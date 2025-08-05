@@ -40,6 +40,7 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 | typedef typename base\_type::discrete\_domain\_type | [**discrete\_domain\_type**](#typedef-discrete_domain_type)  <br>_The IdxRange on which the chunks in this object are defined._  |
 | typedef typename base\_type::discrete\_element\_type | [**discrete\_element\_type**](#typedef-discrete_element_type)  <br>_The Idx which can be used to index this object._  |
 | typedef typename base\_type::element\_type | [**element\_type**](#typedef-element_type)  <br>_The type of the elements in the chunks._  |
+| typedef typename base\_type::element\_type | [**memory\_space**](#typedef-memory_space)  <br>_The type of the memory space where the field is saved (CPU vs GPU)._  |
 | typedef typename base\_type::physical\_deriv\_grids | [**physical\_deriv\_grids**](#typedef-physical_deriv_grids)  <br>_A type sequence containing all dimensions for which derivatives are present in this object._  |
 | typedef typename base\_type::physical\_grids | [**physical\_grids**](#typedef-physical_grids)  <br>_A type sequence containing all the physical grids on which the fields are defined._  |
 | typedef typename base\_type::physical\_idx\_range\_type | [**physical\_idx\_range\_type**](#typedef-physical_idx_range_type)  <br>_The physical index range on which the field is defined._  |
@@ -253,6 +254,20 @@ This is a DDC keyword used to make this class interchangeable with Field. In DDC
 _The type of the elements in the chunks._ 
 ```C++
 using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::element_type =  typename base_type::element_type;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef memory\_space 
+
+_The type of the memory space where the field is saved (CPU vs GPU)._ 
+```C++
+using DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::memory_space =  typename base_type::element_type;
 ```
 
 

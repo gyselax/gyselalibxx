@@ -48,6 +48,8 @@ private:
 public:
     using element_type = typename base_type::element_type;
 
+    using memory_space = typename base_type::element_type;
+
     using discrete_domain_type = typename base_type::discrete_domain_type;
 
     using discrete_element_type = typename base_type::discrete_element_type;

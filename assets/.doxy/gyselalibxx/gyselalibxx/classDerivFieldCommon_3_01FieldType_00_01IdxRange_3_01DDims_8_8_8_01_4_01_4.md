@@ -69,8 +69,8 @@ _An abstract class which holds a chunk of memory describing a field and its deri
 | ---: | :--- |
 |  auto | [**get\_mdspan**](#function-get_mdspan-12) (IdxRange&lt; ODims... &gt; provided\_deriv\_idx\_range) <br>_Get one of the mdspans from the internal array internal\_fields. This function takes index ranges on the derivative directions. Where derivatives are missing it is assumed that the 0-th order derivative is requested. This dimension is stripped from the resulting field. This is the recommended way to access the internal fields._  |
 |  auto | [**get\_mdspan**](#function-get_mdspan-22) () <br>_Get the mdspan holding the values of the function from the internal array internal\_fields._  |
-|  auto | [**get\_values\_field**](#function-get_values_field-12) () <br>_Get the Field which holds the values of the function._  |
-|  auto | [**get\_values\_field**](#function-get_values_field-22) () const<br>_Get the Field which holds the values of the function._  |
+|  auto | [**get\_values\_const\_field**](#function-get_values_const_field) () const<br>_Get the Field which holds the values of the function._  |
+|  auto | [**get\_values\_field**](#function-get_values_field) () <br>_Get the Field which holds the values of the function._  |
 |  constexpr auto | [**operator[]**](#function-operator) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Get a ConstField describing a subset of the data._  |
 |  constexpr auto | [**operator[]**](#function-operator_1) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Get a Field describing a subset of the data._  |
 |  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_2) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
@@ -361,11 +361,11 @@ Field The field on the physical index range and the requested index ranges.
 
 
 
-### function get\_values\_field [1/2]
+### function get\_values\_const\_field 
 
 _Get the Field which holds the values of the function._ 
 ```C++
-inline auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_values_field () 
+inline auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_values_const_field () const
 ```
 
 
@@ -377,7 +377,7 @@ This function is equivalent to calling operator[] with a 0D IdxRange.
 
 **Returns:**
 
-Field The field on the physical index range. 
+Field The constant field on the physical index range. 
 
 
 
@@ -389,11 +389,11 @@ Field The field on the physical index range.
 
 
 
-### function get\_values\_field [2/2]
+### function get\_values\_field 
 
 _Get the Field which holds the values of the function._ 
 ```C++
-inline auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_values_field () const
+inline auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_values_field () 
 ```
 
 

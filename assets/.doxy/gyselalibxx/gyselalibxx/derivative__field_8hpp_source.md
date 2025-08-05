@@ -91,6 +91,8 @@ private:
 public:
     using element_type = typename base_type::element_type;
 
+    using memory_space = typename base_type::element_type;
+
     using discrete_domain_type = typename base_type::discrete_domain_type;
     using index_range_type = typename base_type::index_range_type;
 

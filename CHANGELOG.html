@@ -556,6 +556,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <ul>
 <li>Port <code>PolarSplineEvaluator</code> methods to GPU.</li>
 <li>Add methods to <code>PolarSplineEvaluator</code> to avoid unnecessary creation of fields of coordinates.</li>
+<li>Allow a <code>DerivField</code> to be stored in a <code>MultipatchField</code>.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -581,6 +582,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Clean up code in <code>BslPredCorrRTheta::operator()</code>.</li>
 <li>Clean up code in <code>BslExplicitPredCorrRTheta::operator()</code>.</li>
 <li>Clean up code in <code>BslImplicitPredCorrRTheta::operator()</code>.</li>
+<li>Remove the const version of <code>get_values_field()</code> and change it into <code>get_values_const_field()</code> in <code>DerivFieldCommon</code>.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

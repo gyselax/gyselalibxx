@@ -1009,18 +1009,18 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" line="582" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp" bodystart="582" bodyend="586"/>
       </memberdef>
-      <memberdef kind="function" id="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1acf6b5f3e9791535ee527ffe5fe3ce71b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a811908f829ca05bd4b781814d16efd34" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
-        <definition>auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_field</definition>
+        <definition>auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_const_field</definition>
         <argsstring>() const</argsstring>
-        <name>get_values_field</name>
-        <qualifiedname>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_field</qualifiedname>
+        <name>get_values_const_field</name>
+        <qualifiedname>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_const_field</qualifiedname>
         <briefdescription>
 <para>Get the Field which holds the values of the function. </para>
         </briefdescription>
         <detaileddescription>
 <para>This function is equivalent to calling operator[] with a 0D IdxRange.</para>
-<para><simplesect kind="return"><para>Field The field on the physical index range. </para>
+<para><simplesect kind="return"><para>Field The constant field on the physical index range. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -1087,8 +1087,8 @@
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3515c17c41fab7daaf8842344473acb5" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_mdspan</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a868ed39fa484e90af6985b22c78df50c" prot="protected" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_slicer_for</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a87810847a0ebdc91930bdb5d861396c9" prot="protected" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_slicer_for</name></member>
+      <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a811908f829ca05bd4b781814d16efd34" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_values_const_field</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1adffb6410e57ef9d4d3fd8801cbe73a30" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_values_field</name></member>
-      <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1acf6b5f3e9791535ee527ffe5fe3ce71b" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>get_values_field</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a9c9e1edb698734a3cc18c65c16f8cf2e" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>index_range_type</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a5f7df456b19ca5dbdc9ffcdb4c13a1de" prot="public" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>index_type</name></member>
       <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a31fae5a5f7a6d504fcca1299b6b9eedd" prot="protected" virt="non-virtual"><scope>DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;</scope><name>internal_fields</name></member>

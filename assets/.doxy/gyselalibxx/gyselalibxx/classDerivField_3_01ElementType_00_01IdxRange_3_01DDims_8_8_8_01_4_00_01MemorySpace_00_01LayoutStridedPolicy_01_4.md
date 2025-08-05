@@ -41,6 +41,7 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 | typedef typename base\_type::discrete\_element\_type | [**discrete\_element\_type**](#typedef-discrete_element_type)  <br>_The Idx which can be used to index this object._  |
 | typedef typename base\_type::element\_type | [**element\_type**](#typedef-element_type)  <br>_The type of the elements in the chunks._  |
 | typedef typename base\_type::index\_range\_type | [**index\_range\_type**](#typedef-index_range_type)  <br>_The IdxRange on which the fields in this object are defined._  |
+| typedef typename base\_type::element\_type | [**memory\_space**](#typedef-memory_space)  <br>_The type of the memory space where the field is saved (CPU vs GPU)._  |
 | typedef typename detail::strip\_deriv\_t&lt; [**deriv\_tags**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md#typedef-deriv_tags) &gt; | [**physical\_deriv\_grids**](#typedef-physical_deriv_grids)  <br>_A type sequence containing all grid types for which derivatives are present in this object._  |
 | typedef typename base\_type::physical\_grids | [**physical\_grids**](#typedef-physical_grids)  <br>_A type sequence containing all the grids on which the fields are defined._  |
 | typedef typename base\_type::physical\_idx\_range\_type | [**physical\_idx\_range\_type**](#typedef-physical_idx_range_type)  <br>_The physical index range on which the field is defined._  |
@@ -271,6 +272,20 @@ using DerivField< ElementType, IdxRange< DDims... >, MemorySpace, LayoutStridedP
 _The IdxRange on which the fields in this object are defined._ 
 ```C++
 using DerivField< ElementType, IdxRange< DDims... >, MemorySpace, LayoutStridedPolicy >::index_range_type =  typename base_type::index_range_type;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef memory\_space 
+
+_The type of the memory space where the field is saved (CPU vs GPU)._ 
+```C++
+using DerivField< ElementType, IdxRange< DDims... >, MemorySpace, LayoutStridedPolicy >::memory_space =  typename base_type::element_type;
 ```
 
 

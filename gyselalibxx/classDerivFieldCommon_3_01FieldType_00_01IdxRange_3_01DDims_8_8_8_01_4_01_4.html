@@ -619,11 +619,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-get_values_field-12"><strong>get_values_field</strong></a> () <br><em>Get the Field which holds the values of the function.</em></td>
+<td style="text-align: left;"><a href="#function-get_values_const_field"><strong>get_values_const_field</strong></a> () const<br><em>Get the Field which holds the values of the function.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-get_values_field-22"><strong>get_values_field</strong></a> () const<br><em>Get the Field which holds the values of the function.</em></td>
+<td style="text-align: left;"><a href="#function-get_values_field"><strong>get_values_field</strong></a> () <br><em>Get the Field which holds the values of the function.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr auto</td>
@@ -862,18 +862,18 @@ inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get
 <p>Field The field on the physical index range and the requested index ranges. </p>
 <hr>
 
-<h3 id="function-get_values_field-12">function get_values_field [1/2]</h3>
+<h3 id="function-get_values_const_field">function get_values_const_field</h3>
 <p><em>Get the Field which holds the values of the function.</em> </p>
-<pre><code class="language-C++">inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_field () 
+<pre><code class="language-C++">inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_const_field () const
 </code></pre>
 <p>This function is equivalent to calling operator[] with a 0D IdxRange.</p>
 <p><strong>Returns:</strong></p>
-<p>Field The field on the physical index range. </p>
+<p>Field The constant field on the physical index range. </p>
 <hr>
 
-<h3 id="function-get_values_field-22">function get_values_field [2/2]</h3>
+<h3 id="function-get_values_field">function get_values_field</h3>
 <p><em>Get the Field which holds the values of the function.</em> </p>
-<pre><code class="language-C++">inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_field () const
+<pre><code class="language-C++">inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_field () 
 </code></pre>
 <p>This function is equivalent to calling operator[] with a 0D IdxRange.</p>
 <p><strong>Returns:</strong></p>
