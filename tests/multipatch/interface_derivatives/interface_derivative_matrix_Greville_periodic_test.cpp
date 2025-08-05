@@ -140,12 +140,12 @@ struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
     static constexpr Coord<X> x1_max = Coord<X>(1.0);
     static constexpr IdxStep<GridX<1>> x1_ncells = IdxStep<GridX<1>>(10);
 
-    static constexpr Coord<X> x4_min = x1_min;
-    static constexpr Coord<X> x4_max = x1_max;
+    static constexpr Coord<X> x4_min = convert_dim<X, X>(x1_min);
+    static constexpr Coord<X> x4_max = convert_dim<X, X>(x1_max);
     static constexpr IdxStep<GridX<4>> x4_ncells = IdxStep<GridX<4>>(10);
 
-    static constexpr Coord<X> x7_min = x1_min;
-    static constexpr Coord<X> x7_max = x1_max;
+    static constexpr Coord<X> x7_min = convert_dim<X, X>(x1_min);
+    static constexpr Coord<X> x7_max = convert_dim<X, X>(x1_max);
     static constexpr IdxStep<GridX<7>> x7_ncells = IdxStep<GridX<7>>(10);
 
     // patches 2 | 5 | 8  dim X ------------------
@@ -153,12 +153,12 @@ struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
     static constexpr Coord<X> x2_max = Coord<X>(2.0);
     static constexpr IdxStep<GridX<2>> x2_ncells = IdxStep<GridX<2>>(10);
 
-    static constexpr Coord<X> x5_min = x2_min;
-    static constexpr Coord<X> x5_max = x2_max;
+    static constexpr Coord<X> x5_min = convert_dim<X, X>(x2_min);
+    static constexpr Coord<X> x5_max = convert_dim<X, X>(x2_max);
     static constexpr IdxStep<GridX<5>> x5_ncells = IdxStep<GridX<5>>(10);
 
-    static constexpr Coord<X> x8_min = x2_min;
-    static constexpr Coord<X> x8_max = x2_max;
+    static constexpr Coord<X> x8_min = convert_dim<X, X>(x2_min);
+    static constexpr Coord<X> x8_max = convert_dim<X, X>(x2_max);
     static constexpr IdxStep<GridX<8>> x8_ncells = IdxStep<GridX<8>>(10);
 
     // patches 3 | 6 | 9  dim X ------------------
@@ -166,12 +166,12 @@ struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
     static constexpr Coord<X> x3_max = Coord<X>(3.0);
     static constexpr IdxStep<GridX<3>> x3_ncells = IdxStep<GridX<3>>(10);
 
-    static constexpr Coord<X> x6_min = x3_min;
-    static constexpr Coord<X> x6_max = x3_max;
+    static constexpr Coord<X> x6_min = convert_dim<X, X>(x3_min);
+    static constexpr Coord<X> x6_max = convert_dim<X, X>(x3_max);
     static constexpr IdxStep<GridX<6>> x6_ncells = IdxStep<GridX<6>>(10);
 
-    static constexpr Coord<X> x9_min = x3_min;
-    static constexpr Coord<X> x9_max = x3_max;
+    static constexpr Coord<X> x9_min = convert_dim<X, X>(x3_min);
+    static constexpr Coord<X> x9_max = convert_dim<X, X>(x3_max);
     static constexpr IdxStep<GridX<9>> x9_ncells = IdxStep<GridX<9>>(10);
 
     // patches 1 | 2 | 3  dim Y --------------------
@@ -179,12 +179,12 @@ struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
     static constexpr Coord<Y> y1_max = Coord<Y>(3.0);
     static constexpr IdxStep<GridY<1>> y1_ncells = IdxStep<GridY<1>>(10);
 
-    static constexpr Coord<Y> y2_min = y1_min;
-    static constexpr Coord<Y> y2_max = y1_max;
+    static constexpr Coord<Y> y2_min = convert_dim<Y, Y>(y1_min);
+    static constexpr Coord<Y> y2_max = convert_dim<Y, Y>(y1_max);
     static constexpr IdxStep<GridY<2>> y2_ncells = IdxStep<GridY<2>>(10);
 
-    static constexpr Coord<Y> y3_min = y1_min;
-    static constexpr Coord<Y> y3_max = y1_max;
+    static constexpr Coord<Y> y3_min = convert_dim<Y, Y>(y1_min);
+    static constexpr Coord<Y> y3_max = convert_dim<Y, Y>(y1_max);
     static constexpr IdxStep<GridY<3>> y3_ncells = IdxStep<GridY<3>>(10);
 
     // patches 4 | 5 | 6  dim Y --------------------
@@ -192,12 +192,12 @@ struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
     static constexpr Coord<Y> y4_max = Coord<Y>(2.0);
     static constexpr IdxStep<GridY<4>> y4_ncells = IdxStep<GridY<4>>(10);
 
-    static constexpr Coord<Y> y5_min = y4_min;
-    static constexpr Coord<Y> y5_max = y4_max;
+    static constexpr Coord<Y> y5_min = convert_dim<Y, Y>(y4_min);
+    static constexpr Coord<Y> y5_max = convert_dim<Y, Y>(y4_max);
     static constexpr IdxStep<GridY<5>> y5_ncells = IdxStep<GridY<5>>(10);
 
-    static constexpr Coord<Y> y6_min = y4_min;
-    static constexpr Coord<Y> y6_max = y4_max;
+    static constexpr Coord<Y> y6_min = convert_dim<Y, Y>(y4_min);
+    static constexpr Coord<Y> y6_max = convert_dim<Y, Y>(y4_max);
     static constexpr IdxStep<GridY<6>> y6_ncells = IdxStep<GridY<6>>(10);
 
     // patches 7 | 8 | 9  dim Y --------------------
@@ -205,23 +205,23 @@ struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
     static constexpr Coord<Y> y7_max = Coord<Y>(1.0);
     static constexpr IdxStep<GridY<7>> y7_ncells = IdxStep<GridY<7>>(10);
 
-    static constexpr Coord<Y> y8_min = y7_min;
-    static constexpr Coord<Y> y8_max = y7_max;
+    static constexpr Coord<Y> y8_min = convert_dim<Y, Y>(y7_min);
+    static constexpr Coord<Y> y8_max = convert_dim<Y, Y>(y7_max);
     static constexpr IdxStep<GridY<8>> y8_ncells = IdxStep<GridY<8>>(10);
 
-    static constexpr Coord<Y> y9_min = y7_min;
-    static constexpr Coord<Y> y9_max = y7_max;
+    static constexpr Coord<Y> y9_min = convert_dim<Y, Y>(y7_min);
+    static constexpr Coord<Y> y9_max = convert_dim<Y, Y>(y7_max);
     static constexpr IdxStep<GridY<9>> y9_ncells = IdxStep<GridY<9>>(10);
 
 
     // global ------------------------------------
-    static constexpr Coord<Xg> xg_min = Coord<Xg> {double(x1_min)};
-    static constexpr Coord<Xg> xg_max = Coord<Xg> {double(x3_max)};
+    static constexpr Coord<Xg> xg_min = convert_dim<Xg, X>(x1_min);
+    static constexpr Coord<Xg> xg_max = convert_dim<Xg, X>(x3_max);
     static constexpr IdxStep<GridXg> xg_ncells
             = IdxStep<GridXg>(x1_ncells.value() + x2_ncells.value() + x3_ncells.value());
 
-    static constexpr Coord<Yg> yg_min = Coord<Yg> {double(x1_min)};
-    static constexpr Coord<Yg> yg_max = Coord<Yg> {double(x3_max)};
+    static constexpr Coord<Yg> yg_min = convert_dim<Yg, Y>(y7_min);
+    static constexpr Coord<Yg> yg_max = convert_dim<Yg, Y>(y1_max);
     static constexpr IdxStep<GridYg> yg_ncells
             = IdxStep<GridYg>(y1_ncells.value() + y4_ncells.value() + y7_ncells.value());
 
@@ -338,59 +338,59 @@ public:
 
         // Patch 2 ...............................................................................
         ddc::init_discrete_space<BSplinesX<2>>(break_points_x258);
-        ddc::init_discrete_space<BSplinesY<2>>(break_points_y123);
+        ddc::init_discrete_space<BSplinesY<2>>(convert_dim<Y, Y>(break_points_y123));
 
         ddc::init_discrete_space<GridX<2>>(interpolation_points_x258);
-        ddc::init_discrete_space<GridY<2>>(interpolation_points_y123);
+        ddc::init_discrete_space<GridY<2>>(convert_dim<Y, Y>(interpolation_points_y123));
 
         // Patch 3 ...............................................................................
         ddc::init_discrete_space<BSplinesX<3>>(break_points_x369);
-        ddc::init_discrete_space<BSplinesY<3>>(break_points_y123);
+        ddc::init_discrete_space<BSplinesY<3>>(convert_dim<Y, Y>(break_points_y123));
 
         ddc::init_discrete_space<GridX<3>>(interpolation_points_x369);
-        ddc::init_discrete_space<GridY<3>>(interpolation_points_y123);
+        ddc::init_discrete_space<GridY<3>>(convert_dim<Y, Y>(interpolation_points_y123));
 
         // Patch 4 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<4>>(break_points_x147);
+        ddc::init_discrete_space<BSplinesX<4>>(convert_dim<X, X>(break_points_x147));
         ddc::init_discrete_space<BSplinesY<4>>(break_points_y456);
 
-        ddc::init_discrete_space<GridX<4>>(interpolation_points_x147);
+        ddc::init_discrete_space<GridX<4>>(convert_dim<X, X>(interpolation_points_x147));
         ddc::init_discrete_space<GridY<4>>(interpolation_points_y456);
 
         // Patch 5 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<5>>(break_points_x258);
-        ddc::init_discrete_space<BSplinesY<5>>(break_points_y456);
+        ddc::init_discrete_space<BSplinesX<5>>(convert_dim<X, X>(break_points_x258));
+        ddc::init_discrete_space<BSplinesY<5>>(convert_dim<Y, Y>(break_points_y456));
 
-        ddc::init_discrete_space<GridX<5>>(interpolation_points_x258);
-        ddc::init_discrete_space<GridY<5>>(interpolation_points_y456);
+        ddc::init_discrete_space<GridX<5>>(convert_dim<X, X>(interpolation_points_x258));
+        ddc::init_discrete_space<GridY<5>>(convert_dim<Y, Y>(interpolation_points_y456));
 
         // Patch 6 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<6>>(break_points_x369);
-        ddc::init_discrete_space<BSplinesY<6>>(break_points_y456);
+        ddc::init_discrete_space<BSplinesX<6>>(convert_dim<X, X>(break_points_x369));
+        ddc::init_discrete_space<BSplinesY<6>>(convert_dim<Y, Y>(break_points_y456));
 
-        ddc::init_discrete_space<GridX<6>>(interpolation_points_x369);
-        ddc::init_discrete_space<GridY<6>>(interpolation_points_y456);
+        ddc::init_discrete_space<GridX<6>>(convert_dim<X, X>(interpolation_points_x369));
+        ddc::init_discrete_space<GridY<6>>(convert_dim<Y, Y>(interpolation_points_y456));
 
         // Patch 7 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<7>>(break_points_x147);
+        ddc::init_discrete_space<BSplinesX<7>>(convert_dim<X, X>(break_points_x147));
         ddc::init_discrete_space<BSplinesY<7>>(break_points_y789);
 
-        ddc::init_discrete_space<GridX<7>>(interpolation_points_x147);
+        ddc::init_discrete_space<GridX<7>>(convert_dim<X, X>(interpolation_points_x147));
         ddc::init_discrete_space<GridY<7>>(interpolation_points_y789);
 
         // Patch 8 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<8>>(break_points_x258);
-        ddc::init_discrete_space<BSplinesY<8>>(break_points_y789);
+        ddc::init_discrete_space<BSplinesX<8>>(convert_dim<X, X>(break_points_x258));
+        ddc::init_discrete_space<BSplinesY<8>>(convert_dim<Y, Y>(break_points_y789));
 
-        ddc::init_discrete_space<GridX<8>>(interpolation_points_x258);
-        ddc::init_discrete_space<GridY<8>>(interpolation_points_y789);
+        ddc::init_discrete_space<GridX<8>>(convert_dim<X, X>(interpolation_points_x258));
+        ddc::init_discrete_space<GridY<8>>(convert_dim<Y, Y>(interpolation_points_y789));
 
         // Patch 9 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<9>>(break_points_x369);
-        ddc::init_discrete_space<BSplinesY<9>>(break_points_y789);
+        ddc::init_discrete_space<BSplinesX<9>>(convert_dim<X, X>(break_points_x369));
+        ddc::init_discrete_space<BSplinesY<9>>(convert_dim<Y, Y>(break_points_y789));
 
-        ddc::init_discrete_space<GridX<9>>(interpolation_points_x369);
-        ddc::init_discrete_space<GridY<9>>(interpolation_points_y789);
+        ddc::init_discrete_space<GridX<9>>(convert_dim<X, X>(interpolation_points_x369));
+        ddc::init_discrete_space<GridY<9>>(convert_dim<Y, Y>(interpolation_points_y789));
 
 
         // Equivalent global domain ..............................................................

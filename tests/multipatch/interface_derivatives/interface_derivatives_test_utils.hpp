@@ -4,6 +4,31 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+/** 
+ * @brief Convert a coordinate on a dimension to another coordinate
+ * on another dimension. The scalar value does not change. 
+ */
+template <class DimOut, class DimIn>
+inline Coord<DimOut> constexpr convert_dim(Coord<DimIn> const& input_coord)
+{
+    return Coord<DimOut>{double(input_coord)};
+}
+
+/** 
+ * @brief Convert a vector on coordinate on a dimension to a vector on a coordinate
+ * on another dimension. The scalar values do not change. 
+ */
+template <class DimOut, class DimIn>
+std::vector<Coord<DimOut>> const convert_dim(std::vector<Coord<DimIn>> const& input_vec)
+{
+    std::vector<Coord<DimOut>> output_vec;
+    for (double pt : input_vec) {
+        output_vec.push_back(Coord<DimOut>(pt));
+    }
+    return output_vec;
+}
+
+
 /**
  *  @brief Get interpolation points from the break points by placing 
  * the interpolation points on the break points and adding one on the
