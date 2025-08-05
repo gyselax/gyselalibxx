@@ -197,8 +197,8 @@ public:
         // --- Operators ----------------------------------------------------------------------------------
         ddc::NullExtrapolationRule extrapolation_rule;
         PolarSplineEvaluator<
-                Kokkos::DefaultHostExecutionSpace,
-                Kokkos::HostSpace,
+                Kokkos::DefaultExecutionSpace,
+                Kokkos::DefaultExecutionSpace::memory_space,
                 PolarBSplinesRTheta,
                 ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);

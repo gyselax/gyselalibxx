@@ -203,8 +203,8 @@ public:
         // Operators
         ddc::NullExtrapolationRule extrapolation_rule;
         PolarSplineEvaluator<
-                Kokkos::DefaultHostExecutionSpace,
-                Kokkos::HostSpace,
+                Kokkos::DefaultExecutionSpace,
+                Kokkos::DefaultExecutionSpace::memory_space,
                 PolarBSplinesRTheta,
                 ddc::NullExtrapolationRule>
                 polar_spline_evaluator(extrapolation_rule);
@@ -382,8 +382,6 @@ public:
     }
 
 
-
-private:
     void implicit_loop(
             DVectorFieldRTheta<X, Y> advection_field,
             ConstVectorSplineCoeffs2D<X, Y> advection_field_coefs_k,
@@ -422,7 +420,7 @@ private:
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
                         ddcHelper::assign_vector_field_element(
-                                get_field(advection_field_k_tot),
+                                advection_field_k_tot,
                                 irtheta,
                                 advection_field(irtheta) + advection_field_k(irtheta));
                     });
