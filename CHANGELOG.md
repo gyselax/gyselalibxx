@@ -38,6 +38,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clean up code in `BslExplicitPredCorrRTheta::operator()`.
 - Clean up code in `BslImplicitPredCorrRTheta::operator()`.
 - Ported `PolarSplineFEMPoissonLikeSolver::operator()` to GPU.
+- Change constructor arguments of `BslImplicitPredCorrRTheta` to pass a spline builder and evaluator which operate on GPU.
 
 ### Deprecated
 

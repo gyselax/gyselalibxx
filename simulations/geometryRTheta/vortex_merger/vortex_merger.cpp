@@ -108,11 +108,6 @@ int main(int argc, char** argv)
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
             ddc::PeriodicExtrapolationRule<Theta>());
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
 
     const LogicalToPhysicalMapping to_physical_mapping;
     DiscreteMappingBuilder const discrete_mapping_builder(
@@ -185,9 +180,9 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             grid,
-            builder_host,
+            builder,
             poisson_solver,
-            spline_evaluator_extrapol_host);
+            spline_evaluator_extrapol);
 
 
 
