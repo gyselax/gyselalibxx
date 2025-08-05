@@ -520,50 +520,95 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 
 
     // Collect the derivative calculators --------------------------------------------------------
-    using DerivativesCalculatorCollection123 = SingleInterfaceDerivativesCalculatorCollection<
-            SingleInterfaceDerivativesCalculator<Interface_1_2>,
-            SingleInterfaceDerivativesCalculator<Interface_2_3>,
-            SingleInterfaceDerivativesCalculator<Interface_3_1>>;
+    using DerivativesCalculatorCollection123 = get_deriv_calculator_collection_t<
+            WestEdge<1>,
+            ddc::BoundCond::HERMITE,
+            EastEdge<3>,
+            ddc::BoundCond::HERMITE,
+            Interface_1_2,
+            Interface_2_3,
+            Interface_3_1>;
+    //     SingleInterfaceDerivativesCalculatorCollection<
+    //             SingleInterfaceDerivativesCalculator<Interface_1_2>,
+    //             SingleInterfaceDerivativesCalculator<Interface_2_3>,
+    //             SingleInterfaceDerivativesCalculator<Interface_3_1>>;
 
-    using DerivativesCalculatorCollection456 = SingleInterfaceDerivativesCalculatorCollection<
-            SingleInterfaceDerivativesCalculator<Interface_4_5>,
-            SingleInterfaceDerivativesCalculator<Interface_5_6>,
-            SingleInterfaceDerivativesCalculator<Interface_6_4>>;
+    using DerivativesCalculatorCollection456 = get_deriv_calculator_collection_t<
+            WestEdge<4>,
+            ddc::BoundCond::HERMITE,
+            EastEdge<6>,
+            ddc::BoundCond::HERMITE,
+            Interface_4_5,
+            Interface_5_6,
+            Interface_6_4>;
+    //     SingleInterfaceDerivativesCalculatorCollection<
+    //             SingleInterfaceDerivativesCalculator<Interface_4_5>,
+    //             SingleInterfaceDerivativesCalculator<Interface_5_6>,
+    //             SingleInterfaceDerivativesCalculator<Interface_6_4>>;
 
-    using DerivativesCalculatorCollection789 = SingleInterfaceDerivativesCalculatorCollection<
-            SingleInterfaceDerivativesCalculator<Interface_7_8>,
-            SingleInterfaceDerivativesCalculator<Interface_8_9>,
-            SingleInterfaceDerivativesCalculator<Interface_9_7>>;
+    using DerivativesCalculatorCollection789 = get_deriv_calculator_collection_t<
+            WestEdge<7>,
+            ddc::BoundCond::HERMITE,
+            EastEdge<9>,
+            ddc::BoundCond::HERMITE,
+            Interface_7_8,
+            Interface_8_9,
+            Interface_9_7>;
+    // SingleInterfaceDerivativesCalculatorCollection<
+    //         SingleInterfaceDerivativesCalculator<Interface_7_8>,
+    //         SingleInterfaceDerivativesCalculator<Interface_8_9>,
+    //         SingleInterfaceDerivativesCalculator<Interface_9_7>>;
 
-    using DerivativesCalculatorCollection147 = SingleInterfaceDerivativesCalculatorCollection<
-            SingleInterfaceDerivativesCalculator<
-                    Interface_1_4,
-                    ddc::BoundCond::GREVILLE,
-                    ddc::BoundCond::HERMITE>,
-            SingleInterfaceDerivativesCalculator<
-                    Interface_4_7,
-                    ddc::BoundCond::HERMITE,
-                    ddc::BoundCond::GREVILLE>>;
+    using DerivativesCalculatorCollection147 = get_deriv_calculator_collection_t<
+            NorthEdge<1>,
+            ddc::BoundCond::GREVILLE,
+            SouthEdge<7>,
+            ddc::BoundCond::GREVILLE,
+            Interface_1_4,
+            Interface_4_7>;
+    // = SingleInterfaceDerivativesCalculatorCollection<
+    //         SingleInterfaceDerivativesCalculator<
+    //                 Interface_1_4,
+    //                 ddc::BoundCond::GREVILLE,
+    //                 ddc::BoundCond::HERMITE>,
+    //         SingleInterfaceDerivativesCalculator<
+    //                 Interface_4_7,
+    //                 ddc::BoundCond::HERMITE,
+    //                 ddc::BoundCond::GREVILLE>>;
 
-    using DerivativesCalculatorCollection258 = SingleInterfaceDerivativesCalculatorCollection<
-            SingleInterfaceDerivativesCalculator<
-                    Interface_2_5,
-                    ddc::BoundCond::GREVILLE,
-                    ddc::BoundCond::HERMITE>,
-            SingleInterfaceDerivativesCalculator<
-                    Interface_5_8,
-                    ddc::BoundCond::HERMITE,
-                    ddc::BoundCond::GREVILLE>>;
+    using DerivativesCalculatorCollection258 = get_deriv_calculator_collection_t<
+            NorthEdge<2>,
+            ddc::BoundCond::GREVILLE,
+            SouthEdge<8>,
+            ddc::BoundCond::GREVILLE,
+            Interface_2_5,
+            Interface_5_8>;
+    // = SingleInterfaceDerivativesCalculatorCollection<
+    //         SingleInterfaceDerivativesCalculator<
+    //                 Interface_2_5,
+    //                 ddc::BoundCond::GREVILLE,
+    //                 ddc::BoundCond::HERMITE>,
+    //         SingleInterfaceDerivativesCalculator<
+    //                 Interface_5_8,
+    //                 ddc::BoundCond::HERMITE,
+    //                 ddc::BoundCond::GREVILLE>>;
 
-    using DerivativesCalculatorCollection369 = SingleInterfaceDerivativesCalculatorCollection<
-            SingleInterfaceDerivativesCalculator<
-                    Interface_3_6,
-                    ddc::BoundCond::GREVILLE,
-                    ddc::BoundCond::HERMITE>,
-            SingleInterfaceDerivativesCalculator<
-                    Interface_6_9,
-                    ddc::BoundCond::HERMITE,
-                    ddc::BoundCond::GREVILLE>>;
+    using DerivativesCalculatorCollection369 = get_deriv_calculator_collection_t<
+            NorthEdge<3>,
+            ddc::BoundCond::GREVILLE,
+            SouthEdge<9>,
+            ddc::BoundCond::GREVILLE,
+            Interface_3_6,
+            Interface_6_9>;
+    // = SingleInterfaceDerivativesCalculatorCollection<
+    //         SingleInterfaceDerivativesCalculator<
+    //                 Interface_3_6,
+    //                 ddc::BoundCond::GREVILLE,
+    //                 ddc::BoundCond::HERMITE>,
+    //         SingleInterfaceDerivativesCalculator<
+    //                 Interface_6_9,
+    //                 ddc::BoundCond::HERMITE,
+    //                 ddc::BoundCond::GREVILLE>>;
 
     SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
             derivatives_calculator_1_2,

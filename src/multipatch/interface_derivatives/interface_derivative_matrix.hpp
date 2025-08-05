@@ -74,8 +74,7 @@ class InterfaceDerivativeMatrix<
     using all_patches = typename Connectivity::all_patches;
 
     static_assert(
-            is_single_derivative_calculator_collection_v<
-                    DerivativesCalculatorCollection>,
+            is_single_derivative_calculator_collection_v<DerivativesCalculatorCollection>,
             "Please provide a SingleInterfaceDerivativesCalculatorCollection type.");
 
 
@@ -156,11 +155,11 @@ public:
     using first_patch = FirstPatch;
 
 private:
-    // Matrix (I-M) of the documentation. 
+    // Matrix (I-M) of the documentation.
     std::shared_ptr<Matrix> m_matrix;
-    // Vector C of the documentation. 
+    // Vector C of the documentation.
     std::shared_ptr<Matrix> m_vector;
-    // Vector S of the documentation. 
+    // Vector S of the documentation.
     std::shared_ptr<Matrix> m_interface_derivatives;
 
     // Use a conjugate gradient (CG) solver.
@@ -929,3 +928,117 @@ private:
         return std::make_tuple(slice_idx_1, slice_idx_2);
     }
 };
+
+
+
+template <
+        class Interface,
+        class GridLower,
+        class GridUpper,
+        ddc::BoundCond BoundCondLower,
+        ddc::BoundCond BoundCondUpper>
+struct get_deriv_calculator
+{
+    using GridLeft = typename Interface::Edge1::perpendicular_grid;
+    using GridRight = typename Interface::Edge2::perpendicular_grid;
+
+    static constexpr ddc::BoundCond left_boundcond
+            = std::is_same_v<GridLeft, GridLower>   ? BoundCondLower
+              : std::is_same_v<GridLeft, GridUpper> ? BoundCondUpper
+                                                    : ddc::BoundCond::HERMITE;
+    static constexpr ddc::BoundCond right_boundcond
+            = std::is_same_v<GridRight, GridLower>   ? BoundCondLower
+              : std::is_same_v<GridRight, GridUpper> ? BoundCondUpper
+                                                     : ddc::BoundCond::HERMITE;
+
+    using type = SingleInterfaceDerivativesCalculator<Interface, left_boundcond, right_boundcond>;
+};
+
+template <
+        class Interface,
+        class GridLower,
+        class GridUpper,
+        ddc::BoundCond BoundCondLower,
+        ddc::BoundCond BoundCondUpper>
+using get_deriv_calculator_t = typename get_deriv_calculator<
+        Interface,
+        GridLower,
+        GridUpper,
+        BoundCondLower,
+        BoundCondUpper>::type;
+
+// template <
+//         ddc::BoundCond BoundCondLower = ddc::BoundCond::HERMITE,
+//         ddc::BoundCond BoundCondUpper = ddc::BoundCond::HERMITE,
+//         class... Interfaces>
+// struct get_deriv_calculator_collection
+// {
+//     using InterfaceSeq = ddc::detail::TypeSeq<Interfaces...>;
+//     using FirstInterface = ddc::type_seq_element_t<0, InterfaceSeq>;
+//     using FirstPatch = typename FirstInterface::Edge1::associated_patch;
+//     using GridPerp = typename FirstInterface::Edge1::perpendicular_grid;
+
+//     static_assert(ddc::type_seq_size_v<InterfaceSeq> == 2);
+//     static_assert(std::is_same_v<GridPerp, typename FirstPatch::Grid1>);
+
+//     using GridSeq = collect_grids_on_dim_t<FirstPatch, GridPerp, InterfaceSeq>;
+
+//     static constexpr std::size_t n_grids = ddc::type_seq_size_v<GridSeq>;
+
+//     using GridLower = ddc::type_seq_element_t<0, GridSeq>;
+//     using GridUpper = ddc::type_seq_element_t<n_grids - 1, GridSeq>;
+
+//     using type = SingleInterfaceDerivativesCalculatorCollection<get_deriv_calculator_t<
+//             Interfaces,
+//             GridLower,
+//             GridUpper,
+//             BoundCondLower,
+//             BoundCondUpper>...>;
+// };
+
+template <
+        class EdgeLower,
+        ddc::BoundCond BoundCondLower,
+        class EdgeUpper,
+        ddc::BoundCond BoundCondUpper,
+        class... Interfaces>
+struct get_deriv_calculator_collection
+{
+    using GridLower = typename EdgeLower::perpendicular_grid;
+    using GridUpper = typename EdgeUpper::perpendicular_grid;
+
+    using type = SingleInterfaceDerivativesCalculatorCollection<get_deriv_calculator_t<
+            Interfaces,
+            GridLower,
+            GridUpper,
+            BoundCondLower,
+            BoundCondUpper>...>;
+};
+
+template <
+        class EdgeLower,
+        ddc::BoundCond BoundCondLower,
+        class EdgeUpper,
+        ddc::BoundCond BoundCondUpper,
+        class... Interfaces>
+using get_deriv_calculator_collection_t = typename get_deriv_calculator_collection<
+        EdgeLower,
+        BoundCondLower,
+        EdgeUpper,
+        BoundCondUpper,
+        Interfaces...>::type;
+
+template <class... Interfaces>
+using get_deriv_calculator_collection_with_Hermite_boundcond_t =
+         SingleInterfaceDerivativesCalculatorCollection<
+                SingleInterfaceDerivativesCalculator<Interfaces>...>;
+
+// template <class... Interfaces>
+// using get_deriv_calculator_collection_t<
+//         ddc::BoundCond::HERMITE,
+//         ddc::BoundCond::HERMITE,
+//         Interfaces...> =
+//         typename get_deriv_calculator_collection<
+//                 ddc::BoundCond::HERMITE,
+//                 ddc::BoundCond::HERMITE,
+//                 Interfaces...>::type;
