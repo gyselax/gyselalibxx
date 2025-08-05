@@ -116,7 +116,7 @@ public:
     using element_type = typename base_type::element_type;
 
     /// @brief The type of the memory space where the field is saved (CPU vs GPU).
-    using memory_space = MemorySpace;
+    using memory_space = typename base_type::element_type;
 
     /**
      * @brief The IdxRange on which the chunks in this object are defined.
