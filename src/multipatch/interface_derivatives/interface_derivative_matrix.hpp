@@ -16,21 +16,6 @@
 #include "types.hpp"
 #include "view.hpp"
 
-/**
- * TODO:
- *  - How does it work?
- *      - Constructor
- *          - Take a list of "parallel" interfaces.
- *          - For each "conforming" lines, get the coefficients a and b.
- *  - Remarks:
- *      - Should we restrain to the conforming case first?
- *      - And then the non-conforming case in another operator?
- *      - Treat only "one block line/direction"?
- *      - And build another operator to manage the whole geometry?
- *      - Including treatment for T-joints?
- *      - Deal with periodic case here or in another operator?
- */
-
 
 template <
         class Connectivity,
@@ -38,7 +23,7 @@ template <
         class PatchSeq,
         ddc::BoundCond LowerBound,
         ddc::BoundCond UpperBound,
-        class SingleInterfaceDerivativesCalculatorCollectionType>
+        class DerivativesCalculatorCollection>
 class InterfaceDerivativeMatrix;
 
 /**
@@ -60,7 +45,7 @@ class InterfaceDerivativeMatrix;
   * @tparam Patches List of patches containing all the involved patches in the given direction. 
   * @tparam LowerBound Lower/left boundary condition of the first local spline along the given direction. 
   * @tparam UpperBound Upper/right boundary condition of the last local spline along the given direction. 
-  * @tparam SingleInterfaceDerivativesCalculatorCollectionType A SingleInterfaceDerivativesCalculatorCollection
+  * @tparam DerivativesCalculatorCollection A SingleInterfaceDerivativesCalculatorCollection
   * that stores the SingleInterfaceDerivativesCalculator needed to compute the interface derivatives. 
   */
 template <
@@ -69,14 +54,14 @@ template <
         class... Patches,
         ddc::BoundCond LowerBound,
         ddc::BoundCond UpperBound,
-        class SingleInterfaceDerivativesCalculatorCollectionType>
+        class DerivativesCalculatorCollection>
 class InterfaceDerivativeMatrix<
         Connectivity,
         Grid1D,
         ddc::detail::TypeSeq<Patches...>,
         LowerBound,
         UpperBound,
-        SingleInterfaceDerivativesCalculatorCollectionType>
+        DerivativesCalculatorCollection>
 {
     // All the interfaces given as input to the MultipatchConnectivity class.
     // We expect the parameters defined on these interfaces.
@@ -90,7 +75,7 @@ class InterfaceDerivativeMatrix<
 
     static_assert(
             is_single_derivative_calculator_collection_v<
-                    SingleInterfaceDerivativesCalculatorCollectionType>,
+                    DerivativesCalculatorCollection>,
             "Please provide a SingleInterfaceDerivativesCalculatorCollection type.");
 
 
@@ -171,10 +156,12 @@ public:
     using first_patch = FirstPatch;
 
 private:
+    // Matrix (I-M) of the documentation. 
     std::shared_ptr<Matrix> m_matrix;
+    // Vector C of the documentation. 
     std::shared_ptr<Matrix> m_vector;
+    // Vector S of the documentation. 
     std::shared_ptr<Matrix> m_interface_derivatives;
-
 
     // Use a conjugate gradient (CG) solver.
     using SolverCG = gko::solver::Cg<>;
@@ -184,7 +171,7 @@ private:
 
     MultipatchType<IdxRangeOnPatch, Patches...> const& m_idx_ranges;
 
-    SingleInterfaceDerivativesCalculatorCollectionType const& m_derivatives_calculators;
+    DerivativesCalculatorCollection const& m_derivatives_calculators;
 
 public:
     ~InterfaceDerivativeMatrix() {}
@@ -200,12 +187,10 @@ public:
      *          interface derivative calculator for each interface in the given Grid1D direction. 
      * @param reduction_factor Reduction factor for a Gingko dense matrix with a conjugate gradient solver 
      *          and a Jacobi preconditioner. 
-     * @warning The interface derivative calculators have to be ordered in the tuple. 
-     *      The order has to be the same as the interfaces in the Grid1D direction. 
      */
     InterfaceDerivativeMatrix(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-            SingleInterfaceDerivativesCalculatorCollectionType const& derivatives_calculators,
+            DerivativesCalculatorCollection const& derivatives_calculators,
             double const& reduction_factor = 1e-6)
         : m_idx_ranges(idx_ranges)
         , m_derivatives_calculators(derivatives_calculators)

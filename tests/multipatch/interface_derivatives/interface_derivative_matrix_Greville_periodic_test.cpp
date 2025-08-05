@@ -520,6 +520,51 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 
 
     // Collect the derivative calculators --------------------------------------------------------
+    using DerivativesCalculatorCollection123 = SingleInterfaceDerivativesCalculatorCollection<
+            SingleInterfaceDerivativesCalculator<Interface_1_2>,
+            SingleInterfaceDerivativesCalculator<Interface_2_3>,
+            SingleInterfaceDerivativesCalculator<Interface_3_1>>;
+
+    using DerivativesCalculatorCollection456 = SingleInterfaceDerivativesCalculatorCollection<
+            SingleInterfaceDerivativesCalculator<Interface_4_5>,
+            SingleInterfaceDerivativesCalculator<Interface_5_6>,
+            SingleInterfaceDerivativesCalculator<Interface_6_4>>;
+
+    using DerivativesCalculatorCollection789 = SingleInterfaceDerivativesCalculatorCollection<
+            SingleInterfaceDerivativesCalculator<Interface_7_8>,
+            SingleInterfaceDerivativesCalculator<Interface_8_9>,
+            SingleInterfaceDerivativesCalculator<Interface_9_7>>;
+
+    using DerivativesCalculatorCollection147 = SingleInterfaceDerivativesCalculatorCollection<
+            SingleInterfaceDerivativesCalculator<
+                    Interface_1_4,
+                    ddc::BoundCond::GREVILLE,
+                    ddc::BoundCond::HERMITE>,
+            SingleInterfaceDerivativesCalculator<
+                    Interface_4_7,
+                    ddc::BoundCond::HERMITE,
+                    ddc::BoundCond::GREVILLE>>;
+
+    using DerivativesCalculatorCollection258 = SingleInterfaceDerivativesCalculatorCollection<
+            SingleInterfaceDerivativesCalculator<
+                    Interface_2_5,
+                    ddc::BoundCond::GREVILLE,
+                    ddc::BoundCond::HERMITE>,
+            SingleInterfaceDerivativesCalculator<
+                    Interface_5_8,
+                    ddc::BoundCond::HERMITE,
+                    ddc::BoundCond::GREVILLE>>;
+
+    using DerivativesCalculatorCollection369 = SingleInterfaceDerivativesCalculatorCollection<
+            SingleInterfaceDerivativesCalculator<
+                    Interface_3_6,
+                    ddc::BoundCond::GREVILLE,
+                    ddc::BoundCond::HERMITE>,
+            SingleInterfaceDerivativesCalculator<
+                    Interface_6_9,
+                    ddc::BoundCond::HERMITE,
+                    ddc::BoundCond::GREVILLE>>;
+
     SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
             derivatives_calculator_1_2,
             derivatives_calculator_2_3,
@@ -589,7 +634,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            decltype(deriv_calculators_collect_123)>
+            DerivativesCalculatorCollection123>
             matrix_123(idx_ranges_123, deriv_calculators_collect_123);
 
     InterfaceDerivativeMatrix<
@@ -598,7 +643,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            decltype(deriv_calculators_collect_456)>
+            DerivativesCalculatorCollection456>
             matrix_456(idx_ranges_456, deriv_calculators_collect_456);
 
     InterfaceDerivativeMatrix<
@@ -607,7 +652,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
             ddc::BoundCond::PERIODIC,
             ddc::BoundCond::PERIODIC,
-            decltype(deriv_calculators_collect_789)>
+            DerivativesCalculatorCollection789>
             matrix_789(idx_ranges_789, deriv_calculators_collect_789);
 
 
@@ -618,7 +663,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             ddc::detail::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
-            decltype(deriv_calculators_collect_147)>
+            DerivativesCalculatorCollection147>
             matrix_147(idx_ranges_147, deriv_calculators_collect_147);
 
     InterfaceDerivativeMatrix<
@@ -627,7 +672,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
-            decltype(deriv_calculators_collect_258)>
+            DerivativesCalculatorCollection258>
             matrix_258(idx_ranges_258, deriv_calculators_collect_258);
 
 
@@ -637,7 +682,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
             ddc::BoundCond::GREVILLE,
             ddc::BoundCond::GREVILLE,
-            decltype(deriv_calculators_collect_369)>
+            DerivativesCalculatorCollection369>
             matrix_369(idx_ranges_369, deriv_calculators_collect_369);
 
 
