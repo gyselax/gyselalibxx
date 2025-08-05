@@ -99,7 +99,6 @@ int main(int argc, char** argv)
 
     // OPERATORS ======================================================================================
     SplineRThetaBuilder const builder(mesh_rtheta);
-    SplineRThetaBuilder_host const builder_host(mesh_rtheta);
 
 
     // --- Define the mapping. ------------------------------------------------------------------------
@@ -109,12 +108,6 @@ int main(int argc, char** argv)
             ddc::coordinate(mesh_r.back()));
 
     SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -275,20 +268,22 @@ int main(int argc, char** argv)
 
 
 
-    host_t<DFieldMemRTheta> rho(mesh_rtheta);
-    host_t<DFieldMemRTheta> rho_eq(mesh_rtheta);
+    host_t<DFieldMemRTheta> rho_host(mesh_rtheta);
+    host_t<DFieldMemRTheta> rho_eq_host(mesh_rtheta);
 
     // Initialise rho and rho equilibrium ****************************
     ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
-        rho(irtheta) = exact_rho.initialisation(coords(irtheta));
-        rho_eq(irtheta) = exact_rho.equilibrium(coords(irtheta));
+        rho_host(irtheta) = exact_rho.initialisation(coords(irtheta));
+        rho_eq_host(irtheta) = exact_rho.equilibrium(coords(irtheta));
     });
+
+    auto rho_eq = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), rho_eq_host);
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
     DFieldMemRTheta phi_eq(mesh_rtheta);
     host_t<DFieldMemRTheta> phi_eq_host(mesh_rtheta);
-    host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
-    builder_host(get_field(rho_coef_eq), get_const_field(rho_eq));
+    Spline2DMem rho_coef_eq(idx_range_bsplinesRTheta);
+    builder(get_field(rho_coef_eq), get_const_field(rho_eq));
     PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq));
     ddc::parallel_deepcopy(phi_eq, phi_eq_host);
@@ -298,7 +293,7 @@ int main(int argc, char** argv)
             .with("x_coords", coords_x)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)
-            .with("density_eq", rho_eq)
+            .with("density_eq", rho_eq_host)
             .with("electrical_potential_eq", phi_eq_host);
 
 
