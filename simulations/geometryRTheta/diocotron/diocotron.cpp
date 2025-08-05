@@ -277,7 +277,8 @@ int main(int argc, char** argv)
         rho_eq_host(irtheta) = exact_rho.equilibrium(coords(irtheta));
     });
 
-    auto rho_eq = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), rho_eq_host);
+    auto rho_eq = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(rho_eq_host));
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
     DFieldMemRTheta phi_eq(mesh_rtheta);
@@ -300,7 +301,7 @@ int main(int argc, char** argv)
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
-    predcorr_operator(get_field(rho), dt, iter_nb);
+    predcorr_operator(get_field(rho_host), dt, iter_nb);
 
 
     end_simulation = std::chrono::system_clock::now();
