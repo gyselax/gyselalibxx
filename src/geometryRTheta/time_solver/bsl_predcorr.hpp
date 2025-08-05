@@ -141,14 +141,15 @@ public:
         host_t<PolarSplineRTheta> electrostatic_potential_coef_host
                 = get_field(electrostatic_potential_coef_alloc_host);
         DFieldRTheta density = get_field(density_alloc);
+        host_t<Spline2D> density_coef_host(density_coef_alloc_host);
 
         // Operators
         AdvectionFieldFinder advection_field_computer(m_mapping);
         PoissonLikeRHSFunction const
-                charge_density(get_const_field(density_coef_alloc_host), m_spline_evaluator);
+                charge_density(get_const_field(density_coef_host), m_spline_evaluator);
 
         // Setup
-        m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
+        m_builder(density_coef_host, get_const_field(density_host));
         m_poisson_solver(charge_density, electrical_potential);
         ddc::parallel_deepcopy(electrical_potential_host, get_const_field(electrical_potential));
         ddc::PdiEvent("iteration")
@@ -162,7 +163,7 @@ public:
                 = [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta density) {
                       ddc::parallel_deepcopy(density_host, density);
                       // --- compute electrostatic potential:
-                      m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
+                      m_builder(density_coef_host, get_const_field(density_host));
                       m_poisson_solver(charge_density, electrostatic_potential_coef_host);
 
                       auto advection_field_host = ddcHelper::create_mirror_view_and_copy(
@@ -192,7 +193,7 @@ public:
                             m_advection_solver);
 
             ddc::parallel_deepcopy(density_host, get_const_field(density));
-            m_builder(get_field(density_coef_alloc_host), get_const_field(density_host));
+            m_builder(density_coef_host, get_const_field(density_host));
             m_poisson_solver(charge_density, electrical_potential);
             ddc::parallel_deepcopy(
                     electrical_potential_host,
