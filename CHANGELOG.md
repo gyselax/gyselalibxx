@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Port `PolarSplineEvaluator` methods to GPU.
 - Add methods to `PolarSplineEvaluator` to avoid unnecessary creation of fields of coordinates.
 - Allow a `DerivField` to be stored in a `MultipatchField`.
+- Add `DerivFieldOnPatch` and `IdxRangeSliceOnPatch` aliases for the `MultipatchField` in `types.hpp`.
 - Add a `periodic_strips_non_uniform_2d_9patches` geometry.
 
 ### Fixed
@@ -26,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix `mi250.hipcc.adastra.spack` toolchain.
 - Fix uninitialised values being used as an initial guess for the result of the matrix equation in `PolarSplineFEMPoissonLikeSolver`.
 - Fix missing grids when calling `collect_grids_on_dim_t`.
+- Fix `is_borrowed_deriv_field_v<>` in `derivative_field_common.hpp` file.
 
 ### Changed
 
