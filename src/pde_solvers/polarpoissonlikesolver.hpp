@@ -236,7 +236,7 @@ private:
             m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
-    mutable PolarSplineMemRTheta m_phi_spline_coef;
+    mutable PolarSplineMemRTheta m_phi_spline_coef_alloc;
     mutable DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> m_x_init_alloc;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
@@ -310,7 +310,7 @@ public:
         , m_weights_r(m_idxrange_quadrature_r)
         , m_weights_theta(m_idxrange_quadrature_theta)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
-        , m_phi_spline_coef(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
+        , m_phi_spline_coef_alloc(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
         , m_x_init_alloc(
                   "x_init",
                   IdxRange<InternalBatchDim, PolarBSplinesRTheta>(
@@ -894,9 +894,9 @@ public:
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
 
-        (*this)(rhs, get_field(m_phi_spline_coef));
+        (*this)(rhs, get_field(m_phi_spline_coef_alloc));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
-        m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef));
+        m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc));
     }
 
     /**
