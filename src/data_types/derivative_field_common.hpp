@@ -23,8 +23,8 @@ inline constexpr bool is_deriv_field_v
 
 template <class T>
 inline constexpr bool is_borrowed_deriv_field_v
-        = (std::is_lvalue_reference_v<T>)
-          || (enable_borrowed_deriv_field<std::remove_cv_t<std::remove_reference_t<T>>>);
+        = is_deriv_field_v<
+                  T> && (std::is_lvalue_reference_v<T> || enable_borrowed_deriv_field<std::remove_cv_t<std::remove_reference_t<T>>>);
 
 template <class FieldType, class SupportType>
 class DerivFieldCommon;
