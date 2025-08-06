@@ -227,6 +227,8 @@ public:
                     get_field(electrical_potential_host),
                     get_const_field(electrical_potential));
 
+            ddc::parallel_deepcopy(density_host, get_const_field(density));
+
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
                     .with("time", time)

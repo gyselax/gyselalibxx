@@ -213,6 +213,8 @@ public:
 
         PoissonLikeRHSFunction const charge_density(get_const_field(density_coef), m_evaluator);
 
+        ddc::parallel_deepcopy(density, get_const_field(density_host));
+
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
@@ -224,14 +226,19 @@ public:
                     get_const_field(electrostatic_potential_coef));
 
             ddc::parallel_deepcopy(
-                    electrostatic_potential_coef_host,
-                    get_const_field(electrostatic_potential_coef));
+                    get_field(electrical_potential_alloc_host),
+                    get_const_field(electrical_potential_alloc));
+            ddc::parallel_deepcopy(density_host, get_const_field(density));
 
             ddc::PdiEvent("iteration")
                     .with("iter", iter)
                     .with("time", iter * dt)
                     .with("density", density_host)
                     .with("electrical_potential", electrical_potential_alloc_host);
+
+            ddc::parallel_deepcopy(
+                    electrostatic_potential_coef_host,
+                    get_const_field(electrostatic_potential_coef));
 
             // STEP 2: From phi^n, we compute A^n:
             advection_field_computer(electrostatic_potential_coef_host, advection_field_host);

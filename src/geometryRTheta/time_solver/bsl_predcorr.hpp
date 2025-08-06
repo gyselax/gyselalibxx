@@ -172,7 +172,7 @@ public:
                             advection_field);
 
                     auto electrostatic_potential_coef_alloc_host
-                            = ddc::create_mirror_view(electrostatic_potential_coef);
+                            = ddc::create_mirror_view_and_copy(electrostatic_potential_coef);
 
                     // --- compute advection field:
                     advection_field_computer(
@@ -189,7 +189,6 @@ public:
         // Iteration loop
         start_time = std::chrono::system_clock::now();
         for (int iter(0); iter < steps; ++iter) {
-            ddc::parallel_deepcopy(density, get_const_field(density_host));
             time_stepper
                     .update(Kokkos::DefaultExecutionSpace(),
                             density,
