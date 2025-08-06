@@ -27,6 +27,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix uninitialised values being used as an initial guess for the result of the matrix equation in `PolarSplineFEMPoissonLikeSolver`.
 - Fix missing grids when calling `collect_grids_on_dim_t`.
 - Fix `is_borrowed_deriv_field_v<>` in `derivative_field_common.hpp` file.
+- Fix `phi_eq` in diocotron and vortex-merger simulations.
 
 ### Changed
 

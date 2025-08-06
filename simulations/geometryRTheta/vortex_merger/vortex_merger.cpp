@@ -261,7 +261,7 @@ int main(int argc, char** argv)
     builder(get_field(rho_coef_eq), get_const_field(rho_eq));
     PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq));
-    ddc::parallel_deepcopy(phi_eq, phi_eq_host);
+    ddc::parallel_deepcopy(phi_eq_host, phi_eq);
 
 
     // --- Save initial data --------------------------------------------------------------------------
