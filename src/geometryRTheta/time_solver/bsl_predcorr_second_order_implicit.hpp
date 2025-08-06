@@ -178,8 +178,6 @@ public:
         auto advection_field_alloc_host = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultHostExecutionSpace(),
                 get_field(advection_field_alloc));
-        auto density_predicted_alloc_host
-                = ddc::create_mirror_view(get_field(density_predicted_alloc));
         auto density_alloc
                 = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_host);
         auto electrostatic_potential_coef_alloc_host
@@ -191,7 +189,6 @@ public:
         host_t<DVectorFieldRTheta<X, Y>> advection_field_host(advection_field_alloc_host);
         VectorSplineCoeffs2D<X, Y> advection_field_coefs_k(advection_field_coefs_k_alloc);
         DFieldRTheta density_predicted = get_field(density_predicted_alloc);
-        host_t<DFieldRTheta> density_predicted_host = get_field(density_predicted_alloc_host);
         DFieldRTheta density = get_field(density_alloc);
         Spline2D density_coef(density_coef_alloc);
         FieldRTheta<CoordRTheta> feet_coords(feet_coords_alloc);

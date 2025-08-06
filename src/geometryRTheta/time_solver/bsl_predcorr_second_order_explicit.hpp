@@ -167,8 +167,6 @@ public:
 
         Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
         DFieldMemRTheta density_predicted_alloc(grid);
-        auto density_predicted_host_alloc
-                = ddc::create_mirror_view(get_field(density_predicted_alloc));
         auto density_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
         FieldMemRTheta<CoordRTheta> feet_coords_alloc(grid);
         DVectorFieldMemRTheta<X, Y> advection_field_evaluated_alloc(grid);
@@ -191,7 +189,6 @@ public:
         FieldRTheta<CoordRTheta> feet_coords(feet_coords_alloc);
 
         Spline2D density_coef(density_coef_alloc);
-        host_t<DFieldRTheta> density_predicted_host(density_predicted_host_alloc);
         DFieldRTheta density = get_field(density_alloc);
 
         // --- Operators ----------------------------------------------------------------------------------
