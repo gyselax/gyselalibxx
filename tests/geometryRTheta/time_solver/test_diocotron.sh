@@ -26,12 +26,8 @@ cd "${TMPDIR}"
 "${GYSELALIBXX_EXEC}" "--dump-config" "${PWD}/diocotron_params.yaml"
 "${GYSELALIBXX_EXEC}" "${PWD}/diocotron_params.yaml"
 
-# # Theoretical values for Landau damping
-# growthrate_theory=-0.153
-# frequency_theory=1.4156
-
 export PYTHONPATH="${GYSELALIBXX_SRCDIR}/post-process/PythonScripts:${PYTHONPATH}"
-"${PYTHON3_EXE}" -B "${GYSELALIBXX_SRCDIR}/tests/geometryRTheta/time_solver/growth_rate_test.py" . #-g ${growthrate_theory} -f ${frequency_theory}
+"${PYTHON3_EXE}" -B "${GYSELALIBXX_SRCDIR}/tests/geometryRTheta/time_solver/growth_rate_test.py" . 
 if [ ! -d ${OUTDIR} ]; then
     mkdir "${OUTDIR}"
 fi

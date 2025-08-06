@@ -5,9 +5,6 @@
 """
 Inputs: the executable associated with the file name.cpp.
 """
-# import subprocess
-# import sys
-# import pathlib
 
 from argparse import ArgumentParser
 from pathlib import Path
@@ -16,20 +13,19 @@ import numpy as np
 
 from gysdata import DiskStore
 
-# executable = sys.argv[1]
-# exe_path = pathlib.PurePath(executable)
 
-# test_case = exe_path.stem.removeprefix('polar_poisson_convergence_')
-# path = ""
-# input_file = path + "params.yaml"
-
-
-
-
-# def check_L2_norms(folder):
 if __name__ == '__main__':
+    parser = ArgumentParser(description="Check growth rate.")
+    parser.add_argument('data_dir',
+                        action='store',
+                        nargs='?',
+                        default=Path.cwd(),
+                        type=Path,
+                        help='location of the results')
+    args = parser.parse_args()
+
     path_data_structure = Path('data_structure_RTheta.yaml')
-    ds = DiskStore(folder, data_structure=path_data_structure)
+    ds = DiskStore(args.data_dir, data_structure=path_data_structure)
 
     # Get initial data
     rho_eq = np.array(ds['density_eq'])
@@ -37,13 +33,8 @@ if __name__ == '__main__':
 
     jacobian = np.array(ds["jacobian"])
 
-    # dt = float(ds["delta_t"])
     T = float(ds["final_T"])
-    # iter_nb = int( T / dt ) +1
-    # tstep_diag = int(ds["time_step_diag"])
 
-    # Nr = int(ds["r_size"])
-    # Nt = int(ds["theta_size"])
     omega_Im = float(ds["slope"])
 
     # Get the data at each time step
@@ -57,6 +48,9 @@ if __name__ == '__main__':
 
     slope_rho = np.polyfit(Time, L2norms_rho, 1)[0]
     slope_phi = np.polyfit(Time, L2norms_phi, 1)[0]
+
+    print("abs(slope_rho - omega_Im)", abs(slope_rho - omega_Im))
+    print("abs(slope_phi - omega_Im)", abs(slope_phi - omega_Im))
 
     assert abs(slope_rho - omega_Im) < 1e-3
     assert abs(slope_phi - omega_Im) < 1e-3
