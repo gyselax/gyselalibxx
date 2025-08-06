@@ -95,7 +95,6 @@ int main(int argc, char** argv)
 
     // OPERATORS ======================================================================================
     SplineRThetaBuilder const builder(grid);
-    SplineRThetaBuilder_host const builder_host(grid);
 
     // --- Define the mapping. ------------------------------------------------------------------------
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
@@ -130,11 +129,6 @@ int main(int argc, char** argv)
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
     SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-    SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
             r_extrapolation_rule,
             r_extrapolation_rule,
             theta_extrapolation_rule,
@@ -241,19 +235,19 @@ int main(int argc, char** argv)
     VortexMergerEquilibria equilibrium(
             to_physical_mapping,
             grid,
-            builder_host,
-            spline_evaluator_host,
+            builder,
+            spline_evaluator,
             poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
-    host_t<DFieldMemRTheta> rho_eq(grid);
-    equilibrium.set_equilibrium(get_field(rho_eq), function, phi_max, tau);
+    host_t<DFieldMemRTheta> rho_eq_host(grid);
+    equilibrium.set_equilibrium(get_field(rho_eq_host), function, phi_max, tau);
 
 
     VortexMergerDensitySolution solution(to_physical_mapping);
     host_t<DFieldMemRTheta> rho(grid);
     solution.set_initialisation(
             get_field(rho),
-            get_const_field(rho_eq),
+            get_const_field(rho_eq_host),
             eps,
             sigma,
             x_star_1,
@@ -265,9 +259,11 @@ int main(int argc, char** argv)
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
     DFieldMemRTheta phi_eq(grid);
     host_t<DFieldMemRTheta> phi_eq_host(grid);
-    host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
-    builder_host(get_field(rho_coef_eq), get_const_field(rho_eq));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator_host);
+    Spline2DMem rho_coef_eq(idx_range_bsplinesRTheta);
+    DFieldMemRTheta rho_eq(grid);
+    ddc::parallel_deepcopy(rho, rho_eq_host);
+    builder(get_field(rho_coef_eq), get_const_field(rho_eq));
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq));
     ddc::parallel_deepcopy(phi_eq, phi_eq_host);
 
@@ -277,7 +273,7 @@ int main(int argc, char** argv)
             .with("x_coords", coords_x)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)
-            .with("density_eq", rho_eq)
+            .with("density_eq", rho_eq_host)
             .with("electrical_potential_eq", phi_eq);
 
 
