@@ -84,7 +84,8 @@ public:
     {
     };
 
-    class InternalBatchDim
+    /// The tag for the batch dimension for the equation. This is public due to Cuda.
+    struct InternalBatchDim
     {
     };
 
