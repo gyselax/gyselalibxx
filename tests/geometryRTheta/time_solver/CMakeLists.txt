@@ -1,13 +1,12 @@
 
-
-add_executable(predcorr_test
-	../../main.cpp
-	bsl_predcorr_second_order_explicit_test.cpp
-	# bsl_predcorr_second_order_implicit_test.cpp
-	# bsl_predcorr_test.cpp
-)
-target_link_libraries(predcorr_test
-    PUBLIC
+foreach(PREDCORR "RK2_PREDCORR" "EXPLICIT_PREDCORR" "IMPLICIT_PREDCORR")
+    set(test_name "bsl_${PREDCORR}_test")
+    add_executable("${test_name}"
+        ../../main.cpp
+        bsl_predcorr_test.cpp
+    )
+    target_link_libraries("${test_name}"
+        PUBLIC
         GTest::gtest
         GTest::gmock
         DDC::core
@@ -28,5 +27,7 @@ target_link_libraries(predcorr_test
         gslx::simulation_utils
         gslx::time_integration_RTheta
         gslx::utils
-)
-gtest_discover_tests(predcorr_test DISCOVERY_MODE PRE_TEST)
+    )
+    target_compile_definitions("${test_name}" PUBLIC -D${PREDCORR} )
+    gtest_discover_tests("${test_name}" DISCOVERY_MODE PRE_TEST)
+endforeach()
