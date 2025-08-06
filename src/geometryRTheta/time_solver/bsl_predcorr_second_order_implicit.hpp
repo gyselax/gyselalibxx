@@ -389,8 +389,21 @@ public:
     }
 
 
+    /**
+     * @brief The implicit loop which calculates the feet of the charateristics.
+     *
+     * This function should be private but cannot be as it contains Kokkos lambda
+     * functions.
+     *
+     * @param[in] advection_field The current advection field.
+     * @param[in] advection_field_coefs_k The coefficients of the spline representation of the current advection field.
+     * @param[inout] feet_coords The feet of the characteristics.
+     * @param[in] dt The time step.
+     * @param[in] tau The stopping criteria. The convergence is reached when the old and new
+     *                feet of the characteristics are less than tau apart.
+     */
     void implicit_loop(
-            DVectorFieldRTheta<X, Y> advection_field,
+            DVectorConstFieldRTheta<X, Y> advection_field,
             ConstVectorSplineCoeffs2D<X, Y> advection_field_coefs_k,
             FieldRTheta<CoordRTheta> feet_coords,
             double const dt,
