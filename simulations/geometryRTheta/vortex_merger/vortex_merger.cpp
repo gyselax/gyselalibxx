@@ -232,12 +232,8 @@ int main(int argc, char** argv)
     double const phi_max(1.);
 
 
-    VortexMergerEquilibria equilibrium(
-            to_physical_mapping,
-            grid,
-            builder,
-            spline_evaluator,
-            poisson_solver);
+    VortexMergerEquilibria
+            equilibrium(to_physical_mapping, grid, builder, spline_evaluator, poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
     host_t<DFieldMemRTheta> rho_eq_host(grid);
     equilibrium.set_equilibrium(get_field(rho_eq_host), function, phi_max, tau);

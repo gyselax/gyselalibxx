@@ -116,8 +116,8 @@ public:
         IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
         Spline2DMem rho_coef(idx_range_bsplinesRTheta);
 
-		auto rho_eq_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), rho_eq_host);
-		DFieldRTheta rho_eq(rho_eq_alloc);
+        auto rho_eq_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), rho_eq_host);
+        DFieldRTheta rho_eq(rho_eq_alloc);
 
         double difference_sigma(0.);
         int count = 0;
@@ -131,7 +131,7 @@ public:
 
 
             // STEP 2: compute phi_star^i with PDE solver
-			ddc::parallel_deepcopy(rho_eq, get_const_field(rho_eq_host));
+            ddc::parallel_deepcopy(rho_eq, get_const_field(rho_eq_host));
             m_builder(get_field(rho_coef), get_const_field(rho_eq));
             PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef), m_evaluator);
             m_poisson_solver(poisson_rhs, get_field(phi_star));
@@ -154,7 +154,8 @@ public:
             // STEP 4: update sigma and phi
             difference_sigma = 0.;
             ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
-                double const abs_diff_sigma = fabs(sigma_host(irtheta) - ci(irtheta) * sigma_host(irtheta));
+                double const abs_diff_sigma
+                        = fabs(sigma_host(irtheta) - ci(irtheta) * sigma_host(irtheta));
                 difference_sigma
                         = difference_sigma > abs_diff_sigma ? difference_sigma : abs_diff_sigma;
 
