@@ -95,7 +95,6 @@ int main(int argc, char** argv)
 
     // OPERATORS ======================================================================================
     SplineRThetaBuilder const builder(grid);
-    SplineRThetaBuilder_host const builder_host(grid);
 
     // --- Define the mapping. ------------------------------------------------------------------------
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(
@@ -104,11 +103,6 @@ int main(int argc, char** argv)
             ddc::coordinate(mesh_r.back()));
 
     SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -135,11 +129,6 @@ int main(int argc, char** argv)
     ddc::NullExtrapolationRule r_extrapolation_rule;
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
     SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-    SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
             r_extrapolation_rule,
             r_extrapolation_rule,
             theta_extrapolation_rule,
@@ -185,9 +174,9 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             grid,
-            builder_host,
+            builder,
             poisson_solver,
-            spline_evaluator_extrapol_host);
+            spline_evaluator_extrapol);
 
 
 
@@ -243,22 +232,18 @@ int main(int argc, char** argv)
     double const phi_max(1.);
 
 
-    VortexMergerEquilibria equilibrium(
-            to_physical_mapping,
-            grid,
-            builder_host,
-            spline_evaluator_host,
-            poisson_solver);
+    VortexMergerEquilibria
+            equilibrium(to_physical_mapping, grid, builder, spline_evaluator, poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
-    host_t<DFieldMemRTheta> rho_eq(grid);
-    equilibrium.set_equilibrium(get_field(rho_eq), function, phi_max, tau);
+    host_t<DFieldMemRTheta> rho_eq_alloc_host(grid);
+    equilibrium.set_equilibrium(get_field(rho_eq_alloc_host), function, phi_max, tau);
 
 
     VortexMergerDensitySolution solution(to_physical_mapping);
-    host_t<DFieldMemRTheta> rho(grid);
+    host_t<DFieldMemRTheta> rho_alloc_host(grid);
     solution.set_initialisation(
-            get_field(rho),
-            get_const_field(rho_eq),
+            get_field(rho_alloc_host),
+            get_const_field(rho_eq_alloc_host),
             eps,
             sigma,
             x_star_1,
@@ -268,13 +253,15 @@ int main(int argc, char** argv)
 
 
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
-    DFieldMemRTheta phi_eq(grid);
-    host_t<DFieldMemRTheta> phi_eq_host(grid);
-    host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
-    builder_host(get_field(rho_coef_eq), get_const_field(rho_eq));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator_host);
-    poisson_solver(poisson_rhs_eq, get_field(phi_eq));
-    ddc::parallel_deepcopy(phi_eq_host, phi_eq);
+    DFieldMemRTheta phi_eq_alloc(grid);
+    host_t<DFieldMemRTheta> phi_eq_alloc_host(grid);
+    Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
+    DFieldMemRTheta rho_eq_alloc(grid);
+    ddc::parallel_deepcopy(rho_alloc_host, rho_eq_alloc_host);
+    builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
+    poisson_solver(poisson_rhs_eq, get_field(phi_eq_alloc));
+    ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
 
     // --- Save initial data --------------------------------------------------------------------------
@@ -282,15 +269,15 @@ int main(int argc, char** argv)
             .with("x_coords", coords_x)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)
-            .with("density_eq", rho_eq)
-            .with("electrical_potential_eq", phi_eq);
+            .with("density_eq", rho_eq_alloc_host)
+            .with("electrical_potential_eq", phi_eq_alloc_host);
 
 
 
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
-    predcorr_operator(get_field(rho), dt, iter_nb);
+    predcorr_operator(get_field(rho_alloc_host), dt, iter_nb);
 
 
     end_simulation = std::chrono::system_clock::now();
