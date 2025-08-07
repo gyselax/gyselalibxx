@@ -252,7 +252,7 @@ int main(int argc, char** argv)
             y_star_2);
 
 
-    // Compute phi equilibrium phi_eq_alloc from Poisson solver. ***********
+    // Compute phi equilibrium phi_eq from Poisson solver. ***********
     DFieldMemRTheta phi_eq_alloc(grid);
     host_t<DFieldMemRTheta> phi_eq_alloc_host(grid);
     Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);

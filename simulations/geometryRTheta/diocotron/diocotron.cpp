@@ -281,7 +281,7 @@ int main(int argc, char** argv)
             Kokkos::DefaultExecutionSpace(),
             get_field(rho_eq_alloc_host));
 
-    // Compute phi equilibrium phi_eq_alloc from Poisson solver. ***********
+    // Compute phi equilibrium phi_eq from Poisson solver. ***********
     DFieldMemRTheta phi_eq_alloc(mesh_rtheta);
     host_t<DFieldMemRTheta> phi_eq_alloc_host(mesh_rtheta);
     Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);

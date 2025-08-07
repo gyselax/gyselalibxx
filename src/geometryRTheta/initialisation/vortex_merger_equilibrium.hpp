@@ -130,7 +130,7 @@ public:
             });
 
 
-            // STEP 2: compute phi_star_alloc^i with PDE solver
+            // STEP 2: compute phi_star^i with PDE solver
             ddc::parallel_deepcopy(rho_eq, get_const_field(rho_eq_host));
             m_builder(get_field(rho_coef_alloc), get_const_field(rho_eq));
             PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef_alloc), m_evaluator);
