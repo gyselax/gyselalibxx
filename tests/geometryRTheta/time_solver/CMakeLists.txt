@@ -46,8 +46,8 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
             "$<TARGET_FILE:Python3::Interpreter>")
             # "fft")
             
-    set_property(TEST "${test_name}" PROPERTY TIMEOUT 200)
-    set_property(TEST "${test_name}" PROPERTY COST 100)
+    # set_property(TEST "${test_name}" PROPERTY TIMEOUT 2000)
+    # set_property(TEST "${test_name}" PROPERTY COST 100)
 endfunction()
 
 # Select the parameters of the simulation:

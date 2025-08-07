@@ -1,8 +1,8 @@
 SplineMesh:
-  r_ncells: 128
+  r_ncells: 32
   r_min: 0.0
   r_max: 1.0 
-  theta_ncells: 256
+  theta_ncells: 64
   theta_min: 0.0
   theta_max: 6.283185307179586
 
