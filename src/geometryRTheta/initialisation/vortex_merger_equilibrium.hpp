@@ -206,20 +206,20 @@ public:
         IdxRangeRTheta grid = get_idx_range<GridR, GridTheta>(rho_eq_host);
 
         // Equilibrium:
-        host_t<DFieldMemRTheta> sigma_0(grid);
-        host_t<DFieldMemRTheta> phi_eq_host(grid);
+        host_t<DFieldMemRTheta> sigma_0_alloc_host(grid);
+        host_t<DFieldMemRTheta> phi_eq_alloc_host(grid);
         const double sig = 0.3;
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
             const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
             const CoordXY coord_xy(m_mapping(coord_rtheta));
             const double x = ddc::get<X>(coord_xy);
             const double y = ddc::get<Y>(coord_xy);
-            sigma_0(irtheta) = sig;
-            phi_eq_host(irtheta) = std::exp(-(x * x + y * y) / (2 * sig * sig));
+            sigma_0_alloc_host(irtheta) = sig;
+            phi_eq_alloc_host(irtheta) = std::exp(-(x * x + y * y) / (2 * sig * sig));
         });
         find_equilibrium(
-                get_field(sigma_0),
-                get_field(phi_eq_host),
+                get_field(sigma_0_alloc_host),
+                get_field(phi_eq_alloc_host),
                 get_field(rho_eq_host),
                 function,
                 phi_max,
