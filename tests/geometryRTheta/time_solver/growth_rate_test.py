@@ -26,6 +26,7 @@ if __name__ == '__main__':
 
     path_data_structure = Path('data_structure_RTheta.yaml')
     folder = args.data_dir.joinpath("/output/")
+    print(folder)
     ds = DiskStore(folder, data_structure=path_data_structure)
 
     # Get initial data
