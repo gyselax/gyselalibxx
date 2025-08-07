@@ -99,7 +99,6 @@ int main(int argc, char** argv)
 
     // OPERATORS ======================================================================================
     SplineRThetaBuilder const builder(mesh_rtheta);
-    SplineRThetaBuilder_host const builder_host(mesh_rtheta);
 
 
     // --- Define the mapping. ------------------------------------------------------------------------
@@ -109,12 +108,6 @@ int main(int argc, char** argv)
             ddc::coordinate(mesh_r.back()));
 
     SplineRThetaEvaluatorConstBound spline_evaluator_extrapol(
-            boundary_condition_r_left,
-            boundary_condition_r_right,
-            ddc::PeriodicExtrapolationRule<Theta>(),
-            ddc::PeriodicExtrapolationRule<Theta>());
-
-    SplineRThetaEvaluatorConstBound_host spline_evaluator_extrapol_host(
             boundary_condition_r_left,
             boundary_condition_r_right,
             ddc::PeriodicExtrapolationRule<Theta>(),
@@ -159,11 +152,6 @@ int main(int argc, char** argv)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    SplineRThetaEvaluatorNullBound_host spline_evaluator_host(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
 
     PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, mesh_rtheta);
 
@@ -204,8 +192,8 @@ int main(int argc, char** argv)
     BslPredCorrRTheta predcorr_operator(
             to_physical_mapping,
             advection_operator,
-            builder_host,
-            spline_evaluator_host,
+            builder,
+            spline_evaluator,
             poisson_solver);
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
@@ -213,18 +201,18 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             mesh_rtheta,
-            builder_host,
+            builder,
             poisson_solver,
-            spline_evaluator_extrapol_host);
+            spline_evaluator_extrapol);
 #elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRTheta predcorr_operator(
             to_physical_mapping,
             to_physical_mapping,
             advection_operator,
             mesh_rtheta,
-            builder_host,
+            builder,
             poisson_solver,
-            spline_evaluator_extrapol_host);
+            spline_evaluator_extrapol);
 #endif
 
     // ================================================================================================
@@ -280,37 +268,41 @@ int main(int argc, char** argv)
 
 
 
-    host_t<DFieldMemRTheta> rho(mesh_rtheta);
-    host_t<DFieldMemRTheta> rho_eq(mesh_rtheta);
+    host_t<DFieldMemRTheta> rho_alloc_host(mesh_rtheta);
+    host_t<DFieldMemRTheta> rho_eq_alloc_host(mesh_rtheta);
 
     // Initialise rho and rho equilibrium ****************************
     ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
-        rho(irtheta) = exact_rho.initialisation(coords(irtheta));
-        rho_eq(irtheta) = exact_rho.equilibrium(coords(irtheta));
+        rho_alloc_host(irtheta) = exact_rho.initialisation(coords(irtheta));
+        rho_eq_alloc_host(irtheta) = exact_rho.equilibrium(coords(irtheta));
     });
 
+    auto rho_eq_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(rho_eq_alloc_host));
+
     // Compute phi equilibrium phi_eq from Poisson solver. ***********
-    DFieldMemRTheta phi_eq(mesh_rtheta);
-    host_t<DFieldMemRTheta> phi_eq_host(mesh_rtheta);
-    host_t<Spline2DMem> rho_coef_eq(idx_range_bsplinesRTheta);
-    builder_host(get_field(rho_coef_eq), get_const_field(rho_eq));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator_host);
-    poisson_solver(poisson_rhs_eq, get_field(phi_eq));
-    ddc::parallel_deepcopy(phi_eq_host, phi_eq);
+    DFieldMemRTheta phi_eq_alloc(mesh_rtheta);
+    host_t<DFieldMemRTheta> phi_eq_alloc_host(mesh_rtheta);
+    Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
+    builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
+    poisson_solver(poisson_rhs_eq, get_field(phi_eq_alloc));
+    ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
     // --- Save initial data --------------------------------------------------------------------------
     ddc::PdiEvent("initialisation")
             .with("x_coords", coords_x)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)
-            .with("density_eq", rho_eq)
-            .with("electrical_potential_eq", phi_eq_host);
+            .with("density_eq", rho_eq_alloc_host)
+            .with("electrical_potential_eq", phi_eq_alloc_host);
 
 
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
-    predcorr_operator(get_field(rho), dt, iter_nb);
+    predcorr_operator(get_field(rho_alloc_host), dt, iter_nb);
 
 
     end_simulation = std::chrono::system_clock::now();
