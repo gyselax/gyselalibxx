@@ -25,7 +25,8 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     path_data_structure = Path('data_structure_RTheta.yaml')
-    folder = args.data_dir.joinpath("/output/")
+    # folder = args.data_dir.joinpath("/output/")
+    folder = Path.cwd().joinpath("/output/")
     print("Path.cwd()", Path.cwd())
     print("args.data_dir", args.data_dir)
     print("folder", folder)

@@ -9,7 +9,7 @@ GYSELALIBXX_SRCDIR="$1"
 GYSELALIBXX_EXEC="$2"
 PYTHON3_EXE="$3"
 
-OUTDIR="${PWD}/${SIMULATION_NAME}"
+OUTDIR="${PWD}"
 
 TMPDIR="$(mktemp -p "${PWD}" -d run-XXXXXXXXXX)"
 function finish {
@@ -48,7 +48,7 @@ python3 -c "$MODIFY_PARAMETERS"
 "${GYSELALIBXX_EXEC}" "${PWD}/diocotron_params.yaml"
 
 export PYTHONPATH="${GYSELALIBXX_SRCDIR}/post-process/PythonScripts:${PYTHONPATH}"
-"${PYTHON3_EXE}" -B "${GYSELALIBXX_SRCDIR}/tests/geometryRTheta/time_solver/growth_rate_test.py" "${OUTDIR}" 
+"${PYTHON3_EXE}" -B "${GYSELALIBXX_SRCDIR}/tests/geometryRTheta/time_solver/growth_rate_test.py" "${OUTDIR}"
 if [ ! -d ${OUTDIR} ]; then
     mkdir "${OUTDIR}"
 fi
