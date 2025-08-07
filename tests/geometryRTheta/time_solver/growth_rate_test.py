@@ -31,6 +31,8 @@ if __name__ == '__main__':
     print("args.data_dir", args.data_dir)
     print("folder", folder)
     ds = DiskStore(folder, data_structure=path_data_structure)
+    print(ds)
+    print(ds.keys())
 
     # Get initial data
     rho_eq = np.array(ds['density_eq'])
