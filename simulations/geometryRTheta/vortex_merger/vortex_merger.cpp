@@ -235,15 +235,15 @@ int main(int argc, char** argv)
     VortexMergerEquilibria
             equilibrium(to_physical_mapping, grid, builder, spline_evaluator, poisson_solver);
     std::function<double(double const)> const function = [&](double const x) { return x * x; };
-    host_t<DFieldMemRTheta> rho_eq_host(grid);
-    equilibrium.set_equilibrium(get_field(rho_eq_host), function, phi_max, tau);
+    host_t<DFieldMemRTheta> rho_eq_alloc_host(grid);
+    equilibrium.set_equilibrium(get_field(rho_eq_alloc_host), function, phi_max, tau);
 
 
     VortexMergerDensitySolution solution(to_physical_mapping);
-    host_t<DFieldMemRTheta> rho(grid);
+    host_t<DFieldMemRTheta> rho_alloc_host(grid);
     solution.set_initialisation(
-            get_field(rho),
-            get_const_field(rho_eq_host),
+            get_field(rho_alloc_host),
+            get_const_field(rho_eq_alloc_host),
             eps,
             sigma,
             x_star_1,
@@ -257,7 +257,7 @@ int main(int argc, char** argv)
     host_t<DFieldMemRTheta> phi_eq_alloc_host(grid);
     Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
     DFieldMemRTheta rho_eq_alloc(grid);
-    ddc::parallel_deepcopy(rho, rho_eq_host);
+    ddc::parallel_deepcopy(rho_alloc_host, rho_eq_alloc_host);
     builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
     PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq_alloc));
@@ -269,7 +269,7 @@ int main(int argc, char** argv)
             .with("x_coords", coords_x)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)
-            .with("density_eq", rho_eq_host)
+            .with("density_eq", rho_eq_alloc_host)
             .with("electrical_potential_eq", phi_eq_alloc_host);
 
 
@@ -277,7 +277,7 @@ int main(int argc, char** argv)
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
-    predcorr_operator(get_field(rho), dt, iter_nb);
+    predcorr_operator(get_field(rho_alloc_host), dt, iter_nb);
 
 
     end_simulation = std::chrono::system_clock::now();

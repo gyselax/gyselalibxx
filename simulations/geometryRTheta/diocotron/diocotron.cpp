@@ -268,23 +268,24 @@ int main(int argc, char** argv)
 
 
 
-    host_t<DFieldMemRTheta> rho_host(mesh_rtheta);
-    host_t<DFieldMemRTheta> rho_eq_host(mesh_rtheta);
+    host_t<DFieldMemRTheta> rho_alloc_host(mesh_rtheta);
+    host_t<DFieldMemRTheta> rho_eq_alloc_host(mesh_rtheta);
 
     // Initialise rho and rho equilibrium ****************************
     ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
-        rho_host(irtheta) = exact_rho.initialisation(coords(irtheta));
-        rho_eq_host(irtheta) = exact_rho.equilibrium(coords(irtheta));
+        rho_alloc_host(irtheta) = exact_rho.initialisation(coords(irtheta));
+        rho_eq_alloc_host(irtheta) = exact_rho.equilibrium(coords(irtheta));
     });
 
-    auto rho_eq = ddc::
-            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(rho_eq_host));
+    auto rho_eq_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(rho_eq_alloc_host));
 
     // Compute phi equilibrium phi_eq_alloc from Poisson solver. ***********
     DFieldMemRTheta phi_eq_alloc(mesh_rtheta);
     host_t<DFieldMemRTheta> phi_eq_alloc_host(mesh_rtheta);
     Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
-    builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq));
+    builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
     PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
     poisson_solver(poisson_rhs_eq, get_field(phi_eq_alloc));
     ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
@@ -294,14 +295,14 @@ int main(int argc, char** argv)
             .with("x_coords", coords_x)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)
-            .with("density_eq", rho_eq_host)
+            .with("density_eq", rho_eq_alloc_host)
             .with("electrical_potential_eq", phi_eq_alloc_host);
 
 
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
-    predcorr_operator(get_field(rho_host), dt, iter_nb);
+    predcorr_operator(get_field(rho_alloc_host), dt, iter_nb);
 
 
     end_simulation = std::chrono::system_clock::now();
