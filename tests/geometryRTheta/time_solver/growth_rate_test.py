@@ -25,7 +25,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     path_data_structure = Path('data_structure_RTheta.yaml')
-    folder = args.data_dir.joinpath(f"/output/").resolve()
+    folder = args.data_dir.joinpath(f"/output/")
     ds = DiskStore(folder, data_structure=path_data_structure)
 
     # Get initial data
