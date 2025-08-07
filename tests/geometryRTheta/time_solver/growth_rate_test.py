@@ -21,11 +21,12 @@ if __name__ == '__main__':
                         nargs='?',
                         default=Path.cwd(),
                         type=Path,
-                        help='location of the results')
+                        help='Location of the results.')
     args = parser.parse_args()
 
     path_data_structure = Path('data_structure_RTheta.yaml')
-    ds = DiskStore(args.data_dir, data_structure=path_data_structure)
+    folder = args.data_dir.joinpath(f"/output/").resolve()
+    ds = DiskStore(folder, data_structure=path_data_structure)
 
     # Get initial data
     rho_eq = np.array(ds['density_eq'])
@@ -54,4 +55,3 @@ if __name__ == '__main__':
 
     assert abs(slope_rho - omega_Im) < 1e-3
     assert abs(slope_phi - omega_Im) < 1e-3
-    
