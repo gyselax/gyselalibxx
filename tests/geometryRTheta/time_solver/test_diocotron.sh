@@ -22,7 +22,29 @@ TESTDIR="${PWD}"
 
 cd "${TMPDIR}"
 
+# Create a parameter file with the default values. 
 "${GYSELALIBXX_EXEC}" "--dump-config" "${PWD}/diocotron_params.yaml"
+
+# Modify the default parameter files for a faster test.
+MODIFY_PARAMETERS=$(cat <<EOF
+import yaml
+
+with open('diocotron_params.yaml') as f:
+    data = yaml.safe_load(f)
+
+data['SplineMesh']['r_ncells'] = 32
+data['SplineMesh']['theta_ncells'] = 64
+data['Time']['final_T'] = 40.
+data['Output']['time_step_diag'] = 40
+
+with open('diocotron_params.yaml', 'w') as f:
+    yaml.dump(data, f)
+EOF
+)
+
+python3 -c "$MODIFY_PARAMETERS"
+
+# Launch the test with the modified parameter file. 
 "${GYSELALIBXX_EXEC}" "${PWD}/diocotron_params.yaml"
 
 export PYTHONPATH="${GYSELALIBXX_SRCDIR}/post-process/PythonScripts:${PYTHONPATH}"

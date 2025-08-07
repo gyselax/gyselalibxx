@@ -18,4 +18,4 @@ Perturbation:
   r_max: 0.50
   
 Output:
-  time_step_diag: 10
+  time_step_diag: 40
