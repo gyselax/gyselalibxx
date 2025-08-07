@@ -563,7 +563,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-evaluator_type"><strong>evaluator_type</strong></a>  <br><em>The type of the 2D Spline Evaluator used by this class.</em></td>
 </tr>
 </tbody>
@@ -579,10 +579,10 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-poissonlikerhsfunction"><strong>PoissonLikeRHSFunction</strong></a> (host_t&lt; ConstSpline2D &gt; coefs, <a href="classPoissonLikeRHSFunction.html#typedef-evaluator_type"><strong>evaluator_type</strong></a> const &amp; evaluator) <br><em>Instantiate a</em> <a href="classPoissonLikeRHSFunction.html"><em><strong>PoissonLikeRHSFunction</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-poissonlikerhsfunction"><strong>PoissonLikeRHSFunction</strong></a> (ConstSpline2D coefs, <a href="classPoissonLikeRHSFunction.html#typedef-evaluator_type"><strong>evaluator_type</strong></a> const &amp; evaluator) <br><em>Instantiate a</em> <a href="classPoissonLikeRHSFunction.html"><em><strong>PoissonLikeRHSFunction</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">double</td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (CoordRTheta const &amp; coord_rtheta) const<br><em>Get the value of the function at a given coordinate.</em></td>
 </tr>
 </tbody>
@@ -595,14 +595,14 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-evaluator_type">typedef evaluator_type</h3>
 <p><em>The type of the 2D Spline Evaluator used by this class.</em> </p>
-<pre><code class="language-C++">using PoissonLikeRHSFunction&lt; RadialExtrapolationRule &gt;::evaluator_type =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
+<pre><code class="language-C++">using PoissonLikeRHSFunction&lt; RadialExtrapolationRule &gt;::evaluator_type =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-poissonlikerhsfunction">function PoissonLikeRHSFunction</h3>
 <p><em>Instantiate a</em> <a href="classPoissonLikeRHSFunction.html"><em><strong>PoissonLikeRHSFunction</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">inline PoissonLikeRHSFunction::PoissonLikeRHSFunction (
-    host_t&lt; ConstSpline2D &gt; coefs,
+    ConstSpline2D coefs,
     evaluator_type const &amp; evaluator
 ) 
 </code></pre>
@@ -615,7 +615,7 @@
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Get the value of the function at a given coordinate.</em> </p>
-<pre><code class="language-C++">inline double PoissonLikeRHSFunction::operator() (
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double PoissonLikeRHSFunction::operator() (
     CoordRTheta const &amp; coord_rtheta
 ) const
 </code></pre>

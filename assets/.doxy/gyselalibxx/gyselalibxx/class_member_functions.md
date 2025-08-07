@@ -40,7 +40,6 @@
 
 * **compute\_advection\_field\_RTheta** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
 * **compute\_advection\_field\_XY** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
-* **compute\_square\_polar\_distance** ([**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md))
 * **compute\_twomaxwellian** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **CartesianLeviCivitaTensor** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md))
 * **CartesianToBarycentric** ([**CartesianToBarycentric**](classCartesianToBarycentric.md))

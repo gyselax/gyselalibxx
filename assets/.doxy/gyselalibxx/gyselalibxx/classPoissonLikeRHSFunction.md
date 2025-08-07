@@ -34,7 +34,7 @@ _Type of right-hand side (rhs) function of the Poisson equation._ [More...](#det
 
 | Type | Name |
 | ---: | :--- |
-| typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md), [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt; &gt; | [**evaluator\_type**](#typedef-evaluator_type)  <br>_The type of the 2D Spline Evaluator used by this class._  |
+| typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md), [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Theta**](structTheta.md) &gt; &gt; | [**evaluator\_type**](#typedef-evaluator_type)  <br>_The type of the 2D Spline Evaluator used by this class._  |
 
 
 
@@ -59,8 +59,8 @@ _Type of right-hand side (rhs) function of the Poisson equation._ [More...](#det
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PoissonLikeRHSFunction**](#function-poissonlikerhsfunction) (host\_t&lt; ConstSpline2D &gt; coefs, [**evaluator\_type**](classPoissonLikeRHSFunction.md#typedef-evaluator_type) const & evaluator) <br>_Instantiate a_ [_**PoissonLikeRHSFunction**_](classPoissonLikeRHSFunction.md) _._ |
-|  double | [**operator()**](#function-operator) (CoordRTheta const & coord\_rtheta) const<br>_Get the value of the function at a given coordinate._  |
+|   | [**PoissonLikeRHSFunction**](#function-poissonlikerhsfunction) (ConstSpline2D coefs, [**evaluator\_type**](classPoissonLikeRHSFunction.md#typedef-evaluator_type) const & evaluator) <br>_Instantiate a_ [_**PoissonLikeRHSFunction**_](classPoissonLikeRHSFunction.md) _._ |
+|  KOKKOS\_INLINE\_FUNCTION double | [**operator()**](#function-operator) (CoordRTheta const & coord\_rtheta) const<br>_Get the value of the function at a given coordinate._  |
 
 
 
@@ -112,7 +112,7 @@ _Type of right-hand side (rhs) function of the Poisson equation._ [More...](#det
 
 _The type of the 2D Spline Evaluator used by this class._ 
 ```C++
-using PoissonLikeRHSFunction< RadialExtrapolationRule >::evaluator_type =  ddc::SplineEvaluator2D< Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule<Theta>, ddc::PeriodicExtrapolationRule<Theta> >;
+using PoissonLikeRHSFunction< RadialExtrapolationRule >::evaluator_type =  ddc::SplineEvaluator2D< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, RadialExtrapolationRule, RadialExtrapolationRule, ddc::PeriodicExtrapolationRule<Theta>, ddc::PeriodicExtrapolationRule<Theta> >;
 ```
 
 
@@ -129,7 +129,7 @@ using PoissonLikeRHSFunction< RadialExtrapolationRule >::evaluator_type =  ddc::
 _Instantiate a_ [_**PoissonLikeRHSFunction**_](classPoissonLikeRHSFunction.md) _._
 ```C++
 inline PoissonLikeRHSFunction::PoissonLikeRHSFunction (
-    host_t< ConstSpline2D > coefs,
+    ConstSpline2D coefs,
     evaluator_type const & evaluator
 ) 
 ```
@@ -157,7 +157,7 @@ inline PoissonLikeRHSFunction::PoissonLikeRHSFunction (
 
 _Get the value of the function at a given coordinate._ 
 ```C++
-inline double PoissonLikeRHSFunction::operator() (
+inline KOKKOS_INLINE_FUNCTION double PoissonLikeRHSFunction::operator() (
     CoordRTheta const & coord_rtheta
 ) const
 ```

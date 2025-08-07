@@ -598,11 +598,11 @@
 <td style="text-align: left;"><a href="#function-ipow"><strong>ipow</strong></a> (double a, int i) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="structT.html"><strong>T</strong></a></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="structT.html"><strong>T</strong></a></td>
 <td style="text-align: left;"><a href="#function-max"><strong>max</strong></a> (<a href="structT.html"><strong>T</strong></a> x, <a href="structT.html"><strong>T</strong></a> y) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;"><a href="structT.html"><strong>T</strong></a></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="structT.html"><strong>T</strong></a></td>
 <td style="text-align: left;"><a href="#function-min"><strong>min</strong></a> (<a href="structT.html"><strong>T</strong></a> x, <a href="structT.html"><strong>T</strong></a> y) <br></td>
 </tr>
 <tr>
@@ -701,7 +701,7 @@ KOKKOS_FUNCTION DTensor &lt; VectorIndexSet&lt; typename ColDim1::Dual, typename
 
 <h3 id="function-max">function max</h3>
 <pre><code class="language-C++">template&lt;typename T&gt;
-inline T max (
+KOKKOS_INLINE_FUNCTION T max (
     T x,
     T y
 ) 
@@ -710,7 +710,7 @@ inline T max (
 
 <h3 id="function-min">function min</h3>
 <pre><code class="language-C++">template&lt;typename T&gt;
-inline T min (
+KOKKOS_INLINE_FUNCTION T min (
     T x,
     T y
 ) 

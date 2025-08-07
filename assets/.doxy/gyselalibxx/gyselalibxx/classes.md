@@ -251,6 +251,8 @@
 * [**Interface**](structInterface.md)
 * [**IntermediateBernsteinBasis**](structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.md)
 ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
+* [**InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md)
+([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * [**interpolator\_on\_idx\_range**](structinterpolator__on__idx__range.md)
 * [**interpolator\_on\_idx\_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;**](structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.md)
 * [**InverseJacobianMatrix**](classInverseJacobianMatrix.md)

@@ -291,7 +291,7 @@ template <class Dim1, class Dim2>
 using DVectorFieldRTheta = VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using DConstVectorFieldRTheta
+using DVectorConstFieldRTheta
         = VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 

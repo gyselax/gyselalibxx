@@ -572,6 +572,10 @@
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.html"><strong>InternalBatchDim</strong></a> <br><em>The tag for the batch dimension for the equation. This is public due to Cuda.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.html"><strong>QDimRMesh</strong></a> <br><em>Tag the first dimension for the quadrature mesh.</em></td>
 </tr>
 <tr>
@@ -629,16 +633,12 @@
 <td style="text-align: left;"><a href="#function-get_matrix_stencil_element"><strong>get_matrix_stencil_element</strong></a> (IdxBSRTheta idx_test, IdxBSRTheta idx_trial, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, SplineRThetaEvaluatorNullBound const &amp; evaluator, Mapping const &amp; mapping) <br><em>Computes the matrix element corresponding to two tensor product splines with index idx_test and idx_trial.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION IdxRangeQuadratureRTheta</td>
-<td style="text-align: left;"><a href="#function-get_quadrature_between_knots"><strong>get_quadrature_between_knots</strong></a> (Idx&lt; KnotsR &gt; start_knot_r, Idx&lt; KnotsR &gt; end_knot_r, Idx&lt; KnotsTheta &gt; start_knot_theta, Idx&lt; KnotsTheta &gt; end_knot_theta) const<br><em>Compute the quadrature range between a provided set of knots.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-init_nnz_per_line"><strong>init_nnz_per_line</strong></a> (Kokkos::View&lt; int *, Kokkos::LayoutRight &gt; nnz_per_row) const<br><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (RHSFunction const &amp; rhs, host_t&lt; PolarSplineRTheta &gt; spline) const<br><em>Solve the Poisson-like equation.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (RHSFunction const &amp; rhs, PolarSplineRTheta spline) const<br><em>Solve the Poisson-like equation.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -662,6 +662,10 @@
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION auto</td>
 <td style="text-align: left;"><a href="#function-get_polar_bspline_vals_and_derivs"><strong>get_polar_bspline_vals_and_derivs</strong></a> (double &amp; val, CoordRTheta coord, IdxBSPolar idx) <br><em>Get the value and derivative of the specified polar bspline at the specified quadrature point.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION IdxRangeQuadratureRTheta</td>
+<td style="text-align: left;"><a href="#function-get_quadrature_between_knots"><strong>get_quadrature_between_knots</strong></a> (Idx&lt; KnotsR &gt; start_knot_r, Idx&lt; KnotsR &gt; end_knot_r, Idx&lt; KnotsTheta &gt; start_knot_theta, Idx&lt; KnotsTheta &gt; end_knot_theta, IdxQuadratureRTheta idx_quad_front) <br><em>Compute the quadrature range between a provided set of knots.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION IdxStepBSTheta</td>
@@ -843,27 +847,6 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 <p>The value of the matrix element. </p>
 <hr>
 
-<h3 id="function-get_quadrature_between_knots">function get_quadrature_between_knots</h3>
-<p><em>Compute the quadrature range between a provided set of knots.</em> </p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_between_knots (
-    Idx&lt; KnotsR &gt; start_knot_r,
-    Idx&lt; KnotsR &gt; end_knot_r,
-    Idx&lt; KnotsTheta &gt; start_knot_theta,
-    Idx&lt; KnotsTheta &gt; end_knot_theta
-) const
-</code></pre>
-<p>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>start_knot_r</code> The index of the knot describing the lower bound of the domain of interest in the radial direction. </li>
-<li><code>end_knot_r</code> The index of the knot describing the upper bound of the domain of interest in the radial direction. </li>
-<li><code>start_knot_theta</code> The index of the knot describing the lower bound of the domain of interest in the poloidal direction. </li>
-<li><code>end_knot_theta</code> The index of the knot describing the upper bound of the domain of interest in the poloidal direction. </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>The range of quadrature points in the specified domain. </p>
-<hr>
-
 <h3 id="function-init_nnz_per_line">function init_nnz_per_line</h3>
 <p><em>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on</em> <span class="arithmatex">\((r,\theta)\)</span> <em>splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1).</em></p>
 <pre><code class="language-C++">inline void PolarSplineFEMPoissonLikeSolver::init_nnz_per_line (
@@ -881,14 +864,14 @@ inline double PolarSplineFEMPoissonLikeSolver::get_matrix_stencil_element (
 <pre><code class="language-C++">template&lt;class RHSFunction&gt;
 inline void PolarSplineFEMPoissonLikeSolver::operator() (
     RHSFunction const &amp; rhs,
-    host_t&lt; PolarSplineRTheta &gt; spline
+    PolarSplineRTheta spline
 ) const
 </code></pre>
 <p>This operator returns the coefficients associated with the B-Splines of the solution <span class="arithmatex">\(\phi\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from CPU. </li>
-<li><code>spline</code> The spline representation of the solution <span class="arithmatex">\(\phi\)</span>, also used as initial data for the iterative solver. </li>
+<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. </li>
+<li><code>spline</code> The spline representation of the solution <span class="arithmatex">\(\phi\)</span>. </li>
 </ul>
 <hr>
 
@@ -903,8 +886,8 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 <p>This operator uses the other operator () and returns the values on the grid of the solution <span class="arithmatex">\(\phi\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from CPU. </li>
-<li><code>phi</code> The values of the solution <span class="arithmatex">\(\phi\)</span> on the given coords_eval, also used as initial data for the iterative solver. </li>
+<li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. </li>
+<li><code>phi</code> The values of the solution <span class="arithmatex">\(\phi\)</span> on the given coords_eval. </li>
 </ul>
 <hr>
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
@@ -942,6 +925,29 @@ static inline KOKKOS_FUNCTION auto PolarSplineFEMPoissonLikeSolver::get_polar_bs
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The derivative of the polar bspline (only returned if calculate_derivs is true). </p>
+<hr>
+
+<h3 id="function-get_quadrature_between_knots">function get_quadrature_between_knots</h3>
+<p><em>Compute the quadrature range between a provided set of knots.</em> </p>
+<pre><code class="language-C++">static inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_between_knots (
+    Idx&lt; KnotsR &gt; start_knot_r,
+    Idx&lt; KnotsR &gt; end_knot_r,
+    Idx&lt; KnotsTheta &gt; start_knot_theta,
+    Idx&lt; KnotsTheta &gt; end_knot_theta,
+    IdxQuadratureRTheta idx_quad_front
+) 
+</code></pre>
+<p>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>start_knot_r</code> The index of the knot describing the lower bound of the domain of interest in the radial direction. </li>
+<li><code>end_knot_r</code> The index of the knot describing the upper bound of the domain of interest in the radial direction. </li>
+<li><code>start_knot_theta</code> The index of the knot describing the lower bound of the domain of interest in the poloidal direction. </li>
+<li><code>end_knot_theta</code> The index of the knot describing the upper bound of the domain of interest in the poloidal direction. </li>
+<li><code>idx_quad_front</code> The first index of the index range of the quadrature points. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The range of quadrature points in the specified domain. </p>
 <hr>
 
 <h3 id="function-theta_mod-12">function theta_mod [1/2]</h3>

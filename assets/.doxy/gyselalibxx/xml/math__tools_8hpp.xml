@@ -674,14 +674,14 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="129" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="129" bodyend="136"/>
       </memberdef>
-      <memberdef kind="function" id="math__tools_8hpp_1adf77a48fdc00d2f05c34a228d1e1c237" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="math__tools_8hpp_1a76d27f7832251b9c3222fc59f4ab7069" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename <ref refid="structT" kindref="compound">T</ref></type>
           </param>
         </templateparamlist>
-        <type><ref refid="structT" kindref="compound">T</ref></type>
-        <definition>T min</definition>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="structT" kindref="compound">T</ref></type>
+        <definition>KOKKOS_INLINE_FUNCTION T min</definition>
         <argsstring>(T x, T y)</argsstring>
         <name>min</name>
         <param>
@@ -698,16 +698,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="140" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="140" bodyend="143"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="140" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="140" bodyend="143"/>
       </memberdef>
-      <memberdef kind="function" id="math__tools_8hpp_1a3f4ae913e2a7b3479faa6afe7c6948cd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="math__tools_8hpp_1a636b62d51d7a9ab1cc7790e54ae413cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename <ref refid="structT" kindref="compound">T</ref></type>
           </param>
         </templateparamlist>
-        <type><ref refid="structT" kindref="compound">T</ref></type>
-        <definition>T max</definition>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="structT" kindref="compound">T</ref></type>
+        <definition>KOKKOS_INLINE_FUNCTION T max</definition>
         <argsstring>(T x, T y)</argsstring>
         <name>max</name>
         <param>
@@ -724,7 +724,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="146" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="146" bodyend="149"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="146" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="146" bodyend="149"/>
       </memberdef>
       <memberdef kind="function" id="math__tools_8hpp_1abc6ba7d1d05608b655ee20062561f832" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1112,13 +1112,13 @@
 <codeline lineno="137"><highlight class="normal"></highlight></codeline>
 <codeline lineno="138"><highlight class="normal"></highlight></codeline>
 <codeline lineno="139"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref><sp/>min(<ref refid="structT" kindref="compound">T</ref><sp/>x,<sp/><ref refid="structT" kindref="compound">T</ref><sp/>y)</highlight></codeline>
+<codeline lineno="140"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/><ref refid="structT" kindref="compound">T</ref><sp/>min(<ref refid="structT" kindref="compound">T</ref><sp/>x,<sp/><ref refid="structT" kindref="compound">T</ref><sp/>y)</highlight></codeline>
 <codeline lineno="141"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>x<sp/>&lt;<sp/>y<sp/>?<sp/>x<sp/>:<sp/>y;</highlight></codeline>
 <codeline lineno="143"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="144"><highlight class="normal"></highlight></codeline>
 <codeline lineno="145"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref><sp/>max(<ref refid="structT" kindref="compound">T</ref><sp/>x,<sp/><ref refid="structT" kindref="compound">T</ref><sp/>y)</highlight></codeline>
+<codeline lineno="146"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/><ref refid="structT" kindref="compound">T</ref><sp/>max(<ref refid="structT" kindref="compound">T</ref><sp/>x,<sp/><ref refid="structT" kindref="compound">T</ref><sp/>y)</highlight></codeline>
 <codeline lineno="147"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>x<sp/>&gt;<sp/>y<sp/>?<sp/>x<sp/>:<sp/>y;</highlight></codeline>
 <codeline lineno="149"><highlight class="normal">}</highlight></codeline>

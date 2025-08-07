@@ -101,7 +101,7 @@
          \exp\left[-\frac{(x - x_1^*)^2 + (y - y_1^*)^2}{2\sigma^2}\right]
       +  \exp\left[-\frac{(x - x_2^*)^2 + (y - y_2^*)^2}{2\sigma^2}\right]
      \right)$</formula></para>
-<para>with <formula id="230">$ \rho_{eq}$</formula> given by <ref refid="classVortexMergerEquilibria_1afcf358db72fd433f4470facfecd25019" kindref="member">VortexMergerEquilibria::set_equilibrium</ref>.</para>
+<para>with <formula id="230">$ \rho_{eq}$</formula> given by <ref refid="classVortexMergerEquilibria_1acc81dc247464a8f63d95fba83936c2dd" kindref="member">VortexMergerEquilibria::set_equilibrium</ref>.</para>
 <para>The initial condition is also given in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
@@ -116,7 +116,7 @@
 <parametername direction="in">rho_eq</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The equilibrium density solution computed thanks to <ref refid="classVortexMergerEquilibria_1afcf358db72fd433f4470facfecd25019" kindref="member">VortexMergerEquilibria::set_equilibrium</ref>. </para>
+<para>The equilibrium density solution computed thanks to <ref refid="classVortexMergerEquilibria_1acc81dc247464a8f63d95fba83936c2dd" kindref="member">VortexMergerEquilibria::set_equilibrium</ref>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

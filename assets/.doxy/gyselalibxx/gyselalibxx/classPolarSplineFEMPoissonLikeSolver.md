@@ -34,6 +34,7 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 | ---: | :--- |
 | struct | [**EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) <br>_Object storing a value and a value of the derivative of a 1D function._  |
 | struct | [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) <br>_Object storing a value and a value of the derivatives in each direction of a 2D function._  |
+| struct | [**InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) <br>_The tag for the batch dimension for the equation. This is public due to Cuda._  |
 | struct | [**QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) <br>_Tag the first dimension for the quadrature mesh._  |
 | struct | [**QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) <br>_Tag the second dimension for the quadrature mesh._  |
 
@@ -73,9 +74,8 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 |  void | [**compute\_singular\_elements**](#function-compute_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point._  |
 |  void | [**compute\_stencil\_elements**](#function-compute_stencil_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._  |
 |  double | [**get\_matrix\_stencil\_element**](#function-get_matrix_stencil_element) (IdxBSRTheta idx\_test, IdxBSRTheta idx\_trial, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & evaluator, Mapping const & mapping) <br>_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._  |
-|  KOKKOS\_FUNCTION IdxRangeQuadratureRTheta | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; KnotsR &gt; start\_knot\_r, Idx&lt; KnotsR &gt; end\_knot\_r, Idx&lt; KnotsTheta &gt; start\_knot\_theta, Idx&lt; KnotsTheta &gt; end\_knot\_theta) const<br>_Compute the quadrature range between a provided set of knots._  |
 |  void | [**init\_nnz\_per\_line**](#function-init_nnz_per_line) (Kokkos::View&lt; int \*, Kokkos::LayoutRight &gt; nnz\_per\_row) const<br>_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz\_per\_row[0] = 0. nnz\_per\_row[1] = 0. nnz\_per\_row[2] = number of non-zero elements in line 0. nnz\_per\_row[3] = number of non-zero elements in lines 0-1. ...\_per\_row nnz\_per\_row[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._ |
-|  void | [**operator()**](#function-operator) (RHSFunction const & rhs, host\_t&lt; PolarSplineRTheta &gt; spline) const<br>_Solve the Poisson-like equation._  |
+|  void | [**operator()**](#function-operator) (RHSFunction const & rhs, PolarSplineRTheta spline) const<br>_Solve the Poisson-like equation._  |
 |  void | [**operator()**](#function-operator_1) (RHSFunction const & rhs, DFieldRTheta phi) const<br>_Solve the Poisson-like equation._  |
 
 
@@ -85,6 +85,7 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 | ---: | :--- |
 |  KOKKOS\_INLINE\_FUNCTION double | [**get\_polar\_bspline\_vals**](#function-get_polar_bspline_vals) (CoordRTheta coord, IdxBSPolar idx) <br>_Get the value of the specified polar bspline at the specified point._  |
 |  KOKKOS\_FUNCTION auto | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (double & val, CoordRTheta coord, IdxBSPolar idx) <br>_Get the value and derivative of the specified polar bspline at the specified quadrature point._  |
+|  KOKKOS\_FUNCTION IdxRangeQuadratureRTheta | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; KnotsR &gt; start\_knot\_r, Idx&lt; KnotsR &gt; end\_knot\_r, Idx&lt; KnotsTheta &gt; start\_knot\_theta, Idx&lt; KnotsTheta &gt; end\_knot\_theta, IdxQuadratureRTheta idx\_quad\_front) <br>_Compute the quadrature range between a provided set of knots._  |
 |  KOKKOS\_FUNCTION IdxStepBSTheta | [**theta\_mod**](#function-theta_mod-12) (IdxStepBSTheta idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction ._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxType | [**theta\_mod**](#function-theta_mod-22) (IdxType idx) <br>_Calculates the index which is inside the poloidal domain using the periodicity properties._  |
 |  KOKKOS\_INLINE\_FUNCTION IdxBSPolar | [**to\_polar**](#function-to_polar) (IdxBSRTheta idx) <br> |
@@ -407,49 +408,6 @@ The value of the matrix element.
 
 
 
-### function get\_quadrature\_between\_knots 
-
-_Compute the quadrature range between a provided set of knots._ 
-```C++
-inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_between_knots (
-    Idx< KnotsR > start_knot_r,
-    Idx< KnotsR > end_knot_r,
-    Idx< KnotsTheta > start_knot_theta,
-    Idx< KnotsTheta > end_knot_theta
-) const
-```
-
-
-
-Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.
-
-
-
-
-**Parameters:**
-
-
-* `start_knot_r` The index of the knot describing the lower bound of the domain of interest in the radial direction. 
-* `end_knot_r` The index of the knot describing the upper bound of the domain of interest in the radial direction. 
-* `start_knot_theta` The index of the knot describing the lower bound of the domain of interest in the poloidal direction. 
-* `end_knot_theta` The index of the knot describing the upper bound of the domain of interest in the poloidal direction. 
-
-
-
-**Returns:**
-
-The range of quadrature points in the specified domain. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
 ### function init\_nnz\_per\_line 
 
 _Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz\_per\_row[0] = 0. nnz\_per\_row[1] = 0. nnz\_per\_row[2] = number of non-zero elements in line 0. nnz\_per\_row[3] = number of non-zero elements in lines 0-1. ...\_per\_row nnz\_per\_row[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._
@@ -484,7 +442,7 @@ _Solve the Poisson-like equation._
 template<class RHSFunction>
 inline void PolarSplineFEMPoissonLikeSolver::operator() (
     RHSFunction const & rhs,
-    host_t< PolarSplineRTheta > spline
+    PolarSplineRTheta spline
 ) const
 ```
 
@@ -498,8 +456,8 @@ This operator returns the coefficients associated with the B-Splines of the solu
 **Parameters:**
 
 
-* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from CPU. 
-* `spline` The spline representation of the solution \(\phi\), also used as initial data for the iterative solver. 
+* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. 
+* `spline` The spline representation of the solution \(\phi\). 
 
 
 
@@ -531,8 +489,8 @@ This operator uses the other operator () and returns the values on the grid of t
 **Parameters:**
 
 
-* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from CPU. 
-* `phi` The values of the solution \(\phi\) on the given coords\_eval, also used as initial data for the iterative solver. 
+* `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. 
+* `phi` The values of the solution \(\phi\) on the given coords\_eval. 
 
 
 
@@ -612,6 +570,51 @@ This method calculates the value and the derivatives of polar bsplines. It is te
 **Returns:**
 
 The derivative of the polar bspline (only returned if calculate\_derivs is true). 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function get\_quadrature\_between\_knots 
+
+_Compute the quadrature range between a provided set of knots._ 
+```C++
+static inline KOKKOS_FUNCTION IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeSolver::get_quadrature_between_knots (
+    Idx< KnotsR > start_knot_r,
+    Idx< KnotsR > end_knot_r,
+    Idx< KnotsTheta > start_knot_theta,
+    Idx< KnotsTheta > end_knot_theta,
+    IdxQuadratureRTheta idx_quad_front
+) 
+```
+
+
+
+Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.
+
+
+
+
+**Parameters:**
+
+
+* `start_knot_r` The index of the knot describing the lower bound of the domain of interest in the radial direction. 
+* `end_knot_r` The index of the knot describing the upper bound of the domain of interest in the radial direction. 
+* `start_knot_theta` The index of the knot describing the lower bound of the domain of interest in the poloidal direction. 
+* `end_knot_theta` The index of the knot describing the upper bound of the domain of interest in the poloidal direction. 
+* `idx_quad_front` The first index of the index range of the quadrature points. 
+
+
+
+**Returns:**
+
+The range of quadrature points in the specified domain. 
 
 
 

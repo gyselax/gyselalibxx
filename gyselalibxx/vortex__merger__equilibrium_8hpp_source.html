@@ -569,8 +569,8 @@ class VortexMergerEquilibria
 private:
     Mapping const&amp; m_mapping;
     IdxRangeRTheta const&amp; m_grid;
-    SplineRThetaBuilder_host const&amp; m_builder;
-    SplineRThetaEvaluatorNullBound_host const&amp; m_evaluator;
+    SplineRThetaBuilder const&amp; m_builder;
+    SplineRThetaEvaluatorNullBound const&amp; m_evaluator;
     PolarSplineFEMPoissonLikeSolver&lt;
             GridR,
             GridTheta,
@@ -581,8 +581,8 @@ public:
     VortexMergerEquilibria(
             Mapping const&amp; mapping,
             IdxRangeRTheta const&amp; grid,
-            SplineRThetaBuilder_host const&amp; builder,
-            SplineRThetaEvaluatorNullBound_host const&amp; evaluator,
+            SplineRThetaBuilder const&amp; builder,
+            SplineRThetaEvaluatorNullBound const&amp; evaluator,
             PolarSplineFEMPoissonLikeSolver&lt;
                     GridR,
                     GridTheta,
@@ -595,19 +595,22 @@ public:
         , m_poisson_solver(poisson_solver) {};
 
     void find_equilibrium(
-            host_t&lt;DFieldRTheta&gt; sigma,
-            host_t&lt;DFieldRTheta&gt; phi_eq,
-            host_t&lt;DFieldRTheta&gt; rho_eq,
+            host_t&lt;DFieldRTheta&gt; sigma_host,
+            host_t&lt;DFieldRTheta&gt; phi_eq_host,
+            host_t&lt;DFieldRTheta&gt; rho_eq_host,
             std::function&lt;double(double const)&gt; const&amp; function,
             double const phi_max, // ToDo: ADD CASE WHERE RHO_MAX IS GIVEN.
             double const tau,
             int count_max = 25) const
     {
-        DFieldMemRTheta phi_star(m_grid);
-        host_t&lt;DFieldMemRTheta&gt; ci(m_grid);
+        DFieldMemRTheta phi_star_alloc(m_grid);
+        host_t&lt;DFieldMemRTheta&gt; ci_alloc_host(m_grid);
 
         IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
-        host_t&lt;Spline2DMem&gt; rho_coef(idx_range_bsplinesRTheta);
+        Spline2DMem rho_coef_alloc(idx_range_bsplinesRTheta);
+
+        auto rho_eq_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), rho_eq_host);
+        DFieldRTheta rho_eq(rho_eq_alloc);
 
         double difference_sigma(0.);
         int count = 0;
@@ -616,15 +619,16 @@ public:
             count += 1;
             // STEP 1: compute rho^i
             ddc::for_each(m_grid, [&amp;](IdxRTheta const irtheta) {
-                rho_eq(irtheta) = sigma(irtheta) * function(phi_eq(irtheta));
+                rho_eq_host(irtheta) = sigma_host(irtheta) * function(phi_eq_host(irtheta));
             });
 
 
             // STEP 2: compute phi_star^i with PDE solver
-            m_builder(get_field(rho_coef), get_const_field(rho_eq));
-            PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef), m_evaluator);
-            m_poisson_solver(poisson_rhs, get_field(phi_star));
-            auto phi_star_host = ddc::create_mirror_view_and_copy(get_field(phi_star));
+            ddc::parallel_deepcopy(rho_eq, get_const_field(rho_eq_host));
+            m_builder(get_field(rho_coef_alloc), get_const_field(rho_eq));
+            PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef_alloc), m_evaluator);
+            m_poisson_solver(poisson_rhs, get_field(phi_star_alloc));
+            auto phi_star_host = ddc::create_mirror_view_and_copy(get_field(phi_star_alloc));
 
             // STEP 3: compute c^i
             // If phi_max is given:
@@ -636,19 +640,20 @@ public:
             });
 
             ddc::for_each(m_grid, [&amp;](IdxRTheta const irtheta) {
-                ci(irtheta) = phi_max / norm_Linf_phi_star;
+                ci_alloc_host(irtheta) = phi_max / norm_Linf_phi_star;
             });
 
 
             // STEP 4: update sigma and phi
             difference_sigma = 0.;
             ddc::for_each(m_grid, [&amp;](IdxRTheta const irtheta) {
-                double const abs_diff_sigma = fabs(sigma(irtheta) - ci(irtheta) * sigma(irtheta));
+                double const abs_diff_sigma
+                        = fabs(sigma_host(irtheta) - ci_alloc_host(irtheta) * sigma_host(irtheta));
                 difference_sigma
                         = difference_sigma &gt; abs_diff_sigma ? difference_sigma : abs_diff_sigma;
 
-                sigma(irtheta) = ci(irtheta) * sigma(irtheta);
-                phi_eq(irtheta) = ci(irtheta) * phi_star_host(irtheta);
+                sigma_host(irtheta) = ci_alloc_host(irtheta) * sigma_host(irtheta);
+                phi_eq_host(irtheta) = ci_alloc_host(irtheta) * phi_star_host(irtheta);
             });
 
         } while ((difference_sigma &gt; tau) and (count &lt; count_max));
@@ -656,45 +661,45 @@ public:
 
         // STEP 1: compute rho^i
         ddc::for_each(m_grid, [&amp;](IdxRTheta const irtheta) {
-            rho_eq(irtheta) = sigma(irtheta) * function(phi_eq(irtheta));
+            rho_eq_host(irtheta) = sigma_host(irtheta) * function(phi_eq_host(irtheta));
         });
 
         // Unify at the centre point:
-        IdxRangeR r_idx_range = get_idx_range&lt;GridR&gt;(rho_eq);
-        IdxRangeTheta theta_idx_range = get_idx_range&lt;GridTheta&gt;(rho_eq);
+        IdxRangeR r_idx_range = get_idx_range&lt;GridR&gt;(rho_eq_host);
+        IdxRangeTheta theta_idx_range = get_idx_range&lt;GridTheta&gt;(rho_eq_host);
         if (std::fabs(ddc::coordinate(r_idx_range.front())) &lt; 1e-15) {
             ddc::for_each(theta_idx_range, [&amp;](const IdxTheta itheta) {
-                rho_eq(r_idx_range.front(), itheta)
-                        = rho_eq(r_idx_range.front(), theta_idx_range.front());
+                rho_eq_host(r_idx_range.front(), itheta)
+                        = rho_eq_host(r_idx_range.front(), theta_idx_range.front());
             });
         }
     };
 
 
     void set_equilibrium(
-            host_t&lt;DFieldRTheta&gt; rho_eq,
+            host_t&lt;DFieldRTheta&gt; rho_eq_host,
             std::function&lt;double(double const)&gt; function,
             double const phi_max,
             double const tau)
     {
-        IdxRangeRTheta grid = get_idx_range&lt;GridR, GridTheta&gt;(rho_eq);
+        IdxRangeRTheta grid = get_idx_range&lt;GridR, GridTheta&gt;(rho_eq_host);
 
         // Equilibrium:
-        host_t&lt;DFieldMemRTheta&gt; sigma_0(grid);
-        host_t&lt;DFieldMemRTheta&gt; phi_eq(grid);
+        host_t&lt;DFieldMemRTheta&gt; sigma_0_alloc_host(grid);
+        host_t&lt;DFieldMemRTheta&gt; phi_eq_alloc_host(grid);
         const double sig = 0.3;
         ddc::for_each(grid, [&amp;](IdxRTheta const irtheta) {
             const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
             const CoordXY coord_xy(m_mapping(coord_rtheta));
             const double x = ddc::get&lt;X&gt;(coord_xy);
             const double y = ddc::get&lt;Y&gt;(coord_xy);
-            sigma_0(irtheta) = sig;
-            phi_eq(irtheta) = std::exp(-(x * x + y * y) / (2 * sig * sig));
+            sigma_0_alloc_host(irtheta) = sig;
+            phi_eq_alloc_host(irtheta) = std::exp(-(x * x + y * y) / (2 * sig * sig));
         });
         find_equilibrium(
-                get_field(sigma_0),
-                get_field(phi_eq),
-                get_field(rho_eq),
+                get_field(sigma_0_alloc_host),
+                get_field(phi_eq_alloc_host),
+                get_field(rho_eq_host),
                 function,
                 phi_max,
                 tau);

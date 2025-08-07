@@ -1093,7 +1093,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="343" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="343" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometryRTheta_2geometry_2geometry_8hpp_1a1e152996f48b0aa10e21c13a8ed87633" prot="public" static="no">
+      <memberdef kind="typedef" id="geometryRTheta_2geometry_2geometry_8hpp_1aff004ace4ef103d1ede2aba5a9fd16da" prot="public" static="no">
         <templateparamlist>
           <param>
             <type>class Dim1</type>
@@ -1103,9 +1103,9 @@
           </param>
         </templateparamlist>
         <type><ref refid="classVectorField" kindref="compound">VectorConstField</ref>&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</type>
-        <definition>using DConstVectorFieldRTheta =  VectorConstField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt; &gt;</definition>
+        <definition>using DVectorConstFieldRTheta =  VectorConstField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt; &gt;</definition>
         <argsstring></argsstring>
-        <name>DConstVectorFieldRTheta</name>
+        <name>DVectorConstFieldRTheta</name>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -1617,7 +1617,7 @@
 <codeline lineno="343"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorFieldRTheta</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
 <codeline lineno="344"><highlight class="normal"></highlight></codeline>
 <codeline lineno="345"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Dim2&gt;</highlight></codeline>
-<codeline lineno="346"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DConstVectorFieldRTheta</ref></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorConstFieldRTheta</ref></highlight></codeline>
 <codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorConstField&lt;double, IdxRangeRTheta, VectorIndexSet&lt;Dim1, Dim2&gt;</ref>&gt;;</highlight></codeline>
 <codeline lineno="348"><highlight class="normal"></highlight></codeline>
 <codeline lineno="349"><highlight class="normal"></highlight></codeline>

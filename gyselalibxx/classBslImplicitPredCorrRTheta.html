@@ -565,7 +565,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bslimplicitpredcorrrtheta"><strong>BslImplicitPredCorrRTheta</strong></a> (LogicalToPhysicalMapping const &amp; logical_to_physical, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder_host const &amp; builder, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver, SplineRThetaEvaluatorConstBound_host const &amp; advection_evaluator) <br><em>Instantiate a</em> <a href="classBslImplicitPredCorrRTheta.html"><em><strong>BslImplicitPredCorrRTheta</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-bslimplicitpredcorrrtheta"><strong>BslImplicitPredCorrRTheta</strong></a> (LogicalToPhysicalMapping const &amp; logical_to_physical, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder const &amp; builder, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver, SplineRThetaEvaluatorConstBound const &amp; advection_evaluator) <br><em>Instantiate a</em> <a href="classBslImplicitPredCorrRTheta.html"><em><strong>BslImplicitPredCorrRTheta</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-implicit_loop"><strong>implicit_loop</strong></a> (<a href="classVectorField.html"><strong>DVectorConstFieldRTheta</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; advection_field, <a href="classVectorField.html"><strong>ConstVectorSplineCoeffs2D</strong></a>&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; advection_field_coefs_k, FieldRTheta&lt; CoordRTheta &gt; feet_coords, double const dt, double const tau) const<br><em>The implicit loop which calculates the feet of the charateristics.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
@@ -644,9 +648,9 @@
     LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical,
     BslAdvectionRTheta const &amp; advection_solver,
     IdxRangeRTheta const &amp; grid,
-    SplineRThetaBuilder_host const &amp; builder,
+    SplineRThetaBuilder const &amp; builder,
     PolarSplineFEMPoissonLikeSolver &lt; GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver,
-    SplineRThetaEvaluatorConstBound_host const &amp; advection_evaluator
+    SplineRThetaEvaluatorConstBound const &amp; advection_evaluator
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -658,6 +662,27 @@
 <li><code>builder</code> A spline builder to get the spline representation of the advection field and the rhs. </li>
 <li><code>poisson_solver</code> The PDE solver which computes the electrical potential. </li>
 <li><code>advection_evaluator</code> An evaluator of B-splines for the spline advection field. </li>
+</ul>
+<hr>
+
+<h3 id="function-implicit_loop">function implicit_loop</h3>
+<p><em>The implicit loop which calculates the feet of the charateristics.</em> </p>
+<pre><code class="language-C++">inline void BslImplicitPredCorrRTheta::implicit_loop (
+    DVectorConstFieldRTheta &lt; X , Y &gt; advection_field,
+    ConstVectorSplineCoeffs2D &lt; X , Y &gt; advection_field_coefs_k,
+    FieldRTheta&lt; CoordRTheta &gt; feet_coords,
+    double const dt,
+    double const tau
+) const
+</code></pre>
+<p>This function should be private but cannot be as it contains Kokkos lambda functions.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>advection_field</code> The current advection field. </li>
+<li><code>advection_field_coefs_k</code> The coefficients of the spline representation of the current advection field. </li>
+<li><code>feet_coords</code> The feet of the characteristics. </li>
+<li><code>dt</code> The time step. </li>
+<li><code>tau</code> The stopping criteria. The convergence is reached when the old and new feet of the characteristics are less than tau apart. </li>
 </ul>
 <hr>
 

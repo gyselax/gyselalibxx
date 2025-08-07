@@ -71,9 +71,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="74" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classBslPredCorrRTheta_1a556c9f8698d5c8b5b8ec9e40799fa4bc" prot="private" static="no" mutable="no">
-        <type>SplineRThetaBuilder_host const  &amp;</type>
-        <definition>SplineRThetaBuilder_host const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_builder</definition>
+      <memberdef kind="variable" id="classBslPredCorrRTheta_1a312ee47abf82514ea11ba644dd3a6c10" prot="private" static="no" mutable="no">
+        <type>SplineRThetaBuilder const  &amp;</type>
+        <definition>SplineRThetaBuilder const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_builder</definition>
         <argsstring></argsstring>
         <name>m_builder</name>
         <qualifiedname>BslPredCorrRTheta::m_builder</qualifiedname>
@@ -83,11 +83,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="76" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="76" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="76" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="76" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classBslPredCorrRTheta_1a56194097c5f870bc664f3d65f2993c40" prot="private" static="no" mutable="no">
-        <type>SplineRThetaEvaluatorNullBound_host const  &amp;</type>
-        <definition>SplineRThetaEvaluatorNullBound_host const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_spline_evaluator</definition>
+      <memberdef kind="variable" id="classBslPredCorrRTheta_1a6261137c96e4472fd59bf484bfec7df6" prot="private" static="no" mutable="no">
+        <type>SplineRThetaEvaluatorNullBound const  &amp;</type>
+        <definition>SplineRThetaEvaluatorNullBound const&amp; BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::m_spline_evaluator</definition>
         <argsstring></argsstring>
         <name>m_spline_evaluator</name>
         <qualifiedname>BslPredCorrRTheta::m_spline_evaluator</qualifiedname>
@@ -97,14 +97,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="77" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="77" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="77" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="77" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classBslPredCorrRTheta_1abde2ca091bc04f4ccd7ae310d9a04a04" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classBslPredCorrRTheta_1a17c01bf58cd5cc1e8190f7ea62c3aa9f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>BslPredCorrRTheta&lt; Mapping, FootFinder &gt;::BslPredCorrRTheta</definition>
-        <argsstring>(Mapping const &amp;mapping, BslAdvectionRTheta const &amp;advection_solver, SplineRThetaBuilder_host const &amp;builder, SplineRThetaEvaluatorNullBound_host const &amp;rhs_evaluator, PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver)</argsstring>
+        <argsstring>(Mapping const &amp;mapping, BslAdvectionRTheta const &amp;advection_solver, SplineRThetaBuilder const &amp;builder, SplineRThetaEvaluatorNullBound const &amp;rhs_evaluator, PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound &gt; const &amp;poisson_solver)</argsstring>
         <name>BslPredCorrRTheta</name>
         <qualifiedname>BslPredCorrRTheta::BslPredCorrRTheta</qualifiedname>
         <param>
@@ -116,11 +116,11 @@
           <declname>advection_solver</declname>
         </param>
         <param>
-          <type>SplineRThetaBuilder_host const &amp;</type>
+          <type>SplineRThetaBuilder const &amp;</type>
           <declname>builder</declname>
         </param>
         <param>
-          <type>SplineRThetaEvaluatorNullBound_host const &amp;</type>
+          <type>SplineRThetaEvaluatorNullBound const &amp;</type>
           <declname>rhs_evaluator</declname>
         </param>
         <param>
@@ -232,7 +232,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="116" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="116" bodyend="215"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="116" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="116" bodyend="218"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -304,16 +304,16 @@
         <link refid="classITimeSolverRTheta"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="56" bodyend="216"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp" bodystart="56" bodyend="219"/>
     <listofallmembers>
       <member refid="classBslPredCorrRTheta_1ae1e9de22b859cabec7f5f22287e2e3c4" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslAdvectionRTheta</name></member>
-      <member refid="classBslPredCorrRTheta_1abde2ca091bc04f4ccd7ae310d9a04a04" prot="public" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslPredCorrRTheta</name></member>
+      <member refid="classBslPredCorrRTheta_1a17c01bf58cd5cc1e8190f7ea62c3aa9f" prot="public" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>BslPredCorrRTheta</name></member>
       <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" prot="protected" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>display_time_difference</name></member>
       <member refid="classBslPredCorrRTheta_1af7bfcb0583623c2a131072f3a338d3c2" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_advection_solver</name></member>
-      <member refid="classBslPredCorrRTheta_1a556c9f8698d5c8b5b8ec9e40799fa4bc" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_builder</name></member>
+      <member refid="classBslPredCorrRTheta_1a312ee47abf82514ea11ba644dd3a6c10" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_builder</name></member>
       <member refid="classBslPredCorrRTheta_1a5aa7b962bb5276873ce770e8ebf22c44" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_mapping</name></member>
       <member refid="classBslPredCorrRTheta_1a143881b77cdfb39a66b38f4afafa4adc" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_poisson_solver</name></member>
-      <member refid="classBslPredCorrRTheta_1a56194097c5f870bc664f3d65f2993c40" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_spline_evaluator</name></member>
+      <member refid="classBslPredCorrRTheta_1a6261137c96e4472fd59bf484bfec7df6" prot="private" virt="non-virtual"><scope>BslPredCorrRTheta</scope><name>m_spline_evaluator</name></member>
       <member refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" prot="public" virt="virtual"><scope>BslPredCorrRTheta</scope><name>operator()</name></member>
       <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" virt="virtual"><scope>BslPredCorrRTheta</scope><name>~ITimeSolverRTheta</name></member>
     </listofallmembers>

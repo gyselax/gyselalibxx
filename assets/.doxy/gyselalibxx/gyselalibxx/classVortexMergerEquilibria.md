@@ -54,9 +54,9 @@ _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates
 
 | Type | Name |
 | ---: | :--- |
-|   | [**VortexMergerEquilibria**](#function-vortexmergerequilibria) (Mapping const & mapping, IdxRangeRTheta const & grid, SplineRThetaBuilder\_host const & builder, SplineRThetaEvaluatorNullBound\_host const & evaluator, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver) <br>_Instantiate a_ [_**VortexMergerEquilibria**_](classVortexMergerEquilibria.md) _._ |
-|  void | [**find\_equilibrium**](#function-find_equilibrium) (host\_t&lt; DFieldRTheta &gt; sigma, host\_t&lt; DFieldRTheta &gt; phi\_eq, host\_t&lt; DFieldRTheta &gt; rho\_eq, std::function&lt; double(double const)&gt; const & function, double const phi\_max, double const tau, int count\_max=25) const<br>_Get an equilibrium._  |
-|  void | [**set\_equilibrium**](#function-set_equilibrium) (host\_t&lt; DFieldRTheta &gt; rho\_eq, std::function&lt; double(double const)&gt; function, double const phi\_max, double const tau) <br>_Set an equilibrium._  |
+|   | [**VortexMergerEquilibria**](#function-vortexmergerequilibria) (Mapping const & mapping, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, SplineRThetaEvaluatorNullBound const & evaluator, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver) <br>_Instantiate a_ [_**VortexMergerEquilibria**_](classVortexMergerEquilibria.md) _._ |
+|  void | [**find\_equilibrium**](#function-find_equilibrium) (host\_t&lt; DFieldRTheta &gt; sigma\_host, host\_t&lt; DFieldRTheta &gt; phi\_eq\_host, host\_t&lt; DFieldRTheta &gt; rho\_eq\_host, std::function&lt; double(double const)&gt; const & function, double const phi\_max, double const tau, int count\_max=25) const<br>_Get an equilibrium._  |
+|  void | [**set\_equilibrium**](#function-set_equilibrium) (host\_t&lt; DFieldRTheta &gt; rho\_eq\_host, std::function&lt; double(double const)&gt; function, double const phi\_max, double const tau) <br>_Set an equilibrium._  |
 
 
 
@@ -111,8 +111,8 @@ _Instantiate a_ [_**VortexMergerEquilibria**_](classVortexMergerEquilibria.md) _
 inline VortexMergerEquilibria::VortexMergerEquilibria (
     Mapping const & mapping,
     IdxRangeRTheta const & grid,
-    SplineRThetaBuilder_host const & builder,
-    SplineRThetaEvaluatorNullBound_host const & evaluator,
+    SplineRThetaBuilder const & builder,
+    SplineRThetaEvaluatorNullBound const & evaluator,
     PolarSplineFEMPoissonLikeSolver < GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound > const & poisson_solver
 ) 
 ```
@@ -144,9 +144,9 @@ inline VortexMergerEquilibria::VortexMergerEquilibria (
 _Get an equilibrium._ 
 ```C++
 inline void VortexMergerEquilibria::find_equilibrium (
-    host_t< DFieldRTheta > sigma,
-    host_t< DFieldRTheta > phi_eq,
-    host_t< DFieldRTheta > rho_eq,
+    host_t< DFieldRTheta > sigma_host,
+    host_t< DFieldRTheta > phi_eq_host,
+    host_t< DFieldRTheta > rho_eq_host,
     std::function< double(double const)> const & function,
     double const phi_max,
     double const tau,
@@ -182,9 +182,9 @@ The algorithm is also detailed in Edoardo Zoni's article ([https://doi.org/10.10
 **Parameters:**
 
 
-* `sigma` The \(\sigma\) parameter. 
-* `phi_eq` The equilibrium electrical potential \(\phi\). 
-* `rho_eq` The equilibrium density \(\rho\). 
+* `sigma_host` The \(\sigma\) parameter. 
+* `phi_eq_host` The equilibrium electrical potential \(\phi\). 
+* `rho_eq_host` The equilibrium density \(\rho\). 
 * `function` The function \(f\). 
 * `phi_max` The maximal value of the electrical potential \(\phi\). 
 * `tau` The \(\tau\) parameter. 
@@ -204,7 +204,7 @@ The algorithm is also detailed in Edoardo Zoni's article ([https://doi.org/10.10
 _Set an equilibrium._ 
 ```C++
 inline void VortexMergerEquilibria::set_equilibrium (
-    host_t< DFieldRTheta > rho_eq,
+    host_t< DFieldRTheta > rho_eq_host,
     std::function< double(double const)> function,
     double const phi_max,
     double const tau
@@ -218,7 +218,7 @@ inline void VortexMergerEquilibria::set_equilibrium (
 **Parameters:**
 
 
-* `rho_eq` The equilibrium density \(\rho\). 
+* `rho_eq_host` The equilibrium density \(\rho\). 
  
 * `function` The function \(f\) used to compute the equilibrium. 
 * `phi_max` The maximal value of the electrical potential \(\phi\). 

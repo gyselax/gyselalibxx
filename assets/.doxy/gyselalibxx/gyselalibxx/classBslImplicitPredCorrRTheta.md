@@ -75,7 +75,8 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslImplicitPredCorrRTheta**](#function-bslimplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder\_host const & builder, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver, SplineRThetaEvaluatorConstBound\_host const & advection\_evaluator) <br>_Instantiate a_ [_**BslImplicitPredCorrRTheta**_](classBslImplicitPredCorrRTheta.md) _._ |
+|   | [**BslImplicitPredCorrRTheta**](#function-bslimplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver, SplineRThetaEvaluatorConstBound const & advection\_evaluator) <br>_Instantiate a_ [_**BslImplicitPredCorrRTheta**_](classBslImplicitPredCorrRTheta.md) _._ |
+|  void | [**implicit\_loop**](#function-implicit_loop) ([**DVectorConstFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field, [**ConstVectorSplineCoeffs2D**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field\_coefs\_k, FieldRTheta&lt; CoordRTheta &gt; feet\_coords, double const dt, double const tau) const<br>_The implicit loop which calculates the feet of the charateristics._  |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
 
@@ -225,9 +226,9 @@ inline BslImplicitPredCorrRTheta::BslImplicitPredCorrRTheta (
     LogicalToPseudoPhysicalMapping const & logical_to_pseudo_physical,
     BslAdvectionRTheta const & advection_solver,
     IdxRangeRTheta const & grid,
-    SplineRThetaBuilder_host const & builder,
+    SplineRThetaBuilder const & builder,
     PolarSplineFEMPoissonLikeSolver < GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound > const & poisson_solver,
-    SplineRThetaEvaluatorConstBound_host const & advection_evaluator
+    SplineRThetaEvaluatorConstBound const & advection_evaluator
 ) 
 ```
 
@@ -245,6 +246,44 @@ inline BslImplicitPredCorrRTheta::BslImplicitPredCorrRTheta (
 * `builder` A spline builder to get the spline representation of the advection field and the rhs. 
 * `poisson_solver` The PDE solver which computes the electrical potential. 
 * `advection_evaluator` An evaluator of B-splines for the spline advection field. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function implicit\_loop 
+
+_The implicit loop which calculates the feet of the charateristics._ 
+```C++
+inline void BslImplicitPredCorrRTheta::implicit_loop (
+    DVectorConstFieldRTheta < X , Y > advection_field,
+    ConstVectorSplineCoeffs2D < X , Y > advection_field_coefs_k,
+    FieldRTheta< CoordRTheta > feet_coords,
+    double const dt,
+    double const tau
+) const
+```
+
+
+
+This function should be private but cannot be as it contains Kokkos lambda functions.
+
+
+
+
+**Parameters:**
+
+
+* `advection_field` The current advection field. 
+* `advection_field_coefs_k` The coefficients of the spline representation of the current advection field. 
+* `feet_coords` The feet of the characteristics. 
+* `dt` The time step. 
+* `tau` The stopping criteria. The convergence is reached when the old and new feet of the characteristics are less than tau apart. 
 
 
 

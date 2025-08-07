@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim" kind="struct" language="C++" prot="public">
+    <compoundname>PolarSplineFEMPoissonLikeSolver::InternalBatchDim</compoundname>
+    <includes refid="polarpoissonlikesolver_8hpp" local="no">polarpoissonlikesolver.hpp</includes>
+    <briefdescription>
+<para>The tag for the batch dimension for the equation. This is public due to Cuda. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="89" bodyend="90"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

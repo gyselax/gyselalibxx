@@ -565,7 +565,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bslpredcorrrtheta"><strong>BslPredCorrRTheta</strong></a> (Mapping const &amp; mapping, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, SplineRThetaBuilder_host const &amp; builder, SplineRThetaEvaluatorNullBound_host const &amp; rhs_evaluator, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-bslpredcorrrtheta"><strong>BslPredCorrRTheta</strong></a> (Mapping const &amp; mapping, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, SplineRThetaBuilder const &amp; builder, SplineRThetaEvaluatorNullBound const &amp; rhs_evaluator, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
@@ -638,8 +638,8 @@
 <pre><code class="language-C++">inline BslPredCorrRTheta::BslPredCorrRTheta (
     Mapping const &amp; mapping,
     BslAdvectionRTheta const &amp; advection_solver,
-    SplineRThetaBuilder_host const &amp; builder,
-    SplineRThetaEvaluatorNullBound_host const &amp; rhs_evaluator,
+    SplineRThetaBuilder const &amp; builder,
+    SplineRThetaEvaluatorNullBound const &amp; rhs_evaluator,
     PolarSplineFEMPoissonLikeSolver &lt; GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver
 ) 
 </code></pre>

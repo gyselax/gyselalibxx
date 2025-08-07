@@ -147,13 +147,13 @@ inline std::size_t factorial(std::size_t f)
 
 
 template <typename T>
-inline T min(T x, T y)
+KOKKOS_INLINE_FUNCTION T min(T x, T y)
 {
     return x < y ? x : y;
 }
 
 template <typename T>
-inline T max(T x, T y)
+KOKKOS_INLINE_FUNCTION T max(T x, T y)
 {
     return x > y ? x : y;
 }

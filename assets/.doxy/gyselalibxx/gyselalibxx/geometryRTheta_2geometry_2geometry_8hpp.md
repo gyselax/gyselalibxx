@@ -77,13 +77,13 @@
 | typedef ConstFieldR&lt; double &gt; | [**DConstFieldR**](#typedef-dconstfieldr)  <br> |
 | typedef ConstFieldRTheta&lt; double &gt; | [**DConstFieldRTheta**](#typedef-dconstfieldrtheta)  <br> |
 | typedef ConstFieldTheta&lt; double &gt; | [**DConstFieldTheta**](#typedef-dconstfieldtheta)  <br> |
-| typedef [**VectorConstField**](classVectorField.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**DConstVectorFieldRTheta**](#typedef-dconstvectorfieldrtheta)  <br> |
 | typedef FieldMemR&lt; double &gt; | [**DFieldMemR**](#typedef-dfieldmemr)  <br> |
 | typedef FieldMemRTheta&lt; double &gt; | [**DFieldMemRTheta**](#typedef-dfieldmemrtheta)  <br> |
 | typedef FieldMemTheta&lt; double &gt; | [**DFieldMemTheta**](#typedef-dfieldmemtheta)  <br> |
 | typedef FieldR&lt; double &gt; | [**DFieldR**](#typedef-dfieldr)  <br> |
 | typedef FieldRTheta&lt; double &gt; | [**DFieldRTheta**](#typedef-dfieldrtheta)  <br> |
 | typedef FieldTheta&lt; double &gt; | [**DFieldTheta**](#typedef-dfieldtheta)  <br> |
+| typedef [**VectorConstField**](classVectorField.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**DVectorConstFieldRTheta**](#typedef-dvectorconstfieldrtheta)  <br> |
 | typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**DVectorFieldMemRTheta**](#typedef-dvectorfieldmemrtheta)  <br> |
 | typedef [**VectorField**](classVectorField.md)&lt; double, IdxRangeRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt; | [**DVectorFieldRTheta**](#typedef-dvectorfieldrtheta)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeR &gt; | [**FieldMemR**](#typedef-fieldmemr)  <br> |
@@ -417,19 +417,6 @@ using DConstFieldTheta =  ConstFieldTheta<double>;
 
 
 
-### typedef DConstVectorFieldRTheta 
-
-```C++
-using DConstVectorFieldRTheta =  VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2> >;
-```
-
-
-
-
-<hr>
-
-
-
 ### typedef DFieldMemR 
 
 ```C++
@@ -499,6 +486,19 @@ using DFieldRTheta =  FieldRTheta<double>;
 
 ```C++
 using DFieldTheta =  FieldTheta<double>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DVectorConstFieldRTheta 
+
+```C++
+using DVectorConstFieldRTheta =  VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2> >;
 ```
 
 

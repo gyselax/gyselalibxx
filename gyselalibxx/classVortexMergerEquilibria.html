@@ -564,15 +564,15 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-vortexmergerequilibria"><strong>VortexMergerEquilibria</strong></a> (Mapping const &amp; mapping, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder_host const &amp; builder, SplineRThetaEvaluatorNullBound_host const &amp; evaluator, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classVortexMergerEquilibria.html"><em><strong>VortexMergerEquilibria</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-vortexmergerequilibria"><strong>VortexMergerEquilibria</strong></a> (Mapping const &amp; mapping, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder const &amp; builder, SplineRThetaEvaluatorNullBound const &amp; evaluator, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classVortexMergerEquilibria.html"><em><strong>VortexMergerEquilibria</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-find_equilibrium"><strong>find_equilibrium</strong></a> (host_t&lt; DFieldRTheta &gt; sigma, host_t&lt; DFieldRTheta &gt; phi_eq, host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; const &amp; function, double const phi_max, double const tau, int count_max=25) const<br><em>Get an equilibrium.</em></td>
+<td style="text-align: left;"><a href="#function-find_equilibrium"><strong>find_equilibrium</strong></a> (host_t&lt; DFieldRTheta &gt; sigma_host, host_t&lt; DFieldRTheta &gt; phi_eq_host, host_t&lt; DFieldRTheta &gt; rho_eq_host, std::function&lt; double(double const)&gt; const &amp; function, double const phi_max, double const tau, int count_max=25) const<br><em>Get an equilibrium.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-set_equilibrium"><strong>set_equilibrium</strong></a> (host_t&lt; DFieldRTheta &gt; rho_eq, std::function&lt; double(double const)&gt; function, double const phi_max, double const tau) <br><em>Set an equilibrium.</em></td>
+<td style="text-align: left;"><a href="#function-set_equilibrium"><strong>set_equilibrium</strong></a> (host_t&lt; DFieldRTheta &gt; rho_eq_host, std::function&lt; double(double const)&gt; function, double const phi_max, double const tau) <br><em>Set an equilibrium.</em></td>
 </tr>
 </tbody>
 </table>
@@ -587,8 +587,8 @@
 <pre><code class="language-C++">inline VortexMergerEquilibria::VortexMergerEquilibria (
     Mapping const &amp; mapping,
     IdxRangeRTheta const &amp; grid,
-    SplineRThetaBuilder_host const &amp; builder,
-    SplineRThetaEvaluatorNullBound_host const &amp; evaluator,
+    SplineRThetaBuilder const &amp; builder,
+    SplineRThetaEvaluatorNullBound const &amp; evaluator,
     PolarSplineFEMPoissonLikeSolver &lt; GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver
 ) 
 </code></pre>
@@ -605,9 +605,9 @@
 <h3 id="function-find_equilibrium">function find_equilibrium</h3>
 <p><em>Get an equilibrium.</em> </p>
 <pre><code class="language-C++">inline void VortexMergerEquilibria::find_equilibrium (
-    host_t&lt; DFieldRTheta &gt; sigma,
-    host_t&lt; DFieldRTheta &gt; phi_eq,
-    host_t&lt; DFieldRTheta &gt; rho_eq,
+    host_t&lt; DFieldRTheta &gt; sigma_host,
+    host_t&lt; DFieldRTheta &gt; phi_eq_host,
+    host_t&lt; DFieldRTheta &gt; rho_eq_host,
     std::function&lt; double(double const)&gt; const &amp; function,
     double const phi_max,
     double const tau,
@@ -626,9 +626,9 @@
 <p>The algorithm is also detailed in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>sigma</code> The <span class="arithmatex">\(\sigma\)</span> parameter. </li>
-<li><code>phi_eq</code> The equilibrium electrical potential <span class="arithmatex">\(\phi\)</span>. </li>
-<li><code>rho_eq</code> The equilibrium density <span class="arithmatex">\(\rho\)</span>. </li>
+<li><code>sigma_host</code> The <span class="arithmatex">\(\sigma\)</span> parameter. </li>
+<li><code>phi_eq_host</code> The equilibrium electrical potential <span class="arithmatex">\(\phi\)</span>. </li>
+<li><code>rho_eq_host</code> The equilibrium density <span class="arithmatex">\(\rho\)</span>. </li>
 <li><code>function</code> The function <span class="arithmatex">\(f\)</span>. </li>
 <li><code>phi_max</code> The maximal value of the electrical potential <span class="arithmatex">\(\phi\)</span>. </li>
 <li><code>tau</code> The <span class="arithmatex">\(\tau\)</span> parameter. </li>
@@ -639,7 +639,7 @@
 <h3 id="function-set_equilibrium">function set_equilibrium</h3>
 <p><em>Set an equilibrium.</em> </p>
 <pre><code class="language-C++">inline void VortexMergerEquilibria::set_equilibrium (
-    host_t&lt; DFieldRTheta &gt; rho_eq,
+    host_t&lt; DFieldRTheta &gt; rho_eq_host,
     std::function&lt; double(double const)&gt; function,
     double const phi_max,
     double const tau
@@ -648,7 +648,7 @@
 <p><strong>Parameters:</strong></p>
 <ul>
 <li>
-<p><code>rho_eq</code> The equilibrium density <span class="arithmatex">\(\rho\)</span>. </p>
+<p><code>rho_eq_host</code> The equilibrium density <span class="arithmatex">\(\rho\)</span>. </p>
 </li>
 <li>
 <p><code>function</code> The function <span class="arithmatex">\(f\)</span> used to compute the equilibrium. </p>
