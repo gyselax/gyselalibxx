@@ -280,14 +280,14 @@ int main(int argc, char** argv)
     auto rho_eq = ddc::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(rho_eq_host));
 
-    // Compute phi equilibrium phi_eq from Poisson solver. ***********
-    DFieldMemRTheta phi_eq(mesh_rtheta);
-    host_t<DFieldMemRTheta> phi_eq_host(mesh_rtheta);
-    Spline2DMem rho_coef_eq(idx_range_bsplinesRTheta);
-    builder(get_field(rho_coef_eq), get_const_field(rho_eq));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq), spline_evaluator);
-    poisson_solver(poisson_rhs_eq, get_field(phi_eq));
-    ddc::parallel_deepcopy(phi_eq_host, phi_eq);
+    // Compute phi equilibrium phi_eq_alloc from Poisson solver. ***********
+    DFieldMemRTheta phi_eq_alloc(mesh_rtheta);
+    host_t<DFieldMemRTheta> phi_eq_alloc_host(mesh_rtheta);
+    Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
+    builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq));
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
+    poisson_solver(poisson_rhs_eq, get_field(phi_eq_alloc));
+    ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
     // --- Save initial data --------------------------------------------------------------------------
     ddc::PdiEvent("initialisation")
@@ -295,7 +295,7 @@ int main(int argc, char** argv)
             .with("y_coords", coords_y)
             .with("jacobian", jacobian)
             .with("density_eq", rho_eq_host)
-            .with("electrical_potential_eq", phi_eq_host);
+            .with("electrical_potential_eq", phi_eq_alloc_host);
 
 
     // ================================================================================================

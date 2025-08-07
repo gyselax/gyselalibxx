@@ -110,11 +110,11 @@ public:
             double const tau,
             int count_max = 25) const
     {
-        DFieldMemRTheta phi_star(m_grid);
-        host_t<DFieldMemRTheta> ci(m_grid);
+        DFieldMemRTheta phi_star_alloc(m_grid);
+        host_t<DFieldMemRTheta> ci_alloc_host(m_grid);
 
         IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
-        Spline2DMem rho_coef(idx_range_bsplinesRTheta);
+        Spline2DMem rho_coef_alloc(idx_range_bsplinesRTheta);
 
         auto rho_eq_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), rho_eq_host);
         DFieldRTheta rho_eq(rho_eq_alloc);
@@ -130,12 +130,12 @@ public:
             });
 
 
-            // STEP 2: compute phi_star^i with PDE solver
+            // STEP 2: compute phi_star_alloc^i with PDE solver
             ddc::parallel_deepcopy(rho_eq, get_const_field(rho_eq_host));
-            m_builder(get_field(rho_coef), get_const_field(rho_eq));
-            PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef), m_evaluator);
-            m_poisson_solver(poisson_rhs, get_field(phi_star));
-            auto phi_star_host = ddc::create_mirror_view_and_copy(get_field(phi_star));
+            m_builder(get_field(rho_coef_alloc), get_const_field(rho_eq));
+            PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef_alloc), m_evaluator);
+            m_poisson_solver(poisson_rhs, get_field(phi_star_alloc));
+            auto phi_star_host = ddc::create_mirror_view_and_copy(get_field(phi_star_alloc));
 
             // STEP 3: compute c^i
             // If phi_max is given:
@@ -147,7 +147,7 @@ public:
             });
 
             ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
-                ci(irtheta) = phi_max / norm_Linf_phi_star;
+                ci_alloc_host(irtheta) = phi_max / norm_Linf_phi_star;
             });
 
 
@@ -155,12 +155,12 @@ public:
             difference_sigma = 0.;
             ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
                 double const abs_diff_sigma
-                        = fabs(sigma_host(irtheta) - ci(irtheta) * sigma_host(irtheta));
+                        = fabs(sigma_host(irtheta) - ci_alloc_host(irtheta) * sigma_host(irtheta));
                 difference_sigma
                         = difference_sigma > abs_diff_sigma ? difference_sigma : abs_diff_sigma;
 
-                sigma_host(irtheta) = ci(irtheta) * sigma_host(irtheta);
-                phi_eq_host(irtheta) = ci(irtheta) * phi_star_host(irtheta);
+                sigma_host(irtheta) = ci_alloc_host(irtheta) * sigma_host(irtheta);
+                phi_eq_host(irtheta) = ci_alloc_host(irtheta) * phi_star_host(irtheta);
             });
 
         } while ((difference_sigma > tau) and (count < count_max));
