@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Port `PolarSplineEvaluator` methods to GPU.
 - Add methods to `PolarSplineEvaluator` to avoid unnecessary creation of fields of coordinates.
 - Allow a `DerivField` to be stored in a `MultipatchField`.
+- Add `DerivFieldOnPatch` and `IdxRangeSliceOnPatch` aliases for the `MultipatchField` in `types.hpp`.
+- Allow `min` and `max` from `math_tools.hpp` to be called from GPU.
+- Add a `periodic_strips_non_uniform_2d_9patches` geometry.
 
 ### Fixed
 
@@ -25,6 +28,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix `mi250.hipcc.adastra.spack` toolchain.
 - Fix uninitialised values being used as an initial guess for the result of the matrix equation in `PolarSplineFEMPoissonLikeSolver`.
 - Fix missing grids when calling `collect_grids_on_dim_t`.
+- Fix `is_borrowed_deriv_field_v<>` in `derivative_field_common.hpp` file.
+- Fix `phi_eq` in diocotron and vortex-merger simulations.
 
 ### Changed
 
@@ -39,7 +44,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Clean up code in `BslPredCorrRTheta::operator()`.
 - Clean up code in `BslExplicitPredCorrRTheta::operator()`.
 - Clean up code in `BslImplicitPredCorrRTheta::operator()`.
+- Ported `PolarSplineFEMPoissonLikeSolver::operator()` to GPU. The RHS function passed as argument will now be evaluated on GPU.
+- Change constructor arguments of `BslImplicitPredCorrRTheta` to pass a spline builder and evaluator which operate on GPU.
 - Remove the const version of `get_values_field()` and change it into `get_values_const_field()` in `DerivFieldCommon`.
+- Change alias in (r, theta) geometry `DConstVectorFieldRTheta`->`DVectorConstFieldRTheta`.
+- Change constructor arguments of `VortexMergerEquilibria` to pass a spline builder and evaluator which operate on GPU.
+- Port `PoissonLikeRHSFunction` from the (r, theta) geometry to GPU.
+- Change constructor argument of `PoissonLikeRHSFunction` from the (r, theta) geometry to pass spline coefficients on GPU.
 
 ### Deprecated
 
