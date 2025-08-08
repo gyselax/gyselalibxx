@@ -8,6 +8,7 @@ Inputs: the executable associated with the file name.cpp.
 
 from argparse import ArgumentParser
 from pathlib import Path
+import h5py
 
 import numpy as np
 
@@ -27,9 +28,13 @@ if __name__ == '__main__':
     path_data_structure = Path('data_structure_RTheta.yaml')
     # folder = args.data_dir.joinpath("/output/")
     folder = Path.cwd().joinpath("/output/")
-    print("Path.cwd()", Path.cwd())
-    print("args.data_dir", args.data_dir)
-    print("folder", folder)
+    print("path_data_structure =", path_data_structure)
+    print("Path.cwd() =", Path.cwd())
+    print("args.data_dir =", args.data_dir)
+    print("folder =", folder)
+    data = h5py.File(folder.joinpath("/GYSELALIBXX_initstate.h5"))
+    print ("keys:", list(data.keys()))
+
     ds = DiskStore(folder, data_structure=path_data_structure)
     print(ds)
     print(ds.keys())
