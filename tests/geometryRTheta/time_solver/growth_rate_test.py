@@ -27,8 +27,8 @@ if __name__ == '__main__':
 
     path_data_structure = Path('data_structure_RTheta.yaml')
     # folder = args.data_dir.joinpath("/output/")
-    results_dir = Path('output') 
-    folder = Path.cwd()/'output' 
+    results_dir = Path('output')
+    folder = Path.cwd()/'output'
     print("path_data_structure =", path_data_structure.absolute())
     print("Path.cwd() =", Path.cwd())
     print("args.data_dir =", args.data_dir)
