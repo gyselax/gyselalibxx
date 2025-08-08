@@ -12,7 +12,7 @@ function (diocotron_test_executable PREDCORR_METHOD TIME_METHOD )
             "$<TARGET_FILE:Python3::Interpreter>")
             
     # The test should take less than 15 min.         
-    set_property(TEST "${test_name}" PROPERTY TIMEOUT 900000)
+    set_property(TEST "${test_name}" PROPERTY TIMEOUT 900)
     set_property(TEST "${test_name}" PROPERTY COST 100)
     set_property(TEST "${test_name}" PROPERY LABEL Release_only)
 endfunction()
