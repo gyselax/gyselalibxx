@@ -17,9 +17,6 @@ function finish {
 }
 trap finish EXIT QUIT ABRT KILL SEGV TERM STOP
 
-cd "$(dirname "$0")"
-TESTDIR="${PWD}"
-
 cd "${TMPDIR}"
 
 # Create a parameter file with the default values. 
@@ -42,14 +39,10 @@ with open('diocotron_params.yaml', 'w') as f:
 EOF
 )
 
-python3 -c "$MODIFY_PARAMETERS"
+"${PYTHON3_EXE}" -c "$MODIFY_PARAMETERS"
 
 # Launch the test with the modified parameter file. 
 "${GYSELALIBXX_EXEC}" "${PWD}/diocotron_params.yaml"
 
 export PYTHONPATH="${GYSELALIBXX_SRCDIR}/post-process/PythonScripts:${PYTHONPATH}"
-"${PYTHON3_EXE}" -B "${GYSELALIBXX_SRCDIR}/tests/geometryRTheta/time_solver/growth_rate_test.py" "${OUTDIR}/output"
-if [ ! -d ${OUTDIR} ]; then
-    mkdir "${OUTDIR}"
-fi
-cp *.png "${OUTDIR}"
+"${PYTHON3_EXE}" -B "${GYSELALIBXX_SRCDIR}/tests/geometryRTheta/time_solver/growth_rate_test.py" "${TMPDIR}/output"
