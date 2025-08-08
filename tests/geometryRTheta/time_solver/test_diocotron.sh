@@ -48,7 +48,7 @@ python3 -c "$MODIFY_PARAMETERS"
 "${GYSELALIBXX_EXEC}" "${PWD}/diocotron_params.yaml"
 
 export PYTHONPATH="${GYSELALIBXX_SRCDIR}/post-process/PythonScripts:${PYTHONPATH}"
-"${PYTHON3_EXE}" -B "${GYSELALIBXX_SRCDIR}/tests/geometryRTheta/time_solver/growth_rate_test.py" "${OUTDIR}"
+"${PYTHON3_EXE}" -B "${GYSELALIBXX_SRCDIR}/tests/geometryRTheta/time_solver/growth_rate_test.py" "${OUTDIR}/output"
 if [ ! -d ${OUTDIR} ]; then
     mkdir "${OUTDIR}"
 fi

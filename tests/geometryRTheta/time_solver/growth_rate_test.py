@@ -36,9 +36,7 @@ if __name__ == '__main__':
     data = h5py.File(results_dir.absolute()/"GYSELALIBXX_initstate.h5")
     print ("keys:", list(data.keys()))
 
-    ds = DiskStore(results_dir.absolute(), data_structure=path_data_structure)
-    print(ds)
-    print(ds.keys())
+    ds = DiskStore(args.data_dir, data_structure=path_data_structure)
 
     # Get initial data
     rho_eq = np.array(ds['density_eq'])
