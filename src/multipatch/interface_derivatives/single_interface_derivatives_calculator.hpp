@@ -9,7 +9,6 @@
 #include "edge_transformation.hpp"
 #include "types.hpp"
 
-<<<<<<< HEAD
 
 template <class T>
 inline constexpr bool enable_single_derivative_calculator = false;
@@ -18,8 +17,6 @@ template <class T>
 inline constexpr bool is_single_derivative_calculator_v
         = enable_single_derivative_calculator<std::remove_const_t<std::remove_reference_t<T>>>;
 
-=======
->>>>>>> main_pvidal
 /**
  * @brief Compute the derivative of an equivalent global spline 
  * at the interface between two patches. 
