@@ -235,6 +235,54 @@ using ConstSplineCoeffOnPatch_2D_host = host_t<ConstSplineCoeffOnPatch_2D<Patch>
 
 // --- ON DEVICE ---
 /**
+ * @brief A field memory of the n-th derivatives in the direction of Patch's first
+ * logical grid defined on the index range of n and the Patch's second logical grid.
+ */
+template <class Patch>
+using DerivMem1_OnPatch_2D
+        = DFieldMem<IdxRange<ddc::Deriv<typename Patch::Dim1>, typename Patch::Grid2>>;
+
+/**
+ * @brief A field memory of the n-th derivatives in the direction of Patch's second
+ * logical grid defined on the index range of n and the Patch's first logical grid.
+ */
+template <class Patch>
+using DerivMem2_OnPatch_2D
+        = DFieldMem<IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>>;
+
+/**
+ * @brief A field memory of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
+ * defined on the index ranges of valid n and m.
+ */
+template <class Patch>
+using DerivMem12_OnPatch_2D
+        = DFieldMem<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>>;
+
+
+/**
+ * @brief A field of the n-th derivatives in the direction of Patch's first
+ * logical grid defined on the index range of n and the Patch's second logical grid.
+ */
+template <class Patch>
+using Deriv1_OnPatch_2D = DField<IdxRange<ddc::Deriv<typename Patch::Dim1>, typename Patch::Grid2>>;
+
+/**
+ * @brief A field of the n-th derivatives in the direction of Patch's second
+ * logical grid defined on the index range of n and the Patch's first logical grid.
+ */
+template <class Patch>
+using Deriv2_OnPatch_2D = DField<IdxRange<typename Patch::Grid1, ddc::Deriv<typename Patch::Dim2>>>;
+
+/**
+ * @brief A field of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
+ * defined on the index ranges of valid n and m.
+ */
+template <class Patch>
+using Deriv12_OnPatch_2D
+        = DField<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>>;
+
+
+/**
  * @brief A constant field of the n-th derivatives in the direction of Patch's first
  * logical grid defined on the index range of n and the Patch's second logical grid.
  */
@@ -257,6 +305,79 @@ using ConstDeriv2_OnPatch_2D
 template <class Patch>
 using ConstDeriv12_OnPatch_2D
         = DConstField<IdxRange<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>>>;
+
+
+// --- ON HOST ---
+/**
+ * @brief A field memory of the n-th derivatives in the direction of Patch's first
+ * logical grid defined on the index range of n and the Patch's second logical grid.
+ * Defined on host.
+ */
+template <class Patch>
+using DerivMem1_OnPatch_2D_host = host_t<DerivMem1_OnPatch_2D<Patch>>;
+
+/**
+ * @brief A field memory of the n-th derivatives in the direction of Patch's second
+ * logical grid defined on the index range of n and the Patch's first logical grid.
+ * Defined on host. 
+ */
+template <class Patch>
+using DerivMem2_OnPatch_2D_host = host_t<DerivMem2_OnPatch_2D<Patch>>;
+
+/**
+ * @brief A field memory of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
+ * defined on the index ranges of valid n and m.
+ * Defined on host. 
+ */
+template <class Patch>
+using DerivMem12_OnPatch_2D_host = host_t<DerivMem12_OnPatch_2D<Patch>>;
+
+
+/**
+ * @brief A field defined on host of the n-th derivatives in the direction of Patch's first
+ * logical grid defined on the index range of n and the Patch's second logical grid.
+ */
+template <class Patch>
+using Deriv1_OnPatch_2D_host = host_t<Deriv1_OnPatch_2D<Patch>>;
+
+/**
+ * @brief A field defined on host of the n-th derivatives in the direction of Patch's second
+ * logical grid defined on the index range of n and the Patch's first logical grid.
+ */
+template <class Patch>
+using Deriv2_OnPatch_2D_host = host_t<Deriv2_OnPatch_2D<Patch>>;
+
+/**
+ * @brief A field defined on host of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
+ * defined on the index ranges of valid n and m.
+ */
+template <class Patch>
+using Deriv12_OnPatch_2D_host = host_t<Deriv12_OnPatch_2D<Patch>>;
+
+
+/**
+ * @brief A constant field of the n-th derivatives in the direction of Patch's first
+ * logical grid defined on the index range of n and the Patch's second logical grid.
+ * Defined on host. 
+ */
+template <class Patch>
+using ConstDeriv1_OnPatch_2D_host = host_t<ConstDeriv1_OnPatch_2D<Patch>>;
+
+/**
+ * @brief A constant field of the n-th derivatives in the direction of Patch's second
+ * logical grid defined on the index range of n and the Patch's first logical grid.
+ * Defined on host. 
+ */
+template <class Patch>
+using ConstDeriv2_OnPatch_2D_host = host_t<ConstDeriv2_OnPatch_2D<Patch>>;
+
+/**
+ * @brief A constant field of the derivatives @f$ \partial_1^(n)\partial_2^(m) f(x) @f$
+ * defined on the index ranges of valid n and m.
+ * Defined on host. 
+ */
+template <class Patch>
+using ConstDeriv12_OnPatch_2D_host = host_t<ConstDeriv12_OnPatch_2D<Patch>>;
 
 
 // FIELDS WITH DERIVATIVES -----------------------------------------------------------------------
