@@ -17,6 +17,8 @@ function (diocotron_test_executable PREDCORR_METHOD TIME_METHOD )
 endfunction()
 
 # Select the parameters of the simulation:
-diocotron_test_executable(PREDCORR EULER_METHOD)
-diocotron_test_executable(EXPLICIT_PREDCORR EULER_METHOD)
-diocotron_test_executable(IMPLICIT_PREDCORR EULER_METHOD)
+if(defined ENV{BUILD_END_TO_END_TESTS})
+    diocotron_test_executable(PREDCORR EULER_METHOD)
+    diocotron_test_executable(EXPLICIT_PREDCORR EULER_METHOD)
+    diocotron_test_executable(IMPLICIT_PREDCORR EULER_METHOD)
+endif()
