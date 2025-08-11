@@ -928,24 +928,3 @@ private:
         return std::make_tuple(slice_idx_1, slice_idx_2);
     }
 };
-
-
-// // To help the template deduction.
-// template <
-//         class Connectivity,
-//         class Grid1D,
-//         class... Patches,
-//         ddc::BoundCond LowerBound,
-//         ddc::BoundCond UpperBound,
-//         class DerivativesCalculatorCollection>
-// InterfaceDerivativeMatrix(
-//         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-//         DerivativesCalculatorCollection const& derivatives_calculators,
-//         double const& reduction_factor = 1e-6)
-//         -> InterfaceDerivativeMatrix<
-//                 Connectivity,
-//                 Grid1D,
-//                 ddc::detail::TypeSeq<Patches...>,
-//                 LowerBound,
-//                 UpperBound,
-//                 DerivativesCalculatorCollection>;
