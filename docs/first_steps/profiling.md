@@ -73,4 +73,3 @@ where `MyProfilingRegion` is a string identifying the region. To exit the region
 ```cpp
 Kokkos::Profiling::popRegion();
 ```
-
