@@ -858,28 +858,17 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 
     // --- the first derivatives from the function values.
     matrix_123.solve_deriv(functions_and_derivs);
-    std::cout << "matrix_123" << std::endl;
     matrix_456.solve_deriv(functions_and_derivs);
-    std::cout << "matrix_456" << std::endl;
     matrix_789.solve_deriv(functions_and_derivs);
-    std::cout << "matrix_789" << std::endl;
-
 
     matrix_147.solve_deriv(functions_and_derivs);
-    std::cout << "matrix_147" << std::endl;
     matrix_258.solve_deriv(functions_and_derivs);
-    std::cout << "matrix_258" << std::endl;
     matrix_369.solve_deriv(functions_and_derivs);
-    std::cout << "matrix_369" << std::endl;
-    std::cout << "end of first derivatives." << std::endl; 
 
     // --- the cross-derivatives from the first derivatives.
     matrix_147.solve_cross_deriv(functions_and_derivs);
-    std::cout << "matrix_147" << std::endl;
     matrix_258.solve_cross_deriv(functions_and_derivs);
-    std::cout << "matrix_258" << std::endl;
     matrix_369.solve_cross_deriv(functions_and_derivs);
-    std::cout << "matrix_369" << std::endl;
 
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.
