@@ -77,17 +77,11 @@ using Connectivity = MultipatchConnectivity<
 struct Xg
 {
     static bool constexpr PERIODIC = false;
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    using Dual = Xg;
 };
 
 struct Yg
 {
     static bool constexpr PERIODIC = false;
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    using Dual = Yg;
 };
 
 struct GridXg : NonUniformGridBase<Xg>
@@ -247,9 +241,7 @@ public:
         std::vector<Coord<Y<1>>> break_points_y1
                 = build_random_non_uniform_break_points(y1_min, y1_max, y1_ncells);
         std::vector<Coord<Y<2>>> break_points_y2 = convert_dim<Y<2>, Y<1>>(break_points_y1);
-        // = build_random_non_uniform_break_points(y2_min, y2_max, y2_ncells);
         std::vector<Coord<Y<3>>> break_points_y3 = convert_dim<Y<3>, Y<1>>(break_points_y1);
-        // = build_random_non_uniform_break_points(y3_min, y3_max, y3_ncells);
 
         std::vector<Coord<X<1>>> interpolation_points_x1 = break_points_x1;
         std::vector<Coord<X<2>>> interpolation_points_x2 = break_points_x2;

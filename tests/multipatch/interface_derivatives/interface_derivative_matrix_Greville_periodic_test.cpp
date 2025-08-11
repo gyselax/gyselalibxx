@@ -52,17 +52,11 @@ using namespace periodic_strips_non_uniform_2d_9patches;
 struct Xg
 {
     static bool constexpr PERIODIC = true;
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    using Dual = Xg;
 };
 
 struct Yg
 {
     static bool constexpr PERIODIC = false;
-    static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = true;
-    using Dual = Yg;
 };
 
 struct GridXg : NonUniformGridBase<Xg>
@@ -239,7 +233,6 @@ protected:
     const IdxRange<GridX<8>> idx_range_x8;
     const IdxRange<GridX<9>> idx_range_x9;
 
-
     const IdxRange<GridY<1>> idx_range_y1;
     const IdxRange<GridY<2>> idx_range_y2;
     const IdxRange<GridY<3>> idx_range_y3;
@@ -249,7 +242,6 @@ protected:
     const IdxRange<GridY<7>> idx_range_y7;
     const IdxRange<GridY<8>> idx_range_y8;
     const IdxRange<GridY<9>> idx_range_y9;
-
 
     const IdxRange<GridX<1>, GridY<1>> idx_range_xy1;
     const IdxRange<GridX<2>, GridY<2>> idx_range_xy2;
@@ -706,7 +698,6 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             // SingleInterfaceDerivativesCalculatorCollection<Interface_2_5, Interface_5_8>
             matrix_258(idx_ranges_258, deriv_calculators_collect_258);
 
-
     InterfaceDerivativeMatrix<
             Connectivity,
             GridY<3>,
@@ -856,20 +847,6 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
                     function_and_derivs_8,
                     function_and_derivs_9);
 
-    // MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs_123(
-    //         functions_and_derivs);
-    // MultipatchField<DerivFieldOnPatch_host, Patch4, Patch5, Patch6> functions_and_derivs_456(
-    //         functions_and_derivs);
-    // MultipatchField<DerivFieldOnPatch_host, Patch7, Patch8, Patch9> functions_and_derivs_789(
-    //         functions_and_derivs);
-
-    // MultipatchField<DerivFieldOnPatch_host, Patch1, Patch4, Patch7, Patch2>
-    //         functions_and_derivs_147(functions_and_derivs);
-    // MultipatchField<DerivFieldOnPatch_host, Patch2, Patch5, Patch8> functions_and_derivs_258(
-    //         functions_and_derivs);
-    // MultipatchField<DerivFieldOnPatch_host, Patch3, Patch6, Patch9> functions_and_derivs_369(
-    //         functions_and_derivs);
-
     // Instantiate the field of global function values. No derivatives needed.
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
     host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
@@ -881,17 +858,28 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 
     // --- the first derivatives from the function values.
     matrix_123.solve_deriv(functions_and_derivs);
+    std::cout << "matrix_123" << std::endl;
     matrix_456.solve_deriv(functions_and_derivs);
+    std::cout << "matrix_456" << std::endl;
     matrix_789.solve_deriv(functions_and_derivs);
+    std::cout << "matrix_789" << std::endl;
+
 
     matrix_147.solve_deriv(functions_and_derivs);
+    std::cout << "matrix_147" << std::endl;
     matrix_258.solve_deriv(functions_and_derivs);
+    std::cout << "matrix_258" << std::endl;
     matrix_369.solve_deriv(functions_and_derivs);
+    std::cout << "matrix_369" << std::endl;
+    std::cout << "end of first derivatives." << std::endl; 
 
     // --- the cross-derivatives from the first derivatives.
     matrix_147.solve_cross_deriv(functions_and_derivs);
+    std::cout << "matrix_147" << std::endl;
     matrix_258.solve_cross_deriv(functions_and_derivs);
+    std::cout << "matrix_258" << std::endl;
     matrix_369.solve_cross_deriv(functions_and_derivs);
+    std::cout << "matrix_369" << std::endl;
 
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.
