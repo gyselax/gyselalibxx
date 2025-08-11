@@ -285,7 +285,6 @@ template <class Patch>
 using ConstDeriv12_OnPatch_2D_host = host_t<ConstDeriv12_OnPatch_2D<Patch>>;
 
 
-
 // FIELDS WITH DERIVATIVES -----------------------------------------------------------------------
 
 // --- ON DEVICE ---
