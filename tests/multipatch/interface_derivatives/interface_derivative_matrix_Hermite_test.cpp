@@ -324,18 +324,13 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, InterpolationPointsCheck)
     int const x_shift1 = x1_ncells.value();
     int const x_shift2 = x1_ncells.value() + x2_ncells.value();
 
-    check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0, 0);
-    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1, 0);
-    check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2, 0);
+    check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0);
+    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1);
+    check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2);
 }
 
 
 
-/*
- * Here, we consider only the 1 | 2 | 3 strip. We assume that the equivalant global 
- * domain is not periodic but the derivatives at the boundaries are known. 
- * It allows us to test the InterfaceDerivativeMatrix for ddc::BoundCond::HERMITE.
- */
 TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
 {
     // Instantiate the derivatives calculators ---------------------------------------------------
@@ -351,12 +346,10 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             SingleInterfaceDerivativesCalculator<Interface_1_2>>;
 
     // We do not follow the physical order to test the operator.
-    get_deriv_calculator_collection_with_Hermite_boundcond_t<Interface_2_3, Interface_1_2>
-//     DerivativesCalculatorCollection
+    // get_deriv_calculator_collection_with_Hermite_boundcond_t<Interface_2_3, Interface_1_2>
+    //     DerivativesCalculatorCollection
+    SingleInterfaceDerivativesCalculatorCollection
             deriv_calculators_collect(derivatives_calculator_2_3, derivatives_calculator_1_2);
-
-    get_deriv_calculator_collection_t<WestEdge<1>, ddc::BoundCond::HERMITE, EastEdge<3>, ddc::BoundCond::HERMITE, Interface_2_3, Interface_1_2>
-            deriv_calculators_collect_bis(derivatives_calculator_2_3, derivatives_calculator_1_2);
 
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
@@ -370,6 +363,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             ddc::BoundCond::HERMITE,
             ddc::BoundCond::HERMITE,
             DerivativesCalculatorCollection>
+            // SingleInterfaceDerivativesCalculatorCollection<Interface_2_3, Interface_1_2> >
             matrix(idx_ranges, deriv_calculators_collect);
 
 

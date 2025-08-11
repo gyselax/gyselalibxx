@@ -214,7 +214,7 @@ template <class Patch, class GridXg, class GridYg>
 void check_interpolation_grids(
         typename Patch::IdxRange12 const& idx_range,
         int const x_shift,
-        int const y_shift)
+        int const y_shift = 0)
 {
     using Grid1 = typename Patch::Grid1;
     using Grid2 = typename Patch::Grid2;

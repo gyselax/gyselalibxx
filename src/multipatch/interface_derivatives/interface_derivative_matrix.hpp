@@ -9,7 +9,7 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
-#include "matching_idx_slice.hpp"
+// #include "matching_idx_slice.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "single_interface_derivatives_calculator_collection.hpp"
@@ -38,7 +38,6 @@ class InterfaceDerivativeMatrix;
   *     - It inverses the matrix system: (I-M)S = C. 
   *     - The interface derivatives are stored in the vector S. 
   *     - It updates the given derivatives field with the values of the vector S. 
-  * 
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
@@ -234,7 +233,7 @@ public:
      * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives.
      */
     template <class IdxPar>
-    void solve_deriv( // Should be useful for non-conforming case (later).
+    void solve_deriv(
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             IdxPar const& idx_par)
     {
@@ -420,7 +419,7 @@ private:
         // The orientation of the ordered interface and the one in the derivative calculator.
         constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
 
-        // If the orientations are not the same, we change the sign.
+        // If the orientations are not the same, we change the sign of the derivative.
         const int sign = is_same_orientation - !is_same_orientation;
 
         using Patch1 = typename InterfaceI::Edge1::associated_patch;
@@ -435,8 +434,8 @@ private:
         using DimPerp1 = typename GridPerp1::continuous_dimension_type;
         using DimPerp2 = typename GridPerp2::continuous_dimension_type;
 
-        using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
-        using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
+        // using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
+        // using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
 
         using DerivPerp1 = typename ddc::Deriv<DimPerp1>;
         using DerivPerp2 = typename ddc::Deriv<DimPerp2>;
@@ -464,7 +463,7 @@ private:
 
         m_vector->get_values()[I] = lin_comb_funct;
 
-        // TODO: Test this part.
+        // Add the boundary derivatives for global Hermite boundary conditions. 
         constexpr bool is_lower_bound_deriv_dependent
                 = (LowerBound == ddc::BoundCond::HERMITE && I == 0);
         constexpr bool is_upper_bound_deriv_dependent
@@ -474,6 +473,7 @@ private:
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch2>());
 
+            // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type? 
             IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
                     idx_range_perp_1.front(),
                     IdxStep<GridPerp1>(2),
@@ -539,8 +539,6 @@ private:
 
         auto [idx_slice_1, idx_slice_2] = get_slice_indexes<InterfaceI>(slice_idx_1_value);
 
-
-
         DerivFieldOnPatch_host<Patch1> function_and_derivs_1
                 = functions_and_derivs.template get<Patch1>();
         DerivFieldOnPatch_host<Patch2> function_and_derivs_2
@@ -601,7 +599,7 @@ private:
 
         m_vector->get_values()[I] = lin_comb_funct;
 
-        // TODO: Test this part.
+        // Add the boundary derivatives for global Hermite boundary conditions. 
         constexpr bool is_lower_bound_deriv_dependent
                 = (LowerBound == ddc::BoundCond::HERMITE && I == 0);
         constexpr bool is_upper_bound_deriv_dependent
@@ -928,117 +926,3 @@ private:
         return std::make_tuple(slice_idx_1, slice_idx_2);
     }
 };
-
-
-
-template <
-        class Interface,
-        class GridLower,
-        class GridUpper,
-        ddc::BoundCond BoundCondLower,
-        ddc::BoundCond BoundCondUpper>
-struct get_deriv_calculator
-{
-    using GridLeft = typename Interface::Edge1::perpendicular_grid;
-    using GridRight = typename Interface::Edge2::perpendicular_grid;
-
-    static constexpr ddc::BoundCond left_boundcond
-            = std::is_same_v<GridLeft, GridLower>   ? BoundCondLower
-              : std::is_same_v<GridLeft, GridUpper> ? BoundCondUpper
-                                                    : ddc::BoundCond::HERMITE;
-    static constexpr ddc::BoundCond right_boundcond
-            = std::is_same_v<GridRight, GridLower>   ? BoundCondLower
-              : std::is_same_v<GridRight, GridUpper> ? BoundCondUpper
-                                                     : ddc::BoundCond::HERMITE;
-
-    using type = SingleInterfaceDerivativesCalculator<Interface, left_boundcond, right_boundcond>;
-};
-
-template <
-        class Interface,
-        class GridLower,
-        class GridUpper,
-        ddc::BoundCond BoundCondLower,
-        ddc::BoundCond BoundCondUpper>
-using get_deriv_calculator_t = typename get_deriv_calculator<
-        Interface,
-        GridLower,
-        GridUpper,
-        BoundCondLower,
-        BoundCondUpper>::type;
-
-// template <
-//         ddc::BoundCond BoundCondLower = ddc::BoundCond::HERMITE,
-//         ddc::BoundCond BoundCondUpper = ddc::BoundCond::HERMITE,
-//         class... Interfaces>
-// struct get_deriv_calculator_collection
-// {
-//     using InterfaceSeq = ddc::detail::TypeSeq<Interfaces...>;
-//     using FirstInterface = ddc::type_seq_element_t<0, InterfaceSeq>;
-//     using FirstPatch = typename FirstInterface::Edge1::associated_patch;
-//     using GridPerp = typename FirstInterface::Edge1::perpendicular_grid;
-
-//     static_assert(ddc::type_seq_size_v<InterfaceSeq> == 2);
-//     static_assert(std::is_same_v<GridPerp, typename FirstPatch::Grid1>);
-
-//     using GridSeq = collect_grids_on_dim_t<FirstPatch, GridPerp, InterfaceSeq>;
-
-//     static constexpr std::size_t n_grids = ddc::type_seq_size_v<GridSeq>;
-
-//     using GridLower = ddc::type_seq_element_t<0, GridSeq>;
-//     using GridUpper = ddc::type_seq_element_t<n_grids - 1, GridSeq>;
-
-//     using type = SingleInterfaceDerivativesCalculatorCollection<get_deriv_calculator_t<
-//             Interfaces,
-//             GridLower,
-//             GridUpper,
-//             BoundCondLower,
-//             BoundCondUpper>...>;
-// };
-
-template <
-        class EdgeLower,
-        ddc::BoundCond BoundCondLower,
-        class EdgeUpper,
-        ddc::BoundCond BoundCondUpper,
-        class... Interfaces>
-struct get_deriv_calculator_collection
-{
-    using GridLower = typename EdgeLower::perpendicular_grid;
-    using GridUpper = typename EdgeUpper::perpendicular_grid;
-
-    using type = SingleInterfaceDerivativesCalculatorCollection<get_deriv_calculator_t<
-            Interfaces,
-            GridLower,
-            GridUpper,
-            BoundCondLower,
-            BoundCondUpper>...>;
-};
-
-template <
-        class EdgeLower,
-        ddc::BoundCond BoundCondLower,
-        class EdgeUpper,
-        ddc::BoundCond BoundCondUpper,
-        class... Interfaces>
-using get_deriv_calculator_collection_t = typename get_deriv_calculator_collection<
-        EdgeLower,
-        BoundCondLower,
-        EdgeUpper,
-        BoundCondUpper,
-        Interfaces...>::type;
-
-template <class... Interfaces>
-using get_deriv_calculator_collection_with_Hermite_boundcond_t =
-         SingleInterfaceDerivativesCalculatorCollection<
-                SingleInterfaceDerivativesCalculator<Interfaces>...>;
-
-// template <class... Interfaces>
-// using get_deriv_calculator_collection_t<
-//         ddc::BoundCond::HERMITE,
-//         ddc::BoundCond::HERMITE,
-//         Interfaces...> =
-//         typename get_deriv_calculator_collection<
-//                 ddc::BoundCond::HERMITE,
-//                 ddc::BoundCond::HERMITE,
-//                 Interfaces...>::type;
