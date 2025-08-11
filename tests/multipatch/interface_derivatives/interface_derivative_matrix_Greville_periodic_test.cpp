@@ -517,6 +517,38 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             ddc::BoundCond::GREVILLE> const
             derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9);
 
+    // SingleInterfaceDerivativesCalculator<Interface_1_4> const derivatives_calculator_1_4(
+    //         idx_range_xy1,
+    //         idx_range_xy4,
+    //         ddc::BoundCond::GREVILLE,
+    //         ddc::BoundCond::HERMITE);
+    // SingleInterfaceDerivativesCalculator<Interface_4_7> const derivatives_calculator_4_7(
+    //         idx_range_xy4,
+    //         idx_range_xy7,
+    //         ddc::BoundCond::HERMITE,
+    //         ddc::BoundCond::GREVILLE);
+
+    // SingleInterfaceDerivativesCalculator<Interface_2_5> const derivatives_calculator_2_5(
+    //         idx_range_xy2,
+    //         idx_range_xy5,
+    //         ddc::BoundCond::GREVILLE,
+    //         ddc::BoundCond::HERMITE);
+    // SingleInterfaceDerivativesCalculator<Interface_5_8> const derivatives_calculator_5_8(
+    //         idx_range_xy5,
+    //         idx_range_xy8,
+    //         ddc::BoundCond::HERMITE,
+    //         ddc::BoundCond::GREVILLE);
+
+    // SingleInterfaceDerivativesCalculator<Interface_3_6> const derivatives_calculator_3_6(
+    //         idx_range_xy3,
+    //         idx_range_xy6,
+    //         ddc::BoundCond::GREVILLE,
+    //         ddc::BoundCond::HERMITE);
+    // SingleInterfaceDerivativesCalculator<Interface_6_9> const derivatives_calculator_6_9(
+    //         idx_range_xy6,
+    //         idx_range_xy9,
+    //         ddc::BoundCond::HERMITE,
+    //         ddc::BoundCond::GREVILLE);
 
 
     // Collect the derivative calculators --------------------------------------------------------
@@ -590,21 +622,6 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             deriv_calculators_collect_369(derivatives_calculator_3_6, derivatives_calculator_6_9);
 
     // Collect the index ranges ------------------------------------------------------------------
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
-            idx_ranges_123(idx_range_xy1, idx_range_xy2, idx_range_xy3);
-    MultipatchType<IdxRangeOnPatch, Patch4, Patch5, Patch6>
-            idx_ranges_456(idx_range_xy4, idx_range_xy5, idx_range_xy6);
-    MultipatchType<IdxRangeOnPatch, Patch7, Patch8, Patch9>
-            idx_ranges_789(idx_range_xy7, idx_range_xy8, idx_range_xy9);
-
-    // For 1|4|7, we artificially add another patch to test if the method will modify the correct patches.
-    MultipatchType<IdxRangeOnPatch, Patch1, Patch4, Patch7, Patch2>
-            idx_ranges_147(idx_range_xy1, idx_range_xy4, idx_range_xy7, idx_range_xy2);
-    MultipatchType<IdxRangeOnPatch, Patch2, Patch5, Patch8>
-            idx_ranges_258(idx_range_xy2, idx_range_xy5, idx_range_xy8);
-    MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9>
-            idx_ranges_369(idx_range_xy3, idx_range_xy6, idx_range_xy9);
-
     MultipatchType<
             IdxRangeOnPatch,
             Patch1,
@@ -626,6 +643,15 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
                     idx_range_xy7,
                     idx_range_xy8,
                     idx_range_xy9);
+
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3> idx_ranges_123(idx_ranges);
+    MultipatchType<IdxRangeOnPatch, Patch4, Patch5, Patch6> idx_ranges_456(idx_ranges);
+    MultipatchType<IdxRangeOnPatch, Patch7, Patch8, Patch9> idx_ranges_789(idx_ranges);
+
+    // For 1|4|7, we artificially add another patch to test if the method will modify the correct patches.
+    MultipatchType<IdxRangeOnPatch, Patch1, Patch4, Patch7, Patch2> idx_ranges_147(idx_ranges);
+    MultipatchType<IdxRangeOnPatch, Patch2, Patch5, Patch8> idx_ranges_258(idx_ranges);
+    MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9> idx_ranges_369(idx_ranges);
 
     // Instantiate the matrix calculators --------------------------------------------------------
     InterfaceDerivativeMatrix<
@@ -659,7 +685,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             matrix_789(idx_ranges_789, deriv_calculators_collect_789);
 
 
-    // Test with an exact patch to check it will only take the needed patches.
+    // Test with an extra patch (Patch2) to check it will only take the needed patches.
     InterfaceDerivativeMatrix<
             Connectivity,
             GridY<1>,
@@ -808,39 +834,6 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     DerivFieldOnPatch_host<Patch9> function_and_derivs_9(function_and_derivs_9_alloc);
 
     // Collect the fields with derivatives.
-    MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs_123(
-            function_and_derivs_1,
-            function_and_derivs_2,
-            function_and_derivs_3);
-
-    MultipatchField<DerivFieldOnPatch_host, Patch4, Patch5, Patch6> functions_and_derivs_456(
-            function_and_derivs_4,
-            function_and_derivs_5,
-            function_and_derivs_6);
-
-    MultipatchField<DerivFieldOnPatch_host, Patch7, Patch8, Patch9> functions_and_derivs_789(
-            function_and_derivs_7,
-            function_and_derivs_8,
-            function_and_derivs_9);
-
-    MultipatchField<DerivFieldOnPatch_host, Patch1, Patch4, Patch7, Patch2>
-            functions_and_derivs_147(
-                    function_and_derivs_1,
-                    function_and_derivs_4,
-                    function_and_derivs_7,
-                    function_and_derivs_2);
-
-    MultipatchField<DerivFieldOnPatch_host, Patch2, Patch5, Patch8> functions_and_derivs_258(
-            function_and_derivs_2,
-            function_and_derivs_5,
-            function_and_derivs_8);
-
-    MultipatchField<DerivFieldOnPatch_host, Patch3, Patch6, Patch9> functions_and_derivs_369(
-            function_and_derivs_3,
-            function_and_derivs_6,
-            function_and_derivs_9);
-
-
     MultipatchField<
             DerivFieldOnPatch_host,
             Patch1,
@@ -863,6 +856,20 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
                     function_and_derivs_8,
                     function_and_derivs_9);
 
+    // MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3> functions_and_derivs_123(
+    //         functions_and_derivs);
+    // MultipatchField<DerivFieldOnPatch_host, Patch4, Patch5, Patch6> functions_and_derivs_456(
+    //         functions_and_derivs);
+    // MultipatchField<DerivFieldOnPatch_host, Patch7, Patch8, Patch9> functions_and_derivs_789(
+    //         functions_and_derivs);
+
+    // MultipatchField<DerivFieldOnPatch_host, Patch1, Patch4, Patch7, Patch2>
+    //         functions_and_derivs_147(functions_and_derivs);
+    // MultipatchField<DerivFieldOnPatch_host, Patch2, Patch5, Patch8> functions_and_derivs_258(
+    //         functions_and_derivs);
+    // MultipatchField<DerivFieldOnPatch_host, Patch3, Patch6, Patch9> functions_and_derivs_369(
+    //         functions_and_derivs);
+
     // Instantiate the field of global function values. No derivatives needed.
     host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
     host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
@@ -873,18 +880,18 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     initialise_2D_function<GridXg, GridYg>(function_g);
 
     // --- the first derivatives from the function values.
-    matrix_123.solve_deriv(functions_and_derivs_123);
-    matrix_456.solve_deriv(functions_and_derivs_456);
-    matrix_789.solve_deriv(functions_and_derivs_789);
+    matrix_123.solve_deriv(functions_and_derivs);
+    matrix_456.solve_deriv(functions_and_derivs);
+    matrix_789.solve_deriv(functions_and_derivs);
 
-    matrix_147.solve_deriv(functions_and_derivs_147);
-    matrix_258.solve_deriv(functions_and_derivs_258);
-    matrix_369.solve_deriv(functions_and_derivs_369);
+    matrix_147.solve_deriv(functions_and_derivs);
+    matrix_258.solve_deriv(functions_and_derivs);
+    matrix_369.solve_deriv(functions_and_derivs);
 
     // --- the cross-derivatives from the first derivatives.
-    matrix_147.solve_cross_deriv(functions_and_derivs_147);
-    matrix_258.solve_cross_deriv(functions_and_derivs_258);
-    matrix_369.solve_cross_deriv(functions_and_derivs_369);
+    matrix_147.solve_cross_deriv(functions_and_derivs);
+    matrix_258.solve_cross_deriv(functions_and_derivs);
+    matrix_369.solve_cross_deriv(functions_and_derivs);
 
     // Test the values of the derivatives ========================================================
     // --- Define an equivalent global spline.
