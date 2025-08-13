@@ -62,6 +62,9 @@ find_package(LAPACKE REQUIRED)
 
 find_package(Ginkgo 1.8 REQUIRED)
 
+set(GMGPOLAR_BUILD_TESTS OFF CACHE BOOL "")
+add_subdirectory("vendor/GMGPolar/" "GMGPolar" SYSTEM)
+
 ###############################################################################################
 #                              Build libraries and executables
 ###############################################################################################
