@@ -113,6 +113,9 @@ set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
 set(koliop_ENABLE_KokkosKernels "SUBDIRECTORY" CACHE STRING "")
 add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
 
+set(GMGPOLAR_BUILD_TESTS OFF CACHE BOOL "")
+add_subdirectory("vendor/GMGPolar/" "GMGPolar" SYSTEM)
+
 ###############################################################################################
 #                              Build libraries and executables
 ###############################################################################################
