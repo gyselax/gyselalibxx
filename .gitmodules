@@ -17,3 +17,6 @@
 [submodule "vendor/kokkos-kernels"]
 	path = vendor/kokkos-kernels
 	url = https://github.com/kokkos/kokkos-kernels.git
+[submodule "vendor/GMGPolar"]
+	path = vendor/GMGPolar
+	url = https://github.com/SciCompMod/GMGPolar.git
