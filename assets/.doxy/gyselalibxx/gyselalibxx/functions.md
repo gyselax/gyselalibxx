@@ -84,8 +84,6 @@
 ## m
 
 * **mask\_tanh** ([**mask\_tanh.cpp**](mask__tanh_8cpp.md), [**mask\_tanh.hpp**](mask__tanh_8hpp.md))
-* **max** ([**math\_tools.hpp**](math__tools_8hpp.md))
-* **min** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **modulo** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **mass** ([**species\_info.hpp**](species__info_8hpp.md))
 

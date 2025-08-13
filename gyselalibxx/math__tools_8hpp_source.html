@@ -686,19 +686,6 @@ inline std::size_t factorial(std::size_t f)
     return r;
 }
 
-
-template &lt;typename T&gt;
-KOKKOS_INLINE_FUNCTION T min(T x, T y)
-{
-    return x &lt; y ? x : y;
-}
-
-template &lt;typename T&gt;
-KOKKOS_INLINE_FUNCTION T max(T x, T y)
-{
-    return x &gt; y ? x : y;
-}
-
 template &lt;class RowDim1, class RowDim2, class ColDim1, class ColDim2&gt;
 KOKKOS_INLINE_FUNCTION double determinant(
         DTensor&lt;VectorIndexSet&lt;RowDim1, RowDim2&gt;, VectorIndexSet&lt;ColDim1, ColDim2&gt;&gt; arr)
