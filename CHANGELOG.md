@@ -51,6 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change constructor arguments of `VortexMergerEquilibria` to pass a spline builder and evaluator which operate on GPU.
 - Port `PoissonLikeRHSFunction` from the (r, theta) geometry to GPU.
 - Change constructor argument of `PoissonLikeRHSFunction` from the (r, theta) geometry to pass spline coefficients on GPU.
+- Use Spack to install the Kokkos ecosystem in the MI250 Adastra toolchain.
 
 ### Deprecated
 
