@@ -51,23 +51,23 @@ TEST(CurlParamTests, irrotational_field_has_zero_curl)
     double const r = ddc::get<Rho>(coord);
     double const theta = ddc::get<Theta>(coord);
     // Compute dB_r/dr, dB_theta/dr, dB_r/dtheta, dB_theta/dtheta
-    ddcHelper::get<R_cov, R_cov>(grad_B)
+    ddcHelper::get<Rho_cov, Rho_cov>(grad_B)
             = (std::sinh(r) * std::cosh(r) - std::sinh(r) * std::cos(theta)
                + std::sinh(r) * std::cos(theta) * std::cosh(r))
               * std::cos(theta);
-    ddcHelper::get<R_cov, Theta_cov>(grad_B)
+    ddcHelper::get<Rho_cov, Theta_cov>(grad_B)
             = (-std::sinh(r) * std::sinh(r) - std::cosh(r) * std::cosh(r)
                + std::cosh(r) * std::cos(theta))
               * std::sin(theta);
-    ddcHelper::get<R_cov, Phi_cov>(grad_B) = 0.0;
-    ddcHelper::get<Theta_cov, R_cov>(grad_B)
+    ddcHelper::get<Rho_cov, Phi_cov>(grad_B) = 0.0;
+    ddcHelper::get<Theta_cov, Rho_cov>(grad_B)
             = -std::sin(theta) * std::cosh(r) * (std::cosh(r) - 2.0 * std::cos(theta));
     ddcHelper::get<Theta_cov, Theta_cov>(grad_B)
             = -std::sinh(r)
               * (std::sin(theta) * std::sin(theta)
                  + std::cos(theta) * (std::cos(theta) - std::cosh(r)));
     ddcHelper::get<Theta_cov, Phi_cov>(grad_B) = 0.0;
-    ddcHelper::get<Phi_cov, R_cov>(grad_B) = 0.0;
+    ddcHelper::get<Phi_cov, Rho_cov>(grad_B) = 0.0;
     ddcHelper::get<Phi_cov, Theta_cov>(grad_B) = 0.0;
     ddcHelper::get<Phi_cov, Phi_cov>(grad_B) = 0.0;
 
