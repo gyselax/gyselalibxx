@@ -462,7 +462,8 @@ def check_directives(file):
     from the gyselalibxx project and angle brackets are used to include files from other libraries.
     """
     if file.configs:
-        if file.file.suffix == '.hpp' and not file.root.findall("./dump/directivelist/directive[@str='#pragma once']"):
+        if file.file.suffix == '.hpp' and not file.root.findall("./dump/directivelist/directive[@str='#pragma once']") and \
+                not file.root.findall("./dump/directivelist/directive[@str='#ifdef GEOM_NAMESPACE_NAME']"):
             report_error(FATAL, file, 2, "#pragma once missing from the top of a hpp file")
 
         directives = {d.attrib['linenr']: d.attrib['str'].split() for d in file.root.findall("./dump/directivelist/directive")
