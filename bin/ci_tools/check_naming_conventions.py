@@ -51,13 +51,13 @@ def main():
         print(f'Checking {arg}...')
         data = cppcheckdata.parsedump(arg)
 
-        # No token to report on
-        #fname = Path(arg).stem
-        #res = re.match(RE_SNAKE_CASE, fname)
-        #if not res:
-        #    filename = arg.removesuffix(".dump")
-        #    reportError(token,
-        #                f'File {filename} violates snake-case naming convention', 'varname')
+        fname = Path(arg).stem
+        res = re.match(RE_SNAKE_CASE, fname)
+        if not res:
+            tok = next(tok for tok in data.rawTokens)
+            filename = arg.removesuffix(".dump")
+            reportError(tok,
+                        f'File {filename} violates snake-case naming convention', 'varname')
 
         # Find any use of the DDC keywords listed in ddc_keyword_map in the raw code.
         ddc_usage = [tok for tok in data.rawTokens if tok.str in ddc_keyword_map]
