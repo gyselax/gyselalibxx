@@ -51,13 +51,13 @@ def main():
                 if scope.type not in ('Class', 'Struct'):
                     continue
 
-                # Check if an instance of the class can be created on GPU
-                has_gpu_constructor = any(s.exec_space != 'CPU' for f,s in zip(functions, function_scopes) \
-                                        if f.type == 'Constructor')
-
                 # Find class methods
                 function_scopes = [s for s in scope.nestedList if s.type == 'Function']
                 functions = [s.function for s in function_scopes]
+
+                # Check if an instance of the class can be created on GPU
+                has_gpu_constructor = any(s.exec_space != 'CPU' for f,s in zip(functions, function_scopes) \
+                                        if f.type == 'Constructor')
 
                 nested_scopes = scope.nestedList
                 # If any methods run on GPU and the class contains references which cannot be created
@@ -82,7 +82,7 @@ def main():
                         elif any(s in type_descr for s in ('DefaultExecutionSpace',)):
                             var.mem_space = 'GPU'
                         else:
-                            warnings.warn("Cannot determine if type {type_descr} is on GPU or CPU")
+                            warnings.warn(f"Cannot determine if type {type_descr} is on GPU or CPU")
 
             # Check for memory misuse
             for scope in cfg.scopes:
