@@ -17,7 +17,7 @@
 // psi = a * sinh(r) * cos(theta)
 // B = \grad psi
 // \curl B = \curl (\grad psi) = 0
-TEST(CurlParamTests, irrotational_field_has_zero_curl)
+TEST(CurlTests, irrotational_field_has_zero_curl)
 {
     using Mapping2D = CircularToCartesian<Rho, Theta, R, Z>;
     using ToroidalMapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
@@ -75,6 +75,70 @@ TEST(CurlParamTests, irrotational_field_has_zero_curl)
 
     double eps = 1e-12;
     EXPECT_NEAR(ddcHelper::get<Rho>(curl_B), 0.0, eps);
+    EXPECT_NEAR(ddcHelper::get<Theta>(curl_B), 0.0, eps);
+    EXPECT_NEAR(ddcHelper::get<Phi>(curl_B), 0.0, eps);
+}
+
+// Test the curl for a simple B-field where the
+// result can be analytically computed.
+// Let's use B = (0, 0, cos(theta))
+TEST(CurlTests, specific_field_and_point)
+{
+    using Mapping2D = CircularToCartesian<Rho, Theta, R, Z>;
+    using ToroidalMapping = ToroidalToCylindrical<Mapping2D, Zeta, Phi>;
+    using CylindricalMapping = CylindricalToCartesian<R, Z, Zeta, X, Y>;
+
+    double R0 = 6.2;
+    Coord<R, Z> origin_point(R0, 0.0);
+    Mapping2D polar_to_RZ(origin_point);
+    ToroidalMapping toroidal_to_cylindrical(polar_to_RZ);
+    CylindricalMapping cylindrical_to_cartesian;
+    CombinedMapping<CylindricalMapping, ToroidalMapping, Coord<Rho, Theta, Phi>>
+            mapping(cylindrical_to_cartesian, toroidal_to_cylindrical);
+    Curl curl(mapping);
+
+    using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
+    using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
+    IdxStepRho nrho(10);
+    IdxStepTheta ntheta(10);
+    IdxStepPhi nphi(2);
+    ddc::init_discrete_space<GridRho>(
+            GridRho::init<GridRho>(Coord<Rho>(0.0), Coord<Rho>(1.0), nrho));
+    ddc::init_discrete_space<GridTheta>(GridTheta::init<GridTheta>(
+            build_uniform_break_points(Coord<Theta>(0.0), Coord<Theta>(2 * M_PI), ntheta)));
+    ddc::init_discrete_space<GridPhi>(
+            GridPhi::init<GridPhi>(Coord<Phi>(0.0), Coord<Phi>(2 * M_PI), nphi));
+
+    // We need to get theat = pi/2
+    Coord<Rho, Theta, Phi>
+            coord(ddc::coordinate(Idx<GridRho, GridPhi>(nrho - 1, 0)),
+                  ddc::Coordinate<Theta>(Kokkos::numbers::pi / 2));
+    DTensor<CovBasisSpatial, CovBasisSpatial> grad_B;
+
+    double const r = ddc::get<Rho>(coord);
+    double const theta = ddc::get<Theta>(coord);
+
+    // Compute dB_phi/dtheta
+    ddcHelper::get<Rho_cov, Rho_cov>(grad_B) = 0.0;
+    ddcHelper::get<Rho_cov, Theta_cov>(grad_B) = 0.0;
+    ddcHelper::get<Rho_cov, Phi_cov>(grad_B) = 0.0;
+    ddcHelper::get<Theta_cov, Rho_cov>(grad_B) = 0.0;
+    ddcHelper::get<Theta_cov, Theta_cov>(grad_B) = 0.0;
+    ddcHelper::get<Theta_cov, Phi_cov>(grad_B) = -std::sin(theta);
+    ddcHelper::get<Phi_cov, Rho_cov>(grad_B) = 0.0;
+    ddcHelper::get<Phi_cov, Theta_cov>(grad_B) = 0.0;
+    ddcHelper::get<Phi_cov, Phi_cov>(grad_B) = 0.0;
+
+    DVector<Rho, Theta, Phi> curl_B = curl(grad_B, coord);
+
+    double eps = 1e-12;
+
+    // r component of curl at theta = pi/2 is
+    // curl_B_r
+    // = (cosh^2(r) / (a^2 * sinh(r))) * (-a sinh(r) / cosh(r))
+    // = - cosh(r) / a
+    double ref_curl_B_r = -std::cosh(r) / R0;
+    EXPECT_NEAR(ddcHelper::get<Rho>(curl_B), ref_curl_B_r, eps);
     EXPECT_NEAR(ddcHelper::get<Theta>(curl_B), 0.0, eps);
     EXPECT_NEAR(ddcHelper::get<Phi>(curl_B), 0.0, eps);
 }
