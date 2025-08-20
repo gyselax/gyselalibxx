@@ -18,12 +18,13 @@ nav:
       - Contributing: docs/CONTRIBUTING.md
       - Tutorials:
         - docs/first_steps/landau_damping_tutorial.md
+        - docs/first_steps/profiling.md
   - Standards:
       - Coding Standard: docs/standards/CODING_STANDARD.md
       - Maths and Physics: docs/standards/mathematical_and_physical_conventions.md
       - Coding Covariant and Contravariant Tensors: docs/standards/coding_covariant_and_contravariant_tensors.md
-  - Gyselalib++:
-      - Source: src
+  - Gyselalib++ Overview:
+      - Building Blocks: src
       - Simulations: simulations
       - Tests: tests
   - Development:
