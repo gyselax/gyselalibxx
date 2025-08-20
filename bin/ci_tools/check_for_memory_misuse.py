@@ -79,10 +79,8 @@ def main():
                     if any(t in type_descr for t in ('FieldMem', 'VectorFieldMem', 'Field', 'VectorField', 'DiscreteToCartesian')):
                         if any(s in type_descr for s in ('host_t', 'DefaultHostExecutionSpace', 'HostSpace')):
                             var.mem_space = 'CPU'
-                        elif any(s in type_descr for s in ('DefaultExecutionSpace',)):
-                            var.mem_space = 'GPU'
                         else:
-                            warnings.warn(f"Cannot determine if type {type_descr} is on GPU or CPU")
+                            var.mem_space = 'GPU'
 
             # Check for memory misuse
             for scope in cfg.scopes:
@@ -167,14 +165,22 @@ def main():
                              'Please prefer proxy variables.',
                              'unnecessaryGPUclassCapture', severity='warning')
 
+                tok = scope.bodyStart
+                body = [tok]
+                while tok != scope.bodyEnd:
+                    tok = tok.next
+                    body.append(tok)
+
                 # Check for bad exec space use
                 for var in used_vars:
                     if hasattr(var, 'mem_space'):
                         if var.mem_space != scope.exec_space:
-                            msg = ("Attempted memory access from the wrong execution space. "
-                                  f"The current execution space is \"{scope.exec_space}\" but the variable "
-                                  f"{var.nameToken.str} is stored on a space compatible with \"{var.mem_space}\"")
-                            reportError(scope.bodyStart, msg, 'badAccessCPUGPU')
+                            usage = [tok for tok in body if tok.variable == var and tok.next.str == '(']
+                            for tok in usage:
+                                msg = ("Attempted memory access from the wrong execution space. "
+                                      f"The current execution space is \"{scope.exec_space}\" but the variable "
+                                      f"{var.nameToken.str} is stored on a space compatible with \"{var.mem_space}\"")
+                                reportError(tok, msg, 'badAccessCPUGPU')
 
 if __name__ == '__main__':
     main()
