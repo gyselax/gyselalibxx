@@ -13,6 +13,7 @@
 #include "toroidal_to_cylindrical.hpp"
 #include "vector_field.hpp"
 
+
 // Try to confirm that \curl (\grad psi) == 0
 // psi = a * sinh(r) * cos(theta)
 // B = \grad psi
@@ -51,21 +52,11 @@ TEST(CurlTests, irrotational_field_has_zero_curl)
     double const r = ddc::get<Rho>(coord);
     double const theta = ddc::get<Theta>(coord);
     // Compute dB_r/dr, dB_theta/dr, dB_r/dtheta, dB_theta/dtheta
-    ddcHelper::get<Rho_cov, Rho_cov>(grad_B)
-            = (std::sinh(r) * std::cosh(r) - std::sinh(r) * std::cos(theta)
-               + std::sinh(r) * std::cos(theta) * std::cosh(r))
-              * std::cos(theta);
-    ddcHelper::get<Rho_cov, Theta_cov>(grad_B)
-            = (-std::sinh(r) * std::sinh(r) - std::cosh(r) * std::cosh(r)
-               + std::cosh(r) * std::cos(theta))
-              * std::sin(theta);
+    ddcHelper::get<Rho_cov, Rho_cov>(grad_B) = R0 * std::cos(theta) * std::sinh(r);
+    ddcHelper::get<Rho_cov, Theta_cov>(grad_B) = -R0 * std::sin(theta) * std::cosh(r);
     ddcHelper::get<Rho_cov, Phi_cov>(grad_B) = 0.0;
-    ddcHelper::get<Theta_cov, Rho_cov>(grad_B)
-            = -std::sin(theta) * std::cosh(r) * (std::cosh(r) - 2.0 * std::cos(theta));
-    ddcHelper::get<Theta_cov, Theta_cov>(grad_B)
-            = -std::sinh(r)
-              * (std::sin(theta) * std::sin(theta)
-                 + std::cos(theta) * (std::cos(theta) - std::cosh(r)));
+    ddcHelper::get<Theta_cov, Rho_cov>(grad_B) = -R0 * std::sin(theta) * std::cosh(r);
+    ddcHelper::get<Theta_cov, Theta_cov>(grad_B) = -R0 * std::cos(theta) * std::sinh(r);
     ddcHelper::get<Theta_cov, Phi_cov>(grad_B) = 0.0;
     ddcHelper::get<Phi_cov, Rho_cov>(grad_B) = 0.0;
     ddcHelper::get<Phi_cov, Theta_cov>(grad_B) = 0.0;
@@ -81,7 +72,7 @@ TEST(CurlTests, irrotational_field_has_zero_curl)
 
 // Test the curl for a simple B-field where the
 // result can be analytically computed.
-// Let's use B = (0, 0, cos(theta))
+// Let's use B = (0, 0, 1/(R0+r))
 TEST(CurlTests, specific_field_and_point)
 {
     using Mapping2D = CircularToCartesian<Rho, Theta, R, Z>;
@@ -117,14 +108,17 @@ TEST(CurlTests, specific_field_and_point)
 
     double const r = ddc::get<Rho>(coord);
     double const theta = ddc::get<Theta>(coord);
+    double const cos_t = std::cos(theta);
+    double const sin_t = std::sin(theta);
 
-    // Compute dB_phi/dtheta
+    // Compute dB_phi/dr, dB_phi/dtheta
     ddcHelper::get<Rho_cov, Rho_cov>(grad_B) = 0.0;
     ddcHelper::get<Rho_cov, Theta_cov>(grad_B) = 0.0;
-    ddcHelper::get<Rho_cov, Phi_cov>(grad_B) = 0.0;
+    ddcHelper::get<Rho_cov, Phi_cov>(grad_B)
+            = (R0 + r * cos_t) * (-R0 - r * cos_t + 2 * (R0 + r) * cos_t) / ((R0 + r) * (R0 + r));
     ddcHelper::get<Theta_cov, Rho_cov>(grad_B) = 0.0;
     ddcHelper::get<Theta_cov, Theta_cov>(grad_B) = 0.0;
-    ddcHelper::get<Theta_cov, Phi_cov>(grad_B) = -std::sin(theta);
+    ddcHelper::get<Theta_cov, Phi_cov>(grad_B) = -2.0 * r * (R0 + r * cos_t) * sin_t / (R0 + r);
     ddcHelper::get<Phi_cov, Rho_cov>(grad_B) = 0.0;
     ddcHelper::get<Phi_cov, Theta_cov>(grad_B) = 0.0;
     ddcHelper::get<Phi_cov, Phi_cov>(grad_B) = 0.0;
@@ -132,13 +126,9 @@ TEST(CurlTests, specific_field_and_point)
     DVector<Rho, Theta, Phi> curl_B = curl(grad_B, coord);
 
     double eps = 1e-12;
-
-    // r component of curl at theta = pi/2 is
-    // curl_B_r
-    // = (cosh^2(r) / (a^2 * sinh(r))) * (-a sinh(r) / cosh(r))
-    // = - cosh(r) / a
-    double ref_curl_B_r = -std::cosh(r) / R0;
+    double ref_curl_B_r = -2 * sin_t / (r + R0);
+    double ref_curl_B_theta = (R0 - (2 * R0 + r) * cos_t) / (r * (r + R0) * (r + R0));
     EXPECT_NEAR(ddcHelper::get<Rho>(curl_B), ref_curl_B_r, eps);
-    EXPECT_NEAR(ddcHelper::get<Theta>(curl_B), 0.0, eps);
+    EXPECT_NEAR(ddcHelper::get<Theta>(curl_B), ref_curl_B_theta, eps);
     EXPECT_NEAR(ddcHelper::get<Phi>(curl_B), 0.0, eps);
 }
