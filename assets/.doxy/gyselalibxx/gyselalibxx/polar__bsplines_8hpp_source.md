@@ -498,7 +498,7 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
             }
         }
         jmin_r = first_tensor_product_radial_spline;
-    } else {
+    } else if constexpr (n_singular_basis() > 0) {
         for (std::size_t k(0); k < n_singular_basis(); ++k) {
             singular_values(k) = 0.0;
         }
