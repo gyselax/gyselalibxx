@@ -7,8 +7,7 @@
             - uniform/non-uniform cubic splines;
             - uniform/non-uniform Grid1 and Grid2; 
 */
-#pragma once
-
+#ifdef GEOM_NAMESPACE_NAME
 #define EXTEND_GEOMETRY
 #include "2patches_2d_non_periodic.hpp"
 
@@ -51,3 +50,4 @@ using WestEdge
 
 } // namespace GEOM_NAMESPACE_NAME
 #undef EXTEND_GEOMETRY
+#endif

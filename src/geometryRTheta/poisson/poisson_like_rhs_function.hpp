@@ -17,8 +17,8 @@ class PoissonLikeRHSFunction
 public:
     /// The type of the 2D Spline Evaluator used by this class
     using evaluator_type = ddc::SplineEvaluator2D<
-            Kokkos::DefaultHostExecutionSpace,
-            Kokkos::HostSpace,
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesR,
             BSplinesTheta,
             GridR,
@@ -29,7 +29,7 @@ public:
             ddc::PeriodicExtrapolationRule<Theta>>;
 
 private:
-    host_t<ConstSpline2D> const m_coefs;
+    ConstSpline2D const m_coefs;
     evaluator_type const& m_evaluator;
 
 public:
@@ -41,7 +41,7 @@ public:
 	 * @param[in] evaluator
 	 *      Evaluator on B-splines.
 	 */
-    PoissonLikeRHSFunction(host_t<ConstSpline2D> coefs, evaluator_type const& evaluator)
+    PoissonLikeRHSFunction(ConstSpline2D coefs, evaluator_type const& evaluator)
         : m_coefs(coefs)
         , m_evaluator(evaluator)
     {
@@ -55,7 +55,7 @@ public:
 	 *
 	 * @return A double with the value of the rhs at the given coordinate.
 	 */
-    double operator()(CoordRTheta const& coord_rtheta) const
+    KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const& coord_rtheta) const
     {
         return m_evaluator(coord_rtheta, m_coefs);
     }

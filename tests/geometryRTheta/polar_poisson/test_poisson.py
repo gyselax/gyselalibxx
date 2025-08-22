@@ -24,11 +24,11 @@ with subprocess.Popen([executable, input_file], stdout=subprocess.PIPE) as p:
     out, err = p.communicate()
 out = out.decode('ascii').strip()
 
-assert p.returncode == 0
 print(out)
 if err:
     err = err.decode('ascii')
     print(err)
+assert p.returncode == 0
 
 out_lines = out.split('\n')
 error_32 = [float(l.split(' ')[3]) for l in out_lines if "Max error :" in l][0]
