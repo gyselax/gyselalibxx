@@ -8,7 +8,6 @@
 #include "static_tensors.hpp"
 #include "vector_field.hpp"
 
-
 /**
  * @brief A class which implements a curl operator
  * The implemented equation is:
@@ -35,24 +34,18 @@ class Curl
 private:
     Mapping3D m_mapping;
     MetricTensorEvaluator<Mapping3D, MappingCoord> m_metric_tensor;
-    Gradient<MetricTensorEvaluator<Mapping3D, MappingCoord>> m_grad;
 
 public:
     /**
-     * @brief Build a LiePoissonBracket operator.
+     * @brief Build a curl operator.
      * @param mapping The mapping describing the system of coordinates on which the
      *              expression is calculated.
      */
-    explicit Curl(Mapping3D const& mapping)
-        : m_mapping(mapping)
-        , m_metric_tensor(mapping)
-        , m_grad(m_metric_tensor)
-    {
-    }
+    explicit Curl(Mapping3D const& mapping) : m_mapping(mapping), m_metric_tensor(mapping) {}
 
     /**
-     * @brief Compute the gyrokinetic Poisson bracket at a given coordinate, from
-     * the partial derivatives of the two fields, and the magnetic field.
+     * @brief Compute a curl at a given coordinate, from
+     * the partial derivatives of the vector field f
      *
      * @param[in] partial_derivatives_f A tensor containing the partial derivatives
      * of the vector field f expressed at the given coordinate.
