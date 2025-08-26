@@ -125,10 +125,10 @@ Such verifications are used throughout the codebase. They ensure that tensor ope
 With your basis defined via `VectorIndexSet`, you can now create actual vector and tensor objects. In Gyselalib++, these are represented by `Tensor`. A tensor is a multidimensional array of components defined over a tensor product of basis elements.
 For example, consider a 2D tensor `M` written as:
 $$
-M = m^i_{\;j} \boldsymbol{\eta}_i \otimes boldsymbol{b}^j
+M = m^i_{\;j} \boldsymbol{\eta}_i \otimes \boldsymbol{b}^j
 $$
 
-This object is defined over the tensor product of the contravariant basis $`\{\boldsymbol{\eta}_i\}`$ and the covariant basis $boldsymbol{b}^j$.
+This object is defined over the tensor product of the contravariant basis $`\{\boldsymbol{\eta}_i\}`$ and the covariant basis $\boldsymbol{b}^j$.
 Supposing the tensor components are of type `double`, this can be declared in Gyselalib++ as:
 
 ```cpp
@@ -276,7 +276,7 @@ DVectorField<
 > E;
 ```
 
-This corresponds, for example, to defining a contravariant electric field $`\boldsymbol{E}(\boldsymbol{r}) = E^1(r_i, \theta_j) \boldsymbol{e}_1 + E^2(r_i, \theta_j) \boldsymbol{\e}_2 = E_x(r_i, \theta_j) \hat{x} + E_y(r_i, \theta_j) \hat{y}`$ on a polar mesh.
+This corresponds, for example, to defining a contravariant electric field $`\boldsymbol{E}(\boldsymbol{r}) = E^1(r_i, \theta_j) \boldsymbol{e}_1 + E^2(r_i, \theta_j) \boldsymbol{e}_2 = E_x(r_i, \theta_j) \hat{x} + E_y(r_i, \theta_j) \hat{y}`$ on a polar mesh.
 
 ### Component Access and Assignment
 
