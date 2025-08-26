@@ -712,9 +712,9 @@ using UnknownBasisDual = vector_index_set_dual_t&lt;UnknownBasis&gt;);  // Compu
 <p>With your basis defined via <code>VectorIndexSet</code>, you can now create actual vector and tensor objects. In Gyselalib++, these are represented by <code>Tensor</code>. A tensor is a multidimensional array of components defined over a tensor product of basis elements.
 For example, consider a 2D tensor <code>M</code> written as:
 $$
-M = m^i_{\;j} \boldsymbol{\eta}_i \otimes boldsymbol{b}^j
+M = m^i_{\;j} \boldsymbol{\eta}_i \otimes \boldsymbol{b}^j
 $$</p>
-<p>This object is defined over the tensor product of the contravariant basis <span class="arithmatex">\(\{\boldsymbol{\eta}_i\}\)</span> and the covariant basis <span class="arithmatex">\(boldsymbol{b}^j\)</span>.
+<p>This object is defined over the tensor product of the contravariant basis <span class="arithmatex">\(\{\boldsymbol{\eta}_i\}\)</span> and the covariant basis <span class="arithmatex">\(\boldsymbol{b}^j\)</span>.
 Supposing the tensor components are of type <code>double</code>, this can be declared in Gyselalib++ as:</p>
 <pre><code class="language-cpp">Tensor&lt;double, EtaBasis, BBasis_cov&gt; M;
 </code></pre>
@@ -833,7 +833,7 @@ DTensor&lt;EtaBasis_cov, EtaBasis&gt; P = tensor_mul(index&lt;'i','j'&gt;(M), in
     CartesianBasis              // The basis on which the vectors are defined
 &gt; E;
 </code></pre>
-<p>This corresponds, for example, to defining a contravariant electric field <span class="arithmatex">\(\boldsymbol{E}(\boldsymbol{r}) = E^1(r_i, \theta_j) \boldsymbol{e}_1 + E^2(r_i, \theta_j) \boldsymbol{\e}_2 = E_x(r_i, \theta_j) \hat{x} + E_y(r_i, \theta_j) \hat{y}\)</span> on a polar mesh.</p>
+<p>This corresponds, for example, to defining a contravariant electric field <span class="arithmatex">\(\boldsymbol{E}(\boldsymbol{r}) = E^1(r_i, \theta_j) \boldsymbol{e}_1 + E^2(r_i, \theta_j) \boldsymbol{e}_2 = E_x(r_i, \theta_j) \hat{x} + E_y(r_i, \theta_j) \hat{y}\)</span> on a polar mesh.</p>
 <h3 id="component-access-and-assignment">Component Access and Assignment</h3>
 <p>The scalar fields in the vector fields can be extracted using <code>ddcHelper::select</code>. This allows components to be assigned as for scalar fields :</p>
 <pre><code class="language-cpp">IdxEta1 i;
