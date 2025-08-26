@@ -100,10 +100,10 @@ TEST(CurlTests, specific_field_and_point)
     ddc::init_discrete_space<GridPhi>(
             GridPhi::init<GridPhi>(Coord<Phi>(0.0), Coord<Phi>(2 * M_PI), nphi));
 
-    // We need to get theat = pi/2
+    // We need to get theta = pi/2
     Coord<Rho, Theta, Phi>
             coord(ddc::coordinate(Idx<GridRho, GridPhi>(nrho - 1, 0)),
-                  ddc::Coordinate<Theta>(Kokkos::numbers::pi / 2));
+                  Coord<Theta>(Kokkos::numbers::pi / 2));
     DTensor<CovBasisSpatial, CovBasisSpatial> grad_B;
 
     double const r = ddc::get<Rho>(coord);
