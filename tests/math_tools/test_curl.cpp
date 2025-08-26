@@ -35,18 +35,9 @@ TEST(CurlTests, irrotational_field_has_zero_curl)
 
     using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
-    IdxStepRho nrho(10);
-    IdxStepTheta ntheta(10);
-    IdxStepPhi nphi(2);
-    ddc::init_discrete_space<GridRho>(
-            GridRho::init<GridRho>(Coord<Rho>(0.0), Coord<Rho>(1.0), nrho));
-    ddc::init_discrete_space<GridTheta>(GridTheta::init<GridTheta>(
-            build_uniform_break_points(Coord<Theta>(0.0), Coord<Theta>(2 * M_PI), ntheta)));
-    ddc::init_discrete_space<GridPhi>(
-            GridPhi::init<GridPhi>(Coord<Phi>(0.0), Coord<Phi>(2 * M_PI), nphi));
 
-    Coord<Rho, Theta, Phi> coord
-            = ddc::coordinate(Idx<GridRho, GridTheta, GridPhi>(nrho - 1, ntheta - 5, 0));
+    // Consider a point with rho > 0
+    Coord<Rho, Theta, Phi> coord(0.5, Kokkos::numbers::pi / 2, Kokkos::numbers::pi);
     DTensor<CovBasisSpatial, CovBasisSpatial> grad_B;
 
     double const r = ddc::get<Rho>(coord);
@@ -72,7 +63,8 @@ TEST(CurlTests, irrotational_field_has_zero_curl)
 
 // Test the curl for a simple B-field where the
 // result can be analytically computed.
-// Let's use B = (0, 0, 1/(R0+r))
+// Let's use a contravariant vector
+// B = (0, 0, 1/(R0+r))
 TEST(CurlTests, specific_field_and_point)
 {
     using Mapping2D = CircularToCartesian<Rho, Theta, R, Z>;
@@ -90,20 +82,9 @@ TEST(CurlTests, specific_field_and_point)
 
     using BasisSpatial = VectorIndexSet<Rho, Theta, Phi>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
-    IdxStepRho nrho(10);
-    IdxStepTheta ntheta(10);
-    IdxStepPhi nphi(2);
-    ddc::init_discrete_space<GridRho>(
-            GridRho::init<GridRho>(Coord<Rho>(0.0), Coord<Rho>(1.0), nrho));
-    ddc::init_discrete_space<GridTheta>(GridTheta::init<GridTheta>(
-            build_uniform_break_points(Coord<Theta>(0.0), Coord<Theta>(2 * M_PI), ntheta)));
-    ddc::init_discrete_space<GridPhi>(
-            GridPhi::init<GridPhi>(Coord<Phi>(0.0), Coord<Phi>(2 * M_PI), nphi));
 
-    // We need to get theta = pi/2
-    Coord<Rho, Theta, Phi>
-            coord(ddc::coordinate(Idx<GridRho, GridPhi>(nrho - 1, 0)),
-                  Coord<Theta>(Kokkos::numbers::pi / 2));
+    // Consider a point with rho > 0
+    Coord<Rho, Theta, Phi> coord(0.5, Kokkos::numbers::pi / 2, Kokkos::numbers::pi);
     DTensor<CovBasisSpatial, CovBasisSpatial> grad_B;
 
     double const r = ddc::get<Rho>(coord);
@@ -112,6 +93,7 @@ TEST(CurlTests, specific_field_and_point)
     double const sin_t = std::sin(theta);
 
     // Compute dB_phi/dr, dB_phi/dtheta
+    // B_i needs to be computed by g_ij B^j
     ddcHelper::get<Rho_cov, Rho_cov>(grad_B) = 0.0;
     ddcHelper::get<Rho_cov, Theta_cov>(grad_B) = 0.0;
     ddcHelper::get<Rho_cov, Phi_cov>(grad_B)

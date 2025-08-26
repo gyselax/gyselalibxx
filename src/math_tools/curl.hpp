@@ -51,13 +51,14 @@ public:
      * of the vector field f expressed at the given coordinate.
      * @param[in] coord The coordinate where the calculation is carried out.
      */
-    template <
-            class TensorType,
-            class = std::enable_if_t<is_tensor_type_v<TensorType> && TensorType::rank() == 2>>
-    KOKKOS_INLINE_FUNCTION auto operator()(
-            TensorType const& partial_derivatives_f,
+    template <class T, class CovBasisF>
+    KOKKOS_INLINE_FUNCTION Tensor<T, get_contravariant_dims_t<CovBasisF>> operator()(
+            Tensor<T, CovBasisSpatial, CovBasisF> const& partial_derivatives_f,
             MappingCoord const& coord) const
     {
+        static_assert(
+                is_covariant_vector_index_set_v<CovBasisF>,
+                "Expected the derivative of f expressed in the covariant basis");
         double J = m_mapping.jacobian(coord);
         LeviCivitaTensor<double, BasisSpatial> eps(J);
         return tensor_mul(index<'k', 'l', 'm'>(eps), index<'l', 'm'>(partial_derivatives_f));
