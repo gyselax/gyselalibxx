@@ -6,17 +6,6 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 # NOTE: We are not supposed to define CMAKE_BUILD_TYPE here.
 set(CMAKE_BUILD_TYPE Release) # Debug, Release, RelWithDebInfo and MinSizeRel
 
-# Kokkos options
-set(Kokkos_ENABLE_OPENMP ON CACHE BOOL "")
-set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "")
-set(Kokkos_ARCH_ZEN4 ON CACHE BOOL "Optimize for AMD Zen4 architecture (HOST).")
-
-# Kokkos Kernels options
-set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
-set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
-set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
-set(KokkosKernels_ADD_DEFAULT_ETI OFF CACHE BOOL "")
-
 # Koliop options:
 
 set(koliop_ENABLE_LTO OFF CACHE BOOL "")
@@ -27,7 +16,7 @@ set(koliop_ENABLE_LTO OFF CACHE BOOL "")
 set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -Wall -Wextra -Wpedantic -Wcast-align -Wformat=2 -Winit-self -Woverloaded-virtual -Wsign-promo -Wstrict-aliasing -Wdisabled-optimization -Wtautological-compare -Wpacked -Wunreachable-code -Wno-sign-compare -Wno-unused-parameter -Wno-unused-but-set-variable")
 
 # FIXME: blas are not properly detected.
-set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -isystem $ENV{CRAY_LIBSCI_PREFIX}/include" CACHE STRING "")
+set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -isystem $ENV{CRAY_LIBSCI_PREFIX}/include")
 
 # NOTE: People often export this as environment variable instead.
 set(BLAS_LIBRARIES "$ENV{CRAY_LIBSCI_PREFIX}/lib/libsci_gnu_mp.so;" CACHE STRING "")

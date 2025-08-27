@@ -35,9 +35,11 @@ mkdir -p -- "${SPACK_USER_CONFIG_PATH}/external-repositories"
 
 # Inject recent PDI recipes into our repository.
 git clone https://github.com/pdidev/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi" || true
+git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi" fetch
 git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi" checkout 5483cfea7d2d39d654c2962114248f597b3ecf46
 
 git clone https://github.com/gyselax/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" || true
+git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" fetch
 git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" checkout releases/v0.23
 git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" pull
 
