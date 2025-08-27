@@ -17,7 +17,7 @@ on:
       merge_target:
         description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
         required: false
-        default: devel
+        default: origin/devel
         type: string
 
 concurrency:
@@ -26,6 +26,7 @@ concurrency:
 
 env:
   SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+  CHANGES_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || inputs.merge_target }}
 
 jobs:
   pre_job:

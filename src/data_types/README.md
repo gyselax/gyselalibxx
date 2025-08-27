@@ -16,6 +16,8 @@ The classes DerivFieldMem and DerivField provide a way to represent a field with
 The values and the different combinations of derivatives are each stored in their own field as these objects usually have different index ranges. The field itself can be accessed using slicing methods (`operator[]`). The values additionally have a helper method `get_values_field`.
 When slicing a DerivField, you can use either idx ranges or individual indices. These describe the derivatives which should appear in the field of interest and any additional information necessary to obtain a Field. If a dimension is not described then it is assumed that the derivative in this direction is not of interest.
 
+E.g. to get the `Field` representing the first derivative in x you need to slice the relevant x derivatives, as well as any spatial slicing that may be needed.
+
 Beware: A DDC Field cannot store data defined on a non-contiguous index range (e.g. an IdxRangeSlice) so when accessing derivatives the position of the derivative must also be included in the slice index.
 
 As for VectorField it is advised to use this object for storage and to interact with the underlying fields directly. However the utility function `ddcHelper::deepcopy` is nevertheless provided.

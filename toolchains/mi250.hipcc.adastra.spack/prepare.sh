@@ -27,19 +27,18 @@ spack debug report
 mkdir -p -- "${SPACK_USER_CONFIG_PATH}/external-repositories"
 
 # Inject recent PDI recipes into our repository.
-git clone https://github.com/pdidev/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" || true
-cd -- "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack" && git fetch && git checkout 5483cfea7d2d39d654c2962114248f597b3ecf46 && cd -
+git clone https://github.com/pdidev/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi" || true
+git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi" checkout 5483cfea7d2d39d654c2962114248f597b3ecf46
 
-git clone https://github.com/spack/spack spack.spack || true
-cd spack.spack && git fetch && git checkout 8e7489b && cd ..
-cp -rf -- spack.spack/var/spack/repos/builtin/packages/ginkgo "${SPACK_USER_CONFIG_PATH}/local-repo/packages"
-
-sed -i '/args.append("-DGINKGO_HIP_AMDGPU={0}".format(arch_str))/a\                args.append("-DCMAKE_HIP_ARCHITECTURES={0}".format(arch_str))' "${SPACK_USER_CONFIG_PATH}/local-repo/packages/ginkgo/package.py"
+git clone https://github.com/gyselax/spack "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" || true
+git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" checkout releases/v0.23
+git -C "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx" pull
 
 spack env remove --yes-to-all gyselalibxx-spack-environment
 spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyselalibxx-spack-environment.yaml"
 
-spack --env gyselalibxx-spack-environment repo add "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi.spack"
+spack --env gyselalibxx-spack-environment repo add "${SPACK_USER_CONFIG_PATH}/external-repositories/pdi"
+spack --env gyselalibxx-spack-environment repo add "${SPACK_USER_CONFIG_PATH}/external-repositories/gyselalibxx"
 
 echo "Preparing the Spack environment..."
 

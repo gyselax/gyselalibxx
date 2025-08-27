@@ -210,7 +210,7 @@ public:
                     = max_relative_error > relative_error ? max_relative_error : relative_error;
         });
         return max_relative_error;
-    };
+    }
 };
 
 

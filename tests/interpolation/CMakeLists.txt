@@ -34,7 +34,6 @@ gtest_discover_tests(bernstein_tests DISCOVERY_MODE PRE_TEST)
 add_executable(polar_bsplines_tests
     ../main.cpp
     polar_bsplines.cpp
-    polar_spline_create_mirror.cpp
 )
 target_compile_features(polar_bsplines_tests PUBLIC cxx_std_17)
 target_link_libraries(polar_bsplines_tests

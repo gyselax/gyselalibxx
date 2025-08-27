@@ -62,7 +62,7 @@ private:
     int m_max_iter;
     double m_tol;
     bool m_with_logger;
-    unsigned int m_preconditionner_max_block_size; // Maximum size of Jacobi-block preconditionner
+    unsigned int m_preconditioner_max_block_size; // Maximum size of Jacobi-block preconditioner
 
 public:
     /**
@@ -75,7 +75,7 @@ public:
      * @param[in] res_tol residual tolerance parameter, to ensure convergence. Be careful! the relative residual 
      * provided here, will be used as "implicit residual" in ginkgo solver.
      * @param[in] logger boolean parameter for saving log information such residual and interactions count.
-     * @param[in] preconditionner_max_block_size An optional parameter used to define the maximum size of a block
+     * @param[in] preconditioner_max_block_size An optional parameter used to define the maximum size of a block
      */
     explicit MatrixBatchCsr(
             const int batch_size,
@@ -84,13 +84,13 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt,
-            std::optional<int> preconditionner_max_block_size = 1u)
+            std::optional<int> preconditioner_max_block_size = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_size, mat_size)
         , m_max_iter(max_iter.value_or(1000))
         , m_tol(res_tol.value_or(1e-15))
         , m_with_logger(logger.value_or(false))
-        , m_preconditionner_max_block_size(preconditionner_max_block_size.value_or(
-                  default_preconditionner_max_block_size<ExecSpace>()))
+        , m_preconditioner_max_block_size(preconditioner_max_block_size.value_or(
+                  default_preconditioner_max_block_size<ExecSpace>()))
     {
         std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_csr = gko::share(
@@ -115,7 +115,7 @@ public:
      * provided here, set as relative residual, will be used as "implicit residual" in ginkgo solver.
      * Default value is set to 1e-15.
      * @param[in] logger boolean parameter to save logger information. Default value false.
-     * @param[in] preconditionner_max_block_size An optional parameter used to define the maximum size of a block
+     * @param[in] preconditioner_max_block_size An optional parameter used to define the maximum size of a block
      */
     explicit MatrixBatchCsr(
             Kokkos::View<double**, Kokkos::LayoutRight, ExecSpace> batch_values,
@@ -124,13 +124,13 @@ public:
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt,
-            std::optional<int> preconditionner_max_block_size = 1u)
+            std::optional<int> preconditioner_max_block_size = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_values.extent(0), nnz_per_row.size() - 1)
         , m_max_iter(max_iter.value_or(1000))
         , m_tol(res_tol.value_or(1e-15))
         , m_with_logger(logger.value_or(false))
-        , m_preconditionner_max_block_size(preconditionner_max_block_size.value_or(
-                  default_preconditionner_max_block_size<ExecSpace>()))
+        , m_preconditioner_max_block_size(preconditioner_max_block_size.value_or(
+                  default_preconditioner_max_block_size<ExecSpace>()))
     {
         std::shared_ptr const gko_exec = gko::ext::kokkos::create_executor(ExecSpace());
         m_batch_matrix_csr = gko::share(
@@ -206,7 +206,7 @@ public:
 
             std::shared_ptr const preconditioner
                     = gko::preconditioner::Jacobi<double>::build()
-                              .with_max_block_size(m_preconditionner_max_block_size)
+                              .with_max_block_size(m_preconditioner_max_block_size)
                               .on(gko_exec);
 
             std::unique_ptr const solver_factory
@@ -224,7 +224,7 @@ public:
             // Create the solver factory
             std::shared_ptr const preconditioner
                     = gko::batch::preconditioner::Jacobi<double, int>::build()
-                              .with_max_block_size(m_preconditionner_max_block_size)
+                              .with_max_block_size(m_preconditioner_max_block_size)
                               .on(gko_exec);
 
             std::shared_ptr solver_factory = solver_type::build()
