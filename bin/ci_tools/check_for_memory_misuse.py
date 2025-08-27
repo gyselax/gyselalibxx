@@ -3,7 +3,6 @@ Check that CPU/GPU memory patterns are respected.
 This file should be run using ./bin/run_cppcheck
 """
 import sys
-import warnings
 
 import cppcheckdata #pylint: disable=import-error
 
