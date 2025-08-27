@@ -634,7 +634,9 @@ public:
             class... Params,
             class = std::enable_if_t&lt;(std::is_convertible_v&lt;Params, ElementType&gt; &amp;&amp; ...)&gt;,
             class = std::enable_if_t&lt;
-                    sizeof...(Params) == base_type::size() &amp;&amp; sizeof...(Params) != 1&gt;&gt;
+                    sizeof...(Params) == base_type::size()
+                    &amp;&amp; sizeof...(Params) != 1&gt; // Avoid syntax error in cppcheck
+            &gt;
     explicit KOKKOS_FUNCTION Tensor(Params... elements)
     {
         static_assert(
