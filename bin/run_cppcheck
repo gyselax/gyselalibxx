@@ -57,5 +57,10 @@ if __name__ == '__main__':
 
     if not args.no_clean_up:
         shutil.rmtree(build_dir)
+        for folder in relevant_folders:
+            for file in folder.glob('**/*.ctu-info'):
+                os.remove(file)
+            for file in folder.glob('**/*.cpp.*.dump'):
+                os.remove(file)
 
-    sys.exit(p.exitcode)
+    sys.exit(p.returncode)
