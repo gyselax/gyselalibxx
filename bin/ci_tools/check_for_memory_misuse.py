@@ -102,6 +102,9 @@ def main():
                 if not hasattr(scope, 'exec_space'):
                     continue
 
+                if scope.bodyStart.file != f:
+                    continue
+
                 # Find all variables used in this scope
                 used_vars = {}
                 body_token = scope.bodyStart
@@ -122,12 +125,11 @@ def main():
                     if func_scope.type == 'Global':
                         class_scope = None
                     else:
-                        func_close_brackets = func_scope.bodyStart
-                        while func_close_brackets.str != ')':
-                            func_close_brackets = func_close_brackets.previous
-                        func_id = func_close_brackets.link.previous.functionId
-                        func = next(f for f in cfg.functions if f.Id == func_id)
-                        class_scope = func.nestedIn
+                        possible_funcs = [f for f in cfg.functions if f.name == func_scope.className]
+                        assert len(possible_funcs) == 1
+                        class_scope = scope.nestedIn
+                        while class_scope.type not in ('Class', 'Struct', 'Global'):
+                            class_scope = class_scope.nestedIn
 
                 class_captured = 'CLASS' in scope.exec_type or scope.nestedIn.type in ('Class', 'Struct')
 
