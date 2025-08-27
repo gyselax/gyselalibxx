@@ -15,7 +15,6 @@ extend-ignore-re = ["capitalize()",
                     "Gif-sur-Yvette",
                     "GYSELALIBXX_HOME",
                     "compute-sanitizer",
-                    "MINIMIZE",
                     "minimize_tol"
                     ]
 extend-ignore-identifiers-re = [
