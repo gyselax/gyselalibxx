@@ -14,7 +14,8 @@ extend-ignore-re = ["capitalize()",
                     "unrecognized_links",
                     "Gif-sur-Yvette",
                     "GYSELALIBXX_HOME",
-                    "compute-sanitizer"
+                    "compute-sanitizer",
+                    "minimize_tol"
                     ]
 extend-ignore-identifiers-re = [
     "Comput. Phys. Commun.",
