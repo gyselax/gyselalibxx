@@ -53,7 +53,7 @@ public:
      */
     template <class T, class CovBasisF>
     KOKKOS_INLINE_FUNCTION Tensor<T, get_contravariant_dims_t<CovBasisF>> operator()(
-            Tensor<T, CovBasisSpatial, CovBasisF> const& partial_derivatives_f,
+            Tensor<T, CovBasisF, CovBasisSpatial> const& partial_derivatives_f,
             MappingCoord const& coord) const
     {
         static_assert(
@@ -61,6 +61,8 @@ public:
                 "Expected the derivative of f expressed in the covariant basis");
         double J = m_mapping.jacobian(coord);
         LeviCivitaTensor<double, BasisSpatial> eps(J);
-        return tensor_mul(index<'k', 'l', 'm'>(eps), index<'l', 'm'>(partial_derivatives_f));
+
+        // The following code computes: 1/sqrt(g) * eps^{klm} \nabla_{l} F_{m}
+        return tensor_mul(index<'k', 'l', 'm'>(eps), index<'m', 'l'>(partial_derivatives_f));
     }
 };
