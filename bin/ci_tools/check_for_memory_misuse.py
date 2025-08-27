@@ -30,8 +30,16 @@ def main():
 
             class_scope = None
 
+            # Sort scopes hiererachically
+            scopes_to_add = set(cfg.scopes)
+            scopes = []
+            while scopes_to_add:
+                valid_scopes = [s for s in scopes_to_add if s.nestedIn is None or s.nestedIn in scopes]
+                scopes.extend(valid_scopes)
+                scopes_to_add.difference_update(valid_scopes)
+
             # Find execution space for each scope
-            for scope in cfg.scopes:
+            for scope in scopes:
                 # Only functions and lambdas have an execution space
                 if scope.type not in ('Function', 'Unconditional'):
                     continue
@@ -41,6 +49,13 @@ def main():
                 start_idx = next((tok_idx-i for i, tok in enumerate(reversed(cfg.tokenlist[:tok_idx]),1) if tok.str in ('{', '}', ';')), 0)
                 # Find any KOKKOS macros in the declaration
                 exec_type = next((tok.str for tok in cfg.tokenlist[start_idx:tok_idx] if 'KOKKOS_' in tok.str), 'CPU')
+
+                # Check parent scope. A bare for in a GPU loop is still on GPU
+                parent_scope = scope
+                while parent_scope.nestedIn and exec_type == 'CPU' and parent_scope.nestedIn.type in ('Function', 'Unconditional'):
+                    parent_scope = parent_scope.nestedIn
+                    if parent_scope.exec_space == 'GPU':
+                        exec_type = parent_scope.exec_type
 
                 # Set the exec space (CPU/GPU) and the exec_type (KOKKOS_FUNCTION, KOKKOS_LAMBDA, etc)
                 scope.exec_type = exec_type
@@ -175,7 +190,12 @@ def main():
                 for var in used_vars:
                     if hasattr(var, 'mem_space'):
                         if var.mem_space != scope.exec_space:
-                            usage = [tok for tok in body if tok.variable == var and tok.next.str == '(']
+                            # Check for variables that are actually accessed in this scope
+                            usage = [tok for tok in body if tok.variable == var and tok.next.str == '(' and tok.scope == scope]
+                            try:
+                                usage.remove(var.typeEndToken.next)
+                            except ValueError:
+                                pass
                             for tok in usage:
                                 msg = ("Attempted memory access from the wrong execution space. "
                                       f"The current execution space is \"{scope.exec_space}\" but the variable "
