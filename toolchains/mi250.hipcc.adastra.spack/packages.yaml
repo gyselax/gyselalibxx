@@ -1,19 +1,15 @@
 ---
 packages:
   all:
-    compiler: [gcc@13.2.1.mi250]
+    compiler: [gcc@13.2.1.mi250.raw]
     target: [zen3]
     permissions:
       write: group
     providers:
       mpi: [cray-mpich]
-      blas: [cray-libsci, openblas]
-      lapack: [cray-libsci, openblas]
-      blacs: [cray-libsci]
-      scalapack: [cray-libsci]
-      netlib-scalapack: [cray-libsci]
-      mkl: [cray-libsci]
-      fftw: [cray-fftw]
+      blas: [openblas]
+      lapack: [openblas]
+      fftw-api: [fftw]
       opencl: [rocm-opencl@6.3.3]
       opencl-runtime: [rocm-opencl-runtime@6.3.3]
     require:
@@ -28,18 +24,12 @@ packages:
     version: [8.1.30]
     externals:
       - spec: cray-mpich@8.1.30
+        prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/11.2
         modules:
+          - gcc-native/13.2
+          - craype-network-ofi
+          - craype/2.7.32
           - cray-mpich/8.1.30
-  cray-libsci:
-    buildable: false
-    version: [23.12.5, 24.07.0]
-    externals:
-      - spec: cray-libsci@23.12.5
-        modules:
-          - cray-libsci/23.12.5
-      - spec: cray-libsci@24.07.0
-        modules:
-          - cray-libsci/24.07.0
   hip:
     buildable: false
     externals:
