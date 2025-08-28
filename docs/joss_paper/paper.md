@@ -115,7 +115,7 @@ Via DDC, Gyselalib++ also leverages the Kokkos framework [@trott2022], ensuring 
 The library provides a variety of tools including semi-Lagrangian advection operators, quadrature rules, and solvers for elliptical and hyperbolic partial differential equations (PDEs).
 The majority of the operators are designed to work on non-orthonormal coordinate systems; those that don't use the static typing to raise compiler errors preventing their misuse.
 
-## Statement of Need
+## Gyrokinetic Simulations
 
 Plasma simulations are essential for the development of magnetic confinement fusion devices for energy production.
 The low collisionality of such plasmas makes kinetic models a judicious choice.
@@ -129,6 +129,8 @@ However, expanding this code to use more complex mathematical methods such as no
 These complexities are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exascale simulations.
 This is a challenge shared by other gyrokinetic codes [@trilaksono2025].
 
+## Statement of Need
+
 In the case of GYSELA, the necessary changes would have required an effort comparable to a complete rewrite; whereas, actually performing such a rewrite brings additional benefits for design and portability.
 For example, we have been able to capitalise on C++'s strengths by using template programming to enforce the correctness of the implemented equations.
 A common source of error is writing equations with implicit assumptions, such as assuming an orthonormal coordinate system, or specific properties like those of a circular coordinate system.
@@ -140,6 +142,16 @@ This is particularly useful when working with multiple grids along the same dime
 In contrast to GYSELA, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit-tested and can be combined to build a final simulation.
 This design makes the library more versatile, enabling users to rapidly assemble a wide range of simulations, including high-dimensional test cases.
 The shared elements also provide more confidence in the reliability of the implementation, as they can prove their validity across multiple applications.
+
+## State of the Field
+
+Most established gyrokinetic simulations, such as GENE-X [@MICHELS2021107986] and GT5D [@Idomura_2009], are written in Fortran as stand-alone codes.
+This  limits code sharing and reuse between projects.
+In contrast, many particle-in-cell codes are now developed around reusable libraries such as Smilei [@DEROUILLAT2018351] and AMReX [@AMReX_JOSS].
+To our knowledge, Gyselalib++ is the first such C++ library for gyrokinetic applications.
+The Fortran library SeLaLib [@selalib] plays a similar role in Fortran.
+
+## Contents
 
 Gyselalib++ includes a range of reusable mathematical operators for plasma simulations.
 These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), solvers for common PDEs, and a multi-species collision operator [@Donnel2019].
