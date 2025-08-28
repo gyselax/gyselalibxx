@@ -14,12 +14,8 @@ cd -- "${TOOLCHAIN_ROOT_DIRECTORY}"
 
 SPACK_USER_VERSION="spack-user-4.0.0"
 
-# [TO BE REVERTED BEFORE MERGE]
-export SPACK_USER_PREFIX=/lus/home/CT5/gen2224/tpadioleau/spack-user-install
-export SPACK_USER_CONFIG_PATH=/lus/home/CT5/gen2224/tpadioleau/spack-user-install/configuration
-export SPACK_USER_CACHE_PATH=/lus/home/CT5/gen2224/tpadioleau/spack-user-install/cache
-# export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
-# export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
+export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 module purge
 module load "${SPACK_USER_VERSION}"
@@ -53,12 +49,10 @@ echo "Preparing the Spack environment..."
 
 spack --env gyselalibxx-spack-environment concretize --force
 
-# [TO BE REVERTED BEFORE MERGE]
-# for ((i = 0; i < 8; ++i)); do
-#     spack --env gyselalibxx-spack-environment install --jobs 48 &
-# done
+for ((i = 0; i < 8; ++i)); do
+    spack --env gyselalibxx-spack-environment install --jobs 48 &
+done
 
-# wait
-spack --env gyselalibxx-spack-environment install --jobs 48
+wait
 
 # spack --env gyselalibxx-spack-environment module tcl refresh --delete-tree --yes-to-all

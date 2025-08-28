@@ -9,12 +9,8 @@ fi
 
 SPACK_USER_VERSION="spack-user-4.0.0"
 
-# [TO BE REMOVED BEFORE MERGE]
-export SPACK_USER_PREFIX=/lus/home/CT5/gen2224/tpadioleau/spack-user-install
-export SPACK_USER_CONFIG_PATH=/lus/home/CT5/gen2224/tpadioleau/spack-user-install/configuration
-export SPACK_USER_CACHE_PATH=/lus/home/CT5/gen2224/tpadioleau/spack-user-install/cache
-# export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
-# export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
+export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 module purge
 
