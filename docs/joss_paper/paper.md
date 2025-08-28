@@ -110,7 +110,7 @@ bibliography: paper.bib
 ## Summary
 
 Gyselalib++ provides the mathematical building blocks to construct kinetic or gyrokinetic plasma simulation codes in C++, simulating a distribution function discretised in phase space on a fixed grid.
-It relies on the DDC library [@ddc] to statically type the discretisation dimensions; thus preventing many common sources of errors.
+It relies on the Discrete Domain Computation (DDC) library [@ddc] to statically type the discretisation dimensions; thus preventing many common sources of errors.
 Via DDC, Gyselalib++ also leverages the Kokkos framework [@trott2022], ensuring performance portability across various CPU and GPU architectures.
 The library provides a variety of tools including semi-Lagrangian advection operators, quadrature rules, and solvers for elliptical and hyperbolic partial differential equations (PDEs).
 The majority of the operators are designed to work on non-orthonormal coordinate systems; those that don't use the static typing to raise compiler errors preventing their misuse.
@@ -131,7 +131,7 @@ This is a challenge shared by other gyrokinetic codes [@trilaksono2025].
 
 ## Statement of Need
 
-In the case of GYSELA, the necessary changes would have required an effort comparable to a complete rewrite; whereas, actually performing such a rewrite brings additional benefits for design and portability.
+In the case of GYSELA, the changes necessary to add non-uniform points and simplify the implementation of other new features, would have required an effort comparable to a complete rewrite; whereas, actually performing such a rewrite brings additional benefits for design and portability.
 For example, we have been able to capitalise on C++'s strengths by using template programming to enforce the correctness of the implemented equations.
 A common source of error is writing equations with implicit assumptions, such as assuming an orthonormal coordinate system, or specific properties like those of a circular coordinate system.
 In Gyselalib++, equations are either expressed in tensor notation, so that they are either accurate for all geometries or do not compile, or they explicitly state their dependencies.
