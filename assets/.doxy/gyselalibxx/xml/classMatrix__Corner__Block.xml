@@ -316,7 +316,7 @@
 <para>Solve the matrix equation in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="319">$ M x = b $</formula> The result <formula id="110">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="323">$ M x = b $</formula> The result <formula id="110">$ x $</formula> is saved into the memory allocated for <formula id="324">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">b</parametername>
@@ -350,7 +350,7 @@
 <para>Solve the transposed matrix equation in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="321">$ M^T x = b $</formula> The result <formula id="110">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="325">$ M^T x = b $</formula> The result <formula id="110">$ x $</formula> is saved into the memory allocated for <formula id="324">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">b</parametername>
@@ -384,7 +384,7 @@
 <para>Solve multiple matrix equations in place. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solve the following matrix equation: <formula id="319">$ M x = b $</formula> for multiple values of <formula id="320">$ b $</formula> and <formula id="110">$ x $</formula>. The first dimension is iterated over with each slice representing an equation to be solved. The result <formula id="110">$ x $</formula> is saved into the memory allocated for <formula id="320">$ b $</formula>.</para>
+<para>Solve the following matrix equation: <formula id="323">$ M x = b $</formula> for multiple values of <formula id="324">$ b $</formula> and <formula id="110">$ x $</formula>. The first dimension is iterated over with each slice representing an equation to be solved. The result <formula id="110">$ x $</formula> is saved into the memory allocated for <formula id="324">$ b $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">bx</parametername>
@@ -489,15 +489,15 @@
         <qualifiedname>Matrix_Corner_Block::calculate_delta_to_factorise</qualifiedname>
         <reimplementedby refid="classMatrix__Periodic__Banded_1aee86db5b39602e586ee431aa84bc5874">calculate_delta_to_factorise</reimplementedby>
         <briefdescription>
-<para>Calculate the contents of the dense matrix <formula id="324">$ delta&apos; $</formula> that will be factorised. This is the element <formula id="324">$ delta&apos; $</formula> of the blockwise LU decomposition of the matrix. </para>
+<para>Calculate the contents of the dense matrix <formula id="328">$ delta&apos; $</formula> that will be factorised. This is the element <formula id="328">$ delta&apos; $</formula> of the blockwise LU decomposition of the matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para><verbatim>L = |   Q    |    0   |
     | lambda | delta&apos; |
 </verbatim> It is defined as:</para>
-<para><formula id="325">$ \delta&apos; = \delta - \lambda \beta $</formula></para>
-<para>With <formula id="326">$ \beta $</formula> the solution of the equation:</para>
-<para><formula id="327">$ Q \beta = \gamma $</formula></para>
+<para><formula id="329">$ \delta&apos; = \delta - \lambda \beta $</formula></para>
+<para>With <formula id="330">$ \beta $</formula> the solution of the equation:</para>
+<para><formula id="331">$ Q \beta = \gamma $</formula></para>
 <para>which should already be stored in the variable Abm_1_gamma when this method is called. </para>
         </detaileddescription>
         <inbodydescription>
@@ -523,8 +523,8 @@
 <para>Calculate the solution to the following equation: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="328">$ v - \lambda u $</formula></para>
-<para>The result is saved into the argument <formula id="329">$ v $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
+<para><formula id="332">$ v - \lambda u $</formula></para>
+<para>The result is saved into the argument <formula id="333">$ v $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">v</parametername>
@@ -569,8 +569,8 @@
 <para>Calculate the solution to the following equation: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="330">$ u - \lambda v $</formula></para>
-<para>The result is saved into the argument <formula id="331">$ u $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
+<para><formula id="334">$ u - \lambda v $</formula></para>
+<para>The result is saved into the argument <formula id="335">$ u $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">u</parametername>
@@ -614,8 +614,8 @@
 <para>Calculate the solution to the following equation: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="332">$ u - \beta e $</formula></para>
-<para>The result is saved into the argument <formula id="331">$ u $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
+<para><formula id="336">$ u - \beta e $</formula></para>
+<para>The result is saved into the argument <formula id="335">$ u $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">u</parametername>
@@ -659,8 +659,8 @@
 <para>Calculate the solution to the following equation: </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="333">$ v - \beta u $</formula></para>
-<para>The result is saved into the argument <formula id="329">$ v $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
+<para><formula id="337">$ v - \beta u $</formula></para>
+<para>The result is saved into the argument <formula id="333">$ v $</formula>. This calculation is one of the steps necessary to solve the matrix equation.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">v</parametername>

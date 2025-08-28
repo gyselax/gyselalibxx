@@ -576,6 +576,14 @@
     <member refid="classCrankNicolsonBuilder_1a3a21ef1dbfdd98ea8b0e1d17f40a2a3e" kind="function"><name>CrankNicolsonBuilder</name></member>
     <member refid="classCrankNicolsonBuilder_1a24223feb261747e262c51a08ce2a834a" kind="function"><name>preallocate</name></member>
   </compound>
+  <compound refid="classCurl" kind="class"><name>Curl</name>
+    <member refid="classCurl_1a97f67a8c712a875caa7c22a14c144866" kind="typedef"><name>BasisSpatial</name></member>
+    <member refid="classCurl_1a0f648caba213cfd265c502ad842bd405" kind="typedef"><name>CovBasisSpatial</name></member>
+    <member refid="classCurl_1a35c9320e66af62312768d2f42a30f8bb" kind="variable"><name>m_mapping</name></member>
+    <member refid="classCurl_1af8f205c567c7c066570398a0fc1d2e47" kind="variable"><name>m_metric_tensor</name></member>
+    <member refid="classCurl_1a9cb52bec55d7d60e3ce868232c8450c6" kind="function"><name>Curl</name></member>
+    <member refid="classCurl_1a32ec3619b9102ba23a85fabc5353a6d5" kind="function"><name>operator()</name></member>
+  </compound>
   <compound refid="classCylindricalToCartesian" kind="class"><name>CylindricalToCartesian</name>
     <member refid="classCylindricalToCartesian_1a5b9d946ab8eaacbfe7ee1cd4c6218f7d" kind="typedef"><name>cartesian_tag_x</name></member>
     <member refid="classCylindricalToCartesian_1a030b1b72b6a02eecfca2a36b4649ae8d" kind="typedef"><name>cartesian_tag_y</name></member>
@@ -2923,13 +2931,13 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d210" kind="namespace"><name>@210</name>
+  <compound refid="namespace_0d211" kind="namespace"><name>@211</name>
   </compound>
-  <compound refid="namespace_0d212" kind="namespace"><name>@212</name>
+  <compound refid="namespace_0d213" kind="namespace"><name>@213</name>
   </compound>
-  <compound refid="namespace_0d214" kind="namespace"><name>@214</name>
+  <compound refid="namespace_0d215" kind="namespace"><name>@215</name>
   </compound>
-  <compound refid="namespace_0d216" kind="namespace"><name>@216</name>
+  <compound refid="namespace_0d217" kind="namespace"><name>@217</name>
   </compound>
   <compound refid="namespace_0d93" kind="namespace"><name>@93</name>
   </compound>
@@ -3811,6 +3819,8 @@
   <compound refid="central__fdm__partial__derivatives__with__boundary__values_8hpp" kind="file"><name>central_fdm_partial_derivatives_with_boundary_values.hpp</name>
   </compound>
   <compound refid="constant__partial__derivatives_8hpp" kind="file"><name>constant_partial_derivatives.hpp</name>
+  </compound>
+  <compound refid="curl_8hpp" kind="file"><name>curl.hpp</name>
   </compound>
   <compound refid="gradient_8hpp" kind="file"><name>gradient.hpp</name>
   </compound>

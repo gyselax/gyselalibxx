@@ -55,6 +55,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**RK3**](classRK3.md) _A class which provides an implementation of a third-order Runge-Kutta method._ 
     * **class** [**RK4**](classRK4.md) _A class which provides an implementation of a fourth-order Runge-Kutta method._ 
 * **class** [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md) _A class to indicate that a Crank-Nicolson time stepper should be constructed for use in other operators._ 
+* **class** [**Curl**](classCurl.md) _A class which implements a curl operator The implemented equation is:_ \(\nabla \cross \mathbf{F}\) __\(\nabla \cross \mathbf{F} = {\cal J}_{\rm x}^{-1}\epsilon^{klm}\partial_{x^l} F_m\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(F_m\) _the covariant components of F and_\(\epsilon^{klm}\) _the Levi-Civita symbol._
 * **class** [**CylindricalToCartesian**](classCylindricalToCartesian.md) _A class for describing the cylindrical 3D mapping._ 
 * **class** [**CzarnyToCartesian**](classCzarnyToCartesian.md) _A class for describing the Czarny 2D mapping._ 
 * **class** [**DerivField**](classDerivField.md) 

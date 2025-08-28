@@ -196,6 +196,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**central\_fdm\_partial\_derivatives.hpp**](central__fdm__partial__derivatives_8hpp.md)     
         * **file** [**central\_fdm\_partial\_derivatives\_with\_boundary\_values.hpp**](central__fdm__partial__derivatives__with__boundary__values_8hpp.md)     
         * **file** [**constant\_partial\_derivatives.hpp**](constant__partial__derivatives_8hpp.md)     
+        * **file** [**curl.hpp**](curl_8hpp.md)     
         * **file** [**gradient.hpp**](gradient_8hpp.md)     
         * **file** [**ipartial\_derivative.hpp**](ipartial__derivative_8hpp.md)     
         * **file** [**l\_norm\_tools.hpp**](l__norm__tools_8hpp.md)     

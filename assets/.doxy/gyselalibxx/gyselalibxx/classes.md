@@ -92,6 +92,7 @@
 ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * [**CrankNicolson**](classCrankNicolson.md)
 * [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md)
+* [**Curl**](classCurl.md)
 * [**CylindricalToCartesian**](classCylindricalToCartesian.md)
 * [**CzarnyToCartesian**](classCzarnyToCartesian.md)
 

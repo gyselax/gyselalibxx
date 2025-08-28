@@ -10,6 +10,7 @@ add_executable(unit_tests_math_tools
     test_partial_derivatives.cpp
     test_poisson_bracket.cpp
     test_spline_2d_cache.cpp
+    test_curl.cpp
     ../main.cpp
 )
 target_link_libraries(unit_tests_math_tools
