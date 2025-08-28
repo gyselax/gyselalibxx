@@ -2,7 +2,9 @@
 packages:
   all:
     compiler: [gcc@13.2.1.mi250.raw]
-    target: [zen3, zen4]
+    target: [zen3]
+    permissions:
+      write: group
     providers:
       mpi: [cray-mpich]
       blas: [openblas]
