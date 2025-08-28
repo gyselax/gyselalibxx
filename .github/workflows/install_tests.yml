@@ -48,7 +48,7 @@ jobs:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
       - name: Install spack
         run: |
           mkdir -p spack_setup && cd spack_setup
