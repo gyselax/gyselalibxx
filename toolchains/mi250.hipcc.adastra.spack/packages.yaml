@@ -15,6 +15,10 @@ packages:
     require:
       - one_of: [amdgpu_target=gfx90a, amdgpu_target=gfx942]
         when: +rocm
+      - spec: +rocm amdgpu_target=gfx90a ^cray-mpich+rocm amdgpu_target=gfx90a
+        when: +rocm amdgpu_target=gfx90a ^cray-mpich
+      - spec: +rocm amdgpu_target=gfx942 ^cray-mpich+rocm amdgpu_target=gfx942
+        when: +rocm amdgpu_target=gfx942 ^cray-mpich
   cray-mpich:
     buildable: false
     version: [8.1.30]
