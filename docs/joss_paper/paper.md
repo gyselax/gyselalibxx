@@ -147,8 +147,8 @@ The shared elements also provide more confidence in the reliability of the imple
 
 Most established gyrokinetic simulations, such as GENE-X [@MICHELS2021107986] and GT5D [@Idomura2009], are written in Fortran as stand-alone codes.
 This  limits code sharing and reuse between projects.
-In contrast, many particle-in-cell codes, such as WarpX [@VAY2018476], are now developed around reusable libraries like AMReX [@AMReXJOSS].
-To our knowledge, Gyselalib++ is the first such C++ library for gyrokinetic applications.
+In contrast, many particle-in-cell codes, such as WarpX [@VAY2018476] and XGC [@XGC], are now developed around reusable libraries like AMReX [@AMReXJOSS] and Cabana [@SlatteryJOSS2022].
+To our knowledge, Gyselalib++ is the first such C++ library capable of Eulerian or semi-Lagrangian gyrokinetic applications.
 The Fortran library SeLaLib [@selalib] plays a similar role in Fortran.
 
 ## Contents
