@@ -134,16 +134,16 @@ inline KOKKOS_INLINE_FUNCTION DTensor < VectorIndexSet< Xpc, Ypc >, VectorIndexS
 
 Here, as \(\mathcal{G}^{-1} =  \mathcal{F}\), the Jacobian matrix of \((\mathcal{F} \circ \mathcal{G}^{-1})^{-1}\) is the identity matrix. So, the pseudo-Cartesian Jacobian matrix for a circular mapping is given by :
 * 
-\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1,\]
+  \[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{11}(0, \theta) = 1,\]
 
 * 
-\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0,\]
+  \[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{12}(0, \theta) = 0,\]
 
 * 
-\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0,\]
+  \[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{21}(0, \theta) = 0,\]
 
 * 
-\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1.\]
+  \[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}_{22}(0, \theta) = 1.\]
 
 
 

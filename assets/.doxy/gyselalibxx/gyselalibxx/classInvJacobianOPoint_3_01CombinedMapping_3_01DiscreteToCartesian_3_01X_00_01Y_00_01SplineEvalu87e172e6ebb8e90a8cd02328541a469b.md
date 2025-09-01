@@ -146,19 +146,19 @@ The current mapping maps from the logical domain to the physical domain \(\mathc
 
 The pseudo-Cartesian domain is obtained by the composition of both mappings: \((\mathcal{F} \circ \mathcal{G}^{-1})^{-1}\). This new mapping is invertible and its inverse at the central point is given by
 * 
-\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{11}(0, \theta) = \partial_r x (0, \theta) \cos(\theta)
+  \[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{11}(0, \theta) = \partial_r x (0, \theta) \cos(\theta)
              - \partial_{r \theta} x (0, \theta) \sin(\theta),\]
 
 * 
-\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{12}(0, \theta) = \partial_r x (0, \theta) \sin(\theta)
+  \[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{12}(0, \theta) = \partial_r x (0, \theta) \sin(\theta)
              + \partial_{r \theta} x (0, \theta) \cos(\theta),\]
 
 * 
-\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{21}(0, \theta) = \partial_r y (0, \theta) \cos(\theta)
+  \[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{21}(0, \theta) = \partial_r y (0, \theta) \cos(\theta)
              - \partial_{r \theta} y (0, \theta) \sin(\theta),\]
 
 * 
-\[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{22}(0, \theta) = \partial_r y (0, \theta) \sin(\theta)
+  \[(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{22}(0, \theta) = \partial_r y (0, \theta) \sin(\theta)
              + \partial_{r \theta} y (0, \theta) \cos(\theta).\]
 
 
