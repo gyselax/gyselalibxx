@@ -1,0 +1,52 @@
+#!/usr/bin/python3
+
+# SPDX-License-Identifier: MIT
+
+"""
+File which tests whether the growth rate of the perturbation of a diocotron instabilities test case
+follows the predicted slope. 
+"""
+
+from argparse import ArgumentParser
+from pathlib import Path
+import numpy as np
+
+from gysdata import DiskStore
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser(description="Check growth rate.")
+    parser.add_argument('data_dir',
+                        action='store',
+                        nargs='?',
+                        default=Path.cwd(),
+                        type=Path,
+                        help='Location of the results (output folder).')
+    args = parser.parse_args()
+
+    path_data_structure = Path('data_structure_RTheta.yaml')
+    ds = DiskStore(args.data_dir, data_structure=path_data_structure)
+
+    # Get initial data
+    rho_eq = np.array(ds['density_eq'])
+    phi_eq = np.array(ds['electrical_potential_eq'])
+
+    jacobian = np.array(ds["jacobian"])
+
+    T = float(ds["final_T"])
+    omega_Im = float(ds["slope"])
+
+    # Get the data at each time step
+    Time = np.array(ds["density"].coords["time"])
+    rho = np.array(ds['density'])
+    phi = np.array(ds['electrical_potential'])
+
+    # Compute norms
+    L2norms_rho = np.linalg.norm((rho - rho_eq[None,:,:])*abs(jacobian[None,:,:]), 2, axis=(1,2))
+    L2norms_phi = np.linalg.norm((phi - phi_eq[None,:,:])*abs(jacobian[None,:,:]), 2, axis=(1,2))
+
+    slope_rho = np.polyfit(Time, L2norms_rho, 1)[0]
+    slope_phi = np.polyfit(Time, L2norms_phi, 1)[0]
+
+    assert abs(slope_rho - omega_Im) / abs(omega_Im) < 1
+    assert abs(slope_phi - omega_Im) / abs(omega_Im) < 1
