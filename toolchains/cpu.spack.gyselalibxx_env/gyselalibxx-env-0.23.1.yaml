@@ -5,10 +5,12 @@ spack:
   - compilers: []
   - packages:
     - 'cmake@3.30'
-    - 'fftw@3.3 precision=float,double'
-    - 'ginkgo@1.8'
+    - 'ginkgo@1.9'
     - 'googletest@1.14 +gmock'
-    - 'kokkos@4.4.1:4.4'
+    - 'kokkos@4.6+serial'
+    - 'kokkos-fft@0.3 host_backend=fftw-serial'
+    - 'kokkos-kernels@4.6'
+    - 'kokkos-tools'
     - 'openmpi@5.0'
     - 'paraconf@1.0'
     - 'pdi@1.9 ~fortran ~python'

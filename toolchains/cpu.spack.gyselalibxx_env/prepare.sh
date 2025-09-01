@@ -47,6 +47,10 @@ spack config --scope site add 'config:connect_timeout:60'
 spack config --scope site add 'packages:all:providers:blas:[openblas]'
 spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 
+# Add patched recipes
+git clone --branch releases/v0.23 https://github.com/gyselax/spack spack-0.23.1/var/spack/repos/gyselalibxx
+spack repo add --scope site spack-0.23.1/var/spack/repos/gyselalibxx
+
 # Add PDI repository
 git clone https://github.com/pdidev/spack.git spack-0.23.1/var/spack/repos/pdi
 spack repo add --scope site spack-0.23.1/var/spack/repos/pdi

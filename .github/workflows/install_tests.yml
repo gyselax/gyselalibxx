@@ -39,7 +39,7 @@ jobs:
   spack_test:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-14]
     runs-on: ${{ matrix.os }}
     needs: pre_job
     name: Install Test
@@ -48,7 +48,7 @@ jobs:
       - name: Checkout gyselalibxx
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
       - name: Install spack
         run: |
           mkdir -p spack_setup && cd spack_setup
