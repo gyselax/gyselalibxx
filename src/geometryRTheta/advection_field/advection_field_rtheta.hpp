@@ -8,7 +8,6 @@
 #include "iqnsolver.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polar_spline.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "vector_field.hpp"
@@ -52,11 +51,9 @@
  *
  * with @f$ E(0, \theta) @f$ computed thanks to
  *
- *  - @f$ \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi
- * + \partial_r y  \partial_y \phi \right](0, \theta_1) @f$,
+ *  - @f$ \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right](0, \theta_1) @f$,
  *
- *  - @f$ \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi
- * + \partial_r y  \partial_y \phi \right] (0, \theta_2) @f$,
+ *  - @f$ \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2) @f$,
  *
  * where @f$ \theta_1 @f$ and @f$ \theta_2 @f$  correspond to
  * linearly independent directions.
@@ -99,8 +96,11 @@ public:
 private:
     Mapping const& m_mapping;
 
-    PolarSplineEvaluator<PolarBSplinesRTheta, ddc::NullExtrapolationRule> const
-            m_polar_spline_evaluator;
+    PolarSplineEvaluator<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::HostSpace,
+            PolarBSplinesRTheta,
+            ddc::NullExtrapolationRule> const m_polar_spline_evaluator;
 
     SplineRThetaEvaluatorNullBound_host const m_spline_evaluator;
 
@@ -185,7 +185,7 @@ public:
      *      The advection field on the physical axis. 
      */
     void operator()(
-            host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
+            host_t<PolarSplineRTheta> electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<X, Y>> advection_field_xy) const
     {
         compute_advection_field_XY(
@@ -219,27 +219,22 @@ private:
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<
+                                    Kokkos::DefaultHostExecutionSpace,
+                                    Kokkos::HostSpace,
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineRTheta>>));
 
         IdxRangeRTheta const grid = get_idx_range(advection_field_xy);
         host_t<DVectorFieldMemRTheta<X, Y>> electric_field(grid);
-
-        host_t<FieldMemRTheta<CoordRTheta>> coords(grid);
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-            coords(irtheta) = ddc::coordinate(irtheta);
-        });
 
         // > computation of the phi derivatives
         host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> deriv_phi(grid);
 
         evaluator.deriv_dim_1(
                 ddcHelper::get<R_cov>(deriv_phi),
-                get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
         evaluator.deriv_dim_2(
                 ddcHelper::get<Theta_cov>(deriv_phi),
-                get_const_field(coords),
                 get_const_field(electrostatic_potential_coef));
 
         InverseJacobianMatrix inv_jacobian_matrix(m_mapping);
@@ -409,7 +404,7 @@ public:
      *      The advection field at the centre point on the Cartesian basis.
      */
     void operator()(
-            host_t<PolarSplineMemRTheta>& electrostatic_potential_coef,
+            host_t<PolarSplineRTheta>& electrostatic_potential_coef,
             host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta,
             DVector<X, Y>& advection_field_xy_centre) const
     {
@@ -450,8 +445,10 @@ private:
                 || (std::is_same_v<
                             Evaluator,
                             PolarSplineEvaluator<
+                                    Kokkos::DefaultHostExecutionSpace,
+                                    Kokkos::HostSpace,
                                     PolarBSplinesRTheta,
-                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineMemRTheta>>));
+                                    ddc::NullExtrapolationRule>> && std::is_same_v<SplineType, host_t<PolarSplineRTheta>>));
 
         IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rtheta);
 

@@ -326,7 +326,8 @@ using ConstSpline2D = DConstField<IdxRangeBSRTheta>;
  *
  * Store the polar B-splines coefficients of the function.
  */
-using PolarSplineMemRTheta = PolarSplineMem<PolarBSplinesRTheta>;
+using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
+using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
 
 /**
  * @brief Type of the index of an element of polar B-splines.
@@ -342,7 +343,7 @@ template <class Dim1, class Dim2>
 using DVectorFieldRTheta = VectorField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 template <class Dim1, class Dim2>
-using DConstVectorFieldRTheta
+using DVectorConstFieldRTheta
         = VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 

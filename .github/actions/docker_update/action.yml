@@ -22,12 +22,16 @@ runs:
     - id: rebuild-check
       run: |
         # Check if docker/gyselalibxx_env/Dockerfile has been modified
-        changed_docker_file=$(cat changed_files.txt | grep docker/gyselalibxx_env/Dockerfile || true)
+        changed_docker_file=$(cat changed_files.txt | grep "docker/gyselalibxx_env/Dockerfile" || true)
+        echo "Changed files are"
+        cat changed_files.txt
         # Use the modification status of docker/gyselalibxx_env/Dockerfile to decide if the docker should be rebuilt
         if [ -n "${changed_docker_file}" ]
         then
+          echo "Dockerfile has changed"
           echo "rebuild=true" >> $GITHUB_OUTPUT
         else
+          echo "Dockerfile has not changed"
           echo "rebuild=false" >> $GITHUB_OUTPUT
         fi
       shell: bash

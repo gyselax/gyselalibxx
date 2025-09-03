@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Ensures the script is not being sourced
+if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
+    echo "This script must be executed, not sourced!" >&2
+    return 1
+fi
+
 TOOLCHAIN_ROOT_DIRECTORY="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd -P)"
 
 module purge
