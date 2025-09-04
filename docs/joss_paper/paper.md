@@ -110,42 +110,42 @@ bibliography: paper.bib
 ## Summary
 
 Gyselalib++ provides the mathematical building blocks to construct kinetic or gyrokinetic plasma simulation codes in C++, simulating a distribution function discretised in phase space on a fixed grid.
-It relies on the Discrete Domain Computation (DDC) library [@ddc] to statically type the discretisation dimensions; thus preventing many common sources of errors.
+It relies on the Discrete Domain Computation (DDC) library [@ddc] to statically type the discretisation dimensions, thus preventing many common sources of errors.
 Via DDC, Gyselalib++ also leverages the Kokkos framework [@trott2022], ensuring performance portability across various CPU and GPU architectures.
-The library provides a variety of tools including semi-Lagrangian advection operators, quadrature rules, and solvers for elliptical and hyperbolic partial differential equations (PDEs).
+The library provides a variety of tools including semi-Lagrangian advection operators, quadrature rules, and solvers for elliptic and hyperbolic partial differential equations (PDEs).
 The majority of the operators are designed to work on non-orthonormal coordinate systems; those that don't use the static typing to raise compiler errors preventing their misuse.
 
 ## Gyrokinetic Simulations
 
 Plasma simulations are essential for the development of magnetic confinement fusion devices for energy production.
 The low collisionality of such plasmas makes kinetic models a judicious choice.
-In particular, gyrokinetic theory [@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high frequency gyromotion, is a popular framework for plasma simulation [@garbet2010].
+In particular, gyrokinetic theory [@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high-frequency gyromotion, is a popular framework for plasma simulation [@garbet2010].
 Despite the reduction in dimensionality, such simulations still require massively powerful high-performance computing (HPC) resources.
 For ITER-sized simulations, exascale resources would still be required.
 
-The pre-existing GYSELA code [@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a uniform grid.
-This approach was shown to work well and allowed the study of many interesting physical phenomena [@Esteve2018;@Sarazin2021;@DifPradalier2022].
+The preexisting GYSELA code [@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a uniform grid.
+This approach was shown to work well, and it allowed the study of many interesting physical phenomena [@Esteve2018;@Sarazin2021;@DifPradalier2022].
 However, expanding this code to use more complex mathematical methods such as non-uniform points (vital for handling the different magnitudes of physical quantities in the core and edge regions), and increasingly complex geometries (such as D-shape geometries, geometries including both open and closed field lines, X-points, and potentially stellarator geometries) has proved to be challenging and sometimes error-prone.
-These complexities are further amplified when trying to organise such a code for use on new GPU architectures, necessary for exascale simulations.
+These complexities are further amplified when trying to port such a code for use on new GPU architectures, necessary for exascale simulations.
 This is a challenge shared by other gyrokinetic codes [@trilaksono2025].
 
 ## Statement of Need
 
-In the case of GYSELA, the changes necessary to add non-uniform points and simplify the implementation of other new features, would have required an effort comparable to a complete rewrite; whereas, actually performing such a rewrite brings additional benefits for design and portability.
+In the case of GYSELA, the changes necessary to add non-uniform points and simplify the implementation of other new features, would have required an effort comparable to a complete rewrite, whereas actually performing such a rewrite brings additional benefits for design and portability.
 For example, we have been able to capitalise on C++'s strengths by using template programming to enforce the correctness of the implemented equations.
 A common source of error is writing equations with implicit assumptions, such as assuming an orthonormal coordinate system, or specific properties like those of a circular coordinate system.
 In Gyselalib++, equations are either expressed in tensor notation, so that they are either accurate for all geometries or do not compile, or they explicitly state their dependencies.
 C++ further enables us to add static assertions for cases with restricted applicability to prevent their misuse.
 Additionally, DDC is used to encode grid information directly in the type of each field, allowing the compiler to catch indexing errors at compile time.
-This is particularly useful when working with multiple grids along the same dimension; or when assigning different memory layouts to different fields.
+This is particularly useful when working with multiple grids along the same dimension, or when assigning different memory layouts to different fields.
 
-In contrast to GYSELA, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit-tested and can be combined to build a final simulation.
+In contrast to GYSELA, Gyselalib++ has been created as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit-tested and can be combined to build a final simulation.
 This design makes the library more versatile, enabling users to rapidly assemble a wide range of simulations, including high-dimensional test cases.
 The shared elements also provide more confidence in the reliability of the implementation, as they can prove their validity across multiple applications.
 
 ## State of the Field
 
-Most established gyrokinetic simulations, such as GENE-X [@MICHELS2021107986] and GT5D [@Idomura2009], are written in Fortran as stand-alone codes.
+Most established gyrokinetic simulations, such as GENE-X [@MICHELS2021107986] and GT5D [@Idomura2009], are written in Fortran as standalone codes.
 This  limits code sharing and reuse between projects.
 In contrast, many particle-in-cell codes, such as WarpX [@VAY2018476] and XGC [@XGC], are now developed around reusable libraries like AMReX [@AMReXJOSS] and Cabana [@SlatteryJOSS2022].
 To our knowledge, Gyselalib++ is the first such C++ library capable of Eulerian or semi-Lagrangian gyrokinetic applications.
@@ -154,7 +154,7 @@ The Fortran library SeLaLib [@selalib] plays a similar role in Fortran.
 ## Contents
 
 Gyselalib++ includes a range of reusable mathematical operators for plasma simulations.
-These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g. finite difference methods), solvers for common PDEs, and a multi-species collision operator [@Donnel2019].
+These include, but are not limited to, semi-Lagrangian advection schemes, numerical quadrature, differential operators (e.g., finite difference methods), solvers for common PDEs, and a multi-species collision operator [@Donnel2019].
 A complete list of operators is available in the documentation[^doc].
 Many of these tools are designed to work on a variety of grids, including non-uniform grids, which are especially important in edge-region simulations.
 The library also supports MPI-based parallelism, either with distributed operators or with transpositions between different multi-rank storage layouts.
@@ -162,13 +162,13 @@ The library also supports MPI-based parallelism, either with distributed operato
 [^doc]: <https://gyselax.github.io/gyselalibxx/>
 
 The VOICE code [@bourne2023] has already been rewritten in C++ using the mathematical tools provided by Gyselalib++.
-Several common simulations including Landau damping (in 2D or in a 4D MPI-parallelised Cartesian phase-space coordinates), a bump-on-tail instability (in 2D Cartesian phase-space coordinates), and a guiding-centre model (on polar coordinates) have also been implemented.
-While these examples are included primarily for illustration, they also serve as valuable test-beds for developing and validating new numerical methods.
+Several common simulations including Landau damping (in 2D or in 4D MPI-parallelised Cartesian phase-space coordinates), a bump-on-tail instability (in 2D Cartesian phase-space coordinates), and a guiding-centre model (in polar coordinates) have also been implemented.
+While these examples are included primarily for illustration, they also serve as valuable testbeds for developing and validating new numerical methods.
 As such, these examples are ideal for mathematicians looking to validate new methods in realistic, publication-ready test cases.
 
 ## Acknowledgements
 
-This project has received funding from the EoCoE-III project (Energy-oriented Centre of Excellence for Exascale HPC applications).
+This project has received funding from the EoCoE-III (Energy-oriented Centre of Excellence for Exascale HPC applications) project.
 This work has been carried out within the framework of the EUROfusion Consortium, funded by the European Union via the Euratom Research and Training Program (Grant Agreement No. 101052200 — EUROfusion).
 Views and opinions expressed are those of the author(s) only and do not necessarily reflect those of the European Union or the European Commission.
 Neither the European Union nor the European Commission can be held responsible for them.
