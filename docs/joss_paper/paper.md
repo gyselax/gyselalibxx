@@ -139,7 +139,7 @@ C++ further enables us to add static assertions for cases with restricted applic
 Additionally, DDC is used to encode grid information directly in the type of each field, allowing the compiler to catch indexing errors at compile time.
 This is particularly useful when working with multiple grids along the same dimension, or when assigning different memory layouts to different fields.
 
-In contrast to GYSELA, Gyselalib++ has been conceived as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit-tested and can be combined to build a final simulation.
+In contrast to GYSELA, Gyselalib++ was conceived of and developed as a library, similar to the SeLaLib Fortran library [@selalib], whose independent elements are each unit-tested and can be combined to build a final simulation.
 This design makes the library more versatile, enabling users to rapidly assemble a wide range of simulations, including high-dimensional test cases.
 The shared elements also provide more confidence in the reliability of the implementation, as they can prove their validity across multiple applications.
 
