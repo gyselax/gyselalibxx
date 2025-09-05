@@ -20,6 +20,7 @@ SpeciesInfo:
   perturb_mode: 1
 
 Algorithm:
+  equilibrium: "maxwellian"
   deltat: 0.125
   nbiter: 360
 
