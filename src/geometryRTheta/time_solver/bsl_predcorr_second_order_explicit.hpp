@@ -17,7 +17,7 @@
 #include "geometry.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polarsplinefempoissonlikesolver.hpp"
 #include "spline_polar_foot_finder.hpp"
 
 

@@ -18,7 +18,7 @@
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polarsplinefempoissonlikesolver.hpp"
 #include "test_cases.hpp"
 
 
