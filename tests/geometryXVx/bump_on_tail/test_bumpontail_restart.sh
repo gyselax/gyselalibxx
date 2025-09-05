@@ -12,18 +12,18 @@ PYTHON3_EXE="$3"
 SIMULATION_NAME="$4"
 if [ -n "$5" ]
 then
-  RELATIVE_RESTART_TOLERANCE="$5"
+    RELATIVE_RESTART_TOLERANCE="$5"
 fi
 if [ -n "$6" ]
 then
-  ABSOLUTE_RESTART_TOLERANCE="$6"
+    ABSOLUTE_RESTART_TOLERANCE="$6"
 fi
 
 OUTDIR="${PWD}/${SIMULATION_NAME}"
 
 TMPDIR="$(mktemp -p "${PWD}" -d run-XXXXXXXXXX)"
 function finish {
-  rm -rf "${TMPDIR}"
+    rm -rf "${TMPDIR}"
 }
 trap finish EXIT QUIT ABRT KILL SEGV TERM STOP
 
@@ -36,7 +36,7 @@ RSTDIR="${TMPDIR}/RST"
 mkdir "${RSTDIR}"
 cd "${RSTDIR}"
 
-"${GYSELALIBXX_EXEC}" "--dump-config" "${PWD}/bumpontail.yaml"
+cp ${GYSELALIBXX_SRCDIR}/simulations/geometryXVx/bumpontail.yaml .
 sed -i.save 's/^  x_size: .*/  x_size: 16/' bumpontail.yaml
 sed -i.save 's/^  vx_size: .*/  vx_size: 16/' bumpontail.yaml
 sed -i.save 's/^  nbiter: .*/  nbiter: 10/' bumpontail.yaml
