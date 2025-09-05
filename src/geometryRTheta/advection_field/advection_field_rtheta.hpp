@@ -9,7 +9,7 @@
 #include "metric_tensor_evaluator.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polar_spline_evaluator.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polarsplinefempoissonlikesolver.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
