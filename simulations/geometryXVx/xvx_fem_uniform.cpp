@@ -74,9 +74,9 @@ int main(int argc, char** argv)
 
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
-    MaxwellianEquilibrium const init_fequilibrium
-            = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
-    init_fequilibrium(get_field(allfequilibrium));
+    std::unique_ptr<IEquilibrium> const init_fequilibrium
+            = IEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
+    (*init_fequilibrium)(get_field(allfequilibrium));
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
@@ -129,11 +129,8 @@ int main(int argc, char** argv)
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
     FEM1DPoissonSolver fem_solver(builder_x, spline_x_evaluator);
-    host_t<DFieldMemVx> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients<
-            Kokkos::DefaultHostExecutionSpace>(mesh_vx, builder_vx);
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
+    DFieldMemVx const quadrature_coeffs = neumann_spline_quadrature_coefficients<
+            Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx);
     ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
     QNSolver const poisson(fem_solver, rhs);
 

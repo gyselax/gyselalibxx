@@ -73,9 +73,9 @@ int main(int argc, char** argv)
 
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
-    MaxwellianEquilibrium const init_fequilibrium
-            = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
-    init_fequilibrium(get_field(allfequilibrium));
+    std::unique_ptr<IEquilibrium> const init_fequilibrium
+            = IEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
+    (*init_fequilibrium)(get_field(allfequilibrium));
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
