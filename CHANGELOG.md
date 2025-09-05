@@ -11,11 +11,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added `IEquilibrium::init_from_input` method to choose XVx equililibrium in input file.
+
 ### Fixed
 
 ### Changed
 
 - Use patched recipes for the CPU Spack toolchain.
+- Combine `landau_fft` and `bumpontail_fft` executables into a `xvx_fft` executable.
+- Combine `landau_fem_uniform` and `bumpontail_fem_uniform` executables into a `xvx_fem_uniform` executable.
+- Make the choice of equililibrium an input parameter for `xvx` executables.
 
 ### Deprecated
 
