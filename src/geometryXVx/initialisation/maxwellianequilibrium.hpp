@@ -37,6 +37,10 @@ public:
 
     ~MaxwellianEquilibrium() override = default;
 
+    MaxwellianEquilibrium(MaxwellianEquilibrium&&) = default;
+
+    MaxwellianEquilibrium& operator=(MaxwellianEquilibrium&&) = default;
+
     /**
      * @brief Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.
      * @param[in] idx_range_kinsp Index range for the kinetic species

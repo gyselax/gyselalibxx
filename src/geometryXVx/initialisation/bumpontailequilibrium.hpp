@@ -60,6 +60,10 @@ public:
 
     ~BumpontailEquilibrium() override = default;
 
+    BumpontailEquilibrium(BumpontailEquilibrium&&) = default;
+
+    BumpontailEquilibrium& operator=(BumpontailEquilibrium&&) = default;
+
     /**
      * @brief Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file.
      * @param[in] idx_range_kinsp Index range for the kinetic species
