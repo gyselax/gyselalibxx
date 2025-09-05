@@ -37,8 +37,14 @@ public:
 
     ~MaxwellianEquilibrium() override = default;
 
+    /**
+     * @brief Move-construct a MaxwellianEquilibrium.
+     */
     MaxwellianEquilibrium(MaxwellianEquilibrium&&) = default;
 
+    /**
+     * @brief Move-copy a MaxwellianEquilibrium.
+     */
     MaxwellianEquilibrium& operator=(MaxwellianEquilibrium&&) = default;
 
     /**

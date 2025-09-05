@@ -60,8 +60,14 @@ public:
 
     ~BumpontailEquilibrium() override = default;
 
+    /**
+     * @brief Move-construct a BumpontailEquilibrium.
+     */
     BumpontailEquilibrium(BumpontailEquilibrium&&) = default;
 
+    /**
+     * @brief Move-copy a BumpontailEquilibrium.
+     */
     BumpontailEquilibrium& operator=(BumpontailEquilibrium&&) = default;
 
     /**
