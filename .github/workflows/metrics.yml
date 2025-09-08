@@ -35,7 +35,7 @@ jobs:
       uses: github/issue-metrics@v2
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        SEARCH_QUERY: 'repo:owner/repo is:issue label:bug '
+        SEARCH_QUERY: 'repo:gyselax/gyselalibxx is:issue label:bug '
 
     - name: Check results
       run: |
