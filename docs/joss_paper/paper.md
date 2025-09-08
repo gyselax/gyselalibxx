@@ -121,7 +121,9 @@ Plasma simulations are essential for the development of magnetic confinement fus
 The low collisionality of such plasmas makes kinetic models a judicious choice.
 In particular, gyrokinetic theory [@brizard2007; @krommes2012], which reduces the 6D problem to a 5D problem by removing high-frequency gyromotion, is a popular framework for plasma simulation [@garbet2010].
 Despite the reduction in dimensionality, such simulations still require massively powerful high-performance computing (HPC) resources.
-For ITER-sized simulations, exascale resources would still be required.
+For ITER[^iter]-sized simulations, exascale resources would still be required.
+
+[^iter]: <https://www.iter.org/>
 
 The pre-existing GYSELA code [@grandgirard2016], written in Fortran, originally aimed to simulate plasma in the core region of a tokamak using semi-Lagrangian advection with a distribution function discretised in phase space on a uniform grid.
 This approach was shown to work well, and it allowed the study of many interesting physical phenomena [@Esteve2018;@Sarazin2021;@DifPradalier2022].
