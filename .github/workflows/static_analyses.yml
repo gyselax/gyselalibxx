@@ -161,6 +161,7 @@ jobs:
       - uses: ./.github/actions/test_filter
       - run: |
           python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
+          ./bin/run_cppcheck toolchains/common_toolchains/serial_debug_toolchain.cmake src simulations tests --disable-style
 
   cmake_static_analysis:
     name: CMake static analysis
