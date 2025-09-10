@@ -3,11 +3,6 @@ name: Install linux dependencies for static analyses
 runs:
   using: "composite"
   steps:
-    #- name: Setup tar to allow cache to use sudo
-    #  run: |
-    #    sudo chown root /bin/tar
-    #    sudo chmod u+s /bin/tar
-    #  shell: bash
     - name: Restore cached cppcheck
       id: cache-cppcheck-restore
       uses: actions/cache/restore@v4
@@ -21,10 +16,12 @@ runs:
       run: |
         git clone -b 2.14.2 https://github.com/danmar/cppcheck.git
         cd cppcheck
-        cmake -S . -B build
+        cmake -DCMAKE_INSTALL_PREFIX=${GITHUB_WORKSPACE}/cppcheck_install -S . -B build
         cmake --build build
         cmake --install build
         cd ..
+        ls
+        ls ${GITHUB_WORKSPACE}/cppcheck_install
         rm -rf cppcheck
       shell: bash
     - name: Save cppcache
@@ -33,7 +30,7 @@ runs:
       uses: actions/cache/save@v4
       with:
         path: |
-          /usr/local/share/Cppcheck/
-          /usr/local/bin/cppcheck
+          ${GITHUB_WORKSPACE}/cppcheck_install/share/Cppcheck/
+          ${GITHUB_WORKSPACE}/cppcheck_install/bin/cppcheck
         key: ${{ steps.cache-cppcheck-restore.outputs.cache-primary-key }}
 
