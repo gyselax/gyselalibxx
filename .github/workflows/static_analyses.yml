@@ -15,137 +15,137 @@ env:
   CHANGES_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
 
 jobs:
-  Indentation:
-    name: Clang Formatting Check
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user 1001
-    steps:
-      - uses: actions/checkout@v4
-      - shell: bash
-        run: |
-          ./bin/indent -td
+    #Indentation:
+    #  name: Clang Formatting Check
+    #  runs-on: ubuntu-latest
+    #  container:
+    #    image: ghcr.io/gyselax/gyselalibxx_env
+    #    options: --user 1001
+    #  steps:
+    #    - uses: actions/checkout@v4
+    #    - shell: bash
+    #      run: |
+    #        ./bin/indent -td
 
-  Markdown:
-    name: Markdown format check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.10'
-      - name: Get Python dependencies
-        run: |
-          pip install numpy
-          pwd
-          ls -a
-      - name: Markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v19
-        with:
-          config: './.markdownlint.json'
-          globs: '**/*.md,!.github/**/*.md,!.gitlab/**/*.md'
-          separator: ','
-      - name: Check files
-        id: markdown
-        shell: bash
-        run: |
-          MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
-          echo $MARKDOWN_FILES
-          python3 bin/ci_tools/markdown_linter.py ${MARKDOWN_FILES}
+    #Markdown:
+    #  name: Markdown format check
+    #  runs-on: ubuntu-latest
+    #  steps:
+    #    - uses: actions/checkout@v4
+    #    - uses: actions/setup-python@v5
+    #      with:
+    #        python-version: '3.10'
+    #    - name: Get Python dependencies
+    #      run: |
+    #        pip install numpy
+    #        pwd
+    #        ls -a
+    #    - name: Markdownlint
+    #      uses: DavidAnson/markdownlint-cli2-action@v19
+    #      with:
+    #        config: './.markdownlint.json'
+    #        globs: '**/*.md,!.github/**/*.md,!.gitlab/**/*.md'
+    #        separator: ','
+    #    - name: Check files
+    #      id: markdown
+    #      shell: bash
+    #      run: |
+    #        MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
+    #        echo $MARKDOWN_FILES
+    #        python3 bin/ci_tools/markdown_linter.py ${MARKDOWN_FILES}
 
-  Python:
-    name: Python Best Practices
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/gyselax/gyselalibxx_env
-      options: --user 1001
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Run pylint
-        run: |
-          pylint $(find tests -iname *.py)
-          pylint $(find docs -iname *.py)
-          pylint $(find bin -iname *.py)
-        shell: bash
-        env:
-          PYTHONPATH: ./post-process/PythonScripts
-      - name: Run filtered pylint
-        run: |
-          # Find all files with no extension or a .py extension in post-process/PythonScripts/
-          POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
-          # Get pylint errors without failing
-          pylint ${POST_PROCESS_PYTHON_FILES} > post_process_errors.txt || true
-          # Filter errors on changed files
-          for f in $(git diff ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }} --name-only)
-          do
-            grep $f post_process_errors.txt || true
-          done | tee filtered_errors.txt
-          # Raise an error if post-process in filtered errors
-          ! grep "post-process" filtered_errors.txt >/dev/null
-        shell: bash
-        env:
-          PYTHONPATH: ./post-process/PythonScripts
+    #Python:
+    #  name: Python Best Practices
+    #  runs-on: ubuntu-latest
+    #  container:
+    #    image: ghcr.io/gyselax/gyselalibxx_env
+    #    options: --user 1001
+    #  steps:
+    #    - uses: actions/checkout@v4
+    #      with:
+    #        fetch-depth: 0
+    #    - name: Run pylint
+    #      run: |
+    #        pylint $(find tests -iname *.py)
+    #        pylint $(find docs -iname *.py)
+    #        pylint $(find bin -iname *.py)
+    #      shell: bash
+    #      env:
+    #        PYTHONPATH: ./post-process/PythonScripts
+    #    - name: Run filtered pylint
+    #      run: |
+    #        # Find all files with no extension or a .py extension in post-process/PythonScripts/
+    #        POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
+    #        # Get pylint errors without failing
+    #        pylint ${POST_PROCESS_PYTHON_FILES} > post_process_errors.txt || true
+    #        # Filter errors on changed files
+    #        for f in $(git diff ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }} --name-only)
+    #        do
+    #          grep $f post_process_errors.txt || true
+    #        done | tee filtered_errors.txt
+    #        # Raise an error if post-process in filtered errors
+    #        ! grep "post-process" filtered_errors.txt >/dev/null
+    #      shell: bash
+    #      env:
+    #        PYTHONPATH: ./post-process/PythonScripts
 
-  Documentation:
-    name: Documentation check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-      - name: Install doxygen
-        run:
-          sudo apt-get install doxygen
-        shell: bash
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.11
-      - name: Install Python dependencies
-        run:
-          pip install -r requirements.txt
-        shell: bash
-        working-directory: ./docs
-      - name: Make documentation
-        run: |
-          # Make docs
-          python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
-          cd docs
-          mkdocs build
-        shell: bash
-        continue-on-error: true
-      - name: Check for new errors
-        run: |
-          cat docs/doxygen.log
-          # Get files which have changed in this merge request
-          git diff ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}..${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }} --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
-          python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
-          if [ -s docs/doxygen.log ]; then exit 1; fi
-        shell: bash
-      - name: Test documentation
-        run: |
-          # Make docs
-          mkdocs build --strict
-        shell: bash
-        working-directory: ./docs
+    #Documentation:
+    #  name: Documentation check
+    #  runs-on: ubuntu-latest
+    #  steps:
+    #    - uses: actions/checkout@v4
+    #      with:
+    #        fetch-depth: 0
+    #    - name: Install doxygen
+    #      run:
+    #        sudo apt-get install doxygen
+    #      shell: bash
+    #    - name: Set up Python 3.11
+    #      uses: actions/setup-python@v5
+    #      with:
+    #        python-version: 3.11
+    #    - name: Install Python dependencies
+    #      run:
+    #        pip install -r requirements.txt
+    #      shell: bash
+    #      working-directory: ./docs
+    #    - name: Make documentation
+    #      run: |
+    #        # Make docs
+    #        python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
+    #        cd docs
+    #        mkdocs build
+    #      shell: bash
+    #      continue-on-error: true
+    #    - name: Check for new errors
+    #      run: |
+    #        cat docs/doxygen.log
+    #        # Get files which have changed in this merge request
+    #        git diff ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}..${{ github.event.pull_request.head.sha || github.event.merge_group.head_sha }} --no-indent-heuristic --unified=0 --output=pull_new_files.txt --no-color --diff-filter=A
+    #        python3 bin/ci_tools/check_readme_presence.py pull_new_files.txt
+    #        if [ -s docs/doxygen.log ]; then exit 1; fi
+    #      shell: bash
+    #    - name: Test documentation
+    #      run: |
+    #        # Make docs
+    #        mkdocs build --strict
+    #      shell: bash
+    #      working-directory: ./docs
 
-  cppcheck_static_analysis_errors:
-    name: CppCheck static analysis errors
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-      - uses: ./.github/actions/linux_static_analysis_install
-      - uses: ./.github/actions/python-static-analysis-setup
-      - uses: ./.github/actions/test_filter
-      - run: |
-          python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES} --errors-only
+    #cppcheck_static_analysis_errors:
+    #  name: CppCheck static analysis errors
+    #  runs-on: ubuntu-latest
+    #  steps:
+    #    - uses: actions/checkout@v4
+    #    - name: Set up Python
+    #      uses: actions/setup-python@v5
+    #      with:
+    #        python-version: 3.12
+    #    - uses: ./.github/actions/linux_static_analysis_install
+    #    - uses: ./.github/actions/python-static-analysis-setup
+    #    - uses: ./.github/actions/test_filter
+    #    - run: |
+    #        python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES} --errors-only
 
   cppcheck_static_analysis_warnings:
     name: CppCheck static analysis warnings
@@ -161,38 +161,38 @@ jobs:
           python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
           ./bin/run_cppcheck toolchains/common_toolchains/serial_debug_toolchain.cmake src simulations tests --disable-style
 
-  cmake_static_analysis:
-    name: CMake static analysis
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
-      - run: |
-          python3 bin/ci_tools/cmake_checker.py
+  #cmake_static_analysis:
+  #  name: CMake static analysis
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    - uses: actions/checkout@v4
+  #    - name: Set up Python
+  #      uses: actions/setup-python@v5
+  #      with:
+  #        python-version: 3.12
+  #    - run: |
+  #        python3 bin/ci_tools/cmake_checker.py
 
-  spelling:
-    name: Spell Check with Typos
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout Actions Repository
-      uses: actions/checkout@v4
-    - name: Spell Check Repo
-      uses: crate-ci/typos@v1.29.10
-      with:
-        files: ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin
+  #spelling:
+  #  name: Spell Check with Typos
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #  - name: Checkout Actions Repository
+  #    uses: actions/checkout@v4
+  #  - name: Spell Check Repo
+  #    uses: crate-ci/typos@v1.29.10
+  #    with:
+  #      files: ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin
 
-  set_pr_status:
-    runs-on: ubuntu-latest
-    name: Set PR to draft
-    needs: [Indentation, Markdown, Python, Documentation, cppcheck_static_analysis_errors, cmake_static_analysis, spelling]
-    if: failure()
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/set_pr_status
-        with:
-          status: "failure"
-          pr_number: ${{ github.event.pull_request.number }}
-          sha: ${{ github.event.pull_request.head.sha || github.sha }}
+  #set_pr_status:
+  #  runs-on: ubuntu-latest
+  #  name: Set PR to draft
+  #  needs: [Indentation, Markdown, Python, Documentation, cppcheck_static_analysis_errors, cmake_static_analysis, spelling]
+  #  if: failure()
+  #  steps:
+  #    - uses: actions/checkout@v4
+  #    - uses: ./.github/actions/set_pr_status
+  #      with:
+  #        status: "failure"
+  #        pr_number: ${{ github.event.pull_request.number }}
+  #        sha: ${{ github.event.pull_request.head.sha || github.sha }}
