@@ -155,6 +155,8 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: recursive
       - uses: ./.github/actions/linux_static_analysis_install
       - uses: ./.github/actions/test_filter
       - run: |
