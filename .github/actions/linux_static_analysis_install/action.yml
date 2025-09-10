@@ -30,7 +30,10 @@ runs:
       uses: actions/cache/save@v4
       with:
         path: |
-          ${GITHUB_WORKSPACE}/cppcheck_install/share/Cppcheck/
-          ${GITHUB_WORKSPACE}/cppcheck_install/bin/cppcheck
+          cppcheck_install/share/Cppcheck/
+          cppcheck_install/bin/cppcheck
         key: ${{ steps.cache-cppcheck-restore.outputs.cache-primary-key }}
-
+    - name: Update bath
+      run: |
+        echo "${GITHUB_WORKSPACE}/cppcheck_install/bin" >> ${GITHUB_PATH}
+      shell: bash
