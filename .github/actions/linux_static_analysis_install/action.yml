@@ -3,11 +3,11 @@ name: Install linux dependencies for static analyses
 runs:
   using: "composite"
   steps:
-    - name: Setup tar to allow cache to use sudo
-      run: |
-        sudo chown root /bin/tar
-        sudo chmod u+s /bin/tar
-      shell: bash
+    #- name: Setup tar to allow cache to use sudo
+    #  run: |
+    #    sudo chown root /bin/tar
+    #    sudo chmod u+s /bin/tar
+    #  shell: bash
     - name: Restore cached cppcheck
       id: cache-cppcheck-restore
       uses: actions/cache/restore@v4
@@ -23,7 +23,7 @@ runs:
         cd cppcheck
         cmake -S . -B build
         cmake --build build
-        sudo cmake --install build
+        cmake --install build
         cd ..
         rm -rf cppcheck
       shell: bash
