@@ -150,14 +150,12 @@ jobs:
   cppcheck_static_analysis_warnings:
     name: CppCheck static analysis warnings
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/gyselax/gyselalibxx_env
+      options: --user 1001
     steps:
       - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: 3.12
       - uses: ./.github/actions/linux_static_analysis_install
-      - uses: ./.github/actions/python-static-analysis-setup
       - uses: ./.github/actions/test_filter
       - run: |
           python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
