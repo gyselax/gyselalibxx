@@ -84,4 +84,6 @@ module load PrgEnv-gnu-amd amd-mixed/6.3.3
 
 module list
 
+# Add Kokkos Tools to the `LD_LIBRARY_PATH`
+export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
 export MPICH_GPU_SUPPORT_ENABLED=1
