@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Use patched recipes for the CPU Spack toolchain.
+- Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
 
 ### Deprecated
 
