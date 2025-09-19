@@ -1,0 +1,68 @@
+spack:
+  # add package specs to the `specs` list
+  definitions:
+  - packages:
+    - cmake
+    - ginkgo@1.9~openmp+cuda cuda_arch=90
+    - googletest
+    - kokkos@4.6~openmp+cuda+cuda_relocatable_device_code +cuda_constexpr cuda_arch=90
+    - kokkos-fft@0.3 host_backend=fftw-serial device_backend=cufft
+    - kokkos-kernels@4.6~shared
+    - ninja
+    - paraconf
+    - pdi
+    - pdiplugin-decl-hdf5
+    - pdiplugin-decl-netcdf
+    - pdiplugin-mpi
+    - pdiplugin-set-value
+    - pdiplugin-trace
+    - python
+
+    - py-dask
+    - py-h5py
+    - py-imageio
+    - py-matplotlib
+    - py-netcdf4
+    - py-numpy
+    - py-scipy
+    - py-sympy
+    - py-xarray
+    - py-pyyaml
+  - architectures:
+    - arch=linux-rhel9-icelake
+  specs:
+  - matrix:
+    - [$packages]
+    - ["%gcc@11.4.1"]
+    - [$architectures]
+  view: true
+  concretizer:
+    unify: true
+  compilers:
+  - compiler:
+      spec: gcc@=11.4.1
+      paths:
+        cc: /usr/bin/gcc
+        cxx: /usr/bin/g++
+        f77: /usr/bin/gfortran
+        fc: /usr/bin/gfortran
+      flags: {}
+      operating_system: rhel9
+      target: x86_64
+      modules: []
+      environment: {}
+      extra_rpaths: []
+  packages:
+    all:
+      permissions:
+        read: group
+        write: group
+    cuda:
+      externals:
+      - spec: cuda@12.6.3
+        prefix: /lustre/fshomisc/sys/common/nvidia/cuda/12.6.3
+    openmpi:
+      externals:
+      - spec: openmpi@4.1.6+cuda~cxx~cxx_exceptions~java+lustre~memchecker+pmi~static~wrapper-rpath
+          fabrics=ucx schedulers=slurm
+        prefix: /lustre/fshomisc/sup/spack_soft/openmpi/4.1.6/gcc-11.4.1-hbuwwfts4cctbzqir427u56mkk6zu3qr

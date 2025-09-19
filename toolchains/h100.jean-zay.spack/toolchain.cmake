@@ -1,0 +1,15 @@
+
+# CMake options
+set(CMAKE_BUILD_TYPE Release)
+
+# Compiler options
+set(CMAKE_CXX_COMPILER nvcc_wrapper)
+set(CMAKE_CXX_EXTENSIONS OFF) # Avoid a Kokkos warning that will force if to OFF anyway when compiling with nvcc
+set(CMAKE_CXX_FLAGS_INIT "-Wall -Wno-sign-compare --Werror cross-execution-space-call -Xcudafe --diag_suppress=unsigned_compare_with_zero -Xcudafe --diag_suppress=integer_sign_change")
+set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -isystem $ENV{GYSELALIBXX_OPENBLAS_ROOT}/include")
+
+# Gyselalibxx options
+set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specific to Gyselalib++" FORCE)
+
+# Koliop options
+set(koliop_ENABLE_LTO OFF CACHE BOOL "")
