@@ -249,4 +249,109 @@ public:
 
         return allfdistribu;
     }
+
+    /**
+     * @brief Allocate a Field to the advected function.
+     * 
+     * The value at the O-point of the given advection field is not used here. 
+     * We compute the advection field on the physical axis at the O-point by 
+     * averaging its values at the next interpolation point along r. 
+     *
+     * @param [in, out] allfdistribu
+     *      A Field containing the values of the function we want to advect.
+     * @param [in] advection_field_rtheta
+     *      A field of vectors defined on the Curvilinear basis containing the values
+     *      of the advection field at each point on the logical grid.
+     *      It is expressed on the contravariant basis.
+     * @param [in] dt
+     *      A time step used.
+     *
+     * @return A Field to allfdistribu advected on the time step given.
+     */
+    DFieldFDistribu operator()(
+            DFieldFDistribu allfdistribu,
+            DVectorConstFieldAdvectionRTheta advection_field_rtheta,
+            double dt) const
+    {
+        using DimX = typename LogicalToPhysicalMapping::cartesian_tag_x;
+        using DimY = typename LogicalToPhysicalMapping::cartesian_tag_y;
+        using IdxRangeBatchedWithoutR = ddc::remove_dims_of_t<IdxRangeBatched, GridR>;
+        Kokkos::Profiling::pushRegion("PolarAdvection");
+        IdxRangeBatched grid(get_idx_range(allfdistribu));
+        IdxRangeR radial_grid(grid);
+        IdxRangeBatchedWithoutR no_r_grid(grid);
+
+        IdxRangeBatched const
+                grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
+        IdxRangeBatched const Opoint_grid(radial_grid.take_first(IdxStepR(1)), no_r_grid);
+        IdxRangeBatched const grid_with_points_justafter_Opoint(
+                radial_grid.take_first(IdxStepR(2)).remove_first(IdxStep<GridR>(1)),
+                no_r_grid);
+
+
+        // Convert advection field on RTheta to advection field on XY
+        DVectorFieldMemAdvectionXY advection_field_xy_alloc(grid);
+        DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
+
+        LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy
+                = m_logical_to_physical_mapping;
+
+        // (Ax, Ay) = J (Ar, Atheta)
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                grid_without_Opoint,
+                KOKKOS_LAMBDA(IdxBatched const idx) {
+                    IdxRTheta irtheta(idx);
+                    CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
+
+                    Tensor J = logical_to_physical_mapping_proxy.jacobian_matrix(coord_rtheta);
+
+                    ddcHelper::assign_vector_field_element(
+                            advection_field_xy,
+                            idx,
+                            tensor_mul(
+                                    index<'i', 'j'>(J),
+                                    index<'j'>(advection_field_rtheta(idx))));
+                });
+
+        // Jacobian ill-defined at the O-point, we average the values around the O-point,
+        double advection_field_xy_average_centre_sumx = ddc::parallel_transform_reduce(
+                Kokkos::DefaultExecutionSpace(),
+                grid_with_points_justafter_Opoint,
+                0.,
+                ddc::reducer::sum<double>(),
+                KOKKOS_LAMBDA(IdxBatched const idx) {
+                    return ddcHelper::get<DimX>(advection_field_xy(idx));
+                });
+        double advection_field_xy_average_centre_sumy = ddc::parallel_transform_reduce(
+                Kokkos::DefaultExecutionSpace(),
+                grid_with_points_justafter_Opoint,
+                0.,
+                ddc::reducer::sum<double>(),
+                KOKKOS_LAMBDA(IdxBatched const idx) {
+                    return ddcHelper::get<DimY>(advection_field_xy(idx));
+                });
+        DTensor<CartesianBasis> advection_field_xy_average_centre {
+                1. / grid_with_points_justafter_Opoint.size()
+                * CoordXY(
+                        advection_field_xy_average_centre_sumx,
+                        advection_field_xy_average_centre_sumy)};
+
+        // and assign the averaged value to all the points at the O-point.
+        ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                Opoint_grid,
+                KOKKOS_LAMBDA(IdxBatched const idx) {
+                    ddcHelper::assign_vector_field_element(
+                            advection_field_xy,
+                            idx,
+                            advection_field_xy_average_centre);
+                });
+
+        (*this)(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
+
+        Kokkos::Profiling::popRegion();
+
+        return allfdistribu;
+    }
 };

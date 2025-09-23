@@ -186,6 +186,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // INITIALISATION                                                                                 |
     // ================================================================================================
     host_t<DFieldMemRTheta> density_rtheta_alloc(grid);
+    host_t<DFieldMemRTheta> density_rtheta_averaged_alloc(grid);
     host_t<DFieldMemRTheta> density_xy_alloc(grid);
 
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_exact_alloc(grid);
@@ -197,6 +198,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     host_t<DFieldMemRTheta> electrostatic_potential_alloc(grid);
 
     host_t<DFieldRTheta> density_rtheta(density_rtheta_alloc);
+    host_t<DFieldRTheta> density_rtheta_averaged(density_rtheta_averaged_alloc);
     host_t<DFieldRTheta> density_xy(density_xy_alloc);
     host_t<DFieldRTheta> electrostatic_potential(electrostatic_potential_alloc);
 
@@ -214,6 +216,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         CoordXY const coord_xy(to_physical_mapping(coord_rtheta));
 
         density_rtheta(irtheta) = simulation.function(coord_rtheta);
+        density_rtheta_averaged(irtheta) = density_rtheta(irtheta);
         density_xy(irtheta) = density_rtheta(irtheta);
         electrostatic_potential(irtheta) = simulation.electrostatical_potential(coord_xy, 0);
 
@@ -296,6 +299,8 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     auto density_rtheta_device
             = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_rtheta);
+    auto density_rtheta_averaged_device = ddc::
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_rtheta_averaged);
     auto advection_field_rtheta_device = ddcHelper::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_rtheta);
 
@@ -303,11 +308,18 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // SIMULATION                                                                                     |
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
+        // --- operator() 1: use the given value at the O-point.
         advection_operator(
                 get_field(density_rtheta_device),
                 get_const_field(advection_field_rtheta_device),
                 advection_field_xy_centre,
                 dt);
+        // --- operator() 2: compute a value for the O-point forom the other values.
+        advection_operator(
+                get_field(density_rtheta_averaged),
+                get_const_field(advection_field_rtheta_device),
+                dt);
+        // --- operator() 3: directly give the advection field on (x,y). No extra computations.
         advection_operator(
                 get_field(density_xy_device),
                 get_const_field(advection_field_xy_device),
@@ -315,10 +327,14 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
         ddc::parallel_deepcopy(density_xy, get_const_field(density_xy_device));
         ddc::parallel_deepcopy(density_rtheta, get_const_field(density_rtheta_device));
+        ddc::parallel_deepcopy(
+                density_rtheta_averaged,
+                get_const_field(density_rtheta_averaged_device));
 
         // Check the advected functions ---
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
             EXPECT_NEAR(density_rtheta(irtheta), density_xy(irtheta), 5e-13);
+            EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-7);
         });
     }
 
