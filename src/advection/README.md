@@ -354,7 +354,7 @@ advection_operator(
 3. An operator taking only the advection field on the logical $r$ and $\theta$ axis.
 Implemented for the case where the advection field on the $x$ and $y$ axis cannot be
 previously computed, its value at the O-point is obtained by averaging the computed values
-at the next $r$ row: $\frac{1}{N_\theta}\sum_{j = 0}^{N_\theta} A_{1, j}$.
+at the next $r$ row: $`\frac{1}{N_\theta}\sum_{j = 0}^{N_\theta} A_{1, j}`$.
 
 ```cpp
 // The advection field is given on <R,Theta>. 
