@@ -274,10 +274,9 @@ and  $`(J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}`$ is well-defined. The details
 
 **Remark 2:** if the mapping function is analytically invertible, it is less costly to advect in the physical domain.
 
-
 ### Tutorial
 
-Here is a simple example to define a `BslAdvectionPolar` operator. 
+Here is a simple example to define a `BslAdvectionPolar` operator.
 
 ```cpp
 // Define a spline builder for the advected function. 
@@ -307,9 +306,9 @@ SplinePolarFootFinder find_feet(
 BslAdvectionPolar advection_operator(interpolator, find_feet, logical_to_physical_mapping);
 ```
 
-Now, there are three `operator()` implemented. 
+Now, there are three `operator()` implemented.
 
-1. An operator taking the advection field on the physical $x$ and $y$ axis. 
+1. An operator taking the advection field on the physical $x$ and $y$ axis.
 
 ```cpp
 // The advection field is given on <X,Y>. 
@@ -326,12 +325,12 @@ advection_operator(
         dt);
 ```
 
-2. An operator taking the advection field on the logical $r$ and $\theta$ axis and 
-the value of the advection field on the physical $x$ and $y$ axis at the O-point. 
-The advection field on the $x$ and $y$ axis is well-defined at the O-point, 
-but the advection field on the $r$ and $\theta$ axis and the Jacobian matrix are ill-defined 
+2. An operator taking the advection field on the logical $r$ and $\theta$ axis and
+the value of the advection field on the physical $x$ and $y$ axis at the O-point.
+The advection field on the $x$ and $y$ axis is well-defined at the O-point,
+but the advection field on the $r$ and $\theta$ axis and the Jacobian matrix are ill-defined
 at the O-point. We cannot directly compute the value of the advection field on the $x$ and $y$ axis
-at the O-point. So, here we provide this value at the operator. 
+at the O-point. So, here we provide this value at the operator.
 
 ```cpp
 // The advection field is given on <R,Theta>. 
@@ -352,10 +351,10 @@ advection_operator(
         dt);
 ```
 
-3. An operator taking only the advection field on the logical $r$ and $\theta$ axis. 
-Implemented for the case where the advection field on the $x$ and $y$ axis cannot be  
-previously computed, its value at the O-point is obtained by averaging the computed values 
-at the next $r$ row: $\frac{1}{N_\theta}\sum_{j = 0}^{N_\theta} A_{1, j}$. 
+3. An operator taking only the advection field on the logical $r$ and $\theta$ axis.
+Implemented for the case where the advection field on the $x$ and $y$ axis cannot be
+previously computed, its value at the O-point is obtained by averaging the computed values
+at the next $r$ row: $\frac{1}{N_\theta}\sum_{j = 0}^{N_\theta} A_{1, j}$.
 
 ```cpp
 // The advection field is given on <R,Theta>. 
