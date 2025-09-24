@@ -197,11 +197,21 @@ public:
             DTensor<CartesianBasis> const& advection_field_xy_centre,
             double dt) const
     {
+        using DimX = typename LogicalToPhysicalMapping::cartesian_tag_x;
+        using DimY = typename LogicalToPhysicalMapping::cartesian_tag_y;
         using IdxRangeBatchedWithoutR = ddc::remove_dims_of_t<IdxRangeBatched, GridR>;
         Kokkos::Profiling::pushRegion("PolarAdvection");
         IdxRangeBatched grid(get_idx_range(allfdistribu));
         IdxRangeR radial_grid(grid);
         IdxRangeBatchedWithoutR no_r_grid(grid);
+
+        // Check the first points on R correspond to the O-point.
+        CoordXY o_point = m_logical_to_physical_mapping.o_point();
+        CoordRTheta point_on_first_row
+                = ddc::coordinate(Idx<GridR, GridTheta>(radial_grid.front(), no_r_grid.front()));
+        CoordXY diff_points = m_logical_to_physical_mapping(point_on_first_row) - o_point;
+        assert(abs(ddc::get<DimX>(diff_points)) < 1e-15);
+        assert(abs(ddc::get<DimY>(diff_points)) < 1e-15);
 
         IdxRangeBatched const
                 grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
@@ -280,6 +290,14 @@ public:
         IdxRangeBatched grid(get_idx_range(allfdistribu));
         IdxRangeR radial_grid(grid);
         IdxRangeBatchedWithoutR no_r_grid(grid);
+
+        // Check the first points on R correspond to the O-point.
+        CoordXY o_point = m_logical_to_physical_mapping.o_point();
+        CoordRTheta point_on_first_row
+                = ddc::coordinate(Idx<GridR, GridTheta>(radial_grid.front(), no_r_grid.front()));
+        CoordXY diff_points = m_logical_to_physical_mapping(point_on_first_row) - o_point;
+        assert(abs(ddc::get<DimX>(diff_points)) < 1e-15);
+        assert(abs(ddc::get<DimY>(diff_points)) < 1e-15);
 
         IdxRangeBatched const
                 grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
