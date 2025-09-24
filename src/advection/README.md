@@ -331,10 +331,12 @@ The advection field on the $x$ and $y$ axis is well-defined at the O-point,
 but the advection field on the $r$ and $\theta$ axis and the Jacobian matrix are ill-defined
 at the O-point. We cannot directly compute the value of the advection field on the $x$ and $y$ axis
 at the O-point. So, here we provide this value at the operator.
+The advection field along $r$ and $\theta$ can be defined on a grid with or without O-point.
+In any case, the values on the first index on $r$ won't be taken into account.
 
 ```cpp
 // The advection field is given on <R,Theta>. 
-DVectorFieldMemRTheta<R, Theta> advection_field_rtheta_alloc (grid); 
+DVectorFieldMemRTheta<R, Theta> advection_field_rtheta_alloc (grid_with_or_without_Opoint); 
 DVectorFieldRTheta<R,Theta> advection_field_rtheta (advection_field_rtheta_alloc);
 
 // The additional value of the advection field on <X,Y> at the O-point. 
@@ -355,10 +357,11 @@ advection_operator(
 Implemented for the case where the advection field on the $x$ and $y$ axis cannot be
 previously computed, its value at the O-point is obtained by averaging the computed values
 at the next $r$ row: $`\frac{1}{N_\theta}\sum_{j = 0}^{N_\theta} A_{1, j}`$.
+If the `grid` does not contain the O-point, then the averaging treatment is not applied.
 
 ```cpp
 // The advection field is given on <R,Theta>. 
-DVectorFieldMemRTheta<R, Theta> advection_field_rtheta_alloc (grid); 
+DVectorFieldMemRTheta<R, Theta> advection_field_rtheta_alloc (grid_with_or_without_Opoint); 
 DVectorFieldRTheta<R,Theta> advection_field_rtheta (advection_field_rtheta_alloc);
 
 DFieldMemRTheta function_alloc(grid);   // a function. 
