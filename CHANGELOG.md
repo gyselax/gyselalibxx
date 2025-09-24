@@ -69,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change constructor argument of `PoissonLikeRHSFunction` from the (r, theta) geometry to pass spline coefficients on GPU.
 - Use Spack to install the Kokkos ecosystem in the MI250 Adastra toolchain.
 - Use Spack to install the Kokkos ecosystem in the GENOA Adastra toolchain.
+- Use a single rocm stack on Adastra.
 
 ### Deprecated
 
