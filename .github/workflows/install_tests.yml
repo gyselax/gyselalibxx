@@ -55,6 +55,8 @@ jobs:
           ../toolchains/cpu.spack.gyselalibxx_env/prepare.sh
         shell: bash
         timeout-minutes: 180
+      - name: Setup tmate session
+        uses: mxschmitt/action-tmate@v3
       - name: Build code
         uses: ./.github/actions/build_code
         with:

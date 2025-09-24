@@ -3,37 +3,9 @@ spack:
     unify: true
   definitions:
   - compilers: []
-  - packages:
-    - 'cmake@3.30'
-    - 'ginkgo@1.9'
-    - 'googletest@1.14 +gmock'
-    - 'kokkos@4.6+serial'
-    - 'kokkos-fft@0.3 host_backend=fftw-serial'
-    - 'kokkos-kernels@4.6'
-    - 'kokkos-tools'
-    - 'openmpi@5.0'
-    - 'paraconf@1.0'
-    - 'pdi@1.9 ~fortran ~python'
-    - 'pdiplugin-decl-hdf5@1.9 +mpi ~fortran'
-    - 'pdiplugin-decl-netcdf@1.9 +mpi'
-    - 'pdiplugin-mpi@1.9'
-    - 'pdiplugin-set-value@1.9'
-    - 'pdiplugin-trace@1.9'
   - python-packages:
-    - 'py-dask@2024.7'
-    - 'py-h5py@3.12'
-    - 'py-imageio@2.35'
-    - 'py-matplotlib@3.9'
-    - 'py-netcdf4@1.7 +mpi'
-    - 'py-numpy@2.1'
-    - 'py-scipy@1.14'
-    - 'py-sympy@1.13'
-    - 'py-xarray@2024.7'
+    - 'py-matplotlib@3.9.2%apple-clang@17.0.0~animation~fonts~latex~movies backend=macosx build_system=python_pip arch=darwin-sequoia-m1'
   specs:
-  - lapack
-  - matrix:
-    - [$packages]
-    - [$%compilers]
   - matrix:
     - [$python-packages]
     - [$%compilers]
