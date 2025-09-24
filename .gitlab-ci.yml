@@ -168,6 +168,7 @@ cppcheck_static_analysis:
     GIT_SUBMODULE_STRATEGY: recursive
   script: |
     set +e
+    ./bin/run_cppcheck toolchains/common_toolchains/serial_debug_toolchain.cmake src simulations tests --disable-style
     python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
   allow_failure:
     exit_codes: [1, 2] # Allow failure due to style or error but not fatal
