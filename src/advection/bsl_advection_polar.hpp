@@ -98,13 +98,6 @@ class BslAdvectionPolar
             = DVectorFieldMem<IdxRangeBatch, CartesianBasis, MemorySpace>;
     using DVectorFieldAdvectionXYOnBatch = DVectorField<IdxRangeBatch, CartesianBasis, MemorySpace>;
 
-    // using DVectorFieldMemAdvectionXYOnTheta
-    //         = DVectorFieldMem<IdxRangeBatched, CartesianBasis, MemorySpace>;
-    // using DVectorFieldAdvectionXYOnTheta = DVectorField<IdxRangeBatched, CartesianBasis, MemorySpace>;
-    using DVectorConstFieldAdvectionXYOnRTheta
-            = DVectorConstField<IdxRangeRTheta, CartesianBasis, MemorySpace>;
-
-
     using DVectorFieldAdvectionRTheta
             = DVectorField<IdxRangeBatched, CurvilinearBasis, MemorySpace>;
     using DVectorConstFieldAdvectionRTheta
