@@ -399,7 +399,7 @@ public:
         return allfdistribu;
     }
 
-private:
+
     /**
      * @brief Average a field on X and a field on Y defined on (R,Theta) 
      * and return a coordinate on (X,Y) of the averaged values. 
