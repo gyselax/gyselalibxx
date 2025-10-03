@@ -7,11 +7,11 @@ then
     exit 1
 fi
 
-if [ -f "$(which spack)" ]
+if command -v spack >/dev/null 2>&1
 then
-  spack env deactivate
+    spack env deactivate
 else
-  . /data/gyselarunner/spack-0.23.0/share/spack/setup-env.sh
+    . /data/gyselarunner/spack-0.23.0/share/spack/setup-env.sh
 fi
 
 spack load gcc@12
