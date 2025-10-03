@@ -63,7 +63,7 @@ def main():
                 if scope.function and scope.exec_space == 'GPU' and (scope.function.hasVirtualSpecifier or scope.function.isImplicitlyVirtual):
                     tok = next(tok for tok in cfg.tokenlist if tok.Id == scope.bodyStartId).previous
                     reportError(tok,
-                        f'Virtual functions cannot be reliably called from GPU',
+                        'Virtual functions cannot be reliably called from GPU',
                         'virtualFunctionOnGPU')
 
             # Check for bad class access from GPU
