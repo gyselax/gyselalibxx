@@ -71,20 +71,20 @@ jobs:
           echo "toolchain_matrix=$matrix" >> $GITHUB_OUTPUT
         shell: bash
 
-  docker_update:
-    runs-on: ubuntu-latest
-    outputs:
-      image_tag: ${{ steps.docker.outputs.image_tag }}
-    #if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
-    steps:
-      - uses: actions/checkout@v4
-      - id: docker
-        uses: ./.github/actions/docker_update
-        with:
-          always_push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
-          # Build the release tag with a ternary expression
-          # 'latest' if push else (release.tag_name if release else '')
-          release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
+  #docker_update:
+  #  runs-on: ubuntu-latest
+  #  outputs:
+  #    image_tag: ${{ steps.docker.outputs.image_tag }}
+  #  #if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+  #  steps:
+  #    - uses: actions/checkout@v4
+  #    - id: docker
+  #      uses: ./.github/actions/docker_update
+  #      with:
+  #        always_push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
+  #        # Build the release tag with a ternary expression
+  #        # 'latest' if push else (release.tag_name if release else '')
+  #        release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
 
   #cpu_tests:
   #  runs-on: ubuntu-latest
@@ -168,9 +168,10 @@ jobs:
   include_what_you_use:
     name: Check includes
     runs-on: ubuntu-latest
-    needs: [pre_job, docker_update]
+    #needs: [pre_job, docker_update]
+    needs: [pre_job]
     container:
-      image: ${{ needs.docker_update.outputs.image_tag }}
+      image: ghcr.io/gyselax/gyselalibxx_env:22dc4ff734e2d6bea61f6d4bb4f5cbc8722490a3 # ${{ needs.docker_update.outputs.image_tag }}
     env:
       CC: 'clang'
       CXX: 'clang++'
@@ -183,6 +184,20 @@ jobs:
       - name: "Filter tests"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/test_filter
+      - name: Check clang version
+        id: clang-version
+        run:
+          CLANG_VERSION=$(clang --version | grep -oP 'clang version \K[0-9]+')
+          echo "CLANG_VERSION=${CLANG_VERSION}" >> ${GITHUB_OUTPUT}
+        shell: bash
+      - name: "Search for LLVM"
+        run: |
+          which clang
+          CLANG_DIR=$(dirname `which clang`)
+          ls ${CLANG_DIR}/*
+          ls ${CLANG_DIR}/../*
+          find ${CLANG_DIR}/.. -name LLVMConfig.cmake
+          
       - name: Checkout iwyu
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
@@ -192,7 +207,7 @@ jobs:
           path: iwyu
       - name: Build iwyu
         run: |
-          cmake -B build -S .
+          cmake -DCMAKE_PREFIX_PATH=/usr/lib/llvm-${{ steps.clang-version.outputs.CLANG_VERSION }} -B build -S .
           cmake --build build --parallel
           echo "$(pwd)/iwyu/build/bin/" >> $GITHUB_PATH
         working-directory: iwyu
