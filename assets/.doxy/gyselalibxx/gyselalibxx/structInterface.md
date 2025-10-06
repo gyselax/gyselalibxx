@@ -10,7 +10,7 @@
 
 
 
-_Represent a simple sticking of two edges._ [More...](#detailed-description)
+_Represent a simple interface where two edges intersect._ [More...](#detailed-description)
 
 * `#include <interface.hpp>`
 

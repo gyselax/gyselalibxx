@@ -558,10 +558,10 @@
 <ul>
 <li><a href="#patch">Patch</a> - Definition of Patch tag.</li>
 <li><a href="#interfaces">Interfaces</a></li>
-<li><a href="#sticking-of-two-edges">Sticking of Two Edges</a><ul>
+<li><a href="#overlapping-two-edges">Overlapping Two Edges</a><ul>
 <li><a href="#multi-patch-domain">Multi-patch domain</a> - Mathematical definition of multi-patch domain.</li>
 <li><a href="#edges">Edges</a> - Mathematical definition of edges.</li>
-<li><a href="#sticking-and-coordinate-transformation">Sticking and Coordinate Transformation</a> - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation).</li>
+<li><a href="#connections-and-coordinate-transformation">Connections and Coordinate Transformation</a> - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation).</li>
 <li><a href="#index-transformation">Index transformation</a> - Algorithm of the index transformation in EdgeTransformation.</li>
 <li><a href="#conformity-of-the-meshes">Conformity of the meshes</a> - Definition of <code>UniformGridIdxMatching</code>.</li>
 </ul>
@@ -585,10 +585,10 @@
 </ul>
 <p>The domain defined on this patch is called <em>logical domain</em>.</p>
 <h2 id="interfaces">Interfaces</h2>
-<h3 id="sticking-of-two-edges">Sticking of Two Edges</h3>
+<h3 id="overlapping-two-edges">Overlapping Two Edges</h3>
 <p>We follow the idea to represent the topology of a multipatch domain using
 the idea of <em>domain manifolds</em> (see [1]). This means that we have several
-independent tensor-product logical domains and define their sticking via coordinate
+independent tensor-product logical domains and define their connections via coordinate
 transformations.</p>
 <p><strong>Remark:</strong> In the referenced paper, the authors use affine isometries of the entire
 patch instead of coordinate transformations of the faces. This is equivalent to our approach in
@@ -624,12 +624,12 @@ and whether it is at the front or the back of the domain.
 So e.g.the edge <span class="arithmatex">\([a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}\)</span> would be identified with patch <span class="arithmatex">\(i\)</span>, dimensions <code>Yi</code> and <code>FRONT</code>.
 <span class="arithmatex">\([a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}\)</span> would be identified with patch <span class="arithmatex">\(i\)</span>, dimensions <code>Yi</code> and <code>BACK</code> and
 <span class="arithmatex">\(\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\)</span> would be identified with patch <span class="arithmatex">\(i\)</span>, dimensions <code>Xi</code> and <code>BACK</code>.</p>
-<h4 id="sticking-and-coordinate-transformation">Sticking and Coordinate Transformation</h4>
+<h4 id="connections-and-coordinate-transformation">Connections and Coordinate Transformation</h4>
 <p>Any edge can then be associated with an edge on another patch.
-This corresponds to the 'sticking'.
+The two edges are considered to be overlapping.
 So for a different patch <span class="arithmatex">\(\Omega^{(j)}\)</span>, we have the logical coordinate domain
 <span class="arithmatex">\([a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]\)</span>.
-If we want to stick patch <span class="arithmatex">\(i\)</span> to patch <span class="arithmatex">\(j\)</span>, we have to determine the edges that
+If we want to connect patch <span class="arithmatex">\(i\)</span> to patch <span class="arithmatex">\(j\)</span>, we have to determine the edges that
 are identified and how they are identified.
 The way that they are identified is mathematically determined via the coordinate transformation from one edge
 to the other.
@@ -637,8 +637,8 @@ Since the transformations are supposed to be affine and bijective, there are onl
 the transformation can be order preserving or
 order reversing (this corresponds to the orientation of the physical edge where two parametrisations
 coming from the two patches can have either the same or the opposite orientation respectively).</p>
-<p>So for example, we want to stick the edge <span class="arithmatex">\(\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\)</span>
-on patch <span class="arithmatex">\(i\)</span> to the edge <span class="arithmatex">\([a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}\)</span> on patch <span class="arithmatex">\(j\)</span>.
+<p>So for example, we want the edge <span class="arithmatex">\(\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]\)</span>
+on patch <span class="arithmatex">\(i\)</span> to overlap with the edge <span class="arithmatex">\([a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}\)</span> on patch <span class="arithmatex">\(j\)</span>.
 If the transformation is order-preserving (i.e. the orientations of the parametrisations
 of the physical edge agree), then the transformation from the first edge to the second is</p>
 <div class="arithmatex">\[
@@ -650,7 +650,7 @@ of the physical edge are opposite), then it is</p>
 t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} - a_x^{(j)}).
 \]</div>
 <p>In the code, an edge is represented by the <code>Edge</code> structure.
-The sticking of two edges is represented by an <code>Interface</code> structure which contains tags
+Two overlapping edges are represented by an <code>Interface</code> structure which contains tags
 to the first patch and the second patch as well as the boolean member <code>orientations_agree</code>.
 The transformation from one edge to the other is done using the <code>EdgeTransformation</code> operator.</p>
 <p>This operator contains an <code>operator()</code> to transform a given coordinate on a coordinate on the other patch.

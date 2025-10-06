@@ -31,7 +31,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**Interface**](structInterface.md) &lt;class Edge1Type, class Edge2Type, orientations\_agree\_bool&gt;<br>_Represent a simple sticking of two edges._  |
+| struct | [**Interface**](structInterface.md) &lt;class Edge1Type, class Edge2Type, orientations\_agree\_bool&gt;<br>_Represent a simple interface where two edges intersect._  |
 
 
 

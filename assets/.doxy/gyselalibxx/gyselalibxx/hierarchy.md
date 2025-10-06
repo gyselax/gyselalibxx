@@ -173,7 +173,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**GyroAverageOperator::R\_gyro**](structGyroAverageOperator_1_1R__gyro.md) 
 * **struct** [**GyroAverageOperator::Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md) 
 * **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a IdxRangeSlice type from a TypeSeq._ 
-* **struct** [**Interface**](structInterface.md) _Represent a simple sticking of two edges._ 
+* **struct** [**Interface**](structInterface.md) _Represent a simple interface where two edges intersect._ 
 * **struct** [**MPIDim**](structMPIDim.md) _An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered information will be sent to or where the gathered information will be collected from._ 
 * **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_ \(\mu\) _._
 * **struct** [**MultipatchSplineBuilder2D::Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md) 

@@ -125,7 +125,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Represent a simple sticking of two edges. </para>
+<para>Represent a simple interface where two edges intersect. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
