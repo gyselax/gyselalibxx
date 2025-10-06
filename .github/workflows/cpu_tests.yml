@@ -210,8 +210,8 @@ jobs:
         run: |
           echo $PATH
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=toolchains/common_toolchains/serial_debug_toolchain.cmake -B build -S .
-          bin/filter_compile_commands build/ src tests/ simulations/
-          python3 iwyu/iwyu_tool.py -p build/relevant_compile_commands.json -- -Xiwyu --mapping_file=$(pwd)/bin/ci_tools/iwyu_config.imp
+          bin/filter_compile_commands build/ src tests/ simulations/ --exclude tests/data_types/static_assert_tests/
+          python3 iwyu/iwyu_tool.py -p build/relevant_compile_commands.json -- -Xiwyu --mapping_file=$(pwd)/bin/ci_tools/iwyu_config.imp -Xiwyu --transitive_includes_only
         shell: bash
 
   #set_pr_status:

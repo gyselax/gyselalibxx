@@ -11,14 +11,17 @@ if __name__ == '__main__':
                         type=Path)
     parser.add_argument('folders', metavar='FOLDERS', help='The folders in which the code you would like to test is found.',
                         nargs='+')
+    parser.add_argument('--exclude', metavar='FOLDERS', help='The folders to be excluded from tests.',
+                        nargs='*')
     args = parser.parse_args()
 
     with open(args.build_dir / 'compile_commands.json', encoding='utf-8') as f:
         config = json.load(f)
 
     relevant_folders = [Path(r).absolute() for r in args.folders]
+    exclude_folders = [Path(r).absolute() for r in args.exclude]
 
-    relevant_configs = [c for c in config if any(r in Path(c['file']).parents for r in relevant_folders)]
+    relevant_configs = [c for c in config if any(r in Path(c['file']).parents for r in relevant_folders) and not any(r in Path(c['file']).parents for r in exclude_folders)]
 
     #for c in relevant_configs:
     #    c['command'] = ' '.join(s for s in c['command'].split() if not (s.startswith('-I') and '/vendor/' in s))
