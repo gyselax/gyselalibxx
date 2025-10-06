@@ -71,20 +71,20 @@ jobs:
           echo "toolchain_matrix=$matrix" >> $GITHUB_OUTPUT
         shell: bash
 
-  #docker_update:
-  #  runs-on: ubuntu-latest
-  #  outputs:
-  #    image_tag: ${{ steps.docker.outputs.image_tag }}
-  #  if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
-  #  steps:
-  #    - uses: actions/checkout@v4
-  #    - id: docker
-  #      uses: ./.github/actions/docker_update
-  #      with:
-  #        always_push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
-  #        # Build the release tag with a ternary expression
-  #        # 'latest' if push else (release.tag_name if release else '')
-  #        release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
+  docker_update:
+    runs-on: ubuntu-latest
+    outputs:
+      image_tag: ${{ steps.docker.outputs.image_tag }}
+    if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
+    steps:
+      - uses: actions/checkout@v4
+      - id: docker
+        uses: ./.github/actions/docker_update
+        with:
+          always_push: ${{ github.event_name == 'push' || github.event_name == 'release' }}
+          # Build the release tag with a ternary expression
+          # 'latest' if push else (release.tag_name if release else '')
+          release_tag: ${{ github.event_name == 'push' && 'latest' || ( github.event_name == 'release' && github.event.release.tag_name || '') }}
 
   #cpu_tests:
   #  runs-on: ubuntu-latest
@@ -168,7 +168,7 @@ jobs:
   include_what_you_use:
     name: Check includes
     runs-on: ubuntu-latest
-    needs: docker_update
+    needs: [pre_job, docker_update]
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
     env:
