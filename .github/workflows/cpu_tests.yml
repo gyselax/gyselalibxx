@@ -200,10 +200,11 @@ jobs:
         run: |
           cmake -B build -S .
           cmake --build build --parallel
+        working-directory: iwyu
         shell: bash
       - name: Build code
         run: |
-          cmake -DCMAKE_TOOLCHAIN_FILE=toolchains/common_toolchains/serial_debug_toolchain.cmake -DCMAKE_CXX_INCLUDE_WHAT_YOU_USE=$(pwd)/include-what-you-use/build/bin/include-what-you-use -B build -S .
+          cmake -DCMAKE_TOOLCHAIN_FILE=toolchains/common_toolchains/serial_debug_toolchain.cmake -DCMAKE_CXX_INCLUDE_WHAT_YOU_USE=$(pwd)/iwyu/build/bin/include-what-you-use -B build -S .
         shell: bash
 
   #set_pr_status:
