@@ -1,8 +1,8 @@
 [
   { include: ["@<ddc/[a-z_]+\\.hpp>", "private", "<ddc/ddc.hpp>", "public"] },
   { include: ["@<ddc/kernels/splines/[a-z_]+\\.hpp>", "private", "<ddc/kernels/splines.hpp>", "public"] },
-  { include: ["<Kokkos_.*>", "public", "<Kokkos_Core.hpp>", "public"] },
-  { include: ["<impl/Kokkos_.*>", "private", "<Kokkos_Core.hpp>", "public"] },
-  { include: ["<[a-zA-Z_]+/Kokkos_.*>", "public", "<Kokkos_Core.hpp>", "public"] },
+  { include: ["@<Kokkos_.*>", "public", "<Kokkos_Core.hpp>", "public"] },
+  { include: ["@<impl/Kokkos_.*>", "private", "<Kokkos_Core.hpp>", "public"] },
+  { include: ["@<[a-zA-Z_]+/Kokkos_.*>", "public", "<Kokkos_Core.hpp>", "public"] },
 ]
 
