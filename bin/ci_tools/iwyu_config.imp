@@ -1,10 +1,14 @@
 [
   { include: ["@<ddc/[a-z_]+\\.hpp>", "private", "<ddc/ddc.hpp>", "public"] },
-  { include: ["@<ddc/kernels/splines/[a-z_]+\\.hpp>", "private", "<ddc/kernels/splines.hpp>", "public"] },
+  { include: ["@<ddc/kernels/splines/.*>", "private", "<ddc/kernels/splines.hpp>", "public"] },
   { include: ["@<Kokkos_.*(?<!Impl)\\.hpp>", "public", "<Kokkos_Core.hpp>", "public"] },
   { include: ["@<impl/Kokkos_.*>", "private", "<Kokkos_Core.hpp>", "public"] },
   { include: ["@<(?!impl)[a-zA-Z_]+/Kokkos_.*>", "private", "<Kokkos_Core.hpp>", "public"] },
+  { include: ["<ddc/detail/tagged_vector.hpp>", "private", "<vector_index_tools.hpp>", "public"] },
+  { include: ["<bits/chrono.h>", "public", "<chrono>", "public"] },
 
-  { symbol: ["std::basic_string", "private", "<Kokkos_Core.hpp>", "public"] }, # Added to allow implicit conversion of strings passed to pushRegion
+  { symbol: ["std::basic_string", "private", "<Kokkos_Core.hpp>", "public"] }, # Added to allow implicit conversion of strings
+  { symbol: ["std::basic_string", "private", "<ddc/pdi.hpp>", "private"] }, # Added to allow implicit conversion of strings
+  { symbol: ["ddc::detail::TaggedVector", "private", "<vector_index_tools.hpp>", "public"] },
 ]
 
