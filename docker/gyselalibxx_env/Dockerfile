@@ -26,6 +26,7 @@ RUN chmod +x /bin/bash_run \
  && apt-get install -y --no-install-recommends \
     build-essential \
     clang-18 \
+    libclang-18-dev \
     libomp-dev \
     clang-format-14 \
     doxygen \
