@@ -203,11 +203,12 @@ jobs:
         run: |
           cmake -DCMAKE_PREFIX_PATH=/usr/lib/llvm-${{ steps.clang-version.outputs.CLANG_VERSION }}/lib/cmake/llvm -B build -S .
           cmake --build build --parallel
-          echo "$(pwd)/iwyu/build/bin/" >> $GITHUB_PATH
+          echo "$(pwd)/build/bin/" >> $GITHUB_PATH
         working-directory: iwyu
         shell: bash
       - name: Build code
         run: |
+          echo $PATH
           cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=toolchains/common_toolchains/serial_debug_toolchain.cmake -B build -S .
           bin/filter_compile_commands build/ src tests/ simulations/
           python3 iwyu/iwyu_tool.py -p build/relevant_compile_commands.json -- -Xiwyu --mapping_file=$(pwd)/bin/ci_tools/iwyu_config.imp
