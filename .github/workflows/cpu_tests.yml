@@ -183,16 +183,21 @@ jobs:
       - name: "Filter tests"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/test_filter
+      - name: Check clang version
+        id: clang-version
+        run:
+          CLANG_VERSION=$(clang --version | grep -oP 'clang version \K[0-9]+')
+          echo "CLANG_VERSION=${CLANG_VERSION}" >> ${GITHUB_OUTPUT}
+        shell: bash
       - name: Checkout iwyu
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
         with:
           repository: include-what-you-use/include-what-you-use
-          ref: 0.25
+          ref: 0.${{ steps.clang-version.outputs.CLANG_VERSION }}
           path: iwyu
       - name: Build iwyu
         run: |
-          clang --version
           cmake -B build -S .
           cmake --build build --parallel
         shell: bash
