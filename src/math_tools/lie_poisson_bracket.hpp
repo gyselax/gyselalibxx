@@ -58,7 +58,7 @@ public:
      * @param[in] partial_derivatives_f A vector containing the (covariant) gradient
      * of the scalar field f expressed at the given coordinate.
      * @param[in] partial_derivatives_g A tensor containing the partial derivatives
-     * of the vector field G expressed at the given coordinate : @f DG_{ij} = \partial_j G_i @f.
+     * of the vector field G expressed at the given coordinate : @f$ DG_{ij} = \partial_j G_i @f$.
      * @param[in] B A contravariant vector containing the magnetic field at the given coordinate.
      * @param[in] coord The coordinate where the calculation is carried out.
      *
