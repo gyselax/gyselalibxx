@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Specify return type for Lie-Poisson operator explicitly for better error messages.
+
 ### Changed
 
 - Use patched recipes for the CPU Spack toolchain.
