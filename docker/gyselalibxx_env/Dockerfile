@@ -27,6 +27,7 @@ RUN chmod +x /bin/bash_run \
     build-essential \
     clang-18 \
     libclang-18-dev \
+    llvm-dev \
     libomp-dev \
     clang-format-14 \
     doxygen \
