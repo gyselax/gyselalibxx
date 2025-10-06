@@ -189,6 +189,7 @@ jobs:
         run:
           CLANG_VERSION=$(clang --version | grep -oP 'clang version \K[0-9]+')
           echo "CLANG_VERSION=${CLANG_VERSION}" >> ${GITHUB_OUTPUT}
+          echo "CLANG_VERSION=${CLANG_VERSION}"
         shell: bash
       - name: "Search for LLVM"
         run: |
@@ -197,7 +198,7 @@ jobs:
           ls ${CLANG_DIR}/*
           ls ${CLANG_DIR}/../*
           find ${CLANG_DIR}/.. -name LLVMConfig.cmake
-          
+          echo ${{ steps.clang-version.outputs.CLANG_VERSION }}
       - name: Checkout iwyu
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
@@ -207,7 +208,7 @@ jobs:
           path: iwyu
       - name: Build iwyu
         run: |
-          cmake -DCMAKE_PREFIX_PATH=/usr/lib/llvm-${{ steps.clang-version.outputs.CLANG_VERSION }} -B build -S .
+          cmake -DCMAKE_PREFIX_PATH=/usr/lib/llvm-14 -B build -S .
           cmake --build build --parallel
           echo "$(pwd)/iwyu/build/bin/" >> $GITHUB_PATH
         working-directory: iwyu
