@@ -200,11 +200,14 @@ jobs:
         run: |
           cmake -B build -S .
           cmake --build build --parallel
+          echo "$(pwd)/iwyu/build/bin/" >> $GITHUB_PATH
         working-directory: iwyu
         shell: bash
       - name: Build code
         run: |
-          cmake -DCMAKE_TOOLCHAIN_FILE=toolchains/common_toolchains/serial_debug_toolchain.cmake -DCMAKE_CXX_INCLUDE_WHAT_YOU_USE=$(pwd)/iwyu/build/bin/include-what-you-use -B build -S .
+          cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_TOOLCHAIN_FILE=toolchains/common_toolchains/serial_debug_toolchain.cmake -B build -S .
+          bin/filter_compile_commands build_iwyu/ src tests/ simulations/
+          python3 iwyu/iwyu_tool.py -p build/relevant_compile_commands.json
         shell: bash
 
   #set_pr_status:
