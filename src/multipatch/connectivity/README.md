@@ -6,10 +6,10 @@ The following sections describe the structures and methods implemented:
 
 - [Patch](#patch) - Definition of Patch tag.
 - [Interfaces](#interfaces)
-  - [Sticking of Two Edges](#sticking-of-two-edges)
+  - [Overlapping Two Edges](#overlapping-two-edges)
     - [Multi-patch domain](#multi-patch-domain) - Mathematical definition of multi-patch domain.
     - [Edges](#edges) - Mathematical definition of edges.
-    - [Sticking and Coordinate Transformation](#sticking-and-coordinate-transformation) - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation).
+    - [Connections and Coordinate Transformation](#connections-and-coordinate-transformation) - Mathematical definition of  coordinate transformation and links to the implemented class (Interface, Edge and EdgeTransformation).
     - [Index transformation](#index-transformation) - Algorithm of the index transformation in EdgeTransformation.
     - [Conformity of the meshes](#conformity-of-the-meshes) - Definition of `UniformGridIdxMatching`.
 - [Patch locator](#patch-locator) - Definition of patch locator operators to identify the patch where a given physical coordinate is.
@@ -34,11 +34,11 @@ The domain defined on this patch is called *logical domain*.
 
 ## Interfaces
 
-### Sticking of Two Edges
+### Overlapping Two Edges
 
 We follow the idea to represent the topology of a multipatch domain using
 the idea of *domain manifolds* (see [1]). This means that we have several
-independent tensor-product logical domains and define their sticking via coordinate
+independent tensor-product logical domains and define their connections via coordinate
 transformations.
 
 **Remark:** In the referenced paper, the authors use affine isometries of the entire
@@ -87,13 +87,13 @@ So e.g.the edge $`[a_x^{(i)}, b_x^{(i)}] \times \{ a_y^{(i)} \}`$ would be ident
 $`[a_x^{(i)}, b_x^{(i)}] \times \{ b_y^{(i)} \}`$ would be identified with patch $i$, dimensions `Yi` and `BACK` and
 $`\{ b_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$ would be identified with patch $i$, dimensions `Xi` and `BACK`.
 
-#### Sticking and Coordinate Transformation
+#### Connections and Coordinate Transformation
 
 Any edge can then be associated with an edge on another patch.
-This corresponds to the 'sticking'.
+The two edges are considered to be overlapping.
 So for a different patch $`\Omega^{(j)}`$, we have the logical coordinate domain
 $`[a_x^{(j)}, b_x^{(j)}] \times [a_y^{(j)} b_y^{(j)}]`$.
-If we want to stick patch $i$ to patch $j$, we have to determine the edges that
+If we want to connect patch $i$ to patch $j$, we have to determine the edges that
 are identified and how they are identified.
 The way that they are identified is mathematically determined via the coordinate transformation from one edge
 to the other.
@@ -102,8 +102,8 @@ the transformation can be order preserving or
 order reversing (this corresponds to the orientation of the physical edge where two parametrisations
 coming from the two patches can have either the same or the opposite orientation respectively).
 
-So for example, we want to stick the edge $`\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$
-on patch $i$ to the edge $`[a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}`$ on patch $j$.
+So for example, we want the edge $`\{ a_x^{(i)} \} \times [a_y^{(i)}, b_y^{(i)}]`$
+on patch $i$ to overlap with the edge $`[a_x^{(j)}, b_x^{(j)}] \times \{ b_y^{(j)} \}`$ on patch $j$.
 If the transformation is order-preserving (i.e. the orientations of the parametrisations
 of the physical edge agree), then the transformation from the first edge to the second is
 
@@ -119,7 +119,7 @@ t \mapsto b_x^{(j)} - \frac{t - a_y^{(i)}}{b_y^{(i)} - a_y^{(i)}} \, (b_x^{(j)} 
 ```
 
 In the code, an edge is represented by the `Edge` structure.
-The sticking of two edges is represented by an `Interface` structure which contains tags
+Two overlapping edges are represented by an `Interface` structure which contains tags
 to the first patch and the second patch as well as the boolean member `orientations_agree`.
 The transformation from one edge to the other is done using the `EdgeTransformation` operator.
 
