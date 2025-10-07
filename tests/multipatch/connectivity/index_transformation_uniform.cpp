@@ -160,7 +160,7 @@ TEST_F(IndexTransformationUniformTest, InvertedOrientation)
 
 
 
-TEST_F(IndexTransformationUniformTest, StickingDifferentDimensions)
+TEST_F(IndexTransformationUniformTest, OverlappingDifferentDimensions)
 {
     using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
     using EdgeX2F = Edge<Patch2, GridX<2>, FRONT>;
