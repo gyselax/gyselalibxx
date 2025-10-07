@@ -45,7 +45,7 @@ do spack -e "${GYSELALIB_DIR}" install --reuse --fail-fast --show-log-on-error
 done
 wait
 trap '-' EXIT QUIT ABRT KILL SEGV INT TERM STOP
-
+spack gc --yes-to-all
 # create an activation script
 cat<<EOF > "${GYSELALIB_DIR}/bin/gyselalibxx.env.sh"
 despacktivate &> /dev/null || true
