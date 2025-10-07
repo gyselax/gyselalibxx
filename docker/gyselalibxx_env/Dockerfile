@@ -44,6 +44,8 @@ RUN chmod +x /bin/bash_run \
     python3-venv \
     libpdi-dev \
     cmake \
+ && ln -sf /usr/bin/clang-18 /usr/bin/clang \
+ && ln -sf /usr/bin/clang++-18 /usr/bin/clang++ \
  && git clone -b v1.8.0 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
@@ -124,8 +126,7 @@ RUN chmod +x /bin/bash_run \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
- && chown ci:ci /ci /data \
- && chmod -R a+rX /opt/venv
+ && chown -R ci:ci /ci /data /opt/venv
 
 USER ci:ci
 WORKDIR /ci
