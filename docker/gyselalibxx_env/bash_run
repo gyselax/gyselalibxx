@@ -1,4 +1,9 @@
 #!/bin/bash
 # SPDX-License-Identifier: MIT
 
+# Activate virtual environment if it exists and not already active
+if [ -d /opt/venv ] && [ -z "$VIRTUAL_ENV" ]; then
+    source /opt/venv/bin/activate
+fi
+
 exec "$@"
