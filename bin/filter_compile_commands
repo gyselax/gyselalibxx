@@ -12,7 +12,7 @@ if __name__ == '__main__':
     parser.add_argument('folders', metavar='FOLDERS', help='The folders in which the code you would like to test is found.',
                         nargs='+')
     parser.add_argument('--exclude', metavar='FOLDERS', help='The folders to be excluded from tests.',
-                        nargs='*')
+                        nargs='*', default=())
     args = parser.parse_args()
 
     with open(args.build_dir / 'compile_commands.json', encoding='utf-8') as f:
