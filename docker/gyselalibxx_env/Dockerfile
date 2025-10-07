@@ -41,6 +41,7 @@ RUN chmod +x /bin/bash_run \
     pdiplugin-decl-hdf5-openmpi \
     pdiplugin-set-value \
     python3-pip \
+    python3-venv \
     libpdi-dev \
     cmake \
  && git clone -b v1.8.0 https://github.com/ginkgo-project/ginkgo.git \
@@ -108,7 +109,8 @@ RUN chmod +x /bin/bash_run \
  && apt-get autoremove -y \
  && apt-get clean -y \
  && apt-get autoclean -y \
- && python3 -m pip install -U --no-cache-dir \
+ && python3 -m venv /opt/venv \
+ && /opt/venv/bin/python -m pip install -U --no-cache-dir \
     PyYAML \
     dask \
     h5py \
@@ -122,11 +124,13 @@ RUN chmod +x /bin/bash_run \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
- && chown ci:ci /ci /data
+ && chown ci:ci /ci /data \
+ && chmod -R a+rX /opt/venv
 
 USER ci:ci
 WORKDIR /ci
 ENV HOME=/ci
+ENV PATH="/opt/venv/bin:$PATH"
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]
