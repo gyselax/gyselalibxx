@@ -25,9 +25,9 @@ RUN chmod +x /bin/bash_run \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
-    clang \
+    clang-18 \
     libomp-dev \
-    clang-format \
+    clang-format-14 \
     doxygen \
     pkg-config \
     git \
