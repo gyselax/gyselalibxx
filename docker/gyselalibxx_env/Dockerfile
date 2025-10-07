@@ -62,19 +62,19 @@ RUN chmod +x /bin/bash_run \
  && export KokkosKernels_ROOT=/opt/serial/kokkos-kernels \
  && export KokkosTools_ROOT=/opt/serial/kokkos-tools \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_SERIAL=ON -B build -S kokkos \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build --prefix $Kokkos_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-fft \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build --prefix $KokkosFFT_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-kernels \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build --prefix $KokkosKernels_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
  && rm -rf build \
  && export Kokkos_ROOT=/opt/openmp/kokkos \
@@ -82,25 +82,25 @@ RUN chmod +x /bin/bash_run \
  && export KokkosKernels_ROOT=/opt/openmp/kokkos-kernels \
  && export KokkosTools_ROOT=/opt/openmp/kokkos-tools \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_OPENMP=ON -B build -S kokkos \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build --prefix $Kokkos_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-fft \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build --prefix $KokkosFFT_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-kernels \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build --prefix $KokkosKernels_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
  && rm -rf build kokkos kokkos-fft kokkos-kernels kokkos-tools \
  && git clone -b 2.14.2 https://github.com/danmar/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build \
- && cmake --build build -j 2 \
+ && cmake --build build \
  && cmake --install build \
  && cd .. \
  && rm -rf cppcheck \
