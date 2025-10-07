@@ -6,6 +6,7 @@
   { include: ["@<(?!impl)[a-zA-Z_]+/Kokkos_.*>", "private", "<Kokkos_Core.hpp>", "public"] },
   { include: ["<ddc/detail/tagged_vector.hpp>", "private", "<vector_index_tools.hpp>", "public"] },
   { include: ["<bits/chrono.h>", "public", "<chrono>", "public"] },
+  { include: ['"gtest/gtest.h"', "public", "<gtest/gtest.h>", "public"] },
 
   { symbol: ["std::basic_string", "private", "<Kokkos_Core.hpp>", "public"] }, # Added to allow implicit conversion of strings
   { symbol: ["std::basic_string", "private", "<ddc/pdi.hpp>", "private"] }, # Added to allow implicit conversion of strings
