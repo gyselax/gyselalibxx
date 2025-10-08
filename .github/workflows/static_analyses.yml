@@ -5,7 +5,7 @@ on:
     types:
       - opened
       - reopened
-      #- synchronize
+      - synchronize
     branches-ignore:
       - main
   merge_group:
