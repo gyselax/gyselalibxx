@@ -106,6 +106,8 @@ if __name__ == '__main__':
         relevant_configs = [c for c in relevant_configs if Path(c['file']) in relevant_files or \
                                                             any(d in relevant_files for d in c.get('deps', []))]
 
+        errors = [e for fname, level, msg in errors if fname in relevant_files]
+
     with ThreadPoolExecutor(max_workers=args.jobs) as executor:
         iwyu_results = [executor.submit(submit_iwyu_job, iwyu_command, c) for c in relevant_configs if 'command' in c]
 
