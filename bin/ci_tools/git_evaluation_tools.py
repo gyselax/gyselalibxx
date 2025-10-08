@@ -55,6 +55,10 @@ def get_diff_as_json(filename):
             i+=1
         elif l.startswith('@@'):
             line_info = l.split('@@')[1].split()
+            n_delete = 0
+            delete_index = 0
+            n_append = 0
+            insert_index = 0
             for info in line_info:
                 key = info[0]
                 info = info[1:]

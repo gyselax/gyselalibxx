@@ -122,7 +122,7 @@ RUN chmod +x /bin/bash_run \
     pip \
     scipy \
     xarray \
-    'pylint==2.17.4' \
+    'pylint==3.3.9' \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
