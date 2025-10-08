@@ -58,7 +58,7 @@ jobs:
     name: Python Best Practices
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/gyselax/gyselalibxx_env:0aff62c40e2e1fd37ba3fc2799dfbebf9aea661c
+      image: ghcr.io/gyselax/gyselalibxx_env
       options: --user 1001
     steps:
       - uses: actions/checkout@v4
