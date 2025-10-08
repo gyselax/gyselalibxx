@@ -24,13 +24,12 @@ if __name__ == '__main__':
     parser.add_argument('folders', metavar='FOLDERS', help='The folders in which the code you would like to test is found.',
                         nargs='+', type=Path)
     parser.add_argument('-j', '--jobs', type=int, default=1, help='Number of parallel jobs')
-    parser.add_argument('--disable-style', help='Disable the style checks', action='store_true')
-    parser.add_argument('--no-clean-up', help='Disable the clean-up of the generated folder.', action='store_true')
-    parser.add_argument('--verbose', help='Run cppcheck in verbose mode', action='store_true')
+    parser.add_argument('--fix', help='Modify files to fix includes', action='store_true')
 
     args = parser.parse_args()
 
     errors = []
+    fixes = []
 
     toolchain = Path(args.toolchain).absolute()
 
@@ -110,12 +109,27 @@ if __name__ == '__main__':
             f, p = future.result()
             if p.returncode != 0:
                 errors.append((f, ERROR, p.stderr))
+                fixes.append((f, p.stderr.split(f'The full include-list for {f}:\n')[1].split('---')[0]))
     print()
 
     errors.sort(key=lambda e:e[0])
 
     for f, _, m in errors:
         print(f"{f} : {m}")
+
+    if args.fix:
+        for fname,incs in fixes:
+            with open(fname, 'r') as f:
+                code = f.readlines()
+
+            first_idx = next((i for i, c in enumerate(code) if c.startswith('#include')), 1)
+            last_idx = max((i for i, c in enumerate(code) if c.startswith('#include')), default=first_idx)+1
+
+            inc_lines = [i.split('// for')[0].strip()+'\n' for i in incs.split('\n')]
+
+            code = code[:first_idx] + inc_lines + code[last_idx:]
+            with open(fname, 'w') as f:
+                f.writelines(code)
 
     if any(e[1] > WARNING for e in errors):
         sys.exit(1)
