@@ -66,6 +66,9 @@ jobs:
           fetch-depth: 0
       - name: Run pylint
         run: |
+          pylint --version
+          which pylint
+          ls /opt/venv/bin
           pylint $(find tests -iname *.py)
           pylint $(find docs -iname *.py)
           pylint $(find bin -iname *.py)
