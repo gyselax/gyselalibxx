@@ -170,7 +170,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [pre_job, docker_update]
     container:
-      image: ${{ needs.docker_update.outputs.image_tag }}
+      image: ghcr.io/gyselax/gyselalibxx_env:e88f4aec5dda9798a8baea3061d237316113d56b #${{ needs.docker_update.outputs.image_tag }}
     env:
       CC: 'clang'
       CXX: 'clang++'
