@@ -21,7 +21,7 @@ TEST(MappingStaticAsserts, CirctoCart)
     static_assert(is_mapping_v<CircularToCartesian<R, Theta, X, Y>>);
     static_assert(has_jacobian_v<CircularToCartesian<R, Theta, X, Y>>);
     static_assert(has_inv_jacobian_v<CircularToCartesian<R, Theta, X, Y>>);
-    static_assert(is_curvilinear_2d_mapping_v<CircularToCartesian<R, Theta, X, Y>>);
+    static_assert(has_o_point_v<CircularToCartesian<R, Theta, X, Y>>);
     static_assert(is_analytical_mapping_v<CircularToCartesian<R, Theta, X, Y>>);
     static_assert(has_singular_o_point_inv_jacobian_v<CircularToCartesian<R, Theta, X, Y>>);
 }
@@ -39,7 +39,7 @@ TEST(MappingStaticAsserts, CzarnytoCart)
     static_assert(is_mapping_v<CzarnyToCartesian<R, Theta, X, Y>>);
     static_assert(has_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>>);
     static_assert(has_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>>);
-    static_assert(is_curvilinear_2d_mapping_v<CzarnyToCartesian<R, Theta, X, Y>>);
+    static_assert(has_o_point_v<CzarnyToCartesian<R, Theta, X, Y>>);
     static_assert(is_analytical_mapping_v<CzarnyToCartesian<R, Theta, X, Y>>);
     static_assert(has_singular_o_point_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>>);
 }
@@ -55,7 +55,7 @@ TEST(MappingStaticAsserts, DiscToCart)
     using Mapping = DiscreteToCartesian<X, Y, SplineRThetaEvaluator_host>;
     static_assert(is_mapping_v<Mapping>);
     static_assert(has_jacobian_v<Mapping>);
-    static_assert(is_curvilinear_2d_mapping_v<Mapping>);
+    static_assert(has_o_point_v<Mapping>);
     static_assert(!is_analytical_mapping_v<Mapping>);
     static_assert(has_singular_o_point_inv_jacobian_v<Mapping>);
 }

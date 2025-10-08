@@ -26,7 +26,7 @@ public:
      * coordinates into the physical (Cartesian) coordinates.
      */
     using coordinate_converter_type = CurvilinearToCartesian;
-    static_assert(is_curvilinear_2d_mapping_v<CurvilinearToCartesian>);
+    static_assert(has_o_point_v<CurvilinearToCartesian>);
 
 private:
     using X = typename CurvilinearToCartesian::cartesian_tag_x;
