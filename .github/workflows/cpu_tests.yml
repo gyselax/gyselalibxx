@@ -207,7 +207,7 @@ jobs:
         shell: bash
       - name: Build code
         run: |
-          bin/run_iwyu toolchains/common_toolchains/serial_debug_toolchain.cmake  src/ tests simulations -j 2
+          bin/run_iwyu toolchains/common_toolchains/serial_debug_toolchain.cmake  src/ tests simulations -j 2 --relevant_files changed_files.txt
         shell: bash
 
   #set_pr_status:

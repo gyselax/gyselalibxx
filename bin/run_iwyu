@@ -25,6 +25,7 @@ if __name__ == '__main__':
                         nargs='+', type=Path)
     parser.add_argument('-j', '--jobs', type=int, default=1, help='Number of parallel jobs')
     parser.add_argument('--fix', help='Modify files to fix includes', action='store_true')
+    parser.add_argument('--relevant_files', help='A file listing all files which should be examined. This can be used to only check modified files in a PR.', type=Path, default=None)
 
     args = parser.parse_args()
 
@@ -86,6 +87,7 @@ if __name__ == '__main__':
                         cmd = f'-Xiwyu --check_also={m} ' + cmd
                         orig_c = c.get('ref', c)
                         orig_c['command'] = cmd
+                        orig_c.setdefault('deps', []).append(m)
                         relevant_configs.append({'file': str(m), 'ref': orig_c})
                         missing = False
                         break
@@ -96,6 +98,13 @@ if __name__ == '__main__':
         still_to_parse = missing_files
 
     errors += [(m, WARNING, "File seems to be unused. Compilation is untested") for m in missing_files]
+
+    if args.relevant_files:
+        with open(args.relevant_files, 'r') as f:
+            relevant_files = [Path(l).absolute() for l in f.readlines()]
+
+        relevant_configs = [c for c in relevant_configs if Path(c['file']) in relevant_files or \
+                                                            any(d in relevant_files for d in c.get('deps', []))]
 
     with ThreadPoolExecutor(max_workers=args.jobs) as executor:
         iwyu_results = [executor.submit(submit_iwyu_job, iwyu_command, c) for c in relevant_configs if 'command' in c]
