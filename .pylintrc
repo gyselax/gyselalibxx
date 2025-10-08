@@ -478,6 +478,9 @@ preferred-modules=
 
 [DESIGN]
 
+# Maximum number of positional arguments for function / method.
+max-positional-args=6
+
 # Maximum number of arguments for function / method.
 max-args=5
 
