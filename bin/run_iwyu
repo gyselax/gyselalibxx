@@ -125,7 +125,7 @@ if __name__ == '__main__':
             first_idx = next((i for i, c in enumerate(code) if c.startswith('#include')), 1)
             last_idx = max((i for i, c in enumerate(code) if c.startswith('#include')), default=first_idx)+1
 
-            inc_lines = [i.split('// for')[0].strip()+'\n' for i in incs.split('\n')]
+            inc_lines = [i.split('// for')[0].strip()+'\n' for i in incs.split('\n') if i.startswith('#include')]
 
             code = code[:first_idx] + inc_lines + code[last_idx:]
             with open(fname, 'w') as f:
