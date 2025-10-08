@@ -16,7 +16,7 @@ GYSELALIB_ROOT = Path(__file__).parent.parent
 
 def submit_iwyu_job(iwyu_command, c : dict):
     p = subprocess.run(iwyu_command + c['command'].split(), text = True, capture_output = True, check = False)
-    return c['file'], p
+    return Path(c['file']), p
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser("Use cppcheck to look for common coding errors. This script must be run in a root folder.")
