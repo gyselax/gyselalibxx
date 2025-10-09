@@ -742,5 +742,5 @@ TEST(DerivFieldMemTest, IdxRanges)
 
     EXPECT_EQ(get_idx_range(dxField), idx_range_x_y);
     EXPECT_EQ(deriv_idx_range_x_stored, deriv_idx_range_x);
-    EXPECT_EQ(derivative_idx_range(dxField), expected_derivs);
+    EXPECT_EQ(dxField.derivative_idx_range(), expected_derivs);
 }
