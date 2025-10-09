@@ -620,7 +620,7 @@ public:
      * @brief Get the physical index range along Grid1D on which the derivatives of that
      * dimension are defined.
      */
-    template <Grid1D>
+    template <class Grid1D>
     IdxRangeSlice<Grid1D> idx_range_for_deriv() const
     {
         static_assert(
