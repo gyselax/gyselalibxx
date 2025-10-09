@@ -602,7 +602,7 @@ public:
      * @brief Get the physical index range on which the Field is defined.
      * This method is equivalent to calling `get_idx_range(this->get_values_field())`
      */
-    auto idx_range() const
+    physical_idx_range_type idx_range() const
     {
         return m_physical_idx_range;
     }
@@ -610,8 +610,16 @@ public:
     /**
      * @brief Get the index ranges describing which derivatives are defined
      * for each dimension.
+     *
+     * E.g. for a DerivFieldMem<double, IdxRange<ddc::Deriv<X>, GridX, GridY>, 2>
+     * This will return IdxRange<ddc::Deriv<X>>(1,2) indicating that the first
+     * and second derivatives are defined for the X dimension.
+     * E.g. for a DerivField<double, IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>, GridX, GridY>>
+     * This will return IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>> indicating how many of
+     * the X and Y derivatives are saved in this field (this may be a subset of the
+     * derivatives available in the originally allocated DerivFieldMem.
      */
-    auto derivative_idx_range() const
+    discrete_deriv_idx_range_type derivative_idx_range() const
     {
         return m_deriv_idx_range;
     }
@@ -619,6 +627,9 @@ public:
     /**
      * @brief Get the physical index range along Grid1D on which the derivatives of that
      * dimension are defined.
+     *
+     * This is equivalent to retrieving the argument deriv_idx_range_x from a dxField defined as:
+     * DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1> dxField(idx_range_x_y, deriv_idx_range_x);
      */
     template <class Grid1D>
     IdxRangeSlice<Grid1D> idx_range_for_deriv() const
