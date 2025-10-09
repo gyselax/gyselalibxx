@@ -26,6 +26,7 @@ if __name__ == '__main__':
     parser.add_argument('-j', '--jobs', type=int, default=1, help='Number of parallel jobs')
     parser.add_argument('--fix', help='Modify files to fix includes', action='store_true')
     parser.add_argument('--relevant_files', help='A file listing all files which should be examined. This can be used to only check modified files in a PR.', type=Path, default=None)
+    parser.add_argument('--verbose', help='Provide more information about why changes are being made', action='store_true')
 
     args = parser.parse_args()
 
@@ -56,6 +57,8 @@ if __name__ == '__main__':
                     '-Xiwyu', '--transitive_includes_only',
                     '-Xiwyu', '--no_fwd_decls',
                     '-Xiwyu', '--error']
+    if args.verbose:
+        iwyu_command.extend(['-Xiwyu', '--verbose=3']
 
     files_to_check = {f.absolute() for d in args.folders for f in d.glob('**/*.cpp')}.union(f for d in args.folders for f in d.glob('**/*.hpp'))
     files_to_check = {f for f in files_to_check if 'static_assert_tests' not in f.parts}
@@ -120,7 +123,8 @@ if __name__ == '__main__':
             f, p = future.result()
             if p.returncode != 0:
                 errors.append((f, ERROR, p.stderr))
-                fixes.append((f, p.stderr.split('The full include-list for')[1].split(':\n',1)[1].split('---')[0]))
+                if args.fix:
+                    fixes.append((f, p.stderr.split('The full include-list for')[1].split(':\n',1)[1].split('---')[0]))
     print()
 
     errors.sort(key=lambda e:e[0])
