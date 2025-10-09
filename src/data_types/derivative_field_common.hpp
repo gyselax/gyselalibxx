@@ -597,4 +597,32 @@ public:
         IdxRange<> no_specified_dims;
         return get_internal_field(no_specified_dims).span_cview();
     }
+
+    /**
+     * @brief Get the physical index range on which the Field is defined.
+     * This method is equivalent to calling `get_idx_range(this->get_values_field())`
+     */
+    auto idx_range() const
+    {
+        return m_physical_idx_range;
+    }
+
+    /**
+     * @brief Get the index ranges describing which derivatives are defined
+     * for each dimension.
+     */
+    auto derivative_idx_range() const
+    {
+        return m_deriv_idx_range;
+    }
+
+    /**
+     * @brief Get the physical index range along Grid1D on which the derivatives of that
+     * dimension are defined.
+     */
+    template <Grid1D>
+    IdxRangeSlice<Grid1D> idx_range_for_deriv() const
+    {
+        return ddc::get<Grid1D>(m_cross_derivative_idx_range);
+    }
 };
