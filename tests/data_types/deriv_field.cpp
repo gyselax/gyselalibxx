@@ -740,7 +740,7 @@ TEST(DerivFieldMemTest, IdxRanges)
     IdxRange<dX> expected_derivs(Idx<dX>(1), IdxStep<dX>(1));
     IdxRangeSlice<GridX> deriv_idx_range_x_stored = dxField.template idx_range_for_deriv<GridX>();
 
-    EXPECT_EQUAL(get_idx_range(dxField), idx_range_x_y);
-    EXPECT_EQUAL(deriv_idx_range_x_stored, deriv_idx_range_x);
-    EXPECT_EQUAL(derivative_idx_range(dxField), expected_derivs);
+    EXPECT_EQ(get_idx_range(dxField), idx_range_x_y);
+    EXPECT_EQ(deriv_idx_range_x_stored, deriv_idx_range_x);
+    EXPECT_EQ(derivative_idx_range(dxField), expected_derivs);
 }
