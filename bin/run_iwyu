@@ -49,6 +49,9 @@ if __name__ == '__main__':
     relevant_configs = [c for c in config if any(r in Path(c['file']).parents for r in relevant_folders) \
                                             and not any(r in Path(c['file']).parents for r in exclude_folders)]
 
+    # Remove duplicates that differ by macro definitions
+    unique_relevant_configs = {Path(c['file']): c for c in relevant_configs}
+
     for c in relevant_configs:
         c['command'] = ' '.join(c['command'].split()[1:])
 
@@ -58,12 +61,12 @@ if __name__ == '__main__':
                     '-Xiwyu', '--no_fwd_decls',
                     '-Xiwyu', '--error']
     if args.verbose:
-        iwyu_command.extend(['-Xiwyu', '--verbose=3']
+        iwyu_command.extend(['-Xiwyu', '--verbose=3'])
 
     files_to_check = {f.absolute() for d in args.folders for f in d.glob('**/*.cpp')}.union(f for d in args.folders for f in d.glob('**/*.hpp'))
     files_to_check = {f for f in files_to_check if 'static_assert_tests' not in f.parts}
 
-    cpp_checked_files = {Path(c['file']) for c in relevant_configs}
+    cpp_checked_files = set(unique_relevant_configs.keys())
     hpp_checked_files = {f.with_suffix('.hpp') for f in cpp_checked_files}
     hpp_checked_files = {f for f in hpp_checked_files if f.exists()}
 
@@ -81,7 +84,7 @@ if __name__ == '__main__':
         missing_files = set()
         for m in still_to_parse:
             missing = True
-            for c in relevant_configs:
+            for c in unique_relevant_configs.values():
                 cmd = c.get('ref', c)['command']
                 if str(m.parent) in cmd:
                     with open(c['file'], 'r') as f:
@@ -91,7 +94,7 @@ if __name__ == '__main__':
                         orig_c = c.get('ref', c)
                         orig_c['command'] = cmd
                         orig_c.setdefault('deps', []).append(m)
-                        relevant_configs.append({'file': str(m), 'ref': orig_c})
+                        unique_relevant_configs[m] = {'file': str(m), 'ref': orig_c}
                         missing = False
                         break
             if missing:
@@ -106,13 +109,13 @@ if __name__ == '__main__':
         with open(args.relevant_files, 'r') as f:
             relevant_files = [Path(l).absolute() for l in f.readlines()]
 
-        relevant_configs = [c for c in relevant_configs if Path(c['file']) in relevant_files or \
-                                                            any(d in relevant_files for d in c.get('deps', []))]
+            unique_relevant_configs = {f:c for f,c in relevant_configs.items() if f in relevant_files or \
+                                                        any(d in relevant_files for d in c.get('deps', []))}
 
         errors = [e for fname, level, msg in errors if fname in relevant_files]
 
     with ThreadPoolExecutor(max_workers=args.jobs) as executor:
-        iwyu_results = [executor.submit(submit_iwyu_job, iwyu_command, c) for c in relevant_configs if 'command' in c]
+        iwyu_results = [executor.submit(submit_iwyu_job, iwyu_command, c) for c in unique_relevant_configs.values() if 'command' in c]
 
         total = len(iwyu_results)
         done = 0
@@ -124,7 +127,11 @@ if __name__ == '__main__':
             if p.returncode != 0:
                 errors.append((f, ERROR, p.stderr))
                 if args.fix:
-                    fixes.append((f, p.stderr.split('The full include-list for')[1].split(':\n',1)[1].split('---')[0]))
+                    suggestions = p.stderr.split('The full include-list for')[1:]
+                    for s in suggestions:
+                        file, trailing = s.split(':\n',1)
+                        correction = trailing.split('---')[0]
+                        fixes.append((Path(file.strip()), correction))
     print()
 
     errors.sort(key=lambda e:e[0])
