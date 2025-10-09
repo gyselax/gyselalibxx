@@ -637,6 +637,6 @@ public:
         static_assert(
                 ddc::in_tags_v<Grid1D, physical_deriv_grids>,
                 "Cannot request index range for a dimension where no derivatives are present.");
-        return ddc::get<Grid1D>(m_cross_derivative_idx_range);
+        return IdxRangeSlice<Grid1D>(m_cross_derivative_idx_range);
     }
 };
