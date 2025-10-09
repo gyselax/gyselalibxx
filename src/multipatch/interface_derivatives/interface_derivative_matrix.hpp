@@ -9,7 +9,6 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "interface.hpp"
-// #include "matching_idx_slice.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
 #include "single_interface_derivatives_calculator_collection.hpp"
@@ -33,7 +32,7 @@ class InterfaceDerivativeMatrix;
   * This operator is implemented for conforming equivalent global meshes. 
   * 
   * During the instantiation of the class, the matrix (I-M) is computed are stored in the class. 
-  * When we call the operator .solve(), 
+  * When we call the operator .solve_deriv() or .solve_cross_deriv(): 
   *     - InterfaceDerivativeMatrix computes the vector C from the given values. 
   *     - It inverses the matrix system: (I-M)S = C. 
   *     - The interface derivatives are stored in the vector S. 
@@ -62,11 +61,13 @@ class InterfaceDerivativeMatrix<
         UpperBound,
         DerivativesCalculatorCollection>
 {
-    // All the interfaces given as input to the MultipatchConnectivity class.
-    // We expect the parameters defined on these interfaces.
+    /*
+        All the interfaces given as input to the MultipatchConnectivity class.
+         We expect the parameters defined on these interfaces.
+    */
     using all_interface_collection = typename Connectivity::interface_collection;
     // All the sorted interfaces with the correct orientation.
-    using interface_collection =
+    using interface_sorted_collection =
             typename Connectivity::get_all_interfaces_along_direction_t<Grid1D>;
 
     // using other_interface_collection = ddc::type_seq_remove_t<all_interface_collection, ddc::detail::TypeSeq<find_associated_interface_t<Interfaces, all_interface_collection>...>>
@@ -79,7 +80,8 @@ class InterfaceDerivativeMatrix<
             is_single_derivative_calculator_collection_v<DerivativesCalculatorCollection>,
             "Please provide a SingleInterfaceDerivativesCalculatorCollection type.");
 
-    static constexpr std::size_t number_of_interfaces = ddc::type_seq_size_v<interface_collection>;
+    static constexpr std::size_t number_of_interfaces
+            = ddc::type_seq_size_v<interface_sorted_collection>;
 
     static_assert(
             ((LowerBound == ddc::BoundCond::PERIODIC) == (UpperBound == ddc::BoundCond::PERIODIC)),
@@ -87,28 +89,28 @@ class InterfaceDerivativeMatrix<
 
     static constexpr bool is_periodic = (LowerBound == ddc::BoundCond::PERIODIC);
 
-    // TODO: remove Interfaces with OutsideEdge
-    // Remove all the interfaces with an OutsideEdge.
-    // Rely on the fact that get_all_interfaces_along_direction_t orders the interfaces.
+    /*
+        Remove all the interfaces with an OutsideEdge.
+        Rely on the fact that get_all_interfaces_along_direction_t orders the interfaces.
+    */
     using outer_interface_collection = std::conditional_t<
             is_periodic,
             ddc::detail::TypeSeq<>,
             ddc::detail::TypeSeq<
-                    ddc::type_seq_element_t<0, interface_collection>,
-                    ddc::type_seq_element_t<number_of_interfaces - 1, interface_collection>>>;
+                    ddc::type_seq_element_t<0, interface_sorted_collection>,
+                    ddc::type_seq_element_t<
+                            number_of_interfaces - 1,
+                            interface_sorted_collection>>>;
 
     // All the interfaces in the Grid1D direction without the interfaces with OutsideEdge.
     using inner_interface_collection
-            = ddc::type_seq_remove_t<interface_collection, outer_interface_collection>;
+            = ddc::type_seq_remove_t<interface_sorted_collection, outer_interface_collection>;
 
     // Number of inner interfaces. It fixes the number of element in the matrix and vectors.
     static constexpr std::size_t n_inner_interfaces
             = ddc::type_seq_size_v<inner_interface_collection>;
 
     using FirstInterface = ddc::type_seq_element_t<0, inner_interface_collection>;
-    using LastInterface = ddc::type_seq_element_t<
-            ddc::type_seq_size_v<inner_interface_collection> - 1,
-            inner_interface_collection>;
 
     // First patch of the sorted interfaces.
     using FirstPatch = std::conditional_t<
@@ -120,7 +122,7 @@ class InterfaceDerivativeMatrix<
     using Grid1DSeq = collect_grids_on_dim_t<
             find_patch_t<Grid1D, all_patches>,
             Grid1D,
-            interface_collection>;
+            interface_sorted_collection>;
 
     static_assert(
             ddc::type_seq_size_v<Grid1DSeq> == n_inner_interfaces + !is_periodic,
@@ -271,7 +273,7 @@ public:
 
 
     /**
-     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D
+     * @brief Solve the matrix system MS = C to determine all the interface cross-derivatives in the Grid1D
      * direction at a given index.
      * 
      * It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces. 
@@ -279,7 +281,7 @@ public:
      * @tparam IdxPar Type for the given index. It can be on the first or the second grid of the first patch.
      *
      * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
-     * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives.
+     * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface cross-derivatives.
      */
     template <class IdxPar>
     void solve_cross_deriv(
@@ -290,7 +292,7 @@ public:
     }
 
     /**
-     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D
+     * @brief Solve the matrix system MS = C to determine all the corner cross-derivatives in the Grid1D
      * direction at all the last and the first indices of the first patch.
      * 
      * It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces. 
@@ -427,20 +429,14 @@ private:
         using Patch_1 = typename InterfaceI::Edge1::associated_patch;
         using Patch_2 = typename InterfaceI::Edge2::associated_patch;
 
-        constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
+        constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
+        constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
 
         using GridPerp1 = typename InterfaceI::Edge1::perpendicular_grid;
         using GridPerp2 = typename InterfaceI::Edge2::perpendicular_grid;
 
-        using DimPerp1 = typename GridPerp1::continuous_dimension_type;
-        using DimPerp2 = typename GridPerp2::continuous_dimension_type;
-
-        // using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
-        // using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
-
-        using DerivPerp1 = typename ddc::Deriv<DimPerp1>;
-        using DerivPerp2 = typename ddc::Deriv<DimPerp2>;
+        using DerivPerp1 = typename ddc::Deriv<typename GridPerp1::continuous_dimension_type>;
+        using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
         auto [idx_slice_1, idx_slice_2] = get_slice_indexes<InterfaceI>(slice_idx_1_value);
 
@@ -449,13 +445,13 @@ private:
         DerivFieldOnPatch_host<Patch_2> function_and_derivs_2
                 = functions_and_derivs.template get<Patch_2>();
 
-
         // Use the function values to compute the first derivatives.
         DField<typename Patch_1::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_1
                 = function_and_derivs_1.get_values_field();
         DField<typename Patch_2::IdxRange12, Kokkos::HostSpace, Kokkos::layout_stride> function_2
                 = function_and_derivs_2.get_values_field();
 
+        // Compute the coefficient c_I for the interface I.
         double const lin_comb_funct
                 = sign
                   * m_derivatives_calculators.template get<EquivalentInterfaceI>()
@@ -486,12 +482,10 @@ private:
                     IdxStep<GridPerp2>(2),
                     idx_range_perp_2.extents());
 
-            Idx<GridPerp1> idx_deriv_1 = (extermity_1 == Extremity::BACK)
-                                                 ? idx_range_slice_dperp_1.front()
-                                                 : idx_range_slice_dperp_1.back();
-            Idx<GridPerp2> idx_deriv_2 = (extermity_2 == Extremity::BACK)
-                                                 ? idx_range_slice_dperp_2.front()
-                                                 : idx_range_slice_dperp_2.back();
+            Idx<GridPerp1> idx_deriv_1
+                    = get_extremity_back_idx(idx_range_slice_dperp_1, extremity_1);
+            Idx<GridPerp2> idx_deriv_2
+                    = get_extremity_back_idx(idx_range_slice_dperp_2, extremity_2);
 
             Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
             Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
@@ -553,11 +547,8 @@ private:
         using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
         using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
 
-        using DimPar1 = typename GridPar1::continuous_dimension_type;
-        using DimPar2 = typename GridPar2::continuous_dimension_type;
-
-        using DerivPar1 = typename ddc::Deriv<DimPar1>;
-        using DerivPar2 = typename ddc::Deriv<DimPar2>;
+        using DerivPar1 = typename ddc::Deriv<typename GridPar1::continuous_dimension_type>;
+        using DerivPar2 = typename ddc::Deriv<typename GridPar2::continuous_dimension_type>;
 
         IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
@@ -566,7 +557,7 @@ private:
         assert((idx_slice_1 == idx_range_par_1.front()) || (idx_slice_1 == idx_range_par_1.back()));
         assert((idx_slice_2 == idx_range_par_2.front()) || (idx_slice_2 == idx_range_par_2.back()));
 
-
+        // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
         IdxRangeSlice<GridPar1> idx_range_slice_dpar_1(
                 idx_range_par_1.front(),
                 IdxStep<GridPar1>(2),
@@ -592,6 +583,7 @@ private:
         DField<IdxRange<GridPerp2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
                 = function_and_derivs_2[idx_slice_deriv_2];
 
+        // Compute the coefficient c_I for the interface I.
         double const lin_comb_funct
                 = sign
                   * m_derivatives_calculators.template get<EquivalentInterfaceI>()
@@ -608,8 +600,8 @@ private:
                 = (UpperBound == ddc::BoundCond::HERMITE && I == n_inner_interfaces - 1);
 
         if constexpr (is_lower_bound_deriv_dependent || is_upper_bound_deriv_dependent) {
-            constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
-            constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
+            constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
+            constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
 
             using Grid1_1 = typename Patch_1::Grid1;
             using Grid2_1 = typename Patch_1::Grid2;
@@ -627,6 +619,7 @@ private:
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
 
+            // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
             IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
                     idx_range_perp_1.front(),
                     IdxStep<GridPerp1>(2),
@@ -637,12 +630,11 @@ private:
                     IdxStep<GridPerp2>(2),
                     idx_range_perp_2.extents());
 
-            Idx<GridPerp1> idx_deriv_perp_1 = (extermity_1 == Extremity::BACK)
-                                                      ? idx_range_slice_dperp_1.front()
-                                                      : idx_range_slice_dperp_1.back();
-            Idx<GridPerp2> idx_deriv_perp_2 = (extermity_2 == Extremity::BACK)
-                                                      ? idx_range_slice_dperp_2.front()
-                                                      : idx_range_slice_dperp_2.back();
+            Idx<GridPerp1> idx_deriv_perp_1
+                    = get_extremity_back_idx(idx_range_slice_dperp_1, extremity_1);
+            Idx<GridPerp2> idx_deriv_perp_2
+                    = get_extremity_back_idx(idx_range_slice_dperp_2, extremity_2);
+
 
             Idx<Grid1_1, Grid2_1> idx_d1d2_1;
             if constexpr (is_grid_par_1_on_dim1) {
@@ -722,8 +714,8 @@ private:
         using Patch_1 = typename InterfaceI::Edge1::associated_patch;
         using Patch_2 = typename InterfaceI::Edge2::associated_patch;
 
-        constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
+        constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
+        constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
 
         using GridPerp1 = typename InterfaceI::Edge1::perpendicular_grid;
         using GridPerp2 = typename InterfaceI::Edge2::perpendicular_grid;
@@ -731,11 +723,8 @@ private:
         using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
         using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
 
-        using DimPerp1 = typename GridPerp1::continuous_dimension_type;
-        using DimPerp2 = typename GridPerp2::continuous_dimension_type;
-
-        using DerivPerp1 = typename ddc::Deriv<DimPerp1>;
-        using DerivPerp2 = typename ddc::Deriv<DimPerp2>;
+        using DerivPerp1 = typename ddc::Deriv<typename GridPerp1::continuous_dimension_type>;
+        using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
         // Get the fields of the left and right patch of the interface.
         DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
@@ -747,6 +736,7 @@ private:
         IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
 
+        // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
         IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
                 idx_range_perp_1.front(),
                 IdxStep<GridPerp1>(2),
@@ -757,12 +747,8 @@ private:
                 IdxStep<GridPerp2>(2),
                 idx_range_perp_2.extents());
 
-        Idx<GridPerp1> idx_deriv_1 = (extermity_1 == Extremity::FRONT)
-                                             ? idx_range_slice_dperp_1.front()
-                                             : idx_range_slice_dperp_1.back();
-        Idx<GridPerp2> idx_deriv_2 = (extermity_2 == Extremity::FRONT)
-                                             ? idx_range_slice_dperp_2.front()
-                                             : idx_range_slice_dperp_2.back();
+        Idx<GridPerp1> idx_deriv_1 = get_extremity_front_idx(idx_range_slice_dperp_1, extremity_1);
+        Idx<GridPerp2> idx_deriv_2 = get_extremity_front_idx(idx_range_slice_dperp_2, extremity_2);
 
         Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
         Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
@@ -775,6 +761,7 @@ private:
         DField<IdxRange<GridPar2>, Kokkos::HostSpace, Kokkos::layout_stride> deriv_2
                 = function_and_derivs_2[idx_slice_deriv_2];
 
+        // TODO: Check if we dont need a change of sign.
         deriv_1(slice_idx_1) = m_interface_derivatives->get_values()[I];
         deriv_2(slice_idx_2) = m_interface_derivatives->get_values()[I];
     }
@@ -793,8 +780,8 @@ private:
         using Patch_1 = typename InterfaceI::Edge1::associated_patch;
         using Patch_2 = typename InterfaceI::Edge2::associated_patch;
 
-        constexpr Extremity extermity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extermity_2 = InterfaceI::Edge2::extremity;
+        constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
+        constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
 
         using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
         using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
@@ -824,6 +811,7 @@ private:
         IdxRange<Grid1_2> idx_range_grid1_2(m_idx_ranges.template get<Patch_2>());
         IdxRange<Grid2_2> idx_range_grid2_2(m_idx_ranges.template get<Patch_2>());
 
+        // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
         IdxRangeSlice<Grid1_1> idx_range_slice_d1_1(
                 idx_range_grid1_1.front(),
                 IdxStep<Grid1_1>(2),
@@ -855,59 +843,39 @@ private:
         const bool is_idx_par_min_2 = (slice_idx_2 == idx_range_par_2.front());
 
         // --- Update the cross-derivative on Patch_1
-        Idx<Grid1_1> idx_d1_1;
-        Idx<Grid2_1> idx_d2_1;
-        if (is_idx_par_min_1 && (extermity_1 == Extremity::FRONT)) {
-            // corner min min
-            idx_d1_1 = idx_range_slice_d1_1.front();
-            idx_d2_1 = idx_range_slice_d2_1.front();
-        } else if (!is_idx_par_min_1 && (extermity_1 == Extremity::BACK)) {
-            // corner max max
-            idx_d1_1 = idx_range_slice_d1_1.back();
-            idx_d2_1 = idx_range_slice_d2_1.back();
-        } else if (
-                (is_grid_par_1_on_dim1 && (extermity_1 == Extremity::BACK))
-                || (!is_grid_par_1_on_dim1 && (extermity_1 == Extremity::FRONT))) {
-            // corner min max
-            idx_d1_1 = idx_range_slice_d1_1.front();
-            idx_d2_1 = idx_range_slice_d2_1.back();
-        } else {
-            // corner max min
-            idx_d1_1 = idx_range_slice_d1_1.back();
-            idx_d2_1 = idx_range_slice_d2_1.front();
-        }
-        Idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1>
-                idx_cross_deriv1(Idx<Deriv1_1>(1), idx_d1_1, Idx<Deriv2_1>(1), idx_d2_1);
+        Idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1> idx_cross_deriv1
+                = get_corner_idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1>(
+                        extremity_1,
+                        is_grid_par_1_on_dim1,
+                        is_idx_par_min_1,
+                        idx_range_slice_d1_1,
+                        idx_range_slice_d2_1);
         function_and_derivs_1(idx_cross_deriv1) = m_interface_derivatives->get_values()[I];
 
         // --- Update the cross-derivative on Patch_2
-        Idx<Grid1_2> idx_d1_2;
-        Idx<Grid2_2> idx_d2_2;
-        if (is_idx_par_min_2 && (extermity_2 == Extremity::FRONT)) {
-            // corner min min
-            idx_d1_2 = idx_range_slice_d1_2.front();
-            idx_d2_2 = idx_range_slice_d2_2.front();
-        } else if (!is_idx_par_min_2 && (extermity_2 == Extremity::BACK)) {
-            // corner max max
-            idx_d1_2 = idx_range_slice_d1_2.back();
-            idx_d2_2 = idx_range_slice_d2_2.back();
-        } else if (
-                (is_grid_par_2_on_dim1 && (extermity_2 == Extremity::BACK))
-                || (!is_grid_par_2_on_dim1 && (extermity_2 == Extremity::FRONT))) {
-            // corner min max
-            idx_d1_2 = idx_range_slice_d1_2.front();
-            idx_d2_2 = idx_range_slice_d2_2.back();
-        } else {
-            // corner max min
-            idx_d1_2 = idx_range_slice_d1_2.back();
-            idx_d2_2 = idx_range_slice_d2_2.front();
-        }
-        Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2>
-                idx_cross_deriv2(Idx<Deriv1_2>(1), idx_d1_2, Idx<Deriv2_2>(1), idx_d2_2);
+        Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2> idx_cross_deriv2
+                = get_corner_idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2>(
+                        extremity_2,
+                        is_grid_par_2_on_dim1,
+                        is_idx_par_min_2,
+                        idx_range_slice_d1_2,
+                        idx_range_slice_d2_2);
         function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I];
     }
 
 
+    /**
+     * @brief Get the indices on Patch1 and Patch2 of the given interface.
+     * The index on Patch1 corresponds to the value given in input.
+     * The index on Patch2 is the equivalent index of the one on Patch1.
+     * It also updates the value given in input with the value of the index
+     * on Patch2 for the next interface.
+     * 
+     *  |           Patch1 | Patch2      Patch1 | Patch2        |  
+     *  |            idx_1 > idx_2        idx_1 > idx_2         |
+     *  |              ^   |   v            ^   |   v           |
+     *  |idx_val   idx_val | idx_val    idx_val | idx_val       |
+     */
     template <typename InterfaceI>
     auto get_slice_indexes(int& slice_idx_1_value)
     {
@@ -926,5 +894,65 @@ private:
         Idx<ParallGrid2> slice_idx_2(index_converter(slice_idx_1));
         slice_idx_1_value = (slice_idx_2 - idx_range_parall_2.front()).value();
         return std::make_tuple(slice_idx_1, slice_idx_2);
+    }
+
+    /**
+     * @brief Get the index of the given index range slice corresponding to the 
+     * FRONT extremity of the 1D grid. 
+     */
+    template <class Grid1Or2>
+    Idx<Grid1Or2> get_extremity_front_idx(
+            IdxRangeSlice<Grid1Or2> const idx_range_slice,
+            Extremity extremity) const
+    {
+        return (extremity == Extremity::FRONT) ? idx_range_slice.front() : idx_range_slice.back();
+    }
+
+       /**
+     * @brief Get the index of the given index range slice corresponding to the 
+     * BACK extremity of the 1D grid. 
+     */
+    template <class Grid1Or2>
+    Idx<Grid1Or2> get_extremity_back_idx(
+            IdxRangeSlice<Grid1Or2> const idx_range_slice,
+            Extremity extremity) const
+    {
+        return (extremity == Extremity::BACK) ? idx_range_slice.front() : idx_range_slice.back();
+    }
+
+    /**
+     * @brief Get the index to extract the cross-derivative corresponding to the 
+     * correct corner of the patch. 
+     */
+    template <class Deriv1, class Grid1, class Deriv2, class Grid2>
+    Idx<Deriv1, Grid1, Deriv2, Grid2> get_corner_idx(
+            Extremity const extremity,
+            bool const is_grid_par_on_dim1,
+            bool const is_idx_par_min,
+            IdxRangeSlice<Grid1> const idx_range_slice_d1,
+            IdxRangeSlice<Grid2> const idx_range_slice_d2) const
+    {
+        Idx<Grid1> idx_d1;
+        Idx<Grid2> idx_d2;
+        if (is_idx_par_min && (extremity == Extremity::FRONT)) {
+            // corner min min
+            idx_d1 = idx_range_slice_d1.front();
+            idx_d2 = idx_range_slice_d2.front();
+        } else if (!is_idx_par_min && (extremity == Extremity::BACK)) {
+            // corner max max
+            idx_d1 = idx_range_slice_d1.back();
+            idx_d2 = idx_range_slice_d2.back();
+        } else if (
+                (is_grid_par_on_dim1 && (extremity == Extremity::BACK))
+                || (!is_grid_par_on_dim1 && (extremity == Extremity::FRONT))) {
+            // corner min max
+            idx_d1 = idx_range_slice_d1.front();
+            idx_d2 = idx_range_slice_d2.back();
+        } else {
+            // corner max min
+            idx_d1 = idx_range_slice_d1.back();
+            idx_d2 = idx_range_slice_d2.front();
+        }
+        return Idx<Deriv1, Grid1, Deriv2, Grid2>(Idx<Deriv1>(1), idx_d1, Idx<Deriv2>(1), idx_d2);
     }
 };

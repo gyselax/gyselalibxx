@@ -11,7 +11,7 @@
 template <class DimOut, class DimIn>
 inline Coord<DimOut> constexpr convert_dim(Coord<DimIn> const& input_coord)
 {
-    return Coord<DimOut>{double(input_coord)};
+    return Coord<DimOut> {double(input_coord)};
 }
 
 /** 
@@ -102,4 +102,15 @@ void fill_in_reverse(
     for (int i(0); i < n_pt; ++i) {
         points_global.push_back(CoordTypeG {double(min + max - points_patch[n_pt - 1 - i])});
     }
+}
+
+/**
+ * @brief Get an index range slice containing two indices: 
+ *   * the first index of the given index range, 
+ *   * another index at first index + number of elements in the given index range.
+ */
+template <class Grid1D>
+IdxRangeSlice<Grid1D> get_bound_idx_range_slice(IdxRange<Grid1D> const idx_range)
+{
+    return IdxRangeSlice<Grid1D>(idx_range.front(), IdxStep<Grid1D>(2), idx_range.extents());
 }

@@ -73,9 +73,7 @@ struct BSplinesYg : ddc::NonUniformBSplines<Yg, 3>
 {
 };
 
-
 using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
-
 
 // Interpolation points type for the patches.
 template <std::size_t PatchIdx>
@@ -711,43 +709,25 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 
     // Instantiate DerivField ====================================================================
     // Instantiate index range slices ------------------------------------------------------------
-    IdxRangeSlice<GridX<1>>
-            idx_range_slice_dx1(idx_range_x1.front(), IdxStep<GridX<1>>(2), idx_range_x1.extents());
-    IdxRangeSlice<GridX<2>>
-            idx_range_slice_dx2(idx_range_x2.front(), IdxStep<GridX<2>>(2), idx_range_x2.extents());
-    IdxRangeSlice<GridX<3>>
-            idx_range_slice_dx3(idx_range_x3.front(), IdxStep<GridX<3>>(2), idx_range_x3.extents());
-    IdxRangeSlice<GridX<4>>
-            idx_range_slice_dx4(idx_range_x4.front(), IdxStep<GridX<4>>(2), idx_range_x4.extents());
-    IdxRangeSlice<GridX<5>>
-            idx_range_slice_dx5(idx_range_x5.front(), IdxStep<GridX<5>>(2), idx_range_x5.extents());
-    IdxRangeSlice<GridX<6>>
-            idx_range_slice_dx6(idx_range_x6.front(), IdxStep<GridX<6>>(2), idx_range_x6.extents());
-    IdxRangeSlice<GridX<7>>
-            idx_range_slice_dx7(idx_range_x7.front(), IdxStep<GridX<7>>(2), idx_range_x7.extents());
-    IdxRangeSlice<GridX<8>>
-            idx_range_slice_dx8(idx_range_x8.front(), IdxStep<GridX<8>>(2), idx_range_x8.extents());
-    IdxRangeSlice<GridX<9>>
-            idx_range_slice_dx9(idx_range_x9.front(), IdxStep<GridX<9>>(2), idx_range_x9.extents());
+    IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(idx_range_x1);
+    IdxRangeSlice<GridX<2>> idx_range_slice_dx2 = get_bound_idx_range_slice(idx_range_x2);
+    IdxRangeSlice<GridX<3>> idx_range_slice_dx3 = get_bound_idx_range_slice(idx_range_x3);
+    IdxRangeSlice<GridX<4>> idx_range_slice_dx4 = get_bound_idx_range_slice(idx_range_x4);
+    IdxRangeSlice<GridX<5>> idx_range_slice_dx5 = get_bound_idx_range_slice(idx_range_x5);
+    IdxRangeSlice<GridX<6>> idx_range_slice_dx6 = get_bound_idx_range_slice(idx_range_x6);
+    IdxRangeSlice<GridX<7>> idx_range_slice_dx7 = get_bound_idx_range_slice(idx_range_x7);
+    IdxRangeSlice<GridX<8>> idx_range_slice_dx8 = get_bound_idx_range_slice(idx_range_x8);
+    IdxRangeSlice<GridX<9>> idx_range_slice_dx9 = get_bound_idx_range_slice(idx_range_x9);
 
-    IdxRangeSlice<GridY<1>>
-            idx_range_slice_dy1(idx_range_y1.front(), IdxStep<GridY<1>>(2), idx_range_y1.extents());
-    IdxRangeSlice<GridY<2>>
-            idx_range_slice_dy2(idx_range_y2.front(), IdxStep<GridY<2>>(2), idx_range_y2.extents());
-    IdxRangeSlice<GridY<3>>
-            idx_range_slice_dy3(idx_range_y3.front(), IdxStep<GridY<3>>(2), idx_range_y3.extents());
-    IdxRangeSlice<GridY<4>>
-            idx_range_slice_dy4(idx_range_y4.front(), IdxStep<GridY<4>>(2), idx_range_y4.extents());
-    IdxRangeSlice<GridY<5>>
-            idx_range_slice_dy5(idx_range_y5.front(), IdxStep<GridY<5>>(2), idx_range_y5.extents());
-    IdxRangeSlice<GridY<6>>
-            idx_range_slice_dy6(idx_range_y6.front(), IdxStep<GridY<6>>(2), idx_range_y6.extents());
-    IdxRangeSlice<GridY<7>>
-            idx_range_slice_dy7(idx_range_y7.front(), IdxStep<GridY<7>>(2), idx_range_y7.extents());
-    IdxRangeSlice<GridY<8>>
-            idx_range_slice_dy8(idx_range_y8.front(), IdxStep<GridY<8>>(2), idx_range_y8.extents());
-    IdxRangeSlice<GridY<9>>
-            idx_range_slice_dy9(idx_range_y9.front(), IdxStep<GridY<9>>(2), idx_range_y9.extents());
+    IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(idx_range_y1);
+    IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(idx_range_y2);
+    IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(idx_range_y3);
+    IdxRangeSlice<GridY<4>> idx_range_slice_dy4 = get_bound_idx_range_slice(idx_range_y4);
+    IdxRangeSlice<GridY<5>> idx_range_slice_dy5 = get_bound_idx_range_slice(idx_range_y5);
+    IdxRangeSlice<GridY<6>> idx_range_slice_dy6 = get_bound_idx_range_slice(idx_range_y6);
+    IdxRangeSlice<GridY<7>> idx_range_slice_dy7 = get_bound_idx_range_slice(idx_range_y7);
+    IdxRangeSlice<GridY<8>> idx_range_slice_dy8 = get_bound_idx_range_slice(idx_range_y8);
+    IdxRangeSlice<GridY<9>> idx_range_slice_dy9 = get_bound_idx_range_slice(idx_range_y9);
 
     // Collect the index range slices.
     MultipatchType<

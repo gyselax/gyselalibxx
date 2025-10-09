@@ -338,8 +338,6 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             SingleInterfaceDerivativesCalculator<Interface_1_2>>;
 
     // We do not follow the physical order to test the operator.
-    // get_deriv_calculator_collection_with_Hermite_boundcond_t<Interface_2_3, Interface_1_2>
-    //     DerivativesCalculatorCollection
     SingleInterfaceDerivativesCalculatorCollection
             deriv_calculators_collect(derivatives_calculator_2_3, derivatives_calculator_1_2);
 
@@ -361,19 +359,13 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
 
     // Instantiate DerivField ====================================================================
     // Instantiate index range slices ------------------------------------------------------------
-    IdxRangeSlice<GridX<1>>
-            idx_range_slice_dx1(idx_range_x1.front(), IdxStep<GridX<1>>(2), idx_range_x1.extents());
-    IdxRangeSlice<GridX<2>>
-            idx_range_slice_dx2(idx_range_x2.front(), IdxStep<GridX<2>>(2), idx_range_x2.extents());
-    IdxRangeSlice<GridX<3>>
-            idx_range_slice_dx3(idx_range_x3.front(), IdxStep<GridX<3>>(2), idx_range_x3.extents());
+    IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(idx_range_x1);
+    IdxRangeSlice<GridX<2>> idx_range_slice_dx2 = get_bound_idx_range_slice(idx_range_x2);
+    IdxRangeSlice<GridX<3>> idx_range_slice_dx3 = get_bound_idx_range_slice(idx_range_x3);
 
-    IdxRangeSlice<GridY<1>>
-            idx_range_slice_dy1(idx_range_y1.front(), IdxStep<GridY<1>>(2), idx_range_y1.extents());
-    IdxRangeSlice<GridY<2>>
-            idx_range_slice_dy2(idx_range_y2.front(), IdxStep<GridY<2>>(2), idx_range_y2.extents());
-    IdxRangeSlice<GridY<3>>
-            idx_range_slice_dy3(idx_range_y3.front(), IdxStep<GridY<3>>(2), idx_range_y3.extents());
+    IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(idx_range_y1);
+    IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(idx_range_y2);
+    IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(idx_range_y3);
 
     // Collect the index range slices.
     MultipatchType<IdxRange1SliceOnPatch, Patch1, Patch2, Patch3>
@@ -496,7 +488,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(xg_max, yg_min, yg_max);
     SplineRThetagEvaluator evaluator_g(bc_xmin_g, bc_xmax_g, bc_ymin_g, bc_ymax_g);
 
-    // ------ intialise the first derivatives from the global spline
+    // ------ intialise the boundary first derivatives from the global spline
     Idx<ddc::Deriv<X<1>>, GridX<1>>
             idx_slice_xmin_1(Idx<ddc::Deriv<X<1>>>(1), idx_range_slice_dx1.front());
     Idx<ddc::Deriv<X<3>>, GridX<3>>
@@ -579,6 +571,4 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef);
-
-    std::cout << "End of the test." << std::endl;
 }
