@@ -725,3 +725,22 @@ TEST(DerivFieldTest, FieldDeepCopy)
         EXPECT_EQ(right_x_derivs(iy), 2 * x_right);
     });
 }
+
+TEST(DerivFieldMemTest, IdxRanges)
+{
+    // Type for a x,y field with 1 derivative in x
+    using DFieldMemXY_dX = DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>;
+
+    // Index range where derivatives are defined
+    IdxRangeSlice<GridX> deriv_idx_range_x(idx_range_x.front(), IdxStepX(2), idx_range_x.extents());
+
+    // Define the field memory allocation
+    DFieldMemXY_dX dxField(idx_range_x_y, deriv_idx_range_x);
+
+    IdxRange<dX> expected_derivs(Idx<dX>(1), IdxStep<dX>(1));
+    IdxRangeSlice<GridX> deriv_idx_range_x_stored = dxField.template idx_range_for_deriv<GridX>();
+
+    EXPECT_EQUAL(get_idx_range(dxField), idx_range_x_y);
+    EXPECT_EQUAL(deriv_idx_range_x_stored, deriv_idx_range_x);
+    EXPECT_EQUAL(derivative_idx_range(dxField), expected_derivs);
+}
