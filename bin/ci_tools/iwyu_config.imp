@@ -1,20 +1,19 @@
 [
-  { include: ["@<ddc/[a-z_]+\\.hpp>", "private", "<ddc/ddc.hpp>", "public"] },
+  { include: ["@<ddc/[a-z_][a-z_][a-z_][a-z_]+\\.hpp>", "private", "<ddc/ddc.hpp>", "public"] }, # Map DDC includes with more than 3 letters (pdi/ddc) to ddc.hpp
   { include: ["@<ddc/kernels/splines/.*>", "private", "<ddc/kernels/splines.hpp>", "public"] },
   { include: ["@<Kokkos_.*(?<!Impl)\\.hpp>", "public", "<Kokkos_Core.hpp>", "public"] },
   { include: ["@<impl/Kokkos_.*>", "private", "<Kokkos_Core.hpp>", "public"] },
   { include: ["@<(?!impl)[a-zA-Z_]+/Kokkos_.*>", "private", "<Kokkos_Core.hpp>", "public"] },
-  { include: ["<ddc/detail/tagged_vector.hpp>", "private", "<vector_index_tools.hpp>", "public"] },
+  { include: ["<KOLIOP/error/status.h>", "private", "<KOLIOP/koliop.hpp>", "public"] },
+  { include: ["<ddc/detail/tagged_vector.hpp>", "private", '"vector_index_tools.hpp"', "public"] },
   { include: ["<bits/chrono.h>", "public", "<chrono>", "public"] },
   { include: ['"gtest/gtest.h"', "public", "<gtest/gtest.h>", "public"] },
 
   { symbol: ["std::basic_string", "private", "<Kokkos_Core.hpp>", "public"] }, # Added to allow implicit conversion of strings
   { symbol: ["std::basic_string", "private", "<ddc/pdi.hpp>", "private"] }, # Added to allow implicit conversion of strings
-  { symbol: ["ddc::detail::TaggedVector", "private", "<vector_index_tools.hpp>", "public"] },
   { symbol: ["Kokkos::HostSpace", "private", "<Kokkos_Core.hpp>", "public"] },
   { symbol: ["Kokkos::HostSpace", "private", "<ddc/ddc.hpp>", "public"] },
   { symbol: ["std::abs", "private", "<cmath>", "public"] },
-  { symbol: ["abs", "private", "<cmath>", "public"] },
   { symbol: ["M_PI", "private", "<cmath>", "public"] },
   { symbol: ["std::fmod", "private", "<cmath>", "public"] },
 ]
