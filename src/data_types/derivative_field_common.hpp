@@ -602,7 +602,7 @@ public:
      * @brief Get the physical index range on which the Field is defined.
      * This method is equivalent to calling `get_idx_range(this->get_values_field())`
      */
-    physical_idx_range_type idx_range() const
+    KOKKOS_FUNCTION physical_idx_range_type idx_range() const
     {
         return m_physical_idx_range;
     }
