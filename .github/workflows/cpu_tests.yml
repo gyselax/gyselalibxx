@@ -182,29 +182,9 @@ jobs:
           submodules: recursive
       - name: "Filter tests"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-        uses: ./.github/actions/test_filter
-      - name: Check clang version
-        id: clang-version
-        run: |
-          CLANG_VERSION=$(clang --version | grep -oP 'clang version \K[0-9]+')
-          echo "CLANG_VERSION=${CLANG_VERSION}" >> ${GITHUB_OUTPUT}
-          echo "CLANG_VERSION=${CLANG_VERSION}"
-        shell: bash
-      - name: Checkout iwyu
-        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-        uses: actions/checkout@v4
-        with:
-          repository: include-what-you-use/include-what-you-use
-          ref: 0.22
-          path: iwyu
-      - name: Build iwyu
-        run: |
-          cmake -DCMAKE_PREFIX_PATH=/usr/lib/llvm-${{ steps.clang-version.outputs.CLANG_VERSION }}/lib/cmake/llvm -B build -S .
-          cmake --build build --parallel
-          echo "$(pwd)/build/bin/" >> $GITHUB_PATH
-        working-directory: iwyu
-        shell: bash
+        uses: ./.github/actions/changed_files
       - name: Build code
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         run: |
           bin/run_iwyu toolchains/common_toolchains/serial_debug_toolchain.cmake  src/ tests simulations -j 2 --relevant_files changed_files.txt
         shell: bash
