@@ -944,6 +944,25 @@ public:
         IdxRange&lt;&gt; no_specified_dims;
         return get_internal_field(no_specified_dims).span_cview();
     }
+
+    KOKKOS_FUNCTION physical_idx_range_type idx_range() const
+    {
+        return m_physical_idx_range;
+    }
+
+    discrete_deriv_idx_range_type derivative_idx_range() const
+    {
+        return m_deriv_idx_range;
+    }
+
+    template &lt;class Grid1D&gt;
+    IdxRangeSlice&lt;Grid1D&gt; idx_range_for_deriv() const
+    {
+        static_assert(
+                ddc::in_tags_v&lt;Grid1D, physical_deriv_grids&gt;,
+                "Cannot request index range for a dimension where no derivatives are present.");
+        return IdxRangeSlice&lt;Grid1D&gt;(m_cross_derivative_idx_range);
+    }
 };
 </code></pre></div>
               

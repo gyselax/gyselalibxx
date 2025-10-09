@@ -727,6 +727,9 @@
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3515c17c41fab7daaf8842344473acb5" kind="function"><name>get_mdspan</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1adffb6410e57ef9d4d3fd8801cbe73a30" kind="function"><name>get_values_field</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a811908f829ca05bd4b781814d16efd34" kind="function"><name>get_values_const_field</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ad89f3639c21684fd04f16e7de1da0ac0" kind="function"><name>idx_range</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ad754bae73f3ffd90d1ba4128d9406161" kind="function"><name>derivative_idx_range</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1abf5022e8f003d81445d27fb564324f43" kind="function"><name>idx_range_for_deriv</name></member>
   </compound>
   <compound refid="classDerivFieldMem" kind="class"><name>DerivFieldMem</name>
   </compound>

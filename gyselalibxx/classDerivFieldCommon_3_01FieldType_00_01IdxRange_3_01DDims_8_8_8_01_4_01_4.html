@@ -612,6 +612,10 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;"><a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-discrete_deriv_idx_range_type"><strong>discrete_deriv_idx_range_type</strong></a></td>
+<td style="text-align: left;"><a href="#function-derivative_idx_range"><strong>derivative_idx_range</strong></a> () const<br><em>Get the index ranges describing which derivatives are defined for each dimension.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">auto</td>
 <td style="text-align: left;"><a href="#function-get_mdspan-12"><strong>get_mdspan</strong></a> (IdxRange&lt; ODims... &gt; provided_deriv_idx_range) <br><em>Get one of the mdspans from the internal array internal_fields. This function takes index ranges on the derivative directions. Where derivatives are missing it is assumed that the 0-th order derivative is requested. This dimension is stripped from the resulting field. This is the recommended way to access the internal fields.</em></td>
 </tr>
@@ -626,6 +630,14 @@
 <tr>
 <td style="text-align: right;">auto</td>
 <td style="text-align: left;"><a href="#function-get_values_field"><strong>get_values_field</strong></a> () <br><em>Get the Field which holds the values of the function.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_FUNCTION <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a></td>
+<td style="text-align: left;"><a href="#function-idx_range"><strong>idx_range</strong></a> () const<br><em>Get the physical index range on which the Field is defined. This method is equivalent to calling</em> <code>get_idx_range(this-&gt; get_values_field() )</code> __</td>
+</tr>
+<tr>
+<td style="text-align: right;">IdxRangeSlice&lt; Grid1D &gt;</td>
+<td style="text-align: left;"><a href="#function-idx_range_for_deriv"><strong>idx_range_for_deriv</strong></a> () const<br><em>Get the physical index range along Grid1D on which the derivatives of that dimension are defined.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr auto</td>
@@ -841,6 +853,13 @@
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-derivative_idx_range">function derivative_idx_range</h3>
+<p><em>Get the index ranges describing which derivatives are defined for each dimension.</em> </p>
+<pre><code class="language-C++">inline discrete_deriv_idx_range_type DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::derivative_idx_range () const
+</code></pre>
+<p>E.g. for a <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>&lt;double, IdxRange&lt;ddc::Deriv&lt;X&gt;, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridY.html"><strong>GridY</strong></a>&gt;, 2&gt; This will return IdxRange&lt;ddc::Deriv&lt;X&gt;&gt;(1,2) indicating that the first and second derivatives are defined for the <a href="structX.html"><strong>X</strong></a> dimension. E.g. for a <a href="classDerivField.html"><strong>DerivField</strong></a>&lt;double, IdxRange&lt;ddc::Deriv&lt;X&gt;, ddc::Deriv&lt;Y&gt;, <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridY.html"><strong>GridY</strong></a>&gt;&gt; This will return IdxRange&lt;ddc::Deriv&lt;X&gt;, ddc::Deriv&lt;Y&gt;&gt; indicating how many of the <a href="structX.html"><strong>X</strong></a> and <a href="structY.html"><strong>Y</strong></a> derivatives are saved in this field (this may be a subset of the derivatives available in the originally allocated <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>. </p>
+<hr>
+
 <h3 id="function-get_mdspan-12">function get_mdspan [1/2]</h3>
 <p><em>Get one of the mdspans from the internal array internal_fields. This function takes index ranges on the derivative directions. Where derivatives are missing it is assumed that the 0-th order derivative is requested. This dimension is stripped from the resulting field. This is the recommended way to access the internal fields.</em> </p>
 <pre><code class="language-C++">template&lt;class... ODims&gt;
@@ -880,6 +899,20 @@ inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get
 <p>This function is equivalent to calling operator[] with a 0D IdxRange.</p>
 <p><strong>Returns:</strong></p>
 <p>Field The field on the physical index range. </p>
+<hr>
+
+<h3 id="function-idx_range">function idx_range</h3>
+<p><em>Get the physical index range on which the Field is defined. This method is equivalent to calling</em> <code>get_idx_range(this-&gt; get_values_field() )</code> __</p>
+<pre><code class="language-C++">inline KOKKOS_FUNCTION physical_idx_range_type DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::idx_range () const
+</code></pre>
+<hr>
+
+<h3 id="function-idx_range_for_deriv">function idx_range_for_deriv</h3>
+<p><em>Get the physical index range along Grid1D on which the derivatives of that dimension are defined.</em> </p>
+<pre><code class="language-C++">template&lt;class Grid1D&gt;
+inline IdxRangeSlice&lt; Grid1D &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::idx_range_for_deriv () const
+</code></pre>
+<p>This is equivalent to retrieving the argument deriv_idx_range_x from a dxField defined as: <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>&lt;double, IdxRange&lt;dX, GridX, GridY&gt;, 1&gt; dxField(idx_range_x_y, deriv_idx_range_x); </p>
 <hr>
 
 <h3 id="function-operator">function operator[]</h3>
