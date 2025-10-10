@@ -107,10 +107,10 @@ if __name__ == '__main__':
 
     if args.relevant_files:
         with open(args.relevant_files, 'r') as f:
-            relevant_files = [Path(l).absolute() for l in f.readlines()]
+            relevant_files = [Path(l.strip()).absolute() for l in f.readlines()]
 
-            unique_relevant_configs = {f:c for f,c in relevant_configs.items() if f in relevant_files or \
-                                                        any(d in relevant_files for d in c.get('deps', []))}
+        unique_relevant_configs = {f:c for f,c in unique_relevant_configs.items() if f in relevant_files or \
+                                                    any(d in relevant_files for d in c.get('deps', []))}
 
         errors = [e for fname, level, msg in errors if fname in relevant_files]
 
