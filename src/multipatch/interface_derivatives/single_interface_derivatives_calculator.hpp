@@ -9,6 +9,14 @@
 #include "edge_transformation.hpp"
 #include "types.hpp"
 
+
+template <class T>
+inline constexpr bool enable_single_derivative_calculator = false;
+
+template <class T>
+inline constexpr bool is_single_derivative_calculator_v
+        = enable_single_derivative_calculator<std::remove_const_t<std::remove_reference_t<T>>>;
+
 /**
  * @brief Compute the derivative of an equivalent global spline 
  * at the interface between two patches. 
@@ -45,14 +53,7 @@
  * All the formulae and more details are given in the README.md. 
  * 
  * @tparam Interface The interface between two patches where we want 
- * to compute the derivatives. 
- * @tparam Bound1 The interpolation condition for the spline on the patch 1
- * of the interface. By default the value is set to ddc::BoundCond::HERMITE. 
- * If you want to apply a special treatment for the additional interpolation 
- * point in case of use of interpolation points as closure conditions, please 
- * indicate "ddc::BoundCond::GREVILLE" in this template parameter. 
- * @tparam Bound2 The interpolation condition for the spline on the patch 2
- * of the interface. Same comment as for Bound1.  
+ * to compute the derivatives.  
  * 
  * @warning The applied method only works for interpolation points located on 
  * the break points. In the case where "ddc::BoundCond::GREVILLE" is specified,
@@ -61,25 +62,22 @@
  * Please be sure to initialise the discrete space of your Grid on the break points
  * (especially in the non-uniform case). 
  */
-template <
-        class Interface,
-        ddc::BoundCond Bound1 = ddc::BoundCond::HERMITE,
-        ddc::BoundCond Bound2 = ddc::BoundCond::HERMITE>
+template <class InterfaceType>
 class SingleInterfaceDerivativesCalculator
 {
     static_assert(
-            (!std::is_same_v<typename Interface::Edge1, OutsideEdge>)&&(
-                    !std::is_same_v<typename Interface::Edge2, OutsideEdge>),
+            (!std::is_same_v<typename InterfaceType::Edge1, OutsideEdge>)&&(
+                    !std::is_same_v<typename InterfaceType::Edge2, OutsideEdge>),
             "The interface cannot be an interface with the outside domain.");
 
-    using EdgePerpGrid1 = typename Interface::Edge1::perpendicular_grid;
-    using EdgePerpGrid2 = typename Interface::Edge2::perpendicular_grid;
+    using EdgePerpGrid1 = typename InterfaceType::Edge1::perpendicular_grid;
+    using EdgePerpGrid2 = typename InterfaceType::Edge2::perpendicular_grid;
 
-    using EdgeParGrid1 = typename Interface::Edge1::parallel_grid;
-    using EdgeParGrid2 = typename Interface::Edge2::parallel_grid;
+    using EdgeParGrid1 = typename InterfaceType::Edge1::parallel_grid;
+    using EdgeParGrid2 = typename InterfaceType::Edge2::parallel_grid;
 
-    using Patch1 = typename Interface::Edge1::associated_patch;
-    using Patch2 = typename Interface::Edge2::associated_patch;
+    using Patch1 = typename InterfaceType::Edge1::associated_patch;
+    using Patch2 = typename InterfaceType::Edge2::associated_patch;
 
     using IdxRange2D_1 = typename Patch1::IdxRange12;
     using IdxRange2D_2 = typename Patch2::IdxRange12;
@@ -91,11 +89,6 @@ class SingleInterfaceDerivativesCalculator
 
     using Idx1D_1 = Idx<EdgePerpGrid1>;
     using Idx1D_2 = Idx<EdgePerpGrid2>;
-
-    static constexpr bool is_cell_bound_1_with_extra_interpol_pt
-            = (Bound1 == ddc::BoundCond::GREVILLE);
-    static constexpr bool is_cell_bound_2_with_extra_interpol_pt
-            = (Bound2 == ddc::BoundCond::GREVILLE);
 
     using BSplinesPerp1 = std::conditional_t<
             std::is_same_v<EdgePerpGrid1, typename Patch1::Grid1>,
@@ -117,11 +110,19 @@ class SingleInterfaceDerivativesCalculator
     using IdxRangeBreakPt1 = IdxRange<GridBreakPt1>;
     using IdxRangeBreakPt2 = IdxRange<GridBreakPt2>;
 
+public:
+    /// @brief Interface between the two involved patches.
+    using associated_interface = InterfaceType;
+
+private:
+    const bool m_is_cell_bound_1_with_extra_interpol_pt;
+    const bool m_is_cell_bound_2_with_extra_interpol_pt;
+
     IdxRange1DPerp_1 const m_idx_range_perp_1;
     IdxRange1DPerp_2 const m_idx_range_perp_2;
 
-    static Extremity constexpr m_extremity_1 = Interface::Edge1::extremity;
-    static Extremity constexpr m_extremity_2 = Interface::Edge2::extremity;
+    static Extremity constexpr m_extremity_1 = InterfaceType::Edge1::extremity;
+    static Extremity constexpr m_extremity_2 = InterfaceType::Edge2::extremity;
 
     double m_coeff_deriv_patch_2;
     double m_coeff_deriv_patch_1;
@@ -153,24 +154,39 @@ public:
      * on the patch 1. 
      * @param idx_range_1d_2 1D index range perpendicular to the Interface, 
      * on the patch 2. 
+     * @param Bound1 The boundary condition type on the opposite edge of the interface on 
+     * the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. If 
+     * ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the 
+     * additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense. 
+     * @param Bound2 The boundary condition type on the opposite edge of the interface on 
+     * the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. If 
+     * ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the 
+     * additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense.  
      */
     SingleInterfaceDerivativesCalculator(
             IdxRange1DPerp_1 const& idx_range_1d_1,
-            IdxRange1DPerp_2 const& idx_range_1d_2)
-        : m_idx_range_perp_1(idx_range_1d_1)
+            IdxRange1DPerp_2 const& idx_range_1d_2,
+            ddc::BoundCond const& Bound1 = ddc::BoundCond::HERMITE,
+            ddc::BoundCond const& Bound2 = ddc::BoundCond::HERMITE)
+        : m_is_cell_bound_1_with_extra_interpol_pt(Bound1 == ddc::BoundCond::GREVILLE)
+        , m_is_cell_bound_2_with_extra_interpol_pt(Bound2 == ddc::BoundCond::GREVILLE)
+        , m_idx_range_perp_1(idx_range_1d_1)
         , m_idx_range_perp_2(idx_range_1d_2)
         , m_weights_patch_1_alloc(m_idx_range_perp_1)
         , m_weights_patch_2_alloc(m_idx_range_perp_2)
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
     {
+        assert(Bound1 != ddc::BoundCond::PERIODIC);
+        assert(Bound2 != ddc::BoundCond::PERIODIC);
+
         // Two interpolation points have to be added if the derivatives are not closure condition.
-        if constexpr (is_cell_bound_1_with_extra_interpol_pt) {
+        if (m_is_cell_bound_1_with_extra_interpol_pt) {
             assert(m_idx_range_perp_1.size() == ddc::discrete_space<BSplinesPerp1>().ncells() + 2);
         } else {
             assert(m_idx_range_perp_1.size() <= ddc::discrete_space<BSplinesPerp1>().ncells() + 1);
         }
-        if constexpr (is_cell_bound_2_with_extra_interpol_pt) {
+        if (m_is_cell_bound_2_with_extra_interpol_pt) {
             assert(m_idx_range_perp_2.size() == ddc::discrete_space<BSplinesPerp2>().ncells() + 2);
         } else {
             assert(m_idx_range_perp_2.size() <= ddc::discrete_space<BSplinesPerp2>().ncells() + 1);
@@ -178,22 +194,22 @@ public:
 
         // The break points have to be interpolation points.
         check_break_points_are_interpolation_points<BSplinesPerp1, GridBreakPt1>(
-                is_cell_bound_1_with_extra_interpol_pt,
+                m_is_cell_bound_1_with_extra_interpol_pt,
                 m_idx_range_perp_1,
                 m_extremity_1);
         check_break_points_are_interpolation_points<BSplinesPerp2, GridBreakPt2>(
-                is_cell_bound_2_with_extra_interpol_pt,
+                m_is_cell_bound_2_with_extra_interpol_pt,
                 m_idx_range_perp_2,
                 m_extremity_2);
 
 
         // The additional interpolation points have to be in the boundary cells.
-        if constexpr (is_cell_bound_1_with_extra_interpol_pt) {
+        if (m_is_cell_bound_1_with_extra_interpol_pt) {
             check_additional_interpolation_points_location<
                     BSplinesPerp1,
                     GridBreakPt1>(m_idx_range_perp_1, m_extremity_1);
         }
-        if constexpr (is_cell_bound_2_with_extra_interpol_pt) {
+        if (m_is_cell_bound_2_with_extra_interpol_pt) {
             check_additional_interpolation_points_location<
                     BSplinesPerp2,
                     GridBreakPt2>(m_idx_range_perp_2, m_extremity_2);
@@ -213,14 +229,24 @@ public:
      * See @ref SingleInterfaceDerivativesCalculatorInstantiator.
      * @param idx_range_a Index range on one patch. 
      * @param idx_range_b Index range on the other patch. 
+     * @param Bound1 The boundary condition type on the opposite edge of the interface on 
+     * the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. 
+     * @param Bound2 The boundary condition type on the opposite edge of the interface on 
+     * the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. 
      */
     template <class IdxRangeA, class IdxRangeB>
-    SingleInterfaceDerivativesCalculator(IdxRangeA const& idx_range_a, IdxRangeB const& idx_range_b)
+    SingleInterfaceDerivativesCalculator(
+            IdxRangeA const& idx_range_a,
+            IdxRangeB const& idx_range_b,
+            ddc::BoundCond const& Bound1 = ddc::BoundCond::HERMITE,
+            ddc::BoundCond const& Bound2 = ddc::BoundCond::HERMITE)
         : SingleInterfaceDerivativesCalculator(
                 IdxRange1DPerp_1(
                         ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
                 IdxRange1DPerp_2(
-                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)))
+                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
+                Bound1,
+                Bound2)
     {
     }
 
@@ -537,9 +563,9 @@ private:
 
 
         // Computing coefficients (c, a, b) on patch 2 -------------------------------------------
-        // If is_cell_bound_2_with_extra_interpol_pt is true, the last cell is treated differently.
+        // If m_is_cell_bound_2_with_extra_interpol_pt is true, the last cell is treated differently.
         int const n2_cells
-                = is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
+                = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
 
         recursion(
                 n2_cells,
@@ -550,7 +576,7 @@ private:
                 weights_patch2);
 
         // Correction if we use an additional interpolation point as closure in the last cell.
-        if constexpr (is_cell_bound_2_with_extra_interpol_pt) {
+        if (m_is_cell_bound_2_with_extra_interpol_pt) {
             correction_boundary(
                     n_points_2,
                     interface_idx_2,
@@ -599,9 +625,9 @@ private:
         weights_patch2[1](interface_idx_2) += factor * gammas_i[2];
 
         // Computing coefficients (c, a, b) on patch 1 -------------------------------------------
-        // If is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
+        // If m_is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
         int const n1_cells
-                = is_cell_bound_1_with_extra_interpol_pt ? n_points_1 - 3 : n_points_1 - 1;
+                = m_is_cell_bound_1_with_extra_interpol_pt ? n_points_1 - 3 : n_points_1 - 1;
 
         recursion(
                 n1_cells,
@@ -612,7 +638,7 @@ private:
                 weights_patch2);
 
         // Correction if we use an additional interpolation point as closure in the last cell.
-        if constexpr (is_cell_bound_1_with_extra_interpol_pt) {
+        if (m_is_cell_bound_1_with_extra_interpol_pt) {
             correction_boundary(
                     n_points_1,
                     interface_idx_1,
@@ -1066,3 +1092,9 @@ private:
         return (extremity == FRONT) ? idx_range.front() : idx_range.back();
     }
 };
+
+
+
+template <class InterfaceType>
+inline constexpr bool enable_single_derivative_calculator<
+        SingleInterfaceDerivativesCalculator<InterfaceType>> = true;
