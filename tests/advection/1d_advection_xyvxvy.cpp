@@ -232,10 +232,10 @@ public:
 
                     double const r1 = Kokkos::sqrt((x - xc) * (x - xc) + 8 * (y - yc) * (y - yc));
                     double const r2 = Kokkos::sqrt(8 * (x - xc) * (x - xc) + (y - yc) * (y - yc));
-                    double const G1
-                            = Kokkos::pow(Kokkos::cos(M_PI * r1 / 2. / a), 4) * (Kokkos::abs(r1) < a);
-                    double const G2
-                            = Kokkos::pow(Kokkos::cos(M_PI * r2 / 2. / a), 4) * (Kokkos::abs(r2) < a);
+                    double const G1 = Kokkos::pow(Kokkos::cos(M_PI * r1 / 2. / a), 4)
+                                      * (Kokkos::abs(r1) < a);
+                    double const G2 = Kokkos::pow(Kokkos::cos(M_PI * r2 / 2. / a), 4)
+                                      * (Kokkos::abs(r2) < a);
                     function(idx) = 0.5 * (G1 + G2);
                 });
 
