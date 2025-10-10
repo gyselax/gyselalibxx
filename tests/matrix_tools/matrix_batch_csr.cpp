@@ -198,7 +198,7 @@ void solve_sparse_system()
         cpt = 0;
         for (int i = 0; i < mat_size; i++) {
             for (int j = 0; j < mat_size; j++) {
-                if (abs(matvalues[batch_idx][i][j]) > 1e-16) {
+                if (std::abs(matvalues[batch_idx][i][j]) > 1e-16) {
                     if (batch_idx == 0) {
                         idx_view_host(cpt) = j;
                     }
@@ -258,7 +258,7 @@ void solve_pds_system()
             cpt = 0;
             for (int i = 0; i < mat_size; i++) {
                 for (int j = 0; j < mat_size; j++) {
-                    if (abs(matvalues[batch_idx][i][j]) > 1e-16) {
+                    if (std::abs(matvalues[batch_idx][i][j]) > 1e-16) {
                         if (batch_idx == 0) {
                             idx_view_host(cpt) = j;
                         }

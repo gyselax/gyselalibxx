@@ -73,7 +73,7 @@ TEST(CrankNicolsonFixture, CrankNicolsonOrder)
 
         double linf_err = 0.0;
         ddc::for_each(idx_range, [&](IdxX ix) {
-            double const err = abs(result(ix) - vals(ix));
+            double const err = std::abs(result(ix) - vals(ix));
             linf_err = err > linf_err ? err : linf_err;
         });
         error[j] = linf_err;

@@ -233,9 +233,9 @@ public:
                     double const r1 = Kokkos::sqrt((x - xc) * (x - xc) + 8 * (y - yc) * (y - yc));
                     double const r2 = Kokkos::sqrt(8 * (x - xc) * (x - xc) + (y - yc) * (y - yc));
                     double const G1
-                            = Kokkos::pow(Kokkos::cos(M_PI * r1 / 2. / a), 4) * (abs(r1) < a);
+                            = Kokkos::pow(Kokkos::cos(M_PI * r1 / 2. / a), 4) * (Kokkos::abs(r1) < a);
                     double const G2
-                            = Kokkos::pow(Kokkos::cos(M_PI * r2 / 2. / a), 4) * (abs(r2) < a);
+                            = Kokkos::pow(Kokkos::cos(M_PI * r2 / 2. / a), 4) * (Kokkos::abs(r2) < a);
                     function(idx) = 0.5 * (G1 + G2);
                 });
 
@@ -285,8 +285,8 @@ public:
 
             double const r1 = std::sqrt((x - xc) * (x - xc) + 8 * (y - yc) * (y - yc));
             double const r2 = std::sqrt(8 * (x - xc) * (x - xc) + (y - yc) * (y - yc));
-            double const G1 = std::pow(std::cos(M_PI * r1 / 2. / a), 4) * (abs(r1) < a);
-            double const G2 = std::pow(std::cos(M_PI * r2 / 2. / a), 4) * (abs(r2) < a);
+            double const G1 = std::pow(std::cos(M_PI * r1 / 2. / a), 4) * (std::abs(r1) < a);
+            double const G2 = std::pow(std::cos(M_PI * r2 / 2. / a), 4) * (std::abs(r2) < a);
             exact_function(idx) = 0.5 * (G1 + G2);
         });
 
@@ -306,7 +306,7 @@ public:
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
         ddc::for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
-            double const relative_error = abs(function_host(idx) - exact_function(idx));
+            double const relative_error = std::abs(function_host(idx) - exact_function(idx));
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;
         });

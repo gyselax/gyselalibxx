@@ -209,11 +209,11 @@ public:
         // --- check error
         double max_abs_error = 0;
         ddc::for_each(get_idx_range(function_coef_1_expected_host), [&](Idx1 const idx) {
-            double err = abs(function_coef_1_expected_host(idx) - function_coef_1_host(idx));
+            double err = std::abs(function_coef_1_expected_host(idx) - function_coef_1_host(idx));
             max_abs_error = std::max(max_abs_error, err);
         });
         ddc::for_each(get_idx_range(function_coef_2_expected_host), [&](Idx2 const idx) {
-            double err = abs(function_coef_2_expected_host(idx) - function_coef_2_host(idx));
+            double err = std::abs(function_coef_2_expected_host(idx) - function_coef_2_host(idx));
             max_abs_error = std::max(max_abs_error, err);
         });
         EXPECT_LE(max_abs_error, 1e-15);
