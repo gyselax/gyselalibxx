@@ -515,7 +515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="371" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="371" bodyend="431"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="371" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="371" bodyend="432"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -540,7 +540,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="37" bodyend="432"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge_transformation.hpp" bodystart="37" bodyend="433"/>
     <listofallmembers>
       <member refid="classEdgeTransformation_1a2e0b7b2e83fbdd34e8e99584216fce79" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>EdgeDim1</name></member>
       <member refid="classEdgeTransformation_1a5b7d95b590baebb0f32f05d4b0771aa9" prot="private" virt="non-virtual"><scope>EdgeTransformation</scope><name>EdgeDim2</name></member>

@@ -789,7 +789,7 @@ public:
             CurrentCoord const current_coord(ddc::coordinate(current_idx));
             CurrentCoord target_equivalent_coord
                     = transform_edge_coord&lt;TargetPatch&gt;(ddc::coordinate(target_idx));
-            if (abs(current_coord - target_equivalent_coord) &lt; 1e-14) {
+            if (std::abs(current_coord - target_equivalent_coord) &lt; 1e-14) {
                 return target_idx;
             }
         }
@@ -863,7 +863,8 @@ private:
         CurrentCoord target_coord_max
                 = transform_edge_coord&lt;TargetPatch&gt;(ddc::coordinate(target_idx_max));
 
-        if (abs(current_coord - target_coord_min) &lt; abs(current_coord - target_coord_max)) {
+        if (std::abs(current_coord - target_coord_min)
+            &lt; std::abs(current_coord - target_coord_max)) {
             return target_idx_min;
         } else {
             return target_idx_max;
