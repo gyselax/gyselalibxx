@@ -193,9 +193,8 @@ void solve_sparse_system()
             nnz_per_row_view_host(nnz_per_row, mat_size + 1);
     Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             solution_view_host(solution, batch_size * mat_size);
-    int cpt;
     for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
-        cpt = 0;
+        int cpt = 0;
         for (int i = 0; i < mat_size; i++) {
             for (int j = 0; j < mat_size; j++) {
                 if (std::abs(matvalues[batch_idx][i][j]) > 1e-16) {
@@ -253,9 +252,8 @@ void solve_pds_system()
                 nnz_per_row_view_host(nnz_per_row, mat_size + 1);
         Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
                 solution_view_host(solution, batch_size * mat_size);
-        int cpt;
         for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
-            cpt = 0;
+            int cpt = 0;
             for (int i = 0; i < mat_size; i++) {
                 for (int j = 0; j < mat_size; j++) {
                     if (std::abs(matvalues[batch_idx][i][j]) > 1e-16) {
