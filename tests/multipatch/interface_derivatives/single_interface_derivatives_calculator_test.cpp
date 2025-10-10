@@ -15,6 +15,7 @@
 #include "ddc_helper.hpp"
 #include "global_2d_onion_shape_non_uniform.hpp"
 #include "interface.hpp"
+#include "interface_derivatives_test_utils.hpp"
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "single_interface_derivatives_calculator.hpp"
@@ -132,66 +133,6 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::PeriodicExtrapolationRule<Thetag>>;
 
 
-/**
- *  @brief Get interpolation points from the break points by placing 
- * the interpolation points on the break points and adding one on the
- * left boundary cell at 2/3 of the cell. 
- */
-template <class CoordType>
-std::vector<CoordType> get_interpolation_points_add_one_on_left(
-        std::vector<CoordType> const& break_points)
-{
-    CoordType additional_point(break_points[0] * 2. / 3. + break_points[1] * 1. / 3.);
-    std::vector<CoordType> interpolation_points(break_points);
-    interpolation_points.insert(interpolation_points.begin() + 1, additional_point);
-    return interpolation_points;
-}
-
-/**
- *  @brief Get interpolation points from the break points by placing 
- * the interpolation points on the break points and adding one on the
- * right boundary cell at 1/3 of the cell. 
- */
-template <class CoordType>
-std::vector<CoordType> get_interpolation_points_add_one_on_right(
-        std::vector<CoordType> const& break_points)
-{
-    int n_bpoints = break_points.size();
-    CoordType additional_point(
-            break_points[n_bpoints - 1] * 2. / 3. + break_points[n_bpoints - 2] * 1. / 3.);
-    std::vector<CoordType> interpolation_points(break_points);
-    interpolation_points.insert(interpolation_points.end() - 1, additional_point);
-    return interpolation_points;
-}
-
-/**
- * @brief Fill in a vector of points for the equivalent global mesh 
- * by conserving the same order of the given points.
- */
-template <class CoordTypeG, class CoordTypeP>
-void fill_in(std::vector<CoordTypeG>& points_global, std::vector<CoordTypeP> const& points_patch)
-{
-    for (CoordTypeP pt : points_patch) {
-        points_global.push_back(CoordTypeG {double(pt)});
-    }
-}
-
-/**
- * @brief Fill in a vector of points for the equivalent global mesh
- *  by reversing the order of the given points.
- */
-template <class CoordTypeG, class CoordTypeP>
-void fill_in_reverse(
-        std::vector<CoordTypeG>& points_global,
-        std::vector<CoordTypeP> const& points_patch)
-{
-    std::size_t const n_pt = points_patch.size();
-    CoordTypeP const max = points_patch[n_pt - 1];
-    CoordTypeP const min = points_patch[0];
-    for (int i(0); i < n_pt; ++i) {
-        points_global.push_back(Coord<Rg> {double(min + max - points_patch[n_pt - 1 - i])});
-    }
-}
 
 /// @brief Initialise the function with f(r,theta) = r(3-r)sin(theta).
 template <class Grid1, class Grid2>
@@ -873,13 +814,11 @@ TYPED_TEST(
     if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
         // We test if the boundaries are well treated => only work with 5 cells to better identify an error.
         // 5 cells -------------------------------------------------------------------------------
-        SingleInterfaceDerivativesCalculator<
-                Interface_1_2,
+        SingleInterfaceDerivativesCalculator<Interface_1_2> const derivatives_calculator(
+                TestFixture::idx_range_rtheta1,
+                TestFixture::idx_range_etaxi2,
                 ddc::BoundCond::GREVILLE,
-                ddc::BoundCond::GREVILLE> const
-                derivatives_calculator(
-                        TestFixture::idx_range_rtheta1,
-                        TestFixture::idx_range_etaxi2);
+                ddc::BoundCond::GREVILLE);
 
 
         ddc::for_each(TestFixture::idx_range_theta1, [&](Patch1::Idx2 const& idx2_1) {
