@@ -306,7 +306,7 @@ SplinePolarFootFinder find_feet(
 BslAdvectionPolar advection_operator(interpolator, find_feet, logical_to_physical_mapping);
 ```
 
-Now, there are three `operator()` implemented.
+Currently, there are three `operator()` implemented.
 
 1. An operator taking the advection field on the physical $x$ and $y$ axis.
 

@@ -220,10 +220,7 @@ public:
         CoordRTheta const point_on_first_row
                 = ddc::coordinate(Idx<GridR, GridTheta>(radial_grid.front(), no_r_grid.front()));
         CoordXY const diff_points = m_logical_to_physical_mapping(point_on_first_row) - Opoint;
-        bool const first_row_is_o_point
-                = ((abs(ddc::get<DimX>(diff_points)) < 1e-15)
-                   && (abs(ddc::get<DimY>(diff_points)) < 1e-15));
-        assert(first_row_is_o_point);
+        assert(norm_inf(diff_points) < 1e-13);
 
         IdxRangeBatched const
                 grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
