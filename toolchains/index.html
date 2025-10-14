@@ -619,9 +619,9 @@ cd gyselalibxx
 <li><code>docker.gyselalibxx_env</code> : Designed for use with a docker container. This is used by the CI.
     Should you wish to try Gyselalib++ rapidly, the docker container can be found hosted on the GitHub Container Registry : <a href="https://github.com/gyselax/gyselalibxx/pkgs/container/gyselalibxx_env"><code>ghcr.io/gyselax/gyselalibxx_env:latest</code></a>. The provided <code>environment.sh</code> file will drop you into a container with access to Gyselalib++'s files.</li>
 <li><code>mi250.hipcc.adastra.spack</code> : Designed for use with the MI250 hardware available on CINES's Adastra supercomputer.</li>
-<li><code>v100.persee</code> : Designed for use with the V100 hardware available on IRFM's Persee cluster.</li>
+<li><code>persee/v100</code> : Designed for use with the V100 hardware available on IRFM's Persee cluster.</li>
+<li><code>persee/xeon</code> : Designed for use with the CPU hardware available on IRFM's Persee cluster.</li>
 <li><code>v100.ruche</code> : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster.</li>
-<li><code>xeon.persee</code> : Designed for use with the CPU hardware available on IRFM's Persee cluster.</li>
 </ul>
 <h2 id="environment-setup">Environment Setup</h2>
 <p>Once all the dependencies have been installed the environment must be set up in order to access the installed components. This can be done using a script called <code>environment.sh</code>. The steps required to set up depend on how the dependencies were installed, so the correct file will depend on the machine where you want to run.</p>
