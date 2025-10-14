@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: MIT
 
-FROM ubuntu:jammy
+FROM ubuntu:noble
 
 COPY bash_run /bin/
 ENV BASH_ENV=/etc/profile
@@ -19,15 +19,15 @@ RUN chmod +x /bin/bash_run \
     apt-utils \
     ca-certificates \
     wget \
- && echo "deb [ arch=amd64 ] https://repo.pdi.dev/ubuntu jammy main" > /etc/apt/sources.list.d/pdi.list \
+ && echo "deb [ arch=amd64 ] https://repo.pdi.dev/ubuntu noble main" > /etc/apt/sources.list.d/pdi.list \
  && wget -O /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg https://repo.pdi.dev/ubuntu/pdidev-archive-keyring.gpg \
  && chmod a+r /etc/apt/trusted.gpg.d/pdidev-archive-keyring.gpg \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
-    clang \
+    clang-18 \
     libomp-dev \
-    clang-format \
+    clang-format-14 \
     doxygen \
     pkg-config \
     git \
@@ -41,10 +41,11 @@ RUN chmod +x /bin/bash_run \
     pdiplugin-decl-hdf5-openmpi \
     pdiplugin-set-value \
     python3-pip \
+    python3-venv \
     libpdi-dev \
- && wget https://cmake.org/files/v3.27/cmake-3.27.9-linux-x86_64.tar.gz \
- && tar --extract --file cmake-3.27.9-linux-x86_64.tar.gz \
- && mv cmake-3.27.9-linux-x86_64 /opt/cmake-3.27 \
+    cmake \
+ && ln -sf /usr/bin/clang-18 /usr/bin/clang \
+ && ln -sf /usr/bin/clang++-18 /usr/bin/clang++ \
  && git clone -b v1.8.0 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
@@ -110,7 +111,8 @@ RUN chmod +x /bin/bash_run \
  && apt-get autoremove -y \
  && apt-get clean -y \
  && apt-get autoclean -y \
- && python3 -m pip install -U --no-cache-dir \
+ && python3 -m venv /opt/venv \
+ && /opt/venv/bin/python -m pip install -U --no-cache-dir \
     PyYAML \
     dask \
     h5py \
@@ -120,15 +122,16 @@ RUN chmod +x /bin/bash_run \
     pip \
     scipy \
     xarray \
-    'pylint==2.17.4' \
+    'pylint==3.3.9' \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
- && chown ci:ci /ci /data
+ && chown -R ci:ci /ci /data /opt/venv
 
 USER ci:ci
 WORKDIR /ci
 ENV HOME=/ci
+ENV PATH="/opt/venv/bin:$PATH"
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]

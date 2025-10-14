@@ -147,7 +147,7 @@ public:
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
         ddc::for_each(interpolation_idx_range, [&](IdxX const idx) {
-            double const relative_error = abs(function_host(idx) - exact_function(idx));
+            double const relative_error = std::abs(function_host(idx) - exact_function(idx));
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;
         });

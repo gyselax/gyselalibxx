@@ -50,9 +50,9 @@ cmake_tests_Release_GPU:
   variables:
     RELATIVE_RESTART_TOLERANCE: '1e-14'
     ABSOLUTE_RESTART_TOLERANCE: '1e-14'
-    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/v100.persee/toolchain.cmake'
+    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/persee/v100/toolchain.cmake'
   before_script: |
-    . ${CI_PROJECT_DIR}/toolchains/v100.persee/environment.sh
+    . ${CI_PROJECT_DIR}/toolchains/persee/v100/environment.sh
 
 indentation:
   rules:

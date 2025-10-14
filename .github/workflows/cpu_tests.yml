@@ -109,7 +109,6 @@ jobs:
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
-      options: --user root
     name: CPU Test (${{ matrix.toolchain }}, ${{ matrix.compiler.name }})
     env:
       CC: ${{ matrix.compiler.c_compiler }}
