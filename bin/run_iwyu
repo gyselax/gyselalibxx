@@ -40,6 +40,10 @@ if __name__ == '__main__':
                '-DCMAKE_EXPORT_COMPILE_COMMANDS=ON', '-B', build_dir, '.'],
                    check=True)
 
+    # Clone Kokkos mapping file
+    subprocess.run([shutil.which('git'), 'clone', 'https://gist.github.com/c033bea32c51395c85fb5a4d74d8183b.git'],
+                   check=True, cwd = build_dir)
+
     with open(build_dir / 'compile_commands.json', encoding='utf-8') as f:
         config = json.load(f)
 
@@ -57,6 +61,7 @@ if __name__ == '__main__':
 
     iwyu_command = [shutil.which('include-what-you-use'),
                     '-Xiwyu', f'--mapping_file={GYSELALIB_ROOT / "bin" / "ci_tools" / "iwyu_config.imp"}',
+                    '-Xiwyu', f'--mapping_file={build_dir / "c033bea32c51395c85fb5a4d74d8183b" / "iwyu-kokkos.json"}',
                     '-Xiwyu', '--transitive_includes_only',
                     '-Xiwyu', '--no_fwd_decls',
                     '-Xiwyu', '--error']
