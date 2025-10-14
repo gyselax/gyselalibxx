@@ -20,6 +20,7 @@ spack:
     - 'pdiplugin-decl-hdf5 +mpi'
     - 'pdiplugin-decl-netcdf +mpi'
     - 'pdiplugin-mpi'
+    - 'pdiplugin-pycall'
     - 'pdiplugin-set-value'
     - 'pdiplugin-trace'
   - python-packages:
