@@ -282,11 +282,19 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
     // --- Check the difference on advection fields  --------------------------------------------------
     ddc::for_each(grid, [&](IdxRTheta const irtheta) {
-        EXPECT_LE(abs(ddcHelper::get<X>(difference_between_fields_exact_and_xy)(irtheta)), 1e-5);
-        EXPECT_LE(abs(ddcHelper::get<Y>(difference_between_fields_exact_and_xy)(irtheta)), 1e-5);
+        EXPECT_LE(
+                std::abs(ddcHelper::get<X>(difference_between_fields_exact_and_xy)(irtheta)),
+                1e-5);
+        EXPECT_LE(
+                std::abs(ddcHelper::get<Y>(difference_between_fields_exact_and_xy)(irtheta)),
+                1e-5);
 
-        EXPECT_LE(abs(ddcHelper::get<X>(difference_between_fields_xy_and_rtheta)(irtheta)), 1e-13);
-        EXPECT_LE(abs(ddcHelper::get<Y>(difference_between_fields_xy_and_rtheta)(irtheta)), 1e-13);
+        EXPECT_LE(
+                std::abs(ddcHelper::get<X>(difference_between_fields_xy_and_rtheta)(irtheta)),
+                1e-13);
+        EXPECT_LE(
+                std::abs(ddcHelper::get<Y>(difference_between_fields_xy_and_rtheta)(irtheta)),
+                1e-13);
     });
 
     auto density_xy_device

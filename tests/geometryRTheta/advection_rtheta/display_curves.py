@@ -81,7 +81,7 @@ def set_axis(ax, x_label, y_label, z_label, ax_label):
     ax.axis(ax_label)
 
 
-def set_surface(fig, nb_x, nb_y, n_idx, X, Y, Z, elev, azim, roll):
+def set_surface(fig, nb_x, nb_y, n_idx, *, X, Y, Z, elev, azim, roll):
     """
     Set a plot_trisurf curve.
 
@@ -152,7 +152,7 @@ def display(iter_nb, dt, title, subtitle, output_folder):
         Y = np.array(CoordY)
         Z = np.array(list_F)
 
-        ax = set_surface(fig, 3, 5, n_idx, X, Y, Z, 90, -90, 0)
+        ax = set_surface(fig, 3, 5, n_idx, X=X, Y=Y, Z=Z, elev=90, azim=-90, roll=0)
 
         if idx == 0 :
             plt.title(f"Initial condition\n (maximum = {max(Z):.3}) ")
@@ -176,20 +176,20 @@ def display(iter_nb, dt, title, subtitle, output_folder):
     Ze = np.array(list_F_exact)
     Z = Ze - Zf
 
-    ax = set_surface(fig, 3, 5, 11, X, Y, Ze, 90, -90, 0)
+    ax = set_surface(fig, 3, 5, 11, X=X, Y=Y, Z=Ze, elev=90, azim=-90, roll=0)
     plt.title("Expected final state")
     set_axis(ax, "x", "y", "z", "equal")
 
-    ax = set_surface(fig, 3, 5, 12, X, Y, Z, 90, -90, 0)
+    ax = set_surface(fig, 3, 5, 12, X=X, Y=Y, Z=Z, elev=90, azim=-90, roll=0)
     plt.title(f"Difference (=exact-advected)\n max error = {max(abs(Z)):.3} ")
     set_axis(ax, "x", "y", "z", "equal")
 
-    ax = set_surface(fig, 3, 5, 13, X, Y, Z, 45, -45, 0)
+    ax = set_surface(fig, 3, 5, 13, X=X, Y=Y, Z=Z, elev=45, azim=-45, roll=0)
     plt.title(f"Difference (=exact-advected)\n max error = {max(abs(Z)):.3} ")
     set_axis(ax, "x", "y", "z", "on")
 
 
-    ax = set_surface(fig, 3, 5, 14, X, Y, -Z, 45, -45, 0)
+    ax = set_surface(fig, 3, 5, 14, X=X, Y=Y, Z=-Z, elev=45, azim=-45, roll=0)
     plt.title(f"Difference (=-(exact-advected))\n max error = {max(abs(Z)):.3} ")
     set_axis(ax, "x", "y", "-z", "on")
 
@@ -201,7 +201,7 @@ def display(iter_nb, dt, title, subtitle, output_folder):
 
 
 # Get the inputs -----------------------------------------------
-executable, yaml_parameters, _, verbose = set_input(0, 1, 60, 120, 0.01, 0.8,  True, False)
+executable, yaml_parameters, _, verbose = set_input(0, 1, 60, 120, 0.01, 0.8, curves_def=True, feet_def=False)
 
 executable_name = os.path.basename(executable)
 if executable_name == "advection_ALL" :

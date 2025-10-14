@@ -84,7 +84,7 @@ TEST_F(CoordinateTransformationTest, InvertedOrientation)
 
 
 
-TEST_F(CoordinateTransformationTest, StickingDifferentDimensions)
+TEST_F(CoordinateTransformationTest, OverlappingDifferentDimensions)
 {
     using EdgeY1B = Edge<Patch1, GridY<1>, BACK>;
     using EdgeX2F = Edge<Patch2, GridX<2>, FRONT>;
