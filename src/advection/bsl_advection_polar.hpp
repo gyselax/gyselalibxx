@@ -59,6 +59,8 @@ class BslAdvectionPolar
     using DimX = typename LogicalToPhysicalMapping::cartesian_tag_x;
     using DimY = typename LogicalToPhysicalMapping::cartesian_tag_y;
 
+    using XYBasis = VectorIndexSet<DimX, DimY>;
+
     using CoordRTheta = typename LogicalToPhysicalMapping::CoordArg;
     using CoordXY = typename LogicalToPhysicalMapping::CoordResult;
 
@@ -235,22 +237,11 @@ public:
                 = m_logical_to_physical_mapping;
 
         // (Ax, Ay) = J (Ar, Atheta)
-        ddc::parallel_for_each(
+        copy_to_vector_space<XYBasis>(
                 Kokkos::DefaultExecutionSpace(),
-                grid_without_Opoint,
-                KOKKOS_LAMBDA(IdxBatched const idx) {
-                    IdxRTheta irtheta(idx);
-                    CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
-
-                    Tensor J = logical_to_physical_mapping_proxy.jacobian_matrix(coord_rtheta);
-
-                    ddcHelper::assign_vector_field_element(
-                            advection_field_xy,
-                            idx,
-                            tensor_mul(
-                                    index<'i', 'j'>(J),
-                                    index<'j'>(advection_field_rtheta(idx))));
-                });
+                advection_field_xy[grid_without_Opoint],
+                logical_to_physical_mapping_proxy,
+                advection_field_rtheta[grid_without_Opoint]);
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
@@ -329,22 +320,11 @@ public:
         DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
 
         // (Ax, Ay) = J (Ar, Atheta)
-        ddc::parallel_for_each(
+        copy_to_vector_space<XYBasis>(
                 Kokkos::DefaultExecutionSpace(),
-                grid_without_Opoint,
-                KOKKOS_LAMBDA(IdxBatched const idx) {
-                    IdxRTheta irtheta(idx);
-                    CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
-
-                    Tensor J = logical_to_physical_mapping_proxy.jacobian_matrix(coord_rtheta);
-
-                    ddcHelper::assign_vector_field_element(
-                            advection_field_xy,
-                            idx,
-                            tensor_mul(
-                                    index<'i', 'j'>(J),
-                                    index<'j'>(advection_field_rtheta(idx))));
-                });
+                advection_field_xy[grid_without_Opoint],
+                logical_to_physical_mapping_proxy,
+                advection_field_rtheta[grid_without_Opoint]);
 
         // Treatment for the O-point.
         if (first_row_is_o_point) {
