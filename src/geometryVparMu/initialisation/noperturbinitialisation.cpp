@@ -2,7 +2,9 @@
 
 #include <ddc/ddc.hpp>
 
-#include "ddc_helper.hpp"
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
 #include "noperturbinitialisation.hpp"
 
 

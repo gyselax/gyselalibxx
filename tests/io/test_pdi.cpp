@@ -1,8 +1,22 @@
+#include <vector>
+
+#include <ddc/ddc.hpp>
+#include <ddc/pdi.hpp>
+
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+#include <paraconf.h>
+#include <pdi.h>
+
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "pdi_helper.hpp"
+#include "vector_field_common.hpp"
+#include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

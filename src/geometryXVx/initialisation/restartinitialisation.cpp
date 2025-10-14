@@ -3,6 +3,9 @@
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
 #include "restartinitialisation.hpp"
 
 RestartInitialisation::RestartInitialisation(double& time_start) : m_time_start(time_start) {}

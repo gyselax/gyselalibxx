@@ -1,21 +1,29 @@
+#include <algorithm>
 #include <array>
-#include <cassert>
+#include <cmath>
 #include <cstdlib>
+#include <iostream>
+#include <vector>
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
+#include "cartesian_to_circular.hpp"
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "inv_jacobian_o_point.hpp"
+#include "tensor.hpp"
+#include "tensor_common.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

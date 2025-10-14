@@ -1,4 +1,8 @@
 // SPDX-License-Identifier: MIT
+#include <Kokkos_Core.hpp>
+
+#include "circular_to_cartesian.hpp"
+#include "czarny_to_cartesian.hpp"
 #include "test_cases.hpp"
 
 template <>

@@ -1,9 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <cassert>
-#include <cmath>
-
-#include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"

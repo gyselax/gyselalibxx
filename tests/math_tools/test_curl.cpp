@@ -1,4 +1,9 @@
+#include <cmath>
+#include <tuple>
+
 #include <gtest/gtest.h>
+
+#include <Kokkos_MathematicalConstants.hpp>
 
 #include "../coord_transformations/geometry_coord_transformations_tests.hpp"
 
@@ -6,12 +11,11 @@
 #include "combined_mapping.hpp"
 #include "curl.hpp"
 #include "cylindrical_to_cartesian.hpp"
-#include "indexed_tensor.hpp"
-#include "mesh_builder.hpp"
-#include "metric_tensor_evaluator.hpp"
+#include "ddc_aliases.hpp"
 #include "tensor.hpp"
+#include "tensor_common.hpp"
 #include "toroidal_to_cylindrical.hpp"
-#include "vector_field.hpp"
+#include "vector_index_tools.hpp"
 
 class CurlParamTests : public ::testing::TestWithParam<std::tuple<double, double>>
 {

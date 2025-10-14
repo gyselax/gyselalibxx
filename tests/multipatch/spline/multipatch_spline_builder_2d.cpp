@@ -1,17 +1,28 @@
 // SPDX-License-Identifier: MIT
+#include <algorithm>
+#include <cmath>
+#include <iostream>
+#include <optional>
+#include <tuple>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "2patches_2d_non_periodic_non_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "ddc_helper.hpp"
+#include "ddc_aliases.hpp"
+#include "geometry_descriptors.hpp"
 #include "mesh_builder.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_spline_builder_2d.hpp"
-#include "vector_field.hpp"
-#include "vector_field_mem.hpp"
+#include "patch.hpp"
+#include "types.hpp"
+#include "vector_index_tools.hpp"
 
 
 namespace {

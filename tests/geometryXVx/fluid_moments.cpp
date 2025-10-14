@@ -1,16 +1,20 @@
 // SPDX-License-Identifier: MIT
-#include <string>
+#include <cmath>
+#include <utility>
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "fluid_moments.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
+#include "species_info.hpp"
 #include "trapezoid_quadrature.hpp"
 
 /**

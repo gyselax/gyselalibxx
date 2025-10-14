@@ -1,13 +1,18 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <cmath>
+
 #include <ddc/ddc.hpp>
+
+#include <Kokkos_Core.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry.hpp"
-#include "quadrature.hpp"
+#include "species_info.hpp"
 #include "trapezoid_quadrature.hpp"
+#include "vector_index_tools.hpp"
 
 /**
 * @brief Compute the collisionality spatial profile.

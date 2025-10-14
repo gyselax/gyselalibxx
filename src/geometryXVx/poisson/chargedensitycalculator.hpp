@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include <ddc/ddc.hpp>
-
 #include "geometry.hpp"
 #include "ichargedensitycalculator.hpp"
 #include "quadrature.hpp"

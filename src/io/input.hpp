@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
 #pragma once
-#include <sstream>
+#include <string>
+#include <vector>
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Core.hpp>
 #include <paraconf.h>
-#include <pdi.h>
 
 #include "ddc_aliases.hpp"
 #include "mesh_builder.hpp"
-#include "non_uniform_interpolation_points.hpp"
 #include "paraconfpp.hpp"
 #include "pdi_helper.hpp"
 

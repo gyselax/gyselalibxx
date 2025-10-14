@@ -3,10 +3,13 @@
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "transpose.hpp"
+#include "vector_index_tools.hpp"
 
 
 namespace {

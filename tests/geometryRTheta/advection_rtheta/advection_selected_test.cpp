@@ -1,39 +1,40 @@
 
-#include <chrono>
-#include <cstring>
+#include <cmath>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
-#include <typeinfo>
+#include <string>
+#include <string_view>
+#include <vector>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
+
+#include <Kokkos_Core.hpp>
+#include <paraconf.h>
+#include <stdlib.h>
 
 #include "../../advection/r_theta_test_cases.hpp"
 
 #include "advection_simulation_utils.hpp"
 #include "bsl_advection_polar.hpp"
-#include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
-#include "euler.hpp"
 #include "geometry.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "input.hpp"
-#include "itimestepper.hpp"
-#include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "polar_spline_evaluator.hpp"
-#include "rk2.hpp"
-#include "rk3.hpp"
-#include "rk4.hpp"
+#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
+#include "tensor_common.hpp"
+#include "vector_field_common.hpp"
+#include "vector_index_tools.hpp"
 
 
 

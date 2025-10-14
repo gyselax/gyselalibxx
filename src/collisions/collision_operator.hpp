@@ -1,20 +1,14 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <ddc/ddc.hpp>
-
-#include "assert.hpp"
-#include "ddc_alias_inline_functions.hpp"
-#include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
-#include "species_info.hpp"
-
-// SPDX-License-Identifier: MIT
-#pragma once
-
-#include <ddc/ddc.hpp>
+#include <cstddef>
+#include <cstdint>
 
 #include <KOLIOP/koliop.h>
+#include <KOLIOP/koliop.hpp>
+
+#include "assert.hpp"
+#include "ddc_aliases.hpp"
 
 namespace detail {
 

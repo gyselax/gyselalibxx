@@ -1,12 +1,17 @@
-#include <iomanip>
+#include <stdexcept>
+#include <vector>
 
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
+
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
-#include "fluid_moments.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "matrix_batch_tridiag.hpp"
+#include "trapezoid_quadrature.hpp"
+#include "vector_index_tools.hpp"
 
 template <class TargetDim>
 KOKKOS_FUNCTION Idx<TargetDim> CollisionsIntra::to_index(Idx<GridVx> const& index)

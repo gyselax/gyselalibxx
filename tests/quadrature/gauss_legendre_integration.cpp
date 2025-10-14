@@ -1,13 +1,26 @@
+#include <cmath>
+#include <cstddef>
 #include <iomanip>
 #include <iostream>
 #include <limits>
 #include <map>
+#include <sstream>
+#include <string>
+#include <type_traits>
+#include <utility>
+#include <variant>
+#include <vector>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
 #include "gauss_legendre_integration.hpp"
 #include "quadrature.hpp"
 #include "test_utils.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

@@ -3,15 +3,26 @@
     The test is the same as the one applied to BslAdvectionVelocity operator.
 */
 
+#include <cmath>
+#include <iostream>
+
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
+#include "Lagrange.hpp"
 #include "Lagrange_interpolator.hpp"
 #include "bsl_advection_1d.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "euler.hpp"
 #include "species_info.hpp"
 #include "spline_interpolator.hpp"
+#include "vector_index_tools.hpp"
 
 
 namespace {

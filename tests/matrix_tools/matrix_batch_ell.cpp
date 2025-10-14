@@ -1,9 +1,12 @@
-#include <ddc/ddc.hpp>
+#include <cmath>
+#include <optional>
+#include <string>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "matrix_batch_ell.hpp"
-#include "view.hpp"
 
 
 

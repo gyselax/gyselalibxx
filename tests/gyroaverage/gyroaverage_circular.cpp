@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 #include <cmath>
+#include <cstddef>
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
@@ -12,6 +13,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "geometry_pseudo_cartesian.hpp"
 #include "gyroaverage_operator.hpp"
 #include "test_math_utils.hpp"
 

@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: MIT
 
-#include <ddc/ddc.hpp>
+#include <Kokkos_Core.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "ddc_helper.hpp"
 #include "mpichargedensitycalculator.hpp"
 #include "mpitools.hpp"
-#include "species_info.hpp"
 
 MpiChargeDensityCalculator::MpiChargeDensityCalculator(
         MPI_Comm comm,

@@ -3,11 +3,14 @@
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
 #include "l_norm_tools.hpp"
+#include "tensor_common.hpp"
 #include "vector_field.hpp"
+#include "vector_field_common.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
 

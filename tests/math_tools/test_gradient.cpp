@@ -1,19 +1,28 @@
 /// Test of the metric tensor and its inverse: (singular point avoided)
-#include <ddc/kernels/splines.hpp>
+#include <cmath>
+#include <vector>
+
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
-#include "../coord_transformations/coord_transformations_testing_tools.hpp"
+#include <Kokkos_Core.hpp>
+
 #include "../coord_transformations/geometry_coord_transformations_tests.hpp"
 
 #include "circular_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
 #include "gradient.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "metric_tensor_evaluator.hpp"
+#include "tensor.hpp"
+#include "tensor_common.hpp"
 #include "vector_field.hpp"
+#include "vector_field_common.hpp"
+#include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

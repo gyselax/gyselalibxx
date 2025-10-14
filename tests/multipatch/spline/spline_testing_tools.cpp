@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/splines.hpp>
 
 #include "spline_testing_tools.hpp"
 

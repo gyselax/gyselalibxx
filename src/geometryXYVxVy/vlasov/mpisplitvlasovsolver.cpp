@@ -1,6 +1,12 @@
 // SPDX-License-Identifier: MIT
 
+#include <ddc/ddc.hpp>
+
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
 #include "mpisplitvlasovsolver.hpp"
+#include "vector_field_common.hpp"
 
 MpiSplitVlasovSolver::MpiSplitVlasovSolver(
         IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,

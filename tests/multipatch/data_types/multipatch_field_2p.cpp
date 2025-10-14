@@ -5,18 +5,23 @@
  */
 
 
+#include <cstddef>
+#include <tuple>
+#include <utility>
+
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "2patches_2d_non_periodic_uniform.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_type.hpp"
-#include "patch.hpp"
 #include "types.hpp"
+#include "vector_index_tools.hpp"
 
 // Namespace of the multipatch geometry where the patches are defined
 using namespace non_periodic_uniform_2d_2patches;

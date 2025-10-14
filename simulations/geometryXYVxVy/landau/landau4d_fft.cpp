@@ -1,15 +1,15 @@
 // SPDX-License-Identifier: MIT
+#include <mpi.h>
+
 #include <chrono>
-#include <cmath>
 #include <cstdlib>
-#include <filesystem>
-#include <fstream>
 #include <iostream>
-#include <string_view>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
 #include <paraconf.h>
 #include <pdi.h>
 
@@ -28,6 +28,7 @@
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "pdi_helper.hpp"
 #include "pdi_out.yml.hpp"
 #include "predcorr.hpp"
 #include "qnsolver.hpp"
@@ -35,6 +36,7 @@
 #include "species_info.hpp"
 #include "species_init.hpp"
 #include "spline_interpolator.hpp"
+#include "vector_field_common.hpp"
 
 using std::cerr;
 using std::endl;

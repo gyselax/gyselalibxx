@@ -1,13 +1,19 @@
 // SPDX-License-Identifier: MIT
+#include <cmath>
+#include <cstddef>
+#include <string>
+#include <tuple>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "2patches_2d_onion_shape_non_uniform.hpp"
-#include "cartesian_to_circular.hpp"
-#include "circular_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "multipatch_field.hpp"
-#include "multipatch_type.hpp"
 #include "null_extrapolation_rules.hpp"
 #include "spline_testing_tools.hpp"
 #include "types.hpp"

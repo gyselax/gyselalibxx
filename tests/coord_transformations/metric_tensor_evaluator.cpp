@@ -1,5 +1,8 @@
 /// Test of the metric tensor and its inverse: (singular point avoided)
-#include <ddc/kernels/splines.hpp>
+#include <cstddef>
+#include <tuple>
+
+#include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
@@ -10,11 +13,11 @@
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "metric_tensor_evaluator.hpp"
+#include "tensor_common.hpp"
 #include "toroidal_to_cylindrical.hpp"
-#include "view.hpp"
+#include "vector_index_tools.hpp"
 
 
 class InverseMetricTensor : public testing::TestWithParam<std::tuple<std::size_t, std::size_t>>

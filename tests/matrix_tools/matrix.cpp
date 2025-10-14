@@ -1,8 +1,13 @@
 #include <algorithm>
-#include <cmath>
+#include <cstddef>
 #include <memory>
+#include <tuple>
+#include <vector>
 
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
+#include <assert.h>
 
 #include "math_tools.hpp"
 #include "matrix.hpp"

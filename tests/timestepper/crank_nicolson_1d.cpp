@@ -1,14 +1,18 @@
 // SPDX-License-Identifier: MIT
-#include <tuple>
-#include <type_traits>
-#include <utility>
+#include <array>
+#include <cmath>
+#include <functional>
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "crank_nicolson.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 
 
 struct X

@@ -3,6 +3,7 @@
 
 #include <gtest/gtest.h>
 
+#include "ddc_aliases.hpp"
 #include "mpilayout.hpp"
 
 namespace {

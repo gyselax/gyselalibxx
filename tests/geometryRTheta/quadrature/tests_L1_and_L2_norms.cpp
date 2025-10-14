@@ -1,9 +1,20 @@
+#include <array>
+#include <cmath>
+#include <cstddef>
+#include <iostream>
+#include <tuple>
+#include <vector>
+
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "circular_to_cartesian.hpp"
-#include "czarny_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry.hpp"
@@ -11,7 +22,8 @@
 #include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "spline_quadrature.hpp"
-#include "trapezoid_quadrature.hpp"
+#include "tensor_common.hpp"
+#include "vector_index_tools.hpp"
 #include "volume_quadrature_nd.hpp"
 
 

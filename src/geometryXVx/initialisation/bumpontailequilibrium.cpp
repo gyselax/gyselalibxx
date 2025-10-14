@@ -1,8 +1,15 @@
 // SPDX-License-Identifier: MIT
 
+#include <cmath>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Core.hpp>
+
 #include "bumpontailequilibrium.hpp"
+#include "paraconfpp.hpp"
+#include "vector_index_tools.hpp"
 
 BumpontailEquilibrium::BumpontailEquilibrium(
         host_t<DFieldMemSp> epsilon_bot,

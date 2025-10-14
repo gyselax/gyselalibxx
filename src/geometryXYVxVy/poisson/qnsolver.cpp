@@ -1,16 +1,12 @@
 // SPDX-License-Identifier: MIT
 
 #include <cassert>
-#include <cmath>
-#include <complex>
-#include <iostream>
 
 #include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "qnsolver.hpp"
-#include "vector_index_tools.hpp"
 
 QNSolver::QNSolver(PoissonSolver const& solve_poisson, IChargeDensityCalculator const& compute_rho)
     : m_solve_poisson(solve_poisson)

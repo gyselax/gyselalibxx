@@ -2,11 +2,14 @@
 
 #pragma once
 
+#include <ddc/ddc.hpp>
+
 #include <paraconf.h>
 
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
 #include "iequilibrium.hpp"
-#include "paraconfpp.hpp"
 #include "species_info.hpp"
 
 /// Equilibrium operator as Maxwellian. This initialises all species.

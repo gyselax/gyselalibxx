@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: MIT
-#include <ddc/ddc.hpp>
+#include <cstddef>
+#include <type_traits>
+
+#include <ddc/detail/type_seq.hpp>
 
 #include <gtest/gtest.h>
 
@@ -7,7 +10,9 @@
 #include "indexed_tensor.hpp"
 #include "static_tensors.hpp"
 #include "tensor.hpp"
+#include "tensor_common.hpp"
 #include "tensor_index_tools.hpp"
+#include "type_seq_tools.hpp"
 #include "vector_index_tools.hpp"
 
 using namespace tensor_tools;

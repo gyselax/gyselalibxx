@@ -1,19 +1,28 @@
 // SPDX-License-Identifier: MIT
 
+#include <cmath>
+#include <cstddef>
+#include <stdexcept>
+#include <string>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "2patches_2d_onion_shape_uniform.hpp"
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
+#include "ddc_aliases.hpp"
 #include "multipatch_type.hpp"
 #include "onion_patch_locator.hpp"
-#include "patch.hpp"
 #include "physical_geometry.hpp"
 #include "types.hpp"
+#include "vector_index_tools.hpp"
 
 
 using namespace onion_shape_uniform_2d_2patches;

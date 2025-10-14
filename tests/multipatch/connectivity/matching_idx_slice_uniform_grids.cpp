@@ -4,12 +4,14 @@
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "2patches_2d_non_periodic_uniform.hpp"
+#include "ddc_aliases.hpp"
 #include "edge.hpp"
-#include "idx_range_slice.hpp"
+#include "geometry_descriptors.hpp"
 #include "interface.hpp"
 #include "matching_idx_slice.hpp"
-#include "patch.hpp"
 
 
 using namespace non_periodic_uniform_2d_2patches;

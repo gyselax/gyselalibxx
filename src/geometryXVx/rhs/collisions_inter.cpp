@@ -1,13 +1,19 @@
-#include <iomanip>
+#include <cmath>
+#include <functional>
+#include <stdexcept>
 
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
+
 #include "collisions_inter.hpp"
 #include "collisions_utils.hpp"
-#include "fluid_moments.hpp"
-#include "maxwellianequilibrium.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "rk2.hpp"
+#include "species_info.hpp"
+#include "trapezoid_quadrature.hpp"
+#include "vector_index_tools.hpp"
 
 CollisionsInter::CollisionsInter(IdxRangeSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)

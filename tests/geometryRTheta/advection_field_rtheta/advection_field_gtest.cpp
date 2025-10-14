@@ -4,39 +4,39 @@
 */
 
 #include <chrono>
-#include <filesystem>
-#include <fstream>
-#include <iostream>
+#include <cmath>
+#include <vector>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
-#include <paraconf.h>
-#include <pdi.h>
+#include <Kokkos_Core.hpp>
 
+#include "/home/emily/Code/gyselalibxx/tests/advection/r_theta_test_cases.hpp"
+
+#include "advection_field_rtheta.hpp"
 #include "bsl_advection_polar.hpp"
-#include "bsl_predcorr.hpp"
-#include "bsl_predcorr_second_order_explicit.hpp"
-#include "bsl_predcorr_second_order_implicit.hpp"
 #include "circular_to_cartesian.hpp"
-#include "crank_nicolson.hpp"
-#include "czarny_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
-#include "euler.hpp"
 #include "geometry.hpp"
-#include "l_norm_tools.hpp"
+#include "indexed_tensor.hpp"
 #include "mesh_builder.hpp"
-#include "quadrature.hpp"
+#include "polar_spline_evaluator.hpp"
 #include "rk3.hpp"
-#include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
-#include "spline_quadrature.hpp"
+#include "tensor.hpp"
+#include "tensor_common.hpp"
 #include "test_cases_adv_field.hpp"
-#include "trapezoid_quadrature.hpp"
+#include "vector_field.hpp"
+#include "vector_field_common.hpp"
+#include "vector_index_tools.hpp"
 
 
 namespace {

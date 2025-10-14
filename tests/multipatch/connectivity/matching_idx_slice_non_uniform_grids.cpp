@@ -1,16 +1,22 @@
 // SPDX-License-Identifier: MIT
 
+#include <stdexcept>
+#include <vector>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "3patches_2d_non_periodic_non_uniform.hpp"
+#include "ddc_aliases.hpp"
 #include "edge.hpp"
-#include "idx_range_slice.hpp"
+#include "geometry_descriptors.hpp"
 #include "interface.hpp"
 #include "matching_idx_slice.hpp"
 #include "mesh_builder.hpp"
-#include "patch.hpp"
+#include "vector_index_tools.hpp"
 
 
 using namespace non_periodic_non_uniform_2d_3patches;

@@ -4,9 +4,9 @@
 
 #include <paraconf.h>
 
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
 #include "iinitialisation.hpp"
-#include "paraconfpp.hpp"
 #include "species_info.hpp"
 
 /**

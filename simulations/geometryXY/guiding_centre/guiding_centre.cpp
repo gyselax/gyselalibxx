@@ -2,23 +2,25 @@
 #include <chrono>
 #include <cmath>
 #include <filesystem>
-#include <fstream>
 #include <iostream>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
 #include <paraconf.h>
 #include <pdi.h>
+#include <stdlib.h>
 
 #include "bsl_advection_1d.hpp"
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "euler.hpp"
 #include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "initialisation_Kelvin_Helmholtz.hpp"
 #include "input.hpp"
-#include "l_norm_tools.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -27,7 +29,7 @@
 #include "simulation_utils_tools.hpp"
 #include "spline_interpolator.hpp"
 #include "vector_field.hpp"
-#include "vector_field_mem.hpp"
+#include "vector_field_common.hpp"
 
 
 using std::cerr;

@@ -2,17 +2,23 @@
     Advection along X on (X). 
 */
 
-#include <ddc/ddc.hpp>
+#include <cmath>
+#include <iostream>
 
-#include <gmock/gmock.h>
+#include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
+
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "bsl_advection_1d.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "itimestepper.hpp"
 #include "rk2.hpp"
 #include "spline_interpolator.hpp"
-#include "vector_field_common.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 // Continuous dimension

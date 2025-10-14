@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include <utility>
+#include <functional>
 #include <vector>
 
 #include "geometry.hpp"

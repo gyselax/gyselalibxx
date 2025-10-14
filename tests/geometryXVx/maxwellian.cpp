@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: MIT
-#include <iostream>
-#include <string>
+#include <cmath>
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
+#include "vector_index_tools.hpp"
 
 static void TestMaxwellian()
 {

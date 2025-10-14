@@ -2,13 +2,8 @@
 
 #pragma once
 
-#include <ddc/ddc.hpp>
-
 #include <paraconf.h>
 
-#include "ddc_helper.hpp"
-#include "paraconfpp.hpp"
-#include "pdi_helper.hpp"
 #include "species_info.hpp"
 
 /**

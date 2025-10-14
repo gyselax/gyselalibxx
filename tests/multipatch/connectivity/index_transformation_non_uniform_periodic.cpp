@@ -1,15 +1,21 @@
 // SPDX-License-Identifier: MIT
 
+#include <vector>
+
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "2patches_2d_onion_shape_non_uniform.hpp"
 #include "edge.hpp"
 #include "edge_transformation.hpp"
+#include "geometry_descriptors.hpp"
 #include "interface.hpp"
 #include "mesh_builder.hpp"
-#include "patch.hpp"
+#include "vector_index_tools.hpp"
 
 using namespace onion_shape_non_uniform_2d_2patches;
 

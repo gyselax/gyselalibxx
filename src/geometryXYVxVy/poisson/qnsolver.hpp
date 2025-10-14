@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
 
 #pragma once
-#include "chargedensitycalculator.hpp"
-#include "ddc_aliases.hpp"
+#include <Kokkos_Core.hpp>
+
+#include "geometry.hpp"
+#include "ichargedensitycalculator.hpp"
 #include "ipoisson_solver.hpp"
 #include "iqnsolver.hpp"
 

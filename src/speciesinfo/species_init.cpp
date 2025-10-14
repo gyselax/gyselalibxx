@@ -1,5 +1,15 @@
 // SPDX-License-Identifier: MIT
 
+#include <utility>
+#include <vector>
+
+#include <ddc/ddc.hpp>
+
+#include <Kokkos_Core.hpp>
+
+#include "ddc_helper.hpp"
+#include "paraconfpp.hpp"
+#include "pdi_helper.hpp"
 #include "species_init.hpp"
 
 /*

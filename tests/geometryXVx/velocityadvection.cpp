@@ -1,12 +1,24 @@
 
+#include <cmath>
+#include <utility>
+#include <vector>
+
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
+#include "Lagrange.hpp"
 #include "Lagrange_interpolator.hpp"
 #include "bsl_advection_vx.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
+#include "iadvectionvx.hpp"
+#include "species_info.hpp"
 #include "spline_interpolator.hpp"
+#include "vector_index_tools.hpp"
 
 
 CoordX const x_min(0);

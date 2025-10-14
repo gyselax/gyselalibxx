@@ -1,12 +1,10 @@
 // SPDX-License-Identifier: MIT
 
 #include <cassert>
-#include <cmath>
-#include <complex>
-#include <iostream>
 
 #include <ddc/ddc.hpp>
 
+#include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "qnsolver.hpp"
 

@@ -1,13 +1,20 @@
 // SPDX-License-Identifier: MIT
+#include <array>
+#include <cmath>
+#include <cstddef>
 #include <tuple>
 #include <type_traits>
-#include <utility>
+#include <variant>
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"

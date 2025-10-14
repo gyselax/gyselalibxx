@@ -1,16 +1,18 @@
 // SPDX-License-Identifier: MIT
 
-#include <memory>
-
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
+#include "gmock/gmock.h"
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "iadvectionvx.hpp"
 #include "iadvectionx.hpp"
-#include "species_info.hpp"
 #include "splitvlasovsolver.hpp"
 
 class MockAdvectionX : public IAdvectionSpatial<GeometryXVx, GridX>

@@ -1,43 +1,37 @@
 // SPDX-License-Identifier: MIT
 #include <chrono>
 #include <filesystem>
-#include <fstream>
 #include <functional>
-#include <iostream>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
 #include <paraconf.h>
 #include <pdi.h>
+#include <stdlib.h>
 
 #include "bsl_advection_polar.hpp"
-#include "bsl_predcorr.hpp"
-#include "bsl_predcorr_second_order_explicit.hpp"
 #include "bsl_predcorr_second_order_implicit.hpp"
 #include "circular_to_cartesian.hpp"
-#include "crank_nicolson.hpp"
-#include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
-#include "l_norm_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
-#include "quadrature.hpp"
-#include "rk3.hpp"
-#include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
-#include "spline_quadrature.hpp"
-#include "trapezoid_quadrature.hpp"
+#include "tensor_common.hpp"
+#include "vector_index_tools.hpp"
 #include "vortex_merger_equilibrium.hpp"
 #include "vortex_merger_initialisation.hpp"
 

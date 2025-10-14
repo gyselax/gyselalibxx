@@ -1,17 +1,24 @@
-#include <array>
-#include <cassert>
+#include <cmath>
+#include <string>
+#include <type_traits>
+#include <vector>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "cartesian_to_circular.hpp"
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
+#include "coord_transformation_tools.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry_coord_transformations_tests.hpp"
+#include "vector_index_tools.hpp"
 
 
 

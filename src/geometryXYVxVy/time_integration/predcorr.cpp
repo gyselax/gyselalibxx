@@ -1,12 +1,12 @@
 // SPDX-License-Identifier: MIT
 
-#include <cmath>
-#include <iostream>
-
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "iqnsolver.hpp"
 #include "ivlasovsolver.hpp"
 #include "predcorr.hpp"
