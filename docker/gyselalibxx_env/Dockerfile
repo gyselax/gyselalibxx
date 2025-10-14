@@ -48,6 +48,13 @@ RUN chmod +x /bin/bash_run \
     cmake \
  && ln -sf /usr/bin/clang-18 /usr/bin/clang \
  && ln -sf /usr/bin/clang++-18 /usr/bin/clang++ \
+ && git clone -b 0.22 https://github.com/include-what-you-use/include-what-you-use.git \
+ && cd include-what-you-use \
+ && cmake -S . -DCMAKE_PREFIX_PATH=/usr/lib/llvm-18/ -DCMAKE_BUILD_TYPE=Release -B build \
+ && cmake --build build \
+ && cmake --install build \
+ && cd .. \
+ && rm -rf include-what-you-use \
  && git clone -b v1.8.0 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
@@ -106,13 +113,6 @@ RUN chmod +x /bin/bash_run \
  && cmake --install build \
  && cd .. \
  && rm -rf cppcheck \
- && git clone -b 0.22 https://github.com/include-what-you-use/include-what-you-use.git \
- && cd include-what-you-use \
- && cmake -S . -DCMAKE_PREFIX_PATH=/usr/lib/llvm-18/lib/cmake/llvm -B build \
- && cmake --build build \
- && cmake --install build \
- && cd .. \
- && rm -rf include-what-you-use \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
