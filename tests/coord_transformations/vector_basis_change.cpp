@@ -166,3 +166,81 @@ TEST(MappingChange, VectorFieldChange)
         EXPECT_NEAR(theta_vec, expected_theta_vec, 1e-14);
     });
 }
+
+TEST(MappingChange, VectorFieldChange)
+{
+    setup_coordinates();
+    const CircularToCartesian<R, Theta, X, Y> mapping;
+
+    IdxRange<Species> idx_range_sp(Idx<Species>(0), IdxStep<Species>(3));
+    IdxRangeR idx_range_r(IdxR(1), IdxStepR(N_cells_r)); // Exclude r = 0
+    IdxRangeTheta idx_range_theta(IdxTheta(0), IdxStepTheta(N_cells_theta));
+    IdxRange<Species, GridR, GridTheta> idx_range(idx_range_sp, idx_range_r, idx_range_theta);
+
+    using CartesianBasis = VectorIndexSet<X, Y>;
+    using PolarBasis = VectorIndexSet<R, Theta>;
+
+    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, CartesianBasis> cart_vector_field(
+            idx_range);
+    ddc::parallel_fill(ddcHelper::get<X>(cart_vector_field), 1.0);
+    ddc::parallel_fill(ddcHelper::get<Y>(cart_vector_field), 1.0);
+
+    auto polar_vector_field = create_mirror_view_and_copy_on_vector_space<
+            PolarBasis>(Kokkos::DefaultExecutionSpace(), get_field(cart_vector_field), mapping);
+
+    auto polar_vector_field_host = ddcHelper::create_mirror_view_and_copy(
+            Kokkos::DefaultHostExecutionSpace(),
+            get_field(polar_vector_field));
+
+    ddc::for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
+        CoordRTheta coord = ddc::coordinate(IdxRTheta(idx));
+        Tensor J = mapping.inv_jacobian_matrix(coord);
+        double r_vec = ddcHelper::get<R>(polar_vector_field_host)(idx);
+        double theta_vec = ddcHelper::get<Theta>(polar_vector_field_host)(idx);
+        double expected_r_vec = ddcHelper::get<R, X>(J) + ddcHelper::get<R, Y>(J);
+        double expected_theta_vec = ddcHelper::get<Theta, X>(J) + ddcHelper::get<Theta, Y>(J);
+        EXPECT_NEAR(r_vec, expected_r_vec, 1e-14);
+        EXPECT_NEAR(theta_vec, expected_theta_vec, 1e-14);
+    });
+}
+
+TEST(MappingChange, VectorFieldChangeCopy)
+{
+    setup_coordinates();
+    const CircularToCartesian<R, Theta, X, Y> mapping;
+
+    IdxRange<Species> idx_range_sp(Idx<Species>(0), IdxStep<Species>(3));
+    IdxRangeR idx_range_r(IdxR(1), IdxStepR(N_cells_r)); // Exclude r = 0
+    IdxRangeTheta idx_range_theta(IdxTheta(0), IdxStepTheta(N_cells_theta));
+    IdxRange<Species, GridR, GridTheta> idx_range(idx_range_sp, idx_range_r, idx_range_theta);
+
+    using CartesianBasis = VectorIndexSet<X, Y>;
+    using PolarBasis = VectorIndexSet<R, Theta>;
+
+    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, CartesianBasis> cart_vector_field(
+            idx_range);
+    ddc::parallel_fill(ddcHelper::get<X>(cart_vector_field), 1.0);
+    ddc::parallel_fill(ddcHelper::get<Y>(cart_vector_field), 1.0);
+
+    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, PolarBasis> polar_vector_field(idx_range);
+    copy_to_vector_space<PolarBasis>(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(polar_vector_field),
+            mapping,
+            get_const_field(cart_vector_field));
+
+    auto polar_vector_field_host = ddcHelper::create_mirror_view_and_copy(
+            Kokkos::DefaultHostExecutionSpace(),
+            get_field(polar_vector_field));
+
+    ddc::for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
+        CoordRTheta coord = ddc::coordinate(IdxRTheta(idx));
+        Tensor J = mapping.inv_jacobian_matrix(coord);
+        double r_vec = ddcHelper::get<R>(polar_vector_field_host)(idx);
+        double theta_vec = ddcHelper::get<Theta>(polar_vector_field_host)(idx);
+        double expected_r_vec = ddcHelper::get<R, X>(J) + ddcHelper::get<R, Y>(J);
+        double expected_theta_vec = ddcHelper::get<Theta, X>(J) + ddcHelper::get<Theta, Y>(J);
+        EXPECT_NEAR(r_vec, expected_r_vec, 1e-14);
+        EXPECT_NEAR(theta_vec, expected_theta_vec, 1e-14);
+    });
+}
