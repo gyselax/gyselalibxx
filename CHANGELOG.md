@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add getters to `DerivField` types to access the associated index ranges.
+- Add H100 Jean-Zay toolchain.
 
 ### Fixed
 
