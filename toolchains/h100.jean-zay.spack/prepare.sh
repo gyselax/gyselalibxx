@@ -6,7 +6,15 @@ if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
     return 1
 fi
 
+# Gets the slurm account to use for compiling on a compute node
+if [ $# -ne 1 ]; then
+    echo usage: ${0} h100_slurm_account
+    exit 1
+fi
+slurm_account=${1}
+
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
+CPUS_PER_GPU=24
 
 set -eu
 
@@ -43,13 +51,15 @@ spack bootstrap now
 echo "Preparing the Spack environment..."
 
 # Concretize on the compute node
-CPUS_PER_TASK=24
-srun --account=ksw@h100 --constraint=h100 --ntasks=1 --gres=gpu:1 --cpus-per-task=24 --time=02:00:00 --qos=qos_gpu_h100-dev spack --env gyselalibxx-spack-environment concretize --force --jobs $CPUS_PER_TASK
+GPUS=1
+CPUS_PER_TASK=$((${GPUS} * ${CPUS_PER_GPU}))
+srun --account=${slurm_account} --constraint=h100 --ntasks=1 --gres=gpu:${GPUS} --cpus-per-task=${CPUS_PER_TASK} --time=02:00:00 --qos=qos_gpu_h100-dev spack --env gyselalibxx-spack-environment concretize --force --jobs ${CPUS_PER_TASK}
 
 # Get sources on the login node
 spack --env gyselalibxx-spack-environment mirror create --all --directory ${SPACK_USER_CONFIG_PATH}/mirror
 spack --env gyselalibxx-spack-environment mirror add local_filesystem ${SPACK_USER_CONFIG_PATH}/mirror
 
 # Install on the compute node
-CPUS_PER_TASK=72
-srun --account=ksw@h100 --constraint=h100 --ntasks=1 --gres=gpu:3 --cpus-per-task=$CPUS_PER_TASK --time=02:00:00 --qos=qos_gpu_h100-dev spack --env gyselalibxx-spack-environment install --jobs $CPUS_PER_TASK
+GPUS=3
+CPUS_PER_TASK=$((${GPUS} * ${CPUS_PER_GPU}))
+srun --account=${slurm_account} --constraint=h100 --ntasks=1 --gres=gpu:${GPUS} --cpus-per-task=${CPUS_PER_TASK} --time=02:00:00 --qos=qos_gpu_h100-dev spack --env gyselalibxx-spack-environment install --jobs ${CPUS_PER_TASK}
