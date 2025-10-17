@@ -324,6 +324,14 @@ public:
                     std::is_same_v<EvalMemorySpace, Kokkos::HostSpace>,
                     Kokkos::DefaultHostExecutionSpace,
                     Kokkos::DefaultExecutionSpace>;
+            // Check that BSplines are defined on the expected domain.
+            // The radial direction should extend to r=0
+            // The poloidal domain should have length 2*M_PI
+            assert(fabs(ddc::discrete_space<BSplinesR>().rmin()) < 1e-15);
+            assert(fabs(ddc::discrete_space<BSplinesTheta>().rmax()
+                        - ddc::discrete_space<BSplinesTheta>().rmin() - 2. * M_PI)
+                   < 1e-14);
+            IdxR minimum_r(0);
             if constexpr (C > -1) {
                 IdxRange<BSplinesR> idx_range_r_ctrl_pts(IdxR(0), IdxStepR(std::max(2, C + 1)));
                 IdxRange<BSplinesR, BSplinesTheta> idx_range_ctrl_pts(
