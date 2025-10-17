@@ -331,7 +331,6 @@ public:
             assert(fabs(ddc::discrete_space<BSplinesTheta>().rmax()
                         - ddc::discrete_space<BSplinesTheta>().rmin() - 2. * M_PI)
                    < 1e-14);
-            IdxR minimum_r(0);
             if constexpr (C > -1) {
                 IdxRange<BSplinesR> idx_range_r_ctrl_pts(IdxR(0), IdxStepR(std::max(2, C + 1)));
                 IdxRange<BSplinesR, BSplinesTheta> idx_range_ctrl_pts(
