@@ -218,11 +218,11 @@ public:
         IdxRangeBatchedWithoutR no_r_grid(grid);
 
         // Check the first points on R correspond to the O-point.
-        CoordXY const Opoint = m_logical_to_physical_mapping.o_point();
-        CoordRTheta const point_on_first_row
-                = ddc::coordinate(Idx<GridR, GridTheta>(radial_grid.front(), no_r_grid.front()));
-        CoordXY const diff_points = m_logical_to_physical_mapping(point_on_first_row) - Opoint;
-        assert(norm_inf(diff_points) < 1e-13);
+        assert(norm_inf(
+                       m_logical_to_physical_mapping(ddc::coordinate(
+                               Idx<GridR, GridTheta>(radial_grid.front(), no_r_grid.front())))
+                       - m_logical_to_physical_mapping.o_point())
+               < 1e-13);
 
         IdxRangeBatched const
                 grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
