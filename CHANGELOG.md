@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
 - Update and reorganize the Persee toolchains.
 - Add pdiplugin-pycall to Persee toolchains.
+- Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
 
 ### Deprecated
 
