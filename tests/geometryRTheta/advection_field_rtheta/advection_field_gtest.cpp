@@ -324,7 +324,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
                 dt);
         // --- operator() 2: compute a value for the O-point from the other values.
         advection_operator(
-                get_field(density_rtheta_averaged),
+                get_field(density_rtheta_averaged_device),
                 get_const_field(advection_field_rtheta_device),
                 dt);
         // --- operator() 3: directly give the advection field on (x,y). No extra computations.
