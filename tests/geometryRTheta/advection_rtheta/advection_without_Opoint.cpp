@@ -217,18 +217,15 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     advection_field_computer(electrostatic_potential, advection_field_xy);
 
     InverseJacobianMatrix inv_jacobian_matrix(to_physical_mapping);
-    ddc::parallel_for_each(
-            Kokkos::DefaultHostExecutionSpace(),
-            grid,
-            KOKKOS_LAMBDA(Idx<GridR, GridTheta> const idx) {
-                Coord<R, Theta> const coord_rtheta(ddc::coordinate(idx));
-                Tensor inv_J = inv_jacobian_matrix(coord_rtheta);
+    ddc::for_each(grid, [&](Idx<GridR, GridTheta> const idx) {
+        Coord<R, Theta> const coord_rtheta(ddc::coordinate(idx));
+        Tensor inv_J = inv_jacobian_matrix(coord_rtheta);
 
-                ddcHelper::assign_vector_field_element(
-                        advection_field_rtheta,
-                        idx,
-                        tensor_mul(index<'i', 'j'>(inv_J), index<'j'>(advection_field_xy(idx))));
-            });
+        ddcHelper::assign_vector_field_element(
+                advection_field_rtheta,
+                idx,
+                tensor_mul(index<'i', 'j'>(inv_J), index<'j'>(advection_field_xy(idx))));
+    });
 
     auto density_xy_device
             = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_xy);
