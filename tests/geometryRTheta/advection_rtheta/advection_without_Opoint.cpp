@@ -49,7 +49,6 @@ using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorConstBound_host>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
-using PhysicalToLogicalMapping = CartesianToCircular<X, Y, R, Theta>;
 
 namespace fs = std::filesystem;
 
@@ -184,7 +183,6 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     host_t<DVectorFieldMemRTheta<R, Theta>> advection_field_rtheta_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_alloc(grid);
     host_t<DVectorFieldMemRTheta<X, Y>> advection_field_xy_from_rtheta_alloc(grid);
-    DVector<X, Y> advection_field_xy_centre;
 
     host_t<DFieldMemRTheta> electrostatic_potential_alloc(grid);
 
