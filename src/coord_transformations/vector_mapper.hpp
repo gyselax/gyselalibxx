@@ -119,8 +119,7 @@ template <
         class ElementType,
         class IdxRangeType,
         class InVectorSpace,
-        class LayoutStridedPolicyOut,
-        class LayoutStridedPolicyIn>
+        class LayoutStridedPolicy>
 void copy_to_vector_space(
         ExecSpace exec_space,
         VectorField<
@@ -128,14 +127,14 @@ void copy_to_vector_space(
                 IdxRangeType,
                 OutVectorSpace,
                 typename ExecSpace::memory_space,
-                LayoutStridedPolicyOut> vector_field_out,
+                LayoutStridedPolicy> vector_field_out,
         Mapping mapping,
         VectorConstField<
                 ElementType,
                 IdxRangeType,
                 InVectorSpace,
                 typename ExecSpace::memory_space,
-                LayoutStridedPolicyIn> vector_field)
+                LayoutStridedPolicy> vector_field)
 {
     using IdxType = typename IdxRangeType::discrete_element_type;
     using CoordType = typename Mapping::CoordJacobian;
