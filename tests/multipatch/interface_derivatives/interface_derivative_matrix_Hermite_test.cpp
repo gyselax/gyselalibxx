@@ -26,6 +26,7 @@
     Test InterfaceDerivativeMatrix on the following geometry:
 
         |  1  |  2  |  3  | 
+          -->   <--   -->
 
         with the global X dimension with Hermite boundary conditions 
         and the global Y spline with additional points as closure condition 
@@ -56,8 +57,8 @@ using SouthInterface3 = Interface<OutsideEdge, SouthEdge<3>, true>;
 using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
 using EastInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
 
-using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
-using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
+using Interface_1_2 = Interface<EastEdge<1>, EastEdge<2>, false>;
+using Interface_2_3 = Interface<WestEdge<2>, WestEdge<3>, false>;
 
 
 // CONNECTIVITY ----------------------------------------------------------------------------------
@@ -240,7 +241,8 @@ public:
 
         std::vector<Coord<Y<1>>> break_points_y1
                 = build_random_non_uniform_break_points(y1_min, y1_max, y1_ncells);
-        std::vector<Coord<Y<2>>> break_points_y2 = convert_dim<Y<2>, Y<1>>(break_points_y1);
+        std::vector<Coord<Y<2>>> break_points_y2; //= convert_dim<Y<2>, Y<1>>(break_points_y1);
+        fill_in_reverse(break_points_y2, break_points_y1);
         std::vector<Coord<Y<3>>> break_points_y3 = convert_dim<Y<3>, Y<1>>(break_points_y1);
 
         std::vector<Coord<X<1>>> interpolation_points_x1 = break_points_x1;
@@ -282,14 +284,19 @@ public:
         fill_in(break_points_xg, break_points_x1);
         fill_in(interpolation_points_xg, interpolation_points_x1);
 
-        break_points_x2.pop_back();
-        interpolation_points_x2.pop_back();
-        fill_in(break_points_xg, break_points_x2);
-        fill_in(interpolation_points_xg, interpolation_points_x2);
+        // break_points_x2.pop_back();
+        // interpolation_points_x2.pop_back();
+        std::vector<Coord<X<2>>> break_points_x2_reverse;
+        std::vector<Coord<X<2>>> interpolation_points_x2_reverse;
+        fill_in_reverse(break_points_x2_reverse, break_points_x2);
+        fill_in_reverse(interpolation_points_x2_reverse, interpolation_points_x2);
+        break_points_x2_reverse.pop_back();
+        interpolation_points_x2_reverse.pop_back();
+        fill_in(break_points_xg, break_points_x2_reverse);
+        fill_in(interpolation_points_xg, interpolation_points_x2_reverse);
 
         fill_in(break_points_xg, break_points_x3);
         fill_in(interpolation_points_xg, interpolation_points_x3);
-
 
         std::vector<Coord<Yg>> break_points_yg;
         std::vector<Coord<Yg>> interpolation_points_yg;
@@ -310,14 +317,14 @@ public:
 
 
 
-// // Check that the local grids and the equivalent global grid match together.
+// Check that the local grids and the equivalent global grid match together.
 TEST_F(InterfaceDerivativeMatrixHermiteTest, InterpolationPointsCheck)
 {
     int const x_shift1 = x1_ncells.value();
     int const x_shift2 = x1_ncells.value() + x2_ncells.value();
 
     check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0);
-    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1);
+    check_interpolation_grids_reverse<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1);
     check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2);
 }
 
@@ -400,6 +407,9 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     // --- the function values.
     initialise_all_functions(functions_and_derivs);
     initialise_2D_function<GridXg, GridYg>(function_g);
+
+    // Fix the values for the reverse patch.
+    initialise_2D_function_reverse<GridX<2>, GridY<2>>(function_and_derivs_2.get_values_field());
 
     // --- the derivatives of the equivalent global spline.
     Idx<DerivXg> first_dxg(1);
@@ -518,6 +528,10 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             evaluator_g,
             const_function_g_coef);
 
+    // Fix the derivatives for the reverse patch.
+    initialise_y_derivatives_reversed<
+            Patch2>(function_and_derivs_2, idx_range_slice_dy2, evaluator_g, const_function_g_coef);
+
     // ------ intialise the cross-derivatives from the global spline
     initialise_all_cross_derivatives(
             functions_and_derivs,
@@ -526,8 +540,19 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             evaluator_g,
             const_function_g_coef);
 
+    // Fix the cross-derivatives for the reverse patch.
+    initialise_cross_derivatives_reverse<Patch2>(
+            function_and_derivs_2,
+            idx_range_slice_dx2,
+            idx_range_slice_dy2,
+            evaluator_g,
+            const_function_g_coef, 1);
+
+
     // --- the first derivatives (on inner interfaces) from the function values.
+    std::cout << "before solve deriv." << std::endl;
     matrix.solve_deriv(functions_and_derivs);
+    std::cout << "solve deriv done." << std::endl;
 
     // --- the cross-derivatives from the first derivatives.
     /*
@@ -536,26 +561,28 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
         check that the matrix computes correctly the values. 
     */
     matrix.solve_cross_deriv(functions_and_derivs);
+    std::cout << "solve cross deriv done." << std::endl;
 
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::detail::TypeSeq<>;
+    using ReversedPatchSeq = ddc::detail::TypeSeq<Patch2>;
 
     // Check each derivatives ---
-    check_all_x_derivatives(
+    check_all_x_derivatives<ReversedPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
             idx_ranges,
             idx_ranges_slice_dx);
 
-    check_all_y_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
+    check_all_y_derivatives<ReversedPatchSeq, EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
             idx_ranges,
             idx_ranges_slice_dy);
 
-    check_all_xy_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
+    check_all_xy_derivatives<ReversedPatchSeq, EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
@@ -564,7 +591,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_ranges_slice_dy);
 
     // Check the whole spline representations ---
-    check_all_spline_representation_agreement<EmptyPatchSeq, EmptyPatchSeq>(
+    check_all_spline_representation_agreement<ReversedPatchSeq, EmptyPatchSeq, EmptyPatchSeq>(
             idx_ranges,
             idx_ranges_slice_dx,
             idx_ranges_slice_dy,

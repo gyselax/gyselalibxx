@@ -1093,11 +1093,6 @@ private:
 
 
 
-template <
-        class InterfaceType,
-        ddc::BoundCond Bound1,
-        ddc::BoundCond Bound2>
-inline constexpr bool enable_single_derivative_calculator<SingleInterfaceDerivativesCalculator<
-        InterfaceType,
-        Bound1,
-        Bound2>> = true;
+template <class InterfaceType, ddc::BoundCond Bound1, ddc::BoundCond Bound2>
+inline constexpr bool enable_single_derivative_calculator<
+        SingleInterfaceDerivativesCalculator<InterfaceType, Bound1, Bound2>> = true;

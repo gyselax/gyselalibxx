@@ -439,6 +439,7 @@ private:
         using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
         auto [idx_slice_1, idx_slice_2] = get_slice_indexes<InterfaceI>(slice_idx_1_value);
+        std::cout << "index slices: " << idx_slice_1 << "  " << idx_slice_2 << std::endl; 
 
         DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
                 = functions_and_derivs.template get<Patch_1>();
@@ -527,6 +528,11 @@ private:
         // The orientation of the ordered interface and the one in the derivative calculator.
         constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
 
+        constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
+        constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
+        // The direction of the two perpendicular grids of the patches agree.
+        constexpr bool is_same_direction = (extremity_1 == !extremity_2);
+
         // If the orientations are not the same, we change the sign.
         const int sign = is_same_orientation - !is_same_orientation;
 
@@ -583,13 +589,23 @@ private:
         DField<IdxRange<GridPerp2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2
                 = function_and_derivs_2[idx_slice_deriv_2];
 
+        // The derivatives have to have the same direction.
+        DFieldMem<IdxRange<GridPerp2>, Kokkos::HostSpace> derivs_2_reoriented_alloc(
+                get_idx_range(derivs_2));
+        DField<IdxRange<GridPerp2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2_reoriented(
+                derivs_2_reoriented_alloc);
+        const int sign_reorientation = is_same_direction - !is_same_direction;
+        ddc::for_each(get_idx_range(derivs_2), [&](Idx<GridPerp2> const idx) {
+            derivs_2_reoriented(idx) = sign_reorientation * derivs_2(idx);
+        });
+
         // Compute the coefficient c_I for the interface I.
         double const lin_comb_funct
                 = sign
                   * m_derivatives_calculators.template get<EquivalentInterfaceI>()
                             .get_function_coefficients(
                                     get_const_field(derivs_1),
-                                    get_const_field(derivs_2));
+                                    get_const_field(derivs_2_reoriented));
 
         m_vector->get_values()[I] = lin_comb_funct;
 
@@ -600,9 +616,6 @@ private:
                 = (UpperBound == ddc::BoundCond::HERMITE && I == n_inner_interfaces - 1);
 
         if constexpr (is_lower_bound_deriv_dependent || is_upper_bound_deriv_dependent) {
-            constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
-            constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
-
             using Grid1_1 = typename Patch_1::Grid1;
             using Grid2_1 = typename Patch_1::Grid2;
             using Grid1_2 = typename Patch_2::Grid1;
@@ -716,6 +729,9 @@ private:
 
         constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
         constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
+        // The direction of the two perpendicular grids of the patches agree.
+        constexpr bool is_same_direction = (extremity_1 == !extremity_2);
+        constexpr int sign = is_same_direction - !is_same_direction;
 
         using GridPerp1 = typename InterfaceI::Edge1::perpendicular_grid;
         using GridPerp2 = typename InterfaceI::Edge2::perpendicular_grid;
@@ -763,7 +779,7 @@ private:
 
         // TODO: Check if we dont need a change of sign.
         deriv_1(slice_idx_1) = m_interface_derivatives->get_values()[I];
-        deriv_2(slice_idx_2) = m_interface_derivatives->get_values()[I];
+        deriv_2(slice_idx_2) = m_interface_derivatives->get_values()[I] * sign;
     }
 
     /// @brief Associate the Ith derivative values to the correct cross-derivative.
@@ -782,6 +798,9 @@ private:
 
         constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
         constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
+        // The direction of the two perpendicular grids of the patches agree.
+        constexpr bool is_same_direction = (extremity_1 == !extremity_2);
+        constexpr int sign = is_same_direction - !is_same_direction;
 
         using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
         using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
@@ -860,7 +879,7 @@ private:
                         is_idx_par_min_2,
                         idx_range_slice_d1_2,
                         idx_range_slice_d2_2);
-        function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I];
+        function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I] * sign;
     }
 
 
@@ -908,7 +927,7 @@ private:
         return (extremity == Extremity::FRONT) ? idx_range_slice.front() : idx_range_slice.back();
     }
 
-       /**
+    /**
      * @brief Get the index of the given index range slice corresponding to the 
      * BACK extremity of the 1D grid. 
      */

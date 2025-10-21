@@ -872,22 +872,23 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     // Check each derivatives ---
     using PatchSeqLowerBound = ddc::detail::TypeSeq<Patch7, Patch8, Patch9>;
     using PatchSeqUpperBound = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
+    using EmptyPatchSeq = ddc::detail::TypeSeq<>;
 
-    check_all_x_derivatives(
+    check_all_x_derivatives<EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
             idx_ranges,
             idx_ranges_slice_dx);
 
-    check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
+    check_all_y_derivatives<EmptyPatchSeq, PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
             idx_ranges,
             idx_ranges_slice_dy);
 
-    check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
+    check_all_xy_derivatives<EmptyPatchSeq, PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
@@ -896,7 +897,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             idx_ranges_slice_dy);
 
     // Check the whole spline representations ---
-    check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
+    check_all_spline_representation_agreement<EmptyPatchSeq, PatchSeqLowerBound, PatchSeqUpperBound>(
             idx_ranges,
             idx_ranges_slice_dx,
             idx_ranges_slice_dy,
