@@ -82,7 +82,9 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   endif()
 endif()
 
-find_package(Kokkos 4.4.1 QUIET)
+set(koliop_BUILD_TESTING OFF CACHE BOOL "")
+find_package(Kokkos 4.4.1...<5 QUIET)
+set(koliop_ENABLE_Kokkos        "SYSTEM" CACHE STRING "")
 if(NOT "${Kokkos_FOUND}")
   ## Use Kokkos from `vendor/`
   if("${Kokkos_ENABLE_CUDA}")
@@ -90,15 +92,18 @@ if(NOT "${Kokkos_FOUND}")
     option(Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE "Whether to enable relocatable device code (RDC) for CUDA" ON)
   endif()
   add_subdirectory("vendor/kokkos/" "kokkos" SYSTEM)
+  set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
 endif()
 
-find_package(KokkosKernels 4.5.1 QUIET)
+find_package(KokkosKernels 4.5.1...<5 QUIET)
+set(koliop_ENABLE_KokkosKernels "SYSTEM" CACHE STRING "")
 if(NOT "${KokkosKernels_FOUND}")
   # NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
   set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
   set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
   set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
   add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels" SYSTEM)
+  set(koliop_ENABLE_KokkosKernels "SUBDIRECTORY" CACHE STRING "")
 endif()
 
 
@@ -108,9 +113,6 @@ if(NOT "${DDC_FOUND}")
   add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
 endif()
 
-set(koliop_BUILD_TESTING OFF CACHE BOOL "")
-set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
-set(koliop_ENABLE_KokkosKernels "SUBDIRECTORY" CACHE STRING "")
 add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
 
 ###############################################################################################
