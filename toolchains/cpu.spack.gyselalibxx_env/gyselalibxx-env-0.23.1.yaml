@@ -30,7 +30,6 @@ spack:
     - 'py-sympy@1.13'
     - 'py-xarray@2024.7'
   specs:
-  - python@3.11
   - lapack
   - matrix:
     - [$packages]
