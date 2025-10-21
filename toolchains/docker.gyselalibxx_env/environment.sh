@@ -10,5 +10,8 @@ fi
 current_folder=$(realpath $(dirname ${BASH_SOURCE[0]}))
 gyselalibxx_folder=$(realpath ${current_folder}/../..)
 
-docker run -v ${gyselalibxx_folder}:/src --workdir "/src" -it ghcr.io/gyselax/gyselalibxx_env
+kokkos_openmp_cmake_prefixes="/opt/openmp/kokkos/lib/cmake/Kokkos/:/opt/openmp/kokkos-kernels/lib/cmake/KokkosKernels/:/opt/openmp/kokkos-tools/lib/cmake/KokkosTools/:/opt/openmp/kokkos-fft/lib/cmake/KokkosFFT/"
+
+docker pull ghcr.io/gyselax/gyselalibxx_env:latest
+docker run -v ${gyselalibxx_folder}:/src --workdir "/src" -e CMAKE_PREFIX_PATH=${kokkos_openmp_cmake_prefixes} -it ghcr.io/gyselax/gyselalibxx_env:latest
 
