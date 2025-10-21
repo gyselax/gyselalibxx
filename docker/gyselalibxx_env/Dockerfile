@@ -54,7 +54,7 @@ RUN chmod +x /bin/bash_run \
  && cd .. \
  && rm -rf ginkgo \
  && git clone --branch 4.4.01 --depth 1 https://github.com/kokkos/kokkos.git \
- && git clone --branch develop-spline-kernels-v2 --depth 1 https://github.com/yasahi-hpc/kokkos-kernels \
+ && git clone --branch 4.5.01 --depth 1 https://github.com/kokkos/kokkos-kernels.git \
  && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
  && git clone --branch v0.2.1 --depth 1 https://github.com/kokkos/kokkos-fft.git \
  && export Kokkos_ROOT=/opt/serial/kokkos \
