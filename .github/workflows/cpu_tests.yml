@@ -30,7 +30,7 @@ on:
       merge_target:
         description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
         required: false
-        default: origin/devel
+        default: devel
         type: string
 
 concurrency:
@@ -122,6 +122,19 @@ jobs:
       - name: "Filter tests"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/test_filter
+      - name: "Set CMAKE_PREFIX_PATH"
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        run: |
+          if [[ "${{ matrix.toolchain}}" == *"serial"* ]]; then
+            dirs=$(find /opt/serial -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
+            echo "Using serial Kokkos"
+          else
+            dirs=$(find /opt/openmp -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
+            echo "Using OpenMP Kokkos"
+          fi
+          echo "CMAKE_PREFIX_PATH=${dirs}"
+          echo "CMAKE_PREFIX_PATH=${dirs}" >> $GITHUB_ENV
+        shell: bash
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code
