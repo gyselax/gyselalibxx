@@ -125,12 +125,12 @@ jobs:
       - name: "Set CMAKE_PREFIX_PATH"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         run: |
-          if [[ "${{ matrix.toolchain}}" == *"serial"* ]]; then
-            dirs=$(find /opt/serial -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
-            echo "Using serial Kokkos"
-          else
+          if [[ "${{ matrix.toolchain}}" == *"openmp"* ]]; then
             dirs=$(find /opt/openmp -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
             echo "Using OpenMP Kokkos"
+          else
+            dirs=$(find /opt/serial -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
+            echo "Using serial Kokkos"
           fi
           echo "CMAKE_PREFIX_PATH=${dirs}"
           echo "CMAKE_PREFIX_PATH=${dirs}" >> $GITHUB_ENV
