@@ -51,6 +51,13 @@ setup_env_mr:
   script: |
     set -x
     git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
+    if [[ "${{ matrix.toolchain}}" == *"serial"* ]]; then
+      export CMAKE_PREFIX_PATH=$(find /opt/serial -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
+      echo "Using serial Kokkos"
+    else
+      export CMAKE_PREFIX_PATH=$(find /opt/openmp -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
+      echo "Using OpenMP Kokkos"
+    fi
     rm -rf build || true
     mkdir build
     cd build
