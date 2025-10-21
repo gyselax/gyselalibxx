@@ -242,7 +242,7 @@ private:
 
         radii_host(0) = r_min[0];
         for (std::size_t i(0); i < n_patches - 1; i++) {
-            if (abs(double(r_min[i + 1] - r_max[i])) > 1e-14) {
+            if (std::abs(double(r_min[i + 1] - r_max[i])) > 1e-14) {
                 throw std::invalid_argument("The patches listed in PatchOrdering must be ordered.");
             }
             radii_host(i + 1) = r_max[i];

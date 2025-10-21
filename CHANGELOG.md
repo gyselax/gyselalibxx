@@ -11,12 +11,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add getters to `DerivField` types to access the associated index ranges.
+
 ### Fixed
+
+- Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
 
 ### Changed
 
 - Use patched recipes for the CPU Spack toolchain.
 - Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
+- Update and reorganize the Persee toolchains.
+- Add pdiplugin-pycall to Persee toolchains.
+- Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
 - Rename static variable `is_curvilinear_2d_mapping_v` to the more accurate: `has_o_point_v`.
 
 ### Deprecated
