@@ -47,6 +47,8 @@ spack config --scope site add 'config:connect_timeout:60'
 spack config --scope site add 'packages:all:providers:blas:[openblas]'
 spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 
+spack config add 'bootstrap:spec:python@3.11'
+
 # Add patched recipes
 git clone --branch releases/v0.23 https://github.com/gyselax/spack spack-0.23.1/var/spack/repos/gyselalibxx
 spack repo add --scope site spack-0.23.1/var/spack/repos/gyselalibxx
@@ -58,19 +60,19 @@ spack repo add --scope site spack-0.23.1/var/spack/repos/pdi
 spack compiler find
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  COMPILER='apple-clang@14:'
+    COMPILER='apple-clang@14:'
 else
-  AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
+    AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
 
-  if [ -z "${AVAILABLE_COMPILERS}" ]
-  then
-      echo "A gcc compiler with a version of at least 11 was not found. Installing compiler"
-      spack install gcc@11
-      spack load gcc@11
-      spack compiler find
-  fi
+    if [ -z "${AVAILABLE_COMPILERS}" ]
+    then
+        echo "A gcc compiler with a version of at least 11 was not found. Installing compiler"
+        spack install gcc@11
+        spack load gcc@11
+        spack compiler find
+    fi
 
-  COMPILER='gcc@11:'
+    COMPILER='gcc@11:'
 fi
 
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml
