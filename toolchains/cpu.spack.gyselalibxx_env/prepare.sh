@@ -53,8 +53,10 @@ spack config --scope site add 'config:connect_timeout:60'
 spack config --scope site add 'packages:all:providers:blas:[openblas]'
 spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 
+spack config get bootstrap
 spack config add 'bootstrap:spec:python@3.11'
-spack bootstrap now --debug
+spack config get bootstrap
+spack --debug bootstrap now
 spack config get bootstrap
 
 # Add patched recipes
