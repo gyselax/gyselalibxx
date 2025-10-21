@@ -124,6 +124,7 @@ private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
 public:
+    /// @brief Execution space.
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
 
 private:
