@@ -42,6 +42,9 @@ wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c
 which python
 which python3
 
+python --version
+python3 --version
+
 # Reduce the naming scheme of packages to avoid shebang issues.
 # Increase the time out that is by default too short for some packages (like PDI)
 spack config --scope site add 'config:connect_timeout:60'
@@ -51,7 +54,7 @@ spack config --scope site add 'packages:all:providers:blas:[openblas]'
 spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 
 spack config add 'bootstrap:spec:python@3.11'
-spack bootstrap now
+spack bootstrap now --debug
 spack config get bootstrap
 
 # Add patched recipes
