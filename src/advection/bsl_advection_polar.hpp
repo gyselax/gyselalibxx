@@ -142,7 +142,8 @@ public:
 
 
     /**
-     * @brief Allocate a Field of the advected function.
+     * @brief Advect a function over a time step dt with the given advection field
+     * along the physical directions. 
      *
      * @param [in, out] allfdistribu
      *      A Field containing the values of the function we want to advect.
@@ -185,7 +186,8 @@ public:
 
 
     /**
-     * @brief Allocate a Field to the advected function.
+     * @brief Advect a function over a time step dt with the given advection field
+     * along the logical directions and physical directions for the O-point. 
      * 
      * @warning This operator should be applied if the O-point corresponds to 
      * points of the grid. 
@@ -260,7 +262,10 @@ public:
     }
 
     /**
-     * @brief Allocate a Field to the advected function.
+     * @brief Advect a function over a time step dt with the given advection field
+     * along the logical directions. 
+     * It builds the advection field along the physical directions at the O-point
+     * though averaged values on the first ring. 
      * 
      * The value at the O-point of the given advection field is not used here. 
      * We compute the advection field on the physical axis at the O-point by 
