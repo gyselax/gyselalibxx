@@ -39,11 +39,28 @@ wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c
 # Activate spack
 . ${SPACK_PATH}/share/spack/setup-env.sh
 
-which python
-which python3
+if command -v spack >/dev/null 2>&1
+then
+    INSTALL_PYTHON=1
+else
+    if python3 -c "import sys; assert sys.version_info<(3,13)" >/dev/null 2>&1
+    then
+        INSTALL_PYTHON=0
+    else
+        INSTALL_PYTHON=0
+    fi
+fi
 
-python --version
-python3 --version
+echo "Need to install Python : ${INSTALL_PYTHON}"
+
+if ${INSTALL_PYTHON}
+then
+    # Build a known working Python (Spack-managed, no system dependency)
+    spack install python@3.11
+
+    # Export SPACK_PYTHON to point to that interpreter
+    export SPACK_PYTHON=$(spack location -i python@3.11)
+fi
 
 # Reduce the naming scheme of packages to avoid shebang issues.
 # Increase the time out that is by default too short for some packages (like PDI)
