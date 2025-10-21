@@ -83,6 +83,7 @@ class BslAdvectionPolar
     using IdxStepR = typename IdxRangeR::discrete_vector_type;
 
     using MemorySpace = typename FootFinder::memory_space;
+    using ExecSpace = typename FootFinder::ExecSpace;
 
     using DFieldFDistribu = DField<IdxRangeBatched, MemorySpace>;
 
@@ -168,7 +169,7 @@ public:
         CFieldMemFeetRTheta feet_rtheta_alloc(get_idx_range(advection_field_xy));
         CFieldFeetRTheta feet_rtheta = get_field(feet_rtheta_alloc);
         ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
+                ExecSpace(),
                 get_idx_range(advection_field_xy),
                 KOKKOS_LAMBDA(IdxBatched const idx) {
                     IdxRTheta const irtheta(idx);
@@ -238,13 +239,13 @@ public:
 
         // (Ax, Ay) = J (Ar, Atheta)
         copy_to_vector_space<XYBasis>(
-                Kokkos::DefaultExecutionSpace(),
+                ExecSpace(),
                 advection_field_xy[grid_without_Opoint],
                 logical_to_physical_mapping_proxy,
                 advection_field_rtheta[grid_without_Opoint]);
 
         ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
+                ExecSpace(),
                 Opoint_grid,
                 KOKKOS_LAMBDA(IdxBatched const idx) {
                     ddcHelper::assign_vector_field_element(
@@ -295,10 +296,10 @@ public:
                 = m_logical_to_physical_mapping;
 
         // Test if the first points on R correspond to the O-point.
-        CoordXY const Opoint = logical_to_physical_mapping_proxy.o_point();
+        CoordXY const Opoint = m_logical_to_physical_mapping.o_point();
         CoordRTheta const point_on_first_row
                 = ddc::coordinate(Idx<GridR, GridTheta>(radial_grid.front(), no_r_grid.front()));
-        CoordXY const diff_points = logical_to_physical_mapping_proxy(point_on_first_row) - Opoint;
+        CoordXY const diff_points = m_logical_to_physical_mapping(point_on_first_row) - Opoint;
         bool const first_row_is_o_point
                 = ((abs(ddc::get<DimX>(diff_points)) < 1e-15)
                    && (abs(ddc::get<DimY>(diff_points)) < 1e-15));
@@ -321,7 +322,7 @@ public:
 
         // (Ax, Ay) = J (Ar, Atheta)
         copy_to_vector_space<XYBasis>(
-                Kokkos::DefaultExecutionSpace(),
+                ExecSpace(),
                 advection_field_xy[grid_without_Opoint],
                 logical_to_physical_mapping_proxy,
                 advection_field_rtheta[grid_without_Opoint]);
@@ -358,7 +359,7 @@ public:
 
             // and assign the averaged value to all the points at the O-point.
             ddc::parallel_for_each(
-                    Kokkos::DefaultExecutionSpace(),
+                    ExecSpace(),
                     Opoint_grid,
                     KOKKOS_LAMBDA(IdxBatched const idx) {
                         IdxBatch idx_batch(idx);
@@ -393,7 +394,7 @@ public:
             std::size_t ntheta_points) const
     {
         double const sum_x = ddc::parallel_transform_reduce(
-                Kokkos::DefaultExecutionSpace(),
+                ExecSpace(),
                 grid_first_ring,
                 0.,
                 ddc::reducer::sum<double>(),
@@ -401,7 +402,7 @@ public:
                     return advection_field_x(idx_rtheta);
                 });
         double const sum_y = ddc::parallel_transform_reduce(
-                Kokkos::DefaultExecutionSpace(),
+                ExecSpace(),
                 grid_first_ring,
                 0.,
                 ddc::reducer::sum<double>(),

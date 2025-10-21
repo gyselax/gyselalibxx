@@ -123,8 +123,10 @@ public:
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
-private:
+public:
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
+
+private:
     using MemSpace = typename ExecSpace::memory_space;
     /**
      * @brief Tag the first dimension in the advection domain.
