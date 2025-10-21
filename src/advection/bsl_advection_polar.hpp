@@ -309,8 +309,7 @@ public:
             the advection field on (R, Theta) matches with the grid of the advected function.  
         */
         assert(first_row_is_o_point
-               || (IdxRangeR(get_idx_range(advection_field_rtheta)).front()
-                   == radial_grid.front()));
+               || (IdxRangeR(get_idx_range(advection_field_rtheta)) == radial_grid));
 
         IdxRangeBatched const grid_without_Opoint(
                 radial_grid.remove_first(IdxStep<GridR>(first_row_is_o_point)),
