@@ -219,7 +219,7 @@ public:
         // Check the first points on R correspond to the O-point.
         assert(norm_inf(
                        m_logical_to_physical_mapping(ddc::coordinate(
-                               Idx<GridR, GridTheta>(radial_grid.front(), no_r_grid.front())))
+                               IdxRTheta(radial_grid.front(), no_r_grid.front())))
                        - m_logical_to_physical_mapping.o_point())
                < 1e-13);
 
