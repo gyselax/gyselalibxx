@@ -23,6 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
 - Update and reorganize the Persee toolchains.
 - Add pdiplugin-pycall to Persee toolchains.
+- Allow a local installation of Kokkos > v4.4.1 to be used by CMake.
 
 ### Deprecated
 
