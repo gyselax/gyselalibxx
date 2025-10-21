@@ -53,7 +53,7 @@ fi
 
 echo "Need to install Python : ${INSTALL_PYTHON}"
 
-if ${INSTALL_PYTHON}
+if [ ${INSTALL_PYTHON} ]
 then
     # Build a known working Python (Spack-managed, no system dependency)
     spack install python@3.11
