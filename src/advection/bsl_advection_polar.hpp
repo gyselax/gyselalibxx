@@ -59,8 +59,6 @@ class BslAdvectionPolar
     using DimX = typename LogicalToPhysicalMapping::cartesian_tag_x;
     using DimY = typename LogicalToPhysicalMapping::cartesian_tag_y;
 
-    using XYBasis = VectorIndexSet<DimX, DimY>;
-
     using CoordRTheta = typename LogicalToPhysicalMapping::CoordArg;
     using CoordXY = typename LogicalToPhysicalMapping::CoordResult;
 
@@ -238,7 +236,7 @@ public:
                 = m_logical_to_physical_mapping;
 
         // (Ax, Ay) = J (Ar, Atheta)
-        copy_to_vector_space<XYBasis>(
+        copy_to_vector_space<CartesianBasis>(
                 ExecSpace(),
                 advection_field_xy[grid_without_Opoint],
                 logical_to_physical_mapping_proxy,
@@ -320,7 +318,7 @@ public:
         DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
 
         // (Ax, Ay) = J (Ar, Atheta)
-        copy_to_vector_space<XYBasis>(
+        copy_to_vector_space<CartesianBasis>(
                 ExecSpace(),
                 advection_field_xy[grid_without_Opoint],
                 logical_to_physical_mapping_proxy,
