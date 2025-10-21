@@ -39,6 +39,9 @@ wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c
 # Activate spack
 . ${SPACK_PATH}/share/spack/setup-env.sh
 
+which python
+which python3
+
 # Reduce the naming scheme of packages to avoid shebang issues.
 # Increase the time out that is by default too short for some packages (like PDI)
 spack config --scope site add 'config:connect_timeout:60'
@@ -48,6 +51,8 @@ spack config --scope site add 'packages:all:providers:blas:[openblas]'
 spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 
 spack config add 'bootstrap:spec:python@3.11'
+spack bootstrap now
+spack config get bootstrap
 
 # Add patched recipes
 git clone --branch releases/v0.23 https://github.com/gyselax/spack spack-0.23.1/var/spack/repos/gyselalibxx
@@ -76,7 +81,9 @@ else
 fi
 
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml
+echo "Created"
 spack --env gyselalibxx-env add --list-name compilers ${COMPILER}
+echo "Added compiler"
 spack --env gyselalibxx-env install --jobs 2
 spack env activate -p gyselalibxx-env
 PYTHON_EXECUTABLE=$(which python3)
