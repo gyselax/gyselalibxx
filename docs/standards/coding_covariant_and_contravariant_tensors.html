@@ -731,14 +731,14 @@ DVector&lt;Eta1, Eta2&gt; v;
 </code></pre>
 <p>These are all equivalent and represent a 1D contravariant vector.</p>
 <h3 id="assigning-components">Assigning Components</h3>
-<p>Component-wise assignment uses ddcHelper::select to target specific directions:</p>
-<pre><code class="language-cpp">ddcHelper::select&lt;Eta1&gt;(v) = 2.0;
-ddcHelper::select&lt;Eta2&gt;(v) = 3.0;
+<p>Component-wise assignment uses ddcHelper::get to target specific directions:</p>
+<pre><code class="language-cpp">ddcHelper::get&lt;Eta1&gt;(v) = 2.0;
+ddcHelper::get&lt;Eta2&gt;(v) = 3.0;
 
-ddcHelper::select&lt;Eta1, B1_cov&gt;(M) = 1.0;
-ddcHelper::select&lt;Eta1, B2_cov&gt;(M) = 0.0;
-ddcHelper::select&lt;Eta2, B1_cov&gt;(M) = 0.0;
-ddcHelper::select&lt;Eta2, B2_cov&gt;(M) = 1.0;
+ddcHelper::get&lt;Eta1, B1_cov&gt;(M) = 1.0;
+ddcHelper::get&lt;Eta1, B2_cov&gt;(M) = 0.0;
+ddcHelper::get&lt;Eta2, B1_cov&gt;(M) = 0.0;
+ddcHelper::get&lt;Eta2, B2_cov&gt;(M) = 1.0;
 </code></pre>
 <p>This system ensures type safety: only combinations of indices consistent with the tensor’s declared basis are allowed, enabling early compile-time error detection.</p>
 <h2 id="tensor-multiplication">Tensor Multiplication</h2>
@@ -835,10 +835,10 @@ DTensor&lt;EtaBasis_cov, EtaBasis&gt; P = tensor_mul(index&lt;'i','j'&gt;(M), in
 </code></pre>
 <p>This corresponds, for example, to defining a contravariant electric field <span class="arithmatex">\(\boldsymbol{E}(\boldsymbol{r}) = E^1(r_i, \theta_j) \boldsymbol{e}_1 + E^2(r_i, \theta_j) \boldsymbol{e}_2 = E_x(r_i, \theta_j) \hat{x} + E_y(r_i, \theta_j) \hat{y}\)</span> on a polar mesh.</p>
 <h3 id="component-access-and-assignment">Component Access and Assignment</h3>
-<p>The scalar fields in the vector fields can be extracted using <code>ddcHelper::select</code>. This allows components to be assigned as for scalar fields :</p>
+<p>The scalar fields in the vector fields can be extracted using <code>ddcHelper::get</code>. This allows components to be assigned as for scalar fields :</p>
 <pre><code class="language-cpp">IdxEta1 i;
-ddcHelper::select&lt;X&gt;(E)(i) = 4.2; // Assign to component E_x at index i without a temporary
-DField&lt;IdxRange&lt;GridR, GridTheta&gt;&gt; E_x = ddcHelper::select&lt;X&gt;(E);
+ddcHelper::get&lt;X&gt;(E)(i) = 4.2; // Assign to component E_x at index i without a temporary
+DField&lt;IdxRange&lt;GridR, GridTheta&gt;&gt; E_x = ddcHelper::get&lt;X&gt;(E);
 E_x(i) = -0.3;                    // Assign to component E_x at index i via a temporary field
 </code></pre>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Currently it is only possible to get a constant vector from a vector field so it is not possible to directly assign a vector to an element of a vector field. The method <code>assign_vector_field_element</code> automatically carries out the elementwise assignment.</p>
@@ -860,7 +860,7 @@ DVector&lt;R, Theta&gt; grad_phi = to_vector_space&lt;EtaBasis&gt;(coord_transfo
 </code></pre>
 <p>For a vector field the code is:</p>
 <pre><code class="language-cpp">DVectorField&lt;IdxRange&lt;GridR, GridTheta&gt;, VectorIndexSet&lt;R_cov, Theta_cov&gt;&gt; d_phi;
-DVectorField&lt;IdxRange&lt;GridR, GridTheta&gt;, VectorIndexSet&lt;R, Theta&gt;&gt; grad_phi; 
+DVectorField&lt;IdxRange&lt;GridR, GridTheta&gt;, VectorIndexSet&lt;R, Theta&gt;&gt; grad_phi;
 copy_to_vector_space&lt;PolarBasis&gt;(Kokkos::DefaultExecutionSpace(), grad_phi, coord_transform, d_phi);
 </code></pre>
 <h3 id="example-converting-between-bases">Example: Converting Between Bases</h3>
@@ -893,25 +893,25 @@ DVector&lt;X, Y, Z&gt; w;
 DVector&lt;X, Y, Z&gt; z = tensor_mul(index&lt;'i','j','k'&gt;(eps), index&lt;'i'&gt;(v), index&lt;'j'&gt;(w));
 </code></pre>
 <p>Thanks to inlining and the Einstein summation notation, the compiler understands the last line to mean:</p>
-<pre><code class="language-cpp">ddcHelper::select&lt;X&gt;(z) = 
-          0*ddcHelper::select&lt;X&gt;(v)*ddcHelper::select&lt;X&gt;(w)  // i=X, j=X, k=X
-        + 0*ddcHelper::select&lt;X&gt;(v)*ddcHelper::select&lt;Y&gt;(w)  // i=X, j=X, k=Y
-        + 0*ddcHelper::select&lt;X&gt;(v)*ddcHelper::select&lt;Z&gt;(w)  // i=X, j=X, k=Z
-        + 0*ddcHelper::select&lt;Y&gt;(v)*ddcHelper::select&lt;X&gt;(w)  // i=X, j=Y, k=X
-        + 0*ddcHelper::select&lt;Y&gt;(v)*ddcHelper::select&lt;Y&gt;(w)  // i=X, j=Y, k=Y
-        + 1*ddcHelper::select&lt;Y&gt;(v)*ddcHelper::select&lt;Z&gt;(w)  // i=X, j=Y, k=Z
-        + 0*ddcHelper::select&lt;Z&gt;(v)*ddcHelper::select&lt;X&gt;(w)  // i=X, j=Z, k=X
-        - 1*ddcHelper::select&lt;Z&gt;(v)*ddcHelper::select&lt;Y&gt;(w)  // i=X, j=Z, k=Y
-        + 0*ddcHelper::select&lt;Z&gt;(v)*ddcHelper::select&lt;Z&gt;(w); // i=X, j=Z, k=Z
-ddcHelper::select&lt;Y&gt;(z) = ...;
-ddcHelper::select&lt;Z&gt;(z) = ...;
+<pre><code class="language-cpp">ddcHelper::get&lt;X&gt;(z) =
+          0*ddcHelper::get&lt;X&gt;(v)*ddcHelper::get&lt;X&gt;(w)  // i=X, j=X, k=X
+        + 0*ddcHelper::get&lt;X&gt;(v)*ddcHelper::get&lt;Y&gt;(w)  // i=X, j=X, k=Y
+        + 0*ddcHelper::get&lt;X&gt;(v)*ddcHelper::get&lt;Z&gt;(w)  // i=X, j=X, k=Z
+        + 0*ddcHelper::get&lt;Y&gt;(v)*ddcHelper::get&lt;X&gt;(w)  // i=X, j=Y, k=X
+        + 0*ddcHelper::get&lt;Y&gt;(v)*ddcHelper::get&lt;Y&gt;(w)  // i=X, j=Y, k=Y
+        + 1*ddcHelper::get&lt;Y&gt;(v)*ddcHelper::get&lt;Z&gt;(w)  // i=X, j=Y, k=Z
+        + 0*ddcHelper::get&lt;Z&gt;(v)*ddcHelper::get&lt;X&gt;(w)  // i=X, j=Z, k=X
+        - 1*ddcHelper::get&lt;Z&gt;(v)*ddcHelper::get&lt;Y&gt;(w)  // i=X, j=Z, k=Y
+        + 0*ddcHelper::get&lt;Z&gt;(v)*ddcHelper::get&lt;Z&gt;(w); // i=X, j=Z, k=Z
+ddcHelper::get&lt;Y&gt;(z) = ...;
+ddcHelper::get&lt;Z&gt;(z) = ...;
 </code></pre>
 <p>As long as at least <code>-O1</code> optimisations are activated, the compiler will optimise away the multiplications by 0, effectively turning this into the standard form of a cross product:</p>
-<pre><code class="language-cpp">ddcHelper::select&lt;X&gt;(z) = 
-          ddcHelper::select&lt;Y&gt;(v)*ddcHelper::select&lt;Z&gt;(w) // i=X, j=Y, k=Z
-        - ddcHelper::select&lt;Z&gt;(v)*ddcHelper::select&lt;Y&gt;(w); // i=X, j=Z, k=Y
-ddcHelper::select&lt;Y&gt;(z) = ...;
-ddcHelper::select&lt;Z&gt;(z) = ...;
+<pre><code class="language-cpp">ddcHelper::get&lt;X&gt;(z) =
+          ddcHelper::get&lt;Y&gt;(v)*ddcHelper::get&lt;Z&gt;(w) // i=X, j=Y, k=Z
+        - ddcHelper::get&lt;Z&gt;(v)*ddcHelper::get&lt;Y&gt;(w); // i=X, j=Z, k=Y
+ddcHelper::get&lt;Y&gt;(z) = ...;
+ddcHelper::get&lt;Z&gt;(z) = ...;
 </code></pre></div>
               
             </div>
