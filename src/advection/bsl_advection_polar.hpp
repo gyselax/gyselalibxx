@@ -339,11 +339,16 @@ public:
                     ExecSpace(),
                     no_rtheta_grid,
                     KOKKOS_LAMBDA(IdxBatch const idx_batch) {
+                        DConstField<IdxRangeBatched, MemorySpace> advection_field_x_proxy
+                                = get_const_field(
+                                        ddcHelper::get<DimX>(advection_field_xy)[idx_batch]);
+                        DConstField<IdxRangeBatched, MemorySpace> advection_field_y_proxy
+                                = get_const_field(
+                                        ddcHelper::get<DimY>(advection_field_xy)[idx_batch]);
+
                         CoordXY advection_field_xy_average_on_theta = average_field(
-                                get_const_field(
-                                        ddcHelper::get<DimX>(advection_field_xy)[idx_batch]),
-                                get_const_field(
-                                        ddcHelper::get<DimY>(advection_field_xy)[idx_batch]),
+                                advection_field_x_proxy,
+                                advection_field_y_proxy,
                                 grid_first_ring,
                                 ntheta_points);
 
