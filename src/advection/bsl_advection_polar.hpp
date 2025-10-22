@@ -335,21 +335,26 @@ public:
 
             // Jacobian ill-defined at the O-point, we average the values around the O-point,
             std::size_t ntheta_points = theta_grid.size();
-            ddc::parallel_for_each(no_rtheta_grid, [&](IdxBatch const idx_batch) {
-                CoordXY advection_field_xy_average_on_theta = average_field(
-                        get_const_field(ddcHelper::get<DimX>(advection_field_xy)[idx_batch]),
-                        get_const_field(ddcHelper::get<DimY>(advection_field_xy)[idx_batch]),
-                        grid_first_ring,
-                        ntheta_points);
+            ddc::parallel_for_each(
+                    ExecSpace(),
+                    no_rtheta_grid,
+                    KOKKOS_LAMBDA(IdxBatch const idx_batch) {
+                        CoordXY advection_field_xy_average_on_theta = average_field(
+                                get_const_field(
+                                        ddcHelper::get<DimX>(advection_field_xy)[idx_batch]),
+                                get_const_field(
+                                        ddcHelper::get<DimY>(advection_field_xy)[idx_batch]),
+                                grid_first_ring,
+                                ntheta_points);
 
-                DTensor<CartesianBasis> advection_field_xy_average_on_theta_tensor(
-                        advection_field_xy_average_on_theta);
+                        DTensor<CartesianBasis> advection_field_xy_average_on_theta_tensor(
+                                advection_field_xy_average_on_theta);
 
-                ddcHelper::assign_vector_field_element(
-                        advection_field_xy_average_centre,
-                        idx_batch,
-                        advection_field_xy_average_on_theta_tensor);
-            });
+                        ddcHelper::assign_vector_field_element(
+                                advection_field_xy_average_centre,
+                                idx_batch,
+                                advection_field_xy_average_on_theta_tensor);
+                    });
 
             // and assign the averaged value to all the points at the O-point.
             ddc::parallel_for_each(
