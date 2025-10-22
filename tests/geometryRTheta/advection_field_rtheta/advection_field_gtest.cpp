@@ -342,7 +342,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
         // Check the advected functions ---
         ddc::for_each(grid, [&](IdxRTheta const irtheta) {
             EXPECT_NEAR(density_rtheta(irtheta), density_xy(irtheta), 5e-13);
-        //     EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-7);
+            //     EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-7);
         });
     }
 
