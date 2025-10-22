@@ -339,7 +339,7 @@ public:
                 //         get_const_field(ddcHelper::get<DimY>(advection_field_xy)[idx_batch]),
                 //         grid_first_ring,
                 //         ntheta_points);
-                CoordXY advection_field_xy_average_on_theta (0,0); 
+                CoordXY advection_field_xy_average_on_theta(0, 0);
 
                 DTensor<CartesianBasis> advection_field_xy_average_on_theta_tensor(
                         advection_field_xy_average_on_theta);
