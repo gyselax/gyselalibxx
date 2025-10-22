@@ -328,19 +328,6 @@ public:
                     radial_grid.take_first(IdxStepR(2)).remove_first(IdxStep<GridR>(1)),
                     theta_grid);
 
-            DVectorFieldMemAdvectionXYOnBatch advection_field_xy_average_centre_alloc(
-                    no_rtheta_grid);
-            DVectorFieldAdvectionXYOnBatch advection_field_xy_average_centre(
-                    advection_field_xy_average_centre_alloc);
-
-            ddc::parallel_fill(
-                    ExecSpace(),
-                    ddcHelper::get<DimX>(advection_field_xy_average_centre),
-                    0.);
-            ddc::parallel_fill(
-                    ExecSpace(),
-                    ddcHelper::get<DimY>(advection_field_xy_average_centre),
-                    0.);
 
             // Jacobian ill-defined at the O-point, we average the values around the O-point,
             std::size_t ntheta_points = theta_grid.size();
@@ -348,32 +335,31 @@ public:
                     ExecSpace(),
                     no_rtheta_grid,
                     KOKKOS_LAMBDA(IdxBatch const idx_batch) {
+                        DTensor<CartesianBasis> advection_field_xy_average_centre(0, 0);
+
                         IdxR const idx_r(grid_first_ring.front()); // one ring => one r index.
                         for (IdxTheta const idx_theta : IdxRangeTheta(grid_first_ring)) {
-                            ddcHelper::get<DimX>(advection_field_xy_average_centre)(idx_batch)
+                            ddcHelper::get<DimX>(advection_field_xy_average_centre)
                                     += ddcHelper::get<DimX>(
                                             advection_field_xy)(idx_batch, idx_r, idx_theta);
-                            ddcHelper::get<DimY>(advection_field_xy_average_centre)(idx_batch)
+                            ddcHelper::get<DimY>(advection_field_xy_average_centre)
                                     += ddcHelper::get<DimY>(
                                             advection_field_xy)(idx_batch, idx_r, idx_theta);
                         }
 
-                        ddcHelper::get<DimX>(advection_field_xy_average_centre)(idx_batch)
-                                /= ntheta_points;
-                        ddcHelper::get<DimY>(advection_field_xy_average_centre)(idx_batch)
-                                /= ntheta_points;
-                    });
+                        ddcHelper::get<DimX>(advection_field_xy_average_centre) /= ntheta_points;
+                        ddcHelper::get<DimY>(advection_field_xy_average_centre) /= ntheta_points;
 
-            // and assign the averaged value to all the points at the O-point.
-            ddc::parallel_for_each(
-                    ExecSpace(),
-                    Opoint_grid,
-                    KOKKOS_LAMBDA(IdxBatched const idx) {
-                        IdxBatch idx_batch(idx);
-                        ddcHelper::get<DimX>(advection_field_xy)(idx) = ddcHelper::get<DimX>(
-                                advection_field_xy_average_centre)(idx_batch);
-                        ddcHelper::get<DimY>(advection_field_xy)(idx) = ddcHelper::get<DimY>(
-                                advection_field_xy_average_centre)(idx_batch);
+                        // and assign the averaged value to all the points at the O-point.
+                        IdxR const idx_r_Opt(radial_grid.front());
+                        for (IdxTheta const idx_theta : IdxRangeTheta(grid_first_ring)) {
+                            ddcHelper::get<DimX>(
+                                    advection_field_xy)(idx_batch, idx_r_Opt, idx_theta)
+                                    = ddcHelper::get<DimX>(advection_field_xy_average_centre);
+                            ddcHelper::get<DimY>(
+                                    advection_field_xy)(idx_batch, idx_r_Opt, idx_theta)
+                                    = ddcHelper::get<DimY>(advection_field_xy_average_centre);
+                        }
                     });
         }
 
