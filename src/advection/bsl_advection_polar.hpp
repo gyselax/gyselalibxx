@@ -99,6 +99,9 @@ class BslAdvectionPolar
             = DVectorFieldMem<IdxRangeBatch, CartesianBasis, MemorySpace>;
     using DVectorFieldAdvectionXYOnBatch = DVectorField<IdxRangeBatch, CartesianBasis, MemorySpace>;
 
+    using DVectorFieldMemAdvectionXYOnBatch_host = host_t<DVectorFieldMemAdvectionXYOnBatch>;
+    using DVectorFieldAdvectionXYOnBatch_host = host_t<DVectorFieldAdvectionXYOnBatch>;
+
     using DVectorFieldAdvectionRTheta
             = DVectorField<IdxRangeBatched, CurvilinearBasis, MemorySpace>;
     using DVectorConstFieldAdvectionRTheta
@@ -331,6 +334,11 @@ public:
             DVectorFieldAdvectionXYOnBatch advection_field_xy_average_centre(
                     advection_field_xy_average_centre_alloc);
 
+            DVectorFieldMemAdvectionXYOnBatch_host advection_field_xy_average_centre_host_alloc(
+                    no_rtheta_grid);
+            DVectorFieldAdvectionXYOnBatch_host advection_field_xy_average_centre_host(
+                    advection_field_xy_average_centre_host_alloc);
+
             // Jacobian ill-defined at the O-point, we average the values around the O-point,
             std::size_t ntheta_points = theta_grid.size();
             ddc::for_each(no_rtheta_grid, [&](IdxBatch const idx_batch) {
@@ -340,18 +348,15 @@ public:
                         grid_first_ring,
                         ntheta_points);
 
-                DTensor<CartesianBasis> advection_field_xy_average_on_theta_tensor(
-                        advection_field_xy_average_on_theta);
-
-                // ddcHelper::get<DimX>(advection_field_xy_average_centre)(idx_batch)
-                //         = ddcHelper::get<DimX>(advection_field_xy_average_on_theta_tensor);
-                // ddcHelper::get<DimY>(advection_field_xy_average_centre)(idx_batch)
-                //         = ddcHelper::get<DimY>(advection_field_xy_average_on_theta_tensor);
-                // ddcHelper::assign_vector_field_element(
-                //         advection_field_xy_average_centre,
-                //         idx_batch,
-                //         advection_field_xy_average_on_theta_tensor);
+                ddcHelper::get<DimX>(advection_field_xy_average_centre_host)(idx_batch)
+                        = ddc::get<DimX>(advection_field_xy_average_on_theta);
+                ddcHelper::get<DimY>(advection_field_xy_average_centre_host)(idx_batch)
+                        = ddc::get<DimY>(advection_field_xy_average_on_theta);
             });
+
+            ddcHelper::deepcopy(
+                    advection_field_xy_average_centre,
+                    advection_field_xy_average_centre_host);
 
             // and assign the averaged value to all the points at the O-point.
             ddc::parallel_for_each(
