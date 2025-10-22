@@ -62,6 +62,7 @@ RUN chmod +x /bin/bash_run \
  && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/serial/KokkosKernels \
  && export KokkosTools_ROOT=/opt/serial/KokkosTools \
+ && export DDC_ROOT=/opt/serial/DDC \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_SERIAL=ON -B build -S kokkos \
  && cmake --build build \
  && cmake --install build --prefix $Kokkos_ROOT \
@@ -78,10 +79,15 @@ RUN chmod +x /bin/bash_run \
  && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
  && rm -rf build \
+ && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
+ && cmake --build build \
+ && cmake --install build --prefix $DDC_ROOT \
+ && rm -rf build \
  && export Kokkos_ROOT=/opt/openmp/Kokkos \
  && export KokkosFFT_ROOT=/opt/openmp/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/openmp/KokkosKernels \
  && export KokkosTools_ROOT=/opt/openmp/KokkosTools \
+ && export DDC_ROOT=/opt/openmp/DDC \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_OPENMP=ON -B build -S kokkos \
  && cmake --build build \
  && cmake --install build --prefix $Kokkos_ROOT \
@@ -97,11 +103,11 @@ RUN chmod +x /bin/bash_run \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
  && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
- && rm -rf build kokkos kokkos-fft kokkos-kernels kokkos-tools \
- && export DDC_ROOT=/opt/ddc \
- && CMAKE_PREFIX_PATH=/opt/openmp cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
+ && rm -rf build \
+ && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
  && cmake --build build \
  && cmake --install build --prefix $DDC_ROOT \
+ && rm -rf build kokkos kokkos-fft kokkos-kernels kokkos-tools ddc \
  && git clone -b 2.14.2 https://github.com/danmar/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build \
@@ -137,7 +143,6 @@ USER ci:ci
 WORKDIR /ci
 ENV HOME=/ci
 ENV PATH="/opt/venv/bin:$PATH"
-ENV CMAKE_PREFIX_PATH="/opt/ddc"
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]
