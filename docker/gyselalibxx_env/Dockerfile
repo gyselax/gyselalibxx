@@ -57,6 +57,7 @@ RUN chmod +x /bin/bash_run \
  && git clone --branch 4.5.01 --depth 1 https://github.com/kokkos/kokkos-kernels.git \
  && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
  && git clone --branch v0.2.1 --depth 1 https://github.com/kokkos/kokkos-fft.git \
+ && git clone --branch v0.7.0 --depth 1 https://github.com/CExA-project/ddc.git \
  && export Kokkos_ROOT=/opt/serial/Kokkos \
  && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/serial/KokkosKernels \
@@ -97,6 +98,10 @@ RUN chmod +x /bin/bash_run \
  && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
  && rm -rf build kokkos kokkos-fft kokkos-kernels kokkos-tools \
+ && export DDC_ROOT=/opt/ddc \
+ && CMAKE_PREFIX_PATH=/opt/openmp cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
+ && cmake --build build \
+ && cmake --install build --prefix $DDC_ROOT \
  && git clone -b 2.14.2 https://github.com/danmar/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build \
@@ -132,6 +137,7 @@ USER ci:ci
 WORKDIR /ci
 ENV HOME=/ci
 ENV PATH="/opt/venv/bin:$PATH"
+ENV CMAKE_PREFIX_PATH="/opt/ddc"
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]
