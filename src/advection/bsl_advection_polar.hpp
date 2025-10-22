@@ -389,7 +389,7 @@ public:
     {
         double sum_x = 0;
         double sum_y = 0;
-        IdxR const idx_r (grid_first_ring.front()); // one ring => one r index. 
+        IdxR const idx_r(grid_first_ring.front()); // one ring => one r index.
         for (IdxTheta const idx_theta : IdxRangeTheta(grid_first_ring)) {
             sum_x += advection_field_x(idx_r, idx_theta);
             sum_y += advection_field_y(idx_r, idx_theta);
