@@ -108,6 +108,10 @@ RUN chmod +x /bin/bash_run \
  && cmake --build build \
  && cmake --install build --prefix $DDC_ROOT \
  && rm -rf build kokkos kokkos-fft kokkos-kernels kokkos-tools ddc \
+ && git clone -b release-1.12.1 https://github.com/google/googletest.git \
+ && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
+ && cmake --build build \
+ && cmake --install build --prefix /opt/googletest \
  && git clone -b 2.14.2 https://github.com/danmar/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build \
@@ -143,6 +147,7 @@ USER ci:ci
 WORKDIR /ci
 ENV HOME=/ci
 ENV PATH="/opt/venv/bin:$PATH"
+ENV CMAKE_PREFIX_PATH="/opt/googletest"
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]
