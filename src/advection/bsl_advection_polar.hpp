@@ -381,7 +381,7 @@ public:
      * @param ntheta_points Number of points on the theta grid. 
      * @return A coordinate on (X,Y) ccontaining (sum_theta A_x(r, theta), sum_theta A_y(r, theta)).
      */
-    CoordXY average_field(
+    KOKKOS_INLINE_FUNCTION CoordXY average_field(
             DConstField<IdxRangeRTheta, MemorySpace> advection_field_x,
             DConstField<IdxRangeRTheta, MemorySpace> advection_field_y,
             IdxRangeRTheta grid_first_ring,
