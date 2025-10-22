@@ -334,11 +334,12 @@ public:
             // Jacobian ill-defined at the O-point, we average the values around the O-point,
             std::size_t ntheta_points = theta_grid.size();
             ddc::for_each(no_rtheta_grid, [&](IdxBatch const idx_batch) {
-                CoordXY advection_field_xy_average_on_theta = average_field(
-                        get_const_field(ddcHelper::get<DimX>(advection_field_xy)[idx_batch]),
-                        get_const_field(ddcHelper::get<DimY>(advection_field_xy)[idx_batch]),
-                        grid_first_ring,
-                        ntheta_points);
+                // CoordXY advection_field_xy_average_on_theta = average_field(
+                //         get_const_field(ddcHelper::get<DimX>(advection_field_xy)[idx_batch]),
+                //         get_const_field(ddcHelper::get<DimY>(advection_field_xy)[idx_batch]),
+                //         grid_first_ring,
+                //         ntheta_points);
+                CoordXY advection_field_xy_average_on_theta (0,0); 
 
                 DTensor<CartesianBasis> advection_field_xy_average_on_theta_tensor(
                         advection_field_xy_average_on_theta);
