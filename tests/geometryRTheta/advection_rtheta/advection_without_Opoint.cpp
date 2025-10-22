@@ -119,15 +119,6 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 
     // --- Define the to_physical_mapping. ------------------------------------------------------------------------
     const LogicalToPhysicalMapping to_physical_mapping;
-    DiscreteMappingBuilder const discrete_mapping_builder(
-            Kokkos::DefaultHostExecutionSpace(),
-            to_physical_mapping,
-            builder_host,
-            spline_evaluator_extrapol_host);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
-
-    ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
-
 
     // --- Advection operator -------------------------------------------------------------------------
     ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;

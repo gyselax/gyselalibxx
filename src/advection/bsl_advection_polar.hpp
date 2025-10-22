@@ -219,11 +219,7 @@ public:
         IdxRangeBatchedWithoutR no_r_grid(grid);
 
         // Check the first points on R correspond to the O-point.
-        assert(norm_inf(
-                       m_logical_to_physical_mapping(
-                               ddc::coordinate(IdxRTheta(radial_grid.front(), no_r_grid.front())))
-                       - m_logical_to_physical_mapping.o_point())
-               < 1e-13);
+        assert(ddc::coordinate(radial_grid.front()) < 1e-13);
 
         IdxRangeBatched const
                 grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
@@ -299,13 +295,7 @@ public:
                 = m_logical_to_physical_mapping;
 
         // Test if the first points on R correspond to the O-point.
-        CoordXY const Opoint = m_logical_to_physical_mapping.o_point();
-        CoordRTheta const point_on_first_row
-                = ddc::coordinate(IdxRTheta(radial_grid.front(), no_r_grid.front()));
-        CoordXY const diff_points = m_logical_to_physical_mapping(point_on_first_row) - Opoint;
-        bool const first_row_is_o_point
-                = ((abs(ddc::get<DimX>(diff_points)) < 1e-15)
-                   && (abs(ddc::get<DimY>(diff_points)) < 1e-15));
+        bool const first_row_is_o_point = (ddc::coordinate(radial_grid.front()) < 1e-13); 
 
         /*
             If the O-point is not considered as on the grid, we have to be sure that the grid of 
