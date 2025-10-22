@@ -343,10 +343,10 @@ public:
                 DTensor<CartesianBasis> advection_field_xy_average_on_theta_tensor(
                         advection_field_xy_average_on_theta);
 
-                // ddcHelper::assign_vector_field_element(
-                //         advection_field_xy_average_centre,
-                //         idx_batch,
-                //         advection_field_xy_average_on_theta_tensor);
+                (ddcHelper::get<DimX>(advection_field_xy_average_centre)(idx_batch)
+                 = ddcHelper::get<DimX>(advection_field_xy_average_on_theta_tensor));
+                (ddcHelper::get<DimY>(advection_field_xy_average_centre)(idx_batch)
+                 = ddcHelper::get<DimY>(advection_field_xy_average_on_theta_tensor));
             });
 
             // and assign the averaged value to all the points at the O-point.
