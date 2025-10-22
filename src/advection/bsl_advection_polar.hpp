@@ -333,32 +333,35 @@ public:
             DVectorFieldAdvectionXYOnBatch advection_field_xy_average_centre(
                     advection_field_xy_average_centre_alloc);
 
+            ddc::parallel_fill(
+                    ExecSpace(),
+                    ddcHelper::get<DimX>(advection_field_xy_average_centre),
+                    0.);
+            ddc::parallel_fill(
+                    ExecSpace(),
+                    ddcHelper::get<DimY>(advection_field_xy_average_centre),
+                    0.);
+
             // Jacobian ill-defined at the O-point, we average the values around the O-point,
             std::size_t ntheta_points = theta_grid.size();
             ddc::parallel_for_each(
                     ExecSpace(),
                     no_rtheta_grid,
                     KOKKOS_LAMBDA(IdxBatch const idx_batch) {
-                        DConstField<IdxRangeBatched, MemorySpace> advection_field_x_proxy
-                                = get_const_field(
-                                        ddcHelper::get<DimX>(advection_field_xy)[idx_batch]);
-                        DConstField<IdxRangeBatched, MemorySpace> advection_field_y_proxy
-                                = get_const_field(
-                                        ddcHelper::get<DimY>(advection_field_xy)[idx_batch]);
+                        IdxR const idx_r(grid_first_ring.front()); // one ring => one r index.
+                        for (IdxTheta const idx_theta : IdxRangeTheta(grid_first_ring)) {
+                            ddcHelper::get<DimX>(advection_field_xy_average_centre)(idx_batch)
+                                    += ddcHelper::get<DimX>(
+                                            advection_field_xy)[idx_batch](idx_r, idx_theta);
+                            ddcHelper::get<DimY>(advection_field_xy_average_centre)(idx_batch)
+                                    += ddcHelper::get<DimY>(
+                                            advection_field_xy)[idx_batch](idx_r, idx_theta);
+                        }
 
-                        CoordXY advection_field_xy_average_on_theta = average_field(
-                                advection_field_x_proxy,
-                                advection_field_y_proxy,
-                                grid_first_ring,
-                                ntheta_points);
-
-                        DTensor<CartesianBasis> advection_field_xy_average_on_theta_tensor(
-                                advection_field_xy_average_on_theta);
-
-                        ddcHelper::assign_vector_field_element(
-                                advection_field_xy_average_centre,
-                                idx_batch,
-                                advection_field_xy_average_on_theta_tensor);
+                        ddcHelper::get<DimX>(advection_field_xy_average_centre)(idx_batch)
+                                /= ntheta_points;
+                        ddcHelper::get<DimY>(advection_field_xy_average_centre)(idx_batch)
+                                /= ntheta_points;
                     });
 
             // and assign the averaged value to all the points at the O-point.
@@ -379,31 +382,5 @@ public:
         Kokkos::Profiling::popRegion();
 
         return allfdistribu;
-    }
-
-
-    /**
-     * @brief Average a field on X and a field on Y defined on (R,Theta) 
-     * and return a coordinate on (X,Y) of the averaged values. 
-     * @param advection_field_x Advection field along X defined on the cross-section (R,Theta).
-     * @param advection_field_y Advection field along Y defined on the cross-section (R,Theta).
-     * @param grid_first_ring Index range containing the IdxR(1) and all the Theta indices, 
-     * @param ntheta_points Number of points on the theta grid. 
-     * @return A coordinate on (X,Y) ccontaining (sum_theta A_x(r, theta), sum_theta A_y(r, theta)).
-     */
-    KOKKOS_INLINE_FUNCTION CoordXY average_field(
-            DConstField<IdxRangeRTheta, MemorySpace> advection_field_x,
-            DConstField<IdxRangeRTheta, MemorySpace> advection_field_y,
-            IdxRangeRTheta grid_first_ring,
-            std::size_t ntheta_points) const
-    {
-        double sum_x = 0;
-        double sum_y = 0;
-        IdxR const idx_r(grid_first_ring.front()); // one ring => one r index.
-        for (IdxTheta const idx_theta : IdxRangeTheta(grid_first_ring)) {
-            sum_x += advection_field_x(idx_r, idx_theta);
-            sum_y += advection_field_y(idx_r, idx_theta);
-        }
-        return 1. / ntheta_points * CoordXY(sum_x, sum_y);
     }
 };
