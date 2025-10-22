@@ -352,10 +352,10 @@ public:
                         for (IdxTheta const idx_theta : IdxRangeTheta(grid_first_ring)) {
                             ddcHelper::get<DimX>(advection_field_xy_average_centre)(idx_batch)
                                     += ddcHelper::get<DimX>(
-                                            advection_field_xy)[idx_batch](idx_r, idx_theta);
+                                            advection_field_xy)(idx_batch, idx_r, idx_theta);
                             ddcHelper::get<DimY>(advection_field_xy_average_centre)(idx_batch)
                                     += ddcHelper::get<DimY>(
-                                            advection_field_xy)[idx_batch](idx_r, idx_theta);
+                                            advection_field_xy)(idx_batch, idx_r, idx_theta);
                         }
 
                         ddcHelper::get<DimX>(advection_field_xy_average_centre)(idx_batch)
