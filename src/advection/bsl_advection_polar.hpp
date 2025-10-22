@@ -295,7 +295,7 @@ public:
                 = m_logical_to_physical_mapping;
 
         // Test if the first points on R correspond to the O-point.
-        bool const first_row_is_o_point = (ddc::coordinate(radial_grid.front()) < 1e-13); 
+        bool const first_row_is_o_point = (ddc::coordinate(radial_grid.front()) < 1e-13);
 
         /*
             If the O-point is not considered as on the grid, we have to be sure that the grid of 
