@@ -107,7 +107,7 @@ if(NOT "${KokkosKernels_FOUND}")
 endif()
 
 
-find_package(DDC 0.5 QUIET COMPONENTS fft pdi splines)
+find_package(DDC 0.7.0 QUIET COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
   add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
