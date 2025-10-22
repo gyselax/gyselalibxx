@@ -127,10 +127,10 @@ jobs:
         run: |
           if [[ "${{ matrix.toolchain}}" == *"openmp"* ]]; then
             echo "Using OpenMP Kokkos"
-            echo "CMAKE_PREFIX_PATH=/opt/openmp" >> $GITHUB_ENV
+            echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/openmp" >> $GITHUB_ENV
           else
             echo "Using serial Kokkos"
-            echo "CMAKE_PREFIX_PATH=/opt/serial" >> $GITHUB_ENV
+            echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/serial" >> $GITHUB_ENV
           fi
         shell: bash
       - name: Build code
