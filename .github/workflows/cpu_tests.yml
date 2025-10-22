@@ -126,14 +126,12 @@ jobs:
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         run: |
           if [[ "${{ matrix.toolchain}}" == *"openmp"* ]]; then
-            dirs=$(find /opt/openmp -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
             echo "Using OpenMP Kokkos"
+            echo "CMAKE_PREFIX_PATH=/opt/openmp" >> $GITHUB_ENV
           else
-            dirs=$(find /opt/serial -name '*.cmake' | xargs dirname | sort -u | paste -sd ':' -)
             echo "Using serial Kokkos"
+            echo "CMAKE_PREFIX_PATH=/opt/serial" >> $GITHUB_ENV
           fi
-          echo "CMAKE_PREFIX_PATH=${dirs}"
-          echo "CMAKE_PREFIX_PATH=${dirs}" >> $GITHUB_ENV
         shell: bash
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
