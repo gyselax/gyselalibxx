@@ -62,9 +62,7 @@ find_package(MPI REQUIRED)
 find_package(paraconf REQUIRED COMPONENTS C)
 
 ## Look for a pre-installed PDI
-if(NOT "${PDI_FOUND}")
-  find_package(PDI REQUIRED COMPONENTS C)
-endif()
+find_package(PDI REQUIRED COMPONENTS C)
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
@@ -109,10 +107,12 @@ if(NOT "${KokkosKernels_FOUND}")
 endif()
 
 
+if(NOT "${DDC_FOUND}")
 find_package(DDC 0.7.0 COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
   add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
+endif()
 endif()
 
 add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
