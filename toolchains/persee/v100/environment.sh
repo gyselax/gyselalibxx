@@ -11,12 +11,10 @@ if command -v spack >/dev/null 2>&1
 then
     spack env deactivate
 else
-    . /data/gyselarunner/spack-0.23.0/share/spack/setup-env.sh
+    . /data/gyselarunner/spack-0.23.1/share/spack/setup-env.sh
 fi
 
-spack load gcc@12
 spack env activate gyselalibxx-env-omp-cuda
 export OMP_PROC_BIND=spread
 export OMP_PLACES=threads
 export OMP_NUM_THREADS=8
-

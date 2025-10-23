@@ -11,12 +11,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add getters to `DerivField` types to access the associated index ranges.
+- Add H100 Jean-Zay toolchain.
+- Add an `operator()` in `BslAdvectionPolar` to advect a function with an advection field along `<R, Theta>`.
+The operator averages the values of the advection field on the first ring to get its value at the O-point.
+
 ### Fixed
+
+- Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
 
 ### Changed
 
 - Use patched recipes for the CPU Spack toolchain.
 - Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
+- Update and reorganize the Persee toolchains.
+- Add pdiplugin-pycall to Persee toolchains.
+- Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
+- Allow a local installation of Kokkos > v4.4.1 to be used by CMake.
 
 ### Deprecated
 
