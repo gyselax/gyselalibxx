@@ -43,7 +43,7 @@ public:
     MaxwellianEquilibrium(MaxwellianEquilibrium&&) = default;
 
     /**
-     * @brief Move-copy a MaxwellianEquilibrium.
+     * @brief Move-assignment a MaxwellianEquilibrium.
      */
     MaxwellianEquilibrium& operator=(MaxwellianEquilibrium&&) = default;
 

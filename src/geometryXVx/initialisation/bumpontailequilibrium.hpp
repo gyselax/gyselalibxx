@@ -66,7 +66,7 @@ public:
     BumpontailEquilibrium(BumpontailEquilibrium&&) = default;
 
     /**
-     * @brief Move-copy a BumpontailEquilibrium.
+     * @brief Move-assignment a BumpontailEquilibrium.
      */
     BumpontailEquilibrium& operator=(BumpontailEquilibrium&&) = default;
 
