@@ -669,12 +669,12 @@ private:
             using TargetMapping = typename PatchLocator::
                     template get_mapping_on_logical_dim_t<TargetDim1, TargetDim2>;
 
-            static_assert(has_o_point_v<CurrentMapping>);
+            static_assert(is_coord_transform_with_o_point_v<CurrentMapping>);
             static_assert((std::is_same_v<
                            Coord<typename CurrentMapping::curvilinear_tag_r,
                                  typename CurrentMapping::curvilinear_tag_theta>,
                            Coord<CurrentDim1, CurrentDim2>>));
-            static_assert(has_o_point_v<TargetMapping>);
+            static_assert(is_coord_transform_with_o_point_v<TargetMapping>);
             static_assert((std::is_same_v<
                            Coord<typename TargetMapping::curvilinear_tag_r,
                                  typename TargetMapping::curvilinear_tag_theta>,

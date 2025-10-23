@@ -248,7 +248,7 @@ static constexpr bool has_inv_jacobian_v
 
 /// Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point.
 template <class Mapping>
-static constexpr bool has_o_point_v
+static constexpr bool is_coord_transform_with_o_point_v
         = mapping_detail::HasOPoint<std::remove_const_t<std::remove_reference_t<Mapping>>>::value;
 
 template <class Mapping>
