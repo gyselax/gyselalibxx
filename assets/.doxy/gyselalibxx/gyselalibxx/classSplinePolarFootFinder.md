@@ -39,6 +39,7 @@ Inherits the following classes: [IPolarFootFinder](classIPolarFootFinder.md)
 | typedef Field&lt; CoordRTheta, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**CFieldFeet**](#typedef-cfieldfeet)  <br>_The type of a field of (r, theta) coordinates at every grid point, saved on a compatible memory space._  |
 | typedef [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**DVectorConstFieldAdvection**](#typedef-dvectorconstfieldadvection)  <br>_The type of a constant vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._  |
 | typedef [**DVectorField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), PseudoCartesianBasis, [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; | [**DVectorFieldAdvection**](#typedef-dvectorfieldadvection)  <br>_The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._  |
+| typedef typename SplineRThetaBuilderAdvection::exec\_space | [**ExecSpace**](#typedef-execspace)  <br>_Execution space._  |
 | typedef GridRadial | [**GridR**](#typedef-gridr)  <br>_The continuous radial dimension._  |
 | typedef GridPoloidal | [**GridTheta**](#typedef-gridtheta)  <br>_The continuous poloidal dimension._  |
 | typedef IdxRangeBatched | [**IdxRangeOperator**](#typedef-idxrangeoperator)  <br>_The type of the index range over which the operator works._  |
@@ -257,6 +258,20 @@ using SplinePolarFootFinder< IdxRangeBatched, TimeStepperBuilder, LogicalToPhysi
 _The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space._ 
 ```C++
 using SplinePolarFootFinder< IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection >::DVectorFieldAdvection =  DVectorField<IdxRangeOperator, PseudoCartesianBasis, memory_space>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef ExecSpace 
+
+_Execution space._ 
+```C++
+using SplinePolarFootFinder< IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection >::ExecSpace =  typename SplineRThetaBuilderAdvection::exec_space;
 ```
 
 

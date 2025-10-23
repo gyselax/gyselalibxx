@@ -582,6 +582,10 @@
 <td style="text-align: left;"><a href="#typedef-dvectorfieldadvection"><strong>DVectorFieldAdvection</strong></a>  <br><em>The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef typename SplineRThetaBuilderAdvection::exec_space</td>
+<td style="text-align: left;"><a href="#typedef-execspace"><strong>ExecSpace</strong></a>  <br><em>Execution space.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef GridRadial</td>
 <td style="text-align: left;"><a href="#typedef-gridr"><strong>GridR</strong></a>  <br><em>The continuous radial dimension.</em></td>
 </tr>
@@ -748,6 +752,12 @@
 <h3 id="typedef-dvectorfieldadvection">typedef DVectorFieldAdvection</h3>
 <p><em>The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space.</em> </p>
 <pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::DVectorFieldAdvection =  DVectorField&lt;IdxRangeOperator, PseudoCartesianBasis, memory_space&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-execspace">typedef ExecSpace</h3>
+<p><em>Execution space.</em> </p>
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::ExecSpace =  typename SplineRThetaBuilderAdvection::exec_space;
 </code></pre>
 <hr>
 

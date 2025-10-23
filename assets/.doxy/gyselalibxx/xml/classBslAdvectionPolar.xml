@@ -43,6 +43,34 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1a1b8bb7832a8ec58a6339579d41b7f8ce" prot="private" static="no">
+        <type>typename LogicalToPhysicalMapping::cartesian_tag_x</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::DimX =  typename LogicalToPhysicalMapping::cartesian_tag_x</definition>
+        <argsstring></argsstring>
+        <name>DimX</name>
+        <qualifiedname>BslAdvectionPolar::DimX</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1ac717ae01cc97cf420de3cfd3df7280b0" prot="private" static="no">
+        <type>typename LogicalToPhysicalMapping::cartesian_tag_y</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::DimY =  typename LogicalToPhysicalMapping::cartesian_tag_y</definition>
+        <argsstring></argsstring>
+        <name>DimY</name>
+        <qualifiedname>BslAdvectionPolar::DimY</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1ae34d09846bd6fa86764925f5d3f55d54" prot="private" static="no">
         <type>typename LogicalToPhysicalMapping::CoordArg</type>
         <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::CoordRTheta =  typename LogicalToPhysicalMapping::CoordArg</definition>
@@ -55,7 +83,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a0f2d6b1983c5f363f87ff13d2019f411" prot="private" static="no">
         <type>typename LogicalToPhysicalMapping::CoordResult</type>
@@ -69,7 +97,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a739c5c224b11f13194450b14c2b28095" prot="private" static="no">
         <type>ddc::to_type_seq_t&lt; CoordXY &gt;</type>
@@ -83,7 +111,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a24b60685b958ef25d0f92067db2f6922" prot="private" static="no">
         <type>ddc::to_type_seq_t&lt; CoordRTheta &gt;</type>
@@ -97,7 +125,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="63" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a136951bfcd3568bdb8e0fd21d5d832bd" prot="private" static="no">
         <type>typename FootFinder::IdxRangeOperator</type>
@@ -111,7 +139,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="65" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a3646781b6749c4c31150aa4edd9d2f3b" prot="private" static="no">
         <type>find_grid_t&lt; <ref refid="structR" kindref="compound">R</ref>, ddc::to_type_seq_t&lt; IdxRangeBatched &gt; &gt;</type>
@@ -125,7 +153,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="67" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="70" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a8a85ec6c6224b7cdec2312022feb315f" prot="private" static="no">
         <type>find_grid_t&lt; <ref refid="structTheta" kindref="compound">Theta</ref>, ddc::to_type_seq_t&lt; IdxRangeBatched &gt; &gt;</type>
@@ -139,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="68" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a762c97833b975daf18f51645dd5faffe" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -153,7 +181,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="70" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1af46c74c3d67efe053962060b8c69e0ad" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref> &gt;</type>
@@ -167,7 +195,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="71" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a2a1417b460e3cd255519f322ad3e7252" prot="private" static="no">
         <type>IdxRange&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
@@ -181,7 +209,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="72" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1a84646b21e104ce3e1c7719720aa018a4" prot="private" static="no">
+        <type>ddc::remove_dims_of_t&lt; IdxRangeBatched, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeBatched, GridR, GridTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeBatch</name>
+        <qualifiedname>BslAdvectionPolar::IdxRangeBatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1aa76d1a0189fd247de9d99f54c3ac2e09" prot="private" static="no">
         <type>typename IdxRangeRTheta::discrete_element_type</type>
@@ -195,7 +237,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="74" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1a903eb07c346cb96199017eb10b40e5f4" prot="private" static="no">
+        <type>Idx&lt; <ref refid="structGridR" kindref="compound">GridR</ref> &gt;</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::IdxR =  Idx&lt;GridR&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxR</name>
+        <qualifiedname>BslAdvectionPolar::IdxR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1a573ee27d472bb9b3a96a192fc4c4c064" prot="private" static="no">
+        <type>Idx&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::IdxTheta =  Idx&lt;GridTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxTheta</name>
+        <qualifiedname>BslAdvectionPolar::IdxTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a54cea6adea8d51a1d805378991bc3e16" prot="private" static="no">
         <type>typename IdxRangeBatched::discrete_element_type</type>
@@ -209,7 +279,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="75" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1acbe3df827807a8e47fdcdec6fac296c4" prot="private" static="no">
+        <type>typename IdxRangeBatch::discrete_element_type</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::IdxBatch =  typename IdxRangeBatch::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxBatch</name>
+        <qualifiedname>BslAdvectionPolar::IdxBatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a47056fd5e3aa02293b61968b51bca9f7" prot="private" static="no">
         <type>typename IdxRangeR::discrete_vector_type</type>
@@ -223,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="76" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1ad6a4f116e593ed9f9bd81082e0fa621a" prot="private" static="no">
         <type>typename FootFinder::memory_space</type>
@@ -237,7 +321,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="78" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1ad7fa6cc90e155f07853c1e129880b55f" prot="private" static="no">
+        <type>typename FootFinder::ExecSpace</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::ExecSpace =  typename FootFinder::ExecSpace</definition>
+        <argsstring></argsstring>
+        <name>ExecSpace</name>
+        <qualifiedname>BslAdvectionPolar::ExecSpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="86" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1ac9b81b38809973d2e89d604cb21b5310" prot="private" static="no">
         <type>DField&lt; IdxRangeBatched, MemorySpace &gt;</type>
@@ -251,7 +349,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="80" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a7ab43aed4c153c73e51a548a144b42a8" prot="private" static="no">
         <type>FieldMem&lt; CoordRTheta, IdxRangeBatched, MemorySpace &gt;</type>
@@ -265,7 +363,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="82" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="90" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a06d76696646bf5ed7586bdd95a1e1297" prot="private" static="no">
         <type>Field&lt; CoordRTheta, IdxRangeBatched, MemorySpace &gt;</type>
@@ -279,7 +377,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="84" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="84" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1aba400805ed92dc7ad973d0db45c6bb75" prot="private" static="no">
         <type><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMem</ref>&lt; IdxRangeBatched, CartesianBasis, MemorySpace &gt;</type>
@@ -293,7 +391,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="87" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a966e2600524916f7f41924706e9ef4fc" prot="private" static="no">
         <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRangeBatched, CartesianBasis, MemorySpace &gt;</type>
@@ -307,7 +405,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="88" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="96" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="96" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a5fac2a6880bf2666d539e0135d9a6e46" prot="private" static="no">
         <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRangeBatched, CartesianBasis, MemorySpace &gt;</type>
@@ -321,7 +419,35 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="90" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1abde049bc1872eb7f37887b9ba67b20dc" prot="private" static="no">
+        <type><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMem</ref>&lt; IdxRangeBatch, CartesianBasis, MemorySpace &gt;</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::DVectorFieldMemAdvectionXYOnBatch =  DVectorFieldMem&lt;IdxRangeBatch, CartesianBasis, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>DVectorFieldMemAdvectionXYOnBatch</name>
+        <qualifiedname>BslAdvectionPolar::DVectorFieldMemAdvectionXYOnBatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionPolar_1a69950ccecfbb76089382c2a3c397aaaa" prot="private" static="no">
+        <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRangeBatch, CartesianBasis, MemorySpace &gt;</type>
+        <definition>using BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::DVectorFieldAdvectionXYOnBatch =  DVectorField&lt;IdxRangeBatch, CartesianBasis, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>DVectorFieldAdvectionXYOnBatch</name>
+        <qualifiedname>BslAdvectionPolar::DVectorFieldAdvectionXYOnBatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1ab81ba58436a9567fa1f05837bd977c88" prot="private" static="no">
         <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRangeBatched, CurvilinearBasis, MemorySpace &gt;</type>
@@ -335,7 +461,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="93" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="105" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionPolar_1a3bba4e83debefba3cdaa9b9eaa1a545f" prot="private" static="no">
         <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRangeBatched, CurvilinearBasis, MemorySpace &gt;</type>
@@ -349,7 +475,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="95" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="107" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -365,7 +491,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="98" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="98" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="110" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBslAdvectionPolar_1a93a597e7d830a4b636ad1db876331195" prot="private" static="no" mutable="no">
         <type>FootFinder const  &amp;</type>
@@ -379,7 +505,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="100" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="100" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="112" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="112" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBslAdvectionPolar_1ae165fe6bd52b82217432a30facb82506" prot="private" static="no" mutable="no">
         <type>LogicalToPhysicalMapping const  &amp;</type>
@@ -393,7 +519,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="102" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="102" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="114" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="114" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -457,7 +583,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="121" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="121" bodyend="129"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="133" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="133" bodyend="141"/>
       </memberdef>
       <memberdef kind="function" id="classBslAdvectionPolar_1a9f3a90bfd31ebaea3fc8ad430015406f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -471,7 +597,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="131" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="143" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classBslAdvectionPolar_1a940115dbfb510bf5addadc2504a5ef90" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>DFieldFDistribu</type>
@@ -492,7 +618,7 @@
           <declname>dt</declname>
         </param>
         <briefdescription>
-<para>Allocate a Field of the advected function. </para>
+<para>Advect a function over a time step dt with the given advection field along the physical directions. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -526,7 +652,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="147" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="147" bodyend="174"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="160" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="160" bodyend="187"/>
       </memberdef>
       <memberdef kind="function" id="classBslAdvectionPolar_1a9b6adb162851ad7a823eef10716eab07" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>DFieldFDistribu</type>
@@ -551,10 +677,12 @@
           <declname>dt</declname>
         </param>
         <briefdescription>
-<para>Allocate a Field to the advected function. </para>
+<para>Advect a function over a time step dt with the given advection field along the logical directions and physical directions for the O-point. </para>
         </briefdescription>
         <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
+<para><simplesect kind="warning"><para>This operator should be applied if the O-point corresponds to points of the grid.</para>
+</simplesect>
+<parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">allfdistribu</parametername>
 </parameternamelist>
@@ -593,7 +721,63 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="194" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="194" bodyend="251"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="211" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="211" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslAdvectionPolar_1a52f2664379eeb2d3a47ea93fbfb9238e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>DFieldFDistribu</type>
+        <definition>DFieldFDistribu BslAdvectionPolar&lt; FootFinder, LogicalToPhysicalMapping, InterpolatorPolar &gt;::operator()</definition>
+        <argsstring>(DFieldFDistribu allfdistribu, DVectorConstFieldAdvectionRTheta advection_field_rtheta, double dt) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>BslAdvectionPolar::operator()</qualifiedname>
+        <param>
+          <type>DFieldFDistribu</type>
+          <declname>allfdistribu</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstFieldAdvectionRTheta</ref></type>
+          <declname>advection_field_rtheta</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Advect a function over a time step dt with the given advection field along the logical directions. It builds the advection field along the physical directions at the O-point though averaged values on the first ring. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The value at the O-point of the given advection field is not used here. We compute the advection field on the physical axis at the O-point by averaging its values at the next interpolation point along r.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">allfdistribu</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field containing the values of the function we want to advect. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_field_rtheta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A field of vectors defined on the Curvilinear basis containing the values of the advection field at each point on the logical grid. It is expressed on the contravariant basis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A time step used.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A Field to allfdistribu advected on the time step given. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="283" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="283" bodyend="371"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -613,7 +797,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="55" bodyend="252"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="55" bodyend="372"/>
     <listofallmembers>
       <member refid="classBslAdvectionPolar_1abe7f0ff58d6edbc35e60f37a9600d10c" prot="public" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>BslAdvectionPolar</name></member>
       <member refid="classBslAdvectionPolar_1a739c5c224b11f13194450b14c2b28095" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>CartesianBasis</name></member>
@@ -623,26 +807,36 @@
       <member refid="classBslAdvectionPolar_1a0f2d6b1983c5f363f87ff13d2019f411" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>CoordXY</name></member>
       <member refid="classBslAdvectionPolar_1a24b60685b958ef25d0f92067db2f6922" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>CurvilinearBasis</name></member>
       <member refid="classBslAdvectionPolar_1ac9b81b38809973d2e89d604cb21b5310" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DFieldFDistribu</name></member>
+      <member refid="classBslAdvectionPolar_1a1b8bb7832a8ec58a6339579d41b7f8ce" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DimX</name></member>
+      <member refid="classBslAdvectionPolar_1ac717ae01cc97cf420de3cfd3df7280b0" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DimY</name></member>
       <member refid="classBslAdvectionPolar_1a3bba4e83debefba3cdaa9b9eaa1a545f" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DVectorConstFieldAdvectionRTheta</name></member>
       <member refid="classBslAdvectionPolar_1a5fac2a6880bf2666d539e0135d9a6e46" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DVectorConstFieldAdvectionXY</name></member>
       <member refid="classBslAdvectionPolar_1ab81ba58436a9567fa1f05837bd977c88" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DVectorFieldAdvectionRTheta</name></member>
       <member refid="classBslAdvectionPolar_1a966e2600524916f7f41924706e9ef4fc" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DVectorFieldAdvectionXY</name></member>
+      <member refid="classBslAdvectionPolar_1a69950ccecfbb76089382c2a3c397aaaa" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DVectorFieldAdvectionXYOnBatch</name></member>
       <member refid="classBslAdvectionPolar_1aba400805ed92dc7ad973d0db45c6bb75" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DVectorFieldMemAdvectionXY</name></member>
+      <member refid="classBslAdvectionPolar_1abde049bc1872eb7f37887b9ba67b20dc" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>DVectorFieldMemAdvectionXYOnBatch</name></member>
+      <member refid="classBslAdvectionPolar_1ad7fa6cc90e155f07853c1e129880b55f" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>ExecSpace</name></member>
       <member refid="classBslAdvectionPolar_1a3646781b6749c4c31150aa4edd9d2f3b" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>GridR</name></member>
       <member refid="classBslAdvectionPolar_1a8a85ec6c6224b7cdec2312022feb315f" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>GridTheta</name></member>
+      <member refid="classBslAdvectionPolar_1acbe3df827807a8e47fdcdec6fac296c4" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxBatch</name></member>
       <member refid="classBslAdvectionPolar_1a54cea6adea8d51a1d805378991bc3e16" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxBatched</name></member>
+      <member refid="classBslAdvectionPolar_1a903eb07c346cb96199017eb10b40e5f4" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxR</name></member>
+      <member refid="classBslAdvectionPolar_1a84646b21e104ce3e1c7719720aa018a4" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxRangeBatch</name></member>
       <member refid="classBslAdvectionPolar_1a136951bfcd3568bdb8e0fd21d5d832bd" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxRangeBatched</name></member>
       <member refid="classBslAdvectionPolar_1af46c74c3d67efe053962060b8c69e0ad" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxRangeR</name></member>
       <member refid="classBslAdvectionPolar_1a762c97833b975daf18f51645dd5faffe" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxRangeRTheta</name></member>
       <member refid="classBslAdvectionPolar_1a2a1417b460e3cd255519f322ad3e7252" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxRangeTheta</name></member>
       <member refid="classBslAdvectionPolar_1aa76d1a0189fd247de9d99f54c3ac2e09" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxRTheta</name></member>
       <member refid="classBslAdvectionPolar_1a47056fd5e3aa02293b61968b51bca9f7" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxStepR</name></member>
+      <member refid="classBslAdvectionPolar_1a573ee27d472bb9b3a96a192fc4c4c064" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>IdxTheta</name></member>
       <member refid="classBslAdvectionPolar_1a93a597e7d830a4b636ad1db876331195" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>m_find_feet</name></member>
       <member refid="classBslAdvectionPolar_1ad3a1018cf3f0184967f4e88dc5ba1954" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>m_interpolator</name></member>
       <member refid="classBslAdvectionPolar_1ae165fe6bd52b82217432a30facb82506" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>m_logical_to_physical_mapping</name></member>
       <member refid="classBslAdvectionPolar_1ad6a4f116e593ed9f9bd81082e0fa621a" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>MemorySpace</name></member>
       <member refid="classBslAdvectionPolar_1a940115dbfb510bf5addadc2504a5ef90" prot="public" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>operator()</name></member>
       <member refid="classBslAdvectionPolar_1a9b6adb162851ad7a823eef10716eab07" prot="public" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>operator()</name></member>
+      <member refid="classBslAdvectionPolar_1a52f2664379eeb2d3a47ea93fbfb9238e" prot="public" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>operator()</name></member>
       <member refid="classBslAdvectionPolar_1a2154c15f9649423dac0af9a62f6e483f" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>R</name></member>
       <member refid="classBslAdvectionPolar_1a0bfde516cc6679958fdedab3d7536e1f" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>Theta</name></member>
       <member refid="classBslAdvectionPolar_1a9f3a90bfd31ebaea3fc8ad430015406f" prot="public" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>~BslAdvectionPolar</name></member>

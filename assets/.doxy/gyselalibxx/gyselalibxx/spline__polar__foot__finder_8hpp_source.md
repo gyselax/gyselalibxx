@@ -102,8 +102,10 @@ public:
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
-private:
+public:
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
+
+private:
     using MemSpace = typename ExecSpace::memory_space;
     using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;

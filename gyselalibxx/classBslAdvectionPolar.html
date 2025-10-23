@@ -570,11 +570,15 @@
 </tr>
 <tr>
 <td style="text-align: right;">DFieldFDistribu</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldFDistribu allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldAdvectionXY</strong></a> advection_field_xy, double dt) const<br><em>Allocate a Field of the advected function.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldFDistribu allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldAdvectionXY</strong></a> advection_field_xy, double dt) const<br><em>Advect a function over a time step dt with the given advection field along the physical directions.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">DFieldFDistribu</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DFieldFDistribu allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldAdvectionRTheta</strong></a> advection_field_rtheta, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; CartesianBasis &gt; const &amp; advection_field_xy_centre, double dt) const<br><em>Allocate a Field to the advected function.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (DFieldFDistribu allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldAdvectionRTheta</strong></a> advection_field_rtheta, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; CartesianBasis &gt; const &amp; advection_field_xy_centre, double dt) const<br><em>Advect a function over a time step dt with the given advection field along the logical directions and physical directions for the O-point.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">DFieldFDistribu</td>
+<td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (DFieldFDistribu allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldAdvectionRTheta</strong></a> advection_field_rtheta, double dt) const<br><em>Advect a function over a time step dt with the given advection field along the logical directions. It builds the advection field along the physical directions at the O-point though averaged values on the first ring.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -618,7 +622,7 @@
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
-<p><em>Allocate a Field of the advected function.</em> </p>
+<p><em>Advect a function over a time step dt with the given advection field along the physical directions.</em> </p>
 <pre><code class="language-C++">inline DFieldFDistribu BslAdvectionPolar::operator() (
     DFieldFDistribu allfdistribu,
     DVectorConstFieldAdvectionXY advection_field_xy,
@@ -636,7 +640,7 @@
 <hr>
 
 <h3 id="function-operator_1">function operator()</h3>
-<p><em>Allocate a Field to the advected function.</em> </p>
+<p><em>Advect a function over a time step dt with the given advection field along the logical directions and physical directions for the O-point.</em> </p>
 <pre><code class="language-C++">inline DFieldFDistribu BslAdvectionPolar::operator() (
     DFieldFDistribu allfdistribu,
     DVectorConstFieldAdvectionRTheta advection_field_rtheta,
@@ -644,11 +648,32 @@
     double dt
 ) const
 </code></pre>
+<p><strong>Warning:</strong></p>
+<p>This operator should be applied if the O-point corresponds to points of the grid.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>allfdistribu</code> A Field containing the values of the function we want to advect. </li>
 <li><code>advection_field_rtheta</code> A field of vectors defined on the Curvilinear basis containing the values of the advection field at each point on the logical grid. It is expressed on the contravariant basis. </li>
 <li><code>advection_field_xy_centre</code> A vector in the Cartesian basis, containing the value of the advection field at the O-point. </li>
+<li><code>dt</code> A time step used.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A Field to allfdistribu advected on the time step given. </p>
+<hr>
+
+<h3 id="function-operator_2">function operator()</h3>
+<p><em>Advect a function over a time step dt with the given advection field along the logical directions. It builds the advection field along the physical directions at the O-point though averaged values on the first ring.</em> </p>
+<pre><code class="language-C++">inline DFieldFDistribu BslAdvectionPolar::operator() (
+    DFieldFDistribu allfdistribu,
+    DVectorConstFieldAdvectionRTheta advection_field_rtheta,
+    double dt
+) const
+</code></pre>
+<p>The value at the O-point of the given advection field is not used here. We compute the advection field on the physical axis at the O-point by averaging its values at the next interpolation point along r.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>allfdistribu</code> A Field containing the values of the function we want to advect. </li>
+<li><code>advection_field_rtheta</code> A field of vectors defined on the Curvilinear basis containing the values of the advection field at each point on the logical grid. It is expressed on the contravariant basis. </li>
 <li><code>dt</code> A time step used.</li>
 </ul>
 <p><strong>Returns:</strong></p>
