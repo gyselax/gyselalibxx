@@ -109,12 +109,10 @@ if(NOT "${KokkosKernels_FOUND}")
 endif()
 
 
+find_package(DDC 0.7.0 COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")
-  find_package(DDC 0.7.0 COMPONENTS fft pdi splines)
-  if(NOT "${DDC_FOUND}")
-    ## Use the discrete domain computation library (ddc) from `vendor/`
-    add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
-  endif()
+  ## Use the discrete domain computation library (ddc) from `vendor/`
+  add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
 endif()
 
 add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
