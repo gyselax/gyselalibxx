@@ -83,7 +83,7 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
 endif()
 
 set(koliop_BUILD_TESTING OFF CACHE BOOL "")
-find_package(Kokkos 4.4.1...<5 QUIET)
+find_package(Kokkos 4.4.1...<5)
 set(koliop_ENABLE_Kokkos        "SYSTEM" CACHE STRING "")
 if(NOT "${Kokkos_FOUND}")
   ## Use Kokkos from `vendor/`
@@ -95,7 +95,7 @@ if(NOT "${Kokkos_FOUND}")
   set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
 endif()
 
-find_package(KokkosKernels 4.5.1...<5 QUIET)
+find_package(KokkosKernels 4.5.1...<5)
 set(koliop_ENABLE_KokkosKernels "SYSTEM" CACHE STRING "")
 if(NOT "${KokkosKernels_FOUND}")
   # NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
@@ -107,7 +107,8 @@ if(NOT "${KokkosKernels_FOUND}")
 endif()
 
 
-find_package(DDC 0.7.0 QUIET COMPONENTS fft pdi splines)
+find_package(DDC 0.7.0 COMPONENTS fft pdi splines)
+message(STATUS "DDC Found : ${DDC_FOUND}")
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
   add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
