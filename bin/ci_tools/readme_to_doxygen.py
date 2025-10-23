@@ -58,7 +58,7 @@ def get_code_blocks(line):
     n_code_tags //= 2
     return [(code_tags[2*i], code_tags[2*i+1]) for i in range(n_code_tags)]
 
-def format_equations(line, start_tag, end_tag, start_replace, end_replace, contents = None, idx = None):
+def format_equations(line, start_tag, end_tag, start_replace, end_replace, *, contents = None, idx = None):
     """
     Format equations with Doxygen style.
 
@@ -101,14 +101,12 @@ def format_equations(line, start_tag, end_tag, start_replace, end_replace, conte
     """
     code_blocks = get_code_blocks(line)
     start_match = start_tag.search(line)
-    if contents:
-        n = len(contents)
+    n = len(contents) if contents else 0
 
     while start_match:
         if not any(start < start_match.start() < end for start, end in code_blocks):
             end_match = end_tag.search(line, start_match.end())
-            if end_match is None:
-                assert contents is not None
+            assert contents is not None or end_match is not None
 
             while end_match is None and idx < n-1:
                 idx += 1
@@ -192,7 +190,8 @@ if __name__ == '__main__':
                 # Replace inline math with Doxygen tag
                 line, _ = format_equations(line, single_math_start_tag, single_math_end_tag, "@f$", "@f$")
                 line, _ = format_equations(line, single_math_tag, single_math_tag, "@f$", "@f$")
-                line, line_index = format_equations(line, multiline_math_tag, multiline_math_tag, "@f[", "@f]", contents, line_index)
+                line, line_index = format_equations(line, multiline_math_tag, multiline_math_tag, "@f[", "@f]",
+                                                    contents=contents, idx=line_index)
 
                 # Look for references
                 match_found = reference_tag.search(line)
