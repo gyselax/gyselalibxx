@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add getters to `DerivField` types to access the associated index ranges.
 - Add H100 Jean-Zay toolchain.
+- Add an `operator()` in `BslAdvectionPolar` to advect a function with an advection field along `<R, Theta>`.
+The operator averages the values of the advection field on the first ring to get its value at the O-point.
 
 ### Fixed
 
