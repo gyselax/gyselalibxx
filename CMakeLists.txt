@@ -62,7 +62,9 @@ find_package(MPI REQUIRED)
 find_package(paraconf REQUIRED COMPONENTS C)
 
 ## Look for a pre-installed PDI
-find_package(PDI REQUIRED COMPONENTS C)
+if(NOT "${PDI_FOUND}")
+  find_package(PDI REQUIRED COMPONENTS C)
+endif()
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
