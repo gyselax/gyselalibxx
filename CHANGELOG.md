@@ -27,6 +27,7 @@ The operator averages the values of the advection field on the first ring to get
 - Update and reorganize the Persee toolchains.
 - Add pdiplugin-pycall to Persee toolchains.
 - Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
+- Allow a local installation of Kokkos > v4.4.1 to be used by CMake.
 
 ### Deprecated
 
