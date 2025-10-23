@@ -62,7 +62,7 @@ indentation:
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
-    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_STRATEGY: normal
   script: |
     ./bin/indent -td
 
@@ -74,7 +74,7 @@ python_best_practices:
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
-    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_STRATEGY: normal
   before_script:
     export PYTHONPATH="./post-process/PythonScripts"
   script: |
@@ -99,7 +99,7 @@ public_mirror:
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
-    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_STRATEGY: normal
   script: ./bin/public_mirror
 
 documentation:
@@ -149,7 +149,7 @@ markdown_equations:
   needs: []
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
-    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_STRATEGY: normal
   script: |
     MARKDOWN_FILES=$(find . -name "*.md" -not -path "./vendor/*")
     echo $MARKDOWN_FILES
@@ -165,7 +165,7 @@ cppcheck_static_analysis:
   needs: [ setup_env_mr ]
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
-    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_STRATEGY: normal
   script: |
     set +e
     python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
@@ -179,7 +179,7 @@ cmake_static_analysis:
   needs: [ setup_env_mr ]
   image: ghcr.io/gyselax/gyselalibxx_env
   variables:
-    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_STRATEGY: normal
   script: |
     python3 bin/ci_tools/cmake_checker.py
 
