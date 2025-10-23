@@ -62,7 +62,7 @@ find_package(MPI REQUIRED)
 find_package(paraconf REQUIRED COMPONENTS C)
 
 ## Look for a pre-installed PDI
-find_package(PDI REQUIRED COMPONENTS C)
+find_package(PDI REQUIRED COMPONENTS C GLOBAL)
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
@@ -83,7 +83,7 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
 endif()
 
 set(koliop_BUILD_TESTING OFF CACHE BOOL "")
-find_package(Kokkos 4.4.1...<5)
+find_package(Kokkos 4.4.1...<5 GLOBAL)
 set(koliop_ENABLE_Kokkos        "SYSTEM" CACHE STRING "")
 if(NOT "${Kokkos_FOUND}")
   ## Use Kokkos from `vendor/`
@@ -95,7 +95,7 @@ if(NOT "${Kokkos_FOUND}")
   set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
 endif()
 
-find_package(KokkosKernels 4.5.1...<5)
+find_package(KokkosKernels 4.5.1...<5 GLOBAL)
 set(koliop_ENABLE_KokkosKernels "SYSTEM" CACHE STRING "")
 if(NOT "${KokkosKernels_FOUND}")
   # NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
@@ -107,12 +107,10 @@ if(NOT "${KokkosKernels_FOUND}")
 endif()
 
 
-if(NOT "${DDC_FOUND}")
-find_package(DDC 0.7.0 COMPONENTS fft pdi splines)
+find_package(DDC 0.7.0 COMPONENTS fft pdi splines GLOBAL)
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
   add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
-endif()
 endif()
 
 add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
