@@ -11,13 +11,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add getters to `DerivField` types to access the associated index ranges.
+- Add H100 Jean-Zay toolchain.
+- Add an `operator()` in `BslAdvectionPolar` to advect a function with an advection field along `<R, Theta>`.
+The operator averages the values of the advection field on the first ring to get its value at the O-point.
 - Added `IEquilibrium::init_from_input` method to choose XVx equililibrium in input file.
 
 ### Fixed
 
+- Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
+
 ### Changed
 
 - Use patched recipes for the CPU Spack toolchain.
+- Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
+- Update and reorganize the Persee toolchains.
+- Add pdiplugin-pycall to Persee toolchains.
+- Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
+- Allow a local installation of Kokkos > v4.4.1 to be used by CMake.
 - Combine `landau_fft` and `bumpontail_fft` executables into a `xvx_fft` executable.
 - Combine `landau_fem_uniform` and `bumpontail_fem_uniform` executables into a `xvx_fem_uniform` executable.
 - Make the choice of equililibrium an input parameter for `xvx` executables.
@@ -73,6 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change constructor argument of `PoissonLikeRHSFunction` from the (r, theta) geometry to pass spline coefficients on GPU.
 - Use Spack to install the Kokkos ecosystem in the MI250 Adastra toolchain.
 - Use Spack to install the Kokkos ecosystem in the GENOA Adastra toolchain.
+- Use a single rocm stack on Adastra.
 
 ### Deprecated
 

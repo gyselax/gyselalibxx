@@ -13,7 +13,7 @@ import yaml
 
 SimulationResults = namedtuple('SimulationResults', ('name', 'l_inf_error', 'l_2_error'))
 
-def set_input(rmin_def, rmax_def, Nr_def, Nth_def, dt_def, T_def, curves_def=False, feet_def=False):
+def set_input(rmin_def, rmax_def, Nr_def, Nth_def, dt_def, T_def, *, curves_def=False, feet_def=False):
     """
     Use the argparse package to fill in the params.yaml input parameters file.
     Possibility to change the values of the input parameters in the commande line.

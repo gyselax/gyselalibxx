@@ -7,7 +7,7 @@
 #include "edge.hpp"
 
 /**
- * @brief Represent a simple sticking of two edges.
+ * @brief Represent a simple interface where two edges intersect.
  * 
  * @tparam Edge1Type Edge type defined on first patch.
  * @tparam Edge2Type Edge type defined on second patch.

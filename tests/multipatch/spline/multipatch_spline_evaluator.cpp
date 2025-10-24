@@ -151,7 +151,7 @@ void test_operator_assignment(
                 } else {
                     expected_function = single_evaluator_2(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
                 err = 0;
             },
             Kokkos::Max<double>(max_error));
@@ -182,7 +182,7 @@ void test_deriv_dim_1(
                     expected_function
                             = single_evaluator_2.deriv_dim_1(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
     EXPECT_LE(max_error, 1e-15);
@@ -211,7 +211,7 @@ void test_deriv_dim_2(
                     expected_function
                             = single_evaluator_2.deriv_dim_2(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
     EXPECT_LE(max_error, 1e-15);
@@ -240,7 +240,7 @@ void test_deriv_1_and_2(
                     expected_function
                             = single_evaluator_2.deriv_1_and_2(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
     EXPECT_LE(max_error, 1e-15);
@@ -270,7 +270,7 @@ void test_deriv(
                     expected_function
                             = single_evaluator_2.deriv<InterestDim>(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
     EXPECT_LE(max_error, 1e-15);

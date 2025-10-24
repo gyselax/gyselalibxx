@@ -47,10 +47,17 @@ setup_env_mr:
   stage: test
   timeout: 2 hours
   variables:
-    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_STRATEGY: normal
   script: |
     set -x
     git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
+    if [[ "${{ matrix.toolchain}}" == *"openmp"* ]]; then
+      export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/openmp
+      echo "Using OpenMP Kokkos"
+    else
+      export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/serial
+      echo "Using serial Kokkos"
+    fi
     rm -rf build || true
     mkdir build
     cd build

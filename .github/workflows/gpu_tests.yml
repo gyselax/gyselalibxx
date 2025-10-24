@@ -107,20 +107,20 @@ jobs:
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: actions/checkout@v4
   #      with:
-  #        submodules: recursive
+  #        submodules: true
   #    - name: "Filter tests"
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/test_filter
   #    - name: Setup environment
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      run: |
-  #        . toolchains/v100.persee/environment.sh
+  #        . toolchains/persee/v100/environment.sh
   #      shell: bash
   #    - name: Build code
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/build_code
   #      with:
-  #        toolchain: toolchains/v100.persee/toolchain.cmake
+  #        toolchain: toolchains/persee/v100/toolchain.cmake
   #    - name: Run tests
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/run_tests

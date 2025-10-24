@@ -122,8 +122,12 @@ template <
         class LayoutStridedPolicy>
 void copy_to_vector_space(
         ExecSpace exec_space,
-        VectorField<ElementType, IdxRangeType, OutVectorSpace, typename ExecSpace::memory_space>
-                vector_field_out,
+        VectorField<
+                ElementType,
+                IdxRangeType,
+                OutVectorSpace,
+                typename ExecSpace::memory_space,
+                LayoutStridedPolicy> vector_field_out,
         Mapping mapping,
         VectorConstField<
                 ElementType,

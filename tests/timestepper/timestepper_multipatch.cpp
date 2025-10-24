@@ -148,11 +148,11 @@ void multipatch_timestepper_test(double expected_order)
 
         double linf_err = 0.0;
         ddc::for_each(idx_range_1, [&](Idx<GridR<1>> idx) {
-            double const err = abs(result_patch1(idx) - vals1_host(idx));
+            double const err = std::abs(result_patch1(idx) - vals1_host(idx));
             linf_err = err > linf_err ? err : linf_err;
         });
         ddc::for_each(idx_range_2, [&](Idx<GridR<2>> idx) {
-            double const err = abs(result_patch2(idx) - vals2_host(idx));
+            double const err = std::abs(result_patch2(idx) - vals2_host(idx));
             linf_err = err > linf_err ? err : linf_err;
         });
         error[j] = linf_err;
