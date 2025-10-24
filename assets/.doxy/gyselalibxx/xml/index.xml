@@ -1672,7 +1672,7 @@
     <member refid="classLiePoissonBracket_1ad5e7f68495472c72bb4e2e1d9cee3bf9" kind="variable"><name>m_metric_tensor</name></member>
     <member refid="classLiePoissonBracket_1aed5de814c919d1b2638cfab754b98d8f" kind="variable"><name>m_grad</name></member>
     <member refid="classLiePoissonBracket_1aac0f5603dc34c4615f1800e49c120c5c" kind="function"><name>LiePoissonBracket</name></member>
-    <member refid="classLiePoissonBracket_1a89ed5e0468295eefd9748aff378d3759" kind="function"><name>operator()</name></member>
+    <member refid="classLiePoissonBracket_1a7fe0829279027b1f76e4dfc589c4424c" kind="function"><name>operator()</name></member>
     <member refid="classLiePoissonBracket_1a8de77d77628c8ea4bd87f5f1b73e58f9" kind="function"><name>operator()</name></member>
     <member refid="classLiePoissonBracket_1a8e2fab8a06f1669f7a73b598a5babf02" kind="function"><name>operator()</name></member>
   </compound>

@@ -1141,7 +1141,7 @@
         <argsstring></argsstring>
         <name>ConstDeriv12_OnPatch_2D</name>
         <briefdescription>
-<para>A constant field of the derivatives <formula id="346">$ \partial_1^(n)\partial_2^(m) f(x) $</formula> defined on the index ranges of valid n and m. </para>
+<para>A constant field of the derivatives <formula id="347">$ \partial_1^(n)\partial_2^(m) f(x) $</formula> defined on the index ranges of valid n and m. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

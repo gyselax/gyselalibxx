@@ -43,7 +43,8 @@ public:
     template <
             class TensorType,
             class = std::enable_if_t<is_tensor_type_v<TensorType> && TensorType::rank() == 2>>
-    KOKKOS_INLINE_FUNCTION auto operator()(
+    KOKKOS_INLINE_FUNCTION DTensor<ddc::type_seq_element_t<0, typename TensorType::index_set>>
+    operator()(
             DTensor<CovBasisSpatial> const& partial_derivatives_f,
             TensorType const& partial_derivatives_g,
             DTensor<BasisSpatial> const& B,

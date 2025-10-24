@@ -569,7 +569,7 @@
 <td style="text-align: left;"><a href="#function-liepoissonbracket"><strong>LiePoissonBracket</strong></a> (Mapping3D const &amp; mapping) <br><em>Build a</em> <a href="classLiePoissonBracket.html"><em><strong>LiePoissonBracket</strong></em></a> <em>operator.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION auto</td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classTensor.html"><strong>DTensor</strong></a>&lt; ddc::type_seq_element_t&lt; 0, typename TensorType::index_set &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; CovBasisSpatial &gt; const &amp; partial_derivatives_f, TensorType const &amp; partial_derivatives_g, <a href="classTensor.html"><strong>DTensor</strong></a>&lt; BasisSpatial &gt; const &amp; B, MappingCoord const &amp; coord) const<br><em>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field.</em></td>
 </tr>
 <tr>
@@ -604,7 +604,7 @@
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the gyrokinetic Poisson bracket at a given coordinate, from the partial derivatives of the two fields, and the magnetic field.</em> </p>
 <pre><code class="language-C++">template&lt;class TensorType, class&gt;
-inline KOKKOS_INLINE_FUNCTION auto LiePoissonBracket::operator() (
+inline KOKKOS_INLINE_FUNCTION DTensor &lt; ddc::type_seq_element_t&lt; 0, typename TensorType::index_set &gt; &gt; LiePoissonBracket::operator() (
     DTensor &lt; CovBasisSpatial &gt; const &amp; partial_derivatives_f,
     TensorType const &amp; partial_derivatives_g,
     DTensor &lt; BasisSpatial &gt; const &amp; B,
@@ -613,11 +613,13 @@ inline KOKKOS_INLINE_FUNCTION auto LiePoissonBracket::operator() (
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>partial_derivatives_f</code> A vector containing the partial derivatives of the scalar field f expressed at the given coordinate. </li>
-<li><code>partial_derivatives_g</code> A vector containing the partial derivatives of the scalar field g expressed at the given coordinate. </li>
-<li><code>B</code> A vector containing the magnetic field at the given coordinate. </li>
-<li><code>coord</code> The coordinate where the calculation is carried out. </li>
+<li><code>partial_derivatives_f</code> A vector containing the (covariant) gradient of the scalar field f expressed at the given coordinate. </li>
+<li><code>partial_derivatives_g</code> A tensor containing the partial derivatives of the vector field G expressed at the given coordinate : <span class="arithmatex">\(DG_{ij} = \partial_j G_i\)</span>. </li>
+<li><code>B</code> A contravariant vector containing the magnetic field at the given coordinate. </li>
+<li><code>coord</code> The coordinate where the calculation is carried out.</li>
 </ul>
+<p><strong>Returns:</strong></p>
+<p>A vector describing the gyrokinetic Poisson bracket at a given coordinate. The vector is indexed in the same way and has the same covariance as the elements of the vector G. </p>
 <hr>
 
 <h3 id="function-operator_1">function operator()</h3>
@@ -631,11 +633,13 @@ inline KOKKOS_INLINE_FUNCTION auto LiePoissonBracket::operator() (
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>partial_derivatives_f</code> A vector containing the partial derivatives of the scalar field f expressed at the given coordinate. </li>
-<li><code>partial_derivatives_g</code> A vector containing the partial derivatives of the scalar field g expressed at the given coordinate. </li>
-<li><code>B</code> A vector containing the magnetic field at the given coordinate. </li>
-<li><code>coord</code> The coordinate where the calculation is carried out. </li>
+<li><code>partial_derivatives_f</code> A vector containing the (covariant) gradient of the scalar field f expressed at the given coordinate. </li>
+<li><code>partial_derivatives_g</code> A vector containing the (covariant) gradient of the scalar field g expressed at the given coordinate. </li>
+<li><code>B</code> A contravariant vector containing the magnetic field at the given coordinate. </li>
+<li><code>coord</code> The coordinate where the calculation is carried out.</li>
 </ul>
+<p><strong>Returns:</strong></p>
+<p>The gyrokinetic Poisson bracket at a given coordinate. </p>
 <hr>
 
 <h3 id="function-operator_2">function operator()</h3>
