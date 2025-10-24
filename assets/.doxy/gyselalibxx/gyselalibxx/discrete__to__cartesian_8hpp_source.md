@@ -234,8 +234,7 @@ struct MappingAccessibility<
 };
 
 template <class X, class Y, class SplineEvaluator, class R, class Theta, class MemorySpace>
-struct IsCurvilinear2DMapping<DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
-    : std::true_type
+struct HasOPoint<DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>> : std::true_type
 {
 };
 

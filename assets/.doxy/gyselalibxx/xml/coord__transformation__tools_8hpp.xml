@@ -558,18 +558,17 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="246" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="247" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1a230c6bfb2a4c17a294b86fd030d2ab2f" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="coord__transformation__tools_8hpp_1a9476a5087b5b03e7821ffbd74c7ddb97" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
-        <definition>constexpr bool is_curvilinear_2d_mapping_v</definition>
+        <definition>constexpr bool is_coord_transform_with_o_point_v</definition>
         <argsstring></argsstring>
-        <name>is_curvilinear_2d_mapping_v</name>
-        <initializer>= mapping_detail::IsCurvilinear2DMapping&lt;
-        std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value</initializer>
+        <name>is_coord_transform_with_o_point_v</name>
+        <initializer>= mapping_detail::HasOPoint&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value</initializer>
         <briefdescription>
 <para>Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point. </para>
         </briefdescription>
@@ -577,7 +576,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="251" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="251" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="251" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" bodystart="252" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="coord__transformation__tools_8hpp_1a489e6f5039f572e0f76796a376857cd5" prot="public" static="yes" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -820,7 +819,7 @@
 <codeline lineno="200"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="201"><highlight class="normal"></highlight></codeline>
 <codeline lineno="202"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">IsCurvilinear2DMapping<sp/>:<sp/>std::false_type</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">HasOPoint<sp/>:<sp/>std::false_type</highlight></codeline>
 <codeline lineno="204"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="205"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="206"><highlight class="normal"></highlight></codeline>
@@ -866,8 +865,8 @@
 <codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>mapping_detail::DefinesInvJacobian&lt;Mapping,<sp/>!RaiseError&gt;::value;</highlight></codeline>
 <codeline lineno="248"><highlight class="normal"></highlight></codeline>
 <codeline lineno="250"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
-<codeline lineno="251"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_curvilinear_2d_mapping_v<sp/>=<sp/>mapping_detail::IsCurvilinear2DMapping&lt;</highlight></codeline>
-<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_coord_transform_with_o_point_v</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>mapping_detail::HasOPoint&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value;</highlight></codeline>
 <codeline lineno="253"><highlight class="normal"></highlight></codeline>
 <codeline lineno="254"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>
 <codeline lineno="255"><highlight class="normal"></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_analytical_mapping_v<sp/>=<sp/>mapping_detail::IsAnalyticalMapping&lt;Mapping&gt;::value;</highlight></codeline>

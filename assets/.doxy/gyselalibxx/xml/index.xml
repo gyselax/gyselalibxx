@@ -3086,7 +3086,7 @@
     <member refid="coord__transformation__tools_8hpp_1a91e6734a3ddaeb51dcccfdd2a518e219" kind="variable"><name>is_mapping_v</name></member>
     <member refid="coord__transformation__tools_8hpp_1a72103cf68def64391cfa042b9711a86b" kind="variable"><name>has_jacobian_v</name></member>
     <member refid="coord__transformation__tools_8hpp_1aa3638126a7736141cba45402354ece26" kind="variable"><name>has_inv_jacobian_v</name></member>
-    <member refid="coord__transformation__tools_8hpp_1a230c6bfb2a4c17a294b86fd030d2ab2f" kind="variable"><name>is_curvilinear_2d_mapping_v</name></member>
+    <member refid="coord__transformation__tools_8hpp_1a9476a5087b5b03e7821ffbd74c7ddb97" kind="variable"><name>is_coord_transform_with_o_point_v</name></member>
     <member refid="coord__transformation__tools_8hpp_1a489e6f5039f572e0f76796a376857cd5" kind="variable"><name>is_analytical_mapping_v</name></member>
     <member refid="coord__transformation__tools_8hpp_1a40c83f9e43b408ef10e0c553b6c97ddf" kind="variable"><name>has_singular_o_point_inv_jacobian_v</name></member>
   </compound>

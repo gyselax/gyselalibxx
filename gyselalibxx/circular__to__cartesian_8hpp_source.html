@@ -726,7 +726,7 @@ struct MappingAccessibility&lt;ExecSpace, CircularToCartesian&lt;R, Theta, X, Y&
 };
 
 template &lt;class X, class Y, class R, class Theta&gt;
-struct IsCurvilinear2DMapping&lt;CircularToCartesian&lt;R, Theta, X, Y&gt;&gt; : std::true_type
+struct HasOPoint&lt;CircularToCartesian&lt;R, Theta, X, Y&gt;&gt; : std::true_type
 {
 };
 

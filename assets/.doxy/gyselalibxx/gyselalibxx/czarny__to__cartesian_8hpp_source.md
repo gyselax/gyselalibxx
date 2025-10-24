@@ -268,7 +268,7 @@ struct MappingAccessibility<ExecSpace, CzarnyToCartesian<R, Theta, X, Y>> : std:
 };
 
 template <class X, class Y, class R, class Theta>
-struct IsCurvilinear2DMapping<CzarnyToCartesian<X, Y, R, Theta>> : std::true_type
+struct HasOPoint<CzarnyToCartesian<X, Y, R, Theta>> : std::true_type
 {
 };
 

@@ -993,12 +993,12 @@ private:
             using TargetMapping = typename PatchLocator::
                     template get_mapping_on_logical_dim_t&lt;TargetDim1, TargetDim2&gt;;
 
-            static_assert(is_curvilinear_2d_mapping_v&lt;CurrentMapping&gt;);
+            static_assert(is_coord_transform_with_o_point_v&lt;CurrentMapping&gt;);
             static_assert((std::is_same_v&lt;
                            Coord&lt;typename CurrentMapping::curvilinear_tag_r,
                                  typename CurrentMapping::curvilinear_tag_theta&gt;,
                            Coord&lt;CurrentDim1, CurrentDim2&gt;&gt;));
-            static_assert(is_curvilinear_2d_mapping_v&lt;TargetMapping&gt;);
+            static_assert(is_coord_transform_with_o_point_v&lt;TargetMapping&gt;);
             static_assert((std::is_same_v&lt;
                            Coord&lt;typename TargetMapping::curvilinear_tag_r,
                                  typename TargetMapping::curvilinear_tag_theta&gt;,

@@ -332,7 +332,7 @@
 * **inverse\_mapping\_t** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_accessible\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_analytical\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
-* **is\_curvilinear\_2d\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
+* **is\_coord\_transform\_with\_o\_point\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_borrowed\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
 * **is\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))

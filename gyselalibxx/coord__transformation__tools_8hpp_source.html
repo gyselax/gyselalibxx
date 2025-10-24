@@ -747,7 +747,7 @@ public:
 };
 
 template &lt;class Mapping&gt;
-struct IsCurvilinear2DMapping : std::false_type
+struct HasOPoint : std::false_type
 {
 };
 
@@ -793,8 +793,8 @@ static constexpr bool has_inv_jacobian_v
         = mapping_detail::DefinesInvJacobian&lt;Mapping, !RaiseError&gt;::value;
 
 template &lt;class Mapping&gt;
-static constexpr bool is_curvilinear_2d_mapping_v = mapping_detail::IsCurvilinear2DMapping&lt;
-        std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value;
+static constexpr bool is_coord_transform_with_o_point_v
+        = mapping_detail::HasOPoint&lt;std::remove_const_t&lt;std::remove_reference_t&lt;Mapping&gt;&gt;&gt;::value;
 
 template &lt;class Mapping&gt;
 static constexpr bool is_analytical_mapping_v = mapping_detail::IsAnalyticalMapping&lt;Mapping&gt;::value;

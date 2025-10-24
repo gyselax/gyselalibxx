@@ -41,7 +41,7 @@ class OnionPatchLocator<
         PhysicalToLogicalMapping,
         ExecSpace>
 {
-    static_assert(is_curvilinear_2d_mapping_v<LogicalToPhysicalMapping>);
+    static_assert(is_coord_transform_with_o_point_v<LogicalToPhysicalMapping>);
 
     using X = typename LogicalToPhysicalMapping::cartesian_tag_x;
     using Y = typename LogicalToPhysicalMapping::cartesian_tag_y;
