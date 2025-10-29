@@ -1,11 +1,7 @@
-[build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
-
 [project]
 name = "gyselalibxx-dependencies"
 version = "0.0"
-requires-python = ">= 3.8"
+requires-python = ">= 3.11"
 dependencies = [
     "numpy",
     "matplotlib",
@@ -17,5 +13,5 @@ dependencies = [
     "xarray",
 ]
 
-[tool.hatch.build.targets.wheel]
-include = ["./__init__.py"]
+[tool.setuptools]
+py-modules = []
