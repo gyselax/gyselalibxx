@@ -2,7 +2,11 @@
 
 #pragma once
 
+#include <typeinfo>
+
 #include <ddc/ddc.hpp>
+
+#include <boost/type_index.hpp>
 
 #include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
@@ -14,7 +18,6 @@
 #include "single_interface_derivatives_calculator_collection.hpp"
 #include "types.hpp"
 #include "view.hpp"
-
 
 template <
         class Connectivity,
@@ -361,7 +364,10 @@ private:
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
+        // constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
+        constexpr bool is_same_orientation = std::is_same_v<
+                typename EquivalentInterfaceI::Edge1::perpendicular_grid,
+                ddc::type_seq_element_t<I, Grid1DSeq>>;
 
         double const coeff_deriv_patch1
                 = m_derivatives_calculators.template get<EquivalentInterfaceI>()
@@ -421,25 +427,29 @@ private:
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
         // The orientation of the ordered interface and the one in the derivative calculator.
-        constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
+        // constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
+        constexpr bool is_same_orientation = std::is_same_v<
+                typename EquivalentInterfaceI::Edge1::perpendicular_grid,
+                ddc::type_seq_element_t<I, Grid1DSeq>>;
 
         // If the orientations are not the same, we change the sign of the derivative.
         const int sign = is_same_orientation - !is_same_orientation;
 
-        using Patch_1 = typename InterfaceI::Edge1::associated_patch;
-        using Patch_2 = typename InterfaceI::Edge2::associated_patch;
+        using Patch_1 = typename EquivalentInterfaceI::Edge1::associated_patch;
+        using Patch_2 = typename EquivalentInterfaceI::Edge2::associated_patch;
 
-        constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
+        constexpr Extremity extremity_1 = EquivalentInterfaceI::Edge1::extremity;
+        constexpr Extremity extremity_2 = EquivalentInterfaceI::Edge2::extremity;
 
-        using GridPerp1 = typename InterfaceI::Edge1::perpendicular_grid;
-        using GridPerp2 = typename InterfaceI::Edge2::perpendicular_grid;
+        using GridPerp1 = typename EquivalentInterfaceI::Edge1::perpendicular_grid;
+        using GridPerp2 = typename EquivalentInterfaceI::Edge2::perpendicular_grid;
 
         using DerivPerp1 = typename ddc::Deriv<typename GridPerp1::continuous_dimension_type>;
         using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
-        auto [idx_slice_1, idx_slice_2] = get_slice_indexes<InterfaceI>(slice_idx_1_value);
-        std::cout << "index slices: " << idx_slice_1 << "  " << idx_slice_2 << std::endl; 
+        auto [idx_slice_1, idx_slice_2]
+                = get_slice_indexes<EquivalentInterfaceI>(slice_idx_1_value);
+        std::cout << "index slices: " << idx_slice_1 << "  " << idx_slice_2 << std::endl;
 
         DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
                 = functions_and_derivs.template get<Patch_1>();
@@ -472,6 +482,10 @@ private:
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
 
+            // The direction of the two perpendicular grids of the patches agree.
+            constexpr bool is_same_direction = (extremity_1 == !extremity_2);
+            constexpr int sign_2 = is_same_direction - !is_same_direction;
+
             // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
             IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
                     idx_range_perp_1.front(),
@@ -484,15 +498,21 @@ private:
                     idx_range_perp_2.extents());
 
             Idx<GridPerp1> idx_deriv_1
-                    = get_extremity_back_idx(idx_range_slice_dperp_1, extremity_1);
+                    = get_idx_other_interface(idx_range_slice_dperp_1, extremity_1);
             Idx<GridPerp2> idx_deriv_2
-                    = get_extremity_back_idx(idx_range_slice_dperp_2, extremity_2);
+                    = get_idx_other_interface(idx_range_slice_dperp_2, extremity_2);
 
             Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
             Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
 
             const double deriv_1 = function_and_derivs_1[idx_slice_deriv_1](idx_slice_1);
-            const double deriv_2 = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2);
+            const double deriv_2 = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2) * sign_2;
+
+            std::cout << "deriv_1 = " << deriv_1 << "     deriv_2 = " << deriv_2 << std::endl;
+            std::cout << "is_lower_bound_deriv_dependent? " << is_lower_bound_deriv_dependent
+                      << std::endl;
+            std::cout << "is_upper_bound_deriv_dependent? " << is_upper_bound_deriv_dependent
+                      << std::endl;
 
             const double coeff_deriv_1
                     = m_derivatives_calculators.template get<EquivalentInterfaceI>()
@@ -504,9 +524,11 @@ private:
             if constexpr (is_lower_bound_deriv_dependent) {
                 m_vector->get_values()[I]
                         += is_same_orientation ? coeff_deriv_1 * deriv_1 : -coeff_deriv_2 * deriv_2;
+                // m_vector->get_values()[I] += coeff_deriv_1 * deriv_1;
             } else {
                 m_vector->get_values()[I]
                         += is_same_orientation ? coeff_deriv_2 * deriv_2 : -coeff_deriv_1 * deriv_1;
+                // m_vector->get_values()[I] += coeff_deriv_2 * deriv_2;
             }
         }
     }
@@ -526,20 +548,24 @@ private:
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
         // The orientation of the ordered interface and the one in the derivative calculator.
-        constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
+        // constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
+        constexpr bool is_same_orientation = std::is_same_v<
+                typename EquivalentInterfaceI::Edge1::perpendicular_grid,
+                ddc::type_seq_element_t<I, Grid1DSeq>>;
 
-        constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
+        constexpr Extremity extremity_1 = EquivalentInterfaceI::Edge1::extremity;
+        constexpr Extremity extremity_2 = EquivalentInterfaceI::Edge2::extremity;
         // The direction of the two perpendicular grids of the patches agree.
         constexpr bool is_same_direction = (extremity_1 == !extremity_2);
 
         // If the orientations are not the same, we change the sign.
         const int sign = is_same_orientation - !is_same_orientation;
 
-        using Patch_1 = typename InterfaceI::Edge1::associated_patch;
-        using Patch_2 = typename InterfaceI::Edge2::associated_patch;
+        using Patch_1 = typename EquivalentInterfaceI::Edge1::associated_patch;
+        using Patch_2 = typename EquivalentInterfaceI::Edge2::associated_patch;
 
-        auto [idx_slice_1, idx_slice_2] = get_slice_indexes<InterfaceI>(slice_idx_1_value);
+        auto [idx_slice_1, idx_slice_2]
+                = get_slice_indexes<EquivalentInterfaceI>(slice_idx_1_value);
 
         DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
                 = functions_and_derivs.template get<Patch_1>();
@@ -547,11 +573,11 @@ private:
                 = functions_and_derivs.template get<Patch_2>();
 
         // Use the first derivatives to compute the cross-derivatives.
-        using GridPerp1 = typename InterfaceI::Edge1::perpendicular_grid;
-        using GridPerp2 = typename InterfaceI::Edge2::perpendicular_grid;
+        using GridPerp1 = typename EquivalentInterfaceI::Edge1::perpendicular_grid;
+        using GridPerp2 = typename EquivalentInterfaceI::Edge2::perpendicular_grid;
 
-        using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
-        using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
+        using GridPar1 = typename EquivalentInterfaceI::Edge1::parallel_grid;
+        using GridPar2 = typename EquivalentInterfaceI::Edge2::parallel_grid;
 
         using DerivPar1 = typename ddc::Deriv<typename GridPar1::continuous_dimension_type>;
         using DerivPar2 = typename ddc::Deriv<typename GridPar2::continuous_dimension_type>;
@@ -594,17 +620,30 @@ private:
                 get_idx_range(derivs_2));
         DField<IdxRange<GridPerp2>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_2_reoriented(
                 derivs_2_reoriented_alloc);
+        DFieldMem<IdxRange<GridPerp1>, Kokkos::HostSpace> derivs_1_reoriented_alloc(
+                get_idx_range(derivs_1));
+        DField<IdxRange<GridPerp1>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_1_reoriented(
+                derivs_1_reoriented_alloc);
+        // TODO: Warning different! test on Y direction, not X!
+        // INterface -> agree orientation.
+        // Maybe put it in the single interface operator.
         const int sign_reorientation = is_same_direction - !is_same_direction;
+        constexpr bool change_sign = (is_same_orientation && (extremity_1 == Extremity::FRONT))
+                                     || (!is_same_orientation && (extremity_1 == Extremity::BACK));
+        constexpr int sign_changed = !change_sign - change_sign;
         ddc::for_each(get_idx_range(derivs_2), [&](Idx<GridPerp2> const idx) {
             derivs_2_reoriented(idx) = sign_reorientation * derivs_2(idx);
+        });
+        ddc::for_each(get_idx_range(derivs_1), [&](Idx<GridPerp1> const idx) {
+            derivs_1_reoriented(idx) = derivs_1(idx);
         });
 
         // Compute the coefficient c_I for the interface I.
         double const lin_comb_funct
-                = sign
+                = sign * sign_changed
                   * m_derivatives_calculators.template get<EquivalentInterfaceI>()
                             .get_function_coefficients(
-                                    get_const_field(derivs_1),
+                                    get_const_field(derivs_1_reoriented),
                                     get_const_field(derivs_2_reoriented));
 
         m_vector->get_values()[I] = lin_comb_funct;
@@ -644,9 +683,9 @@ private:
                     idx_range_perp_2.extents());
 
             Idx<GridPerp1> idx_deriv_perp_1
-                    = get_extremity_back_idx(idx_range_slice_dperp_1, extremity_1);
+                    = get_idx_other_interface(idx_range_slice_dperp_1, extremity_1);
             Idx<GridPerp2> idx_deriv_perp_2
-                    = get_extremity_back_idx(idx_range_slice_dperp_2, extremity_2);
+                    = get_idx_other_interface(idx_range_slice_dperp_2, extremity_2);
 
 
             Idx<Grid1_1, Grid2_1> idx_d1d2_1;
@@ -674,8 +713,11 @@ private:
                     idx_cross_deriv2(Idx<Deriv1_2>(1), idx_d1_2, Idx<Deriv2_2>(1), idx_d2_2);
 
             const double cross_deriv_1 = function_and_derivs_1(idx_cross_deriv1);
-            const double cross_deriv_2 = function_and_derivs_2(idx_cross_deriv2);
+            const double cross_deriv_2 = function_and_derivs_2(
+                    idx_cross_deriv2); // * sign_reorientation * sign_orientation_Y;
 
+            std::cout << "cross_deriv_1 = " << cross_deriv_1
+                      << "     cross_deriv_2 = " << cross_deriv_2 << std::endl;
             const double coeff_deriv_1
                     = m_derivatives_calculators.template get<EquivalentInterfaceI>()
                               .get_coeff_deriv_patch_1();
@@ -683,6 +725,8 @@ private:
                     = m_derivatives_calculators.template get<EquivalentInterfaceI>()
                               .get_coeff_deriv_patch_2();
 
+            double vector_val = m_vector->get_values()[I];
+            std::cout << "vector = " << vector_val << std::endl;
             if constexpr (is_lower_bound_deriv_dependent) {
                 m_vector->get_values()[I] += is_same_orientation ? coeff_deriv_1 * cross_deriv_1
                                                                  : -coeff_deriv_2 * cross_deriv_2;
@@ -690,6 +734,14 @@ private:
                 m_vector->get_values()[I] += is_same_orientation ? coeff_deriv_2 * cross_deriv_2
                                                                  : -coeff_deriv_1 * cross_deriv_1;
             }
+            std::cout << "vector = " << m_vector->get_values()[I] << "   "
+                      << vector_val - m_vector->get_values()[I] << std::endl;
+
+            std::cout << "matrix: " << std::endl;
+            std::cout << "[ " << m_matrix->at(0, 0) << ", " << m_matrix->at(0, 1) << " ]"
+                      << std::endl;
+            std::cout << "[ " << m_matrix->at(1, 0) << ", " << m_matrix->at(1, 1) << " ]"
+                      << std::endl;
         }
     }
 
@@ -723,21 +775,59 @@ private:
             int& slice_idx_1_value)
     {
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
+        // Equivalent interface defined in the main file, i.e. given to MultipatchConnectivity.
+        using EquivalentInterfaceI
+                = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        using Patch_1 = typename InterfaceI::Edge1::associated_patch;
-        using Patch_2 = typename InterfaceI::Edge2::associated_patch;
+        // The orientation of the ordered interface and the one in the derivative calculator.
+        // constexpr bool is_same_orientation = std::is_same_v<InterfaceI, EquivalentInterfaceI>;
+        // constexpr bool is_same_orientation
+        //         = std::is_same_v<typename InterfaceI::Edge1, typename EquivalentInterfaceI::Edge1>;
+        constexpr bool is_same_orientation = std::is_same_v<
+                typename EquivalentInterfaceI::Edge1::perpendicular_grid,
+                ddc::type_seq_element_t<I, Grid1DSeq>>;
+        constexpr int sign_orientation = is_same_orientation - !is_same_orientation;
 
-        constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
+        using Patch_1 = typename EquivalentInterfaceI::Edge1::associated_patch;
+        using Patch_2 = typename EquivalentInterfaceI::Edge2::associated_patch;
+
+        constexpr Extremity extremity_1 = EquivalentInterfaceI::Edge1::extremity;
+        constexpr Extremity extremity_2 = EquivalentInterfaceI::Edge2::extremity;
         // The direction of the two perpendicular grids of the patches agree.
         constexpr bool is_same_direction = (extremity_1 == !extremity_2);
-        constexpr int sign = is_same_direction - !is_same_direction;
+        constexpr int sign_direction = is_same_direction - !is_same_direction;
 
-        using GridPerp1 = typename InterfaceI::Edge1::perpendicular_grid;
-        using GridPerp2 = typename InterfaceI::Edge2::perpendicular_grid;
+        // is_same_orientation && (extremity_1 == Extremity::BACK) ->  1
+        // is_same_orientation && (extremity_1 == Extremity::FRONT) ->  -1
+        // !is_same_orientation && (extremity_1 == Extremity::FRONT) ->  1
+        // !is_same_orientation && (extremity_1 == Extremity::BACK) ->  -1
 
-        using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
-        using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
+        constexpr bool change_sign = (is_same_orientation && (extremity_1 == Extremity::FRONT))
+                                     || (!is_same_orientation && (extremity_1 == Extremity::BACK));
+
+        // std::cout << boost::typeindex::type_id_with_cvr<typename InterfaceI::Edge1>().pretty_name()
+        //           << std::endl;
+        // std::cout << boost::typeindex::type_id_with_cvr<typename InterfaceI::Edge2>().pretty_name()
+        //           << std::endl;
+        // std::cout << boost::typeindex::type_id_with_cvr<EquivalentInterfaceI>().pretty_name()
+        //           << std::endl;
+        std::cout << "is_same_orientation = " << is_same_orientation << std::endl;
+        std::cout << "extremity_1 == Extremity::BACK = "
+                  << (EquivalentInterfaceI::Edge1::extremity == Extremity::BACK) << std::endl;
+        std::cout << "extremity_1 == Extremity::FRONT = "
+                  << (EquivalentInterfaceI::Edge1::extremity == Extremity::FRONT) << std::endl;
+        std::cout << " ==> change_sign = " << change_sign << std::endl;
+
+        constexpr int sign = !change_sign - change_sign;
+
+        // constexpr int sign_deriv_1 = 1;
+        // constexpr int sign_deriv_2 = 1 * sign_direction;
+
+        using GridPerp1 = typename EquivalentInterfaceI::Edge1::perpendicular_grid;
+        using GridPerp2 = typename EquivalentInterfaceI::Edge2::perpendicular_grid;
+
+        using GridPar1 = typename EquivalentInterfaceI::Edge1::parallel_grid;
+        using GridPar2 = typename EquivalentInterfaceI::Edge2::parallel_grid;
 
         using DerivPerp1 = typename ddc::Deriv<typename GridPerp1::continuous_dimension_type>;
         using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
@@ -763,13 +853,14 @@ private:
                 IdxStep<GridPerp2>(2),
                 idx_range_perp_2.extents());
 
-        Idx<GridPerp1> idx_deriv_1 = get_extremity_front_idx(idx_range_slice_dperp_1, extremity_1);
-        Idx<GridPerp2> idx_deriv_2 = get_extremity_front_idx(idx_range_slice_dperp_2, extremity_2);
+        Idx<GridPerp1> idx_deriv_1 = get_idx_interface(idx_range_slice_dperp_1, extremity_1);
+        Idx<GridPerp2> idx_deriv_2 = get_idx_interface(idx_range_slice_dperp_2, extremity_2);
 
         Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
         Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
 
-        auto [slice_idx_1, slice_idx_2] = get_slice_indexes<InterfaceI>(slice_idx_1_value);
+        auto [slice_idx_1, slice_idx_2]
+                = get_slice_indexes<EquivalentInterfaceI>(slice_idx_1_value);
 
         // Select the correct data and update.
         DField<IdxRange<GridPar1>, Kokkos::HostSpace, Kokkos::layout_stride> deriv_1
@@ -778,8 +869,9 @@ private:
                 = function_and_derivs_2[idx_slice_deriv_2];
 
         // TODO: Check if we dont need a change of sign.
-        deriv_1(slice_idx_1) = m_interface_derivatives->get_values()[I];
-        deriv_2(slice_idx_2) = m_interface_derivatives->get_values()[I] * sign;
+        deriv_1(slice_idx_1) = m_interface_derivatives->get_values()[I] * sign; // * sign_deriv_1;
+        deriv_2(slice_idx_2) = m_interface_derivatives->get_values()[I] * sign
+                               * sign_direction; // * sign_deriv_2;
     }
 
     /// @brief Associate the Ith derivative values to the correct cross-derivative.
@@ -793,17 +885,29 @@ private:
     {
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
 
-        using Patch_1 = typename InterfaceI::Edge1::associated_patch;
-        using Patch_2 = typename InterfaceI::Edge2::associated_patch;
+        using EquivalentInterfaceI
+                = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
+        constexpr bool is_same_orientation = std::is_same_v<
+                typename EquivalentInterfaceI::Edge1::perpendicular_grid,
+                ddc::type_seq_element_t<I, Grid1DSeq>>;
+        constexpr int sign_orientation = is_same_orientation - !is_same_orientation;
 
-        constexpr Extremity extremity_1 = InterfaceI::Edge1::extremity;
-        constexpr Extremity extremity_2 = InterfaceI::Edge2::extremity;
+        using Patch_1 = typename EquivalentInterfaceI::Edge1::associated_patch;
+        using Patch_2 = typename EquivalentInterfaceI::Edge2::associated_patch;
+
+        constexpr Extremity extremity_1 = EquivalentInterfaceI::Edge1::extremity;
+        constexpr Extremity extremity_2 = EquivalentInterfaceI::Edge2::extremity;
         // The direction of the two perpendicular grids of the patches agree.
         constexpr bool is_same_direction = (extremity_1 == !extremity_2);
-        constexpr int sign = is_same_direction - !is_same_direction;
+        constexpr int sign_direction = is_same_direction - !is_same_direction;
 
-        using GridPar1 = typename InterfaceI::Edge1::parallel_grid;
-        using GridPar2 = typename InterfaceI::Edge2::parallel_grid;
+
+        constexpr bool change_sign = (is_same_orientation && (extremity_1 == Extremity::FRONT))
+                                     || (!is_same_orientation && (extremity_1 == Extremity::BACK));
+        constexpr int sign = !change_sign - change_sign;
+
+        using GridPar1 = typename EquivalentInterfaceI::Edge1::parallel_grid;
+        using GridPar2 = typename EquivalentInterfaceI::Edge2::parallel_grid;
 
         using Grid1_1 = typename Patch_1::Grid1;
         using Grid2_1 = typename Patch_1::Grid2;
@@ -852,7 +956,8 @@ private:
         IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
 
-        auto [slice_idx_1, slice_idx_2] = get_slice_indexes<InterfaceI>(slice_idx_1_value);
+        auto [slice_idx_1, slice_idx_2]
+                = get_slice_indexes<EquivalentInterfaceI>(slice_idx_1_value);
 
         // The slice indices has to be a point at a corner, i.e. index range boundaries.
         assert((slice_idx_1 == idx_range_par_1.front()) || (slice_idx_1 == idx_range_par_1.back()));
@@ -869,7 +974,7 @@ private:
                         is_idx_par_min_1,
                         idx_range_slice_d1_1,
                         idx_range_slice_d2_1);
-        function_and_derivs_1(idx_cross_deriv1) = m_interface_derivatives->get_values()[I];
+        function_and_derivs_1(idx_cross_deriv1) = m_interface_derivatives->get_values()[I] ; // * sign;
 
         // --- Update the cross-derivative on Patch_2
         Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2> idx_cross_deriv2
@@ -879,7 +984,7 @@ private:
                         is_idx_par_min_2,
                         idx_range_slice_d1_2,
                         idx_range_slice_d2_2);
-        function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I] * sign;
+        function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I]; // * sign; // * sign_direction * sign orientation Y;
     }
 
 
@@ -920,7 +1025,7 @@ private:
      * FRONT extremity of the 1D grid. 
      */
     template <class Grid1Or2>
-    Idx<Grid1Or2> get_extremity_front_idx(
+    Idx<Grid1Or2> get_idx_interface(
             IdxRangeSlice<Grid1Or2> const idx_range_slice,
             Extremity extremity) const
     {
@@ -932,7 +1037,7 @@ private:
      * BACK extremity of the 1D grid. 
      */
     template <class Grid1Or2>
-    Idx<Grid1Or2> get_extremity_back_idx(
+    Idx<Grid1Or2> get_idx_other_interface(
             IdxRangeSlice<Grid1Or2> const idx_range_slice,
             Extremity extremity) const
     {

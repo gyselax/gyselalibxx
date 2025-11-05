@@ -458,10 +458,10 @@ void check_x_derivatives(
         double const global_deriv_max
                 = reversing_sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
 
-        std::cout << "min deriv : " << global_deriv_min << "   " << derivs_xmin_extracted(idx_par)
-                  << std::endl;
-        std::cout << "max deriv : " << global_deriv_max << "   " << derivs_xmax_extracted(idx_par)
-                  << std::endl;
+        std::cout << "min deriv : " << global_deriv_min << "   "
+                  << derivs_xmin_extracted(idx_par) << std::endl;
+        std::cout << "max deriv : " << global_deriv_max << "   "
+                  << derivs_xmax_extracted(idx_par) << std::endl;
 
         EXPECT_NEAR(derivs_xmin_extracted(idx_par), global_deriv_min, 5e-14);
         EXPECT_NEAR(derivs_xmax_extracted(idx_par), global_deriv_max, 5e-14);
@@ -676,6 +676,13 @@ void check_xy_derivatives(
         global_deriv_max_max = evaluator_g.deriv_1_and_2(interface_coord_max_max, function_g_coef);
     }
 
+    std::cout << "is_reversed_patch? " << is_reversed_patch << std::endl; 
+
+    std::cout << "min min: " << global_deriv_min_min << "   " << function_and_derivs(idx_cross_deriv_min_min) << std::endl; 
+    std::cout << "min max: " << global_deriv_min_max << "   " << function_and_derivs(idx_cross_deriv_min_max) << std::endl; 
+    std::cout << "max min: " << global_deriv_max_min << "   " << function_and_derivs(idx_cross_deriv_max_min) << std::endl; 
+    std::cout << "max max: " << global_deriv_max_max << "   " << function_and_derivs(idx_cross_deriv_max_max) << std::endl; 
+
     // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
     // we don't need the cross-derivatives for y = ymin. Their value is not checked.
     if constexpr (!ddc::in_tags_v<Patch, PatchSeqMin>) {
@@ -752,7 +759,7 @@ void check_spline_representation_agreement(
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
     constexpr bool is_reversed_patch = ddc::in_tags_v<Patch, ReversedPatchSeq>;
-    constexpr int reversing_sign = !is_reversed_patch - is_reversed_patch;
+//     constexpr int reversing_sign = !is_reversed_patch - is_reversed_patch;
 
     const ddc::BoundCond BoundCondXmin = ddc::BoundCond::HERMITE;
     const ddc::BoundCond BoundCondXmax = ddc::BoundCond::HERMITE;

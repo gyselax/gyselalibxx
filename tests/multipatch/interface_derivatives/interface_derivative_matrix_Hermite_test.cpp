@@ -1,8 +1,11 @@
 // SPDX-License-Identifier: MIT
 
+#include <typeinfo>
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
+#include <boost/type_index.hpp>
 #include <gtest/gtest.h>
 
 #include "3patches_2d_non_periodic_non_uniform.hpp"
@@ -156,7 +159,7 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
 struct InterfaceDerivativeMatrixHermiteTest : public ::testing::Test
 {
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
-    // // patches 1 ---------------------------------
+    // patches 1 ---------------------------------
     static constexpr Coord<X<1>> x1_min = Coord<X<1>>(0.0);
     static constexpr Coord<X<1>> x1_max = Coord<X<1>>(1.0);
     static constexpr IdxStep<GridX<1>> x1_ncells = IdxStep<GridX<1>>(6);
@@ -232,12 +235,14 @@ public:
     {
         // Creating of meshes and supports .......................................................
         // The patches are conforming between each other.
-        std::vector<Coord<X<1>>> break_points_x1
-                = build_random_non_uniform_break_points(x1_min, x1_max, x1_ncells);
+        std::vector<Coord<X<1>>> break_points_x1 = build_uniform_break_points(
+                x1_min,
+                x1_max,
+                x1_ncells); //build_random_non_uniform_break_points
         std::vector<Coord<X<2>>> break_points_x2
-                = build_random_non_uniform_break_points(x2_min, x2_max, x2_ncells);
+                = build_uniform_break_points(x2_min, x2_max, x2_ncells);
         std::vector<Coord<X<3>>> break_points_x3
-                = build_random_non_uniform_break_points(x3_min, x3_max, x3_ncells);
+                = build_uniform_break_points(x3_min, x3_max, x3_ncells);
 
         std::vector<Coord<Y<1>>> break_points_y1
                 = build_random_non_uniform_break_points(y1_min, y1_max, y1_ncells);
@@ -505,20 +510,22 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_slice_xmax_3(Idx<ddc::Deriv<X<3>>>(1), idx_range_slice_dx3.back());
 
     DField<IdxRange<typename Patch1::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_xmin_extracted = function_and_derivs_1[idx_slice_xmin_1];
+            derivs_x1min_extracted = function_and_derivs_1[idx_slice_xmin_1];
     ddc::for_each(idx_range_y1, [&](Idx<GridY<1>> const& idx_par) {
         Idx<GridX<1>, GridY<1>> idx_min(idx_range_x1.front(), idx_par);
         Coord<Xg, Yg> interface_coord_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min)));
-        derivs_xmin_extracted(idx_par)
+        derivs_x1min_extracted(idx_par)
                 = evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+        std::cout << idx_par << "     derivs_x1min = " << derivs_x1min_extracted(idx_par)
+                  << std::endl;
     });
 
     DField<IdxRange<typename Patch3::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_xmax_extracted = function_and_derivs_3[idx_slice_xmax_3];
+            derivs_x3max_extracted = function_and_derivs_3[idx_slice_xmax_3];
     ddc::for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
         Idx<GridX<3>, GridY<3>> idx_min(idx_range_x3.back(), idx_par);
         Coord<Xg, Yg> interface_coord_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min)));
-        derivs_xmax_extracted(idx_par)
+        derivs_x3max_extracted(idx_par)
                 = evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
     });
 
@@ -546,7 +553,8 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_range_slice_dx2,
             idx_range_slice_dy2,
             evaluator_g,
-            const_function_g_coef, 1);
+            const_function_g_coef,
+            1);
 
 
     // --- the first derivatives (on inner interfaces) from the function values.
@@ -557,9 +565,17 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     // --- the cross-derivatives from the first derivatives.
     /*
         Here, it is not needed to compute the cross-derivatives because
-        they are given by the boundary conditions. Otherwise, we want to 
+        they are given by the boundary conditions. However, we want to 
         check that the matrix computes correctly the values. 
     */
+    check_all_xy_derivatives<ddc::detail::TypeSeq<Patch2>, ddc::detail::TypeSeq<>, ddc::detail::TypeSeq<>>(
+            functions_and_derivs,
+            evaluator_g,
+            const_function_g_coef,
+            idx_ranges,
+            idx_ranges_slice_dx,
+            idx_ranges_slice_dy);
+
     matrix.solve_cross_deriv(functions_and_derivs);
     std::cout << "solve cross deriv done." << std::endl;
 
