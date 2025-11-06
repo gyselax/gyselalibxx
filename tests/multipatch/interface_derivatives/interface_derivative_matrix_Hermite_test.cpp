@@ -235,14 +235,14 @@ public:
     {
         // Creating of meshes and supports .......................................................
         // The patches are conforming between each other.
-        std::vector<Coord<X<1>>> break_points_x1 = build_uniform_break_points(
+        std::vector<Coord<X<1>>> break_points_x1 = build_random_non_uniform_break_points(
                 x1_min,
                 x1_max,
                 x1_ncells); //build_random_non_uniform_break_points
         std::vector<Coord<X<2>>> break_points_x2
-                = build_uniform_break_points(x2_min, x2_max, x2_ncells);
+                = build_random_non_uniform_break_points(x2_min, x2_max, x2_ncells);
         std::vector<Coord<X<3>>> break_points_x3
-                = build_uniform_break_points(x3_min, x3_max, x3_ncells);
+                = build_random_non_uniform_break_points(x3_min, x3_max, x3_ncells);
 
         std::vector<Coord<Y<1>>> break_points_y1
                 = build_random_non_uniform_break_points(y1_min, y1_max, y1_ncells);
@@ -453,24 +453,24 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
         double const xgmin = xg_min;
         double const xgmax = xg_max;
         double const yg = ddc::coordinate(Idx<GridYg>(idx));
-        derivs_xgmin(idx) = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmin) * std::sin(yg);
-        derivs_xgmax(idx) = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmax) * std::sin(yg);
+        derivs_xgmin(idx) = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmin + 0.25) * std::sin(yg);
+        derivs_xgmax(idx) = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmax + 0.25) * std::sin(yg);
     });
     ddc::for_each(idx_range_xg_dyg, [&](Idx<GridXg, DerivYg> const idx) {
         double const ygmin = yg_min;
         double const ygmax = yg_max;
         double const xg = ddc::coordinate(Idx<GridXg>(idx));
-        derivs_ygmin(idx) = std::cos(2. / 3 * M_PI * xg) * std ::cos(ygmin);
-        derivs_ygmax(idx) = std::cos(2. / 3 * M_PI * xg) * std ::cos(ygmax);
+        derivs_ygmin(idx) = std::cos(2. / 3 * M_PI * xg + 0.25) * std ::cos(ygmin);
+        derivs_ygmax(idx) = std::cos(2. / 3 * M_PI * xg + 0.25) * std ::cos(ygmax);
     });
     derivs_xyg_min_min(first_dxg, first_dyg)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_min) * std::sin(yg_min);
+            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_min + 0.25) * std::sin(yg_min);
     derivs_xyg_max_min(first_dxg, first_dyg)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max) * std::sin(yg_min);
+            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max + 0.25) * std::sin(yg_min);
     derivs_xyg_min_max(first_dxg, first_dyg)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_min) * std::sin(yg_max);
+            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_min + 0.25) * std::sin(yg_max);
     derivs_xyg_max_max(first_dxg, first_dyg)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max) * std::sin(yg_max);
+            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max + 0.25) * std::sin(yg_max);
 
     // --- the local derivatives from an equivalent global spline.
     // ------- build global spline representation
@@ -568,16 +568,9 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
         they are given by the boundary conditions. However, we want to 
         check that the matrix computes correctly the values. 
     */
-    check_all_xy_derivatives<ddc::detail::TypeSeq<Patch2>, ddc::detail::TypeSeq<>, ddc::detail::TypeSeq<>>(
-            functions_and_derivs,
-            evaluator_g,
-            const_function_g_coef,
-            idx_ranges,
-            idx_ranges_slice_dx,
-            idx_ranges_slice_dy);
-
     matrix.solve_cross_deriv(functions_and_derivs);
     std::cout << "solve cross deriv done." << std::endl;
+
 
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::detail::TypeSeq<>;
@@ -605,6 +598,14 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_ranges,
             idx_ranges_slice_dx,
             idx_ranges_slice_dy);
+
+    ddc::for_each(idx_range_xg, [&](Idx<GridXg> const& idx) {
+        Idx<GridXg, GridYg> idx_min(idx, idx_range_yg.front());
+        Coord<Xg, Yg> interface_coord_min(ddc::coordinate(idx_min));
+        std::cout << "deriv g: " << idx << "    " << interface_coord_min << "    "
+                  << evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef)
+                  << std::endl;
+    });
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<ReversedPatchSeq, EmptyPatchSeq, EmptyPatchSeq>(

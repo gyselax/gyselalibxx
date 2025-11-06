@@ -506,7 +506,7 @@ private:
             Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
 
             const double deriv_1 = function_and_derivs_1[idx_slice_deriv_1](idx_slice_1);
-            const double deriv_2 = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2) * sign_2;
+            const double deriv_2 = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2); // * sign_2;
 
             std::cout << "deriv_1 = " << deriv_1 << "     deriv_2 = " << deriv_2 << std::endl;
             std::cout << "is_lower_bound_deriv_dependent? " << is_lower_bound_deriv_dependent
@@ -633,9 +633,21 @@ private:
         constexpr int sign_changed = !change_sign - change_sign;
         ddc::for_each(get_idx_range(derivs_2), [&](Idx<GridPerp2> const idx) {
             derivs_2_reoriented(idx) = sign_reorientation * derivs_2(idx);
+            // std::cout << "deriv 2: " << idx << "    " << ddc::coordinate(idx) << "    "
+            //           << derivs_2_reoriented(idx) << std::endl;
         });
         ddc::for_each(get_idx_range(derivs_1), [&](Idx<GridPerp1> const idx) {
             derivs_1_reoriented(idx) = derivs_1(idx);
+        });
+
+        ddc::for_each(get_idx_range(derivs_1), [&](Idx<GridPerp1> const idx) {
+            std::cout << "deriv 1: " << idx << "    " << ddc::coordinate(idx) << "    "
+                      << derivs_1_reoriented(idx) << std::endl;
+        });
+        ddc::for_each(get_idx_range(derivs_2), [&](Idx<GridPerp2> const idx) {
+            std::cout << "deriv 2: " << idx << "    " << ddc::coordinate(idx) << "    "
+                      << derivs_2_reoriented(idx) << "    " << 2 - ddc::coordinate(idx)
+                      << std::endl;
         });
 
         // Compute the coefficient c_I for the interface I.
@@ -646,7 +658,8 @@ private:
                                     get_const_field(derivs_1_reoriented),
                                     get_const_field(derivs_2_reoriented));
 
-        m_vector->get_values()[I] = lin_comb_funct;
+        // int I_is_1 = (I == 0) - !(I == 0);
+        m_vector->get_values()[I] = lin_comb_funct; // * I_is_1;
 
         // Add the boundary derivatives for global Hermite boundary conditions.
         constexpr bool is_lower_bound_deriv_dependent
@@ -974,7 +987,8 @@ private:
                         is_idx_par_min_1,
                         idx_range_slice_d1_1,
                         idx_range_slice_d2_1);
-        function_and_derivs_1(idx_cross_deriv1) = m_interface_derivatives->get_values()[I] ; // * sign;
+        function_and_derivs_1(idx_cross_deriv1)
+                = m_interface_derivatives->get_values()[I]; // * sign;
 
         // --- Update the cross-derivative on Patch_2
         Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2> idx_cross_deriv2
@@ -984,7 +998,9 @@ private:
                         is_idx_par_min_2,
                         idx_range_slice_d1_2,
                         idx_range_slice_d2_2);
-        function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I]; // * sign; // * sign_direction * sign orientation Y;
+        function_and_derivs_2(idx_cross_deriv2)
+                = m_interface_derivatives
+                          ->get_values()[I]; // * sign; // * sign_direction * sign orientation Y;
     }
 
 
