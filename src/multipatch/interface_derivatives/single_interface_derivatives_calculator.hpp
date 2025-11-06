@@ -310,29 +310,7 @@ public:
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
     {
-        // // The function needs to be continuous at the interface.
-        // Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
-        // Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
-        // assert(abs(function_1(interface_idx_1) - function_2(interface_idx_2)) < 1e-13);
-
-        // double coeff_values = ddc::transform_reduce(
-        //         m_idx_range_perp_1,
-        //         0.0,
-        //         ddc::reducer::sum<double>(),
-        //         [&](Idx1D_1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
-
-        // // To avoid counting twice the value at the interface.
-        // IdxRange1DPerp_2 idx_range_perp_2_without_interface
-        //         = (m_extremity_2 == FRONT)
-        //                   ? m_idx_range_perp_2.remove_first(IdxStep<EdgePerpGrid2>(1))
-        //                   : m_idx_range_perp_2.remove_last(IdxStep<EdgePerpGrid2>(1));
-        // coeff_values += ddc::transform_reduce(
-        //         idx_range_perp_2_without_interface,
-        //         0.0,
-        //         ddc::reducer::sum<double>(),
-        //         [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
-        // return coeff_values;
-        return get_function_coefficients_with_sign(function_1, function_2, 1);
+          return get_function_coefficients_with_sign(function_1, function_2, 1);
     }
 
     /**
