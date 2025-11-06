@@ -171,11 +171,6 @@ void initialise_y_derivatives_reversed(
                 = -evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
         derivs_ymax_extracted(idx_par)
                 = -evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
-
-        std::cout << "init deriv 2: " << idx_par << "    " << ddc::coordinate(idx_par) << "    "
-                  << derivs_ymin_extracted(idx_par) << "    " << derivs_ymax_extracted(idx_par)
-                  << "    " << 3 - ddc::coordinate(idx_par) << "    " << interface_coord_min
-                  << std::endl;
     });
 }
 
@@ -414,7 +409,6 @@ void check_x_derivatives(
         typename Patch::IdxRange1 const& idx_range_perp,
         IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx)
 {
-    std::cout << "NEW PATCH -----------" << std::endl;
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
@@ -433,20 +427,12 @@ void check_x_derivatives(
             derivs_xmax_extracted = function_and_derivs[idx_slice_max];
 
     typename Patch::IdxRange2 idx_range_par(get_idx_range(derivs_xmin_extracted));
-    // typename Patch::Idx1 idx_x_min
-    //         = is_reversed_patch ? idx_range_perp.back() : idx_range_perp.front();
-    // typename Patch::Idx1 idx_x_max
-    //         = is_reversed_patch ? idx_range_perp.front() : idx_range_perp.back();
+
     typename Patch::Coord1 x_min(ddc::coordinate(idx_range_perp.front()));
     typename Patch::Coord1 x_max(ddc::coordinate(idx_range_perp.back()));
     typename Patch::Coord2 y_min(ddc::coordinate(idx_range_par.front()));
     typename Patch::Coord2 y_max(ddc::coordinate(idx_range_par.back()));
     ddc::for_each(idx_range_par, [&](typename Patch::Idx2 const& idx_par) {
-        // typename Patch::Idx2 idx_par
-        //         = is_reversed_patch ? typename Patch::Idx2((idx_range_par.back() - idx).value())
-        //                             : idx;
-        // typename Patch::Idx12 idx_min(idx_x_min, idx_par);
-        // typename Patch::Idx12 idx_max(idx_x_max, idx_par);
         typename Patch::Idx12 idx_min(idx_range_perp.front(), idx_par);
         typename Patch::Idx12 idx_max(idx_range_perp.back(), idx_par);
         Coord<Xg, Yg> interface_coord_min;
@@ -462,21 +448,11 @@ void check_x_derivatives(
             interface_coord_min = get_global_coord<Xg, Yg>(ddc::coordinate(idx_min));
             interface_coord_max = get_global_coord<Xg, Yg>(ddc::coordinate(idx_max));
         }
-        std::cout << "min: " << interface_coord_min << "   " << ddc::coordinate(idx_min)
-                  << std::endl;
-        std::cout << "max: " << interface_coord_max << "   " << ddc::coordinate(idx_max)
-                  << std::endl;
-        std::cout << "sign: " << reversing_sign << std::endl;
 
         double const global_deriv_min
                 = reversing_sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
         double const global_deriv_max
                 = reversing_sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
-
-        std::cout << "min deriv : " << global_deriv_min << "   " << derivs_xmin_extracted(idx_par)
-                  << std::endl;
-        std::cout << "max deriv : " << global_deriv_max << "   " << derivs_xmax_extracted(idx_par)
-                  << std::endl;
 
         EXPECT_NEAR(derivs_xmin_extracted(idx_par), global_deriv_min, 5e-14);
         EXPECT_NEAR(derivs_xmax_extracted(idx_par), global_deriv_max, 5e-14);
@@ -546,10 +522,6 @@ void check_y_derivatives(
             derivs_ymax_extracted = function_and_derivs[idx_slice_max];
 
     typename Patch::IdxRange1 idx_range_par(get_idx_range(derivs_ymin_extracted));
-    // typename Patch::Idx2 idx_y_min
-    //         = is_reversed_patch ? idx_range_perp.back() : idx_range_perp.front();
-    // typename Patch::Idx2 idx_y_max
-    //         = is_reversed_patch ? idx_range_perp.front() : idx_range_perp.back();
     typename Patch::Idx2 idx_y_min = idx_range_perp.front();
     typename Patch::Idx2 idx_y_max = idx_range_perp.back();
 
@@ -558,9 +530,6 @@ void check_y_derivatives(
     typename Patch::Coord2 y_min(ddc::coordinate(idx_range_perp.front()));
     typename Patch::Coord2 y_max(ddc::coordinate(idx_range_perp.back()));
     ddc::for_each(idx_range_par, [&](typename Patch::Idx1 const& idx) {
-        // typename Patch::Idx1 idx_par
-        //         = is_reversed_patch ? typename Patch::Idx1((idx_range_par.back() - idx).value())
-        //                             : idx;
         typename Patch::Idx12 idx_min(idx, idx_y_min);
         typename Patch::Idx12 idx_max(idx, idx_y_max);
         Coord<Xg, Yg> interface_coord_min;
@@ -710,17 +679,6 @@ void check_xy_derivatives(
         global_deriv_max_max = evaluator_g.deriv_1_and_2(interface_coord_max_max, function_g_coef);
     }
 
-    std::cout << "is_reversed_patch? " << is_reversed_patch << std::endl;
-
-    std::cout << "min min: " << global_deriv_min_min << "   "
-              << function_and_derivs(idx_cross_deriv_min_min) << std::endl;
-    std::cout << "min max: " << global_deriv_min_max << "   "
-              << function_and_derivs(idx_cross_deriv_min_max) << std::endl;
-    std::cout << "max min: " << global_deriv_max_min << "   "
-              << function_and_derivs(idx_cross_deriv_max_min) << std::endl;
-    std::cout << "max max: " << global_deriv_max_max << "   "
-              << function_and_derivs(idx_cross_deriv_max_max) << std::endl;
-
     // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
     // we don't need the cross-derivatives for y = ymin. Their value is not checked.
     if constexpr (!ddc::in_tags_v<Patch, PatchSeqMin>) {
@@ -797,7 +755,6 @@ void check_spline_representation_agreement(
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
     constexpr bool is_reversed_patch = ddc::in_tags_v<Patch, ReversedPatchSeq>;
-    //     constexpr int reversing_sign = !is_reversed_patch - is_reversed_patch;
 
     const ddc::BoundCond BoundCondXmin = ddc::BoundCond::HERMITE;
     const ddc::BoundCond BoundCondXmax = ddc::BoundCond::HERMITE;
@@ -1067,8 +1024,6 @@ void check_spline_representation_agreement(
 
         double local_spline = evaluator(eval_points(idx), get_const_field(function_coef));
         double global_spline = evaluator_g(eval_point_g, get_const_field(function_g_coef));
-
-        // std::cout << "check spline: " << local_spline << "   " << global_spline << std::endl;
 
         EXPECT_NEAR(local_spline, global_spline, 1e-14);
     });

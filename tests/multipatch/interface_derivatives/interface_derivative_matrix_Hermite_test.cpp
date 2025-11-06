@@ -61,7 +61,7 @@ using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
 using EastInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
 
 using Interface_1_2 = Interface<EastEdge<1>, EastEdge<2>, false>;
-using Interface_2_3 = Interface<WestEdge<2>, WestEdge<3>, false>;
+using Interface_2_3 = Interface<WestEdge<3>, WestEdge<2>, false>;
 
 
 // CONNECTIVITY ----------------------------------------------------------------------------------
@@ -516,8 +516,6 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
         Coord<Xg, Yg> interface_coord_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min)));
         derivs_x1min_extracted(idx_par)
                 = evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
-        std::cout << idx_par << "     derivs_x1min = " << derivs_x1min_extracted(idx_par)
-                  << std::endl;
     });
 
     DField<IdxRange<typename Patch3::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
@@ -558,9 +556,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
 
 
     // --- the first derivatives (on inner interfaces) from the function values.
-    std::cout << "before solve deriv." << std::endl;
     matrix.solve_deriv(functions_and_derivs);
-    std::cout << "solve deriv done." << std::endl;
 
     // --- the cross-derivatives from the first derivatives.
     /*
@@ -569,7 +565,6 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
         check that the matrix computes correctly the values. 
     */
     matrix.solve_cross_deriv(functions_and_derivs);
-    std::cout << "solve cross deriv done." << std::endl;
 
 
     // Test the values of the derivatives ========================================================
@@ -598,14 +593,6 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_ranges,
             idx_ranges_slice_dx,
             idx_ranges_slice_dy);
-
-    ddc::for_each(idx_range_xg, [&](Idx<GridXg> const& idx) {
-        Idx<GridXg, GridYg> idx_min(idx, idx_range_yg.front());
-        Coord<Xg, Yg> interface_coord_min(ddc::coordinate(idx_min));
-        std::cout << "deriv g: " << idx << "    " << interface_coord_min << "    "
-                  << evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef)
-                  << std::endl;
-    });
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<ReversedPatchSeq, EmptyPatchSeq, EmptyPatchSeq>(

@@ -306,18 +306,106 @@ public:
      * will return the same value. 
      */
     template <class Layout1, class Layout2>
-    double get_function_coefficients(
+    inline double get_function_coefficients(
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
+    {
+        // // The function needs to be continuous at the interface.
+        // Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
+        // Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
+        // assert(abs(function_1(interface_idx_1) - function_2(interface_idx_2)) < 1e-13);
+
+        // double coeff_values = ddc::transform_reduce(
+        //         m_idx_range_perp_1,
+        //         0.0,
+        //         ddc::reducer::sum<double>(),
+        //         [&](Idx1D_1 const& idx) { return function_1(idx) * m_weights_patch_1(idx); });
+
+        // // To avoid counting twice the value at the interface.
+        // IdxRange1DPerp_2 idx_range_perp_2_without_interface
+        //         = (m_extremity_2 == FRONT)
+        //                   ? m_idx_range_perp_2.remove_first(IdxStep<EdgePerpGrid2>(1))
+        //                   : m_idx_range_perp_2.remove_last(IdxStep<EdgePerpGrid2>(1));
+        // coeff_values += ddc::transform_reduce(
+        //         idx_range_perp_2_without_interface,
+        //         0.0,
+        //         ddc::reducer::sum<double>(),
+        //         [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
+        // return coeff_values;
+        return get_function_coefficients_with_sign(function_1, function_2, 1);
+    }
+
+    /**
+     * @brief Get the linear combination of the function values (c).
+     * See @ref get_function_coefficients.
+     * @param function_1 Function values at the interpolation points on patch 1. 
+     * @param function_2 Function values at the interpolation points on patch 2. 
+     * @return the linear combination of the function values (c).
+     */
+    template <class Layout1, class Layout2>
+    inline double get_function_coefficients(
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
+    {
+        return get_function_coefficients_with_sign(function_1, function_2, 1);
+    }
+
+    /**
+     * @brief Get the linear combination of the derivatives values (c).
+     *
+     * @anchor get_function_coefficients
+     * 
+     * It is more appropriate than get_function_coefficients to compute the 
+     * cross-derivatives. The computation is the same.
+     * However, in addition, the sign of the derivatives on the patch 2 is 
+     * changed in the case where the orientations of the two patches do not 
+     * match. 
+     * E.g. dx(f(-x)) = - dxf(-x)
+     * 
+     * @param derivs_1 Derivatives at the interpolation points on patch 1. 
+     * @param derivs_2 Derivatives at the interpolation points on patch 2. 
+     * @return the linear combination of the function values (c).
+     */
+    template <class Layout1, class Layout2>
+    inline double get_derivatives_coefficients(
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1,
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2) const
+    {
+        int const sign_deriv_2
+                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
+        return get_function_coefficients_with_sign(derivs_1, derivs_2, sign_deriv_2);
+    }
+
+    /**
+     * @brief Get the linear combination of the derivatives values (c).
+     * See @ref get_function_coefficients.
+     * @param derivs_1 Derivatives at the interpolation points on patch 1. 
+     * @param derivs_2 Derivatives at the interpolation points on patch 2. 
+     * @return the linear combination of the function values (c).
+     */
+    template <class Layout1, class Layout2>
+    inline double get_derivatives_coefficients(
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& derivs_2,
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& derivs_1) const
+    {
+        int const sign_deriv_2
+                = (InterfaceType::orientations_agree) - !(InterfaceType::orientations_agree);
+        return get_function_coefficients_with_sign(derivs_1, derivs_2, sign_deriv_2);
+    }
+
+
+
+private:
+    template <class Layout1, class Layout2>
+    double get_function_coefficients_with_sign(
+            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
+            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
+            int const sign_function_2) const
     {
         // The function needs to be continuous at the interface.
         Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
         Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
-        std::cout << interface_idx_1 << "   " << interface_idx_2 << "    "
-                  << abs(function_1(interface_idx_1) - function_2(interface_idx_2)) << "    "
-                  << function_1(interface_idx_1) << "    " << function_2(interface_idx_2)
-                  << std::endl;
-        assert(abs(function_1(interface_idx_1) - function_2(interface_idx_2)) < 1e-13);
+        assert(abs(function_1(interface_idx_1) - sign_function_2*function_2(interface_idx_2)) < 1e-13);
 
         double coeff_values = ddc::transform_reduce(
                 m_idx_range_perp_1,
@@ -334,27 +422,12 @@ public:
                 idx_range_perp_2_without_interface,
                 0.0,
                 ddc::reducer::sum<double>(),
-                [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
+                [&](Idx1D_2 const& idx) {
+                    return sign_function_2 * function_2(idx) * m_weights_patch_2(idx);
+                });
         return coeff_values;
     }
 
-    /**
-     * @brief Get the linear combination of the function values (c).
-     * See @ref get_function_coefficients.
-     * @param function_1 Function values at the interpolation points on patch 1. 
-     * @param function_2 Function values at the interpolation points on patch 2. 
-     * @return the linear combination of the function values (c).
-     */
-    template <class Layout1, class Layout2>
-    inline double get_function_coefficients(
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
-    {
-        return get_function_coefficients(function_1, function_2);
-    }
-
-
-private:
     template <typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid>
     void check_break_points_are_interpolation_points(
             bool const is_cell_bound_with_extra_interpol_pt,
