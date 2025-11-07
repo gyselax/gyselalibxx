@@ -495,12 +495,18 @@ private:
             Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
             Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
 
-            constexpr bool are_patches_same_direction = (extremity_1 != extremity_2);
-            constexpr int sign_deriv_2 = are_patches_same_direction - !are_patches_same_direction;
+            constexpr bool are_same_direction_perp = (extremity_1 != extremity_2);
+            constexpr int sign_deriv_perp_2 = are_same_direction_perp - !are_same_direction_perp;
 
-            const double deriv_1 = function_and_derivs_1[idx_slice_deriv_1](idx_slice_1);
-            const double deriv_2
-                    = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2) * sign_deriv_2;
+            constexpr bool is_patch1_well_oriented
+                    = (is_same_orientation && (extremity_1 == Extremity::BACK))
+                      || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
+            constexpr int sign_patch1 = is_patch1_well_oriented - !is_patch1_well_oriented;
+
+            const double deriv_1
+                    = function_and_derivs_1[idx_slice_deriv_1](idx_slice_1) * sign_patch1;
+            const double deriv_2 = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2)
+                                   * sign_patch1 * sign_deriv_perp_2;
 
             const double coeff_deriv_1
                     = m_derivatives_calculators.template get<EquivalentInterfaceI>()
@@ -605,7 +611,26 @@ private:
         // If the orientations are not the same, we change the sign of the sum.
         const int sign = is_same_orientation - !is_same_orientation;
 
-        m_vector->get_values()[I] = sign * lin_comb_funct;
+        constexpr bool is_patch1_well_orientedbis
+                = (is_same_orientation && (extremity_1 == Extremity::BACK))
+                  || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
+        constexpr int sign_patch1bis = is_patch1_well_orientedbis - !is_patch1_well_orientedbis;
+
+        constexpr bool is_patch2_well_oriented
+                = (is_same_orientation && (extremity_2 == Extremity::FRONT))
+                  || (!is_same_orientation && (extremity_2 == Extremity::BACK));
+        constexpr int sign_patch2 = is_patch2_well_oriented - !is_patch2_well_oriented;
+
+        std::cout << "sign = " << sign << "     sign_patch1bis = " << sign_patch1bis
+                  << "     sign_patch2 = " << sign_patch2 << std::endl;
+        constexpr bool are_same_direction_perpbis = (extremity_1 != extremity_2);
+        int sign_are_same_direction_perpbis
+                = are_same_direction_perpbis - !are_same_direction_perpbis;
+
+        // m_vector->get_values()[I] = sign*sign_are_same_direction_perpbis * lin_comb_funct;
+        // m_vector->get_values()[I] = sign_patch2 * lin_comb_funct;
+        // m_vector->get_values()[I] = sign * lin_comb_funct;
+        m_vector->get_values()[I] = sign*sign_patch1bis * lin_comb_funct;
 
         // Add the boundary derivatives for global Hermite boundary conditions.
         constexpr bool is_lower_bound_deriv_dependent
@@ -671,14 +696,26 @@ private:
             Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2>
                     idx_cross_deriv2(Idx<Deriv1_2>(1), idx_d1_2, Idx<Deriv2_2>(1), idx_d2_2);
 
+            constexpr bool is_patch1_well_oriented
+                    = (is_same_orientation && (extremity_1 == Extremity::BACK))
+                      || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
+            constexpr int sign_patch1 = is_patch1_well_oriented - !is_patch1_well_oriented;
+
             constexpr bool are_same_direction_perp = (extremity_1 != extremity_2);
             constexpr bool are_same_direction_par = EquivalentInterfaceI::orientations_agree;
             constexpr int sign_deriv_perp_2 = are_same_direction_perp - !are_same_direction_perp;
             constexpr int sign_deriv_par_2 = are_same_direction_par - !are_same_direction_par;
 
-            const double cross_deriv_1 = function_and_derivs_1(idx_cross_deriv1);
-            const double cross_deriv_2 = function_and_derivs_2(idx_cross_deriv2) * sign_deriv_perp_2
-                                         * sign_deriv_par_2;
+            const double cross_deriv_1 = function_and_derivs_1(idx_cross_deriv1) ; // *sign_patch1;
+                                        //  * sign_patch2
+                                        //  * sign_deriv_perp_2
+                                        //  * sign_deriv_par_2; // * sign_patch1 * sign_patch1;
+            const double cross_deriv_2 = function_and_derivs_2(idx_cross_deriv2)
+                                         *sign_patch1* sign_patch2*sign_deriv_par_2; // * sign_patch1* sign_patch1
+            // * sign_deriv_perp_2 * sign_deriv_par_2;
+
+            std::cout << "cross_deriv_1 = " << cross_deriv_1 << std::endl;
+            std::cout << "is_same_orientation? " << is_same_orientation << std::endl;
 
             const double coeff_deriv_1
                     = m_derivatives_calculators.template get<EquivalentInterfaceI>()
@@ -795,9 +832,9 @@ private:
 
         // The orientation of Patch1 follows the global orientation on the sorted 1D grid sequence.
         constexpr bool is_patch1_well_oriented
-                = (is_same_orientation && (extremity_1 == Extremity::FRONT))
-                  || (!is_same_orientation && (extremity_1 == Extremity::BACK));
-        constexpr int sign_patch1 = !is_patch1_well_oriented - is_patch1_well_oriented;
+                = (is_same_orientation && (extremity_1 == Extremity::BACK))
+                  || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
+        constexpr int sign_patch1 = is_patch1_well_oriented - !is_patch1_well_oriented;
 
         deriv_1(idx_slice_1) = m_interface_derivatives->get_values()[I] * sign_patch1;
         deriv_2(idx_slice_2)
@@ -896,9 +933,16 @@ private:
 
         // The orientation of Patch1 follows the global orientation on the sorted 1D grid sequence.
         constexpr bool is_patch1_well_oriented
-                = (is_same_orientation && (extremity_1 == Extremity::FRONT))
-                  || (!is_same_orientation && (extremity_1 == Extremity::BACK));
-        constexpr int sign_patch1 = !is_patch1_well_oriented - is_patch1_well_oriented;
+                = (is_same_orientation && (extremity_1 == Extremity::BACK))
+                  || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
+        constexpr int sign_patch1 = is_patch1_well_oriented - !is_patch1_well_oriented;
+
+        constexpr bool is_patch2_well_oriented
+                = (is_same_orientation && (extremity_2 == Extremity::FRONT))
+                  || (!is_same_orientation && (extremity_2 == Extremity::BACK));
+        constexpr int sign_patch2 = is_patch2_well_oriented - !is_patch2_well_oriented;
+
+        const int sign = is_same_orientation - !is_same_orientation;
 
         // --- Update the cross-derivative on Patch_1
         Idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1> idx_cross_deriv1
@@ -909,7 +953,9 @@ private:
                         idx_range_slice_d1_1,
                         idx_range_slice_d2_1);
         function_and_derivs_1(idx_cross_deriv1)
-                = m_interface_derivatives->get_values()[I] * sign_patch1;
+                = m_interface_derivatives->get_values()[I] ; //*sign_patch1;
+                // * sign_patch2 * sign_deriv_perp_2
+                //   * sign_deriv_par_2; // * sign_patch1 * sign_patch1;
 
         // --- Update the cross-derivative on Patch_2
         Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2> idx_cross_deriv2
@@ -920,8 +966,10 @@ private:
                         idx_range_slice_d1_2,
                         idx_range_slice_d2_2);
         function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I]
-                                                  * sign_patch1 * sign_deriv_perp_2
-                                                  * sign_deriv_par_2;
+                                                  //   * sign_patch1 * sign_patch1
+                                                  *sign_patch1* sign_patch2*sign_deriv_par_2;
+        //   * sign_deriv_perp_2
+        //   * sign_deriv_par_2;
     }
 
 

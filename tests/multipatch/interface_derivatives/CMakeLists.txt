@@ -44,21 +44,36 @@ endforeach()
 
 
 # InterfaceDerivativeMatrix test =================================================================
-set(test_name_gtest "interface_derivative_matrix_test")
-add_executable("${test_name_gtest}"
-    interface_derivative_matrix_Greville_periodic_test.cpp
-    interface_derivative_matrix_Hermite_test.cpp
-    ../../main.cpp
-)
-target_link_libraries("${test_name_gtest}"
-PUBLIC
-    DDC::core
-    GTest::gtest
-    GTest::gmock
+function (interface_derivative_matrix_executable REVERSED_PATCH)
+    # The test with Greville do not depend on the reversed patch. Do not need to duplicate test.
+    if (REVERSED_PATCH STREQUAL "PATCH2")
+        set(test_name_gtest "interface_derivative_matrix_middle_patch_reversed_test")
+        add_executable("${test_name_gtest}"
+            interface_derivative_matrix_Greville_periodic_test.cpp
+            interface_derivative_matrix_Hermite_test.cpp
+            ../../main.cpp
+        )
+    else()
+        set(test_name_gtest "interface_derivative_matrix_end_patch_reversed_test")
+        add_executable("${test_name_gtest}"
+            interface_derivative_matrix_Hermite_test2.cpp
+            ../../main.cpp
+        )
+    endif()
+    target_link_libraries("${test_name_gtest}"
+    PUBLIC
+        DDC::core
+        GTest::gtest
+        GTest::gmock
 
-    gslx::multipatch_geometries
-    gslx::multipatch_spline
-    gslx::multipatch_interface_derivatives
-)
-target_compile_definitions("${test_name_gtest}" PUBLIC -D${MESH_TYPE})
-gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
+        gslx::multipatch_geometries
+        gslx::multipatch_spline
+        gslx::multipatch_interface_derivatives
+    )
+    target_compile_definitions("${test_name_gtest}" PUBLIC -D${REVERSED_PATCH})
+    # target_compile_definitions("${test_name_gtest}" PUBLIC REVERSED_PATCH=${REVERSED_PATCH})
+    gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
+endfunction()
+
+interface_derivative_matrix_executable("PATCH2")
+interface_derivative_matrix_executable("PATCH3")
