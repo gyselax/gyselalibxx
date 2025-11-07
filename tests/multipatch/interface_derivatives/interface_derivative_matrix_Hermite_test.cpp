@@ -70,18 +70,18 @@ using SouthInterface3 = Interface<OutsideEdge, SouthEdge<3>, true>;
 
 using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
 
-// #ifdef PATCH2
+#ifdef PATCH2
 using Interface_1_2 = Interface<EastEdge<1>, EastEdge<2>, false>;
-using Interface_2_3 = Interface<WestEdge<3>, WestEdge<2>, false>;
+using Interface_2_3 = Interface<WestEdge<2>, WestEdge<3>, false>;
 
 using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
 
-// #else
-// using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
-// using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
+#else
+using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
+using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
 
-// using OutsideInterface3 = Interface<WestEdge<3>, OutsideEdge, true>;
-// #endif
+using OutsideInterface3 = Interface<WestEdge<3>, OutsideEdge, true>;
+#endif
 
 
 // CONNECTIVITY ----------------------------------------------------------------------------------
@@ -264,15 +264,15 @@ public:
 
         std::vector<Coord<Y<1>>> break_points_y1
                 = build_random_non_uniform_break_points(y1_min, y1_max, y1_ncells);
-// #ifdef PATCH2
+#ifdef PATCH2
         std::vector<Coord<Y<2>>> break_points_y2;
         fill_in_reverse(break_points_y2, break_points_y1);
         std::vector<Coord<Y<3>>> break_points_y3 = convert_dim<Y<3>, Y<1>>(break_points_y1);
-// #else
-//         std::vector<Coord<Y<2>>> break_points_y2 = convert_dim<Y<2>, Y<1>>(break_points_y1);
-//         std::vector<Coord<Y<3>>> break_points_y3;
-//         fill_in_reverse(break_points_y3, break_points_y1);
-// #endif
+#else
+        std::vector<Coord<Y<2>>> break_points_y2 = convert_dim<Y<2>, Y<1>>(break_points_y1);
+        std::vector<Coord<Y<3>>> break_points_y3;
+        fill_in_reverse(break_points_y3, break_points_y1);
+#endif
 
         std::vector<Coord<X<1>>> interpolation_points_x1 = break_points_x1;
         std::vector<Coord<X<2>>> interpolation_points_x2 = break_points_x2;
@@ -313,7 +313,7 @@ public:
         fill_in(break_points_xg, break_points_x1);
         fill_in(interpolation_points_xg, interpolation_points_x1);
 
-// #ifdef PATCH2
+#ifdef PATCH2
         std::vector<Coord<X<2>>> break_points_x2_reverse;
         std::vector<Coord<X<2>>> interpolation_points_x2_reverse;
         fill_in_reverse(break_points_x2_reverse, break_points_x2);
@@ -326,15 +326,15 @@ public:
         fill_in(break_points_xg, break_points_x3);
         fill_in(interpolation_points_xg, interpolation_points_x3);
 
-// #else
-//         break_points_x2.pop_back();
-//         interpolation_points_x2.pop_back();
-//         fill_in(break_points_xg, break_points_x2);
-//         fill_in(interpolation_points_xg, interpolation_points_x2);
+#else
+        break_points_x2.pop_back();
+        interpolation_points_x2.pop_back();
+        fill_in(break_points_xg, break_points_x2);
+        fill_in(interpolation_points_xg, interpolation_points_x2);
 
-//         fill_in_reverse(break_points_xg, break_points_x3);
-//         fill_in_reverse(interpolation_points_xg, interpolation_points_x3);
-// #endif
+        fill_in_reverse(break_points_xg, break_points_x3);
+        fill_in_reverse(interpolation_points_xg, interpolation_points_x3);
+#endif
 
         std::vector<Coord<Yg>> break_points_yg;
         std::vector<Coord<Yg>> interpolation_points_yg;
@@ -362,13 +362,13 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, InterpolationPointsCheck)
     int const x_shift2 = x1_ncells.value() + x2_ncells.value();
 
     check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0);
-// #ifdef PATCH2
+#ifdef PATCH2
     check_interpolation_grids_reverse<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1);
     check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2);
-// #else
-//     check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1);
-//     check_interpolation_grids_reverse<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2);
-// #endif
+#else
+    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1);
+    check_interpolation_grids_reverse<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2);
+#endif
 }
 
 
@@ -452,11 +452,11 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     initialise_2D_function<GridXg, GridYg>(function_g);
 
     // Fix the values for the reverse patch.
-// #ifdef PATCH2
+#ifdef PATCH2
     initialise_2D_function_reverse<GridX<2>, GridY<2>>(function_and_derivs_2.get_values_field());
-// #else
-//     initialise_2D_function_reverse<GridX<3>, GridY<3>>(function_and_derivs_3.get_values_field());
-// #endif
+#else
+    initialise_2D_function_reverse<GridX<3>, GridY<3>>(function_and_derivs_3.get_values_field());
+#endif
 
     // --- the derivatives of the equivalent global spline.
     Idx<DerivXg> first_dxg(1);
@@ -558,7 +558,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
                 = evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
     });
 
-// #ifdef PATCH2
+#ifdef PATCH2
     Idx<ddc::Deriv<X<3>>, GridX<3>>
             idx_slice_xmax_3(Idx<ddc::Deriv<X<3>>>(1), idx_range_slice_dx3.back());
 
@@ -571,22 +571,22 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
                 = evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
     });
 
-// #else
-//     Idx<ddc::Deriv<X<3>>, GridX<3>>
-//             idx_slice_xmin_3(Idx<ddc::Deriv<X<3>>>(1), idx_range_slice_dx3.front());
+#else
+    Idx<ddc::Deriv<X<3>>, GridX<3>>
+            idx_slice_xmin_3(Idx<ddc::Deriv<X<3>>>(1), idx_range_slice_dx3.front());
 
-//     DField<IdxRange<typename Patch3::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
-//             derivs_x3min_extracted = function_and_derivs_3[idx_slice_xmin_3];
-//     ddc::for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
-//         Idx<GridX<3>, GridY<3>> idx_min(idx_range_x3.front(), idx_par);
-//         Coord<Xg, Yg> interface_coord_min(
-//                 get_global_coord_reverse<
-//                         Xg,
-//                         Yg>(ddc::coordinate(idx_min), x3_min, x3_max, y3_min, y3_max));
-//         derivs_x3min_extracted(idx_par)
-//                 = -evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
-//     });
-// #endif
+    DField<IdxRange<typename Patch3::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
+            derivs_x3min_extracted = function_and_derivs_3[idx_slice_xmin_3];
+    ddc::for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
+        Idx<GridX<3>, GridY<3>> idx_min(idx_range_x3.front(), idx_par);
+        Coord<Xg, Yg> interface_coord_min(
+                get_global_coord_reverse<
+                        Xg,
+                        Yg>(ddc::coordinate(idx_min), x3_min, x3_max, y3_min, y3_max));
+        derivs_x3min_extracted(idx_par)
+                = -evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+    });
+#endif
 
     initialise_all_y_derivatives(
             functions_and_derivs,
@@ -595,13 +595,13 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             const_function_g_coef);
 
     // Fix the derivatives for the reverse patch.
-// #ifdef PATCH2
+#ifdef PATCH2
     initialise_y_derivatives_reversed<
             Patch2>(function_and_derivs_2, idx_range_slice_dy2, evaluator_g, const_function_g_coef);
-// #else
-//     initialise_y_derivatives_reversed<
-//             Patch3>(function_and_derivs_3, idx_range_slice_dy3, evaluator_g, const_function_g_coef);
-// #endif
+#else
+    initialise_y_derivatives_reversed<
+            Patch3>(function_and_derivs_3, idx_range_slice_dy3, evaluator_g, const_function_g_coef);
+#endif
 
     // ------ intialise the cross-derivatives from the global spline
     initialise_all_cross_derivatives(
@@ -612,7 +612,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             const_function_g_coef);
 
     // Fix the cross-derivatives for the reverse patch.
-// #ifdef PATCH2
+#ifdef PATCH2
     initialise_cross_derivatives_reverse<Patch2>(
             function_and_derivs_2,
             idx_range_slice_dx2,
@@ -620,15 +620,15 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             evaluator_g,
             const_function_g_coef,
             1);
-// #else
-//     initialise_cross_derivatives_reverse<Patch3>(
-//             function_and_derivs_3,
-//             idx_range_slice_dx3,
-//             idx_range_slice_dy3,
-//             evaluator_g,
-//             const_function_g_coef,
-//             2);
-// #endif
+#else
+    initialise_cross_derivatives_reverse<Patch3>(
+            function_and_derivs_3,
+            idx_range_slice_dx3,
+            idx_range_slice_dy3,
+            evaluator_g,
+            const_function_g_coef,
+            2);
+#endif
 
 
 
@@ -646,11 +646,11 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
 
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::detail::TypeSeq<>;
-// #ifdef PATCH2
+#ifdef PATCH2
     using ReversedPatchSeq = ddc::detail::TypeSeq<Patch2>;
-// #else
-//     using ReversedPatchSeq = ddc::detail::TypeSeq<Patch3>;
-// #endif
+#else
+    using ReversedPatchSeq = ddc::detail::TypeSeq<Patch3>;
+#endif
 
     // Check each derivatives ---
     check_all_x_derivatives<ReversedPatchSeq>(

@@ -171,11 +171,6 @@ void initialise_y_derivatives_reversed(
                 = -evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
         derivs_ymax_extracted(idx_par)
                 = -evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
-
-        // std::cout << idx_par << "   " << derivs_ymin_extracted(idx_par) << "   "
-        //           << derivs_ymax_extracted(idx_par) << "   " << interface_coord_min << "   "
-        //           << interface_coord_max << "   " << ddc::coordinate(idx_min) << "   "
-        //           << ddc::coordinate(idx_max) << std::endl;
     });
 }
 
@@ -683,10 +678,6 @@ void check_xy_derivatives(
         global_deriv_min_max = evaluator_g.deriv_1_and_2(interface_coord_min_max, function_g_coef);
         global_deriv_max_max = evaluator_g.deriv_1_and_2(interface_coord_max_max, function_g_coef);
     }
-    std::cout << "global_deriv_min_min = " << global_deriv_min_min << std::endl;
-    std::cout << "global_deriv_min_max = " << global_deriv_min_max << std::endl;
-    std::cout << "global_deriv_max_min = " << global_deriv_max_min << std::endl;
-    std::cout << "global_deriv_max_max = " << global_deriv_max_max << std::endl;
 
     // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
     // we don't need the cross-derivatives for y = ymin. Their value is not checked.

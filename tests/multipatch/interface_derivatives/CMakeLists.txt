@@ -56,7 +56,7 @@ function (interface_derivative_matrix_executable REVERSED_PATCH)
     else()
         set(test_name_gtest "interface_derivative_matrix_end_patch_reversed_test")
         add_executable("${test_name_gtest}"
-            interface_derivative_matrix_Hermite_test2.cpp
+            interface_derivative_matrix_Hermite_test.cpp
             ../../main.cpp
         )
     endif()
@@ -71,7 +71,6 @@ function (interface_derivative_matrix_executable REVERSED_PATCH)
         gslx::multipatch_interface_derivatives
     )
     target_compile_definitions("${test_name_gtest}" PUBLIC -D${REVERSED_PATCH})
-    # target_compile_definitions("${test_name_gtest}" PUBLIC REVERSED_PATCH=${REVERSED_PATCH})
     gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 endfunction()
 
