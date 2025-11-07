@@ -56,7 +56,7 @@ RUN chmod +x /bin/bash_run \
  && git clone --branch 4.4.01 --depth 1 https://github.com/kokkos/kokkos.git \
  && git clone --branch 4.5.01 --depth 1 https://github.com/kokkos/kokkos-kernels.git \
  && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
- && git clone --branch v0.2.1 --depth 1 https://github.com/kokkos/kokkos-fft.git \
+ && git clone --branch v0.4.0 --depth 1 https://github.com/kokkos/kokkos-fft.git \
  && git clone --branch v0.9.0 --depth 1 https://github.com/CExA-project/ddc.git \
  && export Kokkos_ROOT=/opt/serial/Kokkos \
  && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
