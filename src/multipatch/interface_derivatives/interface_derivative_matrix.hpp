@@ -559,14 +559,14 @@ private:
             constexpr bool is_per_1_well_oriented
                     = (is_same_orientation && (extremity_1 == Extremity::BACK))
                       || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
-            constexpr int sign_patch1 = is_per_1_well_oriented - !is_per_1_well_oriented;
+            constexpr int sign_deriv_perp_1 = is_per_1_well_oriented - !is_per_1_well_oriented;
 
             // Change the sign of the derivatives if Patch1 is ill-oriented.
             const double deriv_1
-                    = function_and_derivs_1[idx_slice_deriv_1](idx_slice_1) * sign_patch1;
+                    = function_and_derivs_1[idx_slice_deriv_1](idx_slice_1) * sign_deriv_perp_1;
             // Change in addition the sign of the derivative on Patch2, if the grid directions desagree.
             const double deriv_2 = function_and_derivs_2[idx_slice_deriv_2](idx_slice_2)
-                                   * sign_patch1 * sign_deriv_perp_2;
+                                   * sign_deriv_perp_1 * sign_deriv_perp_2;
 
             const double coeff_deriv_1
                     = m_derivatives_calculators.template get<EquivalentInterfaceI>()
@@ -670,12 +670,7 @@ private:
 
         // If the orientations are not the same, we change the sign of the sum.
         const int sign = is_same_orientation - !is_same_orientation;
-
-        // If Patch1 follows the orientation of the sorted 1D grid sequence.
-        constexpr bool is_per_1_well_oriented
-                = (is_same_orientation && (extremity_1 == Extremity::BACK))
-                  || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
-        constexpr int sign_patch1 = is_per_1_well_oriented - !is_per_1_well_oriented;
+        const int sign_deriv_par_1 = m_vector_par_signs[ddc::type_seq_rank_v<GridPerp1, Grid1DSeq>];
 
         /*
             We need to change the sign if the orientation of the interface desagrees with 
@@ -686,7 +681,7 @@ private:
             ill-oriented. Because, 
                     d(f(-x)) = - df(-x).
         */
-        m_vector->get_values()[I] = sign * sign_patch1 * lin_comb_funct;
+        m_vector->get_values()[I] = sign * sign_deriv_par_1 * lin_comb_funct;
 
         // Add the boundary derivatives for global Hermite boundary conditions.
         constexpr bool is_lower_bound_deriv_dependent
@@ -752,6 +747,15 @@ private:
             Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2>
                     idx_cross_deriv2(Idx<Deriv1_2>(1), idx_d1_2, Idx<Deriv2_2>(1), idx_d2_2);
 
+            // If Patch1 follows the orientation of the sorted 1D grid sequence.
+            constexpr bool is_per_1_well_oriented
+                    = (is_same_orientation && (extremity_1 == Extremity::BACK))
+                      || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
+            constexpr int sign_deriv_perp_1 = is_per_1_well_oriented - !is_per_1_well_oriented;
+
+            // Sign for the parallel axis.
+            const int sign_deriv_par_1
+                    = m_vector_par_signs[ddc::type_seq_rank_v<GridPerp1, Grid1DSeq>];
             // If the perpendicular grids of the two patches agree.
             constexpr bool are_same_direction_perp = (extremity_1 != extremity_2);
             // If the parallel grids of the two patches agree.
@@ -760,16 +764,12 @@ private:
             constexpr int sign_deriv_perp_2 = are_same_direction_perp - !are_same_direction_perp;
             constexpr int sign_deriv_par_2 = are_same_direction_par - !are_same_direction_par;
 
-            // Sign for the parallel axis.
-            const int sign_deriv_par_1
-                    = m_vector_par_signs[ddc::type_seq_rank_v<GridPerp1, Grid1DSeq>];
-
             /*
                 Change the sign of the cross-derivative if Patch1 has its perpendicular grid ill-oriented.
                 Change the sign of the cross-derivative if Patch1 has its parallel grid ill-oriented. 
             */
-            const double cross_deriv_1
-                    = function_and_derivs_1(idx_cross_deriv1) * sign_patch1 * sign_deriv_par_1;
+            const double cross_deriv_1 = function_and_derivs_1(idx_cross_deriv1) * sign_deriv_perp_1
+                                         * sign_deriv_par_1;
             /*
                 Change the sign of the cross-derivative if Patch1 is ill-oriented.
                 Correct the sign of the cross-derivative from the parallel axis of Patch1.
@@ -778,7 +778,7 @@ private:
                 Change the sign of the cross-derivative if the orientation of the parallel grid 
                 of Patch2 desagrees with Patch1.
             */
-            const double cross_deriv_2 = function_and_derivs_2(idx_cross_deriv2) * sign_patch1
+            const double cross_deriv_2 = function_and_derivs_2(idx_cross_deriv2) * sign_deriv_perp_1
                                          * sign_deriv_par_1 * sign_deriv_perp_2 * sign_deriv_par_2;
 
             const double coeff_deriv_1
@@ -893,7 +893,7 @@ private:
         constexpr bool is_per_1_well_oriented
                 = (is_same_orientation && (extremity_1 == Extremity::BACK))
                   || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
-        constexpr int sign_patch1 = is_per_1_well_oriented - !is_per_1_well_oriented;
+        constexpr int sign_deriv_perp_1 = is_per_1_well_oriented - !is_per_1_well_oriented;
 
         // The direction of the two perpendicular grids of the patches agree.
         constexpr bool are_patches_same_direction = (extremity_1 != extremity_2);
@@ -901,10 +901,10 @@ private:
                 = are_patches_same_direction - !are_patches_same_direction;
 
         // Change again the sign of the derivatives if Patch1 was ill-oriented.
-        deriv_1(idx_slice_1) = m_interface_derivatives->get_values()[I] * sign_patch1;
+        deriv_1(idx_slice_1) = m_interface_derivatives->get_values()[I] * sign_deriv_perp_1;
         // Change again the sign of the derivative on Patch2, if the grid directions desagreed.
-        deriv_2(idx_slice_2)
-                = m_interface_derivatives->get_values()[I] * sign_patch1 * sign_change_direction;
+        deriv_2(idx_slice_2) = m_interface_derivatives->get_values()[I] * sign_deriv_perp_1
+                               * sign_change_direction;
     }
 
     /// @brief Associate the Ith derivative values to the correct cross-derivative.
@@ -999,7 +999,7 @@ private:
         constexpr bool is_per_1_well_oriented
                 = (is_same_orientation && (extremity_1 == Extremity::BACK))
                   || (!is_same_orientation && (extremity_1 == Extremity::FRONT));
-        constexpr int sign_patch1 = is_per_1_well_oriented - !is_per_1_well_oriented;
+        constexpr int sign_deriv_perp_1 = is_per_1_well_oriented - !is_per_1_well_oriented;
 
         // Sign for the parallel axis.
         const int sign_deriv_par_1 = m_vector_par_signs[ddc::type_seq_rank_v<GridPerp1, Grid1DSeq>];
@@ -1025,7 +1025,7 @@ private:
                         idx_range_slice_d1_1,
                         idx_range_slice_d2_1);
         function_and_derivs_1(idx_cross_deriv1)
-                = m_interface_derivatives->get_values()[I] * sign_patch1 * sign_deriv_par_1;
+                = m_interface_derivatives->get_values()[I] * sign_deriv_perp_1 * sign_deriv_par_1;
 
         // --- Update the cross-derivative on Patch_2
         /*
@@ -1044,7 +1044,7 @@ private:
                         idx_range_slice_d1_2,
                         idx_range_slice_d2_2);
         function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I]
-                                                  * sign_patch1 * sign_deriv_par_1
+                                                  * sign_deriv_perp_1 * sign_deriv_par_1
                                                   * sign_deriv_perp_2 * sign_deriv_par_2;
     }
 
