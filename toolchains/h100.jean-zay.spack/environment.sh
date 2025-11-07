@@ -44,3 +44,6 @@ eval -- "$(
 export GYSELALIBXX_OPENBLAS_ROOT="$(spack location -i openblas)"
 
 module load arch/h100 cuda/12.6.3
+
+# Avoid too many temporary files in the Spack installation tree
+export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH

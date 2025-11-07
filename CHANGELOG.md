@@ -20,6 +20,7 @@ The operator averages the values of the advection field on the first ring to get
 ### Fixed
 
 - Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
+- Specify return type for Lie-Poisson operator explicitly for better error messages.
 
 ### Changed
 
@@ -29,9 +30,12 @@ The operator averages the values of the advection field on the first ring to get
 - Add pdiplugin-pycall to Persee toolchains.
 - Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
 - Allow a local installation of Kokkos > v4.4.1 to be used by CMake.
-- Combine `landau_fft` and `bumpontail_fft` executables into a `xvx_fft` executable.
-- Combine `landau_fem_uniform` and `bumpontail_fem_uniform` executables into a `xvx_fem_uniform` executable.
-- Make the choice of equililibrium an input parameter for `xvx` executables.
+- Rename static variable `is_curvilinear_2d_mapping_v` to the more accurate: `is_coord_transform_with_o_point_v`.
+- Move Python cache files out of the Spack installation tree on Adastra and Jean-Zay.
+- Use CCFR environment variables on CINES and IDRIS machines when possible.
+- Combine `landau_fft` and `bumpontail_fft` executables into a `vlasovpoisson_xvx_fft` executable.
+- Combine `landau_fem_uniform` and `bumpontail_fem_uniform` executables into a `vlasovpoisson_xvx_fem_uniform` executable.
+- Make the choice of equililibrium an input parameter for `vlasovpoisson_xvx` executables.
 
 ### Deprecated
 

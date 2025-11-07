@@ -9,7 +9,7 @@ fi
 
 SPACK_USER_VERSION="spack-user-4.0.0"
 
-export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_PREFIX="${ALL_CCFRWORK}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
 export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 module purge
@@ -69,3 +69,6 @@ module list
 
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
+
+# Avoid too many temporary files in the Spack installation tree
+export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH
