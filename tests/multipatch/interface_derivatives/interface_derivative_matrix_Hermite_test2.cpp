@@ -78,8 +78,8 @@ using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
 
 // #else
 using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
-using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
-// using Interface_2_3 = Interface<EastEdge<2>, EastEdge<3>, false>;
+// using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
+using Interface_2_3 = Interface<EastEdge<2>, EastEdge<3>, false>;
 
 using OutsideInterface3 = Interface<WestEdge<3>, OutsideEdge, true>;
 // #endif
