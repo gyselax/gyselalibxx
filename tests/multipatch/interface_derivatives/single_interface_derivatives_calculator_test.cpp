@@ -814,13 +814,11 @@ TYPED_TEST(
     if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
         // We test if the boundaries are well treated => only work with 5 cells to better identify an error.
         // 5 cells -------------------------------------------------------------------------------
-        SingleInterfaceDerivativesCalculator<
-                Interface_1_2,
+        SingleInterfaceDerivativesCalculator<Interface_1_2> const derivatives_calculator(
+                TestFixture::idx_range_rtheta1,
+                TestFixture::idx_range_etaxi2,
                 ddc::BoundCond::GREVILLE,
-                ddc::BoundCond::GREVILLE> const
-                derivatives_calculator(
-                        TestFixture::idx_range_rtheta1,
-                        TestFixture::idx_range_etaxi2);
+                ddc::BoundCond::GREVILLE);
 
 
         ddc::for_each(TestFixture::idx_range_theta1, [&](Patch1::Idx2 const& idx2_1) {

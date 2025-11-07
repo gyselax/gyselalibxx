@@ -383,10 +383,6 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3);
 
     // Collect the derivative calculators --------------------------------------------------------
-    using DerivativesCalculatorCollection = SingleInterfaceDerivativesCalculatorCollection<
-            SingleInterfaceDerivativesCalculator<Interface_2_3>,
-            SingleInterfaceDerivativesCalculator<Interface_1_2>>;
-
     // We do not follow the physical order to test the operator.
     SingleInterfaceDerivativesCalculatorCollection
             deriv_calculators_collect(derivatives_calculator_2_3, derivatives_calculator_1_2);
@@ -402,8 +398,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
             ddc::BoundCond::HERMITE,
             ddc::BoundCond::HERMITE,
-            DerivativesCalculatorCollection>
-            // SingleInterfaceDerivativesCalculatorCollection<Interface_2_3, Interface_1_2> >
+            SingleInterfaceDerivativesCalculatorCollection<Interface_2_3, Interface_1_2>>
             matrix(idx_ranges, deriv_calculators_collect);
 
 
