@@ -226,7 +226,7 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 xyvxvy_grid,
                 KOKKOS_LAMBDA(IdxXYVxVy const idx) {
-                    CoordXY coord_xy = CoordXY(ddc::coordinate(idx));
+                    CoordXY coord_xy = ddc::coordinate(IdxXY(idx));
                     double const x = CoordX(coord_xy);
                     double const y = CoordY(coord_xy);
 
@@ -266,7 +266,7 @@ public:
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
         host_t<DFieldMemXYVxVy> exact_function(xyvxvy_grid);
         ddc::for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
-            CoordXY coord_xy = CoordXY(ddc::coordinate(idx));
+            CoordXY coord_xy = ddc::coordinate(IdxXY(idx));
             double const x0 = CoordX(coord_xy);
             double const y0 = CoordY(coord_xy);
 

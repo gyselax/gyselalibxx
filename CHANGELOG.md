@@ -32,6 +32,7 @@ The operator averages the values of the advection field on the first ring to get
 - Rename static variable `is_curvilinear_2d_mapping_v` to the more accurate: `is_coord_transform_with_o_point_v`.
 - Move Python cache files out of the Spack installation tree on Adastra and Jean-Zay.
 - Use CCFR environment variables on CINES and IDRIS machines when possible.
+- Update DDC dependency to v0.9.0.
 
 ### Deprecated
 
