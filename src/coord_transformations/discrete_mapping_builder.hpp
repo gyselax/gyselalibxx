@@ -23,7 +23,7 @@ class DiscreteToCartesianBuilder
 {
     static_assert(
             ddc::is_evaluator_admissible_v<SplineBuilder, SplineEvaluator>,
-            "SplineEvaluator must be admissible to  SplineBuilder");
+            "SplineEvaluator must be admissible to SplineBuilder");
     static_assert(std::is_same_v<
                   typename SplineBuilder::memory_space,
                   typename SplineEvaluator::memory_space>);
