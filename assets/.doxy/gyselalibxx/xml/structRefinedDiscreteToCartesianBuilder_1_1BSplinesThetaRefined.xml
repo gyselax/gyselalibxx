@@ -31,7 +31,7 @@
         <label>std::conditional_t&lt; BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt;, ddc::NonUniformBSplines&lt; Theta, BSplinesThetaOriginal::degree()&gt; &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" line="205" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" bodystart="210" bodyend="211"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" line="208" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" bodystart="213" bodyend="214"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

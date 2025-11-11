@@ -18,6 +18,9 @@ template <class Spline2DBuilder, class Spline2DEvaluator, class IdxRangeBatched>
 class SplineInterpolator2D
     : public IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>
 {
+    static_assert(
+            ddc::is_evaluator_admissible_v<Spline2DBuilder, Spline2DEvaluator>,
+            "Spline2DEvaluator must be admissible to Spline2DBuilder");
     using base_type
             = IInterpolator2D<typename Spline2DBuilder::interpolation_domain_type, IdxRangeBatched>;
 
