@@ -48,16 +48,6 @@ public:
     MaxwellianEquilibrium& operator=(MaxwellianEquilibrium&&) = default;
 
     /**
-     * @brief Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.
-     * @param[in] idx_range_kinsp Index range for the kinetic species
-     * @param[in] yaml_input_file YAML input file
-     * @return an instance of Maxwellian distribution function.
-     */
-    static MaxwellianEquilibrium init_from_input(
-            IdxRangeSp idx_range_kinsp,
-            PC_tree_t const& yaml_input_file);
-
-    /**
      * @brief Initialises allfequilibrium as a Maxwellian.
      * @param[out] allfequilibrium A Field containing a Maxwellian distribution function.
      * @return A Field containing a Maxwellian distribution function.
@@ -108,3 +98,17 @@ public:
         return get_const_field(m_mean_velocity_eq);
     }
 };
+
+namespace maxwellian_equilibrium {
+
+/**
+ * @brief Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.
+ * @param[in] idx_range_kinsp Index range for the kinetic species
+ * @param[in] yaml_input_file YAML input file
+ * @return an instance of Maxwellian distribution function.
+ */
+MaxwellianEquilibrium init_from_input(
+        IdxRangeSp idx_range_kinsp,
+        PC_tree_t const& yaml_input_file);
+
+} // namespace maxwellian_equilibrium

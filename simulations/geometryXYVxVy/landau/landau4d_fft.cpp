@@ -99,7 +99,7 @@ int main(int argc, char** argv)
     // Initialisation of the distribution function
     DFieldMemSpVxVy allfequilibrium(idxrange_spvxvy_local);
     MaxwellianEquilibrium const init_fequilibrium
-            = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
+            = maxwellian_equilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
     init_fequilibrium(get_field(allfequilibrium));
     DFieldMemSpXYVxVy allfdistribu_x2D_split(idxrange_spxyvxvy_x2Dsplit);
     DFieldMemSpVxVyXY allfdistribu_v2D_split(idxrange_spvxvyxy_v2Dsplit);

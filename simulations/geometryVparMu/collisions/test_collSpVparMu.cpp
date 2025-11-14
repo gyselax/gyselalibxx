@@ -60,7 +60,7 @@ int main(int argc, char** argv)
     // ---> Initialisation of the Maxwellian equilibrium distribution
     DFieldMemSpVparMu allfequilibrium(idxrange_spvparmu);
     MaxwellianEquilibrium const init_fequilibrium
-            = MaxwellianEquilibrium::init_from_input(idxrange_kinsp, conf_collision);
+            = maxwellian_equilibrium::init_from_input(idxrange_kinsp, conf_collision);
     init_fequilibrium(get_field(allfequilibrium));
 
     // ---> Initialisation of the distribution function as a perturbed Maxwellian

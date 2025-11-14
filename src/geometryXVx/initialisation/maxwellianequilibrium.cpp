@@ -38,7 +38,28 @@ DFieldSpVx MaxwellianEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
 }
 
 
-MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
+
+void MaxwellianEquilibrium::compute_maxwellian(
+        DFieldVx const fMaxwellian,
+        double const density,
+        double const temperature,
+        double const mean_velocity)
+{
+    double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature);
+    IdxRangeVx const gridvx = get_idx_range(fMaxwellian);
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            gridvx,
+            KOKKOS_LAMBDA(IdxVx const ivx) {
+                CoordVx const vx = ddc::coordinate(ivx);
+                fMaxwellian(ivx) = density * inv_sqrt_2piT
+                                   * Kokkos::exp(
+                                           -(vx - mean_velocity) * (vx - mean_velocity)
+                                           / (2. * temperature));
+            });
+}
+
+MaxwellianEquilibrium maxwellian_equilibrium::init_from_input(
         IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {
@@ -60,23 +81,3 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
             std::move(mean_velocity_eq));
 }
 
-
-void MaxwellianEquilibrium::compute_maxwellian(
-        DFieldVx const fMaxwellian,
-        double const density,
-        double const temperature,
-        double const mean_velocity)
-{
-    double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature);
-    IdxRangeVx const gridvx = get_idx_range(fMaxwellian);
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            gridvx,
-            KOKKOS_LAMBDA(IdxVx const ivx) {
-                CoordVx const vx = ddc::coordinate(ivx);
-                fMaxwellian(ivx) = density * inv_sqrt_2piT
-                                   * Kokkos::exp(
-                                           -(vx - mean_velocity) * (vx - mean_velocity)
-                                           / (2. * temperature));
-            });
-}
