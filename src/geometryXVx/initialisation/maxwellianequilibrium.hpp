@@ -107,8 +107,6 @@ namespace maxwellian_equilibrium {
  * @param[in] yaml_input_file YAML input file
  * @return an instance of Maxwellian distribution function.
  */
-MaxwellianEquilibrium init_from_input(
-        IdxRangeSp idx_range_kinsp,
-        PC_tree_t const& yaml_input_file);
+MaxwellianEquilibrium init_from_input(IdxRangeSp idx_range_kinsp, PC_tree_t const& yaml_input_file);
 
 } // namespace maxwellian_equilibrium

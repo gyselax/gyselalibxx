@@ -80,4 +80,3 @@ MaxwellianEquilibrium maxwellian_equilibrium::init_from_input(
             std::move(temperature_eq),
             std::move(mean_velocity_eq));
 }
-

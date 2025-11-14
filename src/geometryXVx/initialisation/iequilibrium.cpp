@@ -20,4 +20,3 @@ std::unique_ptr<IEquilibrium> equilibrium::init_from_input(
         throw std::runtime_error("Unrecognised equilibrium requested : " + init_method);
     }
 }
-
