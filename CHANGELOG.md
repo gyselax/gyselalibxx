@@ -15,7 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add H100 Jean-Zay toolchain.
 - Add an `operator()` in `BslAdvectionPolar` to advect a function with an advection field along `<R, Theta>`.
 The operator averages the values of the advection field on the first ring to get its value at the O-point.
-- Added `IEquilibrium::init_from_input` method to choose XVx equililibrium in input file.
+- Add `static_assert` expressions for spline builder/evaluator pairs.
+- Added `equilibrium::init_from_input` method to choose XVx equililibrium in input file.
 
 ### Fixed
 
@@ -33,9 +34,12 @@ The operator averages the values of the advection field on the first ring to get
 - Rename static variable `is_curvilinear_2d_mapping_v` to the more accurate: `is_coord_transform_with_o_point_v`.
 - Move Python cache files out of the Spack installation tree on Adastra and Jean-Zay.
 - Use CCFR environment variables on CINES and IDRIS machines when possible.
+- Update DDC dependency to v0.9.0.
 - Combine `landau_fft` and `bumpontail_fft` executables into a `vlasovpoisson_xvx_fft` executable.
 - Combine `landau_fem_uniform` and `bumpontail_fem_uniform` executables into a `vlasovpoisson_xvx_fem_uniform` executable.
 - Make the choice of equililibrium an input parameter for `vlasovpoisson_xvx` executables.
+- Move static class method `BumpontailEquilibrium::init_from_input` to namespace `bumpontail_equilibrium::init_from_input`.
+- Move static class method `MaxwellianEquilibrium::init_from_input` to namespace `maxwellian_equilibrium::init_from_input`.
 
 ### Deprecated
 

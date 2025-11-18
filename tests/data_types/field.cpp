@@ -535,9 +535,7 @@ TEST(VectorField2DTest, IdxRangeSliceXTooearly)
     DVectorFieldMemXY field(idx_range_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
     // the error message is checked with clang & gcc only
-    EXPECT_DEATH(
-            field[subidx_range_x],
-            R"rgx([Aa]ssert.*DiscreteElement<ODDims>\(m_element_begin\) <= DiscreteElement<ODDims>\(odomain.m_element_begin\).*)rgx");
+    EXPECT_DEATH(field[subidx_range_x], R"rgx([Aa]ssert.*contains\(.*)rgx");
 #endif
 }
 
@@ -549,9 +547,7 @@ TEST(VectorField2DTest, IdxRangeSliceXToolate)
     DVectorFieldMemXY field(idx_range_x_y);
 #ifndef NDEBUG // The assertion is only checked if NDEBUG isn't defined
     // the error message is checked with clang & gcc only
-    EXPECT_DEATH(
-            field[subidx_range_x],
-            R"rgx([Aa]ssert.*DiscreteElement<ODDims>\(m_element_end\) >= DiscreteElement<ODDims>\(odomain.m_element_end\).*)rgx");
+    EXPECT_DEATH(field[subidx_range_x], R"rgx([Aa]ssert.*contains\(.*)rgx");
 #endif
 }
 
