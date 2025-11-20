@@ -7,14 +7,17 @@ then
     exit 1
 fi
 
-SPACK_USER_VERSION="spack-user-4.0.0"
+SPACK_USER_VERSION="spack-user-5.0.0"
 
 export SPACK_USER_PREFIX="${ALL_CCFRWORK}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
 export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
+# Avoid too many temporary files in the Spack installation tree
+export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
+
 module purge
 
-module load "${SPACK_USER_VERSION}"
+module load develop "${SPACK_USER_VERSION}"
 which spack
 spack debug report
 # Spack must work in a clean, purged environment so it can load modules without
@@ -34,12 +37,15 @@ eval -- "$(
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
+        gcc \
         ginkgo \
         googletest \
         kokkos \
         kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
+        lapack \
+        mpi \
         ninja \
         paraconf \
         pdi \
@@ -61,14 +67,7 @@ eval -- "$(
         py-pyyaml
 )"
 
-module load cpe/24.07
-module load craype-x86-genoa
-module load PrgEnv-gnu
-
-module list
-
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
 
-# Avoid too many temporary files in the Spack installation tree
-export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH
+export GYSELALIBXX_OPENBLAS_ROOT="$(spack location -i openblas)"

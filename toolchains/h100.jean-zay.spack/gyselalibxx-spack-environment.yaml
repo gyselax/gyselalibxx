@@ -1,68 +1,84 @@
 spack:
-  # add package specs to the `specs` list
   definitions:
   - packages:
     - cmake
     - ginkgo@1.9~openmp+cuda cuda_arch=90
-    - googletest
+    - googletest +gmock
     - kokkos@4.6~openmp+cuda+cuda_relocatable_device_code +cuda_constexpr cuda_arch=90
     - kokkos-fft@0.3 host_backend=fftw-serial device_backend=cufft
     - kokkos-kernels@4.6~shared
+    - kokkos-tools
+    - lapack
+    - mpi
     - ninja
     - paraconf
     - pdi
-    - pdiplugin-decl-hdf5
-    - pdiplugin-decl-netcdf
+    - pdiplugin-decl-hdf5 +mpi
+    - pdiplugin-decl-netcdf +mpi
     - pdiplugin-mpi
+    - pdiplugin-pycall
     - pdiplugin-set-value
     - pdiplugin-trace
-    - python
+    - 'python@3.12:'
 
     - py-dask
     - py-h5py
     - py-imageio
     - py-matplotlib
-    - py-netcdf4
+    - py-netcdf4 +mpi
     - py-numpy
+    - py-pyyaml
     - py-scipy
     - py-sympy
     - py-xarray
-    - py-pyyaml
   - architectures:
     - arch=linux-rhel9-icelake
   specs:
   - matrix:
     - [$packages]
-    - ["%gcc@11.4.1"]
     - [$architectures]
-  view: true
+  repos:
+    patches:
+      git: https://github.com/gyselax/spack.git
+      branch: releases/v2025.11
+    builtin:
+      branch: releases/v2025.11
   concretizer:
     unify: true
-  compilers:
-  - compiler:
-      spec: gcc@=11.4.1
-      paths:
-        cc: /usr/bin/gcc
-        cxx: /usr/bin/g++
-        f77: /usr/bin/gfortran
-        fc: /usr/bin/gfortran
-      flags: {}
-      operating_system: rhel9
-      target: x86_64
-      modules: []
-      environment: {}
-      extra_rpaths: []
   packages:
     all:
       permissions:
         read: group
         write: group
+      variants: ~fortran ~mpi
     cuda:
+      buildable: false
       externals:
-      - spec: cuda@12.6.3
-        prefix: /lustre/fshomisc/sys/common/nvidia/cuda/12.6.3
+      - spec: cuda@12.8.61
+        prefix: /lustre/fshomisc/sys/common/nvidia/cuda/12.8
+    c:
+      require: gcc@11.4.1
+    cxx:
+      require: gcc@11.4.1
+    gcc:
+      externals:
+      - spec: gcc@11.4.1 languages:='c,c++,fortran'
+        prefix: /usr
+        extra_attributes:
+            compilers:
+              c: /usr/bin/gcc
+              cxx: /usr/bin/g++
+              fortran: /usr/bin/gfortran
+    lapack:
+      require: openblas
+    mpi:
+      require: openmpi
     openmpi:
+      buildable: false
       externals:
       - spec: openmpi@4.1.6+cuda~cxx~cxx_exceptions~java+lustre~memchecker+pmi~static~wrapper-rpath
           fabrics=ucx schedulers=slurm
         prefix: /lustre/fshomisc/sup/spack_soft/openmpi/4.1.6/gcc-11.4.1-hbuwwfts4cctbzqir427u56mkk6zu3qr
+    py-dask:
+      variants: ~dataframe
+  view: false

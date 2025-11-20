@@ -12,7 +12,7 @@ module purge
 
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 
-SPACK_VERSION="0.23.1"
+SPACK_VERSION="1.1.0"
 
 export SPACK_PREFIX=/data/gyselarunner/spack-${SPACK_VERSION}
 
@@ -35,21 +35,6 @@ spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 spack config --scope site add 'packages:git:version:[":2.46"]'
 
 spack compiler find --scope site
-
-mkdir -p -- "${SPACK_PREFIX}/external-repositories"
-
-# Inject recent PDI recipes into our repository.
-git clone https://github.com/pdidev/spack "${SPACK_PREFIX}/external-repositories/pdi" || true
-git -C "${SPACK_PREFIX}/external-repositories/pdi" fetch
-git -C "${SPACK_PREFIX}/external-repositories/pdi" checkout 5483cfea7d2d39d654c2962114248f597b3ecf46
-
-git clone https://github.com/gyselax/spack "${SPACK_PREFIX}/external-repositories/gyselalibxx" || true
-git -C "${SPACK_PREFIX}/external-repositories/gyselalibxx" fetch
-git -C "${SPACK_PREFIX}/external-repositories/gyselalibxx" checkout releases/v0.23
-git -C "${SPACK_PREFIX}/external-repositories/gyselalibxx" pull
-
-spack repo add --scope site "${SPACK_PREFIX}/external-repositories/pdi"
-spack repo add --scope site "${SPACK_PREFIX}/external-repositories/gyselalibxx"
 
 spack env remove --yes-to-all gyselalibxx-env-omp-cuda
 spack env create gyselalibxx-env-omp-cuda "${TOOLCHAIN_ROOT_DIRECTORY}/v100/gyselalibxx-spack-environment.yaml"
