@@ -8,7 +8,7 @@
 #include <string_view>
 
 #include <ddc/ddc.hpp>
-#include <ddc/pdi.hpp>
+#include <ddc/kernels/fft.hpp>
 
 #include <paraconf.h>
 #include <pdi.h>
@@ -17,7 +17,7 @@
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "fem_1d_poisson_solver.hpp"
+#include "fft_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
@@ -65,7 +65,6 @@ int main(int argc, char** argv)
     IdxRangeXVx const meshXVx(mesh_x, mesh_vx);
 
     IdxRangeSp const idx_range_kinsp = init_species(conf_gyselalibxx);
-
     IdxRangeSpXVx const meshSpXVx(idx_range_kinsp, meshXVx);
     IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
 
@@ -74,9 +73,9 @@ int main(int argc, char** argv)
 
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
-    MaxwellianEquilibrium const init_fequilibrium
-            = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
-    init_fequilibrium(get_field(allfequilibrium));
+    std::unique_ptr<IEquilibrium> const init_fequilibrium
+            = equilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
+    (*init_fequilibrium)(get_field(allfequilibrium));
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
@@ -128,14 +127,12 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    FEM1DPoissonSolver fem_solver(builder_x, spline_x_evaluator);
-    host_t<DFieldMemVx> const quadrature_coeffs_host = neumann_spline_quadrature_coefficients<
-            Kokkos::DefaultHostExecutionSpace>(mesh_vx, builder_vx);
-    auto const quadrature_coeffs = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(quadrature_coeffs_host));
+    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
+                                        Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx));
+
     ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
-    QNSolver const poisson(fem_solver, rhs);
+    FFTPoissonSolver<IdxRangeX> fft_poisson_solver(mesh_x);
+    QNSolver const poisson(fft_poisson_solver, rhs);
 
     PredCorr const predcorr(vlasov, poisson);
 

@@ -15,12 +15,12 @@
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
-#include "bumpontailequilibrium.hpp"
 #include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "fem_1d_poisson_solver.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
+#include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
@@ -74,9 +74,9 @@ int main(int argc, char** argv)
 
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
-    BumpontailEquilibrium const init_fequilibrium
-            = BumpontailEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
-    init_fequilibrium(get_field(allfequilibrium));
+    std::unique_ptr<IEquilibrium> const init_fequilibrium
+            = equilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
+    (*init_fequilibrium)(get_field(allfequilibrium));
 
     ddc::expose_to_pdi("iter_start", iter_start);
 
@@ -128,10 +128,10 @@ int main(int argc, char** argv)
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
-                                        Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx));
-    ChargeDensityCalculator rhs(get_const_field(quadrature_coeffs));
     FEM1DPoissonSolver fem_solver(builder_x, spline_x_evaluator);
+    DFieldMemVx const quadrature_coeffs = neumann_spline_quadrature_coefficients<
+            Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx);
+    ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
     QNSolver const poisson(fem_solver, rhs);
 
     PredCorr const predcorr(vlasov, poisson);
