@@ -47,7 +47,7 @@ DFieldSpVx BumpontailEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
     return allfequilibrium;
 }
 
-BumpontailEquilibrium BumpontailEquilibrium::init_from_input(
+BumpontailEquilibrium bumpontail_equilibrium::init_from_input(
         IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {

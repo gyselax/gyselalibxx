@@ -48,28 +48,6 @@ DFieldSpVx MaxwellianEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
 }
 
 
-MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
-        IdxRangeSp idx_range_kinsp,
-        PC_tree_t const& yaml_input_file)
-{
-    host_t<DFieldMemSp> density_eq(idx_range_kinsp);
-    host_t<DFieldMemSp> temperature_eq(idx_range_kinsp);
-    host_t<DFieldMemSp> mean_velocity_eq(idx_range_kinsp);
-
-    for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
-
-        density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
-        temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
-        mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
-    }
-
-    return MaxwellianEquilibrium(
-            std::move(density_eq),
-            std::move(temperature_eq),
-            std::move(mean_velocity_eq));
-}
-
 
 void MaxwellianEquilibrium::compute_maxwellian(
         DFieldVx const fMaxwellian,
@@ -89,6 +67,28 @@ void MaxwellianEquilibrium::compute_maxwellian(
                                            -(vx - mean_velocity) * (vx - mean_velocity)
                                            / (2. * temperature));
             });
+}
+
+MaxwellianEquilibrium maxwellian_equilibrium::init_from_input(
+        IdxRangeSp idx_range_kinsp,
+        PC_tree_t const& yaml_input_file)
+{
+    host_t<DFieldMemSp> density_eq(idx_range_kinsp);
+    host_t<DFieldMemSp> temperature_eq(idx_range_kinsp);
+    host_t<DFieldMemSp> mean_velocity_eq(idx_range_kinsp);
+
+    for (IdxSp const isp : idx_range_kinsp) {
+        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
+
+        density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
+        temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
+        mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
+    }
+
+    return MaxwellianEquilibrium(
+            std::move(density_eq),
+            std::move(temperature_eq),
+            std::move(mean_velocity_eq));
 }
 ```
 

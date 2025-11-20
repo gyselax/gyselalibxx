@@ -35,9 +35,9 @@ public:
 
     ~MaxwellianEquilibrium() override = default;
 
-    static MaxwellianEquilibrium init_from_input(
-            IdxRangeSp idx_range_kinsp,
-            PC_tree_t const& yaml_input_file);
+    MaxwellianEquilibrium(MaxwellianEquilibrium&&) = default;
+
+    MaxwellianEquilibrium& operator=(MaxwellianEquilibrium&&) = default;
 
     DFieldSpVx operator()(DFieldSpVx allfequilibrium) const override;
 
@@ -62,6 +62,12 @@ public:
         return get_const_field(m_mean_velocity_eq);
     }
 };
+
+namespace maxwellian_equilibrium {
+
+MaxwellianEquilibrium init_from_input(IdxRangeSp idx_range_kinsp, PC_tree_t const& yaml_input_file);
+
+} // namespace maxwellian_equilibrium
 ```
 
 

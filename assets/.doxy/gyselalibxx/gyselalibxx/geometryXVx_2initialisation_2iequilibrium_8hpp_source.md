@@ -12,7 +12,12 @@
 
 #pragma once
 
+#include <memory>
+
+#include <paraconf.h>
+
 #include "geometry.hpp"
+#include "paraconfpp.hpp"
 
 class IEquilibrium
 {
@@ -21,6 +26,14 @@ public:
 
     virtual DFieldSpVx operator()(DFieldSpVx allfequilibrium) const = 0;
 };
+
+namespace equilibrium {
+
+std::unique_ptr<IEquilibrium> init_from_input(
+        IdxRangeSp idx_range_kinsp,
+        PC_tree_t const& yaml_input_file);
+
+} // namespace equilibrium
 ```
 
 

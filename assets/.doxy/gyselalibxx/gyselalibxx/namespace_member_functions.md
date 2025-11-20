@@ -30,6 +30,7 @@
 ## i
 
 * **integrals** ([**PolarSplines**](namespacePolarSplines.md))
+* **init\_from\_input** ([**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md), [**equilibrium**](namespaceequilibrium.md), [**maxwellian\_equilibrium**](namespacemaxwellian__equilibrium.md))
 
 
 ## m

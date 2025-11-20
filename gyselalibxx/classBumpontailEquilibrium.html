@@ -566,7 +566,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bumpontailequilibrium"><strong>BumpontailEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; epsilon_bot, host_t&lt; DFieldMemSp &gt; temperature_bot, host_t&lt; DFieldMemSp &gt; mean_velocity_bot) <br><em>Creates an instance of the</em> <a href="classBumpontailEquilibrium.html"><em><strong>BumpontailEquilibrium</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-bumpontailequilibrium-12"><strong>BumpontailEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; epsilon_bot, host_t&lt; DFieldMemSp &gt; temperature_bot, host_t&lt; DFieldMemSp &gt; mean_velocity_bot) <br><em>Creates an instance of the</em> <a href="classBumpontailEquilibrium.html"><em><strong>BumpontailEquilibrium</strong></em></a> <em>class.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-bumpontailequilibrium-22"><strong>BumpontailEquilibrium</strong></a> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a> &amp;&amp;) = default<br><em>Move-construct a</em> <a href="classBumpontailEquilibrium.html"><em><strong>BumpontailEquilibrium</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -583,6 +587,10 @@
 <tr>
 <td style="text-align: right;">virtual DFieldSpVx</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldSpVx allfequilibrium) override const<br><em>Initialises the distribution function as the sum of a bulk and a bump-on-tail Maxwellians.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator=</strong></a> (<a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a> &amp;&amp;) = default<br><em>Move-assignment a</em> <a href="classBumpontailEquilibrium.html"><em><strong>BumpontailEquilibrium</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">host_t&lt; DConstFieldSp &gt;</td>
@@ -630,25 +638,10 @@
 </tr>
 </tbody>
 </table>
-<h2 id="public-static-functions">Public Static Functions</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;"><a href="classBumpontailEquilibrium.html"><strong>BumpontailEquilibrium</strong></a></td>
-<td style="text-align: left;"><a href="#function-init_from_input"><strong>init_from_input</strong></a> (IdxRangeSp idx_range_kinsp, PC_tree_t const &amp; yaml_input_file) <br><em>Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file.</em></td>
-</tr>
-</tbody>
-</table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>This class initialises the distribution function as a sum of two Maxwellian, enabling the study of the so-called bump-on-tail instability. One of the Maxwellians represents the bulk of the distribution function that has no mean velocity, and the other Maxwellian corresponds to high velocity particles. The second Maxwellian is referred to as the "bump-on-tail" Maxwellian. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-bumpontailequilibrium">function BumpontailEquilibrium</h3>
+<h3 id="function-bumpontailequilibrium-12">function BumpontailEquilibrium [1/2]</h3>
 <p><em>Creates an instance of the</em> <a href="classBumpontailEquilibrium.html"><em><strong>BumpontailEquilibrium</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">BumpontailEquilibrium::BumpontailEquilibrium (
     host_t&lt; DFieldMemSp &gt; epsilon_bot,
@@ -662,6 +655,14 @@
 <li><code>temperature_bot</code> A parameter that represents the temperature of the bump-on-tail Maxwellian for each species. </li>
 <li><code>mean_velocity_bot</code> A parameter that represents the mean velocity of the bump-on-tail Maxwellian for each species. </li>
 </ul>
+<hr>
+
+<h3 id="function-bumpontailequilibrium-22">function BumpontailEquilibrium [2/2]</h3>
+<p><em>Move-construct a</em> <a href="classBumpontailEquilibrium.html"><em><strong>BumpontailEquilibrium</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">BumpontailEquilibrium::BumpontailEquilibrium (
+    BumpontailEquilibrium &amp;&amp;
+) = default
+</code></pre>
 <hr>
 
 <h3 id="function-compute_twomaxwellian">function compute_twomaxwellian</h3>
@@ -713,6 +714,14 @@
 <p>Implements <a href="classIEquilibrium.html#function-operator_1"><em>IEquilibrium::operator()</em></a></p>
 <hr>
 
+<h3 id="function-operator_1">function operator=</h3>
+<p><em>Move-assignment a</em> <a href="classBumpontailEquilibrium.html"><em><strong>BumpontailEquilibrium</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">BumpontailEquilibrium &amp; BumpontailEquilibrium::operator= (
+    BumpontailEquilibrium &amp;&amp;
+) = default
+</code></pre>
+<hr>
+
 <h3 id="function-temperature_bot">function temperature_bot</h3>
 <p><em>A method for accessing the m_temperature_bot member variable of the class.</em> </p>
 <pre><code class="language-C++">inline host_t&lt; DConstFieldSp &gt; BumpontailEquilibrium::temperature_bot () const
@@ -721,25 +730,9 @@
 <p>a field containing the m_temperature_bot variable. </p>
 <hr>
 
-<h3 id="function-bumpontailequilibrium_1">function ~BumpontailEquilibrium</h3>
+<h3 id="function-bumpontailequilibrium">function ~BumpontailEquilibrium</h3>
 <pre><code class="language-C++">BumpontailEquilibrium::~BumpontailEquilibrium () override
 </code></pre>
-<hr>
-<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
-<h3 id="function-init_from_input">function init_from_input</h3>
-<p><em>Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file.</em> </p>
-<pre><code class="language-C++">static BumpontailEquilibrium BumpontailEquilibrium::init_from_input (
-    IdxRangeSp idx_range_kinsp,
-    PC_tree_t const &amp; yaml_input_file
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range_kinsp</code> Index range for the kinetic species </li>
-<li><code>yaml_input_file</code> YAML input file </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>an instance of Maxwellian distribution function. </p>
 <hr>
 
 <hr>

@@ -561,6 +561,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add an <code>operator()</code> in <code>BslAdvectionPolar</code> to advect a function with an advection field along <code>&lt;R, Theta&gt;</code>.
 The operator averages the values of the advection field on the first ring to get its value at the O-point.</li>
 <li>Add <code>static_assert</code> expressions for spline builder/evaluator pairs.</li>
+<li>Added <code>equilibrium::init_from_input</code> method to choose XVx equililibrium in input file.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -579,6 +580,11 @@ The operator averages the values of the advection field on the first ring to get
 <li>Move Python cache files out of the Spack installation tree on Adastra and Jean-Zay.</li>
 <li>Use CCFR environment variables on CINES and IDRIS machines when possible.</li>
 <li>Update DDC dependency to v0.9.0.</li>
+<li>Combine <code>landau_fft</code> and <code>bumpontail_fft</code> executables into a <code>vlasovpoisson_xvx_fft</code> executable.</li>
+<li>Combine <code>landau_fem_uniform</code> and <code>bumpontail_fem_uniform</code> executables into a <code>vlasovpoisson_xvx_fem_uniform</code> executable.</li>
+<li>Make the choice of equililibrium an input parameter for <code>vlasovpoisson_xvx</code> executables.</li>
+<li>Move static class method <code>BumpontailEquilibrium::init_from_input</code> to namespace <code>bumpontail_equilibrium::init_from_input</code>.</li>
+<li>Move static class method <code>MaxwellianEquilibrium::init_from_input</code> to namespace <code>maxwellian_equilibrium::init_from_input</code>.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

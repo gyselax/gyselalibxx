@@ -344,6 +344,42 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="38" column="5"/>
       </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1af42c1cec271fcf6a8ec81ef82c8ab843" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MaxwellianEquilibrium::MaxwellianEquilibrium</definition>
+        <argsstring>(MaxwellianEquilibrium &amp;&amp;)=default</argsstring>
+        <name>MaxwellianEquilibrium</name>
+        <qualifiedname>MaxwellianEquilibrium::MaxwellianEquilibrium</qualifiedname>
+        <param>
+          <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>Move-construct a <ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="43" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMaxwellianEquilibrium_1a59466c856ae49aebb9b99f7e0052e684" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref> &amp;</type>
+        <definition>MaxwellianEquilibrium &amp; MaxwellianEquilibrium::operator=</definition>
+        <argsstring>(MaxwellianEquilibrium &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>MaxwellianEquilibrium::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>Move-assignment a <ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="48" column="27"/>
+      </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1af3b41f93de3bb96ae0b44d8f89ee2a0a" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>DFieldSpVx</type>
         <definition>DFieldSpVx MaxwellianEquilibrium::operator()</definition>
@@ -722,49 +758,6 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp" line="81" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.cpp" bodystart="73" bodyend="100"/>
       </memberdef>
-      <memberdef kind="function" id="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref></type>
-        <definition>static MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input</definition>
-        <argsstring>(IdxRangeSp idx_range_kinsp, PC_tree_t const &amp;yaml_input_file)</argsstring>
-        <name>init_from_input</name>
-        <qualifiedname>MaxwellianEquilibrium::init_from_input</qualifiedname>
-        <param>
-          <type>IdxRangeSp</type>
-          <declname>idx_range_kinsp</declname>
-        </param>
-        <param>
-          <type>PC_tree_t const &amp;</type>
-          <declname>yaml_input_file</declname>
-        </param>
-        <briefdescription>
-<para>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">idx_range_kinsp</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Index range for the kinetic species </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">yaml_input_file</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>YAML input file </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>an instance of Maxwellian distribution function. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="46" column="34"/>
-      </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1a45ec8865ba58e58d26fb9174e78faff7" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void MaxwellianEquilibrium::compute_maxwellian</definition>
@@ -828,7 +821,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="68" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="64" bodyend="82"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="68" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="42" bodyend="60"/>
       </memberdef>
       <memberdef kind="function" id="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref></type>
@@ -987,7 +980,6 @@
       <member refid="classMaxwellianEquilibrium_1a0de7a4e921a394a01123af2eae342c21" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>density_eq</name></member>
       <member refid="classMaxwellianEquilibrium_1aff3c441bf785e05f0f3b9e6594209876" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>init_from_input</name></member>
       <member refid="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>init_from_input</name></member>
-      <member refid="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>init_from_input</name></member>
       <member refid="classMaxwellianEquilibrium_1ae2eca1ff4552822b6a487e1334e4720d" prot="private" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>m_density_eq</name></member>
       <member refid="classMaxwellianEquilibrium_1a412ad9eaf8136221eb408893ab486fc8" prot="private" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>m_magnetic_field</name></member>
       <member refid="classMaxwellianEquilibrium_1a1abcb1421bf65ddc61429f0a076b6b07" prot="private" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>m_mass</name></member>
@@ -996,6 +988,7 @@
       <member refid="classMaxwellianEquilibrium_1aebb6814626426a44934a85ced7e2fe62" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>mass</name></member>
       <member refid="classMaxwellianEquilibrium_1a52616624ef6c0da7107c05d680a11a74" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>MaxwellianEquilibrium</name></member>
       <member refid="classMaxwellianEquilibrium_1a034e0f873e3403b14b56ec4200b44bb9" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>MaxwellianEquilibrium</name></member>
+      <member refid="classMaxwellianEquilibrium_1af42c1cec271fcf6a8ec81ef82c8ab843" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>MaxwellianEquilibrium</name></member>
       <member refid="classMaxwellianEquilibrium_1a034e0f873e3403b14b56ec4200b44bb9" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>MaxwellianEquilibrium</name></member>
       <member refid="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>mean_velocity_eq</name></member>
       <member refid="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>mean_velocity_eq</name></member>
@@ -1003,6 +996,7 @@
       <member refid="classMaxwellianEquilibrium_1a0cc2b9bdb6300dd5661cedbfc27957b3" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>operator()</name></member>
       <member refid="classMaxwellianEquilibrium_1af3b41f93de3bb96ae0b44d8f89ee2a0a" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>operator()</name></member>
       <member refid="classMaxwellianEquilibrium_1a883dfc9d838b53deeb47e93f178c7655" prot="public" virt="virtual"><scope>MaxwellianEquilibrium</scope><name>operator()</name></member>
+      <member refid="classMaxwellianEquilibrium_1a59466c856ae49aebb9b99f7e0052e684" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>operator=</name></member>
       <member refid="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>temperature_eq</name></member>
       <member refid="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>temperature_eq</name></member>
       <member refid="classMaxwellianEquilibrium_1aeba2d5c30212bd67b789c87610205263" prot="public" virt="non-virtual"><scope>MaxwellianEquilibrium</scope><name>temperature_eq</name></member>

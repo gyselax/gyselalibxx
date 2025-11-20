@@ -260,11 +260,12 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d93.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d211.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d213.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d215.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d217.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d94.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d212.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d214.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d216.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d218.md) 
+* **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
     * **struct** [**AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md) _A class which helps insert an element into a type sequence._ 
     * **struct** [**AddToTypeSeq&lt; ToInsert, TypeSeq, BackInsert &gt;**](structconnectivity__details_1_1AddToTypeSeq_3_01ToInsert_00_01TypeSeq_00_01BackInsert_01_4.md) _Specialisation of_ [_**AddToTypeSeq**_](structconnectivity__details_1_1AddToTypeSeq.md) _to add an element at the back of the type sequence._    
@@ -317,12 +318,14 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **class** [**NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md) _Helper class for the initialisation of the mesh of interpolation points._     
     * **struct** [**is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md) 
     * **struct** [**is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md) 
+* **namespace** [**equilibrium**](namespaceequilibrium.md)     
 * **namespace** [**gslx**](namespacegslx.md)     
     * **namespace** [**error**](namespacegslx_1_1error.md)     
 * **struct** [**interpolator\_on\_idx\_range**](structinterpolator__on__idx__range.md) 
 * **struct** [**interpolator\_on\_idx\_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;**](structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.md)     
 * **struct** [**is\_onion\_patch\_locator**](structis__onion__patch__locator.md) _Struct to identify if the patch locator is adapted to onion geometry._ 
 * **struct** [**is\_onion\_patch\_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;**](structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.md) 
+* **namespace** [**maxwellian\_equilibrium**](namespacemaxwellian__equilibrium.md)     
 * **namespace** [**std**](namespacestd.md) _STL namespace._     
 * **namespace** [**tensor\_tools**](namespacetensor__tools.md)     
     * **struct** [**GetContravariantDims**](structtensor__tools_1_1GetContravariantDims.md) _A class to get a VectorIndexSet containing only contravariant dimensions._ 

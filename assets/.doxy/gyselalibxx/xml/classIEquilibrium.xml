@@ -66,7 +66,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp" line="13" column="13"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp" line="18" column="13"/>
       </memberdef>
       <memberdef kind="function" id="classIEquilibrium_1a3ea3adf00a9a416a8e3fe54caba902a4" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
         <type>DFieldSpVx</type>
@@ -99,7 +99,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp" line="21" column="24"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp" line="26" column="24"/>
       </memberdef>
       <memberdef kind="function" id="classIEquilibrium_1a7244af05e0e1176c0c02212cee0cfb43" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>

@@ -566,15 +566,19 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-maxwellianequilibrium-13"><strong>MaxwellianEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; mass, host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq, double magnetic_field) <br><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-maxwellianequilibrium-14"><strong>MaxwellianEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; mass, host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq, double magnetic_field) <br><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-maxwellianequilibrium-23"><strong>MaxwellianEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq) <br><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-maxwellianequilibrium-24"><strong>MaxwellianEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq) <br><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-maxwellianequilibrium-23"><strong>MaxwellianEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq) <br><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-maxwellianequilibrium-34"><strong>MaxwellianEquilibrium</strong></a> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a> &amp;&amp;) = default<br><em>Move-construct a</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-maxwellianequilibrium-24"><strong>MaxwellianEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq) <br><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">host_t&lt; DConstFieldSp &gt;</td>
@@ -615,6 +619,10 @@
 <tr>
 <td style="text-align: right;">virtual DFieldSpVxVy</td>
 <td style="text-align: left;"><a href="#function-operator_2"><strong>operator()</strong></a> (DFieldSpVxVy allfequilibrium) override const<br><em>Initialises allfequilibrium as a Maxwellian.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_3"><strong>operator=</strong></a> (<a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a> &amp;&amp;) = default<br><em>Move-assignment a</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">host_t&lt; DConstFieldSp &gt;</td>
@@ -773,22 +781,18 @@
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a></td>
-<td style="text-align: left;"><a href="#function-init_from_input-13"><strong>init_from_input</strong></a> (IdxRangeSp idx_range_kinsp, PC_tree_t const &amp; yaml_input_file) <br><em>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.</em></td>
+<td style="text-align: left;"><a href="#function-init_from_input-12"><strong>init_from_input</strong></a> (IdxRangeSp idx_range_kinsp, PC_tree_t const &amp; yaml_input_file) <br><em>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a></td>
-<td style="text-align: left;"><a href="#function-init_from_input-23"><strong>init_from_input</strong></a> (IdxRangeSp idx_range_kinsp, PC_tree_t const &amp; yaml_input_file) <br><em>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"><a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a></td>
-<td style="text-align: left;"><a href="#function-init_from_input-23"><strong>init_from_input</strong></a> (IdxRangeSp idx_range_kinsp, PC_tree_t const &amp; yaml_input_file) <br><em>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.</em></td>
+<td style="text-align: left;"><a href="#function-init_from_input-22"><strong>init_from_input</strong></a> (IdxRangeSp idx_range_kinsp, PC_tree_t const &amp; yaml_input_file) <br><em>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>A class that initialises the distribution function as a Maxwellian. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-maxwellianequilibrium-13">function MaxwellianEquilibrium [1/3]</h3>
+<h3 id="function-maxwellianequilibrium-14">function MaxwellianEquilibrium [1/4]</h3>
 <p><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">MaxwellianEquilibrium::MaxwellianEquilibrium (
     host_t&lt; DFieldMemSp &gt; mass,
@@ -808,7 +812,7 @@
 </ul>
 <hr>
 
-<h3 id="function-maxwellianequilibrium-23">function MaxwellianEquilibrium [2/3]</h3>
+<h3 id="function-maxwellianequilibrium-24">function MaxwellianEquilibrium [2/4]</h3>
 <p><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">MaxwellianEquilibrium::MaxwellianEquilibrium (
     host_t&lt; DFieldMemSp &gt; density_eq,
@@ -824,7 +828,15 @@
 </ul>
 <hr>
 
-<h3 id="function-maxwellianequilibrium-23_1">function MaxwellianEquilibrium [2/3]</h3>
+<h3 id="function-maxwellianequilibrium-34">function MaxwellianEquilibrium [3/4]</h3>
+<p><em>Move-construct a</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">MaxwellianEquilibrium::MaxwellianEquilibrium (
+    MaxwellianEquilibrium &amp;&amp;
+) = default
+</code></pre>
+<hr>
+
+<h3 id="function-maxwellianequilibrium-24_1">function MaxwellianEquilibrium [2/4]</h3>
 <p><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">MaxwellianEquilibrium::MaxwellianEquilibrium (
     host_t&lt; DFieldMemSp &gt; density_eq,
@@ -941,6 +953,14 @@
 <p>Implements <a href="classIEquilibrium.html#function-operator_2"><em>IEquilibrium::operator()</em></a></p>
 <hr>
 
+<h3 id="function-operator_3">function operator=</h3>
+<p><em>Move-assignment a</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>.</em></p>
+<pre><code class="language-C++">MaxwellianEquilibrium &amp; MaxwellianEquilibrium::operator= (
+    MaxwellianEquilibrium &amp;&amp;
+) = default
+</code></pre>
+<hr>
+
 <h3 id="function-temperature_eq-13">function temperature_eq [1/3]</h3>
 <p><em>A method for accessing the m_temperature_eq member variable of the class.</em> </p>
 <pre><code class="language-C++">inline host_t&lt; DConstFieldSp &gt; MaxwellianEquilibrium::temperature_eq () const
@@ -965,17 +985,17 @@
 <p>A field containing the m_temperature_eq value. </p>
 <hr>
 
+<h3 id="function-maxwellianequilibrium-13">function ~MaxwellianEquilibrium [1/3]</h3>
+<pre><code class="language-C++">MaxwellianEquilibrium::~MaxwellianEquilibrium () override
+</code></pre>
+<hr>
+
 <h3 id="function-maxwellianequilibrium-13_1">function ~MaxwellianEquilibrium [1/3]</h3>
 <pre><code class="language-C++">MaxwellianEquilibrium::~MaxwellianEquilibrium () override
 </code></pre>
 <hr>
 
 <h3 id="function-maxwellianequilibrium-13_2">function ~MaxwellianEquilibrium [1/3]</h3>
-<pre><code class="language-C++">MaxwellianEquilibrium::~MaxwellianEquilibrium () override
-</code></pre>
-<hr>
-
-<h3 id="function-maxwellianequilibrium-13_3">function ~MaxwellianEquilibrium [1/3]</h3>
 <pre><code class="language-C++">MaxwellianEquilibrium::~MaxwellianEquilibrium () override
 </code></pre>
 <hr>
@@ -1043,7 +1063,7 @@
 </ul>
 <hr>
 
-<h3 id="function-init_from_input-13">function init_from_input [1/3]</h3>
+<h3 id="function-init_from_input-12">function init_from_input [1/2]</h3>
 <p><em>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.</em> </p>
 <pre><code class="language-C++">static MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input (
     IdxRangeSp idx_range_kinsp,
@@ -1059,23 +1079,7 @@
 <p>an instance of Maxwellian distribution function. </p>
 <hr>
 
-<h3 id="function-init_from_input-23">function init_from_input [2/3]</h3>
-<p><em>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.</em> </p>
-<pre><code class="language-C++">static MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input (
-    IdxRangeSp idx_range_kinsp,
-    PC_tree_t const &amp; yaml_input_file
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range_kinsp</code> Index range for the kinetic species </li>
-<li><code>yaml_input_file</code> YAML input file </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>an instance of Maxwellian distribution function. </p>
-<hr>
-
-<h3 id="function-init_from_input-23_1">function init_from_input [2/3]</h3>
+<h3 id="function-init_from_input-22">function init_from_input [2/2]</h3>
 <p><em>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file.</em> </p>
 <pre><code class="language-C++">static MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input (
     IdxRangeSp idx_range_kinsp,

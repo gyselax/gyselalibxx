@@ -184,6 +184,42 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp" line="61" column="5"/>
       </memberdef>
+      <memberdef kind="function" id="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BumpontailEquilibrium::BumpontailEquilibrium</definition>
+        <argsstring>(BumpontailEquilibrium &amp;&amp;)=default</argsstring>
+        <name>BumpontailEquilibrium</name>
+        <qualifiedname>BumpontailEquilibrium::BumpontailEquilibrium</qualifiedname>
+        <param>
+          <type><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>Move-construct a <ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp" line="66" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref> &amp;</type>
+        <definition>BumpontailEquilibrium &amp; BumpontailEquilibrium::operator=</definition>
+        <argsstring>(BumpontailEquilibrium &amp;&amp;)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>BumpontailEquilibrium::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref> &amp;&amp;</type>
+        </param>
+        <briefdescription>
+<para>Move-assignment a <ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp" line="71" column="27"/>
+      </memberdef>
       <memberdef kind="function" id="classBumpontailEquilibrium_1a4c85a379ea216bb7ac95186cf8af8817" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>DFieldSpVx</type>
         <definition>DFieldSpVx BumpontailEquilibrium::operator()</definition>
@@ -271,51 +307,6 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp" line="102" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp" bodystart="102" bodyend="105"/>
       </memberdef>
     </sectiondef>
-    <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classBumpontailEquilibrium_1aaf1579e93047ccd045a1ccc10ffb1a32" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
-        <type><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref></type>
-        <definition>BumpontailEquilibrium BumpontailEquilibrium::init_from_input</definition>
-        <argsstring>(IdxRangeSp idx_range_kinsp, PC_tree_t const &amp;yaml_input_file)</argsstring>
-        <name>init_from_input</name>
-        <qualifiedname>BumpontailEquilibrium::init_from_input</qualifiedname>
-        <param>
-          <type>IdxRangeSp</type>
-          <declname>idx_range_kinsp</declname>
-        </param>
-        <param>
-          <type>PC_tree_t const &amp;</type>
-          <declname>yaml_input_file</declname>
-        </param>
-        <briefdescription>
-<para>Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">idx_range_kinsp</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>Index range for the kinetic species </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">yaml_input_file</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>YAML input file </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-<simplesect kind="return"><para>an instance of Maxwellian distribution function. </para>
-</simplesect>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp" line="69" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.cpp" bodystart="40" bodyend="60"/>
-      </memberdef>
-    </sectiondef>
     <briefdescription>
 <para>A class that initialises the distribution function as a sum of two Maxwellian functions. </para>
     </briefdescription>
@@ -349,9 +340,9 @@
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp" bodystart="22" bodyend="106"/>
     <listofallmembers>
       <member refid="classBumpontailEquilibrium_1af3995062c5408eea2ae7761113d30c52" prot="public" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>BumpontailEquilibrium</name></member>
+      <member refid="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" prot="public" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>BumpontailEquilibrium</name></member>
       <member refid="classBumpontailEquilibrium_1aacc82cfd448632f072b0e536c93ea668" prot="public" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>compute_twomaxwellian</name></member>
       <member refid="classBumpontailEquilibrium_1a83f8500f622451e98637fb272208fe41" prot="public" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>epsilon_bot</name></member>
-      <member refid="classBumpontailEquilibrium_1aaf1579e93047ccd045a1ccc10ffb1a32" prot="public" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>init_from_input</name></member>
       <member refid="classBumpontailEquilibrium_1a4cba6a2b73fc62395cee7561dfef4b1a" prot="private" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>m_epsilon_bot</name></member>
       <member refid="classBumpontailEquilibrium_1a822d44bb1897e470db51afd7f3cb4a61" prot="private" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>m_mean_velocity_bot</name></member>
       <member refid="classBumpontailEquilibrium_1afea87e14ba21bd2b98940aec101f72d5" prot="private" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>m_temperature_bot</name></member>
@@ -359,6 +350,7 @@
       <member refid="classBumpontailEquilibrium_1a4c85a379ea216bb7ac95186cf8af8817" prot="public" virt="virtual"><scope>BumpontailEquilibrium</scope><name>operator()</name></member>
       <member refid="classIEquilibrium_1a425f7b104d75900fcc769bdee9c0cdbd" prot="public" virt="pure-virtual" ambiguityscope="IEquilibrium::"><scope>BumpontailEquilibrium</scope><name>operator()</name></member>
       <member refid="classIEquilibrium_1ac3766d5ef01c1e949ec3dd6d55892a75" prot="public" virt="pure-virtual" ambiguityscope="IEquilibrium::"><scope>BumpontailEquilibrium</scope><name>operator()</name></member>
+      <member refid="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" prot="public" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>operator=</name></member>
       <member refid="classBumpontailEquilibrium_1afaae3266ba6ecff76e2764c3f0bf4ffd" prot="public" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>temperature_bot</name></member>
       <member refid="classBumpontailEquilibrium_1a3c79c23553031c7a766db33feb02050d" prot="public" virt="non-virtual"><scope>BumpontailEquilibrium</scope><name>~BumpontailEquilibrium</name></member>
       <member refid="classIEquilibrium_1a7244af05e0e1176c0c02212cee0cfb43" prot="public" virt="virtual"><scope>BumpontailEquilibrium</scope><name>~IEquilibrium</name></member>

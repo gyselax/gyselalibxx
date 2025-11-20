@@ -1,0 +1,56 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacemaxwellian__equilibrium" kind="namespace" language="C++">
+    <compoundname>maxwellian_equilibrium</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_1a0664bbc4da7127e97a1a058b72321898" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classMaxwellianEquilibrium" kindref="compound">MaxwellianEquilibrium</ref></type>
+        <definition>MaxwellianEquilibrium maxwellian_equilibrium::init_from_input</definition>
+        <argsstring>(IdxRangeSp idx_range_kinsp, PC_tree_t const &amp;yaml_input_file)</argsstring>
+        <name>init_from_input</name>
+        <qualifiedname>maxwellian_equilibrium::init_from_input</qualifiedname>
+        <param>
+          <type>IdxRangeSp</type>
+          <declname>idx_range_kinsp</declname>
+        </param>
+        <param>
+          <type>PC_tree_t const &amp;</type>
+          <declname>yaml_input_file</declname>
+        </param>
+        <briefdescription>
+<para>Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range for the kinetic species </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">yaml_input_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>an instance of Maxwellian distribution function. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="110" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.cpp" bodystart="62" bodyend="82" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" declline="110" declcolumn="23"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp" line="102" column="1"/>
+  </compounddef>
+</doxygen>

@@ -73,11 +73,13 @@ Inherits the following classes: [IEquilibrium](classIEquilibrium.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BumpontailEquilibrium**](#function-bumpontailequilibrium) (host\_t&lt; DFieldMemSp &gt; epsilon\_bot, host\_t&lt; DFieldMemSp &gt; temperature\_bot, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_bot) <br>_Creates an instance of the_ [_**BumpontailEquilibrium**_](classBumpontailEquilibrium.md) _class._ |
+|   | [**BumpontailEquilibrium**](#function-bumpontailequilibrium-12) (host\_t&lt; DFieldMemSp &gt; epsilon\_bot, host\_t&lt; DFieldMemSp &gt; temperature\_bot, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_bot) <br>_Creates an instance of the_ [_**BumpontailEquilibrium**_](classBumpontailEquilibrium.md) _class._ |
+|   | [**BumpontailEquilibrium**](#function-bumpontailequilibrium-22) ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md) &&) = default<br>_Move-construct a_ [_**BumpontailEquilibrium**_](classBumpontailEquilibrium.md) _._ |
 |  void | [**compute\_twomaxwellian**](#function-compute_twomaxwellian) (DFieldVx fMaxwellian, double epsilon\_bot, double temperature\_bot, double mean\_velocity\_bot) const<br>_Compute a distribution function defined as a sum of two Maxwellians. This distribution function can be written as $f(x,v) = f1(v) + f2(v) $ with $f1(v) = (1-epsilon)/(sqrt(2\*PI))\*exp(-v\*\*2/2)$ $f2(v) = epsilon/sqrt(2\*PI\*T0)[exp(-(v-v0)\*\*2/2\*T0)$._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**epsilon\_bot**](#function-epsilon_bot) () const<br>_A method for accessing the m\_epsilon\_bot member variable of the class._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**mean\_velocity\_bot**](#function-mean_velocity_bot) () const<br>_A method for accessing the m\_mean\_velocity\_bot member variable of the class._  |
 | virtual DFieldSpVx | [**operator()**](#function-operator) (DFieldSpVx allfequilibrium) override const<br>_Initialises the distribution function as the sum of a bulk and a bump-on-tail Maxwellians._  |
+|  [**BumpontailEquilibrium**](classBumpontailEquilibrium.md) & | [**operator=**](#function-operator_1) ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md) &&) = default<br>_Move-assignment a_ [_**BumpontailEquilibrium**_](classBumpontailEquilibrium.md) _._ |
 |  host\_t&lt; DConstFieldSp &gt; | [**temperature\_bot**](#function-temperature_bot) () const<br>_A method for accessing the m\_temperature\_bot member variable of the class._  |
 |   | [**~BumpontailEquilibrium**](#function-bumpontailequilibrium) () override<br> |
 
@@ -96,11 +98,6 @@ See [IEquilibrium](classIEquilibrium.md)
 | virtual  | [**~IEquilibrium**](classIEquilibrium.md#function-iequilibrium-13) () = default<br> |
 
 
-## Public Static Functions
-
-| Type | Name |
-| ---: | :--- |
-|  [**BumpontailEquilibrium**](classBumpontailEquilibrium.md) | [**init\_from\_input**](#function-init_from_input) (IdxRangeSp idx\_range\_kinsp, PC\_tree\_t const & yaml\_input\_file) <br>_Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file._  |
 
 
 
@@ -165,7 +162,7 @@ This class initialises the distribution function as a sum of two Maxwellian, ena
 
 
 
-### function BumpontailEquilibrium 
+### function BumpontailEquilibrium [1/2]
 
 _Creates an instance of the_ [_**BumpontailEquilibrium**_](classBumpontailEquilibrium.md) _class._
 ```C++
@@ -191,6 +188,22 @@ BumpontailEquilibrium::BumpontailEquilibrium (
 
 
         
+
+<hr>
+
+
+
+### function BumpontailEquilibrium [2/2]
+
+_Move-construct a_ [_**BumpontailEquilibrium**_](classBumpontailEquilibrium.md) _._
+```C++
+BumpontailEquilibrium::BumpontailEquilibrium (
+    BumpontailEquilibrium &&
+) = default
+```
+
+
+
 
 <hr>
 
@@ -315,6 +328,22 @@ Implements [*IEquilibrium::operator()*](classIEquilibrium.md#function-operator_1
 
 
 
+### function operator= 
+
+_Move-assignment a_ [_**BumpontailEquilibrium**_](classBumpontailEquilibrium.md) _._
+```C++
+BumpontailEquilibrium & BumpontailEquilibrium::operator= (
+    BumpontailEquilibrium &&
+) = default
+```
+
+
+
+
+<hr>
+
+
+
 ### function temperature\_bot 
 
 _A method for accessing the m\_temperature\_bot member variable of the class._ 
@@ -348,44 +377,6 @@ BumpontailEquilibrium::~BumpontailEquilibrium () override
 
 
 
-
-<hr>
-## Public Static Functions Documentation
-
-
-
-
-### function init\_from\_input 
-
-_Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file._ 
-```C++
-static BumpontailEquilibrium BumpontailEquilibrium::init_from_input (
-    IdxRangeSp idx_range_kinsp,
-    PC_tree_t const & yaml_input_file
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `idx_range_kinsp` Index range for the kinetic species 
-* `yaml_input_file` YAML input file 
-
-
-
-**Returns:**
-
-an instance of Maxwellian distribution function. 
-
-
-
-
-
-        
 
 <hr>
 

@@ -8,6 +8,7 @@
     <includes refid="paraconfpp_8hpp" local="yes">paraconfpp.hpp</includes>
     <includes refid="species__info_8hpp" local="yes">species_info.hpp</includes>
     <includedby refid="bumpontailequilibrium_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.cpp</includedby>
+    <includedby refid="iequilibrium_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.cpp</includedby>
     <incdepgraph>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp</label>
@@ -18,110 +19,120 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="5" relation="include">
+        <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="4">
         <label>iequilibrium.hpp</label>
         <link refid="geometryXVx_2initialisation_2iequilibrium_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-      </node>
-      <node id="5">
-        <label>paraconfpp.hpp</label>
-        <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
+      </node>
+      <node id="6">
+        <label>paraconfpp.hpp</label>
+        <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>species_info.hpp</label>
         <link refid="species__info_8hpp_source"/>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-      </node>
-      <node id="12">
-        <label>ddc_alias_inline_functions.hpp</label>
-        <link refid="ddc__alias__inline__functions_8hpp_source"/>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="14">
-        <label>ddc_aliases.hpp</label>
-        <link refid="ddc__aliases_8hpp_source"/>
-        <childnode refid="11" relation="include">
+      <node id="13">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="16">
-        <label>ddc_helper.hpp</label>
-        <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="17" relation="include">
+      <node id="15">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
       <node id="17">
-        <label>cassert</label>
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
       </node>
       <node id="18">
+        <label>cassert</label>
+      </node>
+      <node id="19">
         <label>cmath</label>
       </node>
-      <node id="11">
+      <node id="12">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="15">
+      <node id="16">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="6">
+      <node id="7">
         <label>filesystem</label>
       </node>
       <node id="3">
         <label>geometry.hpp</label>
       </node>
+      <node id="5">
+        <label>memory</label>
+      </node>
       <node id="2">
         <label>paraconf.h</label>
       </node>
-      <node id="7">
+      <node id="8">
         <label>stdexcept</label>
       </node>
-      <node id="8">
+      <node id="9">
         <label>string</label>
       </node>
-      <node id="13">
+      <node id="14">
         <label>type_traits</label>
       </node>
-      <node id="9">
+      <node id="10">
         <label>utility</label>
       </node>
     </incdepgraph>
     <innerclass refid="classBumpontailEquilibrium" prot="public">BumpontailEquilibrium</innerclass>
+    <innernamespace refid="namespacebumpontail__equilibrium">bumpontail_equilibrium</innernamespace>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -159,9 +170,9 @@
 <codeline lineno="60"><highlight class="normal"></highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium" kindref="compound">~BumpontailEquilibrium</ref>()<sp/></highlight><highlight class="keyword">override</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref><sp/><ref refid="classBumpontailEquilibrium_1aaf1579e93047ccd045a1ccc10ffb1a32" kindref="member">init_from_input</ref>(</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeSp<sp/>idx_range_kinsp,</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>yaml_input_file);</highlight></codeline>
+<codeline lineno="66" refid="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" kindref="member">BumpontailEquilibrium</ref>(<ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71" refid="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>&amp;<sp/><ref refid="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" kindref="member">operator=</ref>(<ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref>&amp;&amp;)<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpVx<sp/><ref refid="classBumpontailEquilibrium_1a4c85a379ea216bb7ac95186cf8af8817" kindref="member">operator()</ref>(DFieldSpVx<sp/>allfequilibrium)<sp/></highlight><highlight class="keyword">const<sp/>override</highlight><highlight class="normal">;</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
@@ -180,6 +191,12 @@
 <codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>get_const_field(m_mean_velocity_bot);</highlight></codeline>
 <codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="106"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">bumpontail_equilibrium<sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><ref refid="classBumpontailEquilibrium" kindref="compound">BumpontailEquilibrium</ref><sp/>init_from_input(IdxRangeSp<sp/>idx_range_kinsp,<sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>yaml_input_file);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>bumpontail_equilibrium</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp"/>
   </compounddef>

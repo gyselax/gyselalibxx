@@ -10,7 +10,10 @@
 
 
 
+* `#include <memory>`
+* `#include <paraconf.h>`
 * `#include "geometry.hpp"`
+* `#include "paraconfpp.hpp"`
 
 
 
@@ -24,6 +27,11 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**equilibrium**](namespaceequilibrium.md) <br> |
 
 
 ## Classes

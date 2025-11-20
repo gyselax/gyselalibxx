@@ -113,9 +113,10 @@ Inherits the following classes: [IEquilibrium](classIEquilibrium.md),  [IEquilib
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-13) (host\_t&lt; DFieldMemSp &gt; mass, host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq, double magnetic\_field) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
-|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-23) (host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
-|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-23) (host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
+|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-14) (host\_t&lt; DFieldMemSp &gt; mass, host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq, double magnetic\_field) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
+|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-24) (host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
+|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-34) ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) &&) = default<br>_Move-construct a_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _._ |
+|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-24) (host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
 |  host\_t&lt; DConstFieldSp &gt; | [**density\_eq**](#function-density_eq-13) () const<br>_A method for accessing the m\_density\_eq member variable of the class._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**density\_eq**](#function-density_eq-13) () const<br>_A method for accessing the m\_density\_eq member variable of the class._  |
 |  host\_t&lt; ConstFieldSp&lt; double &gt; &gt; | [**density\_eq**](#function-density_eq-33) () const<br>_A method for accessing the m\_density\_eq member variable of the class._  |
@@ -126,6 +127,7 @@ Inherits the following classes: [IEquilibrium](classIEquilibrium.md),  [IEquilib
 | virtual DFieldSpVparMu | [**operator()**](#function-operator) (DFieldSpVparMu allfequilibrium) override const<br>_Initialises allfequilibrium as a Maxwellian._  |
 | virtual DFieldSpVx | [**operator()**](#function-operator_1) (DFieldSpVx allfequilibrium) override const<br>_Initialises allfequilibrium as a Maxwellian._  |
 | virtual DFieldSpVxVy | [**operator()**](#function-operator_2) (DFieldSpVxVy allfequilibrium) override const<br>_Initialises allfequilibrium as a Maxwellian._  |
+|  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) & | [**operator=**](#function-operator_3) ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) &&) = default<br>_Move-assignment a_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _._ |
 |  host\_t&lt; DConstFieldSp &gt; | [**temperature\_eq**](#function-temperature_eq-13) () const<br>_A method for accessing the m\_temperature\_eq member variable of the class._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**temperature\_eq**](#function-temperature_eq-13) () const<br>_A method for accessing the m\_temperature\_eq member variable of the class._  |
 |  host\_t&lt; ConstFieldSp&lt; double &gt; &gt; | [**temperature\_eq**](#function-temperature_eq-33) () const<br>_A method for accessing the m\_temperature\_eq member variable of the class._  |
@@ -183,9 +185,8 @@ See [IEquilibrium](classIEquilibrium.md)
 |  void | [**compute\_maxwellian**](#function-compute_maxwellian-13) (DFieldVparMu const fMaxwellian, double const mass, double const density, double const temperature, double const mean\_velocity, double const magnetic\_field) <br>_Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as Compute $fM(v,mu) = (2\*PI\*T)\*\*1.5\*n\*exp(-E)$ with._  |
 |  void | [**compute\_maxwellian**](#function-compute_maxwellian-23) (DFieldVx const fMaxwellian, double const density, double const temperature, double const mean\_velocity) <br>_Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as $f\_M(v) = n/(sqrt(2\*PI\*T))\*exp(-(v-u)\*\*2/(2\*T))$ with $n$ the density, $T$ the temperature and $u$ is the mean velocity._  |
 |  void | [**compute\_maxwellian**](#function-compute_maxwellian-33) (DFieldVxVy const fMaxwellian, double const density, double const temperature, double const mean\_velocity) <br>_Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as $f\_M(v) = n/(sqrt(2\*PI\*T))\*exp(-(v-u)\*\*2/(2\*T))$ with $n$ the density, $T$ the temperature and $u$ is the mean velocity._  |
-|  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) | [**init\_from\_input**](#function-init_from_input-13) (IdxRangeSp idx\_range\_kinsp, PC\_tree\_t const & yaml\_input\_file) <br>_Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._  |
-|  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) | [**init\_from\_input**](#function-init_from_input-23) (IdxRangeSp idx\_range\_kinsp, PC\_tree\_t const & yaml\_input\_file) <br>_Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._  |
-|  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) | [**init\_from\_input**](#function-init_from_input-23) (IdxRangeSp idx\_range\_kinsp, PC\_tree\_t const & yaml\_input\_file) <br>_Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._  |
+|  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) | [**init\_from\_input**](#function-init_from_input-12) (IdxRangeSp idx\_range\_kinsp, PC\_tree\_t const & yaml\_input\_file) <br>_Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._  |
+|  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) | [**init\_from\_input**](#function-init_from_input-22) (IdxRangeSp idx\_range\_kinsp, PC\_tree\_t const & yaml\_input\_file) <br>_Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._  |
 
 
 
@@ -302,7 +303,7 @@ A class that initialises the distribution function as a Maxwellian.
 
 
 
-### function MaxwellianEquilibrium [1/3]
+### function MaxwellianEquilibrium [1/4]
 
 _The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._
 ```C++
@@ -337,7 +338,7 @@ MaxwellianEquilibrium::MaxwellianEquilibrium (
 
 
 
-### function MaxwellianEquilibrium [2/3]
+### function MaxwellianEquilibrium [2/4]
 
 _The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._
 ```C++
@@ -368,7 +369,23 @@ MaxwellianEquilibrium::MaxwellianEquilibrium (
 
 
 
-### function MaxwellianEquilibrium [2/3]
+### function MaxwellianEquilibrium [3/4]
+
+_Move-construct a_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _._
+```C++
+MaxwellianEquilibrium::MaxwellianEquilibrium (
+    MaxwellianEquilibrium &&
+) = default
+```
+
+
+
+
+<hr>
+
+
+
+### function MaxwellianEquilibrium [2/4]
 
 _The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._
 ```C++
@@ -682,6 +699,22 @@ Implements [*IEquilibrium::operator()*](classIEquilibrium.md#function-operator_2
 
 
 
+### function operator= 
+
+_Move-assignment a_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _._
+```C++
+MaxwellianEquilibrium & MaxwellianEquilibrium::operator= (
+    MaxwellianEquilibrium &&
+) = default
+```
+
+
+
+
+<hr>
+
+
+
 ### function temperature\_eq [1/3]
 
 _A method for accessing the m\_temperature\_eq member variable of the class._ 
@@ -906,7 +939,7 @@ static void MaxwellianEquilibrium::compute_maxwellian (
 
 
 
-### function init\_from\_input [1/3]
+### function init\_from\_input [1/2]
 
 _Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._ 
 ```C++
@@ -942,43 +975,7 @@ an instance of Maxwellian distribution function.
 
 
 
-### function init\_from\_input [2/3]
-
-_Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._ 
-```C++
-static MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input (
-    IdxRangeSp idx_range_kinsp,
-    PC_tree_t const & yaml_input_file
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `idx_range_kinsp` Index range for the kinetic species 
-* `yaml_input_file` YAML input file 
-
-
-
-**Returns:**
-
-an instance of Maxwellian distribution function. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function init\_from\_input [2/3]
+### function init\_from\_input [2/2]
 
 _Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._ 
 ```C++

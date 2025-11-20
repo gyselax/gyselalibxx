@@ -229,11 +229,12 @@
     <member refid="classBumpontailEquilibrium_1aacc82cfd448632f072b0e536c93ea668" kind="function"><name>compute_twomaxwellian</name></member>
     <member refid="classBumpontailEquilibrium_1af3995062c5408eea2ae7761113d30c52" kind="function"><name>BumpontailEquilibrium</name></member>
     <member refid="classBumpontailEquilibrium_1a3c79c23553031c7a766db33feb02050d" kind="function"><name>~BumpontailEquilibrium</name></member>
+    <member refid="classBumpontailEquilibrium_1ac445fec41535f20c92b02cf3bc02c89e" kind="function"><name>BumpontailEquilibrium</name></member>
+    <member refid="classBumpontailEquilibrium_1a6be5caf4ac4b52a31788ae239efc30c4" kind="function"><name>operator=</name></member>
     <member refid="classBumpontailEquilibrium_1a4c85a379ea216bb7ac95186cf8af8817" kind="function"><name>operator()</name></member>
     <member refid="classBumpontailEquilibrium_1a83f8500f622451e98637fb272208fe41" kind="function"><name>epsilon_bot</name></member>
     <member refid="classBumpontailEquilibrium_1afaae3266ba6ecff76e2764c3f0bf4ffd" kind="function"><name>temperature_bot</name></member>
     <member refid="classBumpontailEquilibrium_1a8c7af3f669150f90350907d721f22314" kind="function"><name>mean_velocity_bot</name></member>
-    <member refid="classBumpontailEquilibrium_1aaf1579e93047ccd045a1ccc10ffb1a32" kind="function"><name>init_from_input</name></member>
   </compound>
   <compound refid="classCartesianLeviCivitaTensor" kind="class"><name>CartesianLeviCivitaTensor</name>
     <member refid="classCartesianLeviCivitaTensor_1a46108038ed89fc61152be2653c0c41d7" kind="typedef"><name>element_type</name></member>
@@ -1872,6 +1873,8 @@
     <member refid="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" kind="function"><name>mean_velocity_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1a034e0f873e3403b14b56ec4200b44bb9" kind="function"><name>MaxwellianEquilibrium</name></member>
     <member refid="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" kind="function"><name>~MaxwellianEquilibrium</name></member>
+    <member refid="classMaxwellianEquilibrium_1af42c1cec271fcf6a8ec81ef82c8ab843" kind="function"><name>MaxwellianEquilibrium</name></member>
+    <member refid="classMaxwellianEquilibrium_1a59466c856ae49aebb9b99f7e0052e684" kind="function"><name>operator=</name></member>
     <member refid="classMaxwellianEquilibrium_1af3b41f93de3bb96ae0b44d8f89ee2a0a" kind="function"><name>operator()</name></member>
     <member refid="classMaxwellianEquilibrium_1a86de6dac16d6f3a968b16b028c4bee8d" kind="function"><name>density_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" kind="function"><name>temperature_eq</name></member>
@@ -1884,7 +1887,6 @@
     <member refid="classMaxwellianEquilibrium_1a19a92489bebf290fb48a26a641c9e292" kind="function"><name>mean_velocity_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1aff3c441bf785e05f0f3b9e6594209876" kind="function"><name>init_from_input</name></member>
     <member refid="classMaxwellianEquilibrium_1ad10e98762e5b6716ed6e62f6768bebd9" kind="function"><name>compute_maxwellian</name></member>
-    <member refid="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" kind="function"><name>init_from_input</name></member>
     <member refid="classMaxwellianEquilibrium_1a45ec8865ba58e58d26fb9174e78faff7" kind="function"><name>compute_maxwellian</name></member>
     <member refid="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" kind="function"><name>init_from_input</name></member>
     <member refid="classMaxwellianEquilibrium_1a07ab17abcde0a39b82eb76161a8e47c7" kind="function"><name>compute_maxwellian</name></member>
@@ -2944,15 +2946,18 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d211" kind="namespace"><name>@211</name>
+  <compound refid="namespace_0d212" kind="namespace"><name>@212</name>
   </compound>
-  <compound refid="namespace_0d213" kind="namespace"><name>@213</name>
+  <compound refid="namespace_0d214" kind="namespace"><name>@214</name>
   </compound>
-  <compound refid="namespace_0d215" kind="namespace"><name>@215</name>
+  <compound refid="namespace_0d216" kind="namespace"><name>@216</name>
   </compound>
-  <compound refid="namespace_0d217" kind="namespace"><name>@217</name>
+  <compound refid="namespace_0d218" kind="namespace"><name>@218</name>
   </compound>
-  <compound refid="namespace_0d93" kind="namespace"><name>@93</name>
+  <compound refid="namespace_0d94" kind="namespace"><name>@94</name>
+  </compound>
+  <compound refid="namespacebumpontail__equilibrium" kind="namespace"><name>bumpontail_equilibrium</name>
+    <member refid="bumpontailequilibrium_8hpp_1a904011943d45927909831ec61a31a6da" kind="function"><name>init_from_input</name></member>
   </compound>
   <compound refid="namespaceconnectivity__details" kind="namespace"><name>connectivity_details</name>
     <member refid="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35" kind="enum"><name>InsertPosition</name></member>
@@ -2991,6 +2996,9 @@
     <member refid="transpose_8hpp_1a427b2ef16466ccf26ea2f81563bbedb4" kind="function"><name>create_transpose_mirror_view_and_copy</name></member>
     <member refid="transpose_8hpp_1a46df5800c3318a0b386395442dce6ba8" kind="function"><name>create_transpose_mirror</name></member>
   </compound>
+  <compound refid="namespaceequilibrium" kind="namespace"><name>equilibrium</name>
+    <member refid="geometryXVx_2initialisation_2iequilibrium_8hpp_1a836b2d1d30cdb635cdac8dedd80401e2" kind="function"><name>init_from_input</name></member>
+  </compound>
   <compound refid="namespaceGrevillePointsR" kind="namespace"><name>GrevillePointsR</name>
   </compound>
   <compound refid="namespaceGrevillePointsTheta" kind="namespace"><name>GrevillePointsTheta</name>
@@ -3000,6 +3008,9 @@
   <compound refid="namespacegslx_1_1error" kind="namespace"><name>gslx::error</name>
     <member refid="assert_8cpp_1a6ed39ca4c717fcedac91a69fe5d12438" kind="function"><name>PresentErrorExplanation</name></member>
     <member refid="assert_8cpp_1ae96e29834a9be8b4964acd9edaa37989" kind="function"><name>AssertionFailure</name></member>
+  </compound>
+  <compound refid="namespacemaxwellian__equilibrium" kind="namespace"><name>maxwellian_equilibrium</name>
+    <member refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_1a0664bbc4da7127e97a1a058b72321898" kind="function"><name>init_from_input</name></member>
   </compound>
   <compound refid="namespacePolarSplines" kind="namespace"><name>PolarSplines</name>
     <member refid="polar__bsplines_8hpp_1a3ba12098f03119f39af5886324f72c94" kind="function"><name>integrals</name></member>
@@ -3275,6 +3286,8 @@
   <compound refid="bumpontailequilibrium_8cpp" kind="file"><name>bumpontailequilibrium.cpp</name>
   </compound>
   <compound refid="bumpontailequilibrium_8hpp" kind="file"><name>bumpontailequilibrium.hpp</name>
+  </compound>
+  <compound refid="iequilibrium_8cpp" kind="file"><name>iequilibrium.cpp</name>
   </compound>
   <compound refid="restartinitialisation_8cpp" kind="file"><name>restartinitialisation.cpp</name>
   </compound>

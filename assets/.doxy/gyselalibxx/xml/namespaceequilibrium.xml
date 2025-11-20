@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceequilibrium" kind="namespace" language="C++">
+    <compoundname>equilibrium</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="geometryXVx_2initialisation_2iequilibrium_8hpp_1a836b2d1d30cdb635cdac8dedd80401e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>std::unique_ptr&lt; <ref refid="classIEquilibrium" kindref="compound">IEquilibrium</ref> &gt;</type>
+        <definition>std::unique_ptr&lt; IEquilibrium &gt; equilibrium::init_from_input</definition>
+        <argsstring>(IdxRangeSp idx_range_kinsp, PC_tree_t const &amp;yaml_input_file)</argsstring>
+        <name>init_from_input</name>
+        <qualifiedname>equilibrium::init_from_input</qualifiedname>
+        <param>
+          <type>IdxRangeSp</type>
+          <declname>idx_range_kinsp</declname>
+        </param>
+        <param>
+          <type>PC_tree_t const &amp;</type>
+          <declname>yaml_input_file</declname>
+        </param>
+        <briefdescription>
+<para>Determine the chosen equilibrium method from a YAML input file. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Use the Algorithm.equilibrium key in a YAML input file to select the chosen equilibrium method and call the init_from_input method for that method.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range_kinsp</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range for the kinetic species </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">yaml_input_file</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>YAML input file </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A pointer to an equilibrium operator. A pointer is used for OOP. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp" line="42" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.cpp" bodystart="7" bodyend="22" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp" declline="42" declcolumn="17"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp" line="29" column="1"/>
+  </compounddef>
+</doxygen>

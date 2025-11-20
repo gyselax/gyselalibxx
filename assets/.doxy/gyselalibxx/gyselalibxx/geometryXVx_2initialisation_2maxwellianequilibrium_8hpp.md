@@ -28,6 +28,11 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**maxwellian\_equilibrium**](namespacemaxwellian__equilibrium.md) <br> |
 
 
 ## Classes

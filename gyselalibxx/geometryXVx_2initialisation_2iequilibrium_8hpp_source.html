@@ -555,7 +555,12 @@
 
 #pragma once
 
+#include &lt;memory&gt;
+
+#include &lt;paraconf.h&gt;
+
 #include "geometry.hpp"
+#include "paraconfpp.hpp"
 
 class IEquilibrium
 {
@@ -564,6 +569,14 @@ public:
 
     virtual DFieldSpVx operator()(DFieldSpVx allfequilibrium) const = 0;
 };
+
+namespace equilibrium {
+
+std::unique_ptr&lt;IEquilibrium&gt; init_from_input(
+        IdxRangeSp idx_range_kinsp,
+        PC_tree_t const&amp; yaml_input_file);
+
+} // namespace equilibrium
 </code></pre></div>
               
             </div>

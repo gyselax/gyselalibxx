@@ -28,6 +28,11 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md) <br> |
 
 
 ## Classes

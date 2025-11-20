@@ -96,6 +96,7 @@ Here is a list of all files with brief descriptions:
         * **dir** [**initialisation**](dir_cdb336346544d0d5f695f9cdfe73a70e.md)     
             * **file** [**bumpontailequilibrium.cpp**](bumpontailequilibrium_8cpp.md) 
             * **file** [**bumpontailequilibrium.hpp**](bumpontailequilibrium_8hpp.md)     
+            * **file** [**iequilibrium.cpp**](iequilibrium_8cpp.md) 
             * **file** [**iequilibrium.hpp**](geometryXVx_2initialisation_2iequilibrium_8hpp.md)     
             * **file** [**iinitialisation.hpp**](geometryXVx_2initialisation_2iinitialisation_8hpp.md)     
             * **file** [**maxwellianequilibrium.cpp**](geometryXVx_2initialisation_2maxwellianequilibrium_8cpp.md) 

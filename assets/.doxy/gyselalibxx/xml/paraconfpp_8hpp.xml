@@ -12,6 +12,7 @@
     <includedby refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp</includedby>
     <includedby refid="noperturbinitialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/noperturbinitialisation.hpp</includedby>
     <includedby refid="bumpontailequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/bumpontailequilibrium.hpp</includedby>
+    <includedby refid="geometryXVx_2initialisation_2iequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp</includedby>
     <includedby refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp</includedby>
     <includedby refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp</includedby>
     <includedby refid="predcorr__RK2_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</includedby>
@@ -74,26 +75,34 @@
         <link refid="bumpontailequilibrium_8hpp_source"/>
       </node>
       <node id="7">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/iequilibrium.hpp</label>
+        <link refid="geometryXVx_2initialisation_2iequilibrium_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/maxwellianequilibrium.hpp</label>
         <link refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_source"/>
       </node>
-      <node id="8">
+      <node id="9">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp</label>
         <link refid="geometryXVx_2initialisation_2singlemodeperturbinitialisation_8hpp_source"/>
       </node>
-      <node id="9">
+      <node id="10">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
         <link refid="predcorr__RK2_8hpp_source"/>
       </node>
-      <node id="10">
+      <node id="11">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.hpp</label>
         <link refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp_source"/>
       </node>
-      <node id="11">
+      <node id="12">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp</label>
         <link refid="geometryXYVxVy_2initialisation_2singlemodeperturbinitialisation_8hpp_source"/>
       </node>
-      <node id="12">
+      <node id="13">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp</label>
         <link refid="input_8hpp_source"/>
       </node>
@@ -124,8 +133,10 @@
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
       </node>
-      <node id="13">
+      <node id="14">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/speciesinfo/species_init.hpp</label>
         <link refid="species__init_8hpp_source"/>
       </node>

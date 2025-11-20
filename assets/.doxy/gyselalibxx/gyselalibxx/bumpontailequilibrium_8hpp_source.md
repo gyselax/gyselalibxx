@@ -40,9 +40,9 @@ public:
 
     ~BumpontailEquilibrium() override = default;
 
-    static BumpontailEquilibrium init_from_input(
-            IdxRangeSp idx_range_kinsp,
-            PC_tree_t const& yaml_input_file);
+    BumpontailEquilibrium(BumpontailEquilibrium&&) = default;
+
+    BumpontailEquilibrium& operator=(BumpontailEquilibrium&&) = default;
 
     DFieldSpVx operator()(DFieldSpVx allfequilibrium) const override;
 
@@ -61,6 +61,12 @@ public:
         return get_const_field(m_mean_velocity_bot);
     }
 };
+
+namespace bumpontail_equilibrium {
+
+BumpontailEquilibrium init_from_input(IdxRangeSp idx_range_kinsp, PC_tree_t const& yaml_input_file);
+
+} // namespace bumpontail_equilibrium
 ```
 
 
