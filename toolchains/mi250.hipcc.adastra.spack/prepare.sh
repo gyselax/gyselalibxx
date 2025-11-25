@@ -55,3 +55,5 @@ done
 wait
 
 # spack --env gyselalibxx-spack-environment module tcl refresh --delete-tree --yes-to-all
+
+spack gc --yes-to-all

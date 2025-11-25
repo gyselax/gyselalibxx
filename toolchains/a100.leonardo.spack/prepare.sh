@@ -41,3 +41,4 @@ echo "Preparing the Spack environment..."
 spack env create -d ${HOME}/gyselalib_env ${TOOLCHAIN_ROOT_DIRECTORY}/spack.yaml
 cd ${HOME}
 spack -e gyselalib_env install
+spack gc --yes-to-all

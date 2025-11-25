@@ -76,6 +76,7 @@ fi
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml
 spack --env gyselalibxx-env add --list-name compilers ${COMPILER}
 spack --env gyselalibxx-env install --jobs 2
+spack gc --yes-to-all
 spack env activate -p gyselalibxx-env
 PYTHON_EXECUTABLE=$(which python3)
 spack env deactivate
