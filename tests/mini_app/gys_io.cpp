@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #include <cstdint>
 #include <iostream>
+#include <stdexcept>
 #include <string>
 #include <mpi.h>
 
@@ -12,14 +13,89 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
 #include "input.hpp"
+#include "mesh_builder.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "pdi_helper.hpp"
 #include "pdi_default.yml.hpp"
 #include "species_init.hpp"
+// #include "maxwellianequilibrium.hpp"
 
 using std::cout;
 using std::endl;
+using std::string;
+
+namespace {
+
+struct ConfigHandles
+{
+    PC_tree_t conf_gyselax;
+    PC_tree_t conf_pdi;
+};
+
+ConfigHandles parse_config_files(int argc, char** argv)
+{
+    ConfigHandles configs{};
+    if (argc > 1) {
+        configs.conf_gyselax = PC_parse_path(argv[1]);
+    } else {
+        configs.conf_gyselax = PC_parse_string("");
+    }
+    PC_errhandler(PC_NULL_HANDLER);
+
+    if (argc > 2) {
+        configs.conf_pdi = PC_parse_path(argv[2]);
+    } else {
+        configs.conf_pdi = PC_parse_string(PDI_CFG);
+    }
+    return configs;
+}
+
+void print_banner(int rank)
+{
+    if (rank != 0) {
+        return;
+    }
+    cout << "==========================================" << endl;
+    cout << "           GYSELA MINI APP               " << endl;
+    cout << "==========================================" << endl;
+}
+
+void yaml_params_to_log(int rank, PC_tree_t conf_gyselax)
+{
+    if (rank != 0) {
+        return;
+    }
+    cout << "Configuration parameters:" << endl;
+    string const gysela_io_filename(PCpp_string(conf_gyselax, ".FileNames.gysela_io_filename"));
+    cout << "  gysela_io_filename: " << gysela_io_filename << endl;
+    cout << "  Mesh parameters:" << endl;
+    for (string const& dim : {"Tor1", "Tor2", "Tor3", "Vpar", "Mu"}) {
+        for (string const& key : {"ncells", "min", "max"}) {
+            string const key_key = ".SplineMesh." + dim + "_" + key;
+            cout << dim  << "_" << key << ":" << PCpp_double(conf_gyselax, key_key.c_str()) << endl;
+        }
+    }
+}
+
+IdxRangeSp init_species_from_yaml(PC_tree_t conf_gyselax)
+{
+    int const nb_species = PCpp_len(conf_gyselax, ".SpeciesInfo");
+    IdxRangeSp idx_range_sp(IdxSp(0), IdxStepSp(nb_species));
+
+    host_t<DFieldMemSp> kinetic_charges(idx_range_sp);
+    host_t<DFieldMemSp> kinetic_masses(idx_range_sp);
+    for (int i = 0; i < nb_species; ++i) {
+        std::string const base = ".SpeciesInfo[" + std::to_string(i) + "]";
+        kinetic_charges(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".charge").c_str());
+        kinetic_masses(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".mass").c_str());
+    }
+
+    ddc::init_discrete_space<Species>(std::move(kinetic_charges), std::move(kinetic_masses));
+    return idx_range_sp;
+}
+
+} // namespace
 
 int main(int argc, char** argv)
 {
@@ -29,113 +105,51 @@ int main(int argc, char** argv)
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
-    //----------------------------------------------
-    // Parse configuration files
-    //----------------------------------------------
-    PC_tree_t conf_gyselax;
-    // Parse YAML parameters file (first argument) or use empty config
-    if (argc > 1) {
-        conf_gyselax = PC_parse_path(argv[1]);
-    } else {
-        // Use default empty configuration if no file provided
-        conf_gyselax = PC_parse_string("");
-    }
-    PC_errhandler(PC_NULL_HANDLER);
+    ConfigHandles configs = parse_config_files(argc, argv);
+    PDI_init(configs.conf_pdi);
 
-    // Parse PDI YAML file (second argument) or use default
-    PC_tree_t conf_pdi;
-    if (argc > 2) {
-        conf_pdi = PC_parse_path(argv[2]);
-    } else {
-        // Use default PDI configuration from header file
-        conf_pdi = PC_parse_string(PDI_CFG);
-    }
-        
-    PDI_init(conf_pdi);
-    
-    std::string const gysela_io_filename(PCpp_string(conf_gyselax, ".FileNames.gysela_io_filename"));
-    int64_t const gysela_io_filename_size = gysela_io_filename.size();
-    
+    print_banner(rank);
+    yaml_params_to_log(rank, configs.conf_gyselax);
 
     if (rank == 0) {
-        cout << "==========================================" << endl;
-        cout << "           GYSELA MINI APP               " << endl;
-        cout << "==========================================" << endl;
+        cout << "Initializing 5D particle distribution function..." << endl;
     }
 
-    // Print the configuration
+    IdxRangeSp const idx_range_sp = init_species_from_yaml(configs.conf_gyselax);
     if (rank == 0) {
-        cout << "Configuration parameters:" << endl;
-        cout << "  gysela_io_filename: " << gysela_io_filename << endl;
-        cout << "  Mesh parameters:" << endl;
-        cout << "  npts_tor1: " << PCpp_int(conf_gyselax, ".Mesh.npts_tor1") << endl;
-        cout << "  npts_tor2: " << PCpp_int(conf_gyselax, ".Mesh.npts_tor2") << endl;
-        cout << "  npts_tor3: " << PCpp_int(conf_gyselax, ".Mesh.npts_tor3") << endl;
-        cout << "  npts_vpar: " << PCpp_int(conf_gyselax, ".Mesh.npts_vpar") << endl;
-        cout << "  npts_mu: " << PCpp_int(conf_gyselax, ".Mesh.npts_mu") << endl;
-        cout << "  min_tor1: " << PCpp_double(conf_gyselax, ".Mesh.min_tor1") << endl;
-        cout << "  max_tor1: " << PCpp_double(conf_gyselax, ".Mesh.max_tor1") << endl;
-        cout << "  min_tor2: " << PCpp_double(conf_gyselax, ".Mesh.min_tor2") << endl;
-        cout << "  max_tor2: " << PCpp_double(conf_gyselax, ".Mesh.max_tor2") << endl;
-        cout << "  min_tor3: " << PCpp_double(conf_gyselax, ".Mesh.min_tor3") << endl;
-        cout << "  max_tor3: " << PCpp_double(conf_gyselax, ".Mesh.max_tor3") << endl;
-        cout << "  min_vpar: " << PCpp_double(conf_gyselax, ".Mesh.min_vpar") << endl;
-        cout << "  max_vpar: " << PCpp_double(conf_gyselax, ".Mesh.max_vpar") << endl;
-        cout << "  min_mu: " << PCpp_double(conf_gyselax, ".Mesh.min_mu") << endl;
-        cout << "  max_mu: " << PCpp_double(conf_gyselax, ".Mesh.max_mu") << endl;
+        cout << "Number of kinetic species: " << idx_range_sp.size() << endl;
     }
 
-        
-    if (rank == 0) {
-            cout << "Initializing 5D particle distribution function..." << endl;
-    }
-        
+    //---------------------------------------------------------
+    // Initialisation of the IdxRange using the input yaml file
     //----------------------------------------------
-    // Read species information from PDI
-    //----------------------------------------------
-    int const nb_species = PCpp_len(conf_gyselax, ".SpeciesInfo");
-    IdxRangeSp idxrange_glob_kinsp(IdxSp(0), IdxStepSp(nb_species));
+    IdxRange<GridTor1> const idx_range_tor1 = init_spline_dependent_idx_range<GridTor1,BSplinesTor1,SplineInterpPointsTor1>(configs.conf_gyselax, "Tor1");
+    IdxRange<GridTor2> const idx_range_tor2 = init_spline_dependent_idx_range<GridTor2,BSplinesTor2,SplineInterpPointsTor2>(configs.conf_gyselax, "Tor2");
+    IdxRange<GridTor3> const idx_range_tor3 = init_spline_dependent_idx_range<GridTor3,BSplinesTor3,SplineInterpPointsTor3>(configs.conf_gyselax, "Tor3");
+    IdxRange<GridVpar> const idx_range_vpar = init_spline_dependent_idx_range<GridVpar,BSplinesVpar,SplineInterpPointsVpar>(configs.conf_gyselax, "Vpar");
+    IdxRange<GridMu> const idx_range_mu = init_spline_dependent_idx_range<GridMu,BSplinesMu,SplineInterpPointsMu>(configs.conf_gyselax, "Mu");
     
-    host_t<DFieldMemSp> kinetic_charges(idxrange_glob_kinsp);
-    host_t<DFieldMemSp> kinetic_masses(idxrange_glob_kinsp);
-    
-    for (int i = 0; i < nb_species; ++i) {
-        std::string const base = ".SpeciesInfo[" + std::to_string(i) + "]";
-        kinetic_charges(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".charge").c_str());
-        kinetic_masses(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".mass").c_str());
-    }
-    
-    ddc::init_discrete_space<Species>(
-            std::move(kinetic_charges),
-            std::move(kinetic_masses));  
+    IdxRangeSpGrid const meshGridSp(idx_range_sp, idx_range_tor1, idx_range_tor2, idx_range_tor3, idx_range_vpar, idx_range_mu);
+    IdxRangeSpVparMu const meshGridSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu);
+    //---------------------------------------------------------
+    // Print the grid sizes
+    //---------------------------------------------------------
     if (rank == 0) {
-        cout << "Number of kinetic species: " << idxrange_glob_kinsp.size() << endl;
+        cout << "Grid sizes:" << endl;
+        cout << "  tor1: " << idx_range_tor1.size() << endl;
+        cout << "  tor2: " << idx_range_tor2.size() << endl;
+        cout << "  tor3: " << idx_range_tor3.size() << endl;
+        cout << "  vpar: " << idx_range_vpar.size() << endl;
+        cout << "  mu: " << idx_range_mu.size() << endl;
     }
-        
-    // //----------------------------------------------
-    // // Initialization of the IdxRange for all dimensions
-    // //----------------------------------------------
-    // // -- Read breakpoints and grid via PDI and deduce the IdxRange of each direction
-    // IdxRangeTor1 const idxrange_glob_tor1 = init_spline_dependent_idx_range<
-    //         GridTor1,
-    //         BSplinesTor1,
-    //         SplineInterpPointsR>(conf_gyselax, "tor1");
-    // IdxRangeTor2 const idxrange_glob_tor2 = init_spline_dependent_idx_range<
-    //         GridTor2,
-    //         BSplinesTor2,
-    //         SplineInterpPointsTor2>(conf_gyselax, "tor2");
-    // IdxRangeTor3 const idxrange_glob_tor3 = init_spline_dependent_idx_range<
-    //         GridTor3,
-    //         BSplinesTor3,
-    //         SplineInterpPointsTor3>(conf_gyselax, "tor3");
-    // IdxRangeVpar const idxrange_glob_vpar = init_spline_dependent_idx_range<
-    //         GridVpar,
-    //         BSplinesVpar,
-    //         SplineInterpPointsVpar>(conf_gyselax, "vpar");
-    // IdxRangeMu const idxrange_glob_mu = init_spline_dependent_idx_range<
-    //         GridMu,
-    //         BSplinesMu,
-    //         SplineInterpPointsMu>(conf_gyselax, "mu");
+
+    //---------------------------------------------------------
+    // Initialisation of the distribution function
+    //---------------------------------------------------------
+    DFieldMemSpVparMu allfequilibrium(meshGridSpVparMu);
+    // std::unique_ptr<IEquilibrium> const init_fequilibrium
+    //         = equilibrium::init_from_input(idx_range_sp, configs.conf_gyselax);
+    // (*init_fequilibrium)(get_field(allfequilibrium));
 
     // if (rank == 0) {
     //     cout << "Grid sizes:" << endl;
@@ -148,7 +162,7 @@ int main(int argc, char** argv)
 
     // // -- Deduction of the useful global IdxRange for 5D distribution function (species is an index)
     // IdxRangeSpTor3DV2D const idxrange_glob_sptor3Dv2D(
-    //         idxrange_glob_kinsp,
+    //         idx_range_sp,
     //         idxrange_glob_tor1,
     //         idxrange_glob_tor2,
     //         idxrange_glob_tor3,
@@ -217,8 +231,8 @@ int main(int argc, char** argv)
     PDI_finalize();
     MPI_Finalize();
 
-    PC_tree_destroy(&conf_pdi);
-    PC_tree_destroy(&conf_gyselax);
+    PC_tree_destroy(&configs.conf_pdi);
+    PC_tree_destroy(&configs.conf_gyselax);
 
     return EXIT_SUCCESS;
 }

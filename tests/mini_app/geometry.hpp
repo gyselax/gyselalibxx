@@ -10,9 +10,9 @@
 #include "species_info.hpp"
 
 /**
- * @brief Minimal geometry definitions for 6D distribution function
+ * @brief Minimal geometry definitions for 5D distribution function
  * This is a minimal version for the mini_app that only defines the necessary types
- * to initialize and read a 6D distribution function (species, tor1, tor2, vpar, mu, dim6)
+ * to initialize and read a 5D distribution function (species, tor1, tor2, tor3, vpar, mu)
  */
 
 // Toroidal coordinate dimensions
@@ -34,6 +34,15 @@ struct Tor2
 };
 using Theta = Tor2;
 
+
+struct Tor3
+{
+    static bool constexpr PERIODIC = true;
+    static bool constexpr IS_COVARIANT = false;
+    static bool constexpr IS_CONTRAVARIANT = true;
+};
+using Phi = Tor3;
+
 // Velocity space dimensions
 struct Vpar
 {
@@ -45,88 +54,64 @@ struct Mu
     static bool constexpr PERIODIC = false;
 };
 
-// Additional 6th dimension (not tor3)
-struct Dim6
-{
-    static bool constexpr PERIODIC = false;
-};
 
 // Splines definition
 int constexpr BSDegreeTor1 = 3;
 int constexpr BSDegreeTor2 = 3;
+int constexpr BSDegreeTor3 = 3;
 int constexpr BSDegreeVpar = 3;
 int constexpr BSDegreeMu = 3;
-int constexpr BSDegreeDim6 = 3;
 
-struct BSplinesTor1 : ddc::NonUniformBSplines<Tor1, BSDegreeTor1>
+struct BSplinesTor1 : ddc::UniformBSplines<Tor1, BSDegreeTor1>
 {
 };
-struct BSplinesTor2 : ddc::NonUniformBSplines<Tor2, BSDegreeTor2>
+struct BSplinesTor2 : ddc::UniformBSplines<Tor2, BSDegreeTor2>
 {
 };
-struct BSplinesVpar : ddc::NonUniformBSplines<Vpar, BSDegreeVpar>
+struct BSplinesTor3 : ddc::UniformBSplines<Tor3, BSDegreeTor3>
 {
 };
-struct BSplinesMu : ddc::NonUniformBSplines<Mu, BSDegreeMu>
+struct BSplinesVpar : ddc::UniformBSplines<Vpar, BSDegreeVpar>
 {
 };
-struct BSplinesDim6 : ddc::NonUniformBSplines<Dim6, BSDegreeDim6>
+struct BSplinesMu : ddc::UniformBSplines<Mu, BSDegreeMu>
 {
 };
 
 ddc::BoundCond constexpr SplineTor1Boundary = ddc::BoundCond::GREVILLE;
 ddc::BoundCond constexpr SplineTor2Boundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr SplineTor3Boundary = ddc::BoundCond::PERIODIC; 
 ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::HERMITE;
 ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr SplineDim6Boundary = ddc::BoundCond::HERMITE;
 
-using SplineInterpPointsR = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesTor1, SplineTor1Boundary, SplineTor1Boundary>;
-using SplineInterpPointsTor2 = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesTor2, SplineTor2Boundary, SplineTor2Boundary>;
-using SplineInterpPointsVpar = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesVpar, SplineVparBoundary, SplineVparBoundary>;
+using SplineInterpPointsTor1
+        = ddc::GrevilleInterpolationPoints<BSplinesTor1, SplineTor1Boundary, SplineTor1Boundary>;
+using SplineInterpPointsTor2
+        = ddc::GrevilleInterpolationPoints<BSplinesTor2, SplineTor2Boundary, SplineTor2Boundary>;
+using SplineInterpPointsTor3
+        = ddc::GrevilleInterpolationPoints<BSplinesTor3, SplineTor3Boundary, SplineTor3Boundary>;
+using SplineInterpPointsVpar
+        = ddc::GrevilleInterpolationPoints<BSplinesVpar, SplineVparBoundary, SplineVparBoundary>;
 using SplineInterpPointsMu
-        = ddcHelper::NonUniformInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
-using SplineInterpPointsDim6
-        = ddcHelper::NonUniformInterpolationPoints<BSplinesDim6, SplineDim6Boundary, SplineDim6Boundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
 
-struct GridTor1 : NonUniformGridBase<Tor1>
-{
-};
-struct GridTor2 : NonUniformGridBase<Tor2>
-{
-};
-struct GridVpar : UniformGridBase<Vpar>
-{
-};
-struct GridMu : UniformGridBase<Mu>
-{
-};
-struct GridDim6 : UniformGridBase<Dim6>
-{
-};
+
+struct GridTor1 : SplineInterpPointsTor1::interpolation_discrete_dimension_type{};
+struct GridTor2 : SplineInterpPointsTor2::interpolation_discrete_dimension_type{};
+struct GridTor3 : SplineInterpPointsTor3::interpolation_discrete_dimension_type{};
+struct GridVpar : SplineInterpPointsVpar::interpolation_discrete_dimension_type{};
+struct GridMu : SplineInterpPointsMu::interpolation_discrete_dimension_type{};
 
 // IdxRange definitions
 using IdxRangeTor1 = IdxRange<GridTor1>;
 using IdxRangeTor2 = IdxRange<GridTor2>;
+using IdxRangeTor3 = IdxRange<GridTor3>;
 using IdxRangeVpar = IdxRange<GridVpar>;
 using IdxRangeMu = IdxRange<GridMu>;
-using IdxRangeDim6 = IdxRange<GridDim6>;
-using IdxRangeTor2D = IdxRange<GridTor1, GridTor2>;
-using IdxRangeV2D = IdxRange<GridVpar, GridMu>;
-using IdxRangeSpTor2DV2DDim6 = IdxRange<Species, GridTor1, GridTor2, GridVpar, GridMu, GridDim6>;
+using IdxRangeSpGrid = IdxRange<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
+using IdxRangeSpVparMu = IdxRange<Species, GridVpar, GridMu>;
 
-// Field type aliases
-template <class ElementType>
-using FieldMemSpTor2DV2DDim6 = FieldMem<ElementType, IdxRangeSpTor2DV2DDim6>;
-using DFieldMemSpTor2DV2DDim6 = FieldMemSpTor2DV2DDim6<double>;
 
 template <class ElementType>
-using FieldSpTor2DV2DDim6 = Field<ElementType, IdxRangeSpTor2DV2DDim6>;
-using DFieldSpTor2DV2DDim6 = FieldSpTor2DV2DDim6<double>;
-
-template <class ElementType>
-using FieldMemSpTor2DV2DDim6_host = host_t<FieldMem<ElementType, IdxRangeSpTor2DV2DDim6>>;
-using DFieldMemSpTor2DV2DDim6_host = FieldMemSpTor2DV2DDim6_host<double>;
-
+using FieldMemSpVparMu = FieldMem<ElementType, IdxRangeSpVparMu>;
+using DFieldMemSpVparMu = FieldMemSpVparMu<double>;
