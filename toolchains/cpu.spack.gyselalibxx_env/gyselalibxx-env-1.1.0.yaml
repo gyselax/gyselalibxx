@@ -17,7 +17,6 @@ spack:
     - 'pdiplugin-decl-hdf5@1.9 +mpi'
     - 'pdiplugin-decl-netcdf@1.9 +mpi'
     - 'pdiplugin-mpi@1.9'
-    - 'pdiplugin-pycall@1.9'
     - 'pdiplugin-set-value@1.9'
     - 'pdiplugin-trace@1.9'
   - python-packages:
@@ -52,3 +51,7 @@ spack:
       require: openblas@0.3
     mpi:
       require: openmpi@5.0
+    pdi:
+      require: ~python
+    py-pandas:
+      require: ~performance
