@@ -2,11 +2,11 @@ spack:
   definitions:
   - packages:
     - cmake
-    - ginkgo@1.9~openmp+cuda cuda_arch=90
+    - ginkgo@1.9 ~openmp +cuda cuda_arch=90
     - googletest +gmock
-    - kokkos@4.6~openmp+cuda+cuda_relocatable_device_code +cuda_constexpr cuda_arch=90
-    - kokkos-fft@0.3 host_backend=fftw-serial device_backend=cufft
-    - kokkos-kernels@4.6~shared
+    - kokkos@4.7 ~openmp +cuda +cuda_relocatable_device_code +cuda_constexpr cuda_arch=90
+    - kokkos-fft@0.4 host_backend=fftw-serial device_backend=cufft
+    - kokkos-kernels@4.7 ~shared
     - kokkos-tools
     - lapack
     - mpi
