@@ -54,6 +54,12 @@ struct Mu
     static bool constexpr PERIODIC = false;
 };
 
+using CoordTor1 = Coord<Tor1>;
+using CoordTor2 = Coord<Tor2>;
+using CoordTor3 = Coord<Tor3>;
+using CoordVpar = Coord<Vpar>;
+using CoordMu = Coord<Mu>;
+
 
 // Splines definition
 int constexpr BSDegreeTor1 = 3;
@@ -110,7 +116,13 @@ using IdxRangeVpar = IdxRange<GridVpar>;
 using IdxRangeMu = IdxRange<GridMu>;
 using IdxRangeSpGrid = IdxRange<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
 using IdxRangeSpVparMu = IdxRange<Species, GridVpar, GridMu>;
+using IdxSpGrid = Idx<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
+using IdxSpVparMu = Idx<Species, GridVpar, GridMu>;
 
+
+template <class ElementType>
+using FieldMemSpGrid = FieldMem<ElementType, IdxRangeSpGrid>;
+using DFieldMemSpGrid = FieldMemSpGrid<double>;
 
 template <class ElementType>
 using FieldMemSpVparMu = FieldMem<ElementType, IdxRangeSpVparMu>;

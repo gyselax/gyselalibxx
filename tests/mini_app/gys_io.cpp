@@ -70,8 +70,8 @@ void yaml_params_to_log(int rank, PC_tree_t conf_gyselax)
     string const gysela_io_filename(PCpp_string(conf_gyselax, ".FileNames.gysela_io_filename"));
     cout << "  gysela_io_filename: " << gysela_io_filename << endl;
     cout << "  Mesh parameters:" << endl;
-    for (string const& dim : {"Tor1", "Tor2", "Tor3", "Vpar", "Mu"}) {
-        for (string const& key : {"ncells", "min", "max"}) {
+    for (string dim : {"Tor1", "Tor2", "Tor3", "Vpar", "Mu"}) {
+        for (string key : {"ncells", "min", "max"}) {
             string const key_key = ".SplineMesh." + dim + "_" + key;
             cout << dim  << "_" << key << ":" << PCpp_double(conf_gyselax, key_key.c_str()) << endl;
         }
@@ -95,16 +95,110 @@ IdxRangeSp init_species_from_yaml(PC_tree_t conf_gyselax)
     return idx_range_sp;
 }
 
+struct MeshInitializationResult
+{
+    IdxRangeSp idx_range_sp;
+    IdxRangeSpGrid mesh_sp;
+    IdxRangeSpVparMu mesh_sp_vparmu;
+};
+
+MeshInitializationResult initialize_mesh(int rank, PC_tree_t conf_gyselax)
+{
+    IdxRangeSp const idx_range_sp = init_species_from_yaml(conf_gyselax);
+    if (rank == 0) {
+        cout << "Number of kinetic species: " << idx_range_sp.size() << endl;
+    }
+
+    IdxRange<GridTor1> const idx_range_tor1
+            = init_spline_dependent_idx_range<GridTor1, BSplinesTor1, SplineInterpPointsTor1>(
+                    conf_gyselax,
+                    "Tor1");
+    IdxRange<GridTor2> const idx_range_tor2
+            = init_spline_dependent_idx_range<GridTor2, BSplinesTor2, SplineInterpPointsTor2>(
+                    conf_gyselax,
+                    "Tor2");
+    IdxRange<GridTor3> const idx_range_tor3
+            = init_spline_dependent_idx_range<GridTor3, BSplinesTor3, SplineInterpPointsTor3>(
+                    conf_gyselax,
+                    "Tor3");
+    IdxRange<GridVpar> const idx_range_vpar
+            = init_spline_dependent_idx_range<GridVpar, BSplinesVpar, SplineInterpPointsVpar>(
+                    conf_gyselax,
+                    "Vpar");
+    IdxRange<GridMu> const idx_range_mu
+            = init_spline_dependent_idx_range<GridMu, BSplinesMu, SplineInterpPointsMu>(
+                    conf_gyselax,
+                    "Mu");
+
+    if (rank == 0) {
+        cout << "Grid sizes:" << endl;
+        cout << "  tor1: " << idx_range_tor1.size() << endl;
+        cout << "  tor2: " << idx_range_tor2.size() << endl;
+        cout << "  tor3: " << idx_range_tor3.size() << endl;
+        cout << "  vpar: " << idx_range_vpar.size() << endl;
+        cout << "  mu: " << idx_range_mu.size() << endl;
+    }
+
+    MeshInitializationResult result{
+            idx_range_sp,
+            IdxRangeSpGrid(idx_range_sp, idx_range_tor1, idx_range_tor2, idx_range_tor3, idx_range_vpar, idx_range_mu),
+            IdxRangeSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu)};
+    return result;
+}
+
+void init_distribution_fun(
+        DFieldMemSpGrid& allfdistribu,
+        IdxRangeSpVparMu const& meshGridSpVparMu,
+        IdxRangeSpGrid const& meshGridSp)
+{
+    double const mean_velocity = 1.0;
+    double const temperature = 1.0;
+    DFieldMemSpVparMu allfequilibrium(meshGridSpVparMu);
+    auto allfequilibrium_field = get_field(allfequilibrium);
+    auto allfdistribu_field = get_field(allfdistribu);
+
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            meshGridSpVparMu,
+            KOKKOS_LAMBDA(IdxSpVparMu const ispvparmu) {
+                CoordVpar const vpar = ddc::coordinate(ddc::select<GridVpar>(ispvparmu));
+                double const vpar_value = static_cast<double>(vpar);
+                allfequilibrium_field(ispvparmu)
+                        = Kokkos::exp(-(vpar_value - mean_velocity) * (vpar_value - mean_velocity)
+                                      / (2. * temperature));
+            });
+
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            meshGridSp,
+            KOKKOS_LAMBDA(IdxSpGrid const ispgrid) {
+                IdxSpVparMu const ispvparmu(
+                        ddc::select<Species>(ispgrid),
+                        ddc::select<GridVpar>(ispgrid),
+                        ddc::select<GridMu>(ispgrid));
+                allfdistribu_field(ispgrid) = allfequilibrium_field(ispvparmu);
+            });
+}
+
 } // namespace
 
 int main(int argc, char** argv)
 {
+
+    /**************************************
+    *   Main program: mini_app            *
+    *  
+    ****************************************/
+    
     Kokkos::ScopeGuard scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
     MPI_Init(&argc, &argv);
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
+    //---------------------------------------------------------
+    // Read and initialize the configuration
+    //---------------------------------------------------------
     ConfigHandles configs = parse_config_files(argc, argv);
     PDI_init(configs.conf_pdi);
 
@@ -115,50 +209,21 @@ int main(int argc, char** argv)
         cout << "Initializing 5D particle distribution function..." << endl;
     }
 
-    IdxRangeSp const idx_range_sp = init_species_from_yaml(configs.conf_gyselax);
-    if (rank == 0) {
-        cout << "Number of kinetic species: " << idx_range_sp.size() << endl;
-    }
-
     //---------------------------------------------------------
-    // Initialisation of the IdxRange using the input yaml file
-    //----------------------------------------------
-    IdxRange<GridTor1> const idx_range_tor1 = init_spline_dependent_idx_range<GridTor1,BSplinesTor1,SplineInterpPointsTor1>(configs.conf_gyselax, "Tor1");
-    IdxRange<GridTor2> const idx_range_tor2 = init_spline_dependent_idx_range<GridTor2,BSplinesTor2,SplineInterpPointsTor2>(configs.conf_gyselax, "Tor2");
-    IdxRange<GridTor3> const idx_range_tor3 = init_spline_dependent_idx_range<GridTor3,BSplinesTor3,SplineInterpPointsTor3>(configs.conf_gyselax, "Tor3");
-    IdxRange<GridVpar> const idx_range_vpar = init_spline_dependent_idx_range<GridVpar,BSplinesVpar,SplineInterpPointsVpar>(configs.conf_gyselax, "Vpar");
-    IdxRange<GridMu> const idx_range_mu = init_spline_dependent_idx_range<GridMu,BSplinesMu,SplineInterpPointsMu>(configs.conf_gyselax, "Mu");
-    
-    IdxRangeSpGrid const meshGridSp(idx_range_sp, idx_range_tor1, idx_range_tor2, idx_range_tor3, idx_range_vpar, idx_range_mu);
-    IdxRangeSpVparMu const meshGridSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu);
+    // Initialisation of the mesh (sp, space, phase-space)
     //---------------------------------------------------------
-    // Print the grid sizes
-    //---------------------------------------------------------
-    if (rank == 0) {
-        cout << "Grid sizes:" << endl;
-        cout << "  tor1: " << idx_range_tor1.size() << endl;
-        cout << "  tor2: " << idx_range_tor2.size() << endl;
-        cout << "  tor3: " << idx_range_tor3.size() << endl;
-        cout << "  vpar: " << idx_range_vpar.size() << endl;
-        cout << "  mu: " << idx_range_mu.size() << endl;
-    }
+    MeshInitializationResult const mesh = initialize_mesh(rank, configs.conf_gyselax);
+    IdxRangeSp const idx_range_sp = mesh.idx_range_sp;
+    IdxRangeSpGrid const meshGridSp = mesh.mesh_sp;
+    IdxRangeSpVparMu const meshGridSpVparMu = mesh.mesh_sp_vparmu;
 
     //---------------------------------------------------------
     // Initialisation of the distribution function
     //---------------------------------------------------------
-    DFieldMemSpVparMu allfequilibrium(meshGridSpVparMu);
-    // std::unique_ptr<IEquilibrium> const init_fequilibrium
-    //         = equilibrium::init_from_input(idx_range_sp, configs.conf_gyselax);
-    // (*init_fequilibrium)(get_field(allfequilibrium));
+    DFieldMemSpGrid allfdistribu(meshGridSp);
+    init_distribution_fun(allfdistribu, meshGridSpVparMu, meshGridSp);
 
-    // if (rank == 0) {
-    //     cout << "Grid sizes:" << endl;
-    //     cout << "  tor1: " << idxrange_glob_tor1.size() << endl;
-    //     cout << "  tor2: " << idxrange_glob_tor2.size() << endl;
-    //     cout << "  tor3: " << idxrange_glob_tor3.size() << endl;
-    //     cout << "  vpar: " << idxrange_glob_vpar.size() << endl;
-    //     cout << "  mu: " << idxrange_glob_mu.size() << endl;
-    // }
+
 
     // // -- Deduction of the useful global IdxRange for 5D distribution function (species is an index)
     // IdxRangeSpTor3DV2D const idxrange_glob_sptor3Dv2D(
