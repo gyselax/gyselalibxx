@@ -8,6 +8,7 @@
 #include "ddc_helper.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "species_info.hpp"
+#include "mpilayout.hpp" 
 
 /**
  * @brief Minimal geometry definitions for 5D distribution function
@@ -117,6 +118,7 @@ using IdxRangeMu = IdxRange<GridMu>;
 using IdxRangeSpGrid = IdxRange<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
 using IdxRangeSpVparMu = IdxRange<Species, GridVpar, GridMu>;
 using IdxSpGrid = Idx<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
+using IdxRangeSpGridTranspose = IdxRange<Species, GridVpar, GridMu, GridTor1, GridTor2, GridTor3>;
 using IdxSpVparMu = Idx<Species, GridVpar, GridMu>;
 
 
@@ -127,3 +129,10 @@ using DFieldMemSpGrid = FieldMemSpGrid<double>;
 template <class ElementType>
 using FieldMemSpVparMu = FieldMem<ElementType, IdxRangeSpVparMu>;
 using DFieldMemSpVparMu = FieldMemSpVparMu<double>;
+
+
+//-----------------------------------------------------
+// --> MPI Layouts
+//-----------------------------------------------------
+using Tor3DSplit = MPILayout<IdxRangeSpGrid, GridTor1, GridTor2, GridTor3>;
+using V2DSplit = MPILayout<IdxRangeSpGridTranspose, GridVpar, GridMu>;

@@ -19,6 +19,8 @@
 #include "pdi_helper.hpp"
 #include "pdi_default.yml.hpp"
 #include "species_init.hpp"
+#include "mpitransposealltoall.hpp"
+#include "transpose.hpp"
 // #include "maxwellianequilibrium.hpp"
 
 using std::cout;
@@ -100,6 +102,11 @@ struct MeshInitializationResult
     IdxRangeSp idx_range_sp;
     IdxRangeSpGrid mesh_sp;
     IdxRangeSpVparMu mesh_sp_vparmu;
+    IdxRange<GridTor1> idx_range_tor1;
+    IdxRange<GridTor2> idx_range_tor2;
+    IdxRange<GridTor3> idx_range_tor3;
+    IdxRange<GridVpar> idx_range_vpar;
+    IdxRange<GridMu> idx_range_mu;
 };
 
 MeshInitializationResult initialize_mesh(int rank, PC_tree_t conf_gyselax)
@@ -142,7 +149,12 @@ MeshInitializationResult initialize_mesh(int rank, PC_tree_t conf_gyselax)
     MeshInitializationResult result{
             idx_range_sp,
             IdxRangeSpGrid(idx_range_sp, idx_range_tor1, idx_range_tor2, idx_range_tor3, idx_range_vpar, idx_range_mu),
-            IdxRangeSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu)};
+            IdxRangeSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu),
+            idx_range_tor1,
+            idx_range_tor2,
+            idx_range_tor3,
+            idx_range_vpar,
+            idx_range_mu};
     return result;
 }
 
@@ -180,6 +192,57 @@ void init_distribution_fun(
             });
 }
 
+void write_fdistribu(
+        int rank,
+        IdxRangeSpGrid const& meshGridSp,
+        IdxRangeSp const& idx_range_sp,
+        IdxRange<GridTor1> const& idx_range_tor1,
+        IdxRange<GridTor2> const& idx_range_tor2,
+        IdxRange<GridTor3> const& idx_range_tor3,
+        IdxRange<GridVpar> const& idx_range_vpar,
+        IdxRange<GridMu> const& idx_range_mu,
+        host_t<DFieldMemSpGrid> const& allfdistribu_host)
+{
+    if (rank == 0) {
+        cout << "Writing 5D distribution function and coordinates to file..." << endl;
+    }
+
+    // Expose index range for parallel I/O
+    PDI_expose_idx_range(meshGridSp, "local_fdistribu");
+
+    // Expose species extents
+    std::size_t species_extent = idx_range_sp.size();
+    std::array<std::size_t, 1> species_extents_arr = {species_extent};
+    PDI_expose("species_extents", species_extents_arr.data(), PDI_OUT);
+
+    // Expose coordinate extents
+    std::array<std::size_t, 1> tor1_extents_arr = {idx_range_tor1.size()};
+    std::array<std::size_t, 1> tor2_extents_arr = {idx_range_tor2.size()};
+    std::array<std::size_t, 1> tor3_extents_arr = {idx_range_tor3.size()};
+    std::array<std::size_t, 1> vpar_extents_arr = {idx_range_vpar.size()};
+    std::array<std::size_t, 1> mu_extents_arr = {idx_range_mu.size()};
+    PDI_expose("tor1_extents", tor1_extents_arr.data(), PDI_OUT);
+    PDI_expose("tor2_extents", tor2_extents_arr.data(), PDI_OUT);
+    PDI_expose("tor3_extents", tor3_extents_arr.data(), PDI_OUT);
+    PDI_expose("vpar_extents", vpar_extents_arr.data(), PDI_OUT);
+    PDI_expose("mu_extents", mu_extents_arr.data(), PDI_OUT);
+
+    // Expose coordinates to PDI
+    expose_mesh_to_pdi("tor1", idx_range_tor1);
+    expose_mesh_to_pdi("tor2", idx_range_tor2);
+    expose_mesh_to_pdi("tor3", idx_range_tor3);
+    expose_mesh_to_pdi("vpar", idx_range_vpar);
+    expose_mesh_to_pdi("mu", idx_range_mu);
+
+    // Expose distribution function to PDI and trigger write event
+    ddc::PdiEvent("write_fdistribu")
+            .with("fdistribu_sptor3Dv2D", allfdistribu_host);
+
+    if (rank == 0) {
+        cout << "5D distribution function and coordinates written successfully." << endl;
+    }
+}
+
 } // namespace
 
 int main(int argc, char** argv)
@@ -189,7 +252,6 @@ int main(int argc, char** argv)
     *   Main program: mini_app            *
     *  
     ****************************************/
-    
     Kokkos::ScopeGuard scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
     MPI_Init(&argc, &argv);
@@ -216,6 +278,11 @@ int main(int argc, char** argv)
     IdxRangeSp const idx_range_sp = mesh.idx_range_sp;
     IdxRangeSpGrid const meshGridSp = mesh.mesh_sp;
     IdxRangeSpVparMu const meshGridSpVparMu = mesh.mesh_sp_vparmu;
+    IdxRange<GridTor1> const idx_range_tor1 = mesh.idx_range_tor1;
+    IdxRange<GridTor2> const idx_range_tor2 = mesh.idx_range_tor2;
+    IdxRange<GridTor3> const idx_range_tor3 = mesh.idx_range_tor3;
+    IdxRange<GridVpar> const idx_range_vpar = mesh.idx_range_vpar;
+    IdxRange<GridMu> const idx_range_mu = mesh.idx_range_mu;
 
     //---------------------------------------------------------
     // Initialisation of the distribution function
@@ -223,75 +290,24 @@ int main(int argc, char** argv)
     DFieldMemSpGrid allfdistribu(meshGridSp);
     init_distribution_fun(allfdistribu, meshGridSpVparMu, meshGridSp);
 
+    //---------------------------------------------------------
+    // Read application version from YAML config
+    //---------------------------------------------------------
+    string const version = PCpp_string(configs.conf_gyselax, ".Application.version");
 
+    if (version == "mpi_transpose") {
+        MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(meshGridSp, MPI_COMM_WORLD);
+    }
+    //---------------------------------------------------------
+    // Write 5D distribution function and coordinates to file using PDI
+    //---------------------------------------------------------
+    // Create host version of distribution function for I/O (needed for PDI)
+    host_t<DFieldMemSpGrid> allfdistribu_host(meshGridSp);
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
-    // // -- Deduction of the useful global IdxRange for 5D distribution function (species is an index)
-    // IdxRangeSpTor3DV2D const idxrange_glob_sptor3Dv2D(
-    //         idx_range_sp,
-    //         idxrange_glob_tor1,
-    //         idxrange_glob_tor2,
-    //         idxrange_glob_tor3,
-    //         idxrange_glob_vpar,
-    //         idxrange_glob_mu);
+    write_fdistribu(rank, meshGridSp, idx_range_sp, idx_range_tor1, idx_range_tor2, 
+                    idx_range_tor3, idx_range_vpar, idx_range_mu, allfdistribu_host);
 
-    // if (rank == 0) {
-    //     cout << "5D distribution function size (with species index): " << idxrange_glob_sptor3Dv2D.size() << endl;
-    // }
-
-    // //----------------------------------------------
-    // // Mesh saving (grid and breakpoints in all directions)
-    // //----------------------------------------------
-    // expose_mesh_to_pdi(
-    //         "breakpoints_tor1",
-    //         ddc::discrete_space<BSplinesTor1>().break_point_domain());
-    // expose_mesh_to_pdi("grid_tor1", idxrange_glob_tor1);
-    // expose_mesh_to_pdi(
-    //         "breakpoints_tor2",
-    //         ddc::discrete_space<BSplinesTor2>().break_point_domain());
-    // expose_mesh_to_pdi("grid_tor2", idxrange_glob_tor2);
-    // expose_mesh_to_pdi(
-    //         "breakpoints_vpar",
-    //         ddc::discrete_space<BSplinesVpar>().break_point_domain());
-    // expose_mesh_to_pdi("grid_vpar", idxrange_glob_vpar);
-    // expose_mesh_to_pdi(
-    //         "breakpoints_tor3",
-    //         ddc::discrete_space<BSplinesTor3>().break_point_domain());
-    // expose_mesh_to_pdi("grid_tor3", idxrange_glob_tor3);
-    // expose_mesh_to_pdi(
-    //         "breakpoints_vpar",
-    //         ddc::discrete_space<BSplinesVpar>().break_point_domain());
-    // expose_mesh_to_pdi("grid_vpar", idxrange_glob_vpar);
-    // expose_mesh_to_pdi(
-    //         "breakpoints_mu",
-    //         ddc::discrete_space<BSplinesMu>().break_point_domain());
-    // expose_mesh_to_pdi("grid_mu", idxrange_glob_mu);
-
-    // //----------------------------------------------
-    // // Read the 5D distribution function (tor1, tor2, tor3, vpar, mu) for each species
-    // //----------------------------------------------
-    // DFieldMemSpTor3DV2D_host fdistribu_sptor3Dv2D_host(idxrange_glob_sptor3Dv2D);
-    
-    // // Expose index range for parallel I/O
-    // PDI_expose_idx_range(idxrange_glob_sptor3Dv2D, "local_fdistribu");
-    
-    // // Read distribution function via PDI
-    // ddc::PdiEvent("read_fdistribu")
-    //         .with("fdistribu_sptor3Dv2D", fdistribu_sptor3Dv2D_host);
-
-    // if (rank == 0) {
-    //     cout << "Distribution function read successfully." << endl;
-    //     cout << "Total size: " << idxrange_glob_sptor3Dv2D.size() << " elements" << endl;
-    // }
-
-    // // Copy to device memory (optional, for further processing)
-    // auto fdistribu_sptor3Dv2D_alloc = ddc::create_mirror_view_and_copy(
-    //         Kokkos::DefaultExecutionSpace(),
-    //         get_field(fdistribu_sptor3Dv2D_host));
-    // DFieldSpTor3DV2D fdistribu_sptor3Dv2D(get_field(fdistribu_sptor3Dv2D_alloc));
-
-    // if (rank == 0) {
-    //     cout << "5D distribution function initialized successfully." << endl;
-    // }
 
     PDI_finalize();
     MPI_Finalize();

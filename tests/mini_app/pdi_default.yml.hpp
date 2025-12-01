@@ -175,6 +175,27 @@ plugins:
             dataset_selection:
               size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]', '$local_fdistribu_extents[5]' ]
               start: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]', '$local_fdistribu_starts[5]' ]
+
+    #-- Write distribution function and coordinates
+    - file: 'fdistribu_5D_output.h5'
+      on_event: [write_fdistribu]
+      collision_policy: replace_and_warn
+      communicator: $MPI_COMM_WORLD
+      datasets:
+        fdistribu_sptor3Dv2D:
+          type: array
+          subtype: double
+          size: [ '$species_extents[0]', '$tor1_extents[0]', '$tor2_extents[0]', '$tor3_extents[0]', '$vpar_extents[0]', '$mu_extents[0]' ]
+      write:
+        tor1: ~
+        tor2: ~
+        tor3: ~
+        vpar: ~
+        mu: ~
+        fdistribu_sptor3Dv2D:
+            dataset_selection:
+              size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]', '$local_fdistribu_extents[5]' ]
+              start: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]', '$local_fdistribu_starts[5]' ]
 trace: ~
 )PDI_CFG";
 

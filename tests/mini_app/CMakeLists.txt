@@ -13,6 +13,7 @@ target_link_libraries(gys_io
         gslx::io
         gslx::speciesinfo
         gslx::utils
+        gslx::mpi_parallelisation
 )
 
 install(TARGETS gys_io)

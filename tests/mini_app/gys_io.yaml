@@ -2,11 +2,11 @@ FileNames:
   gysela_io_filename:  plasma1.h5
 
 SplineMesh:
-  Tor1_ncells: 32      # number of points in the radial direction
-  Tor2_ncells: 64      # number of points in the poloidal direction
-  Tor3_ncells: 64      # number of points in the poloidal direction
-  Vpar_ncells: 32     # number of points in the parallel velocity direction
-  Mu_ncells:   16     # number of points in the adiabatic invariant direction
+  Tor1_ncells: 16      # number of points in the radial direction
+  Tor2_ncells: 32      # number of points in the poloidal direction
+  Tor3_ncells: 32      # number of points in the poloidal direction
+  Vpar_ncells: 16     # number of points in the parallel velocity direction
+  Mu_ncells:   8     # number of points in the adiabatic invariant direction
 
   Tor1_min: 0.0
   Tor1_max: 1.0
@@ -32,3 +32,6 @@ SpeciesInfo:
     N_maxw: 1.0         # initial constant density
     T_maxw: 1.0         # initial constant temperature 
     Upar_maxw: 0.0    # initial mean velocity
+
+Application: 
+  version: "gpu2cpu"  # "gpu2cpu"/"mpi_transpose"/"in-situ-diagnostic"
