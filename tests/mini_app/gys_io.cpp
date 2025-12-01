@@ -194,13 +194,7 @@ void init_distribution_fun(
 
 void write_fdistribu(
         int rank,
-        IdxRangeSpGrid const& meshGridSp,
-        IdxRangeSp const& idx_range_sp,
-        IdxRange<GridTor1> const& idx_range_tor1,
-        IdxRange<GridTor2> const& idx_range_tor2,
-        IdxRange<GridTor3> const& idx_range_tor3,
-        IdxRange<GridVpar> const& idx_range_vpar,
-        IdxRange<GridMu> const& idx_range_mu,
+        MeshInitializationResult const& mesh,
         host_t<DFieldMemSpGrid> const& allfdistribu_host)
 {
     if (rank == 0) {
@@ -208,19 +202,19 @@ void write_fdistribu(
     }
 
     // Expose index range for parallel I/O
-    PDI_expose_idx_range(meshGridSp, "local_fdistribu");
+    PDI_expose_idx_range(mesh.mesh_sp, "local_fdistribu");
 
     // Expose species extents
-    std::size_t species_extent = idx_range_sp.size();
+    std::size_t species_extent = mesh.idx_range_sp.size();
     std::array<std::size_t, 1> species_extents_arr = {species_extent};
     PDI_expose("species_extents", species_extents_arr.data(), PDI_OUT);
 
     // Expose coordinate extents
-    std::array<std::size_t, 1> tor1_extents_arr = {idx_range_tor1.size()};
-    std::array<std::size_t, 1> tor2_extents_arr = {idx_range_tor2.size()};
-    std::array<std::size_t, 1> tor3_extents_arr = {idx_range_tor3.size()};
-    std::array<std::size_t, 1> vpar_extents_arr = {idx_range_vpar.size()};
-    std::array<std::size_t, 1> mu_extents_arr = {idx_range_mu.size()};
+    std::array<std::size_t, 1> tor1_extents_arr = {mesh.idx_range_tor1.size()};
+    std::array<std::size_t, 1> tor2_extents_arr = {mesh.idx_range_tor2.size()};
+    std::array<std::size_t, 1> tor3_extents_arr = {mesh.idx_range_tor3.size()};
+    std::array<std::size_t, 1> vpar_extents_arr = {mesh.idx_range_vpar.size()};
+    std::array<std::size_t, 1> mu_extents_arr = {mesh.idx_range_mu.size()};
     PDI_expose("tor1_extents", tor1_extents_arr.data(), PDI_OUT);
     PDI_expose("tor2_extents", tor2_extents_arr.data(), PDI_OUT);
     PDI_expose("tor3_extents", tor3_extents_arr.data(), PDI_OUT);
@@ -228,11 +222,11 @@ void write_fdistribu(
     PDI_expose("mu_extents", mu_extents_arr.data(), PDI_OUT);
 
     // Expose coordinates to PDI
-    expose_mesh_to_pdi("tor1", idx_range_tor1);
-    expose_mesh_to_pdi("tor2", idx_range_tor2);
-    expose_mesh_to_pdi("tor3", idx_range_tor3);
-    expose_mesh_to_pdi("vpar", idx_range_vpar);
-    expose_mesh_to_pdi("mu", idx_range_mu);
+    expose_mesh_to_pdi("tor1", mesh.idx_range_tor1);
+    expose_mesh_to_pdi("tor2", mesh.idx_range_tor2);
+    expose_mesh_to_pdi("tor3", mesh.idx_range_tor3);
+    expose_mesh_to_pdi("vpar", mesh.idx_range_vpar);
+    expose_mesh_to_pdi("mu", mesh.idx_range_mu);
 
     // Expose distribution function to PDI and trigger write event
     ddc::PdiEvent("write_fdistribu")
@@ -278,12 +272,6 @@ int main(int argc, char** argv)
     IdxRangeSp const idx_range_sp = mesh.idx_range_sp;
     IdxRangeSpGrid const meshGridSp = mesh.mesh_sp;
     IdxRangeSpVparMu const meshGridSpVparMu = mesh.mesh_sp_vparmu;
-    IdxRange<GridTor1> const idx_range_tor1 = mesh.idx_range_tor1;
-    IdxRange<GridTor2> const idx_range_tor2 = mesh.idx_range_tor2;
-    IdxRange<GridTor3> const idx_range_tor3 = mesh.idx_range_tor3;
-    IdxRange<GridVpar> const idx_range_vpar = mesh.idx_range_vpar;
-    IdxRange<GridMu> const idx_range_mu = mesh.idx_range_mu;
-
     //---------------------------------------------------------
     // Initialisation of the distribution function
     //---------------------------------------------------------
@@ -302,12 +290,10 @@ int main(int argc, char** argv)
     // Write 5D distribution function and coordinates to file using PDI
     //---------------------------------------------------------
     // Create host version of distribution function for I/O (needed for PDI)
-    host_t<DFieldMemSpGrid> allfdistribu_host(meshGridSp);
+    host_t<DFieldMemSpGrid> allfdistribu_host(mesh.mesh_sp);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
-    write_fdistribu(rank, meshGridSp, idx_range_sp, idx_range_tor1, idx_range_tor2, 
-                    idx_range_tor3, idx_range_vpar, idx_range_mu, allfdistribu_host);
-
+    write_fdistribu(rank, mesh, allfdistribu_host);
 
     PDI_finalize();
     MPI_Finalize();
