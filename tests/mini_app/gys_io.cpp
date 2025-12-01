@@ -63,22 +63,6 @@ void print_banner(int rank)
     cout << "==========================================" << endl;
 }
 
-void yaml_params_to_log(int rank, PC_tree_t conf_gyselax)
-{
-    if (rank != 0) {
-        return;
-    }
-    cout << "Configuration parameters:" << endl;
-    string const gysela_io_filename(PCpp_string(conf_gyselax, ".FileNames.gysela_io_filename"));
-    cout << "  gysela_io_filename: " << gysela_io_filename << endl;
-    cout << "  Mesh parameters:" << endl;
-    for (string dim : {"Tor1", "Tor2", "Tor3", "Vpar", "Mu"}) {
-        for (string key : {"ncells", "min", "max"}) {
-            string const key_key = ".SplineMesh." + dim + "_" + key;
-            cout << dim  << "_" << key << ":" << PCpp_double(conf_gyselax, key_key.c_str()) << endl;
-        }
-    }
-}
 
 IdxRangeSp init_species_from_yaml(PC_tree_t conf_gyselax)
 {
@@ -259,8 +243,7 @@ int main(int argc, char** argv)
     PDI_init(configs.conf_pdi);
 
     print_banner(rank);
-    yaml_params_to_log(rank, configs.conf_gyselax);
-
+   
     if (rank == 0) {
         cout << "Initializing 5D particle distribution function..." << endl;
     }
