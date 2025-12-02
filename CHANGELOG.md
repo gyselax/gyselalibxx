@@ -40,6 +40,9 @@ The operator averages the values of the advection field on the first ring to get
 - Make the choice of equililibrium an input parameter for `vlasovpoisson_xvx` executables.
 - Move static class method `BumpontailEquilibrium::init_from_input` to namespace `bumpontail_equilibrium::init_from_input`.
 - Move static class method `MaxwellianEquilibrium::init_from_input` to namespace `maxwellian_equilibrium::init_from_input`.
+- Update CPU Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
+- Update Adastra Spack toolchains to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:. Use OpenBLAS instead of Cray LibSci and raw GCC compilers.
+- Update Jean-Zay Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
 
 ### Deprecated
 
