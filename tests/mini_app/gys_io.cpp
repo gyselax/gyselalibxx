@@ -26,6 +26,7 @@
 using std::cout;
 using std::endl;
 using std::string;
+using std::chrono::steady_clock;
 
 namespace {
 
@@ -182,7 +183,7 @@ void write_fdistribu(
         host_t<DFieldMemSpGrid> const& allfdistribu_host)
 {
     if (rank == 0) {
-        cout << "Writing 5D distribution function and coordinates to file..." << endl;
+        cout << "Writing 5D distribution function and coordinates to file." << endl;
     }
 
     // Expose index range for parallel I/O
@@ -235,19 +236,17 @@ int main(int argc, char** argv)
     MPI_Init(&argc, &argv);
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+    steady_clock::time_point time_points[5];
 
+    print_banner(rank);
     //---------------------------------------------------------
     // Read and initialize the configuration
     //---------------------------------------------------------
+    if (rank == 0) {
+        cout << "Initializing 5D particle distribution function." << endl;
+    }
     ConfigHandles configs = parse_config_files(argc, argv);
     PDI_init(configs.conf_pdi);
-
-    print_banner(rank);
-   
-    if (rank == 0) {
-        cout << "Initializing 5D particle distribution function..." << endl;
-    }
-
     //---------------------------------------------------------
     // Initialisation of the mesh (sp, space, phase-space)
     //---------------------------------------------------------
@@ -258,26 +257,47 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     // Initialisation of the distribution function
     //---------------------------------------------------------
+    time_points[0] = steady_clock::now();
     DFieldMemSpGrid allfdistribu(meshGridSp);
     init_distribution_fun(allfdistribu, meshGridSpVparMu, meshGridSp);
-
+    time_points[1] = steady_clock::now();
+    
     //---------------------------------------------------------
     // Read application version from YAML config
     //---------------------------------------------------------
     string const version = PCpp_string(configs.conf_gyselax, ".Application.version");
+    if (rank == 0) {
+        cout << "Performing Version: " << version << "" << endl;
+    }
 
     if (version == "mpi_transpose") {
         MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(meshGridSp, MPI_COMM_WORLD);
     }
+    time_points[2] = steady_clock::now();
     //---------------------------------------------------------
     // Write 5D distribution function and coordinates to file using PDI
     //---------------------------------------------------------
     // Create host version of distribution function for I/O (needed for PDI)
     host_t<DFieldMemSpGrid> allfdistribu_host(mesh.mesh_sp);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
-
+    time_points[3] = steady_clock::now();
     write_fdistribu(rank, mesh, allfdistribu_host);
-
+    time_points[4] = steady_clock::now();
+    //---------------------------------------------------------
+    // Finalize PDI and MPI
+    //---------------------------------------------------------
+    if (rank == 0) {
+        double durations[5];
+        for (int i = 0; i < 4; i++) {
+            durations[i] = std::chrono::duration<double>(time_points[i+1] - time_points[i]).count();
+        }
+        durations[4] = std::chrono::duration<double>(time_points[4] - time_points[0]).count();
+        cout << "Time initialization: " << durations[0] << "s" << endl;
+        cout << "Time transpose: " << durations[1] << "s" << endl;
+        cout << "Time gpu2cpu: " << durations[2] << "s" << endl;
+        cout << "Time write: " << durations[3] << "s" << endl;
+        cout << "Time total: " << durations[4] << "s" << endl;
+    }
     PDI_finalize();
     MPI_Finalize();
 
