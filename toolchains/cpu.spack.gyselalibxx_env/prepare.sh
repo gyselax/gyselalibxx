@@ -8,7 +8,7 @@ fi
 
 # set paths for spack to not use home ~/.spack folder
 CURRENT_DIR=$(pwd)
-export SPACK_PATH=${CURRENT_DIR}/spack-0.23.1/
+export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
 export SPACK_USER_CONFIG_PATH="${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="${SPACK_PATH}/user_cache"
@@ -26,15 +26,12 @@ if [ -d "${SPACK_PATH}" ]; then
     fi
 else
     # Download spack
-    wget https://github.com/spack/spack/releases/download/v0.23.1/spack-0.23.1.tar.gz
-    tar -xf spack-0.23.1.tar.gz
-    rm spack-0.23.1.tar.gz
+    wget https://github.com/spack/spack/releases/download/v1.1.0/spack-1.1.0.tar.gz
+    tar -xf spack-1.1.0.tar.gz
+    rm spack-1.1.0.tar.gz
 fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-
-# Bug fix for spack < 0.24 and gcc>=14
-wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c247ca58418e/var/spack/repos/builtin/packages/py-netcdf4/package.py -O spack-0.23.1/var/spack/repos/builtin/packages/py-netcdf4/package.py
 
 # Activate spack
 . ${SPACK_PATH}/share/spack/setup-env.sh
@@ -42,18 +39,6 @@ wget https://raw.githubusercontent.com/spack/spack/b369d8b2509794c4f46f62c81f25c
 # Reduce the naming scheme of packages to avoid shebang issues.
 # Increase the time out that is by default too short for some packages (like PDI)
 spack config --scope site add 'config:connect_timeout:60'
-
-# Restrict `blas` and `lapack` providers to avoid `amdlibflame` and `amdblis`, for some reason they might get selected and fail to compile.
-spack config --scope site add 'packages:all:providers:blas:[openblas]'
-spack config --scope site add 'packages:all:providers:lapack:[openblas]'
-
-# Add patched recipes
-git clone --branch releases/v0.23 https://github.com/gyselax/spack spack-0.23.1/var/spack/repos/gyselalibxx
-spack repo add --scope site spack-0.23.1/var/spack/repos/gyselalibxx
-
-# Add PDI repository
-git clone https://github.com/pdidev/spack.git spack-0.23.1/var/spack/repos/pdi
-spack repo add --scope site spack-0.23.1/var/spack/repos/pdi
 
 spack compiler find
 
@@ -73,8 +58,7 @@ else
   COMPILER='gcc@11:'
 fi
 
-spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-0.23.1.yaml
-spack --env gyselalibxx-env add --list-name compilers ${COMPILER}
+spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.1.0.yaml
 spack --env gyselalibxx-env install --jobs 2
 spack env activate -p gyselalibxx-env
 PYTHON_EXECUTABLE=$(which python3)
@@ -88,7 +72,7 @@ then
     exit 1
 fi
 
-export SPACK_PATH=${CURRENT_DIR}/spack-0.23.1/
+export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
 export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"
