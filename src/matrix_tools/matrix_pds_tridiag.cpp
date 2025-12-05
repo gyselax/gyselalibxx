@@ -4,9 +4,9 @@
 #include <string.h>
 
 #if __has_include(<mkl_lapacke.h>)
-#    include <mkl_lapacke.h>
+#include <mkl_lapacke.h>
 #else
-#    include <lapacke.h>
+#include <lapacke.h>
 #endif
 
 #include "matrix_pds_tridiag.hpp"
