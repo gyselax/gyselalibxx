@@ -21,6 +21,9 @@ set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 
 # Configuration
 
+# Ensure custom cmake modules can be found
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 ## We use C++17 all around!
 set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
@@ -116,9 +119,6 @@ endif()
 add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
 
 find_package(LAPACKE REQUIRED)
-add_library(LAPACKE::LAPACKE)
-target_include_directories(LAPACKE::LAPACKE SYSTEM INTERFACE ${LAPACKE_INCLUDE_DIRS})
-target_link_libraries(LAPACKE::LAPACKE SYSTEM INTERFACE ${LAPACKE_LIBRARIES})
 
 ###############################################################################################
 #                              Build libraries and executables
