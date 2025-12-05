@@ -64,5 +64,16 @@ int Matrix_Banded::factorise_method()
 int Matrix_Banded::solve_inplace_method(double* b, char const transpose, int const n_equations)
         const
 {
-    return LAPACKE_dgbtrs(LAPACK_COL_MAJOR, transpose, n, kl, ku, n_equations, q.get(), c, ipiv.get(), b, n);
+    return LAPACKE_dgbtrs(
+            LAPACK_COL_MAJOR,
+            transpose,
+            n,
+            kl,
+            ku,
+            n_equations,
+            q.get(),
+            c,
+            ipiv.get(),
+            b,
+            n);
 }

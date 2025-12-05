@@ -37,5 +37,14 @@ int Matrix_Dense::factorise_method()
 
 int Matrix_Dense::solve_inplace_method(double* b, char const transpose, int const n_equations) const
 {
-    return LAPACKE_dgetrs(LAPACK_COL_MAJOR, transpose, n, n_equations, a.get(), n, ipiv.get(), b, n);
+    return LAPACKE_dgetrs(
+            LAPACK_COL_MAJOR,
+            transpose,
+            n,
+            n_equations,
+            a.get(),
+            n,
+            ipiv.get(),
+            b,
+            n);
 }
