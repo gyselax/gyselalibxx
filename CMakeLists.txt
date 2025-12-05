@@ -115,6 +115,11 @@ endif()
 
 add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
 
+find_package(LAPACKE REQUIRED)
+add_library(LAPACKE::LAPACKE)
+target_include_directories(LAPACKE::LAPACKE SYSTEM INTERFACE ${LAPACKE_INCLUDE_DIRS})
+target_link_libraries(LAPACKE::LAPACKE SYSTEM INTERFACE ${LAPACKE_LIBRARIES})
+
 ###############################################################################################
 #                              Build libraries and executables
 ###############################################################################################
