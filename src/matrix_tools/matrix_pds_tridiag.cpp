@@ -52,14 +52,10 @@ void Matrix_PDS_Tridiag::set_element(int i, int j, double const a_ij)
 
 int Matrix_PDS_Tridiag::factorise_method()
 {
-    int info;
-    LAPACKE_dpttrf(&n, d.get(), l.get(), &info);
-    return info;
+    return LAPACKE_dpttrf(n, d.get(), l.get());
 }
 
 int Matrix_PDS_Tridiag::solve_inplace_method(double* b, char, int const n_equations) const
 {
-    int info;
-    LAPACKE_dpttrs(&n, &n_equations, d.get(), l.get(), b, &n, &info);
-    return info;
+    return LAPACKE_dpttrs(LAPACK_COL_MAJOR, n, n_equations, d.get(), l.get(), b, n);
 }

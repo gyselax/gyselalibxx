@@ -32,14 +32,10 @@ double Matrix_Dense::get_element(int const i, int const j) const
 
 int Matrix_Dense::factorise_method()
 {
-    int info;
-    LAPACKE_dgetrf(&n, &n, a.get(), &n, ipiv.get(), &info);
-    return info;
+    return LAPACKE_dgetrf(LAPACK_COL_MAJOR, n, n, a.get(), n, ipiv.get());
 }
 
 int Matrix_Dense::solve_inplace_method(double* b, char const transpose, int const n_equations) const
 {
-    int info;
-    LAPACKE_dgetrs(&transpose, &n, &n_equations, a.get(), &n, ipiv.get(), b, &n, &info);
-    return info;
+    return LAPACKE_dgetrs(LAPACK_COL_MAJOR, transpose, n, n_equations, a.get(), n, ipiv.get(), b, n);
 }

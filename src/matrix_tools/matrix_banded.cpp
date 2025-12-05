@@ -58,15 +58,11 @@ void Matrix_Banded::set_element(int const i, int const j, double const a_ij)
 
 int Matrix_Banded::factorise_method()
 {
-    int info;
-    LAPACKE_dgbtrf(&n, &n, &kl, &ku, q.get(), &c, ipiv.get(), &info);
-    return info;
+    return LAPACKE_dgbtrf(LAPACK_COL_MAJOR, n, n, kl, ku, q.get(), c, ipiv.get());
 }
 
 int Matrix_Banded::solve_inplace_method(double* b, char const transpose, int const n_equations)
         const
 {
-    int info;
-    LAPACKE_dgbtrs(&transpose, &n, &kl, &ku, &n_equations, q.get(), &c, ipiv.get(), b, &n, &info);
-    return info;
+    return LAPACKE_dgbtrs(LAPACK_COL_MAJOR, transpose, n, kl, ku, n_equations, q.get(), c, ipiv.get(), b, n);
 }
