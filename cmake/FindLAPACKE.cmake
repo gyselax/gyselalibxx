@@ -353,7 +353,7 @@ if (LAPACK_FOUND)
 else(LAPACK_FOUND)
 
   if (NOT LAPACKE_FIND_QUIETLY)
-    message(STATUS "LAPACKE requires LAPACK but LAPACK has not been found."
+    message(FATAL_ERROR "LAPACKE requires LAPACK but LAPACK has not been found."
       "Please look for LAPACK first.")
   endif()
 
@@ -383,5 +383,14 @@ add_library(LAPACKE::LAPACKE UNKNOWN IMPORTED)
 set_target_properties(LAPACKE::LAPACKE PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES ${LAPACKE_INCLUDE_DIRS}
     INTERFACE_LINK_LIBRARIES ${LAPACKE_LIBRARIES}
-    IMPORTED_LOCATION ${LAPACKE_DIR}
+    IMPORTED_LOCATION ${LAPACKE_LIBRARIES}
 )
+if (${LAPACKE_DIR_FOUND})
+    set_target_properties(LAPACKE::LAPACKE PROPERTIES
+        IMPORTED_LOCATION ${LAPACKE_DIR}
+    )
+else()
+    set_target_properties(LAPACKE::LAPACKE PROPERTIES
+        IMPORTED_LOCATION ${LAPACKE_LIBRARIES}
+    )
+endif()
