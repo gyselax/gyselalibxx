@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [UNRELEASED]
+## [v0.4.0] - 2025-12-08
 
 ### Added
 
@@ -44,10 +44,6 @@ The operator averages the values of the advection field on the first ring to get
 - Update Adastra Spack toolchains to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:. Use OpenBLAS instead of Cray LibSci and raw GCC compilers.
 - Update Jean-Zay Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
 - Use LAPACKE to call LAPACK functions.
-
-### Deprecated
-
-### Removed
 
 ## [v0.3.0] - 2025-09-03
 
