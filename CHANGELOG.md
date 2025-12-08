@@ -43,6 +43,7 @@ The operator averages the values of the advection field on the first ring to get
 - Update CPU Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
 - Update Adastra Spack toolchains to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:. Use OpenBLAS instead of Cray LibSci and raw GCC compilers.
 - Update Jean-Zay Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
+- Use LAPACKE to call LAPACK functions.
 
 ### Deprecated
 
