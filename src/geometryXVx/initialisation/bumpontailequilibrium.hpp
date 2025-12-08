@@ -61,14 +61,14 @@ public:
     ~BumpontailEquilibrium() override = default;
 
     /**
-     * @brief Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file.
-     * @param[in] idx_range_kinsp Index range for the kinetic species
-     * @param[in] yaml_input_file YAML input file
-     * @return an instance of Maxwellian distribution function.
+     * @brief Move-construct a BumpontailEquilibrium.
      */
-    static BumpontailEquilibrium init_from_input(
-            IdxRangeSp idx_range_kinsp,
-            PC_tree_t const& yaml_input_file);
+    BumpontailEquilibrium(BumpontailEquilibrium&&) = default;
+
+    /**
+     * @brief Move-assignment a BumpontailEquilibrium.
+     */
+    BumpontailEquilibrium& operator=(BumpontailEquilibrium&&) = default;
 
     /**
      * @brief Initialises the distribution function as the sum of a bulk and a bump-on-tail Maxwellians. 
@@ -104,3 +104,15 @@ public:
         return get_const_field(m_mean_velocity_bot);
     }
 };
+
+namespace bumpontail_equilibrium {
+
+/**
+ * @brief Read the density, temperature and mean velocity required to initialise the bump-on-tail Maxwellian in a YAML input file.
+ * @param[in] idx_range_kinsp Index range for the kinetic species
+ * @param[in] yaml_input_file YAML input file
+ * @return an instance of Maxwellian distribution function.
+ */
+BumpontailEquilibrium init_from_input(IdxRangeSp idx_range_kinsp, PC_tree_t const& yaml_input_file);
+
+} // namespace bumpontail_equilibrium

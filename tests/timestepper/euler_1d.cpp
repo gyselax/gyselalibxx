@@ -68,7 +68,7 @@ TEST(EulerFixture, EulerOrder)
 
         double linf_err = 0.0;
         ddc::for_each(idx_range, [&](IdxX ix) {
-            double const err = abs(result(ix) - vals(ix));
+            double const err = std::abs(result(ix) - vals(ix));
             linf_err = err > linf_err ? err : linf_err;
         });
         error[j] = linf_err;
@@ -139,7 +139,7 @@ void EulerOrderGPUTest()
 
         double linf_err = 0.0;
         ddc::for_each(idx_range, [&](IdxX ix) {
-            double const err = abs(result(ix) - vals_host(ix));
+            double const err = std::abs(result(ix) - vals_host(ix));
             linf_err = err > linf_err ? err : linf_err;
         });
         error[j] = linf_err;

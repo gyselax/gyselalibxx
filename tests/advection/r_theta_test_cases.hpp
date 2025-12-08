@@ -37,7 +37,7 @@
 template <class Mapping>
 class FunctionToBeAdvected_cos_4_ellipse
 {
-    static_assert(is_curvilinear_2d_mapping_v<Mapping>);
+    static_assert(is_coord_transform_with_o_point_v<Mapping>);
     using X = typename Mapping::cartesian_tag_x;
     using Y = typename Mapping::cartesian_tag_y;
     using R = typename Mapping::curvilinear_tag_r;
@@ -100,7 +100,7 @@ public:
 template <class Mapping>
 class FunctionToBeAdvected_gaussian
 {
-    static_assert(is_curvilinear_2d_mapping_v<Mapping>);
+    static_assert(is_coord_transform_with_o_point_v<Mapping>);
     using X = typename Mapping::cartesian_tag_x;
     using Y = typename Mapping::cartesian_tag_y;
     using R = typename Mapping::curvilinear_tag_r;

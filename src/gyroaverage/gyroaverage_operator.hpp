@@ -31,6 +31,9 @@ template <
         class ToLogicalCoordTransform>
 class GyroAverageOperator
 {
+    static_assert(
+            ddc::is_evaluator_admissible_v<SplineRThetaBuilder, SplineRThetaEvaluator>,
+            "SplineRThetaEvaluator must be admissible to SplineRThetaBuilder");
     using ExecutionSpace = typename SplineRThetaBuilder::exec_space;
 
     using GridRminor = typename SplineRThetaBuilder::interpolation_discrete_dimension_type1;
