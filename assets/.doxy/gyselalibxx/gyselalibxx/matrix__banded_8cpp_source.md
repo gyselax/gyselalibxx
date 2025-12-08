@@ -12,29 +12,13 @@
 #include <cassert>
 #include <cmath>
 
-#include "matrix_banded.hpp"
+#if __has_include(<mkl_lapacke.h>)
+#include <mkl_lapacke.h>
+#else
+#include <lapacke.h>
+#endif
 
-extern "C" int dgbtrf_(
-        int const* m,
-        int const* n,
-        int const* kl,
-        int const* ku,
-        double* a_b,
-        int const* lda_b,
-        int* ipiv,
-        int* info);
-extern "C" int dgbtrs_(
-        char const* trans,
-        int const* n,
-        int const* kl,
-        int const* ku,
-        int const* nrhs,
-        double* a_b,
-        int const* lda_b,
-        int* ipiv,
-        double* b,
-        int const* ldb,
-        int* info);
+#include "matrix_banded.hpp"
 
 Matrix_Banded::Matrix_Banded(int const n, int const kl, int const ku)
     : Matrix(n)
@@ -84,17 +68,24 @@ void Matrix_Banded::set_element(int const i, int const j, double const a_ij)
 
 int Matrix_Banded::factorise_method()
 {
-    int info;
-    dgbtrf_(&n, &n, &kl, &ku, q.get(), &c, ipiv.get(), &info);
-    return info;
+    return LAPACKE_dgbtrf(LAPACK_COL_MAJOR, n, n, kl, ku, q.get(), c, ipiv.get());
 }
 
 int Matrix_Banded::solve_inplace_method(double* b, char const transpose, int const n_equations)
         const
 {
-    int info;
-    dgbtrs_(&transpose, &n, &kl, &ku, &n_equations, q.get(), &c, ipiv.get(), b, &n, &info);
-    return info;
+    return LAPACKE_dgbtrs(
+            LAPACK_COL_MAJOR,
+            transpose,
+            n,
+            kl,
+            ku,
+            n_equations,
+            q.get(),
+            c,
+            ipiv.get(),
+            b,
+            n);
 }
 ```
 

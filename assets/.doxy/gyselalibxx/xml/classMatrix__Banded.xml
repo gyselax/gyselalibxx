@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="29" bodyend="55"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="19" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="13" bodyend="39"/>
       </memberdef>
       <memberdef kind="function" id="classMatrix__Banded_1a5a711c1ca70a97bd8dd0150f99b481db" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>double</type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="21" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="57" bodyend="64"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="21" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="41" bodyend="48"/>
       </memberdef>
       <memberdef kind="function" id="classMatrix__Banded_1a881a233b2d548f7ea5c4e0f3cdcf5a15" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -231,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="22" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="66" bodyend="73"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="22" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="50" bodyend="57"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="protected-func">
@@ -252,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="25" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="75" bodyend="80"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="25" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="59" bodyend="62"/>
       </memberdef>
       <memberdef kind="function" id="classMatrix__Banded_1a6d555bff9cfb365ebb32b25c72e640e9" prot="protected" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>int</type>
@@ -308,7 +308,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="26" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="82" bodyend="88"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.hpp" line="26" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_banded.cpp" bodystart="64" bodyend="79"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

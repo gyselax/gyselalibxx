@@ -10,19 +10,13 @@
 ```C++
 #include <cassert>
 
-#include "matrix_dense.hpp"
+#if __has_include(<mkl_lapacke.h>)
+#include <mkl_lapacke.h>
+#else
+#include <lapacke.h>
+#endif
 
-extern "C" int dgetrf_(int const* m, int const* n, double* a, int const* lda, int* ipiv, int* info);
-extern "C" int dgetrs_(
-        char const* trans,
-        int const* n,
-        int const* nrhs,
-        double* a,
-        int const* lda,
-        int* ipiv,
-        double* b,
-        int const* ldb,
-        int* info);
+#include "matrix_dense.hpp"
 
 Matrix_Dense::Matrix_Dense(int const n) : Matrix(n)
 {
@@ -48,16 +42,21 @@ double Matrix_Dense::get_element(int const i, int const j) const
 
 int Matrix_Dense::factorise_method()
 {
-    int info;
-    dgetrf_(&n, &n, a.get(), &n, ipiv.get(), &info);
-    return info;
+    return LAPACKE_dgetrf(LAPACK_COL_MAJOR, n, n, a.get(), n, ipiv.get());
 }
 
 int Matrix_Dense::solve_inplace_method(double* b, char const transpose, int const n_equations) const
 {
-    int info;
-    dgetrs_(&transpose, &n, &n_equations, a.get(), &n, ipiv.get(), b, &n, &info);
-    return info;
+    return LAPACKE_dgetrs(
+            LAPACK_COL_MAJOR,
+            transpose,
+            n,
+            n_equations,
+            a.get(),
+            n,
+            ipiv.get(),
+            b,
+            n);
 }
 ```
 

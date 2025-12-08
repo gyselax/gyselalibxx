@@ -35,12 +35,6 @@
 ## d
 
 * **determinant** ([**math\_tools.hpp**](math__tools_8hpp.md))
-* **dgbtrf\_** ([**matrix\_banded.cpp**](matrix__banded_8cpp.md))
-* **dgbtrs\_** ([**matrix\_banded.cpp**](matrix__banded_8cpp.md))
-* **dgetrf\_** ([**matrix\_dense.cpp**](matrix__dense_8cpp.md))
-* **dgetrs\_** ([**matrix\_dense.cpp**](matrix__dense_8cpp.md))
-* **dpttrf\_** ([**matrix\_pds\_tridiag.cpp**](matrix__pds__tridiag_8cpp.md))
-* **dpttrs\_** ([**matrix\_pds\_tridiag.cpp**](matrix__pds__tridiag_8cpp.md))
 * **default\_preconditioner\_max\_block\_size** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
 
 

@@ -13,6 +13,7 @@
 * `#include <cassert>`
 * `#include <cmath>`
 * `#include <string.h>`
+* `#include <lapacke.h>`
 * `#include "matrix_pds_tridiag.hpp"`
 
 
@@ -51,12 +52,6 @@
 
 
 
-## Public Functions
-
-| Type | Name |
-| ---: | :--- |
-|  int | [**dpttrf\_**](#function-dpttrf_) (int const \* n, double \* d, double \* e, int \* info) <br> |
-|  int | [**dpttrs\_**](#function-dpttrs_) (int const \* n, int const \* nrhs, double \* d, double \* e, double \* b, int const \* ldb, int \* info) <br> |
 
 
 
@@ -85,47 +80,6 @@
 
 
 
-## Public Functions Documentation
-
-
-
-
-### function dpttrf\_ 
-
-```C++
-int dpttrf_ (
-    int const * n,
-    double * d,
-    double * e,
-    int * info
-) 
-```
-
-
-
-
-<hr>
-
-
-
-### function dpttrs\_ 
-
-```C++
-int dpttrs_ (
-    int const * n,
-    int const * nrhs,
-    double * d,
-    double * e,
-    double * b,
-    int const * ldb,
-    int * info
-) 
-```
-
-
-
-
-<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_pds_tridiag.cpp`

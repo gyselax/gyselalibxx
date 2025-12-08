@@ -3898,8 +3898,6 @@
     <member refid="matrix_8hpp_1ad5cf181362afe97c832fbdc64e544e13" kind="function"><name>operator&lt;&lt;</name></member>
   </compound>
   <compound refid="matrix__banded_8cpp" kind="file"><name>matrix_banded.cpp</name>
-    <member refid="matrix__banded_8cpp_1a3afc5e8a1ee241b9433e4448096660c8" kind="function"><name>dgbtrf_</name></member>
-    <member refid="matrix__banded_8cpp_1a93daab30ce6e73ae65b124edfe532026" kind="function"><name>dgbtrs_</name></member>
   </compound>
   <compound refid="matrix__banded_8hpp" kind="file"><name>matrix_banded.hpp</name>
   </compound>
@@ -3926,14 +3924,10 @@
   <compound refid="matrix__corner__block_8hpp" kind="file"><name>matrix_corner_block.hpp</name>
   </compound>
   <compound refid="matrix__dense_8cpp" kind="file"><name>matrix_dense.cpp</name>
-    <member refid="matrix__dense_8cpp_1a2bc7b0775bf156ed8385098b904db850" kind="function"><name>dgetrf_</name></member>
-    <member refid="matrix__dense_8cpp_1ab3f4d8ae0b51eb20daad9379c85d45da" kind="function"><name>dgetrs_</name></member>
   </compound>
   <compound refid="matrix__dense_8hpp" kind="file"><name>matrix_dense.hpp</name>
   </compound>
   <compound refid="matrix__pds__tridiag_8cpp" kind="file"><name>matrix_pds_tridiag.cpp</name>
-    <member refid="matrix__pds__tridiag_8cpp_1a318b97c31a0273029ea0ae65d2b3ba0e" kind="function"><name>dpttrf_</name></member>
-    <member refid="matrix__pds__tridiag_8cpp_1a2db239b88291172e9d5162ca285c1f7c" kind="function"><name>dpttrs_</name></member>
   </compound>
   <compound refid="matrix__pds__tridiag_8hpp" kind="file"><name>matrix_pds_tridiag.hpp</name>
   </compound>
