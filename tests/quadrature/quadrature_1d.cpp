@@ -1,12 +1,24 @@
 // SPDX-License-Identifier: MIT
-#include <gmock/gmock.h>
+#include <array>
+#include <cmath>
+#include <cstddef>
+#include <utility>
+#include <vector>
+
+#include <ddc/ddc.hpp>
+
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "geometry_descriptors.hpp"
 #include "mesh_builder.hpp"
 #include "quadrature.hpp"
 #include "simpson_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

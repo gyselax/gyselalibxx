@@ -1,12 +1,19 @@
 // SPDX-License-Identifier: MIT
+#include <type_traits>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "tensor_common.hpp"
 #include "vector_field.hpp"
+#include "vector_field_common.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
 

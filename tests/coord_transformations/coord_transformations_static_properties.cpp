@@ -14,6 +14,7 @@
 #include "geometry_coord_transformations_tests.hpp"
 #include "identity_coordinate_change.hpp"
 #include "toroidal_to_cylindrical.hpp"
+#include "vector_index_tools.hpp"
 
 
 TEST(MappingStaticAsserts, CirctoCart)

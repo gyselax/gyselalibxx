@@ -1,15 +1,19 @@
 // SPDX-License-Identifier: MIT
 
-#include <ddc/ddc.hpp>
+#include <cmath>
 
-#include <gmock/gmock.h>
+#include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
+
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "fem_1d_poisson_solver.hpp"
-#include "neumann_spline_quadrature.hpp"
-#include "quadrature.hpp"
-#include "species_info.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

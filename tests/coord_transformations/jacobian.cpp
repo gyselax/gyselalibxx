@@ -1,19 +1,29 @@
 // SPDX-License-Identifier: MIT
+#include <cmath>
+#include <cstddef>
+#include <tuple>
+#include <vector>
+
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "circular_to_cartesian.hpp"
+#include "coord_transformation_tools.hpp"
 #include "coord_transformations_testing_tools.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "mesh_builder.hpp"
+#include "tensor_common.hpp"
 #include "toroidal_to_cylindrical.hpp"
+#include "vector_index_tools.hpp"
 
 
 

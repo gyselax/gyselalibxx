@@ -2,7 +2,11 @@
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Core.hpp>
+
 #include "chargedensitycalculator.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "species_info.hpp"
 
 ChargeDensityCalculator::ChargeDensityCalculator(DConstFieldVx coeffs) : m_quadrature(coeffs) {}
 

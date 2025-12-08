@@ -3,6 +3,7 @@
 #include "iadvectionvx.hpp"
 #include "iadvectionx.hpp"
 #include "splitvlasovsolver.hpp"
+#include "vector_field_common.hpp"
 
 SplitVlasovSolver::SplitVlasovSolver(
         IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,

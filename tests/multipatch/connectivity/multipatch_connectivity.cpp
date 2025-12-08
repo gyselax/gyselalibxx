@@ -1,15 +1,27 @@
 // SPDX-License-Identifier: MIT
 
+#include <tuple>
+#include <type_traits>
+#include <utility>
+
 #include <ddc/ddc.hpp>
+#include <ddc/detail/type_seq.hpp>
 
 #include <gtest/gtest.h>
 
-#include "2patches_2d_non_periodic_uniform.hpp"
+#include <Kokkos_Core.hpp>
+
 #include "3patches_2d_non_periodic_non_uniform.hpp"
 #include "5patches_figure_of_eight.hpp"
 #include "9patches_2d_periodic_strips_uniform.hpp"
+#include "connectivity.hpp"
+#include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
+#include "edge.hpp"
+#include "geometry_descriptors.hpp"
+#include "interface.hpp"
 #include "multipatch_type.hpp"
+#include "patch.hpp"
 #include "types.hpp"
 
 namespace {

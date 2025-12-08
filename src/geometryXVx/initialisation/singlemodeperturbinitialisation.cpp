@@ -1,9 +1,17 @@
 // SPDX-License-Identifier: MIT
 
+#include <cmath>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
+#include "paraconfpp.hpp"
 #include "singlemodeperturbinitialisation.hpp"
+#include "vector_index_tools.hpp"
 
 SingleModePerturbInitialisation::SingleModePerturbInitialisation(
         DConstFieldSpVx fequilibrium,

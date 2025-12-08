@@ -1,17 +1,23 @@
 // SPDX-License-Identifier: MIT
 #include <chrono>
+#include <cmath>
 #include <filesystem>
 #include <fstream>
 #include <iostream>
+#include <string_view>
+#include <vector>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
+#include <Kokkos_Core.hpp>
 #include <paraconf.h>
-#include <pdi.h>
+#include <stdlib.h>
 
-#include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "geometry.hpp"
@@ -19,7 +25,9 @@
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "tensor_common.hpp"
 #include "test_cases.hpp"
+#include "vector_index_tools.hpp"
 
 
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<

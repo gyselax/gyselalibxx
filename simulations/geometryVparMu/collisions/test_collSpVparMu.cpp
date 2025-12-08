@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
 #include <chrono>
 #include <cstdlib>
-#include <filesystem>
-#include <fstream>
 #include <iostream>
+#include <stdexcept>
 
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
 #include <paraconf.h>
 #include <pdi.h>
 
@@ -15,6 +15,7 @@
 #include "collision_operator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry.hpp"
+#include "geometry_descriptors.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"

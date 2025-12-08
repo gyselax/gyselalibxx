@@ -1,18 +1,31 @@
 // SPDX-License-Identifier: MIT
+#include <algorithm>
+#include <array>
+#include <cmath>
+#include <tuple>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "2patches_2d_onion_shape_uniform.hpp"
 #include "crank_nicolson.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "euler.hpp"
-#include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
 #include "multipatch_type.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
+#include "tensor.hpp"
+#include "tensor_common.hpp"
+#include "types.hpp"
+#include "vector_field_common.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

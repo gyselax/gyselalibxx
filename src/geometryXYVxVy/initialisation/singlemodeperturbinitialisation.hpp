@@ -4,9 +4,9 @@
 
 #include <paraconf.h>
 
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
 #include "iinitialisation.hpp"
-#include "paraconfpp.hpp"
 #include "species_info.hpp"
 
 /// Initialisation operator with a sinusoidal perturbation of a Maxwellian. This initialises all species.

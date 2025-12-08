@@ -1,7 +1,10 @@
 #include <cmath>
+#include <iostream>
 
 #include "diocotron_initialisation_equilibrium.hpp"
 #include "geometry.hpp"
+#include "math_tools.hpp"
+#include "vector_index_tools.hpp"
 
 
 

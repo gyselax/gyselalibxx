@@ -1,8 +1,14 @@
 // SPDX-License-Identifier: MIT
 
+#include <cmath>
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Core.hpp>
+
 #include "maxwellianequilibrium.hpp"
+#include "paraconfpp.hpp"
 
 MaxwellianEquilibrium::MaxwellianEquilibrium(
         host_t<DFieldMemSp> density_eq,

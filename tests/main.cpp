@@ -3,6 +3,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleMock(&argc, argv);

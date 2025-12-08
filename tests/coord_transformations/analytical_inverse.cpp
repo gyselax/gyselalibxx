@@ -1,19 +1,19 @@
 // SPDX-License-Identifier: MIT
+#include <cmath>
 #include <cstdlib>
 #include <ctime>
 
-#include <ddc/ddc.hpp>
-
 #include <gtest/gtest.h>
 
-#include "cartesian_to_circular.hpp"
-#include "cartesian_to_cylindrical.hpp"
-#include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
+#include "coord_transformation_tools.hpp"
 #include "cylindrical_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
+#include "ddc_aliases.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "math_tools.hpp"
+#include "tensor_common.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

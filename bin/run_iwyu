@@ -127,7 +127,7 @@ if __name__ == '__main__':
         for future in as_completed(iwyu_results):
             done += 1
             percent = done / total * 100
-            print(f"\rProgress: {done}/{total} ({percent:.0f}%)", end='', flush=True)
+            print(f"\rIWYU Progress: {done}/{total} ({percent:.0f}%)", end='', flush=True)
             f, p = future.result()
             if p.returncode != 0:
                 errors.append((f, ERROR, p.stderr))

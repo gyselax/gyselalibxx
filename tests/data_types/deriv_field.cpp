@@ -1,13 +1,18 @@
 // SPDX-License-Identifier: MIT
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/splines/deriv.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "derivative_field.hpp"
+#include "derivative_field_common.hpp"
 #include "derivative_field_mem.hpp"
 #include "grid_builder.hpp"
 #include "view.hpp"

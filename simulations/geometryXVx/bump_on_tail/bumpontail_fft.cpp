@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: MIT
 #include <chrono>
-#include <cmath>
 #include <cstdlib>
-#include <filesystem>
-#include <fstream>
 #include <iostream>
-#include <string_view>
 
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/fft.hpp>
+#include <ddc/kernels/splines.hpp>
+#include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
 #include <paraconf.h>
 #include <pdi.h>
 

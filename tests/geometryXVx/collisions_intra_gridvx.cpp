@@ -1,18 +1,22 @@
 // SPDX-License-Identifier: MIT
+#include <cmath>
+#include <utility>
+#include <vector>
+
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <paraconf.h>
+
 #include "collisions_intra.hpp"
-#include "collisions_utils.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
-#include "irighthandside.hpp"
 #include "mesh_builder.hpp"
 #include "pdi.h"
-#include "quadrature.hpp"
 #include "species_info.hpp"
-#include "trapezoid_quadrature.hpp"
+#include "vector_index_tools.hpp"
 
 /**
  * Tests the construction of the gridvx and gridvx_staggered 

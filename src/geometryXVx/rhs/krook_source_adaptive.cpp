@@ -1,14 +1,17 @@
 #include <cassert>
-#include <stdexcept>
-#include <string>
+#include <functional>
+#include <optional>
 
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "krook_source_adaptive.hpp"
 #include "mask_tanh.hpp"
 #include "maxwellianequilibrium.hpp"
-#include "quadrature.hpp"
 #include "rk2.hpp"
 #include "species_info.hpp"
 #include "trapezoid_quadrature.hpp"

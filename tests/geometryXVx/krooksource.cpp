@@ -1,17 +1,18 @@
 // SPDX-License-Identifier: MIT
 #include <cmath>
 #include <iostream>
-#include <string>
+#include <utility>
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
 #include <paraconf.h>
 #include <pdi.h>
 
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "krook_source_adaptive.hpp"
@@ -20,7 +21,6 @@
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
-#include "splitrighthandsidesolver.hpp"
 #include "trapezoid_quadrature.hpp"
 
 TEST(KrookSource, Adaptive)

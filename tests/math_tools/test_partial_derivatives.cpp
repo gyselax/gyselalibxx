@@ -1,18 +1,29 @@
 // SPDX-License-Identifier: MIT
+#include <cmath>
+#include <cstddef>
+#include <memory>
+#include <type_traits>
+#include <vector>
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "central_fdm_partial_derivatives.hpp"
 #include "central_fdm_partial_derivatives_with_boundary_values.hpp"
 #include "constant_partial_derivatives.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "math_tools.hpp"
+#include "ipartial_derivative.hpp"
 #include "mesh_builder.hpp"
 #include "spline_1d_partial_derivative.hpp"
 #include "spline_2d_partial_derivative.hpp"
+#include "spline_builder_2d_cache.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

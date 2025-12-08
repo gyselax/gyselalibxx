@@ -1,16 +1,17 @@
 // SPDX-License-Identifier: MIT
 #pragma once
-#include <cassert>
-#include <cmath>
+#include <type_traits>
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Macros.hpp>
+
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 #include "matrix_banded.hpp"
-#include "quadrature.hpp"
-#include "trapezoid_quadrature.hpp"
+#include "species_info.hpp"
 
 /**
  * @brief Class describing the intra-species collision operator

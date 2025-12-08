@@ -2,6 +2,7 @@
 #pragma once
 #include <memory>
 
+#include "matrix.hpp"
 #include "matrix_corner_block.hpp"
 #include "view.hpp"
 

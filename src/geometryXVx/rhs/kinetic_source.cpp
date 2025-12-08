@@ -1,9 +1,15 @@
+#include <cmath>
+
 #include <ddc/ddc.hpp>
 #include <ddc/pdi.hpp>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "kinetic_source.hpp"
 #include "mask_tanh.hpp"
-#include "species_info.hpp"
+#include "vector_index_tools.hpp"
 
 KineticSource::KineticSource(
         IdxRangeX const& gridx,

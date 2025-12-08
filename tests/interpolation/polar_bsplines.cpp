@@ -1,12 +1,21 @@
+#include <array>
 #include <cmath>
-#include <random>
+#include <cstddef>
+#include <tuple>
+#include <type_traits>
+#include <utility>
+#include <variant>
+#include <vector>
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "circular_to_cartesian.hpp"
+#include "ddc_aliases.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "polar_bsplines.hpp"

@@ -1,8 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <cmath>
-
 #include "geometry.hpp"
 #include "irighthandside.hpp"
 

@@ -1,25 +1,27 @@
 // SPDX-License-Identifier: MIT
-#include "ddc_alias_inline_functions.hpp"
-#define _USE_MATH_DEFINES
-
 #include <cmath>
+#include <utility>
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+#include <paraconf.h>
 #include <pdi.h>
 
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "fluid_moments.hpp"
 #include "geometry.hpp"
-#include "irighthandside.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
 #include "trapezoid_quadrature.hpp"
+#include "vector_index_tools.hpp"
 
 /**
  * Intra species collisions applied on a maxwellian should not change the distribution function

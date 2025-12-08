@@ -1,13 +1,10 @@
 
 #include <cassert>
-#include <cmath>
 #include <optional>
 
 #include "collisions_utils.hpp"
 #include "ddc_helper.hpp"
-#include "quadrature.hpp"
 #include "species_info.hpp"
-#include "trapezoid_quadrature.hpp"
 
 namespace {
 

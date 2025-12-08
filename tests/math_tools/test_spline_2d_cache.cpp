@@ -4,8 +4,10 @@
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "mesh_builder.hpp"
 #include "spline_builder_2d_cache.hpp"
 
 namespace {

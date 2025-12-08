@@ -1,10 +1,21 @@
+#include <cmath>
+#include <utility>
+#include <vector>
+
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
 #include "bsl_advection_x.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
+#include "iadvectionx.hpp"
+#include "species_info.hpp"
 #include "spline_interpolator.hpp"
+#include "vector_index_tools.hpp"
 
 
 

@@ -1,9 +1,11 @@
-#include <ddc/ddc.hpp>
+#include <cmath>
+#include <memory>
 
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "matrix_batch_csr.hpp"
-#include "view.hpp"
 
 template <MatrixBatchCsrSolver Solver>
 void solve_system(

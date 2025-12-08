@@ -1,14 +1,28 @@
-#include <fstream>
+#include <algorithm>
+#include <cmath>
+#include <cstddef>
+#include <functional>
+#include <iostream>
+#include <iterator>
+#include <numeric>
 #include <random>
-#include <string>
+#include <utility>
+#include <vector>
 
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
+#include <ext/type_traits.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
+#include "Lagrange.hpp"
 #include "Lagrange_interpolator.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "mesh_builder.hpp"
+#include "vector_index_tools.hpp"
 // Here Z stands to specify that we use ad hoc geometry
 struct Z
 {

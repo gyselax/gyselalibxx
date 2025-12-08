@@ -1,4 +1,6 @@
 // SPDX-License-Identifier: MIT
+#include <vector>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
@@ -6,6 +8,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "mesh_builder.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

@@ -2,11 +2,8 @@
 
 #pragma once
 
-#include <ddc/ddc.hpp>
-
 #include "geometry.hpp"
 #include "iinitialisation.hpp"
-#include "species_info.hpp"
 
 /**
  * @brief A class that initialises the distribution function from a previous simulation.

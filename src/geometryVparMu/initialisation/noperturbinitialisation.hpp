@@ -2,12 +2,8 @@
 
 #pragma once
 
-#include <paraconf.h>
-
 #include "geometry.hpp"
 #include "iinitialisation.hpp"
-#include "paraconfpp.hpp"
-#include "species_info.hpp"
 
 /// Initialisation operator with no perturbation, i.e the distribution function equal to the Maxwellian
 class NoPerturbInitialisation : public IInitialisation

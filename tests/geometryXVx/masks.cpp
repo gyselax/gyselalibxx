@@ -1,14 +1,15 @@
 // SPDX-License-Identifier: MIT
 #include <cmath>
-#include <iostream>
-#include <string>
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
 #include "geometry.hpp"
 #include "mask_tanh.hpp"
 #include "quadrature.hpp"

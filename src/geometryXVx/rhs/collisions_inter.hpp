@@ -1,15 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
-#include <cassert>
-#include <cmath>
-
-#include <ddc/ddc.hpp>
-
-#include "ddc_aliases.hpp"
 #include "geometry.hpp"
 #include "irighthandside.hpp"
-#include "quadrature.hpp"
-#include "trapezoid_quadrature.hpp"
 
 /**
  * @brief Class describing the inter-species collision operator

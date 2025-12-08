@@ -1,12 +1,20 @@
+#include <cstddef>
 #include <random>
+#include <type_traits>
+#include <utility>
+#include <variant>
 
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
+#include <math.h>
+
 #include "bernstein.hpp"
-#include "coord_transformation_tools.hpp"
+#include "cartesian_to_barycentric.hpp"
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "test_utils.hpp"
 
 template <class Tag1, class Tag2>

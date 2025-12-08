@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: MIT
 
+#include <utility>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
 
+#include "ddc_helper.hpp"
 #include "species_info.hpp"
 
 TEST(SpeciesInfo, Ielec)

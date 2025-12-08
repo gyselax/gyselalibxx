@@ -1,18 +1,23 @@
 #include <cmath>
-#include <random>
+#include <cstddef>
+#include <vector>
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
 #include <gtest/gtest.h>
 
-#include "circular_to_cartesian.hpp"
+#include <Kokkos_Core.hpp>
+
 #include "czarny_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "polar_bsplines.hpp"
 #include "polar_spline_evaluator.hpp"
-#include "view.hpp"
+#include "vector_index_tools.hpp"
 
 namespace {
 

@@ -1,12 +1,21 @@
 // SPDX-License-Identifier: MIT
+#include <cmath>
+
 #include <ddc/ddc.hpp>
 
-#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include <Kokkos_Core.hpp>
+
 #include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "fft_poisson_solver.hpp"
 #include "math_tools.hpp"
+#include "vector_field.hpp"
+#include "vector_field_common.hpp"
+#include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 
 namespace FFTPoissonSolverTest {
 

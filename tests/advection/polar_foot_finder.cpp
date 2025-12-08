@@ -1,19 +1,30 @@
 // SPDX-License-Identifier: MIT
+#include <cmath>
+#include <tuple>
+#include <variant>
+
+#include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
+
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "../test_utils.hpp"
 
-#include "cartesian_to_circular.hpp"
-#include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
+#include "coord_transformation_tools.hpp"
 #include "czarny_to_cartesian.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"
 #include "r_theta_test_cases.hpp"
 #include "rk4.hpp"
 #include "species_info.hpp"
 #include "spline_polar_foot_finder.hpp"
+#include "tensor.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"

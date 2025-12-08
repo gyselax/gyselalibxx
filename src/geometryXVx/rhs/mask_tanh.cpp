@@ -1,12 +1,17 @@
 #include <cmath>
+#include <stdexcept>
 
 #include <ddc/ddc.hpp>
 
+#include <Kokkos_Core.hpp>
+
+#include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
 #include "geometry.hpp"
 #include "mask_tanh.hpp"
 #include "quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
+#include "vector_index_tools.hpp"
 
 host_t<DFieldMemX> mask_tanh(
         IdxRangeX const& gridx,

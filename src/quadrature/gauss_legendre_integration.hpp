@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include <array>
+#include <cstddef>
+#include <initializer_list>
+#include <tuple>
 #include <vector>
 
 #include <ddc/ddc.hpp>

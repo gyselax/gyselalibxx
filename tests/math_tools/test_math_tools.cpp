@@ -1,7 +1,12 @@
 // SPDX-License-Identifier: MIT
+#include <cmath>
+#include <vector>
+
 #include <ddc/ddc.hpp>
 
 #include <gtest/gtest.h>
+
+#include <Kokkos_Core.hpp>
 
 #include "../coord_transformations/geometry_coord_transformations_tests.hpp"
 
@@ -14,8 +19,11 @@
 #include "mesh_builder.hpp"
 #include "metric_tensor_evaluator.hpp"
 #include "tensor.hpp"
+#include "tensor_common.hpp"
 #include "vector_field.hpp"
+#include "vector_field_common.hpp"
 #include "vector_field_mem.hpp"
+#include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
 
 namespace {
