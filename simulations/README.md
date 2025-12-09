@@ -14,4 +14,4 @@ It is broken up into the following sub-folders:
 <!-- - [geometryXYVxVy](./geometryXYVxVy/README.md) -->
 - geometryXYVxVy - Simulations with 2 spatial dimensions and 2 velocity dimension.
 
-- [mini_app](./mini_app/README.md) - implements a 5D distribution function for IO performance and MPI testing.
+- [mini\\_app](./mini_app/README.md) - implements a 5D distribution function for IO performance and MPI testing.
