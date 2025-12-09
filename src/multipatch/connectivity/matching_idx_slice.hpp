@@ -96,8 +96,8 @@ public:
         if constexpr (!are_grids_uniform) {
             get_conforming_idx_vector(conforming_indices_1, conforming_indices_2);
         }
-        m_conforming_idx_1 = get_bound_idx_range_slice(m_idx_range_edge_1, conforming_indices_1);
-        m_conforming_idx_2 = get_bound_idx_range_slice(m_idx_range_edge_2, conforming_indices_2);
+        m_conforming_idx_1 = get_idx_range_slice(m_idx_range_edge_1, conforming_indices_1);
+        m_conforming_idx_2 = get_idx_range_slice(m_idx_range_edge_2, conforming_indices_2);
     }
 
 
@@ -215,7 +215,7 @@ private:
 
     /// @brief Get the uniform index step of the second index range.
     template <class Grid1D>
-    IdxRangeSlice<Grid1D> get_bound_idx_range_slice(
+    IdxRangeSlice<Grid1D> get_idx_range_slice(
             IdxRange<Grid1D> const& idx_range,
             std::vector<Idx<Grid1D>> const& conforming_idx_vec) const
     {

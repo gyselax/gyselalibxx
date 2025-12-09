@@ -312,7 +312,7 @@ public:
             DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1,
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
     {
-          return get_function_coefficients_with_sign(function_1, function_2, 1);
+        return get_function_coefficients_with_sign(function_1, function_2, 1);
     }
 
     /**
@@ -333,7 +333,7 @@ public:
     /**
      * @brief Get the linear combination of the derivatives values (c).
      *
-     * @anchor get_function_coefficients
+     * @anchor get_derivatives_coefficients
      * 
      * It is more appropriate than get_function_coefficients to compute the 
      * cross-derivatives. The computation is the same.
@@ -358,7 +358,7 @@ public:
 
     /**
      * @brief Get the linear combination of the derivatives values (c).
-     * See @ref get_function_coefficients.
+     * See @ref get_derivatives_coefficients.
      * @param derivs_1 Derivatives at the interpolation points on patch 1. 
      * @param derivs_2 Derivatives at the interpolation points on patch 2. 
      * @return the linear combination of the function values (c).
@@ -385,7 +385,8 @@ private:
         // The function needs to be continuous at the interface.
         Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
         Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
-        assert(abs(function_1(interface_idx_1) - sign_function_2*function_2(interface_idx_2)) < 1e-13);
+        assert(abs(function_1(interface_idx_1) - sign_function_2 * function_2(interface_idx_2))
+               < 1e-13);
 
         double coeff_values = ddc::transform_reduce(
                 m_idx_range_perp_1,

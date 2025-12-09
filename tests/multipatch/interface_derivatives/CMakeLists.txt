@@ -44,18 +44,30 @@ target_compile_definitions("${test_name_gtest}" PUBLIC)
 gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 
 
-# InterfaceDerivativeMatrix test =================================================================
+# InterfaceExactDerivativeMatrix test =================================================================
 function (interface_derivative_matrix_executable REVERSED_PATCH)
     # The test with Greville do not depend on the reversed patch. Do not need to duplicate test.
-    if (REVERSED_PATCH STREQUAL "PATCH2")
-        set(test_name_gtest "interface_derivative_matrix_middle_patch_reversed_test")
+     if (REVERSED_PATCH STREQUAL "REVERSE_PATCH1")
+        set(test_name_gtest "interface_derivative_matrix_start_patch_reversed_test")
         add_executable("${test_name_gtest}"
             interface_derivative_matrix_Greville_periodic_test.cpp
             interface_derivative_matrix_Hermite_test.cpp
             ../../main.cpp
         )
-    else()
+    elseif (REVERSED_PATCH STREQUAL "REVERSE_PATCH2")
+        set(test_name_gtest "interface_derivative_matrix_middle_patch_reversed_test")
+        add_executable("${test_name_gtest}"
+            interface_derivative_matrix_Hermite_test.cpp
+            ../../main.cpp
+        )
+    elseif (REVERSED_PATCH STREQUAL "REVERSE_PATCH3")
         set(test_name_gtest "interface_derivative_matrix_end_patch_reversed_test")
+        add_executable("${test_name_gtest}"
+            interface_derivative_matrix_Hermite_test.cpp
+            ../../main.cpp
+        )
+    else()
+        set(test_name_gtest "interface_derivative_matrix_${REVERSED_PATCH}_test")
         add_executable("${test_name_gtest}"
             interface_derivative_matrix_Hermite_test.cpp
             ../../main.cpp
@@ -75,5 +87,8 @@ function (interface_derivative_matrix_executable REVERSED_PATCH)
     gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 endfunction()
 
-interface_derivative_matrix_executable("PATCH2")
-interface_derivative_matrix_executable("PATCH3")
+interface_derivative_matrix_executable("REVERSE_PATCH1")
+interface_derivative_matrix_executable("REVERSE_PATCH2")
+interface_derivative_matrix_executable("REVERSE_PATCH3")
+interface_derivative_matrix_executable("CHANGE_BOUND1")
+interface_derivative_matrix_executable("CHANGE_BOUND3")

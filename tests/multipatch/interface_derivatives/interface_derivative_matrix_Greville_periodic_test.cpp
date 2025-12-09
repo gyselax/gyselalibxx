@@ -23,7 +23,7 @@
 
 
 /*
-    Test InterfaceDerivativeMatrix on the following geometry:
+    Test InterfaceExactDerivativeMatrix on the following geometry:
 
         |  1  |  2  |  3  |  1 ...
         -------------------
@@ -124,7 +124,7 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
 
 
-struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
+struct InterfaceExactDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
 {
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
     // patches 1 | 4 | 7  dim X ------------------
@@ -256,7 +256,7 @@ protected:
     const IdxRange<GridXg, GridYg> idx_range_xy_g;
 
 public:
-    InterfaceDerivativeMatrixGrevillePeriodicTest()
+    InterfaceExactDerivativeMatrixGrevillePeriodicTest()
         : idx_range_x1(SplineInterpPointsX<1>::template get_domain<GridX<1>>())
         , idx_range_x2(SplineInterpPointsX<2>::template get_domain<GridX<2>>())
         , idx_range_x3(SplineInterpPointsX<3>::template get_domain<GridX<3>>())
@@ -431,7 +431,7 @@ public:
 
 
 // Check that the local grids and the equivalent global grid match together.
-TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, InterpolationPointsCheck)
+TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, InterpolationPointsCheck)
 {
     int const x_shift1 = x1_ncells.value();
     int const x_shift2 = x1_ncells.value() + x2_ncells.value();
@@ -439,20 +439,58 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, InterpolationPointsCheck)
     int const y_shift1 = y4_ncells.value() + 1;
     int const y_shift2 = y7_ncells.value() + y4_ncells.value() + 1;
 
-    check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0, y_shift2);
-    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1, y_shift2);
-    check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2, y_shift2);
-    check_interpolation_grids<Patch4, GridXg, GridYg>(idx_range_xy4, 0, y_shift1);
-    check_interpolation_grids<Patch5, GridXg, GridYg>(idx_range_xy5, x_shift1, y_shift1);
-    check_interpolation_grids<Patch6, GridXg, GridYg>(idx_range_xy6, x_shift2, y_shift1);
-    check_interpolation_grids<Patch7, GridXg, GridYg>(idx_range_xy7, 0, 0);
-    check_interpolation_grids<Patch8, GridXg, GridYg>(idx_range_xy8, x_shift1, 0);
-    check_interpolation_grids<Patch9, GridXg, GridYg>(idx_range_xy9, x_shift2, 0);
+    check_interpolation_grids<
+            Patch1,
+            GridXg,
+            GridYg>(idx_range_xy1, CoordTransform<Xg, Yg, X<1>, Y<1>>(), 0, y_shift2);
+    check_interpolation_grids<
+            Patch2,
+            GridXg,
+            GridYg>(idx_range_xy2, CoordTransform<Xg, Yg, X<2>, Y<2>>(), x_shift1, y_shift2);
+    check_interpolation_grids<
+            Patch3,
+            GridXg,
+            GridYg>(idx_range_xy3, CoordTransform<Xg, Yg, X<3>, Y<3>>(), x_shift2, y_shift2);
+    check_interpolation_grids<
+            Patch4,
+            GridXg,
+            GridYg>(idx_range_xy4, CoordTransform<Xg, Yg, X<4>, Y<4>>(), 0, y_shift1);
+    check_interpolation_grids<
+            Patch5,
+            GridXg,
+            GridYg>(idx_range_xy5, CoordTransform<Xg, Yg, X<5>, Y<5>>(), x_shift1, y_shift1);
+    check_interpolation_grids<
+            Patch6,
+            GridXg,
+            GridYg>(idx_range_xy6, CoordTransform<Xg, Yg, X<6>, Y<6>>(), x_shift2, y_shift1);
+    check_interpolation_grids<
+            Patch7,
+            GridXg,
+            GridYg>(idx_range_xy7, CoordTransform<Xg, Yg, X<7>, Y<7>>(), 0, 0);
+    check_interpolation_grids<
+            Patch8,
+            GridXg,
+            GridYg>(idx_range_xy8, CoordTransform<Xg, Yg, X<8>, Y<8>>(), x_shift1, 0);
+    check_interpolation_grids<
+            Patch9,
+            GridXg,
+            GridYg>(idx_range_xy9, CoordTransform<Xg, Yg, X<9>, Y<9>>(), x_shift2, 0);
 }
 
 
-TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
+TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
+    std::tuple coord_transforms {
+            CoordTransform<Xg, Yg, X<1>, Y<1>>(),
+            CoordTransform<Xg, Yg, X<2>, Y<2>>(),
+            CoordTransform<Xg, Yg, X<3>, Y<3>>(),
+            CoordTransform<Xg, Yg, X<4>, Y<4>>(),
+            CoordTransform<Xg, Yg, X<5>, Y<5>>(),
+            CoordTransform<Xg, Yg, X<6>, Y<6>>(),
+            CoordTransform<Xg, Yg, X<7>, Y<7>>(),
+            CoordTransform<Xg, Yg, X<8>, Y<8>>(),
+            CoordTransform<Xg, Yg, X<9>, Y<9>>()};
+
     // Instantiate the derivatives calculators ---------------------------------------------------
     // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
     SingleInterfaceDerivativesCalculator<Interface_1_2> const
@@ -569,7 +607,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     MultipatchType<IdxRangeOnPatch, Patch3, Patch6, Patch9> idx_ranges_369(idx_ranges);
 
     // Instantiate the matrix calculators --------------------------------------------------------
-    InterfaceDerivativeMatrix<
+    InterfaceExactDerivativeMatrix<
             Connectivity,
             GridX<1>,
             ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
@@ -581,7 +619,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
                     Interface_3_1>>
             matrix_123(idx_ranges_123, deriv_calculators_collect_123);
 
-    InterfaceDerivativeMatrix<
+    InterfaceExactDerivativeMatrix<
             Connectivity,
             GridX<4>,
             ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
@@ -593,7 +631,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
                     Interface_6_4>>
             matrix_456(idx_ranges_456, deriv_calculators_collect_456);
 
-    InterfaceDerivativeMatrix<
+    InterfaceExactDerivativeMatrix<
             Connectivity,
             GridX<7>,
             ddc::detail::TypeSeq<Patch7, Patch8, Patch9>,
@@ -607,7 +645,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 
 
     // Test with an extra patch (Patch2) to check it will only take the needed patches.
-    InterfaceDerivativeMatrix<
+    InterfaceExactDerivativeMatrix<
             Connectivity,
             GridY<1>,
             ddc::detail::TypeSeq<Patch1, Patch4, Patch7, Patch2>,
@@ -616,7 +654,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             SingleInterfaceDerivativesCalculatorCollection<Interface_1_4, Interface_4_7>>
             matrix_147(idx_ranges_147, deriv_calculators_collect_147);
 
-    InterfaceDerivativeMatrix<
+    InterfaceExactDerivativeMatrix<
             Connectivity,
             GridY<2>,
             ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
@@ -625,7 +663,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             SingleInterfaceDerivativesCalculatorCollection<Interface_2_5, Interface_5_8>>
             matrix_258(idx_ranges_258, deriv_calculators_collect_258);
 
-    InterfaceDerivativeMatrix<
+    InterfaceExactDerivativeMatrix<
             Connectivity,
             GridY<3>,
             ddc::detail::TypeSeq<Patch3, Patch6, Patch9>,
@@ -761,8 +799,8 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 
     // Initialise the data =======================================================================
     // --- the function values.
-    initialise_all_functions(functions_and_derivs);
-    initialise_2D_function<GridXg, GridYg>(function_g);
+    initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
+    initialise_2D_function<GridXg, GridYg, CoordTransform<Xg, Yg, Xg, Yg>>(function_g);
 
     // --- the first derivatives from the function values.
     matrix_123.solve_deriv(functions_and_derivs);
@@ -800,33 +838,35 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     // Check each derivatives ---
     using PatchSeqLowerBound = ddc::detail::TypeSeq<Patch7, Patch8, Patch9>;
     using PatchSeqUpperBound = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
-    using EmptyPatchSeq = ddc::detail::TypeSeq<>;
+    // using EmptyPatchSeq = ddc::detail::TypeSeq<>;
 
-    check_all_x_derivatives<EmptyPatchSeq>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            idx_ranges,
-            idx_ranges_slice_dx);
-
-    check_all_y_derivatives<EmptyPatchSeq, PatchSeqLowerBound, PatchSeqUpperBound>(
-            functions_and_derivs,
-            evaluator_g,
-            get_const_field(function_g_coef),
-            idx_ranges,
-            idx_ranges_slice_dy);
-
-    check_all_xy_derivatives<EmptyPatchSeq, PatchSeqLowerBound, PatchSeqUpperBound>(
+    check_all_x_derivatives(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
             idx_ranges,
             idx_ranges_slice_dx,
-            idx_ranges_slice_dy);
+            coord_transforms);
+
+    check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
+            functions_and_derivs,
+            evaluator_g,
+            get_const_field(function_g_coef),
+            idx_ranges,
+            idx_ranges_slice_dy,
+            coord_transforms);
+
+    check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
+            functions_and_derivs,
+            evaluator_g,
+            get_const_field(function_g_coef),
+            idx_ranges,
+            idx_ranges_slice_dx,
+            idx_ranges_slice_dy,
+            coord_transforms);
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<
-            EmptyPatchSeq,
             PatchSeqLowerBound,
             PatchSeqUpperBound>(
             idx_ranges,
@@ -834,5 +874,6 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             idx_ranges_slice_dy,
             functions_and_derivs,
             evaluator_g,
-            get_const_field(function_g_coef));
+            get_const_field(function_g_coef),
+            coord_transforms);
 }

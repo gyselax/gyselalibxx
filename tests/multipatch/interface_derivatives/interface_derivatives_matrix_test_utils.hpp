@@ -10,76 +10,105 @@
 #include "types.hpp"
 
 /*
-    This file defined useful operators for the test on the InterfaceDerivativeMatrix.
+    This file defined useful operators for the test on the InterfaceExactDerivativeMatrix.
 */
 
-
-/// @brief Convert a local coordinate into a global coordinate.
+/// @brief Coordinate transformation from the patches to the global/physical domain. 
 template <typename Xg, typename Yg, typename X_loc, typename Y_loc>
-Coord<Xg, Yg> get_global_coord(Coord<X_loc, Y_loc> const& local_coord)
+struct CoordTransform
 {
-    double const x = ddc::select<X_loc>(local_coord);
-    double const y = ddc::select<Y_loc>(local_coord);
-    return Coord<Xg, Yg>(x, y);
-}
+    using Dim1Local = X_loc;
+    using Dim2Local = Y_loc;
+    using Dim1Global = Xg;
+    using Dim2Global = Yg;
 
-template <typename Xg, typename Yg, typename X_loc, typename Y_loc>
-Coord<Xg, Yg> get_global_coord_reverse(
-        Coord<X_loc, Y_loc> const& local_coord,
-        Coord<X_loc> const x_min,
-        Coord<X_loc> const x_max,
-        Coord<Y_loc> const y_min,
-        Coord<Y_loc> const y_max)
-{
-    double const x = x_min + x_max - ddc::select<X_loc>(local_coord);
-    double const y = y_min + y_max - ddc::select<Y_loc>(local_coord);
-    return Coord<Xg, Yg>(x, y);
-}
+    const bool m_is_reverse_x;
+    const bool m_is_reverse_y;
+    const bool m_are_exchange_x_y;
+
+    const Coord<X_loc> m_x_min;
+    const Coord<X_loc> m_x_max;
+    const Coord<Y_loc> m_y_min;
+    const Coord<Y_loc> m_y_max;
+
+    CoordTransform(
+            bool is_reverse_x = false,
+            bool is_reverse_y = false,
+            bool are_exchange_x_y = false,
+            Coord<X_loc> x_min = Coord<X_loc>(0),
+            Coord<X_loc> x_max = Coord<X_loc>(1),
+            Coord<Y_loc> y_min = Coord<Y_loc>(0),
+            Coord<Y_loc> y_max = Coord<Y_loc>(1))
+        : m_is_reverse_x(is_reverse_x)
+        , m_is_reverse_y(is_reverse_y)
+        , m_are_exchange_x_y(are_exchange_x_y)
+        , m_x_min(x_min)
+        , m_x_max(x_max)
+        , m_y_min(y_min)
+        , m_y_max(y_max)
+    {
+    }
+
+    Coord<Xg, Yg> get_global_coord(Coord<X_loc, Y_loc> const& local_coord) const
+    {
+        double x_loc = ddc::select<X_loc>(local_coord);
+        double y_loc = ddc::select<Y_loc>(local_coord);
+
+        if (m_is_reverse_x) {
+            x_loc = m_x_min + m_x_max - x_loc;
+        }
+        if (m_is_reverse_y) {
+            y_loc = m_y_min + m_y_max - y_loc;
+        }
+
+        if (m_are_exchange_x_y) {
+            return Coord<Xg, Yg>(y_loc, x_loc);
+        } else {
+            return Coord<Xg, Yg>(x_loc, y_loc);
+        }
+    }
+};
 
 // INITIALISATION OPERATORS ----------------------------------------------------------------------
 
 /// @brief Initialise the function with f(x,y) = cos(2/3*pi*x)sin(y).
-template <class Grid1, class Grid2, class Layout>
-void initialise_2D_function(DField<IdxRange<Grid1, Grid2>, Kokkos::HostSpace, Layout> function)
+template <class Grid1, class Grid2, class CoordTransformType, class Layout>
+void initialise_2D_function(
+        DField<IdxRange<Grid1, Grid2>, Kokkos::HostSpace, Layout> function,
+        CoordTransformType const& coord_transform = CoordTransformType())
 {
+    using Dim1 = typename CoordTransformType::Dim1Local;
+    using Dim2 = typename CoordTransformType::Dim2Local;
+    using Xg = typename CoordTransformType::Dim1Global;
+    using Yg = typename CoordTransformType::Dim2Global;
     ddc::for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
         // Get the coordinate on the equivalent global mesh.
-        double const xg = ddc::coordinate(Idx<Grid1>(idx));
-        double const yg = ddc::coordinate(Idx<Grid2>(idx));
-        function(idx) = Kokkos::cos(xg * 2. / 3. * M_PI + 0.25) * Kokkos::sin(yg);
-    });
-}
-
-template <class Grid1, class Grid2, class Layout>
-void initialise_2D_function_reverse(
-        DField<IdxRange<Grid1, Grid2>, Kokkos::HostSpace, Layout> function)
-{
-    IdxRange<Grid1, Grid2> idx_range = get_idx_range(function);
-    double const x_max = ddc::coordinate(Idx<Grid1>(idx_range.back()));
-    double const y_max = ddc::coordinate(Idx<Grid2>(idx_range.back()));
-    double const x_min = ddc::coordinate(Idx<Grid1>(idx_range.front()));
-    double const y_min = ddc::coordinate(Idx<Grid2>(idx_range.front()));
-    ddc::for_each(idx_range, [&](Idx<Grid1, Grid2> idx) {
-        // Get the coordinate on the equivalent global mesh.
-        double const xg = x_min + x_max - ddc::coordinate(Idx<Grid1>(idx));
-        double const yg = y_min + y_max - ddc::coordinate(Idx<Grid2>(idx));
+        Coord<Dim1, Dim2> local_coord = ddc::coordinate(idx);
+        Coord<Xg, Yg> equiv_global_coord = coord_transform.get_global_coord(local_coord);
+        double const xg = ddc::get<Xg>(equiv_global_coord);
+        double const yg = ddc::get<Yg>(equiv_global_coord);
         function(idx) = Kokkos::cos(xg * 2. / 3. * M_PI + 0.25) * Kokkos::sin(yg);
     });
 }
 
 /// @brief Initialise all the functions defined on the patches.
-template <class... Patches>
+template <class Xg, class Yg, class... Patches>
 void initialise_all_functions(
-        MultipatchField<DerivFieldOnPatch_host, Patches...> const& functions_and_derivs)
+        MultipatchField<DerivFieldOnPatch_host, Patches...> const& functions_and_derivs,
+        std::tuple<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>...>
+                coord_transforms)
 {
     (initialise_2D_function<typename Patches::Grid1, typename Patches::Grid2>(
-             (functions_and_derivs.template get<Patches>()).get_values_field()),
+             (functions_and_derivs.template get<Patches>()).get_values_field(),
+             std::get<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>>(
+                     coord_transforms)),
      ...);
 }
 
 /// @brief Initialise the y-derivatives of a given DerivField from the global spline.
 template <
         class Patch,
+        class CoordTransformType,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
@@ -89,7 +118,8 @@ void initialise_y_derivatives(
         DerivFieldOnPatch_host<Patch> function_and_derivs,
         IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
         SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef)
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
+        CoordTransformType const& coord_transform = CoordTransformType())
 {
     using DerivX = ddc::Deriv<typename Patch::Dim1>;
     using DerivY = ddc::Deriv<typename Patch::Dim2>;
@@ -111,28 +141,42 @@ void initialise_y_derivatives(
     ddc::for_each(idx_range_x, [&](Idx<GridX> const& idx_par) {
         Idx<GridX, GridY> idx_min(idx_par, idx_range_y.front());
         Idx<GridX, GridY> idx_max(idx_par, idx_range_y.back());
-        Coord<Xg, Yg> interface_coord_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min)));
-        Coord<Xg, Yg> interface_coord_max(get_global_coord<Xg, Yg>(ddc::coordinate(idx_max)));
+        Coord<Xg, Yg> interface_coord_min(
+                coord_transform.get_global_coord(ddc::coordinate(idx_min)));
+        Coord<Xg, Yg> interface_coord_max(
+                coord_transform.get_global_coord(ddc::coordinate(idx_max)));
 
-        derivs_ymin_extracted(idx_par)
-                = evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
-        derivs_ymax_extracted(idx_par)
-                = evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
+        int const sign = !coord_transform.m_is_reverse_y - coord_transform.m_is_reverse_y;
+
+        if (coord_transform.m_are_exchange_x_y) {
+            derivs_ymin_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+            derivs_ymax_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+        } else {
+            derivs_ymin_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
+            derivs_ymax_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
+        }
     });
 }
 
+/// @brief Initialise the y-derivatives of a given DerivField from the global spline.
 template <
         class Patch,
+        class CoordTransformType,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class Xg = typename BSplinesXg::continuous_dimension_type,
         class Yg = typename BSplinesYg::continuous_dimension_type>
-void initialise_y_derivatives_reversed(
+void initialise_x_derivatives(
         DerivFieldOnPatch_host<Patch> function_and_derivs,
-        IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
+        IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx,
         SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef)
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
+        CoordTransformType const& coord_transform = CoordTransformType())
 {
     using DerivX = ddc::Deriv<typename Patch::Dim1>;
     using DerivY = ddc::Deriv<typename Patch::Dim2>;
@@ -143,61 +187,43 @@ void initialise_y_derivatives_reversed(
     IdxRange<GridX> idx_range_x(idx_range_xy);
     IdxRange<GridY> idx_range_y(idx_range_xy);
 
-    Idx<DerivY, GridY> idx_slice_ymin(Idx<DerivY>(1), idx_range_slice_dy.front());
-    Idx<DerivY, GridY> idx_slice_ymax(Idx<DerivY>(1), idx_range_slice_dy.back());
+    Idx<DerivX, GridX> idx_slice_xmin(Idx<DerivX>(1), idx_range_slice_dx.front());
+    Idx<DerivX, GridX> idx_slice_xmax(Idx<DerivX>(1), idx_range_slice_dx.back());
 
-    DField<IdxRange<GridX>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_ymin_extracted
-            = function_and_derivs[idx_slice_ymin];
-    DField<IdxRange<GridX>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_ymax_extracted
-            = function_and_derivs[idx_slice_ymax];
+    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xmin_extracted
+            = function_and_derivs[idx_slice_xmin];
+    DField<IdxRange<GridY>, Kokkos::HostSpace, Kokkos::layout_stride> derivs_xmax_extracted
+            = function_and_derivs[idx_slice_xmax];
 
-    typename Patch::Coord1 x_min(ddc::coordinate(idx_range_x.front()));
-    typename Patch::Coord1 x_max(ddc::coordinate(idx_range_x.back()));
-    typename Patch::Coord2 y_min(ddc::coordinate(idx_range_y.front()));
-    typename Patch::Coord2 y_max(ddc::coordinate(idx_range_y.back()));
-    ddc::for_each(idx_range_x, [&](Idx<GridX> const& idx_par) {
-        Idx<GridX, GridY> idx_min(idx_par, idx_range_y.front());
-        Idx<GridX, GridY> idx_max(idx_par, idx_range_y.back());
+    ddc::for_each(idx_range_y, [&](Idx<GridY> const& idx_par) {
+        Idx<GridX, GridY> idx_min(idx_range_x.front(), idx_par);
+        Idx<GridX, GridY> idx_max(idx_range_x.back(), idx_par);
         Coord<Xg, Yg> interface_coord_min(
-                get_global_coord_reverse<
-                        Xg,
-                        Yg>(ddc::coordinate(idx_min), x_min, x_max, y_min, y_max));
+                coord_transform.get_global_coord(ddc::coordinate(idx_min)));
         Coord<Xg, Yg> interface_coord_max(
-                get_global_coord_reverse<
-                        Xg,
-                        Yg>(ddc::coordinate(idx_max), x_min, x_max, y_min, y_max));
+                coord_transform.get_global_coord(ddc::coordinate(idx_max)));
 
-        derivs_ymin_extracted(idx_par)
-                = -evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
-        derivs_ymax_extracted(idx_par)
-                = -evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
+        int const sign = !coord_transform.m_is_reverse_x - coord_transform.m_is_reverse_x;
+
+        if (coord_transform.m_are_exchange_x_y) {
+            derivs_xmin_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
+            derivs_xmax_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
+        } else {
+            derivs_xmin_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+            derivs_xmax_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+        }
     });
 }
 
 
-/// @brief Initialise all the y-derivatives of the given DerivFields from the global spline.
-template <
-        class SplineXYgEvaluator,
-        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
-        class... Patches>
-void initialise_all_y_derivatives(
-        MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
-        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_ranges_slice_dy,
-        SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef)
-{
-    (initialise_y_derivatives<Patches>(
-             functions_and_derivs.template get<Patches>(),
-             idx_ranges_slice_dy.template get<Patches>(),
-             evaluator_g,
-             const_function_g_coef),
-     ...);
-}
-
 /// @brief Initialise the cross-derivatives of a given DerivField from the global spline.
 template <
         class Patch,
+        class CoordTransformType,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
@@ -209,7 +235,8 @@ void initialise_cross_derivatives(
         IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
-        double const& xshift)
+        double const& xshift,
+        CoordTransformType const& coord_transform = CoordTransformType())
 {
     using DerivX = ddc::Deriv<typename Patch::Dim1>;
     using DerivY = ddc::Deriv<typename Patch::Dim2>;
@@ -239,67 +266,27 @@ void initialise_cross_derivatives(
             Idx<DerivY>(1),
             idx_range_slice_dy.back());
 
+    Coord<Xg, Yg> coord_min_min = coord_transform.get_global_coord(
+            typename Patch::Coord12(coord_transform.m_x_min, coord_transform.m_y_min));
+    Coord<Xg, Yg> coord_max_min = coord_transform.get_global_coord(
+            typename Patch::Coord12(coord_transform.m_x_max, coord_transform.m_y_min));
+    Coord<Xg, Yg> coord_min_max = coord_transform.get_global_coord(
+            typename Patch::Coord12(coord_transform.m_x_min, coord_transform.m_y_max));
+    Coord<Xg, Yg> coord_max_max = coord_transform.get_global_coord(
+            typename Patch::Coord12(coord_transform.m_x_max, coord_transform.m_y_max));
+
+    int const sign_x = !coord_transform.m_is_reverse_x - coord_transform.m_is_reverse_x;
+    int const sign_y = !coord_transform.m_is_reverse_y - coord_transform.m_is_reverse_y;
+    int const sign_xy = sign_x * sign_y;
+
     function_and_derivs(idx_cross_deriv_min_min)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(0 + xshift, 0), const_function_g_coef);
+            = sign_xy * evaluator_g.deriv_1_and_2(coord_min_min, const_function_g_coef);
     function_and_derivs(idx_cross_deriv_max_min)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1 + xshift, 0), const_function_g_coef);
+            = sign_xy * evaluator_g.deriv_1_and_2(coord_max_min, const_function_g_coef);
     function_and_derivs(idx_cross_deriv_min_max)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(0 + xshift, 1), const_function_g_coef);
+            = sign_xy * evaluator_g.deriv_1_and_2(coord_min_max, const_function_g_coef);
     function_and_derivs(idx_cross_deriv_max_max)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1 + xshift, 1), const_function_g_coef);
-}
-
-template <
-        class Patch,
-        class SplineXYgEvaluator,
-        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
-        class Xg = typename BSplinesXg::continuous_dimension_type,
-        class Yg = typename BSplinesYg::continuous_dimension_type>
-void initialise_cross_derivatives_reverse(
-        DerivFieldOnPatch_host<Patch> function_and_derivs,
-        IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx,
-        IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
-        SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
-        double const& xshift)
-{
-    using DerivX = ddc::Deriv<typename Patch::Dim1>;
-    using DerivY = ddc::Deriv<typename Patch::Dim2>;
-    using GridX = typename Patch::Grid1;
-    using GridY = typename Patch::Grid2;
-
-    using IdxdXXdYY = Idx<DerivX, GridX, DerivY, GridY>;
-
-    IdxdXXdYY idx_cross_deriv_min_min(
-            Idx<DerivX>(1),
-            idx_range_slice_dx.front(),
-            Idx<DerivY>(1),
-            idx_range_slice_dy.front());
-    IdxdXXdYY idx_cross_deriv_max_min(
-            Idx<DerivX>(1),
-            idx_range_slice_dx.back(),
-            Idx<DerivY>(1),
-            idx_range_slice_dy.front());
-    IdxdXXdYY idx_cross_deriv_min_max(
-            Idx<DerivX>(1),
-            idx_range_slice_dx.front(),
-            Idx<DerivY>(1),
-            idx_range_slice_dy.back());
-    IdxdXXdYY idx_cross_deriv_max_max(
-            Idx<DerivX>(1),
-            idx_range_slice_dx.back(),
-            Idx<DerivY>(1),
-            idx_range_slice_dy.back());
-
-    function_and_derivs(idx_cross_deriv_max_max)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(0 + xshift, 0), const_function_g_coef);
-    function_and_derivs(idx_cross_deriv_min_max)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1 + xshift, 0), const_function_g_coef);
-    function_and_derivs(idx_cross_deriv_max_min)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(0 + xshift, 1), const_function_g_coef);
-    function_and_derivs(idx_cross_deriv_min_min)
-            = evaluator_g.deriv_1_and_2(Coord<Xg, Yg>(1 + xshift, 1), const_function_g_coef);
+            = sign_xy * evaluator_g.deriv_1_and_2(coord_max_max, const_function_g_coef);
 }
 
 /// @brief Initialise all the cross-derivatives of the given DerivFields from the global spline.
@@ -307,37 +294,29 @@ template <
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
-        class Patch1,
-        class Patch2,
-        class Patch3>
+        class Xg = typename BSplinesXg::continuous_dimension_type,
+        class Yg = typename BSplinesYg::continuous_dimension_type,
+        class... Patches>
 void initialise_all_cross_derivatives(
-        MultipatchField<DerivFieldOnPatch_host, Patch1, Patch2, Patch3>& functions_and_derivs,
-        MultipatchType<IdxRange1SliceOnPatch, Patch1, Patch2, Patch3> const& idx_ranges_slice_dx,
-        MultipatchType<IdxRange2SliceOnPatch, Patch1, Patch2, Patch3> const& idx_ranges_slice_dy,
+        MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
+        MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_ranges_slice_dx,
+        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_ranges_slice_dy,
         SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef)
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
+        std::tuple<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>...>
+                coord_transforms)
 {
-    initialise_cross_derivatives<Patch1>(
-            functions_and_derivs.template get<Patch1>(),
-            idx_ranges_slice_dx.template get<Patch1>(),
-            idx_ranges_slice_dy.template get<Patch1>(),
-            evaluator_g,
-            const_function_g_coef,
-            0);
-    initialise_cross_derivatives<Patch2>(
-            functions_and_derivs.template get<Patch2>(),
-            idx_ranges_slice_dx.template get<Patch2>(),
-            idx_ranges_slice_dy.template get<Patch2>(),
-            evaluator_g,
-            const_function_g_coef,
-            1);
-    initialise_cross_derivatives<Patch3>(
-            functions_and_derivs.template get<Patch3>(),
-            idx_ranges_slice_dx.template get<Patch3>(),
-            idx_ranges_slice_dy.template get<Patch3>(),
-            evaluator_g,
-            const_function_g_coef,
-            2);
+    using PatchSeq = ddc::detail::TypeSeq<Patches...>;
+    (initialise_cross_derivatives<Patches>(
+             functions_and_derivs.template get<Patches>(),
+             idx_ranges_slice_dx.template get<Patches>(),
+             idx_ranges_slice_dy.template get<Patches>(),
+             evaluator_g,
+             const_function_g_coef,
+             ddc::type_seq_rank_v<Patches, PatchSeq>,
+             std::get<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>>(
+                     coord_transforms)),
+     ...);
 }
 
 // CHECK OPERATORS -------------------------------------------------------------------------------
@@ -349,56 +328,46 @@ void initialise_all_cross_derivatives(
 template <class Patch, class GridXg, class GridYg>
 void check_interpolation_grids(
         typename Patch::IdxRange12 const& idx_range,
+        CoordTransform<
+                typename GridXg::continuous_dimension_type,
+                typename GridYg::continuous_dimension_type,
+                typename Patch::Dim1,
+                typename Patch::Dim2> const& coord_transform,
         int const x_shift,
         int const y_shift = 0)
 {
     using Grid1 = typename Patch::Grid1;
     using Grid2 = typename Patch::Grid2;
-    ddc::for_each(idx_range, [&](typename Patch::Idx12 const& idx) {
-        IdxStep<Grid1> idx_x(Idx<Grid1>(idx) - IdxRange<Grid1>(idx_range).front());
-        IdxStep<Grid2> idx_y(Idx<Grid2>(idx) - IdxRange<Grid2>(idx_range).front());
-        Idx<GridXg, GridYg> idx_g(idx_x.value() + x_shift, idx_y.value() + y_shift);
-        EXPECT_NEAR(ddc::coordinate(Idx<Grid1>(idx)), ddc::coordinate(Idx<GridXg>(idx_g)), 1e-15);
-        EXPECT_NEAR(ddc::coordinate(Idx<Grid2>(idx)), ddc::coordinate(Idx<GridYg>(idx_g)), 1e-15);
-    });
-}
-
-template <class Patch, class GridXg, class GridYg>
-void check_interpolation_grids_reverse(
-        typename Patch::IdxRange12 const& idx_range,
-        int const x_shift,
-        int const y_shift = 0)
-{
-    using Grid1 = typename Patch::Grid1;
-    using Grid2 = typename Patch::Grid2;
+    using Xg = typename GridXg::continuous_dimension_type;
+    using Yg = typename GridYg::continuous_dimension_type;
     using Dim1 = typename Patch::Dim1;
     using Dim2 = typename Patch::Dim2;
-    Coord<Dim1> coord_x_max = ddc::coordinate(Idx<Grid1>(idx_range.back()));
-    Coord<Dim1> coord_x_min = ddc::coordinate(Idx<Grid1>(idx_range.front()));
-    Coord<Dim2> coord_y_max = ddc::coordinate(Idx<Grid2>(idx_range.back()));
-    Coord<Dim2> coord_y_min = ddc::coordinate(Idx<Grid2>(idx_range.front()));
     ddc::for_each(idx_range, [&](typename Patch::Idx12 const& idx) {
-        IdxStep<Grid1> idx_x(IdxRange<Grid1>(idx_range).back() - Idx<Grid1>(idx));
-        IdxStep<Grid2> idx_y(IdxRange<Grid2>(idx_range).back() - Idx<Grid2>(idx));
-        Idx<GridXg, GridYg> idx_g(idx_x.value() + x_shift, idx_y.value() + y_shift);
-        EXPECT_NEAR(
-                coord_x_max + coord_x_min - ddc::coordinate(Idx<Grid1>(idx)),
-                ddc::coordinate(Idx<GridXg>(idx_g)),
-                1e-15);
-        EXPECT_NEAR(
-                coord_y_max + coord_y_min - ddc::coordinate(Idx<Grid2>(idx)),
-                ddc::coordinate(Idx<GridYg>(idx_g)),
-                1e-15);
+        IdxStep<Grid1> idx_x = coord_transform.m_is_reverse_x
+                                       ? IdxRange<Grid1>(idx_range).back() - Idx<Grid1>(idx)
+                                       : Idx<Grid1>(idx) - IdxRange<Grid1>(idx_range).front();
+        IdxStep<Grid2> idx_y = coord_transform.m_is_reverse_y
+                                       ? IdxRange<Grid2>(idx_range).back() - Idx<Grid2>(idx)
+                                       : Idx<Grid2>(idx) - IdxRange<Grid2>(idx_range).front();
+        Idx<GridXg, GridYg> idx_g
+                = coord_transform.m_are_exchange_x_y
+                          ? Idx<GridXg, GridYg>(idx_y.value() + x_shift, idx_x.value() + y_shift)
+                          : Idx<GridXg, GridYg>(idx_x.value() + x_shift, idx_y.value() + y_shift);
+
+        Coord<Dim1, Dim2> local_coord = ddc::coordinate(idx);
+        Coord<Xg, Yg> equiv_global_coord = coord_transform.get_global_coord(local_coord);
+        Coord<Xg, Yg> global_coord = ddc::coordinate(idx_g);
+        EXPECT_NEAR(ddc::get<Xg>(equiv_global_coord), ddc::get<Xg>(global_coord), 1e-15);
+        EXPECT_NEAR(ddc::get<Yg>(equiv_global_coord), ddc::get<Yg>(global_coord), 1e-15);
     });
 }
-
 
 /** @brief Check agreement between the computed x-derivatives and the global x-derivatives at 
      * the interfaces for a given patch.
      */
 template <
         class Patch,
-        class ReversedPatchSeq,
+        class CoordTransformType,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
@@ -407,13 +376,13 @@ void check_x_derivatives(
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         typename Patch::IdxRange1 const& idx_range_perp,
-        IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx)
+        IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx,
+        CoordTransformType const& coord_transform = CoordTransformType())
 {
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    constexpr bool is_reversed_patch = ddc::in_tags_v<Patch, ReversedPatchSeq>;
-    constexpr int reversing_sign = !is_reversed_patch - is_reversed_patch;
+    const int sign = !coord_transform.m_is_reverse_x - coord_transform.m_is_reverse_x;
 
     using DerivX = typename ddc::Deriv<typename Patch::Dim1>;
     Idx<DerivX> idx_deriv(1);
@@ -428,31 +397,24 @@ void check_x_derivatives(
 
     typename Patch::IdxRange2 idx_range_par(get_idx_range(derivs_xmin_extracted));
 
-    typename Patch::Coord1 x_min(ddc::coordinate(idx_range_perp.front()));
-    typename Patch::Coord1 x_max(ddc::coordinate(idx_range_perp.back()));
-    typename Patch::Coord2 y_min(ddc::coordinate(idx_range_par.front()));
-    typename Patch::Coord2 y_max(ddc::coordinate(idx_range_par.back()));
     ddc::for_each(idx_range_par, [&](typename Patch::Idx2 const& idx_par) {
         typename Patch::Idx12 idx_min(idx_range_perp.front(), idx_par);
         typename Patch::Idx12 idx_max(idx_range_perp.back(), idx_par);
-        Coord<Xg, Yg> interface_coord_min;
-        Coord<Xg, Yg> interface_coord_max;
-        if (is_reversed_patch) {
-            interface_coord_min = get_global_coord_reverse<
-                    Xg,
-                    Yg>(ddc::coordinate(idx_min), x_min, x_max, y_min, y_max);
-            interface_coord_max = get_global_coord_reverse<
-                    Xg,
-                    Yg>(ddc::coordinate(idx_max), x_min, x_max, y_min, y_max);
-        } else {
-            interface_coord_min = get_global_coord<Xg, Yg>(ddc::coordinate(idx_min));
-            interface_coord_max = get_global_coord<Xg, Yg>(ddc::coordinate(idx_max));
-        }
+        Coord<Xg, Yg> interface_coord_min(
+                coord_transform.get_global_coord(ddc::coordinate(idx_min)));
+        Coord<Xg, Yg> interface_coord_max(
+                coord_transform.get_global_coord(ddc::coordinate(idx_max)));
 
-        double const global_deriv_min
-                = reversing_sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
-        double const global_deriv_max
-                = reversing_sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
+        double global_deriv_min;
+        double global_deriv_max;
+        if (coord_transform.m_are_exchange_x_y) {
+            global_deriv_min = sign * evaluator_g.deriv_dim_2(interface_coord_min, function_g_coef);
+            global_deriv_max = sign * evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
+
+        } else {
+            global_deriv_min = sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
+            global_deriv_max = sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
+        }
 
         EXPECT_NEAR(derivs_xmin_extracted(idx_par), global_deriv_min, 5e-14);
         EXPECT_NEAR(derivs_xmax_extracted(idx_par), global_deriv_max, 5e-14);
@@ -463,24 +425,30 @@ void check_x_derivatives(
      * the interfaces. 
      */
 template <
-        class ReversedPatchSeq,
+        // class ReversedPatchSeq,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class Xg = typename BSplinesXg::continuous_dimension_type,
+        class Yg = typename BSplinesYg::continuous_dimension_type,
         class... Patches>
 void check_all_x_derivatives(
         MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-        MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_range_slices_dx)
+        MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_range_slices_dx,
+        std::tuple<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>...>
+                coord_transforms)
 {
-    (check_x_derivatives<Patches, ReversedPatchSeq>(
+    (check_x_derivatives<Patches>(
              functions_and_derivs.template get<Patches>(),
              evaluator_g,
              function_g_coef,
              typename Patches::IdxRange1(idx_ranges.template get<Patches>()),
-             idx_range_slices_dx.template get<Patches>()),
+             idx_range_slices_dx.template get<Patches>(),
+             std::get<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>>(
+                     coord_transforms)),
      ...);
 }
 
@@ -491,9 +459,9 @@ void check_all_x_derivatives(
      */
 template <
         class Patch,
-        class ReversedPatchSeq,
         class PatchSeqMin,
         class PatchSeqMax,
+        class CoordTransformType,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
@@ -502,13 +470,13 @@ void check_y_derivatives(
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         typename Patch::IdxRange2 const& idx_range_perp,
-        IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy)
+        IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
+        CoordTransformType const& coord_transform = CoordTransformType())
 {
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    constexpr bool is_reversed_patch = ddc::in_tags_v<Patch, ReversedPatchSeq>;
-    constexpr int reversing_sign = !is_reversed_patch - is_reversed_patch;
+    const int sign = !coord_transform.m_is_reverse_y - coord_transform.m_is_reverse_y;
 
     using DerivY = typename ddc::Deriv<typename Patch::Dim2>;
     Idx<DerivY> idx_deriv(1);
@@ -525,32 +493,24 @@ void check_y_derivatives(
     typename Patch::Idx2 idx_y_min = idx_range_perp.front();
     typename Patch::Idx2 idx_y_max = idx_range_perp.back();
 
-    typename Patch::Coord1 x_min(ddc::coordinate(idx_range_par.front()));
-    typename Patch::Coord1 x_max(ddc::coordinate(idx_range_par.back()));
-    typename Patch::Coord2 y_min(ddc::coordinate(idx_range_perp.front()));
-    typename Patch::Coord2 y_max(ddc::coordinate(idx_range_perp.back()));
     ddc::for_each(idx_range_par, [&](typename Patch::Idx1 const& idx) {
         typename Patch::Idx12 idx_min(idx, idx_y_min);
         typename Patch::Idx12 idx_max(idx, idx_y_max);
-        Coord<Xg, Yg> interface_coord_min;
-        Coord<Xg, Yg> interface_coord_max;
+        Coord<Xg, Yg> interface_coord_min(
+                coord_transform.get_global_coord(ddc::coordinate(idx_min)));
+        Coord<Xg, Yg> interface_coord_max(
+                coord_transform.get_global_coord(ddc::coordinate(idx_max)));
 
-        if (is_reversed_patch) {
-            interface_coord_min = get_global_coord_reverse<
-                    Xg,
-                    Yg>(ddc::coordinate(idx_min), x_min, x_max, y_min, y_max);
-            interface_coord_max = get_global_coord_reverse<
-                    Xg,
-                    Yg>(ddc::coordinate(idx_max), x_min, x_max, y_min, y_max);
+        double global_deriv_min;
+        double global_deriv_max;
+        if (coord_transform.m_are_exchange_x_y) {
+            global_deriv_min = sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
+            global_deriv_max = sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
+
         } else {
-            interface_coord_min = get_global_coord<Xg, Yg>(ddc::coordinate(idx_min));
-            interface_coord_max = get_global_coord<Xg, Yg>(ddc::coordinate(idx_max));
+            global_deriv_min = sign * evaluator_g.deriv_dim_2(interface_coord_min, function_g_coef);
+            global_deriv_max = sign * evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
         }
-
-        double const global_deriv_min
-                = reversing_sign * evaluator_g.deriv_dim_2(interface_coord_min, function_g_coef);
-        double const global_deriv_max
-                = reversing_sign * evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
 
         // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
         // we don't need the y-derivatives for y = ymin. Their values are not checked.
@@ -569,26 +529,31 @@ void check_y_derivatives(
      * the interfaces.
      */
 template <
-        class ReversedPatchSeq,
         class PatchSeqMin,
         class PatchSeqMax,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class Xg = typename BSplinesXg::continuous_dimension_type,
+        class Yg = typename BSplinesYg::continuous_dimension_type,
         class... Patches>
 void check_all_y_derivatives(
         MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
-        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_dy)
+        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_dy,
+        std::tuple<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>...>
+                coord_transforms)
 {
-    (check_y_derivatives<Patches, ReversedPatchSeq, PatchSeqMin, PatchSeqMax>(
+    (check_y_derivatives<Patches, PatchSeqMin, PatchSeqMax>(
              functions_and_derivs.template get<Patches>(),
              evaluator_g,
              function_g_coef,
              typename Patches::IdxRange2(idx_ranges.template get<Patches>()),
-             idx_range_slices_dy.template get<Patches>()),
+             idx_range_slices_dy.template get<Patches>(),
+             std::get<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>>(
+                     coord_transforms)),
      ...);
 }
 
@@ -598,9 +563,9 @@ void check_all_y_derivatives(
      */
 template <
         class Patch,
-        class ReversedPatchSeq,
         class PatchSeqMin,
         class PatchSeqMax,
+        class CoordTransformType,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
@@ -610,13 +575,16 @@ void check_xy_derivatives(
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         typename Patch::IdxRange12 const& idx_range,
         IdxRange1SliceOnPatch<Patch> const& idx_range_slice_dx,
-        IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy)
+        IdxRange2SliceOnPatch<Patch> const& idx_range_slice_dy,
+        CoordTransformType const& coord_transform = CoordTransformType())
 {
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    constexpr bool is_reversed_patch = ddc::in_tags_v<Patch, ReversedPatchSeq>;
-    constexpr int reversing_sign = !is_reversed_patch - is_reversed_patch;
+    const int sign_x = !coord_transform.m_is_reverse_x - coord_transform.m_is_reverse_x;
+    const int sign_y = !coord_transform.m_is_reverse_y - coord_transform.m_is_reverse_y;
+    const int sign_xy = sign_x * sign_y;
+
 
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
@@ -658,26 +626,23 @@ void check_xy_derivatives(
     Idx<GridX, GridY> idx_min_max(idx_range_x.front(), idx_range_y.back());
     Idx<GridX, GridY> idx_max_max(idx_range_x.back(), idx_range_y.back());
 
-    Coord<Xg, Yg> interface_coord_min_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min_min)));
-    Coord<Xg, Yg> interface_coord_max_min(get_global_coord<Xg, Yg>(ddc::coordinate(idx_max_min)));
-    Coord<Xg, Yg> interface_coord_min_max(get_global_coord<Xg, Yg>(ddc::coordinate(idx_min_max)));
-    Coord<Xg, Yg> interface_coord_max_max(get_global_coord<Xg, Yg>(ddc::coordinate(idx_max_max)));
+    Coord<Xg, Yg> interface_coord_min_min(
+            coord_transform.get_global_coord(ddc::coordinate(idx_min_min)));
+    Coord<Xg, Yg> interface_coord_max_min(
+            coord_transform.get_global_coord(ddc::coordinate(idx_max_min)));
+    Coord<Xg, Yg> interface_coord_min_max(
+            coord_transform.get_global_coord(ddc::coordinate(idx_min_max)));
+    Coord<Xg, Yg> interface_coord_max_max(
+            coord_transform.get_global_coord(ddc::coordinate(idx_max_max)));
 
-    double global_deriv_min_min;
-    double global_deriv_max_min;
-    double global_deriv_min_max;
-    double global_deriv_max_max;
-    if (is_reversed_patch) {
-        global_deriv_min_min = evaluator_g.deriv_1_and_2(interface_coord_max_max, function_g_coef);
-        global_deriv_max_min = evaluator_g.deriv_1_and_2(interface_coord_min_max, function_g_coef);
-        global_deriv_min_max = evaluator_g.deriv_1_and_2(interface_coord_max_min, function_g_coef);
-        global_deriv_max_max = evaluator_g.deriv_1_and_2(interface_coord_min_min, function_g_coef);
-    } else {
-        global_deriv_min_min = evaluator_g.deriv_1_and_2(interface_coord_min_min, function_g_coef);
-        global_deriv_max_min = evaluator_g.deriv_1_and_2(interface_coord_max_min, function_g_coef);
-        global_deriv_min_max = evaluator_g.deriv_1_and_2(interface_coord_min_max, function_g_coef);
-        global_deriv_max_max = evaluator_g.deriv_1_and_2(interface_coord_max_max, function_g_coef);
-    }
+    double global_deriv_min_min
+            = sign_xy * evaluator_g.deriv_1_and_2(interface_coord_min_min, function_g_coef);
+    double global_deriv_max_min
+            = sign_xy * evaluator_g.deriv_1_and_2(interface_coord_max_min, function_g_coef);
+    double global_deriv_min_max
+            = sign_xy * evaluator_g.deriv_1_and_2(interface_coord_min_max, function_g_coef);
+    double global_deriv_max_max
+            = sign_xy * evaluator_g.deriv_1_and_2(interface_coord_max_max, function_g_coef);
 
     // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
     // we don't need the cross-derivatives for y = ymin. Their value is not checked.
@@ -697,12 +662,13 @@ void check_xy_derivatives(
      * the interfaces.
      */
 template <
-        class ReversedPatchSeq,
         class PatchSeqMin,
         class PatchSeqMax,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class Xg = typename BSplinesXg::continuous_dimension_type,
+        class Yg = typename BSplinesYg::continuous_dimension_type,
         class... Patches>
 void check_all_xy_derivatives(
         MultipatchField<DerivFieldOnPatch_host, Patches...>& functions_and_derivs,
@@ -710,15 +676,19 @@ void check_all_xy_derivatives(
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
         MultipatchType<IdxRange1SliceOnPatch, Patches...> const& idx_range_slices_dx,
-        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_dy)
+        MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_dy,
+        std::tuple<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>...>
+                coord_transforms)
 {
-    (check_xy_derivatives<Patches, ReversedPatchSeq, PatchSeqMin, PatchSeqMax>(
+    (check_xy_derivatives<Patches, PatchSeqMin, PatchSeqMax>(
              functions_and_derivs.template get<Patches>(),
              evaluator_g,
              function_g_coef,
              idx_ranges.template get<Patches>(),
              idx_range_slices_dx.template get<Patches>(),
-             idx_range_slices_dy.template get<Patches>()),
+             idx_range_slices_dy.template get<Patches>(),
+             std::get<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>>(
+                     coord_transforms)),
      ...);
 }
 
@@ -728,9 +698,9 @@ void check_all_xy_derivatives(
      */
 template <
         class Patch,
-        class ReversedPatchSeq,
         class PatchSeqMin,
         class PatchSeqMax,
+        class CoordTransformType,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
@@ -740,7 +710,8 @@ void check_spline_representation_agreement(
         IdxRange2SliceOnPatch<Patch> const& idx_range_slice_y,
         DerivFieldOnPatch_host<Patch> function_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
+        CoordTransformType const& coord_transform = CoordTransformType())
 {
     using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
 
@@ -753,8 +724,6 @@ void check_spline_representation_agreement(
 
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
-
-    constexpr bool is_reversed_patch = ddc::in_tags_v<Patch, ReversedPatchSeq>;
 
     const ddc::BoundCond BoundCondXmin = ddc::BoundCond::HERMITE;
     const ddc::BoundCond BoundCondXmax = ddc::BoundCond::HERMITE;
@@ -787,6 +756,7 @@ void check_spline_representation_agreement(
             builder.batched_spline_domain(idx_range_xy));
     SplineCoeffOnPatch_2D_host<Patch> function_coef = get_field(function_coef_alloc);
 
+    // TODO: Put this part in an external operator.
     // Get the fields on the right layout.
     // --- extract each fields.
     // ------ function.
@@ -1013,15 +983,7 @@ void check_spline_representation_agreement(
 
     // Evaluate and compare the local and global spline representations ----------------------
     ddc::for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
-        Coord<Xg, Yg> eval_point_g;
-        if (is_reversed_patch) {
-            eval_point_g = get_global_coord_reverse<
-                    Xg,
-                    Yg>(eval_points(idx), x_min, x_max, y_min, y_max);
-        } else {
-            eval_point_g = (get_global_coord<Xg, Yg>(eval_points(idx)));
-        }
-
+        Coord<Xg, Yg> eval_point_g(coord_transform.get_global_coord(eval_points(idx)));
         double local_spline = evaluator(eval_points(idx), get_const_field(function_coef));
         double global_spline = evaluator_g(eval_point_g, get_const_field(function_g_coef));
 
@@ -1033,12 +995,13 @@ void check_spline_representation_agreement(
      * and the global spline. 
      */
 template <
-        class ReversedPatchSeq,
         class PatchSeqMin,
         class PatchSeqMax,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class Xg = typename BSplinesXg::continuous_dimension_type,
+        class Yg = typename BSplinesYg::continuous_dimension_type,
         class... Patches>
 void check_all_spline_representation_agreement(
         MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
@@ -1046,14 +1009,18 @@ void check_all_spline_representation_agreement(
         MultipatchType<IdxRange2SliceOnPatch, Patches...> const& idx_range_slices_y,
         MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef)
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
+        std::tuple<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>...>
+                coord_transforms)
 {
-    (check_spline_representation_agreement<Patches, ReversedPatchSeq, PatchSeqMin, PatchSeqMax>(
+    (check_spline_representation_agreement<Patches, PatchSeqMin, PatchSeqMax>(
              idx_ranges.template get<Patches>(),
              idx_range_slices_x.template get<Patches>(),
              idx_range_slices_y.template get<Patches>(),
              functions_and_derivs.template get<Patches>(),
              evaluator_g,
-             get_const_field(function_g_coef)),
+             get_const_field(function_g_coef),
+             std::get<CoordTransform<Xg, Yg, typename Patches::Dim1, typename Patches::Dim2>>(
+                     coord_transforms)),
      ...);
 };

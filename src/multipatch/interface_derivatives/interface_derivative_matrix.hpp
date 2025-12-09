@@ -26,17 +26,18 @@ template <
         ddc::BoundCond LowerBound,
         ddc::BoundCond UpperBound,
         class DerivativesCalculatorCollection>
-class InterfaceDerivativeMatrix;
+class InterfaceExactDerivativeMatrix;
 
 /**
   * @brief Class to compute the interface derivatives along a given direction 
   * on all the interfaces.  
   * 
   * This operator is implemented for conforming equivalent global meshes. 
+  * It uses the exact formula. 
   * 
   * During the instantiation of the class, the matrix (I-M) is computed are stored in the class. 
   * When we call the operator .solve_deriv() or .solve_cross_deriv(): 
-  *     - InterfaceDerivativeMatrix computes the vector C from the given values. 
+  *     - InterfaceExactDerivativeMatrix computes the vector C from the given values. 
   *     - It inverses the matrix system: (I-M)S = C. 
   *     - The interface derivatives are stored in the vector S. 
   *     - It updates the given derivatives field with the values of the vector S. 
@@ -56,7 +57,7 @@ template <
         ddc::BoundCond LowerBound,
         ddc::BoundCond UpperBound,
         class DerivativesCalculatorCollection>
-class InterfaceDerivativeMatrix<
+class InterfaceExactDerivativeMatrix<
         Connectivity,
         Grid1D,
         ddc::detail::TypeSeq<Patches...>,
@@ -91,7 +92,7 @@ class InterfaceDerivativeMatrix<
 
     /*
         Remove all the interfaces with an OutsideEdge.
-        Rely on the fact that get_all_interfaces_along_direction_t orders the interfaces.
+        Rely on get_all_interfaces_along_direction_t to order the interfaces.
     */
     using outer_interface_collection = std::conditional_t<
             is_periodic,
@@ -106,7 +107,7 @@ class InterfaceDerivativeMatrix<
     using inner_interface_collection
             = ddc::type_seq_remove_t<interface_sorted_collection, outer_interface_collection>;
 
-    // Number of inner interfaces. It fixes the number of element in the matrix and vectors.
+    // Number of inner interfaces. It fixes the number of elements in the matrix and vectors.
     static constexpr std::size_t n_inner_interfaces
             = ddc::type_seq_size_v<inner_interface_collection>;
 
@@ -175,13 +176,14 @@ private:
 
     DerivativesCalculatorCollection const& m_derivatives_calculators;
 
+    // Vector containing the signs of the derivatives along the parallel direction of the interfaces.
     std::array<int, ddc::type_seq_size_v<Grid1DSeq>> m_vector_par_signs;
 
 public:
-    ~InterfaceDerivativeMatrix() {}
+    ~InterfaceExactDerivativeMatrix() {}
 
     /**
-     * @brief Instantiate InterfaceDerivativeMatrix. 
+     * @brief Instantiate InterfaceExactDerivativeMatrix. 
      * 
      * It creates a dense Gingko matrix, a vector for the rhs and a vector for the solution. 
      * The matrix is initialised with the derivatives calculator collection given in input. 
@@ -192,7 +194,7 @@ public:
      * @param reduction_factor Reduction factor for a Gingko dense matrix with a conjugate gradient solver 
      *          and a Jacobi preconditioner. 
      */
-    InterfaceDerivativeMatrix(
+    InterfaceExactDerivativeMatrix(
             MultipatchType<IdxRangeOnPatch, Patches...> const& idx_ranges,
             DerivativesCalculatorCollection const& derivatives_calculators,
             double const& reduction_factor = 1e-6)
@@ -257,6 +259,7 @@ public:
      * 
      * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives 
      *              we want to compute.
+     * @warning The global mesh is supposed to be conforming. 
      */
     void solve_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
@@ -303,6 +306,7 @@ public:
      * It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces. 
      *
      * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
+     * @warning The global mesh is supposed to be conforming. 
      */
     void solve_cross_deriv(MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs)
     {
@@ -332,7 +336,7 @@ private:
                 (std::is_same_v<IdxPar, typename FirstPatch::Idx1>)
                         || (std::is_same_v<IdxPar, typename FirstPatch::Idx2>),
                 "The given index has to be a 1D index defined on the first patch. See "
-                "InterfaceDerivativeMatrix<...>::first_patch.");
+                "InterfaceExactDerivativeMatrix<...>::first_patch.");
 
         // Update m_vector.
         set_vector<eval_type>(
@@ -387,6 +391,7 @@ private:
             }
         }
 
+        // Add coefficients for the periodic case.
         if constexpr (is_periodic && I == 0) {
             m_matrix->at(I, n_inner_interfaces - 1) = coefs[0];
         }
@@ -431,12 +436,15 @@ private:
         using GridPerp1 = typename EquivalentInterfaceI::Edge1::perpendicular_grid;
         using GridPerp2 = typename EquivalentInterfaceI::Edge2::perpendicular_grid;
 
+        // If the perpendicular grids are agree on one dimension (first or second).
         constexpr bool is_same_dimension
                 = ((std::is_same_v<GridPerp1, typename Patch_1::Grid1>)
                    == (std::is_same_v<GridPerp2, typename Patch_2::Grid1>));
 
+        // If the perpendicular grids agree on the direction.
         constexpr bool are_same_direction_perp = (extremity_1 != extremity_2);
 
+        // If we need to change the sign compared to the previous interface.
         constexpr bool change_sign = (are_same_direction_perp == is_same_dimension);
 
         const int previous_sign = m_vector_par_signs[I];
@@ -452,12 +460,14 @@ private:
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             std::integer_sequence<std::size_t, I...>)
     {
+        // Check we start the loop with the first patch.
         static_assert(
                 (std::is_same_v<GridPar1D, typename FirstPatch::Grid1>)
                 || (std::is_same_v<GridPar1D, typename FirstPatch::Grid2>)
                 || (std::is_same_v<GridPar1D, ddc::Deriv<typename FirstPatch::Dim1>>)
                 || (std::is_same_v<GridPar1D, ddc::Deriv<typename FirstPatch::Dim2>>));
 
+        // Locally transform the index into an integer to avoid type issues.
         IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<FirstPatch>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
         (set_line_vector<I, eval_type>(slice_idx_value, functions_and_derivs), ...);
@@ -494,6 +504,7 @@ private:
         using DerivPerp1 = typename ddc::Deriv<typename GridPerp1::continuous_dimension_type>;
         using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
+        // Type for the slice_previous_idx_value index.
         using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         auto [idx_slice_1, idx_slice_2]
                 = get_slice_indexes<EquivalentInterfaceI, PatchSliceIdx>(slice_previous_idx_value);
@@ -523,7 +534,7 @@ private:
 
         m_vector->get_values()[I] = sign * lin_comb_funct;
 
-        // Add the boundary derivatives for global Hermite boundary conditions.
+        // Add the boundary derivatives for global Hermite boundary conditions. ------------------
         constexpr bool is_lower_bound_deriv_dependent
                 = (LowerBound == ddc::BoundCond::HERMITE && I == 0);
         constexpr bool is_upper_bound_deriv_dependent
@@ -552,6 +563,7 @@ private:
             Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
             Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
 
+            // If the directions of the two perpendicular grids desagree, we will change the sign.
             constexpr bool are_same_direction_perp = (extremity_1 != extremity_2);
             constexpr int sign_deriv_perp_2 = are_same_direction_perp - !are_same_direction_perp;
 
@@ -610,6 +622,7 @@ private:
         using Patch_1 = typename EquivalentInterfaceI::Edge1::associated_patch;
         using Patch_2 = typename EquivalentInterfaceI::Edge2::associated_patch;
 
+        // Type for the slice_previous_idx_value index.
         using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         auto [idx_slice_1, idx_slice_2]
                 = get_slice_indexes<EquivalentInterfaceI, PatchSliceIdx>(slice_previous_idx_value);
@@ -683,7 +696,7 @@ private:
         */
         m_vector->get_values()[I] = sign * sign_deriv_par_1 * lin_comb_funct;
 
-        // Add the boundary derivatives for global Hermite boundary conditions.
+        // Add the boundary derivatives for global Hermite boundary conditions. ------------------
         constexpr bool is_lower_bound_deriv_dependent
                 = (LowerBound == ddc::BoundCond::HERMITE && I == 0);
         constexpr bool is_upper_bound_deriv_dependent
@@ -699,9 +712,6 @@ private:
             using Deriv2_1 = ddc::Deriv<typename Patch_1::Dim2>;
             using Deriv1_2 = ddc::Deriv<typename Patch_2::Dim1>;
             using Deriv2_2 = ddc::Deriv<typename Patch_2::Dim2>;
-
-            constexpr bool is_grid_par_1_on_dim1 = std::is_same_v<GridPar1, Grid1_1>;
-            constexpr bool is_grid_par_2_on_dim1 = std::is_same_v<GridPar2, Grid1_2>;
 
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
@@ -722,20 +732,8 @@ private:
             Idx<GridPerp2> idx_deriv_perp_2
                     = get_idx_other_interface(idx_range_slice_dperp_2, extremity_2);
 
-
-            Idx<Grid1_1, Grid2_1> idx_d1d2_1;
-            if constexpr (is_grid_par_1_on_dim1) {
-                idx_d1d2_1 = Idx<Grid1_1, Grid2_1>(idx_deriv_par_1, idx_deriv_perp_1);
-            } else {
-                idx_d1d2_1 = Idx<Grid1_1, Grid2_1>(idx_deriv_perp_1, idx_deriv_par_1);
-            }
-
-            Idx<Grid1_2, Grid2_2> idx_d1d2_2;
-            if constexpr (is_grid_par_2_on_dim1) {
-                idx_d1d2_2 = Idx<Grid1_2, Grid2_2>(idx_deriv_par_2, idx_deriv_perp_2);
-            } else {
-                idx_d1d2_2 = Idx<Grid1_2, Grid2_2>(idx_deriv_perp_2, idx_deriv_par_2);
-            }
+            Idx<Grid1_1, Grid2_1> idx_d1d2_1(idx_deriv_par_1, idx_deriv_perp_1);
+            Idx<Grid1_2, Grid2_2> idx_d1d2_2(idx_deriv_par_2, idx_deriv_perp_2);
 
             Idx<Grid1_1> idx_d1_1(idx_d1d2_1);
             Idx<Grid2_1> idx_d2_1(idx_d1d2_1);
@@ -812,6 +810,7 @@ private:
                 || (std::is_same_v<GridPar1D, ddc::Deriv<typename FirstPatch::Dim1>>)
                 || (std::is_same_v<GridPar1D, ddc::Deriv<typename FirstPatch::Dim2>>));
 
+        // Locally transform the index into an integer to avoid type issues.
         IdxRange<GridPar1D> idx_range_1d_first_patch(m_idx_ranges.template get<FirstPatch>());
         int slice_idx_value = (slice_idx - idx_range_1d_first_patch.front()).value();
         (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, slice_idx_value), ...);
@@ -879,11 +878,12 @@ private:
         Idx<DerivPerp1, GridPerp1> idx_slice_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1);
         Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
 
+        // Type for the slice_previous_idx_value index.
         using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         auto [idx_slice_1, idx_slice_2]
                 = get_slice_indexes<EquivalentInterfaceI, PatchSliceIdx>(slice_previous_idx_value);
 
-        // Select the correct data and update.
+        // Select the correct data to update.
         DField<IdxRange<GridPar1>, Kokkos::HostSpace, Kokkos::layout_stride> deriv_1
                 = function_and_derivs_1[idx_slice_deriv_1];
         DField<IdxRange<GridPar2>, Kokkos::HostSpace, Kokkos::layout_stride> deriv_2
@@ -917,6 +917,7 @@ private:
             int& slice_previous_idx_value)
     {
         using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
+        // Equivalent interface defined in the main file, i.e. given to MultipatchConnectivity.
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
@@ -983,6 +984,7 @@ private:
         IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
 
+        // Type for the slice_previous_idx_value index.
         using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         auto [idx_slice_1, idx_slice_2]
                 = get_slice_indexes<EquivalentInterfaceI, PatchSliceIdx>(slice_previous_idx_value);
@@ -993,7 +995,6 @@ private:
 
         const bool is_idx_par_min_1 = (idx_slice_1 == idx_range_par_1.front());
         const bool is_idx_par_min_2 = (idx_slice_2 == idx_range_par_2.front());
-
 
         // If Patch1 follows the orientation of the sorted 1D grid sequence.
         constexpr bool is_per_1_well_oriented

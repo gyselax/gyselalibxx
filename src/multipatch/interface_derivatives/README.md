@@ -21,8 +21,8 @@ the boundary cells.
 - [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `SingleInterfaceDerivativesCalculator` operator.
   - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
-- [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfaceDerivativeMatrix` operator.
-  - [How to use the `InterfaceDerivativeMatrix` operator?](#how-to-use-the-interfacederivativematrix-operator): It documents how to use the operator in the code.
+- [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfaceExactDerivativeMatrix` operator.
+  - [How to use the `InterfaceExactDerivativeMatrix` operator?](#how-to-use-the-InterfaceExactDerivativeMatrix-operator): It documents how to use the operator in the code.
 
 ## Relation between derivatives on the boundaries of two connected patches
 
@@ -99,11 +99,14 @@ SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_r
 
 ```cpp
 // If we want to apply the treatment on Patch 1 and Patch 2
-SingleInterfaceDerivativesCalculator<Interface_12, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+SingleInterfaceDerivativesCalculator<Interface_12> 
+    derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE);
 // or if we want to apply the treatment only on Patch 1
-SingleInterfaceDerivativesCalculator<Interface_12, ddc::BoundCond::GREVILLE, ddc::BoundCond::HERMITE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+SingleInterfaceDerivativesCalculator<Interface_12> 
+    derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::BoundCond::GREVILLE, ddc::BoundCond::HERMITE);
 // or if we want to apply the treatment only on Patch 2
-SingleInterfaceDerivativesCalculator<Interface_12, ddc::BoundCond::HERMITE, ddc::BoundCond::GREVILLE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+SingleInterfaceDerivativesCalculator<Interface_12> 
+    derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::BoundCond::HERMITE, ddc::BoundCond::GREVILLE);
 ```
 
 > If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
@@ -115,6 +118,8 @@ The coefficients can be collected with the following functions:
 - `derivatives_calculator.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
 - `derivatives_calculator.get_function_coefficients(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
  (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
+- `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case. This class is also used for 2D cases where we need to compute the corner cross-derivatives. We apply the same method 
+as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree. 
 
 If we want to apply the exact formula, we need to sum these coefficients,
 
@@ -159,23 +164,23 @@ with the *local coefficients* given by
 \left\{
 \begin{aligned}
     & \gamma_i =
-    \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}}
+    \frac{3}{2} \frac{1}{\Delta x^R_{i} +\Delta x^L_{i}}
     \left[
-        \frac{\Delta x^-_{i}}{\Delta x^+_{i}}  f^+_{i+1}
+        \frac{\Delta x^L_{i}}{\Delta x^R_{i}}  f^R_{i+1}
         + \left(
-            \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
-            - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
-        \right) f^+_{i}
-        - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}  f^-_{i-1}
+            \frac{\Delta x^R_{i}}{\Delta x^L_{i}}
+            - \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
+        \right) f^R_{i}
+        - \frac{\Delta x^R_{i}}{\Delta x^L_{i}}  f^L_{i-1}
     \right],
     \\
-    & \alpha_i = -\frac{1}{2} \frac{\Delta x^-_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}, \\
-    & \beta_i =  -\frac{1}{2} \frac{\Delta x^+_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}.
+    & \alpha_i = -\frac{1}{2} \frac{\Delta x^L_{i}}{\Delta x^R_{i} +\Delta x^L_{i}}, \\
+    & \beta_i =  -\frac{1}{2} \frac{\Delta x^R_{i}}{\Delta x^R_{i} +\Delta x^L_{i}}.
 \end{aligned}
 \right.
 ```
 
-and $`\Delta x^+_{i} = x^+_{i+1} -  x^+_{i} \text{, } \Delta x^-_{i} = x^-_{i} -  x^-_{i-1}`$,
+and $`\Delta x^R_{i} = x^R_{i+1} -  x^R_{i} \text{, } \Delta x^L_{i} = x^L_{i} -  x^L_{i-1}`$,
 and $`\{f^{+/-}_{i+k}\}_k`$ the function values at the interpolation points on patch 1 (+) and
 patch 2 (-).
 
@@ -186,14 +191,14 @@ as they depend only on the grids. For the same reason, we store $`\gamma_i`$ as 
 ```math
 {\bf \Gamma_i}
     = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right]
-    = \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}}
+    = \frac{3}{2} \frac{1}{\Delta x^R_{i} +\Delta x^L_{i}}
         \left[
-            - \frac{\Delta x^+_{i}}{\Delta x^-_{i}},
+            - \frac{\Delta x^R_{i}}{\Delta x^L_{i}},
             \left(
-                \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
-                - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+                \frac{\Delta x^R_{i}}{\Delta x^L_{i}}
+                - \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
             \right),
-            \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+            \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
         \right].
 ```
 
@@ -361,9 +366,9 @@ of the second part of the recursion need to use these modified local coefficient
     & \gamma_i^{*,-} = \frac{1}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}
         \left[
             \gamma_i
-            + \beta_i \frac{1}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{*})
-            - \beta_i \frac{H_0^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i-1})
-            - \beta_i \frac{H_1^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i})
+            + \beta_i \frac{1}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{*})
+            - \beta_i \frac{H_0^{*,-}}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{i-1})
+            - \beta_i \frac{H_1^{*,-}}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{i})
         \right],
     \\
     & \alpha_i^{*,-} = \frac{\alpha_i}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}, \\
@@ -385,8 +390,8 @@ with
 ```
 
 with $`H_0^{*,-} \text{, } H_1^{*,-} \text{, } K_0^{*,-} \text{ and } K_1^{*,-}`$ the evaluations of
-$`H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1`$ at $`\frac{x^-_{*} - x^-_{i-1}}{\Delta x^-_{i}}`$,
-with $`x^-_{*}`$ the additional interpolation point.
+$`H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1`$ at $`\frac{x^L_{*} - x^L_{i-1}}{\Delta x^L_{i}}`$,
+with $`x^L_{*}`$ the additional interpolation point.
 
 If there is an additional interpolation point in the right boundary cell, then the last step
 of the first part of the recursion need to use these modified local coefficients,
@@ -397,9 +402,9 @@ of the first part of the recursion need to use these modified local coefficients
     & \gamma_i^{*,+} = \frac{1}{1 + \alpha_i \frac{K_0^{*,+}}{K_1^{*,+}}}
         \left[
             \gamma_i
-            + \alpha_i \frac{1}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{*})
-            - \alpha_i \frac{H_0^{*,+}}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{i})
-            - \alpha_i \frac{H_1^{*,+}}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{i+1})
+            + \alpha_i \frac{1}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{*})
+            - \alpha_i \frac{H_0^{*,+}}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{i})
+            - \alpha_i \frac{H_1^{*,+}}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{i+1})
         \right],
     \\
     & \alpha_i^{*,+} = 0, \\
@@ -409,13 +414,13 @@ of the first part of the recursion need to use these modified local coefficients
 ```
 
 and $`H_0^{*,+} \text{, } H_1^{*,+} \text{, } K_0^{*,+} \text{ and } K_1^{*,+}`$ the evaluations of
-$`H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1`$ at $`\frac{x^+_{*} - x^+_{i}}{\Delta x^+_{i}}`$,
-with $`x^+_{*}`$ the additional interpolation point.
+$`H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1`$ at $`\frac{x^R_{*} - x^R_{i}}{\Delta x^R_{i}}`$,
+with $`x^R_{*}`$ the additional interpolation point.
 
 #### Explicit formula
 
 If the **interpolation points are uniform**
-($`\Delta x^-_{i} = \Delta x^-  \text{ and } \Delta x^+_{i} = \Delta x^+ \text{, } \forall i`$),
+($`\Delta x^L_{i} = \Delta x^L  \text{ and } \Delta x^R_{i} = \Delta x^R \text{, } \forall i`$),
 then the recursion formula is equivalent to the following explicit formula.
 
 To lighten the notation, we note $`n_1 = N^L`$ and $`n_2 = N^R`$.
@@ -445,31 +450,31 @@ with the weights given by,
 \left\{
 \begin{aligned}
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k}
-        \frac{\frac{a^I_{1,1}}{\Delta x^+} u_{n_1}u_{1}}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R} u_{n_1}u_{1}}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = n_2, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k}
-        \frac{\frac{a^I_{1,1}}{\Delta x^+} u_{n_1}(u_{n_2-k+1} - u_{n_2-k-1})}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R} u_{n_1}(u_{n_2-k+1} - u_{n_2-k-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = 1, ..., n_2-1, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^k
-        \frac{\frac{a^I_{1,1}}{\Delta x^+}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^-}u_{n_2}(u_{n_1} - u_{n_1-1})}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^L}u_{n_2}(u_{n_1} - u_{n_1-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = 0, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
-        \frac{\frac{b^I_{1,1}}{\Delta x^-} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
+        \frac{\frac{b^I_{1,1}}{\Delta x^L} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = -(n_1-1), ..., -1, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
-        \frac{\frac{b^I_{1,1}}{\Delta x^-} u_{n_2}u_{1}}
+        \frac{\frac{b^I_{1,1}}{\Delta x^L} u_{n_2}u_{1}}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = -n_1,
 \end{aligned}
 \right.
 ```
 
-and $`a^I_{1,1} = -\frac{1}{2} \frac{\Delta x^-}{\Delta x^+ +\Delta x^-}`$
-and $`b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^+}{\Delta x^+ +\Delta x^-}`$.
+and $`a^I_{1,1} = -\frac{1}{2} \frac{\Delta x^L}{\Delta x^R +\Delta x^L}`$
+and $`b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^R}{\Delta x^R +\Delta x^L}`$.
 
 ## Relation between the interface derivatives along one direction
 
@@ -559,24 +564,24 @@ We simply refer it as
 \end{bmatrix}.
 ```
 
-### How to use the InterfaceDerivativeMatrix operator?
+### How to use the InterfaceExactDerivativeMatrix operator?
 
 First, for each interface in the geometry, we instantiate a `SingleInterfaceDerivatorCalculator`
 (see [How to use the SingleInterfaceDerivatorCalculator operator?](#how-to-use-the-singleinterfacederivativescalculator-operator)).
 We store a constant reference of all the derivative calculator in a `SingleInterfaceDerivatorCalculatorCollection`.
 
 ```cpp
-SingleInterfaceDerivatorCalculator<Interface_1, BoundCond1_1, BoundCond1_2> derivative_calculator_1(...);
-SingleInterfaceDerivatorCalculator<Interface_2, BoundCond2_1, BoundCond2_2> derivative_calculator_2(...);
+SingleInterfaceDerivatorCalculator<Interface_1> derivative_calculator_1(...);
+SingleInterfaceDerivatorCalculator<Interface_2> derivative_calculator_2(...);
 ...
 
 SingleInterfaceDerivatorCalculatorCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
 ```
 
-We can then instantiate `InterfaceDerivativeMatrix` with the tuple of derivative calculator.
+We can then instantiate `InterfaceExactDerivativeMatrix` with the tuple of derivative calculator.
 
 ```cpp
-InterfaceDerivativeMatrix<
+InterfaceExactDerivativeMatrix<
         Connectivity,                               // MultipatchConnectivity class
         Grid1D,                                     // the given direction.
         ddc::detail::TypeSeq<Patch1, Patch2, ...>   // list of patches containing all the needed ones
@@ -588,7 +593,7 @@ InterfaceDerivativeMatrix<
 
 with `idx_ranges` a `MultipatchType<IdxRangeonPatch, Patch1, Patch2, ...>` object.
 
-During the instantiation, `InterfaceDerivativeMatrix` will allocate memory for the matrix $`(\mathbb{I} - M)`$,
+During the instantiation, `InterfaceExactDerivativeMatrix` will allocate memory for the matrix $`(\mathbb{I} - M)`$,
 for the right hand side vector *C* and for the solution vector *S*.
 It also computes the matrix and stores it.
 
@@ -620,17 +625,17 @@ This geometry is composed of 9 patches forming periodic strips in the *x* direct
 We use additional interpolation points as closure condition for the equivalent global splines in
 the *y* direction (i.e. `ddc::BoundCond::GREVILLE`).
 
-So, we start by defining the `InterfaceDerivativeMatrix` matrices for each periodic directions
+So, we start by defining the `InterfaceExactDerivativeMatrix` matrices for each periodic directions
 $`\vec{x_1}, \vec{x_4}, \text{ and } \vec{x_7}`$ (`GridX1`, `GridX4` and `GridX7`).
 
 ```cpp
-InterfaceDerivativeMatrix<Connectivity, GridX1, 
+InterfaceExactDerivativeMatrix<Connectivity, GridX1, 
         ddc::detail::TypeSeq<Patch1, Patch2, Patch3>, 
         ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
         SingleInterfaceDerivatorCalculatorCollection<Interface_1_2, Interface_2_3, Interface_3_1>>
         matrix_123(idx_ranges_123, derivative_calculators_123);
 
-InterfaceDerivativeMatrix<Connectivity, GridX4, 
+InterfaceExactDerivativeMatrix<Connectivity, GridX4, 
         ddc::detail::TypeSeq<Patch4, Patch5, Patch6>,
         ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC,
         SingleInterfaceDerivatorCalculatorCollection<Interface_4_5, Interface_5_6, Interface_6_4>>
@@ -638,17 +643,17 @@ InterfaceDerivativeMatrix<Connectivity, GridX4,
 // ...
 ```
 
-We also define `InterfaceDerivativeMatrix` matrices for each non-periodic directions
+We also define `InterfaceExactDerivativeMatrix` matrices for each non-periodic directions
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$ (`GridY1`, `GridY2` and `GridY3`).
 
 ```cpp
-InterfaceDerivativeMatrix<Connectivity, GridY1, 
+InterfaceExactDerivativeMatrix<Connectivity, GridY1, 
         ddc::detail::TypeSeq<Patch1, Patch4, Patch7>,
         ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
         SingleInterfaceDerivatorCalculatorCollection<Interface_1_4, Interface_4_7>>
         matrix_147(idx_ranges_147, derivative_calculators_147);
 
-InterfaceDerivativeMatrix<Connectivity, GridY2, 
+InterfaceExactDerivativeMatrix<Connectivity, GridY2, 
         ddc::detail::TypeSeq<Patch2, Patch5, Patch8>,
         ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE,
         SingleInterfaceDerivatorCalculatorCollection<Interface_2_5, Interface_5_8>>
@@ -707,5 +712,5 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
-Journal of Scientific Computing, (2025) [SUBMITTED - NOT PUBLISHED].
+Journal of Scientific Computing, (2025) [ACCEPTED].
 Available on arXiv: [https://arxiv.org/abs/2505.22078](https://arxiv.org/abs/2505.22078)
