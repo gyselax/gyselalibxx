@@ -90,6 +90,13 @@ metadata:
   vpar: vpar_double
   mu: mu_double
 
+  # -- Timing statistics
+  timing_names_count: size_t
+  timing_names_strlen: size_t
+  timing_names: { type: array, subtype: char, size: [ '$timing_names_count', '$timing_names_strlen' ] }
+  timing_values_size: size_t
+  timing_values: { type: array, subtype: double, size: [ '$timing_values_size' ] }
+
 data:
   #-- Distribution function
   fdistribu_sptor3Dv2D:
@@ -176,6 +183,14 @@ plugins:
               size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]', '$local_fdistribu_extents[5]' ]
               start: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]', '$local_fdistribu_starts[5]' ]
 
+    #-- Write timing (as table: names and values arrays)
+    - file: 'cpu_time.h5'
+      on_event: [write_timing]
+      collision_policy: replace_and_warn
+      write:
+        timing_names: ~
+        timing_values: ~
+        
     #-- Write distribution function and coordinates
     - file: 'fdistribu_5D_output.h5'
       on_event: [write_fdistribu]

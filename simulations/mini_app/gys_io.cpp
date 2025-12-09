@@ -1,8 +1,10 @@
 // SPDX-License-Identifier: MIT
+#include <algorithm>
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
 #include <string>
+#include <vector>
 #include <mpi.h>
 
 #include <ddc/ddc.hpp>
@@ -222,6 +224,44 @@ void write_fdistribu(
     }
 }
 
+void write_cpu_time_stats(
+        int rank,
+        double const* durations,
+        std::vector<std::string> const& names,
+        std::size_t num_entries)
+{
+    if (rank != 0) {
+        return;
+    }
+
+    // Validate input
+    std::size_t num_names = names.size();
+    if (num_names != num_entries) {
+        throw std::runtime_error("Number of names must match number of durations");
+    }
+
+    // Convert names to 2D char array [num_entries][max_str_len]
+    std::size_t max_str_len = 0;
+    for (auto const& name : names) {
+        max_str_len = std::max(max_str_len, name.size());
+    }
+    max_str_len += 1; // null terminator
+    
+    std::vector<char> timing_names_2d(num_entries * max_str_len, '\0');
+    for (std::size_t i = 0; i < num_names; ++i) {
+        std::copy(names[i].begin(), names[i].end(), 
+                  timing_names_2d.begin() + i * max_str_len);
+    }
+
+    // Expose timing data (sizes as scalars, arrays via PDI_expose)
+    ddc::expose_to_pdi("timing_values_size", num_entries);
+    ddc::expose_to_pdi("timing_names_count", num_entries);
+    ddc::expose_to_pdi("timing_names_strlen", max_str_len);
+    PDI_expose("timing_values", durations, PDI_OUT);
+    PDI_expose("timing_names", timing_names_2d.data(), PDI_OUT);
+    ddc::PdiEvent("write_timing");
+}
+
 } // namespace
 
 int main(int argc, char** argv)
@@ -297,6 +337,16 @@ int main(int argc, char** argv)
         cout << "Time gpu2cpu: " << durations[2] << "s" << endl;
         cout << "Time write: " << durations[3] << "s" << endl;
         cout << "Time total: " << durations[4] << "s" << endl;
+
+        // Use the new function to write timing stats as a table
+        std::vector<std::string> timing_names = {
+            "initialization",
+            "transpose",
+            "gpu2cpu",
+            "write",
+            "total"
+        };
+        write_cpu_time_stats(rank, durations, timing_names, timing_names.size());
     }
     PDI_finalize();
     MPI_Finalize();
