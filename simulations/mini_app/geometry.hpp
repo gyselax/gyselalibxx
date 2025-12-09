@@ -13,7 +13,7 @@
 /**
  * @brief Minimal geometry definitions for 5D distribution function
  * This is a minimal version for the mini_app that only defines the necessary types
- * to initialize and read a 5D distribution function (species, tor1, tor2, tor3, vpar, mu)
+ * to initialise and read a 5D distribution function (species, tor1, tor2, tor3, vpar, mu)
  */
 
 // Toroidal coordinate dimensions
