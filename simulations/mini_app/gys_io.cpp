@@ -1,11 +1,12 @@
 // SPDX-License-Identifier: MIT
+#include <mpi.h>
+
 #include <algorithm>
 #include <cstdint>
 #include <iostream>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <mpi.h>
 
 #include <ddc/ddc.hpp>
 
@@ -16,12 +17,12 @@
 #include "geometry.hpp"
 #include "input.hpp"
 #include "mesh_builder.hpp"
+#include "mpitransposealltoall.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
-#include "pdi_helper.hpp"
 #include "pdi_default.yml.hpp"
+#include "pdi_helper.hpp"
 #include "species_init.hpp"
-#include "mpitransposealltoall.hpp"
 #include "transpose.hpp"
 // #include "maxwellianequilibrium.hpp"
 
@@ -40,7 +41,7 @@ struct ConfigHandles
 
 ConfigHandles parse_config_files(int argc, char** argv)
 {
-    ConfigHandles configs{};
+    ConfigHandles configs {};
     if (argc > 1) {
         configs.conf_gyselax = PC_parse_path(argv[1]);
     } else {
@@ -103,26 +104,26 @@ MeshInitialisationResult initialise_mesh(int rank, PC_tree_t conf_gyselax)
         cout << "Number of kinetic species: " << idx_range_sp.size() << endl;
     }
 
-    IdxRange<GridTor1> const idx_range_tor1
-            = init_spline_dependent_idx_range<GridTor1, BSplinesTor1, SplineInterpPointsTor1>(
-                    conf_gyselax,
-                    "Tor1");
-    IdxRange<GridTor2> const idx_range_tor2
-            = init_spline_dependent_idx_range<GridTor2, BSplinesTor2, SplineInterpPointsTor2>(
-                    conf_gyselax,
-                    "Tor2");
-    IdxRange<GridTor3> const idx_range_tor3
-            = init_spline_dependent_idx_range<GridTor3, BSplinesTor3, SplineInterpPointsTor3>(
-                    conf_gyselax,
-                    "Tor3");
-    IdxRange<GridVpar> const idx_range_vpar
-            = init_spline_dependent_idx_range<GridVpar, BSplinesVpar, SplineInterpPointsVpar>(
-                    conf_gyselax,
-                    "Vpar");
-    IdxRange<GridMu> const idx_range_mu
-            = init_spline_dependent_idx_range<GridMu, BSplinesMu, SplineInterpPointsMu>(
-                    conf_gyselax,
-                    "Mu");
+    IdxRange<GridTor1> const idx_range_tor1 = init_spline_dependent_idx_range<
+            GridTor1,
+            BSplinesTor1,
+            SplineInterpPointsTor1>(conf_gyselax, "Tor1");
+    IdxRange<GridTor2> const idx_range_tor2 = init_spline_dependent_idx_range<
+            GridTor2,
+            BSplinesTor2,
+            SplineInterpPointsTor2>(conf_gyselax, "Tor2");
+    IdxRange<GridTor3> const idx_range_tor3 = init_spline_dependent_idx_range<
+            GridTor3,
+            BSplinesTor3,
+            SplineInterpPointsTor3>(conf_gyselax, "Tor3");
+    IdxRange<GridVpar> const idx_range_vpar = init_spline_dependent_idx_range<
+            GridVpar,
+            BSplinesVpar,
+            SplineInterpPointsVpar>(conf_gyselax, "Vpar");
+    IdxRange<GridMu> const idx_range_mu = init_spline_dependent_idx_range<
+            GridMu,
+            BSplinesMu,
+            SplineInterpPointsMu>(conf_gyselax, "Mu");
 
     if (rank == 0) {
         cout << "Grid sizes:" << endl;
@@ -133,15 +134,21 @@ MeshInitialisationResult initialise_mesh(int rank, PC_tree_t conf_gyselax)
         cout << "  mu: " << idx_range_mu.size() << endl;
     }
 
-    MeshInitialisationResult result{
-            idx_range_sp,
-            IdxRangeSpGrid(idx_range_sp, idx_range_tor1, idx_range_tor2, idx_range_tor3, idx_range_vpar, idx_range_mu),
-            IdxRangeSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu),
-            idx_range_tor1,
-            idx_range_tor2,
-            idx_range_tor3,
-            idx_range_vpar,
-            idx_range_mu};
+    MeshInitialisationResult
+            result {idx_range_sp,
+                    IdxRangeSpGrid(
+                            idx_range_sp,
+                            idx_range_tor1,
+                            idx_range_tor2,
+                            idx_range_tor3,
+                            idx_range_vpar,
+                            idx_range_mu),
+                    IdxRangeSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu),
+                    idx_range_tor1,
+                    idx_range_tor2,
+                    idx_range_tor3,
+                    idx_range_vpar,
+                    idx_range_mu};
     return result;
 }
 
@@ -162,9 +169,9 @@ void init_distribution_fun(
             KOKKOS_LAMBDA(IdxSpVparMu const ispvparmu) {
                 CoordVpar const vpar = ddc::coordinate(ddc::select<GridVpar>(ispvparmu));
                 double const vpar_value = static_cast<double>(vpar);
-                allfequilibrium_field(ispvparmu)
-                        = Kokkos::exp(-(vpar_value - mean_velocity) * (vpar_value - mean_velocity)
-                                      / (2. * temperature));
+                allfequilibrium_field(ispvparmu) = Kokkos::exp(
+                        -(vpar_value - mean_velocity) * (vpar_value - mean_velocity)
+                        / (2. * temperature));
             });
 
     ddc::parallel_for_each(
@@ -216,8 +223,7 @@ void write_fdistribu(
     expose_mesh_to_pdi("mu", mesh.idx_range_mu);
 
     // Expose distribution function to PDI and trigger write event
-    ddc::PdiEvent("write_fdistribu")
-            .with("fdistribu_sptor3Dv2D", allfdistribu_host);
+    ddc::PdiEvent("write_fdistribu").with("fdistribu_sptor3Dv2D", allfdistribu_host);
 
     if (rank == 0) {
         cout << "5D distribution function and coordinates written successfully." << endl;
@@ -246,11 +252,10 @@ void write_cpu_time_stats(
         max_str_len = std::max(max_str_len, name.size());
     }
     max_str_len += 1; // null terminator
-    
+
     std::vector<char> timing_names_2d(num_entries * max_str_len, '\0');
     for (std::size_t i = 0; i < num_names; ++i) {
-        std::copy(names[i].begin(), names[i].end(), 
-                  timing_names_2d.begin() + i * max_str_len);
+        std::copy(names[i].begin(), names[i].end(), timing_names_2d.begin() + i * max_str_len);
     }
 
     // Expose timing data (sizes as scalars, arrays via PDI_expose)
@@ -266,7 +271,6 @@ void write_cpu_time_stats(
 
 int main(int argc, char** argv)
 {
-
     /**************************************
     *   Main program: mini_app            *
     *  
@@ -301,7 +305,7 @@ int main(int argc, char** argv)
     DFieldMemSpGrid allfdistribu(meshGridSp);
     init_distribution_fun(allfdistribu, meshGridSpVparMu, meshGridSp);
     time_points[1] = steady_clock::now();
-    
+
     //---------------------------------------------------------
     // Read application version from YAML config
     //---------------------------------------------------------
@@ -329,7 +333,8 @@ int main(int argc, char** argv)
     if (rank == 0) {
         double durations[5];
         for (int i = 0; i < 4; i++) {
-            durations[i] = std::chrono::duration<double>(time_points[i+1] - time_points[i]).count();
+            durations[i]
+                    = std::chrono::duration<double>(time_points[i + 1] - time_points[i]).count();
         }
         durations[4] = std::chrono::duration<double>(time_points[4] - time_points[0]).count();
         cout << "Time initialisation: " << durations[0] << "s" << endl;
@@ -339,13 +344,8 @@ int main(int argc, char** argv)
         cout << "Time total: " << durations[4] << "s" << endl;
 
         // Use the new function to write timing stats as a table
-        std::vector<std::string> timing_names = {
-            "initialisation",
-            "transpose",
-            "gpu2cpu",
-            "write",
-            "total"
-        };
+        std::vector<std::string> timing_names
+                = {"initialisation", "transpose", "gpu2cpu", "write", "total"};
         write_cpu_time_stats(rank, durations, timing_names, timing_names.size());
     }
     PDI_finalize();
@@ -356,4 +356,3 @@ int main(int argc, char** argv)
 
     return EXIT_SUCCESS;
 }
-

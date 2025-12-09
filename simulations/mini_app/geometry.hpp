@@ -6,9 +6,9 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "mpilayout.hpp"
 #include "non_uniform_interpolation_points.hpp"
 #include "species_info.hpp"
-#include "mpilayout.hpp" 
 
 /**
  * @brief Minimal geometry definitions for 5D distribution function
@@ -87,7 +87,7 @@ struct BSplinesMu : ddc::UniformBSplines<Mu, BSDegreeMu>
 
 ddc::BoundCond constexpr SplineTor1Boundary = ddc::BoundCond::GREVILLE;
 ddc::BoundCond constexpr SplineTor2Boundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineTor3Boundary = ddc::BoundCond::PERIODIC; 
+ddc::BoundCond constexpr SplineTor3Boundary = ddc::BoundCond::PERIODIC;
 ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::HERMITE;
 ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::HERMITE;
 
@@ -103,11 +103,21 @@ using SplineInterpPointsMu
         = ddc::GrevilleInterpolationPoints<BSplinesMu, SplineMuBoundary, SplineMuBoundary>;
 
 
-struct GridTor1 : SplineInterpPointsTor1::interpolation_discrete_dimension_type{};
-struct GridTor2 : SplineInterpPointsTor2::interpolation_discrete_dimension_type{};
-struct GridTor3 : SplineInterpPointsTor3::interpolation_discrete_dimension_type{};
-struct GridVpar : SplineInterpPointsVpar::interpolation_discrete_dimension_type{};
-struct GridMu : SplineInterpPointsMu::interpolation_discrete_dimension_type{};
+struct GridTor1 : SplineInterpPointsTor1::interpolation_discrete_dimension_type
+{
+};
+struct GridTor2 : SplineInterpPointsTor2::interpolation_discrete_dimension_type
+{
+};
+struct GridTor3 : SplineInterpPointsTor3::interpolation_discrete_dimension_type
+{
+};
+struct GridVpar : SplineInterpPointsVpar::interpolation_discrete_dimension_type
+{
+};
+struct GridMu : SplineInterpPointsMu::interpolation_discrete_dimension_type
+{
+};
 
 // IdxRange definitions
 using IdxRangeTor1 = IdxRange<GridTor1>;
