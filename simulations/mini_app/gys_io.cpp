@@ -84,7 +84,7 @@ IdxRangeSp init_species_from_yaml(PC_tree_t conf_gyselax)
     return idx_range_sp;
 }
 
-struct MeshInitializationResult
+struct MeshInitialisationResult
 {
     IdxRangeSp idx_range_sp;
     IdxRangeSpGrid mesh_sp;
@@ -96,7 +96,7 @@ struct MeshInitializationResult
     IdxRange<GridMu> idx_range_mu;
 };
 
-MeshInitializationResult initialize_mesh(int rank, PC_tree_t conf_gyselax)
+MeshInitialisationResult initialise_mesh(int rank, PC_tree_t conf_gyselax)
 {
     IdxRangeSp const idx_range_sp = init_species_from_yaml(conf_gyselax);
     if (rank == 0) {
@@ -133,7 +133,7 @@ MeshInitializationResult initialize_mesh(int rank, PC_tree_t conf_gyselax)
         cout << "  mu: " << idx_range_mu.size() << endl;
     }
 
-    MeshInitializationResult result{
+    MeshInitialisationResult result{
             idx_range_sp,
             IdxRangeSpGrid(idx_range_sp, idx_range_tor1, idx_range_tor2, idx_range_tor3, idx_range_vpar, idx_range_mu),
             IdxRangeSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu),
@@ -153,8 +153,8 @@ void init_distribution_fun(
     double const mean_velocity = 1.0;
     double const temperature = 1.0;
     DFieldMemSpVparMu allfequilibrium(meshGridSpVparMu);
-    auto allfequilibrium_field = get_field(allfequilibrium);
-    auto allfdistribu_field = get_field(allfdistribu);
+    DFieldSpVparMu allfequilibrium_field = get_field(allfequilibrium);
+    DFieldSpGrid allfdistribu_field = get_field(allfdistribu);
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
@@ -181,7 +181,7 @@ void init_distribution_fun(
 
 void write_fdistribu(
         int rank,
-        MeshInitializationResult const& mesh,
+        MeshInitialisationResult const& mesh,
         host_t<DFieldMemSpGrid> const& allfdistribu_host)
 {
     if (rank == 0) {
@@ -280,17 +280,17 @@ int main(int argc, char** argv)
 
     print_banner(rank);
     //---------------------------------------------------------
-    // Read and initialize the configuration
+    // Read and initialise the configuration
     //---------------------------------------------------------
     if (rank == 0) {
-        cout << "Initializing 5D particle distribution function." << endl;
+        cout << "Initialising 5D particle distribution function." << endl;
     }
     ConfigHandles configs = parse_config_files(argc, argv);
     PDI_init(configs.conf_pdi);
     //---------------------------------------------------------
     // Initialisation of the mesh (sp, space, phase-space)
     //---------------------------------------------------------
-    MeshInitializationResult const mesh = initialize_mesh(rank, configs.conf_gyselax);
+    MeshInitialisationResult const mesh = initialise_mesh(rank, configs.conf_gyselax);
     IdxRangeSp const idx_range_sp = mesh.idx_range_sp;
     IdxRangeSpGrid const meshGridSp = mesh.mesh_sp;
     IdxRangeSpVparMu const meshGridSpVparMu = mesh.mesh_sp_vparmu;
@@ -324,7 +324,7 @@ int main(int argc, char** argv)
     write_fdistribu(rank, mesh, allfdistribu_host);
     time_points[4] = steady_clock::now();
     //---------------------------------------------------------
-    // Finalize PDI and MPI
+    // Finalise PDI and MPI
     //---------------------------------------------------------
     if (rank == 0) {
         double durations[5];
@@ -332,7 +332,7 @@ int main(int argc, char** argv)
             durations[i] = std::chrono::duration<double>(time_points[i+1] - time_points[i]).count();
         }
         durations[4] = std::chrono::duration<double>(time_points[4] - time_points[0]).count();
-        cout << "Time initialization: " << durations[0] << "s" << endl;
+        cout << "Time initialisation: " << durations[0] << "s" << endl;
         cout << "Time transpose: " << durations[1] << "s" << endl;
         cout << "Time gpu2cpu: " << durations[2] << "s" << endl;
         cout << "Time write: " << durations[3] << "s" << endl;
@@ -340,7 +340,7 @@ int main(int argc, char** argv)
 
         // Use the new function to write timing stats as a table
         std::vector<std::string> timing_names = {
-            "initialization",
+            "initialisation",
             "transpose",
             "gpu2cpu",
             "write",
