@@ -2,7 +2,6 @@
 
 #pragma once
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/splines.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -117,7 +116,6 @@ using IdxStepSpX = IdxStep<Species, GridX>;
 using IdxStepSpXVx = IdxStep<Species, GridX, GridVx>;
 
 using IdxStepXVx = IdxStep<GridX, GridVx>;
-
 
 
 
