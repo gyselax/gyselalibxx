@@ -11,6 +11,8 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "../spline_definitions.hpp"
+
 #include "bsl_advection_1d.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "euler.hpp"
