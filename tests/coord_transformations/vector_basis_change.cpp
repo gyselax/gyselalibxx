@@ -217,17 +217,17 @@ TEST(MappingChange, VectorFieldChangeCopyLayoutStrided)
     IdxRangeR idx_range_r(IdxR(1), IdxStepR(N_cells_r)); // Exclude r = 0
     IdxRangeTheta idx_range_theta(IdxTheta(0), IdxStepTheta(N_cells_theta));
     IdxRangeRTheta idx_range_r_theta(idx_range_r, idx_range_theta);
-    IdxRange<Species, GridR, GridTheta> idx_range(idx_range_sp, idx_range_r, idx_range_theta);
+    IdxRange<GridR, GridTheta, Species> idx_range(idx_range_sp, idx_range_r, idx_range_theta);
 
     using CartesianBasis = VectorIndexSet<X, Y>;
     using PolarBasis = VectorIndexSet<R, Theta>;
 
-    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, CartesianBasis> cart_vector_field(
+    DVectorFieldMem<IdxRange<GridR, GridTheta, Species>, CartesianBasis> cart_vector_field(
             idx_range);
     ddc::parallel_fill(ddcHelper::get<X>(cart_vector_field), 1.0);
     ddc::parallel_fill(ddcHelper::get<Y>(cart_vector_field), 1.0);
 
-    DVectorFieldMem<IdxRange<Species, GridR, GridTheta>, PolarBasis> polar_vector_field(idx_range);
+    DVectorFieldMem<IdxRange<GridR, GridTheta, Species>, PolarBasis> polar_vector_field(idx_range);
 
     Idx<Species> first_species(0);
 
