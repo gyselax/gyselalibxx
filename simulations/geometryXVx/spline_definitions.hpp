@@ -75,6 +75,10 @@ using SplineVxEvaluator = ddc::SplineEvaluator<
         ddc::ConstantExtrapolationRule<Vx>,
         ddc::ConstantExtrapolationRule<Vx>>;
 
+using IdxRangeBSX = IdxRange<BSplinesX>;
+
+using IdxRangeBSVx = IdxRange<BSplinesVx>;
+
 template <class ElementType>
 using BSFieldMemX = FieldMem<ElementType, IdxRangeBSX>;
 

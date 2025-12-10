@@ -2,6 +2,9 @@
 #pragma once
 
 #include <ddc/kernels/splines.hpp>
+
+#include "geometry.hpp"
+
 // Splines definition
 int constexpr BSDegreeVpar = 3;
 int constexpr BSDegreeMu = 3;
