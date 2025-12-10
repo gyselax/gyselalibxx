@@ -16,7 +16,7 @@
 #include "collision_configuration.hpp"
 #include "collision_operator.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "geometry.hpp"
+#include "geometry_vpar_mu.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"
