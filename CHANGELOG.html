@@ -567,6 +567,7 @@ The operator averages the values of the advection field on the first ring to get
 <ul>
 <li>Ensure <code>std::abs</code> or <code>Kokkos::abs</code> is preferred over <code>abs</code>.</li>
 <li>Specify return type for Lie-Poisson operator explicitly for better error messages.</li>
+<li>Ensure <code>copy_to_vector_space</code> can be called for different memory layouts.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>
