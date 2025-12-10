@@ -19,3 +19,22 @@ Test `SingleInterfaceDerivativesCalculator` with
 ![Illustration test 5](../../../docs/images/interface_derivatives/fig\_test\_5.png "")
 
 with $\theta$ and $\xi$ periodic.
+
+
+## Interface derivative matrix with exact formula 
+
+Test `InterfaceExactDerivativeMatrix` with the following test cases
+
+- In `interface_derivative_matrix_Greville_periodic_test`: additional interpolation points as closure condition (`ddc::BoundCond::GREVILLE`) at the North and the South of the global domain, and periodic boundary conditions (`ddc::BoundCond::PERIODIC`) at the West and the East of the global domain. All the patches follow the same orientation as the global domain. 
+
+![Illustration test Greville and periodic boundary conditions](../../../docs/images/interface_derivatives/fig5\_example\_9\_patches.png "")
+
+- Hermite boundary conditions with the following layouts to test the signs of the derivatives. 
+
+    - In `interface_derivative_matrix_REVERSE_PATCH1_test`:
+    - In `interface_derivative_matrix_REVERSE_PATCH2_test`:
+    - In `interface_derivative_matrix_REVERSE_PATCH3_test`:
+    - In `interface_derivative_matrix_CHANGE_BOUND1_test`:
+    - In `interface_derivative_matrix_CHANGE_BOUND3_test`:
+
+
