@@ -52,11 +52,11 @@ using CoordVx = Coord<Vx>;
 using CoordXVx = Coord<X, Vx>;
 
 #ifdef INPUT_MESH
-bool constexpr GRID_VX_UNIFORM = false;
 bool constexpr GRID_X_UNIFORM = false;
+bool constexpr GRID_VX_UNIFORM = false;
 #else
+bool constexpr GRID_X_UNIFORM = X::PERIODIC;
 bool constexpr GRID_VX_UNIFORM = true;
-bool constexpr GRID_X_UNIFORM = !X::PERIODIC;
 #endif
 
 struct GridX : std::conditional_t<GRID_X_UNIFORM, UniformGridBase<X>, NonUniformGridBase<X>>
