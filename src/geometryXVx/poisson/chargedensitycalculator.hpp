@@ -4,7 +4,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "ichargedensitycalculator.hpp"
 #include "quadrature.hpp"
 

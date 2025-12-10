@@ -3,7 +3,7 @@
 #include <utility>
 #include <vector>
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "iboltzmannsolver.hpp"
 #include "irighthandside.hpp"
 #include "splitrighthandsidesolver.hpp"

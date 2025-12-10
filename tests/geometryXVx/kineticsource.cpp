@@ -7,7 +7,7 @@
 #include <pdi.h>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "kinetic_source.hpp"
 #include "quadrature.hpp"
