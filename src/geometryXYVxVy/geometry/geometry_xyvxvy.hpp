@@ -6,32 +6,12 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "geometry_xvx.hpp"
 #include "mpilayout.hpp"
 #include "species_info.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
-
-
-/**
- * @brief A class which describes the real space in the first spatial direction X.
- */
-struct X
-{
-    /**
-     * @brief A boolean indicating if the dimension is periodic.
-     */
-    static bool constexpr PERIODIC = true;
-
-    /// A boolean indicating if dimension describes a covariant coordinate.
-    static bool constexpr IS_COVARIANT = true;
-
-    /// A boolean indicating if dimension describes a contravariant coordinate.
-    static bool constexpr IS_CONTRAVARIANT = true;
-
-    /// A type-alias mapping to the co/contra-variant counterpart.
-    using Dual = X;
-};
 
 /**
  * @brief A class which describes the real space in the second spatial direction Y.
@@ -54,17 +34,6 @@ struct Y
 };
 
 /**
- * @brief A class which describes the real space in the second velocity direction X.
- */
-struct Vx
-{
-    /**
-     * @brief A boolean indicating if the dimension is periodic.
-     */
-    static bool constexpr PERIODIC = false;
-};
-
-/**
  * @brief A class which describes the real space in the second velocity direction Y.
  */
 struct Vy
@@ -75,21 +44,13 @@ struct Vy
     static bool constexpr PERIODIC = false;
 };
 
-using CoordX = Coord<X>;
 using CoordY = Coord<Y>;
 using CoordXY = Coord<X, Y>;
 
-using CoordVx = Coord<Vx>;
 using CoordVy = Coord<Vy>;
 
 // IDim definition
-struct GridX : UniformGridBase<X>
-{
-};
 struct GridY : UniformGridBase<Y>
-{
-};
-struct GridVx : UniformGridBase<Vx>
 {
 };
 struct GridVy : UniformGridBase<Vy>
@@ -97,26 +58,20 @@ struct GridVy : UniformGridBase<Vy>
 };
 
 // Index
-using IdxX = Idx<GridX>;
 using IdxY = Idx<GridY>;
 using IdxXY = Idx<GridX, GridY>;
-using IdxVx = Idx<GridVx>;
 using IdxVy = Idx<GridVy>;
 using IdxVxVy = Idx<GridVx, GridVy>;
 using IdxXYVxVy = Idx<GridX, GridY, GridVx, GridVy>;
 using IdxSpXYVxVy = Idx<Species, GridX, GridY, GridVx, GridVy>;
 
 // IVect definition
-using IdxStepX = IdxStep<GridX>;
 using IdxStepY = IdxStep<GridY>;
-using IdxStepVx = IdxStep<GridVx>;
 using IdxStepVy = IdxStep<GridVy>;
 
 // Iindex range definition
-using IdxRangeX = IdxRange<GridX>;
 using IdxRangeY = IdxRange<GridY>;
 using IdxRangeXY = IdxRange<GridX, GridY>;
-using IdxRangeVx = IdxRange<GridVx>;
 using IdxRangeVy = IdxRange<GridVy>;
 using IdxRangeXYVxVy = IdxRange<GridX, GridY, GridVx, GridVy>;
 using IdxRangeVxVyXY = IdxRange<GridVx, GridVy, GridX, GridY>;
@@ -124,10 +79,6 @@ using IdxRangeVxVy = IdxRange<GridVx, GridVy>;
 using IdxRangeSpVxVy = IdxRange<Species, GridVx, GridVy>;
 using IdxRangeSpXYVxVy = IdxRange<Species, GridX, GridY, GridVx, GridVy>;
 using IdxRangeSpVxVyXY = IdxRange<Species, GridVx, GridVy, GridX, GridY>;
-
-template <class ElementType>
-using FieldMemX = FieldMem<ElementType, IdxRangeX>;
-using DFieldMemX = FieldMemX<double>;
 
 template <class ElementType>
 using FieldMemY = FieldMem<ElementType, IdxRangeY>;
@@ -140,9 +91,6 @@ using DFieldMemXY = FieldMemXY<double>;
 template <class ElementType>
 using VectorFieldMemXY = VectorFieldMem<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
 using DVectorFieldMemXY = VectorFieldMemXY<double>;
-
-template <class ElementType>
-using FieldMemVx = FieldMem<ElementType, IdxRangeVx>;
 
 template <class ElementType>
 using FieldMemVy = FieldMem<ElementType, IdxRangeVy>;
@@ -167,11 +115,6 @@ template <class ElementType>
 using FieldMemSpVxVyXY = FieldMem<ElementType, IdxRangeSpVxVyXY>;
 using DFieldMemSpVxVyXY = FieldMemSpVxVyXY<double>;
 
-//  Field definitions
-template <class ElementType>
-using FieldX = Field<ElementType, IdxRangeX>;
-using DFieldX = FieldX<double>;
-
 template <class ElementType>
 using FieldY = Field<ElementType, IdxRangeY>;
 using DFieldY = FieldY<double>;
@@ -183,10 +126,6 @@ using DFieldXY = FieldXY<double>;
 template <class ElementType>
 using VectorFieldXY = VectorField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
 using DVectorFieldXY = VectorFieldXY<double>;
-
-template <class ElementType>
-using FieldVx = Field<ElementType, IdxRangeVx>;
-using DFieldVx = FieldVx<double>;
 
 template <class ElementType>
 using FieldVy = Field<ElementType, IdxRangeVy>;
@@ -207,10 +146,6 @@ using DFieldSpXYVxVy = FieldSpXYVxVy<double>;
 template <class ElementType>
 using FieldSpVxVyXY = Field<ElementType, IdxRangeSpVxVyXY>;
 using DFieldSpVxVyXY = FieldSpVxVyXY<double>;
-
-// ConstField definitions
-template <class ElementType>
-using ConstFieldX = Field<ElementType const, IdxRangeX>;
 
 template <class ElementType>
 using ConstFieldY = Field<ElementType const, IdxRangeY>;
