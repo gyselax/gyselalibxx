@@ -64,82 +64,15 @@ using CoordVx = Coord<Vx>;
 
 using CoordXVx = Coord<X, Vx>;
 
-int constexpr BSDegreeX = 3;
-int constexpr BSDegreeVx = 3;
+bool constexpr GRID_VX_UNIFORM = !INPUT_MESH;
+bool constexpr GRID_X_UNIFORM = !INPUT_MESH || !X::PERIODIC;
 
-#ifdef INPUT_MESH
-bool constexpr BsplineOnUniformCellsX = false;
-bool constexpr BsplineOnUniformCellsVx = false;
-#else
-bool constexpr BsplineOnUniformCellsX = true;
-bool constexpr BsplineOnUniformCellsVx = true;
-#endif
-
-struct BSplinesX
-    : std::conditional_t<
-              BsplineOnUniformCellsX,
-              ddc::UniformBSplines<X, BSDegreeX>,
-              ddc::NonUniformBSplines<X, BSDegreeX>>
+struct GridX : std::conditional_t<GRID_X_UNIFORM, UniformGridBase<X>, NonUniformGridBase<X>>
 {
 };
-struct BSplinesVx
-    : std::conditional_t<
-              BsplineOnUniformCellsVx,
-              ddc::UniformBSplines<Vx, BSDegreeVx>,
-              ddc::NonUniformBSplines<Vx, BSDegreeVx>>
+struct GridVx : std::conditional_t<GRID_VX_UNIFORM, UniformGridBase<Vx>, NonUniformGridBase<Vx>>
 {
 };
-
-auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
-auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
-
-using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
-using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
-
-struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
-{
-};
-struct GridVx : SplineInterpPointsVx::interpolation_discrete_dimension_type
-{
-};
-
-using SplineXBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-#ifdef PERIODIC_RDIMX
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
-#else
-        ddc::ConstantExtrapolationRule<X>,
-        ddc::ConstantExtrapolationRule<X>>;
-#endif
-using SplineVxBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVx,
-        GridVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineVxEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVx,
-        GridVx,
-        ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>>;
 
 struct GridMom : Moments
 {
@@ -187,11 +120,6 @@ using IdxStepXVx = IdxStep<GridX, GridVx>;
 
 
 
-using IdxRangeBSX = IdxRange<BSplinesX>;
-
-using IdxRangeBSVx = IdxRange<BSplinesVx>;
-
-
 
 using IdxRangeMom = IdxRange<GridMom>;
 
@@ -218,9 +146,6 @@ using FieldMemVx = FieldMem<ElementType, IdxRangeVx>;
 template <class ElementType>
 using FieldMemX = FieldMem<ElementType, IdxRangeX>;
 
-template <class ElementType>
-using BSFieldMemX = FieldMem<ElementType, IdxRangeBSX>;
-
 
 template <class ElementType>
 using FieldMemSpMom = FieldMem<ElementType, IdxRangeSpMom>;
@@ -243,8 +168,6 @@ using DFieldMemVx = FieldMemVx<double>;
 
 using DFieldMemX = FieldMemX<double>;
 
-using DBSFieldMemX = BSFieldMemX<double>;
-
 
 using DFieldMemSpMom = FieldMemSpMom<double>;
 
@@ -257,9 +180,6 @@ using DFieldMemSpX = FieldMemSpX<double>;
 using DFieldMemSpXVx = FieldMemSpXVx<double>;
 
 
-
-template <class ElementType>
-using BSFieldX = Field<ElementType, IdxRangeBSX>;
 
 template <class ElementType>
 using FieldX = Field<ElementType, IdxRangeX>;
@@ -283,8 +203,6 @@ template <class ElementType>
 using FieldSpXVx = Field<ElementType, IdxRangeSpXVx>;
 
 
-using DBSFieldX = BSFieldX<double>;
-
 using DFieldVx = FieldVx<double>;
 
 using DFieldX = FieldX<double>;
@@ -306,9 +224,6 @@ using ConstFieldVx = Field<ElementType const, IdxRangeVx>;
 template <class ElementType>
 using ConstFieldX = Field<ElementType const, IdxRangeX>;
 
-
-template <class ElementType>
-using BSConstFieldX = ConstField<ElementType, IdxRangeBSX>;
 
 template <class ElementType>
 using ConstFieldSpMom = ConstField<ElementType, IdxRangeSpMom>;
@@ -334,8 +249,6 @@ using DConstFieldVx = ConstFieldVx<double>;
 
 using DConstFieldX = ConstFieldX<double>;
 
-
-using DBSConstFieldX = BSConstFieldX<double>;
 
 using DConstFieldSpMom = ConstFieldSpMom<double>;
 
