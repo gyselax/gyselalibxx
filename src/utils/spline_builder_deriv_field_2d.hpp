@@ -87,7 +87,7 @@ public:
      * @param[in] builder A reference to SplineBuilder2D from DDC that we store
      * in the class. 
      */
-    SplineBuliderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
+    explicit SplineBuliderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
 
     /**
      * @brief Build the spline representation of the function given in a 
@@ -241,24 +241,20 @@ private:
     {
         // Extract data.
         IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
+        IdxRange<Grid2> idx_range_2(idx_range);
         IdxRangeSlice<Grid1> idx_range_slice_1
                 = function_and_derivs.template idx_range_for_deriv<Grid1>();
 
-        IdxRange<Deriv1> idx_range_d1(Idx<Deriv1>(1), IdxStep<Deriv1>(1));
-        IdxRange<Grid2> idx_range_2(idx_range);
+        Idx<Deriv1> idx_d1(Idx<Deriv1>(1));
+        Idx<Grid1> idx_slice = is_min ? idx_range_slice_1.front() : idx_range_slice_1.back();
+        Idx<Deriv1, Grid1> idx_deriv1(idx_d1, idx_slice);
 
-        Idx<Grid1> d1_slice = is_min ? idx_range_slice_1.front() : idx_range_slice_1.back();
-        IdxRange<Grid1> idx_range_slicing_1(d1_slice, IdxStep<Grid1>(1));
-
-        IdxRange<Deriv1, Grid1, Grid2>
-                idx_range_d1_12(idx_range_d1, idx_range_slicing_1, idx_range_2);
-
-        DField<IdxRange<Deriv1, Grid2>, MemorySpace, Kokkos::layout_stride> deriv1_extracted
-                = function_and_derivs[idx_range_d1_12][d1_slice];
+        DField<IdxRange<Grid2>, MemorySpace, Kokkos::layout_stride> deriv1_extracted
+                = function_and_derivs[idx_deriv1];
 
         // Fill the field with correct layout.
-        ddc::for_each(get_idx_range(deriv1), [&](Idx<Deriv1, Grid2> const idx) {
-            deriv1(idx) = deriv1_extracted(idx);
+        ddc::for_each(idx_range_2, [&](Idx<Grid2> const idx) {
+            deriv1(idx_d1, idx) = deriv1_extracted(idx);
         });
     }
 
@@ -272,24 +268,20 @@ private:
     {
         // Extract data.
         IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
+        IdxRange<Grid1> idx_range_1(idx_range);
         IdxRangeSlice<Grid2> idx_range_slice_2
                 = function_and_derivs.template idx_range_for_deriv<Grid2>();
 
-        IdxRange<Grid1> idx_range_1(idx_range);
-        IdxRange<Deriv2> idx_range_d2(Idx<Deriv2>(1), IdxStep<Deriv2>(1));
+        Idx<Deriv2> idx_d2(Idx<Deriv2>(1));
+        Idx<Grid2> idx_slice = is_min ? idx_range_slice_2.front() : idx_range_slice_2.back();
+        Idx<Deriv2, Grid2> idx_deriv2(idx_d2, idx_slice);
 
-        Idx<Grid2> d2_slice = is_min ? idx_range_slice_2.front() : idx_range_slice_2.back();
-        IdxRange<Grid2> idx_range_slicing_2(d2_slice, IdxStep<Grid2>(1));
-
-        IdxRange<Grid1, Deriv2, Grid2>
-                idx_range_d2_12(idx_range_1, idx_range_d2, idx_range_slicing_2);
-
-        DField<IdxRange<Grid1, Deriv2>, MemorySpace, Kokkos::layout_stride> deriv2_extracted
-                = function_and_derivs[idx_range_d2_12][d2_slice];
+        DField<IdxRange<Grid1>, MemorySpace, Kokkos::layout_stride> deriv2_extracted
+                = function_and_derivs[idx_deriv2];
 
         // Fill the field with correct layout.
-        ddc::for_each(get_idx_range(deriv2), [&](Idx<Grid1, Deriv2> const idx) {
-            deriv2(idx) = deriv2_extracted(idx);
+        ddc::for_each(idx_range_1, [&](Idx<Grid1> const idx) {
+            deriv2(idx, idx_d2) = deriv2_extracted(idx);
         });
     }
 
@@ -307,33 +299,22 @@ private:
     {
         // Extract data.
         IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
+        IdxRange<Grid1> idx_range_1(idx_range);
+        IdxRange<Grid2> idx_range_2(idx_range);
+
         IdxRangeSlice<Grid1> idx_range_slice_1
                 = function_and_derivs.template idx_range_for_deriv<Grid1>();
         IdxRangeSlice<Grid2> idx_range_slice_2
                 = function_and_derivs.template idx_range_for_deriv<Grid2>();
 
-        IdxRange<Grid1> idx_range_1(idx_range);
-        IdxRange<Grid2> idx_range_2(idx_range);
-        IdxRange<Deriv1> idx_range_d1(Idx<Deriv1>(1), IdxStep<Deriv1>(1));
-        IdxRange<Deriv2> idx_range_d2(Idx<Deriv2>(1), IdxStep<Deriv2>(1));
-        IdxRange<Deriv1, Deriv2> idx_range_d1d2(idx_range_d1, idx_range_d2);
+        Idx<Deriv1> idx_d1(Idx<Deriv1>(1));
+        Idx<Deriv2> idx_d2(Idx<Deriv2>(1));
+        Idx<Grid1> idx_slice_1 = is_1min ? idx_range_slice_1.front() : idx_range_slice_1.back();
+        Idx<Grid2> idx_slice_2 = is_2min ? idx_range_slice_2.front() : idx_range_slice_2.back();
 
-        Idx<Grid1> d1_slice = is_1min ? idx_range_slice_1.front() : idx_range_slice_1.back();
-        Idx<Grid2> d2_slice = is_2min ? idx_range_slice_2.front() : idx_range_slice_2.back();
-        IdxRange<Grid1> idx_range_slicing_1(d1_slice, IdxStep<Grid1>(1));
-        IdxRange<Grid2> idx_range_slicing_2(d2_slice, IdxStep<Grid2>(1));
-
-        IdxRange<Deriv1, Grid1, Deriv2, Grid2> idx_range_cross_deriv(
-                idx_range_d1,
-                idx_range_slicing_1,
-                idx_range_d2,
-                idx_range_slicing_2);
-
-        DField<IdxRange<Deriv1, Deriv2>, MemorySpace, Kokkos::layout_stride> cross_deriv_extracted
-                = function_and_derivs[idx_range_cross_deriv][d1_slice][d2_slice];
+        Idx<Deriv1, Grid1, Deriv2, Grid2> idx_cross_deriv(idx_d1, idx_slice_1, idx_d2, idx_slice_2);
 
         // Fill the field with correct layout.
-        Idx<Deriv1, Deriv2> const idx_cross_deriv(idx_range_d1d2.front());
-        cross_deriv(idx_cross_deriv) = cross_deriv_extracted(idx_cross_deriv);
+        cross_deriv(idx_d1, idx_d2) = function_and_derivs(idx_cross_deriv);
     }
 };
