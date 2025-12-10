@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [UNRELEASED]
+
+### Added
+
+### Fixed
+
+### Changed
+
+- Extract spline definitions from `geometry.hpp` files into files called `spline_definitions.hpp` which are dedicated to tests or simulations.
+
+### Deprecated
+
+### Removed
+
 ## [v0.4.0] - 2025-12-10
 
 ### Added
