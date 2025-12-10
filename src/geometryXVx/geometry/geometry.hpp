@@ -45,19 +45,7 @@ struct Vx
     static bool constexpr PERIODIC = false;
 };
 
-/**
- * @brief A class which describes the real space in the temporal direction
- */
-struct T
-{
-    /**
-     * @brief A boolean indicating if the dimension is periodic.
-     */
-    static bool constexpr PERIODIC = false;
-};
 
-
-using CoordT = Coord<T>;
 using CoordX = Coord<X>;
 
 using CoordVx = Coord<Vx>;
