@@ -10,6 +10,7 @@
 #include "l_norm_tools.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "spline_definitions.hpp"
 
 
 /**

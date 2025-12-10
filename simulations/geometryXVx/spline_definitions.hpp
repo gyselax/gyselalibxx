@@ -1,4 +1,6 @@
 #pragma once
+#include <ddc/kernels/splines.hpp>
+
 #include "geometry.hpp"
 
 int constexpr BSDegreeX = 3;
