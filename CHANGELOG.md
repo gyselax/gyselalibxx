@@ -31,6 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 The operator averages the values of the advection field on the first ring to get its value at the O-point.
 - Add `static_assert` expressions for spline builder/evaluator pairs.
 - Added `equilibrium::init_from_input` method to choose XVx equililibrium in input file.
+- Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
+in a `DerivField`.
 
 ### Fixed
 
