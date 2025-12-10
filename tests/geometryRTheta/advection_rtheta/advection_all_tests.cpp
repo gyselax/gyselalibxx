@@ -1,4 +1,3 @@
-//#pragma once
 #include <array>
 #include <chrono>
 #include <cstring>
@@ -34,6 +33,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
+#include "spline_definitions.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"

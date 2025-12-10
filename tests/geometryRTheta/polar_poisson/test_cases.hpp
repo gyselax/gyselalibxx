@@ -10,6 +10,7 @@
 #include "geometry.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "math_tools.hpp"
+#include "spline_definitions.hpp"
 
 /**
  * @brief Base class for the exact solutions of the Poisson equation.

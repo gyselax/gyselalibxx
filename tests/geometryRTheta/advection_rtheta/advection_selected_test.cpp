@@ -33,6 +33,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
+#include "spline_definitions.hpp"
 #include "spline_polar_foot_finder.hpp"
 
 
