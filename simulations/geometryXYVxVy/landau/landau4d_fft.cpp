@@ -13,6 +13,8 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "../spline_definitions.hpp"
+
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
