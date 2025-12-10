@@ -45,29 +45,33 @@ gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 
 
 # InterfaceExactDerivativeMatrix test =================================================================
-function (interface_derivative_matrix_executable REVERSED_PATCH)
-    # The test with Greville do not depend on the reversed patch. Do not need to duplicate test.
-     if (REVERSED_PATCH STREQUAL "REVERSE_PATCH1")
-        set(test_name_gtest "interface_derivative_matrix_start_patch_reversed_test")
+function (interface_derivative_matrix_executable TEST_CASE)
+     if (TEST_CASE STREQUAL "GREVILLE_CASE")
+        set(test_name_gtest "interface_derivative_matrix_Greville_periodic_test")
         add_executable("${test_name_gtest}"
             interface_derivative_matrix_Greville_periodic_test.cpp
+            ../../main.cpp
+        )
+    elseif (TEST_CASE STREQUAL "REVERSE_PATCH1")
+        set(test_name_gtest "interface_derivative_matrix_start_patch_reversed_test")
+        add_executable("${test_name_gtest}"
             interface_derivative_matrix_Hermite_test.cpp
             ../../main.cpp
         )
-    elseif (REVERSED_PATCH STREQUAL "REVERSE_PATCH2")
+    elseif (TEST_CASE STREQUAL "REVERSE_PATCH2")
         set(test_name_gtest "interface_derivative_matrix_middle_patch_reversed_test")
         add_executable("${test_name_gtest}"
             interface_derivative_matrix_Hermite_test.cpp
             ../../main.cpp
         )
-    elseif (REVERSED_PATCH STREQUAL "REVERSE_PATCH3")
+    elseif (TEST_CASE STREQUAL "REVERSE_PATCH3")
         set(test_name_gtest "interface_derivative_matrix_end_patch_reversed_test")
         add_executable("${test_name_gtest}"
             interface_derivative_matrix_Hermite_test.cpp
             ../../main.cpp
         )
     else()
-        set(test_name_gtest "interface_derivative_matrix_${REVERSED_PATCH}_test")
+        set(test_name_gtest "interface_derivative_matrix_${TEST_CASE}_test")
         add_executable("${test_name_gtest}"
             interface_derivative_matrix_Hermite_test.cpp
             ../../main.cpp
@@ -83,10 +87,11 @@ function (interface_derivative_matrix_executable REVERSED_PATCH)
         gslx::multipatch_spline
         gslx::multipatch_interface_derivatives
     )
-    target_compile_definitions("${test_name_gtest}" PUBLIC -D${REVERSED_PATCH})
+    target_compile_definitions("${test_name_gtest}" PUBLIC -D${TEST_CASE})
     gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 endfunction()
 
+interface_derivative_matrix_executable("GREVILLE_CASE")
 interface_derivative_matrix_executable("REVERSE_PATCH1")
 interface_derivative_matrix_executable("REVERSE_PATCH2")
 interface_derivative_matrix_executable("REVERSE_PATCH3")

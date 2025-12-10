@@ -205,7 +205,6 @@ struct InterfaceExactDerivativeMatrixGrevillePeriodicTest : public ::testing::Te
     static constexpr Coord<Y<9>> y9_max = convert_dim<Y<9>, Y<7>>(y7_max);
     static constexpr IdxStep<GridY<9>> y9_ncells = IdxStep<GridY<9>>(10);
 
-
     // global ------------------------------------
     static constexpr Coord<Xg> xg_min = convert_dim<Xg, X<1>>(x1_min);
     static constexpr Coord<Xg> xg_max = convert_dim<Xg, X<3>>(x3_max);
@@ -439,42 +438,15 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, InterpolationPointsCh
     int const y_shift1 = y4_ncells.value() + 1;
     int const y_shift2 = y7_ncells.value() + y4_ncells.value() + 1;
 
-    check_interpolation_grids<
-            Patch1,
-            GridXg,
-            GridYg>(idx_range_xy1, CoordTransform<Xg, Yg, X<1>, Y<1>>(), 0, y_shift2);
-    check_interpolation_grids<
-            Patch2,
-            GridXg,
-            GridYg>(idx_range_xy2, CoordTransform<Xg, Yg, X<2>, Y<2>>(), x_shift1, y_shift2);
-    check_interpolation_grids<
-            Patch3,
-            GridXg,
-            GridYg>(idx_range_xy3, CoordTransform<Xg, Yg, X<3>, Y<3>>(), x_shift2, y_shift2);
-    check_interpolation_grids<
-            Patch4,
-            GridXg,
-            GridYg>(idx_range_xy4, CoordTransform<Xg, Yg, X<4>, Y<4>>(), 0, y_shift1);
-    check_interpolation_grids<
-            Patch5,
-            GridXg,
-            GridYg>(idx_range_xy5, CoordTransform<Xg, Yg, X<5>, Y<5>>(), x_shift1, y_shift1);
-    check_interpolation_grids<
-            Patch6,
-            GridXg,
-            GridYg>(idx_range_xy6, CoordTransform<Xg, Yg, X<6>, Y<6>>(), x_shift2, y_shift1);
-    check_interpolation_grids<
-            Patch7,
-            GridXg,
-            GridYg>(idx_range_xy7, CoordTransform<Xg, Yg, X<7>, Y<7>>(), 0, 0);
-    check_interpolation_grids<
-            Patch8,
-            GridXg,
-            GridYg>(idx_range_xy8, CoordTransform<Xg, Yg, X<8>, Y<8>>(), x_shift1, 0);
-    check_interpolation_grids<
-            Patch9,
-            GridXg,
-            GridYg>(idx_range_xy9, CoordTransform<Xg, Yg, X<9>, Y<9>>(), x_shift2, 0);
+    check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0, y_shift2);
+    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1, y_shift2);
+    check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2, y_shift2);
+    check_interpolation_grids<Patch4, GridXg, GridYg>(idx_range_xy4, 0, y_shift1);
+    check_interpolation_grids<Patch5, GridXg, GridYg>(idx_range_xy5, x_shift1, y_shift1);
+    check_interpolation_grids<Patch6, GridXg, GridYg>(idx_range_xy6, x_shift2, y_shift1);
+    check_interpolation_grids<Patch7, GridXg, GridYg>(idx_range_xy7, 0, 0);
+    check_interpolation_grids<Patch8, GridXg, GridYg>(idx_range_xy8, x_shift1, 0);
+    check_interpolation_grids<Patch9, GridXg, GridYg>(idx_range_xy9, x_shift2, 0);
 }
 
 
@@ -547,7 +519,6 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
             idx_range_xy9,
             ddc::BoundCond::HERMITE,
             ddc::BoundCond::GREVILLE);
-
 
     // Collect the derivative calculators --------------------------------------------------------
     SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
@@ -672,7 +643,6 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
             SingleInterfaceDerivativesCalculatorCollection<Interface_3_6, Interface_6_9>>
             matrix_369(idx_ranges_369, deriv_calculators_collect_369);
 
-
     // Instantiate DerivField ====================================================================
     // Instantiate index range slices ------------------------------------------------------------
     IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(idx_range_x1);
@@ -717,7 +687,6 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
                     idx_range_slice_dx7,
                     idx_range_slice_dx8,
                     idx_range_slice_dx9);
-
     MultipatchType<
             IdxRange2SliceOnPatch,
             Patch1,
@@ -802,7 +771,7 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
     initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
     initialise_2D_function<GridXg, GridYg, CoordTransform<Xg, Yg, Xg, Yg>>(function_g);
 
-    // --- the first derivatives from the function values.
+    // --- the first derivatives computed from the function values.
     matrix_123.solve_deriv(functions_and_derivs);
     matrix_456.solve_deriv(functions_and_derivs);
     matrix_789.solve_deriv(functions_and_derivs);
@@ -811,7 +780,7 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
     matrix_258.solve_deriv(functions_and_derivs);
     matrix_369.solve_deriv(functions_and_derivs);
 
-    // --- the cross-derivatives from the first derivatives.
+    // --- the cross-derivatives computed from the first derivatives.
     matrix_147.solve_cross_deriv(functions_and_derivs);
     matrix_258.solve_cross_deriv(functions_and_derivs);
     matrix_369.solve_cross_deriv(functions_and_derivs);
@@ -834,11 +803,9 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
     ddc::PeriodicExtrapolationRule<Xg> bc_x_g;
     SplineRThetagEvaluator evaluator_g(bc_x_g, bc_x_g, bc_ymin_g, bc_ymax_g);
 
-
     // Check each derivatives ---
     using PatchSeqLowerBound = ddc::detail::TypeSeq<Patch7, Patch8, Patch9>;
     using PatchSeqUpperBound = ddc::detail::TypeSeq<Patch1, Patch2, Patch3>;
-    // using EmptyPatchSeq = ddc::detail::TypeSeq<>;
 
     check_all_x_derivatives(
             functions_and_derivs,
@@ -866,9 +833,7 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
             coord_transforms);
 
     // Check the whole spline representations ---
-    check_all_spline_representation_agreement<
-            PatchSeqLowerBound,
-            PatchSeqUpperBound>(
+    check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
             idx_ranges,
             idx_ranges_slice_dx,
             idx_ranges_slice_dy,

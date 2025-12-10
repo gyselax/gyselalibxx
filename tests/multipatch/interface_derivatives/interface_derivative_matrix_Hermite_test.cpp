@@ -597,12 +597,9 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, InterpolationPointsCheck)
     int const x_shift1 = x1_ncells.value();
     int const x_shift2 = x1_ncells.value() + x2_ncells.value();
 
-    std::cout << "check Patch1." << std::endl;
-    check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, coord_transform_1, 0);
-    std::cout << "check Patch2." << std::endl;
-    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, coord_transform_2, x_shift1);
-    std::cout << "check Patch3." << std::endl;
-    check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, coord_transform_3, x_shift2);
+    check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0, 0, coord_transform_1);
+    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1, 0, coord_transform_2);
+    check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2, 0, coord_transform_3);
 }
 
 
