@@ -31,7 +31,7 @@ SpeciesInfo:
     mass: 1.
     N_maxw: 1.0         # initial constant density
     T_maxw: 1.0         # initial constant temperature 
-    Upar_maxw: 0.0    # initial mean velocity
+    Upar_maxw: 3.0    # initial mean velocity
 
 Application: 
   version: "gpu2cpu"  # "gpu2cpu"/"mpi_transpose"/"in-situ-diagnostic"

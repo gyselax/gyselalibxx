@@ -2,6 +2,7 @@
 
 add_executable(gys_io
     gys_io.cpp
+    fluid_moments.cpp
 )
 
 target_link_libraries(gys_io
@@ -14,6 +15,7 @@ target_link_libraries(gys_io
         gslx::speciesinfo
         gslx::utils
         gslx::mpi_parallelisation
+        gslx::quadrature
 )
 
 install(TARGETS gys_io)

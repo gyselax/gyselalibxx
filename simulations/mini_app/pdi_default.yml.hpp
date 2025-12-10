@@ -97,12 +97,31 @@ metadata:
   timing_values_size: size_t
   timing_values: { type: array, subtype: double, size: [ '$timing_values_size' ] }
 
+  #-- Fluid moments extents
+  density_extents: { type: array, subtype: size_t, size: 4 }
+  mean_velocity_extents: { type: array, subtype: size_t, size: 4 }
+  temperature_extents: { type: array, subtype: size_t, size: 4 }
+
 data:
   #-- Distribution function
   fdistribu_sptor3Dv2D:
     type: array
     subtype: double
     size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]', '$local_fdistribu_extents[5]' ]
+
+  #-- Fluid moments (4D: species × tor1 × tor2 × tor3)
+  density:
+    type: array
+    subtype: double
+    size: [ '$density_extents[0]', '$density_extents[1]', '$density_extents[2]', '$density_extents[3]' ]
+  mean_velocity:
+    type: array
+    subtype: double
+    size: [ '$mean_velocity_extents[0]', '$mean_velocity_extents[1]', '$mean_velocity_extents[2]', '$mean_velocity_extents[3]' ]
+  temperature:
+    type: array
+    subtype: double
+    size: [ '$temperature_extents[0]', '$temperature_extents[1]', '$temperature_extents[2]', '$temperature_extents[3]' ]
 
 plugins:
   mpi:
@@ -211,5 +230,14 @@ plugins:
             dataset_selection:
               size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]', '$local_fdistribu_extents[5]' ]
               start: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]', '$local_fdistribu_starts[5]' ]
+
+    #-- Write fluid moments
+    - file: 'fluid_moments.h5'
+      on_event: [write_fluid_moments]
+      collision_policy: replace_and_warn
+      write:
+        density: ~
+        mean_velocity: ~
+        temperature: ~
 trace: ~
 )PDI_CFG";
