@@ -231,11 +231,23 @@ TEST(MappingChange, VectorFieldChangeCopyLayoutStrided)
 
     Idx<Species> first_species(0);
 
+    DVectorConstField<
+            IdxRange<GridR, GridTheta>,
+            CartesianBasis,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            Kokkos::layout_stride>
+            cart_vector_field_slice = get_const_field(cart_vector_field[first_species]);
+    DVectorField<
+            IdxRange<GridR, GridTheta>,
+            PolarBasis,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            Kokkos::layout_stride>
+            polar_vector_field_slice = polar_vector_field[first_species];
     copy_to_vector_space<PolarBasis>(
             Kokkos::DefaultExecutionSpace(),
-            polar_vector_field[first_species],
+            polar_vector_field_slice,
             mapping,
-            get_const_field(cart_vector_field[first_species]));
+            cart_vector_field_slice);
 
     auto polar_vector_field_host = ddcHelper::create_mirror_view_and_copy(
             Kokkos::DefaultHostExecutionSpace(),
