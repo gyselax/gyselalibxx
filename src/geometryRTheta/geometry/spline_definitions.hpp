@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/kernels/splines.hpp>
+
 #include "geometry.hpp"
 
 // --- Spline definitions
