@@ -22,6 +22,7 @@ The operator averages the values of the advection field on the first ring to get
 
 - Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
 - Specify return type for Lie-Poisson operator explicitly for better error messages.
+- Ensure `copy_to_vector_space` can be called for different memory layouts.
 
 ### Changed
 
