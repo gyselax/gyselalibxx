@@ -50,7 +50,7 @@
 |  constexpr bool | [**enable\_borrowed\_deriv\_field**](#variable-enable_borrowed_deriv_field)   = `false`<br> |
 |  constexpr bool | [**enable\_deriv\_field**](#variable-enable_deriv_field)   = `false`<br> |
 |  constexpr bool | [**is\_borrowed\_deriv\_field\_v**](#variable-is_borrowed_deriv_field_v)   = `/* multi line expression */`<br> |
-|  constexpr bool | [**is\_deriv\_field\_v**](#variable-is_deriv_field_v)   = `enable\_deriv\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;[**T**](structT.md)&gt;&gt;&gt;`<br> |
+|  constexpr bool | [**is\_deriv\_field\_v**](#variable-is_deriv_field_v)   = `enable\_deriv\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 

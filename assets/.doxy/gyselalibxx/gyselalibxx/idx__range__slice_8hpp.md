@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename [**IdxRangeToSlice**](structIdxRangeToSlice.md)&lt; [**T**](structT.md) &gt;::value | [**to\_subidx\_range\_collection**](#typedef-to_subidx_range_collection)  <br>_A templated type for creating a IdxRangeSlice from a TypeSeq._  |
+| typedef typename [**IdxRangeToSlice**](structIdxRangeToSlice.md)&lt; T &gt;::value | [**to\_subidx\_range\_collection**](#typedef-to_subidx_range_collection)  <br>_A templated type for creating a IdxRangeSlice from a TypeSeq._  |
 
 
 

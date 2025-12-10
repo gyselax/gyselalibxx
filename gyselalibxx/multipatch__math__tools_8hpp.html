@@ -566,11 +566,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-error_norm_inf"><strong>error_norm_inf</strong></a> (ExecSpace exec_space, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; <a href="structT.html"><strong>T</strong></a>, Patches... &gt; multipatch_function, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; <a href="structT.html"><strong>T</strong></a>, Patches... &gt; multipatch_exact_function) <br><em>Compute the infinity norm of the error between 2 Fields or VectorFields over multiple patches.</em></td>
+<td style="text-align: left;"><a href="#function-error_norm_inf"><strong>error_norm_inf</strong></a> (ExecSpace exec_space, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; T, Patches... &gt; multipatch_function, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; T, Patches... &gt; multipatch_exact_function) <br><em>Compute the infinity norm of the error between 2 Fields or VectorFields over multiple patches.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (ExecSpace exec_space, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; <a href="structT.html"><strong>T</strong></a>, Patches... &gt; multipatch_function) <br><em>Compute the infinity norm for a Field or</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>over multiple patches.</em></td>
+<td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (ExecSpace exec_space, <a href="classMultipatchField.html"><strong>MultipatchField</strong></a>&lt; T, Patches... &gt; multipatch_function) <br><em>Compute the infinity norm for a Field or</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>over multiple patches.</em></td>
 </tr>
 </tbody>
 </table>
@@ -580,8 +580,8 @@
 <pre><code class="language-C++">template&lt;class ExecSpace, template&lt; typename P &gt; typename T, class... Patches&gt;
 double error_norm_inf (
     ExecSpace exec_space,
-    MultipatchField &lt; T , Patches... &gt; multipatch_function,
-    MultipatchField &lt; T , Patches... &gt; multipatch_exact_function
+    MultipatchField &lt; T, Patches... &gt; multipatch_function,
+    MultipatchField &lt; T, Patches... &gt; multipatch_exact_function
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -599,7 +599,7 @@ double error_norm_inf (
 <pre><code class="language-C++">template&lt;class ExecSpace, template&lt; typename P &gt; typename T, class... Patches&gt;
 double norm_inf (
     ExecSpace exec_space,
-    MultipatchField &lt; T , Patches... &gt; multipatch_function
+    MultipatchField &lt; T, Patches... &gt; multipatch_function
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>

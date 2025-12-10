@@ -566,19 +566,19 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-view_type"><strong>::view_type</strong></a></td>
+<td style="text-align: right;">typedef typename T&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-view_type"><strong>::view_type</strong></a></td>
 <td style="text-align: left;"><a href="#typedef-internalconstfieldonpatch"><strong>InternalConstFieldOnPatch</strong></a>  <br><em>An internal type alias that is only instantiated if the get_const_field method is called.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-span_type"><strong>::span_type</strong></a></td>
+<td style="text-align: right;">typedef typename T&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-span_type"><strong>::span_type</strong></a></td>
 <td style="text-align: left;"><a href="#typedef-internalfieldonpatch"><strong>InternalFieldOnPatch</strong></a>  <br><em>An internal type alias that is only instantiated if the get_const_field method is called.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-discrete_domain_type"><strong>::discrete_domain_type</strong></a></td>
+<td style="text-align: right;">typedef typename T&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;<a href="classMultipatchField.html#typedef-discrete_domain_type"><strong>::discrete_domain_type</strong></a></td>
 <td style="text-align: left;"><a href="#typedef-internalidxrangeonpatch"><strong>InternalIdxRangeOnPatch</strong></a>  <br><em>An internal type alias that is only instantiated if the idx_range method is called.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; <a href="structT.html"><strong>T</strong></a>, Patches... &gt;</td>
+<td style="text-align: right;">typedef <a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; T, Patches... &gt;</td>
 <td style="text-align: left;"><a href="#typedef-base_type"><strong>base_type</strong></a>  <br><em>The</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>from which this class inherits.</em></td>
 </tr>
 <tr>
@@ -622,7 +622,7 @@
 <td style="text-align: left;"><a href="classMultipatchType.html#typedef-patchordering"><strong>PatchOrdering</strong></a>  <br><em>A tag storing the order of Patches in this</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="structT.html"><strong>T</strong></a>&lt; ddc::type_seq_element_t&lt; 0, <a href="classMultipatchType.html#typedef-patchordering"><strong>PatchOrdering</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef T&lt; ddc::type_seq_element_t&lt; 0, <a href="classMultipatchType.html#typedef-patchordering"><strong>PatchOrdering</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="classMultipatchType.html#typedef-example_element"><strong>example_element</strong></a>  <br><em>The type of one of the elements of the</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>. This can be used to check that types are as expected using functions such as ddc::is_chunk_v.</em></td>
 </tr>
 </tbody>
@@ -638,7 +638,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-multipatchfield-25"><strong>MultipatchField</strong></a> (<a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... args) <br></td>
+<td style="text-align: left;"><a href="#function-multipatchfield-25"><strong>MultipatchField</strong></a> (T&lt; Patches &gt;... args) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
@@ -694,7 +694,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-35"><strong>MultipatchType</strong></a> (<a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... args) <br></td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-35"><strong>MultipatchType</strong></a> (T&lt; Patches &gt;... args) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
@@ -705,11 +705,11 @@
 <td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-55"><strong>MultipatchType</strong></a> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; OtherType, OPatches... &gt; &amp;&amp; other) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION T&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="classMultipatchType.html#function-get"><strong>get</strong></a> () const<br></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt; const &amp;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; T&lt; Patches &gt;... &gt; const &amp;</td>
 <td style="text-align: left;"><a href="classMultipatchType.html#function-get_tuple"><strong>get_tuple</strong></a> () const<br><em>Get a constant reference to the tuple of objects stored inside this</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
@@ -745,7 +745,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt;</td>
+<td style="text-align: right;">std::tuple&lt; T&lt; Patches &gt;... &gt;</td>
 <td style="text-align: left;"><a href="classMultipatchType.html#variable-m_tuple"><strong>m_tuple</strong></a>  <br><em>The internal tuple containing the data.</em></td>
 </tr>
 </tbody>
@@ -762,7 +762,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-25"><strong>MultipatchType</strong></a> (std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt; &amp;&amp; tuple) <br></td>
+<td style="text-align: left;"><a href="classMultipatchType.html#function-multipatchtype-25"><strong>MultipatchType</strong></a> (std::tuple&lt; T&lt; Patches &gt;... &gt; &amp;&amp; tuple) <br></td>
 </tr>
 </tbody>
 </table>
@@ -770,7 +770,7 @@
 <p>On a multipatch domain when we have objects and types defined on different patches, e.g. fields. They can be stored in this class and then be accessed by the patch they are defined on.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><a href="structT.html"><strong>T</strong></a> The type of the fields/derivative fields/vector fields that are stored on the given patches. </li>
+<li><code>T</code> The type of the fields/derivative fields/vector fields that are stored on the given patches. </li>
 <li><code>Patches</code> The patches of the objects in the same order of the patches that the given objects are defined on.</li>
 </ul>
 <p><strong>Warning:</strong></p>
@@ -838,7 +838,7 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-multipatchfield-25">function MultipatchField [2/5]</h3>
 <pre><code class="language-C++">inline explicit KOKKOS_FUNCTION MultipatchField::MultipatchField (
-    T &lt; Patches &gt;... args
+    T&lt; Patches &gt;... args
 ) 
 </code></pre>
 <p>Instantiate the <a href="classMultipatchField.html"><strong>MultipatchField</strong></a> class from an arbitrary number of objects.</p>

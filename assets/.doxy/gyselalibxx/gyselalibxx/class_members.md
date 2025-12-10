@@ -998,7 +998,7 @@
 * **Patch2** ([**EdgeTransformation**](classEdgeTransformation.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **PDEDim** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **pos** ([**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md))
-* **PERIODIC** ([**GyroAverageOperator::R\_gyro**](structGyroAverageOperator_1_1R__gyro.md), [**GyroAverageOperator::Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md), [**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**T**](structT.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
+* **PERIODIC** ([**GyroAverageOperator::R\_gyro**](structGyroAverageOperator_1_1R__gyro.md), [**GyroAverageOperator::Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md), [**Mu**](structMu.md), [**R**](structR.md), [**R\_cov**](structR__cov.md), [**Theta**](structTheta.md), [**Theta\_cov**](structTheta__cov.md), [**Vpar**](structVpar.md), [**Vr**](structVr.md), [**Vtheta**](structVtheta.md), [**Vx**](structVx.md), [**Vy**](structVy.md), [**X**](structX.md), [**X\_pC**](structX__pC.md), [**Y**](structY.md), [**Y\_pC**](structY__pC.md))
 * **PerpEdgeGrid1** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **PerpEdgeGrid2** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **patch\_id** ([**MultipatchSplineBuilder::Build\_BuilderType**](structMultipatchSplineBuilder_1_1Build__BuilderType.md))

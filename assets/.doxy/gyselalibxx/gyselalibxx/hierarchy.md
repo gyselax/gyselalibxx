@@ -201,7 +201,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**R\_cov**](structR__cov.md) _Define non periodic real covariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**RefinedDiscreteToCartesianBuilder::Build\_BuilderType**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType.md) 
 * **struct** [**RefinedDiscreteToCartesianBuilder::Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exedad782e8118e0de272f3e04e2a3c2f85.md) 
-* **struct** [**T**](structT.md) _A class which describes the real space in the temporal direction._ 
 * **struct** [**Theta**](structTheta.md) _Define periodic real contravariant_ [_**Theta**_](structTheta.md) _dimension._
 * **struct** [**Theta\_cov**](structTheta__cov.md) _Define periodic real covariant_ [_**Theta**_](structTheta.md) _dimension._
 * **struct** [**Vpar**](structVpar.md) _Define non periodic parallel velocity_ \(v_\parallel\) _._

@@ -43,7 +43,6 @@
 | struct | [**GridMom**](structGridMom.md) <br> |
 | struct | [**GridVx**](structGridVx.md) <br> |
 | struct | [**GridX**](structGridX.md) <br> |
-| struct | [**T**](structT.md) <br>_A class which describes the real space in the temporal direction._  |
 | struct | [**Vx**](structVx.md) <br>_Define non periodic real_ [_**X**_](structX.md) _velocity dimension._ |
 | struct | [**X**](structX.md) <br>_Define non periodic real_ [_**X**_](structX.md) _dimension._ |
 
@@ -62,7 +61,6 @@
 | typedef ConstField&lt; ElementType, IdxRangeSpXVx &gt; | [**ConstFieldSpXVx**](#typedef-constfieldspxvx)  <br> |
 | typedef Field&lt; ElementType const, IdxRangeVx &gt; | [**ConstFieldVx**](#typedef-constfieldvx)  <br> |
 | typedef Field&lt; ElementType const, IdxRangeX &gt; | [**ConstFieldX**](#typedef-constfieldx)  <br> |
-| typedef Coord&lt; [**T**](structT.md) &gt; | [**CoordT**](#typedef-coordt)  <br> |
 | typedef Coord&lt; [**Vx**](structVx.md) &gt; | [**CoordVx**](#typedef-coordvx)  <br> |
 | typedef Coord&lt; [**X**](structX.md) &gt; | [**CoordX**](#typedef-coordx)  <br> |
 | typedef Coord&lt; [**X**](structX.md), [**Vx**](structVx.md) &gt; | [**CoordXVx**](#typedef-coordxvx)  <br> |
@@ -323,19 +321,6 @@ using ConstFieldVx =  Field<ElementType const, IdxRangeVx>;
 
 ```C++
 using ConstFieldX =  Field<ElementType const, IdxRangeX>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef CoordT 
-
-```C++
-using CoordT =  Coord<T>;
 ```
 
 

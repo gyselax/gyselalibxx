@@ -925,7 +925,7 @@
       <memberdef kind="variable" id="ddc__alias__inline__functions_8hpp_1a7943e1cbe40f175f81b6fe448ed89007" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
@@ -944,7 +944,7 @@
       <memberdef kind="variable" id="ddc__alias__inline__functions_8hpp_1a43f438046e5ee07f0df36aef5d912da5" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>

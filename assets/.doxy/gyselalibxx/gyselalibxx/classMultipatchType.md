@@ -35,7 +35,7 @@ _A class to store several objects that are of a type which is templated by the p
 | Type | Name |
 | ---: | :--- |
 | typedef ddc::detail::TypeSeq&lt; Patches... &gt; | [**PatchOrdering**](#typedef-patchordering)  <br>_A tag storing the order of Patches in this_ [_**MultipatchType**_](classMultipatchType.md) _._ |
-| typedef [**T**](structT.md)&lt; ddc::type\_seq\_element\_t&lt; 0, [**PatchOrdering**](classMultipatchType.md#typedef-patchordering) &gt; &gt; | [**example\_element**](#typedef-example_element)  <br>_The type of one of the elements of the_ [_**MultipatchType**_](classMultipatchType.md) _. This can be used to check that types are as expected using functions such as ddc::is\_chunk\_v._ |
+| typedef T&lt; ddc::type\_seq\_element\_t&lt; 0, [**PatchOrdering**](classMultipatchType.md#typedef-patchordering) &gt; &gt; | [**example\_element**](#typedef-example_element)  <br>_The type of one of the elements of the_ [_**MultipatchType**_](classMultipatchType.md) _. This can be used to check that types are as expected using functions such as ddc::is\_chunk\_v._ |
 
 
 
@@ -60,11 +60,11 @@ _A class to store several objects that are of a type which is templated by the p
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**MultipatchType**](#function-multipatchtype-35) ([**T**](structT.md)&lt; Patches &gt;... args) <br> |
+|  KOKKOS\_FUNCTION | [**MultipatchType**](#function-multipatchtype-35) (T&lt; Patches &gt;... args) <br> |
 |  KOKKOS\_FUNCTION | [**MultipatchType**](#function-multipatchtype-45) ([**MultipatchType**](classMultipatchType.md)&lt; OtherType, OPatches... &gt; const & other) <br> |
 |   | [**MultipatchType**](#function-multipatchtype-55) ([**MultipatchType**](classMultipatchType.md)&lt; OtherType, OPatches... &gt; && other) <br> |
-|  KOKKOS\_FUNCTION [**T**](structT.md)&lt; [**Patch**](structPatch.md) &gt; | [**get**](#function-get) () const<br> |
-|  KOKKOS\_FUNCTION std::tuple&lt; [**T**](structT.md)&lt; Patches &gt;... &gt; const & | [**get\_tuple**](#function-get_tuple) () const<br>_Get a constant reference to the tuple of objects stored inside this_ [_**MultipatchType**_](classMultipatchType.md) _._ |
+|  KOKKOS\_FUNCTION T&lt; [**Patch**](structPatch.md) &gt; | [**get**](#function-get) () const<br> |
+|  KOKKOS\_FUNCTION std::tuple&lt; T&lt; Patches &gt;... &gt; const & | [**get\_tuple**](#function-get_tuple) () const<br>_Get a constant reference to the tuple of objects stored inside this_ [_**MultipatchType**_](classMultipatchType.md) _._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~MultipatchType**](#function-multipatchtype) () noexcept<br> |
 
 
@@ -83,7 +83,7 @@ _A class to store several objects that are of a type which is templated by the p
 
 | Type | Name |
 | ---: | :--- |
-|  std::tuple&lt; [**T**](structT.md)&lt; Patches &gt;... &gt; | [**m\_tuple**](#variable-m_tuple)  <br>_The internal tuple containing the data._  |
+|  std::tuple&lt; T&lt; Patches &gt;... &gt; | [**m\_tuple**](#variable-m_tuple)  <br>_The internal tuple containing the data._  |
 
 
 
@@ -104,7 +104,7 @@ _A class to store several objects that are of a type which is templated by the p
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**MultipatchType**](#function-multipatchtype-25) (std::tuple&lt; [**T**](structT.md)&lt; Patches &gt;... &gt; && tuple) <br> |
+|  KOKKOS\_FUNCTION | [**MultipatchType**](#function-multipatchtype-25) (std::tuple&lt; T&lt; Patches &gt;... &gt; && tuple) <br> |
 
 
 
@@ -120,7 +120,7 @@ On a multipatch domain when we have objects and types defined on different patch
 **Template parameters:**
 
 
-* [**T**](structT.md) The type of the objects that are stored on the given patches. 
+* `T` The type of the objects that are stored on the given patches. 
 * `Patches` The patches of the objects in the same order of the patches that the given objects are defined on.
 
 
@@ -173,7 +173,7 @@ using MultipatchType< T, Patches >::example_element =  T<ddc::type_seq_element_t
 
 ```C++
 inline explicit KOKKOS_FUNCTION MultipatchType::MultipatchType (
-    T < Patches >... args
+    T< Patches >... args
 ) 
 ```
 
@@ -267,8 +267,8 @@ Create a [**MultipatchType**](classMultipatchType.md) class from an r-value (tem
 ### function get 
 
 ```C++
-template<class Patch, std::enable_if_t<!has_data_access_methods_v< T < Patch > >, bool >>
-inline KOKKOS_FUNCTION T < Patch > MultipatchType::get () const
+template<class Patch, std::enable_if_t<!has_data_access_methods_v< T< Patch > >, bool >>
+inline KOKKOS_FUNCTION T< Patch > MultipatchType::get () const
 ```
 
 
@@ -303,7 +303,7 @@ The object on the given patch.
 
 _Get a constant reference to the tuple of objects stored inside this_ [_**MultipatchType**_](classMultipatchType.md) _._
 ```C++
-inline KOKKOS_FUNCTION std::tuple< T < Patches >... > const & MultipatchType::get_tuple () const
+inline KOKKOS_FUNCTION std::tuple< T< Patches >... > const & MultipatchType::get_tuple () const
 ```
 
 
@@ -386,7 +386,7 @@ std::tuple<T<Patches>...> MultipatchType< T, Patches >::m_tuple;
 
 ```C++
 inline explicit KOKKOS_FUNCTION MultipatchType::MultipatchType (
-    std::tuple< T < Patches >... > && tuple
+    std::tuple< T< Patches >... > && tuple
 ) 
 ```
 

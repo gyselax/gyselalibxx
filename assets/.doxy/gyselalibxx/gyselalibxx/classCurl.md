@@ -55,7 +55,7 @@ _A class which implements a curl operator The implemented equation is:_ \(\nabla
 | Type | Name |
 | ---: | :--- |
 |   | [**Curl**](#function-curl) (Mapping3D const & mapping) <br>_Build a curl operator._  |
-|  KOKKOS\_INLINE\_FUNCTION [**Tensor**](classTensor.md)&lt; [**T**](structT.md), get\_contravariant\_dims\_t&lt; CovBasisF &gt; &gt; | [**operator()**](#function-operator) ([**Tensor**](classTensor.md)&lt; [**T**](structT.md), CovBasisF, CovBasisSpatial &gt; const & partial\_derivatives\_f, MappingCoord const & coord) const<br>_Compute a curl at a given coordinate, from the partial derivatives of the vector field f._  |
+|  KOKKOS\_INLINE\_FUNCTION [**Tensor**](classTensor.md)&lt; T, get\_contravariant\_dims\_t&lt; CovBasisF &gt; &gt; | [**operator()**](#function-operator) ([**Tensor**](classTensor.md)&lt; T, CovBasisF, CovBasisSpatial &gt; const & partial\_derivatives\_f, MappingCoord const & coord) const<br>_Compute a curl at a given coordinate, from the partial derivatives of the vector field f._  |
 
 
 
@@ -136,8 +136,8 @@ inline explicit Curl::Curl (
 _Compute a curl at a given coordinate, from the partial derivatives of the vector field f._ 
 ```C++
 template<class T, class CovBasisF>
-inline KOKKOS_INLINE_FUNCTION Tensor < T , get_contravariant_dims_t< CovBasisF > > Curl::operator() (
-    Tensor < T , CovBasisF, CovBasisSpatial > const & partial_derivatives_f,
+inline KOKKOS_INLINE_FUNCTION Tensor < T, get_contravariant_dims_t< CovBasisF > > Curl::operator() (
+    Tensor < T, CovBasisF, CovBasisSpatial > const & partial_derivatives_f,
     MappingCoord const & coord
 ) const
 ```

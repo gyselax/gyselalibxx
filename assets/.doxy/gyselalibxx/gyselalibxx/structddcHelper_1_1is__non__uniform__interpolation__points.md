@@ -2,7 +2,7 @@
 
 # Struct ddcHelper::is\_non\_uniform\_interpolation\_points
 
-**template &lt;class [**T**](structT.md)&gt;**
+**template &lt;class T&gt;**
 
 
 

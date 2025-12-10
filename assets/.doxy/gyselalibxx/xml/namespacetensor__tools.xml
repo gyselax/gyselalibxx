@@ -373,7 +373,7 @@
       <memberdef kind="variable" id="namespacetensor__tools_1a09cf24ef307ce7250239f76c47aa7ac9" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>

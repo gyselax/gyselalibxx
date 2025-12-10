@@ -85,7 +85,7 @@ _Base tag for a patch._ [More...](#detailed-description)
 **Template parameters:**
 
 
-* [**T**](structT.md) Variadic template parameter allowing us to use [**Patch**](structPatch.md) struct for different numbers of dimensions. 
+* `T` Variadic template parameter allowing us to use [**Patch**](structPatch.md) struct for different numbers of dimensions. 
 
 
 

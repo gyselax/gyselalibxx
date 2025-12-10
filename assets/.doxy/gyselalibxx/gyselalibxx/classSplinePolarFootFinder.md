@@ -101,9 +101,9 @@ See [IPolarFootFinder](classIPolarFootFinder.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**SplinePolarFootFinder**](#function-splinepolarfootfinder) (IdxRangeBatched const & idx\_range\_operator, TimeStepperBuilder const & time\_stepper\_builder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical\_mapping, SplineRThetaBuilderAdvection const & builder\_advection\_field, SplineRThetaEvaluatorAdvection const & evaluator\_advection\_field, double epsilon=1e-12) <br>_Instantiate a time integration method for the advection operator._  |
-|  void | [**is\_unified**](#function-is_unified) (Field&lt; [**T**](structT.md), [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; const & values) const<br>_Check if the values at the centre point are the same._  |
+|  void | [**is\_unified**](#function-is_unified) (Field&lt; T, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; const & values) const<br>_Check if the values at the centre point are the same._  |
 |  void | [**operator()**](#function-operator) ([**CFieldFeet**](classSplinePolarFootFinder.md#typedef-cfieldfeet) feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classSplinePolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const<br>_Advect the feet over_ \(dt\) _._ |
-|  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; [**T**](structT.md), [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; values) const<br>_Replace the value at_ \((r=0, \theta)\) _point by the value at_\((r=0,0)\) _for all_\(\theta\) _._ |
+|  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; T, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; values) const<br>_Replace the value at_ \((r=0, \theta)\) _point by the value at_\((r=0,0)\) _for all_\(\theta\) _._ |
 
 
 ## Public Functions inherited from IPolarFootFinder
@@ -443,7 +443,7 @@ _Check if the values at the centre point are the same._
 ```C++
 template<class T>
 inline void SplinePolarFootFinder::is_unified (
-    Field< T , IdxRangeOperator , memory_space > const & values
+    Field< T, IdxRangeOperator , memory_space > const & values
 ) const
 ```
 
@@ -508,7 +508,7 @@ _Replace the value at_ \((r=0, \theta)\) _point by the value at_\((r=0,0)\) _for
 ```C++
 template<class T>
 inline void SplinePolarFootFinder::unify_value_at_centre_pt (
-    Field< T , IdxRangeOperator , memory_space > values
+    Field< T, IdxRangeOperator , memory_space > values
 ) const
 ```
 

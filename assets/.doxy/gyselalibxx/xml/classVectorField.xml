@@ -364,7 +364,7 @@
             <defname>ODDims</defname>
           </param>
           <param>
-            <type>typename <ref refid="structT" kindref="compound">T</ref></type>
+            <type>typename T</type>
           </param>
           <param>
             <type>T...</type>
@@ -382,7 +382,7 @@
           <declname>delems</declname>
         </param>
         <param>
-          <type>std::integer_sequence&lt; <ref refid="structT" kindref="compound">T</ref>, ints... &gt;</type>
+          <type>std::integer_sequence&lt; T, ints... &gt;</type>
         </param>
         <briefdescription>
         </briefdescription>

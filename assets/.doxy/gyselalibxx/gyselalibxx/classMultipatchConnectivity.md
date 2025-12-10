@@ -68,7 +68,7 @@ _A helper class which provides functionalities to recognise how different patche
 | Type | Name |
 | ---: | :--- |
 |  auto | [**get\_all\_idx\_ranges\_along\_direction**](#function-get_all_idx_ranges_along_direction-12) (std::tuple&lt; IdxRanges... &gt; all\_idx\_ranges) <br>_A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid._  |
-|  auto | [**get\_all\_idx\_ranges\_along\_direction**](#function-get_all_idx_ranges_along_direction-22) ([**MultipatchType**](classMultipatchType.md)&lt; [**T**](structT.md), Patches... &gt; all\_idx\_ranges) <br>_A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid._  |
+|  auto | [**get\_all\_idx\_ranges\_along\_direction**](#function-get_all_idx_ranges_along_direction-22) ([**MultipatchType**](classMultipatchType.md)&lt; T, Patches... &gt; all\_idx\_ranges) <br>_A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid._  |
 
 
 
@@ -307,7 +307,7 @@ _A function to return all index ranges which can be used to obtain coordinates a
 ```C++
 template<class Grid1D, template< typename P > typename T, class... Patches>
 static inline auto MultipatchConnectivity::get_all_idx_ranges_along_direction (
-    MultipatchType < T , Patches... > all_idx_ranges
+    MultipatchType < T, Patches... > all_idx_ranges
 ) 
 ```
 

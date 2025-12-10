@@ -35,10 +35,10 @@ Inherits the following classes: [MultipatchType](classMultipatchType.md)
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename [**T**](structT.md)&lt; [**Patch**](structPatch.md) &gt;[**::view\_type**](classMultipatchFieldMem.md#typedef-view_type) | [**InternalConstFieldOnPatch**](#typedef-internalconstfieldonpatch)  <br>_An internal type alias that is only instantiated if the get\_const\_field method is called._  |
-| typedef typename [**T**](structT.md)&lt; [**Patch**](structPatch.md) &gt;[**::span\_type**](classMultipatchFieldMem.md#typedef-span_type) | [**InternalFieldOnPatch**](#typedef-internalfieldonpatch)  <br>_An internal type alias that is only instantiated if the get\_const\_field method is called._  |
-| typedef typename [**T**](structT.md)&lt; [**Patch**](structPatch.md) &gt;[**::discrete\_domain\_type**](classMultipatchFieldMem.md#typedef-discrete_domain_type) | [**InternalIdxRangeOnPatch**](#typedef-internalidxrangeonpatch)  <br>_An internal type alias that is only instantiated if the idx\_range method is called._  |
-| typedef [**MultipatchType**](classMultipatchType.md)&lt; [**T**](structT.md), Patches... &gt; | [**base\_type**](#typedef-base_type)  <br>_The_ [_**MultipatchType**_](classMultipatchType.md) _from which this class inherits._ |
+| typedef typename T&lt; [**Patch**](structPatch.md) &gt;[**::view\_type**](classMultipatchFieldMem.md#typedef-view_type) | [**InternalConstFieldOnPatch**](#typedef-internalconstfieldonpatch)  <br>_An internal type alias that is only instantiated if the get\_const\_field method is called._  |
+| typedef typename T&lt; [**Patch**](structPatch.md) &gt;[**::span\_type**](classMultipatchFieldMem.md#typedef-span_type) | [**InternalFieldOnPatch**](#typedef-internalfieldonpatch)  <br>_An internal type alias that is only instantiated if the get\_const\_field method is called._  |
+| typedef typename T&lt; [**Patch**](structPatch.md) &gt;[**::discrete\_domain\_type**](classMultipatchFieldMem.md#typedef-discrete_domain_type) | [**InternalIdxRangeOnPatch**](#typedef-internalidxrangeonpatch)  <br>_An internal type alias that is only instantiated if the idx\_range method is called._  |
+| typedef [**MultipatchType**](classMultipatchType.md)&lt; T, Patches... &gt; | [**base\_type**](#typedef-base_type)  <br>_The_ [_**MultipatchType**_](classMultipatchType.md) _from which this class inherits._ |
 | typedef [**MultipatchType**](classMultipatchType.md)&lt; [**InternalIdxRangeOnPatch**](classMultipatchFieldMem.md#typedef-internalidxrangeonpatch), Patches... &gt; | [**discrete\_domain\_type**](#typedef-discrete_domain_type)  <br>_The type of the index ranges that can be used to access this field._  |
 | typedef typename base\_type::example\_element::element\_type | [**element\_type**](#typedef-element_type)  <br>_The type of the elements inside the field._  |
 | typedef typename base\_type::example\_element::memory\_space | [**memory\_space**](#typedef-memory_space)  <br>_The memory space (CPU/GPU) where the data is saved._  |
@@ -53,7 +53,7 @@ See [MultipatchType](classMultipatchType.md)
 | Type | Name |
 | ---: | :--- |
 | typedef ddc::detail::TypeSeq&lt; Patches... &gt; | [**PatchOrdering**](classMultipatchType.md#typedef-patchordering)  <br>_A tag storing the order of Patches in this_ [_**MultipatchType**_](classMultipatchType.md) _._ |
-| typedef [**T**](structT.md)&lt; ddc::type\_seq\_element\_t&lt; 0, [**PatchOrdering**](classMultipatchType.md#typedef-patchordering) &gt; &gt; | [**example\_element**](classMultipatchType.md#typedef-example_element)  <br>_The type of one of the elements of the_ [_**MultipatchType**_](classMultipatchType.md) _. This can be used to check that types are as expected using functions such as ddc::is\_chunk\_v._ |
+| typedef T&lt; ddc::type\_seq\_element\_t&lt; 0, [**PatchOrdering**](classMultipatchType.md#typedef-patchordering) &gt; &gt; | [**example\_element**](classMultipatchType.md#typedef-example_element)  <br>_The type of one of the elements of the_ [_**MultipatchType**_](classMultipatchType.md) _. This can be used to check that types are as expected using functions such as ddc::is\_chunk\_v._ |
 
 
 
@@ -96,7 +96,7 @@ See [MultipatchType](classMultipatchType.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-24) ([**T**](structT.md)&lt; Patches &gt;... args) <br> |
+|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-24) (T&lt; Patches &gt;... args) <br> |
 |   | [**MultipatchFieldMem**](#function-multipatchfieldmem-34) (MultipatchObj & other) <br> |
 |   | [**MultipatchFieldMem**](#function-multipatchfieldmem-44) ([**MultipatchFieldMem**](classMultipatchFieldMem.md)&lt; OtherType, OPatches... &gt; && other) <br> |
 |  auto | [**get**](#function-get-12) () const<br> |
@@ -115,11 +115,11 @@ See [MultipatchType](classMultipatchType.md)
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**MultipatchType**](classMultipatchType.md#function-multipatchtype-35) ([**T**](structT.md)&lt; Patches &gt;... args) <br> |
+|  KOKKOS\_FUNCTION | [**MultipatchType**](classMultipatchType.md#function-multipatchtype-35) (T&lt; Patches &gt;... args) <br> |
 |  KOKKOS\_FUNCTION | [**MultipatchType**](classMultipatchType.md#function-multipatchtype-45) ([**MultipatchType**](classMultipatchType.md)&lt; OtherType, OPatches... &gt; const & other) <br> |
 |   | [**MultipatchType**](classMultipatchType.md#function-multipatchtype-55) ([**MultipatchType**](classMultipatchType.md)&lt; OtherType, OPatches... &gt; && other) <br> |
-|  KOKKOS\_FUNCTION [**T**](structT.md)&lt; [**Patch**](structPatch.md) &gt; | [**get**](classMultipatchType.md#function-get) () const<br> |
-|  KOKKOS\_FUNCTION std::tuple&lt; [**T**](structT.md)&lt; Patches &gt;... &gt; const & | [**get\_tuple**](classMultipatchType.md#function-get_tuple) () const<br>_Get a constant reference to the tuple of objects stored inside this_ [_**MultipatchType**_](classMultipatchType.md) _._ |
+|  KOKKOS\_FUNCTION T&lt; [**Patch**](structPatch.md) &gt; | [**get**](classMultipatchType.md#function-get) () const<br> |
+|  KOKKOS\_FUNCTION std::tuple&lt; T&lt; Patches &gt;... &gt; const & | [**get\_tuple**](classMultipatchType.md#function-get_tuple) () const<br>_Get a constant reference to the tuple of objects stored inside this_ [_**MultipatchType**_](classMultipatchType.md) _._ |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~MultipatchType**](classMultipatchType.md#function-multipatchtype) () noexcept<br> |
 
 
@@ -150,7 +150,7 @@ See [MultipatchType](classMultipatchType.md)
 
 | Type | Name |
 | ---: | :--- |
-|  std::tuple&lt; [**T**](structT.md)&lt; Patches &gt;... &gt; | [**m\_tuple**](classMultipatchType.md#variable-m_tuple)  <br>_The internal tuple containing the data._  |
+|  std::tuple&lt; T&lt; Patches &gt;... &gt; | [**m\_tuple**](classMultipatchType.md#variable-m_tuple)  <br>_The internal tuple containing the data._  |
 
 
 
@@ -189,7 +189,7 @@ See [MultipatchType](classMultipatchType.md)
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**MultipatchType**](classMultipatchType.md#function-multipatchtype-25) (std::tuple&lt; [**T**](structT.md)&lt; Patches &gt;... &gt; && tuple) <br> |
+|  KOKKOS\_FUNCTION | [**MultipatchType**](classMultipatchType.md#function-multipatchtype-25) (std::tuple&lt; T&lt; Patches &gt;... &gt; && tuple) <br> |
 
 
 
@@ -207,7 +207,7 @@ On a multipatch domain when we have objects and types defined on different patch
 **Template parameters:**
 
 
-* [**T**](structT.md) The type of the FieldMem/DerivMem/VectorFieldMem that are stored on the given patches. 
+* `T` The type of the FieldMem/DerivMem/VectorFieldMem that are stored on the given patches. 
 * `Patches` The patches of the objects in the same order of the patches that the given objects are defined on.
 
 
@@ -358,7 +358,7 @@ using MultipatchFieldMem< T, Patches >::view_type =  MultipatchField<InternalCon
 
 ```C++
 inline explicit MultipatchFieldMem::MultipatchFieldMem (
-    T < Patches >... args
+    T< Patches >... args
 ) 
 ```
 

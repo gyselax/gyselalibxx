@@ -569,7 +569,7 @@
 <td style="text-align: left;"><a href="#typedef-patchordering"><strong>PatchOrdering</strong></a>  <br><em>A tag storing the order of Patches in this</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="structT.html"><strong>T</strong></a>&lt; ddc::type_seq_element_t&lt; 0, <a href="classMultipatchType.html#typedef-patchordering"><strong>PatchOrdering</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef T&lt; ddc::type_seq_element_t&lt; 0, <a href="classMultipatchType.html#typedef-patchordering"><strong>PatchOrdering</strong></a> &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-example_element"><strong>example_element</strong></a>  <br><em>The type of one of the elements of the</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>. This can be used to check that types are as expected using functions such as ddc::is_chunk_v.</em></td>
 </tr>
 </tbody>
@@ -585,7 +585,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-multipatchtype-35"><strong>MultipatchType</strong></a> (<a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... args) <br></td>
+<td style="text-align: left;"><a href="#function-multipatchtype-35"><strong>MultipatchType</strong></a> (T&lt; Patches &gt;... args) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
@@ -596,11 +596,11 @@
 <td style="text-align: left;"><a href="#function-multipatchtype-55"><strong>MultipatchType</strong></a> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; OtherType, OPatches... &gt; &amp;&amp; other) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION <a href="structT.html"><strong>T</strong></a>&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION T&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> () const<br></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt; const &amp;</td>
+<td style="text-align: right;">KOKKOS_FUNCTION std::tuple&lt; T&lt; Patches &gt;... &gt; const &amp;</td>
 <td style="text-align: left;"><a href="#function-get_tuple"><strong>get_tuple</strong></a> () const<br><em>Get a constant reference to the tuple of objects stored inside this</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
@@ -634,7 +634,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt;</td>
+<td style="text-align: right;">std::tuple&lt; T&lt; Patches &gt;... &gt;</td>
 <td style="text-align: left;"><a href="#variable-m_tuple"><strong>m_tuple</strong></a>  <br><em>The internal tuple containing the data.</em></td>
 </tr>
 </tbody>
@@ -650,7 +650,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-multipatchtype-25"><strong>MultipatchType</strong></a> (std::tuple&lt; <a href="structT.html"><strong>T</strong></a>&lt; Patches &gt;... &gt; &amp;&amp; tuple) <br></td>
+<td style="text-align: left;"><a href="#function-multipatchtype-25"><strong>MultipatchType</strong></a> (std::tuple&lt; T&lt; Patches &gt;... &gt; &amp;&amp; tuple) <br></td>
 </tr>
 </tbody>
 </table>
@@ -658,7 +658,7 @@
 <p>On a multipatch domain when we have objects and types defined on different patches, e.g. fields. They can be stored in this class and then be accessed by the patch they are defined on.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><a href="structT.html"><strong>T</strong></a> The type of the objects that are stored on the given patches. </li>
+<li><code>T</code> The type of the objects that are stored on the given patches. </li>
 <li><code>Patches</code> The patches of the objects in the same order of the patches that the given objects are defined on.</li>
 </ul>
 <p><strong>Warning:</strong></p>
@@ -678,7 +678,7 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-multipatchtype-35">function MultipatchType [3/5]</h3>
 <pre><code class="language-C++">inline explicit KOKKOS_FUNCTION MultipatchType::MultipatchType (
-    T &lt; Patches &gt;... args
+    T&lt; Patches &gt;... args
 ) 
 </code></pre>
 <p>Instantiate the <a href="classMultipatchType.html"><strong>MultipatchType</strong></a> class from an arbitrary number of objects.</p>
@@ -717,8 +717,8 @@ inline MultipatchType::MultipatchType (
 <hr>
 
 <h3 id="function-get">function get</h3>
-<pre><code class="language-C++">template&lt;class Patch, std::enable_if_t&lt;!has_data_access_methods_v&lt; T &lt; Patch &gt; &gt;, bool &gt;&gt;
-inline KOKKOS_FUNCTION T &lt; Patch &gt; MultipatchType::get () const
+<pre><code class="language-C++">template&lt;class Patch, std::enable_if_t&lt;!has_data_access_methods_v&lt; T&lt; Patch &gt; &gt;, bool &gt;&gt;
+inline KOKKOS_FUNCTION T&lt; Patch &gt; MultipatchType::get () const
 </code></pre>
 <p>Retrieve an object from the patch that it is defined on.</p>
 <p><strong>Template parameters:</strong></p>
@@ -731,7 +731,7 @@ inline KOKKOS_FUNCTION T &lt; Patch &gt; MultipatchType::get () const
 
 <h3 id="function-get_tuple">function get_tuple</h3>
 <p><em>Get a constant reference to the tuple of objects stored inside this</em> <a href="classMultipatchType.html"><em><strong>MultipatchType</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">inline KOKKOS_FUNCTION std::tuple&lt; T &lt; Patches &gt;... &gt; const &amp; MultipatchType::get_tuple () const
+<pre><code class="language-C++">inline KOKKOS_FUNCTION std::tuple&lt; T&lt; Patches &gt;... &gt; const &amp; MultipatchType::get_tuple () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>A constant reference to the tuple of objects stored inside this <a href="classMultipatchType.html"><strong>MultipatchType</strong></a>. </p>
@@ -758,7 +758,7 @@ inline KOKKOS_FUNCTION T &lt; Patch &gt; MultipatchType::get () const
 <h2 id="protected-functions-documentation">Protected Functions Documentation</h2>
 <h3 id="function-multipatchtype-25">function MultipatchType [2/5]</h3>
 <pre><code class="language-C++">inline explicit KOKKOS_FUNCTION MultipatchType::MultipatchType (
-    std::tuple&lt; T &lt; Patches &gt;... &gt; &amp;&amp; tuple
+    std::tuple&lt; T&lt; Patches &gt;... &gt; &amp;&amp; tuple
 ) 
 </code></pre>
 <p>A constructor for sub-classes which can build the necessary tuple directly following their own rules.</p>

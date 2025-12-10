@@ -46,7 +46,7 @@
 |  constexpr bool | [**enable\_borrowed\_vector\_field**](#variable-enable_borrowed_vector_field)   = `false`<br> |
 |  constexpr bool | [**enable\_vector\_field**](#variable-enable_vector_field)   = `false`<br> |
 |  constexpr bool | [**is\_borrowed\_vector\_field\_v**](#variable-is_borrowed_vector_field_v)   = `/* multi line expression */`<br> |
-|  constexpr bool | [**is\_vector\_field\_v**](#variable-is_vector_field_v)   = `enable\_vector\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;[**T**](structT.md)&gt;&gt;&gt;`<br> |
+|  constexpr bool | [**is\_vector\_field\_v**](#variable-is_vector_field_v)   = `enable\_vector\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 

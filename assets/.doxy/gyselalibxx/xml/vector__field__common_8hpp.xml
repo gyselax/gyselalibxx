@@ -584,7 +584,7 @@
       <memberdef kind="variable" id="vector__field__common_8hpp_1aa29e7e054dd70eed40b662573fef4dce" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
@@ -603,7 +603,7 @@
       <memberdef kind="variable" id="vector__field__common_8hpp_1aeda75928d17f75bf8b25e316dbe0eb85" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
@@ -622,14 +622,14 @@
       <memberdef kind="variable" id="vector__field__common_8hpp_1a8e0e3f2d7807786625013abeddaf6340" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
         <definition>constexpr bool is_vector_field_v</definition>
         <argsstring></argsstring>
         <name>is_vector_field_v</name>
-        <initializer>= enable_vector_field&lt;std::remove_const_t&lt;std::remove_reference_t&lt;<ref refid="structT" kindref="compound">T</ref>&gt;&gt;&gt;</initializer>
+        <initializer>= enable_vector_field&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -641,7 +641,7 @@
       <memberdef kind="variable" id="vector__field__common_8hpp_1a1ec1cffd21ca92707e30777c28190ae5" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
@@ -649,7 +649,7 @@
         <argsstring></argsstring>
         <name>is_borrowed_vector_field_v</name>
         <initializer>= is_vector_field_v&lt;
-                  <ref refid="structT" kindref="compound">T</ref>&gt; &amp;&amp; (std::is_lvalue_reference_v&lt;<ref refid="structT" kindref="compound">T</ref>&gt; || enable_borrowed_vector_field&lt;std::remove_cv_t&lt;std::remove_reference_t&lt;<ref refid="structT" kindref="compound">T</ref>&gt;&gt;&gt;)</initializer>
+                  T&gt; &amp;&amp; (std::is_lvalue_reference_v&lt;T&gt; || enable_borrowed_vector_field&lt;std::remove_cv_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;)</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -688,7 +688,7 @@
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_borrowed_vector_field_v</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>is_vector_field_v&lt;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structT" kindref="compound">T</ref>&gt;<sp/>&amp;&amp;<sp/>(std::is_lvalue_reference_v&lt;T&gt;<sp/>||<sp/>enable_borrowed_vector_field&lt;std::remove_cv_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T&gt;<sp/>&amp;&amp;<sp/>(std::is_lvalue_reference_v&lt;T&gt;<sp/>||<sp/>enable_borrowed_vector_field&lt;std::remove_cv_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;);</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"></highlight></codeline>
 <codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">ddcHelper<sp/>{</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>

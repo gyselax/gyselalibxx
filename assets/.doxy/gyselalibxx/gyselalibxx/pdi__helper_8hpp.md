@@ -57,7 +57,7 @@
 | ---: | :--- |
 |  void | [**PDI\_expose\_idx\_range**](#function-pdi_expose_idx_range) (IdxRange&lt; Grids... &gt; index\_range, std::string name) <br> |
 |  void | [**PDI\_expose\_vector\_field**](#function-pdi_expose_vector_field) (std::string const & name\_stem, [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRangeType, VectorIndexSet&lt; IndexTag... &gt;, Kokkos::HostSpace &gt; out\_vector, StringType const &... name\_suffixes) <br>_A helper function to expose a vector field to PDI ready for output to a file._  |
-|  void | [**PDI\_get\_arrays**](#function-pdi_get_arrays) (std::string const & event\_name, std::string const & name, std::vector&lt; [**T**](structT.md) &gt; & out\_vector, Args &... input\_args) <br> |
+|  void | [**PDI\_get\_arrays**](#function-pdi_get_arrays) (std::string const & event\_name, std::string const & name, std::vector&lt; T &gt; & out\_vector, Args &... input\_args) <br> |
 
 
 

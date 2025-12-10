@@ -18,7 +18,7 @@
     </templateparamlist>
     <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classMultipatchField_1aa166acf6255535cc17a77462f916bc24" prot="public" static="no">
-        <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, Patches... &gt;</type>
+        <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; T, Patches... &gt;</type>
         <definition>using MultipatchField&lt; T, Patches &gt;::base_type =  MultipatchType&lt;T, Patches...&gt;</definition>
         <argsstring></argsstring>
         <name>base_type</name>
@@ -38,7 +38,7 @@
             <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structT" kindref="compound">T</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1a5b3babc9be1e8e6c0c87ab4a89d87fc2" kindref="member">::discrete_domain_type</ref></type>
+        <type>typename T&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1a5b3babc9be1e8e6c0c87ab4a89d87fc2" kindref="member">::discrete_domain_type</ref></type>
         <definition>using MultipatchField&lt; T, Patches &gt;::InternalIdxRangeOnPatch =  typename T&lt;Patch&gt;::discrete_domain_type</definition>
         <argsstring></argsstring>
         <name>InternalIdxRangeOnPatch</name>
@@ -58,7 +58,7 @@
             <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structT" kindref="compound">T</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1abd59fa1d9f2605c57ea59eeca005b079" kindref="member">::span_type</ref></type>
+        <type>typename T&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1abd59fa1d9f2605c57ea59eeca005b079" kindref="member">::span_type</ref></type>
         <definition>using MultipatchField&lt; T, Patches &gt;::InternalFieldOnPatch =  typename T&lt;Patch&gt;::span_type</definition>
         <argsstring></argsstring>
         <name>InternalFieldOnPatch</name>
@@ -78,7 +78,7 @@
             <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
           </param>
         </templateparamlist>
-        <type>typename <ref refid="structT" kindref="compound">T</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1a5cbbad0f201452b8682476434d69eae3" kindref="member">::view_type</ref></type>
+        <type>typename T&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;<ref refid="classMultipatchField_1a5cbbad0f201452b8682476434d69eae3" kindref="member">::view_type</ref></type>
         <definition>using MultipatchField&lt; T, Patches &gt;::InternalConstFieldOnPatch =  typename T&lt;Patch&gt;::view_type</definition>
         <argsstring></argsstring>
         <name>InternalConstFieldOnPatch</name>
@@ -227,7 +227,7 @@
         <name>MultipatchField</name>
         <qualifiedname>MultipatchField::MultipatchField</qualifiedname>
         <param>
-          <type><ref refid="structT" kindref="compound">T</ref>&lt; Patches &gt;...</type>
+          <type>T&lt; Patches &gt;...</type>
           <declname>args</declname>
         </param>
         <briefdescription>
@@ -513,7 +513,7 @@
 <para>On a multipatch domain when we have objects and types defined on different patches, e.g. fields. They can be stored in this class and then be accessed by the patch they are defined on.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structT" kindref="compound">T</ref></parametername>
+<parametername>T</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The type of the fields/derivative fields/vector fields that are stored on the given patches. </para>

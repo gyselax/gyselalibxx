@@ -34,7 +34,7 @@
         <label>std::conditional_t&lt; BsplineOnUniformCellsVx, ddc::UniformBSplines&lt; Vx, BSDegreeVx &gt;, ddc::NonUniformBSplines&lt; Vx, BSDegreeVx &gt; &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="85" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="90" bodyend="91"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="73" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="78" bodyend="79"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

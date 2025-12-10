@@ -4,7 +4,7 @@
     <compoundname>IdxRangeToSlice</compoundname>
     <templateparamlist>
       <param>
-        <type>class <ref refid="structT" kindref="compound">T</ref></type>
+        <type>class T</type>
       </param>
     </templateparamlist>
     <briefdescription>

@@ -413,7 +413,7 @@ virtual int Matrix_Banded::solve_inplace_method (
 
 
 * `b` The data describing the right-hand side. 
-* `transpose` A character ['N'/'[**T**](structT.md)'] describing whether the matrix or the transposed matrix appears in the matrix equation. 
+* `transpose` A character ['N'/'T'] describing whether the matrix or the transposed matrix appears in the matrix equation. 
 * `n_equations` The number of equations being solved. 
 
 

@@ -50,7 +50,7 @@
 |  constexpr bool | [**enable\_multipatch\_field**](#variable-enable_multipatch_field)   = `false`<br> |
 |  constexpr bool | [**enable\_multipatch\_field&lt; MultipatchField&lt; T, Patches... &gt; &gt;**](#variable-enable_multipatch_field-multipatchfield-t-patches)   = `true`<br> |
 |  constexpr bool | [**enable\_multipatch\_type&lt; MultipatchField&lt; T, Patches... &gt; &gt;**](#variable-enable_multipatch_type-multipatchfield-t-patches)   = `true`<br> |
-|  constexpr bool | [**is\_multipatch\_field\_v**](#variable-is_multipatch_field_v)   = `enable\_multipatch\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;[**T**](structT.md)&gt;&gt;&gt;`<br> |
+|  constexpr bool | [**is\_multipatch\_field\_v**](#variable-is_multipatch_field_v)   = `enable\_multipatch\_field&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;T&gt;&gt;&gt;`<br> |
 
 
 

@@ -428,15 +428,15 @@
       <memberdef kind="function" id="math__tools_8hpp_1a84374f2ef799f6e7015d484b1eb77ac7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>typename <ref refid="structT" kindref="compound">T</ref></type>
+            <type>typename T</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="structT" kindref="compound">T</ref></type>
+        <type>KOKKOS_INLINE_FUNCTION T</type>
         <definition>KOKKOS_INLINE_FUNCTION T sum</definition>
         <argsstring>(const T *array, int size)</argsstring>
         <name>sum</name>
         <param>
-          <type>const <ref refid="structT" kindref="compound">T</ref> *</type>
+          <type>const T *</type>
           <declname>array</declname>
         </param>
         <param>
@@ -600,19 +600,19 @@
       <memberdef kind="function" id="math__tools_8hpp_1a68d288f6885715deb685f21226119541" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>typename <ref refid="structT" kindref="compound">T</ref></type>
+            <type>typename T</type>
           </param>
         </templateparamlist>
-        <type><ref refid="structT" kindref="compound">T</ref></type>
+        <type>T</type>
         <definition>T modulo</definition>
         <argsstring>(T x, T y)</argsstring>
         <name>modulo</name>
         <param>
-          <type><ref refid="structT" kindref="compound">T</ref></type>
+          <type>T</type>
           <declname>x</declname>
         </param>
         <param>
-          <type><ref refid="structT" kindref="compound">T</ref></type>
+          <type>T</type>
           <declname>y</declname>
         </param>
         <briefdescription>
@@ -946,9 +946,9 @@
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="18"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/><ref refid="structT" kindref="compound">T</ref><sp/>sum(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref>*<sp/>array,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
+<codeline lineno="18"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>T<sp/>sum(</highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>T*<sp/>array,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>size)</highlight></codeline>
 <codeline lineno="19"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="structT" kindref="compound">T</ref><sp/>val(0.0);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/>T<sp/>val(0.0);</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>i(0);<sp/>i<sp/>&lt;<sp/>size;<sp/>++i)<sp/>{</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>val<sp/>+=<sp/>array[i];</highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -1027,7 +1027,7 @@
 <codeline lineno="96"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"></highlight></codeline>
 <codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref><sp/>modulo(<ref refid="structT" kindref="compound">T</ref><sp/>x,<sp/><ref refid="structT" kindref="compound">T</ref><sp/>y)</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>T<sp/>modulo(T<sp/>x,<sp/>T<sp/>y)</highlight></codeline>
 <codeline lineno="100"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>x<sp/>-<sp/>y<sp/>*<sp/>std::floor(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">(x)<sp/>/<sp/>y);</highlight></codeline>
 <codeline lineno="102"><highlight class="normal">}</highlight></codeline>

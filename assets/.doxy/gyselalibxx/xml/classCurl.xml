@@ -105,19 +105,19 @@
       <memberdef kind="function" id="classCurl_1a32ec3619b9102ba23a85fabc5353a6d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
           <param>
             <type>class CovBasisF</type>
           </param>
         </templateparamlist>
-        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, get_contravariant_dims_t&lt; CovBasisF &gt; &gt;</type>
+        <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref>&lt; T, get_contravariant_dims_t&lt; CovBasisF &gt; &gt;</type>
         <definition>KOKKOS_INLINE_FUNCTION Tensor&lt; T, get_contravariant_dims_t&lt; CovBasisF &gt; &gt; Curl&lt; Mapping3D, MappingCoord &gt;::operator()</definition>
         <argsstring>(Tensor&lt; T, CovBasisF, CovBasisSpatial &gt; const &amp;partial_derivatives_f, MappingCoord const &amp;coord) const</argsstring>
         <name>operator()</name>
         <qualifiedname>Curl::operator()</qualifiedname>
         <param>
-          <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, CovBasisF, CovBasisSpatial &gt; const &amp;</type>
+          <type><ref refid="classTensor" kindref="compound">Tensor</ref>&lt; T, CovBasisF, CovBasisSpatial &gt; const &amp;</type>
           <declname>partial_derivatives_f</declname>
         </param>
         <param>

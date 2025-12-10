@@ -2713,9 +2713,6 @@
   <compound refid="structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01FRONT_01_4_01_4" kind="struct"><name>connectivity_details::SwapExtremity&lt; Edge&lt; Patch, Grid1D, FRONT &gt; &gt;</name>
     <member refid="structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01FRONT_01_4_01_4_1a078f35939498a6a06b366f95fce809cd" kind="typedef"><name>type</name></member>
   </compound>
-  <compound refid="structT" kind="struct"><name>T</name>
-    <member refid="structT_1a5f940fd4eca16aa26decb85142708203" kind="variable"><name>PERIODIC</name></member>
-  </compound>
   <compound refid="classTensor" kind="class"><name>Tensor</name>
     <member refid="classTensor_1a90babc948cc76e5741f04a45395c0498" kind="typedef"><name>base_type</name></member>
     <member refid="classTensor_1a4a47cd908de66325add93143756fb97f" kind="function"><name>Tensor</name></member>
@@ -3521,7 +3518,6 @@
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a7c56867d7bd33a28aaa184453ce48f12" kind="variable"><name>SplineMuBoundary</name></member>
   </compound>
   <compound refid="geometryXVx_2geometry_2geometry_8hpp" kind="file"><name>geometry.hpp</name>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a9b4ed88f824e4d19c1898de224a6d676" kind="typedef"><name>CoordT</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a5e9223a5af2d88988df1dc0873f1f021" kind="typedef"><name>CoordX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a7d38310972352694a6247cc9f84304ce" kind="typedef"><name>CoordVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a656661d1d6e9a359f47ca1d364776d6e" kind="typedef"><name>CoordXVx</name></member>

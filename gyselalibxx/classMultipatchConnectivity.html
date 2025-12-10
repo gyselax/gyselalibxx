@@ -609,7 +609,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-get_all_idx_ranges_along_direction-22"><strong>get_all_idx_ranges_along_direction</strong></a> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; <a href="structT.html"><strong>T</strong></a>, Patches... &gt; all_idx_ranges) <br><em>A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid.</em></td>
+<td style="text-align: left;"><a href="#function-get_all_idx_ranges_along_direction-22"><strong>get_all_idx_ranges_along_direction</strong></a> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>&lt; T, Patches... &gt; all_idx_ranges) <br><em>A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid.</em></td>
 </tr>
 </tbody>
 </table>
@@ -701,7 +701,7 @@ static inline auto MultipatchConnectivity::get_all_idx_ranges_along_direction (
 <p><em>A function to return all index ranges which can be used to obtain coordinates along a line which passes through the requested grid.</em> </p>
 <pre><code class="language-C++">template&lt;class Grid1D, template&lt; typename P &gt; typename T, class... Patches&gt;
 static inline auto MultipatchConnectivity::get_all_idx_ranges_along_direction (
-    MultipatchType &lt; T , Patches... &gt; all_idx_ranges
+    MultipatchType &lt; T, Patches... &gt; all_idx_ranges
 ) 
 </code></pre>
 <p><strong>Template parameters:</strong></p>

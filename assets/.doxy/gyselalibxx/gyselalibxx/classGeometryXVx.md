@@ -35,8 +35,8 @@ _A class providing aliases for useful subindex ranges of the geometry. It is use
 | typedef IdxRangeSpXVx | [**IdxRangeFdistribu**](#typedef-idxrangefdistribu)  <br>_An alias for the whole distribution function discrete index range type._  |
 | typedef IdxRangeX | [**IdxRangeSpatial**](#typedef-idxrangespatial)  <br>_An alias for the spatial discrete index range type._  |
 | typedef IdxRangeVx | [**IdxRangeVelocity**](#typedef-idxrangevelocity)  <br>_An alias for the velocity discrete index range type._  |
-| typedef std::conditional\_t&lt; std::is\_same\_v&lt; [**T**](structT.md), [**GridVx**](structGridVx.md) &gt;, [**GridX**](structGridX.md), void &gt; | [**spatial\_dim\_for**](#typedef-spatial_dim_for)  <br>_A templated type giving the spatial discretised dimension type associated to a velocity discretised dimension type._  |
-| typedef std::conditional\_t&lt; std::is\_same\_v&lt; [**T**](structT.md), [**GridX**](structGridX.md) &gt;, [**GridVx**](structGridVx.md), void &gt; | [**velocity\_dim\_for**](#typedef-velocity_dim_for)  <br>_A templated type giving the velocity discretised dimension type associated to a spatial discretised dimension type._  |
+| typedef std::conditional\_t&lt; std::is\_same\_v&lt; T, [**GridVx**](structGridVx.md) &gt;, [**GridX**](structGridX.md), void &gt; | [**spatial\_dim\_for**](#typedef-spatial_dim_for)  <br>_A templated type giving the spatial discretised dimension type associated to a velocity discretised dimension type._  |
+| typedef std::conditional\_t&lt; std::is\_same\_v&lt; T, [**GridX**](structGridX.md) &gt;, [**GridVx**](structGridVx.md), void &gt; | [**velocity\_dim\_for**](#typedef-velocity_dim_for)  <br>_A templated type giving the velocity discretised dimension type associated to a spatial discretised dimension type._  |
 
 
 

@@ -40,13 +40,7 @@ struct Vx
     static bool constexpr PERIODIC = false;
 };
 
-struct T
-{
-    static bool constexpr PERIODIC = false;
-};
 
-
-using CoordT = Coord<T>;
 using CoordX = Coord<X>;
 
 using CoordVx = Coord<Vx>;

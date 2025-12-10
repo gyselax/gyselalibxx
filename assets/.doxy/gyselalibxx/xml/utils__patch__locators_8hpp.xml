@@ -323,14 +323,14 @@
       <memberdef kind="variable" id="utils__patch__locators_8hpp_1a07432a82cd197305e54dba1131b3d0f0" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
         <definition>constexpr bool is_onion_patch_locator_v</definition>
         <argsstring></argsstring>
         <name>is_onion_patch_locator_v</name>
-        <initializer>= <ref refid="structis__onion__patch__locator" kindref="compound">is_onion_patch_locator</ref>&lt;<ref refid="structT" kindref="compound">T</ref>&gt;::value</initializer>
+        <initializer>= <ref refid="structis__onion__patch__locator" kindref="compound">is_onion_patch_locator</ref>&lt;T&gt;::value</initializer>
         <briefdescription>
 <para>Boolean: true if the patch locator is adapted to onion geometry. </para>
         </briefdescription>

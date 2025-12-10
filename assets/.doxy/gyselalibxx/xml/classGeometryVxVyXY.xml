@@ -7,10 +7,10 @@
       <memberdef kind="typedef" id="classGeometryVxVyXY_1a84a9fb15350cd97ea073b9843813182c" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
-        <type>std::conditional_t&lt; std::is_same_v&lt; <ref refid="structT" kindref="compound">T</ref>, <ref refid="structGridX" kindref="compound">GridX</ref> &gt;, <ref refid="structGridVx" kindref="compound">GridVx</ref>, std::conditional_t&lt; std::is_same_v&lt; <ref refid="structT" kindref="compound">T</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;, <ref refid="structGridVy" kindref="compound">GridVy</ref>, void &gt; &gt;</type>
+        <type>std::conditional_t&lt; std::is_same_v&lt; T, <ref refid="structGridX" kindref="compound">GridX</ref> &gt;, <ref refid="structGridVx" kindref="compound">GridVx</ref>, std::conditional_t&lt; std::is_same_v&lt; T, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;, <ref refid="structGridVy" kindref="compound">GridVy</ref>, void &gt; &gt;</type>
         <definition>using GeometryVxVyXY::velocity_dim_for =  std::conditional_t&lt; std::is_same_v&lt;T, GridX&gt;, GridVx, std::conditional_t&lt;std::is_same_v&lt;T, GridY&gt;, GridVy, void&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>velocity_dim_for</name>

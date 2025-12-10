@@ -729,7 +729,7 @@
           <declname>exec_space</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, Patches... &gt;</type>
+          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; T, Patches... &gt;</type>
           <declname>k_total</declname>
         </param>
         <param>
@@ -737,7 +737,7 @@
           <declname>func</declname>
         </param>
         <param>
-          <type>std::array&lt; <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, Patches... &gt;, n_args &gt;</type>
+          <type>std::array&lt; <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; T, Patches... &gt;, n_args &gt;</type>
           <declname>k_arr</declname>
         </param>
         <briefdescription>
@@ -814,7 +814,7 @@
           <declname>exec_space</declname>
         </param>
         <param>
-          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, Patches... &gt;</type>
+          <type><ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; T, Patches... &gt;</type>
           <declname>k_total</declname>
         </param>
         <param>
@@ -822,7 +822,7 @@
           <declname>func</declname>
         </param>
         <param>
-          <type>std::array&lt; <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, Patches... &gt;, n_args &gt;</type>
+          <type>std::array&lt; <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>&lt; T, Patches... &gt;, n_args &gt;</type>
           <declname>k_arr</declname>
         </param>
         <briefdescription>

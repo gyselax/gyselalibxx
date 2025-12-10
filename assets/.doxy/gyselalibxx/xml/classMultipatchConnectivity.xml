@@ -261,7 +261,7 @@
         <name>get_all_idx_ranges_along_direction</name>
         <qualifiedname>MultipatchConnectivity::get_all_idx_ranges_along_direction</qualifiedname>
         <param>
-          <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; <ref refid="structT" kindref="compound">T</ref>, Patches... &gt;</type>
+          <type><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt; T, Patches... &gt;</type>
           <declname>all_idx_ranges</declname>
         </param>
         <briefdescription>

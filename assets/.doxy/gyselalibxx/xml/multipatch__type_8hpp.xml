@@ -432,7 +432,7 @@
       <memberdef kind="variable" id="multipatch__type_8hpp_1a59ab731c02d44c4ec5ad863df0858c5a" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
@@ -451,14 +451,14 @@
       <memberdef kind="variable" id="multipatch__type_8hpp_1a65e97c3c36f361003c0e4603a8e314cd" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>constexpr bool</type>
         <definition>constexpr bool is_multipatch_type_v</definition>
         <argsstring></argsstring>
         <name>is_multipatch_type_v</name>
-        <initializer>= enable_multipatch_type&lt;std::remove_const_t&lt;std::remove_reference_t&lt;<ref refid="structT" kindref="compound">T</ref>&gt;&gt;&gt;</initializer>
+        <initializer>= enable_multipatch_type&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;</initializer>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -514,13 +514,13 @@
 <codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>enable_multipatch_type&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;;</highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref>,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
 <codeline lineno="31" refid="classMultipatchType" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref></highlight></codeline>
 <codeline lineno="32"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="35" refid="classMultipatchType_1ac09ed5edaf7d35c564ef78fe31620631" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchType_1ac09ed5edaf7d35c564ef78fe31620631" kindref="member">PatchOrdering</ref><sp/>=<sp/>ddc::detail::TypeSeq&lt;Patches...&gt;;</highlight></codeline>
 <codeline lineno="36"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41" refid="classMultipatchType_1afba13bfc8d2a69be4c8760228c4a8414" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structT" kindref="compound">example_element</ref><sp/>=<sp/><ref refid="structT" kindref="compound">T&lt;ddc::type_seq_element_t&lt;0, PatchOrdering&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="41" refid="classMultipatchType_1afba13bfc8d2a69be4c8760228c4a8414" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMultipatchType_1afba13bfc8d2a69be4c8760228c4a8414" kindref="member">example_element</ref><sp/>=<sp/>T&lt;ddc::type_seq_element_t&lt;0,<sp/>PatchOrdering&gt;&gt;;</highlight></codeline>
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"></highlight><highlight class="keyword">protected</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="45" refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>std::tuple&lt;T&lt;Patches&gt;...&gt;<sp/><ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">m_tuple</ref>;</highlight></codeline>
@@ -528,10 +528,10 @@
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>OtherType,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>OPatches&gt;</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">friend</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>;</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="55" refid="classMultipatchType_1ae1ab2f08d00d74b0fd692ed0269af5c6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classMultipatchType_1ae1ab2f08d00d74b0fd692ed0269af5c6" kindref="member">MultipatchType</ref>(std::tuple&lt;<ref refid="structT" kindref="compound">T&lt;Patches&gt;</ref>...&gt;&amp;&amp;<sp/>tuple)<sp/>:<sp/><ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">m_tuple</ref>(tuple)<sp/>{}</highlight></codeline>
+<codeline lineno="55" refid="classMultipatchType_1ae1ab2f08d00d74b0fd692ed0269af5c6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classMultipatchType_1ae1ab2f08d00d74b0fd692ed0269af5c6" kindref="member">MultipatchType</ref>(std::tuple&lt;T&lt;Patches&gt;...&gt;&amp;&amp;<sp/>tuple)<sp/>:<sp/><ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">m_tuple</ref>(tuple)<sp/>{}</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"></highlight></codeline>
 <codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="63" refid="classMultipatchType_1a7a63de3f7e30ad01b0a2634abacba57d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/><ref refid="classMultipatchType_1a7a63de3f7e30ad01b0a2634abacba57d" kindref="member">MultipatchType</ref>(<ref refid="structT" kindref="compound">T&lt;Patches&gt;</ref>...<sp/>args)</highlight></codeline>
+<codeline lineno="63" refid="classMultipatchType_1a7a63de3f7e30ad01b0a2634abacba57d" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/><ref refid="classMultipatchType_1a7a63de3f7e30ad01b0a2634abacba57d" kindref="member">MultipatchType</ref>(T&lt;Patches&gt;...<sp/>args)</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">m_tuple</ref>(std::make_tuple(std::move(args)...))</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
 <codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -563,8 +563,8 @@
 <codeline lineno="112"><highlight class="normal"></highlight></codeline>
 <codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_DEFAULTED_FUNCTION<sp/><ref refid="classMultipatchType" kindref="compound">~MultipatchType</ref>()<sp/>noexcept<sp/>=<sp/>default;</highlight></codeline>
 <codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;class<sp/><ref refid="structPatch" kindref="compound">Patch</ref>,<sp/>std::enable_if_t&lt;!has_data_access_methods_v&lt;<ref refid="structT" kindref="compound">T</ref>&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
-<codeline lineno="122" refid="classMultipatchType_1a4257d5324630c6b8326d8601b5fa1d86" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="structT" kindref="compound">T</ref>&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;<sp/><ref refid="classMultipatchType_1a4257d5324630c6b8326d8601b5fa1d86" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>template<sp/>&lt;class<sp/><ref refid="structPatch" kindref="compound">Patch</ref>,<sp/>std::enable_if_t&lt;!has_data_access_methods_v&lt;T&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="122" refid="classMultipatchType_1a4257d5324630c6b8326d8601b5fa1d86" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/>T&lt;<ref refid="structPatch" kindref="compound">Patch</ref>&gt;<sp/><ref refid="classMultipatchType_1a4257d5324630c6b8326d8601b5fa1d86" kindref="member">get</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="123"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::get&lt;T&lt;Patch&gt;&gt;(<ref refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" kindref="member">m_tuple</ref>);</highlight></codeline>
 <codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
@@ -580,8 +580,8 @@
 <codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="145"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structT" kindref="compound">T</ref>,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_multipatch_type&lt;<ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt;<ref refid="structT" kindref="compound">T</ref>,<sp/>Patches...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>P&gt;<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Patches&gt;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>enable_multipatch_type&lt;<ref refid="classMultipatchType" kindref="compound">MultipatchType</ref>&lt;T,<sp/>Patches...&gt;&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_type.hpp"/>
   </compounddef>

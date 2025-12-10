@@ -654,7 +654,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-is_unified"><strong>is_unified</strong></a> (Field&lt; <a href="structT.html"><strong>T</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; const &amp; values) const<br><em>Check if the values at the centre point are the same.</em></td>
+<td style="text-align: left;"><a href="#function-is_unified"><strong>is_unified</strong></a> (Field&lt; T, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; const &amp; values) const<br><em>Check if the values at the centre point are the same.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -662,7 +662,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-unify_value_at_centre_pt"><strong>unify_value_at_centre_pt</strong></a> (Field&lt; <a href="structT.html"><strong>T</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; values) const<br><em>Replace the value at</em> <span class="arithmatex">\((r=0, \theta)\)</span> <em>point by the value at</em><span class="arithmatex">\((r=0,0)\)</span> <em>for all</em><span class="arithmatex">\(\theta\)</span> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-unify_value_at_centre_pt"><strong>unify_value_at_centre_pt</strong></a> (Field&lt; T, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; values) const<br><em>Replace the value at</em> <span class="arithmatex">\((r=0, \theta)\)</span> <em>point by the value at</em><span class="arithmatex">\((r=0,0)\)</span> <em>for all</em><span class="arithmatex">\(\theta\)</span> <em>.</em></td>
 </tr>
 </tbody>
 </table>
@@ -838,7 +838,7 @@
 <p><em>Check if the values at the centre point are the same.</em> </p>
 <pre><code class="language-C++">template&lt;class T&gt;
 inline void SplinePolarFootFinder::is_unified (
-    Field&lt; T , IdxRangeOperator , memory_space &gt; const &amp; values
+    Field&lt; T, IdxRangeOperator , memory_space &gt; const &amp; values
 ) const
 </code></pre>
 <p>For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for <span class="arithmatex">\(r = 0\)</span> have the same value. This function check if for <span class="arithmatex">\(r= 0\)</span>, the values <span class="arithmatex">\(\forall \theta\)</span> are the same.</p>
@@ -869,7 +869,7 @@ inline void SplinePolarFootFinder::is_unified (
 <p><em>Replace the value at</em> <span class="arithmatex">\((r=0, \theta)\)</span> <em>point by the value at</em><span class="arithmatex">\((r=0,0)\)</span> <em>for all</em><span class="arithmatex">\(\theta\)</span> <em>.</em></p>
 <pre><code class="language-C++">template&lt;class T&gt;
 inline void SplinePolarFootFinder::unify_value_at_centre_pt (
-    Field&lt; T , IdxRangeOperator , memory_space &gt; values
+    Field&lt; T, IdxRangeOperator , memory_space &gt; values
 ) const
 </code></pre>
 <p>For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for <span class="arithmatex">\(r = 0\)</span> have the same value. As the computation of the values of a table can induces machine errors, this function is useful to reset the values at the central point at the same value.</p>

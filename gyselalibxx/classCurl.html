@@ -569,8 +569,8 @@
 <td style="text-align: left;"><a href="#function-curl"><strong>Curl</strong></a> (Mapping3D const &amp; mapping) <br><em>Build a curl operator.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classTensor.html"><strong>Tensor</strong></a>&lt; <a href="structT.html"><strong>T</strong></a>, get_contravariant_dims_t&lt; CovBasisF &gt; &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classTensor.html"><strong>Tensor</strong></a>&lt; <a href="structT.html"><strong>T</strong></a>, CovBasisF, CovBasisSpatial &gt; const &amp; partial_derivatives_f, MappingCoord const &amp; coord) const<br><em>Compute a curl at a given coordinate, from the partial derivatives of the vector field f.</em></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION <a href="classTensor.html"><strong>Tensor</strong></a>&lt; T, get_contravariant_dims_t&lt; CovBasisF &gt; &gt;</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classTensor.html"><strong>Tensor</strong></a>&lt; T, CovBasisF, CovBasisSpatial &gt; const &amp; partial_derivatives_f, MappingCoord const &amp; coord) const<br><em>Compute a curl at a given coordinate, from the partial derivatives of the vector field f.</em></td>
 </tr>
 </tbody>
 </table>
@@ -596,8 +596,8 @@
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute a curl at a given coordinate, from the partial derivatives of the vector field f.</em> </p>
 <pre><code class="language-C++">template&lt;class T, class CovBasisF&gt;
-inline KOKKOS_INLINE_FUNCTION Tensor &lt; T , get_contravariant_dims_t&lt; CovBasisF &gt; &gt; Curl::operator() (
-    Tensor &lt; T , CovBasisF, CovBasisSpatial &gt; const &amp; partial_derivatives_f,
+inline KOKKOS_INLINE_FUNCTION Tensor &lt; T, get_contravariant_dims_t&lt; CovBasisF &gt; &gt; Curl::operator() (
+    Tensor &lt; T, CovBasisF, CovBasisSpatial &gt; const &amp; partial_derivatives_f,
     MappingCoord const &amp; coord
 ) const
 </code></pre>

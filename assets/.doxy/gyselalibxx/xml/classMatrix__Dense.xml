@@ -219,7 +219,7 @@
 <parametername direction="in">transpose</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A character [&apos;N&apos;/&apos;<ref refid="structT" kindref="compound">T</ref>&apos;] describing whether the matrix or the transposed matrix appears in the matrix equation. </para>
+<para>A character [&apos;N&apos;/&apos;T&apos;] describing whether the matrix or the transposed matrix appears in the matrix equation. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

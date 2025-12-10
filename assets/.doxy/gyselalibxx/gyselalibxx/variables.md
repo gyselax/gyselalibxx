@@ -64,7 +64,6 @@
 * **ConstFieldSpXVx** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md))
 * **ConstFieldVx** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **ConstFieldX** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXY_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
-* **CoordT** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md))
 * **CoordXVx** ([**geometry.hpp**](geometryXVx_2geometry_2geometry_8hpp.md))
 * **ConstFieldXY** ([**geometry.hpp**](geometryXY_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))
 * **ConstFieldY** ([**geometry.hpp**](geometryXY_2geometry_2geometry_8hpp.md), [**geometry.hpp**](geometryXYVxVy_2geometry_2geometry_8hpp.md))

@@ -553,8 +553,17 @@
 <p>The format is based on <a href="https://keepachangelog.com/en/1.1.0/">Keep a Changelog</a>,
 and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semantic Versioning</a>.</p>
 <hr>
-<h2 id="v040-2025-12-10">[v0.4.0] - 2025-12-10</h2>
+<h2 id="unreleased">[UNRELEASED]</h2>
 <h3 id="added">Added</h3>
+<h3 id="fixed">Fixed</h3>
+<h3 id="changed">Changed</h3>
+<h3 id="deprecated">Deprecated</h3>
+<h3 id="removed">Removed</h3>
+<ul>
+<li>Remove unused temporal dimension <code>T</code> in <code>geometryXVx</code>.</li>
+</ul>
+<h2 id="v040-2025-12-10">[v0.4.0] - 2025-12-10</h2>
+<h3 id="added_1">Added</h3>
 <ul>
 <li>Add getters to <code>DerivField</code> types to access the associated index ranges.</li>
 <li>Add H100 Jean-Zay toolchain.</li>
@@ -563,13 +572,13 @@ The operator averages the values of the advection field on the first ring to get
 <li>Add <code>static_assert</code> expressions for spline builder/evaluator pairs.</li>
 <li>Added <code>equilibrium::init_from_input</code> method to choose XVx equililibrium in input file.</li>
 </ul>
-<h3 id="fixed">Fixed</h3>
+<h3 id="fixed_1">Fixed</h3>
 <ul>
 <li>Ensure <code>std::abs</code> or <code>Kokkos::abs</code> is preferred over <code>abs</code>.</li>
 <li>Specify return type for Lie-Poisson operator explicitly for better error messages.</li>
 <li>Ensure <code>copy_to_vector_space</code> can be called for different memory layouts.</li>
 </ul>
-<h3 id="changed">Changed</h3>
+<h3 id="changed_1">Changed</h3>
 <ul>
 <li>Use patched recipes for the CPU Spack toolchain.</li>
 <li>Inject Kokkos Tools lib directory to <code>LD_LIBRARY_PATH</code> in the Adastra toolchains.</li>
@@ -592,7 +601,7 @@ The operator averages the values of the advection field on the first ring to get
 <li>Use LAPACKE to call LAPACK functions.</li>
 </ul>
 <h2 id="v030-2025-09-03">[v0.3.0] - 2025-09-03</h2>
-<h3 id="added_1">Added</h3>
+<h3 id="added_2">Added</h3>
 <ul>
 <li>Add a curl operator.</li>
 <li>Port <code>PolarSplineEvaluator</code> methods to GPU.</li>
@@ -602,7 +611,7 @@ The operator averages the values of the advection field on the first ring to get
 <li>Allow <code>min</code> and <code>max</code> from <code>math_tools.hpp</code> to be called from GPU.</li>
 <li>Add a <code>periodic_strips_non_uniform_2d_9patches</code> geometry.</li>
 </ul>
-<h3 id="fixed_1">Fixed</h3>
+<h3 id="fixed_2">Fixed</h3>
 <ul>
 <li>Modify <code>ruche.v100/environment.sh</code> file to fix tokamaxi simulation segfault issues.</li>
 <li>Fix type of derivatives stored in <code>DerivFieldMem</code> and <code>DerivField</code> types.</li>
@@ -615,7 +624,7 @@ The operator averages the values of the advection field on the first ring to get
 <li>Fix <code>is_borrowed_deriv_field_v&lt;&gt;</code> in <code>derivative_field_common.hpp</code> file.</li>
 <li>Fix <code>phi_eq</code> in diocotron and vortex-merger simulations.</li>
 </ul>
-<h3 id="changed_1">Changed</h3>
+<h3 id="changed_2">Changed</h3>
 <ul>
 <li>Change interface of <code>EdgeTransformation::search_for_match</code> to return an <code>out_of_bounds_idx</code> instead of a boolean.</li>
 <li>Change spack setup in CPU installation script (<code>prepare.sh</code>) to create and use independent spack installation.</li>
@@ -639,8 +648,8 @@ The operator averages the values of the advection field on the first ring to get
 <li>Use Spack to install the Kokkos ecosystem in the GENOA Adastra toolchain.</li>
 <li>Use a single rocm stack on Adastra.</li>
 </ul>
-<h3 id="deprecated">Deprecated</h3>
-<h3 id="removed">Removed</h3>
+<h3 id="deprecated_1">Deprecated</h3>
+<h3 id="removed_1">Removed</h3>
 <ul>
 <li>Remove deprecated method <code>PolarBSplines::integrals</code>.</li>
 <li>Remove unhelpful <code>PolarSpline</code> classes in favour of <code>DField&lt;IdxRange&lt;PolarBSplines&gt;&gt;</code> types.</li>
@@ -648,7 +657,7 @@ The operator averages the values of the advection field on the first ring to get
 <li>Remove <code>min</code> and <code>max</code> from <code>math_tools.hpp</code> (functionality is available in std and Kokkos namespaces).</li>
 </ul>
 <h2 id="v020-2025-07-03">[v0.2.0] - 2025-07-03</h2>
-<h3 id="added_2">Added</h3>
+<h3 id="added_3">Added</h3>
 <ul>
 <li>Add a Gyroaverage operator with tests for circular geometry.</li>
 <li>Curvilinear coordinate change classes have an O-point method to retrieve the O-point in the non-curvilinear coordinates.</li>
@@ -657,7 +666,7 @@ The operator averages the values of the advection field on the first ring to get
 <li>Add a function <code>PDI_expose_vector_field</code> to output a vector field via PDI.</li>
 <li>Add a <code>control_points</code> method to <code>DiscreteToCartesian</code> to allow all control points to be retrieved at once.</li>
 </ul>
-<h3 id="fixed_2">Fixed</h3>
+<h3 id="fixed_3">Fixed</h3>
 <ul>
 <li>Fix uninitialized warning in the <code>Tensor</code> class.</li>
 <li>Fix unused <code>m_magnetic_field</code> variable in <code>MaxwellianEquilibrium</code> class.</li>
@@ -668,7 +677,7 @@ The operator averages the values of the advection field on the first ring to get
 <li>Fix missing assertion in <code>LeviCivitaTensor</code> to prevent division by 0 when Jacobian is calculated at singular point.</li>
 <li>Fix bad result of <code>is_tensor_v</code> for <code>IdentityTensor</code>.</li>
 </ul>
-<h3 id="changed_2">Changed</h3>
+<h3 id="changed_3">Changed</h3>
 <ul>
 <li>Bumped the minimum CMake version to 3.25 to benefit from the <code>add_subdirectory(.. SYSTEM)</code> feature.</li>
 <li>Change the interface of <code>IVlasovSolver</code> and <code>IQNSolver</code> in <code>geometryXYVxVy</code> to store the electric field in a <code>VectorField</code>.</li>
@@ -679,16 +688,16 @@ The operator averages the values of the advection field on the first ring to get
 <li>Curvilinear coordinate change classes take a <code>Coord</code> type to specify the O-point in the constructor.</li>
 <li>Allow <code>init_discrete_space</code> to be used to initialise <code>PolarBSplines</code> with a GPU-based <code>DiscreteToCartesian</code> coordinate change operator.</li>
 </ul>
-<h3 id="deprecated_1">Deprecated</h3>
+<h3 id="deprecated_2">Deprecated</h3>
 <h2 id="v011-2025-05-30">[v0.1.1] - 2025-05-30</h2>
-<h3 id="fixed_3">Fixed</h3>
+<h3 id="fixed_4">Fixed</h3>
 <ul>
 <li>Fix paths in root <code>CMakeLists.txt</code> file to ensure it can be correctly used in a submodule.</li>
 <li>Update remaining use of <code>ddc::Coordinate</code> to use Gyselalib++ conventions (<code>Coord</code>).</li>
 <li>Update coding conventions to match what is applied.</li>
 </ul>
 <h2 id="v010-2025-05-28">[v0.1.0] - 2025-05-28</h2>
-<h3 id="added_3">Added</h3>
+<h3 id="added_4">Added</h3>
 <ul>
 <li>First release of Gyselalib++</li>
 <li>Advection operators</li>

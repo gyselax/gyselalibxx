@@ -40,7 +40,7 @@
 | Type | Name |
 | ---: | :--- |
 | class | [**NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md) &lt;class BSplines, BcXmin, BcXmax&gt;<br>_Helper class for the initialisation of the mesh of interpolation points._  |
-| struct | [**is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md) &lt;class [**T**](structT.md)&gt;<br> |
+| struct | [**is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md) &lt;class T&gt;<br> |
 | struct | [**is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md) &lt;class BSplines, BcXmin, BcXmax&gt;<br> |
 
 

@@ -15,7 +15,7 @@
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername><ref refid="structT" kindref="compound">T</ref></parametername>
+<parametername>T</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>Variadic template parameter allowing us to use <ref refid="structPatch" kindref="compound">Patch</ref> struct for different numbers of dimensions. </para>

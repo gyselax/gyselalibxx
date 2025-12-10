@@ -796,7 +796,7 @@
       <memberdef kind="function" id="classSplinePolarFootFinder_1afbd816fc87cf702e6692740c09065253" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>void</type>
@@ -805,7 +805,7 @@
         <name>is_unified</name>
         <qualifiedname>SplinePolarFootFinder::is_unified</qualifiedname>
         <param>
-          <type>Field&lt; <ref refid="structT" kindref="compound">T</ref>, <ref refid="classSplinePolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kindref="member">IdxRangeOperator</ref>, <ref refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" kindref="member">memory_space</ref> &gt; const &amp;</type>
+          <type>Field&lt; T, <ref refid="classSplinePolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kindref="member">IdxRangeOperator</ref>, <ref refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" kindref="member">memory_space</ref> &gt; const &amp;</type>
           <declname>values</declname>
         </param>
         <briefdescription>
@@ -831,7 +831,7 @@
       <memberdef kind="function" id="classSplinePolarFootFinder_1a5d70325daef4d1687f452a5d066d2829" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class <ref refid="structT" kindref="compound">T</ref></type>
+            <type>class T</type>
           </param>
         </templateparamlist>
         <type>void</type>
@@ -840,7 +840,7 @@
         <name>unify_value_at_centre_pt</name>
         <qualifiedname>SplinePolarFootFinder::unify_value_at_centre_pt</qualifiedname>
         <param>
-          <type>Field&lt; <ref refid="structT" kindref="compound">T</ref>, <ref refid="classSplinePolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kindref="member">IdxRangeOperator</ref>, <ref refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" kindref="member">memory_space</ref> &gt;</type>
+          <type>Field&lt; T, <ref refid="classSplinePolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kindref="member">IdxRangeOperator</ref>, <ref refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" kindref="member">memory_space</ref> &gt;</type>
           <declname>values</declname>
         </param>
         <briefdescription>

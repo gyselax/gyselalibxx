@@ -53,8 +53,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  double | [**error\_norm\_inf**](#function-error_norm_inf) (ExecSpace exec\_space, [**MultipatchField**](classMultipatchField.md)&lt; [**T**](structT.md), Patches... &gt; multipatch\_function, [**MultipatchField**](classMultipatchField.md)&lt; [**T**](structT.md), Patches... &gt; multipatch\_exact\_function) <br>_Compute the infinity norm of the error between 2 Fields or VectorFields over multiple patches._  |
-|  double | [**norm\_inf**](#function-norm_inf) (ExecSpace exec\_space, [**MultipatchField**](classMultipatchField.md)&lt; [**T**](structT.md), Patches... &gt; multipatch\_function) <br>_Compute the infinity norm for a Field or_ [_**VectorField**_](classVectorField.md) _over multiple patches._ |
+|  double | [**error\_norm\_inf**](#function-error_norm_inf) (ExecSpace exec\_space, [**MultipatchField**](classMultipatchField.md)&lt; T, Patches... &gt; multipatch\_function, [**MultipatchField**](classMultipatchField.md)&lt; T, Patches... &gt; multipatch\_exact\_function) <br>_Compute the infinity norm of the error between 2 Fields or VectorFields over multiple patches._  |
+|  double | [**norm\_inf**](#function-norm_inf) (ExecSpace exec\_space, [**MultipatchField**](classMultipatchField.md)&lt; T, Patches... &gt; multipatch\_function) <br>_Compute the infinity norm for a Field or_ [_**VectorField**_](classVectorField.md) _over multiple patches._ |
 
 
 
@@ -95,8 +95,8 @@ _Compute the infinity norm of the error between 2 Fields or VectorFields over mu
 template<class ExecSpace, template< typename P > typename T, class... Patches>
 double error_norm_inf (
     ExecSpace exec_space,
-    MultipatchField < T , Patches... > multipatch_function,
-    MultipatchField < T , Patches... > multipatch_exact_function
+    MultipatchField < T, Patches... > multipatch_function,
+    MultipatchField < T, Patches... > multipatch_exact_function
 ) 
 ```
 
@@ -134,7 +134,7 @@ _Compute the infinity norm for a Field or_ [_**VectorField**_](classVectorField.
 template<class ExecSpace, template< typename P > typename T, class... Patches>
 double norm_inf (
     ExecSpace exec_space,
-    MultipatchField < T , Patches... > multipatch_function
+    MultipatchField < T, Patches... > multipatch_function
 ) 
 ```
 

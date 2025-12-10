@@ -2,7 +2,7 @@
 
 # Struct IdxRangeToSlice
 
-**template &lt;class [**T**](structT.md)&gt;**
+**template &lt;class T&gt;**
 
 
 

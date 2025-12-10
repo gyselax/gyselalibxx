@@ -5,7 +5,7 @@
     <basecompoundref prot="public" virt="non-virtual">std::false_type</basecompoundref>
     <templateparamlist>
       <param>
-        <type>class <ref refid="structT" kindref="compound">T</ref></type>
+        <type>class T</type>
       </param>
     </templateparamlist>
     <briefdescription>
