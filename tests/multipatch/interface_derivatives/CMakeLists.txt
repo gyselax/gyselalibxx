@@ -52,24 +52,6 @@ function (interface_derivative_matrix_executable TEST_CASE)
             interface_derivative_matrix_Greville_periodic_test.cpp
             ../../main.cpp
         )
-    elseif (TEST_CASE STREQUAL "REVERSE_PATCH1")
-        set(test_name_gtest "interface_derivative_matrix_start_patch_reversed_test")
-        add_executable("${test_name_gtest}"
-            interface_derivative_matrix_Hermite_test.cpp
-            ../../main.cpp
-        )
-    elseif (TEST_CASE STREQUAL "REVERSE_PATCH2")
-        set(test_name_gtest "interface_derivative_matrix_middle_patch_reversed_test")
-        add_executable("${test_name_gtest}"
-            interface_derivative_matrix_Hermite_test.cpp
-            ../../main.cpp
-        )
-    elseif (TEST_CASE STREQUAL "REVERSE_PATCH3")
-        set(test_name_gtest "interface_derivative_matrix_end_patch_reversed_test")
-        add_executable("${test_name_gtest}"
-            interface_derivative_matrix_Hermite_test.cpp
-            ../../main.cpp
-        )
     else()
         set(test_name_gtest "interface_derivative_matrix_${TEST_CASE}_test")
         add_executable("${test_name_gtest}"
