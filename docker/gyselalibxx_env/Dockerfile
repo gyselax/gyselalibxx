@@ -53,14 +53,16 @@ RUN chmod +x /bin/bash_run \
  && cmake --install build \
  && cd .. \
  && rm -rf ginkgo \
- && git clone --branch 4.4.01 --depth 1 https://github.com/kokkos/kokkos.git \
- && git clone --branch develop-spline-kernels-v2 --depth 1 https://github.com/yasahi-hpc/kokkos-kernels \
+ && git clone --branch 4.7.01 --depth 1 https://github.com/kokkos/kokkos.git \
+ && git clone --branch 4.7.01 --depth 1 https://github.com/kokkos/kokkos-kernels.git \
  && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
- && git clone --branch v0.2.1 --depth 1 https://github.com/kokkos/kokkos-fft.git \
- && export Kokkos_ROOT=/opt/serial/kokkos \
- && export KokkosFFT_ROOT=/opt/serial/kokkos-fft \
- && export KokkosKernels_ROOT=/opt/serial/kokkos-kernels \
- && export KokkosTools_ROOT=/opt/serial/kokkos-tools \
+ && git clone --branch v0.4.0 --depth 1 https://github.com/kokkos/kokkos-fft.git \
+ && git clone --branch v0.9.0 --depth 1 https://github.com/CExA-project/ddc.git \
+ && export Kokkos_ROOT=/opt/serial/Kokkos \
+ && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
+ && export KokkosKernels_ROOT=/opt/serial/KokkosKernels \
+ && export KokkosTools_ROOT=/opt/serial/KokkosTools \
+ && export DDC_ROOT=/opt/serial/DDC \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_SERIAL=ON -B build -S kokkos \
  && cmake --build build \
  && cmake --install build --prefix $Kokkos_ROOT \
@@ -77,10 +79,15 @@ RUN chmod +x /bin/bash_run \
  && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
  && rm -rf build \
- && export Kokkos_ROOT=/opt/openmp/kokkos \
- && export KokkosFFT_ROOT=/opt/openmp/kokkos-fft \
- && export KokkosKernels_ROOT=/opt/openmp/kokkos-kernels \
- && export KokkosTools_ROOT=/opt/openmp/kokkos-tools \
+ && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
+ && cmake --build build \
+ && cmake --install build --prefix $DDC_ROOT \
+ && rm -rf build \
+ && export Kokkos_ROOT=/opt/openmp/Kokkos \
+ && export KokkosFFT_ROOT=/opt/openmp/KokkosFFT \
+ && export KokkosKernels_ROOT=/opt/openmp/KokkosKernels \
+ && export KokkosTools_ROOT=/opt/openmp/KokkosTools \
+ && export DDC_ROOT=/opt/openmp/DDC \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_OPENMP=ON -B build -S kokkos \
  && cmake --build build \
  && cmake --install build --prefix $Kokkos_ROOT \
@@ -96,7 +103,15 @@ RUN chmod +x /bin/bash_run \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
  && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
- && rm -rf build kokkos kokkos-fft kokkos-kernels kokkos-tools \
+ && rm -rf build \
+ && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
+ && cmake --build build \
+ && cmake --install build --prefix $DDC_ROOT \
+ && rm -rf build kokkos kokkos-fft kokkos-kernels kokkos-tools ddc \
+ && git clone -b release-1.12.1 https://github.com/google/googletest.git \
+ && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
+ && cmake --build build \
+ && cmake --install build --prefix /opt/googletest \
  && git clone -b 2.14.2 https://github.com/danmar/cppcheck.git \
  && cd cppcheck \
  && cmake -S . -B build \
@@ -132,6 +147,7 @@ USER ci:ci
 WORKDIR /ci
 ENV HOME=/ci
 ENV PATH="/opt/venv/bin:$PATH"
+ENV CMAKE_PREFIX_PATH="/opt/googletest"
 
 ENTRYPOINT ["/bin/bash_run"]
 CMD ["/bin/bash", "-li"]

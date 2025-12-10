@@ -1,45 +1,38 @@
 ---
 packages:
   all:
-    compiler: [gcc@13.2.1.mi250]
-    target: [zen3]
-    permissions:
-      write: group
-    providers:
-      mpi: [cray-mpich]
-      blas: [cray-libsci, openblas]
-      lapack: [cray-libsci, openblas]
-      blacs: [cray-libsci]
-      scalapack: [cray-libsci]
-      netlib-scalapack: [cray-libsci]
-      mkl: [cray-libsci]
-      fftw: [cray-fftw]
-      opencl: [rocm-opencl@6.3.3]
-      opencl-runtime: [rocm-opencl-runtime@6.3.3]
     require:
+      # GPU parameter propagation:
+      # - Avoids handling cray-mpich special case in each MPI package
+      # - Uses package constraint to automatically propagate GPU variants
+      # For MI250X:
       - one_of: [amdgpu_target=gfx90a, amdgpu_target=gfx942]
         when: +rocm
       - spec: +rocm amdgpu_target=gfx90a ^cray-mpich+rocm amdgpu_target=gfx90a
         when: +rocm amdgpu_target=gfx90a ^cray-mpich
+      # For MI300A:
       - spec: +rocm amdgpu_target=gfx942 ^cray-mpich+rocm amdgpu_target=gfx942
         when: +rocm amdgpu_target=gfx942 ^cray-mpich
+      # TODO(Etienne M): Fix all packages requiring MPICH + rocm to effectively
+      # propagate the variant.
   cray-mpich:
     buildable: false
-    version: [8.1.30]
     externals:
-      - spec: cray-mpich@8.1.30
-        modules:
-          - cray-mpich/8.1.30
-  cray-libsci:
-    buildable: false
-    version: [23.12.5, 24.07.0]
+      - spec: cray-mpich@8.1.30 %gcc@13.2
+        prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/11.2
+        extra_attributes:
+          environment:
+            prepend_path:
+              LD_LIBRARY_PATH: /opt/cray/libfabric/1.20.1/lib64/
+  gcc:
     externals:
-      - spec: cray-libsci@23.12.5
-        modules:
-          - cray-libsci/23.12.5
-      - spec: cray-libsci@24.07.0
-        modules:
-          - cray-libsci/24.07.0
+      - spec: gcc@13.2.1 languages:='c,c++,fortran'
+        prefix: /opt/rh/gcc-toolset-13/root/usr
+        extra_attributes:
+          compilers:
+            c: /opt/rh/gcc-toolset-13/root/usr/bin/gcc
+            cxx: /opt/rh/gcc-toolset-13/root/usr/bin/g++
+            fortran: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
   hip:
     buildable: false
     externals:
@@ -50,61 +43,46 @@ packages:
             hip: /opt/rocm-6.3.3/bin/hipcc
         prefix: /opt/rocm-6.3.3
         spec: hip@6.3.3
-    version: [6.3.3]
   hipblas:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hipblas@6.3.3
-    version: [6.3.3]
   hipcub:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hipcub@6.3.3
-    version: [6.3.3]
   hipfft:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hipfft@6.3.3
-    version: [6.3.3]
   hipfort:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hipfort@6.3.3
-    version: [6.3.3]
   hipify-clang:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hipify-clang@6.3.3
-    version: [6.3.3]
   hiprand:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hiprand@6.3.3
-    version: [6.3.3]
-  hip-rocclr:
-    buildable: false
-    externals:
-      - prefix: /opt/rocm-6.3.3/rocclr
-        spec: hip-rocclr@6.3.3
-    version: [6.3.3]
   hipsolver:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hipsolver@6.3.3
-    version: [6.3.3]
   hipsparse:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hipsparse@6.3.3
-    version: [6.3.3]
   hsa-rocr-dev:
     buildable: false
     externals:
@@ -114,19 +92,11 @@ packages:
           compilers:
             c: /opt/rocm-6.3.3/llvm/bin/clang++
             cxx: /opt/rocm-6.3.3/llvm/bin/clang++
-    version: [6.3.3]
   hsakmt-roct:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: hsakmt-roct@6.3.3
-    version: [6.3.3]
-  libfabric:
-    buildable: false
-    externals:
-      - prefix: /opt/software/libfabric/1.23.1
-        spec: libfabric@1.23.1
-    version: [1.23.1]
   llvm-amdgpu:
     buildable: false
     externals:
@@ -136,120 +106,73 @@ packages:
           compilers:
             c: /opt/rocm-6.3.3/llvm/bin/clang++
             cxx: /opt/rocm-6.3.3/llvm/bin/clang++
-    version: [6.3.3]
   miopen-hip:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: miopen-hip@6.3.3
-    version: [6.3.3]
-  python:
-    buildable: true
-    version: [3.9.13.1, 3.11.5, 3.11.7]
-    externals:
-      - spec: python@3.11.7
-        modules:
-          - cray-python/3.11.7
-      - spec: python@3.11.5
-        modules:
-          - cray-python/3.11.5
-      - spec: python@3.9.13.1
-        modules:
-          - cray-python/3.9.13.1
   rccl:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rccl@6.3.3
-    version: [6.3.3]
   rocalution:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocalution@6.3.3
-    version: [6.3.3]
   rocblas:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocblas@6.3.3
-    version: [6.3.3]
   rocfft:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocfft@6.3.3
-    variants: amdgpu_target=gfx90a amdgpu_target_sram_ecc=gfx90a
-    version: [6.3.3]
-  rocm-opencl:
-    buildable: false
-    externals:
-      - prefix: /opt/rocm-6.3.3/opencl
-        spec: rocm-opencl@6.3.3
-    version: [6.3.3]
-  rocm-opencl-runtime:
-    buildable: false
-    externals:
-      - prefix: /opt/rocm-6.3.3/opencl
-        spec: rocm-opencl-runtime@6.3.3
-    version: [6.3.3]
   rocm-smi:
     buildable: false
     externals:
-      - prefix: /opt/rocm-6.3.3/rocm_smi
+      - prefix: /opt/rocm-6.3.3
         spec: rocm-smi@6.3.3
-    version: [6.3.3]
   rocminfo:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocminfo@6.3.3
-    version: [6.3.3]
   rocprim:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocprim@6.3.3
-    version: [6.3.3]
-  rocprofiler-dev:
+  rocprofiler:
     buildable: false
     externals:
-      - prefix: /opt/rocm-6.3.3/rocprofiler
-        spec: rocprofiler-dev@6.3.3
-    version: [6.3.3]
+      - prefix: /opt/rocm-6.3.3
+        spec: rocprofiler@6.3.3
   rocrand:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocrand@6.3.3
-    version: [6.3.3]
   rocsolver:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocsolver@6.3.3
-    version: [6.3.3]
   rocsparse:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocsparse@6.3.3
-    version: [6.3.3]
   rocthrust:
     buildable: false
     externals:
       - prefix: /opt/rocm-6.3.3
         spec: rocthrust@6.3.3
-    version: [6.3.3]
-  roctracer-dev:
+  roctracer:
     buildable: false
     externals:
-      - prefix: /opt/rocm-6.3.3/roctracer
+      - prefix: /opt/rocm-6.3.3
         spec: roctracer-dev@6.3.3
-    version: [6.3.3]
-  julia:
-    buildable: false
-    version: [1.10.0]
-    externals:
-      - spec: julia@1.10.0
-        prefix: /opt/software/gaia-external/CPU/julia-1-10-0/julia-1.10.0
