@@ -317,13 +317,13 @@ FluidMomentsData compute_fluid_moments(
 {
     IdxRangeVparMu const idxrange_vparmu(mesh.idx_range_vpar, mesh.idx_range_mu);
 
-    // Initialize quadrature coefficients for integration over vpar and mu
+    // Initialise quadrature coefficients for integration over vpar and mu
     DFieldMem<IdxRangeVparMu> quadrature_coeffs_vparmu_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(idxrange_vparmu));
     Quadrature<IdxRangeVparMu, IdxRangeSpGrid, Kokkos::DefaultExecutionSpace::memory_space> const
             integrate_vparmu(get_const_field(quadrature_coeffs_vparmu_alloc));
 
-    // Initialize FluidMoments operator
+    // Initialise FluidMoments operator
     ::FluidMoments fluid_moments_op(integrate_vparmu);
 
     // Allocate memory for fluid moments
