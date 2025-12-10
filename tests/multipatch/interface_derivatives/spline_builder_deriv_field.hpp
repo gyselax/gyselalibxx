@@ -228,11 +228,8 @@ private:
     {
         // Extract data.
         IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
-        // IdxRangeSlice<Grid1> idx_range_slice_1; // TODO
-        IdxRangeSlice<Grid1> idx_range_slice_1(
-                IdxRange<Grid1>(idx_range).front(),
-                IdxStep<Grid1>(2),
-                IdxRange<Grid1>(idx_range).extents());
+        IdxRangeSlice<Grid1> idx_range_slice_1
+                = function_and_derivs.template idx_range_for_deriv<Grid1>();
 
         IdxRange<Deriv1> idx_range_d1(Idx<Deriv1>(1), IdxStep<Deriv1>(1));
         IdxRange<Grid2> idx_range_2(idx_range);
@@ -262,12 +259,8 @@ private:
     {
         // Extract data.
         IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
-        // IdxRangeSlice<Grid2> idx_range_slice_2; // TODO
-        IdxRangeSlice<Grid2> idx_range_slice_2(
-                IdxRange<Grid2>(idx_range).front(),
-                IdxStep<Grid2>(2),
-                IdxRange<Grid2>(idx_range).extents());
-
+        IdxRangeSlice<Grid2> idx_range_slice_2
+                = function_and_derivs.template idx_range_for_deriv<Grid2>();
 
         IdxRange<Grid1> idx_range_1(idx_range);
         IdxRange<Deriv2> idx_range_d2(Idx<Deriv2>(1), IdxStep<Deriv2>(1));
@@ -301,16 +294,10 @@ private:
     {
         // Extract data.
         IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
-        // IdxRangeSlice<Grid1> idx_range_slice_1; // TODO
-        // IdxRangeSlice<Grid2> idx_range_slice_2; // TODO
-        IdxRangeSlice<Grid1> idx_range_slice_1(
-                IdxRange<Grid1>(idx_range).front(),
-                IdxStep<Grid1>(2),
-                IdxRange<Grid1>(idx_range).extents());
-        IdxRangeSlice<Grid2> idx_range_slice_2(
-                IdxRange<Grid2>(idx_range).front(),
-                IdxStep<Grid2>(2),
-                IdxRange<Grid2>(idx_range).extents());
+        IdxRangeSlice<Grid1> idx_range_slice_1
+                = function_and_derivs.template idx_range_for_deriv<Grid1>();
+        IdxRangeSlice<Grid2> idx_range_slice_2
+                = function_and_derivs.template idx_range_for_deriv<Grid2>();
 
         IdxRange<Grid1> idx_range_1(idx_range);
         IdxRange<Grid2> idx_range_2(idx_range);

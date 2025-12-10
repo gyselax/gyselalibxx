@@ -543,17 +543,11 @@ private:
         if constexpr (is_lower_bound_deriv_dependent || is_upper_bound_deriv_dependent) {
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
-
-            // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
-            IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
-                    idx_range_perp_1.front(),
-                    IdxStep<GridPerp1>(2),
-                    idx_range_perp_1.extents());
-
-            IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2(
-                    idx_range_perp_2.front(),
-                    IdxStep<GridPerp2>(2),
-                    idx_range_perp_2.extents());
+            
+            IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1
+                    = function_and_derivs_1.template idx_range_for_deriv<GridPerp1>();
+            IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2
+                    = function_and_derivs_2.template idx_range_for_deriv<GridPerp2>();
 
             Idx<GridPerp1> idx_deriv_1
                     = get_idx_other_interface(idx_range_slice_dperp_1, extremity_1);
@@ -649,16 +643,10 @@ private:
         assert((idx_slice_1 == idx_range_par_1.front()) || (idx_slice_1 == idx_range_par_1.back()));
         assert((idx_slice_2 == idx_range_par_2.front()) || (idx_slice_2 == idx_range_par_2.back()));
 
-        // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
-        IdxRangeSlice<GridPar1> idx_range_slice_dpar_1(
-                idx_range_par_1.front(),
-                IdxStep<GridPar1>(2),
-                idx_range_par_1.extents());
-
-        IdxRangeSlice<GridPar2> idx_range_slice_dpar_2(
-                idx_range_par_2.front(),
-                IdxStep<GridPar2>(2),
-                idx_range_par_2.extents());
+        IdxRangeSlice<GridPar1> idx_range_slice_dpar_1
+                = function_and_derivs_1.template idx_range_for_deriv<GridPar1>();
+        IdxRangeSlice<GridPar2> idx_range_slice_dpar_2
+                = function_and_derivs_2.template idx_range_for_deriv<GridPar2>();
 
         Idx<GridPar1> idx_deriv_par_1 = (idx_slice_1 == idx_range_par_1.front())
                                                 ? idx_range_slice_dpar_1.front()
@@ -716,16 +704,10 @@ private:
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
 
-            // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
-            IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
-                    idx_range_perp_1.front(),
-                    IdxStep<GridPerp1>(2),
-                    idx_range_perp_1.extents());
-
-            IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2(
-                    idx_range_perp_2.front(),
-                    IdxStep<GridPerp2>(2),
-                    idx_range_perp_2.extents());
+            IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1
+                    = function_and_derivs_1.template idx_range_for_deriv<GridPerp1>();
+            IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2
+                    = function_and_derivs_2.template idx_range_for_deriv<GridPerp2>();
 
             Idx<GridPerp1> idx_deriv_perp_1
                     = get_idx_other_interface(idx_range_slice_dperp_1, extremity_1);
@@ -861,16 +843,10 @@ private:
         IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
 
-        // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
-        IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1(
-                idx_range_perp_1.front(),
-                IdxStep<GridPerp1>(2),
-                idx_range_perp_1.extents());
-
-        IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2(
-                idx_range_perp_2.front(),
-                IdxStep<GridPerp2>(2),
-                idx_range_perp_2.extents());
+        IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1
+                = function_and_derivs_1.template idx_range_for_deriv<GridPerp1>();
+        IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2
+                = function_and_derivs_2.template idx_range_for_deriv<GridPerp2>();
 
         Idx<GridPerp1> idx_deriv_1 = get_idx_interface(idx_range_slice_dperp_1, extremity_1);
         Idx<GridPerp2> idx_deriv_2 = get_idx_interface(idx_range_slice_dperp_2, extremity_2);
@@ -962,24 +938,14 @@ private:
         IdxRange<Grid1_2> idx_range_grid1_2(m_idx_ranges.template get<Patch_2>());
         IdxRange<Grid2_2> idx_range_grid2_2(m_idx_ranges.template get<Patch_2>());
 
-        // TODO: is it possible to get the IdxRangeSlice from the DerivField? with a ? get_idx_range() type?
-        IdxRangeSlice<Grid1_1> idx_range_slice_d1_1(
-                idx_range_grid1_1.front(),
-                IdxStep<Grid1_1>(2),
-                idx_range_grid1_1.extents());
-        IdxRangeSlice<Grid2_1> idx_range_slice_d2_1(
-                idx_range_grid2_1.front(),
-                IdxStep<Grid2_1>(2),
-                idx_range_grid2_1.extents());
-
-        IdxRangeSlice<Grid1_2> idx_range_slice_d1_2(
-                idx_range_grid1_2.front(),
-                IdxStep<Grid1_2>(2),
-                idx_range_grid1_2.extents());
-        IdxRangeSlice<Grid2_2> idx_range_slice_d2_2(
-                idx_range_grid2_2.front(),
-                IdxStep<Grid2_2>(2),
-                idx_range_grid2_2.extents());
+        IdxRangeSlice<Grid1_1> idx_range_slice_d1_1
+                = function_and_derivs_1.template idx_range_for_deriv<Grid1_1>();
+        IdxRangeSlice<Grid2_1> idx_range_slice_d2_1
+                = function_and_derivs_1.template idx_range_for_deriv<Grid2_1>();
+        IdxRangeSlice<Grid1_2> idx_range_slice_d1_2
+                = function_and_derivs_2.template idx_range_for_deriv<Grid1_2>();
+        IdxRangeSlice<Grid2_2> idx_range_slice_d2_2
+                = function_and_derivs_2.template idx_range_for_deriv<Grid2_2>();
 
         IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
