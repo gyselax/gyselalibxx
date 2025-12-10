@@ -133,3 +133,16 @@ using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
  * @brief Type of the index of an element of polar B-splines.
  */
 using IdxPolarBspl = Idx<PolarBSplinesRTheta>;
+
+
+
+template <class Dim1, class Dim2>
+using VectorSplineCoeffsMem2D
+        = VectorFieldMem<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
+
+template <class Dim1, class Dim2>
+using VectorSplineCoeffs2D = VectorField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
+
+template <class Dim1, class Dim2>
+using ConstVectorSplineCoeffs2D
+        = VectorConstField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
