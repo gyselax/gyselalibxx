@@ -20,6 +20,7 @@
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_definitions.hpp"
 #include "splitrighthandsidesolver.hpp"
 #include "trapezoid_quadrature.hpp"
 

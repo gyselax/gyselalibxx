@@ -11,6 +11,7 @@
 #include "geometry.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
+#include "spline_definitions.hpp"
 #include "trapezoid_quadrature.hpp"
 
 static void TestMaxwellian()
