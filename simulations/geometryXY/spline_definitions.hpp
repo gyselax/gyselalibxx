@@ -2,36 +2,9 @@
 #pragma once
 #include <ddc/kernels/splines.hpp>
 
+#include "geometry.hpp"
 
-int constexpr BSDegreeX = 3;
-int constexpr BSDegreeY = 3;
 
-bool constexpr BsplineOnUniformCellsX = true;
-bool constexpr BsplineOnUniformCellsY = true;
-
-struct BSplinesX
-    : std::conditional_t<
-              BsplineOnUniformCellsX,
-              ddc::UniformBSplines<X, BSDegreeX>,
-              ddc::NonUniformBSplines<X, BSDegreeX>>
-{
-};
-struct BSplinesY
-    : std::conditional_t<
-              BsplineOnUniformCellsY,
-              ddc::UniformBSplines<Y, BSDegreeY>,
-              ddc::NonUniformBSplines<Y, BSDegreeY>>
-{
-};
-
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
-
-// IDim initialisers
-using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
-using SplineInterpPointsY
-        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeY = 3;
 
