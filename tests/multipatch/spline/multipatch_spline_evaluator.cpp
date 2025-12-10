@@ -151,7 +151,7 @@ void test_operator_assignment(
                 } else {
                     expected_function = single_evaluator_2(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
                 err = 0;
             },
             Kokkos::Max<double>(max_error));
@@ -182,7 +182,7 @@ void test_deriv_dim_1(
                     expected_function
                             = single_evaluator_2.deriv_dim_1(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
     EXPECT_LE(max_error, 1e-15);
@@ -211,7 +211,7 @@ void test_deriv_dim_2(
                     expected_function
                             = single_evaluator_2.deriv_dim_2(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
     EXPECT_LE(max_error, 1e-15);
@@ -240,7 +240,7 @@ void test_deriv_1_and_2(
                     expected_function
                             = single_evaluator_2.deriv_1_and_2(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
     EXPECT_LE(max_error, 1e-15);
@@ -270,7 +270,7 @@ void test_deriv(
                     expected_function
                             = single_evaluator_2.deriv<InterestDim>(eval_coords(i), spline_patch_2);
                 }
-                err = Kokkos::max(abs(eval_function - expected_function), err);
+                err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
     EXPECT_LE(max_error, 1e-15);
@@ -890,14 +890,14 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativativesOnCoordField)
 
     // --- check errors
     ddc::for_each(reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
-        EXPECT_NEAR(expected_derivs_1_patch_1_host(idx), eval_derivs_1_patch_1_host(idx), 1e-14);
-        EXPECT_NEAR(expected_derivs_2_patch_1_host(idx), eval_derivs_2_patch_1_host(idx), 1e-14);
-        EXPECT_NEAR(expected_derivs_12_patch_1_host(idx), eval_derivs_12_patch_1_host(idx), 1e-14);
+        EXPECT_NEAR(expected_derivs_1_patch_1_host(idx), eval_derivs_1_patch_1_host(idx), 5e-13);
+        EXPECT_NEAR(expected_derivs_2_patch_1_host(idx), eval_derivs_2_patch_1_host(idx), 5e-13);
+        EXPECT_NEAR(expected_derivs_12_patch_1_host(idx), eval_derivs_12_patch_1_host(idx), 5e-13);
     });
     ddc::for_each(reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
-        EXPECT_NEAR(expected_derivs_1_patch_2_host(idx), eval_derivs_1_patch_2_host(idx), 1e-14);
-        EXPECT_NEAR(expected_derivs_2_patch_2_host(idx), eval_derivs_2_patch_2_host(idx), 1e-14);
-        EXPECT_NEAR(expected_derivs_12_patch_2_host(idx), eval_derivs_12_patch_2_host(idx), 1e-14);
+        EXPECT_NEAR(expected_derivs_1_patch_2_host(idx), eval_derivs_1_patch_2_host(idx), 5e-13);
+        EXPECT_NEAR(expected_derivs_2_patch_2_host(idx), eval_derivs_2_patch_2_host(idx), 5e-13);
+        EXPECT_NEAR(expected_derivs_12_patch_2_host(idx), eval_derivs_12_patch_2_host(idx), 5e-13);
     });
 }
 

@@ -1,0 +1,178 @@
+---
+packages:
+  all:
+    require:
+      # GPU parameter propagation:
+      # - Avoids handling cray-mpich special case in each MPI package
+      # - Uses package constraint to automatically propagate GPU variants
+      # For MI250X:
+      - one_of: [amdgpu_target=gfx90a, amdgpu_target=gfx942]
+        when: +rocm
+      - spec: +rocm amdgpu_target=gfx90a ^cray-mpich+rocm amdgpu_target=gfx90a
+        when: +rocm amdgpu_target=gfx90a ^cray-mpich
+      # For MI300A:
+      - spec: +rocm amdgpu_target=gfx942 ^cray-mpich+rocm amdgpu_target=gfx942
+        when: +rocm amdgpu_target=gfx942 ^cray-mpich
+      # TODO(Etienne M): Fix all packages requiring MPICH + rocm to effectively
+      # propagate the variant.
+  cray-mpich:
+    buildable: false
+    externals:
+      - spec: cray-mpich@8.1.30 %gcc@13.2
+        prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/11.2
+        extra_attributes:
+          environment:
+            prepend_path:
+              LD_LIBRARY_PATH: /opt/cray/libfabric/1.20.1/lib64/
+  gcc:
+    externals:
+      - spec: gcc@13.2.1 languages:='c,c++,fortran'
+        prefix: /opt/rh/gcc-toolset-13/root/usr
+        extra_attributes:
+          compilers:
+            c: /opt/rh/gcc-toolset-13/root/usr/bin/gcc
+            cxx: /opt/rh/gcc-toolset-13/root/usr/bin/g++
+            fortran: /opt/rh/gcc-toolset-13/root/usr/bin/gfortran
+  hip:
+    buildable: false
+    externals:
+      - extra_attributes:
+          compilers:
+            c: /opt/rocm-6.3.3/llvm/bin/clang++
+            c++: /opt/rocm-6.3.3/llvm/bin/clang++
+            hip: /opt/rocm-6.3.3/bin/hipcc
+        prefix: /opt/rocm-6.3.3
+        spec: hip@6.3.3
+  hipblas:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hipblas@6.3.3
+  hipcub:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hipcub@6.3.3
+  hipfft:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hipfft@6.3.3
+  hipfort:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hipfort@6.3.3
+  hipify-clang:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hipify-clang@6.3.3
+  hiprand:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hiprand@6.3.3
+  hipsolver:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hipsolver@6.3.3
+  hipsparse:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hipsparse@6.3.3
+  hsa-rocr-dev:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hsa-rocr-dev@6.3.3
+        extra_attributes:
+          compilers:
+            c: /opt/rocm-6.3.3/llvm/bin/clang++
+            cxx: /opt/rocm-6.3.3/llvm/bin/clang++
+  hsakmt-roct:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: hsakmt-roct@6.3.3
+  llvm-amdgpu:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3/llvm
+        spec: llvm-amdgpu@6.3.3
+        extra_attributes:
+          compilers:
+            c: /opt/rocm-6.3.3/llvm/bin/clang++
+            cxx: /opt/rocm-6.3.3/llvm/bin/clang++
+  miopen-hip:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: miopen-hip@6.3.3
+  rccl:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rccl@6.3.3
+  rocalution:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocalution@6.3.3
+  rocblas:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocblas@6.3.3
+  rocfft:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocfft@6.3.3
+  rocm-smi:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocm-smi@6.3.3
+  rocminfo:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocminfo@6.3.3
+  rocprim:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocprim@6.3.3
+  rocprofiler:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocprofiler@6.3.3
+  rocrand:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocrand@6.3.3
+  rocsolver:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocsolver@6.3.3
+  rocsparse:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocsparse@6.3.3
+  rocthrust:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: rocthrust@6.3.3
+  roctracer:
+    buildable: false
+    externals:
+      - prefix: /opt/rocm-6.3.3
+        spec: roctracer-dev@6.3.3

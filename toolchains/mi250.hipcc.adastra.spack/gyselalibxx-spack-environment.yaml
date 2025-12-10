@@ -2,38 +2,47 @@ spack:
   definitions:
   - packages:
     - cmake
-    - fftw
-    - ginkgo~openmp+rocm amdgpu_target=gfx90a
-    - googletest
+    - ginkgo@1.9 ~openmp +rocm amdgpu_target=gfx90a
+    - googletest +gmock
+    - kokkos@4.7 ~openmp +rocm +hip_relocatable_device_code amdgpu_target=gfx90a
+    - kokkos-fft@0.4 host_backend=fftw-serial device_backend=hipfft
+    - kokkos-kernels@4.7 ~shared
+    - kokkos-tools
+    - lapack
+    - mpi
     - ninja
     - paraconf
     - pdi
-    - pdiplugin-decl-hdf5
-    - pdiplugin-decl-netcdf
+    - pdiplugin-decl-hdf5 +mpi
+    - pdiplugin-decl-netcdf +mpi
     - pdiplugin-mpi
+    - pdiplugin-pycall
     - pdiplugin-set-value
     - pdiplugin-trace
-    - python
+    - 'python@3.12:'
 
     - py-dask
     - py-h5py
     - py-imageio
     - py-matplotlib
-    - py-netcdf4
+    - py-netcdf4 +mpi
     - py-numpy
+    - py-pyyaml
     - py-scipy
     - py-sympy
     - py-xarray
-    - py-pyyaml
-  - compilers:
-    - gcc@13.2.1.mi250
   - architectures:
     - arch=linux-rhel8-zen3
   specs:
   - matrix:
     - [$packages]
-    - [$%compilers]
     - [$architectures]
+  repos:
+    patches:
+      git: https://github.com/gyselax/spack.git
+      branch: releases/v2025.11
+    builtin:
+      tag: v2025.11.0
   concretizer:
     unify: true
     reuse: false
@@ -44,6 +53,17 @@ spack:
       permissions:
         read: world
         write: group
+      variants: ~fortran ~mpi
+    c:
+      require: gcc@13.2.1
+    cxx:
+      require: gcc@13.2.1
+    lapack:
+      require: openblas
+    mpi:
+      require: cray-mpich
+    py-dask:
+      variants: ~dataframe
   modules:
     default:
       roots: {}

@@ -11,6 +11,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add getters to `DerivField` types to access the associated index ranges.
+- Add H100 Jean-Zay toolchain.
+- Add an `operator()` in `BslAdvectionPolar` to advect a function with an advection field along `<R, Theta>`.
+The operator averages the values of the advection field on the first ring to get its value at the O-point.
+- Add `static_assert` expressions for spline builder/evaluator pairs.
+- Added `equilibrium::init_from_input` method to choose XVx equililibrium in input file.
+
+### Fixed
+
+- Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
+- Specify return type for Lie-Poisson operator explicitly for better error messages.
+
+### Changed
+
+- Use patched recipes for the CPU Spack toolchain.
+- Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
+- Update and reorganize the Persee toolchains.
+- Add pdiplugin-pycall to Persee toolchains.
+- Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
+- Allow a local installation of Kokkos > v4.4.1 to be used by CMake.
+- Rename static variable `is_curvilinear_2d_mapping_v` to the more accurate: `is_coord_transform_with_o_point_v`.
+- Move Python cache files out of the Spack installation tree on Adastra and Jean-Zay.
+- Use CCFR environment variables on CINES and IDRIS machines when possible.
+- Update DDC dependency to v0.9.0.
+- Combine `landau_fft` and `bumpontail_fft` executables into a `vlasovpoisson_xvx_fft` executable.
+- Combine `landau_fem_uniform` and `bumpontail_fem_uniform` executables into a `vlasovpoisson_xvx_fem_uniform` executable.
+- Make the choice of equililibrium an input parameter for `vlasovpoisson_xvx` executables.
+- Move static class method `BumpontailEquilibrium::init_from_input` to namespace `bumpontail_equilibrium::init_from_input`.
+- Move static class method `MaxwellianEquilibrium::init_from_input` to namespace `maxwellian_equilibrium::init_from_input`.
+- Update CPU Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
+- Update Adastra Spack toolchains to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:. Use OpenBLAS instead of Cray LibSci and raw GCC compilers.
+- Update Jean-Zay Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
+- Use LAPACKE to call LAPACK functions.
+
+### Deprecated
+
+### Removed
+
+## [v0.3.0] - 2025-09-03
+
+### Added
+
+- Add a curl operator.
 - Port `PolarSplineEvaluator` methods to GPU.
 - Add methods to `PolarSplineEvaluator` to avoid unnecessary creation of fields of coordinates.
 - Allow a `DerivField` to be stored in a `MultipatchField`.
@@ -51,6 +94,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change constructor arguments of `VortexMergerEquilibria` to pass a spline builder and evaluator which operate on GPU.
 - Port `PoissonLikeRHSFunction` from the (r, theta) geometry to GPU.
 - Change constructor argument of `PoissonLikeRHSFunction` from the (r, theta) geometry to pass spline coefficients on GPU.
+- Use Spack to install the Kokkos ecosystem in the MI250 Adastra toolchain.
+- Use Spack to install the Kokkos ecosystem in the GENOA Adastra toolchain.
+- Use a single rocm stack on Adastra.
 
 ### Deprecated
 
@@ -59,6 +105,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove deprecated method `PolarBSplines::integrals`.
 - Remove unhelpful `PolarSpline` classes in favour of `DField<IdxRange<PolarBSplines>>` types.
 - Remove unused broken method `PolarSplineEvaluator::integrate`.
+- Remove `min` and `max` from `math_tools.hpp` (functionality is available in std and Kokkos namespaces).
 
 ## [v0.2.0] - 2025-07-03
 

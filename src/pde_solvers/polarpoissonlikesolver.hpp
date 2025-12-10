@@ -353,7 +353,7 @@ public:
                                        * (PolarBSplinesRTheta::n_singular_basis()
                                           * BSplinesR::degree() * m_nbasis_theta);
         const int n_stencil_theta
-                = m_nbasis_theta * min(int(1 + 2 * BSplinesTheta::degree()), m_nbasis_theta);
+                = m_nbasis_theta * std::min(int(1 + 2 * BSplinesTheta::degree()), m_nbasis_theta);
         const int n_stencil_r = m_nbasis_r * (1 + 2 * BSplinesR::degree())
                                 - (1 + BSplinesR::degree()) * BSplinesR::degree();
         // Number of non-zero elements in the matrix corresponding to the inner product of
@@ -547,11 +547,14 @@ public:
 
                 // Find the index range covering the cells where both the test and trial functions are non-zero
                 const Idx<KnotsR> start_non_zero_r(
-                        ::max(bspl_r.break_point_domain().front(),
-                              bspl_r.get_first_support_knot(idx_trial_r)));
+                        std::
+                                max(bspl_r.break_point_domain().front(),
+                                    bspl_r.get_first_support_knot(idx_trial_r)));
                 const Idx<KnotsR> end_non_zero_r(
-                        ::min(bspl_r.get_last_support_knot(IdxBSR(PolarBSplinesRTheta::continuity)),
-                              bspl_r.get_last_support_knot(idx_trial_r)));
+                        std::
+                                min(bspl_r.get_last_support_knot(
+                                            IdxBSR(PolarBSplinesRTheta::continuity)),
+                                    bspl_r.get_last_support_knot(idx_trial_r)));
 
                 const Idx<KnotsTheta> start_non_zero_theta(
                         bspl_theta.get_first_support_knot(idx_trial_theta));
@@ -683,8 +686,9 @@ public:
                     nnz_per_row_csr_host(int_polar_idx_trial + 1)++;
                 }
             });
-            IdxStepBSR n_remaining_r(
-                    ::min(IdxStepBSR(BSplinesR::degree()), full_idx_range_r.back() - idx_test_r));
+            IdxStepBSR n_remaining_r(std::
+                                             min(IdxStepBSR(BSplinesR::degree()),
+                                                 full_idx_range_r.back() - idx_test_r));
             IdxRangeBSR remaining_r(idx_test_r + 1, n_remaining_r);
             IdxRangeBSTheta relevant_theta(
                     idx_test_theta + ddc::discrete_space<BSplinesTheta>().nbasis()
@@ -815,11 +819,13 @@ public:
 
                     // Find the cells on which the bspline is non-zero
                     const Idx<KnotsR> start_non_zero_r(
-                            ::max(bspl_r.break_point_domain().front(),
-                                  bspl_r.get_first_support_knot(idx_r)));
+                            Kokkos::
+                                    max(bspl_r.break_point_domain().front(),
+                                        bspl_r.get_first_support_knot(idx_r)));
                     const Idx<KnotsR> end_non_zero_r(
-                            ::min(bspl_r.break_point_domain().back(),
-                                  bspl_r.get_last_support_knot(idx_r)));
+                            Kokkos::
+                                    min(bspl_r.break_point_domain().back(),
+                                        bspl_r.get_last_support_knot(idx_r)));
 
                     const Idx<KnotsTheta> start_non_zero_theta(
                             bspl_theta.get_first_support_knot(idx_theta));
@@ -1007,13 +1013,17 @@ public:
         auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
 
         const Idx<KnotsR> start_non_zero_r(
-                ::max(bspl_r.break_point_domain().front(),
-                      ::max(bspl_r.get_first_support_knot(idx_test_r),
-                            bspl_r.get_first_support_knot(idx_trial_r))));
+                std::
+                        max(bspl_r.break_point_domain().front(),
+                            std::
+                                    max(bspl_r.get_first_support_knot(idx_test_r),
+                                        bspl_r.get_first_support_knot(idx_trial_r))));
         const Idx<KnotsR> end_non_zero_r(
-                ::min(bspl_r.break_point_domain().back(),
-                      ::min(bspl_r.get_last_support_knot(idx_test_r),
-                            bspl_r.get_last_support_knot(idx_trial_r))));
+                std::
+                        min(bspl_r.break_point_domain().back(),
+                            std::
+                                    min(bspl_r.get_last_support_knot(idx_test_r),
+                                        bspl_r.get_last_support_knot(idx_trial_r))));
 
         IdxStep<KnotsTheta> span_theta(BSplinesTheta::degree() + 1);
 
@@ -1032,9 +1042,9 @@ public:
             last_support_knot_theta_test += ddc::discrete_space<BSplinesTheta>().nbasis();
         }
         const Idx<KnotsTheta> start_non_zero_theta(
-                ::max(first_support_knot_theta_test, first_support_knot_theta_trial));
+                std::max(first_support_knot_theta_test, first_support_knot_theta_trial));
         const Idx<KnotsTheta> end_non_zero_theta(
-                ::min(last_support_knot_theta_test, last_support_knot_theta_trial));
+                std::min(last_support_knot_theta_test, last_support_knot_theta_trial));
 
         const IdxRangeQuadratureRTheta quad_range = get_quadrature_between_knots(
                 start_non_zero_r,

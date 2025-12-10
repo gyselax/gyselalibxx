@@ -20,7 +20,6 @@ Test `SingleInterfaceDerivativesCalculator` with
 
 with $\theta$ and $\xi$ periodic.
 
-
 ## Interface derivative matrix with exact formula 
 
 Test `InterfaceExactDerivativeMatrix` with the following test cases

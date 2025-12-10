@@ -23,7 +23,7 @@ TESTDIR="${PWD}"
 
 cd "${TMPDIR}"
 
-"${GYSELALIBXX_EXEC}" "--dump-config" "${PWD}/bumpontail.yaml"
+cp ${GYSELALIBXX_SRCDIR}/simulations/geometryXVx/bumpontail.yaml .
 "${GYSELALIBXX_EXEC}" "${PWD}/bumpontail.yaml"
 
 # Theoretical values for Landau damping

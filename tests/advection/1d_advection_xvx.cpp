@@ -204,13 +204,13 @@ public:
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
         ddc::for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
-            double const relative_error = abs(function_host(xv_idx) - exact_function(xv_idx));
+            double const relative_error = std::abs(function_host(xv_idx) - exact_function(xv_idx));
             EXPECT_LE(relative_error, 5.e-7);
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;
         });
         return max_relative_error;
-    };
+    }
 };
 
 

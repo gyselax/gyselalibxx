@@ -18,10 +18,6 @@ target_link_libraries(matrix_tools
         DDC::splines
         Kokkos::kokkos
         gslx::utils
+        LAPACKE::LAPACKE
 )
-if(CMAKE_VERSION GREATER_EQUAL 3.18)
-    target_link_libraries(matrix_tools PRIVATE LAPACK::LAPACK)
-else()
-    target_link_libraries(matrix_tools PRIVATE ${LAPACK_LIBRARIES})
-endif()
 add_library(gslx::matrix_tools ALIAS matrix_tools)

@@ -23,8 +23,8 @@ fi
 if [ -n "${CLANG_FORMAT}" ]
 then
   # Get all C++ files that were changed in this commit
-  HEADER_FILES=$(echo "${CHANGED_FILES_IN_PUSH}" | uniq -u | grep .hpp)
-  SOURCE_FILES=$(echo "${CHANGED_FILES_IN_PUSH}" | uniq -u | grep .cpp)
+  HEADER_FILES=$(echo "${CHANGED_FILES_IN_PUSH}" | uniq -u | grep -F ".hpp")
+  SOURCE_FILES=$(echo "${CHANGED_FILES_IN_PUSH}" | uniq -u | grep -F ".cpp")
   CHANGED_CPP_FILES="${HEADER_FILES} ${SOURCE_FILES}"
 
   if [[ "${CHANGED_CPP_FILES}" == " " ]]
