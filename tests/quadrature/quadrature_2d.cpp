@@ -85,7 +85,7 @@ double constant_func_check_2d(Method quad_method)
     double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
     double expected_val = (x_max - x_min) * (y_max - y_min);
 
-    return abs(integral - expected_val);
+    return std::abs(integral - expected_val);
 }
 
 void integrated_function_operator(Method quad_method)

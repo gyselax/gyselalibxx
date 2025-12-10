@@ -63,7 +63,7 @@ struct ConstantFuncCheck
         double integral = integrate(Kokkos::DefaultExecutionSpace(), values);
         double expected_val = x_max - x_min;
 
-        return abs(integral - expected_val);
+        return std::abs(integral - expected_val);
     }
 
     static double check_simpson_trapezoid_1d(Extremity trapezoid_extremity)
@@ -89,7 +89,7 @@ struct ConstantFuncCheck
         ddc::parallel_fill(get_field(values), 1.0);
         double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
         double expected_val = x_max - x_min;
-        return abs(integral - expected_val);
+        return std::abs(integral - expected_val);
     }
 };
 

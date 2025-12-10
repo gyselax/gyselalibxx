@@ -55,17 +55,21 @@ public:
      * @brief Compute the gyrokinetic Poisson bracket at a given coordinate, from
      * the partial derivatives of the two fields, and the magnetic field.
      *
-     * @param[in] partial_derivatives_f A vector containing the partial derivatives
+     * @param[in] partial_derivatives_f A vector containing the (covariant) gradient
      * of the scalar field f expressed at the given coordinate.
-     * @param[in] partial_derivatives_g A vector containing the partial derivatives
-     * of the scalar field g expressed at the given coordinate.
-     * @param[in] B A vector containing the magnetic field at the given coordinate.
+     * @param[in] partial_derivatives_g A tensor containing the partial derivatives
+     * of the vector field G expressed at the given coordinate : @f$ DG_{ij} = \partial_j G_i @f$.
+     * @param[in] B A contravariant vector containing the magnetic field at the given coordinate.
      * @param[in] coord The coordinate where the calculation is carried out.
+     *
+     * @return A vector describing the gyrokinetic Poisson bracket at a given coordinate.
+     * The vector is indexed in the same way and has the same covariance as the elements of the vector G.
      */
     template <
             class TensorType,
             class = std::enable_if_t<is_tensor_type_v<TensorType> && TensorType::rank() == 2>>
-    KOKKOS_INLINE_FUNCTION auto operator()(
+    KOKKOS_INLINE_FUNCTION DTensor<ddc::type_seq_element_t<0, typename TensorType::index_set>>
+    operator()(
             DTensor<CovBasisSpatial> const& partial_derivatives_f,
             TensorType const& partial_derivatives_g,
             DTensor<BasisSpatial> const& B,
@@ -87,12 +91,14 @@ public:
      * @brief Compute the gyrokinetic Poisson bracket at a given coordinate, from
      * the partial derivatives of the two fields, and the magnetic field.
      *
-     * @param[in] partial_derivatives_f A vector containing the partial derivatives
+     * @param[in] partial_derivatives_f A vector containing the (covariant) gradient
      * of the scalar field f expressed at the given coordinate.
-     * @param[in] partial_derivatives_g A vector containing the partial derivatives
+     * @param[in] partial_derivatives_g A vector containing the (covariant) gradient
      * of the scalar field g expressed at the given coordinate.
-     * @param[in] B A vector containing the magnetic field at the given coordinate.
+     * @param[in] B A contravariant vector containing the magnetic field at the given coordinate.
      * @param[in] coord The coordinate where the calculation is carried out.
+     *
+     * @return The gyrokinetic Poisson bracket at a given coordinate.
      */
     KOKKOS_INLINE_FUNCTION double operator()(
             DTensor<CovBasisSpatial> const& partial_derivatives_f,

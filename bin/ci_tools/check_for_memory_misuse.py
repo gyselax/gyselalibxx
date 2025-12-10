@@ -60,6 +60,12 @@ def main():
                 scope.exec_type = exec_type
                 scope.exec_space = 'CPU' if exec_type == 'CPU' else 'GPU'
 
+                if scope.function and scope.exec_space == 'GPU' and (scope.function.hasVirtualSpecifier or scope.function.isImplicitlyVirtual):
+                    tok = next(tok for tok in cfg.tokenlist if tok.Id == scope.bodyStartId).previous
+                    reportError(tok,
+                        'Virtual functions cannot be reliably called from GPU',
+                        'virtualFunctionOnGPU')
+
             # Check for bad class access from GPU
             for scope in cfg.scopes:
                 if scope.type not in ('Class', 'Struct'):
