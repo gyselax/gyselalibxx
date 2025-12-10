@@ -167,14 +167,14 @@ void init_distribution_fun(
     host_t<DFieldMem<IdxRangeSp>> density_host(idx_range_sp);
     host_t<DFieldMem<IdxRangeSp>> temperature_host(idx_range_sp);
     host_t<DFieldMem<IdxRangeSp>> mean_velocity_host(idx_range_sp);
-    
+
     for (int i = 0; i < nb_species; ++i) {
         std::string const base = ".SpeciesInfo[" + std::to_string(i) + "]";
         density_host(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".N_maxw").c_str());
         temperature_host(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".T_maxw").c_str());
         mean_velocity_host(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".Upar_maxw").c_str());
     }
-    
+
     // Copy to device
     DFieldMem<IdxRangeSp> density_alloc(idx_range_sp);
     DFieldMem<IdxRangeSp> temperature_alloc(idx_range_sp);
@@ -185,7 +185,7 @@ void init_distribution_fun(
     ddc::parallel_deepcopy(density, density_host);
     ddc::parallel_deepcopy(temperature, temperature_host);
     ddc::parallel_deepcopy(mean_velocity, mean_velocity_host);
-    
+
     DFieldMemSpVparMu allfequilibrium(meshGridSpVparMu);
     DFieldSpVparMu allfequilibrium_field = get_field(allfequilibrium);
     DFieldSpGrid allfdistribu_field = get_field(allfdistribu);
@@ -204,7 +204,7 @@ void init_distribution_fun(
                 double const inv_2piT = 1. / (2. * M_PI * temperature_loc);
                 double const coeff_maxw = Kokkos::sqrt(inv_2piT) * inv_2piT;
                 double const energy = 0.5 * (vpar - mean_velocity_loc) * (vpar - mean_velocity_loc)
-                                     / temperature_loc;
+                                      / temperature_loc;
                 allfequilibrium_field(ispvparmu) = coeff_maxw * density_loc * Kokkos::exp(-energy);
             });
 
@@ -316,36 +316,43 @@ FluidMomentsData compute_fluid_moments(
         DConstField<IdxRangeSpGrid> const allfdistribu)
 {
     IdxRangeVparMu const idxrange_vparmu(mesh.idx_range_vpar, mesh.idx_range_mu);
-    
+
     // Initialize quadrature coefficients for integration over vpar and mu
     DFieldMem<IdxRangeVparMu> quadrature_coeffs_vparmu_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(idxrange_vparmu));
-    Quadrature<IdxRangeVparMu, IdxRangeSpGrid, Kokkos::DefaultExecutionSpace::memory_space>
-            const integrate_vparmu(get_const_field(quadrature_coeffs_vparmu_alloc));
-    
+    Quadrature<IdxRangeVparMu, IdxRangeSpGrid, Kokkos::DefaultExecutionSpace::memory_space> const
+            integrate_vparmu(get_const_field(quadrature_coeffs_vparmu_alloc));
+
     // Initialize FluidMoments operator
     ::FluidMoments fluid_moments_op(integrate_vparmu);
-    
+
     // Allocate memory for fluid moments
     IdxRangeSpTor3D const idxrange_sptor3d(
-            mesh.idx_range_sp, mesh.idx_range_tor1, mesh.idx_range_tor2, mesh.idx_range_tor3);
+            mesh.idx_range_sp,
+            mesh.idx_range_tor1,
+            mesh.idx_range_tor2,
+            mesh.idx_range_tor3);
     DFieldMem<IdxRangeSpTor3D> density_alloc(idxrange_sptor3d);
     DFieldMem<IdxRangeSpTor3D> mean_velocity_alloc(idxrange_sptor3d);
     DFieldMem<IdxRangeSpTor3D> temperature_alloc(idxrange_sptor3d);
     DField<IdxRangeSpTor3D> density = get_field(density_alloc);
     DField<IdxRangeSpTor3D> mean_velocity = get_field(mean_velocity_alloc);
     DField<IdxRangeSpTor3D> temperature = get_field(temperature_alloc);
-    
+
     // Compute fluid moments
     fluid_moments_op(density, allfdistribu, ::FluidMoments::s_density);
-    fluid_moments_op(mean_velocity, allfdistribu, get_const_field(density), ::FluidMoments::s_velocity);
+    fluid_moments_op(
+            mean_velocity,
+            allfdistribu,
+            get_const_field(density),
+            ::FluidMoments::s_velocity);
     fluid_moments_op(
             temperature,
             allfdistribu,
             get_const_field(density),
             get_const_field(mean_velocity),
             ::FluidMoments::s_temperature);
-    
+
     return FluidMomentsData {
             std::move(density_alloc),
             std::move(mean_velocity_alloc),
@@ -391,7 +398,12 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     time_points[0] = steady_clock::now();
     DFieldMemSpGrid allfdistribu(meshGridSp);
-    init_distribution_fun(allfdistribu, meshGridSpVparMu, meshGridSp, configs.conf_gyselax, idx_range_sp);
+    init_distribution_fun(
+            allfdistribu,
+            meshGridSpVparMu,
+            meshGridSp,
+            configs.conf_gyselax,
+            idx_range_sp);
     time_points[1] = steady_clock::now();
 
     //---------------------------------------------------------
@@ -409,19 +421,23 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     // Compute fluid moments (density, mean velocity, temperature)
     //---------------------------------------------------------
-    FluidMomentsData fluid_moments_data = compute_fluid_moments(mesh, get_const_field(allfdistribu));
+    FluidMomentsData fluid_moments_data
+            = compute_fluid_moments(mesh, get_const_field(allfdistribu));
     time_points[3] = steady_clock::now();
-    
+
     //---------------------------------------------------------
     // Write 5D distribution function and coordinates to file using PDI
     //---------------------------------------------------------
     // Create host version of distribution function for I/O (needed for PDI)
     host_t<DFieldMemSpGrid> allfdistribu_host(mesh.mesh_sp);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
-    
+
     // Create host versions of fluid moments for I/O
     IdxRangeSpTor3D const idxrange_sptor3d(
-            mesh.idx_range_sp, mesh.idx_range_tor1, mesh.idx_range_tor2, mesh.idx_range_tor3);
+            mesh.idx_range_sp,
+            mesh.idx_range_tor1,
+            mesh.idx_range_tor2,
+            mesh.idx_range_tor3);
     host_t<DFieldMemSpTor3D> density_host_alloc(idxrange_sptor3d);
     host_t<DFieldMemSpTor3D> mean_velocity_host_alloc(idxrange_sptor3d);
     host_t<DFieldMemSpTor3D> temperature_host_alloc(idxrange_sptor3d);
@@ -431,28 +447,28 @@ int main(int argc, char** argv)
     ddc::parallel_deepcopy(density_host, fluid_moments_data.density);
     ddc::parallel_deepcopy(mean_velocity_host, fluid_moments_data.mean_velocity);
     ddc::parallel_deepcopy(temperature_host, fluid_moments_data.temperature);
-    
+
     write_fdistribu(rank, mesh, allfdistribu_host);
-    
+
     // Expose fluid moments to PDI
     if (rank == 0) {
         // Expose extents for fluid moments
-        std::array<std::size_t, 4> moments_extents_arr = {
-                mesh.idx_range_sp.size(),
-                mesh.idx_range_tor1.size(),
-                mesh.idx_range_tor2.size(),
-                mesh.idx_range_tor3.size()};
+        std::array<std::size_t, 4> moments_extents_arr
+                = {mesh.idx_range_sp.size(),
+                   mesh.idx_range_tor1.size(),
+                   mesh.idx_range_tor2.size(),
+                   mesh.idx_range_tor3.size()};
         PDI_expose("density_extents", moments_extents_arr.data(), PDI_OUT);
         PDI_expose("mean_velocity_extents", moments_extents_arr.data(), PDI_OUT);
         PDI_expose("temperature_extents", moments_extents_arr.data(), PDI_OUT);
-        
+
         // Expose fluid moments and trigger write event (using DDC helper which handles sharing)
         ddc::PdiEvent("write_fluid_moments")
                 .with("density", density_host)
                 .with("mean_velocity", mean_velocity_host)
                 .with("temperature", temperature_host);
     }
-    
+
     time_points[5] = steady_clock::now();
     //---------------------------------------------------------
     // Finalise PDI and MPI

@@ -133,7 +133,7 @@ using IdxSpGrid = Idx<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
 using IdxRangeSpGridTranspose = IdxRange<Species, GridVpar, GridMu, GridTor1, GridTor2, GridTor3>;
 using IdxSpVparMu = Idx<Species, GridVpar, GridMu>;
 using IdxVpar = Idx<GridVpar>;
-using IdxRangeVparMu = IdxRange< GridVpar, GridMu>;
+using IdxRangeVparMu = IdxRange<GridVpar, GridMu>;
 
 
 template <class ElementType>
