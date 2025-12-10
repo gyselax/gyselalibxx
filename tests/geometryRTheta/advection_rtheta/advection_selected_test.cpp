@@ -21,7 +21,7 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "input.hpp"
 #include "itimestepper.hpp"

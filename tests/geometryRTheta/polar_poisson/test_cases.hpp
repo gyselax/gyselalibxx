@@ -7,7 +7,7 @@
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "math_tools.hpp"
 #include "spline_definitions.hpp"
