@@ -164,12 +164,15 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
     Idx<DerivX, GridX, DerivY, GridY> idx_cross_deriv_min_max(idx_deriv_xmin, idx_deriv_ymax);
     Idx<DerivX, GridX, DerivY, GridY> idx_cross_deriv_max_max(idx_deriv_xmax, idx_deriv_ymax);
 
-    ddc::for_each(idx_range_xy, [&](Idx<GridX, GridY> const idx) {
-        double const x = ddc::coordinate(Idx<GridX>(idx));
-        double const y = ddc::coordinate(Idx<GridY>(idx));
-        function(idx) = std::cos(2. / 3 * M_PI * x + 0.25) * std::sin(y);
-        function_and_derivs.get_values_field()(idx) = function(idx);
-    });
+    ddc::parallel_for_each(
+            HostExecSpace(),
+            idx_range_xy,
+            KOKKOS_LAMBDA(Idx<GridX, GridY> const idx) {
+                double const x = ddc::coordinate(Idx<GridX>(idx));
+                double const y = ddc::coordinate(Idx<GridY>(idx));
+                function(idx) = std::cos(2. / 3 * M_PI * x + 0.25) * std::sin(y);
+                function_and_derivs.get_values_field()(idx) = function(idx);
+            });
 
     ddc::for_each(idx_range_y, [&](Idx<GridY> const idx_y) {
         double const y = ddc::coordinate(idx_y);
