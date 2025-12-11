@@ -3,7 +3,7 @@
 
 #include <ddc/kernels/splines.hpp>
 
-#include "geometry.hpp"
+#include "geometry_vpar_mu.hpp"
 
 // Splines definition
 int constexpr BSDegreeVpar = 3;

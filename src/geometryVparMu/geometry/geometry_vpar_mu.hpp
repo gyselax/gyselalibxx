@@ -8,7 +8,7 @@
 #include "species_info.hpp"
 
 /*
- * @file geometry.hpp
+ * @file geometry_vpar_mu.hpp
  *
  */
 

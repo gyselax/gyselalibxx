@@ -2,7 +2,7 @@
 #pragma once
 #include <ddc/kernels/splines.hpp>
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;

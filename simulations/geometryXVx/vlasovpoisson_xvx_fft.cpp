@@ -18,7 +18,7 @@
 #include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "fft_poisson_solver.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "neumann_spline_quadrature.hpp"

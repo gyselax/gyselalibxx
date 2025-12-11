@@ -12,7 +12,7 @@
 #include <pdi.h>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "krook_source_adaptive.hpp"
 #include "krook_source_constant.hpp"

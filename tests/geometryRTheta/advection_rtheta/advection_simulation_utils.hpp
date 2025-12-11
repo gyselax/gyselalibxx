@@ -12,7 +12,7 @@
 #include "../../advection/r_theta_test_cases.hpp"
 
 #include "bsl_advection_polar.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "l_norm_tools.hpp"
 #include "math_tools.hpp"
 #include "paraconfpp.hpp"

@@ -12,7 +12,7 @@
 #include "collisions_utils.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "fluid_moments.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
