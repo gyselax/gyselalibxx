@@ -390,20 +390,17 @@ int main(int argc, char** argv)
     // Initialisation of the mesh (sp, space, phase-space)
     //---------------------------------------------------------
     MeshInitialisationResult const mesh = initialise_mesh(rank, configs.conf_gyselax);
-    IdxRangeSp const idx_range_sp = mesh.idx_range_sp;
-    IdxRangeSpGrid const meshGridSp = mesh.mesh_sp;
-    IdxRangeSpVparMu const meshGridSpVparMu = mesh.mesh_sp_vparmu;
     //---------------------------------------------------------
     // Initialisation of the distribution function
     //---------------------------------------------------------
     time_points[0] = steady_clock::now();
-    DFieldMemSpGrid allfdistribu(meshGridSp);
+    DFieldMemSpGrid allfdistribu(mesh.mesh_sp);
     init_distribution_fun(
             allfdistribu,
-            meshGridSpVparMu,
-            meshGridSp,
+            mesh.mesh_sp_vparmu,
+            mesh.mesh_sp,
             configs.conf_gyselax,
-            idx_range_sp);
+            mesh.idx_range_sp);
     time_points[1] = steady_clock::now();
 
     //---------------------------------------------------------
@@ -415,7 +412,7 @@ int main(int argc, char** argv)
     }
 
     if (version == "mpi_transpose") {
-        MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(meshGridSp, MPI_COMM_WORLD);
+        MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh.mesh_sp, MPI_COMM_WORLD);
     }
     time_points[2] = steady_clock::now();
     //---------------------------------------------------------
