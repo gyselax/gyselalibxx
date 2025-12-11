@@ -125,10 +125,19 @@ IdxRangeSpGrid initialise_mesh(int rank, PC_tree_t conf_gyselax)
         cout << "  mu: " << idx_range_mu.size() << endl;
     }
 
-    return IdxRangeSpGrid(idx_range_sp, idx_range_tor1, idx_range_tor2, idx_range_tor3, idx_range_vpar, idx_range_mu);
+    return IdxRangeSpGrid(
+            idx_range_sp,
+            idx_range_tor1,
+            idx_range_tor2,
+            idx_range_tor3,
+            idx_range_vpar,
+            idx_range_mu);
 }
 
-void init_distribution_fun( DFieldSpGrid allfdistribu, IdxRangeSpGrid const& mesh, PC_tree_t conf_gyselax)
+void init_distribution_fun(
+        DFieldSpGrid allfdistribu,
+        IdxRangeSpGrid const& mesh,
+        PC_tree_t conf_gyselax)
 {
     // Read species-specific parameters from YAML
     IdxRangeSp const idx_range_sp(mesh);
@@ -358,12 +367,13 @@ void write_fluid_moments(
         IdxRange<GridTor1> const idx_range_tor1(mesh);
         IdxRange<GridTor2> const idx_range_tor2(mesh);
         IdxRange<GridTor3> const idx_range_tor3(mesh);
-        
+
         // Expose extents for fluid moments
-        std::array<std::size_t, 4> moments_extents_arr = {idx_range_sp.size(),
-                                                           idx_range_tor1.size(),
-                                                           idx_range_tor2.size(),
-                                                           idx_range_tor3.size()};
+        std::array<std::size_t, 4> moments_extents_arr
+                = {idx_range_sp.size(),
+                   idx_range_tor1.size(),
+                   idx_range_tor2.size(),
+                   idx_range_tor3.size()};
         PDI_expose("density_extents", moments_extents_arr.data(), PDI_OUT);
         PDI_expose("mean_velocity_extents", moments_extents_arr.data(), PDI_OUT);
         PDI_expose("temperature_extents", moments_extents_arr.data(), PDI_OUT);
@@ -422,27 +432,30 @@ int main(int argc, char** argv)
 
     if (version == "mpi_transpose") {
         MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh, MPI_COMM_WORLD);
-        
+
         // Get local index ranges for each layout (use exact types returned, don't convert)
         auto idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
         auto idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
-        
+
         // Create fields in both layouts following the Gysela-X pattern
         // Field on Tor3DSplit layout (matches allfdistribu's layout)
-        DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(idxrange_tor3D_split);
-        DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split = get_field(allfdistribu_tor3D_split_alloc);
-        
+        DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(
+                idxrange_tor3D_split);
+        DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split
+                = get_field(allfdistribu_tor3D_split_alloc);
+
         // Temporary field on V2DSplit layout
         DFieldMem<decltype(idxrange_v2D_split)> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
-        DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split = get_field(allfdistribu_v2D_split_alloc);
-        
+        DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split
+                = get_field(allfdistribu_v2D_split_alloc);
+
         // Copy initial data to Tor3DSplit layout field
         ddc::parallel_deepcopy(allfdistribu_tor3D_split, allfdistribu);
-        
+
         // Execute the transpose: from Tor3DSplit to V2DSplit
         transpose(
                 Kokkos::DefaultExecutionSpace(),
-                allfdistribu_v2D_split,                    // destination (V2DSplit layout)
+                allfdistribu_v2D_split, // destination (V2DSplit layout)
                 get_const_field(allfdistribu_tor3D_split)); // source (Tor3DSplit layout)
     }
     time_points[2] = steady_clock::now();
