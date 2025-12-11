@@ -34,6 +34,10 @@ template <
         class LayoutFunction = Kokkos::layout_right>
 class SplineBuliderDerivField2D
 {
+    static_assert(
+            std::is_same_v<ExecSpace, Kokkos::DefaultHostExecutionSpace>,
+            "Implemented for DefaultHostExecutionSpace only yet.");
+
     using MemorySpace = typename ExecSpace::memory_space;
 
     using Dim1 = typename BSplines1::continuous_dimension_type;
