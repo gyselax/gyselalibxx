@@ -13,7 +13,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "../spline_definitions.hpp"
+#include "../spline_definitions_xyvxvy.hpp"
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
