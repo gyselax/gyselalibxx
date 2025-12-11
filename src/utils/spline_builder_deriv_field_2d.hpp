@@ -34,10 +34,6 @@ template <
         class LayoutFunction = Kokkos::layout_right>
 class SplineBuliderDerivField2D
 {
-    static_assert(
-            std::is_same_v<ExecSpace, Kokkos::DefaultHostExecutionSpace>,
-            "Implemented for DefaultHostExecutionSpace only yet.");
-
     using MemorySpace = typename ExecSpace::memory_space;
 
     using Dim1 = typename BSplines1::continuous_dimension_type;
@@ -230,9 +226,12 @@ private:
                 = function_and_derivs.get_values_field();
         IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_extracted);
         // Fill the field with correct layout.
-        ddc::for_each(idx_range, [&](Idx<Grid1, Grid2> const idx) {
-            function(idx) = function_extracted(idx);
-        });
+        ddc::parallel_for_each(
+                ExecSpace(),
+                idx_range,
+                KOKKOS_LAMBDA(Idx<Grid1, Grid2> const idx) {
+                    function(idx) = function_extracted(idx);
+                });
     }
 
     /**
@@ -257,9 +256,12 @@ private:
                 = function_and_derivs[idx_deriv1];
 
         // Fill the field with correct layout.
-        ddc::for_each(idx_range_2, [&](Idx<Grid2> const idx) {
-            deriv1(idx_d1, idx) = deriv1_extracted(idx);
-        });
+        ddc::parallel_for_each(
+                ExecSpace(),
+                idx_range_2,
+                KOKKOS_LAMBDA(Idx<Grid2> const idx) {
+                    deriv1(idx_d1, idx) = deriv1_extracted(idx);
+                });
     }
 
     /**
@@ -284,9 +286,12 @@ private:
                 = function_and_derivs[idx_deriv2];
 
         // Fill the field with correct layout.
-        ddc::for_each(idx_range_1, [&](Idx<Grid1> const idx) {
-            deriv2(idx, idx_d2) = deriv2_extracted(idx);
-        });
+        ddc::parallel_for_each(
+                ExecSpace(),
+                idx_range_1,
+                KOKKOS_LAMBDA(Idx<Grid1> const idx) {
+                    deriv2(idx, idx_d2) = deriv2_extracted(idx);
+                });
     }
 
     /**
@@ -319,6 +324,11 @@ private:
         Idx<Deriv1, Grid1, Deriv2, Grid2> idx_cross_deriv(idx_d1, idx_slice_1, idx_d2, idx_slice_2);
 
         // Fill the field with correct layout.
-        cross_deriv(idx_d1, idx_d2) = function_and_derivs(idx_cross_deriv);
+        Kokkos::parallel_for(
+                "cross-derivs",
+                Kokkos::RangePolicy<ExecSpace>(0, 1),
+                KOKKOS_LAMBDA(const int) {
+                    cross_deriv(idx_d1, idx_d2) = function_and_derivs(idx_cross_deriv);
+                });
     }
 };
