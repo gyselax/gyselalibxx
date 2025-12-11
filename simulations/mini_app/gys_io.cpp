@@ -88,7 +88,7 @@ IdxRangeSp init_species_from_yaml(PC_tree_t conf_gyselax)
     return idx_range_sp;
 }
 
-IdxRangeSpGrid initialise_mesh(int rank, PC_tree_t conf_gyselax)
+IdxRangeSpTor3DV2D initialise_mesh(int rank, PC_tree_t conf_gyselax)
 {
     IdxRangeSp const idx_range_sp = init_species_from_yaml(conf_gyselax);
     if (rank == 0) {
@@ -125,7 +125,7 @@ IdxRangeSpGrid initialise_mesh(int rank, PC_tree_t conf_gyselax)
         cout << "  mu: " << idx_range_mu.size() << endl;
     }
 
-    return IdxRangeSpGrid(
+    return IdxRangeSpTor3DV2D(
             idx_range_sp,
             idx_range_tor1,
             idx_range_tor2,
@@ -136,7 +136,7 @@ IdxRangeSpGrid initialise_mesh(int rank, PC_tree_t conf_gyselax)
 
 void init_distribution_fun(
         DFieldSpGrid allfdistribu,
-        IdxRangeSpGrid const& mesh,
+        IdxRangeSpTor3DV2D const& mesh,
         PC_tree_t conf_gyselax)
 {
     // Read species-specific parameters from YAML
@@ -190,7 +190,7 @@ void init_distribution_fun(
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
             mesh,
-            KOKKOS_LAMBDA(IdxSpGrid const ispgrid) {
+            KOKKOS_LAMBDA(IdxSpTor3DV2D const ispgrid) {
                 IdxSpVparMu const ispvparmu(ispgrid);
                 allfdistribu(ispgrid) = allfequilibrium_field(ispvparmu);
             });
@@ -198,7 +198,7 @@ void init_distribution_fun(
 
 void write_fdistribu(
         int rank,
-        IdxRangeSpGrid const& mesh,
+        IdxRangeSpTor3DV2D const& mesh,
         host_t<DFieldMemSpGrid> const& allfdistribu_host)
 {
     if (rank == 0) {
@@ -296,8 +296,8 @@ struct FluidMomentsData
 };
 
 FluidMomentsData compute_fluid_moments(
-        IdxRangeSpGrid const& mesh,
-        DConstField<IdxRangeSpGrid> const allfdistribu)
+        IdxRangeSpTor3DV2D const& mesh,
+        DConstField<IdxRangeSpTor3DV2D> const allfdistribu)
 {
     // Extract index range from mesh
     IdxRangeVparMu const idxrange_vparmu(mesh);
@@ -305,7 +305,10 @@ FluidMomentsData compute_fluid_moments(
     // Initialise quadrature coefficients for integration over vpar and mu
     DFieldMem<IdxRangeVparMu> quadrature_coeffs_vparmu_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(idxrange_vparmu));
-    Quadrature<IdxRangeVparMu, IdxRangeSpGrid, Kokkos::DefaultExecutionSpace::memory_space> const
+    Quadrature<
+            IdxRangeVparMu,
+            IdxRangeSpTor3DV2D,
+            Kokkos::DefaultExecutionSpace::memory_space> const
             integrate_vparmu(get_const_field(quadrature_coeffs_vparmu_alloc));
 
     // Initialise FluidMoments operator
@@ -345,7 +348,7 @@ FluidMomentsData compute_fluid_moments(
 
 void write_fluid_moments(
         int rank,
-        IdxRangeSpGrid const& mesh,
+        IdxRangeSpTor3DV2D const& mesh,
         FluidMomentsData const& fluid_moments_data)
 {
     // Create host versions of fluid moments for I/O
@@ -413,7 +416,7 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     // Initialisation of the mesh (sp, space, phase-space)
     //---------------------------------------------------------
-    IdxRangeSpGrid const mesh = initialise_mesh(rank, configs.conf_gyselax);
+    IdxRangeSpTor3DV2D const mesh = initialise_mesh(rank, configs.conf_gyselax);
     //---------------------------------------------------------
     // Initialisation of the distribution function
     //---------------------------------------------------------
@@ -433,30 +436,30 @@ int main(int argc, char** argv)
     if (version == "mpi_transpose") {
         MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh, MPI_COMM_WORLD);
 
-        // Get local index ranges for each layout (use exact types returned, don't convert)
-        auto idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
-        auto idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
+        // // Get local index ranges for each layout (use exact types returned, don't convert)
+        // auto idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
+        // auto idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
 
-        // Create fields in both layouts following the Gysela-X pattern
-        // Field on Tor3DSplit layout (matches allfdistribu's layout)
-        DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(
-                idxrange_tor3D_split);
-        DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split
-                = get_field(allfdistribu_tor3D_split_alloc);
+        // // Create fields in both layouts following the Gysela-X pattern
+        // // Field on Tor3DSplit layout (matches allfdistribu's layout)
+        // DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(
+        //         idxrange_tor3D_split);
+        // DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split
+        //         = get_field(allfdistribu_tor3D_split_alloc);
 
-        // Temporary field on V2DSplit layout
-        DFieldMem<decltype(idxrange_v2D_split)> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
-        DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split
-                = get_field(allfdistribu_v2D_split_alloc);
+        // // Temporary field on V2DSplit layout
+        // DFieldMem<decltype(idxrange_v2D_split)> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
+        // DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split
+        //         = get_field(allfdistribu_v2D_split_alloc);
 
-        // Copy initial data to Tor3DSplit layout field
-        ddc::parallel_deepcopy(allfdistribu_tor3D_split, allfdistribu);
+        // // Copy initial data to Tor3DSplit layout field
+        // ddc::parallel_deepcopy(allfdistribu_tor3D_split, allfdistribu);
 
-        // Execute the transpose: from Tor3DSplit to V2DSplit
-        transpose(
-                Kokkos::DefaultExecutionSpace(),
-                allfdistribu_v2D_split, // destination (V2DSplit layout)
-                get_const_field(allfdistribu_tor3D_split)); // source (Tor3DSplit layout)
+        // // Execute the transpose: from Tor3DSplit to V2DSplit
+        // transpose(
+        //         Kokkos::DefaultExecutionSpace(),
+        //         allfdistribu_v2D_split, // destination (V2DSplit layout)
+        //         get_const_field(allfdistribu_tor3D_split)); // source (Tor3DSplit layout)
     }
     time_points[2] = steady_clock::now();
     //---------------------------------------------------------

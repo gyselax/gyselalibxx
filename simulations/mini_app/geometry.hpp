@@ -125,23 +125,23 @@ using IdxRangeTor2 = IdxRange<GridTor2>;
 using IdxRangeTor3 = IdxRange<GridTor3>;
 using IdxRangeVpar = IdxRange<GridVpar>;
 using IdxRangeMu = IdxRange<GridMu>;
-using IdxRangeSpGrid = IdxRange<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
+using IdxRangeSpTor3DV2D = IdxRange<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
 using IdxRangeSpVparMu = IdxRange<Species, GridVpar, GridMu>;
 using IdxRangeSpTor3D = IdxRange<Species, GridTor1, GridTor2, GridTor3>;
 using IdxSpTor3D = Idx<Species, GridTor1, GridTor2, GridTor3>;
-using IdxSpGrid = Idx<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
-using IdxRangeSpGridTranspose = IdxRange<Species, GridVpar, GridMu, GridTor1, GridTor2, GridTor3>;
+using IdxSpTor3DV2D = Idx<Species, GridTor1, GridTor2, GridTor3, GridVpar, GridMu>;
+using IdxRangeSpV2DTor3D = IdxRange<Species, GridVpar, GridMu, GridTor1, GridTor2, GridTor3>;
 using IdxSpVparMu = Idx<Species, GridVpar, GridMu>;
 using IdxVpar = Idx<GridVpar>;
 using IdxRangeVparMu = IdxRange<GridVpar, GridMu>;
 
 
 template <class ElementType>
-using FieldMemSpGrid = FieldMem<ElementType, IdxRangeSpGrid>;
+using FieldMemSpGrid = FieldMem<ElementType, IdxRangeSpTor3DV2D>;
 using DFieldMemSpGrid = FieldMemSpGrid<double>;
 
 template <class ElementType>
-using FieldSpGrid = Field<ElementType, IdxRangeSpGrid>;
+using FieldSpGrid = Field<ElementType, IdxRangeSpTor3DV2D>;
 using DFieldSpGrid = FieldSpGrid<double>;
 
 template <class ElementType>
@@ -158,5 +158,5 @@ using DFieldSpTor3D = DField<IdxRangeSpTor3D>;
 //-----------------------------------------------------
 // --> MPI Layouts
 //-----------------------------------------------------
-using Tor3DSplit = MPILayout<IdxRangeSpGrid, GridTor1, GridTor2, GridTor3>;
-using V2DSplit = MPILayout<IdxRangeSpGridTranspose, GridVpar, GridMu>;
+using Tor3DSplit = MPILayout<IdxRangeSpTor3DV2D, GridTor1, GridTor2, GridTor3>;
+using V2DSplit = MPILayout<IdxRangeSpV2DTor3D, GridVpar, GridMu>;
