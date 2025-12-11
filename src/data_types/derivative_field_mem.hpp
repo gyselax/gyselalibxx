@@ -336,6 +336,70 @@ public:
     }
 
     /**
+     * @brief Get a ConstField describing a subset of the data.
+     *
+     * @param slice_spec A discrete element describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns ConstField A subset of the data.
+     */
+    template <class... QueryDDims>
+    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec) const
+    {
+        return base_type::get_internal_field(slice_spec).span_cview();
+    }
+
+    /**
+     * @brief Get a Field describing a subset of the data.
+     *
+     * @param slice_spec A discrete element describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns Field A subset of the data.
+     */
+    template <class... QueryDDims>
+    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)
+    {
+        return base_type::get_internal_field(slice_spec);
+    }
+
+    /**
+     * @brief Get a Field describing a subset of the data.
+     * This function allows a slice to be obtained however it is designed to return a Field. It is
+     * therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).
+     *
+     * @param oidx_range A discrete index range describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns Field A subset of the data.
+     */
+    template <class... QueryDDims>
+    KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
+    {
+        return base_type::get_internal_field(oidx_range);
+    }
+
+    /**
+     * @brief Get a ConstField describing a subset of the data.
+     * This function allows a slice to be obtained however it is designed to return a ConstField. It is
+     * therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).
+     *
+     * @param oidx_range A discrete index range describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns ConstField A subset of the data.
+     */
+    template <class... QueryDDims>
+    KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
+    {
+        return base_type::get_internal_field(oidx_range).span_cview();
+    }
+
+    /**
      * @brief Get a constant DerivField of this field.
      *
      * This function is designed to match the equivalent function in DDC. In Gysela it should
