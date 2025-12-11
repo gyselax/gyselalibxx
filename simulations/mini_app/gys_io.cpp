@@ -334,6 +334,48 @@ FluidMomentsData compute_fluid_moments(
             temperature};
 }
 
+void write_fluid_moments(
+        int rank,
+        IdxRangeSpGrid const& mesh,
+        FluidMomentsData const& fluid_moments_data)
+{
+    // Create host versions of fluid moments for I/O
+    IdxRangeSpTor3D const idxrange_sptor3d(mesh);
+    host_t<DFieldMemSpTor3D> density_host_alloc(idxrange_sptor3d);
+    host_t<DFieldMemSpTor3D> mean_velocity_host_alloc(idxrange_sptor3d);
+    host_t<DFieldMemSpTor3D> temperature_host_alloc(idxrange_sptor3d);
+    host_t<DFieldSpTor3D> density_host = get_field(density_host_alloc);
+    host_t<DFieldSpTor3D> mean_velocity_host = get_field(mean_velocity_host_alloc);
+    host_t<DFieldSpTor3D> temperature_host = get_field(temperature_host_alloc);
+    ddc::parallel_deepcopy(density_host, fluid_moments_data.density);
+    ddc::parallel_deepcopy(mean_velocity_host, fluid_moments_data.mean_velocity);
+    ddc::parallel_deepcopy(temperature_host, fluid_moments_data.temperature);
+
+    // Expose fluid moments to PDI
+    if (rank == 0) {
+        // Extract index ranges for extents
+        IdxRangeSp const idx_range_sp(mesh);
+        IdxRange<GridTor1> const idx_range_tor1(mesh);
+        IdxRange<GridTor2> const idx_range_tor2(mesh);
+        IdxRange<GridTor3> const idx_range_tor3(mesh);
+        
+        // Expose extents for fluid moments
+        std::array<std::size_t, 4> moments_extents_arr = {idx_range_sp.size(),
+                                                           idx_range_tor1.size(),
+                                                           idx_range_tor2.size(),
+                                                           idx_range_tor3.size()};
+        PDI_expose("density_extents", moments_extents_arr.data(), PDI_OUT);
+        PDI_expose("mean_velocity_extents", moments_extents_arr.data(), PDI_OUT);
+        PDI_expose("temperature_extents", moments_extents_arr.data(), PDI_OUT);
+
+        // Expose fluid moments and trigger write event (using DDC helper which handles sharing)
+        ddc::PdiEvent("write_fluid_moments")
+                .with("density", density_host)
+                .with("mean_velocity", mean_velocity_host)
+                .with("temperature", temperature_host);
+    }
+}
+
 } // namespace
 
 int main(int argc, char** argv)
@@ -380,13 +422,34 @@ int main(int argc, char** argv)
 
     if (version == "mpi_transpose") {
         MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh, MPI_COMM_WORLD);
+        
+        // Get local index ranges for each layout (use exact types returned, don't convert)
+        auto idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
+        auto idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
+        
+        // Create fields in both layouts following the Gysela-X pattern
+        // Field on Tor3DSplit layout (matches allfdistribu's layout)
+        DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(idxrange_tor3D_split);
+        DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split = get_field(allfdistribu_tor3D_split_alloc);
+        
+        // Temporary field on V2DSplit layout
+        DFieldMem<decltype(idxrange_v2D_split)> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
+        DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split = get_field(allfdistribu_v2D_split_alloc);
+        
+        // Copy initial data to Tor3DSplit layout field
+        ddc::parallel_deepcopy(allfdistribu_tor3D_split, allfdistribu);
+        
+        // Execute the transpose: from Tor3DSplit to V2DSplit
+        transpose(
+                Kokkos::DefaultExecutionSpace(),
+                allfdistribu_v2D_split,                    // destination (V2DSplit layout)
+                get_const_field(allfdistribu_tor3D_split)); // source (Tor3DSplit layout)
     }
     time_points[2] = steady_clock::now();
     //---------------------------------------------------------
     // Compute fluid moments (density, mean velocity, temperature)
     //---------------------------------------------------------
-    FluidMomentsData fluid_moments_data
-            = compute_fluid_moments(mesh, get_const_field(allfdistribu));
+    FluidMomentsData fluid_moments = compute_fluid_moments(mesh, get_const_field(allfdistribu));
     time_points[3] = steady_clock::now();
 
     //---------------------------------------------------------
@@ -396,44 +459,9 @@ int main(int argc, char** argv)
     host_t<DFieldMemSpGrid> allfdistribu_host(mesh);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
-    // Create host versions of fluid moments for I/O
-    IdxRangeSpTor3D const idxrange_sptor3d(mesh);
-    host_t<DFieldMemSpTor3D> density_host_alloc(idxrange_sptor3d);
-    host_t<DFieldMemSpTor3D> mean_velocity_host_alloc(idxrange_sptor3d);
-    host_t<DFieldMemSpTor3D> temperature_host_alloc(idxrange_sptor3d);
-    host_t<DFieldSpTor3D> density_host = get_field(density_host_alloc);
-    host_t<DFieldSpTor3D> mean_velocity_host = get_field(mean_velocity_host_alloc);
-    host_t<DFieldSpTor3D> temperature_host = get_field(temperature_host_alloc);
-    ddc::parallel_deepcopy(density_host, fluid_moments_data.density);
-    ddc::parallel_deepcopy(mean_velocity_host, fluid_moments_data.mean_velocity);
-    ddc::parallel_deepcopy(temperature_host, fluid_moments_data.temperature);
-
     write_fdistribu(rank, mesh, allfdistribu_host);
 
-    // Expose fluid moments to PDI
-    if (rank == 0) {
-        // Extract index ranges for extents
-        IdxRangeSp const idx_range_sp(mesh);
-        IdxRange<GridTor1> const idx_range_tor1(mesh);
-        IdxRange<GridTor2> const idx_range_tor2(mesh);
-        IdxRange<GridTor3> const idx_range_tor3(mesh);
-        
-        // Expose extents for fluid moments
-        std::array<std::size_t, 4> moments_extents_arr
-                = {idx_range_sp.size(),
-                   idx_range_tor1.size(),
-                   idx_range_tor2.size(),
-                   idx_range_tor3.size()};
-        PDI_expose("density_extents", moments_extents_arr.data(), PDI_OUT);
-        PDI_expose("mean_velocity_extents", moments_extents_arr.data(), PDI_OUT);
-        PDI_expose("temperature_extents", moments_extents_arr.data(), PDI_OUT);
-
-        // Expose fluid moments and trigger write event (using DDC helper which handles sharing)
-        ddc::PdiEvent("write_fluid_moments")
-                .with("density", density_host)
-                .with("mean_velocity", mean_velocity_host)
-                .with("temperature", temperature_host);
-    }
+    write_fluid_moments(rank, mesh, fluid_moments);
 
     time_points[5] = steady_clock::now();
     //---------------------------------------------------------
