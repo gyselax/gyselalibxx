@@ -174,15 +174,20 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
                 function_and_derivs.get_values_field()(idx) = function(idx);
             });
 
-    ddc::for_each(idx_range_y, [&](Idx<GridY> const idx_y) {
-        double const y = ddc::coordinate(idx_y);
-        derivs_xmin(first_dx, idx_y)
-                = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * double(x_min) + 0.25) * std::sin(y);
-        derivs_xmax(first_dx, idx_y)
-                = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * double(x_max) + 0.25) * std::sin(y);
-        function_and_derivs[idx_deriv_xmin](idx_y) = derivs_xmin(first_dx, idx_y);
-        function_and_derivs[idx_deriv_xmax](idx_y) = derivs_xmax(first_dx, idx_y);
-    });
+    ddc::parallel_for_each(
+            HostExecSpace(),
+            idx_range_y,
+            KOKKOS_LAMBDA(Idx<GridY> const idx_y) {
+                double const y = ddc::coordinate(idx_y);
+                derivs_xmin(first_dx, idx_y) = -2. / 3 * M_PI
+                                               * std::sin(2. / 3 * M_PI * double(x_min) + 0.25)
+                                               * std::sin(y);
+                derivs_xmax(first_dx, idx_y) = -2. / 3 * M_PI
+                                               * std::sin(2. / 3 * M_PI * double(x_max) + 0.25)
+                                               * std::sin(y);
+                function_and_derivs[idx_deriv_xmin](idx_y) = derivs_xmin(first_dx, idx_y);
+                function_and_derivs[idx_deriv_xmax](idx_y) = derivs_xmax(first_dx, idx_y);
+            });
 
     ddc::for_each(idx_range_x, [&](Idx<GridX> const idx_x) {
         double const x = ddc::coordinate(idx_x);
