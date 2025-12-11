@@ -1,7 +1,6 @@
 /*
  * Testing the "src/interpolation/spline_interpolator_rtheta.hpp" file.
  */
-
 #include <filesystem>
 #include <fstream>
 #include <iostream>
@@ -12,6 +11,7 @@
 #include "geometry.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "spline_definitions.hpp"
 #include "spline_interpolator_2d.hpp"
 
 

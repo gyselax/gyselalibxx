@@ -10,6 +10,7 @@
 #include "poisson_like_rhs_function.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "spline_definitions.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
