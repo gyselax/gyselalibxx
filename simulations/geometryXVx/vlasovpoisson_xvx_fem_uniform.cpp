@@ -32,7 +32,7 @@
 #include "singlemodeperturbinitialisation.hpp"
 #include "species_info.hpp"
 #include "species_init.hpp"
-#include "spline_definitions.hpp"
+#include "spline_definitions_xvx.hpp"
 #include "spline_interpolator.hpp"
 #include "splitvlasovsolver.hpp"
 
