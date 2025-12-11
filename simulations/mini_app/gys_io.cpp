@@ -212,10 +212,7 @@ void init_distribution_fun(
             Kokkos::DefaultExecutionSpace(),
             meshGridSp,
             KOKKOS_LAMBDA(IdxSpGrid const ispgrid) {
-                IdxSpVparMu const ispvparmu(
-                        ddc::select<Species>(ispgrid),
-                        ddc::select<GridVpar>(ispgrid),
-                        ddc::select<GridMu>(ispgrid));
+                IdxSpVparMu const ispvparmu(ispgrid);
                 allfdistribu_field(ispgrid) = allfequilibrium_field(ispvparmu);
             });
 }
