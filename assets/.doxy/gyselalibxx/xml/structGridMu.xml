@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structGridMu" kind="struct" language="C++" prot="public">
     <compoundname>GridMu</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsMu::interpolation_discrete_dimension_type</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; Mu &gt;</basecompoundref>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -15,7 +15,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SplineInterpPointsMu::interpolation_discrete_dimension_type</label>
+        <label>UniformGridBase&lt; Mu &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -26,10 +26,10 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SplineInterpPointsMu::interpolation_discrete_dimension_type</label>
+        <label>UniformGridBase&lt; Mu &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" line="77" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" bodystart="78" bodyend="79"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" line="48" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" bodystart="49" bodyend="50"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

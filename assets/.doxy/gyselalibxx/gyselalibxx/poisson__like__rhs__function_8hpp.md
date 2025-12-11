@@ -11,7 +11,9 @@
 
 
 * `#include <ddc/ddc.hpp>`
+* `#include <ddc/kernels/splines.hpp>`
 * `#include "geometry.hpp"`
+* `#include "spline_definitions.hpp"`
 
 
 

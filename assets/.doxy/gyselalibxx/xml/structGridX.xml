@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structGridX" kind="struct" language="C++" prot="public">
     <compoundname>GridX</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsX::interpolation_discrete_dimension_type</basecompoundref>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsX::interpolation_discrete_dimension_type</basecompoundref>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsX::interpolation_discrete_dimension_type</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; GRID_X_UNIFORM, UniformGridBase&lt; X &gt;, NonUniformGridBase&lt; X &gt; &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; X &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; X &gt;</basecompoundref>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -15,13 +15,16 @@
         <link refid="structGridX"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="2" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="2" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="3">
+        <label>UniformGridBase&lt; X &gt;</label>
+      </node>
       <node id="2">
-        <label>SplineInterpPointsX::interpolation_discrete_dimension_type</label>
+        <label>std::conditional_t&lt; GRID_X_UNIFORM, UniformGridBase&lt; X &gt;, NonUniformGridBase&lt; X &gt; &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -30,16 +33,19 @@
         <link refid="structGridX"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="2" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="2" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
+      </node>
+      <node id="3">
+        <label>UniformGridBase&lt; X &gt;</label>
       </node>
       <node id="2">
-        <label>SplineInterpPointsX::interpolation_discrete_dimension_type</label>
+        <label>std::conditional_t&lt; GRID_X_UNIFORM, UniformGridBase&lt; X &gt;, NonUniformGridBase&lt; X &gt; &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="89" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="90" bodyend="91"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="62" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="63" bodyend="64"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

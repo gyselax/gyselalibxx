@@ -11,7 +11,6 @@
 
 
 * `#include <ddc/ddc.hpp>`
-* `#include <ddc/kernels/splines.hpp>`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
@@ -39,10 +38,6 @@
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**BSplinesVx**](structBSplinesVx.md) <br> |
-| struct | [**BSplinesVy**](structBSplinesVy.md) <br> |
-| struct | [**BSplinesX**](structBSplinesX.md) <br> |
-| struct | [**BSplinesY**](structBSplinesY.md) <br> |
 | class | [**GeometryVxVyXY**](classGeometryVxVyXY.md) <br>_A class providing aliases for useful subindex ranges of the geometry when the data is saved with the velocity dimensions distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections._  |
 | class | [**GeometryXYVxVy**](classGeometryXYVxVy.md) <br>_A class providing aliases for useful subindex ranges of the geometry when the data is saved with the spatial dimensions distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections._  |
 | struct | [**GridVx**](structGridVx.md) <br> |
@@ -59,7 +54,6 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef Field&lt; ElementType const, IdxRangeBSXY &gt; | [**BSConstFieldXY**](#typedef-bsconstfieldxy)  <br> |
 | typedef Field&lt; ElementType const, IdxRangeSpVxVy &gt; | [**ConstFieldSpVxVy**](#typedef-constfieldspvxvy)  <br> |
 | typedef Field&lt; ElementType const, IdxRangeSpVxVyXY &gt; | [**ConstFieldSpVxVyXY**](#typedef-constfieldspvxvyxy)  <br> |
 | typedef Field&lt; ElementType const, IdxRangeSpXYVxVy &gt; | [**ConstFieldSpXYVxVy**](#typedef-constfieldspxyvxvy)  <br> |
@@ -74,7 +68,6 @@
 | typedef Coord&lt; [**X**](structX.md) &gt; | [**CoordX**](#typedef-coordx)  <br> |
 | typedef Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**CoordXY**](#typedef-coordxy)  <br> |
 | typedef Coord&lt; [**Y**](structY.md) &gt; | [**CoordY**](#typedef-coordy)  <br> |
-| typedef BSConstFieldXY&lt; double &gt; | [**DBSConstFieldXY**](#typedef-dbsconstfieldxy)  <br> |
 | typedef ConstFieldSpVxVy&lt; double &gt; | [**DConstFieldSpVxVy**](#typedef-dconstfieldspvxvy)  <br> |
 | typedef ConstFieldSpVxVyXY&lt; double &gt; | [**DConstFieldSpVxVyXY**](#typedef-dconstfieldspvxvyxy)  <br> |
 | typedef ConstFieldSpXYVxVy&lt; double &gt; | [**DConstFieldSpXYVxVy**](#typedef-dconstfieldspxyvxvy)  <br> |
@@ -119,12 +112,6 @@
 | typedef Field&lt; ElementType, IdxRangeX &gt; | [**FieldX**](#typedef-fieldx)  <br> |
 | typedef Field&lt; ElementType, IdxRangeXY &gt; | [**FieldXY**](#typedef-fieldxy)  <br> |
 | typedef Field&lt; ElementType, IdxRangeY &gt; | [**FieldY**](#typedef-fieldy)  <br> |
-| typedef IdxRange&lt; [**BSplinesVx**](structBSplinesVx.md) &gt; | [**IdxRangeBSVx**](#typedef-idxrangebsvx)  <br> |
-| typedef IdxRange&lt; [**BSplinesVx**](structBSplinesVx.md), [**BSplinesVy**](structBSplinesVy.md) &gt; | [**IdxRangeBSVxVy**](#typedef-idxrangebsvxvy)  <br> |
-| typedef IdxRange&lt; [**BSplinesVy**](structBSplinesVy.md) &gt; | [**IdxRangeBSVy**](#typedef-idxrangebsvy)  <br> |
-| typedef IdxRange&lt; [**BSplinesX**](structBSplinesX.md) &gt; | [**IdxRangeBSX**](#typedef-idxrangebsx)  <br> |
-| typedef IdxRange&lt; [**BSplinesX**](structBSplinesX.md), [**BSplinesY**](structBSplinesY.md) &gt; | [**IdxRangeBSXY**](#typedef-idxrangebsxy)  <br> |
-| typedef IdxRange&lt; [**BSplinesY**](structBSplinesY.md) &gt; | [**IdxRangeBSY**](#typedef-idxrangebsy)  <br> |
 | typedef IdxRange&lt; [**Species**](structSpecies.md), [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md) &gt; | [**IdxRangeSpVxVy**](#typedef-idxrangespvxvy)  <br> |
 | typedef IdxRange&lt; [**Species**](structSpecies.md), [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md), [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**IdxRangeSpVxVyXY**](#typedef-idxrangespvxvyxy)  <br> |
 | typedef IdxRange&lt; [**Species**](structSpecies.md), [**GridX**](structGridX.md), [**GridY**](structGridY.md), [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md) &gt; | [**IdxRangeSpXYVxVy**](#typedef-idxrangespxyvxvy)  <br> |
@@ -148,18 +135,6 @@
 | typedef Idx&lt; [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**IdxXY**](#typedef-idxxy)  <br> |
 | typedef Idx&lt; [**GridX**](structGridX.md), [**GridY**](structGridY.md), [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md) &gt; | [**IdxXYVxVy**](#typedef-idxxyvxvy)  <br> |
 | typedef Idx&lt; [**GridY**](structGridY.md) &gt; | [**IdxY**](#typedef-idxy)  <br> |
-| typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesVx**](structBSplinesVx.md), SplineVxBoundary, SplineVxBoundary &gt; | [**SplineInterpPointsVx**](#typedef-splineinterppointsvx)  <br> |
-| typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesVy**](structBSplinesVy.md), SplineVyBoundary, SplineVyBoundary &gt; | [**SplineInterpPointsVy**](#typedef-splineinterppointsvy)  <br> |
-| typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesX**](structBSplinesX.md), SplineXBoundary, SplineXBoundary &gt; | [**SplineInterpPointsX**](#typedef-splineinterppointsx)  <br> |
-| typedef ddc::GrevilleInterpolationPoints&lt; [**BSplinesY**](structBSplinesY.md), SplineYBoundary, SplineYBoundary &gt; | [**SplineInterpPointsY**](#typedef-splineinterppointsy)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesVx**](structBSplinesVx.md), [**GridVx**](structGridVx.md), SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineVxBuilder**](#typedef-splinevxbuilder)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesVx**](structBSplinesVx.md), [**GridVx**](structGridVx.md), ddc::ConstantExtrapolationRule&lt; [**Vx**](structVx.md) &gt;, ddc::ConstantExtrapolationRule&lt; [**Vx**](structVx.md) &gt; &gt; | [**SplineVxEvaluator**](#typedef-splinevxevaluator)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesVy**](structBSplinesVy.md), [**GridVy**](structGridVy.md), SplineVyBoundary, SplineVyBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineVyBuilder**](#typedef-splinevybuilder)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesVy**](structBSplinesVy.md), [**GridVy**](structGridVy.md), ddc::ConstantExtrapolationRule&lt; [**Vy**](structVy.md) &gt;, ddc::ConstantExtrapolationRule&lt; [**Vy**](structVy.md) &gt; &gt; | [**SplineVyEvaluator**](#typedef-splinevyevaluator)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineXBuilder**](#typedef-splinexbuilder)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesX**](structBSplinesX.md), [**GridX**](structGridX.md), ddc::PeriodicExtrapolationRule&lt; [**X**](structX.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**X**](structX.md) &gt; &gt; | [**SplineXEvaluator**](#typedef-splinexevaluator)  <br> |
-| typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesY**](structBSplinesY.md), [**GridY**](structGridY.md), SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK &gt; | [**SplineYBuilder**](#typedef-splineybuilder)  <br> |
-| typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory\_space, [**BSplinesY**](structBSplinesY.md), [**GridY**](structGridY.md), ddc::PeriodicExtrapolationRule&lt; [**Y**](structY.md) &gt;, ddc::PeriodicExtrapolationRule&lt; [**Y**](structY.md) &gt; &gt; | [**SplineYEvaluator**](#typedef-splineyevaluator)  <br> |
 | typedef [**MPILayout**](classMPILayout.md)&lt; IdxRangeSpVxVyXY, [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md) &gt; | [**V2DSplit**](#typedef-v2dsplit)  <br> |
 | typedef [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorConstFieldXY**](#typedef-vectorconstfieldxy)  <br> |
 | typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorFieldMemXY**](#typedef-vectorfieldmemxy)  <br> |
@@ -169,22 +144,6 @@
 
 
 
-## Public Attributes
-
-| Type | Name |
-| ---: | :--- |
-|  int constexpr | [**BSDegreeVx**](#variable-bsdegreevx)   = `3`<br> |
-|  int constexpr | [**BSDegreeVy**](#variable-bsdegreevy)   = `3`<br> |
-|  int constexpr | [**BSDegreeX**](#variable-bsdegreex)   = `3`<br> |
-|  int constexpr | [**BSDegreeY**](#variable-bsdegreey)   = `3`<br> |
-|  bool constexpr | [**BsplineOnUniformCellsVx**](#variable-bsplineonuniformcellsvx)   = `true`<br> |
-|  bool constexpr | [**BsplineOnUniformCellsVy**](#variable-bsplineonuniformcellsvy)   = `true`<br> |
-|  bool constexpr | [**BsplineOnUniformCellsX**](#variable-bsplineonuniformcellsx)   = `true`<br> |
-|  bool constexpr | [**BsplineOnUniformCellsY**](#variable-bsplineonuniformcellsy)   = `true`<br> |
-|  ddc::BoundCond constexpr | [**SplineVxBoundary**](#variable-splinevxboundary)   = `ddc::BoundCond::HERMITE`<br> |
-|  ddc::BoundCond constexpr | [**SplineVyBoundary**](#variable-splinevyboundary)   = `ddc::BoundCond::HERMITE`<br> |
-|  ddc::BoundCond constexpr | [**SplineXBoundary**](#variable-splinexboundary)   = `ddc::BoundCond::PERIODIC`<br> |
-|  ddc::BoundCond constexpr | [**SplineYBoundary**](#variable-splineyboundary)   = `ddc::BoundCond::PERIODIC`<br> |
 
 
 
@@ -231,19 +190,6 @@
 
 ## Public Types Documentation
 
-
-
-
-### typedef BSConstFieldXY 
-
-```C++
-using BSConstFieldXY =  Field<ElementType const, IdxRangeBSXY>;
-```
-
-
-
-
-<hr>
 
 
 
@@ -420,19 +366,6 @@ using CoordXY =  Coord<X, Y>;
 
 ```C++
 using CoordY =  Coord<Y>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef DBSConstFieldXY 
-
-```C++
-using DBSConstFieldXY =  BSConstFieldXY<double>;
 ```
 
 
@@ -1014,84 +947,6 @@ using FieldY =  Field<ElementType, IdxRangeY>;
 
 
 
-### typedef IdxRangeBSVx 
-
-```C++
-using IdxRangeBSVx =  IdxRange<BSplinesVx>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef IdxRangeBSVxVy 
-
-```C++
-using IdxRangeBSVxVy =  IdxRange<BSplinesVx, BSplinesVy>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef IdxRangeBSVy 
-
-```C++
-using IdxRangeBSVy =  IdxRange<BSplinesVy>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef IdxRangeBSX 
-
-```C++
-using IdxRangeBSX =  IdxRange<BSplinesX>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef IdxRangeBSXY 
-
-```C++
-using IdxRangeBSXY =  IdxRange<BSplinesX, BSplinesY>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef IdxRangeBSY 
-
-```C++
-using IdxRangeBSY =  IdxRange<BSplinesY>;
-```
-
-
-
-
-<hr>
-
-
-
 ### typedef IdxRangeSpVxVy 
 
 ```C++
@@ -1391,162 +1246,6 @@ using IdxY =  Idx<GridY>;
 
 
 
-### typedef SplineInterpPointsVx 
-
-```C++
-using SplineInterpPointsVx =  ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineInterpPointsVy 
-
-```C++
-using SplineInterpPointsVy =  ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineInterpPointsX 
-
-```C++
-using SplineInterpPointsX =  ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineInterpPointsY 
-
-```C++
-using SplineInterpPointsY =  ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineVxBuilder 
-
-```C++
-using SplineVxBuilder =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineVxEvaluator 
-
-```C++
-using SplineVxEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, ddc::ConstantExtrapolationRule<Vx>, ddc::ConstantExtrapolationRule<Vx> >;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineVyBuilder 
-
-```C++
-using SplineVyBuilder =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVy, GridVy, SplineVyBoundary, SplineVyBoundary, ddc::SplineSolver::LAPACK>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineVyEvaluator 
-
-```C++
-using SplineVyEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVy, GridVy, ddc::ConstantExtrapolationRule<Vy>, ddc::ConstantExtrapolationRule<Vy> >;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineXBuilder 
-
-```C++
-using SplineXBuilder =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineXEvaluator 
-
-```C++
-using SplineXEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::PeriodicExtrapolationRule<X>, ddc::PeriodicExtrapolationRule<X> >;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineYBuilder 
-
-```C++
-using SplineYBuilder =  ddc::SplineBuilder< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, SplineYBoundary, SplineYBoundary, ddc::SplineSolver::LAPACK>;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef SplineYEvaluator 
-
-```C++
-using SplineYEvaluator =  ddc::SplineEvaluator< Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesY, GridY, ddc::PeriodicExtrapolationRule<Y>, ddc::PeriodicExtrapolationRule<Y> >;
-```
-
-
-
-
-<hr>
-
-
-
 ### typedef V2DSplit 
 
 ```C++
@@ -1603,164 +1302,6 @@ using VectorFieldXY =  VectorField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>
 
 ```C++
 using X2DSplit =  MPILayout<IdxRangeSpXYVxVy, GridX, GridY>;
-```
-
-
-
-
-<hr>
-## Public Attributes Documentation
-
-
-
-
-### variable BSDegreeVx 
-
-```C++
-int constexpr BSDegreeVx;
-```
-
-
-
-
-<hr>
-
-
-
-### variable BSDegreeVy 
-
-```C++
-int constexpr BSDegreeVy;
-```
-
-
-
-
-<hr>
-
-
-
-### variable BSDegreeX 
-
-```C++
-int constexpr BSDegreeX;
-```
-
-
-
-
-<hr>
-
-
-
-### variable BSDegreeY 
-
-```C++
-int constexpr BSDegreeY;
-```
-
-
-
-
-<hr>
-
-
-
-### variable BsplineOnUniformCellsVx 
-
-```C++
-bool constexpr BsplineOnUniformCellsVx;
-```
-
-
-
-
-<hr>
-
-
-
-### variable BsplineOnUniformCellsVy 
-
-```C++
-bool constexpr BsplineOnUniformCellsVy;
-```
-
-
-
-
-<hr>
-
-
-
-### variable BsplineOnUniformCellsX 
-
-```C++
-bool constexpr BsplineOnUniformCellsX;
-```
-
-
-
-
-<hr>
-
-
-
-### variable BsplineOnUniformCellsY 
-
-```C++
-bool constexpr BsplineOnUniformCellsY;
-```
-
-
-
-
-<hr>
-
-
-
-### variable SplineVxBoundary 
-
-```C++
-ddc::BoundCond constexpr SplineVxBoundary;
-```
-
-
-
-
-<hr>
-
-
-
-### variable SplineVyBoundary 
-
-```C++
-ddc::BoundCond constexpr SplineVyBoundary;
-```
-
-
-
-
-<hr>
-
-
-
-### variable SplineXBoundary 
-
-```C++
-ddc::BoundCond constexpr SplineXBoundary;
-```
-
-
-
-
-<hr>
-
-
-
-### variable SplineYBoundary 
-
-```C++
-ddc::BoundCond constexpr SplineYBoundary;
 ```
 
 

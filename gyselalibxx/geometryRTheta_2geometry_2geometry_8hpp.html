@@ -553,7 +553,6 @@
 <p><a href="geometryRTheta_2geometry_2geometry_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
 <li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
-<li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
 <li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "ddc_helper.hpp"</code></li>
@@ -573,23 +572,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structGridR.html"><strong>GridR</strong></a> <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structGridTheta.html"><strong>GridTheta</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
@@ -653,14 +640,6 @@
 <tr>
 <td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeTheta &gt;</td>
 <td style="text-align: left;"><a href="#typedef-constfieldtheta"><strong>ConstFieldTheta</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef DConstField&lt; IdxRangeBSRTheta &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constspline2d"><strong>ConstSpline2D</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-constvectorsplinecoeffs2d"><strong>ConstVectorSplineCoeffs2D</strong></a>  <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef Coord&lt; <a href="structR.html"><strong>R</strong></a> &gt;</td>
@@ -775,32 +754,12 @@
 <td style="text-align: left;"><a href="#typedef-fieldtheta"><strong>FieldTheta</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef Idx&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxpolarbspl"><strong>IdxPolarBspl</strong></a>  <br><em>Type of the index of an element of polar B-splines.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">typedef Idx&lt; <a href="structGridR.html"><strong>GridR</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-idxr"><strong>IdxR</strong></a>  <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef Idx&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-idxrtheta"><strong>IdxRTheta</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangebspolar"><strong>IdxRangeBSPolar</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangebsr"><strong>IdxRangeBSR</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangebsrtheta"><strong>IdxRangeBSRTheta</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangebstheta"><strong>IdxRangeBSTheta</strong></a>  <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef IdxRange&lt; <a href="structGridR.html"><strong>GridR</strong></a> &gt;</td>
@@ -830,97 +789,6 @@
 <td style="text-align: right;">typedef Idx&lt; <a href="structGridTheta.html"><strong>GridTheta</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-idxtheta"><strong>IdxTheta</strong></a>  <br></td>
 </tr>
-<tr>
-<td style="text-align: right;">typedef DFieldMem&lt; IdxRange&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-polarsplinememrtheta"><strong>PolarSplineMemRTheta</strong></a>  <br><em>Tag the polar B-splines decomposition of a function.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef DField&lt; IdxRange&lt; <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-polarsplinertheta"><strong>PolarSplineRTheta</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef DField&lt; IdxRangeBSRTheta &gt;</td>
-<td style="text-align: left;"><a href="#typedef-spline2d"><strong>Spline2D</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef DFieldMem&lt; IdxRangeBSRTheta &gt;</td>
-<td style="text-align: left;"><a href="#typedef-spline2dmem"><strong>Spline2DMem</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, SplineRBoundary, SplineRBoundary &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splineinterppointsr"><strong>SplineInterpPointsR</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, SplineThetaBoundary, SplineThetaBoundary &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splineinterppointstheta"><strong>SplineInterpPointsTheta</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, SplineRBoundary, SplineRBoundary, SplineThetaBoundary, SplineThetaBoundary, ddc::SplineSolver::LAPACK &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinerthetabuilder"><strong>SplineRThetaBuilder</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, SplineRBoundary, SplineRBoundary, SplineThetaBoundary, SplineThetaBoundary, ddc::SplineSolver::LAPACK &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinerthetabuilder_host"><strong>SplineRThetaBuilder_host</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinerthetaevaluatorconstbound"><strong>SplineRThetaEvaluatorConstBound</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structR.html"><strong>R</strong></a>, <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinerthetaevaluatorconstbound_host"><strong>SplineRThetaEvaluatorConstBound_host</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinerthetaevaluatornullbound"><strong>SplineRThetaEvaluatorNullBound</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt;, ddc::PeriodicExtrapolationRule&lt; <a href="structTheta.html"><strong>Theta</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinerthetaevaluatornullbound_host"><strong>SplineRThetaEvaluatorNullBound_host</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-vectorsplinecoeffs2d"><strong>VectorSplineCoeffs2D</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>&lt; double, IdxRangeBSRTheta, VectorIndexSet&lt; Dim1, Dim2 &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-vectorsplinecoeffsmem2d"><strong>VectorSplineCoeffsMem2D</strong></a>  <br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-attributes">Public Attributes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">int constexpr</td>
-<td style="text-align: left;"><a href="#variable-bsdegreer"><strong>BSDegreeR</strong></a>   = <code>3</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">int constexpr</td>
-<td style="text-align: left;"><a href="#variable-bsdegreetheta"><strong>BSDegreeTheta</strong></a>   = <code>3</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">bool constexpr</td>
-<td style="text-align: left;"><a href="#variable-bsplineonuniformcellsr"><strong>BsplineOnUniformCellsR</strong></a>   = <code>false</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">bool constexpr</td>
-<td style="text-align: left;"><a href="#variable-bsplineonuniformcellstheta"><strong>BsplineOnUniformCellsTheta</strong></a>   = <code>false</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">ddc::BoundCond constexpr</td>
-<td style="text-align: left;"><a href="#variable-splinerboundary"><strong>SplineRBoundary</strong></a>   = <code>ddc::BoundCond::GREVILLE</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">ddc::BoundCond constexpr</td>
-<td style="text-align: left;"><a href="#variable-splinethetaboundary"><strong>SplineThetaBoundary</strong></a>   = <code>ddc::BoundCond::PERIODIC</code><br></td>
-</tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
@@ -936,16 +804,6 @@
 
 <h3 id="typedef-constfieldtheta">typedef ConstFieldTheta</h3>
 <pre><code class="language-C++">using ConstFieldTheta =  ConstField&lt;ElementType, IdxRangeTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-constspline2d">typedef ConstSpline2D</h3>
-<pre><code class="language-C++">using ConstSpline2D =  DConstField&lt;IdxRangeBSRTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-constvectorsplinecoeffs2d">typedef ConstVectorSplineCoeffs2D</h3>
-<pre><code class="language-C++">using ConstVectorSplineCoeffs2D =  VectorConstField&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt; &gt;;
 </code></pre>
 <hr>
 
@@ -1089,12 +947,6 @@
 </code></pre>
 <hr>
 
-<h3 id="typedef-idxpolarbspl">typedef IdxPolarBspl</h3>
-<p><em>Type of the index of an element of polar B-splines.</em> </p>
-<pre><code class="language-C++">using IdxPolarBspl =  Idx&lt;PolarBSplinesRTheta&gt;;
-</code></pre>
-<hr>
-
 <h3 id="typedef-idxr">typedef IdxR</h3>
 <pre><code class="language-C++">using IdxR =  Idx&lt;GridR&gt;;
 </code></pre>
@@ -1102,26 +954,6 @@
 
 <h3 id="typedef-idxrtheta">typedef IdxRTheta</h3>
 <pre><code class="language-C++">using IdxRTheta =  Idx&lt;GridR, GridTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-idxrangebspolar">typedef IdxRangeBSPolar</h3>
-<pre><code class="language-C++">using IdxRangeBSPolar =  IdxRange&lt;PolarBSplinesRTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-idxrangebsr">typedef IdxRangeBSR</h3>
-<pre><code class="language-C++">using IdxRangeBSR =  IdxRange&lt;BSplinesR&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-idxrangebsrtheta">typedef IdxRangeBSRTheta</h3>
-<pre><code class="language-C++">using IdxRangeBSRTheta =  IdxRange&lt;BSplinesR, BSplinesTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-idxrangebstheta">typedef IdxRangeBSTheta</h3>
-<pre><code class="language-C++">using IdxRangeBSTheta =  IdxRange&lt;BSplinesTheta&gt;;
 </code></pre>
 <hr>
 
@@ -1157,108 +989,6 @@
 
 <h3 id="typedef-idxtheta">typedef IdxTheta</h3>
 <pre><code class="language-C++">using IdxTheta =  Idx&lt;GridTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-polarsplinememrtheta">typedef PolarSplineMemRTheta</h3>
-<p><em>Tag the polar B-splines decomposition of a function.</em> </p>
-<pre><code class="language-C++">using PolarSplineMemRTheta =  DFieldMem&lt;IdxRange&lt;PolarBSplinesRTheta&gt; &gt;;
-</code></pre>
-<p>Store the polar B-splines coefficients of the function. </p>
-<hr>
-
-<h3 id="typedef-polarsplinertheta">typedef PolarSplineRTheta</h3>
-<pre><code class="language-C++">using PolarSplineRTheta =  DField&lt;IdxRange&lt;PolarBSplinesRTheta&gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-spline2d">typedef Spline2D</h3>
-<pre><code class="language-C++">using Spline2D =  DField&lt;IdxRangeBSRTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-spline2dmem">typedef Spline2DMem</h3>
-<pre><code class="language-C++">using Spline2DMem =  DFieldMem&lt;IdxRangeBSRTheta&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splineinterppointsr">typedef SplineInterpPointsR</h3>
-<pre><code class="language-C++">using SplineInterpPointsR =  ddc::GrevilleInterpolationPoints&lt;BSplinesR, SplineRBoundary, SplineRBoundary&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splineinterppointstheta">typedef SplineInterpPointsTheta</h3>
-<pre><code class="language-C++">using SplineInterpPointsTheta =  ddc::GrevilleInterpolationPoints&lt;BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinerthetabuilder">typedef SplineRThetaBuilder</h3>
-<pre><code class="language-C++">using SplineRThetaBuilder =  ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRBoundary, SplineRBoundary, SplineThetaBoundary, SplineThetaBoundary, ddc::SplineSolver::LAPACK&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinerthetabuilder_host">typedef SplineRThetaBuilder_host</h3>
-<pre><code class="language-C++">using SplineRThetaBuilder_host =  ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRBoundary, SplineRBoundary, SplineThetaBoundary, SplineThetaBoundary, ddc::SplineSolver::LAPACK&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinerthetaevaluatorconstbound">typedef SplineRThetaEvaluatorConstBound</h3>
-<pre><code class="language-C++">using SplineRThetaEvaluatorConstBound =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinerthetaevaluatorconstbound_host">typedef SplineRThetaEvaluatorConstBound_host</h3>
-<pre><code class="language-C++">using SplineRThetaEvaluatorConstBound_host =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::ConstantExtrapolationRule&lt;R, Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinerthetaevaluatornullbound">typedef SplineRThetaEvaluatorNullBound</h3>
-<pre><code class="language-C++">using SplineRThetaEvaluatorNullBound =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinerthetaevaluatornullbound_host">typedef SplineRThetaEvaluatorNullBound_host</h3>
-<pre><code class="language-C++">using SplineRThetaEvaluatorNullBound_host =  ddc::SplineEvaluator2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, ddc::NullExtrapolationRule, ddc::NullExtrapolationRule, ddc::PeriodicExtrapolationRule&lt;Theta&gt;, ddc::PeriodicExtrapolationRule&lt;Theta&gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-vectorsplinecoeffs2d">typedef VectorSplineCoeffs2D</h3>
-<pre><code class="language-C++">using VectorSplineCoeffs2D =  VectorField&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-vectorsplinecoeffsmem2d">typedef VectorSplineCoeffsMem2D</h3>
-<pre><code class="language-C++">using VectorSplineCoeffsMem2D =  VectorFieldMem&lt;double, IdxRangeBSRTheta, VectorIndexSet&lt;Dim1, Dim2&gt; &gt;;
-</code></pre>
-<hr>
-<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
-<h3 id="variable-bsdegreer">variable BSDegreeR</h3>
-<pre><code class="language-C++">int constexpr BSDegreeR;
-</code></pre>
-<hr>
-
-<h3 id="variable-bsdegreetheta">variable BSDegreeTheta</h3>
-<pre><code class="language-C++">int constexpr BSDegreeTheta;
-</code></pre>
-<hr>
-
-<h3 id="variable-bsplineonuniformcellsr">variable BsplineOnUniformCellsR</h3>
-<pre><code class="language-C++">bool constexpr BsplineOnUniformCellsR;
-</code></pre>
-<hr>
-
-<h3 id="variable-bsplineonuniformcellstheta">variable BsplineOnUniformCellsTheta</h3>
-<pre><code class="language-C++">bool constexpr BsplineOnUniformCellsTheta;
-</code></pre>
-<hr>
-
-<h3 id="variable-splinerboundary">variable SplineRBoundary</h3>
-<pre><code class="language-C++">ddc::BoundCond constexpr SplineRBoundary;
-</code></pre>
-<hr>
-
-<h3 id="variable-splinethetaboundary">variable SplineThetaBoundary</h3>
-<pre><code class="language-C++">ddc::BoundCond constexpr SplineThetaBoundary;
 </code></pre>
 <hr>
 

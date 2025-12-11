@@ -553,7 +553,6 @@
 <p><a href="geometryXVx_2geometry_2geometry_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
 <li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
-<li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
 <li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "ddc_helper.hpp"</code></li>
@@ -570,14 +569,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structBSplinesX.html"><strong>BSplinesX</strong></a> <br></td>
-</tr>
 <tr>
 <td style="text-align: right;">class</td>
 <td style="text-align: left;"><a href="classGeometryXVx.html"><strong>GeometryXVx</strong></a> <br><em>A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections.</em></td>
@@ -613,18 +604,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeBSX &gt;</td>
-<td style="text-align: left;"><a href="#typedef-bsconstfieldx"><strong>BSConstFieldX</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef FieldMem&lt; ElementType, IdxRangeBSX &gt;</td>
-<td style="text-align: left;"><a href="#typedef-bsfieldmemx"><strong>BSFieldMemX</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef Field&lt; ElementType, IdxRangeBSX &gt;</td>
-<td style="text-align: left;"><a href="#typedef-bsfieldx"><strong>BSFieldX</strong></a>  <br></td>
-</tr>
 <tr>
 <td style="text-align: right;">typedef ConstField&lt; ElementType, IdxRangeSpMom &gt;</td>
 <td style="text-align: left;"><a href="#typedef-constfieldspmom"><strong>ConstFieldSpMom</strong></a>  <br></td>
@@ -664,18 +643,6 @@
 <tr>
 <td style="text-align: right;">typedef Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structVx.html"><strong>Vx</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-coordxvx"><strong>CoordXVx</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef BSConstFieldX&lt; double &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dbsconstfieldx"><strong>DBSConstFieldX</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef BSFieldMemX&lt; double &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dbsfieldmemx"><strong>DBSFieldMemX</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef BSFieldX&lt; double &gt;</td>
-<td style="text-align: left;"><a href="#typedef-dbsfieldx"><strong>DBSFieldX</strong></a>  <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef ConstFieldSpMom&lt; double &gt;</td>
@@ -822,14 +789,6 @@
 <td style="text-align: left;"><a href="#typedef-idxmom"><strong>IdxMom</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangebsvx"><strong>IdxRangeBSVx</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="structBSplinesX.html"><strong>BSplinesX</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-idxrangebsx"><strong>IdxRangeBSX</strong></a>  <br></td>
-</tr>
-<tr>
 <td style="text-align: right;">typedef IdxRange&lt; <a href="structGridMom.html"><strong>GridMom</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-idxrangemom"><strong>IdxRangeMom</strong></a>  <br></td>
 </tr>
@@ -933,30 +892,6 @@
 <td style="text-align: right;">typedef Idx&lt; <a href="structGridX.html"><strong>GridX</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-idxxvx"><strong>IdxXVx</strong></a>  <br></td>
 </tr>
-<tr>
-<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a>, SplineVxBoundary, SplineVxBoundary &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splineinterppointsvx"><strong>SplineInterpPointsVx</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesX.html"><strong>BSplinesX</strong></a>, SplineXBoundary, SplineXBoundary &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splineinterppointsx"><strong>SplineInterpPointsX</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a>, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinevxbuilder"><strong>SplineVxBuilder</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesVx.html"><strong>BSplinesVx</strong></a>, <a href="structGridVx.html"><strong>GridVx</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structVx.html"><strong>Vx</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structVx.html"><strong>Vx</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinevxevaluator"><strong>SplineVxEvaluator</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesX.html"><strong>BSplinesX</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinexbuilder"><strong>SplineXBuilder</strong></a>  <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesX.html"><strong>BSplinesX</strong></a>, <a href="structGridX.html"><strong>GridX</strong></a>, ddc::ConstantExtrapolationRule&lt; <a href="structX.html"><strong>X</strong></a> &gt;, ddc::ConstantExtrapolationRule&lt; <a href="structX.html"><strong>X</strong></a> &gt; &gt;</td>
-<td style="text-align: left;"><a href="#typedef-splinexevaluator"><strong>SplineXEvaluator</strong></a>  <br></td>
-</tr>
 </tbody>
 </table>
 <h2 id="public-attributes">Public Attributes</h2>
@@ -969,47 +904,16 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">int constexpr</td>
-<td style="text-align: left;"><a href="#variable-bsdegreevx"><strong>BSDegreeVx</strong></a>   = <code>3</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">int constexpr</td>
-<td style="text-align: left;"><a href="#variable-bsdegreex"><strong>BSDegreeX</strong></a>   = <code>3</code><br></td>
+<td style="text-align: right;">bool constexpr</td>
+<td style="text-align: left;"><a href="#variable-grid_vx_uniform"><strong>GRID_VX_UNIFORM</strong></a>   = <code>true</code><br></td>
 </tr>
 <tr>
 <td style="text-align: right;">bool constexpr</td>
-<td style="text-align: left;"><a href="#variable-bsplineonuniformcellsvx"><strong>BsplineOnUniformCellsVx</strong></a>   = <code>true</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">bool constexpr</td>
-<td style="text-align: left;"><a href="#variable-bsplineonuniformcellsx"><strong>BsplineOnUniformCellsX</strong></a>   = <code>true</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">auto constexpr</td>
-<td style="text-align: left;"><a href="#variable-splinevxboundary"><strong>SplineVxBoundary</strong></a>   = <code>ddc::BoundCond::HERMITE</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">auto constexpr</td>
-<td style="text-align: left;"><a href="#variable-splinexboundary"><strong>SplineXBoundary</strong></a>   = <code>[**X::PERIODIC**](structX.md#variable-periodic) ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE</code><br></td>
+<td style="text-align: left;"><a href="#variable-grid_x_uniform"><strong>GRID_X_UNIFORM</strong></a>   = <code>[**X::PERIODIC**](structX.md#variable-periodic)</code><br></td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-bsconstfieldx">typedef BSConstFieldX</h3>
-<pre><code class="language-C++">using BSConstFieldX =  ConstField&lt;ElementType, IdxRangeBSX&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-bsfieldmemx">typedef BSFieldMemX</h3>
-<pre><code class="language-C++">using BSFieldMemX =  FieldMem&lt;ElementType, IdxRangeBSX&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-bsfieldx">typedef BSFieldX</h3>
-<pre><code class="language-C++">using BSFieldX =  Field&lt;ElementType, IdxRangeBSX&gt;;
-</code></pre>
-<hr>
-
 <h3 id="typedef-constfieldspmom">typedef ConstFieldSpMom</h3>
 <pre><code class="language-C++">using ConstFieldSpMom =  ConstField&lt;ElementType, IdxRangeSpMom&gt;;
 </code></pre>
@@ -1057,21 +961,6 @@
 
 <h3 id="typedef-coordxvx">typedef CoordXVx</h3>
 <pre><code class="language-C++">using CoordXVx =  Coord&lt;X, Vx&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-dbsconstfieldx">typedef DBSConstFieldX</h3>
-<pre><code class="language-C++">using DBSConstFieldX =  BSConstFieldX&lt;double&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-dbsfieldmemx">typedef DBSFieldMemX</h3>
-<pre><code class="language-C++">using DBSFieldMemX =  BSFieldMemX&lt;double&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-dbsfieldx">typedef DBSFieldX</h3>
-<pre><code class="language-C++">using DBSFieldX =  BSFieldX&lt;double&gt;;
 </code></pre>
 <hr>
 
@@ -1255,16 +1144,6 @@
 </code></pre>
 <hr>
 
-<h3 id="typedef-idxrangebsvx">typedef IdxRangeBSVx</h3>
-<pre><code class="language-C++">using IdxRangeBSVx =  IdxRange&lt;BSplinesVx&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-idxrangebsx">typedef IdxRangeBSX</h3>
-<pre><code class="language-C++">using IdxRangeBSX =  IdxRange&lt;BSplinesX&gt;;
-</code></pre>
-<hr>
-
 <h3 id="typedef-idxrangemom">typedef IdxRangeMom</h3>
 <pre><code class="language-C++">using IdxRangeMom =  IdxRange&lt;GridMom&gt;;
 </code></pre>
@@ -1394,64 +1273,14 @@
 <pre><code class="language-C++">using IdxXVx =  Idx&lt;GridX, GridVx&gt;;
 </code></pre>
 <hr>
-
-<h3 id="typedef-splineinterppointsvx">typedef SplineInterpPointsVx</h3>
-<pre><code class="language-C++">using SplineInterpPointsVx =  ddc::GrevilleInterpolationPoints&lt;BSplinesVx, SplineVxBoundary, SplineVxBoundary&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splineinterppointsx">typedef SplineInterpPointsX</h3>
-<pre><code class="language-C++">using SplineInterpPointsX =  ddc::GrevilleInterpolationPoints&lt;BSplinesX, SplineXBoundary, SplineXBoundary&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinevxbuilder">typedef SplineVxBuilder</h3>
-<pre><code class="language-C++">using SplineVxBuilder =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, SplineVxBoundary, SplineVxBoundary, ddc::SplineSolver::LAPACK&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinevxevaluator">typedef SplineVxEvaluator</h3>
-<pre><code class="language-C++">using SplineVxEvaluator =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesVx, GridVx, ddc::ConstantExtrapolationRule&lt;Vx&gt;, ddc::ConstantExtrapolationRule&lt;Vx&gt; &gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinexbuilder">typedef SplineXBuilder</h3>
-<pre><code class="language-C++">using SplineXBuilder =  ddc::SplineBuilder&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, SplineXBoundary, SplineXBoundary, ddc::SplineSolver::LAPACK&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-splinexevaluator">typedef SplineXEvaluator</h3>
-<pre><code class="language-C++">using SplineXEvaluator =  ddc::SplineEvaluator&lt; Kokkos::DefaultExecutionSpace, Kokkos::DefaultExecutionSpace::memory_space, BSplinesX, GridX, ddc::ConstantExtrapolationRule&lt;X&gt;, ddc::ConstantExtrapolationRule&lt;X&gt; &gt;;
-</code></pre>
-<hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
-<h3 id="variable-bsdegreevx">variable BSDegreeVx</h3>
-<pre><code class="language-C++">int constexpr BSDegreeVx;
+<h3 id="variable-grid_vx_uniform">variable GRID_VX_UNIFORM</h3>
+<pre><code class="language-C++">bool constexpr GRID_VX_UNIFORM;
 </code></pre>
 <hr>
 
-<h3 id="variable-bsdegreex">variable BSDegreeX</h3>
-<pre><code class="language-C++">int constexpr BSDegreeX;
-</code></pre>
-<hr>
-
-<h3 id="variable-bsplineonuniformcellsvx">variable BsplineOnUniformCellsVx</h3>
-<pre><code class="language-C++">bool constexpr BsplineOnUniformCellsVx;
-</code></pre>
-<hr>
-
-<h3 id="variable-bsplineonuniformcellsx">variable BsplineOnUniformCellsX</h3>
-<pre><code class="language-C++">bool constexpr BsplineOnUniformCellsX;
-</code></pre>
-<hr>
-
-<h3 id="variable-splinevxboundary">variable SplineVxBoundary</h3>
-<pre><code class="language-C++">auto constexpr SplineVxBoundary;
-</code></pre>
-<hr>
-
-<h3 id="variable-splinexboundary">variable SplineXBoundary</h3>
-<pre><code class="language-C++">auto constexpr SplineXBoundary;
+<h3 id="variable-grid_x_uniform">variable GRID_X_UNIFORM</h3>
+<pre><code class="language-C++">bool constexpr GRID_X_UNIFORM;
 </code></pre>
 <hr>
 

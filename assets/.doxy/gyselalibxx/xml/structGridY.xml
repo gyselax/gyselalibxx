@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structGridY" kind="struct" language="C++" prot="public">
     <compoundname>GridY</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsY::interpolation_discrete_dimension_type</basecompoundref>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsY::interpolation_discrete_dimension_type</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; Y &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; Y &gt;</basecompoundref>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -18,7 +18,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SplineInterpPointsY::interpolation_discrete_dimension_type</label>
+        <label>UniformGridBase&lt; Y &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -31,10 +31,10 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SplineInterpPointsY::interpolation_discrete_dimension_type</label>
+        <label>UniformGridBase&lt; Y &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="95" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="96" bodyend="97"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" line="63" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp" bodystart="64" bodyend="65"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

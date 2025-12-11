@@ -2,8 +2,8 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structGridVx" kind="struct" language="C++" prot="public">
     <compoundname>GridVx</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsVx::interpolation_discrete_dimension_type</basecompoundref>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsVx::interpolation_discrete_dimension_type</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; GRID_VX_UNIFORM, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; Vx &gt;</basecompoundref>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -14,11 +14,14 @@
         <link refid="structGridVx"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="2" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="3">
+        <label>UniformGridBase&lt; Vx &gt;</label>
+      </node>
       <node id="2">
-        <label>SplineInterpPointsVx::interpolation_discrete_dimension_type</label>
+        <label>std::conditional_t&lt; GRID_VX_UNIFORM, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -27,14 +30,17 @@
         <link refid="structGridVx"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="2" relation="public-inheritance">
+        <childnode refid="3" relation="public-inheritance">
         </childnode>
       </node>
+      <node id="3">
+        <label>UniformGridBase&lt; Vx &gt;</label>
+      </node>
       <node id="2">
-        <label>SplineInterpPointsVx::interpolation_discrete_dimension_type</label>
+        <label>std::conditional_t&lt; GRID_VX_UNIFORM, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="92" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="93" bodyend="94"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="65" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="66" bodyend="67"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

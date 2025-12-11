@@ -273,26 +273,10 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**tensor\_tools::vector\_index\_set\_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _The implementation of_ [_**vector\_index\_set\_dual**_](structtensor__tools_1_1vector__index__set__dual.md) _for a VectorIndexSet._
 * **class** **IAdvectionV< IdxRangeFdistribu, IdxRangeSpatial >**    
     * **class** [**NullAdvectionVelocity**](classNullAdvectionVelocity.md) _This is a class which imitates a velocity advection. It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes._ 
-* **class** **std::conditional_t< BsplineOnUniformCellsMu, ddc::UniformBSplines< Mu, BSDegreeMu >, ddc::NonUniformBSplines< Mu, BSDegreeMu > >**    
-    * **struct** [**BSplinesMu**](structBSplinesMu.md) 
 * **class** **std::conditional_t< BsplineOnUniformCellsR, ddc::UniformBSplines< R, BSDegreeR >, ddc::NonUniformBSplines< R, BSDegreeR > >**    
     * **struct** [**BSplinesR**](structBSplinesR.md) 
 * **class** **std::conditional_t< BsplineOnUniformCellsTheta, ddc::UniformBSplines< Theta, BSDegreeTheta >, ddc::NonUniformBSplines< Theta, BSDegreeTheta > >**    
     * **struct** [**BSplinesTheta**](structBSplinesTheta.md) 
-* **class** **std::conditional_t< BsplineOnUniformCellsVpar, ddc::UniformBSplines< Vpar, BSDegreeVpar >, ddc::NonUniformBSplines< Vpar, BSDegreeVpar > >**    
-    * **struct** [**BSplinesVpar**](structBSplinesVpar.md) 
-* **class** **std::conditional_t< BsplineOnUniformCellsVx, ddc::UniformBSplines< Vx, BSDegreeVx >, ddc::NonUniformBSplines< Vx, BSDegreeVx > >**    
-    * **struct** [**BSplinesVx**](structBSplinesVx.md) 
-    * **struct** [**BSplinesVx**](structBSplinesVx.md) 
-* **class** **std::conditional_t< BsplineOnUniformCellsVy, ddc::UniformBSplines< Vy, BSDegreeVy >, ddc::NonUniformBSplines< Vy, BSDegreeVy > >**    
-    * **struct** [**BSplinesVy**](structBSplinesVy.md) 
-* **class** **std::conditional_t< BsplineOnUniformCellsX, ddc::UniformBSplines< X, BSDegreeX >, ddc::NonUniformBSplines< X, BSDegreeX > >**    
-    * **struct** [**BSplinesX**](structBSplinesX.md) 
-    * **struct** [**BSplinesX**](structBSplinesX.md) 
-    * **struct** [**BSplinesX**](structBSplinesX.md) 
-* **class** **std::conditional_t< BsplineOnUniformCellsY, ddc::UniformBSplines< Y, BSDegreeY >, ddc::NonUniformBSplines< Y, BSDegreeY > >**    
-    * **struct** [**BSplinesY**](structBSplinesY.md) 
-    * **struct** [**BSplinesY**](structBSplinesY.md) 
 * **class** **std::conditional_t< uniform_edge_v, UniformGridBase< Vx >, NonUniformGridBase< Vx > >**    
     * **struct** [**CollisionsIntra::GhostedVx**](structCollisionsIntra_1_1GhostedVx.md) 
     * **struct** [**CollisionsIntra::GhostedVxStaggered**](structCollisionsIntra_1_1GhostedVxStaggered.md) 
@@ -302,30 +286,30 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **struct** [**FEM1DPoissonSolver::HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) 
 * **class** **ddc::PeriodicSampling< ddc::Fourier< Dim > >**    
     * **struct** [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087.md) 
-* **class** **SplineInterpPointsMu::interpolation_discrete_dimension_type**    
+* **class** **UniformGridBase< Mu >**    
     * **struct** [**GridMu**](structGridMu.md) 
-* **class** **SplineInterpPointsR::interpolation_discrete_dimension_type**    
-    * **struct** [**GridR**](structGridR.md) 
-* **class** **SplineInterpPointsTheta::interpolation_discrete_dimension_type**    
-    * **struct** [**GridTheta**](structGridTheta.md) 
-* **class** **SplineInterpPointsVpar::interpolation_discrete_dimension_type**    
-    * **struct** [**GridVpar**](structGridVpar.md) 
-* **class** **SplineInterpPointsVx::interpolation_discrete_dimension_type**    
-    * **struct** [**GridVx**](structGridVx.md) 
-    * **struct** [**GridVx**](structGridVx.md) 
-* **class** **SplineInterpPointsVy::interpolation_discrete_dimension_type**    
-    * **struct** [**GridVy**](structGridVy.md) 
-* **class** **SplineInterpPointsX::interpolation_discrete_dimension_type**    
-    * **struct** [**GridX**](structGridX.md) 
-    * **struct** [**GridX**](structGridX.md) 
-    * **struct** [**GridX**](structGridX.md) 
-* **class** **SplineInterpPointsY::interpolation_discrete_dimension_type**    
-    * **struct** [**GridY**](structGridY.md) 
-    * **struct** [**GridY**](structGridY.md) 
 * **class** **NonUniformGridBase< R >**    
+    * **struct** [**GridR**](structGridR.md) 
     * **struct** [**PolarSplineFEMPoissonLikeSolver::QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) _Tag the first dimension for the quadrature mesh._ 
 * **class** **NonUniformGridBase< Theta >**    
+    * **struct** [**GridTheta**](structGridTheta.md) 
     * **struct** [**PolarSplineFEMPoissonLikeSolver::QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) _Tag the second dimension for the quadrature mesh._ 
+* **class** **UniformGridBase< Vpar >**    
+    * **struct** [**GridVpar**](structGridVpar.md) 
+* **class** **std::conditional_t< GRID_VX_UNIFORM, UniformGridBase< Vx >, NonUniformGridBase< Vx > >**    
+    * **struct** [**GridVx**](structGridVx.md) 
+* **class** **UniformGridBase< Vx >**    
+    * **struct** [**GridVx**](structGridVx.md) 
+* **class** **UniformGridBase< Vy >**    
+    * **struct** [**GridVy**](structGridVy.md) 
+* **class** **std::conditional_t< GRID_X_UNIFORM, UniformGridBase< X >, NonUniformGridBase< X > >**    
+    * **struct** [**GridX**](structGridX.md) 
+* **class** **UniformGridBase< X >**    
+    * **struct** [**GridX**](structGridX.md) 
+    * **struct** [**GridX**](structGridX.md) 
+* **class** **UniformGridBase< Y >**    
+    * **struct** [**GridY**](structGridY.md) 
+    * **struct** [**GridY**](structGridY.md) 
 * **class** **std::conditional_t< BSplinesROriginal::is_uniform(), ddc::UniformBSplines< R, BSplinesROriginal::degree()>, ddc::NonUniformBSplines< R, BSplinesROriginal::degree()> >**    
     * **struct** [**RefinedDiscreteToCartesianBuilder::BSplinesRRefined**](structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.md) _The type of the radial B-splines on which the new mapping will be defined._ 
 * **class** **std::conditional_t< BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines< Theta, BSplinesThetaOriginal::degree()>, ddc::NonUniformBSplines< Theta, BSplinesThetaOriginal::degree()> >**    

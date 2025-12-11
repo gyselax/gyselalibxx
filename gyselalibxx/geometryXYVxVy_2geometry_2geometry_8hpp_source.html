@@ -555,7 +555,6 @@
 
 #pragma once
 #include &lt;ddc/ddc.hpp&gt;
-#include &lt;ddc/kernels/splines.hpp&gt;
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -606,149 +605,19 @@ using CoordXY = Coord&lt;X, Y&gt;;
 using CoordVx = Coord&lt;Vx&gt;;
 using CoordVy = Coord&lt;Vy&gt;;
 
-int constexpr BSDegreeX = 3;
-int constexpr BSDegreeY = 3;
-
-int constexpr BSDegreeVx = 3;
-int constexpr BSDegreeVy = 3;
-
-bool constexpr BsplineOnUniformCellsX = true;
-bool constexpr BsplineOnUniformCellsY = true;
-
-bool constexpr BsplineOnUniformCellsVx = true;
-bool constexpr BsplineOnUniformCellsVy = true;
-
-struct BSplinesX
-    : std::conditional_t&lt;
-              BsplineOnUniformCellsX,
-              ddc::UniformBSplines&lt;X, BSDegreeX&gt;,
-              ddc::NonUniformBSplines&lt;X, BSDegreeX&gt;&gt;
-{
-};
-struct BSplinesY
-    : std::conditional_t&lt;
-              BsplineOnUniformCellsY,
-              ddc::UniformBSplines&lt;Y, BSDegreeY&gt;,
-              ddc::NonUniformBSplines&lt;Y, BSDegreeY&gt;&gt;
-{
-};
-
-struct BSplinesVx
-    : std::conditional_t&lt;
-              BsplineOnUniformCellsVx,
-              ddc::UniformBSplines&lt;Vx, BSDegreeVx&gt;,
-              ddc::NonUniformBSplines&lt;Vx, BSDegreeVx&gt;&gt;
-{
-};
-struct BSplinesVy
-    : std::conditional_t&lt;
-              BsplineOnUniformCellsVy,
-              ddc::UniformBSplines&lt;Vy, BSDegreeVy&gt;,
-              ddc::NonUniformBSplines&lt;Vy, BSDegreeVy&gt;&gt;
-{
-};
-
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::HERMITE;
-
-// IDim initialisers
-using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints&lt;BSplinesX, SplineXBoundary, SplineXBoundary&gt;;
-using SplineInterpPointsY
-        = ddc::GrevilleInterpolationPoints&lt;BSplinesY, SplineYBoundary, SplineYBoundary&gt;;
-using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints&lt;BSplinesVx, SplineVxBoundary, SplineVxBoundary&gt;;
-using SplineInterpPointsVy
-        = ddc::GrevilleInterpolationPoints&lt;BSplinesVy, SplineVyBoundary, SplineVyBoundary&gt;;
-
 // IDim definition
-struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
+struct GridX : UniformGridBase&lt;X&gt;
 {
 };
-struct GridY : SplineInterpPointsY::interpolation_discrete_dimension_type
+struct GridY : UniformGridBase&lt;Y&gt;
 {
 };
-struct GridVx : SplineInterpPointsVx::interpolation_discrete_dimension_type
+struct GridVx : UniformGridBase&lt;Vx&gt;
 {
 };
-struct GridVy : SplineInterpPointsVy::interpolation_discrete_dimension_type
+struct GridVy : UniformGridBase&lt;Vy&gt;
 {
 };
-
-// SplineBuilder and SplineEvaluator definition
-using SplineXBuilder = ddc::SplineBuilder&lt;
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK&gt;;
-using SplineXEvaluator = ddc::SplineEvaluator&lt;
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule&lt;X&gt;,
-        ddc::PeriodicExtrapolationRule&lt;X&gt;&gt;;
-using SplineYBuilder = ddc::SplineBuilder&lt;
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        SplineYBoundary,
-        SplineYBoundary,
-        ddc::SplineSolver::LAPACK&gt;;
-using SplineYEvaluator = ddc::SplineEvaluator&lt;
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        ddc::PeriodicExtrapolationRule&lt;Y&gt;,
-        ddc::PeriodicExtrapolationRule&lt;Y&gt;&gt;;
-using SplineVxBuilder = ddc::SplineBuilder&lt;
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVx,
-        GridVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
-        ddc::SplineSolver::LAPACK&gt;;
-using SplineVxEvaluator = ddc::SplineEvaluator&lt;
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVx,
-        GridVx,
-        ddc::ConstantExtrapolationRule&lt;Vx&gt;,
-        ddc::ConstantExtrapolationRule&lt;Vx&gt;&gt;;
-using SplineVyBuilder = ddc::SplineBuilder&lt;
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVy,
-        GridVy,
-        SplineVyBoundary,
-        SplineVyBoundary,
-        ddc::SplineSolver::LAPACK&gt;;
-using SplineVyEvaluator = ddc::SplineEvaluator&lt;
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVy,
-        GridVy,
-        ddc::ConstantExtrapolationRule&lt;Vy&gt;,
-        ddc::ConstantExtrapolationRule&lt;Vy&gt;&gt;;
-
-using IdxRangeBSX = IdxRange&lt;BSplinesX&gt;;
-using IdxRangeBSY = IdxRange&lt;BSplinesY&gt;;
-using IdxRangeBSXY = IdxRange&lt;BSplinesX, BSplinesY&gt;;
-using IdxRangeBSVx = IdxRange&lt;BSplinesVx&gt;;
-using IdxRangeBSVy = IdxRange&lt;BSplinesVy&gt;;
-using IdxRangeBSVxVy = IdxRange&lt;BSplinesVx, BSplinesVy&gt;;
-
-template &lt;class ElementType&gt;
-using BSConstFieldXY = Field&lt;ElementType const, IdxRangeBSXY&gt;;
-using DBSConstFieldXY = BSConstFieldXY&lt;double&gt;;
 
 // Index
 using IdxX = Idx&lt;GridX&gt;;

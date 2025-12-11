@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: SplineInterpPointsVx::interpolation_discrete_dimension_type,  SplineInterpPointsVx::interpolation_discrete_dimension_type
+Inherits the following classes: std::conditional_t< GRID_VX_UNIFORM, UniformGridBase< Vx >, NonUniformGridBase< Vx > >,  UniformGridBase< Vx >
 
 
 

@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: SplineInterpPointsMu::interpolation_discrete_dimension_type
+Inherits the following classes: UniformGridBase< Mu >
 
 
 

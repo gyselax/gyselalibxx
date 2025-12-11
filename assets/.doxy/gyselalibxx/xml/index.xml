@@ -182,8 +182,6 @@
     <member refid="classBslPredCorrRTheta_1a17c01bf58cd5cc1e8190f7ea62c3aa9f" kind="function"><name>BslPredCorrRTheta</name></member>
     <member refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="structBSplinesMu" kind="struct"><name>BSplinesMu</name>
-  </compound>
   <compound refid="structBSplinesR" kind="struct"><name>BSplinesR</name>
   </compound>
   <compound refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined" kind="struct"><name>RefinedDiscreteToCartesianBuilder::BSplinesRRefined</name>
@@ -191,16 +189,6 @@
   <compound refid="structBSplinesTheta" kind="struct"><name>BSplinesTheta</name>
   </compound>
   <compound refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined" kind="struct"><name>RefinedDiscreteToCartesianBuilder::BSplinesThetaRefined</name>
-  </compound>
-  <compound refid="structBSplinesVpar" kind="struct"><name>BSplinesVpar</name>
-  </compound>
-  <compound refid="structBSplinesVx" kind="struct"><name>BSplinesVx</name>
-  </compound>
-  <compound refid="structBSplinesVy" kind="struct"><name>BSplinesVy</name>
-  </compound>
-  <compound refid="structBSplinesX" kind="struct"><name>BSplinesX</name>
-  </compound>
-  <compound refid="structBSplinesY" kind="struct"><name>BSplinesY</name>
   </compound>
   <compound refid="structMultipatchSplineBuilder2D_1_1Build__BuilderType" kind="struct"><name>MultipatchSplineBuilder2D::Build_BuilderType</name>
   </compound>
@@ -2943,15 +2931,15 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
-  <compound refid="namespace_0d212" kind="namespace"><name>@212</name>
+  <compound refid="namespace_0d213" kind="namespace"><name>@213</name>
   </compound>
-  <compound refid="namespace_0d214" kind="namespace"><name>@214</name>
+  <compound refid="namespace_0d215" kind="namespace"><name>@215</name>
   </compound>
-  <compound refid="namespace_0d216" kind="namespace"><name>@216</name>
+  <compound refid="namespace_0d217" kind="namespace"><name>@217</name>
   </compound>
-  <compound refid="namespace_0d218" kind="namespace"><name>@218</name>
+  <compound refid="namespace_0d219" kind="namespace"><name>@219</name>
   </compound>
-  <compound refid="namespace_0d94" kind="namespace"><name>@94</name>
+  <compound refid="namespace_0d95" kind="namespace"><name>@95</name>
   </compound>
   <compound refid="namespacebumpontail__equilibrium" kind="namespace"><name>bumpontail_equilibrium</name>
     <member refid="bumpontailequilibrium_8hpp_1a904011943d45927909831ec61a31a6da" kind="function"><name>init_from_input</name></member>
@@ -3011,22 +2999,6 @@
   </compound>
   <compound refid="namespacePolarSplines" kind="namespace"><name>PolarSplines</name>
     <member refid="polar__bsplines_8hpp_1a3ba12098f03119f39af5886324f72c94" kind="function"><name>integrals</name></member>
-  </compound>
-  <compound refid="namespaceSplineInterpPointsMu" kind="namespace"><name>SplineInterpPointsMu</name>
-  </compound>
-  <compound refid="namespaceSplineInterpPointsR" kind="namespace"><name>SplineInterpPointsR</name>
-  </compound>
-  <compound refid="namespaceSplineInterpPointsTheta" kind="namespace"><name>SplineInterpPointsTheta</name>
-  </compound>
-  <compound refid="namespaceSplineInterpPointsVpar" kind="namespace"><name>SplineInterpPointsVpar</name>
-  </compound>
-  <compound refid="namespaceSplineInterpPointsVx" kind="namespace"><name>SplineInterpPointsVx</name>
-  </compound>
-  <compound refid="namespaceSplineInterpPointsVy" kind="namespace"><name>SplineInterpPointsVy</name>
-  </compound>
-  <compound refid="namespaceSplineInterpPointsX" kind="namespace"><name>SplineInterpPointsX</name>
-  </compound>
-  <compound refid="namespaceSplineInterpPointsY" kind="namespace"><name>SplineInterpPointsY</name>
   </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
   </compound>
@@ -3207,6 +3179,35 @@
     <member refid="vector__index__tools_8hpp_1af5756e47debeaa77e5e9d4349c128cf5" kind="variable"><name>has_same_variance_v</name></member>
   </compound>
   <compound refid="advection__field__rtheta_8hpp" kind="file"><name>advection_field_rtheta.hpp</name>
+  </compound>
+  <compound refid="spline__definitions_8hpp" kind="file"><name>spline_definitions.hpp</name>
+    <member refid="spline__definitions_8hpp_1a3def126ea3853600ce5a4bde418bf608" kind="typedef"><name>SplineInterpPointsR</name></member>
+    <member refid="spline__definitions_8hpp_1a0fa215d27f778b2d4eb6133aa6dac155" kind="typedef"><name>SplineInterpPointsTheta</name></member>
+    <member refid="spline__definitions_8hpp_1a98f89063acd9fb54bf652088ebf52209" kind="typedef"><name>SplineRThetaBuilder_host</name></member>
+    <member refid="spline__definitions_8hpp_1a3d657cf6ade5586976ef51aa80e1cf2d" kind="typedef"><name>SplineRThetaEvaluatorConstBound_host</name></member>
+    <member refid="spline__definitions_8hpp_1a2f1ccbeb48ba80d9ab2ca6b70c9c9e68" kind="typedef"><name>SplineRThetaEvaluatorNullBound_host</name></member>
+    <member refid="spline__definitions_8hpp_1a7cb83bfd842496e6c38e47bbc661aa5c" kind="typedef"><name>SplineRThetaBuilder</name></member>
+    <member refid="spline__definitions_8hpp_1afaeb80865af49470b4dc426d5a6b7ae8" kind="typedef"><name>SplineRThetaEvaluatorConstBound</name></member>
+    <member refid="spline__definitions_8hpp_1a0595dd743628583f52a3bb9ec76f0e11" kind="typedef"><name>SplineRThetaEvaluatorNullBound</name></member>
+    <member refid="spline__definitions_8hpp_1a6d14a50e6b51eb6ceaf1fa1cdc91301f" kind="typedef"><name>IdxRangeBSR</name></member>
+    <member refid="spline__definitions_8hpp_1a3d636abaff92c56d7328309bb2522bff" kind="typedef"><name>IdxRangeBSTheta</name></member>
+    <member refid="spline__definitions_8hpp_1a4d9f715c3682f75c075ee4b422c3d8fa" kind="typedef"><name>IdxRangeBSRTheta</name></member>
+    <member refid="spline__definitions_8hpp_1af6bad0458920283d5bdd3a5bd67b169c" kind="typedef"><name>IdxRangeBSPolar</name></member>
+    <member refid="spline__definitions_8hpp_1a3669c696ab20b39e7b12c815b2f4fa03" kind="typedef"><name>Spline2DMem</name></member>
+    <member refid="spline__definitions_8hpp_1a92ec60a73f6ad7a6e592db99349f9a39" kind="typedef"><name>Spline2D</name></member>
+    <member refid="spline__definitions_8hpp_1a5bb05d563f5cef181a809dc8b32fb42e" kind="typedef"><name>ConstSpline2D</name></member>
+    <member refid="spline__definitions_8hpp_1ac96999697e65a1ac7c9ef8447ca8e8fa" kind="typedef"><name>PolarSplineMemRTheta</name></member>
+    <member refid="spline__definitions_8hpp_1aef71091f06e8e53c6435c84f000cf71c" kind="typedef"><name>PolarSplineRTheta</name></member>
+    <member refid="spline__definitions_8hpp_1a1815b341dd7a60a3902c2efd150af5af" kind="typedef"><name>IdxPolarBspl</name></member>
+    <member refid="spline__definitions_8hpp_1a2130c4bf1c2712d6fb3757e8d1e761f5" kind="typedef"><name>VectorSplineCoeffsMem2D</name></member>
+    <member refid="spline__definitions_8hpp_1a0a07449f26c8206a10f7ef29414c0dda" kind="typedef"><name>VectorSplineCoeffs2D</name></member>
+    <member refid="spline__definitions_8hpp_1ade9f4b5efbf068a8978a4a86f0bac944" kind="typedef"><name>ConstVectorSplineCoeffs2D</name></member>
+    <member refid="spline__definitions_8hpp_1ad414f99b69c724e382d42d39f28f7bcd" kind="variable"><name>BSDegreeR</name></member>
+    <member refid="spline__definitions_8hpp_1ad40b76fcd2f63f70778b838b6c982c36" kind="variable"><name>BSDegreeTheta</name></member>
+    <member refid="spline__definitions_8hpp_1af0ea53c0d1c2f45376fb232092199ff2" kind="variable"><name>BsplineOnUniformCellsR</name></member>
+    <member refid="spline__definitions_8hpp_1acca1ba33ec93965927407e5f1a106866" kind="variable"><name>BsplineOnUniformCellsTheta</name></member>
+    <member refid="spline__definitions_8hpp_1a5958928bd5659f5be2496f4a97de9a40" kind="variable"><name>SplineRBoundary</name></member>
+    <member refid="spline__definitions_8hpp_1a03b3b44b39cf7bef3ef9b13a66f7ea29" kind="variable"><name>SplineThetaBoundary</name></member>
   </compound>
   <compound refid="diocotron__initialisation__equilibrium_8cpp" kind="file"><name>diocotron_initialisation_equilibrium.cpp</name>
   </compound>
@@ -3394,14 +3395,6 @@
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a9509de021cf3a170ed34a2caff2b99bd" kind="typedef"><name>CoordRTheta</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a8fad0ef53efeed16ba923503afa76f64" kind="typedef"><name>CoordVr</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a18960e6d82cb2d670b58c1b7ff9a4ed4" kind="typedef"><name>CoordVtheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a3def126ea3853600ce5a4bde418bf608" kind="typedef"><name>SplineInterpPointsR</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a0fa215d27f778b2d4eb6133aa6dac155" kind="typedef"><name>SplineInterpPointsTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a98f89063acd9fb54bf652088ebf52209" kind="typedef"><name>SplineRThetaBuilder_host</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a3d657cf6ade5586976ef51aa80e1cf2d" kind="typedef"><name>SplineRThetaEvaluatorConstBound_host</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a2f1ccbeb48ba80d9ab2ca6b70c9c9e68" kind="typedef"><name>SplineRThetaEvaluatorNullBound_host</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a7cb83bfd842496e6c38e47bbc661aa5c" kind="typedef"><name>SplineRThetaBuilder</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1afaeb80865af49470b4dc426d5a6b7ae8" kind="typedef"><name>SplineRThetaEvaluatorConstBound</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a0595dd743628583f52a3bb9ec76f0e11" kind="typedef"><name>SplineRThetaEvaluatorNullBound</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a0c64cc0f397e5e28f1ba48b8fe199400" kind="typedef"><name>IdxR</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a1b311a798cd3d3291f13dadbc41b8696" kind="typedef"><name>IdxTheta</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a6f1ac12f3520cb369a6e89b8f878c331" kind="typedef"><name>IdxRTheta</name></member>
@@ -3411,10 +3404,6 @@
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a40cfe6feecca5087b44ff26bca1ad2d5" kind="typedef"><name>IdxRangeR</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a88bd26653ed33700d4de92fe6c29655c" kind="typedef"><name>IdxRangeTheta</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a9e379cfabcadb966e1f84b4dd2258972" kind="typedef"><name>IdxRangeRTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a6d14a50e6b51eb6ceaf1fa1cdc91301f" kind="typedef"><name>IdxRangeBSR</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a3d636abaff92c56d7328309bb2522bff" kind="typedef"><name>IdxRangeBSTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a4d9f715c3682f75c075ee4b422c3d8fa" kind="typedef"><name>IdxRangeBSRTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1af6bad0458920283d5bdd3a5bd67b169c" kind="typedef"><name>IdxRangeBSPolar</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1aa0b2af67c34249a521957066972a3b84" kind="typedef"><name>FieldMemR</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1afaae5b8aa1632b8715678f6e5f6d269a" kind="typedef"><name>FieldMemTheta</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a9dea41bc9fcbe018e0db3b22af02e05d" kind="typedef"><name>FieldMemRTheta</name></member>
@@ -3433,39 +3422,18 @@
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a6cf9d9a78eef2b881c951c44c963a36f" kind="typedef"><name>DConstFieldR</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a4aaad4e2f59cf6440cc454a42bccc8d8" kind="typedef"><name>DConstFieldTheta</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a203e8c28347ea6a194b0879d251b8f44" kind="typedef"><name>DConstFieldRTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a3669c696ab20b39e7b12c815b2f4fa03" kind="typedef"><name>Spline2DMem</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a92ec60a73f6ad7a6e592db99349f9a39" kind="typedef"><name>Spline2D</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a5bb05d563f5cef181a809dc8b32fb42e" kind="typedef"><name>ConstSpline2D</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1ac96999697e65a1ac7c9ef8447ca8e8fa" kind="typedef"><name>PolarSplineMemRTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1aef71091f06e8e53c6435c84f000cf71c" kind="typedef"><name>PolarSplineRTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a1815b341dd7a60a3902c2efd150af5af" kind="typedef"><name>IdxPolarBspl</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a550909ae6921c9cf6eb4bb6589311e4c" kind="typedef"><name>DVectorFieldMemRTheta</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a51fa3212cdba1945f4e6ebb81b14b9b6" kind="typedef"><name>DVectorFieldRTheta</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1aff004ace4ef103d1ede2aba5a9fd16da" kind="typedef"><name>DVectorConstFieldRTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a2130c4bf1c2712d6fb3757e8d1e761f5" kind="typedef"><name>VectorSplineCoeffsMem2D</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a0a07449f26c8206a10f7ef29414c0dda" kind="typedef"><name>VectorSplineCoeffs2D</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1ade9f4b5efbf068a8978a4a86f0bac944" kind="typedef"><name>ConstVectorSplineCoeffs2D</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a5e9223a5af2d88988df1dc0873f1f021" kind="typedef"><name>CoordX</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a6efd472443b007215996db4a3525a96c" kind="typedef"><name>CoordY</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a10247c2fe6a1199a77f867e7d345e7ac" kind="typedef"><name>CoordXY</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a7d38310972352694a6247cc9f84304ce" kind="typedef"><name>CoordVx</name></member>
     <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a6bb4c25a20696d975f8bdfe1de4d13df" kind="typedef"><name>CoordVy</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1ad414f99b69c724e382d42d39f28f7bcd" kind="variable"><name>BSDegreeR</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1ad40b76fcd2f63f70778b838b6c982c36" kind="variable"><name>BSDegreeTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1af0ea53c0d1c2f45376fb232092199ff2" kind="variable"><name>BsplineOnUniformCellsR</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1acca1ba33ec93965927407e5f1a106866" kind="variable"><name>BsplineOnUniformCellsTheta</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a5958928bd5659f5be2496f4a97de9a40" kind="variable"><name>SplineRBoundary</name></member>
-    <member refid="geometryRTheta_2geometry_2geometry_8hpp_1a03b3b44b39cf7bef3ef9b13a66f7ea29" kind="variable"><name>SplineThetaBoundary</name></member>
   </compound>
   <compound refid="geometryVparMu_2geometry_2geometry_8hpp" kind="file"><name>geometry.hpp</name>
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1ad0efccc3058de7d4d7625ac3c0757967" kind="typedef"><name>CoordVpar</name></member>
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a84b0bb1b7d91b66540dd8ae0bdd7921a" kind="typedef"><name>CoordMu</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a10d177ea72473bc5582bf6cba5727811" kind="typedef"><name>SplineInterpPointsVpar</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1aed31b5c7d5eea681bad26d213bee3183" kind="typedef"><name>SplineInterpPointsMu</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a4c620ccac899f3af7d9bd9787b165326" kind="typedef"><name>SplineVparBuilder</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a1bfa8c76953bc8ab6cea85e52ecf2d1b" kind="typedef"><name>SplineVparEvaluator</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a8689a0124ed92c6bfe936c0bc104d20c" kind="typedef"><name>SplineMuBuilder</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a98b1c15a80e6d8bd4bea1c15cefbf9d4" kind="typedef"><name>SplineMuEvaluator</name></member>
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a4bda760b5ade00c0425b706ced450e23" kind="typedef"><name>IdxVpar</name></member>
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a4c9fac8affcf0f730f36b26554b3e481" kind="typedef"><name>IdxMu</name></member>
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a9cce8e871d2238c2a0775c0fcd9b4c5f" kind="typedef"><name>IdxVparMu</name></member>
@@ -3510,23 +3478,11 @@
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a667fef0a9b5a6452a48624ae6a8b0e1b" kind="typedef"><name>DConstFieldSpVparMu</name></member>
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1aff964a13fb61d1b733112d19f406a7ff" kind="typedef"><name>ConstFieldSpVpar</name></member>
     <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a6e9da85e3513337856b2f4d91575997f" kind="typedef"><name>DConstFieldSpVpar</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a12907a83ad35ef61c502abf5a9419aab" kind="variable"><name>BSDegreeVpar</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a392ee78b1ede7b0f69315cfb63172b1d" kind="variable"><name>BSDegreeMu</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a6d7ef2557b74294aeff7984354bbc54f" kind="variable"><name>BsplineOnUniformCellsVpar</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1ad2fd3b3276bd3d82827f51872d55d7dd" kind="variable"><name>BsplineOnUniformCellsMu</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a197d5f1b5ea26ee2b197310247556afb" kind="variable"><name>SplineVparBoundary</name></member>
-    <member refid="geometryVparMu_2geometry_2geometry_8hpp_1a7c56867d7bd33a28aaa184453ce48f12" kind="variable"><name>SplineMuBoundary</name></member>
   </compound>
   <compound refid="geometryXVx_2geometry_2geometry_8hpp" kind="file"><name>geometry.hpp</name>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a5e9223a5af2d88988df1dc0873f1f021" kind="typedef"><name>CoordX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a7d38310972352694a6247cc9f84304ce" kind="typedef"><name>CoordVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a656661d1d6e9a359f47ca1d364776d6e" kind="typedef"><name>CoordXVx</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a8c6234c0335a0a200eb3cebbf35cef0a" kind="typedef"><name>SplineInterpPointsX</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1ac899af4cc77784530280da6236503cab" kind="typedef"><name>SplineInterpPointsVx</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a687c74336c85948a11a117db1159a635" kind="typedef"><name>SplineXBuilder</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a7d476543f64e9db0e7d4faadbc9cac36" kind="typedef"><name>SplineXEvaluator</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1aad674e698cbe3d50b2742379910f0465" kind="typedef"><name>SplineVxBuilder</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1aed7a32faa139e7d765a606683067cc91" kind="typedef"><name>SplineVxEvaluator</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a3ca3064095baca9a1ee5f386e2d213f1" kind="typedef"><name>IdxMom</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a55228a6755188ebd7407ea51640a020a" kind="typedef"><name>IdxVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a7420811ad88af9c75a4fdace572b389b" kind="typedef"><name>IdxX</name></member>
@@ -3545,8 +3501,6 @@
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ab06d6b6c1ed9f6b2c09ae8d352ec8fbd" kind="typedef"><name>IdxStepSpX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a60e0457bfde9e216ec12d12e65ad5045" kind="typedef"><name>IdxStepSpXVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a0d47a8e8ce9c676f77c1b1dbbc572d89" kind="typedef"><name>IdxStepXVx</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a41517d293f6a5da56099fd4ca7d8e5df" kind="typedef"><name>IdxRangeBSX</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a33d572b4314bff1cd6fd88fb655fdfdd" kind="typedef"><name>IdxRangeBSVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a2bb4761bc4dd6e192278629cc598099e" kind="typedef"><name>IdxRangeMom</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1aa8ef35a3385d7a524751b109bcf11905" kind="typedef"><name>IdxRangeVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ab227c52dd27cd245ac79771fe8762986" kind="typedef"><name>IdxRangeX</name></member>
@@ -3558,7 +3512,6 @@
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1acc0a9f4e8d526143e2e91dfacefd186b" kind="typedef"><name>IdxRangeXVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a1ff5b78ce0200235476285383dcd2058" kind="typedef"><name>FieldMemVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1adebfe0c97a67d44c718c3e5097b40866" kind="typedef"><name>FieldMemX</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a44e6b29b9ab626c50ab1dbe410ce189e" kind="typedef"><name>BSFieldMemX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ae0a4c488308e7204febbd0c80ea01545" kind="typedef"><name>FieldMemSpMom</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ad4518b2a701e0ae677a080a4869c5f29" kind="typedef"><name>FieldMemSpMomX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ab73c3319dc4cb28c558bdae076ef6a53" kind="typedef"><name>FieldMemSpVx</name></member>
@@ -3566,13 +3519,11 @@
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ab06fef5f55a666e749986c7dcf0a9393" kind="typedef"><name>FieldMemSpXVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a1937294443da8c8328734accd123dd67" kind="typedef"><name>DFieldMemVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a2177a1c0ecc312373af01d96112a9599" kind="typedef"><name>DFieldMemX</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a0e78cc569aadb5f186062cb1c3804ff6" kind="typedef"><name>DBSFieldMemX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a731b93db8da0bba3ef032d17ff1323fe" kind="typedef"><name>DFieldMemSpMom</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ab234fcf7da695cf8d231563a89efb4ad" kind="typedef"><name>DFieldMemSpMomX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a5bee4d7c48765e2df146abf3e428c7de" kind="typedef"><name>DFieldMemSpVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ad9cea5fe2da44a156505251724f9b8e3" kind="typedef"><name>DFieldMemSpX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1aa68209414dc86800d9308b6763f2f47e" kind="typedef"><name>DFieldMemSpXVx</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1ae8f636d8f9aed83e20421a32b4d6c2ae" kind="typedef"><name>BSFieldX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1abbe55574f269c6415a34bca0e6b6eb70" kind="typedef"><name>FieldX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1aea6f7648d7fbb2d38f585f3a1823b504" kind="typedef"><name>FieldVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a132a37955862f1a549114f404f54a0f4" kind="typedef"><name>FieldSpMomX</name></member>
@@ -3580,7 +3531,6 @@
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1ad39c7a98f0126de6b9b8ddf7dc958b0c" kind="typedef"><name>FieldSpVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a38182eca62c3f3145c53ba59338e0c47" kind="typedef"><name>FieldSpX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a3b89ee68d4b0d6b813835bab960713f7" kind="typedef"><name>FieldSpXVx</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a6a2357bb1162e65d9921669d60c08236" kind="typedef"><name>DBSFieldX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a532c7d6d0740c47ff13da899ffe7e02d" kind="typedef"><name>DFieldVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1af55207c5cc28b08499fba035dc636abc" kind="typedef"><name>DFieldX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a8c98e3dfa5e801d4906c9b5173393c02" kind="typedef"><name>DFieldSpMomX</name></member>
@@ -3590,7 +3540,6 @@
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a36ca73b327ba28b15ebe82f684422bef" kind="typedef"><name>DFieldSpXVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1adb839d0310c926528957d0e5c9e7a73b" kind="typedef"><name>ConstFieldVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a8041d3cd2331f1afff7941a7aacebb14" kind="typedef"><name>ConstFieldX</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a348648b32547b4afd2fa2eedfa3ffcff" kind="typedef"><name>BSConstFieldX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a222719f98d5e239802b90c2d396272d4" kind="typedef"><name>ConstFieldSpMom</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a3a9844b1afea4e377ac4c9e9259c7922" kind="typedef"><name>ConstFieldSpMomX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a00f8dbcae727b54afd2e6ccfa7b5f22e" kind="typedef"><name>ConstFieldSpVx</name></member>
@@ -3598,34 +3547,18 @@
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a88958c628c8e750b06427467edb94e3f" kind="typedef"><name>ConstFieldSpXVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a1cd223aa5da7b57d08dc3410245b3685" kind="typedef"><name>DConstFieldVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a68a1f92228e80f82c353af07dea7d04b" kind="typedef"><name>DConstFieldX</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a1fb1d147fe600432d574d981f7e9cf0f" kind="typedef"><name>DBSConstFieldX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1aee2ef06a2fde3eaa8bee7717ddf812c5" kind="typedef"><name>DConstFieldSpMom</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a39a854239672c6d82cdd53e84598607b" kind="typedef"><name>DConstFieldSpMomX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a2ef94ee6fe9e2fe27c9f7de01fd0cfb1" kind="typedef"><name>DConstFieldSpX</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1acd91a158451d064fbcf00b3892cc3e74" kind="typedef"><name>DConstFieldSpVx</name></member>
     <member refid="geometryXVx_2geometry_2geometry_8hpp_1a14be14bb02233013783ebc549f8c42a9" kind="typedef"><name>DConstFieldSpXVx</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a967c45aab0d11dc19d39d7754a1a61a1" kind="variable"><name>BSDegreeX</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1ad4c6d6d4530cc59ee3294edf4ec4010c" kind="variable"><name>BSDegreeVx</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1aa541622b4fa2359113f24df3779d73be" kind="variable"><name>BsplineOnUniformCellsX</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a828a3e45f1c2bccaab3709da03a68d1f" kind="variable"><name>BsplineOnUniformCellsVx</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a6305352a79d850be84fbbcdd4265ee11" kind="variable"><name>SplineXBoundary</name></member>
-    <member refid="geometryXVx_2geometry_2geometry_8hpp_1a66b920ba3eaffaaf47f24f59918b5d00" kind="variable"><name>SplineVxBoundary</name></member>
+    <member refid="geometryXVx_2geometry_2geometry_8hpp_1abc763fbcdc4692d62902882e343d92d0" kind="variable"><name>GRID_X_UNIFORM</name></member>
+    <member refid="geometryXVx_2geometry_2geometry_8hpp_1ae95f7da32d7d41e3c6b0d0152b00716a" kind="variable"><name>GRID_VX_UNIFORM</name></member>
   </compound>
   <compound refid="geometryXY_2geometry_2geometry_8hpp" kind="file"><name>geometry.hpp</name>
     <member refid="geometryXY_2geometry_2geometry_8hpp_1a5e9223a5af2d88988df1dc0873f1f021" kind="typedef"><name>CoordX</name></member>
     <member refid="geometryXY_2geometry_2geometry_8hpp_1a6efd472443b007215996db4a3525a96c" kind="typedef"><name>CoordY</name></member>
     <member refid="geometryXY_2geometry_2geometry_8hpp_1a10247c2fe6a1199a77f867e7d345e7ac" kind="typedef"><name>CoordXY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1a8c6234c0335a0a200eb3cebbf35cef0a" kind="typedef"><name>SplineInterpPointsX</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1a60f928a03e2b343a360adb8cffdeb7a2" kind="typedef"><name>SplineInterpPointsY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1afdfc6bba63e60ac864884be1a4593ba5" kind="typedef"><name>SplineXBuilder_XY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1a3be27201d25e4c617d11e0a71c09ee78" kind="typedef"><name>SplineXEvaluator_XY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1aad35130bd7f326c04a5df5fd6812cfaf" kind="typedef"><name>SplineYBuilder_XY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1adfb307e25d8d8badcf02c28a8d3813c0" kind="typedef"><name>SplineYEvaluator_XY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1a41517d293f6a5da56099fd4ca7d8e5df" kind="typedef"><name>IdxRangeBSX</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1ad1a9546bdc7a7952cf6217f7cbbbbf44" kind="typedef"><name>IdxRangeBSY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1aeae9398ecb26b35dc9842cd8387f9f5c" kind="typedef"><name>IdxRangeBSXY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1ac535f91e8629914762a2c2e17955743a" kind="typedef"><name>BSConstFieldXY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1a645465d7b7dac1f9819d89cc19e63997" kind="typedef"><name>DBSConstFieldXY</name></member>
     <member refid="geometryXY_2geometry_2geometry_8hpp_1a7420811ad88af9c75a4fdace572b389b" kind="typedef"><name>IdxX</name></member>
     <member refid="geometryXY_2geometry_2geometry_8hpp_1a07e2c8345b43b4014b9544e2c0f2b477" kind="typedef"><name>IdxY</name></member>
     <member refid="geometryXY_2geometry_2geometry_8hpp_1a2b93083d44a706c27f7584e8dfde511f" kind="typedef"><name>IdxXY</name></member>
@@ -3653,12 +3586,6 @@
     <member refid="geometryXY_2geometry_2geometry_8hpp_1a4805f6b1b159865cb90983ab389daeb5" kind="typedef"><name>VectorFieldMemXY_XY</name></member>
     <member refid="geometryXY_2geometry_2geometry_8hpp_1af407b77bdcd80902b1b620746b4774e9" kind="typedef"><name>VectorFieldXY_XY</name></member>
     <member refid="geometryXY_2geometry_2geometry_8hpp_1a0f49de3dbee224e5716a389e6f024d2d" kind="typedef"><name>VectorConstFieldXY_XY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1a967c45aab0d11dc19d39d7754a1a61a1" kind="variable"><name>BSDegreeX</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1ad44109eedd846cbb22ce183c4fab65df" kind="variable"><name>BSDegreeY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1aa541622b4fa2359113f24df3779d73be" kind="variable"><name>BsplineOnUniformCellsX</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1a0b358ee98901bfdd3b2bd2f0ee3cdcc8" kind="variable"><name>BsplineOnUniformCellsY</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1af6951c662d6feb638735f92da4f44cd6" kind="variable"><name>SplineXBoundary</name></member>
-    <member refid="geometryXY_2geometry_2geometry_8hpp_1a708bc02c7393e78aec4ac6ba9b1709af" kind="variable"><name>SplineYBoundary</name></member>
   </compound>
   <compound refid="geometryXYVxVy_2geometry_2geometry_8hpp" kind="file"><name>geometry.hpp</name>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a5e9223a5af2d88988df1dc0873f1f021" kind="typedef"><name>CoordX</name></member>
@@ -3666,26 +3593,6 @@
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a10247c2fe6a1199a77f867e7d345e7ac" kind="typedef"><name>CoordXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a7d38310972352694a6247cc9f84304ce" kind="typedef"><name>CoordVx</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a6bb4c25a20696d975f8bdfe1de4d13df" kind="typedef"><name>CoordVy</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a8c6234c0335a0a200eb3cebbf35cef0a" kind="typedef"><name>SplineInterpPointsX</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a60f928a03e2b343a360adb8cffdeb7a2" kind="typedef"><name>SplineInterpPointsY</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1ac899af4cc77784530280da6236503cab" kind="typedef"><name>SplineInterpPointsVx</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1adf49a18141db37f5d40f216ead8716ec" kind="typedef"><name>SplineInterpPointsVy</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a687c74336c85948a11a117db1159a635" kind="typedef"><name>SplineXBuilder</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a7845ff09f496faf8a1c1b3f9fa688390" kind="typedef"><name>SplineXEvaluator</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a76044cc85ab4feb610cd016e87d529b8" kind="typedef"><name>SplineYBuilder</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a36e688ef23b501db273b0c0a48464ef6" kind="typedef"><name>SplineYEvaluator</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1aad674e698cbe3d50b2742379910f0465" kind="typedef"><name>SplineVxBuilder</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1aed7a32faa139e7d765a606683067cc91" kind="typedef"><name>SplineVxEvaluator</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a3cf9abafa4cf135d97d9d76be2a27aa1" kind="typedef"><name>SplineVyBuilder</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1ad7f76d33ae9ec8e73e7726e010595761" kind="typedef"><name>SplineVyEvaluator</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a41517d293f6a5da56099fd4ca7d8e5df" kind="typedef"><name>IdxRangeBSX</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1ad1a9546bdc7a7952cf6217f7cbbbbf44" kind="typedef"><name>IdxRangeBSY</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1aeae9398ecb26b35dc9842cd8387f9f5c" kind="typedef"><name>IdxRangeBSXY</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a33d572b4314bff1cd6fd88fb655fdfdd" kind="typedef"><name>IdxRangeBSVx</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a7f817db068bb2e5792ed593920ee6c7d" kind="typedef"><name>IdxRangeBSVy</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a393bf4372d773fada286bd2e88d0701b" kind="typedef"><name>IdxRangeBSVxVy</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1ac535f91e8629914762a2c2e17955743a" kind="typedef"><name>BSConstFieldXY</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a645465d7b7dac1f9819d89cc19e63997" kind="typedef"><name>DBSConstFieldXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a7420811ad88af9c75a4fdace572b389b" kind="typedef"><name>IdxX</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a07e2c8345b43b4014b9544e2c0f2b477" kind="typedef"><name>IdxY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a2b93083d44a706c27f7584e8dfde511f" kind="typedef"><name>IdxXY</name></member>
@@ -3767,18 +3674,6 @@
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1aea80c462186608683f26df5fe079ada1" kind="typedef"><name>DConstFieldSpVxVyXY</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a60af2dc395fbdc8c8b31d418e14f703a" kind="typedef"><name>X2DSplit</name></member>
     <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a4d93cda361e6a3c4781ac2a28c447476" kind="typedef"><name>V2DSplit</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a967c45aab0d11dc19d39d7754a1a61a1" kind="variable"><name>BSDegreeX</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1ad44109eedd846cbb22ce183c4fab65df" kind="variable"><name>BSDegreeY</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1ad4c6d6d4530cc59ee3294edf4ec4010c" kind="variable"><name>BSDegreeVx</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a0a755e69ac56a17bc24ffaa7180c4ecf" kind="variable"><name>BSDegreeVy</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1aa541622b4fa2359113f24df3779d73be" kind="variable"><name>BsplineOnUniformCellsX</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a0b358ee98901bfdd3b2bd2f0ee3cdcc8" kind="variable"><name>BsplineOnUniformCellsY</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a828a3e45f1c2bccaab3709da03a68d1f" kind="variable"><name>BsplineOnUniformCellsVx</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1ae7b4fe5e9e5154f8747276ce349cdb2b" kind="variable"><name>BsplineOnUniformCellsVy</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1af6951c662d6feb638735f92da4f44cd6" kind="variable"><name>SplineXBoundary</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a708bc02c7393e78aec4ac6ba9b1709af" kind="variable"><name>SplineYBoundary</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a3b0117d0dac4046287f6ca7e9fb498e1" kind="variable"><name>SplineVxBoundary</name></member>
-    <member refid="geometryXYVxVy_2geometry_2geometry_8hpp_1a2fef8aca81ca6554971e30628ddb8be2" kind="variable"><name>SplineVyBoundary</name></member>
   </compound>
   <compound refid="initialisation__Kelvin__Helmholtz_8hpp" kind="file"><name>initialisation_Kelvin_Helmholtz.hpp</name>
   </compound>

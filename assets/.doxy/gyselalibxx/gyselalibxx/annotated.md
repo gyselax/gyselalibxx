@@ -5,14 +5,8 @@
 Here are the classes, structs, unions and interfaces with brief descriptions:
 
 * **class** [**AdvectionFieldFinder**](classAdvectionFieldFinder.md) _Solve the Poisson-like equation and return the electric field for the coupled Vlasov equation._     
-* **struct** [**BSplinesMu**](structBSplinesMu.md) 
 * **struct** [**BSplinesR**](structBSplinesR.md) 
 * **struct** [**BSplinesTheta**](structBSplinesTheta.md) 
-* **struct** [**BSplinesVpar**](structBSplinesVpar.md) 
-* **struct** [**BSplinesVx**](structBSplinesVx.md) 
-* **struct** [**BSplinesVy**](structBSplinesVy.md) 
-* **struct** [**BSplinesX**](structBSplinesX.md) 
-* **struct** [**BSplinesY**](structBSplinesY.md) 
 * **class** [**BarycentricToCartesian**](classBarycentricToCartesian.md) _A class to convert barycentric coordinates to Cartesian coordinates on a triangle._     
 * **class** [**BslAdvection1D**](classBslAdvection1D.md) _A class which computes the advection along the dimension of interest GridInterest._     
 * **class** [**BslAdvectionPolar**](classBslAdvectionPolar.md) _Define an advection operator on 2D_ \((r, \theta)\) _domain._    
@@ -225,14 +219,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md) _A class which implements a partial derivative operator using a 2d spline interpolation._     
 * **class** [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _class._    
 * **class** [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) _A class that stores spline builder coefficients and recomputes them when required._     
-* **namespace** [**SplineInterpPointsMu**](namespaceSplineInterpPointsMu.md) 
-* **namespace** [**SplineInterpPointsR**](namespaceSplineInterpPointsR.md) 
-* **namespace** [**SplineInterpPointsTheta**](namespaceSplineInterpPointsTheta.md) 
-* **namespace** [**SplineInterpPointsVpar**](namespaceSplineInterpPointsVpar.md) 
-* **namespace** [**SplineInterpPointsVx**](namespaceSplineInterpPointsVx.md) 
-* **namespace** [**SplineInterpPointsVy**](namespaceSplineInterpPointsVy.md) 
-* **namespace** [**SplineInterpPointsX**](namespaceSplineInterpPointsX.md) 
-* **namespace** [**SplineInterpPointsY**](namespaceSplineInterpPointsY.md) 
 * **class** [**SplineInterpolator**](classSplineInterpolator.md) _A class for interpolating a function using splines._     
 * **class** [**SplineInterpolator2D**](classSplineInterpolator2D.md) _A class for interpolating a function using a 2D tensor product of splines._     
 * **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._    
@@ -259,11 +245,11 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d94.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d212.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d214.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d216.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d218.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d95.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d213.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d215.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d217.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d219.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
     * **struct** [**AddToTypeSeq**](structconnectivity__details_1_1AddToTypeSeq.md) _A class which helps insert an element into a type sequence._ 

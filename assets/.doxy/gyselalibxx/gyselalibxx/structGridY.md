@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: SplineInterpPointsY::interpolation_discrete_dimension_type,  SplineInterpPointsY::interpolation_discrete_dimension_type
+Inherits the following classes: UniformGridBase< Y >,  UniformGridBase< Y >
 
 
 

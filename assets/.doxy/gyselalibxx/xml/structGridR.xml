@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structGridR" kind="struct" language="C++" prot="public">
     <compoundname>GridR</compoundname>
-    <basecompoundref prot="public" virt="non-virtual">SplineInterpPointsR::interpolation_discrete_dimension_type</basecompoundref>
+    <basecompoundref prot="public" virt="non-virtual">NonUniformGridBase&lt; R &gt;</basecompoundref>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -15,7 +15,7 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SplineInterpPointsR::interpolation_discrete_dimension_type</label>
+        <label>NonUniformGridBase&lt; R &gt;</label>
       </node>
     </inheritancegraph>
     <collaborationgraph>
@@ -26,10 +26,10 @@
         </childnode>
       </node>
       <node id="2">
-        <label>SplineInterpPointsR::interpolation_discrete_dimension_type</label>
+        <label>NonUniformGridBase&lt; R &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="175" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="176" bodyend="177"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="141" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="142" bodyend="143"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -18,49 +18,50 @@
     <includes refid="poisson__like__rhs__function_8hpp" local="yes">poisson_like_rhs_function.hpp</includes>
     <includes refid="polarpoissonlikesolver_8hpp" local="yes">polarpoissonlikesolver.hpp</includes>
     <includes refid="rk2_8hpp" local="yes">rk2.hpp</includes>
+    <includes refid="spline__definitions_8hpp" local="yes">spline_definitions.hpp</includes>
     <incdepgraph>
-      <node id="51">
+      <node id="57">
         <label>bsl_advection_polar.hpp</label>
         <link refid="bsl__advection__polar_8hpp_source"/>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="58" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="55" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
-        <childnode refid="56" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="65">
+      <node id="70">
         <label>ipolar_foot_finder.hpp</label>
         <link refid="ipolar__foot__finder_8hpp_source"/>
-        <childnode refid="57" relation="include">
+        <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
       </node>
-      <node id="56">
+      <node id="62">
         <label>spline_polar_foot_finder.hpp</label>
         <link refid="spline__polar__foot__finder_8hpp_source"/>
-        <childnode refid="57" relation="include">
+        <childnode refid="63" relation="include">
         </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
-        <childnode refid="59" relation="include">
+        <childnode refid="65" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
@@ -68,20 +69,30 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="64" relation="include">
+        <childnode refid="69" relation="include">
         </childnode>
-        <childnode refid="65" relation="include">
+        <childnode refid="70" relation="include">
         </childnode>
-        <childnode refid="66" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="76" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
-      <node id="61">
+      <node id="44">
+        <label>cartesian_to_barycentric.hpp</label>
+        <link refid="cartesian__to__barycentric_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="67">
         <label>cartesian_to_circular.hpp</label>
         <link refid="cartesian__to__circular_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -95,7 +106,7 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="58">
+      <node id="64">
         <label>circular_to_cartesian.hpp</label>
         <link refid="circular__to__cartesian_8hpp_source"/>
         <childnode refid="20" relation="include">
@@ -113,12 +124,12 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="59">
+      <node id="65">
         <label>combined_mapping.hpp</label>
         <link refid="combined__mapping_8hpp_source"/>
         <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="60" relation="include">
+        <childnode refid="66" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -141,7 +152,7 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="62">
+      <node id="68">
         <label>czarny_to_cartesian.hpp</label>
         <link refid="czarny__to__cartesian_8hpp_source"/>
         <childnode refid="32" relation="include">
@@ -157,7 +168,7 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="63">
+      <node id="45">
         <label>discrete_to_cartesian.hpp</label>
         <link refid="discrete__to__cartesian_8hpp_source"/>
         <childnode refid="5" relation="include">
@@ -177,7 +188,7 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="64">
+      <node id="69">
         <label>geometry_pseudo_cartesian.hpp</label>
         <link refid="geometry__pseudo__cartesian_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -185,18 +196,18 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="60">
+      <node id="66">
         <label>inv_jacobian_o_point.hpp</label>
         <link refid="inv__jacobian__o__point_8hpp_source"/>
-        <childnode refid="61" relation="include">
+        <childnode refid="67" relation="include">
         </childnode>
-        <childnode refid="58" relation="include">
+        <childnode refid="64" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
         </childnode>
-        <childnode refid="62" relation="include">
+        <childnode refid="68" relation="include">
         </childnode>
-        <childnode refid="63" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
@@ -235,7 +246,7 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="76">
+      <node id="81">
         <label>vector_mapper.hpp</label>
         <link refid="vector__mapper_8hpp_source"/>
         <childnode refid="29" relation="include">
@@ -251,7 +262,7 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="72">
+      <node id="77">
         <label>deriv_details.hpp</label>
         <link refid="deriv__details_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -259,17 +270,17 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="70">
+      <node id="75">
         <label>derivative_field.hpp</label>
         <link refid="derivative__field_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="71">
+      <node id="76">
         <label>derivative_field_common.hpp</label>
         <link refid="derivative__field__common_8hpp_source"/>
         <childnode refid="18" relation="include">
@@ -280,14 +291,14 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="72" relation="include">
+        <childnode refid="77" relation="include">
         </childnode>
-        <childnode refid="73" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
       </node>
-      <node id="74">
+      <node id="79">
         <label>derivative_field_mem.hpp</label>
         <link refid="derivative__field__mem_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -296,12 +307,12 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="71" relation="include">
+        <childnode refid="76" relation="include">
         </childnode>
       </node>
-      <node id="73">
+      <node id="78">
         <label>idx_range_slice.hpp</label>
         <link refid="idx__range__slice_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -436,9 +447,11 @@
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -447,12 +460,44 @@
         <childnode refid="24" relation="include">
         </childnode>
       </node>
+      <node id="40">
+        <label>geometry.hpp</label>
+        <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
+        <label>spline_definitions.hpp</label>
+        <link refid="spline__definitions_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+      </node>
       <node id="38">
         <label>poisson_like_rhs_function.hpp</label>
         <link refid="poisson__like__rhs__function_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
         <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -472,7 +517,7 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="51" relation="include">
+        <childnode refid="57" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
@@ -480,53 +525,95 @@
         </childnode>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="77" relation="include">
+        <childnode refid="82" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
-        <childnode refid="78" relation="include">
+        <childnode refid="83" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
         </childnode>
       </node>
-      <node id="77">
+      <node id="82">
         <label>itimesolver.hpp</label>
         <link refid="geometryRTheta_2time__solver_2itimesolver_8hpp_source"/>
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="52">
+      <node id="58">
         <label>i_interpolator_2d.hpp</label>
         <link refid="i__interpolator__2d_8hpp_source"/>
-        <childnode refid="53" relation="include">
+        <childnode refid="59" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="43">
+        <label>bernstein.hpp</label>
+        <link refid="bernstein_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="41">
+        <label>polar_bsplines.hpp</label>
+        <link refid="polar__bsplines_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+        <childnode refid="25" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
         <label>polar_spline_evaluator.hpp</label>
         <link refid="polar__spline__evaluator_8hpp_source"/>
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="55">
+      <node id="61">
         <label>spline_interpolator_2d.hpp</label>
         <link refid="spline__interpolator__2d_8hpp_source"/>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="58" relation="include">
         </childnode>
       </node>
-      <node id="54">
+      <node id="60">
         <label>l_norm_tools.hpp</label>
         <link refid="l__norm__tools_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -555,7 +642,7 @@
         <childnode refid="34" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="52">
         <label>matrix_batch.hpp</label>
         <link refid="matrix__batch_8hpp_source"/>
         <childnode refid="27" relation="include">
@@ -563,53 +650,53 @@
         <childnode refid="25" relation="include">
         </childnode>
       </node>
-      <node id="43">
+      <node id="49">
         <label>matrix_batch_csr.hpp</label>
         <link refid="matrix__batch__csr_8hpp_source"/>
-        <childnode refid="44" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
       </node>
-      <node id="47">
+      <node id="53">
         <label>matrix_utils.hpp</label>
         <link refid="matrix__utils_8hpp_source"/>
-        <childnode refid="45" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="67">
+      <node id="72">
         <label>multipatch_field.hpp</label>
         <link refid="multipatch__field_8hpp_source"/>
-        <childnode refid="68" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
       </node>
-      <node id="75">
+      <node id="80">
         <label>multipatch_field_mem.hpp</label>
         <link refid="multipatch__field__mem_8hpp_source"/>
-        <childnode refid="67" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="68" relation="include">
+        <childnode refid="73" relation="include">
         </childnode>
       </node>
-      <node id="68">
+      <node id="73">
         <label>multipatch_type.hpp</label>
         <link refid="multipatch__type_8hpp_source"/>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="69" relation="include">
+        <childnode refid="74" relation="include">
         </childnode>
       </node>
-      <node id="69">
+      <node id="74">
         <label>types.hpp</label>
         <link refid="types_8hpp_source"/>
         <childnode refid="13" relation="include">
@@ -618,9 +705,9 @@
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="70" relation="include">
+        <childnode refid="75" relation="include">
         </childnode>
-        <childnode refid="74" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="34" relation="include">
         </childnode>
@@ -629,7 +716,7 @@
         <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="47">
         <label>polarpoissonlikesolver.hpp</label>
         <link refid="polarpoissonlikesolver_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -640,24 +727,24 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="54" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="48">
         <label>gauss_legendre_integration.hpp</label>
         <link refid="gauss__legendre__integration_8hpp_source"/>
         <childnode refid="18" relation="include">
@@ -673,7 +760,7 @@
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="56">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="20" relation="include">
@@ -689,7 +776,7 @@
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="54">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="6" relation="include">
@@ -697,7 +784,7 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="49">
+      <node id="55">
         <label>volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="6" relation="include">
@@ -708,10 +795,10 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
       </node>
-      <node id="66">
+      <node id="71">
         <label>itimestepper.hpp</label>
         <link refid="itimestepper_8hpp_source"/>
         <childnode refid="18" relation="include">
@@ -720,12 +807,12 @@
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="67" relation="include">
+        <childnode refid="72" relation="include">
         </childnode>
-        <childnode refid="75" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="83">
         <label>rk2.hpp</label>
         <link refid="rk2_8hpp_source"/>
         <childnode refid="18" relation="include">
@@ -738,7 +825,7 @@
         </childnode>
         <childnode refid="35" relation="include">
         </childnode>
-        <childnode refid="66" relation="include">
+        <childnode refid="71" relation="include">
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
@@ -824,16 +911,16 @@
       <node id="4">
         <label>fstream</label>
       </node>
-      <node id="57">
+      <node id="63">
         <label>functional</label>
       </node>
       <node id="14">
         <label>geometry.hpp</label>
       </node>
-      <node id="44">
+      <node id="50">
         <label>ginkgo/extensions/kokkos.hpp</label>
       </node>
-      <node id="45">
+      <node id="51">
         <label>ginkgo/ginkgo.hpp</label>
       </node>
       <node id="5">
@@ -842,7 +929,7 @@
       <node id="15">
         <label>iqnsolver.hpp</label>
       </node>
-      <node id="53">
+      <node id="59">
         <label>memory</label>
       </node>
       <node id="26">
@@ -885,156 +972,157 @@
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;poisson_like_rhs_function.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;polarpoissonlikesolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;rk2.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight></codeline>
-<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>FootFinder&gt;</highlight></codeline>
-<codeline lineno="55" refid="classBslPredCorrRTheta" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBslPredCorrRTheta" kindref="compound">BslPredCorrRTheta</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classITimeSolverRTheta" kindref="compound">ITimeSolverRTheta</ref></highlight></codeline>
-<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/>=<sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionPolar</ref>&lt;</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FootFinder,</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping,</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPreallocatableSplineInterpolator2D" kindref="compound">PreallocatableSplineInterpolator2D</ref>&lt;</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaBuilder,</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound,</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta&gt;&gt;;</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/>Mapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_mapping;</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_advection_solver;</highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight></codeline>
-<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>,</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_poisson_solver;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>SplineRThetaBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_builder;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_spline_evaluator;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>FootFinder&gt;</highlight></codeline>
+<codeline lineno="56" refid="classBslPredCorrRTheta" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBslPredCorrRTheta" kindref="compound">BslPredCorrRTheta</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classITimeSolverRTheta" kindref="compound">ITimeSolverRTheta</ref></highlight></codeline>
+<codeline lineno="57"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/>=<sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionPolar</ref>&lt;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FootFinder,</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping,</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPreallocatableSplineInterpolator2D" kindref="compound">PreallocatableSplineInterpolator2D</ref>&lt;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaBuilder,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound,</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta&gt;&gt;;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>Mapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_mapping;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_advection_solver;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_poisson_solver;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/>SplineRThetaBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_builder;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>m_spline_evaluator;</highlight></codeline>
 <codeline lineno="79"><highlight class="normal"></highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="98" refid="classBslPredCorrRTheta_1a17c01bf58cd5cc1e8190f7ea62c3aa9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBslPredCorrRTheta_1a17c01bf58cd5cc1e8190f7ea62c3aa9f" kindref="member">BslPredCorrRTheta</ref>(</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping,</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>advection_solver,</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder,</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>rhs_evaluator,</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>,</highlight></codeline>
-<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>poisson_solver)</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_mapping(mapping)</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_advection_solver(advection_solver)</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_poisson_solver(poisson_solver)</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_builder(builder)</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_spline_evaluator(rhs_evaluator)</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight></codeline>
-<codeline lineno="116" refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldRTheta&gt;<sp/><ref refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" kindref="member">operator()</ref>(</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldRTheta&gt;<sp/>density_host,</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dt,</highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>steps)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
-<codeline lineno="120"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::chrono::time_point&lt;std::chrono::system_clock&gt;<sp/>start_time;</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::chrono::time_point&lt;std::chrono::system_clock&gt;<sp/>end_time;</highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="99" refid="classBslPredCorrRTheta_1a17c01bf58cd5cc1e8190f7ea62c3aa9f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classBslPredCorrRTheta_1a17c01bf58cd5cc1e8190f7ea62c3aa9f" kindref="member">BslPredCorrRTheta</ref>(</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Mapping<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classBslAdvectionPolar" kindref="compound">BslAdvectionRTheta</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>advection_solver,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaBuilder<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>builder,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>rhs_evaluator,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref>&lt;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridR" kindref="compound">GridR</ref>,</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridTheta" kindref="compound">GridTheta</ref>,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref>,</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SplineRThetaEvaluatorNullBound&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>poisson_solver)</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_mapping(mapping)</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_advection_solver(advection_solver)</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_poisson_solver(poisson_solver)</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_builder(builder)</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_spline_evaluator(rhs_evaluator)</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117" refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DFieldRTheta&gt;<sp/><ref refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldRTheta&gt;<sp/>density_host,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dt,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>steps)</highlight><highlight class="keyword"><sp/>const<sp/>override</highlight></codeline>
+<codeline lineno="121"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::chrono::time_point&lt;std::chrono::system_clock&gt;<sp/>start_time;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::chrono::time_point&lt;std::chrono::system_clock&gt;<sp/>end_time;</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"></highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Grid.<sp/>------------------------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta<sp/>grid(get_idx_range(density_host));</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Data</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldMemRTheta<sp/>electrical_potential_alloc(grid);</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DMem<sp/>density_coef_alloc(get_spline_idx_range(m_builder));</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PolarSplineMemRTheta<sp/>electrostatic_potential_coef_alloc(</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().full_domain());</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>electrical_potential_alloc_host</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::create_mirror_view(get_field(electrical_potential_alloc));</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>density_alloc<sp/>=<sp/>ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(),<sp/>density_host);</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight></codeline>
-<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Fields</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldRTheta<sp/>electrical_potential<sp/>=<sp/>get_field(electrical_potential_alloc);</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldRTheta&gt;<sp/>electrical_potential_host<sp/>=<sp/>get_field(electrical_potential_alloc_host);</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PolarSplineRTheta<sp/>electrostatic_potential_coef</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>get_field(electrostatic_potential_coef_alloc);</highlight></codeline>
-<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldRTheta<sp/>density<sp/>=<sp/>get_field(density_alloc);</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2D<sp/>density_coef(density_coef_alloc);</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"></highlight></codeline>
-<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Operators</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref><sp/>advection_field_computer(m_mapping);</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>charge_density(get_const_field(density_coef),<sp/>m_spline_evaluator);</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(density,<sp/>get_const_field(density_host));</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"></highlight></codeline>
-<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Setup</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(density_coef,<sp/>get_const_field(density));</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_poisson_solver(charge_density,<sp/>electrical_potential);</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(electrical_potential_host,<sp/>get_const_field(electrical_potential));</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PdiEvent(</highlight><highlight class="stringliteral">&quot;iteration&quot;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;iter&quot;</highlight><highlight class="normal">,<sp/>0)</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;time&quot;</highlight><highlight class="normal">,<sp/>0)</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;density&quot;</highlight><highlight class="normal">,<sp/>density_host)</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;electrical_potential&quot;</highlight><highlight class="normal">,<sp/>electrical_potential_host);</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"></highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>RK2<sp/>methods</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;X, Y&gt;</ref>,<sp/>DConstFieldRTheta)&gt;<sp/>define_advection_field<sp/>=</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[&amp;](<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;X, Y&gt;</ref><sp/>advection_field,<sp/>DConstFieldRTheta<sp/>density)<sp/>{</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>compute<sp/>electrostatic<sp/>potential:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(density_coef,<sp/>get_const_field(density));</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_poisson_solver(charge_density,<sp/>electrostatic_potential_coef);</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"></highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>advection_field_alloc_host<sp/>=<sp/>ddcHelper::create_mirror_view_and_copy(</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultHostExecutionSpace(),</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>advection_field);</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>electrostatic_potential_coef_alloc_host</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::create_mirror_view_and_copy(electrostatic_potential_coef);</highlight></codeline>
-<codeline lineno="176"><highlight class="normal"></highlight></codeline>
-<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>compute<sp/>advection<sp/>field:</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>advection_field_computer(</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_field(electrostatic_potential_coef_alloc_host),</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_field(advection_field_alloc_host));</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deepcopy(advection_field,<sp/>get_const_field(advection_field_alloc_host));</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classRK2" kindref="compound">RK2&lt;DFieldMemRTheta, DVectorFieldMemRTheta&lt;X, Y&gt;</ref>,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>time_stepper(grid);</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"></highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Iteration<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>start_time<sp/>=<sp/>std::chrono::system_clock::now();</highlight></codeline>
-<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>iter(0);<sp/>iter<sp/>&lt;<sp/>steps;<sp/>++iter)<sp/>{</highlight></codeline>
-<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>time_stepper</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classRK2_1af39ff8c3200cb2b37a4254030288963d" kindref="member">update</ref>(Kokkos::DefaultExecutionSpace(),</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>density,</highlight></codeline>
-<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dt,</highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>define_advection_field,</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_advection_solver);</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"></highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(density_coef,<sp/>get_const_field(density));</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_poisson_solver(charge_density,<sp/>electrical_potential);</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(density_host,<sp/>get_const_field(density));</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>electrical_potential_host,</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(electrical_potential));</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PdiEvent(</highlight><highlight class="stringliteral">&quot;iteration&quot;</highlight><highlight class="normal">)</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;iter&quot;</highlight><highlight class="normal">,<sp/>iter<sp/>+<sp/>1)</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;time&quot;</highlight><highlight class="normal">,<sp/>iter<sp/>*<sp/>dt)</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;density&quot;</highlight><highlight class="normal">,<sp/>density_host)</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;electrical_potential&quot;</highlight><highlight class="normal">,<sp/>electrical_potential_host);</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end_time<sp/>=<sp/>std::chrono::system_clock::now();</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Grid.<sp/>------------------------------------------------------------------------------------------</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta<sp/>grid(get_idx_range(density_host));</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldMemRTheta<sp/>electrical_potential_alloc(grid);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2DMem<sp/>density_coef_alloc(get_spline_idx_range(m_builder));</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PolarSplineMemRTheta<sp/>electrostatic_potential_coef_alloc(</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::discrete_space&lt;PolarBSplinesRTheta&gt;().full_domain());</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>electrical_potential_alloc_host</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::create_mirror_view(get_field(electrical_potential_alloc));</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>density_alloc<sp/>=<sp/>ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(),<sp/>density_host);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Fields</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldRTheta<sp/>electrical_potential<sp/>=<sp/>get_field(electrical_potential_alloc);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>host_t&lt;DFieldRTheta&gt;<sp/>electrical_potential_host<sp/>=<sp/>get_field(electrical_potential_alloc_host);</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PolarSplineRTheta<sp/>electrostatic_potential_coef</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>get_field(electrostatic_potential_coef_alloc);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldRTheta<sp/>density<sp/>=<sp/>get_field(density_alloc);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Spline2D<sp/>density_coef(density_coef_alloc);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Operators</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classAdvectionFieldFinder" kindref="compound">AdvectionFieldFinder</ref><sp/>advection_field_computer(m_mapping);</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classPoissonLikeRHSFunction" kindref="compound">PoissonLikeRHSFunction</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>charge_density(get_const_field(density_coef),<sp/>m_spline_evaluator);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(density,<sp/>get_const_field(density_host));</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Setup</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(density_coef,<sp/>get_const_field(density));</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_poisson_solver(charge_density,<sp/>electrical_potential);</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(electrical_potential_host,<sp/>get_const_field(electrical_potential));</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PdiEvent(</highlight><highlight class="stringliteral">&quot;iteration&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;iter&quot;</highlight><highlight class="normal">,<sp/>0)</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;time&quot;</highlight><highlight class="normal">,<sp/>0)</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;density&quot;</highlight><highlight class="normal">,<sp/>density_host)</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;electrical_potential&quot;</highlight><highlight class="normal">,<sp/>electrical_potential_host);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>RK2<sp/>methods</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::function&lt;void(<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;X, Y&gt;</ref>,<sp/>DConstFieldRTheta)&gt;<sp/>define_advection_field<sp/>=</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>[&amp;](<ref refid="classVectorField" kindref="compound">DVectorFieldRTheta&lt;X, Y&gt;</ref><sp/>advection_field,<sp/>DConstFieldRTheta<sp/>density)<sp/>{</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>compute<sp/>electrostatic<sp/>potential:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(density_coef,<sp/>get_const_field(density));</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_poisson_solver(charge_density,<sp/>electrostatic_potential_coef);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>advection_field_alloc_host<sp/>=<sp/>ddcHelper::create_mirror_view_and_copy(</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultHostExecutionSpace(),</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>advection_field);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>electrostatic_potential_coef_alloc_host</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::create_mirror_view_and_copy(electrostatic_potential_coef);</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>---<sp/>compute<sp/>advection<sp/>field:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>advection_field_computer(</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_field(electrostatic_potential_coef_alloc_host),</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_field(advection_field_alloc_host));</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deepcopy(advection_field,<sp/>get_const_field(advection_field_alloc_host));</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>};</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classRK2" kindref="compound">RK2&lt;DFieldMemRTheta, DVectorFieldMemRTheta&lt;X, Y&gt;</ref>,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>time_stepper(grid);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Iteration<sp/>loop</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>start_time<sp/>=<sp/>std::chrono::system_clock::now();</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>iter(0);<sp/>iter<sp/>&lt;<sp/>steps;<sp/>++iter)<sp/>{</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>time_stepper</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classRK2_1af39ff8c3200cb2b37a4254030288963d" kindref="member">update</ref>(Kokkos::DefaultExecutionSpace(),</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>density,</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dt,</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>define_advection_field,</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_advection_solver);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_builder(density_coef,<sp/>get_const_field(density));</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_poisson_solver(charge_density,<sp/>electrical_potential);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(density_host,<sp/>get_const_field(density));</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>electrical_potential_host,</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(electrical_potential));</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::PdiEvent(</highlight><highlight class="stringliteral">&quot;iteration&quot;</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;iter&quot;</highlight><highlight class="normal">,<sp/>iter<sp/>+<sp/>1)</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;time&quot;</highlight><highlight class="normal">,<sp/>iter<sp/>*<sp/>dt)</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;density&quot;</highlight><highlight class="normal">,<sp/>density_host)</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.with(</highlight><highlight class="stringliteral">&quot;electrical_potential&quot;</highlight><highlight class="normal">,<sp/>electrical_potential_host);</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>end_time<sp/>=<sp/>std::chrono::system_clock::now();</highlight></codeline>
 <codeline lineno="213"><highlight class="normal"></highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" kindref="member">display_time_difference</ref>(</highlight><highlight class="stringliteral">&quot;Iterations<sp/>time:<sp/>&quot;</highlight><highlight class="normal">,<sp/>start_time,<sp/>end_time);</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" kindref="member">display_time_difference</ref>(</highlight><highlight class="stringliteral">&quot;Iterations<sp/>time:<sp/>&quot;</highlight><highlight class="normal">,<sp/>start_time,<sp/>end_time);</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"></highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>density_host;</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="219"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>density_host;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="220"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp"/>
   </compounddef>
