@@ -156,7 +156,7 @@ MeshInitialisationResult initialise_mesh(int rank, PC_tree_t conf_gyselax)
 }
 
 void init_distribution_fun(
-        DFieldMemSpGrid& allfdistribu,
+        DFieldSpGrid allfdistribu,
         IdxRangeSpVparMu const& meshGridSpVparMu,
         IdxRangeSpGrid const& meshGridSp,
         PC_tree_t conf_gyselax,
