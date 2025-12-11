@@ -10,7 +10,7 @@
 #include "geometry_r_theta.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "math_tools.hpp"
-#include "spline_definitions.hpp"
+#include "spline_definitions_r_theta.hpp"
 
 /**
  * @brief Base class for the exact solutions of the Poisson equation.
