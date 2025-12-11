@@ -579,7 +579,7 @@ public:
      *
      * @returns Field The field on the physical index range.
      */
-    auto get_values_field()
+    auto get_values_field() const
     {
         IdxRange<> no_specified_dims;
         return get_internal_field(no_specified_dims);
