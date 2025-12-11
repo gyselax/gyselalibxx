@@ -291,8 +291,10 @@ TEST(DerivFieldTest, derivFieldValueAccess)
     DerivField<double, IdxRange_dXdYXY> const dxdyField_const_copy(dxdyField_alloc);
 
     // Collect the index range of the sliced fields
-    IdxRange<dX, GridX, GridY> slice_dx_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dx]);
-    IdxRange<dY, GridX, GridY> slice_dy_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dy]);
+    IdxRange<dX, GridX, GridY> slice_dx_idx_range
+            = get_idx_range(dxdyField_const_copy[slice_idx_dx]);
+    IdxRange<dY, GridX, GridY> slice_dy_idx_range
+            = get_idx_range(dxdyField_const_copy[slice_idx_dy]);
     IdxRange_dXdYXY slice_dx_dy_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dx_dy]);
 
     // Check that the index ranges are as expected
