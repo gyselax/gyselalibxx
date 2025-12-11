@@ -164,6 +164,12 @@ TEST(DerivFieldTest, FieldValueAccess)
 
     // Check that the index range of the values matches the expected index range
     EXPECT_EQ(idx_range_x_y, get_idx_range(dxdyField.get_values_field()));
+
+    // Define the field
+    DerivField<double, IdxRange_dXdYXY> const dxdyField_const_copy(dxdyField_alloc);
+
+    // Check that the index range of the values matches the expected index range
+    EXPECT_EQ(idx_range_x_y, get_idx_range(dxdyField_const_copy.get_values_field()));
 }
 
 // Test if the values of the function can be accessed via the constant get_values_field function
@@ -181,6 +187,12 @@ TEST(DerivFieldTest, ViewValueAccess)
 
     // Check that the index range of the values matches the expected index range
     EXPECT_EQ(idx_range_x_y, get_idx_range(dxdyField.get_values_field()));
+
+    // Define the field
+    DerivConstField<double, IdxRange_dXdYXY> const dxdyField_const_copy(dxdyField_alloc);
+
+    // Check that the index range of the values matches the expected index range
+    EXPECT_EQ(idx_range_x_y, get_idx_range(dxdyField_const_copy.get_values_field()));
 }
 
 
@@ -269,6 +281,19 @@ TEST(DerivFieldTest, derivFieldValueAccess)
     IdxRange<dX, GridX, GridY> slice_dx_idx_range = get_idx_range(dxdyField[slice_idx_dx]);
     IdxRange<dY, GridX, GridY> slice_dy_idx_range = get_idx_range(dxdyField[slice_idx_dy]);
     IdxRange_dXdYXY slice_dx_dy_idx_range = get_idx_range(dxdyField[slice_idx_dx_dy]);
+
+    // Check that the index ranges are as expected
+    EXPECT_EQ(dx_idx_range, slice_dx_idx_range);
+    EXPECT_EQ(dy_idx_range, slice_dy_idx_range);
+    EXPECT_EQ(dx_dy_idx_range, slice_dx_dy_idx_range);
+
+    // Define a const copy of the field
+    DerivField<double, IdxRange_dXdYXY> const dxdyField_const_copy(dxdyField_alloc);
+
+    // Collect the index range of the sliced fields
+    slice_dx_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dx]);
+    slice_dy_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dy]);
+    slice_dx_dy_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dx_dy]);
 
     // Check that the index ranges are as expected
     EXPECT_EQ(dx_idx_range, slice_dx_idx_range);
