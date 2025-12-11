@@ -11,7 +11,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "../spline_definitions.hpp"
+#include "../spline_definitions_vpar_mu.hpp"
 
 #include "collision_configuration.hpp"
 #include "collision_operator.hpp"
