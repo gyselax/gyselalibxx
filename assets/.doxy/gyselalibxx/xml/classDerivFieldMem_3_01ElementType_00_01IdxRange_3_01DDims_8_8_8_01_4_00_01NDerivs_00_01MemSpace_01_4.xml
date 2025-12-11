@@ -738,6 +738,158 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="330" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="330" bodyend="336"/>
       </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a83ffbc2b0f7fc15cee0096403be29468" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryDDims</declname>
+            <defname>QueryDDims</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator[]</definition>
+        <argsstring>(Idx&lt; QueryDDims... &gt; const &amp;slice_spec) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator[]</qualifiedname>
+        <param>
+          <type>Idx&lt; QueryDDims... &gt; const &amp;</type>
+          <declname>slice_spec</declname>
+        </param>
+        <briefdescription>
+<para>Get a ConstField describing a subset of the data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>slice_spec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A discrete element describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>ConstField A subset of the data. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="348" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="348" bodyend="351"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa167edd566d4f03d7bd737f603dd038f" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryDDims</declname>
+            <defname>QueryDDims</defname>
+          </param>
+        </templateparamlist>
+        <type>constexpr auto</type>
+        <definition>constexpr auto DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator[]</definition>
+        <argsstring>(Idx&lt; QueryDDims... &gt; const &amp;slice_spec)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator[]</qualifiedname>
+        <param>
+          <type>Idx&lt; QueryDDims... &gt; const &amp;</type>
+          <declname>slice_spec</declname>
+        </param>
+        <briefdescription>
+<para>Get a Field describing a subset of the data. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>slice_spec</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A discrete element describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Field A subset of the data. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="363" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="363" bodyend="366"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abe2ed79b3ce82f3b36f75d09f3e7055b" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryDDims</declname>
+            <defname>QueryDDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION constexpr auto</type>
+        <definition>KOKKOS_FUNCTION constexpr auto DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator[]</definition>
+        <argsstring>(IdxRange&lt; QueryDDims... &gt; const &amp;oidx_range)</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator[]</qualifiedname>
+        <param>
+          <type>IdxRange&lt; QueryDDims... &gt; const &amp;</type>
+          <declname>oidx_range</declname>
+        </param>
+        <briefdescription>
+<para>Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>oidx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A discrete index range describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>Field A subset of the data. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="380" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="380" bodyend="383"/>
+      </memberdef>
+      <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a245529dd6cb7d56c85a71e2b1d58e8f3" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>QueryDDims</declname>
+            <defname>QueryDDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION constexpr auto</type>
+        <definition>KOKKOS_FUNCTION constexpr auto DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator[]</definition>
+        <argsstring>(IdxRange&lt; QueryDDims... &gt; const &amp;oidx_range) const</argsstring>
+        <name>operator[]</name>
+        <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::operator[]</qualifiedname>
+        <param>
+          <type>IdxRange&lt; QueryDDims... &gt; const &amp;</type>
+          <declname>oidx_range</declname>
+        </param>
+        <briefdescription>
+<para>Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>oidx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A discrete index range describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>ConstField A subset of the data. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="397" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="397" bodyend="400"/>
+      </memberdef>
       <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6e0d2b4d800e11d4787cf8a1291558d7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac376f71dff518c893e66c88ddb265fe4" kindref="member">view_type</ref></type>
         <definition>view_type DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::span_cview</definition>
@@ -755,7 +907,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="346" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="346" bodyend="349"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="410" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="410" bodyend="413"/>
       </memberdef>
       <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a99a11d6c6c4a56b0d05415ec51146eef" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac376f71dff518c893e66c88ddb265fe4" kindref="member">view_type</ref></type>
@@ -774,7 +926,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="359" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="359" bodyend="362"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="423" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="423" bodyend="426"/>
       </memberdef>
       <memberdef kind="function" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a5bd780143c64dad90a6ed01c9380fc90" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ad62673081818631af0ba0c81dacfff98" kindref="member">span_type</ref></type>
@@ -793,7 +945,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="372" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="372" bodyend="375"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="436" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="436" bodyend="439"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -860,7 +1012,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="47" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="51" bodyend="376"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="47" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="51" bodyend="440"/>
     <listofallmembers>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a7b0ff7b9e831764d9ae1a9988478f7a6" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>allocator_type</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ad5d9bbda8108ebf61c13ee74f7d56f4a" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>base_type</name></member>
@@ -887,6 +1039,10 @@
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a452e3d080c0cf135f1610348fc469b42" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator()</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac897e84a086c7cf6b4577833a8093e69" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator=</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a031703d7536e1b06d4f9dedfad0448fd" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator=</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a83ffbc2b0f7fc15cee0096403be29468" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator[]</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa167edd566d4f03d7bd737f603dd038f" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator[]</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abe2ed79b3ce82f3b36f75d09f3e7055b" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator[]</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a245529dd6cb7d56c85a71e2b1d58e8f3" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator[]</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1afb2089b734b8d88d06788a1844fc5676" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>physical_deriv_grids</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a89b5982b10e92fc92bc35a36076e3505" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>physical_deriv_idx_range_type</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a9507a60bf4428e52d891bc48c778f7d7" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>physical_grids</name></member>

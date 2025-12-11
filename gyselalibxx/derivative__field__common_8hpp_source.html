@@ -875,30 +875,6 @@ protected:
 public:
     KOKKOS_DEFAULTED_FUNCTION ~DerivFieldCommon() = default;
 
-    template &lt;class... QueryDDims&gt;
-    constexpr auto operator[](Idx&lt;QueryDDims...&gt; const&amp; slice_spec) const
-    {
-        return get_internal_field(slice_spec).span_cview();
-    }
-
-    template &lt;class... QueryDDims&gt;
-    constexpr auto operator[](Idx&lt;QueryDDims...&gt; const&amp; slice_spec)
-    {
-        return get_internal_field(slice_spec);
-    }
-
-    template &lt;class... QueryDDims&gt;
-    KOKKOS_FUNCTION constexpr auto operator[](IdxRange&lt;QueryDDims...&gt; const&amp; oidx_range)
-    {
-        return get_internal_field(oidx_range);
-    }
-
-    template &lt;class... QueryDDims&gt;
-    KOKKOS_FUNCTION constexpr auto operator[](IdxRange&lt;QueryDDims...&gt; const&amp; oidx_range) const
-    {
-        return get_internal_field(oidx_range).span_cview();
-    }
-
     template &lt;class... ODims&gt;
     auto get_mdspan(IdxRange&lt;ODims...&gt; provided_deriv_idx_range)
     {
@@ -933,7 +909,7 @@ public:
         return get_mdspan(no_specified_dims);
     }
 
-    auto get_values_field()
+    auto get_values_field() const
     {
         IdxRange&lt;&gt; no_specified_dims;
         return get_internal_field(no_specified_dims);

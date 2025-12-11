@@ -71,13 +71,9 @@ _An abstract class which holds a chunk of memory describing a field and its deri
 |  auto | [**get\_mdspan**](#function-get_mdspan-12) (IdxRange&lt; ODims... &gt; provided\_deriv\_idx\_range) <br>_Get one of the mdspans from the internal array internal\_fields. This function takes index ranges on the derivative directions. Where derivatives are missing it is assumed that the 0-th order derivative is requested. This dimension is stripped from the resulting field. This is the recommended way to access the internal fields._  |
 |  auto | [**get\_mdspan**](#function-get_mdspan-22) () <br>_Get the mdspan holding the values of the function from the internal array internal\_fields._  |
 |  auto | [**get\_values\_const\_field**](#function-get_values_const_field) () const<br>_Get the Field which holds the values of the function._  |
-|  auto | [**get\_values\_field**](#function-get_values_field) () <br>_Get the Field which holds the values of the function._  |
+|  auto | [**get\_values\_field**](#function-get_values_field) () const<br>_Get the Field which holds the values of the function._  |
 |  KOKKOS\_FUNCTION [**physical\_idx\_range\_type**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md#typedef-physical_idx_range_type) | [**idx\_range**](#function-idx_range) () const<br>_Get the physical index range on which the Field is defined. This method is equivalent to calling_ `get_idx_range(this-> get_values_field() )` __ |
 |  IdxRangeSlice&lt; Grid1D &gt; | [**idx\_range\_for\_deriv**](#function-idx_range_for_deriv) () const<br>_Get the physical index range along Grid1D on which the derivatives of that dimension are defined._  |
-|  constexpr auto | [**operator[]**](#function-operator) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Get a ConstField describing a subset of the data._  |
-|  constexpr auto | [**operator[]**](#function-operator_1) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Get a Field describing a subset of the data._  |
-|  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_2) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
-|  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_3) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) const<br>_Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**~DerivFieldCommon**](#function-derivfieldcommon) () = default<br> |
 
 
@@ -414,7 +410,7 @@ Field The constant field on the physical index range.
 
 _Get the Field which holds the values of the function._ 
 ```C++
-inline auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_values_field () 
+inline auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::get_values_field () const
 ```
 
 
@@ -463,146 +459,6 @@ inline IdxRangeSlice< Grid1D > DerivFieldCommon< FieldType, IdxRange< DDims... >
 
 
 This is equivalent to retrieving the argument deriv\_idx\_range\_x from a dxField defined as: [**DerivFieldMem**](classDerivFieldMem.md)&lt;double, IdxRange&lt;dX, GridX, GridY&gt;, 1&gt; dxField(idx\_range\_x\_y, deriv\_idx\_range\_x); 
-
-
-        
-
-<hr>
-
-
-
-### function operator[] 
-
-_Get a ConstField describing a subset of the data._ 
-```C++
-template<class... QueryDDims>
-inline constexpr auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::operator[] (
-    Idx< QueryDDims... > const & slice_spec
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `slice_spec` A discrete element describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.
-
-
-
-**Returns:**
-
-ConstField A subset of the data. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator[] 
-
-_Get a Field describing a subset of the data._ 
-```C++
-template<class... QueryDDims>
-inline constexpr auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::operator[] (
-    Idx< QueryDDims... > const & slice_spec
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `slice_spec` A discrete element describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.
-
-
-
-**Returns:**
-
-Field A subset of the data. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator[] 
-
-_Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._ 
-```C++
-template<class... QueryDDims>
-inline KOKKOS_FUNCTION constexpr auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::operator[] (
-    IdxRange< QueryDDims... > const & oidx_range
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `oidx_range` A discrete index range describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.
-
-
-
-**Returns:**
-
-Field A subset of the data. 
-
-
-
-
-
-        
-
-<hr>
-
-
-
-### function operator[] 
-
-_Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._ 
-```C++
-template<class... QueryDDims>
-inline KOKKOS_FUNCTION constexpr auto DerivFieldCommon< FieldType, IdxRange< DDims... > >::operator[] (
-    IdxRange< QueryDDims... > const & oidx_range
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `oidx_range` A discrete index range describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.
-
-
-
-**Returns:**
-
-ConstField A subset of the data. 
-
-
-
 
 
         

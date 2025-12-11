@@ -679,6 +679,8 @@
     <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a86f232e462344ee0dbc33c7bbf2d7b57" kind="function"><name>deepcopy</name></member>
     <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a86babf139eeb18c97f045852b155a613" kind="function"><name>deepcopy</name></member>
     <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a11d7a0ef77df2e057a0f56d2555fe582" kind="function"><name>operator()</name></member>
+    <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a1629f76c7845f8077707e2e63ce4279f" kind="function"><name>operator[]</name></member>
+    <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1acfb3e5f4e43f2cbe04e8c4edc5f0fb5c" kind="function"><name>operator[]</name></member>
     <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a224a54ac31ccb912b93b7c9fdddda745" kind="function"><name>span_cview</name></member>
     <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a81ddb73448316e11b70fab4feb0c6350" kind="function"><name>span_view</name></member>
   </compound>
@@ -718,13 +720,9 @@
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ac7bdb7d57cf9d0ba344724a0a9797457" kind="function"><name>get_internal_field</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ad087ff1dba182ec21ce44b6b80b8fd5f" kind="function"><name>DerivFieldCommon</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3094a24cf98615b32b93e382c7a0fb74" kind="function"><name>~DerivFieldCommon</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ade0c91573c30506686f3f05b4d7c6c11" kind="function"><name>operator[]</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1af1cdd143c10d63a9a47a36a7b9e7fd81" kind="function"><name>operator[]</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a10dd8bcc177efc11479e4c80b8a64535" kind="function"><name>operator[]</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ac284686e3f7b50d490bd642e9e657b43" kind="function"><name>operator[]</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1afb79eb00f2eb1a1b757d190663c085d1" kind="function"><name>get_mdspan</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a3515c17c41fab7daaf8842344473acb5" kind="function"><name>get_mdspan</name></member>
-    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1adffb6410e57ef9d4d3fd8801cbe73a30" kind="function"><name>get_values_field</name></member>
+    <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1acf6b5f3e9791535ee527ffe5fe3ce71b" kind="function"><name>get_values_field</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1a811908f829ca05bd4b781814d16efd34" kind="function"><name>get_values_const_field</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ad89f3639c21684fd04f16e7de1da0ac0" kind="function"><name>idx_range</name></member>
     <member refid="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4_1ad754bae73f3ffd90d1ba4128d9406161" kind="function"><name>derivative_idx_range</name></member>
@@ -765,6 +763,10 @@
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a031703d7536e1b06d4f9dedfad0448fd" kind="function"><name>operator=</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1af060ce1efbb1b8977510596bfda7c7d9" kind="function"><name>operator()</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a452e3d080c0cf135f1610348fc469b42" kind="function"><name>operator()</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a83ffbc2b0f7fc15cee0096403be29468" kind="function"><name>operator[]</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa167edd566d4f03d7bd737f603dd038f" kind="function"><name>operator[]</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1abe2ed79b3ce82f3b36f75d09f3e7055b" kind="function"><name>operator[]</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a245529dd6cb7d56c85a71e2b1d58e8f3" kind="function"><name>operator[]</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6e0d2b4d800e11d4787cf8a1291558d7" kind="function"><name>span_cview</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a99a11d6c6c4a56b0d05415ec51146eef" kind="function"><name>span_view</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a5bd780143c64dad90a6ed01c9380fc90" kind="function"><name>span_view</name></member>

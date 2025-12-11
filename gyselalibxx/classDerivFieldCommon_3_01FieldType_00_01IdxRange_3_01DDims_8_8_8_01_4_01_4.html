@@ -629,7 +629,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-get_values_field"><strong>get_values_field</strong></a> () <br><em>Get the Field which holds the values of the function.</em></td>
+<td style="text-align: left;"><a href="#function-get_values_field"><strong>get_values_field</strong></a> () const<br><em>Get the Field which holds the values of the function.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.html#typedef-physical_idx_range_type"><strong>physical_idx_range_type</strong></a></td>
@@ -638,22 +638,6 @@
 <tr>
 <td style="text-align: right;">IdxRangeSlice&lt; Grid1D &gt;</td>
 <td style="text-align: left;"><a href="#function-idx_range_for_deriv"><strong>idx_range_for_deriv</strong></a> () const<br><em>Get the physical index range along Grid1D on which the derivatives of that dimension are defined.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr auto</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) const<br><em>Get a ConstField describing a subset of the data.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr auto</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator[]</strong></a> (Idx&lt; QueryDDims... &gt; const &amp; slice_spec) <br><em>Get a Field describing a subset of the data.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_FUNCTION constexpr auto</td>
-<td style="text-align: left;"><a href="#function-operator_2"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) <br><em>Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">KOKKOS_FUNCTION constexpr auto</td>
-<td style="text-align: left;"><a href="#function-operator_3"><strong>operator[]</strong></a> (IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range) const<br><em>Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
@@ -894,7 +878,7 @@ inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get
 
 <h3 id="function-get_values_field">function get_values_field</h3>
 <p><em>Get the Field which holds the values of the function.</em> </p>
-<pre><code class="language-C++">inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_field () 
+<pre><code class="language-C++">inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get_values_field () const
 </code></pre>
 <p>This function is equivalent to calling operator[] with a 0D IdxRange.</p>
 <p><strong>Returns:</strong></p>
@@ -913,66 +897,6 @@ inline auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::get
 inline IdxRangeSlice&lt; Grid1D &gt; DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::idx_range_for_deriv () const
 </code></pre>
 <p>This is equivalent to retrieving the argument deriv_idx_range_x from a dxField defined as: <a href="classDerivFieldMem.html"><strong>DerivFieldMem</strong></a>&lt;double, IdxRange&lt;dX, GridX, GridY&gt;, 1&gt; dxField(idx_range_x_y, deriv_idx_range_x); </p>
-<hr>
-
-<h3 id="function-operator">function operator[]</h3>
-<p><em>Get a ConstField describing a subset of the data.</em> </p>
-<pre><code class="language-C++">template&lt;class... QueryDDims&gt;
-inline constexpr auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::operator[] (
-    Idx&lt; QueryDDims... &gt; const &amp; slice_spec
-) const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>slice_spec</code> A discrete element describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>ConstField A subset of the data. </p>
-<hr>
-
-<h3 id="function-operator_1">function operator[]</h3>
-<p><em>Get a Field describing a subset of the data.</em> </p>
-<pre><code class="language-C++">template&lt;class... QueryDDims&gt;
-inline constexpr auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::operator[] (
-    Idx&lt; QueryDDims... &gt; const &amp; slice_spec
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>slice_spec</code> A discrete element describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>Field A subset of the data. </p>
-<hr>
-
-<h3 id="function-operator_2">function operator[]</h3>
-<p><em>Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).</em> </p>
-<pre><code class="language-C++">template&lt;class... QueryDDims&gt;
-inline KOKKOS_FUNCTION constexpr auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::operator[] (
-    IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>oidx_range</code> A discrete index range describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>Field A subset of the data. </p>
-<hr>
-
-<h3 id="function-operator_3">function operator[]</h3>
-<p><em>Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).</em> </p>
-<pre><code class="language-C++">template&lt;class... QueryDDims&gt;
-inline KOKKOS_FUNCTION constexpr auto DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;::operator[] (
-    IdxRange&lt; QueryDDims... &gt; const &amp; oidx_range
-) const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>oidx_range</code> A discrete index range describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>ConstField A subset of the data. </p>
 <hr>
 
 <h3 id="function-derivfieldcommon">function ~DerivFieldCommon</h3>

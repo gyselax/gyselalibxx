@@ -785,6 +785,30 @@ public:
         return base_type::get_internal_field(elem)();
     }
 
+    template &lt;class... QueryDDims&gt;
+    constexpr auto operator[](Idx&lt;QueryDDims...&gt; const&amp; slice_spec) const
+    {
+        return base_type::get_internal_field(slice_spec).span_cview();
+    }
+
+    template &lt;class... QueryDDims&gt;
+    constexpr auto operator[](Idx&lt;QueryDDims...&gt; const&amp; slice_spec)
+    {
+        return base_type::get_internal_field(slice_spec);
+    }
+
+    template &lt;class... QueryDDims&gt;
+    KOKKOS_FUNCTION constexpr auto operator[](IdxRange&lt;QueryDDims...&gt; const&amp; oidx_range)
+    {
+        return base_type::get_internal_field(oidx_range);
+    }
+
+    template &lt;class... QueryDDims&gt;
+    KOKKOS_FUNCTION constexpr auto operator[](IdxRange&lt;QueryDDims...&gt; const&amp; oidx_range) const
+    {
+        return base_type::get_internal_field(oidx_range).span_cview();
+    }
+
     view_type span_cview() const
     {
         return view_type(*this);

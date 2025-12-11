@@ -259,6 +259,18 @@ public:
         return base_type::get_internal_field(elem)();
     }
 
+    template <class... QueryDDims>
+    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec) const
+    {
+        return base_type::get_internal_field(slice_spec);
+    }
+
+    template <class... QueryDDims>
+    KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
+    {
+        return base_type::get_internal_field(oidx_range);
+    }
+
     KOKKOS_FUNCTION constexpr view_type span_cview() const
     {
         return view_type(*this);

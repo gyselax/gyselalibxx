@@ -96,6 +96,10 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 |  [**element\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-element_type) const & | [**operator()**](#function-operator_1) (DElem... elems) noexcept const<br>_Get an element from a constant field. A Idx describes the element of interest. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested._  |
 |  [**DerivFieldMem**](classDerivFieldMem.md) & | [**operator=**](#function-operator_2) ([**DerivFieldMem**](classDerivFieldMem.md) const & other) = delete<br>_Deleted copy operator._  |
 |  [**DerivFieldMem**](classDerivFieldMem.md) & | [**operator=**](#function-operator_3) ([**DerivFieldMem**](classDerivFieldMem.md) && other) = default<br> |
+|  constexpr auto | [**operator[]**](#function-operator_4) (Idx&lt; QueryDDims... &gt; const & slice\_spec) const<br>_Get a ConstField describing a subset of the data._  |
+|  constexpr auto | [**operator[]**](#function-operator_5) (Idx&lt; QueryDDims... &gt; const & slice\_spec) <br>_Get a Field describing a subset of the data._  |
+|  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_6) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) <br>_Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
+|  KOKKOS\_FUNCTION constexpr auto | [**operator[]**](#function-operator_7) (IdxRange&lt; QueryDDims... &gt; const & oidx\_range) const<br>_Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._  |
 |  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**span\_cview**](#function-span_cview) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
 |  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**span\_view**](#function-span_view-12) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
 |  [**span\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-span_type) | [**span\_view**](#function-span_view-22) () <br>_Get a modifiable_ [_**DerivField**_](classDerivField.md) _of this field._ |
@@ -519,6 +523,146 @@ Move-assigns a new value to this field
 **Returns:**
 
 \*this 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function operator[] 
+
+_Get a ConstField describing a subset of the data._ 
+```C++
+template<class... QueryDDims>
+inline constexpr auto DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::operator[] (
+    Idx< QueryDDims... > const & slice_spec
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `slice_spec` A discrete element describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.
+
+
+
+**Returns:**
+
+ConstField A subset of the data. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function operator[] 
+
+_Get a Field describing a subset of the data._ 
+```C++
+template<class... QueryDDims>
+inline constexpr auto DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::operator[] (
+    Idx< QueryDDims... > const & slice_spec
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `slice_spec` A discrete element describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.
+
+
+
+**Returns:**
+
+Field A subset of the data. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function operator[] 
+
+_Get a Field describing a subset of the data. This function allows a slice to be obtained however it is designed to return a Field. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._ 
+```C++
+template<class... QueryDDims>
+inline KOKKOS_FUNCTION constexpr auto DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::operator[] (
+    IdxRange< QueryDDims... > const & oidx_range
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `oidx_range` A discrete index range describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.
+
+
+
+**Returns:**
+
+Field A subset of the data. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function operator[] 
+
+_Get a ConstField describing a subset of the data. This function allows a slice to be obtained however it is designed to return a ConstField. It is therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3)._ 
+```C++
+template<class... QueryDDims>
+inline KOKKOS_FUNCTION constexpr auto DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::operator[] (
+    IdxRange< QueryDDims... > const & oidx_range
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `oidx_range` A discrete index range describing the position at which these dimensions should be indexed. If information about the derivatives is missing then it is assumed that the 0-th order derivative is requested.
+
+
+
+**Returns:**
+
+ConstField A subset of the data. 
 
 
 
