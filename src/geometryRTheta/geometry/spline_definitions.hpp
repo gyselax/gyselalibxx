@@ -2,7 +2,7 @@
 #pragma once
 #include <ddc/kernels/splines.hpp>
 
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 
 // --- Spline definitions
 int constexpr BSDegreeR = 3;

@@ -12,7 +12,7 @@
 
 
 /*
- * @file geometry.hpp
+ * @file geometry_r_theta.hpp
  *
  * Definition of
  *   - @f$ r@f$, @f$ \theta@f$, @f$(r, \theta)@f$ dimensions.

@@ -7,7 +7,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "iadvectionvx.hpp"
 #include "iadvectionx.hpp"
 #include "species_info.hpp"

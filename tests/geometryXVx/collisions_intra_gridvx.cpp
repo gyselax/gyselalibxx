@@ -6,7 +6,7 @@
 
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "mesh_builder.hpp"
 #include "pdi.h"
