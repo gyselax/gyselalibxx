@@ -12,6 +12,7 @@
 #include "geometry.hpp"
 #include "mask_tanh.hpp"
 #include "quadrature.hpp"
+#include "spline_definitions.hpp"
 #include "trapezoid_quadrature.hpp"
 
 TEST(Masks, Ordering)

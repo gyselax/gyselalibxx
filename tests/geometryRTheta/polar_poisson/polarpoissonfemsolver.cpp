@@ -19,6 +19,7 @@
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "spline_definitions.hpp"
 #include "test_cases.hpp"
 
 

@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.5.0] - 2026-02-03
+
+### Added
+
+### Fixed
+
+### Changed
+
+- Extract spline definitions from `geometry.hpp` files into files called `spline_definitions.hpp` which are dedicated to tests or simulations.
+
+### Deprecated
+
+### Removed
+
+- Remove unused temporal dimension `T` in `geometryXVx`.
+
 ## [v0.4.1] - 2025-12-12
 
 ### Fixed
