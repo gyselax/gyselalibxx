@@ -88,19 +88,7 @@ IdxRangeSp init_species_from_yaml(PC_tree_t conf_gyselax)
     return idx_range_sp;
 }
 
-struct MeshInitialisationResult
-{
-    IdxRangeSp idx_range_sp;
-    IdxRangeSpGrid mesh_sp;
-    IdxRangeSpVparMu mesh_sp_vparmu;
-    IdxRange<GridTor1> idx_range_tor1;
-    IdxRange<GridTor2> idx_range_tor2;
-    IdxRange<GridTor3> idx_range_tor3;
-    IdxRange<GridVpar> idx_range_vpar;
-    IdxRange<GridMu> idx_range_mu;
-};
-
-MeshInitialisationResult initialise_mesh(int rank, PC_tree_t conf_gyselax)
+IdxRangeSpGrid initialise_mesh(int rank, PC_tree_t conf_gyselax)
 {
     IdxRangeSp const idx_range_sp = init_species_from_yaml(conf_gyselax);
     if (rank == 0) {
@@ -137,32 +125,15 @@ MeshInitialisationResult initialise_mesh(int rank, PC_tree_t conf_gyselax)
         cout << "  mu: " << idx_range_mu.size() << endl;
     }
 
-    MeshInitialisationResult
-            result {idx_range_sp,
-                    IdxRangeSpGrid(
-                            idx_range_sp,
-                            idx_range_tor1,
-                            idx_range_tor2,
-                            idx_range_tor3,
-                            idx_range_vpar,
-                            idx_range_mu),
-                    IdxRangeSpVparMu(idx_range_sp, idx_range_vpar, idx_range_mu),
-                    idx_range_tor1,
-                    idx_range_tor2,
-                    idx_range_tor3,
-                    idx_range_vpar,
-                    idx_range_mu};
-    return result;
+    return IdxRangeSpGrid(idx_range_sp, idx_range_tor1, idx_range_tor2, idx_range_tor3, idx_range_vpar, idx_range_mu);
 }
 
-void init_distribution_fun(
-        DFieldSpGrid allfdistribu,
-        IdxRangeSpVparMu const& meshGridSpVparMu,
-        IdxRangeSpGrid const& meshGridSp,
-        PC_tree_t conf_gyselax,
-        IdxRangeSp const& idx_range_sp)
+void init_distribution_fun( DFieldSpGrid allfdistribu, IdxRangeSpGrid const& mesh, PC_tree_t conf_gyselax)
 {
     // Read species-specific parameters from YAML
+    IdxRangeSp const idx_range_sp(mesh);
+    IdxRangeSpVparMu const idx_range_sp_vparmu(mesh);
+
     int const nb_species = idx_range_sp.size();
     host_t<DFieldMem<IdxRangeSp>> density_host(idx_range_sp);
     host_t<DFieldMem<IdxRangeSp>> temperature_host(idx_range_sp);
@@ -186,17 +157,16 @@ void init_distribution_fun(
     ddc::parallel_deepcopy(temperature, temperature_host);
     ddc::parallel_deepcopy(mean_velocity, mean_velocity_host);
 
-    DFieldMemSpVparMu allfequilibrium(meshGridSpVparMu);
+    DFieldMemSpVparMu allfequilibrium(idx_range_sp_vparmu);
     DFieldSpVparMu allfequilibrium_field = get_field(allfequilibrium);
-    DFieldSpGrid allfdistribu_field = get_field(allfdistribu);
 
     // Compute Maxwellian distribution: fM(vpar,mu) = (2*PI*T)**(-1.5)*n*exp(-energy)
     // with energy = 0.5*(vpar-Upar)**2/T (magnetic_field = 0, so mu*B term is zero)
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            meshGridSpVparMu,
+            idx_range_sp_vparmu,
             KOKKOS_LAMBDA(IdxSpVparMu const ispvparmu) {
-                IdxSp const isp = ddc::select<Species>(ispvparmu);
+                IdxSp const isp(ispvparmu);
                 double const density_loc = density(isp);
                 double const temperature_loc = temperature(isp);
                 double const mean_velocity_loc = mean_velocity(isp);
@@ -210,36 +180,44 @@ void init_distribution_fun(
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            meshGridSp,
+            mesh,
             KOKKOS_LAMBDA(IdxSpGrid const ispgrid) {
                 IdxSpVparMu const ispvparmu(ispgrid);
-                allfdistribu_field(ispgrid) = allfequilibrium_field(ispvparmu);
+                allfdistribu(ispgrid) = allfequilibrium_field(ispvparmu);
             });
 }
 
 void write_fdistribu(
         int rank,
-        MeshInitialisationResult const& mesh,
+        IdxRangeSpGrid const& mesh,
         host_t<DFieldMemSpGrid> const& allfdistribu_host)
 {
     if (rank == 0) {
         cout << "Writing 5D distribution function and coordinates to file." << endl;
     }
 
+    // Extract individual index ranges from mesh
+    IdxRangeSp const idx_range_sp(mesh);
+    IdxRange<GridTor1> const idx_range_tor1(mesh);
+    IdxRange<GridTor2> const idx_range_tor2(mesh);
+    IdxRange<GridTor3> const idx_range_tor3(mesh);
+    IdxRange<GridVpar> const idx_range_vpar(mesh);
+    IdxRange<GridMu> const idx_range_mu(mesh);
+
     // Expose index range for parallel I/O
-    PDI_expose_idx_range(mesh.mesh_sp, "local_fdistribu");
+    PDI_expose_idx_range(mesh, "local_fdistribu");
 
     // Expose species extents
-    std::size_t species_extent = mesh.idx_range_sp.size();
+    std::size_t species_extent = idx_range_sp.size();
     std::array<std::size_t, 1> species_extents_arr = {species_extent};
     PDI_expose("species_extents", species_extents_arr.data(), PDI_OUT);
 
     // Expose coordinate extents
-    std::array<std::size_t, 1> tor1_extents_arr = {mesh.idx_range_tor1.size()};
-    std::array<std::size_t, 1> tor2_extents_arr = {mesh.idx_range_tor2.size()};
-    std::array<std::size_t, 1> tor3_extents_arr = {mesh.idx_range_tor3.size()};
-    std::array<std::size_t, 1> vpar_extents_arr = {mesh.idx_range_vpar.size()};
-    std::array<std::size_t, 1> mu_extents_arr = {mesh.idx_range_mu.size()};
+    std::array<std::size_t, 1> tor1_extents_arr = {idx_range_tor1.size()};
+    std::array<std::size_t, 1> tor2_extents_arr = {idx_range_tor2.size()};
+    std::array<std::size_t, 1> tor3_extents_arr = {idx_range_tor3.size()};
+    std::array<std::size_t, 1> vpar_extents_arr = {idx_range_vpar.size()};
+    std::array<std::size_t, 1> mu_extents_arr = {idx_range_mu.size()};
     PDI_expose("tor1_extents", tor1_extents_arr.data(), PDI_OUT);
     PDI_expose("tor2_extents", tor2_extents_arr.data(), PDI_OUT);
     PDI_expose("tor3_extents", tor3_extents_arr.data(), PDI_OUT);
@@ -247,11 +225,11 @@ void write_fdistribu(
     PDI_expose("mu_extents", mu_extents_arr.data(), PDI_OUT);
 
     // Expose coordinates to PDI
-    expose_mesh_to_pdi("tor1", mesh.idx_range_tor1);
-    expose_mesh_to_pdi("tor2", mesh.idx_range_tor2);
-    expose_mesh_to_pdi("tor3", mesh.idx_range_tor3);
-    expose_mesh_to_pdi("vpar", mesh.idx_range_vpar);
-    expose_mesh_to_pdi("mu", mesh.idx_range_mu);
+    expose_mesh_to_pdi("tor1", idx_range_tor1);
+    expose_mesh_to_pdi("tor2", idx_range_tor2);
+    expose_mesh_to_pdi("tor3", idx_range_tor3);
+    expose_mesh_to_pdi("vpar", idx_range_vpar);
+    expose_mesh_to_pdi("mu", idx_range_mu);
 
     // Expose distribution function to PDI and trigger write event
     ddc::PdiEvent("write_fdistribu").with("fdistribu_sptor3Dv2D", allfdistribu_host);
@@ -309,10 +287,11 @@ struct FluidMomentsData
 };
 
 FluidMomentsData compute_fluid_moments(
-        MeshInitialisationResult const& mesh,
+        IdxRangeSpGrid const& mesh,
         DConstField<IdxRangeSpGrid> const allfdistribu)
 {
-    IdxRangeVparMu const idxrange_vparmu(mesh.idx_range_vpar, mesh.idx_range_mu);
+    // Extract index range from mesh
+    IdxRangeVparMu const idxrange_vparmu(mesh);
 
     // Initialise quadrature coefficients for integration over vpar and mu
     DFieldMem<IdxRangeVparMu> quadrature_coeffs_vparmu_alloc(
@@ -324,11 +303,7 @@ FluidMomentsData compute_fluid_moments(
     ::FluidMoments fluid_moments_op(integrate_vparmu);
 
     // Allocate memory for fluid moments
-    IdxRangeSpTor3D const idxrange_sptor3d(
-            mesh.idx_range_sp,
-            mesh.idx_range_tor1,
-            mesh.idx_range_tor2,
-            mesh.idx_range_tor3);
+    IdxRangeSpTor3D const idxrange_sptor3d(mesh);
     DFieldMem<IdxRangeSpTor3D> density_alloc(idxrange_sptor3d);
     DFieldMem<IdxRangeSpTor3D> mean_velocity_alloc(idxrange_sptor3d);
     DFieldMem<IdxRangeSpTor3D> temperature_alloc(idxrange_sptor3d);
@@ -386,18 +361,13 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     // Initialisation of the mesh (sp, space, phase-space)
     //---------------------------------------------------------
-    MeshInitialisationResult const mesh = initialise_mesh(rank, configs.conf_gyselax);
+    IdxRangeSpGrid const mesh = initialise_mesh(rank, configs.conf_gyselax);
     //---------------------------------------------------------
     // Initialisation of the distribution function
     //---------------------------------------------------------
     time_points[0] = steady_clock::now();
-    DFieldMemSpGrid allfdistribu(mesh.mesh_sp);
-    init_distribution_fun(
-            allfdistribu,
-            mesh.mesh_sp_vparmu,
-            mesh.mesh_sp,
-            configs.conf_gyselax,
-            mesh.idx_range_sp);
+    DFieldMemSpGrid allfdistribu(mesh);
+    init_distribution_fun(get_field(allfdistribu), mesh, configs.conf_gyselax);
     time_points[1] = steady_clock::now();
 
     //---------------------------------------------------------
@@ -409,7 +379,7 @@ int main(int argc, char** argv)
     }
 
     if (version == "mpi_transpose") {
-        MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh.mesh_sp, MPI_COMM_WORLD);
+        MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh, MPI_COMM_WORLD);
     }
     time_points[2] = steady_clock::now();
     //---------------------------------------------------------
@@ -423,15 +393,11 @@ int main(int argc, char** argv)
     // Write 5D distribution function and coordinates to file using PDI
     //---------------------------------------------------------
     // Create host version of distribution function for I/O (needed for PDI)
-    host_t<DFieldMemSpGrid> allfdistribu_host(mesh.mesh_sp);
+    host_t<DFieldMemSpGrid> allfdistribu_host(mesh);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
     // Create host versions of fluid moments for I/O
-    IdxRangeSpTor3D const idxrange_sptor3d(
-            mesh.idx_range_sp,
-            mesh.idx_range_tor1,
-            mesh.idx_range_tor2,
-            mesh.idx_range_tor3);
+    IdxRangeSpTor3D const idxrange_sptor3d(mesh);
     host_t<DFieldMemSpTor3D> density_host_alloc(idxrange_sptor3d);
     host_t<DFieldMemSpTor3D> mean_velocity_host_alloc(idxrange_sptor3d);
     host_t<DFieldMemSpTor3D> temperature_host_alloc(idxrange_sptor3d);
@@ -446,12 +412,18 @@ int main(int argc, char** argv)
 
     // Expose fluid moments to PDI
     if (rank == 0) {
+        // Extract index ranges for extents
+        IdxRangeSp const idx_range_sp(mesh);
+        IdxRange<GridTor1> const idx_range_tor1(mesh);
+        IdxRange<GridTor2> const idx_range_tor2(mesh);
+        IdxRange<GridTor3> const idx_range_tor3(mesh);
+        
         // Expose extents for fluid moments
         std::array<std::size_t, 4> moments_extents_arr
-                = {mesh.idx_range_sp.size(),
-                   mesh.idx_range_tor1.size(),
-                   mesh.idx_range_tor2.size(),
-                   mesh.idx_range_tor3.size()};
+                = {idx_range_sp.size(),
+                   idx_range_tor1.size(),
+                   idx_range_tor2.size(),
+                   idx_range_tor3.size()};
         PDI_expose("density_extents", moments_extents_arr.data(), PDI_OUT);
         PDI_expose("mean_velocity_extents", moments_extents_arr.data(), PDI_OUT);
         PDI_expose("temperature_extents", moments_extents_arr.data(), PDI_OUT);
