@@ -10,7 +10,7 @@
 
 
 
-* `#include "geometry.hpp"`
+* `#include "geometry_xvx.hpp"`
 * `#include "iqnsolver.hpp"`
 
 

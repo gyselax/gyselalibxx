@@ -3,11 +3,29 @@
   <compounddef id="kinetic__source_8hpp" kind="file" language="C++">
     <compoundname>kinetic_source.hpp</compoundname>
     <includes local="no">cmath</includes>
-    <includes local="yes">geometry.hpp</includes>
+    <includes refid="geometry__xvx_8hpp" local="yes">geometry_xvx.hpp</includes>
     <includes refid="irighthandside_8hpp" local="yes">irighthandside.hpp</includes>
     <includedby refid="kinetic__source_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/kinetic_source.cpp</includedby>
     <incdepgraph>
-      <node id="4">
+      <node id="3">
+        <label>geometry_xvx.hpp</label>
+        <link refid="geometry__xvx_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
         <label>irighthandside.hpp</label>
         <link refid="irighthandside_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -20,14 +38,88 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>moments.hpp</label>
+        <link refid="moments_8hpp_source"/>
+      </node>
+      <node id="14">
+        <label>species_info.hpp</label>
+        <link refid="species__info_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>non_uniform_interpolation_points.hpp</label>
+        <link refid="non__uniform__interpolation__points_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>cassert</label>
       </node>
       <node id="2">
         <label>cmath</label>
       </node>
-      <node id="3">
-        <label>geometry.hpp</label>
+      <node id="4">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="9">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="6">
+        <label>type_traits</label>
+      </node>
+      <node id="7">
+        <label>utility</label>
       </node>
     </incdepgraph>
     <innerclass refid="classKineticSource" prot="public">KineticSource</innerclass>
@@ -41,7 +133,7 @@
 <codeline lineno="3"><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;cmath&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight></codeline>
-<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry_xvx.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;irighthandside.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="31" refid="classKineticSource" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classKineticSource" kindref="compound">KineticSource</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIRightHandSide" kindref="compound">IRightHandSide</ref></highlight></codeline>

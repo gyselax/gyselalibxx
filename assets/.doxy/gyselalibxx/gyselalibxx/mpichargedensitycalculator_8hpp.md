@@ -13,7 +13,7 @@
 * `#include <mpi.h>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_helper.hpp"`
-* `#include "geometry.hpp"`
+* `#include "geometry_xyvxvy.hpp"`
 * `#include "ichargedensitycalculator.hpp"`
 * `#include "quadrature.hpp"`
 

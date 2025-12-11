@@ -14,7 +14,7 @@
 * `#include <cmath>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_aliases.hpp"`
-* `#include "geometry.hpp"`
+* `#include "geometry_xvx.hpp"`
 * `#include "irighthandside.hpp"`
 * `#include "quadrature.hpp"`
 * `#include "trapezoid_quadrature.hpp"`

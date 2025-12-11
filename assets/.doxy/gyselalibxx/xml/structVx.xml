@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structVx" kind="struct" language="C++" prot="public">
     <compoundname>Vx</compoundname>
-    <includes refid="geometryRTheta_2geometry_2geometry_8hpp" local="no">geometry.hpp</includes>
+    <includes refid="geometry__r__theta_8hpp" local="no">geometry_r_theta.hpp</includes>
     <sectiondef kind="public-static-attrib">
       <memberdef kind="variable" id="structVx_1aabb61a786e12232d6e6adaf41a545a4a" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>bool constexpr</type>
@@ -19,17 +19,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="271" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="271" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="271" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="271" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>Define non periodic real <ref refid="structX" kindref="compound">X</ref> velocity dimension. </para>
     </briefdescription>
     <detaileddescription>
-<para>A class which describes the real space in the second velocity direction <ref refid="structX" kindref="compound">X</ref>.</para>
 <para>A class which describes the real space in the X-velocity direction. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" line="265" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp" bodystart="266" bodyend="272"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" line="265" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp" bodystart="266" bodyend="272"/>
     <listofallmembers>
       <member refid="structVx_1aabb61a786e12232d6e6adaf41a545a4a" prot="public" virt="non-virtual"><scope>Vx</scope><name>PERIODIC</name></member>
     </listofallmembers>

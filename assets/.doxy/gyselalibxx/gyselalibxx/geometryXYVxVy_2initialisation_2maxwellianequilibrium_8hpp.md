@@ -11,7 +11,7 @@
 
 
 * `#include <paraconf.h>`
-* `#include "geometry.hpp"`
+* `#include "geometry_xyvxvy.hpp"`
 * `#include "iequilibrium.hpp"`
 * `#include "paraconfpp.hpp"`
 * `#include "species_info.hpp"`

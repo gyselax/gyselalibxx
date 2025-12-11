@@ -3,7 +3,6 @@
   <compounddef id="structGridVx" kind="struct" language="C++" prot="public">
     <compoundname>GridVx</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; GRID_VX_UNIFORM, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</basecompoundref>
-    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; Vx &gt;</basecompoundref>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -14,11 +13,6 @@
         <link refid="structGridVx"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>UniformGridBase&lt; Vx &gt;</label>
       </node>
       <node id="2">
         <label>std::conditional_t&lt; GRID_VX_UNIFORM, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</label>
@@ -30,17 +24,12 @@
         <link refid="structGridVx"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="3">
-        <label>UniformGridBase&lt; Vx &gt;</label>
       </node>
       <node id="2">
         <label>std::conditional_t&lt; GRID_VX_UNIFORM, UniformGridBase&lt; Vx &gt;, NonUniformGridBase&lt; Vx &gt; &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="65" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="66" bodyend="67"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="65" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="66" bodyend="67"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

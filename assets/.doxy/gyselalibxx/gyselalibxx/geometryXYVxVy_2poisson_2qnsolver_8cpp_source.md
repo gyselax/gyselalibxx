@@ -18,7 +18,7 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 #include "qnsolver.hpp"
 #include "vector_index_tools.hpp"
 

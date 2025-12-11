@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classGeometryXVx" kind="class" language="C++" prot="public">
     <compoundname>GeometryXVx</compoundname>
-    <includes refid="geometryXVx_2geometry_2geometry_8hpp" local="no">geometry.hpp</includes>
+    <includes refid="geometry__xvx_8hpp" local="no">geometry_xvx.hpp</includes>
     <sectiondef kind="public-type">
       <memberdef kind="typedef" id="classGeometryXVx_1a23b86e4306321373542bf91b8858dfc1" prot="public" static="no">
         <templateparamlist>
@@ -22,7 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="267" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="267" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="267" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="267" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGeometryXVx_1a801a3e9956431568cae987d46f81b968" prot="public" static="no">
         <templateparamlist>
@@ -42,7 +42,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="273" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="273" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="273" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="273" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGeometryXVx_1a0e14480d4976661b66acb462e3beb309" prot="public" static="no">
         <type>IdxRangeX</type>
@@ -57,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="278" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="278" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="278" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="278" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGeometryXVx_1a8903d9f025308985617b427783801967" prot="public" static="no">
         <type>IdxRangeVx</type>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="283" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="283" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="283" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="283" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classGeometryXVx_1afca0714427d19b4e591abd6f7b0656e8" prot="public" static="no">
         <type>IdxRangeSpXVx</type>
@@ -87,7 +87,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="290" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="290" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="290" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="290" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -95,7 +95,7 @@
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="260" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="261" bodyend="291"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="260" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="261" bodyend="291"/>
     <listofallmembers>
       <member refid="classGeometryXVx_1afca0714427d19b4e591abd6f7b0656e8" prot="public" virt="non-virtual"><scope>GeometryXVx</scope><name>IdxRangeFdistribu</name></member>
       <member refid="classGeometryXVx_1a0e14480d4976661b66acb462e3beb309" prot="public" virt="non-virtual"><scope>GeometryXVx</scope><name>IdxRangeSpatial</name></member>

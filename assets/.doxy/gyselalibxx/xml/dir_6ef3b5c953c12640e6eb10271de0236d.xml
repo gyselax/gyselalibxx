@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="dir_6ef3b5c953c12640e6eb10271de0236d" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry</compoundname>
-    <innerfile refid="geometryXY_2geometry_2geometry_8hpp">geometry.hpp</innerfile>
+    <innerfile refid="geometry__xy_8hpp">geometry_xy.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

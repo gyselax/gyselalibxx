@@ -78,5 +78,5 @@ Inherits the following classes: UniformGridBase< Y >,  UniformGridBase< Y >
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/geometry/geometry_xy.hpp`
 

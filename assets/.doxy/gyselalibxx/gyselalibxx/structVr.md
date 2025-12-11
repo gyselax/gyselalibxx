@@ -10,7 +10,7 @@
 
 _Define non periodic real_ [_**R**_](structR.md) _velocity dimension._
 
-* `#include <geometry.hpp>`
+* `#include <geometry_r_theta.hpp>`
 
 
 
@@ -99,5 +99,5 @@ bool constexpr Vr::PERIODIC;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp`
 

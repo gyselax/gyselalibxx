@@ -10,7 +10,7 @@
 
 _Define non periodic real_ [_**X**_](structX.md) _velocity dimension._[More...](#detailed-description)
 
-* `#include <geometry.hpp>`
+* `#include <geometry_r_theta.hpp>`
 
 
 
@@ -84,9 +84,6 @@ _Define non periodic real_ [_**X**_](structX.md) _velocity dimension._[More...](
 ## Detailed Description
 
 
-A class which describes the real space in the second velocity direction [**X**](structX.md).
-
-
 A class which describes the real space in the X-velocity direction. 
 
 
@@ -113,5 +110,5 @@ A boolean indicating if the dimension is periodic.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp`
 

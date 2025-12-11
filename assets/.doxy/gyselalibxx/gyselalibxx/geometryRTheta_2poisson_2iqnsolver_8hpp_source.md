@@ -14,7 +14,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 
 class IQNSolver
 {

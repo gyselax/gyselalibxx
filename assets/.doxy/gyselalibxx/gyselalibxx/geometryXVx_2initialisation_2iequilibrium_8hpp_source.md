@@ -16,7 +16,7 @@
 
 #include <paraconf.h>
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "paraconfpp.hpp"
 
 class IEquilibrium

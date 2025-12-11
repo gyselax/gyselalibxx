@@ -24,7 +24,7 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="18">
         <label>iboltzmannsolver.hpp</label>
         <link refid="iboltzmannsolver_8hpp_source"/>
         <childnode refid="11" relation="include">
@@ -45,7 +45,53 @@
         <link refid="geometryXVx_2boltzmann_2splitvlasovsolver_8hpp_source"/>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>geometry_xvx.hpp</label>
+        <link refid="geometry__xvx_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>moments.hpp</label>
+        <link refid="moments_8hpp_source"/>
+      </node>
+      <node id="17">
+        <label>species_info.hpp</label>
+        <link refid="species__info_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -68,6 +114,20 @@
         <childnode refid="4" relation="include">
         </childnode>
       </node>
+      <node id="16">
+        <label>non_uniform_interpolation_points.hpp</label>
+        <link refid="non__uniform__interpolation__points_8hpp_source"/>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
       <node id="7">
         <label>cassert</label>
       </node>
@@ -80,8 +140,11 @@
       <node id="5">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="11">
-        <label>geometry.hpp</label>
+      <node id="13">
+        <label>type_traits</label>
+      </node>
+      <node id="14">
+        <label>utility</label>
       </node>
     </incdepgraph>
     <briefdescription>

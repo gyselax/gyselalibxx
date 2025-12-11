@@ -1,0 +1,928 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="geometry__vpar__mu_8hpp" kind="file" language="C++">
+    <compoundname>geometry_vpar_mu.hpp</compoundname>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="ddc__alias__inline__functions_8hpp" local="yes">ddc_alias_inline_functions.hpp</includes>
+    <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
+    <includes refid="ddc__helper_8hpp" local="yes">ddc_helper.hpp</includes>
+    <includes refid="species__info_8hpp" local="yes">species_info.hpp</includes>
+    <includedby refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/iequilibrium.hpp</includedby>
+    <includedby refid="geometryVparMu_2initialisation_2iinitialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/iinitialisation.hpp</includedby>
+    <includedby refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp</includedby>
+    <includedby refid="noperturbinitialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/noperturbinitialisation.hpp</includedby>
+    <incdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp</label>
+        <link refid="geometry__vpar__mu_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>species_info.hpp</label>
+        <link refid="species__info_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="6">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>cassert</label>
+      </node>
+      <node id="10">
+        <label>cmath</label>
+      </node>
+      <node id="2">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="7">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="4">
+        <label>type_traits</label>
+      </node>
+      <node id="5">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp</label>
+        <link refid="geometry__vpar__mu_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/iequilibrium.hpp</label>
+        <link refid="geometryVparMu_2initialisation_2iequilibrium_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/iinitialisation.hpp</label>
+        <link refid="geometryVparMu_2initialisation_2iinitialisation_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/maxwellianequilibrium.hpp</label>
+        <link refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/initialisation/noperturbinitialisation.hpp</label>
+        <link refid="noperturbinitialisation_8hpp_source"/>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structVpar" prot="public">Vpar</innerclass>
+    <innerclass refid="structMu" prot="public">Mu</innerclass>
+    <innerclass refid="structGridVpar" prot="public">GridVpar</innerclass>
+    <innerclass refid="structGridMu" prot="public">GridMu</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1ad0efccc3058de7d4d7625ac3c0757967" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structVpar" kindref="compound">Vpar</ref> &gt;</type>
+        <definition>using CoordVpar =  Coord&lt;Vpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="41" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a84b0bb1b7d91b66540dd8ae0bdd7921a" prot="public" static="no">
+        <type>Coord&lt; <ref refid="structMu" kindref="compound">Mu</ref> &gt;</type>
+        <definition>using CoordMu =  Coord&lt;Mu&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="42" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a4bda760b5ade00c0425b706ced450e23" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structGridVpar" kindref="compound">GridVpar</ref> &gt;</type>
+        <definition>using IdxVpar =  Idx&lt;GridVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="53" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a4c9fac8affcf0f730f36b26554b3e481" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxMu =  Idx&lt;GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a9cce8e871d2238c2a0775c0fcd9b4c5f" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structGridVpar" kindref="compound">GridVpar</ref>, <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxVparMu =  Idx&lt;GridVpar, GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1aec556455d0c9620d7a1d984b2864558a" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVpar" kindref="compound">GridVpar</ref>, <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxSpVparMu =  Idx&lt;Species, GridVpar, GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="56" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1aa30c4305839a759900d14a56d3ab2b8b" prot="public" static="no">
+        <type>Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVpar" kindref="compound">GridVpar</ref> &gt;</type>
+        <definition>using IdxSpVpar =  Idx&lt;Species, GridVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxSpVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="57" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1aea6217169da46dbd0354aeb65289ccfa" prot="public" static="no">
+        <type>IdxStep&lt; <ref refid="structGridVpar" kindref="compound">GridVpar</ref> &gt;</type>
+        <definition>using IdxStepVpar =  IdxStep&lt;GridVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxStepVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="60" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a4a0e6ba99728870f15c1701bef5c539d" prot="public" static="no">
+        <type>IdxStep&lt; <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxStepMu =  IdxStep&lt;GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxStepMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="61" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a001b8c707fa8557c525764e3e30070cc" prot="public" static="no">
+        <type>IdxStep&lt; <ref refid="structGridVpar" kindref="compound">GridVpar</ref>, <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxStepVparMu =  IdxStep&lt;GridVpar, GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxStepVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="62" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a9e5e4458240bd5a35bbcffdb92cb2de6" prot="public" static="no">
+        <type>IdxStep&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVpar" kindref="compound">GridVpar</ref>, <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxStepSpVparMu =  IdxStep&lt;Species, GridVpar, GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxStepSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="63" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a538d030951359a5473a8b870fc5a837a" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structGridVpar" kindref="compound">GridVpar</ref> &gt;</type>
+        <definition>using IdxRangeVpar =  IdxRange&lt;GridVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="66" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1aa61d71a1f90672cc39884253a29912a6" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxRangeMu =  IdxRange&lt;GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="67" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a434a38596aa0aa03a4110459ec0b54bb" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structGridVpar" kindref="compound">GridVpar</ref>, <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxRangeVparMu =  IdxRange&lt;GridVpar, GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="68" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a2faaad6119e483878ac32bd8deff8358" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVpar" kindref="compound">GridVpar</ref>, <ref refid="structGridMu" kindref="compound">GridMu</ref> &gt;</type>
+        <definition>using IdxRangeSpVparMu =  IdxRange&lt;Species, GridVpar, GridMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="69" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a57184f63e6ec425b6005830ced47267f" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVpar" kindref="compound">GridVpar</ref> &gt;</type>
+        <definition>using IdxRangeSpVpar =  IdxRange&lt;Species, GridVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSpVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="70" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1accd8fb1d4714e80d301d4556dbfbd0a5" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>FieldMem&lt; ElementType, IdxRangeVpar &gt;</type>
+        <definition>using FieldMemVpar =  FieldMem&lt;ElementType, IdxRangeVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldMemVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="74" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1aa45eb00266e7242276749d21d481dbe3" prot="public" static="no">
+        <type>FieldMemVpar&lt; double &gt;</type>
+        <definition>using DFieldMemVpar =  FieldMemVpar&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldMemVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="75" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1ad23613b6e47b8145c1c8f7233f80e303" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>FieldMem&lt; ElementType, IdxRangeMu &gt;</type>
+        <definition>using FieldMemMu =  FieldMem&lt;ElementType, IdxRangeMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldMemMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="78" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a5a9abc233775b817a676c2d5903726a9" prot="public" static="no">
+        <type>FieldMemMu&lt; double &gt;</type>
+        <definition>using DFieldMemMu =  FieldMemMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldMemMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="79" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a511cee93c0928358e4a7788143086989" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>FieldMem&lt; ElementType, IdxRangeVparMu &gt;</type>
+        <definition>using FieldMemVparMu =  FieldMem&lt;ElementType, IdxRangeVparMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldMemVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="82" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a5092282a848a62fe6094121565eb0caf" prot="public" static="no">
+        <type>FieldMemVparMu&lt; double &gt;</type>
+        <definition>using DFieldMemVparMu =  FieldMemVparMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldMemVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="83" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a07532463420622449f403fe60dbc543e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>FieldMem&lt; ElementType, IdxRangeSpVparMu &gt;</type>
+        <definition>using FieldMemSpVparMu =  FieldMem&lt;ElementType, IdxRangeSpVparMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldMemSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="86" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a4c86871b952fe3e61428d89d8020b0ad" prot="public" static="no">
+        <type>FieldMemSpVparMu&lt; double &gt;</type>
+        <definition>using DFieldMemSpVparMu =  FieldMemSpVparMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldMemSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="87" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a3cb5816f1c7043fc4fa7184677ff3444" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>FieldMem&lt; ElementType, IdxRangeSpVpar &gt;</type>
+        <definition>using FieldMemSpVpar =  FieldMem&lt;ElementType, IdxRangeSpVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldMemSpVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="90" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a7d959af510c1e658577434b80447bdd1" prot="public" static="no">
+        <type>FieldMemSpVpar&lt; double &gt;</type>
+        <definition>using DFieldMemSpVpar =  FieldMemSpVpar&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldMemSpVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="91" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1aa97ec528314375a5c7b366f110941ad9" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>Field&lt; ElementType, IdxRangeVpar &gt;</type>
+        <definition>using FieldVpar =  Field&lt;ElementType, IdxRangeVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="94" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a79502ba62ad8c11cd7b76904f4c33ea1" prot="public" static="no">
+        <type>FieldVpar&lt; double &gt;</type>
+        <definition>using DFieldVpar =  FieldVpar&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="95" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a1a2c6e3f67b79c55e5bfffb0cccba110" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>Field&lt; ElementType, IdxRangeMu &gt;</type>
+        <definition>using FieldMu =  Field&lt;ElementType, IdxRangeMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="98" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1ae9b332566a618424aab28a43d5f505bf" prot="public" static="no">
+        <type>FieldMu&lt; double &gt;</type>
+        <definition>using DFieldMu =  FieldMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="99" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a094741b9a84933e3fab69c3318b0fee7" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>Field&lt; ElementType, IdxRangeVparMu &gt;</type>
+        <definition>using FieldVparMu =  Field&lt;ElementType, IdxRangeVparMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="102" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a456114b3ba568439aca65bb2b7b3f8fc" prot="public" static="no">
+        <type>FieldVparMu&lt; double &gt;</type>
+        <definition>using DFieldVparMu =  FieldVparMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="103" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="103" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1aa168d70da07da30c8d56c901ae517492" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>Field&lt; ElementType, IdxRangeSpVparMu &gt;</type>
+        <definition>using FieldSpVparMu =  Field&lt;ElementType, IdxRangeSpVparMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="106" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="106" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a7f74de30ead6a6ccf5001e24ef551515" prot="public" static="no">
+        <type>FieldSpVparMu&lt; double &gt;</type>
+        <definition>using DFieldSpVparMu =  FieldSpVparMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="107" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a802906d838a590a778e246114cfe8adb" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>Field&lt; ElementType, IdxRangeSpVpar &gt;</type>
+        <definition>using FieldSpVpar =  Field&lt;ElementType, IdxRangeSpVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>FieldSpVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="110" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1afe4191f38c5c3fa585ad02d41ee0ac2b" prot="public" static="no">
+        <type>FieldSpVpar&lt; double &gt;</type>
+        <definition>using DFieldSpVpar =  FieldSpVpar&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DFieldSpVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="111" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a363e71eb72bedf9a4543f1ba731c1bb6" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; ElementType, IdxRangeVpar &gt;</type>
+        <definition>using ConstFieldVpar =  ConstField&lt;ElementType, IdxRangeVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>ConstFieldVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="114" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="114" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a1123c34c2c2ee4e52cabbe1ba6e1d768" prot="public" static="no">
+        <type>ConstFieldVpar&lt; double &gt;</type>
+        <definition>using DConstFieldVpar =  ConstFieldVpar&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstFieldVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="115" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1ab3d757a4e5e028b5c73c795564b4ed67" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; ElementType, IdxRangeMu &gt;</type>
+        <definition>using ConstFieldMu =  ConstField&lt;ElementType, IdxRangeMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>ConstFieldMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="118" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1ac91da3efb61a1aced46699fac1df646a" prot="public" static="no">
+        <type>ConstFieldMu&lt; double &gt;</type>
+        <definition>using DConstFieldMu =  ConstFieldMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstFieldMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="119" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a0cae550ee5e8118fdcc0052b568e7fc3" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; ElementType, IdxRangeVparMu &gt;</type>
+        <definition>using ConstFieldVparMu =  ConstField&lt;ElementType, IdxRangeVparMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>ConstFieldVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="122" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1af13a50d265c72b42ef54f4d14daaa196" prot="public" static="no">
+        <type>ConstFieldVparMu&lt; double &gt;</type>
+        <definition>using DConstFieldVparMu =  ConstFieldVparMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstFieldVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="123" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1ae005296dfa71dec2937ea5c12afcc056" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; ElementType, IdxRangeSpVparMu &gt;</type>
+        <definition>using ConstFieldSpVparMu =  ConstField&lt;ElementType, IdxRangeSpVparMu&gt;</definition>
+        <argsstring></argsstring>
+        <name>ConstFieldSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="126" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a667fef0a9b5a6452a48624ae6a8b0e1b" prot="public" static="no">
+        <type>ConstFieldSpVparMu&lt; double &gt;</type>
+        <definition>using DConstFieldSpVparMu =  ConstFieldSpVparMu&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstFieldSpVparMu</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="127" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1aff964a13fb61d1b733112d19f406a7ff" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class ElementType</type>
+          </param>
+        </templateparamlist>
+        <type>ConstField&lt; ElementType, IdxRangeSpVpar &gt;</type>
+        <definition>using ConstFieldSpVpar =  ConstField&lt;ElementType, IdxRangeSpVpar&gt;</definition>
+        <argsstring></argsstring>
+        <name>ConstFieldSpVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="130" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="geometry__vpar__mu_8hpp_1a6e9da85e3513337856b2f4d91575997f" prot="public" static="no">
+        <type>ConstFieldSpVpar&lt; double &gt;</type>
+        <definition>using DConstFieldSpVpar =  ConstFieldSpVpar&lt;double&gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstFieldSpVpar</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="131" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_alias_inline_functions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_info.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>@file<sp/>geometry_vpar_mu.hpp</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="structVpar" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVpar" kindref="compound">Vpar</ref></highlight></codeline>
+<codeline lineno="19"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="25" refid="structVpar_1a8e78c5d93bb2324b0a23c37d51a6794c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structVpar_1a8e78c5d93bb2324b0a23c37d51a6794c" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="30" refid="structMu" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structMu" kindref="compound">Mu</ref></highlight></codeline>
+<codeline lineno="31"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37" refid="structMu_1a1bbcdcd9e3b01b083631930c83c726c3" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structMu_1a1bbcdcd9e3b01b083631930c83c726c3" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Coord<sp/>=<sp/>position<sp/>of<sp/>a<sp/>coordinate<sp/>in<sp/>the<sp/>vector<sp/>space</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordVpar<sp/>=<sp/>Coord&lt;Vpar&gt;;</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordMu<sp/>=<sp/>Coord&lt;Mu&gt;;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="structGridVpar" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGridVpar" kindref="compound">GridVpar</ref><sp/>:<sp/>UniformGridBase&lt;Vpar&gt;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="48" refid="structGridMu" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGridMu" kindref="compound">GridMu</ref><sp/>:<sp/>UniformGridBase&lt;Mu&gt;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Idx<sp/>=<sp/>index<sp/>of<sp/>the<sp/>point<sp/>in<sp/>the<sp/>point<sp/>sampling</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxVpar<sp/>=<sp/>Idx&lt;GridVpar&gt;;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxMu<sp/>=<sp/>Idx&lt;GridMu&gt;;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxVparMu<sp/>=<sp/>Idx&lt;GridVpar,<sp/>GridMu&gt;;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxSpVparMu<sp/>=<sp/>Idx&lt;Species,<sp/>GridVpar,<sp/>GridMu&gt;;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxSpVpar<sp/>=<sp/>Idx&lt;Species,<sp/>GridVpar&gt;;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IdxStep<sp/>=<sp/>number<sp/>of<sp/>grid<sp/>points<sp/>between<sp/>points<sp/>in<sp/>a<sp/>sampling</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepVpar<sp/>=<sp/>IdxStep&lt;GridVpar&gt;;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepMu<sp/>=<sp/>IdxStep&lt;GridMu&gt;;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepVparMu<sp/>=<sp/>IdxStep&lt;GridVpar,<sp/>GridMu&gt;;</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepSpVparMu<sp/>=<sp/>IdxStep&lt;Species,<sp/>GridVpar,<sp/>GridMu&gt;;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IdxRange<sp/>=<sp/>to<sp/>describe<sp/>the<sp/>whole<sp/>index<sp/>range<sp/>(or<sp/>a<sp/>sub-index<sp/>range)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeVpar<sp/>=<sp/>IdxRange&lt;GridVpar&gt;;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeMu<sp/>=<sp/>IdxRange&lt;GridMu&gt;;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeVparMu<sp/>=<sp/>IdxRange&lt;GridVpar,<sp/>GridMu&gt;;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSpVparMu<sp/>=<sp/>IdxRange&lt;Species,<sp/>GridVpar,<sp/>GridMu&gt;;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSpVpar<sp/>=<sp/>IdxRange&lt;Species,<sp/>GridVpar&gt;;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment">//<sp/>template<sp/>for<sp/>the<sp/>fields</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemVpar<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeVpar&gt;;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemVpar<sp/>=<sp/>FieldMemVpar&lt;double&gt;;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemMu<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeMu&gt;;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemMu<sp/>=<sp/>FieldMemMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemVparMu<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeVparMu&gt;;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemVparMu<sp/>=<sp/>FieldMemVparMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSpVparMu<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSpVparMu&gt;;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSpVparMu<sp/>=<sp/>FieldMemSpVparMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSpVpar<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSpVpar&gt;;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSpVpar<sp/>=<sp/>FieldMemSpVpar&lt;double&gt;;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldVpar<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeVpar&gt;;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldVpar<sp/>=<sp/>FieldVpar&lt;double&gt;;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMu<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeMu&gt;;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMu<sp/>=<sp/>FieldMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldVparMu<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeVparMu&gt;;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldVparMu<sp/>=<sp/>FieldVparMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSpVparMu<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSpVparMu&gt;;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSpVparMu<sp/>=<sp/>FieldSpVparMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSpVpar<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSpVpar&gt;;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSpVpar<sp/>=<sp/>FieldSpVpar&lt;double&gt;;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldVpar<sp/>=<sp/>ConstField&lt;ElementType,<sp/>IdxRangeVpar&gt;;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldVpar<sp/>=<sp/>ConstFieldVpar&lt;double&gt;;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldMu<sp/>=<sp/>ConstField&lt;ElementType,<sp/>IdxRangeMu&gt;;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldMu<sp/>=<sp/>ConstFieldMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldVparMu<sp/>=<sp/>ConstField&lt;ElementType,<sp/>IdxRangeVparMu&gt;;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldVparMu<sp/>=<sp/>ConstFieldVparMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSpVparMu<sp/>=<sp/>ConstField&lt;ElementType,<sp/>IdxRangeSpVparMu&gt;;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSpVparMu<sp/>=<sp/>ConstFieldSpVparMu&lt;double&gt;;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSpVpar<sp/>=<sp/>ConstField&lt;ElementType,<sp/>IdxRangeSpVpar&gt;;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSpVpar<sp/>=<sp/>ConstFieldSpVpar&lt;double&gt;;</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp"/>
+  </compounddef>
+</doxygen>

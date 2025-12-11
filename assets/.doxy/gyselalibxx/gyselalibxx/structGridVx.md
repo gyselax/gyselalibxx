@@ -13,7 +13,7 @@
 
 
 
-Inherits the following classes: std::conditional_t< GRID_VX_UNIFORM, UniformGridBase< Vx >, NonUniformGridBase< Vx > >,  UniformGridBase< Vx >
+Inherits the following classes: std::conditional_t< GRID_VX_UNIFORM, UniformGridBase< Vx >, NonUniformGridBase< Vx > >
 
 
 
@@ -78,5 +78,5 @@ Inherits the following classes: std::conditional_t< GRID_VX_UNIFORM, UniformGrid
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp`
 

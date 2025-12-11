@@ -3,7 +3,7 @@
   <compounddef id="spline__definitions_8hpp" kind="file" language="C++">
     <compoundname>spline_definitions.hpp</compoundname>
     <includes local="no">ddc/kernels/splines.hpp</includes>
-    <includes refid="geometryRTheta_2geometry_2geometry_8hpp" local="yes">geometry.hpp</includes>
+    <includes refid="geometry__r__theta_8hpp" local="yes">geometry_r_theta.hpp</includes>
     <includedby refid="advection__field__rtheta_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</includedby>
     <includedby refid="vortex__merger__equilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</includedby>
     <includedby refid="poisson__like__rhs__function_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/poisson/poisson_like_rhs_function.hpp</includedby>
@@ -168,8 +168,8 @@
         </childnode>
       </node>
       <node id="3">
-        <label>geometry.hpp</label>
-        <link refid="geometryRTheta_2geometry_2geometry_8hpp_source"/>
+        <label>geometry_r_theta.hpp</label>
+        <link refid="geometry__r__theta_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
@@ -806,7 +806,7 @@
 <codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/kernels/splines.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
-<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry_r_theta.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//<sp/>---<sp/>Spline<sp/>definitions</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>BSDegreeR<sp/>=<sp/>3;</highlight></codeline>

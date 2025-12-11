@@ -3,10 +3,28 @@
   <compounddef id="geometryXVx_2poisson_2ichargedensitycalculator_8hpp" kind="file" language="C++">
     <compoundname>ichargedensitycalculator.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
-    <includes local="yes">geometry.hpp</includes>
+    <includes refid="geometry__xvx_8hpp" local="yes">geometry_xvx.hpp</includes>
     <includedby refid="geometryXVx_2poisson_2chargedensitycalculator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.hpp</includedby>
     <includedby refid="geometryXVx_2poisson_2qnsolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</includedby>
     <incdepgraph>
+      <node id="3">
+        <label>geometry_xvx.hpp</label>
+        <link refid="geometry__xvx_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/ichargedensitycalculator.hpp</label>
         <link refid="geometryXVx_2poisson_2ichargedensitycalculator_8hpp"/>
@@ -15,11 +33,85 @@
         <childnode refid="3" relation="include">
         </childnode>
       </node>
+      <node id="12">
+        <label>moments.hpp</label>
+        <link refid="moments_8hpp_source"/>
+      </node>
+      <node id="14">
+        <label>species_info.hpp</label>
+        <link refid="species__info_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="4">
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="7">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>non_uniform_interpolation_points.hpp</label>
+        <link refid="non__uniform__interpolation__points_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>cassert</label>
+      </node>
+      <node id="11">
+        <label>cmath</label>
+      </node>
       <node id="2">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="3">
-        <label>geometry.hpp</label>
+      <node id="8">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="5">
+        <label>type_traits</label>
+      </node>
+      <node id="6">
+        <label>utility</label>
       </node>
     </incdepgraph>
     <invincdepgraph>
@@ -52,7 +144,7 @@
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry_xvx.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight></codeline>
 <codeline lineno="15" refid="classIChargeDensityCalculator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref></highlight></codeline>
 <codeline lineno="16"><highlight class="normal">{</highlight></codeline>

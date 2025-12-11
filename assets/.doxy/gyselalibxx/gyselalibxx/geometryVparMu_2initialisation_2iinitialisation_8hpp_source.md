@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_vpar_mu.hpp"
 
 class IInitialisation
 {

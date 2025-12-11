@@ -4,7 +4,6 @@
     <compoundname>GridX</compoundname>
     <basecompoundref prot="public" virt="non-virtual">std::conditional_t&lt; GRID_X_UNIFORM, UniformGridBase&lt; X &gt;, NonUniformGridBase&lt; X &gt; &gt;</basecompoundref>
     <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; X &gt;</basecompoundref>
-    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; X &gt;</basecompoundref>
     <briefdescription>
     </briefdescription>
     <detaileddescription>
@@ -14,8 +13,6 @@
         <label>GridX</label>
         <link refid="structGridX"/>
         <childnode refid="2" relation="public-inheritance">
-        </childnode>
-        <childnode refid="3" relation="public-inheritance">
         </childnode>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
@@ -35,8 +32,6 @@
         </childnode>
         <childnode refid="3" relation="public-inheritance">
         </childnode>
-        <childnode refid="3" relation="public-inheritance">
-        </childnode>
       </node>
       <node id="3">
         <label>UniformGridBase&lt; X &gt;</label>
@@ -45,7 +40,7 @@
         <label>std::conditional_t&lt; GRID_X_UNIFORM, UniformGridBase&lt; X &gt;, NonUniformGridBase&lt; X &gt; &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" line="62" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp" bodystart="63" bodyend="64"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" line="62" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp" bodystart="63" bodyend="64"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

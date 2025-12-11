@@ -29,7 +29,7 @@
         <label>UniformGridBase&lt; Vy &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" line="95" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry.hpp" bodystart="96" bodyend="97"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="56" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="57" bodyend="58"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

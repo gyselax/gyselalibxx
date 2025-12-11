@@ -13,7 +13,7 @@
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
-* `#include "geometry.hpp"`
+* `#include "geometry_r_theta.hpp"`
 * `#include "iqnsolver.hpp"`
 * `#include "metric_tensor_evaluator.hpp"`
 * `#include "poisson_like_rhs_function.hpp"`

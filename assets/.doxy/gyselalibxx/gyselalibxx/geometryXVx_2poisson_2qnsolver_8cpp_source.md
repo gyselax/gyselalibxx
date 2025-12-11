@@ -17,7 +17,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "qnsolver.hpp"
 
 QNSolver::QNSolver(PoissonSolver const& solve_poisson, IChargeDensityCalculator const& compute_rho)

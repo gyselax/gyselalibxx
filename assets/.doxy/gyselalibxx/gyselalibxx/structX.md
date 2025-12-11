@@ -10,7 +10,7 @@
 
 _Define non periodic real_ [_**X**_](structX.md) _dimension._[More...](#detailed-description)
 
-* `#include <geometry.hpp>`
+* `#include <geometry_r_theta.hpp>`
 
 
 
@@ -32,10 +32,9 @@ _Define non periodic real_ [_**X**_](structX.md) _dimension._[More...](#detailed
 
 | Type | Name |
 | ---: | :--- |
-| typedef [**X**](structX.md) | [**Dual**](#typedef-dual-14)  <br>_A type-alias mapping to the covariant counterpart._  |
-| typedef [**X**](structX.md) | [**Dual**](#typedef-dual-14)  <br>_A type-alias mapping to the co/contra-variant counterpart._  |
-| typedef [**X**](structX.md) | [**Dual**](#typedef-dual-14)  <br>_A type-alias mapping to the co/contra-variant counterpart._  |
-| typedef [**X**](structX.md) | [**Dual**](#typedef-dual-14)  <br>_A type-alias mapping to the co/contra-variant counterpart._  |
+| typedef [**X**](structX.md) | [**Dual**](#typedef-dual-13)  <br>_A type-alias mapping to the covariant counterpart._  |
+| typedef [**X**](structX.md) | [**Dual**](#typedef-dual-13)  <br>_A type-alias mapping to the co/contra-variant counterpart._  |
+| typedef [**X**](structX.md) | [**Dual**](#typedef-dual-13)  <br>_A type-alias mapping to the co/contra-variant counterpart._  |
 
 
 
@@ -106,7 +105,7 @@ A class which describes the real space in the spatial [**X**](structX.md) direct
 
 
 
-### typedef Dual [1/4]
+### typedef Dual [1/3]
 
 _A type-alias mapping to the covariant counterpart._ 
 ```C++
@@ -120,7 +119,7 @@ using X::Dual =  X;
 
 
 
-### typedef Dual [1/4]
+### typedef Dual [1/3]
 
 _A type-alias mapping to the co/contra-variant counterpart._ 
 ```C++
@@ -134,21 +133,7 @@ using X::Dual =  X;
 
 
 
-### typedef Dual [1/4]
-
-_A type-alias mapping to the co/contra-variant counterpart._ 
-```C++
-using X::Dual =  X;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef Dual [1/4]
+### typedef Dual [1/3]
 
 _A type-alias mapping to the co/contra-variant counterpart._ 
 ```C++
@@ -209,5 +194,5 @@ A boolean indicating if the dimension is periodic.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp`
 

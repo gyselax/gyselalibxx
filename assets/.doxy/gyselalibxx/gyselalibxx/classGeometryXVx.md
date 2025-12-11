@@ -10,7 +10,7 @@
 
 _A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections._ 
 
-* `#include <geometry.hpp>`
+* `#include <geometry_xvx.hpp>`
 
 
 
@@ -159,5 +159,5 @@ using GeometryXVx::velocity_dim_for =  std::conditional_t<std::is_same_v<T, Grid
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/geometry/geometry_xvx.hpp`
 

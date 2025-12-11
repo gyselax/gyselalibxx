@@ -11,7 +11,7 @@
 
 
 * `#include <ddc/ddc.hpp>`
-* `#include "geometry.hpp"`
+* `#include "geometry_xvx.hpp"`
 * `#include "iinitialisation.hpp"`
 * `#include "species_info.hpp"`
 

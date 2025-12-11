@@ -38,7 +38,7 @@ _A class for describing the cylindrical 3D mapping._ [More...](#detailed-descrip
 | typedef [**CoordArg**](classCartesianToCylindrical.md#typedef-coordarg) | [**CoordJacobian**](#typedef-coordjacobian)  <br>_The type of the coordinate that can be used to evaluate the Jacobian of this mapping._  |
 | typedef Coord&lt; [**R**](structR.md), Z, Zeta &gt; | [**CoordResult**](#typedef-coordresult)  <br>_The type of the result of the function described by this mapping._  |
 | typedef typename [**R::Dual**](structR.md#typedef-dual) | [**R\_cov**](#typedef-r_cov)  <br>_The covariant form of the radial cylindrical coordinate._  |
-| typedef typename [**X::Dual**](structX.md#typedef-dual-14) | [**X\_cov**](#typedef-x_cov)  <br>_The covariant form of the first Cartesian coordinate._  |
+| typedef typename [**X::Dual**](structX.md#typedef-dual-13) | [**X\_cov**](#typedef-x_cov)  <br>_The covariant form of the first Cartesian coordinate._  |
 | typedef typename [**Y::Dual**](structY.md#typedef-dual-13) | [**Y\_cov**](#typedef-y_cov)  <br>_The covariant form of the second Cartesian coordinate._  |
 | typedef typename Z::Dual | [**Z\_cov**](#typedef-z_cov)  <br>_The covariant form of the third Cartesian coordinate._  |
 | typedef typename Zeta::Dual | [**Zeta\_cov**](#typedef-zeta_cov)  <br>_The covariant form of the angular cylindrical coordinate._  |

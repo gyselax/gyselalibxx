@@ -3,13 +3,143 @@
   <compounddef id="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file" language="C++">
     <compoundname>maxwellianequilibrium.hpp</compoundname>
     <includes local="no">paraconf.h</includes>
-    <includes local="yes">geometry.hpp</includes>
+    <includes refid="geometry__xyvxvy_8hpp" local="yes">geometry_xyvxvy.hpp</includes>
     <includes refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp" local="yes">iequilibrium.hpp</includes>
     <includes refid="paraconfpp_8hpp" local="yes">paraconfpp.hpp</includes>
     <includes refid="species__info_8hpp" local="yes">species_info.hpp</includes>
     <includedby refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/maxwellianequilibrium.cpp</includedby>
     <incdepgraph>
-      <node id="4">
+      <node id="24">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="26">
+        <label>tensor_common.hpp</label>
+        <link refid="tensor__common_8hpp_source"/>
+        <childnode refid="25" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="27">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="21">
+        <label>vector_field.hpp</label>
+        <link refid="vector__field_8hpp_source"/>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>vector_field_common.hpp</label>
+        <link refid="vector__field__common_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
+      </node>
+      <node id="22">
+        <label>vector_field_mem.hpp</label>
+        <link refid="vector__field__mem_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="29">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>geometry_xvx.hpp</label>
+        <link refid="geometry__xvx_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="3">
+        <label>geometry_xyvxvy.hpp</label>
+        <link refid="geometry__xyvxvy_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
         <label>iequilibrium.hpp</label>
         <link refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp_source"/>
         <childnode refid="3" relation="include">
@@ -22,102 +152,152 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>impilayout.hpp</label>
+        <link refid="impilayout_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="17">
+        <label>mpilayout.hpp</label>
+        <link refid="mpilayout_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
+        <label>paraconfpp.hpp</label>
+        <link refid="paraconfpp_8hpp_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>moments.hpp</label>
+        <link refid="moments_8hpp_source"/>
+      </node>
+      <node id="16">
+        <label>species_info.hpp</label>
+        <link refid="species__info_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
       </node>
       <node id="5">
-        <label>paraconfpp.hpp</label>
-        <link refid="paraconfpp_8hpp_source"/>
+        <label>ddc_alias_inline_functions.hpp</label>
+        <link refid="ddc__alias__inline__functions_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
         <childnode refid="8" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="2" relation="include">
-        </childnode>
       </node>
       <node id="10">
-        <label>species_info.hpp</label>
-        <link refid="species__info_8hpp_source"/>
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
         <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="12">
-        <label>ddc_alias_inline_functions.hpp</label>
-        <link refid="ddc__alias__inline__functions_8hpp_source"/>
-        <childnode refid="13" relation="include">
+      <node id="15">
+        <label>non_uniform_interpolation_points.hpp</label>
+        <link refid="non__uniform__interpolation__points_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="14">
-        <label>ddc_aliases.hpp</label>
-        <link refid="ddc__aliases_8hpp_source"/>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
+      <node id="28">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="16">
-        <label>ddc_helper.hpp</label>
-        <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
-        </childnode>
-        <childnode refid="11" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="17">
-        <label>cassert</label>
-      </node>
-      <node id="18">
-        <label>cmath</label>
+      <node id="25">
+        <label>array</label>
       </node>
       <node id="11">
+        <label>cassert</label>
+      </node>
+      <node id="12">
+        <label>cmath</label>
+      </node>
+      <node id="4">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="15">
+      <node id="9">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="6">
+      <node id="32">
         <label>filesystem</label>
       </node>
-      <node id="3">
-        <label>geometry.hpp</label>
+      <node id="18">
+        <label>numeric</label>
       </node>
       <node id="2">
         <label>paraconf.h</label>
       </node>
-      <node id="7">
+      <node id="19">
+        <label>sstream</label>
+      </node>
+      <node id="33">
         <label>stdexcept</label>
       </node>
-      <node id="8">
+      <node id="34">
         <label>string</label>
       </node>
-      <node id="13">
+      <node id="6">
         <label>type_traits</label>
       </node>
-      <node id="9">
+      <node id="7">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -133,7 +313,7 @@
 <codeline lineno="4"><highlight class="normal"></highlight></codeline>
 <codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;paraconf.h&gt;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight></codeline>
-<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry_xyvxvy.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;iequilibrium.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;paraconfpp.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;species_info.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>

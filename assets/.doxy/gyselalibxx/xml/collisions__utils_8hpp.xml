@@ -5,13 +5,31 @@
     <includes local="no">ddc/ddc.hpp</includes>
     <includes refid="ddc__alias__inline__functions_8hpp" local="yes">ddc_alias_inline_functions.hpp</includes>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
-    <includes local="yes">geometry.hpp</includes>
+    <includes refid="geometry__xvx_8hpp" local="yes">geometry_xvx.hpp</includes>
     <includes refid="quadrature_8hpp" local="yes">quadrature.hpp</includes>
     <includes refid="trapezoid__quadrature_8hpp" local="yes">trapezoid_quadrature.hpp</includes>
     <includedby refid="collisions__inter_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_inter.cpp</includedby>
     <includedby refid="collisions__intra_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp</includedby>
     <includedby refid="collisions__utils_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.cpp</includedby>
     <incdepgraph>
+      <node id="8">
+        <label>geometry_xvx.hpp</label>
+        <link refid="geometry__xvx_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.hpp</label>
         <link refid="collisions__utils_8hpp"/>
@@ -23,28 +41,28 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="15">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="18">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="2" relation="include">
@@ -52,14 +70,30 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="17">
         <label>trapezoid_quadrature.hpp</label>
         <link refid="trapezoid__quadrature_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>moments.hpp</label>
+        <link refid="moments_8hpp_source"/>
+      </node>
+      <node id="14">
+        <label>species_info.hpp</label>
+        <link refid="species__info_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
       <node id="3">
@@ -82,25 +116,39 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="9">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="13">
+        <label>non_uniform_interpolation_points.hpp</label>
+        <link refid="non__uniform__interpolation__points_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
         <label>Kokkos_Core.hpp</label>
       </node>
       <node id="10">
         <label>cassert</label>
       </node>
-      <node id="13">
+      <node id="11">
         <label>cmath</label>
       </node>
       <node id="2">
@@ -108,9 +156,6 @@
       </node>
       <node id="7">
         <label>ddc/kernels/splines.hpp</label>
-      </node>
-      <node id="8">
-        <label>geometry.hpp</label>
       </node>
       <node id="4">
         <label>type_traits</label>
@@ -689,7 +734,7 @@ Computes the momentum and energy exchange terms between ions and electrons </par
 <codeline lineno="5"><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_alias_inline_functions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;geometry_xvx.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;quadrature.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="trapezoid__quadrature_8hpp" kindref="compound">trapezoid_quadrature.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight></codeline>
@@ -800,11 +845,11 @@ Computes the momentum and energy exchange terms between ions and electrons </par
 <codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>I2mean_integrand_alloc(get_idx_range(allfdistribu));</highlight></codeline>
 <codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>I3mean_integrand_alloc(get_idx_range(allfdistribu));</highlight></codeline>
 <codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>I4mean_integrand_alloc(get_idx_range(allfdistribu));</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I0mean_integrand<sp/>=<sp/>get_field(I0mean_integrand_alloc);</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I1mean_integrand<sp/>=<sp/>get_field(I1mean_integrand_alloc);</highlight></codeline>
-<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I2mean_integrand<sp/>=<sp/>get_field(I2mean_integrand_alloc);</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I3mean_integrand<sp/>=<sp/>get_field(I3mean_integrand_alloc);</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I4mean_integrand<sp/>=<sp/>get_field(I4mean_integrand_alloc);</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>I0mean_integrand<sp/>=<sp/>get_field(I0mean_integrand_alloc);</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>I1mean_integrand<sp/>=<sp/>get_field(I1mean_integrand_alloc);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>I2mean_integrand<sp/>=<sp/>get_field(I2mean_integrand_alloc);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>I3mean_integrand<sp/>=<sp/>get_field(I3mean_integrand_alloc);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>I4mean_integrand<sp/>=<sp/>get_field(I4mean_integrand_alloc);</highlight></codeline>
 <codeline lineno="175"><highlight class="normal"></highlight></codeline>
 <codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_for_each(</highlight></codeline>
 <codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::DefaultExecutionSpace(),</highlight></codeline>
@@ -830,11 +875,11 @@ Computes the momentum and energy exchange terms between ions and electrons </par
 <codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>I2mean_alloc(grid_sp_x);</highlight></codeline>
 <codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>I3mean_alloc(grid_sp_x);</highlight></codeline>
 <codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>I4mean_alloc(grid_sp_x);</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I0mean<sp/>=<sp/>get_field(I0mean_alloc);</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I1mean<sp/>=<sp/>get_field(I1mean_alloc);</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I2mean<sp/>=<sp/>get_field(I2mean_alloc);</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I3mean<sp/>=<sp/>get_field(I3mean_alloc);</highlight></codeline>
-<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>I4mean<sp/>=<sp/>get_field(I4mean_alloc);</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>I0mean<sp/>=<sp/>get_field(I0mean_alloc);</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>I1mean<sp/>=<sp/>get_field(I1mean_alloc);</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>I2mean<sp/>=<sp/>get_field(I2mean_alloc);</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>I3mean<sp/>=<sp/>get_field(I3mean_alloc);</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>I4mean<sp/>=<sp/>get_field(I4mean_alloc);</highlight></codeline>
 <codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_fill(I0mean,<sp/>0.);</highlight></codeline>
 <codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_fill(I1mean,<sp/>0.);</highlight></codeline>
 <codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_fill(I2mean,<sp/>0.);</highlight></codeline>

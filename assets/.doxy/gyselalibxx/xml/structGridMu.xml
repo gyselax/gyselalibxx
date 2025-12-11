@@ -29,7 +29,7 @@
         <label>UniformGridBase&lt; Mu &gt;</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" line="48" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp" bodystart="49" bodyend="50"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" line="48" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp" bodystart="49" bodyend="50"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -12,7 +12,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "iboltzmannsolver.hpp"
 
 template <class Geometry, class GridX>

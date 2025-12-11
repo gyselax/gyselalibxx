@@ -10,7 +10,7 @@
 
 _Define non periodic real_ [_**Y**_](structY.md) _velocity dimension._[More...](#detailed-description)
 
-* `#include <geometry.hpp>`
+* `#include <geometry_r_theta.hpp>`
 
 
 
@@ -110,5 +110,5 @@ A boolean indicating if the dimension is periodic.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/geometry_r_theta.hpp`
 

@@ -10,7 +10,7 @@
 
 _Define non periodic parallel velocity_ \(v_\parallel\) _._
 
-* `#include <geometry.hpp>`
+* `#include <geometry_vpar_mu.hpp>`
 
 
 
@@ -102,5 +102,5 @@ The periodicity of the parallel velocity. This is a compile time constant which 
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryVparMu/geometry/geometry_vpar_mu.hpp`
 

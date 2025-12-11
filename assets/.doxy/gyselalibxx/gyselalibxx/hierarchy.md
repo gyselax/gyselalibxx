@@ -298,14 +298,11 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **struct** [**GridVpar**](structGridVpar.md) 
 * **class** **std::conditional_t< GRID_VX_UNIFORM, UniformGridBase< Vx >, NonUniformGridBase< Vx > >**    
     * **struct** [**GridVx**](structGridVx.md) 
-* **class** **UniformGridBase< Vx >**    
-    * **struct** [**GridVx**](structGridVx.md) 
 * **class** **UniformGridBase< Vy >**    
     * **struct** [**GridVy**](structGridVy.md) 
 * **class** **std::conditional_t< GRID_X_UNIFORM, UniformGridBase< X >, NonUniformGridBase< X > >**    
     * **struct** [**GridX**](structGridX.md) 
 * **class** **UniformGridBase< X >**    
-    * **struct** [**GridX**](structGridX.md) 
     * **struct** [**GridX**](structGridX.md) 
 * **class** **UniformGridBase< Y >**    
     * **struct** [**GridY**](structGridY.md) 
