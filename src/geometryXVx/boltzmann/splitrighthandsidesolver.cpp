@@ -21,12 +21,12 @@ DFieldSpXVx SplitRightHandSideSolver::operator()(
         DConstFieldX const electric_field,
         double const dt) const
 {
-    for (auto rhsit = m_rhs.begin(); rhsit != m_rhs.end(); ++rhsit) {
-        (*rhsit)(allfdistribu, dt / 2.);
+    for (IRightHandSide const& rhsit : m_rhs) {
+        rhsit(allfdistribu, dt / 2.);
     }
     m_boltzmann_solver(allfdistribu, electric_field, dt);
-    for (auto rhsit = m_rhs.rbegin(); rhsit != m_rhs.rend(); ++rhsit) {
-        (*rhsit)(allfdistribu, dt / 2.);
+    for (IRightHandSide const& rhsit : m_rhs) {
+        rhsit(allfdistribu, dt / 2.);
     }
 
     return allfdistribu;
