@@ -399,7 +399,7 @@ public:
      *          indexed. If information about the derivatives is missing then it is assumed that the
      *          0-th order derivative is requested.
      *
-     * @returns ConstField A subset of the data.
+     * @returns Field A subset of the data.
      */
     template <class... QueryDDims>
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
