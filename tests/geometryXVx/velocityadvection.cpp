@@ -6,7 +6,7 @@
 #include "Lagrange_interpolator.hpp"
 #include "bsl_advection_vx.hpp"
 #include "geometry_xvx.hpp"
-#include "spline_definitions.hpp"
+#include "spline_definitions_xvx.hpp"
 #include "spline_interpolator.hpp"
 
 
