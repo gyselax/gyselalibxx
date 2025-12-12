@@ -41,7 +41,7 @@ struct BSplinesY : ddc::NonUniformBSplines<Y, 3>
 using DerivX = ddc::Deriv<X>;
 using DerivY = ddc::Deriv<Y>;
 
-using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
+using ExecSpace = Kokkos::DefaultExecutionSpace;
 
 using SplineInterpPointsX = ddcHelper::
         NonUniformInterpolationPoints<BSplinesX, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
@@ -49,8 +49,8 @@ using SplineInterpPointsY = ddcHelper::
         NonUniformInterpolationPoints<BSplinesY, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
 
 using SplineBuilder = ddc::SplineBuilder2D<
-        HostExecSpace,
-        typename HostExecSpace::memory_space,
+        ExecSpace,
+        typename ExecSpace::memory_space,
         BSplinesX,
         BSplinesY,
         GridX,
@@ -62,7 +62,7 @@ using SplineBuilder = ddc::SplineBuilder2D<
         ddc::SplineSolver::LAPACK>;
 
 using SplineBuilderDerivField = SplineBuliderDerivField2D<
-        HostExecSpace,
+        ExecSpace,
         BSplinesX,
         BSplinesY,
         GridX,
@@ -109,14 +109,14 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
 
     // Instantiate data --------------------------------------------------------------------------
     // --- DerivField
-    host_t<DerivFieldMem<double, IdxRange<DerivX, GridX, DerivY, GridY>, 1>>
+    DerivFieldMem<double, IdxRange<DerivX, GridX, DerivY, GridY>, 1>
             function_and_derivs_alloc(idx_range_xy, idx_range_slice_dx, idx_range_slice_dy);
-    host_t<DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>>> function_and_derivs(
+    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs(
             function_and_derivs_alloc);
 
     // --- Fields
-    host_t<DFieldMem<IdxRange<GridX, GridY>>> function_alloc(idx_range_xy);
-    host_t<DField<IdxRange<GridX, GridY>>> function(function_alloc);
+    DFieldMem<IdxRange<GridX, GridY>> function_alloc(idx_range_xy);
+    DField<IdxRange<GridX, GridY>> function(function_alloc);
 
     Idx<DerivX> first_dx(1);
     IdxRange<DerivX> idx_range_deriv_x(first_dx, IdxStep<DerivX>(1));
@@ -128,25 +128,25 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
     IdxRange<GridX, DerivY> idx_range_x_dy(idx_range_x, idx_range_deriv_y);
     IdxRange<DerivX, DerivY> idx_range_dx_dy(idx_range_deriv_x, idx_range_deriv_y);
 
-    host_t<DFieldMem<IdxRange<DerivX, GridY>>> derivs_xmin_alloc(idx_range_dx_y);
-    host_t<DFieldMem<IdxRange<DerivX, GridY>>> derivs_xmax_alloc(idx_range_dx_y);
-    host_t<DFieldMem<IdxRange<GridX, DerivY>>> derivs_ymin_alloc(idx_range_x_dy);
-    host_t<DFieldMem<IdxRange<GridX, DerivY>>> derivs_ymax_alloc(idx_range_x_dy);
+    DFieldMem<IdxRange<DerivX, GridY>> derivs_xmin_alloc(idx_range_dx_y);
+    DFieldMem<IdxRange<DerivX, GridY>> derivs_xmax_alloc(idx_range_dx_y);
+    DFieldMem<IdxRange<GridX, DerivY>> derivs_ymin_alloc(idx_range_x_dy);
+    DFieldMem<IdxRange<GridX, DerivY>> derivs_ymax_alloc(idx_range_x_dy);
 
-    host_t<DFieldMem<IdxRange<DerivX, DerivY>>> derivs_xy_min_min_alloc(idx_range_dx_dy);
-    host_t<DFieldMem<IdxRange<DerivX, DerivY>>> derivs_xy_max_min_alloc(idx_range_dx_dy);
-    host_t<DFieldMem<IdxRange<DerivX, DerivY>>> derivs_xy_min_max_alloc(idx_range_dx_dy);
-    host_t<DFieldMem<IdxRange<DerivX, DerivY>>> derivs_xy_max_max_alloc(idx_range_dx_dy);
+    DFieldMem<IdxRange<DerivX, DerivY>> derivs_xy_min_min_alloc(idx_range_dx_dy);
+    DFieldMem<IdxRange<DerivX, DerivY>> derivs_xy_max_min_alloc(idx_range_dx_dy);
+    DFieldMem<IdxRange<DerivX, DerivY>> derivs_xy_min_max_alloc(idx_range_dx_dy);
+    DFieldMem<IdxRange<DerivX, DerivY>> derivs_xy_max_max_alloc(idx_range_dx_dy);
 
-    host_t<DField<IdxRange<DerivX, GridY>>> derivs_xmin = get_field(derivs_xmin_alloc);
-    host_t<DField<IdxRange<DerivX, GridY>>> derivs_xmax = get_field(derivs_xmax_alloc);
-    host_t<DField<IdxRange<GridX, DerivY>>> derivs_ymin = get_field(derivs_ymin_alloc);
-    host_t<DField<IdxRange<GridX, DerivY>>> derivs_ymax = get_field(derivs_ymax_alloc);
+    DField<IdxRange<DerivX, GridY>> derivs_xmin = get_field(derivs_xmin_alloc);
+    DField<IdxRange<DerivX, GridY>> derivs_xmax = get_field(derivs_xmax_alloc);
+    DField<IdxRange<GridX, DerivY>> derivs_ymin = get_field(derivs_ymin_alloc);
+    DField<IdxRange<GridX, DerivY>> derivs_ymax = get_field(derivs_ymax_alloc);
 
-    host_t<DField<IdxRange<DerivX, DerivY>>> derivs_xy_min_min(derivs_xy_min_min_alloc);
-    host_t<DField<IdxRange<DerivX, DerivY>>> derivs_xy_max_min(derivs_xy_max_min_alloc);
-    host_t<DField<IdxRange<DerivX, DerivY>>> derivs_xy_min_max(derivs_xy_min_max_alloc);
-    host_t<DField<IdxRange<DerivX, DerivY>>> derivs_xy_max_max(derivs_xy_max_max_alloc);
+    DField<IdxRange<DerivX, DerivY>> derivs_xy_min_min(derivs_xy_min_min_alloc);
+    DField<IdxRange<DerivX, DerivY>> derivs_xy_max_min(derivs_xy_max_min_alloc);
+    DField<IdxRange<DerivX, DerivY>> derivs_xy_min_max(derivs_xy_min_max_alloc);
+    DField<IdxRange<DerivX, DerivY>> derivs_xy_max_max(derivs_xy_max_max_alloc);
 
     // Initialise data ---------------------------------------------------------------------------
     Idx<GridX> idx_slice_xmin(idx_range_slice_dx.front());
@@ -165,7 +165,7 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
     Idx<DerivX, GridX, DerivY, GridY> idx_cross_deriv_max_max(idx_deriv_xmax, idx_deriv_ymax);
 
     ddc::parallel_for_each(
-            HostExecSpace(),
+            ExecSpace(),
             idx_range_xy,
             KOKKOS_LAMBDA(Idx<GridX, GridY> const idx) {
                 double const x = ddc::coordinate(Idx<GridX>(idx));
@@ -175,7 +175,7 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
             });
 
     ddc::parallel_for_each(
-            HostExecSpace(),
+            ExecSpace(),
             idx_range_y,
             KOKKOS_LAMBDA(Idx<GridY> const idx_y) {
                 double const y = ddc::coordinate(idx_y);
@@ -189,29 +189,41 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
                 function_and_derivs[idx_deriv_xmax](idx_y) = derivs_xmax(first_dx, idx_y);
             });
 
-    ddc::for_each(idx_range_x, [&](Idx<GridX> const idx_x) {
-        double const x = ddc::coordinate(idx_x);
-        derivs_ymin(idx_x, first_dy)
-                = std::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_min));
-        derivs_ymax(idx_x, first_dy)
-                = std::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_max));
-        function_and_derivs[idx_deriv_ymin](idx_x) = derivs_ymin(idx_x, first_dy);
-        function_and_derivs[idx_deriv_ymax](idx_x) = derivs_ymax(idx_x, first_dy);
-    });
+    ddc::parallel_for_each(
+            ExecSpace(),
+            idx_range_x,
+            KOKKOS_LAMBDA(Idx<GridX> const idx_x) {
+                double const x = ddc::coordinate(idx_x);
+                derivs_ymin(idx_x, first_dy)
+                        = std::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_min));
+                derivs_ymax(idx_x, first_dy)
+                        = std::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_max));
+                function_and_derivs[idx_deriv_ymin](idx_x) = derivs_ymin(idx_x, first_dy);
+                function_and_derivs[idx_deriv_ymax](idx_x) = derivs_ymax(idx_x, first_dy);
+            });
 
-    derivs_xy_min_min(first_dx, first_dy)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_min + 0.25) * std::sin(y_min);
-    derivs_xy_max_min(first_dx, first_dy)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_max + 0.25) * std::sin(y_min);
-    derivs_xy_min_max(first_dx, first_dy)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_min + 0.25) * std::sin(y_max);
-    derivs_xy_max_max(first_dx, first_dy)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_max + 0.25) * std::sin(y_max);
+    Kokkos::parallel_for(
+            "init_cross-derivs",
+            Kokkos::RangePolicy<ExecSpace>(0, 1),
+            KOKKOS_LAMBDA(const int) {
+                derivs_xy_min_min(first_dx, first_dy)
+                        = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_min + 0.25) * std::sin(y_min);
+                derivs_xy_max_min(first_dx, first_dy)
+                        = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_max + 0.25) * std::sin(y_min);
+                derivs_xy_min_max(first_dx, first_dy)
+                        = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_min + 0.25) * std::sin(y_max);
+                derivs_xy_max_max(first_dx, first_dy)
+                        = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_max + 0.25) * std::sin(y_max);
 
-    function_and_derivs(idx_cross_deriv_min_min) = derivs_xy_min_min(first_dx, first_dy);
-    function_and_derivs(idx_cross_deriv_max_min) = derivs_xy_max_min(first_dx, first_dy);
-    function_and_derivs(idx_cross_deriv_min_max) = derivs_xy_min_max(first_dx, first_dy);
-    function_and_derivs(idx_cross_deriv_max_max) = derivs_xy_max_max(first_dx, first_dy);
+                function_and_derivs(idx_cross_deriv_min_min)
+                        = derivs_xy_min_min(first_dx, first_dy);
+                function_and_derivs(idx_cross_deriv_max_min)
+                        = derivs_xy_max_min(first_dx, first_dy);
+                function_and_derivs(idx_cross_deriv_min_max)
+                        = derivs_xy_min_max(first_dx, first_dy);
+                function_and_derivs(idx_cross_deriv_max_max)
+                        = derivs_xy_max_max(first_dx, first_dy);
+            });
 
     // Instantiate the spline builders -----------------------------------------------------------
     SplineBuilder builder(idx_range_xy);
@@ -219,11 +231,11 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
 
     // Instantiate splines -----------------------------------------------------------------------
     IdxRange<BSplinesX, BSplinesY> idx_range_spline = builder.batched_spline_domain(idx_range_xy);
-    host_t<DFieldMem<IdxRange<BSplinesX, BSplinesY>>> spline_deriv_field_alloc(idx_range_spline);
-    host_t<DFieldMem<IdxRange<BSplinesX, BSplinesY>>> spline_fields_alloc(idx_range_spline);
+    DFieldMem<IdxRange<BSplinesX, BSplinesY>> spline_deriv_field_alloc(idx_range_spline);
+    DFieldMem<IdxRange<BSplinesX, BSplinesY>> spline_fields_alloc(idx_range_spline);
 
-    host_t<DField<IdxRange<BSplinesX, BSplinesY>>> spline_deriv_field(spline_deriv_field_alloc);
-    host_t<DField<IdxRange<BSplinesX, BSplinesY>>> spline_fields(spline_fields_alloc);
+    DField<IdxRange<BSplinesX, BSplinesY>> spline_deriv_field(spline_deriv_field_alloc);
+    DField<IdxRange<BSplinesX, BSplinesY>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
     apply_builder(spline_deriv_field, function_and_derivs);
@@ -239,7 +251,10 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
             std::optional(get_const_field(derivs_xy_min_max)),
             std::optional(get_const_field(derivs_xy_max_max)));
 
+    auto spline_deriv_field_host = ddc::create_mirror_view_and_copy(spline_deriv_field);
+    auto spline_fields_host = ddc::create_mirror_view_and_copy(spline_fields);
+
     ddc::for_each(idx_range_spline, [&](Idx<BSplinesX, BSplinesY> const& idx) {
-        EXPECT_EQ(spline_deriv_field(idx), spline_fields(idx));
+        EXPECT_EQ(spline_deriv_field_host(idx), spline_fields_host(idx));
     });
 }

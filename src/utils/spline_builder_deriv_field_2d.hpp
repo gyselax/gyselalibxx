@@ -320,7 +320,6 @@ private:
         Idx<Deriv2> idx_d2(Idx<Deriv2>(1));
         Idx<Grid1> idx_slice_1 = is_1min ? idx_range_slice_1.front() : idx_range_slice_1.back();
         Idx<Grid2> idx_slice_2 = is_2min ? idx_range_slice_2.front() : idx_range_slice_2.back();
-
         Idx<Deriv1, Grid1, Deriv2, Grid2> idx_cross_deriv(idx_d1, idx_slice_1, idx_d2, idx_slice_2);
 
         // Fill the field with correct layout.
