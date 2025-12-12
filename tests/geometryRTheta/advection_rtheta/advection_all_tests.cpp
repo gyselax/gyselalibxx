@@ -1,4 +1,3 @@
-//#pragma once
 #include <array>
 #include <chrono>
 #include <cstring>
@@ -24,7 +23,7 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "input.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
@@ -34,6 +33,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
+#include "spline_definitions.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"

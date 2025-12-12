@@ -12,7 +12,7 @@
 #include <pdi.h>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "krook_source_adaptive.hpp"
 #include "krook_source_constant.hpp"
@@ -20,6 +20,7 @@
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_definitions.hpp"
 #include "splitrighthandsidesolver.hpp"
 #include "trapezoid_quadrature.hpp"
 

@@ -13,12 +13,13 @@
 #include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "itimesolver.hpp"
 #include "l_norm_tools.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "rk2.hpp"
+#include "spline_definitions.hpp"
 
 /**
  * @brief Predictor-corrector for the Vlasov-Poisson equations.

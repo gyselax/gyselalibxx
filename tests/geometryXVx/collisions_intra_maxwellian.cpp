@@ -1,7 +1,4 @@
 // SPDX-License-Identifier: MIT
-#include "ddc_alias_inline_functions.hpp"
-#define _USE_MATH_DEFINES
-
 #include <cmath>
 
 #include <ddc/ddc.hpp>
@@ -13,12 +10,14 @@
 
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "fluid_moments.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_definitions.hpp"
 #include "trapezoid_quadrature.hpp"
 
 /**

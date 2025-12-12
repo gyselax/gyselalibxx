@@ -2,8 +2,10 @@
 #pragma once
 
 #include <ddc/ddc.hpp>
+#include <ddc/kernels/splines.hpp>
 
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
+#include "spline_definitions.hpp"
 
 
 

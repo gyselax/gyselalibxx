@@ -6,12 +6,13 @@
 
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "mesh_builder.hpp"
 #include "pdi.h"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_definitions.hpp"
 #include "trapezoid_quadrature.hpp"
 
 /**

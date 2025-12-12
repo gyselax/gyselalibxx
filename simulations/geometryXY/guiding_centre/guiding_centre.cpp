@@ -11,11 +11,13 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "../spline_definitions.hpp"
+
 #include "bsl_advection_1d.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "euler.hpp"
 #include "fft_poisson_solver.hpp"
-#include "geometry.hpp"
+#include "geometry_xy.hpp"
 #include "initialisation_Kelvin_Helmholtz.hpp"
 #include "input.hpp"
 #include "l_norm_tools.hpp"

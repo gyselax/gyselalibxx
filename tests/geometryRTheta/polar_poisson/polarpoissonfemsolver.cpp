@@ -14,11 +14,12 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "spline_definitions.hpp"
 #include "test_cases.hpp"
 
 

@@ -1,7 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/splines.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -13,7 +12,7 @@
 
 
 /*
- * @file geometry.hpp
+ * @file geometry_r_theta.hpp
  *
  * Definition of
  *   - @f$ r@f$, @f$ \theta@f$, @f$(r, \theta)@f$ dimensions.
@@ -138,121 +137,13 @@ using CoordRTheta = Coord<R, Theta>;
 using CoordVr = Coord<Vr>;
 using CoordVtheta = Coord<Vtheta>;
 
-// --- Spline definitions
-int constexpr BSDegreeR = 3;
-int constexpr BSDegreeTheta = 3;
-
-bool constexpr BsplineOnUniformCellsR = false;
-bool constexpr BsplineOnUniformCellsTheta = false;
-
-struct BSplinesR
-    : std::conditional_t<
-              BsplineOnUniformCellsR,
-              ddc::UniformBSplines<R, BSDegreeR>,
-              ddc::NonUniformBSplines<R, BSDegreeR>>
-{
-};
-struct BSplinesTheta
-    : std::conditional_t<
-              BsplineOnUniformCellsTheta,
-              ddc::UniformBSplines<Theta, BSDegreeTheta>,
-              ddc::NonUniformBSplines<Theta, BSDegreeTheta>>
-{
-};
-struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>
-{
-};
-
-ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
-ddc::BoundCond constexpr SplineThetaBoundary = ddc::BoundCond::PERIODIC;
-
-using SplineInterpPointsR
-        = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
-using SplineInterpPointsTheta
-        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
-
 // --- Discrete dimensions
-struct GridR : SplineInterpPointsR::interpolation_discrete_dimension_type
+struct GridR : NonUniformGridBase<R>
 {
 };
-struct GridTheta : SplineInterpPointsTheta::interpolation_discrete_dimension_type
+struct GridTheta : NonUniformGridBase<Theta>
 {
 };
-
-// --- Operators
-using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        SplineRBoundary, // boundary at r=0
-        SplineRBoundary, // boundary at rmax
-        SplineThetaBoundary,
-        SplineThetaBoundary,
-        ddc::SplineSolver::LAPACK>;
-
-using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at r=0
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
-
-using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D<
-        Kokkos::DefaultHostExecutionSpace,
-        Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
-
-using SplineRThetaBuilder = ddc::SplineBuilder2D<
-        Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        SplineRBoundary, // boundary at r=0
-        SplineRBoundary, // boundary at rmax
-        SplineThetaBoundary,
-        SplineThetaBoundary,
-        ddc::SplineSolver::LAPACK>;
-
-using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
-        Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at r=0
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
-
-using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D<
-        Kokkos::DefaultExecutionSpace,
-        typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
 // --- Index definitions
 using IdxR = Idx<GridR>;
 using IdxTheta = Idx<GridTheta>;
@@ -267,11 +158,6 @@ using IdxStepRTheta = IdxStep<GridR, GridTheta>;
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
 using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-
-using IdxRangeBSR = IdxRange<BSplinesR>;
-using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
-using IdxRangeBSRTheta = IdxRange<BSplinesR, BSplinesTheta>;
-using IdxRangeBSPolar = IdxRange<PolarBSplinesRTheta>;
 
 
 // --- FieldMem definitions
@@ -316,24 +202,6 @@ using DConstFieldR = ConstFieldR<double>;
 using DConstFieldTheta = ConstFieldTheta<double>;
 using DConstFieldRTheta = ConstFieldRTheta<double>;
 
-// --- Spline representation definitions
-using Spline2DMem = DFieldMem<IdxRangeBSRTheta>;
-using Spline2D = DField<IdxRangeBSRTheta>;
-using ConstSpline2D = DConstField<IdxRangeBSRTheta>;
-
-/**
- * @brief Tag the polar B-splines decomposition of a function.
- *
- * Store the polar B-splines coefficients of the function.
- */
-using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
-using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
-
-/**
- * @brief Type of the index of an element of polar B-splines.
- */
-using IdxPolarBspl = Idx<PolarBSplinesRTheta>;
-
 
 // --- VectorFieldMem definitions
 template <class Dim1, class Dim2>
@@ -345,19 +213,6 @@ using DVectorFieldRTheta = VectorField<double, IdxRangeRTheta, VectorIndexSet<Di
 template <class Dim1, class Dim2>
 using DVectorConstFieldRTheta
         = VectorConstField<double, IdxRangeRTheta, VectorIndexSet<Dim1, Dim2>>;
-
-
-
-template <class Dim1, class Dim2>
-using VectorSplineCoeffsMem2D
-        = VectorFieldMem<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
-
-template <class Dim1, class Dim2>
-using VectorSplineCoeffs2D = VectorField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
-
-template <class Dim1, class Dim2>
-using ConstVectorSplineCoeffs2D
-        = VectorConstField<double, IdxRangeBSRTheta, VectorIndexSet<Dim1, Dim2>>;
 
 
 

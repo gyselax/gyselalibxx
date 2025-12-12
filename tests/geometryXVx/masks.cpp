@@ -9,9 +9,10 @@
 #include <gtest/gtest.h>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "mask_tanh.hpp"
 #include "quadrature.hpp"
+#include "spline_definitions.hpp"
 #include "trapezoid_quadrature.hpp"
 
 TEST(Masks, Ordering)
