@@ -12,7 +12,7 @@
 #include "pdi.h"
 #include "quadrature.hpp"
 #include "species_info.hpp"
-#include "spline_definitions.hpp"
+#include "spline_definitions_xvx.hpp"
 #include "trapezoid_quadrature.hpp"
 
 /**
