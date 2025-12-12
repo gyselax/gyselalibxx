@@ -53,7 +53,6 @@ struct Xg
 {
     static bool constexpr PERIODIC = true;
 };
-
 struct Yg
 {
     static bool constexpr PERIODIC = false;
@@ -96,7 +95,6 @@ using SplineInterpPointsYg = ddcHelper::NonUniformInterpolationPoints<
         ddc::BoundCond::GREVILLE,
         ddc::BoundCond::GREVILLE>;
 
-
 // Operators on the equivalent global spline.
 using SplineRThetagBuilder = ddc::SplineBuilder2D<
         HostExecSpace,
@@ -122,7 +120,6 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::PeriodicExtrapolationRule<Xg>,
         ddc::ConstantExtrapolationRule<Yg, Xg>,
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
-
 
 struct InterfaceExactDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
 {
@@ -381,7 +378,6 @@ public:
         ddc::init_discrete_space<GridX<9>>(convert_dim<X<9>, X<3>>(interpolation_points_x369));
         ddc::init_discrete_space<GridY<9>>(convert_dim<Y<9>, Y<7>>(interpolation_points_y789));
 
-
         // Equivalent global domain ..............................................................
         std::vector<Coord<Xg>> break_points_xg;
         std::vector<Coord<Xg>> interpolation_points_xg;
@@ -399,7 +395,6 @@ public:
         fill_in(break_points_xg, break_points_x369);
         fill_in(interpolation_points_xg, interpolation_points_x369);
 
-
         std::vector<Coord<Yg>> break_points_yg;
         std::vector<Coord<Yg>> interpolation_points_yg;
 
@@ -415,7 +410,6 @@ public:
 
         fill_in(break_points_yg, break_points_y123);
         fill_in(interpolation_points_yg, interpolation_points_y123);
-
 
         ddc::init_discrete_space<BSplinesXg>(break_points_xg);
         ddc::init_discrete_space<BSplinesYg>(break_points_yg);
@@ -613,7 +607,6 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
                     Interface_8_9,
                     Interface_9_7>>
             matrix_789(idx_ranges_789, deriv_calculators_collect_789);
-
 
     // Test with an extra patch (Patch2) to check it will only take the needed patches.
     InterfaceExactDerivativeMatrix<
@@ -814,7 +807,6 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
             idx_ranges,
             idx_ranges_slice_dx,
             coord_transforms);
-
     check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
             evaluator_g,
@@ -822,7 +814,6 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
             idx_ranges,
             idx_ranges_slice_dy,
             coord_transforms);
-
     check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
             evaluator_g,

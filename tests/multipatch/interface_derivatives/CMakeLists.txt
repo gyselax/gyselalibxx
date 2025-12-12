@@ -68,6 +68,7 @@ function (interface_derivative_matrix_executable TEST_CASE)
         gslx::multipatch_geometries
         gslx::multipatch_spline
         gslx::multipatch_interface_derivatives
+        gslx::utils
     )
     target_compile_definitions("${test_name_gtest}" PUBLIC -D${TEST_CASE})
     gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)

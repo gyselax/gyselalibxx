@@ -29,20 +29,24 @@
     Test InterfaceExactDerivativeMatrix on the following geometry:
 
     #if defined(REVERSE_PATCH1)
-
         |  1  |  2  |  3  | 
            ←↓   ↑→     ↑→
 
     #elif defined(REVERSE_PATCH2)
-
         |  1  |  2  |  3  | 
           ↑→     ←↓   ↑→
 
     #elif defined(REVERSE_PATCH3)
-
         |  1  |  2  |  3  | 
            ↑→    ↑→    ←↓  
-
+    
+    #elif defined(CHANGE_BOUND1)
+        |  1  |  2  |  3  | 
+           ←↑    ↑→    ↑→  
+           
+    #elif defined(CHANGE_BOUND3)
+        |  1  |  2  |  3  | 
+           ↑→    ↑→    ↓→  
 
         with the global X dimension with Hermite boundary conditions 
         and the global Y spline with additional points as closure condition 
@@ -144,7 +148,6 @@ struct Xg
 {
     static bool constexpr PERIODIC = false;
 };
-
 struct Yg
 {
     static bool constexpr PERIODIC = false;
@@ -169,7 +172,6 @@ using DerivYg = ddc::Deriv<Yg>;
 
 using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
 
-
 // Interpolation points type for the patches.
 template <std::size_t PatchIdx>
 using SplineInterpPointsX = ddcHelper::NonUniformInterpolationPoints<
@@ -189,7 +191,6 @@ using SplineInterpPointsXg = ddcHelper::
 using SplineInterpPointsYg = ddcHelper::
         NonUniformInterpolationPoints<BSplinesYg, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
 
-
 // Operators on the equivalent global spline.
 using SplineRThetagBuilder = ddc::SplineBuilder2D<
         HostExecSpace,
@@ -204,6 +205,17 @@ using SplineRThetagBuilder = ddc::SplineBuilder2D<
         ddc::BoundCond::HERMITE,
         ddc::SplineSolver::LAPACK>;
 
+using SplineRThetagBuilderDerivField = SplineBuliderDerivField2D<
+        HostExecSpace,
+        BSplinesXg,
+        BSplinesYg,
+        GridXg,
+        GridYg,
+        ddc::BoundCond::HERMITE,
+        ddc::BoundCond::HERMITE,
+        ddc::BoundCond::HERMITE,
+        ddc::BoundCond::HERMITE>;
+
 using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         HostExecSpace,
         typename HostExecSpace::memory_space,
@@ -216,11 +228,7 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg, Xg>,
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
 
-
-template <int PatchIdx>
-using IdxdXXdYY
-        = Idx<ddc::Deriv<X<PatchIdx>>, GridX<PatchIdx>, ddc::Deriv<Y<PatchIdx>>, GridY<PatchIdx>>;
-
+// Tools to get the equivalent global coordinate  of a local coordinate.
 using CoordTransform1 = CoordTransform<Xg, Yg, X<1>, Y<1>>;
 using CoordTransform2 = CoordTransform<Xg, Yg, X<2>, Y<2>>;
 using CoordTransform3 = CoordTransform<Xg, Yg, X<3>, Y<3>>;
@@ -255,7 +263,6 @@ struct InterfaceExactDerivativeMatrixHermiteTest : public ::testing::Test
     static constexpr Coord<Y<3>> y3_min = Coord<Y<3>>(2.0);
     static constexpr Coord<Y<3>> y3_max = Coord<Y<3>>(3.0);
     static constexpr IdxStep<GridY<3>> y3_ncells = IdxStep<GridY<3>>(6);
-
 #else
     static constexpr Coord<X<3>> x3_min = Coord<X<3>>(2.0);
     static constexpr Coord<X<3>> x3_max = Coord<X<3>>(3.0);
@@ -277,71 +284,45 @@ struct InterfaceExactDerivativeMatrixHermiteTest : public ::testing::Test
     static constexpr IdxStep<GridYg> yg_ncells = IdxStep<GridYg>(y1_ncells.value());
 
     // coordinate transformation -----------------
+    // --- for Patch1
 #if defined(REVERSE_PATCH1)
+    static constexpr bool is_reverse_x_1 = false;
+    static constexpr bool is_reverse_y_1 = false;
+    static constexpr bool are_exchange_x_y_1 = true;
+#elif defined(CHANGE_BOUND1)
+    static constexpr bool is_reverse_x_1 = true;
+    static constexpr bool is_reverse_y_1 = false;
+    static constexpr bool are_exchange_x_y_1 = false;
+#else
     static constexpr bool is_reverse_x_1 = true;
     static constexpr bool is_reverse_y_1 = true;
-    static constexpr bool are_exchange_x_y_1 = false;
+    static constexpr bool are_exchange_x_y_1 = true;
+#endif
 
+    // --- for Patch2
+#if defined(REVERSE_PATCH2)
     static constexpr bool is_reverse_x_2 = false;
     static constexpr bool is_reverse_y_2 = false;
-    static constexpr bool are_exchange_x_y_2 = false;
-
-    static constexpr bool is_reverse_x_3 = false;
-    static constexpr bool is_reverse_y_3 = false;
-    static constexpr bool are_exchange_x_y_3 = false;
-
-#elif defined(REVERSE_PATCH2)
-    static constexpr bool is_reverse_x_1 = false;
-    static constexpr bool is_reverse_y_1 = false;
-    static constexpr bool are_exchange_x_y_1 = false;
-
+    static constexpr bool are_exchange_x_y_2 = true;
+#else
     static constexpr bool is_reverse_x_2 = true;
     static constexpr bool is_reverse_y_2 = true;
-    static constexpr bool are_exchange_x_y_2 = false;
+    static constexpr bool are_exchange_x_y_2 = true;
+#endif
 
+    // --- for Patch3
+#if defined(REVERSE_PATCH3)
     static constexpr bool is_reverse_x_3 = false;
-    static constexpr bool is_reverse_y_3 = false;
-    static constexpr bool are_exchange_x_y_3 = false;
-
-#elif defined(REVERSE_PATCH3)
-    static constexpr bool is_reverse_x_1 = false;
-    static constexpr bool is_reverse_y_1 = false;
-    static constexpr bool are_exchange_x_y_1 = false;
-
-    static constexpr bool is_reverse_x_2 = false;
-    static constexpr bool is_reverse_y_2 = false;
-    static constexpr bool are_exchange_x_y_2 = false;
-
-    static constexpr bool is_reverse_x_3 = true;
-    static constexpr bool is_reverse_y_3 = true;
-    static constexpr bool are_exchange_x_y_3 = false;
-
-#elif defined(CHANGE_BOUND1)
-    static constexpr bool is_reverse_x_1 = false;
-    static constexpr bool is_reverse_y_1 = true;
-    static constexpr bool are_exchange_x_y_1 = true;
-
-    static constexpr bool is_reverse_x_2 = false;
-    static constexpr bool is_reverse_y_2 = false;
-    static constexpr bool are_exchange_x_y_2 = false;
-
-    static constexpr bool is_reverse_x_3 = false;
-    static constexpr bool is_reverse_y_3 = false;
-    static constexpr bool are_exchange_x_y_3 = false;
-
-#else
-    static constexpr bool is_reverse_x_1 = false;
-    static constexpr bool is_reverse_y_1 = false;
-    static constexpr bool are_exchange_x_y_1 = false;
-
-    static constexpr bool is_reverse_x_2 = false;
-    static constexpr bool is_reverse_y_2 = false;
-    static constexpr bool are_exchange_x_y_2 = false;
-
-    static constexpr bool is_reverse_x_3 = true;
     static constexpr bool is_reverse_y_3 = false;
     static constexpr bool are_exchange_x_y_3 = true;
-
+#elif defined(CHANGE_BOUND3)
+    static constexpr bool is_reverse_x_3 = false;
+    static constexpr bool is_reverse_y_3 = true;
+    static constexpr bool are_exchange_x_y_3 = false;
+#else
+    static constexpr bool is_reverse_x_3 = true;
+    static constexpr bool is_reverse_y_3 = true;
+    static constexpr bool are_exchange_x_y_3 = true;
 #endif
 
 protected:
@@ -423,7 +404,6 @@ public:
                 = build_random_non_uniform_break_points(x3_min, x3_max, x3_ncells);
 #endif
 
-
         std::vector<Coord<Y<1>>> break_points_y
                 = build_random_non_uniform_break_points(y1_min, y1_max, y1_ncells);
 
@@ -483,11 +463,11 @@ public:
         ddc::init_discrete_space<GridX<3>>(interpolation_points_x3);
         ddc::init_discrete_space<GridY<3>>(interpolation_points_y3);
 
-
         // Equivalent global domain ..............................................................
         std::vector<Coord<Xg>> break_points_xg;
         std::vector<Coord<Xg>> interpolation_points_xg;
 
+        // --- break points from Patch1
 #if defined(REVERSE_PATCH1)
         std::vector<Coord<X<1>>> break_points_x1_reverse;
         std::vector<Coord<X<1>>> interpolation_points_x1_reverse;
@@ -497,47 +477,6 @@ public:
         interpolation_points_x1_reverse.pop_back();
         fill_in(break_points_xg, break_points_x1_reverse);
         fill_in(interpolation_points_xg, interpolation_points_x1_reverse);
-
-        break_points_x2.pop_back();
-        interpolation_points_x2.pop_back();
-        fill_in(break_points_xg, break_points_x2);
-        fill_in(interpolation_points_xg, interpolation_points_x2);
-
-        fill_in(break_points_xg, break_points_x3);
-        fill_in(interpolation_points_xg, interpolation_points_x3);
-
-#elif defined(REVERSE_PATCH2)
-        break_points_x1.pop_back();
-        interpolation_points_x1.pop_back();
-        fill_in(break_points_xg, break_points_x1);
-        fill_in(interpolation_points_xg, interpolation_points_x1);
-
-        std::vector<Coord<X<2>>> break_points_x2_reverse;
-        std::vector<Coord<X<2>>> interpolation_points_x2_reverse;
-        fill_in_reverse(break_points_x2_reverse, break_points_x2);
-        fill_in_reverse(interpolation_points_x2_reverse, interpolation_points_x2);
-        break_points_x2_reverse.pop_back();
-        interpolation_points_x2_reverse.pop_back();
-        fill_in(break_points_xg, break_points_x2_reverse);
-        fill_in(interpolation_points_xg, interpolation_points_x2_reverse);
-
-        fill_in(break_points_xg, break_points_x3);
-        fill_in(interpolation_points_xg, interpolation_points_x3);
-
-#elif defined(REVERSE_PATCH3)
-        break_points_x1.pop_back();
-        interpolation_points_x1.pop_back();
-        fill_in(break_points_xg, break_points_x1);
-        fill_in(interpolation_points_xg, interpolation_points_x1);
-
-        break_points_x2.pop_back();
-        interpolation_points_x2.pop_back();
-        fill_in(break_points_xg, break_points_x2);
-        fill_in(interpolation_points_xg, interpolation_points_x2);
-
-        fill_in_reverse(break_points_xg, break_points_x3);
-        fill_in_reverse(interpolation_points_xg, interpolation_points_x3);
-
 #elif (CHANGE_BOUND1)
         std::vector<Coord<X<1>>> break_points_y1_reverse;
         std::vector<Coord<X<1>>> interpolation_points_y1_reverse;
@@ -547,29 +486,40 @@ public:
         interpolation_points_y1_reverse.pop_back();
         fill_in(break_points_xg, break_points_y1_reverse);
         fill_in(interpolation_points_xg, interpolation_points_y1_reverse);
-
-        break_points_x2.pop_back();
-        interpolation_points_x2.pop_back();
-        fill_in(break_points_xg, break_points_x2);
-        fill_in(interpolation_points_xg, interpolation_points_x2);
-
-        fill_in(break_points_xg, break_points_x3);
-        fill_in(interpolation_points_xg, interpolation_points_x3);
-
 #else
         break_points_x1.pop_back();
         interpolation_points_x1.pop_back();
         fill_in(break_points_xg, break_points_x1);
         fill_in(interpolation_points_xg, interpolation_points_x1);
+#endif
 
+        // --- break points from Patch2
+#if defined(REVERSE_PATCH2)
+        std::vector<Coord<X<2>>> break_points_x2_reverse;
+        std::vector<Coord<X<2>>> interpolation_points_x2_reverse;
+        fill_in_reverse(break_points_x2_reverse, break_points_x2);
+        fill_in_reverse(interpolation_points_x2_reverse, interpolation_points_x2);
+        break_points_x2_reverse.pop_back();
+        interpolation_points_x2_reverse.pop_back();
+        fill_in(break_points_xg, break_points_x2_reverse);
+        fill_in(interpolation_points_xg, interpolation_points_x2_reverse);
+#else
         break_points_x2.pop_back();
         interpolation_points_x2.pop_back();
         fill_in(break_points_xg, break_points_x2);
         fill_in(interpolation_points_xg, interpolation_points_x2);
+#endif
 
+        // --- break points from Patch3
+#if defined(REVERSE_PATCH3)
+        fill_in_reverse(break_points_xg, break_points_x3);
+        fill_in_reverse(interpolation_points_xg, interpolation_points_x3);
+#elif (CHANGE_BOUND3)
         fill_in(break_points_xg, break_points_y3);
         fill_in(interpolation_points_xg, interpolation_points_y3);
-
+#else
+        fill_in(break_points_xg, break_points_x3);
+        fill_in(interpolation_points_xg, interpolation_points_x3);
 #endif
 
         std::vector<Coord<Yg>> break_points_yg;
@@ -578,15 +528,13 @@ public:
         fill_in(break_points_yg, break_points_y);
         fill_in(interpolation_points_yg, break_points_y);
 
-
         ddc::init_discrete_space<BSplinesXg>(break_points_xg);
         ddc::init_discrete_space<BSplinesYg>(break_points_yg);
 
         ddc::init_discrete_space<GridXg>(interpolation_points_xg);
         ddc::init_discrete_space<GridYg>(interpolation_points_yg);
     }
-}; // namespace
-
+};
 } // end namespace
 
 
@@ -598,8 +546,14 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, InterpolationPointsCheck)
     int const x_shift2 = x1_ncells.value() + x2_ncells.value();
 
     check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0, 0, coord_transform_1);
-    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1, 0, coord_transform_2);
-    check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2, 0, coord_transform_3);
+    check_interpolation_grids<
+            Patch2,
+            GridXg,
+            GridYg>(idx_range_xy2, x_shift1, 0, coord_transform_2);
+    check_interpolation_grids<
+            Patch3,
+            GridXg,
+            GridYg>(idx_range_xy3, x_shift2, 0, coord_transform_3);
 }
 
 
@@ -674,91 +628,78 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             function_and_derivs_2,
             function_and_derivs_3);
 
-    // Instantiate the field of global function values. No derivatives needed.
-    host_t<DFieldMem<IdxRange<GridXg, GridYg>>> function_g_alloc(idx_range_xy_g);
-    host_t<DField<IdxRange<GridXg, GridYg>>> function_g = get_field(function_g_alloc);
+    // Instantiate the global function.
+    IdxRangeSlice<GridXg> idx_range_slice_dxg = get_bound_idx_range_slice(idx_range_xg);
+    IdxRangeSlice<GridYg> idx_range_slice_dyg = get_bound_idx_range_slice(idx_range_yg);
+
+    DerivFieldMem<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>, 1>
+            function_and_derivs_g_alloc(idx_range_xy_g, idx_range_slice_dxg, idx_range_slice_dyg);
+    DerivField<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>> function_and_derivs_g(
+            function_and_derivs_g_alloc);
 
     // Initialise the data =======================================================================
     // --- the function values.
     initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
-    initialise_2D_function<GridXg, GridYg, CoordTransform<Xg, Yg, Xg, Yg>>(function_g);
+    initialise_2D_function<GridXg, GridYg, CoordTransform<Xg, Yg, Xg, Yg>>(
+            function_and_derivs_g.get_values_field());
 
     // --- the derivatives of the equivalent global spline.
     Idx<DerivXg> first_dxg(1);
-    IdxStep<DerivXg> n_deriv_xg(1);
-    IdxRange<DerivXg> idx_range_deriv_xg(first_dxg, n_deriv_xg);
-
     Idx<DerivYg> first_dyg(1);
-    IdxStep<DerivYg> n_deriv_yg(1);
-    IdxRange<DerivYg> idx_range_deriv_yg(first_dyg, n_deriv_yg);
 
-    IdxRange<DerivXg, GridYg> idx_range_dxg_yg(idx_range_deriv_xg, idx_range_yg);
-    IdxRange<GridXg, DerivYg> idx_range_xg_dyg(idx_range_xg, idx_range_deriv_yg);
-    IdxRange<DerivXg, DerivYg> idx_range_dxg_dyg(idx_range_deriv_xg, idx_range_deriv_yg);
+    Idx<GridXg> idx_slice_xg_min(idx_range_slice_dxg.front());
+    Idx<GridXg> idx_slice_xg_max(idx_range_slice_dxg.back());
+    Idx<GridYg> idx_slice_yg_min(idx_range_slice_dyg.front());
+    Idx<GridYg> idx_slice_yg_max(idx_range_slice_dyg.back());
 
-    host_t<DFieldMem<IdxRange<DerivXg, GridYg>>> derivs_xgmin_alloc(idx_range_dxg_yg);
-    host_t<DFieldMem<IdxRange<DerivXg, GridYg>>> derivs_xgmax_alloc(idx_range_dxg_yg);
-    host_t<DFieldMem<IdxRange<GridXg, DerivYg>>> derivs_ygmin_alloc(idx_range_xg_dyg);
-    host_t<DFieldMem<IdxRange<GridXg, DerivYg>>> derivs_ygmax_alloc(idx_range_xg_dyg);
+    Idx<DerivXg, GridXg> idx_dxg_min(first_dxg, idx_slice_xg_min);
+    Idx<DerivXg, GridXg> idx_dxg_max(first_dxg, idx_slice_xg_max);
+    Idx<DerivYg, GridYg> idx_dyg_min(first_dyg, idx_slice_yg_min);
+    Idx<DerivYg, GridYg> idx_dyg_max(first_dyg, idx_slice_yg_max);
 
-    host_t<DFieldMem<IdxRange<DerivXg, DerivYg>>> derivs_xyg_min_min_alloc(idx_range_dxg_dyg);
-    host_t<DFieldMem<IdxRange<DerivXg, DerivYg>>> derivs_xyg_max_min_alloc(idx_range_dxg_dyg);
-    host_t<DFieldMem<IdxRange<DerivXg, DerivYg>>> derivs_xyg_min_max_alloc(idx_range_dxg_dyg);
-    host_t<DFieldMem<IdxRange<DerivXg, DerivYg>>> derivs_xyg_max_max_alloc(idx_range_dxg_dyg);
+    Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_min_min(idx_dxg_min, idx_dyg_min);
+    Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_max_min(idx_dxg_max, idx_dyg_min);
+    Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_min_max(idx_dxg_min, idx_dyg_max);
+    Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_max_max(idx_dxg_max, idx_dyg_max);
 
-    host_t<DField<IdxRange<DerivXg, GridYg>>> derivs_xgmin = get_field(derivs_xgmin_alloc);
-    host_t<DField<IdxRange<DerivXg, GridYg>>> derivs_xgmax = get_field(derivs_xgmax_alloc);
-    host_t<DField<IdxRange<GridXg, DerivYg>>> derivs_ygmin = get_field(derivs_ygmin_alloc);
-    host_t<DField<IdxRange<GridXg, DerivYg>>> derivs_ygmax = get_field(derivs_ygmax_alloc);
-
-    host_t<DField<IdxRange<DerivXg, DerivYg>>> derivs_xyg_min_min(derivs_xyg_min_min_alloc);
-    host_t<DField<IdxRange<DerivXg, DerivYg>>> derivs_xyg_max_min(derivs_xyg_max_min_alloc);
-    host_t<DField<IdxRange<DerivXg, DerivYg>>> derivs_xyg_min_max(derivs_xyg_min_max_alloc);
-    host_t<DField<IdxRange<DerivXg, DerivYg>>> derivs_xyg_max_max(derivs_xyg_max_max_alloc);
-
-    ddc::for_each(idx_range_dxg_yg, [&](Idx<DerivXg, GridYg> const idx) {
+    ddc::for_each(idx_range_yg, [&](Idx<GridYg> const idx) {
         double const xgmin = xg_min;
         double const xgmax = xg_max;
-        double const yg = ddc::coordinate(Idx<GridYg>(idx));
-        derivs_xgmin(idx) = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmin + 0.25) * std::sin(yg);
-        derivs_xgmax(idx) = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmax + 0.25) * std::sin(yg);
+        double const yg = ddc::coordinate(idx);
+        function_and_derivs_g[idx_dxg_min](idx)
+                = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmin + 0.25) * std::sin(yg);
+        function_and_derivs_g[idx_dxg_max](idx)
+                = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmax + 0.25) * std::sin(yg);
     });
-    ddc::for_each(idx_range_xg_dyg, [&](Idx<GridXg, DerivYg> const idx) {
+    ddc::for_each(idx_range_xg, [&](Idx<GridXg> const idx) {
         double const ygmin = yg_min;
         double const ygmax = yg_max;
         double const xg = ddc::coordinate(Idx<GridXg>(idx));
-        derivs_ygmin(idx) = std::cos(2. / 3 * M_PI * xg + 0.25) * std ::cos(ygmin);
-        derivs_ygmax(idx) = std::cos(2. / 3 * M_PI * xg + 0.25) * std ::cos(ygmax);
+        function_and_derivs_g[idx_dyg_min](idx)
+                = std::cos(2. / 3 * M_PI * xg + 0.25) * std ::cos(ygmin);
+        function_and_derivs_g[idx_dyg_max](idx)
+                = std::cos(2. / 3 * M_PI * xg + 0.25) * std ::cos(ygmax);
     });
-    derivs_xyg_min_min(first_dxg, first_dyg)
+    function_and_derivs_g(idx_dxgdyg_min_min)
             = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_min + 0.25) * std::sin(yg_min);
-    derivs_xyg_max_min(first_dxg, first_dyg)
+    function_and_derivs_g(idx_dxgdyg_max_min)
             = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max + 0.25) * std::sin(yg_min);
-    derivs_xyg_min_max(first_dxg, first_dyg)
+    function_and_derivs_g(idx_dxgdyg_min_max)
             = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_min + 0.25) * std::sin(yg_max);
-    derivs_xyg_max_max(first_dxg, first_dyg)
+    function_and_derivs_g(idx_dxgdyg_max_max)
             = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max + 0.25) * std::sin(yg_max);
 
     // --- the local derivatives from an equivalent global spline.
     // ------- build global spline representation
     SplineRThetagBuilder builder_g(idx_range_xy_g);
+    SplineRThetagBuilderDerivField apply_builder_g(builder_g);
 
     host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
             builder_g.batched_spline_domain(idx_range_xy_g));
     host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
             = get_field(function_g_coef_alloc);
 
-    builder_g(
-            function_g_coef,
-            get_const_field(function_g),
-            std::optional(get_const_field(derivs_xgmin)),
-            std::optional(get_const_field(derivs_xgmax)),
-            std::optional(get_const_field(derivs_ygmin)),
-            std::optional(get_const_field(derivs_ygmax)),
-            std::optional(get_const_field(derivs_xyg_min_min)),
-            std::optional(get_const_field(derivs_xyg_max_min)),
-            std::optional(get_const_field(derivs_xyg_min_max)),
-            std::optional(get_const_field(derivs_xyg_max_max)));
+    apply_builder_g(function_g_coef, function_and_derivs_g);
 
     host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const_function_g_coef
             = get_const_field(function_g_coef);
@@ -771,7 +712,7 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     SplineRThetagEvaluator evaluator_g(bc_xmin_g, bc_xmax_g, bc_ymin_g, bc_ymax_g);
 
     // ------ intialise the boundary first derivatives from the global spline
-    // Bound on Patch1 ---
+    // X bound on Patch1 ---
 #if defined(REVERSE_PATCH1)
     Idx<ddc::Deriv<X<1>>, GridX<1>>
             idx_slice_xmax_1(Idx<ddc::Deriv<X<1>>>(1), idx_range_slice_dx1.back());
@@ -813,7 +754,7 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     });
 #endif
 
-    // Bound on Patch3 ---
+    // X bound on Patch3 ---
 #if defined(REVERSE_PATCH3)
     Idx<ddc::Deriv<X<3>>, GridX<3>>
             idx_slice_xmin_3(Idx<ddc::Deriv<X<3>>>(1), idx_range_slice_dx3.front());
@@ -855,7 +796,7 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     });
 #endif
 
-
+    // Y bound on Patch1 ---
 #if (CHANGE_BOUND1)
     initialise_x_derivatives<Patch1>(
             function_and_derivs_1,
@@ -872,13 +813,15 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             coord_transform_1);
 #endif
 
+    // Y bound on Patch2 ---
     initialise_y_derivatives<Patch2>(
             function_and_derivs_2,
             idx_range_slice_dy2,
             evaluator_g,
             const_function_g_coef,
             coord_transform_2);
-
+    
+    // Y bound on Patch3 ---
 #if (CHANGE_BOUND3)
     initialise_x_derivatives<Patch3>(
             function_and_derivs_3,
@@ -894,7 +837,6 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             const_function_g_coef,
             coord_transform_3);
 #endif
-
 
     // ------ intialise the cross-derivatives from the global spline
     initialise_all_cross_derivatives(
@@ -916,8 +858,6 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     */
     matrix.solve_cross_deriv(functions_and_derivs);
 
-
-
     // Test the values of the derivatives ========================================================
     using EmptyPatchSeq = ddc::detail::TypeSeq<>;
 
@@ -929,7 +869,6 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_ranges,
             idx_ranges_slice_dx,
             coord_transforms);
-
     check_all_y_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
@@ -937,7 +876,6 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_ranges,
             idx_ranges_slice_dy,
             coord_transforms);
-
     check_all_xy_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,

@@ -7,7 +7,7 @@
 #include <gtest/gtest.h>
 
 #include "multipatch_field.hpp"
-#include "spline_builder_deriv_field.hpp"
+#include "spline_builder_deriv_field_2d.hpp"
 #include "types.hpp"
 
 /*
@@ -23,9 +23,9 @@ struct CoordTransform
     using Dim1Global = Xg;
     using Dim2Global = Yg;
 
-    const bool m_is_reverse_x;
-    const bool m_is_reverse_y;
-    const bool m_are_exchange_x_y;
+    const bool m_is_x_loc_well_oriented;
+    const bool m_is_y_loc_well_oriented;
+    const bool are_x_y_loc_x_y_glob;
 
     const Coord<X_loc> m_x_min;
     const Coord<X_loc> m_x_max;
@@ -37,16 +37,16 @@ struct CoordTransform
      * By default, the transformation is identity.
      */
     CoordTransform(
-            bool is_reverse_x = false,
-            bool is_reverse_y = false,
-            bool are_exchange_x_y = false,
+            bool is_x_loc_well_oriented = true,
+            bool is_y_loc_well_oriented = true,
+            bool are_exchange_x_y = true,
             Coord<X_loc> x_min = Coord<X_loc>(0),
             Coord<X_loc> x_max = Coord<X_loc>(1),
             Coord<Y_loc> y_min = Coord<Y_loc>(0),
             Coord<Y_loc> y_max = Coord<Y_loc>(1))
-        : m_is_reverse_x(is_reverse_x)
-        , m_is_reverse_y(is_reverse_y)
-        , m_are_exchange_x_y(are_exchange_x_y)
+        : m_is_x_loc_well_oriented(is_x_loc_well_oriented)
+        , m_is_y_loc_well_oriented(is_y_loc_well_oriented)
+        , are_x_y_loc_x_y_glob(are_exchange_x_y)
         , m_x_min(x_min)
         , m_x_max(x_max)
         , m_y_min(y_min)
@@ -59,13 +59,13 @@ struct CoordTransform
         double x_loc = ddc::select<X_loc>(local_coord);
         double y_loc = ddc::select<Y_loc>(local_coord);
 
-        if (m_is_reverse_x) {
+        if (!m_is_x_loc_well_oriented) {
             x_loc = m_x_min + m_x_max - x_loc;
         }
-        if (m_is_reverse_y) {
+        if (!m_is_y_loc_well_oriented) {
             y_loc = m_y_min + m_y_max - y_loc;
         }
-        if (m_are_exchange_x_y) {
+        if (!are_x_y_loc_x_y_glob) {
             return Coord<Xg, Yg>(y_loc, x_loc);
         } else {
             return Coord<Xg, Yg>(x_loc, y_loc);
@@ -153,18 +153,19 @@ void initialise_y_derivatives(
         Coord<Xg, Yg> interface_coord_max(
                 coord_transform.get_global_coord(ddc::coordinate(idx_max)));
 
-        int const sign = !coord_transform.m_is_reverse_y - coord_transform.m_is_reverse_y;
+        int const sign = coord_transform.m_is_y_loc_well_oriented
+                         - !coord_transform.m_is_y_loc_well_oriented;
 
-        if (coord_transform.m_are_exchange_x_y) {
-            derivs_ymin_extracted(idx_par)
-                    = sign * evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
-            derivs_ymax_extracted(idx_par)
-                    = sign * evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
-        } else {
+        if (coord_transform.are_x_y_loc_x_y_glob) {
             derivs_ymin_extracted(idx_par)
                     = sign * evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
             derivs_ymax_extracted(idx_par)
                     = sign * evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
+        } else {
+            derivs_ymin_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+            derivs_ymax_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
         }
     });
 }
@@ -211,18 +212,20 @@ void initialise_x_derivatives(
         Coord<Xg, Yg> interface_coord_max(
                 coord_transform.get_global_coord(ddc::coordinate(idx_max)));
 
-        int const sign = !coord_transform.m_is_reverse_x - coord_transform.m_is_reverse_x;
+        int const sign = coord_transform.m_is_x_loc_well_oriented
+                         - !coord_transform.m_is_x_loc_well_oriented;
 
-        if (coord_transform.m_are_exchange_x_y) {
-            derivs_xmin_extracted(idx_par)
-                    = sign * evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
-            derivs_xmax_extracted(idx_par)
-                    = sign * evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
-        } else {
+        if (coord_transform.are_x_y_loc_x_y_glob) {
             derivs_xmin_extracted(idx_par)
                     = sign * evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
             derivs_xmax_extracted(idx_par)
                     = sign * evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+
+        } else {
+            derivs_xmin_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
+            derivs_xmax_extracted(idx_par)
+                    = sign * evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
         }
     });
 }
@@ -283,8 +286,10 @@ void initialise_cross_derivatives(
     Coord<Xg, Yg> coord_max_max = coord_transform.get_global_coord(
             typename Patch::Coord12(coord_transform.m_x_max, coord_transform.m_y_max));
 
-    int const sign_x = !coord_transform.m_is_reverse_x - coord_transform.m_is_reverse_x;
-    int const sign_y = !coord_transform.m_is_reverse_y - coord_transform.m_is_reverse_y;
+    int const sign_x
+            = coord_transform.m_is_x_loc_well_oriented - !coord_transform.m_is_x_loc_well_oriented;
+    int const sign_y
+            = coord_transform.m_is_y_loc_well_oriented - !coord_transform.m_is_y_loc_well_oriented;
     int const sign_xy = sign_x * sign_y;
 
     function_and_derivs(idx_cross_deriv_min_min)
@@ -358,16 +363,16 @@ void check_interpolation_grids(
     using Dim1 = typename Patch::Dim1;
     using Dim2 = typename Patch::Dim2;
     ddc::for_each(idx_range, [&](typename Patch::Idx12 const& idx) {
-        IdxStep<Grid1> idx_x = coord_transform.m_is_reverse_x
-                                       ? IdxRange<Grid1>(idx_range).back() - Idx<Grid1>(idx)
-                                       : Idx<Grid1>(idx) - IdxRange<Grid1>(idx_range).front();
-        IdxStep<Grid2> idx_y = coord_transform.m_is_reverse_y
-                                       ? IdxRange<Grid2>(idx_range).back() - Idx<Grid2>(idx)
-                                       : Idx<Grid2>(idx) - IdxRange<Grid2>(idx_range).front();
+        IdxStep<Grid1> idx_x = coord_transform.m_is_x_loc_well_oriented
+                                       ? Idx<Grid1>(idx) - IdxRange<Grid1>(idx_range).front()
+                                       : IdxRange<Grid1>(idx_range).back() - Idx<Grid1>(idx);
+        IdxStep<Grid2> idx_y = coord_transform.m_is_y_loc_well_oriented
+                                       ? Idx<Grid2>(idx) - IdxRange<Grid2>(idx_range).front()
+                                       : IdxRange<Grid2>(idx_range).back() - Idx<Grid2>(idx);
         Idx<GridXg, GridYg> idx_g
-                = coord_transform.m_are_exchange_x_y
-                          ? Idx<GridXg, GridYg>(idx_y.value() + x_shift, idx_x.value() + y_shift)
-                          : Idx<GridXg, GridYg>(idx_x.value() + x_shift, idx_y.value() + y_shift);
+                = coord_transform.are_x_y_loc_x_y_glob
+                          ? Idx<GridXg, GridYg>(idx_x.value() + x_shift, idx_y.value() + y_shift)
+                          : Idx<GridXg, GridYg>(idx_y.value() + x_shift, idx_x.value() + y_shift);
 
         Coord<Dim1, Dim2> local_coord = ddc::coordinate(idx);
         Coord<Xg, Yg> equiv_global_coord = coord_transform.get_global_coord(local_coord);
@@ -399,7 +404,8 @@ void check_x_derivatives(
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    const int sign = !coord_transform.m_is_reverse_x - coord_transform.m_is_reverse_x;
+    const int sign
+            = coord_transform.m_is_x_loc_well_oriented - !coord_transform.m_is_x_loc_well_oriented;
 
     using DerivX = typename ddc::Deriv<typename Patch::Dim1>;
     Idx<DerivX> idx_deriv(1);
@@ -424,13 +430,12 @@ void check_x_derivatives(
 
         double global_deriv_min;
         double global_deriv_max;
-        if (coord_transform.m_are_exchange_x_y) {
-            global_deriv_min = sign * evaluator_g.deriv_dim_2(interface_coord_min, function_g_coef);
-            global_deriv_max = sign * evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
-
-        } else {
+        if (coord_transform.are_x_y_loc_x_y_glob) {
             global_deriv_min = sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
             global_deriv_max = sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
+        } else {
+            global_deriv_min = sign * evaluator_g.deriv_dim_2(interface_coord_min, function_g_coef);
+            global_deriv_max = sign * evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
         }
         EXPECT_NEAR(derivs_xmin_extracted(idx_par), global_deriv_min, 5e-14);
         EXPECT_NEAR(derivs_xmax_extracted(idx_par), global_deriv_max, 5e-14);
@@ -492,7 +497,8 @@ void check_y_derivatives(
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    const int sign = !coord_transform.m_is_reverse_y - coord_transform.m_is_reverse_y;
+    const int sign
+            = coord_transform.m_is_y_loc_well_oriented - !coord_transform.m_is_y_loc_well_oriented;
 
     using DerivY = typename ddc::Deriv<typename Patch::Dim2>;
     Idx<DerivY> idx_deriv(1);
@@ -519,13 +525,12 @@ void check_y_derivatives(
 
         double global_deriv_min;
         double global_deriv_max;
-        if (coord_transform.m_are_exchange_x_y) {
-            global_deriv_min = sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
-            global_deriv_max = sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
-
-        } else {
+        if (coord_transform.are_x_y_loc_x_y_glob) {
             global_deriv_min = sign * evaluator_g.deriv_dim_2(interface_coord_min, function_g_coef);
             global_deriv_max = sign * evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
+        } else {
+            global_deriv_min = sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
+            global_deriv_max = sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
         }
 
         // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
@@ -599,8 +604,10 @@ void check_xy_derivatives(
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    const int sign_x = !coord_transform.m_is_reverse_x - coord_transform.m_is_reverse_x;
-    const int sign_y = !coord_transform.m_is_reverse_y - coord_transform.m_is_reverse_y;
+    const int sign_x
+            = coord_transform.m_is_x_loc_well_oriented - !coord_transform.m_is_x_loc_well_oriented;
+    const int sign_y
+            = coord_transform.m_is_y_loc_well_oriented - !coord_transform.m_is_y_loc_well_oriented;
     const int sign_xy = sign_x * sign_y;
 
     using GridX = typename Patch::Grid1;
@@ -768,7 +775,7 @@ void check_spline_representation_agreement(
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    DerivFieldSplineBuilder<
+    SplineBuliderDerivField2D<
             HostExecSpace,
             typename Patch::BSplines1,
             typename Patch::BSplines2,
