@@ -608,9 +608,9 @@ cd gyselalibxx
 <p>Ideally this script should be run exactly once per machine. The script should be <strong>working directory agnostic</strong>, in other words it should behave in the same way regardless of the folder it is run from. The preparation file is used like so:</p>
 <pre><code class="language-sh">./toolchains/&lt;CONFIG&gt;/prepare.sh
 </code></pre>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Installation can take a few hours.</p>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Where possible, on commonly-used machines we install the dependencies in a location that is accessible for all users. In this case no <code>prepare.sh</code> script is provided. Only the administrator who controls the location where the dependencies were installed will need to look at installation scripts.</p>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Ideally, if files are produced by the prepare script (such as the installation of a dependency), these should be placed in the appropriate location for the machine. For example, in the WORK file system area often found on HPC machines.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> Installation can take a few hours.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> Where possible, on commonly-used machines we install the dependencies in a location that is accessible for all users. In this case no <code>prepare.sh</code> script is provided. Only the administrator who controls the location where the dependencies were installed will need to look at installation scripts.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> Ideally, if files are produced by the prepare script (such as the installation of a dependency), these should be placed in the appropriate location for the machine. For example, in the WORK file system area often found on HPC machines.</p>
 <h3 id="available-systems">Available systems</h3>
 <p>The folder <a href="https://github.com/gyselax/gyselalibxx/tree/devel/toolchains">toolchains/</a> contains sub-folders with files that can be used for dependency management (<code>prepare.sh</code>, environment setup (<code>environment.sh</code>), and compilation <code>toolchain.cmake</code>. Each sub-folder is designed to work in a different environment. You should choose the folder which best fits your work environment. The available sub-folders are:</p>
 <ul>
@@ -630,14 +630,14 @@ cd gyselalibxx
 <pre><code class="language-sh">source toolchains/&lt;CONFIG&gt;/environment.sh
 </code></pre>
 <p>The <em>sourcing</em> of an environment file will generally happen before the build or usage of the built product.</p>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> This script modifies environment variables so it must be executed every time you connect to a cluster, or everytime you open a new terminal on a local machine.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> This script modifies environment variables so it must be executed every time you connect to a cluster, or everytime you open a new terminal on a local machine.</p>
 <h2 id="compilation">Compilation</h2>
 <p>Once the dependencies are installed and the environment has been set up the compilation is mostly machine independent. There are however a few parameters which may depend on the machine. We use <a href="https://en.wikipedia.org/wiki/Toolchain">toolchains</a> to describe the CMake build settings for the appropriate machine environment and hardware.</p>
 <p>You can use the toolchains by running the following command from the project root directory:</p>
 <pre><code class="language-sh">cmake -B build -DCMAKE_TOOLCHAIN_FILE=toolchains/&lt;FOLDER&gt;/&lt;CONFIG&gt;.cmake .
 </code></pre>
 <p>Kokkos options are one notable reason for the machine dependency. The correct backend must be activated to benefit from the acceleration available on the machine. In order to ensure that the best optimisation flags are used, a <code>toolchain.cmake</code> file is provided for each cluster. When using a local installation, or when a non-optimised compilation is wanted (e.g. a debug compilation) a less specific toolchain can be used. You can find common toolchain choices in the folder <code>toolchains/common_toolchains</code>.</p>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Developers are advised to work with a debug configuration. It is usually simpler to begin with a serial debug configuration and only move onto more complex configurations (e.g. machine specific GPU debug configuration) once the CPU version is working. Serial configurations are found in the folder <code>toolchains/common_toolchains</code>.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> Developers are advised to work with a debug configuration. It is usually simpler to begin with a serial debug configuration and only move onto more complex configurations (e.g. machine specific GPU debug configuration) once the CPU version is working. Serial configurations are found in the folder <code>toolchains/common_toolchains</code>.</p>
 <h2 id="running-tests">Running Tests</h2>
 <p>After successful compilation, you can run the test suite with:</p>
 <pre><code class="language-bash">ctest --output-on-failure

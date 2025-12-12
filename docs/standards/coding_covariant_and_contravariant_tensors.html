@@ -826,7 +826,7 @@ DTensor&lt;EtaBasis_cov, EtaBasis&gt; P = tensor_mul(index&lt;'i','j'&gt;(M), in
 <p>In many physical applications (including plasma physics) fields are not just scalar quantities, but vector-valued functions defined over a spatial domain. For example, the electric field <span class="arithmatex">\(\mathbf{E}(\mathbf{x})\)</span> associates a vector to each point in space.</p>
 <p>In Gyselalib++, this is represented using <code>VectorField</code>, a field whose values are vectors, defined at each point on a discretised grid.</p>
 <p>You can think of a DVectorField as a Field where each element is a DVector.</p>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> If you’re not yet familiar with scalar <code>Field&lt;T, Idx&gt;</code> types, refer to the documentation about <a href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a> for an introduction.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> If you’re not yet familiar with scalar <code>Field&lt;T, Idx&gt;</code> types, refer to the documentation about <a href="../first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a> for an introduction.</p>
 <h3 id="syntax">Syntax</h3>
 <pre><code class="language-cpp">DVectorField&lt;
     IdxRange&lt;GridR, GridTheta&gt;, // Discretised grid as for a scalar field
@@ -841,7 +841,7 @@ ddcHelper::get&lt;X&gt;(E)(i) = 4.2; // Assign to component E_x at index i witho
 DField&lt;IdxRange&lt;GridR, GridTheta&gt;&gt; E_x = ddcHelper::get&lt;X&gt;(E);
 E_x(i) = -0.3;                    // Assign to component E_x at index i via a temporary field
 </code></pre>
-<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/26a0.svg" title=":warning:"> Currently it is only possible to get a constant vector from a vector field so it is not possible to directly assign a vector to an element of a vector field. The method <code>assign_vector_field_element</code> automatically carries out the elementwise assignment.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> Currently it is only possible to get a constant vector from a vector field so it is not possible to directly assign a vector to an element of a vector field. The method <code>assign_vector_field_element</code> automatically carries out the elementwise assignment.</p>
 <h2 id="changing-vector-space">Changing Vector Space</h2>
 <p>In many simulations, you may need to <strong>transform a vector from one basis to another</strong> — for example:</p>
 <ul>
