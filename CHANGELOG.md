@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Allow access to slices extracted from `const DerivField`.
 - Fixed `LAPACKE` CMake target definition.
+- Uses patched cray-mpich package forcing using of the GTL on dependencies.
 
 ### Changed
 
