@@ -19,7 +19,7 @@
 #include "params.yaml.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "quadrature.hpp"
-#include "spline_definitions.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vector_field.hpp"
