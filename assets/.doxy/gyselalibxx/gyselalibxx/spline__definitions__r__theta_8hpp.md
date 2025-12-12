@@ -1,12 +1,12 @@
 
 
-# File spline\_definitions.hpp
+# File spline\_definitions\_r\_theta.hpp
 
 
 
-[**FileList**](files.md) **>** [**geometry**](dir_718520565cc7a7cfd9ba0e7c9c4c6d52.md) **>** [**spline\_definitions.hpp**](spline__definitions_8hpp.md)
+[**FileList**](files.md) **>** [**geometry**](dir_718520565cc7a7cfd9ba0e7c9c4c6d52.md) **>** [**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md)
 
-[Go to the source code of this file](spline__definitions_8hpp_source.md)
+[Go to the source code of this file](spline__definitions__r__theta_8hpp_source.md)
 
 
 
@@ -482,5 +482,5 @@ ddc::BoundCond constexpr SplineThetaBoundary;
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp`
 

@@ -3223,34 +3223,34 @@
     <member refid="geometry__r__theta_8hpp_1a7d38310972352694a6247cc9f84304ce" kind="typedef"><name>CoordVx</name></member>
     <member refid="geometry__r__theta_8hpp_1a6bb4c25a20696d975f8bdfe1de4d13df" kind="typedef"><name>CoordVy</name></member>
   </compound>
-  <compound refid="spline__definitions_8hpp" kind="file"><name>spline_definitions.hpp</name>
-    <member refid="spline__definitions_8hpp_1a3def126ea3853600ce5a4bde418bf608" kind="typedef"><name>SplineInterpPointsR</name></member>
-    <member refid="spline__definitions_8hpp_1a0fa215d27f778b2d4eb6133aa6dac155" kind="typedef"><name>SplineInterpPointsTheta</name></member>
-    <member refid="spline__definitions_8hpp_1a98f89063acd9fb54bf652088ebf52209" kind="typedef"><name>SplineRThetaBuilder_host</name></member>
-    <member refid="spline__definitions_8hpp_1a3d657cf6ade5586976ef51aa80e1cf2d" kind="typedef"><name>SplineRThetaEvaluatorConstBound_host</name></member>
-    <member refid="spline__definitions_8hpp_1a2f1ccbeb48ba80d9ab2ca6b70c9c9e68" kind="typedef"><name>SplineRThetaEvaluatorNullBound_host</name></member>
-    <member refid="spline__definitions_8hpp_1a7cb83bfd842496e6c38e47bbc661aa5c" kind="typedef"><name>SplineRThetaBuilder</name></member>
-    <member refid="spline__definitions_8hpp_1afaeb80865af49470b4dc426d5a6b7ae8" kind="typedef"><name>SplineRThetaEvaluatorConstBound</name></member>
-    <member refid="spline__definitions_8hpp_1a0595dd743628583f52a3bb9ec76f0e11" kind="typedef"><name>SplineRThetaEvaluatorNullBound</name></member>
-    <member refid="spline__definitions_8hpp_1a6d14a50e6b51eb6ceaf1fa1cdc91301f" kind="typedef"><name>IdxRangeBSR</name></member>
-    <member refid="spline__definitions_8hpp_1a3d636abaff92c56d7328309bb2522bff" kind="typedef"><name>IdxRangeBSTheta</name></member>
-    <member refid="spline__definitions_8hpp_1a4d9f715c3682f75c075ee4b422c3d8fa" kind="typedef"><name>IdxRangeBSRTheta</name></member>
-    <member refid="spline__definitions_8hpp_1af6bad0458920283d5bdd3a5bd67b169c" kind="typedef"><name>IdxRangeBSPolar</name></member>
-    <member refid="spline__definitions_8hpp_1a3669c696ab20b39e7b12c815b2f4fa03" kind="typedef"><name>Spline2DMem</name></member>
-    <member refid="spline__definitions_8hpp_1a92ec60a73f6ad7a6e592db99349f9a39" kind="typedef"><name>Spline2D</name></member>
-    <member refid="spline__definitions_8hpp_1a5bb05d563f5cef181a809dc8b32fb42e" kind="typedef"><name>ConstSpline2D</name></member>
-    <member refid="spline__definitions_8hpp_1ac96999697e65a1ac7c9ef8447ca8e8fa" kind="typedef"><name>PolarSplineMemRTheta</name></member>
-    <member refid="spline__definitions_8hpp_1aef71091f06e8e53c6435c84f000cf71c" kind="typedef"><name>PolarSplineRTheta</name></member>
-    <member refid="spline__definitions_8hpp_1a1815b341dd7a60a3902c2efd150af5af" kind="typedef"><name>IdxPolarBspl</name></member>
-    <member refid="spline__definitions_8hpp_1a2130c4bf1c2712d6fb3757e8d1e761f5" kind="typedef"><name>VectorSplineCoeffsMem2D</name></member>
-    <member refid="spline__definitions_8hpp_1a0a07449f26c8206a10f7ef29414c0dda" kind="typedef"><name>VectorSplineCoeffs2D</name></member>
-    <member refid="spline__definitions_8hpp_1ade9f4b5efbf068a8978a4a86f0bac944" kind="typedef"><name>ConstVectorSplineCoeffs2D</name></member>
-    <member refid="spline__definitions_8hpp_1ad414f99b69c724e382d42d39f28f7bcd" kind="variable"><name>BSDegreeR</name></member>
-    <member refid="spline__definitions_8hpp_1ad40b76fcd2f63f70778b838b6c982c36" kind="variable"><name>BSDegreeTheta</name></member>
-    <member refid="spline__definitions_8hpp_1af0ea53c0d1c2f45376fb232092199ff2" kind="variable"><name>BsplineOnUniformCellsR</name></member>
-    <member refid="spline__definitions_8hpp_1acca1ba33ec93965927407e5f1a106866" kind="variable"><name>BsplineOnUniformCellsTheta</name></member>
-    <member refid="spline__definitions_8hpp_1a5958928bd5659f5be2496f4a97de9a40" kind="variable"><name>SplineRBoundary</name></member>
-    <member refid="spline__definitions_8hpp_1a03b3b44b39cf7bef3ef9b13a66f7ea29" kind="variable"><name>SplineThetaBoundary</name></member>
+  <compound refid="spline__definitions__r__theta_8hpp" kind="file"><name>spline_definitions_r_theta.hpp</name>
+    <member refid="spline__definitions__r__theta_8hpp_1a3def126ea3853600ce5a4bde418bf608" kind="typedef"><name>SplineInterpPointsR</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a0fa215d27f778b2d4eb6133aa6dac155" kind="typedef"><name>SplineInterpPointsTheta</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a98f89063acd9fb54bf652088ebf52209" kind="typedef"><name>SplineRThetaBuilder_host</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a3d657cf6ade5586976ef51aa80e1cf2d" kind="typedef"><name>SplineRThetaEvaluatorConstBound_host</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a2f1ccbeb48ba80d9ab2ca6b70c9c9e68" kind="typedef"><name>SplineRThetaEvaluatorNullBound_host</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a7cb83bfd842496e6c38e47bbc661aa5c" kind="typedef"><name>SplineRThetaBuilder</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1afaeb80865af49470b4dc426d5a6b7ae8" kind="typedef"><name>SplineRThetaEvaluatorConstBound</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a0595dd743628583f52a3bb9ec76f0e11" kind="typedef"><name>SplineRThetaEvaluatorNullBound</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a6d14a50e6b51eb6ceaf1fa1cdc91301f" kind="typedef"><name>IdxRangeBSR</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a3d636abaff92c56d7328309bb2522bff" kind="typedef"><name>IdxRangeBSTheta</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a4d9f715c3682f75c075ee4b422c3d8fa" kind="typedef"><name>IdxRangeBSRTheta</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1af6bad0458920283d5bdd3a5bd67b169c" kind="typedef"><name>IdxRangeBSPolar</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a3669c696ab20b39e7b12c815b2f4fa03" kind="typedef"><name>Spline2DMem</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a92ec60a73f6ad7a6e592db99349f9a39" kind="typedef"><name>Spline2D</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a5bb05d563f5cef181a809dc8b32fb42e" kind="typedef"><name>ConstSpline2D</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1ac96999697e65a1ac7c9ef8447ca8e8fa" kind="typedef"><name>PolarSplineMemRTheta</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1aef71091f06e8e53c6435c84f000cf71c" kind="typedef"><name>PolarSplineRTheta</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a1815b341dd7a60a3902c2efd150af5af" kind="typedef"><name>IdxPolarBspl</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a2130c4bf1c2712d6fb3757e8d1e761f5" kind="typedef"><name>VectorSplineCoeffsMem2D</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a0a07449f26c8206a10f7ef29414c0dda" kind="typedef"><name>VectorSplineCoeffs2D</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1ade9f4b5efbf068a8978a4a86f0bac944" kind="typedef"><name>ConstVectorSplineCoeffs2D</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1ad414f99b69c724e382d42d39f28f7bcd" kind="variable"><name>BSDegreeR</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1ad40b76fcd2f63f70778b838b6c982c36" kind="variable"><name>BSDegreeTheta</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1af0ea53c0d1c2f45376fb232092199ff2" kind="variable"><name>BsplineOnUniformCellsR</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1acca1ba33ec93965927407e5f1a106866" kind="variable"><name>BsplineOnUniformCellsTheta</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a5958928bd5659f5be2496f4a97de9a40" kind="variable"><name>SplineRBoundary</name></member>
+    <member refid="spline__definitions__r__theta_8hpp_1a03b3b44b39cf7bef3ef9b13a66f7ea29" kind="variable"><name>SplineThetaBoundary</name></member>
   </compound>
   <compound refid="diocotron__initialisation__equilibrium_8cpp" kind="file"><name>diocotron_initialisation_equilibrium.cpp</name>
   </compound>

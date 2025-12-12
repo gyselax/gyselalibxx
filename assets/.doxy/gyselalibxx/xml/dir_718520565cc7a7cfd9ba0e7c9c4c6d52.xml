@@ -3,7 +3,7 @@
   <compounddef id="dir_718520565cc7a7cfd9ba0e7c9c4c6d52" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry</compoundname>
     <innerfile refid="geometry__r__theta_8hpp">geometry_r_theta.hpp</innerfile>
-    <innerfile refid="spline__definitions_8hpp">spline_definitions.hpp</innerfile>
+    <innerfile refid="spline__definitions__r__theta_8hpp">spline_definitions_r_theta.hpp</innerfile>
     <briefdescription>
     </briefdescription>
     <detaileddescription>

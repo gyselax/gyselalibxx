@@ -59,7 +59,7 @@ Here is a list of all files with brief descriptions:
             * **file** [**advection\_field\_rtheta.hpp**](advection__field__rtheta_8hpp.md)     
         * **dir** [**geometry**](dir_718520565cc7a7cfd9ba0e7c9c4c6d52.md)     
             * **file** [**geometry\_r\_theta.hpp**](geometry__r__theta_8hpp.md)     
-            * **file** [**spline\_definitions.hpp**](spline__definitions_8hpp.md)     
+            * **file** [**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md)     
         * **dir** [**initialisation**](dir_1b70d60e6147eeeade38d183e3e9d318.md)     
             * **file** [**diocotron\_initialisation\_equilibrium.cpp**](diocotron__initialisation__equilibrium_8cpp.md) 
             * **file** [**diocotron\_initialisation\_equilibrium.hpp**](diocotron__initialisation__equilibrium_8hpp.md)     

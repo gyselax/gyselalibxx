@@ -17,7 +17,7 @@
     <includes refid="geometryRTheta_2time__solver_2itimesolver_8hpp" local="yes">itimesolver.hpp</includes>
     <includes refid="poisson__like__rhs__function_8hpp" local="yes">poisson_like_rhs_function.hpp</includes>
     <includes refid="polarpoissonlikesolver_8hpp" local="yes">polarpoissonlikesolver.hpp</includes>
-    <includes refid="spline__definitions_8hpp" local="yes">spline_definitions.hpp</includes>
+    <includes refid="spline__definitions__r__theta_8hpp" local="yes">spline_definitions_r_theta.hpp</includes>
     <includes refid="spline__polar__foot__finder_8hpp" local="yes">spline_polar_foot_finder.hpp</includes>
     <incdepgraph>
       <node id="56">
@@ -481,8 +481,8 @@
         </childnode>
       </node>
       <node id="44">
-        <label>spline_definitions.hpp</label>
-        <link refid="spline__definitions_8hpp_source"/>
+        <label>spline_definitions_r_theta.hpp</label>
+        <link refid="spline__definitions__r__theta_8hpp_source"/>
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
@@ -966,7 +966,7 @@
 <codeline lineno="18"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;itimesolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;poisson_like_rhs_function.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;polarpoissonlikesolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions_r_theta.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_polar_foot_finder.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>

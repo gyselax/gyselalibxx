@@ -10,7 +10,7 @@
     <includes refid="l__norm__tools_8hpp" local="yes">l_norm_tools.hpp</includes>
     <includes refid="poisson__like__rhs__function_8hpp" local="yes">poisson_like_rhs_function.hpp</includes>
     <includes refid="polarpoissonlikesolver_8hpp" local="yes">polarpoissonlikesolver.hpp</includes>
-    <includes refid="spline__definitions_8hpp" local="yes">spline_definitions.hpp</includes>
+    <includes refid="spline__definitions__r__theta_8hpp" local="yes">spline_definitions_r_theta.hpp</includes>
     <includedby refid="vortex__merger__initialisation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</includedby>
     <incdepgraph>
       <node id="17">
@@ -222,8 +222,8 @@
         </childnode>
       </node>
       <node id="39">
-        <label>spline_definitions.hpp</label>
-        <link refid="spline__definitions_8hpp_source"/>
+        <label>spline_definitions_r_theta.hpp</label>
+        <link refid="spline__definitions__r__theta_8hpp_source"/>
         <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
@@ -579,7 +579,7 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="l__norm__tools_8hpp" kindref="compound">l_norm_tools.hpp</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;poisson_like_rhs_function.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;polarpoissonlikesolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions_r_theta.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping&gt;</highlight></codeline>

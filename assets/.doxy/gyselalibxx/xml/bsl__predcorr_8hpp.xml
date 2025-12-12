@@ -18,7 +18,7 @@
     <includes refid="poisson__like__rhs__function_8hpp" local="yes">poisson_like_rhs_function.hpp</includes>
     <includes refid="polarpoissonlikesolver_8hpp" local="yes">polarpoissonlikesolver.hpp</includes>
     <includes refid="rk2_8hpp" local="yes">rk2.hpp</includes>
-    <includes refid="spline__definitions_8hpp" local="yes">spline_definitions.hpp</includes>
+    <includes refid="spline__definitions__r__theta_8hpp" local="yes">spline_definitions_r_theta.hpp</includes>
     <incdepgraph>
       <node id="56">
         <label>bsl_advection_polar.hpp</label>
@@ -481,8 +481,8 @@
         </childnode>
       </node>
       <node id="44">
-        <label>spline_definitions.hpp</label>
-        <link refid="spline__definitions_8hpp_source"/>
+        <label>spline_definitions_r_theta.hpp</label>
+        <link refid="spline__definitions__r__theta_8hpp_source"/>
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="14" relation="include">
@@ -969,7 +969,7 @@
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;poisson_like_rhs_function.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;polarpoissonlikesolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;rk2.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions_r_theta.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>FootFinder&gt;</highlight></codeline>
 <codeline lineno="56" refid="classBslPredCorrRTheta" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classBslPredCorrRTheta" kindref="compound">BslPredCorrRTheta</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classITimeSolverRTheta" kindref="compound">ITimeSolverRTheta</ref></highlight></codeline>

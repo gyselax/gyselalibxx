@@ -11,7 +11,7 @@
     <includes refid="poisson__like__rhs__function_8hpp" local="yes">poisson_like_rhs_function.hpp</includes>
     <includes refid="polar__spline__evaluator_8hpp" local="yes">polar_spline_evaluator.hpp</includes>
     <includes refid="polarpoissonlikesolver_8hpp" local="yes">polarpoissonlikesolver.hpp</includes>
-    <includes refid="spline__definitions_8hpp" local="yes">spline_definitions.hpp</includes>
+    <includes refid="spline__definitions__r__theta_8hpp" local="yes">spline_definitions_r_theta.hpp</includes>
     <includes refid="vector__field_8hpp" local="yes">vector_field.hpp</includes>
     <includes refid="vector__field__mem_8hpp" local="yes">vector_field_mem.hpp</includes>
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
@@ -258,8 +258,8 @@
         </childnode>
       </node>
       <node id="39">
-        <label>spline_definitions.hpp</label>
-        <link refid="spline__definitions_8hpp_source"/>
+        <label>spline_definitions_r_theta.hpp</label>
+        <link refid="spline__definitions__r__theta_8hpp_source"/>
         <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
@@ -593,7 +593,7 @@
 <codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;poisson_like_rhs_function.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;polar_spline_evaluator.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;polarpoissonlikesolver.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;spline_definitions_r_theta.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field_mem.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>

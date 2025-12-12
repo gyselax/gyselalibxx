@@ -342,8 +342,8 @@
         </childnode>
       </node>
       <node id="11">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions.hpp</label>
-        <link refid="spline__definitions_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp</label>
+        <link refid="spline__definitions__r__theta_8hpp_source"/>
         <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="12" relation="include">

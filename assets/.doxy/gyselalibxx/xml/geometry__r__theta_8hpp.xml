@@ -11,7 +11,7 @@
     <includes refid="vector__field__mem_8hpp" local="yes">vector_field_mem.hpp</includes>
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
     <includedby refid="advection__field__rtheta_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</includedby>
-    <includedby refid="spline__definitions_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions.hpp</includedby>
+    <includedby refid="spline__definitions__r__theta_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp</includedby>
     <includedby refid="diocotron__initialisation__equilibrium_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/diocotron_initialisation_equilibrium.cpp</includedby>
     <includedby refid="diocotron__initialisation__equilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/diocotron_initialisation_equilibrium.hpp</includedby>
     <includedby refid="vortex__merger__equilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</includedby>
@@ -384,8 +384,8 @@
         </childnode>
       </node>
       <node id="6">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions.hpp</label>
-        <link refid="spline__definitions_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/geometry/spline_definitions_r_theta.hpp</label>
+        <link refid="spline__definitions__r__theta_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
         <childnode refid="7" relation="include">

@@ -13,7 +13,7 @@
 * `#include <ddc/ddc.hpp>`
 * `#include <ddc/kernels/splines.hpp>`
 * `#include "geometry_r_theta.hpp"`
-* `#include "spline_definitions.hpp"`
+* `#include "spline_definitions_r_theta.hpp"`
 
 
 

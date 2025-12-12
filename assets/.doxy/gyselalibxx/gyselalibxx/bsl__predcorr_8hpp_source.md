@@ -29,7 +29,7 @@
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "rk2.hpp"
-#include "spline_definitions.hpp"
+#include "spline_definitions_r_theta.hpp"
 
 template <class Mapping, class FootFinder>
 class BslPredCorrRTheta : public ITimeSolverRTheta
