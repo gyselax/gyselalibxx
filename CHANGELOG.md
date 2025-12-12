@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - Allow access to slices extracted from `const DerivField`.
+- Fixed `LAPACKE` CMake target definition.
 
 ### Deprecated
 
