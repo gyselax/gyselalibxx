@@ -39,10 +39,10 @@ Test `InterfaceExactDerivativeMatrix` with the following test cases
   - In `interface_derivative_matrix_REVERSE_PATCH3_test`: we test that the correct values and signs are selected, especially for the right boundary.
 ![Illustration test with reversed Patch3](../../../docs/images/interface_derivatives/fig9\_test\_REVERSE\_PATCH3.png "")
 
-  - In `interface_derivative_matrix_CHANGE_BOUND1_test`: we that for an agreement of the direction of the derivatives along $`x_1`$ but not on $`y_1`$ 
+  - In `interface_derivative_matrix_CHANGE_BOUND1_test`: we that for an agreement of the direction of the derivatives along $`x_1`$ but not on $`y_1`$
     for the left boundary.
 ![Illustration test with changed bound Patch1](../../../docs/images/interface_derivatives/fig10\_test\_CHANGE\_BOUND1.png "")
 
-  - In `interface_derivative_matrix_CHANGE_BOUND3_test`: we that for an agreement of the direction of the derivatives along $`y_3`$ but not on $`x_3`$ 
+  - In `interface_derivative_matrix_CHANGE_BOUND3_test`: we that for an agreement of the direction of the derivatives along $`y_3`$ but not on $`x_3`$
     for the right boundary.
 ![Illustration test with changed bound Patch3](../../../docs/images/interface_derivatives/fig11\_test\_CHANGE\_BOUND3.png "")

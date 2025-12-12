@@ -711,7 +711,7 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(xg_max, yg_min, yg_max);
     SplineRThetagEvaluator evaluator_g(bc_xmin_g, bc_xmax_g, bc_ymin_g, bc_ymax_g);
 
-    // ------ intialise the boundary first derivatives from the global spline
+    // ------ initialise the boundary first derivatives from the global spline
     // X bound on Patch1 ---
 #if defined(REVERSE_PATCH1)
     Idx<ddc::Deriv<X<1>>, GridX<1>>
@@ -838,7 +838,7 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             coord_transform_3);
 #endif
 
-    // ------ intialise the cross-derivatives from the global spline
+    // ------ initialise the cross-derivatives from the global spline
     initialise_all_cross_derivatives(
             functions_and_derivs,
             idx_ranges_slice_dx,

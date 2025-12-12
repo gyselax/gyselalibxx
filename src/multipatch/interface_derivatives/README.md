@@ -698,9 +698,9 @@ all have the data to build local spline representations.
 On conforming global meshes, the local splines are exactly pieces of an equivalent
 global spline.
 
-:warning: __Warning:__
+:warning: **Warning:**
 The cross-derivatives are computed from the first derivatives. So, the `.solve_deriv()` has to be applied before the `.solve_cross_deriv()`.
-It is recommended to applied `.solve_deriv()` on _every_ group of patches before.
+It is recommended to applied `.solve_deriv()` on *every* group of patches before.
 
 ## References
 

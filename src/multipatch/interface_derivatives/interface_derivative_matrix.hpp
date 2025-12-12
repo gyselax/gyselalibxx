@@ -1025,7 +1025,7 @@ private:
      * on Patch2 for the next interface 
      * (if the next interface is well oriented, otherwise it is Patch1).
      * 
-     * Exemple for well oriented interfaces:
+     * Example for well oriented interfaces:
      * 
      *  |           Patch1 | Patch2      Patch1 | Patch2        |  
      *  |            idx_1 > idx_2        idx_1 > idx_2         |
