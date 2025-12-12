@@ -384,12 +384,12 @@ set_target_properties(LAPACKE::LAPACKE PROPERTIES
     INTERFACE_INCLUDE_DIRECTORIES "${LAPACKE_INCLUDE_DIRS}"
     INTERFACE_LINK_LIBRARIES "${LAPACKE_LIBRARIES}"
 )
-if (${LAPACKE_DIR_FOUND})
+
+foreach(lib IN LISTS LAPACKE_LIBRARIES)
+  if(IS_ABSOLUTE "${lib}")
     set_target_properties(LAPACKE::LAPACKE PROPERTIES
-        IMPORTED_LOCATION ${LAPACKE_DIR}
+        IMPORTED_LOCATION "${lib}"
     )
-else()
-    set_target_properties(LAPACKE::LAPACKE PROPERTIES
-        IMPORTED_LOCATION ${LAPACKE_LIBRARIES}
-    )
-endif()
+    break()
+  endif()
+endforeach()
