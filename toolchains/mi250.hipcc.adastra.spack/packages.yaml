@@ -18,7 +18,7 @@ packages:
   cray-mpich:
     buildable: false
     externals:
-      - spec: cray-mpich@8.1.30 %gcc@13.2
+      - spec: cray-mpich@8.1.30 +gtl +rocm amdgpu_target=gfx90a %gcc@13.2
         prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/11.2
         extra_attributes:
           environment:
