@@ -19,7 +19,7 @@
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "polarpoissonlikesolver.hpp"
-#include "spline_definitions.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "test_cases.hpp"
 
 

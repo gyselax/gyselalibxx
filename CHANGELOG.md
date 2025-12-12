@@ -18,8 +18,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Extract spline definitions from `geometry.hpp` files into files called `spline_definitions.hpp` which are dedicated to tests or simulations.
-- Rename `geometry.hpp` files to reflect the geometry that they describe.
+- Extract spline definitions from `geometry.hpp` files into files called `spline_definitions_<geom_descriptor>.hpp` which are dedicated to tests or simulations.
+- Rename `geometry.hpp` files to `geometry_<geom_descriptor>.hpp` to reflect the geometry that they describe.
 
 ### Deprecated
 

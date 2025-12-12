@@ -11,7 +11,7 @@
 #include "geometry_r_theta.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "spline_definitions.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_interpolator_2d.hpp"
 
 
