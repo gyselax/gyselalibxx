@@ -170,7 +170,7 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
             KOKKOS_LAMBDA(Idx<GridX, GridY> const idx) {
                 double const x = ddc::coordinate(Idx<GridX>(idx));
                 double const y = ddc::coordinate(Idx<GridY>(idx));
-                function(idx) = std::cos(2. / 3 * M_PI * x + 0.25) * std::sin(y);
+                function(idx) = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::sin(y);
                 function_and_derivs.get_values_field()(idx) = function(idx);
             });
 
@@ -180,11 +180,11 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
             KOKKOS_LAMBDA(Idx<GridY> const idx_y) {
                 double const y = ddc::coordinate(idx_y);
                 derivs_xmin(first_dx, idx_y) = -2. / 3 * M_PI
-                                               * std::sin(2. / 3 * M_PI * double(x_min) + 0.25)
-                                               * std::sin(y);
+                                               * Kokkos::sin(2. / 3 * M_PI * double(x_min) + 0.25)
+                                               * Kokkos::sin(y);
                 derivs_xmax(first_dx, idx_y) = -2. / 3 * M_PI
-                                               * std::sin(2. / 3 * M_PI * double(x_max) + 0.25)
-                                               * std::sin(y);
+                                               * Kokkos::sin(2. / 3 * M_PI * double(x_max) + 0.25)
+                                               * Kokkos::sin(y);
                 function_and_derivs[idx_deriv_xmin](idx_y) = derivs_xmin(first_dx, idx_y);
                 function_and_derivs[idx_deriv_xmax](idx_y) = derivs_xmax(first_dx, idx_y);
             });
@@ -195,9 +195,9 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
             KOKKOS_LAMBDA(Idx<GridX> const idx_x) {
                 double const x = ddc::coordinate(idx_x);
                 derivs_ymin(idx_x, first_dy)
-                        = std::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_min));
+                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_min));
                 derivs_ymax(idx_x, first_dy)
-                        = std::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_max));
+                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_max));
                 function_and_derivs[idx_deriv_ymin](idx_x) = derivs_ymin(idx_x, first_dy);
                 function_and_derivs[idx_deriv_ymax](idx_x) = derivs_ymax(idx_x, first_dy);
             });
@@ -207,13 +207,13 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
             Kokkos::RangePolicy<ExecSpace>(0, 1),
             KOKKOS_LAMBDA(const int) {
                 derivs_xy_min_min(first_dx, first_dy)
-                        = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_min + 0.25) * std::sin(y_min);
+                        = -2. / 3 * M_PI * Kokkos::sin(2. / 3 * M_PI * x_min + 0.25) * Kokkos::sin(y_min);
                 derivs_xy_max_min(first_dx, first_dy)
-                        = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_max + 0.25) * std::sin(y_min);
+                        = -2. / 3 * M_PI * Kokkos::sin(2. / 3 * M_PI * x_max + 0.25) * Kokkos::sin(y_min);
                 derivs_xy_min_max(first_dx, first_dy)
-                        = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_min + 0.25) * std::sin(y_max);
+                        = -2. / 3 * M_PI * Kokkos::sin(2. / 3 * M_PI * x_min + 0.25) * Kokkos::sin(y_max);
                 derivs_xy_max_max(first_dx, first_dy)
-                        = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * x_max + 0.25) * std::sin(y_max);
+                        = -2. / 3 * M_PI * Kokkos::sin(2. / 3 * M_PI * x_max + 0.25) * Kokkos::sin(y_max);
 
                 function_and_derivs(idx_cross_deriv_min_min)
                         = derivs_xy_min_min(first_dx, first_dy);
