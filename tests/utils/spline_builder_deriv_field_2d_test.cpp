@@ -195,9 +195,9 @@ TEST(SplineBuilderDerivField2DTest, CorrectSplineTest)
             KOKKOS_LAMBDA(Idx<GridX> const idx_x) {
                 double const x = ddc::coordinate(idx_x);
                 derivs_ymin(idx_x, first_dy)
-                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_min));
+                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::cos(double(y_min));
                 derivs_ymax(idx_x, first_dy)
-                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * std ::cos(double(y_max));
+                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::cos(double(y_max));
                 function_and_derivs[idx_deriv_ymin](idx_x) = derivs_ymin(idx_x, first_dy);
                 function_and_derivs[idx_deriv_ymax](idx_x) = derivs_ymax(idx_x, first_dy);
             });
