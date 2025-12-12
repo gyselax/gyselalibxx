@@ -3,8 +3,9 @@
 #pragma once
 #include <ddc/kernels/splines.hpp>
 
-#include "geometry_xyvxvy.hpp"
 #include "../geometryXVx/spline_definitions_xvx.hpp"
+
+#include "geometry_xyvxvy.hpp"
 
 
 int constexpr BSDegreeY = 3;
