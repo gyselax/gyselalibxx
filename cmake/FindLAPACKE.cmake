@@ -385,22 +385,14 @@ set_target_properties(LAPACKE::LAPACKE PROPERTIES
     INTERFACE_LINK_LIBRARIES "${LAPACKE_LIBRARIES}"
 )
 
-if (NOT ${LAPACKE_DIR_FOUND})
-  foreach(lib IN LISTS LAPACKE_LIBRARIES)
-    if(IS_ABSOLUTE "${lib}")
-      get_filename_component(dir "${lib}" DIRECTORY)
-      set(LAPACKE_DIR "${dir}")
-      set(LAPACKE_DIR_FOUND TRUE)
-      break()
-    endif()
-  endforeach()
-endif()
+foreach(lib IN LISTS LAPACKE_LIBRARIES)
+  if(IS_ABSOLUTE "${lib}")
+    set(LAPACKE_IMPORTED_LOC "${lib}")
+    break()
+  endif()
+endforeach()
 
 
-if (${LAPACKE_DIR_FOUND})
-    set_target_properties(LAPACKE::LAPACKE PROPERTIES
-        IMPORTED_LOCATION ${LAPACKE_DIR}
-    )
-else()
-    message(FATAL_ERROR "LAPACKE import location not found.")
-endif()
+set_target_properties(LAPACKE::LAPACKE PROPERTIES
+    IMPORTED_LOCATION ${LAPACKE_IMPORTED_LOC}
+)
