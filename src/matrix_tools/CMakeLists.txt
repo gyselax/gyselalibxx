@@ -11,6 +11,7 @@ add_library(matrix_tools STATIC
 target_compile_features(matrix_tools PUBLIC cxx_std_17)
 target_include_directories(matrix_tools
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+    SYSTEM INTERFACE "${LAPACKE_INCLUDE_DIRS}"
 )
 target_link_libraries(matrix_tools
     PUBLIC
@@ -18,6 +19,6 @@ target_link_libraries(matrix_tools
         DDC::splines
         Kokkos::kokkos
         gslx::utils
-        LAPACKE::LAPACKE
+        ${LAPACKE_LIBRARIES}
 )
 add_library(gslx::matrix_tools ALIAS matrix_tools)
