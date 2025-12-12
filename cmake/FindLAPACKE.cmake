@@ -387,12 +387,9 @@ set_target_properties(LAPACKE::LAPACKE PROPERTIES
 
 foreach(lib IN LISTS LAPACKE_LIBRARIES)
   if(IS_ABSOLUTE "${lib}")
-    set(LAPACKE_IMPORTED_LOC "${lib}")
+    set_target_properties(LAPACKE::LAPACKE PROPERTIES
+        IMPORTED_LOCATION "${lib}"
+    )
     break()
   endif()
 endforeach()
-
-
-set_target_properties(LAPACKE::LAPACKE PROPERTIES
-    IMPORTED_LOCATION ${LAPACKE_IMPORTED_LOC}
-)
