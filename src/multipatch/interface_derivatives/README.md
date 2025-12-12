@@ -19,10 +19,10 @@ the boundary cells.
 ## Contents
 
 - [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `SingleInterfaceDerivativesCalculator` operator.
-  - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code.
+  - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator ): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
 - [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfaceExactDerivativeMatrix` operator.
-  - [How to use the `InterfaceExactDerivativeMatrix` operator?](#how-to-use-the-InterfaceExactDerivativeMatrix-operator): It documents how to use the operator in the code.
+  - [How to use the `InterfaceExactDerivativeMatrix` operator?](#how-to-use-the-interfaceexactderivativematrix-operator): It documents how to use the operator in the code.
 
 ## Relation between derivatives on the boundaries of two connected patches
 
@@ -118,8 +118,7 @@ The coefficients can be collected with the following functions:
 - `derivatives_calculator.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
 - `derivatives_calculator.get_function_coefficients(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
  (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
-- `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case. This class is also used for 2D cases where we need to compute the corner cross-derivatives. We apply the same method 
-as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree. 
+- `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case. This class is also used for 2D cases where we need to compute the corner cross-derivatives. We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.
 
 If we want to apply the exact formula, we need to sum these coefficients,
 
@@ -699,10 +698,9 @@ all have the data to build local spline representations.
 On conforming global meshes, the local splines are exactly pieces of an equivalent
 global spline.
 
-
-:warning: **Warning:** 
-The cross-derivatives are computed from the first derivatives. So, the `.solve_deriv()` has to be applied before the `.solve_cross_deriv()`. 
-It is recommended to applied `.solve_deriv()` on _every_ group of patches before. 
+:warning: __Warning:__
+The cross-derivatives are computed from the first derivatives. So, the `.solve_deriv()` has to be applied before the `.solve_cross_deriv()`.
+It is recommended to applied `.solve_deriv()` on _every_ group of patches before.
 
 ## References
 

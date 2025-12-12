@@ -820,7 +820,7 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             evaluator_g,
             const_function_g_coef,
             coord_transform_2);
-    
+
     // Y bound on Patch3 ---
 #if (CHANGE_BOUND3)
     initialise_x_derivatives<Patch3>(

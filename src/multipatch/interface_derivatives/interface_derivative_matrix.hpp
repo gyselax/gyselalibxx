@@ -370,7 +370,7 @@ private:
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        // The orientation Patch1|Patch2 of the interface matchs with the sorted 1D grid sequence.
+        // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
         constexpr bool is_same_orientation = std::is_same_v<
                 typename EquivalentInterfaceI::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
@@ -422,7 +422,7 @@ private:
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        // The orientation Patch1|Patch2 of the interface matchs with the sorted 1D grid sequence.
+        // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
         constexpr bool is_same_orientation = std::is_same_v<
                 typename EquivalentInterfaceI::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
@@ -487,7 +487,7 @@ private:
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        // The orientation Patch1|Patch2 of the interface matchs with the sorted 1D grid sequence.
+        // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
         constexpr bool is_same_orientation = std::is_same_v<
                 typename EquivalentInterfaceI::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
@@ -543,7 +543,7 @@ private:
         if constexpr (is_lower_bound_deriv_dependent || is_upper_bound_deriv_dependent) {
             IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
             IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
-            
+
             IdxRangeSlice<GridPerp1> idx_range_slice_dperp_1
                     = function_and_derivs_1.template idx_range_for_deriv<GridPerp1>();
             IdxRangeSlice<GridPerp2> idx_range_slice_dperp_2
@@ -605,7 +605,7 @@ private:
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        // The orientation Patch1|Patch2 of the interface matchs with the sorted 1D grid sequence.
+        // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
         constexpr bool is_same_orientation = std::is_same_v<
                 typename EquivalentInterfaceI::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
@@ -813,7 +813,7 @@ private:
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        // The orientation Patch1|Patch2 of the interface matchs with the sorted 1D grid sequence.
+        // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
         constexpr bool is_same_orientation = std::is_same_v<
                 typename EquivalentInterfaceI::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
@@ -897,7 +897,7 @@ private:
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        // The orientation Patch1|Patch2 of the interface matchs with the sorted 1D grid sequence.
+        // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
         constexpr bool is_same_orientation = std::is_same_v<
                 typename EquivalentInterfaceI::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
