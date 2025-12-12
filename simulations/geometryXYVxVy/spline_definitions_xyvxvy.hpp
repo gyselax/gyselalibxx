@@ -4,7 +4,7 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "geometry_xyvxvy.hpp"
-#include "spline_definitions_xvx.hpp"
+#include "../geometryXVx/spline_definitions_xvx.hpp"
 
 
 int constexpr BSDegreeY = 3;
