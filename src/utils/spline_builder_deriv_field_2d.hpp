@@ -217,13 +217,14 @@ public:
                 cross_max_max_optional);
     };
 
-public::
-    /**
+public:
+            /**
      * @brief Fill in the function field with the values stored in the function_and_derivs.
      * @param[out] function Field with layout_right where we copy the function values.
      * @param[in] function_and_derivs DerivField from where the function values are copied.
      */
-    void fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
+            void
+            fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
     {
         // Extract data.
         DField<IdxRange<Grid1, Grid2>, MemorySpace, Kokkos::layout_stride> function_extracted
