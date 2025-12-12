@@ -217,8 +217,12 @@ public:
                 cross_max_max_optional);
     };
 
-private:
-    /// @brief Fill in the function field with the values stored in the function_and_derivs.
+public::
+    /**
+     * @brief Fill in the function field with the values stored in the function_and_derivs.
+     * @param[out] function Field with layout_right where we copy the function values.
+     * @param[in] function_and_derivs DerivField from where the function values are copied.
+     */
     void fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
     {
         // Extract data.
@@ -237,7 +241,9 @@ private:
     /**
      *  @brief Fill in the deriv1 field with the derivatives along the first dimension stored 
      * in the function_and_derivs. 
-     * The boolean is_min helps to determine which bound we select for the derivative field. 
+     * @param[out] deriv1 Field with layout_right where we copy the derivatives.
+     * @param[in] function_and_derivs DerivField from where the derivatives are copied.
+     * @param[in] is_min Boolean which helps to determine which bound (mon/max) we select for the derivative field. 
      */
     void fill_in_deriv1(Deriv1Field deriv1, DerivFieldType function_and_derivs, bool const is_min)
             const
@@ -267,7 +273,9 @@ private:
     /**
      *  @brief Fill in the deriv2 field with the derivatives along the second dimension stored 
      * in the function_and_derivs. 
-     * The boolean is_min helps to determine which bound we select for the derivative field. 
+     * @param[out] deriv2 Field with layout_right where we copy the derivatives.
+     * @param[in] function_and_derivs DerivField from where the derivatives are copied.
+     * @param[in] is_min Boolean which helps to determine which bound (mon/max) we select for the derivative field. 
      */
     void fill_in_deriv2(Deriv2Field deriv2, DerivFieldType function_and_derivs, bool const is_min)
             const
@@ -297,8 +305,12 @@ private:
     /**
      *  @brief Fill in the cross_deriv field with the cross derivatives stored 
      * in the function_and_derivs. 
-     * The booleans is_1min and is_2min help to determine which corner we select 
-     * for the derivative field. 
+     * @param[out] cross_deriv Field with layout_right where we copy the cross-derivatives.
+     * @param[in] function_and_derivs DerivField from where the cross-derivatives are copied.
+     * @param[in] is_1min Boolean which helps to determine which bound (mon/max) we select for the derivative field
+     * on the first dimension. 
+     * @param[in] is_2min Boolean which helps to determine which bound (mon/max) we select for the derivative field
+     * on the second dimension. 
      */
     void fill_in_cross_deriv(
             CrossDerivField cross_deriv,
