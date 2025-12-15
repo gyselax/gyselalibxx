@@ -24,6 +24,9 @@ struct Y
     static bool constexpr PERIODIC = false;
 };
 
+using DerivX = ddc::Deriv<X>;
+using DerivY = ddc::Deriv<Y>;
+
 // Grids for the ddc::BoundCond::HERMITE case.
 struct GridXH : NonUniformGridBase<X>
 {
@@ -57,15 +60,127 @@ struct BSplinesYG : ddc::NonUniformBSplines<Y, 3>
 
 using ExecSpace = Kokkos::DefaultExecutionSpace;
 
+
+template <class GridX, class GridY>
+void initialise_function(
+        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs,
+        DField<IdxRange<GridX, GridY>> function)
+{
+    IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function);
+    ddc::parallel_for_each(
+            ExecSpace(),
+            idx_range_xy,
+            KOKKOS_LAMBDA(Idx<GridX, GridY> const idx) {
+                double const x = ddc::coordinate(Idx<GridX>(idx));
+                double const y = ddc::coordinate(Idx<GridY>(idx));
+                function(idx) = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::sin(y);
+                function_and_derivs.get_values_field()(idx) = function(idx);
+            });
+}
+
+void initialise_derivatives(
+        DerivField<double, IdxRange<DerivX, GridXH, DerivY, GridYH>> function_and_derivs,
+        DField<IdxRange<DerivX, GridYH>> derivs_xmin,
+        DField<IdxRange<DerivX, GridYH>> derivs_xmax,
+        DField<IdxRange<GridXH, DerivY>> derivs_ymin,
+        DField<IdxRange<GridXH, DerivY>> derivs_ymax,
+        DField<IdxRange<DerivX, DerivY>> derivs_xy_min_min,
+        DField<IdxRange<DerivX, DerivY>> derivs_xy_max_min,
+        DField<IdxRange<DerivX, DerivY>> derivs_xy_min_max,
+        DField<IdxRange<DerivX, DerivY>> derivs_xy_max_max)
+{
+    IdxRangeSlice<GridXH> idx_range_slice_dx
+            = function_and_derivs.template idx_range_for_deriv<GridXH>();
+    IdxRangeSlice<GridYH> idx_range_slice_dy
+            = function_and_derivs.template idx_range_for_deriv<GridYH>();
+
+    IdxRange<GridXH> idx_range_x(get_idx_range(derivs_ymin));
+    IdxRange<GridYH> idx_range_y(get_idx_range(derivs_xmin));
+
+    Coord<X> x_min(ddc::coordinate(idx_range_x.front()));
+    Coord<X> x_max(ddc::coordinate(idx_range_x.back()));
+    Coord<Y> y_min(ddc::coordinate(idx_range_y.front()));
+    Coord<Y> y_max(ddc::coordinate(idx_range_y.back()));
+
+    Idx<DerivX> first_dx(1);
+    Idx<DerivY> first_dy(1);
+
+    Idx<GridXH> idx_slice_xmin(idx_range_slice_dx.front());
+    Idx<GridXH> idx_slice_xmax(idx_range_slice_dx.back());
+    Idx<GridYH> idx_slice_ymin(idx_range_slice_dy.front());
+    Idx<GridYH> idx_slice_ymax(idx_range_slice_dy.back());
+
+    Idx<DerivX, GridXH> idx_deriv_xmin(first_dx, idx_slice_xmin);
+    Idx<DerivX, GridXH> idx_deriv_xmax(first_dx, idx_slice_xmax);
+    Idx<DerivY, GridYH> idx_deriv_ymin(first_dy, idx_slice_ymin);
+    Idx<DerivY, GridYH> idx_deriv_ymax(first_dy, idx_slice_ymax);
+
+    Idx<DerivX, GridXH, DerivY, GridYH> idx_cross_deriv_min_min(idx_deriv_xmin, idx_deriv_ymin);
+    Idx<DerivX, GridXH, DerivY, GridYH> idx_cross_deriv_max_min(idx_deriv_xmax, idx_deriv_ymin);
+    Idx<DerivX, GridXH, DerivY, GridYH> idx_cross_deriv_min_max(idx_deriv_xmin, idx_deriv_ymax);
+    Idx<DerivX, GridXH, DerivY, GridYH> idx_cross_deriv_max_max(idx_deriv_xmax, idx_deriv_ymax);
+
+    ddc::parallel_for_each(
+            ExecSpace(),
+            idx_range_y,
+            KOKKOS_LAMBDA(Idx<GridYH> const idx_y) {
+                double const y = ddc::coordinate(idx_y);
+                derivs_xmin(first_dx, idx_y) = -2. / 3 * M_PI
+                                               * Kokkos::sin(2. / 3 * M_PI * double(x_min) + 0.25)
+                                               * Kokkos::sin(y);
+                derivs_xmax(first_dx, idx_y) = -2. / 3 * M_PI
+                                               * Kokkos::sin(2. / 3 * M_PI * double(x_max) + 0.25)
+                                               * Kokkos::sin(y);
+                function_and_derivs[idx_deriv_xmin](idx_y) = derivs_xmin(first_dx, idx_y);
+                function_and_derivs[idx_deriv_xmax](idx_y) = derivs_xmax(first_dx, idx_y);
+            });
+
+    ddc::parallel_for_each(
+            ExecSpace(),
+            idx_range_x,
+            KOKKOS_LAMBDA(Idx<GridXH> const idx_x) {
+                double const x = ddc::coordinate(idx_x);
+                derivs_ymin(idx_x, first_dy)
+                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::cos(double(y_min));
+                derivs_ymax(idx_x, first_dy)
+                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::cos(double(y_max));
+                function_and_derivs[idx_deriv_ymin](idx_x) = derivs_ymin(idx_x, first_dy);
+                function_and_derivs[idx_deriv_ymax](idx_x) = derivs_ymax(idx_x, first_dy);
+            });
+
+    Kokkos::parallel_for(
+            "init_cross-derivs",
+            Kokkos::RangePolicy<ExecSpace>(0, 1),
+            KOKKOS_LAMBDA(const int) {
+                derivs_xy_min_min(first_dx, first_dy) = -2. / 3 * M_PI
+                                                        * Kokkos::sin(2. / 3 * M_PI * x_min + 0.25)
+                                                        * Kokkos::sin(y_min);
+                derivs_xy_max_min(first_dx, first_dy) = -2. / 3 * M_PI
+                                                        * Kokkos::sin(2. / 3 * M_PI * x_max + 0.25)
+                                                        * Kokkos::sin(y_min);
+                derivs_xy_min_max(first_dx, first_dy) = -2. / 3 * M_PI
+                                                        * Kokkos::sin(2. / 3 * M_PI * x_min + 0.25)
+                                                        * Kokkos::sin(y_max);
+                derivs_xy_max_max(first_dx, first_dy) = -2. / 3 * M_PI
+                                                        * Kokkos::sin(2. / 3 * M_PI * x_max + 0.25)
+                                                        * Kokkos::sin(y_max);
+
+                function_and_derivs(idx_cross_deriv_min_min)
+                        = derivs_xy_min_min(first_dx, first_dy);
+                function_and_derivs(idx_cross_deriv_max_min)
+                        = derivs_xy_max_min(first_dx, first_dy);
+                function_and_derivs(idx_cross_deriv_min_max)
+                        = derivs_xy_min_max(first_dx, first_dy);
+                function_and_derivs(idx_cross_deriv_max_max)
+                        = derivs_xy_max_max(first_dx, first_dy);
+            });
+}
 } // namespace
 
 
 
 TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
 {
-    using DerivX = ddc::Deriv<X>;
-    using DerivY = ddc::Deriv<Y>;
-
     using SplineInterpPointsX = ddcHelper::NonUniformInterpolationPoints<
             BSplinesXH,
             ddc::BoundCond::HERMITE,
@@ -147,85 +262,17 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
     DField<IdxRange<DerivX, DerivY>> derivs_xy_max_max(derivs_xy_max_max_alloc);
 
     // Initialise data ---------------------------------------------------------------------------
-    Idx<GridXH> idx_slice_xmin(idx_range_slice_dx.front());
-    Idx<GridXH> idx_slice_xmax(idx_range_slice_dx.back());
-    Idx<GridYH> idx_slice_ymin(idx_range_slice_dy.front());
-    Idx<GridYH> idx_slice_ymax(idx_range_slice_dy.back());
-
-    Idx<DerivX, GridXH> idx_deriv_xmin(first_dx, idx_slice_xmin);
-    Idx<DerivX, GridXH> idx_deriv_xmax(first_dx, idx_slice_xmax);
-    Idx<DerivY, GridYH> idx_deriv_ymin(first_dy, idx_slice_ymin);
-    Idx<DerivY, GridYH> idx_deriv_ymax(first_dy, idx_slice_ymax);
-
-    Idx<DerivX, GridXH, DerivY, GridYH> idx_cross_deriv_min_min(idx_deriv_xmin, idx_deriv_ymin);
-    Idx<DerivX, GridXH, DerivY, GridYH> idx_cross_deriv_max_min(idx_deriv_xmax, idx_deriv_ymin);
-    Idx<DerivX, GridXH, DerivY, GridYH> idx_cross_deriv_min_max(idx_deriv_xmin, idx_deriv_ymax);
-    Idx<DerivX, GridXH, DerivY, GridYH> idx_cross_deriv_max_max(idx_deriv_xmax, idx_deriv_ymax);
-
-    ddc::parallel_for_each(
-            ExecSpace(),
-            idx_range_xy,
-            KOKKOS_LAMBDA(Idx<GridXH, GridYH> const idx) {
-                double const x = ddc::coordinate(Idx<GridXH>(idx));
-                double const y = ddc::coordinate(Idx<GridYH>(idx));
-                function(idx) = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::sin(y);
-                function_and_derivs.get_values_field()(idx) = function(idx);
-            });
-
-    ddc::parallel_for_each(
-            ExecSpace(),
-            idx_range_y,
-            KOKKOS_LAMBDA(Idx<GridYH> const idx_y) {
-                double const y = ddc::coordinate(idx_y);
-                derivs_xmin(first_dx, idx_y) = -2. / 3 * M_PI
-                                               * Kokkos::sin(2. / 3 * M_PI * double(x_min) + 0.25)
-                                               * Kokkos::sin(y);
-                derivs_xmax(first_dx, idx_y) = -2. / 3 * M_PI
-                                               * Kokkos::sin(2. / 3 * M_PI * double(x_max) + 0.25)
-                                               * Kokkos::sin(y);
-                function_and_derivs[idx_deriv_xmin](idx_y) = derivs_xmin(first_dx, idx_y);
-                function_and_derivs[idx_deriv_xmax](idx_y) = derivs_xmax(first_dx, idx_y);
-            });
-
-    ddc::parallel_for_each(
-            ExecSpace(),
-            idx_range_x,
-            KOKKOS_LAMBDA(Idx<GridXH> const idx_x) {
-                double const x = ddc::coordinate(idx_x);
-                derivs_ymin(idx_x, first_dy)
-                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::cos(double(y_min));
-                derivs_ymax(idx_x, first_dy)
-                        = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::cos(double(y_max));
-                function_and_derivs[idx_deriv_ymin](idx_x) = derivs_ymin(idx_x, first_dy);
-                function_and_derivs[idx_deriv_ymax](idx_x) = derivs_ymax(idx_x, first_dy);
-            });
-
-    Kokkos::parallel_for(
-            "init_cross-derivs",
-            Kokkos::RangePolicy<ExecSpace>(0, 1),
-            KOKKOS_LAMBDA(const int) {
-                derivs_xy_min_min(first_dx, first_dy) = -2. / 3 * M_PI
-                                                        * Kokkos::sin(2. / 3 * M_PI * x_min + 0.25)
-                                                        * Kokkos::sin(y_min);
-                derivs_xy_max_min(first_dx, first_dy) = -2. / 3 * M_PI
-                                                        * Kokkos::sin(2. / 3 * M_PI * x_max + 0.25)
-                                                        * Kokkos::sin(y_min);
-                derivs_xy_min_max(first_dx, first_dy) = -2. / 3 * M_PI
-                                                        * Kokkos::sin(2. / 3 * M_PI * x_min + 0.25)
-                                                        * Kokkos::sin(y_max);
-                derivs_xy_max_max(first_dx, first_dy) = -2. / 3 * M_PI
-                                                        * Kokkos::sin(2. / 3 * M_PI * x_max + 0.25)
-                                                        * Kokkos::sin(y_max);
-
-                function_and_derivs(idx_cross_deriv_min_min)
-                        = derivs_xy_min_min(first_dx, first_dy);
-                function_and_derivs(idx_cross_deriv_max_min)
-                        = derivs_xy_max_min(first_dx, first_dy);
-                function_and_derivs(idx_cross_deriv_min_max)
-                        = derivs_xy_min_max(first_dx, first_dy);
-                function_and_derivs(idx_cross_deriv_max_max)
-                        = derivs_xy_max_max(first_dx, first_dy);
-            });
+    initialise_function<GridXH, GridYH>(function_and_derivs, function);
+    initialise_derivatives(
+            function_and_derivs,
+            derivs_xmin,
+            derivs_xmax,
+            derivs_ymin,
+            derivs_ymax,
+            derivs_xy_min_min,
+            derivs_xy_max_min,
+            derivs_xy_min_max,
+            derivs_xy_max_max);
 
     // Instantiate the spline builders -----------------------------------------------------------
     ddc::SplineBuilder2D<
@@ -287,9 +334,6 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
 
 TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
 {
-    using DerivX = ddc::Deriv<X>;
-    using DerivY = ddc::Deriv<Y>;
-
     using SplineInterpPointsX = ddc::GrevilleInterpolationPoints<
             BSplinesXG,
             ddc::BoundCond::GREVILLE,
@@ -341,15 +385,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
     DField<IdxRange<GridXG, GridYG>> function(function_alloc);
 
     // Initialise data ---------------------------------------------------------------------------
-    ddc::parallel_for_each(
-            ExecSpace(),
-            idx_range_xy,
-            KOKKOS_LAMBDA(Idx<GridXG, GridYG> const idx) {
-                double const x = ddc::coordinate(Idx<GridXG>(idx));
-                double const y = ddc::coordinate(Idx<GridYG>(idx));
-                function(idx) = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::sin(y);
-                function_and_derivs.get_values_field()(idx) = function(idx);
-            });
+    initialise_function<GridXG, GridYG>(function_and_derivs, function);
 
     // Instantiate the spline builders -----------------------------------------------------------
     ddc::SplineBuilder2D<

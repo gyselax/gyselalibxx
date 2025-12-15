@@ -76,7 +76,7 @@ class SplineBuliderDerivField2D
     using Deriv2Field = DField<IdxRange<Grid1, Deriv2>, MemorySpace>;
     using Deriv2ConstField = DConstField<IdxRange<Grid1, Deriv2>, MemorySpace>;
 
-public:
+private:
     Builder2D const& m_builder;
 
 public:
