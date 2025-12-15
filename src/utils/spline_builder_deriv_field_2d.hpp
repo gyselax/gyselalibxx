@@ -256,15 +256,12 @@ public:
         Idx<Grid1> idx_slice = is_min ? idx_range_slice_1.front() : idx_range_slice_1.back();
         Idx<Deriv1, Grid1> idx_deriv1(idx_d1, idx_slice);
 
-        DField<IdxRange<Grid2>, MemorySpace, Kokkos::layout_stride> deriv1_extracted
-                = function_and_derivs[idx_deriv1];
-
         // Fill the field with correct layout.
         ddc::parallel_for_each(
                 ExecSpace(),
                 idx_range_2,
                 KOKKOS_LAMBDA(Idx<Grid2> const idx) {
-                    deriv1(idx_d1, idx) = deriv1_extracted(idx);
+                    deriv1(idx_d1, idx) = function_and_derivs[idx_deriv1](idx);
                 });
     }
 
@@ -279,24 +276,20 @@ public:
             const
     {
         // Extract data.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs);
-        IdxRange<Grid1> idx_range_1(idx_range);
+        IdxRange<Grid1> idx_range_1(get_idx_range(function_and_derivs));
         IdxRangeSlice<Grid2> idx_range_slice_2
                 = function_and_derivs.template idx_range_for_deriv<Grid2>();
 
-        Idx<Deriv2> idx_d2(Idx<Deriv2>(1));
+        Idx<Deriv2> idx_d2(1);
         Idx<Grid2> idx_slice = is_min ? idx_range_slice_2.front() : idx_range_slice_2.back();
         Idx<Deriv2, Grid2> idx_deriv2(idx_d2, idx_slice);
-
-        DField<IdxRange<Grid1>, MemorySpace, Kokkos::layout_stride> deriv2_extracted
-                = function_and_derivs[idx_deriv2];
 
         // Fill the field with correct layout.
         ddc::parallel_for_each(
                 ExecSpace(),
                 idx_range_1,
                 KOKKOS_LAMBDA(Idx<Grid1> const idx) {
-                    deriv2(idx, idx_d2) = deriv2_extracted(idx);
+                    deriv2(idx, idx_d2) = function_and_derivs[idx_deriv2](idx);
                 });
     }
 
@@ -326,8 +319,9 @@ public:
         IdxRangeSlice<Grid2> idx_range_slice_2
                 = function_and_derivs.template idx_range_for_deriv<Grid2>();
 
-        Idx<Deriv1> idx_d1(Idx<Deriv1>(1));
-        Idx<Deriv2> idx_d2(Idx<Deriv2>(1));
+        Idx<Deriv1> idx_d1(1);
+        Idx<Deriv2> idx_d2(1);
+
         Idx<Grid1> idx_slice_1 = is_1min ? idx_range_slice_1.front() : idx_range_slice_1.back();
         Idx<Grid2> idx_slice_2 = is_2min ? idx_range_slice_2.front() : idx_range_slice_2.back();
         Idx<Deriv1, Grid1, Deriv2, Grid2> idx_cross_deriv(idx_d1, idx_slice_1, idx_d2, idx_slice_2);
