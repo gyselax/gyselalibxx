@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines/deriv.hpp>
 
@@ -62,7 +63,7 @@ template <
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
-    static_assert(std::is_floating_point<DataType>);
+    static_assert(std::is_floating_point_v<DataType>);
 
 private:
     // Advection index range element:

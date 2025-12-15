@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
@@ -14,7 +16,7 @@
 template <class Geometry, class GridX, class DataType = double>
 class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX>
 {
-    static_assert(std::is_floating_point<DataType>);
+    static_assert(std::is_floating_point_v<DataType>);
 
     using GridV = typename Geometry::template velocity_dim_for<GridX>;
     using IdxRangeFdistrib = typename Geometry::IdxRangeFdistribu;
