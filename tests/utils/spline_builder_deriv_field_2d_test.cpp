@@ -77,8 +77,7 @@ void initialise_function(
 }
 
 void initialise_derivatives(
-        DerivField<double, IdxRange<DerivX, GridXH, DerivY, GridYH>>
-                function_and_derivs,
+        DerivField<double, IdxRange<DerivX, GridXH, DerivY, GridYH>> function_and_derivs,
         DField<IdxRange<DerivX, GridYH>> derivs_xmin,
         DField<IdxRange<DerivX, GridYH>> derivs_xmax,
         DField<IdxRange<GridXH, DerivY>> derivs_ymin,
@@ -302,12 +301,10 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
 
     // Instantiate splines -----------------------------------------------------------------------
     IdxRange<BSplinesXH, BSplinesYH> idx_range_spline = builder.batched_spline_domain(idx_range_xy);
-    DFieldMem<IdxRange<BSplinesXH, BSplinesYH>> spline_deriv_field_alloc(
-            idx_range_spline);
+    DFieldMem<IdxRange<BSplinesXH, BSplinesYH>> spline_deriv_field_alloc(idx_range_spline);
     DFieldMem<IdxRange<BSplinesXH, BSplinesYH>> spline_fields_alloc(idx_range_spline);
 
-    DField<IdxRange<BSplinesXH, BSplinesYH>> spline_deriv_field(
-            spline_deriv_field_alloc);
+    DField<IdxRange<BSplinesXH, BSplinesYH>> spline_deriv_field(spline_deriv_field_alloc);
     DField<IdxRange<BSplinesXH, BSplinesYH>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
@@ -416,12 +413,10 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
 
     // Instantiate splines -----------------------------------------------------------------------
     IdxRange<BSplinesXG, BSplinesYG> idx_range_spline = builder.batched_spline_domain(idx_range_xy);
-    DFieldMem<IdxRange<BSplinesXG, BSplinesYG>> spline_deriv_field_alloc(
-            idx_range_spline);
+    DFieldMem<IdxRange<BSplinesXG, BSplinesYG>> spline_deriv_field_alloc(idx_range_spline);
     DFieldMem<IdxRange<BSplinesXG, BSplinesYG>> spline_fields_alloc(idx_range_spline);
 
-    DField<IdxRange<BSplinesXG, BSplinesYG>> spline_deriv_field(
-            spline_deriv_field_alloc);
+    DField<IdxRange<BSplinesXG, BSplinesYG>> spline_deriv_field(spline_deriv_field_alloc);
     DField<IdxRange<BSplinesXG, BSplinesYG>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
