@@ -67,9 +67,8 @@ void initialise_function(
         DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs,
         DField<IdxRange<GridX, GridY>, MemorySpace> function)
 {
-    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace>
-            function_and_derivs_proxy = function_and_derivs;
-    DField<IdxRange<GridX, GridY>, MemorySpace> function_proxy = function;
+    DField<IdxRange<GridX, GridY>, MemorySpace, Kokkos::layout_stride> function_extracted
+            = function_and_derivs.get_values_field();
 
     IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function);
     ddc::parallel_for_each(
@@ -79,7 +78,7 @@ void initialise_function(
                 double const x = ddc::coordinate(Idx<GridX>(idx));
                 double const y = ddc::coordinate(Idx<GridY>(idx));
                 function(idx) = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::sin(y);
-                function_and_derivs.get_values_field()(idx) = function(idx);
+                function_extracted(idx) = function(idx);
             });
 }
 
