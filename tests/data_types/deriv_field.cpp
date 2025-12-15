@@ -703,8 +703,8 @@ TEST(DerivFieldTest, FieldDeepCopy)
             dxdyField_copy_alloc(idx_range_x_y, deriv_idx_range_x);
 
     // Get the fields
-    host_t<DerivField> dxdyField = get_field(dxdyField_alloc);
-    host_t<DerivField> dxdyField_copy = get_field(dxdyField_copy_alloc);
+    DerivField dxdyField = get_field(dxdyField_alloc);
+    DerivField dxdyField_copy = get_field(dxdyField_copy_alloc);
 
     // Extract the values and derivatives
     Idx<dX> first_deriv(1);
