@@ -57,19 +57,13 @@ struct BSplinesYG : ddc::NonUniformBSplines<Y, 3>
 {
 };
 
-
 using ExecSpace = Kokkos::DefaultExecutionSpace;
-using MemorySpace = typename ExecSpace::memory_space;
-
 
 template <class GridX, class GridY>
 void initialise_function(
-        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs,
-        DField<IdxRange<GridX, GridY>, MemorySpace> function)
+        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs,
+        DField<IdxRange<GridX, GridY>> function)
 {
-    DField<IdxRange<GridX, GridY>, MemorySpace, Kokkos::layout_stride> function_extracted
-            = function_and_derivs.get_values_field();
-
     IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function);
     ddc::parallel_for_each(
             ExecSpace(),
@@ -78,21 +72,21 @@ void initialise_function(
                 double const x = ddc::coordinate(Idx<GridX>(idx));
                 double const y = ddc::coordinate(Idx<GridY>(idx));
                 function(idx) = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::sin(y);
-                function_extracted(idx) = function(idx);
+                function_and_derivs(idx) = function(idx);
             });
 }
 
 void initialise_derivatives(
-        DerivField<double, IdxRange<DerivX, GridXH, DerivY, GridYH>, MemorySpace>
+        DerivField<double, IdxRange<DerivX, GridXH, DerivY, GridYH>>
                 function_and_derivs,
-        DField<IdxRange<DerivX, GridYH>, MemorySpace> derivs_xmin,
-        DField<IdxRange<DerivX, GridYH>, MemorySpace> derivs_xmax,
-        DField<IdxRange<GridXH, DerivY>, MemorySpace> derivs_ymin,
-        DField<IdxRange<GridXH, DerivY>, MemorySpace> derivs_ymax,
-        DField<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_min_min,
-        DField<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_max_min,
-        DField<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_min_max,
-        DField<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_max_max)
+        DField<IdxRange<DerivX, GridYH>> derivs_xmin,
+        DField<IdxRange<DerivX, GridYH>> derivs_xmax,
+        DField<IdxRange<GridXH, DerivY>> derivs_ymin,
+        DField<IdxRange<GridXH, DerivY>> derivs_ymax,
+        DField<IdxRange<DerivX, DerivY>> derivs_xy_min_min,
+        DField<IdxRange<DerivX, DerivY>> derivs_xy_max_min,
+        DField<IdxRange<DerivX, DerivY>> derivs_xy_min_max,
+        DField<IdxRange<DerivX, DerivY>> derivs_xy_max_max)
 {
     IdxRangeSlice<GridXH> idx_range_slice_dx
             = function_and_derivs.template idx_range_for_deriv<GridXH>();
@@ -227,14 +221,14 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
 
     // Instantiate data --------------------------------------------------------------------------
     // --- DerivField
-    DerivFieldMem<double, IdxRange<DerivX, GridXH, DerivY, GridYH>, 1, MemorySpace>
+    DerivFieldMem<double, IdxRange<DerivX, GridXH, DerivY, GridYH>, 1>
             function_and_derivs_alloc(idx_range_xy, idx_range_slice_dx, idx_range_slice_dy);
-    DerivField<double, IdxRange<DerivX, GridXH, DerivY, GridYH>, MemorySpace> function_and_derivs(
+    DerivField<double, IdxRange<DerivX, GridXH, DerivY, GridYH>> function_and_derivs(
             function_and_derivs_alloc);
 
     // --- Fields
-    DFieldMem<IdxRange<GridXH, GridYH>, MemorySpace> function_alloc(idx_range_xy);
-    DField<IdxRange<GridXH, GridYH>, MemorySpace> function(function_alloc);
+    DFieldMem<IdxRange<GridXH, GridYH>> function_alloc(idx_range_xy);
+    DField<IdxRange<GridXH, GridYH>> function(function_alloc);
 
     Idx<DerivX> first_dx(1);
     IdxRange<DerivX> idx_range_deriv_x(first_dx, IdxStep<DerivX>(1));
@@ -246,25 +240,25 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
     IdxRange<GridXH, DerivY> idx_range_x_dy(idx_range_x, idx_range_deriv_y);
     IdxRange<DerivX, DerivY> idx_range_dx_dy(idx_range_deriv_x, idx_range_deriv_y);
 
-    DFieldMem<IdxRange<DerivX, GridYH>, MemorySpace> derivs_xmin_alloc(idx_range_dx_y);
-    DFieldMem<IdxRange<DerivX, GridYH>, MemorySpace> derivs_xmax_alloc(idx_range_dx_y);
-    DFieldMem<IdxRange<GridXH, DerivY>, MemorySpace> derivs_ymin_alloc(idx_range_x_dy);
-    DFieldMem<IdxRange<GridXH, DerivY>, MemorySpace> derivs_ymax_alloc(idx_range_x_dy);
+    DFieldMem<IdxRange<DerivX, GridYH>> derivs_xmin_alloc(idx_range_dx_y);
+    DFieldMem<IdxRange<DerivX, GridYH>> derivs_xmax_alloc(idx_range_dx_y);
+    DFieldMem<IdxRange<GridXH, DerivY>> derivs_ymin_alloc(idx_range_x_dy);
+    DFieldMem<IdxRange<GridXH, DerivY>> derivs_ymax_alloc(idx_range_x_dy);
 
-    DFieldMem<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_min_min_alloc(idx_range_dx_dy);
-    DFieldMem<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_max_min_alloc(idx_range_dx_dy);
-    DFieldMem<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_min_max_alloc(idx_range_dx_dy);
-    DFieldMem<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_max_max_alloc(idx_range_dx_dy);
+    DFieldMem<IdxRange<DerivX, DerivY>> derivs_xy_min_min_alloc(idx_range_dx_dy);
+    DFieldMem<IdxRange<DerivX, DerivY>> derivs_xy_max_min_alloc(idx_range_dx_dy);
+    DFieldMem<IdxRange<DerivX, DerivY>> derivs_xy_min_max_alloc(idx_range_dx_dy);
+    DFieldMem<IdxRange<DerivX, DerivY>> derivs_xy_max_max_alloc(idx_range_dx_dy);
 
-    DField<IdxRange<DerivX, GridYH>, MemorySpace> derivs_xmin = get_field(derivs_xmin_alloc);
-    DField<IdxRange<DerivX, GridYH>, MemorySpace> derivs_xmax = get_field(derivs_xmax_alloc);
-    DField<IdxRange<GridXH, DerivY>, MemorySpace> derivs_ymin = get_field(derivs_ymin_alloc);
-    DField<IdxRange<GridXH, DerivY>, MemorySpace> derivs_ymax = get_field(derivs_ymax_alloc);
+    DField<IdxRange<DerivX, GridYH>> derivs_xmin = get_field(derivs_xmin_alloc);
+    DField<IdxRange<DerivX, GridYH>> derivs_xmax = get_field(derivs_xmax_alloc);
+    DField<IdxRange<GridXH, DerivY>> derivs_ymin = get_field(derivs_ymin_alloc);
+    DField<IdxRange<GridXH, DerivY>> derivs_ymax = get_field(derivs_ymax_alloc);
 
-    DField<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_min_min(derivs_xy_min_min_alloc);
-    DField<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_max_min(derivs_xy_max_min_alloc);
-    DField<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_min_max(derivs_xy_min_max_alloc);
-    DField<IdxRange<DerivX, DerivY>, MemorySpace> derivs_xy_max_max(derivs_xy_max_max_alloc);
+    DField<IdxRange<DerivX, DerivY>> derivs_xy_min_min(derivs_xy_min_min_alloc);
+    DField<IdxRange<DerivX, DerivY>> derivs_xy_max_min(derivs_xy_max_min_alloc);
+    DField<IdxRange<DerivX, DerivY>> derivs_xy_min_max(derivs_xy_min_max_alloc);
+    DField<IdxRange<DerivX, DerivY>> derivs_xy_max_max(derivs_xy_max_max_alloc);
 
     // Initialise data ---------------------------------------------------------------------------
     initialise_function<GridXH, GridYH>(function_and_derivs, function);
@@ -282,7 +276,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
     // Instantiate the spline builders -----------------------------------------------------------
     ddc::SplineBuilder2D<
             ExecSpace,
-            MemorySpace,
+            typename ExecSpace::memory_space,
             BSplinesXH,
             BSplinesYH,
             GridXH,
@@ -308,13 +302,13 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
 
     // Instantiate splines -----------------------------------------------------------------------
     IdxRange<BSplinesXH, BSplinesYH> idx_range_spline = builder.batched_spline_domain(idx_range_xy);
-    DFieldMem<IdxRange<BSplinesXH, BSplinesYH>, MemorySpace> spline_deriv_field_alloc(
+    DFieldMem<IdxRange<BSplinesXH, BSplinesYH>> spline_deriv_field_alloc(
             idx_range_spline);
-    DFieldMem<IdxRange<BSplinesXH, BSplinesYH>, MemorySpace> spline_fields_alloc(idx_range_spline);
+    DFieldMem<IdxRange<BSplinesXH, BSplinesYH>> spline_fields_alloc(idx_range_spline);
 
-    DField<IdxRange<BSplinesXH, BSplinesYH>, MemorySpace> spline_deriv_field(
+    DField<IdxRange<BSplinesXH, BSplinesYH>> spline_deriv_field(
             spline_deriv_field_alloc);
-    DField<IdxRange<BSplinesXH, BSplinesYH>, MemorySpace> spline_fields(spline_fields_alloc);
+    DField<IdxRange<BSplinesXH, BSplinesYH>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
     apply_builder(spline_deriv_field, function_and_derivs);
@@ -381,14 +375,14 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
 
     // Instantiate data --------------------------------------------------------------------------
     // --- DerivField
-    DerivFieldMem<double, IdxRange<DerivX, GridXG, DerivY, GridYG>, 0, MemorySpace>
+    DerivFieldMem<double, IdxRange<DerivX, GridXG, DerivY, GridYG>, 0>
             function_and_derivs_alloc(idx_range_xy, idx_range_slice_dx, idx_range_slice_dy);
-    DerivField<double, IdxRange<DerivX, GridXG, DerivY, GridYG>, MemorySpace> function_and_derivs(
+    DerivField<double, IdxRange<DerivX, GridXG, DerivY, GridYG>> function_and_derivs(
             function_and_derivs_alloc);
 
     // --- Fields
-    DFieldMem<IdxRange<GridXG, GridYG>, MemorySpace> function_alloc(idx_range_xy);
-    DField<IdxRange<GridXG, GridYG>, MemorySpace> function(function_alloc);
+    DFieldMem<IdxRange<GridXG, GridYG>> function_alloc(idx_range_xy);
+    DField<IdxRange<GridXG, GridYG>> function(function_alloc);
 
     // Initialise data ---------------------------------------------------------------------------
     initialise_function<GridXG, GridYG>(function_and_derivs, function);
@@ -396,7 +390,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
     // Instantiate the spline builders -----------------------------------------------------------
     ddc::SplineBuilder2D<
             ExecSpace,
-            MemorySpace,
+            typename ExecSpace::memory_space,
             BSplinesXG,
             BSplinesYG,
             GridXG,
@@ -422,13 +416,13 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
 
     // Instantiate splines -----------------------------------------------------------------------
     IdxRange<BSplinesXG, BSplinesYG> idx_range_spline = builder.batched_spline_domain(idx_range_xy);
-    DFieldMem<IdxRange<BSplinesXG, BSplinesYG>, MemorySpace> spline_deriv_field_alloc(
+    DFieldMem<IdxRange<BSplinesXG, BSplinesYG>> spline_deriv_field_alloc(
             idx_range_spline);
-    DFieldMem<IdxRange<BSplinesXG, BSplinesYG>, MemorySpace> spline_fields_alloc(idx_range_spline);
+    DFieldMem<IdxRange<BSplinesXG, BSplinesYG>> spline_fields_alloc(idx_range_spline);
 
-    DField<IdxRange<BSplinesXG, BSplinesYG>, MemorySpace> spline_deriv_field(
+    DField<IdxRange<BSplinesXG, BSplinesYG>> spline_deriv_field(
             spline_deriv_field_alloc);
-    DField<IdxRange<BSplinesXG, BSplinesYG>, MemorySpace> spline_fields(spline_fields_alloc);
+    DField<IdxRange<BSplinesXG, BSplinesYG>> spline_fields(spline_fields_alloc);
 
     // Build splines and compare -----------------------------------------------------------------
     apply_builder(spline_deriv_field, function_and_derivs);
