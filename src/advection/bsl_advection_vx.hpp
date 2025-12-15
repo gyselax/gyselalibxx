@@ -15,6 +15,8 @@
 template <class Geometry, class GridV, class DataType = double>
 class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>
 {
+    static_assert(std::is_floating_point<DataType>);
+
     using IdxRangeFdistribu = typename Geometry::IdxRangeFdistribu;
     using IdxRangeSpatial = typename Geometry::IdxRangeSpatial;
     using IdxSpatial = typename IdxRangeSpatial::discrete_element_type;

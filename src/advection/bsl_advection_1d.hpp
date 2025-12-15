@@ -62,6 +62,7 @@ template <
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
+    static_assert(std::is_floating_point<DataType>);
 
 private:
     // Advection index range element:
