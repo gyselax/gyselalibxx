@@ -115,8 +115,8 @@ void initialise_derivatives(
                 derivs_xmax(first_dx, idx_y) = -2. / 3 * M_PI
                                                * Kokkos::sin(2. / 3 * M_PI * double(x_max) + 0.25)
                                                * Kokkos::sin(y);
-                function_and_derivs[idx_deriv_xmin](idx_y) = derivs_xmin(first_dx, idx_y);
-                function_and_derivs[idx_deriv_xmax](idx_y) = derivs_xmax(first_dx, idx_y);
+                function_and_derivs(idx_deriv_xmin, idx_y) = derivs_xmin(first_dx, idx_y);
+                function_and_derivs(idx_deriv_xmax, idx_y) = derivs_xmax(first_dx, idx_y);
             });
 
     ddc::parallel_for_each(
@@ -128,8 +128,8 @@ void initialise_derivatives(
                         = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::cos(double(y_min));
                 derivs_ymax(idx_x, first_dy)
                         = Kokkos::cos(2. / 3 * M_PI * x + 0.25) * Kokkos::cos(double(y_max));
-                function_and_derivs[idx_deriv_ymin](idx_x) = derivs_ymin(idx_x, first_dy);
-                function_and_derivs[idx_deriv_ymax](idx_x) = derivs_ymax(idx_x, first_dy);
+                function_and_derivs(idx_deriv_ymin, idx_x) = derivs_ymin(idx_x, first_dy);
+                function_and_derivs(idx_deriv_ymax, idx_x) = derivs_ymax(idx_x, first_dy);
             });
 
     Kokkos::parallel_for(
