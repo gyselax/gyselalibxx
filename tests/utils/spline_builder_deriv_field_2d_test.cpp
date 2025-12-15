@@ -50,10 +50,9 @@ void initialise_function(
         DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs,
         DField<IdxRange<GridX, GridY>> function)
 {
-    IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function);
     ddc::parallel_for_each(
             ExecSpace(),
-            idx_range_xy,
+            get_idx_range(function),
             KOKKOS_LAMBDA(Idx<GridX, GridY> const idx) {
                 double const x = ddc::coordinate(Idx<GridX>(idx));
                 double const y = ddc::coordinate(Idx<GridY>(idx));
