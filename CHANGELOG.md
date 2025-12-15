@@ -11,6 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Allow `BslAdvection1D`, `BslAdvectionSpatial`, and `BslAdvectionVelocity` to use variable precision.
+
 ### Fixed
 
 - Allow access to slices extracted from `const DerivField`.
