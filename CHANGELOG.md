@@ -15,10 +15,6 @@ in a `DerivField`.
 
 ### Fixed
 
-- Allow access to slices extracted from `const DerivField`.
-- Fixed `LAPACKE` CMake target definition.
-- Uses patched cray-mpich package forcing using of the GTL on dependencies.
-
 ### Changed
 
 - Extract spline definitions from `geometry.hpp` files into files called `spline_definitions_<geom_descriptor>.hpp` which are dedicated to tests or simulations.
@@ -29,6 +25,14 @@ in a `DerivField`.
 ### Removed
 
 - Remove unused temporal dimension `T` in `geometryXVx`.
+
+## [v0.4.1] - 2025-12-12
+
+### Fixed
+
+- Allow access to slices extracted from `const DerivField`.
+- Fixed `LAPACKE` CMake target definition.
+- Uses patched cray-mpich package forcing using of the GTL on dependencies.
 
 ## [v0.4.0] - 2025-12-10
 
