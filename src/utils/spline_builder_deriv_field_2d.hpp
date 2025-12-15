@@ -29,9 +29,7 @@ template <
         ddc::BoundCond BoundCond1min,
         ddc::BoundCond BoundCond1max,
         ddc::BoundCond BoundCond2min,
-        ddc::BoundCond BoundCond2max,
-        class LayoutSpline = Kokkos::layout_right,
-        class LayoutFunction = Kokkos::layout_right>
+        ddc::BoundCond BoundCond2max>
 class SplineBuliderDerivField2D
 {
     using MemorySpace = typename ExecSpace::memory_space;
@@ -54,12 +52,8 @@ class SplineBuliderDerivField2D
             BoundCond2max,
             ddc::SplineSolver::LAPACK>;
 
-    using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace, LayoutSpline>;
-    using DerivFieldType = DerivField<
-            double,
-            IdxRange<Deriv1, Grid1, Deriv2, Grid2>,
-            MemorySpace,
-            LayoutFunction>;
+    using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace>;
+    using DerivFieldType = DerivField<double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
 
     using FunctFieldMem = DFieldMem<IdxRange<Grid1, Grid2>, MemorySpace>;
     using FunctField = DField<IdxRange<Grid1, Grid2>, MemorySpace>;
