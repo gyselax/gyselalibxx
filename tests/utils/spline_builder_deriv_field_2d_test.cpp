@@ -67,6 +67,10 @@ void initialise_function(
         DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs,
         DField<IdxRange<GridX, GridY>, MemorySpace> function)
 {
+    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace>
+            function_and_derivs_proxy = function_and_derivs;
+    DField<IdxRange<GridX, GridY>, MemorySpace> function_proxy = function;
+    
     IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function);
     ddc::parallel_for_each(
             ExecSpace(),
