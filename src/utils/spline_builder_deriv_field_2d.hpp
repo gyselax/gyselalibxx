@@ -142,7 +142,6 @@ public:
         std::optional<CrossDerivConstField> cross_max_max_optional
                 = std::optional<CrossDerivConstField> {std::nullopt};
 
-
         // --- fill in the first derivatives with the data from the DerivField.
         fill_in_deriv1(get_field(deriv1_min_alloc), function_and_derivs, true);
         if constexpr (BoundCond1max == ddc::BoundCond::HERMITE) {
