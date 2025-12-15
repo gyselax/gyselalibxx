@@ -100,7 +100,7 @@ public:
     {
         // Get the fields on the right layout.
         // --- get the index ranges.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
+        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs);
         IdxRange<Grid1> idx_range_1(idx_range);
         IdxRange<Grid2> idx_range_2(idx_range);
 
@@ -226,15 +226,13 @@ public:
     void fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
     {
         // Extract data.
-        DField<IdxRange<Grid1, Grid2>, MemorySpace, Kokkos::layout_stride> function_extracted
-                = function_and_derivs.get_values_field();
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_extracted);
+        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs);
         // Fill the field with correct layout.
         ddc::parallel_for_each(
                 ExecSpace(),
                 idx_range,
                 KOKKOS_LAMBDA(Idx<Grid1, Grid2> const idx) {
-                    function(idx) = function_extracted(idx);
+                    function(idx) = function_and_derivs(idx);
                 });
     }
 
@@ -249,7 +247,7 @@ public:
             const
     {
         // Extract data.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
+        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs);
         IdxRange<Grid2> idx_range_2(idx_range);
         IdxRangeSlice<Grid1> idx_range_slice_1
                 = function_and_derivs.template idx_range_for_deriv<Grid1>();
@@ -281,7 +279,7 @@ public:
             const
     {
         // Extract data.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
+        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs);
         IdxRange<Grid1> idx_range_1(idx_range);
         IdxRangeSlice<Grid2> idx_range_slice_2
                 = function_and_derivs.template idx_range_for_deriv<Grid2>();
@@ -319,7 +317,7 @@ public:
             bool const is_2min) const
     {
         // Extract data.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
+        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs);
         IdxRange<Grid1> idx_range_1(idx_range);
         IdxRange<Grid2> idx_range_2(idx_range);
 
