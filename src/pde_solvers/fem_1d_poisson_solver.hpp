@@ -29,6 +29,7 @@ class FEM1DPoissonSolver
     : public IPoissonSolver<
               typename SplineEvaluator::evaluation_domain_type,
               IdxRangeBatched,
+              double,
               typename SplineEvaluator::memory_space,
               Kokkos::layout_right>
 {

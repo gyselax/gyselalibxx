@@ -38,6 +38,7 @@ class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, ExecSpace, Layou
     : public IPoissonSolver<
               IdxRange<GridPDEDim1D...>,
               IdxRangeFull,
+              double,
               typename ExecSpace::memory_space,
               LayoutSpace>
 {

@@ -6,7 +6,12 @@
 #include "ddc_helper.hpp"
 #include "vector_field.hpp"
 
-template <class IdxRangeLaplacian, class IdxRangeFull, class MemorySpace, class LayoutSpace>
+template <
+        class IdxRangeLaplacian,
+        class IdxRangeFull,
+        class DataType,
+        class MemorySpace,
+        class LayoutSpace>
 class IPoissonSolver;
 
 /**
@@ -21,8 +26,8 @@ class IPoissonSolver;
  * @tparam MemorySpace The space (CPU/GPU) where the Fields passed to operator()
  *                      are saved.
  */
-template <class... ODims, class IdxRangeFull, class MemorySpace, class LayoutSpace>
-class IPoissonSolver<IdxRange<ODims...>, IdxRangeFull, MemorySpace, LayoutSpace>
+template <class... ODims, class IdxRangeFull, class DataType, class MemorySpace, class LayoutSpace>
+class IPoissonSolver<IdxRange<ODims...>, IdxRangeFull, DataType, MemorySpace, LayoutSpace>
 {
 protected:
     /// @brief The tags describing the real dimensions in the equation.
@@ -40,15 +45,15 @@ protected:
 
 public:
     /// @brief The Field type of the arguments to operator().
-    using field_type = DField<IdxRangeFull, MemorySpace, LayoutSpace>;
+    using field_type = Field<DataType, IdxRangeFull, MemorySpace, LayoutSpace>;
     /// @brief The const Field type of the arguments to operator().
-    using const_field_type = DConstField<IdxRangeFull, MemorySpace, LayoutSpace>;
+    using const_field_type = ConstField<DataType, IdxRangeFull, MemorySpace, LayoutSpace>;
 
     /// @brief The type of the derivative of @f$ \phi @f$.
     using vector_field_type = std::conditional_t<
             ddc::type_seq_size_v<laplacian_tags> == 1,
             field_type,
-            VectorField<double, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace>>;
+            VectorField<DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace>>;
 
     /// @brief The index range type describing the batch dimensions.
     using batch_idx_range_type =
