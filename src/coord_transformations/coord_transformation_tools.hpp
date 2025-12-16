@@ -15,7 +15,7 @@ namespace concepts {
  * @brief A helper concept to determine if a type is a mapping.
  */
 template <typename T>
-concept IsMapping = requires
+concept Mapping = requires
 {
     typename T::CoordArg;
     typename T::CoordResult;
@@ -24,7 +24,7 @@ concept IsMapping = requires
         std::same_as<std::invoke_result_t<T, typename T::CoordArg>, typename T::CoordResult>;
 
 template <typename T>
-concept DefinesJacobian = IsMapping<T> && requires
+concept MappingWithJacobian = Mapping<T> && requires
 {
     typename T::CoordJacobian;
 } && requires(T const& t, typename T::CoordJacobian const& x)
@@ -43,8 +43,8 @@ concept DefinesJacobian = IsMapping<T> && requires
 };
 
 template <typename T>
-concept DefinesInvJacobian
-        = DefinesJacobian<T> && requires(T const& t, typename T::CoordJacobian const& x)
+concept MappingWithInvJacobian
+        = MappingWithJacobian<T> && requires(T const& t, typename T::CoordJacobian const& x)
 {
     {
         t.inv_jacobian_matrix(x)
@@ -57,11 +57,11 @@ concept DefinesInvJacobian
 };
 
 template <typename T>
-concept IsAnalyticalMapping = IsMapping<T> && requires(T const& t)
+concept AnalyticalMapping = Mapping<T> && requires(T const& t)
 {
     {
         t.get_inverse_mapping()
-        } -> IsMapping;
+        } -> Mapping;
 };
 } // namespace concepts
 
@@ -90,13 +90,13 @@ static constexpr bool is_accessible_v = mapping_detail::
         MappingAccessibility<ExecSpace, std::remove_const_t<std::remove_reference_t<Type>>>::value;
 
 template <class Mapping>
-concept is_mapping_v = concepts::IsMapping<Mapping>;
+concept is_mapping_v = concepts::Mapping<Mapping>;
 
 template <class Mapping>
-concept has_jacobian_v = concepts::DefinesJacobian<Mapping>;
+concept has_jacobian_v = concepts::MappingWithJacobian<Mapping>;
 
 template <class Mapping>
-concept has_inv_jacobian_v = concepts::DefinesInvJacobian<Mapping>;
+concept has_inv_jacobian_v = concepts::MappingWithInvJacobian<Mapping>;
 
 /// Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point.
 template <class Mapping>
@@ -104,7 +104,7 @@ static constexpr bool is_coord_transform_with_o_point_v
         = mapping_detail::HasOPoint<std::remove_const_t<std::remove_reference_t<Mapping>>>::value;
 
 template <class Mapping>
-concept is_analytical_mapping_v = concepts::IsAnalyticalMapping<Mapping>;
+concept is_analytical_mapping_v = concepts::AnalyticalMapping<Mapping>;
 
 template <class Mapping>
 using inverse_mapping_t = decltype(std::declval<Mapping>().get_inverse_mapping());
