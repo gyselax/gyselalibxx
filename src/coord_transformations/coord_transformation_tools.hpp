@@ -10,8 +10,7 @@
 #include "vector_index_tools.hpp"
 #include "view.hpp"
 
-namespace mapping_detail {
-
+namespace concepts {
 /**
  * @brief A helper concept to determine if a type is a mapping.
  */
@@ -61,10 +60,12 @@ template <typename T>
 concept IsAnalyticalMapping = IsMapping<T> && requires(T const& t)
 {
     {
-    t.get_inverse_mapping()
-    } -> IsMapping;
+        t.get_inverse_mapping()
+        } -> IsMapping;
 };
+} // namespace concepts
 
+namespace mapping_detail {
 
 template <class ExecSpace, class Type>
 struct MappingAccessibility : std::false_type
@@ -89,13 +90,13 @@ static constexpr bool is_accessible_v = mapping_detail::
         MappingAccessibility<ExecSpace, std::remove_const_t<std::remove_reference_t<Type>>>::value;
 
 template <class Mapping>
-static constexpr bool is_mapping_v = mapping_detail::IsMapping<Mapping>;
+concept is_mapping_v = concepts::IsMapping<Mapping>;
 
-template <class Mapping, bool RaiseError = true>
-static constexpr bool has_jacobian_v = mapping_detail::DefinesJacobian<Mapping>;
+template <class Mapping>
+concept has_jacobian_v = concepts::DefinesJacobian<Mapping>;
 
-template <class Mapping, bool RaiseError = true>
-static constexpr bool has_inv_jacobian_v = mapping_detail::DefinesInvJacobian<Mapping>;
+template <class Mapping>
+concept has_inv_jacobian_v = concepts::DefinesInvJacobian<Mapping>;
 
 /// Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point.
 template <class Mapping>
@@ -103,7 +104,7 @@ static constexpr bool is_coord_transform_with_o_point_v
         = mapping_detail::HasOPoint<std::remove_const_t<std::remove_reference_t<Mapping>>>::value;
 
 template <class Mapping>
-static constexpr bool is_analytical_mapping_v = mapping_detail::IsAnalyticalMapping<Mapping>;
+concept is_analytical_mapping_v = concepts::IsAnalyticalMapping<Mapping>;
 
 template <class Mapping>
 using inverse_mapping_t = decltype(std::declval<Mapping>().get_inverse_mapping());
