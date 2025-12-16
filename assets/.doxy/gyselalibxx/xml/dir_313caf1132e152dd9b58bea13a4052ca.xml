@@ -11,6 +11,7 @@
     <innerfile refid="mesh__builder_8hpp">mesh_builder.hpp</innerfile>
     <innerfile refid="non__uniform__interpolation__points_8hpp">non_uniform_interpolation_points.hpp</innerfile>
     <innerfile refid="preprocessor_8hpp">preprocessor.hpp</innerfile>
+    <innerfile refid="spline__builder__deriv__field__2d_8hpp">spline_builder_deriv_field_2d.hpp</innerfile>
     <innerfile refid="transpose_8hpp">transpose.hpp</innerfile>
     <innerfile refid="type__seq__tools_8hpp">type_seq_tools.hpp</innerfile>
     <innerfile refid="view_8hpp">view.hpp</innerfile>

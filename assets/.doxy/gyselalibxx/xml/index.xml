@@ -2587,6 +2587,34 @@
     <member refid="classSplineBuilder2DCache_1a78da48710cb31c905f7e96d5cb7d2bce" kind="function"><name>compute_coeffs</name></member>
     <member refid="classSplineBuilder2DCache_1aa3f0d45c1e346fd20e29efd81a210a08" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="classSplineBuliderDerivField2D" kind="class"><name>SplineBuliderDerivField2D</name>
+    <member refid="classSplineBuliderDerivField2D_1a7e0a1cc5700f503bfda43336b673fd2e" kind="typedef"><name>MemorySpace</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a3ff565896f51e6bc2c1cde368c11ac95" kind="typedef"><name>Dim1</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a8322683cc919ab1b5630d219076f18c7" kind="typedef"><name>Dim2</name></member>
+    <member refid="classSplineBuliderDerivField2D_1ac753a11e6cc66d5d879de686ea7c934c" kind="typedef"><name>Deriv1</name></member>
+    <member refid="classSplineBuliderDerivField2D_1afbf0f32e6808ddbbf16881c92a60e2f3" kind="typedef"><name>Deriv2</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a370176a149d41646f3776ca72b6be7c0" kind="typedef"><name>Builder2D</name></member>
+    <member refid="classSplineBuliderDerivField2D_1ab0b655566c4477ffd39b94a8bb531eee" kind="typedef"><name>SplineType</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a4921d2d671e689c0b4c1b5bda4f8e9ac" kind="typedef"><name>DerivFieldType</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a27f012291260834e31ef5ce78f81989d" kind="typedef"><name>FunctFieldMem</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a9a6c6b189740cafd5f2eb344be09ee34" kind="typedef"><name>FunctField</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a7d257d21c0940740c03386b1b3ff0a16" kind="typedef"><name>CrossDerivFieldMem</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a625edefbd9b22e75a7cdddcdae9fb9ee" kind="typedef"><name>CrossDerivField</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a8f97b3ebd8253d046ffe03aa96a4589c" kind="typedef"><name>CrossDerivConstField</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a63ffad36f82e813173984174cd39ee0d" kind="typedef"><name>Deriv1FieldMem</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a2ff6aecc9a8b5596978623052157fb68" kind="typedef"><name>Deriv1Field</name></member>
+    <member refid="classSplineBuliderDerivField2D_1af1872dbb76c31590091fc5787e7aa897" kind="typedef"><name>Deriv1ConstField</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a8d207058ba79b92f07108f466c069fa2" kind="typedef"><name>Deriv2FieldMem</name></member>
+    <member refid="classSplineBuliderDerivField2D_1ac9f391293804afa7d0e002e9b82c0c0d" kind="typedef"><name>Deriv2Field</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a8bd04b5e4056724366c338e5c39cb848" kind="typedef"><name>Deriv2ConstField</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a7ae98f3d661fedba1091d0810565a09f" kind="variable"><name>m_builder</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a26000b0a18bd92e1a7cd80b4c70592af" kind="function"><name>SplineBuliderDerivField2D</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a7d022aaaa01632ff2472af62c6f114ae" kind="function"><name>operator()</name></member>
+    <member refid="classSplineBuliderDerivField2D_1ae5a15bccada74cfe45b95e5f52af0990" kind="function"><name>fill_in_function</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a1abd8724064d97b3cc4e49c7d3f6b212" kind="function"><name>fill_in_deriv1</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a9df363ba433e1c5e276fd747c193583e" kind="function"><name>fill_in_deriv2</name></member>
+    <member refid="classSplineBuliderDerivField2D_1a0bb44474e00453075e52b61d8f251951" kind="function"><name>fill_in_cross_deriv</name></member>
+  </compound>
   <compound refid="classSplineInterpolator" kind="class"><name>SplineInterpolator</name>
     <member refid="classSplineInterpolator_1a0178cfed8217e7d7838444f56ea31694" kind="typedef"><name>BuilderType</name></member>
     <member refid="classSplineInterpolator_1a4c1ce88f6419a4fe9ef1073cfb1924ae" kind="typedef"><name>EvaluatorType</name></member>
@@ -4096,6 +4124,8 @@
     <member refid="preprocessor_8hpp_1aa773d24a5cbe4827188248482eaeca5a" kind="define"><name>GSLX_UNUSED</name></member>
     <member refid="preprocessor_8hpp_1a732bcf5fe17fc5ac5deff14eb64ca84d" kind="define"><name>_GSLX_UTILITY_STRINGIFY</name></member>
     <member refid="preprocessor_8hpp_1af0ec689d01b97ce701a4ff5d6e2a2ef3" kind="define"><name>GSLX_UTILITY_STRINGIFY</name></member>
+  </compound>
+  <compound refid="spline__builder__deriv__field__2d_8hpp" kind="file"><name>spline_builder_deriv_field_2d.hpp</name>
   </compound>
   <compound refid="transpose_8hpp" kind="file"><name>transpose.hpp</name>
     <member refid="transpose_8hpp_1a39d1906c5163759cb80ba5df19ecb918" kind="function"><name>transpose_layout</name></member>

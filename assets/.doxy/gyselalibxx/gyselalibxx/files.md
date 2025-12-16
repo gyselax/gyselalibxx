@@ -296,6 +296,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**mesh\_builder.hpp**](mesh__builder_8hpp.md)     
         * **file** [**non\_uniform\_interpolation\_points.hpp**](non__uniform__interpolation__points_8hpp.md)     
         * **file** [**preprocessor.hpp**](preprocessor_8hpp.md)     
+        * **file** [**spline\_builder\_deriv\_field\_2d.hpp**](spline__builder__deriv__field__2d_8hpp.md)     
         * **file** [**transpose.hpp**](transpose_8hpp.md)     
         * **file** [**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md)     
         * **file** [**view.hpp**](view_8hpp.md)     

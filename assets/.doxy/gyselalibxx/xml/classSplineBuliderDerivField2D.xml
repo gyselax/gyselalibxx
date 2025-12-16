@@ -1,0 +1,648 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSplineBuliderDerivField2D" kind="class" language="C++" prot="public">
+    <compoundname>SplineBuliderDerivField2D</compoundname>
+    <includes refid="spline__builder__deriv__field__2d_8hpp" local="no">spline_builder_deriv_field_2d.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class BSplines1</type>
+      </param>
+      <param>
+        <type>class BSplines2</type>
+      </param>
+      <param>
+        <type>class Grid1</type>
+      </param>
+      <param>
+        <type>class Grid2</type>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>BoundCond1min</declname>
+        <defname>BoundCond1min</defname>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>BoundCond1max</declname>
+        <defname>BoundCond1max</defname>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>BoundCond2min</declname>
+        <defname>BoundCond2min</defname>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>BoundCond2max</declname>
+        <defname>BoundCond2max</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a7e0a1cc5700f503bfda43336b673fd2e" prot="private" static="no">
+        <type>typename ExecSpace::memory_space</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::MemorySpace =  typename ExecSpace::memory_space</definition>
+        <argsstring></argsstring>
+        <name>MemorySpace</name>
+        <qualifiedname>SplineBuliderDerivField2D::MemorySpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a3ff565896f51e6bc2c1cde368c11ac95" prot="private" static="no">
+        <type>typename BSplines1::continuous_dimension_type</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Dim1 =  typename BSplines1::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>Dim1</name>
+        <qualifiedname>SplineBuliderDerivField2D::Dim1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a8322683cc919ab1b5630d219076f18c7" prot="private" static="no">
+        <type>typename BSplines2::continuous_dimension_type</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Dim2 =  typename BSplines2::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>Dim2</name>
+        <qualifiedname>SplineBuliderDerivField2D::Dim2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1ac753a11e6cc66d5d879de686ea7c934c" prot="private" static="no">
+        <type>ddc::Deriv&lt; Dim1 &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Deriv1 =  ddc::Deriv&lt;Dim1&gt;</definition>
+        <argsstring></argsstring>
+        <name>Deriv1</name>
+        <qualifiedname>SplineBuliderDerivField2D::Deriv1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1afbf0f32e6808ddbbf16881c92a60e2f3" prot="private" static="no">
+        <type>ddc::Deriv&lt; Dim2 &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Deriv2 =  ddc::Deriv&lt;Dim2&gt;</definition>
+        <argsstring></argsstring>
+        <name>Deriv2</name>
+        <qualifiedname>SplineBuliderDerivField2D::Deriv2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a370176a149d41646f3776ca72b6be7c0" prot="private" static="no">
+        <type>ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max, ddc::SplineSolver::LAPACK &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Builder2D =  ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max, ddc::SplineSolver::LAPACK&gt;</definition>
+        <argsstring></argsstring>
+        <name>Builder2D</name>
+        <qualifiedname>SplineBuliderDerivField2D::Builder2D</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1ab0b655566c4477ffd39b94a8bb531eee" prot="private" static="no">
+        <type>DField&lt; IdxRange&lt; BSplines1, BSplines2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::SplineType =  DField&lt;IdxRange&lt;BSplines1, BSplines2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>SplineType</name>
+        <qualifiedname>SplineBuliderDerivField2D::SplineType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a4921d2d671e689c0b4c1b5bda4f8e9ac" prot="private" static="no">
+        <type><ref refid="classDerivField" kindref="compound">DerivField</ref>&lt; double, IdxRange&lt; Deriv1, Grid1, Deriv2, Grid2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::DerivFieldType =  DerivField&lt;double, IdxRange&lt;Deriv1, Grid1, Deriv2, Grid2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivFieldType</name>
+        <qualifiedname>SplineBuliderDerivField2D::DerivFieldType</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a27f012291260834e31ef5ce78f81989d" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRange&lt; Grid1, Grid2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::FunctFieldMem =  DFieldMem&lt;IdxRange&lt;Grid1, Grid2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>FunctFieldMem</name>
+        <qualifiedname>SplineBuliderDerivField2D::FunctFieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a9a6c6b189740cafd5f2eb344be09ee34" prot="private" static="no">
+        <type>DField&lt; IdxRange&lt; Grid1, Grid2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::FunctField =  DField&lt;IdxRange&lt;Grid1, Grid2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>FunctField</name>
+        <qualifiedname>SplineBuliderDerivField2D::FunctField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a7d257d21c0940740c03386b1b3ff0a16" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRange&lt; Deriv1, Deriv2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::CrossDerivFieldMem =  DFieldMem&lt;IdxRange&lt;Deriv1, Deriv2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>CrossDerivFieldMem</name>
+        <qualifiedname>SplineBuliderDerivField2D::CrossDerivFieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a625edefbd9b22e75a7cdddcdae9fb9ee" prot="private" static="no">
+        <type>DField&lt; IdxRange&lt; Deriv1, Deriv2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::CrossDerivField =  DField&lt;IdxRange&lt;Deriv1, Deriv2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>CrossDerivField</name>
+        <qualifiedname>SplineBuliderDerivField2D::CrossDerivField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a8f97b3ebd8253d046ffe03aa96a4589c" prot="private" static="no">
+        <type>DConstField&lt; IdxRange&lt; Deriv1, Deriv2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::CrossDerivConstField =  DConstField&lt;IdxRange&lt;Deriv1, Deriv2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>CrossDerivConstField</name>
+        <qualifiedname>SplineBuliderDerivField2D::CrossDerivConstField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="63" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a63ffad36f82e813173984174cd39ee0d" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRange&lt; Deriv1, Grid2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Deriv1FieldMem =  DFieldMem&lt;IdxRange&lt;Deriv1, Grid2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>Deriv1FieldMem</name>
+        <qualifiedname>SplineBuliderDerivField2D::Deriv1FieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a2ff6aecc9a8b5596978623052157fb68" prot="private" static="no">
+        <type>DField&lt; IdxRange&lt; Deriv1, Grid2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Deriv1Field =  DField&lt;IdxRange&lt;Deriv1, Grid2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>Deriv1Field</name>
+        <qualifiedname>SplineBuliderDerivField2D::Deriv1Field</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1af1872dbb76c31590091fc5787e7aa897" prot="private" static="no">
+        <type>DConstField&lt; IdxRange&lt; Deriv1, Grid2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Deriv1ConstField =  DConstField&lt;IdxRange&lt;Deriv1, Grid2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>Deriv1ConstField</name>
+        <qualifiedname>SplineBuliderDerivField2D::Deriv1ConstField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a8d207058ba79b92f07108f466c069fa2" prot="private" static="no">
+        <type>DFieldMem&lt; IdxRange&lt; Grid1, Deriv2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Deriv2FieldMem =  DFieldMem&lt;IdxRange&lt;Grid1, Deriv2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>Deriv2FieldMem</name>
+        <qualifiedname>SplineBuliderDerivField2D::Deriv2FieldMem</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1ac9f391293804afa7d0e002e9b82c0c0d" prot="private" static="no">
+        <type>DField&lt; IdxRange&lt; Grid1, Deriv2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Deriv2Field =  DField&lt;IdxRange&lt;Grid1, Deriv2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>Deriv2Field</name>
+        <qualifiedname>SplineBuliderDerivField2D::Deriv2Field</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineBuliderDerivField2D_1a8bd04b5e4056724366c338e5c39cb848" prot="private" static="no">
+        <type>DConstField&lt; IdxRange&lt; Grid1, Deriv2 &gt;, MemorySpace &gt;</type>
+        <definition>using SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::Deriv2ConstField =  DConstField&lt;IdxRange&lt;Grid1, Deriv2&gt;, MemorySpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>Deriv2ConstField</name>
+        <qualifiedname>SplineBuliderDerivField2D::Deriv2ConstField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="71" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSplineBuliderDerivField2D_1a7ae98f3d661fedba1091d0810565a09f" prot="private" static="no" mutable="no">
+        <type>Builder2D const  &amp;</type>
+        <definition>Builder2D const&amp; SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::m_builder</definition>
+        <argsstring></argsstring>
+        <name>m_builder</name>
+        <qualifiedname>SplineBuliderDerivField2D::m_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="74" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSplineBuliderDerivField2D_1a26000b0a18bd92e1a7cd80b4c70592af" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::SplineBuliderDerivField2D</definition>
+        <argsstring>(Builder2D const &amp;builder)</argsstring>
+        <name>SplineBuliderDerivField2D</name>
+        <qualifiedname>SplineBuliderDerivField2D::SplineBuliderDerivField2D</qualifiedname>
+        <param>
+          <type>Builder2D const &amp;</type>
+          <declname>builder</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate the class by storing a reference to the spline builder we can to use. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to SplineBuilder2D from DDC that we store in the class. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="84" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="84" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineBuliderDerivField2D_1a7d022aaaa01632ff2472af62c6f114ae" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::operator()</definition>
+        <argsstring>(SplineType spline, DerivFieldType function_and_derivs) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>SplineBuliderDerivField2D::operator()</qualifiedname>
+        <param>
+          <type>SplineType</type>
+          <declname>spline</declname>
+        </param>
+        <param>
+          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <declname>function_and_derivs</declname>
+        </param>
+        <briefdescription>
+<para>Build the spline representation of the function given in a <ref refid="classDerivField" kindref="compound">DerivField</ref> applying the referenced spline builder stored in the class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">spline</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Spline coefficients on a 2D grid. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">function_and_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Data defining the function on a 2D grid. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="93" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="93" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineBuliderDerivField2D_1ae5a15bccada74cfe45b95e5f52af0990" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::fill_in_function</definition>
+        <argsstring>(FunctField function, DerivFieldType function_and_derivs) const</argsstring>
+        <name>fill_in_function</name>
+        <qualifiedname>SplineBuliderDerivField2D::fill_in_function</qualifiedname>
+        <param>
+          <type>FunctField</type>
+          <declname>function</declname>
+        </param>
+        <param>
+          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <declname>function_and_derivs</declname>
+        </param>
+        <briefdescription>
+<para>Fill in the function field with the values stored in the function_and_derivs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">function</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field with layout_right where we copy the function values. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">function_and_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classDerivField" kindref="compound">DerivField</ref> from where the function values are copied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="195" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="195" bodyend="204"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineBuliderDerivField2D_1a1abd8724064d97b3cc4e49c7d3f6b212" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::fill_in_deriv1</definition>
+        <argsstring>(Deriv1Field deriv1, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice) const</argsstring>
+        <name>fill_in_deriv1</name>
+        <qualifiedname>SplineBuliderDerivField2D::fill_in_deriv1</qualifiedname>
+        <param>
+          <type>Deriv1Field</type>
+          <declname>deriv1</declname>
+        </param>
+        <param>
+          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <declname>function_and_derivs</declname>
+        </param>
+        <param>
+          <type>Idx&lt; Grid1 &gt;</type>
+          <declname>idx_slice</declname>
+        </param>
+        <briefdescription>
+<para>Fill in the deriv1 field with the derivatives along the first dimension stored in the function_and_derivs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">deriv1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field with layout_right where we copy the derivatives. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">function_and_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classDerivField" kindref="compound">DerivField</ref> from where the derivatives are copied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_slice</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index to determine which bound (mon/max) we select for the derivative field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="213" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="213" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineBuliderDerivField2D_1a9df363ba433e1c5e276fd747c193583e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::fill_in_deriv2</definition>
+        <argsstring>(Deriv2Field deriv2, DerivFieldType function_and_derivs, Idx&lt; Grid2 &gt; idx_slice) const</argsstring>
+        <name>fill_in_deriv2</name>
+        <qualifiedname>SplineBuliderDerivField2D::fill_in_deriv2</qualifiedname>
+        <param>
+          <type>Deriv2Field</type>
+          <declname>deriv2</declname>
+        </param>
+        <param>
+          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <declname>function_and_derivs</declname>
+        </param>
+        <param>
+          <type>Idx&lt; Grid2 &gt;</type>
+          <declname>idx_slice</declname>
+        </param>
+        <briefdescription>
+<para>Fill in the deriv2 field with the derivatives along the second dimension stored in the function_and_derivs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">deriv2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field with layout_right where we copy the derivatives. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">function_and_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classDerivField" kindref="compound">DerivField</ref> from where the derivatives are copied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_slice</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index to determine which bound (mon/max) we select for the derivative field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="233" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="233" bodyend="244"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineBuliderDerivField2D_1a0bb44474e00453075e52b61d8f251951" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SplineBuliderDerivField2D&lt; ExecSpace, BSplines1, BSplines2, Grid1, Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max &gt;::fill_in_cross_deriv</definition>
+        <argsstring>(CrossDerivField cross_deriv, DerivFieldType function_and_derivs, Idx&lt; Grid1 &gt; idx_slice_1, Idx&lt; Grid2 &gt; idx_slice_2) const</argsstring>
+        <name>fill_in_cross_deriv</name>
+        <qualifiedname>SplineBuliderDerivField2D::fill_in_cross_deriv</qualifiedname>
+        <param>
+          <type>CrossDerivField</type>
+          <declname>cross_deriv</declname>
+        </param>
+        <param>
+          <type><ref refid="classDerivField" kindref="compound">DerivFieldType</ref></type>
+          <declname>function_and_derivs</declname>
+        </param>
+        <param>
+          <type>Idx&lt; Grid1 &gt;</type>
+          <declname>idx_slice_1</declname>
+        </param>
+        <param>
+          <type>Idx&lt; Grid2 &gt;</type>
+          <declname>idx_slice_2</declname>
+        </param>
+        <briefdescription>
+<para>Fill in the cross_deriv field with the cross derivatives stored in the function_and_derivs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">cross_deriv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Field with layout_right where we copy the cross-derivatives. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">function_and_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classDerivField" kindref="compound">DerivField</ref> from where the cross-derivatives are copied. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_slice_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index to determine which bound (mon/max) we select for the derivative field on the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_slice_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index to determine which bound (mon/max) we select for the derivative field on the second dimension. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="256" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="256" bodyend="268"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>[Temporary] Apply a SplineBuilder2D to a <ref refid="classDerivField" kindref="compound">DerivField</ref>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classDerivField" kindref="compound">DerivField</ref> stores the values and the derivatives of a function. The inputs of the SplineBuilder2D are on different layouts than the fields we can get from the <ref refid="classDerivField" kindref="compound">DerivField</ref>. <ref refid="classSplineBuliderDerivField2D" kindref="compound">SplineBuliderDerivField2D</ref> allows to directly apply a stored SplineBuilder2D to a <ref refid="classDerivField" kindref="compound">DerivField</ref> by copying data in fields with correct layout.</para>
+<para>Implemented only for 2D case. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="34" bodyend="269"/>
+    <listofallmembers>
+      <member refid="classSplineBuliderDerivField2D_1a370176a149d41646f3776ca72b6be7c0" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Builder2D</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a8f97b3ebd8253d046ffe03aa96a4589c" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>CrossDerivConstField</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a625edefbd9b22e75a7cdddcdae9fb9ee" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>CrossDerivField</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a7d257d21c0940740c03386b1b3ff0a16" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>CrossDerivFieldMem</name></member>
+      <member refid="classSplineBuliderDerivField2D_1ac753a11e6cc66d5d879de686ea7c934c" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Deriv1</name></member>
+      <member refid="classSplineBuliderDerivField2D_1af1872dbb76c31590091fc5787e7aa897" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Deriv1ConstField</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a2ff6aecc9a8b5596978623052157fb68" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Deriv1Field</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a63ffad36f82e813173984174cd39ee0d" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Deriv1FieldMem</name></member>
+      <member refid="classSplineBuliderDerivField2D_1afbf0f32e6808ddbbf16881c92a60e2f3" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Deriv2</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a8bd04b5e4056724366c338e5c39cb848" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Deriv2ConstField</name></member>
+      <member refid="classSplineBuliderDerivField2D_1ac9f391293804afa7d0e002e9b82c0c0d" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Deriv2Field</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a8d207058ba79b92f07108f466c069fa2" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Deriv2FieldMem</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a4921d2d671e689c0b4c1b5bda4f8e9ac" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>DerivFieldType</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a3ff565896f51e6bc2c1cde368c11ac95" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Dim1</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a8322683cc919ab1b5630d219076f18c7" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Dim2</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a0bb44474e00453075e52b61d8f251951" prot="public" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>fill_in_cross_deriv</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a1abd8724064d97b3cc4e49c7d3f6b212" prot="public" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>fill_in_deriv1</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a9df363ba433e1c5e276fd747c193583e" prot="public" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>fill_in_deriv2</name></member>
+      <member refid="classSplineBuliderDerivField2D_1ae5a15bccada74cfe45b95e5f52af0990" prot="public" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>fill_in_function</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a9a6c6b189740cafd5f2eb344be09ee34" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>FunctField</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a27f012291260834e31ef5ce78f81989d" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>FunctFieldMem</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a7ae98f3d661fedba1091d0810565a09f" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>m_builder</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a7e0a1cc5700f503bfda43336b673fd2e" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>MemorySpace</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a7d022aaaa01632ff2472af62c6f114ae" prot="public" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>operator()</name></member>
+      <member refid="classSplineBuliderDerivField2D_1a26000b0a18bd92e1a7cd80b4c70592af" prot="public" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>SplineBuliderDerivField2D</name></member>
+      <member refid="classSplineBuliderDerivField2D_1ab0b655566c4477ffd39b94a8bb531eee" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>SplineType</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

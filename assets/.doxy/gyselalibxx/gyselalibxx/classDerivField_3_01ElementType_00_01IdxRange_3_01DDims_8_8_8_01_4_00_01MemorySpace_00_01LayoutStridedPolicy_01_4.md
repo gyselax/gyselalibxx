@@ -724,7 +724,7 @@ inline KOKKOS_FUNCTION constexpr auto DerivField< ElementType, IdxRange< DDims..
 
 **Returns:**
 
-Field A subset of the data. 
+ConstField A subset of the data. 
 
 
 

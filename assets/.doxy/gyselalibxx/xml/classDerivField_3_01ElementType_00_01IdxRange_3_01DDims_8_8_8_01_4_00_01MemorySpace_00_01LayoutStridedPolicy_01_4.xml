@@ -834,7 +834,7 @@
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>Field A subset of the data. </para>
+<simplesect kind="return"><para>ConstField A subset of the data. </para>
 </simplesect>
 </para>
         </detaileddescription>

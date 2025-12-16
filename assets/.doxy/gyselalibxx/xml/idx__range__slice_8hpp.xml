@@ -64,6 +64,8 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
       </node>
       <node id="2">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_common.hpp</label>
@@ -78,13 +80,15 @@
         <link refid="derivative__field__mem_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
+        <childnode refid="31" relation="include">
+        </childnode>
       </node>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/idx_range_slice.hpp</label>
         <link refid="idx__range__slice_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="31" relation="include">
+        <childnode refid="32" relation="include">
         </childnode>
       </node>
       <node id="19">
@@ -107,7 +111,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/connectivity.hpp</label>
         <link refid="connectivity_8hpp_source"/>
       </node>
-      <node id="31">
+      <node id="32">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/matching_idx_slice.hpp</label>
         <link refid="matching__idx__slice_8hpp_source"/>
       </node>
@@ -250,6 +254,10 @@
       <node id="26">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp</label>
         <link refid="rk4_8hpp_source"/>
+      </node>
+      <node id="31">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp</label>
+        <link refid="spline__builder__deriv__field__2d_8hpp_source"/>
       </node>
     </invincdepgraph>
     <sectiondef kind="typedef">

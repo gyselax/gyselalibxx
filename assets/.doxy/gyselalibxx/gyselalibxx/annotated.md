@@ -219,6 +219,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md) _A class which implements a partial derivative operator using a 2d spline interpolation._     
 * **class** [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _class._    
 * **class** [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) _A class that stores spline builder coefficients and recomputes them when required._     
+* **class** [**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md) _[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md) _._    
 * **class** [**SplineInterpolator**](classSplineInterpolator.md) _A class for interpolating a function using splines._     
 * **class** [**SplineInterpolator2D**](classSplineInterpolator2D.md) _A class for interpolating a function using a 2D tensor product of splines._     
 * **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._    
