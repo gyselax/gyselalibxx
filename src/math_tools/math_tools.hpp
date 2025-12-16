@@ -255,7 +255,11 @@ KOKKOS_INLINE_FUNCTION double scalar_product(
     return tensor_mul(index<'i'>(a), index<'i', 'j'>(metric), index<'j'>(b));
 }
 
-template <concepts::MappingWithJacobian Mapping, class CoordType, class ElementType, class VectorIndexSetType>
+template <
+        concepts::MappingWithJacobian Mapping,
+        class CoordType,
+        class ElementType,
+        class VectorIndexSetType>
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>>
 tensor_product(
         Mapping const& mapping,

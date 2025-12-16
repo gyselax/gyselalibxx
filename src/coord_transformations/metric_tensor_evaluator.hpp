@@ -15,7 +15,9 @@
  * @tparam Mapping The mapping providing the Jacobian operator.
  * @tparam PositionCoordinate The coordinate type where the metric tensor can be evaluated.
  */
-template <concepts::MappingWithJacobian Mapping, class PositionCoordinate = typename Mapping::CoordJacobian>
+template <
+        concepts::MappingWithJacobian Mapping,
+        class PositionCoordinate = typename Mapping::CoordJacobian>
 class MetricTensorEvaluator
 {
     static_assert(

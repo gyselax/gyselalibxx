@@ -20,7 +20,10 @@
  * The functions in this mapping are defined on the coordinate system associated
  * with the domain @f$ \Omega_{mid} @f$.
  */
-template <concepts::MappingWithJacobian Mapping1, concepts::MappingWithJacobian Mapping2, class CoordJacobianType = typename Mapping2::CoordResult>
+template <
+        concepts::MappingWithJacobian Mapping1,
+        concepts::MappingWithJacobian Mapping2,
+        class CoordJacobianType = typename Mapping2::CoordResult>
 class CombinedMapping
 {
     static_assert(std::is_same_v<typename Mapping2::CoordResult, typename Mapping1::CoordArg>);
