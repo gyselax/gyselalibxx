@@ -207,41 +207,28 @@ void write_fdistribu(
         cout << "Writing 5D distribution function and coordinates to file." << endl;
     }
 
-    // Extract individual index ranges from mesh
-    IdxRangeSp const idx_range_sp(mesh);
-    IdxRange<GridTor1> const idx_range_tor1(mesh);
-    IdxRange<GridTor2> const idx_range_tor2(mesh);
-    IdxRange<GridTor3> const idx_range_tor3(mesh);
-    IdxRange<GridVpar> const idx_range_vpar(mesh);
-    IdxRange<GridMu> const idx_range_mu(mesh);
-
     // Expose index range for parallel I/O
     PDI_expose_idx_range(mesh, "local_fdistribu");
-
     // Expose species extents
-    std::size_t species_extent = idx_range_sp.size();
-    std::array<std::size_t, 1> species_extents_arr = {species_extent};
+    std::array<std::size_t, 1> species_extents_arr = {mesh.template extent<Species>().value()};
     PDI_expose("species_extents", species_extents_arr.data(), PDI_OUT);
-
     // Expose coordinate extents
-    std::array<std::size_t, 1> tor1_extents_arr = {idx_range_tor1.size()};
-    std::array<std::size_t, 1> tor2_extents_arr = {idx_range_tor2.size()};
-    std::array<std::size_t, 1> tor3_extents_arr = {idx_range_tor3.size()};
-    std::array<std::size_t, 1> vpar_extents_arr = {idx_range_vpar.size()};
-    std::array<std::size_t, 1> mu_extents_arr = {idx_range_mu.size()};
+    std::array<std::size_t, 1> tor1_extents_arr = {mesh.template extent<GridTor1>().value()};
+    std::array<std::size_t, 1> tor2_extents_arr = {mesh.template extent<GridTor2>().value()};
+    std::array<std::size_t, 1> tor3_extents_arr = {mesh.template extent<GridTor3>().value()};
+    std::array<std::size_t, 1> vpar_extents_arr = {mesh.template extent<GridVpar>().value()};
+    std::array<std::size_t, 1> mu_extents_arr = {mesh.template extent<GridMu>().value()};
     PDI_expose("tor1_extents", tor1_extents_arr.data(), PDI_OUT);
     PDI_expose("tor2_extents", tor2_extents_arr.data(), PDI_OUT);
     PDI_expose("tor3_extents", tor3_extents_arr.data(), PDI_OUT);
     PDI_expose("vpar_extents", vpar_extents_arr.data(), PDI_OUT);
     PDI_expose("mu_extents", mu_extents_arr.data(), PDI_OUT);
-
     // Expose coordinates to PDI
-    expose_mesh_to_pdi("tor1", idx_range_tor1);
-    expose_mesh_to_pdi("tor2", idx_range_tor2);
-    expose_mesh_to_pdi("tor3", idx_range_tor3);
-    expose_mesh_to_pdi("vpar", idx_range_vpar);
-    expose_mesh_to_pdi("mu", idx_range_mu);
-
+    expose_mesh_to_pdi("tor1", IdxRange<GridTor1>(mesh));
+    expose_mesh_to_pdi("tor2", IdxRange<GridTor2>(mesh));
+    expose_mesh_to_pdi("tor3", IdxRange<GridTor3>(mesh));
+    expose_mesh_to_pdi("vpar", IdxRange<GridVpar>(mesh));
+    expose_mesh_to_pdi("mu", IdxRange<GridMu>(mesh));
     // Expose distribution function to PDI and trigger write event
     ddc::PdiEvent("write_fdistribu").with("fdistribu_sptor3Dv2D", allfdistribu_host);
 
@@ -437,31 +424,36 @@ int main(int argc, char** argv)
 
     if (version == "mpi_transpose") {
         MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh, MPI_COMM_WORLD);
+        /*------------------------------------------------------------------------------
+        
+        %please uncomment if the new ddc version is available:
+        
+        // Get local index ranges for each layout (use exact types returned, don't convert)
+        auto idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
+        auto idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
+        
+        // Create fields in both layouts following the Gysela-X pattern
+        // Field on Tor3DSplit layout (matches allfdistribu's layout)
+        DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(
+                idxrange_tor3D_split);
+        DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split
+                = get_field(allfdistribu_tor3D_split_alloc);
 
-        // // Get local index ranges for each layout (use exact types returned, don't convert)
-        // auto idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
-        // auto idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
+        // Temporary field on V2DSplit layout
+        DFieldMem<decltype(idxrange_v2D_split)> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
+        DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split
+                = get_field(allfdistribu_v2D_split_alloc);
 
-        // // Create fields in both layouts following the Gysela-X pattern
-        // // Field on Tor3DSplit layout (matches allfdistribu's layout)
-        // DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(
-        //         idxrange_tor3D_split);
-        // DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split
-        //         = get_field(allfdistribu_tor3D_split_alloc);
+        // Copy initial data to Tor3DSplit layout field
+        ddc::parallel_deepcopy(allfdistribu_tor3D_split, allfdistribu);
 
-        // // Temporary field on V2DSplit layout
-        // DFieldMem<decltype(idxrange_v2D_split)> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
-        // DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split
-        //         = get_field(allfdistribu_v2D_split_alloc);
-
-        // // Copy initial data to Tor3DSplit layout field
-        // ddc::parallel_deepcopy(allfdistribu_tor3D_split, allfdistribu);
-
-        // // Execute the transpose: from Tor3DSplit to V2DSplit
-        // transpose(
-        //         Kokkos::DefaultExecutionSpace(),
-        //         allfdistribu_v2D_split, // destination (V2DSplit layout)
-        //         get_const_field(allfdistribu_tor3D_split)); // source (Tor3DSplit layout)
+        // Execute the transpose: from Tor3DSplit to V2DSplit
+        transpose(
+                    Kokkos::DefaultExecutionSpace(),
+                allfdistribu_v2D_split, // destination (V2DSplit layout)
+                get_const_field(allfdistribu_tor3D_split)); // source (Tor3DSplit layout)
+        
+        ------------------------------------------------------------------------------*/
     }
     time_points[2] = steady_clock::now();
     //---------------------------------------------------------
