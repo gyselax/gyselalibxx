@@ -15,6 +15,7 @@
 template <
         class IdxRangeLaplacian,
         class IdxRangeFull = IdxRangeLaplacian,
+        class DataType = double,
         class ExecSpace = Kokkos::DefaultExecutionSpace,
         class LayoutSpace = Kokkos::layout_right>
 class FFTPoissonSolver;
@@ -33,12 +34,17 @@ class FFTPoissonSolver;
  * @tparam ExecSpace The space (CPU/GPU) where the calculations will take place.
  * @tparam LayoutSpace The layout space of the Fields passed to operator().
  */
-template <class... GridPDEDim1D, class IdxRangeFull, class ExecSpace, class LayoutSpace>
-class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, ExecSpace, LayoutSpace>
+template <
+        class... GridPDEDim1D,
+        class IdxRangeFull,
+        class DataType,
+        class ExecSpace,
+        class LayoutSpace>
+class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, DataType, ExecSpace, LayoutSpace>
     : public IPoissonSolver<
               IdxRange<GridPDEDim1D...>,
               IdxRangeFull,
-              double,
+              DataType,
               typename ExecSpace::memory_space,
               LayoutSpace>
 {
@@ -85,7 +91,7 @@ public:
 
     /// @brief The type of a Field storing the Fourier transform of a function.
     using fourier_field_mem_type
-            = FieldMem<Kokkos::complex<double>, fourier_idx_range_type, memory_space>;
+            = FieldMem<Kokkos::complex<DataType>, fourier_idx_range_type, memory_space>;
     /// @brief The type of a Field storing the Fourier transform of a function.
     using fourier_field_type = typename fourier_field_mem_type::span_type;
 
@@ -101,10 +107,10 @@ private:
      * @param index The index of the Fourier mode.
      */
     template <class... FDim>
-    KOKKOS_FUNCTION static double get_laplace_operator(Idx<FDim...> index)
+    KOKKOS_FUNCTION static DataType get_laplace_operator(Idx<FDim...> index)
     {
-        return (((double)ddc::coordinate(ddc::select<FDim>(index))
-                 * (double)ddc::coordinate(ddc::select<FDim>(index)))
+        return (((DataType)ddc::coordinate(ddc::select<FDim>(index))
+                 * (DataType)ddc::coordinate(ddc::select<FDim>(index)))
                 + ...);
     }
 
@@ -120,7 +126,7 @@ private:
      */
     template <class Dim>
     void differentiate_and_invert_fourier_values(
-            DField<laplacian_idx_range_type, memory_space, LayoutSpace> derivative,
+            Field<DataType, laplacian_idx_range_type, memory_space, LayoutSpace> derivative,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -141,7 +147,7 @@ private:
      * @param[in] values The Field containing the values of the function in Fourier space.
      */
     void get_gradient(
-            DField<laplacian_idx_range_type, memory_space, LayoutSpace> gradient,
+            Field<DataType, laplacian_idx_range_type, memory_space, LayoutSpace> gradient,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -162,7 +168,7 @@ private:
     template <class... Dims>
     void get_gradient(
             VectorField<
-                    double,
+                    DataType,
                     laplacian_idx_range_type,
                     VectorIndexSet<Dims...>,
                     memory_space,
@@ -193,7 +199,7 @@ public:
     template <class Layout>
     void solve_poisson_equation(
             fourier_field_type intermediate_chunk,
-            DField<laplacian_idx_range_type, memory_space, Layout> rho) const
+            Field<DataType, laplacian_idx_range_type, memory_space, Layout> rho) const
     {
         // Compute FFT(rho)
         ddc::fft(ExecSpace(), intermediate_chunk, rho, ddc::kwArgs_fft {m_norm});
@@ -227,7 +233,7 @@ public:
     void negative_differentiate_equation(fourier_field_type derivative, fourier_field_type values)
             const
     {
-        Kokkos::complex<double> imaginary_unit(0.0, 1.0);
+        Kokkos::complex<DataType> imaginary_unit(0.0, 1.0);
         ddc::parallel_for_each(
                 ExecSpace(),
                 get_idx_range(values),
