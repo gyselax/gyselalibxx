@@ -52,6 +52,7 @@ private:
     using base_type = IPoissonSolver<
             IdxRange<GridPDEDim1D...>,
             IdxRangeFull,
+            double,
             typename ExecSpace::memory_space,
             LayoutSpace>;
 
