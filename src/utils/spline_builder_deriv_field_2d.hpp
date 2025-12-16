@@ -141,10 +141,11 @@ public:
         IdxRangeSlice<Grid2> idx_range_slice_2
                 = function_and_derivs.template idx_range_for_deriv<Grid2>();
 
-        Idx<Grid1> slice1_min = idx_range_slice_1.front();
-        Idx<Grid1> slice1_max = idx_range_slice_1.back();
-        Idx<Grid2> slice2_min = idx_range_slice_2.front();
-        Idx<Grid2> slice2_max = idx_range_slice_2.back();
+        // The derivatives need to be defined on the boundaries to apply the spline builder.
+        Idx<Grid1> slice1_min = idx_range_1.front();
+        Idx<Grid1> slice1_max = idx_range_1.back();
+        Idx<Grid2> slice2_min = idx_range_2.front();
+        Idx<Grid2> slice2_max = idx_range_2.back();
 
         // --- fill in the new fields with the data from the DerivField.
         fill_in_function(get_field(function_alloc), function_and_derivs);

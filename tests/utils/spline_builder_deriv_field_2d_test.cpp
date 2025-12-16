@@ -69,11 +69,6 @@ void initialise_derivatives(
         DField<IdxRange<DerivX, DerivY>> derivs_xy_min_max,
         DField<IdxRange<DerivX, DerivY>> derivs_xy_max_max)
 {
-    IdxRangeSlice<GridX> idx_range_slice_dx
-            = function_and_derivs.template idx_range_for_deriv<GridX>();
-    IdxRangeSlice<GridY> idx_range_slice_dy
-            = function_and_derivs.template idx_range_for_deriv<GridY>();
-
     IdxRange<GridX> idx_range_x(get_idx_range(derivs_ymin));
     IdxRange<GridY> idx_range_y(get_idx_range(derivs_xmin));
 
@@ -85,10 +80,10 @@ void initialise_derivatives(
     Idx<DerivX> first_dx(1);
     Idx<DerivY> first_dy(1);
 
-    Idx<GridX> idx_slice_xmin(idx_range_slice_dx.front());
-    Idx<GridX> idx_slice_xmax(idx_range_slice_dx.back());
-    Idx<GridY> idx_slice_ymin(idx_range_slice_dy.front());
-    Idx<GridY> idx_slice_ymax(idx_range_slice_dy.back());
+    Idx<GridX> idx_slice_xmin(idx_range_x.front());
+    Idx<GridX> idx_slice_xmax(idx_range_x.back());
+    Idx<GridY> idx_slice_ymin(idx_range_y.front());
+    Idx<GridY> idx_slice_ymax(idx_range_y.back());
 
     Idx<DerivX, GridX> idx_deriv_xmin(first_dx, idx_slice_xmin);
     Idx<DerivX, GridX> idx_deriv_xmax(first_dx, idx_slice_xmax);
@@ -162,11 +157,6 @@ void initialise_derivatives_hybrid_case(
         DField<IdxRange<GridX, DerivY>> derivs_ymax,
         DField<IdxRange<DerivX, DerivY>> derivs_xy_min_max)
 {
-    IdxRangeSlice<GridX> idx_range_slice_dx
-            = function_and_derivs.template idx_range_for_deriv<GridX>();
-    IdxRangeSlice<GridY> idx_range_slice_dy
-            = function_and_derivs.template idx_range_for_deriv<GridY>();
-
     IdxRange<GridX> idx_range_x(get_idx_range(derivs_ymax));
     IdxRange<GridY> idx_range_y(get_idx_range(derivs_xmin));
 
@@ -176,8 +166,8 @@ void initialise_derivatives_hybrid_case(
     Idx<DerivX> first_dx(1);
     Idx<DerivY> first_dy(1);
 
-    Idx<GridX> idx_slice_xmin(idx_range_slice_dx.front());
-    Idx<GridY> idx_slice_ymax(idx_range_slice_dy.back());
+    Idx<GridX> idx_slice_xmin(idx_range_x.front());
+    Idx<GridY> idx_slice_ymax(idx_range_y.back());
 
     Idx<DerivX, GridX> idx_deriv_xmin(first_dx, idx_slice_xmin);
     Idx<DerivY, GridY> idx_deriv_ymax(first_dy, idx_slice_ymax);
