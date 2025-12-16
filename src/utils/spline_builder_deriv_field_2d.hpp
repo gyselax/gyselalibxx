@@ -289,13 +289,12 @@ public:
         IdxRangeSlice<Grid2> idx_range_slice_2
                 = function_and_derivs.template idx_range_for_deriv<Grid2>();
 
-        IdxRange<Deriv1, Deriv2> idx_range_derivs(function_and_derivs.derivative_idx_range());
         Idx<Grid1> idx_slice_1 = is_1min ? idx_range_slice_1.front() : idx_range_slice_1.back();
         Idx<Grid2> idx_slice_2 = is_2min ? idx_range_slice_2.front() : idx_range_slice_2.back();
 
         // Fill the field with correct layout.
         ddc::parallel_for_each(
-                idx_range_derivs,
+                function_and_derivs.derivative_idx_range(),
                 KOKKOS_LAMBDA(Idx<Deriv1, Deriv2> idx_derivs) {
                     cross_deriv(idx_derivs)
                             = function_and_derivs(idx_derivs, idx_slice_1, idx_slice_2);
