@@ -136,12 +136,6 @@ public:
         CrossDerivFieldMem cross_max_max_alloc(idx_range_d1d2_max_max);
 
         // Get slice indices to select the right bound.
-        IdxRangeSlice<Grid1> idx_range_slice_1
-                = function_and_derivs.template idx_range_for_deriv<Grid1>();
-        IdxRangeSlice<Grid2> idx_range_slice_2
-                = function_and_derivs.template idx_range_for_deriv<Grid2>();
-
-        // The derivatives need to be defined on the boundaries to apply the spline builder.
         Idx<Grid1> slice1_min = idx_range_1.front();
         Idx<Grid1> slice1_max = idx_range_1.back();
         Idx<Grid2> slice2_min = idx_range_2.front();
