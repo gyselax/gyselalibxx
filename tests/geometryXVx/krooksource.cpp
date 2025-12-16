@@ -67,7 +67,7 @@ TEST(KrookSource, Adaptive)
     IdxSp my_ielec(idx_range_sp.back());
     charges(my_iion) = 1.;
     charges(my_ielec) = -1.;
-    ddc::for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
+    ddc::host_for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
 
     // Initialisation of the distribution function
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
@@ -93,7 +93,7 @@ TEST(KrookSource, Adaptive)
     double const density_init_elec = 2.;
     double const temperature_init = 1.;
     DFieldMemSpXVx allfdistribu(mesh);
-    ddc::for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
+    ddc::host_for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
         DFieldMemVx finit(gridvx);
         if (charge(ddc::select<Species>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
@@ -112,20 +112,20 @@ TEST(KrookSource, Adaptive)
     auto allfdistribu_host = ddc::create_mirror_view_and_copy(get_field(allfdistribu));
 
     host_t<DFieldMemSpX> densities(get_idx_range<Species, GridX>(allfdistribu));
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
         densities(ispx) = integrate_v(Kokkos::DefaultExecutionSpace(), allfdistribu[ispx]);
     });
 
     // the charge should be conserved by the operator
     host_t<DFieldMemX> error(get_idx_range<GridX>(allfdistribu_host));
-    ddc::for_each(get_idx_range<GridX>(allfdistribu), [&](IdxX const ix) {
+    ddc::host_for_each(get_idx_range<GridX>(allfdistribu), [&](IdxX const ix) {
         error(ix) = std::fabs(
                 charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
                 + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
     });
 
     // reinitialisation of the distribution function
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
         DFieldMemVx finit(gridvx);
         if (charge(ddc::select<Species>(ispx)) >= 0.) {
             MaxwellianEquilibrium::
@@ -141,14 +141,14 @@ TEST(KrookSource, Adaptive)
     // error with a deltat 10 times smaller
     rhs_krook(get_field(allfdistribu), 0.01);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu), [&](IdxSpX const ispx) {
         densities(ispx) = integrate_v(Kokkos::DefaultExecutionSpace(), allfdistribu[ispx]);
     });
 
     // the rk2 scheme used in the krook operator should be of order 2
     // hence the error should be divided by at least 100 when dt is divided by 10
     double const order = 2;
-    ddc::for_each(get_idx_range<GridX>(allfdistribu), [&](IdxX const ix) {
+    ddc::host_for_each(get_idx_range<GridX>(allfdistribu), [&](IdxX const ix) {
         double const error_smalldt = std::fabs(
                 charge(my_iion) * (densities(my_iion, ix) - density_init_ion)
                 + charge(my_ielec) * (densities(my_ielec, ix) - density_init_elec));
@@ -200,7 +200,7 @@ TEST(KrookSource, Constant)
     host_t<DFieldMemSp> masses(idx_range_sp);
     charges(idx_range_sp.front()) = 1.;
     charges(idx_range_sp.back()) = -1.;
-    ddc::for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
+    ddc::host_for_each(idx_range_sp, [&](IdxSp const isp) { masses(isp) = 1.0; });
 
     // Initialisation of the distribution function
     ddc::init_discrete_space<Species>(std::move(charges), std::move(masses));
@@ -234,7 +234,7 @@ TEST(KrookSource, Constant)
     MaxwellianEquilibrium::compute_maxwellian(get_field(finit), density_init, temperature_init, 0.);
     auto finit_host = ddc::create_mirror_view_and_copy(get_field(finit));
     DFieldMemSpXVx allfdistribu(mesh);
-    ddc::for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
+    ddc::host_for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
         ddc::parallel_deepcopy(allfdistribu[ispx], finit_host);
     });
 
@@ -250,7 +250,7 @@ TEST(KrookSource, Constant)
             compute_maxwellian(get_field(ftarget), density_target, temperature_target, 0.);
     auto ftarget_host = ddc::create_mirror_view_and_copy(get_field(ftarget));
 
-    ddc::for_each(get_idx_range(allfdistribu), [&](IdxSpXVx const ispxvx) {
+    ddc::host_for_each(get_idx_range(allfdistribu), [&](IdxSpXVx const ispxvx) {
         // predicted distribution function value
         double const allfdistribu_pred
                 = ftarget_host(ddc::select<GridVx>(ispxvx))

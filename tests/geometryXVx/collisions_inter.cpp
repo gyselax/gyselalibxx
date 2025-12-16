@@ -77,7 +77,7 @@ TEST(CollisionsInter, CollisionsInter)
         temperature_init(my_iion) = 1.;
         temperature_init(my_ielec) = 1.2;
         double const fluid_velocity_init(0.);
-        ddc::for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
+        ddc::host_for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
             DFieldMemVx finit(gridvx);
             MaxwellianEquilibrium::compute_maxwellian(
                     get_field(finit),
@@ -116,7 +116,7 @@ TEST(CollisionsInter, CollisionsInter)
         host_t<DFieldMemSpX> fluid_velocity_host(get_idx_range<Species, GridX>(allfdistribu_host));
         host_t<DFieldMemSpX> temperature_host(get_idx_range<Species, GridX>(allfdistribu_host));
 
-        ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
+        ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
             moments(density_host(ispx),
                     get_const_field(allfdistribu[ispx]),
                     FluidMoments::s_density);
@@ -143,7 +143,7 @@ TEST(CollisionsInter, CollisionsInter)
         auto collfreq_ab_host = ddc::create_mirror_view_and_copy(get_field(collfreq_ab));
 
         double const me_on_memi(mass(my_ielec) / (mass(my_ielec) + mass(my_iion)));
-        ddc::for_each(gridx, [&](IdxX const ix) {
+        ddc::host_for_each(gridx, [&](IdxX const ix) {
             // test : dlog(T_e - T_i)/dt = -12nu_ei*m_e/(m_e+m_b)
             // should be verified
             double const error = std::fabs(

@@ -241,7 +241,7 @@ private:
         InverseJacobianMatrix inv_jacobian_matrix(m_mapping);
 
         // > computation of the electric field
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             double const r = ddc::coordinate(ddc::select<GridR>(irtheta));
             double const th = ddc::coordinate(ddc::select<GridTheta>(irtheta));
 
@@ -454,7 +454,7 @@ private:
         IdxRangeRTheta const grid_without_Opoint = get_idx_range(advection_field_rtheta);
 
         host_t<FieldMemRTheta<CoordRTheta>> coords(grid_without_Opoint);
-        ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             coords(irtheta) = ddc::coordinate(irtheta);
         });
 
@@ -473,7 +473,7 @@ private:
         MetricTensorEvaluator<Mapping, CoordRTheta> metric_tensor(m_mapping);
 
         // > computation of the advection field
-        ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
             CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
             DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<R, Theta>> inv_G

@@ -54,7 +54,7 @@ double SpatialAdvection(
     ddc::init_discrete_space<Species>(std::move(charges_host), std::move(masses_host));
     // Initialisation of the distribution function
     host_t<DFieldMemSpXVx> allfdistribu_host(meshSpXVx);
-    ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
+    ddc::host_for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
         IdxX const ix = ddc::select<GridX>(ispxvx);
         allfdistribu_host(ispxvx) = cos(ddc::coordinate(ix));
     });
@@ -69,7 +69,7 @@ double SpatialAdvection(
     advection_x(get_field(allfdistribu), timestep);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
-    ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
+    ddc::host_for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
         IdxX const ix = ddc::select<GridX>(ispxvx);
         IdxVx const ivx = ddc::select<GridVx>(ispxvx);
         double const err = std::abs(

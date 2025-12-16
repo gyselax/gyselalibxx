@@ -55,7 +55,7 @@ public:
 
         host_t<DFieldMem<IdxRange<GridZ>>> exact_host_alloc(interpolation_idx_range_x);
         host_t<DField<IdxRange<GridZ>>> exact_host = get_field(exact_host_alloc);
-        ddc::for_each(get_idx_range(exact_host), [&](IdxZ const ix) {
+        ddc::host_for_each(get_idx_range(exact_host), [&](IdxZ const ix) {
             exact_host(ix) = f_poly(ddc::coordinate(ix).value(), deg);
         });
         int cpt = 1;
@@ -63,7 +63,7 @@ public:
         std::uniform_real_distribution<double> unif_distr(-1, 1);
         host_t<FieldMem<Coord<Z>, IdxRange<GridZ>>> Sample_host(interpolation_idx_range_x);
 
-        ddc::for_each(get_idx_range(Sample_host), [&](IdxZ const ix) {
+        ddc::host_for_each(get_idx_range(Sample_host), [&](IdxZ const ix) {
             if (cpt % int(0.1 * x_ncells) == 0) {
                 Sample_host(ix) = Coord<Z>(
                         ddc::coordinate(ix).value()
@@ -86,7 +86,7 @@ public:
         Test_Interpolator(get_field(exact), get_const_field(Sample));
         ddc::parallel_deepcopy(exact_host, exact);
         ddc::parallel_deepcopy(Sample_host, Sample);
-        ddc::for_each(interpolation_idx_range_x, [&](IdxZ const ix) {
+        ddc::host_for_each(interpolation_idx_range_x, [&](IdxZ const ix) {
             error.push_back(std::abs(exact_host(ix) - f_poly(Sample_host(ix), deg)));
         });
         double s = std::transform_reduce(

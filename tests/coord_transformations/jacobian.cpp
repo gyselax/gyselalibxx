@@ -42,7 +42,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 mapping.jacobian_matrix(coords(irtheta)),
                 inv_jacobian(coords(irtheta)),
@@ -63,7 +63,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
     static_assert(has_inv_jacobian_v<CzarnyToCartesian<R, Theta, X, Y>>);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         check_inverse_tensor(
                 mapping.jacobian_matrix(coords(irtheta)),
                 mapping.inv_jacobian_matrix(coords(irtheta)),
@@ -119,7 +119,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
         const double r = ddc::get<R>(coord_rtheta);
         if (fabs(r) > 1e-15) {
@@ -198,7 +198,7 @@ TEST_P(InvJacobianMatrix3D, InverseMatrixToroidalDiscCzarMap)
     InverseJacobianMatrix inv_jacobian(mapping);
 
     // Test for each coordinates if the inv_Jacobian_matrix is the inverse of the Jacobian_matrix
-    ddc::for_each(idx_range, [&](IdxRThetaPhi const idx) {
+    ddc::host_for_each(idx_range, [&](IdxRThetaPhi const idx) {
         const CoordRThetaPhi coord(ddc::coordinate(idx));
         const double r = ddc::get<R>(coord);
         if (fabs(r) > 1e-15) {

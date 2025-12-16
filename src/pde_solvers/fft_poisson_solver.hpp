@@ -272,7 +272,7 @@ public:
         fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
             solve_poisson_equation(intermediate_chunk, rho[ib]);
 
             // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
@@ -316,7 +316,7 @@ public:
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
         fourier_field_type fourier_efield = get_field(fourier_efield_alloc);
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
             solve_poisson_equation(intermediate_chunk, rho[ib]);
             get_gradient(E[ib], fourier_efield, intermediate_chunk);
 

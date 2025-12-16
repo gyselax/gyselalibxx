@@ -473,10 +473,10 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
     auto const eval_function_2_host = ddc::create_mirror_and_copy(eval_function_2);
 
     // --- check errors
-    ddc::for_each(reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
+    ddc::host_for_each(reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
         EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-15);
     });
-    ddc::for_each(reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
+    ddc::host_for_each(reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
         EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-15);
     });
 }
@@ -889,12 +889,12 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativativesOnCoordField)
     auto const eval_derivs_12_patch_2_host = ddc::create_mirror_and_copy(eval_derivs_12_patch_2);
 
     // --- check errors
-    ddc::for_each(reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
+    ddc::host_for_each(reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
         EXPECT_NEAR(expected_derivs_1_patch_1_host(idx), eval_derivs_1_patch_1_host(idx), 5e-13);
         EXPECT_NEAR(expected_derivs_2_patch_1_host(idx), eval_derivs_2_patch_1_host(idx), 5e-13);
         EXPECT_NEAR(expected_derivs_12_patch_1_host(idx), eval_derivs_12_patch_1_host(idx), 5e-13);
     });
-    ddc::for_each(reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
+    ddc::host_for_each(reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
         EXPECT_NEAR(expected_derivs_1_patch_2_host(idx), eval_derivs_1_patch_2_host(idx), 5e-13);
         EXPECT_NEAR(expected_derivs_2_patch_2_host(idx), eval_derivs_2_patch_2_host(idx), 5e-13);
         EXPECT_NEAR(expected_derivs_12_patch_2_host(idx), eval_derivs_12_patch_2_host(idx), 5e-13);

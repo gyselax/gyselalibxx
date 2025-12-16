@@ -60,13 +60,13 @@ double VelocityAdvection(
 
     // Initialisation of the distribution function
     host_t<DFieldMemSpXVx> allfdistribu_host(meshSpXVx);
-    ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
+    ddc::host_for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
         IdxVx const ivx = ddc::select<GridVx>(ispxvx);
         allfdistribu_host(ispxvx) = exp(-0.5 * ddc::coordinate(ivx) * ddc::coordinate(ivx));
     });
     // Initialisation of transport coefficient
     host_t<DFieldMemX> adv_speed_host(gridx);
-    ddc::for_each(gridx, [&](IdxX const ix) { adv_speed_host(ix) = ddc::distance_at_right(ix); });
+    ddc::host_for_each(gridx, [&](IdxX const ix) { adv_speed_host(ix) = ddc::distance_at_right(ix); });
     double const timestep = .1;
     std::vector<double> Error;
     Error.reserve(allfdistribu_host.size());

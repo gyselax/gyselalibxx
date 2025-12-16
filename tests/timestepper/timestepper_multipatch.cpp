@@ -87,11 +87,11 @@ void multipatch_timestepper_test(double expected_order)
     host_t<DFieldMem<IdxRange<GridR<2>>>> result_patch2(idx_range_2);
 
     double exp_val = exp(5.0 * dt * Nt);
-    ddc::for_each(idx_range_1, [&](IdxR1 idx) {
+    ddc::host_for_each(idx_range_1, [&](IdxR1 idx) {
         double const C = (ddc::coordinate(idx) - 0.6);
         result_patch1(idx) = C * exp_val + 0.6;
     });
-    ddc::for_each(idx_range_2, [&](IdxR2 idx) {
+    ddc::host_for_each(idx_range_2, [&](IdxR2 idx) {
         double const C = (ddc::coordinate(idx) - 0.6);
         result_patch2(idx) = C * exp_val + 0.6;
     });
@@ -147,11 +147,11 @@ void multipatch_timestepper_test(double expected_order)
         auto vals2_host = ddc::create_mirror_view_and_copy(vals.get<Patch2>());
 
         double linf_err = 0.0;
-        ddc::for_each(idx_range_1, [&](Idx<GridR<1>> idx) {
+        ddc::host_for_each(idx_range_1, [&](Idx<GridR<1>> idx) {
             double const err = std::abs(result_patch1(idx) - vals1_host(idx));
             linf_err = err > linf_err ? err : linf_err;
         });
-        ddc::for_each(idx_range_2, [&](Idx<GridR<2>> idx) {
+        ddc::host_for_each(idx_range_2, [&](Idx<GridR<2>> idx) {
             double const err = std::abs(result_patch2(idx) - vals2_host(idx));
             linf_err = err > linf_err ? err : linf_err;
         });
@@ -224,14 +224,14 @@ void multipatch_timestepper_2D_test(double expected_order)
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    ddc::for_each(idx_range_1, [&](IdxRTheta1 ixy) {
+    ddc::host_for_each(idx_range_1, [&](IdxRTheta1 ixy) {
         double const dist_x = (ddc::coordinate(ddc::select<GridR<1>>(ixy)) - xc);
         double const dist_y = (ddc::coordinate(ddc::select<GridTheta<1>>(ixy)) - yc);
 
         ddc::get<R>(result_patch1(ixy)) = xc + dist_x * cos_val - dist_y * sin_val;
         ddc::get<Theta>(result_patch1(ixy)) = yc + dist_x * sin_val + dist_y * cos_val;
     });
-    ddc::for_each(idx_range_2, [&](IdxRTheta2 ixy) {
+    ddc::host_for_each(idx_range_2, [&](IdxRTheta2 ixy) {
         double const dist_x = (ddc::coordinate(ddc::select<GridR<2>>(ixy)) - xc);
         double const dist_y = (ddc::coordinate(ddc::select<GridTheta<2>>(ixy)) - yc);
 
@@ -307,13 +307,13 @@ void multipatch_timestepper_2D_test(double expected_order)
         auto vals2_host = ddc::create_mirror_view_and_copy(vals.get<Patch2>());
 
         double linf_err = 0.0;
-        ddc::for_each(idx_range_1, [&](IdxRTheta1 idx) {
+        ddc::host_for_each(idx_range_1, [&](IdxRTheta1 idx) {
             double const err_x = ddc::get<R>(result_patch1(idx) - vals1_host(idx));
             double const err_y = ddc::get<Theta>(result_patch1(idx) - vals1_host(idx));
             double const err = std::sqrt(err_x * err_x + err_y * err_y);
             linf_err = err > linf_err ? err : linf_err;
         });
-        ddc::for_each(idx_range_2, [&](IdxRTheta2 idx) {
+        ddc::host_for_each(idx_range_2, [&](IdxRTheta2 idx) {
             double const err_x = ddc::get<R>(result_patch2(idx) - vals2_host(idx));
             double const err_y = ddc::get<Theta>(result_patch2(idx) - vals2_host(idx));
             double const err = std::sqrt(err_x * err_x + err_y * err_y);
