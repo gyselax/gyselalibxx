@@ -403,36 +403,12 @@ private:
                 idx_range_perp_2_without_interface,
                 0.0,
                 ddc::reducer::sum<double>(),
-<<<<<<< HEAD
                 [&](Idx1D_2 const& idx) {
                     return sign_function_2 * function_2(idx) * m_weights_patch_2(idx);
                 });
         return coeff_values;
     }
 
-=======
-                [&](Idx1D_2 const& idx) { return function_2(idx) * m_weights_patch_2(idx); });
-        return coeff_values;
-    }
-
-    /**
-     * @brief Get the linear combination of the function values (c).
-     * See @ref get_function_coefficients.
-     * @param function_1 Function values at the interpolation points on patch 1. 
-     * @param function_2 Function values at the interpolation points on patch 2. 
-     * @return the linear combination of the function values (c).
-     */
-    template <class Layout1, class Layout2>
-    inline double get_function_coefficients(
-            DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2,
-            DConstField<IdxRange1DPerp_1, Kokkos::HostSpace, Layout1> const& function_1) const
-    {
-        return get_function_coefficients(function_1, function_2);
-    }
-
-
-private:
->>>>>>> origin/main_pvidal
     template <typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid>
     void check_break_points_are_interpolation_points(
             bool const is_cell_bound_with_extra_interpol_pt,
