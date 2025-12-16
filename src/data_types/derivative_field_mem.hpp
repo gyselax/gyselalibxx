@@ -11,7 +11,11 @@
 /**
  * See @ref DerivFieldMemImplementation
  */
-template <class ElementType, class Domain, int NDerivs, class MemSpace = Kokkos::HostSpace>
+template <
+        class ElementType,
+        class Domain,
+        int NDerivs,
+        class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
 class DerivFieldMem;
 
 template <class ElementType, class SupportType, int NDerivs, class MemSpace>
