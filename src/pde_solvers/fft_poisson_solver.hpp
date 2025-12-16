@@ -15,8 +15,8 @@
 template <
         class IdxRangeLaplacian,
         class IdxRangeFull = IdxRangeLaplacian,
-        class DataType = double,
         class ExecSpace = Kokkos::DefaultExecutionSpace,
+        class DataType = double,
         class LayoutSpace = Kokkos::layout_right>
 class FFTPoissonSolver;
 
@@ -32,15 +32,16 @@ class FFTPoissonSolver;
  * @tparam IdxRangeFull The index range on which the operator() acts. This is equal to the
  *                      IdxRangeLaplacian plus any batched dimensions.
  * @tparam ExecSpace The space (CPU/GPU) where the calculations will take place.
+ * @tparam DataType The type of the data. This controls the precision of the calculations.
  * @tparam LayoutSpace The layout space of the Fields passed to operator().
  */
 template <
         class... GridPDEDim1D,
         class IdxRangeFull,
-        class DataType,
         class ExecSpace,
+        class DataType,
         class LayoutSpace>
-class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, DataType, ExecSpace, LayoutSpace>
+class FFTPoissonSolver<IdxRange<GridPDEDim1D...>, IdxRangeFull, ExecSpace, DataType, LayoutSpace>
     : public IPoissonSolver<
               IdxRange<GridPDEDim1D...>,
               IdxRangeFull,
