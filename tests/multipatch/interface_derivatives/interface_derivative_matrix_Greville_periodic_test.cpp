@@ -658,50 +658,6 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
     IdxRangeSlice<GridY<8>> idx_range_slice_dy8 = get_bound_idx_range_slice(idx_range_y8);
     IdxRangeSlice<GridY<9>> idx_range_slice_dy9 = get_bound_idx_range_slice(idx_range_y9);
 
-    // Collect the index range slices.
-    MultipatchType<
-            IdxRange1SliceOnPatch,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            idx_ranges_slice_dx(
-                    idx_range_slice_dx1,
-                    idx_range_slice_dx2,
-                    idx_range_slice_dx3,
-                    idx_range_slice_dx4,
-                    idx_range_slice_dx5,
-                    idx_range_slice_dx6,
-                    idx_range_slice_dx7,
-                    idx_range_slice_dx8,
-                    idx_range_slice_dx9);
-    MultipatchType<
-            IdxRange2SliceOnPatch,
-            Patch1,
-            Patch2,
-            Patch3,
-            Patch4,
-            Patch5,
-            Patch6,
-            Patch7,
-            Patch8,
-            Patch9>
-            idx_ranges_slice_dy(
-                    idx_range_slice_dy1,
-                    idx_range_slice_dy2,
-                    idx_range_slice_dy3,
-                    idx_range_slice_dy4,
-                    idx_range_slice_dy5,
-                    idx_range_slice_dy6,
-                    idx_range_slice_dy7,
-                    idx_range_slice_dy8,
-                    idx_range_slice_dy9);
-
     // Instantiate DerivField --------------------------------------------------------------------
     DerivFieldMemOnPatch_host<Patch1>
             function_and_derivs_1_alloc(idx_range_xy1, idx_range_slice_dx1, idx_range_slice_dy1);
@@ -804,30 +760,20 @@ TEST_F(InterfaceExactDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGr
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
-            idx_ranges,
-            idx_ranges_slice_dx,
             coord_transforms);
     check_all_y_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
-            idx_ranges,
-            idx_ranges_slice_dy,
             coord_transforms);
     check_all_xy_derivatives<PatchSeqLowerBound, PatchSeqUpperBound>(
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),
-            idx_ranges,
-            idx_ranges_slice_dx,
-            idx_ranges_slice_dy,
             coord_transforms);
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<PatchSeqLowerBound, PatchSeqUpperBound>(
-            idx_ranges,
-            idx_ranges_slice_dx,
-            idx_ranges_slice_dy,
             functions_and_derivs,
             evaluator_g,
             get_const_field(function_g_coef),

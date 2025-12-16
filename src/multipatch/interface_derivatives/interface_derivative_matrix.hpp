@@ -521,10 +521,11 @@ private:
                 = function_and_derivs_2.get_values_field();
 
         // Compute the coefficient c_I for the interface I.
-        double const lin_comb_funct = m_derivatives_calculators.template get<EquivalentInterfaceI>()
-                                              .get_function_coefficients(
-                                                      get_const_field(function_1[idx_slice_1]),
-                                                      get_const_field(function_2[idx_slice_2]));
+        double const lin_comb_funct
+                = m_derivatives_calculators.template get<EquivalentInterfaceI>()
+                          .get_function_coefficients(
+                                  get_const_field(function_and_derivs_1[idx_slice_1]),
+                                  get_const_field(function_and_derivs_2[idx_slice_2]));
 
         /*
             If the orientation of the interface is not correct, we change the sign of the sum.

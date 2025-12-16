@@ -579,7 +579,6 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             idx_ranges(idx_range_xy1, idx_range_xy2, idx_range_xy3);
 
     // Instantiate the matrix calculators --------------------------------------------------------
-
     InterfaceExactDerivativeMatrix<
             Connectivity,
 #if defined(CHANGE_BOUND1)
@@ -602,13 +601,6 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(idx_range_y1);
     IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(idx_range_y2);
     IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(idx_range_y3);
-
-    // Collect the index range slices.
-    MultipatchType<IdxRange1SliceOnPatch, Patch1, Patch2, Patch3>
-            idx_ranges_slice_dx(idx_range_slice_dx1, idx_range_slice_dx2, idx_range_slice_dx3);
-
-    MultipatchType<IdxRange2SliceOnPatch, Patch1, Patch2, Patch3>
-            idx_ranges_slice_dy(idx_range_slice_dy1, idx_range_slice_dy2, idx_range_slice_dy3);
 
     // Instantiate DerivField --------------------------------------------------------------------
     DerivFieldMemOnPatch_host<Patch1>
@@ -647,15 +639,15 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     Idx<DerivXg> first_dxg(1);
     Idx<DerivYg> first_dyg(1);
 
-    Idx<GridXg> idx_slice_xg_min(idx_range_slice_dxg.front());
-    Idx<GridXg> idx_slice_xg_max(idx_range_slice_dxg.back());
-    Idx<GridYg> idx_slice_yg_min(idx_range_slice_dyg.front());
-    Idx<GridYg> idx_slice_yg_max(idx_range_slice_dyg.back());
+    Idx<GridXg> idx_xg_min(idx_range_xg.front());
+    Idx<GridXg> idx_xg_max(idx_range_xg.back());
+    Idx<GridYg> idx_yg_min(idx_range_yg.front());
+    Idx<GridYg> idx_yg_max(idx_range_yg.back());
 
-    Idx<DerivXg, GridXg> idx_dxg_min(first_dxg, idx_slice_xg_min);
-    Idx<DerivXg, GridXg> idx_dxg_max(first_dxg, idx_slice_xg_max);
-    Idx<DerivYg, GridYg> idx_dyg_min(first_dyg, idx_slice_yg_min);
-    Idx<DerivYg, GridYg> idx_dyg_max(first_dyg, idx_slice_yg_max);
+    Idx<DerivXg, GridXg> idx_dxg_min(first_dxg, idx_xg_min);
+    Idx<DerivXg, GridXg> idx_dxg_max(first_dxg, idx_xg_max);
+    Idx<DerivYg, GridYg> idx_dyg_min(first_dyg, idx_yg_min);
+    Idx<DerivYg, GridYg> idx_dyg_max(first_dyg, idx_yg_max);
 
     Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_min_min(idx_dxg_min, idx_dyg_min);
     Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_max_min(idx_dxg_max, idx_dyg_min);
@@ -714,84 +706,60 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     // ------ initialise the boundary first derivatives from the global spline
     // X bound on Patch1 ---
 #if defined(REVERSE_PATCH1)
-    Idx<ddc::Deriv<X<1>>, GridX<1>>
-            idx_slice_xmax_1(Idx<ddc::Deriv<X<1>>>(1), idx_range_slice_dx1.back());
-
-    DField<IdxRange<typename Patch1::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_x1max_extracted = function_and_derivs_1[idx_slice_xmax_1];
+    Idx<ddc::Deriv<X<1>>> idx_dx1(1);
     ddc::for_each(idx_range_y1, [&](Idx<GridY<1>> const& idx_par) {
         Idx<GridX<1>, GridY<1>> idx_max(idx_range_x1.back(), idx_par);
         Coord<Xg, Yg> interface_coord_max(
                 coord_transform_1.get_global_coord(ddc::coordinate(idx_max)));
-        derivs_x1max_extracted(idx_par)
+        function_and_derivs_1(idx_dx1, idx_max)
                 = -evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
     });
 #elif defined(CHANGE_BOUND1)
-    Idx<ddc::Deriv<Y<1>>, GridY<1>>
-            idx_slice_ymax_1(Idx<ddc::Deriv<Y<1>>>(1), idx_range_slice_dy1.back());
-
-    DField<IdxRange<typename Patch1::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_y1max_extracted = function_and_derivs_1[idx_slice_ymax_1];
+    Idx<ddc::Deriv<Y<1>>> idx_dy1(1);
     ddc::for_each(idx_range_x1, [&](Idx<GridX<1>> const& idx_par) {
-        double y = ddc::coordinate(idx_par);
-        double x = y1_min;
-        Coord<Xg, Yg> interface_coord_max(x, y);
-        derivs_y1max_extracted(idx_par)
+        Idx<GridX<1>, GridY<1>> idx_max(idx_par, idx_range_y1.back());
+        Coord<Xg, Yg> interface_coord_max(
+                coord_transform_1.get_global_coord(ddc::coordinate(idx_max)));
+        function_and_derivs_1(idx_dy1, idx_max)
                 = -evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
     });
 #else
-    Idx<ddc::Deriv<X<1>>, GridX<1>>
-            idx_slice_xmin_1(Idx<ddc::Deriv<X<1>>>(1), idx_range_slice_dx1.front());
-
-    DField<IdxRange<typename Patch1::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_x1min_extracted = function_and_derivs_1[idx_slice_xmin_1];
+    Idx<ddc::Deriv<X<1>>> idx_dx1(1);
     ddc::for_each(idx_range_y1, [&](Idx<GridY<1>> const& idx_par) {
         Idx<GridX<1>, GridY<1>> idx_min(idx_range_x1.front(), idx_par);
         Coord<Xg, Yg> interface_coord_min(
                 coord_transform_1.get_global_coord(ddc::coordinate(idx_min)));
-        derivs_x1min_extracted(idx_par)
+        function_and_derivs_1(idx_dx1, idx_min)
                 = evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
     });
 #endif
 
     // X bound on Patch3 ---
 #if defined(REVERSE_PATCH3)
-    Idx<ddc::Deriv<X<3>>, GridX<3>>
-            idx_slice_xmin_3(Idx<ddc::Deriv<X<3>>>(1), idx_range_slice_dx3.front());
-
-    DField<IdxRange<typename Patch3::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_x3min_extracted = function_and_derivs_3[idx_slice_xmin_3];
+    Idx<ddc::Deriv<X<3>>> idx_dx3(1);
     ddc::for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
         Idx<GridX<3>, GridY<3>> idx_min(idx_range_x3.front(), idx_par);
         Coord<Xg, Yg> interface_coord_min(
                 coord_transform_3.get_global_coord(ddc::coordinate(idx_min)));
-        derivs_x3min_extracted(idx_par)
+        function_and_derivs_3(idx_dx3, idx_min)
                 = -evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
     });
 #elif (CHANGE_BOUND3)
-    Idx<ddc::Deriv<Y<3>>, GridY<3>>
-            idx_slice_ymax_3(Idx<ddc::Deriv<Y<3>>>(1), idx_range_slice_dy3.back());
-
-    DField<IdxRange<typename Patch3::Grid1>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_y3max_extracted = function_and_derivs_3[idx_slice_ymax_3];
+    Idx<ddc::Deriv<Y<3>>> idx_dy3(1);
     ddc::for_each(idx_range_x3, [&](Idx<GridX<3>> const& idx_par) {
-        double y = x3_min + x3_max - ddc::coordinate(idx_par);
-        double x = ddc::coordinate(idx_range_y3.back());
-        Coord<Xg, Yg> interface_coord_max(x, y);
-        derivs_y3max_extracted(idx_par)
+        Idx<GridX<3>, GridY<3>> idx_max(idx_range_y3.back(), idx_par);
+        Coord<Xg, Yg> interface_coord_max(
+                coord_transform_3.get_global_coord(ddc::coordinate(idx_max)));
+        function_and_derivs_3(idx_dy3, idx_max)
                 = evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
     });
 #else
-    Idx<ddc::Deriv<X<3>>, GridX<3>>
-            idx_slice_xmax_3(Idx<ddc::Deriv<X<3>>>(1), idx_range_slice_dx3.back());
-
-    DField<IdxRange<typename Patch3::Grid2>, Kokkos::HostSpace, Kokkos::layout_stride>
-            derivs_x3max_extracted = function_and_derivs_3[idx_slice_xmax_3];
+    Idx<ddc::Deriv<X<3>>> idx_dx3(1);
     ddc::for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
         Idx<GridX<3>, GridY<3>> idx_max(idx_range_x3.back(), idx_par);
         Coord<Xg, Yg> interface_coord_max(
                 coord_transform_3.get_global_coord(ddc::coordinate(idx_max)));
-        derivs_x3max_extracted(idx_par)
+        function_and_derivs_3(idx_dx3, idx_max)
                 = evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
     });
 #endif
@@ -800,14 +768,12 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
 #if (CHANGE_BOUND1)
     initialise_x_derivatives<Patch1>(
             function_and_derivs_1,
-            idx_range_slice_dx1,
             evaluator_g,
             const_function_g_coef,
             coord_transform_1);
 #else
     initialise_y_derivatives<Patch1>(
             function_and_derivs_1,
-            idx_range_slice_dy1,
             evaluator_g,
             const_function_g_coef,
             coord_transform_1);
@@ -816,7 +782,6 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     // Y bound on Patch2 ---
     initialise_y_derivatives<Patch2>(
             function_and_derivs_2,
-            idx_range_slice_dy2,
             evaluator_g,
             const_function_g_coef,
             coord_transform_2);
@@ -825,14 +790,12 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
 #if (CHANGE_BOUND3)
     initialise_x_derivatives<Patch3>(
             function_and_derivs_3,
-            idx_range_slice_dx3,
             evaluator_g,
             const_function_g_coef,
             coord_transform_3);
 #else
     initialise_y_derivatives<Patch3>(
             function_and_derivs_3,
-            idx_range_slice_dy3,
             evaluator_g,
             const_function_g_coef,
             coord_transform_3);
@@ -841,8 +804,6 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
     // ------ initialise the cross-derivatives from the global spline
     initialise_all_cross_derivatives(
             functions_and_derivs,
-            idx_ranges_slice_dx,
-            idx_ranges_slice_dy,
             evaluator_g,
             const_function_g_coef,
             coord_transforms);
@@ -866,30 +827,20 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
-            idx_ranges,
-            idx_ranges_slice_dx,
             coord_transforms);
     check_all_y_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
-            idx_ranges,
-            idx_ranges_slice_dy,
             coord_transforms);
     check_all_xy_derivatives<EmptyPatchSeq, EmptyPatchSeq>(
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
-            idx_ranges,
-            idx_ranges_slice_dx,
-            idx_ranges_slice_dy,
             coord_transforms);
 
     // Check the whole spline representations ---
     check_all_spline_representation_agreement<EmptyPatchSeq, EmptyPatchSeq>(
-            idx_ranges,
-            idx_ranges_slice_dx,
-            idx_ranges_slice_dy,
             functions_and_derivs,
             evaluator_g,
             const_function_g_coef,
