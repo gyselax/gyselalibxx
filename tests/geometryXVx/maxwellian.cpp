@@ -8,9 +8,10 @@
 #include <gtest/gtest.h>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
+#include "spline_definitions_xvx.hpp"
 #include "trapezoid_quadrature.hpp"
 
 static void TestMaxwellian()

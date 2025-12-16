@@ -99,6 +99,7 @@ SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_r
 
 ```cpp
 // If we want to apply the treatment on Patch 1 and Patch 2
+<<<<<<< HEAD
 SingleInterfaceDerivativesCalculator<Interface_12> 
     derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE);
 // or if we want to apply the treatment only on Patch 1
@@ -107,6 +108,13 @@ SingleInterfaceDerivativesCalculator<Interface_12>
 // or if we want to apply the treatment only on Patch 2
 SingleInterfaceDerivativesCalculator<Interface_12> 
     derivatives_calculator (idx_range_patch_1, idx_range_patch_2, ddc::BoundCond::HERMITE, ddc::BoundCond::GREVILLE);
+=======
+SingleInterfaceDerivativesCalculator<Interface_12, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+// or if we want to apply the treatment only on Patch 1
+SingleInterfaceDerivativesCalculator<Interface_12, ddc::BoundCond::GREVILLE, ddc::BoundCond::HERMITE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+// or if we want to apply the treatment only on Patch 2
+SingleInterfaceDerivativesCalculator<Interface_12, ddc::BoundCond::HERMITE, ddc::BoundCond::GREVILLE> derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+>>>>>>> origin/main_pvidal
 ```
 
 > If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
@@ -118,7 +126,10 @@ The coefficients can be collected with the following functions:
 - `derivatives_calculator.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
 - `derivatives_calculator.get_function_coefficients(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
  (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
+<<<<<<< HEAD
 - `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case. This class is also used for 2D cases where we need to compute the corner cross-derivatives. We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.
+=======
+>>>>>>> origin/main_pvidal
 
 If we want to apply the exact formula, we need to sum these coefficients,
 
@@ -163,6 +174,7 @@ with the *local coefficients* given by
 \left\{
 \begin{aligned}
     & \gamma_i =
+<<<<<<< HEAD
     \frac{3}{2} \frac{1}{\Delta x^R_{i} +\Delta x^L_{i}}
     \left[
         \frac{\Delta x^L_{i}}{\Delta x^R_{i}}  f^R_{i+1}
@@ -175,19 +187,42 @@ with the *local coefficients* given by
     \\
     & \alpha_i = -\frac{1}{2} \frac{\Delta x^L_{i}}{\Delta x^R_{i} +\Delta x^L_{i}}, \\
     & \beta_i =  -\frac{1}{2} \frac{\Delta x^R_{i}}{\Delta x^R_{i} +\Delta x^L_{i}}.
+=======
+    \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}}
+    \left[
+        \frac{\Delta x^-_{i}}{\Delta x^+_{i}}  f^+_{i+1}
+        + \left(
+            \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
+            - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+        \right) f^+_{i}
+        - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}  f^-_{i-1}
+    \right],
+    \\
+    & \alpha_i = -\frac{1}{2} \frac{\Delta x^-_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}, \\
+    & \beta_i =  -\frac{1}{2} \frac{\Delta x^+_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}.
+>>>>>>> origin/main_pvidal
 \end{aligned}
 \right.
 ```
 
+<<<<<<< HEAD
 and $`\Delta x^R_{i} = x^R_{i+1} -  x^R_{i} \text{, } \Delta x^L_{i} = x^L_{i} -  x^L_{i-1}`$,
 and $`\{f^{+/-}_{i+k}\}_k`$ the function values at the interpolation points on patch 1 (+) and
 patch 2 (-).
 
 **Remark:** As mentioned above, the coefficient $`c^i_{N^L,N^R}`$ can be written as a linear combination
+=======
+and $`\Delta x^+_{i} = x^+_{i+1} -  x^+_{i} \text{, } \Delta x^-_{i} = x^-_{i} -  x^-_{i-1}`$,
+and $`\{f^{+/-}_{i+k}\}_k`$ the function values at the interpolation points on patch 1 (+) and
+patch 2 (-).
+
+**Remark:** As mentionnd above, the coefficient $`c^i_{N^L,N^R}`$ can be written as a linear combination
+>>>>>>> origin/main_pvidal
 of the interpolating function values. In the code, we store the weights in front of each interpolating function value
 as they depend only on the grids. For the same reason, we store $`\gamma_i`$ as a vector,
 
 ```math
+<<<<<<< HEAD
 {\bf \Gamma_i}
     = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right]
     = \frac{3}{2} \frac{1}{\Delta x^R_{i} +\Delta x^L_{i}}
@@ -198,6 +233,18 @@ as they depend only on the grids. For the same reason, we store $`\gamma_i`$ as 
                 - \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
             \right),
             \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
+=======
+{\bf \Gamma_i} 
+    = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right] 
+    = \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}} 
+        \left[
+            - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}, 
+            \left(
+                \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
+                - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+            \right), 
+            \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+>>>>>>> origin/main_pvidal
         \right].
 ```
 
@@ -225,8 +272,13 @@ We start the recursion on patch 2. We initialise it with,
 
 ```math
 \begin{aligned}
+<<<<<<< HEAD
     & \omega_{k, 1,1}^i = \gamma_{i,k},
     && \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i
+=======
+    & \omega_{k, 1,1}^i = \gamma_{i,k}, 
+    && \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i 
+>>>>>>> origin/main_pvidal
                         + \frac{\alpha_i}{1 - \alpha_i  \beta_{i+1}} \gamma_{i+1,k},
 \end{aligned}
 ```
@@ -326,7 +378,11 @@ and for $`m = 2, ..., N^L-1`$,
 
 ```math
 \begin{aligned}
+<<<<<<< HEAD
     & \omega_{k, m+1,N^R}^i =
+=======
+    & \omega_{k, m+1,N^R}^i = 
+>>>>>>> origin/main_pvidal
     \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}}
             \left[
                 \omega_{k, m,N^R}^i
@@ -365,9 +421,15 @@ of the second part of the recursion need to use these modified local coefficient
     & \gamma_i^{*,-} = \frac{1}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}
         \left[
             \gamma_i
+<<<<<<< HEAD
             + \beta_i \frac{1}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{*})
             - \beta_i \frac{H_0^{*,-}}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{i-1})
             - \beta_i \frac{H_1^{*,-}}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{i})
+=======
+            + \beta_i \frac{1}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{*})
+            - \beta_i \frac{H_0^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i-1})
+            - \beta_i \frac{H_1^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i})
+>>>>>>> origin/main_pvidal
         \right],
     \\
     & \alpha_i^{*,-} = \frac{\alpha_i}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}, \\
@@ -710,5 +772,9 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
+<<<<<<< HEAD
 Journal of Scientific Computing, (2025) [ACCEPTED].
 Available on arXiv: [https://arxiv.org/abs/2505.22078](https://arxiv.org/abs/2505.22078)
+=======
+Journal of Scientific Computing, (2025) [SUBMITTED - NOT PUBLISHED]
+>>>>>>> origin/main_pvidal

@@ -3,13 +3,22 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include "multipatch_field.hpp"
-#include "types.hpp"
-
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
+#include "derivative_field.hpp"
+#include "derivative_field_mem.hpp"
 
 /**
- * @brief Temporary class to build a spline representation of data given in a DerivField.
+ * @brief [Temporary] Apply a SplineBuilder2D to a DerivField.
  * 
+ * DerivField stores the values and the derivatives of a function. 
+ * The inputs of the SplineBuilder2D are on different layouts than the fields
+ * we can get from the DerivField. SplineBuliderDerivField2D allows to 
+ * directly apply a stored SplineBuilder2D to a DerivField by copying 
+ * data in fields with correct layout. 
+ * 
+ * Implemented only for 2D case. 
  */
 template <
         class ExecSpace,
@@ -20,9 +29,7 @@ template <
         ddc::BoundCond BoundCond1min,
         ddc::BoundCond BoundCond1max,
         ddc::BoundCond BoundCond2min,
-        ddc::BoundCond BoundCond2max,
-        class LayoutSpline = Kokkos::layout_right,
-        class LayoutFunction = Kokkos::layout_right>
+        ddc::BoundCond BoundCond2max>
 class SplineBuliderDerivField2D
 {
     using MemorySpace = typename ExecSpace::memory_space;
@@ -45,12 +52,8 @@ class SplineBuliderDerivField2D
             BoundCond2max,
             ddc::SplineSolver::LAPACK>;
 
-    using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace, LayoutSpline>;
-    using DerivFieldType = DerivField<
-            double,
-            IdxRange<Deriv1, Grid1, Deriv2, Grid2>,
-            MemorySpace,
-            LayoutFunction>;
+    using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace>;
+    using DerivFieldType = DerivField<double, IdxRange<Deriv1, Grid1, Deriv2, Grid2>, MemorySpace>;
 
     using FunctFieldMem = DFieldMem<IdxRange<Grid1, Grid2>, MemorySpace>;
     using FunctField = DField<IdxRange<Grid1, Grid2>, MemorySpace>;
@@ -67,14 +70,18 @@ class SplineBuliderDerivField2D
     using Deriv2Field = DField<IdxRange<Grid1, Deriv2>, MemorySpace>;
     using Deriv2ConstField = DConstField<IdxRange<Grid1, Deriv2>, MemorySpace>;
 
+private:
     Builder2D const& m_builder;
 
 public:
     /**
      * @brief Instantiate the class by storing a reference to the spline builder 
      * we can to use. 
+     * 
+     * @param[in] builder A reference to SplineBuilder2D from DDC that we store
+     * in the class. 
      */
-    SplineBuliderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
+    explicit SplineBuliderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
 
     /**
      * @brief Build the spline representation of the function given in a 
@@ -85,242 +92,178 @@ public:
      */
     void operator()(SplineType spline, DerivFieldType function_and_derivs) const
     {
+        // Check that the DerivField contains the necessary derivatives for the builder.
+        IdxRange<Deriv1> idx_range_d1_min(
+                Idx<Deriv1>(1),
+                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbc_xmin));
+        IdxRange<Deriv1> idx_range_d1_max(
+                Idx<Deriv1>(1),
+                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbc_xmax));
+        IdxRange<Deriv2> idx_range_d2_min(
+                Idx<Deriv2>(1),
+                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbc_xmin));
+        IdxRange<Deriv2> idx_range_d2_max(
+                Idx<Deriv2>(1),
+                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbc_xmax));
+
+        IdxRange<Deriv1, Deriv2> idx_range_d1d2_min_min(idx_range_d1_min, idx_range_d2_min);
+        IdxRange<Deriv1, Deriv2> idx_range_d1d2_max_min(idx_range_d1_max, idx_range_d2_min);
+        IdxRange<Deriv1, Deriv2> idx_range_d1d2_min_max(idx_range_d1_min, idx_range_d2_max);
+        IdxRange<Deriv1, Deriv2> idx_range_d1d2_max_max(idx_range_d1_max, idx_range_d2_max);
+
         // Get the fields on the right layout.
         // --- get the index ranges.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
+        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs);
         IdxRange<Grid1> idx_range_1(idx_range);
         IdxRange<Grid2> idx_range_2(idx_range);
-
-        IdxRange<Deriv1> idx_range_d1(Idx<Deriv1>(1), IdxStep<Deriv1>(1));
-        IdxRange<Deriv2> idx_range_d2(Idx<Deriv2>(1), IdxStep<Deriv2>(1));
-        IdxRange<Deriv1, Deriv2> idx_range_d1d2(idx_range_d1, idx_range_d2);
 
         // --- allocate memory for fields on the correct layout.
         FunctFieldMem function_alloc(idx_range);
 
-        IdxRange<Deriv1, Grid2> idx_range_d1_2(idx_range_d1, idx_range_2);
-        Deriv1FieldMem deriv1_min_alloc(idx_range_d1_2);
-        Deriv1FieldMem deriv1_max_alloc(idx_range_d1_2);
+        IdxRange<Deriv1, Grid2> idx_range_d1_2_min(idx_range_d1_min, idx_range_2);
+        IdxRange<Deriv1, Grid2> idx_range_d1_2_max(idx_range_d1_max, idx_range_2);
+        Deriv1FieldMem deriv1_min_alloc(idx_range_d1_2_min);
+        Deriv1FieldMem deriv1_max_alloc(idx_range_d1_2_max);
 
-        IdxRange<Grid1, Deriv2> idx_range_1_d2(idx_range_1, idx_range_d2);
-        Deriv2FieldMem deriv2_min_alloc(idx_range_1_d2);
-        Deriv2FieldMem deriv2_max_alloc(idx_range_1_d2);
+        IdxRange<Grid1, Deriv2> idx_range_1_d2_min(idx_range_1, idx_range_d2_min);
+        IdxRange<Grid1, Deriv2> idx_range_1_d2_max(idx_range_1, idx_range_d2_max);
+        Deriv2FieldMem deriv2_min_alloc(idx_range_1_d2_min);
+        Deriv2FieldMem deriv2_max_alloc(idx_range_1_d2_max);
 
-        CrossDerivFieldMem cross_min_min_alloc(idx_range_d1d2);
-        CrossDerivFieldMem cross_max_min_alloc(idx_range_d1d2);
-        CrossDerivFieldMem cross_min_max_alloc(idx_range_d1d2);
-        CrossDerivFieldMem cross_max_max_alloc(idx_range_d1d2);
+        CrossDerivFieldMem cross_min_min_alloc(idx_range_d1d2_min_min);
+        CrossDerivFieldMem cross_max_min_alloc(idx_range_d1d2_max_min);
+        CrossDerivFieldMem cross_min_max_alloc(idx_range_d1d2_min_max);
+        CrossDerivFieldMem cross_max_max_alloc(idx_range_d1d2_max_max);
+
+        // Get slice indices to select the right bound.
+        Idx<Grid1> slice1_min = idx_range_1.front();
+        Idx<Grid1> slice1_max = idx_range_1.back();
+        Idx<Grid2> slice2_min = idx_range_2.front();
+        Idx<Grid2> slice2_max = idx_range_2.back();
 
         // --- fill in the new fields with the data from the DerivField.
         fill_in_function(get_field(function_alloc), function_and_derivs);
 
-        // If the boundary is not a ddc::BoundCond::HERMITE, we don't use derivatives.
-        std::optional<Deriv1ConstField> deriv1_min_optional;
-        std::optional<Deriv1ConstField> deriv1_max_optional;
-        std::optional<Deriv2ConstField> deriv2_min_optional;
-        std::optional<Deriv2ConstField> deriv2_max_optional;
-        std::optional<CrossDerivConstField> cross_min_min_optional;
-        std::optional<CrossDerivConstField> cross_max_min_optional;
-        std::optional<CrossDerivConstField> cross_min_max_optional;
-        std::optional<CrossDerivConstField> cross_max_max_optional;
-
         // --- fill in the first derivatives with the data from the DerivField.
-        if constexpr (BoundCond1min == ddc::BoundCond::HERMITE) {
-            fill_in_deriv1(get_field(deriv1_min_alloc), function_and_derivs, true);
-            deriv1_min_optional = std::optional(get_const_field(deriv1_min_alloc));
-        } else {
-            deriv1_min_optional = std::optional<Deriv1ConstField> {std::nullopt};
-        }
-
-        if constexpr (BoundCond1max == ddc::BoundCond::HERMITE) {
-            fill_in_deriv1(get_field(deriv1_max_alloc), function_and_derivs, false);
-            deriv1_max_optional = std::optional(get_const_field(deriv1_max_alloc));
-        } else {
-            deriv1_max_optional = std::optional<Deriv1ConstField> {std::nullopt};
-        }
-
-        if constexpr (BoundCond2min == ddc::BoundCond::HERMITE) {
-            fill_in_deriv2(get_field(deriv2_min_alloc), function_and_derivs, true);
-            deriv2_min_optional = std::optional(get_const_field(deriv2_min_alloc));
-        } else {
-            deriv2_min_optional = std::optional<Deriv2ConstField> {std::nullopt};
-        }
-
-        if constexpr (BoundCond2max == ddc::BoundCond::HERMITE) {
-            fill_in_deriv2(get_field(deriv2_max_alloc), function_and_derivs, false);
-            deriv2_max_optional = std::optional(get_const_field(deriv2_max_alloc));
-        } else {
-            deriv2_max_optional = std::optional<Deriv2ConstField> {std::nullopt};
-        }
+        fill_in_deriv1(get_field(deriv1_min_alloc), function_and_derivs, slice1_min);
+        fill_in_deriv1(get_field(deriv1_max_alloc), function_and_derivs, slice1_max);
+        fill_in_deriv2(get_field(deriv2_min_alloc), function_and_derivs, slice2_min);
+        fill_in_deriv2(get_field(deriv2_max_alloc), function_and_derivs, slice2_max);
 
         // --- fill in the cross-derivatives with the data from the DerivField.
-        if constexpr (
-                (BoundCond1min == ddc::BoundCond::HERMITE)
-                && (BoundCond2min == ddc::BoundCond::HERMITE)) {
-            fill_in_cross_deriv(get_field(cross_min_min_alloc), function_and_derivs, true, true);
-            cross_min_min_optional = std::optional(get_const_field(cross_min_min_alloc));
-        } else {
-            cross_min_min_optional = std::optional<CrossDerivConstField> {std::nullopt};
-        }
-
-        if constexpr (
-                (BoundCond1max == ddc::BoundCond::HERMITE)
-                && (BoundCond2min == ddc::BoundCond::HERMITE)) {
-            fill_in_cross_deriv(get_field(cross_max_min_alloc), function_and_derivs, false, true);
-            cross_max_min_optional = std::optional(get_const_field(cross_max_min_alloc));
-        } else {
-            cross_max_min_optional = std::optional<CrossDerivConstField> {std::nullopt};
-        }
-
-        if constexpr (
-                (BoundCond1min == ddc::BoundCond::HERMITE)
-                && (BoundCond2max == ddc::BoundCond::HERMITE)) {
-            fill_in_cross_deriv(get_field(cross_min_max_alloc), function_and_derivs, true, false);
-            cross_min_max_optional = std::optional(get_const_field(cross_min_max_alloc));
-        } else {
-            cross_min_max_optional = std::optional<CrossDerivConstField> {std::nullopt};
-        }
-
-        if constexpr (
-                (BoundCond1max == ddc::BoundCond::HERMITE)
-                && (BoundCond2max == ddc::BoundCond::HERMITE)) {
-            fill_in_cross_deriv(get_field(cross_max_max_alloc), function_and_derivs, false, false);
-            cross_max_max_optional = std::optional(get_const_field(cross_max_max_alloc));
-        } else {
-            cross_max_max_optional = std::optional<CrossDerivConstField> {std::nullopt};
-        }
+        fill_in_cross_deriv(
+                get_field(cross_min_min_alloc),
+                function_and_derivs,
+                slice1_min,
+                slice2_min);
+        fill_in_cross_deriv(
+                get_field(cross_max_min_alloc),
+                function_and_derivs,
+                slice1_max,
+                slice2_min);
+        fill_in_cross_deriv(
+                get_field(cross_min_max_alloc),
+                function_and_derivs,
+                slice1_min,
+                slice2_max);
+        fill_in_cross_deriv(
+                get_field(cross_max_max_alloc),
+                function_and_derivs,
+                slice1_max,
+                slice2_max);
 
         // Build the spline with the fields on the correct layout.
         m_builder(
                 spline,
                 get_const_field(function_alloc),
-                deriv1_min_optional,
-                deriv1_max_optional,
-                deriv2_min_optional,
-                deriv2_max_optional,
-                cross_min_min_optional,
-                cross_max_min_optional,
-                cross_min_max_optional,
-                cross_max_max_optional);
+                std::optional(get_const_field(deriv1_min_alloc)),
+                std::optional(get_const_field(deriv1_max_alloc)),
+                std::optional(get_const_field(deriv2_min_alloc)),
+                std::optional(get_const_field(deriv2_max_alloc)),
+                std::optional(get_const_field(cross_min_min_alloc)),
+                std::optional(get_const_field(cross_max_min_alloc)),
+                std::optional(get_const_field(cross_min_max_alloc)),
+                std::optional(get_const_field(cross_max_max_alloc)));
     };
 
-private:
-    /// @brief Fill in the function field with the values stored in the function_and_derivs.
+public:
+    /**
+     * @brief Fill in the function field with the values stored in the function_and_derivs.
+     * @param[out] function Field with layout_right where we copy the function values.
+     * @param[in] function_and_derivs DerivField from where the function values are copied.
+     */
     void fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
     {
-        // Extract data.
-        DField<IdxRange<Grid1, Grid2>, MemorySpace, Kokkos::layout_stride> function_extracted
-                = function_and_derivs.get_values_field();
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_extracted);
         // Fill the field with correct layout.
-        ddc::for_each(idx_range, [&](Idx<Grid1, Grid2> const idx) {
-            function(idx) = function_extracted(idx);
-        });
+        ddc::parallel_for_each(
+                ExecSpace(),
+                get_idx_range(function_and_derivs),
+                KOKKOS_LAMBDA(Idx<Grid1, Grid2> const idx) {
+                    function(idx) = function_and_derivs(idx);
+                });
     }
 
     /**
      *  @brief Fill in the deriv1 field with the derivatives along the first dimension stored 
      * in the function_and_derivs. 
-     * The boolean is_min helps to determine which bound we select for the derivative field. 
+     * @param[out] deriv1 Field with layout_right where we copy the derivatives.
+     * @param[in] function_and_derivs DerivField from where the derivatives are copied.
+     * @param[in] idx_slice Index to determine which bound (mon/max) we select for the derivative field. 
      */
-    void fill_in_deriv1(Deriv1Field deriv1, DerivFieldType function_and_derivs, bool const is_min)
-            const
+    void fill_in_deriv1(
+            Deriv1Field deriv1,
+            DerivFieldType function_and_derivs,
+            Idx<Grid1> idx_slice) const
     {
-        // Extract data.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
-        IdxRangeSlice<Grid1> idx_range_slice_1
-                = function_and_derivs.template idx_range_for_deriv<Grid1>();
-
-        IdxRange<Deriv1> idx_range_d1(Idx<Deriv1>(1), IdxStep<Deriv1>(1));
-        IdxRange<Grid2> idx_range_2(idx_range);
-
-        Idx<Grid1> d1_slice = is_min ? idx_range_slice_1.front() : idx_range_slice_1.back();
-        IdxRange<Grid1> idx_range_slicing_1(d1_slice, IdxStep<Grid1>(1));
-
-        IdxRange<Deriv1, Grid1, Grid2>
-                idx_range_d1_12(idx_range_d1, idx_range_slicing_1, idx_range_2);
-
-        DField<IdxRange<Deriv1, Grid2>, MemorySpace, Kokkos::layout_stride> deriv1_extracted
-                = function_and_derivs[idx_range_d1_12][d1_slice];
-
-        // Fill the field with correct layout.
-        ddc::for_each(get_idx_range(deriv1), [&](Idx<Deriv1, Grid2> const idx) {
-            deriv1(idx) = deriv1_extracted(idx);
-        });
+        ddc::parallel_for_each(
+                ExecSpace(),
+                get_idx_range(deriv1),
+                KOKKOS_LAMBDA(Idx<Deriv1, Grid2> const idx) {
+                    deriv1(idx) = function_and_derivs(idx, idx_slice);
+                });
     }
 
     /**
      *  @brief Fill in the deriv2 field with the derivatives along the second dimension stored 
      * in the function_and_derivs. 
-     * The boolean is_min helps to determine which bound we select for the derivative field. 
+     * @param[out] deriv2 Field with layout_right where we copy the derivatives.
+     * @param[in] function_and_derivs DerivField from where the derivatives are copied.
+     * @param[in] idx_slice Index to determine which bound (mon/max) we select for the derivative field. 
      */
-    void fill_in_deriv2(Deriv2Field deriv2, DerivFieldType function_and_derivs, bool const is_min)
-            const
+    void fill_in_deriv2(
+            Deriv2Field deriv2,
+            DerivFieldType function_and_derivs,
+            Idx<Grid2> idx_slice) const
     {
-        // Extract data.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
-        IdxRangeSlice<Grid2> idx_range_slice_2
-                = function_and_derivs.template idx_range_for_deriv<Grid2>();
-
-        IdxRange<Grid1> idx_range_1(idx_range);
-        IdxRange<Deriv2> idx_range_d2(Idx<Deriv2>(1), IdxStep<Deriv2>(1));
-
-        Idx<Grid2> d2_slice = is_min ? idx_range_slice_2.front() : idx_range_slice_2.back();
-        IdxRange<Grid2> idx_range_slicing_2(d2_slice, IdxStep<Grid2>(1));
-
-        IdxRange<Grid1, Deriv2, Grid2>
-                idx_range_d2_12(idx_range_1, idx_range_d2, idx_range_slicing_2);
-
-        DField<IdxRange<Grid1, Deriv2>, MemorySpace, Kokkos::layout_stride> deriv2_extracted
-                = function_and_derivs[idx_range_d2_12][d2_slice];
-
-        // Fill the field with correct layout.
-        ddc::for_each(get_idx_range(deriv2), [&](Idx<Grid1, Deriv2> const idx) {
-            deriv2(idx) = deriv2_extracted(idx);
-        });
+        ddc::parallel_for_each(
+                ExecSpace(),
+                get_idx_range(deriv2),
+                KOKKOS_LAMBDA(Idx<Grid1, Deriv2> const idx) {
+                    deriv2(idx) = function_and_derivs(idx, idx_slice);
+                });
     }
 
     /**
      *  @brief Fill in the cross_deriv field with the cross derivatives stored 
      * in the function_and_derivs. 
-     * The booleans is_1min and is_2min help to determine which corner we select 
-     * for the derivative field. 
+     * @param[out] cross_deriv Field with layout_right where we copy the cross-derivatives.
+     * @param[in] function_and_derivs DerivField from where the cross-derivatives are copied.
+     * @param[in] idx_slice_1 Index to determine which bound (mon/max) we select for the derivative field
+     * on the first dimension. 
+     * @param[in] idx_slice_2 Index to determine which bound (mon/max) we select for the derivative field
+     * on the second dimension. 
      */
     void fill_in_cross_deriv(
             CrossDerivField cross_deriv,
             DerivFieldType function_and_derivs,
-            bool const is_1min,
-            bool const is_2min) const
+            Idx<Grid1> idx_slice_1,
+            Idx<Grid2> idx_slice_2) const
     {
-        // Extract data.
-        IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs.get_values_field());
-        IdxRangeSlice<Grid1> idx_range_slice_1
-                = function_and_derivs.template idx_range_for_deriv<Grid1>();
-        IdxRangeSlice<Grid2> idx_range_slice_2
-                = function_and_derivs.template idx_range_for_deriv<Grid2>();
-
-        IdxRange<Grid1> idx_range_1(idx_range);
-        IdxRange<Grid2> idx_range_2(idx_range);
-        IdxRange<Deriv1> idx_range_d1(Idx<Deriv1>(1), IdxStep<Deriv1>(1));
-        IdxRange<Deriv2> idx_range_d2(Idx<Deriv2>(1), IdxStep<Deriv2>(1));
-        IdxRange<Deriv1, Deriv2> idx_range_d1d2(idx_range_d1, idx_range_d2);
-
-        Idx<Grid1> d1_slice = is_1min ? idx_range_slice_1.front() : idx_range_slice_1.back();
-        Idx<Grid2> d2_slice = is_2min ? idx_range_slice_2.front() : idx_range_slice_2.back();
-        IdxRange<Grid1> idx_range_slicing_1(d1_slice, IdxStep<Grid1>(1));
-        IdxRange<Grid2> idx_range_slicing_2(d2_slice, IdxStep<Grid2>(1));
-
-        IdxRange<Deriv1, Grid1, Deriv2, Grid2> idx_range_cross_deriv(
-                idx_range_d1,
-                idx_range_slicing_1,
-                idx_range_d2,
-                idx_range_slicing_2);
-
-        DField<IdxRange<Deriv1, Deriv2>, MemorySpace, Kokkos::layout_stride> cross_deriv_extracted
-                = function_and_derivs[idx_range_cross_deriv][d1_slice][d2_slice];
-
-        // Fill the field with correct layout.
-        Idx<Deriv1, Deriv2> const idx_cross_deriv(idx_range_d1d2.front());
-        cross_deriv(idx_cross_deriv) = cross_deriv_extracted(idx_cross_deriv);
+        ddc::parallel_for_each(
+                get_idx_range(cross_deriv),
+                KOKKOS_LAMBDA(Idx<Deriv1, Deriv2> idx_derivs) {
+                    cross_deriv(idx_derivs)
+                            = function_and_derivs(idx_derivs, idx_slice_1, idx_slice_2);
+                });
     }
 };

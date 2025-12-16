@@ -21,8 +21,8 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "geometry_r_theta.hpp"
 #include "input.hpp"
 #include "itimestepper.hpp"
 #include "math_tools.hpp"
@@ -33,6 +33,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_polar_foot_finder.hpp"
 
 
