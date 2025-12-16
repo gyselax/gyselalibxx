@@ -78,7 +78,7 @@ double SpatialAdvection(
         Error.push_back(err);
     });
 
-    double const m_advection_error = ddc::transform_reduce(
+    double const m_advection_error = ddc::host_transform_reduce(
             meshSpXVx,
             0.0,
             ddc::reducer::max<double>(),
