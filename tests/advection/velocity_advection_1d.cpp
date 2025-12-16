@@ -224,8 +224,8 @@ public:
         DDerivFieldSpX advection_field_derivatives_max
                 = get_field(advection_field_derivatives_max_alloc);
 
-        ddc::parallel_fill(advection_field_derivatives_min_alloc, 1.);
-        ddc::parallel_fill(advection_field_derivatives_max_alloc, 1.);
+        ddc::parallel_fill(advection_field_derivatives_min, 1.);
+        ddc::parallel_fill(advection_field_derivatives_max, 1.);
 
 
         // SIMULATION ----------------------------------------------------------------------------
