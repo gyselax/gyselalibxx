@@ -83,9 +83,8 @@ TEST(DerivFieldMemTest, Constructor1Deriv)
     DFieldMemXY_dX dxField(idx_range_x_y, deriv_idx_range_x);
 
     // Ensure that the internal field has the expected type
-    constexpr bool same = std::is_same_v<
-            typename DFieldMemXY_dX::chunk_type,
-            host_t<DFieldMem<IdxRange<dX, GridX, GridY>>>>;
+    constexpr bool same = std::
+            is_same_v<typename DFieldMemXY_dX::chunk_type, DFieldMem<IdxRange<dX, GridX, GridY>>>;
     EXPECT_TRUE(same);
 }
 
@@ -103,8 +102,7 @@ TEST(DerivFieldMemTest, Constructor2Deriv)
     DFieldMemXY_dXdY dxdyField(idx_range_x_y, deriv_idx_range_x, deriv_idx_range_y);
 
     // Ensure that the internal field has the expected type
-    bool same = std::
-            is_same_v<typename DFieldMemXY_dXdY::chunk_type, host_t<DFieldMem<IdxRange_dXdYXY>>>;
+    bool same = std::is_same_v<typename DFieldMemXY_dXdY::chunk_type, DFieldMem<IdxRange_dXdYXY>>;
     EXPECT_TRUE(same);
 }
 
@@ -124,7 +122,7 @@ TEST(DerivFieldTest, Constructor1Deriv)
     DFieldXY_dX dxField(dxField_alloc);
 
     // Ensure that the internal field has the expected type
-    bool same = std::is_same_v<DFieldXY_dX::chunk_type, host_t<DField<IdxRange<dX, GridX, GridY>>>>;
+    bool same = std::is_same_v<DFieldXY_dX::chunk_type, DField<IdxRange<dX, GridX, GridY>>>;
     EXPECT_TRUE(same);
 }
 
@@ -145,7 +143,7 @@ TEST(DerivFieldTest, Constructor2Deriv)
     DFieldXY_dXdY dxdyField(dxdyField_alloc);
 
     // Ensure that the internal field has the expected type
-    bool same = std::is_same_v<DFieldXY_dXdY::chunk_type, host_t<DField<IdxRange_dXdYXY>>>;
+    bool same = std::is_same_v<DFieldXY_dXdY::chunk_type, DField<IdxRange_dXdYXY>>;
     EXPECT_TRUE(same);
 }
 
