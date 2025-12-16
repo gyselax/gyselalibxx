@@ -658,7 +658,9 @@ TEST(DerivFieldMemTest, FieldDeepCopy)
     });
     // Set the derivatives
     double x_left(idx_range_x.front() - IdxX(0));
-    ddc::host_for_each(get_idx_range(left_x_derivs), [&](IdxY iy) { left_x_derivs(iy) = 2 * x_left; });
+    ddc::host_for_each(get_idx_range(left_x_derivs), [&](IdxY iy) {
+        left_x_derivs(iy) = 2 * x_left;
+    });
     double x_right(idx_range_x.back() - IdxX(0));
     ddc::host_for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
         right_x_derivs(iy) = 2 * x_right;
@@ -723,7 +725,9 @@ TEST(DerivFieldTest, FieldDeepCopy)
     });
     // Set the derivatives
     double x_left(idx_range_x.front() - IdxX(0));
-    ddc::host_for_each(get_idx_range(left_x_derivs), [&](IdxY iy) { left_x_derivs(iy) = 2 * x_left; });
+    ddc::host_for_each(get_idx_range(left_x_derivs), [&](IdxY iy) {
+        left_x_derivs(iy) = 2 * x_left;
+    });
     double x_right(idx_range_x.back() - IdxX(0));
     ddc::host_for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
         right_x_derivs(iy) = 2 * x_right;

@@ -66,7 +66,9 @@ double VelocityAdvection(
     });
     // Initialisation of transport coefficient
     host_t<DFieldMemX> adv_speed_host(gridx);
-    ddc::host_for_each(gridx, [&](IdxX const ix) { adv_speed_host(ix) = ddc::distance_at_right(ix); });
+    ddc::host_for_each(gridx, [&](IdxX const ix) {
+        adv_speed_host(ix) = ddc::distance_at_right(ix);
+    });
     double const timestep = .1;
     std::vector<double> Error;
     Error.reserve(allfdistribu_host.size());

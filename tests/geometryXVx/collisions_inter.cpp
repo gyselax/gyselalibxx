@@ -116,20 +116,22 @@ TEST(CollisionsInter, CollisionsInter)
         host_t<DFieldMemSpX> fluid_velocity_host(get_idx_range<Species, GridX>(allfdistribu_host));
         host_t<DFieldMemSpX> temperature_host(get_idx_range<Species, GridX>(allfdistribu_host));
 
-        ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
-            moments(density_host(ispx),
-                    get_const_field(allfdistribu[ispx]),
-                    FluidMoments::s_density);
-            moments(fluid_velocity_host(ispx),
-                    get_const_field(allfdistribu[ispx]),
-                    density_host(ispx),
-                    FluidMoments::s_velocity);
-            moments(temperature_host(ispx),
-                    get_const_field(allfdistribu[ispx]),
-                    density_host(ispx),
-                    fluid_velocity_host(ispx),
-                    FluidMoments::s_temperature);
-        });
+        ddc::host_for_each(
+                get_idx_range<Species, GridX>(allfdistribu_host),
+                [&](IdxSpX const ispx) {
+                    moments(density_host(ispx),
+                            get_const_field(allfdistribu[ispx]),
+                            FluidMoments::s_density);
+                    moments(fluid_velocity_host(ispx),
+                            get_const_field(allfdistribu[ispx]),
+                            density_host(ispx),
+                            FluidMoments::s_velocity);
+                    moments(temperature_host(ispx),
+                            get_const_field(allfdistribu[ispx]),
+                            density_host(ispx),
+                            fluid_velocity_host(ispx),
+                            FluidMoments::s_temperature);
+                });
         ddc::parallel_deepcopy(temperature, temperature_host);
         ddc::parallel_deepcopy(density, density_host);
 
