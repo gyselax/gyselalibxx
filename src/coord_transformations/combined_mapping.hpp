@@ -22,7 +22,7 @@
  */
 template <
         concepts::MappingWithJacobian Mapping1,
-        concepts::MappingWithJacobian Mapping2,
+        concepts::Mapping Mapping2,
         class CoordJacobianType = typename Mapping2::CoordResult>
 class CombinedMapping
 {

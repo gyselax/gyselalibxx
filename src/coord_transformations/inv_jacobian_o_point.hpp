@@ -29,7 +29,7 @@ class InvJacobianOPoint;
 // Pre-declaration of CombinedMapping.
 template <
         concepts::MappingWithJacobian Mapping1,
-        concepts::MappingWithJacobian Mapping2,
+        concepts::Mapping Mapping2,
         class CoordJacobianType>
 class CombinedMapping;
 
