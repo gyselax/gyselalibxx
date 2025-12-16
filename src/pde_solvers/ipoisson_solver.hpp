@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <type_traits>
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
@@ -29,6 +30,7 @@ class IPoissonSolver;
 template <class... ODims, class IdxRangeFull, class DataType, class MemorySpace, class LayoutSpace>
 class IPoissonSolver<IdxRange<ODims...>, IdxRangeFull, DataType, MemorySpace, LayoutSpace>
 {
+    static_assert(std::is_floating_point_v<DataType>);
 protected:
     /// @brief The tags describing the real dimensions in the equation.
     using real_laplacian_tags = ddc::detail::TypeSeq<typename ODims::continuous_dimension_type...>;
