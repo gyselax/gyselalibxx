@@ -180,10 +180,11 @@ void init_distribution_fun(
                 double const temperature_loc = temperature(isp);
                 double const mean_velocity_loc = mean_velocity(isp);
                 double const vpar = ddc::coordinate(ddc::select<GridVpar>(ispvparmu));
+                double const mu = ddc::coordinate(ddc::select<GridMu>(ispvparmu));
                 double const inv_2piT = 1. / (2. * M_PI * temperature_loc);
-                double const coeff_maxw = Kokkos::sqrt(inv_2piT) * inv_2piT;
-                double const energy = 0.5 * (vpar - mean_velocity_loc) * (vpar - mean_velocity_loc)
-                                      / temperature_loc;
+                double const coeff_maxw = Kokkos::pow (inv_2piT, 1.5);
+                double const energy = 0.5 * ((vpar - mean_velocity_loc) * (vpar - mean_velocity_loc)
+                                             + mu) / temperature_loc;
                 allfequilibrium_field(ispvparmu) = coeff_maxw * density_loc * Kokkos::exp(-energy);
             });
 
