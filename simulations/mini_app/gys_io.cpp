@@ -141,7 +141,6 @@ void init_distribution_fun(
 {
     // Read species-specific parameters from YAML
     IdxRangeSp const idx_range_sp(mesh);
-    IdxRangeSpVparMu const idx_range_sp_vparmu(mesh);
 
     int const nb_species = idx_range_sp.size();
     host_t<DFieldMem<IdxRangeSp>> density_host(idx_range_sp);
@@ -166,35 +165,24 @@ void init_distribution_fun(
     ddc::parallel_deepcopy(temperature, temperature_host);
     ddc::parallel_deepcopy(mean_velocity, mean_velocity_host);
 
-    DFieldMemSpVparMu allfequilibrium(idx_range_sp_vparmu);
-    DFieldSpVparMu allfequilibrium_field = get_field(allfequilibrium);
-
     // Compute Maxwellian distribution: fM(vpar,mu) = (2*PI*T)**(-1.5)*n*exp(-energy)
-    // with energy = 0.5*(vpar-Upar)**2/T (magnetic_field = 0, so mu*B term is zero)
+    // with energy = 0.5*((vpar-Upar)**2-mu) /T 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
-            idx_range_sp_vparmu,
-            KOKKOS_LAMBDA(IdxSpVparMu const ispvparmu) {
-                IdxSp const isp(ispvparmu);
+            mesh,
+            KOKKOS_LAMBDA(IdxSpTor3DV2D const ispgrid) {
+                IdxSp const isp(ispgrid);
                 double const density_loc = density(isp);
                 double const temperature_loc = temperature(isp);
                 double const mean_velocity_loc = mean_velocity(isp);
-                double const vpar = ddc::coordinate(ddc::select<GridVpar>(ispvparmu));
-                double const mu = ddc::coordinate(ddc::select<GridMu>(ispvparmu));
+                double const vpar = ddc::coordinate(ddc::select<GridVpar>(ispgrid));
+                double const mu = ddc::coordinate(ddc::select<GridMu>(ispgrid));
                 double const inv_2piT = 1. / (2. * M_PI * temperature_loc);
                 double const coeff_maxw = Kokkos::pow(inv_2piT, 1.5);
                 double const energy
                         = 0.5 * ((vpar - mean_velocity_loc) * (vpar - mean_velocity_loc) + mu)
                           / temperature_loc;
-                allfequilibrium_field(ispvparmu) = coeff_maxw * density_loc * Kokkos::exp(-energy);
-            });
-
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            mesh,
-            KOKKOS_LAMBDA(IdxSpTor3DV2D const ispgrid) {
-                IdxSpVparMu const ispvparmu(ispgrid);
-                allfdistribu(ispgrid) = allfequilibrium_field(ispvparmu);
+                allfdistribu(ispgrid) = coeff_maxw * density_loc * Kokkos::exp(-energy);
             });
 }
 
