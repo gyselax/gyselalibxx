@@ -44,6 +44,7 @@ private:
     using base_type = IPoissonSolver<
             typename SplineEvaluator::evaluation_domain_type,
             IdxRangeBatched,
+            double,
             typename SplineEvaluator::memory_space,
             Kokkos::layout_right>;
 
