@@ -92,14 +92,19 @@ public:
      */
     void operator()(SplineType spline, DerivFieldType function_and_derivs) const
     {
+        static_assert(Builder2D::builder_type1::s_nbc_xmin == Builder2D::builder_type1::s_nbc_xmax);
+        static_assert(Builder2D::builder_type2::s_nbc_xmin == Builder2D::builder_type2::s_nbc_xmax);
+
         // Get the fields on the right layout.
         // --- get the index ranges.
         IdxRange<Grid1, Grid2> idx_range = get_idx_range(function_and_derivs);
         IdxRange<Grid1> idx_range_1(idx_range);
         IdxRange<Grid2> idx_range_2(idx_range);
 
-        IdxRange<Deriv1> idx_range_d1(Idx<Deriv1>(1), IdxStep<Deriv1>(1));
-        IdxRange<Deriv2> idx_range_d2(Idx<Deriv2>(1), IdxStep<Deriv2>(1));
+        IdxRange<Deriv1>
+                idx_range_d1(Idx<Deriv1>(1), IdxStep<Deriv1>(Builder2D::builder_type1::s_nbc_xmin));
+        IdxRange<Deriv2>
+                idx_range_d2(Idx<Deriv2>(1), IdxStep<Deriv2>(Builder2D::builder_type2::s_nbc_xmin));
         IdxRange<Deriv1, Deriv2> idx_range_d1d2(idx_range_d1, idx_range_d2);
 
         // --- allocate memory for fields on the correct layout.
@@ -122,8 +127,6 @@ public:
         fill_in_function(get_field(function_alloc), function_and_derivs);
 
         // If the boundary is not a ddc::BoundCond::HERMITE, we don't use derivatives.
-        std::optional<Deriv1ConstField> deriv1_min_optional
-                = std::optional<Deriv1ConstField> {std::nullopt};
         std::optional<Deriv1ConstField> deriv1_max_optional
                 = std::optional<Deriv1ConstField> {std::nullopt};
         std::optional<Deriv2ConstField> deriv2_min_optional
@@ -141,10 +144,7 @@ public:
 
 
         // --- fill in the first derivatives with the data from the DerivField.
-        if constexpr (BoundCond1min == ddc::BoundCond::HERMITE) {
-            fill_in_deriv1(get_field(deriv1_min_alloc), function_and_derivs, true);
-            deriv1_min_optional = std::optional(get_const_field(deriv1_min_alloc));
-        }
+        fill_in_deriv1(get_field(deriv1_min_alloc), function_and_derivs, true);
         if constexpr (BoundCond1max == ddc::BoundCond::HERMITE) {
             fill_in_deriv1(get_field(deriv1_max_alloc), function_and_derivs, false);
             deriv1_max_optional = std::optional(get_const_field(deriv1_max_alloc));
@@ -189,7 +189,7 @@ public:
         m_builder(
                 spline,
                 get_const_field(function_alloc),
-                deriv1_min_optional,
+                std::optional(get_const_field(deriv1_min_alloc)),
                 deriv1_max_optional,
                 deriv2_min_optional,
                 deriv2_max_optional,
