@@ -42,10 +42,9 @@ struct BSplinesY : ddc::NonUniformBSplines<Y, 3>
 };
 
 using ExecSpace = Kokkos::DefaultExecutionSpace;
-using MemorySpace = typename ExecSpace::memory_space;
 
 void initialise_function(
-        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs,
+        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs,
         DField<IdxRange<GridX, GridY>> function)
 {
     ddc::parallel_for_each(
@@ -60,7 +59,7 @@ void initialise_function(
 }
 
 void initialise_derivatives(
-        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs,
+        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs,
         DField<IdxRange<DerivX, GridY>> derivs_xmin,
         DField<IdxRange<DerivX, GridY>> derivs_xmax,
         DField<IdxRange<GridX, DerivY>> derivs_ymin,
@@ -158,7 +157,7 @@ void initialise_derivatives(
 }
 
 void initialise_derivatives_hybrid_case(
-        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs,
+        DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs,
         DField<IdxRange<DerivX, GridY>> derivs_xmin,
         DField<IdxRange<GridX, DerivY>> derivs_ymax,
         DField<IdxRange<DerivX, DerivY>> derivs_xy_min_max)
@@ -263,9 +262,9 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
 
     // Instantiate data --------------------------------------------------------------------------
     // --- DerivField
-    DerivFieldMem<double, IdxRange<DerivX, GridX, DerivY, GridY>, 1, MemorySpace>
+    DerivFieldMem<double, IdxRange<DerivX, GridX, DerivY, GridY>, 1>
             function_and_derivs_alloc(idx_range_xy, idx_range_slice_dx, idx_range_slice_dy);
-    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs(
+    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs(
             function_and_derivs_alloc);
 
     // --- Fields
@@ -318,7 +317,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
     // Instantiate the spline builders -----------------------------------------------------------
     ddc::SplineBuilder2D<
             ExecSpace,
-            MemorySpace,
+            typename ExecSpace::memory_space,
             BSplinesX,
             BSplinesY,
             GridX,
@@ -414,9 +413,9 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
 
     // Instantiate data --------------------------------------------------------------------------
     // --- DerivField
-    DerivFieldMem<double, IdxRange<DerivX, GridX, DerivY, GridY>, 0, MemorySpace>
+    DerivFieldMem<double, IdxRange<DerivX, GridX, DerivY, GridY>, 0>
             function_and_derivs_alloc(idx_range_xy, idx_range_slice_dx, idx_range_slice_dy);
-    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs(
+    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs(
             function_and_derivs_alloc);
 
     // --- Fields
@@ -429,7 +428,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
     // Instantiate the spline builders -----------------------------------------------------------
     ddc::SplineBuilder2D<
             ExecSpace,
-            MemorySpace,
+            typename ExecSpace::memory_space,
             BSplinesX,
             BSplinesY,
             GridX,
@@ -532,9 +531,9 @@ TEST(SplineBuilderDerivField2DTest, HybridDDCBoundCondTest)
 
     // Instantiate data --------------------------------------------------------------------------
     // --- DerivField
-    DerivFieldMem<double, IdxRange<DerivX, GridX, DerivY, GridY>, 1, MemorySpace>
+    DerivFieldMem<double, IdxRange<DerivX, GridX, DerivY, GridY>, 1>
             function_and_derivs_alloc(idx_range_xy, idx_range_slice_dx, idx_range_slice_dy);
-    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>, MemorySpace> function_and_derivs(
+    DerivField<double, IdxRange<DerivX, GridX, DerivY, GridY>> function_and_derivs(
             function_and_derivs_alloc);
 
     // --- Fields
@@ -570,7 +569,7 @@ TEST(SplineBuilderDerivField2DTest, HybridDDCBoundCondTest)
     // Instantiate the spline builders -----------------------------------------------------------
     ddc::SplineBuilder2D<
             ExecSpace,
-            MemorySpace,
+            typename ExecSpace::memory_space,
             BSplinesX,
             BSplinesY,
             GridX,

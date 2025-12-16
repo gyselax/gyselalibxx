@@ -200,9 +200,7 @@ public:
                 ExecSpace(),
                 get_idx_range(deriv1),
                 KOKKOS_LAMBDA(Idx<Deriv1, Grid2> const idx) {
-                    Idx<Deriv1> idx_d1(idx);
-                    Idx<Grid2> idx_2(idx);
-                    deriv1(idx) = function_and_derivs(idx_d1, idx_slice, idx_2);
+                    deriv1(idx) = function_and_derivs(idx, idx_slice);
                 });
     }
 
@@ -225,9 +223,7 @@ public:
                 ExecSpace(),
                 get_idx_range(deriv2),
                 KOKKOS_LAMBDA(Idx<Grid1, Deriv2> const idx) {
-                    Idx<Grid1> idx_1(idx);
-                    Idx<Deriv2> idx_d2(idx);
-                    deriv2(idx) = function_and_derivs(idx_d2, idx_slice, idx_1);
+                    deriv2(idx) = function_and_derivs(idx, idx_slice);
                 });
     }
 
