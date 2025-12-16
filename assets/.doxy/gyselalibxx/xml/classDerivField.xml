@@ -11,7 +11,7 @@
       </param>
       <param>
         <type>class MemorySpace</type>
-        <defval>Kokkos::HostSpace</defval>
+        <defval>typename Kokkos::DefaultExecutionSpace::memory_space</defval>
       </param>
       <param>
         <type>class LayoutStridedPolicy</type>

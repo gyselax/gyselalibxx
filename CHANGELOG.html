@@ -556,10 +556,14 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <h2 id="unreleased">[UNRELEASED]</h2>
 <h3 id="added">Added</h3>
 <h3 id="fixed">Fixed</h3>
+<ul>
+<li>Fix derivative indexing of a <code>DerivField</code> object.</li>
+</ul>
 <h3 id="changed">Changed</h3>
 <ul>
 <li>Extract spline definitions from <code>geometry.hpp</code> files into files called <code>spline_definitions_&lt;geom_descriptor&gt;.hpp</code> which are dedicated to tests or simulations.</li>
 <li>Rename <code>geometry.hpp</code> files to <code>geometry_&lt;geom_descriptor&gt;.hpp</code> to reflect the geometry that they describe.</li>
+<li><code>DerivField</code> objects are initialised on GPU by default.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

@@ -152,7 +152,7 @@ template <
         class... TailContainers>
 struct Combine<Container<Tags...>, Container<OTags...>, TailContainers...>
 {
-    using type = Combine<Container<Tags..., OTags...>, TailContainers...>;
+    using type = typename Combine<Container<Tags..., OTags...>, TailContainers...>::type;
 };
 
 template <class... Containers>

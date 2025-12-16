@@ -22,7 +22,7 @@ class DerivFieldMem;
 template <
         class ElementType,
         class SupportType,
-        class MemorySpace = Kokkos::HostSpace,
+        class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
 class DerivField;
 
@@ -285,7 +285,7 @@ public:
 template <
         class ElementType,
         class SupportType,
-        class MemorySpace = Kokkos::HostSpace,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
 using DerivConstField
         = DerivField<ElementType const, SupportType, MemorySpace, LayoutStridedPolicy>;

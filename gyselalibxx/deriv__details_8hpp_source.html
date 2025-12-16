@@ -695,7 +695,7 @@ template &lt;
         class... TailContainers&gt;
 struct Combine&lt;Container&lt;Tags...&gt;, Container&lt;OTags...&gt;, TailContainers...&gt;
 {
-    using type = Combine&lt;Container&lt;Tags..., OTags...&gt;, TailContainers...&gt;;
+    using type = typename Combine&lt;Container&lt;Tags..., OTags...&gt;, TailContainers...&gt;::type;
 };
 
 template &lt;class... Containers&gt;

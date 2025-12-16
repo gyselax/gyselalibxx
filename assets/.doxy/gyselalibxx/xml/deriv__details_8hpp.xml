@@ -394,7 +394,7 @@
 <codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>TailContainers&gt;</highlight></codeline>
 <codeline lineno="208"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">Combine&lt;Container&lt;Tags...&gt;,<sp/>Container&lt;OTags...&gt;,<sp/>TailContainers...&gt;</highlight></codeline>
 <codeline lineno="209"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>Combine&lt;Container&lt;Tags...,<sp/>OTags...&gt;,<sp/>TailContainers...&gt;;</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Combine&lt;Container&lt;Tags...,<sp/>OTags...&gt;,<sp/>TailContainers...&gt;::type;</highlight></codeline>
 <codeline lineno="211"><highlight class="normal">};</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"></highlight></codeline>
 <codeline lineno="220"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Containers&gt;</highlight></codeline>

@@ -561,7 +561,11 @@
 #include "derivative_field.hpp"
 #include "derivative_field_common.hpp"
 
-template &lt;class ElementType, class Domain, int NDerivs, class MemSpace = Kokkos::HostSpace&gt;
+template &lt;
+        class ElementType,
+        class Domain,
+        int NDerivs,
+        class MemSpace = Kokkos::DefaultExecutionSpace::memory_space&gt;
 class DerivFieldMem;
 
 template &lt;class ElementType, class SupportType, int NDerivs, class MemSpace&gt;
