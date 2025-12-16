@@ -13,6 +13,7 @@ Emily Bourne <emily.bourne@epfl.ch>
 - Data type developments
 - Multi-patch developments
 - Developments in the (x, y, vx, vy) geometry
+- Multi-precision developments
 
 Virginie Grandgirard <virginie.grandgirard@cea.fr>
 - Initial designer and Fortran version
