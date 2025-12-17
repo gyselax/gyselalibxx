@@ -29,12 +29,9 @@ class InterfaceDerivativeMatrix;
   * This operator is implemented for conforming equivalent global meshes. 
   * It uses the approximation formula. 
   * 
-  * During the instantiation of the class, the matrix (I-M) is computed are stored in the class. 
-  * When we call the operator .solve_deriv() or .solve_cross_deriv(): 
-  *     - InterfaceDerivativeMatrix computes the vector C from the given values. 
-  *     - It inverses the matrix system: (I-M)S = C. 
-  *     - The interface derivatives are stored in the vector S. 
-  *     - It updates the given derivatives field with the values of the vector S. 
+  * When we call the operator .solve_deriv() or .solve_cross_deriv(), the operator loops
+  * over the interface to compute the interface derivatives and update the DerivField given 
+  * in input. 
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
