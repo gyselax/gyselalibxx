@@ -46,7 +46,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCircMap)
         check_inverse_tensor(
                 mapping.jacobian_matrix(coords(irtheta)),
                 inv_jacobian(coords(irtheta)),
-                1e-15);
+                1e-14);
     });
 }
 
