@@ -73,7 +73,7 @@ Field<ElementType, IdxRangeIn, MemorySpace, LayoutStridedPolicyOut> transpose_la
                 execution_space,
                 parallel_idx_range,
                 KOKKOS_LAMBDA(IdxParallel p_idx) {
-                    ddc::device_for_each_serial(serial_idx_range, [&](IdxSerial s_idx) {
+                    ddc::device_for_each(serial_idx_range, [&](IdxSerial s_idx) {
                         transposed_field(p_idx, s_idx) = field_to_transpose(p_idx, s_idx);
                     });
                 });
