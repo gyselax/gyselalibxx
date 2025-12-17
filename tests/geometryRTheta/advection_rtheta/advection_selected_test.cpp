@@ -125,7 +125,7 @@ int main(int argc, char** argv)
               << interpolation_idx_range_theta.size() << " AND dt = " << dt << ": " << std::endl;
 
     std::ofstream file("r_interpolation_points.txt");
-    for_each(interpolation_idx_range_r, [&](IdxR ir) {
+    host_for_each(interpolation_idx_range_r, [&](IdxR ir) {
         file << (ir - interpolation_idx_range_r.front()).value() << " "
              << double(ddc::coordinate(ir)) << std::endl;
     });

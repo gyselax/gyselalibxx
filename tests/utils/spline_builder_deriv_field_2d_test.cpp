@@ -355,7 +355,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
     auto spline_deriv_field_host = ddc::create_mirror_view_and_copy(spline_deriv_field);
     auto spline_fields_host = ddc::create_mirror_view_and_copy(spline_fields);
 
-    ddc::for_each(idx_range_spline, [&](Idx<BSplinesX, BSplinesY> const& idx) {
+    ddc::host_for_each(idx_range_spline, [&](Idx<BSplinesX, BSplinesY> const& idx) {
         EXPECT_EQ(spline_deriv_field_host(idx), spline_fields_host(idx));
     });
 }
@@ -457,7 +457,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
     auto spline_deriv_field_host = ddc::create_mirror_view_and_copy(spline_deriv_field);
     auto spline_fields_host = ddc::create_mirror_view_and_copy(spline_fields);
 
-    ddc::for_each(idx_range_spline, [&](Idx<BSplinesX, BSplinesY> const& idx) {
+    ddc::host_for_each(idx_range_spline, [&](Idx<BSplinesX, BSplinesY> const& idx) {
         EXPECT_EQ(spline_deriv_field_host(idx), spline_fields_host(idx));
     });
 }
@@ -608,7 +608,7 @@ TEST(SplineBuilderDerivField2DTest, HybridDDCBoundCondTest)
     auto spline_deriv_field_host = ddc::create_mirror_view_and_copy(spline_deriv_field);
     auto spline_fields_host = ddc::create_mirror_view_and_copy(spline_fields);
 
-    ddc::for_each(idx_range_spline, [&](Idx<BSplinesX, BSplinesY> const& idx) {
+    ddc::host_for_each(idx_range_spline, [&](Idx<BSplinesX, BSplinesY> const& idx) {
         EXPECT_EQ(spline_deriv_field_host(idx), spline_fields_host(idx));
     });
 }

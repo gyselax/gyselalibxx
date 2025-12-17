@@ -98,7 +98,7 @@ TYPED_TEST(BernsteinFixture, PartitionOfUnity)
     for (std::size_t i(0); i < n_test_points; ++i) {
         CoordXY const test_point = generate_random_point_in_triangle(c1, c2, c3);
         ddc::discrete_space<Bernstein>().eval_basis(get_field(values), test_point);
-        double total = ddc::transform_reduce(
+        double total = ddc::host_transform_reduce(
                 idx_range,
                 0.0,
                 ddc::reducer::sum<double>(),
