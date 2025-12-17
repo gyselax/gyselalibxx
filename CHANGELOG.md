@@ -17,6 +17,7 @@ in a `DerivField`.
 ### Fixed
 
 - Fix derivative indexing of a `DerivField` object.
+- Fix transposition of arrays with more than 7 dimensions.
 
 ### Changed
 
