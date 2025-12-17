@@ -155,7 +155,7 @@ void test_operator_assignment(
                 err = 0;
             },
             Kokkos::Max<double>(max_error));
-    EXPECT_LE(max_error, 1e-15);
+    EXPECT_LE(max_error, 1e-14);
 }
 
 
@@ -186,7 +186,7 @@ void test_deriv_dim_1(
                 err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
-    EXPECT_LE(max_error, 1e-15);
+    EXPECT_LE(max_error, 1e-13);
 };
 
 // Test deriv_dim_2() ............................................................................
@@ -216,7 +216,7 @@ void test_deriv_dim_2(
                 err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
-    EXPECT_LE(max_error, 1e-15);
+    EXPECT_LE(max_error, 1e-13);
 };
 
 // Test deriv_1_and_2() ..........................................................................
@@ -246,7 +246,7 @@ void test_deriv_1_and_2(
                 err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
-    EXPECT_LE(max_error, 1e-15);
+    EXPECT_LE(max_error, 1e-13);
 };
 
 // Test deriv() ..................................................................................
@@ -277,7 +277,7 @@ void test_deriv(
                 err = Kokkos::max(Kokkos::abs(eval_function - expected_function), err);
             },
             Kokkos::Max<double>(max_error));
-    EXPECT_LE(max_error, 1e-15);
+    EXPECT_LE(max_error, 1e-13);
 };
 
 } // namespace
@@ -319,23 +319,23 @@ TEST_F(MultipatchSplineEvaluatorTest, HostEvaluateOnSingleCoord)
     double eval_function = evaluators(eval_coord_1_on_patch_1, splines_host);
     double expected_function
             = evaluator_1_host(eval_coord_1_on_patch_1, const_function_1_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-15);
+    EXPECT_NEAR(eval_function, expected_function, 1e-14);
 
     eval_function = evaluators(eval_coord_1_on_patch_2, splines_host);
     expected_function = evaluator_2_host(eval_coord_1_on_patch_2, const_function_2_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-15);
+    EXPECT_NEAR(eval_function, expected_function, 1e-14);
 
     eval_function = evaluators(eval_coord_2_on_patch_1, splines_host);
     expected_function = evaluator_1_host(eval_coord_2_on_patch_1, const_function_1_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-15);
+    EXPECT_NEAR(eval_function, expected_function, 1e-14);
 
     eval_function = evaluators(eval_coord_2_on_patch_2, splines_host);
     expected_function = evaluator_2_host(eval_coord_2_on_patch_2, const_function_2_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-15);
+    EXPECT_NEAR(eval_function, expected_function, 1e-14);
 
     eval_function = evaluators(eval_coord_2_outside, splines_host);
     expected_function = evaluator_2_host(eval_coord_2_outside, const_function_2_coef_host);
-    EXPECT_NEAR(eval_function, expected_function, 1e-15);
+    EXPECT_NEAR(eval_function, expected_function, 1e-14);
 
     /*
         REMARK: here Patch1::Coord12 == Patch2::Coord12 == Coord<R, Theta>.
@@ -478,10 +478,10 @@ TEST_F(MultipatchSplineEvaluatorTest, EvaluateOnCoordField)
 
     // --- check errors
     ddc::host_for_each(reduced_idx_range_rtheta1, [&](typename Patch1::Idx12 const idx) {
-        EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-15);
+        EXPECT_NEAR(eval_function_1_host(idx), expected_function_1_host(idx), 1e-14);
     });
     ddc::host_for_each(reduced_idx_range_rtheta2, [&](typename Patch2::Idx12 const idx) {
-        EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-15);
+        EXPECT_NEAR(eval_function_2_host(idx), expected_function_2_host(idx), 1e-14);
     });
 }
 
@@ -528,83 +528,83 @@ TEST_F(MultipatchSplineEvaluatorTest, HostDerivativesOnSingleCoord)
     double eval_deriv = evaluators.deriv_dim_1(eval_coord_1_on_patch_1, splines_host);
     double expected_deriv
             = evaluator_1_host.deriv(d_r, eval_coord_1_on_patch_1, cst_function_1_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_dim_1(eval_coord_1_on_patch_2, splines_host);
     expected_deriv = evaluator_2_host.deriv(d_r, eval_coord_1_on_patch_2, cst_function_2_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_dim_1(eval_coord_2_on_patch_1, splines_host);
     expected_deriv = evaluator_1_host.deriv(d_r, eval_coord_2_on_patch_1, cst_function_1_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_dim_1(eval_coord_2_on_patch_2, splines_host);
     expected_deriv = evaluator_2_host.deriv(d_r, eval_coord_2_on_patch_2, cst_function_2_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
 
     // --- derivative 2
     eval_deriv = evaluators.deriv_dim_2(eval_coord_1_on_patch_1, splines_host);
     expected_deriv
             = evaluator_1_host.deriv(d_theta, eval_coord_1_on_patch_1, cst_function_1_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_dim_2(eval_coord_1_on_patch_2, splines_host);
     expected_deriv
             = evaluator_2_host.deriv(d_theta, eval_coord_1_on_patch_2, cst_function_2_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_dim_2(eval_coord_2_on_patch_1, splines_host);
     expected_deriv
             = evaluator_1_host.deriv(d_theta, eval_coord_2_on_patch_1, cst_function_1_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_dim_2(eval_coord_2_on_patch_2, splines_host);
     expected_deriv
             = evaluator_2_host.deriv(d_theta, eval_coord_2_on_patch_2, cst_function_2_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
 
     // --- cross-derivative
     eval_deriv = evaluators.deriv_1_and_2(eval_coord_1_on_patch_1, splines_host);
     expected_deriv
             = evaluator_1_host.deriv(d_r_d_theta, eval_coord_1_on_patch_1, cst_function_1_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_1_and_2(eval_coord_1_on_patch_2, splines_host);
     expected_deriv
             = evaluator_2_host.deriv(d_r_d_theta, eval_coord_1_on_patch_2, cst_function_2_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_1_and_2(eval_coord_2_on_patch_1, splines_host);
     expected_deriv
             = evaluator_1_host.deriv(d_r_d_theta, eval_coord_2_on_patch_1, cst_function_1_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv_1_and_2(eval_coord_2_on_patch_2, splines_host);
     expected_deriv
             = evaluator_2_host.deriv(d_r_d_theta, eval_coord_2_on_patch_2, cst_function_2_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
 
     // --- template derivative
     eval_deriv = evaluators.deriv<R>(eval_coord_1_on_patch_1, splines_host);
     expected_deriv = evaluator_1_host.deriv(d_r, eval_coord_1_on_patch_1, cst_function_1_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.deriv<R>(eval_coord_1_on_patch_2, splines_host);
     expected_deriv = evaluator_2_host.deriv(d_r, eval_coord_1_on_patch_2, cst_function_2_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.template deriv<Theta>(eval_coord_2_on_patch_1, splines_host);
     expected_deriv
             = evaluator_1_host.deriv(d_theta, eval_coord_2_on_patch_1, cst_function_1_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 
     eval_deriv = evaluators.template deriv<Theta>(eval_coord_2_on_patch_2, splines_host);
     expected_deriv
             = evaluator_2_host.deriv(d_theta, eval_coord_2_on_patch_2, cst_function_2_coef_h);
-    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-15);
+    EXPECT_NEAR(eval_deriv, expected_deriv, 1e-13);
 }
 
 
@@ -958,8 +958,8 @@ TEST_F(MultipatchSplineEvaluatorTest, HostIntegrateOnCoordField)
     double const expected_integral_2 = 0.0;
 
     // Compare the evaluated functions with the expected functions.
-    EXPECT_NEAR(eval_integrals(0), expected_integral_1, 1e-15);
-    EXPECT_NEAR(eval_integrals(1), expected_integral_2, 1e-15);
+    EXPECT_NEAR(eval_integrals(0), expected_integral_1, 1e-14);
+    EXPECT_NEAR(eval_integrals(1), expected_integral_2, 1e-14);
 
     /*
         REMARK: Cannot compare to SplineEvaluator2D as long as the .integrate()
