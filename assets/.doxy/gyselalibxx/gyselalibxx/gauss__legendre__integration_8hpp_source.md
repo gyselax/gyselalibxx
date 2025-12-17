@@ -98,7 +98,7 @@ public:
         DFieldMem<IdxRange<GLGrid>, typename ExecSpace::memory_space> coefficients_alloc(
                 m_valid_idx_range);
         auto coefficients_host = ddc::create_mirror_view(get_field(coefficients_alloc));
-        ddc::for_each(m_valid_idx_range, [&](Idx<GLGrid> ix) {
+        ddc::host_for_each(m_valid_idx_range, [&](Idx<GLGrid> ix) {
             int i = (ix - m_valid_idx_range.front()) / NPoints;
             int j = (ix - m_valid_idx_range.front()) % NPoints;
             coefficients_host(ix) = m_cell_lengths[i] * m_glc.weight[j];
@@ -178,7 +178,7 @@ gauss_legendre_quadrature_coefficients(GaussLegendreQuad const&... gl)
     auto coefficients_host = ddc::create_mirror(get_field(coefficients));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
     // (see https://github.com/kokkos/kokkos/pull/7059)
-    ddc::for_each(idx_range, [&](Idx<typename GaussLegendreQuad::Grid1D...> const idim) {
+    ddc::host_for_each(idx_range, [&](Idx<typename GaussLegendreQuad::Grid1D...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients_host(idim)
                 = (std::get<host_t<DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D>>>>(

@@ -28,7 +28,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="98" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="100" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -44,7 +44,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="100" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="100" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="102" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSpline1DPartialDerivativeCreator_1acd585fc1a1a938fc1808b679a52c1541" prot="private" static="no" mutable="no">
         <type>Spline1DEvaluator const  &amp;</type>
@@ -58,7 +58,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="101" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="101" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="103" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="103" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -101,7 +101,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="109" bodyend="115"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="111" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="111" bodyend="117"/>
       </memberdef>
       <memberdef kind="function" id="classSpline1DPartialDerivativeCreator_1ad65387bde713d87c77e89eb39be94ca6" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="non-virtual">
         <type>std::unique_ptr&lt; <ref refid="classIPartialDerivative" kindref="compound">IPartialDerivative</ref>&lt; IdxRangeBatched, typename Spline1DBuilder::continuous_dimension_type &gt; &gt;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="129" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="129" bodyend="135"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="131" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="131" bodyend="137"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -190,7 +190,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="92" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="96" bodyend="136"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" line="94" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/spline_1d_partial_derivative.hpp" bodystart="98" bodyend="138"/>
     <listofallmembers>
       <member refid="classSpline1DPartialDerivativeCreator_1ad65387bde713d87c77e89eb39be94ca6" prot="public" virt="non-virtual"><scope>Spline1DPartialDerivativeCreator</scope><name>create_instance</name></member>
       <member refid="classIPartialDerivativeCreator_1aa6909a30ce6565221d37736bf059f7a0" prot="public" virt="pure-virtual" ambiguityscope="IPartialDerivativeCreator&lt; IdxRangeBatched, Spline1DBuilder::continuous_dimension_type &gt;::"><scope>Spline1DPartialDerivativeCreator</scope><name>create_instance</name></member>

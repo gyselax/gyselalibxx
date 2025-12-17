@@ -55,7 +55,7 @@ public:
         // This condition is necessary to execute in serial, even in a device activated build.
         // Without it a seg fault appears
         if constexpr (std::is_same_v<ExecutionSpace, Kokkos::DefaultHostExecutionSpace>) {
-            return ddc::transform_reduce(
+            return ddc::host_transform_reduce(
                     get_idx_range(coeff_proxy),
                     0.0,
                     ddc::reducer::sum<double>(),

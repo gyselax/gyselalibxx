@@ -602,13 +602,10 @@ public:
 
     void operator()(DFieldType differentiated_field) const final
     {
-        if constexpr (std::is_same_v&lt;
-                              DerivativeDimension,
-                              typename SplineEvaluator2D::continuous_dimension_type1&gt;) {
-            m_evaluator.deriv_dim_1(differentiated_field, m_builder_cache());
-        } else {
-            m_evaluator.deriv_dim_2(differentiated_field, m_builder_cache());
-        }
+        m_evaluator
+                .deriv(Idx&lt;ddc::Deriv&lt;DerivativeDimension&gt;&gt;(1),
+                       differentiated_field,
+                       m_builder_cache());
     }
 };
 

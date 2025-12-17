@@ -42,7 +42,7 @@ host_t<DFieldMemX> mask_tanh(
 
         switch (type) {
         case MaskType::Normal:
-            ddc::for_each(gridx, [&](IdxX const ix) {
+            ddc::host_for_each(gridx, [&](IdxX const ix) {
                 CoordX const coordx = ddc::coordinate(ix);
                 mask(ix) = 0.5
                            * (std::tanh((coordx - x_left) / stiffness)
@@ -51,7 +51,7 @@ host_t<DFieldMemX> mask_tanh(
             break;
 
         case MaskType::Inverted:
-            ddc::for_each(gridx, [&](IdxX const ix) {
+            ddc::host_for_each(gridx, [&](IdxX const ix) {
                 CoordX const coordx = ddc::coordinate(ix);
                 mask(ix) = 1
                            - 0.5
@@ -67,7 +67,7 @@ host_t<DFieldMemX> mask_tanh(
             host_t<Quadrature<IdxRangeX>> const integrate_x(get_const_field(quadrature_coeffs));
             double const coeff_norm
                     = integrate_x(Kokkos::DefaultHostExecutionSpace(), get_const_field(mask));
-            ddc::for_each(gridx, [&](IdxX const ix) { mask(ix) = mask(ix) / coeff_norm; });
+            ddc::host_for_each(gridx, [&](IdxX const ix) { mask(ix) = mask(ix) / coeff_norm; });
         }
     }
 

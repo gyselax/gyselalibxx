@@ -174,7 +174,7 @@
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialisation<sp/>of<sp/>the<sp/>maxwellian</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemVparMu<sp/>maxwellian_alloc(idxrange_vparmu);</highlight></codeline>
 <codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldVparMu<sp/>maxwellian<sp/>=<sp/>get_field(maxwellian_alloc);</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::for_each(idxrange_sp,<sp/>[&amp;](IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)<sp/>{</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::host_for_each(idxrange_sp,<sp/>[&amp;](IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)<sp/>{</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMaxwellianEquilibrium_1ad10e98762e5b6716ed6e62f6768bebd9" kindref="member">compute_maxwellian</ref>(</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>maxwellian,</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_mass(isp),</highlight></codeline>

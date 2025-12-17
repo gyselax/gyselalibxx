@@ -690,15 +690,15 @@ IdxStep&lt;GridX, GridY&gt; size((j_index-i_index), (l_index-k_index));
 IdxRange&lt;GridX, GridY&gt; idx_range(origin, size);
 </code></pre>
 <p>When working with index ranges we do not usually know if we have access to all of the grid or just a subset. It is therefore important to use the <code>get_index_range</code> function to traverse fields rather than initialising elements manually as we don't know the index of the first element of a <code>IdxRange</code> at compile time.</p>
-<p>There are multiple functions available for traversing an index range. Most of the time we will traverse the entire index range. This can be done simply as <code>IdxRange</code> implements the functions <code>begin()</code> and <code>end()</code>. These functions are called automatically using the modern C++ syntax for a for element in list, or using the <code>ddc::for_each</code> function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is:</p>
+<p>There are multiple functions available for traversing an index range. Most of the time we will traverse the entire index range. This can be done simply as <code>IdxRange</code> implements the functions <code>begin()</code> and <code>end()</code>. These functions are called automatically using the modern C++ syntax for a for element in list, or using the <code>ddc::host_for_each</code> function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is:</p>
 <pre><code class="language-cpp">for (Idx&lt;GridX&gt; index : idx_range) {
 }
 </code></pre>
 <p>or:</p>
-<pre><code class="language-cpp">ddc::for_each(idx_range, [&amp;](Idx&lt;GridX&gt; index) {
+<pre><code class="language-cpp">ddc::host_for_each(idx_range, [&amp;](Idx&lt;GridX&gt; index) {
 });
 </code></pre>
-<p>In the case of a <code>ddc::for_each</code> the second argument is a lambda function. The <code>[&amp;]</code> ensures that any variable defined outside the loop are captured by reference so they can be used inside the lambda function.</p>
+<p>In the case of a <code>ddc::host_for_each</code> the second argument is a lambda function. The <code>[&amp;]</code> ensures that any variable defined outside the loop are captured by reference so they can be used inside the lambda function.</p>
 <p>It is also common to need to iterate over a subset of grid points. Such a subset can be created using the syntax described above, however <code>IdxRange</code> also contains several helper functions which are designed to facilitate the creation of these sets:</p>
 <ul>
 <li><code>take_first(IdxStep&lt;..&gt; n)</code> : Returns an index range containing only the first n indices of the original range.</li>
@@ -790,7 +790,7 @@ struct Vx {
 DFieldMemSpXVx distribution_function_alloc(idx_range);
 DFieldSpXVx distribution_function(distribution_function_alloc);
 
-ddc::for_each(idx_range, [&amp;](IdxSpXVx index) {
+ddc::host_for_each(idx_range, [&amp;](IdxSpXVx index) {
     CoordXVx coord = ddc::coordinate(ddc::select&lt;GridX, GridVx&gt;(index));
     double v_pos = ddc::get&lt;Vx&gt;(coord);
     double x_pos = ddc::get&lt;X&gt;(coord);

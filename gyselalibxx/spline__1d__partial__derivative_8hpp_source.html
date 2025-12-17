@@ -574,9 +574,8 @@ class Spline1DPartialDerivative
                   ddc::to_type_seq_t&lt;IdxRangeBatched&gt;&gt;);
 
 private:
-    using base_type = IPartialDerivative&lt;
-            IdxRangeBatched,
-            typename Spline1DBuilder::continuous_dimension_type&gt;;
+    using DerivativeDimension = typename Spline1DBuilder::continuous_dimension_type;
+    using base_type = IPartialDerivative&lt;IdxRangeBatched, DerivativeDimension&gt;;
 
     using typename base_type::DConstFieldType;
     using typename base_type::DFieldType;
@@ -604,7 +603,10 @@ public:
 
     void operator()(DFieldType differentiated_field) const final
     {
-        m_evaluator.deriv(differentiated_field, get_const_field(m_spline_coefs));
+        m_evaluator
+                .deriv(Idx&lt;ddc::Deriv&lt;DerivativeDimension&gt;&gt;(1),
+                       differentiated_field,
+                       get_const_field(m_spline_coefs));
     }
 };
 

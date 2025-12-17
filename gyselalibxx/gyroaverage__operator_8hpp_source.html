@@ -683,7 +683,7 @@ public:
                 typename ExecutionSpace::memory_space,
                 Kokkos::layout_stride&gt;;
 
-        ddc::for_each(batch_idx_range, [&amp;](IdxBatch const ib) {
+        ddc::host_for_each(batch_idx_range, [&amp;](IdxBatch const ib) {
             SubConstDFieldRminorTheta const sub_A = A[ib];
             SubDFieldRminorTheta sub_A_bar = A_bar[ib];
             DFieldMemRminorTheta sub_A_alloc(rtheta_idx_range);

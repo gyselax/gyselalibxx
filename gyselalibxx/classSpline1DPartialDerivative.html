@@ -599,11 +599,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-spline1dpartialderivative"><strong>Spline1DPartialDerivative</strong></a> (Spline1DBuilder const &amp; builder, Spline1DEvaluator const &amp; evaluator, DConstFieldType const field) <br><em>Construct an instance of the class</em> <a href="classSpline1DPartialDerivative.html"><em><strong>Spline1DPartialDerivative</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-spline1dpartialderivative"><strong>Spline1DPartialDerivative</strong></a> (Spline1DBuilder const &amp; builder, Spline1DEvaluator const &amp; evaluator, <a href="classIPartialDerivative.html#typedef-dconstfieldtype"><strong>DConstFieldType</strong></a> const field) <br><em>Construct an instance of the class</em> <a href="classSpline1DPartialDerivative.html"><em><strong>Spline1DPartialDerivative</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldType differentiated_field) const<br><em>Compute the partial derivative of a field in the direction where the field is represented using 1d splines.</em></td>
+<td style="text-align: right;">virtual void</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classIPartialDerivative.html#typedef-dfieldtype"><strong>DFieldType</strong></a> differentiated_field) const<br><em>Compute the partial derivative of a field in the direction where the field is represented using 1d splines.</em></td>
 </tr>
 </tbody>
 </table>
@@ -653,7 +653,7 @@
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the partial derivative of a field in the direction where the field is represented using 1d splines.</em> </p>
-<pre><code class="language-C++">inline void Spline1DPartialDerivative::operator() (
+<pre><code class="language-C++">inline virtual void Spline1DPartialDerivative::operator() (
     DFieldType differentiated_field
 ) const
 </code></pre>
@@ -661,6 +661,7 @@
 <ul>
 <li><code>differentiated_field</code> Contains on output the value of the differentiated field. </li>
 </ul>
+<p>Implements <a href="classIPartialDerivative.html#function-operator"><em>IPartialDerivative::operator()</em></a></p>
 <hr>
 
 <hr>

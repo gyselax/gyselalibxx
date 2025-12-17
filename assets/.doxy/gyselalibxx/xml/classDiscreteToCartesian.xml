@@ -607,7 +607,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="222" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="222" bodyend="235"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="222" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="222" bodyend="247"/>
       </memberdef>
       <memberdef kind="function" id="classDiscreteToCartesian_1aae3c6b00328f75ccee203c5ca76c863b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -650,7 +650,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="256" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="256" bodyend="278"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="268" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="268" bodyend="298"/>
       </memberdef>
       <memberdef kind="function" id="classDiscreteToCartesian_1af13e543668b38ffc52ac252997e9f1e8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
@@ -681,7 +681,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="288" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="288" bodyend="294"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="308" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="308" bodyend="314"/>
       </memberdef>
       <memberdef kind="function" id="classDiscreteToCartesian_1afea2c72f045e6d7a609b76d1fb2b494e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;, VectorIndexSet&lt; <ref refid="classDiscreteToCartesian_1a45e63566bd132456f6d966218c2d3253" kindref="member">R_cov</ref>, <ref refid="classDiscreteToCartesian_1a2103653283a7597142ab62f30b999e22" kindref="member">Theta_cov</ref> &gt; &gt;</type>
@@ -712,7 +712,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="311" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="311" bodyend="326"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="331" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="331" bodyend="354"/>
       </memberdef>
       <memberdef kind="function" id="classDiscreteToCartesian_1aeade6cd026d0d03df92d00b0f2651195" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxRangeRTheta</type>
@@ -730,7 +730,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="333" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="333" bodyend="336"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="361" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="361" bodyend="364"/>
       </memberdef>
       <memberdef kind="function" id="classDiscreteToCartesian_1a6c57fdeacc0c42720881993b7905ef38" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION const Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -770,7 +770,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="366" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="366" bodyend="370"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="394" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="394" bodyend="398"/>
       </memberdef>
       <memberdef kind="function" id="classDiscreteToCartesian_1ab09fd0542b042ed470da778b6268e229" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -825,7 +825,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="401" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="401" bodyend="412"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="429" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="429" bodyend="440"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -837,7 +837,7 @@
 <para><formula id="107">$ y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta).$</formula></para>
 <para>This mapping could be costly to inverse. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="34" bodyend="413"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp" bodystart="34" bodyend="441"/>
     <listofallmembers>
       <member refid="classDiscreteToCartesian_1a77815368f1e5e77222cf4a66b3589c2e" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>BSplineR</name></member>
       <member refid="classDiscreteToCartesian_1aee74ab0f1f920e05ef94fbb15b36f6fc" prot="public" virt="non-virtual"><scope>DiscreteToCartesian</scope><name>BSplineTheta</name></member>

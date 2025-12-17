@@ -333,7 +333,7 @@
 <codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecutionSpace::memory_space,</highlight></codeline>
 <codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Kokkos::layout_stride&gt;;</highlight></codeline>
 <codeline lineno="180"><highlight class="normal"></highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::for_each(batch_idx_range,<sp/>[&amp;](IdxBatch<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ib)<sp/>{</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::host_for_each(batch_idx_range,<sp/>[&amp;](IdxBatch<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ib)<sp/>{</highlight></codeline>
 <codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SubConstDFieldRminorTheta<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>sub_A<sp/>=<sp/>A[ib];</highlight></codeline>
 <codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SubDFieldRminorTheta<sp/>sub_A_bar<sp/>=<sp/>A_bar[ib];</highlight></codeline>
 <codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldMemRminorTheta<sp/>sub_A_alloc(rtheta_idx_range);</highlight></codeline>

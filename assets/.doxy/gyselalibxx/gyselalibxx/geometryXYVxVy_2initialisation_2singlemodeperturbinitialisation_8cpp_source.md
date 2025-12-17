@@ -37,7 +37,7 @@ DFieldSpXYVxVy SingleModePerturbInitialisation::operator()(DFieldSpXYVxVy const 
     DFieldMemXY perturbation_alloc(gridxy);
     DConstFieldSpVxVy fequilibrium_proxy = get_const_field(m_fequilibrium);
     DFieldXY perturbation_proxy = get_field(perturbation_alloc);
-    ddc::for_each(gridsp, [&](IdxSp const isp) {
+    ddc::host_for_each(gridsp, [&](IdxSp const isp) {
         perturbation_initialisation(
                 perturbation_proxy,
                 m_init_perturb_mode(isp),

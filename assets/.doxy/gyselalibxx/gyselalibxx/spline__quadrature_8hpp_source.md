@@ -71,7 +71,7 @@ DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> spline_quadratur
     auto coefficients_host = ddc::create_mirror(get_field(coefficients));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
     // (see https://github.com/kokkos/kokkos/pull/7059)
-    ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
+    ddc::host_for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients_host(idim)
                 = (std::get<CoefficientFieldMem1D_host<DDims>>(current_dim_coeffs)(

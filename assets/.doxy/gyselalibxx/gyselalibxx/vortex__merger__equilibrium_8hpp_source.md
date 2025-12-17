@@ -78,7 +78,7 @@ public:
         do {
             count += 1;
             // STEP 1: compute rho^i
-            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
                 rho_eq_host(irtheta) = sigma_host(irtheta) * function(phi_eq_host(irtheta));
             });
 
@@ -93,20 +93,20 @@ public:
             // STEP 3: compute c^i
             // If phi_max is given:
             double norm_Linf_phi_star(0.);
-            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
                 double const abs_phi_star = fabs(phi_star_host(irtheta));
                 norm_Linf_phi_star
                         = norm_Linf_phi_star > abs_phi_star ? norm_Linf_phi_star : abs_phi_star;
             });
 
-            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
                 ci_alloc_host(irtheta) = phi_max / norm_Linf_phi_star;
             });
 
 
             // STEP 4: update sigma and phi
             difference_sigma = 0.;
-            ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+            ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
                 double const abs_diff_sigma
                         = fabs(sigma_host(irtheta) - ci_alloc_host(irtheta) * sigma_host(irtheta));
                 difference_sigma
@@ -120,7 +120,7 @@ public:
 
 
         // STEP 1: compute rho^i
-        ddc::for_each(m_grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(m_grid, [&](IdxRTheta const irtheta) {
             rho_eq_host(irtheta) = sigma_host(irtheta) * function(phi_eq_host(irtheta));
         });
 
@@ -128,7 +128,7 @@ public:
         IdxRangeR r_idx_range = get_idx_range<GridR>(rho_eq_host);
         IdxRangeTheta theta_idx_range = get_idx_range<GridTheta>(rho_eq_host);
         if (std::fabs(ddc::coordinate(r_idx_range.front())) < 1e-15) {
-            ddc::for_each(theta_idx_range, [&](const IdxTheta itheta) {
+            ddc::host_for_each(theta_idx_range, [&](const IdxTheta itheta) {
                 rho_eq_host(r_idx_range.front(), itheta)
                         = rho_eq_host(r_idx_range.front(), theta_idx_range.front());
             });
@@ -148,7 +148,7 @@ public:
         host_t<DFieldMemRTheta> sigma_0_alloc_host(grid);
         host_t<DFieldMemRTheta> phi_eq_alloc_host(grid);
         const double sig = 0.3;
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
             const CoordXY coord_xy(m_mapping(coord_rtheta));
             const double x = ddc::get<X>(coord_xy);

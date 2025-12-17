@@ -81,7 +81,7 @@ public:
 
         IdxRangeBatch batch_idx_range(idx_range);
 
-        ddc::for_each(idx_range_sp, [&](IdxSp const isp) {
+        ddc::host_for_each(idx_range_sp, [&](IdxSp const isp) {
             double const charge_proxy
                     = charge(isp); // TODO: consider proper way to access charge from device
             double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));

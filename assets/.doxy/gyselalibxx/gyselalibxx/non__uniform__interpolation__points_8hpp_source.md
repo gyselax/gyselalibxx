@@ -112,7 +112,7 @@ public:
                                 - ddc::discrete_space<BSplines>().rmin();
             SamplingImpl result(interp_points.front(), domain_len / (interp_points.size() - 1));
             IdxRange<Sampling> idx_range(get_domain<Sampling>());
-            bool same_points = ddc::transform_reduce(
+            bool same_points = ddc::host_transform_reduce(
                     idx_range,
                     true,
                     ddc::reducer::land<bool>(),

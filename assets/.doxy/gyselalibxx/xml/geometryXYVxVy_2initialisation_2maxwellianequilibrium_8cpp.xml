@@ -334,7 +334,7 @@
 <codeline lineno="22"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Initialisation<sp/>of<sp/>the<sp/>maxwellian</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemVxVy<sp/>maxwellian_alloc(gridvxvy);</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldVxVy<sp/>maxwellian<sp/>=<sp/>get_field(maxwellian_alloc);</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::for_each(gridsp,<sp/>[&amp;](IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)<sp/>{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::host_for_each(gridsp,<sp/>[&amp;](IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)<sp/>{</highlight></codeline>
 <codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classMaxwellianEquilibrium_1ad10e98762e5b6716ed6e62f6768bebd9" kindref="member">compute_maxwellian</ref>(</highlight></codeline>
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>maxwellian,</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_density_eq(isp),</highlight></codeline>

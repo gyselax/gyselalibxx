@@ -614,7 +614,7 @@ DFieldMem&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt; spli
     auto coefficients_host = ddc::create_mirror(get_field(coefficients));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
     // (see https://github.com/kokkos/kokkos/pull/7059)
-    ddc::for_each(idx_range, [&amp;](Idx&lt;DDims...&gt; const idim) {
+    ddc::host_for_each(idx_range, [&amp;](Idx&lt;DDims...&gt; const idim) {
         // multiply the 1D coefficients by one another
         coefficients_host(idim)
                 = (std::get&lt;CoefficientFieldMem1D_host&lt;DDims&gt;&gt;(current_dim_coeffs)(

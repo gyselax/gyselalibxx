@@ -587,7 +587,7 @@ public:
         IdxRangeRTheta grid = get_idx_range&lt;GridR, GridTheta&gt;(rho_init);
 
         // Initialisation:
-        ddc::for_each(grid, [&amp;](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&amp;](IdxRTheta const irtheta) {
             const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
             const CoordXY coord_xy(m_mapping(coord_rtheta));
             const double x = ddc::get&lt;X&gt;(coord_xy);

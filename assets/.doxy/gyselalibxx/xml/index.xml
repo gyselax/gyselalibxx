@@ -2536,12 +2536,11 @@
     <member refid="classSpeciesInformation_1af77dd55f79155df4dab9bf490d900a07" kind="typedef"><name>discrete_dimension_type</name></member>
   </compound>
   <compound refid="classSpline1DPartialDerivative" kind="class"><name>Spline1DPartialDerivative</name>
-    <member refid="classSpline1DPartialDerivative_1a531c9dfadd58660c77d600f204b7950b" kind="typedef"><name>base_type</name></member>
+    <member refid="classSpline1DPartialDerivative_1aec57ca28aec111a814d9d453cc2178a3" kind="typedef"><name>DerivativeDimension</name></member>
+    <member refid="classSpline1DPartialDerivative_1afd0de2d26355cdc1e0abcf20f629e5de" kind="typedef"><name>base_type</name></member>
     <member refid="classSpline1DPartialDerivative_1a8ba1774162c4f0d4a29fcec207479991" kind="typedef"><name>IdxRangeBS</name></member>
     <member refid="classSpline1DPartialDerivative_1aa2bcb388d7d88bed3fe5a1d7dd36c47e" kind="typedef"><name>DFieldBSMem</name></member>
     <member refid="classSpline1DPartialDerivative_1ab71f56f8d6c9b0cc07d937acc9bfd293" kind="typedef"><name>DFieldBS</name></member>
-    <member refid="classSpline1DPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kind="typedef"><name>DConstFieldType</name></member>
-    <member refid="classSpline1DPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>
     <member refid="classSpline1DPartialDerivative_1ac977d305c980f51e7caf3ab087f376ae" kind="variable"><name>m_builder</name></member>
     <member refid="classSpline1DPartialDerivative_1af6e2bedd508d2a933bd18ea614a546e6" kind="variable"><name>m_evaluator</name></member>
     <member refid="classSpline1DPartialDerivative_1ac27dcb412c5f5841e15ab1985d8d6ef8" kind="variable"><name>m_spline_coefs</name></member>

@@ -672,13 +672,25 @@ public:
     {
         DTensor&lt;VectorIndexSet&lt;X, Y&gt;, VectorIndexSet&lt;R_cov, Theta_cov&gt;&gt; jacobian_matrix;
         ddcHelper::get&lt;X, R_cov&gt;(jacobian_matrix)
-                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
+                = m_spline_evaluator
+                          .deriv(Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1),
+                                 coord,
+                                 get_const_field(m_x_spline_representation));
         ddcHelper::get&lt;X, Theta_cov&gt;(jacobian_matrix)
-                = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_x_spline_representation));
+                = m_spline_evaluator
+                          .deriv(Idx&lt;ddc::Deriv&lt;Theta&gt;&gt;(1),
+                                 coord,
+                                 get_const_field(m_x_spline_representation));
         ddcHelper::get&lt;Y, R_cov&gt;(jacobian_matrix)
-                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
+                = m_spline_evaluator
+                          .deriv(Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1),
+                                 coord,
+                                 get_const_field(m_y_spline_representation));
         ddcHelper::get&lt;Y, Theta_cov&gt;(jacobian_matrix)
-                = m_spline_evaluator.deriv_dim_2(coord, get_const_field(m_y_spline_representation));
+                = m_spline_evaluator
+                          .deriv(Idx&lt;ddc::Deriv&lt;Theta&gt;&gt;(1),
+                                 coord,
+                                 get_const_field(m_y_spline_representation));
         return jacobian_matrix;
     }
 
@@ -691,19 +703,27 @@ public:
         if constexpr (std::is_same_v&lt;IndexTag1, X&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, R_cov&gt;) {
             // Component (1,1), i.e dx/dr
             return m_spline_evaluator
-                    .deriv_dim_1(coord, get_const_field(m_x_spline_representation));
+                    .deriv(Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1),
+                           coord,
+                           get_const_field(m_x_spline_representation));
         } else if constexpr (std::is_same_v&lt;IndexTag1, X&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, Theta_cov&gt;) {
             // Component (1,2), i.e dx/dtheta
             return m_spline_evaluator
-                    .deriv_dim_2(coord, get_const_field(m_x_spline_representation));
+                    .deriv(Idx&lt;ddc::Deriv&lt;Theta&gt;&gt;(1),
+                           coord,
+                           get_const_field(m_x_spline_representation));
         } else if constexpr (std::is_same_v&lt;IndexTag1, Y&gt; &amp;&amp; std::is_same_v&lt;IndexTag2, R_cov&gt;) {
             // Component (2,1), i.e dy/dr
             return m_spline_evaluator
-                    .deriv_dim_1(coord, get_const_field(m_y_spline_representation));
+                    .deriv(Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1),
+                           coord,
+                           get_const_field(m_y_spline_representation));
         } else {
             // Component (2,2), i.e dy/dtheta
             return m_spline_evaluator
-                    .deriv_dim_2(coord, get_const_field(m_y_spline_representation));
+                    .deriv(Idx&lt;ddc::Deriv&lt;Theta&gt;&gt;(1),
+                           coord,
+                           get_const_field(m_y_spline_representation));
         }
     }
 
@@ -720,16 +740,24 @@ public:
             Coord&lt;curvilinear_tag_r, curvilinear_tag_theta&gt; const&amp; coord) const
     {
         DTensor&lt;VectorIndexSet&lt;X, Y&gt;, VectorIndexSet&lt;R_cov, Theta_cov&gt;&gt; J;
-        ddcHelper::get&lt;X, R_cov&gt;(J)
-                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_x_spline_representation));
+        ddcHelper::get&lt;X, R_cov&gt;(J) = m_spline_evaluator
+                                              .deriv(Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1),
+                                                     coord,
+                                                     get_const_field(m_x_spline_representation));
         ddcHelper::get&lt;X, Theta_cov&gt;(J)
                 = m_spline_evaluator
-                          .deriv_1_and_2(coord, get_const_field(m_x_spline_representation));
-        ddcHelper::get&lt;Y, R_cov&gt;(J)
-                = m_spline_evaluator.deriv_dim_1(coord, get_const_field(m_y_spline_representation));
+                          .deriv(Idx&lt;ddc::Deriv&lt;R&gt;, ddc::Deriv&lt;Theta&gt;&gt;(1, 1),
+                                 coord,
+                                 get_const_field(m_x_spline_representation));
+        ddcHelper::get&lt;Y, R_cov&gt;(J) = m_spline_evaluator
+                                              .deriv(Idx&lt;ddc::Deriv&lt;R&gt;&gt;(1),
+                                                     coord,
+                                                     get_const_field(m_y_spline_representation));
         ddcHelper::get&lt;Y, Theta_cov&gt;(J)
                 = m_spline_evaluator
-                          .deriv_1_and_2(coord, get_const_field(m_y_spline_representation));
+                          .deriv(Idx&lt;ddc::Deriv&lt;R&gt;, ddc::Deriv&lt;Theta&gt;&gt;(1, 1),
+                                 coord,
+                                 get_const_field(m_y_spline_representation));
         return J;
     }
 

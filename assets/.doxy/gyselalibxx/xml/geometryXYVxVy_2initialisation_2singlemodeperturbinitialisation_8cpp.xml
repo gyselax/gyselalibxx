@@ -345,7 +345,7 @@
 <codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemXY<sp/>perturbation_alloc(gridxy);</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldSpVxVy<sp/>fequilibrium_proxy<sp/>=<sp/>get_const_field(m_fequilibrium);</highlight></codeline>
 <codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldXY<sp/>perturbation_proxy<sp/>=<sp/>get_field(perturbation_alloc);</highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::for_each(gridsp,<sp/>[&amp;](IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)<sp/>{</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::host_for_each(gridsp,<sp/>[&amp;](IdxSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>isp)<sp/>{</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classSingleModePerturbInitialisation_1a391dcace1aa2d17922800ac806f7fc9a" kindref="member">perturbation_initialisation</ref>(</highlight></codeline>
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>perturbation_proxy,</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_init_perturb_mode(isp),</highlight></codeline>

@@ -331,7 +331,7 @@
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;CoordVx&gt;<sp/>breaks(npoints);</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>breaks[0]<sp/>=<sp/>v0<sp/>-<sp/>(v1<sp/>-<sp/>v0);</highlight></codeline>
 <codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>breaks[npoints<sp/>-<sp/>1]<sp/>=<sp/>vN<sp/>+<sp/>(vN<sp/>-<sp/>vNm1);</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::for_each(idx_range,<sp/>[&amp;](IdxVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>iv)<sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::host_for_each(idx_range,<sp/>[&amp;](IdxVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>iv)<sp/>{</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>breaks[to_index&lt;GhostedVx&gt;(iv).uid()]<sp/>=<sp/>ddc::coordinate(iv);</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>});</highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::init_discrete_space&lt;GhostedVxSpoof&gt;(breaks);</highlight></codeline>
@@ -342,7 +342,7 @@
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>breaks_stag[0]<sp/>=<sp/>v0<sp/>-<sp/>(v1<sp/>-<sp/>v0)<sp/>/<sp/>2.;</highlight></codeline>
 <codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/>breaks_stag[npoints_stag<sp/>-<sp/>1]<sp/>=<sp/>vN<sp/>+<sp/>(vN<sp/>-<sp/>vNm1)<sp/>/<sp/>2.;</highlight></codeline>
 <codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>gridv_less(idx_range.remove_last(IdxStepVx(1)));</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::for_each(gridv_less,<sp/>[&amp;](IdxVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>iv)<sp/>{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::host_for_each(gridv_less,<sp/>[&amp;](IdxVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>iv)<sp/>{</highlight></codeline>
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>breaks_stag[iv.uid()<sp/>+<sp/>1]<sp/>=<sp/>CoordVx((ddc::coordinate(iv)<sp/>+<sp/>ddc::coordinate(iv<sp/>+<sp/>1))<sp/>/<sp/>2.);</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/>});</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::init_discrete_space&lt;GhostedVxStaggeredSpoof&gt;(breaks_stag);</highlight></codeline>
@@ -497,7 +497,7 @@
 <codeline lineno="210"><highlight class="normal"></highlight></codeline>
 <codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>gridvx_inner(</highlight></codeline>
 <codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_idx_range&lt;GridVx&gt;(AA).remove_first(IdxStepVx(1)).remove_last(IdxStepVx(1)));</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::for_each(gridvx_inner,<sp/>[&amp;](IdxVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ivx)<sp/>{</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::host_for_each(gridvx_inner,<sp/>[&amp;](IdxVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>ivx)<sp/>{</highlight></codeline>
 <codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>matrix.<ref refid="classMatrix__Banded_1a881a233b2d548f7ea5c4e0f3cdcf5a15" kindref="member">set_element</ref>(ivx.uid(),<sp/>ivx.uid()<sp/>-<sp/>1,<sp/>AA(ivx));</highlight></codeline>
 <codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>matrix.<ref refid="classMatrix__Banded_1a881a233b2d548f7ea5c4e0f3cdcf5a15" kindref="member">set_element</ref>(ivx.uid(),<sp/>ivx.uid(),<sp/>BB(ivx));</highlight></codeline>
 <codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>matrix.<ref refid="classMatrix__Banded_1a881a233b2d548f7ea5c4e0f3cdcf5a15" kindref="member">set_element</ref>(ivx.uid(),<sp/>ivx.uid()<sp/>+<sp/>1,<sp/>CC(ivx));</highlight></codeline>

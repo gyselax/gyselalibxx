@@ -86,8 +86,8 @@ See [IPartialDerivative](classIPartialDerivative.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**Spline1DPartialDerivative**](#function-spline1dpartialderivative) (Spline1DBuilder const & builder, Spline1DEvaluator const & evaluator, DConstFieldType const field) <br>_Construct an instance of the class_ [_**Spline1DPartialDerivative**_](classSpline1DPartialDerivative.md) _._ |
-|  void | [**operator()**](#function-operator) (DFieldType differentiated\_field) const<br>_Compute the partial derivative of a field in the direction where the field is represented using 1d splines._  |
+|   | [**Spline1DPartialDerivative**](#function-spline1dpartialderivative) (Spline1DBuilder const & builder, Spline1DEvaluator const & evaluator, [**DConstFieldType**](classIPartialDerivative.md#typedef-dconstfieldtype) const field) <br>_Construct an instance of the class_ [_**Spline1DPartialDerivative**_](classSpline1DPartialDerivative.md) _._ |
+| virtual void | [**operator()**](#function-operator) ([**DFieldType**](classIPartialDerivative.md#typedef-dfieldtype) differentiated\_field) const<br>_Compute the partial derivative of a field in the direction where the field is represented using 1d splines._  |
 
 
 ## Public Functions inherited from IPartialDerivative
@@ -208,7 +208,7 @@ inline explicit Spline1DPartialDerivative::Spline1DPartialDerivative (
 
 _Compute the partial derivative of a field in the direction where the field is represented using 1d splines._ 
 ```C++
-inline void Spline1DPartialDerivative::operator() (
+inline virtual void Spline1DPartialDerivative::operator() (
     DFieldType differentiated_field
 ) const
 ```
@@ -226,6 +226,8 @@ inline void Spline1DPartialDerivative::operator() (
 
 
         
+Implements [*IPartialDerivative::operator()*](classIPartialDerivative.md#function-operator)
+
 
 <hr>
 

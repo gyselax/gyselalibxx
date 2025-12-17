@@ -581,7 +581,7 @@ DFieldSpVparMu MaxwellianEquilibrium::operator()(DFieldSpVparMu const allfequili
     // Initialisation of the maxwellian
     DFieldMemVparMu maxwellian_alloc(idxrange_vparmu);
     DFieldVparMu maxwellian = get_field(maxwellian_alloc);
-    ddc::for_each(idxrange_sp, [&amp;](IdxSp const isp) {
+    ddc::host_for_each(idxrange_sp, [&amp;](IdxSp const isp) {
         compute_maxwellian(
                 maxwellian,
                 m_mass(isp),
