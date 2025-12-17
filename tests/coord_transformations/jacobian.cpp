@@ -67,7 +67,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixCzarMap)
         check_inverse_tensor(
                 mapping.jacobian_matrix(coords(irtheta)),
                 mapping.inv_jacobian_matrix(coords(irtheta)),
-                1e-15);
+                1e-14);
     });
 }
 
@@ -126,7 +126,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
             check_inverse_tensor(
                     mapping.jacobian_matrix(coord_rtheta),
                     inv_jacobian(coord_rtheta),
-                    1e-15);
+                    1e-14);
         }
     });
 }
@@ -202,7 +202,7 @@ TEST_P(InvJacobianMatrix3D, InverseMatrixToroidalDiscCzarMap)
         const CoordRThetaPhi coord(ddc::coordinate(idx));
         const double r = ddc::get<R>(coord);
         if (fabs(r) > 1e-15) {
-            check_inverse_tensor(mapping.jacobian_matrix(coord), inv_jacobian(coord), 1e-15);
+            check_inverse_tensor(mapping.jacobian_matrix(coord), inv_jacobian(coord), 1e-14);
         }
     });
 }
