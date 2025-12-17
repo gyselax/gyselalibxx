@@ -136,7 +136,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    ddc::for_each(idx_range, [&](IdxXY ixy) {
+    ddc::host_for_each(idx_range, [&](IdxXY ixy) {
         double const dist_x = (coordinate(select<GridX>(ixy)) - xc);
         double const dist_y = (coordinate(select<GridY>(ixy)) - yc);
 
@@ -145,7 +145,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(idx_range, [&](IdxXY ixy) {
+        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
             ddcHelper::get<X>(vals)(ixy) = coordinate(select<GridX>(ixy));
             ddcHelper::get<Y>(vals)(ixy) = coordinate(select<GridY>(ixy));
         });
@@ -156,13 +156,13 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
                     get_field(vals),
                     dt,
                     [yc, xc, &idx_range, omega](AdvectionField dy, ConstAdvectionField y) {
-                        ddc::for_each(idx_range, [&](IdxXY ixy) {
+                        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
                             ddcHelper::get<X>(dy)(ixy) = omega * (yc - ddcHelper::get<Y>(y)(ixy));
                             ddcHelper::get<Y>(dy)(ixy) = omega * (ddcHelper::get<X>(y)(ixy) - xc);
                         });
                     },
                     [&idx_range](AdvectionField y, ConstAdvectionField dy, double dt) {
-                        ddc::for_each(idx_range, [&](IdxXY ixy) {
+                        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
                             ddcHelper::get<X>(y)(ixy) += ddcHelper::get<X>(dy)(ixy) * dt;
                             ddcHelper::get<Y>(y)(ixy) += ddcHelper::get<Y>(dy)(ixy) * dt;
                         });
@@ -170,7 +170,7 @@ TYPED_TEST(RungeKutta2DFixture, RungeKutta2DOrder)
         }
 
         double linf_err = 0.0;
-        ddc::for_each(idx_range, [&](IdxXY ixy) {
+        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
             double const err_x = ddcHelper::get<X>(result)(ixy) - ddcHelper::get<X>(vals)(ixy);
             double const err_y = ddcHelper::get<Y>(result)(ixy) - ddcHelper::get<Y>(vals)(ixy);
             double const err = std::sqrt(err_x * err_x + err_y * err_y);

@@ -265,7 +265,7 @@ public:
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
         host_t<DFieldMemXYVxVy> exact_function(xyvxvy_grid);
-        ddc::for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
+        ddc::host_for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
             CoordXY coord_xy = ddc::coordinate(IdxXY(idx));
             double const x0 = CoordX(coord_xy);
             double const y0 = CoordY(coord_xy);
@@ -305,7 +305,7 @@ public:
         */
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
-        ddc::for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
+        ddc::host_for_each(xyvxvy_grid, [&](IdxXYVxVy const idx) {
             double const relative_error = std::abs(function_host(idx) - exact_function(idx));
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;

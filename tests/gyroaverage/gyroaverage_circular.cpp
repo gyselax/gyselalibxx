@@ -295,7 +295,7 @@ TEST_P(GyroAverageCircularParamTests, TestPeriodicity)
     IdxRangeTheta const theta_idx_range = get_idx_range<GridTheta>(A_bar);
     IdxRangeRBatch const rbatch_idx_range = get_idx_range<GridR, GridBatch>(A_bar);
 
-    ddc::for_each(rbatch_idx_range, [&](IdxRBatch const irbatch) {
+    ddc::host_for_each(rbatch_idx_range, [&](IdxRBatch const irbatch) {
         IdxR const ir(irbatch);
         IdxBatch const ibatch(irbatch);
         IdxTheta const theta_front = theta_idx_range.front();
@@ -368,7 +368,7 @@ TEST_P(GyroAverageCircularParamTests, TestAnalytical)
     double const kx = m_kx;
     double const ky = m_ky;
     int const nb_gyro_points = m_nb_gyro_points;
-    ddc::for_each(rthetabatch_idx_range_check, [&](IdxRThetaBatch const irthetabatch) {
+    ddc::host_for_each(rthetabatch_idx_range_check, [&](IdxRThetaBatch const irthetabatch) {
         IdxR const ir(irthetabatch);
         IdxTheta const itheta(irthetabatch);
         IdxBatch const ibatch(irthetabatch);
