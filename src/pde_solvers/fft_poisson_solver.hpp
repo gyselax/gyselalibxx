@@ -241,7 +241,7 @@ public:
                 get_idx_range(values),
                 KOKKOS_LAMBDA(fourier_index_type const ik) {
                     Idx<Dim> const ikx = ddc::select<Dim>(ik);
-                    derivative(ik) = -imaginary_unit * ddc::coordinate(ikx) * values(ik);
+                    derivative(ik) = -imaginary_unit * (DataType)ddc::coordinate(ikx) * values(ik);
                 });
     }
 
