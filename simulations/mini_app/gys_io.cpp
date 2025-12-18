@@ -414,39 +414,41 @@ int main(int argc, char** argv)
         cout << "Performing MPI transpose" << endl;
         MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh, MPI_COMM_WORLD);
         // ------------------------------------------------------------------------------
-        
+
         // please uncomment if the new ddc version is available:
         // Get local index ranges for each layout (use exact types returned, don't convert)
         auto idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
         auto idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
-        
+
         // Create fields in both layouts following the Gysela-X pattern
         // Field on Tor3DSplit layout (matches allfdistribu's layout)
-        DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(idxrange_tor3D_split);
-        DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split = get_field(allfdistribu_tor3D_split_alloc);
+        DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(
+                idxrange_tor3D_split);
+        DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split
+                = get_field(allfdistribu_tor3D_split_alloc);
 
         // Temporary field on V2DSplit layout
         DFieldMem<decltype(idxrange_v2D_split)> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
-        DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split = get_field(allfdistribu_v2D_split_alloc);
+        DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split
+                = get_field(allfdistribu_v2D_split_alloc);
 
         // Copy initial data to Tor3DSplit layout field
         // Extract only the local portion of allfdistribu that matches the local MPI-distributed index range
         ddc::parallel_deepcopy(allfdistribu_tor3D_split, allfdistribu[idxrange_tor3D_split]);
 
         // Execute the transpose: from Tor3DSplit to V2DSplit
-        transpose(Kokkos::DefaultExecutionSpace(), // execution space
+        transpose(
+                Kokkos::DefaultExecutionSpace(), // execution space
                 allfdistribu_v2D_split, // destination (V2DSplit layout)
                 get_const_field(allfdistribu_tor3D_split)); // source (Tor3DSplit layout)
-        
+
         // ------------------------------------------------------------------------------
-    }
-    else if (version == "in-situ-diagnostic") {
+    } else if (version == "in-situ-diagnostic") {
         cout << "Performing in-situ diagnostic" << endl;
         /*
         Here is the space for your personal in-situ diagnostic code.
         */
-    }
-    else {
+    } else {
         throw std::runtime_error("Invalid application version");
     }
     time_points[2] = steady_clock::now();
