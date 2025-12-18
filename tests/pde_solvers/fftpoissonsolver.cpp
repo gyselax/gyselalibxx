@@ -74,7 +74,7 @@ TEST(FftPoissonSolver, CosineSource)
 
     // Initialisation of the distribution function --> fill values
     for (IdxX const ix : gridx) {
-        rhs_host(ix) = cos(ddc::coordinate(ix));
+        rhs_host(ix) = std::cos(ddc::coordinate(ix));
     }
     DFieldMemX electrostatic_potential(gridx);
     DFieldMemX electric_field(gridx);
@@ -89,10 +89,10 @@ TEST(FftPoissonSolver, CosineSource)
     double error_field = 0.0;
 
     for (IdxX const ix : gridx) {
-        double const exact_pot = cos(ddc::coordinate(ix));
-        error_pot = fmax(fabs(electrostatic_potential_host(ix) - exact_pot), error_pot);
-        double const exact_field = sin(ddc::coordinate(ix));
-        error_field = fmax(fabs(electric_field_host(ix) - exact_field), error_field);
+        double const exact_pot = std::cos(ddc::coordinate(ix));
+        error_pot = std::fmax(std::fabs(electrostatic_potential_host(ix) - exact_pot), error_pot);
+        double const exact_field = std::sin(ddc::coordinate(ix));
+        error_field = std::fmax(std::fabs(electric_field_host(ix) - exact_field), error_field);
     }
     EXPECT_LE(error_pot, 1e-8);
     EXPECT_LE(error_field, 1e-6);
@@ -126,7 +126,7 @@ TEST(FftPoissonSolver, BatchedCosineSource)
     for (IdxX const ix : gridx) {
         double const c = (ix - gridx.front()) + 1;
         for (IdxY const iy : gridy) {
-            rhs_host(ix, iy) = ipow(c, 2) * cos(c * ddc::coordinate(iy));
+            rhs_host(ix, iy) = ipow(c, 2) * std::cos(c * ddc::coordinate(iy));
         }
     }
     DFieldMemXY electrostatic_potential(gridxy);
@@ -144,10 +144,12 @@ TEST(FftPoissonSolver, BatchedCosineSource)
     for (IdxX const ix : gridx) {
         double const c = (ix - gridx.front()) + 1;
         for (IdxY const iy : gridy) {
-            double const exact_pot = cos(c * ddc::coordinate(iy));
-            error_pot = fmax(fabs(electrostatic_potential_host(ix, iy) - exact_pot), error_pot);
-            double const exact_field = c * sin(c * ddc::coordinate(iy));
-            error_field = fmax(fabs(electric_field_host(ix, iy) - exact_field), error_field);
+            double const exact_pot = std::cos(c * ddc::coordinate(iy));
+            error_pot = std::
+                    fmax(std::fabs(electrostatic_potential_host(ix, iy) - exact_pot), error_pot);
+            double const exact_field = c * std::sin(c * ddc::coordinate(iy));
+            error_field
+                    = std::fmax(std::fabs(electric_field_host(ix, iy) - exact_field), error_field);
         }
     }
     EXPECT_LE(error_pot, 1e-8);
@@ -263,7 +265,7 @@ TEST(FftPoissonSolver, FloatCosineSource)
 
     // Initialisation of the distribution function --> fill values
     for (IdxX const ix : gridx) {
-        rhs_host(ix) = cos(ddc::coordinate(ix));
+        rhs_host(ix) = std::cos(ddc::coordinate(ix));
     }
     FFieldMemX electrostatic_potential(gridx);
     FFieldMemX electric_field(gridx);
@@ -278,10 +280,10 @@ TEST(FftPoissonSolver, FloatCosineSource)
     double error_field = 0.0;
 
     for (IdxX const ix : gridx) {
-        double const exact_pot = cos(ddc::coordinate(ix));
-        error_pot = fmax(fabs(electrostatic_potential_host(ix) - exact_pot), error_pot);
-        double const exact_field = sin(ddc::coordinate(ix));
-        error_field = fmax(fabs(electric_field_host(ix) - exact_field), error_field);
+        double const exact_pot = std::cos(ddc::coordinate(ix));
+        error_pot = std::fmax(std::fabs(electrostatic_potential_host(ix) - exact_pot), error_pot);
+        double const exact_field = std::sin(ddc::coordinate(ix));
+        error_field = std::fmax(std::fabs(electric_field_host(ix) - exact_field), error_field);
     }
     EXPECT_LE(error_pot, 1e-6);
     EXPECT_LE(error_field, 1e-4);
