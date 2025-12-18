@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
@@ -11,9 +13,11 @@
 /**
  * @brief A class which computes the spatial advection along the dimension of interest GridX. Working for every Cartesian geometry. 
  */
-template <class Geometry, class GridX>
+template <class Geometry, class GridX, class DataType = double>
 class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX>
 {
+    static_assert(std::is_floating_point_v<DataType>);
+
     using GridV = typename Geometry::template velocity_dim_for<GridX>;
     using IdxRangeFdistrib = typename Geometry::IdxRangeFdistribu;
     using IdxX = Idx<GridX>;
@@ -50,9 +54,9 @@ public:
      * @param[in] dt Time step
      * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
      */
-    Field<double, IdxRangeFdistrib> operator()(
-            Field<double, IdxRangeFdistrib> const allfdistribu,
-            double const dt) const override
+    Field<DataType, IdxRangeFdistrib> operator()(
+            Field<DataType, IdxRangeFdistrib> const allfdistribu,
+            DataType const dt) const override
     {
         using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFdistrib, Species, GridX>;
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
@@ -72,7 +76,7 @@ public:
         IdxRangeBatch batch_idx_range(idx_range);
 
         for (IdxSp const isp : sp_idx_range) {
-            double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
@@ -80,7 +84,7 @@ public:
                         // compute the displacement
                         IdxV const iv(ib);
                         Coord<DimV> const coord_iv = ddc::coordinate(iv);
-                        double const dx = sqrt_me_on_mspecies * dt * coord_iv;
+                        DataType const dx = sqrt_me_on_mspecies * dt * coord_iv;
 
                         // compute the coordinates of the feet
                         for (IdxX const ix : x_idx_range) {
