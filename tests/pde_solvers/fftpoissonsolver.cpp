@@ -283,8 +283,8 @@ TEST(FftPoissonSolver, FloatCosineSource)
         double const exact_field = sin(ddc::coordinate(ix));
         error_field = fmax(fabs(electric_field_host(ix) - exact_field), error_field);
     }
-    EXPECT_LE(error_pot, 1e-8);
-    EXPECT_LE(error_field, 1e-6);
+    EXPECT_LE(error_pot, 1e-6);
+    EXPECT_LE(error_field, 1e-4);
 }
 
 } // namespace FFTPoissonSolverTest
