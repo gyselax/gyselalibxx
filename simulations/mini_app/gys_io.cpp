@@ -380,6 +380,7 @@ int main(int argc, char** argv)
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
     steady_clock::time_point time_points[6];
+    std::vector<std::string> timing_names(6);
 
     print_banner(rank);
     //---------------------------------------------------------
@@ -401,7 +402,7 @@ int main(int argc, char** argv)
     DFieldMemSpGrid allfdistribu(mesh);
     init_distribution_fun(get_field(allfdistribu), mesh, configs.conf_gyselax);
     time_points[1] = steady_clock::now();
-
+    timing_names[0] = "initialisation";
     //---------------------------------------------------------
     // Read application version from YAML config
     //---------------------------------------------------------
@@ -452,24 +453,26 @@ int main(int argc, char** argv)
         throw std::runtime_error("Invalid application version");
     }
     time_points[2] = steady_clock::now();
+    timing_names[1] = version;
     //---------------------------------------------------------
     // Compute fluid moments (density, mean velocity, temperature)
     //---------------------------------------------------------
     FluidMomentsData fluid_moments = compute_fluid_moments(mesh, get_const_field(allfdistribu));
     time_points[3] = steady_clock::now();
-
+    timing_names[2] = "fluid_moments";
     //---------------------------------------------------------
     // Write 5D distribution function and coordinates to file using PDI
     //---------------------------------------------------------
     // Create host version of distribution function for I/O (needed for PDI)
     host_t<DFieldMemSpGrid> allfdistribu_host(mesh);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
-
+    time_points[4] = steady_clock::now();
+    timing_names[3] = "gpu2cpu";
+    //---------------------------------------------------------
     write_fdistribu(rank, mesh, allfdistribu_host);
-
     write_fluid_moments(rank, mesh, fluid_moments);
-
     time_points[5] = steady_clock::now();
+    timing_names[4] = "write";
     //---------------------------------------------------------
     // Finalise PDI and MPI
     //---------------------------------------------------------
@@ -480,16 +483,11 @@ int main(int argc, char** argv)
                     = std::chrono::duration<double>(time_points[i + 1] - time_points[i]).count();
         }
         durations[5] = std::chrono::duration<double>(time_points[5] - time_points[0]).count();
-        cout << "Time initialisation: " << durations[0] << "s" << endl;
-        cout << "Time transpose: " << durations[1] << "s" << endl;
-        cout << "Time fluid moments: " << durations[2] << "s" << endl;
-        cout << "Time gpu2cpu: " << durations[3] << "s" << endl;
-        cout << "Time write: " << durations[4] << "s" << endl;
-        cout << "Time total: " << durations[5] << "s" << endl;
-
+        timing_names[5] = "total";
+        for (int i = 0; i < 6; i++) {
+            cout << "Time " << timing_names[i] << ": " << durations[i] << "s" << endl;
+        }
         // Use the new function to write timing stats as a table
-        std::vector<std::string> timing_names
-                = {"initialisation", "transpose", "fluid_moments", "gpu2cpu", "write", "total"};
         write_cpu_time_stats(rank, durations, timing_names, timing_names.size());
     }
     PDI_finalize();
