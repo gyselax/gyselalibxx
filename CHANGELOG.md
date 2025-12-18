@@ -18,12 +18,14 @@ in a `DerivField`.
 ### Fixed
 
 - Fix derivative indexing of a `DerivField` object.
+- Fix transposition of arrays with more than 7 dimensions.
 
 ### Changed
 
 - Extract spline definitions from `geometry.hpp` files into files called `spline_definitions_<geom_descriptor>.hpp` which are dedicated to tests or simulations.
 - Rename `geometry.hpp` files to `geometry_<geom_descriptor>.hpp` to reflect the geometry that they describe.
 - `DerivField` objects are initialised on GPU by default.
+- Update DDC to [v0.10.0](https://github.com/CExA-project/ddc/releases/tag/v0.10.0).
 
 ### Deprecated
 

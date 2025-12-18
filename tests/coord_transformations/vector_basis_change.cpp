@@ -155,7 +155,7 @@ TEST(MappingChange, VectorFieldChange)
             Kokkos::DefaultHostExecutionSpace(),
             get_field(polar_vector_field));
 
-    ddc::for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
+    ddc::host_for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
         CoordRTheta coord = ddc::coordinate(IdxRTheta(idx));
         Tensor J = mapping.inv_jacobian_matrix(coord);
         double r_vec = ddcHelper::get<R>(polar_vector_field_host)(idx);
@@ -196,7 +196,7 @@ TEST(MappingChange, VectorFieldChangeCopy)
             Kokkos::DefaultHostExecutionSpace(),
             get_field(polar_vector_field));
 
-    ddc::for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
+    ddc::host_for_each(idx_range, [&](Idx<Species, GridR, GridTheta> idx) {
         CoordRTheta coord = ddc::coordinate(IdxRTheta(idx));
         Tensor J = mapping.inv_jacobian_matrix(coord);
         double r_vec = ddcHelper::get<R>(polar_vector_field_host)(idx);
@@ -253,7 +253,7 @@ TEST(MappingChange, VectorFieldChangeCopyLayoutStrided)
             Kokkos::DefaultHostExecutionSpace(),
             get_field(polar_vector_field));
 
-    ddc::for_each(idx_range_r_theta, [&](IdxRTheta idx) {
+    ddc::host_for_each(idx_range_r_theta, [&](IdxRTheta idx) {
         CoordRTheta coord = ddc::coordinate(idx);
         Tensor J = mapping.inv_jacobian_matrix(coord);
         double r_vec = ddcHelper::get<R>(polar_vector_field_host)(first_species, idx);

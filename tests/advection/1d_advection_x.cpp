@@ -123,7 +123,7 @@ public:
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
         host_t<DFieldMemX> exact_function(interpolation_idx_range);
-        ddc::for_each(interpolation_idx_range, [&](IdxX const idx) {
+        ddc::host_for_each(interpolation_idx_range, [&](IdxX const idx) {
             double const x0 = ddc::coordinate(idx);
             double x = 2 * std::atan(std::tan(x0 / 2.) * std::exp(-final_t));
             // Replace the feet inside the domain if the dimension is periodic
@@ -146,7 +146,7 @@ public:
         */
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
-        ddc::for_each(interpolation_idx_range, [&](IdxX const idx) {
+        ddc::host_for_each(interpolation_idx_range, [&](IdxX const idx) {
             double const relative_error = std::abs(function_host(idx) - exact_function(idx));
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;

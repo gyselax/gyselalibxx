@@ -135,7 +135,7 @@ void test_AllToAll2D_GPU()
     ddc::parallel_deepcopy(get_field(recv_buffer_host), get_const_field(recv_buffer));
 
     bool success = true;
-    ddc::for_each(get_idx_range(recv_buffer_host), [&](IdxXY ixy) {
+    ddc::host_for_each(get_idx_range(recv_buffer_host), [&](IdxXY ixy) {
         success = success and (recv_buffer_host(ixy) == get_unique_id(ixy, full_idx_range));
     });
     EXPECT_TRUE(success);
@@ -157,7 +157,7 @@ TEST(MPIParallelisation, AllToAll2D_CPU)
     IFieldMemXY recv_buffer(transpose.get_local_idx_range<XDistribLayout>());
     IFieldMemYX send_buffer(transpose.get_local_idx_range<YDistribLayout>());
 
-    ddc::for_each(get_idx_range(send_buffer), [&](IdxYX ixy) {
+    ddc::host_for_each(get_idx_range(send_buffer), [&](IdxYX ixy) {
         send_buffer(ixy) = get_unique_id(IdxXY(ixy), full_idx_range);
     });
 
@@ -167,7 +167,7 @@ TEST(MPIParallelisation, AllToAll2D_CPU)
             get_const_field(send_buffer));
 
     bool success = true;
-    ddc::for_each(get_idx_range(recv_buffer), [&](IdxXY ixy) {
+    ddc::host_for_each(get_idx_range(recv_buffer), [&](IdxXY ixy) {
         success = success and (recv_buffer(ixy) == get_unique_id(ixy, full_idx_range));
     });
     EXPECT_TRUE(success);
@@ -194,7 +194,7 @@ TEST(MPIParallelisation, AllToAll3D_CPU)
     IFieldMemXYZ send_buffer(transpose.get_local_idx_range<YDistribLayout3D>());
     IFieldMemYZX recv_buffer(transpose.get_local_idx_range<ZDistribLayout3D>());
 
-    ddc::for_each(get_idx_range(send_buffer), [&](IdxXYZ ixyz) {
+    ddc::host_for_each(get_idx_range(send_buffer), [&](IdxXYZ ixyz) {
         send_buffer(ixyz) = get_unique_id(ixyz, full_idx_range);
     });
 
@@ -206,7 +206,7 @@ TEST(MPIParallelisation, AllToAll3D_CPU)
             get_const_field(send_buffer));
 
     bool success = true;
-    ddc::for_each(get_idx_range(recv_buffer), [&](IdxYZX ixyz) {
+    ddc::host_for_each(get_idx_range(recv_buffer), [&](IdxYZX ixyz) {
         double expected = get_unique_id(IdxXYZ(ixyz), full_idx_range);
         success = success and (recv_buffer(ixyz) == expected);
     });
@@ -230,7 +230,7 @@ TEST(MPIParallelisation, AllToAll4D_CPU)
     IFieldMemWXYZ send_buffer(transpose.get_local_idx_range<XYDistribLayout4D>());
     IFieldMemYZWX recv_buffer(transpose.get_local_idx_range<WZDistribLayout4D>());
 
-    ddc::for_each(get_idx_range(send_buffer), [&](IdxWXYZ iwxyz) {
+    ddc::host_for_each(get_idx_range(send_buffer), [&](IdxWXYZ iwxyz) {
         send_buffer(iwxyz) = get_unique_id(iwxyz, full_idx_range);
     });
 
@@ -242,7 +242,7 @@ TEST(MPIParallelisation, AllToAll4D_CPU)
             get_const_field(send_buffer));
 
     bool success = true;
-    ddc::for_each(get_idx_range(recv_buffer), [&](IdxYZWX iwxyz) {
+    ddc::host_for_each(get_idx_range(recv_buffer), [&](IdxYZWX iwxyz) {
         std::size_t expected = get_unique_id(IdxWXYZ(iwxyz), full_idx_range);
         success = success and (recv_buffer(iwxyz) == expected);
     });
