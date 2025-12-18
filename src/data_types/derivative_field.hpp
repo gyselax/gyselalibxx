@@ -15,7 +15,7 @@ class DerivFieldMem;
 template <
         class ElementType,
         class SupportType,
-        class MemorySpace = Kokkos::HostSpace,
+        class MemorySpace = typename Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
 class DerivField;
 
@@ -399,7 +399,7 @@ public:
      *          indexed. If information about the derivatives is missing then it is assumed that the
      *          0-th order derivative is requested.
      *
-     * @returns Field A subset of the data.
+     * @returns ConstField A subset of the data.
      */
     template <class... QueryDDims>
     KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
@@ -437,7 +437,7 @@ public:
 template <
         class ElementType,
         class SupportType,
-        class MemorySpace = Kokkos::HostSpace,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
         class LayoutStridedPolicy = Kokkos::layout_right>
 using DerivConstField
         = DerivField<ElementType const, SupportType, MemorySpace, LayoutStridedPolicy>;

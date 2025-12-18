@@ -100,14 +100,14 @@ TEST(KineticSource, Moments)
     host_t<DFieldMemVx> values_density(gridvx);
     host_t<DFieldMemVx> values_fluid_velocity(gridvx);
     host_t<DFieldMemVx> values_temperature(gridvx);
-    ddc::for_each(gridx, [&](IdxX const ix) {
+    ddc::host_for_each(gridx, [&](IdxX const ix) {
         // density
         ddc::parallel_deepcopy(values_density, allfdistribu_host[idx_range_sp.front()][ix]);
         density(ix)
                 = integrate_v(Kokkos::DefaultHostExecutionSpace(), get_const_field(values_density));
 
         // fluid velocity
-        ddc::for_each(gridvx, [&](IdxVx const iv) {
+        ddc::host_for_each(gridvx, [&](IdxVx const iv) {
             values_fluid_velocity(iv) = values_density(iv) * ddc::coordinate(iv);
         });
         fluid_velocity(ix) = integrate_v(
@@ -116,7 +116,7 @@ TEST(KineticSource, Moments)
                              / density(ix);
 
         // temperature
-        ddc::for_each(gridvx, [&](IdxVx const iv) {
+        ddc::host_for_each(gridvx, [&](IdxVx const iv) {
             values_temperature(iv)
                     = values_density(iv) * std::pow(ddc::coordinate(iv) - fluid_velocity(ix), 2);
         });
@@ -133,7 +133,7 @@ TEST(KineticSource, Moments)
 
     double error_fluid_velocity(0);
     double error_temperature(0);
-    ddc::for_each(gridx, [&](IdxX const ix) {
+    ddc::host_for_each(gridx, [&](IdxX const ix) {
         error_fluid_velocity = std::fmax(std::fabs(fluid_velocity(ix)), error_fluid_velocity);
         error_temperature
                 = std::fmax(std::fabs(temperature(ix) - temperature_source), error_temperature);

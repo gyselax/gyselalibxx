@@ -62,7 +62,7 @@ void vector_field_norm_test()
 
     auto norm_vals_host = ddc::create_mirror_view_and_copy(get_field(norm_vals));
 
-    ddc::for_each(idx_range, [&](IdxRTheta idx) {
+    ddc::host_for_each(idx_range, [&](IdxRTheta idx) {
         CoordR r = ddc::coordinate(ddc::select<GridR>(idx));
         double expected_norm = std::sqrt(1.0 + 1.5 * 1.5 * (r * r));
         ASSERT_NEAR(expected_norm, norm_vals_host(idx), TOL);

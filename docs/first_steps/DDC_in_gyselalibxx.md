@@ -165,7 +165,7 @@ IdxRange<GridX, GridY> idx_range(origin, size);
 
 When working with index ranges we do not usually know if we have access to all of the grid or just a subset. It is therefore important to use the `get_index_range` function to traverse fields rather than initialising elements manually as we don't know the index of the first element of a `IdxRange` at compile time.
 
-There are multiple functions available for traversing an index range. Most of the time we will traverse the entire index range. This can be done simply as `IdxRange` implements the functions `begin()` and `end()`. These functions are called automatically using the modern C++ syntax for a for element in list, or using the `ddc::for_each` function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is:
+There are multiple functions available for traversing an index range. Most of the time we will traverse the entire index range. This can be done simply as `IdxRange` implements the functions `begin()` and `end()`. These functions are called automatically using the modern C++ syntax for a for element in list, or using the `ddc::host_for_each` function. The latter is to be preferred as it will allow us to add parallelism later. The syntax is:
 
 ```cpp
 for (Idx<GridX> index : idx_range) {
@@ -175,11 +175,11 @@ for (Idx<GridX> index : idx_range) {
 or:
 
 ```cpp
-ddc::for_each(idx_range, [&](Idx<GridX> index) {
+ddc::host_for_each(idx_range, [&](Idx<GridX> index) {
 });
 ```
 
-In the case of a `ddc::for_each` the second argument is a lambda function. The `[&]` ensures that any variable defined outside the loop are captured by reference so they can be used inside the lambda function.
+In the case of a `ddc::host_for_each` the second argument is a lambda function. The `[&]` ensures that any variable defined outside the loop are captured by reference so they can be used inside the lambda function.
 
 It is also common to need to iterate over a subset of grid points. Such a subset can be created using the syntax described above, however `IdxRange` also contains several helper functions which are designed to facilitate the creation of these sets:
 
@@ -313,7 +313,7 @@ IdxRangeSpXVx idx_range(..);
 DFieldMemSpXVx distribution_function_alloc(idx_range);
 DFieldSpXVx distribution_function(distribution_function_alloc);
 
-ddc::for_each(idx_range, [&](IdxSpXVx index) {
+ddc::host_for_each(idx_range, [&](IdxSpXVx index) {
     CoordXVx coord = ddc::coordinate(ddc::select<GridX, GridVx>(index));
     double v_pos = ddc::get<Vx>(coord);
     double x_pos = ddc::get<X>(coord);

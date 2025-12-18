@@ -4,6 +4,7 @@
 include(GoogleTest)
 
 add_executable(unit_tests_utils
+    spline_builder_deriv_field_2d_test.cpp
     test_ddcHelpers.cpp
     transpose.cpp
     view.cpp
@@ -16,6 +17,7 @@ target_link_libraries(unit_tests_utils
         GTest::gmock
         paraconf::paraconf
         gslx::utils
+        gslx::data_types
 )
 
 gtest_discover_tests(unit_tests_utils DISCOVERY_MODE PRE_TEST)
