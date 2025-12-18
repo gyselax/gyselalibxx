@@ -73,7 +73,7 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         ddc::PeriodicExtrapolationRule<X>>;
 
 
-template<class DataType>
+template <class DataType>
 class XAdvection1DTest : public ::testing::Test
 {
 protected:
@@ -154,9 +154,13 @@ public:
     }
 };
 
-class XAdvection1DTestDouble : public XAdvection1DTest<double> {};
+class XAdvection1DTestDouble : public XAdvection1DTest<double>
+{
+};
 
-class XAdvection1DTestFloat : public XAdvection1DTest<float> {};
+class XAdvection1DTestFloat : public XAdvection1DTest<float>
+{
+};
 
 } // end namespace
 
@@ -200,8 +204,14 @@ TEST_F(XAdvection1DTestFloat, AdvectionX)
 
 
     RK2Builder time_stepper;
-    BslAdvection1D<GridX, IdxRangeX, IdxRangeX, SplineXBuilder, SplineXEvaluator, RK2Builder, float> const
-            advection(spline_interpolator, builder, spline_evaluator, time_stepper);
+    BslAdvection1D<
+            GridX,
+            IdxRangeX,
+            IdxRangeX,
+            SplineXBuilder,
+            SplineXEvaluator,
+            RK2Builder,
+            float> const advection(spline_interpolator, builder, spline_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);
