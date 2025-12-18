@@ -572,6 +572,7 @@ class FEM1DPoissonSolver
     : public IPoissonSolver&lt;
               typename SplineEvaluator::evaluation_domain_type,
               IdxRangeBatched,
+              double,
               typename SplineEvaluator::memory_space,
               Kokkos::layout_right&gt;
 {
@@ -586,6 +587,7 @@ private:
     using base_type = IPoissonSolver&lt;
             typename SplineEvaluator::evaluation_domain_type,
             IdxRangeBatched,
+            double,
             typename SplineEvaluator::memory_space,
             Kokkos::layout_right&gt;;
 

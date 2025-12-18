@@ -2,7 +2,7 @@
 
 # Class FFTPoissonSolver
 
-**template &lt;class IdxRangeLaplacian, class IdxRangeFull, class ExecSpace, class LayoutSpace&gt;**
+**template &lt;class IdxRangeLaplacian, class IdxRangeFull, class ExecSpace, class DataType, class LayoutSpace&gt;**
 
 
 

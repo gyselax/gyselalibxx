@@ -553,18 +553,27 @@
 <p><a href="ipoisson__solver_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
+#include &lt;type_traits&gt;
+
 #include &lt;ddc/ddc.hpp&gt;
 
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "vector_field.hpp"
 
-template &lt;class IdxRangeLaplacian, class IdxRangeFull, class MemorySpace, class LayoutSpace&gt;
+template &lt;
+        class IdxRangeLaplacian,
+        class IdxRangeFull,
+        class DataType,
+        class MemorySpace,
+        class LayoutSpace&gt;
 class IPoissonSolver;
 
-template &lt;class... ODims, class IdxRangeFull, class MemorySpace, class LayoutSpace&gt;
-class IPoissonSolver&lt;IdxRange&lt;ODims...&gt;, IdxRangeFull, MemorySpace, LayoutSpace&gt;
+template &lt;class... ODims, class IdxRangeFull, class DataType, class MemorySpace, class LayoutSpace&gt;
+class IPoissonSolver&lt;IdxRange&lt;ODims...&gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace&gt;
 {
+    static_assert(std::is_floating_point_v&lt;DataType&gt;);
+
 protected:
     using real_laplacian_tags = ddc::detail::TypeSeq&lt;typename ODims::continuous_dimension_type...&gt;;
     using laplacian_tags = ddc::detail::TypeSeq&lt;ODims...&gt;;
@@ -575,13 +584,13 @@ protected:
     static constexpr bool using_vector_field = ddc::type_seq_size_v&lt;laplacian_tags&gt; == 1;
 
 public:
-    using field_type = DField&lt;IdxRangeFull, MemorySpace, LayoutSpace&gt;;
-    using const_field_type = DConstField&lt;IdxRangeFull, MemorySpace, LayoutSpace&gt;;
+    using field_type = Field&lt;DataType, IdxRangeFull, MemorySpace, LayoutSpace&gt;;
+    using const_field_type = ConstField&lt;DataType, IdxRangeFull, MemorySpace, LayoutSpace&gt;;
 
     using vector_field_type = std::conditional_t&lt;
             ddc::type_seq_size_v&lt;laplacian_tags&gt; == 1,
             field_type,
-            VectorField&lt;double, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace&gt;&gt;;
+            VectorField&lt;DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace&gt;&gt;;
 
     using batch_idx_range_type =
             typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;batch_tags&gt;;

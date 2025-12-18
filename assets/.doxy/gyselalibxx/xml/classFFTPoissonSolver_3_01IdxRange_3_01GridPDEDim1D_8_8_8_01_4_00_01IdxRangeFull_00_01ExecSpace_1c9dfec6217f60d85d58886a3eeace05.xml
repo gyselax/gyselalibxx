@@ -1,0 +1,815 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05" kind="class" language="C++" prot="public">
+    <compoundname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</compoundname>
+    <basecompoundref refid="classIPoissonSolver" prot="public" virt="non-virtual">IPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, DataType, ExecSpace::memory_space, LayoutSpace &gt;</basecompoundref>
+    <includes refid="fft__poisson__solver_8hpp" local="no">fft_poisson_solver.hpp</includes>
+    <innerclass refid="structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8" prot="public">FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::GridFourier</innerclass>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>GridPDEDim1D</declname>
+        <defname>GridPDEDim1D</defname>
+      </param>
+      <param>
+        <type>class IdxRangeFull</type>
+      </param>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class DataType</type>
+      </param>
+      <param>
+        <type>class LayoutSpace</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab61024e1de86010f92daf28a46876b9a" prot="private" static="no">
+        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, DataType, typename ExecSpace::memory_space, LayoutSpace &gt;</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::base_type =  IPoissonSolver&lt; IdxRange&lt;GridPDEDim1D...&gt;, IdxRangeFull, DataType, typename ExecSpace::memory_space, LayoutSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::base_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" prot="public" static="no">
+        <type>typename base_type::field_type</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::field_type =  typename base_type::field_type</definition>
+        <argsstring></argsstring>
+        <name>field_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::field_type</qualifiedname>
+        <briefdescription>
+<para>The Field type of the arguments to operator(). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a9f3372ba0facbbdf5a3e93b176aa0670" prot="public" static="no">
+        <type>typename base_type::const_field_type</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::const_field_type =  typename base_type::const_field_type</definition>
+        <argsstring></argsstring>
+        <name>const_field_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::const_field_type</qualifiedname>
+        <briefdescription>
+<para>The const Field type of the arguments to operator(). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a2a9068664c77c3cd987b03d219998583" prot="public" static="no">
+        <type>typename base_type::vector_field_type</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::vector_field_type =  typename base_type::vector_field_type</definition>
+        <argsstring></argsstring>
+        <name>vector_field_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::vector_field_type</qualifiedname>
+        <briefdescription>
+<para>The type of the derivative of <formula id="155">$ \phi $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab899291c2c8912ae076a8ae890875068" prot="public" static="no">
+        <type>typename base_type::batch_idx_range_type</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::batch_idx_range_type =  typename base_type::batch_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>batch_idx_range_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::batch_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The index range type describing the batch dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a623c8f00032d066a67beed88195b2762" prot="public" static="no">
+        <type>typename base_type::batch_index_type</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::batch_index_type =  typename base_type::batch_index_type</definition>
+        <argsstring></argsstring>
+        <name>batch_index_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::batch_index_type</qualifiedname>
+        <briefdescription>
+<para>The index type for indexing a batch dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69cd28231ada0e0745a493dabc65fbbd" prot="public" static="no">
+        <type>typename base_type::laplacian_idx_range_type</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::laplacian_idx_range_type =  typename base_type::laplacian_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>laplacian_idx_range_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::laplacian_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the index range on which the equation is defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1abc4582a8142fa98f2fbbd5bc57e055ba" prot="public" static="no">
+        <type>typename base_type::layout_space</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::layout_space =  typename base_type::layout_space</definition>
+        <argsstring></argsstring>
+        <name>layout_space</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::layout_space</qualifiedname>
+        <briefdescription>
+<para>The layout space of the Fields passed to operator(). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="84" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" prot="public" static="no">
+        <type>typename base_type::memory_space</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::memory_space =  typename base_type::memory_space</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::memory_space</qualifiedname>
+        <briefdescription>
+<para>The space (CPU/GPU) where the Fields passed to operator() are saved. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a84950390da2b18e834edaa5f972d941e" prot="public" static="no">
+        <type>IdxRange&lt; GridFourier&lt; typename GridPDEDim1D::continuous_dimension_type &gt;... &gt;</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_idx_range_type =  IdxRange&lt;GridFourier&lt;typename GridPDEDim1D::continuous_dimension_type&gt;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>fourier_idx_range_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the Fourier space index range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8259a46f7cc09d933b0bfdffdd0181a8" prot="public" static="no">
+        <type>typename fourier_idx_range_type::discrete_element_type</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_index_type =  typename fourier_idx_range_type::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>fourier_index_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_index_type</qualifiedname>
+        <briefdescription>
+<para>The type of an index of the Fourier space index range. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ae76ab2b968dc0f2e4fee27b9b494821e" prot="public" static="no">
+        <type>FieldMem&lt; Kokkos::complex&lt; DataType &gt;, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a84950390da2b18e834edaa5f972d941e" kindref="member">fourier_idx_range_type</ref>, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" kindref="member">memory_space</ref> &gt;</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_field_mem_type =  FieldMem&lt;Kokkos::complex&lt;DataType&gt;, fourier_idx_range_type, memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>fourier_field_mem_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_field_mem_type</qualifiedname>
+        <briefdescription>
+<para>The type of a Field storing the Fourier transform of a function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" prot="public" static="no">
+        <type>typename fourier_field_mem_type::span_type</type>
+        <definition>using FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_field_type =  typename fourier_field_mem_type::span_type</definition>
+        <argsstring></argsstring>
+        <name>fourier_field_type</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::fourier_field_type</qualifiedname>
+        <briefdescription>
+<para>The type of a Field storing the Fourier transform of a function. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a2b6a386dd0eebfb48a7acfcbb794e8e8" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr ddc::FFT_Normalization</type>
+        <definition>constexpr ddc::FFT_Normalization FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::m_norm</definition>
+        <argsstring></argsstring>
+        <name>m_norm</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::m_norm</qualifiedname>
+        <initializer>= ddc::FFT_Normalization::BACKWARD</initializer>
+        <briefdescription>
+<para>The normalisation used for the Fourier transform. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="102" column="45" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="102" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1aba6ab0a8643d2c21aa045e0f72913ccd" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>FDim</declname>
+            <defname>FDim</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION DataType</type>
+        <definition>static KOKKOS_FUNCTION DataType FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::get_laplace_operator</definition>
+        <argsstring>(Idx&lt; FDim... &gt; index)</argsstring>
+        <name>get_laplace_operator</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::get_laplace_operator</qualifiedname>
+        <param>
+          <type>Idx&lt; FDim... &gt;</type>
+          <declname>index</declname>
+        </param>
+        <briefdescription>
+<para>The multiplicative factor corresponding to the Laplace operator <formula id="350">$ \Delta $</formula> expressed in Fourier space at a given mode. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>index</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the Fourier mode. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="112" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="112" bodyend="117"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a6c58f80257da3b7d7c5ee0e7943711a6" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Dim</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::differentiate_and_invert_fourier_values</definition>
+        <argsstring>(Field&lt; DataType, laplacian_idx_range_type, memory_space, LayoutSpace &gt; derivative, fourier_field_type fourier_derivative, fourier_field_type values) const</argsstring>
+        <name>differentiate_and_invert_fourier_values</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::differentiate_and_invert_fourier_values</qualifiedname>
+        <param>
+          <type>Field&lt; DataType, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69cd28231ada0e0745a493dabc65fbbd" kindref="member">laplacian_idx_range_type</ref>, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" kindref="member">memory_space</ref>, LayoutSpace &gt;</type>
+          <declname>derivative</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>fourier_derivative</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>Differentiate an expression from its representation in Fourier space by multiplying by -i * k and then converting back to real space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">derivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Field where the derivative will be saved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fourier_derivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The derivative of the function in Fourier space will be saved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Field containing the values of the function in Fourier space.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension along which the expression is differentiated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="130" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="130" bodyend="142"/>
+      </memberdef>
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69160e34a2349192829843c4c75d55a8" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::get_gradient</definition>
+        <argsstring>(Field&lt; DataType, laplacian_idx_range_type, memory_space, LayoutSpace &gt; gradient, fourier_field_type fourier_derivative, fourier_field_type values) const</argsstring>
+        <name>get_gradient</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::get_gradient</qualifiedname>
+        <param>
+          <type>Field&lt; DataType, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69cd28231ada0e0745a493dabc65fbbd" kindref="member">laplacian_idx_range_type</ref>, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" kindref="member">memory_space</ref>, LayoutSpace &gt;</type>
+          <declname>gradient</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>fourier_derivative</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>Get the gradient of a 1D expression from its representation in Fourier space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">gradient</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Field where the derivative will be saved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fourier_derivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The derivative of the function in Fourier space will be saved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Field containing the values of the function in Fourier space. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="151" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="151" bodyend="161"/>
+      </memberdef>
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1aca6044e50df8facb6c4a1c47b398888c" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>Dims</declname>
+            <defname>Dims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::get_gradient</definition>
+        <argsstring>(VectorField&lt; DataType, laplacian_idx_range_type, VectorIndexSet&lt; Dims... &gt;, memory_space, layout_space &gt; gradient, fourier_field_type fourier_derivative, fourier_field_type values) const</argsstring>
+        <name>get_gradient</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::get_gradient</qualifiedname>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">VectorField</ref>&lt; DataType, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69cd28231ada0e0745a493dabc65fbbd" kindref="member">laplacian_idx_range_type</ref>, VectorIndexSet&lt; Dims... &gt;, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" kindref="member">memory_space</ref>, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1abc4582a8142fa98f2fbbd5bc57e055ba" kindref="member">layout_space</ref> &gt;</type>
+          <declname>gradient</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>fourier_derivative</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>Get the gradient of a multi-dimensional expression from its representation in Fourier space. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">gradient</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The <ref refid="classVectorField" kindref="compound">VectorField</ref> where the gradient will be saved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">fourier_derivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The derivative of the function in Fourier space will be saved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Field containing the values of the function in Fourier space. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="171" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="171" bodyend="184"/>
+      </memberdef>
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab913352a4adb796daf364d898cb47993" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::init_fourier_space</definition>
+        <argsstring>(IdxRange&lt; Grid1D &gt; idx_range)</argsstring>
+        <name>init_fourier_space</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::init_fourier_space</qualifiedname>
+        <param>
+          <type>IdxRange&lt; Grid1D &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="187" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="187" bodyend="191"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a9d39cbd5fe6a9f435ec6751e3cf54683" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::solve_poisson_equation</definition>
+        <argsstring>(fourier_field_type intermediate_chunk, Field&lt; DataType, laplacian_idx_range_type, memory_space, Layout &gt; rho) const</argsstring>
+        <name>solve_poisson_equation</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::solve_poisson_equation</qualifiedname>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>intermediate_chunk</declname>
+        </param>
+        <param>
+          <type>Field&lt; DataType, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69cd28231ada0e0745a493dabc65fbbd" kindref="member">laplacian_idx_range_type</ref>, <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" kindref="member">memory_space</ref>, Layout &gt;</type>
+          <declname>rho</declname>
+        </param>
+        <briefdescription>
+<para>A function to solve the Poisson equation in Fourier space This function should be private. It is not due to the inclusion of a KOKKOS_LAMBDA. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">intermediate_chunk</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The solution to the Poisson equation in Fourier space. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rho</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right-hand side of the Poisson equation in Fourier space. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="202" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="202" bodyend="223"/>
+      </memberdef>
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3a6cacb771958ebb2a476c7dc9a83dc7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Dim</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::negative_differentiate_equation</definition>
+        <argsstring>(fourier_field_type derivative, fourier_field_type values) const</argsstring>
+        <name>negative_differentiate_equation</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::negative_differentiate_equation</qualifiedname>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>derivative</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kindref="member">fourier_field_type</ref></type>
+          <declname>values</declname>
+        </param>
+        <briefdescription>
+<para>Differentiate and multiply by -1 an expression in Fourier space by multiplying by -i * k This function should be private. It is not due to the inclusion of a KOKKOS_LAMBDA. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>derivative</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Field where the derivative will be saved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Field containing the values of the function in Fourier space.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension along which the expression is differentiated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="235" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="235" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ad7226b3b5d3048798471a03309f3bef9" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::FFTPoissonSolver</definition>
+        <argsstring>(laplacian_idx_range_type laplacian_idx_range)</argsstring>
+        <name>FFTPoissonSolver</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::FFTPoissonSolver</qualifiedname>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69cd28231ada0e0745a493dabc65fbbd" kindref="member">laplacian_idx_range_type</ref></type>
+          <declname>laplacian_idx_range</declname>
+        </param>
+        <briefdescription>
+<para>A constructor for the FFT Poisson solver. This constructor calls ddc::init_discrete_space so it should only be called once per simulation. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>laplacian_idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the equation should be solved. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="256" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="256" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a08d65e6a86a27a3868c011c5228fd5db" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kindref="member">field_type</ref></type>
+        <definition>virtual field_type FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::operator()</definition>
+        <argsstring>(field_type phi, field_type rho) const final</argsstring>
+        <name>operator()</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kindref="member">field_type</ref></type>
+          <declname>phi</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kindref="member">field_type</ref></type>
+          <declname>rho</declname>
+        </param>
+        <briefdescription>
+<para>An operator which calculates the solution <formula id="191">$\phi$</formula> to Poisson&apos;s equation: <formula id="349">$ - \Delta \phi = \rho $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">phi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The solution to Poisson&apos;s equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rho</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right-hand side of Poisson&apos;s equation.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the solution to Poisson&apos;s equation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="270" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="270" bodyend="297"/>
+      </memberdef>
+      <memberdef kind="function" id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab1df382591495ba2e891e9919ceda487" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kindref="member">field_type</ref></type>
+        <definition>virtual field_type FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::operator()</definition>
+        <argsstring>(field_type phi, vector_field_type E, field_type rho) const final</argsstring>
+        <name>operator()</name>
+        <qualifiedname>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kindref="member">field_type</ref></type>
+          <declname>phi</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a2a9068664c77c3cd987b03d219998583" kindref="member">vector_field_type</ref></type>
+          <declname>E</declname>
+        </param>
+        <param>
+          <type><ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kindref="member">field_type</ref></type>
+          <declname>rho</declname>
+        </param>
+        <briefdescription>
+<para>An operator which calculates the solution <formula id="191">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="349">$ - \Delta \phi = \rho $</formula> <formula id="238">$ E = - \nabla \phi $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">phi</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The solution to Poisson&apos;s equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">E</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The derivative of the solution to Poisson&apos;s equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">rho</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The right-hand side of Poisson&apos;s equation.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to the solution to Poisson&apos;s equation. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="311" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="311" bodyend="341"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to solve the following equation: <formula id="348">$ -\Delta \phi = \rho $</formula> using a Fourier transform. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The implementation of this class can be found at <ref refid="classFFTPoissonSolver" kindref="compound">FFTPoissonSolver</ref>&lt; IdxRange&lt;GridPDEDim1D...&gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;. <anchor id="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1FFTPoissonSolverImplementation"/> <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IdxRangeLaplacian</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the equation is defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeFull</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the operator() acts. This is equal to the IdxRangeLaplacian plus any batched dimensions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ExecSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space (CPU/GPU) where the calculations will take place. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DataType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the data. This controls the precision of the calculations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>LayoutSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The layout space of the Fields passed to operator(). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</label>
+        <link refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, DataType, ExecSpace::memory_space, LayoutSpace &gt;</label>
+        <link refid="classIPoissonSolver"/>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</label>
+        <link refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>IPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, DataType, ExecSpace::memory_space, LayoutSpace &gt;</label>
+        <link refid="classIPoissonSolver"/>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="44" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="51" bodyend="342"/>
+    <listofallmembers>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab61024e1de86010f92daf28a46876b9a" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>base_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab899291c2c8912ae076a8ae890875068" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>batch_idx_range_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a623c8f00032d066a67beed88195b2762" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>batch_index_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a9f3372ba0facbbdf5a3e93b176aa0670" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>const_field_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a6c58f80257da3b7d7c5ee0e7943711a6" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>differentiate_and_invert_fourier_values</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ad7226b3b5d3048798471a03309f3bef9" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>FFTPoissonSolver</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>field_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ae76ab2b968dc0f2e4fee27b9b494821e" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>fourier_field_mem_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>fourier_field_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a84950390da2b18e834edaa5f972d941e" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>fourier_idx_range_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8259a46f7cc09d933b0bfdffdd0181a8" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>fourier_index_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69160e34a2349192829843c4c75d55a8" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>get_gradient</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1aca6044e50df8facb6c4a1c47b398888c" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>get_gradient</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1aba6ab0a8643d2c21aa045e0f72913ccd" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>get_laplace_operator</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab913352a4adb796daf364d898cb47993" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>init_fourier_space</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69cd28231ada0e0745a493dabc65fbbd" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>laplacian_idx_range_type</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1abc4582a8142fa98f2fbbd5bc57e055ba" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>layout_space</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a2b6a386dd0eebfb48a7acfcbb794e8e8" prot="private" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>m_norm</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>memory_space</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3a6cacb771958ebb2a476c7dc9a83dc7" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>negative_differentiate_equation</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a08d65e6a86a27a3868c011c5228fd5db" prot="public" virt="virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>operator()</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab1df382591495ba2e891e9919ceda487" prot="public" virt="virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>operator()</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a9d39cbd5fe6a9f435ec6751e3cf54683" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>solve_poisson_equation</name></member>
+      <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a2a9068664c77c3cd987b03d219998583" prot="public" virt="non-virtual"><scope>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</scope><name>vector_field_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

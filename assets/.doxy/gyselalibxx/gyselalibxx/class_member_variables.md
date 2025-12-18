@@ -139,7 +139,7 @@
 * **m\_quad\_coef** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **m\_spline\_builder** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md), [**GyroAverageOperator**](classGyroAverageOperator.md), [**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **m\_spline\_fem\_evaluator** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
-* **m\_norm** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md))
+* **m\_norm** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05.md))
 * **m\_integrate\_v** ([**FluidMoments**](classFluidMoments.md))
 * **m\_cell\_lengths** ([**GaussLegendre**](classGaussLegendre.md))
 * **m\_glc** ([**GaussLegendre**](classGaussLegendre.md))
@@ -324,7 +324,7 @@
 ## u
 
 * **uniform\_edge\_v** ([**CollisionsIntra**](classCollisionsIntra.md))
-* **using\_vector\_field** ([**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md))
+* **using\_vector\_field** ([**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md))
 
 
 ## v

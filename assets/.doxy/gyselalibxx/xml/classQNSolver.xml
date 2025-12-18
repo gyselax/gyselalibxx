@@ -6,9 +6,9 @@
     <basecompoundref refid="classIQNSolver" prot="public" virt="non-virtual">IQNSolver</basecompoundref>
     <includes refid="geometryXVx_2poisson_2qnsolver_8hpp" local="no">qnsolver.hpp</includes>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classQNSolver_1a6447567016ca2420c44ca68c93359e7f" prot="private" static="no">
-        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRangeX, IdxRangeX, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
-        <definition>using QNSolver::PoissonSolver =  IPoissonSolver&lt; IdxRangeX, IdxRangeX, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
+      <memberdef kind="typedef" id="classQNSolver_1a1f8cb21459b0c3214b26d351382967d6" prot="private" static="no">
+        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRangeX, IdxRangeX, double, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
+        <definition>using QNSolver::PoissonSolver =  IPoissonSolver&lt; IdxRangeX, IdxRangeX, double, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
         <argsstring></argsstring>
         <name>PoissonSolver</name>
         <qualifiedname>QNSolver::PoissonSolver</qualifiedname>
@@ -18,11 +18,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classQNSolver_1afd497ed74760ba783f099dff65865448" prot="private" static="no">
-        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRangeXY, IdxRangeXY, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
-        <definition>using QNSolver::PoissonSolver =  IPoissonSolver&lt; IdxRangeXY, IdxRangeXY, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
+      <memberdef kind="typedef" id="classQNSolver_1a44f5aa907ef5fd0a7d74c639a3cafdcc" prot="private" static="no">
+        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRangeXY, IdxRangeXY, double, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
+        <definition>using QNSolver::PoissonSolver =  IPoissonSolver&lt; IdxRangeXY, IdxRangeXY, double, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
         <argsstring></argsstring>
         <name>PoissonSolver</name>
         <qualifiedname>QNSolver::PoissonSolver</qualifiedname>
@@ -32,7 +32,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -48,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="28" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="28" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="29" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classQNSolver_1acb8175fc24afa3b213cf20e11aa4135e" prot="private" static="no" mutable="no">
         <type><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref> const  &amp;</type>
@@ -62,7 +62,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="29" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="29" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="30" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.cpp" bodystart="13" bodyend="17"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.cpp" bodystart="13" bodyend="17"/>
       </memberdef>
       <memberdef kind="function" id="classQNSolver_1afbc0b4cd0f70f63c93dc6d8c540a2d9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -119,7 +119,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="40" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="41" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classQNSolver_1a866ea0a8cd34e7789d8847aaf963fdf2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -173,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="49" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.cpp" bodystart="19" bodyend="35"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="50" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.cpp" bodystart="19" bodyend="35"/>
       </memberdef>
       <memberdef kind="function" id="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -214,7 +214,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="38" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="39" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classQNSolver_1afbc0b4cd0f70f63c93dc6d8c540a2d9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -228,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="40" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="41" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classQNSolver_1aa32f5284dd9ce1e47665705cb7783268" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>void</type>
@@ -282,7 +282,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="49" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.cpp" bodystart="21" bodyend="38"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.hpp" line="50" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/qnsolver.cpp" bodystart="21" bodyend="38"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -322,15 +322,15 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="22" bodyend="53"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="22" bodyend="54"/>
     <listofallmembers>
       <member refid="classQNSolver_1acb8175fc24afa3b213cf20e11aa4135e" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>m_compute_rho</name></member>
       <member refid="classQNSolver_1a477aa8a214b2de0f9c73797237a8e2aa" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>m_solve_poisson</name></member>
       <member refid="classQNSolver_1a866ea0a8cd34e7789d8847aaf963fdf2" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
       <member refid="classQNSolver_1aa32f5284dd9ce1e47665705cb7783268" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>QNSolver</scope><name>operator()</name></member>
-      <member refid="classQNSolver_1a6447567016ca2420c44ca68c93359e7f" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
-      <member refid="classQNSolver_1afd497ed74760ba783f099dff65865448" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
+      <member refid="classQNSolver_1a1f8cb21459b0c3214b26d351382967d6" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
+      <member refid="classQNSolver_1a44f5aa907ef5fd0a7d74c639a3cafdcc" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
       <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>QNSolver</name></member>
       <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>QNSolver</name></member>
       <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>QNSolver</scope><name>~IQNSolver</name></member>

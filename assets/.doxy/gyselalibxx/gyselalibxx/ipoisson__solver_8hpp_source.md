@@ -10,18 +10,27 @@
 ```C++
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "vector_field.hpp"
 
-template <class IdxRangeLaplacian, class IdxRangeFull, class MemorySpace, class LayoutSpace>
+template <
+        class IdxRangeLaplacian,
+        class IdxRangeFull,
+        class DataType,
+        class MemorySpace,
+        class LayoutSpace>
 class IPoissonSolver;
 
-template <class... ODims, class IdxRangeFull, class MemorySpace, class LayoutSpace>
-class IPoissonSolver<IdxRange<ODims...>, IdxRangeFull, MemorySpace, LayoutSpace>
+template <class... ODims, class IdxRangeFull, class DataType, class MemorySpace, class LayoutSpace>
+class IPoissonSolver<IdxRange<ODims...>, IdxRangeFull, DataType, MemorySpace, LayoutSpace>
 {
+    static_assert(std::is_floating_point_v<DataType>);
+
 protected:
     using real_laplacian_tags = ddc::detail::TypeSeq<typename ODims::continuous_dimension_type...>;
     using laplacian_tags = ddc::detail::TypeSeq<ODims...>;
@@ -32,13 +41,13 @@ protected:
     static constexpr bool using_vector_field = ddc::type_seq_size_v<laplacian_tags> == 1;
 
 public:
-    using field_type = DField<IdxRangeFull, MemorySpace, LayoutSpace>;
-    using const_field_type = DConstField<IdxRangeFull, MemorySpace, LayoutSpace>;
+    using field_type = Field<DataType, IdxRangeFull, MemorySpace, LayoutSpace>;
+    using const_field_type = ConstField<DataType, IdxRangeFull, MemorySpace, LayoutSpace>;
 
     using vector_field_type = std::conditional_t<
             ddc::type_seq_size_v<laplacian_tags> == 1,
             field_type,
-            VectorField<double, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace>>;
+            VectorField<DataType, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace>>;
 
     using batch_idx_range_type =
             typename ddc::detail::convert_type_seq_to_discrete_domain_t<batch_tags>;

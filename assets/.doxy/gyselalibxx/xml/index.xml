@@ -939,7 +939,7 @@
     <member refid="structconnectivity__details_1_1ExtractPatches_3_01ddc_1_1detail_1_1TypeSeq_3_4_01_4_1aa57353c6b14c5fd23369d18288cabd0f" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classFEM1DPoissonSolver" kind="class"><name>FEM1DPoissonSolver</name>
-    <member refid="classFEM1DPoissonSolver_1ae72ab2e5b64445de5e2c0531980001ee" kind="typedef"><name>base_type</name></member>
+    <member refid="classFEM1DPoissonSolver_1abd121b7703ab869429b495621e9ee71e" kind="typedef"><name>base_type</name></member>
     <member refid="classFEM1DPoissonSolver_1ac3585af9f6f9c57b12522973b627456b" kind="typedef"><name>GridPDEDim</name></member>
     <member refid="classFEM1DPoissonSolver_1aaa145db2d81b4cc136e030ad1e33cede" kind="typedef"><name>InputBSplines</name></member>
     <member refid="classFEM1DPoissonSolver_1a3cde62a94a482b5aedce9339cc942355" kind="typedef"><name>PDEDim</name></member>
@@ -997,31 +997,31 @@
   </compound>
   <compound refid="classFFTPoissonSolver" kind="class"><name>FFTPoissonSolver</name>
   </compound>
-  <compound refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4" kind="class"><name>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;</name>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a746cbac253520a6228d15ab8c1cc2e78" kind="typedef"><name>base_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a7cdff0d96a3b6bee16f632dd1cb3d4a6" kind="typedef"><name>field_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1af39085e61fa32cc40b8f2c307df46c51" kind="typedef"><name>const_field_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a2d76127e84d96dc4533c9933123f25a8" kind="typedef"><name>vector_field_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1aae2873b9f545451d922b8be6d810b51d" kind="typedef"><name>batch_idx_range_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a57925644a54843c6f325e30013b1a646" kind="typedef"><name>batch_index_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1af83b239c2f9ffce4663b0210488b5cc0" kind="typedef"><name>laplacian_idx_range_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a3a64a6ecef7debc55b0e7acefcb4a8e1" kind="typedef"><name>layout_space</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a6e31dd601d961ee711979be414fd2036" kind="typedef"><name>memory_space</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a03297d4504878bc4e3b4a858cb51b200" kind="typedef"><name>fourier_idx_range_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1ab12b55b0f5ea7fda912b72de4e3f3178" kind="typedef"><name>fourier_index_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a8590dd393f09bf3381a6f81ff8ab0034" kind="typedef"><name>fourier_field_mem_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1ac0bc6c14fcb18c5426da0c57a1758115" kind="typedef"><name>fourier_field_type</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a1a700307ec458dcfc4c57782e1fff80d" kind="variable"><name>m_norm</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1ac1b92352200434f9e10ed9673669def3" kind="function"><name>get_laplace_operator</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1aab8e969820cf5659fd6b0d9844b22493" kind="function"><name>differentiate_and_invert_fourier_values</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a7a0af1bea8767ef1945dfad5c31ebda6" kind="function"><name>get_gradient</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a8eeed51a032ce55c95251e3b143d0e57" kind="function"><name>get_gradient</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a583fa6c43f6748a92fbd20582c382c08" kind="function"><name>init_fourier_space</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a18dfb44f63e620c688742c15de99e207" kind="function"><name>solve_poisson_equation</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1ae7398f552996b17d7ee0493288d2281d" kind="function"><name>negative_differentiate_equation</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a362273a31c591d4d99fae6e665bcea95" kind="function"><name>FFTPoissonSolver</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a4bb7415769d706c9b48d3a66efd76c71" kind="function"><name>operator()</name></member>
-    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1a852a2a09220eabd3122cec7c741cacb2" kind="function"><name>operator()</name></member>
+  <compound refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05" kind="class"><name>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;</name>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab61024e1de86010f92daf28a46876b9a" kind="typedef"><name>base_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1afaa61ef863b3844fbdab92c1714a8d6c" kind="typedef"><name>field_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a9f3372ba0facbbdf5a3e93b176aa0670" kind="typedef"><name>const_field_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a2a9068664c77c3cd987b03d219998583" kind="typedef"><name>vector_field_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab899291c2c8912ae076a8ae890875068" kind="typedef"><name>batch_idx_range_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a623c8f00032d066a67beed88195b2762" kind="typedef"><name>batch_index_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69cd28231ada0e0745a493dabc65fbbd" kind="typedef"><name>laplacian_idx_range_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1abc4582a8142fa98f2fbbd5bc57e055ba" kind="typedef"><name>layout_space</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8678cd84ae8a568162a37353ea4a68cb" kind="typedef"><name>memory_space</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a84950390da2b18e834edaa5f972d941e" kind="typedef"><name>fourier_idx_range_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a8259a46f7cc09d933b0bfdffdd0181a8" kind="typedef"><name>fourier_index_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ae76ab2b968dc0f2e4fee27b9b494821e" kind="typedef"><name>fourier_field_mem_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3ebf5fde59c67493e4c23e76ee87e811" kind="typedef"><name>fourier_field_type</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a2b6a386dd0eebfb48a7acfcbb794e8e8" kind="variable"><name>m_norm</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1aba6ab0a8643d2c21aa045e0f72913ccd" kind="function"><name>get_laplace_operator</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a6c58f80257da3b7d7c5ee0e7943711a6" kind="function"><name>differentiate_and_invert_fourier_values</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a69160e34a2349192829843c4c75d55a8" kind="function"><name>get_gradient</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1aca6044e50df8facb6c4a1c47b398888c" kind="function"><name>get_gradient</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab913352a4adb796daf364d898cb47993" kind="function"><name>init_fourier_space</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a9d39cbd5fe6a9f435ec6751e3cf54683" kind="function"><name>solve_poisson_equation</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a3a6cacb771958ebb2a476c7dc9a83dc7" kind="function"><name>negative_differentiate_equation</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ad7226b3b5d3048798471a03309f3bef9" kind="function"><name>FFTPoissonSolver</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1a08d65e6a86a27a3868c011c5228fd5db" kind="function"><name>operator()</name></member>
+    <member refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1ab1df382591495ba2e891e9919ceda487" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1FindInterface" kind="struct"><name>connectivity_details::FindInterface</name>
   </compound>
@@ -1141,7 +1141,7 @@
     <member refid="classGradient_1a91c56b0cb7dc0ec63a708029db468ab4" kind="function"><name>operator()</name></member>
     <member refid="classGradient_1add6ab7bc7357e5b74821190bc43fc6b5" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087" kind="struct"><name>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;::GridFourier</name>
+  <compound refid="structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8" kind="struct"><name>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::GridFourier</name>
   </compound>
   <compound refid="structGridMom" kind="struct"><name>GridMom</name>
   </compound>
@@ -1457,22 +1457,22 @@
   </compound>
   <compound refid="classIPoissonSolver" kind="class"><name>IPoissonSolver</name>
   </compound>
-  <compound refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4" kind="class"><name>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</name>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aa8332067967bee2e535b4158a0d9bdb8" kind="typedef"><name>real_laplacian_tags</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a2ee3de31e4bb321921624b0eb74f983e" kind="typedef"><name>laplacian_tags</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a5b96ecb99d32270b694bed7dc17e9b0e" kind="typedef"><name>space_tags</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a0cf31517780ca1f0bf128b9f8ee7965c" kind="typedef"><name>batch_tags</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aa2c395a9fd1033e93f3dbfdb802c04d1" kind="typedef"><name>field_type</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a1ba928089033949f1a0843dc2851a6d9" kind="typedef"><name>const_field_type</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1ac23df235b93e557a6eb8abc982564752" kind="typedef"><name>vector_field_type</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1af2b619a1d1d9cadfa799ba43d03f941e" kind="typedef"><name>batch_idx_range_type</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a308ca37f6829b93d4dc979fc14cf2923" kind="typedef"><name>batch_index_type</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a17fd9c8dbfd114f1feb3d8d9e0afb7ab" kind="typedef"><name>laplacian_idx_range_type</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1ada3c2ef2dec6dcde01a226cf26f159ab" kind="typedef"><name>layout_space</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a046f460b054830adfceecc5fe36582ae" kind="typedef"><name>memory_space</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1a40c5df7afd1c779c57b27d3d5fec93ab" kind="variable"><name>using_vector_field</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1aceeef36c98f8db8338a170049e81d624" kind="function"><name>operator()</name></member>
-    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4_1ab446c64f8dd8b13fe58964cf7821be05" kind="function"><name>operator()</name></member>
+  <compound refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4" kind="class"><name>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</name>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1aad16a630618b07e40a00054d24a8a520" kind="typedef"><name>real_laplacian_tags</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a42762d3d2a291b678b4c6af816c62a47" kind="typedef"><name>laplacian_tags</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a6056ba7891398a579f641af48b2479c4" kind="typedef"><name>space_tags</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a64246c0ee0f24f946266d50f8111837c" kind="typedef"><name>batch_tags</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a70c15e18ae75e7dfd779de53699f2983" kind="typedef"><name>field_type</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a7d2c3b92119407afe38cca3ad5a7ae09" kind="typedef"><name>const_field_type</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a8d449bec424d93bb4197505651f90f8d" kind="typedef"><name>vector_field_type</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a9d8812f0988c0eebc67811306b48d63b" kind="typedef"><name>batch_idx_range_type</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1afab09b47929744ec0afb693a75182ff4" kind="typedef"><name>batch_index_type</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a41b18252639f9df30968dfb3345ba9e0" kind="typedef"><name>laplacian_idx_range_type</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a9d1e6a8ef85ce47ef70fafef928aaee6" kind="typedef"><name>layout_space</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a4eb935a1204bafa19536bf67ef8d47d8" kind="typedef"><name>memory_space</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1adaf2eea84d90f1ee2ca492ff82b307a2" kind="variable"><name>using_vector_field</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a852ddf85594a81687d8340ecf5ba65aa" kind="function"><name>operator()</name></member>
+    <member refid="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4_1a70e023a67a506e72dab7b727ae5deab4" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIPolarFootFinder" kind="class"><name>IPolarFootFinder</name>
     <member refid="classIPolarFootFinder_1a51e91cc4664a2e74009c09a44cbe61fe" kind="typedef"><name>GridR</name></member>
@@ -2396,8 +2396,8 @@
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::QDimThetaMesh</name>
   </compound>
   <compound refid="classQNSolver" kind="class"><name>QNSolver</name>
-    <member refid="classQNSolver_1a6447567016ca2420c44ca68c93359e7f" kind="typedef"><name>PoissonSolver</name></member>
-    <member refid="classQNSolver_1afd497ed74760ba783f099dff65865448" kind="typedef"><name>PoissonSolver</name></member>
+    <member refid="classQNSolver_1a1f8cb21459b0c3214b26d351382967d6" kind="typedef"><name>PoissonSolver</name></member>
+    <member refid="classQNSolver_1a44f5aa907ef5fd0a7d74c639a3cafdcc" kind="typedef"><name>PoissonSolver</name></member>
     <member refid="classQNSolver_1a477aa8a214b2de0f9c73797237a8e2aa" kind="variable"><name>m_solve_poisson</name></member>
     <member refid="classQNSolver_1acb8175fc24afa3b213cf20e11aa4135e" kind="variable"><name>m_compute_rho</name></member>
     <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" kind="function"><name>QNSolver</name></member>

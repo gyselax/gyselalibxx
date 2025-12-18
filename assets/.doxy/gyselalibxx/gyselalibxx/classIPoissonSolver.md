@@ -2,7 +2,7 @@
 
 # Class IPoissonSolver
 
-**template &lt;class IdxRangeLaplacian, class IdxRangeFull, class MemorySpace, class LayoutSpace&gt;**
+**template &lt;class IdxRangeLaplacian, class IdxRangeFull, class DataType, class MemorySpace, class LayoutSpace&gt;**
 
 
 

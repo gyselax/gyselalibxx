@@ -10,6 +10,7 @@
 
 
 
+* `#include <type_traits>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
@@ -33,7 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md) &lt;ODims, class IdxRangeFull, class MemorySpace, class LayoutSpace&gt;<br> |
+| class | [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md) &lt;ODims, class IdxRangeFull, class DataType, class MemorySpace, class LayoutSpace&gt;<br> |
 
 
 

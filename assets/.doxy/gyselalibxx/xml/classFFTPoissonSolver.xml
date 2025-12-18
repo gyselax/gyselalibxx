@@ -15,6 +15,10 @@
         <defval>Kokkos::DefaultExecutionSpace</defval>
       </param>
       <param>
+        <type>class DataType</type>
+        <defval>double</defval>
+      </param>
+      <param>
         <type>class LayoutSpace</type>
         <defval>Kokkos::layout_right</defval>
       </param>
@@ -22,9 +26,9 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para>See <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4_1FFTPoissonSolverImplementation" kindref="member">FFTPoissonSolverImplementation</ref>. </para>
+<para>See <ref refid="classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05_1FFTPoissonSolverImplementation" kindref="member">FFTPoissonSolverImplementation</ref>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="20" bodyend="-1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp" bodystart="21" bodyend="-1"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

@@ -59,8 +59,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) _The grid of quadrature points along the PDEDim direction._ 
     * **struct** [**HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) 
 * **class** [**FFTPoissonSolver**](classFFTPoissonSolver.md) 
-* **class** [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md) _A class to solve the following equation:_ \(-\Delta \phi = \rho\) _using a Fourier transform._    
-    * **struct** [**GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087.md) 
+* **class** [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05.md) _A class to solve the following equation:_ \(-\Delta \phi = \rho\) _using a Fourier transform._    
+    * **struct** [**GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8.md) 
 * **class** [**FluidMoments**](classFluidMoments.md) _A class that computes fluid moments of the distribution function._     
     * **struct** [**MomentDensity**](structFluidMoments_1_1MomentDensity.md) 
     * **struct** [**MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) 
@@ -98,7 +98,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**IPartialDerivative**](classIPartialDerivative.md) _An abstract class for a partial derivative operator._     
 * **class** [**IPartialDerivativeCreator**](classIPartialDerivativeCreator.md) _An abstract class which provides a create\_instance function to instantiate an object of the_ [_**IPartialDerivative**_](classIPartialDerivative.md) _class where required._    
 * **class** [**IPoissonSolver**](classIPoissonSolver.md) 
-* **class** [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md)     
+* **class** [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md)     
 * **class** [**IPolarFootFinder**](classIPolarFootFinder.md) _Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_ \((r,\theta)\) _plane)._    
 * **class** [**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md) _A class which provides access to an interpolating function which can be preallocated where useful._     
 * **class** [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md) _A class which provides access to an interpolating function which can be preallocated where useful._     

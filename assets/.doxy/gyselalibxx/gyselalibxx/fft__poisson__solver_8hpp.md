@@ -36,8 +36,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_00_01LayoutSpace_01_4.md) &lt;GridPDEDim1D, class IdxRangeFull, class ExecSpace, class LayoutSpace&gt;<br>_A class to solve the following equation:_ \(-\Delta \phi = \rho\) _using a Fourier transform._ |
-| struct | [**GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace2aeecfe91d464f5738599cc105fb6087.md) &lt;class Dim&gt;<br> |
+| class | [**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05.md) &lt;GridPDEDim1D, class IdxRangeFull, class ExecSpace, class DataType, class LayoutSpace&gt;<br>_A class to solve the following equation:_ \(-\Delta \phi = \rho\) _using a Fourier transform._ |
+| struct | [**GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8.md) &lt;class Dim&gt;<br> |
 
 
 

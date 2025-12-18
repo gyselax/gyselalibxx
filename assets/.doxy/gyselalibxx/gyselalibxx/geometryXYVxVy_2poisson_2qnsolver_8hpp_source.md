@@ -21,6 +21,7 @@ class QNSolver : public IQNSolver
     using PoissonSolver = IPoissonSolver<
             IdxRangeXY,
             IdxRangeXY,
+            double,
             typename Kokkos::DefaultExecutionSpace::memory_space,
             Kokkos::layout_right>;
     PoissonSolver const& m_solve_poisson;

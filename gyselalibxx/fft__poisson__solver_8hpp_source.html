@@ -566,14 +566,21 @@ template &lt;
         class IdxRangeLaplacian,
         class IdxRangeFull = IdxRangeLaplacian,
         class ExecSpace = Kokkos::DefaultExecutionSpace,
+        class DataType = double,
         class LayoutSpace = Kokkos::layout_right&gt;
 class FFTPoissonSolver;
 
-template &lt;class... GridPDEDim1D, class IdxRangeFull, class ExecSpace, class LayoutSpace&gt;
-class FFTPoissonSolver&lt;IdxRange&lt;GridPDEDim1D...&gt;, IdxRangeFull, ExecSpace, LayoutSpace&gt;
+template &lt;
+        class... GridPDEDim1D,
+        class IdxRangeFull,
+        class ExecSpace,
+        class DataType,
+        class LayoutSpace&gt;
+class FFTPoissonSolver&lt;IdxRange&lt;GridPDEDim1D...&gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace&gt;
     : public IPoissonSolver&lt;
               IdxRange&lt;GridPDEDim1D...&gt;,
               IdxRangeFull,
+              DataType,
               typename ExecSpace::memory_space,
               LayoutSpace&gt;
 {
@@ -581,6 +588,7 @@ private:
     using base_type = IPoissonSolver&lt;
             IdxRange&lt;GridPDEDim1D...&gt;,
             IdxRangeFull,
+            DataType,
             typename ExecSpace::memory_space,
             LayoutSpace&gt;;
 
@@ -609,7 +617,7 @@ public:
     using fourier_index_type = typename fourier_idx_range_type::discrete_element_type;
 
     using fourier_field_mem_type
-            = FieldMem&lt;Kokkos::complex&lt;double&gt;, fourier_idx_range_type, memory_space&gt;;
+            = FieldMem&lt;Kokkos::complex&lt;DataType&gt;, fourier_idx_range_type, memory_space&gt;;
     using fourier_field_type = typename fourier_field_mem_type::span_type;
 
 private:
@@ -617,16 +625,16 @@ private:
 
 private:
     template &lt;class... FDim&gt;
-    KOKKOS_FUNCTION static double get_laplace_operator(Idx&lt;FDim...&gt; index)
+    KOKKOS_FUNCTION static DataType get_laplace_operator(Idx&lt;FDim...&gt; index)
     {
-        return (((double)ddc::coordinate(ddc::select&lt;FDim&gt;(index))
-                 * (double)ddc::coordinate(ddc::select&lt;FDim&gt;(index)))
+        return (((DataType)ddc::coordinate(ddc::select&lt;FDim&gt;(index))
+                 * (DataType)ddc::coordinate(ddc::select&lt;FDim&gt;(index)))
                 + ...);
     }
 
     template &lt;class Dim&gt;
     void differentiate_and_invert_fourier_values(
-            DField&lt;laplacian_idx_range_type, memory_space, LayoutSpace&gt; derivative,
+            Field&lt;DataType, laplacian_idx_range_type, memory_space, LayoutSpace&gt; derivative,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -640,7 +648,7 @@ private:
     }
 
     void get_gradient(
-            DField&lt;laplacian_idx_range_type, memory_space, LayoutSpace&gt; gradient,
+            Field&lt;DataType, laplacian_idx_range_type, memory_space, LayoutSpace&gt; gradient,
             fourier_field_type fourier_derivative,
             fourier_field_type values) const
     {
@@ -654,7 +662,7 @@ private:
     template &lt;class... Dims&gt;
     void get_gradient(
             VectorField&lt;
-                    double,
+                    DataType,
                     laplacian_idx_range_type,
                     VectorIndexSet&lt;Dims...&gt;,
                     memory_space,
@@ -678,7 +686,7 @@ public:
     template &lt;class Layout&gt;
     void solve_poisson_equation(
             fourier_field_type intermediate_chunk,
-            DField&lt;laplacian_idx_range_type, memory_space, Layout&gt; rho) const
+            Field&lt;DataType, laplacian_idx_range_type, memory_space, Layout&gt; rho) const
     {
         // Compute FFT(rho)
         ddc::fft(ExecSpace(), intermediate_chunk, rho, ddc::kwArgs_fft {m_norm});
@@ -703,13 +711,13 @@ public:
     void negative_differentiate_equation(fourier_field_type derivative, fourier_field_type values)
             const
     {
-        Kokkos::complex&lt;double&gt; imaginary_unit(0.0, 1.0);
+        Kokkos::complex&lt;DataType&gt; imaginary_unit(0.0, 1.0);
         ddc::parallel_for_each(
                 ExecSpace(),
                 get_idx_range(values),
                 KOKKOS_LAMBDA(fourier_index_type const ik) {
                     Idx&lt;Dim&gt; const ikx = ddc::select&lt;Dim&gt;(ik);
-                    derivative(ik) = -imaginary_unit * ddc::coordinate(ikx) * values(ik);
+                    derivative(ik) = -imaginary_unit * (DataType)ddc::coordinate(ikx) * values(ik);
                 });
     }
 
