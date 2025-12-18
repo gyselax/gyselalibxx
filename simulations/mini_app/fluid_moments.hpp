@@ -37,9 +37,9 @@ public:
      * @param[in] integrate_vparmu A quadrature method which integrates over the velocity space (vpar, mu).
      */
     explicit FluidMoments(Quadrature<
-                 IdxRangeVparMu,
-                 IdxRangeSpTor3DV2D,
-                 Kokkos::DefaultExecutionSpace::memory_space> integrate_vparmu);
+                          IdxRangeVparMu,
+                          IdxRangeSpTor3DV2D,
+                          Kokkos::DefaultExecutionSpace::memory_space> integrate_vparmu);
 
     ~FluidMoments() = default;
 
