@@ -314,7 +314,7 @@ void test_polar_spline_eval_gpu()
     auto derivs_1_host = ddc::create_mirror_view_and_copy(get_field(derivs_1));
     auto derivs_2_host = ddc::create_mirror_view_and_copy(get_field(derivs_2));
 
-    ddc::for_each(interpolation_idx_range, [&](Idx<GridR, GridTheta> idx) {
+    ddc::host_for_each(interpolation_idx_range, [&](Idx<GridR, GridTheta> idx) {
         EXPECT_NEAR(vals_host(idx), 1.0, 1.0e-14);
         EXPECT_NEAR(derivs_1_host(idx), 0.0, 1.0e-13);
         EXPECT_NEAR(derivs_2_host(idx), 0.0, 1.0e-13);

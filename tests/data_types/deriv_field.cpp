@@ -83,9 +83,8 @@ TEST(DerivFieldMemTest, Constructor1Deriv)
     DFieldMemXY_dX dxField(idx_range_x_y, deriv_idx_range_x);
 
     // Ensure that the internal field has the expected type
-    constexpr bool same = std::is_same_v<
-            typename DFieldMemXY_dX::chunk_type,
-            host_t<DFieldMem<IdxRange<dX, GridX, GridY>>>>;
+    constexpr bool same = std::
+            is_same_v<typename DFieldMemXY_dX::chunk_type, DFieldMem<IdxRange<dX, GridX, GridY>>>;
     EXPECT_TRUE(same);
 }
 
@@ -103,8 +102,7 @@ TEST(DerivFieldMemTest, Constructor2Deriv)
     DFieldMemXY_dXdY dxdyField(idx_range_x_y, deriv_idx_range_x, deriv_idx_range_y);
 
     // Ensure that the internal field has the expected type
-    bool same = std::
-            is_same_v<typename DFieldMemXY_dXdY::chunk_type, host_t<DFieldMem<IdxRange_dXdYXY>>>;
+    bool same = std::is_same_v<typename DFieldMemXY_dXdY::chunk_type, DFieldMem<IdxRange_dXdYXY>>;
     EXPECT_TRUE(same);
 }
 
@@ -124,7 +122,7 @@ TEST(DerivFieldTest, Constructor1Deriv)
     DFieldXY_dX dxField(dxField_alloc);
 
     // Ensure that the internal field has the expected type
-    bool same = std::is_same_v<DFieldXY_dX::chunk_type, host_t<DField<IdxRange<dX, GridX, GridY>>>>;
+    bool same = std::is_same_v<DFieldXY_dX::chunk_type, DField<IdxRange<dX, GridX, GridY>>>;
     EXPECT_TRUE(same);
 }
 
@@ -145,7 +143,7 @@ TEST(DerivFieldTest, Constructor2Deriv)
     DFieldXY_dXdY dxdyField(dxdyField_alloc);
 
     // Ensure that the internal field has the expected type
-    bool same = std::is_same_v<DFieldXY_dXdY::chunk_type, host_t<DField<IdxRange_dXdYXY>>>;
+    bool same = std::is_same_v<DFieldXY_dXdY::chunk_type, DField<IdxRange_dXdYXY>>;
     EXPECT_TRUE(same);
 }
 
@@ -164,6 +162,12 @@ TEST(DerivFieldTest, FieldValueAccess)
 
     // Check that the index range of the values matches the expected index range
     EXPECT_EQ(idx_range_x_y, get_idx_range(dxdyField.get_values_field()));
+
+    // Define the field
+    DerivField<double, IdxRange_dXdYXY> const dxdyField_const_copy(dxdyField_alloc);
+
+    // Check that the index range of the values matches the expected index range
+    EXPECT_EQ(idx_range_x_y, get_idx_range(dxdyField_const_copy.get_values_field()));
 }
 
 // Test if the values of the function can be accessed via the constant get_values_field function
@@ -181,6 +185,12 @@ TEST(DerivFieldTest, ViewValueAccess)
 
     // Check that the index range of the values matches the expected index range
     EXPECT_EQ(idx_range_x_y, get_idx_range(dxdyField.get_values_field()));
+
+    // Define the field
+    DerivConstField<double, IdxRange_dXdYXY> const dxdyField_const_copy(dxdyField_alloc);
+
+    // Check that the index range of the values matches the expected index range
+    EXPECT_EQ(idx_range_x_y, get_idx_range(dxdyField_const_copy.get_values_field()));
 }
 
 
@@ -274,6 +284,19 @@ TEST(DerivFieldTest, derivFieldValueAccess)
     EXPECT_EQ(dx_idx_range, slice_dx_idx_range);
     EXPECT_EQ(dy_idx_range, slice_dy_idx_range);
     EXPECT_EQ(dx_dy_idx_range, slice_dx_dy_idx_range);
+
+    // Define a const copy of the field
+    DerivField<double, IdxRange_dXdYXY> const dxdyField_const_copy(dxdyField_alloc);
+
+    // Collect the index range of the sliced fields
+    slice_dx_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dx]);
+    slice_dy_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dy]);
+    slice_dx_dy_idx_range = get_idx_range(dxdyField_const_copy[slice_idx_dx_dy]);
+
+    // Check that the index ranges are as expected
+    EXPECT_EQ(dx_idx_range, slice_dx_idx_range);
+    EXPECT_EQ(dy_idx_range, slice_dy_idx_range);
+    EXPECT_EQ(dx_dy_idx_range, slice_dx_dy_idx_range);
 }
 
 // Test the element-wise operator
@@ -284,10 +307,10 @@ TEST(DerivFieldTest, ElementAccess)
     IdxRangeSlice<GridY> deriv_idx_range_y(idx_range_y.front(), IdxStepY(2), idx_range_y.extents());
 
     // Define a field memory allocation on x-y with 3 derivatives in x and y
-    DerivFieldMem<int, IdxRange_dXdYXY, 3>
+    host_t<DerivFieldMem<int, IdxRange_dXdYXY, 3>>
             dxdyField_alloc(idx_range_x_y, deriv_idx_range_x, deriv_idx_range_y);
     // Define the field
-    DerivField<int, IdxRange_dXdYXY> dxdyField(dxdyField_alloc);
+    host_t<DerivField<int, IdxRange_dXdYXY>> dxdyField(dxdyField_alloc);
 
     // A subset  of the x-derivatives to be retrieved with get_mdspan
     IdxRange<dX> x_deriv_block(Idx<dX>(1), IdxStep<dX>(2));
@@ -307,7 +330,7 @@ TEST(DerivFieldTest, ElementAccess)
 
     Idx<dX, dY> no_deriv_idx(0, 0);
     // Fill the mdspan with values
-    ddc::for_each(idx_range_x_y, [&](Idx<GridX, GridY> idx_x_y) {
+    ddc::host_for_each(idx_range_x_y, [&](Idx<GridX, GridY> idx_x_y) {
         vals(ddc::select<GridX>(idx_x_y) - idx_range_x.front(),
              ddc::select<GridY>(idx_x_y) - idx_range_y.front())
                 = example_grid(Idx_dXdYXY(idx_x_y, no_deriv_idx));
@@ -324,8 +347,8 @@ TEST(DerivFieldTest, ElementAccess)
     Idx<dY> no_deriv_idx_y(0);
     // Fill the mdspan with values
     for (IdxX idx_x : deriv_idx_range_x) {
-        ddc::for_each(idx_range_y, [&](IdxY idx_y) {
-            ddc::for_each(x_deriv_block, [&](Idx<dX> idx_dx) {
+        ddc::host_for_each(idx_range_y, [&](IdxY idx_y) {
+            ddc::host_for_each(x_deriv_block, [&](Idx<dX> idx_dx) {
                 dx_vals(idx_dx - x_deriv_block.front(),
                         deriv_idx_range_x.distance_from_front(idx_x).value(),
                         idx_y - idx_range_y.front())
@@ -345,8 +368,8 @@ TEST(DerivFieldTest, ElementAccess)
     Idx<dX> no_deriv_idx_x(0);
     // Fill the mdspan with values
     for (IdxY idx_y : deriv_idx_range_y) {
-        ddc::for_each(idx_range_x, [&](IdxX idx_x) {
-            ddc::for_each(y_deriv_block, [&](Idx<dY> idx_dy) {
+        ddc::host_for_each(idx_range_x, [&](IdxX idx_x) {
+            ddc::host_for_each(y_deriv_block, [&](Idx<dY> idx_dy) {
                 dy_vals(idx_dy - y_deriv_block.front(),
                         idx_x - idx_range_x.front(),
                         deriv_idx_range_y.distance_from_front(idx_y).value())
@@ -365,8 +388,8 @@ TEST(DerivFieldTest, ElementAccess)
     EXPECT_EQ(dx_dy_vals.extent(3), deriv_idx_range_y.size());
 
     // Fill the mdspan with values
-    ddc::for_each(x_deriv_block, [&](Idx<dX> idx_dx) {
-        ddc::for_each(y_deriv_block, [&](Idx<dY> idx_dy) {
+    ddc::host_for_each(x_deriv_block, [&](Idx<dX> idx_dx) {
+        ddc::host_for_each(y_deriv_block, [&](Idx<dY> idx_dy) {
             for (IdxX idx_x : deriv_idx_range_x) {
                 for (IdxY idx_y : deriv_idx_range_y) {
                     dx_dy_vals(
@@ -409,10 +432,10 @@ void test_DerivField_GPUElementAccess()
     IdxRangeSlice<GridY> deriv_idx_range_y(idx_range_y.front(), IdxStepY(2), idx_range_y.extents());
 
     // Define a field memory allocation on x-y with 3 derivatives in x and y on GPU
-    device_t<DerivFieldMem<int, IdxRange_dXdYXY, 3>>
+    DerivFieldMem<int, IdxRange_dXdYXY, 3>
             dxdyField_alloc(idx_range_x_y, deriv_idx_range_x, deriv_idx_range_y);
     // Define the field on GPU
-    device_t<DerivField<int, IdxRange_dXdYXY>> dxdyField(dxdyField_alloc);
+    DerivField<int, IdxRange_dXdYXY> dxdyField(dxdyField_alloc);
 
     // A subset  of the x-derivatives to be retrieved with get_mdspan
     IdxRange<dX> x_deriv_block(Idx<dX>(1), IdxStep<dX>(2));
@@ -535,7 +558,7 @@ void test_DerivField_GPUElementAccess()
 
     // Check values
     auto vals_host = ddc::create_mirror_view_and_copy(get_const_field(ddc_vals));
-    ddc::for_each(idx_range_x_y, [&](IdxXY idx_x_y) {
+    ddc::host_for_each(idx_range_x_y, [&](IdxXY idx_x_y) {
         EXPECT_EQ(vals_host(idx_x_y), example_grid(Idx_dXdYXY(idx_x_y, no_deriv_idx)));
     });
 
@@ -552,7 +575,7 @@ void test_DerivField_GPUElementAccess()
 
     // Check x-derivative values
     auto dx_vals_host = ddc::create_mirror_view_and_copy(get_const_field(ddc_dx_vals));
-    ddc::for_each(idx_range_dx_x_y_slice, [&](Idx<dX, GridX, GridY> idx_dx_x_y) {
+    ddc::host_for_each(idx_range_dx_x_y_slice, [&](Idx<dX, GridX, GridY> idx_dx_x_y) {
         Idx<dX> idx_dx(idx_dx_x_y);
         Idx<GridX> idx_x(idx_dx_x_y);
         Idx<GridY> idx_y(idx_dx_x_y);
@@ -572,7 +595,7 @@ void test_DerivField_GPUElementAccess()
 
     // Check y-derivative values
     auto dy_vals_host = ddc::create_mirror_view_and_copy(get_const_field(ddc_dy_vals));
-    ddc::for_each(idx_range_dy_x_y_slice, [&](Idx<dY, GridX, GridY> idx_dy_x_y) {
+    ddc::host_for_each(idx_range_dy_x_y_slice, [&](Idx<dY, GridX, GridY> idx_dy_x_y) {
         Idx<dY> idx_dy(idx_dy_x_y);
         Idx<GridX> idx_x(idx_dy_x_y);
         Idx<GridY> idx_y(idx_dy_x_y);
@@ -594,7 +617,7 @@ void test_DerivField_GPUElementAccess()
 
     // Check cross-derivative values
     auto dx_dy_vals_host = ddc::create_mirror_view_and_copy(get_const_field(ddc_dx_dy_vals));
-    ddc::for_each(idx_range_dx_dy_x_y_slice, [&](Idx_dXdYXY idx_dx_dy_x_y) {
+    ddc::host_for_each(idx_range_dx_dy_x_y_slice, [&](Idx_dXdYXY idx_dx_dy_x_y) {
         EXPECT_EQ(dx_dy_vals_host(idx_dx_dy_x_y), example_grid(Idx_dXdYXY(idx_dx_dy_x_y)));
     });
 }
@@ -611,9 +634,9 @@ TEST(DerivFieldMemTest, FieldDeepCopy)
     IdxRangeSlice<GridX> deriv_idx_range_x(idx_range_x.front(), IdxStepX(2), idx_range_x.extents());
 
     // Define fields on x-y with 1 derivative in x and y
-    DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>
+    host_t<DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>>
             dxdyField(idx_range_x_y, deriv_idx_range_x);
-    DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>
+    host_t<DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>>
             dxdyField_copy(idx_range_x_y, deriv_idx_range_x);
 
     // Extract the values and derivatives
@@ -626,7 +649,7 @@ TEST(DerivFieldMemTest, FieldDeepCopy)
             = dxdyField[IdxXdX(first_deriv, deriv_idx_range_x.back())];
 
     // Set the values
-    ddc::for_each(get_idx_range(values), [&](IdxXY ixy) {
+    ddc::host_for_each(get_idx_range(values), [&](IdxXY ixy) {
         IdxX ix(ixy);
         IdxY iy(ixy);
         double x(ix - IdxX(0));
@@ -635,9 +658,11 @@ TEST(DerivFieldMemTest, FieldDeepCopy)
     });
     // Set the derivatives
     double x_left(idx_range_x.front() - IdxX(0));
-    ddc::for_each(get_idx_range(left_x_derivs), [&](IdxY iy) { left_x_derivs(iy) = 2 * x_left; });
+    ddc::host_for_each(get_idx_range(left_x_derivs), [&](IdxY iy) {
+        left_x_derivs(iy) = 2 * x_left;
+    });
     double x_right(idx_range_x.back() - IdxX(0));
-    ddc::for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
+    ddc::host_for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
         right_x_derivs(iy) = 2 * x_right;
     });
 
@@ -649,7 +674,7 @@ TEST(DerivFieldMemTest, FieldDeepCopy)
             = dxdyField_copy.get_values_field();
 
     // Check the values
-    ddc::for_each(get_idx_range(values), [&](IdxXY ixy) {
+    ddc::host_for_each(get_idx_range(values), [&](IdxXY ixy) {
         IdxX ix(ixy);
         IdxY iy(ixy);
         double x(ix - IdxX(0));
@@ -657,10 +682,10 @@ TEST(DerivFieldMemTest, FieldDeepCopy)
         EXPECT_EQ(values_copy(ixy), x * x + y * y);
     });
     // Check the derivatives
-    ddc::for_each(get_idx_range(left_x_derivs), [&](IdxY iy) {
+    ddc::host_for_each(get_idx_range(left_x_derivs), [&](IdxY iy) {
         EXPECT_EQ(left_x_derivs(iy), 2 * x_left);
     });
-    ddc::for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
+    ddc::host_for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
         EXPECT_EQ(right_x_derivs(iy), 2 * x_right);
     });
 }
@@ -672,9 +697,9 @@ TEST(DerivFieldTest, FieldDeepCopy)
     IdxRangeSlice<GridX> deriv_idx_range_x(idx_range_x.front(), IdxStepX(2), idx_range_x.extents());
 
     // Define field memory allocations on x-y with 1 derivative in x and y
-    DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>
+    host_t<DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>>
             dxdyField_alloc(idx_range_x_y, deriv_idx_range_x);
-    DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>
+    host_t<DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1>>
             dxdyField_copy_alloc(idx_range_x_y, deriv_idx_range_x);
 
     // Get the fields
@@ -691,7 +716,7 @@ TEST(DerivFieldTest, FieldDeepCopy)
             = dxdyField[IdxXdX(first_deriv, deriv_idx_range_x.back())];
 
     // Set the values
-    ddc::for_each(get_idx_range(values), [&](IdxXY ixy) {
+    ddc::host_for_each(get_idx_range(values), [&](IdxXY ixy) {
         IdxX ix(ixy);
         IdxY iy(ixy);
         double x(ix - IdxX(0));
@@ -700,9 +725,11 @@ TEST(DerivFieldTest, FieldDeepCopy)
     });
     // Set the derivatives
     double x_left(idx_range_x.front() - IdxX(0));
-    ddc::for_each(get_idx_range(left_x_derivs), [&](IdxY iy) { left_x_derivs(iy) = 2 * x_left; });
+    ddc::host_for_each(get_idx_range(left_x_derivs), [&](IdxY iy) {
+        left_x_derivs(iy) = 2 * x_left;
+    });
     double x_right(idx_range_x.back() - IdxX(0));
-    ddc::for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
+    ddc::host_for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
         right_x_derivs(iy) = 2 * x_right;
     });
 
@@ -710,7 +737,7 @@ TEST(DerivFieldTest, FieldDeepCopy)
     ddcHelper::deepcopy(dxdyField_copy, dxdyField);
 
     // Check the values
-    ddc::for_each(get_idx_range(values), [&](IdxXY ixy) {
+    ddc::host_for_each(get_idx_range(values), [&](IdxXY ixy) {
         IdxX ix(ixy);
         IdxY iy(ixy);
         double x(ix - IdxX(0));
@@ -718,10 +745,10 @@ TEST(DerivFieldTest, FieldDeepCopy)
         EXPECT_EQ(values(ixy), x * x + y * y);
     });
     // Check the derivatives
-    ddc::for_each(get_idx_range(left_x_derivs), [&](IdxY iy) {
+    ddc::host_for_each(get_idx_range(left_x_derivs), [&](IdxY iy) {
         EXPECT_EQ(left_x_derivs(iy), 2 * x_left);
     });
-    ddc::for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
+    ddc::host_for_each(get_idx_range(right_x_derivs), [&](IdxY iy) {
         EXPECT_EQ(right_x_derivs(iy), 2 * x_right);
     });
 }

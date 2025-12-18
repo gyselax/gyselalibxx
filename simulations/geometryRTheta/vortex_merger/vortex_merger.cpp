@@ -22,7 +22,7 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "input.hpp"
 #include "l_norm_tools.hpp"
 #include "paraconfpp.hpp"
@@ -34,6 +34,7 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
@@ -199,10 +200,10 @@ int main(int argc, char** argv)
 
     host_t<FieldMemR<CoordR>> coords_r(ddc::select<GridR>(grid));
     host_t<FieldMemTheta<CoordTheta>> coords_p(ddc::select<GridTheta>(grid));
-    ddc::for_each(ddc::select<GridR>(grid), [&](IdxR const ir) {
+    ddc::host_for_each(ddc::select<GridR>(grid), [&](IdxR const ir) {
         coords_r(ir) = ddc::coordinate(ir);
     });
-    ddc::for_each(ddc::select<GridTheta>(grid), [&](IdxTheta const itheta) {
+    ddc::host_for_each(ddc::select<GridTheta>(grid), [&](IdxTheta const itheta) {
         coords_p(itheta) = ddc::coordinate(itheta);
     });
 
@@ -221,7 +222,7 @@ int main(int argc, char** argv)
     host_t<FieldMemRTheta<CoordX>> coords_x(grid);
     host_t<FieldMemRTheta<CoordY>> coords_y(grid);
     host_t<DFieldMemRTheta> jacobian(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irtheta));
         coords_x(irtheta) = ddc::select<X>(coords_xy);
         coords_y(irtheta) = ddc::select<Y>(coords_xy);

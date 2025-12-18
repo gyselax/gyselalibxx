@@ -1,7 +1,7 @@
 #include <cmath>
 
 #include "diocotron_initialisation_equilibrium.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 
 
 

@@ -2,37 +2,16 @@
 
 #pragma once
 #include <ddc/ddc.hpp>
-#include <ddc/kernels/splines.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "geometry_xvx.hpp"
 #include "mpilayout.hpp"
 #include "species_info.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
-
-
-/**
- * @brief A class which describes the real space in the first spatial direction X.
- */
-struct X
-{
-    /**
-     * @brief A boolean indicating if the dimension is periodic.
-     */
-    static bool constexpr PERIODIC = true;
-
-    /// A boolean indicating if dimension describes a covariant coordinate.
-    static bool constexpr IS_COVARIANT = true;
-
-    /// A boolean indicating if dimension describes a contravariant coordinate.
-    static bool constexpr IS_CONTRAVARIANT = true;
-
-    /// A type-alias mapping to the co/contra-variant counterpart.
-    using Dual = X;
-};
 
 /**
  * @brief A class which describes the real space in the second spatial direction Y.
@@ -55,17 +34,6 @@ struct Y
 };
 
 /**
- * @brief A class which describes the real space in the second velocity direction X.
- */
-struct Vx
-{
-    /**
-     * @brief A boolean indicating if the dimension is periodic.
-     */
-    static bool constexpr PERIODIC = false;
-};
-
-/**
  * @brief A class which describes the real space in the second velocity direction Y.
  */
 struct Vy
@@ -76,178 +44,34 @@ struct Vy
     static bool constexpr PERIODIC = false;
 };
 
-using CoordX = Coord<X>;
 using CoordY = Coord<Y>;
 using CoordXY = Coord<X, Y>;
 
-using CoordVx = Coord<Vx>;
 using CoordVy = Coord<Vy>;
 
-int constexpr BSDegreeX = 3;
-int constexpr BSDegreeY = 3;
-
-int constexpr BSDegreeVx = 3;
-int constexpr BSDegreeVy = 3;
-
-bool constexpr BsplineOnUniformCellsX = true;
-bool constexpr BsplineOnUniformCellsY = true;
-
-bool constexpr BsplineOnUniformCellsVx = true;
-bool constexpr BsplineOnUniformCellsVy = true;
-
-struct BSplinesX
-    : std::conditional_t<
-              BsplineOnUniformCellsX,
-              ddc::UniformBSplines<X, BSDegreeX>,
-              ddc::NonUniformBSplines<X, BSDegreeX>>
-{
-};
-struct BSplinesY
-    : std::conditional_t<
-              BsplineOnUniformCellsY,
-              ddc::UniformBSplines<Y, BSDegreeY>,
-              ddc::NonUniformBSplines<Y, BSDegreeY>>
-{
-};
-
-struct BSplinesVx
-    : std::conditional_t<
-              BsplineOnUniformCellsVx,
-              ddc::UniformBSplines<Vx, BSDegreeVx>,
-              ddc::NonUniformBSplines<Vx, BSDegreeVx>>
-{
-};
-struct BSplinesVy
-    : std::conditional_t<
-              BsplineOnUniformCellsVy,
-              ddc::UniformBSplines<Vy, BSDegreeVy>,
-              ddc::NonUniformBSplines<Vy, BSDegreeVy>>
-{
-};
-
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::HERMITE;
-
-// IDim initialisers
-using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
-using SplineInterpPointsY
-        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
-using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
-using SplineInterpPointsVy
-        = ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
-
 // IDim definition
-struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
+struct GridY : UniformGridBase<Y>
 {
 };
-struct GridY : SplineInterpPointsY::interpolation_discrete_dimension_type
+struct GridVy : UniformGridBase<Vy>
 {
 };
-struct GridVx : SplineInterpPointsVx::interpolation_discrete_dimension_type
-{
-};
-struct GridVy : SplineInterpPointsVy::interpolation_discrete_dimension_type
-{
-};
-
-// SplineBuilder and SplineEvaluator definition
-using SplineXBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
-using SplineYBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        SplineYBoundary,
-        SplineYBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineYEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        ddc::PeriodicExtrapolationRule<Y>,
-        ddc::PeriodicExtrapolationRule<Y>>;
-using SplineVxBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVx,
-        GridVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineVxEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVx,
-        GridVx,
-        ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>>;
-using SplineVyBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVy,
-        GridVy,
-        SplineVyBoundary,
-        SplineVyBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineVyEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVy,
-        GridVy,
-        ddc::ConstantExtrapolationRule<Vy>,
-        ddc::ConstantExtrapolationRule<Vy>>;
-
-using IdxRangeBSX = IdxRange<BSplinesX>;
-using IdxRangeBSY = IdxRange<BSplinesY>;
-using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;
-using IdxRangeBSVx = IdxRange<BSplinesVx>;
-using IdxRangeBSVy = IdxRange<BSplinesVy>;
-using IdxRangeBSVxVy = IdxRange<BSplinesVx, BSplinesVy>;
-
-template <class ElementType>
-using BSConstFieldXY = Field<ElementType const, IdxRangeBSXY>;
-using DBSConstFieldXY = BSConstFieldXY<double>;
 
 // Index
-using IdxX = Idx<GridX>;
 using IdxY = Idx<GridY>;
 using IdxXY = Idx<GridX, GridY>;
-using IdxVx = Idx<GridVx>;
 using IdxVy = Idx<GridVy>;
 using IdxVxVy = Idx<GridVx, GridVy>;
 using IdxXYVxVy = Idx<GridX, GridY, GridVx, GridVy>;
 using IdxSpXYVxVy = Idx<Species, GridX, GridY, GridVx, GridVy>;
 
 // IVect definition
-using IdxStepX = IdxStep<GridX>;
 using IdxStepY = IdxStep<GridY>;
-using IdxStepVx = IdxStep<GridVx>;
 using IdxStepVy = IdxStep<GridVy>;
 
 // Iindex range definition
-using IdxRangeX = IdxRange<GridX>;
 using IdxRangeY = IdxRange<GridY>;
 using IdxRangeXY = IdxRange<GridX, GridY>;
-using IdxRangeVx = IdxRange<GridVx>;
 using IdxRangeVy = IdxRange<GridVy>;
 using IdxRangeXYVxVy = IdxRange<GridX, GridY, GridVx, GridVy>;
 using IdxRangeVxVyXY = IdxRange<GridVx, GridVy, GridX, GridY>;
@@ -255,10 +79,6 @@ using IdxRangeVxVy = IdxRange<GridVx, GridVy>;
 using IdxRangeSpVxVy = IdxRange<Species, GridVx, GridVy>;
 using IdxRangeSpXYVxVy = IdxRange<Species, GridX, GridY, GridVx, GridVy>;
 using IdxRangeSpVxVyXY = IdxRange<Species, GridVx, GridVy, GridX, GridY>;
-
-template <class ElementType>
-using FieldMemX = FieldMem<ElementType, IdxRangeX>;
-using DFieldMemX = FieldMemX<double>;
 
 template <class ElementType>
 using FieldMemY = FieldMem<ElementType, IdxRangeY>;
@@ -271,9 +91,6 @@ using DFieldMemXY = FieldMemXY<double>;
 template <class ElementType>
 using VectorFieldMemXY = VectorFieldMem<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
 using DVectorFieldMemXY = VectorFieldMemXY<double>;
-
-template <class ElementType>
-using FieldMemVx = FieldMem<ElementType, IdxRangeVx>;
 
 template <class ElementType>
 using FieldMemVy = FieldMem<ElementType, IdxRangeVy>;
@@ -298,11 +115,6 @@ template <class ElementType>
 using FieldMemSpVxVyXY = FieldMem<ElementType, IdxRangeSpVxVyXY>;
 using DFieldMemSpVxVyXY = FieldMemSpVxVyXY<double>;
 
-//  Field definitions
-template <class ElementType>
-using FieldX = Field<ElementType, IdxRangeX>;
-using DFieldX = FieldX<double>;
-
 template <class ElementType>
 using FieldY = Field<ElementType, IdxRangeY>;
 using DFieldY = FieldY<double>;
@@ -314,10 +126,6 @@ using DFieldXY = FieldXY<double>;
 template <class ElementType>
 using VectorFieldXY = VectorField<ElementType, IdxRangeXY, VectorIndexSet<X, Y>>;
 using DVectorFieldXY = VectorFieldXY<double>;
-
-template <class ElementType>
-using FieldVx = Field<ElementType, IdxRangeVx>;
-using DFieldVx = FieldVx<double>;
 
 template <class ElementType>
 using FieldVy = Field<ElementType, IdxRangeVy>;
@@ -338,10 +146,6 @@ using DFieldSpXYVxVy = FieldSpXYVxVy<double>;
 template <class ElementType>
 using FieldSpVxVyXY = Field<ElementType, IdxRangeSpVxVyXY>;
 using DFieldSpVxVyXY = FieldSpVxVyXY<double>;
-
-// ConstField definitions
-template <class ElementType>
-using ConstFieldX = Field<ElementType const, IdxRangeX>;
 
 template <class ElementType>
 using ConstFieldY = Field<ElementType const, IdxRangeY>;

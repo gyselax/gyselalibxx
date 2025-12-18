@@ -1,20 +1,16 @@
 spack:
-  concretizer:
-    unify: true
   definitions:
-  - compilers:
-    - 'gcc@11'
   - packages:
     - 'cmake@3.22:3'
-    - 'gdb'
     - 'ginkgo@1.9 +openmp'
     - 'googletest +gmock'
     - 'kokkos@4.6:4 +openmp'
     - 'kokkos-fft@0.3 host_backend=fftw-openmp'
     - 'kokkos-kernels@4.6:4'
     - 'kokkos-tools'
+    - 'lapack'
+    - 'mpi'
     - 'ninja'
-    - 'openmpi'
     - 'paraconf@1'
     - 'pdi@1.6:1'
     - 'pdiplugin-decl-hdf5 +mpi'
@@ -23,7 +19,8 @@ spack:
     - 'pdiplugin-pycall'
     - 'pdiplugin-set-value'
     - 'pdiplugin-trace'
-  - python-packages:
+    - 'python@3.12:'
+
     - 'py-dask'
     - 'py-h5py'
     - 'py-imageio'
@@ -35,13 +32,16 @@ spack:
     - 'py-sympy'
     - 'py-xarray'
   specs:
-  - lapack
   - matrix:
     - [$packages]
-    - [$%compilers]
-  - matrix:
-    - [$python-packages]
-    - [$%compilers]
+  repos:
+    patches:
+      git: https://github.com/gyselax/spack.git
+      branch: releases/v2025.11
+    builtin:
+      branch: releases/v2025.11
+  concretizer:
+    unify: true
   view:
     default:
       root: .spack-env/view
@@ -49,4 +49,12 @@ spack:
   packages:
     all:
       require: ~cuda
-      variants: ~mpi +openmp cxxstd=17
+      variants: ~fortran ~mpi +openmp cxxstd=17
+    c:
+      require: gcc@11
+    cxx:
+      require: gcc@11
+    lapack:
+      require: openblas
+    mpi:
+      require: openmpi ~cuda

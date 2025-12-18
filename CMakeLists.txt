@@ -21,6 +21,9 @@ set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 
 # Configuration
 
+# Ensure custom cmake modules can be found
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
+
 ## We use C++17 all around!
 set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
@@ -107,13 +110,15 @@ if(NOT "${KokkosKernels_FOUND}")
 endif()
 
 
-find_package(DDC 0.9.0 QUIET COMPONENTS fft pdi splines)
+find_package(DDC 0.10.0 QUIET COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
   add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
 endif()
 
 add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
+
+find_package(LAPACKE REQUIRED)
 
 ###############################################################################################
 #                              Build libraries and executables
