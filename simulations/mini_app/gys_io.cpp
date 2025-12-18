@@ -418,19 +418,18 @@ int main(int argc, char** argv)
 
         // please uncomment if the new ddc version is available:
         // Get local index ranges for each layout (use exact types returned, don't convert)
-        auto idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
-        auto idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
+        IdxRangeSpTor3DV2D idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
+        IdxRangeSpV2DTor3D idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
 
         // Create fields in both layouts following the Gysela-X pattern
         // Field on Tor3DSplit layout (matches allfdistribu's layout)
-        DFieldMem<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split_alloc(
-                idxrange_tor3D_split);
-        DField<decltype(idxrange_tor3D_split)> allfdistribu_tor3D_split
+        DFieldMem<IdxRangeSpTor3DV2D> allfdistribu_tor3D_split_alloc(idxrange_tor3D_split);
+        DField<IdxRangeSpTor3DV2D> allfdistribu_tor3D_split
                 = get_field(allfdistribu_tor3D_split_alloc);
 
         // Temporary field on V2DSplit layout
-        DFieldMem<decltype(idxrange_v2D_split)> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
-        DField<decltype(idxrange_v2D_split)> allfdistribu_v2D_split
+        DFieldMem<IdxRangeSpV2DTor3D> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
+        DField<IdxRangeSpV2DTor3D> allfdistribu_v2D_split
                 = get_field(allfdistribu_v2D_split_alloc);
 
         // Copy initial data to Tor3DSplit layout field
