@@ -51,6 +51,9 @@ using DFieldX = DField<IdxRangeX>;
 using DFieldY = DField<IdxRangeY>;
 using DFieldXY = DField<IdxRangeXY>;
 
+using FFieldMemX = FieldMem<float, IdxRangeX>;
+using FFieldX = Field<float, IdxRangeX>;
+
 
 TEST(FftPoissonSolver, CosineSource)
 {
@@ -239,6 +242,49 @@ static void TestFftPoissonSolver2DCosineSource()
 TEST(FftPoissonSolver2D, CosineSource)
 {
     TestFftPoissonSolver2DCosineSource();
+}
+
+TEST(FftPoissonSolver, FloatCosineSource)
+{
+    CoordX const x_min(0.0);
+    CoordX const x_max(2.0 * M_PI);
+    IdxStepX const x_size(100);
+
+    // Creating mesh & supports
+    ddc::init_discrete_space<GridX>(GridX::init<GridX>(x_min, x_max, x_size + 1));
+    IdxRangeX gridx = IdxRangeX(IdxX(0), x_size);
+
+    // Creating operators
+    FFTPoissonSolver<IdxRangeX, IdxRangeX, Kokkos::DefaultExecutionSpace, float> poisson(gridx);
+
+    host_t<FFieldMemX> electrostatic_potential_host(gridx);
+    host_t<FFieldMemX> electric_field_host(gridx);
+    host_t<FFieldMemX> rhs_host(gridx);
+
+    // Initialisation of the distribution function --> fill values
+    for (IdxX const ix : gridx) {
+        rhs_host(ix) = cos(ddc::coordinate(ix));
+    }
+    FFieldMemX electrostatic_potential(gridx);
+    FFieldMemX electric_field(gridx);
+    FFieldMemX rhs(gridx);
+
+    ddc::parallel_deepcopy(rhs, rhs_host);
+    poisson(get_field(electrostatic_potential), get_field(electric_field), get_field(rhs));
+    ddc::parallel_deepcopy(electric_field_host, electric_field);
+    ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
+
+    double error_pot = 0.0;
+    double error_field = 0.0;
+
+    for (IdxX const ix : gridx) {
+        double const exact_pot = cos(ddc::coordinate(ix));
+        error_pot = fmax(fabs(electrostatic_potential_host(ix) - exact_pot), error_pot);
+        double const exact_field = sin(ddc::coordinate(ix));
+        error_field = fmax(fabs(electric_field_host(ix) - exact_field), error_field);
+    }
+    EXPECT_LE(error_pot, 1e-8);
+    EXPECT_LE(error_field, 1e-6);
 }
 
 } // namespace FFTPoissonSolverTest
