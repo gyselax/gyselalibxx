@@ -429,8 +429,7 @@ int main(int argc, char** argv)
 
         // Temporary field on V2DSplit layout
         DFieldMem<IdxRangeSpV2DTor3D> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
-        DField<IdxRangeSpV2DTor3D> allfdistribu_v2D_split
-                = get_field(allfdistribu_v2D_split_alloc);
+        DField<IdxRangeSpV2DTor3D> allfdistribu_v2D_split = get_field(allfdistribu_v2D_split_alloc);
 
         // Copy initial data to Tor3DSplit layout field
         // Extract only the local portion of allfdistribu that matches the local MPI-distributed index range
