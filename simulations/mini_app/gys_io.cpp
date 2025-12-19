@@ -198,14 +198,15 @@ void write_fdistribu(
     // Expose index range for parallel I/O
     PDI_expose_idx_range(mesh, "local_fdistribu");
     // Expose species extents
-    std::array<std::size_t, 1> species_extents_arr = {mesh.template extent<Species>().value()};
+    std::array<std::size_t, 1> species_extents_arr
+            = {static_cast<std::size_t>(mesh.template extent<Species>().value())};
     PDI_expose("species_extents", species_extents_arr.data(), PDI_OUT);
     // Expose coordinate extents
-    std::array<std::size_t, 1> tor1_extents_arr = {mesh.template extent<GridTor1>().value()};
-    std::array<std::size_t, 1> tor2_extents_arr = {mesh.template extent<GridTor2>().value()};
-    std::array<std::size_t, 1> tor3_extents_arr = {mesh.template extent<GridTor3>().value()};
-    std::array<std::size_t, 1> vpar_extents_arr = {mesh.template extent<GridVpar>().value()};
-    std::array<std::size_t, 1> mu_extents_arr = {mesh.template extent<GridMu>().value()};
+    std::array<std::size_t, 1> tor1_extents_arr = {static_cast<std::size_t>(mesh.template extent<GridTor1>().value())};
+    std::array<std::size_t, 1> tor2_extents_arr = {static_cast<std::size_t>(mesh.template extent<GridTor2>().value())};
+    std::array<std::size_t, 1> tor3_extents_arr = {static_cast<std::size_t>(mesh.template extent<GridTor3>().value())};
+    std::array<std::size_t, 1> vpar_extents_arr = {static_cast<std::size_t>(mesh.template extent<GridVpar>().value())};
+    std::array<std::size_t, 1> mu_extents_arr = {static_cast<std::size_t>(mesh.template extent<GridMu>().value())};
     PDI_expose("tor1_extents", tor1_extents_arr.data(), PDI_OUT);
     PDI_expose("tor2_extents", tor2_extents_arr.data(), PDI_OUT);
     PDI_expose("tor3_extents", tor3_extents_arr.data(), PDI_OUT);
