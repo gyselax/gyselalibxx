@@ -419,7 +419,6 @@ int main(int argc, char** argv)
         MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh, MPI_COMM_WORLD);
         // ------------------------------------------------------------------------------
 
-        // please uncomment if the new ddc version is available:
         // Get local index ranges for each layout (use exact types returned, don't convert)
         IdxRangeSpTor3DV2D idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
         IdxRangeSpV2DTor3D idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
