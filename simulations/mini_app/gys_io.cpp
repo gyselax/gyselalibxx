@@ -336,15 +336,12 @@ void write_fluid_moments(
 {
     // Create host versions of fluid moments for I/O
     IdxRangeSpTor3D const idxrange_sptor3d(mesh);
-    host_t<DFieldMemSpTor3D> density_host_alloc(idxrange_sptor3d);
-    host_t<DFieldMemSpTor3D> mean_velocity_host_alloc(idxrange_sptor3d);
-    host_t<DFieldMemSpTor3D> temperature_host_alloc(idxrange_sptor3d);
+    auto density_host_alloc = ddc::create_mirror_view_and_copy(fluid_moments_data.density);
+    auto mean_velocity_host_alloc = ddc::create_mirror_view_and_copy(fluid_moments_data.mean_velocity);
+    auto temperature_host_alloc = ddc::create_mirror_view_and_copy(fluid_moments_data.temperature);
     host_t<DFieldSpTor3D> density_host = get_field(density_host_alloc);
     host_t<DFieldSpTor3D> mean_velocity_host = get_field(mean_velocity_host_alloc);
     host_t<DFieldSpTor3D> temperature_host = get_field(temperature_host_alloc);
-    ddc::parallel_deepcopy(density_host, fluid_moments_data.density);
-    ddc::parallel_deepcopy(mean_velocity_host, fluid_moments_data.mean_velocity);
-    ddc::parallel_deepcopy(temperature_host, fluid_moments_data.temperature);
 
     // Expose fluid moments to PDI
     if (rank == 0) {
