@@ -14,8 +14,10 @@
 class FluidMoments
 {
 private:
-    Quadrature<IdxRangeVparMu, IdxRangeSpTor3DV2D, Kokkos::DefaultExecutionSpace::memory_space> const&
-            m_integrate_vparmu;
+    Quadrature<
+            IdxRangeVparMu,
+            IdxRangeSpTor3DV2D,
+            Kokkos::DefaultExecutionSpace::memory_space> const& m_integrate_vparmu;
 
 public:
     struct MomentDensity
