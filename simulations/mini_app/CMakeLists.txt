@@ -12,10 +12,10 @@ target_link_libraries(gys_io
         paraconf::paraconf
         MPI::MPI_CXX
         gslx::io
-        gslx::speciesinfo
-        gslx::utils
         gslx::mpi_parallelisation
         gslx::quadrature
+        gslx::speciesinfo
+        gslx::utils
 )
 
 install(TARGETS gys_io)
