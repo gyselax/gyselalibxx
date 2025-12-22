@@ -80,8 +80,8 @@ IdxRangeSp init_species_from_yaml(PC_tree_t conf_gyselax)
     host_t<DFieldMemSp> kinetic_masses(idx_range_sp);
     for (int i = 0; i < nb_species; ++i) {
         std::string const base = ".SpeciesInfo[" + std::to_string(i) + "]";
-        kinetic_charges(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".charge").c_str());
-        kinetic_masses(IdxSp(i)) = PCpp_double(conf_gyselax, (base + ".mass").c_str());
+        kinetic_charges(IdxStepSp(i)) = PCpp_double(conf_gyselax, (base + ".charge").c_str());
+        kinetic_masses(IdxStepSp(i)) = PCpp_double(conf_gyselax, (base + ".mass").c_str());
     }
 
     ddc::init_discrete_space<Species>(std::move(kinetic_charges), std::move(kinetic_masses));
