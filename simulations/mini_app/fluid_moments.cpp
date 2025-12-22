@@ -60,7 +60,7 @@ void FluidMoments::operator()(
             temperature,
             KOKKOS_LAMBDA(IdxSpTor3DV2D const ispgrid) {
                 IdxSpTor3D isptor123(ispgrid);
-                IdxVpar ivpar(ddc::select<GridVpar>(ispgrid));
+                IdxVpar ivpar(ispgrid);
                 double const coeff = ddc::coordinate(ivpar) - mean_velocity(isptor123);
                 return coeff * coeff * allfdistribu(ispgrid) / density(isptor123);
             });
