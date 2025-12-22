@@ -38,7 +38,7 @@ void FluidMoments::operator()(
             mean_velocity,
             KOKKOS_LAMBDA(IdxSpTor3DV2D const ispgrid) {
                 IdxSpTor3D isptor123(ispgrid);
-                IdxVpar ivpar(ddc::select<GridVpar>(ispgrid));
+                IdxVpar ivpar(ispgrid);
                 CoordVpar const coordvpar = ddc::coordinate(ivpar);
                 return coordvpar * allfdistribu(ispgrid) / density(isptor123);
             });
