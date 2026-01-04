@@ -20,7 +20,10 @@ struct LagrangeBasisFixture<std::tuple<std::integral_constant<std::size_t, D>, T
     {
         static constexpr bool PERIODIC = false;
     };
-    struct LagBasis : public UniformLagrangeBasis<X, D, T>
+    struct GridX : public UniformGridBase<X>
+    {
+    };
+    struct LagBasis : public UniformLagrangeBasis<GridX, D, T>
     {
     };
     using DataType = T;
@@ -40,6 +43,7 @@ TYPED_TEST_SUITE(LagrangeBasisFixture, Cases);
 TYPED_TEST(LagrangeBasisFixture, KroneckerDeltaAtKnots)
 {
     using X = typename TestFixture::X;
+    using GridX = typename TestFixture::GridX;
     using DataType = typename TestFixture::DataType;
     using LagBasis = typename TestFixture::LagBasis;
     using knot_discrete_dimension_type = UniformLagrangeKnots<LagBasis>;
@@ -48,7 +52,9 @@ TYPED_TEST(LagrangeBasisFixture, KroneckerDeltaAtKnots)
     Coord<X> xmin(0);
     Coord<X> xmax(2);
     std::size_t ncells(20);
-    ddc::init_discrete_space<LagBasis>(xmin, xmax, ncells);
+    ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells)));
+    IdxRange<GridX> idx_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
+    ddc::init_discrete_space<LagBasis>(idx_range);
 
     constexpr Idx<knot_discrete_dimension_type> poly_start(0);
 
@@ -76,6 +82,7 @@ TYPED_TEST(LagrangeBasisFixture, KroneckerDeltaAtKnots)
 TYPED_TEST(LagrangeBasisFixture, PartitionOfUnity)
 {
     using X = typename TestFixture::X;
+    using GridX = typename TestFixture::GridX;
     using DataType = typename TestFixture::DataType;
     using LagBasis = typename TestFixture::LagBasis;
     using knot_discrete_dimension_type = UniformLagrangeKnots<LagBasis>;
@@ -85,7 +92,9 @@ TYPED_TEST(LagrangeBasisFixture, PartitionOfUnity)
     Coord<X> xmin(0);
     Coord<X> xmax(2);
     std::size_t ncells(20);
-    ddc::init_discrete_space<LagBasis>(xmin, xmax, ncells);
+    ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells)));
+    IdxRange<GridX> idx_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
+    ddc::init_discrete_space<LagBasis>(idx_range);
 
     constexpr Idx<knot_discrete_dimension_type> poly_start(0);
 
@@ -108,5 +117,4 @@ TYPED_TEST(LagrangeBasisFixture, PartitionOfUnity)
         EXPECT_NEAR(sum, DataType(1), kTol);
     }
 }
-
 
