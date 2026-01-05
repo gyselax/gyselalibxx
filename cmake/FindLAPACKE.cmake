@@ -378,21 +378,22 @@ if (NOT LAPACKE_FOUND)
     LAPACKE_LIBRARIES
     LAPACKE_WORKS)
 
-  if (NOT TARGET LAPACKE::LAPACKE)
-    add_library(LAPACKE::LAPACKE UNKNOWN IMPORTED)
-    set_target_properties(LAPACKE::LAPACKE PROPERTIES
-        INTERFACE_INCLUDE_DIRECTORIES "${LAPACKE_INCLUDE_DIRS}"
-        INTERFACE_LINK_LIBRARIES "${LAPACKE_LIBRARIES}"
-    )
+endif()
 
-    foreach(lib IN LISTS LAPACKE_LIBRARIES)
-      if(IS_ABSOLUTE "${lib}")
-        set_target_properties(LAPACKE::LAPACKE PROPERTIES
-            IMPORTED_LOCATION "${lib}"
-        )
-        break()
-      endif()
-    endforeach()
-  endif()
+# Create target after LAPACKE_FOUND test to create target from LAPACKE found by DDC
+if (NOT TARGET LAPACKE::LAPACKE)
+  add_library(LAPACKE::LAPACKE UNKNOWN IMPORTED)
+  set_target_properties(LAPACKE::LAPACKE PROPERTIES
+      INTERFACE_INCLUDE_DIRECTORIES "${LAPACKE_INCLUDE_DIRS}"
+      INTERFACE_LINK_LIBRARIES "${LAPACKE_LIBRARIES}"
+  )
 
+  foreach(lib IN LISTS LAPACKE_LIBRARIES)
+    if(IS_ABSOLUTE "${lib}")
+      set_target_properties(LAPACKE::LAPACKE PROPERTIES
+          IMPORTED_LOCATION "${lib}"
+      )
+      break()
+    endif()
+  endforeach()
 endif()
