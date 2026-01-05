@@ -101,7 +101,7 @@ public:
     public:
         Impl() = default;
 
-        Impl(IdxRange<Grid1D> break_point_domain);
+        explicit Impl(IdxRange<Grid1D> break_point_domain);
 
         /** @brief Returns the coordinate of the lower bound of the domain on which the B-splines are defined.
          *
@@ -187,12 +187,12 @@ UniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
     std::size_t ncells = break_point_domain.size() - 1;
     assert(ncells >= D);
 
-    coord_type rmin = ddc::coordinate(break_point_domain.front());
+    coord_type bp_rmin = ddc::coordinate(break_point_domain.front());
     DataType step = ddc::discrete_space<Grid1D>().step();
 
     // Initialise knot grid
     if constexpr (is_periodic()) {
-        coord_type rmin_local = rmin - step * (D - 1);
+        coord_type rmin_local = bp_rmin - step * (D - 1);
         ddc::init_discrete_space<knot_discrete_dimension_type>(rmin_local, step);
         m_knot_domain = IdxRange<knot_discrete_dimension_type>(
                 ddc::discrete_space<knot_discrete_dimension_type>().front(),
@@ -201,7 +201,7 @@ UniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
                                        .remove(IdxStep<knot_discrete_dimension_type>(D - 1),
                                                IdxStep<knot_discrete_dimension_type>(D - 1));
     } else {
-        ddc::init_discrete_space<knot_discrete_dimension_type>(rmin, step);
+        ddc::init_discrete_space<knot_discrete_dimension_type>(bp_rmin, step);
         m_knot_domain = IdxRange<knot_discrete_dimension_type>(
                 ddc::discrete_space<knot_discrete_dimension_type>().front(),
                 IdxStep<knot_discrete_dimension_type>(break_point_domain.size()));

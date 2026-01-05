@@ -99,7 +99,7 @@ public:
     public:
         Impl() = default;
 
-        Impl(IdxRange<Grid1D> break_point_domain);
+        explicit Impl(IdxRange<Grid1D> break_point_domain);
 
         /** @brief Returns the coordinate of the lower bound of the domain on which the B-splines are defined.
          *
@@ -188,9 +188,6 @@ NonUniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
 {
     std::size_t ncells = break_point_domain.size() - 1;
     assert(ncells >= D);
-
-    coord_type rmin = ddc::coordinate(break_point_domain.front());
-    coord_type rmax = ddc::coordinate(break_point_domain.back());
 
     // Initialise knot grid
     if constexpr (is_periodic()) {
