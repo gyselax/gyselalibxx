@@ -149,4 +149,3 @@ TYPED_TEST(LagrangeBasisFixture, PartitionOfUnity)
         EXPECT_NEAR(sum, DataType(1), TestFixture::TOL);
     }
 }
-
