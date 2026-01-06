@@ -152,7 +152,7 @@ public:
         {
             KOKKOS_ASSERT(values.size() == degree() + 1);
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
-            KOKKOS_ASSERT(x <= ddc::coordinate(poly_start+degree()));
+            KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
             DataType offset = (x - ddc::coordinate(poly_start));
             DataType eps = std::numeric_limits<DataType>::epsilon() * 4;

@@ -154,7 +154,7 @@ public:
         {
             KOKKOS_ASSERT(values.size() == degree() + 1);
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
-            KOKKOS_ASSERT(x <= ddc::coordinate(poly_start+degree()));
+            KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
             DataType dx = ddc::discrete_space<knot_discrete_dimension_type>().step();
             double inv_dx = 1. / dx;
