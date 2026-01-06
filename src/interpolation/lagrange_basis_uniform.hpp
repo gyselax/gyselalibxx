@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <array>
 
@@ -96,7 +97,7 @@ public:
         IdxRange<knot_discrete_dimension_type> m_knot_domain;
         IdxRange<knot_discrete_dimension_type> m_break_point_domain;
 
-        ddc::DiscreteElement<DDim> m_reference;
+        Idx<DDim> m_reference;
 
     public:
         Impl() = default;
@@ -220,49 +221,3 @@ UniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
         m_weights[i] = 1.0 / numerator;
     }
 }
-
-//template <class CDim, std::size_t D, class DataType>
-//template <class DDim, class MemorySpace>
-//discrete_element_type UniformLagrangeBasis<CDim, D, DataType>::Impl<DDim, MemorySpace>::
-//        get_icell_and_offset(int& icell, DataType& offset, ddc::Coordinate<CDim> const& x) const
-//{
-//    KOKKOS_ASSERT(x - rmin() >= -length() * std::numeric_limits<DataType>::epsilon * 4);
-//    KOKKOS_ASSERT(rmax() - x >= -length() * std::numeric_limits<DataType>::epsilon * 4);
-//
-//    if (x <= rmin()) {
-//        icell = 0;
-//        offset = 0.0;
-//    } else if (x >= rmax()) {
-//        icell = ncells() - 1;
-//        offset = 1.0;
-//    } else {
-//        offset = (x - rmin()) * inv_dx;
-//        icell = static_cast<int>(offset);
-//        offset = offset - icell;
-//
-//        // When x is very close to xmax, round-off may cause the wrong answer
-//        // icell=ncells and x_offset=0, which we convert to the case x=xmax:
-//        if (icell == int(ncells()) && offset == 0.0) {
-//            icell = ncells() - 1;
-//            offset = 1.0;
-//        }
-//    }
-//
-//    int ideal_icell_left = D / 2;
-//    discrete_element_type previous_knot_idx = m_reference + icell;
-//    if constexpr (is_periodic()) {
-//        icell = ideal_icell_left;
-//    } else {
-//        int ideal_icell_right = D - D / 2;
-//
-//        if (icell >= ideal_icell_left) {
-//            if (icell > grid_idx_range.size() - 1 - ideal_icell_right) {
-//                icell = (icell - grid_idx_range.size() + 1 + D);
-//            } else {
-//                icell = ideal_icell_left;
-//            }
-//        }
-//        first_idx = m_reference;
-//    }
-//    return previous_knot_idx - icell;
-//}
