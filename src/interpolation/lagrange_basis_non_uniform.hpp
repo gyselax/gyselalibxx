@@ -102,7 +102,7 @@ public:
 
         /** @brief Initialise the possible Lagrange bases.
          *
-         * Initialise the class such that Lagrange bases can be evluated on domains
+         * Initialise the class such that Lagrange bases can be evaluated on domains
          * derived from the break point domain.
          */
         explicit Impl(IdxRange<Grid1D> break_point_domain);
