@@ -159,14 +159,14 @@ public:
 
         // --- check error
         double max_abs_error = 0;
-        ddc::for_each(
+        ddc::host_for_each(
                 get_idx_range(function_coef_1_expected_host),
                 [&](Idx<Patch1::BSplines1, Patch1::BSplines2> const idx) {
                     double err = std::abs(
                             function_coef_1_expected_host(idx) - function_coef_1_host(idx));
                     max_abs_error = std::max(max_abs_error, err);
                 });
-        ddc::for_each(
+        ddc::host_for_each(
                 get_idx_range(function_coef_2_expected_host),
                 [&](Idx<Patch2::BSplines1, Patch2::BSplines2> const idx) {
                     double err = std::abs(

@@ -459,8 +459,8 @@ public:
 
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
         // Calculate the matrix elements corresponding to the B-splines which cover the singular point
-        ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
-            ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_trial) {
+        ddc::host_for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
+            ddc::host_for_each(idxrange_singular, [&](IdxBSPolar const idx_trial) {
                 // Calculate the weak integral
                 double const element = ddc::parallel_transform_reduce(
                         Kokkos::DefaultExecutionSpace(),
@@ -536,8 +536,8 @@ public:
                 full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
 
         // Calculate the matrix elements where bspline products overlap the B-splines which cover the singular point
-        ddc::for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
-            ddc::for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
+        ddc::host_for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
+            ddc::host_for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
                 const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
                 const IdxBSR idx_trial_r(idx_trial);
                 const IdxBSTheta idx_trial_theta(idx_trial);
@@ -647,7 +647,7 @@ public:
                 = ddc::discrete_space<BSplinesR>().full_domain().remove_last(IdxStepBSR(1));
 
         // Calculate the matrix elements following a stencil
-        ddc::for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx_test_polar) {
+        ddc::host_for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx_test_polar) {
             const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
             const IdxBSR idx_test_r(idx_test);
             const IdxBSTheta idx_test_theta(idx_test);
@@ -656,7 +656,7 @@ public:
             IdxRangeBSTheta remaining_theta(
                     idx_test_theta,
                     IdxStep<BSplinesTheta> {BSplinesTheta::degree() + 1});
-            ddc::for_each(remaining_theta, [&](IdxBSTheta const idx_trial_theta) {
+            ddc::host_for_each(remaining_theta, [&](IdxBSTheta const idx_trial_theta) {
                 IdxBSRTheta idx_trial(idx_test_r, idx_trial_theta);
                 IdxBSPolar idx_trial_polar(to_polar(theta_mod(idx_trial)));
                 double element = get_matrix_stencil_element(
@@ -697,7 +697,7 @@ public:
 
             IdxRangeBSRTheta trial_idx_range(remaining_r, relevant_theta);
 
-            ddc::for_each(trial_idx_range, [&](IdxBSRTheta const idx_trial) {
+            ddc::host_for_each(trial_idx_range, [&](IdxBSRTheta const idx_trial) {
                 IdxBSPolar idx_trial_polar(to_polar(theta_mod(idx_trial)));
                 double element = get_matrix_stencil_element(
                         idx_test,

@@ -190,7 +190,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 
 
     // Initialise functions ******************************************
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
         CoordXY const coord_xy(to_physical_mapping(coord_rtheta));
 
@@ -209,7 +209,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     advection_field_computer(electrostatic_potential, advection_field_xy);
 
     InverseJacobianMatrix inv_jacobian_matrix(to_physical_mapping);
-    ddc::for_each(grid, [&](Idx<GridR, GridTheta> const idx) {
+    ddc::host_for_each(grid, [&](Idx<GridR, GridTheta> const idx) {
         Coord<R, Theta> const coord_rtheta(ddc::coordinate(idx));
         Tensor inv_J = inv_jacobian_matrix(coord_rtheta);
 
@@ -251,7 +251,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
                 get_const_field(density_rtheta_averaged_device));
 
         // Check the advected functions ---
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-7);
         });
     }

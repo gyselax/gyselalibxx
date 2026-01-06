@@ -101,7 +101,7 @@ TEST(LayoutTransposition, Transpose2D_Host)
     DFieldXY start_values = get_field(start_values_alloc);
     DFieldYX end_values = get_field(end_values_alloc);
 
-    ddc::for_each(start_idx_range, [&](IdxXY ixy) {
+    ddc::host_for_each(start_idx_range, [&](IdxXY ixy) {
         double coord_x = get_coordinate(ddc::select<GridX>(ixy));
         double coord_y = get_coordinate(ddc::select<GridY>(ixy));
         start_values(ixy) = coord_x * coord_x - coord_y * coord_y;
@@ -112,7 +112,7 @@ TEST(LayoutTransposition, Transpose2D_Host)
             end_values,
             get_const_field(start_values));
 
-    ddc::for_each(start_idx_range, [&](IdxXY ixy) {
+    ddc::host_for_each(start_idx_range, [&](IdxXY ixy) {
         IdxX ix(ixy);
         IdxY iy(ixy);
         EXPECT_EQ(start_values(ix, iy), end_values(ix, iy));
@@ -148,7 +148,7 @@ static void TestTranspose2D_Device()
     auto start_values_host = ddc::create_mirror_view_and_copy(get_const_field(start_values));
     auto end_values_host = ddc::create_mirror_view_and_copy(get_const_field(end_values));
 
-    ddc::for_each(start_idx_range, [&](IdxXY ixy) {
+    ddc::host_for_each(start_idx_range, [&](IdxXY ixy) {
         IdxX ix(ixy);
         IdxY iy(ixy);
         EXPECT_EQ(start_values_host(ix, iy), end_values_host(ix, iy));
@@ -174,7 +174,7 @@ TEST(LayoutTransposition, BadTranspose2D)
 
     DFieldXY start_values = get_field(start_values_alloc);
 
-    ddc::for_each(start_idx_range, [&](IdxXY ixy) {
+    ddc::host_for_each(start_idx_range, [&](IdxXY ixy) {
         double coord_x = get_coordinate(ddc::select<GridX>(ixy));
         double coord_y = get_coordinate(ddc::select<GridY>(ixy));
         start_values(ixy) = coord_x * coord_x - coord_y * coord_y;
@@ -205,7 +205,7 @@ TEST(LayoutTransposition, BatchedTranspose2D)
     DFieldXYZ start_values = get_field(start_values_alloc);
     DFieldXZY end_values = get_field(end_values_alloc);
 
-    ddc::for_each(start_idx_range, [&](IdxXYZ ixyz) {
+    ddc::host_for_each(start_idx_range, [&](IdxXYZ ixyz) {
         double coord_x = get_coordinate(ddc::select<GridX>(ixyz));
         double coord_y = get_coordinate(ddc::select<GridY>(ixyz));
         double coord_z = get_coordinate(ddc::select<GridZ>(ixyz));
@@ -217,7 +217,7 @@ TEST(LayoutTransposition, BatchedTranspose2D)
             end_values,
             get_const_field(start_values));
 
-    ddc::for_each(start_idx_range, [&](IdxXYZ ixyz) {
+    ddc::host_for_each(start_idx_range, [&](IdxXYZ ixyz) {
         IdxX ix(ixyz);
         IdxY iy(ixyz);
         IdxZ iz(ixyz);
@@ -240,7 +240,7 @@ TEST(LayoutTransposition, Permutation)
     DFieldXYZ start_values = get_field(start_values_alloc);
     DFieldZXY end_values = get_field(end_values_alloc);
 
-    ddc::for_each(start_idx_range, [&](IdxXYZ ixyz) {
+    ddc::host_for_each(start_idx_range, [&](IdxXYZ ixyz) {
         double coord_x = get_coordinate(ddc::select<GridX>(ixyz));
         double coord_y = get_coordinate(ddc::select<GridY>(ixyz));
         double coord_z = get_coordinate(ddc::select<GridZ>(ixyz));
@@ -252,7 +252,7 @@ TEST(LayoutTransposition, Permutation)
             end_values,
             get_const_field(start_values));
 
-    ddc::for_each(start_idx_range, [&](IdxXYZ ixyz) {
+    ddc::host_for_each(start_idx_range, [&](IdxXYZ ixyz) {
         IdxX ix(ixyz);
         IdxY iy(ixyz);
         IdxZ iz(ixyz);
@@ -275,7 +275,7 @@ TEST(LayoutTransposition, Transpose3D)
     DFieldXYZ start_values = get_field(start_values_alloc);
     DFieldZYX end_values = get_field(end_values_alloc);
 
-    ddc::for_each(start_idx_range, [&](IdxXYZ ixyz) {
+    ddc::host_for_each(start_idx_range, [&](IdxXYZ ixyz) {
         double coord_x = get_coordinate(ddc::select<GridX>(ixyz));
         double coord_y = get_coordinate(ddc::select<GridY>(ixyz));
         double coord_z = get_coordinate(ddc::select<GridZ>(ixyz));
@@ -287,7 +287,7 @@ TEST(LayoutTransposition, Transpose3D)
             end_values,
             get_const_field(start_values));
 
-    ddc::for_each(start_idx_range, [&](IdxXYZ ixyz) {
+    ddc::host_for_each(start_idx_range, [&](IdxXYZ ixyz) {
         IdxX ix(ixyz);
         IdxY iy(ixyz);
         IdxZ iz(ixyz);
