@@ -34,29 +34,49 @@ public:
     /// @brief The discrete dimension representing the B-Lagranges.
     using lagrange_basis_type = LagrangeBasis;
 
+    using basis_domain_type = Basis::Impl<Basis, MemorySpace>::knot_grid;
+
+    /// @brief The type of the domain for the 1D evaluation mesh used by this class.
+    using evaluation_domain_type = IdxRange<evaluation_discrete_dimension_type>;
+
     /**
      * @brief The type of the whole domain representing evaluation points.
      *
      * @tparam The batched discrete domain on which the interpolation points are defined.
      */
     template <
-            class BatchedInterpolationIdxRange,
-            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationIdxRange>>>
-    using batched_evaluation_domain_type = BatchedInterpolationIdxRange;
+            class BatchedInterpolationGrid,
+            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationGrid>>>
+    using batched_evaluation_domain_type = BatchedInterpolationGrid;
 
-    /// @brief The type of the 1D Lagrange domain corresponding to the dimension of interest.
-    using interpolation_domain_type = IdxRange<InterpolationGrid>;
+    /// @brief The type of the 1D spline domain corresponding to the dimension of interest.
+    using lagrange_domain_type = IdxRange<basis_domain_type>;
 
     /**
-     * @brief The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain
-     * and batch domain) preserving the order of dimensions.
+     * @brief The type of the batch domain (obtained by removing the dimension of interest
+     * from the whole domain).
      *
      * @tparam The batched discrete domain on which the interpolation points are defined.
      */
     template <
             class BatchedInterpolationGrid,
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationGrid>>>
-    using batched_lagrange_domain_type = BatchedInterpolationGrid;
+    using batch_domain_type
+            = ddc::remove_dims_of_t<BatchedInterpolationGrid, evaluation_discrete_dimension_type>;
+
+    /**
+     * @brief The type of the whole spline domain (cartesian product of 1D spline domain
+     * and batch domain) preserving the order of dimensions.
+     *
+     * @tparam The batched discrete domain on which the interpolation points are defined.
+     */
+    template <
+            class BatchedInterpolationDDom,
+            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationDDom>>>
+    using batched_lagrange_domain_type = ddc::replace_dim_of_t<
+            BatchedInterpolationDDom,
+            evaluation_discrete_dimension_type,
+            basis_domain_type>;
 
     /// @brief The type of the extrapolation rule at the lower boundary.
     using lower_extrapolation_rule_type = LowerExtrapolationRule;
