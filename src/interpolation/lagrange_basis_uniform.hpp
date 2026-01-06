@@ -149,6 +149,15 @@ public:
             return m_break_point_domain;
         }
 
+        /** @brief Returns the index range including eventual duplicate values for the periodic case.
+         *
+         * @return The index range including eventual duplicate values.
+         */
+        KOKKOS_INLINE_FUNCTION IdxRange<knot_grid> full_domain() const
+        {
+            return m_knot_domain;
+        }
+
         /** @brief Evaluate the selected set of bases at the coordinate.
          *
          * Evaluate all d+1 bases which span the domain
