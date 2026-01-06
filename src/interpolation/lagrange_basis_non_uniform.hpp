@@ -100,6 +100,11 @@ public:
     public:
         Impl() = default;
 
+        /** @brief Initialise the possible Lagrange bases.
+         *
+         * Initialise the class such that Lagrange bases can be evluated on domains
+         * derived from the break point domain.
+         */
         explicit Impl(IdxRange<Grid1D> break_point_domain);
 
         /** @brief Returns the coordinate of the lower bound of the domain on which the B-splines are defined.
@@ -129,19 +134,26 @@ public:
             return static_cast<DataType>(rmax()) - static_cast<DataType>(rmin());
         }
 
-
-        //discrete_element_type get_icell_and_offset(
-        //        int& icell,
-        //        DataType& offset,
-        //        ddc::Coordinate<CDim> const& x) const;
-
+        /** @brief Evaluate the selected set of bases at the coordinate.
+         *
+         * Evaluate all d+1 bases which span the domain
+         * [coordinate(poly_start), coordinate(poly_start+d)]
+         * at the coordinate x.
+         *
+         * @param[out] values The values of each basis at the coordinate x.
+         * @param[in] x The coordinate where the bases are evaluated.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         */
         KOKKOS_INLINE_FUNCTION void eval_basis(
                 Span1D<DataType> values,
                 coord_type const& x,
                 Idx<knot_discrete_dimension_type> poly_start) const
         {
             KOKKOS_ASSERT(values.size() == degree() + 1);
-            //discrete_element_type poly_start = get_icell_and_offset(first_elem, icell, offset, x);
+            KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
+            KOKKOS_ASSERT(x <= ddc::coordinate(poly_start+degree()));
+
             DataType offset = (x - ddc::coordinate(poly_start));
             DataType eps = std::numeric_limits<DataType>::epsilon() * 4;
             for (std::size_t i(0); i < D + 1; ++i) {
