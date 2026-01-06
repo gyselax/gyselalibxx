@@ -138,6 +138,15 @@ public:
             return static_cast<DataType>(rmax()) - static_cast<DataType>(rmin());
         }
 
+        /** @brief Returns the index range of the break points.
+         *
+         * @return The index range describing the break points.
+         */
+        KOKKOS_INLINE_FUNCTION IdxRange<knot_grid> break_point_domain() const
+        {
+            return m_break_point_domain;
+        }
+
         /** @brief Evaluate the selected set of bases at the coordinate.
          *
          * Evaluate all d+1 bases which span the domain

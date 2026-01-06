@@ -93,13 +93,13 @@ public:
 
     public:
         /// @brief The type of the knots defining the B-splines.
-        using knot_discrete_dimension_type = UniformLagrangeKnots<DDim>;
+        using knot_grid = UniformLagrangeKnots<DDim>;
 
     private:
         std::array<DataType, D + 1> m_weights;
 
-        IdxRange<knot_discrete_dimension_type> m_knot_domain;
-        IdxRange<knot_discrete_dimension_type> m_break_point_domain;
+        IdxRange<knot_grid> m_knot_domain;
+        IdxRange<knot_grid> m_break_point_domain;
 
         Idx<DDim> m_reference;
 
@@ -140,6 +140,15 @@ public:
             return static_cast<DataType>(rmax()) - static_cast<DataType>(rmin());
         }
 
+        /** @brief Returns the index range of the break points.
+         *
+         * @return The index range describing the break points.
+         */
+        KOKKOS_INLINE_FUNCTION IdxRange<knot_grid> break_point_domain() const
+        {
+            return m_break_point_domain;
+        }
+
         /** @brief Evaluate the selected set of bases at the coordinate.
          *
          * Evaluate all d+1 bases which span the domain
@@ -154,13 +163,13 @@ public:
         KOKKOS_INLINE_FUNCTION void eval_basis(
                 Span1D<DataType> values,
                 coord_type const& x,
-                Idx<knot_discrete_dimension_type> poly_start) const
+                Idx<knot_grid> poly_start) const
         {
             KOKKOS_ASSERT(values.size() == degree() + 1);
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
             KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
-            DataType dx = ddc::discrete_space<knot_discrete_dimension_type>().step();
+            DataType dx = ddc::discrete_space<knot_grid>().step();
             double inv_dx = 1. / dx;
             DataType offset = (x - ddc::coordinate(poly_start)) * inv_dx;
             DataType eps = std::numeric_limits<DataType>::epsilon() * 4;
@@ -209,23 +218,22 @@ UniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
     // Initialise knot grid
     if constexpr (is_periodic()) {
         coord_type rmin_local = bp_rmin - step * (D - 1);
-        ddc::init_discrete_space<knot_discrete_dimension_type>(rmin_local, step);
-        m_knot_domain = IdxRange<knot_discrete_dimension_type>(
-                ddc::discrete_space<knot_discrete_dimension_type>().front(),
-                IdxStep<knot_discrete_dimension_type>(break_point_domain.size() + 2 * (D - 1)));
-        m_break_point_domain = m_knot_domain
-                                       .remove(IdxStep<knot_discrete_dimension_type>(D - 1),
-                                               IdxStep<knot_discrete_dimension_type>(D - 1));
+        ddc::init_discrete_space<knot_grid>(rmin_local, step);
+        m_knot_domain = IdxRange<knot_grid>(
+                ddc::discrete_space<knot_grid>().front(),
+                IdxStep<knot_grid>(break_point_domain.size() + 2 * (D - 1)));
+        m_break_point_domain
+                = m_knot_domain.remove(IdxStep<knot_grid>(D - 1), IdxStep<knot_grid>(D - 1));
     } else {
-        ddc::init_discrete_space<knot_discrete_dimension_type>(bp_rmin, step);
-        m_knot_domain = IdxRange<knot_discrete_dimension_type>(
-                ddc::discrete_space<knot_discrete_dimension_type>().front(),
-                IdxStep<knot_discrete_dimension_type>(break_point_domain.size()));
+        ddc::init_discrete_space<knot_grid>(bp_rmin, step);
+        m_knot_domain = IdxRange<knot_grid>(
+                ddc::discrete_space<knot_grid>().front(),
+                IdxStep<knot_grid>(break_point_domain.size()));
         m_break_point_domain = m_knot_domain;
     }
 
     // Calculate weights
-    DataType dx = ddc::discrete_space<knot_discrete_dimension_type>().step();
+    DataType dx = ddc::discrete_space<knot_grid>().step();
     for (std::size_t i(0); i < D + 1; ++i) {
         DataType numerator = dx;
         for (std::size_t j(0); j < D + 1; ++j) {
