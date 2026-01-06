@@ -215,17 +215,14 @@ UniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
     coord_type bp_rmin = ddc::coordinate(break_point_domain.front());
     DataType step = ddc::discrete_space<Grid1D>().step();
 
+    ddc::init_discrete_space<knot_grid>(bp_rmin, step);
     // Initialise knot grid
     if constexpr (is_periodic()) {
-        coord_type rmin_local = bp_rmin - step * (D - 1);
-        ddc::init_discrete_space<knot_grid>(rmin_local, step);
         m_knot_domain = IdxRange<knot_grid>(
                 ddc::discrete_space<knot_grid>().front(),
-                IdxStep<knot_grid>(break_point_domain.size() + 2 * (D - 1)));
-        m_break_point_domain
-                = m_knot_domain.remove(IdxStep<knot_grid>(D - 1), IdxStep<knot_grid>(D - 1));
+                IdxStep<knot_grid>(break_point_domain.size() + D));
+        m_break_point_domain = m_knot_domain.remove_last(IdxStep<knot_grid>(D));
     } else {
-        ddc::init_discrete_space<knot_grid>(bp_rmin, step);
         m_knot_domain = IdxRange<knot_grid>(
                 ddc::discrete_space<knot_grid>().front(),
                 IdxStep<knot_grid>(break_point_domain.size()));

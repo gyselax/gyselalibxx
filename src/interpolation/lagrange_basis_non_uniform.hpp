@@ -218,25 +218,21 @@ NonUniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
     // Initialise knot grid
     if constexpr (is_periodic()) {
         std::size_t npoints = ddc::discrete_space<Grid1D>().size();
-        std::vector<coord_type> points(npoints + 2 * (D - 1));
+        std::vector<coord_type> points(npoints + D);
         Idx<Grid1D> idx_front = ddc::discrete_space<Grid1D>().front();
         Idx<Grid1D> idx_back = idx_front + npoints;
         for (std::size_t i(0); i < npoints; ++i) {
-            points[D - 1 + i] = ddc::coordinate(idx_front + i);
+            points[i] = ddc::coordinate(idx_front + i);
         }
-        for (std::size_t i(1); i <= D - 1; ++i) {
-            points[D - 1 - i - 1] = ddc::coordinate(idx_front)
-                                    - (ddc::coordinate(idx_back) - ddc::coordinate(idx_back - i));
+        for (std::size_t i(1); i < D + 1; ++i) {
             points[npoints + i] = ddc::coordinate(idx_back)
-                                  - (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
+                                  + (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
         }
         ddc::init_discrete_space<knot_discrete_dimension_type>(points);
         m_knot_domain = IdxRange<knot_discrete_dimension_type>(
                 ddc::discrete_space<knot_discrete_dimension_type>().front(),
-                IdxStep<knot_discrete_dimension_type>(break_point_domain.size() + 2 * (D - 1)));
-        m_break_point_domain = m_knot_domain
-                                       .remove(IdxStep<knot_discrete_dimension_type>(D - 1),
-                                               IdxStep<knot_discrete_dimension_type>(D - 1));
+                IdxStep<knot_discrete_dimension_type>(break_point_domain.size() + D));
+        m_break_point_domain = m_knot_domain.remove_last(IdxStep<knot_discrete_dimension_type>(D));
     } else {
         std::size_t npoints = ddc::discrete_space<Grid1D>().size();
         Idx<Grid1D> idx_front = ddc::discrete_space<Grid1D>().front();
