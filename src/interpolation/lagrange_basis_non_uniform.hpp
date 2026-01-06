@@ -23,6 +23,10 @@ struct NonUniformLagrangeKnots : NonUniformGridBase<typename T::continuous_dimen
  *
  * This class uses the second barycentric formulation to evaluate the
  * polynomials. This formula is used for stability.
+ * It is described in
+ * Barycentric Lagrange Interpolation
+ * Jean-Paul Berrut and Lloyd N. Trefethen
+ * SIAM Review 2004 46:3, 501-517
  *
  * @tparam Grid1D The grid on which the Lagrange polynomials
  *                  are defined.
