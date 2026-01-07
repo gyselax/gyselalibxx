@@ -13,8 +13,8 @@ from plot_utils import anim_field3d
 
 if __name__ == '__main__':
     parser = ArgumentParser(
-        description="Plots the difference between the distribution
-        function and equilibrium")
+        description=("Plots the difference between the distribution"
+                     "function and equilibrium"))
     parser.add_argument('data_dir',
                         action='store',
                         nargs='?',
