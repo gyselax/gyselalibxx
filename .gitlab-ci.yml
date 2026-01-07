@@ -109,8 +109,9 @@ documentation:
     export PYTHONPATH=$(pwd)/docs/pip_install/local/lib/python3.10/dist-packages/
   script: |
     rm -rf docs/mkdoc docs/site || true
-    python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
+    python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc docs/pip_install
     cd docs
+    ls pip_install
     pip_install/local/bin/mkdocs build
     cat doxygen.log
     cd ..
