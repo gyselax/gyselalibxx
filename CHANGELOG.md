@@ -27,6 +27,7 @@ in a `DerivField`.
 - Rename `geometry.hpp` files to `geometry_<geom_descriptor>.hpp` to reflect the geometry that they describe.
 - `DerivField` objects are initialised on GPU by default.
 - Update DDC to [v0.10.0](https://github.com/CExA-project/ddc/releases/tag/v0.10.0).
+- Change some Python class `scattered_coord` arguments to keyword-only.
 
 ### Deprecated
 
