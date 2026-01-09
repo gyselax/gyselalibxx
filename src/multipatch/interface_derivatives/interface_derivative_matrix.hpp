@@ -907,28 +907,11 @@ private:
                 = functions_and_derivs.template get<Patch_2>();
 
         // Get the correct index ranges and indices for the slices.
-        IdxRange<Grid1_1> idx_range_grid1_1(m_idx_ranges.template get<Patch_1>());
-        IdxRange<Grid2_1> idx_range_grid2_1(m_idx_ranges.template get<Patch_1>());
-        IdxRange<Grid1_2> idx_range_grid1_2(m_idx_ranges.template get<Patch_2>());
-        IdxRange<Grid2_2> idx_range_grid2_2(m_idx_ranges.template get<Patch_2>());
-
-        IdxRangeSlice<Grid1_1> idx_range_slice_d1_1
-                = function_and_derivs_1.template idx_range_for_deriv<Grid1_1>();
-        IdxRangeSlice<Grid2_1> idx_range_slice_d2_1
-                = function_and_derivs_1.template idx_range_for_deriv<Grid2_1>();
-        IdxRangeSlice<Grid1_2> idx_range_slice_d1_2
-                = function_and_derivs_2.template idx_range_for_deriv<Grid1_2>();
-        IdxRangeSlice<Grid2_2> idx_range_slice_d2_2
-                = function_and_derivs_2.template idx_range_for_deriv<Grid2_2>();
-
         IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
 
         IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
-
-        IdxRange<Grid1_1, Grid2_1> idx_range_1(m_idx_ranges.template get<Patch_1>());
-        IdxRange<Grid1_2, Grid2_2> idx_range_2(m_idx_ranges.template get<Patch_2>());
 
         Idx<Deriv1_1> idx_d1_1(1);
         Idx<Deriv2_1> idx_d2_1(1);
@@ -949,9 +932,6 @@ private:
         // The slice indices has to be a point at a corner, i.e. index range boundaries.
         assert((idx_slice_1 == idx_range_par_1.front()) || (idx_slice_1 == idx_range_par_1.back()));
         assert((idx_slice_2 == idx_range_par_2.front()) || (idx_slice_2 == idx_range_par_2.back()));
-
-        const bool is_idx_par_min_1 = (idx_slice_1 == idx_range_par_1.front());
-        const bool is_idx_par_min_2 = (idx_slice_2 == idx_range_par_2.front());
 
         // If Patch1 follows the orientation of the sorted 1D grid sequence.
         constexpr bool is_per_1_well_oriented
