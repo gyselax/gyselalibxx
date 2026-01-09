@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
 in a `DerivField`.
 - Allow `FFTPoissonSolver` to use variable precision.
+- Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
 
 ### Fixed
 
