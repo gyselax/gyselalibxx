@@ -1,5 +1,4 @@
 #include <array>
-#include <random>
 
 #include <gtest/gtest.h>
 
@@ -23,7 +22,7 @@ struct LagrangeBasisFixture<std::tuple<
 {
     struct X
     {
-        static constexpr bool PERIODIC = false;
+        static constexpr bool PERIODIC = Periodic;
     };
     struct GridX : public std::conditional_t<Uniform, UniformGridBase<X>, NonUniformGridBase<X>>
     {
