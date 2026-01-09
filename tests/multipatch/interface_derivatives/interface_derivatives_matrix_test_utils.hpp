@@ -132,7 +132,6 @@ void initialise_y_derivatives(
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
 
-    // IdxRange<GridX, GridY> idx_range_xy = get_idx_range(function_and_derivs);
     IdxRange<GridX> idx_range_x(get_idx_range(function_and_derivs));
     IdxRange<GridY> idx_range_y(get_idx_range(function_and_derivs));
 
