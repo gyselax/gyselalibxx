@@ -112,5 +112,5 @@ void fill_in_reverse(
 template <class Grid1D>
 IdxRangeSlice<Grid1D> get_bound_idx_range_slice(IdxRange<Grid1D> const idx_range)
 {
-    return IdxRangeSlice<Grid1D>(idx_range.front(), IdxStep<Grid1D>(2), idx_range.extents()-1);
+    return IdxRangeSlice<Grid1D>(idx_range.front(), IdxStep<Grid1D>(2), idx_range.extents() - 1);
 }

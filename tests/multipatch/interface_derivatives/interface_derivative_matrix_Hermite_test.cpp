@@ -766,39 +766,24 @@ TEST_F(InterfaceExactDerivativeMatrixHermiteTest, CheckForHermiteBc)
 
     // Y bound on Patch1 ---
 #if (CHANGE_BOUND1)
-    initialise_x_derivatives<Patch1>(
-            function_and_derivs_1,
-            evaluator_g,
-            const_function_g_coef,
-            coord_transform_1);
+    initialise_x_derivatives<
+            Patch1>(function_and_derivs_1, evaluator_g, const_function_g_coef, coord_transform_1);
 #else
-    initialise_y_derivatives<Patch1>(
-            function_and_derivs_1,
-            evaluator_g,
-            const_function_g_coef,
-            coord_transform_1);
+    initialise_y_derivatives<
+            Patch1>(function_and_derivs_1, evaluator_g, const_function_g_coef, coord_transform_1);
 #endif
 
     // Y bound on Patch2 ---
-    initialise_y_derivatives<Patch2>(
-            function_and_derivs_2,
-            evaluator_g,
-            const_function_g_coef,
-            coord_transform_2);
+    initialise_y_derivatives<
+            Patch2>(function_and_derivs_2, evaluator_g, const_function_g_coef, coord_transform_2);
 
     // Y bound on Patch3 ---
 #if (CHANGE_BOUND3)
-    initialise_x_derivatives<Patch3>(
-            function_and_derivs_3,
-            evaluator_g,
-            const_function_g_coef,
-            coord_transform_3);
+    initialise_x_derivatives<
+            Patch3>(function_and_derivs_3, evaluator_g, const_function_g_coef, coord_transform_3);
 #else
-    initialise_y_derivatives<Patch3>(
-            function_and_derivs_3,
-            evaluator_g,
-            const_function_g_coef,
-            coord_transform_3);
+    initialise_y_derivatives<
+            Patch3>(function_and_derivs_3, evaluator_g, const_function_g_coef, coord_transform_3);
 #endif
 
     // ------ initialise the cross-derivatives from the global spline
