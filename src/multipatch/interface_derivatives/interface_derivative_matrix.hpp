@@ -335,9 +335,9 @@ private:
         using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
         // Type for the slice_previous_idx_value index.
-        using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
+        using IdxPatchSlice = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         auto [idx_slice_1, idx_slice_2]
-                = get_slice_indexes<EquivalentInterfaceI, PatchSliceIdx>(slice_previous_idx_value);
+                = get_slice_indexes<EquivalentInterfaceI, IdxPatchSlice>(slice_previous_idx_value);
 
         // Get the fields of the left and right patch of the interface.
         DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
@@ -374,9 +374,9 @@ private:
         Idx<DerivPerp2, GridPerp2> idx_slice_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2);
 
         // Type for the slice_previous_idx_value index.
-        using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
+        using IdxPatchSlice = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         auto [idx_slice_1, idx_slice_2]
-                = get_slice_indexes<EquivalentInterfaceI, PatchSliceIdx>(slice_previous_idx_value);
+                = get_slice_indexes<EquivalentInterfaceI, IdxPatchSlice>(slice_previous_idx_value);
 
 
         // The direction of the two perpendicular grids of the patches agree.
@@ -545,7 +545,7 @@ private:
      *  |              ^   |   v            ^   |   v           |
      *  |idx_val   idx_val | idx_val    idx_val | idx_val       |
      */
-    template <typename InterfaceI, class PatchSliceIdx>
+    template <typename InterfaceI, class IdxPatchSlice>
     auto get_slice_indexes(int& slice_idx_value)
     {
         using Patch_1 = typename InterfaceI::Edge1::associated_patch;
@@ -559,7 +559,7 @@ private:
 
         EdgeTransformation<InterfaceI> index_converter(idx_range_parall_1, idx_range_parall_2);
 
-        if constexpr (std::is_same_v<Patch_1, PatchSliceIdx>) {
+        if constexpr (std::is_same_v<Patch_1, IdxPatchSlice>) {
             Idx<ParallGrid1> slice_idx_1(slice_idx_value);
             Idx<ParallGrid2> slice_idx_2(index_converter(slice_idx_1));
             slice_idx_value = (slice_idx_2 - idx_range_parall_2.front()).value();

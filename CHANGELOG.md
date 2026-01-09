@@ -11,6 +11,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
+in a `DerivField`.
+
+### Fixed
+
+- Fix derivative indexing of a `DerivField` object.
+
+### Changed
+
+- Extract spline definitions from `geometry.hpp` files into files called `spline_definitions_<geom_descriptor>.hpp` which are dedicated to tests or simulations.
+- Rename `geometry.hpp` files to `geometry_<geom_descriptor>.hpp` to reflect the geometry that they describe.
+- `DerivField` objects are initialised on GPU by default.
+
+### Deprecated
+
+### Removed
+
+- Remove unused temporal dimension `T` in `geometryXVx`.
+
+## [v0.4.1] - 2025-12-12
+
+### Fixed
+
+- Allow access to slices extracted from `const DerivField`.
+- Fixed `LAPACKE` CMake target definition.
+- Uses patched cray-mpich package forcing using of the GTL on dependencies.
+
+## [v0.4.0] - 2025-12-10
+
+### Added
+
 - Add getters to `DerivField` types to access the associated index ranges.
 - Add H100 Jean-Zay toolchain.
 - Add an `operator()` in `BslAdvectionPolar` to advect a function with an advection field along `<R, Theta>`.
@@ -22,6 +53,7 @@ The operator averages the values of the advection field on the first ring to get
 
 - Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
 - Specify return type for Lie-Poisson operator explicitly for better error messages.
+- Ensure `copy_to_vector_space` can be called for different memory layouts.
 
 ### Changed
 
@@ -44,10 +76,6 @@ The operator averages the values of the advection field on the first ring to get
 - Update Adastra Spack toolchains to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:. Use OpenBLAS instead of Cray LibSci and raw GCC compilers.
 - Update Jean-Zay Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
 - Use LAPACKE to call LAPACK functions.
-
-### Deprecated
-
-### Removed
 
 ## [v0.3.0] - 2025-09-03
 

@@ -71,5 +71,3 @@ eval -- "$(
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
 
 export GYSELALIBXX_OPENBLAS_ROOT="$(spack location -i openblas)"
-
-export MPICH_GPU_SUPPORT_ENABLED=1
