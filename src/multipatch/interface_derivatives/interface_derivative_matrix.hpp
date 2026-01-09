@@ -508,12 +508,12 @@ private:
         using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
         // Type for the slice_previous_idx_value index.
-        using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
+        using IdxPatchSlice = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         Idx<GridPar1> idx_slice_1;
         Idx<GridPar2> idx_slice_2;
         set_slice_indexes<
                 EquivalentInterfaceI,
-                PatchSliceIdx>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+                IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
 
         DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
@@ -626,12 +626,12 @@ private:
         using DerivPar2 = typename ddc::Deriv<typename GridPar2::continuous_dimension_type>;
 
         // Type for the slice_previous_idx_value index.
-        using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
+        using IdxPatchSlice = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         Idx<GridPar1> idx_slice_1;
         Idx<GridPar2> idx_slice_2;
         set_slice_indexes<
                 EquivalentInterfaceI,
-                PatchSliceIdx>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+                IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
         IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
@@ -829,12 +829,12 @@ private:
         Idx<GridPerp2> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2);
 
         // Type for the slice_previous_idx_value index.
-        using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
+        using IdxPatchSlice = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         Idx<GridPar1> idx_slice_1;
         Idx<GridPar2> idx_slice_2;
         set_slice_indexes<
                 EquivalentInterfaceI,
-                PatchSliceIdx>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+                IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
         // The orientation of Patch1 follows the global orientation on the sorted 1D grid sequence.
         constexpr bool is_per_1_well_oriented
@@ -936,12 +936,12 @@ private:
         Idx<Deriv2_2> idx_d2_2(1);
 
         // Type for the slice_previous_idx_value index.
-        using PatchSliceIdx = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
+        using IdxPatchSlice = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
         Idx<GridPar1> idx_slice_1;
         Idx<GridPar2> idx_slice_2;
         set_slice_indexes<
                 EquivalentInterfaceI,
-                PatchSliceIdx>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+                IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
 
         Idx<GridPerp1> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1);
         Idx<GridPerp2> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2);
@@ -1015,7 +1015,7 @@ private:
      */
     template <
             typename InterfaceI,
-            class PatchSliceIdx,
+            class IdxPatchSlice,
             class ParallGrid1 = typename InterfaceI::Edge1::parallel_grid,
             class ParallGrid2 = typename InterfaceI::Edge2::parallel_grid>
     void set_slice_indexes(
@@ -1031,7 +1031,7 @@ private:
 
         EdgeTransformation<InterfaceI> index_converter(idx_range_parall_1, idx_range_parall_2);
 
-        if constexpr (std::is_same_v<Patch_1, PatchSliceIdx>) {
+        if constexpr (std::is_same_v<Patch_1, IdxPatchSlice>) {
             slice_idx_1 = Idx<ParallGrid1>(slice_idx_value);
             slice_idx_2 = index_converter(slice_idx_1);
             slice_idx_value = (slice_idx_2 - idx_range_parall_2.front()).value();
