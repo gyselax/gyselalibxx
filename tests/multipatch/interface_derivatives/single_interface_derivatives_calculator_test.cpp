@@ -484,19 +484,17 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                     get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
                     get_const_field(function_2[idx_par_2][reduced_idx_range_perp2]));
 
-            Idx<ddc::Deriv<Rg>> idx_deriv_r(1);
-            double global_deriv = evaluator_g
-                                          .deriv(idx_deriv_r,
-                                                 interface_coord,
-                                                 get_const_field(function_g_coef));
+            Idx<ddc::Deriv<Rg>> idx_dr(1);
+            double global_deriv
+                    = evaluator_g.deriv(idx_dr, interface_coord, get_const_field(function_g_coef));
 
             // Exact formula ---------------------------------------------------------------------
             double const deriv_patch_1 = evaluator_g
-                                                 .deriv(idx_deriv_r,
+                                                 .deriv(idx_dr,
                                                         interface_minus_coord,
                                                         get_const_field(function_g_coef));
             double const deriv_patch_2 = evaluator_g
-                                                 .deriv(idx_deriv_r,
+                                                 .deriv(idx_dr,
                                                         interface_plus_coord,
                                                         get_const_field(function_g_coef));
             double const local_deriv = sum_values + coeff_deriv_patch_1 * deriv_patch_1
