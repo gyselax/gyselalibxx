@@ -45,11 +45,19 @@ gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 
 # InterfaceExactDerivativeMatrix test =================================================================
 function (interface_derivative_matrix_executable TEST_CASE)
-    set(test_name_gtest "interface_derivative_matrix_${TEST_CASE}_test")
+     if (TEST_CASE STREQUAL "GREVILLE_CASE")
+        set(test_name_gtest "interface_derivative_matrix_Greville_periodic_test")
+        add_executable("${test_name_gtest}"
+            interface_derivative_matrix_Greville_periodic_test.cpp
+            ../../main.cpp
+        )
+    else()
+        set(test_name_gtest "interface_derivative_matrix_${TEST_CASE}_test")
         add_executable("${test_name_gtest}"
             interface_derivative_matrix_Hermite_test.cpp
             ../../main.cpp
         )
+    endif()
     target_link_libraries("${test_name_gtest}"
     PUBLIC
         DDC::core
@@ -65,6 +73,7 @@ function (interface_derivative_matrix_executable TEST_CASE)
     gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 endfunction()
 
+interface_derivative_matrix_executable("GREVILLE_CASE")
 interface_derivative_matrix_executable("REVERSE_PATCH1")
 interface_derivative_matrix_executable("REVERSE_PATCH2")
 interface_derivative_matrix_executable("REVERSE_PATCH3")

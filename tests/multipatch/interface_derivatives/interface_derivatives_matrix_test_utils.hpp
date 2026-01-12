@@ -87,7 +87,7 @@ void initialise_2D_function(
     using Dim2 = typename CoordTransformType::Dim2Local;
     using Xg = typename CoordTransformType::Dim1Global;
     using Yg = typename CoordTransformType::Dim2Global;
-    ddc::for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
+    ddc::host_for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
         // Get the coordinate on the equivalent global mesh.
         Coord<Dim1, Dim2> local_coord = ddc::coordinate(idx);
         Coord<Xg, Yg> equiv_global_coord = coord_transform.get_global_coord(local_coord);
@@ -142,7 +142,7 @@ void initialise_y_derivatives(
     int const sign
             = coord_transform.m_is_y_loc_well_oriented - !coord_transform.m_is_y_loc_well_oriented;
 
-    ddc::for_each(idx_range_x, [&](Idx<GridX> const& idx_par) {
+    ddc::host_for_each(idx_range_x, [&](Idx<GridX> const& idx_par) {
         Idx<GridX, GridY> idx_min(idx_par, idx_ymin);
         Idx<GridX, GridY> idx_max(idx_par, idx_ymax);
         Coord<Xg, Yg> interface_coord_min(
@@ -151,15 +151,21 @@ void initialise_y_derivatives(
                 coord_transform.get_global_coord(ddc::coordinate(idx_max)));
 
         if (coord_transform.are_x_y_loc_x_y_glob) {
+            Idx<ddc::Deriv<Yg>> idx_deriv(1);
             function_and_derivs(idx_dy, idx_ymin, idx_par)
-                    = sign * evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
+                    = sign
+                      * evaluator_g.deriv(idx_deriv, interface_coord_min, const_function_g_coef);
             function_and_derivs(idx_dy, idx_ymax, idx_par)
-                    = sign * evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
+                    = sign
+                      * evaluator_g.deriv(idx_deriv, interface_coord_max, const_function_g_coef);
         } else {
+            Idx<ddc::Deriv<Xg>> idx_deriv(1);
             function_and_derivs(idx_dy, idx_ymin, idx_par)
-                    = sign * evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+                    = sign
+                      * evaluator_g.deriv(idx_deriv, interface_coord_min, const_function_g_coef);
             function_and_derivs(idx_dy, idx_ymax, idx_par)
-                    = sign * evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+                    = sign
+                      * evaluator_g.deriv(idx_deriv, interface_coord_max, const_function_g_coef);
         }
     });
 }
@@ -195,7 +201,7 @@ void initialise_x_derivatives(
     int const sign
             = coord_transform.m_is_x_loc_well_oriented - !coord_transform.m_is_x_loc_well_oriented;
 
-    ddc::for_each(idx_range_y, [&](Idx<GridY> const& idx_par) {
+    ddc::host_for_each(idx_range_y, [&](Idx<GridY> const& idx_par) {
         Idx<GridX, GridY> idx_min(idx_xmin, idx_par);
         Idx<GridX, GridY> idx_max(idx_xmax, idx_par);
         Coord<Xg, Yg> interface_coord_min(
@@ -204,15 +210,21 @@ void initialise_x_derivatives(
                 coord_transform.get_global_coord(ddc::coordinate(idx_max)));
 
         if (coord_transform.are_x_y_loc_x_y_glob) {
+            Idx<ddc::Deriv<Xg>> idx_deriv(1);
             function_and_derivs(idx_dx, idx_xmin, idx_par)
-                    = sign * evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+                    = sign
+                      * evaluator_g.deriv(idx_deriv, interface_coord_min, const_function_g_coef);
             function_and_derivs(idx_dx, idx_xmax, idx_par)
-                    = sign * evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+                    = sign
+                      * evaluator_g.deriv(idx_deriv, interface_coord_max, const_function_g_coef);
         } else {
+            Idx<ddc::Deriv<Yg>> idx_deriv(1);
             function_and_derivs(idx_dx, idx_xmin, idx_par)
-                    = sign * evaluator_g.deriv_dim_2(interface_coord_min, const_function_g_coef);
+                    = sign
+                      * evaluator_g.deriv(idx_deriv, interface_coord_min, const_function_g_coef);
             function_and_derivs(idx_dx, idx_xmax, idx_par)
-                    = sign * evaluator_g.deriv_dim_2(interface_coord_max, const_function_g_coef);
+                    = sign
+                      * evaluator_g.deriv(idx_deriv, interface_coord_max, const_function_g_coef);
         }
     });
 }
@@ -270,14 +282,15 @@ void initialise_cross_derivatives(
             = coord_transform.m_is_y_loc_well_oriented - !coord_transform.m_is_y_loc_well_oriented;
     int const sign_xy = sign_x * sign_y;
 
+    Idx<ddc::Deriv<Xg>, ddc::Deriv<Yg>> idx_deriv(1, 1);
     function_and_derivs(idx_cross_deriv_min_min)
-            = sign_xy * evaluator_g.deriv_1_and_2(coord_min_min, const_function_g_coef);
+            = sign_xy * evaluator_g.deriv(idx_deriv, coord_min_min, const_function_g_coef);
     function_and_derivs(idx_cross_deriv_max_min)
-            = sign_xy * evaluator_g.deriv_1_and_2(coord_max_min, const_function_g_coef);
+            = sign_xy * evaluator_g.deriv(idx_deriv, coord_max_min, const_function_g_coef);
     function_and_derivs(idx_cross_deriv_min_max)
-            = sign_xy * evaluator_g.deriv_1_and_2(coord_min_max, const_function_g_coef);
+            = sign_xy * evaluator_g.deriv(idx_deriv, coord_min_max, const_function_g_coef);
     function_and_derivs(idx_cross_deriv_max_max)
-            = sign_xy * evaluator_g.deriv_1_and_2(coord_max_max, const_function_g_coef);
+            = sign_xy * evaluator_g.deriv(idx_deriv, coord_max_max, const_function_g_coef);
 }
 
 /// @brief Initialise all the cross-derivatives of the given DerivFields from the global spline.
@@ -336,7 +349,7 @@ void check_interpolation_grids(
     using Yg = typename GridYg::continuous_dimension_type;
     using Dim1 = typename Patch::Dim1;
     using Dim2 = typename Patch::Dim2;
-    ddc::for_each(idx_range, [&](typename Patch::Idx12 const& idx) {
+    ddc::host_for_each(idx_range, [&](typename Patch::Idx12 const& idx) {
         IdxStep<Grid1> idx_x = coord_transform.m_is_x_loc_well_oriented
                                        ? Idx<Grid1>(idx) - IdxRange<Grid1>(idx_range).front()
                                        : IdxRange<Grid1>(idx_range).back() - Idx<Grid1>(idx);
@@ -391,7 +404,7 @@ void check_x_derivatives(
     Idx<GridX> idx_xmin(idx_range_x.front());
     Idx<GridX> idx_xmax(idx_range_x.back());
 
-    ddc::for_each(idx_range_y, [&](typename Patch::Idx2 const& idx_y) {
+    ddc::host_for_each(idx_range_y, [&](typename Patch::Idx2 const& idx_y) {
         typename Patch::Idx12 idx_min(idx_xmin, idx_y);
         typename Patch::Idx12 idx_max(idx_xmax, idx_y);
         Coord<Xg, Yg> interface_coord_min(
@@ -402,11 +415,17 @@ void check_x_derivatives(
         double global_deriv_min;
         double global_deriv_max;
         if (coord_transform.are_x_y_loc_x_y_glob) {
-            global_deriv_min = sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
-            global_deriv_max = sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
+            Idx<ddc::Deriv<Xg>> idx_deriv(1);
+            global_deriv_min
+                    = sign * evaluator_g.deriv(idx_deriv, interface_coord_min, function_g_coef);
+            global_deriv_max
+                    = sign * evaluator_g.deriv(idx_deriv, interface_coord_max, function_g_coef);
         } else {
-            global_deriv_min = sign * evaluator_g.deriv_dim_2(interface_coord_min, function_g_coef);
-            global_deriv_max = sign * evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
+            Idx<ddc::Deriv<Yg>> idx_deriv(1);
+            global_deriv_min
+                    = sign * evaluator_g.deriv(idx_deriv, interface_coord_min, function_g_coef);
+            global_deriv_max
+                    = sign * evaluator_g.deriv(idx_deriv, interface_coord_max, function_g_coef);
         }
         EXPECT_NEAR(function_and_derivs(idx_deriv, idx_xmin, idx_y), global_deriv_min, TOL);
         EXPECT_NEAR(function_and_derivs(idx_deriv, idx_xmax, idx_y), global_deriv_max, TOL);
@@ -479,7 +498,7 @@ void check_y_derivatives(
     Idx<GridY> idx_ymin = idx_range_y.front();
     Idx<GridY> idx_ymax = idx_range_y.back();
 
-    ddc::for_each(idx_range_x, [&](typename Patch::Idx1 const& idx_x) {
+    ddc::host_for_each(idx_range_x, [&](typename Patch::Idx1 const& idx_x) {
         typename Patch::Idx12 idx_min(idx_x, idx_ymin);
         typename Patch::Idx12 idx_max(idx_x, idx_ymax);
         Coord<Xg, Yg> interface_coord_min(
@@ -490,11 +509,17 @@ void check_y_derivatives(
         double global_deriv_min;
         double global_deriv_max;
         if (coord_transform.are_x_y_loc_x_y_glob) {
-            global_deriv_min = sign * evaluator_g.deriv_dim_2(interface_coord_min, function_g_coef);
-            global_deriv_max = sign * evaluator_g.deriv_dim_2(interface_coord_max, function_g_coef);
+            Idx<ddc::Deriv<Yg>> idx_deriv(1);
+            global_deriv_min
+                    = sign * evaluator_g.deriv(idx_deriv, interface_coord_min, function_g_coef);
+            global_deriv_max
+                    = sign * evaluator_g.deriv(idx_deriv, interface_coord_max, function_g_coef);
         } else {
-            global_deriv_min = sign * evaluator_g.deriv_dim_1(interface_coord_min, function_g_coef);
-            global_deriv_max = sign * evaluator_g.deriv_dim_1(interface_coord_max, function_g_coef);
+            Idx<ddc::Deriv<Xg>> idx_deriv(1);
+            global_deriv_min
+                    = sign * evaluator_g.deriv(idx_deriv, interface_coord_min, function_g_coef);
+            global_deriv_max
+                    = sign * evaluator_g.deriv(idx_deriv, interface_coord_max, function_g_coef);
         }
 
         // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
@@ -606,14 +631,15 @@ void check_xy_derivatives(
     Coord<Xg, Yg> interface_coord_max_max(
             coord_transform.get_global_coord(ddc::coordinate(idx_max_max)));
 
+    Idx<ddc::Deriv<Xg>, ddc::Deriv<Yg>> idx_deriv(1, 1);
     double global_deriv_min_min
-            = sign_xy * evaluator_g.deriv_1_and_2(interface_coord_min_min, function_g_coef);
+            = sign_xy * evaluator_g.deriv(idx_deriv, interface_coord_min_min, function_g_coef);
     double global_deriv_max_min
-            = sign_xy * evaluator_g.deriv_1_and_2(interface_coord_max_min, function_g_coef);
+            = sign_xy * evaluator_g.deriv(idx_deriv, interface_coord_max_min, function_g_coef);
     double global_deriv_min_max
-            = sign_xy * evaluator_g.deriv_1_and_2(interface_coord_min_max, function_g_coef);
+            = sign_xy * evaluator_g.deriv(idx_deriv, interface_coord_min_max, function_g_coef);
     double global_deriv_max_max
-            = sign_xy * evaluator_g.deriv_1_and_2(interface_coord_max_max, function_g_coef);
+            = sign_xy * evaluator_g.deriv(idx_deriv, interface_coord_max_max, function_g_coef);
 
     // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
     // we don't need the cross-derivatives for y = ymin. Their value is not checked.
@@ -766,7 +792,7 @@ void check_spline_representation_agreement(
     host_t<CoordFieldOnPatch<Patch>> eval_points(eval_points_alloc);
 
     // The evaluation points are placed in the middle of the cells, except for the last one.
-    ddc::for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
+    ddc::host_for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
         Coord<DimX, DimY> const mesh_point(ddc::coordinate(idx));
         typename Patch::Idx1 idx_1(idx);
         typename Patch::Idx2 idx_2(idx);
@@ -778,7 +804,7 @@ void check_spline_representation_agreement(
     });
 
     // Evaluate and compare the local and global spline representations ----------------------
-    ddc::for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
+    ddc::host_for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
         Coord<Xg, Yg> eval_point_g(coord_transform.get_global_coord(eval_points(idx)));
         double local_spline = evaluator(eval_points(idx), get_const_field(function_coef));
         double global_spline = evaluator_g(eval_point_g, get_const_field(function_g_coef));

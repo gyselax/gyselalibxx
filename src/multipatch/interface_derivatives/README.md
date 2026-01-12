@@ -693,7 +693,7 @@ matrix_147.solve_cross_deriv(functions_and_derivs_147); // along y direction usi
 // ...
 ```
 
-Once the all derivatives computed on for every patches using all the interfaces,
+Once the all derivatives computed on for every patch using all the interfaces,
 all have the data to build local spline representations.
 On conforming global meshes, the local splines are exactly pieces of an equivalent
 global spline.

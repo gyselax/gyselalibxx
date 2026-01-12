@@ -652,7 +652,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_min_max(idx_dxg_min, idx_dyg_max);
     Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_max_max(idx_dxg_max, idx_dyg_max);
 
-    ddc::for_each(idx_range_yg, [&](Idx<GridYg> const idx) {
+    ddc::host_for_each(idx_range_yg, [&](Idx<GridYg> const idx) {
         double const xgmin = xg_min;
         double const xgmax = xg_max;
         double const yg = ddc::coordinate(idx);
@@ -661,7 +661,7 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
         function_and_derivs_g[idx_dxg_max](idx)
                 = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmax + 0.25) * std::sin(yg);
     });
-    ddc::for_each(idx_range_xg, [&](Idx<GridXg> const idx) {
+    ddc::host_for_each(idx_range_xg, [&](Idx<GridXg> const idx) {
         double const ygmin = yg_min;
         double const ygmax = yg_max;
         double const xg = ddc::coordinate(Idx<GridXg>(idx));
@@ -703,62 +703,63 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
 
     // ------ initialise the boundary first derivatives from the global spline
     // X bound on Patch1 ---
+    Idx<ddc::Deriv<Xg>> idx_dxg(1);
 #if defined(REVERSE_PATCH1)
     Idx<ddc::Deriv<X<1>>> idx_dx1(1);
-    ddc::for_each(idx_range_y1, [&](Idx<GridY<1>> const& idx_par) {
+    ddc::host_for_each(idx_range_y1, [&](Idx<GridY<1>> const& idx_par) {
         Idx<GridX<1>, GridY<1>> idx_max(idx_range_x1.back(), idx_par);
         Coord<Xg, Yg> interface_coord_max(
                 coord_transform_1.get_global_coord(ddc::coordinate(idx_max)));
         function_and_derivs_1(idx_dx1, idx_max)
-                = -evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+                = -evaluator_g.deriv(idx_dxg, interface_coord_max, const_function_g_coef);
     });
 #elif defined(CHANGE_BOUND1)
     Idx<ddc::Deriv<Y<1>>> idx_dy1(1);
-    ddc::for_each(idx_range_x1, [&](Idx<GridX<1>> const& idx_par) {
+    ddc::host_for_each(idx_range_x1, [&](Idx<GridX<1>> const& idx_par) {
         Idx<GridX<1>, GridY<1>> idx_max(idx_par, idx_range_y1.back());
         Coord<Xg, Yg> interface_coord_max(
                 coord_transform_1.get_global_coord(ddc::coordinate(idx_max)));
         function_and_derivs_1(idx_dy1, idx_max)
-                = -evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+                = -evaluator_g.deriv(idx_dxg, interface_coord_max, const_function_g_coef);
     });
 #else
     Idx<ddc::Deriv<X<1>>> idx_dx1(1);
-    ddc::for_each(idx_range_y1, [&](Idx<GridY<1>> const& idx_par) {
+    ddc::host_for_each(idx_range_y1, [&](Idx<GridY<1>> const& idx_par) {
         Idx<GridX<1>, GridY<1>> idx_min(idx_range_x1.front(), idx_par);
         Coord<Xg, Yg> interface_coord_min(
                 coord_transform_1.get_global_coord(ddc::coordinate(idx_min)));
         function_and_derivs_1(idx_dx1, idx_min)
-                = evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+                = evaluator_g.deriv(idx_dxg, interface_coord_min, const_function_g_coef);
     });
 #endif
 
     // X bound on Patch3 ---
 #if defined(REVERSE_PATCH3)
     Idx<ddc::Deriv<X<3>>> idx_dx3(1);
-    ddc::for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
+    ddc::host_for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
         Idx<GridX<3>, GridY<3>> idx_min(idx_range_x3.front(), idx_par);
         Coord<Xg, Yg> interface_coord_min(
                 coord_transform_3.get_global_coord(ddc::coordinate(idx_min)));
         function_and_derivs_3(idx_dx3, idx_min)
-                = -evaluator_g.deriv_dim_1(interface_coord_min, const_function_g_coef);
+                = -evaluator_g.deriv(idx_dxg, interface_coord_min, const_function_g_coef);
     });
 #elif (CHANGE_BOUND3)
     Idx<ddc::Deriv<Y<3>>> idx_dy3(1);
-    ddc::for_each(idx_range_x3, [&](Idx<GridX<3>> const& idx_par) {
+    ddc::host_for_each(idx_range_x3, [&](Idx<GridX<3>> const& idx_par) {
         Idx<GridX<3>, GridY<3>> idx_max(idx_range_y3.back(), idx_par);
         Coord<Xg, Yg> interface_coord_max(
                 coord_transform_3.get_global_coord(ddc::coordinate(idx_max)));
         function_and_derivs_3(idx_dy3, idx_max)
-                = evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+                = evaluator_g.deriv(idx_dxg, interface_coord_max, const_function_g_coef);
     });
 #else
     Idx<ddc::Deriv<X<3>>> idx_dx3(1);
-    ddc::for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
+    ddc::host_for_each(idx_range_y3, [&](Idx<GridY<3>> const& idx_par) {
         Idx<GridX<3>, GridY<3>> idx_max(idx_range_x3.back(), idx_par);
         Coord<Xg, Yg> interface_coord_max(
                 coord_transform_3.get_global_coord(ddc::coordinate(idx_max)));
         function_and_derivs_3(idx_dx3, idx_max)
-                = evaluator_g.deriv_dim_1(interface_coord_max, const_function_g_coef);
+                = evaluator_g.deriv(idx_dxg, interface_coord_max, const_function_g_coef);
     });
 #endif
 

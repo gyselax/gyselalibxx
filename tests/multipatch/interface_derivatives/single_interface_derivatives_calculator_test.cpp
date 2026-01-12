@@ -138,7 +138,7 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
 template <class Grid1, class Grid2>
 void initialise_2D_function(host_t<DField<IdxRange<Grid1, Grid2>>> function)
 {
-    ddc::for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
+    ddc::host_for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
         // Get the coordinate on the equivalent global mesh.
         double const rg = ddc::coordinate(Idx<Grid1>(idx));
         double const thetag = ddc::coordinate(Idx<Grid2>(idx));
@@ -439,7 +439,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
         using IdxPar2
                 = std::conditional_t<std::is_same_v<Edge2, SouthEdge2>, Patch2::Idx1, Patch2::Idx2>;
 
-        ddc::for_each(idx_range_theta1, [&](Patch1::Idx2 const& idx_par_1) {
+        ddc::host_for_each(idx_range_theta1, [&](Patch1::Idx2 const& idx_par_1) {
             IdxPar2 idx_par_2 = idx_convertor_12(idx_par_1);
 
             // Coordinates to evaluate the derivative of the equivalent global spline.
@@ -484,16 +484,21 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                     get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
                     get_const_field(function_2[idx_par_2][reduced_idx_range_perp2]));
 
-            double global_deriv
-                    = evaluator_g.deriv_dim_1(interface_coord, get_const_field(function_g_coef));
+            Idx<ddc::Deriv<Rg>> idx_deriv_r(1);
+            double global_deriv = evaluator_g
+                                          .deriv(idx_deriv_r,
+                                                 interface_coord,
+                                                 get_const_field(function_g_coef));
 
             // Exact formula ---------------------------------------------------------------------
-            double const deriv_patch_1
-                    = evaluator_g
-                              .deriv_dim_1(interface_minus_coord, get_const_field(function_g_coef));
-            double const deriv_patch_2
-                    = evaluator_g
-                              .deriv_dim_1(interface_plus_coord, get_const_field(function_g_coef));
+            double const deriv_patch_1 = evaluator_g
+                                                 .deriv(idx_deriv_r,
+                                                        interface_minus_coord,
+                                                        get_const_field(function_g_coef));
+            double const deriv_patch_2 = evaluator_g
+                                                 .deriv(idx_deriv_r,
+                                                        interface_plus_coord,
+                                                        get_const_field(function_g_coef));
             double const local_deriv = sum_values + coeff_deriv_patch_1 * deriv_patch_1
                                        + coeff_deriv_patch_2 * deriv_patch_2;
             EXPECT_NEAR(local_deriv, global_deriv, 5e-13);
@@ -550,7 +555,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
     if constexpr (std::is_same_v<Edge1, EastEdge1>) {
         // Orientation first patch:   ↑→
         // Orientation global domain: ↑→
-        ddc::for_each(TestFixture::idx_range_rtheta1, [&](Patch1::Idx12 const& idx) {
+        ddc::host_for_each(TestFixture::idx_range_rtheta1, [&](Patch1::Idx12 const& idx) {
             Patch1::IdxStep1 idx_r(Patch1::Idx1(idx) - TestFixture::idx_range_r1.front());
             Patch1::IdxStep2 idx_theta(Patch1::Idx2(idx) - TestFixture::idx_range_theta1.front());
             Idx<GridRg, GridThetag> idx_g(idx_r.value(), idx_theta.value());
@@ -566,7 +571,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
     } else if (std::is_same_v<Edge1, WestEdge1>) {
         // Orientation first patch:   ←↓
         // Orientation global domain: ↑→
-        ddc::for_each(TestFixture::idx_range_rtheta1, [&](Patch1::Idx12 const& idx) {
+        ddc::host_for_each(TestFixture::idx_range_rtheta1, [&](Patch1::Idx12 const& idx) {
             Patch1::IdxStep1 idx_r(Patch1::Idx1(idx) - TestFixture::idx_range_r1.front());
             Patch1::IdxStep2 idx_theta(Patch1::Idx2(idx) - TestFixture::idx_range_theta1.front());
             Idx<GridRg, GridThetag> idx_g;
@@ -595,7 +600,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
     if constexpr (std::is_same_v<Edge2, EastEdge2>) {
         // Orientation second patch:  ←↓
         // Orientation global domain: ↑→
-        ddc::for_each(TestFixture::idx_range_etaxi2, [&](Patch2::Idx12 const& idx) {
+        ddc::host_for_each(TestFixture::idx_range_etaxi2, [&](Patch2::Idx12 const& idx) {
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag> idx_g;
@@ -623,7 +628,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
     } else if (std ::is_same_v<Edge2, WestEdge2>) {
         // Orientation second patch:  ↑→
         // Orientation global domain: ↑→
-        ddc::for_each(TestFixture::idx_range_etaxi2, [&](Patch2::Idx12 const& idx) {
+        ddc::host_for_each(TestFixture::idx_range_etaxi2, [&](Patch2::Idx12 const& idx) {
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag> idx_g;
@@ -653,7 +658,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
                           "We cannot make the Edge1 on Theta with N points to match with the "
                           "Edge2 on R with N+1 points.");
         }
-        ddc::for_each(TestFixture::idx_range_etaxi2, [&](Patch2::Idx12 const& idx) {
+        ddc::host_for_each(TestFixture::idx_range_etaxi2, [&](Patch2::Idx12 const& idx) {
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag>
@@ -722,7 +727,7 @@ TYPED_TEST(
         initialise_2D_function<Patch1::Grid1, Patch1::Grid2>(function_1);
     } else {
         // Different orientation: global: ↑→ | local: ←↓
-        ddc::for_each(get_idx_range(function_1), [&](Idx<Patch1::Grid1, Patch1::Grid2> idx) {
+        ddc::host_for_each(get_idx_range(function_1), [&](Idx<Patch1::Grid1, Patch1::Grid2> idx) {
             // Get the coordinate on the equivalent global domain.
             double const rg = TestFixture::r1_max - ddc::coordinate(Idx<Patch1::Grid1>(idx));
             double const thetag
@@ -737,7 +742,7 @@ TYPED_TEST(
         initialise_2D_function<Patch2::Grid1, Patch2::Grid2>(function_2);
     } else if (std::is_same_v<Edge2, EastEdge2>) {
         // Different orientation: global: ↑→ | local: ←↓
-        ddc::for_each(get_idx_range(function_2), [&](Idx<Patch2::Grid1, Patch2::Grid2> idx) {
+        ddc::host_for_each(get_idx_range(function_2), [&](Idx<Patch2::Grid1, Patch2::Grid2> idx) {
             // Get the coordinate on the equivalent global domain.
             double const rg = TestFixture::eta2_max - ddc::coordinate(Idx<Patch2::Grid1>(idx))
                               + TestFixture::r1_max;
@@ -746,7 +751,7 @@ TYPED_TEST(
         });
     } else if (std::is_same_v<Edge2, SouthEdge2>) {
         // Different orientation: global: ↑→ | local: ↓→
-        ddc::for_each(get_idx_range(function_2), [&](Idx<Patch2::Grid1, Patch2::Grid2> idx) {
+        ddc::host_for_each(get_idx_range(function_2), [&](Idx<Patch2::Grid1, Patch2::Grid2> idx) {
             // Get the coordinate on the equivalent global domain.
             double const rg
                     = double(ddc::coordinate(Idx<Patch2::Grid2>(idx))) + TestFixture::r1_max;
@@ -790,7 +795,7 @@ TYPED_TEST(
         host_t<DField<IdxRange<ddc::Deriv<Rg>, GridThetag>>> derivs_rgmax
                 = get_field(derivs_rgmax_alloc);
 
-        ddc::for_each(TestFixture::idx_range_theta_g, [&](Idx<GridThetag> const& idx_thetag) {
+        ddc::host_for_each(TestFixture::idx_range_theta_g, [&](Idx<GridThetag> const& idx_thetag) {
             derivs_rgmin(first_deriv_rg, idx_thetag) = 3 * Kokkos::sin(ddc::coordinate(idx_thetag));
             derivs_rgmax(first_deriv_rg, idx_thetag)
                     = -3 * Kokkos::sin(ddc::coordinate(idx_thetag));
@@ -821,7 +826,7 @@ TYPED_TEST(
                 ddc::BoundCond::GREVILLE);
 
 
-        ddc::for_each(TestFixture::idx_range_theta1, [&](Patch1::Idx2 const& idx2_1) {
+        ddc::host_for_each(TestFixture::idx_range_theta1, [&](Patch1::Idx2 const& idx2_1) {
             Patch2::Idx2 idx2_2 = idx_convertor_12(idx2_1);
 
             // Coordinate at the interface.
@@ -841,8 +846,10 @@ TYPED_TEST(
                     get_const_field(function_2[idx2_2]),
                     get_const_field(function_1[idx2_1]));
 
-            double const global_deriv
-                    = evaluator_g.deriv_dim_1(interface_coord, get_const_field(function_g_coef));
+            double const global_deriv = evaluator_g
+                                                .deriv(Idx<ddc::Deriv<Rg>>(1),
+                                                       interface_coord,
+                                                       get_const_field(function_g_coef));
 
             // Exact formula ---------------------------------------------------------------------
             double const local_deriv = sum_values;

@@ -218,7 +218,7 @@ public:
 
         IdxRangeParFirstType idx_range_par_first(m_idx_ranges.template get<FirstPatch>());
 
-        ddc::for_each(
+        ddc::host_for_each(
                 idx_range_par_first,
                 [&](typename IdxRangeParFirstType::discrete_element_type const& idx_par) {
                     solve<eval_deriv>(functions_and_derivs, idx_par);
