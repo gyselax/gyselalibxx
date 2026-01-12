@@ -8,6 +8,7 @@
 #include "edge.hpp"
 #include "edge_transformation.hpp"
 #include "types.hpp"
+#include "geometry_descriptors.hpp"
 
 
 template <class T>
@@ -249,6 +250,39 @@ public:
                 Bound2)
     {
     }
+
+    SingleInterfaceDerivativesCalculator(
+            IdxRange1DPerp_1 const& idx_range_1d_1,
+            IdxRange1DPerp_2 const& idx_range_1d_2,
+            int const number_taken_cells)
+        : SingleInterfaceDerivativesCalculator(
+                (m_extremity_1 == Extremiy::FRONT)
+                        ? idx_range_1d_1.take_first(IdxStep<EdgePerpGrid1>(number_taken_cells + 1))
+                        : idx_range_1d_1.take_last(IdxStep<EdgePerpGrid1>(number_taken_cells + 1)),
+                (m_extremity_2 == Extremiy::FRONT)
+                        ? idx_range_1d_2.take_first(IdxStep<EdgePerpGrid2>(number_taken_cells + 1))
+                        : idx_range_1d_2.take_last(IdxStep<EdgePerpGrid2>(number_taken_cells + 1)),
+                ddc::BoundCond::HERMITE,
+                ddc::BoundCond::HERMITE)
+    {
+    }
+
+    template <class IdxRangeA, class IdxRangeB>
+    SingleInterfaceDerivativesCalculator(
+            IdxRangeA const& idx_range_a,
+            IdxRangeB const& idx_range_b,
+            int const number_taken_cells)
+        : SingleInterfaceDerivativesCalculator(
+                IdxRange1DPerp_1(
+                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
+                IdxRange1DPerp_2(
+                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
+                number_taken_cells)
+    {
+    }
+
+    static Extremity constexpr m_extremity_1 = InterfaceType::Edge1::extremity;
+    static Extremity constexpr m_extremity_2 = InterfaceType::Edge2::extremity;
 
     /**
      * @brief Get the coefficient (a) in front of the derivative on the patch 1 of the given Interface.
