@@ -1,0 +1,1296 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSingleInterfaceDerivativesCalculator" kind="class" language="C++" prot="public">
+    <compoundname>SingleInterfaceDerivativesCalculator</compoundname>
+    <includes refid="single__interface__derivatives__calculator_8hpp" local="no">single_interface_derivatives_calculator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class InterfaceType</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a5860dc60fc102a8637b51d5a422d56cd" prot="private" static="no">
+        <type>typename InterfaceType::Edge1::perpendicular_grid</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::EdgePerpGrid1 =  typename InterfaceType::Edge1::perpendicular_grid</definition>
+        <argsstring></argsstring>
+        <name>EdgePerpGrid1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::EdgePerpGrid1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a90bfc0eb912c5bf1bc5176ca8982df02" prot="private" static="no">
+        <type>typename InterfaceType::Edge2::perpendicular_grid</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::EdgePerpGrid2 =  typename InterfaceType::Edge2::perpendicular_grid</definition>
+        <argsstring></argsstring>
+        <name>EdgePerpGrid2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::EdgePerpGrid2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a6d7059e0d4a5f45074e329f2e81387ab" prot="private" static="no">
+        <type>typename InterfaceType::Edge1::parallel_grid</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::EdgeParGrid1 =  typename InterfaceType::Edge1::parallel_grid</definition>
+        <argsstring></argsstring>
+        <name>EdgeParGrid1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::EdgeParGrid1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a44b0f497867be47003a348e6770ff1fe" prot="private" static="no">
+        <type>typename InterfaceType::Edge2::parallel_grid</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::EdgeParGrid2 =  typename InterfaceType::Edge2::parallel_grid</definition>
+        <argsstring></argsstring>
+        <name>EdgeParGrid2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::EdgeParGrid2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a28c2d0bcbe6461fd0ce1c56131d593e0" prot="private" static="no">
+        <type>typename InterfaceType::Edge1::associated_patch</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::Patch1 =  typename InterfaceType::Edge1::associated_patch</definition>
+        <argsstring></argsstring>
+        <name>Patch1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::Patch1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="79" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a8993fe800e123ac60c188230d2d6843b" prot="private" static="no">
+        <type>typename InterfaceType::Edge2::associated_patch</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::Patch2 =  typename InterfaceType::Edge2::associated_patch</definition>
+        <argsstring></argsstring>
+        <name>Patch2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::Patch2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a0ac979b3c598bb6a84d09a7110e1140c" prot="private" static="no">
+        <type>typename Patch1::IdxRange12</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::IdxRange2D_1 =  typename Patch1::IdxRange12</definition>
+        <argsstring></argsstring>
+        <name>IdxRange2D_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::IdxRange2D_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a6e126326d784a8a194acab82e2646dcd" prot="private" static="no">
+        <type>typename Patch2::IdxRange12</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::IdxRange2D_2 =  typename Patch2::IdxRange12</definition>
+        <argsstring></argsstring>
+        <name>IdxRange2D_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::IdxRange2D_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1aebe57ae9b3a11c21b8b70adcb8c449c0" prot="private" static="no">
+        <type>IdxRange&lt; EdgePerpGrid1 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::IdxRange1DPerp_1 =  IdxRange&lt;EdgePerpGrid1&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRange1DPerp_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::IdxRange1DPerp_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a5150580e0c6741bba3ef990038f4a6a7" prot="private" static="no">
+        <type>IdxRange&lt; EdgePerpGrid2 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::IdxRange1DPerp_2 =  IdxRange&lt;EdgePerpGrid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRange1DPerp_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::IdxRange1DPerp_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a221f1bd80167623db7b79db21dbeaf55" prot="private" static="no">
+        <type>IdxRange&lt; EdgeParGrid1 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::IdxRange1DPar_1 =  IdxRange&lt;EdgeParGrid1&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRange1DPar_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::IdxRange1DPar_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="87" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a593014a47b51a4d025282ab386d024e1" prot="private" static="no">
+        <type>IdxRange&lt; EdgeParGrid2 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::IdxRange1DPar_2 =  IdxRange&lt;EdgeParGrid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRange1DPar_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::IdxRange1DPar_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1ae93d7c560f59ffd78f7d64559445aec2" prot="private" static="no">
+        <type>Idx&lt; EdgePerpGrid1 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::Idx1D_1 =  Idx&lt;EdgePerpGrid1&gt;</definition>
+        <argsstring></argsstring>
+        <name>Idx1D_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::Idx1D_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a963b89d255bf812d58caea1d6863c58f" prot="private" static="no">
+        <type>Idx&lt; EdgePerpGrid2 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::Idx1D_2 =  Idx&lt;EdgePerpGrid2&gt;</definition>
+        <argsstring></argsstring>
+        <name>Idx1D_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::Idx1D_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a16a8809bb6ccb4b747f79f9708a0daf3" prot="private" static="no">
+        <type>std::conditional_t&lt; std::is_same_v&lt; EdgePerpGrid1, typename Patch1::Grid1 &gt;, typename Patch1::BSplines1, typename Patch1::BSplines2 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::BSplinesPerp1 =  std::conditional_t&lt; std::is_same_v&lt;EdgePerpGrid1, typename Patch1::Grid1&gt;, typename Patch1::BSplines1, typename Patch1::BSplines2&gt;</definition>
+        <argsstring></argsstring>
+        <name>BSplinesPerp1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::BSplinesPerp1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a0f01eae0a2883a93f6205a2d4955923b" prot="private" static="no">
+        <type>std::conditional_t&lt; std::is_same_v&lt; EdgePerpGrid2, typename Patch2::Grid1 &gt;, typename Patch2::BSplines1, typename Patch2::BSplines2 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::BSplinesPerp2 =  std::conditional_t&lt; std::is_same_v&lt;EdgePerpGrid2, typename Patch2::Grid1&gt;, typename Patch2::BSplines1, typename Patch2::BSplines2&gt;</definition>
+        <argsstring></argsstring>
+        <name>BSplinesPerp2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::BSplinesPerp2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1a1ccdff01ec876635de1da6e2bf4034bb" prot="private" static="no">
+        <type>std::conditional_t&lt; BSplinesPerp1::is_uniform(), ddc::UniformBsplinesKnots&lt; BSplinesPerp1 &gt;, ddc::NonUniformBsplinesKnots&lt; BSplinesPerp1 &gt; &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::GridBreakPt1 =  std::conditional_t&lt; BSplinesPerp1::is_uniform(), ddc::UniformBsplinesKnots&lt;BSplinesPerp1&gt;, ddc::NonUniformBsplinesKnots&lt;BSplinesPerp1&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>GridBreakPt1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::GridBreakPt1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="102" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1acb062bf1da9231a2b21a7f004292fbe0" prot="private" static="no">
+        <type>std::conditional_t&lt; BSplinesPerp2::is_uniform(), ddc::UniformBsplinesKnots&lt; BSplinesPerp2 &gt;, ddc::NonUniformBsplinesKnots&lt; BSplinesPerp2 &gt; &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::GridBreakPt2 =  std::conditional_t&lt; BSplinesPerp2::is_uniform(), ddc::UniformBsplinesKnots&lt;BSplinesPerp2&gt;, ddc::NonUniformBsplinesKnots&lt;BSplinesPerp2&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>GridBreakPt2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::GridBreakPt2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1aa43d2a95a765e2b91e3664368657125f" prot="private" static="no">
+        <type>IdxRange&lt; GridBreakPt1 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::IdxRangeBreakPt1 =  IdxRange&lt;GridBreakPt1&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeBreakPt1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::IdxRangeBreakPt1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1ac37234d5f467daa0c7cbee067fd25227" prot="private" static="no">
+        <type>IdxRange&lt; GridBreakPt2 &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::IdxRangeBreakPt2 =  IdxRange&lt;GridBreakPt2&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeBreakPt2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::IdxRangeBreakPt2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="111" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="111" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculator_1ab1ad36b4d43bb1b491fdecc6b825646f" prot="public" static="no">
+        <type>InterfaceType</type>
+        <definition>using SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::associated_interface =  InterfaceType</definition>
+        <argsstring></argsstring>
+        <name>associated_interface</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::associated_interface</qualifiedname>
+        <briefdescription>
+<para><ref refid="structInterface" kindref="compound">Interface</ref> between the two involved patches. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="115" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="115" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1a176086af3a195f9a8de9472f520fbffc" prot="private" static="no" mutable="no">
+        <type>const bool</type>
+        <definition>const bool SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_is_cell_bound_1_with_extra_interpol_pt</definition>
+        <argsstring></argsstring>
+        <name>m_is_cell_bound_1_with_extra_interpol_pt</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_is_cell_bound_1_with_extra_interpol_pt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="118" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="118" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1ac549cfa5b417938a125983bbaf299ef2" prot="private" static="no" mutable="no">
+        <type>const bool</type>
+        <definition>const bool SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_is_cell_bound_2_with_extra_interpol_pt</definition>
+        <argsstring></argsstring>
+        <name>m_is_cell_bound_2_with_extra_interpol_pt</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_is_cell_bound_2_with_extra_interpol_pt</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="119" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1a8ee66ef051e05ad04aa1aeaa963cd877" prot="private" static="no" mutable="no">
+        <type>IdxRange1DPerp_1 const</type>
+        <definition>IdxRange1DPerp_1 const SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_idx_range_perp_1</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_perp_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_idx_range_perp_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="121" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1a800bd838bc5634f3eabc12a5c0e03946" prot="private" static="no" mutable="no">
+        <type>IdxRange1DPerp_2 const</type>
+        <definition>IdxRange1DPerp_2 const SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_idx_range_perp_2</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range_perp_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_idx_range_perp_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="122" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="122" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1af96ebc847815a14a338ac5d2bec152eb" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_coeff_deriv_patch_2</definition>
+        <argsstring></argsstring>
+        <name>m_coeff_deriv_patch_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_coeff_deriv_patch_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="127" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1a754d989bd5efbf2eb00f28148dbc11e2" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_coeff_deriv_patch_1</definition>
+        <argsstring></argsstring>
+        <name>m_coeff_deriv_patch_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_coeff_deriv_patch_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="128" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1a510eec95011febb213054b26b19fc061" prot="private" static="no" mutable="no">
+        <type>host_t&lt; DFieldMem&lt; IdxRange1DPerp_1 &gt; &gt;</type>
+        <definition>host_t&lt;DFieldMem&lt;IdxRange1DPerp_1&gt; &gt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_weights_patch_1_alloc</definition>
+        <argsstring></argsstring>
+        <name>m_weights_patch_1_alloc</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_weights_patch_1_alloc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="130" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="130" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1ac76b12adadc4ebba1f00019969286a3e" prot="private" static="no" mutable="no">
+        <type>host_t&lt; DFieldMem&lt; IdxRange1DPerp_2 &gt; &gt;</type>
+        <definition>host_t&lt;DFieldMem&lt;IdxRange1DPerp_2&gt; &gt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_weights_patch_2_alloc</definition>
+        <argsstring></argsstring>
+        <name>m_weights_patch_2_alloc</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_weights_patch_2_alloc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="131" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1a9e20cb40681dda74086f76f9dd98caf8" prot="private" static="no" mutable="no">
+        <type>host_t&lt; DField&lt; IdxRange1DPerp_1 &gt; &gt;</type>
+        <definition>host_t&lt;DField&lt;IdxRange1DPerp_1&gt; &gt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_weights_patch_1</definition>
+        <argsstring></argsstring>
+        <name>m_weights_patch_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_weights_patch_1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="133" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1a30dff28dcbaf41217f9f145e50ccbab1" prot="private" static="no" mutable="no">
+        <type>host_t&lt; DField&lt; IdxRange1DPerp_2 &gt; &gt;</type>
+        <definition>host_t&lt;DField&lt;IdxRange1DPerp_2&gt; &gt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_weights_patch_2</definition>
+        <argsstring></argsstring>
+        <name>m_weights_patch_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_weights_patch_2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="134" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1afb23c054ceebafbfdd7ae1ba0bdb68a7" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>Extremity constexpr</type>
+        <definition>Extremity constexpr SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_extremity_1</definition>
+        <argsstring></argsstring>
+        <name>m_extremity_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_extremity_1</qualifiedname>
+        <initializer>= InterfaceType::Edge1::extremity</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="124" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="124" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculator_1a0d306c098cf3629f261c75b66b34d7b2" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>Extremity constexpr</type>
+        <definition>Extremity constexpr SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::m_extremity_2</definition>
+        <argsstring></argsstring>
+        <name>m_extremity_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::m_extremity_2</qualifiedname>
+        <initializer>= InterfaceType::Edge2::extremity</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="125" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="125" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a2d8bbf78b34f506ebe74aafebeec6702" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::SingleInterfaceDerivativesCalculator</definition>
+        <argsstring>(IdxRange1DPerp_1 const &amp;idx_range_1d_1, IdxRange1DPerp_2 const &amp;idx_range_1d_2, ddc::BoundCond const &amp;Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const &amp;Bound2=ddc::BoundCond::HERMITE)</argsstring>
+        <name>SingleInterfaceDerivativesCalculator</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator</qualifiedname>
+        <param>
+          <type>IdxRange1DPerp_1 const &amp;</type>
+          <declname>idx_range_1d_1</declname>
+        </param>
+        <param>
+          <type>IdxRange1DPerp_2 const &amp;</type>
+          <declname>idx_range_1d_2</declname>
+        </param>
+        <param>
+          <type>ddc::BoundCond const &amp;</type>
+          <declname>Bound1</declname>
+          <defval>ddc::BoundCond::HERMITE</defval>
+        </param>
+        <param>
+          <type>ddc::BoundCond const &amp;</type>
+          <declname>Bound2</declname>
+          <defval>ddc::BoundCond::HERMITE</defval>
+        </param>
+        <briefdescription>
+<para>Instantiate <ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><anchor id="classSingleInterfaceDerivativesCalculator_1SingleInterfaceDerivativesCalculatorInstantiator"/> It computes the coefficients a and b, and the weights <formula id="354">$\omega_k$</formula> and stores the values in the class. If you want to compute the derivatives with an exact formula, please provide the index ranges on the full domain of the patches. If you want to use an approximation (e.g. use only 5 cells), please provide the index ranges on a reduced number of cells (e.g. 5 cells).</para>
+<para>If the interpolation points are uniform, it computes the coefficients with an explicit formula. Otherwise, it uses the recursive formula (see README.md).</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_1d_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D index range perpendicular to the <ref refid="structInterface" kindref="compound">Interface</ref>, on the patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_1d_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>1D index range perpendicular to the <ref refid="structInterface" kindref="compound">Interface</ref>, on the patch 2. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Bound1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The boundary condition type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. If ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Bound2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The boundary condition type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. If ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense. <linebreak/>
+ </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="166" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="166" bodyend="224"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1aa628dec3b8a2d8488b14c9b346e31d1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxRangeA</type>
+          </param>
+          <param>
+            <type>class IdxRangeB</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::SingleInterfaceDerivativesCalculator</definition>
+        <argsstring>(IdxRangeA const &amp;idx_range_a, IdxRangeB const &amp;idx_range_b, ddc::BoundCond const &amp;Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const &amp;Bound2=ddc::BoundCond::HERMITE)</argsstring>
+        <name>SingleInterfaceDerivativesCalculator</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator</qualifiedname>
+        <param>
+          <type>IdxRangeA const &amp;</type>
+          <declname>idx_range_a</declname>
+        </param>
+        <param>
+          <type>IdxRangeB const &amp;</type>
+          <declname>idx_range_b</declname>
+        </param>
+        <param>
+          <type>ddc::BoundCond const &amp;</type>
+          <declname>Bound1</declname>
+          <defval>ddc::BoundCond::HERMITE</defval>
+        </param>
+        <param>
+          <type>ddc::BoundCond const &amp;</type>
+          <declname>Bound2</declname>
+          <defval>ddc::BoundCond::HERMITE</defval>
+        </param>
+        <briefdescription>
+<para>Instantiate <ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>. See <ref refid="classSingleInterfaceDerivativesCalculator_1SingleInterfaceDerivativesCalculatorInstantiator" kindref="member">SingleInterfaceDerivativesCalculatorInstantiator</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range_a</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range on one patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>idx_range_b</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index range on the other patch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Bound1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The boundary condition type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Bound2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The boundary condition type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="238" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="238" bodyend="251"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a838eca0a617f303e1208542d34356983" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_coeff_deriv_patch_1</definition>
+        <argsstring>() const</argsstring>
+        <name>get_coeff_deriv_patch_1</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_coeff_deriv_patch_1</qualifiedname>
+        <briefdescription>
+<para>Get the coefficient (a) in front of the derivative on the patch 1 of the given <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The value of the coefficient a. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="257" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="257" bodyend="260"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1abbd94c0ca89ccf58644866c230255c8e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_coeff_deriv_patch_2</definition>
+        <argsstring>() const</argsstring>
+        <name>get_coeff_deriv_patch_2</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_coeff_deriv_patch_2</qualifiedname>
+        <briefdescription>
+<para>Get the coefficient (b) in front of the derivative on the patch 2 of the given <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The value of the coefficient b. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="266" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="266" bodyend="269"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a06fcd61d099d349e04cd5064f4f9fac4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structPatch" kindref="compound">Patch</ref></type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_coeff_deriv_on_patch</definition>
+        <argsstring>() const</argsstring>
+        <name>get_coeff_deriv_on_patch</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_coeff_deriv_on_patch</qualifiedname>
+        <briefdescription>
+<para>Get the coefficient (a) or (b) in front of the derivative on the given patch of the given <ref refid="structInterface" kindref="compound">Interface</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The value of the coefficient (a) or (b). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="276" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="276" bodyend="287"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a805e6683ca1feddda4f51f17c9cfac8c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_function_coefficients</definition>
+        <argsstring>(DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp;function_1, DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp;function_2) const</argsstring>
+        <name>get_function_coefficients</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_function_coefficients</qualifiedname>
+        <param>
+          <type>DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp;</type>
+          <declname>function_1</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp;</type>
+          <declname>function_2</declname>
+        </param>
+        <briefdescription>
+<para>Get the linear combination of the function values (c). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><anchor id="classSingleInterfaceDerivativesCalculator_1get_function_coefficients"/> <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>function_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>function_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the linear combination of the function values (c).</para>
+</simplesect>
+Remark: for the approximation case, the cells were selected by the given index ranges in the instantiation. Here, function_1 and function_2 can be given on the whole domain and the operator will select the correct values. But, it could be more optimised to directly give a slice on the selected cells. E.g. get_function_coefficients(function_1[idx_interface_1][selected_cells_idx_range_1], 
+                          function_2[idx_interface_2][selected_cells_idx_range_2]); and get_function_coefficients(function_1[idx_interface_1], 
+                          function_2[idx_interface_2]); will return the same value. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="311" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="311" bodyend="337"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1ace8b4483953cbc857786e5a65814d0f5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+        </templateparamlist>
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_function_coefficients</definition>
+        <argsstring>(DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp;function_2, DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp;function_1) const</argsstring>
+        <name>get_function_coefficients</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_function_coefficients</qualifiedname>
+        <param>
+          <type>DConstField&lt; IdxRange1DPerp_2, Kokkos::HostSpace, Layout2 &gt; const &amp;</type>
+          <declname>function_2</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRange1DPerp_1, Kokkos::HostSpace, Layout1 &gt; const &amp;</type>
+          <declname>function_1</declname>
+        </param>
+        <briefdescription>
+<para>Get the linear combination of the function values (c). See <ref refid="classSingleInterfaceDerivativesCalculator_1get_function_coefficients" kindref="member">get_function_coefficients</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>function_1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>function_2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Function values at the interpolation points on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>the linear combination of the function values (c). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="347" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="347" bodyend="352"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a665ebf7825b39b293a504aea41fcc79c" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BSplinesPerp</type>
+          </param>
+          <param>
+            <type>typename GridBreakPt</type>
+          </param>
+          <param>
+            <type>typename EdgePerpGrid</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::check_break_points_are_interpolation_points</definition>
+        <argsstring>(bool const is_cell_bound_with_extra_interpol_pt, IdxRange&lt; EdgePerpGrid &gt; const &amp;idx_range_perp, Extremity const extremity) const</argsstring>
+        <name>check_break_points_are_interpolation_points</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::check_break_points_are_interpolation_points</qualifiedname>
+        <param>
+          <type>bool const</type>
+          <declname>is_cell_bound_with_extra_interpol_pt</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; EdgePerpGrid &gt; const &amp;</type>
+          <declname>idx_range_perp</declname>
+        </param>
+        <param>
+          <type>Extremity const</type>
+          <declname>extremity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="357" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="357" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a62f819ba442878a5f4b7f33f883cb5bd" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename BSplinesPerp</type>
+          </param>
+          <param>
+            <type>typename GridBreakPt</type>
+          </param>
+          <param>
+            <type>typename EdgePerpGrid</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::check_additional_interpolation_points_location</definition>
+        <argsstring>(IdxRange&lt; EdgePerpGrid &gt; const &amp;idx_range_perp, Extremity const extremity)</argsstring>
+        <name>check_additional_interpolation_points_location</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::check_additional_interpolation_points_location</qualifiedname>
+        <param>
+          <type>IdxRange&lt; EdgePerpGrid &gt; const &amp;</type>
+          <declname>idx_range_perp</declname>
+        </param>
+        <param>
+          <type>Extremity const</type>
+          <declname>extremity</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="396" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="396" bodyend="431"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a69a3d28bb5217d206134bb7e2be9d361" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::set_coefficients_non_uniform_case</definition>
+        <argsstring>()</argsstring>
+        <name>set_coefficients_non_uniform_case</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::set_coefficients_non_uniform_case</qualifiedname>
+        <briefdescription>
+<para>Compute the coefficients a, b and the weights omega applying the recursive formula. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="440" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="440" bodyend="656"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1ac98b7ebcb0cb5a9fdc45966b3b50c787" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::recursion</definition>
+        <argsstring>(int const n_cells, Idx&lt; Grid1D &gt; const interface_idx, std::array&lt; double, 3 &gt; &amp;coeff_deriv_patch, std::array&lt; double, 3 &gt; &amp;coeff_deriv_other_patch, std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_1 &gt; &gt;, 3 &gt; &amp;weights_patch1, std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_2 &gt; &gt;, 3 &gt; &amp;weights_patch2)</argsstring>
+        <name>recursion</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::recursion</qualifiedname>
+        <param>
+          <type>int const</type>
+          <declname>n_cells</declname>
+        </param>
+        <param>
+          <type>Idx&lt; Grid1D &gt; const</type>
+          <declname>interface_idx</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>coeff_deriv_patch</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>coeff_deriv_other_patch</declname>
+        </param>
+        <param>
+          <type>std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_1 &gt; &gt;, 3 &gt; &amp;</type>
+          <declname>weights_patch1</declname>
+        </param>
+        <param>
+          <type>std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_2 &gt; &gt;, 3 &gt; &amp;</type>
+          <declname>weights_patch2</declname>
+        </param>
+        <briefdescription>
+<para>Recursion to compute the coefficients a, b and the weights omega. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">n_cells</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of the cells of the patch where the recursion is made. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">interface_idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index at the interface.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+The following parameters are array with three elements corresponding to the values at the step n-1, n and n+1 in the recursion. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">coeff_deriv_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coefficient in front of the derivative of the patch. E.g. Patch1: coeff_deriv_patch = b | Patch2: coeff_deriv_patch = a </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">coeff_deriv_other_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coefficient in front of the derivative of the other patch. E.g. Patch1: coeff_deriv_other_patch = a | Patch2: coeff_deriv_other_patch = b </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">weights_patch1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weights in front of the function values on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">weights_patch2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weights in front of the function values on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="675" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="675" bodyend="754"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a044ea3e756566b4f7f1efebc361a1c75" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::correction_boundary</definition>
+        <argsstring>(int const n_points, Idx&lt; Grid1D &gt; const interface_idx, std::array&lt; double, 3 &gt; &amp;coeff_deriv_patch, std::array&lt; double, 3 &gt; &amp;coeff_deriv_other_patch, std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_1 &gt; &gt;, 3 &gt; &amp;weights_patch1, std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_2 &gt; &gt;, 3 &gt; &amp;weights_patch2)</argsstring>
+        <name>correction_boundary</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::correction_boundary</qualifiedname>
+        <param>
+          <type>int const</type>
+          <declname>n_points</declname>
+        </param>
+        <param>
+          <type>Idx&lt; Grid1D &gt; const</type>
+          <declname>interface_idx</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>coeff_deriv_patch</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; &amp;</type>
+          <declname>coeff_deriv_other_patch</declname>
+        </param>
+        <param>
+          <type>std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_1 &gt; &gt;, 3 &gt; &amp;</type>
+          <declname>weights_patch1</declname>
+        </param>
+        <param>
+          <type>std::array&lt; host_t&lt; DField&lt; IdxRange1DPerp_2 &gt; &gt;, 3 &gt; &amp;</type>
+          <declname>weights_patch2</declname>
+        </param>
+        <briefdescription>
+<para>Correction of the local coefficients on the boundary for additional interpolation points in the middle of a cell. <linebreak/>
+ </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">n_points</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of interpolation points on the patch where the correction is made. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">interface_idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Index at the interface.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+The following parameters are array with three elements corresponding to the values at the step n-1, n and n+1 in the recursion. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">coeff_deriv_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coefficient in front of the derivative of the patch. E.g. Patch1: coeff_deriv_patch = b | Patch2: coeff_deriv_patch = a </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">coeff_deriv_other_patch</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Coefficient in front of the derivative of the other patch. E.g. Patch1: coeff_deriv_other_patch = a | Patch2: coeff_deriv_other_patch = b </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">weights_patch1</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weights in front of the function values on patch 1. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">weights_patch2</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Weights in front of the function values on patch 2. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="773" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="773" bodyend="886"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a38bba7bdc0a412bda4063c3dc4a427af" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::set_coefficients_uniform_per_patch_case</definition>
+        <argsstring>()</argsstring>
+        <name>set_coefficients_uniform_per_patch_case</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::set_coefficients_uniform_per_patch_case</qualifiedname>
+        <briefdescription>
+<para>Compute the coefficients a, b and the weights omega applying the explicit formula for the uniform case. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="896" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="896" bodyend="982"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1abb8f59a13f86685c73945d6317515d5b" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type>std::tuple&lt; double, double &gt;</type>
+        <definition>std::tuple&lt; double, double &gt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_cell_lengths</definition>
+        <argsstring>(Idx&lt; Grid1D &gt; const &amp;idx) const</argsstring>
+        <name>get_cell_lengths</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_cell_lengths</qualifiedname>
+        <param>
+          <type>Idx&lt; Grid1D &gt; const &amp;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the lengths of the cell on the right side and the left side of the given index. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="989" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="989" bodyend="1056"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1aca9c128b9cc4eedb591df224cc76ef95" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>std::array&lt; double, 3 &gt;</type>
+        <definition>std::array&lt; double, 3 &gt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_gammas</definition>
+        <argsstring>(double const cell_length_left, double const cell_length_right) const</argsstring>
+        <name>get_gammas</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_gammas</qualifiedname>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_left</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_right</declname>
+        </param>
+        <briefdescription>
+<para>Compute the coefficients gammas_i. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="1060" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="1060" bodyend="1072"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1ab8176083e835f821855ae58b4ba9673a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_alpha</definition>
+        <argsstring>(double const cell_length_left, double const cell_length_right) const</argsstring>
+        <name>get_alpha</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_alpha</qualifiedname>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_left</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_right</declname>
+        </param>
+        <briefdescription>
+<para>Compute the coefficient alpha_i. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="1075" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="1075" bodyend="1078"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a246bddf213b70ab99c74a6a9ecde87ce" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_beta</definition>
+        <argsstring>(double const cell_length_left, double const cell_length_right) const</argsstring>
+        <name>get_beta</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_beta</qualifiedname>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_left</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>cell_length_right</declname>
+        </param>
+        <briefdescription>
+<para>Compute the coefficient beta_i. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="1081" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="1081" bodyend="1084"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1ab515968940eeaad12fd5bd00d7e52822" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION Idx&lt; Grid1D &gt;</type>
+        <definition>KOKKOS_INLINE_FUNCTION Idx&lt; Grid1D &gt; SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::get_extremity_idx</definition>
+        <argsstring>(Extremity const extremity, IdxRange&lt; Grid1D &gt; const &amp;idx_range) const</argsstring>
+        <name>get_extremity_idx</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculator::get_extremity_idx</qualifiedname>
+        <param>
+          <type>Extremity const</type>
+          <declname>extremity</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; Grid1D &gt; const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="1088" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="1088" bodyend="1093"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Compute the derivative of an equivalent global spline at the interface between two patches. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>For a given <ref refid="structInterface" kindref="compound">Interface</ref>, this operator computes the coefficients a, b and c of the following relation: <formula id="348">$ s&apos;(X_I) = c + a s&apos;(X_{I+1}) + b s&apos;(X_{I+1})$</formula>,</para>
+<para>with<itemizedlist>
+<listitem><para>s&apos;(X_I) the derivative at the <ref refid="structInterface" kindref="compound">Interface</ref> of the two local splines on the patches.</para>
+</listitem><listitem><para>s&apos;(X_{I+1}) the derivative at the next (or right) <ref refid="structInterface" kindref="compound">Interface</ref> of the local splines on patch 1.</para>
+</listitem><listitem><para>s&apos;(X_{I-1}) the derivative at the previous (or left) <ref refid="structInterface" kindref="compound">Interface</ref> of the local splines on patch 2.</para>
+</listitem><listitem><para>a,b scalars depending on the meshes of the two patches.</para>
+</listitem><listitem><para>c a linear combination of the function values on the two patches. The weights in the linear combination depend on the meshes of the two patches. It can be written as a sum: <formula id="349">$ c = \sum_{k = -N2}^{N1} \omega_k f_k$</formula>, with <formula id="350">$ \omega_k $</formula> the weights, <formula id="351">$ f_k $</formula> the function values, <formula id="352">$ N1 $</formula> the number of cells in patch 1, and <formula id="353">$ N2 $</formula> the number of cells in patch 2.</para>
+</listitem></itemizedlist>
+</para>
+<para>Scheme of the two patches: X_{I-1} X_I X_{I+1} <hruler/>
+ | | | | 1 | 2 | |_______|_______|<itemizedlist>
+<listitem><para>← → +</para>
+</listitem><listitem><para>→ ← - Orientation of an equivalent global mesh : →</para>
+</listitem></itemizedlist>
+</para>
+<para>All the formulae and more details are given in the README.md.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structInterface" kindref="compound">Interface</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interface between two patches where we want to compute the derivatives. <linebreak/>
+</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>The applied method only works for interpolation points located on the break points. In the case where &quot;ddc::BoundCond::GREVILLE&quot; is specified, additional interpolation points are also placed in the first or last cell of the patch. Please be sure to initialise the discrete space of your Grid on the break points (especially in the non-uniform case). </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="66" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="67" bodyend="1094"/>
+    <listofallmembers>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ab1ad36b4d43bb1b491fdecc6b825646f" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>associated_interface</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a16a8809bb6ccb4b747f79f9708a0daf3" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>BSplinesPerp1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a0f01eae0a2883a93f6205a2d4955923b" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>BSplinesPerp2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a62f819ba442878a5f4b7f33f883cb5bd" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>check_additional_interpolation_points_location</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a665ebf7825b39b293a504aea41fcc79c" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>check_break_points_are_interpolation_points</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a044ea3e756566b4f7f1efebc361a1c75" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>correction_boundary</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a6d7059e0d4a5f45074e329f2e81387ab" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>EdgeParGrid1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a44b0f497867be47003a348e6770ff1fe" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>EdgeParGrid2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a5860dc60fc102a8637b51d5a422d56cd" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>EdgePerpGrid1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a90bfc0eb912c5bf1bc5176ca8982df02" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>EdgePerpGrid2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ab8176083e835f821855ae58b4ba9673a" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_alpha</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a246bddf213b70ab99c74a6a9ecde87ce" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_beta</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1abb8f59a13f86685c73945d6317515d5b" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_cell_lengths</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a06fcd61d099d349e04cd5064f4f9fac4" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_coeff_deriv_on_patch</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a838eca0a617f303e1208542d34356983" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_coeff_deriv_patch_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1abbd94c0ca89ccf58644866c230255c8e" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_coeff_deriv_patch_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ab515968940eeaad12fd5bd00d7e52822" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_extremity_idx</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a805e6683ca1feddda4f51f17c9cfac8c" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_function_coefficients</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ace8b4483953cbc857786e5a65814d0f5" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_function_coefficients</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1aca9c128b9cc4eedb591df224cc76ef95" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>get_gammas</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a1ccdff01ec876635de1da6e2bf4034bb" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>GridBreakPt1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1acb062bf1da9231a2b21a7f004292fbe0" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>GridBreakPt2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ae93d7c560f59ffd78f7d64559445aec2" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>Idx1D_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a963b89d255bf812d58caea1d6863c58f" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>Idx1D_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a221f1bd80167623db7b79db21dbeaf55" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>IdxRange1DPar_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a593014a47b51a4d025282ab386d024e1" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>IdxRange1DPar_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1aebe57ae9b3a11c21b8b70adcb8c449c0" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>IdxRange1DPerp_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a5150580e0c6741bba3ef990038f4a6a7" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>IdxRange1DPerp_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a0ac979b3c598bb6a84d09a7110e1140c" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>IdxRange2D_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a6e126326d784a8a194acab82e2646dcd" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>IdxRange2D_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1aa43d2a95a765e2b91e3664368657125f" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>IdxRangeBreakPt1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ac37234d5f467daa0c7cbee067fd25227" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>IdxRangeBreakPt2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a754d989bd5efbf2eb00f28148dbc11e2" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_coeff_deriv_patch_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1af96ebc847815a14a338ac5d2bec152eb" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_coeff_deriv_patch_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1afb23c054ceebafbfdd7ae1ba0bdb68a7" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_extremity_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a0d306c098cf3629f261c75b66b34d7b2" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_extremity_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a8ee66ef051e05ad04aa1aeaa963cd877" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_idx_range_perp_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a800bd838bc5634f3eabc12a5c0e03946" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_idx_range_perp_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a176086af3a195f9a8de9472f520fbffc" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_is_cell_bound_1_with_extra_interpol_pt</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ac549cfa5b417938a125983bbaf299ef2" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_is_cell_bound_2_with_extra_interpol_pt</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a9e20cb40681dda74086f76f9dd98caf8" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_weights_patch_1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a510eec95011febb213054b26b19fc061" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_weights_patch_1_alloc</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a30dff28dcbaf41217f9f145e50ccbab1" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_weights_patch_2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ac76b12adadc4ebba1f00019969286a3e" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>m_weights_patch_2_alloc</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a28c2d0bcbe6461fd0ce1c56131d593e0" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>Patch1</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a8993fe800e123ac60c188230d2d6843b" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>Patch2</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ac98b7ebcb0cb5a9fdc45966b3b50c787" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>recursion</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a69a3d28bb5217d206134bb7e2be9d361" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>set_coefficients_non_uniform_case</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a38bba7bdc0a412bda4063c3dc4a427af" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>set_coefficients_uniform_per_patch_case</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a2d8bbf78b34f506ebe74aafebeec6702" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>SingleInterfaceDerivativesCalculator</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1aa628dec3b8a2d8488b14c9b346e31d1f" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>SingleInterfaceDerivativesCalculator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

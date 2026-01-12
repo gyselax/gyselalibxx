@@ -330,6 +330,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
                 <li class="toctree-l3"><a class="reference internal" >spline</a>
     <ul>
                 <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
@@ -462,6 +468,12 @@
                 </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/interface_derivatives/index.html">Interface derivatives test</a>
+                </li>
+    </ul>
+                </li>
     </ul>
                 </li>
     </ul>
@@ -560,6 +572,7 @@
 <li><strong>associated_patch</strong> (<a href="structEdge.html"><strong>Edge</strong></a>)</li>
 <li><strong>ArgBasisCov</strong> (<a href="classIdentityCoordinateChange.html"><strong>IdentityCoordinateChange</strong></a>)</li>
 <li><strong>all_patches</strong> (<a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a>)</li>
+<li><strong>associated_interface</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
 <li><strong>Allocator</strong> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a>)</li>
 </ul>
 <h2 id="b">b</h2>
@@ -594,6 +607,8 @@
 <li><strong>BuilderType</strong> (<a href="classPreallocatableSplineInterpolator.html"><strong>PreallocatableSplineInterpolator</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
 <li><strong>BSplinesROriginal</strong> (<a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
 <li><strong>BSplinesThetaOriginal</strong> (<a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
+<li><strong>BSplinesPerp1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>BSplinesPerp2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
 <li><strong>Builder2D</strong> (<a href="classSplineBuliderDerivField2D.html"><strong>SplineBuliderDerivField2D</strong></a>)</li>
 <li><strong>batched_deriv_field_type</strong> (<a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
 <li><strong>batched_spline_domain_type</strong> (<a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
@@ -728,6 +743,7 @@
 <li><strong>DimR</strong> (<a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
 <li><strong>DimTheta</strong> (<a href="classPolarSplineEvaluator.html"><strong>PolarSplineEvaluator</strong></a>)</li>
 <li><strong>DFieldRTheta</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
+<li><strong>DerivCalculatorTypeSeq</strong> (<a href="classSingleInterfaceDerivativesCalculatorCollection.html"><strong>SingleInterfaceDerivativesCalculatorCollection</strong></a>)</li>
 <li><strong>DFieldBS</strong> (<a href="classSpline1DPartialDerivative.html"><strong>Spline1DPartialDerivative</strong></a>, <a href="classSpline2DPartialDerivative.html"><strong>Spline2DPartialDerivative</strong></a>)</li>
 <li><strong>DFieldBSMem</strong> (<a href="classSpline1DPartialDerivative.html"><strong>Spline1DPartialDerivative</strong></a>, <a href="classSpline2DPartialDerivative.html"><strong>Spline2DPartialDerivative</strong></a>)</li>
 <li><strong>DerivativeDimension</strong> (<a href="classSpline1DPartialDerivative.html"><strong>Spline1DPartialDerivative</strong></a>)</li>
@@ -766,6 +782,10 @@
 <li><strong>example_element</strong> (<a href="classMultipatchType.html"><strong>MultipatchType</strong></a>)</li>
 <li><strong>evaluator_type</strong> (<a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a>)</li>
 <li><strong>EvaluatorType</strong> (<a href="classPreallocatableSplineInterpolator.html"><strong>PreallocatableSplineInterpolator</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
+<li><strong>EdgeParGrid1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>EdgeParGrid2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>EdgePerpGrid1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>EdgePerpGrid2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
 </ul>
 <h2 id="f">f</h2>
 <ul>
@@ -818,6 +838,8 @@
 <li><strong>GrevillePointsTheta</strong> (<a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
 <li><strong>GridROriginal</strong> (<a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
 <li><strong>GridThetaOriginal</strong> (<a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
+<li><strong>GridBreakPt1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>GridBreakPt2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
 </ul>
 <h2 id="i">i</h2>
 <ul>
@@ -903,8 +925,8 @@
 <li><strong>idx_range_type</strong> (<a href="classMPILayout.html"><strong>MPILayout</strong></a>)</li>
 <li><strong>IdxRange1D_1</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
 <li><strong>IdxRange1D_2</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
-<li><strong>IdxRange2D_1</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
-<li><strong>IdxRange2D_2</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
+<li><strong>IdxRange2D_1</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>, <a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>IdxRange2D_2</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>, <a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
 <li><strong>IdxRangeSlice1</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
 <li><strong>IdxRangeSlice2</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
 <li><strong>inner_edges</strong> (<a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a>)</li>
@@ -948,6 +970,15 @@
 <li><strong>IdxStepQuadratureR</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
 <li><strong>IdxStepQuadratureTheta</strong> (<a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>)</li>
 <li><strong>IdxQuadrature</strong> (<a href="classQuadrature.html"><strong>Quadrature</strong></a>)</li>
+<li><strong>Idx1D_1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>Idx1D_2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>IdxRange1DPar_1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>IdxRange1DPar_2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>IdxRange1DPerp_1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>IdxRange1DPerp_2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>IdxRangeBreakPt1</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>IdxRangeBreakPt2</strong> (<a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>InterfaceTypeSeq</strong> (<a href="classSingleInterfaceDerivativesCalculatorCollection.html"><strong>SingleInterfaceDerivativesCalculatorCollection</strong></a>)</li>
 <li><strong>IdxRangeBS</strong> (<a href="classSpline1DPartialDerivative.html"><strong>Spline1DPartialDerivative</strong></a>, <a href="classSpline2DPartialDerivative.html"><strong>Spline2DPartialDerivative</strong></a>)</li>
 <li><strong>IdxRangeBSField</strong> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>)</li>
 <li><strong>IdxRangeField</strong> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>)</li>
@@ -1023,8 +1054,8 @@
 <li><strong>physical_deriv_idx_range_type</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
 <li><strong>parallel_grid</strong> (<a href="structEdge.html"><strong>Edge</strong></a>)</li>
 <li><strong>perpendicular_grid</strong> (<a href="structEdge.html"><strong>Edge</strong></a>)</li>
-<li><strong>Patch1</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>, <a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
-<li><strong>Patch2</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>, <a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
+<li><strong>Patch1</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>, <a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>, <a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
+<li><strong>Patch2</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>, <a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>, <a href="classSingleInterfaceDerivativesCalculator.html"><strong>SingleInterfaceDerivativesCalculator</strong></a>)</li>
 <li><strong>PDEDim</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>PerpEdgeGrid1</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>
 <li><strong>PerpEdgeGrid2</strong> (<a href="classMatchingIdxSlice.html"><strong>MatchingIdxSlice</strong></a>)</li>

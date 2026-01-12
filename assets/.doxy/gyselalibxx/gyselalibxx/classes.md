@@ -411,6 +411,8 @@
 ([**connectivity\_details**](namespaceconnectivity__details.md))
 * [**SelectRelevantIdxRangeType&lt; QueryGrid1D, IdxRange&lt; IdxRangeGrids... &gt; &gt;**](structconnectivity__details_1_1SelectRelevantIdxRangeType_3_01QueryGrid1D_00_01IdxRange_3_01IdxRangeGrids_8_8_8_01_4_01_4.md)
 ([**connectivity\_details**](namespaceconnectivity__details.md))
+* [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md)
+* [**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md)
 * [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md)
 * [**Species**](structSpecies.md)
 * [**SpeciesInformation**](classSpeciesInformation.md)

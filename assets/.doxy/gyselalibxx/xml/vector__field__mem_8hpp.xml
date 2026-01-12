@@ -282,7 +282,7 @@
         </childnode>
         <childnode refid="58" relation="include">
         </childnode>
-        <childnode refid="76" relation="include">
+        <childnode refid="78" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -413,7 +413,7 @@
         <childnode refid="5" relation="include">
         </childnode>
       </node>
-      <node id="77">
+      <node id="79">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp</label>
         <link refid="geometryXVx_2poisson_2qnsolver_8hpp_source"/>
       </node>
@@ -684,8 +684,20 @@
         </childnode>
         <childnode refid="63" relation="include">
         </childnode>
+        <childnode refid="76" relation="include">
+        </childnode>
         <childnode refid="62" relation="include">
         </childnode>
+      </node>
+      <node id="76">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp</label>
+        <link refid="single__interface__derivatives__calculator_8hpp_source"/>
+        <childnode refid="77" relation="include">
+        </childnode>
+      </node>
+      <node id="77">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp</label>
+        <link refid="single__interface__derivatives__calculator__collection_8hpp_source"/>
       </node>
       <node id="61">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
@@ -713,24 +725,24 @@
         <childnode refid="46" relation="include">
         </childnode>
       </node>
-      <node id="78">
+      <node id="80">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fem_1d_poisson_solver.hpp</label>
         <link refid="fem__1d__poisson__solver_8hpp_source"/>
       </node>
-      <node id="79">
+      <node id="81">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp</label>
         <link refid="fft__poisson__solver_8hpp_source"/>
       </node>
-      <node id="76">
+      <node id="78">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp</label>
         <link refid="ipoisson__solver_8hpp_source"/>
-        <childnode refid="77" relation="include">
+        <childnode refid="79" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
-        <childnode refid="78" relation="include">
+        <childnode refid="80" relation="include">
         </childnode>
-        <childnode refid="79" relation="include">
+        <childnode refid="81" relation="include">
         </childnode>
       </node>
       <node id="55">

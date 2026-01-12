@@ -14,6 +14,7 @@
 * **associated\_patch** ([**Edge**](structEdge.md))
 * **ArgBasisCov** ([**IdentityCoordinateChange**](classIdentityCoordinateChange.md))
 * **all\_patches** ([**MultipatchConnectivity**](classMultipatchConnectivity.md))
+* **associated\_interface** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **Allocator** ([**VectorFieldMem**](classVectorFieldMem.md))
 
 
@@ -49,6 +50,8 @@
 * **BuilderType** ([**PreallocatableSplineInterpolator**](classPreallocatableSplineInterpolator.md), [**SplineInterpolator**](classSplineInterpolator.md))
 * **BSplinesROriginal** ([**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
 * **BSplinesThetaOriginal** ([**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
+* **BSplinesPerp1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **BSplinesPerp2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **Builder2D** ([**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md))
 * **batched\_deriv\_field\_type** ([**SplineInterpolator**](classSplineInterpolator.md))
 * **batched\_spline\_domain\_type** ([**SplineInterpolator**](classSplineInterpolator.md))
@@ -185,6 +188,7 @@
 * **DimR** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **DimTheta** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **DFieldRTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **DerivCalculatorTypeSeq** ([**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md))
 * **DFieldBS** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md), [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md))
 * **DFieldBSMem** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md), [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md))
 * **DerivativeDimension** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md))
@@ -224,6 +228,10 @@
 * **example\_element** ([**MultipatchType**](classMultipatchType.md))
 * **evaluator\_type** ([**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md))
 * **EvaluatorType** ([**PreallocatableSplineInterpolator**](classPreallocatableSplineInterpolator.md), [**SplineInterpolator**](classSplineInterpolator.md))
+* **EdgeParGrid1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **EdgeParGrid2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **EdgePerpGrid1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **EdgePerpGrid2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 
 
 ## f
@@ -278,6 +286,8 @@
 * **GrevillePointsTheta** ([**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
 * **GridROriginal** ([**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
 * **GridThetaOriginal** ([**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
+* **GridBreakPt1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **GridBreakPt2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 
 
 ## i
@@ -364,8 +374,8 @@
 * **idx\_range\_type** ([**MPILayout**](classMPILayout.md))
 * **IdxRange1D\_1** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **IdxRange1D\_2** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
-* **IdxRange2D\_1** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
-* **IdxRange2D\_2** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
+* **IdxRange2D\_1** ([**MatchingIdxSlice**](classMatchingIdxSlice.md), [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **IdxRange2D\_2** ([**MatchingIdxSlice**](classMatchingIdxSlice.md), [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **IdxRangeSlice1** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **IdxRangeSlice2** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **inner\_edges** ([**MultipatchConnectivity**](classMultipatchConnectivity.md))
@@ -409,6 +419,15 @@
 * **IdxStepQuadratureR** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **IdxStepQuadratureTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **IdxQuadrature** ([**Quadrature**](classQuadrature.md))
+* **Idx1D\_1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **Idx1D\_2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **IdxRange1DPar\_1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **IdxRange1DPar\_2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **IdxRange1DPerp\_1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **IdxRange1DPerp\_2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **IdxRangeBreakPt1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **IdxRangeBreakPt2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **InterfaceTypeSeq** ([**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md))
 * **IdxRangeBS** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md), [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md))
 * **IdxRangeBSField** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **IdxRangeField** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
@@ -491,8 +510,8 @@
 * **physical\_deriv\_idx\_range\_type** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **parallel\_grid** ([**Edge**](structEdge.md))
 * **perpendicular\_grid** ([**Edge**](structEdge.md))
-* **Patch1** ([**EdgeTransformation**](classEdgeTransformation.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md))
-* **Patch2** ([**EdgeTransformation**](classEdgeTransformation.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md))
+* **Patch1** ([**EdgeTransformation**](classEdgeTransformation.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **Patch2** ([**EdgeTransformation**](classEdgeTransformation.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **PDEDim** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **PerpEdgeGrid1** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **PerpEdgeGrid2** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))

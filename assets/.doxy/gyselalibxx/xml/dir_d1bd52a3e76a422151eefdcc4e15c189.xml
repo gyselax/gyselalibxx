@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_d1bd52a3e76a422151eefdcc4e15c189" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives</compoundname>
+    <innerfile refid="single__interface__derivatives__calculator_8hpp">single_interface_derivatives_calculator.hpp</innerfile>
+    <innerfile refid="single__interface__derivatives__calculator__collection_8hpp">single_interface_derivatives_calculator_collection.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/"/>
+  </compounddef>
+</doxygen>

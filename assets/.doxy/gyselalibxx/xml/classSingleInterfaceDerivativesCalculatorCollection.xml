@@ -1,0 +1,151 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSingleInterfaceDerivativesCalculatorCollection" kind="class" language="C++" prot="public">
+    <compoundname>SingleInterfaceDerivativesCalculatorCollection</compoundname>
+    <includes refid="single__interface__derivatives__calculator__collection_8hpp" local="no">single_interface_derivatives_calculator_collection.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class...</type>
+        <declname>Interfaces</declname>
+        <defname>Interfaces</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculatorCollection_1a07bbd6bd97c37f353a6f5147d5ff720b" prot="private" static="no">
+        <type>ddc::detail::TypeSeq&lt; <ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>&lt; Interfaces &gt;... &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculatorCollection&lt; Interfaces &gt;::DerivCalculatorTypeSeq =  ddc::detail::TypeSeq&lt;SingleInterfaceDerivativesCalculator&lt;Interfaces&gt;...&gt;</definition>
+        <argsstring></argsstring>
+        <name>DerivCalculatorTypeSeq</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculatorCollection::DerivCalculatorTypeSeq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSingleInterfaceDerivativesCalculatorCollection_1a625108f8449eaa34cf3e6680b91c41a8" prot="private" static="no">
+        <type>ddc::detail::TypeSeq&lt; Interfaces... &gt;</type>
+        <definition>using SingleInterfaceDerivativesCalculatorCollection&lt; Interfaces &gt;::InterfaceTypeSeq =  ddc::detail::TypeSeq&lt;Interfaces...&gt;</definition>
+        <argsstring></argsstring>
+        <name>InterfaceTypeSeq</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculatorCollection::InterfaceTypeSeq</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" bodystart="38" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSingleInterfaceDerivativesCalculatorCollection_1afdc0d693460c27994f2b5f025eba0502" prot="private" static="no" mutable="no">
+        <type>std::tuple&lt; <ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>&lt; Interfaces &gt; const  &amp;... &gt;</type>
+        <definition>std::tuple&lt;SingleInterfaceDerivativesCalculator&lt;Interfaces&gt; const&amp;...&gt; SingleInterfaceDerivativesCalculatorCollection&lt; Interfaces &gt;::m_derivative_calculator_collection</definition>
+        <argsstring></argsstring>
+        <name>m_derivative_calculator_collection</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculatorCollection::m_derivative_calculator_collection</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" line="41" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculatorCollection_1a5f4dd17ca5605ee76b05cf498efac6a4" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SingleInterfaceDerivativesCalculatorCollection&lt; Interfaces &gt;::SingleInterfaceDerivativesCalculatorCollection</definition>
+        <argsstring>(SingleInterfaceDerivativesCalculator&lt; Interfaces &gt; const &amp;... derivative_calculators)</argsstring>
+        <name>SingleInterfaceDerivativesCalculatorCollection</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculatorCollection::SingleInterfaceDerivativesCalculatorCollection</qualifiedname>
+        <param>
+          <type><ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>&lt; Interfaces &gt; const &amp;...</type>
+          <declname>derivative_calculators</declname>
+        </param>
+        <briefdescription>
+<para>Instantiate a <ref refid="classSingleInterfaceDerivativesCalculatorCollection" kindref="compound">SingleInterfaceDerivativesCalculatorCollection</ref> from a list of interface derivative calculators. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>derivative_calculators</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="structInterface" kindref="compound">Interface</ref> derivative calculators. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" line="50" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" bodystart="50" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculatorCollection_1a5c9c77e3c0be700ed68ebade87f9c16d" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class <ref refid="structInterface" kindref="compound">Interface</ref></type>
+          </param>
+        </templateparamlist>
+        <type><ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>&lt; <ref refid="structInterface" kindref="compound">Interface</ref> &gt; const &amp;</type>
+        <definition>SingleInterfaceDerivativesCalculator&lt; Interface &gt; const  &amp; SingleInterfaceDerivativesCalculatorCollection&lt; Interfaces &gt;::get</definition>
+        <argsstring>() const</argsstring>
+        <name>get</name>
+        <qualifiedname>SingleInterfaceDerivativesCalculatorCollection::get</qualifiedname>
+        <briefdescription>
+<para>Get a derivative calculator of the collection. The output cannot be copied. This operator only allows to get a temporary reference to call one of the operators of the <ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref> class. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structInterface" kindref="compound">Interface</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interface where the required interface derivative calculator is defined.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The required interface derivative calculator as a constant reference. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" line="69" column="48" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" bodystart="69" bodyend="77"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to store a collection of interface derivative calculators templated on the interfaces. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The class stores a constant reference of interface derivative calculators. It should not be use to copy the elements outside of the class but it should be use to access the operators of the stored interface derivative calculators.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Interfaces</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Types of interface that defined the interface derivative calculators.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="warning"><para>For each interface, only one interface derivative calculator should be defined.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>. </para>
+</simplesect>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator_collection.hpp" bodystart="34" bodyend="78"/>
+    <listofallmembers>
+      <member refid="classSingleInterfaceDerivativesCalculatorCollection_1a07bbd6bd97c37f353a6f5147d5ff720b" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculatorCollection</scope><name>DerivCalculatorTypeSeq</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculatorCollection_1a5c9c77e3c0be700ed68ebade87f9c16d" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculatorCollection</scope><name>get</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculatorCollection_1a625108f8449eaa34cf3e6680b91c41a8" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculatorCollection</scope><name>InterfaceTypeSeq</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculatorCollection_1afdc0d693460c27994f2b5f025eba0502" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculatorCollection</scope><name>m_derivative_calculator_collection</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculatorCollection_1a5f4dd17ca5605ee76b05cf498efac6a4" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculatorCollection</scope><name>SingleInterfaceDerivativesCalculatorCollection</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

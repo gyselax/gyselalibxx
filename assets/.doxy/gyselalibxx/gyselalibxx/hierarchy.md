@@ -149,6 +149,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._
 * **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._ 
 * **class** [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md) _A class to create a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
+* **class** [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md) _Compute the derivative of an equivalent global spline at the interface between two patches._ 
+* **class** [**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md) _A class to store a collection of interface derivative calculators templated on the interfaces._ 
 * **class** [**SpeciesInformation**](classSpeciesInformation.md) [_**Species**_](structSpecies.md) _discrete dimension to access constant attributes related to species._    
     * **struct** [**Species**](structSpecies.md) 
 * **class** [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md) [_**Impl**_](classSpeciesInformation_1_1Impl.md) _object storing attributes in_`MemorySpace` _._

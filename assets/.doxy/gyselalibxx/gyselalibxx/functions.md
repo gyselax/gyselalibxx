@@ -128,6 +128,7 @@
 * **scalar\_product** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **sum** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **save\_logger** ([**matrix\_utils.hpp**](matrix__utils_8hpp.md))
+* **SingleInterfaceDerivativesCalculatorCollection** ([**single\_interface\_derivatives\_calculator\_collection.hpp**](single__interface__derivatives__calculator__collection_8hpp.md))
 * **simpson\_quadrature\_coefficients** ([**simpson\_quadrature.hpp**](simpson__quadrature_8hpp.md))
 * **simpson\_quadrature\_coefficients\_1d** ([**simpson\_quadrature.hpp**](simpson__quadrature_8hpp.md))
 * **simpson\_trapezoid\_quadrature\_coefficients\_1d** ([**simpson\_quadrature.hpp**](simpson__quadrature_8hpp.md))

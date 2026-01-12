@@ -82,6 +82,9 @@
 * **compute\_overlapping\_singular\_elements** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **compute\_singular\_elements** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **compute\_stencil\_elements** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **check\_additional\_interpolation\_points\_location** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **check\_break\_points\_are\_interpolation\_points** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **correction\_boundary** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **charge** ([**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md))
 * **charges** ([**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md))
 * **compute\_coeffs** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
@@ -153,7 +156,7 @@
 ## g
 
 * **get\_inverse\_mapping** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md), [**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md))
-* **get** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**CombinedMapping**](classCombinedMapping.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**MultipatchType**](classMultipatchType.md), [**TensorCommon**](classTensorCommon.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
+* **get** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**CombinedMapping**](classCombinedMapping.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**MultipatchType**](classMultipatchType.md), [**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md), [**TensorCommon**](classTensorCommon.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
 * **get\_derivative** ([**CollisionsInter**](classCollisionsInter.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md))
 * **get\_nustar0** ([**CollisionsInter**](classCollisionsInter.md), [**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_gridvx\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))
@@ -215,6 +218,15 @@
 * **get\_polar\_bspline\_vals** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **get\_polar\_bspline\_vals\_and\_derivs** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **get\_quadrature\_between\_knots** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **get\_alpha** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **get\_beta** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **get\_cell\_lengths** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **get\_coeff\_deriv\_on\_patch** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **get\_coeff\_deriv\_patch\_1** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **get\_coeff\_deriv\_patch\_2** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **get\_extremity\_idx** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **get\_function\_coefficients** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **get\_gammas** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **get\_2d\_polar\_mapping** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **get\_slice** ([**VectorField**](classVectorField.md))
 * **get\_domain** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
@@ -371,6 +383,7 @@
 * **RK4** ([**RK4**](classRK4.md))
 * **RefinedDiscreteToCartesianBuilder** ([**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md))
 * **RestartInitialisation** ([**RestartInitialisation**](classRestartInitialisation.md))
+* **recursion** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 
 
 ## s
@@ -398,6 +411,10 @@
 * **solve\_lambda\_section\_transpose** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))
 * **set\_and\_check\_radii** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **singular\_idx\_range** ([**PolarBSplines**](classPolarBSplines.md))
+* **SingleInterfaceDerivativesCalculator** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **set\_coefficients\_non\_uniform\_case** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **set\_coefficients\_uniform\_per\_patch\_case** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
+* **SingleInterfaceDerivativesCalculatorCollection** ([**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md))
 * **SingleModePerturbInitialisation** ([**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))
 * **Spline1DPartialDerivative** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md))
 * **Spline1DPartialDerivativeCreator** ([**Spline1DPartialDerivativeCreator**](classSpline1DPartialDerivativeCreator.md))

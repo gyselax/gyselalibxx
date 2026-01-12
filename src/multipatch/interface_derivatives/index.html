@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../../../img/favicon.ico" />
+    <title>Interface derivatives - GyselalibX</title>
+    <link rel="stylesheet" href="../../../css/theme.css" />
+    <link rel="stylesheet" href="../../../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../../../docs/stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Interface derivatives";
+        var mkdocs_page_input_path = "src/multipatch/interface_derivatives/README.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../../../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="../../.." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../toolchains/index.html">Installation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/CONTRIBUTING.html">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tutorials</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../docs/first_steps/landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../docs/first_steps/profiling.html">Measuring Performance in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/standards/mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/standards/coding_covariant_and_contravariant_tensors.html">Coding Covariant and Contravariant Tensors</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++ Overview</span></p>
+              <ul class="current">
+                  <li class="toctree-l1 current"><a class="reference internal current" >Building Blocks</a>
+    <ul class="current">
+                <li class="toctree-l2"><a class="reference internal" href="../../index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../coord_transformations/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >gyroaverage</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../gyroaverage/index.html">Gyroaverage operator (for circular geometry)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2 current"><a class="reference internal current" >multipatch</a>
+    <ul class="current">
+                <li class="toctree-l3"><a class="reference internal" href="../index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3 current"><a class="reference internal current" >interface_derivatives</a>
+    <ul class="current">
+                <li class="toctree-l4 current"><a class="reference internal current" href="#">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../../../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../../../tests/multipatch/interface_derivatives/index.html">Interface derivatives test</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../../../docs/troubleshooting/Debugging_workflow.html">Debugging</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="../../../gyselalibxx/namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../gyselalibxx/functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../gyselalibxx/variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../gyselalibxx/macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../../../gyselalibxx/files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../.." class="icon icon-home" aria-label="Docs"></a></li>
+          <li class="breadcrumb-item">Gyselalib++ Overview</li>
+          <li class="breadcrumb-item">Building Blocks</li>
+          <li class="breadcrumb-item">multipatch</li>
+          <li class="breadcrumb-item">interface_derivatives</li>
+      <li class="breadcrumb-item active">Interface derivatives</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/src/multipatch/interface_derivatives/README.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="interface-derivatives">Interface derivatives</h1>
+<p>On multi-patch geometries, we can impose a <span class="arithmatex">\(\mathcal{C}^1\)</span> regularity on the whole domain by fixing identical derivatives and function values on the interface.
+The operators implemented in this folder propose methods to compute the derivatives at the patch interfaces.</p>
+<p>The method applied here is detailed in Vidal et al. (2025)<sup id="fnref:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.</p>
+<p><strong>Assumptions:</strong></p>
+<ul>
+<li>the splines are cubic;</li>
+<li><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> every break point has to be an interpolation point for the splines.</li>
+</ul>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> <strong>Warning:</strong>
+For the non-uniform meshes, please do not use Greville points as interpolation points but the
+break points as interpolation points.
+If you do not use derivatives as closure condition, two additional interpolation points have to be placed in
+the boundary cells.</p>
+<h2 id="contents">Contents</h2>
+<ul>
+<li><a href="#relation-between-derivatives-on-the-boundaries-of-two-connected-patches">Relation between derivatives on the boundaries of two connected patches</a>: It documents the <code>SingleInterfaceDerivativesCalculator</code> operator.</li>
+<li><a href="#how-to-use-the-singleinterfacederivativescalculator-operator">How to use the <code>SingleInterfaceDerivativesCalculator</code> operator?</a>: It documents how to use the operator in the code.</li>
+<li><a href="#formulae">Formulae</a>: It details the formulae applies in the operator.</li>
+</ul>
+<h2 id="relation-between-derivatives-on-the-boundaries-of-two-connected-patches">Relation between derivatives on the boundaries of two connected patches</h2>
+<p>We consider an interface between two patches.
+The method computes the derivative at the interface of an equivalent global spline defined on the two patches of the interface.</p>
+<p>Here is an illustration of the patch layout. For this example, we chose this patch connection but the method
+and the implemented operator works for any patch connection.</p>
+<p><img alt="Illustration patch" src="../../../docs/images/interface_derivatives/fig1_illustration_patch.png" title=""></p>
+<p>In the code, we are using the following relation between derivatives at consecutive interfaces,</p>
+<div class="arithmatex">\[
+    s'(x_{i}) = c^i_{N^L,N^R} + a^i_{N^L,N^R} s'(x_{i+N^R}) + b^i_{N^L,N^R} s'(x_{i-N^L}).
+\]</div>
+<p>with</p>
+<ul>
+<li><span class="arithmatex">\(x_{i}\)</span> the interpolation point located on the interface,</li>
+<li><span class="arithmatex">\(x_{i-N^L}\)</span> the interpolation point located on the interface to the left of the given interface (left bound on patch 1),</li>
+<li><span class="arithmatex">\(x_{i+N^R}\)</span> the interpolation point located on the interface to the right of the given interface (right bound on patch 2),</li>
+<li><span class="arithmatex">\(N^L\)</span> the number of cells on the left patch (patch 1),</li>
+<li><span class="arithmatex">\(N^R\)</span> the number of cells on the right patch (patch 2),</li>
+<li><span class="arithmatex">\(a^i_{N^L,N^R}\)</span>, <span class="arithmatex">\(b^i_{N^L,N^R}\)</span>  and <span class="arithmatex">\(c^i_{N^L,N^R}\)</span> coefficients to determine.</li>
+</ul>
+<p><strong>Note:</strong> <span class="arithmatex">\(a^i_{N^L,N^R}\)</span> and <span class="arithmatex">\(b^i_{N^L,N^R}\)</span> only depend on the interpolation points. The coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span>
+can be written as a linear combination of the function values <span class="arithmatex">\(\{f_{i+k}\}_{k = - N^L}^{N^R}\)</span> on the patches:</p>
+<div class="arithmatex">\[
+    c^i_{N^L,N^R} = \sum_{k = - N^L}^{N^R} \omega_{k, N^L,N^R}^i f_{i+k},
+\]</div>
+<p>with <span class="arithmatex">\(\{\omega_{k, N^L,N^R}^i\}_{k = - N^L}^{N^R}\)</span> depending only on the interpolation points.</p>
+<p><strong>Approximation:</strong> The formula gives the exact derivative of an equivalent global spline.
+It is possible to use an approximation of this formula by using is smaller number of cells on each patch.
+Instead of choosing the <span class="arithmatex">\(N^L\)</span> cells of patch 1, we can chose <span class="arithmatex">\(N^L_{reduc}\)</span> first cells from the interface on patch 1.
+And we can do the same on patch 2 with <span class="arithmatex">\(N^R_{reduc}\)</span> first cells from the interface.
+The approximation is then given by</p>
+<div class="arithmatex">\[
+    s'(x_{i}) = \sum_{k = - N^L_{reduc}}^{N^R_{reduc}} \omega_{k, N^L_{reduc},N^R_{reduc}}^i f_{i+k}.
+\]</div>
+<p>There are different ways to compute the coefficients <span class="arithmatex">\(a^i_{N^L,N^R}\)</span>,
+<span class="arithmatex">\(b^i_{N^L,N^R}\)</span>, and <span class="arithmatex">\(c^i_{N^L,N^R}\)</span>. There are described in the section
+<a href="#formulae">Formulae</a>.</p>
+<p>Firstly, we describe how to use the <code>SingleInterfaceDerivativesCalculator</code> operator.</p>
+<h3 id="how-to-use-the-singleinterfacederivativescalculator-operator">How to use the SingleInterfaceDerivativesCalculator operator?</h3>
+<p>When <code>SingleInterfaceDerivativesCalculator</code> is instantiated, it computes and stores the coefficients
+<span class="arithmatex">\(a^i_{N^L,N^R}\)</span> and <span class="arithmatex">\(b^i_{N^L,N^R}\)</span> and the weights <span class="arithmatex">\(\{\omega_{k, N^L,N^R}^i\}_{k = - N^L}^{N^R}\)</span>.
+To instantiate it, we need the index ranges of the interpolation points. If we want to use the exact formula,
+we need to provide the index ranges with all the points,</p>
+<pre><code class="language-cpp">SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+</code></pre>
+<p>If we want to use an approximation, we provide the index ranges with the interpolation points on the selected cells,</p>
+<pre><code class="language-cpp">Patch1::IdxRange1D idx_range_patch_1_reduced (idx_range_patch_1.take_first(N_L_reduc +1));
+Patch2::IdxRange1D idx_range_patch_2_reduced (idx_range_patch_2.take_last(N_R_reduc +1));
+SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
+</code></pre>
+<blockquote>
+<p><strong>Remark:</strong> For interpolation with interpolation points as closure condition, a special treatment has to be carried out on the boundary cells
+(see <a href="#additional-interpolation-point-not-on-a-break-point">Additional interpolation point not on a break point</a>).
+To apply this treatment, we specify it in the template parameter as follows.</p>
+</blockquote>
+<pre><code class="language-cpp">// If we want to apply the treatment on Patch 1 and Patch 2
+SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+// or if we want to apply the treatment only on Patch 1
+SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::BoundCond::GREVILLE, ddc::BoundCond::HERMITE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+// or if we want to apply the treatment only on Patch 2
+SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::BoundCond::HERMITE, ddc::BoundCond::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+</code></pre>
+<blockquote>
+<p>If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),
+the default template parameter can be used to avoid applying the treatment on inner cells.</p>
+</blockquote>
+<p>The coefficients can be collected with the following functions:</p>
+<ul>
+<li><code>derivatives_calculator.get_coeff_deriv_patch_1()</code> returns the coefficient <span class="arithmatex">\(b^i_{N^L,N^R}\)</span>;</li>
+<li><code>derivatives_calculator.get_coeff_deriv_patch_2()</code> returns the coefficient <span class="arithmatex">\(a^i_{N^L,N^R}\)</span>;</li>
+<li><code>derivatives_calculator.get_function_coefficients(function_1, function_2)</code> returns the coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span>
+ (or <span class="arithmatex">\(c^i_{N^L_{reduc},N^R_{reduc}}\)</span> for approximation).</li>
+</ul>
+<p>If we want to apply the exact formula, we need to sum these coefficients,</p>
+<pre><code class="language-cpp">double const coeff_deriv_left = derivatives_calculator.get_coeff_deriv_patch_1(); // coeff b
+double const coeff_deriv_right = derivatives_calculator.get_coeff_deriv_patch_2(); // coeff a
+double const sum_values = derivatives_calculator.get_function_coefficients(function_1, function_2); // coeff c
+
+double const deriv_interface_right = 1e1; // a given value
+double const deriv_interface_left = 1e1; // a given value
+
+double const deriv_interface = sum_values + coeff_deriv_left * deriv_interface_left + coeff_deriv_right * deriv_interface_right;
+</code></pre>
+<p>If we want to apply an approximation of the formula, we only need <span class="arithmatex">\(c^i_{N^L_{reduc},N^R_{reduc}}\)</span>,</p>
+<pre><code class="language-cpp">double const deriv_interface = derivatives_calculator.get_function_coefficients(function_1, function_2); // coeff c
+</code></pre>
+<p><strong>Remark:</strong> It is also possible to use slices for the functions values,</p>
+<pre><code class="language-cpp">double const deriv_interface =
+    derivatives_calculator.get_function_coefficients(
+            function_1[idx_range_patch_1_reduced],
+            function_2[idx_range_patch_2_reduced]); // coeff c
+</code></pre>
+<h3 id="formulae">Formulae</h3>
+<p>We use a method inspired by Crouseille et al. (2009)<sup id="fnref:1"><a class="footnote-ref" href="#fn:1">1</a></sup>, and detailed in Vidal et al.(2025)<sup id="fnref2:2"><a class="footnote-ref" href="#fn:2">2</a></sup>.
+To establish the formulae, we use the following relation between each consecutive interpolation point,</p>
+<div class="arithmatex">\[
+    s'(x_i) = \gamma_i + \alpha_i  s'(x_{i+1}) + \beta_i  s'(x_{i-1})
+\]</div>
+<p>with the <em>local coefficients</em> given by</p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+    &amp; \gamma_i =
+    \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}}
+    \left[
+        \frac{\Delta x^-_{i}}{\Delta x^+_{i}}  f^+_{i+1}
+        + \left(
+            \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
+            - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+        \right) f^+_{i}
+        - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}  f^-_{i-1}
+    \right],
+    \\
+    &amp; \alpha_i = -\frac{1}{2} \frac{\Delta x^-_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}, \\
+    &amp; \beta_i =  -\frac{1}{2} \frac{\Delta x^+_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}.
+\end{aligned}
+\right.
+\]</div>
+<p>and <span class="arithmatex">\(\Delta x^+_{i} = x^+_{i+1} -  x^+_{i} \text{, } \Delta x^-_{i} = x^-_{i} -  x^-_{i-1}\)</span>,
+and <span class="arithmatex">\(\{f^{+/-}_{i+k}\}_k\)</span> the function values at the interpolation points on patch 1 (+) and
+patch 2 (-).</p>
+<p><strong>Remark:</strong> As mentionnd above, the coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span> can be written as a linear combination
+of the interpolating function values. In the code, we store the weights in front of each interpolating function value
+as they depend only on the grids. For the same reason, we store <span class="arithmatex">\(\gamma_i\)</span> as a vector,</p>
+<div class="arithmatex">\[
+{\bf \Gamma_i} 
+    = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right] 
+    = \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}} 
+        \left[
+            - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}, 
+            \left(
+                \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
+                - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+            \right), 
+            \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+        \right].
+\]</div>
+<h4 id="recursive-formula">Recursive formula</h4>
+<p>We start the recursion on patch 2. We initialise it with,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+    &amp; c^i_{1,1} = \gamma_i,
+    \qquad
+    &amp;&amp; a^i_{1,1} = \alpha_i,
+    \qquad
+    &amp;&amp; b^i_{1,1} = \beta_i,
+    \\
+    &amp; c^i_{1,2} = \frac{1}{1 - \alpha_i  \beta_{i+1}} \left[ \gamma_i + \alpha_i \gamma_{i+1} \right],
+    \qquad
+    &amp;&amp; a^i_{1,2} = \frac{\alpha_i \alpha_{i+1}}{1 - \alpha_i  \beta_{i+1}},
+    \qquad
+    &amp;&amp; b^i_{1,2} = \frac{\beta_i}{1 - \alpha_i  \beta_{i+1}},
+\end{aligned}
+\]</div>
+<p>(i.e. for the weights,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+    &amp; \omega_{k, 1,1}^i = \gamma_{i,k}, 
+    &amp;&amp; \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i 
+                        + \frac{\alpha_i}{1 - \alpha_i  \beta_{i+1}} \gamma_{i+1,k},
+\end{aligned}
+\]</div>
+<p>with <span class="arithmatex">\(\gamma_{i,i-1} = ({\bf \Gamma_i})_0, \ \gamma_{i,i} = ({\bf \Gamma_i})_1, \ \gamma_{i,i+1} = ({\bf \Gamma_i})_2\)</span>
+and null for different <em>k</em>.)</p>
+<p>and for <span class="arithmatex">\(n = 2, ..., N^R-1\)</span>,</p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+    &amp; c^i_{1,n+1} = \frac{1}{1 -  \beta_{i+n} \frac{a^i_{1,n}}{a^i_{1,n-1}} }
+        \left[
+            c^i_{1,n}
+            + a^i_{1,n} \gamma_{i+n}
+            - \beta_{i+n} \frac{a^i_{1,n}}{a^i_{1,n-1}} c^i_{1,n-1}
+        \right] \\
+    &amp; a^i_{1,n+1} = \frac{a^i_{1,n} \alpha_{i+n}}{1 -  \beta_{i+n} \frac{a^i_{1,n}}{a^i_{1,n-1}} }, \\
+    &amp; b^i_{1,n+1} = \frac{1}{1 -  \beta_{i+n} \frac{a^i_{1,n}}{a^i_{1,n-1}} }
+        \left[
+            b^i_{1,n}
+            - \beta_{i+n} \frac{a^i_{1,n} }{a^i_{1,n-1}} b^i_{1,n-1}
+        \right].
+\end{aligned}
+\right.
+\]</div>
+<p>(i.e. for the weights,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+    &amp; \omega_{k, 1,n+1}^i = \frac{1}{1 -  \beta_{i+n} \frac{a^i_{1,n}}{a^i_{1,n-1}} }
+        \left[
+            \omega_{k, 1,n}^i
+            - \beta_{i+n} \frac{a^i_{1,n}}{a^i_{1,n-1}} \omega_{k, 1,n-1}^i
+        \right]
+        + \frac{1}{1 -  \beta_{i+n} \frac{a^i_{1,n}}{a^i_{1,n-1}} }a^i_{1,n} \gamma_{i+n, k}. \\
+\end{aligned}
+\]</div>
+<p>)</p>
+<p>It gives us a relation linking the derivatives at the three points on the following illustration,</p>
+<p><img alt="Illustration recursion 1" src="../../../docs/images/interface_derivatives/fig2_illustration_recursion_1.png" title=""></p>
+<p>We keep doing the recursion on patch 1,</p>
+<div class="arithmatex">\[
+    c^i_{2,N^R} = \frac{1}{1 - b^{i}_{1,N^R}  \alpha_{i-1}}
+        \left[
+            c^{i}_{1,N^R} + b^{i}_{1,N^R}  \gamma_{i-1}
+        \right],
+    \qquad
+    a^i_{2,N^R} = \frac{a^{i}_{1,N^R}}{1 - b^{i}_{1,N^R} \alpha_{i-1}},
+    \qquad
+    b^i_{2,N^R} = \frac{b^{i}_{1,N^R}   \beta_{i-1}}{1 - b^{i}_{1,N^R}  \alpha_{i-1}},
+\]</div>
+<p>(i.e. for the weights,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+    &amp; \omega_{k, 2,N^R}^i = \frac{1}{1 - b^{i}_{1,N^R}  \alpha_{i-1}} \omega_{k, 1,N^R}^i
+                            + \frac{1}{1 - b^{i}_{1,N^R}  \alpha_{i-1}} b^{i}_{1,N^R}  \gamma_{i-1, k}.
+\end{aligned}
+\]</div>
+<p>)</p>
+<p>and for <span class="arithmatex">\(m = 2, ..., N^L-1\)</span>,</p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+        &amp; c^{i}_{m+1,N^R} = \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}}
+            \left[
+                c^{i}_{m,N^R}
+                + b^{i}_{m,N^R}  \gamma_{i-m}
+                - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}} c^{i}_{m-1,N^R}
+            \right],
+        \\
+        &amp; a^{i}_{m+1,N^R} = \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}}
+            \left[
+                a^{i}_{m,N^R}
+                - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}} a^{i}_{m-1,N^R}
+            \right],
+        \\
+        &amp; b^{i}_{m+1,N^R} = \frac{b^{i}_{m,N^R} \beta_{i-m} }
+            {1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}}.
+\end{aligned}
+\right.
+\]</div>
+<p>(i.e. for the weights,</p>
+<div class="arithmatex">\[
+\begin{aligned}
+    &amp; \omega_{k, m+1,N^R}^i = 
+    \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}}
+            \left[
+                \omega_{k, m,N^R}^i
+                - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}} \omega_{k, m-1,N^R}^i
+            \right]
+    \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}} b^{i}_{m,N^R}  \gamma_{i-m, k}.
+    \\
+\end{aligned}
+\]</div>
+<p>)</p>
+<p>The two recursions gives us a relation linking the derivatives at the three consecutive interface
+(see the following illustration),</p>
+<p><img alt="Illustration recursion 2" src="../../../docs/images/interface_derivatives/fig3_illustration_recursion_2.png" title=""></p>
+<h4 id="additional-interpolation-point-not-on-a-break-point">Additional interpolation point not on a break point</h4>
+<p>If we use interpolation points as closure conditions for the equivalent global spline,
+the last local coefficients must be modified.</p>
+<p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/26a0.svg" title=":warning:"> <strong>Warning:</strong>
+We consider here that all the break points are interpolation points. For cubic splines,
+two additional interpolation points are added.
+They are added in the boundary cells of the mesh where the equivalent global spline is defined.</p>
+<p><img alt="Illustration additional interpolation points." src="../../../docs/images/interface_derivatives/fig4_illustration_additional_interpolation_pts.png" title=""></p>
+<p>If there is an additional interpolation point in the left boundary cell, then the last step
+of the second part of the recursion need to use these modified local coefficients,</p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+    &amp; \gamma_i^{*,-} = \frac{1}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}
+        \left[
+            \gamma_i
+            + \beta_i \frac{1}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{*})
+            - \beta_i \frac{H_0^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i-1})
+            - \beta_i \frac{H_1^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i})
+        \right],
+    \\
+    &amp; \alpha_i^{*,-} = \frac{\alpha_i}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}, \\
+    &amp; \beta_i^{*,-} = 0
+\end{aligned}
+\right.
+\]</div>
+<p>with</p>
+<div class="arithmatex">\[
+    H_0(x) = (1-x)^2 (1+2x),
+    \qquad
+    H_1(x) = x^2 (3-2x),
+    \qquad
+    K_0(x) = (1-x)^2 x,
+    \qquad
+    K_1(x) = x^2 (x-1),
+\]</div>
+<p>with <span class="arithmatex">\(H_0^{*,-} \text{, } H_1^{*,-} \text{, } K_0^{*,-} \text{ and } K_1^{*,-}\)</span> the evaluations of
+<span class="arithmatex">\(H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1\)</span> at <span class="arithmatex">\(\frac{x^-_{*} - x^-_{i-1}}{\Delta x^-_{i}}\)</span>,
+with <span class="arithmatex">\(x^-_{*}\)</span> the additional interpolation point.</p>
+<p>If there is an additional interpolation point in the right boundary cell, then the last step
+of the first part of the recursion need to use these modified local coefficients,</p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+    &amp; \gamma_i^{*,+} = \frac{1}{1 + \alpha_i \frac{K_0^{*,+}}{K_1^{*,+}}}
+        \left[
+            \gamma_i
+            + \alpha_i \frac{1}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{*})
+            - \alpha_i \frac{H_0^{*,+}}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{i})
+            - \alpha_i \frac{H_1^{*,+}}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{i+1})
+        \right],
+    \\
+    &amp; \alpha_i^{*,+} = 0, \\
+    &amp; \beta_i^{*,+} = \frac{\beta_i}{1 + \alpha_i \frac{K_0^{*,+}}{K_1^{*,+}}}.
+\end{aligned}
+\right.
+\]</div>
+<p>and <span class="arithmatex">\(H_0^{*,+} \text{, } H_1^{*,+} \text{, } K_0^{*,+} \text{ and } K_1^{*,+}\)</span> the evaluations of
+<span class="arithmatex">\(H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1\)</span> at <span class="arithmatex">\(\frac{x^+_{*} - x^+_{i}}{\Delta x^+_{i}}\)</span>,
+with <span class="arithmatex">\(x^+_{*}\)</span> the additional interpolation point.</p>
+<h4 id="explicit-formula">Explicit formula</h4>
+<p>If the <strong>interpolation points are uniform</strong>
+(<span class="arithmatex">\(\Delta x^-_{i} = \Delta x^-  \text{ and } \Delta x^+_{i} = \Delta x^+ \text{, } \forall i\)</span>),
+then the recursion formula is equivalent to the following explicit formula.</p>
+<p>To lighten the notation, we note <span class="arithmatex">\(n_1 = N^L\)</span> and <span class="arithmatex">\(n_2 = N^R\)</span>.</p>
+<p>We introduce the following sequence to define the explicit formulae,</p>
+<div class="arithmatex">\[
+    u_{k} = (2+\sqrt{3})^k - (2-\sqrt{3})^k,
+    \qquad \forall k \in \mathbb{N}.
+\]</div>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+    &amp; a^I_{n_1,n_2} = \frac{(-1)^{n_2-1}u_{1}a^I_{1,1}u_{n_1}}{u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}},
+    \\
+    &amp; b^I_{n_1,n_2} = \frac{(-1)^{n_1-1} u_{1} b^I_{1,1} u_{n_2}}{u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}},
+    \\
+    &amp; c^I_{n_1,n_2} = \sum_{k=-n_1}^{n_2} \omega^I_{k,n_1,n_2} f_{i+k},
+\end{aligned}
+\right.
+\]</div>
+<p>with the weights given by,</p>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+    &amp; \omega^I_{k,n_1,n_2} = 3(-1)^{k}
+        \frac{\frac{a^I_{1,1}}{\Delta x^+} u_{n_1}u_{1}}
+        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
+        , &amp;k = n_2, \\
+    &amp; \omega^I_{k,n_1,n_2} = 3(-1)^{k}
+        \frac{\frac{a^I_{1,1}}{\Delta x^+} u_{n_1}(u_{n_2-k+1} - u_{n_2-k-1})}
+        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
+        , &amp;k = 1, ..., n_2-1, \\
+    &amp; \omega^I_{k,n_1,n_2} = 3(-1)^k
+        \frac{\frac{a^I_{1,1}}{\Delta x^+}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^-}u_{n_2}(u_{n_1} - u_{n_1-1})}
+        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
+        , &amp;k = 0, \\
+    &amp; \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
+        \frac{\frac{b^I_{1,1}}{\Delta x^-} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
+        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
+        , &amp;k = -(n_1-1), ..., -1, \\
+    &amp; \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
+        \frac{\frac{b^I_{1,1}}{\Delta x^-} u_{n_2}u_{1}}
+        {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
+        , &amp;k = -n_1,
+\end{aligned}
+\right.
+\]</div>
+<p>and <span class="arithmatex">\(a^I_{1,1} = -\frac{1}{2} \frac{\Delta x^-}{\Delta x^+ +\Delta x^-}\)</span>
+and <span class="arithmatex">\(b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^+}{\Delta x^+ +\Delta x^-}\)</span>.</p>
+<h2 id="references">References</h2>
+<div class="footnote">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Crouseilles, N., Latu, G., Sonnendrücker, E.:
+<em>A parallel vlasov solver based on local cubic spline interpolation on patches.</em>
+Journal of Computational Physics 228(5), 1429–1446 (2009) <a class="footnote-backref" href="#fnref:1" title="Jump back to footnote 1 in the text">↩</a></p>
+</li>
+<li id="fn:2">
+<p>Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
+<em>Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.</em>
+Journal of Scientific Computing, (2025) [SUBMITTED - NOT PUBLISHED] <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">↩</a></p>
+</li>
+</ol>
+</div></div>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../data_types/index.html" class="btn btn-neutral float-left" title="Data Types for Multipatch Geometry"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../spline/index.html" class="btn btn-neutral float-right" title="Spline on multipatch geometry">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../data_types/index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../spline/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../../../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "../../..";</script>
+    <script src="../../../js/theme_extra.js"></script>
+    <script src="../../../js/theme.js"></script>
+      <script src="../../../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../../../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>File single_interface_derivatives_calculator.hpp - GyselalibX</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+        <link href="../docs/stylesheets/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "File single_interface_derivatives_calculator.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/single__interface__derivatives__calculator_8hpp_source.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> GyselalibX
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">General</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../index.html">Home</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >First Steps</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/getting_started.html">Getting Started</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../toolchains/index.html">Installation</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/DDC_in_gyselalibxx.html">DDC in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/CONTRIBUTING.html">Contributing</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tutorials</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/landau_damping_tutorial.html">1D-1V Landau Damping Simulation with Gyselalib++</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="../docs/first_steps/profiling.html">Measuring Performance in Gyselalib++</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Standards</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/CODING_STANDARD.html">Coding Standard</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/mathematical_and_physical_conventions.html">Maths and Physics</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/standards/coding_covariant_and_contravariant_tensors.html">Coding Covariant and Contravariant Tensors</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Gyselalib++ Overview</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Building Blocks</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../src/index.html">Gyselalib++ contents</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/collisions/index.html">Collisions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >coord_transformations</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/coord_transformations/index.html">Mappings</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/data_types/index.html">Data Storage Types</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryRTheta/index.html">Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_field</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/advection_field/index.html">Advection Field finder</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/geometry/index.html">Geometry RTheta</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/initialisation/index.html">Initialisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/poisson/index.html">Polar Poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_solver</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryRTheta/time_solver/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryVparMu</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryVparMu/index.html">Geometry (vpar, mu)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >collisions</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/collisions/index.html">CollisionConfiguration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/geometry/index.html">GeometryVparMu</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryVparMu/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXVx/index.html">Geometry (x, v_x)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >boltzmann</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/boltzmann/index.html">Boltzmann solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/geometry/index.html">Geometry X-Vx</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >rhs</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/rhs/index.html">RHS</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXVx/utils/index.html">Utils</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXY/index.html">Geometry (x, y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/geometry/index.html">Geometry XY</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/initialisation/index.html">Initialisation on (x,y) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXY/time_integration/index.html">Predictor-corrector methods</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXYVxVy</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/geometryXYVxVy/index.html">Geometry (x, y, v_x, v_y)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometry</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/geometry/index.html">Geometry X Y-Vx Vy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >initialisation</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/initialisation/index.html">Initialisation methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/poisson/index.html">Quasi-Neutrality Solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >time_integration</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/time_integration/index.html">Time integration</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vlasov</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/geometryXYVxVy/vlasov/index.html">Vlasov solver</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >gyroaverage</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/gyroaverage/index.html">Gyroaverage operator (for circular geometry)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >interpolation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/interpolation/index.html">Interpolation Methods</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_splines</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/interpolation/polar_splines/index.html">Polar Splines</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >io</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/io/index.html">Functions used for input and output</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >math_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/math_tools/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >matrix_tools</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/matrix_tools/index.html">Matrix tools</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >mpi_parallelisation</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/mpi_parallelisation/index.html">Parallelisation</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/multipatch/index.html">Multipatch</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >connectivity</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/connectivity/index.html">Multipatch connectivity</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >data_types</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/data_types/index.html">Data Types for Multipatch Geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/interface_derivatives/index.html">Interface derivatives</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/spline/index.html">Spline on multipatch geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >pde_solvers</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/pde_solvers/index.html">PDE Solvers</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >quadrature</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/quadrature/index.html">Quadrature Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >speciesinfo</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/speciesinfo/index.html">SpeciesInfo (x, v_x)</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >timestepper</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/timestepper/index.html">Time Stepping Methods</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >utils</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../src/utils/index.html">Utility Functions</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Simulations</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../simulations/index.html">Gyselalib++ simulations</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryRTheta/index.html">Simulations in (r, theta) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >diocotron</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/diocotron/index.html">Diocotron instability</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >vortex_merger</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryRTheta/vortex_merger/index.html">Vortex merger</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXVx</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXVx/index.html">Simulations in (x, vx) geometry</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryXY</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../simulations/geometryXY/index.html">Simulations in (x, y) geometry</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >guiding_centre</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../simulations/geometryXY/guiding_centre/index.html">Guiding centre (X,Y) simulation</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" >Tests</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" href="../tests/index.html">Gyselalib++ tests</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >advection</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/advection/index.html">Tests on the templated advection operators</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >geometryRTheta</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/geometryRTheta/index.html">Tests : Geometry (r, theta)</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >advection_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/advection_rtheta/index.html">Tests on the 2D polar advection operator</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_poisson</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/polar_poisson/index.html">Tests on the 2D polar poisson solver</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >spline_interpolator_rtheta</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/geometryRTheta/spline_interpolator_rtheta/index.html">Tests on spline interpolator in polar coordinates</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >multipatch</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="../tests/multipatch/index.html">Multipatch geometry tests</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >geometries</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/geometries/index.html">Multipatch geometries</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" >interface_derivatives</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../tests/multipatch/interface_derivatives/index.html">Interface derivatives test</a>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Development</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Adding_docs.html">Adding Docs</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/Using_git.html">Using Git</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/development/developer_FAQ.html">Developer FAQ</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">Troubleshooting</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Common_compilation_problems.html">Compilation Issues</a>
+                  </li>
+                  <li class="toctree-l1"><a class="reference internal" href="../docs/troubleshooting/Debugging_workflow.html">Debugging</a>
+                  </li>
+              </ul>
+              <p class="caption"><span class="caption-text">API</span></p>
+              <ul>
+                  <li class="toctree-l1"><a class="reference internal" >Gyselalib++</a>
+    <ul>
+                <li class="toctree-l2"><a class="reference internal" >Classes</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="annotated.html">Class List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="classes.html">Class Index</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="hierarchy.html">Class Hierarchy</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" >Namespaces</a>
+    <ul>
+                <li class="toctree-l3"><a class="reference internal" href="namespaces.html">Namespace List</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_members.html">Namespace Members</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_functions.html">Namespace Member Functions</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_variables.html">Namespace Member Variables</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_typedefs.html">Namespace Member Typedefs</a>
+                </li>
+                <li class="toctree-l3"><a class="reference internal" href="namespace_member_enums.html">Namespace Member Enumerations</a>
+                </li>
+    </ul>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="functions.html">Functions</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="variables.html">Variables</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="macros.html">Macros</a>
+                </li>
+                <li class="toctree-l2"><a class="reference internal" href="files.html">Files</a>
+                </li>
+    </ul>
+                  </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">GyselalibX</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">File single_interface_derivatives_calculator.hpp</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/single__interface__derivatives__calculator_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <div><h1 id="file-single_interface_derivatives_calculatorhpp">File single_interface_derivatives_calculator.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_d1bd52a3e76a422151eefdcc4e15c189.html"><strong>interface_derivatives</strong></a> <strong>&gt;</strong> <a href="single__interface__derivatives__calculator_8hpp.html"><strong>single_interface_derivatives_calculator.hpp</strong></a></p>
+<p><a href="single__interface__derivatives__calculator_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+
+#pragma once
+
+#include &lt;ddc/ddc.hpp&gt;
+
+#include "ddc_aliases.hpp"
+#include "edge.hpp"
+#include "edge_transformation.hpp"
+#include "types.hpp"
+
+
+template &lt;class T&gt;
+inline constexpr bool enable_single_derivative_calculator = false;
+
+template &lt;class T&gt;
+inline constexpr bool is_single_derivative_calculator_v
+        = enable_single_derivative_calculator&lt;std::remove_const_t&lt;std::remove_reference_t&lt;T&gt;&gt;&gt;;
+
+template &lt;class InterfaceType&gt;
+class SingleInterfaceDerivativesCalculator
+{
+    static_assert(
+            (!std::is_same_v&lt;typename InterfaceType::Edge1, OutsideEdge&gt;)&amp;&amp;(
+                    !std::is_same_v&lt;typename InterfaceType::Edge2, OutsideEdge&gt;),
+            "The interface cannot be an interface with the outside domain.");
+
+    using EdgePerpGrid1 = typename InterfaceType::Edge1::perpendicular_grid;
+    using EdgePerpGrid2 = typename InterfaceType::Edge2::perpendicular_grid;
+
+    using EdgeParGrid1 = typename InterfaceType::Edge1::parallel_grid;
+    using EdgeParGrid2 = typename InterfaceType::Edge2::parallel_grid;
+
+    using Patch1 = typename InterfaceType::Edge1::associated_patch;
+    using Patch2 = typename InterfaceType::Edge2::associated_patch;
+
+    using IdxRange2D_1 = typename Patch1::IdxRange12;
+    using IdxRange2D_2 = typename Patch2::IdxRange12;
+
+    using IdxRange1DPerp_1 = IdxRange&lt;EdgePerpGrid1&gt;;
+    using IdxRange1DPerp_2 = IdxRange&lt;EdgePerpGrid2&gt;;
+    using IdxRange1DPar_1 = IdxRange&lt;EdgeParGrid1&gt;;
+    using IdxRange1DPar_2 = IdxRange&lt;EdgeParGrid2&gt;;
+
+    using Idx1D_1 = Idx&lt;EdgePerpGrid1&gt;;
+    using Idx1D_2 = Idx&lt;EdgePerpGrid2&gt;;
+
+    using BSplinesPerp1 = std::conditional_t&lt;
+            std::is_same_v&lt;EdgePerpGrid1, typename Patch1::Grid1&gt;,
+            typename Patch1::BSplines1,
+            typename Patch1::BSplines2&gt;;
+    using BSplinesPerp2 = std::conditional_t&lt;
+            std::is_same_v&lt;EdgePerpGrid2, typename Patch2::Grid1&gt;,
+            typename Patch2::BSplines1,
+            typename Patch2::BSplines2&gt;;
+
+    using GridBreakPt1 = std::conditional_t&lt;
+            BSplinesPerp1::is_uniform(),
+            ddc::UniformBsplinesKnots&lt;BSplinesPerp1&gt;,
+            ddc::NonUniformBsplinesKnots&lt;BSplinesPerp1&gt;&gt;;
+    using GridBreakPt2 = std::conditional_t&lt;
+            BSplinesPerp2::is_uniform(),
+            ddc::UniformBsplinesKnots&lt;BSplinesPerp2&gt;,
+            ddc::NonUniformBsplinesKnots&lt;BSplinesPerp2&gt;&gt;;
+    using IdxRangeBreakPt1 = IdxRange&lt;GridBreakPt1&gt;;
+    using IdxRangeBreakPt2 = IdxRange&lt;GridBreakPt2&gt;;
+
+public:
+    using associated_interface = InterfaceType;
+
+private:
+    const bool m_is_cell_bound_1_with_extra_interpol_pt;
+    const bool m_is_cell_bound_2_with_extra_interpol_pt;
+
+    IdxRange1DPerp_1 const m_idx_range_perp_1;
+    IdxRange1DPerp_2 const m_idx_range_perp_2;
+
+    static Extremity constexpr m_extremity_1 = InterfaceType::Edge1::extremity;
+    static Extremity constexpr m_extremity_2 = InterfaceType::Edge2::extremity;
+
+    double m_coeff_deriv_patch_2;
+    double m_coeff_deriv_patch_1;
+
+    host_t&lt;DFieldMem&lt;IdxRange1DPerp_1&gt;&gt; m_weights_patch_1_alloc;
+    host_t&lt;DFieldMem&lt;IdxRange1DPerp_2&gt;&gt; m_weights_patch_2_alloc;
+
+    host_t&lt;DField&lt;IdxRange1DPerp_1&gt;&gt; m_weights_patch_1;
+    host_t&lt;DField&lt;IdxRange1DPerp_2&gt;&gt; m_weights_patch_2;
+
+public:
+    SingleInterfaceDerivativesCalculator(
+            IdxRange1DPerp_1 const&amp; idx_range_1d_1,
+            IdxRange1DPerp_2 const&amp; idx_range_1d_2,
+            ddc::BoundCond const&amp; Bound1 = ddc::BoundCond::HERMITE,
+            ddc::BoundCond const&amp; Bound2 = ddc::BoundCond::HERMITE)
+        : m_is_cell_bound_1_with_extra_interpol_pt(Bound1 == ddc::BoundCond::GREVILLE)
+        , m_is_cell_bound_2_with_extra_interpol_pt(Bound2 == ddc::BoundCond::GREVILLE)
+        , m_idx_range_perp_1(idx_range_1d_1)
+        , m_idx_range_perp_2(idx_range_1d_2)
+        , m_weights_patch_1_alloc(m_idx_range_perp_1)
+        , m_weights_patch_2_alloc(m_idx_range_perp_2)
+        , m_weights_patch_1(m_weights_patch_1_alloc)
+        , m_weights_patch_2(m_weights_patch_2_alloc)
+    {
+        assert(Bound1 != ddc::BoundCond::PERIODIC);
+        assert(Bound2 != ddc::BoundCond::PERIODIC);
+
+        // Two interpolation points have to be added if the derivatives are not closure condition.
+        if (m_is_cell_bound_1_with_extra_interpol_pt) {
+            assert(m_idx_range_perp_1.size() == ddc::discrete_space&lt;BSplinesPerp1&gt;().ncells() + 2);
+        } else {
+            assert(m_idx_range_perp_1.size() &lt;= ddc::discrete_space&lt;BSplinesPerp1&gt;().ncells() + 1);
+        }
+        if (m_is_cell_bound_2_with_extra_interpol_pt) {
+            assert(m_idx_range_perp_2.size() == ddc::discrete_space&lt;BSplinesPerp2&gt;().ncells() + 2);
+        } else {
+            assert(m_idx_range_perp_2.size() &lt;= ddc::discrete_space&lt;BSplinesPerp2&gt;().ncells() + 1);
+        }
+
+        // The break points have to be interpolation points.
+        check_break_points_are_interpolation_points&lt;BSplinesPerp1, GridBreakPt1&gt;(
+                m_is_cell_bound_1_with_extra_interpol_pt,
+                m_idx_range_perp_1,
+                m_extremity_1);
+        check_break_points_are_interpolation_points&lt;BSplinesPerp2, GridBreakPt2&gt;(
+                m_is_cell_bound_2_with_extra_interpol_pt,
+                m_idx_range_perp_2,
+                m_extremity_2);
+
+
+        // The additional interpolation points have to be in the boundary cells.
+        if (m_is_cell_bound_1_with_extra_interpol_pt) {
+            check_additional_interpolation_points_location&lt;
+                    BSplinesPerp1,
+                    GridBreakPt1&gt;(m_idx_range_perp_1, m_extremity_1);
+        }
+        if (m_is_cell_bound_2_with_extra_interpol_pt) {
+            check_additional_interpolation_points_location&lt;
+                    BSplinesPerp2,
+                    GridBreakPt2&gt;(m_idx_range_perp_2, m_extremity_2);
+        }
+
+        if constexpr ((ddc::is_uniform_point_sampling_v&lt;EdgePerpGrid1&gt;)&amp;&amp;(
+                              ddc::is_uniform_point_sampling_v&lt;EdgePerpGrid2&gt;)) {
+            set_coefficients_uniform_per_patch_case();
+        } else {
+            set_coefficients_non_uniform_case();
+        }
+    }
+
+
+    template &lt;class IdxRangeA, class IdxRangeB&gt;
+    SingleInterfaceDerivativesCalculator(
+            IdxRangeA const&amp; idx_range_a,
+            IdxRangeB const&amp; idx_range_b,
+            ddc::BoundCond const&amp; Bound1 = ddc::BoundCond::HERMITE,
+            ddc::BoundCond const&amp; Bound2 = ddc::BoundCond::HERMITE)
+        : SingleInterfaceDerivativesCalculator(
+                IdxRange1DPerp_1(
+                        ddc::cartesian_prod_t&lt;IdxRangeA, IdxRangeB&gt;(idx_range_a, idx_range_b)),
+                IdxRange1DPerp_2(
+                        ddc::cartesian_prod_t&lt;IdxRangeA, IdxRangeB&gt;(idx_range_a, idx_range_b)),
+                Bound1,
+                Bound2)
+    {
+    }
+
+    double get_coeff_deriv_patch_1() const
+    {
+        return m_coeff_deriv_patch_1;
+    }
+
+    double get_coeff_deriv_patch_2() const
+    {
+        return m_coeff_deriv_patch_2;
+    }
+
+    template &lt;class Patch&gt;
+    double get_coeff_deriv_on_patch() const
+    {
+        static_assert(
+                (std::is_same_v&lt;Patch, Patch1&gt;) || (std::is_same_v&lt;Patch, Patch2&gt;),
+                "The given Patch template parameter is not one of the Patch of the given "
+                "Interface.");
+        if constexpr (std::is_same_v&lt;Patch, Patch1&gt;) {
+            return m_coeff_deriv_patch_1;
+        } else {
+            return m_coeff_deriv_patch_2;
+        }
+    }
+
+    template &lt;class Layout1, class Layout2&gt;
+    double get_function_coefficients(
+            DConstField&lt;IdxRange1DPerp_1, Kokkos::HostSpace, Layout1&gt; const&amp; function_1,
+            DConstField&lt;IdxRange1DPerp_2, Kokkos::HostSpace, Layout2&gt; const&amp; function_2) const
+    {
+        // The function needs to be continuous at the interface.
+        Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
+        Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
+        assert(abs(function_1(interface_idx_1) - function_2(interface_idx_2)) &lt; 1e-13);
+
+        double coeff_values = ddc::host_transform_reduce(
+                m_idx_range_perp_1,
+                0.0,
+                ddc::reducer::sum&lt;double&gt;(),
+                [&amp;](Idx1D_1 const&amp; idx) { return function_1(idx) * m_weights_patch_1(idx); });
+
+        // To avoid counting twice the value at the interface.
+        IdxRange1DPerp_2 idx_range_perp_2_without_interface
+                = (m_extremity_2 == FRONT)
+                          ? m_idx_range_perp_2.remove_first(IdxStep&lt;EdgePerpGrid2&gt;(1))
+                          : m_idx_range_perp_2.remove_last(IdxStep&lt;EdgePerpGrid2&gt;(1));
+        coeff_values += ddc::host_transform_reduce(
+                idx_range_perp_2_without_interface,
+                0.0,
+                ddc::reducer::sum&lt;double&gt;(),
+                [&amp;](Idx1D_2 const&amp; idx) { return function_2(idx) * m_weights_patch_2(idx); });
+        return coeff_values;
+    }
+
+    template &lt;class Layout1, class Layout2&gt;
+    inline double get_function_coefficients(
+            DConstField&lt;IdxRange1DPerp_2, Kokkos::HostSpace, Layout2&gt; const&amp; function_2,
+            DConstField&lt;IdxRange1DPerp_1, Kokkos::HostSpace, Layout1&gt; const&amp; function_1) const
+    {
+        return get_function_coefficients(function_1, function_2);
+    }
+
+
+private:
+    template &lt;typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid&gt;
+    void check_break_points_are_interpolation_points(
+            bool const is_cell_bound_with_extra_interpol_pt,
+            IdxRange&lt;EdgePerpGrid&gt; const&amp; idx_range_perp,
+            Extremity const extremity) const
+    {
+        // Get the index range for all the break points on the patch.
+        IdxRange&lt;GridBreakPt&gt; idx_range_full_break_points
+                = ddc::discrete_space&lt;BSplinesPerp&gt;().break_point_domain();
+        IdxRange&lt;GridBreakPt&gt; idx_range_break_points = idx_range_full_break_points;
+        // Select the break points where the interpolation points are defined.
+        if (!is_cell_bound_with_extra_interpol_pt) {
+            IdxStep&lt;GridBreakPt&gt; idx_step(idx_range_perp.size());
+            if (extremity == Extremity::FRONT) {
+                idx_range_break_points = idx_range_full_break_points.take_first(idx_step);
+            } else {
+                idx_range_break_points = idx_range_full_break_points.take_last(idx_step);
+            }
+        }
+        // Each break point should be an interpolation point.
+        ddc::host_for_each(idx_range_break_points, [&amp;](Idx&lt;GridBreakPt&gt; const idx_break) {
+            double const break_point = ddc::coordinate(idx_break);
+            bool is_an_interpolation_pt = false;
+            ddc::host_for_each(idx_range_perp, [&amp;](Idx&lt;EdgePerpGrid&gt; const idx_interpol) {
+                double const interpolation_point = ddc::coordinate(idx_interpol);
+                if (abs(break_point - interpolation_point) &lt; 1e-15) {
+                    is_an_interpolation_pt = true;
+                }
+            });
+            if (!is_an_interpolation_pt) {
+                throw std::runtime_error(
+                        "[abort] The break points have to be interpolation points. The break point "
+                        + std::to_string(break_point) + " at the "
+                        + std::to_string((idx_break - idx_range_break_points.front()).value())
+                        + "th index was not found in the interpolation point grid given.");
+            }
+        });
+    }
+
+    template &lt;typename BSplinesPerp, typename GridBreakPt, typename EdgePerpGrid&gt;
+    void check_additional_interpolation_points_location(
+            IdxRange&lt;EdgePerpGrid&gt; const&amp; idx_range_perp,
+            Extremity const extremity)
+    {
+        IdxRange&lt;GridBreakPt&gt; idx_range_full_break_points
+                = ddc::discrete_space&lt;BSplinesPerp&gt;().break_point_domain();
+
+        double added_interpolation_pt;
+        double break_coord_min;
+        double break_coord_max;
+        if (extremity == Extremity::FRONT) {
+            Idx&lt;EdgePerpGrid&gt; idx = idx_range_perp.back() - IdxStep&lt;EdgePerpGrid&gt;(1);
+            Idx&lt;GridBreakPt&gt; idx_break
+                    = idx_range_full_break_points.back() - IdxStep&lt;GridBreakPt&gt;(1);
+            added_interpolation_pt = double(ddc::coordinate(idx));
+            break_coord_min = double(ddc::coordinate(idx_break));
+            break_coord_max = double(ddc::coordinate(idx_range_full_break_points.back()));
+        } else {
+            Idx&lt;EdgePerpGrid&gt; idx = idx_range_perp.front() + IdxStep&lt;EdgePerpGrid&gt;(1);
+            Idx&lt;GridBreakPt&gt; idx_break
+                    = idx_range_full_break_points.front() + IdxStep&lt;GridBreakPt&gt;(1);
+            added_interpolation_pt = double(ddc::coordinate(idx));
+            break_coord_min = double(ddc::coordinate(idx_range_full_break_points.front()));
+            break_coord_max = double(ddc::coordinate(idx_break));
+        }
+
+        if (!((break_coord_min &lt; added_interpolation_pt)
+              &amp;&amp; (added_interpolation_pt &lt; break_coord_max))) {
+            throw std::runtime_error(
+                    "[abort] The additional interpolation points have to be placed in the "
+                    "first or last cell of the patch. The point "
+                    + std::to_string(added_interpolation_pt) + " is not placed between "
+                    + std::to_string(break_coord_min) + " and " + std::to_string(break_coord_max)
+                    + ".");
+        }
+    }
+
+    // ===========================================================================================
+    // NON-UNIFORM INTERPOLATION POINTS                                                          |
+    // ===========================================================================================
+    void set_coefficients_non_uniform_case()
+    {
+        // Memory allocation ---------------------------------------------------------------------
+        // Define weight fields for number of cells equal to n, n-1 and n-2 in the recursion.
+        host_t&lt;DFieldMem&lt;IdxRange1DPerp_1&gt;&gt; weights_1_alloc_minus_2(m_idx_range_perp_1);
+        host_t&lt;DFieldMem&lt;IdxRange1DPerp_1&gt;&gt; weights_1_alloc_minus_1(m_idx_range_perp_1);
+        host_t&lt;DFieldMem&lt;IdxRange1DPerp_1&gt;&gt; weights_1_alloc_minus_0(m_idx_range_perp_1);
+
+        host_t&lt;DFieldMem&lt;IdxRange1DPerp_2&gt;&gt; weights_2_alloc_minus_2(m_idx_range_perp_2);
+        host_t&lt;DFieldMem&lt;IdxRange1DPerp_2&gt;&gt; weights_2_alloc_minus_1(m_idx_range_perp_2);
+        host_t&lt;DFieldMem&lt;IdxRange1DPerp_2&gt;&gt; weights_2_alloc_minus_0(m_idx_range_perp_2);
+
+        host_t&lt;DField&lt;IdxRange1DPerp_1&gt;&gt; weights_1_minus_2(weights_1_alloc_minus_2);
+        host_t&lt;DField&lt;IdxRange1DPerp_1&gt;&gt; weights_1_minus_1(weights_1_alloc_minus_1);
+        host_t&lt;DField&lt;IdxRange1DPerp_1&gt;&gt; weights_1_minus_0(weights_1_alloc_minus_0);
+
+        host_t&lt;DField&lt;IdxRange1DPerp_2&gt;&gt; weights_2_minus_2(weights_2_alloc_minus_2);
+        host_t&lt;DField&lt;IdxRange1DPerp_2&gt;&gt; weights_2_minus_1(weights_2_alloc_minus_1);
+        host_t&lt;DField&lt;IdxRange1DPerp_2&gt;&gt; weights_2_minus_0(weights_2_alloc_minus_0);
+
+        int const n_points_1 = m_idx_range_perp_1.size();
+        int const n_points_2 = m_idx_range_perp_2.size();
+
+        // Please provide at least 2 cells.
+        if (n_points_1 &lt; 2) {
+            throw std::runtime_error("Please provide at least 2 cells in the Patch1.");
+        }
+        if (n_points_2 &lt; 2) {
+            throw std::runtime_error("Please provide at least 2 cells in the Patch2.");
+        }
+
+        // Initialise fields
+        ddc::parallel_fill(weights_1_minus_2, 0.0);
+        ddc::parallel_fill(weights_1_minus_1, 0.0);
+        ddc::parallel_fill(weights_1_minus_0, 0.0);
+        ddc::parallel_fill(weights_2_minus_2, 0.0);
+        ddc::parallel_fill(weights_2_minus_1, 0.0);
+        ddc::parallel_fill(weights_2_minus_0, 0.0);
+
+        // Store the 3 last steps for the recursion in an array.
+        std::array&lt;host_t&lt;DField&lt;IdxRange1DPerp_1&gt;&gt;, 3&gt; weights_patch1
+                = {weights_1_minus_2, weights_1_minus_1, weights_1_minus_0};
+        std::array&lt;host_t&lt;DField&lt;IdxRange1DPerp_2&gt;&gt;, 3&gt; weights_patch2
+                = {weights_2_minus_2, weights_2_minus_1, weights_2_minus_0};
+
+        std::array&lt;double, 3&gt; coeff_deriv_patch1;
+        std::array&lt;double, 3&gt; coeff_deriv_patch2;
+
+        // For the local coefficients
+        double alpha_i;
+        double beta_i;
+        std::array&lt;double, 3&gt; gammas_i;
+
+        // Define a step to increment the indices to move away from the interface.
+        IdxStep&lt;EdgePerpGrid1&gt; idx_step_1
+                = m_extremity_1 == FRONT ? IdxStep&lt;EdgePerpGrid1&gt;(1) : IdxStep&lt;EdgePerpGrid1&gt;(-1);
+        IdxStep&lt;EdgePerpGrid2&gt; idx_step_2
+                = m_extremity_2 == FRONT ? IdxStep&lt;EdgePerpGrid2&gt;(1) : IdxStep&lt;EdgePerpGrid2&gt;(-1);
+
+        // Initialisation recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) -----------------------------
+        Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
+        Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
+
+        // Set (a_{n-2},b_{n-2},c_{n-2}) ---
+        Idx1D_1 idx_1_minus;
+        Idx1D_1 idx_1 = interface_idx_1;
+        Idx1D_1 idx_1_plus = interface_idx_1 + idx_step_1;
+
+        Idx1D_2 idx_2_minus;
+        Idx1D_2 idx_2 = interface_idx_2;
+        Idx1D_2 idx_2_plus = interface_idx_2 + idx_step_2;
+
+        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx_2);
+
+        alpha_i = get_alpha(cell_length_left, cell_length_right);
+        beta_i = get_beta(cell_length_left, cell_length_right);
+        gammas_i = get_gammas(cell_length_left, cell_length_right);
+
+        coeff_deriv_patch1[0] = beta_i; // b_{n-2}
+        coeff_deriv_patch2[0] = alpha_i; // a_{n-2}
+
+        // c_{n-2}
+        weights_patch1[0](idx_1_plus) = gammas_i[0];
+        weights_patch1[0](idx_1) = gammas_i[1];
+        weights_patch2[0](idx_2) = gammas_i[1];
+        weights_patch2[0](idx_2_plus) = gammas_i[2];
+
+        // Set (a_{n-1},b_{n-1},c_{n-1}) ---
+        idx_2_minus = interface_idx_2;
+        idx_2 = interface_idx_2 + idx_step_2;
+        idx_2_plus = interface_idx_2 + 2 * idx_step_2;
+
+        std::tie(cell_length_left, cell_length_right) = get_cell_lengths(idx_2);
+
+        alpha_i = get_alpha(cell_length_left, cell_length_right);
+        beta_i = get_beta(cell_length_left, cell_length_right);
+        gammas_i = get_gammas(cell_length_left, cell_length_right);
+
+        coeff_deriv_patch2[1]
+                = alpha_i * coeff_deriv_patch2[0] / (1 - coeff_deriv_patch2[0] * beta_i); // a_{n-1}
+        coeff_deriv_patch1[1]
+                = coeff_deriv_patch1[0] / (1 - coeff_deriv_patch2[0] * beta_i); // b_{n-1}
+
+        // c_{n-1} = (c_{n-2} + a_{n-2} * gamma_i) / (1 - a_{n-2} * beta_i);
+        ddc::host_for_each(m_idx_range_perp_1, [&amp;](Idx1D_1 const&amp; idx) {
+            weights_patch1[1](idx)
+                    = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch1[0](idx);
+        });
+        ddc::host_for_each(m_idx_range_perp_2, [&amp;](Idx1D_2 const&amp; idx) {
+            weights_patch2[1](idx)
+                    = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch2[0](idx);
+        });
+        double factor = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * coeff_deriv_patch2[0];
+        weights_patch2[1](idx_2_plus) += factor * gammas_i[2];
+        weights_patch2[1](idx_2) += factor * gammas_i[1];
+        weights_patch2[1](idx_2_minus) += factor * gammas_i[0];
+        weights_patch1[1](idx_1) += factor * gammas_i[0];
+
+        // Set (a_{n},b_{n},c_{n}) ---
+        coeff_deriv_patch1[2] = coeff_deriv_patch1[1];
+        coeff_deriv_patch2[2] = coeff_deriv_patch2[1];
+        ddc::parallel_deepcopy(weights_patch1[2], get_const_field(weights_patch1[1]));
+        ddc::parallel_deepcopy(weights_patch2[2], get_const_field(weights_patch2[1]));
+
+
+        // Computing coefficients (c, a, b) on patch 2 -------------------------------------------
+        // If m_is_cell_bound_2_with_extra_interpol_pt is true, the last cell is treated differently.
+        int const n2_cells
+                = m_is_cell_bound_2_with_extra_interpol_pt ? n_points_2 - 3 : n_points_2 - 1;
+
+        recursion(
+                n2_cells,
+                interface_idx_2,
+                coeff_deriv_patch2,
+                coeff_deriv_patch1,
+                weights_patch1,
+                weights_patch2);
+
+        // Correction if we use an additional interpolation point as closure in the last cell.
+        if (m_is_cell_bound_2_with_extra_interpol_pt) {
+            correction_boundary(
+                    n_points_2,
+                    interface_idx_2,
+                    coeff_deriv_patch2,
+                    coeff_deriv_patch1,
+                    weights_patch1,
+                    weights_patch2);
+        }
+
+        // Initialisation second recursivity: set (a_{n-2},b_{n-2},c_{n-2}) and (a_{n-1},b_{n-1},c_{n-1}) ----------------------
+        // Set (a_{n-2},b_{n-2},c_{n-2}) ---
+        idx_1_minus = interface_idx_1;
+        idx_1 = interface_idx_1 + idx_step_1;
+        idx_1_plus = interface_idx_1 + 2 * idx_step_1;
+
+        std::tie(cell_length_left, cell_length_right) = get_cell_lengths(idx_1);
+
+        alpha_i = get_alpha(cell_length_left, cell_length_right);
+        beta_i = get_beta(cell_length_left, cell_length_right);
+        gammas_i = get_gammas(cell_length_left, cell_length_right);
+
+        coeff_deriv_patch1[0] = coeff_deriv_patch1[2]; // a_{n-2}
+        coeff_deriv_patch2[0] = coeff_deriv_patch2[2]; // b_{n-2}
+        ddc::parallel_deepcopy(weights_patch1[0], get_const_field(weights_patch1[2])); // c_{n-2}
+        ddc::parallel_deepcopy(weights_patch2[0], get_const_field(weights_patch2[2])); // c_{n-2}
+
+        // Set (a_{n-1},b_{n-1},c_{n-1}) ---
+        coeff_deriv_patch2[1]
+                = coeff_deriv_patch2[0] / (1 - coeff_deriv_patch1[0] * alpha_i); // a_{n-1}
+        coeff_deriv_patch1[1]
+                = coeff_deriv_patch1[0] * beta_i / (1 - coeff_deriv_patch1[0] * alpha_i); // b_{n-1}
+
+        // c_{n-1} = (c_{n-2} + b_{n-2} * gamma_i) / (1 - b_{n-2} * alpha_i);
+        ddc::host_for_each(m_idx_range_perp_1, [&amp;](Idx1D_1 const&amp; idx) {
+            weights_patch1[1](idx)
+                    = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch1[0](idx);
+        });
+        ddc::host_for_each(m_idx_range_perp_2, [&amp;](Idx1D_2 const&amp; idx) {
+            weights_patch2[1](idx)
+                    = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch2[0](idx);
+        });
+        factor = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * coeff_deriv_patch1[0];
+        weights_patch1[1](idx_1_plus) += factor * gammas_i[0];
+        weights_patch1[1](idx_1) += factor * gammas_i[1];
+        weights_patch1[1](idx_1_minus) += factor * gammas_i[2];
+        weights_patch2[1](interface_idx_2) += factor * gammas_i[2];
+
+        // Computing coefficients (c, a, b) on patch 1 -------------------------------------------
+        // If m_is_cell_bound_1_with_extra_interpol_pt is true, the last cell is treated differently.
+        int const n1_cells
+                = m_is_cell_bound_1_with_extra_interpol_pt ? n_points_1 - 3 : n_points_1 - 1;
+
+        recursion(
+                n1_cells,
+                interface_idx_1,
+                coeff_deriv_patch1,
+                coeff_deriv_patch2,
+                weights_patch1,
+                weights_patch2);
+
+        // Correction if we use an additional interpolation point as closure in the last cell.
+        if (m_is_cell_bound_1_with_extra_interpol_pt) {
+            correction_boundary(
+                    n_points_1,
+                    interface_idx_1,
+                    coeff_deriv_patch1,
+                    coeff_deriv_patch2,
+                    weights_patch1,
+                    weights_patch2);
+        }
+
+        // Store the final values.
+        m_coeff_deriv_patch_1 = coeff_deriv_patch1[2];
+        m_coeff_deriv_patch_2 = coeff_deriv_patch2[2];
+        ddc::parallel_deepcopy(m_weights_patch_1, get_const_field(weights_patch1[2]));
+        ddc::parallel_deepcopy(m_weights_patch_2, get_const_field(weights_patch2[2]));
+    }
+
+
+    template &lt;class Grid1D&gt;
+    void recursion(
+            int const n_cells,
+            Idx&lt;Grid1D&gt; const interface_idx,
+            std::array&lt;double, 3&gt;&amp; coeff_deriv_patch,
+            std::array&lt;double, 3&gt;&amp; coeff_deriv_other_patch,
+            std::array&lt;host_t&lt;DField&lt;IdxRange1DPerp_1&gt;&gt;, 3&gt;&amp; weights_patch1,
+            std::array&lt;host_t&lt;DField&lt;IdxRange1DPerp_2&gt;&gt;, 3&gt;&amp; weights_patch2)
+    {
+        using Idx1D = Idx&lt;Grid1D&gt;;
+        constexpr bool is_on_patch1 = std::is_same_v&lt;Idx1D, Idx1D_1&gt;;
+
+        Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
+        IdxStep&lt;Grid1D&gt; idx_step = extremity == FRONT ? IdxStep&lt;Grid1D&gt;(1) : IdxStep&lt;Grid1D&gt;(-1);
+
+        for (int n(2); n &lt; n_cells; n++) {
+            Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
+            Idx1D const idx = interface_idx + n * idx_step;
+            Idx1D const idx_plus = interface_idx + (n + 1) * idx_step;
+
+            auto [cell_length_left, cell_length_right] = get_cell_lengths(idx);
+
+            // Local coefficient (alpha_i/beta_i) furthest from the interface
+            double const coeff_furthest = is_on_patch1
+                                                  ? get_beta(cell_length_left, cell_length_right)
+                                                  : get_alpha(cell_length_left, cell_length_right);
+            // Local coefficient (alpha_i/beta_i) closest to the interface
+            double const coeff_closest = is_on_patch1
+                                                 ? get_alpha(cell_length_left, cell_length_right)
+                                                 : get_beta(cell_length_left, cell_length_right);
+            std::array&lt;double, 3&gt; const gammas_i = get_gammas(cell_length_left, cell_length_right);
+
+            double const denom = 1 - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
+
+            // Set (a_{n},b_{n},c_{n}) ---
+            coeff_deriv_patch[2] = coeff_furthest * coeff_deriv_patch[1] / denom;
+            coeff_deriv_other_patch[2]
+                    = (coeff_deriv_other_patch[1]
+                       - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0]
+                                 * coeff_deriv_other_patch[0])
+                      / denom;
+
+            // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
+            // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
+            double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
+            ddc::host_for_each(m_idx_range_perp_1, [&amp;](Idx1D_1 const&amp; idx_perp) {
+                weights_patch1[2](idx_perp)
+                        = 1. / denom
+                          * (weights_patch1[1](idx_perp)
+                             - coeff_closer_deriv * weights_patch1[0](idx_perp));
+            });
+            ddc::host_for_each(m_idx_range_perp_2, [&amp;](Idx1D_2 const&amp; idx_perp) {
+                weights_patch2[2](idx_perp)
+                        = 1. / denom
+                          * (weights_patch2[1](idx_perp)
+                             - coeff_closer_deriv * weights_patch2[0](idx_perp));
+            });
+            double const factor = 1. / denom * coeff_deriv_patch[1];
+            if constexpr (is_on_patch1) {
+                weights_patch1[2](idx_plus) += factor * gammas_i[0];
+                weights_patch1[2](idx) += factor * gammas_i[1];
+                weights_patch1[2](idx_minus) += factor * gammas_i[2];
+            } else {
+                weights_patch2[2](idx_plus) += factor * gammas_i[2];
+                weights_patch2[2](idx) += factor * gammas_i[1];
+                weights_patch2[2](idx_minus) += factor * gammas_i[0];
+            }
+
+            // Update coefficients.
+            coeff_deriv_patch[0] = coeff_deriv_patch[1];
+            coeff_deriv_patch[1] = coeff_deriv_patch[2];
+            coeff_deriv_other_patch[0] = coeff_deriv_other_patch[1];
+            coeff_deriv_other_patch[1] = coeff_deriv_other_patch[2];
+
+            ddc::parallel_deepcopy(weights_patch1[0], get_const_field(weights_patch1[1]));
+            ddc::parallel_deepcopy(weights_patch2[0], get_const_field(weights_patch2[1]));
+
+            ddc::parallel_deepcopy(weights_patch1[1], get_const_field(weights_patch1[2]));
+            ddc::parallel_deepcopy(weights_patch2[1], get_const_field(weights_patch2[2]));
+        }
+    }
+
+    template &lt;class Grid1D&gt;
+    void correction_boundary(
+            int const n_points,
+            Idx&lt;Grid1D&gt; const interface_idx,
+            std::array&lt;double, 3&gt;&amp; coeff_deriv_patch,
+            std::array&lt;double, 3&gt;&amp; coeff_deriv_other_patch,
+            std::array&lt;host_t&lt;DField&lt;IdxRange1DPerp_1&gt;&gt;, 3&gt;&amp; weights_patch1,
+            std::array&lt;host_t&lt;DField&lt;IdxRange1DPerp_2&gt;&gt;, 3&gt;&amp; weights_patch2)
+    {
+        using Idx1D = Idx&lt;Grid1D&gt;;
+        constexpr bool is_on_patch1 = std::is_same_v&lt;Idx1D, Idx1D_1&gt;;
+
+        Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
+        IdxStep&lt;Grid1D&gt; idx_step = extremity == FRONT ? IdxStep&lt;Grid1D&gt;(1) : IdxStep&lt;Grid1D&gt;(-1);
+
+        int const n = n_points - 3;
+        Idx1D const idx_minus = interface_idx + (n - 1) * idx_step;
+        Idx1D const idx = interface_idx + n * idx_step;
+        Idx1D const idx_plus = interface_idx + (n + 2) * idx_step;
+        // Additional interpolation point.
+        Idx1D const idx_star = interface_idx + (n + 1) * idx_step;
+
+        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx);
+        auto [cell_length_left_star, cell_length_right_star] = get_cell_lengths(idx_star);
+
+        if constexpr (is_on_patch1) {
+            cell_length_left += cell_length_left_star;
+        } else {
+            cell_length_right += cell_length_right_star;
+        }
+
+        // Local coefficient (alpha_i/beta_i) furthest from the interface
+        double coeff_furthest = is_on_patch1 ? get_beta(cell_length_left, cell_length_right)
+                                             : get_alpha(cell_length_left, cell_length_right);
+        // Local coefficient (alpha_i/beta_i) closest to the interface
+        double coeff_closest = is_on_patch1 ? get_alpha(cell_length_left, cell_length_right)
+                                            : get_beta(cell_length_left, cell_length_right);
+        std::array&lt;double, 3&gt; const gammas_i = get_gammas(cell_length_left, cell_length_right);
+
+        // Correction of gammas_i, alpha_i and beta_i
+        double x;
+        if constexpr (is_on_patch1) {
+            // (x^-_star - x^-_{i-1}) / Delta x^-_i
+            x = cell_length_left_star / cell_length_left;
+        } else {
+            // (x^+_star - x^+_i) / Delta x^+_i
+            x = cell_length_left_star / cell_length_right;
+        }
+        double const H0 = (1 - x) * (1 - x) * (1 + 2 * x);
+        double const H1 = x * x * (3 - 2 * x);
+        double const K0 = (1 - x) * (1 - x) * x;
+        double const K1 = x * x * (x - 1);
+
+        double gamma_plus;
+        double gamma_star;
+        double gamma_idx;
+        double gamma_minus;
+        if constexpr (is_on_patch1) {
+            double denom_gamma = 1. / (1 + coeff_furthest * K1 / K0);
+
+            coeff_closest = denom_gamma * coeff_closest;
+
+            gamma_plus = denom_gamma * (gammas_i[0] - coeff_furthest * H0 / K0 / cell_length_left);
+            gamma_star = denom_gamma * coeff_furthest / K0 / cell_length_left;
+            gamma_idx = denom_gamma * (gammas_i[1] - coeff_furthest * H1 / K0 / cell_length_left);
+            gamma_minus = denom_gamma * gammas_i[2];
+        } else {
+            double denom_gamma = 1. / (1 + coeff_furthest * K0 / K1);
+
+            coeff_closest = denom_gamma * coeff_closest;
+
+            gamma_plus = denom_gamma * (gammas_i[2] - coeff_furthest * H1 / K1 / cell_length_right);
+            gamma_star = denom_gamma * coeff_furthest / K1 / cell_length_right;
+            gamma_idx = denom_gamma * (gammas_i[1] - coeff_furthest * H0 / K1 / cell_length_right);
+            gamma_minus = denom_gamma * gammas_i[0];
+        }
+
+        // No more boundary derivative, the local coefficient is set to zero.
+        coeff_furthest = 0;
+
+        double denom = 1 - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
+
+        // Set (a_{n},b_{n},c_{n}) ---
+        coeff_deriv_patch[2] = coeff_furthest * coeff_deriv_patch[1] / denom;
+        coeff_deriv_other_patch[2] = (coeff_deriv_other_patch[1]
+                                      - coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0]
+                                                * coeff_deriv_other_patch[0])
+                                     / denom;
+
+        // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
+        // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
+        double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
+        ddc::host_for_each(m_idx_range_perp_1, [&amp;](Idx1D_1 const&amp; idx_perp) {
+            weights_patch1[2](idx_perp) = 1. / denom
+                                          * (weights_patch1[1](idx_perp)
+                                             - coeff_closer_deriv * weights_patch1[0](idx_perp));
+        });
+        ddc::host_for_each(m_idx_range_perp_2, [&amp;](Idx1D_2 const&amp; idx_perp) {
+            weights_patch2[2](idx_perp) = 1. / denom
+                                          * (weights_patch2[1](idx_perp)
+                                             - coeff_closer_deriv * weights_patch2[0](idx_perp));
+        });
+        double const factor = 1. / denom * coeff_deriv_patch[1];
+        if constexpr (is_on_patch1) {
+            weights_patch1[2](idx_plus) += factor * gamma_plus;
+            weights_patch1[2](idx_star) += factor * gamma_star;
+            weights_patch1[2](idx) += factor * gamma_idx;
+            weights_patch1[2](idx_minus) += factor * gamma_minus;
+        } else {
+            weights_patch2[2](idx_plus) += factor * gamma_plus;
+            weights_patch2[2](idx_star) += factor * gamma_star;
+            weights_patch2[2](idx) += factor * gamma_idx;
+            weights_patch2[2](idx_minus) += factor * gamma_minus;
+        }
+    }
+
+
+    // ===========================================================================================
+    // UNIFORM INTERPOLATION POINTS                                                              |
+    // ===========================================================================================
+    void set_coefficients_uniform_per_patch_case()
+    {
+        int const n_cells_1 = m_idx_range_perp_1.size() - 1;
+        int const n_cells_2 = m_idx_range_perp_2.size() - 1;
+
+        Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
+        Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
+
+        Idx1D_1 idx_1 = interface_idx_1;
+        Idx1D_2 idx_2 = interface_idx_2;
+
+        // Index increment to move away from the interface.
+        IdxStep&lt;EdgePerpGrid1&gt; idx_step_1
+                = m_extremity_1 == FRONT ? IdxStep&lt;EdgePerpGrid1&gt;(1) : IdxStep&lt;EdgePerpGrid1&gt;(-1);
+        IdxStep&lt;EdgePerpGrid2&gt; idx_step_2
+                = m_extremity_2 == FRONT ? IdxStep&lt;EdgePerpGrid2&gt;(1) : IdxStep&lt;EdgePerpGrid2&gt;(-1);
+
+        auto [cell_length_left, cell_length_right] = get_cell_lengths(idx_1);
+
+        double const a_11 = -0.5 * cell_length_left / (cell_length_left + cell_length_right);
+        double const b_11 = -0.5 * cell_length_right / (cell_length_left + cell_length_right);
+
+        double const u1 = 2 * Kokkos::sqrt(3);
+
+        double const un1 = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_1)
+                           - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_1);
+        double const un1_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_1 - 1)
+                                 - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_1 - 1);
+
+        double const un2 = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_2)
+                           - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_2);
+        double const un2_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n_cells_2 - 1)
+                                 - Kokkos::pow(2 - Kokkos::sqrt(3), n_cells_2 - 1);
+
+        double const denominator = un1 * un2 + un1 * un2_minus * a_11 + un1_minus * un2 * b_11;
+
+
+        // Compute the coefficients a and b.
+        m_coeff_deriv_patch_1
+                = Kokkos::pow(-1, (n_cells_1 - 1) % 2) * u1 * b_11 * un2 / denominator;
+        m_coeff_deriv_patch_2
+                = Kokkos::pow(-1, (n_cells_2 - 1) % 2) * u1 * a_11 * un1 / denominator;
+
+
+        // Compute the weights {omega_k}_{k = -NL, ..., NR} in c.
+        double const factor_a = 3 * a_11 / cell_length_right / denominator;
+        double const factor_b = 3 * b_11 / cell_length_left / denominator;
+
+        // --- for k = 0
+        m_weights_patch_1(idx_1)
+                = factor_a * un1 * (un2 - un2_minus) - factor_b * un2 * (un1 - un1_minus);
+        m_weights_patch_2(idx_2) = m_weights_patch_1(idx_1);
+
+        // --- for k = 1, ..., NR-1
+        for (int k(1); k &lt; n_cells_2; ++k) {
+            idx_2 = idx_2 + idx_step_2;
+            const int n2_minus_k = n_cells_2 - k;
+            double const vk_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n2_minus_k - 1)
+                                    - Kokkos::pow(2 - Kokkos::sqrt(3), n2_minus_k - 1);
+            double const vk_plus = Kokkos::pow(2 + Kokkos::sqrt(3), n2_minus_k + 1)
+                                   - Kokkos::pow(2 - Kokkos::sqrt(3), n2_minus_k + 1);
+
+            m_weights_patch_2(idx_2)
+                    = Kokkos::pow(-1, k % 2) * factor_a * un1 * (vk_plus - vk_minus);
+        }
+
+        // --- for k = NR
+        idx_2 = idx_2 + idx_step_2;
+        m_weights_patch_2(idx_2) = Kokkos::pow(-1, n_cells_2 % 2) * factor_a * un1 * u1;
+
+        // --- for k = -1, ..., -(NL-1)
+        for (int k(1); k &lt; n_cells_1; ++k) {
+            idx_1 = idx_1 + idx_step_1;
+            const int n1_minus_k = n_cells_1 - k;
+            double const vk_minus = Kokkos::pow(2 + Kokkos::sqrt(3), n1_minus_k - 1)
+                                    - Kokkos::pow(2 - Kokkos::sqrt(3), n1_minus_k - 1);
+            double const vk_plus = Kokkos::pow(2 + Kokkos::sqrt(3), n1_minus_k + 1)
+                                   - Kokkos::pow(2 - Kokkos::sqrt(3), n1_minus_k + 1);
+
+            m_weights_patch_1(idx_1)
+                    = Kokkos::pow(-1, (k + 1) % 2) * factor_b * un2 * (vk_plus - vk_minus);
+        }
+
+        // --- for k = -NL
+        idx_1 = idx_1 + idx_step_1;
+        m_weights_patch_1(idx_1) = Kokkos::pow(-1, (n_cells_1 + 1) % 2) * factor_b * un2 * u1;
+    };
+
+
+    template &lt;class Grid1D&gt;
+    std::tuple&lt;double, double&gt; get_cell_lengths(Idx&lt;Grid1D&gt; const&amp; idx) const
+    {
+        static_assert(
+                std::is_same_v&lt;Grid1D, EdgePerpGrid1&gt; || std::is_same_v&lt;Grid1D, EdgePerpGrid2&gt;,
+                "Wrong type of index given.");
+
+        bool constexpr is_on_patch1 = std::is_same_v&lt;Grid1D, EdgePerpGrid1&gt;;
+
+        // Tag for the grid on the other patch.
+        using OGrid1D = std::conditional_t&lt;is_on_patch1, EdgePerpGrid2, EdgePerpGrid1&gt;;
+
+        using IdxRangeGlobal = IdxRange&lt;EdgePerpGrid1, EdgePerpGrid2&gt;;
+
+        Extremity constexpr extremity = is_on_patch1 ? m_extremity_1 : m_extremity_2;
+        Extremity constexpr other_extremity = is_on_patch1 ? m_extremity_2 : m_extremity_1;
+
+        IdxRange&lt;Grid1D&gt; idx_range_1d(IdxRangeGlobal(m_idx_range_perp_1, m_idx_range_perp_2));
+        IdxRange&lt;OGrid1D&gt; other_idx_range_1d(
+                IdxRangeGlobal(m_idx_range_perp_1, m_idx_range_perp_2));
+
+        // Please, do not provide a index on the boundary except for the interface.
+        assert(!(idx == idx_range_1d.front() &amp;&amp; extremity == BACK));
+        assert(!(idx == idx_range_1d.back() &amp;&amp; extremity == FRONT));
+
+        double length_left;
+        double length_right;
+
+        Idx&lt;Grid1D&gt; const idx_minus = idx - IdxStep&lt;Grid1D&gt;(1);
+        Idx&lt;Grid1D&gt; const idx_plus = idx + IdxStep&lt;Grid1D&gt;(1);
+
+        double const delta_coord_plus = abs(ddc::coordinate(idx_plus) - ddc::coordinate(idx));
+        double const delta_coord_minus = abs(ddc::coordinate(idx) - ddc::coordinate(idx_minus));
+
+        bool constexpr is_same_orientation_as_global = (is_on_patch1 &amp;&amp; m_extremity_1 == BACK)
+                                                       || (!is_on_patch1 &amp;&amp; m_extremity_2 == FRONT);
+
+        // If the given index corresponds to the index at the interface,
+        Idx&lt;Grid1D&gt; const idx_interface = get_extremity_idx(extremity, idx_range_1d);
+        if (idx == idx_interface) {
+            IdxStep&lt;Grid1D&gt; idx_step
+                    = extremity == FRONT ? IdxStep&lt;Grid1D&gt;(1) : IdxStep&lt;Grid1D&gt;(-1);
+            Idx&lt;Grid1D&gt; const idx_incremented = idx + idx_step;
+
+            IdxStep&lt;OGrid1D&gt; other_idx_step
+                    = other_extremity == FRONT ? IdxStep&lt;OGrid1D&gt;(1) : IdxStep&lt;OGrid1D&gt;(-1);
+            Idx&lt;OGrid1D&gt; const other_idx = get_extremity_idx(other_extremity, other_idx_range_1d);
+            Idx&lt;OGrid1D&gt; const other_idx_incremented = other_idx + other_idx_step;
+
+            length_left = abs(ddc::coordinate(other_idx_incremented) - ddc::coordinate(other_idx));
+            length_right = abs(ddc::coordinate(idx_incremented) - ddc::coordinate(idx));
+        }
+        // If given index is on the patch 1 or on the patch 2,
+        else if (is_same_orientation_as_global) {
+            // . | →   or  → | .
+            length_left = delta_coord_minus;
+            length_right = delta_coord_plus;
+        } else {
+            //  . | ←  or  ← | .
+            length_left = delta_coord_plus;
+            length_right = delta_coord_minus;
+        }
+
+        if ((length_left == 0) || (length_right == 0)) {
+            throw std::runtime_error(
+                    "[abort] Ill-defined: the length of the cells must be not zero.");
+        }
+        return std::make_tuple(length_left, length_right);
+    }
+
+
+    std::array&lt;double, 3&gt; get_gammas(double const cell_length_left, double const cell_length_right)
+            const
+    {
+        double const factor = 3. / 2. / (cell_length_left + cell_length_right);
+        double const R_on_L = cell_length_right / cell_length_left;
+        double const L_on_R = cell_length_left / cell_length_right;
+
+        double gamma_i_minus = -factor * R_on_L;
+        double gamma_i = factor * (R_on_L - L_on_R);
+        double gamma_i_plus = factor * L_on_R;
+
+        return std::array&lt;double, 3&gt;({gamma_i_minus, gamma_i, gamma_i_plus});
+    }
+
+    double get_alpha(double const cell_length_left, double const cell_length_right) const
+    {
+        return -0.5 * cell_length_left / (cell_length_right + cell_length_left);
+    }
+
+    double get_beta(double const cell_length_left, double const cell_length_right) const
+    {
+        return -0.5 * cell_length_right / (cell_length_right + cell_length_left);
+    }
+
+
+    template &lt;class Grid1D&gt;
+    KOKKOS_INLINE_FUNCTION Idx&lt;Grid1D&gt; get_extremity_idx(
+            Extremity const extremity,
+            IdxRange&lt;Grid1D&gt; const&amp; idx_range) const
+    {
+        return (extremity == FRONT) ? idx_range.front() : idx_range.back();
+    }
+};
+
+
+
+template &lt;class InterfaceType&gt;
+inline constexpr bool enable_single_derivative_calculator&lt;
+        SingleInterfaceDerivativesCalculator&lt;InterfaceType&gt;&gt; = true;
+</code></pre></div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/gyselax/gyselalibxx/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../docs/jscript/mathjax.js"></script>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>
