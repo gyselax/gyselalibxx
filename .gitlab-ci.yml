@@ -76,7 +76,7 @@ python_best_practices:
   variables:
     GIT_SUBMODULE_STRATEGY: normal
   before_script:
-    export PYTHONPATH="./post-process/PythonScripts"
+    export PYTHONPATH="$(pwd)/post-process/PythonScripts"
   script: |
     pylint $(find tests -iname *.py)
     pylint $(find docs -iname *.py)
@@ -84,13 +84,7 @@ python_best_practices:
     # Find all files with no extension or a .py extension in post-process/PythonScripts/
     POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
     # Get pylint errors without failing
-    pylint ${POST_PROCESS_PYTHON_FILES} > post_process_errors.txt || true
-    # Filter errors on changed files
-    git config --global --add safe.directory $(pwd)
-    git fetch origin main
-    for f in $(git diff origin/main --name-only); do grep $f post_process_errors.txt || true; done | tee filtered_errors.txt
-    # Raise an error if post-process in filtered errors
-    ! grep "post-process" filtered_errors.txt >/dev/null
+    pylint ${POST_PROCESS_PYTHON_FILES}
 
 public_mirror:
   rules:
@@ -112,12 +106,12 @@ documentation:
     git config --global --add safe.directory $CI_PROJECT_DIR
     git fetch origin ${CI_MERGE_REQUEST_TARGET_BRANCH_NAME} --recurse-submodules=no
     pip install -r docs/requirements.txt --prefix docs/pip_install
-    export PYTHONPATH=$(pwd)/docs/pip_install/local/lib/python3.10/dist-packages/
+    export PYTHONPATH=$(pwd)/docs/pip_install/lib/python3.12/site-packages/
   script: |
     rm -rf docs/mkdoc docs/site || true
-    python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc
+    python3 docs/prepare_mkdocs.py . docs/mkdoc vendor/ docs/mkdoc docs/pip_install
     cd docs
-    pip_install/local/bin/mkdocs build
+    pip_install/bin/mkdocs build
     cat doxygen.log
     cd ..
     # Get files which have changed in this merge request

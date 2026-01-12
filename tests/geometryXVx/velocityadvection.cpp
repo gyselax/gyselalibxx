@@ -60,13 +60,15 @@ double VelocityAdvection(
 
     // Initialisation of the distribution function
     host_t<DFieldMemSpXVx> allfdistribu_host(meshSpXVx);
-    ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
+    ddc::host_for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
         IdxVx const ivx = ddc::select<GridVx>(ispxvx);
         allfdistribu_host(ispxvx) = exp(-0.5 * ddc::coordinate(ivx) * ddc::coordinate(ivx));
     });
     // Initialisation of transport coefficient
     host_t<DFieldMemX> adv_speed_host(gridx);
-    ddc::for_each(gridx, [&](IdxX const ix) { adv_speed_host(ix) = ddc::distance_at_right(ix); });
+    ddc::host_for_each(gridx, [&](IdxX const ix) {
+        adv_speed_host(ix) = ddc::distance_at_right(ix);
+    });
     double const timestep = .1;
     std::vector<double> Error;
     Error.reserve(allfdistribu_host.size());
@@ -78,7 +80,7 @@ double VelocityAdvection(
     advection_vx(get_field(allfdistribu), get_const_field(electric_field), timestep);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
-    double const m_advection_error = ddc::transform_reduce(
+    double const m_advection_error = ddc::host_transform_reduce(
             meshSpXVx,
             0.0,
             ddc::reducer::max<double>(),
