@@ -100,7 +100,7 @@ void output_feet(
     Idx<GridR> ir_start = idx_range_r.front();
     Idx<GridTheta> itheta_start = idx_range_theta.front();
 
-    ddc::for_each(idx_range_rtheta, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(idx_range_rtheta, [&](IdxRTheta const irtheta) {
         IdxR ir(irtheta);
         IdxTheta itheta(irtheta);
         file_feet << std::setw(15) << (ir - ir_start).value() << std::setw(15)
@@ -143,7 +143,7 @@ void saving_computed(
     Idx<GridR> ir_start = idx_range_r.front();
     Idx<GridTheta> itheta_start = idx_range_theta.front();
 
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         IdxR const ir(irtheta);
         IdxTheta const itheta(irtheta);
 
@@ -187,7 +187,7 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rtheta(
 
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rtheta(idx_range_rtheta);
     CoordXY const coord_xy_centre = CoordXY(logical_to_physical_mapping.o_point());
-    ddc::for_each(idx_range_rtheta, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(idx_range_rtheta, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta = ddc::coordinate(irtheta);
         CoordXY const coord_xy
                 = advection_field.exact_feet(logical_to_physical_mapping(coord_rtheta), time);
@@ -234,7 +234,7 @@ double compute_difference_L2_norm(
 {
     host_t<DFieldMemRTheta> exact_function(grid);
     host_t<DFieldMemRTheta> difference_function(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         exact_function(irtheta) = function_to_be_advected(feet_coord(irtheta));
         difference_function(irtheta) = exact_function(irtheta) - density_advected(irtheta);
     });
@@ -373,7 +373,7 @@ void simulate(
     start_simulation = std::chrono::system_clock::now();
 
     // Initialisation of the advected function:
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         CoordRTheta coord = coordinate(irtheta);
         if (ddc::get<R>(coord) <= 1e-15) {
             ddc::get<Theta>(coord) = 0;
@@ -384,7 +384,7 @@ void simulate(
 
 
     // Definition of advection field:
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         // Moving the coordinates in the physical domain:
         CoordXY const coord_xy = to_physical_mapping_host(ddc::coordinate(irtheta));
 
@@ -438,7 +438,7 @@ void simulate(
 
     // Compute the maximal absolute error on the space at the end of the simulation:
     double max_err = 0.;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         double const err
                 = fabs(density_test(irtheta)
                        - simulation.advected_function(feet_coords_rtheta_end_time(irtheta)));
@@ -496,7 +496,7 @@ void simulate(
 
         host_t<DFieldMemRTheta> initial_function(grid);
         host_t<DFieldMemRTheta> end_function(grid);
-        ddc::for_each(grid, [&](const IdxRTheta irtheta) {
+        ddc::host_for_each(grid, [&](const IdxRTheta irtheta) {
             initial_function(irtheta) = simulation.advected_function(ddc::coordinate(irtheta));
 
             // Exact final state

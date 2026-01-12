@@ -42,7 +42,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
     // --- for the Jacobian matrix:
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         Tensor Jacobian_matrix = mapping.jacobian_matrix(coords(irtheta));
 
         DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> Jacobian_matrix_coeff;
@@ -74,7 +74,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCircMap)
     });
 
     // --- for the inverse Jacobian matrix:
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         Tensor inv_Jacobian_matrix = mapping.inv_jacobian_matrix(coords(irtheta));
 
         DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X, Y>> inv_Jacobian_matrix_coeff;
@@ -118,7 +118,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
     // --- for the Jacobian matrix:
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         Tensor Jacobian_matrix = mapping.jacobian_matrix(coords(irtheta));
 
         DTensor<VectorIndexSet<X, Y>, VectorIndexSet<R_cov, Theta_cov>> Jacobian_matrix_coeff;
@@ -139,7 +139,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixCzarMap)
     // --- for the inverseJacobian matrix:
     using X_cov = X::Dual;
     using Y_cov = Y::Dual;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         Tensor inv_Jacobian_matrix = inv_jacobian(coords(irtheta));
 
         DTensor<VectorIndexSet<R, Theta>, VectorIndexSet<X_cov, Y_cov>> inv_Jacobian_matrix_coeff;
@@ -218,7 +218,7 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
 
     // Test for each coordinates if the coefficients defined by the coefficients functions
     //are the same as the coefficients in the matrix function.
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord_rtheta(ddc::coordinate(irtheta));
         const double r = ddc::get<R>(coord_rtheta);
         if (fabs(r) > 1e-15) {

@@ -179,7 +179,7 @@ public:
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
         host_t<DFieldMemXVx> exact_function(idx_range_xvx);
-        ddc::for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
+        ddc::host_for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
             double const x0 = ddc::coordinate(IdxX(xv_idx));
             double const v = ddc::coordinate(IdxVx(xv_idx));
             double x = x0 - final_t * v;
@@ -203,7 +203,7 @@ public:
         */
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
-        ddc::for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
+        ddc::host_for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
             double const relative_error = std::abs(function_host(xv_idx) - exact_function(xv_idx));
             EXPECT_LE(relative_error, 5.e-7);
             max_relative_error

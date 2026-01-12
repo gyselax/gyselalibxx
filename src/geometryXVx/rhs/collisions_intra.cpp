@@ -44,7 +44,7 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<GridVxSpoof>> CollisionsIntra
     std::vector<CoordVx> breaks(npoints);
     breaks[0] = v0 - (v1 - v0);
     breaks[npoints - 1] = vN + (vN - vNm1);
-    ddc::for_each(idx_range, [&](IdxVx const iv) {
+    ddc::host_for_each(idx_range, [&](IdxVx const iv) {
         breaks[to_index<GhostedVx>(iv).uid()] = ddc::coordinate(iv);
     });
     ddc::init_discrete_space<GhostedVxSpoof>(breaks);
@@ -55,7 +55,7 @@ std::enable_if_t<!ddc::is_uniform_point_sampling_v<GridVxSpoof>> CollisionsIntra
     breaks_stag[0] = v0 - (v1 - v0) / 2.;
     breaks_stag[npoints_stag - 1] = vN + (vN - vNm1) / 2.;
     IdxRangeVx const gridv_less(idx_range.remove_last(IdxStepVx(1)));
-    ddc::for_each(gridv_less, [&](IdxVx const iv) {
+    ddc::host_for_each(gridv_less, [&](IdxVx const iv) {
         breaks_stag[iv.uid() + 1] = CoordVx((ddc::coordinate(iv) + ddc::coordinate(iv + 1)) / 2.);
     });
     ddc::init_discrete_space<GhostedVxStaggeredSpoof>(breaks_stag);
@@ -210,7 +210,7 @@ void CollisionsIntra::fill_matrix_with_coeff(
 
     IdxRangeVx const gridvx_inner(
             get_idx_range<GridVx>(AA).remove_first(IdxStepVx(1)).remove_last(IdxStepVx(1)));
-    ddc::for_each(gridvx_inner, [&](IdxVx const ivx) {
+    ddc::host_for_each(gridvx_inner, [&](IdxVx const ivx) {
         matrix.set_element(ivx.uid(), ivx.uid() - 1, AA(ivx));
         matrix.set_element(ivx.uid(), ivx.uid(), BB(ivx));
         matrix.set_element(ivx.uid(), ivx.uid() + 1, CC(ivx));

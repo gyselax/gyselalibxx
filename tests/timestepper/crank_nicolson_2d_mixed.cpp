@@ -98,7 +98,7 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    ddc::for_each(idx_range, [&](IdxXY ixy) {
+    ddc::host_for_each(idx_range, [&](IdxXY ixy) {
         double const dist_x = (coordinate(select<GridX>(ixy)) - xc);
         double const dist_y = (coordinate(select<GridY>(ixy)) - yc);
 
@@ -107,7 +107,7 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
     });
 
     for (int j(0); j < Ntests; ++j) {
-        ddc::for_each(idx_range, [&](IdxXY ixy) { vals(ixy) = coordinate(ixy); });
+        ddc::host_for_each(idx_range, [&](IdxXY ixy) { vals(ixy) = coordinate(ixy); });
 
         for (int i(0); i < Nt; ++i) {
             crank_nicolson.update(
@@ -118,7 +118,7 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
                      xc,
                      &idx_range,
                      omega](AdvectionField dy, host_t<ConstField<CoordXY, IdxRangeXY>> y) {
-                        ddc::for_each(idx_range, [&](IdxXY ixy) {
+                        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
                             ddcHelper::get<X>(dy)(ixy) = omega * (yc - ddc::get<Y>(y(ixy)));
                             ddcHelper::get<Y>(dy)(ixy) = omega * (ddc::get<X>(y(ixy)) - xc);
                         });
@@ -127,12 +127,12 @@ TEST(CrankNicolson2DFixtureMixedTypes, CrankNicolson2DOrderMixedTypes)
                             host_t<Field<CoordXY, IdxRangeXY>> y,
                             ConstAdvectionField dy,
                             double dt) {
-                        ddc::for_each(idx_range, [&](IdxXY ixy) { y(ixy) += dt * dy(ixy); });
+                        ddc::host_for_each(idx_range, [&](IdxXY ixy) { y(ixy) += dt * dy(ixy); });
                     });
         }
 
         double linf_err = 0.0;
-        ddc::for_each(idx_range, [&](IdxXY ixy) {
+        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
             double const err_x = ddc::get<X>(result(ixy) - vals(ixy));
             double const err_y = ddc::get<Y>(result(ixy) - vals(ixy));
             double const err = std::sqrt(err_x * err_x + err_y * err_y);
@@ -207,7 +207,7 @@ void CrankNicolson2DOrderMixedTypesTest()
 
     double cos_val = std::cos(omega * dt * Nt);
     double sin_val = std::sin(omega * dt * Nt);
-    ddc::for_each(idx_range, [&](IdxXY ixy) {
+    ddc::host_for_each(idx_range, [&](IdxXY ixy) {
         double const dist_x = (coordinate(select<GridX>(ixy)) - xc);
         double const dist_y = (coordinate(select<GridY>(ixy)) - yc);
 
@@ -249,7 +249,7 @@ void CrankNicolson2DOrderMixedTypesTest()
         auto vals_host = ddc::create_mirror_view_and_copy(vals);
 
         double linf_err = 0.0;
-        ddc::for_each(idx_range, [&](IdxXY ixy) {
+        ddc::host_for_each(idx_range, [&](IdxXY ixy) {
             double const err_x = ddc::get<X>(result(ixy) - vals_host(ixy));
             double const err_y = ddc::get<Y>(result(ixy) - vals_host(ixy));
             double const err = std::sqrt(err_x * err_x + err_y * err_y);

@@ -212,7 +212,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // Initialise functions ******************************************
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
         CoordXY const coord_xy(to_physical_mapping(coord_rtheta));
 
@@ -239,7 +239,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // Compare advection fields ---
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_exact_and_xy(grid);
     // > Compare the advection field computed on XY to the exact advection field
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         ddcHelper::assign_vector_field_element(
                 get_field(difference_between_fields_exact_and_xy),
                 irtheta,
@@ -250,7 +250,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     // > Compare the advection field computed on RTheta to the advection field computed on XY
     host_t<DVectorFieldMemRTheta<X, Y>> difference_between_fields_xy_and_rtheta(grid);
 
-    ddc::for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid_without_Opoint, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
 
         // Jacobian matrix
@@ -270,7 +270,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
                 advection_field_xy_from_rtheta(irtheta) - advection_field_xy(irtheta));
     });
 
-    ddc::for_each(Opoint_grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(Opoint_grid, [&](IdxRTheta const irtheta) {
         // computation made in BslAdvectionRTheta operator:
         ddcHelper::assign_vector_field_element(
                 advection_field_xy_from_rtheta,
@@ -285,7 +285,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
     });
 
     // --- Check the difference on advection fields  --------------------------------------------------
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         EXPECT_LE(
                 std::abs(ddcHelper::get<X>(difference_between_fields_exact_and_xy)(irtheta)),
                 1e-5);
@@ -341,7 +341,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
                 get_const_field(density_rtheta_averaged_device));
 
         // Check the advected functions ---
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             EXPECT_NEAR(density_rtheta(irtheta), density_xy(irtheta), 5e-13);
             EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-7);
         });

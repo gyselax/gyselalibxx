@@ -65,7 +65,7 @@ TEST(Physics, FluidMoments)
     host_t<DFieldMemSpX> density_init(get_idx_range<Species, GridX>(allfdistribu_host));
     host_t<DFieldMemSpX> mean_velocity_init(get_idx_range<Species, GridX>(allfdistribu_host));
     host_t<DFieldMemSpX> temperature_init(get_idx_range<Species, GridX>(allfdistribu_host));
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
         double const density = 1.;
         double const density_ampl = 0.1;
         double const mean_velocity = 0.;
@@ -121,7 +121,7 @@ TEST(Physics, FluidMoments)
     auto temperature_computed_host
             = ddc::create_mirror_view_and_copy(get_field(temperature_computed));
     auto density_computed_host = ddc::create_mirror_view_and_copy(get_field(density_computed));
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
         EXPECT_LE(std::fabs(density_computed_host(ispx) - density_init(ispx)), 1e-12);
         EXPECT_LE(std::fabs(mean_velocity_computed_host(ispx) - mean_velocity_init(ispx)), 1e-12);
         EXPECT_LE(std::fabs(temperature_computed_host(ispx) - temperature_init(ispx)), 1e-12);

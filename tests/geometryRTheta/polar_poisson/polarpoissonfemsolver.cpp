@@ -193,7 +193,7 @@ int main(int argc, char** argv)
     DFieldMemRTheta result_alloc(grid);
     DField<IdxRangeRTheta> result = get_field(result_alloc);
 
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         coords(irtheta) = CoordRTheta(
                 ddc::coordinate(ddc::select<GridR>(irtheta)),
                 ddc::coordinate(ddc::select<GridTheta>(irtheta)));
@@ -203,7 +203,7 @@ int main(int argc, char** argv)
         Spline2DMem rhs_spline(idx_range_bsplinesRTheta);
         host_t<DFieldMemRTheta> rhs_vals_host(grid);
 
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             rhs_vals_host(irtheta) = rhs(coords(irtheta));
         });
         auto rhs_vals = ddc::create_mirror_view_and_copy(
@@ -232,7 +232,7 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
 
     double max_err = 0.0;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         const double err = result_host(irtheta) - lhs(coords(irtheta));
         if (err > 0) {
             max_err = max_err > err ? max_err : err;
