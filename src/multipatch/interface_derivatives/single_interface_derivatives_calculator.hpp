@@ -259,7 +259,7 @@ public:
      * on the patch 1. 
      * @param idx_range_1d_2 1D index range perpendicular to the Interface, 
      * on the patch 2. 
-     * @param number_taken_cells The number of cells we take into account for the 
+     * @param number_chosen_cells The number of cells we choose for the 
      * computation of the interface derivatives. Same number for Patch1 and Patch2. 
      * @warning If the mesh has additional interpolation points, please be sure to
      * not take these points. 
@@ -267,18 +267,18 @@ public:
     SingleInterfaceDerivativesCalculator(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
-            std::size_t const number_taken_cells)
+            std::size_t const number_chosen_cells)
         : SingleInterfaceDerivativesCalculator(
                 (m_extremity_1 == Extremity::FRONT)
                         ? idx_range_1d_1.take_first(IdxStep<EdgePerpGrid1>(
-                                Kokkos::min(number_taken_cells + 1, idx_range_1d_1.size())))
+                                Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size())))
                         : idx_range_1d_1.take_last(IdxStep<EdgePerpGrid1>(
-                                Kokkos::min(number_taken_cells + 1, idx_range_1d_1.size()))),
+                                Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size()))),
                 (m_extremity_2 == Extremity::FRONT)
                         ? idx_range_1d_2.take_first(IdxStep<EdgePerpGrid2>(
-                                Kokkos::min(number_taken_cells + 1, idx_range_1d_2.size())))
+                                Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size())))
                         : idx_range_1d_2.take_last(IdxStep<EdgePerpGrid2>(
-                                Kokkos::min(number_taken_cells + 1, idx_range_1d_2.size()))),
+                                Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size()))),
                 ddc::BoundCond::HERMITE,
                 ddc::BoundCond::HERMITE)
     {
@@ -290,7 +290,7 @@ public:
      * Constructor useful to apply approximation of the formula. 
      * @param idx_range_a Index range on one patch. 
      * @param idx_range_b Index range on the other patch. 
-     * @param number_taken_cells The number of cells we take into account for the 
+     * @param number_chosen_cells The number of cells we choose for the 
      * computation of the interface derivatives. Same number for Patch1 and Patch2. 
      * @warning If the mesh has additional interpolation points, please be sure to
      * not take these points. 
@@ -299,13 +299,13 @@ public:
     SingleInterfaceDerivativesCalculator(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
-            std::size_t const number_taken_cells)
+            std::size_t const number_chosen_cells)
         : SingleInterfaceDerivativesCalculator(
                 IdxRange1DPerp_1(
                         ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
                 IdxRange1DPerp_2(
                         ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
-                number_taken_cells)
+                number_chosen_cells)
     {
     }
 
