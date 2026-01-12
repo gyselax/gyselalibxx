@@ -55,7 +55,7 @@ static constexpr ddc::BoundCond BCG = ddc::BoundCond::GREVILLE;
 template <class Grid1, class Grid2>
 void initialise_2D_function(host_t<DField<IdxRange<Grid1, Grid2>>> function)
 {
-    ddc::for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
+    ddc::host_for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
         // Get the coordinate on the equivalent global mesh.
         double const xg = ddc::coordinate(Idx<Grid1>(idx));
         double const yg = ddc::coordinate(Idx<Grid2>(idx));
