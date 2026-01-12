@@ -58,7 +58,7 @@
     > test on a non-uniform patches. 
     > test with a middle ill-oriented interface. 
     > test with not matching directions of the patches.
-    > test with exact formulation in SingleInterfaceDerivativeCalculator. 
+    > test with approximation formulation in SingleInterfaceDerivativeCalculator. 
     > test agreement between computed and global spline derivatives. 
     > test agreement between local and global splines.
 */
@@ -587,8 +587,6 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
             GridX<1>,
 #endif
             ddc::detail::TypeSeq<Patch1, Patch2, Patch3>,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE,
             SingleInterfaceDerivativesCalculatorCollection<Interface_2_3, Interface_1_2>>
             matrix(idx_ranges, deriv_calculators_collect);
 

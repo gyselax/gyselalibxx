@@ -23,8 +23,6 @@ template <
         class Connectivity,
         class Grid1D,
         class PatchSeq,
-        ddc::BoundCond LowerBound,
-        ddc::BoundCond UpperBound,
         class DerivativesCalculatorCollection>
 class InterfaceDerivativeMatrix;
 
@@ -49,15 +47,11 @@ template <
         class Connectivity,
         class Grid1D,
         class... Patches,
-        ddc::BoundCond LowerBound,
-        ddc::BoundCond UpperBound,
         class DerivativesCalculatorCollection>
 class InterfaceDerivativeMatrix<
         Connectivity,
         Grid1D,
         ddc::detail::TypeSeq<Patches...>,
-        LowerBound,
-        UpperBound,
         DerivativesCalculatorCollection>
 {
     /*
@@ -79,12 +73,20 @@ class InterfaceDerivativeMatrix<
     static constexpr std::size_t number_of_interfaces
             = ddc::type_seq_size_v<interface_sorted_collection>;
 
+    using Interface0 = ddc::type_seq_element_t<0, interface_sorted_collection>;
+    using InterfaceN
+            = ddc::type_seq_element_t<number_of_interfaces - 1, interface_sorted_collection>;
+
     static_assert(
-            ((LowerBound == ddc::BoundCond::PERIODIC) == (UpperBound == ddc::BoundCond::PERIODIC)),
-            "If one boundary is periodic, the other boundary should be too.");
+            (((!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)&&(
+                     !std::is_same_v<typename Interface0::Edge2, OutsideEdge>))
+             == ((!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)&&(
+                     !std::is_same_v<typename Interface0::Edge2, OutsideEdge>))),
+            "If one boundary has an outside edge, the other boundary should have too.");
 
-    static constexpr bool is_periodic = (LowerBound == ddc::BoundCond::PERIODIC);
-
+    static constexpr bool is_periodic
+            = (!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)&&(
+                    !std::is_same_v<typename Interface0::Edge2, OutsideEdge>);
     /*
         Remove all the interfaces with an OutsideEdge.
         Rely on get_all_interfaces_along_direction_t to order the interfaces.
@@ -92,11 +94,7 @@ class InterfaceDerivativeMatrix<
     using outer_interface_collection = std::conditional_t<
             is_periodic,
             ddc::detail::TypeSeq<>,
-            ddc::detail::TypeSeq<
-                    ddc::type_seq_element_t<0, interface_sorted_collection>,
-                    ddc::type_seq_element_t<
-                            number_of_interfaces - 1,
-                            interface_sorted_collection>>>;
+            ddc::detail::TypeSeq<Interface0, InterfaceN>>;
 
     // All the interfaces in the Grid1D direction without the interfaces with OutsideEdge.
     using inner_interface_collection
@@ -503,7 +501,7 @@ private:
         constexpr bool change_sign_2
                 = ((extremity_2 == Extremity::BACK) && are_same_direction_par)
                   || ((extremity_2 == Extremity::FRONT) && !are_same_direction_par);
-                  
+
         constexpr int sign_1 = !change_sign_1 - change_sign_1;
         constexpr int sign_2 = !change_sign_2 - change_sign_2;
 
