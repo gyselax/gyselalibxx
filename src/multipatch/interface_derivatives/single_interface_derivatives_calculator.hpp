@@ -317,7 +317,7 @@ public:
         Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
         assert(abs(function_1(interface_idx_1) - function_2(interface_idx_2)) < 1e-13);
 
-        double coeff_values = ddc::transform_reduce(
+        double coeff_values = ddc::host_transform_reduce(
                 m_idx_range_perp_1,
                 0.0,
                 ddc::reducer::sum<double>(),
@@ -328,7 +328,7 @@ public:
                 = (m_extremity_2 == FRONT)
                           ? m_idx_range_perp_2.remove_first(IdxStep<EdgePerpGrid2>(1))
                           : m_idx_range_perp_2.remove_last(IdxStep<EdgePerpGrid2>(1));
-        coeff_values += ddc::transform_reduce(
+        coeff_values += ddc::host_transform_reduce(
                 idx_range_perp_2_without_interface,
                 0.0,
                 ddc::reducer::sum<double>(),
@@ -373,10 +373,10 @@ private:
             }
         }
         // Each break point should be an interpolation point.
-        ddc::for_each(idx_range_break_points, [&](Idx<GridBreakPt> const idx_break) {
+        ddc::host_for_each(idx_range_break_points, [&](Idx<GridBreakPt> const idx_break) {
             double const break_point = ddc::coordinate(idx_break);
             bool is_an_interpolation_pt = false;
-            ddc::for_each(idx_range_perp, [&](Idx<EdgePerpGrid> const idx_interpol) {
+            ddc::host_for_each(idx_range_perp, [&](Idx<EdgePerpGrid> const idx_interpol) {
                 double const interpolation_point = ddc::coordinate(idx_interpol);
                 if (abs(break_point - interpolation_point) < 1e-15) {
                     is_an_interpolation_pt = true;
@@ -541,11 +541,11 @@ private:
                 = coeff_deriv_patch1[0] / (1 - coeff_deriv_patch2[0] * beta_i); // b_{n-1}
 
         // c_{n-1} = (c_{n-2} + a_{n-2} * gamma_i) / (1 - a_{n-2} * beta_i);
-        ddc::for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
+        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
             weights_patch1[1](idx)
                     = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch1[0](idx);
         });
-        ddc::for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
+        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
             weights_patch2[1](idx)
                     = 1. / (1 - coeff_deriv_patch2[0] * beta_i) * weights_patch2[0](idx);
         });
@@ -610,11 +610,11 @@ private:
                 = coeff_deriv_patch1[0] * beta_i / (1 - coeff_deriv_patch1[0] * alpha_i); // b_{n-1}
 
         // c_{n-1} = (c_{n-2} + b_{n-2} * gamma_i) / (1 - b_{n-2} * alpha_i);
-        ddc::for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
+        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx) {
             weights_patch1[1](idx)
                     = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch1[0](idx);
         });
-        ddc::for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
+        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx) {
             weights_patch2[1](idx)
                     = 1. / (1 - coeff_deriv_patch1[0] * alpha_i) * weights_patch2[0](idx);
         });
@@ -716,13 +716,13 @@ private:
             // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
             // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
             double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
-            ddc::for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
+            ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
                 weights_patch1[2](idx_perp)
                         = 1. / denom
                           * (weights_patch1[1](idx_perp)
                              - coeff_closer_deriv * weights_patch1[0](idx_perp));
             });
-            ddc::for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
+            ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
                 weights_patch2[2](idx_perp)
                         = 1. / denom
                           * (weights_patch2[1](idx_perp)
@@ -861,12 +861,12 @@ private:
         // Patch1: c_{n} = (c_{n-1} - alpha_i * b_{n-1} / b_{n-2} * c_{n-2} + b_{n-1} * gamma_i) / denom;
         // Patch2: c_{n} = (c_{n-1} - beta_i * a_{n-1} / a_{n-2} * c_{n-2} + a_{n-1} * gamma_i) / denom;
         double coeff_closer_deriv = coeff_closest * coeff_deriv_patch[1] / coeff_deriv_patch[0];
-        ddc::for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
+        ddc::host_for_each(m_idx_range_perp_1, [&](Idx1D_1 const& idx_perp) {
             weights_patch1[2](idx_perp) = 1. / denom
                                           * (weights_patch1[1](idx_perp)
                                              - coeff_closer_deriv * weights_patch1[0](idx_perp));
         });
-        ddc::for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
+        ddc::host_for_each(m_idx_range_perp_2, [&](Idx1D_2 const& idx_perp) {
             weights_patch2[2](idx_perp) = 1. / denom
                                           * (weights_patch2[1](idx_perp)
                                              - coeff_closer_deriv * weights_patch2[0](idx_perp));
