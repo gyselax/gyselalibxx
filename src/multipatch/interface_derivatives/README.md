@@ -569,7 +569,7 @@ We simply refer it as
 
 #### Approximation
 
-In Vidal et al. (2025)[^2], we see that if the number of choosen cells in `SingleInterfaceDerivatorCalculator` is large, then the system can be approximated by
+In Vidal et al. (2025)[^2], we see that if the number of chosen cells in `SingleInterfaceDerivatorCalculator` is large, then the system can be approximated by
 
 ```math
 \begin{bmatrix}
@@ -592,7 +592,7 @@ C_{trunc} =
 \end{bmatrix},
 ```
 
-where the values of the vector $C_{trunc}$ correspond to coefficients in $`\{c^k\}_k`$ computed in `SingleInterfaceDerivatorCalculator` for $`N_{reduc}`$ cells next to the interface choosen on its two patches.
+where the values of the vector $C_{trunc}$ correspond to coefficients in $`\{c^k\}_k`$ computed in `SingleInterfaceDerivatorCalculator` for $`N_{reduc}`$ cells next to the interface chosen on its two patches.
 
 ### How to use the InterfaceDerivativeMatrix operator?
 
