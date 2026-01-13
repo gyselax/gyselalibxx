@@ -254,7 +254,7 @@ public:
     /**
      * @brief Instantiate SingleInterfaceDerivativesCalculator. 
      * See @ref SingleInterfaceDerivativesCalculatorInstantiator.
-     * Constructor useful to apply approximation of the formula. 
+     * This constructor calculates an approximation of the formula. 
      * @param idx_range_1d_1 1D index range perpendicular to the Interface, 
      * on the patch 1. 
      * @param idx_range_1d_2 1D index range perpendicular to the Interface, 
@@ -287,7 +287,7 @@ public:
     /**
      * @brief Instantiate SingleInterfaceDerivativesCalculator. 
      * See @ref SingleInterfaceDerivativesCalculatorInstantiator.
-     * Constructor useful to apply approximation of the formula. 
+     * This constructor calculates an approximation of the formula. 
      * @param idx_range_a Index range on one patch. 
      * @param idx_range_b Index range on the other patch. 
      * @param number_chosen_cells The number of cells we choose for the 
