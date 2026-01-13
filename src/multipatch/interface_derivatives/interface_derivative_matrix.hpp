@@ -149,10 +149,7 @@ public:
 
     /**
      * @brief Instantiate InterfaceDerivativeMatrix. 
-     * 
-     * It creates a dense Gingko matrix, a vector for the rhs and a vector for the solution. 
-     * The matrix is initialised with the derivatives calculator collection given in input. 
-     * 
+     *  
      * @param idx_ranges MultipatchType collection of index ranges defined on the given list of patches. 
      * @param derivatives_calculators SingleInterfaceDerivativesCalculatorCollection containing all the 
      *          interface derivative calculator for each interface in the given Grid1D direction. 
@@ -166,13 +163,12 @@ public:
     }
 
     /**
-     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D
+     * @brief Compute the vector C_trunc to determine all the interface derivatives in the Grid1D
      * direction at a given index.
      * 
      * It uses the function values to compute the first-derivatives perpendicular to the interfaces. 
      *
      * @tparam IdxPar Type for the given index. It can be on the first or the second grid of the first patch.
-     *
      * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
      * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface derivatives.
      */
@@ -185,7 +181,7 @@ public:
     }
 
     /**
-     * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D
+    * @brief Compute the vector C_trunc to determine all the interface derivatives in the Grid1D
      * direction at all the indices of the first patch.
      * 
      * It uses the function values to compute the first-derivatives perpendicular to the interfaces. 
@@ -212,15 +208,13 @@ public:
                 });
     }
 
-
     /**
-     * @brief Solve the matrix system MS = C to determine all the interface cross-derivatives in the Grid1D
+     * @brief Compute the vector C_trunc to determine all the interface cross-derivatives in the Grid1D
      * direction at a given index.
      * 
      * It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces. 
      *
      * @tparam IdxPar Type for the given index. It can be on the first or the second grid of the first patch.
-     *
      * @param[in,out] functions_and_derivs Collection fields with its first derivatives and cross-derivatives.
      * @param[in] idx_par Index of the line in the Grid1D direction where we compute all the interface cross-derivatives.
      */
@@ -233,7 +227,7 @@ public:
     }
 
     /**
-     * @brief Solve the matrix system MS = C to determine all the corner cross-derivatives in the Grid1D
+     * @brief Compute the vector C_trunc to determine all the corner cross-derivatives in the Grid1D
      * direction at all the last and the first indices of the first patch.
      * 
      * It uses the first-derivatives s to compute the cross-derivatives in a perpendicular direction to the interfaces. 
@@ -255,7 +249,6 @@ public:
         solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.front());
         solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.back());
     }
-
 
 
 private:
@@ -376,7 +369,6 @@ private:
         constexpr int sign_2 = !change_sign_2 - change_sign_2;
 
         // Update the derivatives.
-        // Change the sign of the derivative on Patch1, if the grid directions desagreed.
         function_and_derivs_1(idx_slice_deriv_1, idx_slice_1) = interface_deriv * sign_1;
         function_and_derivs_2(idx_slice_deriv_2, idx_slice_2) = interface_deriv * sign_2;
     }
@@ -479,7 +471,7 @@ private:
         constexpr int sign_1 = !change_sign_1 - change_sign_1;
         constexpr int sign_2 = !change_sign_2 - change_sign_2;
 
-        // Update the cross-derivatives
+        // Update the cross-derivatives.
         Idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1>
                 idx_cross_deriv1(Idx<Deriv1_1>(1), Idx<Deriv2_1>(1), idx_slice_1, idx_deriv_1);
         function_and_derivs_1(idx_cross_deriv1) = corner_derivative * sign_1;
