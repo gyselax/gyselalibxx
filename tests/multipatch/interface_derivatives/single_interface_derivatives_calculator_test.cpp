@@ -439,7 +439,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
 
         // Instantiation with the indicated number of chosen cells and 2D index ranges.
         SingleInterfaceDerivativesCalculator<Interface_1_2> const
-                derivatives_calculator_approx_2D(idx_range_rtheta1, idx_range_etaxi2, n_cells);
+                derivatives_calculator_approx_2D(idx_range_etaxi2, idx_range_rtheta1, n_cells);
 
         // Coefficients a and b
         double const coeff_deriv_patch_1 = derivatives_calculator.get_coeff_deriv_patch_1();
