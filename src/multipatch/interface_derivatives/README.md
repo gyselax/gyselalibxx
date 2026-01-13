@@ -91,6 +91,12 @@ Patch2::IdxRange1D idx_range_patch_2_reduced (idx_range_patch_2.take_last(N_R_re
 SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
 ```
 
+or we can directly call, for $`N_{reduc} = N^L = N^R`$,
+
+```cpp
+SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
+```
+
 > **Remark:** For interpolation with interpolation points as closure condition, a special treatment has to be carried out on the boundary cells
 > (see [Additional interpolation point not on a break point](#additional-interpolation-point-not-on-a-break-point)).
 > To apply this treatment, we specify it in the template parameter as follows.
@@ -157,41 +163,41 @@ with the *local coefficients* given by
 \left\{
 \begin{aligned}
     & \gamma_i =
-    \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}}
+    \frac{3}{2} \frac{1}{\Delta x^R_{i} +\Delta x^L_{i}}
     \left[
-        \frac{\Delta x^-_{i}}{\Delta x^+_{i}}  f^+_{i+1}
+        \frac{\Delta x^L_{i}}{\Delta x^R_{i}}  f^R_{i+1}
         + \left(
-            \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
-            - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
-        \right) f^+_{i}
-        - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}  f^-_{i-1}
+            \frac{\Delta x^R_{i}}{\Delta x^L_{i}}
+            - \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
+        \right) f^R_{i}
+        - \frac{\Delta x^R_{i}}{\Delta x^L_{i}}  f^L_{i-1}
     \right],
     \\
-    & \alpha_i = -\frac{1}{2} \frac{\Delta x^-_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}, \\
-    & \beta_i =  -\frac{1}{2} \frac{\Delta x^+_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}.
+    & \alpha_i = -\frac{1}{2} \frac{\Delta x^L_{i}}{\Delta x^R_{i} +\Delta x^L_{i}}, \\
+    & \beta_i =  -\frac{1}{2} \frac{\Delta x^R_{i}}{\Delta x^R_{i} +\Delta x^L_{i}}.
 \end{aligned}
 \right.
 ```
 
-and $`\Delta x^+_{i} = x^+_{i+1} -  x^+_{i} \text{, } \Delta x^-_{i} = x^-_{i} -  x^-_{i-1}`$,
+and $`\Delta x^R_{i} = x^R_{i+1} -  x^R_{i} \text{, } \Delta x^L_{i} = x^L_{i} -  x^L_{i-1}`$,
 and $`\{f^{+/-}_{i+k}\}_k`$ the function values at the interpolation points on patch 1 (+) and
 patch 2 (-).
 
-**Remark:** As mentionnd above, the coefficient $`c^i_{N^L,N^R}`$ can be written as a linear combination
+**Remark:** As mentioned above, the coefficient $`c^i_{N^L,N^R}`$ can be written as a linear combination
 of the interpolating function values. In the code, we store the weights in front of each interpolating function value
 as they depend only on the grids. For the same reason, we store $`\gamma_i`$ as a vector,
 
 ```math
-{\bf \Gamma_i} 
-    = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right] 
-    = \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}} 
+{\bf \Gamma_i}
+    = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right]
+    = \frac{3}{2} \frac{1}{\Delta x^R_{i} +\Delta x^L_{i}}
         \left[
-            - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}, 
+            - \frac{\Delta x^R_{i}}{\Delta x^L_{i}},
             \left(
-                \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
-                - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
-            \right), 
-            \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+                \frac{\Delta x^R_{i}}{\Delta x^L_{i}}
+                - \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
+            \right),
+            \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
         \right].
 ```
 
@@ -219,8 +225,8 @@ We start the recursion on patch 2. We initialise it with,
 
 ```math
 \begin{aligned}
-    & \omega_{k, 1,1}^i = \gamma_{i,k}, 
-    && \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i 
+    & \omega_{k, 1,1}^i = \gamma_{i,k},
+    && \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i
                         + \frac{\alpha_i}{1 - \alpha_i  \beta_{i+1}} \gamma_{i+1,k},
 \end{aligned}
 ```
@@ -320,7 +326,7 @@ and for $`m = 2, ..., N^L-1`$,
 
 ```math
 \begin{aligned}
-    & \omega_{k, m+1,N^R}^i = 
+    & \omega_{k, m+1,N^R}^i =
     \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}}
             \left[
                 \omega_{k, m,N^R}^i
@@ -359,9 +365,9 @@ of the second part of the recursion need to use these modified local coefficient
     & \gamma_i^{*,-} = \frac{1}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}
         \left[
             \gamma_i
-            + \beta_i \frac{1}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{*})
-            - \beta_i \frac{H_0^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i-1})
-            - \beta_i \frac{H_1^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i})
+            + \beta_i \frac{1}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{*})
+            - \beta_i \frac{H_0^{*,-}}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{i-1})
+            - \beta_i \frac{H_1^{*,-}}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{i})
         \right],
     \\
     & \alpha_i^{*,-} = \frac{\alpha_i}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}, \\
@@ -383,8 +389,8 @@ with
 ```
 
 with $`H_0^{*,-} \text{, } H_1^{*,-} \text{, } K_0^{*,-} \text{ and } K_1^{*,-}`$ the evaluations of
-$`H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1`$ at $`\frac{x^-_{*} - x^-_{i-1}}{\Delta x^-_{i}}`$,
-with $`x^-_{*}`$ the additional interpolation point.
+$`H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1`$ at $`\frac{x^L_{*} - x^L_{i-1}}{\Delta x^L_{i}}`$,
+with $`x^L_{*}`$ the additional interpolation point.
 
 If there is an additional interpolation point in the right boundary cell, then the last step
 of the first part of the recursion need to use these modified local coefficients,
@@ -395,9 +401,9 @@ of the first part of the recursion need to use these modified local coefficients
     & \gamma_i^{*,+} = \frac{1}{1 + \alpha_i \frac{K_0^{*,+}}{K_1^{*,+}}}
         \left[
             \gamma_i
-            + \alpha_i \frac{1}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{*})
-            - \alpha_i \frac{H_0^{*,+}}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{i})
-            - \alpha_i \frac{H_1^{*,+}}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{i+1})
+            + \alpha_i \frac{1}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{*})
+            - \alpha_i \frac{H_0^{*,+}}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{i})
+            - \alpha_i \frac{H_1^{*,+}}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{i+1})
         \right],
     \\
     & \alpha_i^{*,+} = 0, \\
@@ -407,13 +413,13 @@ of the first part of the recursion need to use these modified local coefficients
 ```
 
 and $`H_0^{*,+} \text{, } H_1^{*,+} \text{, } K_0^{*,+} \text{ and } K_1^{*,+}`$ the evaluations of
-$`H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1`$ at $`\frac{x^+_{*} - x^+_{i}}{\Delta x^+_{i}}`$,
-with $`x^+_{*}`$ the additional interpolation point.
+$`H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1`$ at $`\frac{x^R_{*} - x^R_{i}}{\Delta x^R_{i}}`$,
+with $`x^R_{*}`$ the additional interpolation point.
 
 #### Explicit formula
 
 If the **interpolation points are uniform**
-($`\Delta x^-_{i} = \Delta x^-  \text{ and } \Delta x^+_{i} = \Delta x^+ \text{, } \forall i`$),
+($`\Delta x^L_{i} = \Delta x^L  \text{ and } \Delta x^R_{i} = \Delta x^R \text{, } \forall i`$),
 then the recursion formula is equivalent to the following explicit formula.
 
 To lighten the notation, we note $`n_1 = N^L`$ and $`n_2 = N^R`$.
@@ -443,31 +449,31 @@ with the weights given by,
 \left\{
 \begin{aligned}
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k}
-        \frac{\frac{a^I_{1,1}}{\Delta x^+} u_{n_1}u_{1}}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R} u_{n_1}u_{1}}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = n_2, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k}
-        \frac{\frac{a^I_{1,1}}{\Delta x^+} u_{n_1}(u_{n_2-k+1} - u_{n_2-k-1})}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R} u_{n_1}(u_{n_2-k+1} - u_{n_2-k-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = 1, ..., n_2-1, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^k
-        \frac{\frac{a^I_{1,1}}{\Delta x^+}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^-}u_{n_2}(u_{n_1} - u_{n_1-1})}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^L}u_{n_2}(u_{n_1} - u_{n_1-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = 0, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
-        \frac{\frac{b^I_{1,1}}{\Delta x^-} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
+        \frac{\frac{b^I_{1,1}}{\Delta x^L} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = -(n_1-1), ..., -1, \\
     & \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
-        \frac{\frac{b^I_{1,1}}{\Delta x^-} u_{n_2}u_{1}}
+        \frac{\frac{b^I_{1,1}}{\Delta x^L} u_{n_2}u_{1}}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &k = -n_1,
 \end{aligned}
 \right.
 ```
 
-and $`a^I_{1,1} = -\frac{1}{2} \frac{\Delta x^-}{\Delta x^+ +\Delta x^-}`$
-and $`b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^+}{\Delta x^+ +\Delta x^-}`$.
+and $`a^I_{1,1} = -\frac{1}{2} \frac{\Delta x^L}{\Delta x^R +\Delta x^L}`$
+and $`b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^R}{\Delta x^R +\Delta x^L}`$.
 
 ## References
 
@@ -477,4 +483,4 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
-Journal of Scientific Computing, (2025) [SUBMITTED - NOT PUBLISHED]
+Journal of Scientific Computing, (2025) [ACCEPTED]
