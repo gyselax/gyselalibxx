@@ -20,7 +20,6 @@ Test `SingleInterfaceDerivativesCalculator` with
 
 with $\theta$ and $\xi$ periodic.
 
-
 ## Interface derivative matrix with approximation formula
 
 Test `InterfaceExactDerivativeMatrix` with the following test cases
@@ -28,7 +27,6 @@ Test `InterfaceExactDerivativeMatrix` with the following test cases
 - In `interface_derivative_matrix_Greville_periodic_test`: we test with additional interpolation points as closure condition for the $y$-axis(`ddc::BoundCond::GREVILLE`) at the North and the South of the global domain, and periodic boundary conditions for the $x$-axis (`ddc::BoundCond::PERIODIC`) at the West and the East of the global domain. All the patches follow the same orientation as the global domain.
 
 ![Illustration test Greville and periodic boundary conditions](../../../docs/images/interface_derivatives/fig5\_example\_9\_patches.png "")
-
 
 - Hermite boundary conditions with the following layouts to test the signs of the derivatives.
 

@@ -480,6 +480,8 @@ and $`b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^R}{\Delta x^R +\Delta x^L}`$.
 We consider now a set of patches connected via different interfaces.
 We want to compute the derivatives at all the interfaces.
 
+### Exact and approximation formulae
+
 #### Exact formula
 
 To compute all the interface derivatives along one direction, we collect all the relations between
