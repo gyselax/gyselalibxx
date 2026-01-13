@@ -9,6 +9,5 @@ target_link_libraries("multipatch_interface_derivatives" INTERFACE
     gslx::multipatch_data_types
     gslx::multipatch_connectivity
     gslx::utils
-
 )
 add_library("gslx::multipatch_interface_derivatives" ALIAS "multipatch_interface_derivatives")
