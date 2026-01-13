@@ -110,7 +110,7 @@ using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
 using OutsideInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
 using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
 
-#else
+#elif defined(CHANGE_BOUND3)
 using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
 using Interface_2_3 = Interface<EastEdge<2>, SouthEdge<3>, false>;
 
@@ -422,12 +422,12 @@ public:
         std::vector<Coord<Y<2>>> break_points_y2 = convert_dim<Y<2>, Y<1>>(break_points_y);
         std::vector<Coord<Y<3>>> break_points_y3;
         fill_in_reverse(break_points_y3, break_points_y);
-#elif (CHANGE_BOUND1)
+#elif defined(CHANGE_BOUND1)
         std::vector<Coord<Y<1>>> break_points_y1 = convert_dim<Y<1>, X<1>>(break_points_x1);
         break_points_x1 = convert_dim<X<1>, Y<1>>(break_points_y);
         std::vector<Coord<Y<2>>> break_points_y2 = convert_dim<Y<2>, Y<1>>(break_points_y);
         std::vector<Coord<Y<3>>> break_points_y3 = convert_dim<Y<3>, Y<1>>(break_points_y);
-#else
+#elif defined(CHANGE_BOUND3)
         std::vector<Coord<Y<1>>> break_points_y1 = break_points_y;
         std::vector<Coord<Y<2>>> break_points_y2 = convert_dim<Y<2>, Y<1>>(break_points_y);
         std::vector<Coord<X<3>>> break_points_x3;

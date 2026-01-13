@@ -421,11 +421,6 @@ private:
         using EquivalentInterfaceI
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
-        // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
-        constexpr bool is_good_orientation = std::is_same_v<
-                typename EquivalentInterfaceI::Edge1::perpendicular_grid,
-                ddc::type_seq_element_t<I, Grid1DSeq>>;
-
         constexpr Extremity extremity_1 = EquivalentInterfaceI::Edge1::extremity;
         constexpr Extremity extremity_2 = EquivalentInterfaceI::Edge2::extremity;
 
