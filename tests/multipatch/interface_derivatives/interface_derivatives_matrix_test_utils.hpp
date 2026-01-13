@@ -36,7 +36,7 @@ struct CoordTransform
      * @brief Instantiate the coordinate transformator.
      * By default, the transformation is identity.
      */
-    CoordTransform(
+    explicit CoordTransform(
             bool is_x_loc_well_oriented = true,
             bool is_y_loc_well_oriented = true,
             bool are_exchange_x_y = true,
