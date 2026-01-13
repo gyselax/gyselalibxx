@@ -425,9 +425,6 @@ private:
         using Deriv1_2 = ddc::Deriv<typename Patch_2::Dim1>;
         using Deriv2_2 = ddc::Deriv<typename Patch_2::Dim2>;
 
-        constexpr bool is_grid_par_1_on_dim1 = std::is_same_v<GridPar1, Grid1_1>;
-        constexpr bool is_grid_par_2_on_dim1 = std::is_same_v<GridPar2, Grid1_2>;
-
         // Get the fields of the left and right patch of the interface.
         DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
                 = functions_and_derivs.template get<Patch_1>();
