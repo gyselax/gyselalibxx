@@ -6,8 +6,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <boost/type_index.hpp>
-
 #include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
 #include "edge.hpp"
@@ -19,11 +17,7 @@
 #include "types.hpp"
 #include "view.hpp"
 
-template <
-        class Connectivity,
-        class Grid1D,
-        class PatchSeq,
-        class DerivativesCalculatorCollection>
+template <class Connectivity, class Grid1D, class PatchSeq, class DerivativesCalculatorCollection>
 class InterfaceDerivativeMatrix;
 
 /**
@@ -43,11 +37,7 @@ class InterfaceDerivativeMatrix;
   * @tparam DerivativesCalculatorCollection A SingleInterfaceDerivativesCalculatorCollection
   * that stores the SingleInterfaceDerivativesCalculator needed to compute the interface derivatives. 
   */
-template <
-        class Connectivity,
-        class Grid1D,
-        class... Patches,
-        class DerivativesCalculatorCollection>
+template <class Connectivity, class Grid1D, class... Patches, class DerivativesCalculatorCollection>
 class InterfaceDerivativeMatrix<
         Connectivity,
         Grid1D,
@@ -78,11 +68,12 @@ class InterfaceDerivativeMatrix<
             = ddc::type_seq_element_t<number_of_interfaces - 1, interface_sorted_collection>;
 
     static_assert(
-            (((!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)&&(
-                     !std::is_same_v<typename Interface0::Edge2, OutsideEdge>))
-             == ((!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)&&(
-                     !std::is_same_v<typename Interface0::Edge2, OutsideEdge>))),
-            "If one boundary has an outside edge, the other boundary should have too.");
+            (((!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)
+              || (!std::is_same_v<typename Interface0::Edge2, OutsideEdge>))
+             == ((!std::is_same_v<typename InterfaceN::Edge1, OutsideEdge>)
+                 || (!std::is_same_v<typename InterfaceN::Edge2, OutsideEdge>))),
+            "If one global boundary has an outside edge, the other global boundary should have "
+            "too.");
 
     static constexpr bool is_periodic
             = (!std::is_same_v<typename Interface0::Edge1, OutsideEdge>)&&(
@@ -145,7 +136,6 @@ class InterfaceDerivativeMatrix<
     {
     };
 
-
 public:
     /// @brief First patch of the collection of patches in the direction of the given Grid1D.
     using first_patch = FirstPatch;
@@ -175,8 +165,6 @@ public:
         , m_derivatives_calculators(derivatives_calculators)
     {
     }
-
-
 
     /**
      * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D

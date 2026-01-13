@@ -16,6 +16,7 @@ in a `DerivField`.
 - Allow `FFTPoissonSolver` to use variable precision.
 - Add `SingleInterfaceDerivativesCalculator` to compute an interface derivative of an equivalent global spline.
 - Add `SingleInterfaceDerivativeCalculatorCollection` to collect different `SingleInterfaceDerivativesCalculator`.
+- Add `InterfaceDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
 
 ### Fixed
 
