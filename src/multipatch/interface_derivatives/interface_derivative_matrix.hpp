@@ -6,8 +6,6 @@
 
 #include <ddc/ddc.hpp>
 
-#include <boost/type_index.hpp>
-
 #include "connectivity_details.hpp"
 #include "ddc_aliases.hpp"
 #include "edge.hpp"
@@ -322,7 +320,6 @@ public:
         solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.front());
         solve<eval_cross_deriv>(functions_and_derivs, idx_range_par_first.back());
     }
-
 
 
 private:
