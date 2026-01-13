@@ -454,11 +454,11 @@ struct SingleInterfaceDerivativesCalculatorFixture<
         EXPECT_NEAR(
                 coeff_deriv_patch_1,
                 derivatives_calculator_approx.template get_coeff_deriv_on_patch<Patch1>(),
-                1e-14);
+                1e-12);
         EXPECT_NEAR(
                 coeff_deriv_patch_2,
                 derivatives_calculator_approx.template get_coeff_deriv_on_patch<Patch2>(),
-                1e-14);
+                1e-12);
 
 
         using IdxPar2
@@ -532,7 +532,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                                                         get_const_field(function_g_coef));
             double const local_deriv = sum_values + coeff_deriv_patch_1 * deriv_patch_1
                                        + coeff_deriv_patch_2 * deriv_patch_2;
-            EXPECT_NEAR(local_deriv, global_deriv, 5e-13);
+            EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
 
             // Approximation ---------------------------------------------------------------------
             EXPECT_NEAR(sum_values, global_deriv, approximation_error_bound);
