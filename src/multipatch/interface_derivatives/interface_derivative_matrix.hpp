@@ -229,7 +229,6 @@ public:
     }
 
 
-
     /**
      * @brief Solve the matrix system MS = C to determine all the interface derivatives in the Grid1D
      * direction at a given index.
@@ -276,7 +275,6 @@ public:
                     solve<eval_deriv>(functions_and_derivs, idx_par);
                 });
     }
-
 
     /**
      * @brief Solve the matrix system MS = C to determine all the interface cross-derivatives in the Grid1D
@@ -410,7 +408,11 @@ private:
         (set_sign_vector_line<I>(), ...);
     }
 
-    /// @brief Fill in the Ith line of the vector contening the orientation signs of the parallel grids.
+    /**
+     * @brief Fill in the Ith line of the vector contening the orientation signs of the 
+     * parallel grids. Keeping these signs helps for the computation of equivalent global
+     * spline cross-derivatives.
+     */
     template <std::size_t I>
     void set_sign_vector_line()
     {
@@ -672,12 +674,6 @@ private:
         using DerivPar1 = typename ddc::Deriv<typename GridPar1::continuous_dimension_type>;
         using DerivPar2 = typename ddc::Deriv<typename GridPar2::continuous_dimension_type>;
 
-        // Get the fields of the left and right patch of the interface.
-        DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
-                = functions_and_derivs.template get<Patch_1>();
-        DerivFieldOnPatch_host<Patch_2> function_and_derivs_2
-                = functions_and_derivs.template get<Patch_2>();
-
         // Get the correct index ranges and indices for the slices.
         IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
         IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
@@ -692,6 +688,12 @@ private:
         set_slice_indexes<
                 EquivalentInterfaceI,
                 IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+
+        // Get the fields of the left and right patch of the interface.
+        DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
+                = functions_and_derivs.template get<Patch_1>();
+        DerivFieldOnPatch_host<Patch_2> function_and_derivs_2
+                = functions_and_derivs.template get<Patch_2>();
 
         auto const [sign_1, sign_2]
                 = get_sign_derivs<EquivalentInterfaceI, is_good_orientation, eval_type>();
