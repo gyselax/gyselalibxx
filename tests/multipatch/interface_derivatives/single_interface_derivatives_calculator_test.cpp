@@ -433,10 +433,13 @@ struct SingleInterfaceDerivativesCalculatorFixture<
         } else {
             idx_range_perp2 = idx_range_eta2;
         }
-        // Instantiation with the indicated number of cells taken into account.
+        // Instantiation with the indicated number of chosen cells.
         SingleInterfaceDerivativesCalculator<Interface_1_2> const
                 derivatives_calculator_approx(idx_range_r1, idx_range_perp2, n_cells);
 
+        // Instantiation with the indicated number of chosen cells and 2D index ranges.
+        SingleInterfaceDerivativesCalculator<Interface_1_2> const
+                derivatives_calculator_approx_2D(idx_range_rtheta1, idx_range_etaxi2, n_cells);
 
         // Coefficients a and b
         double const coeff_deriv_patch_1 = derivatives_calculator.get_coeff_deriv_patch_1();
@@ -458,6 +461,16 @@ struct SingleInterfaceDerivativesCalculatorFixture<
         EXPECT_NEAR(
                 coeff_deriv_patch_2,
                 derivatives_calculator_approx.template get_coeff_deriv_on_patch<Patch2>(),
+                1e-12);
+
+        // Compare derivatives_calculator and derivatives_calculator_approx_2D.
+        EXPECT_NEAR(
+                coeff_deriv_patch_1,
+                derivatives_calculator_approx_2D.template get_coeff_deriv_on_patch<Patch1>(),
+                1e-12);
+        EXPECT_NEAR(
+                coeff_deriv_patch_2,
+                derivatives_calculator_approx_2D.template get_coeff_deriv_on_patch<Patch2>(),
                 1e-12);
 
 
@@ -515,7 +528,15 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                     derivatives_calculator_approx.get_function_coefficients(
                             get_const_field(function_1[idx_par_1]),
                             get_const_field(function_2[idx_par_2])),
-                    5e-14);
+                    1e-12);
+
+            // Compare derivatives_calculator and derivatives_calculator_approx_2D.
+            EXPECT_NEAR(
+                    sum_values,
+                    derivatives_calculator_approx_2D.get_function_coefficients(
+                            get_const_field(function_1[idx_par_1]),
+                            get_const_field(function_2[idx_par_2])),
+                    1e-12);
 
             Idx<ddc::Deriv<Rg>> idx_dr(1);
             double global_deriv
