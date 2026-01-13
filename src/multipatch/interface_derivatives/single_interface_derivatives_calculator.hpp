@@ -249,6 +249,8 @@ public:
                 Bound1,
                 Bound2)
     {
+        static_assert(ddc::is_discrete_domain_v<IdxRangeA>);
+        static_assert(ddc::is_discrete_domain_v<IdxRangeB>);
     }
 
     /**
@@ -307,6 +309,8 @@ public:
                         ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
                 number_chosen_cells)
     {
+        static_assert(ddc::is_discrete_domain_v<IdxRangeA>);
+        static_assert(ddc::is_discrete_domain_v<IdxRangeB>);
     }
 
     /**
