@@ -511,6 +511,46 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             idx_range_y6.take_first(IdxStep<GridY<6>>(10)),
             idx_range_y9.take_last(IdxStep<GridY<9>>(10)));
 
+    // constexpr std::size_t nb_chosen_cells = 9;
+
+    // // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
+    // SingleInterfaceDerivativesCalculator<Interface_1_2> const
+    //         derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_2_3> const
+    //         derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_3_1> const
+    //         derivatives_calculator_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
+
+    // SingleInterfaceDerivativesCalculator<Interface_4_5> const
+    //         derivatives_calculator_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_5_6> const
+    //         derivatives_calculator_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_6_4> const
+    //         derivatives_calculator_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
+
+    // SingleInterfaceDerivativesCalculator<Interface_7_8> const
+    //         derivatives_calculator_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_8_9> const
+    //         derivatives_calculator_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_9_7> const
+    //         derivatives_calculator_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
+
+    // // SingleInterfaceDerivativesCalculators for interfaces along x.
+    // SingleInterfaceDerivativesCalculator<Interface_1_4> const
+    //         derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_4_7> const
+    //         derivatives_calculator_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
+
+    // SingleInterfaceDerivativesCalculator<Interface_2_5> const
+    //         derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_5_8> const
+    //         derivatives_calculator_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
+
+    // SingleInterfaceDerivativesCalculator<Interface_3_6> const
+    //         derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
+    // SingleInterfaceDerivativesCalculator<Interface_6_9> const
+    //         derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
+
     // Collect the derivative calculators --------------------------------------------------------
     SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
             derivatives_calculator_1_2,

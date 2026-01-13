@@ -22,10 +22,9 @@ class InterfaceDerivativeMatrix;
 
 /**
   * @brief Class to compute the interface derivatives along a given direction 
-  * on all the interfaces.  
+  * on all the interfaces with approximation formula.
   * 
   * This operator is implemented for conforming equivalent global meshes. 
-  * It uses the approximation formula. 
   * 
   * When we call the operator .solve_deriv() or .solve_cross_deriv(), the operator loops
   * over the interface to compute the interface derivatives and update the DerivField given 

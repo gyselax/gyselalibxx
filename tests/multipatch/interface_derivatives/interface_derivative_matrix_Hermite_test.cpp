@@ -652,32 +652,33 @@ TEST_F(InterfaceDerivativeMatrixHermiteTest, CheckForHermiteBc)
     Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_min_max(idx_dxg_min, idx_dyg_max);
     Idx<DerivXg, GridXg, DerivYg, GridYg> idx_dxgdyg_max_max(idx_dxg_max, idx_dyg_max);
 
+    double const coef_a = 2. / 3 * M_PI;
+    double const coef_b = 0.25;
+
     ddc::host_for_each(idx_range_yg, [&](Idx<GridYg> const idx) {
         double const xgmin = xg_min;
         double const xgmax = xg_max;
         double const yg = ddc::coordinate(idx);
         function_and_derivs_g[idx_dxg_min](idx)
-                = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmin + 0.25) * std::sin(yg);
+                = -coef_a * std::sin(coef_a * xgmin + coef_b) * std::sin(yg);
         function_and_derivs_g[idx_dxg_max](idx)
-                = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xgmax + 0.25) * std::sin(yg);
+                = -coef_a * std::sin(coef_a * xgmax + coef_b) * std::sin(yg);
     });
     ddc::host_for_each(idx_range_xg, [&](Idx<GridXg> const idx) {
         double const ygmin = yg_min;
         double const ygmax = yg_max;
         double const xg = ddc::coordinate(Idx<GridXg>(idx));
-        function_and_derivs_g[idx_dyg_min](idx)
-                = std::cos(2. / 3 * M_PI * xg + 0.25) * std ::cos(ygmin);
-        function_and_derivs_g[idx_dyg_max](idx)
-                = std::cos(2. / 3 * M_PI * xg + 0.25) * std ::cos(ygmax);
+        function_and_derivs_g[idx_dyg_min](idx) = std::cos(coef_a * xg + coef_b) * std ::cos(ygmin);
+        function_and_derivs_g[idx_dyg_max](idx) = std::cos(coef_a * xg + coef_b) * std ::cos(ygmax);
     });
     function_and_derivs_g(idx_dxgdyg_min_min)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_min + 0.25) * std::sin(yg_min);
+            = -coef_a * std::sin(coef_a * xg_min + coef_b) * std::sin(yg_min);
     function_and_derivs_g(idx_dxgdyg_max_min)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max + 0.25) * std::sin(yg_min);
+            = -coef_a * std::sin(coef_a * xg_max + coef_b) * std::sin(yg_min);
     function_and_derivs_g(idx_dxgdyg_min_max)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_min + 0.25) * std::sin(yg_max);
+            = -coef_a * std::sin(coef_a * xg_min + coef_b) * std::sin(yg_max);
     function_and_derivs_g(idx_dxgdyg_max_max)
-            = -2. / 3 * M_PI * std::sin(2. / 3 * M_PI * xg_max + 0.25) * std::sin(yg_max);
+            = -coef_a * std::sin(coef_a * xg_max + coef_b) * std::sin(yg_max);
 
     // --- the local derivatives from an equivalent global spline.
     // ------- build global spline representation
