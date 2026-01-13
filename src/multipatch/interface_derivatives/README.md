@@ -91,6 +91,12 @@ Patch2::IdxRange1D idx_range_patch_2_reduced (idx_range_patch_2.take_last(N_R_re
 SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
 ```
 
+or we can directly call, for $`N_{reduc} = N^L = N^R`$,
+
+```cpp
+SingleInterfaceDerivativesCalculator<Interface_12> derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
+```
+
 > **Remark:** For interpolation with interpolation points as closure condition, a special treatment has to be carried out on the boundary cells
 > (see [Additional interpolation point not on a break point](#additional-interpolation-point-not-on-a-break-point)).
 > To apply this treatment, we specify it in the template parameter as follows.
@@ -477,4 +483,4 @@ Journal of Computational Physics 228(5), 1429–1446 (2009)
 
 [^2]: Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 *Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.*
-Journal of Scientific Computing, (2025) [SUBMITTED - NOT PUBLISHED]
+Journal of Scientific Computing, (2025) [ACCEPTED]
