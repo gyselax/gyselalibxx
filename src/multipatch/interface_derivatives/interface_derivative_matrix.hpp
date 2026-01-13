@@ -314,7 +314,7 @@ private:
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
         // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
-        constexpr bool is_same_orientation = std::is_same_v<
+        constexpr bool is_good_orientation = std::is_same_v<
                 typename EquivalentInterfaceI::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
 
@@ -334,7 +334,7 @@ private:
         using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
         // Type for the slice_previous_idx_value index.
-        using IdxPatchSlice = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
+        using IdxPatchSlice = std::conditional_t<is_good_orientation, Patch_1, Patch_2>;
         Idx<GridPar1> idx_slice_1;
         Idx<GridPar2> idx_slice_2;
         set_slice_indexes<
@@ -396,7 +396,7 @@ private:
                 = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
 
         // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
-        constexpr bool is_same_orientation = std::is_same_v<
+        constexpr bool is_good_orientation = std::is_same_v<
                 typename EquivalentInterfaceI::Edge1::perpendicular_grid,
                 ddc::type_seq_element_t<I, Grid1DSeq>>;
 
@@ -438,7 +438,7 @@ private:
         IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
 
         // Type for the slice_previous_idx_value index.
-        using IdxPatchSlice = std::conditional_t<is_same_orientation, Patch_1, Patch_2>;
+        using IdxPatchSlice = std::conditional_t<is_good_orientation, Patch_1, Patch_2>;
         Idx<GridPar1> idx_slice_1;
         Idx<GridPar2> idx_slice_2;
         set_slice_indexes<
@@ -448,11 +448,6 @@ private:
         // The slice indices has to be a point at a corner, i.e. index range boundaries.
         assert((idx_slice_1 == idx_range_par_1.front()) || (idx_slice_1 == idx_range_par_1.back()));
         assert((idx_slice_2 == idx_range_par_2.front()) || (idx_slice_2 == idx_range_par_2.back()));
-
-        IdxRangeSlice<GridPar1> idx_range_slice_dpar_1
-                = function_and_derivs_1.template idx_range_for_deriv<GridPar1>();
-        IdxRangeSlice<GridPar2> idx_range_slice_dpar_2
-                = function_and_derivs_2.template idx_range_for_deriv<GridPar2>();
 
         Idx<DerivPar1, GridPar1> idx_slice_deriv_1(Idx<DerivPar1>(1), idx_slice_1);
         Idx<DerivPar2, GridPar2> idx_slice_deriv_2(Idx<DerivPar2>(1), idx_slice_2);
@@ -469,12 +464,7 @@ private:
                                   get_const_field(derivs_1),
                                   get_const_field(derivs_2));
 
-        // Get the correct index ranges and indices for the slices.
-        Idx<Deriv1_1> idx_d1_1(1);
-        Idx<Deriv2_1> idx_d2_1(1);
-        Idx<Deriv1_2> idx_d1_2(1);
-        Idx<Deriv2_2> idx_d2_2(1);
-
+        // Get the correct indices for the slices.
         Idx<GridPerp1> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1);
         Idx<GridPerp2> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2);
 
@@ -491,11 +481,11 @@ private:
 
         // Update the cross-derivatives
         Idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1>
-                idx_cross_deriv1(idx_d1_1, idx_d2_1, idx_slice_1, idx_deriv_1);
+                idx_cross_deriv1(Idx<Deriv1_1>(1), Idx<Deriv2_1>(1), idx_slice_1, idx_deriv_1);
         function_and_derivs_1(idx_cross_deriv1) = corner_derivative * sign_1;
 
         Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2>
-                idx_cross_deriv2(idx_d1_2, idx_d2_2, idx_slice_2, idx_deriv_2);
+                idx_cross_deriv2(Idx<Deriv1_2>(1), Idx<Deriv2_2>(1), idx_slice_2, idx_deriv_2);
         function_and_derivs_2(idx_cross_deriv2) = corner_derivative * sign_2;
     }
 
@@ -547,24 +537,12 @@ private:
 
     /**
      * @brief Get the index of the given index range slice corresponding to the 
-     * FRONT extremity of the 1D grid. 
+     * extremity at the interface of the 1D grid. 
      */
     template <class Grid1Or2>
     Idx<Grid1Or2> get_idx_interface(IdxRange<Grid1Or2> const idx_range_slice, Extremity extremity)
             const
     {
         return (extremity == Extremity::FRONT) ? idx_range_slice.front() : idx_range_slice.back();
-    }
-
-    /**
-     * @brief Get the index of the given index range slice corresponding to the 
-     * BACK extremity of the 1D grid. 
-     */
-    template <class Grid1Or2>
-    Idx<Grid1Or2> get_idx_other_interface(
-            IdxRange<Grid1Or2> const idx_range_slice,
-            Extremity extremity) const
-    {
-        return (extremity == Extremity::BACK) ? idx_range_slice.front() : idx_range_slice.back();
     }
 };
