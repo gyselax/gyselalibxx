@@ -686,38 +686,38 @@ To establish the formulae, we use the following relation between each consecutiv
 \left\{
 \begin{aligned}
     &amp; \gamma_i =
-    \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}}
+    \frac{3}{2} \frac{1}{\Delta x^R_{i} +\Delta x^L_{i}}
     \left[
-        \frac{\Delta x^-_{i}}{\Delta x^+_{i}}  f^+_{i+1}
+        \frac{\Delta x^L_{i}}{\Delta x^R_{i}}  f^R_{i+1}
         + \left(
-            \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
-            - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
-        \right) f^+_{i}
-        - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}  f^-_{i-1}
+            \frac{\Delta x^R_{i}}{\Delta x^L_{i}}
+            - \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
+        \right) f^R_{i}
+        - \frac{\Delta x^R_{i}}{\Delta x^L_{i}}  f^L_{i-1}
     \right],
     \\
-    &amp; \alpha_i = -\frac{1}{2} \frac{\Delta x^-_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}, \\
-    &amp; \beta_i =  -\frac{1}{2} \frac{\Delta x^+_{i}}{\Delta x^+_{i} +\Delta x^-_{i}}.
+    &amp; \alpha_i = -\frac{1}{2} \frac{\Delta x^L_{i}}{\Delta x^R_{i} +\Delta x^L_{i}}, \\
+    &amp; \beta_i =  -\frac{1}{2} \frac{\Delta x^R_{i}}{\Delta x^R_{i} +\Delta x^L_{i}}.
 \end{aligned}
 \right.
 \]</div>
-<p>and <span class="arithmatex">\(\Delta x^+_{i} = x^+_{i+1} -  x^+_{i} \text{, } \Delta x^-_{i} = x^-_{i} -  x^-_{i-1}\)</span>,
+<p>and <span class="arithmatex">\(\Delta x^R_{i} = x^R_{i+1} -  x^R_{i} \text{, } \Delta x^L_{i} = x^L_{i} -  x^L_{i-1}\)</span>,
 and <span class="arithmatex">\(\{f^{+/-}_{i+k}\}_k\)</span> the function values at the interpolation points on patch 1 (+) and
 patch 2 (-).</p>
-<p><strong>Remark:</strong> As mentionnd above, the coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span> can be written as a linear combination
+<p><strong>Remark:</strong> As mentioned above, the coefficient <span class="arithmatex">\(c^i_{N^L,N^R}\)</span> can be written as a linear combination
 of the interpolating function values. In the code, we store the weights in front of each interpolating function value
 as they depend only on the grids. For the same reason, we store <span class="arithmatex">\(\gamma_i\)</span> as a vector,</p>
 <div class="arithmatex">\[
-{\bf \Gamma_i} 
-    = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right] 
-    = \frac{3}{2} \frac{1}{\Delta x^+_{i} +\Delta x^-_{i}} 
+{\bf \Gamma_i}
+    = \left[({\bf \Gamma_i})_0, ({\bf \Gamma_i})_1, ({\bf \Gamma_i})_2\right]
+    = \frac{3}{2} \frac{1}{\Delta x^R_{i} +\Delta x^L_{i}}
         \left[
-            - \frac{\Delta x^+_{i}}{\Delta x^-_{i}}, 
+            - \frac{\Delta x^R_{i}}{\Delta x^L_{i}},
             \left(
-                \frac{\Delta x^+_{i}}{\Delta x^-_{i}}
-                - \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
-            \right), 
-            \frac{\Delta x^-_{i}}{\Delta x^+_{i}}
+                \frac{\Delta x^R_{i}}{\Delta x^L_{i}}
+                - \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
+            \right),
+            \frac{\Delta x^L_{i}}{\Delta x^R_{i}}
         \right].
 \]</div>
 <h4 id="recursive-formula">Recursive formula</h4>
@@ -740,8 +740,8 @@ as they depend only on the grids. For the same reason, we store <span class="ari
 <p>(i.e. for the weights,</p>
 <div class="arithmatex">\[
 \begin{aligned}
-    &amp; \omega_{k, 1,1}^i = \gamma_{i,k}, 
-    &amp;&amp; \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i 
+    &amp; \omega_{k, 1,1}^i = \gamma_{i,k},
+    &amp;&amp; \omega_{k, 1,2}^i = \frac{1}{1 - \alpha_i  \beta_{i+1}} \omega_{k, 1,1}^i
                         + \frac{\alpha_i}{1 - \alpha_i  \beta_{i+1}} \gamma_{i+1,k},
 \end{aligned}
 \]</div>
@@ -824,7 +824,7 @@ and null for different <em>k</em>.)</p>
 <p>(i.e. for the weights,</p>
 <div class="arithmatex">\[
 \begin{aligned}
-    &amp; \omega_{k, m+1,N^R}^i = 
+    &amp; \omega_{k, m+1,N^R}^i =
     \frac{1}{1 - \alpha_{i-m} \frac{b^{i}_{m,N^R}}{b^{i}_{m-1,N^R}}}
             \left[
                 \omega_{k, m,N^R}^i
@@ -854,9 +854,9 @@ of the second part of the recursion need to use these modified local coefficient
     &amp; \gamma_i^{*,-} = \frac{1}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}
         \left[
             \gamma_i
-            + \beta_i \frac{1}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{*})
-            - \beta_i \frac{H_0^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i-1})
-            - \beta_i \frac{H_1^{*,-}}{\Delta x^-_{i} K_0^{*,-}} s(x^-_{i})
+            + \beta_i \frac{1}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{*})
+            - \beta_i \frac{H_0^{*,-}}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{i-1})
+            - \beta_i \frac{H_1^{*,-}}{\Delta x^L_{i} K_0^{*,-}} s(x^L_{i})
         \right],
     \\
     &amp; \alpha_i^{*,-} = \frac{\alpha_i}{1 + \beta_i \frac{K_1^{*,-}}{K_0^{*,-}}}, \\
@@ -875,8 +875,8 @@ of the second part of the recursion need to use these modified local coefficient
     K_1(x) = x^2 (x-1),
 \]</div>
 <p>with <span class="arithmatex">\(H_0^{*,-} \text{, } H_1^{*,-} \text{, } K_0^{*,-} \text{ and } K_1^{*,-}\)</span> the evaluations of
-<span class="arithmatex">\(H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1\)</span> at <span class="arithmatex">\(\frac{x^-_{*} - x^-_{i-1}}{\Delta x^-_{i}}\)</span>,
-with <span class="arithmatex">\(x^-_{*}\)</span> the additional interpolation point.</p>
+<span class="arithmatex">\(H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1\)</span> at <span class="arithmatex">\(\frac{x^L_{*} - x^L_{i-1}}{\Delta x^L_{i}}\)</span>,
+with <span class="arithmatex">\(x^L_{*}\)</span> the additional interpolation point.</p>
 <p>If there is an additional interpolation point in the right boundary cell, then the last step
 of the first part of the recursion need to use these modified local coefficients,</p>
 <div class="arithmatex">\[
@@ -885,9 +885,9 @@ of the first part of the recursion need to use these modified local coefficients
     &amp; \gamma_i^{*,+} = \frac{1}{1 + \alpha_i \frac{K_0^{*,+}}{K_1^{*,+}}}
         \left[
             \gamma_i
-            + \alpha_i \frac{1}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{*})
-            - \alpha_i \frac{H_0^{*,+}}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{i})
-            - \alpha_i \frac{H_1^{*,+}}{\Delta x^+_{i} K_1^{*,+}} s(x^+_{i+1})
+            + \alpha_i \frac{1}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{*})
+            - \alpha_i \frac{H_0^{*,+}}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{i})
+            - \alpha_i \frac{H_1^{*,+}}{\Delta x^R_{i} K_1^{*,+}} s(x^R_{i+1})
         \right],
     \\
     &amp; \alpha_i^{*,+} = 0, \\
@@ -896,11 +896,11 @@ of the first part of the recursion need to use these modified local coefficients
 \right.
 \]</div>
 <p>and <span class="arithmatex">\(H_0^{*,+} \text{, } H_1^{*,+} \text{, } K_0^{*,+} \text{ and } K_1^{*,+}\)</span> the evaluations of
-<span class="arithmatex">\(H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1\)</span> at <span class="arithmatex">\(\frac{x^+_{*} - x^+_{i}}{\Delta x^+_{i}}\)</span>,
-with <span class="arithmatex">\(x^+_{*}\)</span> the additional interpolation point.</p>
+<span class="arithmatex">\(H_0 \text{, } H_1 \text{, } K_0 \text{ and } K_1\)</span> at <span class="arithmatex">\(\frac{x^R_{*} - x^R_{i}}{\Delta x^R_{i}}\)</span>,
+with <span class="arithmatex">\(x^R_{*}\)</span> the additional interpolation point.</p>
 <h4 id="explicit-formula">Explicit formula</h4>
 <p>If the <strong>interpolation points are uniform</strong>
-(<span class="arithmatex">\(\Delta x^-_{i} = \Delta x^-  \text{ and } \Delta x^+_{i} = \Delta x^+ \text{, } \forall i\)</span>),
+(<span class="arithmatex">\(\Delta x^L_{i} = \Delta x^L  \text{ and } \Delta x^R_{i} = \Delta x^R \text{, } \forall i\)</span>),
 then the recursion formula is equivalent to the following explicit formula.</p>
 <p>To lighten the notation, we note <span class="arithmatex">\(n_1 = N^L\)</span> and <span class="arithmatex">\(n_2 = N^R\)</span>.</p>
 <p>We introduce the following sequence to define the explicit formulae,</p>
@@ -924,30 +924,30 @@ then the recursion formula is equivalent to the following explicit formula.</p>
 \left\{
 \begin{aligned}
     &amp; \omega^I_{k,n_1,n_2} = 3(-1)^{k}
-        \frac{\frac{a^I_{1,1}}{\Delta x^+} u_{n_1}u_{1}}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R} u_{n_1}u_{1}}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &amp;k = n_2, \\
     &amp; \omega^I_{k,n_1,n_2} = 3(-1)^{k}
-        \frac{\frac{a^I_{1,1}}{\Delta x^+} u_{n_1}(u_{n_2-k+1} - u_{n_2-k-1})}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R} u_{n_1}(u_{n_2-k+1} - u_{n_2-k-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &amp;k = 1, ..., n_2-1, \\
     &amp; \omega^I_{k,n_1,n_2} = 3(-1)^k
-        \frac{\frac{a^I_{1,1}}{\Delta x^+}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^-}u_{n_2}(u_{n_1} - u_{n_1-1})}
+        \frac{\frac{a^I_{1,1}}{\Delta x^R}u_{n_1} (u_{n_2} - u_{n_2-1}) - \frac{b^I_{1,1}}{\Delta x^L}u_{n_2}(u_{n_1} - u_{n_1-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &amp;k = 0, \\
     &amp; \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
-        \frac{\frac{b^I_{1,1}}{\Delta x^-} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
+        \frac{\frac{b^I_{1,1}}{\Delta x^L} u_{n_2}(u_{n_1+k+1} - u_{n_1+k-1})}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &amp;k = -(n_1-1), ..., -1, \\
     &amp; \omega^I_{k,n_1,n_2} = 3(-1)^{k+1}
-        \frac{\frac{b^I_{1,1}}{\Delta x^-} u_{n_2}u_{1}}
+        \frac{\frac{b^I_{1,1}}{\Delta x^L} u_{n_2}u_{1}}
         {u_{n_1}u_{n_2} + u_{n_1}u_{n_2-1}a^I_{1,1} + u_{n_2} u_{n_1-1}b^I_{1,1}}
         , &amp;k = -n_1,
 \end{aligned}
 \right.
 \]</div>
-<p>and <span class="arithmatex">\(a^I_{1,1} = -\frac{1}{2} \frac{\Delta x^-}{\Delta x^+ +\Delta x^-}\)</span>
-and <span class="arithmatex">\(b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^+}{\Delta x^+ +\Delta x^-}\)</span>.</p>
+<p>and <span class="arithmatex">\(a^I_{1,1} = -\frac{1}{2} \frac{\Delta x^L}{\Delta x^R +\Delta x^L}\)</span>
+and <span class="arithmatex">\(b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^R}{\Delta x^R +\Delta x^L}\)</span>.</p>
 <h2 id="references">References</h2>
 <div class="footnote">
 <hr>
