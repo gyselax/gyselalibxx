@@ -562,9 +562,7 @@ private:
                 ill-oriented. Because, 
                         d(f(-x)) = - df(-x).
             */
-            const int sign_deriv_par_1
-                    = m_vector_par_signs[ddc::type_seq_rank_v<GridPerp1, Grid1DSeq>];
-            sign_sum *= sign_deriv_par_1;
+            sign_sum *= m_vector_par_signs[ddc::type_seq_rank_v<GridPerp1, Grid1DSeq>];
         }
 
         m_vector->get_values()[I] = sign_sum * lin_comb_funct;
@@ -585,12 +583,13 @@ private:
             auto const [sign_1, sign_2]
                     = get_sign_derivs<EquivalentInterfaceI, is_good_orientation, eval_type>();
 
-            double bound_deriv_1;
-            double bound_deriv_2;
             Idx<DerivPerp1, GridPerp1, GridPar1>
                     idx_bound_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1, idx_slice_1);
             Idx<DerivPerp2, GridPerp2, GridPar2>
                     idx_bound_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2, idx_slice_2);
+
+            double bound_deriv_1;
+            double bound_deriv_2;
             if constexpr (std::is_same_v<eval_type, eval_deriv>) {
                 // Select the first derivatives at the other interfaces/bounds.
                 bound_deriv_1 = function_and_derivs_1(idx_bound_deriv_1) * sign_1;
@@ -642,12 +641,8 @@ private:
         (update_derivatives_at_interface<I, eval_type>(functions_and_derivs, slice_idx_value), ...);
     }
 
-
-    /// @brief Associate the Ith derivative values to the correct first derivative.
-    template <
-            std::size_t I,
-            typename eval_type,
-            std::enable_if_t<std::is_same_v<eval_type, eval_deriv>, bool> = true>
+    /// @brief Associate the Ith derivative values to the correct first derivative or cross-derivatives.
+    template <std::size_t I, typename eval_type>
     void update_derivatives_at_interface(
             MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
             int& slice_previous_idx_value)
@@ -677,6 +672,9 @@ private:
         using DerivPerp1 = typename ddc::Deriv<typename GridPerp1::continuous_dimension_type>;
         using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
 
+        using DerivPar1 = typename ddc::Deriv<typename GridPar1::continuous_dimension_type>;
+        using DerivPar2 = typename ddc::Deriv<typename GridPar2::continuous_dimension_type>;
+
         // Get the fields of the left and right patch of the interface.
         DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
                 = functions_and_derivs.template get<Patch_1>();
@@ -697,96 +695,189 @@ private:
         set_slice_indexes<
                 EquivalentInterfaceI,
                 IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
-
-        auto const [sign_1, sign_2] = get_sign_deriv<EquivalentInterfaceI, is_good_orientation>();
-
-        function_and_derivs_1(Idx<DerivPerp1>(1), idx_deriv_1, idx_slice_1)
-                = m_interface_derivatives->get_values()[I] * sign_1;
-        function_and_derivs_2(Idx<DerivPerp2>(1), idx_deriv_2, idx_slice_2)
-                = m_interface_derivatives->get_values()[I] * sign_2;
-    }
-
-    /// @brief Associate the Ith derivative values to the correct cross-derivative.
-    template <
-            std::size_t I,
-            typename eval_type,
-            std::enable_if_t<std::is_same_v<eval_type, eval_cross_deriv>, bool> = true>
-    void update_derivatives_at_interface(
-            MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
-            int& slice_previous_idx_value)
-    {
-        using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
-        // Equivalent interface defined in the main file, i.e. given to MultipatchConnectivity.
-        using EquivalentInterfaceI
-                = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
-
-        // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
-        constexpr bool is_good_orientation = std::is_same_v<
-                typename EquivalentInterfaceI::Edge1::perpendicular_grid,
-                ddc::type_seq_element_t<I, Grid1DSeq>>;
-
-        using Patch_1 = typename EquivalentInterfaceI::Edge1::associated_patch;
-        using Patch_2 = typename EquivalentInterfaceI::Edge2::associated_patch;
-
-        constexpr Extremity extremity_1 = EquivalentInterfaceI::Edge1::extremity;
-        constexpr Extremity extremity_2 = EquivalentInterfaceI::Edge2::extremity;
-
-        using GridPerp1 = typename EquivalentInterfaceI::Edge1::perpendicular_grid;
-        using GridPerp2 = typename EquivalentInterfaceI::Edge2::perpendicular_grid;
-
-        using GridPar1 = typename EquivalentInterfaceI::Edge1::parallel_grid;
-        using GridPar2 = typename EquivalentInterfaceI::Edge2::parallel_grid;
-
-        using Grid1_1 = typename Patch_1::Grid1;
-        using Grid2_1 = typename Patch_1::Grid2;
-        using Grid1_2 = typename Patch_2::Grid1;
-        using Grid2_2 = typename Patch_2::Grid2;
-
-        using Deriv1_1 = ddc::Deriv<typename Patch_1::Dim1>;
-        using Deriv2_1 = ddc::Deriv<typename Patch_1::Dim2>;
-        using Deriv1_2 = ddc::Deriv<typename Patch_2::Dim1>;
-        using Deriv2_2 = ddc::Deriv<typename Patch_2::Dim2>;
-
-        // Get the fields of the left and right patch of the interface.
-        DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
-                = functions_and_derivs.template get<Patch_1>();
-        DerivFieldOnPatch_host<Patch_2> function_and_derivs_2
-                = functions_and_derivs.template get<Patch_2>();
-
-        // Get the correct index ranges and indices for the slices.
-        IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
-        IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
-
-        IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
-        IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
-
-        // Type for the slice_previous_idx_value index.
-        using IdxPatchSlice = std::conditional_t<is_good_orientation, Patch_1, Patch_2>;
-        Idx<GridPar1> idx_slice_1;
-        Idx<GridPar2> idx_slice_2;
-        set_slice_indexes<
-                EquivalentInterfaceI,
-                IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
-
-        Idx<GridPerp1> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1);
-        Idx<GridPerp2> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2);
-
-        // The slice indices has to be a point at a corner, i.e. index range boundaries.
-        assert((idx_slice_1 == idx_range_par_1.front()) || (idx_slice_1 == idx_range_par_1.back()));
-        assert((idx_slice_2 == idx_range_par_2.front()) || (idx_slice_2 == idx_range_par_2.back()));
-
-        Idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1>
-                idx_cross_deriv1(Idx<Deriv1_1>(1), Idx<Deriv2_1>(1), idx_slice_1, idx_deriv_1);
-        Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2>
-                idx_cross_deriv2(Idx<Deriv1_2>(1), Idx<Deriv2_2>(1), idx_slice_2, idx_deriv_2);
 
         auto const [sign_1, sign_2]
-                = get_sign_cross_deriv<EquivalentInterfaceI, is_good_orientation>();
+                = get_sign_derivs<EquivalentInterfaceI, is_good_orientation, eval_type>();
 
-        // Update the cross-derivative.
-        function_and_derivs_1(idx_cross_deriv1) = m_interface_derivatives->get_values()[I] * sign_1;
-        function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I] * sign_2;
+        Idx<DerivPerp1, GridPerp1, GridPar1>
+                idx_interface_deriv_1(Idx<DerivPerp1>(1), idx_deriv_1, idx_slice_1);
+        Idx<DerivPerp2, GridPerp2, GridPar2>
+                idx_interface_deriv_2(Idx<DerivPerp2>(1), idx_deriv_2, idx_slice_2);
+
+        if constexpr (std::is_same_v<eval_type, eval_deriv>) {
+            // Update the first derivatives.
+            function_and_derivs_1(idx_interface_deriv_1)
+                    = m_interface_derivatives->get_values()[I] * sign_1;
+            function_and_derivs_2(idx_interface_deriv_2)
+                    = m_interface_derivatives->get_values()[I] * sign_2;
+        } else {
+            IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
+            IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
+
+            // The slice indices has to be a point at a corner, i.e. index range boundaries.
+            assert((idx_slice_1 == idx_range_par_1.front())
+                   || (idx_slice_1 == idx_range_par_1.back()));
+            assert((idx_slice_2 == idx_range_par_2.front())
+                   || (idx_slice_2 == idx_range_par_2.back()));
+
+            Idx<DerivPar1, DerivPerp1, GridPerp1, GridPar1>
+                    idx_cross_deriv_1(Idx<DerivPar1>(1), idx_interface_deriv_1);
+            Idx<DerivPar2, DerivPerp2, GridPerp2, GridPar2>
+                    idx_cross_deriv_2(Idx<DerivPar2>(1), idx_interface_deriv_2);
+
+            // Update the cross-derivative.
+            function_and_derivs_1(idx_cross_deriv_1)
+                    = m_interface_derivatives->get_values()[I] * sign_1;
+            function_and_derivs_2(idx_cross_deriv_2)
+                    = m_interface_derivatives->get_values()[I] * sign_2;
+        }
     }
+
+
+    // /// @brief Associate the Ith derivative values to the correct first derivative.
+    // template <
+    //         std::size_t I,
+    //         typename eval_type,
+    //         std::enable_if_t<std::is_same_v<eval_type, eval_deriv>, bool> = true>
+    // void update_derivatives_at_interface(
+    //         MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+    //         int& slice_previous_idx_value)
+    // {
+    //     using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
+    //     // Equivalent interface defined in the main file, i.e. given to MultipatchConnectivity.
+    //     using EquivalentInterfaceI
+    //             = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
+
+    //     // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
+    //     constexpr bool is_good_orientation = std::is_same_v<
+    //             typename EquivalentInterfaceI::Edge1::perpendicular_grid,
+    //             ddc::type_seq_element_t<I, Grid1DSeq>>;
+
+    //     using Patch_1 = typename EquivalentInterfaceI::Edge1::associated_patch;
+    //     using Patch_2 = typename EquivalentInterfaceI::Edge2::associated_patch;
+
+    //     constexpr Extremity extremity_1 = EquivalentInterfaceI::Edge1::extremity;
+    //     constexpr Extremity extremity_2 = EquivalentInterfaceI::Edge2::extremity;
+
+    //     using GridPerp1 = typename EquivalentInterfaceI::Edge1::perpendicular_grid;
+    //     using GridPerp2 = typename EquivalentInterfaceI::Edge2::perpendicular_grid;
+
+    //     using GridPar1 = typename EquivalentInterfaceI::Edge1::parallel_grid;
+    //     using GridPar2 = typename EquivalentInterfaceI::Edge2::parallel_grid;
+
+    //     using DerivPerp1 = typename ddc::Deriv<typename GridPerp1::continuous_dimension_type>;
+    //     using DerivPerp2 = typename ddc::Deriv<typename GridPerp2::continuous_dimension_type>;
+
+    //     // Get the fields of the left and right patch of the interface.
+    //     DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
+    //             = functions_and_derivs.template get<Patch_1>();
+    //     DerivFieldOnPatch_host<Patch_2> function_and_derivs_2
+    //             = functions_and_derivs.template get<Patch_2>();
+
+    //     // Get the correct index ranges and indices for the slices.
+    //     IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
+    //     IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
+
+    //     Idx<GridPerp1> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1);
+    //     Idx<GridPerp2> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2);
+
+    //     // Type for the slice_previous_idx_value index.
+    //     using IdxPatchSlice = std::conditional_t<is_good_orientation, Patch_1, Patch_2>;
+    //     Idx<GridPar1> idx_slice_1;
+    //     Idx<GridPar2> idx_slice_2;
+    //     set_slice_indexes<
+    //             EquivalentInterfaceI,
+    //             IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+
+    //     auto const [sign_1, sign_2] = get_sign_deriv<EquivalentInterfaceI, is_good_orientation>();
+
+    //     function_and_derivs_1(Idx<DerivPerp1>(1), idx_deriv_1, idx_slice_1)
+    //             = m_interface_derivatives->get_values()[I] * sign_1;
+    //     function_and_derivs_2(Idx<DerivPerp2>(1), idx_deriv_2, idx_slice_2)
+    //             = m_interface_derivatives->get_values()[I] * sign_2;
+    // }
+
+    // /// @brief Associate the Ith derivative values to the correct cross-derivative.
+    // template <
+    //         std::size_t I,
+    //         typename eval_type,
+    //         std::enable_if_t<std::is_same_v<eval_type, eval_cross_deriv>, bool> = true>
+    // void update_derivatives_at_interface(
+    //         MultipatchField<DerivFieldOnPatch_host, Patches...> functions_and_derivs,
+    //         int& slice_previous_idx_value)
+    // {
+    //     using InterfaceI = ddc::type_seq_element_t<I, inner_interface_collection>;
+    //     // Equivalent interface defined in the main file, i.e. given to MultipatchConnectivity.
+    //     using EquivalentInterfaceI
+    //             = find_associated_interface_t<typename InterfaceI::Edge1, all_interface_collection>;
+
+    //     // The orientation Patch1|Patch2 of the interface matches with the sorted 1D grid sequence.
+    //     constexpr bool is_good_orientation = std::is_same_v<
+    //             typename EquivalentInterfaceI::Edge1::perpendicular_grid,
+    //             ddc::type_seq_element_t<I, Grid1DSeq>>;
+
+    //     using Patch_1 = typename EquivalentInterfaceI::Edge1::associated_patch;
+    //     using Patch_2 = typename EquivalentInterfaceI::Edge2::associated_patch;
+
+    //     constexpr Extremity extremity_1 = EquivalentInterfaceI::Edge1::extremity;
+    //     constexpr Extremity extremity_2 = EquivalentInterfaceI::Edge2::extremity;
+
+    //     using GridPerp1 = typename EquivalentInterfaceI::Edge1::perpendicular_grid;
+    //     using GridPerp2 = typename EquivalentInterfaceI::Edge2::perpendicular_grid;
+
+    //     using GridPar1 = typename EquivalentInterfaceI::Edge1::parallel_grid;
+    //     using GridPar2 = typename EquivalentInterfaceI::Edge2::parallel_grid;
+
+    //     using Grid1_1 = typename Patch_1::Grid1;
+    //     using Grid2_1 = typename Patch_1::Grid2;
+    //     using Grid1_2 = typename Patch_2::Grid1;
+    //     using Grid2_2 = typename Patch_2::Grid2;
+
+    //     using Deriv1_1 = ddc::Deriv<typename Patch_1::Dim1>;
+    //     using Deriv2_1 = ddc::Deriv<typename Patch_1::Dim2>;
+    //     using Deriv1_2 = ddc::Deriv<typename Patch_2::Dim1>;
+    //     using Deriv2_2 = ddc::Deriv<typename Patch_2::Dim2>;
+
+    //     // Get the fields of the left and right patch of the interface.
+    //     DerivFieldOnPatch_host<Patch_1> function_and_derivs_1
+    //             = functions_and_derivs.template get<Patch_1>();
+    //     DerivFieldOnPatch_host<Patch_2> function_and_derivs_2
+    //             = functions_and_derivs.template get<Patch_2>();
+
+    //     // Get the correct index ranges and indices for the slices.
+    //     IdxRange<GridPar1> idx_range_par_1(m_idx_ranges.template get<Patch_1>());
+    //     IdxRange<GridPar2> idx_range_par_2(m_idx_ranges.template get<Patch_2>());
+
+    //     IdxRange<GridPerp1> idx_range_perp_1(m_idx_ranges.template get<Patch_1>());
+    //     IdxRange<GridPerp2> idx_range_perp_2(m_idx_ranges.template get<Patch_2>());
+
+    //     // Type for the slice_previous_idx_value index.
+    //     using IdxPatchSlice = std::conditional_t<is_good_orientation, Patch_1, Patch_2>;
+    //     Idx<GridPar1> idx_slice_1;
+    //     Idx<GridPar2> idx_slice_2;
+    //     set_slice_indexes<
+    //             EquivalentInterfaceI,
+    //             IdxPatchSlice>(slice_previous_idx_value, idx_slice_1, idx_slice_2);
+
+    //     Idx<GridPerp1> idx_deriv_1 = get_idx_interface(idx_range_perp_1, extremity_1);
+    //     Idx<GridPerp2> idx_deriv_2 = get_idx_interface(idx_range_perp_2, extremity_2);
+
+    //     // The slice indices has to be a point at a corner, i.e. index range boundaries.
+    //     assert((idx_slice_1 == idx_range_par_1.front()) || (idx_slice_1 == idx_range_par_1.back()));
+    //     assert((idx_slice_2 == idx_range_par_2.front()) || (idx_slice_2 == idx_range_par_2.back()));
+
+    //     Idx<Deriv1_1, Grid1_1, Deriv2_1, Grid2_1>
+    //             idx_cross_deriv1(Idx<Deriv1_1>(1), Idx<Deriv2_1>(1), idx_slice_1, idx_deriv_1);
+    //     Idx<Deriv1_2, Grid1_2, Deriv2_2, Grid2_2>
+    //             idx_cross_deriv2(Idx<Deriv1_2>(1), Idx<Deriv2_2>(1), idx_slice_2, idx_deriv_2);
+
+    //     auto const [sign_1, sign_2]
+    //             = get_sign_cross_deriv<EquivalentInterfaceI, is_good_orientation>();
+
+    //     // Update the cross-derivative.
+    //     function_and_derivs_1(idx_cross_deriv1) = m_interface_derivatives->get_values()[I] * sign_1;
+    //     function_and_derivs_2(idx_cross_deriv2) = m_interface_derivatives->get_values()[I] * sign_2;
+    // }
 
 
     /**
