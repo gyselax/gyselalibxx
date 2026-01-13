@@ -592,7 +592,7 @@ C_{trunc} =
 \end{bmatrix},
 ```
 
-where the values of the vector $C_{trunc}$ correspond to coefficients in $`\{c^k\}_k`$ computed in `SingleInterfaceDerivatorCalculator` for $`N_{reduc}`$ cells next to the interface chosen on its two patches.
+where the values of the vector $`C_{trunc}`$ correspond to coefficients in $`\{c^k\}_k`$ computed in `SingleInterfaceDerivatorCalculator` for $`N_{reduc}`$ cells next to the interface chosen on its two patches.
 
 ### How to use the InterfaceDerivativeMatrix operator?
 
