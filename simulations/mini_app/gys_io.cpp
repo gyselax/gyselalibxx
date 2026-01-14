@@ -289,8 +289,7 @@ FluidMomentsData compute_fluid_moments(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(idxrange_vparmu));
     Quadrature<
             IdxRangeVparMu,
-            IdxRangeSpTor3DV2D,
-            Kokkos::DefaultExecutionSpace::memory_space> const
+            IdxRangeSpTor3DV2D> const
             integrate_vparmu(get_const_field(quadrature_coeffs_vparmu_alloc));
 
     // Initialise FluidMoments operator
