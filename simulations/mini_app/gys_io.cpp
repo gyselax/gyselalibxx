@@ -27,7 +27,6 @@
 #include "species_init.hpp"
 #include "transpose.hpp"
 #include "trapezoid_quadrature.hpp"
-// #include "maxwellianequilibrium.hpp"
 
 using std::cout;
 using std::endl;
