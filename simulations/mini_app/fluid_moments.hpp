@@ -39,8 +39,7 @@ public:
      */
     explicit FluidMoments(Quadrature<
                           IdxRangeVparMu,
-                          IdxRangeSpTor3DV2D,
-                          Kokkos::DefaultExecutionSpace::memory_space> const& integrate_vparmu);
+                          IdxRangeSpTor3DV2D> const& integrate_vparmu);
 
     ~FluidMoments() = default;
 
