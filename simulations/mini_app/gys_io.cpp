@@ -198,7 +198,7 @@ void write_fdistribu(
     PDI_expose_idx_range(mesh, "local_fdistribu");
     // Expose species extents
     std::array<std::size_t, 1> species_extents_arr
-            = {static_cast<std::size_t>(mesh.template extent<Species>().value())};
+            = {static_cast<std::size_t>(mesh.template extent<Species>())};
     PDI_expose("species_extents", species_extents_arr.data(), PDI_OUT);
     // Expose coordinate extents
     std::array<std::size_t, 1> tor1_extents_arr
