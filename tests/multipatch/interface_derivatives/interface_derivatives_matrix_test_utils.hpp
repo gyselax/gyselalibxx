@@ -127,7 +127,6 @@ void initialise_y_derivatives(
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
         CoordTransformType const& coord_transform = CoordTransformType())
 {
-    using DerivX = ddc::Deriv<typename Patch::Dim1>;
     using DerivY = ddc::Deriv<typename Patch::Dim2>;
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
@@ -187,7 +186,6 @@ void initialise_x_derivatives(
         CoordTransformType const& coord_transform = CoordTransformType())
 {
     using DerivX = ddc::Deriv<typename Patch::Dim1>;
-    using DerivY = ddc::Deriv<typename Patch::Dim2>;
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
 
@@ -710,8 +708,6 @@ void check_spline_representation_agreement(
 
     using DimX = typename Patch::Dim1;
     using DimY = typename Patch::Dim2;
-    using DerivX = typename ddc::Deriv<DimX>;
-    using DerivY = typename ddc::Deriv<DimY>;
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
 
