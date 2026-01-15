@@ -6,9 +6,7 @@
 #include "quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 
-FluidMoments::FluidMoments(Quadrature<
-                           IdxRangeVparMu,
-                           IdxRangeSpTor3DV2D> const& integrate_vparmu)
+FluidMoments::FluidMoments(Quadrature<IdxRangeVparMu, IdxRangeSpTor3DV2D> const& integrate_vparmu)
     : m_integrate_vparmu(integrate_vparmu)
 {
 }

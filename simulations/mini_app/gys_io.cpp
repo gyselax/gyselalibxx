@@ -288,10 +288,8 @@ FluidMomentsData compute_fluid_moments(
     // Initialise quadrature coefficients for integration over vpar and mu
     DFieldMem<IdxRangeVparMu> quadrature_coeffs_vparmu_alloc(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(idxrange_vparmu));
-    Quadrature<
-            IdxRangeVparMu,
-            IdxRangeSpTor3DV2D> const
-            integrate_vparmu(get_const_field(quadrature_coeffs_vparmu_alloc));
+    Quadrature<IdxRangeVparMu, IdxRangeSpTor3DV2D> const integrate_vparmu(
+            get_const_field(quadrature_coeffs_vparmu_alloc));
 
     // Initialise FluidMoments operator
     FluidMoments fluid_moments_op(integrate_vparmu);
@@ -450,7 +448,8 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     // Compute fluid moments (density, mean velocity, temperature)
     //---------------------------------------------------------
-    FluidMomentsData fluid_moments = compute_fluid_moments(local_mesh, get_const_field(allfdistribu));
+    FluidMomentsData fluid_moments
+            = compute_fluid_moments(local_mesh, get_const_field(allfdistribu));
     time_points[3] = steady_clock::now();
     timing_names[2] = "fluid_moments";
     //---------------------------------------------------------

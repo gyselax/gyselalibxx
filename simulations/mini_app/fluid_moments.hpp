@@ -14,9 +14,7 @@
 class FluidMoments
 {
 private:
-    Quadrature<
-            IdxRangeVparMu,
-            IdxRangeSpTor3DV2D> const& m_integrate_vparmu;
+    Quadrature<IdxRangeVparMu, IdxRangeSpTor3DV2D> const& m_integrate_vparmu;
 
 public:
     struct MomentDensity
@@ -37,9 +35,7 @@ public:
      *
      * @param[in] integrate_vparmu A quadrature method which integrates over the velocity space (vpar, mu).
      */
-    explicit FluidMoments(Quadrature<
-                          IdxRangeVparMu,
-                          IdxRangeSpTor3DV2D> const& integrate_vparmu);
+    explicit FluidMoments(Quadrature<IdxRangeVparMu, IdxRangeSpTor3DV2D> const& integrate_vparmu);
 
     ~FluidMoments() = default;
 
