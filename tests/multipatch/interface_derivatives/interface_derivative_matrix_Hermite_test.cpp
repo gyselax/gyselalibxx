@@ -5,7 +5,6 @@
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
 
-#include <boost/type_index.hpp>
 #include <gtest/gtest.h>
 
 #include "3patches_2d_non_periodic_non_uniform.hpp"
