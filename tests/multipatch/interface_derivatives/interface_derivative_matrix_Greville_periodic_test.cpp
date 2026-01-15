@@ -156,9 +156,6 @@ struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
     static constexpr IdxStep<GridY<7>> y7_ncells = IdxStep<GridY<7>>(10);
 
     // global ------------------------------------
-    static constexpr Coord<Xg> xg_min = convert_dim<Xg, X<1>>(x1_min);
-    static constexpr Coord<Xg> xg_max = convert_dim<Xg, X<3>>(x3_max);
-
     static constexpr Coord<Yg> yg_min = convert_dim<Yg, Y<7>>(y7_min);
     static constexpr Coord<Yg> yg_max = convert_dim<Yg, Y<1>>(y1_max);
 
