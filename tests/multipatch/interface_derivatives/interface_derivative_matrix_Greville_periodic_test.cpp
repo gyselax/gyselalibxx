@@ -124,7 +124,7 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
 struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
 {
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
-    // We define only the patch of the first row or column as the patches are sharing data. 
+    // We define only the patch of the first row or column as the patches are sharing data.
     // patches 1 | 4 | 7  dim X ------------------
     static constexpr Coord<X<1>> x1_min = Coord<X<1>>(0.0);
     static constexpr Coord<X<1>> x1_max = Coord<X<1>>(1.0);
