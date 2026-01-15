@@ -242,7 +242,7 @@ struct InterfaceDerivativeMatrixHermiteTest : public ::testing::Test
 
     static constexpr Coord<Y<1>> y1_min = Coord<Y<1>>(0.0);
     static constexpr Coord<Y<1>> y1_max = Coord<Y<1>>(1.0);
-    static constexpr IdxStep<GridY<1>> y1_ncells = IdxStep<GridY<1>>(5);
+    static constexpr IdxStep<GridY<1>> y_ncells = IdxStep<GridY<1>>(5);
 
     // patches 2 ---------------------------------
     static constexpr Coord<X<2>> x2_min = Coord<X<2>>(1.0);
@@ -251,13 +251,11 @@ struct InterfaceDerivativeMatrixHermiteTest : public ::testing::Test
 
     static constexpr Coord<Y<2>> y2_min = Coord<Y<2>>(0.0);
     static constexpr Coord<Y<2>> y2_max = Coord<Y<2>>(1.0);
-    static constexpr IdxStep<GridY<2>> y2_ncells = IdxStep<GridY<2>>(5);
 
 // patches 3 ---------------------------------
 #if defined(CHANGE_BOUND3)
     static constexpr Coord<X<3>> x3_min = Coord<X<3>>(0.0);
     static constexpr Coord<X<3>> x3_max = Coord<X<3>>(1.0);
-    static constexpr IdxStep<GridX<3>> x3_ncells = IdxStep<GridX<3>>(5);
 
     static constexpr Coord<Y<3>> y3_min = Coord<Y<3>>(2.0);
     static constexpr Coord<Y<3>> y3_max = Coord<Y<3>>(3.0);
@@ -269,18 +267,14 @@ struct InterfaceDerivativeMatrixHermiteTest : public ::testing::Test
 
     static constexpr Coord<Y<3>> y3_min = Coord<Y<3>>(0.0);
     static constexpr Coord<Y<3>> y3_max = Coord<Y<3>>(1.0);
-    static constexpr IdxStep<GridY<3>> y3_ncells = IdxStep<GridY<3>>(5);
 #endif
 
     // global ------------------------------------
     static constexpr Coord<Xg> xg_min = Coord<Xg> {double(x1_min)};
     static constexpr Coord<Xg> xg_max = Coord<Xg> {double(x3_max)};
-    static constexpr IdxStep<GridXg> xg_ncells
-            = IdxStep<GridXg>(x1_ncells.value() + x2_ncells.value() + x3_ncells.value());
 
     static constexpr Coord<Yg> yg_min = Coord<Yg> {double(y1_min)};
     static constexpr Coord<Yg> yg_max = Coord<Yg> {double(y1_max)};
-    static constexpr IdxStep<GridYg> yg_ncells = IdxStep<GridYg>(y1_ncells.value());
 
     // coordinate transformation -----------------
     // --- for Patch1
@@ -404,7 +398,7 @@ public:
 #endif
 
         std::vector<Coord<Y<1>>> break_points_y
-                = build_random_non_uniform_break_points(y1_min, y1_max, y1_ncells);
+                = build_random_non_uniform_break_points(y1_min, y1_max, y_ncells);
 
 #if defined(REVERSE_PATCH1)
         std::vector<Coord<Y<1>>> break_points_y1;

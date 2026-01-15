@@ -124,94 +124,43 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
 struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
 {
     // DEFINE BOUNDARIES OF THE DOMAINS ----------------------------------------------------------
+    // We define only the patch of the first row or column as the patches are sharing data. 
     // patches 1 | 4 | 7  dim X ------------------
     static constexpr Coord<X<1>> x1_min = Coord<X<1>>(0.0);
     static constexpr Coord<X<1>> x1_max = Coord<X<1>>(1.0);
     static constexpr IdxStep<GridX<1>> x1_ncells = IdxStep<GridX<1>>(10);
-
-    static constexpr Coord<X<4>> x4_min = convert_dim<X<4>, X<1>>(x1_min);
-    static constexpr Coord<X<4>> x4_max = convert_dim<X<4>, X<1>>(x1_max);
-    static constexpr IdxStep<GridX<4>> x4_ncells = IdxStep<GridX<4>>(10);
-
-    static constexpr Coord<X<7>> x7_min = convert_dim<X<7>, X<1>>(x1_min);
-    static constexpr Coord<X<7>> x7_max = convert_dim<X<7>, X<1>>(x1_max);
-    static constexpr IdxStep<GridX<7>> x7_ncells = IdxStep<GridX<7>>(10);
 
     // patches 2 | 5 | 8  dim X ------------------
     static constexpr Coord<X<2>> x2_min = Coord<X<2>>(1.0);
     static constexpr Coord<X<2>> x2_max = Coord<X<2>>(2.0);
     static constexpr IdxStep<GridX<2>> x2_ncells = IdxStep<GridX<2>>(10);
 
-    static constexpr Coord<X<5>> x5_min = convert_dim<X<5>, X<2>>(x2_min);
-    static constexpr Coord<X<5>> x5_max = convert_dim<X<5>, X<2>>(x2_max);
-    static constexpr IdxStep<GridX<5>> x5_ncells = IdxStep<GridX<5>>(10);
-
-    static constexpr Coord<X<8>> x8_min = convert_dim<X<8>, X<2>>(x2_min);
-    static constexpr Coord<X<8>> x8_max = convert_dim<X<8>, X<2>>(x2_max);
-    static constexpr IdxStep<GridX<8>> x8_ncells = IdxStep<GridX<8>>(10);
-
     // patches 3 | 6 | 9  dim X ------------------
     static constexpr Coord<X<3>> x3_min = Coord<X<3>>(2.0);
     static constexpr Coord<X<3>> x3_max = Coord<X<3>>(3.0);
     static constexpr IdxStep<GridX<3>> x3_ncells = IdxStep<GridX<3>>(10);
-
-    static constexpr Coord<X<6>> x6_min = convert_dim<X<6>, X<3>>(x3_min);
-    static constexpr Coord<X<6>> x6_max = convert_dim<X<6>, X<3>>(x3_max);
-    static constexpr IdxStep<GridX<6>> x6_ncells = IdxStep<GridX<6>>(10);
-
-    static constexpr Coord<X<9>> x9_min = convert_dim<X<9>, X<3>>(x3_min);
-    static constexpr Coord<X<9>> x9_max = convert_dim<X<9>, X<3>>(x3_max);
-    static constexpr IdxStep<GridX<9>> x9_ncells = IdxStep<GridX<9>>(10);
 
     // patches 1 | 2 | 3  dim Y --------------------
     static constexpr Coord<Y<1>> y1_min = Coord<Y<1>>(2.0);
     static constexpr Coord<Y<1>> y1_max = Coord<Y<1>>(3.0);
     static constexpr IdxStep<GridY<1>> y1_ncells = IdxStep<GridY<1>>(10);
 
-    static constexpr Coord<Y<2>> y2_min = convert_dim<Y<2>, Y<1>>(y1_min);
-    static constexpr Coord<Y<2>> y2_max = convert_dim<Y<2>, Y<1>>(y1_max);
-    static constexpr IdxStep<GridY<2>> y2_ncells = IdxStep<GridY<2>>(10);
-
-    static constexpr Coord<Y<3>> y3_min = convert_dim<Y<3>, Y<1>>(y1_min);
-    static constexpr Coord<Y<3>> y3_max = convert_dim<Y<3>, Y<1>>(y1_max);
-    static constexpr IdxStep<GridY<3>> y3_ncells = IdxStep<GridY<3>>(10);
-
     // patches 4 | 5 | 6  dim Y --------------------
     static constexpr Coord<Y<4>> y4_min = Coord<Y<4>>(1.0);
     static constexpr Coord<Y<4>> y4_max = Coord<Y<4>>(2.0);
     static constexpr IdxStep<GridY<4>> y4_ncells = IdxStep<GridY<4>>(10);
-
-    static constexpr Coord<Y<5>> y5_min = convert_dim<Y<5>, Y<4>>(y4_min);
-    static constexpr Coord<Y<5>> y5_max = convert_dim<Y<5>, Y<4>>(y4_max);
-    static constexpr IdxStep<GridY<5>> y5_ncells = IdxStep<GridY<5>>(10);
-
-    static constexpr Coord<Y<6>> y6_min = convert_dim<Y<6>, Y<4>>(y4_min);
-    static constexpr Coord<Y<6>> y6_max = convert_dim<Y<6>, Y<4>>(y4_max);
-    static constexpr IdxStep<GridY<6>> y6_ncells = IdxStep<GridY<6>>(10);
 
     // patches 7 | 8 | 9  dim Y --------------------
     static constexpr Coord<Y<7>> y7_min = Coord<Y<7>>(0.0);
     static constexpr Coord<Y<7>> y7_max = Coord<Y<7>>(1.0);
     static constexpr IdxStep<GridY<7>> y7_ncells = IdxStep<GridY<7>>(10);
 
-    static constexpr Coord<Y<8>> y8_min = convert_dim<Y<8>, Y<7>>(y7_min);
-    static constexpr Coord<Y<8>> y8_max = convert_dim<Y<8>, Y<7>>(y7_max);
-    static constexpr IdxStep<GridY<8>> y8_ncells = IdxStep<GridY<8>>(10);
-
-    static constexpr Coord<Y<9>> y9_min = convert_dim<Y<9>, Y<7>>(y7_min);
-    static constexpr Coord<Y<9>> y9_max = convert_dim<Y<9>, Y<7>>(y7_max);
-    static constexpr IdxStep<GridY<9>> y9_ncells = IdxStep<GridY<9>>(10);
-
     // global ------------------------------------
     static constexpr Coord<Xg> xg_min = convert_dim<Xg, X<1>>(x1_min);
     static constexpr Coord<Xg> xg_max = convert_dim<Xg, X<3>>(x3_max);
-    static constexpr IdxStep<GridXg> xg_ncells
-            = IdxStep<GridXg>(x1_ncells.value() + x2_ncells.value() + x3_ncells.value());
 
     static constexpr Coord<Yg> yg_min = convert_dim<Yg, Y<7>>(y7_min);
     static constexpr Coord<Yg> yg_max = convert_dim<Yg, Y<1>>(y1_max);
-    static constexpr IdxStep<GridYg> yg_ncells
-            = IdxStep<GridYg>(y1_ncells.value() + y4_ncells.value() + y7_ncells.value());
 
     static constexpr ddc::BoundCond BcH = ddc::BoundCond::HERMITE;
     static constexpr ddc::BoundCond BcG = ddc::BoundCond::GREVILLE;
@@ -511,6 +460,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             idx_range_y6.take_first(IdxStep<GridY<6>>(10)),
             idx_range_y9.take_last(IdxStep<GridY<9>>(10)));
 
+    // TODO: WAITING FOR THE MERGE OF PR 499.
     // constexpr std::size_t nb_chosen_cells = 9;
 
     // // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
