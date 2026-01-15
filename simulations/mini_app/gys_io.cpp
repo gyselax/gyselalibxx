@@ -187,7 +187,8 @@ void init_distribution_fun(
 
 void write_fdistribu(
         int rank,
-        IdxRangeSpTor3DV2D const& mesh,
+        IdxRangeSpTor3DV2D const& local_mesh,
+        IdxRangeSpTor3DV2D const& global_mesh,
         host_t<DFieldMemSpGrid> const& allfdistribu_host)
 {
     if (rank == 0) {
@@ -195,33 +196,33 @@ void write_fdistribu(
     }
 
     // Expose index range for parallel I/O
-    PDI_expose_idx_range(mesh, "local_fdistribu");
+    PDI_expose_idx_range(local_mesh, "local_fdistribu");
     // Expose species extents
     std::array<std::size_t, 1> species_extents_arr
-            = {static_cast<std::size_t>(mesh.template extent<Species>())};
+            = {static_cast<std::size_t>(global_mesh.template extent<Species>())};
     PDI_expose("species_extents", species_extents_arr.data(), PDI_OUT);
     // Expose coordinate extents
     std::array<std::size_t, 1> tor1_extents_arr
-            = {static_cast<std::size_t>(mesh.template extent<GridTor1>().value())};
+            = {static_cast<std::size_t>(global_mesh.template extent<GridTor1>().value())};
     std::array<std::size_t, 1> tor2_extents_arr
-            = {static_cast<std::size_t>(mesh.template extent<GridTor2>().value())};
+            = {static_cast<std::size_t>(global_mesh.template extent<GridTor2>().value())};
     std::array<std::size_t, 1> tor3_extents_arr
-            = {static_cast<std::size_t>(mesh.template extent<GridTor3>().value())};
+            = {static_cast<std::size_t>(global_mesh.template extent<GridTor3>().value())};
     std::array<std::size_t, 1> vpar_extents_arr
-            = {static_cast<std::size_t>(mesh.template extent<GridVpar>().value())};
+            = {static_cast<std::size_t>(global_mesh.template extent<GridVpar>().value())};
     std::array<std::size_t, 1> mu_extents_arr
-            = {static_cast<std::size_t>(mesh.template extent<GridMu>().value())};
+            = {static_cast<std::size_t>(global_mesh.template extent<GridMu>().value())};
     PDI_expose("tor1_extents", tor1_extents_arr.data(), PDI_OUT);
     PDI_expose("tor2_extents", tor2_extents_arr.data(), PDI_OUT);
     PDI_expose("tor3_extents", tor3_extents_arr.data(), PDI_OUT);
     PDI_expose("vpar_extents", vpar_extents_arr.data(), PDI_OUT);
     PDI_expose("mu_extents", mu_extents_arr.data(), PDI_OUT);
     // Expose coordinates to PDI
-    expose_mesh_to_pdi("tor1", IdxRange<GridTor1>(mesh));
-    expose_mesh_to_pdi("tor2", IdxRange<GridTor2>(mesh));
-    expose_mesh_to_pdi("tor3", IdxRange<GridTor3>(mesh));
-    expose_mesh_to_pdi("vpar", IdxRange<GridVpar>(mesh));
-    expose_mesh_to_pdi("mu", IdxRange<GridMu>(mesh));
+    expose_mesh_to_pdi("tor1", IdxRange<GridTor1>(global_mesh));
+    expose_mesh_to_pdi("tor2", IdxRange<GridTor2>(global_mesh));
+    expose_mesh_to_pdi("tor3", IdxRange<GridTor3>(global_mesh));
+    expose_mesh_to_pdi("vpar", IdxRange<GridVpar>(global_mesh));
+    expose_mesh_to_pdi("mu", IdxRange<GridMu>(global_mesh));
     // Expose distribution function to PDI and trigger write event
     ddc::PdiEvent("write_fdistribu").with("fdistribu_sptor3Dv2D", allfdistribu_host);
 
@@ -293,7 +294,7 @@ FluidMomentsData compute_fluid_moments(
             integrate_vparmu(get_const_field(quadrature_coeffs_vparmu_alloc));
 
     // Initialise FluidMoments operator
-    ::FluidMoments fluid_moments_op(integrate_vparmu);
+    FluidMoments fluid_moments_op(integrate_vparmu);
 
     // Allocate memory for fluid moments
     IdxRangeSpTor3D const idxrange_sptor3d(mesh);
@@ -385,6 +386,7 @@ int main(int argc, char** argv)
     std::vector<std::string> timing_names(6);
 
     print_banner(rank);
+    cout << "rank: " << rank << endl;
     //---------------------------------------------------------
     // Read and initialise the configuration
     //---------------------------------------------------------
@@ -394,17 +396,12 @@ int main(int argc, char** argv)
     ConfigHandles configs = parse_config_files(argc, argv);
     PDI_init(configs.conf_pdi);
     //---------------------------------------------------------
-    // Initialisation of the mesh (sp, space, phase-space)
+    // Initialisation of the global and local mesh (sp, space, phase-space)
     //---------------------------------------------------------
-    IdxRangeSpTor3DV2D const mesh = initialise_mesh(rank, configs.conf_gyselax);
-    //---------------------------------------------------------
-    // Initialisation of the distribution function
-    //---------------------------------------------------------
-    time_points[0] = steady_clock::now();
-    DFieldMemSpGrid allfdistribu(mesh);
-    init_distribution_fun(get_field(allfdistribu), mesh, configs.conf_gyselax);
-    time_points[1] = steady_clock::now();
-    timing_names[0] = "initialisation";
+    IdxRangeSpTor3DV2D const global_mesh = initialise_mesh(rank, configs.conf_gyselax);
+    MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(global_mesh, MPI_COMM_WORLD);
+    IdxRangeSpTor3DV2D local_mesh = transpose.get_local_idx_range<Tor3DSplit>();
+    IdxRangeSpV2DTor3D idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
     //---------------------------------------------------------
     // Read application version from YAML config
     //---------------------------------------------------------
@@ -415,34 +412,6 @@ int main(int argc, char** argv)
 
     if (version == "mpi_transpose") {
         cout << "Performing MPI transpose" << endl;
-        MPITransposeAllToAll<Tor3DSplit, V2DSplit> transpose(mesh, MPI_COMM_WORLD);
-        // ------------------------------------------------------------------------------
-
-        // Get local index ranges for each layout (use exact types returned, don't convert)
-        IdxRangeSpTor3DV2D idxrange_tor3D_split = transpose.get_local_idx_range<Tor3DSplit>();
-        IdxRangeSpV2DTor3D idxrange_v2D_split = transpose.get_local_idx_range<V2DSplit>();
-
-        // Create fields in both layouts following the Gysela-X pattern
-        // Field on Tor3DSplit layout (matches allfdistribu's layout)
-        DFieldMem<IdxRangeSpTor3DV2D> allfdistribu_tor3D_split_alloc(idxrange_tor3D_split);
-        DField<IdxRangeSpTor3DV2D> allfdistribu_tor3D_split
-                = get_field(allfdistribu_tor3D_split_alloc);
-
-        // Temporary field on V2DSplit layout
-        DFieldMem<IdxRangeSpV2DTor3D> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
-        DField<IdxRangeSpV2DTor3D> allfdistribu_v2D_split = get_field(allfdistribu_v2D_split_alloc);
-
-        // Copy initial data to Tor3DSplit layout field
-        // Extract only the local portion of allfdistribu that matches the local MPI-distributed index range
-        ddc::parallel_deepcopy(allfdistribu_tor3D_split, allfdistribu[idxrange_tor3D_split]);
-
-        // Execute the transpose: from Tor3DSplit to V2DSplit
-        transpose(
-                Kokkos::DefaultExecutionSpace(), // execution space
-                allfdistribu_v2D_split, // destination (V2DSplit layout)
-                get_const_field(allfdistribu_tor3D_split)); // source (Tor3DSplit layout)
-
-        // ------------------------------------------------------------------------------
     } else if (version == "in-situ-diagnostic") {
         cout << "Performing in-situ diagnostic" << endl;
         /*
@@ -451,25 +420,51 @@ int main(int argc, char** argv)
     } else {
         throw std::runtime_error("Invalid application version");
     }
+
+    //---------------------------------------------------------
+    // Initialisation of the distribution function
+    //---------------------------------------------------------
+    time_points[0] = steady_clock::now();
+    DFieldMemSpGrid allfdistribu(local_mesh);
+    init_distribution_fun(get_field(allfdistribu), local_mesh, configs.conf_gyselax);
+    time_points[1] = steady_clock::now();
+    timing_names[0] = "initialisation";
+
+    if (version == "mpi_transpose") {
+        // ------------------------------------------------------------------------------
+        // Execute the transpose: from Tor3DSplit to V2DSplit
+        // ------------------------------------------------------------------------------
+        DFieldMem<IdxRangeSpV2DTor3D> allfdistribu_v2D_split_alloc(idxrange_v2D_split);
+        DField<IdxRangeSpV2DTor3D> allfdistribu_v2D_split = get_field(allfdistribu_v2D_split_alloc);
+
+        // Execute the transpose: from Tor3DSplit to V2DSplit
+        transpose(
+                Kokkos::DefaultExecutionSpace(), // execution space
+                allfdistribu_v2D_split, // destination (V2DSplit layout)
+                get_const_field(allfdistribu)); // source (Tor3DSplit layout - already local)
+
+        // ------------------------------------------------------------------------------
+    }
     time_points[2] = steady_clock::now();
     timing_names[1] = version;
     //---------------------------------------------------------
     // Compute fluid moments (density, mean velocity, temperature)
     //---------------------------------------------------------
-    FluidMomentsData fluid_moments = compute_fluid_moments(mesh, get_const_field(allfdistribu));
+    FluidMomentsData fluid_moments = compute_fluid_moments(local_mesh, get_const_field(allfdistribu));
     time_points[3] = steady_clock::now();
     timing_names[2] = "fluid_moments";
     //---------------------------------------------------------
     // Write 5D distribution function and coordinates to file using PDI
     //---------------------------------------------------------
     // Create host version of distribution function for I/O (needed for PDI)
-    host_t<DFieldMemSpGrid> allfdistribu_host(mesh);
+    host_t<DFieldMemSpGrid> allfdistribu_host(local_mesh);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     time_points[4] = steady_clock::now();
     timing_names[3] = "gpu2cpu";
     //---------------------------------------------------------
-    write_fdistribu(rank, mesh, allfdistribu_host);
-    write_fluid_moments(rank, mesh, fluid_moments);
+    // For I/O, we need global mesh for coordinate extents, but local mesh for data
+    write_fdistribu(rank, local_mesh, global_mesh, allfdistribu_host);
+    write_fluid_moments(rank, local_mesh, fluid_moments);
     time_points[5] = steady_clock::now();
     timing_names[4] = "write";
     //---------------------------------------------------------
