@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 
 # SPDX-License-Identifier: MIT
+"""
+A tool to plot the distribution function and the electrostatic potential.
+"""
 
 import os
 
