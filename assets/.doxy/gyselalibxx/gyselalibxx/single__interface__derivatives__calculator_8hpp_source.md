@@ -205,9 +205,9 @@ public:
             DConstField<IdxRange1DPerp_2, Kokkos::HostSpace, Layout2> const& function_2) const
     {
         // The function needs to be continuous at the interface.
-        Idx1D_1 interface_idx_1 = get_extremity_idx(m_extremity_1, m_idx_range_perp_1);
-        Idx1D_2 interface_idx_2 = get_extremity_idx(m_extremity_2, m_idx_range_perp_2);
-        assert(abs(function_1(interface_idx_1) - function_2(interface_idx_2)) < 1e-13);
+        assert(abs(function_1(get_extremity_idx(m_extremity_1, m_idx_range_perp_1))
+                   - function_2(get_extremity_idx(m_extremity_2, m_idx_range_perp_2)))
+               < 1e-13);
 
         double coeff_values = ddc::host_transform_reduce(
                 m_idx_range_perp_1,

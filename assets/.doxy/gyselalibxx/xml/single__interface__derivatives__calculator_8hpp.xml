@@ -562,9 +562,9 @@
 <codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DConstField&lt;IdxRange1DPerp_2,<sp/>Kokkos::HostSpace,<sp/>Layout2&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>function_2)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="314"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>The<sp/>function<sp/>needs<sp/>to<sp/>be<sp/>continuous<sp/>at<sp/>the<sp/>interface.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx1D_1<sp/>interface_idx_1<sp/>=<sp/>get_extremity_idx(m_extremity_1,<sp/>m_idx_range_perp_1);</highlight></codeline>
-<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Idx1D_2<sp/>interface_idx_2<sp/>=<sp/>get_extremity_idx(m_extremity_2,<sp/>m_idx_range_perp_2);</highlight></codeline>
-<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(abs(function_1(interface_idx_1)<sp/>-<sp/>function_2(interface_idx_2))<sp/>&lt;<sp/>1e-13);</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>assert(abs(function_1(get_extremity_idx(m_extremity_1,<sp/>m_idx_range_perp_1))</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>-<sp/>function_2(get_extremity_idx(m_extremity_2,<sp/>m_idx_range_perp_2)))</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&lt;<sp/>1e-13);</highlight></codeline>
 <codeline lineno="319"><highlight class="normal"></highlight></codeline>
 <codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>coeff_values<sp/>=<sp/>ddc::host_transform_reduce(</highlight></codeline>
 <codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_idx_range_perp_1,</highlight></codeline>
