@@ -17,6 +17,16 @@ cmake_clang_tests:
     CXX: 'clang++'
     TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/common_toolchains/serial_debug_toolchain.cmake'
 
+cmake_clang_tests_Release:
+  extends: .cmake_tests
+  image: ghcr.io/gyselax/gyselalibxx_env
+  variables:
+    RELATIVE_RESTART_TOLERANCE: '0.0'
+    ABSOLUTE_RESTART_TOLERANCE: '0.0'
+    CC: 'clang'
+    CXX: 'clang++'
+    TOOLCHAIN: '${CI_PROJECT_DIR}/toolchains/common_toolchains/serial_release_toolchain.cmake'
+
 cmake_tests:
   extends: .cmake_tests
   image: ghcr.io/gyselax/gyselalibxx_env
