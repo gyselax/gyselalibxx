@@ -19,7 +19,6 @@ in a `DerivField`.
 - Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
 - Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
 
-
 ### Fixed
 
 - Fix derivative indexing of a `DerivField` object.
