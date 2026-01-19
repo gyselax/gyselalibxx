@@ -16,7 +16,9 @@ in a `DerivField`.
 - Allow `FFTPoissonSolver` to use variable precision.
 - Add `SingleInterfaceDerivativesCalculator` to compute an interface derivative of an equivalent global spline.
 - Add `SingleInterfaceDerivativeCalculatorCollection` to collect different `SingleInterfaceDerivativesCalculator`.
+- Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
 - Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
+
 
 ### Fixed
 
