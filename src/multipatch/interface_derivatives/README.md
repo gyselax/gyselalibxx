@@ -684,7 +684,7 @@ InterfaceDerivativeMatrix<Connectivity, GridY2,
 ```
 
 > **Note:** the list of patches must contain all the patches on the given direction.
-> Unnecessary patches are discarded, so in case of doubt, the full list of patches can be given. 
+> Unnecessary patches are discarded, so in case of doubt, the full list of patches can be given.
 > In this case, all the given collections have to be defined on the same patch set.
 
 With these matrices, we can compute all the interface *x*-derivatives using the directions
@@ -720,7 +720,7 @@ Once all the derivatives have been computed on for each patch using all the inte
 all the data to build local spline representations is available.
 
 :warning: **Warning:**
-The cross-derivatives are computed from the first derivatives. 
+The cross-derivatives are computed from the first derivatives.
 So, `.solve_deriv()` has to be called before `.solve_cross_deriv()`.
 It is recommended to apply `.solve_deriv()` on *every* group of patches before calling `.solve_cross_deriv()`.
 
