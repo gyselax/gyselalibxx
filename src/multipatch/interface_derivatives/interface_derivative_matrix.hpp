@@ -22,7 +22,7 @@ class InterfaceDerivativeMatrix;
 
 /**
   * @brief Class to compute the interface derivatives along a given direction 
-  * on all the interfaces with approximation formula.
+  * on all the interfaces with an approximation formula.
   * 
   * This operator is implemented for conforming equivalent global meshes. 
   * 

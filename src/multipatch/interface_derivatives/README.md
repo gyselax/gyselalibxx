@@ -118,7 +118,7 @@ The coefficients can be collected with the following functions:
 - `derivatives_calculator.get_coeff_deriv_patch_2()` returns the coefficient $`a^i_{N^L,N^R}`$;
 - `derivatives_calculator.get_function_coefficients(function_1, function_2)` returns the coefficient $`c^i_{N^L,N^R}`$
  (or $`c^i_{N^L_{reduc},N^R_{reduc}}`$ for approximation).
-- `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case. This class is also used for 2D cases where we need to compute the corner cross-derivatives. We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.
+- `derivatives_calculator.get_derivatives_coefficients(deriv_1, deriv_2)` is similar to `derivatives_calculator.get_function_coefficients(function_1, function_2)` but is recommended to compute the cross-derivatives in a 2D case.  We apply the same method as for first derivatives but with first derivatives instead of function values. The difference in this operator is the change of sign of the first derivatives on patch 2 if the orientations of the patches of interface desagree.
 
 If we want to apply the exact formula, we need to sum these coefficients,
 
@@ -477,7 +477,7 @@ and $`b^I_{1,1} =  -\frac{1}{2} \frac{\Delta x^R}{\Delta x^R +\Delta x^L}`$.
 
 ## Relation between the interface derivatives along one direction
 
-We consider now a set of patches connected via different interfaces.
+We now consider a set of patches connected via different interfaces.
 We want to compute the derivatives at all the interfaces.
 
 ### Exact and approximation formulae
@@ -519,17 +519,17 @@ with
 
 - $`a^I, b^I \text{ and } c^I`$ the coefficients computed with `SingleInterfaceDerivativeCalculator`
 for a given interface *I* (and given number of cells on the right and the left patches that we do not
-precise here to lighten the notation).
+specify here to simplify the notation).
 - $`\{\mathcal{X}_I\}_I`$ a set of parallel interfaces.
 - $`s'(\mathcal{X})`$ the derivative at the *I*th interface.
 
-We simply refer it as
+We simply refer to it as
 
 ```math
     S = (\mathbb{I}-M)^{-1}C.
 ```
 
-> **Remark:** This matrix is given in the case where the equivalent global spline passing through all
+> **Remark:** This matrix is given for the case where the equivalent global spline passing through all
 > the patches in the given direction use **Hermite boundary conditions**.
 >
 > If the equivalent global spline uses **additional interpolation points as closure condition**
@@ -600,7 +600,7 @@ where the values of the vector $`C_{trunc}`$ correspond to coefficients in $`\{c
 
 First, for each interface in the geometry, we instantiate a `SingleInterfaceDerivatorCalculator`
 (see [How to use the SingleInterfaceDerivatorCalculator operator?](#how-to-use-the-singleinterfacederivativescalculator-operator)).
-We store a constant reference of all the derivative calculator in a `SingleInterfaceDerivatorCalculatorCollection`.
+We store a constant reference to all the derivative calculators in a `SingleInterfaceDerivatorCalculatorCollection`.
 
 ```cpp
 SingleInterfaceDerivatorCalculator<Interface_1> derivative_calculator_1(...);
@@ -610,7 +610,7 @@ SingleInterfaceDerivatorCalculator<Interface_2> derivative_calculator_2(...);
 SingleInterfaceDerivatorCalculatorCollection derivative_calculators (derivative_calculator_1, derivative_calculator_2, ...);
 ```
 
-We can then instantiate `InterfaceDerivativeMatrix` with the tuple of derivative calculator.
+We can then instantiate `InterfaceDerivativeMatrix` with the tuple of derivative calculators.
 
 ```cpp
 InterfaceDerivativeMatrix<
@@ -633,7 +633,7 @@ matrix.solve_deriv(
 
 During the call to `.solve_deriv()`, it computes the right hand side approximated vector $`C_{trunc}`$.
 It solves the matrix system to get the solution vector *S*.
-It fill in the derivatives in th `functions_and_derivs` collection with the computed derivatives at the right place.
+It fills in the derivatives in the `functions_and_derivs` collection with the computed derivatives at the right place.
 
 :warning: The derivatives in `functions_and_derivs` are overwritten during the last step.
 
@@ -683,9 +683,9 @@ InterfaceDerivativeMatrix<Connectivity, GridY2,
 // ...
 ```
 
-> **Note:** the list of patches need to have all the patches on the given direction.
-> In case of doubt, the full list of patches can be given. In this case, all the given collections
-> have to be defined on the same patch set.
+> **Note:** the list of patches must contain all the patches on the given direction.
+> Unnecessary patches are discarded, so in case of doubt, the full list of patches can be given. 
+> In this case, all the given collections have to be defined on the same patch set.
 
 With these matrices, we can compute all the interface *x*-derivatives using the directions
 $`\vec{y_1}, \vec{y_2}, \text{ and } \vec{y_3}`$,
@@ -716,8 +716,8 @@ matrix_147.solve_cross_deriv(functions_and_derivs_147); // along y direction usi
 // ...
 ```
 
-Once the all derivatives computed on for every patch using all the interfaces,
-all have the data to build local spline representations.
+Once all the derivatives have been computed on for each patch using all the interfaces,
+all the data to build local spline representations is available.
 
 :warning: **Warning:**
 The cross-derivatives are computed from the first derivatives. So, the `.solve_deriv()` has to be applied before the `.solve_cross_deriv()`.
