@@ -19,7 +19,7 @@ the boundary cells.
 ## Contents
 
 - [Relation between derivatives on the boundaries of two connected patches](#relation-between-derivatives-on-the-boundaries-of-two-connected-patches): It documents the `SingleInterfaceDerivativesCalculator` operator.
-  - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator ): It documents how to use the operator in the code.
+  - [How to use the `SingleInterfaceDerivativesCalculator` operator?](#how-to-use-the-singleinterfacederivativescalculator-operator): It documents how to use the operator in the code.
   - [Formulae](#formulae): It details the formulae applies in the operator.
 - [Relation between the interface derivatives along one direction](#relation-between-the-interface-derivatives-along-one-direction): It documents the `InterfaceDerivativeMatrix` operator.
   - [How to use the `InterfaceDerivativeMatrix` operator?](#how-to-use-the-interfacederivativematrix-operator): It documents how to use the operator in the code.
