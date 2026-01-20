@@ -1,0 +1,17 @@
+[project]
+name = "gyselalibxx-dependencies"
+version = "0.0"
+requires-python = ">= 3.11"
+dependencies = [
+    "numpy",
+    "matplotlib",
+    "h5netcdf",
+    "h5py",
+    "imageio",
+    "ipython",
+    "pyyaml",
+    "xarray",
+]
+
+[tool.setuptools]
+py-modules = []
