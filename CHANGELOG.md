@@ -95,7 +95,6 @@ The operator averages the values of the advection field on the first ring to get
 - Allow a `DerivField` to be stored in a `MultipatchField`.
 - Add `DerivFieldOnPatch` and `IdxRangeSliceOnPatch` aliases for the `MultipatchField` in `types.hpp`.
 - Allow `min` and `max` from `math_tools.hpp` to be called from GPU.
-- Add a `periodic_strips_non_uniform_2d_9patches` geometry.
 
 ### Fixed
 
