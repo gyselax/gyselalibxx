@@ -232,8 +232,7 @@ constexpr bool type_seq_has_unique_elements_v
 /**
  * @brief Determine if the permutation parity of a type sequence.
  * @tparam TypeSeqType The type sequence whose permutation parity is calculated.
- * @tparam OrderedTypeSeq The final order of the indices.whose permutation parity is calculated.
- * @tparam OrderedTypeSeq The final order of the indices.
+ * @tparam OrderedTypeSeq The final order of the indices whose permutation parity is calculated.
  */
 template <class TypeSeqType, class OrderedTypeSeq>
 constexpr int type_seq_permutation_parity_v
