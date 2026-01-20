@@ -64,6 +64,27 @@ cmake_tests_Release_GPU:
   before_script: |
     . ${CI_PROJECT_DIR}/toolchains/persee/v100/environment.sh
 
+iwyu:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+      when: manual
+      needs: [ setup_env_mr ]
+  image: ghcr.io/gyselax/gyselalibxx_env
+  stage: test
+  timeout: 2 hours
+  variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+  script: |
+    CLANG_VERSION=$(clang --version | grep -oP 'clang version \K[0-9]+')
+    git clone https://github.com/include-what-you-use/include-what-you-use.git --depth 1 --branch 0.22 iwyu
+    cd iwyu
+    cmake -DCMAKE_PREFIX_PATH=/usr/lib/llvm-${CLANG_VERSION}/lib/cmake/llvm -B build -S .
+    cmake --build build --parallel
+    export PATH=$PATH:$(pwd)/build/bin
+    cd ..
+    bin/run_iwyu toolchains/common_toolchains/serial_debug_toolchain.cmake  src/ tests simulations -j 2 --relevant_files changed_files.txt
+
+
 indentation:
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

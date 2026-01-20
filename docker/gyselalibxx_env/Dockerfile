@@ -26,6 +26,8 @@ RUN chmod +x /bin/bash_run \
  && apt-get install -y --no-install-recommends \
     build-essential \
     clang-18 \
+    libclang-18-dev \
+    llvm-dev \
     libomp-dev \
     clang-format-14 \
     doxygen \
@@ -119,6 +121,13 @@ RUN chmod +x /bin/bash_run \
  && cmake --install build \
  && cd .. \
  && rm -rf cppcheck \
+ && git clone -b 0.22 https://github.com/include-what-you-use/include-what-you-use.git \
+ && cd include-what-you-use \
+ && cmake -S . -DCMAKE_PREFIX_PATH=/usr/lib/llvm-18/ -DCMAKE_BUILD_TYPE=Release -B build \
+ && cmake --build build \
+ && cmake --install build \
+ && cd .. \
+ && rm -rf include-what-you-use \
  && apt-get purge -y \
     apt-transport-https \
     apt-utils \
