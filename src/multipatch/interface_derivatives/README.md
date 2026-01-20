@@ -720,8 +720,9 @@ Once all the derivatives have been computed on for each patch using all the inte
 all the data to build local spline representations is available.
 
 :warning: **Warning:**
-The cross-derivatives are computed from the first derivatives. So, the `.solve_deriv()` has to be applied before the `.solve_cross_deriv()`.
-It is recommended to applied `.solve_deriv()` on *every* group of patches before.
+The cross-derivatives are computed from the first derivatives. 
+So, `.solve_deriv()` has to be called before `.solve_cross_deriv()`.
+It is recommended to apply `.solve_deriv()` on *every* group of patches before calling `.solve_cross_deriv()`.
 
 ## References
 
