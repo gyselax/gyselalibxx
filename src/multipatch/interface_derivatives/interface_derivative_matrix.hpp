@@ -27,8 +27,17 @@ class InterfaceDerivativeMatrix;
   * This operator is implemented for conforming equivalent global meshes. 
   * 
   * When we call the operator .solve_deriv() or .solve_cross_deriv(), the operator loops
-  * over the interface to compute the interface derivatives and update the DerivField given 
-  * in input. 
+  * over the interface to compute the vector C_trunc to determine all the interface derivatives 
+  * and update the DerivField given in input. 
+  * 
+  * The vector C_trunc is given by the coefficients (see README),
+  * @f$ \{\sum_{k = - N_{reduc}}^{N_{reduc}} \omega_{k, N_{reduc}, N_{reduc}}^{i_I} f_{i_I+k} \}_I @f$
+  * 
+  * with 
+  *     * @f$ N_{reduc} @f$ the number of chosen cells for the approximation, 
+  *     * @f$ i_I @f$ the index of the grid at the Ith interface, 
+  *     * @f$ f_{i_I+k} @f$ the function values if we compute the first derivatives, or the first 
+  * derivatives if we compute the cross-derivatives. 
   * 
   * @tparam Connectivity A MultipatchConnectivity class describing all the patch connections.
   * @tparam Grid1D A given direction.
