@@ -145,8 +145,6 @@ private:
     DerivativesCalculatorCollection const& m_derivatives_calculators;
 
 public:
-    ~InterfaceDerivativeMatrix() {}
-
     /**
      * @brief Instantiate InterfaceDerivativeMatrix. 
      *  
