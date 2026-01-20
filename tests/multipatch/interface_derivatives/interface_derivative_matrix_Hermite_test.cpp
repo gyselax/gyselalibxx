@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 
-#include <typeinfo>
+// #include <typeinfo>
 
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines.hpp>
