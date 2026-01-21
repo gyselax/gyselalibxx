@@ -3,6 +3,7 @@
 
 #include <ddc/ddc.hpp>
 
+#include "coord_transformation_tools.hpp"
 #include "ddc_helper.hpp"
 #include "tensor.hpp"
 #include "type_seq_tools.hpp"
