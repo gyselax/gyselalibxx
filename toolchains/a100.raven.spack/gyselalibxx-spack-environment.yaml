@@ -32,7 +32,7 @@ spack:
     - py-sympy
     - py-xarray
   - architectures:
-    - arch=linux-rhel9-icelake
+    - arch=linux-sles15-icelake
   specs:
   - matrix:
     - [$packages]
