@@ -51,11 +51,6 @@ eval -- "$(
         py-pyyaml
 )"
 
-#Load cluster-specific modules
-module load intel/21.2.0
-module load impi/2021.2
-module load cuda/11.2
-
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
 

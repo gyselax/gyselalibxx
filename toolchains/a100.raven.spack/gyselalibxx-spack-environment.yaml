@@ -52,7 +52,7 @@ spack:
         write: group
       variants: ~fortran ~mpi
     cuda:
-      buildable: false  # remove this line or not? 
+      buildable: false
       externals:
       - spec: cuda@12.8.93
         prefix: /mpcdf/soft/SLE_15/packages/x86_64/cuda/12.8.1
@@ -62,30 +62,21 @@ spack:
       require: gcc@14.1.0
     gcc:
       externals:
-      - spec: gcc@14.1.0 languages:='c,c++,fortran'
+      - spec: gcc@14.1.0 
         prefix: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0
         extra_attributes:
-            compilers:
-              c: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/gcc
-              cxx: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/g++
-              fortran: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/gfortran
-      - spec: gcc@7.5.0 languages:='c,c++,fortran'  
-        prefix: /usr 
-        extra_attributes: 
-         compilers:   
-          c: /usr/bin/gcc    
-          cxx: /usr/bin/g++     
-          fortran: /usr/bin/gfortran
+          compilers:
+            c: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/gcc
+            cxx: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/g++
+            fortran: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/gfortran
 
     lapack:
       require: openblas
     mpi:
       require: openmpi
     openmpi:
-      buildable: false # remove this line or not?
+      buildable: false
       externals:
-      - spec: openmpi@5.0.9~cuda~java~memchecker~rocm~static~wrapper-rpath fabrics=psm2,ucx schedulers=none
-        prefix: /mpcdf/soft/SLE_15/packages/skylake/openmpi/gcc_14-14.1.0/5.0.9
       - spec: openmpi@5.0.9+cuda~java~memchecker~rocm~static~wrapper-rpath fabrics=psm2,ucx schedulers=none
         prefix: /mpcdf/soft/SLE_15/packages/skylake/openmpi_gpu/cuda_12.8-12.8.1-gcc_14-14.1.0/5.0.9
     py-dask:
