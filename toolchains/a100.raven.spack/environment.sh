@@ -1,5 +1,9 @@
 #!/bin/bash
 
+export ALL_CCFRWORK=$HOME
+export ALL_CCFRSCRATCH=/ptmp/$USER
+
+
 if [ "${BASH_SOURCE[0]}" -ef "$0" ]
 then
     echo "This script must be sourced not executed."
@@ -50,6 +54,8 @@ eval -- "$(
         py-xarray \
         py-pyyaml
 )"
+
+module load gcc/14
 
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
