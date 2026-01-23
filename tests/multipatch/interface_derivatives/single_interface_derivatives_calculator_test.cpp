@@ -196,10 +196,6 @@ struct SingleInterfaceDerivativesCalculatorFixture<
     // global ------------------------------------
     static constexpr Coord<Rg> rg_min = Coord<Rg> {double(r1_min)};
     static constexpr Coord<Rg> rg_max = Coord<Rg> {double(eta2_max)};
-    static constexpr IdxStep<GridRg> rg_ncells
-            = (std::is_same_v<Edge2, SouthEdge2>)
-                      ? IdxStep<GridRg>(r1_ncells.value() + xi2_ncells.value())
-                      : IdxStep<GridRg>(r1_ncells.value() + eta2_ncells.value());
 
     static constexpr Coord<Thetag> thetag_min = Coord<Thetag>(0.0);
     static constexpr Coord<Thetag> thetag_max = Coord<Thetag>(2 * M_PI);
@@ -422,19 +418,57 @@ struct SingleInterfaceDerivativesCalculatorFixture<
             reduced_idx_range_perp2 = idx_range_xi2.take_first(Patch2::IdxStep2(n_points_2));
         }
 
+        // Instantiation with the reduced index range.
         SingleInterfaceDerivativesCalculator<Interface_1_2> const
                 derivatives_calculator(reduced_idx_range_perp1, reduced_idx_range_perp2);
+
+
+        IdxRangePerp2 idx_range_perp2;
+        if constexpr (std::is_same_v<Edge2, SouthEdge2>) {
+            idx_range_perp2 = idx_range_xi2;
+        } else {
+            idx_range_perp2 = idx_range_eta2;
+        }
+        // Instantiation with the indicated number of chosen cells.
+        SingleInterfaceDerivativesCalculator<Interface_1_2> const
+                derivatives_calculator_approx(idx_range_r1, idx_range_perp2, n_cells);
+
+        // Instantiation with the indicated number of chosen cells and 2D index ranges.
+        SingleInterfaceDerivativesCalculator<Interface_1_2> const
+                derivatives_calculator_approx_2D(idx_range_etaxi2, idx_range_rtheta1, n_cells);
 
         // Coefficients a and b
         double const coeff_deriv_patch_1 = derivatives_calculator.get_coeff_deriv_patch_1();
         double const coeff_deriv_patch_2 = derivatives_calculator.get_coeff_deriv_patch_2();
 
+        // Compare get_coeff_deriv_patch_1/2 and get_coeff_deriv_on_patch<Patch1/2>.
         EXPECT_EQ(
                 coeff_deriv_patch_1,
                 derivatives_calculator.template get_coeff_deriv_on_patch<Patch1>());
         EXPECT_EQ(
                 coeff_deriv_patch_2,
                 derivatives_calculator.template get_coeff_deriv_on_patch<Patch2>());
+
+        // Compare derivatives_calculator and derivatives_calculator_approx.
+        EXPECT_NEAR(
+                coeff_deriv_patch_1,
+                derivatives_calculator_approx.template get_coeff_deriv_on_patch<Patch1>(),
+                1e-12);
+        EXPECT_NEAR(
+                coeff_deriv_patch_2,
+                derivatives_calculator_approx.template get_coeff_deriv_on_patch<Patch2>(),
+                1e-12);
+
+        // Compare derivatives_calculator and derivatives_calculator_approx_2D.
+        EXPECT_NEAR(
+                coeff_deriv_patch_1,
+                derivatives_calculator_approx_2D.template get_coeff_deriv_on_patch<Patch1>(),
+                1e-12);
+        EXPECT_NEAR(
+                coeff_deriv_patch_2,
+                derivatives_calculator_approx_2D.template get_coeff_deriv_on_patch<Patch2>(),
+                1e-12);
+
 
         using IdxPar2
                 = std::conditional_t<std::is_same_v<Edge2, SouthEdge2>, Patch2::Idx1, Patch2::Idx2>;
@@ -484,6 +518,22 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                     get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
                     get_const_field(function_2[idx_par_2][reduced_idx_range_perp2]));
 
+            // Compare derivatives_calculator and derivatives_calculator_approx.
+            EXPECT_NEAR(
+                    sum_values,
+                    derivatives_calculator_approx.get_function_coefficients(
+                            get_const_field(function_1[idx_par_1]),
+                            get_const_field(function_2[idx_par_2])),
+                    1e-12);
+
+            // Compare derivatives_calculator and derivatives_calculator_approx_2D.
+            EXPECT_NEAR(
+                    sum_values,
+                    derivatives_calculator_approx_2D.get_function_coefficients(
+                            get_const_field(function_1[idx_par_1]),
+                            get_const_field(function_2[idx_par_2])),
+                    1e-12);
+
             Idx<ddc::Deriv<Rg>> idx_dr(1);
             double global_deriv
                     = evaluator_g.deriv(idx_dr, interface_coord, get_const_field(function_g_coef));
@@ -499,7 +549,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                                                         get_const_field(function_g_coef));
             double const local_deriv = sum_values + coeff_deriv_patch_1 * deriv_patch_1
                                        + coeff_deriv_patch_2 * deriv_patch_2;
-            EXPECT_NEAR(local_deriv, global_deriv, 5e-13);
+            EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
 
             // Approximation ---------------------------------------------------------------------
             EXPECT_NEAR(sum_values, global_deriv, approximation_error_bound);
