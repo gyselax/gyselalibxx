@@ -14,6 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
 in a `DerivField`.
 - Allow `FFTPoissonSolver` to use variable precision.
+- Add `SingleInterfaceDerivativesCalculator` to compute an interface derivative of an equivalent global spline.
+- Add `SingleInterfaceDerivativeCalculatorCollection` to collect different `SingleInterfaceDerivativesCalculator`.
+- Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
 
 ### Fixed
 
@@ -27,6 +30,7 @@ in a `DerivField`.
 - Rename `geometry.hpp` files to `geometry_<geom_descriptor>.hpp` to reflect the geometry that they describe.
 - `DerivField` objects are initialised on GPU by default.
 - Update DDC to [v0.10.0](https://github.com/CExA-project/ddc/releases/tag/v0.10.0).
+- Change some Python class `scattered_coord` arguments to keyword-only.
 - Increase C++ version to 20.
 - Use concepts to describe coordinate transformation classes.
 
