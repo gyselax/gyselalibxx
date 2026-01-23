@@ -111,9 +111,8 @@ void initialise_all_functions(
      ...);
 }
 
-
-/// @brief Initialise the y-derivatives of a given DerivField from the global spline.
 template <
+        class GridDeriv,
         class Patch,
         class CoordTransformType,
         class SplineXYgEvaluator,
@@ -121,109 +120,44 @@ template <
         class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
         class Xg = typename BSplinesXg::continuous_dimension_type,
         class Yg = typename BSplinesYg::continuous_dimension_type>
-void initialise_y_derivatives(
+void initialise_derivatives(
+        Idx<GridDeriv> idx_deriv_pos,
         DerivFieldOnPatch_host<Patch> function_and_derivs,
         SplineXYgEvaluator const& evaluator_g,
         host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
-        CoordTransformType const& coord_transform = CoordTransformType())
+        CoordTransformType coord_transform)
 {
-    using DerivY = ddc::Deriv<typename Patch::Dim2>;
-    using GridX = typename Patch::Grid1;
-    using GridY = typename Patch::Grid2;
+    using DerivDim = typename GridDeriv::continuous_dimension_type;
+    static_assert(ddc::in_tags_v<DerivDim, ddc::detail::TypeSeq<Xg, Yg>>);
+    using DimAlongXg =
+            typename CoordTransformType::XTransform::CoordResult::continuous_dimension_type;
+    using DimAlongYg =
+            typename CoordTransformType::YTransform::CoordResult::continuous_dimension_type;
+    using DimAlongDeriv = std::conditional_t<std::is_same_v<DerivDim, Xg>, DimAlongXg, DimAlongYg>;
+    using GridAlongDeriv = std::conditional_t<
+            std::is_same_v<Patch::Grid1::continuous_dimension_t, DimAlongDeriv>,
+            typename Patch::Grid1,
+            typename Patch::Grid2>;
+    using GridPerpToDeriv = std::conditional_t<
+            std::is_same_v<Patch::Grid1, GridAlongDeriv>,
+            typename Patch::Grid2,
+            typename Patch::Grid1>;
 
-    IdxRange<GridX> idx_range_x(get_idx_range(function_and_derivs));
-    IdxRange<GridY> idx_range_y(get_idx_range(function_and_derivs));
+    Coord<DimAlongDeriv> deriv_coord = coord_transform_1(ddc::coordinate(idx_deriv_pos));
 
-    Idx<DerivY> idx_dy(Idx<DerivY>(1));
-    Idx<GridY> idx_ymin(idx_range_y.front());
-    Idx<GridY> idx_ymax(idx_range_y.back());
+    IdxRange<GridAlongDeriv> idx_range_derivs(get_idx_range(function_and_derivs));
+    IdxRange<GridPerpToDeriv> idx_range_perp(get_idx_range(function_and_derivs));
 
-    int const sign
-            = coord_transform.m_is_y_loc_well_oriented - !coord_transform.m_is_y_loc_well_oriented;
+    Idx<ddc::Deriv<DimAlongDeriv>> idx_deriv(1);
+    Idx<GridAlongDeriv> idx_deriv_pos_local
+            = (std::fabs(deriv_coord - ddc::coordinate(idx_range_derivs.front())) < 1e-14)
+                      ? idx_range_derivs.front()
+                      : idx_range_derivs.back();
 
-    ddc::host_for_each(idx_range_x, [&](Idx<GridX> const& idx_par) {
-        Idx<GridX, GridY> idx_min(idx_par, idx_ymin);
-        Idx<GridX, GridY> idx_max(idx_par, idx_ymax);
-        Coord<Xg, Yg> interface_coord_min(
-                coord_transform.get_global_coord(ddc::coordinate(idx_min)));
-        Coord<Xg, Yg> interface_coord_max(
-                coord_transform.get_global_coord(ddc::coordinate(idx_max)));
-
-        if (coord_transform.are_x_y_loc_x_y_glob) {
-            Idx<ddc::Deriv<Yg>> idx_deriv(1);
-            function_and_derivs(idx_dy, idx_ymin, idx_par)
-                    = sign
-                      * evaluator_g.deriv(idx_deriv, interface_coord_min, const_function_g_coef);
-            function_and_derivs(idx_dy, idx_ymax, idx_par)
-                    = sign
-                      * evaluator_g.deriv(idx_deriv, interface_coord_max, const_function_g_coef);
-        } else {
-            Idx<ddc::Deriv<Xg>> idx_deriv(1);
-            function_and_derivs(idx_dy, idx_ymin, idx_par)
-                    = sign
-                      * evaluator_g.deriv(idx_deriv, interface_coord_min, const_function_g_coef);
-            function_and_derivs(idx_dy, idx_ymax, idx_par)
-                    = sign
-                      * evaluator_g.deriv(idx_deriv, interface_coord_max, const_function_g_coef);
-        }
-    });
-}
-
-
-/// @brief Initialise the x-derivatives of a given DerivField from the global spline.
-template <
-        class Patch,
-        class CoordTransformType,
-        class SplineXYgEvaluator,
-        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
-        class Xg = typename BSplinesXg::continuous_dimension_type,
-        class Yg = typename BSplinesYg::continuous_dimension_type>
-void initialise_x_derivatives(
-        DerivFieldOnPatch_host<Patch> function_and_derivs,
-        SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
-        CoordTransformType const& coord_transform = CoordTransformType())
-{
-    using DerivX = ddc::Deriv<typename Patch::Dim1>;
-    using GridX = typename Patch::Grid1;
-    using GridY = typename Patch::Grid2;
-
-    IdxRange<GridX> idx_range_x(get_idx_range(function_and_derivs));
-    IdxRange<GridY> idx_range_y(get_idx_range(function_and_derivs));
-
-    Idx<DerivX> idx_dx(Idx<DerivX>(1));
-    Idx<GridX> idx_xmin(idx_range_x.front());
-    Idx<GridX> idx_xmax(idx_range_x.back());
-
-    int const sign
-            = coord_transform.m_is_x_loc_well_oriented - !coord_transform.m_is_x_loc_well_oriented;
-
-    ddc::host_for_each(idx_range_y, [&](Idx<GridY> const& idx_par) {
-        Idx<GridX, GridY> idx_min(idx_xmin, idx_par);
-        Idx<GridX, GridY> idx_max(idx_xmax, idx_par);
-        Coord<Xg, Yg> interface_coord_min(
-                coord_transform.get_global_coord(ddc::coordinate(idx_min)));
-        Coord<Xg, Yg> interface_coord_max(
-                coord_transform.get_global_coord(ddc::coordinate(idx_max)));
-
-        if (coord_transform.are_x_y_loc_x_y_glob) {
-            Idx<ddc::Deriv<Xg>> idx_deriv(1);
-            function_and_derivs(idx_dx, idx_xmin, idx_par)
-                    = sign
-                      * evaluator_g.deriv(idx_deriv, interface_coord_min, const_function_g_coef);
-            function_and_derivs(idx_dx, idx_xmax, idx_par)
-                    = sign
-                      * evaluator_g.deriv(idx_deriv, interface_coord_max, const_function_g_coef);
-        } else {
-            Idx<ddc::Deriv<Yg>> idx_deriv(1);
-            function_and_derivs(idx_dx, idx_xmin, idx_par)
-                    = sign
-                      * evaluator_g.deriv(idx_deriv, interface_coord_min, const_function_g_coef);
-            function_and_derivs(idx_dx, idx_xmax, idx_par)
-                    = sign
-                      * evaluator_g.deriv(idx_deriv, interface_coord_max, const_function_g_coef);
-        }
+    ddc::host_for_each(idx_range_perp, [&](Idx<GridPerpToDeriv> const& idx_par) {
+        function_and_derivs(idx_deriv, idx_deriv_pos_local, idx_par)
+                = coord_transform.jacobian(deriv_coord)
+                  * evaluator_g.deriv(idx_deriv, deriv_coord, const_function_g_coef);
     });
 }
 
