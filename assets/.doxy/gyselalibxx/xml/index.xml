@@ -2550,6 +2550,8 @@
     <member refid="classSingleInterfaceDerivativesCalculator_1a0d306c098cf3629f261c75b66b34d7b2" kind="variable"><name>m_extremity_2</name></member>
     <member refid="classSingleInterfaceDerivativesCalculator_1a2d8bbf78b34f506ebe74aafebeec6702" kind="function"><name>SingleInterfaceDerivativesCalculator</name></member>
     <member refid="classSingleInterfaceDerivativesCalculator_1aa628dec3b8a2d8488b14c9b346e31d1f" kind="function"><name>SingleInterfaceDerivativesCalculator</name></member>
+    <member refid="classSingleInterfaceDerivativesCalculator_1a22987b1309b065887566d883a8b3c834" kind="function"><name>SingleInterfaceDerivativesCalculator</name></member>
+    <member refid="classSingleInterfaceDerivativesCalculator_1a065032a37a9772743c329f85d6467f27" kind="function"><name>SingleInterfaceDerivativesCalculator</name></member>
     <member refid="classSingleInterfaceDerivativesCalculator_1a838eca0a617f303e1208542d34356983" kind="function"><name>get_coeff_deriv_patch_1</name></member>
     <member refid="classSingleInterfaceDerivativesCalculator_1abbd94c0ca89ccf58644866c230255c8e" kind="function"><name>get_coeff_deriv_patch_2</name></member>
     <member refid="classSingleInterfaceDerivativesCalculator_1a06fcd61d099d349e04cd5064f4f9fac4" kind="function"><name>get_coeff_deriv_on_patch</name></member>

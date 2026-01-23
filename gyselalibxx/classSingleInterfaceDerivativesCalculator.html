@@ -599,11 +599,19 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-12"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, ddc::BoundCond const &amp; Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const &amp; Bound2=ddc::BoundCond::HERMITE) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-14"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, ddc::BoundCond const &amp; Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const &amp; Bound2=ddc::BoundCond::HERMITE) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-22"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, ddc::BoundCond const &amp; Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const &amp; Bound2=ddc::BoundCond::HERMITE) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>._</td>
+<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-24"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, ddc::BoundCond const &amp; Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const &amp; Bound2=ddc::BoundCond::HERMITE) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>._</td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-34"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRange1DPerp_1 const &amp; idx_range_1d_1, IdxRange1DPerp_2 const &amp; idx_range_1d_2, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>. This constructor calculates an approximation of the formula._</td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-singleinterfacederivativescalculator-44"><strong>SingleInterfaceDerivativesCalculator</strong></a> (IdxRangeA const &amp; idx_range_a, IdxRangeB const &amp; idx_range_b, std::size_t const number_chosen_cells) <br><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>. This constructor calculates an approximation of the formula._</td>
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
@@ -653,7 +661,7 @@
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-singleinterfacederivativescalculator-12">function SingleInterfaceDerivativesCalculator [1/2]</h3>
+<h3 id="function-singleinterfacederivativescalculator-14">function SingleInterfaceDerivativesCalculator [1/4]</h3>
 <p><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
     IdxRange1DPerp_1 const &amp; idx_range_1d_1,
@@ -673,7 +681,7 @@
 </ul>
 <hr>
 
-<h3 id="function-singleinterfacederivativescalculator-22">function SingleInterfaceDerivativesCalculator [2/2]</h3>
+<h3 id="function-singleinterfacederivativescalculator-24">function SingleInterfaceDerivativesCalculator [2/4]</h3>
 <p><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>._</p>
 <pre><code class="language-C++">template&lt;class IdxRangeA, class IdxRangeB&gt;
 inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
@@ -690,6 +698,43 @@ inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculato
 <li><code>Bound1</code> The boundary condition type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. </li>
 <li><code>Bound2</code> The boundary condition type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. </li>
 </ul>
+<hr>
+
+<h3 id="function-singleinterfacederivativescalculator-34">function SingleInterfaceDerivativesCalculator [3/4]</h3>
+<p><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>. This constructor calculates an approximation of the formula._</p>
+<pre><code class="language-C++">inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
+    IdxRange1DPerp_1 const &amp; idx_range_1d_1,
+    IdxRange1DPerp_2 const &amp; idx_range_1d_2,
+    std::size_t const number_chosen_cells
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_range_1d_1</code> 1D index range perpendicular to the <a href="structInterface.html"><strong>Interface</strong></a>, on the patch 1. </li>
+<li><code>idx_range_1d_2</code> 1D index range perpendicular to the <a href="structInterface.html"><strong>Interface</strong></a>, on the patch 2. </li>
+<li><code>number_chosen_cells</code> The number of cells we choose for the computation of the interface derivatives. Same number for Patch1 and Patch2. </li>
+</ul>
+<p><strong>Warning:</strong></p>
+<p>If the mesh has additional interpolation points, please be sure to not take these points. </p>
+<hr>
+
+<h3 id="function-singleinterfacederivativescalculator-44">function SingleInterfaceDerivativesCalculator [4/4]</h3>
+<p><em>Instantiate</em> <a href="classSingleInterfaceDerivativesCalculator.html"><em><strong>SingleInterfaceDerivativesCalculator</strong></em></a> <em>. See_SingleInterfaceDerivativesCalculatorInstantiator </em>. This constructor calculates an approximation of the formula._</p>
+<pre><code class="language-C++">template&lt;class IdxRangeA, class IdxRangeB&gt;
+inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
+    IdxRangeA const &amp; idx_range_a,
+    IdxRangeB const &amp; idx_range_b,
+    std::size_t const number_chosen_cells
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_range_a</code> Index range on one patch. </li>
+<li><code>idx_range_b</code> Index range on the other patch. </li>
+<li><code>number_chosen_cells</code> The number of cells we choose for the computation of the interface derivatives. Same number for Patch1 and Patch2. </li>
+</ul>
+<p><strong>Warning:</strong></p>
+<p>If the mesh has additional interpolation points, please be sure to not take these points. </p>
 <hr>
 
 <h3 id="function-get_coeff_deriv_on_patch">function get_coeff_deriv_on_patch</h3>

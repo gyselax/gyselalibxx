@@ -17,6 +17,7 @@
 #include "ddc_aliases.hpp"
 #include "edge.hpp"
 #include "edge_transformation.hpp"
+#include "geometry_descriptors.hpp"
 #include "types.hpp"
 
 
@@ -173,6 +174,44 @@ public:
                 Bound1,
                 Bound2)
     {
+        static_assert(ddc::is_discrete_domain_v<IdxRangeA>);
+        static_assert(ddc::is_discrete_domain_v<IdxRangeB>);
+    }
+
+    SingleInterfaceDerivativesCalculator(
+            IdxRange1DPerp_1 const& idx_range_1d_1,
+            IdxRange1DPerp_2 const& idx_range_1d_2,
+            std::size_t const number_chosen_cells)
+        : SingleInterfaceDerivativesCalculator(
+                (m_extremity_1 == Extremity::FRONT)
+                        ? idx_range_1d_1.take_first(IdxStep<EdgePerpGrid1>(
+                                Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size())))
+                        : idx_range_1d_1.take_last(IdxStep<EdgePerpGrid1>(
+                                Kokkos::min(number_chosen_cells + 1, idx_range_1d_1.size()))),
+                (m_extremity_2 == Extremity::FRONT)
+                        ? idx_range_1d_2.take_first(IdxStep<EdgePerpGrid2>(
+                                Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size())))
+                        : idx_range_1d_2.take_last(IdxStep<EdgePerpGrid2>(
+                                Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size()))),
+                ddc::BoundCond::HERMITE,
+                ddc::BoundCond::HERMITE)
+    {
+    }
+
+    template <class IdxRangeA, class IdxRangeB>
+    SingleInterfaceDerivativesCalculator(
+            IdxRangeA const& idx_range_a,
+            IdxRangeB const& idx_range_b,
+            std::size_t const number_chosen_cells)
+        : SingleInterfaceDerivativesCalculator(
+                IdxRange1DPerp_1(
+                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
+                IdxRange1DPerp_2(
+                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
+                number_chosen_cells)
+    {
+        static_assert(ddc::is_discrete_domain_v<IdxRangeA>);
+        static_assert(ddc::is_discrete_domain_v<IdxRangeB>);
     }
 
     double get_coeff_deriv_patch_1() const

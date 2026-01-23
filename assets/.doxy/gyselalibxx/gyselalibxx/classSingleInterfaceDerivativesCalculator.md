@@ -59,8 +59,10 @@ _Compute the derivative of an equivalent global spline at the interface between 
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-12) (IdxRange1DPerp\_1 const & idx\_range\_1d\_1, IdxRange1DPerp\_2 const & idx\_range\_1d\_2, ddc::BoundCond const & Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const & Bound2=ddc::BoundCond::HERMITE) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _._ |
-|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-22) (IdxRangeA const & idx\_range\_a, IdxRangeB const & idx\_range\_b, ddc::BoundCond const & Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const & Bound2=ddc::BoundCond::HERMITE) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _._ |
+|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-14) (IdxRange1DPerp\_1 const & idx\_range\_1d\_1, IdxRange1DPerp\_2 const & idx\_range\_1d\_2, ddc::BoundCond const & Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const & Bound2=ddc::BoundCond::HERMITE) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _._ |
+|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-24) (IdxRangeA const & idx\_range\_a, IdxRangeB const & idx\_range\_b, ddc::BoundCond const & Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const & Bound2=ddc::BoundCond::HERMITE) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _._ |
+|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-34) (IdxRange1DPerp\_1 const & idx\_range\_1d\_1, IdxRange1DPerp\_2 const & idx\_range\_1d\_2, std::size\_t const number\_chosen\_cells) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _. This constructor calculates an approximation of the formula._ |
+|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-44) (IdxRangeA const & idx\_range\_a, IdxRangeB const & idx\_range\_b, std::size\_t const number\_chosen\_cells) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _. This constructor calculates an approximation of the formula._ |
 |  double | [**get\_coeff\_deriv\_on\_patch**](#function-get_coeff_deriv_on_patch) () const<br>_Get the coefficient (a) or (b) in front of the derivative on the given patch of the given_ [_**Interface**_](structInterface.md) _._ |
 |  double | [**get\_coeff\_deriv\_patch\_1**](#function-get_coeff_deriv_patch_1) () const<br>_Get the coefficient (a) in front of the derivative on the patch 1 of the given_ [_**Interface**_](structInterface.md) _._ |
 |  double | [**get\_coeff\_deriv\_patch\_2**](#function-get_coeff_deriv_patch_2) () const<br>_Get the coefficient (b) in front of the derivative on the patch 2 of the given_ [_**Interface**_](structInterface.md) _._ |
@@ -161,7 +163,7 @@ using SingleInterfaceDerivativesCalculator< InterfaceType >::associated_interfac
 
 
 
-### function SingleInterfaceDerivativesCalculator [1/2]
+### function SingleInterfaceDerivativesCalculator [1/4]
 
 _Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _._
 ```C++
@@ -201,7 +203,7 @@ If the interpolation points are uniform, it computes the coefficients with an ex
 
 
 
-### function SingleInterfaceDerivativesCalculator [2/2]
+### function SingleInterfaceDerivativesCalculator [2/4]
 
 _Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _._
 ```C++
@@ -225,6 +227,83 @@ inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculato
 * `idx_range_b` Index range on the other patch. 
 * `Bound1` The boundary condition type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. 
 * `Bound2` The boundary condition type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function SingleInterfaceDerivativesCalculator [3/4]
+
+_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _. This constructor calculates an approximation of the formula._
+```C++
+inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
+    IdxRange1DPerp_1 const & idx_range_1d_1,
+    IdxRange1DPerp_2 const & idx_range_1d_2,
+    std::size_t const number_chosen_cells
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `idx_range_1d_1` 1D index range perpendicular to the [**Interface**](structInterface.md), on the patch 1. 
+* `idx_range_1d_2` 1D index range perpendicular to the [**Interface**](structInterface.md), on the patch 2. 
+* `number_chosen_cells` The number of cells we choose for the computation of the interface derivatives. Same number for Patch1 and Patch2. 
+
+
+
+**Warning:**
+
+If the mesh has additional interpolation points, please be sure to not take these points. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function SingleInterfaceDerivativesCalculator [4/4]
+
+_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _. This constructor calculates an approximation of the formula._
+```C++
+template<class IdxRangeA, class IdxRangeB>
+inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
+    IdxRangeA const & idx_range_a,
+    IdxRangeB const & idx_range_b,
+    std::size_t const number_chosen_cells
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `idx_range_a` Index range on one patch. 
+* `idx_range_b` Index range on the other patch. 
+* `number_chosen_cells` The number of cells we choose for the computation of the interface derivatives. Same number for Patch1 and Patch2. 
+
+
+
+**Warning:**
+
+If the mesh has additional interpolation points, please be sure to not take these points. 
+
 
 
 

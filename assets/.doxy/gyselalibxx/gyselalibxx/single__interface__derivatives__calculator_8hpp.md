@@ -14,6 +14,7 @@
 * `#include "ddc_aliases.hpp"`
 * `#include "edge.hpp"`
 * `#include "edge_transformation.hpp"`
+* `#include "geometry_descriptors.hpp"`
 * `#include "types.hpp"`
 
 

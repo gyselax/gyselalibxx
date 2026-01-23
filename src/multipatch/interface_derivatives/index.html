@@ -639,6 +639,9 @@ we need to provide the index ranges with all the points,</p>
 Patch2::IdxRange1D idx_range_patch_2_reduced (idx_range_patch_2.take_last(N_R_reduc +1));
 SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1_reduced, idx_range_patch_2_reduced);
 </code></pre>
+<p>or we can directly call, for <span class="arithmatex">\(N_{reduc} = N^L = N^R\)</span>,</p>
+<pre><code class="language-cpp">SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2, N_reduc);
+</code></pre>
 <blockquote>
 <p><strong>Remark:</strong> For interpolation with interpolation points as closure condition, a special treatment has to be carried out on the boundary cells
 (see <a href="#additional-interpolation-point-not-on-a-break-point">Additional interpolation point not on a break point</a>).
@@ -966,7 +969,7 @@ Journal of Computational Physics 228(5), 1429–1446 (2009) <a class="footnote-
 <li id="fn:2">
 <p>Vidal, P., Bourne, E., Grandgirard, V., Mehrenberger, M., Sonnendrücker, E.,
 <em>Local cubic spline interpolation for Vlasov-type equations on a multi-patch geometry.</em>
-Journal of Scientific Computing, (2025) [SUBMITTED - NOT PUBLISHED] <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">↩</a></p>
+Journal of Scientific Computing, (2025) [ACCEPTED] <a class="footnote-backref" href="#fnref:2" title="Jump back to footnote 2 in the text">↩</a><a class="footnote-backref" href="#fnref2:2" title="Jump back to footnote 2 in the text">↩</a></p>
 </li>
 </ol>
 </div></div>

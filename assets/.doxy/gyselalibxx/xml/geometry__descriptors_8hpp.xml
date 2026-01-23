@@ -3,6 +3,7 @@
   <compounddef id="geometry__descriptors_8hpp" kind="file" language="C++">
     <compoundname>geometry_descriptors.hpp</compoundname>
     <includedby refid="edge_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/edge.hpp</includedby>
+    <includedby refid="single__interface__derivatives__calculator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp</includedby>
     <includedby refid="simpson__quadrature_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/simpson_quadrature.hpp</includedby>
     <invincdepgraph>
       <node id="4">
@@ -67,6 +68,8 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/geometry_descriptors.hpp</label>
         <link refid="geometry__descriptors_8hpp"/>
         <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
