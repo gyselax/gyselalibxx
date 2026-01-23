@@ -481,19 +481,6 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
     using TestFixture;
     std::tuple coord_transforms(coord_transform_1, coord_transform_2, coord_transform_3);
 
-    using DimAlongXg1 = CoordTransform1::XTransform::CoordResult::continuous_dimension_type;
-    using GridAlongXg1 = find_grid_t<DimAlongXg, AllGrids>;
-    using DimAlongYg1 = CoordTransform1::YTransform::CoordResult::continuous_dimension_type;
-    using GridAlongYg1 = find_grid_t<DimAlongYg, AllGrids>;
-    using DimAlongXg2 = CoordTransform1::XTransform::CoordResult::continuous_dimension_type;
-    using GridAlongXg2 = find_grid_t<DimAlongXg, AllGrids>;
-    using DimAlongYg2 = CoordTransform1::YTransform::CoordResult::continuous_dimension_type;
-    using GridAlongYg2 = find_grid_t<DimAlongYg, AllGrids>;
-    using DimAlongXg3 = CoordTransform1::XTransform::CoordResult::continuous_dimension_type;
-    using GridAlongXg3 = find_grid_t<DimAlongXg, AllGrids>;
-    using DimAlongYg3 = CoordTransform1::YTransform::CoordResult::continuous_dimension_type;
-    using GridAlongYg3 = find_grid_t<DimAlongYg, AllGrids>;
-
     // Instantiate the derivatives calculators ---------------------------------------------------
     // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
     SingleInterfaceDerivativesCalculator<Interface_1_2> const
