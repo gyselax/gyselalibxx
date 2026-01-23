@@ -196,10 +196,6 @@ struct SingleInterfaceDerivativesCalculatorFixture<
     // global ------------------------------------
     static constexpr Coord<Rg> rg_min = Coord<Rg> {double(r1_min)};
     static constexpr Coord<Rg> rg_max = Coord<Rg> {double(eta2_max)};
-    static constexpr IdxStep<GridRg> rg_ncells
-            = (std::is_same_v<Edge2, SouthEdge2>)
-                      ? IdxStep<GridRg>(r1_ncells.value() + xi2_ncells.value())
-                      : IdxStep<GridRg>(r1_ncells.value() + eta2_ncells.value());
 
     static constexpr Coord<Thetag> thetag_min = Coord<Thetag>(0.0);
     static constexpr Coord<Thetag> thetag_max = Coord<Thetag>(2 * M_PI);
