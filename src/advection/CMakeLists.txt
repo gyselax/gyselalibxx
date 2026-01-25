@@ -13,6 +13,7 @@ target_link_libraries("advection"
         gslx::speciesinfo
         gslx::timestepper
         gslx::utils
+        gslx::exact_splitting_solver
 )
 
 add_library("gslx::advection" ALIAS "advection")

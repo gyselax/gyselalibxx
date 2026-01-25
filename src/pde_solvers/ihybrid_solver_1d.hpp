@@ -5,9 +5,10 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "vector_field.hpp"
+#include "geometry.hpp"
 
 template <class IdxRangeHybrid, class IdxRangeFull, class MemorySpace, class LayoutSpace>
-class IHybridSolver;
+class IHybridSolver1d;
 
 /**
  * An abstract class from which a Poisson solver can inherit.
@@ -22,7 +23,7 @@ class IHybridSolver;
  *                      are saved.
  */
 template <class... ODims, class IdxRangeFull, class MemorySpace, class LayoutSpace>
-class IHybridSolver<IdxRange<ODims...>, IdxRangeFull, MemorySpace, LayoutSpace>
+class IHybridSolver1d<IdxRange<ODims...>, IdxRangeFull, MemorySpace, LayoutSpace>
 {
 protected:
     /// @brief The tags describing the real dimensions in the equation.
@@ -103,48 +104,52 @@ public:
      * @param[in] magnetic_field_z_mid The magnetic field in middle time step, the intermidiate value of the nonlinear solver.
      * @param[in] mean_velocity_x_mid The intermidiate value of the nonlinear solver, the average of ux during a time step.
      * @param[in] mean_velocity_y_mid The intermidiate value of the nonlinear solver, the average of uy during a time step.
-     * @param[out] rhs_1 the intermidiate value of the nonlinear solver, and the velocity frame shift in vx.
-     * @param[out] rhs_2 the intermidiate value of the nonlinear solver, and the velocity frame shift in vy.
-     * @param[in] rhs_3 the intermidiate value of the nonlinear solver.
-     * @param[in] rhs_4 the intermidiate value of the nonlinear solver.
-     * @param[in] mean_velocity_x The mean velocity in vx in the last time step.
-     * @param[in] mean_velocity_y The mean velocity in vy in the last time step.
-     * @param[in] mean_velocity_x_each The mean velocity in vx in the last time step for each species ions.
-     * @param[in] mean_velocity_x_each The mean velocity in vx in the last time step for each species ions.
-     * @param[in] rho_each The charge density in the last time step for each species ions.
-     * @param[in] gradx_magnetic The derivative along x of the magnetic field, the intermidiate value of the nonlinear solver.
-     * @param[in] grady_magnetic The derivative along y of the magnetic field, the intermidiate value of the nonlinear solver.
-     * @param[in] gradx_pressure The derivative along x of the pressure field, the intermidiate value of the nonlinear solver.
-     * @param[in] grady_pressure The derivative along y of the pressure field, the intermidiate value of the nonlinear solver.
-     * @param[in] rho The charge density for all species ions.
      * @param[in] dt The time step.
      *
      * @return A reference to the solution of sub-step pvb.
      */
-    virtual field_type operator()(field_type pressure_field,
-        field_type pressure_field_old,
-        field_type pressure_field_mid,
-        field_type pressure_field_previous,
-        field_type magnetic_field_z,
-        field_type magnetic_field_z_old,
-        field_type magnetic_field_z_mid,
+
+    
+    virtual field_type operator()(
+        field_type magnetic_field_y,
+        field_type magnetic_field_y_old,
+        field_type magnetic_field_y_mid, 
+        field_type magnetic_field_y_previous,
+        field_type magnetic_field_z, 
+        field_type magnetic_field_z_old, 
+        field_type magnetic_field_z_mid, 
         field_type magnetic_field_z_previous,
-        field_type mean_velocity_x_mid,
-        field_type mean_velocity_y_mid,
+        field_type rho,
+        field_type magnetic_field_x,
+        field_type gradx_magnetic_field_y_mid,
+        field_type gradx_magnetic_field_z_mid,
+        double dt) const = 0;
+
+
+    virtual field_type operator()(
+        field_type magnetic_field_y, field_type magnetic_field_y_old,
+        field_type magnetic_field_y_mid, field_type magnetic_field_y_previous,
+        field_type magnetic_field_z, field_type magnetic_field_z_old, 
+        field_type magnetic_field_z_mid, field_type magnetic_field_z_previous,
+        DFieldSpX u_old_x, DFieldSpX u_old_y, DFieldSpX u_old_z, 
+        field_type u_bar_x, field_type u_bar_y, field_type u_bar_z, 
+        field_type rho, DFieldSpX rho_each,
+        field_type magnetic_field_x,
+        field_type gradx_rho,
+        field_type gradx_magnetic_field_y_mid,
+        field_type gradx_magnetic_field_z_mid,
         field_type rhs_1,
         field_type rhs_2,
         field_type rhs_3,
-        field_type rhs_4,
-        field_type mean_velocity_x,
-        field_type mean_velocity_y,
-        DFieldSpXY mean_velocity_x_each,
-        DFieldSpXY mean_velocity_y_each,
-        DFieldSpXY rho_each,
-        field_type gradx_magnetic,
-        field_type grady_magnetic,
-        field_type gradx_pressure,
-        field_type grady_pressure,
-        field_type rho,
+        field_type rhs_5,
+        field_type rhs_6,
+        field_type Mxx, field_type Mxy, field_type Mxz,
+        field_type Myx, field_type Myy, field_type Myz,
+        field_type Mzx, field_type Mzy, field_type Mzz,
+        field_type weighted_u_x, field_type weighted_u_y, field_type weighted_u_z,
+        field_type weighted_p_para_x, field_type weighted_p_para_y, field_type weighted_p_para_z,
+        field_type qx, field_type qy, field_type qz,
+        field_type p_parallel_x, field_type p_parallel_y, field_type p_parallel_z,
+        double const electron_temperature,
         double dt) const = 0;
-
 };

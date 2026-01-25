@@ -10,7 +10,7 @@
 #include "vector_index_tools.hpp"
 
 /**
- * See @ref FFTPoissonSolverImplementation.
+ * See @ref 2DFFTHybridSolverImplementation.
  */
 template <
         class IdxRangeLaplacian,
