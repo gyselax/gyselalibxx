@@ -94,7 +94,7 @@ public:
      *
      * @return The equivalent coordinate.
      */
-    CoordResult operator()(CoordArg coord)
+    CoordResult operator()(CoordArg coord) const
     {
         return m_mapping_1(m_mapping_2(coord));
     }
