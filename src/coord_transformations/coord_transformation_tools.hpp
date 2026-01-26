@@ -20,9 +20,11 @@ concept Mapping = requires
     typename T::CoordArg;
     typename T::CoordResult;
 }
-&& requires(T const& t, typename T::CoordArg const& x)
+&&requires(T const& t, typename T::CoordArg const& x)
 {
-  { t(x) } -> std::same_as<typename T::CoordResult>;
+    {
+        t(x)
+        } -> std::same_as<typename T::CoordResult>;
 }
 
 template <typename T>
