@@ -597,7 +597,7 @@ public:
 
     KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(CoordJacobian const&amp; coord) const
     {
-        if constexpr (has_inv_jacobian_v&lt;Mapping, false&gt;) {
+        if constexpr (has_inv_jacobian_v&lt;Mapping&gt;) {
             return m_mapping.inv_jacobian_matrix(coord);
         } else {
             static_assert(has_jacobian_v&lt;Mapping&gt;);
@@ -615,7 +615,7 @@ public:
         static_assert(ddc::in_tags_v&lt;IndexTag1, ValidArgIndices&gt;);
         static_assert(ddc::in_tags_v&lt;IndexTag2, get_covariant_dims_t&lt;ValidResultIndices&gt;&gt;);
 
-        if constexpr (has_inv_jacobian_v&lt;Mapping, false&gt;) {
+        if constexpr (has_inv_jacobian_v&lt;Mapping&gt;) {
             return m_mapping.template inv_jacobian_component&lt;IndexTag1, IndexTag2&gt;(coord);
         } else {
             static_assert(has_jacobian_v&lt;Mapping&gt;);

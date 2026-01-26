@@ -18,29 +18,29 @@
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>circular_to_cartesian.hpp</label>
-        <link refid="circular__to__cartesian_8hpp_source"/>
         <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="20">
+        <label>circular_to_cartesian.hpp</label>
+        <link refid="circular__to__cartesian_8hpp_source"/>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="4">
@@ -54,45 +54,47 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
-      </node>
-      <node id="21">
-        <label>czarny_to_cartesian.hpp</label>
-        <link refid="czarny__to__cartesian_8hpp_source"/>
-        <childnode refid="20" relation="include">
-        </childnode>
-        <childnode refid="3" relation="include">
-        </childnode>
-        <childnode refid="4" relation="include">
-        </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="22">
-        <label>discrete_to_cartesian.hpp</label>
-        <link refid="discrete__to__cartesian_8hpp_source"/>
-        <childnode refid="23" relation="include">
+        <label>czarny_to_cartesian.hpp</label>
+        <link refid="czarny__to__cartesian_8hpp_source"/>
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
+        <label>discrete_to_cartesian.hpp</label>
+        <link refid="discrete__to__cartesian_8hpp_source"/>
         <childnode refid="24" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="16" relation="include">
+        <childnode refid="26" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -100,230 +102,233 @@
         <link refid="inv__jacobian__o__point_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="19" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="21" relation="include">
-        </childnode>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="23" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
+        <label>indexed_tensor.hpp</label>
+        <link refid="indexed__tensor_8hpp"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="27">
-        <label>indexed_tensor.hpp</label>
-        <link refid="indexed__tensor_8hpp"/>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
-      <node id="28">
+      <node id="29">
         <label>static_tensors.hpp</label>
         <link refid="static__tensors_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
       </node>
-      <node id="8">
+      <node id="9">
         <label>tensor.hpp</label>
         <link refid="tensor_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="12">
+      <node id="13">
         <label>tensor_common.hpp</label>
         <link refid="tensor__common_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="13" relation="include">
-        </childnode>
-        <childnode refid="15" relation="include">
-        </childnode>
-      </node>
-      <node id="13">
-        <label>tensor_index_tools.hpp</label>
-        <link refid="tensor__index__tools_8hpp_source"/>
         <childnode refid="14" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="14">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="30">
         <label>vector_field.hpp</label>
         <link refid="vector__field_8hpp_source"/>
-        <childnode refid="24" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>vector_field_common.hpp</label>
         <link refid="vector__field__common_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="8" relation="include">
+        <childnode refid="9" relation="include">
         </childnode>
       </node>
-      <node id="31">
+      <node id="32">
         <label>vector_field_mem.hpp</label>
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="24" relation="include">
+        <childnode refid="25" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
+        <childnode refid="31" relation="include">
         </childnode>
-        <childnode refid="32" relation="include">
+        <childnode refid="33" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>vector_index_tools.hpp</label>
         <link refid="vector__index__tools_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
-      <node id="25">
+      <node id="26">
         <label>math_tools.hpp</label>
         <link refid="math__tools_8hpp_source"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="19" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
         <childnode refid="28" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
+        </childnode>
       </node>
-      <node id="24">
+      <node id="25">
         <label>ddc_alias_inline_functions.hpp</label>
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="10">
-        <label>ddc_aliases.hpp</label>
-        <link refid="ddc__aliases_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="30">
+      <node id="11">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="31">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="20" relation="include">
+        <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="16">
+      <node id="17">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
-        </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
         <childnode refid="18" relation="include">
         </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
       </node>
-      <node id="18">
+      <node id="19">
         <label>Kokkos_Core.hpp</label>
       </node>
-      <node id="26">
+      <node id="27">
         <label>algorithm</label>
       </node>
       <node id="5">
         <label>array</label>
       </node>
-      <node id="9">
+      <node id="10">
         <label>cassert</label>
       </node>
-      <node id="20">
+      <node id="21">
         <label>cmath</label>
+      </node>
+      <node id="6">
+        <label>concepts</label>
       </node>
       <node id="3">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="11">
+      <node id="12">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="23">
+      <node id="24">
         <label>iostream</label>
       </node>
-      <node id="17">
+      <node id="18">
         <label>ostream</label>
       </node>
-      <node id="6">
+      <node id="7">
         <label>type_traits</label>
       </node>
-      <node id="7">
+      <node id="8">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -396,165 +401,168 @@
 <codeline lineno="27" refid="classInvJacobianOPoint" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref>;</highlight></codeline>
 <codeline lineno="28"><highlight class="normal"></highlight></codeline>
 <codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Pre-declaration<sp/>of<sp/>CombinedMapping.</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Mapping2,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordJacobian&gt;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>;</highlight></codeline>
-<codeline lineno="32"><highlight class="normal"></highlight></codeline>
-<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Xpc,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Ypc&gt;</highlight></codeline>
-<codeline lineno="42" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref>&lt;</highlight></codeline>
-<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian</ref>&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>,<sp/><ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>&gt;,</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt;Xpc,<sp/>Ypc,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;,</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;,</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordRTheta<sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">X_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref>;</highlight></codeline>
-<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Y_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref>;</highlight></codeline>
-<codeline lineno="56"><highlight class="normal"></highlight></codeline>
-<codeline lineno="57"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>=<sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian&lt;R, Theta, X, Y&gt;</ref>,</highlight></codeline>
-<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;</ref>,</highlight></codeline>
-<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;&gt;;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>m_mapping;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1MappingWithJacobian" kindref="compound">concepts::MappingWithJacobian</ref><sp/>Mapping1,</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref><sp/>Mapping2,</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CoordJacobianType&gt;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Xpc,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Ypc&gt;</highlight></codeline>
+<codeline lineno="45" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref>&lt;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian</ref>&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>,<sp/><ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>&gt;,</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt;Xpc,<sp/>Ypc,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;,</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;,</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordRTheta<sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">X_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref>;</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Y_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref>;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>=<sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCircularToCartesian" kindref="compound">CircularToCartesian&lt;R, Theta, X, Y&gt;</ref>,</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;</ref>,</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;&gt;;</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="71" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a82112d29decc49118b332f5adefbf362" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a82112d29decc49118b332f5adefbf362" kindref="member">InvJacobianOPoint</ref>(<ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping)<sp/>:<sp/>m_mapping(mapping)<sp/>{}</highlight></codeline>
-<codeline lineno="72"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_INLINE_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;</highlight></codeline>
-<codeline lineno="88" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1aae48865b7f1b1d592a92ce539c0c1ebe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1aae48865b7f1b1d592a92ce539c0c1ebe" kindref="member">operator()</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="89"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/>J;</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Xpc,<sp/>X_cov&gt;(J)<sp/>=<sp/>1.;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Xpc,<sp/>Y_cov&gt;(J)<sp/>=<sp/>0.;</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Ypc,<sp/>X_cov&gt;(J)<sp/>=<sp/>0.;</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Ypc,<sp/>Y_cov&gt;(J)<sp/>=<sp/>1.;</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>J;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="97"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Xpc,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Ypc&gt;</highlight></codeline>
-<codeline lineno="108" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref>&lt;</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>,<sp/><ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>&gt;,</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt;Xpc,<sp/>Ypc,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;,</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;,</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;</highlight></codeline>
-<codeline lineno="114"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordRTheta<sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight></codeline>
-<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">X_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref>;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Y_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref>;</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCart</ref><sp/>=<sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian&lt;R, Theta, X, Y&gt;</ref>;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>=<sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCart</ref>,</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;</ref>,</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;&gt;;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>m_mapping;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>m_mapping;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="74" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a82112d29decc49118b332f5adefbf362" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1a82112d29decc49118b332f5adefbf362" kindref="member">InvJacobianOPoint</ref>(<ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping)<sp/>:<sp/>m_mapping(mapping)<sp/>{}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_INLINE_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;</highlight></codeline>
+<codeline lineno="91" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1aae48865b7f1b1d592a92ce539c0c1ebe" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f_1aae48865b7f1b1d592a92ce539c0c1ebe" kindref="member">operator()</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="92"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/>J;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Xpc,<sp/>X_cov&gt;(J)<sp/>=<sp/>1.;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Xpc,<sp/>Y_cov&gt;(J)<sp/>=<sp/>0.;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Ypc,<sp/>X_cov&gt;(J)<sp/>=<sp/>0.;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Ypc,<sp/>Y_cov&gt;(J)<sp/>=<sp/>1.;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>J;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Y,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>R,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Theta,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Xpc,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Ypc&gt;</highlight></codeline>
+<codeline lineno="111" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref>&lt;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>,<sp/><ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>&gt;,</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt;Xpc,<sp/>Ypc,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;,</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordRTheta<sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">X_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Y_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref>;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCart</ref><sp/>=<sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian&lt;R, Theta, X, Y&gt;</ref>;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>=<sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCart</ref>,</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;</ref>,</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;&gt;;</highlight></codeline>
 <codeline lineno="132"><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="138" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a755ef2b433106ec410ccfa743dac3393" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a755ef2b433106ec410ccfa743dac3393" kindref="member">InvJacobianOPoint</ref>(<ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping)<sp/>:<sp/>m_mapping(mapping)<sp/>{}</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight></codeline>
-<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_INLINE_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;</highlight></codeline>
-<codeline lineno="153" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a9b4712e64671e3d412d0c9d3d4c9bb77" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a9b4712e64671e3d412d0c9d3d4c9bb77" kindref="member">operator()</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="154"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>epsilon<sp/>=<sp/>m_mapping.template<sp/>get&lt;CzarnyToCart&gt;().epsilon();</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>e<sp/>=<sp/>m_mapping.template<sp/>get&lt;CzarnyToCart&gt;().e();</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(1.<sp/>/<sp/>(1.<sp/>-<sp/>epsilon<sp/>*<sp/>epsilon<sp/>*<sp/>0.25));</highlight></codeline>
-<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sqrt_eps_2<sp/>=<sp/>Kokkos::sqrt(1.<sp/>+<sp/>epsilon<sp/>*<sp/>epsilon);</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"></highlight></codeline>
-<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/>J;</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Xpc,<sp/>X_cov&gt;(J)<sp/>=<sp/>-sqrt_eps_2;</highlight></codeline>
-<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Xpc,<sp/>Y_cov&gt;(J)<sp/>=<sp/>0.;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Ypc,<sp/>X_cov&gt;(J)<sp/>=<sp/>0.;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Ypc,<sp/>Y_cov&gt;(J)<sp/>=<sp/>(2<sp/>-<sp/>sqrt_eps_2)<sp/>/<sp/>e<sp/>/<sp/>xi;</highlight></codeline>
-<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>J;</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="167"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight></codeline>
-<codeline lineno="176"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">X</ref>,</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref>,</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">SplineEvaluator,</highlight></codeline>
-<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structR" kindref="compound">R</ref>,</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structTheta" kindref="compound">Theta</ref>,</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemorySpace,</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Xpc,</highlight></codeline>
-<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Ypc&gt;</highlight></codeline>
-<codeline lineno="185" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref>&lt;</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
-<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref>&lt;<ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>,<sp/>SplineEvaluator,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>,<sp/>MemorySpace&gt;,</highlight></codeline>
-<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt;Xpc,<sp/>Ypc,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;,</highlight></codeline>
-<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;,</highlight></codeline>
-<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;</highlight></codeline>
-<codeline lineno="191"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordRTheta<sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
-<codeline lineno="194"><highlight class="normal"></highlight></codeline>
-<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">X_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref>;</highlight></codeline>
-<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Y_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref>;</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Xpc_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Xpc::Dual;</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ypc_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ypc::Dual;</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR__cov" kindref="compound">R_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref>;</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref>;</highlight></codeline>
-<codeline lineno="203"><highlight class="normal"></highlight></codeline>
-<codeline lineno="204"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>=<sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;</ref>,</highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;</ref>,</highlight></codeline>
-<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;&gt;;</highlight></codeline>
-<codeline lineno="209"><highlight class="normal"></highlight></codeline>
-<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeR<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineEvaluator::evaluation_domain_type1;</highlight></codeline>
-<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeTheta<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineEvaluator::evaluation_domain_type2;</highlight></codeline>
-<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeRTheta<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineEvaluator::evaluation_domain_type;</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxR<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeR::discrete_element_type;</highlight></codeline>
-<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxTheta<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeTheta::discrete_element_type;</highlight></codeline>
-<codeline lineno="215"><highlight class="normal"></highlight></codeline>
-<codeline lineno="216"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>m_mapping;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>m_mapping;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="141" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a755ef2b433106ec410ccfa743dac3393" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a755ef2b433106ec410ccfa743dac3393" kindref="member">InvJacobianOPoint</ref>(<ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping)<sp/>:<sp/>m_mapping(mapping)<sp/>{}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_INLINE_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;</highlight></codeline>
+<codeline lineno="156" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a9b4712e64671e3d412d0c9d3d4c9bb77" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a9b4712e64671e3d412d0c9d3d4c9bb77" kindref="member">operator()</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="157"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>epsilon<sp/>=<sp/>m_mapping.template<sp/>get&lt;CzarnyToCart&gt;().epsilon();</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>e<sp/>=<sp/>m_mapping.template<sp/>get&lt;CzarnyToCart&gt;().e();</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>xi<sp/>=<sp/>Kokkos::sqrt(1.<sp/>/<sp/>(1.<sp/>-<sp/>epsilon<sp/>*<sp/>epsilon<sp/>*<sp/>0.25));</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>sqrt_eps_2<sp/>=<sp/>Kokkos::sqrt(1.<sp/>+<sp/>epsilon<sp/>*<sp/>epsilon);</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/>J;</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Xpc,<sp/>X_cov&gt;(J)<sp/>=<sp/>-sqrt_eps_2;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Xpc,<sp/>Y_cov&gt;(J)<sp/>=<sp/>0.;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Ypc,<sp/>X_cov&gt;(J)<sp/>=<sp/>0.;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Ypc,<sp/>Y_cov&gt;(J)<sp/>=<sp/>(2<sp/>-<sp/>sqrt_eps_2)<sp/>/<sp/>e<sp/>/<sp/>xi;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>J;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="170"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structX" kindref="compound">X</ref>,</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref>,</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">SplineEvaluator,</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structR" kindref="compound">R</ref>,</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="structTheta" kindref="compound">Theta</ref>,</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">MemorySpace,</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Xpc,</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Ypc&gt;</highlight></codeline>
+<codeline lineno="188" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref>&lt;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref>&lt;<ref refid="structX" kindref="compound">X</ref>,<sp/><ref refid="structY" kindref="compound">Y</ref>,<sp/>SplineEvaluator,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>,<sp/>MemorySpace&gt;,</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt;Xpc,<sp/>Ypc,<sp/><ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;,</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;,</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;<ref refid="structR" kindref="compound">R</ref>,<sp/><ref refid="structTheta" kindref="compound">Theta</ref>&gt;&gt;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordRTheta<sp/>=<sp/>Coord&lt;R,<sp/>Theta&gt;;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">X_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref>;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Y_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref>;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Xpc_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Xpc::Dual;</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Ypc_cov<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Ypc::Dual;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structR__cov" kindref="compound">R_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref>;</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structTheta__cov" kindref="compound">Theta_cov</ref><sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/><ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref>;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>=<sp/><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt;</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;</ref>,</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;</ref>,</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;&gt;;</highlight></codeline>
+<codeline lineno="212"><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeR<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineEvaluator::evaluation_domain_type1;</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeTheta<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineEvaluator::evaluation_domain_type2;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeRTheta<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>SplineEvaluator::evaluation_domain_type;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxR<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeR::discrete_element_type;</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxTheta<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>IdxRangeTheta::discrete_element_type;</highlight></codeline>
 <codeline lineno="218"><highlight class="normal"></highlight></codeline>
-<codeline lineno="219"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="224" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3184b7b72cd5621d627f62e793c94ecc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3184b7b72cd5621d627f62e793c94ecc" kindref="member">InvJacobianOPoint</ref>(<ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping)<sp/>:<sp/>m_mapping(mapping)<sp/>{}</highlight></codeline>
-<codeline lineno="225"><highlight class="normal"></highlight></codeline>
-<codeline lineno="264" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a762e83a88cdb2b379becdb9f87b31872" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a762e83a88cdb2b379becdb9f87b31872" kindref="member">operator()</ref>()</highlight><highlight class="keyword"></highlight></codeline>
-<codeline lineno="265"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const</highlight></codeline>
-<codeline lineno="266"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>discrete_mapping</highlight></codeline>
-<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_mapping.template<sp/>get&lt;</highlight></codeline>
-<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;</ref>&gt;();</highlight></codeline>
-<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/>J(0.0);</highlight></codeline>
-<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta<sp/>idx_range_singular_point<sp/>=<sp/>discrete_mapping.<ref refid="classDiscreteToCartesian_1aeade6cd026d0d03df92d00b0f2651195" kindref="member">idx_range_singular_point</ref>();</highlight></codeline>
-<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Average<sp/>the<sp/>values<sp/>at<sp/>(r<sp/>=<sp/>0,<sp/>theta):</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxR<sp/>ir(idx_range_singular_point.front());</highlight></codeline>
-<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxTheta<sp/>itheta<sp/>:<sp/>IdxRangeTheta(idx_range_singular_point))<sp/>{</highlight></codeline>
-<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;<sp/>coord(ddc::coordinate(ir),<sp/>ddc::coordinate(itheta));</highlight></codeline>
-<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;X, Y&gt;</ref>,<sp/>VectorIndexSet&lt;R_cov,<sp/>Theta_cov&gt;&gt;<sp/>J_first_order</highlight></codeline>
-<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>discrete_mapping.<ref refid="classDiscreteToCartesian_1afea2c72f045e6d7a609b76d1fb2b494e" kindref="member">first_order_jacobian_matrix_r_rtheta</ref>(coord);</highlight></codeline>
-<codeline lineno="278"><highlight class="normal"></highlight></codeline>
-<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>th<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
-<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;R, Theta&gt;</ref>,<sp/>VectorIndexSet&lt;Xpc_cov,<sp/>Ypc_cov&gt;&gt;<sp/>J_circ_r_rtheta;</highlight></codeline>
-<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;R,<sp/>Xpc_cov&gt;(J_circ_r_rtheta)<sp/>=<sp/>Kokkos::cos(th);</highlight></codeline>
-<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;R,<sp/>Ypc_cov&gt;(J_circ_r_rtheta)<sp/>=<sp/>Kokkos::sin(th);</highlight></codeline>
-<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Theta,<sp/>Xpc_cov&gt;(J_circ_r_rtheta)<sp/>=<sp/>-Kokkos::sin(th);</highlight></codeline>
-<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Theta,<sp/>Ypc_cov&gt;(J_circ_r_rtheta)<sp/>=<sp/>Kokkos::cos(th);</highlight></codeline>
-<codeline lineno="285"><highlight class="normal"></highlight></codeline>
-<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>J_theta<sp/>=<sp/>inverse(</highlight></codeline>
-<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(J_first_order),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;k&apos;</highlight><highlight class="normal">&gt;(J_circ_r_rtheta)));</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/>m_mapping;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="227" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3184b7b72cd5621d627f62e793c94ecc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3184b7b72cd5621d627f62e793c94ecc" kindref="member">InvJacobianOPoint</ref>(<ref refid="classCombinedMapping" kindref="compound">Mapping</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mapping)<sp/>:<sp/>m_mapping(mapping)<sp/>{}</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267" refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a762e83a88cdb2b379becdb9f87b31872" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/><ref refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a762e83a88cdb2b379becdb9f87b31872" kindref="member">operator()</ref>()</highlight><highlight class="keyword"></highlight></codeline>
+<codeline lineno="268"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const</highlight></codeline>
+<codeline lineno="269"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>discrete_mapping</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>m_mapping.template<sp/>get&lt;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;</ref>&gt;();</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;Xpc, Ypc&gt;</ref>,<sp/>VectorIndexSet&lt;X_cov,<sp/>Y_cov&gt;&gt;<sp/>J(0.0);</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxRangeRTheta<sp/>idx_range_singular_point<sp/>=<sp/>discrete_mapping.<ref refid="classDiscreteToCartesian_1aeade6cd026d0d03df92d00b0f2651195" kindref="member">idx_range_singular_point</ref>();</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Average<sp/>the<sp/>values<sp/>at<sp/>(r<sp/>=<sp/>0,<sp/>theta):</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxR<sp/>ir(idx_range_singular_point.front());</highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(IdxTheta<sp/>itheta<sp/>:<sp/>IdxRangeTheta(idx_range_singular_point))<sp/>{</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord&lt;R,<sp/>Theta&gt;<sp/>coord(ddc::coordinate(ir),<sp/>ddc::coordinate(itheta));</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;X, Y&gt;</ref>,<sp/>VectorIndexSet&lt;R_cov,<sp/>Theta_cov&gt;&gt;<sp/>J_first_order</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>discrete_mapping.<ref refid="classDiscreteToCartesian_1afea2c72f045e6d7a609b76d1fb2b494e" kindref="member">first_order_jacobian_matrix_r_rtheta</ref>(coord);</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>th<sp/>=<sp/>ddc::get&lt;Theta&gt;(coord);</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">DTensor&lt;VectorIndexSet&lt;R, Theta&gt;</ref>,<sp/>VectorIndexSet&lt;Xpc_cov,<sp/>Ypc_cov&gt;&gt;<sp/>J_circ_r_rtheta;</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;R,<sp/>Xpc_cov&gt;(J_circ_r_rtheta)<sp/>=<sp/>Kokkos::cos(th);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;R,<sp/>Ypc_cov&gt;(J_circ_r_rtheta)<sp/>=<sp/>Kokkos::sin(th);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Theta,<sp/>Xpc_cov&gt;(J_circ_r_rtheta)<sp/>=<sp/>-Kokkos::sin(th);</highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::get&lt;Theta,<sp/>Ypc_cov&gt;(J_circ_r_rtheta)<sp/>=<sp/>Kokkos::cos(th);</highlight></codeline>
 <codeline lineno="288"><highlight class="normal"></highlight></codeline>
-<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>J<sp/>+=<sp/>J_theta;</highlight></codeline>
-<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classTensor" kindref="compound">Tensor</ref><sp/>J_theta<sp/>=<sp/>inverse(</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(J_first_order),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;k&apos;</highlight><highlight class="normal">&gt;(J_circ_r_rtheta)));</highlight></codeline>
 <codeline lineno="291"><highlight class="normal"></highlight></codeline>
-<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>theta_size<sp/>=<sp/>idx_range_singular_point.size();</highlight></codeline>
-<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>J<sp/>/=<sp/>theta_size;</highlight></codeline>
-<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>J;</highlight></codeline>
-<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="296"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>J<sp/>+=<sp/>J_theta;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>theta_size<sp/>=<sp/>idx_range_singular_point.size();</highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>J<sp/>/=<sp/>theta_size;</highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>J;</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="299"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp"/>
   </compounddef>

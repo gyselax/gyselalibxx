@@ -18,11 +18,9 @@
 #include "static_tensors.hpp"
 #include "vector_field.hpp"
 
-template <class Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
+template <concepts::Mapping Mapping3D, class MappingCoord = typename Mapping3D::CoordArg>
 class Curl
 {
-    static_assert(is_mapping_v<Mapping3D>);
-
     using BasisSpatial = ddc::to_type_seq_t<typename Mapping3D::CoordArg>;
     using CovBasisSpatial = get_covariant_dims_t<BasisSpatial>;
 

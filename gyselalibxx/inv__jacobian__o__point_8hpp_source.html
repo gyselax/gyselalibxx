@@ -584,7 +584,10 @@ template &lt;class Mapping, class CoordRTheta&gt;
 class InvJacobianOPoint;
 
 // Pre-declaration of CombinedMapping.
-template &lt;class Mapping1, class Mapping2, class CoordJacobian&gt;
+template &lt;
+        concepts::MappingWithJacobian Mapping1,
+        concepts::Mapping Mapping2,
+        class CoordJacobianType&gt;
 class CombinedMapping;
 
 template &lt;class X, class Y, class R, class Theta, class Xpc, class Ypc&gt;

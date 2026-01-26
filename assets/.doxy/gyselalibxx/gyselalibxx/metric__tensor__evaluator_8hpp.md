@@ -37,7 +37,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**MetricTensorEvaluator**](classMetricTensorEvaluator.md) &lt;class Mapping, class PositionCoordinate&gt;<br>_An operator for calculating the metric tensor._  |
+| class | [**MetricTensorEvaluator**](classMetricTensorEvaluator.md) &lt;Mapping, class PositionCoordinate&gt;<br>_An operator for calculating the metric tensor._  |
 
 
 

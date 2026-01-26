@@ -101,7 +101,7 @@ File providing functions to adapt quadrature coefficients so they can integrate 
 
 _Add the Jacobian determinant to the coefficients._ 
 ```C++
-template<class Mapping, class IdxRangeCoeffs, class ExecSpace>
+template<concepts::MappingWithJacobian Mapping, class IdxRangeCoeffs, class ExecSpace>
 DFieldMem< IdxRangeCoeffs, typename ExecSpace::memory_space > compute_coeffs_on_mapping (
     ExecSpace exec_space,
     Mapping & mapping,

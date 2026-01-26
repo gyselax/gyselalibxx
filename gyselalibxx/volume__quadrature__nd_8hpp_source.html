@@ -580,15 +580,12 @@
 
 
 
-template &lt;class Mapping, class IdxRangeCoeffs, class ExecSpace&gt;
+template &lt;concepts::MappingWithJacobian Mapping, class IdxRangeCoeffs, class ExecSpace&gt;
 DFieldMem&lt;IdxRangeCoeffs, typename ExecSpace::memory_space&gt; compute_coeffs_on_mapping(
         ExecSpace exec_space,
         Mapping&amp; mapping,
         DFieldMem&lt;IdxRangeCoeffs, typename ExecSpace::memory_space&gt;&amp;&amp; coefficients_alloc)
 {
-    static_assert(is_mapping_v&lt;Mapping&gt;);
-    static_assert(has_jacobian_v&lt;Mapping&gt;);
-
     using CoordJ = typename Mapping::CoordJacobian;
     using IdxJ = find_idx_t&lt;CoordJ, IdxRangeCoeffs&gt;;
 

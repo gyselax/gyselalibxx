@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptis__analytical__mapping__v" kind="concept">
+    <compoundname>is_analytical_mapping_v</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class Mapping</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class Mapping&gt;
+concept <ref refid="conceptis__analytical__mapping__v" kindref="compound">is_analytical_mapping_v</ref> =  <ref refid="conceptconcepts_1_1AnalyticalMapping" kindref="compound">concepts::AnalyticalMapping</ref>&lt;Mapping&gt;    </initializer>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="111" column="1"/>
+  </compounddef>
+</doxygen>

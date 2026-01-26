@@ -396,10 +396,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp" line="127" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp" bodystart="127" bodyend="136"/>
       </memberdef>
-      <memberdef kind="function" id="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classCartesianToCircular_1a1d2b002a2211b86d3469c29a25ea6895" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
         <definition>KOKKOS_FUNCTION double CartesianToCircular&lt; X, Y, R, Theta &gt;::jacobian</definition>
-        <argsstring>(Coord&lt; X, Y &gt; const &amp;coord)</argsstring>
+        <argsstring>(Coord&lt; X, Y &gt; const &amp;coord) const</argsstring>
         <name>jacobian</name>
         <qualifiedname>CartesianToCircular::jacobian</qualifiedname>
         <param>
@@ -545,7 +545,7 @@
       <member refid="classCartesianToCircular_1a97b27a4e4e766216d76ce150a2903345" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>curvilinear_tag_r</name></member>
       <member refid="classCartesianToCircular_1a22c0b5fa2d5952f5bd9e9db9045226e9" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>curvilinear_tag_theta</name></member>
       <member refid="classCartesianToCircular_1a2abacca05657095a5f3747031b92fef6" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>get_inverse_mapping</name></member>
-      <member refid="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian</name></member>
+      <member refid="classCartesianToCircular_1a1d2b002a2211b86d3469c29a25ea6895" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian</name></member>
       <member refid="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian_component</name></member>
       <member refid="classCartesianToCircular_1a15d8b8ccc837c4e57c000ac4307713f5" prot="public" virt="non-virtual"><scope>CartesianToCircular</scope><name>jacobian_matrix</name></member>
       <member refid="classCartesianToCircular_1a6f4e24c52964aad64eff418cac8988f4" prot="private" virt="non-virtual"><scope>CartesianToCircular</scope><name>m_o_point</name></member>

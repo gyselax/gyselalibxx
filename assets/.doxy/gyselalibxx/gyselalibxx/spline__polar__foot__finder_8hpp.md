@@ -41,7 +41,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) &lt;class IdxRangeBatched, class TimeStepperBuilder, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;<br>_A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._ |
+| class | [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) &lt;class IdxRangeBatched, class TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;<br>_A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._ |
 
 
 

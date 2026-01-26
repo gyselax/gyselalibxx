@@ -655,7 +655,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-jacobian"><strong>jacobian</strong></a> (Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; const &amp; coord) <br><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em></td>
+<td style="text-align: left;"><a href="#function-jacobian"><strong>jacobian</strong></a> (Coord&lt; <a href="structX.html"><strong>X</strong></a>, <a href="structY.html"><strong>Y</strong></a> &gt; const &amp; coord) const<br><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
@@ -809,7 +809,7 @@
 <p><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION double CartesianToCircular::jacobian (
     Coord&lt; X , Y &gt; const &amp; coord
-) 
+) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>

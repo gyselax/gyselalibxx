@@ -631,7 +631,7 @@ public:
         return CoordResult(r, ddc::select&lt;Z&gt;(coord), zeta);
     }
 
-    KOKKOS_FUNCTION double jacobian(CoordArg const&amp; coord)
+    KOKKOS_FUNCTION double jacobian(CoordArg const&amp; coord) const
     {
         const double x = ddc::get&lt;X&gt;(coord);
         const double y = ddc::get&lt;Y&gt;(coord);

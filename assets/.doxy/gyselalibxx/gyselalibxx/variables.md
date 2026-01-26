@@ -301,8 +301,6 @@
 
 ## h
 
-* **has\_inv\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
-* **has\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **has\_singular\_o\_point\_inv\_jacobian\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **has\_same\_variance\_v** ([**vector\_index\_tools.hpp**](vector__index__tools_8hpp.md))
 * **has\_data\_access\_methods\_v** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
@@ -316,9 +314,7 @@
 * **is\_sol\_enabled** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
 * **inverse\_mapping\_t** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_accessible\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
-* **is\_analytical\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_coord\_transform\_with\_o\_point\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
-* **is\_mapping\_v** ([**coord\_transformation\_tools.hpp**](coord__transformation__tools_8hpp.md))
 * **is\_borrowed\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
 * **is\_deriv\_field\_v** ([**derivative\_field\_common.hpp**](derivative__field__common_8hpp.md))
 * **is\_tensor\_type\_v** ([**tensor\_common.hpp**](tensor__common_8hpp.md))

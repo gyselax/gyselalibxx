@@ -580,11 +580,9 @@
 #include "vector_field.hpp"
 
 
-template &lt;class Mapping3D, class MappingCoord = typename Mapping3D::CoordArg&gt;
+template &lt;concepts::Mapping Mapping3D, class MappingCoord = typename Mapping3D::CoordArg&gt;
 class LiePoissonBracket
 {
-    static_assert(is_mapping_v&lt;Mapping3D&gt;);
-
     using BasisSpatial = ddc::to_type_seq_t&lt;typename Mapping3D::CoordArg&gt;;
     using CovBasisSpatial = get_covariant_dims_t&lt;BasisSpatial&gt;;
 

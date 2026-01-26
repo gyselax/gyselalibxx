@@ -631,7 +631,7 @@ public:
         return Coord&lt;R, Theta&gt;(r, theta);
     }
 
-    KOKKOS_FUNCTION double jacobian(Coord&lt;X, Y&gt; const&amp; coord)
+    KOKKOS_FUNCTION double jacobian(Coord&lt;X, Y&gt; const&amp; coord) const
     {
         const double x = ddc::get&lt;X&gt;(coord) - ddc::get&lt;X&gt;(m_o_point);
         const double y = ddc::get&lt;Y&gt;(coord) - ddc::get&lt;Y&gt;(m_o_point);

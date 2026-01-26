@@ -265,7 +265,11 @@ KOKKOS_INLINE_FUNCTION double scalar_product(
     return tensor_mul(index<'i'>(a), index<'i', 'j'>(metric), index<'j'>(b));
 }
 
-template <class Mapping, class CoordType, class ElementType, class VectorIndexSetType>
+template <
+        concepts::MappingWithJacobian Mapping,
+        class CoordType,
+        class ElementType,
+        class VectorIndexSetType>
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>>
 tensor_product(
         Mapping const& mapping,
@@ -274,8 +278,6 @@ tensor_product(
         Tensor<ElementType, VectorIndexSetType> const& b)
 {
     static_assert(ddc::type_seq_size_v<VectorIndexSetType> == 3);
-    static_assert(is_mapping_v<Mapping>);
-    static_assert(has_jacobian_v<Mapping>);
     LeviCivitaTensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> eps(
             mapping.jacobian(coord));
     return tensor_mul(index<'i', 'j', 'k'>(eps), index<'j'>(a), index<'k'>(b));

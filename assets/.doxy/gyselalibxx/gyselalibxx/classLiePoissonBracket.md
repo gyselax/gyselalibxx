@@ -2,7 +2,7 @@
 
 # Class LiePoissonBracket
 
-**template &lt;class Mapping3D, class MappingCoord&gt;**
+**template &lt;concepts::Mapping Mapping3D, class MappingCoord&gt;**
 
 
 

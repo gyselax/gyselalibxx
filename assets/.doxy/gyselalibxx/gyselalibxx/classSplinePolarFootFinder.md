@@ -2,7 +2,7 @@
 
 # Class SplinePolarFootFinder
 
-**template &lt;class IdxRangeBatched, class TimeStepperBuilder, class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;**
+**template &lt;class IdxRangeBatched, class TimeStepperBuilder, concepts::Mapping LogicalToPhysicalMapping, concepts::AnalyticalMapping LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;**
 
 
 

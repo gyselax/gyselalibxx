@@ -787,7 +787,7 @@ KOKKOS_INLINE_FUNCTION ElementType sum (
 <hr>
 
 <h3 id="function-tensor_product">function tensor_product</h3>
-<pre><code class="language-C++">template&lt;class Mapping, class CoordType, class ElementType, class VectorIndexSetType&gt;
+<pre><code class="language-C++">template&lt;concepts::MappingWithJacobian Mapping, class CoordType, class ElementType, class VectorIndexSetType&gt;
 KOKKOS_INLINE_FUNCTION Tensor &lt; ElementType, vector_index_set_dual_t&lt; VectorIndexSetType &gt; &gt; tensor_product (
     Mapping const &amp; mapping,
     CoordType const &amp; coord,

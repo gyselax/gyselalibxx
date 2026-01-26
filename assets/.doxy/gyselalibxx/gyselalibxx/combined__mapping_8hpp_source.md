@@ -16,11 +16,12 @@
 #include "inverse_jacobian_matrix.hpp"
 #include "math_tools.hpp"
 
-template <class Mapping1, class Mapping2, class CoordJacobianType = typename Mapping2::CoordResult>
+template <
+        concepts::MappingWithJacobian Mapping1,
+        concepts::Mapping Mapping2,
+        class CoordJacobianType = typename Mapping2::CoordResult>
 class CombinedMapping
 {
-    static_assert(is_mapping_v<Mapping1>);
-    static_assert(is_mapping_v<Mapping2>);
     static_assert(std::is_same_v<typename Mapping2::CoordResult, typename Mapping1::CoordArg>);
     static_assert(
             (std::is_same_v<CoordJacobianType, typename Mapping2::CoordArg>)
@@ -65,7 +66,7 @@ public:
         }
     }
 
-    CoordResult operator()(CoordArg coord)
+    CoordResult operator()(CoordArg coord) const
     {
         return m_mapping_1(m_mapping_2(coord));
     }
@@ -75,7 +76,6 @@ public:
         if constexpr (std::is_same_v<CoordJacobian, typename Mapping2::CoordResult>) {
             static_assert(is_analytical_mapping_v<Mapping2>);
             using InverseMapping2 = inverse_mapping_t<Mapping2>;
-            static_assert(has_jacobian_v<Mapping1>);
             static_assert(has_jacobian_v<InverseMapping2>);
             static_assert(std::is_same_v<CoordJacobian, typename Mapping1::CoordJacobian>);
             static_assert(std::is_same_v<CoordJacobian, typename InverseMapping2::CoordJacobian>);

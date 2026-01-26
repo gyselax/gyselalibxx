@@ -597,7 +597,7 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-compute_coeffs_on_mapping">function compute_coeffs_on_mapping</h3>
 <p><em>Add the Jacobian determinant to the coefficients.</em> </p>
-<pre><code class="language-C++">template&lt;class Mapping, class IdxRangeCoeffs, class ExecSpace&gt;
+<pre><code class="language-C++">template&lt;concepts::MappingWithJacobian Mapping, class IdxRangeCoeffs, class ExecSpace&gt;
 DFieldMem&lt; IdxRangeCoeffs, typename ExecSpace::memory_space &gt; compute_coeffs_on_mapping (
     ExecSpace exec_space,
     Mapping &amp; mapping,

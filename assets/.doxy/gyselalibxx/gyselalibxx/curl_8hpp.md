@@ -35,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Curl**](classCurl.md) &lt;class Mapping3D, class MappingCoord&gt;<br>_A class which implements a curl operator The implemented equation is:_ \(\nabla \cross \mathbf{F}\) __\(\nabla \cross \mathbf{F} = {\cal J}_{\rm x}^{-1}\epsilon^{klm}\partial_{x^l} F_m\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(F_m\) _the covariant components of F and_\(\epsilon^{klm}\) _the Levi-Civita symbol._ |
+| class | [**Curl**](classCurl.md) &lt;Mapping3D, class MappingCoord&gt;<br>_A class which implements a curl operator The implemented equation is:_ \(\nabla \cross \mathbf{F}\) __\(\nabla \cross \mathbf{F} = {\cal J}_{\rm x}^{-1}\epsilon^{klm}\partial_{x^l} F_m\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(F_m\) _the covariant components of F and_\(\epsilon^{klm}\) _the Levi-Civita symbol._ |
 
 
 

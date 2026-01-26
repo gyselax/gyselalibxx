@@ -581,11 +581,11 @@
 #include "vector_index_tools.hpp"
 #include "view.hpp"
 
-template &lt;class Mapping, class PositionCoordinate = typename Mapping::CoordJacobian&gt;
+template &lt;
+        concepts::MappingWithJacobian Mapping,
+        class PositionCoordinate = typename Mapping::CoordJacobian&gt;
 class MetricTensorEvaluator
 {
-    static_assert(is_mapping_v&lt;Mapping&gt;);
-    static_assert(has_jacobian_v&lt;Mapping&gt;);
     static_assert(
             std::is_same_v&lt;PositionCoordinate, typename Mapping::CoordJacobian&gt;,
             "The metric tensor is calculated from the Jacobian matrix. In order to evaluate the "

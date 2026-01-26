@@ -270,7 +270,7 @@
     <member refid="classCartesianToCircular_1ad149af07eb1a3c309c02797b1eeb1099" kind="function"><name>operator=</name></member>
     <member refid="classCartesianToCircular_1a37380fa46ba2613b3082a6c3b302af61" kind="function"><name>operator=</name></member>
     <member refid="classCartesianToCircular_1ac7328c386b3ece480b67c475eb9d281a" kind="function"><name>operator()</name></member>
-    <member refid="classCartesianToCircular_1a275832f34d53e29ba6a1304819d040fe" kind="function"><name>jacobian</name></member>
+    <member refid="classCartesianToCircular_1a1d2b002a2211b86d3469c29a25ea6895" kind="function"><name>jacobian</name></member>
     <member refid="classCartesianToCircular_1a15d8b8ccc837c4e57c000ac4307713f5" kind="function"><name>jacobian_matrix</name></member>
     <member refid="classCartesianToCircular_1af69ebbdc58f56c521d3c25589fe16769" kind="function"><name>jacobian_component</name></member>
     <member refid="classCartesianToCircular_1a2abacca05657095a5f3747031b92fef6" kind="function"><name>get_inverse_mapping</name></member>
@@ -297,7 +297,7 @@
     <member refid="classCartesianToCylindrical_1a3997bb373bcc5809b1bdfb7c1bf1c07c" kind="function"><name>operator=</name></member>
     <member refid="classCartesianToCylindrical_1a5578c461691f0c81a513c4b626ec9135" kind="function"><name>operator=</name></member>
     <member refid="classCartesianToCylindrical_1afea84c9965d1fa33b5573d3140db8df6" kind="function"><name>operator()</name></member>
-    <member refid="classCartesianToCylindrical_1a2c6b83170ea4878792ffd0d4be1ecffb" kind="function"><name>jacobian</name></member>
+    <member refid="classCartesianToCylindrical_1a7c994b8f651bc8d4af548f0f76aa72f7" kind="function"><name>jacobian</name></member>
     <member refid="classCartesianToCylindrical_1a5f5945e50e313ce3c5927d4591629d3e" kind="function"><name>jacobian_matrix</name></member>
     <member refid="classCartesianToCylindrical_1a7d4dc83cf1c3950a783fc4e482f33815" kind="function"><name>jacobian_component</name></member>
     <member refid="classCartesianToCylindrical_1ab9aa77a76d9efd4cd3194cdf1b0186ea" kind="function"><name>get_inverse_mapping</name></member>
@@ -509,7 +509,7 @@
     <member refid="classCombinedMapping_1a89c66b4fdffc5db31f7bd0e0ee8b0578" kind="variable"><name>m_mapping_2</name></member>
     <member refid="classCombinedMapping_1a023599e85b2489a3ce9a6a4fa8ad731a" kind="variable"><name>m_epsilon</name></member>
     <member refid="classCombinedMapping_1a323492a6204c56e8b70143168a5f2845" kind="function"><name>CombinedMapping</name></member>
-    <member refid="classCombinedMapping_1af3de08ff21e964132fa83d8bbdfa8776" kind="function"><name>operator()</name></member>
+    <member refid="classCombinedMapping_1abcc2fc07ded1e5b90a254b3280ba50e1" kind="function"><name>operator()</name></member>
     <member refid="classCombinedMapping_1aae0f04e41772585563d0b9be1070cec3" kind="function"><name>jacobian_matrix</name></member>
     <member refid="classCombinedMapping_1a8ea5397c3808cff9bcb070b1cc1e0763" kind="function"><name>jacobian_component</name></member>
     <member refid="classCombinedMapping_1a32c23aba0dc6f606e502c932a1d003cc" kind="function"><name>jacobian</name></member>
@@ -3021,6 +3021,22 @@
     <member refid="structY__pC_1a6274201b751e93509509253746e598c1" kind="variable"><name>IS_COVARIANT</name></member>
     <member refid="structY__pC_1a840b5d333654df4c5be30422ce8eeb28" kind="variable"><name>IS_CONTRAVARIANT</name></member>
   </compound>
+  <compound refid="conceptconcepts_1_1AnalyticalMapping" kind="concept"><name>concepts::AnalyticalMapping</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1Mapping" kind="concept"><name>concepts::Mapping</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1MappingWithInvJacobian" kind="concept"><name>concepts::MappingWithInvJacobian</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1MappingWithJacobian" kind="concept"><name>concepts::MappingWithJacobian</name>
+  </compound>
+  <compound refid="concepthas__inv__jacobian__v" kind="concept"><name>has_inv_jacobian_v</name>
+  </compound>
+  <compound refid="concepthas__jacobian__v" kind="concept"><name>has_jacobian_v</name>
+  </compound>
+  <compound refid="conceptis__analytical__mapping__v" kind="concept"><name>is_analytical_mapping_v</name>
+  </compound>
+  <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
+  </compound>
   <compound refid="namespace_0d215" kind="namespace"><name>@215</name>
   </compound>
   <compound refid="namespace_0d217" kind="namespace"><name>@217</name>
@@ -3033,6 +3049,8 @@
   </compound>
   <compound refid="namespacebumpontail__equilibrium" kind="namespace"><name>bumpontail_equilibrium</name>
     <member refid="bumpontailequilibrium_8hpp_1a904011943d45927909831ec61a31a6da" kind="function"><name>init_from_input</name></member>
+  </compound>
+  <compound refid="namespaceconcepts" kind="namespace"><name>concepts</name>
   </compound>
   <compound refid="namespaceconnectivity__details" kind="namespace"><name>connectivity_details</name>
     <member refid="connectivity__details_8hpp_1a466fdaea6f003eafe6cf608ff6593e35" kind="enum"><name>InsertPosition</name></member>
@@ -3153,11 +3171,7 @@
   <compound refid="coord__transformation__tools_8hpp" kind="file"><name>coord_transformation_tools.hpp</name>
     <member refid="coord__transformation__tools_8hpp_1a73b10b1b7a6d6f065a61b7cd3e07715d" kind="typedef"><name>inverse_mapping_t</name></member>
     <member refid="coord__transformation__tools_8hpp_1af4d26b36a5a227ac1dc9de0e85602530" kind="variable"><name>is_accessible_v</name></member>
-    <member refid="coord__transformation__tools_8hpp_1a91e6734a3ddaeb51dcccfdd2a518e219" kind="variable"><name>is_mapping_v</name></member>
-    <member refid="coord__transformation__tools_8hpp_1a72103cf68def64391cfa042b9711a86b" kind="variable"><name>has_jacobian_v</name></member>
-    <member refid="coord__transformation__tools_8hpp_1aa3638126a7736141cba45402354ece26" kind="variable"><name>has_inv_jacobian_v</name></member>
     <member refid="coord__transformation__tools_8hpp_1a9476a5087b5b03e7821ffbd74c7ddb97" kind="variable"><name>is_coord_transform_with_o_point_v</name></member>
-    <member refid="coord__transformation__tools_8hpp_1a489e6f5039f572e0f76796a376857cd5" kind="variable"><name>is_analytical_mapping_v</name></member>
     <member refid="coord__transformation__tools_8hpp_1a40c83f9e43b408ef10e0c553b6c97ddf" kind="variable"><name>has_singular_o_point_inv_jacobian_v</name></member>
   </compound>
   <compound refid="cylindrical__to__cartesian_8hpp" kind="file"><name>cylindrical_to_cartesian.hpp</name>

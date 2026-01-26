@@ -588,8 +588,8 @@
 template &lt;
         class IdxRangeBatched,
         class TimeStepperBuilder,
-        class LogicalToPhysicalMapping,
-        class LogicalToPseudoPhysicalMapping,
+        concepts::Mapping LogicalToPhysicalMapping,
+        concepts::AnalyticalMapping LogicalToPseudoPhysicalMapping,
         class SplineRThetaBuilderAdvection,
         class SplineRThetaEvaluatorAdvection&gt;
 class SplinePolarFootFinder
@@ -601,9 +601,6 @@ class SplinePolarFootFinder
               typename SplineRThetaBuilderAdvection::memory_space&gt;
 {
     static_assert(is_timestepper_builder_v&lt;TimeStepperBuilder&gt;);
-    static_assert(is_mapping_v&lt;LogicalToPhysicalMapping&gt;);
-    static_assert(is_mapping_v&lt;LogicalToPseudoPhysicalMapping&gt;);
-    static_assert(is_analytical_mapping_v&lt;LogicalToPseudoPhysicalMapping&gt;);
     static_assert(std::is_same_v&lt;
                   typename SplineRThetaBuilderAdvection::memory_space,
                   typename SplineRThetaEvaluatorAdvection::memory_space&gt;);

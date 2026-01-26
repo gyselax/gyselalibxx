@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1Mapping" kind="concept">
+    <compoundname>concepts::Mapping</compoundname>
+    <includes refid="coord__transformation__tools_8hpp" local="no">coord_transformation_tools.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref> =  requires
+{
+    typename T::CoordArg;
+    typename T::CoordResult;
+}
+&amp;&amp;requires(T const&amp; t, typename T::CoordArg const&amp; x)
+{
+    {
+        t(x)
+        } -&gt; std::same_as&lt;typename T::CoordResult&gt;;
+}    </initializer>
+    <briefdescription>
+<para>A helper concept to determine if a type is a mapping. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="18" column="1"/>
+  </compounddef>
+</doxygen>

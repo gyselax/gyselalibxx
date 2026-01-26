@@ -2,7 +2,7 @@
 
 # Class MetricTensorEvaluator
 
-**template &lt;class Mapping, class PositionCoordinate&gt;**
+**template &lt;concepts::MappingWithJacobian Mapping, class PositionCoordinate&gt;**
 
 
 

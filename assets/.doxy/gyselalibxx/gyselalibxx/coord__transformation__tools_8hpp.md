@@ -11,6 +11,7 @@
 
 
 * `#include <array>`
+* `#include <concepts>`
 * `#include <type_traits>`
 * `#include <utility>`
 * `#include "tensor.hpp"`
@@ -29,6 +30,11 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**concepts**](namespaceconcepts.md) <br> |
 
 
 
@@ -48,13 +54,9 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**has\_inv\_jacobian\_v**](#variable-has_inv_jacobian_v)   = `mapping\_detail::DefinesInvJacobian&lt;Mapping, !RaiseError&gt;::value`<br> |
-|  constexpr bool | [**has\_jacobian\_v**](#variable-has_jacobian_v)   = `mapping\_detail::DefinesJacobian&lt;Mapping, !RaiseError&gt;::value`<br> |
 |  constexpr bool | [**has\_singular\_o\_point\_inv\_jacobian\_v**](#variable-has_singular_o_point_inv_jacobian_v)   = `/* multi line expression */`<br> |
 |  constexpr bool | [**is\_accessible\_v**](#variable-is_accessible_v)   = `/* multi line expression */`<br> |
-|  constexpr bool | [**is\_analytical\_mapping\_v**](#variable-is_analytical_mapping_v)   = `mapping\_detail::IsAnalyticalMapping&lt;Mapping&gt;::value`<br> |
 |  constexpr bool | [**is\_coord\_transform\_with\_o\_point\_v**](#variable-is_coord_transform_with_o_point_v)   = `mapping\_detail::HasOPoint&lt;std::remove\_const\_t&lt;std::remove\_reference\_t&lt;Mapping&gt;&gt;&gt;::value`<br>_Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point._  |
-|  constexpr bool | [**is\_mapping\_v**](#variable-is_mapping_v)   = `mapping\_detail::IsMapping&lt;Mapping&gt;::value`<br> |
 
 
 
@@ -117,32 +119,6 @@ using inverse_mapping_t =  decltype(std::declval<Mapping>().get_inverse_mapping(
 
 
 
-### variable has\_inv\_jacobian\_v 
-
-```C++
-constexpr bool has_inv_jacobian_v;
-```
-
-
-
-
-<hr>
-
-
-
-### variable has\_jacobian\_v 
-
-```C++
-constexpr bool has_jacobian_v;
-```
-
-
-
-
-<hr>
-
-
-
 ### variable has\_singular\_o\_point\_inv\_jacobian\_v 
 
 ```C++
@@ -169,37 +145,11 @@ constexpr bool is_accessible_v;
 
 
 
-### variable is\_analytical\_mapping\_v 
-
-```C++
-constexpr bool is_analytical_mapping_v;
-```
-
-
-
-
-<hr>
-
-
-
 ### variable is\_coord\_transform\_with\_o\_point\_v 
 
 _Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point._ 
 ```C++
 constexpr bool is_coord_transform_with_o_point_v;
-```
-
-
-
-
-<hr>
-
-
-
-### variable is\_mapping\_v 
-
-```C++
-constexpr bool is_mapping_v;
 ```
 
 

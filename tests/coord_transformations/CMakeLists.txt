@@ -12,7 +12,6 @@ add_executable(unit_tests_coord_transformations
     refined_discrete_mapping.cpp
     vector_basis_change.cpp
 )
-target_compile_features(unit_tests_coord_transformations PUBLIC cxx_std_17)
 target_link_libraries(unit_tests_coord_transformations
     PUBLIC
         GTest::gtest

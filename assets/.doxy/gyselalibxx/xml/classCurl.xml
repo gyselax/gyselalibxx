@@ -5,7 +5,9 @@
     <includes refid="curl_8hpp" local="no">curl.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class Mapping3D</type>
+        <type><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref></type>
+        <declname>Mapping3D</declname>
+        <defname>Mapping3D</defname>
       </param>
       <param>
         <type>class MappingCoord</type>
@@ -25,7 +27,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="31" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCurl_1a0f648caba213cfd265c502ad842bd405" prot="private" static="no">
         <type>get_covariant_dims_t&lt; BasisSpatial &gt;</type>
@@ -39,7 +41,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="32" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="30" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -55,7 +57,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="35" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="33" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classCurl_1af8f205c567c7c066570398a0fc1d2e47" prot="private" static="no" mutable="no">
         <type><ref refid="classMetricTensorEvaluator" kindref="compound">MetricTensorEvaluator</ref>&lt; Mapping3D, MappingCoord &gt;</type>
@@ -69,7 +71,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="36" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="36" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="34" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -100,7 +102,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="44" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="44" bodyend="44"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="42" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="42" bodyend="42"/>
       </memberdef>
       <memberdef kind="function" id="classCurl_1a32ec3619b9102ba23a85fabc5353a6d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -149,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="55" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="55" bodyend="67"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="53" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="53" bodyend="65"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -175,7 +177,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="27" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="28" bodyend="68"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" line="27" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp" bodystart="28" bodyend="66"/>
     <listofallmembers>
       <member refid="classCurl_1a97f67a8c712a875caa7c22a14c144866" prot="private" virt="non-virtual"><scope>Curl</scope><name>BasisSpatial</name></member>
       <member refid="classCurl_1a0f648caba213cfd265c502ad842bd405" prot="private" virt="non-virtual"><scope>Curl</scope><name>CovBasisSpatial</name></member>

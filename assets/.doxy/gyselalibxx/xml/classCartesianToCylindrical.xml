@@ -412,10 +412,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="137" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="137" bodyend="146"/>
       </memberdef>
-      <memberdef kind="function" id="classCartesianToCylindrical_1a2c6b83170ea4878792ffd0d4be1ecffb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classCartesianToCylindrical_1a7c994b8f651bc8d4af548f0f76aa72f7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>
         <definition>KOKKOS_FUNCTION double CartesianToCylindrical&lt; X, Y, Z, R, Zeta &gt;::jacobian</definition>
-        <argsstring>(CoordArg const &amp;coord)</argsstring>
+        <argsstring>(CoordArg const &amp;coord) const</argsstring>
         <name>jacobian</name>
         <qualifiedname>CartesianToCylindrical::jacobian</qualifiedname>
         <param>
@@ -570,7 +570,7 @@
       <member refid="classCartesianToCylindrical_1a78b198363986b0644fce386e52c6c500" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>cylindrical_tag_Z</name></member>
       <member refid="classCartesianToCylindrical_1a3488fcd6d0e017d27be68cce5e822a8d" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>cylindrical_tag_Zeta</name></member>
       <member refid="classCartesianToCylindrical_1ab9aa77a76d9efd4cd3194cdf1b0186ea" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>get_inverse_mapping</name></member>
-      <member refid="classCartesianToCylindrical_1a2c6b83170ea4878792ffd0d4be1ecffb" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>jacobian</name></member>
+      <member refid="classCartesianToCylindrical_1a7c994b8f651bc8d4af548f0f76aa72f7" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>jacobian</name></member>
       <member refid="classCartesianToCylindrical_1a7d4dc83cf1c3950a783fc4e482f33815" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>jacobian_component</name></member>
       <member refid="classCartesianToCylindrical_1a5f5945e50e313ce3c5927d4591629d3e" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>jacobian_matrix</name></member>
       <member refid="classCartesianToCylindrical_1afea84c9965d1fa33b5573d3140db8df6" prot="public" virt="non-virtual"><scope>CartesianToCylindrical</scope><name>operator()</name></member>

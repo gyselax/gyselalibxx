@@ -5,7 +5,9 @@
     <includes refid="metric__tensor__evaluator_8hpp" local="no">metric_tensor_evaluator.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class Mapping</type>
+        <type><ref refid="conceptconcepts_1_1MappingWithJacobian" kindref="compound">concepts::MappingWithJacobian</ref></type>
+        <declname>Mapping</declname>
+        <defname>Mapping</defname>
       </param>
       <param>
         <type>class PositionCoordinate</type>
@@ -222,7 +224,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="20" bodyend="91"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp" bodystart="22" bodyend="91"/>
     <listofallmembers>
       <member refid="classMetricTensorEvaluator_1a7ca6db7787f9a6522e0123f7b00381eb" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>ContravariantVectorType</name></member>
       <member refid="classMetricTensorEvaluator_1ab6d658a3c74587b141cedac1740711ec" prot="public" virt="non-virtual"><scope>MetricTensorEvaluator</scope><name>CoordArg</name></member>

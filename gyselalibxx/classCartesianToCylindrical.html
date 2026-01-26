@@ -667,7 +667,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-jacobian"><strong>jacobian</strong></a> (<a href="classCartesianToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) <br><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em></td>
+<td style="text-align: left;"><a href="#function-jacobian"><strong>jacobian</strong></a> (<a href="classCartesianToCylindrical.html#typedef-coordarg"><strong>CoordArg</strong></a> const &amp; coord) const<br><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION double</td>
@@ -838,7 +838,7 @@
 <p><em>Compute the Jacobian, the determinant of the Jacobian matrix of the mapping.</em> </p>
 <pre><code class="language-C++">inline KOKKOS_FUNCTION double CartesianToCylindrical::jacobian (
     CoordArg const &amp; coord
-) 
+) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>

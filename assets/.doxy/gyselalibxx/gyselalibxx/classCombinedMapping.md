@@ -2,7 +2,7 @@
 
 # Class CombinedMapping
 
-**template &lt;class Mapping1, class Mapping2, class CoordJacobianType&gt;**
+**template &lt;concepts::MappingWithJacobian Mapping1, concepts::Mapping Mapping2, class CoordJacobianType&gt;**
 
 
 
@@ -71,7 +71,7 @@ _A class which describes a mapping which is constructed by combining two mapping
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian**](#function-jacobian) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the determinant of the Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION double | [**jacobian\_component**](#function-jacobian_component) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord\_rtheta) const<br>_Compute the (i,j) component of the Jacobian matrix._  |
 |  KOKKOS\_INLINE\_FUNCTION [**JacobianMatrixType**](classCombinedMapping.md#typedef-jacobianmatrixtype) | [**jacobian\_matrix**](#function-jacobian_matrix) ([**CoordJacobian**](classCombinedMapping.md#typedef-coordjacobian) const & coord) const<br>_Compute full Jacobian matrix._  |
-|  [**CoordResult**](classCombinedMapping.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classCombinedMapping.md#typedef-coordarg) coord) <br>_Convert the argument coordinate to the equivalent result coordinate._  |
+|  [**CoordResult**](classCombinedMapping.md#typedef-coordresult) | [**operator()**](#function-operator) ([**CoordArg**](classCombinedMapping.md#typedef-coordarg) coord) const<br>_Convert the argument coordinate to the equivalent result coordinate._  |
 
 
 
@@ -487,7 +487,7 @@ _Convert the argument coordinate to the equivalent result coordinate._
 ```C++
 inline CoordResult CombinedMapping::operator() (
     CoordArg coord
-) 
+) const
 ```
 
 

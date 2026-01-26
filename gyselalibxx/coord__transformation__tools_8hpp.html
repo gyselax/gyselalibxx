@@ -571,12 +571,28 @@
 <p><a href="coord__transformation__tools_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
 <li><code>#include &lt;array&gt;</code></li>
+<li><code>#include &lt;concepts&gt;</code></li>
 <li><code>#include &lt;type_traits&gt;</code></li>
 <li><code>#include &lt;utility&gt;</code></li>
 <li><code>#include "tensor.hpp"</code></li>
 <li><code>#include "vector_index_tools.hpp"</code></li>
 <li><code>#include "view.hpp"</code></li>
 </ul>
+<h2 id="namespaces">Namespaces</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">namespace</td>
+<td style="text-align: left;"><a href="namespaceconcepts.html"><strong>concepts</strong></a> <br></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -603,14 +619,6 @@
 <tbody>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-has_inv_jacobian_v"><strong>has_inv_jacobian_v</strong></a>   = <code>mapping\_detail::DefinesInvJacobian&amp;lt;Mapping, !RaiseError&amp;gt;::value</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-has_jacobian_v"><strong>has_jacobian_v</strong></a>   = <code>mapping\_detail::DefinesJacobian&amp;lt;Mapping, !RaiseError&amp;gt;::value</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
 <td style="text-align: left;"><a href="#variable-has_singular_o_point_inv_jacobian_v"><strong>has_singular_o_point_inv_jacobian_v</strong></a>   = <code>/* multi line expression */</code><br></td>
 </tr>
 <tr>
@@ -619,15 +627,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_analytical_mapping_v"><strong>is_analytical_mapping_v</strong></a>   = <code>mapping\_detail::IsAnalyticalMapping&amp;lt;Mapping&amp;gt;::value</code><br></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
 <td style="text-align: left;"><a href="#variable-is_coord_transform_with_o_point_v"><strong>is_coord_transform_with_o_point_v</strong></a>   = <code>mapping\_detail::HasOPoint&amp;lt;std::remove\_const\_t&amp;lt;std::remove\_reference\_t&amp;lt;Mapping&amp;gt;&amp;gt;&amp;gt;::value</code><br><em>Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_mapping_v"><strong>is_mapping_v</strong></a>   = <code>mapping\_detail::IsMapping&amp;lt;Mapping&amp;gt;::value</code><br></td>
 </tr>
 </tbody>
 </table>
@@ -637,16 +637,6 @@
 </code></pre>
 <hr>
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
-<h3 id="variable-has_inv_jacobian_v">variable has_inv_jacobian_v</h3>
-<pre><code class="language-C++">constexpr bool has_inv_jacobian_v;
-</code></pre>
-<hr>
-
-<h3 id="variable-has_jacobian_v">variable has_jacobian_v</h3>
-<pre><code class="language-C++">constexpr bool has_jacobian_v;
-</code></pre>
-<hr>
-
 <h3 id="variable-has_singular_o_point_inv_jacobian_v">variable has_singular_o_point_inv_jacobian_v</h3>
 <pre><code class="language-C++">constexpr bool has_singular_o_point_inv_jacobian_v;
 </code></pre>
@@ -657,19 +647,9 @@
 </code></pre>
 <hr>
 
-<h3 id="variable-is_analytical_mapping_v">variable is_analytical_mapping_v</h3>
-<pre><code class="language-C++">constexpr bool is_analytical_mapping_v;
-</code></pre>
-<hr>
-
 <h3 id="variable-is_coord_transform_with_o_point_v">variable is_coord_transform_with_o_point_v</h3>
 <p><em>Indicates that a coordinate change operator is 2D with a curvilinear mapping showing an O-point.</em> </p>
 <pre><code class="language-C++">constexpr bool is_coord_transform_with_o_point_v;
-</code></pre>
-<hr>
-
-<h3 id="variable-is_mapping_v">variable is_mapping_v</h3>
-<pre><code class="language-C++">constexpr bool is_mapping_v;
 </code></pre>
 <hr>
 

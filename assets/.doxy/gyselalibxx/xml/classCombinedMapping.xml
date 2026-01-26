@@ -5,10 +5,14 @@
     <includes refid="combined__mapping_8hpp" local="no">combined_mapping.hpp</includes>
     <templateparamlist>
       <param>
-        <type>class Mapping1</type>
+        <type><ref refid="conceptconcepts_1_1MappingWithJacobian" kindref="compound">concepts::MappingWithJacobian</ref></type>
+        <declname>Mapping1</declname>
+        <defname>Mapping1</defname>
       </param>
       <param>
-        <type>class Mapping2</type>
+        <type><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref></type>
+        <declname>Mapping2</declname>
+        <defname>Mapping2</defname>
       </param>
       <param>
         <type>class CoordJacobianType</type>
@@ -29,7 +33,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" prot="public" static="no">
         <type>typename Mapping1::CoordResult</type>
@@ -44,7 +48,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCombinedMapping_1ab6600cd1c21a95897b6b7e0af20ff1d4" prot="public" static="no">
         <type>CoordJacobianType</type>
@@ -59,7 +63,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="39" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="40" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCombinedMapping_1a0d93115eb69d758d8a11a5b4f470fa8f" prot="public" static="no">
         <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt; &gt; &gt;</type>
@@ -74,7 +78,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="43" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCombinedMapping_1a1c59688cb74997538f6afa7d9769268a" prot="public" static="no">
         <type><ref refid="classTensor" kindref="compound">DTensor</ref>&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt;, vector_index_set_dual_t&lt; ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt; &gt; &gt;</type>
@@ -89,7 +93,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="48" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-type">
@@ -105,7 +109,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="50" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="51" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCombinedMapping_1a4c08bd06ad49f8e1d0dab269f03b7e59" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" kindref="member">CoordArg</ref> &gt; &gt;</type>
@@ -119,7 +123,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="51" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCombinedMapping_1a40c4311f2095df841ea7825e92440402" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt; &gt;</type>
@@ -133,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="52" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCombinedMapping_1a954c2537b8176d8bbd9f7c8dd7ec6e96" prot="private" static="no">
         <type>ddc::type_seq_element_t&lt; 1, ddc::to_type_seq_t&lt; <ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref> &gt; &gt;</type>
@@ -147,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="53" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="54" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCombinedMapping_1a750e5ed678bd611774d45177151527de" prot="private" static="no">
         <type>typename Mapping2::CoordResult</type>
@@ -162,7 +166,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="56" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -178,7 +182,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="59" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="60" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classCombinedMapping_1a89c66b4fdffc5db31f7bd0e0ee8b0578" prot="private" static="no" mutable="no">
         <type>Mapping2</type>
@@ -192,7 +196,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="60" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="60" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="61" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="61" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classCombinedMapping_1a023599e85b2489a3ce9a6a4fa8ad731a" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -206,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="61" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="61" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="62" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -262,12 +266,12 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="75" bodyend="87"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="76" bodyend="88"/>
       </memberdef>
-      <memberdef kind="function" id="classCombinedMapping_1af3de08ff21e964132fa83d8bbdfa8776" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classCombinedMapping_1abcc2fc07ded1e5b90a254b3280ba50e1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classCombinedMapping_1a2b8aa0a917ffcd246d9257c4623a08a5" kindref="member">CoordResult</ref></type>
         <definition>CoordResult CombinedMapping&lt; Mapping1, Mapping2, CoordJacobianType &gt;::operator()</definition>
-        <argsstring>(CoordArg coord)</argsstring>
+        <argsstring>(CoordArg coord) const</argsstring>
         <name>operator()</name>
         <qualifiedname>CombinedMapping::operator()</qualifiedname>
         <param>
@@ -293,7 +297,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="96" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="96" bodyend="99"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="97" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="97" bodyend="100"/>
       </memberdef>
       <memberdef kind="function" id="classCombinedMapping_1aae0f04e41772585563d0b9be1070cec3" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classCombinedMapping_1a0d93115eb69d758d8a11a5b4f470fa8f" kindref="member">JacobianMatrixType</ref></type>
@@ -327,7 +331,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="118" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="118" bodyend="138"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="119" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="119" bodyend="138"/>
       </memberdef>
       <memberdef kind="function" id="classCombinedMapping_1a8ea5397c3808cff9bcb070b1cc1e0763" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -583,7 +587,7 @@
 <para>There are therefore 3 domains in this calculation <formula id="68">$ \Omega_{start} $</formula>, <formula id="69">$ \Omega_{mid} $</formula> and <formula id="70">$ \Omega_{end} $</formula> with <formula id="71">$ \mathcal{F}(\Omega_{mid})\rightarrow\Omega_{end} $</formula> and <formula id="72">$ \mathcal{G}(\Omega_{start})\rightarrow\Omega_{mid} $</formula></para>
 <para>The functions in this mapping are defined on the coordinate system associated with the domain <formula id="69">$ \Omega_{mid} $</formula>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="25" bodyend="284"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" line="27" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp" bodystart="28" bodyend="284"/>
     <listofallmembers>
       <member refid="classCombinedMapping_1a323492a6204c56e8b70143168a5f2845" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>CombinedMapping</name></member>
       <member refid="classCombinedMapping_1abe12d94d3d899970931d2694d733d3a0" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>CoordArg</name></member>
@@ -607,7 +611,7 @@
       <member refid="classCombinedMapping_1aa31c3c209ae6e2c0162d744a42dd93da" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>m_mapping_1</name></member>
       <member refid="classCombinedMapping_1a89c66b4fdffc5db31f7bd0e0ee8b0578" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>m_mapping_2</name></member>
       <member refid="classCombinedMapping_1af2a39b1a3c17e96b9ce968db9b9bccf1" prot="private" virt="non-virtual"><scope>CombinedMapping</scope><name>non_singular_inverse_jacobian_matrix</name></member>
-      <member refid="classCombinedMapping_1af3de08ff21e964132fa83d8bbdfa8776" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>operator()</name></member>
+      <member refid="classCombinedMapping_1abcc2fc07ded1e5b90a254b3280ba50e1" prot="public" virt="non-virtual"><scope>CombinedMapping</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

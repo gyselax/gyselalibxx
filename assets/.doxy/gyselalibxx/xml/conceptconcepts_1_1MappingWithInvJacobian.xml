@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1MappingWithInvJacobian" kind="concept">
+    <compoundname>concepts::MappingWithInvJacobian</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="conceptconcepts_1_1MappingWithInvJacobian" kindref="compound">concepts::MappingWithInvJacobian</ref> =  MappingWithJacobian&lt;T&gt; &amp;&amp; requires(T const&amp; t, typename T::CoordJacobian const&amp; x)
+{
+    {
+        t.inv_jacobian_matrix(x)
+        } -&gt; std::same_as&lt;
+                <ref refid="classTensor" kindref="compound">DTensor</ref>&lt;get_contravariant_dims_t&lt;ddc::to_type_seq_t&lt;typename T::CoordArg&gt;&gt;,
+                        get_covariant_dims_t&lt;ddc::to_type_seq_t&lt;typename T::CoordResult&gt;&gt;&gt;&gt;;
+    {
+        t.template inv_jacobian_component&lt;int, int&gt;(x)
+        } -&gt; std::same_as&lt;double&gt;;
+}    </initializer>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="50" column="1"/>
+  </compounddef>
+</doxygen>

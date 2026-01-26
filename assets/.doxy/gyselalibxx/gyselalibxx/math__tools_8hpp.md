@@ -362,7 +362,7 @@ KOKKOS_INLINE_FUNCTION ElementType sum (
 ### function tensor\_product 
 
 ```C++
-template<class Mapping, class CoordType, class ElementType, class VectorIndexSetType>
+template<concepts::MappingWithJacobian Mapping, class CoordType, class ElementType, class VectorIndexSetType>
 KOKKOS_INLINE_FUNCTION Tensor < ElementType, vector_index_set_dual_t< VectorIndexSetType > > tensor_product (
     Mapping const & mapping,
     CoordType const & coord,

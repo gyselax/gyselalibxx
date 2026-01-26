@@ -70,7 +70,7 @@ public:
         return CoordResult(r, ddc::select<Z>(coord), zeta);
     }
 
-    KOKKOS_FUNCTION double jacobian(CoordArg const& coord)
+    KOKKOS_FUNCTION double jacobian(CoordArg const& coord) const
     {
         const double x = ddc::get<X>(coord);
         const double y = ddc::get<Y>(coord);
