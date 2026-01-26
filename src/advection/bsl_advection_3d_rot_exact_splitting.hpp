@@ -306,15 +306,6 @@ using namespace std;
                 double a7 = dt*yr[1];
                 double a8 = dt*yr[2];
 
-                std::cout << "checkcoefficients a1 --- " << a1 << std::endl;
-                std::cout << "checkcoefficients a2 --- " << a2 << std::endl;
-                std::cout << "checkcoefficients a3 --- " << a3 << std::endl;
-                std::cout << "checkcoefficients a4 --- " << a4 << std::endl;
-                std::cout << "checkcoefficients a5 --- " << a5 << std::endl;
-                std::cout << "checkcoefficients a6 --- " << a6 << std::endl;
-                std::cout << "checkcoefficients a7 --- " << a7 << std::endl;
-                std::cout << "checkcoefficients a8 --- " << a8 << std::endl;
-
                 // module vx 
                 ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
                     KOKKOS_LAMBDA(IdxBatch_Vx const ib){
@@ -394,15 +385,6 @@ using namespace std;
                 double a7 = dt*yr[1];
                 double a8 = dt*yr[2];
 
-                std::cout << "checkcoefficients a1 --- " << a1 << std::endl;
-                std::cout << "checkcoefficients a2 --- " << a2 << std::endl;
-                std::cout << "checkcoefficients a3 --- " << a3 << std::endl;
-                std::cout << "checkcoefficients a4 --- " << a4 << std::endl;
-                std::cout << "checkcoefficients a5 --- " << a5 << std::endl;
-                std::cout << "checkcoefficients a6 --- " << a6 << std::endl;
-                std::cout << "checkcoefficients a7 --- " << a7 << std::endl;
-                std::cout << "checkcoefficients a8 --- " << a8 << std::endl;
-
                 // module vx 
                 ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
                     KOKKOS_LAMBDA(IdxBatch_Vx const ib){
@@ -465,9 +447,6 @@ using namespace std;
                             get_const_field(derivs_max_vx));
             
 
-
-               
-
             }
 
             if (count >= 2 && idx_order[0] == 1 && idx_order[1] == 0 && idx_order[2] == 2)
@@ -484,16 +463,6 @@ using namespace std;
                 double a6 = dt*y3[1];
                 double a7 = dt*yr[1];
                 double a8 = dt*yr[2];
-
-                std::cout << "checkcoefficients a1 --- " << a1 << std::endl;
-                std::cout << "checkcoefficients a2 --- " << a2 << std::endl;
-                std::cout << "checkcoefficients a3 --- " << a3 << std::endl;
-                std::cout << "checkcoefficients a4 --- " << a4 << std::endl;
-                std::cout << "checkcoefficients a5 --- " << a5 << std::endl;
-                std::cout << "checkcoefficients a6 --- " << a6 << std::endl;
-                std::cout << "checkcoefficients a7 --- " << a7 << std::endl;
-                std::cout << "checkcoefficients a8 --- " << a8 << std::endl;
-
 
 
                 // module vy 
