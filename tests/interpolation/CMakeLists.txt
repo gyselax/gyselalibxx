@@ -18,7 +18,6 @@ add_executable(bernstein_tests
     ../main.cpp
     bernstein.cpp
 )
-target_compile_features(bernstein_tests PUBLIC cxx_std_17)
 target_link_libraries(bernstein_tests
     PUBLIC
         GTest::gtest
@@ -35,7 +34,6 @@ add_executable(polar_bsplines_tests
     ../main.cpp
     polar_bsplines.cpp
 )
-target_compile_features(polar_bsplines_tests PUBLIC cxx_std_17)
 target_link_libraries(polar_bsplines_tests
     PUBLIC
         GTest::gtest
@@ -63,7 +61,6 @@ foreach(CONTINUITY RANGE -1 1)
         foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
           set(test_name "polar_splines_tests_DEGREE_R_${DEGREE_R}_DEGREE_P_${DEGREE_P}_CONTINUITY_${CONTINUITY}_${BSPLINES_TYPE}_${MAPPING_TYPE}")
           add_executable("${test_name}" polar_splines.cpp)
-          target_compile_features("${test_name}" PUBLIC cxx_std_17)
           target_link_libraries("${test_name}"
             PUBLIC
             GTest::gtest

@@ -24,8 +24,8 @@ set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 # Ensure custom cmake modules can be found
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-## We use C++17 all around!
-set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
+## We use C++20 all around!
+set(CMAKE_CXX_STANDARD 20 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 ## List of options
 option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
