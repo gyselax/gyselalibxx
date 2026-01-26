@@ -20,8 +20,10 @@ concept Mapping = requires
     typename T::CoordArg;
     typename T::CoordResult;
 }
-&&std::invocable<T, typename T::CoordArg>&&
-        std::same_as<std::invoke_result_t<T, typename T::CoordArg>, typename T::CoordResult>;
+&& requires(T const& t, typename T::CoordArg const& x)
+{
+  { t(x) } -> std::same_as<typename T::CoordResult>;
+}
 
 template <typename T>
 concept MappingWithJacobian = Mapping<T> && requires
