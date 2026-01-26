@@ -25,7 +25,7 @@ concept Mapping = requires
     {
         t(x)
         } -> std::same_as<typename T::CoordResult>;
-}
+};
 
 template <typename T>
 concept MappingWithJacobian = Mapping<T> && requires
