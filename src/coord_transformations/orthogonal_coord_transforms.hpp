@@ -10,7 +10,11 @@
 
 namespace detail {
 
-template <class CoordArg, class TypeSeqGrid>
+/**
+ * A structure used at compile time to find which of the transformations in a given
+ * TypeSeq converts from coordinates of the type CoordArg.
+ */
+template <class CoordArg, class TypeSeqTransforms>
 struct FindTransform;
 
 template <class CoordArg, class HeadTransform, class... Transforms>
@@ -29,42 +33,10 @@ struct FindTransform<CoordArg, std::tuple<>>
     using type = void;
 };
 
-template <class ContraDim, class CovDimsSet, class TensorType, class CoordTransformType>
-struct FillJacobianSubsetRow;
-
-template <class ContraDim, class... CovDims, class TensorType, class CoordTransformType>
-struct FillJacobianSubsetRow<ContraDim, VectorIndexSet<CovDims...>, TensorType, CoordTransformType>
-{
-    static void fill(
-            TensorType& mat,
-            CoordTransformType const& transform,
-            typename CoordTransformType::CoordArg const& coord)
-    {
-        typename CoordTransformType::CoordArg coord_arg(coord);
-        ((ddcHelper::get<ContraDim, CovDims>(mat)
-          = transform.template jacobian_component<ContraDim, CovDims>(coord_arg)),
-         ...);
-    }
-};
-
-template <class ContraDimsSet, class CovDimsSet, class TensorType, class CoordTransformType>
-struct FillJacobianSubset;
-template <class... ContraDims, class CovDimsSet, class TensorType, class CoordTransformType>
-struct FillJacobianSubset<VectorIndexSet<ContraDims...>, CovDimsSet, TensorType, CoordTransformType>
-{
-    static void fill(
-            TensorType& mat,
-            CoordTransformType const& transform,
-            typename CoordTransformType::CoordArg const& coord)
-    {
-        ((FillJacobianSubsetRow<ContraDims, CovDimsSet, TensorType, CoordTransformType>::
-                  fill(mat, transform, coord)),
-         ...);
-    }
-};
-
 } // namespace detail
 
+/**
+ */
 template <class ArgCoord, class ResultCoord, class... CoordTransform>
 class OrthogonalCoordTransforms
 {
@@ -118,15 +90,11 @@ public:
         using TensorType = DTensor<
                 ddc::to_type_seq_t<CoordResult>,
                 get_covariant_dims_t<ddc::to_type_seq_t<CoordArg>>>;
-        TensorType jacobian_matrix;
-        ((detail::FillJacobianSubset<
-                 ddc::to_type_seq_t<typename CoordTransform::CoordResult>,
-                 get_covariant_dims_t<ddc::to_type_seq_t<typename CoordTransform::CoordArg>>,
-                 TensorType,
-                 CoordTransform>::
-                  fill(jacobian_matrix,
-                       std::get<CoordTransform>(m_transforms),
-                       typename CoordTransform::CoordArg(coord))),
+        TensorType jacobian_matrix(0);
+        ((ddcHelper::assign_elements(
+                 jacobian_matrix,
+                 std::get<CoordTransform>(m_transforms)
+                         .jacobian_matrix(typename CoordTransform::CoordJacobian(coord)))),
          ...);
         return jacobian_matrix;
     }
