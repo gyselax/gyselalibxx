@@ -61,7 +61,11 @@ public:
     {
     }
 
-    KOKKOS_DEFAULTED_FUNCTION LinearCoordTransform(LinearCoordTransform const&) = default;
+    /**
+     * Copy constructor for LinearCoordTransform.
+     * @param[in] other The operator to be copied.
+     */
+    KOKKOS_DEFAULTED_FUNCTION LinearCoordTransform(LinearCoordTransform const& other) = default;
 
     KOKKOS_DEFAULTED_FUNCTION ~LinearCoordTransform() = default;
 
