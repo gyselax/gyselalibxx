@@ -11,15 +11,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Added support for A100 Raven cluster Spack toolchain:
-  - New folder `/a100.raven.spack/` with files:
-    - `environment.sh` : setup the environment modules for Raven
-    - `prepare.sh` : preparation script for building the package
-    - `gyselalibxx-spack-environment.yaml` : Spack environment definition
-    - `toolchain.cmake` : CMake toolchain configuration
-
-### Added
-
 - Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
 in a `DerivField`.
 - Allow `FFTPoissonSolver` to use variable precision.
@@ -28,6 +19,7 @@ in a `DerivField`.
 - Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
 - Add Kokkos Tools in the environment on Persee toolchains
 - Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
+- Added support for A100 Raven cluster Spack toolchain.
 
 ### Fixed
 
