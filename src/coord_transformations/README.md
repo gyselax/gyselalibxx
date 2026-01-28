@@ -6,7 +6,17 @@ The current coordinate transformations implemented are:
 
 ## Analytically invertible coordinate transformations
 
-### Circular coordinate transformation
+### 1D coordinate transformations
+
+#### Linear coordinate transformation
+
+```math
+y(x) = \alpha x + \beta
+```
+
+### 2D coordinate transformations
+
+#### Circular coordinate transformation
 
 - Mapping (CircularToCartesian):
 
@@ -40,7 +50,7 @@ with $\det(J) = r$.
 \right.
 ```
 
-### Czarny coordinate transformation
+#### Czarny coordinate transformation
 
 - Mapping (CzarnyToCartesian): Taking $\varepsilon \in ]0,1[$ and $e$ as parameters.
 
@@ -105,30 +115,9 @@ with $\det(J) = \frac{-r}{\sqrt{1 + \varepsilon(\varepsilon + 2r\cos(\theta))}}\
 \right.
 ```
 
-### Barycentric coordinate transformation
+### 3D coordinate transformations
 
-- Mapping (BarycentricToCartesian):
-
-```math
- (c_1, c_2, c_3) \rightarrow (x, y).
-```
-
-## Discrete coordinate transformation defined on B-splines
-
-- Mapping (DiscreteToCartesian)
-
-```math
-\left\{
-\begin{aligned}
- & x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta) , \\
- & y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
-\end{aligned}
-\right.
-```
-
-## 3D coordinate transformations
-
-### Cylindrical to Cartesian transformation
+#### Cylindrical to Cartesian transformation
 
 - Mapping (CylindricalToCartesian):
 
@@ -165,7 +154,7 @@ with $\det(J) = -R$.
 \right.
 ```
 
-### Toroidal to Cylindrical transformation
+#### Toroidal to Cylindrical transformation
 
 The toroidal to cylindrical transformation combines a 2D transformation in the polar plane of the torus with an orthogonal transformation in the remaining dimension.
 
@@ -187,6 +176,27 @@ J (R, Z, \zeta) =
 \end{bmatrix}.
 ```
 
+## Barycentric coordinate transformation
+
+- Mapping (BarycentricToCartesian):
+
+```math
+ (c_1, c_2, c_3) \rightarrow (x, y).
+```
+
+## Discrete coordinate transformation defined on B-splines
+
+- Mapping (DiscreteToCartesian)
+
+```math
+\left\{
+\begin{aligned}
+ & x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta) , \\
+ & y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
+\end{aligned}
+\right.
+```
+
 ## Combined coordinate transformation which combines two of the coordinate transformations above
 
 The tools are:
@@ -196,3 +206,7 @@ The tools are:
 - MetricTensorEvaluator : this tool calculates the metric tensor associated with a coordinate transformation.
 - VectorMapper : this tool helps when converting vectors stored in a `VectorField` from one coordinate system to another.
 - other static analysis tools found in `coord_transformation_tools.hpp`
+
+## Orthogonal coordinate transformation
+
+A coordinate transformation that is comprised of coordinate transformation components which are orthogonal to one another.
