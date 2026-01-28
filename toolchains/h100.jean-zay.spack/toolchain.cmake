@@ -13,6 +13,3 @@ set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -isystem $ENV{GYSELALIBXX_OPEN
 
 # Gyselalibxx options
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specific to Gyselalib++" FORCE)
-
-# Koliop options
-set(koliop_ENABLE_LTO OFF CACHE BOOL "")

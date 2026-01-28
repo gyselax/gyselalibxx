@@ -85,7 +85,6 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   endif()
 endif()
 
-set(koliop_BUILD_TESTING OFF CACHE BOOL "")
 find_package(Kokkos 4.4.1...<5 QUIET)
 set(koliop_ENABLE_Kokkos        "SYSTEM" CACHE STRING "")
 if(NOT "${Kokkos_FOUND}")
@@ -116,7 +115,12 @@ if(NOT "${DDC_FOUND}")
   add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
 endif()
 
-add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
+find_package(koliop QUIET)
+if(NOT "${koliop_FOUND}")
+  set(koliop_BUILD_TESTING OFF CACHE BOOL "")
+  set(koliop_ENABLE_LTO OFF CACHE BOOL "")
+  add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
+endif()
 
 find_package(LAPACKE REQUIRED)
 
