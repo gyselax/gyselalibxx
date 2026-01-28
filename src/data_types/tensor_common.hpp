@@ -342,7 +342,8 @@ KOKKOS_INLINE_FUNCTION void assign_elements(
     detail::assign_elements(
             tensor_to_fill,
             tensor_input,
-            std::make_index_sequence<TensorCommon<InputStorageType, InputValidIndexSet...>::size()>());
+            std::make_index_sequence<
+                    TensorCommon<InputStorageType, InputValidIndexSet...>::size()>());
 }
 
 } // namespace ddcHelper
