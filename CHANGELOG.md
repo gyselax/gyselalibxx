@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [UNRELEASED]
 
 ### Added
+
 - Added support for A100 Raven cluster Spack toolchain:
   - New folder `/a100.raven.spack/` with files:
     - `environment.sh` : setup the environment modules for Raven
