@@ -24,8 +24,8 @@ set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 # Ensure custom cmake modules can be found
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-## We use C++17 all around!
-set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
+## We use C++20 all around!
+set(CMAKE_CXX_STANDARD 20 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 ## List of options
 option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
@@ -85,7 +85,6 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   endif()
 endif()
 
-set(koliop_BUILD_TESTING OFF CACHE BOOL "")
 find_package(Kokkos 4.4.1...<5 QUIET)
 set(koliop_ENABLE_Kokkos        "SYSTEM" CACHE STRING "")
 if(NOT "${Kokkos_FOUND}")
@@ -116,7 +115,12 @@ if(NOT "${DDC_FOUND}")
   add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
 endif()
 
-add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
+find_package(koliop QUIET)
+if(NOT "${koliop_FOUND}")
+  set(koliop_BUILD_TESTING OFF CACHE BOOL "")
+  set(koliop_ENABLE_LTO OFF CACHE BOOL "")
+  add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
+endif()
 
 find_package(LAPACKE REQUIRED)
 

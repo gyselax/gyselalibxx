@@ -17,6 +17,8 @@ in a `DerivField`.
 - Add `SingleInterfaceDerivativesCalculator` to compute an interface derivative of an equivalent global spline.
 - Add `SingleInterfaceDerivativeCalculatorCollection` to collect different `SingleInterfaceDerivativesCalculator`.
 - Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
+- Add Kokkos Tools in the environment on Persee toolchains
+- Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
 
 ### Fixed
 
@@ -31,6 +33,11 @@ in a `DerivField`.
 - `DerivField` objects are initialised on GPU by default.
 - Update DDC to [v0.10.0](https://github.com/CExA-project/ddc/releases/tag/v0.10.0).
 - Change some Python class `scattered_coord` arguments to keyword-only.
+- Increase C++ version to 20.
+- Use concepts to describe coordinate transformation classes.
+- Update koliop to [v0.1.0](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.0).
+- Make koliop discoverable with `find_package`.
+- Simplify toolchains by disabling koliop LTO by default.
 
 ### Deprecated
 

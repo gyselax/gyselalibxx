@@ -12,6 +12,3 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_FLAGS_INIT "-Wall -Wextra -Wpedantic -Wcast-align -Wformat=2 -Winit-self -Woverloaded-virtual -Wsign-promo -Wstrict-aliasing -Wdisabled-optimization -Wtautological-compare -Wpacked -Wunreachable-code -Wno-sign-compare -Wno-unused-parameter -Wno-unused-but-set-variable")
 set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -isystem $ENV{GYSELALIBXX_OPENBLAS_ROOT}/include")
 set(CMAKE_EXE_LINKER_FLAGS_INIT "-L/opt/cray/pe/mpich/8.1.30/gtl/lib -lmpi_gtl_hsa")
-
-# Koliop options:
-set(koliop_ENABLE_LTO OFF CACHE BOOL "")

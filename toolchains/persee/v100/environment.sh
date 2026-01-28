@@ -18,3 +18,6 @@ spack env activate gyselalibxx-env-omp-cuda
 export OMP_PROC_BIND=spread
 export OMP_PLACES=threads
 export OMP_NUM_THREADS=8
+
+# Add Kokkos Tools to the `LD_LIBRARY_PATH`
+export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
