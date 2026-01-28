@@ -58,8 +58,11 @@ class OrthogonalCoordTransforms
     static_assert(sizeof...(CoordTransform) > 1);
 
 public:
+    /// The type of the argument of the function described by this mapping
     using CoordArg = ArgCoord;
+    /// The type of the result of the function described by this mapping
     using CoordResult = ResultCoord;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
     using CoordJacobian = ddcHelper::to_coord_t<
             type_seq_cat_t<ddc::to_type_seq_t<typename CoordTransform::CoordJacobian>...>>;
 

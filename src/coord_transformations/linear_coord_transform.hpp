@@ -13,13 +13,16 @@
  * where @f$ x_1 @f$ and @f$ x_2 @f$ are coordinates in the input and
  * output dimensions, and @f$ \alpha @f$ and @f$ \beta @f$ are coefficients.
  */
-template <class InputDim, class OutputDim>
+template <class InputDim, class OutputDim, class CoordJacob = Coord<InputDim>>
 class LinearCoordTransform
 {
 public:
+    /// The type of the argument of the function described by this mapping
     using CoordArg = Coord<InputDim>;
+    /// The type of the result of the function described by this mapping
     using CoordResult = Coord<OutputDim>;
-    using CoordJacobian = CoordArg;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
+    using CoordJacobian = CoordJacob;
 
 private:
     Coord<InputDim> m_reference_point_on_input_dim;
@@ -41,10 +44,10 @@ public:
      *
      * @param reference_point_on_input_dim
      *              The reference point expressed in the input coordinate system.
-     * @param reference_point_on_input_dim
+     * @param reference_point_on_output_dim
      *              The reference point expressed in the output coordinate system.
      * @param scaling_factor
-     *              The scaling factor describing how distances in the ouput
+     *              The scaling factor describing how distances in the output
      *              coordinate system scale compared to distances in the input
      *              coordinate system.
      */
