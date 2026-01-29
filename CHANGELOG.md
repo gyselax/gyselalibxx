@@ -19,6 +19,7 @@ in a `DerivField`.
 - Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
 - Add Kokkos Tools in the environment on Persee toolchains
 - Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
+- Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
 
 ### Fixed
 
