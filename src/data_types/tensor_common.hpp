@@ -265,8 +265,11 @@ KOKKOS_INLINE_FUNCTION void assign_elements(
         std::index_sequence<InternalIdx...>)
 {
     using InputTensorIndexSet = ddc::detail::TypeSeq<InputValidIndexSet...>;
-    ((tensor_to_fill.template get<
-              tensor_tools::get_nth_tensor_index_element_t<InternalIdx, InputTensorIndexSet>>()
+    ((tensor_to_fill.template get<tensor_tools::to_tensor_index_element_t<
+              ddc::detail::TypeSeq<OutputValidIndexSet...>,
+              typename tensor_tools::get_nth_tensor_index_element_t<
+                      InternalIdx,
+                      InputTensorIndexSet>::IdxTypeSeq>>()
       = tensor_input.template get<
               tensor_tools::get_nth_tensor_index_element_t<InternalIdx, InputTensorIndexSet>>()),
      ...);
