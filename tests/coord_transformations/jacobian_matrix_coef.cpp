@@ -311,6 +311,11 @@ TEST(JacobianMatrixAndJacobianCoefficients, OrthogonalCoordTransforms)
     EXPECT_DOUBLE_EQ(Coord<X2>(transformed_coord), x_transform(Coord<X>(test_coord)));
     EXPECT_DOUBLE_EQ(Coord<X2>(transformed_coord), transform(Coord<X>(test_coord)));
 
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<X2, X>(test_coord)), x_scaling);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<Y2, Y>(test_coord)), y_scaling);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<X2, Y>(test_coord)), 0.0);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<Y2, X>(test_coord)), 0.0);
+
     DTensor<VectorIndexSet<Y2, X2>, VectorIndexSet<X, Y>> Jacobian_matrix
             = transform.jacobian_matrix(test_coord);
     EXPECT_DOUBLE_EQ((ddcHelper::get<X2, X>(Jacobian_matrix)), x_scaling);
