@@ -75,7 +75,7 @@ source toolchains/<CONFIG>/environment.sh
 
 The *sourcing* of an environment file will generally happen before the build or usage of the built product.
 
-:warning: This script modifies environment variables so it must be executed every- `v100.ruche` : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster. time you connect to a cluster, or everytime you open a new terminal on a local machine.
+:warning: This script modifies environment variables so it must be executed every time you connect to a cluster, or everytime you open a new terminal on a local machine.
 
 ## Compilation
 
