@@ -25,6 +25,7 @@ in a `DerivField`.
 - Fix derivative indexing of a `DerivField` object.
 - Fix transposition of arrays with more than 7 dimensions.
 - Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
+- Fix spurious segfaults for toolchains based on Spack environment views.
 
 ### Changed
 
