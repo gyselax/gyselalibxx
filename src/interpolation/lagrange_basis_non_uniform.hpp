@@ -142,7 +142,7 @@ public:
          *
          * @return The index range describing the break points.
          */
-        KOKKOS_INLINE_FUNCTION IdxRange<knot_grid> break_point_domain() const
+        KOKKOS_INLINE_FUNCTION IdxRange<knot_discrete_dimension_type> break_point_domain() const
         {
             return m_break_point_domain;
         }
@@ -151,7 +151,7 @@ public:
          *
          * @return The index range including eventual duplicate values.
          */
-        KOKKOS_INLINE_FUNCTION IdxRange<knot_grid> full_domain() const
+        KOKKOS_INLINE_FUNCTION IdxRange<knot_discrete_dimension_type> full_domain() const
         {
             return m_knot_domain;
         }
