@@ -21,7 +21,11 @@ template <class CoordArg, class HeadTransform, class... Transforms>
 struct FindTransform<CoordArg, std::tuple<HeadTransform, Transforms...>>
 {
     using type = std::conditional_t<
-            std::is_same_v<typename HeadTransform::CoordArg, CoordArg>,
+            ((ddc::detail::is_tagged_vector_v<CoordArg>)&&(
+                    std::is_same_v<typename HeadTransform::CoordArg, CoordArg>))
+                    || (ddc::in_tags_v<
+                            CoordArg,
+                            ddc::to_type_seq_t<typename HeadTransform::CoordArg>>),
             HeadTransform,
             typename FindTransform<CoordArg, std::tuple<Transforms...>>::type>;
 };
@@ -152,18 +156,17 @@ public:
         static_assert(ddc::in_tags_v<IndexTag1, ddc::to_type_seq_t<CoordResult>>);
         static_assert(
                 ddc::in_tags_v<IndexTag2, get_covariant_dims_t<ddc::to_type_seq_t<CoordArg>>>);
-        double result
-                = ((((ddc::in_tags_v<IndexTag1, ddc::to_type_seq_t<typename CoordTransform::CoordResult>>)&&(
-                            ddc::in_tags_v<
-                                    IndexTag2,
-                                    get_covariant_dims_t<ddc::to_type_seq_t<
-                                            typename CoordTransform::CoordArg>>>))
-                            ? std::get<CoordTransform>(m_transforms)
-                                      .template jacobian_component<IndexTag1, IndexTag2>(
-                                              typename CoordTransform::CoordArg(coord))
-                            : 0.0)
-                   + ...);
-        return result;
+        using RelevantMapping =
+                typename detail::FindTransform<IndexTag2, std::tuple<CoordTransform...>>::type;
+        if constexpr (ddc::in_tags_v<
+                              IndexTag1,
+                              ddc::to_type_seq_t<typename RelevantMapping::CoordResult>>) {
+            return std::get<RelevantMapping>(m_transforms)
+                    .template jacobian_component<IndexTag1, IndexTag2>(
+                            typename RelevantMapping::CoordJacobian(coord));
+        } else {
+            return 0;
+        }
     }
 
     /**
