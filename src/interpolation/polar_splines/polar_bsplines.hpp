@@ -696,7 +696,6 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
         }
     }
     if constexpr (!ddc::in_tags_v<deriv_theta, deriv_dims>) {
-        DSpan1D const vals_theta(vals_theta_ptr.data(), ntheta);
         jmin_theta = ddc::discrete_space<BSplinesTheta>()
                              .eval_basis(vals_theta, ddc::select<Theta>(coord_eval));
     } else {
