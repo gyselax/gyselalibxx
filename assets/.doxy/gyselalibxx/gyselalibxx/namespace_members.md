@@ -6,6 +6,7 @@
 ## a
 
 * **apply\_template\_to\_type\_seq\_t** ([**ddcHelper**](namespaceddcHelper.md))
+* **assign\_elements** ([**ddcHelper**](namespaceddcHelper.md))
 * **assign\_vector\_field\_element** ([**ddcHelper**](namespaceddcHelper.md))
 * **AssertionFailure** ([**gslx::error**](namespacegslx_1_1error.md))
 

@@ -70,6 +70,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  KOKKOS\_INLINE\_FUNCTION void | [**assign\_elements**](#function-assign_elements) ([**TensorCommon**](classTensorCommon.md)&lt; OutputStorageType, OutputValidIndexSet... &gt; & tensor\_to\_fill, [**TensorCommon**](classTensorCommon.md)&lt; InputStorageType, InputValidIndexSet... &gt; const & tensor\_input) <br>_Assign the elements of a tensor to another tensor._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**assign\_vector\_field\_element**](#function-assign_vector_field_element) ([**VectorField**](classVectorField.md)&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete\_element\_type idx, [**Vector**](classTensor.md)&lt; ElementType, Dims... &gt; const & vector) <br>_Copy the elements of a vector into a vector field at a given index._  |
 |  auto | [**create\_mirror\_view\_and\_copy**](#function-create_mirror_view_and_copy) (ExecSpace exec\_space, [**VectorField**](classVectorField.md)&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field) <br> |
 |  auto | [**create\_transpose\_mirror**](#function-create_transpose_mirror) (ExecSpace const & execution\_space, Field&lt; ElementType, Domain, MemSpace, FieldLayoutType &gt; src) <br>_Create a data object in the requested dimension ordering using as allocations as possible. This function does not copy data._  |
@@ -182,6 +183,39 @@ constexpr bool ddcHelper::is_non_uniform_interpolation_points_v;
 <hr>
 ## Public Functions Documentation
 
+
+
+
+### function assign\_elements 
+
+_Assign the elements of a tensor to another tensor._ 
+```C++
+template<class InputStorageType, class OutputStorageType, class... OutputValidIndexSet, class... InputValidIndexSet, std::size_t... InternalIdx>
+KOKKOS_INLINE_FUNCTION void ddcHelper::assign_elements (
+    TensorCommon < OutputStorageType, OutputValidIndexSet... > & tensor_to_fill,
+    TensorCommon < InputStorageType, InputValidIndexSet... > const & tensor_input
+) 
+```
+
+
+
+Assign the elements of the tensor tensor\_input to the corresponding positions in the tensor tensor\_to\_fill. tensor\_to\_fill may be larger than tensor\_input but cannot be smaller.
+
+
+
+
+**Parameters:**
+
+
+* `tensor_to_fill` The tensor whose elements will be modified. 
+* `tensor_input` The tensor whose elements will be copied. 
+
+
+
+
+        
+
+<hr>
 
 
 

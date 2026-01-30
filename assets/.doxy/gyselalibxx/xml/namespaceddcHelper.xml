@@ -430,7 +430,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="264" column="60" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="264" bodyend="270"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="288" column="60" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="288" bodyend="294"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1af27e89e895316fa48d3702f1ae445bf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -485,7 +485,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="279" column="66" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="279" bodyend="285"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="303" column="66" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="303" bodyend="309"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1af48ed18fbce09d9f7ff47eeb0b61bf41" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -526,7 +526,72 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="295" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="295" bodyend="299"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="319" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="319" bodyend="323"/>
+      </memberdef>
+      <memberdef kind="function" id="tensor__common_8hpp_1a540be0aa6b7bd342394aaa616fea50cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class InputStorageType</type>
+          </param>
+          <param>
+            <type>class OutputStorageType</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>OutputValidIndexSet</declname>
+            <defname>OutputValidIndexSet</defname>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>InputValidIndexSet</declname>
+            <defname>InputValidIndexSet</defname>
+          </param>
+          <param>
+            <type>std::size_t...</type>
+            <declname>InternalIdx</declname>
+            <defname>InternalIdx</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION void</type>
+        <definition>KOKKOS_INLINE_FUNCTION void ddcHelper::assign_elements</definition>
+        <argsstring>(TensorCommon&lt; OutputStorageType, OutputValidIndexSet... &gt; &amp;tensor_to_fill, TensorCommon&lt; InputStorageType, InputValidIndexSet... &gt; const &amp;tensor_input)</argsstring>
+        <name>assign_elements</name>
+        <qualifiedname>ddcHelper::assign_elements</qualifiedname>
+        <param>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; OutputStorageType, OutputValidIndexSet... &gt; &amp;</type>
+          <declname>tensor_to_fill</declname>
+        </param>
+        <param>
+          <type><ref refid="classTensorCommon" kindref="compound">TensorCommon</ref>&lt; InputStorageType, InputValidIndexSet... &gt; const &amp;</type>
+          <declname>tensor_input</declname>
+        </param>
+        <briefdescription>
+<para>Assign the elements of a tensor to another tensor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Assign the elements of the tensor tensor_input to the corresponding positions in the tensor tensor_to_fill. tensor_to_fill may be larger than tensor_input but cannot be smaller.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">tensor_to_fill</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor whose elements will be modified. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">tensor_input</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The tensor whose elements will be copied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="341" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="341" bodyend="350"/>
       </memberdef>
       <memberdef kind="function" id="vector__field_8hpp_1aa57ad767fdb365aaa4bf5b7e8929c576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

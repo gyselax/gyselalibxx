@@ -718,6 +718,30 @@ public:
 
 //                         Operators
 
+namespace detail {
+template &lt;
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet,
+        std::size_t... InternalIdx&gt;
+KOKKOS_INLINE_FUNCTION void assign_elements(
+        TensorCommon&lt;OutputStorageType, OutputValidIndexSet...&gt;&amp; tensor_to_fill,
+        TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt; const&amp; tensor_input,
+        std::index_sequence&lt;InternalIdx...&gt;)
+{
+    using InputTensorIndexSet = ddc::detail::TypeSeq&lt;InputValidIndexSet...&gt;;
+    ((tensor_to_fill.template get&lt;tensor_tools::to_tensor_index_element_t&lt;
+              ddc::detail::TypeSeq&lt;OutputValidIndexSet...&gt;,
+              typename tensor_tools::get_nth_tensor_index_element_t&lt;
+                      InternalIdx,
+                      InputTensorIndexSet&gt;::IdxTypeSeq&gt;&gt;()
+      = tensor_input.template get&lt;
+              tensor_tools::get_nth_tensor_index_element_t&lt;InternalIdx, InputTensorIndexSet&gt;&gt;()),
+     ...);
+}
+} // namespace detail
+
 namespace ddcHelper {
 
 template &lt;class... QueryIndexTag, class storage_type, class... ValidIndexSet&gt;
@@ -744,6 +768,24 @@ KOKKOS_INLINE_FUNCTION Coord&lt;Dims...&gt; to_coord(
 {
     return Coord&lt;Dims...&gt;(get&lt;Dims&gt;(tensor)...);
 }
+
+template &lt;
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet,
+        std::size_t... InternalIdx&gt;
+KOKKOS_INLINE_FUNCTION void assign_elements(
+        TensorCommon&lt;OutputStorageType, OutputValidIndexSet...&gt;&amp; tensor_to_fill,
+        TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt; const&amp; tensor_input)
+{
+    detail::assign_elements(
+            tensor_to_fill,
+            tensor_input,
+            std::make_index_sequence&lt;
+                    TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt;::size()&gt;());
+}
+
 } // namespace ddcHelper
 
 template &lt;class storage_type, class... Dims&gt;

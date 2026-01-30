@@ -3073,6 +3073,7 @@
     <member refid="tensor__common_8hpp_1aaf4377a1b44ab11de52a968fd43821e0" kind="function"><name>get</name></member>
     <member refid="tensor__common_8hpp_1af27e89e895316fa48d3702f1ae445bf4" kind="function"><name>get</name></member>
     <member refid="tensor__common_8hpp_1af48ed18fbce09d9f7ff47eeb0b61bf41" kind="function"><name>to_coord</name></member>
+    <member refid="tensor__common_8hpp_1a540be0aa6b7bd342394aaa616fea50cc" kind="function"><name>assign_elements</name></member>
     <member refid="vector__field_8hpp_1aa57ad767fdb365aaa4bf5b7e8929c576" kind="function"><name>create_mirror_view_and_copy</name></member>
     <member refid="vector__field_8hpp_1a0a990d73f5440550ebb60058ea19544c" kind="function"><name>assign_vector_field_element</name></member>
     <member refid="vector__field__common_8hpp_1a3073ccd7095e44121805d560d53db101" kind="function"><name>get</name></member>

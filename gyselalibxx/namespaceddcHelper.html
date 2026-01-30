@@ -640,6 +640,10 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION void</td>
+<td style="text-align: left;"><a href="#function-assign_elements"><strong>assign_elements</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a>&lt; OutputStorageType, OutputValidIndexSet... &gt; &amp; tensor_to_fill, <a href="classTensorCommon.html"><strong>TensorCommon</strong></a>&lt; InputStorageType, InputValidIndexSet... &gt; const &amp; tensor_input) <br><em>Assign the elements of a tensor to another tensor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION void</td>
 <td style="text-align: left;"><a href="#function-assign_vector_field_element"><strong>assign_vector_field_element</strong></a> (<a href="classVectorField.html"><strong>VectorField</strong></a>&lt; ElementType, IdxRangeType, VectorIndexSet&lt; Dims... &gt;, MemorySpace, LayoutStridedPolicy &gt; field, typename IdxRangeType::discrete_element_type idx, <a href="classTensor.html"><strong>Vector</strong></a>&lt; ElementType, Dims... &gt; const &amp; vector) <br><em>Copy the elements of a vector into a vector field at a given index.</em></td>
 </tr>
 <tr>
@@ -756,6 +760,22 @@
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-assign_elements">function assign_elements</h3>
+<p><em>Assign the elements of a tensor to another tensor.</em> </p>
+<pre><code class="language-C++">template&lt;class InputStorageType, class OutputStorageType, class... OutputValidIndexSet, class... InputValidIndexSet, std::size_t... InternalIdx&gt;
+KOKKOS_INLINE_FUNCTION void ddcHelper::assign_elements (
+    TensorCommon &lt; OutputStorageType, OutputValidIndexSet... &gt; &amp; tensor_to_fill,
+    TensorCommon &lt; InputStorageType, InputValidIndexSet... &gt; const &amp; tensor_input
+) 
+</code></pre>
+<p>Assign the elements of the tensor tensor_input to the corresponding positions in the tensor tensor_to_fill. tensor_to_fill may be larger than tensor_input but cannot be smaller.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>tensor_to_fill</code> The tensor whose elements will be modified. </li>
+<li><code>tensor_input</code> The tensor whose elements will be copied. </li>
+</ul>
+<hr>
+
 <h3 id="function-assign_vector_field_element">function assign_vector_field_element</h3>
 <p><em>Copy the elements of a vector into a vector field at a given index.</em> </p>
 <pre><code class="language-C++">template&lt;class ElementType, class IdxRangeType, class... Dims, class MemorySpace, class LayoutStridedPolicy&gt;

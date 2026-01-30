@@ -157,6 +157,30 @@ public:
 
 //                         Operators
 
+namespace detail {
+template <
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet,
+        std::size_t... InternalIdx>
+KOKKOS_INLINE_FUNCTION void assign_elements(
+        TensorCommon<OutputStorageType, OutputValidIndexSet...>& tensor_to_fill,
+        TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input,
+        std::index_sequence<InternalIdx...>)
+{
+    using InputTensorIndexSet = ddc::detail::TypeSeq<InputValidIndexSet...>;
+    ((tensor_to_fill.template get<tensor_tools::to_tensor_index_element_t<
+              ddc::detail::TypeSeq<OutputValidIndexSet...>,
+              typename tensor_tools::get_nth_tensor_index_element_t<
+                      InternalIdx,
+                      InputTensorIndexSet>::IdxTypeSeq>>()
+      = tensor_input.template get<
+              tensor_tools::get_nth_tensor_index_element_t<InternalIdx, InputTensorIndexSet>>()),
+     ...);
+}
+} // namespace detail
+
 namespace ddcHelper {
 
 template <class... QueryIndexTag, class storage_type, class... ValidIndexSet>
@@ -183,6 +207,24 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
 {
     return Coord<Dims...>(get<Dims>(tensor)...);
 }
+
+template <
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet,
+        std::size_t... InternalIdx>
+KOKKOS_INLINE_FUNCTION void assign_elements(
+        TensorCommon<OutputStorageType, OutputValidIndexSet...>& tensor_to_fill,
+        TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input)
+{
+    detail::assign_elements(
+            tensor_to_fill,
+            tensor_input,
+            std::make_index_sequence<
+                    TensorCommon<InputStorageType, InputValidIndexSet...>::size()>());
+}
+
 } // namespace ddcHelper
 
 template <class storage_type, class... Dims>

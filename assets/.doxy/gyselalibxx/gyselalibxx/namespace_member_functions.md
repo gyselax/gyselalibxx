@@ -5,6 +5,7 @@
 
 ## a
 
+* **assign\_elements** ([**ddcHelper**](namespaceddcHelper.md))
 * **assign\_vector\_field\_element** ([**ddcHelper**](namespaceddcHelper.md))
 * **AssertionFailure** ([**gslx::error**](namespacegslx_1_1error.md))
 
