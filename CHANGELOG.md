@@ -19,6 +19,7 @@ in a `DerivField`.
 - Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
 - Add Kokkos Tools in the environment on Persee toolchains
 - Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
+- Added support for A100 Raven cluster Spack toolchain.
 - Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
 
 ### Fixed
@@ -26,6 +27,7 @@ in a `DerivField`.
 - Fix derivative indexing of a `DerivField` object.
 - Fix transposition of arrays with more than 7 dimensions.
 - Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
+- Fix spurious segfaults for toolchains based on Spack environment views.
 
 ### Changed
 
