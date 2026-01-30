@@ -489,3 +489,20 @@ TEST(TensorTest, Identity2D)
     static_assert(ddcHelper::get<Z, R>(identity) == 0);
     static_assert(ddcHelper::get<Z, Z>(identity) == 1);
 }
+
+TEST(TensorTest, ElementAssign)
+{
+    using Tensor2x2 = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    using Tensor3x3 = Tensor<int, VectorIndexSet<X, Y, Z>, VectorIndexSet<X, Y, Z>>;
+    Tensor2x2 small;
+    ddcHelper::get<X, X>(small) = 1;
+    ddcHelper::get<X, Y>(small) = 2;
+    ddcHelper::get<Y, X>(small) = 3;
+    ddcHelper::get<Y, Y>(small) = 4;
+    Tensor3x3 big;
+    ddcHelper::assign_elements(big, small);
+    EXPECT_EQ((ddcHelper::get<X, X>(small)), (ddcHelper::get<X, X>(big)));
+    EXPECT_EQ((ddcHelper::get<X, Y>(small)), (ddcHelper::get<X, Y>(big)));
+    EXPECT_EQ((ddcHelper::get<Y, X>(small)), (ddcHelper::get<Y, X>(big)));
+    EXPECT_EQ((ddcHelper::get<Y, Y>(small)), (ddcHelper::get<Y, Y>(big)));
+}

@@ -20,6 +20,7 @@ in a `DerivField`.
 - Add Kokkos Tools in the environment on Persee toolchains
 - Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
 - Added support for A100 Raven cluster Spack toolchain.
+- Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
 
 ### Fixed
 
