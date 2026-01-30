@@ -37,9 +37,9 @@ public:
      * reference point provided in both coordinate systems and a scaling factor.
      *
      * The transformation is then defined as:
-     * @f$ x_{out} = x_{out}* + s * (x_{in} - x_{in}*) @f$
+     * @f$ x_{out} = x_{out}^* + s * (x_{in} - x_{in}^*) @f$
      * where @f$ x_{in} @f$ and @f$ x_{out} @f$ denote the point expressed in the
-     * input and output coordinate system, @f$ \cdot * @f$ denotes the reference
+     * input and output coordinate system, @f$ \cdot^* @f$ denotes the reference
      * point and @f$ s @f$ denotes the scaling factor.
      *
      * @param reference_point_on_input_dim
