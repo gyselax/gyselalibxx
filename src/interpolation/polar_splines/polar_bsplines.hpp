@@ -547,7 +547,7 @@ public:
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
          */
-        [[deprecated("Use eval_deriv(..., Idx<ddc::DDeriv<R>>(1)) instead")]] KOKKOS_FUNCTION
+        [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<R>>(1)) instead")]] KOKKOS_FUNCTION
                 tensor_product_index_type
                 eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const;
 
@@ -715,44 +715,41 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
     std::size_t constexpr nr = BSplinesR::degree() + 1;
     std::size_t constexpr ntheta = BSplinesTheta::degree() + 1;
 
-    std::size_t constexpr nderiv_mem_r
-            = BSplinesR::degree() * static_cast<int>(ddc::in_tags_v<deriv_r, deriv_dims>);
-    std::size_t constexpr nderiv_mem_theta
-            = BSplinesTheta::degree() * static_cast<int>(ddc::in_tags_v<deriv_theta, deriv_dims>);
-
-    std::array<double, nr*(nderiv_mem_r + 1)> vals_r_ptr;
-    std::array<double, ntheta*(nderiv_mem_theta + 1)> vals_theta_ptr;
-    int offset_r, offset_theta;
+    std::array<double, nr> vals_r_ptr;
+    std::array<double, ntheta> vals_theta_ptr;
+    DSpan1D const vals_r(vals_r_ptr.data(), nr);
+    DSpan1D const vals_theta(vals_theta_ptr.data(), ntheta);
 
     if constexpr (!ddc::in_tags_v<deriv_r, deriv_dims>) {
-        DSpan1D const vals_r(vals_r_ptr.data(), nr);
         jmin_r = ddc::discrete_space<BSplinesR>().eval_basis(vals_r, ddc::select<R>(coord_eval));
-        offset_r = 0;
     } else {
         int nderivs_r = (Idx<deriv_r>(deriv_order) - Idx<deriv_r>(0)).value();
+        std::array<double, nr * nr> derivs_r_ptr;
         Kokkos::mdspan<double, Kokkos::extents<std::size_t, nr, Kokkos::dynamic_extent>> const
-                derivs_r(vals_r_ptr.data(), nderivs_r + 1);
+                derivs_r(derivs_r_ptr.data(), nderivs_r + 1);
         jmin_r = ddc::discrete_space<BSplinesR>()
                          .eval_basis_and_n_derivs(derivs_r, ddc::select<R>(coord_eval), nderivs_r);
-        offset_r = nr * nderivs_r;
+        for (int i(0); i < nr; ++i) {
+            vals_r(i) = derivs_r(i, nderivs_r);
+        }
     }
-    DSpan1D const vals_r(vals_r_ptr.data() + offset_r, nr);
     if constexpr (!ddc::in_tags_v<deriv_theta, deriv_dims>) {
         DSpan1D const vals_theta(vals_theta_ptr.data(), ntheta);
         jmin_theta = ddc::discrete_space<BSplinesTheta>()
                              .eval_basis(vals_theta, ddc::select<Theta>(coord_eval));
-        offset_theta = 0;
     } else {
         int nderivs_theta = (Idx<deriv_theta>(deriv_order) - Idx<deriv_theta>(0)).value();
+        std::array<double, ntheta * ntheta> derivs_theta_ptr;
         Kokkos::mdspan<double, Kokkos::extents<std::size_t, ntheta, Kokkos::dynamic_extent>> const
-                derivs_theta(vals_theta_ptr.data(), nderivs_theta + 1);
+                derivs_theta(derivs_theta_ptr.data(), nderivs_theta + 1);
         jmin_theta = ddc::discrete_space<BSplinesTheta>().eval_basis_and_n_derivs(
                 derivs_theta,
                 ddc::select<Theta>(coord_eval),
                 nderivs_theta);
-        offset_theta = ntheta * nderivs_theta;
+        for (int i(0); i < nr; ++i) {
+            vals_theta(i) = derivs_theta(i, nderivs_theta);
+        }
     }
-    DSpan1D const vals_theta(vals_theta_ptr.data() + offset_theta, ntheta);
 
     std::size_t nr_done = 0;
 
