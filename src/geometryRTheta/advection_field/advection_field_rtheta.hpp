@@ -232,13 +232,13 @@ private:
         host_t<DVectorFieldMemRTheta<R_cov, Theta_cov>> deriv_phi(grid);
 
         evaluator
-                .deriv(
+                .deriv(Idx<ddc::Deriv<R>>(1),
                        ddcHelper::get<R_cov>(deriv_phi),
-                       get_const_field(electrostatic_potential_coef), Idx<ddc::Deriv<R>>(1));
+                       get_const_field(electrostatic_potential_coef));
         evaluator
-                .deriv(
+                .deriv(Idx<ddc::Deriv<Theta>>(1),
                        ddcHelper::get<Theta_cov>(deriv_phi),
-                       get_const_field(electrostatic_potential_coef), Idx<ddc::Deriv<Theta>>(1));
+                       get_const_field(electrostatic_potential_coef));
 
         InverseJacobianMatrix inv_jacobian_matrix(m_mapping);
 

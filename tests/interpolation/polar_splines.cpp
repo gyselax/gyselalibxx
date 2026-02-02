@@ -195,10 +195,10 @@ TEST(PolarSplineTest, ConstantEval)
             const double val = spline_evaluator(test_point, get_const_field(coef));
             const double deriv_1
                     = spline_evaluator
-                              .deriv(test_point, get_const_field(coef), Idx<ddc::Deriv<R>>(1));
+                              .deriv(Idx<ddc::Deriv<R>>(1), test_point, get_const_field(coef));
             const double deriv_2
                     = spline_evaluator
-                              .deriv(test_point, get_const_field(coef), Idx<ddc::Deriv<Theta>>(1));
+                              .deriv(Idx<ddc::Deriv<Theta>>(1), test_point, get_const_field(coef));
 
             EXPECT_LE(fabs(val - 1.0), 1.0e-14);
             EXPECT_LE(fabs(deriv_1), 1.0e-13);
@@ -311,8 +311,8 @@ void test_polar_spline_eval_gpu()
     DFieldMem<IdxRange<GridR, GridTheta>> derivs_2(interpolation_idx_range);
 
     spline_evaluator(get_field(vals), get_const_field(coef));
-    spline_evaluator.deriv(get_field(derivs_1), get_const_field(coef), Idx<ddc::Deriv<R>>(1));
-    spline_evaluator.deriv(get_field(derivs_2), get_const_field(coef), Idx<ddc::Deriv<Theta>>(1));
+    spline_evaluator.deriv(Idx<ddc::Deriv<R>>(1), get_field(derivs_1), get_const_field(coef));
+    spline_evaluator.deriv(Idx<ddc::Deriv<Theta>>(1), get_field(derivs_2), get_const_field(coef));
 
     auto vals_host = ddc::create_mirror_view_and_copy(get_field(vals));
     auto derivs_1_host = ddc::create_mirror_view_and_copy(get_field(derivs_1));

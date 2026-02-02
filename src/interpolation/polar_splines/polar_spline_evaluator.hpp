@@ -184,9 +184,9 @@ public:
      */
     template <class DerivDim>
     KOKKOS_FUNCTION double deriv(
+            Idx<ddc::Deriv<DerivDim>> deriv_order,
             Coord<R, Theta> coord_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef,
-            Idx<ddc::Deriv<DerivDim>> deriv_order) const
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         return eval_no_bc(coord_eval, spline_coef, deriv_order);
     }
@@ -203,7 +203,7 @@ public:
      * @return The value of the derivative of the spline function on the
      * first dimension.
      */
-    [[deprecated("Use deriv(..., Idx<ddc::Deriv<R>>(1)) instead")]] KOKKOS_FUNCTION double
+    [[deprecated("Use deriv(Idx<ddc::Deriv<R>>(1), ...) instead")]] KOKKOS_FUNCTION double
     deriv_dim_1(
             Coord<R, Theta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
@@ -223,7 +223,7 @@ public:
      * @return The value of the derivative of the spline function on the
      * second dimension.
      */
-    [[deprecated("Use deriv(..., Idx<ddc::Deriv<Theta>>(1)) instead")]] KOKKOS_FUNCTION double
+    [[deprecated("Use deriv(Idx<ddc::Deriv<Theta>>(1), ...) instead")]] KOKKOS_FUNCTION double
     deriv_dim_2(
             Coord<R, Theta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
@@ -267,10 +267,10 @@ public:
      */
     template <class Domain, class... DerivDims>
     void deriv(
+            Idx<DerivDims...> const deriv_order,
             DField<Domain, MemorySpace> const spline_eval,
             ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef,
-            Idx<DerivDims...> const deriv_order) const
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
         ddc::parallel_for_each(
@@ -295,9 +295,9 @@ public:
      */
     template <class Domain, class... DerivDims>
     void deriv(
+            Idx<DerivDims...> const deriv_order,
             DField<Domain, MemorySpace> const spline_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef,
-            Idx<DerivDims...> const deriv_order) const
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
         ddc::parallel_for_each(
@@ -320,7 +320,7 @@ public:
      *      The B-splines coefficients of the spline function we want to evaluate.
      */
     template <class Domain>
-    [[deprecated("Use deriv(..., Idx<ddc::Deriv<R>>(1)) instead")]] void deriv_dim_1(
+    [[deprecated("Use deriv(Idx<ddc::Deriv<R>>(1), ...) instead")]] void deriv_dim_1(
             DField<Domain, MemorySpace> const spline_eval,
             ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
@@ -344,7 +344,7 @@ public:
      *      The B-splines coefficients of the spline function we want to evaluate.
      */
     template <class Domain>
-    [[deprecated("Use deriv(..., Idx<ddc::Deriv<R>>(1)) instead")]] void deriv_dim_1(
+    [[deprecated("Use deriv(Idx<ddc::Deriv<R>>(1), ...) instead")]] void deriv_dim_1(
             DField<Domain, MemorySpace> const spline_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
@@ -370,7 +370,7 @@ public:
      *      The B-splines coefficients of the spline function we want to evaluate..
      */
     template <class Domain>
-    [[deprecated("Use deriv(..., Idx<ddc::Deriv<Theta>>(1)) instead")]] void deriv_dim_2(
+    [[deprecated("Use deriv(Idx<ddc::Deriv<Theta>>(1), ...) instead")]] void deriv_dim_2(
             DField<Domain, MemorySpace> const spline_eval,
             ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
@@ -395,7 +395,7 @@ public:
      *      The B-splines coefficients of the spline function we want to evaluate..
      */
     template <class Domain>
-    [[deprecated("Use deriv(..., Idx<ddc::Deriv<Theta>>(1)) instead")]] void deriv_dim_2(
+    [[deprecated("Use deriv(Idx<ddc::Deriv<Theta>>(1), ...) instead")]] void deriv_dim_2(
             DField<Domain, MemorySpace> const spline_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
