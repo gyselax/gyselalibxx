@@ -281,12 +281,16 @@ private:
                 double const dr_y_2 = m_mapping.template jacobian_component<Y, R_cov>(
                         coord_2_0); // dr_y (0, th2)
 
-                double deriv_r_phi_1 = evaluator.deriv_dim_1(
-                        coord_1_0,
-                        get_const_field(electrostatic_potential_coef));
-                double deriv_r_phi_2 = evaluator.deriv_dim_1(
-                        coord_2_0,
-                        get_const_field(electrostatic_potential_coef));
+                double deriv_r_phi_1
+                        = evaluator
+                                  .deriv(Idx<ddc::Deriv<R>>(1),
+                                         coord_1_0,
+                                         get_const_field(electrostatic_potential_coef));
+                double deriv_r_phi_2
+                        = evaluator
+                                  .deriv(Idx<ddc::Deriv<R>>(1),
+                                         coord_2_0,
+                                         get_const_field(electrostatic_potential_coef));
 
                 double const determinant = dr_x_1 * dr_y_2 - dr_x_2 * dr_y_1;
 
