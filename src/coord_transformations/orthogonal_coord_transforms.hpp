@@ -203,8 +203,8 @@ public:
         return OrthogonalCoordTransforms<
                 ResultCoord,
                 ArgCoord,
-                type_seq_cat_t<ddc::to_type_seq_t<
-                        typename inverse_mapping_t<CoordTransform>::CoordJacobian>...>,
+                ddcHelper::to_coord_t<type_seq_cat_t<ddc::to_type_seq_t<
+                        typename inverse_mapping_t<CoordTransform>::CoordJacobian>...>>,
                 inverse_mapping_t<CoordTransform>...>(
                 (std::get<CoordTransform>(m_transforms).get_inverse_mapping())...);
     }
