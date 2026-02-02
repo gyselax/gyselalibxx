@@ -117,6 +117,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**Lagrange**](classLagrange.md) _A class which implements_ [_**Lagrange**_](classLagrange.md) _polynomials._
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md) 
 * **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._
+* **class** [**LinearCoordTransform**](classLinearCoordTransform.md) _A class describing a linear coordinate transformation._ 
 * **class** [**MatchingIdxSlice**](classMatchingIdxSlice.md) _Store the conforming indexes of each patch of a given interface._ 
 * **class** [**Matrix**](classMatrix.md) _The super class from which matrix classes should inherit. This class is used to solve matrix equations._     
     * **class** [**Matrix\_Banded**](classMatrix__Banded.md) _A matrix class representing a banded matrix._ 
@@ -141,6 +142,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) _A class to evaluate all the splines of all the patches at once._ 
 * **class** [**OnionPatchLocator**](classOnionPatchLocator.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._
 * **class** [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._
+* **class** [**OrthogonalCoordTransforms**](classOrthogonalCoordTransforms.md) _A multi-dimensional coordinate transformation which can be decomposed into multiple orthogonal coordinate transformations._ 
 * **class** [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) _Type of right-hand side (rhs) function of the Poisson equation._ 
 * **class** [**PolarBSplines**](classPolarBSplines.md) 
 * **class** [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md) 

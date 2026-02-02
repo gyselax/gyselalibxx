@@ -125,6 +125,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**LagrangeInterpolator**](classLagrangeInterpolator.md) _A class for interpolating a function using_ [_**Lagrange**_](classLagrange.md) _polynomials. It is designed to work with both uniform and non-uniform mesh, and have the advantage to be local._    
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md)     
 * **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._    
+* **class** [**LinearCoordTransform**](classLinearCoordTransform.md) _A class describing a linear coordinate transformation._     
 * **struct** [**MPIDim**](structMPIDim.md) _An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered information will be sent to or where the gathered information will be collected from._     
 * **class** [**MPILayout**](classMPILayout.md) _A class describing a way in which data may be laid out across MPI processes._     
 * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._     
@@ -165,6 +166,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**NullQNSolver**](classNullQNSolver.md) _Null operator._     
 * **class** [**OnionPatchLocator**](classOnionPatchLocator.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._
 * **class** [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._    
+* **class** [**OrthogonalCoordTransforms**](classOrthogonalCoordTransforms.md) _A multi-dimensional coordinate transformation which can be decomposed into multiple orthogonal coordinate transformations._     
 * **struct** [**OutsideEdge**](structOutsideEdge.md) _Define an edge for the outside index range._ [_**OutsideEdge**_](structOutsideEdge.md) _is a pseudo-edge outside the index range used to define interfaces between patches and the outside index range._
 * **struct** [**Patch**](structPatch.md) _Base tag for a patch._ 
 * **struct** [**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md) _Tag for a patch._     
@@ -248,11 +250,11 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**X\_pC**](structX__pC.md) _Tag the first non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d95.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d215.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d217.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d219.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d221.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d97.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d217.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d219.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d221.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d223.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     

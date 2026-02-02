@@ -197,23 +197,23 @@
 <para>Get an equilibrium. </para>
         </briefdescription>
         <detaileddescription>
-<para>The equilibrium is determined by the eigenvalue problem. For the given initial data <formula id="217">$ (\sigma^0, \phi^0) $</formula>,</para>
+<para>The equilibrium is determined by the eigenvalue problem. For the given initial data <formula id="230">$ (\sigma^0, \phi^0) $</formula>,</para>
 <para><orderedlist>
-<listitem><para>compute <formula id="218">$ \rho^i = \sigma^{i-1} f(\phi^{i-1})$</formula>;</para>
-</listitem><listitem><para>compute <formula id="219">$ \phi_*^i$</formula> with <formula id="220">$ -\nabla\cdot\nabla\phi_*^i = \rho^i$</formula>;</para>
-</listitem><listitem><para>for <formula id="221">$ \phi_{\text{max}}$</formula> given, compute <formula id="222">$ c^i$</formula> with <formula id="223">$ c^i = \phi_{\text{max}} / \Vert \phi_*^i \Vert_{\mathcal{L}^\infty} $</formula> ;</para>
-</listitem><listitem><para>compute <formula id="224">$ (\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i) $</formula>.</para>
+<listitem><para>compute <formula id="231">$ \rho^i = \sigma^{i-1} f(\phi^{i-1})$</formula>;</para>
+</listitem><listitem><para>compute <formula id="232">$ \phi_*^i$</formula> with <formula id="233">$ -\nabla\cdot\nabla\phi_*^i = \rho^i$</formula>;</para>
+</listitem><listitem><para>for <formula id="234">$ \phi_{\text{max}}$</formula> given, compute <formula id="235">$ c^i$</formula> with <formula id="236">$ c^i = \phi_{\text{max}} / \Vert \phi_*^i \Vert_{\mathcal{L}^\infty} $</formula> ;</para>
+</listitem><listitem><para>compute <formula id="237">$ (\sigma^i, \phi^i) = c^i (\sigma^{i-1}, \phi_*^i) $</formula>.</para>
 </listitem></orderedlist>
 </para>
-<para>We iterate until <formula id="225">$ |\sigma^i - \sigma^{i-1}|\leq \tau $</formula>.</para>
-<para>For the vortex merger simulation, <formula id="226">$ f(\phi) = \phi^2$</formula>.</para>
+<para>We iterate until <formula id="238">$ |\sigma^i - \sigma^{i-1}|\leq \tau $</formula>.</para>
+<para>For the vortex merger simulation, <formula id="239">$ f(\phi) = \phi^2$</formula>.</para>
 <para>The algorithm is also detailed in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">sigma_host</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="227">$\sigma $</formula> parameter. </para>
+<para>The <formula id="240">$\sigma $</formula> parameter. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -221,7 +221,7 @@
 <parametername direction="in">phi_eq_host</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The equilibrium electrical potential <formula id="155">$ \phi $</formula>. </para>
+<para>The equilibrium electrical potential <formula id="168">$ \phi $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -229,7 +229,7 @@
 <parametername direction="out">rho_eq_host</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The equilibrium density <formula id="192">$ \rho $</formula>. </para>
+<para>The equilibrium density <formula id="205">$ \rho $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -245,7 +245,7 @@
 <parametername direction="in">phi_max</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The maximal value of the electrical potential <formula id="155">$ \phi $</formula>. </para>
+<para>The maximal value of the electrical potential <formula id="168">$ \phi $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -253,7 +253,7 @@
 <parametername direction="in">tau</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="228">$ \tau $</formula> parameter. </para>
+<para>The <formula id="241">$ \tau $</formula> parameter. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -302,7 +302,7 @@
 <parametername direction="out">rho_eq_host</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The equilibrium density <formula id="192">$ \rho $</formula>. <linebreak/>
+<para>The equilibrium density <formula id="205">$ \rho $</formula>. <linebreak/>
  </para>
 </parameterdescription>
 </parameteritem>
@@ -319,7 +319,7 @@
 <parametername direction="in">phi_max</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The maximal value of the electrical potential <formula id="155">$ \phi $</formula>. </para>
+<para>The maximal value of the electrical potential <formula id="168">$ \phi $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -327,7 +327,7 @@
 <parametername direction="in">tau</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="228">$ \tau $</formula> parameter. </para>
+<para>The <formula id="241">$ \tau $</formula> parameter. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

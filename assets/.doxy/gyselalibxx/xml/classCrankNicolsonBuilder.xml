@@ -97,7 +97,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="17">$ \varepsilon $</formula> upperbound of the difference of two steps in the implicit method: <formula id="382">$ |y^{k+1} -  y^{k}| &lt; \varepsilon $</formula>. </para>
+<para>The <formula id="17">$ \varepsilon $</formula> upperbound of the difference of two steps in the implicit method: <formula id="392">$ |y^{k+1} -  y^{k}| &lt; \varepsilon $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

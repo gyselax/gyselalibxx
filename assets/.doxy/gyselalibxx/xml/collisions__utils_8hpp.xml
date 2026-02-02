@@ -442,15 +442,15 @@ Computes the space and species dependent collision frequency collfreq. </para>
         </briefdescription>
         <detaileddescription>
 <para>Computation of Vcoll and Tcoll, which are the moments of the kernel maxwellian function of the intra species collision operator. Vcoll and Tcoll are defined as follows:<itemizedlist>
-<listitem><para><formula id="280">$Tcoll = Pcoll^{-1}[Imean0*Imean2 - Imean1*Imean1]$</formula></para>
-</listitem><listitem><para><formula id="281">$Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]$</formula></para>
-</listitem><listitem><para><formula id="282">$Pcoll = Imean0*Imean4 - Imean1*Imean3$</formula> where the 5 integrals are defined as:  <formula id="283">\[
+<listitem><para><formula id="292">$Tcoll = Pcoll^{-1}[Imean0*Imean2 - Imean1*Imean1]$</formula></para>
+</listitem><listitem><para><formula id="293">$Vcoll = Pcoll^{-1}[Imean4*Imean1 - Imean3*Imean2]$</formula></para>
+</listitem><listitem><para><formula id="294">$Pcoll = Imean0*Imean4 - Imean1*Imean3$</formula> where the 5 integrals are defined as:  <formula id="295">\[
     Imean0=&lt;Dcoll&gt; ;
     Imean1=&lt;v*Dcoll&gt; ;
     Imean2=&lt;v^2*Dcoll&gt; ;
     Imean3=&lt;d/dv(Dcoll)&gt;
     Imean4=&lt;d/dv(v*Dcoll)&gt;
- \]</formula> The brackets <formula id="284">$&lt;.&gt;$</formula> represent the integral in velocity: <formula id="285">$&lt;.&gt; = \int . dv$</formula></para>
+ \]</formula> The brackets <formula id="296">$&lt;.&gt;$</formula> represent the integral in velocity: <formula id="297">$&lt;.&gt; = \int . dv$</formula></para>
 </listitem></itemizedlist>
 </para>
 <para><parameterlist kind="param"><parameteritem>

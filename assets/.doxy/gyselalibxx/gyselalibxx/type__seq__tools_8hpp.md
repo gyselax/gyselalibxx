@@ -283,8 +283,7 @@ constexpr int type_seq_permutation_parity_v;
 
 
 * `TypeSeqType` The type sequence whose permutation parity is calculated. 
-* `OrderedTypeSeq` The final order of the indices.whose permutation parity is calculated. 
-* `OrderedTypeSeq` The final order of the indices. 
+* `OrderedTypeSeq` The final order of the indices whose permutation parity is calculated. 
 
 
 

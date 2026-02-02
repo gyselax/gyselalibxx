@@ -510,7 +510,7 @@
 <para>Instantiate <ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para><anchor id="classSingleInterfaceDerivativesCalculator_1SingleInterfaceDerivativesCalculatorInstantiator"/> It computes the coefficients a and b, and the weights <formula id="354">$\omega_k$</formula> and stores the values in the class. If you want to compute the derivatives with an exact formula, please provide the index ranges on the full domain of the patches. If you want to use an approximation (e.g. use only 5 cells), please provide the index ranges on a reduced number of cells (e.g. 5 cells).</para>
+<para><anchor id="classSingleInterfaceDerivativesCalculator_1SingleInterfaceDerivativesCalculatorInstantiator"/> It computes the coefficients a and b, and the weights <formula id="365">$\omega_k$</formula> and stores the values in the class. If you want to compute the derivatives with an exact formula, please provide the index ranges on the full domain of the patches. If you want to use an approximation (e.g. use only 5 cells), please provide the index ranges on a reduced number of cells (e.g. 5 cells).</para>
 <para>If the interpolation points are uniform, it computes the coefficients with an explicit formula. Otherwise, it uses the recursive formula (see README.md).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
@@ -1326,13 +1326,13 @@ The following parameters are array with three elements corresponding to the valu
 <para>Compute the derivative of an equivalent global spline at the interface between two patches. </para>
     </briefdescription>
     <detaileddescription>
-<para>For a given <ref refid="structInterface" kindref="compound">Interface</ref>, this operator computes the coefficients a, b and c of the following relation: <formula id="348">$ s&apos;(X_I) = c + a s&apos;(X_{I+1}) + b s&apos;(X_{I+1})$</formula>,</para>
+<para>For a given <ref refid="structInterface" kindref="compound">Interface</ref>, this operator computes the coefficients a, b and c of the following relation: <formula id="359">$ s&apos;(X_I) = c + a s&apos;(X_{I+1}) + b s&apos;(X_{I+1})$</formula>,</para>
 <para>with<itemizedlist>
 <listitem><para>s&apos;(X_I) the derivative at the <ref refid="structInterface" kindref="compound">Interface</ref> of the two local splines on the patches.</para>
 </listitem><listitem><para>s&apos;(X_{I+1}) the derivative at the next (or right) <ref refid="structInterface" kindref="compound">Interface</ref> of the local splines on patch 1.</para>
 </listitem><listitem><para>s&apos;(X_{I-1}) the derivative at the previous (or left) <ref refid="structInterface" kindref="compound">Interface</ref> of the local splines on patch 2.</para>
 </listitem><listitem><para>a,b scalars depending on the meshes of the two patches.</para>
-</listitem><listitem><para>c a linear combination of the function values on the two patches. The weights in the linear combination depend on the meshes of the two patches. It can be written as a sum: <formula id="349">$ c = \sum_{k = -N2}^{N1} \omega_k f_k$</formula>, with <formula id="350">$ \omega_k $</formula> the weights, <formula id="351">$ f_k $</formula> the function values, <formula id="352">$ N1 $</formula> the number of cells in patch 1, and <formula id="353">$ N2 $</formula> the number of cells in patch 2.</para>
+</listitem><listitem><para>c a linear combination of the function values on the two patches. The weights in the linear combination depend on the meshes of the two patches. It can be written as a sum: <formula id="360">$ c = \sum_{k = -N2}^{N1} \omega_k f_k$</formula>, with <formula id="361">$ \omega_k $</formula> the weights, <formula id="362">$ f_k $</formula> the function values, <formula id="363">$ N1 $</formula> the number of cells in patch 1, and <formula id="364">$ N2 $</formula> the number of cells in patch 2.</para>
 </listitem></itemizedlist>
 </para>
 <para>Scheme of the two patches: X_{I-1} X_I X_{I+1} <hruler/>

@@ -98,11 +98,13 @@
     <ul class="current">
     <li class="toctree-l4"><a class="reference internal" href="#analytically-invertible-coordinate-transformations">Analytically invertible coordinate transformations</a>
     </li>
+    <li class="toctree-l4"><a class="reference internal" href="#barycentric-coordinate-transformation">Barycentric coordinate transformation</a>
+    </li>
     <li class="toctree-l4"><a class="reference internal" href="#discrete-coordinate-transformation-defined-on-b-splines">Discrete coordinate transformation defined on B-splines</a>
     </li>
-    <li class="toctree-l4"><a class="reference internal" href="#3d-coordinate-transformations">3D coordinate transformations</a>
-    </li>
     <li class="toctree-l4"><a class="reference internal" href="#combined-coordinate-transformation-which-combines-two-of-the-coordinate-transformations-above">Combined coordinate transformation which combines two of the coordinate transformations above</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#orthogonal-coordinate-transformation">Orthogonal coordinate transformation</a>
     </li>
     </ul>
                 </li>
@@ -583,7 +585,13 @@
 <p>This folder contains code describing tools for handling different coordinate systems.</p>
 <p>The current coordinate transformations implemented are:</p>
 <h2 id="analytically-invertible-coordinate-transformations">Analytically invertible coordinate transformations</h2>
-<h3 id="circular-coordinate-transformation">Circular coordinate transformation</h3>
+<h3 id="1d-coordinate-transformations">1D coordinate transformations</h3>
+<h4 id="linear-coordinate-transformation">Linear coordinate transformation</h4>
+<div class="arithmatex">\[
+y(x) = \alpha x + \beta
+\]</div>
+<h3 id="2d-coordinate-transformations">2D coordinate transformations</h3>
+<h4 id="circular-coordinate-transformation">Circular coordinate transformation</h4>
 <ul>
 <li>Mapping (CircularToCartesian):</li>
 </ul>
@@ -614,7 +622,7 @@ J (r,\theta) =
 \end{aligned}
 \right.
 \]</div>
-<h3 id="czarny-coordinate-transformation">Czarny coordinate transformation</h3>
+<h4 id="czarny-coordinate-transformation">Czarny coordinate transformation</h4>
 <ul>
 <li>Mapping (CzarnyToCartesian): Taking <span class="arithmatex">\(\varepsilon \in ]0,1[\)</span> and <span class="arithmatex">\(e\)</span> as parameters.</li>
 </ul>
@@ -675,27 +683,8 @@ J (r,\theta)
 \end{aligned}
 \right.
 \]</div>
-<h3 id="barycentric-coordinate-transformation">Barycentric coordinate transformation</h3>
-<ul>
-<li>Mapping (BarycentricToCartesian):</li>
-</ul>
-<div class="arithmatex">\[
- (c_1, c_2, c_3) \rightarrow (x, y).
-\]</div>
-<h2 id="discrete-coordinate-transformation-defined-on-b-splines">Discrete coordinate transformation defined on B-splines</h2>
-<ul>
-<li>Mapping (DiscreteToCartesian)</li>
-</ul>
-<div class="arithmatex">\[
-\left\{
-\begin{aligned}
- &amp; x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta) , \\
- &amp; y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
-\end{aligned}
-\right.
-\]</div>
-<h2 id="3d-coordinate-transformations">3D coordinate transformations</h2>
-<h3 id="cylindrical-to-cartesian-transformation">Cylindrical to Cartesian transformation</h3>
+<h3 id="3d-coordinate-transformations">3D coordinate transformations</h3>
+<h4 id="cylindrical-to-cartesian-transformation">Cylindrical to Cartesian transformation</h4>
 <ul>
 <li>Mapping (CylindricalToCartesian):</li>
 </ul>
@@ -729,7 +718,7 @@ J (R, Z, \zeta) =
 \end{aligned}
 \right.
 \]</div>
-<h3 id="toroidal-to-cylindrical-transformation">Toroidal to Cylindrical transformation</h3>
+<h4 id="toroidal-to-cylindrical-transformation">Toroidal to Cylindrical transformation</h4>
 <p>The toroidal to cylindrical transformation combines a 2D transformation in the polar plane of the torus with an orthogonal transformation in the remaining dimension.</p>
 <div class="arithmatex">\[
 \begin{aligned}
@@ -746,6 +735,25 @@ J (R, Z, \zeta) =
   0          &amp; 0 &amp;       -1 \\
 \end{bmatrix}.
 \]</div>
+<h2 id="barycentric-coordinate-transformation">Barycentric coordinate transformation</h2>
+<ul>
+<li>Mapping (BarycentricToCartesian):</li>
+</ul>
+<div class="arithmatex">\[
+ (c_1, c_2, c_3) \rightarrow (x, y).
+\]</div>
+<h2 id="discrete-coordinate-transformation-defined-on-b-splines">Discrete coordinate transformation defined on B-splines</h2>
+<ul>
+<li>Mapping (DiscreteToCartesian)</li>
+</ul>
+<div class="arithmatex">\[
+\left\{
+\begin{aligned}
+ &amp; x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta) , \\
+ &amp; y(r,\theta) = \sum_k c_{y,k} B_k(r,\theta) .
+\end{aligned}
+\right.
+\]</div>
 <h2 id="combined-coordinate-transformation-which-combines-two-of-the-coordinate-transformations-above">Combined coordinate transformation which combines two of the coordinate transformations above</h2>
 <p>The tools are:</p>
 <ul>
@@ -754,7 +762,9 @@ J (R, Z, \zeta) =
 <li>MetricTensorEvaluator : this tool calculates the metric tensor associated with a coordinate transformation.</li>
 <li>VectorMapper : this tool helps when converting vectors stored in a <code>VectorField</code> from one coordinate system to another.</li>
 <li>other static analysis tools found in <code>coord_transformation_tools.hpp</code></li>
-</ul></div>
+</ul>
+<h2 id="orthogonal-coordinate-transformation">Orthogonal coordinate transformation</h2>
+<p>A coordinate transformation that is comprised of coordinate transformation components which are orthogonal to one another.</p></div>
               
             </div>
           </div><footer>

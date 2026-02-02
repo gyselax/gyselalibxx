@@ -18,7 +18,9 @@
     <innerfile refid="identity__coordinate__change_8hpp">identity_coordinate_change.hpp</innerfile>
     <innerfile refid="inv__jacobian__o__point_8hpp">inv_jacobian_o_point.hpp</innerfile>
     <innerfile refid="inverse__jacobian__matrix_8hpp">inverse_jacobian_matrix.hpp</innerfile>
+    <innerfile refid="linear__coord__transform_8hpp">linear_coord_transform.hpp</innerfile>
     <innerfile refid="metric__tensor__evaluator_8hpp">metric_tensor_evaluator.hpp</innerfile>
+    <innerfile refid="orthogonal__coord__transforms_8hpp">orthogonal_coord_transforms.hpp</innerfile>
     <innerfile refid="toroidal__to__cylindrical_8hpp">toroidal_to_cylindrical.hpp</innerfile>
     <innerfile refid="vector__mapper_8hpp">vector_mapper.hpp</innerfile>
     <briefdescription>

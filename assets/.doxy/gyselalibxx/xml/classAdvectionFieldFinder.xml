@@ -158,7 +158,7 @@
           <declname>advection_field_xy</declname>
         </param>
         <briefdescription>
-<para>Compute the advection field from a Field of <formula id="191">$\phi$</formula> values. </para>
+<para>Compute the advection field from a Field of <formula id="204">$\phi$</formula> values. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -166,7 +166,7 @@
 <parametername direction="in">electrostatic_potential</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The values of the solution <formula id="191">$\phi$</formula> of the Poisson-like equation (2). </para>
+<para>The values of the solution <formula id="204">$\phi$</formula> of the Poisson-like equation (2). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -199,7 +199,7 @@
           <declname>advection_field_xy</declname>
         </param>
         <briefdescription>
-<para>Compute the advection field from a spline representation of <formula id="191">$\phi$</formula> solution. The B-splines basis used is the cross-product of two 1D B-splines basis. </para>
+<para>Compute the advection field from a spline representation of <formula id="204">$\phi$</formula> solution. The B-splines basis used is the cross-product of two 1D B-splines basis. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -207,7 +207,7 @@
 <parametername direction="in">electrostatic_potential_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the solution <formula id="191">$\phi$</formula> of the Poisson-like equation (2). </para>
+<para>The spline representation of the solution <formula id="204">$\phi$</formula> of the Poisson-like equation (2). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -248,7 +248,7 @@
 <parametername direction="in">electrostatic_potential_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The polar spline representation of the solution <formula id="191">$\phi$</formula> of the Poisson-like equation (2). </para>
+<para>The polar spline representation of the solution <formula id="204">$\phi$</formula> of the Poisson-like equation (2). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -285,7 +285,7 @@
           <declname>advection_field_xy_centre</declname>
         </param>
         <briefdescription>
-<para>Compute the advection field from a Field of <formula id="191">$\phi$</formula> values. </para>
+<para>Compute the advection field from a Field of <formula id="204">$\phi$</formula> values. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -293,7 +293,7 @@
 <parametername direction="in">electrostatic_potential</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The values of the solution <formula id="191">$\phi$</formula> of the Poisson-like equation (2). </para>
+<para>The values of the solution <formula id="204">$\phi$</formula> of the Poisson-like equation (2). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -338,7 +338,7 @@
           <declname>advection_field_xy_centre</declname>
         </param>
         <briefdescription>
-<para>Compute the advection field from a spline representation of <formula id="191">$\phi$</formula>. The B-splines basis used is the cross-product of two 1D B-splines basis. </para>
+<para>Compute the advection field from a spline representation of <formula id="204">$\phi$</formula>. The B-splines basis used is the cross-product of two 1D B-splines basis. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -346,7 +346,7 @@
 <parametername direction="in">electrostatic_potential_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the solution <formula id="191">$\phi$</formula> of the Poisson-like equation (2). </para>
+<para>The spline representation of the solution <formula id="204">$\phi$</formula> of the Poisson-like equation (2). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -399,7 +399,7 @@
 <parametername direction="in">electrostatic_potential_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The polar spline representation of the solution <formula id="191">$\phi$</formula> of the Poisson-like equation (2). </para>
+<para>The polar spline representation of the solution <formula id="204">$\phi$</formula> of the Poisson-like equation (2). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -470,7 +470,7 @@
 <parametername direction="in">electrostatic_potential_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the solution <formula id="191">$\phi$</formula> of the Poisson-like equation (2). </para>
+<para>The spline representation of the solution <formula id="204">$\phi$</formula> of the Poisson-like equation (2). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -535,7 +535,7 @@
 <parametername direction="in">electrostatic_potential_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The spline representation of the solution <formula id="191">$\phi$</formula> of the Poisson-like equation (2). </para>
+<para>The spline representation of the solution <formula id="204">$\phi$</formula> of the Poisson-like equation (2). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -568,37 +568,37 @@
     <detaileddescription>
 <para>The Vlasov-Poisson equations are given by</para>
 <para><itemizedlist>
-<listitem><para>(1) <formula id="169">$ \partial_t \rho + (E \wedge e_z) \cdot \nabla \rho = 0 $</formula>,</para>
-</listitem><listitem><para>(2) <formula id="170">$ - \nabla\cdot\nabla \phi = \rho  $</formula>,</para>
-</listitem><listitem><para>(3) <formula id="171">$ E = -\nabla \phi  $</formula>.</para>
+<listitem><para>(1) <formula id="182">$ \partial_t \rho + (E \wedge e_z) \cdot \nabla \rho = 0 $</formula>,</para>
+</listitem><listitem><para>(2) <formula id="183">$ - \nabla\cdot\nabla \phi = \rho  $</formula>,</para>
+</listitem><listitem><para>(3) <formula id="184">$ E = -\nabla \phi  $</formula>.</para>
 </listitem></itemizedlist>
 </para>
-<para>The functions are defined on a logical domain, and the mapping from the logical domain to the physical domain is written <formula id="172">$\mathcal{F}$</formula>.</para>
-<para>We here focus on equation (3). The <formula id="155">$ \phi $</formula> is already computed on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator() we compute the advection field ( <formula id="173">$A = E \wedge e_z$</formula>) thanks to (3) using the B-splines coefficients. Depending on the given mapping, the computation at the centre point is not always well-defined so we linearise around the centre point as explained in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
+<para>The functions are defined on a logical domain, and the mapping from the logical domain to the physical domain is written <formula id="185">$\mathcal{F}$</formula>.</para>
+<para>We here focus on equation (3). The <formula id="168">$ \phi $</formula> is already computed on B-splines with the given Poisson solver. Then in the AdvectionFieldFinder::operator() we compute the advection field ( <formula id="186">$A = E \wedge e_z$</formula>) thanks to (3) using the B-splines coefficients. Depending on the given mapping, the computation at the centre point is not always well-defined so we linearise around the centre point as explained in Edoardo Zoni&apos;s article (<ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>).</para>
 <para>The advection field can be computed along the logical domain axis or the physical domain axis.</para>
 <para>1- In the first case, we compute the electric field thanks to (3) and<itemizedlist>
-<listitem><para><formula id="174">$ \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} \hat{\nabla}_{r,\theta} \phi(r, \theta) $</formula>,</para>
-</listitem><listitem><para><formula id="175">$ E(r, \theta) = -\nabla_{x,y} \phi(r, \theta) $</formula>,</para>
+<listitem><para><formula id="187">$ \nabla_{x,y} \phi(r, \theta) = (J^{-1})^{T} \hat{\nabla}_{r,\theta} \phi(r, \theta) $</formula>,</para>
+</listitem><listitem><para><formula id="188">$ E(r, \theta) = -\nabla_{x,y} \phi(r, \theta) $</formula>,</para>
 </listitem></itemizedlist>
 </para>
-<para>For <formula id="176">$ r &lt; \varepsilon $</formula>, <formula id="177">$(J^{-1})^{T}$</formula> is ill-defined so we linearise  <formula id="178">$ E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta)
+<para>For <formula id="189">$ r &lt; \varepsilon $</formula>, <formula id="190">$(J^{-1})^{T}$</formula> is ill-defined so we linearise  <formula id="191">$ E(r, \theta) = \left( 1 - \frac{r}{\varepsilon} \right)  E(0, \theta)
 + \frac{r}{\varepsilon} E(\varepsilon, \theta) $</formula>,</para>
-<para>with <formula id="179">$ E(0, \theta) $</formula> computed thanks to</para>
+<para>with <formula id="192">$ E(0, \theta) $</formula> computed thanks to</para>
 <para><itemizedlist>
-<listitem><para><formula id="180">$ \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right](0, \theta_1) $</formula>,</para>
-</listitem><listitem><para><formula id="181">$ \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2) $</formula>,</para>
+<listitem><para><formula id="193">$ \partial_r \phi (0, \theta_1) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right](0, \theta_1) $</formula>,</para>
+</listitem><listitem><para><formula id="194">$ \partial_r \phi (0, \theta_2) = \left[\partial_r x  \partial_x \phi + \partial_r y  \partial_y \phi \right] (0, \theta_2) $</formula>,</para>
 </listitem></itemizedlist>
 </para>
-<para>where <formula id="182">$ \theta_1 $</formula> and <formula id="183">$ \theta_2 $</formula> correspond to linearly independent directions.</para>
-<para>Then the advection field along the physical domain axis is given by <formula id="173">$A = E \wedge e_z$</formula>.</para>
+<para>where <formula id="195">$ \theta_1 $</formula> and <formula id="196">$ \theta_2 $</formula> correspond to linearly independent directions.</para>
+<para>Then the advection field along the physical domain axis is given by <formula id="186">$A = E \wedge e_z$</formula>.</para>
 <para>2- In the second case, the advection field along the logical domain axis is computed with<itemizedlist>
-<listitem><para><formula id="184">$ \hat{\nabla} \phi = \sum_{i,j} \partial_{x_i} \phi g^{ij} e_j$</formula>,</para>
-</listitem><listitem><para>with <formula id="185">$g^{ij}$</formula>, the coefficients of the inverse metric tensor,</para>
-</listitem><listitem><para><formula id="186">$g_{jj}$</formula>, the coefficients of the metric tensor,</para>
-</listitem><listitem><para><formula id="187">$e_j$</formula>, the unnormalized local covariants vectors.</para>
+<listitem><para><formula id="197">$ \hat{\nabla} \phi = \sum_{i,j} \partial_{x_i} \phi g^{ij} e_j$</formula>,</para>
+</listitem><listitem><para>with <formula id="198">$g^{ij}$</formula>, the coefficients of the inverse metric tensor,</para>
+</listitem><listitem><para><formula id="199">$g_{jj}$</formula>, the coefficients of the metric tensor,</para>
+</listitem><listitem><para><formula id="200">$e_j$</formula>, the unnormalized local covariants vectors.</para>
 </listitem></itemizedlist>
 </para>
-<para>Then, we compute <formula id="188">$ \hat{E}_{r\theta} = -\hat{\nabla}_{r\theta} \phi $</formula> and <formula id="189">$ \hat{A}_{r\theta} = J^{-1}(J \hat{E}_{r\theta} \wedge e_z) $</formula>, with <formula id="190">$ J $</formula> the Jacobian matrix of the transformation <formula id="123">$ (r,\theta) \mapsto (x,y) $</formula>.</para>
+<para>Then, we compute <formula id="201">$ \hat{E}_{r\theta} = -\hat{\nabla}_{r\theta} \phi $</formula> and <formula id="202">$ \hat{A}_{r\theta} = J^{-1}(J \hat{E}_{r\theta} \wedge e_z) $</formula>, with <formula id="203">$ J $</formula> the Jacobian matrix of the transformation <formula id="123">$ (r,\theta) \mapsto (x,y) $</formula>.</para>
 <para>The equation (1) is solved thanks to advection operator (IAdvectionRTheta).</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>

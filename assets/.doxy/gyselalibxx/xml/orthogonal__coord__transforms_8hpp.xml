@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="orthogonal__coord__transforms_8hpp" kind="file" language="C++">
+    <compoundname>orthogonal_coord_transforms.hpp</compoundname>
+    <includes local="no">ddc/ddc.hpp</includes>
+    <includes refid="coord__transformation__tools_8hpp" local="yes">coord_transformation_tools.hpp</includes>
+    <includes refid="ddc__helper_8hpp" local="yes">ddc_helper.hpp</includes>
+    <includes refid="tensor_8hpp" local="yes">tensor.hpp</includes>
+    <includes refid="type__seq__tools_8hpp" local="yes">type_seq_tools.hpp</includes>
+    <incdepgraph>
+      <node id="3">
+        <label>coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/orthogonal_coord_transforms.hpp</label>
+        <link refid="orthogonal__coord__transforms_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+      </node>
+      <node id="8">
+        <label>tensor.hpp</label>
+        <link refid="tensor_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="12">
+        <label>tensor_common.hpp</label>
+        <link refid="tensor__common_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
+        <label>tensor_index_tools.hpp</label>
+        <link refid="tensor__index__tools_8hpp_source"/>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
+        <label>vector_index_tools.hpp</label>
+        <link refid="vector__index__tools_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>ddc_aliases.hpp</label>
+        <link refid="ddc__aliases_8hpp_source"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>ddc_helper.hpp</label>
+        <link refid="ddc__helper_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="20" relation="include">
+        </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
+      </node>
+      <node id="14">
+        <label>type_seq_tools.hpp</label>
+        <link refid="type__seq__tools_8hpp_source"/>
+      </node>
+      <node id="16">
+        <label>view.hpp</label>
+        <link refid="view_8hpp_source"/>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
+        </childnode>
+      </node>
+      <node id="18">
+        <label>Kokkos_Core.hpp</label>
+      </node>
+      <node id="4">
+        <label>array</label>
+      </node>
+      <node id="9">
+        <label>cassert</label>
+      </node>
+      <node id="20">
+        <label>cmath</label>
+      </node>
+      <node id="5">
+        <label>concepts</label>
+      </node>
+      <node id="2">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="11">
+        <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="17">
+        <label>ostream</label>
+      </node>
+      <node id="6">
+        <label>type_traits</label>
+      </node>
+      <node id="7">
+        <label>utility</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="classOrthogonalCoordTransforms" prot="public">OrthogonalCoordTransforms</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ddc/ddc.hpp&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;coord_transformation_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_helper.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;tensor.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;type_seq_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">namespace<sp/></highlight><highlight class="normal">detail<sp/>{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordArg,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TypeSeqTransforms&gt;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindTransform;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">CoordArg,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">HeadTransform,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>Transforms&gt;</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindTransform&lt;CoordArg,<sp/>std::tuple&lt;HeadTransform,<sp/>Transforms...&gt;&gt;</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((ddc::detail::is_tagged_vector_v&lt;CoordArg&gt;)&amp;&amp;(</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;typename<sp/>HeadTransform::CoordArg,<sp/>CoordArg&gt;))</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>||<sp/>(ddc::in_tags_v&lt;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CoordArg,</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;typename<sp/>HeadTransform::CoordArg&gt;&gt;),</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>HeadTransform,</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>FindTransform&lt;CoordArg,<sp/>std::tuple&lt;Transforms...&gt;&gt;::type&gt;;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordArg&gt;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal">FindTransform&lt;CoordArg,<sp/>std::tuple&lt;&gt;&gt;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(std::is_same_v&lt;CoordArg,<sp/>CoordArg&gt;,<sp/></highlight><highlight class="stringliteral">&quot;Transform<sp/>not<sp/>found&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">type<sp/>=<sp/>void;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>detail</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ArgCoord,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">ResultCoord,<sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">JacobianCoord,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal">...<sp/>CoordTransform&gt;</highlight></codeline>
+<codeline lineno="62" refid="classOrthogonalCoordTransforms" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classOrthogonalCoordTransforms" kindref="compound">OrthogonalCoordTransforms</ref></highlight></codeline>
+<codeline lineno="63"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight><highlight class="keyword">sizeof</highlight><highlight class="normal">...(CoordTransform)<sp/>&gt;<sp/>1);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="68" refid="classOrthogonalCoordTransforms_1a674712b33e4623a1d12552a4b6b7cc77" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classOrthogonalCoordTransforms_1a674712b33e4623a1d12552a4b6b7cc77" kindref="member">CoordArg</ref><sp/>=<sp/>ArgCoord;</highlight></codeline>
+<codeline lineno="70" refid="classOrthogonalCoordTransforms_1afefad21ce2c07c75937aa97df51efe6c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classOrthogonalCoordTransforms_1afefad21ce2c07c75937aa97df51efe6c" kindref="member">CoordResult</ref><sp/>=<sp/>ResultCoord;</highlight></codeline>
+<codeline lineno="72" refid="classOrthogonalCoordTransforms_1aae0e4590b8d5e7ee9624729bca37b93a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classOrthogonalCoordTransforms_1aae0e4590b8d5e7ee9624729bca37b93a" kindref="member">CoordJacobian</ref><sp/>=<sp/>JacobianCoord;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(ddc::type_seq_same_v&lt;</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>type_seq_cat_t&lt;ddc::to_type_seq_t&lt;typename<sp/>CoordTransform::CoordJacobian&gt;...&gt;,</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;JacobianCoord&gt;&gt;);</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>std::tuple&lt;CoordTransform...&gt;<sp/>m_transforms;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="86" refid="classOrthogonalCoordTransforms_1ac697e1bed23066ec44f95468d6867018" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/>KOKKOS_FUNCTION<sp/><ref refid="classOrthogonalCoordTransforms_1ac697e1bed23066ec44f95468d6867018" kindref="member">OrthogonalCoordTransforms</ref>(CoordTransform<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;...<sp/>transform)</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_transforms(transform...)</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="classOrthogonalCoordTransforms_1a2b977292d6128db500bbc9928761dc0b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classOrthogonalCoordTransforms_1afefad21ce2c07c75937aa97df51efe6c" kindref="member">CoordResult</ref><sp/><ref refid="classOrthogonalCoordTransforms_1a2b977292d6128db500bbc9928761dc0b" kindref="member">operator()</ref>(<ref refid="classOrthogonalCoordTransforms_1a674712b33e4623a1d12552a4b6b7cc77" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="99"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classOrthogonalCoordTransforms_1afefad21ce2c07c75937aa97df51efe6c" kindref="member">CoordResult</ref>(std::get&lt;CoordTransform&gt;(m_transforms)(</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CoordTransform::CoordArg(coord))...);</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>CoordType,<sp/>std::enable_if_t&lt;!std::is_same_v&lt;CoordType,<sp/>CoordArg&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="114" refid="classOrthogonalCoordTransforms_1a788f69a4c41a28cac32093fa90a28f16" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classOrthogonalCoordTransforms_1a788f69a4c41a28cac32093fa90a28f16" kindref="member">operator()</ref>(CoordType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="115"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">SelectedCoordTransform<sp/>=</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindTransform&lt;CoordType,<sp/>std::tuple&lt;CoordTransform...&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::get&lt;SelectedCoordTransform&gt;(m_transforms)(coord);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;CoordResult&gt;,</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_covariant_dims_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt;&gt;&gt;</highlight></codeline>
+<codeline lineno="135" refid="classOrthogonalCoordTransforms_1ae7f0125b08cc1fafa2c70f3c50bd920c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classOrthogonalCoordTransforms_1ae7f0125b08cc1fafa2c70f3c50bd920c" kindref="member">jacobian_matrix</ref>(<ref refid="classOrthogonalCoordTransforms_1a674712b33e4623a1d12552a4b6b7cc77" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="136"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">TensorType<sp/>=<sp/><ref refid="classTensor" kindref="compound">DTensor</ref>&lt;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;CoordResult&gt;,</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_covariant_dims_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt;&gt;&gt;;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>TensorType<sp/><ref refid="classOrthogonalCoordTransforms_1ae7f0125b08cc1fafa2c70f3c50bd920c" kindref="member">jacobian_matrix</ref>(0);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>((ddcHelper::assign_elements(</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="classOrthogonalCoordTransforms_1ae7f0125b08cc1fafa2c70f3c50bd920c" kindref="member">jacobian_matrix</ref>,</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::get&lt;CoordTransform&gt;(m_transforms)</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.<ref refid="classOrthogonalCoordTransforms_1ae7f0125b08cc1fafa2c70f3c50bd920c" kindref="member">jacobian_matrix</ref>(</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CoordTransform::CoordJacobian(coord)))),</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>...);</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classOrthogonalCoordTransforms_1ae7f0125b08cc1fafa2c70f3c50bd920c" kindref="member">jacobian_matrix</ref>;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexTag1,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>IndexTag2&gt;</highlight></codeline>
+<codeline lineno="158" refid="classOrthogonalCoordTransforms_1a2ff6e9efec2884108796597df8f6fc8c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classOrthogonalCoordTransforms_1a2ff6e9efec2884108796597df8f6fc8c" kindref="member">jacobian_component</ref>(<ref refid="classOrthogonalCoordTransforms_1a674712b33e4623a1d12552a4b6b7cc77" kindref="member">CoordArg</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="159"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(ddc::in_tags_v&lt;IndexTag1,<sp/>ddc::to_type_seq_t&lt;CoordResult&gt;&gt;);</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::in_tags_v&lt;IndexTag2,<sp/>get_covariant_dims_t&lt;ddc::to_type_seq_t&lt;CoordArg&gt;&gt;&gt;);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">RelevantMapping<sp/>=</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::FindTransform&lt;IndexTag2,<sp/>std::tuple&lt;CoordTransform...&gt;&gt;::type;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(ddc::in_tags_v&lt;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IndexTag1,</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;typename<sp/>RelevantMapping::CoordResult&gt;&gt;)<sp/>{</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>std::get&lt;RelevantMapping&gt;(m_transforms)</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.template<sp/>jacobian_component&lt;IndexTag1,<sp/>IndexTag2&gt;(</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>RelevantMapping::CoordJacobian(coord));</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184" refid="classOrthogonalCoordTransforms_1a7504dd07eaf7c8db375ac089c9aa2559" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_FUNCTION<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="classOrthogonalCoordTransforms_1a7504dd07eaf7c8db375ac089c9aa2559" kindref="member">jacobian</ref>(<ref refid="classOrthogonalCoordTransforms_1aae0e4590b8d5e7ee9624729bca37b93a" kindref="member">CoordJacobian</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>coord)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="185"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>result</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>((std::get&lt;CoordTransform&gt;(m_transforms)</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>.jacobian(</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>CoordTransform::CoordJacobian(coord)))</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>...);</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>*=<sp/>type_seq_permutation_parity_v&lt;</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::to_type_seq_t&lt;CoordResult&gt;,</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>type_seq_cat_t&lt;ddc::to_type_seq_t&lt;typename<sp/>CoordTransform::CoordResult&gt;...&gt;&gt;;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight></codeline>
+<codeline lineno="201" refid="classOrthogonalCoordTransforms_1ab98e73b31af198bb9b29ae2be9630654" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/>KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/><ref refid="classOrthogonalCoordTransforms_1ab98e73b31af198bb9b29ae2be9630654" kindref="member">get_inverse_mapping</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="202"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="classOrthogonalCoordTransforms" kindref="compound">OrthogonalCoordTransforms</ref>&lt;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ResultCoord,</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ArgCoord,</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddcHelper::to_coord_t&lt;type_seq_cat_t&lt;ddc::to_type_seq_t&lt;</highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>inverse_mapping_t&lt;CoordTransform&gt;::CoordJacobian&gt;...&gt;&gt;,</highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inverse_mapping_t&lt;CoordTransform&gt;...&gt;(</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(std::get&lt;CoordTransform&gt;(m_transforms).get_inverse_mapping())...);</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="211"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/orthogonal_coord_transforms.hpp"/>
+  </compounddef>
+</doxygen>

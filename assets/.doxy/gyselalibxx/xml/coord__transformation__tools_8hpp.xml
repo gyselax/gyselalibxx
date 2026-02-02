@@ -23,6 +23,7 @@
     <includedby refid="inv__jacobian__o__point_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp</includedby>
     <includedby refid="inverse__jacobian__matrix_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</includedby>
     <includedby refid="metric__tensor__evaluator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/metric_tensor_evaluator.hpp</includedby>
+    <includedby refid="orthogonal__coord__transforms_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/orthogonal_coord_transforms.hpp</includedby>
     <includedby refid="polar__bsplines_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp</includedby>
     <includedby refid="math__tools_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp</includedby>
     <includedby refid="onion__patch__locator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</includedby>
@@ -243,15 +244,17 @@
         </childnode>
         <childnode refid="32" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
         <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="40" relation="include">
         </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
       </node>
       <node id="27">
@@ -313,6 +316,10 @@
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
+      </node>
+      <node id="39">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/orthogonal_coord_transforms.hpp</label>
+        <link refid="orthogonal__coord__transforms_8hpp_source"/>
       </node>
       <node id="38">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
@@ -462,7 +469,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp</label>
         <link refid="lie__poisson__bracket_8hpp_source"/>
       </node>
-      <node id="39">
+      <node id="40">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp</label>
         <link refid="math__tools_8hpp_source"/>
         <childnode refid="22" relation="include">
@@ -476,27 +483,27 @@
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="41">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/onion_patch_locator.hpp</label>
         <link refid="onion__patch__locator_8hpp_source"/>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="42" relation="include">
-        </childnode>
-      </node>
-      <node id="41">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
-        <link refid="utils__patch__locators_8hpp_source"/>
         <childnode refid="42" relation="include">
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
       </node>
       <node id="42">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/connectivity/utils_patch_locators.hpp</label>
+        <link refid="utils__patch__locators_8hpp_source"/>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+      </node>
+      <node id="43">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/constant_extrapolation_rules_onion.hpp</label>
         <link refid="constant__extrapolation__rules__onion_8hpp_source"/>
       </node>
-      <node id="43">
+      <node id="44">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</label>
         <link refid="multipatch__spline__evaluator__2d_8hpp_source"/>
       </node>
@@ -514,7 +521,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="45">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/volume_quadrature_nd.hpp</label>
         <link refid="volume__quadrature__nd_8hpp"/>
         <childnode refid="37" relation="include">

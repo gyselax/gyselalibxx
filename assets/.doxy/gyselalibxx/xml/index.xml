@@ -1667,6 +1667,24 @@
     <member refid="classLiePoissonBracket_1a8de77d77628c8ea4bd87f5f1b73e58f9" kind="function"><name>operator()</name></member>
     <member refid="classLiePoissonBracket_1a8e2fab8a06f1669f7a73b598a5babf02" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="classLinearCoordTransform" kind="class"><name>LinearCoordTransform</name>
+    <member refid="classLinearCoordTransform_1a23294a50c649fd311cc06407b1d95dc6" kind="typedef"><name>CoordArg</name></member>
+    <member refid="classLinearCoordTransform_1a483a1cfb33cfa9e67bc6742550d507c2" kind="typedef"><name>CoordResult</name></member>
+    <member refid="classLinearCoordTransform_1a65e85ae8b98b95b7156ebec8452e7746" kind="typedef"><name>CoordJacobian</name></member>
+    <member refid="classLinearCoordTransform_1a929e3bf5f8fc4bc674f68b0d7d2eea7b" kind="variable"><name>m_reference_point_on_input_dim</name></member>
+    <member refid="classLinearCoordTransform_1ab5a78cddd336e57b9decc7d5c9edd2d8" kind="variable"><name>m_reference_point_on_output_dim</name></member>
+    <member refid="classLinearCoordTransform_1a8b627662e2a91acc0c2307bee236701c" kind="variable"><name>m_scaling_factor</name></member>
+    <member refid="classLinearCoordTransform_1a936d0dc9e8d8bef527b484b423ab3c31" kind="function"><name>LinearCoordTransform</name></member>
+    <member refid="classLinearCoordTransform_1a02cc438819317224b98607055a067243" kind="function"><name>LinearCoordTransform</name></member>
+    <member refid="classLinearCoordTransform_1a043fbee1025de933a69fc76cbf66cdff" kind="function"><name>~LinearCoordTransform</name></member>
+    <member refid="classLinearCoordTransform_1aaed5cba403300f9182df3b6ce4ffe111" kind="function"><name>operator()</name></member>
+    <member refid="classLinearCoordTransform_1a4b38cbc5a646496ab62e4e3e2d8c89ec" kind="function"><name>jacobian</name></member>
+    <member refid="classLinearCoordTransform_1a7729159851e0fa1b8d916202f1888d40" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classLinearCoordTransform_1a3c869d2a4943b8a86942c5ca6db97d7f" kind="function"><name>jacobian_component</name></member>
+    <member refid="classLinearCoordTransform_1ad12f5b436962abd7b88193b5fb4b2052" kind="function"><name>inv_jacobian_matrix</name></member>
+    <member refid="classLinearCoordTransform_1af2d649c924d184a0501631e559fb7421" kind="function"><name>inv_jacobian_component</name></member>
+    <member refid="classLinearCoordTransform_1a9e658d91bc4f6a6eae8051c405645032" kind="function"><name>get_inverse_mapping</name></member>
+  </compound>
   <compound refid="classMatchingIdxSlice" kind="class"><name>MatchingIdxSlice</name>
     <member refid="classMatchingIdxSlice_1a6ae1a3ffc067ecc5a7a59a30ff2e2395" kind="typedef"><name>Patch1</name></member>
     <member refid="classMatchingIdxSlice_1ae2bb7212ead00ac2c6daa9d617bc2784" kind="typedef"><name>Patch2</name></member>
@@ -2168,6 +2186,19 @@
     <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a83853bf96978cf43658602ed45fea3cb" kind="function"><name>get_mapping_on_patch</name></member>
     <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a6989dccaab70d5b5974a0d3f5263edff" kind="function"><name>get_mapping_on_logical_dim</name></member>
     <member refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa_1a66ec2021188919e8bb341d6327b986da" kind="function"><name>set_and_check_radii</name></member>
+  </compound>
+  <compound refid="classOrthogonalCoordTransforms" kind="class"><name>OrthogonalCoordTransforms</name>
+    <member refid="classOrthogonalCoordTransforms_1a674712b33e4623a1d12552a4b6b7cc77" kind="typedef"><name>CoordArg</name></member>
+    <member refid="classOrthogonalCoordTransforms_1afefad21ce2c07c75937aa97df51efe6c" kind="typedef"><name>CoordResult</name></member>
+    <member refid="classOrthogonalCoordTransforms_1aae0e4590b8d5e7ee9624729bca37b93a" kind="typedef"><name>CoordJacobian</name></member>
+    <member refid="classOrthogonalCoordTransforms_1a410409f9f935ff6ab5340fe3228f2d90" kind="variable"><name>m_transforms</name></member>
+    <member refid="classOrthogonalCoordTransforms_1ac697e1bed23066ec44f95468d6867018" kind="function"><name>OrthogonalCoordTransforms</name></member>
+    <member refid="classOrthogonalCoordTransforms_1a2b977292d6128db500bbc9928761dc0b" kind="function"><name>operator()</name></member>
+    <member refid="classOrthogonalCoordTransforms_1a788f69a4c41a28cac32093fa90a28f16" kind="function"><name>operator()</name></member>
+    <member refid="classOrthogonalCoordTransforms_1ae7f0125b08cc1fafa2c70f3c50bd920c" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classOrthogonalCoordTransforms_1a2ff6e9efec2884108796597df8f6fc8c" kind="function"><name>jacobian_component</name></member>
+    <member refid="classOrthogonalCoordTransforms_1a7504dd07eaf7c8db375ac089c9aa2559" kind="function"><name>jacobian</name></member>
+    <member refid="classOrthogonalCoordTransforms_1ab98e73b31af198bb9b29ae2be9630654" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="structOutsideEdge" kind="struct"><name>OutsideEdge</name>
   </compound>
@@ -3037,15 +3068,15 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d215" kind="namespace"><name>@215</name>
-  </compound>
   <compound refid="namespace_0d217" kind="namespace"><name>@217</name>
   </compound>
   <compound refid="namespace_0d219" kind="namespace"><name>@219</name>
   </compound>
   <compound refid="namespace_0d221" kind="namespace"><name>@221</name>
   </compound>
-  <compound refid="namespace_0d95" kind="namespace"><name>@95</name>
+  <compound refid="namespace_0d223" kind="namespace"><name>@223</name>
+  </compound>
+  <compound refid="namespace_0d97" kind="namespace"><name>@97</name>
   </compound>
   <compound refid="namespacebumpontail__equilibrium" kind="namespace"><name>bumpontail_equilibrium</name>
     <member refid="bumpontailequilibrium_8hpp_1a904011943d45927909831ec61a31a6da" kind="function"><name>init_from_input</name></member>
@@ -3194,7 +3225,11 @@
   </compound>
   <compound refid="inverse__jacobian__matrix_8hpp" kind="file"><name>inverse_jacobian_matrix.hpp</name>
   </compound>
+  <compound refid="linear__coord__transform_8hpp" kind="file"><name>linear_coord_transform.hpp</name>
+  </compound>
   <compound refid="metric__tensor__evaluator_8hpp" kind="file"><name>metric_tensor_evaluator.hpp</name>
+  </compound>
+  <compound refid="orthogonal__coord__transforms_8hpp" kind="file"><name>orthogonal_coord_transforms.hpp</name>
   </compound>
   <compound refid="toroidal__to__cylindrical_8hpp" kind="file"><name>toroidal_to_cylindrical.hpp</name>
   </compound>

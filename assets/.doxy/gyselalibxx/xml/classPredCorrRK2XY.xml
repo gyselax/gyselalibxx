@@ -155,7 +155,7 @@
 <parametername>allfdistribu</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Initial function <formula id="300">$f (0, x, y)$</formula>. </para>
+<para>Initial function <formula id="312">$f (0, x, y)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -188,21 +188,21 @@
     <detaileddescription>
 <para>It solves in time the following guiding-centre equations system:</para>
 <para><itemizedlist>
-<listitem><para><formula id="293">$  -\Delta \phi = f $</formula>,</para>
-</listitem><listitem><para><formula id="238">$ E = - \nabla \phi $</formula>,</para>
-</listitem><listitem><para><formula id="294">$ \partial_t f - E_y \partial_x f + E_x \partial_y f= 0$</formula>.</para>
+<listitem><para><formula id="305">$  -\Delta \phi = f $</formula>,</para>
+</listitem><listitem><para><formula id="251">$ E = - \nabla \phi $</formula>,</para>
+</listitem><listitem><para><formula id="306">$ \partial_t f - E_y \partial_x f + E_x \partial_y f= 0$</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para>This method is mainly a Runge-Kutta 2 method:</para>
-<para>for <formula id="241">$ n \geq 0 $</formula>,</para>
+<para>for <formula id="254">$ n \geq 0 $</formula>,</para>
 <para>First, it advects on a half time step:<itemizedlist>
-<listitem><para>1./2. From <formula id="295">$f^n$</formula>, it computes <formula id="296">$E^n$</formula> with a <ref refid="classFFTPoissonSolver" kindref="compound">FFTPoissonSolver</ref>;</para>
-</listitem><listitem><para>3. From <formula id="295">$f^n$</formula> and <formula id="296">$E^n$</formula>, it computes <formula id="297">$f^{n+1/2}$</formula> with a <ref refid="classBslAdvection1D" kindref="compound">BslAdvection1D</ref> on <formula id="246">$\frac{dt}{2}$</formula>;</para>
+<listitem><para>1./2. From <formula id="307">$f^n$</formula>, it computes <formula id="308">$E^n$</formula> with a <ref refid="classFFTPoissonSolver" kindref="compound">FFTPoissonSolver</ref>;</para>
+</listitem><listitem><para>3. From <formula id="307">$f^n$</formula> and <formula id="308">$E^n$</formula>, it computes <formula id="309">$f^{n+1/2}$</formula> with a <ref refid="classBslAdvection1D" kindref="compound">BslAdvection1D</ref> on <formula id="259">$\frac{dt}{2}$</formula>;</para>
 </listitem></itemizedlist>
 </para>
 <para>Secondly, it advects on a full time step:<itemizedlist>
-<listitem><para>4./5. From <formula id="297">$f^{n+1/2}$</formula>, it computes <formula id="298">$E^{n+1/2}$</formula> with a <ref refid="classFFTPoissonSolver" kindref="compound">FFTPoissonSolver</ref>;</para>
-</listitem><listitem><para>6. From <formula id="295">$f^n$</formula> and <formula id="298">$E^{n+1/2}$</formula>, it computes <formula id="299">$f^{n+1}$</formula> with a BslAdvectionRP on <formula id="250">$dt$</formula>.</para>
+<listitem><para>4./5. From <formula id="309">$f^{n+1/2}$</formula>, it computes <formula id="310">$E^{n+1/2}$</formula> with a <ref refid="classFFTPoissonSolver" kindref="compound">FFTPoissonSolver</ref>;</para>
+</listitem><listitem><para>6. From <formula id="307">$f^n$</formula> and <formula id="310">$E^{n+1/2}$</formula>, it computes <formula id="311">$f^{n+1}$</formula> with a BslAdvectionRP on <formula id="263">$dt$</formula>.</para>
 </listitem></itemizedlist>
 </para>
 <para><parameterlist kind="templateparam"><parameteritem>

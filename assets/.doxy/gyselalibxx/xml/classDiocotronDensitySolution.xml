@@ -11,7 +11,7 @@
         <name>m_W1</name>
         <qualifiedname>DiocotronDensitySolution::m_W1</qualifiedname>
         <briefdescription>
-<para>The value of <formula id="198">$ r $</formula> at the inner wall. </para>
+<para>The value of <formula id="211">$ r $</formula> at the inner wall. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -26,7 +26,7 @@
         <name>m_R1</name>
         <qualifiedname>DiocotronDensitySolution::m_R1</qualifiedname>
         <briefdescription>
-<para>The value of <formula id="198">$ r $</formula> at the inner boundary of the initial condition. </para>
+<para>The value of <formula id="211">$ r $</formula> at the inner boundary of the initial condition. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -41,7 +41,7 @@
         <name>m_R2</name>
         <qualifiedname>DiocotronDensitySolution::m_R2</qualifiedname>
         <briefdescription>
-<para>The value of <formula id="198">$ r $</formula> at the outer boundary of the initial condition. </para>
+<para>The value of <formula id="211">$ r $</formula> at the outer boundary of the initial condition. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -56,7 +56,7 @@
         <name>m_W2</name>
         <qualifiedname>DiocotronDensitySolution::m_W2</qualifiedname>
         <briefdescription>
-<para>The value of <formula id="198">$ r $</formula> at the outer wall. </para>
+<para>The value of <formula id="211">$ r $</formula> at the outer wall. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -116,7 +116,7 @@
         <name>m_omega_Re</name>
         <qualifiedname>DiocotronDensitySolution::m_omega_Re</qualifiedname>
         <briefdescription>
-<para>The real part of <formula id="199">$ \omega $</formula>, solution of the dispersion relation. </para>
+<para>The real part of <formula id="212">$ \omega $</formula>, solution of the dispersion relation. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -131,7 +131,7 @@
         <name>m_omega_Im</name>
         <qualifiedname>DiocotronDensitySolution::m_omega_Im</qualifiedname>
         <briefdescription>
-<para>The imaginary part of <formula id="199">$ \omega $</formula>, solution of the dispersion relation. </para>
+<para>The imaginary part of <formula id="212">$ \omega $</formula>, solution of the dispersion relation. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -146,7 +146,7 @@
         <name>m_r_bar</name>
         <qualifiedname>DiocotronDensitySolution::m_r_bar</qualifiedname>
         <briefdescription>
-<para>The average between <formula id="200">$ R_1 $</formula> and <formula id="201">$ R_2 $</formula>. </para>
+<para>The average between <formula id="213">$ R_1 $</formula> and <formula id="214">$ R_2 $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -161,7 +161,7 @@
         <name>m_d</name>
         <qualifiedname>DiocotronDensitySolution::m_d</qualifiedname>
         <briefdescription>
-<para>The half difference between <formula id="200">$ R_1 $</formula> and <formula id="201">$ R_2 $</formula>. </para>
+<para>The half difference between <formula id="213">$ R_1 $</formula> and <formula id="214">$ R_2 $</formula>. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -261,7 +261,7 @@
 <parametername direction="in">Q</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The charge carried by the inner conductor at <formula id="202">$ r = W_1 $</formula>. </para>
+<para>The charge carried by the inner conductor at <formula id="215">$ r = W_1 $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -297,7 +297,7 @@
 <para>Get the frequency of the perturbation. </para>
         </briefdescription>
         <detaileddescription>
-<para>The frequency of the perturbation is given by the real part of <formula id="199">$ \omega $</formula>, where <formula id="199">$ \omega $</formula> is the solution of the dispersion relation.</para>
+<para>The frequency of the perturbation is given by the real part of <formula id="212">$ \omega $</formula>, where <formula id="212">$ \omega $</formula> is the solution of the dispersion relation.</para>
 <para><simplesect kind="return"><para>The frequency of the perturbation. </para>
 </simplesect>
 </para>
@@ -316,7 +316,7 @@
 <para>Get the slope of the perturbation. </para>
         </briefdescription>
         <detaileddescription>
-<para>The slope of the perturbation is given by the imaginary part of <formula id="199">$ \omega $</formula>, where <formula id="199">$ \omega $</formula> is the solution of the dispersion relation.</para>
+<para>The slope of the perturbation is given by the imaginary part of <formula id="212">$ \omega $</formula>, where <formula id="212">$ \omega $</formula> is the solution of the dispersion relation.</para>
 <para><simplesect kind="return"><para>The slope of the perturbation. </para>
 </simplesect>
 </para>
@@ -341,11 +341,11 @@
         <detaileddescription>
 <para>The initial condition is given by</para>
 <para><itemizedlist>
-<listitem><para>if <formula id="203">$ R_1 \leq r \leq R_2 $</formula>, <formula id="204">$ \rho_0(r, \theta) = (1 + \varepsilon \cos(l\theta)) \exp\left( - \left(\frac{r - \bar{r}}{d}\right)^p \right) $</formula>,</para>
-</listitem><listitem><para>otherwise, <formula id="205">$ \rho_0(r, \theta) = 0 $</formula>,</para>
+<listitem><para>if <formula id="216">$ R_1 \leq r \leq R_2 $</formula>, <formula id="217">$ \rho_0(r, \theta) = (1 + \varepsilon \cos(l\theta)) \exp\left( - \left(\frac{r - \bar{r}}{d}\right)^p \right) $</formula>,</para>
+</listitem><listitem><para>otherwise, <formula id="218">$ \rho_0(r, \theta) = 0 $</formula>,</para>
 </listitem></itemizedlist>
 </para>
-<para>with <formula id="206">$ p = 50 $</formula>, <formula id="207">$ \bar{r} = \frac{R_1 + R_2}{2}$</formula> and <formula id="208">$ d = \frac{R_2 - R_1}{2}$</formula>.</para>
+<para>with <formula id="219">$ p = 50 $</formula>, <formula id="220">$ \bar{r} = \frac{R_1 + R_2}{2}$</formula> and <formula id="221">$ d = \frac{R_2 - R_1}{2}$</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -379,11 +379,11 @@
         <detaileddescription>
 <para>The equilibrium is given by</para>
 <para><itemizedlist>
-<listitem><para>if <formula id="203">$ R_1 \leq r \leq R_2 $</formula>, <formula id="209">$ \rho_0(r, \theta) = \exp\left( - \left(\frac{r - \bar{r}}{d}\right)^p \right) $</formula>,</para>
-</listitem><listitem><para>otherwise, <formula id="205">$ \rho_0(r, \theta) = 0 $</formula>,</para>
+<listitem><para>if <formula id="216">$ R_1 \leq r \leq R_2 $</formula>, <formula id="222">$ \rho_0(r, \theta) = \exp\left( - \left(\frac{r - \bar{r}}{d}\right)^p \right) $</formula>,</para>
+</listitem><listitem><para>otherwise, <formula id="218">$ \rho_0(r, \theta) = 0 $</formula>,</para>
 </listitem></itemizedlist>
 </para>
-<para>with <formula id="206">$ p = 50 $</formula>, <formula id="207">$ \bar{r} = \frac{R_1 + R_2}{2}$</formula> and <formula id="208">$ d = \frac{R_2 - R_1}{2}$</formula>.</para>
+<para>with <formula id="219">$ p = 50 $</formula>, <formula id="220">$ \bar{r} = \frac{R_1 + R_2}{2}$</formula> and <formula id="221">$ d = \frac{R_2 - R_1}{2}$</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -421,9 +421,9 @@
 <para>Solves the dispersion relation. </para>
         </briefdescription>
         <detaileddescription>
-<para>The dispersion relation is given by <formula id="210">$ \left(\frac{\omega}{\omega_D} \right)^2 - b_l \frac{\omega}{\omega_D} + c_l = 0 $</formula></para>
+<para>The dispersion relation is given by <formula id="223">$ \left(\frac{\omega}{\omega_D} \right)^2 - b_l \frac{\omega}{\omega_D} + c_l = 0 $</formula></para>
 <para>with<itemizedlist>
-<listitem><para><formula id="211">$ b_l = \frac{1}{1 - \left(\frac{W_1}{W_2}\right)^{2l}}
+<listitem><para><formula id="224">$ b_l = \frac{1}{1 - \left(\frac{W_1}{W_2}\right)^{2l}}
      \left(
          l \left[ 1 - \left(\frac{W_1}{W_2}\right)^{2l} \right]
          \left(
@@ -434,7 +434,7 @@
           \left[ 1 - \left(\frac{R_1}{R_2}\right)^{2l} \right]
           \left[\left(\frac{R_2}{W_2}\right)^{2l} - \left(\frac{W_1}{R_1}\right)^{2l} \right]
      \right)$</formula>,</para>
-</listitem><listitem><para><formula id="212">$ c_l = \frac{1}{1 - \left(\frac{W_1}{W_2}\right)^{2l}}
+</listitem><listitem><para><formula id="225">$ c_l = \frac{1}{1 - \left(\frac{W_1}{W_2}\right)^{2l}}
      \left(
          l^2 \frac{\omega_q}{\omega_D} \left[1 - \left(\frac{R_1}{R_2}\right)^{2} + \frac{\omega_q}{\omega_D}\left(\frac{R_1}{R_2}\right)^{2} \right]
              \left[ 1 - \left(\frac{W_1}{W_2}\right)^{2l} \right]
@@ -448,8 +448,8 @@
 </listitem></itemizedlist>
 </para>
 <para>and<itemizedlist>
-<listitem><para><formula id="213">$ \omega_D = 0.5 $</formula>,</para>
-</listitem><listitem><para><formula id="214">$ \omega_q = - \frac{2 Q c}{B_0 R_1^2}$</formula> (here <formula id="215">$ c = 1 $</formula>, <formula id="216">$ B_0 = 1 $</formula>).</para>
+<listitem><para><formula id="226">$ \omega_D = 0.5 $</formula>,</para>
+</listitem><listitem><para><formula id="227">$ \omega_q = - \frac{2 Q c}{B_0 R_1^2}$</formula> (here <formula id="228">$ c = 1 $</formula>, <formula id="229">$ B_0 = 1 $</formula>).</para>
 </listitem></itemizedlist>
 </para>
 <para>(For more details, see R.C. Davidson&apos;s book, &quot;Theory of Nonneutral Plasmas&quot;, Chap.6, &quot;The diocotron instability&quot;, Benjamin, 1974)</para>
@@ -458,7 +458,7 @@
 <parametername direction="out">omega_Re</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The real part of <formula id="199">$ \omega $</formula>. </para>
+<para>The real part of <formula id="212">$ \omega $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -466,7 +466,7 @@
 <parametername direction="out">omega_Im</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The imaginary part of <formula id="199">$ \omega $</formula>. </para>
+<para>The imaginary part of <formula id="212">$ \omega $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -478,17 +478,17 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>The diocotron exact solution of the density <formula id="192">$ \rho $</formula>. </para>
+<para>The diocotron exact solution of the density <formula id="205">$ \rho $</formula>. </para>
     </briefdescription>
     <detaileddescription>
 <para>The equations of the diocotron simulation are the Vlasov-Poisson equations</para>
 <para><itemizedlist>
-<listitem><para><formula id="193">$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0 $</formula>,</para>
-</listitem><listitem><para><formula id="194">$ L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>,</para>
-</listitem><listitem><para><formula id="195">$ E = -\nabla \phi $</formula>.</para>
+<listitem><para><formula id="206">$ \partial_t \rho - E_y \partial_x \rho + E_x \partial_y \rho = 0 $</formula>,</para>
+</listitem><listitem><para><formula id="207">$ L \phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>,</para>
+</listitem><listitem><para><formula id="208">$ E = -\nabla \phi $</formula>.</para>
 </listitem></itemizedlist>
 </para>
-<para>The <ref refid="classDiocotronDensitySolution" kindref="compound">DiocotronDensitySolution</ref> provides an initial perturbed solution <formula id="196">$ \rho_0 $</formula> for the density <formula id="192">$ \rho $</formula> and its associated equilibrium solution <formula id="197">$ \rho_{eq} $</formula>. </para>
+<para>The <ref refid="classDiocotronDensitySolution" kindref="compound">DiocotronDensitySolution</ref> provides an initial perturbed solution <formula id="209">$ \rho_0 $</formula> for the density <formula id="205">$ \rho $</formula> and its associated equilibrium solution <formula id="210">$ \rho_{eq} $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/diocotron_initialisation_equilibrium.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/diocotron_initialisation_equilibrium.hpp" bodystart="24" bodyend="238"/>
     <listofallmembers>

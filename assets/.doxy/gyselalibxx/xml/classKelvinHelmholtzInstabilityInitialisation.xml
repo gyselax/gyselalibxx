@@ -65,7 +65,7 @@
 <parametername>mode_k</parametername>
 </parameternamelist>
 <parameterdescription>
-<para><formula id="289">$ k $</formula>, the perturbation mode. </para>
+<para><formula id="301">$ k $</formula>, the perturbation mode. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -104,7 +104,7 @@
           <declname>allfdistribu_equilibrium</declname>
         </param>
         <briefdescription>
-<para>Initialise <formula id="291">$ f_{eq}$</formula> and <formula id="1">$ f $</formula>. </para>
+<para>Initialise <formula id="303">$ f_{eq}$</formula> and <formula id="1">$ f $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -120,7 +120,7 @@
 <parametername>allfdistribu_equilibrium</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Field referring to the <formula id="292">$ f_{eq} $</formula> function. </para>
+<para>Field referring to the <formula id="304">$ f_{eq} $</formula> function. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -135,9 +135,9 @@
 <para>Initialise the allfdistribu function. </para>
     </briefdescription>
     <detaileddescription>
-<para>Set the allfdistribu at <formula id="287">$ f_{eq}(x, y) = \sin(y) $</formula></para>
-<para>and <formula id="288">$ f_0(x, y) = f_{eq}(x, y) + \varepsilon \cos(kx) $</formula>,</para>
-<para>with <formula id="17">$ \varepsilon $</formula> an amplitude of perturbation and <formula id="289">$ k $</formula> mode equal to <formula id="290">$ 2\pi $</formula> divided by the length of the index range on <formula id="110">$ x $</formula>. </para>
+<para>Set the allfdistribu at <formula id="299">$ f_{eq}(x, y) = \sin(y) $</formula></para>
+<para>and <formula id="300">$ f_0(x, y) = f_{eq}(x, y) + \varepsilon \cos(kx) $</formula>,</para>
+<para>with <formula id="17">$ \varepsilon $</formula> an amplitude of perturbation and <formula id="301">$ k $</formula> mode equal to <formula id="302">$ 2\pi $</formula> divided by the length of the index range on <formula id="110">$ x $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="24" bodyend="65"/>
     <listofallmembers>

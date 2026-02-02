@@ -302,6 +302,7 @@
 * [**LagrangeInterpolator**](classLagrangeInterpolator.md)
 * [**LeviCivitaTensor**](classLeviCivitaTensor.md)
 * [**LiePoissonBracket**](classLiePoissonBracket.md)
+* [**LinearCoordTransform**](classLinearCoordTransform.md)
 
 
 ## m
@@ -356,6 +357,7 @@
 
 * [**OnionPatchLocator**](classOnionPatchLocator.md)
 * [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md)
+* [**OrthogonalCoordTransforms**](classOrthogonalCoordTransforms.md)
 * [**OutsideEdge**](structOutsideEdge.md)
 
 

@@ -37,7 +37,9 @@
 | file | [**identity\_coordinate\_change.hpp**](identity__coordinate__change_8hpp.md) <br> |
 | file | [**inv\_jacobian\_o\_point.hpp**](inv__jacobian__o__point_8hpp.md) <br> |
 | file | [**inverse\_jacobian\_matrix.hpp**](inverse__jacobian__matrix_8hpp.md) <br> |
+| file | [**linear\_coord\_transform.hpp**](linear__coord__transform_8hpp.md) <br> |
 | file | [**metric\_tensor\_evaluator.hpp**](metric__tensor__evaluator_8hpp.md) <br> |
+| file | [**orthogonal\_coord\_transforms.hpp**](orthogonal__coord__transforms_8hpp.md) <br> |
 | file | [**toroidal\_to\_cylindrical.hpp**](toroidal__to__cylindrical_8hpp.md) <br> |
 | file | [**vector\_mapper.hpp**](vector__mapper_8hpp.md) <br> |
 
