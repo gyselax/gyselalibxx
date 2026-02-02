@@ -17,6 +17,12 @@ in a `DerivField`.
 - Add `SingleInterfaceDerivativesCalculator` to compute an interface derivative of an equivalent global spline.
 - Add `SingleInterfaceDerivativeCalculatorCollection` to collect different `SingleInterfaceDerivativesCalculator`.
 - Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
+- Add Kokkos Tools in the environment on Persee toolchains
+- Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
+- Added support for A100 Raven cluster Spack toolchain.
+- Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
+- Add a new coordinate transformation `LinearCoordTransform`.
+- Add a new coordinate transformation `OrthogonalCoordTransforms`.
 - Add `InterfaceDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
 
 ### Fixed
@@ -24,6 +30,7 @@ in a `DerivField`.
 - Fix derivative indexing of a `DerivField` object.
 - Fix transposition of arrays with more than 7 dimensions.
 - Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
+- Fix spurious segfaults for toolchains based on Spack environment views.
 
 ### Changed
 
@@ -32,6 +39,11 @@ in a `DerivField`.
 - `DerivField` objects are initialised on GPU by default.
 - Update DDC to [v0.10.0](https://github.com/CExA-project/ddc/releases/tag/v0.10.0).
 - Change some Python class `scattered_coord` arguments to keyword-only.
+- Increase C++ version to 20.
+- Use concepts to describe coordinate transformation classes.
+- Update koliop to [v0.1.0](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.0).
+- Make koliop discoverable with `find_package`.
+- Simplify toolchains by disabling koliop LTO by default.
 
 ### Deprecated
 

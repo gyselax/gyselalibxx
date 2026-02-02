@@ -10,14 +10,22 @@
 
 namespace detail {
 
-template <class CoordArg, class TypeSeqGrid>
+/**
+ * @brief A structure used at compile time to find which of the transformations in a given
+ * TypeSeq converts from coordinates of the type CoordArg.
+ */
+template <class CoordArg, class TypeSeqTransforms>
 struct FindTransform;
 
 template <class CoordArg, class HeadTransform, class... Transforms>
 struct FindTransform<CoordArg, std::tuple<HeadTransform, Transforms...>>
 {
     using type = std::conditional_t<
-            std::is_same_v<typename HeadTransform::CoordArg, CoordArg>,
+            ((ddc::detail::is_tagged_vector_v<CoordArg>)&&(
+                    std::is_same_v<typename HeadTransform::CoordArg, CoordArg>))
+                    || (ddc::in_tags_v<
+                            CoordArg,
+                            ddc::to_type_seq_t<typename HeadTransform::CoordArg>>),
             HeadTransform,
             typename FindTransform<CoordArg, std::tuple<Transforms...>>::type>;
 };
@@ -29,69 +37,80 @@ struct FindTransform<CoordArg, std::tuple<>>
     using type = void;
 };
 
-template <class ContraDim, class CovDimsSet, class TensorType, class CoordTransformType>
-struct FillJacobianSubsetRow;
-
-template <class ContraDim, class... CovDims, class TensorType, class CoordTransformType>
-struct FillJacobianSubsetRow<ContraDim, VectorIndexSet<CovDims...>, TensorType, CoordTransformType>
-{
-    static void fill(
-            TensorType& mat,
-            CoordTransformType const& transform,
-            typename CoordTransformType::CoordArg const& coord)
-    {
-        typename CoordTransformType::CoordArg coord_arg(coord);
-        ((ddcHelper::get<ContraDim, CovDims>(mat)
-          = transform.template jacobian_component<ContraDim, CovDims>(coord_arg)),
-         ...);
-    }
-};
-
-template <class ContraDimsSet, class CovDimsSet, class TensorType, class CoordTransformType>
-struct FillJacobianSubset;
-template <class... ContraDims, class CovDimsSet, class TensorType, class CoordTransformType>
-struct FillJacobianSubset<VectorIndexSet<ContraDims...>, CovDimsSet, TensorType, CoordTransformType>
-{
-    static void fill(
-            TensorType& mat,
-            CoordTransformType const& transform,
-            typename CoordTransformType::CoordArg const& coord)
-    {
-        ((FillJacobianSubsetRow<ContraDims, CovDimsSet, TensorType, CoordTransformType>::
-                  fill(mat, transform, coord)),
-         ...);
-    }
-};
-
 } // namespace detail
 
-template <class ArgCoord, class ResultCoord, class... CoordTransform>
+/**
+ * @brief A multi-dimensional coordinate transformation which can be decomposed
+ * into multiple orthogonal coordinate transformations.
+ *
+ * E.g. @f$ (x_1,x_2) = (y_1 + 3, 4*y_2 + 7) @f$
+ * Here the coordinates @f$ y_1 @f$ and @f$ y_2 @f$ only appear in the description
+ * of either @f$ x_1 @f$ or @f$ x_2 @f$.
+
+ * E.g. a cylindrical transformation which can be decomposed into a 2D circular
+ * transformation and a linear transformation.
+ *
+ * @tparam ArgCoord The type of the input coordinates.
+ * @tparam ResultCoord The type of the output coordinates.
+ * @tparam JacobianCoord The type of the coordinates used to calculate the Jacobian.
+ *                  Usually this is the same as ArgCoord.
+ * @tparam CoordTransform The coordinate transformations comprising this coordinate
+ *                  transformation. Note that the order of these is unrelated to
+ *                  the ordering chosen for the coordinates.
+ */
+template <class ArgCoord, class ResultCoord, class JacobianCoord, class... CoordTransform>
 class OrthogonalCoordTransforms
 {
     static_assert(sizeof...(CoordTransform) > 1);
 
 public:
+    /// The type of the argument of the function described by this mapping
     using CoordArg = ArgCoord;
+    /// The type of the result of the function described by this mapping
     using CoordResult = ResultCoord;
-    using CoordJacobian = ddcHelper::to_coord_t<
-            type_seq_cat_t<ddc::to_type_seq_t<typename CoordTransform::CoordJacobian>...>>;
+    /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
+    using CoordJacobian = JacobianCoord;
+    static_assert(ddc::type_seq_same_v<
+                  type_seq_cat_t<ddc::to_type_seq_t<typename CoordTransform::CoordJacobian>...>,
+                  ddc::to_type_seq_t<JacobianCoord>>);
 
 private:
     std::tuple<CoordTransform...> m_transforms;
 
 public:
+    /**
+     * @brief Construct a multi-dimensional coordinate transformation.
+     *
+     * @param[in] transform The coordinate transformations comprising this coordinate transformation.
+     */
     explicit KOKKOS_FUNCTION OrthogonalCoordTransforms(CoordTransform const&... transform)
         : m_transforms(transform...)
     {
     }
 
+    /**
+     * @brief Convert the coordinate to the output coordinate system.
+     *
+     * @param[in] coord The coordinate to be converted expressed on the input coordinate system.
+     *
+     * @return The coordinate expressed on the output coordinate system.
+     */
     KOKKOS_FUNCTION CoordResult operator()(CoordArg const& coord) const
     {
         return CoordResult(std::get<CoordTransform>(m_transforms)(
                 typename CoordTransform::CoordArg(coord))...);
     }
 
-    template <class CoordType>
+    /**
+     * @brief Convert a subset of coordinates to the corresponding subset of the output coordinate system.
+     *
+     * Neglected elements of the coordinate system must be orthogonal to the provided coordinates.
+     *
+     * @param[in] coord The coordinate to be converted expressed on the input coordinate system.
+     *
+     * @return The coordinate expressed on the output coordinate system.
+     */
+    template <class CoordType, std::enable_if_t<!std::is_same_v<CoordType, CoordArg>, bool> = true>
     KOKKOS_INLINE_FUNCTION auto operator()(CoordType const& coord) const
     {
         using SelectedCoordTransform =
@@ -118,15 +137,11 @@ public:
         using TensorType = DTensor<
                 ddc::to_type_seq_t<CoordResult>,
                 get_covariant_dims_t<ddc::to_type_seq_t<CoordArg>>>;
-        TensorType jacobian_matrix;
-        ((detail::FillJacobianSubset<
-                 ddc::to_type_seq_t<typename CoordTransform::CoordResult>,
-                 get_covariant_dims_t<ddc::to_type_seq_t<typename CoordTransform::CoordArg>>,
-                 TensorType,
-                 CoordTransform>::
-                  fill(jacobian_matrix,
-                       std::get<CoordTransform>(m_transforms),
-                       typename CoordTransform::CoordArg(coord))),
+        TensorType jacobian_matrix(0);
+        ((ddcHelper::assign_elements(
+                 jacobian_matrix,
+                 std::get<CoordTransform>(m_transforms)
+                         .jacobian_matrix(typename CoordTransform::CoordJacobian(coord)))),
          ...);
         return jacobian_matrix;
     }
@@ -145,18 +160,17 @@ public:
         static_assert(ddc::in_tags_v<IndexTag1, ddc::to_type_seq_t<CoordResult>>);
         static_assert(
                 ddc::in_tags_v<IndexTag2, get_covariant_dims_t<ddc::to_type_seq_t<CoordArg>>>);
-        double result
-                = ((((ddc::in_tags_v<IndexTag1, ddc::to_type_seq_t<typename CoordTransform::CoordResult>>)&&(
-                            ddc::in_tags_v<
-                                    IndexTag2,
-                                    get_covariant_dims_t<ddc::to_type_seq_t<
-                                            typename CoordTransform::CoordArg>>>))
-                            ? std::get<CoordTransform>(m_transforms)
-                                      .template jacobian_component<IndexTag1, IndexTag2>(
-                                              typename CoordTransform::CoordArg(coord))
-                            : 0.0)
-                   + ...);
-        return result;
+        using RelevantMapping =
+                typename detail::FindTransform<IndexTag2, std::tuple<CoordTransform...>>::type;
+        if constexpr (ddc::in_tags_v<
+                              IndexTag1,
+                              ddc::to_type_seq_t<typename RelevantMapping::CoordResult>>) {
+            return std::get<RelevantMapping>(m_transforms)
+                    .template jacobian_component<IndexTag1, IndexTag2>(
+                            typename RelevantMapping::CoordJacobian(coord));
+        } else {
+            return 0;
+        }
     }
 
     /**
@@ -189,6 +203,8 @@ public:
         return OrthogonalCoordTransforms<
                 ResultCoord,
                 ArgCoord,
+                ddcHelper::to_coord_t<type_seq_cat_t<ddc::to_type_seq_t<
+                        typename inverse_mapping_t<CoordTransform>::CoordJacobian>...>>,
                 inverse_mapping_t<CoordTransform>...>(
                 (std::get<CoordTransform>(m_transforms).get_inverse_mapping())...);
     }

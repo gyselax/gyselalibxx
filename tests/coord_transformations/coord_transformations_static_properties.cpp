@@ -139,7 +139,12 @@ TEST(MappingStaticAsserts, OrthogonalJoin)
 {
     using Mapping1 = LinearCoordTransform<X, R>;
     using Mapping2 = LinearCoordTransform<Y, Theta>;
-    using Mapping = OrthogonalCoordTransforms<Coord<X, Y>, Coord<R, Theta>, Mapping1, Mapping2>;
+    using Mapping = OrthogonalCoordTransforms<
+            Coord<X, Y>,
+            Coord<R, Theta>,
+            Coord<X, Y>,
+            Mapping1,
+            Mapping2>;
     static_assert(is_mapping_v<Mapping>);
     static_assert(has_jacobian_v<Mapping>);
     static_assert(is_analytical_mapping_v<Mapping>);

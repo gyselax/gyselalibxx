@@ -15,8 +15,8 @@
 #include "geometry_coord_transformations_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "linear_coord_transform.hpp"
-#include "orthogonal_coord_transforms.hpp"
 #include "mesh_builder.hpp"
+#include "orthogonal_coord_transforms.hpp"
 
 
 
@@ -300,6 +300,7 @@ TEST(JacobianMatrixAndJacobianCoefficients, OrthogonalCoordTransforms)
     OrthogonalCoordTransforms<
             Coord<X, Y>,
             Coord<Y2, X2>,
+            Coord<X, Y>,
             LinearCoordTransform<X, X2>,
             LinearCoordTransform<Y, Y2>>
             transform(x_transform, y_transform);
@@ -311,7 +312,13 @@ TEST(JacobianMatrixAndJacobianCoefficients, OrthogonalCoordTransforms)
     EXPECT_DOUBLE_EQ(Coord<X2>(transformed_coord), x_transform(Coord<X>(test_coord)));
     EXPECT_DOUBLE_EQ(Coord<X2>(transformed_coord), transform(Coord<X>(test_coord)));
 
-    DTensor<VectorIndexSet<Y2,X2>, VectorIndexSet<X,Y>> Jacobian_matrix = transform.jacobian_matrix(test_coord);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<X2, X>(test_coord)), x_scaling);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<Y2, Y>(test_coord)), y_scaling);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<X2, Y>(test_coord)), 0.0);
+    EXPECT_DOUBLE_EQ((transform.template jacobian_component<Y2, X>(test_coord)), 0.0);
+
+    DTensor<VectorIndexSet<Y2, X2>, VectorIndexSet<X, Y>> Jacobian_matrix
+            = transform.jacobian_matrix(test_coord);
     EXPECT_DOUBLE_EQ((ddcHelper::get<X2, X>(Jacobian_matrix)), x_scaling);
     EXPECT_DOUBLE_EQ((ddcHelper::get<Y2, Y>(Jacobian_matrix)), y_scaling);
     EXPECT_DOUBLE_EQ((ddcHelper::get<X2, Y>(Jacobian_matrix)), 0.0);
