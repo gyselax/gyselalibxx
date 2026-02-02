@@ -707,7 +707,7 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
                 derivs_theta,
                 ddc::select<Theta>(coord_eval),
                 nderivs_theta);
-        for (int i(0); i < nr; ++i) {
+        for (int i(0); i < ntheta; ++i) {
             vals_theta(i) = derivs_theta(i, nderivs_theta);
         }
     }
