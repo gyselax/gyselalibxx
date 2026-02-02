@@ -300,6 +300,7 @@ TEST(JacobianMatrixAndJacobianCoefficients, OrthogonalCoordTransforms)
     OrthogonalCoordTransforms<
             Coord<X, Y>,
             Coord<Y2, X2>,
+            Coord<X, Y>,
             LinearCoordTransform<X, X2>,
             LinearCoordTransform<Y, Y2>>
             transform(x_transform, y_transform);

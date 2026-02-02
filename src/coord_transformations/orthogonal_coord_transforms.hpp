@@ -11,7 +11,7 @@
 namespace detail {
 
 /**
- * A structure used at compile time to find which of the transformations in a given
+ * @brief A structure used at compile time to find which of the transformations in a given
  * TypeSeq converts from coordinates of the type CoordArg.
  */
 template <class CoordArg, class TypeSeqTransforms>
@@ -52,11 +52,13 @@ struct FindTransform<CoordArg, std::tuple<>>
  *
  * @tparam ArgCoord The type of the input coordinates.
  * @tparam ResultCoord The type of the output coordinates.
+ * @tparam JacobianCoord The type of the coordinates used to calculate the Jacobian.
+ *                  Usually this is the same as ArgCoord.
  * @tparam CoordTransform The coordinate transformations comprising this coordinate
  *                  transformation. Note that the order of these is unrelated to
  *                  the ordering chosen for the coordinates.
  */
-template <class ArgCoord, class ResultCoord, class... CoordTransform>
+template <class ArgCoord, class ResultCoord, class JacobianCoord, class... CoordTransform>
 class OrthogonalCoordTransforms
 {
     static_assert(sizeof...(CoordTransform) > 1);
@@ -67,8 +69,10 @@ public:
     /// The type of the result of the function described by this mapping
     using CoordResult = ResultCoord;
     /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
-    using CoordJacobian = ddcHelper::to_coord_t<
-            type_seq_cat_t<ddc::to_type_seq_t<typename CoordTransform::CoordJacobian>...>>;
+    using CoordJacobian = JacobianCoord;
+    static_assert(ddc::type_seq_same_v<
+                  type_seq_cat_t<ddc::to_type_seq_t<typename CoordTransform::CoordJacobian>...>,
+                  ddc::to_type_seq_t<JacobianCoord>>);
 
 private:
     std::tuple<CoordTransform...> m_transforms;

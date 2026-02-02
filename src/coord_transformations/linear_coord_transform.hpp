@@ -101,7 +101,7 @@ public:
      *
      * For some computations, we need the complete Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given independently with the function jacobian_component.
+     * The coefficient can be given as a scalar with the function jacobian_component.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
@@ -137,7 +137,7 @@ public:
      *
      * For some computations, we need the complete inverse Jacobian matrix or just the
      * coefficients.
-     * The coefficients can be given independently with the function inv_jacobian_component.
+     * The coefficient can be given as a scalar with the function inv_jacobian_component.
      *
      * @param[in] coord
      * 				The coordinate where we evaluate the Jacobian matrix.
@@ -154,8 +154,6 @@ public:
 
     /**
      * @brief Compute the (i,j) coefficient of the inverse Jacobian matrix.
-     *
-     * Be careful because not all mappings are invertible, especially at the centre point.
      *
      * @param[in] coord
      *              The coordinate where we evaluate the inverse Jacobian matrix.
