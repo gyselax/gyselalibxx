@@ -48,7 +48,7 @@ public:
      */
     KOKKOS_INLINE_FUNCTION InverseJacobianTensor operator()(CoordJacobian const& coord) const
     {
-        if constexpr (has_inv_jacobian_v<Mapping, false>) {
+        if constexpr (has_inv_jacobian_v<Mapping>) {
             return m_mapping.inv_jacobian_matrix(coord);
         } else {
             static_assert(has_jacobian_v<Mapping>);
@@ -76,7 +76,7 @@ public:
         static_assert(ddc::in_tags_v<IndexTag1, ValidArgIndices>);
         static_assert(ddc::in_tags_v<IndexTag2, get_covariant_dims_t<ValidResultIndices>>);
 
-        if constexpr (has_inv_jacobian_v<Mapping, false>) {
+        if constexpr (has_inv_jacobian_v<Mapping>) {
             return m_mapping.template inv_jacobian_component<IndexTag1, IndexTag2>(coord);
         } else {
             static_assert(has_jacobian_v<Mapping>);
