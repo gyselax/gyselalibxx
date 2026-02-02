@@ -28,6 +28,20 @@ struct Z
     /// The corresponding type in the dual space.
     using Dual = Z;
 };
+struct X2
+{
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
+    using Dual = X2;
+};
+struct Y2
+{
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    /// The corresponding type in the dual space.
+    using Dual = Y2;
+};
 
 struct Rho_cov;
 struct Rho
