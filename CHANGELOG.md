@@ -21,6 +21,8 @@ in a `DerivField`.
 - Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
 - Added support for A100 Raven cluster Spack toolchain.
 - Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
+- Add a new coordinate transformation `LinearCoordTransform`.
+- Add a new coordinate transformation `OrthogonalCoordTransforms`.
 
 ### Fixed
 
