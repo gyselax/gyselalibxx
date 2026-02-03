@@ -889,9 +889,9 @@ public:
             polar_bspl.eval_basis(singular_vals, vals, coord);
             val = singular_vals[offset.value()];
             if constexpr (calculate_derivs) {
-                polar_bspl.eval_deriv_r(singular_vals, vals, coord);
+                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
                 double r_deriv = singular_vals[offset.value()];
-                polar_bspl.eval_deriv_theta(singular_vals, vals, coord);
+                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
                 double theta_deriv = singular_vals[offset.value()];
                 DVector<R_cov, Theta_cov> derivs(r_deriv, theta_deriv);
                 return derivs;
@@ -906,9 +906,9 @@ public:
 
             val = vals(ir, itheta);
             if constexpr (calculate_derivs) {
-                polar_bspl.eval_deriv_r(singular_vals, vals, coord);
+                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
                 double r_deriv = vals(ir, itheta);
-                polar_bspl.eval_deriv_theta(singular_vals, vals, coord);
+                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
                 double theta_deriv = vals(ir, itheta);
                 DVector<R_cov, Theta_cov> derivs(r_deriv, theta_deriv);
                 return derivs;

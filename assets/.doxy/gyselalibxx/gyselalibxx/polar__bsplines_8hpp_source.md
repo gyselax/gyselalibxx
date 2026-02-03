@@ -41,16 +41,6 @@ class PolarBSplines
     static_assert(!BSplinesR::is_uniform(), "Radial B-splines must have knots at the boundary.");
     static_assert(BSplinesTheta::is_periodic(), "Poloidal B-splines should be periodic.");
 
-private:
-    // Tags to determine what to evaluate
-    struct eval_type
-    {
-    };
-
-    struct eval_deriv_type
-    {
-    };
-
 public:
     using BSplinesR_tag = BSplinesR;
 
@@ -365,16 +355,41 @@ public:
         Impl& operator=(Impl&& x) = default;
 
         KOKKOS_FUNCTION tensor_product_index_type
-        eval_basis(DSpan1D singular_values, DSpan2D values, Coord<R, Theta> p) const;
+        eval_basis(DSpan1D singular_values, DSpan2D values, Coord<R, Theta> p) const
+        {
+            return eval(singular_values, values, p, Idx<>());
+        }
 
-        KOKKOS_FUNCTION tensor_product_index_type
-        eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const;
+        template <class... DerivDims>
+        KOKKOS_FUNCTION tensor_product_index_type eval_deriv(
+                DSpan1D singular_derivs,
+                DSpan2D derivs,
+                Coord<R, Theta> p,
+                Idx<DerivDims...> deriv_order) const
+        {
+            return eval(singular_derivs, derivs, p, deriv_order);
+        }
 
-        KOKKOS_FUNCTION tensor_product_index_type
-        eval_deriv_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const;
+        [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<R>>(1)) instead")]] KOKKOS_FUNCTION
+                tensor_product_index_type
+                eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const
+        {
+            return eval(singular_derivs, derivs, p, Idx<ddc::Deriv<R>>(1));
+        }
 
-        KOKKOS_FUNCTION tensor_product_index_type
-        eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const;
+        [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<Theta>>(1)) "
+                     "instead")]] KOKKOS_FUNCTION tensor_product_index_type
+        eval_deriv_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const
+        {
+            return eval(singular_derivs, derivs, p, Idx<ddc::Deriv<Theta>>(1));
+        }
+
+        [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1)) "
+                     "instead")]] KOKKOS_FUNCTION tensor_product_index_type
+        eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const
+        {
+            return eval(singular_derivs, derivs, p, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1));
+        }
 
         std::size_t nbasis() const noexcept
         {
@@ -394,75 +409,34 @@ public:
         }
 
     private:
-        template <class EvalTypeR, class EvalTypeTheta>
+        template <class... DerivDims>
         KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> eval(
                 DSpan1D singular_values,
                 DSpan2D values,
                 Coord<R, Theta> coord_eval,
-                EvalTypeR const,
-                EvalTypeTheta const) const;
+                Idx<DerivDims...> deriv_order) const;
     };
 };
 
 template <class BSplinesR, class BSplinesTheta, int C>
 template <class DDim, class MemorySpace>
-KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<
-        DDim,
-        MemorySpace>::eval_basis(DSpan1D singular_values, DSpan2D values, Coord<R, Theta> p) const
-{
-    return eval(singular_values, values, p, eval_type(), eval_type());
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<
-        DDim,
-        MemorySpace>::eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const
-{
-    return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_type());
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
-        Impl<DDim, MemorySpace>::eval_deriv_theta(
-                DSpan1D singular_derivs,
-                DSpan2D derivs,
-                Coord<R, Theta> p) const
-{
-    return eval(singular_derivs, derivs, p, eval_type(), eval_deriv_type());
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
-        Impl<DDim, MemorySpace>::eval_deriv_r_and_theta(
-                DSpan1D singular_derivs,
-                DSpan2D derivs,
-                Coord<R, Theta> p) const
-{
-    return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_deriv_type());
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-template <class EvalTypeR, class EvalTypeTheta>
+template <class... DerivDims>
 KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
         Impl<DDim, MemorySpace>::eval(
                 DSpan1D singular_values,
                 DSpan2D values,
                 Coord<R, Theta> coord_eval,
-                EvalTypeR const,
-                EvalTypeTheta const) const
+                Idx<DerivDims...> deriv_order) const
 {
+    using deriv_r = ddc::Deriv<R>;
+    using deriv_theta = ddc::Deriv<Theta>;
+    using deriv_dims = ddc::detail::TypeSeq<DerivDims...>;
+
+    static_assert((ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<deriv_r, deriv_theta>> && ...));
+
     assert(singular_values.extent(0) == n_singular_basis());
     assert(values.extent(0) == BSplinesR::degree() + 1);
     assert(values.extent(1) == BSplinesTheta::degree() + 1);
-    static_assert(
-            std::is_same_v<EvalTypeR, eval_type> || std::is_same_v<EvalTypeR, eval_deriv_type>);
-    static_assert(
-            (std::is_same_v<EvalTypeTheta, eval_type>)
-            || (std::is_same_v<EvalTypeTheta, eval_deriv_type>));
 
     Idx<BSplinesR> jmin_r;
     Idx<BSplinesTheta> jmin_theta;
@@ -475,17 +449,34 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
     DSpan1D const vals_r(vals_r_ptr.data(), nr);
     DSpan1D const vals_theta(vals_theta_ptr.data(), ntheta);
 
-    if constexpr (std::is_same_v<EvalTypeR, eval_type>) {
+    if constexpr (!ddc::in_tags_v<deriv_r, deriv_dims>) {
         jmin_r = ddc::discrete_space<BSplinesR>().eval_basis(vals_r, ddc::select<R>(coord_eval));
-    } else if constexpr (std::is_same_v<EvalTypeR, eval_deriv_type>) {
-        jmin_r = ddc::discrete_space<BSplinesR>().eval_deriv(vals_r, ddc::select<R>(coord_eval));
+    } else {
+        int nderivs_r = (Idx<deriv_r>(deriv_order) - Idx<deriv_r>(0)).value();
+        std::array<double, nr * nr> derivs_r_ptr;
+        Kokkos::mdspan<double, Kokkos::extents<std::size_t, nr, Kokkos::dynamic_extent>> const
+                derivs_r(derivs_r_ptr.data(), nderivs_r + 1);
+        jmin_r = ddc::discrete_space<BSplinesR>()
+                         .eval_basis_and_n_derivs(derivs_r, ddc::select<R>(coord_eval), nderivs_r);
+        for (int i(0); i < nr; ++i) {
+            vals_r(i) = derivs_r(i, nderivs_r);
+        }
     }
-    if constexpr (std::is_same_v<EvalTypeTheta, eval_type>) {
+    if constexpr (!ddc::in_tags_v<deriv_theta, deriv_dims>) {
         jmin_theta = ddc::discrete_space<BSplinesTheta>()
                              .eval_basis(vals_theta, ddc::select<Theta>(coord_eval));
-    } else if constexpr (std::is_same_v<EvalTypeTheta, eval_deriv_type>) {
-        jmin_theta = ddc::discrete_space<BSplinesTheta>()
-                             .eval_deriv(vals_theta, ddc::select<Theta>(coord_eval));
+    } else {
+        int nderivs_theta = (Idx<deriv_theta>(deriv_order) - Idx<deriv_theta>(0)).value();
+        std::array<double, ntheta * ntheta> derivs_theta_ptr;
+        Kokkos::mdspan<double, Kokkos::extents<std::size_t, ntheta, Kokkos::dynamic_extent>> const
+                derivs_theta(derivs_theta_ptr.data(), nderivs_theta + 1);
+        jmin_theta = ddc::discrete_space<BSplinesTheta>().eval_basis_and_n_derivs(
+                derivs_theta,
+                ddc::select<Theta>(coord_eval),
+                nderivs_theta);
+        for (int i(0); i < ntheta; ++i) {
+            vals_theta(i) = derivs_theta(i, nderivs_theta);
+        }
     }
 
     std::size_t nr_done = 0;

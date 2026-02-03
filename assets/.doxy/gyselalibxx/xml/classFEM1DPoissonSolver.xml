@@ -782,7 +782,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="204">$\phi$</formula> to Poisson&apos;s equation: <formula id="366">$ -\Delta \phi = \rho $</formula>. </para>
+<para>An operator which calculates the solution <formula id="204">$\phi$</formula> to Poisson&apos;s equation: <formula id="367">$ -\Delta \phi = \rho $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -829,7 +829,7 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="204">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="367">$ - \Delta \phi = \rho $</formula> <formula id="251">$ E = - \nabla \phi $</formula>. </para>
+<para>An operator which calculates the solution <formula id="204">$\phi$</formula> to Poisson&apos;s equation and its derivative: <formula id="368">$ - \Delta \phi = \rho $</formula> <formula id="251">$ E = - \nabla \phi $</formula>. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -960,7 +960,7 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para>A class to solve the following equation: <formula id="366">$ -\Delta \phi = \rho $</formula> using a Finite Element Method.</para>
+<para>A class to solve the following equation: <formula id="367">$ -\Delta \phi = \rho $</formula> using a Finite Element Method.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>SplineBuilder</parametername>

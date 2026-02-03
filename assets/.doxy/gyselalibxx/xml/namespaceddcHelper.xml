@@ -528,7 +528,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="319" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="319" bodyend="323"/>
       </memberdef>
-      <memberdef kind="function" id="tensor__common_8hpp_1a540be0aa6b7bd342394aaa616fea50cc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1a90f054ca2d6011a8db8462e9a1c0cb75" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class InputStorageType</type>
@@ -545,11 +545,6 @@
             <type>class...</type>
             <declname>InputValidIndexSet</declname>
             <defname>InputValidIndexSet</defname>
-          </param>
-          <param>
-            <type>std::size_t...</type>
-            <declname>InternalIdx</declname>
-            <defname>InternalIdx</defname>
           </param>
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -591,7 +586,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="341" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="341" bodyend="350"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="340" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="340" bodyend="349"/>
       </memberdef>
       <memberdef kind="function" id="vector__field_8hpp_1aa57ad767fdb365aaa4bf5b7e8929c576" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>

@@ -177,14 +177,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
         * **struct** [**Corner2Tag**](structPolarBSplines_1_1Impl_1_1Corner2Tag.md) _The tag for the second corner of the Barycentric coordinates._ 
         * **struct** [**Corner3Tag**](structPolarBSplines_1_1Impl_1_1Corner3Tag.md) _The tag for the third corner of the Barycentric coordinates._ 
         * **struct** [**IntermediateBernsteinBasis**](structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.md) 
-* **struct** [**eval\_deriv\_type**](structPolarBSplines_1_1eval__deriv__type.md) 
-* **struct** [**eval\_type**](structPolarBSplines_1_1eval__type.md) 
 * **struct** [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) 
 * **class** [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) _Define an evaluator on polar B-splines._     
-* **struct** [**eval\_deriv\_r\_theta\_type**](structPolarSplineEvaluator_1_1eval__deriv__r__theta__type.md) _Tag for the evaluation of the cross derivative of the function._ 
-* **struct** [**eval\_deriv\_r\_type**](structPolarSplineEvaluator_1_1eval__deriv__r__type.md) _Tag for the evaluation of the derivative on the first dimension._ 
-* **struct** [**eval\_deriv\_theta\_type**](structPolarSplineEvaluator_1_1eval__deriv__theta__type.md) _Tag for the evaluation of the derivative on the second dimension._ 
-* **struct** [**eval\_type**](structPolarSplineEvaluator_1_1eval__type.md) _Tag for the evaluation of the function._ 
 * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._     
     * **struct** [**EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) _Object storing a value and a value of the derivative of a 1D function._     
     * **struct** [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) _Object storing a value and a value of the derivatives in each direction of a 2D function._     

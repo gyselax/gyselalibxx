@@ -212,8 +212,7 @@ template <
         class InputStorageType,
         class OutputStorageType,
         class... OutputValidIndexSet,
-        class... InputValidIndexSet,
-        std::size_t... InternalIdx>
+        class... InputValidIndexSet>
 KOKKOS_INLINE_FUNCTION void assign_elements(
         TensorCommon<OutputStorageType, OutputValidIndexSet...>& tensor_to_fill,
         TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input)

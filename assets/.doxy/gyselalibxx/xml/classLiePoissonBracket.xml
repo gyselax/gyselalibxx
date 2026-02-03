@@ -166,7 +166,7 @@
 <parametername direction="in">partial_derivatives_g</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A tensor containing the partial derivatives of the vector field G expressed at the given coordinate : <formula id="335">$ DG_{ij} = \partial_j G_i $</formula>. </para>
+<para>A tensor containing the partial derivatives of the vector field G expressed at the given coordinate : <formula id="336">$ DG_{ij} = \partial_j G_i $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -351,7 +351,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is: <formula id="330">$ \{F, G\} = b\dot(\nabla F \cross \nabla G) $</formula> with <formula id="331">$ b= \mathbf{B} / B $</formula> the unitary magnetic field, i.e: <formula id="332">$ \{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k $</formula> with <formula id="324">$ {\cal J}_{\rm x} $</formula> the jacobian of the system, <formula id="333">$ b_k $</formula> the covariant components of b and <formula id="334">$\epsilon^{ijk} $</formula> the Levi-Civita symbol. </para>
+<para>A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is: <formula id="331">$ \{F, G\} = b\dot(\nabla F \cross \nabla G) $</formula> with <formula id="332">$ b= \mathbf{B} / B $</formula> the unitary magnetic field, i.e: <formula id="333">$ \{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k $</formula> with <formula id="325">$ {\cal J}_{\rm x} $</formula> the jacobian of the system, <formula id="334">$ b_k $</formula> the covariant components of b and <formula id="335">$\epsilon^{ijk} $</formula> the Levi-Civita symbol. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>

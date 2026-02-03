@@ -193,12 +193,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**PolarBSplines::Impl::Corner1Tag**](structPolarBSplines_1_1Impl_1_1Corner1Tag.md) _The tag for the first corner of the Barycentric coordinates._ 
 * **struct** [**PolarBSplines::Impl::Corner2Tag**](structPolarBSplines_1_1Impl_1_1Corner2Tag.md) _The tag for the second corner of the Barycentric coordinates._ 
 * **struct** [**PolarBSplines::Impl::Corner3Tag**](structPolarBSplines_1_1Impl_1_1Corner3Tag.md) _The tag for the third corner of the Barycentric coordinates._ 
-* **struct** [**PolarBSplines::eval\_deriv\_type**](structPolarBSplines_1_1eval__deriv__type.md) 
-* **struct** [**PolarBSplines::eval\_type**](structPolarBSplines_1_1eval__type.md) 
-* **struct** [**PolarSplineEvaluator::eval\_deriv\_r\_theta\_type**](structPolarSplineEvaluator_1_1eval__deriv__r__theta__type.md) _Tag for the evaluation of the cross derivative of the function._ 
-* **struct** [**PolarSplineEvaluator::eval\_deriv\_r\_type**](structPolarSplineEvaluator_1_1eval__deriv__r__type.md) _Tag for the evaluation of the derivative on the first dimension._ 
-* **struct** [**PolarSplineEvaluator::eval\_deriv\_theta\_type**](structPolarSplineEvaluator_1_1eval__deriv__theta__type.md) _Tag for the evaluation of the derivative on the second dimension._ 
-* **struct** [**PolarSplineEvaluator::eval\_type**](structPolarSplineEvaluator_1_1eval__type.md) _Tag for the evaluation of the function._ 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) _Object storing a value and a value of the derivative of a 1D function._ 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) _Object storing a value and a value of the derivatives in each direction of a 2D function._ 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 

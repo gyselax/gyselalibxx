@@ -16,30 +16,12 @@
 template <class ExecSpace, class MemorySpace, class PolarBSplinesType, class OuterExtrapolationRule>
 class PolarSplineEvaluator
 {
-private:
-    // Tags to determine what to evaluate
-    struct eval_type
-    {
-    };
-
-    struct eval_deriv_r_type
-    {
-    };
-
-    struct eval_deriv_theta_type
-    {
-    };
-
-    struct eval_deriv_r_theta_type
-    {
-    };
-
 public:
     using bsplines_type = PolarBSplinesType;
     using BSplinesR = typename PolarBSplinesType::BSplinesR_tag;
     using BSplinesTheta = typename PolarBSplinesType::BSplinesTheta_tag;
-    using DimR = typename BSplinesR::continuous_dimension_type;
-    using DimTheta = typename BSplinesTheta::continuous_dimension_type;
+    using R = typename BSplinesR::continuous_dimension_type;
+    using Theta = typename BSplinesTheta::continuous_dimension_type;
 
     using exec_space = ExecSpace;
 
@@ -67,7 +49,7 @@ public:
     PolarSplineEvaluator& operator=(PolarSplineEvaluator&& x) = default;
 
     KOKKOS_FUNCTION double operator()(
-            Coord<DimR, DimTheta> coord_eval,
+            Coord<R, Theta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         return eval(coord_eval, spline_coef);
@@ -76,7 +58,7 @@ public:
     template <class Domain>
     void operator()(
             DField<Domain, MemorySpace> const spline_eval,
-            ConstField<Coord<DimR, DimTheta>, Domain, MemorySpace> const coords_eval,
+            ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
@@ -102,31 +84,45 @@ public:
                 });
     }
 
-    KOKKOS_FUNCTION double deriv_dim_1(
-            Coord<DimR, DimTheta> coord_eval,
+    template <class DerivDim>
+    KOKKOS_FUNCTION double deriv(
+            Idx<ddc::Deriv<DerivDim>> deriv_order,
+            Coord<R, Theta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
-        return eval_no_bc(coord_eval, spline_coef, eval_deriv_r_type());
+        return eval_no_bc(coord_eval, spline_coef, deriv_order);
     }
 
-    KOKKOS_FUNCTION double deriv_dim_2(
-            Coord<DimR, DimTheta> coord_eval,
+    [[deprecated("Use deriv(Idx<ddc::Deriv<R>>(1), ...) instead")]] KOKKOS_FUNCTION double
+    deriv_dim_1(
+            Coord<R, Theta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
-        return eval_no_bc(coord_eval, spline_coef, eval_deriv_theta_type());
+        return eval_no_bc(coord_eval, spline_coef, Idx<ddc::Deriv<R>>(1));
     }
 
-    KOKKOS_FUNCTION double deriv_1_and_2(
-            Coord<DimR, DimTheta> coord_eval,
+    [[deprecated("Use deriv(Idx<ddc::Deriv<Theta>>(1), ...) instead")]] KOKKOS_FUNCTION double
+    deriv_dim_2(
+            Coord<R, Theta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
-        return eval_no_bc(coord_eval, spline_coef, eval_deriv_r_theta_type());
+        return eval_no_bc(coord_eval, spline_coef, Idx<ddc::Deriv<Theta>>(1));
     }
 
-    template <class Domain>
-    void deriv_dim_1(
+    [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1)) "
+                 "instead")]] KOKKOS_FUNCTION double
+    deriv_1_and_2(
+            Coord<R, Theta> coord_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        return eval_no_bc(coord_eval, spline_coef, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1));
+    }
+
+    template <class Domain, class... DerivDims>
+    void deriv(
+            Idx<DerivDims...> const deriv_order,
             DField<Domain, MemorySpace> const spline_eval,
-            ConstField<Coord<DimR, DimTheta>, Domain, MemorySpace> const coords_eval,
+            ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
@@ -134,12 +130,42 @@ public:
                 exec_space(),
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
-                    spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_type());
+                    spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, deriv_order);
+                });
+    }
+
+    template <class Domain, class... DerivDims>
+    void deriv(
+            Idx<DerivDims...> const deriv_order,
+            DField<Domain, MemorySpace> const spline_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        using IdxEval = typename Domain::discrete_element_type;
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(spline_eval),
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
+                    spline_eval(i) = eval_no_bc(ddc::coordinate(i), spline_coef, deriv_order);
                 });
     }
 
     template <class Domain>
-    void deriv_dim_1(
+    [[deprecated("Use deriv(Idx<ddc::Deriv<R>>(1), ...) instead")]] void deriv_dim_1(
+            DField<Domain, MemorySpace> const spline_eval,
+            ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        using IdxEval = typename Domain::discrete_element_type;
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(coords_eval),
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
+                    spline_eval(i) = eval_no_bc(coords_eval(i), spline_coef, Idx<ddc::Deriv<R>>(1));
+                });
+    }
+
+    template <class Domain>
+    [[deprecated("Use deriv(Idx<ddc::Deriv<R>>(1), ...) instead")]] void deriv_dim_1(
             DField<Domain, MemorySpace> const spline_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
@@ -149,14 +175,14 @@ public:
                 get_idx_range(spline_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i)
-                            = eval_no_bc(ddc::coordinate(i), spline_coef, eval_deriv_r_type());
+                            = eval_no_bc(ddc::coordinate(i), spline_coef, Idx<ddc::Deriv<R>>(1));
                 });
     }
 
     template <class Domain>
-    void deriv_dim_2(
+    [[deprecated("Use deriv(Idx<ddc::Deriv<Theta>>(1), ...) instead")]] void deriv_dim_2(
             DField<Domain, MemorySpace> const spline_eval,
-            ConstField<Coord<DimR, DimTheta>, Domain, MemorySpace> const coords_eval,
+            ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
@@ -165,43 +191,12 @@ public:
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
                     spline_eval(i)
-                            = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_theta_type());
+                            = eval_no_bc(coords_eval(i), spline_coef, Idx<ddc::Deriv<Theta>>(1));
                 });
     }
 
     template <class Domain>
-    void deriv_dim_2(
-            DField<Domain, MemorySpace> const spline_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
-    {
-        using IdxEval = typename Domain::discrete_element_type;
-        ddc::parallel_for_each(
-                exec_space(),
-                get_idx_range(spline_eval),
-                KOKKOS_CLASS_LAMBDA(IdxEval i) {
-                    spline_eval(i)
-                            = eval_no_bc(ddc::coordinate(i), spline_coef, eval_deriv_theta_type());
-                });
-    }
-
-    template <class Domain>
-    void deriv_dim_1_and_2(
-            DField<Domain, MemorySpace> const spline_eval,
-            ConstField<Coord<DimR, DimTheta>, Domain, MemorySpace> const coords_eval,
-            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
-    {
-        using IdxEval = typename Domain::discrete_element_type;
-        ddc::parallel_for_each(
-                exec_space(),
-                get_idx_range(coords_eval),
-                KOKKOS_CLASS_LAMBDA(IdxEval i) {
-                    spline_eval(i)
-                            = eval_no_bc(coords_eval(i), spline_coef, eval_deriv_r_theta_type());
-                });
-    }
-
-    template <class Domain>
-    void deriv_dim_1_and_2(
+    [[deprecated("Use deriv(Idx<ddc::Deriv<Theta>>(1), ...) instead")]] void deriv_dim_2(
             DField<Domain, MemorySpace> const spline_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
@@ -213,17 +208,54 @@ public:
                     spline_eval(i) = eval_no_bc(
                             ddc::coordinate(i),
                             spline_coef,
-                            eval_deriv_r_theta_type());
+                            Idx<ddc::Deriv<Theta>>(1));
+                });
+    }
+
+    template <class Domain>
+    [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1)) instead")]] void
+    deriv_dim_1_and_2(
+            DField<Domain, MemorySpace> const spline_eval,
+            ConstField<Coord<R, Theta>, Domain, MemorySpace> const coords_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        using IdxEval = typename Domain::discrete_element_type;
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(coords_eval),
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
+                    spline_eval(i) = eval_no_bc(
+                            coords_eval(i),
+                            spline_coef,
+                            Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1));
+                });
+    }
+
+    template <class Domain>
+    [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1)) instead")]] void
+    deriv_dim_1_and_2(
+            DField<Domain, MemorySpace> const spline_eval,
+            DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
+    {
+        using IdxEval = typename Domain::discrete_element_type;
+        ddc::parallel_for_each(
+                exec_space(),
+                get_idx_range(spline_eval),
+                KOKKOS_CLASS_LAMBDA(IdxEval i) {
+                    spline_eval(i) = eval_no_bc(
+                            ddc::coordinate(i),
+                            spline_coef,
+                            Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1));
                 });
     }
 
 private:
     KOKKOS_FUNCTION double eval(
-            Coord<DimR, DimTheta> coord_eval,
+            Coord<R, Theta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
-        const double coord_eval1 = ddc::get<DimR>(coord_eval);
-        double coord_eval2 = ddc::get<DimTheta>(coord_eval);
+        const double coord_eval1 = ddc::get<R>(coord_eval);
+        double coord_eval2 = ddc::get<Theta>(coord_eval);
         if (coord_eval1 > ddc::discrete_space<BSplinesR>().rmax()) {
             return m_outer_bc(coord_eval, spline_coef);
         }
@@ -234,42 +266,24 @@ private:
                                    / ddc::discrete_space<BSplinesTheta>().length())
                            * ddc::discrete_space<BSplinesTheta>().length();
         }
-        Coord<DimR, DimTheta> coord_eval_new(coord_eval1, coord_eval2);
-        return eval_no_bc(coord_eval_new, spline_coef, eval_type());
+        Coord<R, Theta> coord_eval_new(coord_eval1, coord_eval2);
+        return eval_no_bc(coord_eval_new, spline_coef, Idx<>());
     }
 
-    template <class EvalType>
+    template <class... DerivDims>
     KOKKOS_FUNCTION double eval_no_bc(
-            Coord<DimR, DimTheta> coord_eval,
+            Coord<R, Theta> coord_eval,
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef,
-            EvalType const) const
+            Idx<DerivDims...> const deriv_order) const
     {
-        static_assert(
-                (std::is_same_v<EvalType, eval_type>)
-                || (std::is_same_v<EvalType, eval_deriv_r_type>)
-                || (std::is_same_v<EvalType, eval_deriv_theta_type>)
-                || (std::is_same_v<EvalType, eval_deriv_r_theta_type>));
-
         std::array<double, PolarBSplinesType::n_singular_basis()> singular_data;
         DSpan1D singular_vals(singular_data.data(), PolarBSplinesType::n_singular_basis());
         std::array<double, (BSplinesR::degree() + 1) * (BSplinesTheta::degree() + 1)> data;
         DSpan2D vals(data.data(), BSplinesR::degree() + 1, BSplinesTheta::degree() + 1);
 
-        Idx<BSplinesR, BSplinesTheta> jmin;
-
-        if constexpr (std::is_same_v<EvalType, eval_type>) {
-            jmin = ddc::discrete_space<PolarBSplinesType>()
-                           .eval_basis(singular_vals, vals, coord_eval);
-        } else if constexpr (std::is_same_v<EvalType, eval_deriv_r_type>) {
-            jmin = ddc::discrete_space<PolarBSplinesType>()
-                           .eval_deriv_r(singular_vals, vals, coord_eval);
-        } else if constexpr (std::is_same_v<EvalType, eval_deriv_theta_type>) {
-            jmin = ddc::discrete_space<PolarBSplinesType>()
-                           .eval_deriv_theta(singular_vals, vals, coord_eval);
-        } else if constexpr (std::is_same_v<EvalType, eval_deriv_r_theta_type>) {
-            jmin = ddc::discrete_space<PolarBSplinesType>()
-                           .eval_deriv_r_and_theta(singular_vals, vals, coord_eval);
-        }
+        Idx<BSplinesR, BSplinesTheta> jmin
+                = ddc::discrete_space<PolarBSplinesType>()
+                          .eval_deriv(singular_vals, vals, coord_eval, deriv_order);
 
         double y = 0.0;
         for (std::size_t i = 0; i < PolarBSplinesType::n_singular_basis(); ++i) {

@@ -285,13 +285,11 @@
 * **Derivs12OnPatch** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **Derivs1OnPatch** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **Derivs2OnPatch** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
-* **deriv** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
+* **deriv** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **deriv\_1\_and\_2** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **deriv\_dim\_1** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **deriv\_dim\_2** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **discrete\_vector\_type** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
-* **DimR** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
-* **DimTheta** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **deriv\_dim\_1\_and\_2** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **DFieldRTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **derivative** ([**PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md), [**PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md))
@@ -348,6 +346,7 @@
 * **evaluator\_type** ([**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md))
 * **eval** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **eval\_basis** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
+* **eval\_deriv** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **eval\_deriv\_r** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **eval\_deriv\_r\_and\_theta** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **eval\_deriv\_theta** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
@@ -1103,7 +1102,7 @@
 
 ## r
 
-* **R** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**IPolarFootFinder**](classIPolarFootFinder.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**PolarBSplines**](classPolarBSplines.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **R** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**IPolarFootFinder**](classIPolarFootFinder.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**PolarBSplines**](classPolarBSplines.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 * **R\_cov** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **R\_max** ([**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md))
@@ -1204,7 +1203,7 @@
 ## t
 
 * **TimeStepper** ([**BslAdvection1D**](classBslAdvection1D.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
-* **Theta** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**GyroAverageOperator**](classGyroAverageOperator.md), [**IPolarFootFinder**](classIPolarFootFinder.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**PolarBSplines**](classPolarBSplines.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **Theta** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**GyroAverageOperator**](classGyroAverageOperator.md), [**IPolarFootFinder**](classIPolarFootFinder.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md), [**PolarBSplines**](classPolarBSplines.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **temperature\_bot** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **Theta\_cov** ([**CartesianToCircular**](classCartesianToCircular.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **to\_index** ([**CollisionsIntra**](classCollisionsIntra.md))

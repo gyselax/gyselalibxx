@@ -190,7 +190,7 @@ constexpr bool ddcHelper::is_non_uniform_interpolation_points_v;
 
 _Assign the elements of a tensor to another tensor._ 
 ```C++
-template<class InputStorageType, class OutputStorageType, class... OutputValidIndexSet, class... InputValidIndexSet, std::size_t... InternalIdx>
+template<class InputStorageType, class OutputStorageType, class... OutputValidIndexSet, class... InputValidIndexSet>
 KOKKOS_INLINE_FUNCTION void ddcHelper::assign_elements (
     TensorCommon < OutputStorageType, OutputValidIndexSet... > & tensor_to_fill,
     TensorCommon < InputStorageType, InputValidIndexSet... > const & tensor_input

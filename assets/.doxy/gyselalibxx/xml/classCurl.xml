@@ -155,7 +155,7 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A class which implements a curl operator The implemented equation is: <formula id="322">$ \nabla \cross \mathbf{F} $</formula> <formula id="323">$ \nabla \cross \mathbf{F} = {\cal J}_{\rm x}^{-1}\epsilon^{klm}\partial_{x^l} F_m $</formula> with <formula id="324">$ {\cal J}_{\rm x} $</formula> the jacobian of the system, <formula id="325">$ F_m $</formula> the covariant components of F and <formula id="326">$\epsilon^{klm} $</formula> the Levi-Civita symbol. </para>
+<para>A class which implements a curl operator The implemented equation is: <formula id="323">$ \nabla \cross \mathbf{F} $</formula> <formula id="324">$ \nabla \cross \mathbf{F} = {\cal J}_{\rm x}^{-1}\epsilon^{klm}\partial_{x^l} F_m $</formula> with <formula id="325">$ {\cal J}_{\rm x} $</formula> the jacobian of the system, <formula id="326">$ F_m $</formula> the covariant components of F and <formula id="327">$\epsilon^{klm} $</formula> the Levi-Civita symbol. </para>
     </briefdescription>
     <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
