@@ -40,7 +40,7 @@ in a `DerivField`.
 - Change some Python class `scattered_coord` arguments to keyword-only.
 - Increase C++ version to 20.
 - Use concepts to describe coordinate transformation classes.
-- Update koliop to [v0.1.0](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.0).
+- Update koliop to [v0.1.2](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.2).
 - Make koliop discoverable with `find_package`.
 - Simplify toolchains by disabling koliop LTO by default.
 
