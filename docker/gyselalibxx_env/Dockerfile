@@ -4,7 +4,7 @@ FROM ubuntu:noble
 
 COPY bash_run /bin/
 ENV BASH_ENV=/etc/profile
-ENV PATH=/opt/cmake-3.27/bin:${PATH:+:${PATH}}
+ENV PATH=/opt/cmake-3.27/bin${PATH:+:${PATH}}
 SHELL ["/bin/bash", "-c"]
 
 
