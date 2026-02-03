@@ -72,10 +72,16 @@ using namespace non_periodic_non_uniform_2d_3patches;
 struct Xg
 {
     static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Xg;
 };
 struct Yg
 {
     static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Yg;
 };
 
 struct GridXg : NonUniformGridBase<Xg>
@@ -153,153 +159,6 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::ConstantExtrapolationRule<Yg, Xg>,
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
 
-using AllGrids = ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>, GridY<1>, GridY<2>, GridY<3>>;
-using AllBSpls = ddc::detail::
-        TypeSeq<BSplinesX<1>, BSplinesX<2>, BSplinesX<3>, BSplinesY<1>, BSplinesY<2>, BSplinesY<3>>;
-
-template <int I>
-struct MatchingPatchTransform
-{
-    using XTransform = LinearCoordTransform<Xg, X<I>>;
-    using YTransform = LinearCoordTransform<Yg, Y<I>>;
-    XTransform x_transform;
-    YTransform y_transform;
-    OrthogonalCoordTransforms<Coord<Xg, Yg>, Coord<X<I>, Y<I>>, XTransform, YTransform>
-            coord_transform;
-    MatchingPatchTransform(XTransform x_transform, YTransform y_transform)
-        : x_transform(x_transform)
-        , y_transform(y_transform)
-        , coord_transform(x_transform, y_transform)
-    {
-    }
-};
-
-template <int I>
-struct AlignedPatchTransform : public MatchingPatchTransform<I>
-{
-    AlignedPatchTransform(Coord<Xg, Yg> origin)
-        : MatchingPatchTransform<I>(
-                XTransform(Coord<Xg>(origin), convert_dim<X<I>>(Coord<Xg>(origin)), 1.0),
-                YTransform(Coord<Yg>(origin), convert_dim<Y<I>>(Coord<Yg>(origin)), 1.0))
-    {
-    }
-};
-
-template <int I>
-struct ReversePatchTransform : public MatchingPatchTransform<I>
-{
-    ReversePatchTransform(Coord<Xg, Yg> origin)
-        : MatchingPatchTransform<I>(
-                XTransform(Coord<Xg>(origin), convert_dim<X<I>>(Coord<Xg>(origin) + 1.0), -1.0),
-                YTransform(Coord<Yg>(origin), convert_dim<Y<I>>(Coord<Yg>(origin) + 1.0), -1.0))
-    {
-    }
-};
-
-template <int I>
-struct BoundChangePatchTransform
-{
-    using XTransform = LinearCoordTransform<Xg, Y<I>>;
-    using YTransform = LinearCoordTransform<Yg, X<I>>;
-    XTransform x_transform;
-    YTransform y_transform;
-    OrthogonalCoordTransforms<Coord<Yg, Xg>, Coord<X<I>, Y<I>>, XTransform, YTransform>
-            coord_transform;
-    BoundChangePatchTransform(XTransform x_transform, YTransform y_transform)
-        : x_transform(x_transform)
-        , y_transform(y_transform)
-        , coord_transform(x_transform, y_transform)
-    {
-    }
-};
-
-template <int I>
-struct BoundChangeXPatchTransform : BoundChangePatchTransform<I>
-{
-    BoundChangeXPatchTransform(Coord<Xg, Yg> origin)
-        : BoundChangePatchTransform<I>(
-                XTransform(Coord<Xg>(origin), convert_dim<X<I>>(Coord<Xg>(origin) + 1.0), -1.0),
-                YTransform(Coord<Yg>(origin), convert_dim<Y<I>>(Coord<Yg>(origin)), -1.0))
-    {
-    }
-};
-
-template <int I>
-struct BoundChangeYPatchTransform : BoundChangePatchTransform<I>
-{
-    BoundChangeYPatchTransform(Coord<Xg, Yg> origin)
-        : BoundChangePatchTransform<I>(
-                XTransform(Coord<Xg>(origin), convert_dim<X<I>>(Coord<Xg>(origin)), -1.0),
-                YTransform(Coord<Yg>(origin), convert_dim<Y<I>>(Coord<Yg>(origin) + 1.0), -1.0))
-    {
-    }
-};
-
-struct RevPatch1
-{
-    using Interface_1_2 = Interface<WestEdge<1>, WestEdge<2>, false>;
-    using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
-
-    using OutsideInterface1 = Interface<OutsideEdge, EastEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
-
-    using CoordTransform1 = ReversePatchTransform<1>;
-    using CoordTransform2 = AlignedPatchTransform<2>;
-    using CoordTransform3 = AlignedPatchTransform<3>;
-};
-
-struct RevPatch2
-{
-    using Interface_1_2 = Interface<EastEdge<1>, EastEdge<2>, false>;
-    using Interface_2_3 = Interface<WestEdge<2>, WestEdge<3>, false>;
-
-    using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
-
-    using CoordTransform1 = AlignedPatchTransform<1>;
-    using CoordTransform2 = ReversePatchTransform<2>;
-    using CoordTransform3 = AlignedPatchTransform<3>;
-};
-
-struct RevPatch3
-{
-    using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
-    using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
-
-    using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<WestEdge<3>, OutsideEdge, true>;
-
-    using CoordTransform1 = AlignedPatchTransform<1>;
-    using CoordTransform2 = AlignedPatchTransform<2>;
-    using CoordTransform3 = ReversePatchTransform<3>;
-};
-
-struct ChangeBound1
-{
-    using Interface_1_2 = Interface<SouthEdge<1>, WestEdge<2>, true>;
-    using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
-
-    using OutsideInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
-    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
-
-    using CoordTransform1 = BoundChangeXPatchTransform<1>;
-    using CoordTransform2 = AlignedPatchTransform<2>;
-    using CoordTransform3 = AlignedPatchTransform<3>;
-};
-
-struct ChangeBound3
-{
-    using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
-    using Interface_2_3 = Interface<EastEdge<2>, SouthEdge<3>, false>;
-
-    using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
-    using OutsideInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
-
-    using CoordTransform1 = AlignedPatchTransform<1>;
-    using CoordTransform2 = AlignedPatchTransform<2>;
-    using CoordTransform3 = BoundChangeYPatchTransform<3>;
-};
-
 // INTERFACES ------------------------------------------------------------------------------------
 using NorthInterface1 = Interface<NorthEdge<1>, OutsideEdge, true>;
 using NorthInterface2 = Interface<NorthEdge<2>, OutsideEdge, true>;
@@ -315,10 +174,243 @@ using EastInterface3 = Interface<OutsideEdge, EastEdge<3>, true>;
 using WestInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
 using WestInterface3 = Interface<OutsideEdge, WestEdge<3>, true>;
 
+using AllGrids = ddc::detail::TypeSeq<GridX<1>, GridX<2>, GridX<3>, GridY<1>, GridY<2>, GridY<3>>;
+using AllBSpls = ddc::detail::
+        TypeSeq<BSplinesX<1>, BSplinesX<2>, BSplinesX<3>, BSplinesY<1>, BSplinesY<2>, BSplinesY<3>>;
+
+template <int I>
+struct MatchingPatchTransform
+{
+    using XTransform = LinearCoordTransform<Xg, X<I>>;
+    using YTransform = LinearCoordTransform<Yg, Y<I>>;
+    XTransform x_transform;
+    YTransform y_transform;
+    OrthogonalCoordTransforms<
+            Coord<Xg, Yg>,
+            Coord<X<I>, Y<I>>,
+            Coord<Xg, Yg>,
+            XTransform,
+            YTransform>
+            coord_transform;
+    MatchingPatchTransform(XTransform x_transform, YTransform y_transform)
+        : x_transform(x_transform)
+        , y_transform(y_transform)
+        , coord_transform(x_transform, y_transform)
+    {
+    }
+};
+
+template <int I>
+struct AlignedPatchTransform : public MatchingPatchTransform<I>
+{
+    AlignedPatchTransform(Coord<Xg, Yg> origin)
+        : MatchingPatchTransform<I>(
+                typename MatchingPatchTransform<I>::
+                        XTransform(Coord<Xg>(origin), convert_dim<X<I>>(Coord<Xg>(origin)), 1.0),
+                typename MatchingPatchTransform<I>::
+                        YTransform(Coord<Yg>(origin), convert_dim<Y<I>>(Coord<Yg>(origin)), 1.0))
+    {
+    }
+};
+
+template <int I>
+struct ReversePatchTransform : public MatchingPatchTransform<I>
+{
+    ReversePatchTransform(Coord<Xg, Yg> origin)
+        : MatchingPatchTransform<I>(
+                typename MatchingPatchTransform<I>::XTransform(
+                        Coord<Xg>(origin),
+                        convert_dim<X<I>>(Coord<Xg>(origin) + 1.0),
+                        -1.0),
+                typename MatchingPatchTransform<I>::YTransform(
+                        Coord<Yg>(origin),
+                        convert_dim<Y<I>>(Coord<Yg>(origin) + 1.0),
+                        -1.0))
+    {
+    }
+};
+
+template <int I>
+struct BoundChangePatchTransform
+{
+    using XTransform = LinearCoordTransform<Xg, Y<I>>;
+    using YTransform = LinearCoordTransform<Yg, X<I>>;
+    XTransform x_transform;
+    YTransform y_transform;
+    OrthogonalCoordTransforms<
+            Coord<Yg, Xg>,
+            Coord<X<I>, Y<I>>,
+            Coord<Xg, Yg>,
+            XTransform,
+            YTransform>
+            coord_transform;
+    BoundChangePatchTransform(XTransform x_transform, YTransform y_transform)
+        : x_transform(x_transform)
+        , y_transform(y_transform)
+        , coord_transform(x_transform, y_transform)
+    {
+    }
+};
+
+template <int I>
+struct BoundChangeXPatchTransform : public BoundChangePatchTransform<I>
+{
+    BoundChangeXPatchTransform(Coord<Xg, Yg> origin)
+        : BoundChangePatchTransform<I>(
+                typename BoundChangePatchTransform<I>::XTransform(
+                        Coord<Xg>(origin),
+                        convert_dim<Y<I>>(Coord<Xg>(origin) + 1.0),
+                        -1.0),
+                typename BoundChangePatchTransform<I>::
+                        YTransform(Coord<Yg>(origin), convert_dim<X<I>>(Coord<Yg>(origin)), -1.0))
+    {
+    }
+};
+
+template <int I>
+struct BoundChangeYPatchTransform : public BoundChangePatchTransform<I>
+{
+    BoundChangeYPatchTransform(Coord<Xg, Yg> origin)
+        : BoundChangePatchTransform<I>(
+                typename BoundChangePatchTransform<I>::
+                        XTransform(Coord<Xg>(origin), convert_dim<Y<I>>(Coord<Xg>(origin)), -1.0),
+                typename BoundChangePatchTransform<I>::YTransform(
+                        Coord<Yg>(origin),
+                        convert_dim<X<I>>(Coord<Yg>(origin) + 1.0),
+                        -1.0))
+    {
+    }
+};
+
+struct RevPatch1
+{
+    using Interface_1_2 = Interface<WestEdge<1>, WestEdge<2>, false>;
+    using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
+
+    using OutsideInterface1 = Interface<OutsideEdge, EastEdge<1>, true>;
+    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+
+    using CoordTransform1 = ReversePatchTransform<1>;
+    using CoordTransform2 = AlignedPatchTransform<2>;
+    using CoordTransform3 = AlignedPatchTransform<3>;
+
+    using Connectivity = MultipatchConnectivity<
+            NorthInterface1,
+            SouthInterface1,
+            NorthInterface2,
+            SouthInterface2,
+            NorthInterface3,
+            SouthInterface3,
+            OutsideInterface1,
+            OutsideInterface3,
+            Interface_1_2,
+            Interface_2_3>;
+};
+
+struct RevPatch2
+{
+    using Interface_1_2 = Interface<EastEdge<1>, EastEdge<2>, false>;
+    using Interface_2_3 = Interface<WestEdge<2>, WestEdge<3>, false>;
+
+    using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
+    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+
+    using CoordTransform1 = AlignedPatchTransform<1>;
+    using CoordTransform2 = ReversePatchTransform<2>;
+    using CoordTransform3 = AlignedPatchTransform<3>;
+
+    using Connectivity = MultipatchConnectivity<
+            NorthInterface1,
+            SouthInterface1,
+            NorthInterface2,
+            SouthInterface2,
+            NorthInterface3,
+            SouthInterface3,
+            OutsideInterface1,
+            OutsideInterface3,
+            Interface_1_2,
+            Interface_2_3>;
+};
+
+struct RevPatch3
+{
+    using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
+    using Interface_2_3 = Interface<EastEdge<3>, EastEdge<2>, false>;
+
+    using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
+    using OutsideInterface3 = Interface<WestEdge<3>, OutsideEdge, true>;
+
+    using CoordTransform1 = AlignedPatchTransform<1>;
+    using CoordTransform2 = AlignedPatchTransform<2>;
+    using CoordTransform3 = ReversePatchTransform<3>;
+
+    using Connectivity = MultipatchConnectivity<
+            NorthInterface1,
+            SouthInterface1,
+            NorthInterface2,
+            SouthInterface2,
+            NorthInterface3,
+            SouthInterface3,
+            OutsideInterface1,
+            OutsideInterface3,
+            Interface_1_2,
+            Interface_2_3>;
+};
+
+struct ChangeBound1
+{
+    using Interface_1_2 = Interface<SouthEdge<1>, WestEdge<2>, true>;
+    using Interface_2_3 = Interface<EastEdge<2>, WestEdge<3>, true>;
+
+    using OutsideInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
+    using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
+
+    using CoordTransform1 = BoundChangeXPatchTransform<1>;
+    using CoordTransform2 = AlignedPatchTransform<2>;
+    using CoordTransform3 = AlignedPatchTransform<3>;
+
+    using Connectivity = MultipatchConnectivity<
+            EastInterface1,
+            WestInterface1,
+            NorthInterface2,
+            SouthInterface2,
+            NorthInterface3,
+            SouthInterface3,
+            OutsideInterface1,
+            OutsideInterface3,
+            Interface_1_2,
+            Interface_2_3>;
+};
+
+struct ChangeBound3
+{
+    using Interface_1_2 = Interface<EastEdge<1>, WestEdge<2>, true>;
+    using Interface_2_3 = Interface<EastEdge<2>, SouthEdge<3>, false>;
+
+    using OutsideInterface1 = Interface<OutsideEdge, WestEdge<1>, true>;
+    using OutsideInterface3 = Interface<NorthEdge<3>, OutsideEdge, true>;
+
+    using CoordTransform1 = AlignedPatchTransform<1>;
+    using CoordTransform2 = AlignedPatchTransform<2>;
+    using CoordTransform3 = BoundChangeYPatchTransform<3>;
+
+    using Connectivity = MultipatchConnectivity<
+            NorthInterface1,
+            SouthInterface1,
+            NorthInterface2,
+            SouthInterface2,
+            EastInterface3,
+            WestInterface3,
+            OutsideInterface1,
+            OutsideInterface3,
+            Interface_1_2,
+            Interface_2_3>;
+};
+
 
 // CONNECTIVITY ----------------------------------------------------------------------------------
 
-template <class PatchLayout>
+template <class PatchLayout_>
 struct InterfaceDerivativeMatrixHermiteFixture : public ::testing::Test
 {
     static constexpr int ncells_per_patch = 5;
@@ -345,6 +437,8 @@ struct InterfaceDerivativeMatrixHermiteFixture : public ::testing::Test
     const IdxRange<GridXg> idx_range_xg;
     const IdxRange<GridYg> idx_range_yg;
     const IdxRange<GridXg, GridYg> idx_range_xy_g;
+
+    using PatchLayout = PatchLayout_;
 
     typename PatchLayout::CoordTransform1 coord_transform_1;
     typename PatchLayout::CoordTransform2 coord_transform_2;
@@ -379,18 +473,19 @@ public:
         IdxStep<GridXg> nbreaks_per_patch(ncells_per_patch + 1);
 
         init_patch(
-                PatchLayout::CoordTransform1(Coord<Xg, Yg>(xg_min, yg_min)),
+                typename PatchLayout::CoordTransform1(Coord<Xg, Yg>(xg_min, yg_min)),
                 idx_range_xg.take_first(nbreaks_per_patch),
                 idx_range_yg);
         init_patch(
-                PatchLayout::CoordTransform2(Coord<Xg, Yg>(
-                        ddc::coordinate(idx_range_xg.front() + IdxStep<Xg>(ncells_per_patch)),
+                typename PatchLayout::CoordTransform2(Coord<Xg, Yg>(
+                        ddc::coordinate(idx_range_xg.front() + IdxStep<GridXg>(ncells_per_patch)),
                         yg_min)),
                 idx_range_xg.remove(nbreaks_per_patch - 1, nbreaks_per_patch - 1),
                 idx_range_yg);
         init_patch(
-                PatchLayout::CoordTransform3(Coord<Xg, Yg>(
-                        ddc::coordinate(idx_range_xg.front() + IdxStep<Xg>(2 * ncells_per_patch)),
+                typename PatchLayout::CoordTransform3(Coord<Xg, Yg>(
+                        ddc::coordinate(
+                                idx_range_xg.front() + IdxStep<GridXg>(2 * ncells_per_patch)),
                         yg_min)),
                 idx_range_xg.take_last(nbreaks_per_patch),
                 idx_range_yg);
@@ -405,7 +500,7 @@ public:
         std::vector<Coord<Yg>> break_points_yg = build_random_non_uniform_break_points(
                 yg_min,
                 yg_max,
-                IdxStep<GridXg>(ncells_per_patch));
+                IdxStep<GridYg>(ncells_per_patch));
 
         ddc::init_discrete_space<BSplinesXg>(break_points_xg);
         ddc::init_discrete_space<BSplinesYg>(break_points_yg);
@@ -424,21 +519,22 @@ public:
         using YLinearTransform = typename PatchTransform::YTransform;
         std::vector<typename XLinearTransform::CoordResult> break_points_along_xg(ncells_per_patch);
         std::vector<typename YLinearTransform::CoordResult> break_points_along_yg(ncells_per_patch);
-        ddc::for_each(idx_range_xg, [&](Idx<GridXg> idx) {
+        ddc::host_for_each(idx_range_xg, [&](Idx<GridXg> idx) {
             break_points_along_xg.push_back(patch_transform.x_transform(ddc::coordinate(idx)));
         });
-        ddc::for_each(idx_range_yg, [&](Idx<GridYg> idx) {
+        ddc::host_for_each(idx_range_yg, [&](Idx<GridYg> idx) {
             break_points_along_yg.push_back(patch_transform.y_transform(ddc::coordinate(idx)));
         });
 
-        using GridLocAlongXg = find_grid_t<
-                typename XLinearTransform::CoordResult::continuous_dimension_type,
-                AllGrids>;
-        using GridLocAlongYg = find_grid_t<
-                typename YLinearTransform::CoordResult::continuous_dimension_type,
-                AllGrids>;
-        using BSplAlongXg = find_grid_t<GridLocAlongXg, AllBSpls>;
-        using BSplAlongYg = find_grid_t<GridLocAlongYg, AllBSpls>;
+        using LocalXg = ddc::
+                type_seq_element_t<0, ddc::to_type_seq_t<typename XLinearTransform::CoordResult>>;
+        using LocalYg = ddc::
+                type_seq_element_t<0, ddc::to_type_seq_t<typename YLinearTransform::CoordResult>>;
+
+        using GridLocAlongXg = find_grid_t<LocalXg, AllGrids>;
+        using GridLocAlongYg = find_grid_t<LocalYg, AllGrids>;
+        using BSplAlongXg = find_grid_t<LocalXg, AllBSpls>;
+        using BSplAlongYg = find_grid_t<LocalYg, AllBSpls>;
 
         ddc::init_discrete_space<BSplAlongXg>(break_points_along_xg);
         ddc::init_discrete_space<BSplAlongYg>(break_points_along_yg);
@@ -454,37 +550,23 @@ TYPED_TEST_SUITE(InterfaceDerivativeMatrixHermiteFixture, TestTypes);
 
 
 
-// Check that the local grids and the equivalent global grid match together.
-TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, InterpolationPointsCheck)
-{
-    using TestFixture;
-    int const x_shift1 = ncells_per_patch.value();
-    int const x_shift2 = 2 * ncells_per_patch.value();
-
-    check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0, 0, coord_transform_1);
-    check_interpolation_grids<
-            Patch2,
-            GridXg,
-            GridYg>(idx_range_xy2, x_shift1, 0, coord_transform_2);
-    check_interpolation_grids<
-            Patch3,
-            GridXg,
-            GridYg>(idx_range_xy3, x_shift2, 0, coord_transform_3);
-}
-
-
 
 TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
 {
-    using TestFixture;
-    std::tuple coord_transforms(coord_transform_1, coord_transform_2, coord_transform_3);
+    using PatchLayout = typename TestFixture::PatchLayout;
+    using Interface_1_2 = typename PatchLayout::Interface_1_2;
+    using Interface_2_3 = typename PatchLayout::Interface_2_3;
+    std::tuple coord_transforms(
+            this->coord_transform_1,
+            this->coord_transform_2,
+            this->coord_transform_3);
 
     // Instantiate the derivatives calculators ---------------------------------------------------
     // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
     SingleInterfaceDerivativesCalculator<Interface_1_2> const
-            derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2);
+            derivatives_calculator_1_2(this->idx_range_xy1, this->idx_range_xy2);
     SingleInterfaceDerivativesCalculator<Interface_2_3> const
-            derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3);
+            derivatives_calculator_2_3(this->idx_range_xy2, this->idx_range_xy3);
 
     // Collect the derivative calculators --------------------------------------------------------
     // We do not follow the physical order to test the operator.
@@ -493,31 +575,18 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
 
     // Collect the index ranges ------------------------------------------------------------------
     MultipatchType<IdxRangeOnPatch, Patch1, Patch2, Patch3>
-            idx_ranges(idx_range_xy1, idx_range_xy2, idx_range_xy3);
+            idx_ranges(this->idx_range_xy1, this->idx_range_xy2, this->idx_range_xy3);
 
-    using Connectivity = MultipatchConnectivity<
-#if defined(CHANGE_BOUND1)
-            EastInterface1,
-            WestInterface1,
-#else
-            NorthInterface1,
-            SouthInterface1,
-#endif
-            NorthInterface2,
-            SouthInterface2,
-#if defined(CHANGE_BOUND3)
-            EastInterface3,
-            WestInterface3,
-#else
-            NorthInterface3,
-            SouthInterface3,
-#endif
-            PatchLayout::OutsideInterface1,
-            PatchLayout::OutsideInterface3,
-            PatchLayout::Interface_1_2,
-            PatchLayout::Interface_2_3>;
+    using Connectivity = typename PatchLayout::Connectivity;
 
     // Instantiate the matrix calculators --------------------------------------------------------
+    using Grid1AlongXg = find_grid_t<
+            ddc::type_seq_element_t<
+                    0,
+                    ddc::to_type_seq_t<
+                            typename PatchLayout::CoordTransform1::XTransform::CoordResult>>,
+            AllGrids>;
+
     InterfaceDerivativeMatrix<
             Connectivity,
             Grid1AlongXg,
@@ -527,21 +596,27 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
 
     // Instantiate DerivField ====================================================================
     // Instantiate index range slices ------------------------------------------------------------
-    IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(idx_range_x1);
-    IdxRangeSlice<GridX<2>> idx_range_slice_dx2 = get_bound_idx_range_slice(idx_range_x2);
-    IdxRangeSlice<GridX<3>> idx_range_slice_dx3 = get_bound_idx_range_slice(idx_range_x3);
+    IdxRangeSlice<GridX<1>> idx_range_slice_dx1 = get_bound_idx_range_slice(this->idx_range_x1);
+    IdxRangeSlice<GridX<2>> idx_range_slice_dx2 = get_bound_idx_range_slice(this->idx_range_x2);
+    IdxRangeSlice<GridX<3>> idx_range_slice_dx3 = get_bound_idx_range_slice(this->idx_range_x3);
 
-    IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(idx_range_y1);
-    IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(idx_range_y2);
-    IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(idx_range_y3);
+    IdxRangeSlice<GridY<1>> idx_range_slice_dy1 = get_bound_idx_range_slice(this->idx_range_y1);
+    IdxRangeSlice<GridY<2>> idx_range_slice_dy2 = get_bound_idx_range_slice(this->idx_range_y2);
+    IdxRangeSlice<GridY<3>> idx_range_slice_dy3 = get_bound_idx_range_slice(this->idx_range_y3);
 
     // Instantiate DerivField --------------------------------------------------------------------
-    DerivFieldMemOnPatch_host<Patch1>
-            function_and_derivs_1_alloc(idx_range_xy1, idx_range_slice_dx1, idx_range_slice_dy1);
-    DerivFieldMemOnPatch_host<Patch2>
-            function_and_derivs_2_alloc(idx_range_xy2, idx_range_slice_dx2, idx_range_slice_dy2);
-    DerivFieldMemOnPatch_host<Patch3>
-            function_and_derivs_3_alloc(idx_range_xy3, idx_range_slice_dx3, idx_range_slice_dy3);
+    DerivFieldMemOnPatch_host<Patch1> function_and_derivs_1_alloc(
+            this->idx_range_xy1,
+            idx_range_slice_dx1,
+            idx_range_slice_dy1);
+    DerivFieldMemOnPatch_host<Patch2> function_and_derivs_2_alloc(
+            this->idx_range_xy2,
+            idx_range_slice_dx2,
+            idx_range_slice_dy2);
+    DerivFieldMemOnPatch_host<Patch3> function_and_derivs_3_alloc(
+            this->idx_range_xy3,
+            idx_range_slice_dx3,
+            idx_range_slice_dy3);
 
     DerivFieldOnPatch_host<Patch1> function_and_derivs_1(function_and_derivs_1_alloc);
     DerivFieldOnPatch_host<Patch2> function_and_derivs_2(function_and_derivs_2_alloc);
@@ -554,28 +629,31 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
             function_and_derivs_3);
 
     // Instantiate the global function.
-    IdxRangeSlice<GridXg> idx_range_slice_dxg = get_bound_idx_range_slice(idx_range_xg);
-    IdxRangeSlice<GridYg> idx_range_slice_dyg = get_bound_idx_range_slice(idx_range_yg);
+    IdxRangeSlice<GridXg> idx_range_slice_dxg = get_bound_idx_range_slice(this->idx_range_xg);
+    IdxRangeSlice<GridYg> idx_range_slice_dyg = get_bound_idx_range_slice(this->idx_range_yg);
 
     DerivFieldMem<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>, 1>
-            function_and_derivs_g_alloc(idx_range_xy_g, idx_range_slice_dxg, idx_range_slice_dyg);
+            function_and_derivs_g_alloc(
+                    this->idx_range_xy_g,
+                    idx_range_slice_dxg,
+                    idx_range_slice_dyg);
     DerivField<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>> function_and_derivs_g(
             function_and_derivs_g_alloc);
 
     // Initialise the data =======================================================================
     // --- the function values.
     initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
-    initialise_2D_function<GridXg, GridYg, CoordTransform<Xg, Yg, Xg, Yg>>(
+    initialise_2D_function<Xg, Yg>(
             function_and_derivs_g.get_values_field());
 
     // --- the derivatives of the equivalent global spline.
     Idx<DerivXg> first_dxg(1);
     Idx<DerivYg> first_dyg(1);
 
-    Idx<GridXg> idx_xg_min(idx_range_xg.front());
-    Idx<GridXg> idx_xg_max(idx_range_xg.back());
-    Idx<GridYg> idx_yg_min(idx_range_yg.front());
-    Idx<GridYg> idx_yg_max(idx_range_yg.back());
+    Idx<GridXg> idx_xg_min(this->idx_range_xg.front());
+    Idx<GridXg> idx_xg_max(this->idx_range_xg.back());
+    Idx<GridYg> idx_yg_min(this->idx_range_yg.front());
+    Idx<GridYg> idx_yg_max(this->idx_range_yg.back());
 
     Idx<DerivXg, GridXg> idx_dxg_min(first_dxg, idx_xg_min);
     Idx<DerivXg, GridXg> idx_dxg_max(first_dxg, idx_xg_max);
@@ -590,21 +668,23 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
     double const coef_a = 2. / 3 * M_PI;
     double const coef_b = 0.25;
 
-    ddc::host_for_each(idx_range_yg, [&](Idx<GridYg> const idx) {
-        double const xgmin = xg_min;
-        double const xgmax = xg_max;
+    double const xg_min = this->xg_min;
+    double const xg_max = this->xg_max;
+    double const yg_min = this->yg_min;
+    double const yg_max = this->yg_max;
+    ddc::host_for_each(this->idx_range_yg, [&](Idx<GridYg> const idx) {
         double const yg = ddc::coordinate(idx);
         function_and_derivs_g[idx_dxg_min](idx)
-                = -coef_a * std::sin(coef_a * xgmin + coef_b) * std::sin(yg);
+                = -coef_a * std::sin(coef_a * xg_min + coef_b) * std::sin(yg);
         function_and_derivs_g[idx_dxg_max](idx)
-                = -coef_a * std::sin(coef_a * xgmax + coef_b) * std::sin(yg);
+                = -coef_a * std::sin(coef_a * xg_max + coef_b) * std::sin(yg);
     });
-    ddc::host_for_each(idx_range_xg, [&](Idx<GridXg> const idx) {
-        double const ygmin = yg_min;
-        double const ygmax = yg_max;
+    ddc::host_for_each(this->idx_range_xg, [&](Idx<GridXg> const idx) {
         double const xg = ddc::coordinate(Idx<GridXg>(idx));
-        function_and_derivs_g[idx_dyg_min](idx) = std::cos(coef_a * xg + coef_b) * std ::cos(ygmin);
-        function_and_derivs_g[idx_dyg_max](idx) = std::cos(coef_a * xg + coef_b) * std ::cos(ygmax);
+        function_and_derivs_g[idx_dyg_min](idx)
+                = std::cos(coef_a * xg + coef_b) * std ::cos(yg_min);
+        function_and_derivs_g[idx_dyg_max](idx)
+                = std::cos(coef_a * xg + coef_b) * std ::cos(yg_max);
     });
     function_and_derivs_g(idx_dxgdyg_min_min)
             = -coef_a * std::sin(coef_a * xg_min + coef_b) * std::sin(yg_min);
@@ -617,11 +697,11 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
 
     // --- the local derivatives from an equivalent global spline.
     // ------- build global spline representation
-    SplineRThetagBuilder builder_g(idx_range_xy_g);
+    SplineRThetagBuilder builder_g(this->idx_range_xy_g);
     SplineRThetagBuilderDerivField apply_builder_g(builder_g);
 
     host_t<DFieldMem<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef_alloc(
-            builder_g.batched_spline_domain(idx_range_xy_g));
+            builder_g.batched_spline_domain(this->idx_range_xy_g));
     host_t<DField<IdxRange<BSplinesXg, BSplinesYg>>> function_g_coef
             = get_field(function_g_coef_alloc);
 
@@ -631,73 +711,77 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
             = get_const_field(function_g_coef);
 
     // ------ global spline evaluator
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(yg_min, xg_min, xg_max);
-    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(yg_max, xg_min, xg_max);
-    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmin_g(xg_min, yg_min, yg_max);
-    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(xg_max, yg_min, yg_max);
+    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymin_g(this->yg_min, this->xg_min, this->xg_max);
+    ddc::ConstantExtrapolationRule<Yg, Xg> bc_ymax_g(this->yg_max, this->xg_min, this->xg_max);
+    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmin_g(this->xg_min, this->yg_min, this->yg_max);
+    ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(this->xg_max, this->yg_min, this->yg_max);
     SplineRThetagEvaluator evaluator_g(bc_xmin_g, bc_xmax_g, bc_ymin_g, bc_ymax_g);
 
-    IdxRange<GridXg> idx_range_x_global_patch_1(idx_range_xg.take_first(ncells_per_patch + 1));
+    IdxRange<GridXg> idx_range_x_global_patch_1(
+            this->idx_range_xg.take_first(IdxStep<GridXg>(this->ncells_per_patch + 1)));
     IdxRange<GridXg> idx_range_y_global_patch_2(
-            idx_range_xg.remove(ncells_per_patch, ncells_per_patch));
-    IdxRange<GridXg> idx_range_y_global_patch_3(idx_range_xg.take_last(ncells_per_patch + 1));
+            this->idx_range_xg
+                    .remove(IdxStep<GridXg>(this->ncells_per_patch),
+                            IdxStep<GridXg>(this->ncells_per_patch)));
+    IdxRange<GridXg> idx_range_y_global_patch_3(
+            this->idx_range_xg.take_last(IdxStep<GridXg>(this->ncells_per_patch + 1)));
 
     // ------ initialise the boundary first derivatives from the global spline
     // Left X bound ---
-    initialise_derivatives(
-            idx_range_xg.front(),
+    initialise_derivatives<Patch1>(
+            this->idx_range_xg.front(),
             function_and_derivs_1,
             evaluator_g,
             const_function_g_coef,
-            coord_transform_1);
+            this->coord_transform_1);
 
     // lower Y bound ---
-    initialise_derivatives(
-            idx_range_yg.front(),
+    initialise_derivatives<Patch1>(
+            this->idx_range_yg.front(),
             function_and_derivs_1,
             evaluator_g,
             const_function_g_coef,
-            coord_transform_1);
-    initialise_derivatives(
-            idx_range_yg.front(),
+            this->coord_transform_1);
+    initialise_derivatives<Patch2>(
+            this->idx_range_yg.front(),
             function_and_derivs_2,
             evaluator_g,
             const_function_g_coef,
-            coord_transform_2);
-    initialise_derivatives(
-            idx_range_yg.front(),
+            this->coord_transform_2);
+    initialise_derivatives<Patch3>(
+            this->idx_range_yg.front(),
             function_and_derivs_3,
             evaluator_g,
             const_function_g_coef,
-            coord_transform_3);
+            this->coord_transform_3);
 
     // Right X bound ---
-    initialise_derivatives(
-            idx_range_xg.back(),
+    initialise_derivatives<Patch3>(
+            this->idx_range_xg.back(),
             function_and_derivs_3,
             evaluator_g,
             const_function_g_coef,
-            coord_transform_3);
+            this->coord_transform_3);
 
     // upper Y bound ---
-    initialise_derivatives(
-            idx_range_yg.back(),
+    initialise_derivatives<Patch1>(
+            this->idx_range_yg.back(),
             function_and_derivs_1,
             evaluator_g,
             const_function_g_coef,
-            coord_transform_1);
-    initialise_derivatives(
-            idx_range_yg.back(),
+            this->coord_transform_1);
+    initialise_derivatives<Patch2>(
+            this->idx_range_yg.back(),
             function_and_derivs_2,
             evaluator_g,
             const_function_g_coef,
-            coord_transform_2);
-    initialise_derivatives(
-            idx_range_yg.back(),
+            this->coord_transform_2);
+    initialise_derivatives<Patch3>(
+            this->idx_range_yg.back(),
             function_and_derivs_3,
             evaluator_g,
             const_function_g_coef,
-            coord_transform_3);
+            this->coord_transform_3);
 
     // ------ initialise the cross-derivatives from the global spline
     initialise_all_cross_derivatives(
