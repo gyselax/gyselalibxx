@@ -174,7 +174,8 @@ void initialise_derivatives(
                       : idx_range_derivs.back();
 
     ddc::host_for_each(idx_range_perp, [&](Idx<GridPerpToDeriv> const& idx_perp) {
-        Coord<Xg, Yg> coord_glob(deriv_coord_glob, coord_transform_l_to_g(ddc::coordinate(idx_perp)));
+        Coord<Xg, Yg>
+                coord_glob(deriv_coord_glob, coord_transform_l_to_g(ddc::coordinate(idx_perp)));
         function_and_derivs(idx_deriv, idx_deriv_pos_local, idx_perp)
                 = coord_transform_g_to_l.jacobian(deriv_coord_glob)
                   * evaluator_g.deriv(idx_deriv, coord_glob, const_function_g_coef);
