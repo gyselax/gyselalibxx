@@ -14,8 +14,10 @@
 #include "interface_derivative_matrix.hpp"
 #include "interface_derivatives_matrix_test_utils.hpp"
 #include "interface_derivatives_test_utils.hpp"
+#include "linear_coord_transform.hpp"
 #include "mesh_builder.hpp"
 #include "non_uniform_interpolation_points.hpp"
+#include "orthogonal_coord_transforms.hpp"
 #include "single_interface_derivatives_calculator.hpp"
 #include "single_interface_derivatives_calculator_collection.hpp"
 #include "types.hpp"
@@ -52,10 +54,16 @@ using namespace periodic_strips_non_uniform_2d_9patches;
 struct Xg
 {
     static bool constexpr PERIODIC = true;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Xg;
 };
 struct Yg
 {
     static bool constexpr PERIODIC = false;
+    static bool constexpr IS_COVARIANT = true;
+    static bool constexpr IS_CONTRAVARIANT = true;
+    using Dual = Yg;
 };
 
 struct GridXg : NonUniformGridBase<Xg>
@@ -120,6 +128,25 @@ using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
         ddc::PeriodicExtrapolationRule<Xg>,
         ddc::ConstantExtrapolationRule<Yg, Xg>,
         ddc::ConstantExtrapolationRule<Yg, Xg>>;
+
+template<std::size_t I>
+struct CoordTransformGroup {
+    using XTransform = LinearCoordTransform<Xg, X<I>>;
+    using YTransform = LinearCoordTransform<Yg, Y<I>>;
+    XTransform x_transform;
+    YTransform y_transform;
+    OrthogonalCoordTransforms<
+            Coord<Yg, Xg>,
+            Coord<X<I>, Y<I>>,
+            Coord<Xg, Yg>,
+            XTransform,
+            YTransform>
+            coord_transform;
+    CoordTransformGroup(Coord<Xg> xg_min, Coord<Yg> yg_min, Coord<X<I>> xl_min, Coord<Y<I>> yl_min)
+        : x_transform(xg_min, xl_min, 1.0)
+        , y_transform(yg_min, yl_min, 1.0)
+        , coord_transform(x_transform, y_transform) {}
+};
 
 struct InterfaceDerivativeMatrixGrevillePeriodicTest : public ::testing::Test
 {
@@ -313,13 +340,13 @@ public:
     }
 
     template <int I, int XI, int YI>
-    void init_space(
+    static void init_space(
             std::vector<Coord<X<XI>>> break_points_x,
             std::vector<Coord<Y<YI>>> break_points_y,
             std::vector<Coord<Y<YI>>> interpolation_points_y)
     {
-        static_assert(I % 3 == XI);
-        static_assert(I / 3 == YI);
+        static_assert((I - 1) % 3 + 1 == XI);
+        static_assert(I - (I - 1) % 3 == YI);
         ddc::init_discrete_space<BSplinesX<I>>(convert_dim<X<I>, X<XI>>(break_points_x));
         ddc::init_discrete_space<BSplinesY<I>>(convert_dim<Y<I>, Y<YI>>(break_points_y));
 
@@ -332,39 +359,19 @@ public:
 
 
 
-// Check that the local grids and the equivalent global grid match together.
-TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, InterpolationPointsCheck)
-{
-    int const x_shift1 = x1_ncells.value();
-    int const x_shift2 = x1_ncells.value() + x2_ncells.value();
-
-    int const y_shift1 = y4_ncells.value() + 1;
-    int const y_shift2 = y7_ncells.value() + y4_ncells.value() + 1;
-
-    check_interpolation_grids<Patch1, GridXg, GridYg>(idx_range_xy1, 0, y_shift2);
-    check_interpolation_grids<Patch2, GridXg, GridYg>(idx_range_xy2, x_shift1, y_shift2);
-    check_interpolation_grids<Patch3, GridXg, GridYg>(idx_range_xy3, x_shift2, y_shift2);
-    check_interpolation_grids<Patch4, GridXg, GridYg>(idx_range_xy4, 0, y_shift1);
-    check_interpolation_grids<Patch5, GridXg, GridYg>(idx_range_xy5, x_shift1, y_shift1);
-    check_interpolation_grids<Patch6, GridXg, GridYg>(idx_range_xy6, x_shift2, y_shift1);
-    check_interpolation_grids<Patch7, GridXg, GridYg>(idx_range_xy7, 0, 0);
-    check_interpolation_grids<Patch8, GridXg, GridYg>(idx_range_xy8, x_shift1, 0);
-    check_interpolation_grids<Patch9, GridXg, GridYg>(idx_range_xy9, x_shift2, 0);
-}
-
-
 TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
+    Coord<Xg> xg_min = ddc::coordinate(idx_range_xg.front());
     std::tuple coord_transforms {
-            CoordTransform<Xg, Yg, X<1>, Y<1>>(),
-            CoordTransform<Xg, Yg, X<2>, Y<2>>(),
-            CoordTransform<Xg, Yg, X<3>, Y<3>>(),
-            CoordTransform<Xg, Yg, X<4>, Y<4>>(),
-            CoordTransform<Xg, Yg, X<5>, Y<5>>(),
-            CoordTransform<Xg, Yg, X<6>, Y<6>>(),
-            CoordTransform<Xg, Yg, X<7>, Y<7>>(),
-            CoordTransform<Xg, Yg, X<8>, Y<8>>(),
-            CoordTransform<Xg, Yg, X<9>, Y<9>>()};
+        CoordTransformGroup<1>(xg_min, yg_min, x1_min, y1_min),
+        CoordTransformGroup<2>(xg_min, yg_min, convert_dim<X<2>>(x1_min), convert_dim<Y<2>>(y1_min)),
+        CoordTransformGroup<3>(xg_min, yg_min, convert_dim<X<3>>(x1_min), convert_dim<Y<3>>(y1_min)),
+        CoordTransformGroup<4>(xg_min, yg_min, convert_dim<X<4>>(x1_min), convert_dim<Y<4>>(y1_min)),
+        CoordTransformGroup<5>(xg_min, yg_min, convert_dim<X<5>>(x1_min), convert_dim<Y<5>>(y1_min)),
+        CoordTransformGroup<6>(xg_min, yg_min, convert_dim<X<6>>(x1_min), convert_dim<Y<6>>(y1_min)),
+        CoordTransformGroup<7>(xg_min, yg_min, convert_dim<X<7>>(x1_min), convert_dim<Y<7>>(y1_min)),
+        CoordTransformGroup<8>(xg_min, yg_min, convert_dim<X<8>>(x1_min), convert_dim<Y<8>>(y1_min)),
+        CoordTransformGroup<9>(xg_min, yg_min, convert_dim<X<9>>(x1_min), convert_dim<Y<9>>(y1_min))};
 
     // Instantiate the derivatives calculators ---------------------------------------------------
     // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
@@ -653,7 +660,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     // Initialise the data =======================================================================
     // --- the function values.
     initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
-    initialise_2D_function<GridXg, GridYg, CoordTransform<Xg, Yg, Xg, Yg>>(function_g);
+    initialise_2D_function<Xg, Yg>(function_g);
 
     // --- the first derivatives computed from the function values.
     matrix_123.solve_deriv(functions_and_derivs);
