@@ -262,67 +262,15 @@ public:
                 = get_interpolation_points_add_one_on_left(break_points_y789);
 
         // Patch 1 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<1>>(break_points_x147);
-        ddc::init_discrete_space<BSplinesY<1>>(break_points_y123);
-
-        ddc::init_discrete_space<GridX<1>>(interpolation_points_x147);
-        ddc::init_discrete_space<GridY<1>>(interpolation_points_y123);
-
-        // Patch 2 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<2>>(break_points_x258);
-        ddc::init_discrete_space<BSplinesY<2>>(convert_dim<Y<2>, Y<1>>(break_points_y123));
-
-        ddc::init_discrete_space<GridX<2>>(interpolation_points_x258);
-        ddc::init_discrete_space<GridY<2>>(convert_dim<Y<2>, Y<1>>(interpolation_points_y123));
-
-        // Patch 3 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<3>>(break_points_x369);
-        ddc::init_discrete_space<BSplinesY<3>>(convert_dim<Y<3>, Y<1>>(break_points_y123));
-
-        ddc::init_discrete_space<GridX<3>>(interpolation_points_x369);
-        ddc::init_discrete_space<GridY<3>>(convert_dim<Y<3>, Y<1>>(interpolation_points_y123));
-
-        // Patch 4 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<4>>(convert_dim<X<4>, X<1>>(break_points_x147));
-        ddc::init_discrete_space<BSplinesY<4>>(break_points_y456);
-
-        ddc::init_discrete_space<GridX<4>>(convert_dim<X<4>, X<1>>(interpolation_points_x147));
-        ddc::init_discrete_space<GridY<4>>(interpolation_points_y456);
-
-        // Patch 5 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<5>>(convert_dim<X<5>, X<2>>(break_points_x258));
-        ddc::init_discrete_space<BSplinesY<5>>(convert_dim<Y<5>, Y<4>>(break_points_y456));
-
-        ddc::init_discrete_space<GridX<5>>(convert_dim<X<5>, X<2>>(interpolation_points_x258));
-        ddc::init_discrete_space<GridY<5>>(convert_dim<Y<5>, Y<4>>(interpolation_points_y456));
-
-        // Patch 6 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<6>>(convert_dim<X<6>, X<3>>(break_points_x369));
-        ddc::init_discrete_space<BSplinesY<6>>(convert_dim<Y<6>, Y<4>>(break_points_y456));
-
-        ddc::init_discrete_space<GridX<6>>(convert_dim<X<6>, X<3>>(interpolation_points_x369));
-        ddc::init_discrete_space<GridY<6>>(convert_dim<Y<6>, Y<4>>(interpolation_points_y456));
-
-        // Patch 7 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<7>>(convert_dim<X<7>, X<1>>(break_points_x147));
-        ddc::init_discrete_space<BSplinesY<7>>(break_points_y789);
-
-        ddc::init_discrete_space<GridX<7>>(convert_dim<X<7>, X<1>>(interpolation_points_x147));
-        ddc::init_discrete_space<GridY<7>>(interpolation_points_y789);
-
-        // Patch 8 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<8>>(convert_dim<X<8>, X<2>>(break_points_x258));
-        ddc::init_discrete_space<BSplinesY<8>>(convert_dim<Y<8>, Y<7>>(break_points_y789));
-
-        ddc::init_discrete_space<GridX<8>>(convert_dim<X<8>, X<2>>(interpolation_points_x258));
-        ddc::init_discrete_space<GridY<8>>(convert_dim<Y<8>, Y<7>>(interpolation_points_y789));
-
-        // Patch 9 ...............................................................................
-        ddc::init_discrete_space<BSplinesX<9>>(convert_dim<X<9>, X<3>>(break_points_x369));
-        ddc::init_discrete_space<BSplinesY<9>>(convert_dim<Y<9>, Y<7>>(break_points_y789));
-
-        ddc::init_discrete_space<GridX<9>>(convert_dim<X<9>, X<3>>(interpolation_points_x369));
-        ddc::init_discrete_space<GridY<9>>(convert_dim<Y<9>, Y<7>>(interpolation_points_y789));
+        init_space<1>(break_points_x147, break_points_y123, interpolation_points_y123);
+        init_space<2>(break_points_x258, break_points_y123, interpolation_points_y123);
+        init_space<3>(break_points_x369, break_points_y123, interpolation_points_y123);
+        init_space<4>(break_points_x147, break_points_y456, interpolation_points_y456);
+        init_space<5>(break_points_x258, break_points_y456, interpolation_points_y456);
+        init_space<6>(break_points_x369, break_points_y456, interpolation_points_y456);
+        init_space<7>(break_points_x147, break_points_y789, interpolation_points_y789);
+        init_space<8>(break_points_x258, break_points_y789, interpolation_points_y789);
+        init_space<9>(break_points_x369, break_points_y789, interpolation_points_y789);
 
         // Equivalent global domain ..............................................................
         std::vector<Coord<Xg>> break_points_xg;
@@ -362,6 +310,21 @@ public:
 
         ddc::init_discrete_space<GridXg>(interpolation_points_xg);
         ddc::init_discrete_space<GridYg>(interpolation_points_yg);
+    }
+
+    template <int I, int XI, int YI>
+    void init_space(
+            std::vector<Coord<X<XI>>> break_points_x,
+            std::vector<Coord<Y<YI>>> break_points_y,
+            std::vector<Coord<Y<YI>>> interpolation_points_y)
+    {
+        static_assert(I % 3 == XI);
+        static_assert(I / 3 == YI);
+        ddc::init_discrete_space<BSplinesX<I>>(convert_dim<X<I>, X<XI>>(break_points_x));
+        ddc::init_discrete_space<BSplinesY<I>>(convert_dim<Y<I>, Y<YI>>(break_points_y));
+
+        ddc::init_discrete_space<GridX<I>>(convert_dim<X<I>, X<XI>>(break_points_x));
+        ddc::init_discrete_space<GridY<I>>(convert_dim<Y<I>, Y<YI>>(interpolation_points_y));
     }
 };
 
