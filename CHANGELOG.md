@@ -41,11 +41,15 @@ in a `DerivField`.
 - Change some Python class `scattered_coord` arguments to keyword-only.
 - Increase C++ version to 20.
 - Use concepts to describe coordinate transformation classes.
-- Update koliop to [v0.1.0](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.0).
+- Update koliop to [v0.1.2](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.2).
 - Make koliop discoverable with `find_package`.
 - Simplify toolchains by disabling koliop LTO by default.
+- Update Persee toolchains to GCC 13.
 
 ### Deprecated
+
+- `PolarBSplines::eval_deriv_r`, `PolarBSplines::eval_deriv_theta`, and `PolarBSplines::eval_deriv_r_and_theta` are deprecated in favour of `PolarBSplines::eval_deriv`.
+- `PolarSplineEvaluator::deriv_dim_1`, `PolarSplineEvaluator::deriv_dim_2`, and `PolarSplineEvaluator::deriv_dim_1_and_2` are deprecated in favour of `PolarSplineEvaluator::deriv`.
 
 ### Removed
 
