@@ -23,65 +23,6 @@ auto get_1d_transform(CoordTransformType transform)
     }
 }
 
-/// @brief Coordinate transformation from the patches to the global/physical domain.
-template <typename Xg, typename Yg, typename X_loc, typename Y_loc>
-struct CoordTransform
-{
-    using Dim1Local = X_loc;
-    using Dim2Local = Y_loc;
-    using Dim1Global = Xg;
-    using Dim2Global = Yg;
-
-    const bool m_is_x_loc_well_oriented;
-    const bool m_is_y_loc_well_oriented;
-    const bool are_x_y_loc_x_y_glob;
-
-    const Coord<X_loc> m_x_min;
-    const Coord<X_loc> m_x_max;
-    const Coord<Y_loc> m_y_min;
-    const Coord<Y_loc> m_y_max;
-
-    /**
-     * @brief Instantiate the coordinate transformator.
-     * By default, the transformation is identity.
-     */
-    explicit CoordTransform(
-            bool is_x_loc_well_oriented = true,
-            bool is_y_loc_well_oriented = true,
-            bool are_exchange_x_y = true,
-            Coord<X_loc> x_min = Coord<X_loc>(0),
-            Coord<X_loc> x_max = Coord<X_loc>(1),
-            Coord<Y_loc> y_min = Coord<Y_loc>(0),
-            Coord<Y_loc> y_max = Coord<Y_loc>(1))
-        : m_is_x_loc_well_oriented(is_x_loc_well_oriented)
-        , m_is_y_loc_well_oriented(is_y_loc_well_oriented)
-        , are_x_y_loc_x_y_glob(are_exchange_x_y)
-        , m_x_min(x_min)
-        , m_x_max(x_max)
-        , m_y_min(y_min)
-        , m_y_max(y_max)
-    {
-    }
-
-    Coord<Xg, Yg> get_global_coord(Coord<X_loc, Y_loc> const& local_coord) const
-    {
-        double x_loc = ddc::select<X_loc>(local_coord);
-        double y_loc = ddc::select<Y_loc>(local_coord);
-
-        if (!m_is_x_loc_well_oriented) {
-            x_loc = m_x_min + m_x_max - x_loc;
-        }
-        if (!m_is_y_loc_well_oriented) {
-            y_loc = m_y_min + m_y_max - y_loc;
-        }
-        if (!are_x_y_loc_x_y_glob) {
-            return Coord<Xg, Yg>(y_loc, x_loc);
-        } else {
-            return Coord<Xg, Yg>(x_loc, y_loc);
-        }
-    }
-};
-
 // -----------------------------------------------------------------------------------------------
 // INITIALISATION OPERATORS ----------------------------------------------------------------------
 // -----------------------------------------------------------------------------------------------
