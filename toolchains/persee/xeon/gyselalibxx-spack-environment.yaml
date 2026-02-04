@@ -51,9 +51,9 @@ spack:
       require: ~cuda
       variants: ~fortran ~mpi +openmp cxxstd=17
     c:
-      require: gcc@11
+      require: gcc@13
     cxx:
-      require: gcc@11
+      require: gcc@13
     lapack:
       require: openblas
     mpi:
