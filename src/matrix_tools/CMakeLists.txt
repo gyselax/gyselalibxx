@@ -8,7 +8,6 @@ add_library(matrix_tools STATIC
     matrix_periodic_banded.cpp
     matrix_pds_tridiag.cpp
 )
-target_compile_features(matrix_tools PUBLIC cxx_std_17)
 target_include_directories(matrix_tools
     PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
 )

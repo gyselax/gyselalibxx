@@ -21,8 +21,8 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "geometry_r_theta.hpp"
 #include "input.hpp"
 #include "itimestepper.hpp"
 #include "math_tools.hpp"
@@ -33,6 +33,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_polar_foot_finder.hpp"
 
 
@@ -124,7 +125,7 @@ int main(int argc, char** argv)
               << interpolation_idx_range_theta.size() << " AND dt = " << dt << ": " << std::endl;
 
     std::ofstream file("r_interpolation_points.txt");
-    for_each(interpolation_idx_range_r, [&](IdxR ir) {
+    host_for_each(interpolation_idx_range_r, [&](IdxR ir) {
         file << (ir - interpolation_idx_range_r.front()).value() << " "
              << double(ddc::coordinate(ir)) << std::endl;
     });

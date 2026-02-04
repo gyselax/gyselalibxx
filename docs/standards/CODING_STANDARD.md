@@ -29,6 +29,7 @@
 - Files, functions and variables use `snake_case`.
 - Types use `CamelCase`.
 - Macros use `ALL_CAPS`.
+- Concepts use `CamelCase` when found in a `concepts::` namespace, and `snake_case` outside (e.g. `concepts::Mapping` and `is_mapping_v`).
 - Non-static member variables names begin with an `m_` prefix.
 - Static member variables names begin with an `s_` prefix.
 - We don't use single letter variables.

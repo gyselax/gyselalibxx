@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 
 /**
  * @brief An enum class that allows choosing between two types

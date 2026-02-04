@@ -6,12 +6,13 @@
 
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "mesh_builder.hpp"
 #include "pdi.h"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_definitions_xvx.hpp"
 #include "trapezoid_quadrature.hpp"
 
 /**
@@ -75,7 +76,7 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
     std::vector<CoordVx> gridvx_ghosted_staggered_pred
             = build_uniform_break_points(vx_min - dv / 2., vx_max + dv / 2., gridvx.extents());
 
-    ddc::for_each(gridvx_ghosted, [&](Idx<CollisionsIntra::GhostedVx> const ivx_gh) {
+    ddc::host_for_each(gridvx_ghosted, [&](Idx<CollisionsIntra::GhostedVx> const ivx_gh) {
         EXPECT_LE(
                 std::fabs(
                         ddc::coordinate(ivx_gh)
@@ -83,7 +84,7 @@ TEST(CollisionsIntraGridvx, CollisionsIntraGridvx)
                 1.e-12);
     });
 
-    ddc::for_each(
+    ddc::host_for_each(
             gridvx_ghosted_staggered,
             [&](Idx<CollisionsIntra::GhostedVxStaggered> const ivx_ghs) {
                 EXPECT_LE(

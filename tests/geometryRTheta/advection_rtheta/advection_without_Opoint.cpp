@@ -27,7 +27,7 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"
@@ -35,6 +35,7 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
@@ -189,7 +190,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 
 
     // Initialise functions ******************************************
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         CoordRTheta const coord_rtheta(ddc::coordinate(irtheta));
         CoordXY const coord_xy(to_physical_mapping(coord_rtheta));
 
@@ -208,7 +209,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     advection_field_computer(electrostatic_potential, advection_field_xy);
 
     InverseJacobianMatrix inv_jacobian_matrix(to_physical_mapping);
-    ddc::for_each(grid, [&](Idx<GridR, GridTheta> const idx) {
+    ddc::host_for_each(grid, [&](Idx<GridR, GridTheta> const idx) {
         Coord<R, Theta> const coord_rtheta(ddc::coordinate(idx));
         Tensor inv_J = inv_jacobian_matrix(coord_rtheta);
 
@@ -250,7 +251,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
                 get_const_field(density_rtheta_averaged_device));
 
         // Check the advected functions ---
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-7);
         });
     }

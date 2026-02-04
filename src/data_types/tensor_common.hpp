@@ -252,6 +252,30 @@ public:
 //                         Operators
 //////////////////////////////////////////////////////////////////////////
 
+namespace detail {
+template <
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet,
+        std::size_t... InternalIdx>
+KOKKOS_INLINE_FUNCTION void assign_elements(
+        TensorCommon<OutputStorageType, OutputValidIndexSet...>& tensor_to_fill,
+        TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input,
+        std::index_sequence<InternalIdx...>)
+{
+    using InputTensorIndexSet = ddc::detail::TypeSeq<InputValidIndexSet...>;
+    ((tensor_to_fill.template get<tensor_tools::to_tensor_index_element_t<
+              ddc::detail::TypeSeq<OutputValidIndexSet...>,
+              typename tensor_tools::get_nth_tensor_index_element_t<
+                      InternalIdx,
+                      InputTensorIndexSet>::IdxTypeSeq>>()
+      = tensor_input.template get<
+              tensor_tools::get_nth_tensor_index_element_t<InternalIdx, InputTensorIndexSet>>()),
+     ...);
+}
+} // namespace detail
+
 namespace ddcHelper {
 
 /**
@@ -297,6 +321,33 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> to_coord(
 {
     return Coord<Dims...>(get<Dims>(tensor)...);
 }
+
+/**
+ * @brief Assign the elements of a tensor to another tensor.
+ *
+ * Assign the elements of the tensor tensor_input to the corresponding positions
+ * in the tensor tensor_to_fill. tensor_to_fill may be larger than tensor_input
+ * but cannot be smaller.
+ *
+ * @param[inout] tensor_to_fill The tensor whose elements will be modified.
+ * @param[in] tensor_input The tensor whose elements will be copied.
+ */
+template <
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet>
+KOKKOS_INLINE_FUNCTION void assign_elements(
+        TensorCommon<OutputStorageType, OutputValidIndexSet...>& tensor_to_fill,
+        TensorCommon<InputStorageType, InputValidIndexSet...> const& tensor_input)
+{
+    detail::assign_elements(
+            tensor_to_fill,
+            tensor_input,
+            std::make_index_sequence<
+                    TensorCommon<InputStorageType, InputValidIndexSet...>::size()>());
+}
+
 } // namespace ddcHelper
 
 /**

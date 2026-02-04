@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "iboltzmannsolver.hpp"
 
 /**A generic class for a spatial advection*/

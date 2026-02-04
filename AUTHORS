@@ -13,6 +13,7 @@ Emily Bourne <emily.bourne@epfl.ch>
 - Data type developments
 - Multi-patch developments
 - Developments in the (x, y, vx, vy) geometry
+- Multi-precision developments
 
 Virginie Grandgirard <virginie.grandgirard@cea.fr>
 - Initial designer and Fortran version
@@ -26,6 +27,7 @@ Abdelhadi Kara
 
 Philipp Krah
 - Documentation
+- mini application for testing the in-situ diagnostics
 
 Baptiste Legouix
 - DDC integration
@@ -52,6 +54,7 @@ Pauline Vidal
   - Guiding-centre simulations (Diocotron and Vortex-Merger)
 - Developments in the (x, y) geometry
 - Multi-patch developments
+  - Interface derivative computations.
 
 Yuuichi Asahi
 - Gyroaverage operator
