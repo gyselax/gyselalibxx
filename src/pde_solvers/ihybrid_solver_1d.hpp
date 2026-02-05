@@ -152,4 +152,9 @@ public:
         field_type p_parallel_x, field_type p_parallel_y, field_type p_parallel_z,
         double const electron_temperature,
         double dt) const = 0;
+        
+    virtual field_type operator()(
+       DFieldSpX multi_species_para_tem, DFieldSpX multi_species_perp_tem, 
+       field_type single_species_para_tem, field_type single_species_perp_tem) const = 0;
+       
 };

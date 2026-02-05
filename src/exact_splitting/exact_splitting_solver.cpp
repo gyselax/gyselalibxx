@@ -117,7 +117,7 @@ void exact_splitting_solver(
         //error_vec(i) = (expB - approx).norm();
         double error_iter = (expB - approx).norm();
         if (error_iter < 1e-14) {
-        std::cout << "Converged at iteration " << i << ", error = " << error_iter << std::endl;
+        //std::cout << "Converged at iteration " << i << ", error = " << error_iter << std::endl;
         break;
         }
     }

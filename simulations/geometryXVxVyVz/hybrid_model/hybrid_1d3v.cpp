@@ -95,6 +95,7 @@ int main(int argc, char** argv)
     IdxRangeSpVxVyVzX idxrange_spvxvyvzx_v3Dsplit(transpose.get_local_idx_range<V3DSplit>());
 
     IdxRangeVxVyVz idxrange_vxvyvz_v3Dsplit(idxrange_spvxvyvzx_v3Dsplit);
+    IdxRangeVz idxrange_vz_v3Dsplit(idxrange_spvxvyvzx_v3Dsplit);
     IdxRangeVxVyVz idxrange_vxvyvz_x1Dsplit(idxrange_spxvxvyvz_x1Dsplit);
 
     IdxRangeVxVyVzX idxrange_vxvyvzx_v3Dsplit(idxrange_spvxvyvzx_v3Dsplit);
@@ -207,6 +208,7 @@ int main(int argc, char** argv)
     MpiSplitHybridVlasovSolver const
             vlasov(advection_x, advection_vx, advection_vy, advection_vz, advec_3d_rot, transpose);
     
+    // 3D velocity quafrature coefficients 
     DFieldMemVxVyVz const quadrature_coeffs(
             neumann_spline_quadrature_coefficients<
                     Kokkos::DefaultExecutionSpace>(idxrange_vxvyvz, builder_vx, builder_vy, builder_vz));
@@ -214,9 +216,18 @@ int main(int argc, char** argv)
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs),
             quadrature_coeffs[idxrange_vxvyvz_v3Dsplit]);
+
+    // 1D (Vz) velocity quafrature coefficients 
+    DFieldMemVz const quadrature_coeffs_Vz(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(idxrange_vz, builder_vz));
+    DFieldMemVz local_quadrature_coeffs_Vz(idxrange_vz_v3Dsplit);
+    ddc::parallel_deepcopy(
+            get_field(local_quadrature_coeffs_Vz),
+            quadrature_coeffs_Vz[idxrange_vz_v3Dsplit]);
     
     FFTHybridSolver1D<IdxRangeX> fft_hybrid_solver(idxrange_x);
-    MomentsCalculator const rhs_local(get_const_field(local_quadrature_coeffs));
+    MomentsCalculator const rhs_local(get_const_field(local_quadrature_coeffs), get_const_field(local_quadrature_coeffs_Vz));
     MpiMomentsCalculator const rhs(MPI_COMM_WORLD, rhs_local);
     HybridFieldSolver const hybrid_field(fft_hybrid_solver, rhs);
     
@@ -263,10 +274,7 @@ int main(int argc, char** argv)
                    get_field(mean_current_x), get_field(mean_current_y), get_field(mean_current_z), get_field(momentum_x), get_field(momentum_y), get_field(momentum_z), 
                    get_field(magnetic_field_x), get_field(magnetic_field_y), get_field(magnetic_field_z), get_field(pressure),
                    get_field(rho_each), get_field(rho), get_field(kinetic), deltat, nbiter);
-
-    //hybridsplitting(get_field(allfdistribu_v2D_split), deltat, nbiter);
     
-
     steady_clock::time_point const end = steady_clock::now();
 
     double const simulation_time = std::chrono::duration<double>(end - start).count();

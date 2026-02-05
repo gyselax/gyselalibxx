@@ -33,17 +33,46 @@ DFieldSpXVxVyVz SingleModePerturbInitialisation::operator()(DFieldSpXVxVyVz cons
                 m_init_perturb_mode(isp),
                 m_init_perturb_amplitude(isp));
 
+        double w0 = 0.17773094298487538;
+        double k0 = 0.196;
+        double temperature = 0.125;
+        double const inv_2pi = 1. / (2. * M_PI * temperature);
+
         // Initialisation of the distribution function --> fill values
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 gridxvxvyvz,
                 KOKKOS_LAMBDA(IdxXVxVyVz const ixvxvyvz) {
+                    /*
                     IdxX const ix = ddc::select<GridX>(ixvxvyvz);
                     IdxVx const ivx = ddc::select<GridVx>(ixvxvyvz);
                     IdxVy const ivy = ddc::select<GridVy>(ixvxvyvz);
                     IdxVz const ivz = ddc::select<GridVz>(ixvxvyvz);
                     double fdistribu_val
                             = fequilibrium_proxy(isp, ivx, ivy, ivz) * (1. + perturbation_proxy(ix));
+                    if (fdistribu_val < 1.e-60) {
+                        fdistribu_val = 1.e-60;
+                    }
+                    allfdistribu(isp, ix, ivx, ivy, ivz) = fdistribu_val;
+                    */
+                    IdxX const ix = ddc::select<GridX>(ixvxvyvz);
+                    IdxVx const ivx = ddc::select<GridVx>(ixvxvyvz);
+                    IdxVy const ivy = ddc::select<GridVy>(ixvxvyvz);
+                    IdxVz const ivz = ddc::select<GridVz>(ixvxvyvz);
+                    double const x = ddc::coordinate(ddc::select<GridX>(ixvxvyvz));
+                    double const vx = ddc::coordinate(ddc::select<GridVx>(ixvxvyvz));
+                    double const vy = ddc::coordinate(ddc::select<GridVy>(ixvxvyvz));
+                    double const vz = ddc::coordinate(ddc::select<GridVz>(ixvxvyvz));
+
+                    double fdistribu_val = std::pow(inv_2pi, 1.5) 
+                                     * Kokkos::exp(
+                                             -(vx*vx)
+                                             / (2.0*temperature))
+                                     * Kokkos::exp(
+                                             -((vy - w0/k0 * Kokkos::sin(0.196 * x)) * (vy - w0/k0 * Kokkos::sin(0.196 * x))
+                                             + (vz + w0/k0 * Kokkos::cos(0.196 * x)) * (vz + w0/k0 * Kokkos::cos(0.196 * x)))
+                                             / (2.0*temperature ));
+
                     if (fdistribu_val < 1.e-60) {
                         fdistribu_val = 1.e-60;
                     }
@@ -93,6 +122,6 @@ void SingleModePerturbInitialisation::perturbation_initialisation(
                 CoordX const x = ddc::coordinate(ix);
                
                 perturbation(ix)
-                        = perturb_amplitude * Kokkos::cos(kx * x);
+                        = (0.0 * perturb_amplitude) * Kokkos::sin(kx * x);
             });
 }

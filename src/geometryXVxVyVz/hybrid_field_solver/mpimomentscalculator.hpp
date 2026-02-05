@@ -79,4 +79,22 @@ public:
      */
     void operator()(DFieldSpX mean_current_x, DFieldSpX mean_current_y, DFieldSpX mean_current_z, DFieldSpX rho, 
                     DConstFieldSpVxVyVzX allfdistribu) const final;
+
+    /**
+     * @brief Computes the density for each distribution function by intergrating for one velocity direction.
+     * @param[in, out] rho
+     * @param[in] allfdistribu 
+     */
+    void operator()(DFieldSpXVxVy rho, DConstFieldSpVxVyVzX allfdistribu) const final;
+
+    /**
+     * @brief Computes the temperature each distribution function.
+     * @param[out] parallel_temperature, perpendicular_temperature
+     * @param[in] rho, Bx, By, Bz, ux, uy, uz
+     * @param[in] allfdistribu 
+     */
+    void operator()(DFieldSpX parallel_temperature, DFieldSpX perpendicular_temperature, 
+                    DConstFieldSpX rho, DConstFieldX Bx, DConstFieldX By, DConstFieldX Bz, 
+                    DConstFieldSpX ux, DConstFieldSpX uy,  DConstFieldSpX uz, 
+                    DConstFieldSpVxVyVzX allfdistribu) const final;
 };

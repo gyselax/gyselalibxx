@@ -42,6 +42,10 @@ DFieldSpVxVyVzX MpiSplitHybridVlasovSolver::operator()(
     DFieldMemX local_p_parallel_y(idx_range_x_v3Dsplit);
     DFieldMemX local_p_parallel_z(idx_range_x_v3Dsplit);
 
+    DFieldMemX local_frame_shift_x(idx_range_x_v3Dsplit);
+    DFieldMemX local_frame_shift_y(idx_range_x_v3Dsplit);
+    DFieldMemX local_frame_shift_z(idx_range_x_v3Dsplit);
+
     DFieldMemX local_magnetic_x(idx_range_x_v3Dsplit);
     DFieldMemX local_magnetic_y(idx_range_x_v3Dsplit);
     DFieldMemX local_magnetic_z(idx_range_x_v3Dsplit);
@@ -55,6 +59,16 @@ DFieldSpVxVyVzX MpiSplitHybridVlasovSolver::operator()(
     ddc::parallel_deepcopy(
             get_field(local_p_parallel_z),
             p_parallel_z[idx_range_x_v3Dsplit]);
+
+    ddc::parallel_deepcopy(
+            get_field(local_frame_shift_x),
+            frame_shift_x[idx_range_x_v3Dsplit]);
+    ddc::parallel_deepcopy(
+            get_field(local_frame_shift_y),
+            frame_shift_y[idx_range_x_v3Dsplit]);
+    ddc::parallel_deepcopy(
+            get_field(local_frame_shift_z),
+            frame_shift_z[idx_range_x_v3Dsplit]);
 
     ddc::parallel_deepcopy(
             get_field(local_magnetic_x),
@@ -72,21 +86,11 @@ DFieldSpVxVyVzX MpiSplitHybridVlasovSolver::operator()(
             allfdistribu_x1Dsplit,
             get_const_field(allfdistribu_v3Dsplit));
     
-    // Advect in velocity dimensions: rotation by exact splittings
-    //m_advec_3d_rot_vx(allfdistribu_x1Dsplit, get_const_field(local_yr_x), get_const_field(local_yr_y), get_const_field(local_yr_z), get_const_field(frame_shift_x), get_const_field(frame_shift_y), get_const_field(frame_shift_z), dt);
-    //m_advec_3d_rot_vz(allfdistribu_x1Dsplit, get_const_field(local_y3_x), get_const_field(local_y3_y), get_const_field(local_y3_z), get_const_field(frame_shift_x), get_const_field(frame_shift_y), get_const_field(frame_shift_z), dt);
-    //m_advec_3d_rot_vy(allfdistribu_x1Dsplit, get_const_field(local_y2_x), get_const_field(local_y2_y), get_const_field(local_y2_z), get_const_field(frame_shift_x), get_const_field(frame_shift_y), get_const_field(frame_shift_z), dt);
-    //m_advec_3d_rot_vx(allfdistribu_x1Dsplit, get_const_field(local_yl_x), get_const_field(local_yl_y), get_const_field(local_yl_z), get_const_field(frame_shift_x), get_const_field(frame_shift_y), get_const_field(frame_shift_z), dt);
+    m_advec_3d_rot(allfdistribu_x1Dsplit, get_const_field(local_magnetic_x), get_const_field(local_magnetic_y), get_const_field(local_magnetic_z), get_const_field(local_frame_shift_x), get_const_field(local_frame_shift_y), get_const_field(local_frame_shift_z), dt);
 
-    m_advec_3d_rot(allfdistribu_x1Dsplit, get_const_field(local_magnetic_x), get_const_field(local_magnetic_y), get_const_field(local_magnetic_z), get_const_field(frame_shift_x), get_const_field(frame_shift_y), get_const_field(frame_shift_z), dt);
-
-    //m_advec_3d_rot_vx(allfdistribu_x1Dsplit, get_const_field(local_y3_x), get_const_field(local_y3_y), get_const_field(local_y3_z), get_const_field(frame_shift_x), get_const_field(frame_shift_y), get_const_field(frame_shift_z), dt);
-    //m_advec_3d_rot_vy(allfdistribu_x1Dsplit, get_const_field(local_y2_x), get_const_field(local_y2_y), get_const_field(local_y2_z), get_const_field(frame_shift_x), get_const_field(frame_shift_y), get_const_field(frame_shift_z), dt);
-    //m_advec_3d_rot_vx(allfdistribu_x1Dsplit, get_const_field(local_yl_x), get_const_field(local_yl_y), get_const_field(local_yl_z), get_const_field(frame_shift_x), get_const_field(frame_shift_y), get_const_field(frame_shift_z), dt);
-
-    //m_advec_vx(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_x), dt);
-    //m_advec_vy(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_y), dt);
-    //m_advec_vz(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_z), dt);
+    m_advec_vx(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_x), dt);
+    m_advec_vy(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_y), dt);
+    m_advec_vz(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_z), dt);
     
     // Swap to x contiguous layout
     m_transpose(

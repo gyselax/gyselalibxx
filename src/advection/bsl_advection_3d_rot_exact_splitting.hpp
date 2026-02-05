@@ -208,7 +208,7 @@ using namespace std;
                 if (std::abs(Bfield[i]) > tol)
                 ++count;
             }
-            
+            //std::cout << "non-zero number is: " << count << std::endl;
             // 原始索引
             std::vector<int> idx_order = {0, 1, 2};
 
@@ -218,7 +218,11 @@ using namespace std;
                       return std::abs(Bfield[i1]) < std::abs(Bfield[i2]);
                   });
 
-            /*
+            //std::cout << "idx_order x is: " << idx_order[0] << std::endl;
+            //std::cout << "idx_order y is: " << idx_order[1] << std::endl;
+            //std::cout << "idx_order z is: " << idx_order[2] << std::endl;
+
+            
             // module vx 
             auto module_vx = [&](double coef1, double coef2){
             ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
@@ -269,7 +273,7 @@ using namespace std;
                         get_const_field(derivs_min_vz),
                         get_const_field(derivs_max_vz));
             };
-            */
+            
 
             // ======= compute the rotation matrix =======
             /*
@@ -286,10 +290,11 @@ using namespace std;
             double M33 = 1.0 + coe2 * (-Bfield[0]*Bfield[0] - Bfield[1]*Bfield[1]); 
             */
 
+            
+            
             std::array<double, 3> magnetic_field = {Bfield[0], Bfield[1], Bfield[2]};
-
             std::array<double, 3> yl, y2, y3, yr;
-
+            
             // start the advections based on the rotation 
             if (count >= 2 && idx_order[0] == 0 && idx_order[1] == 1 && idx_order[2] == 2)
             {
@@ -306,6 +311,11 @@ using namespace std;
                 double a7 = dt*yr[1];
                 double a8 = dt*yr[2];
 
+                module_vx(a7,a8);
+                module_vz(a5,a6);
+                module_vy(a3,a4);
+                module_vx(a1,a2);
+                /*
                 // module vx 
                 ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
                     KOKKOS_LAMBDA(IdxBatch_Vx const ib){
@@ -366,7 +376,7 @@ using namespace std;
                             get_const_field(derivs_min_vx),
                             get_const_field(derivs_max_vx));
             
-               
+               */
             
             }
 
@@ -379,72 +389,16 @@ using namespace std;
                 double a1 = dt*yl[1];
                 double a2 = dt*yl[2];
                 double a3 = dt*y2[0];
-                double a4 = dt*y2[2];
+                double a4 = dt*y2[1];
                 double a5 = dt*y3[0];
-                double a6 = dt*y3[1];
+                double a6 = dt*y3[2];
                 double a7 = dt*yr[1];
                 double a8 = dt*yr[2];
 
-                // module vx 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
-                    KOKKOS_LAMBDA(IdxBatch_Vx const ib){
-                        IdxVy const ivy(ib);
-                        IdxVz const ivz(ib);
-                        double dvx = (ddc::coordinate(ivy)-mean_velocity_y(ix))*a7
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a8;
-                        for (IdxVx const iv : idx_range_vx)
-                            feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
-                    });
-                interpolator_vx(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vx),
-                            get_const_field(derivs_min_vx),
-                            get_const_field(derivs_max_vx));
-
-                // module vy 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
-                    KOKKOS_LAMBDA(IdxBatch_Vy const ib){
-                        IdxVx const ivx(ib);
-                        IdxVz const ivz(ib);
-                        double dvy = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a5
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a6;
-                        for (IdxVy const iv : idx_range_vy)
-                            feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
-                    });
-                interpolator_vy(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vy),
-                            get_const_field(derivs_min_vy),
-                            get_const_field(derivs_max_vy));
-                
-                // module vz
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
-                    KOKKOS_LAMBDA(IdxBatch_Vz const ib){
-                        IdxVx const ivx(ib);
-                        IdxVy const ivy(ib);
-                        double dvz = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a3
-                            + (ddc::coordinate(ivy)-mean_velocity_y(ix))*a4;
-                        for (IdxVz const iv : idx_range_vz)
-                            feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
-                    });
-                interpolator_vz(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vz),
-                            get_const_field(derivs_min_vz),
-                            get_const_field(derivs_max_vz));
-
-
-                // module vx 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
-                    KOKKOS_LAMBDA(IdxBatch_Vx const ib){
-                        IdxVy const ivy(ib);
-                        IdxVz const ivz(ib);
-                        double dvx = (ddc::coordinate(ivy)-mean_velocity_y(ix))*a1
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a2;
-                        for (IdxVx const iv : idx_range_vx)
-                            feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
-                    });
-                interpolator_vx(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vx),
-                            get_const_field(derivs_min_vx),
-                            get_const_field(derivs_max_vx));
+                module_vx(a7,a8);
+                module_vy(a5,a6);
+                module_vz(a3,a4);
+                module_vx(a1,a2);
             
 
             }
@@ -455,76 +409,20 @@ using namespace std;
 
                 exact_splitting_solver(magnetic_field, dt, yl, y2, y3, yr, order);
 
-                double a1 = dt*yl[1];
+                double a1 = dt*yl[0];
                 double a2 = dt*yl[2];
-                double a3 = dt*y2[0];
+                double a3 = dt*y2[1];
                 double a4 = dt*y2[2];
                 double a5 = dt*y3[0];
                 double a6 = dt*y3[1];
-                double a7 = dt*yr[1];
+                double a7 = dt*yr[0];
                 double a8 = dt*yr[2];
 
 
-                // module vy 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
-                    KOKKOS_LAMBDA(IdxBatch_Vy const ib){
-                        IdxVx const ivx(ib);
-                        IdxVz const ivz(ib);
-                        double dvy = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a7
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a8;
-                        for (IdxVy const iv : idx_range_vy)
-                            feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
-                    });
-                interpolator_vy(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vy),
-                            get_const_field(derivs_min_vy),
-                            get_const_field(derivs_max_vy));
-                
-                // module vz
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
-                    KOKKOS_LAMBDA(IdxBatch_Vz const ib){
-                        IdxVx const ivx(ib);
-                        IdxVy const ivy(ib);
-                        double dvz = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a5
-                            + (ddc::coordinate(ivy)-mean_velocity_y(ix))*a6;
-                        for (IdxVz const iv : idx_range_vz)
-                            feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
-                    });
-                interpolator_vz(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vz),
-                            get_const_field(derivs_min_vz),
-                            get_const_field(derivs_max_vz));
-
-
-                // module vx 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
-                    KOKKOS_LAMBDA(IdxBatch_Vx const ib){
-                        IdxVy const ivy(ib);
-                        IdxVz const ivz(ib);
-                        double dvx = (ddc::coordinate(ivy)-mean_velocity_y(ix))*a3
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a4;
-                        for (IdxVx const iv : idx_range_vx)
-                            feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
-                    });
-                interpolator_vx(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vx),
-                            get_const_field(derivs_min_vx),
-                            get_const_field(derivs_max_vx));
-
-                // module vy 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
-                    KOKKOS_LAMBDA(IdxBatch_Vy const ib){
-                        IdxVx const ivx(ib);
-                        IdxVz const ivz(ib);
-                        double dvy = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a1
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a2;
-                        for (IdxVy const iv : idx_range_vy)
-                            feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
-                    });
-                interpolator_vy(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vy),
-                            get_const_field(derivs_min_vy),
-                            get_const_field(derivs_max_vy));
+                module_vy(a7,a8);
+                module_vz(a5,a6);
+                module_vx(a3,a4);
+                module_vy(a1,a2);
 
                
                
@@ -533,80 +431,24 @@ using namespace std;
 
             if (count >= 2 && idx_order[0] == 1 && idx_order[1] == 2 && idx_order[2] == 0)
             {
+                
                 std::array<int, 3> order = {1, 2, 0};
 
                 exact_splitting_solver(magnetic_field, dt, yl, y2, y3, yr, order);
 
-                double a1 = dt*yl[1];
+                double a1 = dt*yl[0];
                 double a2 = dt*yl[2];
                 double a3 = dt*y2[0];
-                double a4 = dt*y2[2];
-                double a5 = dt*y3[0];
-                double a6 = dt*y3[1];
-                double a7 = dt*yr[1];
+                double a4 = dt*y2[1];
+                double a5 = dt*y3[1];
+                double a6 = dt*y3[2];
+                double a7 = dt*yr[0];
                 double a8 = dt*yr[2];
-
-                // module vy 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
-                    KOKKOS_LAMBDA(IdxBatch_Vy const ib){
-                        IdxVx const ivx(ib);
-                        IdxVz const ivz(ib);
-                        double dvy = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a7
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a8;
-                        for (IdxVy const iv : idx_range_vy)
-                            feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
-                    });
-                interpolator_vy(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vy),
-                            get_const_field(derivs_min_vy),
-                            get_const_field(derivs_max_vy));
-
-                // module vx 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
-                    KOKKOS_LAMBDA(IdxBatch_Vx const ib){
-                        IdxVy const ivy(ib);
-                        IdxVz const ivz(ib);
-                        double dvx = (ddc::coordinate(ivy)-mean_velocity_y(ix))*a5
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a6;
-                        for (IdxVx const iv : idx_range_vx)
-                            feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
-                    });
-                interpolator_vx(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vx),
-                            get_const_field(derivs_min_vx),
-                            get_const_field(derivs_max_vx));
                 
-                // module vz
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
-                    KOKKOS_LAMBDA(IdxBatch_Vz const ib){
-                        IdxVx const ivx(ib);
-                        IdxVy const ivy(ib);
-                        double dvz = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a3
-                            + (ddc::coordinate(ivy)-mean_velocity_y(ix))*a4;
-                        for (IdxVz const iv : idx_range_vz)
-                            feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
-                    });
-                interpolator_vz(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vz),
-                            get_const_field(derivs_min_vz),
-                            get_const_field(derivs_max_vz));
-
-
-
-                // module vy 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
-                    KOKKOS_LAMBDA(IdxBatch_Vy const ib){
-                        IdxVx const ivx(ib);
-                        IdxVz const ivz(ib);
-                        double dvy = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a1
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a2;
-                        for (IdxVy const iv : idx_range_vy)
-                            feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
-                    });
-                interpolator_vy(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vy),
-                            get_const_field(derivs_min_vy),
-                            get_const_field(derivs_max_vy));
+                module_vy(a7,a8);
+                module_vx(a5,a6);
+                module_vz(a3,a4);
+                module_vy(a1,a2);
 
                 
             }
@@ -617,75 +459,20 @@ using namespace std;
 
                 exact_splitting_solver(magnetic_field, dt, yl, y2, y3, yr, order);
 
-                double a1 = dt*yl[1];
-                double a2 = dt*yl[2];
-                double a3 = dt*y2[0];
+                double a1 = dt*yl[0];
+                double a2 = dt*yl[1];
+                double a3 = dt*y2[1];
                 double a4 = dt*y2[2];
                 double a5 = dt*y3[0];
-                double a6 = dt*y3[1];
-                double a7 = dt*yr[1];
-                double a8 = dt*yr[2];
+                double a6 = dt*y3[2];
+                double a7 = dt*yr[0];
+                double a8 = dt*yr[1];
 
 
-                // module vz
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
-                    KOKKOS_LAMBDA(IdxBatch_Vz const ib){
-                        IdxVx const ivx(ib);
-                        IdxVy const ivy(ib);
-                        double dvz = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a7
-                            + (ddc::coordinate(ivy)-mean_velocity_y(ix))*a8;
-                        for (IdxVz const iv : idx_range_vz)
-                            feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
-                    });
-                interpolator_vz(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vz),
-                            get_const_field(derivs_min_vz),
-                            get_const_field(derivs_max_vz));
-
-                // module vy 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
-                    KOKKOS_LAMBDA(IdxBatch_Vy const ib){
-                        IdxVx const ivx(ib);
-                        IdxVz const ivz(ib);
-                        double dvy = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a5
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a6;
-                        for (IdxVy const iv : idx_range_vy)
-                            feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
-                    });
-                interpolator_vy(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vy),
-                            get_const_field(derivs_min_vy),
-                            get_const_field(derivs_max_vy));
-
-                // module vx 
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
-                    KOKKOS_LAMBDA(IdxBatch_Vx const ib){
-                        IdxVy const ivy(ib);
-                        IdxVz const ivz(ib);
-                        double dvx = (ddc::coordinate(ivy)-mean_velocity_y(ix))*a3
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a4;
-                        for (IdxVx const iv : idx_range_vx)
-                            feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
-                    });
-                interpolator_vx(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vx),
-                            get_const_field(derivs_min_vx),
-                            get_const_field(derivs_max_vx));
-                
-                // module vz
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
-                    KOKKOS_LAMBDA(IdxBatch_Vz const ib){
-                        IdxVx const ivx(ib);
-                        IdxVy const ivy(ib);
-                        double dvz = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a1
-                            + (ddc::coordinate(ivy)-mean_velocity_y(ix))*a2;
-                        for (IdxVz const iv : idx_range_vz)
-                            feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
-                    });
-                interpolator_vz(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vz),
-                            get_const_field(derivs_min_vz),
-                            get_const_field(derivs_max_vz));
+                module_vz(a7,a8);
+                module_vy(a5,a6);
+                module_vx(a3,a4);
+                module_vz(a1,a2);
                
 
             }
@@ -693,26 +480,55 @@ using namespace std;
             if (count >= 2 && idx_order[0] == 2 && idx_order[1] == 1 && idx_order[2] == 0)
             {
 
+                
                 std::array<int, 3> order = {2, 1, 0};
 
                 exact_splitting_solver(magnetic_field, dt, yl, y2, y3, yr, order);
+                //std::cout << "The exact splitting yl is x: " << yl[0] << "y" << yl[1] << "z" << yl[2] << std::endl;
+                //std::cout << "The exact splitting y2 is x: " << y2[0] << "y" << y2[1] << "z" << y2[2] << std::endl;
+                //std::cout << "The exact splitting y3 is x: " << y3[0] << "y" << y3[1] << "z" << y3[2] << std::endl;
+                //std::cout << "The exact splitting yr is x: " << yr[0] << "y" << yr[1] << "z" << yr[2] << std::endl;
 
-                double a1 = dt*yl[1];
-                double a2 = dt*yl[2];
+                double a1 = dt*yl[0];
+                double a2 = dt*yl[1];
                 double a3 = dt*y2[0];
                 double a4 = dt*y2[2];
-                double a5 = dt*y3[0];
-                double a6 = dt*y3[1];
-                double a7 = dt*yr[1];
-                double a8 = dt*yr[2];
+                double a5 = dt*y3[1];
+                double a6 = dt*y3[2];
+                double a7 = dt*yr[0];
+                double a8 = dt*yr[1];
 
-                // module vz
+
+                module_vz(a7,a8);
+                module_vx(a5,a6);
+                module_vy(a3,a4);
+                module_vz(a1,a2);
+
+
+            }
+
+            if (count == 1 && idx_order[2] == 0)
+            {
+                // module vy 
+                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
+                    KOKKOS_LAMBDA(IdxBatch_Vy const ib){
+                        IdxVz const ivz(ib);
+                        double const dvy
+                                 = (ddc::coordinate(ivz) - mean_velocity_z(ix)) * std::tan(-0.5*dt*Bfield[0]);
+                        for (IdxVy const iv : idx_range_vy)
+                            feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
+                    });
+                interpolator_vy(allfdistribu[isp][ix],
+                            get_const_field(feet_coords_vy),
+                            get_const_field(derivs_min_vy),
+                            get_const_field(derivs_max_vy));
+
+                // module vz 
                 ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
                     KOKKOS_LAMBDA(IdxBatch_Vz const ib){
-                        IdxVx const ivx(ib);
                         IdxVy const ivy(ib);
-                        double dvz = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a7
-                            + (ddc::coordinate(ivy)-mean_velocity_y(ix))*a8;
+                        double const dvz
+                                = (ddc::coordinate(ivy) - mean_velocity_y(ix)) * std::sin(dt*Bfield[0]);
                         for (IdxVz const iv : idx_range_vz)
                             feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
                     });
@@ -721,13 +537,76 @@ using namespace std;
                             get_const_field(derivs_min_vz),
                             get_const_field(derivs_max_vz));
 
+                // module vy 
+                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
+                    KOKKOS_LAMBDA(IdxBatch_Vy const ib){
+                        IdxVz const ivz(ib);
+                        double const dvy
+                                 = (ddc::coordinate(ivz) - mean_velocity_z(ix)) * std::tan(-0.5*dt*Bfield[0]);
+                        for (IdxVy const iv : idx_range_vy)
+                            feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
+                    });
+                interpolator_vy(allfdistribu[isp][ix],
+                            get_const_field(feet_coords_vy),
+                            get_const_field(derivs_min_vy),
+                            get_const_field(derivs_max_vy));
+
+            }
+            
+            if (count == 1 && idx_order[2] == 1)
+            {
+                // module vz
+                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
+                    KOKKOS_LAMBDA(IdxBatch_Vz const ib){
+                        IdxVx const ivx(ib);
+                        double const dvz
+                                 = (ddc::coordinate(ivx) - mean_velocity_x(ix)) * std::tan(-0.5*dt*Bfield[1]);
+                        for (IdxVz const iv : idx_range_vz)
+                            feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
+                    });
+                interpolator_vz(allfdistribu[isp][ix],
+                            get_const_field(feet_coords_vz),
+                            get_const_field(derivs_min_vz),
+                            get_const_field(derivs_max_vz));
+
+                // module vx
+                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
+                    KOKKOS_LAMBDA(IdxBatch_Vx const ib){
+                        IdxVz const ivz(ib);
+                        double const dvx
+                                = (ddc::coordinate(ivz) - mean_velocity_z(ix)) * std::sin(dt*Bfield[1]);
+                        for (IdxVx const iv : idx_range_vx)
+                            feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
+                    });
+                interpolator_vx(allfdistribu[isp][ix],
+                            get_const_field(feet_coords_vx),
+                            get_const_field(derivs_min_vx),
+                            get_const_field(derivs_max_vx));
+
+                // module vz
+                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
+                    KOKKOS_LAMBDA(IdxBatch_Vz const ib){
+                        IdxVx const ivx(ib);
+                        double const dvz
+                                 = (ddc::coordinate(ivx) - mean_velocity_x(ix)) * std::tan(-0.5*dt*Bfield[1]);
+                        for (IdxVz const iv : idx_range_vz)
+                            feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
+                    });
+                interpolator_vz(allfdistribu[isp][ix],
+                            get_const_field(feet_coords_vz),
+                            get_const_field(derivs_min_vz),
+                            get_const_field(derivs_max_vz));
+
+            }
+            
+            if (count == 1 && idx_order[2] == 2)
+            {
                 // module vx 
                 ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
                     KOKKOS_LAMBDA(IdxBatch_Vx const ib){
                         IdxVy const ivy(ib);
-                        IdxVz const ivz(ib);
-                        double dvx = (ddc::coordinate(ivy)-mean_velocity_y(ix))*a5
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a6;
+                        double const dvx
+                                 = (ddc::coordinate(ivy) - mean_velocity_y(ix)) * std::tan(-0.5*dt*Bfield[2]);
                         for (IdxVx const iv : idx_range_vx)
                             feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
                     });
@@ -740,9 +619,8 @@ using namespace std;
                 ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vy,
                     KOKKOS_LAMBDA(IdxBatch_Vy const ib){
                         IdxVx const ivx(ib);
-                        IdxVz const ivz(ib);
-                        double dvy = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a3
-                            + (ddc::coordinate(ivz)-mean_velocity_z(ix))*a4;
+                        double const dvy
+                                = (ddc::coordinate(ivx) - mean_velocity_x(ix)) * std::sin(dt*Bfield[2]);
                         for (IdxVy const iv : idx_range_vy)
                             feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
                     });
@@ -751,42 +629,21 @@ using namespace std;
                             get_const_field(derivs_min_vy),
                             get_const_field(derivs_max_vy));
 
-                
-                
-                // module vz
-                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vz,
-                    KOKKOS_LAMBDA(IdxBatch_Vz const ib){
-                        IdxVx const ivx(ib);
+                // module vx 
+                ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), batch_idx_range_vx,
+                    KOKKOS_LAMBDA(IdxBatch_Vx const ib){
                         IdxVy const ivy(ib);
-                        double dvz = (ddc::coordinate(ivx)-mean_velocity_x(ix))*a1
-                            + (ddc::coordinate(ivy)-mean_velocity_y(ix))*a2;
-                        for (IdxVz const iv : idx_range_vz)
-                            feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
+                        double const dvx
+                                 = (ddc::coordinate(ivy) - mean_velocity_y(ix)) * std::tan(-0.5*dt*Bfield[2]);
+                        for (IdxVx const iv : idx_range_vx)
+                            feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
                     });
-                interpolator_vz(allfdistribu[isp][ix],
-                            get_const_field(feet_coords_vz),
-                            get_const_field(derivs_min_vz),
-                            get_const_field(derivs_max_vz));
-
-                
-                
+                interpolator_vx(allfdistribu[isp][ix],
+                            get_const_field(feet_coords_vx),
+                            get_const_field(derivs_min_vx),
+                            get_const_field(derivs_max_vx));
 
             }
-
-            //if (count == 1 && idx_order[2] == 0)
-            //{
-
-            //}
-
-            //if (count == 1 && idx_order[2] == 1)
-            //{
-
-            //}
-
-            //if (count == 1 && idx_order[2] == 2)
-            //{
-
-            //}
 
 
          //});

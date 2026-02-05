@@ -86,9 +86,11 @@ void MaxwellianEquilibrium::compute_maxwellian(
                 double const vz = ddc::coordinate(ddc::select<GridVz>(ivxvyvz));
                 fMaxwellian(ivxvyvz) = density * std::pow(inv_2pi, 1.5) 
                                      * Kokkos::exp(
-                                             -((vx - mean_velocity) * (vx - mean_velocity)
-                                               + (vy - mean_velocity) * (vy - mean_velocity)
+                                             -((vx - mean_velocity) * (vx - mean_velocity))
+                                             / (2.0*temperature))
+                                     * Kokkos::exp(
+                                             -((vy - mean_velocity) * (vy - mean_velocity)
                                                + (vz - mean_velocity) * (vz - mean_velocity))
-                                             / (2.0*temperature));
+                                             / (2.0*temperature ));
             });
 }
