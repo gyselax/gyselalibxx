@@ -363,15 +363,15 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 {
     Coord<Xg> xg_min = ddc::coordinate(idx_range_xg.front());
     std::tuple coord_transforms {
-        CoordTransformGroup<1>(xg_min, yg_min, x1_min, y1_min),
-        CoordTransformGroup<2>(xg_min, yg_min, convert_dim<X<2>>(x1_min), convert_dim<Y<2>>(y1_min)),
-        CoordTransformGroup<3>(xg_min, yg_min, convert_dim<X<3>>(x1_min), convert_dim<Y<3>>(y1_min)),
-        CoordTransformGroup<4>(xg_min, yg_min, convert_dim<X<4>>(x1_min), convert_dim<Y<4>>(y1_min)),
-        CoordTransformGroup<5>(xg_min, yg_min, convert_dim<X<5>>(x1_min), convert_dim<Y<5>>(y1_min)),
-        CoordTransformGroup<6>(xg_min, yg_min, convert_dim<X<6>>(x1_min), convert_dim<Y<6>>(y1_min)),
-        CoordTransformGroup<7>(xg_min, yg_min, convert_dim<X<7>>(x1_min), convert_dim<Y<7>>(y1_min)),
-        CoordTransformGroup<8>(xg_min, yg_min, convert_dim<X<8>>(x1_min), convert_dim<Y<8>>(y1_min)),
-        CoordTransformGroup<9>(xg_min, yg_min, convert_dim<X<9>>(x1_min), convert_dim<Y<9>>(y1_min))};
+        CoordTransformGroup<1>(xg_min, yg_min, x1_min, convert_dim<Y<1>>(y7_min)),
+        CoordTransformGroup<2>(xg_min, yg_min, convert_dim<X<2>>(x1_min), convert_dim<Y<2>>(y7_min)),
+        CoordTransformGroup<3>(xg_min, yg_min, convert_dim<X<3>>(x1_min), convert_dim<Y<3>>(y7_min)),
+        CoordTransformGroup<4>(xg_min, yg_min, convert_dim<X<4>>(x1_min), convert_dim<Y<4>>(y7_min)),
+        CoordTransformGroup<5>(xg_min, yg_min, convert_dim<X<5>>(x1_min), convert_dim<Y<5>>(y7_min)),
+        CoordTransformGroup<6>(xg_min, yg_min, convert_dim<X<6>>(x1_min), convert_dim<Y<6>>(y7_min)),
+        CoordTransformGroup<7>(xg_min, yg_min, convert_dim<X<7>>(x1_min), y7_min),
+        CoordTransformGroup<8>(xg_min, yg_min, convert_dim<X<8>>(x1_min), convert_dim<Y<8>>(y7_min)),
+        CoordTransformGroup<9>(xg_min, yg_min, convert_dim<X<9>>(x1_min), convert_dim<Y<9>>(y7_min))};
 
     // Instantiate the derivatives calculators ---------------------------------------------------
     // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
@@ -660,7 +660,7 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
     // Initialise the data =======================================================================
     // --- the function values.
     initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
-    initialise_2D_function<Xg, Yg>(function_g);
+    initialise_2D_function(function_g);
 
     // --- the first derivatives computed from the function values.
     matrix_123.solve_deriv(functions_and_derivs);

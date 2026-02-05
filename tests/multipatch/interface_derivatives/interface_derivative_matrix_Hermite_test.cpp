@@ -642,7 +642,7 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
     // Initialise the data =======================================================================
     // --- the function values.
     initialise_all_functions<Xg, Yg>(functions_and_derivs, coord_transforms);
-    initialise_2D_function<Xg, Yg>(function_and_derivs_g.get_values_field());
+    initialise_2D_function(function_and_derivs_g.get_values_field());
 
     // --- the derivatives of the equivalent global spline.
     Idx<DerivXg> first_dxg(1);

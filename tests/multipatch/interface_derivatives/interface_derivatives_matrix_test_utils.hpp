@@ -28,10 +28,12 @@ auto get_1d_transform(CoordTransformType transform)
 // -----------------------------------------------------------------------------------------------
 
 /// @brief Initialise the function with f(x,y) = cos(2/3*pi*x)sin(y).
-template <class Xg, class Yg, class Grid1, class Grid2, class Layout>
-void initialise_2D_function(DField<IdxRange<Grid1, Grid2>, Kokkos::HostSpace, Layout> function)
+template <class GridXg, class GridYg, class Layout>
+void initialise_2D_function(DField<IdxRange<GridXg, GridYg>, Kokkos::HostSpace, Layout> function)
 {
-    ddc::host_for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
+    using Xg = typename GridXg::continuous_dimension_type;
+    using Yg = typename GridYg::continuous_dimension_type;
+    ddc::host_for_each(get_idx_range(function), [&](Idx<GridXg, GridYg> idx) {
         // Get the coordinate on the equivalent global mesh.
         Coord<Xg, Yg> equiv_global_coord = ddc::coordinate(idx);
         double const xg = ddc::get<Xg>(equiv_global_coord);
