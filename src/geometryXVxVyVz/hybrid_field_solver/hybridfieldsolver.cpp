@@ -60,6 +60,7 @@ Kokkos::Profiling::pushRegion("Hybridfieldsolver1d3v");
 //assert((get_idx_range(electrostatic_potential) == get_idx_range<GridX, GridY>(allfdistribu)));
 
     m_compute_moments(rho, allfdistribu);
+    //m_compute_moments(weighted_u_x, weighted_u_y, weighted_u_z, rho, allfdistribu);
 
     m_compute_moments(rho_each, allfdistribu);
     m_compute_moments(u_old_x, u_old_y, u_old_z, rho_each, allfdistribu);
@@ -80,6 +81,22 @@ Kokkos::Profiling::pushRegion("Hybridfieldsolver1d3v");
         qx, qy, qz, p_parallel_x, p_parallel_y, p_parallel_z,
         electron_temperature, dt      
         );    
+    
+Kokkos::Profiling::popRegion();
+}
+
+
+
+void HybridFieldSolver::operator()(
+    DFieldSpX multi_para_tem, 
+    DFieldSpX multi_perp_tem, 
+    DFieldX single_para_tem, 
+    DFieldX single_perp_tem
+    ) const
+{
+Kokkos::Profiling::pushRegion("Hybridfieldsolver1d3v");
+    m_solve_hybrid(
+        multi_para_tem, multi_perp_tem, single_para_tem, single_perp_tem);    
     
 Kokkos::Profiling::popRegion();
 }

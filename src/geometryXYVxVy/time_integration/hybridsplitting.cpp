@@ -161,11 +161,10 @@ DFieldSpVxVyXY Hybridsplitting::operator()(
         ddc::parallel_deepcopy(
                 allfdistribu_host,
                 get_const_field(allfdistribu_v2D_split_output_layout));
-        ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
+        ddc::parallel_deepcopy(electrostatic_potential_host, magnetic_field_z);
         ddc::PdiEvent("iteration")
                 .with("iter", iter)
                 .with("time_saved", iter_time)
-                .with("fdistribu", allfdistribu_host)
                 .with("electrostatic_potential", electrostatic_potential_host);
 
         // Computation of the density, mean velocity, and kinetic energy density.
@@ -215,11 +214,10 @@ DFieldSpVxVyXY Hybridsplitting::operator()(
             allfdistribu_host,
             get_const_field(allfdistribu_v2D_split_output_layout));
     
-    ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
+    ddc::parallel_deepcopy(electrostatic_potential_host, magnetic_field_z);
     ddc::PdiEvent("last_iteration")
             .with("iter", iter)
             .with("time_saved", final_time)
-            .with("fdistribu", allfdistribu_host)
             .with("electrostatic_potential", electrostatic_potential_host);
     //std::cout << "just check-----------------: " << std::setprecision(16) << final_time << std::endl;
 

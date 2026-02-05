@@ -110,6 +110,7 @@ public:
                                // = charge_proxy / mass(isp) * (ddc::coordinate(ivx) + mean_velocity_x(ix)) * std::sin(-dt*magnetic_field_z(ix)) ;
                         double const dvx
                                 = (ddc::coordinate(ivx) + mean_velocity_x(ix)) * std::sin(-dt*charge_proxy/mass(isp)*magnetic_field_z(ix)) ;
+                        //std::cout << "check rot 2d vy is: " << std::setprecision(16) <<  mean_velocity_x(ix) << std::endl;
                         // compute the coordinates of the feet
                         for (IdxV const iv : idx_range_v) {
                             feet_coords(iv, ib) = Coord<DimV>(ddc::coordinate(iv) - dvx);

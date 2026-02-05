@@ -102,4 +102,30 @@ public:
      */
     virtual void operator()(DFieldSpX mean_current_x, DFieldSpX mean_current_y, DFieldSpX mean_current_z, DFieldSpX rho, 
         DConstFieldSpVxVyVzX allfdistribu) const = 0;
+
+    /**
+     * Calculate the density for each distribution function by intergrating for one velocity direction.
+     *
+     * @param[out] rho The density after integrating about one velocity direction.
+     * @param[in] allfdistribu The distribution function.
+     */
+    virtual void operator()(DFieldSpXVxVy rho, DConstFieldSpVxVyVzX allfdistribu) const = 0;
+
+    /**
+     * Calculate the mean velocity in direction x, y, and z for each distribution function.
+     *
+     * Calculate the mean velocity by calculating the spline representation of slices
+     * of the distribution function at each spatial point along the velocity direction.
+     * This representation is multiplied with vx, vy and integrated, then multiplied by the charge,
+     * and finally devided by the rho of the same species. 
+     *
+     * @param[out] mean_velocity_x The mean velocity in direction x.
+     * @param[out] mean_velocity_y The mean velocity in direction y.
+     * @param[in] rho The charge density.
+     * @param[in] allfdistribu The distribution function.
+     */
+    virtual void operator()(DFieldSpX parallel_temperature, DFieldSpX perpendicular_temperature, 
+                            DConstFieldSpX rho, DConstFieldX Bx, DConstFieldX By, DConstFieldX Bz, 
+                            DConstFieldSpX ux, DConstFieldSpX uy, DConstFieldSpX uz, 
+                            DConstFieldSpVxVyVzX allfdistribu) const = 0;
 };

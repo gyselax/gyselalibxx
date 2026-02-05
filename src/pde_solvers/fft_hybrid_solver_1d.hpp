@@ -539,7 +539,7 @@ public:
      * 
      * @return A reference to the solution of sub-step fb.
     */
-
+    
     // used for the sub-step fb
     virtual field_type operator()(field_type magnetic_field_y, field_type magnetic_field_y_old,
                                   field_type magnetic_field_y_mid, field_type magnetic_field_y_previous,
@@ -607,11 +607,18 @@ public:
             KOKKOS_LAMBDA(IdxX const ixy) {
                 magnetic_field_y_old(ixy) = magnetic_field_y(ixy);
                 magnetic_field_z_old(ixy) = magnetic_field_z(ixy);
+
+                //std::cout << "x is: " << std::setprecision(16) << Mxx(ixy) - weighted_u_x(ixy) << std::endl;
+                //std::cout << "y is: " << std::setprecision(16) << Mxy(ixy) - weighted_u_y(ixy) << std::endl;
+                //std::cout << "z is: " << std::setprecision(16) << Mxz(ixy) - weighted_u_z(ixy) << std::endl;
             });
+
+        get_gradient<X>(intermediate_chunk, magnetic_field_z, gradx_magnetic_field_z_mid);
+
         // The picard iteration starts here 
         ///////////////////////////////////////////////////////////////////////////////////////////
         int iter = 0;
-        int iter_number = 20;
+        int iter_number = 50;
         for (; iter < iter_number; ++iter) {
             // 0th step, compute the p at the mid-time, and store the p value at pressure_field_previous 
             ddc::parallel_for_each(
@@ -644,7 +651,7 @@ public:
                         weighted_p_para_z(ixy) = 0.0;
 
 
-                        //std::cout << "rho is: " << std::setprecision(16) << mean_velocity_y(ixy) << std::endl;
+                        //std::cout << "rho is: " << std::setprecision(16) << rho(ixy) << std::endl;
                     });
 
 
@@ -653,19 +660,36 @@ public:
             get_gradient<X>(intermediate_chunk, magnetic_field_z_mid, gradx_magnetic_field_z_mid);
             get_gradient<X>(intermediate_chunk, rho, gradx_rho);
 
+            
+
 
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     idx_range,
                     KOKKOS_LAMBDA(IdxX const ixy) {
                         double B_square = magnetic_field_x(ixy) * magnetic_field_x(ixy) + magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy);
-                        qx(ixy) = 0.0;
-                        qy(ixy) = magnetic_field_z_mid(ixy) * gradx_rho(ixy) * electron_temperature / B_square / rho(ixy);
-                        qz(ixy) = - magnetic_field_y_mid(ixy) * gradx_rho(ixy) * electron_temperature / B_square / rho(ixy);
-                        p_parallel_x(ixy) = gradx_rho(ixy) * magnetic_field_x(ixy) * electron_temperature / rho(ixy) * magnetic_field_x(ixy) / B_square;
-                        p_parallel_y(ixy) = gradx_rho(ixy) * magnetic_field_x(ixy) * electron_temperature / rho(ixy) * magnetic_field_y_mid(ixy) / B_square;
-                        p_parallel_z(ixy) = gradx_rho(ixy) * magnetic_field_x(ixy) * electron_temperature / rho(ixy) * magnetic_field_z_mid(ixy) / B_square;
- 
+                        if (Kokkos::sqrt(B_square) > 1e-13)
+                        {
+                            qx(ixy) = 0.0;
+                            qy(ixy) = magnetic_field_z_mid(ixy) * gradx_rho(ixy) * electron_temperature / B_square / rho(ixy);
+                            qz(ixy) = - magnetic_field_y_mid(ixy) * gradx_rho(ixy) * electron_temperature / B_square / rho(ixy);
+                            p_parallel_x(ixy) = gradx_rho(ixy) * magnetic_field_x(ixy) * electron_temperature / rho(ixy) * magnetic_field_x(ixy) / B_square;
+                            p_parallel_y(ixy) = gradx_rho(ixy) * magnetic_field_x(ixy) * electron_temperature / rho(ixy) * magnetic_field_y_mid(ixy) / B_square;
+                            p_parallel_z(ixy) = gradx_rho(ixy) * magnetic_field_x(ixy) * electron_temperature / rho(ixy) * magnetic_field_z_mid(ixy) / B_square;
+                        }
+                        
+                        else
+                        {
+                            qx(ixy) = 0.0;
+                            qy(ixy) = 0.0;
+                            qz(ixy) = 0.0;
+                            p_parallel_x(ixy) = electron_temperature * gradx_rho(ixy) / rho(ixy);
+                            p_parallel_y(ixy) = 0.0;
+                            p_parallel_z(ixy) = 0.0;
+
+                        }
+                        
+
                     });
 
             // decomposition of p/rho, and compute u_bar.
@@ -674,25 +698,46 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 idx_range,
                 KOKKOS_LAMBDA(IdxX const ixy) {
-                    double B_square = magnetic_field_x(ixy) * magnetic_field_x(ixy) + magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy);
                     double q_over_m = - kinetic_charges(isp) / kinetic_masses(isp);
                     double rho_i_over_rho = rho_each(isp,ixy) / rho(ixy);
+                    
+                    double B_square = magnetic_field_x(ixy) * magnetic_field_x(ixy) + magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy);
+                    double B_abs = Kokkos::sqrt(B_square);
+                    
+                    
                     // matrix M 
-                    double coe1 = 2.0 * std::sin(0.5*dt*q_over_m*std::sqrt(B_square)) * std::sin(0.5*dt*q_over_m*std::sqrt(B_square)) / dt / B_square/q_over_m; 
-                    double coe2 = (1.0 - std::sin( dt * q_over_m * std::sqrt(B_square) ) / ( dt*q_over_m*std::sqrt(B_square) ) ) / B_square;
+                    
+                    double Mxx_temp = 1.0;
+                    double Mxy_temp = 0.0;
+                    double Mxz_temp = 0.0;
 
-                    double Mxx_temp = 1.0 - coe2 * (magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy));
-                    double Mxy_temp = coe1 * magnetic_field_z_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_y_mid(ixy);
-                    double Mxz_temp = - coe1 * magnetic_field_y_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_z_mid(ixy);
+                    double Myx_temp = 0.0;
+                    double Myy_temp = 1.0;
+                    double Myz_temp = 0.0;
 
-                    double Myx_temp = - coe1 *  magnetic_field_z_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_y_mid(ixy);
-                    double Myy_temp = 1.0 - coe2 * (magnetic_field_x(ixy) * magnetic_field_x(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy));
-                    double Myz_temp = coe1 * magnetic_field_x(ixy) + coe2 * magnetic_field_y_mid(ixy) * magnetic_field_z_mid(ixy);
+                    double Mzx_temp = 0.0;
+                    double Mzy_temp = 0.0;
+                    double Mzz_temp = 1.0;
+                    
 
-                    double Mzx_temp = coe1 * magnetic_field_y_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_z_mid(ixy);
-                    double Mzy_temp = -coe1 * magnetic_field_x(ixy) + coe2 * magnetic_field_y_mid(ixy) *  magnetic_field_z_mid(ixy);
-                    double Mzz_temp = 1.0 - coe2 * (magnetic_field_x(ixy)*magnetic_field_x(ixy) + magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy));
+                    if (B_abs > 1e-13)
+                    {
+                        double coe1 = 2.0 * dt*q_over_m * (Kokkos::sin(0.5*dt*q_over_m*B_abs) / (dt*B_abs*q_over_m)) * (Kokkos::sin(0.5*dt*q_over_m*B_abs) / (dt*B_abs*q_over_m)); 
+                        double coe2 = (1.0 - Kokkos::sin( dt * q_over_m * B_abs ) / ( dt*q_over_m*B_abs ) ) / B_square;
 
+                        Mxx_temp = 1.0 - coe2 * (magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy));
+                        Mxy_temp = coe1 * magnetic_field_z_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_y_mid(ixy);
+                        Mxz_temp = - coe1 * magnetic_field_y_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_z_mid(ixy);
+
+                        Myx_temp = - coe1 *  magnetic_field_z_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_y_mid(ixy);
+                        Myy_temp = 1.0 - coe2 * (magnetic_field_x(ixy) * magnetic_field_x(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy));
+                        Myz_temp = coe1 * magnetic_field_x(ixy) + coe2 * magnetic_field_y_mid(ixy) * magnetic_field_z_mid(ixy);
+
+                        Mzx_temp = coe1 * magnetic_field_y_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_z_mid(ixy);
+                        Mzy_temp = -coe1 * magnetic_field_x(ixy) + coe2 * magnetic_field_y_mid(ixy) *  magnetic_field_z_mid(ixy);
+                        Mzz_temp = 1.0 - coe2 * (magnetic_field_x(ixy) * magnetic_field_x(ixy) + magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy));
+                    }
+                   
                     Mxx(ixy) += rho_i_over_rho * Mxx_temp;
                     Mxy(ixy) += rho_i_over_rho * Mxy_temp;
                     Mxz(ixy) += rho_i_over_rho * Mxz_temp;
@@ -704,7 +749,8 @@ public:
                     Mzx(ixy) += rho_i_over_rho * Mzx_temp;
                     Mzy(ixy) += rho_i_over_rho * Mzy_temp;
                     Mzz(ixy) += rho_i_over_rho * Mzz_temp;
-
+                
+                    
                     weighted_u_x(ixy) += rho_i_over_rho * (Mxx_temp * u_old_x(isp,ixy) + Mxy_temp * u_old_y(isp,ixy) + Mxz_temp * u_old_z(isp,ixy));
                     weighted_u_y(ixy) += rho_i_over_rho * (Myx_temp * u_old_x(isp,ixy) + Myy_temp * u_old_y(isp,ixy) + Myz_temp * u_old_z(isp,ixy));
                     weighted_u_z(ixy) += rho_i_over_rho * (Mzx_temp * u_old_x(isp,ixy) + Mzy_temp * u_old_y(isp,ixy) + Mzz_temp * u_old_z(isp,ixy));
@@ -721,6 +767,7 @@ public:
                 idx_range,
                 KOKKOS_LAMBDA(IdxX const ixy) {
                     // the inverse of M, denote by N
+                    
                     double det_M = Mxx(ixy) * (Myy(ixy) * Mzz(ixy) - Myz(ixy) * Mzy(ixy)) - Mxy(ixy) * (Myx(ixy) * Mzz(ixy) - Myz(ixy) * Mzx(ixy)) + Mxz(ixy) * (Myx(ixy) * Mzy(ixy) - Myy(ixy) * Mzx(ixy));
                     
                     double Nxx = (Myy(ixy) * Mzz(ixy) - Myz(ixy) * Mzy(ixy)) / det_M;
@@ -740,9 +787,10 @@ public:
                     double horq_y = -gradx_magnetic_field_z_mid(ixy)/rho(ixy) - qy(ixy);
                     double horq_z = gradx_magnetic_field_y_mid(ixy)/rho(ixy) - qz(ixy);
 
-                    u_bar_x(ixy) = horq_x + Nxx * (weighted_u_x(ixy) - horq_x - weighted_p_para_x(ixy)) + Nxy * (weighted_u_y(ixy) - horq_y - weighted_p_para_y(ixy)) + Nxz * (weighted_u_z(ixy) - horq_z - weighted_p_para_z(ixy));
-                    u_bar_y(ixy) = horq_y + Nyx * (weighted_u_x(ixy) - horq_x - weighted_p_para_x(ixy)) + Nyy * (weighted_u_y(ixy) - horq_y - weighted_p_para_y(ixy)) + Nyz * (weighted_u_z(ixy) - horq_z - weighted_p_para_z(ixy));
-                    u_bar_z(ixy) = horq_z + Nzx * (weighted_u_x(ixy) - horq_x - weighted_p_para_x(ixy)) + Nzy * (weighted_u_y(ixy) - horq_y - weighted_p_para_y(ixy)) + Nzz * (weighted_u_z(ixy) - horq_z - weighted_p_para_z(ixy));
+                    u_bar_x(ixy) =  horq_x + Nxx * (weighted_u_x(ixy) - horq_x - weighted_p_para_x(ixy)) + Nxy * (weighted_u_y(ixy) - horq_y - weighted_p_para_y(ixy)) + Nxz * (weighted_u_z(ixy) - horq_z - weighted_p_para_z(ixy));
+                    u_bar_y(ixy) =  horq_y + Nyx * (weighted_u_x(ixy) - horq_x - weighted_p_para_x(ixy)) + Nyy * (weighted_u_y(ixy) - horq_y - weighted_p_para_y(ixy)) + Nyz * (weighted_u_z(ixy) - horq_z - weighted_p_para_z(ixy));
+                    u_bar_z(ixy) =  horq_z + Nzx * (weighted_u_x(ixy) - horq_x - weighted_p_para_x(ixy)) + Nzy * (weighted_u_y(ixy) - horq_y - weighted_p_para_y(ixy)) + Nzz * (weighted_u_z(ixy) - horq_z - weighted_p_para_z(ixy));
+
 
                 });
 
@@ -755,6 +803,7 @@ public:
                 KOKKOS_LAMBDA(IdxX const ixy) {
                     rhs_2(ixy) = u_bar_z(ixy) * magnetic_field_x(ixy) - u_bar_x(ixy) * magnetic_field_z_mid(ixy) - magnetic_field_x(ixy) * gradx_magnetic_field_y_mid(ixy) / rho(ixy);
                     rhs_3(ixy) = u_bar_x(ixy) * magnetic_field_y_mid(ixy) - u_bar_y(ixy) * magnetic_field_x(ixy) - magnetic_field_x(ixy) * gradx_magnetic_field_z_mid(ixy) / rho(ixy);
+
                 });
 
             // compute fft for the Bx / rho * gradx Bz or gradx By on the right hand side 
@@ -784,36 +833,125 @@ public:
 
             double max_val = norm_inf(Kokkos::DefaultExecutionSpace(), get_const_field(magnetic_field_y_previous))
                            + norm_inf(Kokkos::DefaultExecutionSpace(), get_const_field(magnetic_field_z_previous));
-            std::cout << "The iteration error of sub step bb is: " << max_val << std::endl;
+            //std::cout << "The iteration error of sub step bb is: " << max_val << std::endl;
 
             double tol = 1e-15;
             if (max_val < tol) {
-                std::cout << "The picard iteration of sub step bb is finished." << std::endl;
+               
+                  // prepare for the shifted rotation
+                 ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                idx_range,
+                KOKKOS_LAMBDA(IdxX const ixy) {
+
+                    rhs_1(ixy) = u_bar_x(ixy) + qx(ixy);
+                    rhs_2(ixy) = u_bar_y(ixy) + qy(ixy) + gradx_magnetic_field_z_mid(ixy) / rho(ixy);
+                    rhs_3(ixy) = u_bar_z(ixy) + qz(ixy) - gradx_magnetic_field_y_mid(ixy) / rho(ixy);
+
+                    /*
+                    // save mean velocity for comparison 
+                    double B_square = magnetic_field_x(ixy) * magnetic_field_x(ixy) + magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy);
+                    double B_abs = Kokkos::sqrt(B_square);
+
+                    double coe1 =  Kokkos::sin(dt*B_abs) / B_abs ; 
+                    double coe2 =  2.0 * (Kokkos::sin( 0.5 * dt * B_abs ) / B_abs ) *  (Kokkos::sin( 0.5 * dt * B_abs ) / B_abs ) ;
+
+                    double Mxx_temp = 1.0 - coe2 * (magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy));
+                    double Mxy_temp = coe1 * magnetic_field_z_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_y_mid(ixy);
+                    double Mxz_temp = - coe1 * magnetic_field_y_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_z_mid(ixy);
+
+                    double Myx_temp = - coe1 *  magnetic_field_z_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_y_mid(ixy);
+                    double Myy_temp = 1.0 - coe2 * (magnetic_field_x(ixy) * magnetic_field_x(ixy) + magnetic_field_z_mid(ixy) * magnetic_field_z_mid(ixy));
+                    double Myz_temp = coe1 * magnetic_field_x(ixy) + coe2 * magnetic_field_y_mid(ixy) * magnetic_field_z_mid(ixy);
+
+                    double Mzx_temp = coe1 * magnetic_field_y_mid(ixy) + coe2 * magnetic_field_x(ixy) * magnetic_field_z_mid(ixy);
+                    double Mzy_temp = -coe1 * magnetic_field_x(ixy) + coe2 * magnetic_field_y_mid(ixy) *  magnetic_field_z_mid(ixy);
+                    double Mzz_temp = 1.0 - coe2 * (magnetic_field_x(ixy)*magnetic_field_x(ixy) + magnetic_field_y_mid(ixy) * magnetic_field_y_mid(ixy));
+
+                    double exp_rhs_x = weighted_u_x(ixy) - u_bar_x(ixy);
+                    double exp_rhs_y = weighted_u_y(ixy) - u_bar_y(ixy) - gradx_magnetic_field_z_mid(ixy) / rho(ixy);
+                    double exp_rhs_z = weighted_u_z(ixy) - u_bar_z(ixy) + gradx_magnetic_field_y_mid(ixy) / rho(ixy);
+
+                    Mxx(ixy) = Mxx_temp * exp_rhs_x + Mxy_temp * exp_rhs_y + Mxz_temp * exp_rhs_z + u_bar_x(ixy);
+                    Mxy(ixy) = Myx_temp * exp_rhs_x + Myy_temp * exp_rhs_y + Myz_temp * exp_rhs_z + u_bar_y(ixy) + gradx_magnetic_field_z_mid(ixy) / rho(ixy);
+                    Mxz(ixy) = Mzx_temp * exp_rhs_x + Mzy_temp * exp_rhs_y + Mzz_temp * exp_rhs_z + u_bar_z(ixy) - gradx_magnetic_field_y_mid(ixy) / rho(ixy);
+                    */
+                    //std::cout << "rhs_1: " << std::setprecision(16) << weighted_p_para_x(ixy)  << std::endl;
+                    //std::cout << "rhs_2: " << std::setprecision(16) << weighted_p_para_y(ixy) << std::endl;
+                    //std::cout << "rhs_3: " << std::setprecision(16) << weighted_p_para_z(ixy) << std::endl;
+                });
                 break;
             }
 
         }
         Kokkos::Profiling::popRegion();
 
-        // prepare for the shifted rotation
-            ddc::parallel_for_each(
-                Kokkos::DefaultExecutionSpace(),
-                idx_range,
-                KOKKOS_LAMBDA(IdxX const ixy) {
-                    rhs_1(ixy) = u_bar_x(ixy) + qx(ixy);
-                    rhs_2(ixy) = u_bar_y(ixy) + qy(ixy) + gradx_magnetic_field_z_mid(ixy) / rho(ixy);
-                    rhs_3(ixy) = u_bar_z(ixy) + qz(ixy) - gradx_magnetic_field_y_mid(ixy) / rho(ixy);
+      
+           
 
-                    //std::cout << "yl_x: " << std::setprecision(16) << rhs_1(ixy) << std::endl;
-                    //std::cout << "yl_y: " << std::setprecision(16) << rhs_2(ixy) << std::endl;
-                    //std::cout << "yl_z: " << std::setprecision(16) << rhs_3(ixy) << std::endl;
-                });
+        
         
         return magnetic_field_y;
 
 
     }
 
+
+
+
+        // used for the sub-step fb
+    virtual field_type operator()(DFieldSpX multi_species_para_tem, DFieldSpX multi_species_perp_tem, 
+                                  field_type single_species_para_tem, field_type single_species_perp_tem) const final
+    {
+        Kokkos::Profiling::pushRegion("FFTHybridSolver_SUBSTEP_fb1d3v");
+
+        hybrid_idx_range_type idx_range(get_idx_range(single_species_para_tem));
+        batch_idx_range_type batch_idx_range(get_idx_range(single_species_para_tem));
+
+        // Build a mesh in the fourier space, for N points
+        fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
+                GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
+
+        fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
+
+        fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
+
+        // the charge and mass of each kinds on ions
+        
+        IdxRangeSp const kin_species_idx_range = get_idx_range<Species>(multi_species_para_tem);
+        
+        host_t<DConstFieldSp> const charges_host = ddc::host_discrete_space<Species>().charges();
+        host_t<DConstFieldSp> const kinetic_charges_host
+                = charges_host[get_idx_range<Species>(multi_species_para_tem)];
+        
+        // Before the picard iteration, set field_old = field
+
+         ddc::for_each(kin_species_idx_range, [&](IdxSp isp) {
+            ddc::parallel_for_each(
+                Kokkos::DefaultExecutionSpace(),
+                idx_range,
+                KOKKOS_LAMBDA(IdxX const ixy) {       
+                    single_species_para_tem(ixy) = multi_species_para_tem(isp,ixy);
+                    single_species_perp_tem(ixy) = multi_species_perp_tem(isp,ixy);
+                });
+        });
+
+        Kokkos::Profiling::popRegion();
+
+      
+           
+
+        
+        
+        return single_species_para_tem;
+
+
+    }
+
+
+    
+
+    
 
 
 

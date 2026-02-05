@@ -86,4 +86,11 @@ public:
             double const electron_temperature,
             double const dt) const = 0;
 
+
+    virtual void operator()(
+            DFieldSpX multi_para_tem, 
+            DFieldSpX multi_perp_tem, 
+            DFieldX single_para_tem, 
+            DFieldX single_perp_tem) const = 0;
+
 };

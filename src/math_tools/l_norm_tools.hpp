@@ -289,7 +289,7 @@ double error_norm_L2(
 /**
  * @brief Compute integral of a function with a given quadrature.
  *
- * @f$ \sqrt{\int_{\Omega} f(X)  dX} @f$
+ * @f$ \int_{\Omega} f(X)  dX @f$
  *
  * @param[in] exec_space
  *     The space on which the function is executed (CPU/GPU).
@@ -313,6 +313,39 @@ double error_norm_L2(
              0.,
              ddc::reducer::sum<double>(),
              KOKKOS_LAMBDA(IdxFunc const idx) { return function(idx); });
+ }
+
+
+
+ /**
+ * @brief Compute Te int rho log tho dx of a function rho a given quadrature.
+ *
+ * @f$ Te \int_{\Omega} rho(X) log rho(X)  dX @f$
+ *
+ * @param[in] exec_space
+ *     The space on which the function is executed (CPU/GPU).
+ * @param[in] function
+ *      A Field to the value of the function on the quadrature grid.
+ * @param[in] temperature
+ *      A double to the value of the eletron temperature.
+ *
+ * @return A double containing the integral of the function.
+ */
+
+ template <class ExecSpace, class FuncType>
+ double thermal_energy_int(ExecSpace exec_space, FuncType function, double Te)
+ {
+     static_assert(
+             Kokkos::SpaceAccessibility<ExecSpace, typename FuncType::memory_space>::accessible);
+     using IdxRangeFunc = typename FuncType::discrete_domain_type;
+     using IdxFunc = typename IdxRangeFunc::discrete_element_type;
+     IdxRangeFunc idx_range = get_idx_range(function);
+     return ddc::parallel_transform_reduce(
+             exec_space,
+             idx_range,
+             0.,
+             ddc::reducer::sum<double>(),
+             KOKKOS_LAMBDA(IdxFunc const idx) { return Te * function(idx) * Kokkos::log(function(idx)); });
  }
  
  

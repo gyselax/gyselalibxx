@@ -96,6 +96,6 @@ void SingleModePerturbInitialisation::perturbation_initialisation(
                 IdxY const iy = ddc::select<GridY>(ixy);
                 CoordY const y = ddc::coordinate(iy);
                 perturbation(ix, iy)
-                        = perturb_amplitude * (Kokkos::cos(kx * x) + Kokkos::cos(ky * y));
+                        = 0.0 * perturb_amplitude * (Kokkos::cos(kx * x) + Kokkos::cos(ky * y));
             });
 }

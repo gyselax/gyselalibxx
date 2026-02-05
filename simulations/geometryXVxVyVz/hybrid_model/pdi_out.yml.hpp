@@ -9,6 +9,11 @@ metadata:
   Nvz_spline_cells : int
   iter : int
   time_saved : double
+  kinetic_energy : double
+  magnetic_energy : double
+  thermal_energy : double
+  parallel_temperature : double
+  perpendicular_temperature : double
   nbstep_diag: int
   iter_saved : int
   MeshX_extents: { type: array, subtype: int64, size: 1 }
@@ -58,11 +63,26 @@ data:
     type: array
     subtype: double
     size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
-  electrostatic_potential_extents: { type: array, subtype: int64, size: 1 }
-  electrostatic_potential:
+  magnetic_field_x_extents: { type: array, subtype: int64, size: 1 }
+  magnetic_field_x:
     type: array
     subtype: double
-    size: [ '$electrostatic_potential_extents[0]' ]
+    size: [ '$magnetic_field_x_extents[0]' ]
+  magnetic_field_y_extents: { type: array, subtype: int64, size: 1 }
+  magnetic_field_y:
+    type: array
+    subtype: double
+    size: [ '$magnetic_field_y_extents[0]' ]
+  magnetic_field_z_extents: { type: array, subtype: int64, size: 1 }
+  magnetic_field_z:
+    type: array
+    subtype: double
+    size: [ '$magnetic_field_z_extents[0]' ]
+  densityspvxvy_extents: { type: array, subtype: int64, size: 3 }
+  densityspvxvy:
+    type: array
+    subtype: double
+    size: [ '$densityspvxvy_extents[0]', '$densityspvxvy_extents[1]', '$densityspvxvy_extents[2]' ]
 
 plugins:
   mpi:
@@ -91,12 +111,6 @@ plugins:
           type: array
           subtype: double
           size: [ '$Nkinspecies', '$MeshX_extents[0]', '$MeshVx_extents[0]', '$MeshVy_extents[0]', '$MeshVz_extents[0]' ]
-      write:
-        time_saved: ~
-        fdistribu:
-          dataset_selection:
-            size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
-            start: [ '$local_fdistribu_starts[0]', '$local_fdistribu_starts[1]', '$local_fdistribu_starts[2]', '$local_fdistribu_starts[3]', '$local_fdistribu_starts[4]' ]
-        electrostatic_potential: ~
+      write: [time_saved, kinetic_energy, magnetic_energy, thermal_energy, parallel_temperature, perpendicular_temperature, magnetic_field_x, magnetic_field_y, magnetic_field_z, densityspvxvy]
   #trace: ~
 )PDI_CFG";
