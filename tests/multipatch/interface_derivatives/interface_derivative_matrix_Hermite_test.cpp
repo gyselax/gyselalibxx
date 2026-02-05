@@ -517,8 +517,8 @@ public:
     {
         using XLinearTransform = typename PatchTransform::XTransform;
         using YLinearTransform = typename PatchTransform::YTransform;
-        std::vector<typename XLinearTransform::CoordResult> break_points_along_xg(ncells_per_patch);
-        std::vector<typename YLinearTransform::CoordResult> break_points_along_yg(ncells_per_patch);
+        std::vector<typename XLinearTransform::CoordResult> break_points_along_xg;
+        std::vector<typename YLinearTransform::CoordResult> break_points_along_yg;
         ddc::host_for_each(idx_range_xg, [&](Idx<GridXg> idx) {
             break_points_along_xg.push_back(patch_transform.x_transform(ddc::coordinate(idx)));
         });
@@ -536,11 +536,26 @@ public:
         using BSplAlongXg = find_grid_t<LocalXg, AllBSpls>;
         using BSplAlongYg = find_grid_t<LocalYg, AllBSpls>;
 
-        ddc::init_discrete_space<BSplAlongXg>(break_points_along_xg);
-        ddc::init_discrete_space<BSplAlongYg>(break_points_along_yg);
 
-        ddc::init_discrete_space<GridLocAlongXg>(break_points_along_xg);
-        ddc::init_discrete_space<GridLocAlongYg>(break_points_along_yg);
+        if (break_points_along_xg.back() > break_points_along_xg.front()) {
+            ddc::init_discrete_space<BSplAlongXg>(break_points_along_xg);
+            ddc::init_discrete_space<GridLocAlongXg>(break_points_along_xg);
+        } else {
+            ddc::init_discrete_space<
+                    BSplAlongXg>(break_points_along_xg.rbegin(), break_points_along_xg.rend());
+            ddc::init_discrete_space<
+                    GridLocAlongXg>(break_points_along_xg.rbegin(), break_points_along_xg.rend());
+        }
+
+        if (break_points_along_yg.back() > break_points_along_yg.front()) {
+            ddc::init_discrete_space<BSplAlongYg>(break_points_along_yg);
+            ddc::init_discrete_space<GridLocAlongYg>(break_points_along_yg);
+        } else {
+            ddc::init_discrete_space<
+                    BSplAlongYg>(break_points_along_yg.rbegin(), break_points_along_yg.rend());
+            ddc::init_discrete_space<
+                    GridLocAlongYg>(break_points_along_yg.rbegin(), break_points_along_yg.rend());
+        }
     }
 };
 
