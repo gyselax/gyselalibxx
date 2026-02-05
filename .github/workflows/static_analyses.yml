@@ -77,14 +77,7 @@ jobs:
           # Find all files with no extension or a .py extension in post-process/PythonScripts/
           POST_PROCESS_PYTHON_FILES=$(find post-process/PythonScripts/ -type f ! -name "*.*"; find post-process/PythonScripts -iname *.py)
           # Get pylint errors without failing
-          pylint ${POST_PROCESS_PYTHON_FILES} > post_process_errors.txt || true
-          # Filter errors on changed files
-          for f in $(git diff ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }} --name-only)
-          do
-            grep $f post_process_errors.txt || true
-          done | tee filtered_errors.txt
-          # Raise an error if post-process in filtered errors
-          ! grep "post-process" filtered_errors.txt >/dev/null
+          pylint ${POST_PROCESS_PYTHON_FILES}
         shell: bash
         env:
           PYTHONPATH: ./post-process/PythonScripts

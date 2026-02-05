@@ -12,7 +12,7 @@ module purge
 
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 
-SPACK_VERSION="1.1.0"
+SPACK_VERSION="1.1.1"
 
 export SPACK_PREFIX=/data/gyselarunner/spack-${SPACK_VERSION}
 
@@ -34,7 +34,9 @@ spack config --scope site add 'packages:all:providers:blas:[openblas]'
 spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 spack config --scope site add 'packages:git:version:[":2.46"]'
 
-spack compiler find --scope site
+module load gcc/13
+spack compiler find --scope site ${GCC_HOME}
+module purge
 
 spack env remove --yes-to-all gyselalibxx-env-omp-cuda
 spack env create gyselalibxx-env-omp-cuda "${TOOLCHAIN_ROOT_DIRECTORY}/v100/gyselalibxx-spack-environment.yaml"
@@ -43,10 +45,10 @@ echo "Preparing the Spack environment..."
 
 spack --env gyselalibxx-env-omp-cuda external find cuda
 spack --env gyselalibxx-env-omp-cuda concretize --fresh --force
-spack --env gyselalibxx-env-omp-cuda install --jobs 16
+spack --env gyselalibxx-env-omp-cuda install --concurrent-packages 2 --jobs 16
 
 spack env remove --yes-to-all gyselalibxx-env-omp
 spack env create gyselalibxx-env-omp "${TOOLCHAIN_ROOT_DIRECTORY}/xeon/gyselalibxx-spack-environment.yaml"
 
 spack --env gyselalibxx-env-omp concretize --fresh --force
-spack --env gyselalibxx-env-omp install --jobs 16
+spack --env gyselalibxx-env-omp install --concurrent-packages 2 --jobs 16
