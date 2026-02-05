@@ -91,9 +91,9 @@ double check_value_not_on_grid(
     ddc::host_for_each(idx_range, [&](IdxRTheta const irtheta) {
         IdxR ir(ddc::select<GridR>(irtheta));
         CoordR coord_r_0 = ddc::coordinate(ir);
-        CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
         if (ir < ir_max) {
+            CoordR coord_r_1 = ddc::coordinate(ir + 1);
             double factor = double(std::rand()) / RAND_MAX;
             coord_r = coord_r_0 + (coord_r_1 - coord_r_0) * factor;
         } else {
@@ -102,9 +102,9 @@ double check_value_not_on_grid(
 
         IdxTheta itheta(ddc::select<GridTheta>(irtheta));
         CoordTheta coord_theta_0 = ddc::coordinate(itheta);
-        CoordTheta coord_theta_1 = ddc::coordinate(itheta + 1);
         double coord_theta;
         if (itheta < itheta_max) {
+            CoordTheta coord_theta_1 = ddc::coordinate(itheta + 1);
             double factor = double(std::rand()) / RAND_MAX;
             coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {
