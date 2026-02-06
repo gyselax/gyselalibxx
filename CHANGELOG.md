@@ -35,6 +35,7 @@ in a `DerivField`.
 - Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
 - Add a new coordinate transformation `LinearCoordTransform`.
 - Add a new coordinate transformation `OrthogonalCoordTransforms`.
+- Add `InterfaceDerivativeMatrix` to compute all the coupled interface derivatives along a direction with the approximation formula.
 
 ### Fixed
 

@@ -42,3 +42,40 @@ PUBLIC
 target_compile_definitions("${test_name_gtest}" PUBLIC)
 gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 
+
+# InterfaceExactDerivativeMatrix test =================================================================
+function (interface_derivative_matrix_executable TEST_CASE)
+     if (TEST_CASE STREQUAL "GREVILLE_CASE")
+        set(test_name_gtest "interface_derivative_matrix_Greville_periodic_test")
+        add_executable("${test_name_gtest}"
+            interface_derivative_matrix_Greville_periodic_test.cpp
+            ../../main.cpp
+        )
+    else()
+        set(test_name_gtest "interface_derivative_matrix_${TEST_CASE}_test")
+        add_executable("${test_name_gtest}"
+            interface_derivative_matrix_Hermite_test.cpp
+            ../../main.cpp
+        )
+    endif()
+    target_link_libraries("${test_name_gtest}"
+    PUBLIC
+        DDC::core
+        GTest::gtest
+        GTest::gmock
+
+        gslx::multipatch_geometries
+        gslx::multipatch_spline
+        gslx::multipatch_interface_derivatives
+        gslx::utils
+    )
+    target_compile_definitions("${test_name_gtest}" PUBLIC -D${TEST_CASE})
+    gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
+endfunction()
+
+interface_derivative_matrix_executable("GREVILLE_CASE")
+interface_derivative_matrix_executable("REVERSE_PATCH1")
+interface_derivative_matrix_executable("REVERSE_PATCH2")
+interface_derivative_matrix_executable("REVERSE_PATCH3")
+interface_derivative_matrix_executable("CHANGE_BOUND1")
+interface_derivative_matrix_executable("CHANGE_BOUND3")
