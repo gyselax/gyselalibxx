@@ -248,6 +248,22 @@ private:
          ...);
     }
 
+    /// @brief Free the internal pointer that is saved in internal_fields at the index ArrayIndex.
+    template <std::size_t ArrayIndex>
+    void free_ptr(ElementType* const ptr, allocator_type allocator)
+    {
+        std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
+        allocator.deallocate(ptr, alloc_size);
+    }
+
+    /// @brief Free the chunks inside internal_fields.
+    template <std::size_t... ArrayIndex>
+    void free_chunks(allocator_type allocator, std::index_sequence<ArrayIndex...>)
+    {
+        (free_ptr<ArrayIndex>(base_type::internal_fields[ArrayIndex].data_handle(), allocator),
+         ...);
+    }
+
 public:
     /**
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
@@ -291,8 +307,11 @@ public:
         initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
 
-    /// Defaulted destructor
-    ~DerivFieldMem() = default;
+    /// Destructor, responsible to deallocate memory.
+    ~DerivFieldMem()
+    {
+        free_chunks(allocator_type {}, std::make_integer_sequence<std::size_t, n_fields> {});
+    }
 
     /// Deleted copy operator
     DerivFieldMem& operator=(DerivFieldMem const& other) = delete;
