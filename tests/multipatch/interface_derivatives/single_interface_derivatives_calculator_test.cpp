@@ -522,16 +522,16 @@ struct SingleInterfaceDerivativesCalculatorFixture<
             EXPECT_NEAR(
                     sum_values,
                     derivatives_calculator_approx.get_function_coefficients(
-                            get_const_field(function_1[idx_par_1]),
-                            get_const_field(function_2[idx_par_2])),
+                            get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
+                            get_const_field(function_2[idx_par_2][reduced_idx_range_perp1])),
                     1e-12);
 
             // Compare derivatives_calculator and derivatives_calculator_approx_2D.
             EXPECT_NEAR(
                     sum_values,
                     derivatives_calculator_approx_2D.get_function_coefficients(
-                            get_const_field(function_1[idx_par_1]),
-                            get_const_field(function_2[idx_par_2])),
+                            get_const_field(function_1[idx_par_1][reduced_idx_range_perp1]),
+                            get_const_field(function_2[idx_par_2][reduced_idx_range_perp1])),
                     1e-12);
 
             Idx<ddc::Deriv<Rg>> idx_dr(1);
