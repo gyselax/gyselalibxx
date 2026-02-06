@@ -499,6 +499,8 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#q-git-reports-changes-in-the-submodule-but-i-didnt-change-this-code">Q: Git reports changes in the submodule but I didn't change this code</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#q-i-accidentally-committed-a-different-version-of-a-submodule-how-do-i-get-back-to-the-version-in-the-devel-branch">Q: I accidentally committed a different version of a submodule how do I get back to the version in the devel branch?</a>
+    </li>
         </ul>
     </li>
     </ul>
@@ -605,6 +607,13 @@ git rebase origin/devel
 <h3 id="q-git-reports-changes-in-the-submodule-but-i-didnt-change-this-code">Q: Git reports changes in the submodule but I didn't change this code</h3>
 <p><strong>A:</strong> It is likely that you previously checked out a branch where the submodule was pinned to a different version. When you changed to your current branch the submodule was not updated, hence the reported changes. You can revert the changes to return to the version in your branch using:</p>
 <pre><code class="language-sh">git submodule update --init
+</code></pre>
+<h3 id="q-i-accidentally-committed-a-different-version-of-a-submodule-how-do-i-get-back-to-the-version-in-the-devel-branch">Q: I accidentally committed a different version of a submodule how do I get back to the version in the devel branch?</h3>
+<p><strong>A:</strong> Inside git, a submodule is viewed as a file containing the SHA of the commit that the submodule is pinned to. This object can be manipulated in git like any other file. Therefore to get the version of the submodule that appears on the <code>devel</code> branch you simply run:</p>
+<pre><code class="language-sh">git fetch origin # Make sure that you have an up-to-date version of the branch
+git checkout origin/devel -- &lt;submodule&gt; # Revert to the expected version of the submodule
+git commit -m "Revert accidental change to submodule" &lt;submodule&gt; # Save the version change
+git submodule update submodule # Update your local copy of the submodule to the new version
 </code></pre></div>
               
             </div>
