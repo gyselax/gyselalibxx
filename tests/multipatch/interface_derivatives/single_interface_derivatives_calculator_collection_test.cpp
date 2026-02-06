@@ -21,8 +21,8 @@
 
         |  1  |  2  |  3  |
 
-        with the global X and Y dimensions with additional points as closure condition 
-        (ddc::BoundCond::GREVILLE).
+        with the global X dimension with additional points as closure condition 
+        (ddc::BoundCond::GREVILLE) and the global Y with Hermite boundary conditions.
 
 */
 
@@ -127,9 +127,9 @@ public:
         : idx_range_x1(SplineInterpPointsX<1, BCG, BCH>::template get_domain<GridX<1>>())
         , idx_range_x2(SplineInterpPointsX<2, BCH, BCH>::template get_domain<GridX<2>>())
         , idx_range_x3(SplineInterpPointsX<3, BCH, BCG>::template get_domain<GridX<3>>())
-        , idx_range_y1(SplineInterpPointsY<1, BCG, BCH>::template get_domain<GridY<1>>())
+        , idx_range_y1(SplineInterpPointsY<1, BCH, BCH>::template get_domain<GridY<1>>())
         , idx_range_y2(SplineInterpPointsY<2, BCH, BCH>::template get_domain<GridY<2>>())
-        , idx_range_y3(SplineInterpPointsY<3, BCH, BCG>::template get_domain<GridY<3>>())
+        , idx_range_y3(SplineInterpPointsY<3, BCH, BCH>::template get_domain<GridY<3>>())
         , idx_range_xy1(idx_range_x1, idx_range_y1)
         , idx_range_xy2(idx_range_x2, idx_range_y2)
         , idx_range_xy3(idx_range_x3, idx_range_y3)
