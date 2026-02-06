@@ -67,3 +67,7 @@ if (condition) {
 Note also that the way of annotating such errors depends on how they are raised. This reflects the fact that `assert` errors should only be seen by developers while `abort` errors will also be seen by users.
 Assertions indicate the line and file where they originated so it is easy for developers to locate any associated comments. This also gives them  starting point for how to debug the error.
 In contrast `abort` errors are written into the line that raises the error. This means that the error is printed to the command line when the executable fails. The message should include enough information for the user to understand what is happening so they have an idea of how to change their input to fix this problem.
+
+## I have problems with git submodules
+
+See the dedicated documentation about [git submodules](./Using_git.md#submodules).
