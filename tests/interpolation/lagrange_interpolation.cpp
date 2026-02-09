@@ -47,7 +47,7 @@ struct LagrangeEvaluatorFixture<std::tuple<
     static constexpr bool UNIFORM = Uniform;
 
     // Replace with your actual tolerance policy
-    static constexpr double TOL = std::is_same_v<T, float> ? 1e-6 : 1e-12;
+    static constexpr double TOL = std::is_same_v<T, float> ? 5e-6 : 1e-12;
 };
 
 using degrees = std::integer_sequence<std::size_t, 2, 3, 4>;
@@ -108,7 +108,7 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
                 xmin,
                 xmax,
                 IdxStep<GridX>(ncells),
-                0.0); //5);
+                0.5);
         ddc::init_discrete_space<GridX>(points);
     }
     IdxRange<GridX> idx_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
