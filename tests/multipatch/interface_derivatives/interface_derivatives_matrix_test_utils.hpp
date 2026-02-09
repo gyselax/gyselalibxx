@@ -125,30 +125,29 @@ void initialise_derivatives(
     });
 }
 
-
-/// @brief Initialise the cross-derivatives of a given DerivField from the global spline.
 template <
         class Patch,
+        class IdxRangeType,
         class CoordTransformType,
         class SplineXYgEvaluator,
         class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
-        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
-        class Xg = typename BSplinesXg::continuous_dimension_type,
-        class Yg = typename BSplinesYg::continuous_dimension_type>
-void initialise_cross_derivatives(
-        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2>
+std::tuple<double, double, double, double> get_cross_derivatives(
+        IdxRangeType idx_range,
         SplineXYgEvaluator const& evaluator_g,
-        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
-        double const& xshift,
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& function_g_coef,
         CoordTransformType const& coord_transform_handler)
 {
+    using Xg = typename BSplinesXg::continuous_dimension_type;
+    using Yg = typename BSplinesYg::continuous_dimension_type;
+
     using DerivX = ddc::Deriv<typename Patch::Dim1>;
     using DerivY = ddc::Deriv<typename Patch::Dim2>;
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
 
-    IdxRange<GridX> idx_range_x(get_idx_range(function_and_derivs));
-    IdxRange<GridY> idx_range_y(get_idx_range(function_and_derivs));
+    IdxRange<GridX> idx_range_x(idx_range);
+    IdxRange<GridY> idx_range_y(idx_range);
 
     Idx<DerivX> idx_dx(1);
     Idx<DerivY> idx_dy(1);
@@ -172,22 +171,57 @@ void initialise_cross_derivatives(
     Coord<Xg, Yg> coord_max_max_g(coord_transform_l_to_g(coord_max_max));
 
     Idx<ddc::Deriv<Xg>, ddc::Deriv<Yg>> idx_deriv(1, 1);
-    function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymin)
-            = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_min_g))
-              * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_min_g))
-              * evaluator_g.deriv(idx_deriv, coord_min_min_g, const_function_g_coef);
-    function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymin)
-            = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_min_g))
-              * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_min_g))
-              * evaluator_g.deriv(idx_deriv, coord_max_min_g, const_function_g_coef);
-    function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymax)
-            = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_max_g))
-              * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_max_g))
-              * evaluator_g.deriv(idx_deriv, coord_min_max_g, const_function_g_coef);
-    function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymax)
-            = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_max_g))
-              * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_max_g))
-              * evaluator_g.deriv(idx_deriv, coord_max_max_g, const_function_g_coef);
+    double global_deriv_min_min = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_min_g))
+                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_min_g))
+                                  * evaluator_g.deriv(idx_deriv, coord_min_min_g, function_g_coef);
+    double global_deriv_max_min = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_min_g))
+                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_min_g))
+                                  * evaluator_g.deriv(idx_deriv, coord_max_min_g, function_g_coef);
+    double global_deriv_min_max = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_max_g))
+                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_max_g))
+                                  * evaluator_g.deriv(idx_deriv, coord_min_max_g, function_g_coef);
+    double global_deriv_max_max = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_max_g))
+                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_max_g))
+                                  * evaluator_g.deriv(idx_deriv, coord_max_max_g, function_g_coef);
+    return std::make_tuple(
+            global_deriv_min_min,
+            global_deriv_max_min,
+            global_deriv_min_max,
+            global_deriv_max_max);
+}
+
+
+/// @brief Initialise the cross-derivatives of a given DerivField from the global spline.
+template <
+        class Patch,
+        class CoordTransformType,
+        class SplineXYgEvaluator,
+        class BSplinesXg = typename SplineXYgEvaluator::bsplines_type1,
+        class BSplinesYg = typename SplineXYgEvaluator::bsplines_type2,
+        class Xg = typename BSplinesXg::continuous_dimension_type,
+        class Yg = typename BSplinesYg::continuous_dimension_type>
+void initialise_cross_derivatives(
+        DerivFieldOnPatch_host<Patch> function_and_derivs,
+        SplineXYgEvaluator const& evaluator_g,
+        host_t<DConstField<IdxRange<BSplinesXg, BSplinesYg>>> const& const_function_g_coef,
+        CoordTransformType const& coord_transform_handler)
+{
+    using GridX = typename Patch::Grid1;
+    using GridY = typename Patch::Grid2;
+    Idx<ddc::Deriv<typename Patch::Dim1>> idx_dx(1);
+    Idx<ddc::Deriv<typename Patch::Dim2>> idx_dy(1);
+    IdxRange<GridX, GridY> idx_range(get_idx_range(function_and_derivs));
+    Idx<GridX> idx_xmin(idx_range.front());
+    Idx<GridX> idx_xmax(idx_range.back());
+    Idx<GridY> idx_ymin(idx_range.front());
+    Idx<GridY> idx_ymax(idx_range.back());
+    std::
+            tie(function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymin),
+                function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymin),
+                function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymax),
+                function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymax))
+            = get_cross_derivatives<
+                    Patch>(idx_range, evaluator_g, const_function_g_coef, coord_transform_handler);
 }
 
 /// @brief Initialise all the cross-derivatives of the given DerivFields from the global spline.
@@ -208,7 +242,6 @@ void initialise_all_cross_derivatives(
              functions_and_derivs.template get<Patches>(),
              evaluator_g,
              const_function_g_coef,
-             ddc::type_seq_rank_v<Patches, PatchSeq>,
              std::get<ddc::type_seq_rank_v<Patches, PatchSeq>>(coord_transforms)),
      ...);
 }
@@ -376,57 +409,18 @@ void check_xy_derivatives(
         CoordTransformType const& coord_transform,
         double const TOL = 5e-13)
 {
-    using Xg = typename BSplinesXg::continuous_dimension_type;
-    using Yg = typename BSplinesYg::continuous_dimension_type;
-
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
-    using DerivX = typename ddc::Deriv<typename Patch::Dim1>;
-    using DerivY = typename ddc::Deriv<typename Patch::Dim2>;
-
-    IdxRange<GridX> idx_range_x(get_idx_range(function_and_derivs));
-    IdxRange<GridY> idx_range_y(get_idx_range(function_and_derivs));
-
-    Idx<DerivX> idx_dx(1);
-    Idx<DerivY> idx_dy(1);
-
-    Idx<GridX> idx_xmin(idx_range_x.front());
-    Idx<GridX> idx_xmax(idx_range_x.back());
-    Idx<GridY> idx_ymin(idx_range_y.front());
-    Idx<GridY> idx_ymax(idx_range_y.back());
-
-    Idx<GridX, GridY> idx_min_min(idx_xmin, idx_ymin);
-    Idx<GridX, GridY> idx_max_min(idx_xmax, idx_ymin);
-    Idx<GridX, GridY> idx_min_max(idx_xmin, idx_ymax);
-    Idx<GridX, GridY> idx_max_max(idx_xmax, idx_ymax);
-
-    auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
-    auto coord_transform_g_to_l_1d_x = coord_transform.x_transform;
-    auto coord_transform_g_to_l_1d_y = coord_transform.y_transform;
-
-    typename Patch::Coord12 coord_min_min(ddc::coordinate(idx_min_min));
-    typename Patch::Coord12 coord_max_min(ddc::coordinate(idx_max_min));
-    typename Patch::Coord12 coord_min_max(ddc::coordinate(idx_min_max));
-    typename Patch::Coord12 coord_max_max(ddc::coordinate(idx_max_max));
-
-    Coord<Xg, Yg> coord_min_min_g(coord_transform_l_to_g(coord_min_min));
-    Coord<Xg, Yg> coord_max_min_g(coord_transform_l_to_g(coord_max_min));
-    Coord<Xg, Yg> coord_min_max_g(coord_transform_l_to_g(coord_min_max));
-    Coord<Xg, Yg> coord_max_max_g(coord_transform_l_to_g(coord_max_max));
-
-    Idx<ddc::Deriv<Xg>, ddc::Deriv<Yg>> idx_deriv(1, 1);
-    double global_deriv_min_min = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_min_g))
-                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_min_g))
-                                  * evaluator_g.deriv(idx_deriv, coord_min_min_g, function_g_coef);
-    double global_deriv_max_min = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_min_g))
-                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_min_g))
-                                  * evaluator_g.deriv(idx_deriv, coord_max_min_g, function_g_coef);
-    double global_deriv_min_max = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_max_g))
-                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_max_g))
-                                  * evaluator_g.deriv(idx_deriv, coord_min_max_g, function_g_coef);
-    double global_deriv_max_max = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_max_g))
-                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_max_g))
-                                  * evaluator_g.deriv(idx_deriv, coord_max_max_g, function_g_coef);
+    Idx<ddc::Deriv<typename Patch::Dim1>> idx_dx(1);
+    Idx<ddc::Deriv<typename Patch::Dim2>> idx_dy(1);
+    IdxRange<GridX, GridY> idx_range(get_idx_range(function_and_derivs));
+    Idx<GridX> idx_xmin(idx_range.front());
+    Idx<GridX> idx_xmax(idx_range.back());
+    Idx<GridY> idx_ymin(idx_range.front());
+    Idx<GridY> idx_ymax(idx_range.back());
+    auto [global_deriv_min_min, global_deriv_max_min, global_deriv_min_max, global_deriv_max_max]
+            = get_cross_derivatives<
+                    Patch>(idx_range, evaluator_g, function_g_coef, coord_transform);
 
     // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
     // we don't need the cross-derivatives for y = ymin. Their value is not checked.
