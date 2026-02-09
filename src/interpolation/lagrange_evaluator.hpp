@@ -390,7 +390,7 @@ private:
                 first_lagrange_knot = first_knot;
             } else {
                 first_lagrange_knot = closest_knot + step;
-                Idx<knot_grid> last_possible = last_knot - (lagrange_basis_type::degree() + 1);
+                Idx<knot_grid> last_possible = last_knot - (lagrange_basis_type::degree());
                 if (first_lagrange_knot > last_possible) {
                     first_lagrange_knot = last_possible;
                 }
