@@ -93,11 +93,11 @@ public:
 
     public:
         /// @brief The type of the knots defining the B-splines.
-        using knot_discrete_dimension_type = NonUniformLagrangeKnots<DDim>;
+        using knot_grid = NonUniformLagrangeKnots<DDim>;
 
     private:
-        IdxRange<knot_discrete_dimension_type> m_knot_domain;
-        IdxRange<knot_discrete_dimension_type> m_break_point_domain;
+        IdxRange<knot_grid> m_knot_domain;
+        IdxRange<knot_grid> m_break_point_domain;
 
         Idx<DDim> m_reference;
 
@@ -142,7 +142,7 @@ public:
          *
          * @return The index range describing the break points.
          */
-        KOKKOS_INLINE_FUNCTION IdxRange<knot_discrete_dimension_type> break_point_domain() const
+        KOKKOS_INLINE_FUNCTION IdxRange<knot_grid> break_point_domain() const
         {
             return m_break_point_domain;
         }
@@ -151,7 +151,7 @@ public:
          *
          * @return The index range including eventual duplicate values.
          */
-        KOKKOS_INLINE_FUNCTION IdxRange<knot_discrete_dimension_type> full_domain() const
+        KOKKOS_INLINE_FUNCTION IdxRange<knot_grid> full_domain() const
         {
             return m_knot_domain;
         }
@@ -170,7 +170,7 @@ public:
         KOKKOS_INLINE_FUNCTION void eval_basis(
                 Span1D<DataType> values,
                 coord_type const& x,
-                Idx<knot_discrete_dimension_type> poly_start) const
+                Idx<knot_grid> poly_start) const
         {
             KOKKOS_ASSERT(values.size() == degree() + 1);
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
@@ -237,11 +237,11 @@ NonUniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
             points[npoints + i] = ddc::coordinate(idx_back)
                                   + (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
         }
-        ddc::init_discrete_space<knot_discrete_dimension_type>(points);
-        m_knot_domain = IdxRange<knot_discrete_dimension_type>(
-                ddc::discrete_space<knot_discrete_dimension_type>().front(),
-                IdxStep<knot_discrete_dimension_type>(break_point_domain.size() + D));
-        m_break_point_domain = m_knot_domain.remove_last(IdxStep<knot_discrete_dimension_type>(D));
+        ddc::init_discrete_space<knot_grid>(points);
+        m_knot_domain = IdxRange<knot_grid>(
+                ddc::discrete_space<knot_grid>().front(),
+                IdxStep<knot_grid>(break_point_domain.size() + D));
+        m_break_point_domain = m_knot_domain.remove_last(IdxStep<knot_grid>(D));
     } else {
         std::size_t npoints = ddc::discrete_space<Grid1D>().size();
         Idx<Grid1D> idx_front = ddc::discrete_space<Grid1D>().front();
@@ -249,10 +249,10 @@ NonUniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
         for (std::size_t i(0); i < npoints; ++i) {
             points[i] = ddc::coordinate(idx_front + i);
         }
-        ddc::init_discrete_space<knot_discrete_dimension_type>(points);
-        m_knot_domain = IdxRange<knot_discrete_dimension_type>(
-                ddc::discrete_space<knot_discrete_dimension_type>().front(),
-                IdxStep<knot_discrete_dimension_type>(break_point_domain.size()));
+        ddc::init_discrete_space<knot_grid>(points);
+        m_knot_domain = IdxRange<knot_grid>(
+                ddc::discrete_space<knot_grid>().front(),
+                IdxStep<knot_grid>(break_point_domain.size()));
         m_break_point_domain = m_knot_domain;
     }
 }

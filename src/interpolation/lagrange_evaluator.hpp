@@ -15,6 +15,7 @@
 template <
         class ExecSpace,
         class MemorySpace,
+        class DataType,
         class LagrangeBasis,
         class InterpolationGrid,
         class LowerExtrapolationRule,
@@ -34,10 +35,11 @@ public:
     /// @brief The discrete dimension representing the B-Lagranges.
     using lagrange_basis_type = LagrangeBasis;
 
-    using basis_domain_type = Basis::Impl<Basis, MemorySpace>::knot_grid;
+    using basis_domain_type =
+            typename LagrangeBasis::template Impl<LagrangeBasis, MemorySpace>::knot_grid;
 
     /// @brief The type of the domain for the 1D evaluation mesh used by this class.
-    using evaluation_domain_type = IdxRange<evaluation_discrete_dimension_type>;
+    using evaluation_domain_type = IdxRange<InterpolationGrid>;
 
     /**
      * @brief The type of the whole domain representing evaluation points.
@@ -61,8 +63,7 @@ public:
     template <
             class BatchedInterpolationGrid,
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationGrid>>>
-    using batch_domain_type
-            = ddc::remove_dims_of_t<BatchedInterpolationGrid, evaluation_discrete_dimension_type>;
+    using batch_domain_type = ddc::remove_dims_of_t<BatchedInterpolationGrid, InterpolationGrid>;
 
     /**
      * @brief The type of the whole spline domain (cartesian product of 1D spline domain
@@ -73,10 +74,8 @@ public:
     template <
             class BatchedInterpolationDDom,
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationDDom>>>
-    using batched_lagrange_domain_type = ddc::replace_dim_of_t<
-            BatchedInterpolationDDom,
-            evaluation_discrete_dimension_type,
-            basis_domain_type>;
+    using batched_lagrange_domain_type
+            = ddc::replace_dim_of_t<BatchedInterpolationDDom, InterpolationGrid, basis_domain_type>;
 
     /// @brief The type of the extrapolation rule at the lower boundary.
     using lower_extrapolation_rule_type = LowerExtrapolationRule;
@@ -105,14 +104,14 @@ public:
                     DataType,
                     LowerExtrapolationRule,
                     Coord<continuous_dimension_type>,
-                    ConstField<DataType, interpolation_domain_type, memory_space>>,
+                    ConstField<DataType, lagrange_domain_type, memory_space>>,
             "LowerExtrapolationRule::operator() has to be callable with usual arguments.");
     static_assert(
             std::is_invocable_r_v<
                     DataType,
                     UpperExtrapolationRule,
                     Coord<continuous_dimension_type>,
-                    ConstField<DataType, interpolation_domain_type, memory_space>>,
+                    ConstField<DataType, lagrange_domain_type, memory_space>>,
             "UpperExtrapolationRule::operator() has to be callable with usual arguments.");
 
     /**
@@ -204,13 +203,13 @@ public:
      *
      * @return The value of the Lagrange function at the desired coordinate.
      */
-    template <class Layout, class... CoordsDims>
+    template <class Layout, class... CoordsDims, class BatchedLagrangeIdxRange>
     KOKKOS_FUNCTION DataType operator()(
             Coord<CoordsDims...> const& coord_eval,
-            ConstField<DataType, interpolation_domain_type, memory_space, Layout> const
-                    func_vals_on_grid) const
+            ConstField<DataType, BatchedLagrangeIdxRange, memory_space, Layout> const lagrange_coef)
+            const
     {
-        return eval(coord_eval, Lagrange_coef);
+        return eval(coord_eval, lagrange_coef);
     }
 
     /**
@@ -252,12 +251,14 @@ public:
         evaluation_domain_type const evaluation_domain(lagrange_eval.domain());
         batch_domain_type<BatchedInterpolationGrid> const batch_domain(lagrange_eval.domain());
 
+        using BatchedInterpolationIdx =
+                typename batch_domain_type<BatchedInterpolationGrid>::discrete_element_type;
+
         ddc::parallel_for_each(
                 "Lagrange_evaluate",
                 exec_space(),
                 batch_domain,
-                KOKKOS_CLASS_lAMBDA(typename batch_domain_type<
-                                    BatchedInterpolationGrid>::discrete_element_type const j) {
+                KOKKOS_CLASS_LAMBDA(BatchedInterpolationIdx const j) {
                     auto const lagrange_eval_1D = lagrange_eval[j];
                     auto const coords_eval_1D = coords_eval[j];
                     auto const lagrange_coef_1D = lagrange_coef[j];
@@ -290,7 +291,7 @@ public:
             Field<DataType, BatchedInterpolationGrid, memory_space, Layout1> const spline_eval,
             ConstField<
                     DataType,
-                    batched_spline_domain_type<BatchedInterpolationGrid>,
+                    batched_lagrange_domain_type<BatchedInterpolationGrid>,
                     memory_space,
                     Layout2> const spline_coef) const
     {
@@ -298,7 +299,7 @@ public:
         batch_domain_type<BatchedInterpolationGrid> const batch_domain(spline_eval.domain());
 
         ddc::parallel_for_each(
-                "ddc_splines_evaluate",
+                "lagrange_evaluate",
                 exec_space(),
                 batch_domain,
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type<
@@ -316,7 +317,7 @@ private:
     template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType
     eval(Coord<CoordsDims...> const& coord_eval,
-         ConstField<DataType, spline_domain_type, memory_space, Layout> const spline_coef) const
+         ConstField<DataType, lagrange_domain_type, memory_space, Layout> const spline_coef) const
     {
         Coord<continuous_dimension_type> coord_eval_interest(coord_eval);
         if constexpr (lagrange_basis_type::is_periodic()) {
@@ -344,7 +345,8 @@ private:
     KOKKOS_INLINE_FUNCTION DataType eval_no_bc(
             Idx<DerivDims...> const& deriv_order,
             Coord<CoordsDims...> const& coord_eval,
-            ConstField<DataType, spline_domain_type, Layout, memory_space> const spline_coef) const
+            ConstField<DataType, lagrange_domain_type, memory_space, Layout> const spline_coef)
+            const
     {
         using deriv_dim = ddc::Deriv<continuous_dimension_type>;
         using knot_grid = std::conditional_t<
@@ -353,9 +355,9 @@ private:
                 NonUniformLagrangeKnots<LagrangeBasis>>;
         static_assert(
                 sizeof...(DerivDims) == 0
-                        || type_seq_same_v<
-                                detail::TypeSeq<DerivDims...>,
-                                detail::TypeSeq<deriv_dim>>,
+                        || ddc::type_seq_same_v<
+                                ddc::detail::TypeSeq<DerivDims...>,
+                                ddc::detail::TypeSeq<deriv_dim>>,
                 "The only valid dimension for deriv_order is Deriv<Dim>");
 
         std::array<DataType, lagrange_basis_type::degree() + 1> vals_ptr;
@@ -364,15 +366,16 @@ private:
                 Kokkos::extents<std::size_t, lagrange_basis_type::degree() + 1>> const
                 vals(vals_ptr.data());
         Coord<continuous_dimension_type> const coord_eval_interest(coord_eval);
-        Idx<knot_grid> closest_knot = getclosest(x);
+        Idx<knot_grid> closest_knot = getclosest(coord_eval);
         Idx<knot_grid> first_knot
                 = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
         Idx<knot_grid> last_knot
-                = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
+                = ddc::discrete_space<LagrangeBasis>().break_point_domain().back();
+        // The step from the closest knot to the start of the domain
         IdxStep<knot_grid> step(
-                -lagrange_basis_type::degree() / 2
-                - (lagrange_basis_type::degree() % 2)
-                          * static_cast<int>(ddc::coordinate(closest_knot) > x));
+                -static_cast<int>(lagrange_basis_type::degree() / 2) // back over half the domain
+                - static_cast<int>(lagrange_basis_type::degree() % 2) // ensure coord is in the central cell if even number of points
+                          * static_cast<int>(ddc::coordinate(closest_knot) > coord_eval));
         Idx<knot_grid> first_lagrange_knot;
 
         if constexpr (lagrange_basis_type::is_periodic()) {
@@ -395,41 +398,40 @@ private:
 
         static_assert(sizeof...(DerivDims) == 0);
         ddc::discrete_space<lagrange_basis_type>()
-                .eval_basis(vals, first_lagrange_knot, coord_eval_interest);
+                .eval_basis(vals, coord_eval_interest, first_lagrange_knot);
 
         DataType y = 0.0;
         for (std::size_t i = 0; i < lagrange_basis_type::degree() + 1; ++i) {
-            y += spline_coef(Idx<lagrange_basis_type>(jmin + i)) * vals[i];
+            y += spline_coef(first_lagrange_knot + i) * vals[i];
         }
         return y;
     }
 
-    KOKKOS_INLINE_FUNCTION auto getclosest(coord_type x) const
+    KOKKOS_INLINE_FUNCTION auto getclosest(Coord<continuous_dimension_type> x_interp) const
     {
         using knot_grid = std::conditional_t<
                 LagrangeBasis::is_uniform(),
                 UniformLagrangeKnots<LagrangeBasis>,
                 NonUniformLagrangeKnots<LagrangeBasis>>;
         Idx<knot_grid> first = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
-        if constexpr (ddc::is_uniform_point_sampling_v<GridInterp>) {
-            int knot_offset = static_cast<int>(Kokkos::round(
-                    (x - ddc::coordinate(first))
-                    / ddc::step<decltype(ddc::discrete_space<LagrangeBasis>())::knot_grid>()));
+        if constexpr (ddc::is_uniform_point_sampling_v<InterpolationGrid>) {
+            int knot_offset = static_cast<int>(
+                    Kokkos::round((x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>()));
             return first + knot_offset;
         } else {
             Idx<knot_grid> last = ddc::discrete_space<LagrangeBasis>().break_point_domain().back();
             KOKKOS_ASSERT(x_interp >= ddc::discrete_space<LagrangeBasis>().rmin());
             KOKKOS_ASSERT(x_interp <= ddc::discrete_space<LagrangeBasis>().rmax());
-            IdxInterp elm_cell = begin + (end - begin) / 2;
+            Idx<knot_grid> elm_cell = first + (last - first) / 2;
             while (x_interp < ddc::coordinate(elm_cell)
-                   || x_interp > ddc::coordinate(elm_cell + IdxStepInterp(1))) {
+                   || x_interp > ddc::coordinate(elm_cell + IdxStep<knot_grid>(1))) {
                 if (x_interp < ddc::coordinate(elm_cell)) {
-                    end = elm_cell;
+                    last = elm_cell;
                 } else {
-                    begin = elm_cell;
+                    first = elm_cell;
                 }
 
-                elm_cell = begin + (end - begin) / 2;
+                elm_cell = first + (last - first) / 2;
             }
             return elm_cell;
         }

@@ -171,10 +171,15 @@ public:
          */
         KOKKOS_INLINE_FUNCTION void eval_basis(
                 Span1D<DataType> values,
-                coord_type const& x,
+                coord_type x,
                 Idx<knot_grid> poly_start) const
         {
             KOKKOS_ASSERT(values.size() == degree() + 1);
+            if constexpr (is_periodic()) {
+                if (x < ddc::coordinate(poly_start)) {
+                    x = x + length();
+                }
+            }
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
             KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
@@ -240,9 +245,9 @@ UniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
 
     // Calculate weights
     DataType dx = ddc::discrete_space<knot_grid>().step();
-    for (std::size_t i(0); i < D + 1; ++i) {
+    for (int i(0); i < D + 1; ++i) {
         DataType numerator = dx;
-        for (std::size_t j(0); j < D + 1; ++j) {
+        for (int j(0); j < D + 1; ++j) {
             if (i == j)
                 continue;
             numerator *= (i - j);

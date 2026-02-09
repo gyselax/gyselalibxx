@@ -2,6 +2,8 @@
 
 #pragma once
 
+#include "ddc_aliases.hpp"
+
 /**
  * @brief A builder class for copying data.
  *
@@ -32,7 +34,7 @@ public:
     /// @brief The type of the domain for the 1D interpolation mesh used by this class.
     using interpolation_domain_type = ddc::DiscreteDomain<interpolation_discrete_dimension_type>;
 
-    using basis_domain_type = Basis::Impl<Basis, MemorySpace>::knot_grid;
+    using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
 
     /**
      * @brief The type of the whole domain representing interpolation points.
@@ -76,6 +78,11 @@ public:
             interpolation_discrete_dimension_type,
             basis_domain_type>;
 
+    template <
+            class BatchedInterpolationGrid,
+            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationGrid>>>
+    using batched_derivs_domain_type = ddc::
+            remove_dims_of_t<BatchedInterpolationGrid, interpolation_discrete_dimension_type>;
 
 public:
     /// @brief The number of equations defining the boundary condition at the lower bound.
@@ -106,13 +113,13 @@ public:
      * @param[in] derivs_xmax The values of the derivatives at the upper boundary
      * (used only with BoundCond::HERMITE upper boundary condition).
      */
-    template <class Layout, class BatchedInterpolationGrid>
+    template <class DataType, class Layout, class BatchedInterpolationGrid>
     void operator()(
             Field<DataType,
                   batched_basis_domain_type<BatchedInterpolationGrid>,
                   memory_space,
                   Layout> coeffs,
-            ConstField<DataType, BatchedInterpolationGrid, Layout, memory_space> vals,
+            ConstField<DataType, BatchedInterpolationGrid, memory_space, Layout> vals,
             std::optional<ConstField<
                     DataType,
                     batched_derivs_domain_type<BatchedInterpolationGrid>,
@@ -127,14 +134,19 @@ public:
             = std::nullopt) const
     {
         IdxRange<basis_domain_type> bp_idx_range
-                = ddc::discrete_domain<Basis>().break_point_domain();
-        ddc::parallel_deepcopy(coeffs[bp_idx_range], vals);
+                = ddc::discrete_space<Basis>().break_point_domain();
+        Kokkos::deep_copy(
+                coeffs[bp_idx_range].allocation_kokkos_view(),
+                vals.allocation_kokkos_view());
         if constexpr (Basis::is_uniform()) {
             IdxRange<basis_domain_type> extended_domain(
-                    ddc::discrete_domain<Basis>().full_domain().remove_first(bp_idx_range));
-            IdxRange<basis_domain_type>
-                    repeat_domain(bp_idx_range.front(), extended_domain.extents());
-            ddc::parallel_deepcopy(coeffs[extended_domain], vals[repeat_domain]);
+                    ddc::discrete_space<Basis>().full_domain().remove_first(
+                            bp_idx_range.extents()));
+            typename BatchedInterpolationGrid::discrete_vector_type nrepeat(extended_domain.size());
+            BatchedInterpolationGrid repeat_domain(get_idx_range(vals).take_first(nrepeat));
+            Kokkos::deep_copy(
+                    coeffs[extended_domain].allocation_kokkos_view(),
+                    vals[repeat_domain].allocation_kokkos_view());
         }
     }
 };
