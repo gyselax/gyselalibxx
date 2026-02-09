@@ -143,7 +143,7 @@ public:
      *
      * @return A double with the value of the determinant of the Jacobian matrix.
      */
-    KOKKOS_FUNCTION double jacobian(Coord<X, Y> const& coord)
+    KOKKOS_FUNCTION double jacobian(Coord<X, Y> const& coord) const
     {
         const double x = ddc::get<X>(coord) - ddc::get<X>(m_o_point);
         const double y = ddc::get<Y>(coord) - ddc::get<Y>(m_o_point);

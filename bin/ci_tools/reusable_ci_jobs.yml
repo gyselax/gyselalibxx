@@ -51,7 +51,7 @@ setup_env_mr:
   script: |
     set -x
     git config --global --add safe.directory /builds/gysela-developpers/gyselalibxx/vendor/kokkos
-    if [[ "${{ matrix.toolchain}}" == *"openmp"* ]]; then
+    if [[ "${TOOLCHAIN}" == *"openmp"* ]]; then
       export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/openmp
       echo "Using OpenMP Kokkos"
     else

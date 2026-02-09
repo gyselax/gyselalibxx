@@ -102,6 +102,7 @@ class scattered_coord:
 
     def __init__(self,
                  data_dir,
+                 *,
                  scatter_pattern_file_regexp,
                  scatter_pattern_dataset_regexp,
                  scatter_pattern_index,

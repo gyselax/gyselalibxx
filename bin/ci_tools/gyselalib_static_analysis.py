@@ -280,7 +280,7 @@ def search_for_unnecessary_auto(file):
             if not any(v['str'] in chain(mirror_functions, auto_functions) for v in config.data[start:end]):
                 report_error(ERROR, file, config.data[start]['linenr'], f"Please use explicit types instead of auto ({var_name})")
 
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
 
         # Find auto in arguments of lambda functions
@@ -440,7 +440,7 @@ def search_for_uid(file):
     Test for use of uid(). The DDC internal unique identifier should never be used directly.
     """
     for config in file.configs:
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
         uid_usage = [d.attrib for d in config.data_xml.findall(".token[@str='uid']") if Path(d.attrib['file']) == file.file]
         uid_indices = [config.data.index(d) for d in uid_usage]
@@ -511,8 +511,11 @@ def update_aliases(all_files):
             if include_file == 'species_info.hpp':
                 file.aliases.update(spec_file.aliases)
             elif include_file == 'geometry.hpp':
-                relevant_geom = next(p for p in file.file.parts if p.startswith('geometry'))
-                geom_file = next(f for f in geom_files if relevant_geom in f.file.parts)
+                relevant_geom = next((p for p in file.file.parts if p.startswith('geometry')), file.file.parent)
+                if isinstance(relevant_geom, Path):
+                    geom_file = next(f for f in geom_files if f.file.is_relative_to(relevant_geom))
+                else:
+                    geom_file = next(f for f in geom_files if relevant_geom in f.file.parts)
                 file.aliases.update(geom_file.aliases)
             elif include_file in multipatch_geom_file_names:
                 file.aliases.update(multipatch_geom_file_names[include_file].aliases)
@@ -527,7 +530,7 @@ def check_kokkos_lambda_use(file):
     - Check that class variables are not used in lambda functions passed to ddc::parallel_X functions.
     """
     for config in file.configs:
-        if not config.data_xml:
+        if config.data_xml is None:
             continue
 
         for p in parallel_functions:

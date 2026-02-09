@@ -41,15 +41,12 @@
  *
  * @return A rvalue FieldMem to the modified coefficients  @f$\{q_{ij}| det(J(r_i,\theta_j))|\}_{ij} @f$.
  */
-template <class Mapping, class IdxRangeCoeffs, class ExecSpace>
+template <concepts::MappingWithJacobian Mapping, class IdxRangeCoeffs, class ExecSpace>
 DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space> compute_coeffs_on_mapping(
         ExecSpace exec_space,
         Mapping& mapping,
         DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space>&& coefficients_alloc)
 {
-    static_assert(is_mapping_v<Mapping>);
-    static_assert(has_jacobian_v<Mapping>);
-
     using CoordJ = typename Mapping::CoordJacobian;
     using IdxJ = find_idx_t<CoordJ, IdxRangeCoeffs>;
 

@@ -49,3 +49,14 @@ git submodule update --init
 ```sh
 git submodule update --init
 ```
+
+### Q: I accidentally committed a different version of a submodule how do I get back to the version in the devel branch?
+
+**A:** Inside git, a submodule is viewed as a file containing the SHA of the commit that the submodule is pinned to. This object can be manipulated in git like any other file. Therefore to get the version of the submodule that appears on the `devel` branch you simply run:
+
+```sh
+git fetch origin # Make sure that you have an up-to-date version of the branch
+git checkout origin/devel -- <submodule> # Revert to the expected version of the submodule
+git commit -m "Revert accidental change to submodule" <submodule> # Save the version change
+git submodule update submodule # Update your local copy of the submodule to the new version
+```

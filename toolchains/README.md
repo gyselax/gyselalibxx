@@ -61,6 +61,7 @@ The folder [toolchains/](https://github.com/gyselax/gyselalibxx/tree/devel/toolc
 - `persee/v100` : Designed for use with the V100 hardware available on IRFM's Persee cluster.
 - `persee/xeon` : Designed for use with the CPU hardware available on IRFM's Persee cluster.
 - `v100.ruche` : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster.
+- `a100.raven.spack` : Designed for use with the A100 hardware available on MPCDF raven cluster.
 
 ## Environment Setup
 
