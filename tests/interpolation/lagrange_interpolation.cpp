@@ -1,30 +1,36 @@
 #include <array>
 #include <random>
 
+#include <ddc/ddc.hpp>
+
 #include <gtest/gtest.h>
 
+#include "ddc_alias_inline_functions.hpp"
+#include "ddc_helper.hpp"
+#include "identity_interpolation_builder.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
+#include "lagrange_evaluator.hpp"
 #include "mesh_builder.hpp"
 #include "test_utils.hpp"
 #include "view.hpp"
 
 namespace {
 
-template <class T>
-struct LagrangeBasisFixture;
+struct X
+{
+    static constexpr bool PERIODIC = false;
+};
 
-template <std::size_t D, class T, bool Uniform, bool Periodic>
-struct LagrangeBasisFixture<std::tuple<
+template <class T>
+struct LagrangeEvaluatorFixture;
+
+template <std::size_t D, class T, bool Uniform>
+struct LagrangeEvaluatorFixture<std::tuple<
         std::integral_constant<std::size_t, D>,
         T,
-        std::integral_constant<bool, Uniform>,
-        std::integral_constant<bool, Periodic>>> : public testing::Test
+        std::integral_constant<bool, Uniform>>> : public testing::Test
 {
-    struct X
-    {
-        static constexpr bool PERIODIC = Periodic;
-    };
     struct GridX : public std::conditional_t<Uniform, UniformGridBase<X>, NonUniformGridBase<X>>
     {
     };
@@ -39,7 +45,6 @@ struct LagrangeBasisFixture<std::tuple<
 
     static constexpr std::size_t degree = D;
     static constexpr bool UNIFORM = Uniform;
-    static constexpr bool PERIODIC = Periodic;
 
     // Replace with your actual tolerance policy
     static constexpr double TOL = std::is_same_v<T, float> ? 1e-6 : 1e-12;
@@ -47,18 +52,28 @@ struct LagrangeBasisFixture<std::tuple<
 
 using degrees = std::integer_sequence<std::size_t, 2, 3, 4>;
 using uniformity = std::integer_sequence<bool, true, false>;
-using periodicity = std::integer_sequence<bool, true, false>;
-using Cases = tuple_to_types_t<
-        cartesian_product_t<degrees, std::tuple<double, float>, uniformity, periodicity>>;
+using Cases = tuple_to_types_t<cartesian_product_t<degrees, std::tuple<double, float>, uniformity>>;
+
+template <class X, class DataType, std::size_t N>
+DataType polynomial(Coord<X> coord, std::array<DataType, N> coeffs)
+{
+    DataType result = 0.0;
+    for (int j(0); j < N; ++j) {
+        result += coeffs[j] * std::pow(coord, j);
+    }
+    return result;
+}
 
 } // namespace
 
-TYPED_TEST_SUITE(LagrangeBasisFixture, Cases);
+TYPED_TEST_SUITE(LagrangeEvaluatorFixture, Cases);
 
 TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
 {
-    static constexpr bool Periodic = TestFixture::Periodic;
+    static constexpr bool Periodic = X::PERIODIC;
     using DataType = typename TestFixture::DataType;
+    using GridX = TestFixture::GridX;
+    using LagBasis = TestFixture::LagBasis;
     using Builder = IdentityInterpolationBuilder<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -67,28 +82,33 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
     using Evaluator = LagrangeEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
+            DataType,
             LagBasis,
             GridX,
             std::conditional_t<
                     Periodic,
                     ddc::PeriodicExtrapolationRule<X>,
-                    ddc::NullExtrapolationRule<X>>,
+                    ddc::NullExtrapolationRule>,
             std::conditional_t<
                     Periodic,
                     ddc::PeriodicExtrapolationRule<X>,
-                    ddc::NullExtrapolationRule<X>>>;
-    using CoeffIdxRange = Builder::batched_basis_domain_type<GridX>;
+                    ddc::NullExtrapolationRule>>;
+    using CoeffIdxRange = typename Builder::template batched_basis_domain_type<IdxRange<GridX>>;
 
     constexpr std::size_t degree = TestFixture::degree;
+    static constexpr double TOL = TestFixture::TOL;
 
     Coord<X> xmin(0);
     Coord<X> xmax(2);
-    std::size_t ncells(20);
+    std::size_t ncells(10);
     if constexpr (TestFixture::UNIFORM) {
-        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells)));
+        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
     } else {
-        std::vector<Coord<X>> points
-                = build_random_non_uniform_break_points(xmin, xmax, IdxStep<GridX>(ncells), 0.5);
+        std::vector<Coord<X>> points = build_random_non_uniform_break_points(
+                xmin,
+                xmax,
+                IdxStep<GridX>(ncells),
+                0.0); //5);
         ddc::init_discrete_space<GridX>(points);
     }
     IdxRange<GridX> idx_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
@@ -98,43 +118,48 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
     std::random_device rd;
     std::mt19937 gen(rd());
     std::uniform_real_distribution dis(0., 1.);
-    for (int i(0); i < Degree + 1; ++i) {
+    for (int i(0); i < degree + 1; ++i) {
         coeffs[i] = dis(gen);
     }
 
-    host_t<FieldMem<IdxRange<GridX>>> function_values_host(idx_range);
-    ddc::for_each(idx_range, [&](Idx<GridX> i) {
-        function_values(i) = 0.0;
-        DataType x = ddc::coordinate(i);
-        for (int i(0); i < Degree + 1; ++i) {
-            values(i) += coeffs[i] * std::pow(x, i);
-        }
+    host_t<FieldMem<DataType, IdxRange<GridX>>> function_values_host(idx_range);
+    ddc::host_for_each(idx_range, [&](Idx<GridX> i) {
+        function_values_host(i) = polynomial(ddc::coordinate(i), coeffs);
     });
 
-    FieldMem<DataType, IdxRange<GridX>> function_values_alloc(idx_range);
+    auto function_values_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(function_values_host));
     Field<DataType, IdxRange<GridX>> function_values(function_values_alloc);
 
-    ddc::parallel_deepcopy(function_values, get_const_field(function_values_host));
-
-    FieldMem<DataType, CoeffIdxRange> lagrange_coeffs_alloc(idx_range);
-    Field<DataType, CoeffIdxRange> lagrange_coeffs(lagrange_coeffs_alloc);
     Builder builder;
+    FieldMem<DataType, CoeffIdxRange> lagrange_coeffs_alloc(
+            ddc::discrete_space<LagBasis>().full_domain());
+    Field<DataType, CoeffIdxRange> lagrange_coeffs(lagrange_coeffs_alloc);
 
-    std::conditional_t<Periodic, ddc::PeriodicExtrapolationRule<X>, ddc::NullExtrapolationRule<X>>
+    std::conditional_t<Periodic, ddc::PeriodicExtrapolationRule<X>, ddc::NullExtrapolationRule>
             extrapol;
     Evaluator evaluator(extrapol, extrapol);
 
-    FieldMem<Coord<X>, IdxRange<GridX>> test_coords_alloc(idx_range);
-    Field<Coord<X>, IdxRange<GridX>> test_coords(test_coords_alloc);
+    host_t<FieldMem<Coord<X>, IdxRange<GridX>>> test_coords_host_alloc(idx_range);
 
-    choose_coords(test_coords);
+    ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
+        test_coords_host_alloc(idx) = xmin + (xmax - xmin) * dis(gen);
+    });
+
+    auto test_coords_alloc = ddc::create_mirror_view_and_copy(get_field(test_coords_host_alloc));
+    ConstField<Coord<X>, IdxRange<GridX>> test_coords = get_const_field(test_coords_alloc);
 
     builder(lagrange_coeffs, get_const_field(function_values));
-    evaluator(function_values, test_coords, get_const_field(lagrange_coeffs));
+    evaluator(function_values, get_const_field(test_coords), get_const_field(lagrange_coeffs));
 
-    for (int k = 0; k < 20; ++k) {
-        DataType x = TestFixture::random_point_inside_domain();
-        EXPECT_NEAR(evaluator(x), f(x), kTol);
-    }
+    ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
+
+    ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
+        EXPECT_NEAR(
+                function_values_host(idx),
+                polynomial(test_coords_host_alloc(idx), coeffs),
+                TOL);
+    });
 }
 

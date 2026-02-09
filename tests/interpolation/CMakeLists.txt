@@ -78,20 +78,21 @@ foreach(CONTINUITY RANGE -1 1)
 endforeach()
 
 
-add_executable(lagrange_bsplines_tests
+add_executable(lagrange_tests
     ../main.cpp
     lagrange_bsplines.cpp
+    lagrange_interpolation.cpp
 )
-target_link_libraries(lagrange_bsplines_tests
+target_link_libraries(lagrange_tests
     PUBLIC
         GTest::gtest
         GTest::gmock
         gslx::interpolation
 )
-target_include_directories(lagrange_bsplines_tests
+target_include_directories(lagrange_tests
     PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/.."
 )
 
-gtest_discover_tests(lagrange_bsplines_tests DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(lagrange_tests DISCOVERY_MODE PRE_TEST)
 
