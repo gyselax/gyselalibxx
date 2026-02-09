@@ -179,7 +179,7 @@ using AllBSpls = ddc::detail::
         TypeSeq<BSplinesX<1>, BSplinesX<2>, BSplinesX<3>, BSplinesY<1>, BSplinesY<2>, BSplinesY<3>>;
 
 template <int I>
-struct MatchingPatchTransform
+struct MatchingBoundPatchTransform
 {
     using XTransform = LinearCoordTransform<Xg, X<I>>;
     using YTransform = LinearCoordTransform<Yg, Y<I>>;
@@ -192,7 +192,7 @@ struct MatchingPatchTransform
             XTransform,
             YTransform>
             coord_transform;
-    MatchingPatchTransform(XTransform x_transform, YTransform y_transform)
+    MatchingBoundPatchTransform(XTransform x_transform, YTransform y_transform)
         : x_transform(x_transform)
         , y_transform(y_transform)
         , coord_transform(x_transform, y_transform)
@@ -201,37 +201,41 @@ struct MatchingPatchTransform
 };
 
 template <int I>
-struct AlignedPatchTransform : public MatchingPatchTransform<I>
+struct AlignedPatchTransform : public MatchingBoundPatchTransform<I>
 {
-    AlignedPatchTransform(Coord<Xg, Yg> origin)
-        : MatchingPatchTransform<I>(
-                typename MatchingPatchTransform<I>::
-                        XTransform(Coord<Xg>(origin), convert_dim<X<I>>(Coord<Xg>(origin)), 1.0),
-                typename MatchingPatchTransform<I>::
-                        YTransform(Coord<Yg>(origin), convert_dim<Y<I>>(Coord<Yg>(origin)), 1.0))
+    AlignedPatchTransform(Coord<Xg, Yg> bottom_left, Coord<Xg, Yg> top_right)
+        : MatchingBoundPatchTransform<I>(
+                typename MatchingBoundPatchTransform<I>::XTransform(
+                        Coord<Xg>(bottom_left),
+                        Coord<X<I>>(0),
+                        ddc::select<Xg>(top_right - bottom_left)),
+                typename MatchingBoundPatchTransform<I>::YTransform(
+                        Coord<Yg>(bottom_left),
+                        Coord<Y<I>>(0),
+                        ddc::select<Yg>(top_right - bottom_left)))
     {
     }
 };
 
 template <int I>
-struct ReversePatchTransform : public MatchingPatchTransform<I>
+struct ReversePatchTransform : public MatchingBoundPatchTransform<I>
 {
-    ReversePatchTransform(Coord<Xg, Yg> origin)
-        : MatchingPatchTransform<I>(
-                typename MatchingPatchTransform<I>::XTransform(
-                        Coord<Xg>(origin),
-                        convert_dim<X<I>>(Coord<Xg>(origin) + 1.0),
-                        -1.0),
-                typename MatchingPatchTransform<I>::YTransform(
-                        Coord<Yg>(origin),
-                        convert_dim<Y<I>>(Coord<Yg>(origin) + 1.0),
-                        -1.0))
+    ReversePatchTransform(Coord<Xg, Yg> bottom_left, Coord<Xg, Yg> top_right)
+        : MatchingBoundPatchTransform<I>(
+                typename MatchingBoundPatchTransform<I>::XTransform(
+                        Coord<Xg>(top_right),
+                        Coord<X<I>>(0),
+                        -ddc::select<Xg>(top_right - bottom_left)),
+                typename MatchingBoundPatchTransform<I>::YTransform(
+                        Coord<Yg>(top_right),
+                        Coord<Y<I>>(0),
+                        -ddc::select<Yg>(top_right - bottom_left)))
     {
     }
 };
 
 template <int I>
-struct BoundChangePatchTransform
+struct ChangeBoundPatchTransform
 {
     using XTransform = LinearCoordTransform<Xg, Y<I>>;
     using YTransform = LinearCoordTransform<Yg, X<I>>;
@@ -244,40 +248,38 @@ struct BoundChangePatchTransform
             XTransform,
             YTransform>
             coord_transform;
-    BoundChangePatchTransform(XTransform x_transform, YTransform y_transform)
-        : x_transform(x_transform)
-        , y_transform(y_transform)
+    ChangeBoundPatchTransform(
+            Coord<Xg, Yg> origin_g,
+            Coord<X<I>, Y<I>> origin_l,
+            double x_factor,
+            double y_factor)
+        : x_transform(Coord<Xg>(origin_g), Coord<Y<I>>(origin_l), x_factor)
+        , y_transform(Coord<Yg>(origin_g), Coord<X<I>>(origin_l), y_factor)
         , coord_transform(x_transform, y_transform)
     {
     }
 };
 
-template <int I>
-struct BoundChangeXPatchTransform : public BoundChangePatchTransform<I>
+struct ChangeBound1Transform : ChangeBoundPatchTransform<1>
 {
-    BoundChangeXPatchTransform(Coord<Xg, Yg> origin)
-        : BoundChangePatchTransform<I>(
-                typename BoundChangePatchTransform<I>::XTransform(
-                        Coord<Xg>(origin),
-                        convert_dim<Y<I>>(Coord<Xg>(origin) + 1.0),
-                        -1.0),
-                typename BoundChangePatchTransform<I>::
-                        YTransform(Coord<Yg>(origin), convert_dim<X<I>>(Coord<Yg>(origin)), -1.0))
+    ChangeBound1Transform(Coord<Xg, Yg> bottom_left, Coord<Xg, Yg> top_right)
+        : ChangeBoundPatchTransform<1>(
+                Coord<Xg, Yg>(ddc::select<Xg>(top_right), ddc::select<Yg>(bottom_left)),
+                Coord<X<1>, Y<1>>(0, 0),
+                -ddc::select<Xg>(top_right - bottom_left),
+                ddc::select<Yg>(top_right - bottom_left))
     {
     }
 };
 
-template <int I>
-struct BoundChangeYPatchTransform : public BoundChangePatchTransform<I>
+struct ChangeBound3Transform : ChangeBoundPatchTransform<3>
 {
-    BoundChangeYPatchTransform(Coord<Xg, Yg> origin)
-        : BoundChangePatchTransform<I>(
-                typename BoundChangePatchTransform<I>::
-                        XTransform(Coord<Xg>(origin), convert_dim<Y<I>>(Coord<Xg>(origin)), -1.0),
-                typename BoundChangePatchTransform<I>::YTransform(
-                        Coord<Yg>(origin),
-                        convert_dim<X<I>>(Coord<Yg>(origin) + 1.0),
-                        -1.0))
+    ChangeBound3Transform(Coord<Xg, Yg> bottom_left, Coord<Xg, Yg> top_right)
+        : ChangeBoundPatchTransform<3>(
+                Coord<Xg, Yg>(ddc::select<Xg>(bottom_left), ddc::select<Yg>(top_right)),
+                Coord<X<3>, Y<3>>(0, 0),
+                ddc::select<Xg>(top_right - bottom_left),
+                -ddc::select<Yg>(top_right - bottom_left))
     {
     }
 };
@@ -365,7 +367,7 @@ struct ChangeBound1
     using OutsideInterface1 = Interface<OutsideEdge, NorthEdge<1>, true>;
     using OutsideInterface3 = Interface<EastEdge<3>, OutsideEdge, true>;
 
-    using CoordTransform1 = BoundChangeXPatchTransform<1>;
+    using CoordTransform1 = ChangeBound1Transform;
     using CoordTransform2 = AlignedPatchTransform<2>;
     using CoordTransform3 = AlignedPatchTransform<3>;
 
@@ -392,7 +394,7 @@ struct ChangeBound3
 
     using CoordTransform1 = AlignedPatchTransform<1>;
     using CoordTransform2 = AlignedPatchTransform<2>;
-    using CoordTransform3 = BoundChangeYPatchTransform<3>;
+    using CoordTransform3 = ChangeBound3Transform;
 
     using Connectivity = MultipatchConnectivity<
             NorthInterface1,
@@ -458,9 +460,15 @@ public:
         , idx_range_xg(SplineInterpPointsXg::get_domain<GridXg>())
         , idx_range_yg(SplineInterpPointsYg::get_domain<GridYg>())
         , idx_range_xy_g(idx_range_xg, idx_range_yg)
-        , coord_transform_1(Coord<Xg, Yg>(xg_min, yg_min))
-        , coord_transform_2(Coord<Xg, Yg>(xg_min + (xg_max - xg_min) / 3, yg_min))
-        , coord_transform_3(Coord<Xg, Yg>(xg_min + 2 * (xg_max - xg_min) / 3, yg_min))
+        , coord_transform_1(
+                  Coord<Xg, Yg>(xg_min, yg_min),
+                  Coord<Xg, Yg>(ddc::coordinate(Idx<GridXg>(ncells_per_patch)), yg_max))
+        , coord_transform_2(
+                  Coord<Xg, Yg>(ddc::coordinate(Idx<GridXg>(ncells_per_patch)), yg_min),
+                  Coord<Xg, Yg>(ddc::coordinate(Idx<GridXg>(2 * ncells_per_patch)), yg_max))
+        , coord_transform_3(
+                  Coord<Xg, Yg>(ddc::coordinate(Idx<GridXg>(2 * ncells_per_patch)), yg_min),
+                  Coord<Xg, Yg>(ddc::coordinate(Idx<GridXg>(3 * ncells_per_patch)), yg_max))
     {
     }
 
@@ -472,22 +480,28 @@ public:
         IdxRange<GridYg> idx_range_yg(SplineInterpPointsYg::get_domain<GridYg>());
         IdxStep<GridXg> nbreaks_per_patch(ncells_per_patch + 1);
 
+        IdxRange<GridXg> idx_range_xg_1 = idx_range_xg.take_first(nbreaks_per_patch);
+        IdxRange<GridXg> idx_range_xg_2
+                = idx_range_xg.remove(nbreaks_per_patch - 1, nbreaks_per_patch - 1);
+        IdxRange<GridXg> idx_range_xg_3 = idx_range_xg.take_last(nbreaks_per_patch);
+
         init_patch(
-                typename PatchLayout::CoordTransform1(Coord<Xg, Yg>(xg_min, yg_min)),
-                idx_range_xg.take_first(nbreaks_per_patch),
+                typename PatchLayout::CoordTransform1(
+                        Coord<Xg, Yg>(ddc::coordinate(idx_range_xg_1.front()), yg_min),
+                        Coord<Xg, Yg>(ddc::coordinate(idx_range_xg_1.back()), yg_max)),
+                idx_range_xg_1,
                 idx_range_yg);
         init_patch(
-                typename PatchLayout::CoordTransform2(Coord<Xg, Yg>(
-                        ddc::coordinate(idx_range_xg.front() + IdxStep<GridXg>(ncells_per_patch)),
-                        yg_min)),
-                idx_range_xg.remove(nbreaks_per_patch - 1, nbreaks_per_patch - 1),
+                typename PatchLayout::CoordTransform2(
+                        Coord<Xg, Yg>(ddc::coordinate(idx_range_xg_2.front()), yg_min),
+                        Coord<Xg, Yg>(ddc::coordinate(idx_range_xg_2.back()), yg_max)),
+                idx_range_xg_2,
                 idx_range_yg);
         init_patch(
-                typename PatchLayout::CoordTransform3(Coord<Xg, Yg>(
-                        ddc::coordinate(
-                                idx_range_xg.front() + IdxStep<GridXg>(2 * ncells_per_patch)),
-                        yg_min)),
-                idx_range_xg.take_last(nbreaks_per_patch),
+                typename PatchLayout::CoordTransform3(
+                        Coord<Xg, Yg>(ddc::coordinate(idx_range_xg_3.front()), yg_min),
+                        Coord<Xg, Yg>(ddc::coordinate(idx_range_xg_3.back()), yg_max)),
+                idx_range_xg_3,
                 idx_range_yg);
     }
 
@@ -496,7 +510,8 @@ public:
         std::vector<Coord<Xg>> break_points_xg = build_random_non_uniform_break_points(
                 xg_min,
                 xg_max,
-                IdxStep<GridXg>(ncells_per_patch * 3));
+                IdxStep<GridXg>(ncells_per_patch * 3),
+                0.); // non-uniformity
         std::vector<Coord<Yg>> break_points_yg = build_random_non_uniform_break_points(
                 yg_min,
                 yg_max,
@@ -535,7 +550,6 @@ public:
         using GridLocAlongYg = find_grid_t<LocalYg, AllGrids>;
         using BSplAlongXg = find_grid_t<LocalXg, AllBSpls>;
         using BSplAlongYg = find_grid_t<LocalYg, AllBSpls>;
-
 
         if (break_points_along_xg.back() > break_points_along_xg.front()) {
             ddc::init_discrete_space<BSplAlongXg>(break_points_along_xg);
