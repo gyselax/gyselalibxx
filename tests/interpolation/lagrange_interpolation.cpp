@@ -162,4 +162,3 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
                 TOL);
     });
 }
-

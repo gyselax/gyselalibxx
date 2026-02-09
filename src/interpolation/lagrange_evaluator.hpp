@@ -369,12 +369,13 @@ private:
         Idx<knot_grid> closest_knot = getclosest(coord_eval);
         Idx<knot_grid> first_knot
                 = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
-        Idx<knot_grid> last_knot
-                = ddc::discrete_space<LagrangeBasis>().break_point_domain().back();
+        Idx<knot_grid> last_knot = ddc::discrete_space<LagrangeBasis>().break_point_domain().back();
         // The step from the closest knot to the start of the domain
         IdxStep<knot_grid> step(
                 -static_cast<int>(lagrange_basis_type::degree() / 2) // back over half the domain
-                - static_cast<int>(lagrange_basis_type::degree() % 2) // ensure coord is in the central cell if even number of points
+                - static_cast<int>(
+                          lagrange_basis_type::degree()
+                          % 2) // ensure coord is in the central cell if even number of points
                           * static_cast<int>(ddc::coordinate(closest_knot) > coord_eval));
         Idx<knot_grid> first_lagrange_knot;
 
