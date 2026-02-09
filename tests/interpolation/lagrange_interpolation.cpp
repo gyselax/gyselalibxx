@@ -104,11 +104,8 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
     if constexpr (TestFixture::UNIFORM) {
         ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
     } else {
-        std::vector<Coord<X>> points = build_random_non_uniform_break_points(
-                xmin,
-                xmax,
-                IdxStep<GridX>(ncells),
-                0.5);
+        std::vector<Coord<X>> points
+                = build_random_non_uniform_break_points(xmin, xmax, IdxStep<GridX>(ncells), 0.5);
         ddc::init_discrete_space<GridX>(points);
     }
     IdxRange<GridX> idx_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
