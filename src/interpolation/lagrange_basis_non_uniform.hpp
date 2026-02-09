@@ -177,7 +177,7 @@ public:
             KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
             DataType offset = (x - ddc::coordinate(poly_start));
-            DataType eps = std::numeric_limits<DataType>::epsilon() * 4;
+            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
             for (std::size_t i(0); i < D + 1; ++i) {
                 if (fabs(offset - ddc::coordinate(poly_start + i)) < eps) {
                     for (int j(0); j < D + 1; ++j) {

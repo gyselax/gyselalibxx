@@ -186,7 +186,7 @@ public:
             DataType dx = ddc::discrete_space<knot_grid>().step();
             double inv_dx = 1. / dx;
             DataType offset = (x - ddc::coordinate(poly_start)) * inv_dx;
-            DataType eps = std::numeric_limits<DataType>::epsilon() * 4;
+            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
             int icell = static_cast<int>(offset);
             DataType local_offset = offset - icell;
             if (local_offset < eps) {
