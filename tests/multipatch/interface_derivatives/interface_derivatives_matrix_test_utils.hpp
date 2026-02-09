@@ -162,8 +162,9 @@ void initialise_cross_derivatives(
     typename Patch::Coord12 coord_min_max(ddc::coordinate(idx_xmin), ddc::coordinate(idx_ymax));
     typename Patch::Coord12 coord_max_max(ddc::coordinate(idx_xmax), ddc::coordinate(idx_ymax));
 
-    auto coord_transform = coord_transform_handler.coord_transform;
     auto coord_transform_l_to_g = coord_transform_handler.coord_transform.get_inverse_mapping();
+    auto coord_transform_g_to_l_1d_x = coord_transform_handler.x_transform;
+    auto coord_transform_g_to_l_1d_y = coord_transform_handler.y_transform;
 
     Coord<Xg, Yg> coord_min_min_g(coord_transform_l_to_g(coord_min_min));
     Coord<Xg, Yg> coord_max_min_g(coord_transform_l_to_g(coord_max_min));
@@ -172,16 +173,20 @@ void initialise_cross_derivatives(
 
     Idx<ddc::Deriv<Xg>, ddc::Deriv<Yg>> idx_deriv(1, 1);
     function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymin)
-            = coord_transform.jacobian(coord_min_min_g)
+            = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_min_g))
+              * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_min_g))
               * evaluator_g.deriv(idx_deriv, coord_min_min_g, const_function_g_coef);
     function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymin)
-            = coord_transform.jacobian(coord_max_min_g)
+            = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_min_g))
+              * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_min_g))
               * evaluator_g.deriv(idx_deriv, coord_max_min_g, const_function_g_coef);
     function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymax)
-            = coord_transform.jacobian(coord_min_max_g)
+            = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_max_g))
+              * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_max_g))
               * evaluator_g.deriv(idx_deriv, coord_min_max_g, const_function_g_coef);
     function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymax)
-            = coord_transform.jacobian(coord_max_max_g)
+            = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_max_g))
+              * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_max_g))
               * evaluator_g.deriv(idx_deriv, coord_max_max_g, const_function_g_coef);
 }
 
@@ -236,10 +241,10 @@ void check_derivatives(
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    using DerivG = ddc::Deriv<std::conditional_t<
+    using DerivDimG = std::conditional_t<
             std::is_same_v<Coord<DerivDim>, typename CoordTransformType::XTransform::CoordResult>,
             Xg,
-            Yg>>;
+            Yg>;
 
     using GridAlongDeriv = std::conditional_t<
             std::is_same_v<DerivDim, typename Patch::Dim1>,
@@ -255,11 +260,12 @@ void check_derivatives(
     IdxRange<GridAlongDeriv> idx_range_par(get_idx_range(function_and_derivs));
 
     Idx<ddc::Deriv<DerivDim>> idx_deriv(1);
-    Idx<DerivG> idx_deriv_g(1);
+    Idx<ddc::Deriv<DerivDimG>> idx_deriv_g(1);
     Idx<GridAlongDeriv> idx_par_min(idx_range_par.front());
     Idx<GridAlongDeriv> idx_par_max(idx_range_par.back());
 
-    auto coord_transform_g_to_l = coord_transform.coord_transform;
+    auto coord_transform_g_to_l_1d
+            = get_1d_transform<std::is_same_v<DerivDimG, Xg>>(coord_transform);
     auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
 
     ddc::host_for_each(idx_range_perp, [&](Idx<GridPerpToDeriv> const& idx_perp) {
@@ -267,9 +273,8 @@ void check_derivatives(
             typename Patch::Idx12 idx_min(idx_par_min, idx_perp);
             Coord<Xg, Yg> interface_coord_min(coord_transform_l_to_g(ddc::coordinate(idx_min)));
             double global_deriv_min
-                    = coord_transform_g_to_l.jacobian(interface_coord_min)
+                    = coord_transform_g_to_l_1d.jacobian(Coord<DerivDimG>(interface_coord_min))
                       * evaluator_g.deriv(idx_deriv_g, interface_coord_min, function_g_coef);
-
             EXPECT_NEAR(
                     function_and_derivs(idx_deriv, idx_par_min, idx_perp),
                     global_deriv_min,
@@ -281,7 +286,7 @@ void check_derivatives(
             Coord<Xg, Yg> interface_coord_max(coord_transform_l_to_g(ddc::coordinate(idx_max)));
 
             double global_deriv_max
-                    = coord_transform_g_to_l.jacobian(interface_coord_max)
+                    = coord_transform_g_to_l_1d.jacobian(Coord<DerivDimG>(interface_coord_max))
                       * evaluator_g.deriv(idx_deriv_g, interface_coord_max, function_g_coef);
             EXPECT_NEAR(
                     function_and_derivs(idx_deriv, idx_par_max, idx_perp),
@@ -395,8 +400,9 @@ void check_xy_derivatives(
     Idx<GridX, GridY> idx_min_max(idx_xmin, idx_ymax);
     Idx<GridX, GridY> idx_max_max(idx_xmax, idx_ymax);
 
-    auto coord_transform_g_to_l = coord_transform.coord_transform;
     auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
+    auto coord_transform_g_to_l_1d_x = coord_transform.x_transform;
+    auto coord_transform_g_to_l_1d_y = coord_transform.y_transform;
 
     typename Patch::Coord12 coord_min_min(ddc::coordinate(idx_min_min));
     typename Patch::Coord12 coord_max_min(ddc::coordinate(idx_max_min));
@@ -409,13 +415,17 @@ void check_xy_derivatives(
     Coord<Xg, Yg> coord_max_max_g(coord_transform_l_to_g(coord_max_max));
 
     Idx<ddc::Deriv<Xg>, ddc::Deriv<Yg>> idx_deriv(1, 1);
-    double global_deriv_min_min = coord_transform_g_to_l.jacobian(coord_min_min_g)
+    double global_deriv_min_min = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_min_g))
+                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_min_g))
                                   * evaluator_g.deriv(idx_deriv, coord_min_min_g, function_g_coef);
-    double global_deriv_max_min = coord_transform_g_to_l.jacobian(coord_max_min_g)
+    double global_deriv_max_min = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_min_g))
+                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_min_g))
                                   * evaluator_g.deriv(idx_deriv, coord_max_min_g, function_g_coef);
-    double global_deriv_min_max = coord_transform_g_to_l.jacobian(coord_min_max_g)
+    double global_deriv_min_max = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_max_g))
+                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_min_max_g))
                                   * evaluator_g.deriv(idx_deriv, coord_min_max_g, function_g_coef);
-    double global_deriv_max_max = coord_transform_g_to_l.jacobian(coord_max_max_g)
+    double global_deriv_max_max = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_max_max_g))
+                                  * coord_transform_g_to_l_1d_y.jacobian(Coord<Yg>(coord_max_max_g))
                                   * evaluator_g.deriv(idx_deriv, coord_max_max_g, function_g_coef);
 
     // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
