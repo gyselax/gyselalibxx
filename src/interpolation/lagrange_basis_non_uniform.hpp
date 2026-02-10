@@ -265,4 +265,3 @@ struct is_non_uniform_lagrange_basis
     : public std::is_base_of<detail::NonUniformLagrangeBasisBase, DDim>::type
 {
 };
-
