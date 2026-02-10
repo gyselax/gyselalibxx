@@ -282,6 +282,8 @@ struct ChangeBound3Transform : ChangeBoundPatchTransform<3>
     }
 };
 
+// CONNECTIVITY for each patch layout ---------------------------------------------------------
+
 struct RevPatch1
 {
     using Interface_1_2 = Interface<WestEdge<1>, WestEdge<2>, false>;
@@ -408,8 +410,6 @@ struct ChangeBound3
 };
 
 
-// CONNECTIVITY ----------------------------------------------------------------------------------
-
 template <class PatchLayout_>
 struct InterfaceDerivativeMatrixHermiteFixture : public ::testing::Test
 {
@@ -508,8 +508,7 @@ public:
         std::vector<Coord<Xg>> break_points_xg = build_random_non_uniform_break_points(
                 xg_min,
                 xg_max,
-                IdxStep<GridXg>(ncells_per_patch * 3),
-                0.); // non-uniformity
+                IdxStep<GridXg>(ncells_per_patch * 3));
         std::vector<Coord<Yg>> break_points_yg = build_random_non_uniform_break_points(
                 yg_min,
                 yg_max,
