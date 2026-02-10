@@ -223,8 +223,7 @@ UniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
         IdxRange<Grid1D> break_point_domain)
     : m_reference(ddc::create_reference_discrete_element<DDim>())
 {
-    std::size_t ncells = break_point_domain.size() - 1;
-    assert(ncells >= D);
+    assert(break_point_domain.size() >= D + 1);
 
     coord_type bp_rmin = ddc::coordinate(break_point_domain.front());
     DataType step = ddc::discrete_space<Grid1D>().step();
