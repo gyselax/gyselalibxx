@@ -7,14 +7,14 @@
 /**
  * @brief A builder class for copying data.
  *
- * A class which contains an operator () which can be used to build a spline approximation
- * of a function. A spline approximation is represented by coefficients stored in a Chunk
- * of B-splines. The spline is constructed such that it respects the boundary conditions
- * BcLower and BcUpper, and it interpolates the function at the points on the interpolation_discrete_dimension
- * associated with interpolation_discrete_dimension_type.
+ * A class which contains an operator () which can be used to build an interpolation
+ * of a function. This class handles the case where no calculations are necessary and
+ * the data simply needs to be copied.
+ *
  * @tparam ExecSpace The Kokkos execution space on which the spline approximation is performed.
  * @tparam MemorySpace The Kokkos memory space on which the data (interpolation function and splines coefficients) is stored.
  * @tparam InterpolationDDim The discrete dimension on which interpolation points are defined.
+ * @tparam Basis The basis on which the interpolation is constructed.
  */
 template <class ExecSpace, class MemorySpace, class InterpolationDDim, class Basis>
 class IdentityInterpolationBuilder
@@ -62,13 +62,13 @@ public:
             remove_dims_of_t<BatchedInterpolationGrid, interpolation_discrete_dimension_type>;
 
     /**
-     * @brief The type of the whole spline domain (cartesian product of 1D spline domain
+     * @brief The type of the whole interpolation domain (cartesian product of 1D interpolation domain
      * and batch domain) preserving the underlying memory layout (order of dimensions).
      *
      * @tparam The batched discrete domain on which the interpolation points are defined.
      *
      * Example: For batched_interpolation_domain_type = DiscreteDomain<X,Y,Z> and a dimension of interest Y
-     * (associated to a B-splines tag BSplinesY), this is DiscreteDomain<X,BSplinesY,Z>.
+     * (associated to a Basis tag LagrangeBasisY), this is DiscreteDomain<X,LagrangeBasisY,Z>.
      */
     template <
             class BatchedInterpolationGrid,
@@ -78,6 +78,15 @@ public:
             interpolation_discrete_dimension_type,
             basis_domain_type>;
 
+    /**
+     * @brief The typeof the derivatives
+     *
+     * The type of the derivatives that need to be provided to this method. No derivatives
+     * are required but this is included for interoperability with other interpolation
+     * builder classes.
+     *
+     * @tparam The batched discrete domain on which the interpolation points are defined.
+     */
     template <
             class BatchedInterpolationGrid,
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationGrid>>>
@@ -95,23 +104,17 @@ public:
     IdentityInterpolationBuilder() = default;
 
     /**
-     * @brief Compute a spline approximation of a function.
+     * @brief Compute the interpolation coefficients for a function.
      *
-     * Use the values of a function (defined on
-     * SplineBuilder::batched_interpolation_domain) and the derivatives of the
-     * function at the boundaries (in the case of BoundCond::HERMITE only, defined
-     * on SplineBuilder::batched_derivs_xmin_domain and SplineBuilder::batched_derivs_xmax_domain)
-     * to calculate a spline approximation of this function.
+     * No calculations are necessary and the data simply needs to be copied
+     * from vals to coeffs.
      *
-     * The spline approximation is stored as a ChunkSpan of coefficients
-     * associated with B-splines.
-     *
-     * @param[out] spline The coefficients of the spline computed by this SplineBuilder.
+     * @param[out] coeffs The coefficients of the spline computed by this SplineBuilder.
      * @param[in] vals The values of the function on the interpolation mesh.
      * @param[in] derivs_xmin The values of the derivatives at the lower boundary
-     * (used only with BoundCond::HERMITE lower boundary condition).
+     *                  (unused in this class).
      * @param[in] derivs_xmax The values of the derivatives at the upper boundary
-     * (used only with BoundCond::HERMITE upper boundary condition).
+     *                  (unused in this class).
      */
     template <class DataType, class Layout, class BatchedInterpolationGrid>
     void operator()(
