@@ -201,10 +201,8 @@ struct AlignedPatchTransform : public MatchingBoundPatchTransform<I>
 {
     AlignedPatchTransform(Coord<Xg> left, Coord<Xg> right, Coord<Yg> bottom, Coord<Yg> top)
         : MatchingBoundPatchTransform<I>(
-                typename MatchingBoundPatchTransform<
-                        I>::XTransform(left, Coord<X<I>>(0), right - left),
-                typename MatchingBoundPatchTransform<
-                        I>::YTransform(bottom, Coord<Y<I>>(0), top - bottom))
+                typename MatchingBoundPatchTransform<I>::XTransform(left, Coord<X<I>>(0), 1.),
+                typename MatchingBoundPatchTransform<I>::YTransform(bottom, Coord<Y<I>>(0), 1.))
     {
     }
 };
@@ -214,10 +212,8 @@ struct ReversePatchTransform : public MatchingBoundPatchTransform<I>
 {
     ReversePatchTransform(Coord<Xg> left, Coord<Xg> right, Coord<Yg> bottom, Coord<Yg> top)
         : MatchingBoundPatchTransform<I>(
-                typename MatchingBoundPatchTransform<
-                        I>::XTransform(right, Coord<X<I>>(0), -(right - left)),
-                typename MatchingBoundPatchTransform<
-                        I>::YTransform(top, Coord<Y<I>>(0), -(top - bottom)))
+                typename MatchingBoundPatchTransform<I>::XTransform(right, Coord<X<I>>(0), -1.),
+                typename MatchingBoundPatchTransform<I>::YTransform(top, Coord<Y<I>>(0), -1.))
     {
     }
 };
@@ -253,8 +249,7 @@ struct ChangeBoundPatchTransform
 struct ChangeBound1Transform : ChangeBoundPatchTransform<1>
 {
     ChangeBound1Transform(Coord<Xg> left, Coord<Xg> right, Coord<Yg> bottom, Coord<Yg> top)
-        : ChangeBoundPatchTransform<
-                1>(right, bottom, Coord<X<1>>(0), Coord<Y<1>>(0), -(right - left), top - bottom)
+        : ChangeBoundPatchTransform<1>(right, bottom, Coord<X<1>>(0), Coord<Y<1>>(0), -1., 1.)
     {
     }
 };
@@ -262,8 +257,7 @@ struct ChangeBound1Transform : ChangeBoundPatchTransform<1>
 struct ChangeBound3Transform : ChangeBoundPatchTransform<3>
 {
     ChangeBound3Transform(Coord<Xg> left, Coord<Xg> right, Coord<Yg> bottom, Coord<Yg> top)
-        : ChangeBoundPatchTransform<
-                3>(left, top, Coord<X<3>>(0), Coord<Y<3>>(0), (right - left), -(top - bottom))
+        : ChangeBoundPatchTransform<3>(left, top, Coord<X<3>>(0), Coord<Y<3>>(0), 1., -1.)
     {
     }
 };
@@ -502,8 +496,7 @@ public:
         std::vector<Coord<Xg>> break_points_xg = build_random_non_uniform_break_points(
                 xg_min,
                 xg_max,
-                IdxStep<GridXg>(ncells_per_patch * 3),
-                0.);
+                IdxStep<GridXg>(ncells_per_patch * 3));
         std::vector<Coord<Yg>> break_points_yg = build_random_non_uniform_break_points(
                 yg_min,
                 yg_max,
