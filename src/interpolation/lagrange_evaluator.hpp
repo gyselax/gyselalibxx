@@ -38,6 +38,7 @@ public:
     /// @brief The discrete dimension representing the Lagrange basis.
     using lagrange_basis_type = LagrangeBasis;
 
+    /// @brief The grid on which the interpolation coefficients should be provided.
     using basis_domain_type =
             typename LagrangeBasis::template Impl<LagrangeBasis, MemorySpace>::knot_grid;
 
