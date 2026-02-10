@@ -229,12 +229,12 @@ NonUniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
         std::size_t npoints = ddc::discrete_space<Grid1D>().size();
         std::vector<coord_type> points(npoints + D);
         Idx<Grid1D> idx_front = ddc::discrete_space<Grid1D>().front();
-        Idx<Grid1D> idx_back = idx_front + npoints;
+        Idx<Grid1D> idx_back = idx_front + npoints - 1;
         for (std::size_t i(0); i < npoints; ++i) {
             points[i] = ddc::coordinate(idx_front + i);
         }
         for (std::size_t i(1); i < D + 1; ++i) {
-            points[npoints + i] = ddc::coordinate(idx_back)
+            points[npoints + i - 1] = ddc::coordinate(idx_back)
                                   + (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
         }
         ddc::init_discrete_space<knot_grid>(points);
