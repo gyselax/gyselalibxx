@@ -71,14 +71,12 @@ struct Xg
 {
     static bool constexpr PERIODIC = false;
     static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = true;
     using Dual = Xg;
 };
 struct Yg
 {
     static bool constexpr PERIODIC = false;
     static bool constexpr IS_COVARIANT = true;
-    static bool constexpr IS_CONTRAVARIANT = true;
     using Dual = Yg;
 };
 
