@@ -265,10 +265,11 @@ public:
                 exec_space(),
                 batch_idx_range,
                 KOKKOS_CLASS_LAMBDA(BatchedInterpolationIdx const j) {
+                    // auto allows non-contiguous layouts
                     auto const lagrange_eval_1D = lagrange_eval[j];
                     auto const coords_eval_1D = coords_eval[j];
                     auto const lagrange_coef_1D = lagrange_coef[j];
-                    for (auto const i : evaluation_idx_range) {
+                    for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
                         lagrange_eval_1D(i) = eval(coords_eval_1D(i), lagrange_coef_1D);
                     }
                 });
@@ -308,12 +309,10 @@ public:
                                     BatchedInterpolationGrid>::discrete_element_type const j) {
                     auto const lagrange_eval_1D = lagrange_eval[j];
                     auto const lagrange_coef_1D = lagrange_coef[j];
-                    device_for_each_serial(
-                            evaluation_idx_range,
-                            [&](Idx<InterpolationGrid> const i) {
-                                Coord<continuous_dimension_type> coord_eval_1D = ddc::coordinate(i);
-                                lagrange_eval_1D(i) = eval(coord_eval_1D, lagrange_coef_1D);
-                            });
+                    for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
+                        Coord<continuous_dimension_type> coord_eval_1D = ddc::coordinate(i);
+                        lagrange_eval_1D(i) = eval(coord_eval_1D, lagrange_coef_1D);
+                    }
                 });
     }
 
