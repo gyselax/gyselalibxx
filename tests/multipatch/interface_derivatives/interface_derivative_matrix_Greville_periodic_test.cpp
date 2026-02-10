@@ -338,8 +338,10 @@ public:
         ddc::init_discrete_space<BSplinesXg>(break_points_xg);
         ddc::init_discrete_space<BSplinesYg>(break_points_yg);
 
-        ddc::init_discrete_space<GridXg>(interpolation_points_xg);
-        ddc::init_discrete_space<GridYg>(interpolation_points_yg);
+        ddc::init_discrete_space<GridXg>(
+                SplineInterpPointsXg::get_sampling<GridXg>(interpolation_points_xg));
+        ddc::init_discrete_space<GridYg>(
+                SplineInterpPointsYg::get_sampling<GridYg>(interpolation_points_yg));
     }
 
     template <int I, int XI, int YI>

@@ -66,8 +66,6 @@ namespace {
 // Multi-patch tags ---
 using namespace non_periodic_non_uniform_2d_3patches;
 
-//enum TestCase { REVERSE_PATCH1, REVERSE_PATCH2, REVERSE_PATCH13, CHANGE_BOUND1, CHANGE_BOUND3 };
-
 // Equivalent global mesh tags ---
 struct Xg
 {
@@ -520,8 +518,10 @@ public:
         ddc::init_discrete_space<BSplinesXg>(break_points_xg);
         ddc::init_discrete_space<BSplinesYg>(break_points_yg);
 
-        ddc::init_discrete_space<GridXg>(break_points_xg);
-        ddc::init_discrete_space<GridYg>(break_points_yg);
+        ddc::init_discrete_space<GridXg>(
+                SplineInterpPointsXg::get_sampling<GridXg>(break_points_xg));
+        ddc::init_discrete_space<GridYg>(
+                SplineInterpPointsYg::get_sampling<GridYg>(break_points_yg));
     }
 
     template <class PatchTransform>
