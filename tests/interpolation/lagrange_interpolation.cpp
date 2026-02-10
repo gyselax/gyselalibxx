@@ -93,7 +93,7 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
                     Periodic,
                     ddc::PeriodicExtrapolationRule<X>,
                     ddc::NullExtrapolationRule>>;
-    using CoeffIdxRange = typename Builder::template batched_basis_domain_type<IdxRange<GridX>>;
+    using IdxRangeCoeff = typename Builder::template batched_basis_domain_type<IdxRange<GridX>>;
 
     constexpr std::size_t degree = TestFixture::degree;
     static constexpr double TOL = TestFixture::TOL;
@@ -130,9 +130,9 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
     Field<DataType, IdxRange<GridX>> function_values(function_values_alloc);
 
     Builder builder;
-    FieldMem<DataType, CoeffIdxRange> lagrange_coeffs_alloc(
+    FieldMem<DataType, IdxRangeCoeff> lagrange_coeffs_alloc(
             ddc::discrete_space<LagBasis>().full_domain());
-    Field<DataType, CoeffIdxRange> lagrange_coeffs(lagrange_coeffs_alloc);
+    Field<DataType, IdxRangeCoeff> lagrange_coeffs(lagrange_coeffs_alloc);
 
     std::conditional_t<Periodic, ddc::PeriodicExtrapolationRule<X>, ddc::NullExtrapolationRule>
             extrapol;

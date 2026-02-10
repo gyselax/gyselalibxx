@@ -258,14 +258,14 @@ public:
         batch_domain_type<BatchedInterpolationGrid> const batch_idx_range(
                 get_idx_range(lagrange_eval));
 
-        using BatchedInterpolationIdx =
+        using IdxBatchedInterpolation =
                 typename batch_domain_type<BatchedInterpolationGrid>::discrete_element_type;
 
         ddc::parallel_for_each(
                 "Lagrange_evaluate",
                 exec_space(),
                 batch_idx_range,
-                KOKKOS_CLASS_LAMBDA(BatchedInterpolationIdx const j) {
+                KOKKOS_CLASS_LAMBDA(IdxBatchedInterpolation const j) {
                     // auto allows non-contiguous layouts
                     auto const lagrange_eval_1D = lagrange_eval[j];
                     auto const coords_eval_1D = coords_eval[j];
