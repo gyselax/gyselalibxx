@@ -69,7 +69,7 @@ TYPED_TEST(LagrangeBasisFixture, KroneckerDeltaAtKnots)
     Coord<X> xmax(2);
     std::size_t ncells(20);
     if constexpr (TestFixture::UNIFORM) {
-        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells)));
+        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
     } else {
         std::vector<Coord<X>> points
                 = build_random_non_uniform_break_points(xmin, xmax, IdxStep<GridX>(ncells), 0.5);
