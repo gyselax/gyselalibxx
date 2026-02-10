@@ -204,7 +204,7 @@ public:
      *
      * @param coord_eval The coordinate where the Lagrange polynomial is evaluated.
      *              Note that only the component along the dimension of interest is used.
-     * @param Lagrange_coef A Field storing the 1D Lagrange coefficients.
+     * @param lagrange_coef A Field storing the 1D Lagrange coefficients.
      *
      * @return The value of the Lagrange polynomial at the desired coordinate.
      */
