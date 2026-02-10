@@ -234,8 +234,9 @@ NonUniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
             points[i] = ddc::coordinate(idx_front + i);
         }
         for (std::size_t i(1); i < D + 1; ++i) {
-            points[npoints + i - 1] = ddc::coordinate(idx_back)
-                                  + (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
+            points[npoints + i - 1]
+                    = ddc::coordinate(idx_back)
+                      + (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
         }
         ddc::init_discrete_space<knot_grid>(points);
         m_knot_domain = IdxRange<knot_grid>(
