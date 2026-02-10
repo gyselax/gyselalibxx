@@ -219,7 +219,7 @@ public:
     /**
      * @brief Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh.
      *
-     * The Lagrange coefficients describe Lagrange polynomials defined on a cartesian product of batch_domain and
+     * The Lagrange coefficients describe Lagrange polynomials defined on a cartesian product of batch_idx_range and
      * Lagrange basis. They can be obtained using the IdentityInterpolationBuilder.
      *
      * This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates
@@ -252,8 +252,9 @@ public:
                     memory_space,
                     Layout3> const lagrange_coef) const
     {
-        evaluation_domain_type const evaluation_domain(lagrange_eval.domain());
-        batch_domain_type<BatchedInterpolationGrid> const batch_domain(lagrange_eval.domain());
+        evaluation_domain_type const evaluation_idx_range(get_idx_range(lagrange_eval));
+        batch_domain_type<BatchedInterpolationGrid> const batch_idx_range(
+                get_idx_range(lagrange_eval));
 
         using BatchedInterpolationIdx =
                 typename batch_domain_type<BatchedInterpolationGrid>::discrete_element_type;
@@ -261,12 +262,12 @@ public:
         ddc::parallel_for_each(
                 "Lagrange_evaluate",
                 exec_space(),
-                batch_domain,
+                batch_idx_range,
                 KOKKOS_CLASS_LAMBDA(BatchedInterpolationIdx const j) {
                     auto const lagrange_eval_1D = lagrange_eval[j];
                     auto const coords_eval_1D = coords_eval[j];
                     auto const lagrange_coef_1D = lagrange_coef[j];
-                    for (auto const i : evaluation_domain) {
+                    for (auto const i : evaluation_idx_range) {
                         lagrange_eval_1D(i) = eval(coords_eval_1D(i), lagrange_coef_1D);
                     }
                 });
@@ -275,7 +276,7 @@ public:
     /**
      * @brief Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh.
      *
-     * The Lagrange coefficients describe Lagrange polynomials defined on a cartesian product of batch_domain and
+     * The Lagrange coefficients describe Lagrange polynomials defined on a cartesian product of batch_idx_range and
      * Lagrange basis. They can be obtained using the IdentityInterpolationBuilder.
      *
      * This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates
@@ -294,21 +295,24 @@ public:
                     memory_space,
                     Layout2> const lagrange_coef) const
     {
-        evaluation_domain_type const evaluation_domain(lagrange_eval.domain());
-        batch_domain_type<BatchedInterpolationGrid> const batch_domain(lagrange_eval.domain());
+        evaluation_domain_type const evaluation_idx_range(get_idx_range(lagrange_eval));
+        batch_domain_type<BatchedInterpolationGrid> const batch_idx_range(
+                get_idx_range(lagrange_eval));
 
         ddc::parallel_for_each(
                 "lagrange_evaluate",
                 exec_space(),
-                batch_domain,
+                batch_idx_range,
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type<
                                     BatchedInterpolationGrid>::discrete_element_type const j) {
                     auto const lagrange_eval_1D = lagrange_eval[j];
                     auto const lagrange_coef_1D = lagrange_coef[j];
-                    for (auto const i : evaluation_domain) {
-                        Coord<continuous_dimension_type> coord_eval_1D = ddc::coordinate(i);
-                        lagrange_eval_1D(i) = eval(coord_eval_1D, lagrange_coef_1D);
-                    }
+                    device_for_each_serial(
+                            evaluation_idx_range,
+                            [&](Idx<InterpolationGrid> const i) {
+                                Coord<continuous_dimension_type> coord_eval_1D = ddc::coordinate(i);
+                                lagrange_eval_1D(i) = eval(coord_eval_1D, lagrange_coef_1D);
+                            });
                 });
     }
 
