@@ -700,16 +700,16 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
     double const yg_max = this->yg_max;
     ddc::host_for_each(this->idx_range_yg, [&](Idx<GridYg> const idx) {
         double const yg = ddc::coordinate(idx);
-        function_and_derivs_g[idx_dxg_min](idx)
+        function_and_derivs_g(idx_dxg_min, idx)
                 = -coef_a * std::sin(coef_a * xg_min + coef_b) * std::sin(yg);
-        function_and_derivs_g[idx_dxg_max](idx)
+        function_and_derivs_g(idx_dxg_max, idx)
                 = -coef_a * std::sin(coef_a * xg_max + coef_b) * std::sin(yg);
     });
     ddc::host_for_each(this->idx_range_xg, [&](Idx<GridXg> const idx) {
         double const xg = ddc::coordinate(Idx<GridXg>(idx));
-        function_and_derivs_g[idx_dyg_min](idx)
+        function_and_derivs_g(idx_dyg_min, idx)
                 = std::cos(coef_a * xg + coef_b) * std ::cos(yg_min);
-        function_and_derivs_g[idx_dyg_max](idx)
+        function_and_derivs_g(idx_dyg_max, idx)
                 = std::cos(coef_a * xg + coef_b) * std ::cos(yg_max);
     });
     function_and_derivs_g(idx_dxgdyg_min_min)
@@ -742,15 +742,6 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
     ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmin_g(this->xg_min, this->yg_min, this->yg_max);
     ddc::ConstantExtrapolationRule<Xg, Yg> bc_xmax_g(this->xg_max, this->yg_min, this->yg_max);
     SplineRThetagEvaluator evaluator_g(bc_xmin_g, bc_xmax_g, bc_ymin_g, bc_ymax_g);
-
-    IdxRange<GridXg> idx_range_x_global_patch_1(
-            this->idx_range_xg.take_first(IdxStep<GridXg>(this->ncells_per_patch + 1)));
-    IdxRange<GridXg> idx_range_y_global_patch_2(
-            this->idx_range_xg
-                    .remove(IdxStep<GridXg>(this->ncells_per_patch),
-                            IdxStep<GridXg>(this->ncells_per_patch)));
-    IdxRange<GridXg> idx_range_y_global_patch_3(
-            this->idx_range_xg.take_last(IdxStep<GridXg>(this->ncells_per_patch + 1)));
 
     // ------ initialise the boundary first derivatives from the global spline
     // Left X bound ---
