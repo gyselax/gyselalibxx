@@ -240,7 +240,7 @@ struct ChangeBoundPatchTransform
     XTransform x_transform;
     YTransform y_transform;
     OrthogonalCoordTransforms<
-            Coord<Yg, Xg>,
+            Coord<Xg, Yg>,
             Coord<X<I>, Y<I>>,
             Coord<Xg, Yg>,
             XTransform,
@@ -416,11 +416,11 @@ struct InterfaceDerivativeMatrixHermiteFixture : public ::testing::Test
     static constexpr int ncells_per_patch = 5;
 
     // global ------------------------------------
-    static constexpr Coord<Xg> xg_min = Coord<Xg> {double(0.0)};
-    static constexpr Coord<Xg> xg_max = Coord<Xg> {double(3.0)};
+    static constexpr Coord<Xg> xg_min = Coord<Xg>(0.0);
+    static constexpr Coord<Xg> xg_max = Coord<Xg>(3.0);
 
-    static constexpr Coord<Yg> yg_min = Coord<Yg> {double(0.0)};
-    static constexpr Coord<Yg> yg_max = Coord<Yg> {double(1.0)};
+    static constexpr Coord<Yg> yg_min = Coord<Yg>(0.0);
+    static constexpr Coord<Yg> yg_max = Coord<Yg>(1.0);
 
     const IdxRange<GridX<1>> idx_range_x1;
     const IdxRange<GridX<2>> idx_range_x2;
@@ -540,15 +540,15 @@ public:
             break_points_along_yg.push_back(patch_transform.y_transform(ddc::coordinate(idx)));
         });
 
-        using LocalXg = ddc::
+        using LocalX = ddc::
                 type_seq_element_t<0, ddc::to_type_seq_t<typename XLinearTransform::CoordResult>>;
-        using LocalYg = ddc::
+        using LocalY = ddc::
                 type_seq_element_t<0, ddc::to_type_seq_t<typename YLinearTransform::CoordResult>>;
 
-        using GridLocAlongXg = find_grid_t<LocalXg, AllGrids>;
-        using GridLocAlongYg = find_grid_t<LocalYg, AllGrids>;
-        using BSplAlongXg = find_grid_t<LocalXg, AllBSpls>;
-        using BSplAlongYg = find_grid_t<LocalYg, AllBSpls>;
+        using GridLocAlongXg = find_grid_t<LocalX, AllGrids>;
+        using GridLocAlongYg = find_grid_t<LocalY, AllGrids>;
+        using BSplAlongXg = find_grid_t<LocalX, AllBSpls>;
+        using BSplAlongYg = find_grid_t<LocalY, AllBSpls>;
 
         if (break_points_along_xg.back() > break_points_along_xg.front()) {
             ddc::init_discrete_space<BSplAlongXg>(break_points_along_xg);
@@ -706,7 +706,7 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
                 = -coef_a * std::sin(coef_a * xg_max + coef_b) * std::sin(yg);
     });
     ddc::host_for_each(this->idx_range_xg, [&](Idx<GridXg> const idx) {
-        double const xg = ddc::coordinate(Idx<GridXg>(idx));
+        double const xg = ddc::coordinate(idx);
         function_and_derivs_g(idx_dyg_min, idx)
                 = std::cos(coef_a * xg + coef_b) * std ::cos(yg_min);
         function_and_derivs_g(idx_dyg_max, idx)
