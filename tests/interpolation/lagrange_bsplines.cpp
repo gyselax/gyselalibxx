@@ -37,7 +37,6 @@ struct LagrangeBasisFixture<std::tuple<
     using DataType = T;
     static constexpr std::size_t degree = D;
     static constexpr bool UNIFORM = Uniform;
-    static constexpr bool PERIODIC = Periodic;
 
     // Replace with your actual tolerance policy
     static constexpr double TOL = std::is_same_v<T, float> ? 1e-6 : 1e-12;
