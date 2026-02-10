@@ -30,8 +30,8 @@ struct LagrangeBasisFixture<std::tuple<
     struct LagBasis
         : public std::conditional_t<
                   Uniform,
-                  UniformLagrangeBasis<GridX, D, T>,
-                  NonUniformLagrangeBasis<GridX, D, T>>
+                  UniformLagrangeBasis<X, D, T>,
+                  NonUniformLagrangeBasis<X, D, T>>
     {
     };
     using DataType = T;
