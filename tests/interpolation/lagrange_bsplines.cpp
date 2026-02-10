@@ -82,7 +82,6 @@ TYPED_TEST(LagrangeBasisFixture, KroneckerDeltaAtKnots)
 
     std::array<DataType, degree + 1> basis_storage;
     Span1D<DataType> basis_values(basis_storage.data(), degree + 1);
-    std::cout << basis_values.size() << " " << degree + 1 << std::endl;
 
     // --- Test ---
     for (std::size_t j = 0; j < degree + 1; ++j) {
