@@ -141,34 +141,31 @@ std::tuple<double, double, double, double> get_cross_derivatives(
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    using DerivX = ddc::Deriv<typename Patch::Dim1>;
-    using DerivY = ddc::Deriv<typename Patch::Dim2>;
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
+
+    using IdxXY = Idx<GridX, GridY>;
 
     IdxRange<GridX> idx_range_x(idx_range);
     IdxRange<GridY> idx_range_y(idx_range);
 
-    Idx<DerivX> idx_dx(1);
-    Idx<DerivY> idx_dy(1);
     Idx<GridX> idx_xmin(idx_range_x.front());
     Idx<GridX> idx_xmax(idx_range_x.back());
     Idx<GridY> idx_ymin(idx_range_y.front());
     Idx<GridY> idx_ymax(idx_range_y.back());
 
-    typename Patch::Coord12 coord_min_min(ddc::coordinate(idx_xmin), ddc::coordinate(idx_ymin));
-    typename Patch::Coord12 coord_max_min(ddc::coordinate(idx_xmax), ddc::coordinate(idx_ymin));
-    typename Patch::Coord12 coord_min_max(ddc::coordinate(idx_xmin), ddc::coordinate(idx_ymax));
-    typename Patch::Coord12 coord_max_max(ddc::coordinate(idx_xmax), ddc::coordinate(idx_ymax));
-
     auto coord_transform_l_to_g = coord_transform_handler.coord_transform.get_inverse_mapping();
     auto coord_transform_g_to_l_1d_x = coord_transform_handler.x_transform;
     auto coord_transform_g_to_l_1d_y = coord_transform_handler.y_transform;
 
-    Coord<Xg, Yg> coord_min_min_g(coord_transform_l_to_g(coord_min_min));
-    Coord<Xg, Yg> coord_max_min_g(coord_transform_l_to_g(coord_max_min));
-    Coord<Xg, Yg> coord_min_max_g(coord_transform_l_to_g(coord_min_max));
-    Coord<Xg, Yg> coord_max_max_g(coord_transform_l_to_g(coord_max_max));
+    Coord<Xg, Yg> coord_min_min_g(
+            coord_transform_l_to_g(ddc::coordinate(IdxXY(idx_xmin, idx_ymin))));
+    Coord<Xg, Yg> coord_max_min_g(
+            coord_transform_l_to_g(ddc::coordinate(IdxXY(idx_xmax, idx_ymin))));
+    Coord<Xg, Yg> coord_min_max_g(
+            coord_transform_l_to_g(ddc::coordinate(IdxXY(idx_xmin, idx_ymax))));
+    Coord<Xg, Yg> coord_max_max_g(
+            coord_transform_l_to_g(ddc::coordinate(IdxXY(idx_xmax, idx_ymax))));
 
     Idx<ddc::Deriv<Xg>, ddc::Deriv<Yg>> idx_deriv(1, 1);
     double global_deriv_min_min = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_min_g))
