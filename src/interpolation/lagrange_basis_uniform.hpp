@@ -113,6 +113,19 @@ public:
          */
         explicit Impl(IdxRange<Grid1D> break_point_domain);
 
+        /** @brief Copy-constructs from another Impl with a different Kokkos memory space.
+         *
+         * @param impl A reference to the other Impl.
+         */
+        template <class OriginMemorySpace>
+        explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
+            : m_weights(impl.m_weights)
+            , m_knot_domain(impl.m_knot_domain)
+            , m_break_point_domain(impl.m_break_point_domain)
+            , m_reference(impl.m_reference)
+        {
+        }
+
         /** @brief Returns the coordinate of the lower bound of the domain on which the B-splines are defined.
          *
          * @return Coordinate of the lower bound of the domain.
