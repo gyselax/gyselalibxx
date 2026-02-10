@@ -3,12 +3,14 @@
 /**
  * @brief A class to evaluate, differentiate or integrate a Lagrange function.
  *
- * A class which contains an operator () which can be used to evaluate, differentiate or integrate a Lagrange function.
+ * A class which contains an operator () which can be used to evaluate, or
+ * differentiate a Lagrange polynomial.
  *
  * @tparam ExecSpace The Kokkos execution space on which the Lagrange evaluation is performed.
  * @tparam MemorySpace The Kokkos memory space on which the data (Lagrange coefficients and evaluation) is stored.
- * @tparam BSplines The discrete dimension representing the B-Lagranges.
- * @tparam EvaluationDDim The discrete dimension on which evaluation points are defined.
+ * @tparam DataType The data type on which calculations are made.
+ * @tparam LagrangeBasis The discrete dimension representing the Lagrange basis.
+ * @tparam InterpolationGrid The discrete dimension on which evaluation points are defined.
  * @tparam LowerExtrapolationRule The lower extrapolation rule type.
  * @tparam UpperExtrapolationRule The upper extrapolation rule type.
  */
@@ -32,7 +34,7 @@ public:
     /// @brief The type of the evaluation continuous dimension (continuous dimension of interest) used by this class.
     using continuous_dimension_type = typename LagrangeBasis::continuous_dimension_type;
 
-    /// @brief The discrete dimension representing the B-Lagranges.
+    /// @brief The discrete dimension representing the Lagrange basis.
     using lagrange_basis_type = LagrangeBasis;
 
     using basis_domain_type =
@@ -51,7 +53,7 @@ public:
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationGrid>>>
     using batched_evaluation_domain_type = BatchedInterpolationGrid;
 
-    /// @brief The type of the 1D spline domain corresponding to the dimension of interest.
+    /// @brief The type of the 1D Lagrange domain corresponding to the dimension of interest.
     using lagrange_domain_type = IdxRange<basis_domain_type>;
 
     /**
@@ -66,7 +68,7 @@ public:
     using batch_domain_type = ddc::remove_dims_of_t<BatchedInterpolationGrid, InterpolationGrid>;
 
     /**
-     * @brief The type of the whole spline domain (cartesian product of 1D spline domain
+     * @brief The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain
      * and batch domain) preserving the order of dimensions.
      *
      * @tparam The batched discrete domain on which the interpolation points are defined.
@@ -166,7 +168,8 @@ public:
     /**
      * @brief Get the lower extrapolation rule.
      *
-     * Extrapolation rules are functors used to define the behavior of the LagrangeEvaluator out of the domain where the break points of the B-Lagranges are defined.
+     * Extrapolation rules are functors used to define the behaviour of the LagrangeEvaluator
+     * outside the domain where the break points of the Lagrange basis are defined.
      *
      * @return The lower extrapolation rule.
      *
@@ -180,7 +183,8 @@ public:
     /**
      * @brief Get the upper extrapolation rule.
      *
-     * Extrapolation rules are functors used to define the behavior of the LagrangeEvaluator out of the domain where the break points of the B-Lagranges are defined.
+     * Extrapolation rules are functors used to define the behavior of the LagrangeEvaluator
+     * outside the domain where the break points of the Lagrange basis are defined.
      *
      * @return The upper extrapolation rule.
      *
@@ -192,16 +196,16 @@ public:
     }
 
     /**
-     * @brief Evaluate 1D Lagrange function (described by its Lagrange coefficients) at a given coordinate.
+     * @brief Evaluate 1D Lagrange polynomial (described by its Lagrange coefficients) at a given coordinate.
      *
-     * The Lagrange coefficients represent a 1D Lagrange function defined on a B-Lagranges (basis Lagranges). They can be obtained via various methods, such as using a SplineBuilder.
+     * The Lagrange coefficients describe 1D Lagrange polynomials defined on a Lagrange basis.
+     * They can be obtained using the IdentityInterpolationBuilder.
      *
-     * Remark: calling SplineBuilder then SplineEvaluator corresponds to a Lagrange interpolation.
+     * @param coord_eval The coordinate where the Lagrange polynomial is evaluated.
+     *              Note that only the component along the dimension of interest is used.
+     * @param Lagrange_coef A Field storing the 1D Lagrange coefficients.
      *
-     * @param coord_eval The coordinate where the Lagrange is evaluated. Note that only the component along the dimension of interest is used.
-     * @param Lagrange_coef A ChunkSpan storing the 1D Lagrange coefficients.
-     *
-     * @return The value of the Lagrange function at the desired coordinate.
+     * @return The value of the Lagrange polynomial at the desired coordinate.
      */
     template <class Layout, class... CoordsDims, class BatchedLagrangeIdxRange>
     KOKKOS_FUNCTION DataType operator()(
@@ -213,35 +217,35 @@ public:
     }
 
     /**
-     * @brief Evaluate Lagrange function (described by its Lagrange coefficients) on a mesh.
+     * @brief Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh.
      *
-     * The Lagrange coefficients represent a Lagrange function defined on a cartesian product of batch_domain and B-Lagranges
-     * (basis Lagranges). They can be obtained via various methods, such as using a SplineBuilder.
+     * The Lagrange coefficients describe Lagrange polynomials defined on a cartesian product of batch_domain and
+     * Lagrange basis. They can be obtained using the IdentityInterpolationBuilder.
      *
      * This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates
      * identified by a batch_domain_type::discrete_element_type, the evaluation is performed with the 1D set of
      * Lagrange coefficients identified by the same batch_domain_type::discrete_element_type.
      *
-     * Remark: calling SplineBuilder then SplineEvaluator corresponds to a Lagrange interpolation.
-     *
-     * @param[out] Lagrange_eval The values of the Lagrange function at the desired coordinates. For practical reasons those are
-     * stored in a ChunkSpan defined on a batched_evaluation_domain_type.
-     * @param[in] coords_eval The coordinates where the Lagrange is evaluated. Those are
-     * stored in a ChunkSpan defined on a batched_evaluation_domain_type. Note that the coordinates of the
-     * points represented by this domain are unused and irrelevant (but the points themselves (DiscreteElement) are used to select
-     * the set of 1D Lagrange coefficients retained to perform the evaluation).
-     * @param[in] Lagrange_coef A ChunkSpan storing the Lagrange coefficients.
+     * @param[out] lagrange_eval The values of the Lagrange polynomials at the desired coordinates.
+     * @param[in] coords_eval The coordinates where the Lagrange polynomials are evaluated. Those are
+     * stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the
+     * points represented by this index range are unused and irrelevant.
+     * @param[in] lagrange_coef A Field storing the Lagrange coefficients.
      */
     template <
             class Layout1,
             class Layout2,
             class Layout3,
-            class BatchedInterpolationGrid,
+            class BatchedInterpolationIdxRange,
             class... CoordsDims>
     void operator()(
-            Field<DataType, BatchedInterpolationGrid, memory_space, Layout1> const lagrange_eval,
-            ConstField<Coord<CoordsDims...>, BatchedInterpolationGrid, memory_space, Layout2> const
-                    coords_eval,
+            Field<DataType, BatchedInterpolationIdxRange, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    Coord<CoordsDims...>,
+                    BatchedInterpolationIdxRange,
+                    memory_space,
+                    Layout2> const coords_eval,
             ConstField<
                     DataType,
                     batched_lagrange_domain_type<BatchedInterpolationGrid>,
@@ -269,34 +273,29 @@ public:
     }
 
     /**
-     * @brief Evaluate a spline function (described by its spline coefficients) on a mesh.
+     * @brief Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh.
      *
-     * The spline coefficients represent a spline function defined on a cartesian
-     * product of batch_domain and B-splines (basis splines). They can be obtained
-     * via various methods, such as using a SplineBuilder.
+     * The Lagrange coefficients describe Lagrange polynomials defined on a cartesian product of batch_domain and
+     * Lagrange basis. They can be obtained using the IdentityInterpolationBuilder.
      *
-     * This is not a multidimensional evaluation. This is a batched 1D evaluation.
-     * This means that for each slice of spline_eval the evaluation is performed with
-     * the 1D set of spline coefficients identified by the same batch_domain_type::discrete_element_type.
+     * This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates
+     * identified by a batch_domain_type::discrete_element_type, the evaluation is performed with the 1D set of
+     * Lagrange coefficients identified by the same batch_domain_type::discrete_element_type.
      *
-     * Remark: calling SplineBuilder then SplineEvaluator corresponds to a spline
-     * interpolation.
-     *
-     * @param[out] spline_eval The values of the spline function at the coordinates
-     * of the mesh.
-     * @param[in] spline_coef A ChunkSpan storing the spline coefficients.
+     * @param[out] lagrange_eval The values of the Lagrange polynomials at the mesh points.
+     * @param[in] lagrange_coef A Field storing the Lagrange coefficients.
      */
     template <class Layout1, class Layout2, class BatchedInterpolationGrid>
     void operator()(
-            Field<DataType, BatchedInterpolationGrid, memory_space, Layout1> const spline_eval,
+            Field<DataType, BatchedInterpolationGrid, memory_space, Layout1> const lagrange_eval,
             ConstField<
                     DataType,
                     batched_lagrange_domain_type<BatchedInterpolationGrid>,
                     memory_space,
-                    Layout2> const spline_coef) const
+                    Layout2> const lagrange_coef) const
     {
-        evaluation_domain_type const evaluation_domain(spline_eval.domain());
-        batch_domain_type<BatchedInterpolationGrid> const batch_domain(spline_eval.domain());
+        evaluation_domain_type const evaluation_domain(lagrange_eval.domain());
+        batch_domain_type<BatchedInterpolationGrid> const batch_domain(lagrange_eval.domain());
 
         ddc::parallel_for_each(
                 "lagrange_evaluate",
@@ -304,11 +303,11 @@ public:
                 batch_domain,
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type<
                                     BatchedInterpolationGrid>::discrete_element_type const j) {
-                    auto const spline_eval_1D = spline_eval[j];
-                    auto const spline_coef_1D = spline_coef[j];
+                    auto const lagrange_eval_1D = lagrange_eval[j];
+                    auto const lagrange_coef_1D = lagrange_coef[j];
                     for (auto const i : evaluation_domain) {
                         Coord<continuous_dimension_type> coord_eval_1D = ddc::coordinate(i);
-                        spline_eval_1D(i) = eval(coord_eval_1D, spline_coef_1D);
+                        lagrange_eval_1D(i) = eval(coord_eval_1D, lagrange_coef_1D);
                     }
                 });
     }
@@ -317,7 +316,7 @@ private:
     template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType
     eval(Coord<CoordsDims...> const& coord_eval,
-         ConstField<DataType, lagrange_domain_type, memory_space, Layout> const spline_coef) const
+         ConstField<DataType, lagrange_domain_type, memory_space, Layout> const lagrange_coef) const
     {
         Coord<continuous_dimension_type> coord_eval_interest(coord_eval);
         if constexpr (lagrange_basis_type::is_periodic()) {
@@ -332,20 +331,20 @@ private:
             }
         } else {
             if (coord_eval_interest < ddc::discrete_space<lagrange_basis_type>().rmin()) {
-                return m_lower_extrap_rule(coord_eval_interest, spline_coef);
+                return m_lower_extrap_rule(coord_eval_interest, lagrange_coef);
             }
             if (coord_eval_interest > ddc::discrete_space<lagrange_basis_type>().rmax()) {
-                return m_upper_extrap_rule(coord_eval_interest, spline_coef);
+                return m_upper_extrap_rule(coord_eval_interest, lagrange_coef);
             }
         }
-        return eval_no_bc(Idx<>(), coord_eval_interest, spline_coef);
+        return eval_no_bc(Idx<>(), coord_eval_interest, lagrange_coef);
     }
 
     template <class... DerivDims, class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType eval_no_bc(
             Idx<DerivDims...> const& deriv_order,
             Coord<CoordsDims...> const& coord_eval,
-            ConstField<DataType, lagrange_domain_type, memory_space, Layout> const spline_coef)
+            ConstField<DataType, lagrange_domain_type, memory_space, Layout> const lagrange_coef)
             const
     {
         using deriv_dim = ddc::Deriv<continuous_dimension_type>;
@@ -403,11 +402,13 @@ private:
 
         DataType y = 0.0;
         for (std::size_t i = 0; i < lagrange_basis_type::degree() + 1; ++i) {
-            y += spline_coef(first_lagrange_knot + i) * vals[i];
+            y += lagrange_coef(first_lagrange_knot + i) * vals[i];
         }
         return y;
     }
 
+    /** @brief Get the knot index closest to the provided coordinate.
+     */
     KOKKOS_INLINE_FUNCTION auto getclosest(Coord<continuous_dimension_type> x_interp) const
     {
         using knot_grid = std::conditional_t<
