@@ -34,6 +34,7 @@ public:
     /// @brief The type of the domain for the 1D interpolation mesh used by this class.
     using interpolation_domain_type = IdxRange<interpolation_discrete_dimension_type>;
 
+    /// @brief The grid on which the interpolation coefficients should be provided.
     using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
 
     /**
