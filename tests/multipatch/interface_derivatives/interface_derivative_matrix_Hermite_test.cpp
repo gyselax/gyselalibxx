@@ -502,7 +502,8 @@ public:
         std::vector<Coord<Xg>> break_points_xg = build_random_non_uniform_break_points(
                 xg_min,
                 xg_max,
-                IdxStep<GridXg>(ncells_per_patch * 3));
+                IdxStep<GridXg>(ncells_per_patch * 3),
+                0.);
         std::vector<Coord<Yg>> break_points_yg = build_random_non_uniform_break_points(
                 yg_min,
                 yg_max,
