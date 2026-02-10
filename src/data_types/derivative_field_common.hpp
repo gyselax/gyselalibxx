@@ -383,7 +383,7 @@ protected:
     KOKKOS_FUNCTION auto get_internal_field(Idx<ODims...> elem) const
     {
         using AllValidDims = ddc::detail::TypeSeq<DDims...>;
-        static_assert(((ddc::in_tags_v<ODims, AllValidDims>) && ...));
+        static_assert(((ddc::in_tags_v<ODims, AllValidDims>)&&...));
 
         // Get the types related to the provided information
         using provided_tags = ddc::detail::TypeSeq<ODims...>;
