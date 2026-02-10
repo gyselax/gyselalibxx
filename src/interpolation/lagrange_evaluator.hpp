@@ -184,7 +184,7 @@ public:
     /**
      * @brief Get the upper extrapolation rule.
      *
-     * Extrapolation rules are functors used to define the behavior of the LagrangeEvaluator
+     * Extrapolation rules are functors used to define the behaviour of the LagrangeEvaluator
      * outside the domain where the break points of the Lagrange basis are defined.
      *
      * @return The upper extrapolation rule.
