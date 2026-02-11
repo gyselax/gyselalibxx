@@ -58,5 +58,5 @@ git submodule update --init
 git fetch origin # Make sure that you have an up-to-date version of the branch
 git checkout origin/devel -- <submodule> # Revert to the expected version of the submodule
 git commit -m "Revert accidental change to submodule" <submodule> # Save the version change
-git submodule update submodule # Update your local copy of the submodule to the new version
+git submodule update <submodule> # Update your local copy of the submodule to the new version
 ```
