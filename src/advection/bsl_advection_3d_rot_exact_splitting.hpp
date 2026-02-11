@@ -310,6 +310,9 @@ using namespace std;
                 double a6 = dt*y3[1];
                 double a7 = dt*yr[1];
                 double a8 = dt*yr[2];
+                
+
+                
 
                 module_vx(a7,a8);
                 module_vz(a5,a6);
@@ -395,6 +398,9 @@ using namespace std;
                 double a7 = dt*yr[1];
                 double a8 = dt*yr[2];
 
+                
+
+
                 module_vx(a7,a8);
                 module_vy(a5,a6);
                 module_vz(a3,a4);
@@ -418,6 +424,10 @@ using namespace std;
                 double a7 = dt*yr[0];
                 double a8 = dt*yr[2];
 
+                
+
+               
+                
 
                 module_vy(a7,a8);
                 module_vz(a5,a6);
@@ -444,7 +454,10 @@ using namespace std;
                 double a6 = dt*y3[2];
                 double a7 = dt*yr[0];
                 double a8 = dt*yr[2];
+
                 
+
+
                 module_vy(a7,a8);
                 module_vx(a5,a6);
                 module_vz(a3,a4);
@@ -467,6 +480,11 @@ using namespace std;
                 double a6 = dt*y3[2];
                 double a7 = dt*yr[0];
                 double a8 = dt*yr[1];
+
+            
+
+
+                
 
 
                 module_vz(a7,a8);

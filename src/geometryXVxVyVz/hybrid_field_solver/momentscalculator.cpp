@@ -7,9 +7,10 @@
 #include "ddc_helper.hpp"
 #include "species_info.hpp"
 
-MomentsCalculator::MomentsCalculator(DConstFieldVxVyVz coeffs, DConstFieldVz coeffs1D) 
+MomentsCalculator::MomentsCalculator(DConstFieldVxVyVz coeffs, DConstFieldVz coeffs_vz, DConstFieldVyVz coeffs_vyvz) 
 : m_quadrature(coeffs) 
-, m_quadrature_1D(coeffs1D) 
+, m_quadrature_vz(coeffs_vz) 
+, m_quadrature_vyvz(coeffs_vyvz) 
 {}
 
 void MomentsCalculator::operator()(DFieldX rho, DConstFieldSpVxVyVzX allfdistribu) const
@@ -428,7 +429,7 @@ void MomentsCalculator::operator()(DFieldSpXVxVy rho, DConstFieldSpVxVyVzX allfd
     */
 
     ddc::for_each(kin_species_idx_range, [&](IdxSp isp) {
-        m_quadrature_1D(
+        m_quadrature_vz(
             Kokkos::DefaultExecutionSpace(),
             rho[isp],
             KOKKOS_LAMBDA(IdxXVxVyVz idx) {
@@ -451,6 +452,35 @@ void MomentsCalculator::operator()(DFieldSpXVxVy rho, DConstFieldSpVxVyVzX allfd
                 KOKKOS_LAMBDA(IdxXY ixy) { rho(ixy) += chargedens_adiabspecies; });
     }
     */
+
+    Kokkos::Profiling::popRegion();
+}
+
+
+
+void MomentsCalculator::operator()(DFieldSpXVx rho, DConstFieldSpVxVyVzX allfdistribu) const
+{
+    Kokkos::Profiling::pushRegion("Hybrid_model_Density_after_1D_int_Calculator");
+
+    IdxRangeSp const kin_species_idx_range = get_idx_range<Species>(allfdistribu);
+    host_t<DConstFieldSp> const charges_host = ddc::host_discrete_space<Species>().charges();
+    host_t<DConstFieldSp> const kinetic_charges_host
+            = charges_host[get_idx_range<Species>(allfdistribu)];
+
+    auto const kinetic_charges_alloc
+            = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
+    DConstFieldSp kinetic_charges = get_const_field(kinetic_charges_alloc);
+
+    ddc::for_each(kin_species_idx_range, [&](IdxSp isp) {
+        m_quadrature_vyvz(
+            Kokkos::DefaultExecutionSpace(),
+            rho[isp],
+            KOKKOS_LAMBDA(IdxXVxVyVz idx) {
+                double sum = allfdistribu(isp, idx);
+                return sum;
+            }); 
+    });
+
 
     Kokkos::Profiling::popRegion();
 }

@@ -88,6 +88,13 @@ public:
     void operator()(DFieldSpXVxVy rho, DConstFieldSpVxVyVzX allfdistribu) const final;
 
     /**
+     * @brief Computes the density for each distribution function by intergrating vy and vz.
+     * @param[in, out] rho
+     * @param[in] allfdistribu 
+     */
+    void operator()(DFieldSpXVx rho, DConstFieldSpVxVyVzX allfdistribu) const final;
+
+    /**
      * @brief Computes the temperature each distribution function.
      * @param[out] parallel_temperature, perpendicular_temperature
      * @param[in] rho, Bx, By, Bz, ux, uy, uz

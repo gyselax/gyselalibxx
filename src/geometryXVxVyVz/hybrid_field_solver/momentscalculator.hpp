@@ -21,7 +21,8 @@ class MomentsCalculator : public IMomentsCalculator
 {
 private:
     Quadrature<IdxRangeVxVyVz, IdxRangeXVxVyVz> m_quadrature;
-    Quadrature<IdxRangeVz, IdxRangeXVxVyVz> m_quadrature_1D;
+    Quadrature<IdxRangeVz, IdxRangeXVxVyVz> m_quadrature_vz;
+    Quadrature<IdxRangeVyVz, IdxRangeXVxVyVz> m_quadrature_vyvz;
 
 public:
     /**
@@ -29,7 +30,7 @@ public:
      * @param[in] coeffs
      *            The coefficients of the quadrature.
      */
-    explicit MomentsCalculator(DConstFieldVxVyVz coeffs, DConstFieldVz coeffs1D);
+    explicit MomentsCalculator(DConstFieldVxVyVz coeffs, DConstFieldVz coeffs_vy, DConstFieldVyVz coeffs_vyvz);
 
     /**
      * @brief Computes the charge density rho from the distribution function.
@@ -103,6 +104,13 @@ public:
      * @param[in] allfdistribu 
      */
     void operator()(DFieldSpXVxVy rho, DConstFieldSpVxVyVzX allfdistribu) const final;
+
+    /**
+     * @brief Computes the density for each distribution function by intergrating for vy and vz.
+     * @param[in, out] rho
+     * @param[in] allfdistribu 
+     */
+    void operator()(DFieldSpXVx rho, DConstFieldSpVxVyVzX allfdistribu) const final;
 
     
     void operator()(DFieldSpX parallel_temperature, DFieldSpX perpendicular_temperature, DConstFieldSpX rho, 
