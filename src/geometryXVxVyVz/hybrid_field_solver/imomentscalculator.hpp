@@ -112,6 +112,14 @@ public:
     virtual void operator()(DFieldSpXVxVy rho, DConstFieldSpVxVyVzX allfdistribu) const = 0;
 
     /**
+     * Calculate the density for each distribution function by intergrating for vy and vz.
+     *
+     * @param[out] rho The density after integrating about one velocity direction.
+     * @param[in] allfdistribu The distribution function.
+     */
+    virtual void operator()(DFieldSpXVx rho, DConstFieldSpVxVyVzX allfdistribu) const = 0;
+
+    /**
      * Calculate the mean velocity in direction x, y, and z for each distribution function.
      *
      * Calculate the mean velocity by calculating the spline representation of slices

@@ -84,6 +84,12 @@ data:
     subtype: double
     size: [ '$densityspvxvy_extents[0]', '$densityspvxvy_extents[1]', '$densityspvxvy_extents[2]' ]
 
+  densityspxvx_extents: { type: array, subtype: int64, size: 3 }
+  densityspxvx:
+    type: array
+    subtype: double
+    size: [ '$densityspxvx_extents[0]', '$densityspxvx_extents[1]', '$densityspxvx_extents[2]' ]
+
 plugins:
   mpi:
   set_value:
@@ -111,6 +117,6 @@ plugins:
           type: array
           subtype: double
           size: [ '$Nkinspecies', '$MeshX_extents[0]', '$MeshVx_extents[0]', '$MeshVy_extents[0]', '$MeshVz_extents[0]' ]
-      write: [time_saved, kinetic_energy, magnetic_energy, thermal_energy, parallel_temperature, perpendicular_temperature, magnetic_field_x, magnetic_field_y, magnetic_field_z, densityspvxvy]
+      write: [time_saved, kinetic_energy, magnetic_energy, thermal_energy, parallel_temperature, perpendicular_temperature, magnetic_field_x, magnetic_field_y, magnetic_field_z]
   #trace: ~
 )PDI_CFG";

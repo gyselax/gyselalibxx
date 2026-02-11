@@ -256,11 +256,13 @@ using IdxRangeXVxVyVz = IdxRange<GridX, GridVx, GridVy, GridVz>;
 using IdxRangeVxVyVzX = IdxRange<GridVx, GridVy, GridVz, GridX>;
 using IdxRangeVxVyVz = IdxRange<GridVx, GridVy, GridVz>;
 using IdxRangeVxVy = IdxRange<GridVx, GridVy>;
+using IdxRangeVyVz = IdxRange<GridVy, GridVz>;
 using IdxRangeSpVxVy = IdxRange<Species, GridVx, GridVy>;
 using IdxRangeSpXVxVy = IdxRange<Species, GridX, GridVx, GridVy>;
 using IdxRangeSpVxVyX = IdxRange<Species, GridVx, GridVy, GridX>;
 using IdxRangeSpVxVyVz = IdxRange<Species, GridVx, GridVy, GridVz>;
 using IdxRangeSpX = IdxRange<Species, GridX>;
+using IdxRangeSpXVx = IdxRange<Species, GridX, GridVx>;
 using IdxRangeSpXVxVyVz = IdxRange<Species, GridX, GridVx, GridVy, GridVz>;
 using IdxRangeSpVxVyVzX = IdxRange<Species, GridVx, GridVy, GridVz, GridX>;
 
@@ -281,6 +283,10 @@ using FieldMemVz = FieldMem<ElementType, IdxRangeVz>;
 using DFieldMemVz = FieldMemVz<double>;
 
 template <class ElementType>
+using FieldMemVyVz = FieldMem<ElementType, IdxRangeVyVz>;
+using DFieldMemVyVz = FieldMemVyVz<double>;
+
+template <class ElementType>
 using FieldMemVxVyVz = FieldMem<ElementType, IdxRangeVxVyVz>;
 using DFieldMemVxVyVz = FieldMemVxVyVz<double>;
 
@@ -299,6 +305,10 @@ using DFieldMemSpVxVy = FieldMemSpVxVy<double>;
 template <class ElementType>
 using FieldMemSpX = FieldMem<ElementType, IdxRangeSpX>;
 using DFieldMemSpX = FieldMemSpX<double>;
+
+template <class ElementType>
+using FieldMemSpXVx = FieldMem<ElementType, IdxRangeSpXVx>;
+using DFieldMemSpXVx = FieldMemSpXVx<double>;
 
 template <class ElementType>
 using FieldMemSpXVxVyVz = FieldMem<ElementType, IdxRangeSpXVxVyVz>;
@@ -350,6 +360,10 @@ using FieldSpXVxVy = Field<ElementType, IdxRangeSpXVxVy>;
 using DFieldSpXVxVy = FieldSpXVxVy<double>;
 
 template <class ElementType>
+using FieldSpXVx = Field<ElementType, IdxRangeSpXVx>;
+using DFieldSpXVx = FieldSpXVx<double>;
+
+template <class ElementType>
 using FieldSpVxVyVzX = Field<ElementType, IdxRangeSpVxVyVzX>;
 using DFieldSpVxVyVzX = FieldSpVxVyVzX<double>;
 
@@ -377,6 +391,10 @@ using DConstFieldVy = ConstFieldVy<double>;
 template <class ElementType>
 using ConstFieldVz = Field<ElementType const, IdxRangeVz>;
 using DConstFieldVz = ConstFieldVz<double>;
+
+template <class ElementType>
+using ConstFieldVyVz = Field<ElementType const, IdxRangeVyVz>;
+using DConstFieldVyVz = ConstFieldVyVz<double>;
 
 template <class ElementType>
 using ConstFieldVxVyVz = Field<ElementType const, IdxRangeVxVyVz>;

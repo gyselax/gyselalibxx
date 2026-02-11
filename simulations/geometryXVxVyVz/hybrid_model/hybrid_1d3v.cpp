@@ -78,7 +78,8 @@ int main(int argc, char** argv)
             GridVz,
             BSplinesVz,
             SplineInterpPointsVz>(conf_gyselalibxx, "vz");
- 
+        
+    IdxRangeVyVz idxrange_vyvz(idxrange_vy, idxrange_vz);
     IdxRangeVxVyVz idxrange_vxvyvz(idxrange_vx, idxrange_vy, idxrange_vz);
     IdxRangeXVxVyVz const idxrange_xvxvyvz(idxrange_x, idxrange_vx, idxrange_vy, idxrange_vz);
 
@@ -96,6 +97,7 @@ int main(int argc, char** argv)
 
     IdxRangeVxVyVz idxrange_vxvyvz_v3Dsplit(idxrange_spvxvyvzx_v3Dsplit);
     IdxRangeVz idxrange_vz_v3Dsplit(idxrange_spvxvyvzx_v3Dsplit);
+    IdxRangeVyVz idxrange_vyvz_v3Dsplit(idxrange_spvxvyvzx_v3Dsplit);
     IdxRangeVxVyVz idxrange_vxvyvz_x1Dsplit(idxrange_spxvxvyvz_x1Dsplit);
 
     IdxRangeVxVyVzX idxrange_vxvyvzx_v3Dsplit(idxrange_spvxvyvzx_v3Dsplit);
@@ -217,6 +219,15 @@ int main(int argc, char** argv)
             get_field(local_quadrature_coeffs),
             quadrature_coeffs[idxrange_vxvyvz_v3Dsplit]);
 
+    // 2D velocity quafrature coefficients 
+    DFieldMemVyVz const quadrature_coeffs_VyVz(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(idxrange_vyvz, builder_vy, builder_vz));
+    DFieldMemVyVz local_quadrature_coeffs_VyVz(idxrange_vyvz_v3Dsplit);
+    ddc::parallel_deepcopy(
+            get_field(local_quadrature_coeffs_VyVz),
+            quadrature_coeffs_VyVz[idxrange_vyvz_v3Dsplit]);
+
     // 1D (Vz) velocity quafrature coefficients 
     DFieldMemVz const quadrature_coeffs_Vz(
             neumann_spline_quadrature_coefficients<
@@ -227,7 +238,7 @@ int main(int argc, char** argv)
             quadrature_coeffs_Vz[idxrange_vz_v3Dsplit]);
     
     FFTHybridSolver1D<IdxRangeX> fft_hybrid_solver(idxrange_x);
-    MomentsCalculator const rhs_local(get_const_field(local_quadrature_coeffs), get_const_field(local_quadrature_coeffs_Vz));
+    MomentsCalculator const rhs_local(get_const_field(local_quadrature_coeffs), get_const_field(local_quadrature_coeffs_Vz), get_const_field(local_quadrature_coeffs_VyVz));
     MpiMomentsCalculator const rhs(MPI_COMM_WORLD, rhs_local);
     HybridFieldSolver const hybrid_field(fft_hybrid_solver, rhs);
     

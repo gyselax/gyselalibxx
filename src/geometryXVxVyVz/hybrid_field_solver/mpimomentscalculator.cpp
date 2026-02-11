@@ -220,12 +220,37 @@ void MpiMomentsCalculator::operator()(DFieldSpX mean_current_x, DFieldSpX mean_c
 
 void MpiMomentsCalculator::operator()(DFieldSpXVxVy rho, DConstFieldSpVxVyVzX allfdistribu) const
 {
-    Kokkos::Profiling::pushRegion("MpiCharge_after_1D_int_Calculator1d3v");
+    Kokkos::Profiling::pushRegion("MpiCharge_after_vz_int_Calculator1d3v");
     
     IdxRangeSp const kin_species_idx_range = get_idx_range<Species>(allfdistribu);
 
     DFieldMemSpXVxVy rho_local_alloc(get_idx_range(rho));
     DFieldSpXVxVy rho_local = get_field(rho_local_alloc);
+
+    m_local_moments_calculator(rho_local, allfdistribu);
+
+    for (IdxSp isp : kin_species_idx_range) {
+        MPI_Allreduce(
+                rho_local[isp].data_handle(),
+                rho[isp].data_handle(),
+                rho[isp].size(),
+                MPI_type_descriptor_t<double>,
+                MPI_SUM,
+                m_comm);
+    }
+
+    Kokkos::Profiling::popRegion();
+}
+
+
+void MpiMomentsCalculator::operator()(DFieldSpXVx rho, DConstFieldSpVxVyVzX allfdistribu) const
+{
+    Kokkos::Profiling::pushRegion("MpiCharge_after_vyvz_int_Calculator1d3v");
+    
+    IdxRangeSp const kin_species_idx_range = get_idx_range<Species>(allfdistribu);
+
+    DFieldMemSpXVx rho_local_alloc(get_idx_range(rho));
+    DFieldSpXVx rho_local = get_field(rho_local_alloc);
 
     m_local_moments_calculator(rho_local, allfdistribu);
 

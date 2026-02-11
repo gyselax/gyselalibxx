@@ -88,9 +88,9 @@ DFieldSpVxVyVzX MpiSplitHybridVlasovSolver::operator()(
     
     m_advec_3d_rot(allfdistribu_x1Dsplit, get_const_field(local_magnetic_x), get_const_field(local_magnetic_y), get_const_field(local_magnetic_z), get_const_field(local_frame_shift_x), get_const_field(local_frame_shift_y), get_const_field(local_frame_shift_z), dt);
 
-    m_advec_vx(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_x), dt);
-    m_advec_vy(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_y), dt);
-    m_advec_vz(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_z), dt);
+    //m_advec_vx(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_x), dt);
+    //m_advec_vy(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_y), dt);
+    //m_advec_vz(allfdistribu_x1Dsplit, get_const_field(local_p_parallel_z), dt);
     
     // Swap to x contiguous layout
     m_transpose(

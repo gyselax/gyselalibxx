@@ -51,10 +51,7 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
             = ddc::create_mirror_view(get_field(allfdistribu_v3D_split_output_layout));
     host_t<DFieldSpXVxVyVz> allfdistribu_host = get_field(allfdistribu_host_alloc);
 
-    // electrostatic potential and electric field (depending only on x)
-    DFieldMemX electrostatic_potential(get_idx_range<GridX>(allfdistribu_v3D_split));
-    DFieldMemX electric_field_x(get_idx_range<GridX>(allfdistribu_v3D_split));
-    DFieldMemX electric_field_y(get_idx_range<GridX>(allfdistribu_v3D_split));
+    // fields (depending only on x)
     host_t<DFieldMemX> magnetic_field_x_host(
         get_idx_range<GridX>(allfdistribu_v3D_split));
     host_t<DFieldMemX> magnetic_field_y_host(
@@ -62,9 +59,7 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
     host_t<DFieldMemX> magnetic_field_z_host(
         get_idx_range<GridX>(allfdistribu_v3D_split));
     host_t<DFieldMemSpVxVy> density_spvxvy_host(get_idx_range<Species,GridVx,GridVy>(allfdistribu_v3D_split));
-
-    // a 2D memory block of the same size as fdistribu
-    DFieldMemSpVxVyVzX allfdistribu_half_t(get_idx_range(allfdistribu_v3D_split));
+    host_t<DFieldMemSpXVx> density_spxvx_host(get_idx_range<Species,GridX,GridVx>(allfdistribu_v3D_split));
 
     // define the intermidiate variables used in the iteration solver of the fields.
     DFieldMemX pressure_old(get_idx_range<GridX>(allfdistribu_v3D_split));
@@ -118,6 +113,8 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
 
     DFieldMemSpXVxVy density_spxvxvy(get_idx_range<Species,GridX,GridVx,GridVy>(allfdistribu_v3D_split));
     DFieldMemSpVxVy density_spvxvy(get_idx_range<Species,GridVx,GridVy>(allfdistribu_v3D_split));
+
+    DFieldMemSpXVx density_spxvx(get_idx_range<Species,GridX,GridVx>(allfdistribu_v3D_split));
 
     DFieldMemSpX yl_x(get_idx_range(mean_current_x_each));
     DFieldMemSpX yl_y(get_idx_range(mean_current_x_each));
@@ -267,6 +264,8 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
         m_moments_calculator(get_field(kinetic), get_const_field(allfdistribu_v3D_split), 'k');
         // compute the integral of the distribution about vz
         m_moments_calculator(get_field(density_spxvxvy), get_const_field(allfdistribu_v3D_split));
+        // compute the integral of the distribution about vy and vz
+        m_moments_calculator(get_field(density_spxvx), get_const_field(allfdistribu_v3D_split));
 
         // compute the temperature 
         m_moments_calculator(get_field(rho_each), get_const_field(allfdistribu_v3D_split));
@@ -339,6 +338,7 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
         ddc::parallel_deepcopy(magnetic_field_y_host, magnetic_field_y);
         ddc::parallel_deepcopy(magnetic_field_z_host, magnetic_field_z);
         ddc::parallel_deepcopy(density_spvxvy_host, density_spvxvy);
+        ddc::parallel_deepcopy(density_spxvx_host, density_spxvx);
         ddc::PdiEvent("iteration")
                 .with("iter", iter)
                 .with("time_saved", iter_time)
@@ -349,8 +349,7 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
                 .with("perpendicular_temperature", perp_temperature)
                 .with("magnetic_field_x", magnetic_field_x_host)
                 .with("magnetic_field_y", magnetic_field_y_host)
-                .with("magnetic_field_z", magnetic_field_z_host)
-                .with("densityspvxvy", density_spvxvy_host);
+                .with("magnetic_field_z", magnetic_field_z_host);
 
         std::cout << "time step just finished is: " << iter << std::endl;
     }
@@ -371,13 +370,13 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
     ddc::parallel_deepcopy(magnetic_field_y_host, magnetic_field_y);
     ddc::parallel_deepcopy(magnetic_field_z_host, magnetic_field_z);
     ddc::parallel_deepcopy(density_spvxvy_host, density_spvxvy);
+    ddc::parallel_deepcopy(density_spxvx_host, density_spxvx);
     ddc::PdiEvent("last_iteration")
             .with("iter", iter)
             .with("time_saved", final_time)
             .with("magnetic_field_x", magnetic_field_x_host)
             .with("magnetic_field_y", magnetic_field_y_host)
-            .with("magnetic_field_z", magnetic_field_z_host)
-            .with("densityspvxvy", density_spvxvy_host);
+            .with("magnetic_field_z", magnetic_field_z_host);
     //std::cout << "just check-----------------: " << std::setprecision(16) << final_time << std::endl;
 
     return allfdistribu_v3D_split;
