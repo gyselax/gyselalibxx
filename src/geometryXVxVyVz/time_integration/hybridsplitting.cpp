@@ -263,7 +263,7 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
                             get_const_field(allfdistribu_v3D_split));
         m_moments_calculator(get_field(kinetic), get_const_field(allfdistribu_v3D_split), 'k');
         // compute the integral of the distribution about vz
-        m_moments_calculator(get_field(density_spxvxvy), get_const_field(allfdistribu_v3D_split));
+        //m_moments_calculator(get_field(density_spxvxvy), get_const_field(allfdistribu_v3D_split));
         // compute the integral of the distribution about vy and vz
         m_moments_calculator(get_field(density_spxvx), get_const_field(allfdistribu_v3D_split));
 
@@ -337,7 +337,7 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
         ddc::parallel_deepcopy(magnetic_field_x_host, magnetic_field_x);
         ddc::parallel_deepcopy(magnetic_field_y_host, magnetic_field_y);
         ddc::parallel_deepcopy(magnetic_field_z_host, magnetic_field_z);
-        ddc::parallel_deepcopy(density_spvxvy_host, density_spvxvy);
+        //ddc::parallel_deepcopy(density_spvxvy_host, density_spvxvy);
         ddc::parallel_deepcopy(density_spxvx_host, density_spxvx);
         ddc::PdiEvent("iteration")
                 .with("iter", iter)
@@ -349,7 +349,8 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
                 .with("perpendicular_temperature", perp_temperature)
                 .with("magnetic_field_x", magnetic_field_x_host)
                 .with("magnetic_field_y", magnetic_field_y_host)
-                .with("magnetic_field_z", magnetic_field_z_host);
+                .with("magnetic_field_z", magnetic_field_z_host)
+                .with("densityspxvx", density_spxvx_host);
 
         std::cout << "time step just finished is: " << iter << std::endl;
     }
@@ -369,14 +370,15 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
     ddc::parallel_deepcopy(magnetic_field_x_host, magnetic_field_x);
     ddc::parallel_deepcopy(magnetic_field_y_host, magnetic_field_y);
     ddc::parallel_deepcopy(magnetic_field_z_host, magnetic_field_z);
-    ddc::parallel_deepcopy(density_spvxvy_host, density_spvxvy);
+    //ddc::parallel_deepcopy(density_spvxvy_host, density_spvxvy);
     ddc::parallel_deepcopy(density_spxvx_host, density_spxvx);
     ddc::PdiEvent("last_iteration")
             .with("iter", iter)
             .with("time_saved", final_time)
             .with("magnetic_field_x", magnetic_field_x_host)
             .with("magnetic_field_y", magnetic_field_y_host)
-            .with("magnetic_field_z", magnetic_field_z_host);
+            .with("magnetic_field_z", magnetic_field_z_host)
+            .with("densityspxvx", density_spxvx_host);
     //std::cout << "just check-----------------: " << std::setprecision(16) << final_time << std::endl;
 
     return allfdistribu_v3D_split;

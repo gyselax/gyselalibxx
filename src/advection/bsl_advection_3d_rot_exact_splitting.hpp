@@ -235,9 +235,9 @@ using namespace std;
                         feet_coords_vx(iv, ib) = Coord<DimVx>(ddc::coordinate(iv)+dvx);
                 });
             interpolator_vx(allfdistribu[isp][ix],
-                        get_const_field(feet_coords_vx),
-                        get_const_field(derivs_min_vx),
-                        get_const_field(derivs_max_vx));
+                        get_const_field(feet_coords_vx));
+                        //get_const_field(derivs_min_vx),
+                        //get_const_field(derivs_max_vx));
             };
 
             // module vy 
@@ -252,9 +252,9 @@ using namespace std;
                         feet_coords_vy(iv, ib) = Coord<DimVy>(ddc::coordinate(iv)+dvy);
                 });
             interpolator_vy(allfdistribu[isp][ix],
-                        get_const_field(feet_coords_vy),
-                        get_const_field(derivs_min_vy),
-                        get_const_field(derivs_max_vy));
+                        get_const_field(feet_coords_vy));
+                        //get_const_field(derivs_min_vy),
+                        //get_const_field(derivs_max_vy));
             };
 
             // module vz 
@@ -269,9 +269,9 @@ using namespace std;
                         feet_coords_vz(iv, ib) = Coord<DimVz>(ddc::coordinate(iv)+dvz);
                 });
             interpolator_vz(allfdistribu[isp][ix],
-                        get_const_field(feet_coords_vz),
-                        get_const_field(derivs_min_vz),
-                        get_const_field(derivs_max_vz));
+                        get_const_field(feet_coords_vz));
+                        //get_const_field(derivs_min_vz),
+                        //get_const_field(derivs_max_vz));
             };
             
 

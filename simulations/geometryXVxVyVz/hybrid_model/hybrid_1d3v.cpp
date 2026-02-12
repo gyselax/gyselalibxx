@@ -13,7 +13,7 @@
 #include <paraconf.h>
 #include <pdi.h>
 
-#include "bsl_advection_vx.hpp"
+#include "bsl_advection_vx_hybrid.hpp"
 #include "bsl_advection_3d_rot_exact_splitting.hpp"
 #include "bsl_advection_x.hpp"
 #include "ddc_alias_inline_functions.hpp"
@@ -27,6 +27,7 @@
 #include "mpisplitvlasovsolver.hpp"
 #include "mpitransposealltoall.hpp"
 #include "neumann_spline_quadrature.hpp"
+#include "trapezoid_quadrature.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -162,20 +163,20 @@ int main(int argc, char** argv)
 
     PreallocatableSplineInterpolator const spline_x_interpolator(builder_x, spline_x_evaluator, idxrange_vxvyvzx_v3Dsplit);
 
-    ddc::ConstantExtrapolationRule<Vx> bv_vx_min(ddc::coordinate(idxrange_vx.front()));
-    ddc::ConstantExtrapolationRule<Vx> bv_vx_max(ddc::coordinate(idxrange_vx.back()));
+    ddc::PeriodicExtrapolationRule<Vx> bv_vx_min;
+    ddc::PeriodicExtrapolationRule<Vx> bv_vx_max;
     SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
 
     PreallocatableSplineInterpolator const spline_vx_interpolator(builder_vx, spline_vx_evaluator, idxrange_xvxvyvz_x1Dsplit);
 
-    ddc::ConstantExtrapolationRule<Vy> bv_vy_min(ddc::coordinate(idxrange_vy.front()));
-    ddc::ConstantExtrapolationRule<Vy> bv_vy_max(ddc::coordinate(idxrange_vy.back()));
+    ddc::PeriodicExtrapolationRule<Vy> bv_vy_min;
+    ddc::PeriodicExtrapolationRule<Vy> bv_vy_max;
     SplineVyEvaluator const spline_vy_evaluator(bv_vy_min, bv_vy_max);
 
     PreallocatableSplineInterpolator const spline_vy_interpolator(builder_vy, spline_vy_evaluator, idxrange_xvxvyvz_x1Dsplit);
 
-    ddc::ConstantExtrapolationRule<Vz> bv_vz_min(ddc::coordinate(idxrange_vz.front()));
-    ddc::ConstantExtrapolationRule<Vz> bv_vz_max(ddc::coordinate(idxrange_vz.back()));
+    ddc::PeriodicExtrapolationRule<Vz> bv_vz_min;
+    ddc::PeriodicExtrapolationRule<Vz> bv_vz_max;
     SplineVzEvaluator const spline_vz_evaluator(bv_vz_min, bv_vz_max);
 
     PreallocatableSplineInterpolator const spline_vz_interpolator(builder_vz, spline_vz_evaluator, idxrange_xvxvyvz_x1Dsplit);
@@ -197,9 +198,9 @@ int main(int argc, char** argv)
     // Create advection operator
     BslAdvectionSpatial<GeometryVxVyVzX, GridX> const advection_x(spline_x_interpolator);
     
-    BslAdvectionVelocity<GeometryXVxVyVz, GridVx> const advection_vx(spline_vx_interpolator);
-    BslAdvectionVelocity<GeometryXVxVyVz, GridVy> const advection_vy(spline_vy_interpolator);
-    BslAdvectionVelocity<GeometryXVxVyVz, GridVz> const advection_vz(spline_vz_interpolator);
+    BslAdvectionVelocityHybrid<GeometryXVxVyVz, GridVx> const advection_vx(spline_vx_interpolator);
+    BslAdvectionVelocityHybrid<GeometryXVxVyVz, GridVy> const advection_vy(spline_vy_interpolator);
+    BslAdvectionVelocityHybrid<GeometryXVxVyVz, GridVz> const advection_vz(spline_vz_interpolator);
 
     //BslAdvectionVelocityRot3DVx<GeometryXVxVyVz, GridVx, GridVy, GridVz> const advec_3d_rot_vx(spline_vx_interpolator);
     //BslAdvectionVelocityRot3DVy<GeometryXVxVyVz, GridVx, GridVy, GridVz> const advec_3d_rot_vy(spline_vy_interpolator);
@@ -212,8 +213,8 @@ int main(int argc, char** argv)
     
     // 3D velocity quafrature coefficients 
     DFieldMemVxVyVz const quadrature_coeffs(
-            neumann_spline_quadrature_coefficients<
-                    Kokkos::DefaultExecutionSpace>(idxrange_vxvyvz, builder_vx, builder_vy, builder_vz));
+            trapezoid_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(idxrange_vxvyvz));
     DFieldMemVxVyVz local_quadrature_coeffs(idxrange_vxvyvz_v3Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs),
@@ -221,8 +222,8 @@ int main(int argc, char** argv)
 
     // 2D velocity quafrature coefficients 
     DFieldMemVyVz const quadrature_coeffs_VyVz(
-            neumann_spline_quadrature_coefficients<
-                    Kokkos::DefaultExecutionSpace>(idxrange_vyvz, builder_vy, builder_vz));
+            trapezoid_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(idxrange_vyvz));
     DFieldMemVyVz local_quadrature_coeffs_VyVz(idxrange_vyvz_v3Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs_VyVz),
@@ -230,8 +231,8 @@ int main(int argc, char** argv)
 
     // 1D (Vz) velocity quafrature coefficients 
     DFieldMemVz const quadrature_coeffs_Vz(
-            neumann_spline_quadrature_coefficients<
-                    Kokkos::DefaultExecutionSpace>(idxrange_vz, builder_vz));
+            trapezoid_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(idxrange_vz));
     DFieldMemVz local_quadrature_coeffs_Vz(idxrange_vz_v3Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs_Vz),
