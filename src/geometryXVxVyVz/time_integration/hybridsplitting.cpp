@@ -195,6 +195,19 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
         
         // advect in x over dt / 2
         m_vlasov_solver(get_field(allfdistribu_v3D_split), dt / 2);
+
+        // substep bb
+        // remember to compute rho here
+        m_moments_calculator(get_field(rho), get_const_field(allfdistribu_v3D_split));
+        m_hybrid_solver(get_field(magnetic_field_y), get_field(magnetic_field_y_old),
+                        get_field(magnetic_field_y_mid), get_field(magnetic_field_y_previous),
+                        get_field(magnetic_field_z), get_field(magnetic_field_z_old), 
+                        get_field(magnetic_field_z_mid), get_field(magnetic_field_z_previous),
+                        get_field(rho),
+                        get_field(magnetic_field_x),
+                        get_field(gradx_magnetic_field_y_mid),
+                        get_field(gradx_magnetic_field_z_mid),
+                        dt / 2);
         
         
         // computation of the fields
@@ -246,7 +259,17 @@ DFieldSpVxVyVzX Hybridsplitting::operator()(
         
         
         
-        
+        // substep bb over dt / 2
+
+        m_hybrid_solver(get_field(magnetic_field_y), get_field(magnetic_field_y_old),
+                        get_field(magnetic_field_y_mid), get_field(magnetic_field_y_previous),
+                        get_field(magnetic_field_z), get_field(magnetic_field_z_old), 
+                        get_field(magnetic_field_z_mid), get_field(magnetic_field_z_previous),
+                        get_field(rho),
+                        get_field(magnetic_field_x),
+                        get_field(gradx_magnetic_field_y_mid),
+                        get_field(gradx_magnetic_field_z_mid),
+                        dt / 2);
         
         // advect in x over dt / 2
         m_vlasov_solver(get_field(allfdistribu_v3D_split), dt / 2);

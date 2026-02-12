@@ -59,7 +59,7 @@ void HybridFieldSolver::operator()(
 Kokkos::Profiling::pushRegion("Hybridfieldsolver1d3v");
 //assert((get_idx_range(electrostatic_potential) == get_idx_range<GridX, GridY>(allfdistribu)));
 
-    m_compute_moments(rho, allfdistribu);
+    //m_compute_moments(rho, allfdistribu);
     //m_compute_moments(weighted_u_x, weighted_u_y, weighted_u_z, rho, allfdistribu);
 
     m_compute_moments(rho_each, allfdistribu);
@@ -101,3 +101,18 @@ Kokkos::Profiling::pushRegion("Hybridfieldsolver1d3v");
 Kokkos::Profiling::popRegion();
 }
 
+
+void HybridFieldSolver::operator()(
+    DFieldX magnetic_field_y, DFieldX magnetic_field_y_old, DFieldX magnetic_field_y_mid, DFieldX magnetic_field_y_previous, 
+    DFieldX magnetic_field_z, DFieldX magnetic_field_z_old, DFieldX magnetic_field_z_mid, DFieldX magnetic_field_z_previous, 
+    DFieldX rho,
+    DFieldX magnetic_field_x, DFieldX gradx_magnetic_field_y_mid, DFieldX gradx_magnetic_field_z_mid, double const dt
+    ) const
+{
+    Kokkos::Profiling::pushRegion("Hybridfieldsolver1d3vbb");
+    m_solve_hybrid(magnetic_field_y, magnetic_field_y_old, magnetic_field_y_mid, magnetic_field_y_previous,
+                   magnetic_field_z, magnetic_field_z_old, magnetic_field_z_mid, magnetic_field_z_previous,
+                   rho, magnetic_field_x, gradx_magnetic_field_y_mid, gradx_magnetic_field_z_mid, dt);    
+    
+Kokkos::Profiling::popRegion();
+}

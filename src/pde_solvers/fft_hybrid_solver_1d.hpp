@@ -449,7 +449,7 @@ public:
         // The picard iteration starts here 
         ///////////////////////////////////////////////////////////////////////////////////////////
         int iter = 0;
-        int iter_number = 20;
+        int iter_number = 50;
         for (; iter < iter_number; ++iter) {
             // 0th step, compute the p at the mid-time, and store the p value at pressure_field_previous 
             ddc::parallel_for_each(
@@ -486,8 +486,8 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 idx_range,
                 KOKKOS_LAMBDA(IdxX const ixy) {
-                    magnetic_field_y(ixy) = magnetic_field_y_old(ixy) + dt * gradx_magnetic_field_y_mid(ixy);
-                    magnetic_field_z(ixy) = magnetic_field_z_old(ixy) - dt * gradx_magnetic_field_z_mid(ixy);
+                    magnetic_field_y(ixy) = magnetic_field_y_old(ixy) + dt * gradx_magnetic_field_z_mid(ixy);
+                    magnetic_field_z(ixy) = magnetic_field_z_old(ixy) - dt * gradx_magnetic_field_y_mid(ixy);
                 });
 
             
@@ -504,11 +504,11 @@ public:
 
             double max_val = norm_inf(Kokkos::DefaultExecutionSpace(), get_const_field(magnetic_field_y_previous))
                            + norm_inf(Kokkos::DefaultExecutionSpace(), get_const_field(magnetic_field_z_previous));
-            std::cout << "The iteration error of sub step bb is: " << max_val << std::endl;
+            //std::cout << "The iteration error of sub step bb is: " << max_val << std::endl;
 
             double tol = 1e-15;
             if (max_val < tol) {
-                std::cout << "The picard iteration of sub step bb is finished." << std::endl;
+                std::cout << "The picard iteration of sub step bb is finished with the error." << max_val << std::endl;
                 break;
             }
 
@@ -801,8 +801,8 @@ public:
                 Kokkos::DefaultExecutionSpace(),
                 idx_range,
                 KOKKOS_LAMBDA(IdxX const ixy) {
-                    rhs_2(ixy) = u_bar_z(ixy) * magnetic_field_x(ixy) - u_bar_x(ixy) * magnetic_field_z_mid(ixy) - magnetic_field_x(ixy) * gradx_magnetic_field_y_mid(ixy) / rho(ixy);
-                    rhs_3(ixy) = u_bar_x(ixy) * magnetic_field_y_mid(ixy) - u_bar_y(ixy) * magnetic_field_x(ixy) - magnetic_field_x(ixy) * gradx_magnetic_field_z_mid(ixy) / rho(ixy);
+                    rhs_2(ixy) = u_bar_z(ixy) * magnetic_field_x(ixy) - u_bar_x(ixy) * magnetic_field_z_mid(ixy); //- magnetic_field_x(ixy) * gradx_magnetic_field_y_mid(ixy) / rho(ixy);
+                    rhs_3(ixy) = u_bar_x(ixy) * magnetic_field_y_mid(ixy) - u_bar_y(ixy) * magnetic_field_x(ixy); // - magnetic_field_x(ixy) * gradx_magnetic_field_z_mid(ixy) / rho(ixy);
 
                 });
 
@@ -833,12 +833,12 @@ public:
 
             double max_val = norm_inf(Kokkos::DefaultExecutionSpace(), get_const_field(magnetic_field_y_previous))
                            + norm_inf(Kokkos::DefaultExecutionSpace(), get_const_field(magnetic_field_z_previous));
-            //std::cout << "The iteration error of sub step bb is: " << max_val << std::endl;
+            std::cout << "The iteration error of sub step pvb is: " << max_val << std::endl;
 
             double tol = 1e-15;
             if (max_val < tol) {
-               
-                  // prepare for the shifted rotation
+                std::cout << "The iteration error of sub step pvb is: " << max_val << std::endl;
+                // prepare for the shifted rotation
                  ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 idx_range,
