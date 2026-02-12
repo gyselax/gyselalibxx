@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <array>
+#include <cstddef>
+#include <type_traits>
 
 #include "ddc_aliases.hpp"
 #include "view.hpp"
@@ -114,6 +116,10 @@ public:
             : m_reference(ddc::create_reference_discrete_element<DDim>())
         {
             static_assert(std::is_same_v<typename Grid1D::continuous_dimension_type, Dim>);
+            static_assert(
+                    ddc::is_uniform_point_sampling<Grid1D>()
+                    || ddc::is_non_uniform_point_sampling<Grid1D>());
+            assert(ddc::is_discrete_space_initialized<Grid1D>());
             assert(break_point_domain.size() >= D + 1);
 
             // Initialise knot grid
