@@ -58,7 +58,7 @@ struct Vx
     /**
      * @brief A boolean indicating if the dimension is periodic.
      */
-    static bool constexpr PERIODIC = false;
+    static bool constexpr PERIODIC = true;
 };
 
 /**
@@ -69,7 +69,7 @@ struct Vy
     /**
      * @brief A boolean indicating if the dimension is periodic.
      */
-    static bool constexpr PERIODIC = false;
+    static bool constexpr PERIODIC = true;
 };
 
 /**
@@ -80,7 +80,7 @@ struct Vz
     /**
      * @brief A boolean indicating if the dimension is periodic.
      */
-    static bool constexpr PERIODIC = false;
+    static bool constexpr PERIODIC = true;
 };
 
 using CoordX = Coord<X>;
@@ -132,9 +132,9 @@ struct BSplinesVz
 };
 
 ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr SplineVzBoundary = ddc::BoundCond::HERMITE;
+ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::PERIODIC;
+ddc::BoundCond constexpr SplineVzBoundary = ddc::BoundCond::PERIODIC;
 
 // IDim initialisers
 using SplineInterpPointsX
@@ -189,8 +189,8 @@ using SplineVxEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
         GridVx,
-        ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>>;
+        ddc::PeriodicExtrapolationRule<Vx>,
+        ddc::PeriodicExtrapolationRule<Vx>>;
 using SplineVyBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -204,8 +204,8 @@ using SplineVyEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVy,
         GridVy,
-        ddc::ConstantExtrapolationRule<Vy>,
-        ddc::ConstantExtrapolationRule<Vy>>;
+        ddc::PeriodicExtrapolationRule<Vy>,
+        ddc::PeriodicExtrapolationRule<Vy>>;
 using SplineVzBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -219,8 +219,8 @@ using SplineVzEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVz,
         GridVz,
-        ddc::ConstantExtrapolationRule<Vz>,
-        ddc::ConstantExtrapolationRule<Vz>>;
+        ddc::PeriodicExtrapolationRule<Vz>,
+        ddc::PeriodicExtrapolationRule<Vz>>;
 
 using IdxRangeBSX = IdxRange<BSplinesX>;
 using IdxRangeBSVx = IdxRange<BSplinesVx>;

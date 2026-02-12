@@ -37,8 +37,8 @@ DFieldX Hybridmodel_field_initialisation::operator()(DFieldX const magnetic_fiel
                 double const x = ddc::coordinate(ddc::select<GridX>(ix));
                 
                 magnetic_field_x(ix) = 1.0 + 0.0 * m_magnetic_init_perturb_amplitude *  Kokkos::sin(magnetic_kx * x) *  Kokkos::cos(magnetic_kx * x); ;
-                magnetic_field_y(ix) = 0.6 - 0.0*Kokkos::sin(4.0 * magnetic_kx * x); 
-                magnetic_field_z(ix) = 0.9 + 0.0*Kokkos::cos(4.0 * magnetic_kx * x);
+                magnetic_field_y(ix) = 0.0 - 0.25*Kokkos::sin(0.0 * magnetic_kx * x + 0.196 * x); 
+                magnetic_field_z(ix) = 0.0 + 0.25*Kokkos::cos(0.0 * magnetic_kx * x + 0.196 * x);
                 /*
                 magnetic_field_z(ix) +=     B_perturbation * sin(2.0 * magnetic_kx * x);  
                 magnetic_field_z(ix) +=     B_perturbation * sin(3.0 * magnetic_kx * x);  
