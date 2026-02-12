@@ -108,4 +108,11 @@ public:
             DFieldX single_para_tem, 
             DFieldX single_perp_tem) const override;
 
+     void operator()(
+            DFieldX magnetic_field_y, DFieldX magnetic_field_y_old, DFieldX magnetic_field_y_mid, DFieldX magnetic_field_y_previous, 
+            DFieldX magnetic_field_z, DFieldX magnetic_field_z_old, DFieldX magnetic_field_z_mid, DFieldX magnetic_field_z_previous, 
+            DFieldX rho,
+            DFieldX magnetic_field_x, DFieldX gradx_magnetic_field_y_mid, DFieldX gradx_magnetic_field_z_mid, double const dt) const override;
+
+
 };
