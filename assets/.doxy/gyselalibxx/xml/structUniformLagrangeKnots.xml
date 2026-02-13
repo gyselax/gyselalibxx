@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structUniformLagrangeKnots" kind="struct" language="C++" prot="public">
+    <compoundname>UniformLagrangeKnots</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">UniformGridBase&lt; T::continuous_dimension_type &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>UniformGridBase&lt; T::continuous_dimension_type &gt;</label>
+      </node>
+      <node id="1">
+        <label>UniformLagrangeKnots&lt; T &gt;</label>
+        <link refid="structUniformLagrangeKnots"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>UniformGridBase&lt; T::continuous_dimension_type &gt;</label>
+      </node>
+      <node id="1">
+        <label>UniformLagrangeKnots&lt; T &gt;</label>
+        <link refid="structUniformLagrangeKnots"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="20" bodyend="21"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

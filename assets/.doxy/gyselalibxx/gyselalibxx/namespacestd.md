@@ -23,6 +23,11 @@ _STL namespace._
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**is\_base\_of**](namespacestd_1_1is__base__of.md) <br> |
 
 
 

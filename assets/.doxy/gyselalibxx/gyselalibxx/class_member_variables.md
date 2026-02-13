@@ -212,6 +212,9 @@
 * **m\_patch\_locator** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **m\_tuple** ([**MultipatchType**](classMultipatchType.md))
 * **m\_fequilibrium** ([**NoPerturbInitialisation**](classNoPerturbInitialisation.md), [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))
+* **m\_break\_point\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
+* **m\_knot\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
+* **m\_reference** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **m\_all\_idx\_ranges** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **m\_radii** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **m\_to\_cartesian\_mapping** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
@@ -282,6 +285,7 @@
 * **m\_data** ([**TensorCommon**](classTensorCommon.md))
 * **m\_mapping\_2d** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **m\_coord\_changer** ([**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
+* **m\_weights** ([**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **m\_grid** ([**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
 * **m\_tensor** ([**tensor\_tools::IndexedTensor**](classtensor__tools_1_1IndexedTensor.md))
 

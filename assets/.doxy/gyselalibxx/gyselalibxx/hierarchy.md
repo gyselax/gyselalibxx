@@ -140,6 +140,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md) _A class to call all the builders of all the patches once._ 
 * **class** [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md) _A class to call all the builders of all the patches once._ 
 * **class** [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) _A class to evaluate all the splines of all the patches at once._ 
+* **class** [**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._ 
 * **class** [**OnionPatchLocator**](classOnionPatchLocator.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._
 * **class** [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._
 * **class** [**OrthogonalCoordTransforms**](classOrthogonalCoordTransforms.md) _A multi-dimensional coordinate transformation which can be decomposed into multiple orthogonal coordinate transformations._ 
@@ -163,6 +164,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._
 * **class** [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md) _A class which evaluates the triangular Bernstein polynomials._ 
 * **class** [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md) 
+* **class** [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._ 
 * **class** [**VectorFieldCommon**](classVectorFieldCommon.md) 
 * **class** [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md) _Initial condition for the vortex merger simulation._ 
 * **class** [**VortexMergerEquilibria**](classVortexMergerEquilibria.md) _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates._ 
@@ -270,8 +272,12 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _A helper structure to check if all the dimensions in a VectorIndexSet can represent covariant indices._ 
 * **struct** [**tensor\_tools::vector\_index\_set\_dual**](structtensor__tools_1_1vector__index__set__dual.md) _A helper structure to find a VectorIndexSet describing the covariant indices from a VectorIndexSet describing contravariant indices or to find a VectorIndexSet describing the contravariant indices from a VectorIndexSet describing covariant indices._ 
 * **struct** [**tensor\_tools::vector\_index\_set\_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _The implementation of_ [_**vector\_index\_set\_dual**_](structtensor__tools_1_1vector__index__set__dual.md) _for a VectorIndexSet._
+* **class** **detail::NonUniformLagrangeBasisBase**    
+    * **class** [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) _Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._
 * **class** **IAdvectionV< IdxRangeFdistribu, IdxRangeSpatial >**    
     * **class** [**NullAdvectionVelocity**](classNullAdvectionVelocity.md) _This is a class which imitates a velocity advection. It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes._ 
+* **class** **detail::UniformLagrangeBasisBase**    
+    * **class** [**UniformLagrangeBasis**](classUniformLagrangeBasis.md) _Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._
 * **class** **std::conditional_t< BsplineOnUniformCellsR, ddc::UniformBSplines< R, BSDegreeR >, ddc::NonUniformBSplines< R, BSDegreeR > >**    
     * **struct** [**BSplinesR**](structBSplinesR.md) 
 * **class** **std::conditional_t< BsplineOnUniformCellsTheta, ddc::UniformBSplines< Theta, BSDegreeTheta >, ddc::NonUniformBSplines< Theta, BSDegreeTheta > >**    
@@ -306,6 +312,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** **UniformGridBase< Y >**    
     * **struct** [**GridY**](structGridY.md) 
     * **struct** [**GridY**](structGridY.md) 
+* **class** **NonUniformGridBase< T::continuous_dimension_type >**    
+    * **struct** [**NonUniformLagrangeKnots**](structNonUniformLagrangeKnots.md) 
 * **class** **std::conditional_t< BSplinesROriginal::is_uniform(), ddc::UniformBSplines< R, BSplinesROriginal::degree()>, ddc::NonUniformBSplines< R, BSplinesROriginal::degree()> >**    
     * **struct** [**RefinedDiscreteToCartesianBuilder::BSplinesRRefined**](structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.md) _The type of the radial B-splines on which the new mapping will be defined._ 
 * **class** **std::conditional_t< BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines< Theta, BSplinesThetaOriginal::degree()>, ddc::NonUniformBSplines< Theta, BSplinesThetaOriginal::degree()> >**    
@@ -314,6 +322,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **struct** [**RefinedDiscreteToCartesianBuilder::GridRRefined**](structRefinedDiscreteToCartesianBuilder_1_1GridRRefined.md) _The type of the grid of radial points on which the new mapping will be defined._ 
 * **class** **GrevillePointsTheta::interpolation_discrete_dimension_type**    
     * **struct** [**RefinedDiscreteToCartesianBuilder::GridThetaRefined**](structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined.md) _The type of the grid of poloidal points on which the new mapping will be defined._ 
+* **class** **UniformGridBase< T::continuous_dimension_type >**    
+    * **struct** [**UniformLagrangeKnots**](structUniformLagrangeKnots.md) 
 * **class** **std::false_type**    
     * **struct** [**ddcHelper::is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md) 
     * **struct** [**is\_onion\_patch\_locator**](structis__onion__patch__locator.md) _Struct to identify if the patch locator is adapted to onion geometry._ 
@@ -322,4 +332,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **struct** [**ddcHelper::is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md) 
     * **struct** [**is\_onion\_patch\_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;**](structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.md) 
     * **struct** [**tensor\_tools::is\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) 
+* **class** **std::is_base_of::type**    
+    * **struct** [**is\_non\_uniform\_lagrange\_basis**](structis__non__uniform__lagrange__basis.md) 
+    * **struct** [**is\_uniform\_lagrange\_basis**](structis__uniform__lagrange__basis.md) 
 

@@ -100,6 +100,7 @@
     <innerclass refid="classstd_1_1wstring" prot="public">std::wstring</innerclass>
     <innerclass refid="classstd_1_1wstring__view" prot="public">std::wstring_view</innerclass>
     <innerclass refid="classstd_1_1wstringstream" prot="public">std::wstringstream</innerclass>
+    <innernamespace refid="namespacestd_1_1is__base__of">std::is_base_of</innernamespace>
     <briefdescription>
 <para>STL namespace. </para>
     </briefdescription>

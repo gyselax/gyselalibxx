@@ -189,6 +189,8 @@ Here is a list of all files with brief descriptions:
         * **file** [**Lagrange\_interpolator.hpp**](Lagrange__interpolator_8hpp.md)     
         * **file** [**i\_interpolator\_2d.hpp**](i__interpolator__2d_8hpp.md)     
         * **file** [**iinterpolator.hpp**](iinterpolator_8hpp.md)     
+        * **file** [**lagrange\_basis\_non\_uniform.hpp**](lagrange__basis__non__uniform_8hpp.md)     
+        * **file** [**lagrange\_basis\_uniform.hpp**](lagrange__basis__uniform_8hpp.md)     
         * **file** [**spline\_interpolator.hpp**](spline__interpolator_8hpp.md)     
         * **file** [**spline\_interpolator\_2d.hpp**](spline__interpolator__2d_8hpp.md)     
     * **dir** [**io**](dir_c184e51c84f2c3f0345bbc8a0d75d3e1.md)     

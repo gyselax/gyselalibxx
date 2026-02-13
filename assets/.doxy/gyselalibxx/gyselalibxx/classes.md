@@ -229,12 +229,16 @@
 * [**IMPITranspose**](classIMPITranspose.md)
 * [**Impl**](classMoments_1_1Impl.md)
 ([**Moments**](classMoments.md))
+* [**Impl**](classNonUniformLagrangeBasis_1_1Impl.md)
+([**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md))
 * [**Impl**](classPolarBSplines_1_1Impl.md)
 ([**PolarBSplines**](classPolarBSplines.md))
 * [**Impl**](classSpeciesInformation_1_1Impl.md)
 ([**SpeciesInformation**](classSpeciesInformation.md))
 * [**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md)
 ([**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
+* [**Impl**](classUniformLagrangeBasis_1_1Impl.md)
+([**UniformLagrangeBasis**](classUniformLagrangeBasis.md))
 * [**IndexedTensor**](classtensor__tools_1_1IndexedTensor.md)
 ([**tensor\_tools**](namespacetensor__tools.md))
 * [**Interface**](structInterface.md)
@@ -270,8 +274,10 @@
 ([**ddcHelper**](namespaceddcHelper.md))
 * [**is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md)
 ([**ddcHelper**](namespaceddcHelper.md))
+* [**is\_non\_uniform\_lagrange\_basis**](structis__non__uniform__lagrange__basis.md)
 * [**is\_onion\_patch\_locator**](structis__onion__patch__locator.md)
 * [**is\_onion\_patch\_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;**](structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.md)
+* [**is\_uniform\_lagrange\_basis**](structis__uniform__lagrange__basis.md)
 * [**is\_vector\_index\_set**](structtensor__tools_1_1is__vector__index__set.md)
 ([**tensor\_tools**](namespacetensor__tools.md))
 * [**is\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md)
@@ -341,6 +347,8 @@
 
 * [**NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md)
 ([**ddcHelper**](namespaceddcHelper.md))
+* [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md)
+* [**NonUniformLagrangeKnots**](structNonUniformLagrangeKnots.md)
 * [**NoPerturbInitialisation**](classNoPerturbInitialisation.md)
 * [**NullAdvectionVelocity**](classNullAdvectionVelocity.md)
 * [**NullExtrapolationRule**](structNullExtrapolationRule.md)
@@ -452,6 +460,12 @@
 * [**ToTuple&lt; ddc::detail::TypeSeq&lt; I... &gt; &gt;**](structconnectivity__details_1_1ToTuple_3_01ddc_1_1detail_1_1TypeSeq_3_01I_8_8_8_01_4_01_4.md)
 ([**connectivity\_details**](namespaceconnectivity__details.md))
 * [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md)
+
+
+## u
+
+* [**UniformLagrangeBasis**](classUniformLagrangeBasis.md)
+* [**UniformLagrangeKnots**](structUniformLagrangeKnots.md)
 
 
 ## v

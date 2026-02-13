@@ -34,6 +34,7 @@
 * **batched\_derivs\_idx\_range\_xmax** ([**IInterpolator**](classIInterpolator.md), [**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md), [**LagrangeInterpolator**](classLagrangeInterpolator.md), [**SplineInterpolator**](classSplineInterpolator.md))
 * **batched\_derivs\_idx\_range\_xmin** ([**IInterpolator**](classIInterpolator.md), [**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md), [**LagrangeInterpolator**](classLagrangeInterpolator.md), [**SplineInterpolator**](classSplineInterpolator.md))
 * **batch\_size** ([**MatrixBatch**](classMatrixBatch.md))
+* **break\_point\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 
 
 ## c
@@ -111,8 +112,8 @@
 * **deriv\_1\_and\_2** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **deriv\_dim\_1** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **deriv\_dim\_2** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
+* **degree** ([**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md), [**UniformLagrangeBasis**](classUniformLagrangeBasis.md))
 * **deriv\_dim\_1\_and\_2** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
-* **degree** ([**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 
 
 ## e
@@ -127,8 +128,8 @@
 * **evaluate** ([**Lagrange**](classLagrange.md))
 * **evaluate\_lagrange** ([**Lagrange**](classLagrange.md))
 * **eval\_no\_bc** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
+* **eval\_basis** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **eval** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
-* **eval\_basis** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
 * **eval\_deriv** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **eval\_deriv\_r** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
 * **eval\_deriv\_r\_and\_theta** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
@@ -146,7 +147,7 @@
 * **fill\_diagonal\_elements** ([**IdentityCoordinateChange**](classIdentityCoordinateChange.md))
 * **factorise** ([**Matrix**](classMatrix.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **factorise\_method** ([**Matrix**](classMatrix.md), [**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Dense**](classMatrix__Dense.md), [**Matrix\_PDS\_Tridiag**](classMatrix__PDS__Tridiag.md))
-* **full\_domain** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md))
+* **full\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **fill\_in\_cross\_deriv** ([**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md))
 * **fill\_in\_deriv1** ([**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md))
 * **fill\_in\_deriv2** ([**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md))
@@ -259,8 +260,10 @@
 * **internal\_distribute\_idx\_range** ([**MPILayout**](classMPILayout.md))
 * **init\_from\_input** ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md), [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))
 * **inverse** ([**MetricTensorEvaluator**](classMetricTensorEvaluator.md))
-* **Impl** ([**Moments::Impl**](classMoments_1_1Impl.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
+* **Impl** ([**Moments::Impl**](classMoments_1_1Impl.md), [**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **integrate** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
+* **is\_periodic** ([**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md), [**UniformLagrangeBasis**](classUniformLagrangeBasis.md))
+* **is\_uniform** ([**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md), [**UniformLagrangeBasis**](classUniformLagrangeBasis.md))
 * **init\_nnz\_per\_line** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **ielec** ([**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md))
 * **is\_unified** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
@@ -290,6 +293,7 @@
 * **LeviCivitaTensor** ([**LeviCivitaTensor**](classLeviCivitaTensor.md))
 * **LiePoissonBracket** ([**LiePoissonBracket**](classLiePoissonBracket.md))
 * **LinearCoordTransform** ([**LinearCoordTransform**](classLinearCoordTransform.md))
+* **length** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 
 
 ## m
@@ -381,6 +385,8 @@
 * **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 * **recursive\_dispatch\_patch\_function** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **replace\_periodic\_coord\_inside** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
+* **rmax** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
+* **rmin** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **RK2** ([**RK2**](classRK2.md))
 * **RK3** ([**RK3**](classRK3.md))
 * **RK4** ([**RK4**](classRK4.md))

@@ -1,0 +1,189 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classNonUniformLagrangeBasis" kind="class" language="C++" prot="public">
+    <compoundname>NonUniformLagrangeBasis</compoundname>
+    <basecompoundref prot="private" virt="non-virtual">detail::NonUniformLagrangeBasisBase</basecompoundref>
+    <includes refid="lagrange__basis__non__uniform_8hpp" local="no">lagrange_basis_non_uniform.hpp</includes>
+    <innerclass refid="classNonUniformLagrangeBasis_1_1Impl" prot="public">NonUniformLagrangeBasis::Impl</innerclass>
+    <templateparamlist>
+      <param>
+        <type>class Dim</type>
+      </param>
+      <param>
+        <type>std::size_t</type>
+        <declname>D</declname>
+        <defname>D</defname>
+      </param>
+      <param>
+        <type>class DataType</type>
+        <defval>double</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classNonUniformLagrangeBasis_1adf3c4fbfc7a9c1ae6a43319d49f7245a" prot="public" static="no">
+        <type>Dim</type>
+        <definition>using NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::continuous_dimension_type =  Dim</definition>
+        <argsstring></argsstring>
+        <name>continuous_dimension_type</name>
+        <qualifiedname>NonUniformLagrangeBasis::continuous_dimension_type</qualifiedname>
+        <briefdescription>
+<para>The tag identifying the continuous dimension on which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNonUniformLagrangeBasis_1affe26bb323f796a6c4aaf3ddfa8629d6" prot="public" static="no">
+        <type>Coord&lt; Dim &gt;</type>
+        <definition>using NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::coord_type =  Coord&lt;Dim&gt;</definition>
+        <argsstring></argsstring>
+        <name>coord_type</name>
+        <qualifiedname>NonUniformLagrangeBasis::coord_type</qualifiedname>
+        <briefdescription>
+<para>The type of the coordinates on which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials can be evaluated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="53" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="53" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNonUniformLagrangeBasis_1a270f3c91a8bad8ab23a3d9dbdc17330c" prot="public" static="no">
+        <type><ref refid="classNonUniformLagrangeBasis" kindref="compound">NonUniformLagrangeBasis</ref></type>
+        <definition>using NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::discrete_dimension_type =  NonUniformLagrangeBasis</definition>
+        <argsstring></argsstring>
+        <name>discrete_dimension_type</name>
+        <qualifiedname>NonUniformLagrangeBasis::discrete_dimension_type</qualifiedname>
+        <briefdescription>
+<para>The discrete dimension representing B-splines. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classNonUniformLagrangeBasis_1a0eedacfae3a36f48bb754d45b2f1310d" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::degree</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>degree</name>
+        <qualifiedname>NonUniformLagrangeBasis::degree</qualifiedname>
+        <briefdescription>
+<para>The degree of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The degree. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="62" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="classNonUniformLagrangeBasis_1a5b1c4708aad1d6fd2f88ee9bd9781fe0" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>static constexpr bool NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::is_periodic</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>is_periodic</name>
+        <qualifiedname>NonUniformLagrangeBasis::is_periodic</qualifiedname>
+        <briefdescription>
+<para>Indicates if the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are periodic or not. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A boolean indicating if the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are periodic or not. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="71" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="71" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="classNonUniformLagrangeBasis_1aab4158846797a4a81067429b7fac286f" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
+        <type>constexpr bool</type>
+        <definition>static constexpr bool NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::is_uniform</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>is_uniform</name>
+        <qualifiedname>NonUniformLagrangeBasis::is_uniform</qualifiedname>
+        <briefdescription>
+<para>Indicates if the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are uniform or not (this is the case here). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>A boolean indicating if the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are uniform or not. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="80" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="80" bodyend="83"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Class describing <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials on a uniform grid. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class uses the second barycentric formulation to evaluate the polynomials. This formula is used for stability. It is described in Barycentric <ref refid="classLagrange" kindref="compound">Lagrange</ref> Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Dim</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimension on which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The degree of the polynomials, equal to the number of cells over which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DataType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type used for the calculations. Double by default. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;</label>
+        <link refid="classNonUniformLagrangeBasis"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::NonUniformLagrangeBasisBase</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;</label>
+        <link refid="classNonUniformLagrangeBasis"/>
+        <childnode refid="2" relation="private-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>detail::NonUniformLagrangeBasisBase</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="44" bodyend="268"/>
+    <listofallmembers>
+      <member refid="classNonUniformLagrangeBasis_1adf3c4fbfc7a9c1ae6a43319d49f7245a" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis</scope><name>continuous_dimension_type</name></member>
+      <member refid="classNonUniformLagrangeBasis_1affe26bb323f796a6c4aaf3ddfa8629d6" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis</scope><name>coord_type</name></member>
+      <member refid="classNonUniformLagrangeBasis_1a0eedacfae3a36f48bb754d45b2f1310d" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis</scope><name>degree</name></member>
+      <member refid="classNonUniformLagrangeBasis_1a270f3c91a8bad8ab23a3d9dbdc17330c" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis</scope><name>discrete_dimension_type</name></member>
+      <member refid="classNonUniformLagrangeBasis_1a5b1c4708aad1d6fd2f88ee9bd9781fe0" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis</scope><name>is_periodic</name></member>
+      <member refid="classNonUniformLagrangeBasis_1aab4158846797a4a81067429b7fac286f" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis</scope><name>is_uniform</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1291,6 +1291,22 @@
     <member refid="classMoments_1_1Impl_1a1d0f28c92509bf1c21a8f930dca915ea" kind="function"><name>Impl</name></member>
     <member refid="classMoments_1_1Impl_1a53ef02b0e60b8aeafdaed641c660ba61" kind="function"><name>Impl</name></member>
   </compound>
+  <compound refid="classNonUniformLagrangeBasis_1_1Impl" kind="class"><name>NonUniformLagrangeBasis::Impl</name>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a2db4a21f8fa52bcad6adaf930dee5a24" kind="typedef"><name>knot_grid</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1adcaf2527acc2c7a0a18f741240082b56" kind="friend"><name>Impl</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a510e5d0dd309112fe96a12d94a143be1" kind="variable"><name>m_knot_domain</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a68a07118ec7f9c8e27bba69fef109007" kind="variable"><name>m_break_point_domain</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a0f9e0bcd746e1bccc8e83a9fb7d04e0f" kind="variable"><name>m_reference</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a6477d9bcb4e048f558a2e3d41ee65e05" kind="function"><name>Impl</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1ad1f233299d211a6a076dd12074b10675" kind="function"><name>Impl</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a243a0e2af970857df060f6c9575f3af7" kind="function"><name>Impl</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1abe2663beb2230cb1727701ec139de22c" kind="function"><name>rmin</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a729fd847c7657f58bda764bf4bb0898f" kind="function"><name>rmax</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a1761db8c849ada12988a764787d861ec" kind="function"><name>length</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1afab457f35ffd170e46a266cdf2536abe" kind="function"><name>break_point_domain</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a764a42c0119e24c304e5c6b6bbf545d5" kind="function"><name>full_domain</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1aaa83daa104489e6a24ef782e1cfb247c" kind="function"><name>eval_basis</name></member>
+  </compound>
   <compound refid="classPolarBSplines_1_1Impl" kind="class"><name>PolarBSplines::Impl</name>
     <member refid="classPolarBSplines_1_1Impl_1a75f86d6c1815cbb80b0a0046e81800a6" kind="typedef"><name>singular_basis_linear_combination_idx_range_type</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a00a05a8522a019c5e4324e26ecc780d3" kind="typedef"><name>discrete_dimension_type</name></member>
@@ -1353,6 +1369,23 @@
     <member refid="classTriangularBernsteinPolynomialBasis_1_1Impl_1a12c6307c7bcf19a28e9822ec3670324f" kind="function"><name>operator=</name></member>
     <member refid="classTriangularBernsteinPolynomialBasis_1_1Impl_1aa9472f9e52588af85652f93907a6a27a" kind="function"><name>operator=</name></member>
     <member refid="classTriangularBernsteinPolynomialBasis_1_1Impl_1a8b0e07fde6ca3d85eb5530591b80ff3c" kind="function"><name>eval_basis</name></member>
+  </compound>
+  <compound refid="classUniformLagrangeBasis_1_1Impl" kind="class"><name>UniformLagrangeBasis::Impl</name>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kind="typedef"><name>knot_grid</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1adcaf2527acc2c7a0a18f741240082b56" kind="friend"><name>Impl</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1ae2ac36fde8c378168a04079147304ee6" kind="variable"><name>m_weights</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a3ae22c3f0fb1952c25a78705342145a7" kind="variable"><name>m_knot_domain</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a2a43d3cb5344faea08fc3d99beb17bf6" kind="variable"><name>m_break_point_domain</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1ad7ac4d97c409c07cf0251a3f15e36a1f" kind="variable"><name>m_reference</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1ac09e4ce9139b4092076ee9cad89b4ea4" kind="function"><name>Impl</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1afdf1fc77208e24004c1fa09cde19d101" kind="function"><name>Impl</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a13a3867798502cab994edb10ab9dd896" kind="function"><name>Impl</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1af70e236878aa1b7478656dc0a26617ff" kind="function"><name>rmin</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a51060f9366b8e5a6d1eb5821e06932d4" kind="function"><name>rmax</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a8fa6a1354109591d08a79a2928acc0e8" kind="function"><name>length</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1ab68b76df208aad2026fb10590e655272" kind="function"><name>break_point_domain</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a399e6614ad017d771b6d9ffbd8d4da8a" kind="function"><name>full_domain</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a4fbf13e1e13127ef98f6477df2e809c8" kind="function"><name>eval_basis</name></member>
   </compound>
   <compound refid="classtensor__tools_1_1IndexedTensor" kind="class"><name>tensor_tools::IndexedTensor</name>
     <member refid="classtensor__tools_1_1IndexedTensor_1a9b1aa0cb99b47fe5ea64752e79c6d30a" kind="typedef"><name>index_pattern</name></member>
@@ -1513,9 +1546,13 @@
   </compound>
   <compound refid="structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270" kind="struct"><name>ddcHelper::is_non_uniform_interpolation_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;</name>
   </compound>
+  <compound refid="structis__non__uniform__lagrange__basis" kind="struct"><name>is_non_uniform_lagrange_basis</name>
+  </compound>
   <compound refid="structis__onion__patch__locator" kind="struct"><name>is_onion_patch_locator</name>
   </compound>
   <compound refid="structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f" kind="struct"><name>is_onion_patch_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;</name>
+  </compound>
+  <compound refid="structis__uniform__lagrange__basis" kind="struct"><name>is_uniform_lagrange_basis</name>
   </compound>
   <compound refid="structtensor__tools_1_1is__vector__index__set" kind="struct"><name>tensor_tools::is_vector_index_set</name>
   </compound>
@@ -2127,6 +2164,16 @@
     <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1ad77297ae5dfb40b29258c41d81a18793" kind="function"><name>check_n_points_in_cell</name></member>
     <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1ab89aa8de226681a7ac5f4c0f5009f0a6" kind="function"><name>get_sampling</name></member>
     <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1a947c549e52044a11d9483af1627835f4" kind="function"><name>get_domain</name></member>
+  </compound>
+  <compound refid="classNonUniformLagrangeBasis" kind="class"><name>NonUniformLagrangeBasis</name>
+    <member refid="classNonUniformLagrangeBasis_1adf3c4fbfc7a9c1ae6a43319d49f7245a" kind="typedef"><name>continuous_dimension_type</name></member>
+    <member refid="classNonUniformLagrangeBasis_1affe26bb323f796a6c4aaf3ddfa8629d6" kind="typedef"><name>coord_type</name></member>
+    <member refid="classNonUniformLagrangeBasis_1a270f3c91a8bad8ab23a3d9dbdc17330c" kind="typedef"><name>discrete_dimension_type</name></member>
+    <member refid="classNonUniformLagrangeBasis_1a0eedacfae3a36f48bb754d45b2f1310d" kind="function"><name>degree</name></member>
+    <member refid="classNonUniformLagrangeBasis_1a5b1c4708aad1d6fd2f88ee9bd9781fe0" kind="function"><name>is_periodic</name></member>
+    <member refid="classNonUniformLagrangeBasis_1aab4158846797a4a81067429b7fac286f" kind="function"><name>is_uniform</name></member>
+  </compound>
+  <compound refid="structNonUniformLagrangeKnots" kind="struct"><name>NonUniformLagrangeKnots</name>
   </compound>
   <compound refid="classNoPerturbInitialisation" kind="class"><name>NoPerturbInitialisation</name>
     <member refid="classNoPerturbInitialisation_1acf480387304593fbcfc98016299da5c1" kind="variable"><name>m_fequilibrium</name></member>
@@ -2909,6 +2956,16 @@
     <member refid="classTriangularBernsteinPolynomialBasis_1afc2ce5f428444dc1fd4f0001d1c82f6a" kind="function"><name>degree</name></member>
     <member refid="classTriangularBernsteinPolynomialBasis_1ad4df99445b4db980d8dfb888bf5f40d7" kind="function"><name>nbasis</name></member>
   </compound>
+  <compound refid="classUniformLagrangeBasis" kind="class"><name>UniformLagrangeBasis</name>
+    <member refid="classUniformLagrangeBasis_1a52fb1551ae10b33aae017a7df70d83b1" kind="typedef"><name>continuous_dimension_type</name></member>
+    <member refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" kind="typedef"><name>coord_type</name></member>
+    <member refid="classUniformLagrangeBasis_1a53a4debcf8bdd25bec0ac47aac30eb99" kind="typedef"><name>discrete_dimension_type</name></member>
+    <member refid="classUniformLagrangeBasis_1abb2ea2ef273ecc739e3c5916bd3b1a2e" kind="function"><name>degree</name></member>
+    <member refid="classUniformLagrangeBasis_1ad235dd27040ae4efd0eec0d56f76fdec" kind="function"><name>is_periodic</name></member>
+    <member refid="classUniformLagrangeBasis_1a98969db8adfd92291c4db483ca26233e" kind="function"><name>is_uniform</name></member>
+  </compound>
+  <compound refid="structUniformLagrangeKnots" kind="struct"><name>UniformLagrangeKnots</name>
+  </compound>
   <compound refid="structtensor__tools_1_1vector__index__set__dual" kind="struct"><name>tensor_tools::vector_index_set_dual</name>
   </compound>
   <compound refid="structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4" kind="struct"><name>tensor_tools::vector_index_set_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;</name>
@@ -3060,13 +3117,13 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d217" kind="namespace"><name>@217</name>
-  </compound>
   <compound refid="namespace_0d219" kind="namespace"><name>@219</name>
   </compound>
   <compound refid="namespace_0d221" kind="namespace"><name>@221</name>
   </compound>
   <compound refid="namespace_0d223" kind="namespace"><name>@223</name>
+  </compound>
+  <compound refid="namespace_0d225" kind="namespace"><name>@225</name>
   </compound>
   <compound refid="namespace_0d97" kind="namespace"><name>@97</name>
   </compound>
@@ -3133,6 +3190,8 @@
     <member refid="polar__bsplines_8hpp_1a3ba12098f03119f39af5886324f72c94" kind="function"><name>integrals</name></member>
   </compound>
   <compound refid="namespacestd" kind="namespace"><name>std</name>
+  </compound>
+  <compound refid="namespacestd_1_1is__base__of" kind="namespace"><name>std::is_base_of</name>
   </compound>
   <compound refid="namespacetensor__tools" kind="namespace"><name>tensor_tools</name>
     <member refid="namespacetensor__tools_1acd62e88dcaeb52aa4c2cd79ea14922eb" kind="typedef"><name>to_tensor_index_element_t</name></member>
@@ -3461,30 +3520,6 @@
     <member refid="geometry__vpar__mu_8hpp_1aff964a13fb61d1b733112d19f406a7ff" kind="typedef"><name>ConstFieldSpVpar</name></member>
     <member refid="geometry__vpar__mu_8hpp_1a6e9da85e3513337856b2f4d91575997f" kind="typedef"><name>DConstFieldSpVpar</name></member>
   </compound>
-  <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
-  </compound>
   <compound refid="noperturbinitialisation_8cpp" kind="file"><name>noperturbinitialisation.cpp</name>
   </compound>
   <compound refid="noperturbinitialisation_8hpp" kind="file"><name>noperturbinitialisation.hpp</name>
@@ -3584,6 +3619,30 @@
   <compound refid="bumpontailequilibrium_8hpp" kind="file"><name>bumpontailequilibrium.hpp</name>
   </compound>
   <compound refid="iequilibrium_8cpp" kind="file"><name>iequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
   </compound>
   <compound refid="restartinitialisation_8cpp" kind="file"><name>restartinitialisation.cpp</name>
   </compound>
@@ -3816,6 +3875,10 @@
     <member refid="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53" kind="enum"><name>BCond</name></member>
     <member refid="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53ad9d83fc826ae0d42075af007a477e2c9" kind="enumvalue"><name>PERIODIC</name></member>
     <member refid="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53ae151350b63efc6c3bbe2e3f0d27863ba" kind="enumvalue"><name>DIRICHLET</name></member>
+  </compound>
+  <compound refid="lagrange__basis__non__uniform_8hpp" kind="file"><name>lagrange_basis_non_uniform.hpp</name>
+  </compound>
+  <compound refid="lagrange__basis__uniform_8hpp" kind="file"><name>lagrange_basis_uniform.hpp</name>
   </compound>
   <compound refid="Lagrange__interpolator_8hpp" kind="file"><name>Lagrange_interpolator.hpp</name>
   </compound>

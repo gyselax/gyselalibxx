@@ -161,6 +161,9 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**eval\_type**](structMultipatchSplineEvaluator2D_1_1eval__type.md) _Tag to indicate that the value of the spline should be evaluated._ 
 * **class** [**MultipatchType**](classMultipatchType.md) _A class to store several objects that are of a type which is templated by the patch._     
 * **class** [**NoPerturbInitialisation**](classNoPerturbInitialisation.md) _Initialisation operator with no perturbation, i.e the distribution function equal to the Maxwellian._     
+* **class** [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) _Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._    
+    * **class** [**Impl**](classNonUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._     
+* **struct** [**NonUniformLagrangeKnots**](structNonUniformLagrangeKnots.md) 
 * **class** [**NullAdvectionVelocity**](classNullAdvectionVelocity.md) _This is a class which imitates a velocity advection. It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes._     
 * **struct** [**NullExtrapolationRule**](structNullExtrapolationRule.md) _Define null extrapolation rule common to all geometries._     
 * **class** [**NullQNSolver**](classNullQNSolver.md) _Null operator._     
@@ -230,6 +233,9 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._    
 * **class** [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md) _A class which evaluates the triangular Bernstein polynomials._     
     * **class** [**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md)     
+* **class** [**UniformLagrangeBasis**](classUniformLagrangeBasis.md) _Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._    
+    * **class** [**Impl**](classUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._     
+* **struct** [**UniformLagrangeKnots**](structUniformLagrangeKnots.md) 
 * **class** [**VectorField**](classVectorField.md) _A class which holds multiple (scalar) fields in order to represent a vector field._     
 * **class** [**VectorFieldCommon**](classVectorFieldCommon.md) 
 * **class** [**VectorFieldMem**](classVectorFieldMem.md) _Pre-declaration of_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._    
@@ -245,10 +251,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d97.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d217.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d219.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d221.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d223.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d219.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d221.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d223.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d225.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
@@ -308,10 +314,13 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **namespace** [**error**](namespacegslx_1_1error.md)     
 * **struct** [**interpolator\_on\_idx\_range**](structinterpolator__on__idx__range.md) 
 * **struct** [**interpolator\_on\_idx\_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;**](structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.md)     
+* **struct** [**is\_non\_uniform\_lagrange\_basis**](structis__non__uniform__lagrange__basis.md) 
 * **struct** [**is\_onion\_patch\_locator**](structis__onion__patch__locator.md) _Struct to identify if the patch locator is adapted to onion geometry._ 
 * **struct** [**is\_onion\_patch\_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;**](structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.md) 
+* **struct** [**is\_uniform\_lagrange\_basis**](structis__uniform__lagrange__basis.md) 
 * **namespace** [**maxwellian\_equilibrium**](namespacemaxwellian__equilibrium.md)     
 * **namespace** [**std**](namespacestd.md) _STL namespace._     
+    * **namespace** [**is\_base\_of**](namespacestd_1_1is__base__of.md) 
 * **namespace** [**tensor\_tools**](namespacetensor__tools.md)     
     * **struct** [**GetContravariantDims**](structtensor__tools_1_1GetContravariantDims.md) _A class to get a VectorIndexSet containing only contravariant dimensions._ 
     * **struct** [**GetContravariantDims&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _A class to get a VectorIndexSet containing only contravariant dimensions._     

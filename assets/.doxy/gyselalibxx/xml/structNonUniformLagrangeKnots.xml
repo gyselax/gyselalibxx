@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structNonUniformLagrangeKnots" kind="struct" language="C++" prot="public">
+    <compoundname>NonUniformLagrangeKnots</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">NonUniformGridBase&lt; T::continuous_dimension_type &gt;</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class T</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>NonUniformGridBase&lt; T::continuous_dimension_type &gt;</label>
+      </node>
+      <node id="1">
+        <label>NonUniformLagrangeKnots&lt; T &gt;</label>
+        <link refid="structNonUniformLagrangeKnots"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>NonUniformGridBase&lt; T::continuous_dimension_type &gt;</label>
+      </node>
+      <node id="1">
+        <label>NonUniformLagrangeKnots&lt; T &gt;</label>
+        <link refid="structNonUniformLagrangeKnots"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="21" bodyend="22"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

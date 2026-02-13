@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structis__uniform__lagrange__basis" kind="struct" language="C++" prot="public">
+    <compoundname>is_uniform_lagrange_basis</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">std::is_base_of::type</basecompoundref>
+    <templateparamlist>
+      <param>
+        <type>class DDim</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>is_uniform_lagrange_basis&lt; DDim &gt;</label>
+        <link refid="structis__uniform__lagrange__basis"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::is_base_of&lt; detail::UniformLagrangeBasisBase, DDim &gt;::type</label>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="1">
+        <label>is_uniform_lagrange_basis&lt; DDim &gt;</label>
+        <link refid="structis__uniform__lagrange__basis"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>std::is_base_of&lt; detail::UniformLagrangeBasisBase, DDim &gt;::type</label>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="267" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="269" bodyend="270"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

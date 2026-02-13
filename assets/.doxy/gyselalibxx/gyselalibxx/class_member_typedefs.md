@@ -105,6 +105,8 @@
 * **CoordOnPatch** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **continuous\_dimension\_type1** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **continuous\_dimension\_type2** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
+* **continuous\_dimension\_type** ([**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md), [**UniformLagrangeBasis**](classUniformLagrangeBasis.md))
+* **coord\_type** ([**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md), [**UniformLagrangeBasis**](classUniformLagrangeBasis.md))
 * **Coord1** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
 * **Coord12** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
 * **Coord2** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md))
@@ -179,7 +181,7 @@
 * **distributed\_idx\_range\_type1** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **distributed\_idx\_range\_type2** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **DKokkosView2D** ([**MatrixBatchTridiag**](classMatrixBatchTridiag.md))
-* **discrete\_dimension\_type** ([**Moments::Impl**](classMoments_1_1Impl.md), [**Moments**](classMoments.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**PolarBSplines**](classPolarBSplines.md), [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md), [**SpeciesInformation**](classSpeciesInformation.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
+* **discrete\_dimension\_type** ([**Moments::Impl**](classMoments_1_1Impl.md), [**Moments**](classMoments.md), [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**PolarBSplines**](classPolarBSplines.md), [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md), [**SpeciesInformation**](classSpeciesInformation.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md), [**UniformLagrangeBasis**](classUniformLagrangeBasis.md))
 * **DerivsOnPatch** ([**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md))
 * **Derivs12OnPatch** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
 * **Derivs1OnPatch** ([**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md))
@@ -443,6 +445,7 @@
 
 ## k
 
+* **knot\_grid** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **KnotsR** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **KnotsTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 

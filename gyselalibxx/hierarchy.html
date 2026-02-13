@@ -752,6 +752,7 @@
 <li><strong>class</strong> <a href="classMultipatchSplineBuilder.html"><strong>MultipatchSplineBuilder</strong></a> <em>A class to call all the builders of all the patches once.</em> </li>
 <li><strong>class</strong> <a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a> <em>A class to call all the builders of all the patches once.</em> </li>
 <li><strong>class</strong> <a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a> <em>A class to evaluate all the splines of all the patches at once.</em> </li>
+<li><strong>class</strong> <a href="classNonUniformLagrangeBasis_1_1Impl.html"><strong>NonUniformLagrangeBasis::Impl</strong></a> <em>Storage class of the static attributes of the discrete dimension.</em> </li>
 <li><strong>class</strong> <a href="classOnionPatchLocator.html"><strong>OnionPatchLocator</strong></a> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>locator specialised for "onion" geometry.</em></li>
 <li><strong>class</strong> <a href="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.html"><strong>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</strong></a> <a href="structPatch.html"><em><strong>Patch</strong></em></a> <em>locator specialised for "onion" geometry.</em></li>
 <li><strong>class</strong> <a href="classOrthogonalCoordTransforms.html"><strong>OrthogonalCoordTransforms</strong></a> <em>A multi-dimensional coordinate transformation which can be decomposed into multiple orthogonal coordinate transformations.</em> </li>
@@ -779,6 +780,7 @@
 <li><strong>class</strong> <a href="classToroidalToCylindrical.html"><strong>ToroidalToCylindrical</strong></a> <em>A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane</em> <span class="arithmatex">\((\rho, \theta)\)</span> <em>and a perpendicular dimension</em><span class="arithmatex">\(\phi\)</span> <em>. The cylindrical coordinates are</em><span class="arithmatex">\((R, Z, \zeta)\)</span> <em>.</em><span class="arithmatex">\((R, Z)\)</span> <em>describe a Cartesian slice.</em><span class="arithmatex">\((\rho, \theta)\)</span> <em>are therefore defined from this slice with a 2D coordinate change operator.</em><span class="arithmatex">\(\zeta\)</span> <em>is chosen to be equal to</em><span class="arithmatex">\(-\phi\)</span> <em>to preserve the orientation of the axes (following the right-hand rule).</em></li>
 <li><strong>class</strong> <a href="classTriangularBernsteinPolynomialBasis.html"><strong>TriangularBernsteinPolynomialBasis</strong></a> <em>A class which evaluates the triangular Bernstein polynomials.</em> </li>
 <li><strong>class</strong> <a href="classTriangularBernsteinPolynomialBasis_1_1Impl.html"><strong>TriangularBernsteinPolynomialBasis::Impl</strong></a> </li>
+<li><strong>class</strong> <a href="classUniformLagrangeBasis_1_1Impl.html"><strong>UniformLagrangeBasis::Impl</strong></a> <em>Storage class of the static attributes of the discrete dimension.</em> </li>
 <li><strong>class</strong> <a href="classVectorFieldCommon.html"><strong>VectorFieldCommon</strong></a> </li>
 <li><strong>class</strong> <a href="classVortexMergerDensitySolution.html"><strong>VortexMergerDensitySolution</strong></a> <em>Initial condition for the vortex merger simulation.</em> </li>
 <li><strong>class</strong> <a href="classVortexMergerEquilibria.html"><strong>VortexMergerEquilibria</strong></a> <em>Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates.</em> </li>
@@ -886,8 +888,16 @@
 <li><strong>struct</strong> <a href="structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html"><strong>tensor_tools::is_covariant_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;</strong></a> <em>A helper structure to check if all the dimensions in a VectorIndexSet can represent covariant indices.</em> </li>
 <li><strong>struct</strong> <a href="structtensor__tools_1_1vector__index__set__dual.html"><strong>tensor_tools::vector_index_set_dual</strong></a> <em>A helper structure to find a VectorIndexSet describing the covariant indices from a VectorIndexSet describing contravariant indices or to find a VectorIndexSet describing the contravariant indices from a VectorIndexSet describing covariant indices.</em> </li>
 <li><strong>struct</strong> <a href="structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html"><strong>tensor_tools::vector_index_set_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;</strong></a> <em>The implementation of</em> <a href="structtensor__tools_1_1vector__index__set__dual.html"><em><strong>vector_index_set_dual</strong></em></a> <em>for a VectorIndexSet.</em></li>
+<li><strong>class</strong> <strong>detail::NonUniformLagrangeBasisBase</strong>    <ul>
+<li><strong>class</strong> <a href="classNonUniformLagrangeBasis.html"><strong>NonUniformLagrangeBasis</strong></a> <em>Class describing</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials on a uniform grid.</em></li>
+</ul>
+</li>
 <li><strong>class</strong> <strong>IAdvectionV&lt; IdxRangeFdistribu, IdxRangeSpatial &gt;</strong>    <ul>
 <li><strong>class</strong> <a href="classNullAdvectionVelocity.html"><strong>NullAdvectionVelocity</strong></a> <em>This is a class which imitates a velocity advection. It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes.</em> </li>
+</ul>
+</li>
+<li><strong>class</strong> <strong>detail::UniformLagrangeBasisBase</strong>    <ul>
+<li><strong>class</strong> <a href="classUniformLagrangeBasis.html"><strong>UniformLagrangeBasis</strong></a> <em>Class describing</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials on a uniform grid.</em></li>
 </ul>
 </li>
 <li><strong>class</strong> <strong>std::conditional_t&lt; BsplineOnUniformCellsR, ddc::UniformBSplines&lt; R, BSDegreeR &gt;, ddc::NonUniformBSplines&lt; R, BSDegreeR &gt; &gt;</strong>    <ul>
@@ -954,6 +964,10 @@
 <li><strong>struct</strong> <a href="structGridY.html"><strong>GridY</strong></a> </li>
 </ul>
 </li>
+<li><strong>class</strong> <strong>NonUniformGridBase&lt; T::continuous_dimension_type &gt;</strong>    <ul>
+<li><strong>struct</strong> <a href="structNonUniformLagrangeKnots.html"><strong>NonUniformLagrangeKnots</strong></a> </li>
+</ul>
+</li>
 <li><strong>class</strong> <strong>std::conditional_t&lt; BSplinesROriginal::is_uniform(), ddc::UniformBSplines&lt; R, BSplinesROriginal::degree()&gt;, ddc::NonUniformBSplines&lt; R, BSplinesROriginal::degree()&gt; &gt;</strong>    <ul>
 <li><strong>struct</strong> <a href="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.html"><strong>RefinedDiscreteToCartesianBuilder::BSplinesRRefined</strong></a> <em>The type of the radial B-splines on which the new mapping will be defined.</em> </li>
 </ul>
@@ -970,6 +984,10 @@
 <li><strong>struct</strong> <a href="structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined.html"><strong>RefinedDiscreteToCartesianBuilder::GridThetaRefined</strong></a> <em>The type of the grid of poloidal points on which the new mapping will be defined.</em> </li>
 </ul>
 </li>
+<li><strong>class</strong> <strong>UniformGridBase&lt; T::continuous_dimension_type &gt;</strong>    <ul>
+<li><strong>struct</strong> <a href="structUniformLagrangeKnots.html"><strong>UniformLagrangeKnots</strong></a> </li>
+</ul>
+</li>
 <li><strong>class</strong> <strong>std::false_type</strong>    <ul>
 <li><strong>struct</strong> <a href="structddcHelper_1_1is__non__uniform__interpolation__points.html"><strong>ddcHelper::is_non_uniform_interpolation_points</strong></a> </li>
 <li><strong>struct</strong> <a href="structis__onion__patch__locator.html"><strong>is_onion_patch_locator</strong></a> <em>Struct to identify if the patch locator is adapted to onion geometry.</em> </li>
@@ -980,6 +998,11 @@
 <li><strong>struct</strong> <a href="structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.html"><strong>ddcHelper::is_non_uniform_interpolation_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;</strong></a> </li>
 <li><strong>struct</strong> <a href="structis__onion__patch__locator_3_01OnionPatchLocator_3_01MultipatchIdxRanges_00_01LogicalToPhys15c96379834346672a2b2d644897e91f.html"><strong>is_onion_patch_locator&lt; OnionPatchLocator&lt; MultipatchIdxRanges, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt; &gt;</strong></a> </li>
 <li><strong>struct</strong> <a href="structtensor__tools_1_1is__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.html"><strong>tensor_tools::is_vector_index_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;</strong></a> </li>
+</ul>
+</li>
+<li><strong>class</strong> <strong>std::is_base_of::type</strong>    <ul>
+<li><strong>struct</strong> <a href="structis__non__uniform__lagrange__basis.html"><strong>is_non_uniform_lagrange_basis</strong></a> </li>
+<li><strong>struct</strong> <a href="structis__uniform__lagrange__basis.html"><strong>is_uniform_lagrange_basis</strong></a> </li>
 </ul>
 </li>
 </ul></div>
