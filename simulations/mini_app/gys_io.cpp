@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <filesystem>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -33,6 +34,8 @@ using std::endl;
 using std::string;
 using std::chrono::steady_clock;
 
+namespace fs = std::filesystem;
+
 namespace {
 
 struct ConfigHandles
@@ -52,8 +55,9 @@ ConfigHandles parse_config_files(int argc, char** argv)
     ConfigHandles configs {};
     std::string exe = argv[0];
     if (argc > 1) {
+        fs::path gysela_config_yml = argv[1];
         std::string gysela_config_yml = argv[1];
-        if (!gysela_config_yml.ends_with(".yml")) {
+        if (gysela_config_yml.extension != ".yml") {
             std::cerr << "Expected a .yml file for the config_file.yml. Received : " << gysela_config_yml << endl;
             display_help(exe);
         }
@@ -64,8 +68,8 @@ ConfigHandles parse_config_files(int argc, char** argv)
     PC_errhandler(PC_NULL_HANDLER);
 
     if (argc > 2) {
-        std::string pdi_config_yml = argv[2];
-        if (!pdi_config_yml.ends_with(".yml")) {
+        fs::path pdi_config_yml = argv[2];
+        if (pdi_config_yml.extension != ".yml") {
             std::cerr << "Expected a .yml file for the pdi_config.yml. Received : " << pdi_config_yml << endl;
             display_help(exe);
         }
