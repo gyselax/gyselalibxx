@@ -45,7 +45,7 @@ struct ConfigHandles
 
 void display_help(std::string const& exe)
 {
-    std::cerr << "usage: " << exe << " <config_file.yaml> [<pdi_config.yaml>]" << endl;
+    std::cerr << "usage: " << exe << " <config_file.yaml> <pdi_config.yaml>" << endl;
     std::exit(EXIT_FAILURE);
 }
 
