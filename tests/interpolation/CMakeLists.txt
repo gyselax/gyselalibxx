@@ -88,6 +88,7 @@ target_link_libraries(lagrange_tests
         GTest::gtest
         GTest::gmock
         gslx::interpolation
+        gslx::math_tools
 )
 target_include_directories(lagrange_tests
     PRIVATE

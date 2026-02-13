@@ -8,6 +8,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
 #include "identity_interpolation_builder.hpp"
+#include "l_norm_tools.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
 #include "lagrange_evaluator.hpp"
@@ -22,11 +23,16 @@ struct X
     static constexpr bool PERIODIC = false;
 };
 
+struct Y
+{
+    static constexpr bool PERIODIC = true;
+};
+
 template <class T>
-struct LagrangeEvaluatorFixture;
+struct LagrangeNonPeriodicEvaluatorFixture;
 
 template <std::size_t D, class T, bool Uniform>
-struct LagrangeEvaluatorFixture<std::tuple<
+struct LagrangeNonPeriodicEvaluatorFixture<std::tuple<
         std::integral_constant<std::size_t, D>,
         T,
         std::integral_constant<bool, Uniform>>> : public testing::Test
@@ -37,8 +43,8 @@ struct LagrangeEvaluatorFixture<std::tuple<
     struct LagBasis
         : public std::conditional_t<
                   Uniform,
-                  UniformLagrangeBasis<GridX, D, T>,
-                  NonUniformLagrangeBasis<GridX, D, T>>
+                  UniformLagrangeBasis<X, D, T>,
+                  NonUniformLagrangeBasis<X, D, T>>
     {
     };
     using DataType = T;
@@ -48,6 +54,43 @@ struct LagrangeEvaluatorFixture<std::tuple<
 
     // Replace with your actual tolerance policy
     static constexpr double TOL = std::is_same_v<T, float> ? 5e-6 : 1e-12;
+};
+
+template <class T>
+struct LagrangePeriodicEvaluatorFixture;
+
+template <std::size_t D, class T, bool Uniform>
+struct LagrangePeriodicEvaluatorFixture<std::tuple<
+        std::integral_constant<std::size_t, D>,
+        T,
+        std::integral_constant<bool, Uniform>>> : public testing::Test
+{
+    struct GridY : public std::conditional_t<Uniform, UniformGridBase<Y>, NonUniformGridBase<Y>>
+    {
+    };
+    struct LagBasis
+        : public std::conditional_t<
+                  Uniform,
+                  UniformLagrangeBasis<Y, D, T>,
+                  NonUniformLagrangeBasis<Y, D, T>>
+    {
+    };
+    using DataType = T;
+
+    struct RefinedGridY
+        : public std::conditional_t<Uniform, UniformGridBase<Y>, NonUniformGridBase<Y>>
+    {
+    };
+    struct RefinedLagBasis
+        : public std::conditional_t<
+                  Uniform,
+                  UniformLagrangeBasis<Y, D, T>,
+                  NonUniformLagrangeBasis<Y, D, T>>
+    {
+    };
+
+    static constexpr std::size_t degree = D;
+    static constexpr bool UNIFORM = Uniform;
 };
 
 using degrees = std::integer_sequence<std::size_t, 2, 3, 4>;
@@ -66,11 +109,12 @@ DataType polynomial(Coord<X> coord, std::array<DataType, N> coeffs)
 
 } // namespace
 
-TYPED_TEST_SUITE(LagrangeEvaluatorFixture, Cases);
+TYPED_TEST_SUITE(LagrangeNonPeriodicEvaluatorFixture, Cases);
 
-TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
+TYPED_TEST_SUITE(LagrangePeriodicEvaluatorFixture, Cases);
+
+TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
 {
-    static constexpr bool Periodic = X::PERIODIC;
     using DataType = typename TestFixture::DataType;
     using GridX = TestFixture::GridX;
     using LagBasis = TestFixture::LagBasis;
@@ -85,14 +129,8 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
             DataType,
             LagBasis,
             GridX,
-            std::conditional_t<
-                    Periodic,
-                    ddc::PeriodicExtrapolationRule<X>,
-                    ddc::NullExtrapolationRule>,
-            std::conditional_t<
-                    Periodic,
-                    ddc::PeriodicExtrapolationRule<X>,
-                    ddc::NullExtrapolationRule>>;
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule>;
     using IdxRangeCoeff = typename Builder::template batched_basis_domain_type<IdxRange<GridX>>;
 
     constexpr std::size_t degree = TestFixture::degree;
@@ -134,8 +172,7 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
             ddc::discrete_space<LagBasis>().full_domain());
     Field<DataType, IdxRangeCoeff> lagrange_coeffs(lagrange_coeffs_alloc);
 
-    std::conditional_t<Periodic, ddc::PeriodicExtrapolationRule<X>, ddc::NullExtrapolationRule>
-            extrapol;
+    ddc::NullExtrapolationRule extrapol;
     Evaluator evaluator(extrapol, extrapol);
 
     host_t<FieldMem<Coord<X>, IdxRange<GridX>>> test_coords_host_alloc(idx_range);
@@ -158,4 +195,109 @@ TYPED_TEST(LagrangeEvaluatorFixture, ExactPolynomialInterpolation)
                 polynomial(test_coords_host_alloc(idx), coeffs),
                 TOL);
     });
+}
+
+template <class DataType, class LagBasis, class GridType>
+DataType get_cosine_error(IdxRange<GridType> idx_range)
+{
+    using Dim = typename GridType::continuous_dimension_type;
+    using Builder = IdentityInterpolationBuilder<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            GridType,
+            LagBasis>;
+    using Evaluator = LagrangeEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            DataType,
+            LagBasis,
+            GridType,
+            ddc::PeriodicExtrapolationRule<Dim>,
+            ddc::PeriodicExtrapolationRule<Dim>>;
+    using IdxRangeCoeff = typename Builder::template batched_basis_domain_type<IdxRange<GridType>>;
+
+    host_t<FieldMem<DataType, IdxRange<GridType>>> function_values_host(idx_range);
+    ddc::host_for_each(idx_range, [&](Idx<GridType> i) {
+        function_values_host(i) = std::cos(ddc::coordinate(i));
+    });
+
+    auto function_values_alloc = ddc::create_mirror_view_and_copy(
+            Kokkos::DefaultExecutionSpace(),
+            get_field(function_values_host));
+    Field<DataType, IdxRange<GridType>> function_values(function_values_alloc);
+
+    Builder builder;
+    FieldMem<DataType, IdxRangeCoeff> lagrange_coeffs_alloc(
+            ddc::discrete_space<LagBasis>().full_domain());
+    Field<DataType, IdxRangeCoeff> lagrange_coeffs(lagrange_coeffs_alloc);
+
+    ddc::PeriodicExtrapolationRule<Dim> extrapol;
+    Evaluator evaluator(extrapol, extrapol);
+
+    host_t<FieldMem<Coord<Y>, IdxRange<GridType>>> test_coords_host_alloc(idx_range);
+
+    Coord<Y> ymin = ddc::coordinate(idx_range.front());
+    Coord<Y> ymax = ddc::coordinate(idx_range.back());
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution dis(0., 1.);
+    ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridType> idx) {
+        test_coords_host_alloc(idx) = ymin + (ymax - ymin) * dis(gen);
+    });
+
+    auto test_coords_alloc = ddc::create_mirror_view_and_copy(get_field(test_coords_host_alloc));
+    ConstField<Coord<Y>, IdxRange<GridType>> test_coords = get_const_field(test_coords_alloc);
+
+    builder(lagrange_coeffs, get_const_field(function_values));
+    evaluator(function_values, get_const_field(test_coords), get_const_field(lagrange_coeffs));
+
+    return error_norm_inf(
+            Kokkos::DefaultExecutionSpace(),
+            get_const_field(function_values),
+            KOKKOS_LAMBDA(Idx<GridType> idx) {
+                return static_cast<DataType>(std::cos(ddc::coordinate(idx)));
+            });
+}
+
+TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
+{
+    using DataType = typename TestFixture::DataType;
+    using GridY = TestFixture::GridY;
+    using LagBasis = TestFixture::LagBasis;
+    using RefinedGridY = TestFixture::RefinedGridY;
+    using RefinedLagBasis = TestFixture::RefinedLagBasis;
+
+    constexpr std::size_t degree = TestFixture::degree;
+
+    Coord<Y> ymin(0);
+    Coord<Y> ymax(2 * Kokkos::numbers::pi);
+    std::size_t ncells(10);
+    if constexpr (TestFixture::UNIFORM) {
+        ddc::init_discrete_space<GridY>(GridY::init(ymin, ymax, IdxStep<GridY>(ncells + 1)));
+        ddc::init_discrete_space<RefinedGridY>(
+                RefinedGridY::init(ymin, ymax, IdxStep<RefinedGridY>(2 * ncells + 1)));
+    } else {
+        std::vector<Coord<Y>> points
+                = build_random_non_uniform_break_points(ymin, ymax, IdxStep<GridY>(ncells), 0.5);
+        ddc::init_discrete_space<GridY>(points);
+        std::vector<Coord<Y>> refined_points(ncells * 2 + 1);
+        for (int i(0); i < points.size(); ++i) {
+            refined_points[2 * i] = points[i];
+            refined_points[2 * i + 1] = 0.5 * (points[i] + points[i + 1]);
+        }
+        refined_points.back() = points.back();
+        ddc::init_discrete_space<RefinedGridY>(refined_points);
+    }
+    IdxRange<GridY> idx_range(Idx<GridY>(0), IdxStep<GridY>(ncells + 1));
+    ddc::init_discrete_space<LagBasis>(idx_range);
+
+    IdxRange<RefinedGridY>
+            refined_idx_range(Idx<RefinedGridY>(0), IdxStep<RefinedGridY>(2 * ncells + 1));
+    ddc::init_discrete_space<RefinedLagBasis>(idx_range);
+
+    DataType cosine_error = get_cosine_error<DataType, LagBasis>(idx_range);
+    DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(refined_idx_range);
+
+    DataType order = std::log(cosine_error / refined_cosine_error) / std::log(2.0);
+    EXPECT_NEAR(order, degree + 1, 0.5);
 }
