@@ -304,11 +304,9 @@ public:
                 batch_idx_range,
                 KOKKOS_CLASS_LAMBDA(typename batch_domain_type<
                                     BatchedInterpolationGrid>::discrete_element_type const j) {
-                    auto const lagrange_eval_1D = lagrange_eval[j];
-                    auto const lagrange_coef_1D = lagrange_coef[j];
                     for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
                         Coord<continuous_dimension_type> coord_eval_1D = ddc::coordinate(i);
-                        lagrange_eval_1D(i) = eval(coord_eval_1D, lagrange_coef_1D);
+                        lagrange_eval(j, i) = eval(coord_eval_1D, lagrange_coef[j]);
                     }
                 });
     }
