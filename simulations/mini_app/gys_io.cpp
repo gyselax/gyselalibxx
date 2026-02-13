@@ -46,7 +46,7 @@ struct ConfigHandles
 
 void display_help(std::string exe)
 {
-    std::cerr << "usage: " << exe << " <config_file.yml> [<pdi_config.yml>]" << endl;
+    std::cerr << "usage: " << exe << " <config_file.yaml> [<pdi_config.yaml>]" << endl;
     std::exit(EXIT_FAILURE);
 }
 
@@ -56,9 +56,8 @@ ConfigHandles parse_config_files(int argc, char** argv)
     std::string exe = argv[0];
     if (argc > 1) {
         fs::path gysela_config_yml = argv[1];
-        std::string gysela_config_yml = argv[1];
-        if (gysela_config_yml.extension != ".yml") {
-            std::cerr << "Expected a .yml file for the config_file.yml. Received : " << gysela_config_yml << endl;
+        if (gysela_config_yml.extension() != "yaml" and gysela_config_yml.extension() != "yml") {
+            std::cerr << "Expected a .yaml file for the config_file.yaml. Received : " << gysela_config_yml << endl;
             display_help(exe);
         }
         configs.conf_gyselax = PC_parse_path(gysela_config_yml.c_str());
@@ -69,8 +68,8 @@ ConfigHandles parse_config_files(int argc, char** argv)
 
     if (argc > 2) {
         fs::path pdi_config_yml = argv[2];
-        if (pdi_config_yml.extension != ".yml") {
-            std::cerr << "Expected a .yml file for the pdi_config.yml. Received : " << pdi_config_yml << endl;
+        if (pdi_config_yml.extension() != "yaml" and pdi_config_yml.extension() != "yml") {
+            std::cerr << "Expected a .yaml file for the pdi_config.yaml. Received : " << pdi_config_yml << endl;
             display_help(exe);
         }
         configs.conf_pdi = PC_parse_path(pdi_config_yml.c_str());

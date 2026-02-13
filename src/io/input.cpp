@@ -20,8 +20,8 @@ void parse_executable_arguments(
     iter_start = 0;
     if (argc == 2) {
         fs::path pc_path = argv[1];
-        if (pc_path.extension != "yml") {
-            cerr << "Expected file with .yml extension. Received : " << pc_path << std::endl;
+        if (pc_path.extension() != "yaml" and pc_path.extension() != "yml") {
+            cerr << "Expected file with .yaml extension. Received : " << pc_path << std::endl;
         } else {
             conf_gyselalibxx = PC_parse_path(pc_path.c_str());
             return;
@@ -37,16 +37,16 @@ void parse_executable_arguments(
         if (argv[1] == std::string_view("--iter-restart")) {
             iter_start = std::strtol(argv[2], NULL, 10);
             fs::path pc_path = argv[3];
-            if (pc_path.extension != "yml") {
-                cerr << "Expected file with .yml extension. Received : " << pc_path << std::endl;
+            if (pc_path.extension() != "yaml" and pc_path.extension() != "yml") {
+                cerr << "Expected file with .yaml extension. Received : " << pc_path << std::endl;
             } else {
                 conf_gyselalibxx = PC_parse_path(pc_path.c_str());
                 return;
             }
         }
     }
-    cerr << "usage: " << argv[0] << " [--dump-config] <config_file.yml>" << endl;
-    cerr << "or to perform a restart" << argv[0] << " [--iter-restart] <iter> <config_file.yml>"
+    cerr << "usage: " << argv[0] << " [--dump-config] <config_file.yaml>" << endl;
+    cerr << "or to perform a restart" << argv[0] << " [--iter-restart] <iter> <config_file.yaml>"
          << endl;
     std::exit(EXIT_FAILURE);
 }
@@ -54,7 +54,13 @@ void parse_executable_arguments(
 PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const params_yaml)
 {
     if (argc == 2) {
-        return PC_parse_path(fs::path(argv[1]).c_str());
+        fs::path pc_path = argv[1];
+        if (pc_path.extension() != "yaml" and pc_path.extension() != "yml") {
+            cerr << "Expected file with .yaml extension. Received : " << pc_path << std::endl;
+        } else {
+            conf_gyselalibxx = PC_parse_path(pc_path.c_str());
+            return;
+        }
     } else if (argc == 3) {
         if (argv[1] == std::string_view("--dump-config")) {
             std::fstream file(argv[2], std::fstream::out);
@@ -64,6 +70,6 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
         }
     }
 
-    cerr << "usage: " << argv[0] << " [--dump-config] <config_file.yml>" << endl;
+    cerr << "usage: " << argv[0] << " [--dump-config] <config_file.yaml>" << endl;
     std::exit(EXIT_FAILURE);
 }
