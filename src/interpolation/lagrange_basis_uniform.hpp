@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <array>
+#include <cstddef>
+#include <type_traits>
 
 #include "ddc_aliases.hpp"
 #include "view.hpp"
@@ -28,7 +30,7 @@ struct UniformLagrangeKnots : UniformGridBase<typename T::continuous_dimension_t
  * Jean-Paul Berrut and Lloyd N. Trefethen
  * SIAM Review 2004 46:3, 501-517
  *
- * @tparam Grid1D The grid on which the Lagrange polynomials
+ * @tparam Dim The dimension on which the Lagrange polynomials
  *                  are defined.
  * @tparam D The degree of the polynomials, equal to the number of
  *                  cells over which the Lagrange polynomials are
@@ -36,7 +38,7 @@ struct UniformLagrangeKnots : UniformGridBase<typename T::continuous_dimension_t
  * @tparam DataType The data type used for the calculations.
  *                  Double by default.
  */
-template <class Grid1D, std::size_t D, class DataType = double>
+template <class Dim, std::size_t D, class DataType = double>
 class UniformLagrangeBasis : detail::UniformLagrangeBasisBase
 {
     static_assert(D > 0, "Parameter `D` must be positive");
@@ -44,7 +46,7 @@ class UniformLagrangeBasis : detail::UniformLagrangeBasisBase
 
 public:
     /// @brief The tag identifying the continuous dimension on which the Lagrange polynomials are defined.
-    using continuous_dimension_type = typename Grid1D::continuous_dimension_type;
+    using continuous_dimension_type = Dim;
 
     /// @brief The type of the coordinates on which the Lagrange polynomials can be evaluated.
     using coord_type = Coord<continuous_dimension_type>;
@@ -111,7 +113,57 @@ public:
          * Initialise the class such that Lagrange bases can be evaluated on domains
          * derived from the break point domain.
          */
-        explicit Impl(IdxRange<Grid1D> break_point_domain);
+        template <class Grid1D>
+        explicit Impl(IdxRange<Grid1D> break_point_domain)
+            : m_reference(ddc::create_reference_discrete_element<DDim>())
+        {
+            static_assert(std::is_same_v<typename Grid1D::continuous_dimension_type, Dim>);
+            static_assert(ddc::is_uniform_point_sampling<Grid1D>());
+            assert(ddc::is_discrete_space_initialized<Grid1D>());
+            assert(break_point_domain.size() >= D + 1);
+
+            coord_type bp_rmin = ddc::coordinate(break_point_domain.front());
+            DataType step = ddc::discrete_space<Grid1D>().step();
+
+            ddc::init_discrete_space<knot_grid>(bp_rmin, step);
+            // Initialise knot grid
+            if constexpr (is_periodic()) {
+                m_knot_domain = IdxRange<knot_grid>(
+                        ddc::discrete_space<knot_grid>().front(),
+                        IdxStep<knot_grid>(break_point_domain.size() + D));
+                m_break_point_domain = m_knot_domain.remove_last(IdxStep<knot_grid>(D));
+            } else {
+                m_knot_domain = IdxRange<knot_grid>(
+                        ddc::discrete_space<knot_grid>().front(),
+                        IdxStep<knot_grid>(break_point_domain.size()));
+                m_break_point_domain = m_knot_domain;
+            }
+
+            // Calculate weights
+            DataType dx = ddc::discrete_space<knot_grid>().step();
+            for (int i(0); i < D + 1; ++i) {
+                DataType numerator = dx;
+                for (int j(0); j < D + 1; ++j) {
+                    if (i == j)
+                        continue;
+                    numerator *= (i - j);
+                }
+                m_weights[i] = 1.0 / numerator;
+            }
+        }
+
+        /** @brief Copy-constructs from another Impl with a different Kokkos memory space.
+         *
+         * @param impl A reference to the other Impl.
+         */
+        template <class OriginMemorySpace>
+        explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
+            : m_weights(impl.m_weights)
+            , m_knot_domain(impl.m_knot_domain)
+            , m_break_point_domain(impl.m_break_point_domain)
+            , m_reference(impl.m_reference)
+        {
+        }
 
         /** @brief Returns the coordinate of the lower bound of the domain on which the B-splines are defined.
          *
@@ -186,7 +238,7 @@ public:
             DataType dx = ddc::discrete_space<knot_grid>().step();
             double inv_dx = 1. / dx;
             DataType offset = (x - ddc::coordinate(poly_start)) * inv_dx;
-            DataType eps = std::numeric_limits<DataType>::epsilon() * 4;
+            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
             int icell = static_cast<int>(offset);
             DataType local_offset = offset - icell;
             if (local_offset < eps) {
@@ -216,42 +268,3 @@ struct is_uniform_lagrange_basis
     : public std::is_base_of<detail::UniformLagrangeBasisBase, DDim>::type
 {
 };
-
-template <class Grid1D, std::size_t D, class DataType>
-template <class DDim, class MemorySpace>
-UniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
-        IdxRange<Grid1D> break_point_domain)
-    : m_reference(ddc::create_reference_discrete_element<DDim>())
-{
-    std::size_t ncells = break_point_domain.size() - 1;
-    assert(ncells >= D);
-
-    coord_type bp_rmin = ddc::coordinate(break_point_domain.front());
-    DataType step = ddc::discrete_space<Grid1D>().step();
-
-    ddc::init_discrete_space<knot_grid>(bp_rmin, step);
-    // Initialise knot grid
-    if constexpr (is_periodic()) {
-        m_knot_domain = IdxRange<knot_grid>(
-                ddc::discrete_space<knot_grid>().front(),
-                IdxStep<knot_grid>(break_point_domain.size() + D));
-        m_break_point_domain = m_knot_domain.remove_last(IdxStep<knot_grid>(D));
-    } else {
-        m_knot_domain = IdxRange<knot_grid>(
-                ddc::discrete_space<knot_grid>().front(),
-                IdxStep<knot_grid>(break_point_domain.size()));
-        m_break_point_domain = m_knot_domain;
-    }
-
-    // Calculate weights
-    DataType dx = ddc::discrete_space<knot_grid>().step();
-    for (int i(0); i < D + 1; ++i) {
-        DataType numerator = dx;
-        for (int j(0); j < D + 1; ++j) {
-            if (i == j)
-                continue;
-            numerator *= (i - j);
-        }
-        m_weights[i] = 1.0 / numerator;
-    }
-}

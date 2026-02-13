@@ -1,5 +1,4 @@
 #include <array>
-#include <random>
 
 #include <gtest/gtest.h>
 
@@ -23,7 +22,7 @@ struct LagrangeBasisFixture<std::tuple<
 {
     struct X
     {
-        static constexpr bool PERIODIC = false;
+        static constexpr bool PERIODIC = Periodic;
     };
     struct GridX : public std::conditional_t<Uniform, UniformGridBase<X>, NonUniformGridBase<X>>
     {
@@ -31,14 +30,13 @@ struct LagrangeBasisFixture<std::tuple<
     struct LagBasis
         : public std::conditional_t<
                   Uniform,
-                  UniformLagrangeBasis<GridX, D, T>,
-                  NonUniformLagrangeBasis<GridX, D, T>>
+                  UniformLagrangeBasis<X, D, T>,
+                  NonUniformLagrangeBasis<X, D, T>>
     {
     };
     using DataType = T;
     static constexpr std::size_t degree = D;
     static constexpr bool UNIFORM = Uniform;
-    static constexpr bool PERIODIC = Periodic;
 
     // Replace with your actual tolerance policy
     static constexpr double TOL = std::is_same_v<T, float> ? 1e-6 : 1e-12;
@@ -70,7 +68,7 @@ TYPED_TEST(LagrangeBasisFixture, KroneckerDeltaAtKnots)
     Coord<X> xmax(2);
     std::size_t ncells(20);
     if constexpr (TestFixture::UNIFORM) {
-        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells)));
+        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
     } else {
         std::vector<Coord<X>> points
                 = build_random_non_uniform_break_points(xmin, xmax, IdxStep<GridX>(ncells), 0.5);
@@ -83,7 +81,6 @@ TYPED_TEST(LagrangeBasisFixture, KroneckerDeltaAtKnots)
 
     std::array<DataType, degree + 1> basis_storage;
     Span1D<DataType> basis_values(basis_storage.data(), degree + 1);
-    std::cout << basis_values.size() << " " << degree + 1 << std::endl;
 
     // --- Test ---
     for (std::size_t j = 0; j < degree + 1; ++j) {

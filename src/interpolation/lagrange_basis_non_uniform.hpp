@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 #include <array>
+#include <cstddef>
+#include <type_traits>
+#include <vector>
 
 #include "ddc_aliases.hpp"
 #include "view.hpp"
@@ -28,7 +31,7 @@ struct NonUniformLagrangeKnots : NonUniformGridBase<typename T::continuous_dimen
  * Jean-Paul Berrut and Lloyd N. Trefethen
  * SIAM Review 2004 46:3, 501-517
  *
- * @tparam Grid1D The grid on which the Lagrange polynomials
+ * @tparam Dim The dimension on which the Lagrange polynomials
  *                  are defined.
  * @tparam D The degree of the polynomials, equal to the number of
  *                  cells over which the Lagrange polynomials are
@@ -36,7 +39,7 @@ struct NonUniformLagrangeKnots : NonUniformGridBase<typename T::continuous_dimen
  * @tparam DataType The data type used for the calculations.
  *                  Double by default.
  */
-template <class Grid1D, std::size_t D, class DataType = double>
+template <class Dim, std::size_t D, class DataType = double>
 class NonUniformLagrangeBasis : detail::NonUniformLagrangeBasisBase
 {
     static_assert(D > 0, "Parameter `D` must be positive");
@@ -44,10 +47,10 @@ class NonUniformLagrangeBasis : detail::NonUniformLagrangeBasisBase
 
 public:
     /// @brief The tag identifying the continuous dimension on which the Lagrange polynomials are defined.
-    using continuous_dimension_type = typename Grid1D::continuous_dimension_type;
+    using continuous_dimension_type = Dim;
 
     /// @brief The type of the coordinates on which the Lagrange polynomials can be evaluated.
-    using coord_type = Coord<continuous_dimension_type>;
+    using coord_type = Coord<Dim>;
 
     /// @brief The discrete dimension representing B-splines.
     using discrete_dimension_type = NonUniformLagrangeBasis;
@@ -109,7 +112,62 @@ public:
          * Initialise the class such that Lagrange bases can be evaluated on domains
          * derived from the break point domain.
          */
-        explicit Impl(IdxRange<Grid1D> break_point_domain);
+        template <class Grid1D>
+        explicit Impl(IdxRange<Grid1D> break_point_domain)
+            : m_reference(ddc::create_reference_discrete_element<DDim>())
+        {
+            static_assert(std::is_same_v<typename Grid1D::continuous_dimension_type, Dim>);
+            static_assert(
+                    ddc::is_uniform_point_sampling<Grid1D>()
+                    || ddc::is_non_uniform_point_sampling<Grid1D>());
+            assert(ddc::is_discrete_space_initialized<Grid1D>());
+            assert(break_point_domain.size() >= D + 1);
+
+            // Initialise knot grid
+            if constexpr (is_periodic()) {
+                std::size_t npoints = ddc::discrete_space<Grid1D>().size();
+                std::vector<coord_type> points(npoints + D);
+                Idx<Grid1D> idx_front = ddc::discrete_space<Grid1D>().front();
+                Idx<Grid1D> idx_back = idx_front + npoints - 1;
+                for (std::size_t i(0); i < npoints; ++i) {
+                    points[i] = ddc::coordinate(idx_front + i);
+                }
+                for (std::size_t i(1); i < D + 1; ++i) {
+                    points[npoints + i - 1]
+                            = ddc::coordinate(idx_back)
+                              + (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
+                }
+                ddc::init_discrete_space<knot_grid>(points);
+                m_knot_domain = IdxRange<knot_grid>(
+                        ddc::discrete_space<knot_grid>().front(),
+                        IdxStep<knot_grid>(break_point_domain.size() + D));
+                m_break_point_domain = m_knot_domain.remove_last(IdxStep<knot_grid>(D));
+            } else {
+                std::size_t npoints = ddc::discrete_space<Grid1D>().size();
+                Idx<Grid1D> idx_front = ddc::discrete_space<Grid1D>().front();
+                std::vector<coord_type> points(npoints);
+                for (std::size_t i(0); i < npoints; ++i) {
+                    points[i] = ddc::coordinate(idx_front + i);
+                }
+                ddc::init_discrete_space<knot_grid>(points);
+                m_knot_domain = IdxRange<knot_grid>(
+                        ddc::discrete_space<knot_grid>().front(),
+                        IdxStep<knot_grid>(break_point_domain.size()));
+                m_break_point_domain = m_knot_domain;
+            }
+        }
+
+        /** @brief Copy-constructs from another Impl with a different Kokkos memory space.
+         *
+         * @param impl A reference to the other Impl.
+         */
+        template <class OriginMemorySpace>
+        explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
+            : m_knot_domain(impl.m_knot_domain)
+            , m_break_point_domain(impl.m_break_point_domain)
+            , m_reference(impl.m_reference)
+        {
+        }
 
         /** @brief Returns the coordinate of the lower bound of the domain on which the B-splines are defined.
          *
@@ -177,7 +235,7 @@ public:
             KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
             DataType offset = (x - ddc::coordinate(poly_start));
-            DataType eps = std::numeric_limits<DataType>::epsilon() * 4;
+            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
             for (std::size_t i(0); i < D + 1; ++i) {
                 if (fabs(offset - ddc::coordinate(poly_start + i)) < eps) {
                     for (int j(0); j < D + 1; ++j) {
@@ -214,45 +272,3 @@ struct is_non_uniform_lagrange_basis
     : public std::is_base_of<detail::NonUniformLagrangeBasisBase, DDim>::type
 {
 };
-
-template <class Grid1D, std::size_t D, class DataType>
-template <class DDim, class MemorySpace>
-NonUniformLagrangeBasis<Grid1D, D, DataType>::Impl<DDim, MemorySpace>::Impl(
-        IdxRange<Grid1D> break_point_domain)
-    : m_reference(ddc::create_reference_discrete_element<DDim>())
-{
-    std::size_t ncells = break_point_domain.size() - 1;
-    assert(ncells >= D);
-
-    // Initialise knot grid
-    if constexpr (is_periodic()) {
-        std::size_t npoints = ddc::discrete_space<Grid1D>().size();
-        std::vector<coord_type> points(npoints + D);
-        Idx<Grid1D> idx_front = ddc::discrete_space<Grid1D>().front();
-        Idx<Grid1D> idx_back = idx_front + npoints;
-        for (std::size_t i(0); i < npoints; ++i) {
-            points[i] = ddc::coordinate(idx_front + i);
-        }
-        for (std::size_t i(1); i < D + 1; ++i) {
-            points[npoints + i] = ddc::coordinate(idx_back)
-                                  + (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
-        }
-        ddc::init_discrete_space<knot_grid>(points);
-        m_knot_domain = IdxRange<knot_grid>(
-                ddc::discrete_space<knot_grid>().front(),
-                IdxStep<knot_grid>(break_point_domain.size() + D));
-        m_break_point_domain = m_knot_domain.remove_last(IdxStep<knot_grid>(D));
-    } else {
-        std::size_t npoints = ddc::discrete_space<Grid1D>().size();
-        Idx<Grid1D> idx_front = ddc::discrete_space<Grid1D>().front();
-        std::vector<coord_type> points(npoints);
-        for (std::size_t i(0); i < npoints; ++i) {
-            points[i] = ddc::coordinate(idx_front + i);
-        }
-        ddc::init_discrete_space<knot_grid>(points);
-        m_knot_domain = IdxRange<knot_grid>(
-                ddc::discrete_space<knot_grid>().front(),
-                IdxStep<knot_grid>(break_point_domain.size()));
-        m_break_point_domain = m_knot_domain;
-    }
-}

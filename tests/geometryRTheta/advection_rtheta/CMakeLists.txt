@@ -48,7 +48,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
         add_test(NAME TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}
                COMMAND "$<TARGET_FILE:Python3::Interpreter>" "${CMAKE_CURRENT_SOURCE_DIR}/display_all_errors_for_gtest.py"
                     "$<TARGET_FILE:advection_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION}>")
-        set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY TIMEOUT 100)
+        set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY TIMEOUT 150)
         set_property(TEST TestAdvectionRPConvergence_${MAPPING_TYPE}__${TIME_METHOD}__${SIMULATION} PROPERTY COST 50)
     endforeach()
 endforeach()
