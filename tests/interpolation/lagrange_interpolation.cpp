@@ -197,10 +197,12 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
     });
 }
 
-template <class DataType, class LagBasis, class GridType>
-DataType get_cosine_error(IdxRange<GridType> idx_range)
+template <class DataType, class LagBasis, class Dim, class GridType, class TestGridType>
+DataType get_cosine_error(
+        IdxRange<GridType> idx_range,
+        ConstField<Coord<Dim>, IdxRange<TestGridType>> test_coords)
 {
-    using Dim = typename GridType::continuous_dimension_type;
+    static_assert(std::is_same_v<Dim, typename GridType::continuous_dimension_type>);
     using Builder = IdentityInterpolationBuilder<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -211,7 +213,7 @@ DataType get_cosine_error(IdxRange<GridType> idx_range)
             Kokkos::DefaultExecutionSpace::memory_space,
             DataType,
             LagBasis,
-            GridType,
+            TestGridType,
             ddc::PeriodicExtrapolationRule<Dim>,
             ddc::PeriodicExtrapolationRule<Dim>>;
     using IdxRangeCoeff = typename Builder::template batched_basis_domain_type<IdxRange<GridType>>;
@@ -234,28 +236,20 @@ DataType get_cosine_error(IdxRange<GridType> idx_range)
     ddc::PeriodicExtrapolationRule<Dim> extrapol;
     Evaluator evaluator(extrapol, extrapol);
 
-    host_t<FieldMem<Coord<Y>, IdxRange<GridType>>> test_coords_host_alloc(idx_range);
-
-    Coord<Y> ymin = ddc::coordinate(idx_range.front());
-    Coord<Y> ymax = ddc::coordinate(idx_range.back());
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution dis(0., 1.);
-    ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridType> idx) {
-        test_coords_host_alloc(idx) = ymin + (ymax - ymin) * dis(gen);
-    });
-
-    auto test_coords_alloc = ddc::create_mirror_view_and_copy(get_field(test_coords_host_alloc));
-    ConstField<Coord<Y>, IdxRange<GridType>> test_coords = get_const_field(test_coords_alloc);
-
     builder(lagrange_coeffs, get_const_field(function_values));
-    evaluator(function_values, get_const_field(test_coords), get_const_field(lagrange_coeffs));
+
+    FieldMem<DataType, IdxRange<TestGridType>> values_at_test_points_alloc(get_idx_range(test_coords));
+    Field<DataType, IdxRange<TestGridType>> values_at_test_points(values_at_test_points_alloc);
+    evaluator(
+            values_at_test_points,
+            get_const_field(test_coords),
+            get_const_field(lagrange_coeffs));
 
     return error_norm_inf(
             Kokkos::DefaultExecutionSpace(),
-            get_const_field(function_values),
-            KOKKOS_LAMBDA(Idx<GridType> idx) {
-                return static_cast<DataType>(std::cos(ddc::coordinate(idx)));
+            get_const_field(values_at_test_points),
+            KOKKOS_LAMBDA(Idx<TestGridType> idx) {
+                return static_cast<DataType>(std::cos(test_coords(idx)));
             });
 }
 
@@ -295,12 +289,24 @@ TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
             refined_idx_range(Idx<RefinedGridY>(0), IdxStep<RefinedGridY>(2 * ncells + 1));
     ddc::init_discrete_space<RefinedLagBasis>(refined_idx_range);
 
+    host_t<FieldMem<Coord<Y>, IdxRange<GridY>>> test_coords_host_alloc(idx_range);
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+    std::uniform_real_distribution dis(0., 1.);
+    ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridY> idx) {
+        test_coords_host_alloc(idx) = ymin + (ymax - ymin) * dis(gen);
+    });
+
+    auto test_coords_alloc = ddc::create_mirror_view_and_copy(get_field(test_coords_host_alloc));
+    ConstField<Coord<Y>, IdxRange<GridY>> test_coords = get_const_field(test_coords_alloc);
+
     DataType cosine_error = get_cosine_error<DataType, LagBasis>(
-            idx_range.remove_last(IdxStep<GridY>(1)) // Remove repeat periodic point
-    );
+            idx_range.remove_last(IdxStep<GridY>(1)), // Remove repeat periodic point
+            test_coords);
     DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(
-            refined_idx_range.remove_last(IdxStep<RefinedGridY>(1)) // Remove repeat periodic point
-    );
+            refined_idx_range.remove_last(IdxStep<RefinedGridY>(1)), // Remove repeat periodic point
+            test_coords);
 
     DataType order = std::log(cosine_error / refined_cosine_error) / std::log(2.0);
     EXPECT_NEAR(order, degree + 1, 0.5);
