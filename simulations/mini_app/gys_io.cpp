@@ -41,18 +41,35 @@ struct ConfigHandles
     PC_tree_t conf_pdi;
 };
 
+void display_help(std::string exe)
+{
+    std::cerr << "usage: " << exe << " <config_file.yml> [<pdi_config.yml>]" << endl;
+    std::exit(EXIT_FAILURE);
+}
+
 ConfigHandles parse_config_files(int argc, char** argv)
 {
     ConfigHandles configs {};
+    std::string exe = argv[0];
     if (argc > 1) {
-        configs.conf_gyselax = PC_parse_path(argv[1]);
+        std::string gysela_config_yml = argv[1];
+        if (!gysela_config_yml.ends_with(".yml")) {
+            std::cerr << "Expected a .yml file for the config_file.yml. Received : " << gysela_config_yml << endl;
+            display_help(exe);
+        }
+        configs.conf_gyselax = PC_parse_path(gysela_config_yml.c_str());
     } else {
-        configs.conf_gyselax = PC_parse_string("");
+        display_help(exe);
     }
     PC_errhandler(PC_NULL_HANDLER);
 
     if (argc > 2) {
-        configs.conf_pdi = PC_parse_path(argv[2]);
+        std::string pdi_config_yml = argv[2];
+        if (!pdi_config_yml.ends_with(".yml")) {
+            std::cerr << "Expected a .yml file for the pdi_config.yml. Received : " << pdi_config_yml << endl;
+            display_help(exe);
+        }
+        configs.conf_pdi = PC_parse_path(pdi_config_yml.c_str());
     } else {
         configs.conf_pdi = PC_parse_string(PDI_CFG);
     }
@@ -388,10 +405,10 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     // Read and initialise the configuration
     //---------------------------------------------------------
+    ConfigHandles configs = parse_config_files(argc, argv);
     if (rank == 0) {
         cout << "Initialising 5D particle distribution function." << endl;
     }
-    ConfigHandles configs = parse_config_files(argc, argv);
     PDI_init(configs.conf_pdi);
     //---------------------------------------------------------
     // Initialisation of the global and local mesh (sp, space, phase-space)
