@@ -219,9 +219,12 @@ DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> t
     FieldMem<DataType, IdxRange<GridType>> function_values_alloc(idx_range);
     Field<DataType, IdxRange<GridType>> function_values(function_values_alloc);
 
-    ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), idx_range, [&](Idx<GridType> i) {
-        function_values(i) = Kokkos::cos(ddc::coordinate(i));
-    });
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            idx_range,
+            KOKKOS_LAMBDA(Idx<GridType> i) {
+                function_values(i) = Kokkos::cos(ddc::coordinate(i));
+            });
 
     Builder builder;
     FieldMem<DataType, IdxRangeCoeff> lagrange_coeffs_alloc(
