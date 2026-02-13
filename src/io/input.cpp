@@ -58,8 +58,7 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
         if (pc_path.extension() != "yaml" and pc_path.extension() != "yml") {
             cerr << "Expected file with .yaml extension. Received : " << pc_path << std::endl;
         } else {
-            conf_gyselalibxx = PC_parse_path(pc_path.c_str());
-            return;
+            return PC_parse_path(pc_path.c_str());
         }
     } else if (argc == 3) {
         if (argv[1] == std::string_view("--dump-config")) {
