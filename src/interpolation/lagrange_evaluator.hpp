@@ -385,7 +385,8 @@ private:
                                             * static_cast<int>((first_knot - closest_knot) > step)
                                   + step;
             if (first_lagrange_knot > closest_knot) {
-                coord_eval_interest = coord_eval_interest + ddc::discrete_space<lagrange_basis_type>().length();
+                coord_eval_interest
+                        = coord_eval_interest + ddc::discrete_space<lagrange_basis_type>().length();
             }
         } else {
             if ((first_knot - closest_knot) > step) {
@@ -420,7 +421,7 @@ private:
                 UniformLagrangeKnots<LagrangeBasis>,
                 NonUniformLagrangeKnots<LagrangeBasis>>;
         Idx<knot_grid> first = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
-        if constexpr (ddc::is_uniform_point_sampling_v<InterpolationGrid>) {
+        if constexpr (ddc::is_uniform_point_sampling_v<knot_grid>) {
             int knot_offset = static_cast<int>(
                     Kokkos::round((x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>()));
             return first + knot_offset;
