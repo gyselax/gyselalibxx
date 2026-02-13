@@ -138,11 +138,12 @@ public:
             = std::nullopt) const
     {
         IdxRange<basis_domain_type> bp_idx_range
-                = ddc::discrete_space<Basis>().break_point_domain();
+                = ddc::discrete_space<Basis>().break_point_domain().remove_last(
+                        IdxStep<basis_domain_type>(static_cast<int>(Basis::is_periodic())));
         Kokkos::deep_copy(
                 coeffs[bp_idx_range].allocation_kokkos_view(),
                 vals.allocation_kokkos_view());
-        if constexpr (Basis::is_uniform()) {
+        if constexpr (Basis::is_periodic()) {
             IdxRange<basis_domain_type> extended_domain(
                     ddc::discrete_space<Basis>().full_domain().remove_first(
                             bp_idx_range.extents()));

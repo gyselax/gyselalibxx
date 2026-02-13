@@ -293,10 +293,14 @@ TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
 
     IdxRange<RefinedGridY>
             refined_idx_range(Idx<RefinedGridY>(0), IdxStep<RefinedGridY>(2 * ncells + 1));
-    ddc::init_discrete_space<RefinedLagBasis>(idx_range);
+    ddc::init_discrete_space<RefinedLagBasis>(refined_idx_range);
 
-    DataType cosine_error = get_cosine_error<DataType, LagBasis>(idx_range);
-    DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(refined_idx_range);
+    DataType cosine_error = get_cosine_error<DataType, LagBasis>(
+            idx_range.remove_last(IdxStep<GridY>(1)) // Remove repeat periodic point
+    );
+    DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(
+            refined_idx_range.remove_last(IdxStep<RefinedGridY>(1)) // Remove repeat periodic point
+    );
 
     DataType order = std::log(cosine_error / refined_cosine_error) / std::log(2.0);
     EXPECT_NEAR(order, degree + 1, 0.5);
