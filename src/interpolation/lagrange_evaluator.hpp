@@ -365,7 +365,7 @@ private:
                 DataType,
                 Kokkos::extents<std::size_t, lagrange_basis_type::degree() + 1>> const
                 vals(vals_ptr.data());
-        Coord<continuous_dimension_type> const coord_eval_interest(coord_eval);
+        Coord<continuous_dimension_type> coord_eval_interest(coord_eval);
         Idx<knot_grid> closest_knot = getclosest(coord_eval);
         Idx<knot_grid> first_knot
                 = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
@@ -384,6 +384,9 @@ private:
                                   + (last_knot - first_knot)
                                             * static_cast<int>((first_knot - closest_knot) > step)
                                   + step;
+            if (first_lagrange_knot > closest_knot) {
+                coord_eval_interest = coord_eval_interest + ddc::discrete_space<lagrange_basis_type>().length();
+            }
         } else {
             if ((first_knot - closest_knot) > step) {
                 // if first_lagrange_knot would be < 0
