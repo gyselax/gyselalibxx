@@ -22,7 +22,6 @@
 #include "mpitransposealltoall.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
-#include "pdi_default.yml.hpp"
 #include "pdi_helper.hpp"
 #include "quadrature.hpp"
 #include "species_init.hpp"
@@ -54,19 +53,13 @@ ConfigHandles parse_config_files(int argc, char** argv)
 {
     ConfigHandles configs {};
     std::string exe = argv[0];
-    if (argc > 1) {
+    if (argc > 2) {
         fs::path gysela_config_yml = argv[1];
         if (gysela_config_yml.extension() != "yaml" and gysela_config_yml.extension() != "yml") {
             std::cerr << "Expected a .yaml file for the config_file.yaml. Received : " << gysela_config_yml << endl;
             display_help(exe);
         }
         configs.conf_gyselax = PC_parse_path(gysela_config_yml.c_str());
-    } else {
-        display_help(exe);
-    }
-    PC_errhandler(PC_NULL_HANDLER);
-
-    if (argc > 2) {
         fs::path pdi_config_yml = argv[2];
         if (pdi_config_yml.extension() != "yaml" and pdi_config_yml.extension() != "yml") {
             std::cerr << "Expected a .yaml file for the pdi_config.yaml. Received : " << pdi_config_yml << endl;
@@ -74,7 +67,7 @@ ConfigHandles parse_config_files(int argc, char** argv)
         }
         configs.conf_pdi = PC_parse_path(pdi_config_yml.c_str());
     } else {
-        configs.conf_pdi = PC_parse_string(PDI_CFG);
+        display_help(exe);
     }
     return configs;
 }
