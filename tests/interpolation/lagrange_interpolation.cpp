@@ -216,15 +216,12 @@ DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> t
             ddc::PeriodicExtrapolationRule<Dim>>;
     using IdxRangeCoeff = typename Builder::template batched_basis_domain_type<IdxRange<GridType>>;
 
-    host_t<FieldMem<DataType, IdxRange<GridType>>> function_values_host(idx_range);
-    ddc::host_for_each(idx_range, [&](Idx<GridType> i) {
-        function_values_host(i) = std::cos(ddc::coordinate(i));
-    });
-
-    auto function_values_alloc = ddc::create_mirror_view_and_copy(
-            Kokkos::DefaultExecutionSpace(),
-            get_field(function_values_host));
+    FieldMem<DataType, IdxRange<GridType>> function_values_alloc(idx_range);
     Field<DataType, IdxRange<GridType>> function_values(function_values_alloc);
+
+    ddc::parallel_for_each(Kokkos::DefaultExecutionSpace(), idx_range, [&](Idx<GridType> i) {
+        function_values(i) = Kokkos::cos(ddc::coordinate(i));
+    });
 
     Builder builder;
     FieldMem<DataType, IdxRangeCoeff> lagrange_coeffs_alloc(
@@ -244,7 +241,7 @@ DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> t
             Kokkos::DefaultExecutionSpace(),
             get_const_field(values_at_test_points),
             KOKKOS_LAMBDA(Idx<TestGridType> idx) {
-                return static_cast<DataType>(std::cos(ddc::coordinate(idx)));
+                return static_cast<DataType>(Kokkos::cos(ddc::coordinate(idx)));
             });
 }
 
