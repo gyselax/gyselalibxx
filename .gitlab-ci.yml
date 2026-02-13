@@ -96,16 +96,6 @@ python_best_practices:
     # Get pylint errors without failing
     pylint ${POST_PROCESS_PYTHON_FILES}
 
-public_mirror:
-  rules:
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
-  tags: [ outssh ]
-  needs: []
-  image: ghcr.io/gyselax/gyselalibxx_env
-  variables:
-    GIT_SUBMODULE_STRATEGY: normal
-  script: ./bin/public_mirror
-
 documentation:
   rules:
     - if: $CI_PIPELINE_SOURCE == "merge_request_event"
