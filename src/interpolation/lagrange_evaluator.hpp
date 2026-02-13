@@ -238,36 +238,36 @@ public:
             class Layout1,
             class Layout2,
             class Layout3,
-            class BatchedInterpolationIdxRange,
+            class IdxRangeBatchedInterpolation,
             class... CoordsDims>
     void operator()(
-            Field<DataType, BatchedInterpolationIdxRange, memory_space, Layout1> const
+            Field<DataType, IdxRangeBatchedInterpolation, memory_space, Layout1> const
                     lagrange_eval,
             ConstField<
                     Coord<CoordsDims...>,
-                    BatchedInterpolationIdxRange,
+                    IdxRangeBatchedInterpolation,
                     memory_space,
                     Layout2> const coords_eval,
             ConstField<
                     DataType,
-                    batched_lagrange_domain_type<BatchedInterpolationGrid>,
+                    batched_lagrange_domain_type<IdxRangeBatchedInterpolation>,
                     memory_space,
                     Layout3> const lagrange_coef) const
     {
         evaluation_domain_type const evaluation_idx_range(get_idx_range(lagrange_eval));
-        batch_domain_type<BatchedInterpolationGrid> const batch_idx_range(
+        batch_domain_type<IdxRangeBatchedInterpolation> const batch_idx_range(
                 get_idx_range(lagrange_eval));
 
-        using IdxBatchedInterpolation =
-                typename batch_domain_type<BatchedInterpolationGrid>::discrete_element_type;
+        using IdxBatchInterpolation =
+                typename batch_domain_type<IdxRangeBatchedInterpolation>::discrete_element_type;
 
         ddc::parallel_for_each(
                 "Lagrange_evaluate",
                 exec_space(),
                 batch_idx_range,
-                KOKKOS_CLASS_LAMBDA(IdxBatchedInterpolation const j) {
+                KOKKOS_CLASS_LAMBDA(IdxBatchInterpolation const j) {
                     for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
-                        lagrange_eval(j, i) = eval(coords_eval_1D(j, i), lagrange_coef_1D[j]);
+                        lagrange_eval(j, i) = eval(coords_eval(j, i), lagrange_coef[j]);
                     }
                 });
     }
