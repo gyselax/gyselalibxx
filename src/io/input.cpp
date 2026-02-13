@@ -20,7 +20,7 @@ void parse_executable_arguments(
     iter_start = 0;
     if (argc == 2) {
         fs::path pc_path = argv[1];
-        if (pc_path.extension() != "yaml" && pc_path.extension() != "yml") {
+        if (pc_path.extension() != ".yaml" && pc_path.extension() != ".yml") {
             cerr << "Expected file with .yaml extension. Received : " << pc_path << std::endl;
         } else {
             conf_gyselalibxx = PC_parse_path(pc_path.c_str());
@@ -37,7 +37,7 @@ void parse_executable_arguments(
         if (argv[1] == std::string_view("--iter-restart")) {
             iter_start = std::strtol(argv[2], NULL, 10);
             fs::path pc_path = argv[3];
-            if (pc_path.extension() != "yaml" && pc_path.extension() != "yml") {
+            if (pc_path.extension() != ".yaml" && pc_path.extension() != ".yml") {
                 cerr << "Expected file with .yaml extension. Received : " << pc_path << std::endl;
             } else {
                 conf_gyselalibxx = PC_parse_path(pc_path.c_str());
@@ -55,7 +55,7 @@ PC_tree_t parse_executable_arguments(int argc, char** argv, char const* const pa
 {
     if (argc == 2) {
         fs::path pc_path = argv[1];
-        if (pc_path.extension() != "yaml" && pc_path.extension() != "yml") {
+        if (pc_path.extension() != ".yaml" && pc_path.extension() != ".yml") {
             cerr << "Expected file with .yaml extension. Received : " << pc_path << std::endl;
         } else {
             return PC_parse_path(pc_path.c_str());
