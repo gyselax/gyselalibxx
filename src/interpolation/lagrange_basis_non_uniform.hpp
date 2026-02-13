@@ -3,6 +3,7 @@
 #include <array>
 #include <cstddef>
 #include <type_traits>
+#include <vector>
 
 #include "ddc_aliases.hpp"
 #include "view.hpp"
