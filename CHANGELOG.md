@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [UNRELEASED]
+
+### Added
+
+- Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
+
+### Fixed
+
+### Changed
+
+### Deprecated
+
+### Removed
+
 ## [v0.5.0] - 2026-02-04
 
 ### Added
