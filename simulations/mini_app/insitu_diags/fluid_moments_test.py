@@ -95,7 +95,6 @@ mean_velocity = moments_calc.compute_velocity(f, density).compute()
 # --- Compute Temperature ---
 temperature = moments_calc.compute_temperature(f, density, mean_velocity).compute()
 
-print(f"density : {density}")
 # -------------------------------------------------
 # 4. Verification
 # -------------------------------------------------
