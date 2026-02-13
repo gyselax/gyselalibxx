@@ -43,7 +43,7 @@ struct ConfigHandles
     PC_tree_t conf_pdi;
 };
 
-void display_help(std::string exe)
+void display_help(std::string const& exe)
 {
     std::cerr << "usage: " << exe << " <config_file.yaml> [<pdi_config.yaml>]" << endl;
     std::exit(EXIT_FAILURE);
