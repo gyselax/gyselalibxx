@@ -49,13 +49,13 @@ ConfigHandles parse_config_files(int argc, char** argv)
     } else {
         configs.conf_gyselax = PC_parse_string("");
     }
-    PC_errhandler(PC_NULL_HANDLER);
 
     if (argc > 2) {
         configs.conf_pdi = PC_parse_path(argv[2]);
     } else {
         configs.conf_pdi = PC_parse_string(PDI_CFG);
     }
+    PC_errhandler(PC_NULL_HANDLER);
     return configs;
 }
 
@@ -483,11 +483,10 @@ int main(int argc, char** argv)
         // Use the new function to write timing stats as a table
         write_cpu_time_stats(rank, durations, timing_names, timing_names.size());
     }
-    PDI_finalize();
-    MPI_Finalize();
-
     PC_tree_destroy(&configs.conf_pdi);
     PC_tree_destroy(&configs.conf_gyselax);
+    PDI_finalize();
+    MPI_Finalize();
 
     return EXIT_SUCCESS;
 }
