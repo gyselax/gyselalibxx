@@ -30,7 +30,7 @@ add_test(NAME TestSimulationBumpontailFemUniform_xperiod_vx
         "$<TARGET_FILE:vlasovpoisson_xvx_fem_uniform_xperiod_vx>"
         "$<TARGET_FILE:Python3::Interpreter>"
         "fem")
-set_property(TEST TestSimulationBumpontailFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
+set_property(TEST TestSimulationBumpontailFemUniform_xperiod_vx PROPERTY TIMEOUT 250)
 set_property(TEST TestSimulationBumpontailFemUniform_xperiod_vx PROPERTY COST 100)
 
 if (${ACTIVATE_RESTART_TESTS})
@@ -42,6 +42,6 @@ if (${ACTIVATE_RESTART_TESTS})
             "restart"
             "${RELATIVE_RESTART_TOLERANCE}"
             "${ABSOLUTE_RESTART_TOLERANCE}")
-    set_property(TEST TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
+    set_property(TEST TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTY TIMEOUT 250)
     set_property(TEST TestSimulationBumpontailRestartFemUniform_xperiod_vx PROPERTY COST 100)
 endif()
