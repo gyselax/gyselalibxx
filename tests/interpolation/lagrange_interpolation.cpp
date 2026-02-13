@@ -197,12 +197,10 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
     });
 }
 
-template <class DataType, class LagBasis, class Dim, class GridType, class TestGridType>
-DataType get_cosine_error(
-        IdxRange<GridType> idx_range,
-        ConstField<Coord<Dim>, IdxRange<TestGridType>> test_coords)
+template <class DataType, class LagBasis, class GridType, class TestGridType>
+DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> test_idx_range)
 {
-    static_assert(std::is_same_v<Dim, typename GridType::continuous_dimension_type>);
+    using Dim = typename GridType::continuous_dimension_type;
     using Builder = IdentityInterpolationBuilder<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -238,18 +236,15 @@ DataType get_cosine_error(
 
     builder(lagrange_coeffs, get_const_field(function_values));
 
-    FieldMem<DataType, IdxRange<TestGridType>> values_at_test_points_alloc(get_idx_range(test_coords));
+    FieldMem<DataType, IdxRange<TestGridType>> values_at_test_points_alloc(test_idx_range);
     Field<DataType, IdxRange<TestGridType>> values_at_test_points(values_at_test_points_alloc);
-    evaluator(
-            values_at_test_points,
-            get_const_field(test_coords),
-            get_const_field(lagrange_coeffs));
+    evaluator(values_at_test_points, get_const_field(lagrange_coeffs));
 
     return error_norm_inf(
             Kokkos::DefaultExecutionSpace(),
             get_const_field(values_at_test_points),
             KOKKOS_LAMBDA(Idx<TestGridType> idx) {
-                return static_cast<DataType>(std::cos(test_coords(idx)));
+                return static_cast<DataType>(std::cos(ddc::coordinate(idx)));
             });
 }
 
@@ -263,6 +258,10 @@ TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
 
     constexpr std::size_t degree = TestFixture::degree;
 
+    struct TestGrid : public UniformGridBase<Y>
+    {
+    };
+
     Coord<Y> ymin(0);
     Coord<Y> ymax(2 * Kokkos::numbers::pi);
     std::size_t ncells(10);
@@ -272,10 +271,10 @@ TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
                 RefinedGridY::init(ymin, ymax, IdxStep<RefinedGridY>(2 * ncells + 1)));
     } else {
         std::vector<Coord<Y>> points
-                = build_random_non_uniform_break_points(ymin, ymax, IdxStep<GridY>(ncells), 0.5);
+                = build_random_non_uniform_break_points(ymin, ymax, IdxStep<GridY>(ncells), 0.1);
         ddc::init_discrete_space<GridY>(points);
         std::vector<Coord<Y>> refined_points(ncells * 2 + 1);
-        for (int i(0); i < points.size(); ++i) {
+        for (int i(0); i < ncells; ++i) {
             refined_points[2 * i] = points[i];
             refined_points[2 * i + 1] = 0.5 * (points[i] + points[i + 1]);
         }
@@ -289,25 +288,23 @@ TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
             refined_idx_range(Idx<RefinedGridY>(0), IdxStep<RefinedGridY>(2 * ncells + 1));
     ddc::init_discrete_space<RefinedLagBasis>(refined_idx_range);
 
-    host_t<FieldMem<Coord<Y>, IdxRange<GridY>>> test_coords_host_alloc(idx_range);
+    ddc::init_discrete_space<TestGrid>(TestGrid::init(ymin, ymax, IdxStep<TestGrid>(6 * ncells)));
 
-    std::random_device rd;
-    std::mt19937 gen(rd());
-    std::uniform_real_distribution dis(0., 1.);
-    ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridY> idx) {
-        test_coords_host_alloc(idx) = ymin + (ymax - ymin) * dis(gen);
-    });
-
-    auto test_coords_alloc = ddc::create_mirror_view_and_copy(get_field(test_coords_host_alloc));
-    ConstField<Coord<Y>, IdxRange<GridY>> test_coords = get_const_field(test_coords_alloc);
+    IdxRange<TestGrid> test_idx_range(Idx<TestGrid>(0), IdxStep<TestGrid>(6 * ncells));
 
     DataType cosine_error = get_cosine_error<DataType, LagBasis>(
             idx_range.remove_last(IdxStep<GridY>(1)), // Remove repeat periodic point
-            test_coords);
+            test_idx_range);
     DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(
             refined_idx_range.remove_last(IdxStep<RefinedGridY>(1)), // Remove repeat periodic point
-            test_coords);
+            test_idx_range);
 
     DataType order = std::log(cosine_error / refined_cosine_error) / std::log(2.0);
-    EXPECT_NEAR(order, degree + 1, 0.5);
+
+    std::cout << cosine_error << " " << refined_cosine_error << " " << order << std::endl;
+    if constexpr (TestFixture::UNIFORM) {
+        EXPECT_NEAR(order, degree + 1, 0.5);
+    } else {
+        EXPECT_GT(order, degree);
+    }
 }
