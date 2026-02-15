@@ -89,6 +89,10 @@ struct LagrangePeriodicEvaluatorFixture<std::tuple<
     {
     };
 
+    struct TestGrid : public UniformGridBase<Y>
+    {
+    };
+
     static constexpr std::size_t degree = D;
     static constexpr bool UNIFORM = Uniform;
 };
@@ -181,7 +185,7 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
         test_coords_host_alloc(idx) = xmin + (xmax - xmin) * dis(gen);
     });
 
-    auto test_coords_alloc = ddc::create_mirror_view_and_copy(get_field(test_coords_host_alloc));
+    auto test_coords_alloc = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), get_field(test_coords_host_alloc));
     ConstField<Coord<X>, IdxRange<GridX>> test_coords = get_const_field(test_coords_alloc);
 
     builder(lagrange_coeffs, get_const_field(function_values));
@@ -250,17 +254,14 @@ DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> t
 
 TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
 {
-    using DataType = typename TestFixture::DataType;
+    using DataType = TestFixture::DataType;
     using GridY = TestFixture::GridY;
     using LagBasis = TestFixture::LagBasis;
     using RefinedGridY = TestFixture::RefinedGridY;
     using RefinedLagBasis = TestFixture::RefinedLagBasis;
+	using TestGrid = TestFixture::TestGrid;
 
     constexpr std::size_t degree = TestFixture::degree;
-
-    struct TestGrid : public UniformGridBase<Y>
-    {
-    };
 
     Coord<Y> ymin(0);
     Coord<Y> ymax(2 * Kokkos::numbers::pi);
