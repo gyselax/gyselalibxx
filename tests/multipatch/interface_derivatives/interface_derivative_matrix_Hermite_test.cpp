@@ -237,10 +237,10 @@ struct ChangeBoundPatchTransform
             Coord<Yg> origin_g_y,
             Coord<X<I>> origin_l_x,
             Coord<Y<I>> origin_l_y,
-            double x_factor,
-            double y_factor)
-        : x_transform(origin_g_x, origin_l_y, x_factor)
-        , y_transform(origin_g_y, origin_l_x, y_factor)
+            double xg_factor,
+            double yg_factor)
+        : x_transform(origin_g_x, origin_l_y, xg_factor)
+        , y_transform(origin_g_y, origin_l_x, yg_factor)
         , coord_transform(x_transform, y_transform)
     {
     }
