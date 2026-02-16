@@ -179,15 +179,15 @@ struct MatchingBoundPatchTransform
 {
     using XTransform = LinearCoordTransform<Xg, X<I>>;
     using YTransform = LinearCoordTransform<Yg, Y<I>>;
-    XTransform x_transform;
-    YTransform y_transform;
-    OrthogonalCoordTransforms<
+    using XYTransform = OrthogonalCoordTransforms<
             Coord<Xg, Yg>,
             Coord<X<I>, Y<I>>,
             Coord<Xg, Yg>,
             XTransform,
-            YTransform>
-            coord_transform;
+            YTransform>;
+    XTransform x_transform;
+    YTransform y_transform;
+    XYTransform coord_transform;
     MatchingBoundPatchTransform(XTransform x_transform, YTransform y_transform)
         : x_transform(x_transform)
         , y_transform(y_transform)
@@ -223,15 +223,15 @@ struct ChangeBoundPatchTransform
 {
     using XTransform = LinearCoordTransform<Xg, Y<I>>;
     using YTransform = LinearCoordTransform<Yg, X<I>>;
-    XTransform x_transform;
-    YTransform y_transform;
-    OrthogonalCoordTransforms<
+    using XYTransform = OrthogonalCoordTransforms<
             Coord<Xg, Yg>,
             Coord<X<I>, Y<I>>,
             Coord<Xg, Yg>,
             XTransform,
-            YTransform>
-            coord_transform;
+            YTransform>;
+    XTransform x_transform;
+    YTransform y_transform;
+    XYTransform coord_transform;
     ChangeBoundPatchTransform(
             Coord<Xg> origin_g_x,
             Coord<Yg> origin_g_y,

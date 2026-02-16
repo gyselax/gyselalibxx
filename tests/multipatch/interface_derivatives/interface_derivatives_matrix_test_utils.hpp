@@ -6,6 +6,7 @@
 
 #include <gtest/gtest.h>
 
+#include "coord_transformation_tools.hpp"
 #include "multipatch_field.hpp"
 #include "spline_builder_deriv_field_2d.hpp"
 #include "types.hpp"
@@ -48,7 +49,8 @@ void initialise_2D_function(
         DField<IdxRange<Grid1, Grid2>, Kokkos::HostSpace, Layout> function,
         CoordTransformType const& coord_transform)
 {
-    auto coord_transform_l_to_g_2d = coord_transform.coord_transform.get_inverse_mapping();
+    inverse_mapping_t<typename CoordTransformType::XYTransform> coord_transform_l_to_g_2d
+            = coord_transform.coord_transform.get_inverse_mapping();
     ddc::host_for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
         // Get the coordinate on the equivalent global mesh.
         Coord<Xg, Yg> equiv_global_coord(coord_transform_l_to_g_2d(ddc::coordinate(idx)));
@@ -91,7 +93,8 @@ void initialise_derivatives(
 
     auto coord_transform_g_to_l_1d
             = get_1d_transform<std::is_same_v<DimDerivG, Xg>>(coord_transform);
-    auto coord_transform_l_to_g_2d = coord_transform.coord_transform.get_inverse_mapping();
+    inverse_mapping_t<typename CoordTransformType::XYTransform> coord_transform_l_to_g_2d
+            = coord_transform.coord_transform.get_inverse_mapping();
 
     using DerivCoord = decltype(coord_transform_g_to_l_1d)::CoordResult;
     using DimDeriv = ddc::type_seq_element_t<0, ddc::to_type_seq_t<DerivCoord>>;
@@ -155,7 +158,8 @@ std::tuple<double, double, double, double> get_cross_derivatives(
     Idx<GridY> idx_ymin(idx_range_y.front());
     Idx<GridY> idx_ymax(idx_range_y.back());
 
-    auto coord_transform_l_to_g_2d = coord_transform_handler.coord_transform.get_inverse_mapping();
+    inverse_mapping_t<typename CoordTransformType::XYTransform> coord_transform_l_to_g_2d
+            = coord_transform_handler.coord_transform.get_inverse_mapping();
     auto coord_transform_g_to_l_1d_x = coord_transform_handler.x_transform;
     auto coord_transform_g_to_l_1d_y = coord_transform_handler.y_transform;
 
@@ -296,7 +300,8 @@ void check_derivatives(
 
     auto coord_transform_g_to_l_1d
             = get_1d_transform<std::is_same_v<DimDerivG, Xg>>(coord_transform);
-    auto coord_transform_l_to_g_2d = coord_transform.coord_transform.get_inverse_mapping();
+    inverse_mapping_t<typename CoordTransformType::XYTransform> coord_transform_l_to_g_2d
+            = coord_transform.coord_transform.get_inverse_mapping();
 
     ddc::host_for_each(idx_range_perp, [&](Idx<GridPerpToDeriv> const& idx_perp) {
         if constexpr (checkMin) {
@@ -576,7 +581,8 @@ void check_spline_representation_agreement(
         eval_points(idx) = mesh_point + Coord<DimX, DimY>(dx, dy);
     });
 
-    auto coord_transform_l_to_g_2d = coord_transform.coord_transform.get_inverse_mapping();
+    inverse_mapping_t<typename CoordTransformType::XYTransform> coord_transform_l_to_g_2d
+            = coord_transform.coord_transform.get_inverse_mapping();
 
     // Evaluate and compare the local and global spline representations ----------------------
     ddc::host_for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {

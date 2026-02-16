@@ -132,15 +132,15 @@ struct CoordTransformGroup
 {
     using XTransform = LinearCoordTransform<Xg, X<I>>;
     using YTransform = LinearCoordTransform<Yg, Y<I>>;
-    XTransform x_transform;
-    YTransform y_transform;
-    OrthogonalCoordTransforms<
+    using XYTransform = OrthogonalCoordTransforms<
             Coord<Yg, Xg>,
             Coord<X<I>, Y<I>>,
             Coord<Xg, Yg>,
             XTransform,
-            YTransform>
-            coord_transform;
+            YTransform>;
+    XTransform x_transform;
+    YTransform y_transform;
+    XYTransform coord_transform;
     CoordTransformGroup()
         : x_transform(Coord<Xg>(0), Coord<X<I>>(0), 1.0)
         , y_transform(Coord<Yg>(0), Coord<Y<I>>(0), 1.0)
