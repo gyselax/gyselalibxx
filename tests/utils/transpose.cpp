@@ -181,12 +181,16 @@ TEST(LayoutTransposition, BadTranspose2D)
     });
 
 #ifndef NDEBUG
-    EXPECT_DEATH(
-            transpose_layout(
-                    Kokkos::DefaultHostExecutionSpace(),
-                    get_field(end_values_alloc),
-                    get_const_field(start_values)),
-            "Assertion");
+    if constexpr (std::is_same_v< // The assertion is only checked if on CPU
+                          Kokkos::DefaultExecutionSpace::memory_space,
+                          Kokkos::DefaultHostExecutionSpace::memory_space>) {
+        EXPECT_DEATH(
+                transpose_layout(
+                        Kokkos::DefaultHostExecutionSpace(),
+                        get_field(end_values_alloc),
+                        get_const_field(start_values)),
+                "Assertion");
+    }
 #endif
 }
 

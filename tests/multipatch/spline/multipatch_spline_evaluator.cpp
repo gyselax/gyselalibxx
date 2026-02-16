@@ -713,8 +713,8 @@ TEST_F(MultipatchSplineEvaluatorTest, DerivativesOnSingleCoordDeathTest)
 
     // Test the Kokkos::abort only on host.
     if constexpr (std::is_same_v<
-                          Kokkos::DefaultExecutionSpace,
-                          Kokkos::DefaultHostExecutionSpace>) {
+                          Kokkos::DefaultExecutionSpace::memory_space,
+                          Kokkos::DefaultHostExecutionSpace::memory_space>) {
         // --- derivativative 1
         EXPECT_DEATH(
                 evaluators.deriv_dim_1(eval_coord_1_outside, splines),
