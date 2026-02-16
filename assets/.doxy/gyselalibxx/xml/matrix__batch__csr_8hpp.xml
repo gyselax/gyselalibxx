@@ -302,7 +302,7 @@
 <codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;bool&gt;<sp/>logger<sp/>=<sp/>std::nullopt,</highlight></codeline>
 <codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;int&gt;<sp/>preconditioner_max_block_size<sp/>=<sp/>std::nullopt)</highlight></codeline>
 <codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref>&lt;ExecSpace&gt;(<ref refid="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" kindref="member">batch_size</ref>,<sp/>mat_size)</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_iter(max_iter.value_or(1000))</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_iter(max_iter.value_or(mat_size))</highlight></codeline>
 <codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_tol(res_tol.value_or(1e-15))</highlight></codeline>
 <codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_with_logger(logger.value_or(false))</highlight></codeline>
 <codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_preconditioner_max_block_size(preconditioner_max_block_size.value_or(</highlight></codeline>

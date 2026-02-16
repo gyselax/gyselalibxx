@@ -47,7 +47,7 @@ public:
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> logger = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_size, mat_size)
-        , m_max_iter(max_iter.value_or(500))
+        , m_max_iter(max_iter.value_or(mat_size))
         , m_tol(res_tol.value_or(1e-15))
         , m_with_logger(logger.value_or(false))
     {

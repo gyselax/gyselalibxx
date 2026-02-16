@@ -114,7 +114,7 @@
 <codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;double&gt;<sp/>res_tol<sp/>=<sp/>std::nullopt,</highlight></codeline>
 <codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::optional&lt;bool&gt;<sp/>logger<sp/>=<sp/>std::nullopt)</highlight></codeline>
 <codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/><ref refid="classMatrixBatch" kindref="compound">MatrixBatch</ref>&lt;ExecSpace&gt;(<ref refid="classMatrixBatch_1a4ca6fc98c1b218c3aa0a534d04b2a06a" kindref="member">batch_size</ref>,<sp/>mat_size)</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_iter(max_iter.value_or(500))</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_iter(max_iter.value_or(mat_size))</highlight></codeline>
 <codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_tol(res_tol.value_or(1e-15))</highlight></codeline>
 <codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_with_logger(logger.value_or(false))</highlight></codeline>
 <codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>

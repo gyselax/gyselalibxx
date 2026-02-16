@@ -63,7 +63,7 @@ public:
             std::optional<bool> logger = std::nullopt,
             std::optional<int> preconditioner_max_block_size = std::nullopt)
         : MatrixBatch<ExecSpace>(batch_size, mat_size)
-        , m_max_iter(max_iter.value_or(1000))
+        , m_max_iter(max_iter.value_or(mat_size))
         , m_tol(res_tol.value_or(1e-15))
         , m_with_logger(logger.value_or(false))
         , m_preconditioner_max_block_size(preconditioner_max_block_size.value_or(
