@@ -160,8 +160,10 @@ std::tuple<double, double, double, double> get_cross_derivatives(
 
     inverse_mapping_t<typename CoordTransformType::XYTransform> coord_transform_l_to_g_2d
             = coord_transform_handler.coord_transform.get_inverse_mapping();
-    auto coord_transform_g_to_l_1d_x = coord_transform_handler.x_transform;
-    auto coord_transform_g_to_l_1d_y = coord_transform_handler.y_transform;
+    typename CoordTransformType::XTransform& coord_transform_g_to_l_1d_x
+            = coord_transform_handler.x_transform;
+    typename CoordTransformType::YTransform& coord_transform_g_to_l_1d_y
+            = coord_transform_handler.y_transform;
 
     Coord<Xg, Yg> coord_min_min_g(
             coord_transform_l_to_g_2d(ddc::coordinate(IdxXY(idx_xmin, idx_ymin))));
