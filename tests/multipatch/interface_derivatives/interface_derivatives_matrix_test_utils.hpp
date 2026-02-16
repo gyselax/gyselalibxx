@@ -86,31 +86,31 @@ void initialise_derivatives(
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    using DerivDimG = typename GridDeriv::continuous_dimension_type;
-    static_assert(ddc::in_tags_v<DerivDimG, ddc::detail::TypeSeq<Xg, Yg>>);
+    using DimDerivG = typename GridDeriv::continuous_dimension_type;
+    static_assert(ddc::in_tags_v<DimDerivG, ddc::detail::TypeSeq<Xg, Yg>>);
 
-    auto coord_transform_g_to_l = get_1d_transform<std::is_same_v<DerivDimG, Xg>>(coord_transform);
+    auto coord_transform_g_to_l = get_1d_transform<std::is_same_v<DimDerivG, Xg>>(coord_transform);
     auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
 
     using DerivCoord = decltype(coord_transform_g_to_l)::CoordResult;
-    using DerivDim = ddc::type_seq_element_t<0, ddc::to_type_seq_t<DerivCoord>>;
+    using DimDeriv = ddc::type_seq_element_t<0, ddc::to_type_seq_t<DerivCoord>>;
     using GridAlongDeriv = std::conditional_t<
-            std::is_same_v<typename Patch::Dim1, DerivDim>,
+            std::is_same_v<typename Patch::Dim1, DimDeriv>,
             typename Patch::Grid1,
             typename Patch::Grid2>;
     using GridPerpToDeriv = std::conditional_t<
-            std::is_same_v<typename Patch::Dim1, DerivDim>,
+            std::is_same_v<typename Patch::Dim1, DimDeriv>,
             typename Patch::Grid2,
             typename Patch::Grid1>;
 
-    Coord<DerivDimG> deriv_coord_glob = ddc::coordinate(idx_deriv_pos);
-    Coord<DerivDim> deriv_coord = coord_transform_g_to_l(deriv_coord_glob);
+    Coord<DimDerivG> deriv_coord_glob = ddc::coordinate(idx_deriv_pos);
+    Coord<DimDeriv> deriv_coord = coord_transform_g_to_l(deriv_coord_glob);
 
     IdxRange<GridAlongDeriv> idx_range_derivs(get_idx_range(function_and_derivs));
     IdxRange<GridPerpToDeriv> idx_range_perp(get_idx_range(function_and_derivs));
 
-    Idx<ddc::Deriv<DerivDim>> idx_deriv(1);
-    Idx<ddc::Deriv<DerivDimG>> idx_deriv_g(1);
+    Idx<ddc::Deriv<DimDeriv>> idx_deriv(1);
+    Idx<ddc::Deriv<DimDerivG>> idx_deriv_g(1);
     Idx<GridAlongDeriv> idx_deriv_pos_local
             = (std::fabs(deriv_coord - ddc::coordinate(idx_range_derivs.front())) < 1e-14)
                       ? idx_range_derivs.front()
@@ -253,7 +253,7 @@ void initialise_all_cross_derivatives(
  * the interfaces for a given patch.
  */
 template <
-        class DerivDim,
+        class DimDeriv,
         bool checkMin,
         bool checkMax,
         class Patch,
@@ -271,31 +271,31 @@ void check_derivatives(
     using Xg = typename BSplinesXg::continuous_dimension_type;
     using Yg = typename BSplinesYg::continuous_dimension_type;
 
-    using DerivDimG = std::conditional_t<
-            std::is_same_v<Coord<DerivDim>, typename CoordTransformType::XTransform::CoordResult>,
+    using DimDerivG = std::conditional_t<
+            std::is_same_v<Coord<DimDeriv>, typename CoordTransformType::XTransform::CoordResult>,
             Xg,
             Yg>;
 
     using GridAlongDeriv = std::conditional_t<
-            std::is_same_v<DerivDim, typename Patch::Dim1>,
+            std::is_same_v<DimDeriv, typename Patch::Dim1>,
             typename Patch::Grid1,
             typename Patch::Grid2>;
 
     using GridPerpToDeriv = std::conditional_t<
-            std::is_same_v<DerivDim, typename Patch::Dim1>,
+            std::is_same_v<DimDeriv, typename Patch::Dim1>,
             typename Patch::Grid2,
             typename Patch::Grid1>;
 
     IdxRange<GridPerpToDeriv> idx_range_perp(get_idx_range(function_and_derivs));
     IdxRange<GridAlongDeriv> idx_range_par(get_idx_range(function_and_derivs));
 
-    Idx<ddc::Deriv<DerivDim>> idx_deriv(1);
-    Idx<ddc::Deriv<DerivDimG>> idx_deriv_g(1);
+    Idx<ddc::Deriv<DimDeriv>> idx_deriv(1);
+    Idx<ddc::Deriv<DimDerivG>> idx_deriv_g(1);
     Idx<GridAlongDeriv> idx_par_min(idx_range_par.front());
     Idx<GridAlongDeriv> idx_par_max(idx_range_par.back());
 
     auto coord_transform_g_to_l_1d
-            = get_1d_transform<std::is_same_v<DerivDimG, Xg>>(coord_transform);
+            = get_1d_transform<std::is_same_v<DimDerivG, Xg>>(coord_transform);
     auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
 
     ddc::host_for_each(idx_range_perp, [&](Idx<GridPerpToDeriv> const& idx_perp) {
@@ -303,7 +303,7 @@ void check_derivatives(
             typename Patch::Idx12 idx_min(idx_par_min, idx_perp);
             Coord<Xg, Yg> interface_coord_min(coord_transform_l_to_g(ddc::coordinate(idx_min)));
             double global_deriv_min
-                    = coord_transform_g_to_l_1d.jacobian(Coord<DerivDimG>(interface_coord_min))
+                    = coord_transform_g_to_l_1d.jacobian(Coord<DimDerivG>(interface_coord_min))
                       * evaluator_g.deriv(idx_deriv_g, interface_coord_min, function_g_coef);
             EXPECT_NEAR(
                     function_and_derivs(idx_deriv, idx_par_min, idx_perp),
@@ -316,7 +316,7 @@ void check_derivatives(
             Coord<Xg, Yg> interface_coord_max(coord_transform_l_to_g(ddc::coordinate(idx_max)));
 
             double global_deriv_max
-                    = coord_transform_g_to_l_1d.jacobian(Coord<DerivDimG>(interface_coord_max))
+                    = coord_transform_g_to_l_1d.jacobian(Coord<DimDerivG>(interface_coord_max))
                       * evaluator_g.deriv(idx_deriv_g, interface_coord_max, function_g_coef);
             EXPECT_NEAR(
                     function_and_derivs(idx_deriv, idx_par_max, idx_perp),
