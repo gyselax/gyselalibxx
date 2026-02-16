@@ -48,10 +48,10 @@ void initialise_2D_function(
         DField<IdxRange<Grid1, Grid2>, Kokkos::HostSpace, Layout> function,
         CoordTransformType const& coord_transform)
 {
-    auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
+    auto coord_transform_l_to_g_2d = coord_transform.coord_transform.get_inverse_mapping();
     ddc::host_for_each(get_idx_range(function), [&](Idx<Grid1, Grid2> idx) {
         // Get the coordinate on the equivalent global mesh.
-        Coord<Xg, Yg> equiv_global_coord(coord_transform_l_to_g(ddc::coordinate(idx)));
+        Coord<Xg, Yg> equiv_global_coord(coord_transform_l_to_g_2d(ddc::coordinate(idx)));
         double const xg = ddc::get<Xg>(equiv_global_coord);
         double const yg = ddc::get<Yg>(equiv_global_coord);
         function(idx) = Kokkos::cos(xg * 2. / 3. * M_PI + 0.25) * Kokkos::sin(yg);
@@ -89,10 +89,11 @@ void initialise_derivatives(
     using DimDerivG = typename GridDeriv::continuous_dimension_type;
     static_assert(ddc::in_tags_v<DimDerivG, ddc::detail::TypeSeq<Xg, Yg>>);
 
-    auto coord_transform_g_to_l = get_1d_transform<std::is_same_v<DimDerivG, Xg>>(coord_transform);
-    auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
+    auto coord_transform_g_to_l_1d
+            = get_1d_transform<std::is_same_v<DimDerivG, Xg>>(coord_transform);
+    auto coord_transform_l_to_g_2d = coord_transform.coord_transform.get_inverse_mapping();
 
-    using DerivCoord = decltype(coord_transform_g_to_l)::CoordResult;
+    using DerivCoord = decltype(coord_transform_g_to_l_1d)::CoordResult;
     using DimDeriv = ddc::type_seq_element_t<0, ddc::to_type_seq_t<DerivCoord>>;
     using GridAlongDeriv = std::conditional_t<
             std::is_same_v<typename Patch::Dim1, DimDeriv>,
@@ -104,7 +105,7 @@ void initialise_derivatives(
             typename Patch::Grid1>;
 
     Coord<DimDerivG> deriv_coord_glob = ddc::coordinate(idx_deriv_pos);
-    Coord<DimDeriv> deriv_coord = coord_transform_g_to_l(deriv_coord_glob);
+    Coord<DimDeriv> deriv_coord = coord_transform_g_to_l_1d(deriv_coord_glob);
 
     IdxRange<GridAlongDeriv> idx_range_derivs(get_idx_range(function_and_derivs));
     IdxRange<GridPerpToDeriv> idx_range_perp(get_idx_range(function_and_derivs));
@@ -118,9 +119,9 @@ void initialise_derivatives(
 
     ddc::host_for_each(idx_range_perp, [&](Idx<GridPerpToDeriv> const& idx_perp) {
         Coord<Xg, Yg>
-                coord_glob(deriv_coord_glob, coord_transform_l_to_g(ddc::coordinate(idx_perp)));
+                coord_glob(deriv_coord_glob, coord_transform_l_to_g_2d(ddc::coordinate(idx_perp)));
         function_and_derivs(idx_deriv, idx_deriv_pos_local, idx_perp)
-                = coord_transform_g_to_l.jacobian(deriv_coord_glob)
+                = coord_transform_g_to_l_1d.jacobian(deriv_coord_glob)
                   * evaluator_g.deriv(idx_deriv_g, coord_glob, const_function_g_coef);
     });
 }
@@ -154,18 +155,18 @@ std::tuple<double, double, double, double> get_cross_derivatives(
     Idx<GridY> idx_ymin(idx_range_y.front());
     Idx<GridY> idx_ymax(idx_range_y.back());
 
-    auto coord_transform_l_to_g = coord_transform_handler.coord_transform.get_inverse_mapping();
+    auto coord_transform_l_to_g_2d = coord_transform_handler.coord_transform.get_inverse_mapping();
     auto coord_transform_g_to_l_1d_x = coord_transform_handler.x_transform;
     auto coord_transform_g_to_l_1d_y = coord_transform_handler.y_transform;
 
     Coord<Xg, Yg> coord_min_min_g(
-            coord_transform_l_to_g(ddc::coordinate(IdxXY(idx_xmin, idx_ymin))));
+            coord_transform_l_to_g_2d(ddc::coordinate(IdxXY(idx_xmin, idx_ymin))));
     Coord<Xg, Yg> coord_max_min_g(
-            coord_transform_l_to_g(ddc::coordinate(IdxXY(idx_xmax, idx_ymin))));
+            coord_transform_l_to_g_2d(ddc::coordinate(IdxXY(idx_xmax, idx_ymin))));
     Coord<Xg, Yg> coord_min_max_g(
-            coord_transform_l_to_g(ddc::coordinate(IdxXY(idx_xmin, idx_ymax))));
+            coord_transform_l_to_g_2d(ddc::coordinate(IdxXY(idx_xmin, idx_ymax))));
     Coord<Xg, Yg> coord_max_max_g(
-            coord_transform_l_to_g(ddc::coordinate(IdxXY(idx_xmax, idx_ymax))));
+            coord_transform_l_to_g_2d(ddc::coordinate(IdxXY(idx_xmax, idx_ymax))));
 
     Idx<ddc::Deriv<Xg>, ddc::Deriv<Yg>> idx_deriv(1, 1);
     double global_deriv_min_min = coord_transform_g_to_l_1d_x.jacobian(Coord<Xg>(coord_min_min_g))
@@ -296,12 +297,12 @@ void check_derivatives(
 
     auto coord_transform_g_to_l_1d
             = get_1d_transform<std::is_same_v<DimDerivG, Xg>>(coord_transform);
-    auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
+    auto coord_transform_l_to_g_2d = coord_transform.coord_transform.get_inverse_mapping();
 
     ddc::host_for_each(idx_range_perp, [&](Idx<GridPerpToDeriv> const& idx_perp) {
         if constexpr (checkMin) {
             typename Patch::Idx12 idx_min(idx_par_min, idx_perp);
-            Coord<Xg, Yg> interface_coord_min(coord_transform_l_to_g(ddc::coordinate(idx_min)));
+            Coord<Xg, Yg> interface_coord_min(coord_transform_l_to_g_2d(ddc::coordinate(idx_min)));
             double global_deriv_min
                     = coord_transform_g_to_l_1d.jacobian(Coord<DimDerivG>(interface_coord_min))
                       * evaluator_g.deriv(idx_deriv_g, interface_coord_min, function_g_coef);
@@ -313,7 +314,7 @@ void check_derivatives(
 
         if constexpr (checkMax) {
             typename Patch::Idx12 idx_max(idx_par_max, idx_perp);
-            Coord<Xg, Yg> interface_coord_max(coord_transform_l_to_g(ddc::coordinate(idx_max)));
+            Coord<Xg, Yg> interface_coord_max(coord_transform_l_to_g_2d(ddc::coordinate(idx_max)));
 
             double global_deriv_max
                     = coord_transform_g_to_l_1d.jacobian(Coord<DimDerivG>(interface_coord_max))
@@ -589,11 +590,11 @@ void check_spline_representation_agreement(
         eval_points(idx) = mesh_point + Coord<DimX, DimY>(dx, dy);
     });
 
-    auto coord_transform_l_to_g = coord_transform.coord_transform.get_inverse_mapping();
+    auto coord_transform_l_to_g_2d = coord_transform.coord_transform.get_inverse_mapping();
 
     // Evaluate and compare the local and global spline representations ----------------------
     ddc::host_for_each(idx_range_xy, [&](typename Patch::Idx12 const idx) {
-        Coord<Xg, Yg> eval_point_g(coord_transform_l_to_g(eval_points(idx)));
+        Coord<Xg, Yg> eval_point_g(coord_transform_l_to_g_2d(eval_points(idx)));
         double local_spline = evaluator(eval_points(idx), get_const_field(function_coef));
         double global_spline = evaluator_g(eval_point_g, get_const_field(function_g_coef));
         EXPECT_NEAR(local_spline, global_spline, TOL);
