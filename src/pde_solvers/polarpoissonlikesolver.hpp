@@ -262,7 +262,7 @@ public:
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
      * @param[in] max_iter
-     *      The maximum number of iterations possible for the batched CSR solver. By default, it equals the matrix size.
+     *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
      *      The residual tolerance for the batched CSR solver. Be careful! the relative residual
      *      provided here, will be used as "implicit residual" in ginkgo solver.
@@ -280,8 +280,7 @@ public:
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
-            std::optional<int> max_iter = ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
-                                          - ddc::discrete_space<BSplinesTheta>().nbasis(),
+            std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
             std::optional<int> preconditioner_max_block_size = std::nullopt)
