@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
+- Added error messages when wrong input is provided to a simulation.
 
 ### Fixed
 
@@ -20,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 
 ### Removed
+
+- Remove the default PDI configuration file for the mini-app.
 
 ## [v0.5.0] - 2026-02-04
 
