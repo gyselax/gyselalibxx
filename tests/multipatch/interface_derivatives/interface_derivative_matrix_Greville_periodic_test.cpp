@@ -141,9 +141,9 @@ struct CoordTransformGroup
             XTransform,
             YTransform>
             coord_transform;
-    CoordTransformGroup(Coord<Xg> xg_min, Coord<Yg> yg_min, Coord<X<I>> xl_min, Coord<Y<I>> yl_min)
-        : x_transform(xg_min, xl_min, 1.0)
-        , y_transform(yg_min, yl_min, 1.0)
+    CoordTransformGroup()
+        : x_transform(Coord<Xg>(0), Coord<X<I>>(0), 1.0)
+        , y_transform(Coord<Yg>(0), Coord<Y<I>>(0), 1.0)
         , coord_transform(x_transform, y_transform)
     {
     }
@@ -366,22 +366,15 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
 {
     Coord<Xg> xg_min = ddc::coordinate(idx_range_xg.front());
     std::tuple coord_transforms {
-            CoordTransformGroup<1>(xg_min, yg_min, x1_min, convert_dim<Y<1>>(y7_min)),
-            CoordTransformGroup<
-                    2>(xg_min, yg_min, convert_dim<X<2>>(x1_min), convert_dim<Y<2>>(y7_min)),
-            CoordTransformGroup<
-                    3>(xg_min, yg_min, convert_dim<X<3>>(x1_min), convert_dim<Y<3>>(y7_min)),
-            CoordTransformGroup<
-                    4>(xg_min, yg_min, convert_dim<X<4>>(x1_min), convert_dim<Y<4>>(y7_min)),
-            CoordTransformGroup<
-                    5>(xg_min, yg_min, convert_dim<X<5>>(x1_min), convert_dim<Y<5>>(y7_min)),
-            CoordTransformGroup<
-                    6>(xg_min, yg_min, convert_dim<X<6>>(x1_min), convert_dim<Y<6>>(y7_min)),
-            CoordTransformGroup<7>(xg_min, yg_min, convert_dim<X<7>>(x1_min), y7_min),
-            CoordTransformGroup<
-                    8>(xg_min, yg_min, convert_dim<X<8>>(x1_min), convert_dim<Y<8>>(y7_min)),
-            CoordTransformGroup<
-                    9>(xg_min, yg_min, convert_dim<X<9>>(x1_min), convert_dim<Y<9>>(y7_min))};
+            CoordTransformGroup<1>(),
+            CoordTransformGroup<2>(),
+            CoordTransformGroup<3>(),
+            CoordTransformGroup<4>(),
+            CoordTransformGroup<5>(),
+            CoordTransformGroup<6>(),
+            CoordTransformGroup<7>(),
+            CoordTransformGroup<8>(),
+            CoordTransformGroup<9>()};
 
     // Instantiate the derivatives calculators ---------------------------------------------------
     // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
