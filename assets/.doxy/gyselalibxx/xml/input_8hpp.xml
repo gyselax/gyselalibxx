@@ -338,7 +338,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" line="25" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.cpp" bodystart="13" bodyend="41" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" declline="25" declcolumn="6"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" line="25" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.cpp" bodystart="13" bodyend="52" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" declline="25" declcolumn="6"/>
       </memberdef>
       <memberdef kind="function" id="input_8hpp_1ad0798c73945ba76a41854a6e4de7584f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>PC_tree_t</type>
@@ -392,7 +392,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" line="41" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.cpp" bodystart="43" bodyend="58" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" declline="41" declcolumn="11"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" line="41" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.cpp" bodystart="54" bodyend="74" declfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" declline="41" declcolumn="11"/>
       </memberdef>
       <memberdef kind="function" id="input_8hpp_1a6537533138425084d826e0ecd867fa8e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
