@@ -206,18 +206,17 @@ void initialise_cross_derivatives(
 {
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
-    Idx<ddc::Deriv<typename Patch::Dim1>> idx_dx(1);
-    Idx<ddc::Deriv<typename Patch::Dim2>> idx_dy(1);
+    Idx<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>> idx_dx_dy(1, 1);
     IdxRange<GridX, GridY> idx_range(get_idx_range(function_and_derivs));
     Idx<GridX> idx_xmin(idx_range.front());
     Idx<GridX> idx_xmax(idx_range.back());
     Idx<GridY> idx_ymin(idx_range.front());
     Idx<GridY> idx_ymax(idx_range.back());
     std::
-            tie(function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymin),
-                function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymin),
-                function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymax),
-                function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymax))
+            tie(function_and_derivs(idx_dx_dy, idx_xmin, idx_ymin),
+                function_and_derivs(idx_dx_dy, idx_xmax, idx_ymin),
+                function_and_derivs(idx_dx_dy, idx_xmin, idx_ymax),
+                function_and_derivs(idx_dx_dy, idx_xmax, idx_ymax))
             = get_cross_derivatives<
                     Patch>(idx_range, evaluator_g, const_function_g_coef, coord_transform_handler);
 }
@@ -409,8 +408,7 @@ void check_xy_derivatives(
 {
     using GridX = typename Patch::Grid1;
     using GridY = typename Patch::Grid2;
-    Idx<ddc::Deriv<typename Patch::Dim1>> idx_dx(1);
-    Idx<ddc::Deriv<typename Patch::Dim2>> idx_dy(1);
+    Idx<ddc::Deriv<typename Patch::Dim1>, ddc::Deriv<typename Patch::Dim2>> idx_dx_dy(1, 1);
     IdxRange<GridX, GridY> idx_range(get_idx_range(function_and_derivs));
     Idx<GridX> idx_xmin(idx_range.front());
     Idx<GridX> idx_xmax(idx_range.back());
@@ -423,26 +421,14 @@ void check_xy_derivatives(
     // For Patches in PatchSeqMin, we defined ddc::BoundCond::GREVILLE the local lower Y-boundary,
     // we don't need the cross-derivatives for y = ymin. Their value is not checked.
     if constexpr (!ddc::in_tags_v<Patch, PatchSeqMin>) {
-        EXPECT_NEAR(
-                function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymin),
-                global_deriv_min_min,
-                TOL);
-        EXPECT_NEAR(
-                function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymin),
-                global_deriv_max_min,
-                TOL);
+        EXPECT_NEAR(function_and_derivs(idx_dx_dy, idx_xmin, idx_ymin), global_deriv_min_min, TOL);
+        EXPECT_NEAR(function_and_derivs(idx_dx_dy, idx_xmax, idx_ymin), global_deriv_max_min, TOL);
     }
     // For Patches in PatchSeqMax, we defined ddc::BoundCond::GREVILLE the local upper Y-boundary,
     // we don't need the cross-derivatives for y = ymax. Their value is not checked.
     if constexpr (!ddc::in_tags_v<Patch, PatchSeqMax>) {
-        EXPECT_NEAR(
-                function_and_derivs(idx_dx, idx_xmin, idx_dy, idx_ymax),
-                global_deriv_min_max,
-                TOL);
-        EXPECT_NEAR(
-                function_and_derivs(idx_dx, idx_xmax, idx_dy, idx_ymax),
-                global_deriv_max_max,
-                TOL);
+        EXPECT_NEAR(function_and_derivs(idx_dx_dy, idx_xmin, idx_ymax), global_deriv_min_max, TOL);
+        EXPECT_NEAR(function_and_derivs(idx_dx_dy, idx_xmax, idx_ymax), global_deriv_max_max, TOL);
     }
 }
 
