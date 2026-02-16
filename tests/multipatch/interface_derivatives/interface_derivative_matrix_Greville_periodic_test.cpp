@@ -364,7 +364,6 @@ public:
 
 TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevilleBC)
 {
-    Coord<Xg> xg_min = ddc::coordinate(idx_range_xg.front());
     std::tuple coord_transforms {
             CoordTransformGroup<1>(),
             CoordTransformGroup<2>(),
