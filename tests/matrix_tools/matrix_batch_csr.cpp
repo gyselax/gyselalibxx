@@ -107,7 +107,7 @@ TEST(MatrixBatchCsrFixture, Coo_to_Csr)
 
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace>> test_instance
             = std::make_unique<MatrixBatchCsr<
-                    Kokkos::DefaultExecutionSpace>>(batch_size, mat_size, non_zero_per_system);
+                    Kokkos::DefaultExecutionSpace>>(batch_size, mat_size, non_zero_per_system, 50);
     convert_coo_to_csr(test_instance, vals_coo_host, row_coo_host, col_coo_host);
     test_instance->setup_solver();
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
