@@ -60,7 +60,7 @@ void initialise_2D_function(
     });
 }
 
-template <class Xg, class Yg, class... Patches, class... CoordTransformType, size_t... I>
+template <class Xg, class Yg, class... Patches, class... CoordTransformType>
 void initialise_all_functions(
         MultipatchField<DerivFieldOnPatch_host, Patches...> const& functions_and_derivs,
         std::tuple<CoordTransformType...> coord_transforms)
