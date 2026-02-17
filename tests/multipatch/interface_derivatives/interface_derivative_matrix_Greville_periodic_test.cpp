@@ -283,6 +283,10 @@ public:
         std::vector<Coord<X<2>>> interpolation_points_x258 = break_points_x258;
         std::vector<Coord<X<3>>> interpolation_points_x369 = break_points_x369;
 
+        interpolation_points_x147.pop_back();
+        interpolation_points_x258.pop_back();
+        interpolation_points_x369.pop_back();
+
         std::vector<Coord<Y<1>>> interpolation_points_y123
                 = get_interpolation_points_add_one_on_right(break_points_y123);
         std::vector<Coord<Y<4>>> interpolation_points_y456 = break_points_y456;
