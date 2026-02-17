@@ -8,7 +8,7 @@ Julien Bigot <julien.bigot@cea.fr>
 
 Emily Bourne <emily.bourne@epfl.ch>
 - Maintainer
-- Spline related development
+- Interpolation related development (spline, Lagrange)
 - Fortran to C++ porting
 - Data type developments
 - Multi-patch developments
