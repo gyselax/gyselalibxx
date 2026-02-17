@@ -16,7 +16,4 @@ set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -Wall -Wno-sign-compare --Werr
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specific to Gyselalib++" FORCE)
 
 # Activate/deactivate parts of the code
-if (DEFINED ENV{DDC_BUILD_TESTING})
-    set(DDC_BUILD_TESTS $ENV{DDC_BUILD_TESTING})
-endif()
 set(ACTIVATE_RESTART_TESTS OFF)

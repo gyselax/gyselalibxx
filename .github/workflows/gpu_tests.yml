@@ -106,8 +106,6 @@ jobs:
   #    - name: Checkout gyselalibxx
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: actions/checkout@v4
-  #      with:
-  #        submodules: true
   #    - name: "Filter tests"
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/test_filter
