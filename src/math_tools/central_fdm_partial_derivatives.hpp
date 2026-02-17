@@ -76,41 +76,62 @@ public:
 
         IdxStepDeriv const step(1);
 
-        // front batched derivative
-        {
-            IdxDeriv const ix(idxrange_deriv.front());
-            double const h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-            double const h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
-            double const c3 = -h1 / (h2 * (h1 + h2));
-            double const c2 = 1. / h1 + 1. / h2;
-            double const c1 = -c3 - c2;
-            ddc::parallel_for_each(
-                    Kokkos::DefaultExecutionSpace(),
-                    idxrange_batch,
-                    KOKKOS_LAMBDA(IdxBatch ib) {
-                        IdxFull ibx(ib, ix);
-                        differentiated_field(ibx) = c1 * field_proxy(ibx)
-                                                    + c2 * field_proxy(ib, ix + step)
-                                                    + c3 * field_proxy(ib, ix + 2 * step);
-                    });
-        }
+        if constexpr (DerivativeDimension::PERIODIC) {
+            // front batched derivative
+            {
+                IdxDeriv const ix(idxrange_deriv.front());
+                double const h1 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+                double const h2 = ddc::coordinate(ix + 2 * step) - ddc::coordinate(ix + step);
+                double const c3 = -h1 / (h2 * (h1 + h2));
+                double const c2 = 1. / h1 + 1. / h2;
+                double const c1 = -c3 - c2;
+                ddc::parallel_for_each(
+                        Kokkos::DefaultExecutionSpace(),
+                        idxrange_batch,
+                        KOKKOS_LAMBDA(IdxBatch ib) {
+                            IdxFull ibx(ib, ix);
+                            differentiated_field(ibx) = c1 * field_proxy(ibx)
+                                                        + c2 * field_proxy(ib, ix + step)
+                                                        + c3 * field_proxy(ib, ix + 2 * step);
+                        });
+            }
 
-        // back batched derivative
-        {
-            IdxDeriv const ix = idxrange_deriv.back();
-            double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
-            double const h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
-            double const c3 = h1 / (h2 * (h1 + h2));
-            double const c2 = -(h1 + h2) / (h1 * h2);
-            double const c1 = -c3 - c2;
+            // back batched derivative
+            {
+                IdxDeriv const ix = idxrange_deriv.back();
+                double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+                double const h2 = ddc::coordinate(ix - step) - ddc::coordinate(ix - 2 * step);
+                double const c3 = h1 / (h2 * (h1 + h2));
+                double const c2 = -(h1 + h2) / (h1 * h2);
+                double const c1 = -c3 - c2;
+                ddc::parallel_for_each(
+                        Kokkos::DefaultExecutionSpace(),
+                        idxrange_batch,
+                        KOKKOS_LAMBDA(IdxBatch ib) {
+                            IdxFull ibx(ib, ix);
+                            differentiated_field(ibx) = c1 * field_proxy(ibx)
+                                                        + c2 * field_proxy(ib, ix - step)
+                                                        + c3 * field_proxy(ib, ix - 2 * step);
+                        });
+            }
+        } else {
+            IdxDeriv const ix_front(idxrange_deriv.front());
+            IdxDeriv const ix_back(idxrange_deriv.back());
+            double domain_length = total_interval_length(idxrange_deriv);
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
                     KOKKOS_LAMBDA(IdxBatch ib) {
-                        IdxFull ibx(ib, ix);
-                        differentiated_field(ibx) = c1 * field_proxy(ibx)
-                                                    + c2 * field_proxy(ib, ix - step)
-                                                    + c3 * field_proxy(ib, ix - 2 * step);
+                        double const h1
+                                = ddc::coordinate(ix_back) - ddc::coordinate(ix_back - step);
+                        double const h2 = ddc::coordinate(ix_front)
+                                                  - ddc::coordinate(ix_back) + domain_length;
+                        double const h3
+                                = ddc::coordinate(ix_front + step) - ddc::coordinate(ix_front);
+                        differentiated_field(ib, ix_back)
+                                = fdm_centred(ib, ix_back - step, ix_back, ix_front, h1, h2);
+                        differentiated_field(ib, ix_front)
+                                = fdm_centred(ib, ix_back, ix_front, ix_front + step, h2, h3);
                     });
         }
 
@@ -126,14 +147,28 @@ public:
                         IdxDeriv ix(ibx);
                         double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
                         double const h2 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
-                        double const c3 = h1 / (h2 * (h1 + h2));
-                        double const c2 = 1. / h1 - 1. / h2;
-                        double const c1 = -c3 - c2;
-                        differentiated_field(ibx) = c1 * field_proxy(ib, ix - step)
-                                                    + c2 * field_proxy(ibx)
-                                                    + c3 * field_proxy(ib, ix + step);
+                        differentiated_field(ibx)
+                                = fdm_centred(ib, ix - step, ix, ix + step, h1, h2);
                     });
         }
+    }
+
+private:
+    KOKKOS_INLINE_FUNCTION double fdm_centred(
+            IdxBatch ib,
+            IdxDeriv i1,
+            IdxDeriv i2,
+            IdxDeriv i3,
+            double h1,
+            double h2)
+    {
+        double const h1 = ddc::coordinate(ix) - ddc::coordinate(ix - step);
+        double const h2 = ddc::coordinate(ix + step) - ddc::coordinate(ix);
+        double const c3 = h1 / (h2 * (h1 + h2));
+        double const c2 = 1. / h1 - 1. / h2;
+        double const c1 = -c3 - c2;
+        return c1 * field_proxy(ib, ix - step) + c2 * field_proxy(ibx)
+               + c3 * field_proxy(ib, ix + step);
     }
 };
 
