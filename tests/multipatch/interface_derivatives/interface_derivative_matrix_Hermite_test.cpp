@@ -647,12 +647,12 @@ TYPED_TEST(InterfaceDerivativeMatrixHermiteFixture, CheckForHermiteBc)
     IdxRangeSlice<GridXg> idx_range_slice_dxg = get_bound_idx_range_slice(this->idx_range_xg);
     IdxRangeSlice<GridYg> idx_range_slice_dyg = get_bound_idx_range_slice(this->idx_range_yg);
 
-    DerivFieldMem<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>, 1>
+    host_t<DerivFieldMem<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>, 1>>
             function_and_derivs_g_alloc(
                     this->idx_range_xy_g,
                     idx_range_slice_dxg,
                     idx_range_slice_dyg);
-    DerivField<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>> function_and_derivs_g(
+    host_t<DerivField<double, IdxRange<DerivXg, GridXg, DerivYg, GridYg>>> function_and_derivs_g(
             function_and_derivs_g_alloc);
 
     // Initialise the data =======================================================================
