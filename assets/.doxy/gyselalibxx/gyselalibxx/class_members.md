@@ -378,6 +378,8 @@
 * **FunctionInterpolatorType** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionPreallocatableInterpolatorType** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **fill\_matrix\_with\_coeff** ([**CollisionsIntra**](classCollisionsIntra.md))
+* **free\_chunks** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
+* **free\_ptr** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **first\_order\_jacobian\_matrix\_r\_rtheta** ([**DiscreteToCartesian**](classDiscreteToCartesian.md))
 * **FEM1DPoissonSolver** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **FEMBSplines** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))

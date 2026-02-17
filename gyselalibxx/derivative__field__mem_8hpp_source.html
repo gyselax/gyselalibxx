@@ -755,6 +755,20 @@ private:
          ...);
     }
 
+    template &lt;std::size_t ArrayIndex&gt;
+    void free_ptr(ElementType* const ptr, allocator_type allocator)
+    {
+        std::size_t alloc_size(((get_mdspan_size&lt;DDims, ArrayIndex&gt;()) * ...));
+        allocator.deallocate(ptr, alloc_size);
+    }
+
+    template &lt;std::size_t... ArrayIndex&gt;
+    void free_chunks(allocator_type allocator, std::index_sequence&lt;ArrayIndex...&gt;)
+    {
+        (free_ptr&lt;ArrayIndex&gt;(base_type::internal_fields[ArrayIndex].data_handle(), allocator),
+         ...);
+    }
+
 public:
     template &lt;class... DerivDoms&gt;
     DerivFieldMem(
@@ -783,7 +797,10 @@ public:
         initialise_chunks(allocator, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
     }
 
-    ~DerivFieldMem() = default;
+    ~DerivFieldMem()
+    {
+        free_chunks(allocator_type {}, std::make_integer_sequence&lt;std::size_t, n_fields&gt; {});
+    }
 
     DerivFieldMem&amp; operator=(DerivFieldMem const&amp; other) = delete;
 

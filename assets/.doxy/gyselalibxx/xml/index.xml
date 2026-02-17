@@ -756,9 +756,11 @@
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a6d6b4af2eae39ae4777b8014987f3198" kind="function"><name>get_mdspan_size</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a71930d8ab2a366995e95669f4d35dd2c" kind="function"><name>make_internal_mdspan</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aa15a282ff001c56164f83e2437ddee69" kind="function"><name>initialise_chunks</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a19bc44519c173ede5c709afae85ba0f2" kind="function"><name>free_ptr</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a663c5393bae37235e5f196631011896b" kind="function"><name>free_chunks</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a11a38217dc28cf66cada14781ce30b43" kind="function"><name>DerivFieldMem</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a09a41faf825170dbedd7a225db47bc45" kind="function"><name>DerivFieldMem</name></member>
-    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a7af910528c9b40eb599439539340925d" kind="function"><name>~DerivFieldMem</name></member>
+    <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a33693e6637197882ee691b6c1d24ee29" kind="function"><name>~DerivFieldMem</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac897e84a086c7cf6b4577833a8093e69" kind="function"><name>operator=</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a031703d7536e1b06d4f9dedfad0448fd" kind="function"><name>operator=</name></member>
     <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1af060ce1efbb1b8977510596bfda7c7d9" kind="function"><name>operator()</name></member>

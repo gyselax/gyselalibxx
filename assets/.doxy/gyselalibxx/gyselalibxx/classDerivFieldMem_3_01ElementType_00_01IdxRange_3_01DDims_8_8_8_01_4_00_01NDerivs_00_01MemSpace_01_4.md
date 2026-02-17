@@ -103,7 +103,7 @@ Inherits the following classes: [DerivFieldCommon](classDerivFieldCommon.md)
 |  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**span\_cview**](#function-span_cview) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
 |  [**view\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-view_type) | [**span\_view**](#function-span_view-12) () const<br>_Get a constant_ [_**DerivField**_](classDerivField.md) _of this field._ |
 |  [**span\_type**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md#typedef-span_type) | [**span\_view**](#function-span_view-22) () <br>_Get a modifiable_ [_**DerivField**_](classDerivField.md) _of this field._ |
-|   | [**~DerivFieldMem**](#function-derivfieldmem) () = default<br>_Defaulted destructor._  |
+|   | [**~DerivFieldMem**](#function-derivfieldmem) () <br>_Destructor, responsible to deallocate memory._  |
 
 
 
@@ -760,9 +760,9 @@ A span of this field.
 
 ### function ~DerivFieldMem 
 
-_Defaulted destructor._ 
+_Destructor, responsible to deallocate memory._ 
 ```C++
-DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::~DerivFieldMem () = default
+inline DerivFieldMem< ElementType, IdxRange< DDims... >, NDerivs, MemSpace >::~DerivFieldMem () 
 ```
 
 

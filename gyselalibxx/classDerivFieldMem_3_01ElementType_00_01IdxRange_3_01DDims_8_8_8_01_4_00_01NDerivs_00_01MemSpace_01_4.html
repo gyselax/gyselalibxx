@@ -692,7 +692,7 @@
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-derivfieldmem"><strong>~DerivFieldMem</strong></a> () = default<br><em>Defaulted destructor.</em></td>
+<td style="text-align: left;"><a href="#function-derivfieldmem"><strong>~DerivFieldMem</strong></a> () <br><em>Destructor, responsible to deallocate memory.</em></td>
 </tr>
 </tbody>
 </table>
@@ -947,8 +947,8 @@ inline KOKKOS_FUNCTION constexpr auto DerivFieldMem&lt; ElementType, IdxRange&lt
 <hr>
 
 <h3 id="function-derivfieldmem">function ~DerivFieldMem</h3>
-<p><em>Defaulted destructor.</em> </p>
-<pre><code class="language-C++">DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::~DerivFieldMem () = default
+<p><em>Destructor, responsible to deallocate memory.</em> </p>
+<pre><code class="language-C++">inline DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::~DerivFieldMem () 
 </code></pre>
 <hr>
 <h2 id="friends-documentation">Friends Documentation</h2>

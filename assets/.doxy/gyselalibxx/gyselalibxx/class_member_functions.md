@@ -139,6 +139,8 @@
 ## f
 
 * **fill\_matrix\_with\_coeff** ([**CollisionsIntra**](classCollisionsIntra.md))
+* **free\_chunks** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
+* **free\_ptr** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **first\_order\_jacobian\_matrix\_r\_rtheta** ([**DiscreteToCartesian**](classDiscreteToCartesian.md))
 * **FEM1DPoissonSolver** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **FFTPoissonSolver** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05.md))
