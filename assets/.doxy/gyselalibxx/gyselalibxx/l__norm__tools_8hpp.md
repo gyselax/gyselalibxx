@@ -27,6 +27,11 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**concepts**](namespaceconcepts.md) <br> |
 
 
 
@@ -58,6 +63,7 @@
 |  double | [**error\_norm\_L1**](#function-error_norm_l1) (ExecSpace exec\_space, [**Quadrature**](classQuadrature.md)&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory\_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory\_space &gt; function, DField&lt; IdxRangeQuad, typename ExecSpace::memory\_space &gt; exact\_function) <br>_Compute the L1 norm of the error between 2 Fields._  |
 |  double | [**error\_norm\_L2**](#function-error_norm_l2) (ExecSpace exec\_space, [**Quadrature**](classQuadrature.md)&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory\_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory\_space &gt; function, DField&lt; IdxRangeQuad, typename ExecSpace::memory\_space &gt; exact\_function) <br>_Compute the L2 norm of the error between 2 Fields._  |
 |  double | [**error\_norm\_inf**](#function-error_norm_inf) (ExecSpace exec\_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory\_space &gt; function, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory\_space &gt; exact\_function) <br>_Compute the infinity norm of the error between 2 Fields._  |
+|  ElementType | [**error\_norm\_inf**](#function-error_norm_inf) (ExecSpace exec\_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory\_space &gt; function, ExactFunc exact\_function) <br>_Compute the infinity norm of the error between 2 Fields._  |
 |  double | [**error\_norm\_inf**](#function-error_norm_inf) (ExecSpace exec\_space, [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory\_space &gt; function, [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory\_space &gt; exact\_function) <br>_Compute the infinity norm of the error between 2 VectorFields._  |
 |  double | [**norm\_L1**](#function-norm_l1) (ExecSpace exec\_space, [**Quadrature**](classQuadrature.md)&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory\_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory\_space &gt; function) <br>_Compute L1 norm of a function with a given quadrature._  |
 |  double | [**norm\_L2**](#function-norm_l2) (ExecSpace exec\_space, [**Quadrature**](classQuadrature.md)&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory\_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory\_space &gt; function) <br>_Compute L2 norm of a function with a given quadrature._  |
@@ -197,6 +203,45 @@ inline double error_norm_inf (
     ExecSpace exec_space,
     ConstField< ElementType, IdxRange, typename ExecSpace::memory_space > function,
     ConstField< ElementType, IdxRange, typename ExecSpace::memory_space > exact_function
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `exec_space` The space on which the function is executed (CPU/GPU). 
+* `function` The calculated function. 
+* `exact_function` The exact function with which the calculated function is compared. 
+
+
+
+**Returns:**
+
+A double containing the value of the infinity norm. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function error\_norm\_inf 
+
+_Compute the infinity norm of the error between 2 Fields._ 
+```C++
+template<class ExecSpace, class ElementType, class IdxRange, class ExactFunc>
+inline ElementType error_norm_inf (
+    ExecSpace exec_space,
+    ConstField< ElementType, IdxRange, typename ExecSpace::memory_space > function,
+    ExactFunc exact_function
 ) 
 ```
 

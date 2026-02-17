@@ -1,0 +1,895 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classLagrangeEvaluator" kind="class" language="C++" prot="public">
+    <compoundname>LagrangeEvaluator</compoundname>
+    <includes refid="lagrange__evaluator_8hpp" local="no">lagrange_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+      </param>
+      <param>
+        <type>class DataType</type>
+      </param>
+      <param>
+        <type>class LagrangeBasis</type>
+      </param>
+      <param>
+        <type>class InterpolationGrid</type>
+      </param>
+      <param>
+        <type>class LowerExtrapolationRule</type>
+      </param>
+      <param>
+        <type>class UpperExtrapolationRule</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1ace70f78b0de89a44f8d33b11c689d6c9" prot="public" static="no">
+        <type>ExecSpace</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::exec_space =  ExecSpace</definition>
+        <argsstring></argsstring>
+        <name>exec_space</name>
+        <qualifiedname>LagrangeEvaluator::exec_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos execution space used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" prot="public" static="no">
+        <type>MemorySpace</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::memory_space =  MemorySpace</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>LagrangeEvaluator::memory_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos memory space used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1afd2dd964bf9a6c2b38ddb5b91a6299da" prot="public" static="no">
+        <type>typename LagrangeBasis::continuous_dimension_type</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::continuous_dimension_type =  typename LagrangeBasis::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>continuous_dimension_type</name>
+        <qualifiedname>LagrangeEvaluator::continuous_dimension_type</qualifiedname>
+        <briefdescription>
+<para>The type of the evaluation continuous dimension (continuous dimension of interest) used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1a952fb22f39fdb757352e211fc0966801" prot="public" static="no">
+        <type>LagrangeBasis</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::lagrange_basis_type =  LagrangeBasis</definition>
+        <argsstring></argsstring>
+        <name>lagrange_basis_type</name>
+        <qualifiedname>LagrangeEvaluator::lagrange_basis_type</qualifiedname>
+        <briefdescription>
+<para>The discrete dimension representing the <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" prot="public" static="no">
+        <type>typename LagrangeBasis::template Impl&lt; LagrangeBasis, MemorySpace &gt;::knot_grid</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::basis_domain_type =  typename LagrangeBasis::template Impl&lt;LagrangeBasis, MemorySpace&gt;::knot_grid</definition>
+        <argsstring></argsstring>
+        <name>basis_domain_type</name>
+        <qualifiedname>LagrangeEvaluator::basis_domain_type</qualifiedname>
+        <briefdescription>
+<para>The grid on which the interpolation coefficients should be provided. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1a35759cafed3a4e9a845c80974c9c2c76" prot="public" static="no">
+        <type>IdxRange&lt; InterpolationGrid &gt;</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::evaluation_domain_type =  IdxRange&lt;InterpolationGrid&gt;</definition>
+        <argsstring></argsstring>
+        <name>evaluation_domain_type</name>
+        <qualifiedname>LagrangeEvaluator::evaluation_domain_type</qualifiedname>
+        <briefdescription>
+<para>The type of the domain for the 1D evaluation mesh used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1a818b483eae319f58efd13d714fbff36d" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationGrid</type>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationGrid&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>BatchedInterpolationGrid</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batched_evaluation_domain_type =  BatchedInterpolationGrid</definition>
+        <argsstring></argsstring>
+        <name>batched_evaluation_domain_type</name>
+        <qualifiedname>LagrangeEvaluator::batched_evaluation_domain_type</qualifiedname>
+        <briefdescription>
+<para>The type of the whole domain representing evaluation points. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batched discrete domain on which the interpolation points are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" kindref="member">basis_domain_type</ref> &gt;</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::lagrange_domain_type =  IdxRange&lt;basis_domain_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>lagrange_domain_type</name>
+        <qualifiedname>LagrangeEvaluator::lagrange_domain_type</qualifiedname>
+        <briefdescription>
+<para>The type of the 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain corresponding to the dimension of interest. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1aec0eb2160df56bf516868831776cc389" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationGrid</type>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationGrid&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>ddc::remove_dims_of_t&lt; BatchedInterpolationGrid, InterpolationGrid &gt;</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batch_domain_type =  ddc::remove_dims_of_t&lt;BatchedInterpolationGrid, InterpolationGrid&gt;</definition>
+        <argsstring></argsstring>
+        <name>batch_domain_type</name>
+        <qualifiedname>LagrangeEvaluator::batch_domain_type</qualifiedname>
+        <briefdescription>
+<para>The type of the batch domain (obtained by removing the dimension of interest from the whole domain). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batched discrete domain on which the interpolation points are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationDDom</type>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationDDom&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>ddc::replace_dim_of_t&lt; BatchedInterpolationDDom, InterpolationGrid, <ref refid="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" kindref="member">basis_domain_type</ref> &gt;</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batched_lagrange_domain_type =  ddc::replace_dim_of_t&lt;BatchedInterpolationDDom, InterpolationGrid, basis_domain_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_lagrange_domain_type</name>
+        <qualifiedname>LagrangeEvaluator::batched_lagrange_domain_type</qualifiedname>
+        <briefdescription>
+<para>The type of the whole <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain (cartesian product of 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain and batch domain) preserving the order of dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batched discrete domain on which the interpolation points are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1a653c9afe4c6a14def4643d12e1546bb0" prot="public" static="no">
+        <type>LowerExtrapolationRule</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::lower_extrapolation_rule_type =  LowerExtrapolationRule</definition>
+        <argsstring></argsstring>
+        <name>lower_extrapolation_rule_type</name>
+        <qualifiedname>LagrangeEvaluator::lower_extrapolation_rule_type</qualifiedname>
+        <briefdescription>
+<para>The type of the extrapolation rule at the lower boundary. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1aa6a81e8a7ad93e886018bcfaa7002de2" prot="public" static="no">
+        <type>UpperExtrapolationRule</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::upper_extrapolation_rule_type =  UpperExtrapolationRule</definition>
+        <argsstring></argsstring>
+        <name>upper_extrapolation_rule_type</name>
+        <qualifiedname>LagrangeEvaluator::upper_extrapolation_rule_type</qualifiedname>
+        <briefdescription>
+<para>The type of the extrapolation rule at the upper boundary. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="88" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classLagrangeEvaluator_1a34aba36b5a0acf596daa83f7a8bd0013" prot="private" static="no" mutable="no">
+        <type>LowerExtrapolationRule</type>
+        <definition>LowerExtrapolationRule LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::m_lower_extrap_rule</definition>
+        <argsstring></argsstring>
+        <name>m_lower_extrap_rule</name>
+        <qualifiedname>LagrangeEvaluator::m_lower_extrap_rule</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="92" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classLagrangeEvaluator_1ae869b4e35a85568d53d75f533163369a" prot="private" static="no" mutable="no">
+        <type>UpperExtrapolationRule</type>
+        <definition>UpperExtrapolationRule LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::m_upper_extrap_rule</definition>
+        <argsstring></argsstring>
+        <name>m_upper_extrap_rule</name>
+        <qualifiedname>LagrangeEvaluator::m_upper_extrap_rule</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="94" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classLagrangeEvaluator_1aa422bd8a3350eed1e85c8c5609a17c1f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::LagrangeEvaluator</definition>
+        <argsstring>(LowerExtrapolationRule const &amp;lower_extrap_rule, UpperExtrapolationRule const &amp;upper_extrap_rule)</argsstring>
+        <name>LagrangeEvaluator</name>
+        <qualifiedname>LagrangeEvaluator::LagrangeEvaluator</qualifiedname>
+        <param>
+          <type>LowerExtrapolationRule const &amp;</type>
+          <declname>lower_extrap_rule</declname>
+        </param>
+        <param>
+          <type>UpperExtrapolationRule const &amp;</type>
+          <declname>upper_extrap_rule</declname>
+        </param>
+        <briefdescription>
+<para>Build a <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> acting on batched_lagrange_domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>lower_extrap_rule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The extrapolation rule at the lower boundary. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>upper_extrap_rule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The extrapolation rule at the upper boundary.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="see"><para><ref refid="structNullExtrapolationRule" kindref="compound">NullExtrapolationRule</ref> ConstantExtrapolationRule PeriodicExtrapolationRule </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="129" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="129" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1ad2ec20ca49f6226262039f946859ab78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::LagrangeEvaluator</definition>
+        <argsstring>(LagrangeEvaluator const &amp;x)=default</argsstring>
+        <name>LagrangeEvaluator</name>
+        <qualifiedname>LagrangeEvaluator::LagrangeEvaluator</qualifiedname>
+        <param>
+          <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Copy-constructs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to another <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="142" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a5a6b468e22f490961d24740700d78eb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::LagrangeEvaluator</definition>
+        <argsstring>(LagrangeEvaluator &amp;&amp;x)=default</argsstring>
+        <name>LagrangeEvaluator</name>
+        <qualifiedname>LagrangeEvaluator::LagrangeEvaluator</qualifiedname>
+        <param>
+          <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Move-constructs. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An rvalue to another <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="149" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1aec9870e4eb313c44640755e6e768ea29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::~LagrangeEvaluator</definition>
+        <argsstring>()=default</argsstring>
+        <name>~LagrangeEvaluator</name>
+        <qualifiedname>LagrangeEvaluator::~LagrangeEvaluator</qualifiedname>
+        <briefdescription>
+<para>Destructs. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="152" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1afb3a7522913bfcf752f858f32c49fa12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> &amp;</type>
+        <definition>LagrangeEvaluator &amp; LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::operator=</definition>
+        <argsstring>(LagrangeEvaluator const &amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>LagrangeEvaluator::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Copy-assigns. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A reference to another <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to this object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="160" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a30c1a66e29d7a43ea028c38415ee3694" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> &amp;</type>
+        <definition>LagrangeEvaluator &amp; LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::operator=</definition>
+        <argsstring>(LagrangeEvaluator &amp;&amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>LagrangeEvaluator::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Move-assigns. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An rvalue to another <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>A reference to this object. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="168" column="23"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a181cf7541c084c467d3a856d25b65152" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classLagrangeEvaluator_1a653c9afe4c6a14def4643d12e1546bb0" kindref="member">lower_extrapolation_rule_type</ref></type>
+        <definition>lower_extrapolation_rule_type LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::lower_extrapolation_rule</definition>
+        <argsstring>() const</argsstring>
+        <name>lower_extrapolation_rule</name>
+        <qualifiedname>LagrangeEvaluator::lower_extrapolation_rule</qualifiedname>
+        <briefdescription>
+<para>Get the lower extrapolation rule. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Extrapolation rules are functors used to define the behaviour of the <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> outside the domain where the break points of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis are defined.</para>
+<para><simplesect kind="return"><para>The lower extrapolation rule.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="structNullExtrapolationRule" kindref="compound">NullExtrapolationRule</ref> ConstantExtrapolationRule PeriodicExtrapolationRule </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="180" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="180" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1af95b50680e42b7727fcdf439a87bd016" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classLagrangeEvaluator_1aa6a81e8a7ad93e886018bcfaa7002de2" kindref="member">upper_extrapolation_rule_type</ref></type>
+        <definition>upper_extrapolation_rule_type LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::upper_extrapolation_rule</definition>
+        <argsstring>() const</argsstring>
+        <name>upper_extrapolation_rule</name>
+        <qualifiedname>LagrangeEvaluator::upper_extrapolation_rule</qualifiedname>
+        <briefdescription>
+<para>Get the upper extrapolation rule. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Extrapolation rules are functors used to define the behaviour of the <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> outside the domain where the break points of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis are defined.</para>
+<para><simplesect kind="return"><para>The upper extrapolation rule.</para>
+</simplesect>
+<simplesect kind="see"><para><ref refid="structNullExtrapolationRule" kindref="compound">NullExtrapolationRule</ref> ConstantExtrapolationRule PeriodicExtrapolationRule </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="195" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="195" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a84a9e487a0487108b83726a130fa8f14" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>CoordsDims</declname>
+            <defname>CoordsDims</defname>
+          </param>
+          <param>
+            <type>class BatchedLagrangeIdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION DataType</type>
+        <definition>KOKKOS_FUNCTION DataType LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::operator()</definition>
+        <argsstring>(Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, BatchedLagrangeIdxRange, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>LagrangeEvaluator::operator()</qualifiedname>
+        <param>
+          <type>Coord&lt; CoordsDims... &gt; const &amp;</type>
+          <declname>coord_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, BatchedLagrangeIdxRange, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout &gt; const</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomial (described by its <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients) at a given coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients describe 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials defined on a <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>coord_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomial is evaluated. Note that only the component along the dimension of interest is used. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lagrange_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field storing the 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomial at the desired coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="213" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="213" bodyend="219"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1aeb214616cc6e3d10e7d92e097638d23e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+          <param>
+            <type>class Layout3</type>
+          </param>
+          <param>
+            <type>class IdxRangeBatchedInterpolation</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>CoordsDims</declname>
+            <defname>CoordsDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::operator()</definition>
+        <argsstring>(Field&lt; DataType, IdxRangeBatchedInterpolation, memory_space, Layout1 &gt; const lagrange_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, memory_space, Layout2 &gt; const coords_eval, ConstField&lt; DataType, batched_lagrange_domain_type&lt; IdxRangeBatchedInterpolation &gt;, memory_space, Layout3 &gt; const lagrange_coef) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>LagrangeEvaluator::operator()</qualifiedname>
+        <param>
+          <type>Field&lt; DataType, IdxRangeBatchedInterpolation, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout1 &gt; const</type>
+          <declname>lagrange_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout2 &gt; const</type>
+          <declname>coords_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" kindref="member">batched_lagrange_domain_type</ref>&lt; IdxRangeBatchedInterpolation &gt;, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout3 &gt; const</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials (described by their <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients) on a mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients describe <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials defined on a cartesian product of batch_idx_range and <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
+<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type, the evaluation is performed with the 1D set of <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients identified by the same batch_domain_type::discrete_element_type.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">lagrange_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials at the desired coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coords_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates where the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are evaluated. Those are stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the points represented by this index range are unused and irrelevant. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lagrange_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field storing the <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="243" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="243" bodyend="273"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a63ada9689f6673d090fa372d6e923253" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+          <param>
+            <type>class BatchedInterpolationGrid</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::operator()</definition>
+        <argsstring>(Field&lt; DataType, BatchedInterpolationGrid, memory_space, Layout1 &gt; const lagrange_eval, ConstField&lt; DataType, batched_lagrange_domain_type&lt; BatchedInterpolationGrid &gt;, memory_space, Layout2 &gt; const lagrange_coef) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>LagrangeEvaluator::operator()</qualifiedname>
+        <param>
+          <type>Field&lt; DataType, BatchedInterpolationGrid, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout1 &gt; const</type>
+          <declname>lagrange_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" kindref="member">batched_lagrange_domain_type</ref>&lt; BatchedInterpolationGrid &gt;, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout2 &gt; const</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials (described by their <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients) on a mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients describe <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials defined on a cartesian product of batch_idx_range and <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
+<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type, the evaluation is performed with the 1D set of <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients identified by the same batch_domain_type::discrete_element_type.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">lagrange_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials at the mesh points. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lagrange_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field storing the <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="289" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="289" bodyend="312"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classLagrangeEvaluator_1adcd503f82a5159aa1d64387b625ee6ec" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>CoordsDims</declname>
+            <defname>CoordsDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION DataType</type>
+        <definition>KOKKOS_INLINE_FUNCTION DataType LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::eval</definition>
+        <argsstring>(Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, lagrange_domain_type, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
+        <name>eval</name>
+        <qualifiedname>LagrangeEvaluator::eval</qualifiedname>
+        <param>
+          <type>Coord&lt; CoordsDims... &gt; const &amp;</type>
+          <declname>coord_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" kindref="member">lagrange_domain_type</ref>, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout &gt; const</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="317" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="317" bodyend="340"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a9624b338beb3ce46ad374d1740fb86e5" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class...</type>
+            <declname>DerivDims</declname>
+            <defname>DerivDims</defname>
+          </param>
+          <param>
+            <type>class Layout</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>CoordsDims</declname>
+            <defname>CoordsDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION DataType</type>
+        <definition>KOKKOS_INLINE_FUNCTION DataType LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::eval_no_bc</definition>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, lagrange_domain_type, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
+        <name>eval_no_bc</name>
+        <qualifiedname>LagrangeEvaluator::eval_no_bc</qualifiedname>
+        <param>
+          <type>Idx&lt; DerivDims... &gt; const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>Coord&lt; CoordsDims... &gt; const &amp;</type>
+          <declname>coord_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" kindref="member">lagrange_domain_type</ref>, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout &gt; const</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="343" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="343" bodyend="411"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION auto</type>
+        <definition>KOKKOS_INLINE_FUNCTION auto LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::getclosest</definition>
+        <argsstring>(Coord&lt; continuous_dimension_type &gt; x_interp) const</argsstring>
+        <name>getclosest</name>
+        <qualifiedname>LagrangeEvaluator::getclosest</qualifiedname>
+        <param>
+          <type>Coord&lt; <ref refid="classLagrangeEvaluator_1afd2dd964bf9a6c2b38ddb5b91a6299da" kindref="member">continuous_dimension_type</ref> &gt;</type>
+          <declname>x_interp</declname>
+        </param>
+        <briefdescription>
+<para>Get the knot index closest to the provided coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="415" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="415" bodyend="443"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class to evaluate, differentiate or integrate a <ref refid="classLagrange" kindref="compound">Lagrange</ref> function. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A class which contains an operator () which can be used to evaluate, or differentiate a <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomial.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ExecSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Kokkos execution space on which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> evaluation is performed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MemorySpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Kokkos memory space on which the data (<ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients and evaluation) is stored. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DataType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type on which calculations are made. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>LagrangeBasis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The discrete dimension representing the <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InterpolationGrid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The discrete dimension on which evaluation points are defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>LowerExtrapolationRule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The lower extrapolation rule type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>UpperExtrapolationRule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The upper extrapolation rule type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="26" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="27" bodyend="444"/>
+    <listofallmembers>
+      <member refid="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>basis_domain_type</name></member>
+      <member refid="classLagrangeEvaluator_1aec0eb2160df56bf516868831776cc389" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batch_domain_type</name></member>
+      <member refid="classLagrangeEvaluator_1a818b483eae319f58efd13d714fbff36d" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batched_evaluation_domain_type</name></member>
+      <member refid="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batched_lagrange_domain_type</name></member>
+      <member refid="classLagrangeEvaluator_1afd2dd964bf9a6c2b38ddb5b91a6299da" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>continuous_dimension_type</name></member>
+      <member refid="classLagrangeEvaluator_1adcd503f82a5159aa1d64387b625ee6ec" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval</name></member>
+      <member refid="classLagrangeEvaluator_1a9624b338beb3ce46ad374d1740fb86e5" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval_no_bc</name></member>
+      <member refid="classLagrangeEvaluator_1a35759cafed3a4e9a845c80974c9c2c76" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>evaluation_domain_type</name></member>
+      <member refid="classLagrangeEvaluator_1ace70f78b0de89a44f8d33b11c689d6c9" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>exec_space</name></member>
+      <member refid="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>getclosest</name></member>
+      <member refid="classLagrangeEvaluator_1a952fb22f39fdb757352e211fc0966801" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>lagrange_basis_type</name></member>
+      <member refid="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>lagrange_domain_type</name></member>
+      <member refid="classLagrangeEvaluator_1aa422bd8a3350eed1e85c8c5609a17c1f" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>LagrangeEvaluator</name></member>
+      <member refid="classLagrangeEvaluator_1ad2ec20ca49f6226262039f946859ab78" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>LagrangeEvaluator</name></member>
+      <member refid="classLagrangeEvaluator_1a5a6b468e22f490961d24740700d78eb9" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>LagrangeEvaluator</name></member>
+      <member refid="classLagrangeEvaluator_1a181cf7541c084c467d3a856d25b65152" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>lower_extrapolation_rule</name></member>
+      <member refid="classLagrangeEvaluator_1a653c9afe4c6a14def4643d12e1546bb0" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>lower_extrapolation_rule_type</name></member>
+      <member refid="classLagrangeEvaluator_1a34aba36b5a0acf596daa83f7a8bd0013" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>m_lower_extrap_rule</name></member>
+      <member refid="classLagrangeEvaluator_1ae869b4e35a85568d53d75f533163369a" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>m_upper_extrap_rule</name></member>
+      <member refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>memory_space</name></member>
+      <member refid="classLagrangeEvaluator_1a84a9e487a0487108b83726a130fa8f14" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator()</name></member>
+      <member refid="classLagrangeEvaluator_1aeb214616cc6e3d10e7d92e097638d23e" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator()</name></member>
+      <member refid="classLagrangeEvaluator_1a63ada9689f6673d090fa372d6e923253" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator()</name></member>
+      <member refid="classLagrangeEvaluator_1afb3a7522913bfcf752f858f32c49fa12" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator=</name></member>
+      <member refid="classLagrangeEvaluator_1a30c1a66e29d7a43ea028c38415ee3694" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator=</name></member>
+      <member refid="classLagrangeEvaluator_1af95b50680e42b7727fcdf439a87bd016" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>upper_extrapolation_rule</name></member>
+      <member refid="classLagrangeEvaluator_1aa6a81e8a7ad93e886018bcfaa7002de2" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>upper_extrapolation_rule_type</name></member>
+      <member refid="classLagrangeEvaluator_1aec9870e4eb313c44640755e6e768ea29" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>~LagrangeEvaluator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

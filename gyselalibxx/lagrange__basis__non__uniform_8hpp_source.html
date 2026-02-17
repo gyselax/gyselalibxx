@@ -726,10 +726,9 @@ public:
             KOKKOS_ASSERT(x &gt;= ddc::coordinate(poly_start));
             KOKKOS_ASSERT(x &lt;= ddc::coordinate(poly_start + degree()));
 
-            DataType offset = (x - ddc::coordinate(poly_start));
             DataType eps = Kokkos::Experimental::epsilon_v&lt;DataType&gt; * 4;
             for (std::size_t i(0); i &lt; D + 1; ++i) {
-                if (fabs(offset - ddc::coordinate(poly_start + i)) &lt; eps) {
+                if (Kokkos::fabs(x - ddc::coordinate(poly_start + i)) &lt; eps) {
                     for (int j(0); j &lt; D + 1; ++j) {
                         values(j) = static_cast&lt;int&gt;(j == i);
                     }

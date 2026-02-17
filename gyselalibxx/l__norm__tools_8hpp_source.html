@@ -625,8 +625,8 @@ double norm_inf(ExecSpace exec_space, FuncType function)
 
 // General implementation of the infinity norm of an error. This function is in a namespace to avoid code duplication
 // without creating a function so general that it also captures multipatch types.
-template &lt;class ExecSpace, class FuncType&gt;
-double error_norm_inf(ExecSpace exec_space, FuncType function, FuncType exact_function)
+template &lt;class ExecSpace, class FuncType, class ExactFuncType&gt;
+double error_norm_inf(ExecSpace exec_space, FuncType function, ExactFuncType exact_function)
 {
     static_assert(
             Kokkos::SpaceAccessibility&lt;ExecSpace, typename FuncType::memory_space&gt;::accessible);
@@ -671,6 +671,29 @@ inline double error_norm_inf(
         ConstField&lt;ElementType, IdxRange, typename ExecSpace::memory_space&gt; function,
         ConstField&lt;ElementType, IdxRange, typename ExecSpace::memory_space&gt; exact_function)
 {
+    return detail::error_norm_inf(exec_space, function, exact_function);
+}
+
+namespace concepts {
+template &lt;class F, class ElementType, class IdxType&gt;
+concept CompatibleFunc = requires(F const&amp; f, IdxType idx)
+{
+    {
+        f(idx)
+        } -&gt; std::same_as&lt;ElementType&gt;;
+};
+} // namespace concepts
+
+template &lt;class ExecSpace, class ElementType, class IdxRange, class ExactFunc&gt;
+inline ElementType error_norm_inf(
+        ExecSpace exec_space,
+        ConstField&lt;ElementType, IdxRange, typename ExecSpace::memory_space&gt; function,
+        ExactFunc exact_function)
+{
+    static_assert(concepts::CompatibleFunc&lt;
+                  ExactFunc,
+                  ElementType,
+                  typename IdxRange::discrete_element_type&gt;);
     return detail::error_norm_inf(exec_space, function, exact_function);
 }
 

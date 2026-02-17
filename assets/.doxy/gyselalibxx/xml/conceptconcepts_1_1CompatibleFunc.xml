@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1CompatibleFunc" kind="concept">
+    <compoundname>concepts::CompatibleFunc</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class F</type>
+      </param>
+      <param>
+        <type>class ElementType</type>
+      </param>
+      <param>
+        <type>class IdxType</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class F, class ElementType, class IdxType&gt;
+concept <ref refid="conceptconcepts_1_1CompatibleFunc" kindref="compound">concepts::CompatibleFunc</ref> =  requires(F const&amp; f, IdxType idx)
+{
+    {
+        f(idx)
+        } -&gt; std::same_as&lt;ElementType&gt;;
+}    </initializer>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/l_norm_tools.hpp" line="165" column="1"/>
+  </compounddef>
+</doxygen>

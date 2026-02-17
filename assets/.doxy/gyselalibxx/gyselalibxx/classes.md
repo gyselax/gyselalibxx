@@ -219,6 +219,7 @@
 * [**IBoltzmannSolver**](classIBoltzmannSolver.md)
 * [**IChargeDensityCalculator**](classIChargeDensityCalculator.md)
 * [**IdentityCoordinateChange**](classIdentityCoordinateChange.md)
+* [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md)
 * [**IdentityTensor**](classIdentityTensor.md)
 * [**IdxRangeToSlice**](structIdxRangeToSlice.md)
 * [**IEquilibrium**](classIEquilibrium.md)
@@ -299,6 +300,7 @@
 ## l
 
 * [**Lagrange**](classLagrange.md)
+* [**LagrangeEvaluator**](classLagrangeEvaluator.md)
 * [**LagrangeInterpolator**](classLagrangeInterpolator.md)
 * [**LeviCivitaTensor**](classLeviCivitaTensor.md)
 * [**LiePoissonBracket**](classLiePoissonBracket.md)

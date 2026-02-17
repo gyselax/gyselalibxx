@@ -176,7 +176,7 @@
         <label>detail::NonUniformLagrangeBasisBase</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="44" bodyend="268"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="43" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="44" bodyend="267"/>
     <listofallmembers>
       <member refid="classNonUniformLagrangeBasis_1adf3c4fbfc7a9c1ae6a43319d49f7245a" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis</scope><name>continuous_dimension_type</name></member>
       <member refid="classNonUniformLagrangeBasis_1affe26bb323f796a6c4aaf3ddfa8629d6" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis</scope><name>coord_type</name></member>

@@ -576,6 +576,21 @@
 <li><code>#include "vector_field.hpp"</code></li>
 <li><code>#include "vector_index_tools.hpp"</code></li>
 </ul>
+<h2 id="namespaces">Namespaces</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">namespace</td>
+<td style="text-align: left;"><a href="namespaceconcepts.html"><strong>concepts</strong></a> <br></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
@@ -596,6 +611,10 @@
 <tr>
 <td style="text-align: right;">double</td>
 <td style="text-align: left;"><a href="#function-error_norm_inf"><strong>error_norm_inf</strong></a> (ExecSpace exec_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; exact_function) <br><em>Compute the infinity norm of the error between 2 Fields.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">ElementType</td>
+<td style="text-align: left;"><a href="#function-error_norm_inf"><strong>error_norm_inf</strong></a> (ExecSpace exec_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function, ExactFunc exact_function) <br><em>Compute the infinity norm of the error between 2 Fields.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">double</td>
@@ -696,6 +715,25 @@ inline double error_norm_inf (
 <hr>
 
 <h3 id="function-error_norm_inf_1">function error_norm_inf</h3>
+<p><em>Compute the infinity norm of the error between 2 Fields.</em> </p>
+<pre><code class="language-C++">template&lt;class ExecSpace, class ElementType, class IdxRange, class ExactFunc&gt;
+inline ElementType error_norm_inf (
+    ExecSpace exec_space,
+    ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function,
+    ExactFunc exact_function
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><code>function</code> The calculated function. </li>
+<li><code>exact_function</code> The exact function with which the calculated function is compared. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A double containing the value of the infinity norm. </p>
+<hr>
+
+<h3 id="function-error_norm_inf_2">function error_norm_inf</h3>
 <p><em>Compute the infinity norm of the error between 2 VectorFields.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecSpace, class ElementType, class IdxRange, class VectorIndexSetType&gt;
 inline double error_norm_inf (

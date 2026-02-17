@@ -1226,6 +1226,22 @@
     <member refid="classIdentityCoordinateChange_1a6a5a7a7cee7431f4550b61e99d6cc48d" kind="function"><name>get_inverse_mapping</name></member>
     <member refid="classIdentityCoordinateChange_1afdfb2dc996572378b66c6e9b0063036e" kind="function"><name>fill_diagonal_elements</name></member>
   </compound>
+  <compound refid="classIdentityInterpolationBuilder" kind="class"><name>IdentityInterpolationBuilder</name>
+    <member refid="classIdentityInterpolationBuilder_1aec5a64b277c3609167662c7cc8831b8b" kind="typedef"><name>exec_space</name></member>
+    <member refid="classIdentityInterpolationBuilder_1af73a563f8f66dda791c73477053382a6" kind="typedef"><name>memory_space</name></member>
+    <member refid="classIdentityInterpolationBuilder_1aaf910dd7c20bc88ece399787f63a6565" kind="typedef"><name>continuous_dimension_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1acc3dc1510310248e1d1426d2be5e1602" kind="typedef"><name>interpolation_discrete_dimension_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a99ae1edf4d8fab198eb89d672d4129c1" kind="typedef"><name>interpolation_domain_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a8c1c0808909bc5d6d75224fd1e7797ee" kind="typedef"><name>basis_domain_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1adb8013a2ecaca9bfe93477e0e3a40602" kind="typedef"><name>batched_interpolation_domain_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a7a8243f45204a350c1e4e2665979ec69" kind="typedef"><name>batch_domain_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a6f2db3fc348f85236b05940b4e20df4a" kind="typedef"><name>batched_basis_domain_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a7550c9fc780dbdfcd0064f6b666d4688" kind="typedef"><name>batched_derivs_domain_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1ad6214fc5331691e0d95c96ae0c71ff93" kind="variable"><name>s_nbc_xmin</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a6071456590e1849fa434eef38f2c4921" kind="variable"><name>s_nbc_xmax</name></member>
+    <member refid="classIdentityInterpolationBuilder_1abf32221293ed5fc85575098819c5a3f5" kind="function"><name>IdentityInterpolationBuilder</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a15710b52b0c6f11f4996d83b466077ec" kind="function"><name>operator()</name></member>
+  </compound>
   <compound refid="classIdentityTensor" kind="class"><name>IdentityTensor</name>
     <member refid="classIdentityTensor_1a27a7de561c7c5ea7b5789abcfa85810e" kind="typedef"><name>element_type</name></member>
     <member refid="classIdentityTensor_1abdb0049eae9e619f3a545a474de1777b" kind="typedef"><name>index_set</name></member>
@@ -1659,6 +1675,36 @@
     <member refid="classLagrange_1aea4d15d2d289535f0d8aa1055e51f014" kind="function"><name>evaluate_lagrange</name></member>
     <member refid="classLagrange_1a57098c6ee680509b5c3ca9cbc21d0065" kind="function"><name>apply_bc</name></member>
     <member refid="classLagrange_1a8dc0fdd92e84e3e3ce6c95200a0fa581" kind="function"><name>compute_basis</name></member>
+  </compound>
+  <compound refid="classLagrangeEvaluator" kind="class"><name>LagrangeEvaluator</name>
+    <member refid="classLagrangeEvaluator_1ace70f78b0de89a44f8d33b11c689d6c9" kind="typedef"><name>exec_space</name></member>
+    <member refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kind="typedef"><name>memory_space</name></member>
+    <member refid="classLagrangeEvaluator_1afd2dd964bf9a6c2b38ddb5b91a6299da" kind="typedef"><name>continuous_dimension_type</name></member>
+    <member refid="classLagrangeEvaluator_1a952fb22f39fdb757352e211fc0966801" kind="typedef"><name>lagrange_basis_type</name></member>
+    <member refid="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" kind="typedef"><name>basis_domain_type</name></member>
+    <member refid="classLagrangeEvaluator_1a35759cafed3a4e9a845c80974c9c2c76" kind="typedef"><name>evaluation_domain_type</name></member>
+    <member refid="classLagrangeEvaluator_1a818b483eae319f58efd13d714fbff36d" kind="typedef"><name>batched_evaluation_domain_type</name></member>
+    <member refid="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" kind="typedef"><name>lagrange_domain_type</name></member>
+    <member refid="classLagrangeEvaluator_1aec0eb2160df56bf516868831776cc389" kind="typedef"><name>batch_domain_type</name></member>
+    <member refid="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" kind="typedef"><name>batched_lagrange_domain_type</name></member>
+    <member refid="classLagrangeEvaluator_1a653c9afe4c6a14def4643d12e1546bb0" kind="typedef"><name>lower_extrapolation_rule_type</name></member>
+    <member refid="classLagrangeEvaluator_1aa6a81e8a7ad93e886018bcfaa7002de2" kind="typedef"><name>upper_extrapolation_rule_type</name></member>
+    <member refid="classLagrangeEvaluator_1a34aba36b5a0acf596daa83f7a8bd0013" kind="variable"><name>m_lower_extrap_rule</name></member>
+    <member refid="classLagrangeEvaluator_1ae869b4e35a85568d53d75f533163369a" kind="variable"><name>m_upper_extrap_rule</name></member>
+    <member refid="classLagrangeEvaluator_1aa422bd8a3350eed1e85c8c5609a17c1f" kind="function"><name>LagrangeEvaluator</name></member>
+    <member refid="classLagrangeEvaluator_1ad2ec20ca49f6226262039f946859ab78" kind="function"><name>LagrangeEvaluator</name></member>
+    <member refid="classLagrangeEvaluator_1a5a6b468e22f490961d24740700d78eb9" kind="function"><name>LagrangeEvaluator</name></member>
+    <member refid="classLagrangeEvaluator_1aec9870e4eb313c44640755e6e768ea29" kind="function"><name>~LagrangeEvaluator</name></member>
+    <member refid="classLagrangeEvaluator_1afb3a7522913bfcf752f858f32c49fa12" kind="function"><name>operator=</name></member>
+    <member refid="classLagrangeEvaluator_1a30c1a66e29d7a43ea028c38415ee3694" kind="function"><name>operator=</name></member>
+    <member refid="classLagrangeEvaluator_1a181cf7541c084c467d3a856d25b65152" kind="function"><name>lower_extrapolation_rule</name></member>
+    <member refid="classLagrangeEvaluator_1af95b50680e42b7727fcdf439a87bd016" kind="function"><name>upper_extrapolation_rule</name></member>
+    <member refid="classLagrangeEvaluator_1a84a9e487a0487108b83726a130fa8f14" kind="function"><name>operator()</name></member>
+    <member refid="classLagrangeEvaluator_1aeb214616cc6e3d10e7d92e097638d23e" kind="function"><name>operator()</name></member>
+    <member refid="classLagrangeEvaluator_1a63ada9689f6673d090fa372d6e923253" kind="function"><name>operator()</name></member>
+    <member refid="classLagrangeEvaluator_1adcd503f82a5159aa1d64387b625ee6ec" kind="function"><name>eval</name></member>
+    <member refid="classLagrangeEvaluator_1a9624b338beb3ce46ad374d1740fb86e5" kind="function"><name>eval_no_bc</name></member>
+    <member refid="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" kind="function"><name>getclosest</name></member>
   </compound>
   <compound refid="classLagrangeInterpolator" kind="class"><name>LagrangeInterpolator</name>
     <member refid="classLagrangeInterpolator_1a66bada460bd32a4dbdb846ff5acabbb7" kind="typedef"><name>InterpDim</name></member>
@@ -3103,6 +3149,8 @@
   </compound>
   <compound refid="conceptconcepts_1_1AnalyticalMapping" kind="concept"><name>concepts::AnalyticalMapping</name>
   </compound>
+  <compound refid="conceptconcepts_1_1CompatibleFunc" kind="concept"><name>concepts::CompatibleFunc</name>
+  </compound>
   <compound refid="conceptconcepts_1_1Mapping" kind="concept"><name>concepts::Mapping</name>
   </compound>
   <compound refid="conceptconcepts_1_1MappingWithInvJacobian" kind="concept"><name>concepts::MappingWithInvJacobian</name>
@@ -3117,13 +3165,13 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d219" kind="namespace"><name>@219</name>
-  </compound>
   <compound refid="namespace_0d221" kind="namespace"><name>@221</name>
   </compound>
   <compound refid="namespace_0d223" kind="namespace"><name>@223</name>
   </compound>
   <compound refid="namespace_0d225" kind="namespace"><name>@225</name>
+  </compound>
+  <compound refid="namespace_0d227" kind="namespace"><name>@227</name>
   </compound>
   <compound refid="namespace_0d97" kind="namespace"><name>@97</name>
   </compound>
@@ -3868,6 +3916,8 @@
   </compound>
   <compound refid="i__interpolator__2d_8hpp" kind="file"><name>i_interpolator_2d.hpp</name>
   </compound>
+  <compound refid="identity__interpolation__builder_8hpp" kind="file"><name>identity_interpolation_builder.hpp</name>
+  </compound>
   <compound refid="iinterpolator_8hpp" kind="file"><name>iinterpolator.hpp</name>
     <member refid="iinterpolator_8hpp_1ab7bc57a697bacb3c9b73b49f6fe94b64" kind="typedef"><name>interpolator_on_idx_range_t</name></member>
   </compound>
@@ -3879,6 +3929,8 @@
   <compound refid="lagrange__basis__non__uniform_8hpp" kind="file"><name>lagrange_basis_non_uniform.hpp</name>
   </compound>
   <compound refid="lagrange__basis__uniform_8hpp" kind="file"><name>lagrange_basis_uniform.hpp</name>
+  </compound>
+  <compound refid="lagrange__evaluator_8hpp" kind="file"><name>lagrange_evaluator.hpp</name>
   </compound>
   <compound refid="Lagrange__interpolator_8hpp" kind="file"><name>Lagrange_interpolator.hpp</name>
   </compound>
@@ -3929,6 +3981,7 @@
     <member refid="l__norm__tools_8hpp_1a4c8219dfeea80b86bff16a853e188f8d" kind="function"><name>norm_inf</name></member>
     <member refid="l__norm__tools_8hpp_1a1e7039002a54c7de373d8c9b27de00ca" kind="function"><name>norm_inf</name></member>
     <member refid="l__norm__tools_8hpp_1adaecce94200353e1fc9bd3e73d9e85ca" kind="function"><name>error_norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1a4225526c98d8298b3f8490b11ae40348" kind="function"><name>error_norm_inf</name></member>
     <member refid="l__norm__tools_8hpp_1abd8c6a554b42bfe5b2e272cf286993a7" kind="function"><name>error_norm_inf</name></member>
     <member refid="l__norm__tools_8hpp_1a7f4a4eefdd0dcdf92e87faf0a722f611" kind="function"><name>norm_L1</name></member>
     <member refid="l__norm__tools_8hpp_1a27082a4ff6b4ad2c890a613983f6f287" kind="function"><name>error_norm_L1</name></member>
