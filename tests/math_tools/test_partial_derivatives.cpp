@@ -349,6 +349,7 @@ public:
 
         return max_error;
     }
+
 private:
     ExtrapolationRule get_bv(Coord<DDim> dcoord) const
     {
@@ -551,8 +552,12 @@ public:
     template <class DerivativeDimension>
     double compute_error(double& max_distance) const
     {
-        IdxRangeX idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
-        IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
+        IdxRangeX idxrange_x(
+                typename base_type::IdxX(0),
+                base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
+        IdxRangeY idxrange_y(
+                typename base_type::IdxY(0),
+                base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
         IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
         CentralFDMPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
@@ -613,8 +618,12 @@ public:
     template <class DerivativeDimension>
     double compute_error(double& max_distance) const
     {
-        IdxRangeX idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
-        IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
+        IdxRangeX idxrange_x(
+                typename base_type::IdxX(0),
+                base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
+        IdxRangeY idxrange_y(
+                typename base_type::IdxY(0),
+                base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
         IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
         // the boundary values are the value of the test function at -pi and pi, namely 0.
@@ -665,8 +674,12 @@ public:
     template <class DerivativeDimension>
     double compute_error() const
     {
-        IdxRangeX idxrange_x(typename base_type::IdxX(0), base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
-        IdxRangeY idxrange_y(typename base_type::IdxY(0), base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
+        IdxRangeX idxrange_x(
+                typename base_type::IdxX(0),
+                base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
+        IdxRangeY idxrange_y(
+                typename base_type::IdxY(0),
+                base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
         IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
         ConstantPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
@@ -710,10 +723,10 @@ TYPED_TEST(PartialDerivativeFixture, Spline1DPartialDerivative)
 {
     using X = typename TestFixture::X;
     using Y = typename TestFixture::Y;
-    double const xmin(-M_PI*0.5);
-    double const xmax(M_PI*1.5);
-    double const ymin(-2*M_PI);
-    double const ymax(4*M_PI);
+    double const xmin(-M_PI * 0.5);
+    double const xmax(M_PI * 1.5);
+    double const ymin(-2 * M_PI);
+    double const ymax(4 * M_PI);
     // relative error of convergence should be less than 15%
     double const TOL = 0.15;
 
@@ -752,9 +765,9 @@ TYPED_TEST(PartialDerivativeFixture, Spline2DPartialDerivative)
 {
     using X = typename TestFixture::X;
     using Y = typename TestFixture::Y;
-    double const xmin(-M_PI*0.25);
-    double const xmax(M_PI*1.75);
-    double const ymin(-3*M_PI);
+    double const xmin(-M_PI * 0.25);
+    double const xmax(M_PI * 1.75);
+    double const ymin(-3 * M_PI);
     double const ymax(-M_PI);
     // relative error of convergence should be less than 15%
     double const TOL = 0.15;
