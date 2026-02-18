@@ -805,10 +805,10 @@ TYPED_TEST(PartialDerivativeFixture, CentralFDMPartialDerivative)
 {
     using X = typename TestFixture::X;
     using Y = typename TestFixture::Y;
-    double const xmin(0.1);
-    double const xmax(1.1);
-    double const ymin(0.2);
-    double const ymax(1.2);
+    double const xmin(0);
+    double const xmax(2*M_PI);
+    double const ymin(-M_PI*0.8);
+    double const ymax(1.2*M_PI);
     // relative error of convergence should be less than 15%
     double const TOL = 0.15;
     int const expected_order(2);
