@@ -138,6 +138,7 @@
 
 ## f
 
+* **fdm\_centred** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md))
 * **fill\_matrix\_with\_coeff** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **free\_chunks** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
 * **free\_ptr** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))

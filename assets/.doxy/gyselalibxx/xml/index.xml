@@ -326,6 +326,10 @@
   <compound refid="classCentralFDMPartialDerivative" kind="class"><name>CentralFDMPartialDerivative</name>
     <member refid="classCentralFDMPartialDerivative_1a7bdf59407f13c8b5910573a98bf3cac8" kind="typedef"><name>base_type</name></member>
     <member refid="classCentralFDMPartialDerivative_1a323d706a205681218b9c28d16e65b4d5" kind="typedef"><name>DFieldMemType</name></member>
+    <member refid="classCentralFDMPartialDerivative_1a885eb53b48bf5d1d6c89d3cfd07028aa" kind="typedef"><name>IdxFull</name></member>
+    <member refid="classCentralFDMPartialDerivative_1ae3e1c39b938374ea25419e820aa46a73" kind="typedef"><name>IdxDeriv</name></member>
+    <member refid="classCentralFDMPartialDerivative_1ab10f56286fc79bf60563f0d1b9d9576f" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classCentralFDMPartialDerivative_1af5255c9e4eb9ad6b8598899d4ecee989" kind="typedef"><name>IdxStepDeriv</name></member>
     <member refid="classCentralFDMPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>
     <member refid="classCentralFDMPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" kind="typedef"><name>DConstFieldType</name></member>
     <member refid="classCentralFDMPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" kind="typedef"><name>IdxRangeDeriv</name></member>
@@ -333,6 +337,7 @@
     <member refid="classCentralFDMPartialDerivative_1a64a1c06f33429b26b0314b5093032a90" kind="variable"><name>m_field</name></member>
     <member refid="classCentralFDMPartialDerivative_1a7dc376bbd4bbf568c100816f5bb0b1fe" kind="function"><name>CentralFDMPartialDerivative</name></member>
     <member refid="classCentralFDMPartialDerivative_1ae3faa9459a609771457f2677ef709bd5" kind="function"><name>operator()</name></member>
+    <member refid="classCentralFDMPartialDerivative_1a273469223bf4a9e8cc2f86c0e3d869fa" kind="function"><name>fdm_centred</name></member>
   </compound>
   <compound refid="classCentralFDMPartialDerivativeCreator" kind="class"><name>CentralFDMPartialDerivativeCreator</name>
     <member refid="classCentralFDMPartialDerivativeCreator_1abf4fba4727b5f204740920faa551d527" kind="typedef"><name>DConstFieldType</name></member>
