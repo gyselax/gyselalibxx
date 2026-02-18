@@ -167,14 +167,14 @@ public:
     }
 
 private:
-    KOKKOS_INLINE_FUNCTION double fdm_centred(
+    static KOKKOS_INLINE_FUNCTION double fdm_centred(
             DConstFieldType field,
             IdxBatch ib,
             IdxDeriv i1,
             IdxDeriv i2,
             IdxDeriv i3,
             double h1,
-            double h2) const
+            double h2)
     {
         double const c3 = h1 / (h2 * (h1 + h2));
         double const c2 = 1. / h1 - 1. / h2;
