@@ -210,8 +210,6 @@ public:
                 0.,
                 ddc::reducer::max<double>(),
                 KOKKOS_LAMBDA(IdxXY const idx) {
-                std::cout << idx << " " << ddc::coordinate(idx) << " " << field_differentiated(idx) << " " << function_to_differentiate.template differentiate<DerivativeDimension>(
-                                    ddc::coordinate(idx)) << std::endl;
                     return Kokkos::abs(
                             field_differentiated(idx)
                             - function_to_differentiate.template differentiate<DerivativeDimension>(
@@ -488,7 +486,6 @@ public:
                 FunctionToDifferentiateCosine<
                         X,
                         Y>>(idxrange, function_to_differentiate, derivative_creator, max_distance);
-        std::cout << max_error << std::endl;
 
         return max_error;
     }
@@ -556,10 +553,10 @@ public:
     {
         IdxRangeX idxrange_x(
                 typename base_type::IdxX(0),
-                base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(!X::PERIODIC));
+                base_type::m_ncells_x + static_cast<int>(!X::PERIODIC));
         IdxRangeY idxrange_y(
                 typename base_type::IdxY(0),
-                base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(!Y::PERIODIC));
+                base_type::m_ncells_y + static_cast<int>(!Y::PERIODIC));
         IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
         CentralFDMPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
@@ -573,7 +570,6 @@ public:
                 function_to_differentiate,
                 derivative_creator,
                 max_distance);
-        std::cout << max_error << std::endl;
 
         return max_error;
     }
