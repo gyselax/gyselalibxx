@@ -129,22 +129,25 @@ plugins:
           import xarray as xr
           import numpy as np
           from fluid_moments import FluidMoments
-      Share:
+      FluidMoments:
         with: {fdistribu_raw: $fdistribu_sptor3Dv2D, vpar_vals: $vpar, mu_vals: $mu}
         exec: |
-          # Initialise Distribution Function as a xr.DataArray
-          fdistribu = xr.DataArray(fdistribu_raw, dims=( 'species', 'tor1', 'tor2', 'tor3', 'vpar', 'mu' )
-          # Initialise Fluid Moments
-          fluid_moments = FluidMoments(vpar_vals, mu_vals)
-          # Compute Fluid Moments
-          density = fluid_moments.compute_density(fdistribu).compute()
-          mean_velocity = fluid_moments.compute_mean_velocity(fdistribu, density).compute()
-          temperature = fluid_moments.compute_temperature(fdistribu, density, mean_velocity).compute()
-          # Write Fluid Moments to file
+          fdistribu = xr.DataArray(
+              fdistribu_raw,
+              dims=('species', 'tor1', 'tor2', 'tor3', 'vpar', 'mu')
+          )
+          vpar = xr.DataArray(vpar_vals, dims=('vpar'))
+          mu = xr.DataArray(mu_vals, dims=('mu'))
+          fm = FluidMoments(vpar, mu)
+
+          density = fm.compute_density(fdistribu).compute()
+          velocity = fm.compute_velocity(fdistribu, density).compute()
+          temperature = fm.compute_temperature(fdistribu, density, velocity).compute()
+
           ds_out = xr.Dataset({
-            'density': density,
-            'mean_velocity': mean_velocity,
-            'temperature': temperature,
+              'density': density,
+              'velocity': velocity,
+              'temperature': temperature,
           })
           ds_out.to_netcdf('fluid_moments.nc')
   decl_hdf5:
