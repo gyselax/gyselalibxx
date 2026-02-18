@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <filesystem>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -21,7 +22,6 @@
 #include "mpitransposealltoall.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
-#include "pdi_default.yml.hpp"
 #include "pdi_helper.hpp"
 #include "quadrature.hpp"
 #include "species_init.hpp"
@@ -33,6 +33,8 @@ using std::endl;
 using std::string;
 using std::chrono::steady_clock;
 
+namespace fs = std::filesystem;
+
 namespace {
 
 struct ConfigHandles
@@ -41,20 +43,33 @@ struct ConfigHandles
     PC_tree_t conf_pdi;
 };
 
+void display_help(std::string const& exe)
+{
+    std::cerr << "usage: " << exe << " <config_file.yaml> <pdi_config.yaml>" << endl;
+    std::exit(EXIT_FAILURE);
+}
+
 ConfigHandles parse_config_files(int argc, char** argv)
 {
     ConfigHandles configs {};
-    if (argc > 1) {
-        configs.conf_gyselax = PC_parse_path(argv[1]);
-    } else {
-        configs.conf_gyselax = PC_parse_string("");
-    }
-    PC_errhandler(PC_NULL_HANDLER);
-
+    std::string exe = argv[0];
     if (argc > 2) {
-        configs.conf_pdi = PC_parse_path(argv[2]);
+        fs::path gysela_config_yml = argv[1];
+        if (gysela_config_yml.extension() != ".yaml" && gysela_config_yml.extension() != ".yml") {
+            std::cerr << "Expected a .yaml file for the config_file.yaml. Received : "
+                      << gysela_config_yml << endl;
+            display_help(exe);
+        }
+        configs.conf_gyselax = PC_parse_path(gysela_config_yml.c_str());
+        fs::path pdi_config_yml = argv[2];
+        if (pdi_config_yml.extension() != ".yaml" && pdi_config_yml.extension() != ".yml") {
+            std::cerr << "Expected a .yaml file for the pdi_config.yaml. Received : "
+                      << pdi_config_yml << endl;
+            display_help(exe);
+        }
+        configs.conf_pdi = PC_parse_path(pdi_config_yml.c_str());
     } else {
-        configs.conf_pdi = PC_parse_string(PDI_CFG);
+        display_help(exe);
     }
     return configs;
 }
@@ -388,10 +403,10 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     // Read and initialise the configuration
     //---------------------------------------------------------
+    ConfigHandles configs = parse_config_files(argc, argv);
     if (rank == 0) {
         cout << "Initialising 5D particle distribution function." << endl;
     }
-    ConfigHandles configs = parse_config_files(argc, argv);
     PDI_init(configs.conf_pdi);
     //---------------------------------------------------------
     // Initialisation of the global and local mesh (sp, space, phase-space)

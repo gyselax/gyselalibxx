@@ -11,6 +11,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
+- Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
+- Add `LagrangeEvaluator` to evaluate a Lagrange polynomial centred on a given point.
+- Added error messages when wrong input is provided to a simulation.
+
+### Fixed
+
+- Fix a memory leak in `DerivFieldMem`.
+- Fix `ddc::coordinate` called on `ddc::DiscreteElement` outside of the domain of definition in `single_interface_derivatives_calculator.hpp` and tests.
+- Fix a memory leak related to an object of type `PC_tree_t` not destroyed.
+- Fix boundary conditions in `single_interface_derivatives_calculator_collection_test.cpp`
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+- Remove the default PDI configuration file for the mini-app.
+
+## [v0.5.0] - 2026-02-04
+
+### Added
+
 - Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
 in a `DerivField`.
 - Allow `FFTPoissonSolver` to use variable precision.

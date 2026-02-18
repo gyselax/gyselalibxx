@@ -1135,9 +1135,6 @@ private:
         Idx<Grid1D> const idx_minus = idx - IdxStep<Grid1D>(1);
         Idx<Grid1D> const idx_plus = idx + IdxStep<Grid1D>(1);
 
-        double const delta_coord_plus = abs(ddc::coordinate(idx_plus) - ddc::coordinate(idx));
-        double const delta_coord_minus = abs(ddc::coordinate(idx) - ddc::coordinate(idx_minus));
-
         bool constexpr is_same_orientation_as_global = (is_on_patch1 && m_extremity_1 == BACK)
                                                        || (!is_on_patch1 && m_extremity_2 == FRONT);
 
@@ -1159,12 +1156,12 @@ private:
         // If given index is on the patch 1 or on the patch 2,
         else if (is_same_orientation_as_global) {
             // . | →   or  → | .
-            length_left = delta_coord_minus;
-            length_right = delta_coord_plus;
+            length_left = abs(ddc::coordinate(idx) - ddc::coordinate(idx_minus));
+            length_right = abs(ddc::coordinate(idx_plus) - ddc::coordinate(idx));
         } else {
             //  . | ←  or  ← | .
-            length_left = delta_coord_plus;
-            length_right = delta_coord_minus;
+            length_left = abs(ddc::coordinate(idx_plus) - ddc::coordinate(idx));
+            length_right = abs(ddc::coordinate(idx) - ddc::coordinate(idx_minus));
         }
 
         if ((length_left == 0) || (length_right == 0)) {
