@@ -77,7 +77,7 @@ public:
 
         IdxStepDeriv const step(1);
 
-        if constexpr (DerivativeDimension::PERIODIC) {
+        if constexpr (!DerivativeDimension::PERIODIC) {
             // front batched derivative
             {
                 IdxDeriv const ix(idxrange_deriv.front());

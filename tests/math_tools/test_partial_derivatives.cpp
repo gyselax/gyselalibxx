@@ -210,6 +210,8 @@ public:
                 0.,
                 ddc::reducer::max<double>(),
                 KOKKOS_LAMBDA(IdxXY const idx) {
+                std::cout << idx << " " << ddc::coordinate(idx) << " " << field_differentiated(idx) << " " << function_to_differentiate.template differentiate<DerivativeDimension>(
+                                    ddc::coordinate(idx)) << std::endl;
                     return Kokkos::abs(
                             field_differentiated(idx)
                             - function_to_differentiate.template differentiate<DerivativeDimension>(
@@ -554,10 +556,10 @@ public:
     {
         IdxRangeX idxrange_x(
                 typename base_type::IdxX(0),
-                base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
+                base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(!X::PERIODIC));
         IdxRangeY idxrange_y(
                 typename base_type::IdxY(0),
-                base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
+                base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(!Y::PERIODIC));
         IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
         CentralFDMPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
@@ -620,10 +622,10 @@ public:
     {
         IdxRangeX idxrange_x(
                 typename base_type::IdxX(0),
-                base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
+                base_type::m_ncells_x + static_cast<int>(!X::PERIODIC));
         IdxRangeY idxrange_y(
                 typename base_type::IdxY(0),
-                base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
+                base_type::m_ncells_y + static_cast<int>(!Y::PERIODIC));
         IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
         // the boundary values are the value of the test function at -pi and pi, namely 0.
@@ -676,10 +678,10 @@ public:
     {
         IdxRangeX idxrange_x(
                 typename base_type::IdxX(0),
-                base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(X::PERIODIC));
+                base_type::m_ncells_x + base_type::m_ncells_x + static_cast<int>(!X::PERIODIC));
         IdxRangeY idxrange_y(
                 typename base_type::IdxY(0),
-                base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(Y::PERIODIC));
+                base_type::m_ncells_y + base_type::m_ncells_y + static_cast<int>(!Y::PERIODIC));
         IdxRangeXY idxrange_xy(idxrange_x, idxrange_y);
 
         ConstantPartialDerivativeCreator<IdxRangeXY, DerivativeDimension> const
