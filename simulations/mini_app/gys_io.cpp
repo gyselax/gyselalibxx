@@ -422,8 +422,7 @@ void compute_fluid_moments_pycall(
     expose_mesh_to_pdi("vpar", IdxRange<GridVpar>(global_mesh));
     expose_mesh_to_pdi("mu", IdxRange<GridMu>(global_mesh));
     // Expose distribution function to PDI and trigger Pycall Fluid Moments event
-    ddc::PdiEvent("FluidMoments")
-          .with("fdistribu_sptor3Dv2D", allfdistribu_host);
+    ddc::PdiEvent("FluidMoments").with("fdistribu_sptor3Dv2D", allfdistribu_host);
 
     if (rank == 0) {
         cout << "Fluid Moments computed in Pycall event." << endl;
@@ -514,8 +513,7 @@ int main(int argc, char** argv)
                 get_const_field(allfdistribu)); // source (Tor3DSplit layout - already local)
 
         // ------------------------------------------------------------------------------
-    }
-    else if (version == "in-situ-diagnostic") {
+    } else if (version == "in-situ-diagnostic") {
         //-----------------------------------------------------------------------
         // Compute fluid moments in Python (density, mean velocity, temperature)
         //-----------------------------------------------------------------------
