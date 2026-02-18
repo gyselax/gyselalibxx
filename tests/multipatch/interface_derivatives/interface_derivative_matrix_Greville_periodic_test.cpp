@@ -309,12 +309,10 @@ public:
         std::vector<Coord<Xg>> interpolation_points_xg;
 
         break_points_x147.pop_back();
-        // interpolation_points_x147.pop_back();
         fill_in(break_points_xg, break_points_x147);
         fill_in(interpolation_points_xg, interpolation_points_x147);
 
         break_points_x258.pop_back();
-        // interpolation_points_x258.pop_back();
         fill_in(break_points_xg, break_points_x258);
         fill_in(interpolation_points_xg, interpolation_points_x258);
 
@@ -380,99 +378,45 @@ TEST_F(InterfaceDerivativeMatrixGrevillePeriodicTest, CheckForPeriodicAndGrevill
             CoordTransformGroup<9>()};
 
     // Instantiate the derivatives calculators ---------------------------------------------------
+    constexpr std::size_t nb_chosen_cells = 9;
+
     // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
-    SingleInterfaceDerivativesCalculator<Interface_1_2> const derivatives_calculator_1_2(
-            idx_range_x1.take_last(IdxStep<GridX<1>>(10)),
-            idx_range_x2.take_first(IdxStep<GridX<2>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_2_3> const derivatives_calculator_2_3(
-            idx_range_x2.take_last(IdxStep<GridX<2>>(10)),
-            idx_range_x3.take_first(IdxStep<GridX<3>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_3_1> const derivatives_calculator_3_1(
-            idx_range_x3.take_last(IdxStep<GridX<3>>(10)),
-            idx_range_x1.take_first(IdxStep<GridX<1>>(10)));
+    SingleInterfaceDerivativesCalculator<Interface_1_2> const
+            derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_2_3> const
+            derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_3_1> const
+            derivatives_calculator_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
 
-    SingleInterfaceDerivativesCalculator<Interface_4_5> const derivatives_calculator_4_5(
-            idx_range_x4.take_last(IdxStep<GridX<4>>(10)),
-            idx_range_x5.take_first(IdxStep<GridX<5>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_5_6> const derivatives_calculator_5_6(
-            idx_range_x5.take_last(IdxStep<GridX<5>>(10)),
-            idx_range_x6.take_first(IdxStep<GridX<6>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_6_4> const derivatives_calculator_6_4(
-            idx_range_x6.take_last(IdxStep<GridX<6>>(10)),
-            idx_range_x4.take_first(IdxStep<GridX<4>>(10)));
+    SingleInterfaceDerivativesCalculator<Interface_4_5> const
+            derivatives_calculator_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_5_6> const
+            derivatives_calculator_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_6_4> const
+            derivatives_calculator_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
 
-    SingleInterfaceDerivativesCalculator<Interface_7_8> const derivatives_calculator_7_8(
-            idx_range_x7.take_last(IdxStep<GridX<7>>(10)),
-            idx_range_x8.take_first(IdxStep<GridX<8>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_8_9> const derivatives_calculator_8_9(
-            idx_range_x8.take_last(IdxStep<GridX<8>>(10)),
-            idx_range_x9.take_first(IdxStep<GridX<9>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_9_7> const derivatives_calculator_9_7(
-            idx_range_x9.take_last(IdxStep<GridX<9>>(10)),
-            idx_range_x7.take_first(IdxStep<GridX<7>>(10)));
+    SingleInterfaceDerivativesCalculator<Interface_7_8> const
+            derivatives_calculator_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_8_9> const
+            derivatives_calculator_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_9_7> const
+            derivatives_calculator_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
 
     // SingleInterfaceDerivativesCalculators for interfaces along x.
-    SingleInterfaceDerivativesCalculator<Interface_1_4> const derivatives_calculator_1_4(
-            idx_range_y1.take_first(IdxStep<GridY<1>>(10)),
-            idx_range_y4.take_last(IdxStep<GridY<4>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_4_7> const derivatives_calculator_4_7(
-            idx_range_y4.take_first(IdxStep<GridY<4>>(10)),
-            idx_range_y7.take_last(IdxStep<GridY<7>>(10)));
+    SingleInterfaceDerivativesCalculator<Interface_1_4> const
+            derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_4_7> const
+            derivatives_calculator_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
 
-    SingleInterfaceDerivativesCalculator<Interface_2_5> const derivatives_calculator_2_5(
-            idx_range_y2.take_first(IdxStep<GridY<2>>(10)),
-            idx_range_y5.take_last(IdxStep<GridY<5>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_5_8> const derivatives_calculator_5_8(
-            idx_range_y5.take_first(IdxStep<GridY<5>>(10)),
-            idx_range_y8.take_last(IdxStep<GridY<8>>(10)));
+    SingleInterfaceDerivativesCalculator<Interface_2_5> const
+            derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_5_8> const
+            derivatives_calculator_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
 
-    SingleInterfaceDerivativesCalculator<Interface_3_6> const derivatives_calculator_3_6(
-            idx_range_y3.take_first(IdxStep<GridY<3>>(10)),
-            idx_range_y6.take_last(IdxStep<GridY<6>>(10)));
-    SingleInterfaceDerivativesCalculator<Interface_6_9> const derivatives_calculator_6_9(
-            idx_range_y6.take_first(IdxStep<GridY<6>>(10)),
-            idx_range_y9.take_last(IdxStep<GridY<9>>(10)));
-
-    // TODO: WAITING FOR THE MERGE OF PR 499.
-    // constexpr std::size_t nb_chosen_cells = 9;
-
-    // // SingleInterfaceDerivativesCalculators for interfaces along y (periodic).
-    // SingleInterfaceDerivativesCalculator<Interface_1_2> const
-    //         derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_2_3> const
-    //         derivatives_calculator_2_3(idx_range_xy2, idx_range_xy3, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_3_1> const
-    //         derivatives_calculator_3_1(idx_range_xy3, idx_range_xy1, nb_chosen_cells);
-
-    // SingleInterfaceDerivativesCalculator<Interface_4_5> const
-    //         derivatives_calculator_4_5(idx_range_xy4, idx_range_xy5, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_5_6> const
-    //         derivatives_calculator_5_6(idx_range_xy5, idx_range_xy6, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_6_4> const
-    //         derivatives_calculator_6_4(idx_range_xy6, idx_range_xy4, nb_chosen_cells);
-
-    // SingleInterfaceDerivativesCalculator<Interface_7_8> const
-    //         derivatives_calculator_7_8(idx_range_xy7, idx_range_xy8, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_8_9> const
-    //         derivatives_calculator_8_9(idx_range_xy8, idx_range_xy9, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_9_7> const
-    //         derivatives_calculator_9_7(idx_range_xy9, idx_range_xy7, nb_chosen_cells);
-
-    // // SingleInterfaceDerivativesCalculators for interfaces along x.
-    // SingleInterfaceDerivativesCalculator<Interface_1_4> const
-    //         derivatives_calculator_1_4(idx_range_xy1, idx_range_xy4, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_4_7> const
-    //         derivatives_calculator_4_7(idx_range_xy4, idx_range_xy7, nb_chosen_cells);
-
-    // SingleInterfaceDerivativesCalculator<Interface_2_5> const
-    //         derivatives_calculator_2_5(idx_range_xy2, idx_range_xy5, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_5_8> const
-    //         derivatives_calculator_5_8(idx_range_xy5, idx_range_xy8, nb_chosen_cells);
-
-    // SingleInterfaceDerivativesCalculator<Interface_3_6> const
-    //         derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
-    // SingleInterfaceDerivativesCalculator<Interface_6_9> const
-    //         derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_3_6> const
+            derivatives_calculator_3_6(idx_range_xy3, idx_range_xy6, nb_chosen_cells);
+    SingleInterfaceDerivativesCalculator<Interface_6_9> const
+            derivatives_calculator_6_9(idx_range_xy6, idx_range_xy9, nb_chosen_cells);
 
     // Collect the derivative calculators --------------------------------------------------------
     SingleInterfaceDerivativesCalculatorCollection deriv_calculators_collect_123(
