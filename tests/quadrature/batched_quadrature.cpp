@@ -112,7 +112,7 @@ void batched_operator_1d()
 
     auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
-    ddc::for_each(gridb, [&](IdxBatch1 ib) {
+    ddc::host_for_each(gridb, [&](IdxBatch1 ib) {
         double b = ddc::coordinate(ddc::select<GridBatch1>(ib));
         double x = x_max;
         double const ubound = 0.5 * b * x * x + 2 * x;
@@ -166,7 +166,7 @@ void batched_operator_2d()
 
     auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
-    ddc::for_each(gridb, [&](IdxB1B2 ib) {
+    ddc::host_for_each(gridb, [&](IdxB1B2 ib) {
         double const b1 = ddc::coordinate(ddc::select<GridBatch1>(ib));
         double const b2 = ddc::coordinate(ddc::select<GridBatch2>(ib));
         double const exact
@@ -219,7 +219,7 @@ void batched_operator_1d_2d()
 
     auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
-    ddc::for_each(gridb1, [&](IdxBatch1 ib) {
+    ddc::host_for_each(gridb1, [&](IdxBatch1 ib) {
         double const b1 = ddc::coordinate(ib);
         double const exact
                 = b1
@@ -268,7 +268,7 @@ void batched_operator_2d_1d()
 
     auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
-    ddc::for_each(gridb, [&](IdxB1B2 ib) {
+    ddc::host_for_each(gridb, [&](IdxB1B2 ib) {
         double const b1 = ddc::coordinate(ddc::select<GridBatch1>(ib));
         double const b2 = ddc::coordinate(ddc::select<GridBatch2>(ib));
         double x = x_max;
@@ -323,7 +323,7 @@ void batched_operator_2d_reordered()
 
     auto results_host = ddc::create_mirror_view_and_copy(get_field(results));
 
-    ddc::for_each(gridb, [&](IdxB1B2 ib) {
+    ddc::host_for_each(gridb, [&](IdxB1B2 ib) {
         double const b1 = ddc::coordinate(ddc::select<GridBatch1>(ib));
         double const b2 = ddc::coordinate(ddc::select<GridBatch2>(ib));
         double const exact

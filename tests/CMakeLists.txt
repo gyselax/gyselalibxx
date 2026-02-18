@@ -12,7 +12,7 @@ target_link_libraries(unit_tests_common
         gslx::speciesinfo
 )
 
-gtest_discover_tests(unit_tests_common DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_common DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 10)
 
 add_subdirectory(advection)
 add_subdirectory(coord_transformations)

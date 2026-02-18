@@ -1,7 +1,4 @@
 // SPDX-License-Identifier: MIT
-#include "ddc_alias_inline_functions.hpp"
-#define _USE_MATH_DEFINES
-
 #include <cmath>
 
 #include <ddc/ddc.hpp>
@@ -13,12 +10,14 @@
 
 #include "collisions_intra.hpp"
 #include "collisions_utils.hpp"
+#include "ddc_alias_inline_functions.hpp"
 #include "fluid_moments.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "irighthandside.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_definitions_xvx.hpp"
 #include "trapezoid_quadrature.hpp"
 
 /**
@@ -76,7 +75,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     host_t<DFieldMemSpX> density_init_host(ddc::select<Species, GridX>(mesh));
     host_t<DFieldMemSpX> mean_velocity_init_host(ddc::select<Species, GridX>(mesh));
     host_t<DFieldMemSpX> temperature_init_host(ddc::select<Species, GridX>(mesh));
-    ddc::for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
+    ddc::host_for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
         double const density = 1.;
         double const density_ampl = 0.1;
         double const mean_velocity = 0.;
@@ -120,7 +119,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
     host_t<DFieldMemSpX> nustar_profile_host(get_idx_range<Species, GridX>(allfdistribu_host));
     ddc::parallel_deepcopy(nustar_profile_host, nustar_profile);
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
         if (charge(ddc::select<Species>(ispx)) < 0.) {
             double const pred(1 / x_max * nustar0);
             EXPECT_LE(std::fabs(nustar_profile_host(ispx) - pred), 1e-12);
@@ -149,7 +148,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     host_t<DFieldMemSpX> collfreq_host(get_idx_range<Species, GridX>(allfdistribu_host));
     ddc::parallel_deepcopy(collfreq_host, collfreq);
 
-    ddc::for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
+    ddc::host_for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
         if (charge(ddc::select<Species>(ispx)) < 0.) {
             double const pred(
                     1 / x_max * nustar0 * density_init_host(ispx)
@@ -199,7 +198,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     ddc::parallel_deepcopy(Vcoll_host, Vcoll);
     ddc::parallel_deepcopy(Tcoll_host, Tcoll);
 
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
         EXPECT_LE(std::fabs(Vcoll_host(ispx) - mean_velocity_init_host(ispx)), 1e-12);
         EXPECT_LE(std::fabs(Tcoll_host(ispx) - temperature_init_host(ispx)), 1e-12);
     });
@@ -233,7 +232,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     auto density_res_host = ddc::create_mirror_view_and_copy(get_field(density_res));
 
     double const tol = 1.e-6;
-    ddc::for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
+    ddc::host_for_each(get_idx_range<Species, GridX>(allfdistribu_host), [&](IdxSpX const ispx) {
         EXPECT_LE(std::fabs(density_res_host(ispx) - density_init_host(ispx)), tol);
         EXPECT_LE(std::fabs(mean_velocity_res_host(ispx) - mean_velocity_init_host(ispx)), tol);
         EXPECT_LE(std::fabs(temperature_res_host(ispx) - temperature_init_host(ispx)), tol);
@@ -241,7 +240,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
 
     // * Intra species collisions applied on a perturbed distribution function
     // * should make it relax towards a maxwellian, i.e. Vcoll = mean_velocity, Tcoll = temperature at equilibrium
-    ddc::for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
+    ddc::host_for_each(ddc::select<Species, GridX>(mesh), [&](IdxSpX const ispx) {
         double const density = 1.;
         double const density_ampl = 0.1;
         double const mean_velocity = 0.;
@@ -275,7 +274,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     double const perturb_density = 0.5;
     double const coeff_mxw(perturb_density / std::sqrt(2 * M_PI * perturb_temperature));
 
-    ddc::for_each(mesh, [&](IdxSpXVx const ispxvx) {
+    ddc::host_for_each(mesh, [&](IdxSpXVx const ispxvx) {
         CoordVx const coordvx = ddc::coordinate(ddc::select<GridVx>(ispxvx));
         double const coordvx_sq = (coordvx - perturb_velocity) * (coordvx - perturb_velocity);
         double const perturb
@@ -301,7 +300,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     ddc::parallel_deepcopy(mean_velocity_res_host, mean_velocity_res);
     ddc::parallel_deepcopy(temperature_res_host, temperature_res);
 
-    ddc::for_each(get_idx_range<GridX>(allfdistribu_host), [&](IdxX const ix) {
+    ddc::host_for_each(get_idx_range<GridX>(allfdistribu_host), [&](IdxX const ix) {
         EXPECT_GE(std::fabs(mean_velocity_res_host(ielec(), ix) - Vcoll_host(ielec(), ix)), 1.e-4);
         EXPECT_GE(std::fabs(temperature_res_host(ielec(), ix) - Tcoll_host(ielec(), ix)), 1.e-4);
     });
@@ -353,7 +352,7 @@ TEST(CollisionsIntraMaxwellian, CollisionsIntraMaxwellian)
     ddc::parallel_deepcopy(Tcoll_host, Tcoll);
     ddc::parallel_deepcopy(mean_velocity_res_host, mean_velocity_res);
     ddc::parallel_deepcopy(temperature_res_host, temperature_res);
-    ddc::for_each(get_idx_range<GridX>(allfdistribu_host), [&](IdxX const ix) {
+    ddc::host_for_each(get_idx_range<GridX>(allfdistribu_host), [&](IdxX const ix) {
         EXPECT_LE(std::fabs(mean_velocity_res_host(ielec(), ix) - Vcoll_host(ielec(), ix)), 1.e-4);
         EXPECT_LE(std::fabs(temperature_res_host(ielec(), ix) - Tcoll_host(ielec(), ix)), 1.e-4);
     });

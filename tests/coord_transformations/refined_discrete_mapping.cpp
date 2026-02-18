@@ -44,7 +44,7 @@ double check_value_on_grid(
 {
     const double TOL = 1e-7;
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(idx_range, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord(ddc::coordinate(irtheta));
         const CoordXY discrete_coord = mapping(coord);
         const CoordXY analytical_coord = analytical_mapping(coord);
@@ -88,12 +88,12 @@ double check_value_not_on_grid(
     FieldMemRTheta_host<CoordRTheta> coords(idx_range);
     IdxR ir_max(ddc::select<GridR>(idx_range).back());
     IdxTheta itheta_max(ddc::select<GridTheta>(idx_range).back());
-    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(idx_range, [&](IdxRTheta const irtheta) {
         IdxR ir(ddc::select<GridR>(irtheta));
         CoordR coord_r_0 = ddc::coordinate(ir);
-        CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
         if (ir < ir_max) {
+            CoordR coord_r_1 = ddc::coordinate(ir + 1);
             double factor = double(std::rand()) / RAND_MAX;
             coord_r = coord_r_0 + (coord_r_1 - coord_r_0) * factor;
         } else {
@@ -102,9 +102,9 @@ double check_value_not_on_grid(
 
         IdxTheta itheta(ddc::select<GridTheta>(irtheta));
         CoordTheta coord_theta_0 = ddc::coordinate(itheta);
-        CoordTheta coord_theta_1 = ddc::coordinate(itheta + 1);
         double coord_theta;
         if (itheta < itheta_max) {
+            CoordTheta coord_theta_1 = ddc::coordinate(itheta + 1);
             double factor = double(std::rand()) / RAND_MAX;
             coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {
@@ -115,7 +115,7 @@ double check_value_not_on_grid(
 
     const double TOL = 5e-5;
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(idx_range, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord(coords(irtheta));
         const CoordXY discrete_coord = mapping(coord);
         const CoordXY analytical_coord = analytical_mapping(coord);
@@ -187,7 +187,7 @@ double check_Jacobian_on_grid(
 {
     static_assert(has_jacobian_v<Mapping>);
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(idx_range, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord(ddc::coordinate(irtheta));
 
         Tensor discrete_Jacobian = mapping.jacobian_matrix(coord);
@@ -232,12 +232,12 @@ double check_Jacobian_not_on_grid(
     FieldMemRTheta_host<CoordRTheta> coords(idx_range);
     IdxR ir_max(ddc::select<GridR>(idx_range).back());
     IdxTheta itheta_max(ddc::select<GridTheta>(idx_range).back());
-    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(idx_range, [&](IdxRTheta const irtheta) {
         IdxR ir(ddc::select<GridR>(irtheta));
         CoordR coord_r_0 = ddc::coordinate(ir);
-        CoordR coord_r_1 = ddc::coordinate(ir + 1);
         double coord_r;
         if (ir < ir_max) {
+            CoordR coord_r_1 = ddc::coordinate(ir + 1);
             double factor = double(std::rand()) / RAND_MAX;
             coord_r = coord_r_0 + (coord_r_1 - coord_r_0) * factor;
         } else {
@@ -246,9 +246,9 @@ double check_Jacobian_not_on_grid(
 
         IdxTheta itheta(ddc::select<GridTheta>(irtheta));
         CoordTheta coord_theta_0 = ddc::coordinate(itheta);
-        CoordTheta coord_theta_1 = ddc::coordinate(itheta + 1);
         double coord_theta;
         if (itheta < itheta_max) {
+            CoordTheta coord_theta_1 = ddc::coordinate(itheta + 1);
             double factor = double(std::rand()) / RAND_MAX;
             coord_theta = coord_theta_0 + (coord_theta_1 - coord_theta_0) * factor;
         } else {
@@ -259,7 +259,7 @@ double check_Jacobian_not_on_grid(
 
 
     double max_err = 0.;
-    ddc::for_each(idx_range, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(idx_range, [&](IdxRTheta const irtheta) {
         const CoordRTheta coord(coords(irtheta));
 
         Tensor discrete_Jacobian = mapping.jacobian_matrix(coord);

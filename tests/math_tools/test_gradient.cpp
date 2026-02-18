@@ -116,7 +116,7 @@ void test_gradient_prediction(
     auto gradient_cov_host = ddcHelper::
             create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), gradient_cov);
 
-    ddc::for_each(get_idx_range(gradient_contra_host), [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(get_idx_range(gradient_contra_host), [&](IdxRTheta const irtheta) {
         EXPECT_NEAR(
                 ddcHelper::get<R>(gradient_contra_host)(irtheta),
                 ddcHelper::get<R>(gradient_prediction_contra_host)(irtheta),

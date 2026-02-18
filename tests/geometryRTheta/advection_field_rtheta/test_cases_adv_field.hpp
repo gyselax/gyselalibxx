@@ -6,7 +6,7 @@
 
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "math_tools.hpp"
 #include "polar_spline_evaluator.hpp"
 

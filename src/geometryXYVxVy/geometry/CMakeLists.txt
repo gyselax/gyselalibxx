@@ -12,5 +12,6 @@ target_link_libraries("geometry_xyvxvy" INTERFACE
     gslx::mpi_parallelisation
     gslx::speciesinfo
     gslx::utils
+    gslx::geometry_xperiod_vx
 )
 add_library("gslx::geometry_xyvxvy" ALIAS "geometry_xyvxvy")

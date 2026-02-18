@@ -157,16 +157,16 @@ These are all equivalent and represent a 1D contravariant vector.
 
 ### Assigning Components
 
-Component-wise assignment uses ddcHelper::select to target specific directions:
+Component-wise assignment uses ddcHelper::get to target specific directions:
 
 ```cpp
-ddcHelper::select<Eta1>(v) = 2.0;
-ddcHelper::select<Eta2>(v) = 3.0;
+ddcHelper::get<Eta1>(v) = 2.0;
+ddcHelper::get<Eta2>(v) = 3.0;
 
-ddcHelper::select<Eta1, B1_cov>(M) = 1.0;
-ddcHelper::select<Eta1, B2_cov>(M) = 0.0;
-ddcHelper::select<Eta2, B1_cov>(M) = 0.0;
-ddcHelper::select<Eta2, B2_cov>(M) = 1.0;
+ddcHelper::get<Eta1, B1_cov>(M) = 1.0;
+ddcHelper::get<Eta1, B2_cov>(M) = 0.0;
+ddcHelper::get<Eta2, B1_cov>(M) = 0.0;
+ddcHelper::get<Eta2, B2_cov>(M) = 1.0;
 ```
 
 This system ensures type safety: only combinations of indices consistent with the tensor’s declared basis are allowed, enabling early compile-time error detection.
@@ -280,12 +280,12 @@ This corresponds, for example, to defining a contravariant electric field $`\bol
 
 ### Component Access and Assignment
 
-The scalar fields in the vector fields can be extracted using `ddcHelper::select`. This allows components to be assigned as for scalar fields :
+The scalar fields in the vector fields can be extracted using `ddcHelper::get`. This allows components to be assigned as for scalar fields :
 
 ```cpp
 IdxEta1 i;
-ddcHelper::select<X>(E)(i) = 4.2; // Assign to component E_x at index i without a temporary
-DField<IdxRange<GridR, GridTheta>> E_x = ddcHelper::select<X>(E);
+ddcHelper::get<X>(E)(i) = 4.2; // Assign to component E_x at index i without a temporary
+DField<IdxRange<GridR, GridTheta>> E_x = ddcHelper::get<X>(E);
 E_x(i) = -0.3;                    // Assign to component E_x at index i via a temporary field
 ```
 
@@ -318,7 +318,7 @@ For a vector field the code is:
 
 ```cpp
 DVectorField<IdxRange<GridR, GridTheta>, VectorIndexSet<R_cov, Theta_cov>> d_phi;
-DVectorField<IdxRange<GridR, GridTheta>, VectorIndexSet<R, Theta>> grad_phi; 
+DVectorField<IdxRange<GridR, GridTheta>, VectorIndexSet<R, Theta>> grad_phi;
 copy_to_vector_space<PolarBasis>(Kokkos::DefaultExecutionSpace(), grad_phi, coord_transform, d_phi);
 ```
 
@@ -359,26 +359,26 @@ DVector<X, Y, Z> z = tensor_mul(index<'i','j','k'>(eps), index<'i'>(v), index<'j
 Thanks to inlining and the Einstein summation notation, the compiler understands the last line to mean:
 
 ```cpp
-ddcHelper::select<X>(z) = 
-          0*ddcHelper::select<X>(v)*ddcHelper::select<X>(w)  // i=X, j=X, k=X
-        + 0*ddcHelper::select<X>(v)*ddcHelper::select<Y>(w)  // i=X, j=X, k=Y
-        + 0*ddcHelper::select<X>(v)*ddcHelper::select<Z>(w)  // i=X, j=X, k=Z
-        + 0*ddcHelper::select<Y>(v)*ddcHelper::select<X>(w)  // i=X, j=Y, k=X
-        + 0*ddcHelper::select<Y>(v)*ddcHelper::select<Y>(w)  // i=X, j=Y, k=Y
-        + 1*ddcHelper::select<Y>(v)*ddcHelper::select<Z>(w)  // i=X, j=Y, k=Z
-        + 0*ddcHelper::select<Z>(v)*ddcHelper::select<X>(w)  // i=X, j=Z, k=X
-        - 1*ddcHelper::select<Z>(v)*ddcHelper::select<Y>(w)  // i=X, j=Z, k=Y
-        + 0*ddcHelper::select<Z>(v)*ddcHelper::select<Z>(w); // i=X, j=Z, k=Z
-ddcHelper::select<Y>(z) = ...;
-ddcHelper::select<Z>(z) = ...;
+ddcHelper::get<X>(z) =
+          0*ddcHelper::get<X>(v)*ddcHelper::get<X>(w)  // i=X, j=X, k=X
+        + 0*ddcHelper::get<X>(v)*ddcHelper::get<Y>(w)  // i=X, j=X, k=Y
+        + 0*ddcHelper::get<X>(v)*ddcHelper::get<Z>(w)  // i=X, j=X, k=Z
+        + 0*ddcHelper::get<Y>(v)*ddcHelper::get<X>(w)  // i=X, j=Y, k=X
+        + 0*ddcHelper::get<Y>(v)*ddcHelper::get<Y>(w)  // i=X, j=Y, k=Y
+        + 1*ddcHelper::get<Y>(v)*ddcHelper::get<Z>(w)  // i=X, j=Y, k=Z
+        + 0*ddcHelper::get<Z>(v)*ddcHelper::get<X>(w)  // i=X, j=Z, k=X
+        - 1*ddcHelper::get<Z>(v)*ddcHelper::get<Y>(w)  // i=X, j=Z, k=Y
+        + 0*ddcHelper::get<Z>(v)*ddcHelper::get<Z>(w); // i=X, j=Z, k=Z
+ddcHelper::get<Y>(z) = ...;
+ddcHelper::get<Z>(z) = ...;
 ```
 
 As long as at least `-O1` optimisations are activated, the compiler will optimise away the multiplications by 0, effectively turning this into the standard form of a cross product:
 
 ```cpp
-ddcHelper::select<X>(z) = 
-          ddcHelper::select<Y>(v)*ddcHelper::select<Z>(w) // i=X, j=Y, k=Z
-        - ddcHelper::select<Z>(v)*ddcHelper::select<Y>(w); // i=X, j=Z, k=Y
-ddcHelper::select<Y>(z) = ...;
-ddcHelper::select<Z>(z) = ...;
+ddcHelper::get<X>(z) =
+          ddcHelper::get<Y>(v)*ddcHelper::get<Z>(w) // i=X, j=Y, k=Z
+        - ddcHelper::get<Z>(v)*ddcHelper::get<Y>(w); // i=X, j=Z, k=Y
+ddcHelper::get<Y>(z) = ...;
+ddcHelper::get<Z>(z) = ...;
 ```

@@ -124,7 +124,7 @@ neumann_spline_quadrature_coefficients(
     host_t<DField<IdxRange<DDims...>>> coefficients(get_field(coefficients_alloc_host));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
     // (see https://github.com/kokkos/kokkos/pull/7059)
-    ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
+    ddc::host_for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
                 = (std::get<CoefficientField1D<Kokkos::DefaultHostExecutionSpace, DDims>>(

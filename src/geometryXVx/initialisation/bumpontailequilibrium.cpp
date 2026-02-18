@@ -22,7 +22,7 @@ DFieldSpVx BumpontailEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
     // Initialisation of the maxwellian
     DFieldMemVx maxwellian_alloc(gridvx);
     DFieldVx maxwellian = get_field(maxwellian_alloc);
-    ddc::for_each(gridsp, [&](IdxSp const isp) {
+    ddc::host_for_each(gridsp, [&](IdxSp const isp) {
         compute_twomaxwellian(
                 maxwellian,
                 m_epsilon_bot(isp),
@@ -37,7 +37,7 @@ DFieldSpVx BumpontailEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
     return allfequilibrium;
 }
 
-BumpontailEquilibrium BumpontailEquilibrium::init_from_input(
+BumpontailEquilibrium bumpontail_equilibrium::init_from_input(
         IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {

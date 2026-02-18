@@ -3,6 +3,7 @@
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("initialisation_${GEOMETRY_VARIANT}" STATIC
+    iequilibrium.cpp
     maxwellianequilibrium.cpp
     bumpontailequilibrium.cpp
     restartinitialisation.cpp

@@ -1,0 +1,57 @@
+spack:
+  concretizer:
+    unify: true
+  definitions:
+  - packages:
+    - 'cmake@3.30'
+    - 'ginkgo@1.9'
+    - 'googletest@1.14 +gmock'
+    - 'kokkos@4.7 +serial'
+    - 'kokkos-fft@0.4 host_backend=fftw-serial'
+    - 'kokkos-kernels@4.7'
+    - 'kokkos-tools'
+    - 'lapack'
+    - 'mpi'
+    - 'paraconf@1.0'
+    - 'pdi@1.9'
+    - 'pdiplugin-decl-hdf5@1.9 +mpi'
+    - 'pdiplugin-decl-netcdf@1.9 +mpi'
+    - 'pdiplugin-mpi@1.9'
+    - 'pdiplugin-set-value@1.9'
+    - 'pdiplugin-trace@1.9'
+  - python-packages:
+    - 'py-dask@2024.7'
+    - 'py-h5py@3.12'
+    - 'py-imageio@2.35'
+    - 'py-matplotlib@3.9'
+    - 'py-netcdf4@1.7 +mpi'
+    - 'py-numpy@2.1'
+    - 'py-pyyaml@6.0'
+    - 'py-scipy@1.14'
+    - 'py-sympy@1.13'
+    - 'py-xarray@2024.7'
+  specs:
+  - matrix:
+    - [$packages]
+  - matrix:
+    - [$python-packages]
+  repos:
+    patches:
+      git: https://github.com/gyselax/spack.git
+      branch: releases/v2025.11
+    builtin:
+      branch: releases/v2025.11
+  view: true
+  packages:
+    all:
+      variants: ~fortran ~mpi ~openmp cxxstd=17
+    blas:
+      require: openblas@0.3
+    lapack:
+      require: openblas@0.3
+    mpi:
+      require: openmpi@5.0
+    pdi:
+      require: ~python
+    py-pandas:
+      require: ~performance

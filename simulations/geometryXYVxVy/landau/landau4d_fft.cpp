@@ -13,12 +13,14 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "../spline_definitions_xyvxvy.hpp"
+
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "fft_poisson_solver.hpp"
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "mpichargedensitycalculator.hpp"

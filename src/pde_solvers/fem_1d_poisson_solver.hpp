@@ -29,6 +29,7 @@ class FEM1DPoissonSolver
     : public IPoissonSolver<
               typename SplineEvaluator::evaluation_domain_type,
               IdxRangeBatched,
+              double,
               typename SplineEvaluator::memory_space,
               Kokkos::layout_right>
 {
@@ -43,6 +44,7 @@ private:
     using base_type = IPoissonSolver<
             typename SplineEvaluator::evaluation_domain_type,
             IdxRangeBatched,
+            double,
             typename SplineEvaluator::memory_space,
             Kokkos::layout_right>;
 
@@ -294,7 +296,11 @@ public:
                 });
 
         m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
-        m_spline_fem_evaluator.deriv(E, get_const_field(eval_pts), get_const_field(phi_coefs));
+        m_spline_fem_evaluator
+                .deriv(Idx<ddc::Deriv<PDEDim>>(1),
+                       E,
+                       get_const_field(eval_pts),
+                       get_const_field(phi_coefs));
 
         ddc::parallel_for_each(
                 exec_space(),
@@ -328,7 +334,7 @@ private:
         // Fill the banded part of the matrix
         std::array<double, s_degree + 1> derivs_alloc;
         DSpan1D derivs = as_span(derivs_alloc);
-        ddc::for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
+        ddc::host_for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
             CoordPDEDim const coord = ddc::coordinate(ix);
             IdxFEMBSplines const jmin_idx
                     = ddc::discrete_space<FEMBSplines>().eval_deriv(derivs, coord);
@@ -390,7 +396,7 @@ private:
         // Fill the banded part of the matrix
         std::array<double, s_degree + 1> derivs_alloc;
         DSpan1D derivs = as_span(derivs_alloc);
-        ddc::for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
+        ddc::host_for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
             CoordPDEDim const coord = ddc::coordinate(ix);
             IdxFEMBSplines const jmin_idx
                     = ddc::discrete_space<FEMBSplines>().eval_deriv(derivs, coord);
@@ -483,7 +489,7 @@ public:
 
         int constexpr n_implicit_min_bcs(!InputBSplines::is_periodic());
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
             IdxRangeFEMBSplines solve_idx_range(
                     fem_idx_range.front() + n_implicit_min_bcs,
                     IdxStep<FEMBSplines>(m_matrix_size));

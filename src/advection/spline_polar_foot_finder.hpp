@@ -48,8 +48,8 @@
 template <
         class IdxRangeBatched,
         class TimeStepperBuilder,
-        class LogicalToPhysicalMapping,
-        class LogicalToPseudoPhysicalMapping,
+        concepts::Mapping LogicalToPhysicalMapping,
+        concepts::AnalyticalMapping LogicalToPseudoPhysicalMapping,
         class SplineRThetaBuilderAdvection,
         class SplineRThetaEvaluatorAdvection>
 class SplinePolarFootFinder
@@ -61,9 +61,6 @@ class SplinePolarFootFinder
               typename SplineRThetaBuilderAdvection::memory_space>
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
-    static_assert(is_mapping_v<LogicalToPhysicalMapping>);
-    static_assert(is_mapping_v<LogicalToPseudoPhysicalMapping>);
-    static_assert(is_analytical_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(std::is_same_v<
                   typename SplineRThetaBuilderAdvection::memory_space,
                   typename SplineRThetaEvaluatorAdvection::memory_space>);
@@ -123,8 +120,11 @@ public:
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
-private:
+public:
+    /// @brief Execution space.
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
+
+private:
     using MemSpace = typename ExecSpace::memory_space;
     /**
      * @brief Tag the first dimension in the advection domain.

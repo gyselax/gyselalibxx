@@ -126,10 +126,10 @@ void compute_and_test_Lie_Poisson_Bracket()
     auto poisson_bracket_b_host = ddc::create_mirror_view_and_copy(poisson_bracket_b);
     auto analytical_matrix_host = ddc::create_mirror_view_and_copy(analytical_matrix);
 
-    ddc::for_each(idx_range, [&](IdxRhoThetaPhi idx) {
+    ddc::host_for_each(idx_range, [&](IdxRhoThetaPhi idx) {
         EXPECT_NEAR(poisson_bracket_a_host(idx), poisson_bracket_b_host(idx), 1e-13);
     });
-    ddc::for_each(idx_range, [&](IdxRhoThetaPhi idx) {
+    ddc::host_for_each(idx_range, [&](IdxRhoThetaPhi idx) {
         EXPECT_NEAR(poisson_bracket_a_host(idx), analytical_matrix_host(idx), 1e-13);
     });
 }

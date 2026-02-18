@@ -11,6 +11,125 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
+- Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
+- Add `LagrangeEvaluator` to evaluate a Lagrange polynomial centred on a given point.
+- Added error messages when wrong input is provided to a simulation.
+
+### Fixed
+
+- Fix a memory leak in `DerivFieldMem`.
+- Fix `ddc::coordinate` called on `ddc::DiscreteElement` outside of the domain of definition in `single_interface_derivatives_calculator.hpp` and tests.
+- Fix a memory leak related to an object of type `PC_tree_t` not destroyed.
+- Fix boundary conditions in `single_interface_derivatives_calculator_collection_test.cpp`
+- Fix the finite differences method on a periodic domain.
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+- Remove the default PDI configuration file for the mini-app.
+
+## [v0.5.0] - 2026-02-04
+
+### Added
+
+- Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
+in a `DerivField`.
+- Allow `FFTPoissonSolver` to use variable precision.
+- Add `SingleInterfaceDerivativesCalculator` to compute an interface derivative of an equivalent global spline.
+- Add `SingleInterfaceDerivativeCalculatorCollection` to collect different `SingleInterfaceDerivativesCalculator`.
+- Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
+- Add Kokkos Tools in the environment on Persee toolchains
+- Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
+- Added support for A100 Raven cluster Spack toolchain.
+- Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
+- Add a new coordinate transformation `LinearCoordTransform`.
+- Add a new coordinate transformation `OrthogonalCoordTransforms`.
+
+### Fixed
+
+- Fix derivative indexing of a `DerivField` object.
+- Fix transposition of arrays with more than 7 dimensions.
+- Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
+- Fix spurious segfaults for toolchains based on Spack environment views.
+
+### Changed
+
+- Extract spline definitions from `geometry.hpp` files into files called `spline_definitions_<geom_descriptor>.hpp` which are dedicated to tests or simulations.
+- Rename `geometry.hpp` files to `geometry_<geom_descriptor>.hpp` to reflect the geometry that they describe.
+- `DerivField` objects are initialised on GPU by default.
+- Update DDC to [v0.10.0](https://github.com/CExA-project/ddc/releases/tag/v0.10.0).
+- Change some Python class `scattered_coord` arguments to keyword-only.
+- Increase C++ version to 20.
+- Use concepts to describe coordinate transformation classes.
+- Update koliop to [v0.1.2](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.2).
+- Make koliop discoverable with `find_package`.
+- Simplify toolchains by disabling koliop LTO by default.
+- Update Persee toolchains to GCC 13.
+
+### Deprecated
+
+- `PolarBSplines::eval_deriv_r`, `PolarBSplines::eval_deriv_theta`, and `PolarBSplines::eval_deriv_r_and_theta` are deprecated in favour of `PolarBSplines::eval_deriv`.
+- `PolarSplineEvaluator::deriv_dim_1`, `PolarSplineEvaluator::deriv_dim_2`, and `PolarSplineEvaluator::deriv_dim_1_and_2` are deprecated in favour of `PolarSplineEvaluator::deriv`.
+
+### Removed
+
+- Remove unused temporal dimension `T` in `geometryXVx`.
+
+## [v0.4.1] - 2025-12-12
+
+### Fixed
+
+- Allow access to slices extracted from `const DerivField`.
+- Fixed `LAPACKE` CMake target definition.
+- Uses patched cray-mpich package forcing using of the GTL on dependencies.
+
+## [v0.4.0] - 2025-12-10
+
+### Added
+
+- Add getters to `DerivField` types to access the associated index ranges.
+- Add H100 Jean-Zay toolchain.
+- Add an `operator()` in `BslAdvectionPolar` to advect a function with an advection field along `<R, Theta>`.
+The operator averages the values of the advection field on the first ring to get its value at the O-point.
+- Add `static_assert` expressions for spline builder/evaluator pairs.
+- Added `equilibrium::init_from_input` method to choose XVx equililibrium in input file.
+
+### Fixed
+
+- Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
+- Specify return type for Lie-Poisson operator explicitly for better error messages.
+- Ensure `copy_to_vector_space` can be called for different memory layouts.
+
+### Changed
+
+- Use patched recipes for the CPU Spack toolchain.
+- Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
+- Update and reorganize the Persee toolchains.
+- Add pdiplugin-pycall to Persee toolchains.
+- Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
+- Allow a local installation of Kokkos > v4.4.1 to be used by CMake.
+- Rename static variable `is_curvilinear_2d_mapping_v` to the more accurate: `is_coord_transform_with_o_point_v`.
+- Move Python cache files out of the Spack installation tree on Adastra and Jean-Zay.
+- Use CCFR environment variables on CINES and IDRIS machines when possible.
+- Update DDC dependency to v0.9.0.
+- Combine `landau_fft` and `bumpontail_fft` executables into a `vlasovpoisson_xvx_fft` executable.
+- Combine `landau_fem_uniform` and `bumpontail_fem_uniform` executables into a `vlasovpoisson_xvx_fem_uniform` executable.
+- Make the choice of equililibrium an input parameter for `vlasovpoisson_xvx` executables.
+- Move static class method `BumpontailEquilibrium::init_from_input` to namespace `bumpontail_equilibrium::init_from_input`.
+- Move static class method `MaxwellianEquilibrium::init_from_input` to namespace `maxwellian_equilibrium::init_from_input`.
+- Update CPU Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
+- Update Adastra Spack toolchains to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:. Use OpenBLAS instead of Cray LibSci and raw GCC compilers.
+- Update Jean-Zay Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
+- Use LAPACKE to call LAPACK functions.
+
+## [v0.3.0] - 2025-09-03
+
+### Added
+
 - Add a curl operator.
 - Port `PolarSplineEvaluator` methods to GPU.
 - Add methods to `PolarSplineEvaluator` to avoid unnecessary creation of fields of coordinates.
@@ -54,7 +173,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change constructor argument of `PoissonLikeRHSFunction` from the (r, theta) geometry to pass spline coefficients on GPU.
 - Use Spack to install the Kokkos ecosystem in the MI250 Adastra toolchain.
 - Use Spack to install the Kokkos ecosystem in the GENOA Adastra toolchain.
-- Use patched recipes for the CPU Spack toolchain.
+- Use a single rocm stack on Adastra.
 
 ### Deprecated
 

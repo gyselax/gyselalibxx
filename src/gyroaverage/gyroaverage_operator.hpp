@@ -31,6 +31,9 @@ template <
         class ToLogicalCoordTransform>
 class GyroAverageOperator
 {
+    static_assert(
+            ddc::is_evaluator_admissible_v<SplineRThetaBuilder, SplineRThetaEvaluator>,
+            "SplineRThetaEvaluator must be admissible to SplineRThetaBuilder");
     using ExecutionSpace = typename SplineRThetaBuilder::exec_space;
 
     using GridRminor = typename SplineRThetaBuilder::interpolation_discrete_dimension_type1;
@@ -175,7 +178,7 @@ public:
                 typename ExecutionSpace::memory_space,
                 Kokkos::layout_stride>;
 
-        ddc::for_each(batch_idx_range, [&](IdxBatch const ib) {
+        ddc::host_for_each(batch_idx_range, [&](IdxBatch const ib) {
             SubConstDFieldRminorTheta const sub_A = A[ib];
             SubDFieldRminorTheta sub_A_bar = A_bar[ib];
             DFieldMemRminorTheta sub_A_alloc(rtheta_idx_range);

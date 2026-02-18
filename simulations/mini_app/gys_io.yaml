@@ -1,0 +1,37 @@
+FileNames:
+  gysela_io_filename:  plasma1.h5
+
+SplineMesh:
+  Tor1_ncells: 15      # number of points in the radial direction
+  Tor2_ncells: 32      # number of points in the poloidal direction
+  Tor3_ncells: 32      # number of points in the poloidal direction
+  Vpar_ncells: 15     # number of points in the parallel velocity direction
+  Mu_ncells:   9     # number of points in the adiabatic invariant direction
+
+  Tor1_min: 0.0
+  Tor1_max: 1.0
+  Tor2_min: 0.0
+  Tor2_max: 6.283185307179586476925286766559005768394
+  Tor3_min: 0.0
+  Tor3_max: 6.283185307179586476925286766559005768394
+  Vpar_min: -7.0
+  Vpar_max: 7.0
+  Mu_min: 0.0
+  Mu_max: 12.0
+
+SpeciesInfo:
+  - name: 'electron'
+    charge: -1.
+    mass: 0.0005
+    N_maxw: 1.0          # initial constant density
+    T_maxw: 1.0          # initial constant temperature
+    Upar_maxw: 0.0     # initial mean velocity
+  - name: 'ion'
+    charge: 1.
+    mass: 1.
+    N_maxw: 1.0         # initial constant density
+    T_maxw: 1.0         # initial constant temperature 
+    Upar_maxw: 3.0    # initial mean velocity
+
+Application: 
+  version: "mpi_transpose"  # "mpi_transpose"/"in-situ-diagnostic"

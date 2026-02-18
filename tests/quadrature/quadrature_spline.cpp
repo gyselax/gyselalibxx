@@ -72,7 +72,7 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
     ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), values, 1.0);
     double integral = integrate(Kokkos::DefaultExecutionSpace(), get_const_field(values));
     double expected_val = x_max - x_min;
-    EXPECT_LE(abs(integral - expected_val), 1e-15);
+    EXPECT_LE(std::abs(integral - expected_val), 1e-15);
 }
 
 template <std::size_t N>
@@ -156,7 +156,7 @@ TEST(SplineUniformQuadrature, Convergence)
     for (int i(1); i < NTESTS; ++i) {
         EXPECT_LE(error[i], error[i - 1]);
         double order = log(error[i - 1] / error[i]) / log(2.0);
-        double order_error = abs(4 - order);
+        double order_error = std::abs(4 - order);
         EXPECT_LE(order_error, 5e-2);
     }
 }

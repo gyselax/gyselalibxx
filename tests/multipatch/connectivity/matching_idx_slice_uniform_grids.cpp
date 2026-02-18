@@ -68,7 +68,7 @@ public:
 
 
 /*
-    Sticking between edges defined along 
+    Overlapping edges defined along
         - GridX<1> : uniform of 16 cells; 
         - GridX<2> : uniform of 8 cells; 
     Conforming lines:
@@ -106,7 +106,7 @@ TEST_F(MatchingIdxSliceUniformGridTest, OneGridIncludeInTheOther)
 
 
 /*
-    Sticking between edges defined along 
+    Overlapping edges defined along
         - GridY<1> : uniform of 10 cells; 
         - GridY<2> : uniform of 12 cells; 
     Conforming lines:

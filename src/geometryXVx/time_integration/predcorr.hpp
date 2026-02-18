@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "itimesolver.hpp"
 
 class IQNSolver;

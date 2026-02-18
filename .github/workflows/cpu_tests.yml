@@ -30,7 +30,7 @@ on:
       merge_target:
         description: "The branch to which this branch should be compared to filter out costly tests (default: devel)"
         required: false
-        default: origin/devel
+        default: devel
         type: string
 
 concurrency:
@@ -109,7 +109,6 @@ jobs:
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
-      options: --user root
     name: CPU Test (${{ matrix.toolchain }}, ${{ matrix.compiler.name }})
     env:
       CC: ${{ matrix.compiler.c_compiler }}
@@ -119,10 +118,21 @@ jobs:
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: actions/checkout@v4
         with:
-          submodules: recursive
+          submodules: true
       - name: "Filter tests"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/test_filter
+      - name: "Set CMAKE_PREFIX_PATH"
+        if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
+        run: |
+          if [[ "${{ matrix.toolchain}}" == *"openmp"* ]]; then
+            echo "Using OpenMP Kokkos"
+            echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/openmp" >> $GITHUB_ENV
+          else
+            echo "Using serial Kokkos"
+            echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/serial" >> $GITHUB_ENV
+          fi
+        shell: bash
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         uses: ./.github/actions/build_code

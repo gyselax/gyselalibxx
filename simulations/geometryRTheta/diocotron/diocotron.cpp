@@ -22,7 +22,7 @@
 #include "discrete_mapping_builder.hpp"
 #include "discrete_to_cartesian.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "input.hpp"
 #include "l_norm_tools.hpp"
 #include "output.hpp"
@@ -35,6 +35,7 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
@@ -92,7 +93,7 @@ int main(int argc, char** argv)
     IdxRangeRTheta const mesh_rtheta(mesh_r, mesh_theta);
 
     host_t<FieldMemRTheta<CoordRTheta>> coords(mesh_rtheta);
-    ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
         coords(irtheta) = ddc::coordinate(irtheta);
     });
 
@@ -259,7 +260,7 @@ int main(int argc, char** argv)
     host_t<FieldMemRTheta<CoordX>> coords_x(mesh_rtheta);
     host_t<FieldMemRTheta<CoordY>> coords_y(mesh_rtheta);
     host_t<DFieldMemRTheta> jacobian(mesh_rtheta);
-    ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
         CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irtheta));
         coords_x(irtheta) = ddc::select<X>(coords_xy);
         coords_y(irtheta) = ddc::select<Y>(coords_xy);
@@ -272,7 +273,7 @@ int main(int argc, char** argv)
     host_t<DFieldMemRTheta> rho_eq_alloc_host(mesh_rtheta);
 
     // Initialise rho and rho equilibrium ****************************
-    ddc::for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(mesh_rtheta, [&](IdxRTheta const irtheta) {
         rho_alloc_host(irtheta) = exact_rho.initialisation(coords(irtheta));
         rho_eq_alloc_host(irtheta) = exact_rho.equilibrium(coords(irtheta));
     });
