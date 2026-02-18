@@ -309,12 +309,12 @@ public:
         std::vector<Coord<Xg>> interpolation_points_xg;
 
         break_points_x147.pop_back();
-        interpolation_points_x147.pop_back();
+        // interpolation_points_x147.pop_back();
         fill_in(break_points_xg, break_points_x147);
         fill_in(interpolation_points_xg, interpolation_points_x147);
 
         break_points_x258.pop_back();
-        interpolation_points_x258.pop_back();
+        // interpolation_points_x258.pop_back();
         fill_in(break_points_xg, break_points_x258);
         fill_in(interpolation_points_xg, interpolation_points_x258);
 
