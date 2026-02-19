@@ -24,7 +24,7 @@ template<
         typename QDimThetaMesh, 
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler{
-    TODO: Add a batch loop to operator()
+    // TODO: Add a batch loop to operator()
     static_assert(
             std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
             "PolarSplineFEMPoissonLikeAssembler is not yet batched");
@@ -146,14 +146,10 @@ private:
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
-// TODO: Encapsulate
-public:
     Field<double, IdxRangeQuadratureRTheta> m_int_volume;
 
 public:
-    template<typename Mapping>
     explicit PolarSplineFEMPoissonLikeAssembler(
-            Mapping const& mapping, // TODO: Not used
             Field<double, IdxRangeQuadratureRTheta> int_volume
             )
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
@@ -760,6 +756,7 @@ public:
                 });
     }
 
+    // DUPLICATED from PolarSplineFEMPoissonLikeSolver
     /**
      * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction .
      *
@@ -777,6 +774,7 @@ public:
         return idx_theta;
     }
 
+    // DUPLICATED from PolarSplineFEMPoissonLikeSolver
     /**
      * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
      *
@@ -800,6 +798,7 @@ public:
         return idx;
     }
 
+    // DUPLICATED from PolarSplineFEMPoissonLikeSolver
     /**
      * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
      *
@@ -1022,6 +1021,7 @@ public:
         return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
     }
 
+    // DUPLICATED from PolarSplineFEMPoissonLikeSolver
     /**
      * @brief Compute the quadrature range between a provided set of knots.
      *
@@ -1407,7 +1407,7 @@ public:
                 SplineRThetaEvaluatorNullBound,
                 QDimRMesh,
                 QDimThetaMesh>;
-        PoissonAssembler assembler(mapping, get_field(m_int_volume_alloc));
+        PoissonAssembler assembler(get_field(m_int_volume_alloc));
         assembler(
                 m_gko_matrix,
                 coeff_alpha,
