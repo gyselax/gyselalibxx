@@ -26,10 +26,10 @@ template<
         typename QDimThetaMesh, 
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler{
-    // TODO: Add a batch loop to operator()
-    // static_assert(
-    //         std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
-    //         "PolarSplineFEMPoissonLikeSolver is not yet batched");
+    TODO: Add a batch loop to operator()
+    static_assert(
+            std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
+            "PolarSplineFEMPoissonLikeAssembler is not yet batched");
 
 public:
     /// The radial dimension
@@ -39,19 +39,6 @@ public:
 
     static_assert(R::IS_CONTRAVARIANT);
     static_assert(Theta::IS_CONTRAVARIANT);
-
-//     /**
-//      * @brief Tag the first dimension for the quadrature mesh.
-//      */
-//     struct QDimRMesh : NonUniformGridBase<R>
-//     {
-//     };
-//     /**
-//      * @brief Tag the second dimension for the quadrature mesh.
-//      */
-//     struct QDimThetaMesh : NonUniformGridBase<Theta>
-//     {
-//     };
 
     /// The tag for the batch dimension for the equation. This is public due to Cuda.
     struct InternalBatchDim
@@ -72,10 +59,7 @@ private:
     using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
     using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
 
-    // using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
-    // using IdxRTheta = Idx<GridR, GridTheta>;
-
-    // /// The type of an index range over the polar B-splines
+    /// The type of an index range over the polar B-splines
     using IdxRangeBSPolar = IdxRange<PolarBSplinesRTheta>;
     using IdxBSPolar = Idx<PolarBSplinesRTheta>;
     using IdxStepBSPolar = IdxStep<PolarBSplinesRTheta>;
@@ -97,8 +81,6 @@ private:
                     ddc::to_type_seq_t<IdxRangeFull>,
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
-
-    // using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, IdxRange<GridR>, IdxRange<GridTheta>>;
 
     // /**
     //  * @brief Tag the quadrature index range in the first dimension.
@@ -134,12 +116,6 @@ private:
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
     using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
-    // using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
-    // using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
-
-    // using CoordFieldMemRTheta = FieldMem<CoordRTheta, IdxRangeRTheta>;
-    // using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
-    // using DFieldRTheta = DField<IdxRangeRTheta>;
 
 private: 
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
@@ -170,7 +146,6 @@ private:
     IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
-    // mutable DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> m_x_init_alloc;
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
 // TODO: Encapsulate
@@ -180,7 +155,7 @@ public:
 public:
     template<typename Mapping>
     explicit PolarSplineFEMPoissonLikeAssembler(
-            Mapping const& mapping,
+            Mapping const& mapping, // TODO: Not used
             Field<double, IdxRangeQuadratureRTheta> int_volume
             )
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
@@ -648,7 +623,7 @@ public:
      * the quadrature point given by the indices.
      */
     template <class Mapping>
-    static KOKKOS_FUNCTION double weak_integral_element(
+    static KOKKOS_FUNCTION double weak_integral_element( // TODO: Rename!
             IdxBSPolar idx_test,
             IdxBSPolar idx_trial,
             IdxQuadratureRTheta idx_quad,
