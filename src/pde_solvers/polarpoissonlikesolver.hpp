@@ -15,8 +15,6 @@
 #include "view.hpp"
 #include "volume_quadrature_nd.hpp"
 
-#include <chrono>
-
 template<
         typename GridR,
         typename GridTheta,
@@ -198,7 +196,6 @@ public:
     {
         // Number of elements in the matrix that correspond to the splines
         // that cover the singular point
-        auto start_time = std::chrono::system_clock::now();
         constexpr int n_elements_singular
                 = PolarBSplinesRTheta::n_singular_basis() * PolarBSplinesRTheta::n_singular_basis();
         // Number of non-zero elements in the matrix corresponding to the inner product of
@@ -275,12 +272,6 @@ public:
         Kokkos::deep_copy(col_idx, col_idx_csr_host);
         Kokkos::deep_copy(nnz_per_row, nnz_per_row_csr_host);
         gko_matrix->setup_solver();
-
-        auto end_time = std::chrono::system_clock::now();
-        std::cout << "Assembly time : "
-                << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time)
-                            .count()
-                << "ms" << std::endl;
     }
 
 
@@ -1416,9 +1407,7 @@ public:
                 SplineRThetaEvaluatorNullBound,
                 QDimRMesh,
                 QDimThetaMesh>;
-        auto start_time = std::chrono::system_clock::now();
-
-        [[maybe_unused]] PoissonAssembler assembler(mapping, get_field(m_int_volume_alloc));
+        PoissonAssembler assembler(mapping, get_field(m_int_volume_alloc));
         assembler(
                 m_gko_matrix,
                 coeff_alpha,
@@ -1426,11 +1415,6 @@ public:
                 mapping,
                 spline_evaluator
         );
-        auto end_time = std::chrono::system_clock::now();
-        std::cout << "Assembly time : "
-        << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time)
-                    .count()
-        << "ms" << std::endl;
     }
 
     /**
