@@ -126,7 +126,7 @@ jobs:
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}
-    name: CPU Test (${{ matrix.toolchain }}, ${{ matrix.compiler.name }})
+    name: CPU Test (${{ matrix.backend }}, ${{ matrix.toolchain }}, ${{ matrix.compiler.name }})
     env:
       CC: ${{ matrix.compiler.c_compiler }}
       CXX: ${{ matrix.compiler.cxx_compiler }}
@@ -142,13 +142,7 @@ jobs:
       - name: "Set CMAKE_PREFIX_PATH"
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
         run: |
-          if [[ "${{ matrix.backend}}" == "openmp" ]]; then
-            echo "Using OpenMP Kokkos"
-            echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/openmp" >> $GITHUB_ENV
-          else
-            echo "Using serial Kokkos"
-            echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/serial" >> $GITHUB_ENV
-          fi
+          echo "CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/${{matrix.backend}}" >> $GITHUB_ENV
         shell: bash
       - name: Build code
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
