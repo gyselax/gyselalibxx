@@ -97,7 +97,7 @@ if(NOT "${DDC_FOUND}")
 endif()
 
 #TODO: Remove when PDI v1.11 is released to keep basic find_packages grouped
-if (NOT TARGET PDI::pdi)
+if (NOT TARGET PDI::PDI_C)
   find_package(PDI REQUIRED COMPONENTS C)
 endif()
 
