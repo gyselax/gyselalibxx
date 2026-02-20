@@ -3575,6 +3575,30 @@
     <member refid="geometry__vpar__mu_8hpp_1aff964a13fb61d1b733112d19f406a7ff" kind="typedef"><name>ConstFieldSpVpar</name></member>
     <member refid="geometry__vpar__mu_8hpp_1a6e9da85e3513337856b2f4d91575997f" kind="typedef"><name>DConstFieldSpVpar</name></member>
   </compound>
+  <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
+  </compound>
+  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
+  </compound>
+  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
+  </compound>
   <compound refid="noperturbinitialisation_8cpp" kind="file"><name>noperturbinitialisation.cpp</name>
   </compound>
   <compound refid="noperturbinitialisation_8hpp" kind="file"><name>noperturbinitialisation.hpp</name>
@@ -3674,30 +3698,6 @@
   <compound refid="bumpontailequilibrium_8hpp" kind="file"><name>bumpontailequilibrium.hpp</name>
   </compound>
   <compound refid="iequilibrium_8cpp" kind="file"><name>iequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2iequilibrium_8hpp" kind="file"><name>iequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2iinitialisation_8hpp" kind="file"><name>iinitialisation.hpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8cpp" kind="file"><name>maxwellianequilibrium.cpp</name>
-  </compound>
-  <compound refid="geometryVparMu_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
-  </compound>
-  <compound refid="geometryXYVxVy_2initialisation_2maxwellianequilibrium_8hpp" kind="file"><name>maxwellianequilibrium.hpp</name>
   </compound>
   <compound refid="restartinitialisation_8cpp" kind="file"><name>restartinitialisation.cpp</name>
   </compound>
