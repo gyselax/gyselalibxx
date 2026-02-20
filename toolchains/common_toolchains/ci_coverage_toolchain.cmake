@@ -5,11 +5,10 @@ include(${CMAKE_CURRENT_LIST_DIR}/importable_defaults.cmake)
 set(CMAKE_BUILD_TYPE Debug)
 
 # Compiler options
-set(CMAKE_CXX_FLAGS_INIT "-Og --coverage -fprofile-update=atomic -g")
+set(CMAKE_CXX_FLAGS_INIT "-Og --coverage -fprofile-update=atomic")
 
-# Kokkos options
-set(Kokkos_ENABLE_SERIAL ON CACHE BOOL "Allow serial code to run" FORCE)
+# Gyselalibxx options
+set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specific to Gyselalib++" FORCE)
 
 # Activate/deactivate parts of the code
-set(BUILD_BENCHMARKS OFF)
 set(ACTIVATE_RESTART_TESTS ON)

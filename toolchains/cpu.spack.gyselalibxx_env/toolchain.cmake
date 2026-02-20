@@ -11,5 +11,4 @@ set(CMAKE_BUILD_TYPE Release)
 set(CMAKE_CXX_FLAGS_INIT "-Wall -Wno-sign-compare")
 
 # Activate/deactivate parts of the code
-set(BUILD_BENCHMARKS ON)
 set(ACTIVATE_RESTART_TESTS ON)
