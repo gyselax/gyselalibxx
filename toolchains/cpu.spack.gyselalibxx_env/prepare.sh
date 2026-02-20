@@ -36,7 +36,6 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # Activate spack
 . ${SPACK_PATH}/share/spack/setup-env.sh
 
-# Reduce the naming scheme of packages to avoid shebang issues.
 # Increase the time out that is by default too short for some packages (like PDI)
 spack config --scope site add 'config:connect_timeout:60'
 
@@ -53,12 +52,14 @@ else
       spack install gcc@11
       spack load gcc@11
       spack compiler find
+      spack unload gcc@11
   fi
 
   COMPILER='gcc@11:'
 fi
 
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.1.0.yaml
+spack --env gyselalibxx-env config --scope env:gyselalibxx-env add packages:all:target:[$(spack arch --family --target)]
 spack --env gyselalibxx-env install --jobs 2
 spack env activate -p gyselalibxx-env
 PYTHON_EXECUTABLE=$(which python3)
