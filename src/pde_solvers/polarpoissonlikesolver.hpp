@@ -15,15 +15,16 @@
 #include "view.hpp"
 #include "volume_quadrature_nd.hpp"
 
-template<
+template <
         typename GridR,
         typename GridTheta,
         typename PolarBSplinesRTheta,
-        typename SplineRThetaEvaluatorNullBound, 
-        typename QDimRMesh, 
-        typename QDimThetaMesh, 
+        typename SplineRThetaEvaluatorNullBound,
+        typename QDimRMesh,
+        typename QDimThetaMesh,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
-class PolarSplineFEMPoissonLikeAssembler{
+class PolarSplineFEMPoissonLikeAssembler
+{
     // TODO: Add a batch loop to operator()
     static_assert(
             std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
@@ -42,12 +43,14 @@ public:
     struct InternalBatchDim
     {
     };
-    
+
 private:
     /// The radial dimension
     using R_cov = typename R::Dual;
     /// The poloidal dimension
-    using Theta_cov = typename Theta::Dual;private:
+    using Theta_cov = typename Theta::Dual;
+
+private:
     // using CoordRTheta = Coord<R, Theta>;
     /// The 1D B-splines in the radial direction
     using BSplinesR = typename PolarBSplinesRTheta::BSplinesR_tag;
@@ -115,7 +118,7 @@ private:
 
     using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
 
-private: 
+private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
     static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
     // The number of cells (in the radial direction) in which both types of basis splines can be found
@@ -124,7 +127,7 @@ private:
     // Number of cells over which a radial B-splines has its support
     // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
     static constexpr int m_n_non_zero_bases_r = BSplinesR::degree() + 1;
-    
+
     // Number of cells over which a poloidal B-splines has its support
     static constexpr int m_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
 
@@ -149,9 +152,7 @@ private:
     Field<double, IdxRangeQuadratureRTheta> m_int_volume;
 
 public:
-    explicit PolarSplineFEMPoissonLikeAssembler(
-            Field<double, IdxRangeQuadratureRTheta> int_volume
-            )
+    explicit PolarSplineFEMPoissonLikeAssembler(Field<double, IdxRangeQuadratureRTheta> int_volume)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
@@ -178,9 +179,11 @@ public:
         , m_int_volume(int_volume)
     {
     }
-    template<typename Mapping>
+    template <typename Mapping>
     void operator()(
-            std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>& gko_matrix,
+            std::unique_ptr<
+                    MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>&
+                    gko_matrix,
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
@@ -233,7 +236,7 @@ public:
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
         Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
-        
+
         std::cout << "Compute singular entries." << std::endl;
         compute_singular_elements(
                 coeff_alpha,
@@ -867,7 +870,7 @@ public:
             }
         }
     }
-    
+
     /**
      * @brief Fills the nnz data structure by computing the number of non-zero per line.
      * This number is linked to the weak formulation and depends on @f$(r,\theta)@f$ splines.
@@ -1080,7 +1083,6 @@ public:
 
         return IdxRangeQuadratureRTheta(q_range_r, q_range_theta);
     }
-    
 };
 
 
@@ -1399,22 +1401,16 @@ public:
                 mapping,
                 gauss_legendre_quadrature_coefficients<
                         Kokkos::DefaultExecutionSpace>(gl_coeffs_r, gl_coeffs_theta));
-        
+
         using PoissonAssembler = PolarSplineFEMPoissonLikeAssembler<
-                GridR, 
-                GridTheta, 
-                PolarBSplinesRTheta, 
+                GridR,
+                GridTheta,
+                PolarBSplinesRTheta,
                 SplineRThetaEvaluatorNullBound,
                 QDimRMesh,
                 QDimThetaMesh>;
         PoissonAssembler assembler(get_field(m_int_volume_alloc));
-        assembler(
-                m_gko_matrix,
-                coeff_alpha,
-                coeff_beta,
-                mapping,
-                spline_evaluator
-        );
+        assembler(m_gko_matrix, coeff_alpha, coeff_beta, mapping, spline_evaluator);
     }
 
     /**
