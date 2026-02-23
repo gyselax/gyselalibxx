@@ -53,11 +53,18 @@ public:
 
     /// @brief The type of the interpolation discrete dimension (discrete dimension of interest) used by this class.
     using typename base_type::interpolation_grid_type;
+
     /// @brief The type of the domain for the 1D interpolation mesh used by this class.
-    using typename base_type::interpolation_domain_type;
+    using typename base_type::interpolation_idx_range_type;
 
     /// @brief The grid on which the interpolation coefficients should be provided.
     using typename base_type::basis_domain_type;
+
+    /// @brief The type of the Deriv dimension at the boundaries.
+    using typename base_type::deriv_type;
+
+    /// @brief The type of the derivatives index range
+    using typename base_type::batched_derivs_idx_range_type;
 
 public:
     /// @brief The number of equations defining the boundary condition at the lower bound.
@@ -83,18 +90,16 @@ public:
      *                  (unused in this class).
      */
     void operator()(
-            Field<DataType,
-                  typename base_type::batched_basis_domain_type<BatchedInterpolationIdxRange>,
-                  memory_space> coeffs,
+            Field<DataType, typename base_type::batched_basis_idx_range_type, memory_space> coeffs,
             ConstField<DataType, BatchedInterpolationIdxRange, memory_space> vals,
             std::optional<ConstField<
                     DataType,
-                    typename base_type::batched_derivs_domain_type<BatchedInterpolationIdxRange>,
+                    typename base_type::batched_derivs_idx_range_type,
                     memory_space>> derivs_xmin
             = std::nullopt,
             std::optional<ConstField<
                     DataType,
-                    typename base_type::batched_derivs_domain_type<BatchedInterpolationIdxRange>,
+                    typename base_type::batched_derivs_idx_range_type,
                     memory_space>> derivs_xmax
             = std::nullopt) const final
     {
@@ -107,12 +112,45 @@ public:
         if constexpr (Basis::is_periodic()) {
             IdxRange<basis_domain_type> extended_domain(
                     ddc::discrete_space<Basis>().full_domain().remove_first(
-                        bp_idx_range.extents()));
-            typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(extended_domain.size());
+                            bp_idx_range.extents()));
+            typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(
+                    extended_domain.size());
             BatchedInterpolationIdxRange repeat_domain(get_idx_range(vals).take_first(nrepeat));
             Kokkos::deep_copy(
                     coeffs[extended_domain].allocation_kokkos_view(),
                     vals[repeat_domain].allocation_kokkos_view());
         }
+    }
+
+    /**
+     * @brief Get the whole domain on which derivatives on lower boundary are defined.
+     *
+     * This is only used with BoundCond::HERMITE boundary conditions.
+     *
+     * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
+     *
+     * @return The domain for the Derivs values.
+     */
+    batched_derivs_idx_range_type batched_derivs_xmin_domain(
+            BatchedInterpolationIdxRange const& batched_interpolation_domain) const noexcept final
+    {
+        IdxRange<deriv_type> empty_deriv_range(Idx<deriv_type>(0), IdxStep<deriv_type>(0));
+        return batched_derivs_idx_range_type(empty_deriv_range, batched_interpolation_domain);
+    }
+
+    /**
+     * @brief Get the whole domain on which derivatives on upper boundary are defined.
+     *
+     * This is only used with BoundCond::HERMITE boundary conditions.
+     *
+     * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
+     *
+     * @return The domain for the Derivs values.
+     */
+    batched_derivs_idx_range_type batched_derivs_xmax_domain(
+            BatchedInterpolationIdxRange const& batched_interpolation_domain) const noexcept final
+    {
+        IdxRange<deriv_type> empty_deriv_range(Idx<deriv_type>(0), IdxStep<deriv_type>(0));
+        return batched_derivs_idx_range_type(empty_deriv_range, batched_interpolation_domain);
     }
 };
