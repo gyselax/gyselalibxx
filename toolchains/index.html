@@ -611,13 +611,15 @@
 <h2 id="cloning-the-repository">Cloning the Repository</h2>
 <p>To get started with Gyselalib++, you'll need to clone the repository along with its submodules. You can do this using either SSH or HTTPS:</p>
 <h3 id="ssh-method-required-for-developers-who-want-to-push-to-the-repository">SSH Method (required for developers who want to push to the repository)</h3>
-<pre><code class="language-bash">git clone --recurse-submodules git@github.com:gyselax/gyselalibxx.git gyselalibxx
+<pre><code class="language-bash">git clone git@github.com:gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
+./bin/submodules_sync
 ./bin/install-hooks
 </code></pre>
 <h3 id="https-method">HTTPS Method</h3>
-<pre><code class="language-bash">git clone --recurse-submodules https://github.com/gyselax/gyselalibxx.git gyselalibxx
+<pre><code class="language-bash">git clone https://github.com/gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
+./bin/submodules_sync
 ./bin/install-hooks
 </code></pre>
 <p>The <code>install-hooks</code> script sets up necessary git hooks for the repository.</p>
