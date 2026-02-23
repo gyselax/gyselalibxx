@@ -125,6 +125,7 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
     using Builder = IdentityInterpolationBuilder<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
+            DataType,
             GridX,
             LagBasis>;
     using Evaluator = LagrangeEvaluator<
@@ -210,6 +211,7 @@ DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> t
     using Builder = IdentityInterpolationBuilder<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
+            DataType,
             GridType,
             LagBasis>;
     using Evaluator = LagrangeEvaluator<
