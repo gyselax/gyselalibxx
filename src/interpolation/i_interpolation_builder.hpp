@@ -1,7 +1,30 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <type_traits>
+
 #include "ddc_aliases.hpp"
+
+namespace detail {
+
+// Primary template: when Impl::knot_grid doesn't exist, the Basis IS its own domain (e.g. BSplines).
+template <class Basis, class MemorySpace, class = void>
+struct basis_domain_type_helper
+{
+    using type = Basis;
+};
+
+// Specialization: when Impl::knot_grid exists, use it (e.g. LagrangeBasis).
+template <class Basis, class MemorySpace>
+struct basis_domain_type_helper<
+        Basis,
+        MemorySpace,
+        std::void_t<typename Basis::template Impl<Basis, MemorySpace>::knot_grid>>
+{
+    using type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
+};
+
+} // namespace detail
 
 template <
         class ExecSpace,
@@ -29,7 +52,7 @@ public:
     using interpolation_idx_range_type = IdxRange<interpolation_grid_type>;
 
     /// @brief The grid on which the interpolation coefficients should be provided.
-    using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
+    using basis_domain_type = typename detail::basis_domain_type_helper<Basis, MemorySpace>::type;
 
     /// @brief The type of the Deriv dimension at the boundaries.
     using deriv_type = ddc::Deriv<continuous_dimension_type>;
