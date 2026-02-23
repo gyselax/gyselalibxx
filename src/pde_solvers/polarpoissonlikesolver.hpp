@@ -174,10 +174,11 @@ private:
     Field<double, IdxRangeQuadratureRTheta> m_int_volume;
 
 public:
+    //TODO: Add mapping parameter to check consistency.
     /**
      * @brief Instantiate the assembler operator.
      *
-     * @param int_volume The initialized field of Jacobian values of the mapping. //TODO: Add as parameter to check consistency
+     * @param int_volume The initialised field of Jacobian values of the mapping. 
      */
     explicit PolarSplineFEMPoissonLikeAssembler(Field<double, IdxRangeQuadratureRTheta> int_volume)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
