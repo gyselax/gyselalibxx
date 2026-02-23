@@ -15,6 +15,28 @@
 #include "view.hpp"
 #include "volume_quadrature_nd.hpp"
 
+
+/**
+ * @brief An operator to assemble a Poisson-like stiffness matrix using polar B-splines.
+ * 
+ * Assemble the finite element stiffness matrix with entries 
+ * @f$ \int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx @f$
+ * for @f$0 < i,j < N @f$ where @f$ N @f$ is the number of polar splines. We only consider 
+ * splines that vanish on the boundary.
+ * 
+ * For more details see the `PolarSplineFEMPoissonLikeSolver` and Emily Bourne's thesis 
+ * ("Non-Uniform Numerical Schemes for the Modelling of Turbulence
+ * in the 5D GYSELA Code". December 2022.)
+ * @tparam GridR The radial grid type.
+ * @tparam GridR The poloidal grid type.
+ * @tparam PolarBSplinesRTheta The type of the 2D polar B-splines (on the coordinate
+ *          system @f$(r,\theta)@f$ including B-splines which traverse the O point).
+ * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
+ * @tparam QDimRMesh The radial quadrature grid type.
+ * @tparam QDimThetaMesh The poloidal quadrature grid type.
+ * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
+ */
+
 template <
         typename GridR,
         typename GridTheta,
@@ -152,6 +174,11 @@ private:
     Field<double, IdxRangeQuadratureRTheta> m_int_volume;
 
 public:
+    /**
+     * @brief Instantiate the assembler operator.
+     *
+     * @param int_volume The initialized field of Jacobian values of the mapping. //TODO: Add as parameter to check consistency
+     */
     explicit PolarSplineFEMPoissonLikeAssembler(Field<double, IdxRangeQuadratureRTheta> int_volume)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
@@ -179,6 +206,34 @@ public:
         , m_int_volume(int_volume)
     {
     }
+    /**
+     * @brief Assemble the stiffness matrix.
+     * 
+     * @param[out] gko_matrix The pointer to the assembled matrix.
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] mapping
+     *      The mapping from the logical domain to the physical domain where
+     *      the equation is defined.
+     * @param[in] spline_evaluator
+     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[in] max_iter
+     *      The maximum number of iterations possible for the batched CSR solver.
+     * @param[in] res_tol
+     *      The residual tolerance for the batched CSR solver. Be careful! the relative residual
+     *      provided here, will be used as "implicit residual" in ginkgo solver.
+     * @param[in] batch_solver_logger
+     *      Indicates whether log information such as the residual and the number of iterations
+     *      should be monitored.
+     * @param[in] preconditioner_max_block_size
+     *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
+     *
+     * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
+     */
     template <typename Mapping>
     void operator()(
             std::unique_ptr<
@@ -1018,7 +1073,12 @@ public:
 
         Kokkos::Profiling::popRegion();
     }
-
+    /**
+     * @brief Convert a 2D (r,theta) bspline index into a polar bspline index.
+     *
+     * @param[in] idx The 2D (r,theta) bspline index.
+     * @return The polar bspline index.
+     */
     static KOKKOS_INLINE_FUNCTION IdxBSPolar to_polar(IdxBSRTheta idx)
     {
         return PolarBSplinesRTheta::template get_polar_index<PolarBSplinesRTheta>(idx);
