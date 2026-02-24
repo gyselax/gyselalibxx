@@ -118,7 +118,11 @@ public:
     {
         ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
         ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
-        ddc::init_discrete_space<LagBasisX>(SplineInterpPointsX::get_domain<GridX>());
+        IdxRangeX interpolation_idx_range(SplineInterpPointsX::get_domain<GridX>());
+        IdxRangeX lagrange_break_point_idx_range(
+                interpolation_idx_range.front(),
+                interpolation_idx_range.extents() + 1);
+        ddc::init_discrete_space<LagBasisX>(lagrange_break_point_idx_range);
     }
 
     template <class AdvectionOperator>
