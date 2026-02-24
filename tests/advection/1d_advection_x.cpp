@@ -14,7 +14,6 @@
 #include "lagrange_basis_uniform.hpp"
 #include "lagrange_evaluator.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator.hpp"
 #include "vector_field_common.hpp"
 
 namespace {
@@ -198,13 +197,16 @@ TEST_F(XAdvection1DTest, AdvectionX)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const
-            spline_interpolator(builder, spline_evaluator, interpolation_idx_range);
-
-
     RK2Builder time_stepper;
-    BslAdvection1D<GridX, IdxRangeX, IdxRangeX, SplineXBuilder, SplineXEvaluator, RK2Builder> const
-            advection(spline_interpolator, builder, spline_evaluator, time_stepper);
+    BslAdvection1D<
+            GridX,
+            IdxRangeX,
+            IdxRangeX,
+            SplineXBuilder,
+            SplineXEvaluator,
+            SplineXBuilder,
+            SplineXEvaluator,
+            RK2Builder> const advection(builder, spline_evaluator, builder, spline_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);
@@ -221,15 +223,19 @@ TEST_F(XAdvection1DTest, AdvectionXLagrange)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const
-            spline_interpolator(function_builder, spline_evaluator, interpolation_idx_range);
-
     LagBuilderX const lag_builder;
     LagEvaluatorX const lag_evaluator(bv_x_min, bv_x_max);
 
     RK2Builder time_stepper;
-    BslAdvection1D<GridX, IdxRangeX, IdxRangeX, LagBuilderX, LagEvaluatorX, RK2Builder> const
-            advection(spline_interpolator, lag_builder, lag_evaluator, time_stepper);
+    BslAdvection1D<
+            GridX,
+            IdxRangeX,
+            IdxRangeX,
+            SplineXBuilder,
+            SplineXEvaluator,
+            LagBuilderX,
+            LagEvaluatorX,
+            RK2Builder> const advection(function_builder, spline_evaluator, lag_builder, lag_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-2);
