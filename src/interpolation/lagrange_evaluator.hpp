@@ -81,8 +81,8 @@ public:
     template <
             class BatchedInterpolationIdxRange,
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationIdxRange>>>
-    using batched_coeff_idx_range_type
-            = ddc::replace_dim_of_t<BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type>;
+    using batched_coeff_idx_range_type = ddc::
+            replace_dim_of_t<BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type>;
 
     /// @brief The type of the extrapolation rule at the lower boundary.
     using lower_extrapolation_rule_type = LowerExtrapolationRule;

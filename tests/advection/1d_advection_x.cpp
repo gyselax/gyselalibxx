@@ -229,6 +229,6 @@ TEST_F(XAdvection1DTest, AdvectionXLagrange)
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-2);
-    std::cout << "Lagrange test on " << x_size << " grid: max relative error = "
-              << max_relative_error << std::endl;
+    std::cout << "Lagrange test on " << x_size
+              << " grid: max relative error = " << max_relative_error << std::endl;
 }

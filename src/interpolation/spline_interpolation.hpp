@@ -150,9 +150,11 @@ public:
             Field<DataType, batched_basis_idx_range_type<D>, memory_space> coeffs,
             ConstField<DataType, D, memory_space> vals,
             std::optional<ConstField<DataType, batched_derivs_idx_range_type<D>, memory_space>>
-                    derivs_xmin = std::nullopt,
+                    derivs_xmin
+            = std::nullopt,
             std::optional<ConstField<DataType, batched_derivs_idx_range_type<D>, memory_space>>
-                    derivs_xmax = std::nullopt) const
+                    derivs_xmax
+            = std::nullopt) const
     {
         m_builder(coeffs, vals, derivs_xmin, derivs_xmax);
     }
