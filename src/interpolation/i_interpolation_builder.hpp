@@ -42,14 +42,14 @@ struct InterpolationBuilderTraits
     using basis_domain_type = typename Builder::basis_domain_type;
 
     /// @brief Batched domain with interpolation_grid_type replaced by basis_domain_type.
-    template <class BatchedInterpolationIdxRange>
+    template <class IdxRangeBatchedInterpolation>
     using batched_basis_idx_range_type =
-            typename Builder::template batched_basis_idx_range_type<BatchedInterpolationIdxRange>;
+            typename Builder::template batched_basis_idx_range_type<IdxRangeBatchedInterpolation>;
 
     /// @brief Batched domain with interpolation_grid_type replaced by deriv_type.
-    template <class BatchedInterpolationIdxRange>
+    template <class IdxRangeBatchedInterpolation>
     using batched_derivs_idx_range_type =
-            typename Builder::template batched_derivs_idx_range_type<BatchedInterpolationIdxRange>;
+            typename Builder::template batched_derivs_idx_range_type<IdxRangeBatchedInterpolation>;
 };
 
 /**
@@ -105,14 +105,14 @@ public:
     using basis_domain_type = typename Builder::bsplines_type;
 
     /// @brief Batched domain with InterpolationDDim replaced by BSplines.
-    template <class BatchedInterpolationIdxRange>
+    template <class IdxRangeBatchedInterpolation>
     using batched_basis_idx_range_type =
-            typename Builder::template batched_spline_domain_type<BatchedInterpolationIdxRange>;
+            typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
 
     /// @brief Batched domain with InterpolationDDim replaced by deriv_type.
-    template <class BatchedInterpolationIdxRange>
+    template <class IdxRangeBatchedInterpolation>
     using batched_derivs_idx_range_type =
-            typename Builder::template batched_derivs_domain_type<BatchedInterpolationIdxRange>;
+            typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
 };
 
 /**
@@ -125,10 +125,10 @@ public:
  * @param batched_interpolation_domain The batched interpolation domain.
  * @return The batched basis index range.
  */
-template <class Builder, class BatchedInterpolationIdxRange>
+template <class Builder, class IdxRangeBatchedInterpolation>
 auto batched_basis_idx_range(
         Builder const& builder,
-        BatchedInterpolationIdxRange const& batched_interpolation_domain)
+        IdxRangeBatchedInterpolation const& batched_interpolation_domain)
 {
     if constexpr (requires { builder.batched_spline_domain(batched_interpolation_domain); }) {
         return builder.batched_spline_domain(batched_interpolation_domain);
