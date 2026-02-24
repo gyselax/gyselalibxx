@@ -17,16 +17,18 @@ To get started with Gyselalib++, you'll need to clone the repository along with 
 ### SSH Method (required for developers who want to push to the repository)
 
 ```bash
-git clone --recurse-submodules git@github.com:gyselax/gyselalibxx.git gyselalibxx
+git clone git@github.com:gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
+./bin/submodules_sync
 ./bin/install-hooks
 ```
 
 ### HTTPS Method
 
 ```bash
-git clone --recurse-submodules https://github.com/gyselax/gyselalibxx.git gyselalibxx
+git clone https://github.com/gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
+./bin/submodules_sync
 ./bin/install-hooks
 ```
 
