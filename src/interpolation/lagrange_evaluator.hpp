@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include "i_interpolation_evaluator.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
 
@@ -33,6 +34,9 @@ public:
 
     /// @brief The type of the Kokkos memory space used by this class.
     using memory_space = MemorySpace;
+
+    /// @brief The data type that the data is saved on.
+    using data_type = DataType;
 
     /// @brief The type of the evaluation continuous dimension (continuous dimension of interest) used by this class.
     using continuous_dimension_type = typename LagrangeBasis::continuous_dimension_type;
@@ -445,4 +449,6 @@ private:
             return elm_cell;
         }
     }
+
+    static_assert(concepts::InterpolationEvaluator<LagrangeEvaluator>);
 };
