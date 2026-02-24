@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include "lagrange_basis_non_uniform.hpp"
+#include "lagrange_basis_uniform.hpp"
 
 /**
  * @brief A class to evaluate, differentiate or integrate a Lagrange function.
