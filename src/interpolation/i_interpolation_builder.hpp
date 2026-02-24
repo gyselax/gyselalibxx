@@ -16,22 +16,14 @@
  * Specialise this struct to adapt external builders whose alias names differ from
  * the convention (e.g. ddc::SplineBuilder).
  *
- * Required type aliases in the primary template (or a specialisation):
- *   - exec_space                   : Kokkos execution space
- *   - memory_space                 : Kokkos memory space
- *   - continuous_dimension_type    : the continuous dimension being interpolated
- *   - interpolation_grid_type      : the discrete grid on which values are given
- *   - interpolation_idx_range_type : 1D index range for the interpolation mesh
- *   - basis_domain_type            : discrete dimension for the interpolation coefficients
- *   - deriv_type                   : ddc::Deriv tag for the boundary derivative dimension
- *   - batched_basis_idx_range_type<D>  : D with interpolation_grid_type replaced by basis_domain_type
- *   - batched_derivs_idx_range_type<D> : D with interpolation_grid_type replaced by deriv_type
- *
  * @tparam Builder The interpolation builder type.
  */
 template <class Builder>
 struct InterpolationBuilderTraits
 {
+    /// @brief The data type that the data is saved on.
+    using data_type = typename Builder::data_type;
+
     /// @brief The discrete grid on which interpolation values are given.
     using interpolation_grid_type = typename Builder::interpolation_grid_type;
 
@@ -95,6 +87,9 @@ private:
             Solver>;
 
 public:
+    /// @brief The data type that the data is saved on.
+    using data_type = double;
+
     /// @brief The discrete grid on which interpolation values are given.
     using interpolation_grid_type = typename Builder::interpolation_discrete_dimension_type;
 
@@ -150,27 +145,6 @@ namespace concepts {
  * primary template delegating to Builder's own aliases and can be specialised for
  * external builders (e.g. ddc::SplineBuilder).
  *
- * A type satisfies this concept if InterpolationBuilderTraits<Builder> exposes:
- *
- * Non-template type aliases:
- *   - exec_space                   : Kokkos execution space
- *   - memory_space                 : Kokkos memory space
- *   - continuous_dimension_type    : the continuous dimension being interpolated
- *   - interpolation_grid_type      : the discrete grid on which values are given
- *   - interpolation_idx_range_type : 1D index range for the interpolation mesh
- *   - basis_domain_type            : discrete dimension for the interpolation coefficients
- *   - deriv_type                   : ddc::Deriv tag for the boundary derivative dimension
- *
- * Template type aliases (parameterised by any batched interpolation domain D):
- *   - batched_basis_idx_range_type<D>   : D with interpolation_grid_type replaced by basis_domain_type
- *   - batched_derivs_idx_range_type<D>  : D with interpolation_grid_type replaced by deriv_type
- *
- * Member functions (for a const builder b, a batched domain dom of type D, and matching fields):
- *   - b(coeffs, vals)                          : compute coefficients from values
- *   - b(coeffs, vals, derivs_min, derivs_max)  : compute coefficients with boundary derivatives
- *   - b.batched_derivs_xmin_domain(dom) -> batched_derivs_idx_range_type<D>
- *   - b.batched_derivs_xmax_domain(dom) -> batched_derivs_idx_range_type<D>
- *
  * The template alias and method requirements are verified using interpolation_idx_range_type
  * as a representative domain.
  */
@@ -180,6 +154,7 @@ concept InterpolationBuilder = requires
     typename Builder::exec_space;
     typename Builder::memory_space;
     typename Builder::continuous_dimension_type;
+    typename InterpolationBuilderTraits<Builder>::data_type;
     typename InterpolationBuilderTraits<Builder>::interpolation_grid_type;
     typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type;
     typename InterpolationBuilderTraits<Builder>::basis_domain_type;
@@ -193,16 +168,16 @@ concept InterpolationBuilder = requires
 &&requires(
         Builder const& b,
         typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type domain,
-        Field<double,
+        Field<typename InterpolationBuilderTraits<Builder>::data_type,
               typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
                       typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>,
               typename Builder::memory_space> coeffs,
         ConstField<
-                double,
+                typename InterpolationBuilderTraits<Builder>::data_type,
                 typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type,
                 typename Builder::memory_space> vals,
         std::optional<ConstField<
-                double,
+                typename InterpolationBuilderTraits<Builder>::data_type,
                 typename InterpolationBuilderTraits<Builder>::
                         template batched_derivs_idx_range_type<typename InterpolationBuilderTraits<
                                 Builder>::interpolation_idx_range_type>,
@@ -221,12 +196,6 @@ concept InterpolationBuilder = requires
         } -> std::same_as<
                 typename InterpolationBuilderTraits<Builder>::
                         template batched_derivs_idx_range_type<typename InterpolationBuilderTraits<
-                                Builder>::interpolation_idx_range_type>>;
-    {
-        batched_basis_idx_range(b, domain)
-        } -> std::same_as<
-                typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
-                        typename InterpolationBuilderTraits<
                                 Builder>::interpolation_idx_range_type>>;
 };
 

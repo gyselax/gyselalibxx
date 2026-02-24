@@ -28,6 +28,9 @@ public:
     /// @brief The type of the Kokkos memory space used by this class.
     using memory_space = MemorySpace;
 
+    /// @brief The data type that the data is saved on.
+    using data_type = DataType;
+
     /// @brief The type of the interpolation continuous dimension (continuous dimension of interest) used by this class.
     using continuous_dimension_type = typename InterpolationGrid::continuous_dimension_type;
 
@@ -165,4 +168,6 @@ public:
                 ddc::discrete_space<Basis>().full_domain(),
                 batched_interpolation_domain);
     }
+
+    static_assert(concepts::InterpolationBuilder<IdentityInterpolationBuilder>);
 };
