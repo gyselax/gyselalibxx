@@ -9,7 +9,10 @@
 
 #include "bsl_advection_1d.hpp"
 #include "ddc_helper.hpp"
+#include "identity_interpolation_builder.hpp"
 #include "itimestepper.hpp"
+#include "lagrange_basis_uniform.hpp"
+#include "lagrange_evaluator.hpp"
 #include "rk2.hpp"
 #include "spline_interpolator.hpp"
 #include "vector_field_common.hpp"
@@ -74,6 +77,27 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         ddc::PeriodicExtrapolationRule<X>,
         ddc::PeriodicExtrapolationRule<X>>;
 
+// Lagrange basis for the advection field interpolation
+struct LagBasisX : UniformLagrangeBasis<X, 3, double>
+{
+};
+
+using LagBuilderX = IdentityInterpolationBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        double,
+        GridX,
+        LagBasisX>;
+
+using LagEvaluatorX = LagrangeEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        double,
+        LagBasisX,
+        GridX,
+        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>>;
+
 
 class XAdvection1DTest : public ::testing::Test
 {
@@ -94,6 +118,7 @@ public:
     {
         ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
         ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+        ddc::init_discrete_space<LagBasisX>(SplineInterpPointsX::get_domain<GridX>());
     }
 
     template <class AdvectionOperator>
@@ -181,4 +206,29 @@ TEST_F(XAdvection1DTest, AdvectionX)
     EXPECT_LE(max_relative_error, 5.e-3);
     std::cout << "Test on " << x_size << " grid: max relative error = " << max_relative_error
               << std::endl;
+}
+
+TEST_F(XAdvection1DTest, AdvectionXLagrange)
+{
+    // CREATING OPERATORS ------------------------------------------------------------------------
+    SplineXBuilder const function_builder(interpolation_idx_range);
+
+    ddc::PeriodicExtrapolationRule<X> bv_x_min;
+    ddc::PeriodicExtrapolationRule<X> bv_x_max;
+    SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
+
+    PreallocatableSplineInterpolator const
+            spline_interpolator(function_builder, spline_evaluator, interpolation_idx_range);
+
+    LagBuilderX const lag_builder;
+    LagEvaluatorX const lag_evaluator(bv_x_min, bv_x_max);
+
+    RK2Builder time_stepper;
+    BslAdvection1D<GridX, IdxRangeX, IdxRangeX, LagBuilderX, LagEvaluatorX, RK2Builder> const
+            advection(spline_interpolator, lag_builder, lag_evaluator, time_stepper);
+
+    double const max_relative_error = AdvectionX(advection);
+    EXPECT_LE(max_relative_error, 5.e-2);
+    std::cout << "Lagrange test on " << x_size << " grid: max relative error = "
+              << max_relative_error << std::endl;
 }
