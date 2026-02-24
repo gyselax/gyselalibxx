@@ -173,7 +173,6 @@ private:
     Field<double, IdxRangeQuadratureRTheta> m_int_volume;
 
 public:
-    //TODO: Add mapping parameter to check consistency.
     /**
      * @brief Instantiate the assembler operator.
      *
@@ -663,7 +662,7 @@ public:
      * the quadrature point given by the indices.
      */
     template <class Mapping>
-    static KOKKOS_FUNCTION double weak_integral_element( // TODO: Rename!
+    static KOKKOS_FUNCTION double weak_integral_element(
             IdxBSPolar idx_test,
             IdxBSPolar idx_trial,
             IdxQuadratureRTheta idx_quad,
