@@ -634,8 +634,12 @@ public:
     }
 
     /**
-     * @brief Computes a quadrature summand corresponding to the 
-     *        inner product.
+     * @brief Computes a quadrature summand for computing the integral
+     *      corresponding to the inner product.
+     *
+     * Inner product of the test and trial spline is computed using a 
+     * quadrature. This function returns one summand of the quadrature for 
+     * the quadrature point given by the indices.
      *
      * @param[in] idx_test
      *      The index of the test basis spline.
@@ -656,10 +660,7 @@ public:
      *      the equation is defined.
      * @param[in] int_volume
      *      The integral volume associated with each point used in the quadrature scheme.
-     * @return
-      inner product of the test and trial spline is computed using a 
-     * quadrature. This function returns one summand of the quadrature for 
-     * the quadrature point given by the indices.
+     * @return Value of the quadrature summand
      */
     template <class Mapping>
     static KOKKOS_FUNCTION double weak_integral_element(
