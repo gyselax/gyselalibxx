@@ -1,6 +1,10 @@
+# Authors
+
+## Major contributions
+
 Multiple people have contributed to Gyselalib++. To show our appreciation for
-their public spirit, we list here in alphabetical order a condensed list of their
-contributions.
+their public spirit, we list here in alphabetical order a condensed list of
+major contributions:
 
 
 Julien Bigot <julien.bigot@cea.fr>
@@ -58,3 +62,8 @@ Pauline Vidal
 
 Yuuichi Asahi
 - Gyroaverage operator
+
+## Minor contributions
+
+We would also like to thank contributors who have provided bug fixes and minor contributions:
+-
