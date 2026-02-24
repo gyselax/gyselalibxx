@@ -14,4 +14,3 @@ cmake_prefixes="/opt/googletest:/opt/openmp/"
 
 docker pull ghcr.io/gyselax/gyselalibxx_env:latest
 docker run -v ${gyselalibxx_folder}:/src --workdir "/src" --user :$(id -g) -e CMAKE_PREFIX_PATH=${cmake_prefixes} -it ghcr.io/gyselax/gyselalibxx_env:latest
-

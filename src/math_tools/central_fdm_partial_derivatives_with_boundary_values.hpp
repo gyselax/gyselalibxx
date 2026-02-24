@@ -22,6 +22,8 @@ template <class IdxRangeFull, class DerivativeDimension>
 class CentralFDMPartialDerivativeWithBValue
     : public IPartialDerivative<IdxRangeFull, DerivativeDimension>
 {
+    static_assert(!DerivativeDimension::PERIODIC);
+
 private:
     using base_type = IPartialDerivative<IdxRangeFull, DerivativeDimension>;
 
