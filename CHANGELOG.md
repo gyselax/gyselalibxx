@@ -27,6 +27,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Moved assembly of the stiffness matrix from `PolarSplineFEMPoissonLikeSolver` to new `PolarSplineFEMPoissonLikeAssembler` class.
+
 ### Deprecated
 
 ### Removed
