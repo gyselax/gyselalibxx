@@ -98,9 +98,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" line="116" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field.hpp" bodystart="116" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a0fc7f4486fa328951b9ece9408d93654" prot="public" static="no">
-        <type>typename base_type::element_type</type>
-        <definition>using DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::memory_space =  typename base_type::element_type</definition>
+      <memberdef kind="typedef" id="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aeeea17b30f6fd53c0bec0b5767c62f24" prot="public" static="no">
+        <type>MemorySpace</type>
+        <definition>using DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::memory_space =  MemorySpace</definition>
         <argsstring></argsstring>
         <name>memory_space</name>
         <qualifiedname>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;::memory_space</qualifiedname>
@@ -967,7 +967,7 @@
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aea01e036a1639d070d35df387ec85b34" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>get_kokkos_view_from_internal_chunk</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a8976a7b20051721b99a646045565c0bb" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>index_range_type</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1ab026f2f41036bfda6c6e6c06c8223670" prot="private" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>initialise_fields</name></member>
-      <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a0fc7f4486fa328951b9ece9408d93654" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>memory_space</name></member>
+      <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1aeeea17b30f6fd53c0bec0b5767c62f24" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>memory_space</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a11d7a0ef77df2e057a0f56d2555fe582" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>operator()</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a5c73fc7d3e23f0dc0b8cfe0c352495f2" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>operator=</name></member>
       <member refid="classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4_1a16496ea9865d678f0cc111ab934849a3" prot="public" virt="non-virtual"><scope>DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;</scope><name>operator=</name></member>
