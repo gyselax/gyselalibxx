@@ -15,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added error messages when wrong input is provided to a simulation.
 
 ### Fixed
-
+- Fix incorrect `memory_space` type alias in `DerivField`.
 ### Changed
 
 ### Deprecated
@@ -47,7 +47,6 @@ in a `DerivField`.
 - Fix transposition of arrays with more than 7 dimensions.
 - Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
 - Fix spurious segfaults for toolchains based on Spack environment views.
-- Fixed incorrect `memory_space` and `element_type` in `DerivField` (#553).
 
 ### Changed
 
