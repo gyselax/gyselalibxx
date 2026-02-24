@@ -141,4 +141,20 @@ public:
         IdxRange<deriv_type> empty_deriv_range(Idx<deriv_type>(0), IdxStep<deriv_type>(0));
         return batched_derivs_idx_range_type<BatchedInterpolationIdxRange>(empty_deriv_range, batched_interpolation_domain);
     }
+
+    /**
+     * @brief Get the whole domain on which the interpolation coefficients are defined.
+     *
+     * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
+     *
+     * @return The domain for the interpolation coefficients.
+     */
+    template <class BatchedInterpolationIdxRange>
+    batched_basis_idx_range_type<BatchedInterpolationIdxRange> batched_basis_idx_range(
+            BatchedInterpolationIdxRange const& batched_interpolation_domain) const noexcept
+    {
+        return batched_basis_idx_range_type<BatchedInterpolationIdxRange>(
+                ddc::discrete_space<Basis>().full_domain(),
+                batched_interpolation_domain);
+    }
 };
