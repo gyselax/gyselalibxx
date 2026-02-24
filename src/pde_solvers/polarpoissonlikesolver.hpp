@@ -73,7 +73,6 @@ private:
     using Theta_cov = typename Theta::Dual;
 
 private:
-    // using CoordRTheta = Coord<R, Theta>;
     /// The 1D B-splines in the radial direction
     using BSplinesR = typename PolarBSplinesRTheta::BSplinesR_tag;
     /// The 1D B-splines in the poloidal direction
@@ -105,13 +104,13 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    // /**
-    //  * @brief Tag the quadrature index range in the first dimension.
-    //  */
+    /**
+     * @brief Tag the quadrature index range in the first dimension.
+     */
     using IdxRangeQuadratureR = IdxRange<QDimRMesh>;
-    // /**
-    //  * @brief Tag the quadrature index range in the second dimension.
-    //  */
+    /**
+     * @brief Tag the quadrature index range in the second dimension.
+     */
     using IdxRangeQuadratureTheta = IdxRange<QDimThetaMesh>;
     /**
      * @brief Tag the quadrature index range.
@@ -159,7 +158,7 @@ private:
     // Matrix size is equal to the number of Polar bspline
     const int m_matrix_size;
 
-
+    // Domains
     IdxRangeBSPolar m_idxrange_fem_non_singular;
     IdxRangeBSR m_idxrange_bsplines_r;
     IdxRangeBSTheta m_idxrange_bsplines_theta;
@@ -293,7 +292,6 @@ public:
         init_nnz_per_line(nnz_per_row);
         Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
 
-        std::cout << "Compute singular entries." << std::endl;
         compute_singular_elements(
                 coeff_alpha,
                 coeff_beta,
@@ -302,7 +300,6 @@ public:
                 values_csr_host,
                 col_idx_csr_host,
                 nnz_per_row_csr_host);
-        std::cout << "Done.\nCompute overlapping entries." << std::endl;
         compute_overlapping_singular_elements(
                 coeff_alpha,
                 coeff_beta,
@@ -311,7 +308,6 @@ public:
                 values_csr_host,
                 col_idx_csr_host,
                 nnz_per_row_csr_host);
-        std::cout << "Done.\nCompute stencil entries." << std::endl;
         compute_stencil_elements(
                 coeff_alpha,
                 coeff_beta,
@@ -320,7 +316,6 @@ public:
                 values_csr_host,
                 col_idx_csr_host,
                 nnz_per_row_csr_host);
-        std::cout << "Done." << std::endl;
 
         assert(nnz_per_row_csr_host(m_matrix_size) == n_matrix_elements);
         Kokkos::deep_copy(values, values_csr_host);
@@ -328,7 +323,6 @@ public:
         Kokkos::deep_copy(nnz_per_row, nnz_per_row_csr_host);
         gko_matrix->setup_solver();
     }
-
 
     /**
      * @brief Computes the matrix element corresponding to the singular area.
