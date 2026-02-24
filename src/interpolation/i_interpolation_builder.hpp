@@ -155,13 +155,13 @@ namespace concepts {
 template <class Builder>
 concept InterpolationBuilder = requires
 {
-    typename InterpolationBuilderTraits<Builder>::exec_space;
-    typename InterpolationBuilderTraits<Builder>::memory_space;
-    typename InterpolationBuilderTraits<Builder>::continuous_dimension_type;
+    typename Builder::exec_space;
+    typename Builder::memory_space;
+    typename Builder::continuous_dimension_type;
     typename InterpolationBuilderTraits<Builder>::interpolation_grid_type;
     typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type;
     typename InterpolationBuilderTraits<Builder>::basis_domain_type;
-    typename InterpolationBuilderTraits<Builder>::deriv_type;
+    typename Builder::deriv_type;
     // Verify the template aliases can be instantiated with a concrete domain
     typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
             typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>;
@@ -174,17 +174,17 @@ concept InterpolationBuilder = requires
         Field<double,
               typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
                       typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>,
-              typename InterpolationBuilderTraits<Builder>::memory_space> coeffs,
+              typename Builder::memory_space> coeffs,
         ConstField<
                 double,
                 typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type,
-                typename InterpolationBuilderTraits<Builder>::memory_space> vals,
+                typename Builder::memory_space> vals,
         std::optional<ConstField<
                 double,
                 typename InterpolationBuilderTraits<Builder>::
                         template batched_derivs_idx_range_type<typename InterpolationBuilderTraits<
                                 Builder>::interpolation_idx_range_type>,
-                typename InterpolationBuilderTraits<Builder>::memory_space>> derivs)
+                typename Builder::memory_space>> derivs)
 {
     {b(coeffs, vals)};
     {b(coeffs, vals, derivs, derivs)};
@@ -203,3 +203,25 @@ concept InterpolationBuilder = requires
 };
 
 } // namespace concepts
+
+/**
+ * @brief Get the batched basis index range for a builder.
+ *
+ * Dispatches to @c batched_basis_idx_range if available (e.g. IdentityInterpolationBuilder),
+ * otherwise falls back to @c batched_spline_domain (e.g. ddc::SplineBuilder).
+ *
+ * @param builder The interpolation builder.
+ * @param batched_interpolation_domain The batched interpolation domain.
+ * @return The batched basis index range.
+ */
+template <class Builder, class BatchedInterpolationIdxRange>
+auto batched_basis_idx_range(
+        Builder const& builder,
+        BatchedInterpolationIdxRange const& batched_interpolation_domain)
+{
+    if constexpr (requires { builder.batched_spline_domain(batched_interpolation_domain); }) {
+        return builder.batched_spline_domain(batched_interpolation_domain);
+    } else {
+        return builder.batched_basis_idx_range(batched_interpolation_domain);
+    }
+}
