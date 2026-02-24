@@ -1,6 +1,10 @@
+# Authors
+
+## Major contributions
+
 Multiple people have contributed to Gyselalib++. To show our appreciation for
-their public spirit, we list here in alphabetical order a condensed list of their
-contributions.
+their public spirit, we list here in alphabetical order a condensed list of
+major contributions:
 
 
 Julien Bigot <julien.bigot@cea.fr>
@@ -8,7 +12,7 @@ Julien Bigot <julien.bigot@cea.fr>
 
 Emily Bourne <emily.bourne@epfl.ch>
 - Maintainer
-- Spline related development
+- Interpolation related development (spline, Lagrange)
 - Fortran to C++ porting
 - Data type developments
 - Multi-patch developments
@@ -59,5 +63,7 @@ Pauline Vidal
 Yuuichi Asahi
 - Gyroaverage operator
 
-MD. Sajid Khan
-- Bug fix in DerivField
+## Minor contributions 
+
+We would also like to thank contributors who have provided bug fixes and minor contributions:
+- Md Sajid Khan
