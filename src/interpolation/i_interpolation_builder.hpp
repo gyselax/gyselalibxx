@@ -6,6 +6,115 @@
 
 #include "ddc_aliases.hpp"
 
+/**
+ * @brief A traits struct for accessing type aliases of an interpolation builder.
+ *
+ * The primary template delegates to the builder's own type aliases, so any class
+ * that defines them directly (e.g. IdentityInterpolationBuilder, SplineBuilder1D)
+ * satisfies the InterpolationBuilder concept without specialisation.
+ *
+ * Specialise this struct to adapt external builders whose alias names differ from
+ * the convention (e.g. ddc::SplineBuilder).
+ *
+ * Required type aliases in the primary template (or a specialisation):
+ *   - exec_space                   : Kokkos execution space
+ *   - memory_space                 : Kokkos memory space
+ *   - continuous_dimension_type    : the continuous dimension being interpolated
+ *   - interpolation_grid_type      : the discrete grid on which values are given
+ *   - interpolation_idx_range_type : 1D index range for the interpolation mesh
+ *   - basis_domain_type            : discrete dimension for the interpolation coefficients
+ *   - deriv_type                   : ddc::Deriv tag for the boundary derivative dimension
+ *   - batched_basis_idx_range_type<D>  : D with interpolation_grid_type replaced by basis_domain_type
+ *   - batched_derivs_idx_range_type<D> : D with interpolation_grid_type replaced by deriv_type
+ *
+ * @tparam Builder The interpolation builder type.
+ */
+template <class Builder>
+struct InterpolationBuilderTraits
+{
+    /// @brief The discrete grid on which interpolation values are given.
+    using interpolation_grid_type = typename Builder::interpolation_grid_type;
+
+    /// @brief The 1D index range for the interpolation mesh.
+    using interpolation_idx_range_type = typename Builder::interpolation_idx_range_type;
+
+    /// @brief The discrete dimension for the interpolation coefficients.
+    using basis_domain_type = typename Builder::basis_domain_type;
+
+    /// @brief Batched domain with interpolation_grid_type replaced by basis_domain_type.
+    template <class BatchedInterpolationIdxRange>
+    using batched_basis_idx_range_type =
+            typename Builder::template batched_basis_idx_range_type<BatchedInterpolationIdxRange>;
+
+    /// @brief Batched domain with interpolation_grid_type replaced by deriv_type.
+    template <class BatchedInterpolationIdxRange>
+    using batched_derivs_idx_range_type =
+            typename Builder::template batched_derivs_idx_range_type<BatchedInterpolationIdxRange>;
+};
+
+/**
+ * @brief Specialisation of InterpolationBuilderTraits for ddc::SplineBuilder.
+ *
+ * ddc::SplineBuilder uses different alias names from the InterpolationBuilder
+ * convention. This specialisation provides the mapping so that ddc::SplineBuilder
+ * can be used directly as an InterpolationBuilder without wrapping it in
+ * SplineBuilder1D.
+ *
+ * Mapping:
+ *   interpolation_discrete_dimension_type -> interpolation_grid_type
+ *   interpolation_domain_type             -> interpolation_idx_range_type
+ *   bsplines_type                         -> basis_domain_type
+ *   batched_spline_domain_type<D>         -> batched_basis_idx_range_type<D>
+ *   batched_derivs_domain_type<D>         -> batched_derivs_idx_range_type<D>
+ */
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class BSplines,
+        class InterpolationDDim,
+        ddc::BoundCond BcLower,
+        ddc::BoundCond BcUpper,
+        ddc::SplineSolver Solver>
+struct InterpolationBuilderTraits<ddc::SplineBuilder<
+        ExecSpace,
+        MemorySpace,
+        BSplines,
+        InterpolationDDim,
+        BcLower,
+        BcUpper,
+        Solver>>
+{
+private:
+    using Builder = ddc::SplineBuilder<
+            ExecSpace,
+            MemorySpace,
+            BSplines,
+            InterpolationDDim,
+            BcLower,
+            BcUpper,
+            Solver>;
+
+public:
+    /// @brief The discrete grid on which interpolation values are given.
+    using interpolation_grid_type = typename Builder::interpolation_discrete_dimension_type;
+
+    /// @brief The 1D index range for the interpolation mesh.
+    using interpolation_idx_range_type = typename Builder::interpolation_domain_type;
+
+    /// @brief The discrete dimension for the B-spline coefficients.
+    using basis_domain_type = typename Builder::bsplines_type;
+
+    /// @brief Batched domain with InterpolationDDim replaced by BSplines.
+    template <class BatchedInterpolationIdxRange>
+    using batched_basis_idx_range_type =
+            typename Builder::template batched_spline_domain_type<BatchedInterpolationIdxRange>;
+
+    /// @brief Batched domain with InterpolationDDim replaced by deriv_type.
+    template <class BatchedInterpolationIdxRange>
+    using batched_derivs_idx_range_type =
+            typename Builder::template batched_derivs_domain_type<BatchedInterpolationIdxRange>;
+};
+
 namespace concepts {
 
 /**
@@ -13,7 +122,13 @@ namespace concepts {
  *
  * An interpolation builder is a callable that takes function values on an interpolation
  * mesh and computes the coefficients of an interpolation representation (e.g. spline or
- * Lagrange) of that function. A type satisfies this concept if it exposes:
+ * Lagrange) of that function.
+ *
+ * Type information is accessed through InterpolationBuilderTraits<Builder>, which has a
+ * primary template delegating to Builder's own aliases and can be specialised for
+ * external builders (e.g. ddc::SplineBuilder).
+ *
+ * A type satisfies this concept if InterpolationBuilderTraits<Builder> exposes:
  *
  * Non-template type aliases:
  *   - exec_space                   : Kokkos execution space
@@ -40,46 +155,51 @@ namespace concepts {
 template <class Builder>
 concept InterpolationBuilder = requires
 {
-    typename Builder::exec_space;
-    typename Builder::memory_space;
-    typename Builder::continuous_dimension_type;
-    typename Builder::interpolation_grid_type;
-    typename Builder::interpolation_idx_range_type;
-    typename Builder::basis_domain_type;
-    typename Builder::deriv_type;
+    typename InterpolationBuilderTraits<Builder>::exec_space;
+    typename InterpolationBuilderTraits<Builder>::memory_space;
+    typename InterpolationBuilderTraits<Builder>::continuous_dimension_type;
+    typename InterpolationBuilderTraits<Builder>::interpolation_grid_type;
+    typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type;
+    typename InterpolationBuilderTraits<Builder>::basis_domain_type;
+    typename InterpolationBuilderTraits<Builder>::deriv_type;
     // Verify the template aliases can be instantiated with a concrete domain
-    typename Builder::template batched_basis_idx_range_type<
-            typename Builder::interpolation_idx_range_type>;
-    typename Builder::template batched_derivs_idx_range_type<
-            typename Builder::interpolation_idx_range_type>;
+    typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
+            typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>;
+    typename InterpolationBuilderTraits<Builder>::template batched_derivs_idx_range_type<
+            typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>;
 }
 &&requires(
         Builder const& b,
-        typename Builder::interpolation_idx_range_type domain,
+        typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type domain,
         Field<double,
-              typename Builder::template batched_basis_idx_range_type<
-                      typename Builder::interpolation_idx_range_type>,
-              typename Builder::memory_space> coeffs,
+              typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
+                      typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>,
+              typename InterpolationBuilderTraits<Builder>::memory_space> coeffs,
         ConstField<
                 double,
-                typename Builder::interpolation_idx_range_type,
-                typename Builder::memory_space> vals,
+                typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type,
+                typename InterpolationBuilderTraits<Builder>::memory_space> vals,
         std::optional<ConstField<
                 double,
-                typename Builder::template batched_derivs_idx_range_type<
-                        typename Builder::interpolation_idx_range_type>,
-                typename Builder::memory_space>> derivs)
+                typename InterpolationBuilderTraits<Builder>::
+                        template batched_derivs_idx_range_type<typename InterpolationBuilderTraits<
+                                Builder>::interpolation_idx_range_type>,
+                typename InterpolationBuilderTraits<Builder>::memory_space>> derivs)
 {
     {b(coeffs, vals)};
     {b(coeffs, vals, derivs, derivs)};
     {
         b.batched_derivs_xmin_domain(domain)
-        } -> std::same_as<typename Builder::template batched_derivs_idx_range_type<
-                typename Builder::interpolation_idx_range_type>>;
+        } -> std::same_as<
+                typename InterpolationBuilderTraits<Builder>::
+                        template batched_derivs_idx_range_type<typename InterpolationBuilderTraits<
+                                Builder>::interpolation_idx_range_type>>;
     {
         b.batched_derivs_xmax_domain(domain)
-        } -> std::same_as<typename Builder::template batched_derivs_idx_range_type<
-                typename Builder::interpolation_idx_range_type>>;
+        } -> std::same_as<
+                typename InterpolationBuilderTraits<Builder>::
+                        template batched_derivs_idx_range_type<typename InterpolationBuilderTraits<
+                                Builder>::interpolation_idx_range_type>>;
 };
 
 } // namespace concepts

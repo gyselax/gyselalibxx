@@ -8,6 +8,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"
+#include "i_interpolation_builder.hpp"
 #include "iinterpolator.hpp"
 #include "itimestepper.hpp"
 
@@ -61,6 +62,7 @@ template <
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
+    static_assert(concepts::InterpolationBuilder<AdvectionFieldBuilder>);
 
 private:
     // Advection index range element:
@@ -86,8 +88,8 @@ private:
     using FunctionField = DField<IdxRangeFunction>;
 
     // Type for spline representation of the advection field
-    using IdxRangeBSAdvection =
-            typename AdvectionFieldBuilder::template batched_spline_domain_type<IdxRangeAdvection>;
+    using IdxRangeBSAdvection = typename InterpolationBuilderTraits<
+            AdvectionFieldBuilder>::template batched_basis_idx_range_type<IdxRangeAdvection>;
     using AdvecFieldSplineMem = DFieldMem<IdxRangeBSAdvection>;
     using AdvecFieldSplineCoeffs = DField<IdxRangeBSAdvection>;
 
