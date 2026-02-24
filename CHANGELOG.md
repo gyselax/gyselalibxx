@@ -47,6 +47,7 @@ in a `DerivField`.
 - Fix transposition of arrays with more than 7 dimensions.
 - Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
 - Fix spurious segfaults for toolchains based on Spack environment views.
+- Fixed incorrect `memory_space` and `element_type` in `DerivField` (#553).
 
 ### Changed
 
