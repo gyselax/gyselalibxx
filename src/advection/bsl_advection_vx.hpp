@@ -28,10 +28,10 @@ class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>
             = ddc::remove_dims_of_t<typename Geometry::IdxRangeFdistribu, Species>;
 
 private:
-    using FunctionDerivIdxRange = typename InterpolationBuilderTraits<FunctionBuilder>::
-            template batched_derivs_idx_range_type<IdxRangeSpaceVelocity>;
-    using FunctionBasisIdxRange = typename InterpolationBuilderTraits<FunctionBuilder>::
-            template batched_basis_idx_range_type<IdxRangeSpaceVelocity>;
+    using FunctionDerivIdxRange = typename InterpolationBuilderTraits<
+            FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeSpaceVelocity>;
+    using FunctionBasisIdxRange = typename InterpolationBuilderTraits<
+            FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeSpaceVelocity>;
 
     FunctionBuilder const& m_function_builder;
     FunctionEvaluator const& m_function_evaluator;

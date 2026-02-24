@@ -237,12 +237,7 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
             SplineXBuilder,
             SplineXEvaluator,
             EulerBuilder> const
-            spline_advection_x(
-                    builder_x,
-                    spline_x_evaluator,
-                    builder_x,
-                    spline_x_evaluator,
-                    euler);
+            spline_advection_x(builder_x, spline_x_evaluator, builder_x, spline_x_evaluator, euler);
 
     double const err = SpatialAdvection(spline_advection_x);
     EXPECT_LE(err, 1.e-6);

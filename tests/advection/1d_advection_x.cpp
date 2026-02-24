@@ -206,7 +206,8 @@ TEST_F(XAdvection1DTest, AdvectionX)
             SplineXEvaluator,
             SplineXBuilder,
             SplineXEvaluator,
-            RK2Builder> const advection(builder, spline_evaluator, builder, spline_evaluator, time_stepper);
+            RK2Builder> const
+            advection(builder, spline_evaluator, builder, spline_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);
@@ -235,7 +236,8 @@ TEST_F(XAdvection1DTest, AdvectionXLagrange)
             SplineXEvaluator,
             LagBuilderX,
             LagEvaluatorX,
-            RK2Builder> const advection(function_builder, spline_evaluator, lag_builder, lag_evaluator, time_stepper);
+            RK2Builder> const
+            advection(function_builder, spline_evaluator, lag_builder, lag_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-2);

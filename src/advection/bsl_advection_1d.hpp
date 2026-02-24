@@ -109,13 +109,13 @@ private:
     using AdvecFieldDerivConstField = Field<const double, IdxRangeAdvecFieldDeriv>;
 
     // Type for the spline representation of the function
-    using FunctionBasisIdxRange = typename InterpolationBuilderTraits<FunctionBuilder>::
-            template batched_basis_idx_range_type<IdxRangeFunction>;
+    using FunctionBasisIdxRange = typename InterpolationBuilderTraits<
+            FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeFunction>;
     using FunctionBasisFieldMem = DFieldMem<FunctionBasisIdxRange>;
 
     // Type for the derivatives of the function
-    using FunctionDerivIdxRange = typename InterpolationBuilderTraits<FunctionBuilder>::
-            template batched_derivs_idx_range_type<IdxRangeFunction>;
+    using FunctionDerivIdxRange = typename InterpolationBuilderTraits<
+            FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeFunction>;
     using FunctionDerivFieldMem = DFieldMem<FunctionDerivIdxRange>;
 
     using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<

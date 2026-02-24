@@ -187,9 +187,7 @@ public:
     }
 
     template <class AdvectionOperator, class Builder>
-    double VelocityAdvection(
-            AdvectionOperator const& advection_x,
-            Builder const& builder_vx)
+    double VelocityAdvection(AdvectionOperator const& advection_x, Builder const& builder_vx)
     {
         // Mesh ----------------------------------------------------------------------------------
         IdxRangeSpXVx const meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
