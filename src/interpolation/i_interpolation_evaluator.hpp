@@ -16,16 +16,6 @@
  * Specialise this struct to adapt external evaluators whose alias names differ
  * (e.g. ddc::SplineEvaluator).
  *
- * Required type aliases provided by the primary template or a specialisation:
- *   - exec_space                     : Kokkos execution space
- *   - memory_space                   : Kokkos memory space
- *   - continuous_dimension_type      : the continuous dimension being evaluated
- *   - evaluation_idx_range_type      : 1D index range for the evaluation mesh
- *   - coeff_grid_type              : discrete dimension for the interpolation coefficients
- *   - lower_extrapolation_rule_type  : type of the lower boundary extrapolation rule
- *   - upper_extrapolation_rule_type  : type of the upper boundary extrapolation rule
- *   - batched_coeff_idx_range_type<D> : D with evaluation grid replaced by coeff_grid_type
- *
  * @tparam Evaluator The interpolation evaluator type.
  */
 template <class Evaluator>
@@ -123,24 +113,6 @@ namespace concepts {
  * Type information is accessed through InterpolationEvaluatorTraits<Evaluator>, which
  * has a primary template delegating to the evaluator's own aliases and can be
  * specialised for external evaluators (e.g. ddc::SplineEvaluator).
- *
- * A type satisfies this concept if InterpolationEvaluatorTraits<Evaluator> exposes:
- *
- * Non-template type aliases:
- *   - exec_space                     : Kokkos execution space
- *   - memory_space                   : Kokkos memory space
- *   - continuous_dimension_type      : the continuous dimension being evaluated
- *   - evaluation_idx_range_type      : 1D index range for the evaluation mesh
- *   - coeff_grid_type              : discrete dimension for the interpolation coefficients
- *   - lower_extrapolation_rule_type  : type of the lower boundary extrapolation rule
- *   - upper_extrapolation_rule_type  : type of the upper boundary extrapolation rule
- *
- * Template type alias (parameterised by any batched evaluation domain D):
- *   - batched_coeff_idx_range_type<D> : D with the evaluation grid replaced by coeff_grid_type
- *
- * Member functions (for a const evaluator e and matching fields on evaluation_idx_range_type):
- *   - e(eval, coeffs)          : evaluate at grid-point coordinates
- *   - e(eval, coords, coeffs)  : evaluate at user-supplied coordinates
  *
  * The template alias and method requirements are verified using evaluation_idx_range_type
  * as a representative domain.
