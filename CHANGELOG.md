@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix incorrect `memory_space` type alias in `DerivField`.
 - Fix a memory leak in `DerivFieldMem`.
 - Fix `ddc::coordinate` called on `ddc::DiscreteElement` outside of the domain of definition in `single_interface_derivatives_calculator.hpp` and tests.
 - Fix a memory leak related to an object of type `PC_tree_t` not destroyed.
