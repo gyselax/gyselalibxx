@@ -9,6 +9,7 @@
 #include "ddc_helper.hpp"
 #include "euler.hpp"
 #include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "iinterpolator.hpp"
 #include "itimestepper.hpp"
 
@@ -63,6 +64,7 @@ class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(concepts::InterpolationBuilder<AdvectionFieldBuilder>);
+    static_assert(concepts::InterpolationEvaluator<AdvectionFieldEvaluator>);
 
 private:
     // Advection index range element:
