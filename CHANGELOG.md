@@ -57,6 +57,7 @@ in a `DerivField`.
 - Add a new coordinate transformation `OrthogonalCoordTransforms`.
 
 ### Fixed
+
 - Fix derivative indexing of a `DerivField` object.
 - Fix transposition of arrays with more than 7 dimensions.
 - Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
@@ -88,6 +89,7 @@ in a `DerivField`.
 ## [v0.4.1] - 2025-12-12
 
 ### Fixed
+
 - Allow access to slices extracted from `const DerivField`.
 - Fixed `LAPACKE` CMake target definition.
 - Uses patched cray-mpich package forcing using of the GTL on dependencies.
@@ -104,6 +106,7 @@ The operator averages the values of the advection field on the first ring to get
 - Added `equilibrium::init_from_input` method to choose XVx equililibrium in input file.
 
 ### Fixed
+
 - Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
 - Specify return type for Lie-Poisson operator explicitly for better error messages.
 - Ensure `copy_to_vector_space` can be called for different memory layouts.
@@ -143,6 +146,7 @@ The operator averages the values of the advection field on the first ring to get
 - Add a `periodic_strips_non_uniform_2d_9patches` geometry.
 
 ### Fixed
+
 - Modify `ruche.v100/environment.sh` file to fix tokamaxi simulation segfault issues.
 - Fix type of derivatives stored in `DerivFieldMem` and `DerivField` types.
 - Fixed memory error in `PolarSplineFEMPoissonLikeSolver`.
@@ -199,6 +203,7 @@ The operator averages the values of the advection field on the first ring to get
 - Add a `control_points` method to `DiscreteToCartesian` to allow all control points to be retrieved at once.
 
 ### Fixed
+
 - Fix uninitialized warning in the `Tensor` class.
 - Fix unused `m_magnetic_field` variable in `MaxwellianEquilibrium` class.
 - Fix break points incorrectly labelled as knots.
@@ -224,6 +229,7 @@ The operator averages the values of the advection field on the first ring to get
 ## [v0.1.1] - 2025-05-30
 
 ### Fixed
+
 - Fix paths in root `CMakeLists.txt` file to ensure it can be correctly used in a submodule.
 - Update remaining use of `ddc::Coordinate` to use Gyselalib++ conventions (`Coord`).
 - Update coding conventions to match what is applied.
