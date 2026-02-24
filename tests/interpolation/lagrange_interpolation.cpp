@@ -136,7 +136,7 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
             GridX,
             ddc::NullExtrapolationRule,
             ddc::NullExtrapolationRule>;
-    using IdxRangeCoeff = typename Builder::batched_basis_idx_range_type;
+    using IdxRangeCoeff = typename Builder::batched_basis_idx_range_type<IdxRange<GridX>>;
 
     constexpr std::size_t degree = TestFixture::degree;
     static constexpr double TOL = TestFixture::TOL;
@@ -222,7 +222,7 @@ DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> t
             TestGridType,
             ddc::PeriodicExtrapolationRule<Dim>,
             ddc::PeriodicExtrapolationRule<Dim>>;
-    using IdxRangeCoeff = typename Builder::batched_basis_idx_range_type;
+    using IdxRangeCoeff = typename Builder::batched_basis_idx_range_type<IdxRange<GridType>>;
 
     FieldMem<DataType, IdxRange<GridType>> function_values_alloc(idx_range);
     Field<DataType, IdxRange<GridType>> function_values(function_values_alloc);

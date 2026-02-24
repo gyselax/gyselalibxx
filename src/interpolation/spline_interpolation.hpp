@@ -11,9 +11,9 @@
 #include "i_interpolation_builder.hpp"
 
 /**
- * @brief A class for building spline coefficients that satisfies the IInterpolationBuilder interface.
+ * @brief A class for building spline coefficients that satisfies the InterpolationBuilder concept.
  *
- * This class wraps ddc::SplineBuilder and exposes it through the IInterpolationBuilder interface.
+ * This class wraps ddc::SplineBuilder and exposes it through the InterpolationBuilder interface.
  *
  * @tparam ExecSpace The Kokkos execution space on which the spline approximation is performed.
  * @tparam MemorySpace The Kokkos memory space on which the data is stored.
@@ -23,7 +23,6 @@
  * @tparam BcLower The lower boundary condition.
  * @tparam BcUpper The upper boundary condition.
  * @tparam Solver The SplineSolver giving the backend used to perform the spline approximation.
- * @tparam BatchedInterpolationIdxRange The batched discrete domain on which interpolation is defined.
  */
 template <
         class ExecSpace,
@@ -33,28 +32,12 @@ template <
         class InterpolationGrid,
         ddc::BoundCond BcLower,
         ddc::BoundCond BcUpper,
-        ddc::SplineSolver Solver,
-        class BatchedInterpolationIdxRange = IdxRange<InterpolationGrid>>
+        ddc::SplineSolver Solver>
 class SplineBuilder1D
-    : public IInterpolationBuilder<
-              ExecSpace,
-              MemorySpace,
-              DataType,
-              InterpolationGrid,
-              BSplines,
-              BatchedInterpolationIdxRange>
 {
     static_assert(
             std::is_same_v<DataType, double>,
             "SplineBuilder1D only supports double as DataType, matching ddc::SplineBuilder.");
-
-    using base_type = IInterpolationBuilder<
-            ExecSpace,
-            MemorySpace,
-            DataType,
-            InterpolationGrid,
-            BSplines,
-            BatchedInterpolationIdxRange>;
 
     using builder_type = ddc::SplineBuilder<
             ExecSpace,
@@ -69,25 +52,38 @@ class SplineBuilder1D
 
 public:
     /// @brief The type of the Kokkos execution space used by this class.
-    using typename base_type::exec_space;
+    using exec_space = ExecSpace;
 
     /// @brief The type of the Kokkos memory space used by this class.
-    using typename base_type::memory_space;
+    using memory_space = MemorySpace;
 
     /// @brief The type of the interpolation continuous dimension used by this class.
-    using typename base_type::continuous_dimension_type;
+    using continuous_dimension_type = typename InterpolationGrid::continuous_dimension_type;
 
     /// @brief The type of the interpolation discrete dimension used by this class.
-    using typename base_type::interpolation_grid_type;
+    using interpolation_grid_type = InterpolationGrid;
 
     /// @brief The type of the domain for the 1D interpolation mesh used by this class.
-    using typename base_type::interpolation_idx_range_type;
+    using interpolation_idx_range_type = IdxRange<interpolation_grid_type>;
 
     /// @brief The grid on which the interpolation coefficients should be provided (equals BSplines).
-    using typename base_type::basis_domain_type;
+    using basis_domain_type = BSplines;
 
     /// @brief The discrete dimension representing the B-splines (same as basis_domain_type).
     using bsplines_type = BSplines;
+
+    /// @brief The type of the Deriv dimension at the boundaries.
+    using deriv_type = ddc::Deriv<continuous_dimension_type>;
+
+    /// @brief The batched domain type with interpolation_grid_type replaced by basis_domain_type.
+    template <class D>
+    using batched_basis_idx_range_type
+            = ddc::replace_dim_of_t<D, interpolation_grid_type, basis_domain_type>;
+
+    /// @brief The batched domain type with interpolation_grid_type replaced by deriv_type.
+    template <class D>
+    using batched_derivs_idx_range_type
+            = ddc::replace_dim_of_t<D, interpolation_grid_type, deriv_type>;
 
     /// @brief The number of equations defining the boundary condition at the lower bound.
     static constexpr int s_nbc_xmin = builder_type::s_nbc_xmin;
@@ -106,11 +102,9 @@ public:
 
 public:
     /**
-     * @brief Construct a SplineBuilder1D acting on the given 1D interpolation domain.
+     * @brief Construct a SplineBuilder1D wrapping the given ddc::SplineBuilder.
      *
-     * @param interpolation_domain The 1D domain on which the interpolation points are defined.
-     * @param cols_per_chunk Optional solver parameter (see ddc::SplineBuilder).
-     * @param preconditioner_max_block_size Optional solver parameter (see ddc::SplineBuilder).
+     * @param builder The underlying ddc::SplineBuilder to delegate to.
      */
     explicit SplineBuilder1D(builder_type const& builder) : m_builder(builder) {}
 
@@ -151,21 +145,16 @@ public:
      * @param[in] derivs_xmax The values of the derivatives at the upper boundary
      *                  (used only with BoundCond::HERMITE upper boundary condition).
      */
+    template <class D>
     void operator()(
-            Field<DataType, typename base_type::batched_basis_idx_range_type, memory_space> coeffs,
-            ConstField<DataType, BatchedInterpolationIdxRange, memory_space> vals,
-            std::optional<ConstField<
-                    DataType,
-                    typename base_type::batched_derivs_idx_range_type,
-                    memory_space>> derivs_xmin
-            = std::nullopt,
-            std::optional<ConstField<
-                    DataType,
-                    typename base_type::batched_derivs_idx_range_type,
-                    memory_space>> derivs_xmax
-            = std::nullopt) const final
+            Field<DataType, batched_basis_idx_range_type<D>, memory_space> coeffs,
+            ConstField<DataType, D, memory_space> vals,
+            std::optional<ConstField<DataType, batched_derivs_idx_range_type<D>, memory_space>>
+                    derivs_xmin = std::nullopt,
+            std::optional<ConstField<DataType, batched_derivs_idx_range_type<D>, memory_space>>
+                    derivs_xmax = std::nullopt) const
     {
-        m_builder(coeffs, vals);
+        m_builder(coeffs, vals, derivs_xmin, derivs_xmax);
     }
 
     /**
@@ -177,8 +166,9 @@ public:
      *
      * @return The domain for the Derivs values.
      */
-    typename base_type::batched_derivs_idx_range_type batched_derivs_xmin_domain(
-            BatchedInterpolationIdxRange const& batched_interpolation_domain) const noexcept final
+    template <class D>
+    batched_derivs_idx_range_type<D> batched_derivs_xmin_domain(
+            D const& batched_interpolation_domain) const noexcept
     {
         return m_builder.batched_derivs_xmin_domain(batched_interpolation_domain);
     }
@@ -192,8 +182,9 @@ public:
      *
      * @return The domain for the Derivs values.
      */
-    typename base_type::batched_derivs_idx_range_type batched_derivs_xmax_domain(
-            BatchedInterpolationIdxRange const& batched_interpolation_domain) const noexcept final
+    template <class D>
+    batched_derivs_idx_range_type<D> batched_derivs_xmax_domain(
+            D const& batched_interpolation_domain) const noexcept
     {
         return m_builder.batched_derivs_xmax_domain(batched_interpolation_domain);
     }
