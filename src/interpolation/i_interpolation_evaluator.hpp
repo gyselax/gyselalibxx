@@ -21,10 +21,10 @@
  *   - memory_space                   : Kokkos memory space
  *   - continuous_dimension_type      : the continuous dimension being evaluated
  *   - evaluation_idx_range_type      : 1D index range for the evaluation mesh
- *   - coeff_domain_type              : discrete dimension for the interpolation coefficients
+ *   - coeff_grid_type              : discrete dimension for the interpolation coefficients
  *   - lower_extrapolation_rule_type  : type of the lower boundary extrapolation rule
  *   - upper_extrapolation_rule_type  : type of the upper boundary extrapolation rule
- *   - batched_coeff_idx_range_type<D> : D with evaluation grid replaced by coeff_domain_type
+ *   - batched_coeff_idx_range_type<D> : D with evaluation grid replaced by coeff_grid_type
  *
  * @tparam Evaluator The interpolation evaluator type.
  */
@@ -35,7 +35,7 @@ struct InterpolationEvaluatorTraits
     using evaluation_idx_range_type = typename Evaluator::evaluation_idx_range_type;
 
     /// @brief The discrete dimension for the interpolation coefficients.
-    using coeff_domain_type = typename Evaluator::coeff_domain_type;
+    using coeff_grid_type = typename Evaluator::coeff_grid_type;
 
     /// @brief Batched index range for the evaluation
     template <class BatchedInterpolationIdxRange>
@@ -43,7 +43,7 @@ struct InterpolationEvaluatorTraits
             typename Evaluator::template batched_evaluation_idx_range_type<
                     BatchedInterpolationIdxRange>;
 
-    /// @brief Batched domain with the evaluation grid replaced by coeff_domain_type.
+    /// @brief Batched domain with the evaluation grid replaced by coeff_grid_type.
     template <class D>
     using batched_coeff_idx_range_type =
             typename Evaluator::template batched_coeff_idx_range_type<D>;
@@ -59,7 +59,7 @@ struct InterpolationEvaluatorTraits
  * Mapping:
  *   evaluation_discrete_dimension_type -> (defines evaluation_idx_range_type)
  *   evaluation_domain_type             -> evaluation_idx_range_type
- *   bsplines_type                      -> coeff_domain_type
+ *   bsplines_type                      -> coeff_grid_type
  *   batched_spline_domain_type<D>      -> batched_coeff_idx_range_type<D>
  */
 template <
@@ -91,7 +91,7 @@ public:
     using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
 
     /// @brief The discrete dimension for the B-spline coefficients.
-    using coeff_domain_type = typename Evaluator::bsplines_type;
+    using coeff_grid_type = typename Evaluator::bsplines_type;
 
     /// @brief Batched index range for the evaluation
     template <class BatchedInterpolationIdxRange>
@@ -125,12 +125,12 @@ namespace concepts {
  *   - memory_space                   : Kokkos memory space
  *   - continuous_dimension_type      : the continuous dimension being evaluated
  *   - evaluation_idx_range_type      : 1D index range for the evaluation mesh
- *   - coeff_domain_type              : discrete dimension for the interpolation coefficients
+ *   - coeff_grid_type              : discrete dimension for the interpolation coefficients
  *   - lower_extrapolation_rule_type  : type of the lower boundary extrapolation rule
  *   - upper_extrapolation_rule_type  : type of the upper boundary extrapolation rule
  *
  * Template type alias (parameterised by any batched evaluation domain D):
- *   - batched_coeff_idx_range_type<D> : D with the evaluation grid replaced by coeff_domain_type
+ *   - batched_coeff_idx_range_type<D> : D with the evaluation grid replaced by coeff_grid_type
  *
  * Member functions (for a const evaluator e and matching fields on evaluation_idx_range_type):
  *   - e(eval, coeffs)          : evaluate at grid-point coordinates
@@ -142,13 +142,13 @@ namespace concepts {
 template <class Evaluator>
 concept InterpolationEvaluator = requires
 {
-    typename InterpolationEvaluatorTraits<Evaluator>::exec_space;
-    typename InterpolationEvaluatorTraits<Evaluator>::memory_space;
-    typename InterpolationEvaluatorTraits<Evaluator>::continuous_dimension_type;
+    typename Evaluator::exec_space;
+    typename Evaluator::memory_space;
+    typename Evaluator::continuous_dimension_type;
     typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type;
-    typename InterpolationEvaluatorTraits<Evaluator>::coeff_domain_type;
-    typename InterpolationEvaluatorTraits<Evaluator>::lower_extrapolation_rule_type;
-    typename InterpolationEvaluatorTraits<Evaluator>::upper_extrapolation_rule_type;
+    typename InterpolationEvaluatorTraits<Evaluator>::coeff_grid_type;
+    typename Evaluator::lower_extrapolation_rule_type;
+    typename Evaluator::upper_extrapolation_rule_type;
     // Verify the template alias can be instantiated with a concrete domain
     typename InterpolationEvaluatorTraits<Evaluator>::template batched_coeff_idx_range_type<
             typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type>;
@@ -157,17 +157,17 @@ concept InterpolationEvaluator = requires
         Evaluator const& e,
         Field<double,
               typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type,
-              typename InterpolationEvaluatorTraits<Evaluator>::memory_space> eval,
+              typename Evaluator::memory_space> eval,
         ConstField<
                 double,
                 typename InterpolationEvaluatorTraits<Evaluator>::
                         template batched_coeff_idx_range_type<typename InterpolationEvaluatorTraits<
                                 Evaluator>::evaluation_idx_range_type>,
-                typename InterpolationEvaluatorTraits<Evaluator>::memory_space> coeffs,
+                typename Evaluator::memory_space> coeffs,
         ConstField<
-                Coord<typename InterpolationEvaluatorTraits<Evaluator>::continuous_dimension_type>,
+                Coord<typename Evaluator::continuous_dimension_type>,
                 typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type,
-                typename InterpolationEvaluatorTraits<Evaluator>::memory_space> coords)
+                typename Evaluator::memory_space> coords)
 {
     {e(eval, coeffs)};
     {e(eval, coords, coeffs)};
@@ -179,8 +179,8 @@ concept InterpolationEvaluator = requires
                 typename InterpolationEvaluatorTraits<Evaluator>::
                         template batched_coeff_idx_range_type<typename InterpolationEvaluatorTraits<
                                 Evaluator>::evaluation_idx_range_type>,
-                typename InterpolationEvaluatorTraits<Evaluator>::memory_space> coeffs,
-        Coord<typename InterpolationEvaluatorTraits<Evaluator>::continuous_dimension_type> coord)
+                typename Evaluator::memory_space> coeffs,
+        Coord<typename Evaluator::continuous_dimension_type> coord)
 {
     {
         e(coord, coeffs)
