@@ -31,6 +31,9 @@
 template <class Evaluator>
 struct InterpolationEvaluatorTraits
 {
+    /// @brief The data type that the data is saved on.
+    using data_type = typename Evaluator::data_type;
+
     /// @brief The 1D index range for the evaluation mesh.
     using evaluation_idx_range_type = typename Evaluator::evaluation_idx_range_type;
 
@@ -87,6 +90,9 @@ private:
             UpperExtrapolationRule>;
 
 public:
+    /// @brief The data type that the data is saved on.
+    using data_type = double;
+
     /// @brief The 1D index range for the evaluation mesh.
     using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
 
@@ -145,6 +151,7 @@ concept InterpolationEvaluator = requires
     typename Evaluator::exec_space;
     typename Evaluator::memory_space;
     typename Evaluator::continuous_dimension_type;
+    typename InterpolationEvaluatorTraits<Evaluator>::data_type;
     typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type;
     typename InterpolationEvaluatorTraits<Evaluator>::coeff_grid_type;
     typename Evaluator::lower_extrapolation_rule_type;
@@ -155,11 +162,11 @@ concept InterpolationEvaluator = requires
 }
 &&requires(
         Evaluator const& e,
-        Field<double,
+        Field<typename InterpolationEvaluatorTraits<Evaluator>::data_type,
               typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type,
               typename Evaluator::memory_space> eval,
         ConstField<
-                double,
+                typename InterpolationEvaluatorTraits<Evaluator>::data_type,
                 typename InterpolationEvaluatorTraits<Evaluator>::
                         template batched_coeff_idx_range_type<typename InterpolationEvaluatorTraits<
                                 Evaluator>::evaluation_idx_range_type>,
@@ -175,7 +182,7 @@ concept InterpolationEvaluator = requires
 &&requires(
         Evaluator const& e,
         ConstField<
-                double,
+                typename InterpolationEvaluatorTraits<Evaluator>::data_type,
                 typename InterpolationEvaluatorTraits<Evaluator>::
                         template batched_coeff_idx_range_type<typename InterpolationEvaluatorTraits<
                                 Evaluator>::evaluation_idx_range_type>,
@@ -184,7 +191,7 @@ concept InterpolationEvaluator = requires
 {
     {
         e(coord, coeffs)
-        } -> std::same_as<double>;
+        } -> std::same_as<typename InterpolationEvaluatorTraits<Evaluator>::data_type>;
 };
 
 } // namespace concepts
