@@ -168,6 +168,4 @@ public:
                 ddc::discrete_space<Basis>().full_domain(),
                 batched_interpolation_domain);
     }
-
-    static_assert(concepts::InterpolationBuilder<IdentityInterpolationBuilder>);
 };

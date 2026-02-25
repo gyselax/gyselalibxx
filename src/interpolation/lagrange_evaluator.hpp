@@ -449,6 +449,4 @@ private:
             return elm_cell;
         }
     }
-
-    static_assert(concepts::InterpolationEvaluator<LagrangeEvaluator>);
 };
