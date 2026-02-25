@@ -604,7 +604,7 @@
 <td style="text-align: left;"><a href="#typedef-element_type"><strong>element_type</strong></a>  <br><em>The type of the elements in the chunks.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename base_type::element_type</td>
+<td style="text-align: right;">typedef MemSpace</td>
 <td style="text-align: left;"><a href="#typedef-memory_space"><strong>memory_space</strong></a>  <br><em>The type of the memory space where the field is saved (CPU vs GPU).</em></td>
 </tr>
 <tr>
@@ -741,7 +741,7 @@
 
 <h3 id="typedef-memory_space">typedef memory_space</h3>
 <p><em>The type of the memory space where the field is saved (CPU vs GPU).</em> </p>
-<pre><code class="language-C++">using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::memory_space =  typename base_type::element_type;
+<pre><code class="language-C++">using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::memory_space =  MemSpace;
 </code></pre>
 <hr>
 

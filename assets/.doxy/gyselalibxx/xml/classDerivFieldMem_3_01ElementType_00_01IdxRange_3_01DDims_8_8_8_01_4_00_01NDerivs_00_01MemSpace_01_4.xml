@@ -157,9 +157,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/derivative_field_mem.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a64987f8d187c6a28a8ba0e1b9eb0fb93" prot="public" static="no">
-        <type>typename base_type::element_type</type>
-        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::memory_space =  typename base_type::element_type</definition>
+      <memberdef kind="typedef" id="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1acf1ab9407fe009edb2585d07a4b4eb68" prot="public" static="no">
+        <type>MemSpace</type>
+        <definition>using DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::memory_space =  MemSpace</definition>
         <argsstring></argsstring>
         <name>memory_space</name>
         <qualifiedname>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;::memory_space</qualifiedname>
@@ -1095,7 +1095,7 @@
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1aee850b47a22edcce1e8398418392e0f5" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>internal_mdspan_type</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a71930d8ab2a366995e95669f4d35dd2c" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>make_internal_mdspan</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ab9401bf08cc2d76bf1a632f9ff740da8" prot="private" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>mapping_type</name></member>
-      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a64987f8d187c6a28a8ba0e1b9eb0fb93" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>memory_space</name></member>
+      <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1acf1ab9407fe009edb2585d07a4b4eb68" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>memory_space</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1af060ce1efbb1b8977510596bfda7c7d9" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator()</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1a452e3d080c0cf135f1610348fc469b42" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator()</name></member>
       <member refid="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4_1ac897e84a086c7cf6b4577833a8093e69" prot="public" virt="non-virtual"><scope>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</scope><name>operator=</name></member>
