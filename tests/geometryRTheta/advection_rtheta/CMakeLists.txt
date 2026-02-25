@@ -32,7 +32,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING_PHYSICAL" "CZARNY_MAPPING_PHYSICAL" "CZAR
 
                 paraconf::paraconf
 
-                PDI::pdi
+                PDI::PDI_C
 
                 gslx::advection
                 gslx::geometry_RTheta
@@ -70,7 +70,7 @@ target_link_libraries(advection_ALL
 
 		paraconf::paraconf
 
-		PDI::pdi
+		PDI::PDI_C
 
 		gslx::advection
 		gslx::geometry_RTheta
@@ -106,7 +106,7 @@ function (advection_without_Opoint_test_executable SIMULATION)
 
             paraconf::paraconf
 
-            PDI::pdi
+            PDI::PDI_C
             
             GTest::gtest
             GTest::gmock

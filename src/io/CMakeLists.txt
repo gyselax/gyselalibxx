@@ -12,7 +12,7 @@ target_include_directories("io"
 target_link_libraries("io"
     PUBLIC
         DDC::core
-        PDI::pdi
+        PDI::PDI_C
         gslx::data_types
         gslx::paraconfpp
         gslx::utils
