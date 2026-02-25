@@ -23,7 +23,7 @@ function (diocotron_executable PREDCORR_METHOD TIME_METHOD )
 
             paraconf::paraconf
 
-            PDI::pdi
+            PDI::PDI_C
 
             gslx::advection
             gslx::diocotron_init_eq

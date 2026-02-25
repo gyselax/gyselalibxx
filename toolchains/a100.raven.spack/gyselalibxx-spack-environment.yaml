@@ -12,7 +12,7 @@ spack:
     - mpi
     - ninja
     - paraconf
-    - pdi
+    - pdi@1.10.1:1
     - pdiplugin-decl-hdf5 +mpi
     - pdiplugin-decl-netcdf +mpi
     - pdiplugin-mpi

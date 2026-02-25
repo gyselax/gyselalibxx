@@ -11,7 +11,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             DDC::core
             DDC::pdi
             paraconf::paraconf
-            PDI::pdi
+            PDI::PDI_C
             gslx::geometry_RTheta
             gslx::paraconfpp
             gslx::pde_solvers

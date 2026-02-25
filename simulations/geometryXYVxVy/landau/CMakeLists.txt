@@ -6,7 +6,7 @@ target_link_libraries(landau4d_fft
         DDC::core
         DDC::pdi
         paraconf::paraconf
-        PDI::pdi
+        PDI::PDI_C
         gslx::advection
         gslx::geometry_xyvxvy
         gslx::initialisation_xyvxvy

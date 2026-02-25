@@ -16,7 +16,7 @@ spack:
     - mdspan@0.6
     - openmpi +cuda
     - paraconf
-    - pdi@1.6:1
+    - pdi@1.10.1:1
     - pdiplugin-decl-hdf5
     - pdiplugin-decl-netcdf
     - pdiplugin-mpi

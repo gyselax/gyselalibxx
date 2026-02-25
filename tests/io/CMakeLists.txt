@@ -12,7 +12,7 @@ target_link_libraries(unit_tests_io
         GTest::gtest
         GTest::gmock
         paraconf::paraconf
-        PDI::pdi
+        PDI::PDI_C
         gslx::data_types
         gslx::io
         gslx::utils

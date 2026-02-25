@@ -62,11 +62,10 @@ find_package(LAPACK REQUIRED)
 find_package(MPI REQUIRED)
 
 ## Look for a pre-installed paraconf
-find_package(paraconf REQUIRED COMPONENTS C)
+find_package(paraconf 1.0.0...<2 REQUIRED COMPONENTS C)
 
-#TODO: Uncomment when PDI v1.11 is released to keep basic find_packages grouped
 ### Look for a pre-installed PDI
-#find_package(PDI REQUIRED COMPONENTS C)
+find_package(PDI 1.10.1...<2 REQUIRED COMPONENTS C)
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
@@ -94,11 +93,6 @@ find_package(DDC 0.10.0 QUIET COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
   add_subdirectory(vendor/ddc SYSTEM)
-endif()
-
-#TODO: Remove when PDI v1.11 is released to keep basic find_packages grouped
-if (NOT TARGET PDI::pdi)
-  find_package(PDI REQUIRED COMPONENTS C)
 endif()
 
 find_package(koliop 0.1.2 QUIET)

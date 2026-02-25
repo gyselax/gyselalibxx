@@ -10,7 +10,7 @@ target_link_libraries(vortex_merger
 
         paraconf::paraconf
 
-        PDI::pdi
+        PDI::PDI_C
 
         gslx::advection
         gslx::geometry_RTheta
