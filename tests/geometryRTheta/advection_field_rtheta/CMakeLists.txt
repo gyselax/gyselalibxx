@@ -22,7 +22,7 @@ function (advection_field_test_executable SIMULATION)
 
             paraconf::paraconf
 
-            PDI::pdi
+            PDI::PDI_C
             
             GTest::gtest
             GTest::gmock
