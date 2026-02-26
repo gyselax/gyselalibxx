@@ -16,6 +16,51 @@
 #include "volume_quadrature_nd.hpp"
 
 
+namespace detail_poisson {
+
+/**
+    * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction .
+    *
+    * @param[in] idx_theta @f$ \theta @f$ index.
+    *
+    * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
+    */
+template <typename BSplinesTheta>
+KOKKOS_FUNCTION IdxStep<BSplinesTheta> theta_mod(IdxStep<BSplinesTheta> idx_theta)
+{
+    int n_theta = ddc::discrete_space<BSplinesTheta>().nbasis();
+    while (idx_theta < 0)
+        idx_theta += n_theta;
+    while (idx_theta >= n_theta)
+        idx_theta -= n_theta;
+    return idx_theta;
+}
+
+/**
+    * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
+    *
+    * @param[in] idx A multi-dimensional index including the polar bspline index.
+    *
+    * @return The corresponding index inside the domain.
+    */
+template <typename BSplinesTheta, class IdxType>
+KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
+{
+    static_assert(ddc::is_discrete_element_v<IdxType>);
+    static_assert(ddc::in_tags_v<BSplinesTheta, ddc::to_type_seq_t<IdxType>>);
+    IdxRange<BSplinesTheta> idx_range_theta
+            = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
+                    IdxStep<BSplinesTheta>(ddc::discrete_space<BSplinesTheta>().nbasis()));
+    while (ddc::select<BSplinesTheta>(idx) < idx_range_theta.front())
+        idx += idx_range_theta.extents();
+    while (ddc::select<BSplinesTheta>(idx) > idx_range_theta.back())
+        idx -= idx_range_theta.extents();
+    assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
+    return idx;
+}
+} // namespace detail_poisson
+
+
 /**
  * @brief An operator to assemble a Poisson-like stiffness matrix using polar B-splines.
  * 
@@ -561,7 +606,8 @@ public:
                     IdxStep<BSplinesTheta> {BSplinesTheta::degree() + 1});
             ddc::host_for_each(remaining_theta, [&](IdxBSTheta const idx_trial_theta) {
                 IdxBSRTheta idx_trial(idx_test_r, idx_trial_theta);
-                IdxBSPolar idx_trial_polar(to_polar(theta_mod(idx_trial)));
+                IdxBSPolar idx_trial_polar(
+                        to_polar(detail_poisson::theta_mod<BSplinesTheta>(idx_trial)));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -601,7 +647,8 @@ public:
             IdxRangeBSRTheta trial_idx_range(remaining_r, relevant_theta);
 
             ddc::host_for_each(trial_idx_range, [&](IdxBSRTheta const idx_trial) {
-                IdxBSPolar idx_trial_polar(to_polar(theta_mod(idx_trial)));
+                IdxBSPolar idx_trial_polar(
+                        to_polar(detail_poisson::theta_mod<BSplinesTheta>(idx_trial)));
                 double element = get_matrix_stencil_element(
                         idx_test,
                         idx_trial,
@@ -735,8 +782,10 @@ public:
                 full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
         const IdxBSR idx_test_r(idx_test);
         const IdxBSR idx_trial_r(idx_trial);
-        const IdxBSTheta idx_test_theta(theta_mod(IdxBSTheta(idx_test)));
-        const IdxBSTheta idx_trial_theta(theta_mod(IdxBSTheta(idx_trial)));
+        const IdxBSTheta idx_test_theta(
+                detail_poisson::theta_mod<BSplinesTheta>(IdxBSTheta(idx_test)));
+        const IdxBSTheta idx_trial_theta(
+                detail_poisson::theta_mod<BSplinesTheta>(IdxBSTheta(idx_trial)));
 
         auto& bspl_r = ddc::discrete_space<BSplinesR>();
         auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
@@ -811,48 +860,6 @@ public:
 
     // DUPLICATED from PolarSplineFEMPoissonLikeSolver
     /**
-     * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction .
-     *
-     * @param[in] idx_theta @f$ \theta @f$ index.
-     *
-     * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
-     */
-    static KOKKOS_FUNCTION IdxStepBSTheta theta_mod(IdxStepBSTheta idx_theta)
-    {
-        int n_theta = ddc::discrete_space<BSplinesTheta>().nbasis();
-        while (idx_theta < 0)
-            idx_theta += n_theta;
-        while (idx_theta >= n_theta)
-            idx_theta -= n_theta;
-        return idx_theta;
-    }
-
-    // DUPLICATED from PolarSplineFEMPoissonLikeSolver
-    /**
-     * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
-     *
-     * @param[in] idx A multi-dimensional index including the polar bspline index.
-     *
-     * @return The corresponding index inside the domain.
-     */
-    template <class IdxType>
-    static KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
-    {
-        static_assert(ddc::is_discrete_element_v<IdxType>);
-        static_assert(ddc::in_tags_v<BSplinesTheta, ddc::to_type_seq_t<IdxType>>);
-        IdxRangeBSTheta idx_range_theta
-                = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
-                        IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
-        while (ddc::select<BSplinesTheta>(idx) < idx_range_theta.front())
-            idx += idx_range_theta.extents();
-        while (ddc::select<BSplinesTheta>(idx) > idx_range_theta.back())
-            idx -= idx_range_theta.extents();
-        assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
-        return idx;
-    }
-
-    // DUPLICATED from PolarSplineFEMPoissonLikeSolver
-    /**
      * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
      *
      * This method calculates the value and the derivatives of polar bsplines. It is templated by
@@ -905,7 +912,7 @@ public:
             IdxBSRTheta idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
             IdxStepBSRTheta offset = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
             IdxStepBSR ir(offset);
-            IdxStepBSTheta itheta(theta_mod(IdxStepBSTheta(offset)));
+            IdxStepBSTheta itheta(detail_poisson::theta_mod<BSplinesTheta>(IdxStepBSTheta(offset)));
 
             val = vals(ir, itheta);
             if constexpr (calculate_derivs) {
@@ -1644,45 +1651,6 @@ public:
         m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc));
     }
 
-    /**
-     * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction .
-     *
-     * @param[in] idx_theta @f$ \theta @f$ index.
-     *
-     * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
-     */
-    static KOKKOS_FUNCTION IdxStepBSTheta theta_mod(IdxStepBSTheta idx_theta)
-    {
-        int n_theta = ddc::discrete_space<BSplinesTheta>().nbasis();
-        while (idx_theta < 0)
-            idx_theta += n_theta;
-        while (idx_theta >= n_theta)
-            idx_theta -= n_theta;
-        return idx_theta;
-    }
-
-    /**
-     * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
-     *
-     * @param[in] idx A multi-dimensional index including the polar bspline index.
-     *
-     * @return The corresponding index inside the domain.
-     */
-    template <class IdxType>
-    static KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
-    {
-        static_assert(ddc::is_discrete_element_v<IdxType>);
-        static_assert(ddc::in_tags_v<BSplinesTheta, ddc::to_type_seq_t<IdxType>>);
-        IdxRangeBSTheta idx_range_theta
-                = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
-                        IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
-        while (ddc::select<BSplinesTheta>(idx) < idx_range_theta.front())
-            idx += idx_range_theta.extents();
-        while (ddc::select<BSplinesTheta>(idx) > idx_range_theta.back())
-            idx -= idx_range_theta.extents();
-        assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
-        return idx;
-    }
 
     /**
      * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
@@ -1700,10 +1668,8 @@ public:
      * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
      */
     template <bool calculate_derivs = true>
-    static KOKKOS_FUNCTION auto get_polar_bspline_vals_and_derivs(
-            double& val,
-            CoordRTheta coord,
-            IdxBSPolar idx)
+    static KOKKOS_FUNCTION std::conditional_t<calculate_derivs, DVector<R_cov, Theta_cov>, void>
+    get_polar_bspline_vals_and_derivs(double& val, CoordRTheta coord, IdxBSPolar idx)
     {
         std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
         std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
@@ -1737,7 +1703,7 @@ public:
             IdxBSRTheta idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
             IdxStepBSRTheta offset = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
             IdxStepBSR ir(offset);
-            IdxStepBSTheta itheta(theta_mod(IdxStepBSTheta(offset)));
+            IdxStepBSTheta itheta(detail_poisson::theta_mod<BSplinesTheta>(IdxStepBSTheta(offset)));
 
             val = vals(ir, itheta);
             if constexpr (calculate_derivs) {
