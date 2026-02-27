@@ -21,12 +21,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Fix incorrect `memory_space` type alias in `DerivFieldMem`.
 - Fix incorrect `memory_space` type alias in `DerivField`.
 - Fix a memory leak in `DerivFieldMem`.
 - Fix `ddc::coordinate` called on `ddc::DiscreteElement` outside of the domain of definition in `single_interface_derivatives_calculator.hpp` and tests.
 - Fix a memory leak related to an object of type `PC_tree_t` not destroyed.
 - Fix boundary conditions in `single_interface_derivatives_calculator_collection_test.cpp`.
 - Fix the finite differences method on a periodic domain.
+- Fix the warning for using the deprecated target `PDI::pdi` starting from PDI 1.10.1.
 
 ### Changed
 
@@ -34,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use generic binaries in the CPU Spack toolchain.
 - Remove Kokkos-related submodules.
 - Remove recursion from submodules synchronisation.
+- Add missing `module purge` in Persee toolchains.
 
 ### Deprecated
 

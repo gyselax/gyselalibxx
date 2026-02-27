@@ -7,6 +7,8 @@ then
     exit 1
 fi
 
+module purge
+
 if command -v spack >/dev/null 2>&1
 then
     spack env deactivate
