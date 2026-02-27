@@ -99,10 +99,10 @@ protected:
     KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon const& o_tensor) = default;
 
     /**
-     * @brief Move-construct a tensor object by copying an existing tensor of exactly the
+     * @brief Move-construct a tensor object by moving an existing tensor of exactly the
      * same type. This method can be called implicitly.
      *
-     * @param o_tensor The tensor to be copied.
+     * @param o_tensor The tensor to be moved.
      */
     KOKKOS_DEFAULTED_FUNCTION TensorCommon(TensorCommon&& o_tensor) = default;
 
@@ -148,7 +148,7 @@ public:
 
     /**
      * @brief A move assign operator.
-     * @param other The tensor to be copied.
+     * @param other The tensor to be moved.
      * @return A reference to the current tensor.
      */
     KOKKOS_FUNCTION TensorCommon& operator=(TensorCommon&& other)
@@ -177,7 +177,7 @@ public:
     /**
      * @brief An operator to divide all the element of the current tensor by
      * a value.
-     * @param val The value by which the elements should be multiplied.
+     * @param val The value by which the elements should be divided.
      * @return A reference to the current modified tensor.
      */
     template <class Oelement_type>
@@ -368,7 +368,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...> operator+(
 }
 
 /**
- * An operator to add the elements of a tensor to a coordinate.
+ * An operator to subtract the elements of a tensor to a coordinate.
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
  * @param[in] coord The coordinate from which the tensor is subtracted.
@@ -403,7 +403,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator+=(
 }
 
 /**
- * An operator to add the elements of a tensor to a coordinate.
+ * An operator to subtract the elements of a tensor to a coordinate.
  * This can be useful in some calculations, e.g when calculating the foot
  * of a characteristic.
  * @param[inout] coord The coordinate from which the tensor is subtracted.
@@ -421,7 +421,7 @@ KOKKOS_INLINE_FUNCTION Coord<Dims...>& operator-=(
 }
 
 /**
- * @brief An operator to multiply all a tensor by a value.
+ * @brief An operator to multiply all the elements of the current tensor by a value.
  * @param val The value by which the elements should be multiplied.
  * @param tensor The tensor being multiplied.
  * @return A new tensor containing the result of the multiplication.
@@ -459,8 +459,8 @@ KOKKOS_FUNCTION TensorType operator*(TensorType const& tensor, Oelement_type val
  * @brief An operator to divide all the element of the current tensor by
  * a value.
  * @param tensor The tensor being divided.
- * @param val The value by which the elements should be multiplied.
- * @return A new tensor containing the result of the multiplication.
+ * @param val The value by which the elements should be divided
+ * @return A new tensor containing the result of the division.
  */
 template <
         class TensorType,
@@ -481,9 +481,8 @@ KOKKOS_FUNCTION TensorType operator/(TensorType const& tensor, Oelement_type val
  */
 template <
         class TensorType,
-        class Oelement_type,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor, Oelement_type val)
+KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor,TensorType const& val)
 {
     TensorType result(tensor);
     result += val;
