@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
 - Add `LagrangeEvaluator` to evaluate a Lagrange polynomial centred on a given point.
 - Added error messages when wrong input is provided to a simulation.
+- Add `concepts::InterpolationBuilder` to make `IdentityInterpolationBuilder` and `ddc::SplineBuilder` interchangeable.
+- Add `concepts::InterpolationEvaluator` to make `LagrangeEvaluator` and `ddc::SplineEvaluator` interchangeable.
 
 ### Fixed
 
@@ -37,6 +39,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add missing `module purge` in Persee toolchains.
 
 ### Deprecated
+
+- Deprecated `Lagrange` class.
 
 ### Removed
 
