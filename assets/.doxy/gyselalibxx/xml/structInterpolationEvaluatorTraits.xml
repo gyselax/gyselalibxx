@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structInterpolationEvaluatorTraits" kind="struct" language="C++" prot="public">
+    <compoundname>InterpolationEvaluatorTraits</compoundname>
+    <includes refid="i__interpolation__evaluator_8hpp" local="no">i_interpolation_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Evaluator</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" prot="public" static="no">
+        <type>typename Evaluator::data_type</type>
+        <definition>using InterpolationEvaluatorTraits&lt; Evaluator &gt;::data_type =  typename Evaluator::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type that the data is saved on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" prot="public" static="no">
+        <type>typename Evaluator::evaluation_idx_range_type</type>
+        <definition>using InterpolationEvaluatorTraits&lt; Evaluator &gt;::evaluation_idx_range_type =  typename Evaluator::evaluation_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits::evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The 1D index range for the evaluation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1a1285ea0f7b6a58fee335155575ccf392" prot="public" static="no">
+        <type>typename Evaluator::coeff_grid_type</type>
+        <definition>using InterpolationEvaluatorTraits&lt; Evaluator &gt;::coeff_grid_type =  typename Evaluator::coeff_grid_type</definition>
+        <argsstring></argsstring>
+        <name>coeff_grid_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits::coeff_grid_type</qualifiedname>
+        <briefdescription>
+<para>The discrete dimension for the interpolation coefficients. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1a19bb1b14421bc5c63617e38b52592551" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationIdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>typename Evaluator::template <ref refid="structInterpolationEvaluatorTraits_1a19bb1b14421bc5c63617e38b52592551" kindref="member">batched_evaluation_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; Evaluator &gt;::batched_evaluation_idx_range_type =  typename Evaluator::template batched_evaluation_idx_range_type&lt; BatchedInterpolationIdxRange&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_evaluation_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits::batched_evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Batched index range for the evaluation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationEvaluatorTraits_1aa3307759834c89348e6b133d7eaf86e9" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class D</type>
+          </param>
+        </templateparamlist>
+        <type>typename Evaluator::template <ref refid="structInterpolationEvaluatorTraits_1aa3307759834c89348e6b133d7eaf86e9" kindref="member">batched_coeff_idx_range_type</ref>&lt; D &gt;</type>
+        <definition>using InterpolationEvaluatorTraits&lt; Evaluator &gt;::batched_coeff_idx_range_type =  typename Evaluator::template batched_coeff_idx_range_type&lt;D&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_coeff_idx_range_type</name>
+        <qualifiedname>InterpolationEvaluatorTraits::batched_coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Batched domain with the evaluation grid replaced by coeff_grid_type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="42" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A traits struct for accessing type aliases of an interpolation evaluator. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The primary template delegates to the evaluator&apos;s own type aliases. It handles the common case where an evaluator already uses the convention names (e.g. <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> exposes <computeroutput>evaluation_idx_range_type</computeroutput> and <computeroutput>batched_coeff_idx_range_type</computeroutput> directly).</para>
+<para>Specialise this struct to adapt external evaluators whose alias names differ (e.g. ddc::SplineEvaluator).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolation evaluator type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" bodystart="23" bodyend="43"/>
+    <listofallmembers>
+      <member refid="structInterpolationEvaluatorTraits_1aa3307759834c89348e6b133d7eaf86e9" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>batched_coeff_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_1a19bb1b14421bc5c63617e38b52592551" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>batched_evaluation_idx_range_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_1a1285ea0f7b6a58fee335155575ccf392" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>coeff_grid_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>data_type</name></member>
+      <member refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" prot="public" virt="non-virtual"><scope>InterpolationEvaluatorTraits</scope><name>evaluation_idx_range_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

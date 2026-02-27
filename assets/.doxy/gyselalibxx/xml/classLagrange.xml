@@ -229,7 +229,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange.hpp" line="44" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange.hpp" bodystart="44" bodyend="56"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange.hpp" line="44" column="22" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange.hpp" bodystart="44" bodyend="56"/>
       </memberdef>
       <memberdef kind="function" id="classLagrange_1a74b5dae43695245aaf9063c1dedc0523" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>KOKKOS_FUNCTION double</type>

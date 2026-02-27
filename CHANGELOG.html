@@ -579,6 +579,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add <code>IdentityInterpolationBuilder</code> to copy data required for an interpolation operator.</li>
 <li>Add <code>LagrangeEvaluator</code> to evaluate a Lagrange polynomial centred on a given point.</li>
 <li>Added error messages when wrong input is provided to a simulation.</li>
+<li>Add <code>concepts::InterpolationBuilder</code> to make <code>IdentityInterpolationBuilder</code> and <code>ddc::SplineBuilder</code> interchangeable.</li>
+<li>Add <code>concepts::InterpolationEvaluator</code> to make <code>LagrangeEvaluator</code> and <code>ddc::SplineEvaluator</code> interchangeable.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -600,6 +602,9 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add missing <code>module purge</code> in Persee toolchains.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
+<ul>
+<li>Deprecated <code>Lagrange</code> class.</li>
+</ul>
 <h3 id="removed">Removed</h3>
 <ul>
 <li>Remove the default PDI configuration file for the mini-app.</li>

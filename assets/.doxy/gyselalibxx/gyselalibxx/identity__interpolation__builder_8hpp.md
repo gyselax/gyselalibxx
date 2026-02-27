@@ -11,6 +11,7 @@
 
 
 * `#include "ddc_aliases.hpp"`
+* `#include "i_interpolation_builder.hpp"`
 
 
 
@@ -30,7 +31,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md) &lt;class ExecSpace, class MemorySpace, class InterpolationDDim, class Basis&gt;<br>_A builder class for copying data._  |
+| class | [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md) &lt;class ExecSpace, class MemorySpace, class DataType, class InterpolationGrid, class Basis&gt;<br>_A builder class for copying data._  |
 
 
 

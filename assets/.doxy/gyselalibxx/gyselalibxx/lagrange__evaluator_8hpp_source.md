@@ -10,6 +10,9 @@
 ```C++
 // SPDX-License-Identifier: MIT
 #pragma once
+#include "i_interpolation_evaluator.hpp"
+#include "lagrange_basis_non_uniform.hpp"
+#include "lagrange_basis_uniform.hpp"
 
 template <
         class ExecSpace,
@@ -26,32 +29,35 @@ public:
 
     using memory_space = MemorySpace;
 
+    using data_type = DataType;
+
     using continuous_dimension_type = typename LagrangeBasis::continuous_dimension_type;
 
     using lagrange_basis_type = LagrangeBasis;
 
-    using basis_domain_type =
+    using coeff_grid_type =
             typename LagrangeBasis::template Impl<LagrangeBasis, MemorySpace>::knot_grid;
 
-    using evaluation_domain_type = IdxRange<InterpolationGrid>;
+    using evaluation_idx_range_type = IdxRange<InterpolationGrid>;
 
     template <
-            class BatchedInterpolationGrid,
-            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationGrid>>>
-    using batched_evaluation_domain_type = BatchedInterpolationGrid;
+            class BatchedInterpolationIdxRange,
+            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationIdxRange>>>
+    using batched_evaluation_idx_range_type = BatchedInterpolationIdxRange;
 
-    using lagrange_domain_type = IdxRange<basis_domain_type>;
-
-    template <
-            class BatchedInterpolationGrid,
-            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationGrid>>>
-    using batch_domain_type = ddc::remove_dims_of_t<BatchedInterpolationGrid, InterpolationGrid>;
+    using coeff_idx_range_type = IdxRange<coeff_grid_type>;
 
     template <
-            class BatchedInterpolationDDom,
-            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationDDom>>>
-    using batched_lagrange_domain_type
-            = ddc::replace_dim_of_t<BatchedInterpolationDDom, InterpolationGrid, basis_domain_type>;
+            class BatchedInterpolationIdxRange,
+            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationIdxRange>>>
+    using batch_idx_range_type
+            = ddc::remove_dims_of_t<BatchedInterpolationIdxRange, InterpolationGrid>;
+
+    template <
+            class BatchedInterpolationIdxRange,
+            class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationIdxRange>>>
+    using batched_coeff_idx_range_type = ddc::
+            replace_dim_of_t<BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type>;
 
     using lower_extrapolation_rule_type = LowerExtrapolationRule;
 
@@ -78,14 +84,14 @@ public:
                     DataType,
                     LowerExtrapolationRule,
                     Coord<continuous_dimension_type>,
-                    ConstField<DataType, lagrange_domain_type, memory_space>>,
+                    ConstField<DataType, coeff_idx_range_type, memory_space>>,
             "LowerExtrapolationRule::operator() has to be callable with usual arguments.");
     static_assert(
             std::is_invocable_r_v<
                     DataType,
                     UpperExtrapolationRule,
                     Coord<continuous_dimension_type>,
-                    ConstField<DataType, lagrange_domain_type, memory_space>>,
+                    ConstField<DataType, coeff_idx_range_type, memory_space>>,
             "UpperExtrapolationRule::operator() has to be callable with usual arguments.");
 
     explicit LagrangeEvaluator(
@@ -141,16 +147,16 @@ public:
                     Layout2> const coords_eval,
             ConstField<
                     DataType,
-                    batched_lagrange_domain_type<IdxRangeBatchedInterpolation>,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
                     memory_space,
                     Layout3> const lagrange_coef) const
     {
-        evaluation_domain_type const evaluation_idx_range(get_idx_range(lagrange_eval));
-        batch_domain_type<IdxRangeBatchedInterpolation> const batch_idx_range(
+        evaluation_idx_range_type const evaluation_idx_range(get_idx_range(lagrange_eval));
+        batch_idx_range_type<IdxRangeBatchedInterpolation> const batch_idx_range(
                 get_idx_range(lagrange_eval));
 
         using IdxBatchInterpolation =
-                typename batch_domain_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
 
         ddc::parallel_for_each(
                 "Lagrange_evaluate",
@@ -163,25 +169,26 @@ public:
                 });
     }
 
-    template <class Layout1, class Layout2, class BatchedInterpolationGrid>
+    template <class Layout1, class Layout2, class BatchedInterpolationIdxRange>
     void operator()(
-            Field<DataType, BatchedInterpolationGrid, memory_space, Layout1> const lagrange_eval,
+            Field<DataType, BatchedInterpolationIdxRange, memory_space, Layout1> const
+                    lagrange_eval,
             ConstField<
                     DataType,
-                    batched_lagrange_domain_type<BatchedInterpolationGrid>,
+                    batched_coeff_idx_range_type<BatchedInterpolationIdxRange>,
                     memory_space,
                     Layout2> const lagrange_coef) const
     {
-        evaluation_domain_type const evaluation_idx_range(get_idx_range(lagrange_eval));
-        batch_domain_type<BatchedInterpolationGrid> const batch_idx_range(
+        evaluation_idx_range_type const evaluation_idx_range(get_idx_range(lagrange_eval));
+        batch_idx_range_type<BatchedInterpolationIdxRange> const batch_idx_range(
                 get_idx_range(lagrange_eval));
 
         ddc::parallel_for_each(
                 "lagrange_evaluate",
                 exec_space(),
                 batch_idx_range,
-                KOKKOS_CLASS_LAMBDA(typename batch_domain_type<
-                                    BatchedInterpolationGrid>::discrete_element_type const j) {
+                KOKKOS_CLASS_LAMBDA(typename batch_idx_range_type<
+                                    BatchedInterpolationIdxRange>::discrete_element_type const j) {
                     for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
                         Coord<continuous_dimension_type> coord_eval_1D = ddc::coordinate(i);
                         lagrange_eval(j, i) = eval(coord_eval_1D, lagrange_coef[j]);
@@ -193,7 +200,7 @@ private:
     template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType
     eval(Coord<CoordsDims...> const& coord_eval,
-         ConstField<DataType, lagrange_domain_type, memory_space, Layout> const lagrange_coef) const
+         ConstField<DataType, coeff_idx_range_type, memory_space, Layout> const lagrange_coef) const
     {
         Coord<continuous_dimension_type> coord_eval_interest(coord_eval);
         if constexpr (lagrange_basis_type::is_periodic()) {
@@ -221,7 +228,7 @@ private:
     KOKKOS_INLINE_FUNCTION DataType eval_no_bc(
             Idx<DerivDims...> const& deriv_order,
             Coord<CoordsDims...> const& coord_eval,
-            ConstField<DataType, lagrange_domain_type, memory_space, Layout> const lagrange_coef)
+            ConstField<DataType, coeff_idx_range_type, memory_space, Layout> const lagrange_coef)
             const
     {
         using deriv_dim = ddc::Deriv<continuous_dimension_type>;

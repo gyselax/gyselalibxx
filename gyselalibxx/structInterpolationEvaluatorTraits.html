@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp} - GyselalibX</title>
+    <title>Struct InterpolationEvaluatorTraits - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d221.md";
+        var mkdocs_page_name = "Struct InterpolationEvaluatorTraits";
+        var mkdocs_page_input_path = "gyselalibxx/structInterpolationEvaluatorTraits.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</li>
+      <li class="breadcrumb-item active">Struct InterpolationEvaluatorTraits</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d221.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structInterpolationEvaluatorTraits.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,10 +566,84 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadraturegauss_legendre_integrationcpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d221.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</strong></a></p>
+                <div><h1 id="struct-interpolationevaluatortraits">Struct InterpolationEvaluatorTraits</h1>
+<p><strong>template &lt;class Evaluator&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="structInterpolationEvaluatorTraits.html"><strong>InterpolationEvaluatorTraits</strong></a></p>
+<p><em>A traits struct for accessing type aliases of an interpolation evaluator.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;i_interpolation_evaluator.hpp&gt;</code></li>
+</ul>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::template <a href="structInterpolationEvaluatorTraits.html#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>&lt; D &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>  <br><em>Batched domain with the evaluation grid replaced by coeff_grid_type.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::template <a href="structInterpolationEvaluatorTraits.html#typedef-batched_evaluation_idx_range_type"><strong>batched_evaluation_idx_range_type</strong></a>&lt; BatchedInterpolationIdxRange &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batched_evaluation_idx_range_type"><strong>batched_evaluation_idx_range_type</strong></a>  <br><em>Batched index range for the evaluation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::coeff_grid_type</td>
+<td style="text-align: left;"><a href="#typedef-coeff_grid_type"><strong>coeff_grid_type</strong></a>  <br><em>The discrete dimension for the interpolation coefficients.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::data_type</td>
+<td style="text-align: left;"><a href="#typedef-data_type"><strong>data_type</strong></a>  <br><em>The data type that the data is saved on.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Evaluator::evaluation_idx_range_type</td>
+<td style="text-align: left;"><a href="#typedef-evaluation_idx_range_type"><strong>evaluation_idx_range_type</strong></a>  <br><em>The 1D index range for the evaluation mesh.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>The primary template delegates to the evaluator's own type aliases. It handles the common case where an evaluator already uses the convention names (e.g. <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> exposes <code>evaluation_idx_range_type</code> and <code>batched_coeff_idx_range_type</code> directly).</p>
+<p>Specialise this struct to adapt external evaluators whose alias names differ (e.g. ddc::SplineEvaluator).</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Evaluator</code> The interpolation evaluator type. </li>
+</ul>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-batched_coeff_idx_range_type">typedef batched_coeff_idx_range_type</h3>
+<p><em>Batched domain with the evaluation grid replaced by coeff_grid_type.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::batched_coeff_idx_range_type =  typename Evaluator::template batched_coeff_idx_range_type&lt;D&gt;;
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp</code></p></div>
+
+<h3 id="typedef-batched_evaluation_idx_range_type">typedef batched_evaluation_idx_range_type</h3>
+<p><em>Batched index range for the evaluation.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::batched_evaluation_idx_range_type =  typename Evaluator::template batched_evaluation_idx_range_type&lt; BatchedInterpolationIdxRange&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coeff_grid_type">typedef coeff_grid_type</h3>
+<p><em>The discrete dimension for the interpolation coefficients.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::coeff_grid_type =  typename Evaluator::coeff_grid_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-data_type">typedef data_type</h3>
+<p><em>The data type that the data is saved on.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::data_type =  typename Evaluator::data_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-evaluation_idx_range_type">typedef evaluation_idx_range_type</h3>
+<p><em>The 1D index range for the evaluation mesh.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::evaluation_idx_range_type =  typename Evaluator::evaluation_idx_range_type;
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp</code></p></div>
               
             </div>
           </div><footer>

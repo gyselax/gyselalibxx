@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="30" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="33" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" prot="public" static="no">
         <type>MemorySpace</type>
@@ -55,7 +55,22 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="33" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1ad0d109fd894110740bee3523ab5fef28" prot="public" static="no">
+        <type>DataType</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::data_type =  DataType</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>LagrangeEvaluator::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type that the data is saved on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="39" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classLagrangeEvaluator_1afd2dd964bf9a6c2b38ddb5b91a6299da" prot="public" static="no">
         <type>typename LagrangeBasis::continuous_dimension_type</type>
@@ -70,7 +85,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="36" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classLagrangeEvaluator_1a952fb22f39fdb757352e211fc0966801" prot="public" static="no">
         <type>LagrangeBasis</type>
@@ -85,14 +100,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="39" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="45" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" prot="public" static="no">
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1aa14805621516e8acab534ae3a52251b1" prot="public" static="no">
         <type>typename LagrangeBasis::template Impl&lt; LagrangeBasis, MemorySpace &gt;::knot_grid</type>
-        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::basis_domain_type =  typename LagrangeBasis::template Impl&lt;LagrangeBasis, MemorySpace&gt;::knot_grid</definition>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::coeff_grid_type =  typename LagrangeBasis::template Impl&lt;LagrangeBasis, MemorySpace&gt;::knot_grid</definition>
         <argsstring></argsstring>
-        <name>basis_domain_type</name>
-        <qualifiedname>LagrangeEvaluator::basis_domain_type</qualifiedname>
+        <name>coeff_grid_type</name>
+        <qualifiedname>LagrangeEvaluator::coeff_grid_type</qualifiedname>
         <briefdescription>
 <para>The grid on which the interpolation coefficients should be provided. </para>
         </briefdescription>
@@ -100,14 +115,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="43" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="48" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classLagrangeEvaluator_1a35759cafed3a4e9a845c80974c9c2c76" prot="public" static="no">
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1a2b3881bc56af00edf8ca7a956185dfd8" prot="public" static="no">
         <type>IdxRange&lt; InterpolationGrid &gt;</type>
-        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::evaluation_domain_type =  IdxRange&lt;InterpolationGrid&gt;</definition>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::evaluation_idx_range_type =  IdxRange&lt;InterpolationGrid&gt;</definition>
         <argsstring></argsstring>
-        <name>evaluation_domain_type</name>
-        <qualifiedname>LagrangeEvaluator::evaluation_domain_type</qualifiedname>
+        <name>evaluation_idx_range_type</name>
+        <qualifiedname>LagrangeEvaluator::evaluation_idx_range_type</qualifiedname>
         <briefdescription>
 <para>The type of the domain for the 1D evaluation mesh used by this class. </para>
         </briefdescription>
@@ -115,23 +130,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="46" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="46" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classLagrangeEvaluator_1a818b483eae319f58efd13d714fbff36d" prot="public" static="no">
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1aa427cbee56f39d3b4c2af9824e36f28a" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type>class BatchedInterpolationGrid</type>
+            <type>class BatchedInterpolationIdxRange</type>
           </param>
           <param>
             <type>class</type>
-            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationGrid&gt;&gt;</defval>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationIdxRange&gt;&gt;</defval>
           </param>
         </templateparamlist>
-        <type>BatchedInterpolationGrid</type>
-        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batched_evaluation_domain_type =  BatchedInterpolationGrid</definition>
+        <type>BatchedInterpolationIdxRange</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batched_evaluation_idx_range_type =  BatchedInterpolationIdxRange</definition>
         <argsstring></argsstring>
-        <name>batched_evaluation_domain_type</name>
-        <qualifiedname>LagrangeEvaluator::batched_evaluation_domain_type</qualifiedname>
+        <name>batched_evaluation_idx_range_type</name>
+        <qualifiedname>LagrangeEvaluator::batched_evaluation_idx_range_type</qualifiedname>
         <briefdescription>
 <para>The type of the whole domain representing evaluation points. </para>
         </briefdescription>
@@ -149,14 +164,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="56" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" prot="public" static="no">
-        <type>IdxRange&lt; <ref refid="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" kindref="member">basis_domain_type</ref> &gt;</type>
-        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::lagrange_domain_type =  IdxRange&lt;basis_domain_type&gt;</definition>
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1ac4f442b7234a311f049383d3e336b934" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="classLagrangeEvaluator_1aa14805621516e8acab534ae3a52251b1" kindref="member">coeff_grid_type</ref> &gt;</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::coeff_idx_range_type =  IdxRange&lt;coeff_grid_type&gt;</definition>
         <argsstring></argsstring>
-        <name>lagrange_domain_type</name>
-        <qualifiedname>LagrangeEvaluator::lagrange_domain_type</qualifiedname>
+        <name>coeff_idx_range_type</name>
+        <qualifiedname>LagrangeEvaluator::coeff_idx_range_type</qualifiedname>
         <briefdescription>
 <para>The type of the 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain corresponding to the dimension of interest. </para>
         </briefdescription>
@@ -164,23 +179,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classLagrangeEvaluator_1aec0eb2160df56bf516868831776cc389" prot="public" static="no">
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1aec086914105c4d1cc46b4105ab04095c" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type>class BatchedInterpolationGrid</type>
+            <type>class BatchedInterpolationIdxRange</type>
           </param>
           <param>
             <type>class</type>
-            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationGrid&gt;&gt;</defval>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationIdxRange&gt;&gt;</defval>
           </param>
         </templateparamlist>
-        <type>ddc::remove_dims_of_t&lt; BatchedInterpolationGrid, InterpolationGrid &gt;</type>
-        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batch_domain_type =  ddc::remove_dims_of_t&lt;BatchedInterpolationGrid, InterpolationGrid&gt;</definition>
+        <type>ddc::remove_dims_of_t&lt; BatchedInterpolationIdxRange, InterpolationGrid &gt;</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batch_idx_range_type =  ddc::remove_dims_of_t&lt;BatchedInterpolationIdxRange, InterpolationGrid&gt;</definition>
         <argsstring></argsstring>
-        <name>batch_domain_type</name>
-        <qualifiedname>LagrangeEvaluator::batch_domain_type</qualifiedname>
+        <name>batch_idx_range_type</name>
+        <qualifiedname>LagrangeEvaluator::batch_idx_range_type</qualifiedname>
         <briefdescription>
 <para>The type of the batch domain (obtained by removing the dimension of interest from the whole domain). </para>
         </briefdescription>
@@ -198,23 +213,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="70" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="77" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" prot="public" static="no">
+      <memberdef kind="typedef" id="classLagrangeEvaluator_1a1f62d58f6ca9f533846027355a3b5d2c" prot="public" static="no">
         <templateparamlist>
           <param>
-            <type>class BatchedInterpolationDDom</type>
+            <type>class BatchedInterpolationIdxRange</type>
           </param>
           <param>
             <type>class</type>
-            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationDDom&gt;&gt;</defval>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationIdxRange&gt;&gt;</defval>
           </param>
         </templateparamlist>
-        <type>ddc::replace_dim_of_t&lt; BatchedInterpolationDDom, InterpolationGrid, <ref refid="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" kindref="member">basis_domain_type</ref> &gt;</type>
-        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batched_lagrange_domain_type =  ddc::replace_dim_of_t&lt;BatchedInterpolationDDom, InterpolationGrid, basis_domain_type&gt;</definition>
+        <type>ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, InterpolationGrid, <ref refid="classLagrangeEvaluator_1aa14805621516e8acab534ae3a52251b1" kindref="member">coeff_grid_type</ref> &gt;</type>
+        <definition>using LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::batched_coeff_idx_range_type =  ddc:: replace_dim_of_t&lt;BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type&gt;</definition>
         <argsstring></argsstring>
-        <name>batched_lagrange_domain_type</name>
-        <qualifiedname>LagrangeEvaluator::batched_lagrange_domain_type</qualifiedname>
+        <name>batched_coeff_idx_range_type</name>
+        <qualifiedname>LagrangeEvaluator::batched_coeff_idx_range_type</qualifiedname>
         <briefdescription>
 <para>The type of the whole <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain (cartesian product of 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain and batch domain) preserving the order of dimensions. </para>
         </briefdescription>
@@ -232,7 +247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="82" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="89" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classLagrangeEvaluator_1a653c9afe4c6a14def4643d12e1546bb0" prot="public" static="no">
         <type>LowerExtrapolationRule</type>
@@ -247,7 +262,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="85" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classLagrangeEvaluator_1aa6a81e8a7ad93e886018bcfaa7002de2" prot="public" static="no">
         <type>UpperExtrapolationRule</type>
@@ -262,7 +277,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="88" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -278,7 +293,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="92" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="92" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="99" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classLagrangeEvaluator_1ae869b4e35a85568d53d75f533163369a" prot="private" static="no" mutable="no">
         <type>UpperExtrapolationRule</type>
@@ -292,7 +307,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="94" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="94" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="101" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="101" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -337,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="129" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="129" bodyend="135"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="136" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="136" bodyend="142"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1ad2ec20ca49f6226262039f946859ab78" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -366,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="142" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="149" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1a5a6b468e22f490961d24740700d78eb9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -395,7 +410,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="149" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="156" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1aec9870e4eb313c44640755e6e768ea29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -410,7 +425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="152" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="159" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1afb3a7522913bfcf752f858f32c49fa12" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> &amp;</type>
@@ -441,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="160" column="23"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="167" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1a30c1a66e29d7a43ea028c38415ee3694" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> &amp;</type>
@@ -472,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="168" column="23"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="175" column="23"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1a181cf7541c084c467d3a856d25b65152" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classLagrangeEvaluator_1a653c9afe4c6a14def4643d12e1546bb0" kindref="member">lower_extrapolation_rule_type</ref></type>
@@ -493,7 +508,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="180" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="180" bodyend="183"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="187" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="187" bodyend="190"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1af95b50680e42b7727fcdf439a87bd016" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classLagrangeEvaluator_1aa6a81e8a7ad93e886018bcfaa7002de2" kindref="member">upper_extrapolation_rule_type</ref></type>
@@ -514,7 +529,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="195" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="195" bodyend="198"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="202" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="202" bodyend="205"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1a84a9e487a0487108b83726a130fa8f14" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -571,9 +586,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="213" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="213" bodyend="219"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="220" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="220" bodyend="226"/>
       </memberdef>
-      <memberdef kind="function" id="classLagrangeEvaluator_1aeb214616cc6e3d10e7d92e097638d23e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classLagrangeEvaluator_1a940bc8a12231b0dc1d82dd5b60f0ea75" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Layout1</type>
@@ -595,7 +610,7 @@
         </templateparamlist>
         <type>void</type>
         <definition>void LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::operator()</definition>
-        <argsstring>(Field&lt; DataType, IdxRangeBatchedInterpolation, memory_space, Layout1 &gt; const lagrange_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, memory_space, Layout2 &gt; const coords_eval, ConstField&lt; DataType, batched_lagrange_domain_type&lt; IdxRangeBatchedInterpolation &gt;, memory_space, Layout3 &gt; const lagrange_coef) const</argsstring>
+        <argsstring>(Field&lt; DataType, IdxRangeBatchedInterpolation, memory_space, Layout1 &gt; const lagrange_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, memory_space, Layout2 &gt; const coords_eval, ConstField&lt; DataType, batched_coeff_idx_range_type&lt; IdxRangeBatchedInterpolation &gt;, memory_space, Layout3 &gt; const lagrange_coef) const</argsstring>
         <name>operator()</name>
         <qualifiedname>LagrangeEvaluator::operator()</qualifiedname>
         <param>
@@ -607,7 +622,7 @@
           <declname>coords_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" kindref="member">batched_lagrange_domain_type</ref>&lt; IdxRangeBatchedInterpolation &gt;, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout3 &gt; const</type>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1a1f62d58f6ca9f533846027355a3b5d2c" kindref="member">batched_coeff_idx_range_type</ref>&lt; IdxRangeBatchedInterpolation &gt;, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout3 &gt; const</type>
           <declname>lagrange_coef</declname>
         </param>
         <briefdescription>
@@ -615,7 +630,7 @@
         </briefdescription>
         <detaileddescription>
 <para>The <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients describe <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials defined on a cartesian product of batch_idx_range and <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
-<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type, the evaluation is performed with the 1D set of <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients identified by the same batch_domain_type::discrete_element_type.</para>
+<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_idx_range_type::discrete_element_type, the evaluation is performed with the 1D set of <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients identified by the same batch_idx_range_type::discrete_element_type.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">lagrange_eval</parametername>
@@ -645,9 +660,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="243" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="243" bodyend="273"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="250" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="250" bodyend="280"/>
       </memberdef>
-      <memberdef kind="function" id="classLagrangeEvaluator_1a63ada9689f6673d090fa372d6e923253" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classLagrangeEvaluator_1ad4bb1d5d33263f705594b4a999eec9dd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Layout1</type>
@@ -656,20 +671,20 @@
             <type>class Layout2</type>
           </param>
           <param>
-            <type>class BatchedInterpolationGrid</type>
+            <type>class BatchedInterpolationIdxRange</type>
           </param>
         </templateparamlist>
         <type>void</type>
         <definition>void LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::operator()</definition>
-        <argsstring>(Field&lt; DataType, BatchedInterpolationGrid, memory_space, Layout1 &gt; const lagrange_eval, ConstField&lt; DataType, batched_lagrange_domain_type&lt; BatchedInterpolationGrid &gt;, memory_space, Layout2 &gt; const lagrange_coef) const</argsstring>
+        <argsstring>(Field&lt; DataType, BatchedInterpolationIdxRange, memory_space, Layout1 &gt; const lagrange_eval, ConstField&lt; DataType, batched_coeff_idx_range_type&lt; BatchedInterpolationIdxRange &gt;, memory_space, Layout2 &gt; const lagrange_coef) const</argsstring>
         <name>operator()</name>
         <qualifiedname>LagrangeEvaluator::operator()</qualifiedname>
         <param>
-          <type>Field&lt; DataType, BatchedInterpolationGrid, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout1 &gt; const</type>
+          <type>Field&lt; DataType, BatchedInterpolationIdxRange, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout1 &gt; const</type>
           <declname>lagrange_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" kindref="member">batched_lagrange_domain_type</ref>&lt; BatchedInterpolationGrid &gt;, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout2 &gt; const</type>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1a1f62d58f6ca9f533846027355a3b5d2c" kindref="member">batched_coeff_idx_range_type</ref>&lt; BatchedInterpolationIdxRange &gt;, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout2 &gt; const</type>
           <declname>lagrange_coef</declname>
         </param>
         <briefdescription>
@@ -677,7 +692,7 @@
         </briefdescription>
         <detaileddescription>
 <para>The <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients describe <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials defined on a cartesian product of batch_idx_range and <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
-<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type, the evaluation is performed with the 1D set of <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients identified by the same batch_domain_type::discrete_element_type.</para>
+<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_idx_range_type::discrete_element_type, the evaluation is performed with the 1D set of <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients identified by the same batch_idx_range_type::discrete_element_type.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">lagrange_eval</parametername>
@@ -699,11 +714,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="289" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="289" bodyend="312"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="296" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="296" bodyend="320"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classLagrangeEvaluator_1adcd503f82a5159aa1d64387b625ee6ec" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Layout</type>
@@ -716,7 +731,7 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION DataType</type>
         <definition>KOKKOS_INLINE_FUNCTION DataType LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::eval</definition>
-        <argsstring>(Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, lagrange_domain_type, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
+        <argsstring>(Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, coeff_idx_range_type, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
         <name>eval</name>
         <qualifiedname>LagrangeEvaluator::eval</qualifiedname>
         <param>
@@ -724,7 +739,7 @@
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" kindref="member">lagrange_domain_type</ref>, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout &gt; const</type>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1ac4f442b7234a311f049383d3e336b934" kindref="member">coeff_idx_range_type</ref>, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout &gt; const</type>
           <declname>lagrange_coef</declname>
         </param>
         <briefdescription>
@@ -733,9 +748,9 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="317" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="317" bodyend="340"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="325" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="325" bodyend="348"/>
       </memberdef>
-      <memberdef kind="function" id="classLagrangeEvaluator_1a9624b338beb3ce46ad374d1740fb86e5" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classLagrangeEvaluator_1a5dd80d5c33512b83f508a62bc3657093" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class...</type>
@@ -753,7 +768,7 @@
         </templateparamlist>
         <type>KOKKOS_INLINE_FUNCTION DataType</type>
         <definition>KOKKOS_INLINE_FUNCTION DataType LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::eval_no_bc</definition>
-        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, lagrange_domain_type, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
+        <argsstring>(Idx&lt; DerivDims... &gt; const &amp;deriv_order, Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, coeff_idx_range_type, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
         <name>eval_no_bc</name>
         <qualifiedname>LagrangeEvaluator::eval_no_bc</qualifiedname>
         <param>
@@ -765,7 +780,7 @@
           <declname>coord_eval</declname>
         </param>
         <param>
-          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" kindref="member">lagrange_domain_type</ref>, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout &gt; const</type>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1ac4f442b7234a311f049383d3e336b934" kindref="member">coeff_idx_range_type</ref>, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout &gt; const</type>
           <declname>lagrange_coef</declname>
         </param>
         <briefdescription>
@@ -774,7 +789,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="343" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="343" bodyend="411"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="351" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="351" bodyend="419"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION auto</type>
@@ -793,7 +808,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="415" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="415" bodyend="443"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="423" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="423" bodyend="451"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -860,20 +875,21 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="26" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="27" bodyend="444"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="30" bodyend="452"/>
     <listofallmembers>
-      <member refid="classLagrangeEvaluator_1afd4f68d7385d1e47ae867696697b9705" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>basis_domain_type</name></member>
-      <member refid="classLagrangeEvaluator_1aec0eb2160df56bf516868831776cc389" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batch_domain_type</name></member>
-      <member refid="classLagrangeEvaluator_1a818b483eae319f58efd13d714fbff36d" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batched_evaluation_domain_type</name></member>
-      <member refid="classLagrangeEvaluator_1acf9ccf68c2814b4403fbf9eda46f0802" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batched_lagrange_domain_type</name></member>
+      <member refid="classLagrangeEvaluator_1aec086914105c4d1cc46b4105ab04095c" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batch_idx_range_type</name></member>
+      <member refid="classLagrangeEvaluator_1a1f62d58f6ca9f533846027355a3b5d2c" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batched_coeff_idx_range_type</name></member>
+      <member refid="classLagrangeEvaluator_1aa427cbee56f39d3b4c2af9824e36f28a" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batched_evaluation_idx_range_type</name></member>
+      <member refid="classLagrangeEvaluator_1aa14805621516e8acab534ae3a52251b1" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>coeff_grid_type</name></member>
+      <member refid="classLagrangeEvaluator_1ac4f442b7234a311f049383d3e336b934" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>coeff_idx_range_type</name></member>
       <member refid="classLagrangeEvaluator_1afd2dd964bf9a6c2b38ddb5b91a6299da" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>continuous_dimension_type</name></member>
-      <member refid="classLagrangeEvaluator_1adcd503f82a5159aa1d64387b625ee6ec" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval</name></member>
-      <member refid="classLagrangeEvaluator_1a9624b338beb3ce46ad374d1740fb86e5" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval_no_bc</name></member>
-      <member refid="classLagrangeEvaluator_1a35759cafed3a4e9a845c80974c9c2c76" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>evaluation_domain_type</name></member>
+      <member refid="classLagrangeEvaluator_1ad0d109fd894110740bee3523ab5fef28" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>data_type</name></member>
+      <member refid="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval</name></member>
+      <member refid="classLagrangeEvaluator_1a5dd80d5c33512b83f508a62bc3657093" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval_no_bc</name></member>
+      <member refid="classLagrangeEvaluator_1a2b3881bc56af00edf8ca7a956185dfd8" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>evaluation_idx_range_type</name></member>
       <member refid="classLagrangeEvaluator_1ace70f78b0de89a44f8d33b11c689d6c9" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>exec_space</name></member>
       <member refid="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>getclosest</name></member>
       <member refid="classLagrangeEvaluator_1a952fb22f39fdb757352e211fc0966801" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>lagrange_basis_type</name></member>
-      <member refid="classLagrangeEvaluator_1a4fb2f9eeded9ab5afb5b2f2c343d4cbf" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>lagrange_domain_type</name></member>
       <member refid="classLagrangeEvaluator_1aa422bd8a3350eed1e85c8c5609a17c1f" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>LagrangeEvaluator</name></member>
       <member refid="classLagrangeEvaluator_1ad2ec20ca49f6226262039f946859ab78" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>LagrangeEvaluator</name></member>
       <member refid="classLagrangeEvaluator_1a5a6b468e22f490961d24740700d78eb9" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>LagrangeEvaluator</name></member>
@@ -883,8 +899,8 @@
       <member refid="classLagrangeEvaluator_1ae869b4e35a85568d53d75f533163369a" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>m_upper_extrap_rule</name></member>
       <member refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>memory_space</name></member>
       <member refid="classLagrangeEvaluator_1a84a9e487a0487108b83726a130fa8f14" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator()</name></member>
-      <member refid="classLagrangeEvaluator_1aeb214616cc6e3d10e7d92e097638d23e" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator()</name></member>
-      <member refid="classLagrangeEvaluator_1a63ada9689f6673d090fa372d6e923253" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator()</name></member>
+      <member refid="classLagrangeEvaluator_1a940bc8a12231b0dc1d82dd5b60f0ea75" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator()</name></member>
+      <member refid="classLagrangeEvaluator_1ad4bb1d5d33263f705594b4a999eec9dd" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator()</name></member>
       <member refid="classLagrangeEvaluator_1afb3a7522913bfcf752f858f32c49fa12" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator=</name></member>
       <member refid="classLagrangeEvaluator_1a30c1a66e29d7a43ea028c38415ee3694" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>operator=</name></member>
       <member refid="classLagrangeEvaluator_1af95b50680e42b7727fcdf439a87bd016" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>upper_extrapolation_rule</name></member>

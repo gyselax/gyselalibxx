@@ -33,6 +33,9 @@
 * **build\_periodic\_matrix** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **batched\_derivs\_idx\_range\_xmax** ([**IInterpolator**](classIInterpolator.md), [**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md), [**LagrangeInterpolator**](classLagrangeInterpolator.md), [**SplineInterpolator**](classSplineInterpolator.md))
 * **batched\_derivs\_idx\_range\_xmin** ([**IInterpolator**](classIInterpolator.md), [**IPreallocatableInterpolator**](classIPreallocatableInterpolator.md), [**LagrangeInterpolator**](classLagrangeInterpolator.md), [**SplineInterpolator**](classSplineInterpolator.md))
+* **batched\_basis\_idx\_range** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
+* **batched\_derivs\_xmax\_domain** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
+* **batched\_derivs\_xmin\_domain** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
 * **batch\_size** ([**MatrixBatch**](classMatrixBatch.md))
 * **break\_point\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 

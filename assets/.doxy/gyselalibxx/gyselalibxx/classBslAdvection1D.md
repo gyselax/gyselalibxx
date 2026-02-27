@@ -123,7 +123,6 @@ The characteristic equation is solved using a time integration method ([**ITimeS
 * `IdxRangeFunction` The index range of \(\Omega\) where allfdistribu is defined. 
 * `AdvectionFieldBuilder` The type of the spline builder for the advection field (see SplineBuilder). 
 * `AdvectionFieldEvaluator` The type of the spline evaluator for the advection field (see SplineEvaluator). 
- 
 * `TimeStepperBuilder` A time stepper builder indicating which time integration method should be applied to solve the characteristic equation. 
 
 
@@ -163,7 +162,6 @@ We can also use it when we want two different interpolators but defined on the s
 * `function_interpolator` Interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the domain of the function. 
 * `adv_field_builder` Builder along the GridInterest direction to build a spline representation of the advection field on the function domain. 
 * `adv_field_evaluator` Evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. 
- 
 * `time_stepper_builder` A builder for the time integration method used for the characteristic equation. 
 
 

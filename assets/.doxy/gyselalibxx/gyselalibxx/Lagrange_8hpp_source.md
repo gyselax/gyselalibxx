@@ -37,7 +37,7 @@ private:
     IdxStepInterp m_poly_support;
 
 public:
-    KOKKOS_FUNCTION Lagrange(
+    KOKKOS_FUNCTION [[deprecated]] Lagrange(
             int degree,
             Field<double, IdxRangeInterp, typename Execspace::memory_space> x_nodes_fnodes,
             IdxRangeInterp idx_range,

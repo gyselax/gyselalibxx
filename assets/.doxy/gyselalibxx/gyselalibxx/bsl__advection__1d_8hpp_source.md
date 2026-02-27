@@ -18,6 +18,8 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"
+#include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "iinterpolator.hpp"
 #include "itimestepper.hpp"
 
@@ -32,6 +34,8 @@ template <
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
+    static_assert(concepts::InterpolationBuilder<AdvectionFieldBuilder>);
+    static_assert(concepts::InterpolationEvaluator<AdvectionFieldEvaluator>);
 
 private:
     // Advection index range element:
@@ -57,8 +61,8 @@ private:
     using FunctionField = DField<IdxRangeFunction>;
 
     // Type for spline representation of the advection field
-    using IdxRangeBSAdvection =
-            typename AdvectionFieldBuilder::template batched_spline_domain_type<IdxRangeAdvection>;
+    using IdxRangeBSAdvection = typename InterpolationBuilderTraits<
+            AdvectionFieldBuilder>::template batched_basis_idx_range_type<IdxRangeAdvection>;
     using AdvecFieldSplineMem = DFieldMem<IdxRangeBSAdvection>;
     using AdvecFieldSplineCoeffs = DField<IdxRangeBSAdvection>;
 
@@ -129,7 +133,7 @@ public:
 
         // Build spline representation of the advection field ....................................
         AdvecFieldSplineMem advection_field_coefs_alloc(
-                m_adv_field_builder.batched_spline_domain(get_idx_range(advection_field)));
+                batched_basis_idx_range(m_adv_field_builder, get_idx_range(advection_field)));
         AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);
 
         m_adv_field_builder(
@@ -150,7 +154,7 @@ public:
         /*
             For the time integration solver, the function we advect (here the characteristics)
             need to be defined on the same index range as the advection field. We then work on space
-            slices of the characteristic feet.  
+            slices of the characteristic feet.
         */
         FeetFieldMem slice_feet_alloc(idx_range_advection);
         FeetField slice_feet = get_field(slice_feet_alloc);
@@ -164,10 +168,10 @@ public:
 
         // Compute the characteristic feet .......................................................
         /*
-            We use a time stepper method to solve the charateristic equation. 
-            A TimeStepper needs a function to compute the updated advection field and a function to 
-            compute the updated feet. 
-                * update_adv_field: evaluate the advection field spline at the updated feet. 
+            We use a time stepper method to solve the charateristic equation.
+            A TimeStepper needs a function to compute the updated advection field and a function to
+            compute the updated feet.
+                * update_adv_field: evaluate the advection field spline at the updated feet.
         */
         // The function describing how the derivative of the evolve function is calculated.
         std::function<void(AdvecField, FeetConstField)> update_adv_field
@@ -191,8 +195,8 @@ public:
 
         // Interpolate the function ..............................................................
         /*
-            To interpolate the function we want to advect, we build for the feet a Field defined 
-            on the index range where the function is defined. 
+            To interpolate the function we want to advect, we build for the feet a Field defined
+            on the index range where the function is defined.
         */
         FieldMem<CoordInterest, IdxRangeFunction> feet_alloc(idx_range_function);
         Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);

@@ -7,6 +7,7 @@
     <includes local="no">type_traits</includes>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
     <includes refid="view_8hpp" local="yes">view.hpp</includes>
+    <includedby refid="lagrange__evaluator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</includedby>
     <incdepgraph>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp</label>
@@ -67,6 +68,18 @@
         <label>utility</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp</label>
+        <link refid="lagrange__basis__uniform_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
+        <link refid="lagrange__evaluator_8hpp_source"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="structUniformLagrangeKnots" prot="public">UniformLagrangeKnots</innerclass>
     <innerclass refid="classUniformLagrangeBasis" prot="public">UniformLagrangeBasis</innerclass>
     <innerclass refid="classUniformLagrangeBasis_1_1Impl" prot="public">UniformLagrangeBasis::Impl</innerclass>

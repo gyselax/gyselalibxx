@@ -10,6 +10,7 @@
 
 ## b
 
+* **batched\_basis\_idx\_range** ([**i\_interpolation\_builder.hpp**](i__interpolation__builder_8hpp.md))
 * **build\_random\_non\_uniform\_break\_points** ([**mesh\_builder.hpp**](mesh__builder_8hpp.md))
 * **build\_uniform\_break\_points** ([**mesh\_builder.hpp**](mesh__builder_8hpp.md))
 

@@ -34,15 +34,16 @@ _A class to evaluate, differentiate or integrate a_ [_**Lagrange**_](classLagran
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename LagrangeBasis::template Impl&lt; LagrangeBasis, MemorySpace &gt;::knot\_grid | [**basis\_domain\_type**](#typedef-basis_domain_type)  <br>_The grid on which the interpolation coefficients should be provided._  |
-| typedef ddc::remove\_dims\_of\_t&lt; BatchedInterpolationGrid, InterpolationGrid &gt; | [**batch\_domain\_type**](#typedef-batch_domain_type)  <br>_The type of the batch domain (obtained by removing the dimension of interest from the whole domain)._  |
-| typedef BatchedInterpolationGrid | [**batched\_evaluation\_domain\_type**](#typedef-batched_evaluation_domain_type)  <br>_The type of the whole domain representing evaluation points._  |
-| typedef ddc::replace\_dim\_of\_t&lt; BatchedInterpolationDDom, InterpolationGrid, [**basis\_domain\_type**](classLagrangeEvaluator.md#typedef-basis_domain_type) &gt; | [**batched\_lagrange\_domain\_type**](#typedef-batched_lagrange_domain_type)  <br>_The type of the whole_ [_**Lagrange**_](classLagrange.md) _domain (cartesian product of 1D_[_**Lagrange**_](classLagrange.md) _domain and batch domain) preserving the order of dimensions._ |
+| typedef ddc::remove\_dims\_of\_t&lt; BatchedInterpolationIdxRange, InterpolationGrid &gt; | [**batch\_idx\_range\_type**](#typedef-batch_idx_range_type)  <br>_The type of the batch domain (obtained by removing the dimension of interest from the whole domain)._  |
+| typedef ddc::replace\_dim\_of\_t&lt; BatchedInterpolationIdxRange, InterpolationGrid, [**coeff\_grid\_type**](classLagrangeEvaluator.md#typedef-coeff_grid_type) &gt; | [**batched\_coeff\_idx\_range\_type**](#typedef-batched_coeff_idx_range_type)  <br>_The type of the whole_ [_**Lagrange**_](classLagrange.md) _domain (cartesian product of 1D_[_**Lagrange**_](classLagrange.md) _domain and batch domain) preserving the order of dimensions._ |
+| typedef BatchedInterpolationIdxRange | [**batched\_evaluation\_idx\_range\_type**](#typedef-batched_evaluation_idx_range_type)  <br>_The type of the whole domain representing evaluation points._  |
+| typedef typename LagrangeBasis::template Impl&lt; LagrangeBasis, MemorySpace &gt;::knot\_grid | [**coeff\_grid\_type**](#typedef-coeff_grid_type)  <br>_The grid on which the interpolation coefficients should be provided._  |
+| typedef IdxRange&lt; [**coeff\_grid\_type**](classLagrangeEvaluator.md#typedef-coeff_grid_type) &gt; | [**coeff\_idx\_range\_type**](#typedef-coeff_idx_range_type)  <br>_The type of the 1D_ [_**Lagrange**_](classLagrange.md) _domain corresponding to the dimension of interest._ |
 | typedef typename LagrangeBasis::continuous\_dimension\_type | [**continuous\_dimension\_type**](#typedef-continuous_dimension_type)  <br>_The type of the evaluation continuous dimension (continuous dimension of interest) used by this class._  |
-| typedef IdxRange&lt; InterpolationGrid &gt; | [**evaluation\_domain\_type**](#typedef-evaluation_domain_type)  <br>_The type of the domain for the 1D evaluation mesh used by this class._  |
+| typedef DataType | [**data\_type**](#typedef-data_type)  <br>_The data type that the data is saved on._  |
+| typedef IdxRange&lt; InterpolationGrid &gt; | [**evaluation\_idx\_range\_type**](#typedef-evaluation_idx_range_type)  <br>_The type of the domain for the 1D evaluation mesh used by this class._  |
 | typedef ExecSpace | [**exec\_space**](#typedef-exec_space)  <br>_The type of the Kokkos execution space used by this class._  |
 | typedef LagrangeBasis | [**lagrange\_basis\_type**](#typedef-lagrange_basis_type)  <br>_The discrete dimension representing the_ [_**Lagrange**_](classLagrange.md) _basis._ |
-| typedef IdxRange&lt; [**basis\_domain\_type**](classLagrangeEvaluator.md#typedef-basis_domain_type) &gt; | [**lagrange\_domain\_type**](#typedef-lagrange_domain_type)  <br>_The type of the 1D_ [_**Lagrange**_](classLagrange.md) _domain corresponding to the dimension of interest._ |
 | typedef LowerExtrapolationRule | [**lower\_extrapolation\_rule\_type**](#typedef-lower_extrapolation_rule_type)  <br>_The type of the extrapolation rule at the lower boundary._  |
 | typedef MemorySpace | [**memory\_space**](#typedef-memory_space)  <br>_The type of the Kokkos memory space used by this class._  |
 | typedef UpperExtrapolationRule | [**upper\_extrapolation\_rule\_type**](#typedef-upper_extrapolation_rule_type)  <br>_The type of the extrapolation rule at the upper boundary._  |
@@ -75,8 +76,8 @@ _A class to evaluate, differentiate or integrate a_ [_**Lagrange**_](classLagran
 |   | [**LagrangeEvaluator**](#function-lagrangeevaluator-33) ([**LagrangeEvaluator**](classLagrangeEvaluator.md) && x) = default<br>_Move-constructs._  |
 |  [**lower\_extrapolation\_rule\_type**](classLagrangeEvaluator.md#typedef-lower_extrapolation_rule_type) | [**lower\_extrapolation\_rule**](#function-lower_extrapolation_rule) () const<br>_Get the lower extrapolation rule._  |
 |  KOKKOS\_FUNCTION DataType | [**operator()**](#function-operator) (Coord&lt; CoordsDims... &gt; const & coord\_eval, ConstField&lt; DataType, BatchedLagrangeIdxRange, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout &gt; const lagrange\_coef) const<br>_Evaluate 1D_ [_**Lagrange**_](classLagrange.md) _polynomial (described by its_[_**Lagrange**_](classLagrange.md) _coefficients) at a given coordinate._ |
-|  void | [**operator()**](#function-operator_1) (Field&lt; DataType, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const coords\_eval, ConstField&lt; DataType, [**batched\_lagrange\_domain\_type**](classLagrangeEvaluator.md#typedef-batched_lagrange_domain_type)&lt; IdxRangeBatchedInterpolation &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout3 &gt; const lagrange\_coef) const<br>_Evaluate_ [_**Lagrange**_](classLagrange.md) _polynomials (described by their_[_**Lagrange**_](classLagrange.md) _coefficients) on a mesh._ |
-|  void | [**operator()**](#function-operator_2) (Field&lt; DataType, BatchedInterpolationGrid, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; DataType, [**batched\_lagrange\_domain\_type**](classLagrangeEvaluator.md#typedef-batched_lagrange_domain_type)&lt; BatchedInterpolationGrid &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const lagrange\_coef) const<br>_Evaluate_ [_**Lagrange**_](classLagrange.md) _polynomials (described by their_[_**Lagrange**_](classLagrange.md) _coefficients) on a mesh._ |
+|  void | [**operator()**](#function-operator_1) (Field&lt; DataType, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const coords\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; IdxRangeBatchedInterpolation &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout3 &gt; const lagrange\_coef) const<br>_Evaluate_ [_**Lagrange**_](classLagrange.md) _polynomials (described by their_[_**Lagrange**_](classLagrange.md) _coefficients) on a mesh._ |
+|  void | [**operator()**](#function-operator_2) (Field&lt; DataType, BatchedInterpolationIdxRange, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; BatchedInterpolationIdxRange &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const lagrange\_coef) const<br>_Evaluate_ [_**Lagrange**_](classLagrange.md) _polynomials (described by their_[_**Lagrange**_](classLagrange.md) _coefficients) on a mesh._ |
 |  [**LagrangeEvaluator**](classLagrangeEvaluator.md) & | [**operator=**](#function-operator_3) ([**LagrangeEvaluator**](classLagrangeEvaluator.md) const & x) = default<br>_Copy-assigns._  |
 |  [**LagrangeEvaluator**](classLagrangeEvaluator.md) & | [**operator=**](#function-operator_4) ([**LagrangeEvaluator**](classLagrangeEvaluator.md) && x) = default<br>_Move-assigns._  |
 |  [**upper\_extrapolation\_rule\_type**](classLagrangeEvaluator.md#typedef-upper_extrapolation_rule_type) | [**upper\_extrapolation\_rule**](#function-upper_extrapolation_rule) () const<br>_Get the upper extrapolation rule._  |
@@ -137,25 +138,11 @@ A class which contains an operator () which can be used to evaluate, or differen
 
 
 
-### typedef basis\_domain\_type 
-
-_The grid on which the interpolation coefficients should be provided._ 
-```C++
-using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::basis_domain_type =  typename LagrangeBasis::template Impl<LagrangeBasis, MemorySpace>::knot_grid;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef batch\_domain\_type 
+### typedef batch\_idx\_range\_type 
 
 _The type of the batch domain (obtained by removing the dimension of interest from the whole domain)._ 
 ```C++
-using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::batch_domain_type =  ddc::remove_dims_of_t<BatchedInterpolationGrid, InterpolationGrid>;
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::batch_idx_range_type =  ddc::remove_dims_of_t<BatchedInterpolationIdxRange, InterpolationGrid>;
 ```
 
 
@@ -176,36 +163,11 @@ using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, Interp
 
 
 
-### typedef batched\_evaluation\_domain\_type 
-
-_The type of the whole domain representing evaluation points._ 
-```C++
-using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::batched_evaluation_domain_type =  BatchedInterpolationGrid;
-```
-
-
-
-
-
-**Template parameters:**
-
-
-* `The` batched discrete domain on which the interpolation points are defined. 
-
-
-
-
-        
-
-<hr>
-
-
-
-### typedef batched\_lagrange\_domain\_type 
+### typedef batched\_coeff\_idx\_range\_type 
 
 _The type of the whole_ [_**Lagrange**_](classLagrange.md) _domain (cartesian product of 1D_[_**Lagrange**_](classLagrange.md) _domain and batch domain) preserving the order of dimensions._
 ```C++
-using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::batched_lagrange_domain_type =  ddc::replace_dim_of_t<BatchedInterpolationDDom, InterpolationGrid, basis_domain_type>;
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::batched_coeff_idx_range_type =  ddc:: replace_dim_of_t<BatchedInterpolationIdxRange, InterpolationGrid, coeff_grid_type>;
 ```
 
 
@@ -221,6 +183,59 @@ using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, Interp
 
 
         
+
+<hr>
+
+
+
+### typedef batched\_evaluation\_idx\_range\_type 
+
+_The type of the whole domain representing evaluation points._ 
+```C++
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::batched_evaluation_idx_range_type =  BatchedInterpolationIdxRange;
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `The` batched discrete domain on which the interpolation points are defined. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### typedef coeff\_grid\_type 
+
+_The grid on which the interpolation coefficients should be provided._ 
+```C++
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::coeff_grid_type =  typename LagrangeBasis::template Impl<LagrangeBasis, MemorySpace>::knot_grid;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef coeff\_idx\_range\_type 
+
+_The type of the 1D_ [_**Lagrange**_](classLagrange.md) _domain corresponding to the dimension of interest._
+```C++
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::coeff_idx_range_type =  IdxRange<coeff_grid_type>;
+```
+
+
+
 
 <hr>
 
@@ -240,11 +255,25 @@ using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, Interp
 
 
 
-### typedef evaluation\_domain\_type 
+### typedef data\_type 
+
+_The data type that the data is saved on._ 
+```C++
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::data_type =  DataType;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef evaluation\_idx\_range\_type 
 
 _The type of the domain for the 1D evaluation mesh used by this class._ 
 ```C++
-using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::evaluation_domain_type =  IdxRange<InterpolationGrid>;
+using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::evaluation_idx_range_type =  IdxRange<InterpolationGrid>;
 ```
 
 
@@ -273,20 +302,6 @@ using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, Interp
 _The discrete dimension representing the_ [_**Lagrange**_](classLagrange.md) _basis._
 ```C++
 using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::lagrange_basis_type =  LagrangeBasis;
-```
-
-
-
-
-<hr>
-
-
-
-### typedef lagrange\_domain\_type 
-
-_The type of the 1D_ [_**Lagrange**_](classLagrange.md) _domain corresponding to the dimension of interest._
-```C++
-using LagrangeEvaluator< ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule >::lagrange_domain_type =  IdxRange<basis_domain_type>;
 ```
 
 
@@ -505,7 +520,7 @@ template<class Layout1, class Layout2, class Layout3, class IdxRangeBatchedInter
 inline void LagrangeEvaluator::operator() (
     Field< DataType, IdxRangeBatchedInterpolation, memory_space , Layout1 > const lagrange_eval,
     ConstField< Coord< CoordsDims... >, IdxRangeBatchedInterpolation, memory_space , Layout2 > const coords_eval,
-    ConstField< DataType, batched_lagrange_domain_type < IdxRangeBatchedInterpolation >, memory_space , Layout3 > const lagrange_coef
+    ConstField< DataType, batched_coeff_idx_range_type < IdxRangeBatchedInterpolation >, memory_space , Layout3 > const lagrange_coef
 ) const
 ```
 
@@ -514,7 +529,7 @@ inline void LagrangeEvaluator::operator() (
 The [**Lagrange**](classLagrange.md) coefficients describe [**Lagrange**](classLagrange.md) polynomials defined on a cartesian product of batch\_idx\_range and [**Lagrange**](classLagrange.md) basis. They can be obtained using the [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md).
 
 
-This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch\_domain\_type::discrete\_element\_type, the evaluation is performed with the 1D set of [**Lagrange**](classLagrange.md) coefficients identified by the same batch\_domain\_type::discrete\_element\_type.
+This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch\_idx\_range\_type::discrete\_element\_type, the evaluation is performed with the 1D set of [**Lagrange**](classLagrange.md) coefficients identified by the same batch\_idx\_range\_type::discrete\_element\_type.
 
 
 
@@ -539,10 +554,10 @@ This is not a multidimensional evaluation. This is a batched 1D evaluation. This
 
 _Evaluate_ [_**Lagrange**_](classLagrange.md) _polynomials (described by their_[_**Lagrange**_](classLagrange.md) _coefficients) on a mesh._
 ```C++
-template<class Layout1, class Layout2, class BatchedInterpolationGrid>
+template<class Layout1, class Layout2, class BatchedInterpolationIdxRange>
 inline void LagrangeEvaluator::operator() (
-    Field< DataType, BatchedInterpolationGrid, memory_space , Layout1 > const lagrange_eval,
-    ConstField< DataType, batched_lagrange_domain_type < BatchedInterpolationGrid >, memory_space , Layout2 > const lagrange_coef
+    Field< DataType, BatchedInterpolationIdxRange, memory_space , Layout1 > const lagrange_eval,
+    ConstField< DataType, batched_coeff_idx_range_type < BatchedInterpolationIdxRange >, memory_space , Layout2 > const lagrange_coef
 ) const
 ```
 
@@ -551,7 +566,7 @@ inline void LagrangeEvaluator::operator() (
 The [**Lagrange**](classLagrange.md) coefficients describe [**Lagrange**](classLagrange.md) polynomials defined on a cartesian product of batch\_idx\_range and [**Lagrange**](classLagrange.md) basis. They can be obtained using the [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md).
 
 
-This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch\_domain\_type::discrete\_element\_type, the evaluation is performed with the 1D set of [**Lagrange**](classLagrange.md) coefficients identified by the same batch\_domain\_type::discrete\_element\_type.
+This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch\_idx\_range\_type::discrete\_element\_type, the evaluation is performed with the 1D set of [**Lagrange**](classLagrange.md) coefficients identified by the same batch\_idx\_range\_type::discrete\_element\_type.
 
 
 

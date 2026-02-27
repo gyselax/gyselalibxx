@@ -3,6 +3,8 @@
   <compounddef id="dir_264890e5c091f8c8d7fe1f842870c25e" kind="dir">
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation</compoundname>
     <innerdir refid="dir_a6779ae02b71d57f488d261458bab1ce">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines</innerdir>
+    <innerfile refid="i__interpolation__builder_8hpp">i_interpolation_builder.hpp</innerfile>
+    <innerfile refid="i__interpolation__evaluator_8hpp">i_interpolation_evaluator.hpp</innerfile>
     <innerfile refid="i__interpolator__2d_8hpp">i_interpolator_2d.hpp</innerfile>
     <innerfile refid="identity__interpolation__builder_8hpp">identity_interpolation_builder.hpp</innerfile>
     <innerfile refid="iinterpolator_8hpp">iinterpolator.hpp</innerfile>

@@ -183,6 +183,10 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**GyroAverageOperator::Theta\_gyro**](structGyroAverageOperator_1_1Theta__gyro.md) 
 * **struct** [**IdxRangeToSlice**](structIdxRangeToSlice.md) _A class to create a IdxRangeSlice type from a TypeSeq._ 
 * **struct** [**Interface**](structInterface.md) _Represent a simple interface where two edges intersect._ 
+* **struct** [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md) _A traits struct for accessing type aliases of an interpolation builder._ 
+* **struct** [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f.md) _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilderTraits.md) _for ddc::SplineBuilder._
+* **struct** [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md) _A traits struct for accessing type aliases of an interpolation evaluator._ 
+* **struct** [**InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;**](structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c.md) _Specialisation of_ [_**InterpolationEvaluatorTraits**_](structInterpolationEvaluatorTraits.md) _for ddc::SplineEvaluator._
 * **struct** [**MPIDim**](structMPIDim.md) _An internal tag used to dsecribe an artificial dimension describing the MPI rank where the scattered information will be sent to or where the gathered information will be collected from._ 
 * **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_ \(\mu\) _._
 * **struct** [**MultipatchSplineBuilder2D::Build\_BuilderType**](structMultipatchSplineBuilder2D_1_1Build__BuilderType.md) 

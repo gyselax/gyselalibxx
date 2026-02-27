@@ -16,6 +16,8 @@
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
 * `#include "euler.hpp"`
+* `#include "i_interpolation_builder.hpp"`
+* `#include "i_interpolation_evaluator.hpp"`
 * `#include "iinterpolator.hpp"`
 * `#include "itimestepper.hpp"`
 

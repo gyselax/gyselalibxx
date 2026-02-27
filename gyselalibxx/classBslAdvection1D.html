@@ -613,12 +613,8 @@
 <li><code>IdxRangeAdvection</code> The index range for the interpolation points defined on <span class="arithmatex">\(\Omega'\)</span> where the characteristic equation is solved. <span class="arithmatex">\(\Omega'\)</span> also refers to the domain of the advection field. It had to also be defined on the GridInterest for the time integration method. </li>
 <li><code>IdxRangeFunction</code> The index range of <span class="arithmatex">\(\Omega\)</span> where allfdistribu is defined. </li>
 <li><code>AdvectionFieldBuilder</code> The type of the spline builder for the advection field (see SplineBuilder). </li>
-<li>
-<p><code>AdvectionFieldEvaluator</code> The type of the spline evaluator for the advection field (see SplineEvaluator). </p>
-</li>
-<li>
-<p><code>TimeStepperBuilder</code> A time stepper builder indicating which time integration method should be applied to solve the characteristic equation. </p>
-</li>
+<li><code>AdvectionFieldEvaluator</code> The type of the spline evaluator for the advection field (see SplineEvaluator). </li>
+<li><code>TimeStepperBuilder</code> A time stepper builder indicating which time integration method should be applied to solve the characteristic equation. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-bsladvection1d">function BslAdvection1D</h3>
@@ -636,12 +632,8 @@
 <ul>
 <li><code>function_interpolator</code> Interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the domain of the function. </li>
 <li><code>adv_field_builder</code> Builder along the GridInterest direction to build a spline representation of the advection field on the function domain. </li>
-<li>
-<p><code>adv_field_evaluator</code> Evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. </p>
-</li>
-<li>
-<p><code>time_stepper_builder</code> A builder for the time integration method used for the characteristic equation. </p>
-</li>
+<li><code>adv_field_evaluator</code> Evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. </li>
+<li><code>time_stepper_builder</code> A builder for the time integration method used for the characteristic equation. </li>
 </ul>
 <hr>
 

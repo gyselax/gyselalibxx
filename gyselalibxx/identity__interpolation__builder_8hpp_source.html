@@ -574,8 +574,9 @@
 #pragma once
 
 #include "ddc_aliases.hpp"
+#include "i_interpolation_builder.hpp"
 
-template &lt;class ExecSpace, class MemorySpace, class InterpolationDDim, class Basis&gt;
+template &lt;class ExecSpace, class MemorySpace, class DataType, class InterpolationGrid, class Basis&gt;
 class IdentityInterpolationBuilder
 {
 public:
@@ -583,37 +584,27 @@ public:
 
     using memory_space = MemorySpace;
 
-    using continuous_dimension_type = typename InterpolationDDim::continuous_dimension_type;
+    using data_type = DataType;
 
-    using interpolation_discrete_dimension_type = InterpolationDDim;
-    using interpolation_domain_type = IdxRange&lt;interpolation_discrete_dimension_type&gt;;
+    using continuous_dimension_type = typename InterpolationGrid::continuous_dimension_type;
+
+    using interpolation_grid_type = InterpolationGrid;
+
+    using interpolation_idx_range_type = IdxRange&lt;interpolation_grid_type&gt;;
 
     using basis_domain_type = typename Basis::template Impl&lt;Basis, MemorySpace&gt;::knot_grid;
 
-    template &lt;
-            class BatchedInterpolationGrid,
-            class = std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationGrid&gt;&gt;&gt;
-    using batched_interpolation_domain_type = BatchedInterpolationGrid;
+    using deriv_type = ddc::Deriv&lt;continuous_dimension_type&gt;;
 
-    template &lt;
-            class BatchedInterpolationGrid,
-            class = std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationGrid&gt;&gt;&gt;
-    using batch_domain_type = ddc::
-            remove_dims_of_t&lt;BatchedInterpolationGrid, interpolation_discrete_dimension_type&gt;;
-
-    template &lt;
-            class BatchedInterpolationGrid,
-            class = std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationGrid&gt;&gt;&gt;
-    using batched_basis_domain_type = ddc::replace_dim_of_t&lt;
-            BatchedInterpolationGrid,
-            interpolation_discrete_dimension_type,
+    template &lt;class BatchedInterpolationIdxRange&gt;
+    using batched_basis_idx_range_type = ddc::replace_dim_of_t&lt;
+            BatchedInterpolationIdxRange,
+            interpolation_grid_type,
             basis_domain_type&gt;;
 
-    template &lt;
-            class BatchedInterpolationGrid,
-            class = std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationGrid&gt;&gt;&gt;
-    using batched_derivs_domain_type = ddc::
-            remove_dims_of_t&lt;BatchedInterpolationGrid, interpolation_discrete_dimension_type&gt;;
+    template &lt;class BatchedInterpolationIdxRange&gt;
+    using batched_derivs_idx_range_type = ddc::
+            replace_dim_of_t&lt;BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type&gt;;
 
 public:
     static constexpr int s_nbc_xmin = 0;
@@ -623,24 +614,21 @@ public:
 public:
     IdentityInterpolationBuilder() = default;
 
-    template &lt;class DataType, class Layout, class BatchedInterpolationGrid&gt;
+    template &lt;class BatchedInterpolationIdxRange&gt;
     void operator()(
             Field&lt;DataType,
-                  batched_basis_domain_type&lt;BatchedInterpolationGrid&gt;,
-                  memory_space,
-                  Layout&gt; coeffs,
-            ConstField&lt;DataType, BatchedInterpolationGrid, memory_space, Layout&gt; vals,
+                  batched_basis_idx_range_type&lt;BatchedInterpolationIdxRange&gt;,
+                  memory_space&gt; coeffs,
+            ConstField&lt;DataType, BatchedInterpolationIdxRange, memory_space&gt; vals,
             std::optional&lt;ConstField&lt;
                     DataType,
-                    batched_derivs_domain_type&lt;BatchedInterpolationGrid&gt;,
-                    memory_space,
-                    Layout&gt;&gt; derivs_xmin
+                    batched_derivs_idx_range_type&lt;BatchedInterpolationIdxRange&gt;,
+                    memory_space&gt;&gt; derivs_xmin
             = std::nullopt,
             std::optional&lt;ConstField&lt;
                     DataType,
-                    batched_derivs_domain_type&lt;BatchedInterpolationGrid&gt;,
-                    memory_space,
-                    Layout&gt;&gt; derivs_xmax
+                    batched_derivs_idx_range_type&lt;BatchedInterpolationIdxRange&gt;,
+                    memory_space&gt;&gt; derivs_xmax
             = std::nullopt) const
     {
         IdxRange&lt;basis_domain_type&gt; bp_idx_range
@@ -653,12 +641,40 @@ public:
             IdxRange&lt;basis_domain_type&gt; extended_domain(
                     ddc::discrete_space&lt;Basis&gt;().full_domain().remove_first(
                             bp_idx_range.extents()));
-            typename BatchedInterpolationGrid::discrete_vector_type nrepeat(extended_domain.size());
-            BatchedInterpolationGrid repeat_domain(get_idx_range(vals).take_first(nrepeat));
+            typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(
+                    extended_domain.size());
+            BatchedInterpolationIdxRange repeat_domain(get_idx_range(vals).take_first(nrepeat));
             Kokkos::deep_copy(
                     coeffs[extended_domain].allocation_kokkos_view(),
                     vals[repeat_domain].allocation_kokkos_view());
         }
+    }
+
+    template &lt;class BatchedInterpolationIdxRange&gt;
+    batched_derivs_idx_range_type&lt;BatchedInterpolationIdxRange&gt; batched_derivs_xmin_domain(
+            BatchedInterpolationIdxRange const&amp; batched_interpolation_domain) const noexcept
+    {
+        IdxRange&lt;deriv_type&gt; empty_deriv_range(Idx&lt;deriv_type&gt;(0), IdxStep&lt;deriv_type&gt;(0));
+        return batched_derivs_idx_range_type&lt;
+                BatchedInterpolationIdxRange&gt;(empty_deriv_range, batched_interpolation_domain);
+    }
+
+    template &lt;class BatchedInterpolationIdxRange&gt;
+    batched_derivs_idx_range_type&lt;BatchedInterpolationIdxRange&gt; batched_derivs_xmax_domain(
+            BatchedInterpolationIdxRange const&amp; batched_interpolation_domain) const noexcept
+    {
+        IdxRange&lt;deriv_type&gt; empty_deriv_range(Idx&lt;deriv_type&gt;(0), IdxStep&lt;deriv_type&gt;(0));
+        return batched_derivs_idx_range_type&lt;
+                BatchedInterpolationIdxRange&gt;(empty_deriv_range, batched_interpolation_domain);
+    }
+
+    template &lt;class BatchedInterpolationIdxRange&gt;
+    batched_basis_idx_range_type&lt;BatchedInterpolationIdxRange&gt; batched_basis_idx_range(
+            BatchedInterpolationIdxRange const&amp; batched_interpolation_domain) const noexcept
+    {
+        return batched_basis_idx_range_type&lt;BatchedInterpolationIdxRange&gt;(
+                ddc::discrete_space&lt;Basis&gt;().full_domain(),
+                batched_interpolation_domain);
     }
 };
 </code></pre></div>

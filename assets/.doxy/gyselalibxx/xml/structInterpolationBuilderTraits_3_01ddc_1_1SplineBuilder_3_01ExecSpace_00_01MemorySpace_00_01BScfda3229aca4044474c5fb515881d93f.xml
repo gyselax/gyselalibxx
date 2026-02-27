@@ -1,0 +1,171 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f" kind="struct" language="C++" prot="public">
+    <compoundname>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</compoundname>
+    <includes refid="i__interpolation__builder_8hpp" local="no">i_interpolation_builder.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+      </param>
+      <param>
+        <type>class BSplines</type>
+      </param>
+      <param>
+        <type>class InterpolationDDim</type>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>BcLower</declname>
+        <defname>BcLower</defname>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>BcUpper</declname>
+        <defname>BcUpper</defname>
+      </param>
+      <param>
+        <type>ddc::SplineSolver</type>
+        <declname>Solver</declname>
+        <defname>Solver</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1aded9831a468c2a2af3832b84e738fd31" prot="private" static="no">
+        <type>ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt;</type>
+        <definition>using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::Builder =  ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver&gt;</definition>
+        <argsstring></argsstring>
+        <name>Builder</name>
+        <qualifiedname>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::Builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="87" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a3ff779bdc5f86fd5eea961109edb78c3" prot="public" static="no">
+        <type>double</type>
+        <definition>using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::data_type =  double</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type that the data is saved on. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a2265dd8bff4ed58f7914775d82f6deae" prot="public" static="no">
+        <type>typename Builder::interpolation_discrete_dimension_type</type>
+        <definition>using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::interpolation_grid_type =  typename Builder::interpolation_discrete_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>interpolation_grid_type</name>
+        <qualifiedname>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::interpolation_grid_type</qualifiedname>
+        <briefdescription>
+<para>The discrete grid on which interpolation values are given. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1af385a490a57b692489c51a1370e19f56" prot="public" static="no">
+        <type>typename Builder::interpolation_domain_type</type>
+        <definition>using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::interpolation_idx_range_type =  typename Builder::interpolation_domain_type</definition>
+        <argsstring></argsstring>
+        <name>interpolation_idx_range_type</name>
+        <qualifiedname>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::interpolation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The 1D index range for the interpolation mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a31b127598131cc7547cff3fb73b0c0a4" prot="public" static="no">
+        <type>typename Builder::bsplines_type</type>
+        <definition>using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::basis_domain_type =  typename Builder::bsplines_type</definition>
+        <argsstring></argsstring>
+        <name>basis_domain_type</name>
+        <qualifiedname>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::basis_domain_type</qualifiedname>
+        <briefdescription>
+<para>The discrete dimension for the B-spline coefficients. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="100" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1ab191085003650de44fc7e4f4efc9fa3a" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class IdxRangeBatchedInterpolation</type>
+          </param>
+        </templateparamlist>
+        <type>typename Builder::template batched_spline_domain_type&lt; IdxRangeBatchedInterpolation &gt;</type>
+        <definition>using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::batched_basis_idx_range_type =  typename Builder::template batched_spline_domain_type&lt;IdxRangeBatchedInterpolation&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_basis_idx_range_type</name>
+        <qualifiedname>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::batched_basis_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Batched domain with InterpolationDDim replaced by BSplines. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a632524bb9d4a459a58605d8d62ab72dd" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class IdxRangeBatchedInterpolation</type>
+          </param>
+        </templateparamlist>
+        <type>typename Builder::template batched_derivs_domain_type&lt; IdxRangeBatchedInterpolation &gt;</type>
+        <definition>using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::batched_derivs_idx_range_type =  typename Builder::template batched_derivs_domain_type&lt;IdxRangeBatchedInterpolation&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_derivs_idx_range_type</name>
+        <qualifiedname>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::batched_derivs_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>Batched domain with InterpolationDDim replaced by deriv_type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="109" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Specialisation of <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref> for ddc::SplineBuilder. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>ddc::SplineBuilder uses different alias names from the InterpolationBuilder convention. This specialisation provides the mapping so that ddc::SplineBuilder can be used directly as an InterpolationBuilder without wrapping it in SplineBuilder1D.</para>
+<para>Mapping: interpolation_discrete_dimension_type -&gt; interpolation_grid_type interpolation_domain_type -&gt; interpolation_idx_range_type bsplines_type -&gt; basis_domain_type batched_spline_domain_type&lt;D&gt; -&gt; batched_basis_idx_range_type&lt;D&gt; batched_derivs_domain_type&lt;D&gt; -&gt; batched_derivs_idx_range_type&lt;D&gt; </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="70" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="78" bodyend="111"/>
+    <listofallmembers>
+      <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a31b127598131cc7547cff3fb73b0c0a4" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</scope><name>basis_domain_type</name></member>
+      <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1ab191085003650de44fc7e4f4efc9fa3a" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</scope><name>batched_basis_idx_range_type</name></member>
+      <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a632524bb9d4a459a58605d8d62ab72dd" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</scope><name>batched_derivs_idx_range_type</name></member>
+      <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1aded9831a468c2a2af3832b84e738fd31" prot="private" virt="non-virtual"><scope>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</scope><name>Builder</name></member>
+      <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a3ff779bdc5f86fd5eea961109edb78c3" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</scope><name>data_type</name></member>
+      <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a2265dd8bff4ed58f7914775d82f6deae" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</scope><name>interpolation_grid_type</name></member>
+      <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1af385a490a57b692489c51a1370e19f56" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</scope><name>interpolation_idx_range_type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

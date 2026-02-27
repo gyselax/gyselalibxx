@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-identityinterpolationbuilder">Class IdentityInterpolationBuilder</h1>
-<p><strong>template &lt;class ExecSpace, class MemorySpace, class InterpolationDDim, class Basis&gt;</strong></p>
+<p><strong>template &lt;class ExecSpace, class MemorySpace, class DataType, class InterpolationGrid, class Basis&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a></p>
 <p><em>A builder class for copying data.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -587,36 +587,36 @@
 <td style="text-align: left;"><a href="#typedef-basis_domain_type"><strong>basis_domain_type</strong></a>  <br><em>The grid on which the interpolation coefficients should be provided.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::remove_dims_of_t&lt; BatchedInterpolationGrid, <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_discrete_dimension_type"><strong>interpolation_discrete_dimension_type</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batch_domain_type"><strong>batch_domain_type</strong></a>  <br><em>The type of the batch domain (obtained by removing the dimension of interest from the whole domain).</em></td>
+<td style="text-align: right;">typedef ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><strong>interpolation_grid_type</strong></a>, <a href="classIdentityInterpolationBuilder.html#typedef-basis_domain_type"><strong>basis_domain_type</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>  <br><em>The batched domain type with interpolation_grid_type replaced by basis_domain_type.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::replace_dim_of_t&lt; BatchedInterpolationGrid, <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_discrete_dimension_type"><strong>interpolation_discrete_dimension_type</strong></a>, <a href="classIdentityInterpolationBuilder.html#typedef-basis_domain_type"><strong>basis_domain_type</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_basis_domain_type"><strong>batched_basis_domain_type</strong></a>  <br><em>The type of the whole interpolation domain (cartesian product of 1D interpolation domain and batch domain) preserving the underlying memory layout (order of dimensions).</em></td>
+<td style="text-align: right;">typedef ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><strong>interpolation_grid_type</strong></a>, <a href="classIdentityInterpolationBuilder.html#typedef-deriv_type"><strong>deriv_type</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>The batched domain type with interpolation_grid_type replaced by deriv_type.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::remove_dims_of_t&lt; BatchedInterpolationGrid, <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_discrete_dimension_type"><strong>interpolation_discrete_dimension_type</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_derivs_domain_type"><strong>batched_derivs_domain_type</strong></a>  <br><em>The typeof the derivatives.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef BatchedInterpolationGrid</td>
-<td style="text-align: left;"><a href="#typedef-batched_interpolation_domain_type"><strong>batched_interpolation_domain_type</strong></a>  <br><em>The type of the whole domain representing interpolation points.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename InterpolationDDim::continuous_dimension_type</td>
+<td style="text-align: right;">typedef typename InterpolationGrid::continuous_dimension_type</td>
 <td style="text-align: left;"><a href="#typedef-continuous_dimension_type"><strong>continuous_dimension_type</strong></a>  <br><em>The type of the interpolation continuous dimension (continuous dimension of interest) used by this class.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DataType</td>
+<td style="text-align: left;"><a href="#typedef-data_type"><strong>data_type</strong></a>  <br><em>The data type that the data is saved on.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::Deriv&lt; <a href="classIdentityInterpolationBuilder.html#typedef-continuous_dimension_type"><strong>continuous_dimension_type</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-deriv_type"><strong>deriv_type</strong></a>  <br><em>The type of the Deriv dimension at the boundaries.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef ExecSpace</td>
 <td style="text-align: left;"><a href="#typedef-exec_space"><strong>exec_space</strong></a>  <br><em>The type of the Kokkos execution space used by this class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef InterpolationDDim</td>
-<td style="text-align: left;"><a href="#typedef-interpolation_discrete_dimension_type"><strong>interpolation_discrete_dimension_type</strong></a>  <br><em>The type of the interpolation discrete dimension (discrete dimension of interest) used by this class.</em></td>
+<td style="text-align: right;">typedef InterpolationGrid</td>
+<td style="text-align: left;"><a href="#typedef-interpolation_grid_type"><strong>interpolation_grid_type</strong></a>  <br><em>The type of the interpolation discrete dimension (discrete dimension of interest) used by this class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef IdxRange&lt; <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_discrete_dimension_type"><strong>interpolation_discrete_dimension_type</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="#typedef-interpolation_domain_type"><strong>interpolation_domain_type</strong></a>  <br><em>The type of the domain for the 1D interpolation mesh used by this class.</em></td>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="classIdentityInterpolationBuilder.html#typedef-interpolation_grid_type"><strong>interpolation_grid_type</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-interpolation_idx_range_type"><strong>interpolation_idx_range_type</strong></a>  <br><em>The type of the domain for the 1D interpolation mesh used by this class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef MemorySpace</td>
@@ -657,8 +657,20 @@
 <td style="text-align: left;"><a href="#function-identityinterpolationbuilder"><strong>IdentityInterpolationBuilder</strong></a> () = default<br></td>
 </tr>
 <tr>
+<td style="text-align: right;"><a href="classIdentityInterpolationBuilder.html#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>&lt; BatchedInterpolationIdxRange &gt;</td>
+<td style="text-align: left;"><a href="#function-batched_basis_idx_range"><strong>batched_basis_idx_range</strong></a> (BatchedInterpolationIdxRange const &amp; batched_interpolation_domain) noexcept const<br><em>Get the whole domain on which the interpolation coefficients are defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classIdentityInterpolationBuilder.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>&lt; BatchedInterpolationIdxRange &gt;</td>
+<td style="text-align: left;"><a href="#function-batched_derivs_xmax_domain"><strong>batched_derivs_xmax_domain</strong></a> (BatchedInterpolationIdxRange const &amp; batched_interpolation_domain) noexcept const<br><em>Get the whole domain on which derivatives on upper boundary are defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classIdentityInterpolationBuilder.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>&lt; BatchedInterpolationIdxRange &gt;</td>
+<td style="text-align: left;"><a href="#function-batched_derivs_xmin_domain"><strong>batched_derivs_xmin_domain</strong></a> (BatchedInterpolationIdxRange const &amp; batched_interpolation_domain) noexcept const<br><em>Get the whole domain on which derivatives on lower boundary are defined.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Field&lt; DataType, <a href="classIdentityInterpolationBuilder.html#typedef-batched_basis_domain_type"><strong>batched_basis_domain_type</strong></a>&lt; BatchedInterpolationGrid &gt;, <a href="classIdentityInterpolationBuilder.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout &gt; coeffs, ConstField&lt; DataType, BatchedInterpolationGrid, <a href="classIdentityInterpolationBuilder.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout &gt; vals, std::optional&lt; ConstField&lt; DataType, <a href="classIdentityInterpolationBuilder.html#typedef-batched_derivs_domain_type"><strong>batched_derivs_domain_type</strong></a>&lt; BatchedInterpolationGrid &gt;, <a href="classIdentityInterpolationBuilder.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout &gt; &gt; derivs_xmin=std::nullopt, std::optional&lt; ConstField&lt; DataType, <a href="classIdentityInterpolationBuilder.html#typedef-batched_derivs_domain_type"><strong>batched_derivs_domain_type</strong></a>&lt; BatchedInterpolationGrid &gt;, <a href="classIdentityInterpolationBuilder.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout &gt; &gt; derivs_xmax=std::nullopt) const<br><em>Compute the interpolation coefficients for a function.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Field&lt; DataType, <a href="classIdentityInterpolationBuilder.html#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>&lt; BatchedInterpolationIdxRange &gt;, <a href="classIdentityInterpolationBuilder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; coeffs, ConstField&lt; DataType, BatchedInterpolationIdxRange, <a href="classIdentityInterpolationBuilder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; vals, std::optional&lt; ConstField&lt; DataType, <a href="classIdentityInterpolationBuilder.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>&lt; BatchedInterpolationIdxRange &gt;, <a href="classIdentityInterpolationBuilder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; &gt; derivs_xmin=std::nullopt, std::optional&lt; ConstField&lt; DataType, <a href="classIdentityInterpolationBuilder.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>&lt; BatchedInterpolationIdxRange &gt;, <a href="classIdentityInterpolationBuilder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; &gt; derivs_xmax=std::nullopt) const<br><em>Compute the interpolation coefficients for a function.</em></td>
 </tr>
 </tbody>
 </table>
@@ -668,98 +680,80 @@
 <ul>
 <li><code>ExecSpace</code> The Kokkos execution space on which the spline approximation is performed. </li>
 <li><code>MemorySpace</code> The Kokkos memory space on which the data (interpolation function and splines coefficients) is stored. </li>
-<li><code>InterpolationDDim</code> The discrete dimension on which interpolation points are defined. </li>
+<li><code>DataType</code> The data type of the field values and coefficients. </li>
+<li><code>InterpolationGrid</code> The discrete dimension on which interpolation points are defined. </li>
 <li><code>Basis</code> The basis on which the interpolation is constructed. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-basis_domain_type">typedef basis_domain_type</h3>
 <p><em>The grid on which the interpolation coefficients should be provided.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::basis_domain_type =  typename Basis::template Impl&lt;Basis, MemorySpace&gt;::knot_grid;
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::basis_domain_type =  typename Basis::template Impl&lt;Basis, MemorySpace&gt;::knot_grid;
 </code></pre>
 <hr>
 
-<h3 id="typedef-batch_domain_type">typedef batch_domain_type</h3>
-<p><em>The type of the batch domain (obtained by removing the dimension of interest from the whole domain).</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::batch_domain_type =  ddc:: remove_dims_of_t&lt;BatchedInterpolationGrid, interpolation_discrete_dimension_type&gt;;
+<h3 id="typedef-batched_basis_idx_range_type">typedef batched_basis_idx_range_type</h3>
+<p><em>The batched domain type with interpolation_grid_type replaced by basis_domain_type.</em> </p>
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_basis_idx_range_type =  ddc::replace_dim_of_t&lt; BatchedInterpolationIdxRange, interpolation_grid_type, basis_domain_type&gt;;
 </code></pre>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>The</code> batched discrete domain on which the interpolation points are defined.</li>
-</ul>
-<p>Example: For batched_interpolation_domain_type = DiscreteDomain&lt;X,Y,Z&gt; and a dimension of interest <a href="structY.html"><strong>Y</strong></a>, this is DiscreteDomain&lt;X,Z&gt; </p>
 <hr>
 
-<h3 id="typedef-batched_basis_domain_type">typedef batched_basis_domain_type</h3>
-<p><em>The type of the whole interpolation domain (cartesian product of 1D interpolation domain and batch domain) preserving the underlying memory layout (order of dimensions).</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::batched_basis_domain_type =  ddc::replace_dim_of_t&lt; BatchedInterpolationGrid, interpolation_discrete_dimension_type, basis_domain_type&gt;;
+<h3 id="typedef-batched_derivs_idx_range_type">typedef batched_derivs_idx_range_type</h3>
+<p><em>The batched domain type with interpolation_grid_type replaced by deriv_type.</em> </p>
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_derivs_idx_range_type =  ddc:: replace_dim_of_t&lt;BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type&gt;;
 </code></pre>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>The</code> batched discrete domain on which the interpolation points are defined.</li>
-</ul>
-<p>Example: For batched_interpolation_domain_type = DiscreteDomain&lt;X,Y,Z&gt; and a dimension of interest <a href="structY.html"><strong>Y</strong></a> (associated to a Basis tag LagrangeBasisY), this is DiscreteDomain&lt;X,LagrangeBasisY,Z&gt;. </p>
-<hr>
-
-<h3 id="typedef-batched_derivs_domain_type">typedef batched_derivs_domain_type</h3>
-<p><em>The typeof the derivatives.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::batched_derivs_domain_type =  ddc:: remove_dims_of_t&lt;BatchedInterpolationGrid, interpolation_discrete_dimension_type&gt;;
-</code></pre>
-<p>The type of the derivatives that need to be provided to this method. No derivatives are required but this is included for interoperability with other interpolation builder classes.</p>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>The</code> batched discrete domain on which the interpolation points are defined. </li>
-</ul>
-<hr>
-
-<h3 id="typedef-batched_interpolation_domain_type">typedef batched_interpolation_domain_type</h3>
-<p><em>The type of the whole domain representing interpolation points.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::batched_interpolation_domain_type =  BatchedInterpolationGrid;
-</code></pre>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>The</code> batched discrete domain on which the interpolation points are defined. </li>
-</ul>
 <hr>
 
 <h3 id="typedef-continuous_dimension_type">typedef continuous_dimension_type</h3>
 <p><em>The type of the interpolation continuous dimension (continuous dimension of interest) used by this class.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::continuous_dimension_type =  typename InterpolationDDim::continuous_dimension_type;
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::continuous_dimension_type =  typename InterpolationGrid::continuous_dimension_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-data_type">typedef data_type</h3>
+<p><em>The data type that the data is saved on.</em> </p>
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::data_type =  DataType;
+</code></pre>
+<hr>
+
+<h3 id="typedef-deriv_type">typedef deriv_type</h3>
+<p><em>The type of the Deriv dimension at the boundaries.</em> </p>
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::deriv_type =  ddc::Deriv&lt;continuous_dimension_type&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-exec_space">typedef exec_space</h3>
 <p><em>The type of the Kokkos execution space used by this class.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::exec_space =  ExecSpace;
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::exec_space =  ExecSpace;
 </code></pre>
 <hr>
 
-<h3 id="typedef-interpolation_discrete_dimension_type">typedef interpolation_discrete_dimension_type</h3>
+<h3 id="typedef-interpolation_grid_type">typedef interpolation_grid_type</h3>
 <p><em>The type of the interpolation discrete dimension (discrete dimension of interest) used by this class.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::interpolation_discrete_dimension_type =  InterpolationDDim;
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::interpolation_grid_type =  InterpolationGrid;
 </code></pre>
 <hr>
 
-<h3 id="typedef-interpolation_domain_type">typedef interpolation_domain_type</h3>
+<h3 id="typedef-interpolation_idx_range_type">typedef interpolation_idx_range_type</h3>
 <p><em>The type of the domain for the 1D interpolation mesh used by this class.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::interpolation_domain_type =  IdxRange&lt;interpolation_discrete_dimension_type&gt;;
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::interpolation_idx_range_type =  IdxRange&lt;interpolation_grid_type&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-memory_space">typedef memory_space</h3>
 <p><em>The type of the Kokkos memory space used by this class.</em> </p>
-<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::memory_space =  MemorySpace;
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::memory_space =  MemorySpace;
 </code></pre>
 <hr>
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
 <h3 id="variable-s_nbc_xmax">variable s_nbc_xmax</h3>
 <p><em>The number of equations defining the boundary condition at the upper bound.</em> </p>
-<pre><code class="language-C++">constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::s_nbc_xmax;
+<pre><code class="language-C++">constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbc_xmax;
 </code></pre>
 <hr>
 
 <h3 id="variable-s_nbc_xmin">variable s_nbc_xmin</h3>
 <p><em>The number of equations defining the boundary condition at the lower bound.</em> </p>
-<pre><code class="language-C++">constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, InterpolationDDim, Basis &gt;::s_nbc_xmin;
+<pre><code class="language-C++">constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbc_xmin;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -768,20 +762,67 @@
 </code></pre>
 <hr>
 
+<h3 id="function-batched_basis_idx_range">function batched_basis_idx_range</h3>
+<p><em>Get the whole domain on which the interpolation coefficients are defined.</em> </p>
+<pre><code class="language-C++">template&lt;class BatchedInterpolationIdxRange&gt;
+inline batched_basis_idx_range_type &lt; BatchedInterpolationIdxRange &gt; IdentityInterpolationBuilder::batched_basis_idx_range (
+    BatchedInterpolationIdxRange const &amp; batched_interpolation_domain
+) noexcept const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>batched_interpolation_domain</code> The whole domain on which the interpolation points are defined.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The domain for the interpolation coefficients. </p>
+<hr>
+
+<h3 id="function-batched_derivs_xmax_domain">function batched_derivs_xmax_domain</h3>
+<p><em>Get the whole domain on which derivatives on upper boundary are defined.</em> </p>
+<pre><code class="language-C++">template&lt;class BatchedInterpolationIdxRange&gt;
+inline batched_derivs_idx_range_type &lt; BatchedInterpolationIdxRange &gt; IdentityInterpolationBuilder::batched_derivs_xmax_domain (
+    BatchedInterpolationIdxRange const &amp; batched_interpolation_domain
+) noexcept const
+</code></pre>
+<p>This is only used with BoundCond::HERMITE boundary conditions.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>batched_interpolation_domain</code> The whole domain on which the interpolation points are defined.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The domain for the Derivs values. </p>
+<hr>
+
+<h3 id="function-batched_derivs_xmin_domain">function batched_derivs_xmin_domain</h3>
+<p><em>Get the whole domain on which derivatives on lower boundary are defined.</em> </p>
+<pre><code class="language-C++">template&lt;class BatchedInterpolationIdxRange&gt;
+inline batched_derivs_idx_range_type &lt; BatchedInterpolationIdxRange &gt; IdentityInterpolationBuilder::batched_derivs_xmin_domain (
+    BatchedInterpolationIdxRange const &amp; batched_interpolation_domain
+) noexcept const
+</code></pre>
+<p>This is only used with BoundCond::HERMITE boundary conditions.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>batched_interpolation_domain</code> The whole domain on which the interpolation points are defined.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The domain for the Derivs values. </p>
+<hr>
+
 <h3 id="function-operator">function operator()</h3>
 <p><em>Compute the interpolation coefficients for a function.</em> </p>
-<pre><code class="language-C++">template&lt;class DataType, class Layout, class BatchedInterpolationGrid&gt;
+<pre><code class="language-C++">template&lt;class BatchedInterpolationIdxRange&gt;
 inline void IdentityInterpolationBuilder::operator() (
-    Field&lt; DataType, batched_basis_domain_type &lt; BatchedInterpolationGrid &gt;, memory_space , Layout &gt; coeffs,
-    ConstField&lt; DataType, BatchedInterpolationGrid, memory_space , Layout &gt; vals,
-    std::optional&lt; ConstField&lt; DataType, batched_derivs_domain_type &lt; BatchedInterpolationGrid &gt;, memory_space , Layout &gt; &gt; derivs_xmin=std::nullopt,
-    std::optional&lt; ConstField&lt; DataType, batched_derivs_domain_type &lt; BatchedInterpolationGrid &gt;, memory_space , Layout &gt; &gt; derivs_xmax=std::nullopt
+    Field&lt; DataType, batched_basis_idx_range_type &lt; BatchedInterpolationIdxRange &gt;, memory_space &gt; coeffs,
+    ConstField&lt; DataType, BatchedInterpolationIdxRange, memory_space &gt; vals,
+    std::optional&lt; ConstField&lt; DataType, batched_derivs_idx_range_type &lt; BatchedInterpolationIdxRange &gt;, memory_space &gt; &gt; derivs_xmin=std::nullopt,
+    std::optional&lt; ConstField&lt; DataType, batched_derivs_idx_range_type &lt; BatchedInterpolationIdxRange &gt;, memory_space &gt; &gt; derivs_xmax=std::nullopt
 ) const
 </code></pre>
 <p>No calculations are necessary and the data simply needs to be copied from vals to coeffs.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>coeffs</code> The coefficients of the spline computed by this SplineBuilder. </li>
+<li><code>coeffs</code> The coefficients of the interpolation computed by this builder. </li>
 <li><code>vals</code> The values of the function on the interpolation mesh. </li>
 <li><code>derivs_xmin</code> The values of the derivatives at the lower boundary (unused in this class). </li>
 <li><code>derivs_xmax</code> The values of the derivatives at the upper boundary (unused in this class). </li>

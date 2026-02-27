@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1InterpolationEvaluator" kind="concept">
+    <compoundname>concepts::InterpolationEvaluator</compoundname>
+    <includes refid="i__interpolation__evaluator_8hpp" local="no">i_interpolation_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Evaluator</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class Evaluator&gt;
+concept <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref> =  requires
+{
+    typename Evaluator::exec_space;
+    typename Evaluator::memory_space;
+    typename Evaluator::continuous_dimension_type;
+    typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::data_type;
+    typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::evaluation_idx_range_type;
+    typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::coeff_grid_type;
+    typename Evaluator::lower_extrapolation_rule_type;
+    typename Evaluator::upper_extrapolation_rule_type;
+}
+&amp;&amp;requires(
+        Evaluator const&amp; e,
+        Field&lt;typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::data_type,
+              typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::evaluation_idx_range_type,
+              typename Evaluator::memory_space&gt; eval,
+        ConstField&lt;
+                typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::data_type,
+                typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::
+                        template batched_coeff_idx_range_type&lt;typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;
+                                Evaluator&gt;::evaluation_idx_range_type&gt;,
+                typename Evaluator::memory_space&gt; coeffs,
+        ConstField&lt;
+                Coord&lt;typename Evaluator::continuous_dimension_type&gt;,
+                typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::evaluation_idx_range_type,
+                typename Evaluator::memory_space&gt; coords)
+{
+    {e(eval, coeffs)};
+    {e(eval, coords, coeffs)};
+}
+&amp;&amp;requires(
+        Evaluator const&amp; e,
+        ConstField&lt;
+                typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::data_type,
+                typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::
+                        template batched_coeff_idx_range_type&lt;typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;
+                                Evaluator&gt;::evaluation_idx_range_type&gt;,
+                typename Evaluator::memory_space&gt; coeffs,
+        Coord&lt;typename Evaluator::continuous_dimension_type&gt; coord)
+{
+    {
+        e(coord, coeffs)
+        } -&gt; std::same_as&lt;typename <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;Evaluator&gt;::data_type&gt;;
+}    </initializer>
+    <briefdescription>
+<para>A concept describing an interpolation evaluator. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An interpolation evaluator is a callable that takes a field of interpolation coefficients (on a basis domain) and produces function values on an evaluation mesh, optionally at user-supplied coordinates.</para>
+<para>Type information is accessed through InterpolationEvaluatorTraits&lt;Evaluator&gt;, which has a primary template delegating to the evaluator&apos;s own aliases and can be specialised for external evaluators (e.g. ddc::SplineEvaluator).</para>
+<para>The template alias and method requirements are verified using evaluation_idx_range_type as a representative domain. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_evaluator.hpp" line="121" column="1"/>
+  </compounddef>
+</doxygen>
