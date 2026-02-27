@@ -13,12 +13,13 @@
 /**
  * @brief A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry.
  */
-template <class Geometry, class GridV, class FunctionBuilder, class FunctionEvaluator>
+template <
+        class Geometry,
+        class GridV,
+        concepts::InterpolationBuilder FunctionBuilder,
+        concepts::InterpolationEvaluator FunctionEvaluator>
 class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>
 {
-    static_assert(concepts::InterpolationBuilder<FunctionBuilder>);
-    static_assert(concepts::InterpolationEvaluator<FunctionEvaluator>);
-
     using IdxRangeFdistribu = typename Geometry::IdxRangeFdistribu;
     using IdxRangeSpatial = typename Geometry::IdxRangeSpatial;
     using IdxSpatial = typename IdxRangeSpatial::discrete_element_type;

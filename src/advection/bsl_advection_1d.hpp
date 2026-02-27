@@ -60,18 +60,14 @@ template <
         class GridInterest,
         class IdxRangeAdvection,
         class IdxRangeFunction,
-        class FunctionBuilder,
-        class FunctionEvaluator,
-        class AdvectionFieldBuilder,
-        class AdvectionFieldEvaluator,
+        concepts::InterpolationBuilder FunctionBuilder,
+        concepts::InterpolationEvaluator FunctionEvaluator,
+        concepts::InterpolationBuilder AdvectionFieldBuilder,
+        concepts::InterpolationEvaluator AdvectionFieldEvaluator,
         class TimeStepperBuilder = EulerBuilder>
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
-    static_assert(concepts::InterpolationBuilder<FunctionBuilder>);
-    static_assert(concepts::InterpolationEvaluator<FunctionEvaluator>);
-    static_assert(concepts::InterpolationBuilder<AdvectionFieldBuilder>);
-    static_assert(concepts::InterpolationEvaluator<AdvectionFieldEvaluator>);
 
 private:
     // Advection index range element:
