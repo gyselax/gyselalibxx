@@ -41,7 +41,7 @@ public:
      * @param[in] idx_range along interest direction, usedful in periodic case
      * @param[in] ghost DiscretVector which gives the number of ghosted points
      */
-    KOKKOS_FUNCTION Lagrange(
+    KOKKOS_FUNCTION [[deprecated]] Lagrange(
             int degree,
             Field<double, IdxRangeInterp, typename Execspace::memory_space> x_nodes_fnodes,
             IdxRangeInterp idx_range,

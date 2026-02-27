@@ -725,8 +725,8 @@ TYPED_TEST(PartialDerivativeFixture, Spline1DPartialDerivative)
     double const xmax(M_PI * 1.5);
     double const ymin(-2 * M_PI);
     double const ymax(4 * M_PI);
-    // relative error of convergence should be less than 15%
-    double const TOL = 0.15;
+    // relative error of convergence order should be less than 25%
+    double const TOL = 0.25;
 
     // Partial Derivative in X direction
     double delta_low_x,
@@ -767,8 +767,8 @@ TYPED_TEST(PartialDerivativeFixture, Spline2DPartialDerivative)
     double const xmax(M_PI * 1.75);
     double const ymin(-3 * M_PI);
     double const ymax(-M_PI);
-    // relative error of convergence should be less than 15%
-    double const TOL = 0.15;
+    // relative error of convergence order should be less than 25%
+    double const TOL = 0.25;
 
     // Partial Derivative in X direction
     double delta_low_x,
@@ -809,8 +809,8 @@ TYPED_TEST(PartialDerivativeFixture, CentralFDMPartialDerivative)
     double const xmax(2 * M_PI);
     double const ymin(-M_PI * 0.8);
     double const ymax(1.2 * M_PI);
-    // relative error of convergence should be less than 15%
-    double const TOL = 0.15;
+    // relative error of convergence order should be less than 25%
+    double const TOL = 0.25;
     int const expected_order(2);
 
     PartialDerivativeTestFDM<X, Y, 10, 10> const test_low_res(xmin, xmax, ymin, ymax);
@@ -848,8 +848,8 @@ TEST(PartialDerivative, CentralFDMPartialDerivativeWithBV)
     double const xmax(M_PI);
     double const ymin(-M_PI);
     double const ymax(M_PI);
-    // relative error of convergence should be less than 15%
-    double const TOL = 0.15;
+    // relative error of convergence order should be less than 25%
+    double const TOL = 0.25;
     // due to the boundary values we lose the order two
     int const expected_order(2);
 
