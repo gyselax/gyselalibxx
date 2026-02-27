@@ -29,9 +29,9 @@ class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>
             = ddc::remove_dims_of_t<typename Geometry::IdxRangeFdistribu, Species>;
 
 private:
-    using FunctionDerivIdxRange = typename InterpolationBuilderTraits<
+    using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeSpaceVelocity>;
-    using FunctionBasisIdxRange = typename InterpolationBuilderTraits<
+    using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeSpaceVelocity>;
 
     FunctionBuilder const& m_function_builder;
@@ -78,9 +78,9 @@ public:
 
         IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
 
-        FieldMem<double, FunctionDerivIdxRange> derivs_min(
+        FieldMem<double, IdxRangeFunctionDeriv> derivs_min(
                 m_function_builder.batched_derivs_xmin_domain(batched_feet_idx_range));
-        FieldMem<double, FunctionDerivIdxRange> derivs_max(
+        FieldMem<double, IdxRangeFunctionDeriv> derivs_max(
                 m_function_builder.batched_derivs_xmax_domain(batched_feet_idx_range));
         ddc::parallel_fill(derivs_min, 0.);
         ddc::parallel_fill(derivs_max, 0.);
@@ -88,7 +88,7 @@ public:
         // pre-allocate some memory to prevent allocation later in loop
         FieldMem<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
         Field<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
-        DFieldMem<FunctionBasisIdxRange> function_coefs_alloc(
+        DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);

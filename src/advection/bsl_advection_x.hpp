@@ -29,7 +29,7 @@ class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX>
             = ddc::remove_dims_of_t<typename Geometry::IdxRangeFdistribu, Species>;
 
 private:
-    using FunctionBasisIdxRange = typename InterpolationBuilderTraits<
+    using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeSpaceVelocity>;
 
     FunctionBuilder const& m_function_builder;
@@ -75,7 +75,7 @@ public:
         IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
         FieldMem<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
         Field<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
-        DFieldMem<FunctionBasisIdxRange> function_coefs_alloc(
+        DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);
