@@ -7,9 +7,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#include "Lagrange_interpolator.hpp"
 #include "mesh_builder.hpp"
-// Here Z stands to specify that we use ad hoc geometry
+
 struct Z
 {
     static bool constexpr PERIODIC = false;
