@@ -35,8 +35,8 @@ using LagEvaluatorVx = LagrangeEvaluator<
         double,
         LagBasisVx,
         GridVx,
-        ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>>;
+        ddc::NullExtrapolationRule,
+        ddc::NullExtrapolationRule>;
 
 std::pair<IdxRange<GridX>, IdxRange<GridVx>> Init_idx_range_velocity_adv()
 {
@@ -126,8 +126,8 @@ TEST(VelocityAdvection, BatchedLagrange)
 {
     auto [idx_range_x, idx_range_vx] = Init_idx_range_velocity_adv();
     LagBuilderVx const lag_builder_vx;
-    ddc::ConstantExtrapolationRule<Vx> bv_v_min(vx_min);
-    ddc::ConstantExtrapolationRule<Vx> bv_v_max(vx_max);
+    ddc::NullExtrapolationRule bv_v_min;
+    ddc::NullExtrapolationRule bv_v_max;
     LagEvaluatorVx const lag_evaluator_vx(bv_v_min, bv_v_max);
     BslAdvectionVelocity<GeometryXVx, GridVx, LagBuilderVx, LagEvaluatorVx> const
             lag_advection_vx(lag_builder_vx, lag_evaluator_vx);
