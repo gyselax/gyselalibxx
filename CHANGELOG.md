@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove Kokkos-related submodules.
 - Remove recursion from submodules synchronisation.
 - Add missing `module purge` in Persee toolchains.
+- Use GCC 14 in the Jean-Zay toolchain.
 
 ### Deprecated
 
