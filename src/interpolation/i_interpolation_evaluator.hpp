@@ -128,9 +128,6 @@ concept InterpolationEvaluator = requires
     typename InterpolationEvaluatorTraits<Evaluator>::coeff_grid_type;
     typename Evaluator::lower_extrapolation_rule_type;
     typename Evaluator::upper_extrapolation_rule_type;
-    // Verify the template alias can be instantiated with a concrete domain
-    typename InterpolationEvaluatorTraits<Evaluator>::template batched_coeff_idx_range_type<
-            typename InterpolationEvaluatorTraits<Evaluator>::evaluation_idx_range_type>;
 }
 &&requires(
         Evaluator const& e,

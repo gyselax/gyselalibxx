@@ -159,11 +159,6 @@ concept InterpolationBuilder = requires
     typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type;
     typename InterpolationBuilderTraits<Builder>::basis_domain_type;
     typename Builder::deriv_type;
-    // Verify the template aliases can be instantiated with a concrete domain
-    typename InterpolationBuilderTraits<Builder>::template batched_basis_idx_range_type<
-            typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>;
-    typename InterpolationBuilderTraits<Builder>::template batched_derivs_idx_range_type<
-            typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type>;
 }
 &&requires(
         Builder const& b,
