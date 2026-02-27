@@ -47,9 +47,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Remove the default PDI configuration file for the mini-app.
 - Remove `Interpolator` classes:
-    - `IInterpolator`
-    - `LagrangeInterpolator`
-    - `SplineInterpolator`
+  - `IInterpolator`
+  - `LagrangeInterpolator`
+  - `SplineInterpolator`
 
 ## [v0.5.0] - 2026-02-04
 
