@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File iinterpolator.hpp - GyselalibX</title>
+    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp} - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File iinterpolator.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/iinterpolator_8hpp.md";
+        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp}";
+        var mkdocs_page_input_path = "gyselalibxx/namespace_0d224.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File iinterpolator.hpp</li>
+      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp}</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/iinterpolator_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d224.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,73 +566,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-iinterpolatorhpp">File iinterpolator.hpp</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_264890e5c091f8c8d7fe1f842870c25e.html"><strong>interpolation</strong></a> <strong>&gt;</strong> <a href="iinterpolator_8hpp.html"><strong>iinterpolator.hpp</strong></a></p>
-<p><a href="iinterpolator_8hpp_source.html">Go to the source code of this file</a></p>
-<ul>
-<li><code>#include &lt;memory&gt;</code></li>
-<li><code>#include &lt;ddc/ddc.hpp&gt;</code></li>
-<li><code>#include &lt;ddc/kernels/splines/deriv.hpp&gt;</code></li>
-<li><code>#include "ddc_aliases.hpp"</code></li>
-<li><code>#include "ddc_helper.hpp"</code></li>
-</ul>
-<h2 id="classes">Classes</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classIInterpolator.html"><strong>IInterpolator</strong></a> &lt;class GridInterp, Grid1D&gt;<br><em>A class which provides an interpolating function.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classIPreallocatableInterpolator.html"><strong>IPreallocatableInterpolator</strong></a> &lt;class GridInterp, Grid1D&gt;<br><em>A class which provides access to an interpolating function which can be preallocated where useful.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structinterpolator__on__idx__range.html"><strong>interpolator_on_idx_range</strong></a> &lt;Interp, class GridInterp, class IdxRange&gt;<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.html"><strong>interpolator_on_idx_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;</strong></a> &lt;Interp, class GridInterp, Grid1D&gt;<br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-types">Public Types</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">typedef typename <a href="structinterpolator__on__idx__range.html"><strong>interpolator_on_idx_range</strong></a>&lt; Interp, GridInterp, IdxRange &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-interpolator_on_idx_range_t"><strong>interpolator_on_idx_range_t</strong></a>  <br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-interpolator_on_idx_range_t">typedef interpolator_on_idx_range_t</h3>
-<pre><code class="language-C++">using interpolator_on_idx_range_t =  typename interpolator_on_idx_range&lt;Interp, GridInterp, IdxRange&gt;::type;
-</code></pre>
-<p>A template function which returns an interpolation type.</p>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>Interp</code> The interpolator class being built. </li>
-<li><code>GridInterp</code> The dimension along which the operator will interpolate. </li>
-<li><code>IdxRange</code> The index range on which the data being interpolated is defined. </li>
-</ul>
+                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadraturequadrature_coeffs_ndhpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp}</h1>
+<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d224.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp}</strong></a></p>
 <hr>
-
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/iinterpolator.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp</code></p></div>
               
             </div>
           </div><footer>

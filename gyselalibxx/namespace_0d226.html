@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Class LagrangeInterpolator - GyselalibX</title>
+    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp} - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Class LagrangeInterpolator";
-        var mkdocs_page_input_path = "gyselalibxx/classLagrangeInterpolator.md";
+        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}";
+        var mkdocs_page_input_path = "gyselalibxx/namespace_0d226.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Class LagrangeInterpolator</li>
+      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classLagrangeInterpolator.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d226.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,167 +566,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="class-lagrangeinterpolator">Class LagrangeInterpolator</h1>
-<p><strong>template &lt;class GridInterp, BCond BcMin, BCond BcMax, class... Grid1D&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a></p>
-<p><em>A class for interpolating a function using</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials. It is designed to work with both uniform and non-uniform mesh, and have the advantage to be local.</em></p>
-<ul>
-<li><code>#include &lt;Lagrange_interpolator.hpp&gt;</code></li>
-</ul>
-<p>Inherits the following classes: <a href="classIInterpolator.html">IInterpolator</a></p>
-<h2 id="public-types-inherited-from-iinterpolator">Public Types inherited from IInterpolator</h2>
-<p>See <a href="classIInterpolator.html">IInterpolator</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">typedef ddc::replace_dim_of_t&lt; IdxRange&lt; Grid1D... &gt;, GridInterp, <a href="classIInterpolator.html#typedef-deriv_type"><strong>deriv_type</strong></a> &gt;</td>
-<td style="text-align: left;"><a href="classIInterpolator.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>The type of the whole index range on which derivatives are defined.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::Deriv&lt; typename GridInterp::continuous_dimension_type &gt;</td>
-<td style="text-align: left;"><a href="classIInterpolator.html#typedef-deriv_type"><strong>deriv_type</strong></a>  <br><em>The type of the dimension representing derivatives.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-functions">Public Functions</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-lagrangeinterpolator"><strong>LagrangeInterpolator</strong></a> (int degree, IdxStep&lt; GridInterp &gt; ghost) <br><em>Create a</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>interpolator object.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">virtual batched_derivs_idx_range_type</td>
-<td style="text-align: left;"><a href="#function-batched_derivs_idx_range_xmax"><strong>batched_derivs_idx_range_xmax</strong></a> (IdxRange&lt; Grid1D... &gt; idx_range) override const<br><em>Get the batched derivs index range on upper boundaries.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">virtual batched_derivs_idx_range_type</td>
-<td style="text-align: left;"><a href="#function-batched_derivs_idx_range_xmin"><strong>batched_derivs_idx_range_xmin</strong></a> (IdxRange&lt; Grid1D... &gt; idx_range) override const<br><em>Get the batched derivs index range on lower boundaries.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; inout_data, Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt; &gt; coordinates, std::optional&lt; Field&lt; double const, typename <a href="classIInterpolator.html"><strong>IInterpolator</strong></a>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt; &gt; derivs_xmin=std::nullopt, std::optional&lt; Field&lt; double const, typename <a href="classIInterpolator.html"><strong>IInterpolator</strong></a>&lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt; &gt; derivs_xmax=std::nullopt) override const<br><em>Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-lagrangeinterpolator"><strong>~LagrangeInterpolator</strong></a> () override<br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-functions-inherited-from-iinterpolator">Public Functions inherited from IInterpolator</h2>
-<p>See <a href="classIInterpolator.html">IInterpolator</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">virtual <a href="classIInterpolator.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a></td>
-<td style="text-align: left;"><a href="classIInterpolator.html#function-batched_derivs_idx_range_xmax"><strong>batched_derivs_idx_range_xmax</strong></a> (IdxRange&lt; Grid1D... &gt; idx_range) const = 0<br><em>Get the batched derivs index range on upper boundaries.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">virtual <a href="classIInterpolator.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a></td>
-<td style="text-align: left;"><a href="classIInterpolator.html#function-batched_derivs_idx_range_xmin"><strong>batched_derivs_idx_range_xmin</strong></a> (IdxRange&lt; Grid1D... &gt; idx_range) const = 0<br><em>Get the batched derivs index range on lower boundaries.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">virtual Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt;</td>
-<td style="text-align: left;"><a href="classIInterpolator.html#function-operator"><strong>operator()</strong></a> (Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; inout_data, Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt; &gt; coordinates, std::optional&lt; Field&lt; double const, <a href="classIInterpolator.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a> &gt; &gt; derivs_xmin=std::nullopt, std::optional&lt; Field&lt; double const, <a href="classIInterpolator.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a> &gt; &gt; derivs_xmax=std::nullopt) const = 0<br><em>Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">virtual</td>
-<td style="text-align: left;"><a href="classIInterpolator.html#function-iinterpolator"><strong>~IInterpolator</strong></a> () = default<br></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-lagrangeinterpolator">function LagrangeInterpolator</h3>
-<p><em>Create a</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>interpolator object.</em></p>
-<pre><code class="language-C++">inline LagrangeInterpolator::LagrangeInterpolator (
-    int degree,
-    IdxStep&lt; GridInterp &gt; ghost
-) 
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>degree</code> Degree of polynomials </li>
-<li><code>ghost</code> Discrete vector which gives the number of ghost points. By default choose 2. </li>
-</ul>
+                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadraturespline_quadraturehpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</h1>
+<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d226.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</strong></a></p>
 <hr>
-
-<h3 id="function-batched_derivs_idx_range_xmax">function batched_derivs_idx_range_xmax</h3>
-<p><em>Get the batched derivs index range on upper boundaries.</em> </p>
-<pre><code class="language-C++">inline virtual batched_derivs_idx_range_type LagrangeInterpolator::batched_derivs_idx_range_xmax (
-    IdxRange&lt; Grid1D... &gt; idx_range
-) override const
-</code></pre>
-<p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on upper boundaries are defined.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range</code> The index range of a single-species distribution function. </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>idx_range The upper boundaries of this index range. </p>
-<p>Implements <a href="classIInterpolator.html#function-batched_derivs_idx_range_xmax"><em>IInterpolator::batched_derivs_idx_range_xmax</em></a></p>
-<hr>
-
-<h3 id="function-batched_derivs_idx_range_xmin">function batched_derivs_idx_range_xmin</h3>
-<p><em>Get the batched derivs index range on lower boundaries.</em> </p>
-<pre><code class="language-C++">inline virtual batched_derivs_idx_range_type LagrangeInterpolator::batched_derivs_idx_range_xmin (
-    IdxRange&lt; Grid1D... &gt; idx_range
-) override const
-</code></pre>
-<p>Dimension of interest IDimI is replaced with ddc::Deriv&lt;IDimI::continuous_dimensions_type&gt;. This is the index range on which derivatives on lower boundaries are defined.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range</code> The index range of a single-species distribution function. </li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>idx_range The lower boundaries of this index range. </p>
-<p>Implements <a href="classIInterpolator.html#function-batched_derivs_idx_range_xmin"><em>IInterpolator::batched_derivs_idx_range_xmin</em></a></p>
-<hr>
-
-<h3 id="function-operator">function operator()</h3>
-<p><em>Approximate the value of a function at a set of coordinates using the current values at a known set of interpolation points.</em> </p>
-<pre><code class="language-C++">inline Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; LagrangeInterpolator::operator() (
-    Field&lt; double, IdxRange&lt; Grid1D... &gt; &gt; inout_data,
-    Field&lt; const Coord&lt; typename GridInterp::continuous_dimension_type &gt;, IdxRange&lt; Grid1D... &gt; &gt; coordinates,
-    std::optional&lt; Field&lt; double const, typename IInterpolator &lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt; &gt; derivs_xmin=std::nullopt,
-    std::optional&lt; Field&lt; double const, typename IInterpolator &lt; GridInterp, Grid1D... &gt;::batched_derivs_idx_range_type &gt; &gt; derivs_xmax=std::nullopt
-) override const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>inout_data</code> On input: an array containing the value of the function at the interpolation points. On output: an array containing the value of the function at the coordinates. </li>
-<li><code>coordinates</code> The coordinates where the function should be evaluated. </li>
-<li><code>derivs_xmin</code> The values of the derivatives at the lower boundary (unused in this class). </li>
-<li><code>derivs_xmax</code> The values of the derivatives at the upper boundary (unused in this class).</li>
-</ul>
-<p><strong>Returns:</strong></p>
-<p>A reference to the inout_data array containing the value of the function at the coordinates. </p>
-<hr>
-
-<h3 id="function-lagrangeinterpolator_1">function ~LagrangeInterpolator</h3>
-<pre><code class="language-C++">LagrangeInterpolator::~LagrangeInterpolator () override
-</code></pre>
-<hr>
-
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp</code></p></div>
               
             </div>
           </div><footer>

@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classIAdvectionVelocity" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>IAdvectionVelocity</compoundname>
-    <derivedcompoundref refid="classBslAdvectionVelocity" prot="public" virt="non-virtual">BslAdvectionVelocity&lt; Geometry, GridV &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslAdvectionVelocity" prot="public" virt="non-virtual">BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;</derivedcompoundref>
     <includes refid="iadvectionvx_8hpp" local="no">iadvectionvx.hpp</includes>
     <templateparamlist>
       <param>
@@ -92,7 +92,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>BslAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <label>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;</label>
         <link refid="classBslAdvectionVelocity"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>

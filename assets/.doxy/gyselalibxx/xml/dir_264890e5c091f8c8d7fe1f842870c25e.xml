@@ -7,13 +7,10 @@
     <innerfile refid="i__interpolation__evaluator_8hpp">i_interpolation_evaluator.hpp</innerfile>
     <innerfile refid="i__interpolator__2d_8hpp">i_interpolator_2d.hpp</innerfile>
     <innerfile refid="identity__interpolation__builder_8hpp">identity_interpolation_builder.hpp</innerfile>
-    <innerfile refid="iinterpolator_8hpp">iinterpolator.hpp</innerfile>
     <innerfile refid="Lagrange_8hpp">Lagrange.hpp</innerfile>
     <innerfile refid="lagrange__basis__non__uniform_8hpp">lagrange_basis_non_uniform.hpp</innerfile>
     <innerfile refid="lagrange__basis__uniform_8hpp">lagrange_basis_uniform.hpp</innerfile>
     <innerfile refid="lagrange__evaluator_8hpp">lagrange_evaluator.hpp</innerfile>
-    <innerfile refid="Lagrange__interpolator_8hpp">Lagrange_interpolator.hpp</innerfile>
-    <innerfile refid="spline__interpolator_8hpp">spline_interpolator.hpp</innerfile>
     <innerfile refid="spline__interpolator__2d_8hpp">spline_interpolator_2d.hpp</innerfile>
     <briefdescription>
     </briefdescription>

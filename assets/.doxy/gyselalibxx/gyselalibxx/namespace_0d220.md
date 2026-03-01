@@ -4,7 +4,7 @@
 
 
 
-[**Namespace List**](namespaces.md) **>** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d223.md)
+[**Namespace List**](namespaces.md) **>** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d220.md)
 
 
 

@@ -85,7 +85,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**RestartInitialisation**](classRestartInitialisation.md) _A class that initialises the distribution function from a previous simulation._ 
     * **class** [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md) _A class that initialises the distribution function as a perturbed Maxwellian._ 
     * **class** [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md) _A class that initialises the distribution function as a perturbed Maxwellian._ 
-* **class** [**IInterpolator**](classIInterpolator.md) _A class which provides an interpolating function._ 
 * **class** [**IInterpolator2D**](classIInterpolator2D.md) _A class which provides an interpolating function._     
     * **class** [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md) _A class which provides access to an interpolating function which can be preallocated where useful._ 
     * **class** [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md) _A class which provides access to an interpolating function which can be preallocated where useful._ 
@@ -265,8 +264,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**connectivity\_details::SwapExtremity&lt; Edge&lt; Patch, Grid1D, FRONT &gt; &gt;**](structconnectivity__details_1_1SwapExtremity_3_01Edge_3_01Patch_00_01Grid1D_00_01FRONT_01_4_01_4.md) _Specialisation of_ [_**SwapExtremity**_](structconnectivity__details_1_1SwapExtremity.md) _for an edge at the front end of a grid line._
 * **struct** [**connectivity\_details::ToTuple**](structconnectivity__details_1_1ToTuple.md) _A class to convert a type sequence to a tuple type._ 
 * **struct** [**connectivity\_details::ToTuple&lt; ddc::detail::TypeSeq&lt; I... &gt; &gt;**](structconnectivity__details_1_1ToTuple_3_01ddc_1_1detail_1_1TypeSeq_3_01I_8_8_8_01_4_01_4.md) _Specialisation of_ [_**ToTuple**_](structconnectivity__details_1_1ToTuple.md) _for type sequences._
-* **struct** [**interpolator\_on\_idx\_range**](structinterpolator__on__idx__range.md) 
-* **struct** [**interpolator\_on\_idx\_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;**](structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4.md) 
 * **struct** [**tensor\_tools::GetContravariantDims**](structtensor__tools_1_1GetContravariantDims.md) _A class to get a VectorIndexSet containing only contravariant dimensions._ 
 * **struct** [**tensor\_tools::GetContravariantDims&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1GetContravariantDims_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _A class to get a VectorIndexSet containing only contravariant dimensions._ 
 * **struct** [**tensor\_tools::GetCovariantDims**](structtensor__tools_1_1GetCovariantDims.md) _A class to get a VectorIndexSet containing only covariant dimensions._ 

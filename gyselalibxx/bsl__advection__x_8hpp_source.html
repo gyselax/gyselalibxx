@@ -575,11 +575,16 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "iadvectionx.hpp"
-#include "iinterpolator.hpp"
 #include "species_info.hpp"
 
-template &lt;class Geometry, class GridX&gt;
+template &lt;
+        class Geometry,
+        class GridX,
+        concepts::InterpolationBuilder FunctionBuilder,
+        concepts::InterpolationEvaluator FunctionEvaluator&gt;
 class BslAdvectionSpatial : public IAdvectionSpatial&lt;Geometry, GridX&gt;
 {
     using GridV = typename Geometry::template velocity_dim_for&lt;GridX&gt;;
@@ -592,17 +597,18 @@ class BslAdvectionSpatial : public IAdvectionSpatial&lt;Geometry, GridX&gt;
             = ddc::remove_dims_of_t&lt;typename Geometry::IdxRangeFdistribu, Species&gt;;
 
 private:
-    using PreallocatableInterpolatorType = interpolator_on_idx_range_t&lt;
-            IPreallocatableInterpolator,
-            GridX,
-            IdxRangeSpaceVelocity&gt;;
-    using InterpolatorType
-            = interpolator_on_idx_range_t&lt;IInterpolator, GridX, IdxRangeSpaceVelocity&gt;;
-    PreallocatableInterpolatorType const&amp; m_interpolator_x;
+    using IdxRangeFunctionBasis = typename InterpolationBuilderTraits&lt;
+            FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeSpaceVelocity&gt;;
+
+    FunctionBuilder const&amp; m_function_builder;
+    FunctionEvaluator const&amp; m_function_evaluator;
 
 public:
-    explicit BslAdvectionSpatial(PreallocatableInterpolatorType const&amp; interpolator_x)
-        : m_interpolator_x(interpolator_x)
+    explicit BslAdvectionSpatial(
+            FunctionBuilder const&amp; function_builder,
+            FunctionEvaluator const&amp; function_evaluator)
+        : m_function_builder(function_builder)
+        , m_function_evaluator(function_evaluator)
     {
     }
 
@@ -624,8 +630,8 @@ public:
         IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
         FieldMem&lt;Coord&lt;DimX&gt;, IdxRangeSpaceVelocity&gt; feet_coords_alloc(batched_feet_idx_range);
         Field&lt;Coord&lt;DimX&gt;, IdxRangeSpaceVelocity&gt; feet_coords(get_field(feet_coords_alloc));
-        std::unique_ptr&lt;InterpolatorType&gt; const interpolator_x_ptr = m_interpolator_x.preallocate();
-        InterpolatorType const&amp; interpolator_x = *interpolator_x_ptr;
+        DFieldMem&lt;IdxRangeFunctionBasis&gt; function_coefs_alloc(
+                batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);
 
@@ -645,7 +651,11 @@ public:
                             feet_coords(ix, ib) = Coord&lt;DimX&gt;(ddc::coordinate(ix) - dx);
                         }
                     });
-            interpolator_x(allfdistribu[isp], get_const_field(feet_coords));
+            m_function_builder(get_field(function_coefs_alloc), get_const_field(allfdistribu[isp]));
+            m_function_evaluator(
+                    allfdistribu[isp],
+                    get_const_field(feet_coords),
+                    get_const_field(function_coefs_alloc));
         }
 
         Kokkos::Profiling::popRegion();

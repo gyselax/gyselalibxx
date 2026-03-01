@@ -2,7 +2,7 @@
 
 # Class BslAdvectionSpatial
 
-**template &lt;class Geometry, class [**GridX**](structGridX.md)&gt;**
+**template &lt;class Geometry, class [**GridX**](structGridX.md), concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator&gt;**
 
 
 
@@ -75,7 +75,7 @@ Inherits the following classes: [IAdvectionSpatial](classIAdvectionSpatial.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvectionSpatial**](#function-bsladvectionspatial) (PreallocatableInterpolatorType const & interpolator\_x) <br>_Constructor_  __ |
+|   | [**BslAdvectionSpatial**](#function-bsladvectionspatial) (FunctionBuilder const & function\_builder, FunctionEvaluator const & function\_evaluator) <br>_Constructor._  |
 |  Field&lt; double, IdxRangeFdistrib &gt; | [**operator()**](#function-operator) (Field&lt; double, IdxRangeFdistrib &gt; const allfdistribu, double const dt) override const<br>_Advects fdistribu along_ [_**GridX**_](structGridX.md) _for a duration dt._ |
 |   | [**~BslAdvectionSpatial**](#function-bsladvectionspatial) () override<br> |
 
@@ -149,10 +149,11 @@ See [IAdvectionSpatial](classIAdvectionSpatial.md)
 
 ### function BslAdvectionSpatial 
 
-_Constructor_  __
+_Constructor._ 
 ```C++
 inline explicit BslAdvectionSpatial::BslAdvectionSpatial (
-    PreallocatableInterpolatorType const & interpolator_x
+    FunctionBuilder const & function_builder,
+    FunctionEvaluator const & function_evaluator
 ) 
 ```
 
@@ -163,8 +164,8 @@ inline explicit BslAdvectionSpatial::BslAdvectionSpatial (
 **Parameters:**
 
 
-* `interpolator_x` interpolator along the [**GridX**](structGridX.md) direction which refers to the spatial space. 
- 
+* `function_builder` Builder along the [**GridX**](structGridX.md) direction used to build the interpolation representation of the advected function. 
+* `function_evaluator` Evaluator along the [**GridX**](structGridX.md) direction used to evaluate the advected function at the characteristic feet. 
 
 
 

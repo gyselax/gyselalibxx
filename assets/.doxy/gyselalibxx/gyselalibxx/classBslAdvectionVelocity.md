@@ -2,7 +2,7 @@
 
 # Class BslAdvectionVelocity
 
-**template &lt;class Geometry, class GridV&gt;**
+**template &lt;class Geometry, class GridV, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator&gt;**
 
 
 
@@ -75,7 +75,7 @@ Inherits the following classes: [IAdvectionVelocity](classIAdvectionVelocity.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvectionVelocity**](#function-bsladvectionvelocity) (PreallocatableInterpolatorType const & interpolator\_v) <br>_Constructor._  |
+|   | [**BslAdvectionVelocity**](#function-bsladvectionvelocity) (FunctionBuilder const & function\_builder, FunctionEvaluator const & function\_evaluator) <br>_Constructor._  |
 |  Field&lt; double, IdxRangeFdistribu &gt; | [**operator()**](#function-operator) (Field&lt; double, IdxRangeFdistribu &gt; const allfdistribu, Field&lt; const double, IdxRangeSpatial &gt; const electric\_field, double const dt) override const<br>_Advects fdistribu along GridV for a duration dt._  |
 |   | [**~BslAdvectionVelocity**](#function-bsladvectionvelocity) () override<br> |
 
@@ -152,7 +152,8 @@ See [IAdvectionVelocity](classIAdvectionVelocity.md)
 _Constructor._ 
 ```C++
 inline explicit BslAdvectionVelocity::BslAdvectionVelocity (
-    PreallocatableInterpolatorType const & interpolator_v
+    FunctionBuilder const & function_builder,
+    FunctionEvaluator const & function_evaluator
 ) 
 ```
 
@@ -163,8 +164,8 @@ inline explicit BslAdvectionVelocity::BslAdvectionVelocity (
 **Parameters:**
 
 
-* `interpolator_v` interpolator along the GridV direction which refers to the velocity space. 
- 
+* `function_builder` Builder along the GridV direction used to build the interpolation representation of the advected function. 
+* `function_evaluator` Evaluator along the GridV direction used to evaluate the advected function at the characteristic feet. 
 
 
 

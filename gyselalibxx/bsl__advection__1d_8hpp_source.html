@@ -581,7 +581,6 @@
 #include "euler.hpp"
 #include "i_interpolation_builder.hpp"
 #include "i_interpolation_evaluator.hpp"
-#include "iinterpolator.hpp"
 #include "itimestepper.hpp"
 
 
@@ -589,14 +588,14 @@ template &lt;
         class GridInterest,
         class IdxRangeAdvection,
         class IdxRangeFunction,
-        class AdvectionFieldBuilder,
-        class AdvectionFieldEvaluator,
+        concepts::InterpolationBuilder FunctionBuilder,
+        concepts::InterpolationEvaluator FunctionEvaluator,
+        concepts::InterpolationBuilder AdvectionFieldBuilder,
+        concepts::InterpolationEvaluator AdvectionFieldEvaluator,
         class TimeStepperBuilder = EulerBuilder&gt;
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v&lt;TimeStepperBuilder&gt;);
-    static_assert(concepts::InterpolationBuilder&lt;AdvectionFieldBuilder&gt;);
-    static_assert(concepts::InterpolationEvaluator&lt;AdvectionFieldEvaluator&gt;);
 
 private:
     // Advection index range element:
@@ -633,24 +632,22 @@ private:
             = ddc::replace_dim_of_t&lt;IdxRangeAdvection, GridInterest, DerivDim&gt;;
     using AdvecFieldDerivConstField = Field&lt;const double, IdxRangeAdvecFieldDeriv&gt;;
 
-
-    // Interpolators:
-    using FunctionPreallocatableInterpolatorType = interpolator_on_idx_range_t&lt;
-            IPreallocatableInterpolator,
-            GridInterest,
-            IdxRangeFunction&gt;;
-    using FunctionInterpolatorType
-            = interpolator_on_idx_range_t&lt;IInterpolator, GridInterest, IdxRangeFunction&gt;;
+    // Type for the spline representation of the function
+    using IdxRangeFunctionBasis = typename InterpolationBuilderTraits&lt;
+            FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeFunction&gt;;
+    using FunctionBasisFieldMem = DFieldMem&lt;IdxRangeFunctionBasis&gt;;
 
     // Type for the derivatives of the function
-    using IdxRangeFunctionDeriv = typename FunctionInterpolatorType::batched_derivs_idx_range_type;
+    using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits&lt;
+            FunctionBuilder&gt;::template batched_derivs_idx_range_type&lt;IdxRangeFunction&gt;;
     using FunctionDerivFieldMem = DFieldMem&lt;IdxRangeFunctionDeriv&gt;;
 
     using TimeStepper = typename TimeStepperBuilder::template time_stepper_t&lt;
             FieldMem&lt;Coord&lt;typename GridInterest::continuous_dimension_type&gt;, IdxRangeAdvection&gt;,
             DFieldMem&lt;IdxRangeAdvection&gt;&gt;;
 
-    FunctionPreallocatableInterpolatorType const&amp; m_function_interpolator;
+    FunctionBuilder const&amp; m_function_builder;
+    FunctionEvaluator const&amp; m_function_evaluator;
 
     AdvectionFieldBuilder const&amp; m_adv_field_builder;
     AdvectionFieldEvaluator const&amp; m_adv_field_evaluator;
@@ -659,11 +656,13 @@ private:
 
 public:
     explicit BslAdvection1D(
-            FunctionPreallocatableInterpolatorType const&amp; function_interpolator,
+            FunctionBuilder const&amp; function_builder,
+            FunctionEvaluator const&amp; function_evaluator,
             AdvectionFieldBuilder const&amp; adv_field_builder,
             AdvectionFieldEvaluator const&amp; adv_field_evaluator,
             TimeStepperBuilder const&amp; time_stepper_builder)
-        : m_function_interpolator(function_interpolator)
+        : m_function_builder(function_builder)
+        , m_function_evaluator(function_evaluator)
         , m_adv_field_builder(adv_field_builder)
         , m_adv_field_evaluator(adv_field_evaluator)
         , m_time_stepper_builder(time_stepper_builder)
@@ -687,10 +686,6 @@ public:
         IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
         IdxRangeAdvection const idx_range_advection = get_idx_range(advection_field);
 
-        std::unique_ptr&lt;FunctionInterpolatorType&gt; const function_interpolator_ptr
-                = m_function_interpolator.preallocate();
-        FunctionInterpolatorType const&amp; function_interpolator = *function_interpolator_ptr;
-
 
         // Build spline representation of the advection field ....................................
         AdvecFieldSplineMem advection_field_coefs_alloc(
@@ -703,11 +698,15 @@ public:
                 advection_field_derivatives_min,
                 advection_field_derivatives_max);
 
+        // Allocate buffer for the function interpolation coefficients ...........................
+        FunctionBasisFieldMem function_coefs_alloc(
+                batched_basis_idx_range(m_function_builder, idx_range_function));
+
         // Build derivatives on boundaries and fill with zeros....................................
         FunctionDerivFieldMem function_derivatives_min(
-                m_function_interpolator.batched_derivs_idx_range_xmin(idx_range_function));
+                m_function_builder.batched_derivs_xmin_domain(idx_range_function));
         FunctionDerivFieldMem function_derivatives_max(
-                m_function_interpolator.batched_derivs_idx_range_xmax(idx_range_function));
+                m_function_builder.batched_derivs_xmax_domain(idx_range_function));
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
 
@@ -770,12 +769,18 @@ public:
                 });
 
 
-        // Interpolate the function at the characteristic feet
-        function_interpolator(
+        // Build interpolation coefficients from the function values
+        m_function_builder(
+                get_field(function_coefs_alloc),
+                get_const_field(allfdistribu),
+                std::optional(get_const_field(function_derivatives_min)),
+                std::optional(get_const_field(function_derivatives_max)));
+
+        // Evaluate the function at the characteristic feet
+        m_function_evaluator(
                 allfdistribu,
                 get_const_field(feet),
-                get_const_field(function_derivatives_min),
-                get_const_field(function_derivatives_max));
+                get_const_field(function_coefs_alloc));
 
 
         Kokkos::Profiling::popRegion();

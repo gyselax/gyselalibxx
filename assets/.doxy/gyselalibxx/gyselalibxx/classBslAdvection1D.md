@@ -2,7 +2,7 @@
 
 # Class BslAdvection1D
 
-**template &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, class AdvectionFieldBuilder, class AdvectionFieldEvaluator, class TimeStepperBuilder&gt;**
+**template &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator, concepts::InterpolationBuilder AdvectionFieldBuilder, concepts::InterpolationEvaluator AdvectionFieldEvaluator, class TimeStepperBuilder&gt;**
 
 
 
@@ -54,7 +54,7 @@ _A class which computes the advection along the dimension of interest GridIntere
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvection1D**](#function-bsladvection1d) (FunctionPreallocatableInterpolatorType const & function\_interpolator, AdvectionFieldBuilder const & adv\_field\_builder, AdvectionFieldEvaluator const & adv\_field\_evaluator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
+|   | [**BslAdvection1D**](#function-bsladvection1d) (FunctionBuilder const & function\_builder, FunctionEvaluator const & function\_evaluator, AdvectionFieldBuilder const & adv\_field\_builder, AdvectionFieldEvaluator const & adv\_field\_evaluator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
 |  FunctionField | [**operator()**](#function-operator) (FunctionField const allfdistribu, AdvecField const advection\_field, double const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_max=std::nullopt) const<br>_Advects allfdistribu along the advection dimension GridInterest for a duration dt._  |
 |   | [**~BslAdvection1D**](#function-bsladvection1d) () = default<br> |
 
@@ -121,6 +121,8 @@ The characteristic equation is solved using a time integration method ([**ITimeS
 * `GridInterest` The dimension along which the advection is computed. It refers to the dimension of \(x_i\) in the equation. 
 * `IdxRangeAdvection` The index range for the interpolation points defined on \(\Omega'\) where the characteristic equation is solved. \(\Omega'\) also refers to the domain of the advection field. It had to also be defined on the GridInterest for the time integration method. 
 * `IdxRangeFunction` The index range of \(\Omega\) where allfdistribu is defined. 
+* `FunctionBuilder` The type of the interpolation builder for the advected function along GridInterest. 
+* `FunctionEvaluator` The type of the interpolation evaluator for the advected function along GridInterest. 
 * `AdvectionFieldBuilder` The type of the spline builder for the advection field (see SplineBuilder). 
 * `AdvectionFieldEvaluator` The type of the spline evaluator for the advection field (see SplineEvaluator). 
 * `TimeStepperBuilder` A time stepper builder indicating which time integration method should be applied to solve the characteristic equation. 
@@ -139,7 +141,8 @@ The characteristic equation is solved using a time integration method ([**ITimeS
 _Constructor when the advection domain and the function domain are different._ 
 ```C++
 inline explicit BslAdvection1D::BslAdvection1D (
-    FunctionPreallocatableInterpolatorType const & function_interpolator,
+    FunctionBuilder const & function_builder,
+    FunctionEvaluator const & function_evaluator,
     AdvectionFieldBuilder const & adv_field_builder,
     AdvectionFieldEvaluator const & adv_field_evaluator,
     TimeStepperBuilder const & time_stepper_builder
@@ -148,10 +151,10 @@ inline explicit BslAdvection1D::BslAdvection1D (
 
 
 
-When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for each index range.
+When IdxRangeAdvection and IdxRangeFunction are different, we need one builder and evaluator for each index range.
 
 
-We can also use it when we want two different interpolators but defined on the same domain (e.g. different boundary conditions for the evaluators).
+We can also use it when we want two different builders/evaluators but defined on the same domain (e.g. different boundary conditions for the evaluators).
 
 
 
@@ -159,7 +162,8 @@ We can also use it when we want two different interpolators but defined on the s
 **Parameters:**
 
 
-* `function_interpolator` Interpolator along the GridInterest direction to interpolate the advected function (allfdistribu) on the domain of the function. 
+* `function_builder` Builder along the GridInterest direction used to build the interpolation representation of the advected function (allfdistribu) on the domain of the function. 
+* `function_evaluator` Evaluator along the GridInterest direction used to evaluate the advected function at the characteristic feet. 
 * `adv_field_builder` Builder along the GridInterest direction to build a spline representation of the advection field on the function domain. 
 * `adv_field_evaluator` Evaluator along the GridInterest direction to evaluate the advection field spline representation on the function domain. 
 * `time_stepper_builder` A builder for the time integration method used for the characteristic equation. 

@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classIAdvectionSpatial" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>IAdvectionSpatial</compoundname>
-    <derivedcompoundref refid="classBslAdvectionSpatial" prot="public" virt="non-virtual">BslAdvectionSpatial&lt; Geometry, GridX &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslAdvectionSpatial" prot="public" virt="non-virtual">BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator &gt;</derivedcompoundref>
     <includes refid="iadvectionx_8hpp" local="no">iadvectionx.hpp</includes>
     <templateparamlist>
       <param>
@@ -80,7 +80,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>BslAdvectionSpatial&lt; Geometry, GridX &gt;</label>
+        <label>BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator &gt;</label>
         <link refid="classBslAdvectionSpatial"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>

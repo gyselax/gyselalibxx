@@ -36,8 +36,6 @@
         </childnode>
         <childnode refid="39" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
-        </childnode>
         <childnode refid="19" relation="include">
         </childnode>
       </node>
@@ -187,7 +185,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="40">
         <label>geometry_xy.hpp</label>
         <link refid="geometry__xy_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -224,13 +222,13 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="41" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="44" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
+        <childnode refid="48" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -255,26 +253,12 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="40">
-        <label>iinterpolator.hpp</label>
-        <link refid="iinterpolator_8hpp_source"/>
-        <childnode refid="41" relation="include">
-        </childnode>
-        <childnode refid="6" relation="include">
-        </childnode>
-        <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="12" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
-        </childnode>
-      </node>
-      <node id="43">
+      <node id="41">
         <label>l_norm_tools.hpp</label>
         <link refid="l__norm__tools_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="42" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -325,28 +309,28 @@
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="46">
+      <node id="44">
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="45" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="46" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="42">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="43" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
@@ -385,7 +369,7 @@
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="48">
         <label>rk2.hpp</label>
         <link refid="rk2_8hpp_source"/>
         <childnode refid="18" relation="include">
@@ -439,7 +423,7 @@
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="45">
+      <node id="43">
         <label>Kokkos_Core.hpp</label>
       </node>
       <node id="18">
@@ -472,19 +456,16 @@
       <node id="5">
         <label>iostream</label>
       </node>
-      <node id="41">
-        <label>memory</label>
-      </node>
       <node id="38">
         <label>optional</label>
       </node>
-      <node id="49">
+      <node id="47">
         <label>paraconf.h</label>
       </node>
-      <node id="47">
+      <node id="45">
         <label>stdexcept</label>
       </node>
-      <node id="48">
+      <node id="46">
         <label>string</label>
       </node>
       <node id="10">

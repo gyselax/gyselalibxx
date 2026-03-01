@@ -396,7 +396,6 @@
 * **IdxVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **IdxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **IdxXYVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
-* **interpolator\_on\_idx\_range\_t** ([**iinterpolator.hpp**](iinterpolator_8hpp.md))
 * **insert\_into\_seq\_before\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **insert\_into\_type\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **insert\_mpi\_tags\_into\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))

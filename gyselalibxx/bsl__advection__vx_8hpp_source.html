@@ -576,11 +576,16 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "iadvectionvx.hpp"
-#include "iinterpolator.hpp"
 #include "species_info.hpp"
 
-template &lt;class Geometry, class GridV&gt;
+template &lt;
+        class Geometry,
+        class GridV,
+        concepts::InterpolationBuilder FunctionBuilder,
+        concepts::InterpolationEvaluator FunctionEvaluator&gt;
 class BslAdvectionVelocity : public IAdvectionVelocity&lt;Geometry, GridV&gt;
 {
     using IdxRangeFdistribu = typename Geometry::IdxRangeFdistribu;
@@ -592,17 +597,20 @@ class BslAdvectionVelocity : public IAdvectionVelocity&lt;Geometry, GridV&gt;
             = ddc::remove_dims_of_t&lt;typename Geometry::IdxRangeFdistribu, Species&gt;;
 
 private:
-    using PreallocatableInterpolatorType = interpolator_on_idx_range_t&lt;
-            IPreallocatableInterpolator,
-            GridV,
-            IdxRangeSpaceVelocity&gt;;
-    using InterpolatorType
-            = interpolator_on_idx_range_t&lt;IInterpolator, GridV, IdxRangeSpaceVelocity&gt;;
-    PreallocatableInterpolatorType const&amp; m_interpolator_v;
+    using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits&lt;
+            FunctionBuilder&gt;::template batched_derivs_idx_range_type&lt;IdxRangeSpaceVelocity&gt;;
+    using IdxRangeFunctionBasis = typename InterpolationBuilderTraits&lt;
+            FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeSpaceVelocity&gt;;
+
+    FunctionBuilder const&amp; m_function_builder;
+    FunctionEvaluator const&amp; m_function_evaluator;
 
 public:
-    explicit BslAdvectionVelocity(PreallocatableInterpolatorType const&amp; interpolator_v)
-        : m_interpolator_v(interpolator_v)
+    explicit BslAdvectionVelocity(
+            FunctionBuilder const&amp; function_builder,
+            FunctionEvaluator const&amp; function_evaluator)
+        : m_function_builder(function_builder)
+        , m_function_evaluator(function_evaluator)
     {
     }
 
@@ -622,23 +630,20 @@ public:
         IdxRange&lt;GridV&gt; const idx_range_v = ddc::select&lt;GridV&gt;(idx_range);
         IdxRange&lt;Species&gt; const idx_range_sp = ddc::select&lt;Species&gt;(idx_range);
 
-        FieldMem&lt;double, typename InterpolatorType::batched_derivs_idx_range_type&gt; derivs_min(
-                m_interpolator_v.batched_derivs_idx_range_xmin(
-                        ddc::remove_dims_of&lt;Species&gt;(idx_range)));
-        FieldMem&lt;double, typename InterpolatorType::batched_derivs_idx_range_type&gt; derivs_max(
-                m_interpolator_v.batched_derivs_idx_range_xmax(
-                        ddc::remove_dims_of&lt;Species&gt;(idx_range)));
+        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
+
+        FieldMem&lt;double, IdxRangeFunctionDeriv&gt; derivs_min(
+                m_function_builder.batched_derivs_xmin_domain(batched_feet_idx_range));
+        FieldMem&lt;double, IdxRangeFunctionDeriv&gt; derivs_max(
+                m_function_builder.batched_derivs_xmax_domain(batched_feet_idx_range));
         ddc::parallel_fill(derivs_min, 0.);
         ddc::parallel_fill(derivs_max, 0.);
 
         // pre-allocate some memory to prevent allocation later in loop
-        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
         FieldMem&lt;Coord&lt;DimV&gt;, IdxRangeSpaceVelocity&gt; feet_coords_alloc(batched_feet_idx_range);
         Field&lt;Coord&lt;DimV&gt;, IdxRangeSpaceVelocity&gt; feet_coords(get_field(feet_coords_alloc));
-        std::unique_ptr&lt;InterpolatorType&gt; const interpolator_v_ptr = m_interpolator_v.preallocate();
-        InterpolatorType const&amp; interpolator_v = *interpolator_v_ptr;
-
-        IdxRangeSpatial const idx_range_spatial(get_idx_range(allfdistribu));
+        DFieldMem&lt;IdxRangeFunctionBasis&gt; function_coefs_alloc(
+                batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);
 
@@ -660,11 +665,15 @@ public:
                             feet_coords(iv, ib) = Coord&lt;DimV&gt;(ddc::coordinate(iv) - dvx);
                         }
                     });
-            interpolator_v(
+            m_function_builder(
+                    get_field(function_coefs_alloc),
+                    get_const_field(allfdistribu[isp]),
+                    std::optional(get_const_field(derivs_min)),
+                    std::optional(get_const_field(derivs_max)));
+            m_function_evaluator(
                     allfdistribu[isp],
                     get_const_field(feet_coords),
-                    get_const_field(derivs_min),
-                    get_const_field(derivs_max));
+                    get_const_field(function_coefs_alloc));
         });
 
         Kokkos::Profiling::popRegion();

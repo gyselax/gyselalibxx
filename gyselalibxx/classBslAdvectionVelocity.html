@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-bsladvectionvelocity">Class BslAdvectionVelocity</h1>
-<p><strong>template &lt;class Geometry, class GridV&gt;</strong></p>
+<p><strong>template &lt;class Geometry, class GridV, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslAdvectionVelocity.html"><strong>BslAdvectionVelocity</strong></a></p>
 <p><em>A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry.</em> </p>
 <ul>
@@ -585,7 +585,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bsladvectionvelocity"><strong>BslAdvectionVelocity</strong></a> (PreallocatableInterpolatorType const &amp; interpolator_v) <br><em>Constructor.</em></td>
+<td style="text-align: left;"><a href="#function-bsladvectionvelocity"><strong>BslAdvectionVelocity</strong></a> (FunctionBuilder const &amp; function_builder, FunctionEvaluator const &amp; function_evaluator) <br><em>Constructor.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">Field&lt; double, IdxRangeFdistribu &gt;</td>
@@ -621,12 +621,14 @@
 <h3 id="function-bsladvectionvelocity">function BslAdvectionVelocity</h3>
 <p><em>Constructor.</em> </p>
 <pre><code class="language-C++">inline explicit BslAdvectionVelocity::BslAdvectionVelocity (
-    PreallocatableInterpolatorType const &amp; interpolator_v
+    FunctionBuilder const &amp; function_builder,
+    FunctionEvaluator const &amp; function_evaluator
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>interpolator_v</code> interpolator along the GridV direction which refers to the velocity space. </li>
+<li><code>function_builder</code> Builder along the GridV direction used to build the interpolation representation of the advected function. </li>
+<li><code>function_evaluator</code> Evaluator along the GridV direction used to evaluate the advected function at the characteristic feet. </li>
 </ul>
 <hr>
 

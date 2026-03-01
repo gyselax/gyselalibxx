@@ -14,8 +14,9 @@
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
+* `#include "i_interpolation_builder.hpp"`
+* `#include "i_interpolation_evaluator.hpp"`
 * `#include "iadvectionvx.hpp"`
-* `#include "iinterpolator.hpp"`
 * `#include "species_info.hpp"`
 
 
@@ -36,7 +37,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslAdvectionVelocity**](classBslAdvectionVelocity.md) &lt;class Geometry, class GridV&gt;<br>_A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry._  |
+| class | [**BslAdvectionVelocity**](classBslAdvectionVelocity.md) &lt;class Geometry, class GridV, FunctionBuilder, FunctionEvaluator&gt;<br>_A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry._  |
 
 
 

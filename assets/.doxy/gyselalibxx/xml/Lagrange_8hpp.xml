@@ -5,7 +5,6 @@
     <includes local="no">ddc/ddc.hpp</includes>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
     <includes refid="ddc__helper_8hpp" local="yes">ddc_helper.hpp</includes>
-    <includedby refid="Lagrange__interpolator_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp</includedby>
     <incdepgraph>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange.hpp</label>
@@ -50,18 +49,6 @@
         <label>ddc/kernels/splines.hpp</label>
       </node>
     </incdepgraph>
-    <invincdepgraph>
-      <node id="1">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange.hpp</label>
-        <link refid="Lagrange_8hpp"/>
-        <childnode refid="2" relation="include">
-        </childnode>
-      </node>
-      <node id="2">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/Lagrange_interpolator.hpp</label>
-        <link refid="Lagrange__interpolator_8hpp_source"/>
-      </node>
-    </invincdepgraph>
     <innerclass refid="classLagrange" prot="public">Lagrange</innerclass>
     <sectiondef kind="enum">
       <memberdef kind="enum" id="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53" prot="public" static="no" strong="yes">

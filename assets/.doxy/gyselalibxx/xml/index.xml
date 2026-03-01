@@ -42,36 +42,37 @@
     <member refid="classBarycentricToCartesian_1a0d989e44273714f226c63ae78657214c" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classBslAdvection1D" kind="class"><name>BslAdvection1D</name>
-    <member refid="classBslAdvection1D_1ae5ea5aafe141b9ac37fb70993d850532" kind="typedef"><name>IdxAdvection</name></member>
-    <member refid="classBslAdvection1D_1ac452c9b13f678ad3623adb53fd61a1b7" kind="typedef"><name>IdxFunction</name></member>
-    <member refid="classBslAdvection1D_1a0eb514cc395b40d6a17352a69ddbffb7" kind="typedef"><name>DimInterest</name></member>
-    <member refid="classBslAdvection1D_1ad12abf3c972f8589a6e421940570aa94" kind="typedef"><name>CoordInterest</name></member>
-    <member refid="classBslAdvection1D_1a5a1f30580212bbaad4eb3ca700b8efbc" kind="typedef"><name>IdxRangeInterest</name></member>
-    <member refid="classBslAdvection1D_1ad7135d9c31c1efe0501ea9a5a173542f" kind="typedef"><name>IdxInterest</name></member>
-    <member refid="classBslAdvection1D_1aa8e2659830e9ed71ff37c649c26f4198" kind="typedef"><name>FeetFieldMem</name></member>
-    <member refid="classBslAdvection1D_1ab9c24e643552d03e38356ac12c192364" kind="typedef"><name>FeetField</name></member>
-    <member refid="classBslAdvection1D_1a9aef7039fbcb471974e833573fd267b0" kind="typedef"><name>FeetConstField</name></member>
-    <member refid="classBslAdvection1D_1a3fb88989054d134bbe30df786fdcf2e4" kind="typedef"><name>AdvecFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a70850e072ea75a46a581062011a96cb6" kind="typedef"><name>AdvecField</name></member>
-    <member refid="classBslAdvection1D_1a85e2030efc9d0bc6784cc6b6f0e38cd5" kind="typedef"><name>FunctionField</name></member>
-    <member refid="classBslAdvection1D_1a2a66bc49c5a8e9465cbdeb8a9b1305eb" kind="typedef"><name>IdxRangeBSAdvection</name></member>
-    <member refid="classBslAdvection1D_1af31d6b92c0bf51aff81bbe1197a94ff7" kind="typedef"><name>AdvecFieldSplineMem</name></member>
-    <member refid="classBslAdvection1D_1ad36d478eb8b8c6ec133aca98ca5651f5" kind="typedef"><name>AdvecFieldSplineCoeffs</name></member>
-    <member refid="classBslAdvection1D_1aaf113f31757344d34e5f55250cdd13fc" kind="typedef"><name>DerivDim</name></member>
-    <member refid="classBslAdvection1D_1af8a301148c054c24dd751aa247467e0d" kind="typedef"><name>IdxRangeAdvecFieldDeriv</name></member>
-    <member refid="classBslAdvection1D_1a5ffce9debb7187251c12b9c7dc015835" kind="typedef"><name>AdvecFieldDerivConstField</name></member>
-    <member refid="classBslAdvection1D_1a05a7ef8c4e74e0a78707f2ad7ed9fbe3" kind="typedef"><name>FunctionPreallocatableInterpolatorType</name></member>
-    <member refid="classBslAdvection1D_1abde42e671040ef85c9c343af6c9a5945" kind="typedef"><name>FunctionInterpolatorType</name></member>
-    <member refid="classBslAdvection1D_1a960f5886c11741da0725199d65766adc" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
-    <member refid="classBslAdvection1D_1a0a79451dcce297ce5e7b206df6f315f5" kind="typedef"><name>FunctionDerivFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a1a640f19e8977dc305043b15b2bc2c12" kind="typedef"><name>TimeStepper</name></member>
-    <member refid="classBslAdvection1D_1ac600ce7e5dbed2089fbde21065c8b3ad" kind="variable"><name>m_function_interpolator</name></member>
-    <member refid="classBslAdvection1D_1ae87783bd1ba711394c63b406cb061270" kind="variable"><name>m_adv_field_builder</name></member>
-    <member refid="classBslAdvection1D_1a7dd819d156552de193c720285cf616c8" kind="variable"><name>m_adv_field_evaluator</name></member>
-    <member refid="classBslAdvection1D_1afd89cbfa130ed74242df232dc974dc12" kind="variable"><name>m_time_stepper_builder</name></member>
-    <member refid="classBslAdvection1D_1adf1e271587e2895c99f80543aedfd7dd" kind="function"><name>BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1a7e1d227f798ef3b9ff0b952ca6b93b34" kind="function"><name>~BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1aa1b6eb51ab09a4763f31445917d96dd4" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvection1D_1a11979991744b0295b0e2e2a87408891b" kind="typedef"><name>IdxAdvection</name></member>
+    <member refid="classBslAdvection1D_1aa14cdebe6d162694da37dd6640a9fea0" kind="typedef"><name>IdxFunction</name></member>
+    <member refid="classBslAdvection1D_1aab5fe0cf14c8a21a56a989391cea472a" kind="typedef"><name>DimInterest</name></member>
+    <member refid="classBslAdvection1D_1a8e6d03a3824481884a0ecc120fb53944" kind="typedef"><name>CoordInterest</name></member>
+    <member refid="classBslAdvection1D_1ab5645c81b0ac118dc15ef2d4f9d76907" kind="typedef"><name>IdxRangeInterest</name></member>
+    <member refid="classBslAdvection1D_1a68fb6a2aefdaba0c2d8427e996da6ac0" kind="typedef"><name>IdxInterest</name></member>
+    <member refid="classBslAdvection1D_1ad5d8ab1dcc9ef85a0203da0758a43f6d" kind="typedef"><name>FeetFieldMem</name></member>
+    <member refid="classBslAdvection1D_1ad7727592424ed36cb013bce77652d75b" kind="typedef"><name>FeetField</name></member>
+    <member refid="classBslAdvection1D_1ad769dbeac75fe47bf6691a21ba402cc2" kind="typedef"><name>FeetConstField</name></member>
+    <member refid="classBslAdvection1D_1ac0dbc5b0adda5913c80ba71b4b044324" kind="typedef"><name>AdvecFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a90714f5f8b2d9aee676884be66627fc6" kind="typedef"><name>AdvecField</name></member>
+    <member refid="classBslAdvection1D_1a291adf0f02f1efb9b49ca9c931652fd1" kind="typedef"><name>FunctionField</name></member>
+    <member refid="classBslAdvection1D_1a8954c18c8a61bcbf515b86078e171895" kind="typedef"><name>IdxRangeBSAdvection</name></member>
+    <member refid="classBslAdvection1D_1a6e549792e2122ce20f69a2b941eda871" kind="typedef"><name>AdvecFieldSplineMem</name></member>
+    <member refid="classBslAdvection1D_1a636d10f83250f601b18917019d1494b2" kind="typedef"><name>AdvecFieldSplineCoeffs</name></member>
+    <member refid="classBslAdvection1D_1ac190048ce8ec07190fd25ea111bbe40d" kind="typedef"><name>DerivDim</name></member>
+    <member refid="classBslAdvection1D_1aa938edbf2e31c68c165bfe97e2cd54ba" kind="typedef"><name>IdxRangeAdvecFieldDeriv</name></member>
+    <member refid="classBslAdvection1D_1a23dbd22d7c6ec26c1fe5c91a8193dcfc" kind="typedef"><name>AdvecFieldDerivConstField</name></member>
+    <member refid="classBslAdvection1D_1a6e0f0a5ecf898f20023f2d421168f4a6" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
+    <member refid="classBslAdvection1D_1ad0d06518d64a1fc2ab75a81576808758" kind="typedef"><name>FunctionBasisFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a43d747cb0c63eb50a3b8eca0df205e8b" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
+    <member refid="classBslAdvection1D_1af52ffd99ffb90ff4c5ed5e8ec0bd189d" kind="typedef"><name>FunctionDerivFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a8fca4b700c75265eeb3f73fd35af08b1" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classBslAdvection1D_1af20ab4d0dd30bced6da7b48b7f83dad9" kind="variable"><name>m_function_builder</name></member>
+    <member refid="classBslAdvection1D_1a07d9e9f0b8dfdb651c2621cb68c24fa4" kind="variable"><name>m_function_evaluator</name></member>
+    <member refid="classBslAdvection1D_1afa33e32431741c7ca78491a66ea8c894" kind="variable"><name>m_adv_field_builder</name></member>
+    <member refid="classBslAdvection1D_1aa853be4d95a8f6f4eee0f6802fe634b3" kind="variable"><name>m_adv_field_evaluator</name></member>
+    <member refid="classBslAdvection1D_1a643cc4bb5f6d140ed552341116809f8a" kind="variable"><name>m_time_stepper_builder</name></member>
+    <member refid="classBslAdvection1D_1a90d316e2525d6f8834f9848ad88cef57" kind="function"><name>BslAdvection1D</name></member>
+    <member refid="classBslAdvection1D_1a9719bd5e7181aa3843e06386a5ff8540" kind="function"><name>~BslAdvection1D</name></member>
+    <member refid="classBslAdvection1D_1a1863c7777ca540448941d7ebf0494b37" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionPolar" kind="class"><name>BslAdvectionPolar</name>
     <member refid="classBslAdvectionPolar_1a2154c15f9649423dac0af9a62f6e483f" kind="typedef"><name>R</name></member>
@@ -117,33 +118,34 @@
     <member refid="classBslAdvectionPolar_1a52f2664379eeb2d3a47ea93fbfb9238e" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionSpatial" kind="class"><name>BslAdvectionSpatial</name>
-    <member refid="classBslAdvectionSpatial_1a5ab2e7471cfc6966ededa7d5b4f5510c" kind="typedef"><name>GridV</name></member>
-    <member refid="classBslAdvectionSpatial_1a0e66d777ece5bde288fd4daecfdeeeca" kind="typedef"><name>IdxRangeFdistrib</name></member>
-    <member refid="classBslAdvectionSpatial_1a14438f34ca740e62036d5fc9c7ad2bec" kind="typedef"><name>IdxX</name></member>
-    <member refid="classBslAdvectionSpatial_1abe38d2044be1ed677575650dfcdddfa6" kind="typedef"><name>IdxV</name></member>
-    <member refid="classBslAdvectionSpatial_1aa6f8a9326cd687e9add8be192514b87c" kind="typedef"><name>DimX</name></member>
-    <member refid="classBslAdvectionSpatial_1a70a9bf6122220ac81bab3150857c4045" kind="typedef"><name>DimV</name></member>
-    <member refid="classBslAdvectionSpatial_1ae64f0a2881a6799ddf44dd828851b2d2" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
-    <member refid="classBslAdvectionSpatial_1a71e7a0f362753e70bd2d9889e7761c16" kind="typedef"><name>PreallocatableInterpolatorType</name></member>
-    <member refid="classBslAdvectionSpatial_1ae3c29b3c6fde30f8c266215d3519dbfd" kind="typedef"><name>InterpolatorType</name></member>
-    <member refid="classBslAdvectionSpatial_1ae1c60099d8b727741475faa644aec529" kind="variable"><name>m_interpolator_x</name></member>
-    <member refid="classBslAdvectionSpatial_1a6ee34fd8becaaf459692d47d6f59568d" kind="function"><name>BslAdvectionSpatial</name></member>
-    <member refid="classBslAdvectionSpatial_1a75b27057eac318ca23d3ca3fe3c2edab" kind="function"><name>~BslAdvectionSpatial</name></member>
-    <member refid="classBslAdvectionSpatial_1ab806340298fc18ebefefe09f205d116f" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvectionSpatial_1a9c9c6c24738c732e74a750c0b1fcda50" kind="typedef"><name>GridV</name></member>
+    <member refid="classBslAdvectionSpatial_1a4a9ca40b2f708924bff1f4ed3838de23" kind="typedef"><name>IdxRangeFdistrib</name></member>
+    <member refid="classBslAdvectionSpatial_1afc87383080f9b0242a36278a958a3773" kind="typedef"><name>IdxX</name></member>
+    <member refid="classBslAdvectionSpatial_1a893eebcaed4174e86d2454bdeb41362c" kind="typedef"><name>IdxV</name></member>
+    <member refid="classBslAdvectionSpatial_1adc9f073139ddc16b1f6d4aef58819ffc" kind="typedef"><name>DimX</name></member>
+    <member refid="classBslAdvectionSpatial_1a0bac792c6dfa8db722d7a1706245863a" kind="typedef"><name>DimV</name></member>
+    <member refid="classBslAdvectionSpatial_1a9cac810f5332d50ddd00732a78b1902b" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
+    <member refid="classBslAdvectionSpatial_1a459dadeffbdf47975134a9be8d89b802" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
+    <member refid="classBslAdvectionSpatial_1aab759667977f30c63326130ab39e1ff4" kind="variable"><name>m_function_builder</name></member>
+    <member refid="classBslAdvectionSpatial_1a66400566c48dcbfdc0712f386983e5b6" kind="variable"><name>m_function_evaluator</name></member>
+    <member refid="classBslAdvectionSpatial_1a2395d3130d87de6a8b932aecebcc76ec" kind="function"><name>BslAdvectionSpatial</name></member>
+    <member refid="classBslAdvectionSpatial_1a4e2f371a3543811c3b38b6700145ccdd" kind="function"><name>~BslAdvectionSpatial</name></member>
+    <member refid="classBslAdvectionSpatial_1afce58559359ed066916badf00db027ce" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionVelocity" kind="class"><name>BslAdvectionVelocity</name>
-    <member refid="classBslAdvectionVelocity_1a0e7f5534310e9d108fb23915cc03a5b5" kind="typedef"><name>IdxRangeFdistribu</name></member>
-    <member refid="classBslAdvectionVelocity_1ac795c6485aad318845f06f208021c89f" kind="typedef"><name>IdxRangeSpatial</name></member>
-    <member refid="classBslAdvectionVelocity_1a2a19e8ceb8d68352557837ce4e627971" kind="typedef"><name>IdxSpatial</name></member>
-    <member refid="classBslAdvectionVelocity_1ad9556005d87ccc7a0df03a7f015eaf67" kind="typedef"><name>IdxV</name></member>
-    <member refid="classBslAdvectionVelocity_1a539aadca9d4b16f8e63c7f603b58a95b" kind="typedef"><name>DimV</name></member>
-    <member refid="classBslAdvectionVelocity_1ad120e10800125f081ba188f12d3016f6" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
-    <member refid="classBslAdvectionVelocity_1a1d5276e3630157bb71a0abce77109ea5" kind="typedef"><name>PreallocatableInterpolatorType</name></member>
-    <member refid="classBslAdvectionVelocity_1acdcc26d0e5908e82b42574e1fafa39bd" kind="typedef"><name>InterpolatorType</name></member>
-    <member refid="classBslAdvectionVelocity_1afeaea98cd674abf7f58e0401a1df1204" kind="variable"><name>m_interpolator_v</name></member>
-    <member refid="classBslAdvectionVelocity_1a85c69c265dbb2410fdd60f7b78117593" kind="function"><name>BslAdvectionVelocity</name></member>
-    <member refid="classBslAdvectionVelocity_1a5d4ef8f16bdc3c34ec6452cf761c945a" kind="function"><name>~BslAdvectionVelocity</name></member>
-    <member refid="classBslAdvectionVelocity_1a9774e52704d997107ddeeb0d4041a0a9" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvectionVelocity_1ab56f76ccb62c98ee3244b3725a426fd6" kind="typedef"><name>IdxRangeFdistribu</name></member>
+    <member refid="classBslAdvectionVelocity_1ae2a875fa42ecb836e934efd34531b5a5" kind="typedef"><name>IdxRangeSpatial</name></member>
+    <member refid="classBslAdvectionVelocity_1ab4a24368218f0a4f44917822208b6c15" kind="typedef"><name>IdxSpatial</name></member>
+    <member refid="classBslAdvectionVelocity_1abf778812512c2e7db758075bf47db195" kind="typedef"><name>IdxV</name></member>
+    <member refid="classBslAdvectionVelocity_1af4b88be4640e91d0f99d5f67f1fd812c" kind="typedef"><name>DimV</name></member>
+    <member refid="classBslAdvectionVelocity_1a2224d733f248372218fb1afadad5f1df" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
+    <member refid="classBslAdvectionVelocity_1a7742ca64e8ebcde7fa5e4ced64184d2c" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
+    <member refid="classBslAdvectionVelocity_1a1b881d7da45b353480b84d72ad0ccccc" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
+    <member refid="classBslAdvectionVelocity_1aa7b69cb987d1ffc2ae761c14196a983e" kind="variable"><name>m_function_builder</name></member>
+    <member refid="classBslAdvectionVelocity_1a760e97267cc478529aa11f4101f1a40d" kind="variable"><name>m_function_evaluator</name></member>
+    <member refid="classBslAdvectionVelocity_1a50fbcbdb4ef4a6ebd617cae8e447a11d" kind="function"><name>BslAdvectionVelocity</name></member>
+    <member refid="classBslAdvectionVelocity_1a5a542fac3b6420da587f26ceaba12fec" kind="function"><name>~BslAdvectionVelocity</name></member>
+    <member refid="classBslAdvectionVelocity_1ae76bbf721e9cbb70dc23382b45027658" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslExplicitPredCorrRTheta" kind="class"><name>BslExplicitPredCorrRTheta</name>
     <member refid="classBslExplicitPredCorrRTheta_1ab7c824b049b06986c80a63e9f409bac8" kind="typedef"><name>SplinePolarFootFinderType</name></member>
@@ -1279,14 +1281,6 @@
     <member refid="classIInitialisation_1a1031f0b5ddc471102c6024eea4aa74df" kind="function"><name>~IInitialisation</name></member>
     <member refid="classIInitialisation_1ae08dacb88d913d1854652b86a6828c49" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="classIInterpolator" kind="class"><name>IInterpolator</name>
-    <member refid="classIInterpolator_1add959ac890d1a041cc399eb9a694e8f3" kind="typedef"><name>deriv_type</name></member>
-    <member refid="classIInterpolator_1a34da0d56a4983e66979c56014fd5436c" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
-    <member refid="classIInterpolator_1a8cd2160d82f63450c0278568408fc892" kind="function"><name>~IInterpolator</name></member>
-    <member refid="classIInterpolator_1af664c9db9a794fb1f199ff31f8673bf8" kind="function"><name>batched_derivs_idx_range_xmin</name></member>
-    <member refid="classIInterpolator_1a14f07a9a9cd43939de6acd999d25c195" kind="function"><name>batched_derivs_idx_range_xmax</name></member>
-    <member refid="classIInterpolator_1a83d8113fe207f0d87a240f6ae3f99498" kind="function"><name>operator()</name></member>
-  </compound>
   <compound refid="classIInterpolator2D" kind="class"><name>IInterpolator2D</name>
     <member refid="classIInterpolator2D_1aed8ccfee0c4687c303d27e47e5dd7ff8" kind="typedef"><name>Dim1</name></member>
     <member refid="classIInterpolator2D_1a97e0cf3ec6ccbdd821c444801c1785e7" kind="typedef"><name>Dim2</name></member>
@@ -1469,11 +1463,6 @@
     <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1ab2a5f148bf40c77728bd8c376534bcad" kind="typedef"><name>batched_evaluation_idx_range_type</name></member>
     <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a04def3c71792a9479779645966462f24" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
   </compound>
-  <compound refid="structinterpolator__on__idx__range" kind="struct"><name>interpolator_on_idx_range</name>
-  </compound>
-  <compound refid="structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4" kind="struct"><name>interpolator_on_idx_range&lt; Interp, GridInterp, IdxRange&lt; Grid1D... &gt; &gt;</name>
-    <member refid="structinterpolator__on__idx__range_3_01Interp_00_01GridInterp_00_01IdxRange_3_01Grid1D_8_8_8_01_4_01_4_1a3d7bd6ff70bbce6361c363dd77cc76bd" kind="typedef"><name>type</name></member>
-  </compound>
   <compound refid="classInverseJacobianMatrix" kind="class"><name>InverseJacobianMatrix</name>
     <member refid="classInverseJacobianMatrix_1a7988d90c0e9ad18cff9a1e635943428b" kind="typedef"><name>ValidArgIndices</name></member>
     <member refid="classInverseJacobianMatrix_1ad1067073595d216dd797c33f776213f1" kind="typedef"><name>ValidResultIndices</name></member>
@@ -1564,15 +1553,6 @@
     <member refid="classIPolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kind="typedef"><name>IdxRangeOperator</name></member>
     <member refid="classIPolarFootFinder_1aac7862984f8ba9387ea2d94c1e971901" kind="function"><name>~IPolarFootFinder</name></member>
     <member refid="classIPolarFootFinder_1a3da1ab44c93598dee39faac9557db18c" kind="function"><name>operator()</name></member>
-  </compound>
-  <compound refid="classIPreallocatableInterpolator" kind="class"><name>IPreallocatableInterpolator</name>
-    <member refid="classIPreallocatableInterpolator_1a1cc1863346091416a12a0e3ef210748a" kind="typedef"><name>deriv_type</name></member>
-    <member refid="classIPreallocatableInterpolator_1a84c8637a225b4aa749251fb6b7217783" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
-    <member refid="classIPreallocatableInterpolator_1a938ecc601db6305c1cfc0290abb2f445" kind="function"><name>~IPreallocatableInterpolator</name></member>
-    <member refid="classIPreallocatableInterpolator_1a20012bae921142b3c686f6a4a615e23a" kind="function"><name>preallocate</name></member>
-    <member refid="classIPreallocatableInterpolator_1a737773f79bd66f394f19a6b7d8045b52" kind="function"><name>batched_derivs_idx_range_xmin</name></member>
-    <member refid="classIPreallocatableInterpolator_1aa5f6e697f47d2e64a7e079a7e0ac9745" kind="function"><name>batched_derivs_idx_range_xmax</name></member>
-    <member refid="classIPreallocatableInterpolator_1acf51b8cbb5a54ff83ee67c20f538e7e3" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIPreallocatableInterpolator2D" kind="class"><name>IPreallocatableInterpolator2D</name>
     <member refid="classIPreallocatableInterpolator2D_1a88eb569b2a9496f0d68693e81a96c4dc" kind="function"><name>preallocate</name></member>
@@ -1748,18 +1728,6 @@
     <member refid="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" kind="function"><name>eval</name></member>
     <member refid="classLagrangeEvaluator_1a5dd80d5c33512b83f508a62bc3657093" kind="function"><name>eval_no_bc</name></member>
     <member refid="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" kind="function"><name>getclosest</name></member>
-  </compound>
-  <compound refid="classLagrangeInterpolator" kind="class"><name>LagrangeInterpolator</name>
-    <member refid="classLagrangeInterpolator_1a66bada460bd32a4dbdb846ff5acabbb7" kind="typedef"><name>InterpDim</name></member>
-    <member refid="classLagrangeInterpolator_1aac2bce44549fc5328fa2228e6e233c01" kind="typedef"><name>deriv_type</name></member>
-    <member refid="classLagrangeInterpolator_1a0656ca8187faf0316a97c2c4aa750850" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
-    <member refid="classLagrangeInterpolator_1a66f8f70e8008006ae07046049d99309f" kind="variable"><name>m_degree</name></member>
-    <member refid="classLagrangeInterpolator_1a6df18acd8b7a60f378b475b501ff5a4a" kind="variable"><name>m_ghost</name></member>
-    <member refid="classLagrangeInterpolator_1a60914d8391f7ea2e47c624a088ec5d92" kind="function"><name>LagrangeInterpolator</name></member>
-    <member refid="classLagrangeInterpolator_1a24322b63ee0649eb5c5b8d7db410621b" kind="function"><name>~LagrangeInterpolator</name></member>
-    <member refid="classLagrangeInterpolator_1a08d2746b1cf2f70e18478141b3bc5ca9" kind="function"><name>batched_derivs_idx_range_xmin</name></member>
-    <member refid="classLagrangeInterpolator_1a9a6515bea1958ced63980a0ecee4c707" kind="function"><name>batched_derivs_idx_range_xmax</name></member>
-    <member refid="classLagrangeInterpolator_1a27441b99d16e977bf606a01442e8a957" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classLeviCivitaTensor" kind="class"><name>LeviCivitaTensor</name>
     <member refid="classLeviCivitaTensor_1a75ae281b08da04242aa4b8fe07a61c67" kind="typedef"><name>element_type</name></member>
@@ -2508,22 +2476,6 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1af770ddf5e1bc2824b4c42c8447e9d214" kind="function"><name>to_polar</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a79ec79a59a0a4c93bb1d59f546681a11" kind="function"><name>get_quadrature_between_knots</name></member>
   </compound>
-  <compound refid="classPreallocatableLagrangeInterpolator" kind="class"><name>PreallocatableLagrangeInterpolator</name>
-    <member refid="classPreallocatableLagrangeInterpolator_1afc234adece0019e074190e2b1cb71158" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classPreallocatableLagrangeInterpolator_1ab22f8df459fbda09a57c004610f3d9db" kind="function"><name>PreallocatableLagrangeInterpolator</name></member>
-    <member refid="classPreallocatableLagrangeInterpolator_1a89d9c3223de02ee3ca1034da54134e09" kind="function"><name>~PreallocatableLagrangeInterpolator</name></member>
-    <member refid="classPreallocatableLagrangeInterpolator_1ae427633c86b7699ce59d9db59bbf50ae" kind="function"><name>preallocate</name></member>
-  </compound>
-  <compound refid="classPreallocatableSplineInterpolator" kind="class"><name>PreallocatableSplineInterpolator</name>
-    <member refid="classPreallocatableSplineInterpolator_1ace1464e44f0378d18220edce5806df26" kind="typedef"><name>BuilderType</name></member>
-    <member refid="classPreallocatableSplineInterpolator_1a614200e48bc76f4af496df0527379d4e" kind="typedef"><name>EvaluatorType</name></member>
-    <member refid="classPreallocatableSplineInterpolator_1a0b5abedb5e92d939e457310fcd4ba1e6" kind="variable"><name>m_builder</name></member>
-    <member refid="classPreallocatableSplineInterpolator_1a44636ecb4daf840b25bdb50a4e5c725d" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classPreallocatableSplineInterpolator_1a304f7855955a97093232d93d405b2c81" kind="variable"><name>m_idx_range_batched</name></member>
-    <member refid="classPreallocatableSplineInterpolator_1a8359df8b1d9b4c89f55b214a008cbd3c" kind="function"><name>PreallocatableSplineInterpolator</name></member>
-    <member refid="classPreallocatableSplineInterpolator_1ae2a531101d4b7e93c096ee7185e47e74" kind="function"><name>~PreallocatableSplineInterpolator</name></member>
-    <member refid="classPreallocatableSplineInterpolator_1a0f8c7088fc3a65ef39e2710549dee3b0" kind="function"><name>preallocate</name></member>
-  </compound>
   <compound refid="classPreallocatableSplineInterpolator2D" kind="class"><name>PreallocatableSplineInterpolator2D</name>
     <member refid="classPreallocatableSplineInterpolator2D_1ad8226ecfd141ebf4a83b4a68d68a5666" kind="variable"><name>m_builder</name></member>
     <member refid="classPreallocatableSplineInterpolator2D_1a376920a51cdb3ec0f916e840f8bfbd6f" kind="variable"><name>m_evaluator</name></member>
@@ -2834,22 +2786,6 @@
     <member refid="classSplineBuliderDerivField2D_1a1abd8724064d97b3cc4e49c7d3f6b212" kind="function"><name>fill_in_deriv1</name></member>
     <member refid="classSplineBuliderDerivField2D_1a9df363ba433e1c5e276fd747c193583e" kind="function"><name>fill_in_deriv2</name></member>
     <member refid="classSplineBuliderDerivField2D_1a0bb44474e00453075e52b61d8f251951" kind="function"><name>fill_in_cross_deriv</name></member>
-  </compound>
-  <compound refid="classSplineInterpolator" kind="class"><name>SplineInterpolator</name>
-    <member refid="classSplineInterpolator_1a0178cfed8217e7d7838444f56ea31694" kind="typedef"><name>BuilderType</name></member>
-    <member refid="classSplineInterpolator_1a4c1ce88f6419a4fe9ef1073cfb1924ae" kind="typedef"><name>EvaluatorType</name></member>
-    <member refid="classSplineInterpolator_1a1f4ea33c0cb2a9ecb4658c7f536843b7" kind="typedef"><name>deriv_type</name></member>
-    <member refid="classSplineInterpolator_1a9969315a15aa8cf4c3d26b7ec47e1e01" kind="typedef"><name>batched_spline_domain_type</name></member>
-    <member refid="classSplineInterpolator_1a604d2cc6f28885bf7120179bb5a4b2d9" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
-    <member refid="classSplineInterpolator_1af5914284e726e43516db72af11a57c30" kind="typedef"><name>batched_deriv_field_type</name></member>
-    <member refid="classSplineInterpolator_1a0e1dfe63670f3c0718d65876731658c6" kind="variable"><name>m_builder</name></member>
-    <member refid="classSplineInterpolator_1adb3b5587324525081ce954deb739dcf9" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classSplineInterpolator_1a40db3b34ea6f08a4ff61cfb5028e2827" kind="variable"><name>m_coefs</name></member>
-    <member refid="classSplineInterpolator_1ac0316cee966f42d53b4a9932774d2da9" kind="function"><name>SplineInterpolator</name></member>
-    <member refid="classSplineInterpolator_1abe4759eae637affa7603da612bb9d5b7" kind="function"><name>~SplineInterpolator</name></member>
-    <member refid="classSplineInterpolator_1a9cfc0e637f271993f61b0270d12e5703" kind="function"><name>batched_derivs_idx_range_xmin</name></member>
-    <member refid="classSplineInterpolator_1ab7b38622e403a5a5dc9e09d737a9dfe8" kind="function"><name>batched_derivs_idx_range_xmax</name></member>
-    <member refid="classSplineInterpolator_1a39f32a67cd5be9f26c7dafdb8e33ecaf" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classSplineInterpolator2D" kind="class"><name>SplineInterpolator2D</name>
     <member refid="classSplineInterpolator2D_1a710ece4c148100aa05307b140deb709a" kind="typedef"><name>base_type</name></member>
@@ -3212,13 +3148,13 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d223" kind="namespace"><name>@223</name>
+  <compound refid="namespace_0d220" kind="namespace"><name>@220</name>
   </compound>
-  <compound refid="namespace_0d225" kind="namespace"><name>@225</name>
+  <compound refid="namespace_0d222" kind="namespace"><name>@222</name>
   </compound>
-  <compound refid="namespace_0d227" kind="namespace"><name>@227</name>
+  <compound refid="namespace_0d224" kind="namespace"><name>@224</name>
   </compound>
-  <compound refid="namespace_0d229" kind="namespace"><name>@229</name>
+  <compound refid="namespace_0d226" kind="namespace"><name>@226</name>
   </compound>
   <compound refid="namespace_0d97" kind="namespace"><name>@97</name>
   </compound>
@@ -3970,9 +3906,6 @@
   </compound>
   <compound refid="identity__interpolation__builder_8hpp" kind="file"><name>identity_interpolation_builder.hpp</name>
   </compound>
-  <compound refid="iinterpolator_8hpp" kind="file"><name>iinterpolator.hpp</name>
-    <member refid="iinterpolator_8hpp_1ab7bc57a697bacb3c9b73b49f6fe94b64" kind="typedef"><name>interpolator_on_idx_range_t</name></member>
-  </compound>
   <compound refid="Lagrange_8hpp" kind="file"><name>Lagrange.hpp</name>
     <member refid="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53" kind="enum"><name>BCond</name></member>
     <member refid="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53ad9d83fc826ae0d42075af007a477e2c9" kind="enumvalue"><name>PERIODIC</name></member>
@@ -3984,15 +3917,11 @@
   </compound>
   <compound refid="lagrange__evaluator_8hpp" kind="file"><name>lagrange_evaluator.hpp</name>
   </compound>
-  <compound refid="Lagrange__interpolator_8hpp" kind="file"><name>Lagrange_interpolator.hpp</name>
-  </compound>
   <compound refid="bernstein_8hpp" kind="file"><name>bernstein.hpp</name>
   </compound>
   <compound refid="polar__bsplines_8hpp" kind="file"><name>polar_bsplines.hpp</name>
   </compound>
   <compound refid="polar__spline__evaluator_8hpp" kind="file"><name>polar_spline_evaluator.hpp</name>
-  </compound>
-  <compound refid="spline__interpolator_8hpp" kind="file"><name>spline_interpolator.hpp</name>
   </compound>
   <compound refid="spline__interpolator__2d_8hpp" kind="file"><name>spline_interpolator_2d.hpp</name>
   </compound>
