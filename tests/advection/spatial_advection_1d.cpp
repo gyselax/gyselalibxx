@@ -10,7 +10,6 @@
 #include "bsl_advection_1d.hpp"
 #include "euler.hpp"
 #include "species_info.hpp"
-#include "spline_interpolator.hpp"
 
 
 namespace {
@@ -228,9 +227,6 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, meshSpXVx);
-
     EulerBuilder euler;
     BslAdvection1D<
             GridX,
@@ -238,8 +234,10 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
             IdxRangeSpXVx,
             SplineXBuilder,
             SplineXEvaluator,
+            SplineXBuilder,
+            SplineXEvaluator,
             EulerBuilder> const
-            spline_advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler);
+            spline_advection_x(builder_x, spline_x_evaluator, builder_x, spline_x_evaluator, euler);
 
     double const err = SpatialAdvection(spline_advection_x);
     EXPECT_LE(err, 1.e-6);

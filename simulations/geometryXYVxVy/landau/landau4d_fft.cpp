@@ -36,7 +36,6 @@
 #include "singlemodeperturbinitialisation.hpp"
 #include "species_info.hpp"
 #include "species_init.hpp"
-#include "spline_interpolator.hpp"
 
 using std::cerr;
 using std::endl;
@@ -122,35 +121,27 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, idxrange_vxvyxy_v2Dsplit);
-
     ddc::PeriodicExtrapolationRule<Y> bv_y_min;
     ddc::PeriodicExtrapolationRule<Y> bv_y_max;
     SplineYEvaluator const spline_y_evaluator(bv_y_min, bv_y_max);
-
-    PreallocatableSplineInterpolator const
-            spline_y_interpolator(builder_y, spline_y_evaluator, idxrange_vxvyxy_v2Dsplit);
 
     ddc::ConstantExtrapolationRule<Vx> bv_vx_min(ddc::coordinate(idxrange_vx.front()));
     ddc::ConstantExtrapolationRule<Vx> bv_vx_max(ddc::coordinate(idxrange_vx.back()));
     SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
 
-    PreallocatableSplineInterpolator const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator, idxrange_xyvxvy_x2Dsplit);
-
     ddc::ConstantExtrapolationRule<Vy> bv_vy_min(ddc::coordinate(idxrange_vy.front()));
     ddc::ConstantExtrapolationRule<Vy> bv_vy_max(ddc::coordinate(idxrange_vy.back()));
     SplineVyEvaluator const spline_vy_evaluator(bv_vy_min, bv_vy_max);
 
-    PreallocatableSplineInterpolator const
-            spline_vy_interpolator(builder_vy, spline_vy_evaluator, idxrange_xyvxvy_x2Dsplit);
-
     // Create advection operator
-    BslAdvectionSpatial<GeometryVxVyXY, GridX> const advection_x(spline_x_interpolator);
-    BslAdvectionSpatial<GeometryVxVyXY, GridY> const advection_y(spline_y_interpolator);
-    BslAdvectionVelocity<GeometryXYVxVy, GridVx> const advection_vx(spline_vx_interpolator);
-    BslAdvectionVelocity<GeometryXYVxVy, GridVy> const advection_vy(spline_vy_interpolator);
+    BslAdvectionSpatial<GeometryVxVyXY, GridX, SplineXBuilder, SplineXEvaluator> const
+            advection_x(builder_x, spline_x_evaluator);
+    BslAdvectionSpatial<GeometryVxVyXY, GridY, SplineYBuilder, SplineYEvaluator> const
+            advection_y(builder_y, spline_y_evaluator);
+    BslAdvectionVelocity<GeometryXYVxVy, GridVx, SplineVxBuilder, SplineVxEvaluator> const
+            advection_vx(builder_vx, spline_vx_evaluator);
+    BslAdvectionVelocity<GeometryXYVxVy, GridVy, SplineVyBuilder, SplineVyEvaluator> const
+            advection_vy(builder_vy, spline_vy_evaluator);
 
     MpiSplitVlasovSolver const
             vlasov(advection_x, advection_y, advection_vx, advection_vy, transpose);

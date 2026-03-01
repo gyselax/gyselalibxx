@@ -10,7 +10,6 @@
 #include "ddc_helper.hpp"
 #include "itimestepper.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator.hpp"
 #include "vector_field_common.hpp"
 
 
@@ -334,12 +333,6 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
     SplineYEvaluator const spline_evaluator_y(bv_y_min, bv_y_max);
 
 
-    PreallocatableSplineInterpolator const
-            function_spline_x_interpolator(builder_x, spline_evaluator_x, xyvxvy_grid);
-    PreallocatableSplineInterpolator const
-            function_spline_y_interpolator(builder_y, spline_evaluator_y, xyvxvy_grid);
-
-
     RK2Builder time_stepper;
 
     BslAdvection1D<
@@ -348,24 +341,20 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
             IdxRangeXYVxVy,
             SplineXBuilder,
             SplineXEvaluator,
+            SplineXBuilder,
+            SplineXEvaluator,
             RK2Builder> const
-            advection_x(
-                    function_spline_x_interpolator,
-                    builder_x,
-                    spline_evaluator_x,
-                    time_stepper);
+            advection_x(builder_x, spline_evaluator_x, builder_x, spline_evaluator_x, time_stepper);
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXYVxVy,
             SplineYBuilder,
             SplineYEvaluator,
+            SplineYBuilder,
+            SplineYEvaluator,
             RK2Builder> const
-            advection_y(
-                    function_spline_y_interpolator,
-                    builder_y,
-                    spline_evaluator_y,
-                    time_stepper);
+            advection_y(builder_y, spline_evaluator_y, builder_y, spline_evaluator_y, time_stepper);
 
 
     double const max_relative_error = AdvectionXY(advection_x, advection_y);
