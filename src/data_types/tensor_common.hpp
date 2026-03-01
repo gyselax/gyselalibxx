@@ -482,7 +482,7 @@ KOKKOS_FUNCTION TensorType operator/(TensorType const& tensor, Oelement_type val
 template <
         class TensorType,
         std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
-KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor,TensorType const& val)
+KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor, TensorType const& val)
 {
     TensorType result(tensor);
     result += val;
