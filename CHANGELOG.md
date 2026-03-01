@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove Kokkos-related submodules.
 - Remove recursion from submodules synchronisation.
 - Add missing `module purge` in Persee toolchains.
+- Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
 
 ### Deprecated
 
@@ -45,6 +46,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove the default PDI configuration file for the mini-app.
+- Remove `Interpolator` classes:
+  - `IInterpolator`
+  - `LagrangeInterpolator`
+  - `SplineInterpolator`
 
 ## [v0.5.0] - 2026-02-04
 

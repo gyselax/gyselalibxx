@@ -33,7 +33,6 @@
 #include "species_info.hpp"
 #include "species_init.hpp"
 #include "spline_definitions_xvx.hpp"
-#include "spline_interpolator.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
@@ -114,18 +113,16 @@ int main(int argc, char** argv)
 
     // Creating operators
     SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, meshXVx);
 
     ddc::ConstantExtrapolationRule<Vx> bv_v_min(ddc::coordinate(mesh_vx.front()));
     ddc::ConstantExtrapolationRule<Vx> bv_v_max(ddc::coordinate(mesh_vx.back()));
 
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
-    PreallocatableSplineInterpolator const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator, meshXVx);
 
-    BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator);
-    BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(spline_vx_interpolator);
+    BslAdvectionSpatial<GeometryXVx, GridX, SplineXBuilder, SplineXEvaluator> const
+            advection_x(builder_x, spline_x_evaluator);
+    BslAdvectionVelocity<GeometryXVx, GridVx, SplineVxBuilder, SplineVxEvaluator> const
+            advection_vx(builder_vx, spline_vx_evaluator);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
