@@ -479,9 +479,7 @@ KOKKOS_FUNCTION TensorType operator/(TensorType const& tensor, Oelement_type val
  * @param val The second tensor in the addition.
  * @return A new tensor containing the result of the addition.
  */
-template <
-        class TensorType,
-        std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
+template <class TensorType, std::enable_if_t<is_tensor_type_v<TensorType>, bool> = true>
 KOKKOS_FUNCTION TensorType operator+(TensorType const& tensor, TensorType const& val)
 {
     TensorType result(tensor);
