@@ -58,6 +58,83 @@ KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
     assert(idx_range_theta.contains(ddc::select<BSplinesTheta>(idx)));
     return idx;
 }
+/**
+* @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
+*
+* This method calculates the value and the derivatives of polar bsplines. It is templated by
+* calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and
+* get_polar_bspline_vals. The calling method should not need to use the template parameter.
+*
+* @param[out] val
+*      The value of the specified polar bspline at the specified point.
+* @param[in] coord
+*      The coordinate where the value of the polar bspline should be calculated.
+* @param[in] idx
+*      The polar bspline of interest.
+* @return The derivative of the polar bspline (only returned if calculate_derivs is true).
+*/
+template <typename PolarBSplinesRTheta, bool calculate_derivs = true>
+KOKKOS_FUNCTION std::conditional_t<
+        calculate_derivs,
+        DVector<typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual>,
+        void>
+get_polar_bspline_vals_and_derivs(double& val, CoordRTheta coord, Idx<PolarBSplinesRTheta> idx)
+{
+    using R = PolarBSplinesRTheta::R;
+    using Theta = PolarBSplinesRTheta::Theta;
+    std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
+    using BSplinesR = PolarBSplinesRTheta::BSplinesR_tag;
+    using BSplinesTheta = PolarBSplinesRTheta::BSplinesTheta_tag;
+    constexpr int n_non_zero_bases_r = BSplinesR::degree() + 1;
+    constexpr int n_non_zero_bases_theta = BSplinesR::degree() + 1;
+    std::array<double, n_non_zero_bases_r * n_non_zero_bases_theta> data;
+    // Values of the polar basis splines around the singular point
+    // at a given coordinate
+    DSpan1D singular_vals(singular_data.data(), PolarBSplinesRTheta::n_singular_basis());
+    // Values of the polar basis splines, that do not cover the singular point,
+    // at a given coordinate
+    DSpan2D vals(data.data(), n_non_zero_bases_r, n_non_zero_bases_theta);
+
+    auto& polar_bspl = ddc::discrete_space<PolarBSplinesRTheta>();
+
+    if (idx < Idx<PolarBSplinesRTheta>(PolarBSplinesRTheta::n_singular_basis())) {
+        IdxStep<PolarBSplinesRTheta> offset
+                = idx
+                  - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>().front();
+        polar_bspl.eval_basis(singular_vals, vals, coord);
+        val = singular_vals[offset.value()];
+        if constexpr (calculate_derivs) {
+            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
+            double r_deriv = singular_vals[offset.value()];
+            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
+            double theta_deriv = singular_vals[offset.value()];
+            DVector<typename R::Dual, typename Theta::Dual> derivs(r_deriv, theta_deriv);
+            return derivs;
+        } else {
+            return;
+        }
+    } else {
+        Idx<BSplinesR, BSplinesTheta> idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
+        IdxStep<BSplinesR, BSplinesTheta> offset
+                = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
+        IdxStep<BSplinesR> ir(offset);
+        IdxStep<BSplinesTheta> itheta(
+                detail_poisson::theta_mod<BSplinesTheta>(IdxStep<BSplinesTheta>(offset)));
+
+        val = vals(ir, itheta);
+        if constexpr (calculate_derivs) {
+            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
+            double r_deriv = vals(ir, itheta);
+            polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
+            double theta_deriv = vals(ir, itheta);
+            DVector<typename R::Dual, typename Theta::Dual> derivs(r_deriv, theta_deriv);
+            return derivs;
+        } else {
+            return;
+        }
+    }
+}
+
 } // namespace detail_poisson
 
 
@@ -727,11 +804,13 @@ public:
 
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
-        double basis_val_trial_space;
         DVector<R_cov, Theta_cov> basis_derivs_test_space
-                = get_polar_bspline_vals_and_derivs(basis_val_test_space, coord, idx_test);
+                = detail_poisson::get_polar_bspline_vals_and_derivs<
+                        PolarBSplinesRTheta>(basis_val_test_space, coord, idx_test);
+        double basis_val_trial_space;
         DVector<R_cov, Theta_cov> basis_derivs_trial_space
-                = get_polar_bspline_vals_and_derivs(basis_val_trial_space, coord, idx_trial);
+                = detail_poisson::get_polar_bspline_vals_and_derivs<
+                        PolarBSplinesRTheta>(basis_val_trial_space, coord, idx_trial);
 
         MetricTensorEvaluator<Mapping, CoordRTheta> get_metric_tensor(mapping);
 
@@ -858,75 +937,6 @@ public:
                 });
     }
 
-    // DUPLICATED from PolarSplineFEMPoissonLikeSolver
-    /**
-     * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
-     *
-     * This method calculates the value and the derivatives of polar bsplines. It is templated by
-     * calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and
-     * get_polar_bspline_vals. The calling method should not need to use the template parameter.
-     *
-     * @param[out] val
-     *      The value of the specified polar bspline at the specified point.
-     * @param[in] coord
-     *      The coordinate where the value of the polar bspline should be calculated.
-     * @param[in] idx
-     *      The polar bspline of interest.
-     * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
-     */
-    template <bool calculate_derivs = true>
-    static KOKKOS_FUNCTION auto get_polar_bspline_vals_and_derivs(
-            double& val,
-            CoordRTheta coord,
-            IdxBSPolar idx)
-    {
-        std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
-        std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
-        // Values of the polar basis splines around the singular point
-        // at a given coordinate
-        DSpan1D singular_vals(singular_data.data(), PolarBSplinesRTheta::n_singular_basis());
-        // Values of the polar basis splines, that do not cover the singular point,
-        // at a given coordinate
-        DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);
-
-        auto& polar_bspl = ddc::discrete_space<PolarBSplinesRTheta>();
-
-        if (idx < IdxBSPolar(PolarBSplinesRTheta::n_singular_basis())) {
-            IdxStepBSPolar offset
-                    = idx
-                      - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>()
-                                .front();
-            polar_bspl.eval_basis(singular_vals, vals, coord);
-            val = singular_vals[offset.value()];
-            if constexpr (calculate_derivs) {
-                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
-                double r_deriv = singular_vals[offset.value()];
-                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
-                double theta_deriv = singular_vals[offset.value()];
-                DVector<R_cov, Theta_cov> derivs(r_deriv, theta_deriv);
-                return derivs;
-            } else {
-                return;
-            }
-        } else {
-            IdxBSRTheta idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
-            IdxStepBSRTheta offset = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
-            IdxStepBSR ir(offset);
-            IdxStepBSTheta itheta(detail_poisson::theta_mod<BSplinesTheta>(IdxStepBSTheta(offset)));
-
-            val = vals(ir, itheta);
-            if constexpr (calculate_derivs) {
-                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
-                double r_deriv = vals(ir, itheta);
-                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
-                double theta_deriv = vals(ir, itheta);
-                DVector<R_cov, Theta_cov> derivs(r_deriv, theta_deriv);
-                return derivs;
-            } else {
-                return;
-            }
-        }
-    }
 
     /**
      * @brief Fills the nnz data structure by computing the number of non-zero per line.
@@ -1651,74 +1661,6 @@ public:
         m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc));
     }
 
-
-    /**
-     * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
-     *
-     * This method calculates the value and the derivatives of polar bsplines. It is templated by
-     * calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and
-     * get_polar_bspline_vals. The calling method should not need to use the template parameter.
-     *
-     * @param[out] val
-     *      The value of the specified polar bspline at the specified point.
-     * @param[in] coord
-     *      The coordinate where the value of the polar bspline should be calculated.
-     * @param[in] idx
-     *      The polar bspline of interest.
-     * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
-     */
-    template <bool calculate_derivs = true>
-    static KOKKOS_FUNCTION std::conditional_t<calculate_derivs, DVector<R_cov, Theta_cov>, void>
-    get_polar_bspline_vals_and_derivs(double& val, CoordRTheta coord, IdxBSPolar idx)
-    {
-        std::array<double, PolarBSplinesRTheta::n_singular_basis()> singular_data;
-        std::array<double, m_n_non_zero_bases_r * m_n_non_zero_bases_theta> data;
-        // Values of the polar basis splines around the singular point
-        // at a given coordinate
-        DSpan1D singular_vals(singular_data.data(), PolarBSplinesRTheta::n_singular_basis());
-        // Values of the polar basis splines, that do not cover the singular point,
-        // at a given coordinate
-        DSpan2D vals(data.data(), m_n_non_zero_bases_r, m_n_non_zero_bases_theta);
-
-        auto& polar_bspl = ddc::discrete_space<PolarBSplinesRTheta>();
-
-        if (idx < IdxBSPolar(PolarBSplinesRTheta::n_singular_basis())) {
-            IdxStepBSPolar offset
-                    = idx
-                      - PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>()
-                                .front();
-            polar_bspl.eval_basis(singular_vals, vals, coord);
-            val = singular_vals[offset.value()];
-            if constexpr (calculate_derivs) {
-                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
-                double r_deriv = singular_vals[offset.value()];
-                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
-                double theta_deriv = singular_vals[offset.value()];
-                DVector<R_cov, Theta_cov> derivs(r_deriv, theta_deriv);
-                return derivs;
-            } else {
-                return;
-            }
-        } else {
-            IdxBSRTheta idx_front = polar_bspl.eval_basis(singular_vals, vals, coord);
-            IdxStepBSRTheta offset = PolarBSplinesRTheta::get_2d_index(idx) - idx_front;
-            IdxStepBSR ir(offset);
-            IdxStepBSTheta itheta(detail_poisson::theta_mod<BSplinesTheta>(IdxStepBSTheta(offset)));
-
-            val = vals(ir, itheta);
-            if constexpr (calculate_derivs) {
-                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<R>>(1));
-                double r_deriv = vals(ir, itheta);
-                polar_bspl.eval_deriv(singular_vals, vals, coord, Idx<ddc::Deriv<Theta>>(1));
-                double theta_deriv = vals(ir, itheta);
-                DVector<R_cov, Theta_cov> derivs(r_deriv, theta_deriv);
-                return derivs;
-            } else {
-                return;
-            }
-        }
-    }
-
     /**
      * @brief Get the value of the specified polar bspline at the specified point.
      *
@@ -1731,7 +1673,8 @@ public:
     static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(CoordRTheta coord, IdxBSPolar idx)
     {
         double val;
-        get_polar_bspline_vals_and_derivs<false>(val, coord, idx);
+        detail_poisson::
+                get_polar_bspline_vals_and_derivs<PolarBSplinesRTheta, false>(val, coord, idx);
         return val;
     }
 
