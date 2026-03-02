@@ -11,7 +11,7 @@
  * An abstract class which implements a function that 
  * applies the transport along a physical space direction of the phase space.
  */
-template <class Geometry, class GridX, class DataType>
+template <class Geometry, class GridX, class DataType = double>
 class IAdvectionSpatial
 {
 public:

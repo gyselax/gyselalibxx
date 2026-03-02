@@ -12,7 +12,7 @@
  * An abstract class which implements a function that 
  * applies the transport along a velocity direction of the phase space.
  */
-template <class Geometry, class GridV, class DataType>
+template <class Geometry, class GridV, class DataType = double>
 class IAdvectionVelocity
 {
 public:
