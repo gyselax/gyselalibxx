@@ -79,6 +79,10 @@ struct LagBasisX : UniformLagrangeBasis<X, 3, double>
 {
 };
 
+struct LagBasisFloatX : UniformLagrangeBasis<X, 3, float>
+{
+};
+
 using LagBuilderX = IdentityInterpolationBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -100,13 +104,13 @@ using LagBuilderFloatX = IdentityInterpolationBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         float,
         GridX,
-        LagBasisX>;
+        LagBasisFloatX>;
 
 using LagEvaluatorFloatX = LagrangeEvaluator<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         float,
-        LagBasisX,
+        LagBasisFloatX,
         GridX,
         ddc::PeriodicExtrapolationRule<X>,
         ddc::PeriodicExtrapolationRule<X>>;
@@ -137,6 +141,7 @@ public:
                 interpolation_idx_range.front(),
                 interpolation_idx_range.extents() + 1);
         ddc::init_discrete_space<LagBasisX>(lagrange_break_point_idx_range);
+        ddc::init_discrete_space<LagBasisFloatX>(lagrange_break_point_idx_range);
     }
 
     template <class AdvectionOperator>
@@ -237,7 +242,7 @@ TEST_F(XAdvection1DTestDouble, AdvectionX)
               << std::endl;
 }
 
-TEST_F(XAdvection1DTest, AdvectionXLagrange)
+TEST_F(XAdvection1DTestDouble, AdvectionXLagrange)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
     SplineXBuilder const function_builder(interpolation_idx_range);
@@ -282,9 +287,12 @@ TEST_F(XAdvection1DTestFloat, AdvectionX)
             IdxRangeX,
             IdxRangeX,
             LagBuilderFloatX,
+            LagEvaluatorFloatX,
             LagBuilderFloatX,
+            LagEvaluatorFloatX,
             RK2Builder,
-            float> const advection(builder, lag_evaluator, builder, lag_evaluator, time_stepper);
+            float> const
+            advection(lag_builder, lag_evaluator, lag_builder, lag_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);

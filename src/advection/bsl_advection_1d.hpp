@@ -110,7 +110,7 @@ private:
     // Type for the spline representation of the function
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeFunction>;
-    using FunctionBasisFieldMem = DFieldMem<IdxRangeFunctionBasis>;
+    using FunctionBasisFieldMem = FieldMem<DataType, IdxRangeFunctionBasis>;
 
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
