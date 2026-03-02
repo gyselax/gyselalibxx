@@ -75,6 +75,7 @@ TEST(PDI, VectorFieldReadWrite)
     }
 
     PDI_finalize();
+    PC_tree_destroy(&conf_pdi);
 }
 
 } // namespace

@@ -5,7 +5,7 @@ target_link_libraries(test_collSpVparMu
   PUBLIC
   DDC::core
   DDC::pdi
-  PDI::pdi
+  PDI::PDI_C
   gslx::collisions
   gslx::geometry_vparmu
   gslx::geometry_collisions_vparmu

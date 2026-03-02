@@ -3,11 +3,12 @@
 
 #include <gtest/gtest.h>
 
-#include "Lagrange_interpolator.hpp"
 #include "bsl_advection_vx.hpp"
 #include "geometry_xvx.hpp"
+#include "identity_interpolation_builder.hpp"
+#include "lagrange_basis_uniform.hpp"
+#include "lagrange_evaluator.hpp"
 #include "spline_definitions_xvx.hpp"
-#include "spline_interpolator.hpp"
 
 
 CoordX const x_min(0);
@@ -16,6 +17,27 @@ IdxStepX const x_size(50);
 CoordVx const vx_min(-10);
 CoordVx const vx_max(10);
 IdxStepVx const vx_size(100);
+
+struct LagBasisVx : UniformLagrangeBasis<Vx, 3, double>
+{
+};
+
+using LagBuilderVx = IdentityInterpolationBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        double,
+        GridVx,
+        LagBasisVx>;
+
+using LagEvaluatorVx = LagrangeEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        double,
+        LagBasisVx,
+        GridVx,
+        ddc::NullExtrapolationRule,
+        ddc::NullExtrapolationRule>;
+
 std::pair<IdxRange<GridX>, IdxRange<GridVx>> Init_idx_range_velocity_adv()
 {
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -24,6 +46,7 @@ std::pair<IdxRange<GridX>, IdxRange<GridVx>> Init_idx_range_velocity_adv()
     ddc::init_discrete_space<GridVx>(SplineInterpPointsVx::get_sampling<GridVx>());
     IdxRange<GridX> idx_range_x = SplineInterpPointsX::get_domain<GridX>();
     IdxRange<GridVx> idx_range_vx = SplineInterpPointsVx::get_domain<GridVx>();
+    ddc::init_discrete_space<LagBasisVx>(idx_range_vx);
     return {idx_range_x, idx_range_vx};
 }
 
@@ -102,16 +125,12 @@ double VelocityAdvection(
 TEST(VelocityAdvection, BatchedLagrange)
 {
     auto [idx_range_x, idx_range_vx] = Init_idx_range_velocity_adv();
-    IdxStepVx static constexpr n_ghosts_vx {0};
-    LagrangeInterpolator<GridVx, BCond::DIRICHLET, BCond::DIRICHLET, GridX, GridVx> const
-            lagrange_vx_non_preallocatable_interpolator(3, n_ghosts_vx);
-    PreallocatableLagrangeInterpolator<
-            GridVx,
-            BCond::DIRICHLET,
-            BCond::DIRICHLET,
-            GridX,
-            GridVx> const lagrange_vx_interpolator(lagrange_vx_non_preallocatable_interpolator);
-    BslAdvectionVelocity<GeometryXVx, GridVx> const lag_advection_vx(lagrange_vx_interpolator);
+    LagBuilderVx const lag_builder_vx;
+    ddc::NullExtrapolationRule bv_v_min;
+    ddc::NullExtrapolationRule bv_v_max;
+    LagEvaluatorVx const lag_evaluator_vx(bv_v_min, bv_v_max);
+    BslAdvectionVelocity<GeometryXVx, GridVx, LagBuilderVx, LagEvaluatorVx> const
+            lag_advection_vx(lag_builder_vx, lag_evaluator_vx);
     double const err
             = VelocityAdvection<GeometryXVx, GridVx>(lag_advection_vx, idx_range_x, idx_range_vx);
     EXPECT_LE(err, 1e-3);
@@ -120,15 +139,13 @@ TEST(VelocityAdvection, BatchedLagrange)
 TEST(VelocityAdvection, SplineBatched)
 {
     auto [idx_range_x, idx_range_vx] = Init_idx_range_velocity_adv();
-    IdxRangeXVx meshXVx(idx_range_x, idx_range_vx);
 
     SplineVxBuilder const builder_vx(idx_range_vx);
     ddc::ConstantExtrapolationRule<Vx> bv_v_min(vx_min);
     ddc::ConstantExtrapolationRule<Vx> bv_v_max(vx_max);
     SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
-    PreallocatableSplineInterpolator const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator, meshXVx);
-    BslAdvectionVelocity<GeometryXVx, GridVx> const spline_advection_vx(spline_vx_interpolator);
+    BslAdvectionVelocity<GeometryXVx, GridVx, SplineVxBuilder, SplineVxEvaluator> const
+            spline_advection_vx(builder_vx, spline_vx_evaluator);
     double const err = VelocityAdvection<
             GeometryXVx,
             GridVx>(spline_advection_vx, idx_range_x, idx_range_vx);

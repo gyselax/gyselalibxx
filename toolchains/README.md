@@ -17,16 +17,18 @@ To get started with Gyselalib++, you'll need to clone the repository along with 
 ### SSH Method (required for developers who want to push to the repository)
 
 ```bash
-git clone --recurse-submodules git@github.com:gyselax/gyselalibxx.git gyselalibxx
+git clone git@github.com:gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
+./bin/submodules_sync
 ./bin/install-hooks
 ```
 
 ### HTTPS Method
 
 ```bash
-git clone --recurse-submodules https://github.com/gyselax/gyselalibxx.git gyselalibxx
+git clone https://github.com/gyselax/gyselalibxx.git gyselalibxx
 cd gyselalibxx
+./bin/submodules_sync
 ./bin/install-hooks
 ```
 
@@ -61,6 +63,7 @@ The folder [toolchains/](https://github.com/gyselax/gyselalibxx/tree/devel/toolc
 - `persee/v100` : Designed for use with the V100 hardware available on IRFM's Persee cluster.
 - `persee/xeon` : Designed for use with the CPU hardware available on IRFM's Persee cluster.
 - `v100.ruche` : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster.
+- `a100.raven.spack` : Designed for use with the A100 hardware available on MPCDF raven cluster.
 
 ## Environment Setup
 

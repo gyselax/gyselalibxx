@@ -24,8 +24,8 @@ set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 # Ensure custom cmake modules can be found
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-## We use C++17 all around!
-set(CMAKE_CXX_STANDARD 17 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
+## We use C++20 all around!
+set(CMAKE_CXX_STANDARD 20 CACHE INTERNAL "The C++ standard whose features are requested to build this project.")
 
 ## List of options
 option(GYSELALIBXX_BUILD_SIMULATIONS "Build the simulations." ON)
@@ -62,10 +62,10 @@ find_package(LAPACK REQUIRED)
 find_package(MPI REQUIRED)
 
 ## Look for a pre-installed paraconf
-find_package(paraconf REQUIRED COMPONENTS C)
+find_package(paraconf 1.0.0...<2 REQUIRED COMPONENTS C)
 
-## Look for a pre-installed PDI
-find_package(PDI REQUIRED COMPONENTS C)
+### Look for a pre-installed PDI
+find_package(PDI 1.10.1...<2 REQUIRED COMPONENTS C)
 
 ## if tests are enabled, use googletest from `vendor/`
 ### we use it to write unit tests
@@ -76,47 +76,33 @@ if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
   if("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "AUTO")
     find_package(GTest "1.12" QUIET)
     if(NOT "${GTest_FOUND}")
-      add_subdirectory("vendor/googletest/" "googletest" SYSTEM)
+      add_subdirectory(vendor/googletest SYSTEM)
     endif()
   elseif("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
-    add_subdirectory("vendor/googletest/" "googletest" SYSTEM)
+    add_subdirectory(vendor/googletest SYSTEM)
   elseif("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
     find_package(GTest "1.12" REQUIRED)
   endif()
 endif()
 
-set(koliop_BUILD_TESTING OFF CACHE BOOL "")
-find_package(Kokkos 4.4.1...<5 QUIET)
-set(koliop_ENABLE_Kokkos        "SYSTEM" CACHE STRING "")
-if(NOT "${Kokkos_FOUND}")
-  ## Use Kokkos from `vendor/`
-  if("${Kokkos_ENABLE_CUDA}")
-    option(Kokkos_ENABLE_CUDA_CONSTEXPR "Whether to activate experimental relaxed constexpr functions" ON)
-    option(Kokkos_ENABLE_CUDA_RELOCATABLE_DEVICE_CODE "Whether to enable relocatable device code (RDC) for CUDA" ON)
-  endif()
-  add_subdirectory("vendor/kokkos/" "kokkos" SYSTEM)
-  set(koliop_ENABLE_Kokkos        "SUBDIRECTORY" CACHE STRING "")
-endif()
+find_package(Kokkos 4.4.1...<5 REQUIRED)
 
-find_package(KokkosKernels 4.5.1...<5 QUIET)
-set(koliop_ENABLE_KokkosKernels "SYSTEM" CACHE STRING "")
-if(NOT "${KokkosKernels_FOUND}")
-  # NOTE: Do not forget to keep Kokkos and Kokkos-kernels in sync !
-  set(KokkosKernels_ENABLE_ALL_COMPONENTS OFF CACHE BOOL "")
-  set(KokkosKernels_ENABLE_COMPONENT_BATCHED ON CACHE BOOL "")
-  set(KokkosKernels_ENABLE_COMPONENT_BLAS ON CACHE BOOL "")
-  add_subdirectory("vendor/kokkos-kernels/" "kokkos-kernels" SYSTEM)
-  set(koliop_ENABLE_KokkosKernels "SUBDIRECTORY" CACHE STRING "")
-endif()
-
+find_package(KokkosKernels 4.5.1...<5 REQUIRED)
 
 find_package(DDC 0.10.0 QUIET COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
-  add_subdirectory("vendor/ddc/" "ddc" SYSTEM)
+  add_subdirectory(vendor/ddc SYSTEM)
 endif()
 
-add_subdirectory("vendor/koliop/" "koliop" SYSTEM)
+find_package(koliop 0.1.2 QUIET)
+if(NOT "${koliop_FOUND}")
+  set(koliop_ENABLE_Kokkos        "SYSTEM" CACHE STRING "")
+  set(koliop_ENABLE_KokkosKernels "SYSTEM" CACHE STRING "")
+  set(koliop_BUILD_TESTING OFF CACHE BOOL "")
+  set(koliop_ENABLE_LTO OFF CACHE BOOL "")
+  add_subdirectory(vendor/koliop SYSTEM)
+endif()
 
 find_package(LAPACKE REQUIRED)
 

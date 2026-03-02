@@ -9,9 +9,11 @@
 
 #include "bsl_advection_1d.hpp"
 #include "ddc_helper.hpp"
+#include "identity_interpolation_builder.hpp"
 #include "itimestepper.hpp"
+#include "lagrange_basis_uniform.hpp"
+#include "lagrange_evaluator.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator.hpp"
 #include "vector_field_common.hpp"
 
 namespace {
@@ -72,6 +74,43 @@ using SplineXEvaluator = ddc::SplineEvaluator<
         ddc::PeriodicExtrapolationRule<X>,
         ddc::PeriodicExtrapolationRule<X>>;
 
+// Lagrange basis for the advection field interpolation
+struct LagBasisX : UniformLagrangeBasis<X, 3, double>
+{
+};
+
+using LagBuilderX = IdentityInterpolationBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        double,
+        GridX,
+        LagBasisX>;
+
+using LagEvaluatorX = LagrangeEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        double,
+        LagBasisX,
+        GridX,
+        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>>;
+
+using LagBuilderFloatX = IdentityInterpolationBuilder<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        float,
+        GridX,
+        LagBasisX>;
+
+using LagEvaluatorFloatX = LagrangeEvaluator<
+        Kokkos::DefaultExecutionSpace,
+        Kokkos::DefaultExecutionSpace::memory_space,
+        float,
+        LagBasisX,
+        GridX,
+        ddc::PeriodicExtrapolationRule<X>,
+        ddc::PeriodicExtrapolationRule<X>>;
+
 
 template <class DataType>
 class XAdvection1DTest : public ::testing::Test
@@ -93,6 +132,11 @@ public:
     {
         ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
         ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+        IdxRangeX interpolation_idx_range(SplineInterpPointsX::get_domain<GridX>());
+        IdxRangeX lagrange_break_point_idx_range(
+                interpolation_idx_range.front(),
+                interpolation_idx_range.extents() + 1);
+        ddc::init_discrete_space<LagBasisX>(lagrange_break_point_idx_range);
     }
 
     template <class AdvectionOperator>
@@ -175,13 +219,17 @@ TEST_F(XAdvection1DTestDouble, AdvectionX)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const
-            spline_interpolator(builder, spline_evaluator, interpolation_idx_range);
-
-
     RK2Builder time_stepper;
-    BslAdvection1D<GridX, IdxRangeX, IdxRangeX, SplineXBuilder, SplineXEvaluator, RK2Builder> const
-            advection(spline_interpolator, builder, spline_evaluator, time_stepper);
+    BslAdvection1D<
+            GridX,
+            IdxRangeX,
+            IdxRangeX,
+            SplineXBuilder,
+            SplineXEvaluator,
+            SplineXBuilder,
+            SplineXEvaluator,
+            RK2Builder> const
+            advection(builder, spline_evaluator, builder, spline_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);
@@ -189,19 +237,17 @@ TEST_F(XAdvection1DTestDouble, AdvectionX)
               << std::endl;
 }
 
-TEST_F(XAdvection1DTestFloat, AdvectionX)
+TEST_F(XAdvection1DTest, AdvectionXLagrange)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    // TODO: Use a multi-precision interpolator (E.g. Lagrange)
-    SplineXBuilder const builder(interpolation_idx_range);
+    SplineXBuilder const function_builder(interpolation_idx_range);
 
     ddc::PeriodicExtrapolationRule<X> bv_x_min;
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const
-            spline_interpolator(builder, spline_evaluator, interpolation_idx_range);
-
+    LagBuilderX const lag_builder;
+    LagEvaluatorX const lag_evaluator(bv_x_min, bv_x_max);
 
     RK2Builder time_stepper;
     BslAdvection1D<
@@ -210,8 +256,35 @@ TEST_F(XAdvection1DTestFloat, AdvectionX)
             IdxRangeX,
             SplineXBuilder,
             SplineXEvaluator,
+            LagBuilderX,
+            LagEvaluatorX,
+            RK2Builder> const
+            advection(function_builder, spline_evaluator, lag_builder, lag_evaluator, time_stepper);
+
+    double const max_relative_error = AdvectionX(advection);
+    EXPECT_LE(max_relative_error, 5.e-2);
+    std::cout << "Lagrange test on " << x_size
+              << " grid: max relative error = " << max_relative_error << std::endl;
+}
+
+TEST_F(XAdvection1DTestFloat, AdvectionX)
+{
+    ddc::PeriodicExtrapolationRule<X> bv_x_min;
+    ddc::PeriodicExtrapolationRule<X> bv_x_max;
+
+    // CREATING OPERATORS ------------------------------------------------------------------------
+    LagBuilderFloatX const lag_builder;
+    LagEvaluatorFloatX const lag_evaluator(bv_x_min, bv_x_max);
+
+    RK2Builder time_stepper;
+    BslAdvection1D<
+            GridX,
+            IdxRangeX,
+            IdxRangeX,
+            LagBuilderFloatX,
+            LagBuilderFloatX,
             RK2Builder,
-            float> const advection(spline_interpolator, builder, spline_evaluator, time_stepper);
+            float> const advection(builder, lag_evaluator, builder, lag_evaluator, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);

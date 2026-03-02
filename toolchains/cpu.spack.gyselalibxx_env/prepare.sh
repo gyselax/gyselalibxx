@@ -36,7 +36,6 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # Activate spack
 . ${SPACK_PATH}/share/spack/setup-env.sh
 
-# Reduce the naming scheme of packages to avoid shebang issues.
 # Increase the time out that is by default too short for some packages (like PDI)
 spack config --scope site add 'config:connect_timeout:60'
 
@@ -53,12 +52,14 @@ else
       spack install gcc@11
       spack load gcc@11
       spack compiler find
+      spack unload gcc@11
   fi
 
   COMPILER='gcc@11:'
 fi
 
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.1.0.yaml
+spack --env gyselalibxx-env config --scope env:gyselalibxx-env add packages:all:target:[$(spack arch --family --target)]
 spack --env gyselalibxx-env install --jobs 2
 spack env activate -p gyselalibxx-env
 PYTHON_EXECUTABLE=$(which python3)
@@ -76,7 +77,12 @@ export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
 export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"
+# The hdf5 package is injecting the environment view \`lib\` path to \`LD_LIBRARY_PATH\`
+# which causes spurious segfaults for system executables, we manually remove it.
+LD_LIBRARY_PATH_TMP="$LD_LIBRARY_PATH"
 . \${SPACK_PATH}/share/spack/setup-env.sh
+export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_TMP"
+unset LD_LIBRARY_PATH_TMP
 spack env activate -p gyselalibxx-env
 export PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
 EOL

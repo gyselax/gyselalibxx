@@ -12,7 +12,7 @@ spack:
     - 'mpi'
     - 'ninja'
     - 'paraconf@1'
-    - 'pdi@1.6:1'
+    - 'pdi@1.10.1:1'
     - 'pdiplugin-decl-hdf5 +mpi'
     - 'pdiplugin-decl-netcdf +mpi'
     - 'pdiplugin-mpi'
@@ -50,9 +50,9 @@ spack:
     all:
       variants: ~fortran ~mpi +openmp cxxstd=17
     c:
-      require: gcc@11
+      require: gcc@13
     cxx:
-      require: gcc@11
+      require: gcc@13
     lapack:
       require: openblas
     mpi:

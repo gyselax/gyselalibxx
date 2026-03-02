@@ -11,14 +11,70 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
+- Add the fluid moments computation in pycall block to the mini-application
+- Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
+- Add `LagrangeEvaluator` to evaluate a Lagrange polynomial centred on a given point.
+- Added error messages when wrong input is provided to a simulation.
+- Add `concepts::InterpolationBuilder` to make `IdentityInterpolationBuilder` and `ddc::SplineBuilder` interchangeable.
+- Add `concepts::InterpolationEvaluator` to make `LagrangeEvaluator` and `ddc::SplineEvaluator` interchangeable.
+- Allow `BslAdvection1D`, `BslAdvectionSpatial`, and `BslAdvectionVelocity` to use variable precision.
+
+### Fixed
+
+- Fix incorrect `memory_space` type alias in `DerivFieldMem`.
+- Fix incorrect `memory_space` type alias in `DerivField`.
+- Fix a memory leak in `DerivFieldMem`.
+- Fix `ddc::coordinate` called on `ddc::DiscreteElement` outside of the domain of definition in `single_interface_derivatives_calculator.hpp` and tests.
+- Fix a memory leak related to an object of type `PC_tree_t` not destroyed.
+- Fix boundary conditions in `single_interface_derivatives_calculator_collection_test.cpp`.
+- Fix the finite differences method on a periodic domain.
+- Fix the warning for using the deprecated target `PDI::pdi` starting from PDI 1.10.1.
+
+### Changed
+
+- Remove `ddc_sync` utility.
+- Use generic binaries in the CPU Spack toolchain.
+- Remove Kokkos-related submodules.
+- Remove recursion from submodules synchronisation.
+- Add missing `module purge` in Persee toolchains.
+- Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
+
+### Deprecated
+
+- Deprecated `Lagrange` class.
+
+### Removed
+
+- Remove the default PDI configuration file for the mini-app.
+- Remove `Interpolator` classes:
+  - `IInterpolator`
+  - `LagrangeInterpolator`
+  - `SplineInterpolator`
+
+## [v0.5.0] - 2026-02-04
+
+### Added
+
 - Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
 in a `DerivField`.
-- Allow `BslAdvection1D`, `BslAdvectionSpatial`, and `BslAdvectionVelocity` to use variable precision.
+- Allow `FFTPoissonSolver` to use variable precision.
+- Add `SingleInterfaceDerivativesCalculator` to compute an interface derivative of an equivalent global spline.
+- Add `SingleInterfaceDerivativeCalculatorCollection` to collect different `SingleInterfaceDerivativesCalculator`.
+- Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
+- Add Kokkos Tools in the environment on Persee toolchains
+- Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
+- Added support for A100 Raven cluster Spack toolchain.
+- Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
+- Add a new coordinate transformation `LinearCoordTransform`.
+- Add a new coordinate transformation `OrthogonalCoordTransforms`.
 
 ### Fixed
 
 - Fix derivative indexing of a `DerivField` object.
 - Fix transposition of arrays with more than 7 dimensions.
+- Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
+- Fix spurious segfaults for toolchains based on Spack environment views.
 
 ### Changed
 
@@ -26,8 +82,18 @@ in a `DerivField`.
 - Rename `geometry.hpp` files to `geometry_<geom_descriptor>.hpp` to reflect the geometry that they describe.
 - `DerivField` objects are initialised on GPU by default.
 - Update DDC to [v0.10.0](https://github.com/CExA-project/ddc/releases/tag/v0.10.0).
+- Change some Python class `scattered_coord` arguments to keyword-only.
+- Increase C++ version to 20.
+- Use concepts to describe coordinate transformation classes.
+- Update koliop to [v0.1.2](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.2).
+- Make koliop discoverable with `find_package`.
+- Simplify toolchains by disabling koliop LTO by default.
+- Update Persee toolchains to GCC 13.
 
 ### Deprecated
+
+- `PolarBSplines::eval_deriv_r`, `PolarBSplines::eval_deriv_theta`, and `PolarBSplines::eval_deriv_r_and_theta` are deprecated in favour of `PolarBSplines::eval_deriv`.
+- `PolarSplineEvaluator::deriv_dim_1`, `PolarSplineEvaluator::deriv_dim_2`, and `PolarSplineEvaluator::deriv_dim_1_and_2` are deprecated in favour of `PolarSplineEvaluator::deriv`.
 
 ### Removed
 

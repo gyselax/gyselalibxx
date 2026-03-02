@@ -65,24 +65,6 @@ gtest_discover_tests(unit_tests_maxwellian_${GEOMETRY_VARIANT}
 
 endforeach()
 
-add_executable(unit_tests_lagrange
-lagrange_test.cpp
-    ../main.cpp
-)
-
-target_link_libraries(unit_tests_lagrange
-    PUBLIC
-        GTest::gtest
-        GTest::gmock
-        gslx::interpolation
-        gslx::utils
-
-
-)
-gtest_discover_tests(unit_tests_lagrange
-    TEST_SUFFIX "_${lagrange}"
-    DISCOVERY_MODE PRE_TEST)
-
 add_executable(unit_tests_advection_1d
     velocityadvection.cpp
     spatialadvection.cpp
