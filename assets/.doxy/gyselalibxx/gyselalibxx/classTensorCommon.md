@@ -118,7 +118,7 @@ Inherited by the following classes: [Tensor](classTensor.md)
 | ---: | :--- |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](#function-tensorcommon-13) () = default<br>_Construct an uninitialised tensor object._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](#function-tensorcommon-23) ([**TensorCommon**](classTensorCommon.md) const & o\_tensor) = default<br>_Construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._  |
-|  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](#function-tensorcommon-33) ([**TensorCommon**](classTensorCommon.md) && o\_tensor) = default<br>_Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](#function-tensorcommon-33) ([**TensorCommon**](classTensorCommon.md) && o\_tensor) = default<br>_Move-construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly._  |
 
 
 
@@ -419,7 +419,7 @@ inline KOKKOS_FUNCTION TensorCommon & TensorCommon::operator/= (
 **Parameters:**
 
 
-* `val` The value by which the elements should be multiplied. 
+* `val` The value by which the elements should be divided. 
 
 
 
@@ -487,7 +487,7 @@ inline KOKKOS_FUNCTION TensorCommon & TensorCommon::operator= (
 **Parameters:**
 
 
-* `other` The tensor to be copied. 
+* `other` The tensor to be moved. 
 
 
 
@@ -671,7 +671,7 @@ KOKKOS_DEFAULTED_FUNCTION TensorCommon::TensorCommon (
 
 ### function TensorCommon [3/3]
 
-_Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._ 
+_Move-construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly._ 
 ```C++
 KOKKOS_DEFAULTED_FUNCTION TensorCommon::TensorCommon (
     TensorCommon && o_tensor
@@ -685,7 +685,7 @@ KOKKOS_DEFAULTED_FUNCTION TensorCommon::TensorCommon (
 **Parameters:**
 
 
-* `o_tensor` The tensor to be copied. 
+* `o_tensor` The tensor to be moved. 
 
 
 

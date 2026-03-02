@@ -207,7 +207,7 @@
           <declname>o_tensor</declname>
         </param>
         <briefdescription>
-<para>Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly. </para>
+<para>Move-construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -215,7 +215,7 @@
 <parametername>o_tensor</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The tensor to be copied. </para>
+<para>The tensor to be moved. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -341,7 +341,7 @@
 <parametername>other</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The tensor to be copied. </para>
+<para>The tensor to be moved. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -413,7 +413,7 @@
 <parametername>val</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The value by which the elements should be multiplied. </para>
+<para>The value by which the elements should be divided. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

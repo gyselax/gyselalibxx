@@ -189,7 +189,7 @@ See [TensorCommon](classTensorCommon.md)
 | ---: | :--- |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](classTensorCommon.md#function-tensorcommon-13) () = default<br>_Construct an uninitialised tensor object._  |
 |  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](classTensorCommon.md#function-tensorcommon-23) ([**TensorCommon**](classTensorCommon.md) const & o\_tensor) = default<br>_Construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._  |
-|  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](classTensorCommon.md#function-tensorcommon-33) ([**TensorCommon**](classTensorCommon.md) && o\_tensor) = default<br>_Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly._  |
+|  KOKKOS\_DEFAULTED\_FUNCTION | [**TensorCommon**](classTensorCommon.md#function-tensorcommon-33) ([**TensorCommon**](classTensorCommon.md) && o\_tensor) = default<br>_Move-construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly._  |
 
 
 

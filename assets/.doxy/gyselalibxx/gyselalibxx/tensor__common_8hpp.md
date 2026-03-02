@@ -72,10 +72,10 @@
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION TensorType | [**operator\***](#function-operator) (Oelement\_type val, TensorType const & tensor) <br>_An operator to multiply all a tensor by a value._  |
+|  KOKKOS\_FUNCTION TensorType | [**operator\***](#function-operator) (Oelement\_type val, TensorType const & tensor) <br>_An operator to multiply all the elements of the current tensor by a value._  |
 |  KOKKOS\_FUNCTION TensorType | [**operator\***](#function-operator_1) (TensorType const & tensor, Oelement\_type val) <br>_An operator to multiply all the element of the current tensor by a value._  |
 |  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**operator+**](#function-operator_2) (Coord&lt; Dims... &gt; const & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
-|  KOKKOS\_FUNCTION TensorType | [**operator+**](#function-operator_3) (TensorType const & tensor, Oelement\_type val) <br>_An operator to add two tensors elementwise._  |
+|  KOKKOS\_FUNCTION TensorType | [**operator+**](#function-operator_3) (TensorType const & tensor, TensorType const & val) <br>_An operator to add two tensors elementwise._  |
 |  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; & | [**operator+=**](#function-operator_4) (Coord&lt; Dims... &gt; & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
 |  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**operator-**](#function-operator-) (Coord&lt; Dims... &gt; const & coord, [**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br> |
 |  KOKKOS\_FUNCTION TensorType | [**operator-**](#function-operator-_1) (TensorType const & tensor, TensorType const & val) <br>_An operator to subtract one tensor from another elementwise._  |
@@ -132,7 +132,7 @@ constexpr bool is_tensor_type_v;
 
 ### function operator\* 
 
-_An operator to multiply all a tensor by a value._ 
+_An operator to multiply all the elements of the current tensor by a value._ 
 ```C++
 template<class TensorType, class Oelement_type, std::enable_if_t< is_tensor_type_v< TensorType >, bool >>
 KOKKOS_FUNCTION TensorType operator* (
@@ -244,10 +244,10 @@ The new coordinate.
 
 _An operator to add two tensors elementwise._ 
 ```C++
-template<class TensorType, class Oelement_type, std::enable_if_t< is_tensor_type_v< TensorType >, bool >>
+template<class TensorType, std::enable_if_t< is_tensor_type_v< TensorType >, bool >>
 KOKKOS_FUNCTION TensorType operator+ (
     TensorType const & tensor,
-    Oelement_type val
+    TensorType const & val
 ) 
 ```
 
@@ -325,7 +325,7 @@ KOKKOS_INLINE_FUNCTION Coord< Dims... > operator- (
 
 
 
-An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. 
+An operator to subtract the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. 
 
 **Parameters:**
 
@@ -433,7 +433,7 @@ KOKKOS_INLINE_FUNCTION Coord< Dims... > & operator-= (
 
 
 
-An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. 
+An operator to subtract the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. 
 
 **Parameters:**
 
@@ -476,13 +476,13 @@ KOKKOS_FUNCTION TensorType operator/ (
 
 
 * `tensor` The tensor being divided. 
-* `val` The value by which the elements should be multiplied. 
+* `val` The value by which the elements should be divided 
 
 
 
 **Returns:**
 
-A new tensor containing the result of the multiplication. 
+A new tensor containing the result of the division. 
 
 
 

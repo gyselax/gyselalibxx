@@ -1015,7 +1015,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. <parameterlist kind="param"><parameteritem>
+<para>An operator to subtract the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
 </parameternamelist>
@@ -1117,7 +1117,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. <parameterlist kind="param"><parameteritem>
+<para>An operator to subtract the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. <parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="inout">coord</parametername>
 </parameternamelist>
@@ -1168,7 +1168,7 @@
           <declname>tensor</declname>
         </param>
         <briefdescription>
-<para>An operator to multiply all a tensor by a value. </para>
+<para>An operator to multiply all the elements of the current tensor by a value. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -1292,11 +1292,11 @@
 <parametername>val</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The value by which the elements should be multiplied. </para>
+<para>The value by which the elements should be divided </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>A new tensor containing the result of the multiplication. </para>
+<simplesect kind="return"><para>A new tensor containing the result of the division. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -1304,13 +1304,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="469" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="469" bodyend="474"/>
       </memberdef>
-      <memberdef kind="function" id="tensor__common_8hpp_1aaf06f488ec3de2a5d18b6322ea0343a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="tensor__common_8hpp_1a6548a0ef8edf8bae228195e9531b37a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class TensorType</type>
-          </param>
-          <param>
-            <type>class Oelement_type</type>
           </param>
           <param>
             <type>std::enable_if_t&lt; is_tensor_type_v&lt; TensorType &gt;, bool &gt;</type>
@@ -1319,14 +1316,14 @@
         </templateparamlist>
         <type>KOKKOS_FUNCTION TensorType</type>
         <definition>KOKKOS_FUNCTION TensorType operator+</definition>
-        <argsstring>(TensorType const &amp;tensor, Oelement_type val)</argsstring>
+        <argsstring>(TensorType const &amp;tensor, TensorType const &amp;val)</argsstring>
         <name>operator+</name>
         <param>
           <type>TensorType const &amp;</type>
           <declname>tensor</declname>
         </param>
         <param>
-          <type>Oelement_type</type>
+          <type>TensorType const &amp;</type>
           <declname>val</declname>
         </param>
         <briefdescription>
@@ -1356,7 +1353,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="486" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="486" bodyend="491"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="483" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="483" bodyend="488"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1ada4db5346b9c20698885d1a189706ad0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1407,7 +1404,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="500" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="500" bodyend="505"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="497" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="497" bodyend="502"/>
       </memberdef>
       <memberdef kind="function" id="tensor__common_8hpp_1a8595263316e38b76855bd4e03cb6956c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1446,7 +1443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="513" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="513" bodyend="518"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="510" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="510" bodyend="515"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1743,32 +1740,29 @@
 <codeline lineno="473"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
 <codeline lineno="474"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="475"><highlight class="normal"></highlight></codeline>
-<codeline lineno="482"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight></codeline>
-<codeline lineno="483"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TensorType,</highlight></codeline>
-<codeline lineno="484"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">Oelement_type,</highlight></codeline>
-<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">&gt;</highlight></codeline>
-<codeline lineno="486"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator+(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>Oelement_type<sp/>val)</highlight></codeline>
-<codeline lineno="487"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="488"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
-<codeline lineno="489"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>+=<sp/>val;</highlight></codeline>
-<codeline lineno="490"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="491"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="492"><highlight class="normal"></highlight></codeline>
-<codeline lineno="499"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
-<codeline lineno="500"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator-(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
-<codeline lineno="501"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="502"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
-<codeline lineno="503"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>val;</highlight></codeline>
-<codeline lineno="504"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="505"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="506"><highlight class="normal"></highlight></codeline>
-<codeline lineno="512"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
-<codeline lineno="513"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator-(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
-<codeline lineno="514"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="515"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(0);</highlight></codeline>
-<codeline lineno="516"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>tensor;</highlight></codeline>
-<codeline lineno="517"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
-<codeline lineno="518"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="482"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="483"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator+(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
+<codeline lineno="484"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="485"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
+<codeline lineno="486"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>+=<sp/>val;</highlight></codeline>
+<codeline lineno="487"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="488"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="489"><highlight class="normal"></highlight></codeline>
+<codeline lineno="496"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="497"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator-(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor,<sp/>TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>val)</highlight></codeline>
+<codeline lineno="498"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="499"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(tensor);</highlight></codeline>
+<codeline lineno="500"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>val;</highlight></codeline>
+<codeline lineno="501"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="502"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="503"><highlight class="normal"></highlight></codeline>
+<codeline lineno="509"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>TensorType,<sp/>std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;,<sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal">&gt;<sp/>=<sp/>true&gt;</highlight></codeline>
+<codeline lineno="510"><highlight class="normal">KOKKOS_FUNCTION<sp/>TensorType<sp/>operator-(TensorType<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>tensor)</highlight></codeline>
+<codeline lineno="511"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="512"><highlight class="normal"><sp/><sp/><sp/><sp/>TensorType<sp/>result(0);</highlight></codeline>
+<codeline lineno="513"><highlight class="normal"><sp/><sp/><sp/><sp/>result<sp/>-=<sp/>tensor;</highlight></codeline>
+<codeline lineno="514"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>result;</highlight></codeline>
+<codeline lineno="515"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp"/>
   </compounddef>

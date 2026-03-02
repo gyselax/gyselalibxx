@@ -3363,7 +3363,7 @@
     <member refid="tensor__common_8hpp_1a21a60b8d604003f554c790a734471b24" kind="function"><name>operator*</name></member>
     <member refid="tensor__common_8hpp_1aaae65328bd77430ec82331d74f33caaa" kind="function"><name>operator*</name></member>
     <member refid="tensor__common_8hpp_1a1789570df938da121c33669df52f4244" kind="function"><name>operator/</name></member>
-    <member refid="tensor__common_8hpp_1aaf06f488ec3de2a5d18b6322ea0343a3" kind="function"><name>operator+</name></member>
+    <member refid="tensor__common_8hpp_1a6548a0ef8edf8bae228195e9531b37a5" kind="function"><name>operator+</name></member>
     <member refid="tensor__common_8hpp_1ada4db5346b9c20698885d1a189706ad0" kind="function"><name>operator-</name></member>
     <member refid="tensor__common_8hpp_1a8595263316e38b76855bd4e03cb6956c" kind="function"><name>operator-</name></member>
   </compound>

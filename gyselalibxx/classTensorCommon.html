@@ -716,7 +716,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
-<td style="text-align: left;"><a href="#function-tensorcommon-33"><strong>TensorCommon</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;&amp; o_tensor) = default<br><em>Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly.</em></td>
+<td style="text-align: left;"><a href="#function-tensorcommon-33"><strong>TensorCommon</strong></a> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a> &amp;&amp; o_tensor) = default<br><em>Move-construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly.</em></td>
 </tr>
 </tbody>
 </table>
@@ -842,7 +842,7 @@ inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator/= (
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>val</code> The value by which the elements should be multiplied. </li>
+<li><code>val</code> The value by which the elements should be divided. </li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>A reference to the current modified tensor. </p>
@@ -870,7 +870,7 @@ inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator/= (
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>other</code> The tensor to be copied. </li>
+<li><code>other</code> The tensor to be moved. </li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>A reference to the current tensor. </p>
@@ -937,14 +937,14 @@ inline KOKKOS_FUNCTION TensorCommon &amp; TensorCommon::operator/= (
 <hr>
 
 <h3 id="function-tensorcommon-33">function TensorCommon [3/3]</h3>
-<p><em>Move-construct a tensor object by copying an existing tensor of exactly the same type. This method can be called implicitly.</em> </p>
+<p><em>Move-construct a tensor object by moving an existing tensor of exactly the same type. This method can be called implicitly.</em> </p>
 <pre><code class="language-C++">KOKKOS_DEFAULTED_FUNCTION TensorCommon::TensorCommon (
     TensorCommon &amp;&amp; o_tensor
 ) = default
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>o_tensor</code> The tensor to be copied. </li>
+<li><code>o_tensor</code> The tensor to be moved. </li>
 </ul>
 <hr>
 

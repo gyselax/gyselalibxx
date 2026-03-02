@@ -633,7 +633,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION TensorType</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator*</strong></a> (Oelement_type val, TensorType const &amp; tensor) <br><em>An operator to multiply all a tensor by a value.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator*</strong></a> (Oelement_type val, TensorType const &amp; tensor) <br><em>An operator to multiply all the elements of the current tensor by a value.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION TensorType</td>
@@ -645,7 +645,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION TensorType</td>
-<td style="text-align: left;"><a href="#function-operator_3"><strong>operator+</strong></a> (TensorType const &amp; tensor, Oelement_type val) <br><em>An operator to add two tensors elementwise.</em></td>
+<td style="text-align: left;"><a href="#function-operator_3"><strong>operator+</strong></a> (TensorType const &amp; tensor, TensorType const &amp; val) <br><em>An operator to add two tensors elementwise.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp;</td>
@@ -680,7 +680,7 @@
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-operator">function operator*</h3>
-<p><em>An operator to multiply all a tensor by a value.</em> </p>
+<p><em>An operator to multiply all the elements of the current tensor by a value.</em> </p>
 <pre><code class="language-C++">template&lt;class TensorType, class Oelement_type, std::enable_if_t&lt; is_tensor_type_v&lt; TensorType &gt;, bool &gt;&gt;
 KOKKOS_FUNCTION TensorType operator* (
     Oelement_type val,
@@ -732,10 +732,10 @@ KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; operator+ (
 
 <h3 id="function-operator_3">function operator+</h3>
 <p><em>An operator to add two tensors elementwise.</em> </p>
-<pre><code class="language-C++">template&lt;class TensorType, class Oelement_type, std::enable_if_t&lt; is_tensor_type_v&lt; TensorType &gt;, bool &gt;&gt;
+<pre><code class="language-C++">template&lt;class TensorType, std::enable_if_t&lt; is_tensor_type_v&lt; TensorType &gt;, bool &gt;&gt;
 KOKKOS_FUNCTION TensorType operator+ (
     TensorType const &amp; tensor,
-    Oelement_type val
+    TensorType const &amp; val
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -771,7 +771,7 @@ KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; operator- (
     TensorCommon &lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp; tensor
 ) 
 </code></pre>
-<p>An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. </p>
+<p>An operator to subtract the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate from which the tensor is subtracted. </li>
@@ -820,7 +820,7 @@ KOKKOS_INLINE_FUNCTION Coord&lt; Dims... &gt; &amp; operator-= (
     TensorCommon &lt; storage_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const &amp; tensor
 ) 
 </code></pre>
-<p>An operator to add the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. </p>
+<p>An operator to subtract the elements of a tensor to a coordinate. This can be useful in some calculations, e.g when calculating the foot of a characteristic. </p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>coord</code> The coordinate from which the tensor is subtracted. </li>
@@ -841,10 +841,10 @@ KOKKOS_FUNCTION TensorType operator/ (
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>tensor</code> The tensor being divided. </li>
-<li><code>val</code> The value by which the elements should be multiplied. </li>
+<li><code>val</code> The value by which the elements should be divided </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A new tensor containing the result of the multiplication. </p>
+<p>A new tensor containing the result of the division. </p>
 <hr>
 
 <hr>

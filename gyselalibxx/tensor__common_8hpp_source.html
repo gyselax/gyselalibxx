@@ -858,11 +858,8 @@ KOKKOS_FUNCTION TensorType operator/(TensorType const&amp; tensor, Oelement_type
     return result;
 }
 
-template &lt;
-        class TensorType,
-        class Oelement_type,
-        std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;, bool&gt; = true&gt;
-KOKKOS_FUNCTION TensorType operator+(TensorType const&amp; tensor, Oelement_type val)
+template &lt;class TensorType, std::enable_if_t&lt;is_tensor_type_v&lt;TensorType&gt;, bool&gt; = true&gt;
+KOKKOS_FUNCTION TensorType operator+(TensorType const&amp; tensor, TensorType const&amp; val)
 {
     TensorType result(tensor);
     result += val;
