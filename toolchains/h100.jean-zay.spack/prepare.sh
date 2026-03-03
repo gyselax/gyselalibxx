@@ -29,14 +29,14 @@ export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
 
 module purge
 
-git clone --branch v1.1.0 --depth 1 https://github.com/spack/spack.git $ALL_CCFRWORK/spack || true
+git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $ALL_CCFRWORK/spack || true
 . $ALL_CCFRWORK/spack/share/spack/setup-env.sh
-
-spack env remove --yes-to-all gyselalibxx-spack-environment
-spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyselalibxx-spack-environment.yaml"
 
 # Bootstrap must happen before getting on a compute node
 spack bootstrap now
+
+spack env remove --yes-to-all gyselalibxx-spack-environment
+spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyselalibxx-spack-environment.yaml"
 
 echo "Preparing the Spack environment..."
 

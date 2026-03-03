@@ -39,6 +39,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove recursion from submodules synchronisation.
 - Add missing `module purge` in Persee toolchains.
 - Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
+- Use GCC 14 in the Jean-Zay toolchain.
 - Moved assembly of the stiffness matrix from `PolarSplineFEMPoissonLikeSolver` to new `PolarSplineFEMPoissonLikeAssembler` class.
 
 ### Deprecated

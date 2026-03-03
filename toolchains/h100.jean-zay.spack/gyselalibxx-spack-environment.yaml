@@ -32,7 +32,7 @@ spack:
     - py-sympy
     - py-xarray
   - architectures:
-    - arch=linux-rhel9-icelake
+    - arch=linux-rhel9-sapphirerapids
   specs:
   - matrix:
     - [$packages]
@@ -57,18 +57,18 @@ spack:
       - spec: cuda@12.8.61
         prefix: /lustre/fshomisc/sys/common/nvidia/cuda/12.8
     c:
-      require: gcc@11.4.1
+      require: gcc@14.3.0
     cxx:
-      require: gcc@11.4.1
+      require: gcc@14.3.0
     gcc:
       externals:
-      - spec: gcc@11.4.1 languages:='c,c++,fortran'
-        prefix: /usr
+      - spec: gcc@14.3.0 languages:='c,c++,fortran'
+        prefix: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y
         extra_attributes:
             compilers:
-              c: /usr/bin/gcc
-              cxx: /usr/bin/g++
-              fortran: /usr/bin/gfortran
+              c: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gcc
+              cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/g++
+              fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gfortran
     lapack:
       require: openblas
     mpi:
