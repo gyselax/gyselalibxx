@@ -3,14 +3,9 @@
 #pragma once
 
 #include "geometry_xvx.hpp"
+#include "iadvectionvx.hpp"
+#include "iadvectionx.hpp"
 #include "iboltzmannsolver.hpp"
-
-/**A generic class for a spatial advection*/
-template <class Geometry, class GridX>
-class IAdvectionSpatial;
-/**A generic class for a velocity advection*/
-template <class Geometry, class GridV>
-class IAdvectionVelocity;
 
 /**
  * @brief A class that solves a Vlasov equation using Strang's splitting.

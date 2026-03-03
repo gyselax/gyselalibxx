@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines/deriv.hpp>
 
@@ -64,10 +65,12 @@ template <
         concepts::InterpolationEvaluator FunctionEvaluator,
         concepts::InterpolationBuilder AdvectionFieldBuilder,
         concepts::InterpolationEvaluator AdvectionFieldEvaluator,
-        class TimeStepperBuilder = EulerBuilder>
+        class TimeStepperBuilder = EulerBuilder,
+        class DataType = double>
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
+    static_assert(std::is_floating_point_v<DataType>);
 
 private:
     // Advection index range element:
@@ -87,36 +90,36 @@ private:
     using FeetField = typename FeetFieldMem::span_type;
     using FeetConstField = typename FeetFieldMem::view_type;
 
-    using AdvecFieldMem = DFieldMem<IdxRangeAdvection>;
+    using AdvecFieldMem = FieldMem<DataType, IdxRangeAdvection>;
     using AdvecField = typename AdvecFieldMem::span_type;
 
-    using FunctionField = DField<IdxRangeFunction>;
+    using FunctionField = Field<DataType, IdxRangeFunction>;
 
     // Type for spline representation of the advection field
     using IdxRangeBSAdvection = typename InterpolationBuilderTraits<
             AdvectionFieldBuilder>::template batched_basis_idx_range_type<IdxRangeAdvection>;
-    using AdvecFieldSplineMem = DFieldMem<IdxRangeBSAdvection>;
-    using AdvecFieldSplineCoeffs = DField<IdxRangeBSAdvection>;
+    using AdvecFieldSplineMem = FieldMem<DataType, IdxRangeBSAdvection>;
+    using AdvecFieldSplineCoeffs = Field<DataType, IdxRangeBSAdvection>;
 
     // Type for the derivatives of the advection field
     using DerivDim = ddc::Deriv<DimInterest>;
     using IdxRangeAdvecFieldDeriv
             = ddc::replace_dim_of_t<IdxRangeAdvection, GridInterest, DerivDim>;
-    using AdvecFieldDerivConstField = Field<const double, IdxRangeAdvecFieldDeriv>;
+    using AdvecFieldDerivConstField = Field<const DataType, IdxRangeAdvecFieldDeriv>;
 
     // Type for the spline representation of the function
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeFunction>;
-    using FunctionBasisFieldMem = DFieldMem<IdxRangeFunctionBasis>;
+    using FunctionBasisFieldMem = FieldMem<DataType, IdxRangeFunctionBasis>;
 
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeFunction>;
-    using FunctionDerivFieldMem = DFieldMem<IdxRangeFunctionDeriv>;
+    using FunctionDerivFieldMem = FieldMem<DataType, IdxRangeFunctionDeriv>;
 
     using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
             FieldMem<Coord<typename GridInterest::continuous_dimension_type>, IdxRangeAdvection>,
-            DFieldMem<IdxRangeAdvection>>;
+            FieldMem<DataType, IdxRangeAdvection>>;
 
     FunctionBuilder const& m_function_builder;
     FunctionEvaluator const& m_function_evaluator;
@@ -180,7 +183,7 @@ public:
     FunctionField operator()(
             FunctionField const allfdistribu,
             AdvecField const advection_field,
-            double const dt,
+            DataType const dt,
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
             = std::nullopt,
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
