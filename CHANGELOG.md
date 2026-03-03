@@ -18,6 +18,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added error messages when wrong input is provided to a simulation.
 - Add `concepts::InterpolationBuilder` to make `IdentityInterpolationBuilder` and `ddc::SplineBuilder` interchangeable.
 - Add `concepts::InterpolationEvaluator` to make `LagrangeEvaluator` and `ddc::SplineEvaluator` interchangeable.
+- Allow `BslAdvection1D`, `BslAdvectionSpatial`, and `BslAdvectionVelocity` to use variable precision.
 
 ### Fixed
 
@@ -37,6 +38,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove Kokkos-related submodules.
 - Remove recursion from submodules synchronisation.
 - Add missing `module purge` in Persee toolchains.
+- Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
+- Use GCC 14 in the Jean-Zay toolchain.
 
 ### Deprecated
 
@@ -45,6 +48,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 
 - Remove the default PDI configuration file for the mini-app.
+- Remove `Interpolator` classes:
+  - `IInterpolator`
+  - `LagrangeInterpolator`
+  - `SplineInterpolator`
 
 ## [v0.5.0] - 2026-02-04
 
