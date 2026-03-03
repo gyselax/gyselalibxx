@@ -6,7 +6,7 @@ target_link_libraries(guiding_centre_XY
         DDC::core
         DDC::pdi
         paraconf::paraconf
-        PDI::pdi
+        PDI::PDI_C
 
         gslx::advection
         gslx::initialisation_Kelvin_Helmholtz

@@ -10,7 +10,7 @@ target_link_libraries(vlasovpoisson_xvx_fem_uniform_${GEOMETRY_VARIANT}
         DDC::core
         DDC::pdi
         paraconf::paraconf
-        PDI::pdi
+        PDI::PDI_C
         gslx::initialisation_${GEOMETRY_VARIANT}
         gslx::interpolation
         gslx::paraconfpp
@@ -35,7 +35,7 @@ target_link_libraries(vlasovpoisson_xvx_fft
         DDC::core
         DDC::pdi
         paraconf::paraconf
-        PDI::pdi
+        PDI::PDI_C
         gslx::initialisation_xperiod_vx
         gslx::interpolation
         gslx::paraconfpp

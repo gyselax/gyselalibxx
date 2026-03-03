@@ -27,7 +27,6 @@
 #include "pdi_out.yml.hpp"
 #include "predcorr_RK2.hpp"
 #include "simulation_utils_tools.hpp"
-#include "spline_interpolator.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -93,12 +92,6 @@ int main(int argc, char** argv)
     ddc::PeriodicExtrapolationRule<Y> bv_y_max;
     SplineYEvaluator_XY const spline_y_evaluator(bv_y_min, bv_y_max);
 
-    // Create spline interpolators ---
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, meshXY);
-    PreallocatableSplineInterpolator const
-            spline_y_interpolator(builder_y, spline_y_evaluator, meshXY);
-
     // Create Poisson solver ---
     FFTPoissonSolver<IdxRangeXY> const poisson_solver(meshXY);
 
@@ -110,8 +103,10 @@ int main(int argc, char** argv)
             IdxRangeXY,
             SplineXBuilder_XY,
             SplineXEvaluator_XY,
+            SplineXBuilder_XY,
+            SplineXEvaluator_XY,
             EulerBuilder>
-            advection_x(spline_x_interpolator, builder_x, spline_x_evaluator, euler);
+            advection_x(builder_x, spline_x_evaluator, builder_x, spline_x_evaluator, euler);
 
     BslAdvection1D<
             GridY,
@@ -119,8 +114,10 @@ int main(int argc, char** argv)
             IdxRangeXY,
             SplineYBuilder_XY,
             SplineYEvaluator_XY,
+            SplineYBuilder_XY,
+            SplineYEvaluator_XY,
             EulerBuilder>
-            advection_y(spline_y_interpolator, builder_y, spline_y_evaluator, euler);
+            advection_y(builder_y, spline_y_evaluator, builder_y, spline_y_evaluator, euler);
 
 
     // Create an initialiser ---
