@@ -11,6 +11,8 @@
 
 
 * `#include "geometry_xvx.hpp"`
+* `#include "iadvectionvx.hpp"`
+* `#include "iadvectionx.hpp"`
 * `#include "iboltzmannsolver.hpp"`
 
 

@@ -15,14 +15,14 @@
 
 #include "ddc_aliases.hpp"
 
-template <class Geometry, class GridX>
+template <class Geometry, class GridX, class DataType = double>
 class IAdvectionSpatial
 {
 public:
     virtual ~IAdvectionSpatial() = default;
-    virtual DField<typename Geometry::IdxRangeFdistribu> operator()(
-            DField<typename Geometry::IdxRangeFdistribu> allfdistribu,
-            double dt) const = 0;
+    virtual Field<DataType, typename Geometry::IdxRangeFdistribu> operator()(
+            Field<DataType, typename Geometry::IdxRangeFdistribu> allfdistribu,
+            DataType dt) const = 0;
 };
 ```
 

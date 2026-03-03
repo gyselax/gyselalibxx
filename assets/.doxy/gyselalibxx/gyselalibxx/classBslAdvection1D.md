@@ -2,7 +2,7 @@
 
 # Class BslAdvection1D
 
-**template &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator, concepts::InterpolationBuilder AdvectionFieldBuilder, concepts::InterpolationEvaluator AdvectionFieldEvaluator, class TimeStepperBuilder&gt;**
+**template &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator, concepts::InterpolationBuilder AdvectionFieldBuilder, concepts::InterpolationEvaluator AdvectionFieldEvaluator, class TimeStepperBuilder, class DataType&gt;**
 
 
 
@@ -55,7 +55,7 @@ _A class which computes the advection along the dimension of interest GridIntere
 | Type | Name |
 | ---: | :--- |
 |   | [**BslAdvection1D**](#function-bsladvection1d) (FunctionBuilder const & function\_builder, FunctionEvaluator const & function\_evaluator, AdvectionFieldBuilder const & adv\_field\_builder, AdvectionFieldEvaluator const & adv\_field\_evaluator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
-|  FunctionField | [**operator()**](#function-operator) (FunctionField const allfdistribu, AdvecField const advection\_field, double const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_max=std::nullopt) const<br>_Advects allfdistribu along the advection dimension GridInterest for a duration dt._  |
+|  FunctionField | [**operator()**](#function-operator) (FunctionField const allfdistribu, AdvecField const advection\_field, DataType const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_max=std::nullopt) const<br>_Advects allfdistribu along the advection dimension GridInterest for a duration dt._  |
 |   | [**~BslAdvection1D**](#function-bsladvection1d) () = default<br> |
 
 
@@ -184,7 +184,7 @@ _Advects allfdistribu along the advection dimension GridInterest for a duration 
 inline FunctionField BslAdvection1D::operator() (
     FunctionField const allfdistribu,
     AdvecField const advection_field,
-    double const dt,
+    DataType const dt,
     std::optional< AdvecFieldDerivConstField > const advection_field_derivatives_min=std::nullopt,
     std::optional< AdvecFieldDerivConstField > const advection_field_derivatives_max=std::nullopt
 ) const

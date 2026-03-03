@@ -6,8 +6,10 @@
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
     <includedby refid="bsl__advection__x_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp</includedby>
     <includedby refid="geometryXVx_2boltzmann_2splitvlasovsolver_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.cpp</includedby>
+    <includedby refid="geometryXVx_2boltzmann_2splitvlasovsolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.hpp</includedby>
     <includedby refid="mpisplitvlasovsolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/mpisplitvlasovsolver.hpp</includedby>
     <includedby refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.cpp</includedby>
+    <includedby refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp</includedby>
     <incdepgraph>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionx.hpp</label>
@@ -44,10 +46,22 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
       </node>
       <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.hpp</label>
+        <link refid="geometryXVx_2boltzmann_2splitvlasovsolver_8hpp_source"/>
+      </node>
+      <node id="4">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/mpisplitvlasovsolver.hpp</label>
         <link refid="mpisplitvlasovsolver_8hpp_source"/>
+      </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp</label>
+        <link refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source"/>
       </node>
     </invincdepgraph>
     <innerclass refid="classIAdvectionSpatial" prot="public">IAdvectionSpatial</innerclass>
@@ -63,14 +77,14 @@
 <codeline lineno="5"><highlight class="normal"></highlight></codeline>
 <codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;ddc_aliases.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="7"><highlight class="normal"></highlight></codeline>
-<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Geometry,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">X&gt;</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Geometry,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">X,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>DataType<sp/>=<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal">&gt;</highlight></codeline>
 <codeline lineno="15" refid="classIAdvectionSpatial" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref></highlight></codeline>
 <codeline lineno="16"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="17"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/><ref refid="classIAdvectionSpatial" kindref="compound">~IAdvectionSpatial</ref>()<sp/>=<sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="27" refid="classIAdvectionSpatial_1a1ca175ba280c8d9f82a96b285a0a56f2" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>DField&lt;typename<sp/>Geometry::IdxRangeFdistribu&gt;<sp/><ref refid="classIAdvectionSpatial_1a1ca175ba280c8d9f82a96b285a0a56f2" kindref="member">operator()</ref>(</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DField&lt;typename<sp/>Geometry::IdxRangeFdistribu&gt;<sp/>allfdistribu,</highlight></codeline>
-<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="27" refid="classIAdvectionSpatial_1a96124b9a27ea3bb8c49e32163135bd6e" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">virtual</highlight><highlight class="normal"><sp/>Field&lt;DataType,<sp/>typename<sp/>Geometry::IdxRangeFdistribu&gt;<sp/><ref refid="classIAdvectionSpatial_1a96124b9a27ea3bb8c49e32163135bd6e" kindref="member">operator()</ref>(</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Field&lt;DataType,<sp/>typename<sp/>Geometry::IdxRangeFdistribu&gt;<sp/>allfdistribu,</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DataType<sp/>dt)<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>=<sp/>0;</highlight></codeline>
 <codeline lineno="30"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionx.hpp"/>

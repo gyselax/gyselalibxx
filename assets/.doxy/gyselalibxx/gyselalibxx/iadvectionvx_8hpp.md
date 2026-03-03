@@ -32,7 +32,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**IAdvectionVelocity**](classIAdvectionVelocity.md) &lt;class Geometry, class GridV&gt;<br>_A class which provides an advection operator._  |
+| class | [**IAdvectionVelocity**](classIAdvectionVelocity.md) &lt;class Geometry, class GridV, class DataType&gt;<br>_A class which provides an advection operator._  |
 
 
 

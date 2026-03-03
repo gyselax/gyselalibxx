@@ -571,6 +571,8 @@
 <p><a href="bsl__advection__vx_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
+#include &lt;type_traits&gt;
+
 #include &lt;ddc/ddc.hpp&gt;
 
 #include "ddc_alias_inline_functions.hpp"
@@ -585,9 +587,12 @@ template &lt;
         class Geometry,
         class GridV,
         concepts::InterpolationBuilder FunctionBuilder,
-        concepts::InterpolationEvaluator FunctionEvaluator&gt;
-class BslAdvectionVelocity : public IAdvectionVelocity&lt;Geometry, GridV&gt;
+        concepts::InterpolationEvaluator FunctionEvaluator,
+        class DataType = double&gt;
+class BslAdvectionVelocity : public IAdvectionVelocity&lt;Geometry, GridV, DataType&gt;
 {
+    static_assert(std::is_floating_point_v&lt;DataType&gt;);
+
     using IdxRangeFdistribu = typename Geometry::IdxRangeFdistribu;
     using IdxRangeSpatial = typename Geometry::IdxRangeSpatial;
     using IdxSpatial = typename IdxRangeSpatial::discrete_element_type;
@@ -616,10 +621,10 @@ public:
 
     ~BslAdvectionVelocity() override = default;
 
-    Field&lt;double, IdxRangeFdistribu&gt; operator()(
-            Field&lt;double, IdxRangeFdistribu&gt; const allfdistribu,
-            Field&lt;const double, IdxRangeSpatial&gt; const electric_field,
-            double const dt) const override
+    Field&lt;DataType, IdxRangeFdistribu&gt; operator()(
+            Field&lt;DataType, IdxRangeFdistribu&gt; const allfdistribu,
+            ConstField&lt;DataType, IdxRangeSpatial&gt; const electric_field,
+            DataType const dt) const override
     {
         using IdxRangeBatch = ddc::remove_dims_of_t&lt;IdxRangeFdistribu, Species, GridV&gt;;
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
@@ -632,9 +637,9 @@ public:
 
         IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
 
-        FieldMem&lt;double, IdxRangeFunctionDeriv&gt; derivs_min(
+        FieldMem&lt;DataType, IdxRangeFunctionDeriv&gt; derivs_min(
                 m_function_builder.batched_derivs_xmin_domain(batched_feet_idx_range));
-        FieldMem&lt;double, IdxRangeFunctionDeriv&gt; derivs_max(
+        FieldMem&lt;DataType, IdxRangeFunctionDeriv&gt; derivs_max(
                 m_function_builder.batched_derivs_xmax_domain(batched_feet_idx_range));
         ddc::parallel_fill(derivs_min, 0.);
         ddc::parallel_fill(derivs_max, 0.);
@@ -648,16 +653,16 @@ public:
         IdxRangeBatch batch_idx_range(idx_range);
 
         ddc::host_for_each(idx_range_sp, [&amp;](IdxSp const isp) {
-            double const charge_proxy
+            DataType const charge_proxy
                     = charge(isp); // TODO: consider proper way to access charge from device
-            double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
             ddc::parallel_for_each(
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
                     KOKKOS_LAMBDA(IdxBatch const ib) {
                         IdxSpatial const ix(ib);
                         // compute the displacement
-                        double const dvx
+                        DataType const dvx
                                 = charge_proxy * sqrt_me_on_mspecies * dt * electric_field(ix);
 
                         // compute the coordinates of the feet

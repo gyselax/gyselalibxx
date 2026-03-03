@@ -42,37 +42,37 @@
     <member refid="classBarycentricToCartesian_1a0d989e44273714f226c63ae78657214c" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classBslAdvection1D" kind="class"><name>BslAdvection1D</name>
-    <member refid="classBslAdvection1D_1a11979991744b0295b0e2e2a87408891b" kind="typedef"><name>IdxAdvection</name></member>
-    <member refid="classBslAdvection1D_1aa14cdebe6d162694da37dd6640a9fea0" kind="typedef"><name>IdxFunction</name></member>
-    <member refid="classBslAdvection1D_1aab5fe0cf14c8a21a56a989391cea472a" kind="typedef"><name>DimInterest</name></member>
-    <member refid="classBslAdvection1D_1a8e6d03a3824481884a0ecc120fb53944" kind="typedef"><name>CoordInterest</name></member>
-    <member refid="classBslAdvection1D_1ab5645c81b0ac118dc15ef2d4f9d76907" kind="typedef"><name>IdxRangeInterest</name></member>
-    <member refid="classBslAdvection1D_1a68fb6a2aefdaba0c2d8427e996da6ac0" kind="typedef"><name>IdxInterest</name></member>
-    <member refid="classBslAdvection1D_1ad5d8ab1dcc9ef85a0203da0758a43f6d" kind="typedef"><name>FeetFieldMem</name></member>
-    <member refid="classBslAdvection1D_1ad7727592424ed36cb013bce77652d75b" kind="typedef"><name>FeetField</name></member>
-    <member refid="classBslAdvection1D_1ad769dbeac75fe47bf6691a21ba402cc2" kind="typedef"><name>FeetConstField</name></member>
-    <member refid="classBslAdvection1D_1ac0dbc5b0adda5913c80ba71b4b044324" kind="typedef"><name>AdvecFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a90714f5f8b2d9aee676884be66627fc6" kind="typedef"><name>AdvecField</name></member>
-    <member refid="classBslAdvection1D_1a291adf0f02f1efb9b49ca9c931652fd1" kind="typedef"><name>FunctionField</name></member>
-    <member refid="classBslAdvection1D_1a8954c18c8a61bcbf515b86078e171895" kind="typedef"><name>IdxRangeBSAdvection</name></member>
-    <member refid="classBslAdvection1D_1a6e549792e2122ce20f69a2b941eda871" kind="typedef"><name>AdvecFieldSplineMem</name></member>
-    <member refid="classBslAdvection1D_1a636d10f83250f601b18917019d1494b2" kind="typedef"><name>AdvecFieldSplineCoeffs</name></member>
-    <member refid="classBslAdvection1D_1ac190048ce8ec07190fd25ea111bbe40d" kind="typedef"><name>DerivDim</name></member>
-    <member refid="classBslAdvection1D_1aa938edbf2e31c68c165bfe97e2cd54ba" kind="typedef"><name>IdxRangeAdvecFieldDeriv</name></member>
-    <member refid="classBslAdvection1D_1a23dbd22d7c6ec26c1fe5c91a8193dcfc" kind="typedef"><name>AdvecFieldDerivConstField</name></member>
-    <member refid="classBslAdvection1D_1a6e0f0a5ecf898f20023f2d421168f4a6" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
-    <member refid="classBslAdvection1D_1ad0d06518d64a1fc2ab75a81576808758" kind="typedef"><name>FunctionBasisFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a43d747cb0c63eb50a3b8eca0df205e8b" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
-    <member refid="classBslAdvection1D_1af52ffd99ffb90ff4c5ed5e8ec0bd189d" kind="typedef"><name>FunctionDerivFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a8fca4b700c75265eeb3f73fd35af08b1" kind="typedef"><name>TimeStepper</name></member>
-    <member refid="classBslAdvection1D_1af20ab4d0dd30bced6da7b48b7f83dad9" kind="variable"><name>m_function_builder</name></member>
-    <member refid="classBslAdvection1D_1a07d9e9f0b8dfdb651c2621cb68c24fa4" kind="variable"><name>m_function_evaluator</name></member>
-    <member refid="classBslAdvection1D_1afa33e32431741c7ca78491a66ea8c894" kind="variable"><name>m_adv_field_builder</name></member>
-    <member refid="classBslAdvection1D_1aa853be4d95a8f6f4eee0f6802fe634b3" kind="variable"><name>m_adv_field_evaluator</name></member>
-    <member refid="classBslAdvection1D_1a643cc4bb5f6d140ed552341116809f8a" kind="variable"><name>m_time_stepper_builder</name></member>
-    <member refid="classBslAdvection1D_1a90d316e2525d6f8834f9848ad88cef57" kind="function"><name>BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1a9719bd5e7181aa3843e06386a5ff8540" kind="function"><name>~BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1a1863c7777ca540448941d7ebf0494b37" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvection1D_1a4b3e042e73028b2d923fc1a85d02c3fa" kind="typedef"><name>IdxAdvection</name></member>
+    <member refid="classBslAdvection1D_1a0b12fa5b61d5e428e135c1e16edc0363" kind="typedef"><name>IdxFunction</name></member>
+    <member refid="classBslAdvection1D_1a310af1b09325c1248509b03e35c7c778" kind="typedef"><name>DimInterest</name></member>
+    <member refid="classBslAdvection1D_1a381874ceac0ee19a866cfc3aeb43d37b" kind="typedef"><name>CoordInterest</name></member>
+    <member refid="classBslAdvection1D_1a05fb22db2caafc3b6e5f59f34192445f" kind="typedef"><name>IdxRangeInterest</name></member>
+    <member refid="classBslAdvection1D_1a31ec2f6b89c13f6b2f04d9982609123c" kind="typedef"><name>IdxInterest</name></member>
+    <member refid="classBslAdvection1D_1a4552c896b35856c42481868228ac72b1" kind="typedef"><name>FeetFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a6c7c826a55811a0c240344b91c033bff" kind="typedef"><name>FeetField</name></member>
+    <member refid="classBslAdvection1D_1af8b35ccb71b77641651cb10aad52d88d" kind="typedef"><name>FeetConstField</name></member>
+    <member refid="classBslAdvection1D_1a2c7b5a06d2b77f1b29fc45120a86300e" kind="typedef"><name>AdvecFieldMem</name></member>
+    <member refid="classBslAdvection1D_1ac4d0466201267b428b19791f5fb2cbbf" kind="typedef"><name>AdvecField</name></member>
+    <member refid="classBslAdvection1D_1a99086219e1549b2b5791c7c5bcb64176" kind="typedef"><name>FunctionField</name></member>
+    <member refid="classBslAdvection1D_1a95a9aed73686fd0b38991190751d77a0" kind="typedef"><name>IdxRangeBSAdvection</name></member>
+    <member refid="classBslAdvection1D_1ad3da9d032d59af7ff2dcc26d8a87a918" kind="typedef"><name>AdvecFieldSplineMem</name></member>
+    <member refid="classBslAdvection1D_1ae084c9c9e5a131633552eb33d1cc21d4" kind="typedef"><name>AdvecFieldSplineCoeffs</name></member>
+    <member refid="classBslAdvection1D_1a73207e5f73da2af729eecd7e90745533" kind="typedef"><name>DerivDim</name></member>
+    <member refid="classBslAdvection1D_1afba56a27d33121bf626e3627b81f9b83" kind="typedef"><name>IdxRangeAdvecFieldDeriv</name></member>
+    <member refid="classBslAdvection1D_1a52fe8a1170e38570d90c1298b0723cfd" kind="typedef"><name>AdvecFieldDerivConstField</name></member>
+    <member refid="classBslAdvection1D_1a9a0086d969c0c6d4ec62fe14ab37d0ee" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
+    <member refid="classBslAdvection1D_1a61c028d79d75f00ea8de41bde33e7e9f" kind="typedef"><name>FunctionBasisFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a91a3ab5c70359321add8f13ada62e80d" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
+    <member refid="classBslAdvection1D_1a634c4dcb84f6e2534ac912d8acf79c0c" kind="typedef"><name>FunctionDerivFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a05e95fcedc666bbab45ae049d0495321" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classBslAdvection1D_1aac4499acc060f07327d9a282f6cfdd39" kind="variable"><name>m_function_builder</name></member>
+    <member refid="classBslAdvection1D_1a2d3a6bd70a921a0ead77356e874ee0d9" kind="variable"><name>m_function_evaluator</name></member>
+    <member refid="classBslAdvection1D_1a1dc10d4926af786a66a2828e0a17fc90" kind="variable"><name>m_adv_field_builder</name></member>
+    <member refid="classBslAdvection1D_1a022d3a9fb6c32e492b5f34b14b0df5df" kind="variable"><name>m_adv_field_evaluator</name></member>
+    <member refid="classBslAdvection1D_1aed083ee9ab7d0c7fe640fc5c1a8cd87d" kind="variable"><name>m_time_stepper_builder</name></member>
+    <member refid="classBslAdvection1D_1aa2250c3337be0e67172c1dc81a4f86af" kind="function"><name>BslAdvection1D</name></member>
+    <member refid="classBslAdvection1D_1a4ab831f390941e381d734390f627015f" kind="function"><name>~BslAdvection1D</name></member>
+    <member refid="classBslAdvection1D_1a34f55dae301808df59a48de70a4fef31" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionPolar" kind="class"><name>BslAdvectionPolar</name>
     <member refid="classBslAdvectionPolar_1a2154c15f9649423dac0af9a62f6e483f" kind="typedef"><name>R</name></member>
@@ -118,34 +118,34 @@
     <member refid="classBslAdvectionPolar_1a52f2664379eeb2d3a47ea93fbfb9238e" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionSpatial" kind="class"><name>BslAdvectionSpatial</name>
-    <member refid="classBslAdvectionSpatial_1a9c9c6c24738c732e74a750c0b1fcda50" kind="typedef"><name>GridV</name></member>
-    <member refid="classBslAdvectionSpatial_1a4a9ca40b2f708924bff1f4ed3838de23" kind="typedef"><name>IdxRangeFdistrib</name></member>
-    <member refid="classBslAdvectionSpatial_1afc87383080f9b0242a36278a958a3773" kind="typedef"><name>IdxX</name></member>
-    <member refid="classBslAdvectionSpatial_1a893eebcaed4174e86d2454bdeb41362c" kind="typedef"><name>IdxV</name></member>
-    <member refid="classBslAdvectionSpatial_1adc9f073139ddc16b1f6d4aef58819ffc" kind="typedef"><name>DimX</name></member>
-    <member refid="classBslAdvectionSpatial_1a0bac792c6dfa8db722d7a1706245863a" kind="typedef"><name>DimV</name></member>
-    <member refid="classBslAdvectionSpatial_1a9cac810f5332d50ddd00732a78b1902b" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
-    <member refid="classBslAdvectionSpatial_1a459dadeffbdf47975134a9be8d89b802" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
-    <member refid="classBslAdvectionSpatial_1aab759667977f30c63326130ab39e1ff4" kind="variable"><name>m_function_builder</name></member>
-    <member refid="classBslAdvectionSpatial_1a66400566c48dcbfdc0712f386983e5b6" kind="variable"><name>m_function_evaluator</name></member>
-    <member refid="classBslAdvectionSpatial_1a2395d3130d87de6a8b932aecebcc76ec" kind="function"><name>BslAdvectionSpatial</name></member>
-    <member refid="classBslAdvectionSpatial_1a4e2f371a3543811c3b38b6700145ccdd" kind="function"><name>~BslAdvectionSpatial</name></member>
-    <member refid="classBslAdvectionSpatial_1afce58559359ed066916badf00db027ce" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvectionSpatial_1a35aa6dfce6f0f95bfb431f89b87dddb1" kind="typedef"><name>GridV</name></member>
+    <member refid="classBslAdvectionSpatial_1a6e0cac3c1b097f7878b10f5a754df9b0" kind="typedef"><name>IdxRangeFdistrib</name></member>
+    <member refid="classBslAdvectionSpatial_1a4ba1e9b2f9cd3ed6dcebce55641edabe" kind="typedef"><name>IdxX</name></member>
+    <member refid="classBslAdvectionSpatial_1ac78bd76070a91dd181d4c259067204d0" kind="typedef"><name>IdxV</name></member>
+    <member refid="classBslAdvectionSpatial_1a8c3e1779087697f4a3087b8dfece611a" kind="typedef"><name>DimX</name></member>
+    <member refid="classBslAdvectionSpatial_1a82fa2bfaf4f52527724ee9cdd7390f60" kind="typedef"><name>DimV</name></member>
+    <member refid="classBslAdvectionSpatial_1ab3c0b781a42b32c1350182889e5f91a4" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
+    <member refid="classBslAdvectionSpatial_1a5277e68b8b4a6f989ecd3a8de5083650" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
+    <member refid="classBslAdvectionSpatial_1a60f68e982a4be7bcab7c3ba6d78b4924" kind="variable"><name>m_function_builder</name></member>
+    <member refid="classBslAdvectionSpatial_1a766ef3d7d03a0f3373ca7d2b72f74774" kind="variable"><name>m_function_evaluator</name></member>
+    <member refid="classBslAdvectionSpatial_1a10b7fcd67d6326ec1a67b0ca2ff4fd1b" kind="function"><name>BslAdvectionSpatial</name></member>
+    <member refid="classBslAdvectionSpatial_1adefe881f2096f2c3ec0f9dc6e9c0248f" kind="function"><name>~BslAdvectionSpatial</name></member>
+    <member refid="classBslAdvectionSpatial_1ab21a38d11aba44530dc54edfe269a6af" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionVelocity" kind="class"><name>BslAdvectionVelocity</name>
-    <member refid="classBslAdvectionVelocity_1ab56f76ccb62c98ee3244b3725a426fd6" kind="typedef"><name>IdxRangeFdistribu</name></member>
-    <member refid="classBslAdvectionVelocity_1ae2a875fa42ecb836e934efd34531b5a5" kind="typedef"><name>IdxRangeSpatial</name></member>
-    <member refid="classBslAdvectionVelocity_1ab4a24368218f0a4f44917822208b6c15" kind="typedef"><name>IdxSpatial</name></member>
-    <member refid="classBslAdvectionVelocity_1abf778812512c2e7db758075bf47db195" kind="typedef"><name>IdxV</name></member>
-    <member refid="classBslAdvectionVelocity_1af4b88be4640e91d0f99d5f67f1fd812c" kind="typedef"><name>DimV</name></member>
-    <member refid="classBslAdvectionVelocity_1a2224d733f248372218fb1afadad5f1df" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
-    <member refid="classBslAdvectionVelocity_1a7742ca64e8ebcde7fa5e4ced64184d2c" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
-    <member refid="classBslAdvectionVelocity_1a1b881d7da45b353480b84d72ad0ccccc" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
-    <member refid="classBslAdvectionVelocity_1aa7b69cb987d1ffc2ae761c14196a983e" kind="variable"><name>m_function_builder</name></member>
-    <member refid="classBslAdvectionVelocity_1a760e97267cc478529aa11f4101f1a40d" kind="variable"><name>m_function_evaluator</name></member>
-    <member refid="classBslAdvectionVelocity_1a50fbcbdb4ef4a6ebd617cae8e447a11d" kind="function"><name>BslAdvectionVelocity</name></member>
-    <member refid="classBslAdvectionVelocity_1a5a542fac3b6420da587f26ceaba12fec" kind="function"><name>~BslAdvectionVelocity</name></member>
-    <member refid="classBslAdvectionVelocity_1ae76bbf721e9cbb70dc23382b45027658" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvectionVelocity_1a11e596eed1466c5aabd13fc84f0416d1" kind="typedef"><name>IdxRangeFdistribu</name></member>
+    <member refid="classBslAdvectionVelocity_1a83d719bb5f18315f6aebe23b6bf22fd6" kind="typedef"><name>IdxRangeSpatial</name></member>
+    <member refid="classBslAdvectionVelocity_1aec38f7b839928a1d48f5647cbd0d1ce1" kind="typedef"><name>IdxSpatial</name></member>
+    <member refid="classBslAdvectionVelocity_1a8fbfef6ab5b3f10f04a8c3cc6b556f59" kind="typedef"><name>IdxV</name></member>
+    <member refid="classBslAdvectionVelocity_1aef2f354f8ec6ee17b7ae474fb453aab5" kind="typedef"><name>DimV</name></member>
+    <member refid="classBslAdvectionVelocity_1a4573b2b87b32ac7bea0e0b06523a2e95" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
+    <member refid="classBslAdvectionVelocity_1a558ae8ed581af4fe4541ec40dee1d63d" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
+    <member refid="classBslAdvectionVelocity_1a5c2109547e67a575ce2148e976ca2436" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
+    <member refid="classBslAdvectionVelocity_1adb0069ae1acab043a09cb824de539657" kind="variable"><name>m_function_builder</name></member>
+    <member refid="classBslAdvectionVelocity_1a9a8a55560e4ac43f3fa2f0d58270d676" kind="variable"><name>m_function_evaluator</name></member>
+    <member refid="classBslAdvectionVelocity_1ae2006a5e38609a34d9a4522baa70a888" kind="function"><name>BslAdvectionVelocity</name></member>
+    <member refid="classBslAdvectionVelocity_1a619aec122f353b30db5e1d30a6ab4a24" kind="function"><name>~BslAdvectionVelocity</name></member>
+    <member refid="classBslAdvectionVelocity_1ae7a136d800da0e8371389e225181467f" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslExplicitPredCorrRTheta" kind="class"><name>BslExplicitPredCorrRTheta</name>
     <member refid="classBslExplicitPredCorrRTheta_1ab7c824b049b06986c80a63e9f409bac8" kind="typedef"><name>SplinePolarFootFinderType</name></member>
@@ -1205,12 +1205,12 @@
   <compound refid="structFEM1DPoissonSolver_1_1HiddenFEMBSplines" kind="struct"><name>FEM1DPoissonSolver::HiddenFEMBSplines</name>
   </compound>
   <compound refid="classIAdvectionSpatial" kind="class"><name>IAdvectionSpatial</name>
-    <member refid="classIAdvectionSpatial_1a4d3a4ee18ee609f0261a323062a58d7a" kind="function"><name>~IAdvectionSpatial</name></member>
-    <member refid="classIAdvectionSpatial_1a1ca175ba280c8d9f82a96b285a0a56f2" kind="function"><name>operator()</name></member>
+    <member refid="classIAdvectionSpatial_1a71c962707fab5143e2702e6f7d3dd7aa" kind="function"><name>~IAdvectionSpatial</name></member>
+    <member refid="classIAdvectionSpatial_1a96124b9a27ea3bb8c49e32163135bd6e" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIAdvectionVelocity" kind="class"><name>IAdvectionVelocity</name>
-    <member refid="classIAdvectionVelocity_1a970d504c9e17550be8be377490c6a0ff" kind="function"><name>~IAdvectionVelocity</name></member>
-    <member refid="classIAdvectionVelocity_1a3421d3fb6a659e30d75af3ce8bac861a" kind="function"><name>operator()</name></member>
+    <member refid="classIAdvectionVelocity_1a21e57afc5362336038e93a80f64a7422" kind="function"><name>~IAdvectionVelocity</name></member>
+    <member refid="classIAdvectionVelocity_1a475dfaa247dbbb07032c3ef229a22bb4" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIBoltzmannSolver" kind="class"><name>IBoltzmannSolver</name>
     <member refid="classIBoltzmannSolver_1adedfcbd6d713c24cd39272d512ae8f1b" kind="function"><name>~IBoltzmannSolver</name></member>

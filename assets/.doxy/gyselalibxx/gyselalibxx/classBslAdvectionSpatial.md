@@ -2,7 +2,7 @@
 
 # Class BslAdvectionSpatial
 
-**template &lt;class Geometry, class [**GridX**](structGridX.md), concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator&gt;**
+**template &lt;class Geometry, class [**GridX**](structGridX.md), concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator, class DataType&gt;**
 
 
 
@@ -76,7 +76,7 @@ Inherits the following classes: [IAdvectionSpatial](classIAdvectionSpatial.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**BslAdvectionSpatial**](#function-bsladvectionspatial) (FunctionBuilder const & function\_builder, FunctionEvaluator const & function\_evaluator) <br>_Constructor._  |
-|  Field&lt; double, IdxRangeFdistrib &gt; | [**operator()**](#function-operator) (Field&lt; double, IdxRangeFdistrib &gt; const allfdistribu, double const dt) override const<br>_Advects fdistribu along_ [_**GridX**_](structGridX.md) _for a duration dt._ |
+|  Field&lt; DataType, IdxRangeFdistrib &gt; | [**operator()**](#function-operator) (Field&lt; DataType, IdxRangeFdistrib &gt; const allfdistribu, DataType const dt) override const<br>_Advects fdistribu along_ [_**GridX**_](structGridX.md) _for a duration dt._ |
 |   | [**~BslAdvectionSpatial**](#function-bsladvectionspatial) () override<br> |
 
 
@@ -86,7 +86,7 @@ See [IAdvectionSpatial](classIAdvectionSpatial.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt; | [**operator()**](classIAdvectionSpatial.md#function-operator) (DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, double dt) const = 0<br>_operates a transport of the distribution function._  |
+| virtual Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; | [**operator()**](classIAdvectionSpatial.md#function-operator) (Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DataType dt) const = 0<br>_operates a transport of the distribution function._  |
 | virtual  | [**~IAdvectionSpatial**](classIAdvectionSpatial.md#function-iadvectionspatial) () = default<br> |
 
 
@@ -180,9 +180,9 @@ inline explicit BslAdvectionSpatial::BslAdvectionSpatial (
 
 _Advects fdistribu along_ [_**GridX**_](structGridX.md) _for a duration dt._
 ```C++
-inline Field< double, IdxRangeFdistrib > BslAdvectionSpatial::operator() (
-    Field< double, IdxRangeFdistrib > const allfdistribu,
-    double const dt
+inline Field< DataType, IdxRangeFdistrib > BslAdvectionSpatial::operator() (
+    Field< DataType, IdxRangeFdistrib > const allfdistribu,
+    DataType const dt
 ) override const
 ```
 

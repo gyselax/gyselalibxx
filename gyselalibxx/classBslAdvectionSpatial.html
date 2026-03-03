@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-bsladvectionspatial">Class BslAdvectionSpatial</h1>
-<p><strong>template &lt;class Geometry, class <a href="structGridX.html"><strong>GridX</strong></a>, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator&gt;</strong></p>
+<p><strong>template &lt;class Geometry, class <a href="structGridX.html"><strong>GridX</strong></a>, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator, class DataType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a></p>
 <p><em>A class which computes the spatial advection along the dimension of interest</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>. Working for every Cartesian geometry.</em></p>
 <ul>
@@ -588,8 +588,8 @@
 <td style="text-align: left;"><a href="#function-bsladvectionspatial"><strong>BslAdvectionSpatial</strong></a> (FunctionBuilder const &amp; function_builder, FunctionEvaluator const &amp; function_evaluator) <br><em>Constructor.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">Field&lt; double, IdxRangeFdistrib &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Field&lt; double, IdxRangeFdistrib &gt; const allfdistribu, double const dt) override const<br><em>Advects fdistribu along</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>for a duration dt.</em></td>
+<td style="text-align: right;">Field&lt; DataType, IdxRangeFdistrib &gt;</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Field&lt; DataType, IdxRangeFdistrib &gt; const allfdistribu, DataType const dt) override const<br><em>Advects fdistribu along</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>for a duration dt.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -608,8 +608,8 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt;</td>
-<td style="text-align: left;"><a href="classIAdvectionSpatial.html#function-operator"><strong>operator()</strong></a> (DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, double dt) const = 0<br><em>operates a transport of the distribution function.</em></td>
+<td style="text-align: right;">virtual Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt;</td>
+<td style="text-align: left;"><a href="classIAdvectionSpatial.html#function-operator"><strong>operator()</strong></a> (Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DataType dt) const = 0<br><em>operates a transport of the distribution function.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -634,9 +634,9 @@
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Advects fdistribu along</em> <a href="structGridX.html"><em><strong>GridX</strong></em></a> <em>for a duration dt.</em></p>
-<pre><code class="language-C++">inline Field&lt; double, IdxRangeFdistrib &gt; BslAdvectionSpatial::operator() (
-    Field&lt; double, IdxRangeFdistrib &gt; const allfdistribu,
-    double const dt
+<pre><code class="language-C++">inline Field&lt; DataType, IdxRangeFdistrib &gt; BslAdvectionSpatial::operator() (
+    Field&lt; DataType, IdxRangeFdistrib &gt; const allfdistribu,
+    DataType const dt
 ) override const
 </code></pre>
 <p><strong>Parameters:</strong></p>

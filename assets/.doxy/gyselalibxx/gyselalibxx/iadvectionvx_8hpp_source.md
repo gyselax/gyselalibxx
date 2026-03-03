@@ -16,16 +16,16 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 
-template <class Geometry, class GridV>
+template <class Geometry, class GridV, class DataType = double>
 class IAdvectionVelocity
 {
 public:
     virtual ~IAdvectionVelocity() = default;
 
-    virtual DField<typename Geometry::IdxRangeFdistribu> operator()(
-            DField<typename Geometry::IdxRangeFdistribu> allfdistribu,
-            DConstField<typename Geometry::IdxRangeSpatial> electric_field,
-            double dt) const = 0;
+    virtual Field<DataType, typename Geometry::IdxRangeFdistribu> operator()(
+            Field<DataType, typename Geometry::IdxRangeFdistribu> allfdistribu,
+            ConstField<DataType, typename Geometry::IdxRangeSpatial> electric_field,
+            DataType dt) const = 0;
 };
 ```
 

@@ -2,7 +2,7 @@
 
 # Class IAdvectionSpatial
 
-**template &lt;class Geometry, class [**GridX**](structGridX.md)&gt;**
+**template &lt;class Geometry, class [**GridX**](structGridX.md), class DataType&gt;**
 
 
 
@@ -55,7 +55,7 @@ Inherited by the following classes: [BslAdvectionSpatial](classBslAdvectionSpati
 
 | Type | Name |
 | ---: | :--- |
-| virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt; | [**operator()**](#function-operator) (DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, double dt) const = 0<br>_operates a transport of the distribution function._  |
+| virtual Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; | [**operator()**](#function-operator) (Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DataType dt) const = 0<br>_operates a transport of the distribution function._  |
 | virtual  | [**~IAdvectionSpatial**](#function-iadvectionspatial) () = default<br> |
 
 
@@ -88,10 +88,7 @@ Inherited by the following classes: [BslAdvectionSpatial](classBslAdvectionSpati
 ## Detailed Description
 
 
-An abstract class which implements a function that applies the transport along a physical space direction of the phase space.
-
-
-A generic class for a spatial advection 
+An abstract class which implements a function that applies the transport along a physical space direction of the phase space. 
 
 
     
@@ -104,9 +101,9 @@ A generic class for a spatial advection
 
 _operates a transport of the distribution function._ 
 ```C++
-virtual DField< typename Geometry::IdxRangeFdistribu > IAdvectionSpatial::operator() (
-    DField< typename Geometry::IdxRangeFdistribu > allfdistribu,
-    double dt
+virtual Field< DataType, typename Geometry::IdxRangeFdistribu > IAdvectionSpatial::operator() (
+    Field< DataType, typename Geometry::IdxRangeFdistribu > allfdistribu,
+    DataType dt
 ) const = 0
 ```
 

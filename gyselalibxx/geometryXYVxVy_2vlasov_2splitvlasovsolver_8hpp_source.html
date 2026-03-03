@@ -574,12 +574,9 @@
 #pragma once
 
 #include "geometry_xyvxvy.hpp"
+#include "iadvectionvx.hpp"
+#include "iadvectionx.hpp"
 #include "ivlasovsolver.hpp"
-
-template &lt;class Geometry, class GridX&gt;
-class IAdvectionSpatial;
-template &lt;class Geometry, class GridV&gt;
-class IAdvectionVelocity;
 
 class SplitVlasovSolver : public IVlasovSolver
 {

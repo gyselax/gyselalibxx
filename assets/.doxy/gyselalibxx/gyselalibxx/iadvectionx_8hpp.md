@@ -31,7 +31,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**IAdvectionSpatial**](classIAdvectionSpatial.md) &lt;class Geometry, class [**GridX**](structGridX.md)&gt;<br>_A class which provides an advection operator._  |
+| class | [**IAdvectionSpatial**](classIAdvectionSpatial.md) &lt;class Geometry, class [**GridX**](structGridX.md), class DataType&gt;<br>_A class which provides an advection operator._  |
 
 
 

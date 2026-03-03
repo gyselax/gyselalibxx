@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-iadvectionspatial">Class IAdvectionSpatial</h1>
-<p><strong>template &lt;class Geometry, class <a href="structGridX.html"><strong>GridX</strong></a>&gt;</strong></p>
+<p><strong>template &lt;class Geometry, class <a href="structGridX.html"><strong>GridX</strong></a>, class DataType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classIAdvectionSpatial.html"><strong>IAdvectionSpatial</strong></a></p>
 <p><em>A class which provides an advection operator.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -584,8 +584,8 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt;</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, double dt) const = 0<br><em>operates a transport of the distribution function.</em></td>
+<td style="text-align: right;">virtual Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt;</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DataType dt) const = 0<br><em>operates a transport of the distribution function.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -594,14 +594,13 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>An abstract class which implements a function that applies the transport along a physical space direction of the phase space.</p>
-<p>A generic class for a spatial advection </p>
+<p>An abstract class which implements a function that applies the transport along a physical space direction of the phase space. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-operator">function operator()</h3>
 <p><em>operates a transport of the distribution function.</em> </p>
-<pre><code class="language-C++">virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt; IAdvectionSpatial::operator() (
-    DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu,
-    double dt
+<pre><code class="language-C++">virtual Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; IAdvectionSpatial::operator() (
+    Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; allfdistribu,
+    DataType dt
 ) const = 0
 </code></pre>
 <p><strong>Parameters:</strong></p>

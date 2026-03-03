@@ -175,6 +175,10 @@
         <link refid="geometryXYVxVy_2vlasov_2splitvlasovsolver_8hpp_source"/>
         <childnode refid="11" relation="include">
         </childnode>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="9" relation="include">
+        </childnode>
         <childnode refid="32" relation="include">
         </childnode>
       </node>

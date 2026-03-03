@@ -10,6 +10,7 @@
 
 
 
+* `#include <type_traits>`
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
@@ -36,7 +37,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) &lt;class Geometry, class [**GridX**](structGridX.md), FunctionBuilder, FunctionEvaluator&gt;<br>_A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._ |
+| class | [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) &lt;class Geometry, class [**GridX**](structGridX.md), FunctionBuilder, FunctionEvaluator, class DataType&gt;<br>_A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._ |
 
 
 

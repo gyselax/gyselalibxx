@@ -10,6 +10,7 @@
 
 
 
+* `#include <type_traits>`
 * `#include <ddc/ddc.hpp>`
 * `#include <ddc/kernels/splines/deriv.hpp>`
 * `#include "ddc_alias_inline_functions.hpp"`
@@ -38,7 +39,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslAdvection1D**](classBslAdvection1D.md) &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, FunctionBuilder, FunctionEvaluator, AdvectionFieldBuilder, AdvectionFieldEvaluator, class TimeStepperBuilder&gt;<br>_A class which computes the advection along the dimension of interest GridInterest._  |
+| class | [**BslAdvection1D**](classBslAdvection1D.md) &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, FunctionBuilder, FunctionEvaluator, AdvectionFieldBuilder, AdvectionFieldEvaluator, class TimeStepperBuilder, class DataType&gt;<br>_A class which computes the advection along the dimension of interest GridInterest._  |
 
 
 

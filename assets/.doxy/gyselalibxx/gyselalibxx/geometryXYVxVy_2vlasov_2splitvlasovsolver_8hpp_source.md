@@ -13,12 +13,9 @@
 #pragma once
 
 #include "geometry_xyvxvy.hpp"
+#include "iadvectionvx.hpp"
+#include "iadvectionx.hpp"
 #include "ivlasovsolver.hpp"
-
-template <class Geometry, class GridX>
-class IAdvectionSpatial;
-template <class Geometry, class GridV>
-class IAdvectionVelocity;
 
 class SplitVlasovSolver : public IVlasovSolver
 {

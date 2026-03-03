@@ -20,11 +20,13 @@
       <node id="7">
         <label>bsl_advection_1d.hpp</label>
         <link refid="bsl__advection__1d_8hpp_source"/>
-        <childnode refid="6" relation="include">
-        </childnode>
         <childnode refid="8" relation="include">
         </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
         <childnode refid="9" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -80,7 +82,7 @@
         <link refid="derivative__field__mem_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -142,7 +144,7 @@
       <node id="29">
         <label>vector_field.hpp</label>
         <link refid="vector__field_8hpp_source"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -168,7 +170,7 @@
         <link refid="vector__field__mem_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -190,7 +192,7 @@
         <link refid="geometry__xy_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -218,7 +220,7 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -240,7 +242,7 @@
         <link refid="i__interpolation__builder_8hpp_source"/>
         <childnode refid="38" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -248,7 +250,7 @@
       <node id="39">
         <label>i_interpolation_evaluator.hpp</label>
         <link refid="i__interpolation__evaluator_8hpp_source"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -282,7 +284,7 @@
       <node id="21">
         <label>multipatch_type.hpp</label>
         <link refid="multipatch__type_8hpp_source"/>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -332,7 +334,7 @@
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -344,7 +346,7 @@
         <link refid="euler_8hpp_source"/>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -360,7 +362,7 @@
         <link refid="itimestepper_8hpp_source"/>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
@@ -374,9 +376,9 @@
         <link refid="rk2_8hpp_source"/>
         <childnode refid="18" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
@@ -387,10 +389,10 @@
         <childnode refid="31" relation="include">
         </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>ddc_alias_inline_functions.hpp</label>
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
-        <childnode refid="10" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
@@ -444,7 +446,7 @@
       <node id="13">
         <label>ddc/kernels/splines.hpp</label>
       </node>
-      <node id="8">
+      <node id="9">
         <label>ddc/kernels/splines/deriv.hpp</label>
       </node>
       <node id="3">
@@ -468,7 +470,7 @@
       <node id="46">
         <label>string</label>
       </node>
-      <node id="10">
+      <node id="8">
         <label>type_traits</label>
       </node>
       <node id="11">

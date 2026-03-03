@@ -2,7 +2,7 @@
 
 # Class IAdvectionVelocity
 
-**template &lt;class Geometry, class GridV&gt;**
+**template &lt;class Geometry, class GridV, class DataType&gt;**
 
 
 
@@ -55,7 +55,7 @@ Inherited by the following classes: [BslAdvectionVelocity](classBslAdvectionVelo
 
 | Type | Name |
 | ---: | :--- |
-| virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt; | [**operator()**](#function-operator) (DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DConstField&lt; typename Geometry::IdxRangeSpatial &gt; electric\_field, double dt) const = 0<br>_operates a transport of the distribution function._  |
+| virtual Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; | [**operator()**](#function-operator) (Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; allfdistribu, ConstField&lt; DataType, typename Geometry::IdxRangeSpatial &gt; electric\_field, DataType dt) const = 0<br>_operates a transport of the distribution function._  |
 | virtual  | [**~IAdvectionVelocity**](#function-iadvectionvelocity) () = default<br> |
 
 
@@ -88,10 +88,7 @@ Inherited by the following classes: [BslAdvectionVelocity](classBslAdvectionVelo
 ## Detailed Description
 
 
-An abstract class which implements a function that applies the transport along a velocity direction of the phase space.
-
-
-A generic class for a velocity advection 
+An abstract class which implements a function that applies the transport along a velocity direction of the phase space. 
 
 
     
@@ -104,10 +101,10 @@ A generic class for a velocity advection
 
 _operates a transport of the distribution function._ 
 ```C++
-virtual DField< typename Geometry::IdxRangeFdistribu > IAdvectionVelocity::operator() (
-    DField< typename Geometry::IdxRangeFdistribu > allfdistribu,
-    DConstField< typename Geometry::IdxRangeSpatial > electric_field,
-    double dt
+virtual Field< DataType, typename Geometry::IdxRangeFdistribu > IAdvectionVelocity::operator() (
+    Field< DataType, typename Geometry::IdxRangeFdistribu > allfdistribu,
+    ConstField< DataType, typename Geometry::IdxRangeSpatial > electric_field,
+    DataType dt
 ) const = 0
 ```
 

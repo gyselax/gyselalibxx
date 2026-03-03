@@ -2,7 +2,7 @@
 
 # Class BslAdvectionVelocity
 
-**template &lt;class Geometry, class GridV, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator&gt;**
+**template &lt;class Geometry, class GridV, concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator, class DataType&gt;**
 
 
 
@@ -76,7 +76,7 @@ Inherits the following classes: [IAdvectionVelocity](classIAdvectionVelocity.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**BslAdvectionVelocity**](#function-bsladvectionvelocity) (FunctionBuilder const & function\_builder, FunctionEvaluator const & function\_evaluator) <br>_Constructor._  |
-|  Field&lt; double, IdxRangeFdistribu &gt; | [**operator()**](#function-operator) (Field&lt; double, IdxRangeFdistribu &gt; const allfdistribu, Field&lt; const double, IdxRangeSpatial &gt; const electric\_field, double const dt) override const<br>_Advects fdistribu along GridV for a duration dt._  |
+|  Field&lt; DataType, IdxRangeFdistribu &gt; | [**operator()**](#function-operator) (Field&lt; DataType, IdxRangeFdistribu &gt; const allfdistribu, ConstField&lt; DataType, IdxRangeSpatial &gt; const electric\_field, DataType const dt) override const<br>_Advects fdistribu along GridV for a duration dt._  |
 |   | [**~BslAdvectionVelocity**](#function-bsladvectionvelocity) () override<br> |
 
 
@@ -86,7 +86,7 @@ See [IAdvectionVelocity](classIAdvectionVelocity.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt; | [**operator()**](classIAdvectionVelocity.md#function-operator) (DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DConstField&lt; typename Geometry::IdxRangeSpatial &gt; electric\_field, double dt) const = 0<br>_operates a transport of the distribution function._  |
+| virtual Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; | [**operator()**](classIAdvectionVelocity.md#function-operator) (Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; allfdistribu, ConstField&lt; DataType, typename Geometry::IdxRangeSpatial &gt; electric\_field, DataType dt) const = 0<br>_operates a transport of the distribution function._  |
 | virtual  | [**~IAdvectionVelocity**](classIAdvectionVelocity.md#function-iadvectionvelocity) () = default<br> |
 
 
@@ -180,10 +180,10 @@ inline explicit BslAdvectionVelocity::BslAdvectionVelocity (
 
 _Advects fdistribu along GridV for a duration dt._ 
 ```C++
-inline Field< double, IdxRangeFdistribu > BslAdvectionVelocity::operator() (
-    Field< double, IdxRangeFdistribu > const allfdistribu,
-    Field< const double, IdxRangeSpatial > const electric_field,
-    double const dt
+inline Field< DataType, IdxRangeFdistribu > BslAdvectionVelocity::operator() (
+    Field< DataType, IdxRangeFdistribu > const allfdistribu,
+    ConstField< DataType, IdxRangeSpatial > const electric_field,
+    DataType const dt
 ) override const
 ```
 

@@ -13,12 +13,9 @@
 #pragma once
 
 #include "geometry_xvx.hpp"
+#include "iadvectionvx.hpp"
+#include "iadvectionx.hpp"
 #include "iboltzmannsolver.hpp"
-
-template <class Geometry, class GridX>
-class IAdvectionSpatial;
-template <class Geometry, class GridV>
-class IAdvectionVelocity;
 
 class SplitVlasovSolver : public IBoltzmannSolver
 {

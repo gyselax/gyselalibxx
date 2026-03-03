@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classBslAdvectionVelocity" kind="class" language="C++" prot="public">
     <compoundname>BslAdvectionVelocity</compoundname>
-    <basecompoundref refid="classIAdvectionVelocity" prot="public" virt="non-virtual">IAdvectionVelocity&lt; Geometry, GridV &gt;</basecompoundref>
+    <basecompoundref refid="classIAdvectionVelocity" prot="public" virt="non-virtual">IAdvectionVelocity&lt; Geometry, GridV, double &gt;</basecompoundref>
     <includes refid="bsl__advection__vx_8hpp" local="no">bsl_advection_vx.hpp</includes>
     <templateparamlist>
       <param>
@@ -21,11 +21,15 @@
         <declname>FunctionEvaluator</declname>
         <defname>FunctionEvaluator</defname>
       </param>
+      <param>
+        <type>class DataType</type>
+        <defval>double</defval>
+      </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1ab56f76ccb62c98ee3244b3725a426fd6" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a11e596eed1466c5aabd13fc84f0416d1" prot="private" static="no">
         <type>typename Geometry::IdxRangeFdistribu</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::IdxRangeFdistribu =  typename Geometry::IdxRangeFdistribu</definition>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxRangeFdistribu =  typename Geometry::IdxRangeFdistribu</definition>
         <argsstring></argsstring>
         <name>IdxRangeFdistribu</name>
         <qualifiedname>BslAdvectionVelocity::IdxRangeFdistribu</qualifiedname>
@@ -35,11 +39,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="23" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1ae2a875fa42ecb836e934efd34531b5a5" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a83d719bb5f18315f6aebe23b6bf22fd6" prot="private" static="no">
         <type>typename Geometry::IdxRangeSpatial</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::IdxRangeSpatial =  typename Geometry::IdxRangeSpatial</definition>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxRangeSpatial =  typename Geometry::IdxRangeSpatial</definition>
         <argsstring></argsstring>
         <name>IdxRangeSpatial</name>
         <qualifiedname>BslAdvectionVelocity::IdxRangeSpatial</qualifiedname>
@@ -49,11 +53,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="24" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="29" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1ab4a24368218f0a4f44917822208b6c15" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1aec38f7b839928a1d48f5647cbd0d1ce1" prot="private" static="no">
         <type>typename IdxRangeSpatial::discrete_element_type</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::IdxSpatial =  typename IdxRangeSpatial::discrete_element_type</definition>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxSpatial =  typename IdxRangeSpatial::discrete_element_type</definition>
         <argsstring></argsstring>
         <name>IdxSpatial</name>
         <qualifiedname>BslAdvectionVelocity::IdxSpatial</qualifiedname>
@@ -63,11 +67,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="25" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="30" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1abf778812512c2e7db758075bf47db195" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a8fbfef6ab5b3f10f04a8c3cc6b556f59" prot="private" static="no">
         <type>Idx&lt; GridV &gt;</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::IdxV =  Idx&lt;GridV&gt;</definition>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxV =  Idx&lt;GridV&gt;</definition>
         <argsstring></argsstring>
         <name>IdxV</name>
         <qualifiedname>BslAdvectionVelocity::IdxV</qualifiedname>
@@ -77,11 +81,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="26" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="26" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="31" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1af4b88be4640e91d0f99d5f67f1fd812c" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1aef2f354f8ec6ee17b7ae474fb453aab5" prot="private" static="no">
         <type>typename GridV::continuous_dimension_type</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::DimV =  typename GridV::continuous_dimension_type</definition>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::DimV =  typename GridV::continuous_dimension_type</definition>
         <argsstring></argsstring>
         <name>DimV</name>
         <qualifiedname>BslAdvectionVelocity::DimV</qualifiedname>
@@ -91,11 +95,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="32" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a2224d733f248372218fb1afadad5f1df" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a4573b2b87b32ac7bea0e0b06523a2e95" prot="private" static="no">
         <type>ddc::remove_dims_of_t&lt; typename Geometry::IdxRangeFdistribu, <ref refid="structSpecies" kindref="compound">Species</ref> &gt;</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::IdxRangeSpaceVelocity =  ddc::remove_dims_of_t&lt;typename Geometry::IdxRangeFdistribu, Species&gt;</definition>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxRangeSpaceVelocity =  ddc::remove_dims_of_t&lt;typename Geometry::IdxRangeFdistribu, Species&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeSpaceVelocity</name>
         <qualifiedname>BslAdvectionVelocity::IdxRangeSpaceVelocity</qualifiedname>
@@ -105,11 +109,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="29" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a7742ca64e8ebcde7fa5e4ced64184d2c" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a558ae8ed581af4fe4541ec40dee1d63d" prot="private" static="no">
         <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; FunctionBuilder &gt;::template batched_derivs_idx_range_type&lt; IdxRangeSpaceVelocity &gt;</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::IdxRangeFunctionDeriv =  typename InterpolationBuilderTraits&lt; FunctionBuilder&gt;::template batched_derivs_idx_range_type&lt;IdxRangeSpaceVelocity&gt;</definition>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxRangeFunctionDeriv =  typename InterpolationBuilderTraits&lt; FunctionBuilder&gt;::template batched_derivs_idx_range_type&lt;IdxRangeSpaceVelocity&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeFunctionDeriv</name>
         <qualifiedname>BslAdvectionVelocity::IdxRangeFunctionDeriv</qualifiedname>
@@ -119,11 +123,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="33" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a1b881d7da45b353480b84d72ad0ccccc" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionVelocity_1a5c2109547e67a575ce2148e976ca2436" prot="private" static="no">
         <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; FunctionBuilder &gt;::template batched_basis_idx_range_type&lt; IdxRangeSpaceVelocity &gt;</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::IdxRangeFunctionBasis =  typename InterpolationBuilderTraits&lt; FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeSpaceVelocity&gt;</definition>
+        <definition>using BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxRangeFunctionBasis =  typename InterpolationBuilderTraits&lt; FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeSpaceVelocity&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeFunctionBasis</name>
         <qualifiedname>BslAdvectionVelocity::IdxRangeFunctionBasis</qualifiedname>
@@ -133,13 +137,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="35" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="40" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classBslAdvectionVelocity_1aa7b69cb987d1ffc2ae761c14196a983e" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classBslAdvectionVelocity_1adb0069ae1acab043a09cb824de539657" prot="private" static="no" mutable="no">
         <type>FunctionBuilder const  &amp;</type>
-        <definition>FunctionBuilder const&amp; BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::m_function_builder</definition>
+        <definition>FunctionBuilder const&amp; BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::m_function_builder</definition>
         <argsstring></argsstring>
         <name>m_function_builder</name>
         <qualifiedname>BslAdvectionVelocity::m_function_builder</qualifiedname>
@@ -149,11 +153,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="37" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="37" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="42" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classBslAdvectionVelocity_1a760e97267cc478529aa11f4101f1a40d" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classBslAdvectionVelocity_1a9a8a55560e4ac43f3fa2f0d58270d676" prot="private" static="no" mutable="no">
         <type>FunctionEvaluator const  &amp;</type>
-        <definition>FunctionEvaluator const&amp; BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::m_function_evaluator</definition>
+        <definition>FunctionEvaluator const&amp; BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::m_function_evaluator</definition>
         <argsstring></argsstring>
         <name>m_function_evaluator</name>
         <qualifiedname>BslAdvectionVelocity::m_function_evaluator</qualifiedname>
@@ -163,13 +167,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="38" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="43" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="43" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classBslAdvectionVelocity_1a50fbcbdb4ef4a6ebd617cae8e447a11d" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classBslAdvectionVelocity_1ae2006a5e38609a34d9a4522baa70a888" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::BslAdvectionVelocity</definition>
+        <definition>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::BslAdvectionVelocity</definition>
         <argsstring>(FunctionBuilder const &amp;function_builder, FunctionEvaluator const &amp;function_evaluator)</argsstring>
         <name>BslAdvectionVelocity</name>
         <qualifiedname>BslAdvectionVelocity::BslAdvectionVelocity</qualifiedname>
@@ -206,11 +210,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="48" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="48" bodyend="54"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="53" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="53" bodyend="59"/>
       </memberdef>
-      <memberdef kind="function" id="classBslAdvectionVelocity_1a5a542fac3b6420da587f26ceaba12fec" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classBslAdvectionVelocity_1a619aec122f353b30db5e1d30a6ab4a24" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
-        <definition>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::~BslAdvectionVelocity</definition>
+        <definition>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::~BslAdvectionVelocity</definition>
         <argsstring>() override=default</argsstring>
         <name>~BslAdvectionVelocity</name>
         <qualifiedname>BslAdvectionVelocity::~BslAdvectionVelocity</qualifiedname>
@@ -220,24 +224,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="56" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="61" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classBslAdvectionVelocity_1ae76bbf721e9cbb70dc23382b45027658" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type>Field&lt; double, IdxRangeFdistribu &gt;</type>
-        <definition>Field&lt; double, IdxRangeFdistribu &gt; BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;::operator()</definition>
-        <argsstring>(Field&lt; double, IdxRangeFdistribu &gt; const allfdistribu, Field&lt; const double, IdxRangeSpatial &gt; const electric_field, double const dt) const override</argsstring>
+      <memberdef kind="function" id="classBslAdvectionVelocity_1ae7a136d800da0e8371389e225181467f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>Field&lt; DataType, IdxRangeFdistribu &gt;</type>
+        <definition>Field&lt; DataType, IdxRangeFdistribu &gt; BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;::operator()</definition>
+        <argsstring>(Field&lt; DataType, IdxRangeFdistribu &gt; const allfdistribu, ConstField&lt; DataType, IdxRangeSpatial &gt; const electric_field, DataType const dt) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>BslAdvectionVelocity::operator()</qualifiedname>
         <param>
-          <type>Field&lt; double, IdxRangeFdistribu &gt; const</type>
+          <type>Field&lt; DataType, IdxRangeFdistribu &gt; const</type>
           <declname>allfdistribu</declname>
         </param>
         <param>
-          <type>Field&lt; const double, IdxRangeSpatial &gt; const</type>
+          <type>ConstField&lt; DataType, IdxRangeSpatial &gt; const</type>
           <declname>electric_field</declname>
         </param>
         <param>
-          <type>double const</type>
+          <type>DataType const</type>
           <declname>dt</declname>
         </param>
         <briefdescription>
@@ -275,7 +279,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="65" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="65" bodyend="127"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="70" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="70" bodyend="132"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -285,45 +289,45 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
-        <label>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;</label>
+        <label>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;</label>
         <link refid="classBslAdvectionVelocity"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
-        <label>IAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <label>IAdvectionVelocity&lt; Geometry, GridV, DataType &gt;</label>
         <link refid="classIAdvectionVelocity"/>
       </node>
     </inheritancegraph>
     <collaborationgraph>
       <node id="1">
-        <label>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator &gt;</label>
+        <label>BslAdvectionVelocity&lt; Geometry, GridV, FunctionBuilder, FunctionEvaluator, DataType &gt;</label>
         <link refid="classBslAdvectionVelocity"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
       </node>
       <node id="2">
-        <label>IAdvectionVelocity&lt; Geometry, GridV &gt;</label>
+        <label>IAdvectionVelocity&lt; Geometry, GridV, DataType &gt;</label>
         <link refid="classIAdvectionVelocity"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="22" bodyend="128"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="24" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="25" bodyend="133"/>
     <listofallmembers>
-      <member refid="classBslAdvectionVelocity_1a50fbcbdb4ef4a6ebd617cae8e447a11d" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>BslAdvectionVelocity</name></member>
-      <member refid="classBslAdvectionVelocity_1af4b88be4640e91d0f99d5f67f1fd812c" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>DimV</name></member>
-      <member refid="classBslAdvectionVelocity_1ab56f76ccb62c98ee3244b3725a426fd6" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFdistribu</name></member>
-      <member refid="classBslAdvectionVelocity_1a1b881d7da45b353480b84d72ad0ccccc" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFunctionBasis</name></member>
-      <member refid="classBslAdvectionVelocity_1a7742ca64e8ebcde7fa5e4ced64184d2c" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFunctionDeriv</name></member>
-      <member refid="classBslAdvectionVelocity_1a2224d733f248372218fb1afadad5f1df" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeSpaceVelocity</name></member>
-      <member refid="classBslAdvectionVelocity_1ae2a875fa42ecb836e934efd34531b5a5" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeSpatial</name></member>
-      <member refid="classBslAdvectionVelocity_1ab4a24368218f0a4f44917822208b6c15" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxSpatial</name></member>
-      <member refid="classBslAdvectionVelocity_1abf778812512c2e7db758075bf47db195" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxV</name></member>
-      <member refid="classBslAdvectionVelocity_1aa7b69cb987d1ffc2ae761c14196a983e" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>m_function_builder</name></member>
-      <member refid="classBslAdvectionVelocity_1a760e97267cc478529aa11f4101f1a40d" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>m_function_evaluator</name></member>
-      <member refid="classBslAdvectionVelocity_1ae76bbf721e9cbb70dc23382b45027658" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>operator()</name></member>
-      <member refid="classIAdvectionVelocity_1a3421d3fb6a659e30d75af3ce8bac861a" prot="public" virt="pure-virtual" ambiguityscope="IAdvectionVelocity::"><scope>BslAdvectionVelocity</scope><name>operator()</name></member>
-      <member refid="classBslAdvectionVelocity_1a5a542fac3b6420da587f26ceaba12fec" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>~BslAdvectionVelocity</name></member>
-      <member refid="classIAdvectionVelocity_1a970d504c9e17550be8be377490c6a0ff" prot="public" virt="virtual"><scope>BslAdvectionVelocity</scope><name>~IAdvectionVelocity</name></member>
+      <member refid="classBslAdvectionVelocity_1ae2006a5e38609a34d9a4522baa70a888" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>BslAdvectionVelocity</name></member>
+      <member refid="classBslAdvectionVelocity_1aef2f354f8ec6ee17b7ae474fb453aab5" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>DimV</name></member>
+      <member refid="classBslAdvectionVelocity_1a11e596eed1466c5aabd13fc84f0416d1" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFdistribu</name></member>
+      <member refid="classBslAdvectionVelocity_1a5c2109547e67a575ce2148e976ca2436" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFunctionBasis</name></member>
+      <member refid="classBslAdvectionVelocity_1a558ae8ed581af4fe4541ec40dee1d63d" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFunctionDeriv</name></member>
+      <member refid="classBslAdvectionVelocity_1a4573b2b87b32ac7bea0e0b06523a2e95" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeSpaceVelocity</name></member>
+      <member refid="classBslAdvectionVelocity_1a83d719bb5f18315f6aebe23b6bf22fd6" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeSpatial</name></member>
+      <member refid="classBslAdvectionVelocity_1aec38f7b839928a1d48f5647cbd0d1ce1" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxSpatial</name></member>
+      <member refid="classBslAdvectionVelocity_1a8fbfef6ab5b3f10f04a8c3cc6b556f59" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxV</name></member>
+      <member refid="classBslAdvectionVelocity_1adb0069ae1acab043a09cb824de539657" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>m_function_builder</name></member>
+      <member refid="classBslAdvectionVelocity_1a9a8a55560e4ac43f3fa2f0d58270d676" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>m_function_evaluator</name></member>
+      <member refid="classBslAdvectionVelocity_1ae7a136d800da0e8371389e225181467f" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>operator()</name></member>
+      <member refid="classIAdvectionVelocity_1a475dfaa247dbbb07032c3ef229a22bb4" prot="public" virt="pure-virtual" ambiguityscope="IAdvectionVelocity::"><scope>BslAdvectionVelocity</scope><name>operator()</name></member>
+      <member refid="classBslAdvectionVelocity_1a619aec122f353b30db5e1d30a6ab4a24" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>~BslAdvectionVelocity</name></member>
+      <member refid="classIAdvectionVelocity_1a21e57afc5362336038e93a80f64a7422" prot="public" virt="virtual"><scope>BslAdvectionVelocity</scope><name>~IAdvectionVelocity</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

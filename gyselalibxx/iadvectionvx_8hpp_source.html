@@ -577,16 +577,16 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 
-template &lt;class Geometry, class GridV&gt;
+template &lt;class Geometry, class GridV, class DataType = double&gt;
 class IAdvectionVelocity
 {
 public:
     virtual ~IAdvectionVelocity() = default;
 
-    virtual DField&lt;typename Geometry::IdxRangeFdistribu&gt; operator()(
-            DField&lt;typename Geometry::IdxRangeFdistribu&gt; allfdistribu,
-            DConstField&lt;typename Geometry::IdxRangeSpatial&gt; electric_field,
-            double dt) const = 0;
+    virtual Field&lt;DataType, typename Geometry::IdxRangeFdistribu&gt; operator()(
+            Field&lt;DataType, typename Geometry::IdxRangeFdistribu&gt; allfdistribu,
+            ConstField&lt;DataType, typename Geometry::IdxRangeSpatial&gt; electric_field,
+            DataType dt) const = 0;
 };
 </code></pre></div>
               

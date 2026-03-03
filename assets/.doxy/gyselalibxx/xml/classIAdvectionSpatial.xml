@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classIAdvectionSpatial" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>IAdvectionSpatial</compoundname>
-    <derivedcompoundref refid="classBslAdvectionSpatial" prot="public" virt="non-virtual">BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslAdvectionSpatial" prot="public" virt="non-virtual">BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;</derivedcompoundref>
     <includes refid="iadvectionx_8hpp" local="no">iadvectionx.hpp</includes>
     <templateparamlist>
       <param>
@@ -11,11 +11,15 @@
       <param>
         <type>class <ref refid="structGridX" kindref="compound">GridX</ref></type>
       </param>
+      <param>
+        <type>class DataType</type>
+        <defval>double</defval>
+      </param>
     </templateparamlist>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classIAdvectionSpatial_1a4d3a4ee18ee609f0261a323062a58d7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classIAdvectionSpatial_1a71c962707fab5143e2702e6f7d3dd7aa" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
         <type></type>
-        <definition>virtual IAdvectionSpatial&lt; Geometry, GridX &gt;::~IAdvectionSpatial</definition>
+        <definition>virtual IAdvectionSpatial&lt; Geometry, GridX, DataType &gt;::~IAdvectionSpatial</definition>
         <argsstring>()=default</argsstring>
         <name>~IAdvectionSpatial</name>
         <qualifiedname>IAdvectionSpatial::~IAdvectionSpatial</qualifiedname>
@@ -27,18 +31,18 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionx.hpp" line="18" column="13"/>
       </memberdef>
-      <memberdef kind="function" id="classIAdvectionSpatial_1a1ca175ba280c8d9f82a96b285a0a56f2" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
-        <type>DField&lt; typename Geometry::IdxRangeFdistribu &gt;</type>
-        <definition>virtual DField&lt; typename Geometry::IdxRangeFdistribu &gt; IAdvectionSpatial&lt; Geometry, GridX &gt;::operator()</definition>
-        <argsstring>(DField&lt; typename Geometry::IdxRangeFdistribu &gt; allfdistribu, double dt) const =0</argsstring>
+      <memberdef kind="function" id="classIAdvectionSpatial_1a96124b9a27ea3bb8c49e32163135bd6e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="pure-virtual">
+        <type>Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt;</type>
+        <definition>virtual Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; IAdvectionSpatial&lt; Geometry, GridX, DataType &gt;::operator()</definition>
+        <argsstring>(Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt; allfdistribu, DataType dt) const =0</argsstring>
         <name>operator()</name>
         <qualifiedname>IAdvectionSpatial::operator()</qualifiedname>
         <param>
-          <type>DField&lt; typename Geometry::IdxRangeFdistribu &gt;</type>
+          <type>Field&lt; DataType, typename Geometry::IdxRangeFdistribu &gt;</type>
           <declname>allfdistribu</declname>
         </param>
         <param>
-          <type>double</type>
+          <type>DataType</type>
           <declname>dt</declname>
         </param>
         <briefdescription>
@@ -68,32 +72,31 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionx.hpp" line="27" column="20"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionx.hpp" line="27" column="19"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>A class which provides an advection operator. </para>
     </briefdescription>
     <detaileddescription>
-<para>An abstract class which implements a function that applies the transport along a physical space direction of the phase space.</para>
-<para>A generic class for a spatial advection </para>
+<para>An abstract class which implements a function that applies the transport along a physical space direction of the phase space. </para>
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator &gt;</label>
+        <label>BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;</label>
         <link refid="classBslAdvectionSpatial"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="1">
-        <label>IAdvectionSpatial&lt; Geometry, GridX &gt;</label>
+        <label>IAdvectionSpatial&lt; Geometry, GridX, DataType &gt;</label>
         <link refid="classIAdvectionSpatial"/>
       </node>
     </inheritancegraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionx.hpp" line="15" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/iadvectionx.hpp" bodystart="16" bodyend="30"/>
     <listofallmembers>
-      <member refid="classIAdvectionSpatial_1a1ca175ba280c8d9f82a96b285a0a56f2" prot="public" virt="pure-virtual"><scope>IAdvectionSpatial</scope><name>operator()</name></member>
-      <member refid="classIAdvectionSpatial_1a4d3a4ee18ee609f0261a323062a58d7a" prot="public" virt="virtual"><scope>IAdvectionSpatial</scope><name>~IAdvectionSpatial</name></member>
+      <member refid="classIAdvectionSpatial_1a96124b9a27ea3bb8c49e32163135bd6e" prot="public" virt="pure-virtual"><scope>IAdvectionSpatial</scope><name>operator()</name></member>
+      <member refid="classIAdvectionSpatial_1a71c962707fab5143e2702e6f7d3dd7aa" prot="public" virt="virtual"><scope>IAdvectionSpatial</scope><name>~IAdvectionSpatial</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>
