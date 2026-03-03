@@ -13,7 +13,6 @@
 #include "ddc_helper.hpp"
 #include "itimestepper.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator.hpp"
 #include "vector_field_common.hpp"
 
 namespace {
@@ -227,9 +226,6 @@ TEST_F(XVxAdvection1DTest, AdvectionXVx)
     ddc::PeriodicExtrapolationRule<X> bv_x_max;
     SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
 
-    PreallocatableSplineInterpolator const
-            spline_interpolator_x(builder_x, spline_evaluator_x, idx_range_xvx);
-
     RK2Builder time_stepper;
     BslAdvection1D<
             GridX,
@@ -237,8 +233,10 @@ TEST_F(XVxAdvection1DTest, AdvectionXVx)
             IdxRangeXVx,
             SplineXBuilder,
             SplineXEvaluator,
+            SplineXBuilder,
+            SplineXEvaluator,
             RK2Builder> const
-            advection(spline_interpolator_x, builder_x, spline_evaluator_x, time_stepper);
+            advection(builder_x, spline_evaluator_x, builder_x, spline_evaluator_x, time_stepper);
 
     double const max_relative_error = AdvectionXVx(advection);
     EXPECT_LE(max_relative_error, 5.e-7);
