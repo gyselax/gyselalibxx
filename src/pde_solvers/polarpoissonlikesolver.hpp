@@ -19,8 +19,10 @@
 namespace detail_poisson {
 
 /**
-    * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction .
+    * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction.
     *
+    * @tparam BSplinesTheta Periodic B-Splines in poloidal direction.
+    * 
     * @param[in] idx_theta @f$ \theta @f$ index.
     *
     * @return The corresponding indice modulo @f$ \theta @f$ direction cells number
@@ -38,6 +40,9 @@ KOKKOS_FUNCTION IdxStep<BSplinesTheta> theta_mod(IdxStep<BSplinesTheta> idx_thet
 
 /**
     * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
+    * 
+    * @tparam BSplinesTheta Periodic B-Splines in poloidal direction.
+    * @tparam IdxType The Type of the input index.
     *
     * @param[in] idx A multi-dimensional index including the polar bspline index.
     *
@@ -59,20 +64,24 @@ KOKKOS_INLINE_FUNCTION IdxType theta_mod(IdxType idx)
     return idx;
 }
 /**
-* @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
-*
-* This method calculates the value and the derivatives of polar bsplines. It is templated by
-* calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and
-* get_polar_bspline_vals. The calling method should not need to use the template parameter.
-*
-* @param[out] val
-*      The value of the specified polar bspline at the specified point.
-* @param[in] coord
-*      The coordinate where the value of the polar bspline should be calculated.
-* @param[in] idx
-*      The polar bspline of interest.
-* @return The derivative of the polar bspline (only returned if calculate_derivs is true).
-*/
+ * @brief Get the value and derivative of the specified polar bspline at the specified quadrature point.
+ *
+ * This method calculates the value and the derivatives of polar bsplines. It is templated by
+ * calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and
+ * get_polar_bspline_vals. The calling method should not need to use the template parameter.
+ * 
+ * @tparam PolarBSplinesRTheta The Polar B-Splines to be used.
+ * @tparam calculate_derivs Returns the derivatives at the coordinate if true. If false, 
+ *     only the value is calculated.
+ *
+ * @param[out] val
+ *      The value of the specified polar bspline at the specified point.
+ * @param[in] coord
+ *      The coordinate where the value of the polar bspline should be calculated.
+ * @param[in] idx
+ *      The polar bspline of interest.
+ * @return The derivative of the polar bspline (only returned if calculate_derivs is true).
+ */
 template <typename PolarBSplinesRTheta, bool calculate_derivs = true>
 KOKKOS_FUNCTION std::conditional_t<
         calculate_derivs,
@@ -142,6 +151,11 @@ get_polar_bspline_vals_and_derivs(double& val, CoordRTheta coord, Idx<PolarBSpli
  * in both the radial and poloidal directions. In order to return a contiguous range
  * the result may include indices which are outside the domain. A modulo operator
  * should be applied before using the indices.
+ * 
+ * @tparam QDimRMesh Quadrature mesh in radial direction.
+ * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
+ * @tparam BSplinesR Splines in radial direction.
+ * @tparam BSplinesTheta Splines in poloidal direction.
  *
  * @param[in] start_knot_r
  *      The index of the knot describing the lower bound of the domain of interest
