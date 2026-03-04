@@ -1,14 +1,17 @@
 #pragma once
 #include "ddc_aliases.hpp"
 
-template <class Basis, class DataType = double>
+template <class CoeffGrid, class DataType = double>
 class ConstantIdentityInterpolationExtrapolationRule
 {
 private:
-    Idx<Basis> m_coeff_idx;
+    Idx<CoeffGrid> m_coeff_idx;
 
 public:
-    ConstantIdentityInterpolationExtrapolationRule(Idx<Basis> coeff_idx) : m_coeff_idx(coeff_idx) {}
+    ConstantIdentityInterpolationExtrapolationRule(Idx<CoeffGrid> coeff_idx)
+        : m_coeff_idx(coeff_idx)
+    {
+    }
 
     /**
      * @brief Get the value of the function on B-splines at a coordinate outside the domain.
@@ -21,7 +24,7 @@ public:
     template <class CoordType, class Layout, class MemorySpace>
     KOKKOS_FUNCTION double operator()(
             [[maybe_unused]] CoordType pos,
-            ConstField<DataType, IdxRange<Basis>, Layout, MemorySpace> const interp_coef) const
+            ConstField<DataType, IdxRange<CoeffGrid>, Layout, MemorySpace> const interp_coef) const
     {
         return interp_coef(m_coeff_idx);
     }

@@ -36,25 +36,29 @@ public:
             InterpGrid,
             Basis>;
 
+    using CoeffGridType = typename BuilderType::basis_domain_type;
+
     using EvaluatorType = LagrangeEvaluator<
             ExecSpace,
             typename ExecSpace::memory_space,
             DataType,
             Basis,
             InterpGrid,
-            extrapolation_rule_t<MinExtrapRule, Basis>,
-            extrapolation_rule_t<MaxExtrapRule, Basis>>;
+            extrapolation_rule_t<MinExtrapRule, CoeffGridType>,
+            extrapolation_rule_t<MaxExtrapRule, CoeffGridType>>;
 
 private:
-    extrapolation_rule_t<MinExtrapRule, Basis> m_min_extrapolation;
-    extrapolation_rule_t<MaxExtrapRule, Basis> m_max_extrapolation;
+    extrapolation_rule_t<MinExtrapRule, CoeffGridType> m_min_extrapolation;
+    extrapolation_rule_t<MaxExtrapRule, CoeffGridType> m_max_extrapolation;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
 public:
     LagrangeInterpolator()
-        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
+        : m_min_extrapolation(
+                get_extrapolation<MinExtrapRule, CoeffGridType, Basis>(Extremity::FRONT))
+        , m_max_extrapolation(
+                  get_extrapolation<MaxExtrapRule, CoeffGridType, Basis>(Extremity::BACK))
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
