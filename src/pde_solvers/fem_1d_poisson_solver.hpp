@@ -276,10 +276,7 @@ public:
         solve_matrix_system(phi_coefs, rho);
 
         m_spline_fem_evaluator(phi, get_const_field(phi_coefs));
-        m_spline_fem_evaluator
-                .deriv(Idx<ddc::Deriv<PDEDim>>(1),
-                       E,
-                       get_const_field(phi_coefs));
+        m_spline_fem_evaluator.deriv(Idx<ddc::Deriv<PDEDim>>(1), E, get_const_field(phi_coefs));
 
         ddc::parallel_for_each(
                 exec_space(),
