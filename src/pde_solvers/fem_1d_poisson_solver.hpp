@@ -248,17 +248,7 @@ public:
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
-        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
-        CoordField eval_pts = get_field(eval_pts_alloc);
-
-        ddc::parallel_for_each(
-                exec_space(),
-                get_idx_range(eval_pts),
-                KOKKOS_LAMBDA(full_index const idx) {
-                    eval_pts(idx) = ddc::coordinate(ddc::select<GridPDEDim>(idx));
-                });
-
-        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
+        m_spline_fem_evaluator(phi, get_const_field(phi_coefs));
 
         return phi;
     }
@@ -285,22 +275,8 @@ public:
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
-        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
-        CoordField eval_pts = get_field(eval_pts_alloc);
-
-        ddc::parallel_for_each(
-                exec_space(),
-                get_idx_range(eval_pts),
-                KOKKOS_LAMBDA(full_index const idx) {
-                    eval_pts(idx) = ddc::coordinate(ddc::select<GridPDEDim>(idx));
-                });
-
-        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
-        m_spline_fem_evaluator
-                .deriv(Idx<ddc::Deriv<PDEDim>>(1),
-                       E,
-                       get_const_field(eval_pts),
-                       get_const_field(phi_coefs));
+        m_spline_fem_evaluator(phi, get_const_field(phi_coefs));
+        m_spline_fem_evaluator.deriv(Idx<ddc::Deriv<PDEDim>>(1), E, get_const_field(phi_coefs));
 
         ddc::parallel_for_each(
                 exec_space(),
