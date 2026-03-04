@@ -17,10 +17,6 @@ template <
         class DataType = double>
 class LagrangeInterpolator
 {
-    // Constant not yet implemented for Lagrange
-    static_assert(MinExtrapRule != ExtrapolationRule::CONSTANT);
-    static_assert(MaxExtrapRule != ExtrapolationRule::CONSTANT);
-
     using continuous_dimension_type = typename InterpGrid::continuous_dimension_type;
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
