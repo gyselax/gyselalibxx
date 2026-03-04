@@ -10,6 +10,7 @@
 #include "bsl_advection_1d.hpp"
 #include "euler.hpp"
 #include "species_info.hpp"
+#include "spline_interpolation.hpp"
 
 
 namespace {
@@ -99,21 +100,14 @@ using FieldXVx = Field<ElementType, IdxRangeXVx>;
 
 
 // Operators
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
+        PERIODIC,
+        PERIODIC,
         SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        SplineXBoundary>;
 
 
 class Spatial1DAdvectionTest : public ::testing::Test
@@ -221,23 +215,24 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
 {
     IdxRangeSpXVx meshSpXVx(idx_range_allsp, idx_range_x, idx_range_vx);
 
-    SplineXBuilder const builder_x(idx_range_x);
-
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
+    SplineInterpolatorX spline_interpolation(idx_range_x);
 
     EulerBuilder euler;
     BslAdvection1D<
             GridX,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
-            SplineXBuilder,
-            SplineXEvaluator,
-            SplineXBuilder,
-            SplineXEvaluator,
+            typename SplineInterpolatorX::BuilderType,
+            typename SplineInterpolatorX::EvaluatorType,
+            typename SplineInterpolatorX::BuilderType,
+            typename SplineInterpolatorX::EvaluatorType,
             EulerBuilder> const
-            spline_advection_x(builder_x, spline_x_evaluator, builder_x, spline_x_evaluator, euler);
+            spline_advection_x(
+                    spline_interpolation.get_builder(),
+                    spline_interpolation.get_evaluator(),
+                    spline_interpolation.get_builder(),
+                    spline_interpolation.get_evaluator(),
+                    euler);
 
     double const err = SpatialAdvection(spline_advection_x);
     EXPECT_LE(err, 1.e-6);

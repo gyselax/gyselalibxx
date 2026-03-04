@@ -13,6 +13,7 @@
 #include "ddc_helper.hpp"
 #include "itimestepper.hpp"
 #include "rk2.hpp"
+#include "spline_interpolation.hpp"
 #include "vector_field_common.hpp"
 
 namespace {
@@ -99,21 +100,14 @@ using DFieldXVx = FieldXVx<double>;
 
 
 // Operators
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
+        PERIODIC,
+        PERIODIC,
         SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        SplineXBoundary>;
 
 
 class XVxAdvection1DTest : public ::testing::Test
@@ -220,23 +214,24 @@ public:
 TEST_F(XVxAdvection1DTest, AdvectionXVx)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder_x(idx_range_x);
-
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
+    SplineInterpolatorX spline_interpolation(idx_range_x);
 
     RK2Builder time_stepper;
     BslAdvection1D<
             GridX,
             IdxRangeXVx,
             IdxRangeXVx,
-            SplineXBuilder,
-            SplineXEvaluator,
-            SplineXBuilder,
-            SplineXEvaluator,
+            typename SplineInterpolatorX::BuilderType,
+            typename SplineInterpolatorX::EvaluatorType,
+            typename SplineInterpolatorX::BuilderType,
+            typename SplineInterpolatorX::EvaluatorType,
             RK2Builder> const
-            advection(builder_x, spline_evaluator_x, builder_x, spline_evaluator_x, time_stepper);
+            advection(
+                    spline_interpolation.get_builder(),
+                    spline_interpolation.get_evaluator(),
+                    spline_interpolation.get_builder(),
+                    spline_interpolation.get_evaluator(),
+                    time_stepper);
 
     double const max_relative_error = AdvectionXVx(advection);
     EXPECT_LE(max_relative_error, 5.e-7);
