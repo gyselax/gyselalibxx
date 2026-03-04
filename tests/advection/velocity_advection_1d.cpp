@@ -284,17 +284,9 @@ TEST_F(Velocity1DAdvectionTest, BatchedLagrange)
             GridVx,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
-            typename LagrangeInterpolatorVx::BuilderType,
-            typename LagrangeInterpolatorVx::EvaluatorType,
-            typename LagrangeInterpolatorVx::BuilderType,
-            typename LagrangeInterpolatorVx::EvaluatorType,
-            EulerBuilder> const
-            lagrange_advection_vx(
-                    lag_interpolation.get_builder(),
-                    lag_interpolation.get_evaluator(),
-                    lag_interpolation.get_builder(),
-                    lag_interpolation.get_evaluator(),
-                    euler);
+            LagrangeInterpolatorVx,
+            LagrangeInterpolatorVx,
+            EulerBuilder> const lagrange_advection_vx(lag_interpolation, lag_interpolation, euler);
 
 
     double const err = VelocityAdvection(lagrange_advection_vx, lag_interpolation.get_builder());
@@ -314,17 +306,9 @@ TEST_F(Velocity1DAdvectionTest, SplineBatched)
             GridVx,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
-            typename SplineInterpolatorVx::BuilderType,
-            typename SplineInterpolatorVx::EvaluatorType,
-            typename SplineInterpolatorVx::BuilderType,
-            typename SplineInterpolatorVx::EvaluatorType,
-            EulerBuilder> const
-            spline_advection_vx(
-                    interpolator_vx.get_builder(),
-                    interpolator_vx.get_evaluator(),
-                    interpolator_vx.get_builder(),
-                    interpolator_vx.get_evaluator(),
-                    euler);
+            SplineInterpolatorVx,
+            SplineInterpolatorVx,
+            EulerBuilder> const spline_advection_vx(interpolator_vx, interpolator_vx, euler);
 
 
     double const err = VelocityAdvection(spline_advection_vx, interpolator_vx.get_builder());

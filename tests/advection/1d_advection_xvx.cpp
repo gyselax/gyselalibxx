@@ -221,17 +221,9 @@ TEST_F(XVxAdvection1DTest, AdvectionXVx)
             GridX,
             IdxRangeXVx,
             IdxRangeXVx,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
-            RK2Builder> const
-            advection(
-                    spline_interpolation.get_builder(),
-                    spline_interpolation.get_evaluator(),
-                    spline_interpolation.get_builder(),
-                    spline_interpolation.get_evaluator(),
-                    time_stepper);
+            SplineInterpolatorX,
+            SplineInterpolatorX,
+            RK2Builder> const advection(spline_interpolation, spline_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionXVx(advection);
     EXPECT_LE(max_relative_error, 5.e-7);

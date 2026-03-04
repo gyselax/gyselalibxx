@@ -204,17 +204,9 @@ TEST_F(XAdvection1DTestDouble, AdvectionX)
             GridX,
             IdxRangeX,
             IdxRangeX,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
-            RK2Builder> const
-            advection(
-                    spline_interpolation.get_builder(),
-                    spline_interpolation.get_evaluator(),
-                    spline_interpolation.get_builder(),
-                    spline_interpolation.get_evaluator(),
-                    time_stepper);
+            SplineInterpolatorX,
+            SplineInterpolatorX,
+            RK2Builder> const advection(spline_interpolation, spline_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);
@@ -233,17 +225,9 @@ TEST_F(XAdvection1DTestDouble, AdvectionXLagrange)
             GridX,
             IdxRangeX,
             IdxRangeX,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
-            typename LagrangeInterpolatorX::BuilderType,
-            typename LagrangeInterpolatorX::EvaluatorType,
-            RK2Builder> const
-            advection(
-                    spline_interpolation.get_builder(),
-                    spline_interpolation.get_evaluator(),
-                    lag_interpolation.get_builder(),
-                    lag_interpolation.get_evaluator(),
-                    time_stepper);
+            SplineInterpolatorX,
+            LagrangeInterpolatorX,
+            RK2Builder> const advection(spline_interpolation, lag_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-2);
@@ -261,18 +245,10 @@ TEST_F(XAdvection1DTestFloat, AdvectionX)
             GridX,
             IdxRangeX,
             IdxRangeX,
-            typename LagrangeInterpolatorFloatX::BuilderType,
-            typename LagrangeInterpolatorFloatX::EvaluatorType,
-            typename LagrangeInterpolatorFloatX::BuilderType,
-            typename LagrangeInterpolatorFloatX::EvaluatorType,
+            LagrangeInterpolatorFloatX,
+            LagrangeInterpolatorFloatX,
             RK2Builder,
-            float> const
-            advection(
-                    lag_interpolation.get_builder(),
-                    lag_interpolation.get_evaluator(),
-                    lag_interpolation.get_builder(),
-                    lag_interpolation.get_evaluator(),
-                    time_stepper);
+            float> const advection(lag_interpolation, lag_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);

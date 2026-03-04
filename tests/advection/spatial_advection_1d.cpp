@@ -223,17 +223,10 @@ TEST_F(Spatial1DAdvectionTest, SpatialAdvection)
             GridX,
             IdxRangeSpXVx,
             IdxRangeSpXVx,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
+            SplineInterpolatorX,
+            SplineInterpolatorX,
             EulerBuilder> const
-            spline_advection_x(
-                    spline_interpolation.get_builder(),
-                    spline_interpolation.get_evaluator(),
-                    spline_interpolation.get_builder(),
-                    spline_interpolation.get_evaluator(),
-                    euler);
+            spline_advection_x(spline_interpolation, spline_interpolation, euler);
 
     double const err = SpatialAdvection(spline_advection_x);
     EXPECT_LE(err, 1.e-6);

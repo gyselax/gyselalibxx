@@ -316,32 +316,18 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
             GridX,
             IdxRangeXY,
             IdxRangeXYVxVy,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType,
+            SplineInterpolatorX,
+            SplineInterpolatorX,
             RK2Builder> const
-            advection_x(
-                    spline_interpolation_x.get_builder(),
-                    spline_interpolation_x.get_evaluator(),
-                    spline_interpolation_x.get_builder(),
-                    spline_interpolation_x.get_evaluator(),
-                    time_stepper);
+            advection_x(spline_interpolation_x, spline_interpolation_x, time_stepper);
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXYVxVy,
-            typename SplineInterpolatorY::BuilderType,
-            typename SplineInterpolatorY::EvaluatorType,
-            typename SplineInterpolatorY::BuilderType,
-            typename SplineInterpolatorY::EvaluatorType,
+            SplineInterpolatorY,
+            SplineInterpolatorY,
             RK2Builder> const
-            advection_y(
-                    spline_interpolation_y.get_builder(),
-                    spline_interpolation_y.get_evaluator(),
-                    spline_interpolation_y.get_builder(),
-                    spline_interpolation_y.get_evaluator(),
-                    time_stepper);
+            advection_y(spline_interpolation_y, spline_interpolation_y, time_stepper);
 
 
     double const max_relative_error = AdvectionXY(advection_x, advection_y);
