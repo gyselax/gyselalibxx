@@ -1,5 +1,6 @@
 #pragma once
 #include "i_interpolation.hpp"
+#include "constant_identity_interpolation_extrapolation_rule.hpp"
 
 namespace details {
 
@@ -31,7 +32,7 @@ struct GetExtrapolationRuleClass<CONSTANT, Basis>
 } // namespace details
 
 template <ExtrapolationRule Rule, class Basis>
-using extrapolation_rule_t = GetExtrapolationRuleClass<Rule, Basis>::type;
+using extrapolation_rule_t = details::GetExtrapolationRuleClass<Rule, Basis>::type;
 
 template <ExtrapolationRule Rule, class Basis>
 extrapolation_rule_t<Rule, Basis> get_extrapolation(Extremity extremity)

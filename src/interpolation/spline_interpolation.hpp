@@ -42,19 +42,19 @@ public:
             typename ExecSpace::memory_space,
             Basis,
             InterpGrid,
-            details::extrapolation_rule_t<MinExtrapRule, Basis>,
-            details::extrapolation_rule_t<MaxExtrapRule, Basis>>;
+            extrapolation_rule_t<MinExtrapRule, Basis>,
+            extrapolation_rule_t<MaxExtrapRule, Basis>>;
 
 private:
-    details::extrapolation_rule_t<MinExtrapRule, Basis> m_min_extrapolation;
-    details::extrapolation_rule_t<MaxExtrapRule, Basis> m_max_extrapolation;
+    extrapolation_rule_t<MinExtrapRule, Basis> m_min_extrapolation;
+    extrapolation_rule_t<MaxExtrapRule, Basis> m_max_extrapolation;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
 public:
     SplineInterpolator(IdxRange<InterpGrid> idx_range)
-        : m_min_extrapolation(details::get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
-        , m_max_extrapolation(details::get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
+        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
         , m_builder(idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
