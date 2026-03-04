@@ -22,25 +22,20 @@
  *                  By default: the 1D index range of the interpolation points for the spline builder.
  */
 template <
-        class SplineBuilder,
-        class SplineEvaluator,
-        class IdxRangeBatched = typename SplineBuilder::interpolation_domain_type>
+        class SplineInterpolatorType class IdxRangeBatched =
+                typename SplineInterpolatorType::BuilderType::interpolation_domain_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
-              typename SplineEvaluator::evaluation_domain_type,
+              typename SplineInterpolatorType::EvaluatorType::evaluation_domain_type,
               IdxRangeBatched,
               double,
-              typename SplineEvaluator::memory_space,
+              typename SplineInterpolatorType::EvaluatorType::memory_space,
               Kokkos::layout_right>
 {
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::interpolation_discrete_dimension_type,
-                  typename SplineEvaluator::evaluation_discrete_dimension_type>);
-    static_assert(ddc::in_tags_v<
-                  typename SplineBuilder::interpolation_discrete_dimension_type,
-                  ddc::to_type_seq_t<IdxRangeBatched>>);
-
 private:
+    using SplineBuilder = typename SplineInterpolatorType::BuilderType;
+    using SplineEvaluator = typename SplineInterpolatorType::EvaluatorType;
+
     using base_type = IPoissonSolver<
             typename SplineEvaluator::evaluation_domain_type,
             IdxRangeBatched,
@@ -203,10 +198,10 @@ public:
      * @param spline_builder A spline builder which calculates the coefficients of a spline representation.
      * @param spline_evaluator A spline evaluator which provides the value of a spline representation from its coefficients.
      */
-    FEM1DPoissonSolver(SplineBuilder const& spline_builder, SplineEvaluator const& spline_evaluator)
-        : m_spline_builder(spline_builder)
-        , m_spline_evaluator(spline_evaluator)
-        , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_evaluator))
+    FEM1DPoissonSolver(SplineInterpolator const& spline_interpolator)
+        : m_spline_builder(spline_interpolator.get_builder())
+        , m_spline_evaluator(spline_interpolator.get_evaluator())
+        , m_spline_fem_evaluator(jit_build_nubsplinesx(m_spline_evaluator))
     {
         using break_point_grid = ddc::knot_discrete_dimension_t<InputBSplines>;
         IdxRange<break_point_grid> break_point_idx_range
@@ -248,17 +243,7 @@ public:
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
-        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
-        CoordField eval_pts = get_field(eval_pts_alloc);
-
-        ddc::parallel_for_each(
-                exec_space(),
-                get_idx_range(eval_pts),
-                KOKKOS_LAMBDA(full_index const idx) {
-                    eval_pts(idx) = ddc::coordinate(ddc::select<GridPDEDim>(idx));
-                });
-
-        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
+        m_spline_fem_evaluator(phi, get_const_field(phi_coefs));
 
         return phi;
     }
@@ -285,22 +270,8 @@ public:
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
-        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
-        CoordField eval_pts = get_field(eval_pts_alloc);
-
-        ddc::parallel_for_each(
-                exec_space(),
-                get_idx_range(eval_pts),
-                KOKKOS_LAMBDA(full_index const idx) {
-                    eval_pts(idx) = ddc::coordinate(ddc::select<GridPDEDim>(idx));
-                });
-
-        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
-        m_spline_fem_evaluator
-                .deriv(Idx<ddc::Deriv<PDEDim>>(1),
-                       E,
-                       get_const_field(eval_pts),
-                       get_const_field(phi_coefs));
+        m_spline_fem_evaluator(phi, get_const_field(phi_coefs));
+        m_spline_fem_evaluator.deriv(Idx<ddc::Deriv<PDEDim>>(1), E, get_const_field(phi_coefs));
 
         ddc::parallel_for_each(
                 exec_space(),
