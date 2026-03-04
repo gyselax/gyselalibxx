@@ -109,19 +109,21 @@ int main(int argc, char** argv)
             GridX,
             typename SplineInterpolatorX::BuilderType,
             typename SplineInterpolatorX::EvaluatorType> const
-            advection_x(spline_interpolation_x.get_builder(), spline_interpolation_x.get_evaluator());
+            advection_x(
+                    spline_interpolation_x.get_builder(),
+                    spline_interpolation_x.get_evaluator());
     BslAdvectionVelocity<
             GeometryXVx,
             GridVx,
             typename SplineInterpolatorVx::BuilderType,
             typename SplineInterpolatorVx::EvaluatorType> const
-            advection_vx(spline_interpolation_vx.get_builder(), spline_interpolation_vx.get_evaluator());
+            advection_vx(
+                    spline_interpolation_vx.get_builder(),
+                    spline_interpolation_vx.get_evaluator());
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    FEM1DPoissonSolver fem_solver(
-            spline_interpolation_x.get_builder(),
-            spline_interpolation_x.get_evaluator());
+    FEM1DPoissonSolver fem_solver(spline_interpolation_x);
     DFieldMemVx const quadrature_coeffs = neumann_spline_quadrature_coefficients<
             Kokkos::DefaultExecutionSpace>(mesh_vx, spline_interpolation_vx.get_builder());
     ChargeDensityCalculator rhs(get_field(quadrature_coeffs));

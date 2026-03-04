@@ -61,7 +61,7 @@ TEST(FemNonPeriodicPoissonSolver, Ordering)
 
     SplineXInterpolator const interpolator_x(gridx);
 
-    FEM1DPoissonSolver poisson(interpolator_x.get_builder(), interpolator_x.get_evaluator());
+    FEM1DPoissonSolver poisson(interpolator_x);
 
     host_t<DFieldMemX> electrostatic_potential_host(gridx);
     host_t<DFieldMemX> electric_field_host(gridx);

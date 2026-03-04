@@ -76,7 +76,7 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
 
     SplineXInterpolator const interpolator_x(gridx);
 
-    FEM1DPoissonSolver poisson(interpolator_x.get_builder(), interpolator_x.get_evaluator());
+    FEM1DPoissonSolver poisson(interpolator_x);
 
     host_t<DFieldMemX> electrostatic_potential_host(gridx);
     host_t<DFieldMemX> electric_field_host(gridx);
@@ -131,11 +131,7 @@ TEST(FemPeriodicPoissonSolver, BatchedCosineSource)
 
     SplineXInterpolator const interpolator_x(gridx);
 
-    FEM1DPoissonSolver<
-            typename SplineXInterpolator::BuilderType,
-            typename SplineXInterpolator::EvaluatorType,
-            IdxRangeBatchX>
-            poisson(interpolator_x.get_builder(), interpolator_x.get_evaluator());
+    FEM1DPoissonSolver<SplineXInterpolator, IdxRangeBatchX> poisson(interpolator_x);
 
     host_t<DFieldMemBatchX> electrostatic_potential_host(gridbx);
     host_t<DFieldMemBatchX> electric_field_host(gridbx);
