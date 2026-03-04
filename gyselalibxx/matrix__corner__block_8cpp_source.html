@@ -625,7 +625,7 @@ double Matrix_Corner_Block::get_element(int const i, int const j) const
     assert(i &gt;= 0);
     assert(i &lt; n);
     assert(j &gt;= 0);
-    assert(i &lt; n);
+    assert(j &lt; n);
     if (i &lt; nb &amp;&amp; j &lt; nb) {
         return q_block-&gt;get_element(i, j);
     } else if (i &gt;= nb &amp;&amp; j &gt;= nb) {
@@ -642,7 +642,7 @@ void Matrix_Corner_Block::set_element(int const i, int const j, double const a_i
     assert(i &gt;= 0);
     assert(i &lt; n);
     assert(j &gt;= 0);
-    assert(i &lt; n);
+    assert(j &lt; n);
     if (i &lt; nb &amp;&amp; j &lt; nb) {
         q_block-&gt;set_element(i, j, a_ij);
     } else if (i &gt;= nb &amp;&amp; j &gt;= nb) {
