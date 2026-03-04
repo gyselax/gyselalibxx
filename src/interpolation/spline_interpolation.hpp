@@ -8,10 +8,10 @@ template <
         class ExecSpace,
         class Basis,
         class InterpGrid,
-        ddc::BoundCond MinBound,
-        ddc::BoundCond MaxBound,
         ExtrapolationRule MinExtrapRule,
         ExtrapolationRule MaxExtrapRule,
+        ddc::BoundCond MinBound,
+        ddc::BoundCond MaxBound,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
 class SplineInterpolator
 {

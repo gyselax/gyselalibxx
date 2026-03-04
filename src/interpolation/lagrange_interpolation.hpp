@@ -10,10 +10,10 @@ template <
         class ExecSpace,
         class Basis,
         class InterpGrid,
-        ddc::BoundCond MinBound,
-        ddc::BoundCond MaxBound,
         ExtrapolationRule MinExtrapRule,
         ExtrapolationRule MaxExtrapRule,
+        ddc::BoundCond MinBound = ddc::BoundCond::GREVILLE,
+        ddc::BoundCond MaxBound = ddc::BoundCond::GREVILLE,
         class DataType = double>
 class LagrangeInterpolator
 {
@@ -56,10 +56,9 @@ private:
     EvaluatorType m_evaluator;
 
 public:
-    LagrangeInterpolator(IdxRange<InterpGrid> idx_range)
+    LagrangeInterpolator()
         : m_min_extrapolation(details::get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
         , m_max_extrapolation(details::get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
-        , m_builder(idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
