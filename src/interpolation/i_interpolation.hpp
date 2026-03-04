@@ -37,4 +37,4 @@ constexpr bool is_lagrange_basis_v
 
 template <class Basis>
 constexpr bool is_spline_basis_v
-        = iddc::is_uniform_bsplines_v<Basis> || ddc::is_non_uniform_bsplines_v<Basis>;
+        = ddc::is_uniform_bsplines_v<Basis> || ddc::is_non_uniform_bsplines_v<Basis>;
