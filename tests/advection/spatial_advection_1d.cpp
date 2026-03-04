@@ -9,6 +9,7 @@
 
 #include "bsl_advection_1d.hpp"
 #include "euler.hpp"
+#include "i_interpolation.hpp"
 #include "species_info.hpp"
 #include "spline_interpolation.hpp"
 
