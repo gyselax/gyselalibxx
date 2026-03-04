@@ -51,9 +51,6 @@ TEST(KrookSource, Adaptive)
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
     IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
 
-    SplineXBuilder const builder_x(gridx);
-    SplineVxBuilder const builder_vx(gridvx);
-
     IdxRangeSp const gridsp = idx_range_sp;
     IdxRangeSpXVx const mesh(gridsp, gridx, gridvx);
 
@@ -188,9 +185,6 @@ TEST(KrookSource, Constant)
 
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
     IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
-
-    SplineXBuilder const builder_x(gridx);
-    SplineVxBuilder const builder_vx(gridvx);
 
     IdxRangeSp const gridsp = idx_range_sp;
 
