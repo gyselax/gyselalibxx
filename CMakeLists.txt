@@ -89,7 +89,7 @@ find_package(Kokkos 4.4.1...<5 REQUIRED)
 
 find_package(KokkosKernels 4.5.1...<5 REQUIRED)
 
-find_package(DDC 0.10.0 QUIET COMPONENTS fft pdi splines)
+find_package(DDC 0.11.0 QUIET COMPONENTS fft pdi splines)
 if(NOT "${DDC_FOUND}")
   ## Use the discrete domain computation library (ddc) from `vendor/`
   add_subdirectory(vendor/ddc SYSTEM)
@@ -105,6 +105,8 @@ if(NOT "${koliop_FOUND}")
 endif()
 
 find_package(LAPACKE REQUIRED)
+
+find_package(Ginkgo 1.8 REQUIRED)
 
 ###############################################################################################
 #                              Build libraries and executables

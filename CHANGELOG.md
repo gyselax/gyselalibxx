@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
 - Use GCC 14 in the Jean-Zay toolchain.
 - Reduce memory footprint of `FEM1DPoissonSolver`.
+- Update DDC to [v0.11.0](https://github.com/CExA-project/ddc/releases/tag/v0.11.0).
 
 ### Deprecated
 

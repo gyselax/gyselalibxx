@@ -16,6 +16,7 @@ target_link_libraries(matrix_tools
         DDC::core
         DDC::splines
         Kokkos::kokkos
+        Ginkgo::ginkgo
         gslx::utils
         LAPACKE::LAPACKE
 )

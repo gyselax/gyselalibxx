@@ -60,10 +60,10 @@ public:
 
 public:
     /// @brief The number of equations defining the boundary condition at the lower bound.
-    static constexpr int s_nbc_xmin = 0;
+    static constexpr int s_nbe_xmin = 0;
 
     /// @brief The number of equations defining the boundary condition at the upper bound.
-    static constexpr int s_nbc_xmax = 0;
+    static constexpr int s_nbe_xmax = 0;
 
 public:
     IdentityInterpolationBuilder() = default;
