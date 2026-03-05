@@ -6,6 +6,11 @@ if [[ "${BASH_SOURCE[0]}" != "${0}" ]]; then
     return 1
 fi
 
+if [[ "$(id -gn)" != "gysela" ]]; then
+    echo "Primary group must be 'gysela'!" >&2
+    exit 1
+fi
+
 set -eu
 
 module purge

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
-
 #pragma once
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
 #include <ddc/kernels/splines/deriv.hpp>
 
@@ -8,59 +9,68 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"
-#include "iinterpolator.hpp"
+#include "i_interpolation_builder.hpp"
+#include "i_interpolation_evaluator.hpp"
 #include "itimestepper.hpp"
 
 
 /**
- * @brief A class which computes the advection along the dimension of interest GridInterest. 
- * 
- * This operator solves the following equation type
- * 
- * @f$ \partial_t f_s(t,x) + A_{s, x_i} (x') \cdot \partial_{x_i} f_s (t, x) = 0, \qquad x\in \Omega, x'\in\Omega'@f$
- * 
- * with 
+ * @brief A class which computes the advection along the dimension of interest GridInterest.
  *
- *  * @f$ f @f$, a function defined on an domain @f$ \Omega @f$; 
- *  * @f$ A @f$, an advection field defined on subdomain @f$ \Omega'\subset \Omega @f$; 
+ * This operator solves the following equation type
+ *
+ * @f$ \partial_t f_s(t,x) + A_{s, x_i} (x') \cdot \partial_{x_i} f_s (t, x) = 0, \qquad x\in \Omega, x'\in\Omega'@f$
+ *
+ * with
+ *
+ *  * @f$ f @f$, a function defined on an domain @f$ \Omega @f$;
+ *  * @f$ A @f$, an advection field defined on subdomain @f$ \Omega'\subset \Omega @f$;
  *  * @f$ x_i @f$, an advection dimension.
- * 
- * 
- * The characteristic equation is solved on the advection domain @f$ \Omega'@f$. 
- * Then the feet on @f$ \Omega@f$ are computed from the characteristic feet on @f$ \Omega'@f$ and the function 
- * @f$ f @f$ is interpolated at the feet in @f$ \Omega @f$. 
- * 
- * The characteristic equation is solved using a time integration method (ITimeStepper). 
- * 
- * 
+ *
+ *
+ * The characteristic equation is solved on the advection domain @f$ \Omega'@f$.
+ * Then the feet on @f$ \Omega@f$ are computed from the characteristic feet on @f$ \Omega'@f$ and the function
+ * @f$ f @f$ is interpolated at the feet in @f$ \Omega @f$.
+ *
+ * The characteristic equation is solved using a time integration method (ITimeStepper).
+ *
+ *
  * @tparam GridInterest
- *          The dimension along which the advection is computed. 
- *          It refers to the dimension of @f$ x_i @f$ in the equation. 
+ *          The dimension along which the advection is computed.
+ *          It refers to the dimension of @f$ x_i @f$ in the equation.
  * @tparam IdxRangeAdvection
- *          The index range for the interpolation points defined on @f$ \Omega' @f$ 
- *          where the characteristic equation is solved. 
- *          @f$ \Omega' @f$ also refers to the domain of the advection field. 
- *          It had to also be defined on the GridInterest for the time integration method. 
+ *          The index range for the interpolation points defined on @f$ \Omega' @f$
+ *          where the characteristic equation is solved.
+ *          @f$ \Omega' @f$ also refers to the domain of the advection field.
+ *          It had to also be defined on the GridInterest for the time integration method.
  * @tparam IdxRangeFunction
- *          The index range of @f$ \Omega @f$ where allfdistribu is defined. 
+ *          The index range of @f$ \Omega @f$ where allfdistribu is defined.
+ * @tparam FunctionBuilder
+ *          The type of the interpolation builder for the advected function along GridInterest.
+ * @tparam FunctionEvaluator
+ *          The type of the interpolation evaluator for the advected function along GridInterest.
  * @tparam AdvectionFieldBuilder
- *          The type of the spline builder for the advection field (see SplineBuilder). 
+ *          The type of the spline builder for the advection field (see SplineBuilder).
  * @tparam AdvectionFieldEvaluator
- *          The type of the spline evaluator for the advection field (see SplineEvaluator).  
+ *          The type of the spline evaluator for the advection field (see SplineEvaluator).
  * @tparam TimeStepperBuilder
  *          A time stepper builder indicating which time integration method should be
- *          applied to solve the characteristic equation. 
+ *          applied to solve the characteristic equation.
  */
 template <
         class GridInterest,
         class IdxRangeAdvection,
         class IdxRangeFunction,
-        class AdvectionFieldBuilder,
-        class AdvectionFieldEvaluator,
-        class TimeStepperBuilder = EulerBuilder>
+        concepts::InterpolationBuilder FunctionBuilder,
+        concepts::InterpolationEvaluator FunctionEvaluator,
+        concepts::InterpolationBuilder AdvectionFieldBuilder,
+        concepts::InterpolationEvaluator AdvectionFieldEvaluator,
+        class TimeStepperBuilder = EulerBuilder,
+        class DataType = double>
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
+    static_assert(std::is_floating_point_v<DataType>);
 
 private:
     // Advection index range element:
@@ -80,41 +90,39 @@ private:
     using FeetField = typename FeetFieldMem::span_type;
     using FeetConstField = typename FeetFieldMem::view_type;
 
-    using AdvecFieldMem = DFieldMem<IdxRangeAdvection>;
+    using AdvecFieldMem = FieldMem<DataType, IdxRangeAdvection>;
     using AdvecField = typename AdvecFieldMem::span_type;
 
-    using FunctionField = DField<IdxRangeFunction>;
+    using FunctionField = Field<DataType, IdxRangeFunction>;
 
     // Type for spline representation of the advection field
-    using IdxRangeBSAdvection =
-            typename AdvectionFieldBuilder::template batched_spline_domain_type<IdxRangeAdvection>;
-    using AdvecFieldSplineMem = DFieldMem<IdxRangeBSAdvection>;
-    using AdvecFieldSplineCoeffs = DField<IdxRangeBSAdvection>;
+    using IdxRangeBSAdvection = typename InterpolationBuilderTraits<
+            AdvectionFieldBuilder>::template batched_basis_idx_range_type<IdxRangeAdvection>;
+    using AdvecFieldSplineMem = FieldMem<DataType, IdxRangeBSAdvection>;
+    using AdvecFieldSplineCoeffs = Field<DataType, IdxRangeBSAdvection>;
 
     // Type for the derivatives of the advection field
     using DerivDim = ddc::Deriv<DimInterest>;
     using IdxRangeAdvecFieldDeriv
             = ddc::replace_dim_of_t<IdxRangeAdvection, GridInterest, DerivDim>;
-    using AdvecFieldDerivConstField = Field<const double, IdxRangeAdvecFieldDeriv>;
+    using AdvecFieldDerivConstField = Field<const DataType, IdxRangeAdvecFieldDeriv>;
 
-
-    // Interpolators:
-    using FunctionPreallocatableInterpolatorType = interpolator_on_idx_range_t<
-            IPreallocatableInterpolator,
-            GridInterest,
-            IdxRangeFunction>;
-    using FunctionInterpolatorType
-            = interpolator_on_idx_range_t<IInterpolator, GridInterest, IdxRangeFunction>;
+    // Type for the spline representation of the function
+    using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
+            FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeFunction>;
+    using FunctionBasisFieldMem = FieldMem<DataType, IdxRangeFunctionBasis>;
 
     // Type for the derivatives of the function
-    using IdxRangeFunctionDeriv = typename FunctionInterpolatorType::batched_derivs_idx_range_type;
-    using FunctionDerivFieldMem = DFieldMem<IdxRangeFunctionDeriv>;
+    using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
+            FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeFunction>;
+    using FunctionDerivFieldMem = FieldMem<DataType, IdxRangeFunctionDeriv>;
 
     using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
             FieldMem<Coord<typename GridInterest::continuous_dimension_type>, IdxRangeAdvection>,
-            DFieldMem<IdxRangeAdvection>>;
+            FieldMem<DataType, IdxRangeAdvection>>;
 
-    FunctionPreallocatableInterpolatorType const& m_function_interpolator;
+    FunctionBuilder const& m_function_builder;
+    FunctionEvaluator const& m_function_evaluator;
 
     AdvectionFieldBuilder const& m_adv_field_builder;
     AdvectionFieldEvaluator const& m_adv_field_evaluator;
@@ -123,29 +131,34 @@ private:
 
 public:
     /**
-     * @brief Constructor when the advection domain and the function domain are different. 
-     * 
-     * When IdxRangeAdvection and IdxRangeFunction are different, we need one interpolator for 
-     * each index range. 
-     * 
-     * We can also use it when we want two different interpolators but defined on the same 
+     * @brief Constructor when the advection domain and the function domain are different.
+     *
+     * When IdxRangeAdvection and IdxRangeFunction are different, we need one builder and
+     * evaluator for each index range.
+     *
+     * We can also use it when we want two different builders/evaluators but defined on the same
      * domain (e.g. different boundary conditions for the evaluators).
-     * 
-     * @param[in] function_interpolator Interpolator along the GridInterest direction to interpolate 
-     *          the advected function (allfdistribu) on the domain of the function.
+     *
+     * @param[in] function_builder Builder along the GridInterest direction used to build
+     *          the interpolation representation of the advected function (allfdistribu)
+     *          on the domain of the function.
+     * @param[in] function_evaluator Evaluator along the GridInterest direction used to
+     *          evaluate the advected function at the characteristic feet.
      * @param[in] adv_field_builder Builder along the GridInterest direction to build a spline representation
-     *          of the advection field on the function domain. 
-     * @param[in] adv_field_evaluator Evaluator along the GridInterest direction to evaluate 
-     *          the advection field spline representation on the function domain.  
+     *          of the advection field on the function domain.
+     * @param[in] adv_field_evaluator Evaluator along the GridInterest direction to evaluate
+     *          the advection field spline representation on the function domain.
      * @param[in] time_stepper_builder A builder for the time integration method used
-     *          for the characteristic equation. 
+     *          for the characteristic equation.
      */
     explicit BslAdvection1D(
-            FunctionPreallocatableInterpolatorType const& function_interpolator,
+            FunctionBuilder const& function_builder,
+            FunctionEvaluator const& function_evaluator,
             AdvectionFieldBuilder const& adv_field_builder,
             AdvectionFieldEvaluator const& adv_field_evaluator,
             TimeStepperBuilder const& time_stepper_builder)
-        : m_function_interpolator(function_interpolator)
+        : m_function_builder(function_builder)
+        , m_function_evaluator(function_evaluator)
         , m_adv_field_builder(adv_field_builder)
         , m_adv_field_evaluator(adv_field_evaluator)
         , m_time_stepper_builder(time_stepper_builder)
@@ -156,21 +169,21 @@ public:
 
     /**
      * @brief Advects allfdistribu along the advection dimension GridInterest for a duration dt.
-     * 
-     * @param[in, out] allfdistribu Reference to the advected function, allocated on the device 
+     *
+     * @param[in, out] allfdistribu Reference to the advected function, allocated on the device
      * @param[in] advection_field Reference to the advection field, allocated on the device.
-     * @param[in] advection_field_derivatives_min Reference to the advection field 
+     * @param[in] advection_field_derivatives_min Reference to the advection field
      *              derivatives at the left side of the interest dimension, allocated on the device.
-     * @param[in] advection_field_derivatives_max Reference to the advection field 
+     * @param[in] advection_field_derivatives_max Reference to the advection field
      *              derivatives at the right side of the interest dimension, allocated on the device.
      * @param[in] dt Time step.
-     * 
-     * @return A reference to the allfdistribu array after advection on dt. 
+     *
+     * @return A reference to the allfdistribu array after advection on dt.
      */
     FunctionField operator()(
             FunctionField const allfdistribu,
             AdvecField const advection_field,
-            double const dt,
+            DataType const dt,
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
             = std::nullopt,
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
@@ -182,14 +195,10 @@ public:
         IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
         IdxRangeAdvection const idx_range_advection = get_idx_range(advection_field);
 
-        std::unique_ptr<FunctionInterpolatorType> const function_interpolator_ptr
-                = m_function_interpolator.preallocate();
-        FunctionInterpolatorType const& function_interpolator = *function_interpolator_ptr;
-
 
         // Build spline representation of the advection field ....................................
         AdvecFieldSplineMem advection_field_coefs_alloc(
-                m_adv_field_builder.batched_spline_domain(get_idx_range(advection_field)));
+                batched_basis_idx_range(m_adv_field_builder, get_idx_range(advection_field)));
         AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);
 
         m_adv_field_builder(
@@ -198,11 +207,15 @@ public:
                 advection_field_derivatives_min,
                 advection_field_derivatives_max);
 
+        // Allocate buffer for the function interpolation coefficients ...........................
+        FunctionBasisFieldMem function_coefs_alloc(
+                batched_basis_idx_range(m_function_builder, idx_range_function));
+
         // Build derivatives on boundaries and fill with zeros....................................
         FunctionDerivFieldMem function_derivatives_min(
-                m_function_interpolator.batched_derivs_idx_range_xmin(idx_range_function));
+                m_function_builder.batched_derivs_xmin_domain(idx_range_function));
         FunctionDerivFieldMem function_derivatives_max(
-                m_function_interpolator.batched_derivs_idx_range_xmax(idx_range_function));
+                m_function_builder.batched_derivs_xmax_domain(idx_range_function));
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
         ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
 
@@ -210,7 +223,7 @@ public:
         /*
             For the time integration solver, the function we advect (here the characteristics)
             need to be defined on the same index range as the advection field. We then work on space
-            slices of the characteristic feet.  
+            slices of the characteristic feet.
         */
         FeetFieldMem slice_feet_alloc(idx_range_advection);
         FeetField slice_feet = get_field(slice_feet_alloc);
@@ -224,10 +237,10 @@ public:
 
         // Compute the characteristic feet .......................................................
         /*
-            We use a time stepper method to solve the charateristic equation. 
-            A TimeStepper needs a function to compute the updated advection field and a function to 
-            compute the updated feet. 
-                * update_adv_field: evaluate the advection field spline at the updated feet. 
+            We use a time stepper method to solve the charateristic equation.
+            A TimeStepper needs a function to compute the updated advection field and a function to
+            compute the updated feet.
+                * update_adv_field: evaluate the advection field spline at the updated feet.
         */
         // The function describing how the derivative of the evolve function is calculated.
         std::function<void(AdvecField, FeetConstField)> update_adv_field
@@ -251,8 +264,8 @@ public:
 
         // Interpolate the function ..............................................................
         /*
-            To interpolate the function we want to advect, we build for the feet a Field defined 
-            on the index range where the function is defined. 
+            To interpolate the function we want to advect, we build for the feet a Field defined
+            on the index range where the function is defined.
         */
         FieldMem<CoordInterest, IdxRangeFunction> feet_alloc(idx_range_function);
         Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
@@ -265,12 +278,18 @@ public:
                 });
 
 
-        // Interpolate the function at the characteristic feet
-        function_interpolator(
+        // Build interpolation coefficients from the function values
+        m_function_builder(
+                get_field(function_coefs_alloc),
+                get_const_field(allfdistribu),
+                std::optional(get_const_field(function_derivatives_min)),
+                std::optional(get_const_field(function_derivatives_max)));
+
+        // Evaluate the function at the characteristic feet
+        m_function_evaluator(
                 allfdistribu,
                 get_const_field(feet),
-                get_const_field(function_derivatives_min),
-                get_const_field(function_derivatives_max));
+                get_const_field(function_coefs_alloc));
 
 
         Kokkos::Profiling::popRegion();

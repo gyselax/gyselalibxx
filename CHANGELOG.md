@@ -7,6 +7,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.6.0] - 2026-03-05
+
+### Added
+
+- Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
+- Add the fluid moments computation in pycall block to the mini-application
+- Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
+- Add `LagrangeEvaluator` to evaluate a Lagrange polynomial centred on a given point.
+- Added error messages when wrong input is provided to a simulation.
+- Add `concepts::InterpolationBuilder` to make `IdentityInterpolationBuilder` and `ddc::SplineBuilder` interchangeable.
+- Add `concepts::InterpolationEvaluator` to make `LagrangeEvaluator` and `ddc::SplineEvaluator` interchangeable.
+- Allow `BslAdvection1D`, `BslAdvectionSpatial`, and `BslAdvectionVelocity` to use variable precision.
+
+### Fixed
+
+- Fix incorrect `memory_space` type alias in `DerivFieldMem`.
+- Fix incorrect `memory_space` type alias in `DerivField`.
+- Fix a memory leak in `DerivFieldMem`.
+- Fix `ddc::coordinate` called on `ddc::DiscreteElement` outside of the domain of definition in `single_interface_derivatives_calculator.hpp` and tests.
+- Fix a memory leak related to an object of type `PC_tree_t` not destroyed.
+- Fix boundary conditions in `single_interface_derivatives_calculator_collection_test.cpp`.
+- Fix the finite differences method on a periodic domain.
+- Fix the warning for using the deprecated target `PDI::pdi` starting from PDI 1.10.1.
+
+### Changed
+
+- Remove `ddc_sync` utility.
+- Use generic binaries in the CPU Spack toolchain.
+- Remove Kokkos-related submodules.
+- Remove recursion from submodules synchronisation.
+- Add missing `module purge` in Persee toolchains.
+- Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
+- Use GCC 14 in the Jean-Zay toolchain.
+- Reduce memory footprint of `FEM1DPoissonSolver`.
+- Update DDC to [v0.11.0](https://github.com/CExA-project/ddc/releases/tag/v0.11.0).
+
+### Deprecated
+
+- Deprecated `Lagrange` class.
+
+### Removed
+
+- Remove the default PDI configuration file for the mini-app.
+- Remove `Interpolator` classes:
+  - `IInterpolator`
+  - `LagrangeInterpolator`
+  - `SplineInterpolator`
+
 ## [v0.5.0] - 2026-02-04
 
 ### Added

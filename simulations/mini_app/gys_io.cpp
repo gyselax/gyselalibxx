@@ -3,6 +3,7 @@
 
 #include <algorithm>
 #include <cstdint>
+#include <filesystem>
 #include <iostream>
 #include <stdexcept>
 #include <string>
@@ -21,7 +22,6 @@
 #include "mpitransposealltoall.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
-#include "pdi_default.yml.hpp"
 #include "pdi_helper.hpp"
 #include "quadrature.hpp"
 #include "species_init.hpp"
@@ -33,6 +33,8 @@ using std::endl;
 using std::string;
 using std::chrono::steady_clock;
 
+namespace fs = std::filesystem;
+
 namespace {
 
 struct ConfigHandles
@@ -41,21 +43,35 @@ struct ConfigHandles
     PC_tree_t conf_pdi;
 };
 
+void display_help(std::string const& exe)
+{
+    std::cerr << "usage: " << exe << " <config_file.yaml> <pdi_config.yaml>" << endl;
+    std::exit(EXIT_FAILURE);
+}
+
 ConfigHandles parse_config_files(int argc, char** argv)
 {
     ConfigHandles configs {};
-    if (argc > 1) {
-        configs.conf_gyselax = PC_parse_path(argv[1]);
+    std::string exe = argv[0];
+    if (argc > 2) {
+        fs::path gysela_config_yml = argv[1];
+        if (gysela_config_yml.extension() != ".yaml" && gysela_config_yml.extension() != ".yml") {
+            std::cerr << "Expected a .yaml file for the config_file.yaml. Received : "
+                      << gysela_config_yml << endl;
+            display_help(exe);
+        }
+        configs.conf_gyselax = PC_parse_path(gysela_config_yml.c_str());
+        fs::path pdi_config_yml = argv[2];
+        if (pdi_config_yml.extension() != ".yaml" && pdi_config_yml.extension() != ".yml") {
+            std::cerr << "Expected a .yaml file for the pdi_config.yaml. Received : "
+                      << pdi_config_yml << endl;
+            display_help(exe);
+        }
+        configs.conf_pdi = PC_parse_path(pdi_config_yml.c_str());
     } else {
-        configs.conf_gyselax = PC_parse_string("");
+        display_help(exe);
     }
     PC_errhandler(PC_NULL_HANDLER);
-
-    if (argc > 2) {
-        configs.conf_pdi = PC_parse_path(argv[2]);
-    } else {
-        configs.conf_pdi = PC_parse_string(PDI_CFG);
-    }
     return configs;
 }
 
@@ -367,6 +383,53 @@ void write_fluid_moments(
     }
 }
 
+void compute_fluid_moments_pycall(
+        int rank,
+        IdxRangeSpTor3DV2D const& local_mesh,
+        IdxRangeSpTor3DV2D const& global_mesh,
+        host_t<DFieldMemSpGrid> const& allfdistribu_host)
+{
+    if (rank == 0) {
+        cout << "Computing Fluid Moments in Pycall event." << endl;
+    }
+
+    // Expose index range for parallel I/O
+    PDI_expose_idx_range(local_mesh, "local_fdistribu");
+    // Expose species extents
+    std::array<std::size_t, 1> species_extents_arr
+            = {static_cast<std::size_t>(global_mesh.template extent<Species>())};
+    PDI_expose("species_extents", species_extents_arr.data(), PDI_OUT);
+    // Expose coordinate extents
+    std::array<std::size_t, 1> tor1_extents_arr
+            = {static_cast<std::size_t>(global_mesh.template extent<GridTor1>().value())};
+    std::array<std::size_t, 1> tor2_extents_arr
+            = {static_cast<std::size_t>(global_mesh.template extent<GridTor2>().value())};
+    std::array<std::size_t, 1> tor3_extents_arr
+            = {static_cast<std::size_t>(global_mesh.template extent<GridTor3>().value())};
+    std::array<std::size_t, 1> vpar_extents_arr
+            = {static_cast<std::size_t>(global_mesh.template extent<GridVpar>().value())};
+    std::array<std::size_t, 1> mu_extents_arr
+            = {static_cast<std::size_t>(global_mesh.template extent<GridMu>().value())};
+    PDI_expose("tor1_extents", tor1_extents_arr.data(), PDI_OUT);
+    PDI_expose("tor2_extents", tor2_extents_arr.data(), PDI_OUT);
+    PDI_expose("tor3_extents", tor3_extents_arr.data(), PDI_OUT);
+    PDI_expose("vpar_extents", vpar_extents_arr.data(), PDI_OUT);
+    PDI_expose("mu_extents", mu_extents_arr.data(), PDI_OUT);
+    // Expose coordinates to PDI
+    expose_mesh_to_pdi("tor1", IdxRange<GridTor1>(global_mesh));
+    expose_mesh_to_pdi("tor2", IdxRange<GridTor2>(global_mesh));
+    expose_mesh_to_pdi("tor3", IdxRange<GridTor3>(global_mesh));
+    expose_mesh_to_pdi("vpar", IdxRange<GridVpar>(global_mesh));
+    expose_mesh_to_pdi("mu", IdxRange<GridMu>(global_mesh));
+    // Expose distribution function to PDI and trigger Pycall Fluid Moments event
+    ddc::PdiEvent("FluidMoments").with("fdistribu_sptor3Dv2D", allfdistribu_host);
+
+    if (rank == 0) {
+        cout << "Fluid Moments computed in Pycall event." << endl;
+    }
+}
+
+
 } // namespace
 
 int main(int argc, char** argv)
@@ -388,11 +451,15 @@ int main(int argc, char** argv)
     //---------------------------------------------------------
     // Read and initialise the configuration
     //---------------------------------------------------------
+    ConfigHandles configs = parse_config_files(argc, argv);
     if (rank == 0) {
         cout << "Initialising 5D particle distribution function." << endl;
     }
-    ConfigHandles configs = parse_config_files(argc, argv);
     PDI_init(configs.conf_pdi);
+    //---------------------------------------------------------
+    // Import Python packages
+    //---------------------------------------------------------
+    ddc::PdiEvent("Init");
     //---------------------------------------------------------
     // Initialisation of the global and local mesh (sp, space, phase-space)
     //---------------------------------------------------------
@@ -428,6 +495,10 @@ int main(int argc, char** argv)
     time_points[1] = steady_clock::now();
     timing_names[0] = "initialisation";
 
+    // Create host version of distribution function for I/O (needed for PDI)
+    host_t<DFieldMemSpGrid> allfdistribu_host(local_mesh);
+    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
+
     if (version == "mpi_transpose") {
         // ------------------------------------------------------------------------------
         // Execute the transpose: from Tor3DSplit to V2DSplit
@@ -440,6 +511,13 @@ int main(int argc, char** argv)
                 Kokkos::DefaultExecutionSpace(), // execution space
                 allfdistribu_v2D_split, // destination (V2DSplit layout)
                 get_const_field(allfdistribu)); // source (Tor3DSplit layout - already local)
+
+        // ------------------------------------------------------------------------------
+    } else if (version == "in-situ-diagnostic") {
+        //-----------------------------------------------------------------------
+        // Compute fluid moments in Python (density, mean velocity, temperature)
+        //-----------------------------------------------------------------------
+        compute_fluid_moments_pycall(rank, local_mesh, global_mesh, allfdistribu_host);
 
         // ------------------------------------------------------------------------------
     }
@@ -456,8 +534,6 @@ int main(int argc, char** argv)
     // Write 5D distribution function and coordinates to file using PDI
     //---------------------------------------------------------
     // Create host version of distribution function for I/O (needed for PDI)
-    host_t<DFieldMemSpGrid> allfdistribu_host(local_mesh);
-    ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
     time_points[4] = steady_clock::now();
     timing_names[3] = "gpu2cpu";
     //---------------------------------------------------------
@@ -483,11 +559,10 @@ int main(int argc, char** argv)
         // Use the new function to write timing stats as a table
         write_cpu_time_stats(rank, durations, timing_names, timing_names.size());
     }
-    PDI_finalize();
-    MPI_Finalize();
-
     PC_tree_destroy(&configs.conf_pdi);
     PC_tree_destroy(&configs.conf_gyselax);
+    PDI_finalize();
+    MPI_Finalize();
 
     return EXIT_SUCCESS;
 }

@@ -8,7 +8,8 @@ add_executable(gys_io
 target_link_libraries(gys_io
     PUBLIC
         DDC::core
-        PDI::pdi
+        DDC::pdi
+        PDI::PDI_C
         paraconf::paraconf
         MPI::MPI_CXX
         gslx::io
