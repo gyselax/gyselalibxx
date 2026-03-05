@@ -593,11 +593,11 @@ host_t&lt;DFieldMem&lt;IdxRange&lt;Grid1D&gt;&gt;&gt; spline_quadrature_coeffici
         SplineBuilder const&amp; builder)
 {
     static_assert(
-            SplineBuilder::s_nbc_xmin == 0,
+            SplineBuilder::s_nbe_xmin == 0,
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
     static_assert(
-            SplineBuilder::s_nbc_xmax == 0,
+            SplineBuilder::s_nbe_xmax == 0,
             "The spline quadrature requires a builder which can construct the coefficients using "
             "only the values at the interpolation points.");
     // Since spline builder quadrature coeffs are not available on device, need host allocated builder.

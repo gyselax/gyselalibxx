@@ -1246,8 +1246,8 @@
     <member refid="classIdentityInterpolationBuilder_1a63c15db52b118b689c837fd7aaf9c33b" kind="typedef"><name>deriv_type</name></member>
     <member refid="classIdentityInterpolationBuilder_1a5ce180cadfffa6db674ea0f5fa68e5b3" kind="typedef"><name>batched_basis_idx_range_type</name></member>
     <member refid="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
-    <member refid="classIdentityInterpolationBuilder_1a728e04a6dacb27dbcae9408d966c36bf" kind="variable"><name>s_nbc_xmin</name></member>
-    <member refid="classIdentityInterpolationBuilder_1abe44cae3d866e377397705a405ed247f" kind="variable"><name>s_nbc_xmax</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a1787260395e125f5afd766e026c20511" kind="variable"><name>s_nbe_xmin</name></member>
+    <member refid="classIdentityInterpolationBuilder_1ad7a730453d02850a3fe29dadf91c49b2" kind="variable"><name>s_nbe_xmax</name></member>
     <member refid="classIdentityInterpolationBuilder_1a7dd28fa0a0440a707ec7a6295d5f43e4" kind="function"><name>IdentityInterpolationBuilder</name></member>
     <member refid="classIdentityInterpolationBuilder_1a6c2055a41e5b848229308895930d99c7" kind="function"><name>operator()</name></member>
     <member refid="classIdentityInterpolationBuilder_1a70d7e70b1683afc4ccb46525e3596e67" kind="function"><name>batched_derivs_xmin_domain</name></member>

@@ -46,9 +46,9 @@ public:
             replace_dim_of_t<BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type>;
 
 public:
-    static constexpr int s_nbc_xmin = 0;
+    static constexpr int s_nbe_xmin = 0;
 
-    static constexpr int s_nbc_xmax = 0;
+    static constexpr int s_nbe_xmax = 0;
 
 public:
     IdentityInterpolationBuilder() = default;

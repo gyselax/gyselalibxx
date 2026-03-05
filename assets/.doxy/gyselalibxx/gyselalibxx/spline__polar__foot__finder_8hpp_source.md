@@ -56,13 +56,13 @@ class SplinePolarFootFinder
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
                   ddc::to_type_seq_t<IdxRangeBatched>>);
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmin == 0,
+            SplineRThetaBuilderAdvection::builder_type1::s_nbe_xmin == 0,
             "This class is designed to work with a spline builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "
             "check the choice of boundary conditions).");
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmax == 0,
+            SplineRThetaBuilderAdvection::builder_type1::s_nbe_xmax == 0,
             "This class is designed to work with a spline builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "

@@ -54,8 +54,8 @@ _A builder class for copying data._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr int | [**s\_nbc\_xmax**](#variable-s_nbc_xmax)   = `0`<br>_The number of equations defining the boundary condition at the upper bound._  |
-|  constexpr int | [**s\_nbc\_xmin**](#variable-s_nbc_xmin)   = `0`<br>_The number of equations defining the boundary condition at the lower bound._  |
+|  constexpr int | [**s\_nbe\_xmax**](#variable-s_nbe_xmax)   = `0`<br>_The number of equations defining the boundary condition at the upper bound._  |
+|  constexpr int | [**s\_nbe\_xmin**](#variable-s_nbe_xmin)   = `0`<br>_The number of equations defining the boundary condition at the lower bound._  |
 
 
 
@@ -275,11 +275,11 @@ using IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, Interpolat
 
 
 
-### variable s\_nbc\_xmax 
+### variable s\_nbe\_xmax 
 
 _The number of equations defining the boundary condition at the upper bound._ 
 ```C++
-constexpr int IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis >::s_nbc_xmax;
+constexpr int IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis >::s_nbe_xmax;
 ```
 
 
@@ -289,11 +289,11 @@ constexpr int IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, In
 
 
 
-### variable s\_nbc\_xmin 
+### variable s\_nbe\_xmin 
 
 _The number of equations defining the boundary condition at the lower bound._ 
 ```C++
-constexpr int IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis >::s_nbc_xmin;
+constexpr int IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis >::s_nbe_xmin;
 ```
 
 

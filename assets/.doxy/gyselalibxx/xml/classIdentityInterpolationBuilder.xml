@@ -183,12 +183,12 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="classIdentityInterpolationBuilder_1a728e04a6dacb27dbcae9408d966c36bf" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="classIdentityInterpolationBuilder_1a1787260395e125f5afd766e026c20511" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr int</type>
-        <definition>constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbc_xmin</definition>
+        <definition>constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmin</definition>
         <argsstring></argsstring>
-        <name>s_nbc_xmin</name>
-        <qualifiedname>IdentityInterpolationBuilder::s_nbc_xmin</qualifiedname>
+        <name>s_nbe_xmin</name>
+        <qualifiedname>IdentityInterpolationBuilder::s_nbe_xmin</qualifiedname>
         <initializer>= 0</initializer>
         <briefdescription>
 <para>The number of equations defining the boundary condition at the lower bound. </para>
@@ -199,12 +199,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="63" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classIdentityInterpolationBuilder_1abe44cae3d866e377397705a405ed247f" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="classIdentityInterpolationBuilder_1ad7a730453d02850a3fe29dadf91c49b2" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr int</type>
-        <definition>constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbc_xmax</definition>
+        <definition>constexpr int IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::s_nbe_xmax</definition>
         <argsstring></argsstring>
-        <name>s_nbc_xmax</name>
-        <qualifiedname>IdentityInterpolationBuilder::s_nbc_xmax</qualifiedname>
+        <name>s_nbe_xmax</name>
+        <qualifiedname>IdentityInterpolationBuilder::s_nbe_xmax</qualifiedname>
         <initializer>= 0</initializer>
         <briefdescription>
 <para>The number of equations defining the boundary condition at the upper bound. </para>
@@ -480,8 +480,8 @@
       <member refid="classIdentityInterpolationBuilder_1a1c6bce80a06b04fb58e60821efbb9669" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>interpolation_idx_range_type</name></member>
       <member refid="classIdentityInterpolationBuilder_1a1efe4dad3715309d3bf818cbfe648822" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>memory_space</name></member>
       <member refid="classIdentityInterpolationBuilder_1a6c2055a41e5b848229308895930d99c7" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>operator()</name></member>
-      <member refid="classIdentityInterpolationBuilder_1abe44cae3d866e377397705a405ed247f" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>s_nbc_xmax</name></member>
-      <member refid="classIdentityInterpolationBuilder_1a728e04a6dacb27dbcae9408d966c36bf" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>s_nbc_xmin</name></member>
+      <member refid="classIdentityInterpolationBuilder_1ad7a730453d02850a3fe29dadf91c49b2" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>s_nbe_xmax</name></member>
+      <member refid="classIdentityInterpolationBuilder_1a1787260395e125f5afd766e026c20511" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>s_nbe_xmin</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

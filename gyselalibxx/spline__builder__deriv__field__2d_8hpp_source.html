@@ -641,16 +641,16 @@ public:
         // Check that the DerivField contains the necessary derivatives for the builder.
         IdxRange&lt;Deriv1&gt; idx_range_d1_min(
                 Idx&lt;Deriv1&gt;(1),
-                IdxStep&lt;Deriv1&gt;(Builder2D::builder_type1::s_nbc_xmin));
+                IdxStep&lt;Deriv1&gt;(Builder2D::builder_type1::s_nbv_xmin));
         IdxRange&lt;Deriv1&gt; idx_range_d1_max(
                 Idx&lt;Deriv1&gt;(1),
-                IdxStep&lt;Deriv1&gt;(Builder2D::builder_type1::s_nbc_xmax));
+                IdxStep&lt;Deriv1&gt;(Builder2D::builder_type1::s_nbv_xmax));
         IdxRange&lt;Deriv2&gt; idx_range_d2_min(
                 Idx&lt;Deriv2&gt;(1),
-                IdxStep&lt;Deriv2&gt;(Builder2D::builder_type2::s_nbc_xmin));
+                IdxStep&lt;Deriv2&gt;(Builder2D::builder_type2::s_nbv_xmin));
         IdxRange&lt;Deriv2&gt; idx_range_d2_max(
                 Idx&lt;Deriv2&gt;(1),
-                IdxStep&lt;Deriv2&gt;(Builder2D::builder_type2::s_nbc_xmax));
+                IdxStep&lt;Deriv2&gt;(Builder2D::builder_type2::s_nbv_xmax));
 
         IdxRange&lt;Deriv1, Deriv2&gt; idx_range_d1d2_min_min(idx_range_d1_min, idx_range_d2_min);
         IdxRange&lt;Deriv1, Deriv2&gt; idx_range_d1d2_max_min(idx_range_d1_max, idx_range_d2_min);
