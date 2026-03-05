@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Remove unused local spline builders in `tests/geometryXVx`.
+
 ## [v0.6.0] - 2026-03-05
 
 ### Added
