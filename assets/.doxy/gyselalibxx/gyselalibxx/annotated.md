@@ -185,6 +185,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
         * **struct** [**IntermediateBernsteinBasis**](structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis.md) 
 * **struct** [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) 
 * **class** [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) _Define an evaluator on polar B-splines._     
+* **class** [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._     
+    * **struct** [**InternalBatchDim**](structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 
 * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._     
     * **struct** [**EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) _Object storing a value and a value of the derivative of a 1D function._     
     * **struct** [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) _Object storing a value and a value of the derivatives in each direction of a 2D function._     
@@ -251,10 +253,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d97.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d220.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d222.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d224.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d226.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d221.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d223.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d225.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d227.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
@@ -309,6 +311,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **class** [**NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md) _Helper class for the initialisation of the mesh of interpolation points._     
     * **struct** [**is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md) 
     * **struct** [**is\_non\_uniform\_interpolation\_points&lt; NonUniformInterpolationPoints&lt; BSplines, BcXmin, BcXmax &gt; &gt;**](structddcHelper_1_1is__non__uniform__interpolation__points_3_01NonUniformInterpolationPoints_3_047d1c8570873e3c052e2e394afcf9270.md) 
+* **namespace** [**detail\_poisson**](namespacedetail__poisson.md)     
 * **namespace** [**equilibrium**](namespaceequilibrium.md)     
 * **namespace** [**gslx**](namespacegslx.md)     
     * **namespace** [**error**](namespacegslx_1_1error.md)     

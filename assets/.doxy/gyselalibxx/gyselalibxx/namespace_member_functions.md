@@ -26,6 +26,8 @@
 ## g
 
 * **get** ([**ddcHelper**](namespaceddcHelper.md))
+* **get\_polar\_bspline\_vals\_and\_derivs** ([**detail\_poisson**](namespacedetail__poisson.md))
+* **get\_quadrature\_between\_knots** ([**detail\_poisson**](namespacedetail__poisson.md))
 
 
 ## i
@@ -54,6 +56,7 @@
 
 * **to\_coord** ([**ddcHelper**](namespaceddcHelper.md))
 * **total\_interval\_length** ([**ddcHelper**](namespaceddcHelper.md))
+* **theta\_mod** ([**detail\_poisson**](namespacedetail__poisson.md))
 
 
 

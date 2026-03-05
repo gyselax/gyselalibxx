@@ -113,7 +113,7 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="24">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
         <link refid="advection__field__rtheta_8hpp_source"/>
         <childnode refid="12" relation="include">
@@ -208,9 +208,15 @@
         </childnode>
       </node>
       <node id="22">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</label>
+        <link refid="polarpoissonlikeassembler_8hpp_source"/>
+        <childnode refid="23" relation="include">
+        </childnode>
+      </node>
+      <node id="23">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
         <link refid="polarpoissonlikesolver_8hpp_source"/>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>

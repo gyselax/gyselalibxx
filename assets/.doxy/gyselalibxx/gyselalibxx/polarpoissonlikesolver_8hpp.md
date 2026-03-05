@@ -10,18 +10,7 @@
 
 
 
-* `#include <ddc/ddc.hpp>`
-* `#include "coord_transformation_tools.hpp"`
-* `#include "ddc_alias_inline_functions.hpp"`
-* `#include "ddc_aliases.hpp"`
-* `#include "gauss_legendre_integration.hpp"`
-* `#include "math_tools.hpp"`
-* `#include "matrix_batch_csr.hpp"`
-* `#include "metric_tensor_evaluator.hpp"`
-* `#include "polar_spline_evaluator.hpp"`
-* `#include "quadrature_coeffs_nd.hpp"`
-* `#include "view.hpp"`
-* `#include "volume_quadrature_nd.hpp"`
+* `#include "polarpoissonlikeassembler.hpp"`
 
 
 

@@ -4,7 +4,7 @@
 
 
 
-[**Namespace List**](namespaces.md) **>** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d226.md)
+[**Namespace List**](namespaces.md) **>** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d227.md)
 
 
 

@@ -1,0 +1,325 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacedetail__poisson" kind="namespace" language="C++">
+    <compoundname>detail_poisson</compoundname>
+    <sectiondef kind="func">
+      <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a65137404e884acc2dcaee94b2b25c073" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION IdxStep&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
+        <definition>KOKKOS_FUNCTION IdxStep&lt; BSplinesTheta &gt; detail_poisson::theta_mod</definition>
+        <argsstring>(IdxStep&lt; BSplinesTheta &gt; idx_theta)</argsstring>
+        <name>theta_mod</name>
+        <qualifiedname>detail_poisson::theta_mod</qualifiedname>
+        <param>
+          <type>IdxStep&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt;</type>
+          <declname>idx_theta</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the modulo idx_theta in relation to cells number along <formula id="23">$ \theta $</formula> direction. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Periodic B-Splines in poloidal direction.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_theta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><formula id="23">$ \theta $</formula> index.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding indice modulo <formula id="23">$ \theta $</formula> direction cells number </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="31" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="31" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+          </param>
+          <param>
+            <type>class IdxType</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_INLINE_FUNCTION IdxType</type>
+        <definition>KOKKOS_INLINE_FUNCTION IdxType detail_poisson::theta_mod</definition>
+        <argsstring>(IdxType idx)</argsstring>
+        <name>theta_mod</name>
+        <qualifiedname>detail_poisson::theta_mod</qualifiedname>
+        <param>
+          <type>IdxType</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Calculates the index which is inside the poloidal domain using the periodicity properties. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Periodic B-Splines in poloidal direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Type of the input index.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A multi-dimensional index including the polar bspline index.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The corresponding index inside the domain. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="52" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="52" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a39ae23b7a27305b424a39e6d0578e1f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></type>
+          </param>
+          <param>
+            <type>bool</type>
+            <declname>calculate_derivs</declname>
+            <defname>calculate_derivs</defname>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt;</type>
+        <definition>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt; detail_poisson::get_polar_bspline_vals_and_derivs</definition>
+        <argsstring>(double &amp;val, CoordRTheta coord, Idx&lt; PolarBSplinesRTheta &gt; idx)</argsstring>
+        <name>get_polar_bspline_vals_and_derivs</name>
+        <qualifiedname>detail_poisson::get_polar_bspline_vals_and_derivs</qualifiedname>
+        <param>
+          <type>double &amp;</type>
+          <declname>val</declname>
+        </param>
+        <param>
+          <type>CoordRTheta</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref> &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <briefdescription>
+<para>Get the value and derivative of the specified polar bspline at the specified quadrature point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>This method calculates the value and the derivatives of polar bsplines. It is templated by calculate_derivs to avoid code duplication between get_polar_bspline_vals_and_derivs and get_polar_bspline_vals. The calling method should not need to use the template parameter.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Polar B-Splines to be used. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>calculate_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Returns the derivatives at the coordinate if true. If false, only the value is calculated.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">val</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value of the specified polar bspline at the specified point. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the value of the polar bspline should be calculated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The polar bspline of interest. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The derivative of the polar bspline (only returned if calculate_derivs is true). </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="90" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="90" bodyend="145"/>
+      </memberdef>
+      <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename QDimRMesh</type>
+          </param>
+          <param>
+            <type>typename QDimThetaMesh</type>
+          </param>
+          <param>
+            <type>typename <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></type>
+          </param>
+          <param>
+            <type>typename <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+        <definition>KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_quadrature_between_knots</definition>
+        <argsstring>(Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesR &gt; &gt; start_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesR &gt; &gt; end_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesTheta &gt; &gt; start_knot_theta, Idx&lt; ddc::knot_discrete_dimension_t&lt; BSplinesTheta &gt; &gt; end_knot_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front)</argsstring>
+        <name>get_quadrature_between_knots</name>
+        <qualifiedname>detail_poisson::get_quadrature_between_knots</qualifiedname>
+        <param>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt; &gt;</type>
+          <declname>start_knot_r</declname>
+        </param>
+        <param>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref> &gt; &gt;</type>
+          <declname>end_knot_r</declname>
+        </param>
+        <param>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt; &gt;</type>
+          <declname>start_knot_theta</declname>
+        </param>
+        <param>
+          <type>Idx&lt; ddc::knot_discrete_dimension_t&lt; <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt; &gt;</type>
+          <declname>end_knot_theta</declname>
+        </param>
+        <param>
+          <type>Idx&lt; QDimRMesh, QDimThetaMesh &gt;</type>
+          <declname>idx_quad_front</declname>
+        </param>
+        <briefdescription>
+<para>Compute the quadrature range between a provided set of knots. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Compute the range of quadrature points which are found between a set of knots in both the radial and poloidal directions. In order to return a contiguous range the result may include indices which are outside the domain. A modulo operator should be applied before using the indices.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>QDimRMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>QDimThetaMesh</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><ref refid="classQuadrature" kindref="compound">Quadrature</ref> mesh in poloidal direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Splines in poloidal direction.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">start_knot_r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the knot describing the lower bound of the domain of interest in the radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">end_knot_r</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the knot describing the upper bound of the domain of interest in the radial direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">start_knot_theta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the knot describing the lower bound of the domain of interest in the poloidal direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">end_knot_theta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the knot describing the upper bound of the domain of interest in the poloidal direction. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_quad_front</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The first index of the index range of the quadrature points. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The range of quadrature points in the specified domain. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="178" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="178" bodyend="213"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="19" column="1"/>
+  </compounddef>
+</doxygen>

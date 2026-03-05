@@ -36,6 +36,8 @@
 ## g
 
 * **get** ([**ddcHelper**](namespaceddcHelper.md))
+* **get\_polar\_bspline\_vals\_and\_derivs** ([**detail\_poisson**](namespacedetail__poisson.md))
+* **get\_quadrature\_between\_knots** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **get\_nth\_tensor\_index\_element\_from\_map\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 * **get\_nth\_tensor\_index\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 * **get\_type\_seq\_vector\_index\_set\_t** ([**tensor\_tools**](namespacetensor__tools.md))
@@ -80,6 +82,7 @@
 * **to\_coord\_t** ([**ddcHelper**](namespaceddcHelper.md))
 * **total\_interval\_length** ([**ddcHelper**](namespaceddcHelper.md))
 * **type\_seq\_intersection\_t** ([**ddcHelper**](namespaceddcHelper.md))
+* **theta\_mod** ([**detail\_poisson**](namespacedetail__poisson.md))
 * **to\_tensor\_index\_element\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 
 

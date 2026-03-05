@@ -1429,6 +1429,8 @@
   </compound>
   <compound refid="structPolarBSplines_1_1Impl_1_1IntermediateBernsteinBasis" kind="struct"><name>PolarBSplines::Impl::IntermediateBernsteinBasis</name>
   </compound>
+  <compound refid="structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim" kind="struct"><name>PolarSplineFEMPoissonLikeAssembler::InternalBatchDim</name>
+  </compound>
   <compound refid="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim" kind="struct"><name>PolarSplineFEMPoissonLikeSolver::InternalBatchDim</name>
   </compound>
   <compound refid="structInterpolationBuilderTraits" kind="struct"><name>InterpolationBuilderTraits</name>
@@ -2397,6 +2399,64 @@
     <member refid="classPolarSplineEvaluator_1aa8222d24e353eb6794fcb75b856a6b7d" kind="function"><name>eval</name></member>
     <member refid="classPolarSplineEvaluator_1a757995ca51cb9aefdbd643377d77d333" kind="function"><name>eval_no_bc</name></member>
   </compound>
+  <compound refid="classPolarSplineFEMPoissonLikeAssembler" kind="class"><name>PolarSplineFEMPoissonLikeAssembler</name>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1ac0c488acc8ed72e59c9ed0ace960243a" kind="typedef"><name>R</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a664cf25bf879ea172a7e0edf86b826d4" kind="typedef"><name>Theta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a81eee1dc14a1efaeb9d5e53524eeb119" kind="typedef"><name>R_cov</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a14ecbd7099fbd0a670670f4a1b5b16ed" kind="typedef"><name>Theta_cov</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aa5309f9db9c56dd3d418989f23684586" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a7828a2baf4cabd466b37d7f348caef6a" kind="typedef"><name>BSplinesTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a23b099d9d7a373fe6f57aee3c5e601c7" kind="typedef"><name>KnotsR</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a81b137e43ee75d98cf4106127799e7bf" kind="typedef"><name>KnotsTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1af740ba841a05daa357613ded398ad9b9" kind="typedef"><name>IdxRangeBSPolar</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a62c387571dc733f62a5eb75dddc4bdcc" kind="typedef"><name>IdxBSPolar</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a8bd46f57ba6e1d98fc64ab2d9c7231b3" kind="typedef"><name>IdxStepBSPolar</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aedce5e3b5eb022c3cba598f16393a8bd" kind="typedef"><name>IdxRangeBSR</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6321662e9a28dbf31a9a82f8ddfb6563" kind="typedef"><name>IdxRangeBSTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a0cf4025938a005c5734f7dc93fe5674a" kind="typedef"><name>IdxRangeBSRTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1ab36c0b760b2aa1eed5deb8e5df415af8" kind="typedef"><name>IdxBSR</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a8257d1714166746d2a164a7036e2a264" kind="typedef"><name>IdxBSTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a90737536d182c622bd8d0df7c8a56ca8" kind="typedef"><name>IdxBSRTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a653817c63e3c056e34204fd3ce692b13" kind="typedef"><name>IdxStepBSR</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1af94bfeacde1071eb8631ea3359d24120" kind="typedef"><name>IdxStepBSTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a54ad2d873c08cb5181c42ea4709c204a" kind="typedef"><name>IdxStepBSRTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a97de7a0e4b4be5925da47da80e053802" kind="typedef"><name>IdxRangeBatchedBSRTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1acbe6c3dcfc19e92615cfe61eb474581f" kind="typedef"><name>IdxRangeQuadratureR</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a5f819ef981fe89eb8f8f4192f94487e9" kind="typedef"><name>IdxRangeQuadratureTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aeff12052b2d9ad940f12741a0bcc5ca0" kind="typedef"><name>IdxRangeQuadratureRTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a65301d04d3c395a359026b060525678e" kind="typedef"><name>IdxQuadratureR</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a51e887db09b58fc55ef2d8e7378e48ba" kind="typedef"><name>IdxQuadratureTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1ad9bd153a4d667ad6f6cda7640f3a1cc2" kind="typedef"><name>IdxQuadratureRTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a043bd825c2f8a6f8c4c12473b42d7f20" kind="typedef"><name>IdxStepQuadratureR</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a1a61028bb08f1a147800314fb1fbce10" kind="typedef"><name>IdxStepQuadratureTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a7038f8979b44b716ad49f83b68c3258e" kind="typedef"><name>ConstSpline2D</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a69153c3d917f8f07e049896076270963" kind="variable"><name>s_n_gauss_legendre_r</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aca494b633aac4cb2bd931a128c4587b7" kind="variable"><name>s_n_gauss_legendre_theta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a1fefe304632b2a6402d09590d75d368a" kind="variable"><name>m_n_overlap_cells</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1ac4285a0df9939e036117b21191955aa6" kind="variable"><name>m_n_non_zero_bases_r</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1ab180eb1babd5e5fc9781942a65317c7e" kind="variable"><name>m_n_non_zero_bases_theta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a5dc81e628fed540b357880ea65745d74" kind="variable"><name>m_nbasis_r</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1af324b680bb01bed21301bed20d1f2d08" kind="variable"><name>m_nbasis_theta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aee7b60f8ccea3ce50d4565849e307931" kind="variable"><name>m_matrix_size</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aedcead144250427020118bca9b3073cb" kind="variable"><name>m_idxrange_fem_non_singular</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a7604cb107a61f1f1fed25ade9dc7ddd8" kind="variable"><name>m_idxrange_bsplines_r</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1af9611c0a40db77d5e2ee1c783669d073" kind="variable"><name>m_idxrange_bsplines_theta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a3cfd33d07ffe136f94c33508442feff4" kind="variable"><name>m_idxrange_quadrature_r</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a1210373c6b99f1bda0502ddc370b28d7" kind="variable"><name>m_idxrange_quadrature_theta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1ac22b5d1d9e9f801f090e797212d14016" kind="variable"><name>m_idxrange_quadrature_singular</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a86de9590fddca13f14cf70ad08c40f88" kind="variable"><name>m_idxrange_quadrature</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a2aad241b05108d705ea50f8f8529cf7f" kind="variable"><name>m_batch_idx</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a4dabaac0e98bc5c06c4d8619677c7191" kind="variable"><name>m_int_volume</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a934e3e0fece4b2070001ee5d1d9e699c" kind="function"><name>PolarSplineFEMPoissonLikeAssembler</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1abc0ce99a71c2b00034f2199bda6c9614" kind="function"><name>operator()</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a0a247174185eff8fa38b2bc93ea1227a" kind="function"><name>compute_singular_elements</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a41e32c99985b1df2350ee1d9f84f12ca" kind="function"><name>compute_overlapping_singular_elements</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a9ecfde2b6c8bd1c64caece74390ea655" kind="function"><name>compute_stencil_elements</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aafe773776f261e32daa04d80e9c994ee" kind="function"><name>get_matrix_stencil_element</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a037ea0e3df142ead46779f23a0973c3c" kind="function"><name>init_nnz_per_line</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a62a231709128ef1dc7670bbddd17fd9b" kind="function"><name>weak_integral_element</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a79971ed2f9d16481d9a6da774d2b4a1c" kind="function"><name>to_polar</name></member>
+  </compound>
   <compound refid="classPolarSplineFEMPoissonLikeSolver" kind="class"><name>PolarSplineFEMPoissonLikeSolver</name>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1aea7575e5ec7f7e2a776c1677a79137d9" kind="typedef"><name>R</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a0c880f33d839cedfafdf2b3b32139417" kind="typedef"><name>Theta</name></member>
@@ -2408,7 +2468,6 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a79f282290ff810b183e87526fd14eafc" kind="typedef"><name>KnotsR</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a82a6eb2f3dca9d5114346f1c18736c51" kind="typedef"><name>KnotsTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1aa0f511a953d87b08a5581f52775d3caf" kind="typedef"><name>IdxRangeRTheta</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a97c05acaf33da3726713692ff152ba7f" kind="typedef"><name>IdxRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a611821800abcf638b859b4129691642a" kind="typedef"><name>IdxRangeBSPolar</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a379650fe83430816bef2f6b155e408d9" kind="typedef"><name>IdxBSPolar</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1acd16d9f1b7e09558dbc95ecd45e4ca6b" kind="typedef"><name>IdxStepBSPolar</name></member>
@@ -2442,9 +2501,7 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a86e2ff04d5704480a5a3fa3a300c4b3b" kind="variable"><name>m_n_overlap_cells</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1aac7630fc04854aef1382a8b71e7f266d" kind="variable"><name>m_n_non_zero_bases_r</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ab8270b33e0481eab317032c5d46b705b" kind="variable"><name>m_n_non_zero_bases_theta</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1ae6ed06bc3045f9358fcecc5faf46ce61" kind="variable"><name>m_nbasis_r</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a3e0b42cae266052c9207b486955bb992" kind="variable"><name>m_nbasis_theta</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1ac0a14f99526d7311034a9492c44bdfb8" kind="variable"><name>m_matrix_size</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a0aac03ca1cbd08119ed59a9798076bd1" kind="variable"><name>m_idxrange_fem_non_singular</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a0aca9d7c40b1b901694372d17a0d0f0c" kind="variable"><name>m_idxrange_bsplines_r</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ac7b36b1b379aa95a81915deefd3c05db" kind="variable"><name>m_idxrange_bsplines_theta</name></member>
@@ -2452,8 +2509,6 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a1634910cc8538644425a6bf26c55869b" kind="variable"><name>m_idxrange_quadrature_theta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1afd0422e5a6cdd44919a33a1fdef5de03" kind="variable"><name>m_idxrange_quadrature_singular</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a9f30a3ca79abe19948ff5660a60f268b" kind="variable"><name>m_idxrange_quadrature</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a6115292f2e279384a9aba2f9e98c8622" kind="variable"><name>m_weights_r</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a3451e432cc47c49dd4d274c36cccf3fb" kind="variable"><name>m_weights_theta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a37606d9833aa675f4bce28b77454bb3b" kind="variable"><name>m_int_volume_alloc</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1adfe6f1c0509f740749d6ce4397c576dd" kind="variable"><name>m_polar_spline_evaluator</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a55664a455be46f70f1d33768cee0e7b3" kind="variable"><name>m_gko_matrix</name></member>
@@ -2461,20 +2516,9 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a07a3def85461f920382b864d8865afb7" kind="variable"><name>m_x_init_alloc</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a43b7466804454a28b1dda74afcb77a9f" kind="variable"><name>m_batch_idx</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ad239b2f33e6a3268ce783acc78935aff" kind="function"><name>PolarSplineFEMPoissonLikeSolver</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1ae5645f014d26559165955e51746f3e70" kind="function"><name>compute_singular_elements</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a36be84f08a082b52a73f5134b8f1a8e2" kind="function"><name>compute_overlapping_singular_elements</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a161e772a03b980ad5cb19bdeb6b02925" kind="function"><name>compute_stencil_elements</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a746919b2bad797f1a1db77ab5d1f7bcf" kind="function"><name>operator()</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ac699f74359d1f9160bed57ffcf325861" kind="function"><name>operator()</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a90ab8ff1603bc0a3f36b5a0c5077de5b" kind="function"><name>get_matrix_stencil_element</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a15e528d25ba6df5a707e0b78c81c92e6" kind="function"><name>init_nnz_per_line</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a927ace754421f6951892bf2c1bd57866" kind="function"><name>weak_integral_element</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a3160403491222e46fadb1472e98f6006" kind="function"><name>theta_mod</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1aede6285406c7828a7000df73ed93b649" kind="function"><name>theta_mod</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1aef5a25d0952c71226d089f7b34a4f84f" kind="function"><name>get_polar_bspline_vals_and_derivs</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a1229098e45381cd6008d620ab49c7970" kind="function"><name>get_polar_bspline_vals</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1af770ddf5e1bc2824b4c42c8447e9d214" kind="function"><name>to_polar</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1a79ec79a59a0a4c93bb1d59f546681a11" kind="function"><name>get_quadrature_between_knots</name></member>
   </compound>
   <compound refid="classPreallocatableSplineInterpolator2D" kind="class"><name>PreallocatableSplineInterpolator2D</name>
     <member refid="classPreallocatableSplineInterpolator2D_1ad8226ecfd141ebf4a83b4a68d68a5666" kind="variable"><name>m_builder</name></member>
@@ -3148,13 +3192,13 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d220" kind="namespace"><name>@220</name>
+  <compound refid="namespace_0d221" kind="namespace"><name>@221</name>
   </compound>
-  <compound refid="namespace_0d222" kind="namespace"><name>@222</name>
+  <compound refid="namespace_0d223" kind="namespace"><name>@223</name>
   </compound>
-  <compound refid="namespace_0d224" kind="namespace"><name>@224</name>
+  <compound refid="namespace_0d225" kind="namespace"><name>@225</name>
   </compound>
-  <compound refid="namespace_0d226" kind="namespace"><name>@226</name>
+  <compound refid="namespace_0d227" kind="namespace"><name>@227</name>
   </compound>
   <compound refid="namespace_0d97" kind="namespace"><name>@97</name>
   </compound>
@@ -3200,6 +3244,12 @@
     <member refid="ddc__helper_8hpp_1a9e2ce2d2ae35d41cf6d260b465560976" kind="function"><name>maximum_distance_between_adjacent_points</name></member>
     <member refid="transpose_8hpp_1a427b2ef16466ccf26ea2f81563bbedb4" kind="function"><name>create_transpose_mirror_view_and_copy</name></member>
     <member refid="transpose_8hpp_1a46df5800c3318a0b386395442dce6ba8" kind="function"><name>create_transpose_mirror</name></member>
+  </compound>
+  <compound refid="namespacedetail__poisson" kind="namespace"><name>detail_poisson</name>
+    <member refid="polarpoissonlikeassembler_8hpp_1a65137404e884acc2dcaee94b2b25c073" kind="function"><name>theta_mod</name></member>
+    <member refid="polarpoissonlikeassembler_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" kind="function"><name>theta_mod</name></member>
+    <member refid="polarpoissonlikeassembler_8hpp_1a39ae23b7a27305b424a39e6d0578e1f2" kind="function"><name>get_polar_bspline_vals_and_derivs</name></member>
+    <member refid="polarpoissonlikeassembler_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" kind="function"><name>get_quadrature_between_knots</name></member>
   </compound>
   <compound refid="namespaceequilibrium" kind="namespace"><name>equilibrium</name>
     <member refid="geometryXVx_2initialisation_2iequilibrium_8hpp_1a836b2d1d30cdb635cdac8dedd80401e2" kind="function"><name>init_from_input</name></member>
@@ -4195,6 +4245,8 @@
   <compound refid="fft__poisson__solver_8hpp" kind="file"><name>fft_poisson_solver.hpp</name>
   </compound>
   <compound refid="ipoisson__solver_8hpp" kind="file"><name>ipoisson_solver.hpp</name>
+  </compound>
+  <compound refid="polarpoissonlikeassembler_8hpp" kind="file"><name>polarpoissonlikeassembler.hpp</name>
   </compound>
   <compound refid="polarpoissonlikesolver_8hpp" kind="file"><name>polarpoissonlikesolver.hpp</name>
   </compound>

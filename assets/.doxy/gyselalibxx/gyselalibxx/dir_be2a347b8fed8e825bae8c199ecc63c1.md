@@ -24,6 +24,7 @@
 | file | [**fem\_1d\_poisson\_solver.hpp**](fem__1d__poisson__solver_8hpp.md) <br> |
 | file | [**fft\_poisson\_solver.hpp**](fft__poisson__solver_8hpp.md) <br> |
 | file | [**ipoisson\_solver.hpp**](ipoisson__solver_8hpp.md) <br> |
+| file | [**polarpoissonlikeassembler.hpp**](polarpoissonlikeassembler_8hpp.md) <br> |
 | file | [**polarpoissonlikesolver.hpp**](polarpoissonlikesolver_8hpp.md) <br> |
 
 

@@ -149,6 +149,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**PolarBSplines**](classPolarBSplines.md) 
 * **class** [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md) 
 * **class** [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) _Define an evaluator on polar B-splines._ 
+* **class** [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._ 
 * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._ 
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._
 * **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._ 
@@ -200,6 +201,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**PolarBSplines::Impl::Corner1Tag**](structPolarBSplines_1_1Impl_1_1Corner1Tag.md) _The tag for the first corner of the Barycentric coordinates._ 
 * **struct** [**PolarBSplines::Impl::Corner2Tag**](structPolarBSplines_1_1Impl_1_1Corner2Tag.md) _The tag for the second corner of the Barycentric coordinates._ 
 * **struct** [**PolarBSplines::Impl::Corner3Tag**](structPolarBSplines_1_1Impl_1_1Corner3Tag.md) _The tag for the third corner of the Barycentric coordinates._ 
+* **struct** [**PolarSplineFEMPoissonLikeAssembler::InternalBatchDim**](structPolarSplineFEMPoissonLikeAssembler_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) _Object storing a value and a value of the derivative of a 1D function._ 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) _Object storing a value and a value of the derivatives in each direction of a 2D function._ 
 * **struct** [**PolarSplineFEMPoissonLikeSolver::InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 

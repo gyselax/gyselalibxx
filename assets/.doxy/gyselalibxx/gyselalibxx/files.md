@@ -271,6 +271,7 @@ Here is a list of all files with brief descriptions:
         * **file** [**fem\_1d\_poisson\_solver.hpp**](fem__1d__poisson__solver_8hpp.md)     
         * **file** [**fft\_poisson\_solver.hpp**](fft__poisson__solver_8hpp.md)     
         * **file** [**ipoisson\_solver.hpp**](ipoisson__solver_8hpp.md)     
+        * **file** [**polarpoissonlikeassembler.hpp**](polarpoissonlikeassembler_8hpp.md)     
         * **file** [**polarpoissonlikesolver.hpp**](polarpoissonlikesolver_8hpp.md)     
     * **dir** [**quadrature**](dir_264321be3574e3b1cf375050e213576e.md)     
         * **file** [**gauss\_legendre\_integration.cpp**](gauss__legendre__integration_8cpp.md) 

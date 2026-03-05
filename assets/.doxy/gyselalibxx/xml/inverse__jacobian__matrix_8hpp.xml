@@ -289,7 +289,7 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="17" relation="include">
+        <childnode refid="18" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
@@ -312,7 +312,7 @@
         <childnode refid="14" relation="include">
         </childnode>
       </node>
-      <node id="17">
+      <node id="18">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
         <link refid="toroidal__to__cylindrical_8hpp_source"/>
       </node>
@@ -332,13 +332,13 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
         <link refid="vortex__merger__equilibrium_8hpp_source"/>
-        <childnode refid="16" relation="include">
+        <childnode refid="17" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
         <link refid="vortex__merger__initialisation_8hpp_source"/>
       </node>
@@ -371,11 +371,17 @@
         <link refid="lie__poisson__bracket_8hpp_source"/>
       </node>
       <node id="14">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</label>
+        <link refid="polarpoissonlikeassembler_8hpp_source"/>
+        <childnode refid="15" relation="include">
+        </childnode>
+      </node>
+      <node id="15">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
         <link refid="polarpoissonlikesolver_8hpp_source"/>
         <childnode refid="10" relation="include">
         </childnode>
-        <childnode refid="15" relation="include">
+        <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>

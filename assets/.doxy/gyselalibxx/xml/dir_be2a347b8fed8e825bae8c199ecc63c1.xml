@@ -5,6 +5,7 @@
     <innerfile refid="fem__1d__poisson__solver_8hpp">fem_1d_poisson_solver.hpp</innerfile>
     <innerfile refid="fft__poisson__solver_8hpp">fft_poisson_solver.hpp</innerfile>
     <innerfile refid="ipoisson__solver_8hpp">ipoisson_solver.hpp</innerfile>
+    <innerfile refid="polarpoissonlikeassembler_8hpp">polarpoissonlikeassembler.hpp</innerfile>
     <innerfile refid="polarpoissonlikesolver_8hpp">polarpoissonlikesolver.hpp</innerfile>
     <briefdescription>
     </briefdescription>

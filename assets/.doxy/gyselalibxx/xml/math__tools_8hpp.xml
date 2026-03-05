@@ -15,7 +15,7 @@
     <includedby refid="discrete__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp</includedby>
     <includedby refid="inverse__jacobian__matrix_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</includedby>
     <includedby refid="bernstein_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</includedby>
-    <includedby refid="polarpoissonlikesolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</includedby>
+    <includedby refid="polarpoissonlikeassembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</includedby>
     <incdepgraph>
       <node id="6">
         <label>coord_transformation_tools.hpp</label>
@@ -303,7 +303,7 @@
         </childnode>
         <childnode refid="22" relation="include">
         </childnode>
-        <childnode refid="28" relation="include">
+        <childnode refid="29" relation="include">
         </childnode>
         <childnode refid="23" relation="include">
         </childnode>
@@ -326,7 +326,7 @@
         <childnode refid="27" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/toroidal_to_cylindrical.hpp</label>
         <link refid="toroidal__to__cylindrical_8hpp_source"/>
       </node>
@@ -442,7 +442,7 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="30">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
         <childnode refid="11" relation="include">
@@ -479,12 +479,18 @@
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="27" relation="include">
         </childnode>
       </node>
       <node id="27">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</label>
+        <link refid="polarpoissonlikeassembler_8hpp_source"/>
+        <childnode refid="28" relation="include">
+        </childnode>
+      </node>
+      <node id="28">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
         <link refid="polarpoissonlikesolver_8hpp_source"/>
         <childnode refid="13" relation="include">

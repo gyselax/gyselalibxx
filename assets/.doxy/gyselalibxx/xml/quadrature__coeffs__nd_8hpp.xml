@@ -4,7 +4,7 @@
     <compoundname>quadrature_coeffs_nd.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
-    <includedby refid="polarpoissonlikesolver_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</includedby>
+    <includedby refid="polarpoissonlikeassembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</includedby>
     <includedby refid="simpson__quadrature_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/simpson_quadrature.hpp</includedby>
     <includedby refid="trapezoid__quadrature_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/trapezoid_quadrature.hpp</includedby>
     <incdepgraph>
@@ -32,62 +32,68 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
-      <node id="3">
+      <node id="4">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/advection_field/advection_field_rtheta.hpp</label>
         <link refid="advection__field__rtheta_8hpp_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-      </node>
-      <node id="7">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
-        <link refid="vortex__merger__equilibrium_8hpp_source"/>
-        <childnode refid="8" relation="include">
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
+        <link refid="vortex__merger__equilibrium_8hpp_source"/>
+        <childnode refid="9" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
         <link refid="vortex__merger__initialisation_8hpp_source"/>
       </node>
-      <node id="4">
+      <node id="5">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</label>
         <link refid="bsl__predcorr_8hpp_source"/>
       </node>
-      <node id="5">
+      <node id="6">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_explicit.hpp</label>
         <link refid="bsl__predcorr__second__order__explicit_8hpp_source"/>
       </node>
-      <node id="6">
+      <node id="7">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
         <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
       </node>
-      <node id="11">
+      <node id="12">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_inter.hpp</label>
         <link refid="collisions__inter_8hpp_source"/>
       </node>
-      <node id="12">
+      <node id="13">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.hpp</label>
         <link refid="collisions__intra_8hpp_source"/>
       </node>
-      <node id="13">
+      <node id="14">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_utils.hpp</label>
         <link refid="collisions__utils_8hpp_source"/>
       </node>
       <node id="2">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
-        <link refid="polarpoissonlikesolver_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</label>
+        <link refid="polarpoissonlikeassembler_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="7" relation="include">
-        </childnode>
+      </node>
+      <node id="3">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
+        <link refid="polarpoissonlikesolver_8hpp_source"/>
         <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="7" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -95,25 +101,25 @@
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="2" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
-        </childnode>
         <childnode refid="10" relation="include">
         </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
       </node>
-      <node id="9">
+      <node id="10">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/simpson_quadrature.hpp</label>
         <link refid="simpson__quadrature_8hpp_source"/>
       </node>
-      <node id="10">
+      <node id="11">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/trapezoid_quadrature.hpp</label>
         <link refid="trapezoid__quadrature_8hpp"/>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="13" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
         </childnode>
       </node>
     </invincdepgraph>
