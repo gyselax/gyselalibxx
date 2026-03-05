@@ -11,6 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Fixed
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+## [v0.6.0] - 2026-03-05
+
+### Added
+
 - Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
 - Add the fluid moments computation in pycall block to the mini-application
 - Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
@@ -39,6 +51,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove recursion from submodules synchronisation.
 - Add missing `module purge` in Persee toolchains.
 - Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
+- Use GCC 14 in the Jean-Zay toolchain.
+- Reduce memory footprint of `FEM1DPoissonSolver`.
+- Update DDC to [v0.11.0](https://github.com/CExA-project/ddc/releases/tag/v0.11.0).
+- Moved assembly of the stiffness matrix from `PolarSplineFEMPoissonLikeSolver` to new `PolarSplineFEMPoissonLikeAssembler` class.
 
 ### Deprecated
 
