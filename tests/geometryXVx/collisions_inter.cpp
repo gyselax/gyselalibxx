@@ -50,9 +50,6 @@ TEST(CollisionsInter, CollisionsInter)
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
     IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
 
-    SplineXBuilder const builder_x(gridx);
-    SplineVxBuilder const builder_vx(gridvx);
-
     IdxRangeSpXVx const mesh(idx_range_sp, gridx, gridvx);
 
     host_t<DFieldMemSp> charges(idx_range_sp);

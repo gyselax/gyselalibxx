@@ -30,8 +30,6 @@ static void TestMaxwellian()
 
     IdxRangeVx gridvx(SplineInterpPointsVx::get_domain<GridVx>());
 
-    SplineVxBuilder const builder_vx(gridvx);
-
     DFieldMemVx quadrature_coeffs(
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx));
     Quadrature<IdxRangeVx> const integrate_v(get_const_field(quadrature_coeffs));
