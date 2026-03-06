@@ -53,7 +53,7 @@ private:
     EvaluatorType m_evaluator;
 
 public:
-    SplineInterpolator(IdxRange<InterpGrid> idx_range)
+    explicit SplineInterpolator(IdxRange<InterpGrid> idx_range)
         : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
         , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
         , m_builder(idx_range)
