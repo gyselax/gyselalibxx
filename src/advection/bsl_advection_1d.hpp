@@ -9,8 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"
-#include "i_interpolation_builder.hpp"
-#include "i_interpolation_evaluator.hpp"
+#include "i_interpolation.hpp"
 #include "itimestepper.hpp"
 
 
@@ -61,8 +60,8 @@ template <
         class GridInterest,
         class IdxRangeAdvection,
         class IdxRangeFunction,
-        concepts::Interpolation FunctionInterpolation,
-        concepts::Interpolation AdvectionInterpolation,
+        concepts::Interpolation FunctionInterpolator,
+        concepts::Interpolation AdvectionFieldInterpolator,
         class TimeStepperBuilder = EulerBuilder,
         class DataType = double>
 class BslAdvection1D
@@ -72,13 +71,13 @@ class BslAdvection1D
 
 public:
     // The type of the interpolation builder for the advected function along GridInterest.
-    using FunctionBuilder = typename concepts::InterpolationBuilder;
+    using FunctionBuilder = typename FunctionInterpolator::BuilderType;
     // The type of the interpolation evaluator for the advected function along GridInterest.
-    using FunctionEvaluator = typename concepts::InterpolationEvaluator;
+    using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
     // The type of the spline builder for the advection field (see SplineBuilder).
-    using AdvectionFieldBuilder = typename concepts::InterpolationBuilder;
+    using AdvectionFieldBuilder = typename AdvectionFieldInterpolator::BuilderType;
     // The type of the spline evaluator for the advection field (see SplineEvaluator).
-    using AdvectionFieldEvaluator = typename concepts::InterpolationEvaluator;
+    using AdvectionFieldEvaluator = typename AdvectionFieldInterpolator::EvaluatorType;
 
 private:
     // Advection index range element:
