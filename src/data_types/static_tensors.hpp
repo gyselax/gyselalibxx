@@ -84,7 +84,7 @@ public:
      * @tparam Dim The dimension of interest (0 <= dim < rank()).
      */
     template <std::size_t dim>
-    using vector_index_set_t = std::conditional_t<dim == 0, ValidIndexSetRow, ValidIndexSetCol>;
+    using vector_index_set_t = ddc::type_seq_element_t<dim, index_set>;
 };
 
 /**
@@ -98,6 +98,16 @@ class CartesianLeviCivitaTensor
 {
     static_assert(is_vector_index_set_v<ValidIndexSet>);
     static_assert(std::is_same_v<ValidIndexSet, vector_index_set_dual_t<ValidIndexSet>>);
+
+private:
+    static constexpr std::size_t compute_size()
+    {
+        std::size_t result = 1;
+        for (std::size_t i = 0; i < rank(); ++i) {
+            result *= ddc::type_seq_size_v<ValidIndexSet>;
+        }
+        return result;
+    }
 
 public:
     /// The type of the elements of the tensor.
@@ -123,7 +133,7 @@ public:
      */
     KOKKOS_FUNCTION static constexpr std::size_t size()
     {
-        return rank() * rank();
+        return compute_size();
     }
 
     /// The TensorIndexSet describing the possible indices.
@@ -171,7 +181,15 @@ class LeviCivitaTensor
             || (is_contravariant_vector_index_set_v<ValidIndexSet>));
 
 private:
-    double m_coeff;
+    ElementType m_coeff;
+    static constexpr std::size_t compute_size()
+    {
+        std::size_t result = 1;
+        for (std::size_t i = 0; i < rank(); ++i) {
+            result *= ddc::type_seq_size_v<ValidIndexSet>;
+        }
+        return result;
+    }
 
 public:
     /// The type of the elements of the tensor.
@@ -197,7 +215,7 @@ public:
      */
     KOKKOS_FUNCTION static constexpr std::size_t size()
     {
-        return rank() * rank();
+        return compute_size();
     }
 
     /// The TensorIndexSet describing the possible indices.
@@ -206,7 +224,7 @@ public:
     /**
      * @brief Construct an uninitialised tensor object.
      */
-    explicit KOKKOS_FUNCTION LeviCivitaTensor(double jacobian)
+    explicit KOKKOS_FUNCTION LeviCivitaTensor(ElementType jacobian)
     {
         if constexpr (is_covariant_vector_index_set_v<ValidIndexSet>) {
             m_coeff = jacobian;
@@ -225,7 +243,7 @@ public:
     template <class QueryTensorIndexElement>
     KOKKOS_INLINE_FUNCTION ElementType get() const
     {
-        double constexpr eps = type_seq_permutation_parity_v<
+        int constexpr eps = type_seq_permutation_parity_v<
                 typename QueryTensorIndexElement::IdxTypeSeq,
                 ValidIndexSet>;
         return eps * m_coeff;
@@ -243,7 +261,7 @@ public:
 
 namespace ddcHelper {
 /**
- * @brief A helper function to get a modifiable reference to an element of the tensor.
+ * @brief A helper function to get the value of an element of the tensor.
  * @tparam QueryIndexTag A type describing the relevant index.
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
@@ -258,7 +276,7 @@ KOKKOS_INLINE_FUNCTION constexpr double get(
 }
 
 /**
- * @brief A helper function to get a modifiable reference to an element of the tensor.
+ * @brief A helper function to get the value of an element of the tensor.
  * @tparam QueryIndexTag A type describing the relevant index.
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
@@ -273,7 +291,7 @@ KOKKOS_INLINE_FUNCTION constexpr double get(
 }
 
 /**
- * @brief A helper function to get a modifiable reference to an element of the tensor.
+ * @brief A helper function to get the value of an element of the tensor.
  * @tparam QueryIndexTag A type describing the relevant index.
  * @param tensor The tensor whose elements are examined.
  * @return The relevant element of the tensor.
@@ -296,5 +314,9 @@ inline constexpr bool
 
 template <class ElementType, class ValidIndexSet>
 inline constexpr bool enable_tensor_type<LeviCivitaTensor<ElementType, ValidIndexSet>> = true;
+
+template <class ElementType, class ValidIndexSet>
+inline constexpr bool
+        enable_tensor_type<CartesianLeviCivitaTensor<ElementType, ValidIndexSet>> = true;
 
 } // namespace detail
