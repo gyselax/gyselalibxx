@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include "constant_identity_interpolation_extrapolation_rule.hpp"
 #include "i_interpolation.hpp"
