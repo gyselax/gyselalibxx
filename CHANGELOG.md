@@ -21,6 +21,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Removed the mini-app and moved it to its own repository [mini-app](https://github.com/gyselax/gysela-mini-app_io).
+
 ## [v0.6.0] - 2026-03-05
 
 ### Added
