@@ -9,8 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"
-#include "i_interpolation_builder.hpp"
-#include "i_interpolation_evaluator.hpp"
+#include "i_interpolation.hpp"
 #include "itimestepper.hpp"
 
 
@@ -61,16 +60,24 @@ template <
         class GridInterest,
         class IdxRangeAdvection,
         class IdxRangeFunction,
-        concepts::InterpolationBuilder FunctionBuilder,
-        concepts::InterpolationEvaluator FunctionEvaluator,
-        concepts::InterpolationBuilder AdvectionFieldBuilder,
-        concepts::InterpolationEvaluator AdvectionFieldEvaluator,
+        concepts::Interpolation FunctionInterpolator,
+        concepts::Interpolation AdvectionFieldInterpolator,
         class TimeStepperBuilder = EulerBuilder,
         class DataType = double>
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(std::is_floating_point_v<DataType>);
+
+public:
+    // The type of the interpolation builder for the advected function along GridInterest.
+    using FunctionBuilder = typename FunctionInterpolator::BuilderType;
+    // The type of the interpolation evaluator for the advected function along GridInterest.
+    using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
+    // The type of the spline builder for the advection field (see SplineBuilder).
+    using AdvectionFieldBuilder = typename AdvectionFieldInterpolator::BuilderType;
+    // The type of the spline evaluator for the advection field (see SplineEvaluator).
+    using AdvectionFieldEvaluator = typename AdvectionFieldInterpolator::EvaluatorType;
 
 private:
     // Advection index range element:
@@ -161,6 +168,39 @@ public:
         , m_function_evaluator(function_evaluator)
         , m_adv_field_builder(adv_field_builder)
         , m_adv_field_evaluator(adv_field_evaluator)
+        , m_time_stepper_builder(time_stepper_builder)
+    {
+    }
+
+    /**
+     * @brief Constructor when the advection domain and the function domain are different.
+     *
+     * When IdxRangeAdvection and IdxRangeFunction are different, we need one builder and
+     * evaluator for each index range.
+     *
+     * We can also use it when we want two different builders/evaluators but defined on the same
+     * domain (e.g. different boundary conditions for the evaluators).
+     *
+     * @param[in] function_builder Builder along the GridInterest direction used to build
+     *          the interpolation representation of the advected function (allfdistribu)
+     *          on the domain of the function.
+     * @param[in] function_evaluator Evaluator along the GridInterest direction used to
+     *          evaluate the advected function at the characteristic feet.
+     * @param[in] adv_field_builder Builder along the GridInterest direction to build a spline representation
+     *          of the advection field on the function domain.
+     * @param[in] adv_field_evaluator Evaluator along the GridInterest direction to evaluate
+     *          the advection field spline representation on the function domain.
+     * @param[in] time_stepper_builder A builder for the time integration method used
+     *          for the characteristic equation.
+     */
+    explicit BslAdvection1D(
+            FunctionInterpolator const& function_interpolator,
+            AdvectionFieldInterpolator const& adv_field_interpolator,
+            TimeStepperBuilder const& time_stepper_builder)
+        : m_function_builder(function_interpolator.get_builder())
+        , m_function_evaluator(function_interpolator.get_evaluator())
+        , m_adv_field_builder(adv_field_interpolator.get_builder())
+        , m_adv_field_evaluator(adv_field_interpolator.get_evaluator())
         , m_time_stepper_builder(time_stepper_builder)
     {
     }
