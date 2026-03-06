@@ -7,9 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [v0.6.1] - 2026-03-06
+## [v0.6.2] - 2026-03-06
 
-### Added
+### Fixed
+
+- Ensure `CoordRTheta` is defined in `polarpoissonlikeassembler.hpp`.
+
+## [v0.6.1] - 2026-03-06
 
 ### Fixed
 
@@ -19,8 +23,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Modified `Quadrature` to allow the batched operator to work on strided data.
-
-### Deprecated
 
 ### Removed
 
