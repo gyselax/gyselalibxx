@@ -87,7 +87,10 @@ KOKKOS_FUNCTION std::conditional_t<
         calculate_derivs,
         DVector<typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual>,
         void>
-get_polar_bspline_vals_and_derivs(double& val, CoordRTheta coord, Idx<PolarBSplinesRTheta> idx)
+get_polar_bspline_vals_and_derivs(
+        double& val,
+        Coord<typename PolarBSplinesRTheta::R, typename PolarBSplinesRTheta::Theta> coord,
+        Idx<PolarBSplinesRTheta> idx)
 {
     using R = PolarBSplinesRTheta::R;
     using Theta = PolarBSplinesRTheta::Theta;
@@ -877,7 +880,7 @@ public:
             DField<IdxRangeQuadratureRTheta> int_volume)
     {
         // Calculate coefficients at quadrature point
-        CoordRTheta coord(ddc::coordinate(idx_quad));
+        Coord<R, Theta> coord(ddc::coordinate(idx_quad));
         const double alpha = spline_evaluator(coord, coeff_alpha);
         const double beta = spline_evaluator(coord, coeff_beta);
 
@@ -891,7 +894,7 @@ public:
                 = detail_poisson::get_polar_bspline_vals_and_derivs<
                         PolarBSplinesRTheta>(basis_val_trial_space, coord, idx_trial);
 
-        MetricTensorEvaluator<Mapping, CoordRTheta> get_metric_tensor(mapping);
+        MetricTensorEvaluator<Mapping, Coord<R, Theta>> get_metric_tensor(mapping);
 
         Tensor inv_metric_tensor = get_metric_tensor.inverse(coord);
 
