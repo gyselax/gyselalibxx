@@ -15,6 +15,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Modified `Quadrature` to allow the batched operator to work on strided data.
+
 ### Deprecated
 
 ### Removed
