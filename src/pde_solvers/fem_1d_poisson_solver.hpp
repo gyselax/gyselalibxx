@@ -196,7 +196,7 @@ public:
     explicit FEM1DPoissonSolver(SplineInterpolatorType const& spline_interpolator)
         : m_spline_builder(spline_interpolator.get_builder())
         , m_spline_evaluator(spline_interpolator.get_evaluator())
-        , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_evaluator))
+        , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_interpolator.get_evaluator()))
     {
         build_matrix();
     }
