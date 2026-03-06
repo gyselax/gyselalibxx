@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [UNRELEASED]
 
+### Fixed
+
+- Ensure `CoordRTheta` is defined in `polarpoissonlikeassembler.hpp`.
+
+## [v0.6.1] - 2026-03-06
+
 ### Added
 
 ### Fixed
