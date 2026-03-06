@@ -56,7 +56,7 @@ _A class providing an operator for integrating functions defined on known grid p
 | ---: | :--- |
 |   | [**Quadrature**](#function-quadrature) (QuadConstField coeffs) <br>_Create a_ [_**Quadrature**_](classQuadrature.md) _object._ |
 |  double | [**operator()**](#function-operator) (ExecutionSpace exec\_space, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on known grid points._  |
-|  void | [**operator()**](#function-operator_1) (ExecutionSpace exec\_space, Field&lt; double, BatchIdxRange, MemorySpace &gt; const result, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._  |
+|  void | [**operator()**](#function-operator_1) (ExecutionSpace exec\_space, Field&lt; double, BatchIdxRange, MemorySpace, Layout &gt; const result, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._  |
 
 
 
@@ -174,10 +174,10 @@ The integral of the function over the domain.
 
 _An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._ 
 ```C++
-template<class ExecutionSpace, class BatchIdxRange, class IntegratorFunction>
+template<class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
 inline void Quadrature::operator() (
     ExecutionSpace exec_space,
-    Field< double, BatchIdxRange, MemorySpace > const result,
+    Field< double, BatchIdxRange, MemorySpace, Layout > const result,
     IntegratorFunction integrated_function
 ) const
 ```

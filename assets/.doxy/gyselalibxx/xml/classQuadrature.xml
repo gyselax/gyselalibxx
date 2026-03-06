@@ -144,7 +144,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="60" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="60" bodyend="94"/>
       </memberdef>
-      <memberdef kind="function" id="classQuadrature_1ad7645c75af6af6bdf3f2d13eaa7cd6ff" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classQuadrature_1ae02eb072db0c97909145dc712629c824" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ExecutionSpace</type>
@@ -155,10 +155,13 @@
           <param>
             <type>class IntegratorFunction</type>
           </param>
+          <param>
+            <type>class Layout</type>
+          </param>
         </templateparamlist>
         <type>void</type>
         <definition>void Quadrature&lt; IdxRangeQuadrature, IdxRangeTotal, MemorySpace &gt;::operator()</definition>
-        <argsstring>(ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, MemorySpace &gt; const result, IntegratorFunction integrated_function) const</argsstring>
+        <argsstring>(ExecutionSpace exec_space, Field&lt; double, BatchIdxRange, MemorySpace, Layout &gt; const result, IntegratorFunction integrated_function) const</argsstring>
         <name>operator()</name>
         <qualifiedname>Quadrature::operator()</qualifiedname>
         <param>
@@ -166,7 +169,7 @@
           <declname>exec_space</declname>
         </param>
         <param>
-          <type>Field&lt; double, BatchIdxRange, MemorySpace &gt; const</type>
+          <type>Field&lt; double, BatchIdxRange, MemorySpace, Layout &gt; const</type>
           <declname>result</declname>
         </param>
         <param>
@@ -300,7 +303,7 @@
       <member refid="classQuadrature_1a21847eb865943b66e0f6aad3d18b6a22" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>IdxQuadrature</name></member>
       <member refid="classQuadrature_1a4459d395596756d33cb2b965a6f1f80d" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>m_coefficients</name></member>
       <member refid="classQuadrature_1acc3a757e91e2d185ee290c409156fd4f" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>operator()</name></member>
-      <member refid="classQuadrature_1ad7645c75af6af6bdf3f2d13eaa7cd6ff" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>operator()</name></member>
+      <member refid="classQuadrature_1ae02eb072db0c97909145dc712629c824" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>operator()</name></member>
       <member refid="classQuadrature_1a870fe16d8b2b27bef3c482b642558318" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>QuadConstField</name></member>
       <member refid="classQuadrature_1add77c7dd792c607d8047825fa2097b55" prot="public" virt="non-virtual"><scope>Quadrature</scope><name>Quadrature</name></member>
       <member refid="classQuadrature_1a5a2dcb3fe87e46decb8fe4f26d204fed" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>to_discrete_element</name></member>

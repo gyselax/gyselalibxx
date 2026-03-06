@@ -629,10 +629,10 @@ public:
         }
     }
 
-    template &lt;class ExecutionSpace, class BatchIdxRange, class IntegratorFunction&gt;
+    template &lt;class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout&gt;
     void operator()(
             ExecutionSpace exec_space,
-            Field&lt;double, BatchIdxRange, MemorySpace&gt; const result,
+            Field&lt;double, BatchIdxRange, MemorySpace, Layout&gt; const result,
             IntegratorFunction integrated_function) const
     {
         static_assert(

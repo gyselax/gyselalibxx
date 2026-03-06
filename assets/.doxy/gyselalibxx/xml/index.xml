@@ -2568,7 +2568,7 @@
     <member refid="classQuadrature_1a4459d395596756d33cb2b965a6f1f80d" kind="variable"><name>m_coefficients</name></member>
     <member refid="classQuadrature_1add77c7dd792c607d8047825fa2097b55" kind="function"><name>Quadrature</name></member>
     <member refid="classQuadrature_1acc3a757e91e2d185ee290c409156fd4f" kind="function"><name>operator()</name></member>
-    <member refid="classQuadrature_1ad7645c75af6af6bdf3f2d13eaa7cd6ff" kind="function"><name>operator()</name></member>
+    <member refid="classQuadrature_1ae02eb072db0c97909145dc712629c824" kind="function"><name>operator()</name></member>
     <member refid="classQuadrature_1a5a2dcb3fe87e46decb8fe4f26d204fed" kind="function"><name>to_discrete_element</name></member>
   </compound>
   <compound refid="structR" kind="struct"><name>R</name>

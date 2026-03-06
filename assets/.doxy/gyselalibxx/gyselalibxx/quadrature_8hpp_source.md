@@ -74,10 +74,10 @@ public:
         }
     }
 
-    template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction>
+    template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
     void operator()(
             ExecutionSpace exec_space,
-            Field<double, BatchIdxRange, MemorySpace> const result,
+            Field<double, BatchIdxRange, MemorySpace, Layout> const result,
             IntegratorFunction integrated_function) const
     {
         static_assert(
