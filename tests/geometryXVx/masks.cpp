@@ -28,17 +28,6 @@ TEST(Masks, Ordering)
 
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
 
-    SplineXBuilder const builder_x(gridx);
-
-#ifdef PERIODIC_RDIMX
-    ddc::PeriodicExtrapolationRule<X> extrapolation_rule_min;
-    ddc::PeriodicExtrapolationRule<X> extrapolation_rule_max;
-#else
-    ddc::ConstantExtrapolationRule<X> extrapolation_rule_min(x_min);
-    ddc::ConstantExtrapolationRule<X> extrapolation_rule_max(x_max);
-#endif
-    SplineXEvaluator const spline_x_evaluator(extrapolation_rule_min, extrapolation_rule_max);
-
     double const extent = 0.25;
     double const stiffness = 1e-2;
 

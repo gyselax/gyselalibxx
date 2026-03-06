@@ -7,6 +7,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [v0.6.1] - 2026-03-06
+
+### Added
+
+### Fixed
+
+- Allow `neumann_spline_quadrature_coefficients_1d` to work with `HOMOGENEOUS_HERMITE` boundary conditions.
+- Fix non-uniform periodic interpolation point selection.
+
+### Changed
+
+- Modified `Quadrature` to allow the batched operator to work on strided data.
+
+### Deprecated
+
+### Removed
+
+- Removed the mini-app and moved it to its own repository [mini-app](https://github.com/gyselax/gysela-mini-app_io).
+
 ## [v0.6.0] - 2026-03-05
 
 ### Added
@@ -42,6 +61,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use GCC 14 in the Jean-Zay toolchain.
 - Reduce memory footprint of `FEM1DPoissonSolver`.
 - Update DDC to [v0.11.0](https://github.com/CExA-project/ddc/releases/tag/v0.11.0).
+- Moved assembly of the stiffness matrix from `PolarSplineFEMPoissonLikeSolver` to new `PolarSplineFEMPoissonLikeAssembler` class.
 
 ### Deprecated
 
