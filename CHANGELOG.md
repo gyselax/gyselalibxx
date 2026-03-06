@@ -26,8 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
-- Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
 - Add the fluid moments computation in pycall block to the mini-application
+- Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
 - Add `LagrangeEvaluator` to evaluate a Lagrange polynomial centred on a given point.
 - Added error messages when wrong input is provided to a simulation.
 - Add `concepts::InterpolationBuilder` to make `IdentityInterpolationBuilder` and `ddc::SplineBuilder` interchangeable.
