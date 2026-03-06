@@ -3248,7 +3248,7 @@
   <compound refid="namespacedetail__poisson" kind="namespace"><name>detail_poisson</name>
     <member refid="polarpoissonlikeassembler_8hpp_1a65137404e884acc2dcaee94b2b25c073" kind="function"><name>theta_mod</name></member>
     <member refid="polarpoissonlikeassembler_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" kind="function"><name>theta_mod</name></member>
-    <member refid="polarpoissonlikeassembler_8hpp_1a39ae23b7a27305b424a39e6d0578e1f2" kind="function"><name>get_polar_bspline_vals_and_derivs</name></member>
+    <member refid="polarpoissonlikeassembler_8hpp_1a3f94a5d4864782525d1774e4ea602cf6" kind="function"><name>get_polar_bspline_vals_and_derivs</name></member>
     <member refid="polarpoissonlikeassembler_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" kind="function"><name>get_quadrature_between_knots</name></member>
   </compound>
   <compound refid="namespaceequilibrium" kind="namespace"><name>equilibrium</name>

@@ -104,7 +104,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="52" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="52" bodyend="65"/>
       </memberdef>
-      <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a39ae23b7a27305b424a39e6d0578e1f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a3f94a5d4864782525d1774e4ea602cf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>typename <ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></type>
@@ -118,7 +118,7 @@
         </templateparamlist>
         <type>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt;</type>
         <definition>KOKKOS_FUNCTION std::conditional_t&lt; calculate_derivs, DVector&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt; detail_poisson::get_polar_bspline_vals_and_derivs</definition>
-        <argsstring>(double &amp;val, CoordRTheta coord, Idx&lt; PolarBSplinesRTheta &gt; idx)</argsstring>
+        <argsstring>(double &amp;val, Coord&lt; typename PolarBSplinesRTheta::R, typename PolarBSplinesRTheta::Theta &gt; coord, Idx&lt; PolarBSplinesRTheta &gt; idx)</argsstring>
         <name>get_polar_bspline_vals_and_derivs</name>
         <qualifiedname>detail_poisson::get_polar_bspline_vals_and_derivs</qualifiedname>
         <param>
@@ -126,7 +126,7 @@
           <declname>val</declname>
         </param>
         <param>
-          <type>CoordRTheta</type>
+          <type>Coord&lt; typename <ref refid="classPolarBSplines_1a648dc9ce69b7875ee05df11ca91ca831" kindref="member">PolarBSplinesRTheta::R</ref>, typename <ref refid="classPolarBSplines_1ac4cbfc152e798720dd2615390e96d894" kindref="member">PolarBSplinesRTheta::Theta</ref> &gt;</type>
           <declname>coord</declname>
         </param>
         <param>
@@ -186,7 +186,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="90" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="90" bodyend="145"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="90" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="90" bodyend="148"/>
       </memberdef>
       <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -313,7 +313,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="178" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="178" bodyend="213"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="181" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="181" bodyend="216"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

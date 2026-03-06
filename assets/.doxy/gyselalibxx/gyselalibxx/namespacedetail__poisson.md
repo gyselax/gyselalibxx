@@ -51,7 +51,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, [**DVector**](classTensor.md)&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (double & val, CoordRTheta coord, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivative of the specified polar bspline at the specified quadrature point._  |
+|  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, [**DVector**](classTensor.md)&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (double & val, Coord&lt; typename [**PolarBSplinesRTheta::R**](classPolarBSplines.md#typedef-r), typename [**PolarBSplinesRTheta::Theta**](classPolarBSplines.md#typedef-theta) &gt; coord, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivative of the specified polar bspline at the specified quadrature point._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; start\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; end\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; start\_knot\_theta, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; end\_knot\_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the quadrature range between a provided set of knots._  |
 |  KOKKOS\_FUNCTION IdxStep&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; | [**theta\_mod**](#function-theta_mod) (IdxStep&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxType | [**theta\_mod**](#function-theta_mod) (IdxType idx) <br>_Calculates the index which is inside the poloidal domain using the periodicity properties._  |
@@ -95,7 +95,7 @@ _Get the value and derivative of the specified polar bspline at the specified qu
 template<typename PolarBSplinesRTheta, bool calculate_derivs>
 KOKKOS_FUNCTION std::conditional_t< calculate_derivs, DVector < typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual >, void > detail_poisson::get_polar_bspline_vals_and_derivs (
     double & val,
-    CoordRTheta coord,
+    Coord< typename PolarBSplinesRTheta::R , typename PolarBSplinesRTheta::Theta > coord,
     Idx< PolarBSplinesRTheta > idx
 ) 
 ```
