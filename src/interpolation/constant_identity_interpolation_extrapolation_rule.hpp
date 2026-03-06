@@ -9,7 +9,7 @@ private:
     Idx<CoeffGrid> m_coeff_idx;
 
 public:
-    ConstantIdentityInterpolationExtrapolationRule(Idx<CoeffGrid> coeff_idx)
+    explicit ConstantIdentityInterpolationExtrapolationRule(Idx<CoeffGrid> coeff_idx)
         : m_coeff_idx(coeff_idx)
     {
     }
