@@ -8,6 +8,7 @@
 #include "identity_interpolation_builder.hpp"
 #include "lagrange_basis_uniform.hpp"
 #include "lagrange_evaluator.hpp"
+#include "lagrange_interpolation.hpp"
 #include "spline_definitions_xvx.hpp"
 
 
@@ -22,21 +23,12 @@ struct LagBasisVx : UniformLagrangeBasis<Vx, 3, double>
 {
 };
 
-using LagBuilderVx = IdentityInterpolationBuilder<
+using LagInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        double,
-        GridVx,
-        LagBasisVx>;
-
-using LagEvaluatorVx = LagrangeEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        double,
         LagBasisVx,
         GridVx,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule>;
+        NULL_VALUE,
+        NULL_VALUE>;
 
 std::pair<IdxRange<GridX>, IdxRange<GridVx>> Init_idx_range_velocity_adv()
 {
@@ -125,12 +117,9 @@ double VelocityAdvection(
 TEST(VelocityAdvection, BatchedLagrange)
 {
     auto [idx_range_x, idx_range_vx] = Init_idx_range_velocity_adv();
-    LagBuilderVx const lag_builder_vx;
-    ddc::NullExtrapolationRule bv_v_min;
-    ddc::NullExtrapolationRule bv_v_max;
-    LagEvaluatorVx const lag_evaluator_vx(bv_v_min, bv_v_max);
-    BslAdvectionVelocity<GeometryXVx, GridVx, LagBuilderVx, LagEvaluatorVx> const
-            lag_advection_vx(lag_builder_vx, lag_evaluator_vx);
+    LagInterpolatorVx lagrange_interpolation;
+    BslAdvectionVelocity<GeometryXVx, LagInterpolatorVx> const lag_advection_vx(
+            lagrange_interpolation);
     double const err
             = VelocityAdvection<GeometryXVx, GridVx>(lag_advection_vx, idx_range_x, idx_range_vx);
     EXPECT_LE(err, 1e-3);
@@ -141,12 +130,8 @@ TEST(VelocityAdvection, SplineBatched)
     auto [idx_range_x, idx_range_vx] = Init_idx_range_velocity_adv();
 
     SplineInterpolatorVx spline_interpolation(idx_range_vx);
-    BslAdvectionVelocity<
-            GeometryXVx,
-            GridVx,
-            typename SplineInterpolatorVx::BuilderType,
-            typename SplineInterpolatorVx::EvaluatorType> const
-            spline_advection_vx(spline_interpolation.get_builder(), spline_interpolation.get_evaluator());
+    BslAdvectionVelocity<GeometryXVx, SplineInterpolatorVx> const spline_advection_vx(
+            spline_interpolation);
     double const err = VelocityAdvection<
             GeometryXVx,
             GridVx>(spline_advection_vx, idx_range_x, idx_range_vx);

@@ -10,6 +10,7 @@
 #include "neumann_spline_quadrature.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_interpolation.hpp"
 
 namespace {
 
@@ -40,10 +41,10 @@ using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ExtrapolationRule::PERIODIC,
-        ExtrapolationRule::PERIODIC>;
+        ExtrapolationRule::NULL_VALUE,
+        ExtrapolationRule::NULL_VALUE,
+        ddc::BoundCond::GREVILLE,
+        ddc::BoundCond::GREVILLE>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 

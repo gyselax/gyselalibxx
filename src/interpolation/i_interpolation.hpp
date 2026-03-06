@@ -23,10 +23,10 @@ concept Interpolation = requires
 {
     {
         t.get_builder()
-        } -> std::same_as<typename T::BuilderType>;
+        } -> std::same_as<typename T::BuilderType const&>;
     {
         t.get_evaluator()
-        } -> std::same_as<typename T::EvaluatorType>;
+        } -> std::same_as<typename T::EvaluatorType const&>;
 };
 
 } // namespace concepts

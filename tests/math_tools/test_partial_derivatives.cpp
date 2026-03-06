@@ -9,10 +9,12 @@
 #include "constant_partial_derivatives.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "i_interpolation.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "spline_1d_partial_derivative.hpp"
 #include "spline_2d_partial_derivative.hpp"
+#include "spline_interpolation.hpp"
 
 namespace {
 
@@ -264,17 +266,17 @@ public:
     using SplineInterpPointsDDim
             = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsX, SplineInterpPointsY>;
 
-    ExtrapolationRule SplineExtrapolation
+    static constexpr ExtrapolationRule SplineExtrapolation
             = DDim::PERIODIC ? ExtrapolationRule::PERIODIC : ExtrapolationRule::CONSTANT;
 
-    using SplineDDimInterpolation = SplineInterpolation<
+    using SplineDDimInterpolation = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,
             BSplinesDDim,
             GridDDim,
+            SplineExtrapolation,
+            SplineExtrapolation,
             SplineBoundary,
-            SplineBoundary,
-            ExtrapolationRule,
-            ExtrapolationRule>;
+            SplineBoundary>;
 
 public:
     PartialDerivativeTestSpline1D(
@@ -307,9 +309,11 @@ public:
     {
         IdxRangeX const idxrange_x = SplineInterpPointsX::template get_domain<GridX>();
         IdxRangeY const idxrange_y = SplineInterpPointsY::template get_domain<GridY>();
-        IdxRangeXY const idxrange = IdxRangeXY(idxrange_x, idxrange_y);
 
-        SplineDDimInterpolation spline_interpolator(idxrange);
+        IdxRangeXY const idxrange(idxrange_x, idxrange_y);
+        IdxRange<GridDDim> idxrange_ddim(idxrange);
+
+        SplineDDimInterpolation spline_interpolator(idxrange_ddim);
 
         Spline1DPartialDerivativeCreator<
                 typename SplineDDimInterpolation::BuilderType,

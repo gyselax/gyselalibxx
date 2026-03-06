@@ -22,7 +22,8 @@
  *                  By default: the 1D index range of the interpolation points for the spline builder.
  */
 template <
-        class SplineInterpolatorType class IdxRangeBatched =
+        class SplineInterpolatorType,
+        class IdxRangeBatched =
                 typename SplineInterpolatorType::BuilderType::interpolation_domain_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
@@ -198,7 +199,7 @@ public:
      * @param spline_builder A spline builder which calculates the coefficients of a spline representation.
      * @param spline_evaluator A spline evaluator which provides the value of a spline representation from its coefficients.
      */
-    FEM1DPoissonSolver(SplineInterpolator const& spline_interpolator)
+    FEM1DPoissonSolver(SplineInterpolatorType const& spline_interpolator)
         : m_spline_builder(spline_interpolator.get_builder())
         , m_spline_evaluator(spline_interpolator.get_evaluator())
         , m_spline_fem_evaluator(jit_build_nubsplinesx(m_spline_evaluator))

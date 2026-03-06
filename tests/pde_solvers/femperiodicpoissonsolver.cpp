@@ -7,9 +7,11 @@
 
 #include "ddc_helper.hpp"
 #include "fem_1d_poisson_solver.hpp"
+#include "i_interpolation.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_interpolation.hpp"
 
 namespace {
 
@@ -55,10 +57,10 @@ using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
         ExtrapolationRule::PERIODIC,
-        ExtrapolationRule::PERIODIC>;
+        ExtrapolationRule::PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 using DFieldMemBatchX = DFieldMem<IdxRangeBatchX>;

@@ -104,22 +104,9 @@ int main(int argc, char** argv)
     int const nbstep_diag = int(time_diag / deltat);
 
     // Creating operators
-    BslAdvectionSpatial<
-            GeometryXVx,
-            GridX,
-            typename SplineInterpolatorX::BuilderType,
-            typename SplineInterpolatorX::EvaluatorType> const
-            advection_x(
-                    spline_interpolation_x.get_builder(),
-                    spline_interpolation_x.get_evaluator());
-    BslAdvectionVelocity<
-            GeometryXVx,
-            GridVx,
-            typename SplineInterpolatorVx::BuilderType,
-            typename SplineInterpolatorVx::EvaluatorType> const
-            advection_vx(
-                    spline_interpolation_vx.get_builder(),
-                    spline_interpolation_vx.get_evaluator());
+    BslAdvectionSpatial<GeometryXVx, SplineInterpolatorX> const advection_x(spline_interpolation_x);
+    BslAdvectionVelocity<GeometryXVx, SplineInterpolatorVx> const advection_vx(
+            spline_interpolation_vx);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
