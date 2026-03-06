@@ -70,4 +70,3 @@ public:
         return m_evaluator;
     }
 };
-
