@@ -62,6 +62,11 @@ public:
     {
     }
 
+    /**
+     * @brief Constructor
+     * @param[in] function_interpolator Interpolator along the GridVx direction used to build
+     *          and evaluate the interpolation representation of the advected function.
+     */
     explicit BslAdvectionVelocity(FunctionInterpolator const& function_interpolator)
         : m_function_builder(function_interpolator.get_builder())
         , m_function_evaluator(function_interpolator.get_evaluator())
