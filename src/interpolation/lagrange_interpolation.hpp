@@ -7,6 +7,36 @@
 #include "lagrange_basis_uniform.hpp"
 #include "lagrange_evaluator.hpp"
 
+/**
+ * @brief An owning interpolation object that bundles a Lagrange builder and evaluator.
+ *
+ * LagrangeInterpolator constructs and owns a matching IdentityInterpolationBuilder and
+ * LagrangeEvaluator for a given dimension. It satisfies the concepts::Interpolation
+ * concept and is the recommended way to create a Lagrange interpolation for use with
+ * advection operators and similar algorithms.
+ *
+ * The builder is an identity operation: it passes function values on the interpolation
+ * grid directly as coefficients to the evaluator, which then performs local polynomial
+ * reconstruction via the Lagrange basis.
+ *
+ * The boundary condition (MinBound / MaxBound) and extrapolation rule
+ * (MinExtrapRule / MaxExtrapRule) must be consistent: both must be PERIODIC for
+ * periodic dimensions and both must be non-PERIODIC for non-periodic dimensions.
+ * Note: @c CONSTANT extrapolation is not supported for Lagrange interpolation.
+ *
+ * @tparam ExecSpace     The Kokkos execution space used for computations.
+ * @tparam Basis         The Lagrange basis type (uniform or non-uniform).
+ * @tparam InterpGrid    The discrete grid on which function values are provided.
+ * @tparam MinExtrapRule The ExtrapolationRule applied below the lower boundary.
+ * @tparam MaxExtrapRule The ExtrapolationRule applied above the upper boundary.
+ * @tparam MinBound      The ddc::BoundCond at the lower boundary (default: GREVILLE).
+ *                       This is included to have an interface interchangeable with SplineBuilder
+ *                       but is unused.
+ * @tparam MaxBound      The ddc::BoundCond at the upper boundary (default: GREVILLE).
+ *                       This is included to have an interface interchangeable with SplineBuilder
+ *                       but is unused.
+ * @tparam DataType      The floating-point type of the function values (default: double).
+ */
 template <
         class ExecSpace,
         class Basis,
@@ -30,6 +60,7 @@ class LagrangeInterpolator
     static_assert(is_lagrange_basis_v<Basis>);
 
 public:
+    /// @brief The IdentityInterpolationBuilder type built from the template parameters.
     using BuilderType = IdentityInterpolationBuilder<
             ExecSpace,
             typename ExecSpace::memory_space,
@@ -37,8 +68,10 @@ public:
             InterpGrid,
             Basis>;
 
+    /// @brief The discrete grid type used for the Lagrange coefficients (the Lagrange basis grid).
     using CoeffGridType = typename BuilderType::basis_domain_type;
 
+    /// @brief The LagrangeEvaluator type built from the template parameters.
     using EvaluatorType = LagrangeEvaluator<
             ExecSpace,
             typename ExecSpace::memory_space,
@@ -55,6 +88,13 @@ private:
     EvaluatorType m_evaluator;
 
 public:
+    /**
+     * @brief Construct a LagrangeInterpolator.
+     *
+     * The extrapolation rules are initialised from the discrete space of @c Basis,
+     * so the corresponding ddc discrete space must be initialised before construction.
+     * No index range is required because the identity builder needs none.
+     */
     LagrangeInterpolator()
         : m_min_extrapolation(
                 get_extrapolation<MinExtrapRule, CoeffGridType, Basis>(Extremity::FRONT))
@@ -64,11 +104,19 @@ public:
     {
     }
 
+    /**
+     * @brief Return a const reference to the owned identity builder.
+     * @return The BuilderType instance.
+     */
     BuilderType const& get_builder() const
     {
         return m_builder;
     }
 
+    /**
+     * @brief Return a const reference to the owned Lagrange evaluator.
+     * @return The EvaluatorType instance.
+     */
     EvaluatorType const& get_evaluator() const
     {
         return m_evaluator;
