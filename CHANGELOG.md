@@ -19,6 +19,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Remove deprecated `Lagrange` class.
+
+## [v0.6.2] - 2026-03-06
+
+### Fixed
+
+- Ensure `CoordRTheta` is defined in `polarpoissonlikeassembler.hpp`.
+
+## [v0.6.1] - 2026-03-06
+
+### Fixed
+
+- Allow `neumann_spline_quadrature_coefficients_1d` to work with `HOMOGENEOUS_HERMITE` boundary conditions.
+- Fix non-uniform periodic interpolation point selection.
+
+### Changed
+
+- Modified `Quadrature` to allow the batched operator to work on strided data.
+
+### Removed
+
+- Removed the mini-app and moved it to its own repository [mini-app](https://github.com/gyselax/gysela-mini-app_io).
+
 ## [v0.6.0] - 2026-03-05
 
 ### Added

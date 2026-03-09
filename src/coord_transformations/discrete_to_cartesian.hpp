@@ -201,7 +201,7 @@ public:
         static_assert(std::is_same_v<R, typename GridR::continuous_dimension_type>);
         static_assert(std::is_same_v<Theta, typename GridTheta::continuous_dimension_type>);
         ddc::parallel_for_each(
-                ExecSpace(),
+                exec_space,
                 get_idx_range(coords),
                 KOKKOS_CLASS_LAMBDA(IdxRTheta idx) {
                     coords(idx) = (*this)(ddc::coordinate(idx));
