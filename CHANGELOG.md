@@ -19,6 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- Remove deprecated `Lagrange` class.
+
 ## [v0.6.2] - 2026-03-06
 
 ### Fixed
