@@ -193,6 +193,14 @@ private:
     std::unique_ptr<Matrix> m_fem_matrix;
 
 public:
+    /**
+     * Construct the FemQNSolver operator.
+     *
+     * @param spline_interpolator A spline interpolator containting the builder
+     *                           which calculates the coefficients of a spline representation
+     *                           and the associated evaluator which provides the value of the
+     *                           spline representation from its coefficients.
+     */
     explicit FEM1DPoissonSolver(SplineInterpolatorType const& spline_interpolator)
         : m_spline_builder(spline_interpolator.get_builder())
         , m_spline_evaluator(spline_interpolator.get_evaluator())
