@@ -44,14 +44,10 @@
  *          It had to also be defined on the GridInterest for the time integration method.
  * @tparam IdxRangeFunction
  *          The index range of @f$ \Omega @f$ where allfdistribu is defined.
- * @tparam FunctionBuilder
- *          The type of the interpolation builder for the advected function along GridInterest.
- * @tparam FunctionEvaluator
- *          The type of the interpolation evaluator for the advected function along GridInterest.
- * @tparam AdvectionFieldBuilder
- *          The type of the spline builder for the advection field (see SplineBuilder).
- * @tparam AdvectionFieldEvaluator
- *          The type of the spline evaluator for the advection field (see SplineEvaluator).
+ * @tparam FunctionInterpolator
+ *          The type of the interpolation for the advected function along GridInterest.
+ * @tparam AdvectionFieldInterpolator
+ *          The type of the interpolation for the advection field (see SplineBuilder).
  * @tparam TimeStepperBuilder
  *          A time stepper builder indicating which time integration method should be
  *          applied to solve the characteristic equation.
@@ -70,13 +66,13 @@ class BslAdvection1D
     static_assert(std::is_floating_point_v<DataType>);
 
 public:
-    // The type of the interpolation builder for the advected function along GridInterest.
+    /// The type of the interpolation builder for the advected function along GridInterest.
     using FunctionBuilder = typename FunctionInterpolator::BuilderType;
-    // The type of the interpolation evaluator for the advected function along GridInterest.
+    /// The type of the interpolation evaluator for the advected function along GridInterest.
     using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
-    // The type of the spline builder for the advection field (see SplineBuilder).
+    /// The type of the spline builder for the advection field (see SplineBuilder).
     using AdvectionFieldBuilder = typename AdvectionFieldInterpolator::BuilderType;
-    // The type of the spline evaluator for the advection field (see SplineEvaluator).
+    /// The type of the spline evaluator for the advection field (see SplineEvaluator).
     using AdvectionFieldEvaluator = typename AdvectionFieldInterpolator::EvaluatorType;
 
 private:
@@ -181,15 +177,10 @@ public:
      * We can also use it when we want two different builders/evaluators but defined on the same
      * domain (e.g. different boundary conditions for the evaluators).
      *
-     * @param[in] function_builder Builder along the GridInterest direction used to build
-     *          the interpolation representation of the advected function (allfdistribu)
-     *          on the domain of the function.
-     * @param[in] function_evaluator Evaluator along the GridInterest direction used to
-     *          evaluate the advected function at the characteristic feet.
-     * @param[in] adv_field_builder Builder along the GridInterest direction to build a spline representation
-     *          of the advection field on the function domain.
-     * @param[in] adv_field_evaluator Evaluator along the GridInterest direction to evaluate
-     *          the advection field spline representation on the function domain.
+     * @param[in] function_interpolator Interpolator along the GridInterest direction used to
+     *          build a continuous representation and evaluate the advected function at the characteristic feet.
+     * @param[in] adv_field_interpolator Interpolator along the GridInterest direction used to
+     *          build a continuous representation and evaluate the advection field at the characteristic feet.
      * @param[in] time_stepper_builder A builder for the time integration method used
      *          for the characteristic equation.
      */
