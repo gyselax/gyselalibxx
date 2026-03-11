@@ -122,9 +122,7 @@ public:
                             feet_coords(iv, ib) = Coord<DimV>(ddc::coordinate(iv) - dvx);
                         }
                     });
-            m_function_builder(
-                    get_field(function_coefs_alloc),
-                    get_const_field(allfdistribu[isp]));
+            m_function_builder(get_field(function_coefs_alloc), get_const_field(allfdistribu[isp]));
             m_function_evaluator(
                     allfdistribu[isp],
                     get_const_field(feet_coords),
