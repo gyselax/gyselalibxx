@@ -100,7 +100,7 @@ class CartesianLeviCivitaTensor
     static_assert(std::is_same_v<ValidIndexSet, vector_index_set_dual_t<ValidIndexSet>>);
 
 private:
-    static constexpr std::size_t compute_size()
+    KOKKOS_FUNCTION static constexpr std::size_t compute_size()
     {
         std::size_t result = 1;
         for (std::size_t i = 0; i < rank(); ++i) {
@@ -182,7 +182,7 @@ class LeviCivitaTensor
 
 private:
     ElementType m_coeff;
-    static constexpr std::size_t compute_size()
+    KOKKOS_FUNCTION static constexpr std::size_t compute_size()
     {
         std::size_t result = 1;
         for (std::size_t i = 0; i < rank(); ++i) {
