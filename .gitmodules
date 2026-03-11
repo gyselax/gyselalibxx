@@ -2,9 +2,6 @@
 	path = vendor/googletest
 	url = https://github.com/google/googletest.git
 	branch = master
-[submodule "vendor/koliop"]
-	path = vendor/koliop
-	url = https://gitlab.com/cines/code.gysela/koliop.git
 [submodule "vendor/ddc"]
 	path = vendor/ddc
 	url = https://github.com/CExA-project/ddc.git
