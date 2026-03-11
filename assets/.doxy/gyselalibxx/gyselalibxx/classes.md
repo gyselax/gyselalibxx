@@ -76,6 +76,7 @@
 * [**CollisionsIntra**](classCollisionsIntra.md)
 * [**CombinedMapping**](classCombinedMapping.md)
 * [**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md)
+* [**ConstantIdentityInterpolationExtrapolationRule**](classConstantIdentityInterpolationExtrapolationRule.md)
 * [**ConstantPartialDerivative**](classConstantPartialDerivative.md)
 * [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md)
 * [**Corner1Tag**](structPolarBSplines_1_1Impl_1_1Corner1Tag.md)
@@ -302,6 +303,7 @@
 ## l
 
 * [**LagrangeEvaluator**](classLagrangeEvaluator.md)
+* [**LagrangeInterpolator**](classLagrangeInterpolator.md)
 * [**LeviCivitaTensor**](classLeviCivitaTensor.md)
 * [**LiePoissonBracket**](classLiePoissonBracket.md)
 * [**LinearCoordTransform**](classLinearCoordTransform.md)
@@ -427,6 +429,7 @@
 * [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md)
 * [**SplineBuilder2DCache**](classSplineBuilder2DCache.md)
 * [**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md)
+* [**SplineInterpolator**](classSplineInterpolator.md)
 * [**SplineInterpolator2D**](classSplineInterpolator2D.md)
 * [**SplinePolarFootFinder**](classSplinePolarFootFinder.md)
 * [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md)

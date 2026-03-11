@@ -585,6 +585,10 @@
 <td style="text-align: left;"><a href="#typedef-find_idx_t"><strong>find_idx_t</strong></a>  <br><em>Find the type of an index which allows access to a Coordinate of the specified type.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef typename detail::GetFirst&lt; Condition, T... &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-get_first_t"><strong>get_first_t</strong></a>  <br><em>Get the first type which satisfies the condition.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename detail::TypeSeqCat&lt; TypeSeqs... &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-type_seq_cat_t"><strong>type_seq_cat_t</strong></a>  <br><em>Concatenate type sequences into a new type sequence. This is similar to type_seq_merge_t but it does not remove duplicate elements.</em></td>
 </tr>
@@ -642,6 +646,17 @@
 <ul>
 <li><code>CoordType</code> The type of the coordinate </li>
 <li><code>IdxRangeType</code> The type of the index range that the index will come from. </li>
+</ul>
+<hr>
+
+<h3 id="typedef-get_first_t">typedef get_first_t</h3>
+<p><em>Get the first type which satisfies the condition.</em> </p>
+<pre><code class="language-C++">using get_first_t =  typename detail::GetFirst&lt;Condition, T...&gt;::type;
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>Condition</code> The condition that must be satisfied. </li>
+<li><code>T</code> The possible types </li>
 </ul>
 <hr>
 

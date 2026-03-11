@@ -2,7 +2,7 @@
 
 # Class FEM1DPoissonSolver
 
-**template &lt;class SplineBuilder, class SplineEvaluator, class IdxRangeBatched&gt;**
+**template &lt;class SplineInterpolatorType, class IdxRangeBatched&gt;**
 
 
 
@@ -81,7 +81,8 @@ Inherits the following classes: [IPoissonSolver](classIPoissonSolver.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**FEM1DPoissonSolver**](#function-fem1dpoissonsolver) (SplineBuilder const & spline\_builder, SplineEvaluator const & spline\_evaluator) <br> |
+|   | [**FEM1DPoissonSolver**](#function-fem1dpoissonsolver-12) (SplineInterpolatorType const & spline\_interpolator) <br> |
+|   | [**FEM1DPoissonSolver**](#function-fem1dpoissonsolver-22) (SplineBuilder const & spline\_builder, SplineEvaluator const & spline\_evaluator) <br> |
 |  field\_type | [**operator()**](#function-operator) (field\_type phi, field\_type rho) override const<br>_An operator which calculates the solution_ \(\phi\) _to Poisson's equation:_\(-\Delta \phi = \rho\) _._ |
 |  field\_type | [**operator()**](#function-operator_1) (field\_type phi, vector\_field\_type E, field\_type rho) override const<br>_An operator which calculates the solution_ \(\phi\) _to Poisson's equation and its derivative:_\(- \Delta \phi = \rho\) __\(E = - \nabla \phi\) _._ |
 |  void | [**solve\_matrix\_system**](#function-solve_matrix_system) (BatchedFEMBSplinesCoeff phi\_spline\_coef, field\_type rho) const<br> |
@@ -165,7 +166,36 @@ A class to solve the following equation: \(-\Delta \phi = \rho\) using a Finite 
 
 
 
-### function FEM1DPoissonSolver 
+### function FEM1DPoissonSolver [1/2]
+
+```C++
+inline explicit FEM1DPoissonSolver::FEM1DPoissonSolver (
+    SplineInterpolatorType const & spline_interpolator
+) 
+```
+
+
+
+Construct the FemQNSolver operator.
+
+
+
+
+**Parameters:**
+
+
+* `spline_interpolator` A spline interpolator containing the builder which calculates the coefficients of a spline representation and the associated evaluator which provides the value of the spline representation from its coefficients. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function FEM1DPoissonSolver [2/2]
 
 ```C++
 inline FEM1DPoissonSolver::FEM1DPoissonSolver (

@@ -568,6 +568,8 @@
 <li><strong>AdvecFieldMem</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
 <li><strong>AdvecFieldSplineCoeffs</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
 <li><strong>AdvecFieldSplineMem</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
+<li><strong>AdvectionFieldBuilder</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
+<li><strong>AdvectionFieldEvaluator</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
 <li><strong>allocator_type</strong> (<a href="classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.html"><strong>DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;</strong></a>)</li>
 <li><strong>associated_patch</strong> (<a href="structEdge.html"><strong>Edge</strong></a>)</li>
 <li><strong>ArgBasisCov</strong> (<a href="classIdentityCoordinateChange.html"><strong>IdentityCoordinateChange</strong></a>)</li>
@@ -597,6 +599,7 @@
 <li><strong>Builder</strong> (<a href="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f.html"><strong>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</strong></a>)</li>
 <li><strong>batched_coeff_idx_range_type</strong> (<a href="structInterpolationEvaluatorTraits.html"><strong>InterpolationEvaluatorTraits</strong></a>, <a href="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c.html"><strong>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;</strong></a>, <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>)</li>
 <li><strong>batched_evaluation_idx_range_type</strong> (<a href="structInterpolationEvaluatorTraits.html"><strong>InterpolationEvaluatorTraits</strong></a>, <a href="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c.html"><strong>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;</strong></a>, <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>, <a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
+<li><strong>BuilderType</strong> (<a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
 <li><strong>BatchedRHS</strong> (<a href="classMatrixBatch.html"><strong>MatrixBatch</strong></a>)</li>
 <li><strong>batch_sparse_type</strong> (<a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>, <a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>)</li>
 <li><strong>BuilderOnPatch</strong> (<a href="classMultipatchSplineBuilder.html"><strong>MultipatchSplineBuilder</strong></a>, <a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a>)</li>
@@ -654,10 +657,11 @@
 <li><strong>CoordRminorTheta</strong> (<a href="classGyroAverageOperator.html"><strong>GyroAverageOperator</strong></a>)</li>
 <li><strong>CConstFieldType</strong> (<a href="classIInterpolator2D.html"><strong>IInterpolator2D</strong></a>, <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a>)</li>
 <li><strong>CoordType</strong> (<a href="classIInterpolator2D.html"><strong>IInterpolator2D</strong></a>, <a href="classSplineInterpolator2D.html"><strong>SplineInterpolator2D</strong></a>)</li>
-<li><strong>continuous_dimension_type</strong> (<a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a>, <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>, <a href="classNonUniformLagrangeBasis.html"><strong>NonUniformLagrangeBasis</strong></a>, <a href="classUniformLagrangeBasis.html"><strong>UniformLagrangeBasis</strong></a>)</li>
+<li><strong>continuous_dimension_type</strong> (<a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a>, <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>, <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>, <a href="classNonUniformLagrangeBasis.html"><strong>NonUniformLagrangeBasis</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>, <a href="classUniformLagrangeBasis.html"><strong>UniformLagrangeBasis</strong></a>)</li>
 <li><strong>coeff_grid_type</strong> (<a href="structInterpolationEvaluatorTraits.html"><strong>InterpolationEvaluatorTraits</strong></a>, <a href="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c.html"><strong>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;</strong></a>, <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>)</li>
 <li><strong>CzarnyToCart</strong> (<a href="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.html"><strong>InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</strong></a>)</li>
 <li><strong>coeff_idx_range_type</strong> (<a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>)</li>
+<li><strong>CoeffGridType</strong> (<a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>)</li>
 <li><strong>ContravariantVectorType</strong> (<a href="classMetricTensorEvaluator.html"><strong>MetricTensorEvaluator</strong></a>)</li>
 <li><strong>CovariantVectorType</strong> (<a href="classMetricTensorEvaluator.html"><strong>MetricTensorEvaluator</strong></a>)</li>
 <li><strong>CoordConstFieldOnPatch</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
@@ -779,6 +783,7 @@
 <li><strong>Edge2</strong> (<a href="structInterface.html"><strong>Interface</strong></a>)</li>
 <li><strong>evaluation_idx_range_type</strong> (<a href="structInterpolationEvaluatorTraits.html"><strong>InterpolationEvaluatorTraits</strong></a>, <a href="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c.html"><strong>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;</strong></a>, <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>, <a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
 <li><strong>Evaluator</strong> (<a href="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c.html"><strong>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;</strong></a>)</li>
+<li><strong>EvaluatorType</strong> (<a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
 <li><strong>evaluation_discrete_dimension_type1</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
 <li><strong>evaluation_discrete_dimension_type2</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
 <li><strong>evaluation_idx_range_type1</strong> (<a href="classMultipatchSplineEvaluator2D.html"><strong>MultipatchSplineEvaluator2D</strong></a>)</li>
@@ -796,7 +801,9 @@
 <li><strong>FeetField</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
 <li><strong>FeetFieldMem</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
 <li><strong>FunctionBasisFieldMem</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
+<li><strong>FunctionBuilder</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>, <a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a>, <a href="classBslAdvectionVelocity.html"><strong>BslAdvectionVelocity</strong></a>)</li>
 <li><strong>FunctionDerivFieldMem</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
+<li><strong>FunctionEvaluator</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>, <a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a>, <a href="classBslAdvectionVelocity.html"><strong>BslAdvectionVelocity</strong></a>)</li>
 <li><strong>FunctionField</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>)</li>
 <li><strong>FEMBSplines</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>FEMBSplinesCoeffMem</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
@@ -818,7 +825,8 @@
 <ul>
 <li><strong>GridR</strong> (<a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a>, <a href="classDiscreteToCartesianBuilder.html"><strong>DiscreteToCartesianBuilder</strong></a>, <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
 <li><strong>GridTheta</strong> (<a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a>, <a href="classDiscreteToCartesianBuilder.html"><strong>DiscreteToCartesianBuilder</strong></a>, <a href="classGyroAverageOperator.html"><strong>GyroAverageOperator</strong></a>, <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
-<li><strong>GridV</strong> (<a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a>)</li>
+<li><strong>GridV</strong> (<a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a>, <a href="classBslAdvectionVelocity.html"><strong>BslAdvectionVelocity</strong></a>)</li>
+<li><strong>GridX</strong> (<a href="classBslAdvectionSpatial.html"><strong>BslAdvectionSpatial</strong></a>)</li>
 <li><strong>GridMuType</strong> (<a href="classCollisionConfiguration.html"><strong>CollisionConfiguration</strong></a>)</li>
 <li><strong>GridPhiType</strong> (<a href="classCollisionConfiguration.html"><strong>CollisionConfiguration</strong></a>)</li>
 <li><strong>GridRType</strong> (<a href="classCollisionConfiguration.html"><strong>CollisionConfiguration</strong></a>)</li>
@@ -1106,6 +1114,8 @@
 <li><strong>spline_idx_range</strong> (<a href="classDiscreteToCartesian.html"><strong>DiscreteToCartesian</strong></a>)</li>
 <li><strong>SplineCoeffs</strong> (<a href="classDiscreteToCartesianBuilder.html"><strong>DiscreteToCartesianBuilder</strong></a>, <a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
 <li><strong>SplineCoeffsMem</strong> (<a href="classDiscreteToCartesianBuilder.html"><strong>DiscreteToCartesianBuilder</strong></a>, <a href="classRefinedDiscreteToCartesianBuilder.html"><strong>RefinedDiscreteToCartesianBuilder</strong></a>)</li>
+<li><strong>SplineBuilder</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
+<li><strong>SplineEvaluator</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>spatial_dim_for</strong> (<a href="classGeometryXVx.html"><strong>GeometryXVx</strong></a>)</li>
 <li><strong>space_tags</strong> (<a href="classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.html"><strong>IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;</strong></a>)</li>
 <li><strong>solver_type</strong> (<a href="classMatrixBatchCsr.html"><strong>MatrixBatchCsr</strong></a>, <a href="classMatrixBatchEll.html"><strong>MatrixBatchEll</strong></a>)</li>

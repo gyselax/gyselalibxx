@@ -561,7 +561,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-fem1dpoissonsolver">Class FEM1DPoissonSolver</h1>
-<p><strong>template &lt;class SplineBuilder, class SplineEvaluator, class IdxRangeBatched&gt;</strong></p>
+<p><strong>template &lt;class SplineInterpolatorType, class IdxRangeBatched&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a></p>
 <p><a href="#detailed-description">More...</a></p>
 <ul>
@@ -598,7 +598,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-fem1dpoissonsolver"><strong>FEM1DPoissonSolver</strong></a> (SplineBuilder const &amp; spline_builder, SplineEvaluator const &amp; spline_evaluator) <br></td>
+<td style="text-align: left;"><a href="#function-fem1dpoissonsolver-12"><strong>FEM1DPoissonSolver</strong></a> (SplineInterpolatorType const &amp; spline_interpolator) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-fem1dpoissonsolver-22"><strong>FEM1DPoissonSolver</strong></a> (SplineBuilder const &amp; spline_builder, SplineEvaluator const &amp; spline_evaluator) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">field_type</td>
@@ -623,7 +627,19 @@
 <li><code>IdxRangeBatched</code> The type af the index range over which this operator will operate. By default: the 1D index range of the interpolation points for the spline builder. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-fem1dpoissonsolver">function FEM1DPoissonSolver</h3>
+<h3 id="function-fem1dpoissonsolver-12">function FEM1DPoissonSolver [1/2]</h3>
+<pre><code class="language-C++">inline explicit FEM1DPoissonSolver::FEM1DPoissonSolver (
+    SplineInterpolatorType const &amp; spline_interpolator
+) 
+</code></pre>
+<p>Construct the FemQNSolver operator.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>spline_interpolator</code> A spline interpolator containing the builder which calculates the coefficients of a spline representation and the associated evaluator which provides the value of the spline representation from its coefficients. </li>
+</ul>
+<hr>
+
+<h3 id="function-fem1dpoissonsolver-22">function FEM1DPoissonSolver [2/2]</h3>
 <pre><code class="language-C++">inline FEM1DPoissonSolver::FEM1DPoissonSolver (
     SplineBuilder const &amp; spline_builder,
     SplineEvaluator const &amp; spline_evaluator

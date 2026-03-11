@@ -55,6 +55,7 @@
 
 ## g
 
+* **get\_extrapolation** ([**extrapolation\_rule\_choice.hpp**](extrapolation__rule__choice_8hpp.md))
 * **gauss\_legendre\_quadrature\_coefficients** ([**gauss\_legendre\_integration.hpp**](gauss__legendre__integration_8hpp.md))
 * **get\_const\_field** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))
 * **get\_field** ([**ddc\_alias\_inline\_functions.hpp**](ddc__alias__inline__functions_8hpp.md))

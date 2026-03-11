@@ -17,8 +17,7 @@
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
 * `#include "euler.hpp"`
-* `#include "i_interpolation_builder.hpp"`
-* `#include "i_interpolation_evaluator.hpp"`
+* `#include "i_interpolation.hpp"`
 * `#include "itimestepper.hpp"`
 
 
@@ -39,7 +38,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslAdvection1D**](classBslAdvection1D.md) &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, FunctionBuilder, FunctionEvaluator, AdvectionFieldBuilder, AdvectionFieldEvaluator, class TimeStepperBuilder, class DataType&gt;<br>_A class which computes the advection along the dimension of interest GridInterest._  |
+| class | [**BslAdvection1D**](classBslAdvection1D.md) &lt;class GridInterest, class IdxRangeAdvection, class IdxRangeFunction, FunctionInterpolator, AdvectionFieldInterpolator, class TimeStepperBuilder, class DataType&gt;<br>_A class which computes the advection along the dimension of interest GridInterest._  |
 
 
 

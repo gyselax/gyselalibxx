@@ -14,8 +14,7 @@
 * `#include <ddc/ddc.hpp>`
 * `#include "ddc_alias_inline_functions.hpp"`
 * `#include "ddc_aliases.hpp"`
-* `#include "i_interpolation_builder.hpp"`
-* `#include "i_interpolation_evaluator.hpp"`
+* `#include "i_interpolation.hpp"`
 * `#include "iadvectionx.hpp"`
 * `#include "species_info.hpp"`
 
@@ -37,7 +36,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) &lt;class Geometry, class [**GridX**](structGridX.md), FunctionBuilder, FunctionEvaluator, class DataType&gt;<br>_A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._ |
+| class | [**BslAdvectionSpatial**](classBslAdvectionSpatial.md) &lt;class Geometry, FunctionInterpolator, class DataType&gt;<br>_A class which computes the spatial advection along the dimension of interest_ [_**GridX**_](structGridX.md) _. Working for every Cartesian geometry._ |
 
 
 

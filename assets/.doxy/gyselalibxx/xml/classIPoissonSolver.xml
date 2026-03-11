@@ -2,7 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classIPoissonSolver" kind="class" language="C++" prot="public">
     <compoundname>IPoissonSolver</compoundname>
-    <derivedcompoundref refid="classFEM1DPoissonSolver" prot="public" virt="non-virtual">FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classFEM1DPoissonSolver" prot="public" virt="non-virtual">FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;</derivedcompoundref>
     <templateparamlist>
       <param>
         <type>class IdxRangeLaplacian</type>
@@ -26,7 +26,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>FEM1DPoissonSolver&lt; SplineBuilder, SplineEvaluator, IdxRangeBatched &gt;</label>
+        <label>FEM1DPoissonSolver&lt; SplineInterpolatorType, IdxRangeBatched &gt;</label>
         <link refid="classFEM1DPoissonSolver"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>

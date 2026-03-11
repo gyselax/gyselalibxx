@@ -2,7 +2,7 @@
 
 # Class BslAdvectionSpatial
 
-**template &lt;class Geometry, class [**GridX**](structGridX.md), concepts::InterpolationBuilder FunctionBuilder, concepts::InterpolationEvaluator FunctionEvaluator, class DataType&gt;**
+**template &lt;class Geometry, concepts::Interpolation FunctionInterpolator, class DataType&gt;**
 
 
 
@@ -75,7 +75,8 @@ Inherits the following classes: [IAdvectionSpatial](classIAdvectionSpatial.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvectionSpatial**](#function-bsladvectionspatial) (FunctionBuilder const & function\_builder, FunctionEvaluator const & function\_evaluator) <br>_Constructor._  |
+|   | [**BslAdvectionSpatial**](#function-bsladvectionspatial-12) (FunctionBuilder const & function\_builder, FunctionEvaluator const & function\_evaluator) <br>_Constructor._  |
+|   | [**BslAdvectionSpatial**](#function-bsladvectionspatial-22) (FunctionInterpolator const & function\_interpolator) <br>_Constructor._  |
 |  Field&lt; DataType, IdxRangeFdistrib &gt; | [**operator()**](#function-operator) (Field&lt; DataType, IdxRangeFdistrib &gt; const allfdistribu, DataType const dt) override const<br>_Advects fdistribu along_ [_**GridX**_](structGridX.md) _for a duration dt._ |
 |   | [**~BslAdvectionSpatial**](#function-bsladvectionspatial) () override<br> |
 
@@ -147,7 +148,7 @@ See [IAdvectionSpatial](classIAdvectionSpatial.md)
 
 
 
-### function BslAdvectionSpatial 
+### function BslAdvectionSpatial [1/2]
 
 _Constructor._ 
 ```C++
@@ -166,6 +167,33 @@ inline explicit BslAdvectionSpatial::BslAdvectionSpatial (
 
 * `function_builder` Builder along the [**GridX**](structGridX.md) direction used to build the interpolation representation of the advected function. 
 * `function_evaluator` Evaluator along the [**GridX**](structGridX.md) direction used to evaluate the advected function at the characteristic feet. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function BslAdvectionSpatial [2/2]
+
+_Constructor._ 
+```C++
+inline explicit BslAdvectionSpatial::BslAdvectionSpatial (
+    FunctionInterpolator const & function_interpolator
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `function_interpolator` Interpolator along the [**GridX**](structGridX.md) direction used to build and evaluate the interpolation representation of the advected function. 
 
 
 

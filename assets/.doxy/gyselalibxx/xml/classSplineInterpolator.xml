@@ -1,0 +1,322 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classSplineInterpolator" kind="class" language="C++" prot="public">
+    <compoundname>SplineInterpolator</compoundname>
+    <includes refid="spline__interpolation_8hpp" local="no">spline_interpolation.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class Basis</type>
+      </param>
+      <param>
+        <type>class InterpGrid</type>
+      </param>
+      <param>
+        <type>ExtrapolationRule</type>
+        <declname>MinExtrapRule</declname>
+        <defname>MinExtrapRule</defname>
+      </param>
+      <param>
+        <type>ExtrapolationRule</type>
+        <declname>MaxExtrapRule</declname>
+        <defname>MaxExtrapRule</defname>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>MinBound</declname>
+        <defname>MinBound</defname>
+      </param>
+      <param>
+        <type>ddc::BoundCond</type>
+        <declname>MaxBound</declname>
+        <defname>MaxBound</defname>
+      </param>
+      <param>
+        <type>ddc::SplineSolver</type>
+        <declname>Solver</declname>
+        <defname>Solver</defname>
+        <defval>ddc::SplineSolver::LAPACK</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classSplineInterpolator_1a6ccadb16c290f6a7de78a1aefb544c48" prot="private" static="no">
+        <type>typename InterpGrid::continuous_dimension_type</type>
+        <definition>using SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::continuous_dimension_type =  typename InterpGrid::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>continuous_dimension_type</name>
+        <qualifiedname>SplineInterpolator::continuous_dimension_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="41" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" prot="public" static="no">
+        <type>ddc::SplineBuilder&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, MinBound, MaxBound, Solver &gt;</type>
+        <definition>using SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::BuilderType =  ddc::SplineBuilder&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, MinBound, MaxBound, Solver&gt;</definition>
+        <argsstring></argsstring>
+        <name>BuilderType</name>
+        <qualifiedname>SplineInterpolator::BuilderType</qualifiedname>
+        <briefdescription>
+<para>The ddc::SplineBuilder type built from the template parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" prot="public" static="no">
+        <type>ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, extrapolation_rule_t&lt; MinExtrapRule, Basis &gt;, extrapolation_rule_t&lt; MaxExtrapRule, Basis &gt; &gt;</type>
+        <definition>using SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::EvaluatorType =  ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, Basis&gt;, extrapolation_rule_t&lt;MaxExtrapRule, Basis&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>EvaluatorType</name>
+        <qualifiedname>SplineInterpolator::EvaluatorType</qualifiedname>
+        <briefdescription>
+<para>The ddc::SplineEvaluator type built from the template parameters. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-attrib">
+      <memberdef kind="variable" id="classSplineInterpolator_1a2db070d5637b9e19a7201c95017101dd" prot="private" static="yes" constexpr="yes" mutable="no">
+        <type>constexpr bool</type>
+        <definition>constexpr bool SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::is_periodic</definition>
+        <argsstring></argsstring>
+        <name>is_periodic</name>
+        <qualifiedname>SplineInterpolator::is_periodic</qualifiedname>
+        <initializer>= continuous_dimension_type::PERIODIC</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="43" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="43" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classSplineInterpolator_1a348292ac795d3196975a390463610c1a" prot="private" static="no" mutable="no">
+        <type>extrapolation_rule_t&lt; MinExtrapRule, Basis &gt;</type>
+        <definition>extrapolation_rule_t&lt;MinExtrapRule, Basis&gt; SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::m_min_extrapolation</definition>
+        <argsstring></argsstring>
+        <name>m_min_extrapolation</name>
+        <qualifiedname>SplineInterpolator::m_min_extrapolation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="73" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSplineInterpolator_1a52957a0179ed761b6a6dcc7c5155a73c" prot="private" static="no" mutable="no">
+        <type>extrapolation_rule_t&lt; MaxExtrapRule, Basis &gt;</type>
+        <definition>extrapolation_rule_t&lt;MaxExtrapRule, Basis&gt; SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::m_max_extrapolation</definition>
+        <argsstring></argsstring>
+        <name>m_max_extrapolation</name>
+        <qualifiedname>SplineInterpolator::m_max_extrapolation</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="74" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSplineInterpolator_1a6f394ea211d048ed0de9e84b377363ae" prot="private" static="no" mutable="no">
+        <type><ref refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kindref="member">BuilderType</ref></type>
+        <definition>BuilderType SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::m_builder</definition>
+        <argsstring></argsstring>
+        <name>m_builder</name>
+        <qualifiedname>SplineInterpolator::m_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="75" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classSplineInterpolator_1a4de6b5624065659fa7c93dfa0ac7482b" prot="private" static="no" mutable="no">
+        <type><ref refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kindref="member">EvaluatorType</ref></type>
+        <definition>EvaluatorType SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>SplineInterpolator::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="76" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::SplineInterpolator</definition>
+        <argsstring>(IdxRange&lt; InterpGrid &gt; idx_range)</argsstring>
+        <name>SplineInterpolator</name>
+        <qualifiedname>SplineInterpolator::SplineInterpolator</qualifiedname>
+        <param>
+          <type>IdxRange&lt; InterpGrid &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Construct a <ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref> on the given interpolation index range. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The extrapolation rules are initialised from the discrete space of <computeroutput>Basis</computeroutput>, so the corresponding ddc discrete space must be initialised before construction.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D interpolation index range passed to the builder. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="87" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="87" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kindref="member">BuilderType</ref> const &amp;</type>
+        <definition>BuilderType const  &amp; SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::get_builder</definition>
+        <argsstring>() const</argsstring>
+        <name>get_builder</name>
+        <qualifiedname>SplineInterpolator::get_builder</qualifiedname>
+        <briefdescription>
+<para>Return a const reference to the owned spline builder. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The BuilderType instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="99" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="99" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kindref="member">EvaluatorType</ref> const &amp;</type>
+        <definition>EvaluatorType const  &amp; SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::get_evaluator</definition>
+        <argsstring>() const</argsstring>
+        <name>get_evaluator</name>
+        <qualifiedname>SplineInterpolator::get_evaluator</qualifiedname>
+        <briefdescription>
+<para>Return a const reference to the owned spline evaluator. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The EvaluatorType instance. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="108" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="108" bodyend="111"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>An owning interpolation object that bundles a spline builder and evaluator. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref> constructs and owns a matching ddc::SplineBuilder and ddc::SplineEvaluator for a given dimension. It satisfies the <ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref> concept and is the recommended way to create a spline interpolation for use with advection operators and similar algorithms.</para>
+<para>The boundary condition (MinBound / MaxBound) and extrapolation rule (MinExtrapRule / MaxExtrapRule) must be consistent: both must be PERIODIC for periodic dimensions and both must be non-PERIODIC for non-periodic dimensions.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ExecSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Kokkos execution space used for computations. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Basis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The B-spline basis type (uniform or non-uniform). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>InterpGrid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The discrete grid on which function values are provided. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MinExtrapRule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ExtrapolationRule applied below the lower boundary. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MaxExtrapRule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ExtrapolationRule applied above the upper boundary. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MinBound</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ddc::BoundCond at the lower boundary of the spline builder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MaxBound</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ddc::BoundCond at the upper boundary of the spline builder. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Solver</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline solver backend (default: LAPACK). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="39" bodyend="112"/>
+    <listofallmembers>
+      <member refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>BuilderType</name></member>
+      <member refid="classSplineInterpolator_1a6ccadb16c290f6a7de78a1aefb544c48" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>continuous_dimension_type</name></member>
+      <member refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>EvaluatorType</name></member>
+      <member refid="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>get_builder</name></member>
+      <member refid="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>get_evaluator</name></member>
+      <member refid="classSplineInterpolator_1a2db070d5637b9e19a7201c95017101dd" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>is_periodic</name></member>
+      <member refid="classSplineInterpolator_1a6f394ea211d048ed0de9e84b377363ae" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_builder</name></member>
+      <member refid="classSplineInterpolator_1a4de6b5624065659fa7c93dfa0ac7482b" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_evaluator</name></member>
+      <member refid="classSplineInterpolator_1a52957a0179ed761b6a6dcc7c5155a73c" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_max_extrapolation</name></member>
+      <member refid="classSplineInterpolator_1a348292ac795d3196975a390463610c1a" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_min_extrapolation</name></member>
+      <member refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>SplineInterpolator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

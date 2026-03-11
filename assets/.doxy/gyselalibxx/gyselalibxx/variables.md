@@ -203,6 +203,8 @@
 * **enable\_data\_access\_methods&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;** ([**vector\_field\_mem.hpp**](vector__field__mem_8hpp.md))
 * **enable\_mem\_type&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, Allocator &gt; &gt;** ([**vector\_field\_mem.hpp**](vector__field__mem_8hpp.md))
 * **enable\_vector\_field&lt; VectorFieldMem&lt; ElementType, IdxRangeType, DimSeq, MemSpace &gt; &gt;** ([**vector\_field\_mem.hpp**](vector__field__mem_8hpp.md))
+* **extrapolation\_rule\_t** ([**extrapolation\_rule\_choice.hpp**](extrapolation__rule__choice_8hpp.md))
+* **ExtrapolationRule** ([**i\_interpolation.hpp**](i__interpolation_8hpp.md))
 * **equivalent\_edge\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **extract\_patches\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **enable\_data\_access\_methods&lt; MultipatchField&lt; T, Patches... &gt; &gt;** ([**multipatch\_field.hpp**](multipatch__field_8hpp.md))
@@ -296,6 +298,7 @@
 * **GRID\_X\_UNIFORM** ([**geometry\_xvx.hpp**](geometry__xvx_8hpp.md))
 * **Grid1OnPatch** ([**types.hpp**](types_8hpp.md))
 * **Grid2OnPatch** ([**types.hpp**](types_8hpp.md))
+* **get\_first\_t** ([**type\_seq\_tools.hpp**](type__seq__tools_8hpp.md))
 
 
 ## h
@@ -395,6 +398,10 @@
 * **IdxVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **IdxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **IdxXYVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
+* **is\_lagrange\_basis\_v** ([**i\_interpolation.hpp**](i__interpolation_8hpp.md))
+* **is\_spline\_basis\_v** ([**i\_interpolation.hpp**](i__interpolation_8hpp.md))
+* **is\_non\_uniform\_lagrange\_basis\_v** ([**lagrange\_basis\_non\_uniform.hpp**](lagrange__basis__non__uniform_8hpp.md))
+* **is\_uniform\_lagrange\_basis\_v** ([**lagrange\_basis\_uniform.hpp**](lagrange__basis__uniform_8hpp.md))
 * **insert\_into\_seq\_before\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **insert\_into\_type\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))
 * **insert\_mpi\_tags\_into\_seq\_t** ([**mpitools.hpp**](mpitools_8hpp.md))

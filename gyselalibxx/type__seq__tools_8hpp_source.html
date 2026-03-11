@@ -757,6 +757,21 @@ public:
     using type = ddc::detail::TypeSeq&lt;get_element&lt;Is&gt;...&gt;;
 };
 
+template &lt;template &lt;typename P&gt; typename Condition, class... T&gt;
+class GetFirst;
+
+template &lt;template &lt;typename P&gt; typename Condition, class First, class... T&gt;
+class GetFirst&lt;Condition, First, T...&gt;
+{
+    using type = std::conditional_t&lt;Condition&lt;First&gt;::value, First, GetFirst&lt;Condition, T...&gt;&gt;;
+};
+
+template &lt;template &lt;typename P&gt; typename Condition&gt;
+class GetFirst&lt;Condition&gt;
+{
+    using type = void;
+};
+
 } // namespace detail
 
 template &lt;class TypeSeqIn, std::size_t Start, std::size_t End&gt;
@@ -788,6 +803,9 @@ using type_seq_duplicate_t =
 
 template &lt;class CoordType, class IdxRangeType&gt;
 using find_idx_t = typename detail::FindIdxType&lt;CoordType, IdxRangeType&gt;::type;
+
+template &lt;template &lt;typename P&gt; typename Condition, class... T&gt;
+using get_first_t = typename detail::GetFirst&lt;Condition, T...&gt;::type;
 </code></pre></div>
               
             </div>

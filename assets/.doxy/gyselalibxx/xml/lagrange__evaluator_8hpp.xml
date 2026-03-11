@@ -5,6 +5,7 @@
     <includes refid="i__interpolation__evaluator_8hpp" local="yes">i_interpolation_evaluator.hpp</includes>
     <includes refid="lagrange__basis__non__uniform_8hpp" local="yes">lagrange_basis_non_uniform.hpp</includes>
     <includes refid="lagrange__basis__uniform_8hpp" local="yes">lagrange_basis_uniform.hpp</includes>
+    <includedby refid="lagrange__interpolation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</includedby>
     <incdepgraph>
       <node id="2">
         <label>i_interpolation_evaluator.hpp</label>
@@ -102,6 +103,18 @@
         <label>vector</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
+        <link refid="lagrange__evaluator_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
+        <link refid="lagrange__interpolation_8hpp_source"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="classLagrangeEvaluator" prot="public">LagrangeEvaluator</innerclass>
     <briefdescription>
     </briefdescription>

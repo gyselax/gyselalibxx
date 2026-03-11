@@ -22,25 +22,21 @@
 
 
 template <
-        class SplineBuilder,
-        class SplineEvaluator,
-        class IdxRangeBatched = typename SplineBuilder::interpolation_domain_type>
+        class SplineInterpolatorType,
+        class IdxRangeBatched =
+                typename SplineInterpolatorType::BuilderType::interpolation_domain_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
-              typename SplineEvaluator::evaluation_domain_type,
+              typename SplineInterpolatorType::EvaluatorType::evaluation_domain_type,
               IdxRangeBatched,
               double,
-              typename SplineEvaluator::memory_space,
+              typename SplineInterpolatorType::EvaluatorType::memory_space,
               Kokkos::layout_right>
 {
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::interpolation_discrete_dimension_type,
-                  typename SplineEvaluator::evaluation_discrete_dimension_type>);
-    static_assert(ddc::in_tags_v<
-                  typename SplineBuilder::interpolation_discrete_dimension_type,
-                  ddc::to_type_seq_t<IdxRangeBatched>>);
-
 private:
+    using SplineBuilder = typename SplineInterpolatorType::BuilderType;
+    using SplineEvaluator = typename SplineInterpolatorType::EvaluatorType;
+
     using base_type = IPoissonSolver<
             typename SplineEvaluator::evaluation_domain_type,
             IdxRangeBatched,
@@ -175,30 +171,22 @@ private:
     std::unique_ptr<Matrix> m_fem_matrix;
 
 public:
-    FEM1DPoissonSolver(SplineBuilder const& spline_builder, SplineEvaluator const& spline_evaluator)
+    explicit FEM1DPoissonSolver(SplineInterpolatorType const& spline_interpolator)
+        : m_spline_builder(spline_interpolator.get_builder())
+        , m_spline_evaluator(spline_interpolator.get_evaluator())
+        , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_interpolator.get_evaluator()))
+    {
+        build_matrix();
+    }
+
+    [[deprecated]] FEM1DPoissonSolver(
+            SplineBuilder const& spline_builder,
+            SplineEvaluator const& spline_evaluator)
         : m_spline_builder(spline_builder)
         , m_spline_evaluator(spline_evaluator)
         , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_evaluator))
     {
-        using break_point_grid = ddc::knot_discrete_dimension_t<InputBSplines>;
-        IdxRange<break_point_grid> break_point_idx_range
-                = ddc::discrete_space<InputBSplines>().break_point_domain();
-        host_t<FieldMem<CoordPDEDim, IdxRange<break_point_grid>>> break_points_alloc(
-                break_point_idx_range);
-        ddcHelper::dump_coordinates(
-                Kokkos::DefaultHostExecutionSpace(),
-                get_field(break_points_alloc));
-
-        // Calculate the integration coefficients
-        GaussLegendre<GridPDEDimQ, s_npts_gauss> const gl(get_const_field(break_points_alloc));
-        m_quad_coef = gl.template gauss_legendre_coefficients<memory_space>();
-
-        // Build the finite elements matrix
-        if constexpr (InputBSplines::is_periodic()) {
-            build_periodic_matrix();
-        } else {
-            build_non_periodic_matrix();
-        }
+        build_matrix();
     }
 
     field_type operator()(field_type phi, field_type rho) const override
@@ -469,6 +457,29 @@ private:
             }
             // Boundary values are never evaluated
             return FEMSplineEvaluator(ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule());
+        }
+    }
+
+    void build_matrix()
+    {
+        using break_point_grid = ddc::knot_discrete_dimension_t<InputBSplines>;
+        IdxRange<break_point_grid> break_point_idx_range
+                = ddc::discrete_space<InputBSplines>().break_point_domain();
+        host_t<FieldMem<CoordPDEDim, IdxRange<break_point_grid>>> break_points_alloc(
+                break_point_idx_range);
+        ddcHelper::dump_coordinates(
+                Kokkos::DefaultHostExecutionSpace(),
+                get_field(break_points_alloc));
+
+        // Calculate the integration coefficients
+        GaussLegendre<GridPDEDimQ, s_npts_gauss> const gl(get_const_field(break_points_alloc));
+        m_quad_coef = gl.template gauss_legendre_coefficients<memory_space>();
+
+        // Build the finite elements matrix
+        if constexpr (InputBSplines::is_periodic()) {
+            build_periodic_matrix();
+        } else {
+            build_non_periodic_matrix();
         }
     }
 };

@@ -4,6 +4,7 @@
     <compoundname>identity_interpolation_builder.hpp</compoundname>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
     <includes refid="i__interpolation__builder_8hpp" local="yes">i_interpolation_builder.hpp</includes>
+    <includedby refid="lagrange__interpolation_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</includedby>
     <incdepgraph>
       <node id="5">
         <label>i_interpolation_builder.hpp</label>
@@ -44,6 +45,18 @@
         <label>type_traits</label>
       </node>
     </incdepgraph>
+    <invincdepgraph>
+      <node id="1">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp</label>
+        <link refid="identity__interpolation__builder_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+      </node>
+      <node id="2">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
+        <link refid="lagrange__interpolation_8hpp_source"/>
+      </node>
+    </invincdepgraph>
     <innerclass refid="classIdentityInterpolationBuilder" prot="public">IdentityInterpolationBuilder</innerclass>
     <briefdescription>
     </briefdescription>

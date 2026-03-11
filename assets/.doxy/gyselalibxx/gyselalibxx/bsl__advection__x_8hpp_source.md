@@ -16,20 +16,24 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "i_interpolation_builder.hpp"
-#include "i_interpolation_evaluator.hpp"
+#include "i_interpolation.hpp"
 #include "iadvectionx.hpp"
 #include "species_info.hpp"
 
-template <
-        class Geometry,
-        class GridX,
-        concepts::InterpolationBuilder FunctionBuilder,
-        concepts::InterpolationEvaluator FunctionEvaluator,
-        class DataType = double>
-class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX, DataType>
+template <class Geometry, concepts::Interpolation FunctionInterpolator, class DataType = double>
+class BslAdvectionSpatial
+    : public IAdvectionSpatial<
+              Geometry,
+              typename InterpolationBuilderTraits<
+                      typename FunctionInterpolator::BuilderType>::interpolation_grid_type,
+              DataType>
 {
     static_assert(std::is_floating_point_v<DataType>);
+
+    using FunctionBuilder = typename FunctionInterpolator::BuilderType;
+    using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
+
+    using GridX = typename InterpolationBuilderTraits<FunctionBuilder>::interpolation_grid_type;
 
     using GridV = typename Geometry::template velocity_dim_for<GridX>;
     using IdxRangeFdistrib = typename Geometry::IdxRangeFdistribu;
@@ -48,11 +52,17 @@ private:
     FunctionEvaluator const& m_function_evaluator;
 
 public:
-    explicit BslAdvectionSpatial(
+    [[deprecated]] explicit BslAdvectionSpatial(
             FunctionBuilder const& function_builder,
             FunctionEvaluator const& function_evaluator)
         : m_function_builder(function_builder)
         , m_function_evaluator(function_evaluator)
+    {
+    }
+
+    explicit BslAdvectionSpatial(FunctionInterpolator const& function_interpolator)
+        : m_function_builder(function_interpolator.get_builder())
+        , m_function_evaluator(function_interpolator.get_evaluator())
     {
     }
 

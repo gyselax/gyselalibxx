@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classConstantIdentityInterpolationExtrapolationRule" kind="class" language="C++" prot="public">
+    <compoundname>ConstantIdentityInterpolationExtrapolationRule</compoundname>
+    <includes refid="constant__identity__interpolation__extrapolation__rule_8hpp" local="no">constant_identity_interpolation_extrapolation_rule.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class CoeffGrid</type>
+      </param>
+      <param>
+        <type>class DataType</type>
+        <defval>double</defval>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classConstantIdentityInterpolationExtrapolationRule_1ac5eda8d67bb280de45c80085cc6312d5" prot="private" static="no" mutable="no">
+        <type>Idx&lt; CoeffGrid &gt;</type>
+        <definition>Idx&lt;CoeffGrid&gt; ConstantIdentityInterpolationExtrapolationRule&lt; CoeffGrid, DataType &gt;::m_coeff_idx</definition>
+        <argsstring></argsstring>
+        <name>m_coeff_idx</name>
+        <qualifiedname>ConstantIdentityInterpolationExtrapolationRule::m_coeff_idx</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="23" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classConstantIdentityInterpolationExtrapolationRule_1a236beb3602d3220eabce2135f93172ef" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>ConstantIdentityInterpolationExtrapolationRule&lt; CoeffGrid, DataType &gt;::ConstantIdentityInterpolationExtrapolationRule</definition>
+        <argsstring>(Idx&lt; CoeffGrid &gt; coeff_idx)</argsstring>
+        <name>ConstantIdentityInterpolationExtrapolationRule</name>
+        <qualifiedname>ConstantIdentityInterpolationExtrapolationRule::ConstantIdentityInterpolationExtrapolationRule</qualifiedname>
+        <param>
+          <type>Idx&lt; CoeffGrid &gt;</type>
+          <declname>coeff_idx</declname>
+        </param>
+        <briefdescription>
+<para>Construct the rule, clamping to the coefficient at <computeroutput>coeff_idx</computeroutput>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>coeff_idx</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the boundary coefficient to return for all out-of-domain evaluation coordinates. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="32" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="32" bodyend="35"/>
+      </memberdef>
+      <memberdef kind="function" id="classConstantIdentityInterpolationExtrapolationRule_1a54fa69a7e733cb0ab33b37c230a3049b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class CoordType</type>
+          </param>
+          <param>
+            <type>class Layout</type>
+          </param>
+          <param>
+            <type>class MemorySpace</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double ConstantIdentityInterpolationExtrapolationRule&lt; CoeffGrid, DataType &gt;::operator()</definition>
+        <argsstring>(CoordType pos, ConstField&lt; DataType, IdxRange&lt; CoeffGrid &gt;, Layout, MemorySpace &gt; const interp_coef) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>ConstantIdentityInterpolationExtrapolationRule::operator()</qualifiedname>
+        <param>
+          <type>CoordType</type>
+          <declname>pos</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, IdxRange&lt; CoeffGrid &gt;, Layout, MemorySpace &gt; const</type>
+          <declname>interp_coef</declname>
+        </param>
+        <briefdescription>
+<para>Return the boundary interpolation coefficient for a coordinate outside the domain. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">pos</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the function is to be evaluated (unused). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">interp_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The full field of interpolation coefficients.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The value of <computeroutput>interp_coef</computeroutput> at the fixed boundary index. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="46" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="46" bodyend="51"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A constant extrapolation rule for identity-based (Lagrange) interpolation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>When an evaluation coordinate falls outside the interpolation domain, this rule returns the interpolation coefficient at a fixed boundary index (<computeroutput>m_coeff_idx</computeroutput>) rather than extrapolating the polynomial. This is the Lagrange analog of ddc::ConstantExtrapolationRule used with spline evaluators.</para>
+<para>It is intended to be constructed via get_extrapolation&lt;CONSTANT, CoeffGrid, Basis&gt;(), which supplies the appropriate boundary index automatically.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>CoeffGrid</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The discrete grid type of the interpolation coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DataType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The floating-point type of the function values (default: double). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="21" bodyend="52"/>
+    <listofallmembers>
+      <member refid="classConstantIdentityInterpolationExtrapolationRule_1a236beb3602d3220eabce2135f93172ef" prot="public" virt="non-virtual"><scope>ConstantIdentityInterpolationExtrapolationRule</scope><name>ConstantIdentityInterpolationExtrapolationRule</name></member>
+      <member refid="classConstantIdentityInterpolationExtrapolationRule_1ac5eda8d67bb280de45c80085cc6312d5" prot="private" virt="non-virtual"><scope>ConstantIdentityInterpolationExtrapolationRule</scope><name>m_coeff_idx</name></member>
+      <member refid="classConstantIdentityInterpolationExtrapolationRule_1a54fa69a7e733cb0ab33b37c230a3049b" prot="public" virt="non-virtual"><scope>ConstantIdentityInterpolationExtrapolationRule</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

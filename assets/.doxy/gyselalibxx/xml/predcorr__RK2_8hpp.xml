@@ -36,8 +36,6 @@
         </childnode>
         <childnode refid="37" relation="include">
         </childnode>
-        <childnode refid="39" relation="include">
-        </childnode>
         <childnode refid="19" relation="include">
         </childnode>
       </node>
@@ -187,7 +185,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="40">
+      <node id="49">
         <label>geometry_xy.hpp</label>
         <link refid="geometry__xy_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -224,13 +222,13 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="40" relation="include">
+        <childnode refid="49" relation="include">
         </childnode>
-        <childnode refid="41" relation="include">
+        <childnode refid="50" relation="include">
         </childnode>
-        <childnode refid="44" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
-        <childnode refid="48" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -238,16 +236,34 @@
         </childnode>
       </node>
       <node id="37">
+        <label>i_interpolation.hpp</label>
+        <link refid="i__interpolation_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
+      </node>
+      <node id="39">
         <label>i_interpolation_builder.hpp</label>
         <link refid="i__interpolation__builder_8hpp_source"/>
-        <childnode refid="38" relation="include">
+        <childnode refid="40" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="39">
+      <node id="41">
         <label>i_interpolation_evaluator.hpp</label>
         <link refid="i__interpolation__evaluator_8hpp_source"/>
         <childnode refid="8" relation="include">
@@ -255,12 +271,42 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
-      <node id="41">
+      <node id="42">
+        <label>lagrange_basis_non_uniform.hpp</label>
+        <link refid="lagrange__basis__non__uniform_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="44" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="48">
+        <label>lagrange_basis_uniform.hpp</label>
+        <link refid="lagrange__basis__uniform_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="43" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="45" relation="include">
+        </childnode>
+      </node>
+      <node id="50">
         <label>l_norm_tools.hpp</label>
         <link refid="l__norm__tools_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="42" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
         <childnode refid="29" relation="include">
         </childnode>
@@ -311,28 +357,28 @@
         <childnode refid="35" relation="include">
         </childnode>
       </node>
-      <node id="44">
+      <node id="52">
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="45" relation="include">
+        <childnode refid="53" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="54" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
       </node>
-      <node id="42">
+      <node id="51">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="43" relation="include">
+        <childnode refid="47" relation="include">
         </childnode>
         <childnode refid="10" relation="include">
         </childnode>
@@ -371,7 +417,7 @@
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="48">
+      <node id="56">
         <label>rk2.hpp</label>
         <link refid="rk2_8hpp_source"/>
         <childnode refid="18" relation="include">
@@ -421,11 +467,27 @@
         <childnode refid="12" relation="include">
         </childnode>
       </node>
+      <node id="38">
+        <label>geometry_descriptors.hpp</label>
+        <link refid="geometry__descriptors_8hpp_source"/>
+      </node>
       <node id="27">
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="43">
+      <node id="45">
+        <label>view.hpp</label>
+        <link refid="view_8hpp_source"/>
+        <childnode refid="18" relation="include">
+        </childnode>
+        <childnode refid="46" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="47" relation="include">
+        </childnode>
+      </node>
+      <node id="47">
         <label>Kokkos_Core.hpp</label>
       </node>
       <node id="18">
@@ -439,6 +501,9 @@
       </node>
       <node id="16">
         <label>cmath</label>
+      </node>
+      <node id="43">
+        <label>cstddef</label>
       </node>
       <node id="6">
         <label>ddc/ddc.hpp</label>
@@ -458,16 +523,19 @@
       <node id="5">
         <label>iostream</label>
       </node>
-      <node id="38">
+      <node id="40">
         <label>optional</label>
       </node>
-      <node id="47">
+      <node id="46">
+        <label>ostream</label>
+      </node>
+      <node id="55">
         <label>paraconf.h</label>
       </node>
-      <node id="45">
+      <node id="53">
         <label>stdexcept</label>
       </node>
-      <node id="46">
+      <node id="54">
         <label>string</label>
       </node>
       <node id="8">
@@ -475,6 +543,9 @@
       </node>
       <node id="11">
         <label>utility</label>
+      </node>
+      <node id="44">
+        <label>vector</label>
       </node>
     </incdepgraph>
     <innerclass refid="classPredCorrRK2XY" prot="public">PredCorrRK2XY</innerclass>

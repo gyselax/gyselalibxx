@@ -757,6 +757,9 @@ struct is_non_uniform_lagrange_basis
     : public std::is_base_of&lt;detail::NonUniformLagrangeBasisBase, DDim&gt;::type
 {
 };
+
+template &lt;class DDim&gt;
+constexpr bool is_non_uniform_lagrange_basis_v = is_non_uniform_lagrange_basis&lt;DDim&gt;::value;
 </code></pre></div>
               
             </div>

@@ -19,8 +19,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"
-#include "i_interpolation_builder.hpp"
-#include "i_interpolation_evaluator.hpp"
+#include "i_interpolation.hpp"
 #include "itimestepper.hpp"
 
 
@@ -28,16 +27,20 @@ template <
         class GridInterest,
         class IdxRangeAdvection,
         class IdxRangeFunction,
-        concepts::InterpolationBuilder FunctionBuilder,
-        concepts::InterpolationEvaluator FunctionEvaluator,
-        concepts::InterpolationBuilder AdvectionFieldBuilder,
-        concepts::InterpolationEvaluator AdvectionFieldEvaluator,
+        concepts::Interpolation FunctionInterpolator,
+        concepts::Interpolation AdvectionFieldInterpolator,
         class TimeStepperBuilder = EulerBuilder,
         class DataType = double>
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(std::is_floating_point_v<DataType>);
+
+public:
+    using FunctionBuilder = typename FunctionInterpolator::BuilderType;
+    using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
+    using AdvectionFieldBuilder = typename AdvectionFieldInterpolator::BuilderType;
+    using AdvectionFieldEvaluator = typename AdvectionFieldInterpolator::EvaluatorType;
 
 private:
     // Advection index range element:
@@ -97,7 +100,7 @@ private:
     TimeStepperBuilder const& m_time_stepper_builder;
 
 public:
-    explicit BslAdvection1D(
+    [[deprecated]] explicit BslAdvection1D(
             FunctionBuilder const& function_builder,
             FunctionEvaluator const& function_evaluator,
             AdvectionFieldBuilder const& adv_field_builder,
@@ -107,6 +110,18 @@ public:
         , m_function_evaluator(function_evaluator)
         , m_adv_field_builder(adv_field_builder)
         , m_adv_field_evaluator(adv_field_evaluator)
+        , m_time_stepper_builder(time_stepper_builder)
+    {
+    }
+
+    explicit BslAdvection1D(
+            FunctionInterpolator const& function_interpolator,
+            AdvectionFieldInterpolator const& adv_field_interpolator,
+            TimeStepperBuilder const& time_stepper_builder)
+        : m_function_builder(function_interpolator.get_builder())
+        , m_function_evaluator(function_interpolator.get_evaluator())
+        , m_adv_field_builder(adv_field_interpolator.get_builder())
+        , m_adv_field_evaluator(adv_field_interpolator.get_evaluator())
         , m_time_stepper_builder(time_stepper_builder)
     {
     }

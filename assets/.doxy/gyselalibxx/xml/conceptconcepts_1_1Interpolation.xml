@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1Interpolation" kind="concept">
+    <compoundname>concepts::Interpolation</compoundname>
+    <includes refid="i__interpolation_8hpp" local="no">i_interpolation.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref> =  requires
+{
+    typename T::BuilderType;
+    typename T::EvaluatorType;
+}
+&amp;&amp;<ref refid="conceptconcepts_1_1InterpolationBuilder" kindref="compound">concepts::InterpolationBuilder</ref>&lt;typename T::BuilderType&gt;&amp;&amp; <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref>&lt;
+        typename T::EvaluatorType&gt;&amp;&amp; requires(T const&amp; t)
+{
+    {
+        t.get_builder()
+        } -&gt; std::same_as&lt;typename T::BuilderType const&amp;&gt;;
+    {
+        t.get_evaluator()
+        } -&gt; std::same_as&lt;typename T::EvaluatorType const&amp;&gt;;
+}    </initializer>
+    <briefdescription>
+<para>A concept describing an interpolation object that owns a matching builder–evaluator pair. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An <computeroutput>Interpolation</computeroutput> bundles a builder (which converts function values on the interpolation mesh into interpolation coefficients) and an evaluator (which reconstructs function values from those coefficients) into a single owning object.</para>
+<para>Concrete models include <ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref> and <ref refid="classLagrangeInterpolator" kindref="compound">LagrangeInterpolator</ref>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolation type to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="36" column="1"/>
+  </compounddef>
+</doxygen>

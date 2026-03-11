@@ -2,24 +2,16 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classBslAdvectionSpatial" kind="class" language="C++" prot="public">
     <compoundname>BslAdvectionSpatial</compoundname>
-    <basecompoundref refid="classIAdvectionSpatial" prot="public" virt="non-virtual">IAdvectionSpatial&lt; Geometry, GridX, double &gt;</basecompoundref>
+    <basecompoundref refid="classIAdvectionSpatial" prot="public" virt="non-virtual">IAdvectionSpatial&lt; Geometry, InterpolationBuilderTraits&lt; FunctionInterpolator::BuilderType &gt;::interpolation_grid_type, double &gt;</basecompoundref>
     <includes refid="bsl__advection__x_8hpp" local="no">bsl_advection_x.hpp</includes>
     <templateparamlist>
       <param>
         <type>class Geometry</type>
       </param>
       <param>
-        <type>class <ref refid="structGridX" kindref="compound">GridX</ref></type>
-      </param>
-      <param>
-        <type><ref refid="conceptconcepts_1_1InterpolationBuilder" kindref="compound">concepts::InterpolationBuilder</ref></type>
-        <declname>FunctionBuilder</declname>
-        <defname>FunctionBuilder</defname>
-      </param>
-      <param>
-        <type><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref></type>
-        <declname>FunctionEvaluator</declname>
-        <defname>FunctionEvaluator</defname>
+        <type><ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concepts::Interpolation</ref></type>
+        <declname>FunctionInterpolator</declname>
+        <defname>FunctionInterpolator</defname>
       </param>
       <param>
         <type>class DataType</type>
@@ -27,9 +19,51 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a35aa6dfce6f0f95bfb431f89b87dddb1" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a57f1fc7af2bf6dc2936be8124b7bd8ee" prot="private" static="no">
+        <type>typename FunctionInterpolator::BuilderType</type>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::FunctionBuilder =  typename FunctionInterpolator::BuilderType</definition>
+        <argsstring></argsstring>
+        <name>FunctionBuilder</name>
+        <qualifiedname>BslAdvectionSpatial::FunctionBuilder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="26" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a6bcf93ec82aaa5c1ebb3c1c2c1af7102" prot="private" static="no">
+        <type>typename FunctionInterpolator::EvaluatorType</type>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::FunctionEvaluator =  typename FunctionInterpolator::EvaluatorType</definition>
+        <argsstring></argsstring>
+        <name>FunctionEvaluator</name>
+        <qualifiedname>BslAdvectionSpatial::FunctionEvaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1ace5b23cc38022f44c8d397c6be14247f" prot="private" static="no">
+        <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; FunctionBuilder &gt;::interpolation_grid_type</type>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::GridX =  typename InterpolationBuilderTraits&lt;FunctionBuilder&gt;::interpolation_grid_type</definition>
+        <argsstring></argsstring>
+        <name>GridX</name>
+        <qualifiedname>BslAdvectionSpatial::GridX</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a2c1179970a63ee9366bc0b13508c630b" prot="private" static="no">
         <type>typename Geometry::template velocity_dim_for&lt; <ref refid="structGridX" kindref="compound">GridX</ref> &gt;</type>
-        <definition>using BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::GridV =  typename Geometry::template velocity_dim_for&lt;GridX&gt;</definition>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::GridV =  typename Geometry::template velocity_dim_for&lt;GridX&gt;</definition>
         <argsstring></argsstring>
         <name>GridV</name>
         <qualifiedname>BslAdvectionSpatial::GridV</qualifiedname>
@@ -39,11 +73,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="27" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="31" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a6e0cac3c1b097f7878b10f5a754df9b0" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1aaffeb787a04ffa64709fcd876bb85bf9" prot="private" static="no">
         <type>typename Geometry::IdxRangeFdistribu</type>
-        <definition>using BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxRangeFdistrib =  typename Geometry::IdxRangeFdistribu</definition>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::IdxRangeFdistrib =  typename Geometry::IdxRangeFdistribu</definition>
         <argsstring></argsstring>
         <name>IdxRangeFdistrib</name>
         <qualifiedname>BslAdvectionSpatial::IdxRangeFdistrib</qualifiedname>
@@ -53,11 +87,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="28" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="32" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a4ba1e9b2f9cd3ed6dcebce55641edabe" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a724ef6d556b318494e7003d4b041f72b" prot="private" static="no">
         <type>Idx&lt; <ref refid="structGridX" kindref="compound">GridX</ref> &gt;</type>
-        <definition>using BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxX =  Idx&lt;GridX&gt;</definition>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::IdxX =  Idx&lt;GridX&gt;</definition>
         <argsstring></argsstring>
         <name>IdxX</name>
         <qualifiedname>BslAdvectionSpatial::IdxX</qualifiedname>
@@ -67,11 +101,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="29" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="29" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="33" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionSpatial_1ac78bd76070a91dd181d4c259067204d0" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a98fc1b81c117804cd8d524da45e7a86b" prot="private" static="no">
         <type>Idx&lt; GridV &gt;</type>
-        <definition>using BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxV =  Idx&lt;GridV&gt;</definition>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::IdxV =  Idx&lt;GridV&gt;</definition>
         <argsstring></argsstring>
         <name>IdxV</name>
         <qualifiedname>BslAdvectionSpatial::IdxV</qualifiedname>
@@ -81,11 +115,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="30" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="30" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="34" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a8c3e1779087697f4a3087b8dfece611a" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a4d0be592e718d4280bbec8db23222277" prot="private" static="no">
         <type>typename GridX::continuous_dimension_type</type>
-        <definition>using BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::DimX =  typename GridX::continuous_dimension_type</definition>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::DimX =  typename GridX::continuous_dimension_type</definition>
         <argsstring></argsstring>
         <name>DimX</name>
         <qualifiedname>BslAdvectionSpatial::DimX</qualifiedname>
@@ -95,11 +129,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="31" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="35" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="35" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a82fa2bfaf4f52527724ee9cdd7390f60" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1ac136c3bfcec168de647652e9baaa18a7" prot="private" static="no">
         <type>typename GridV::continuous_dimension_type</type>
-        <definition>using BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::DimV =  typename GridV::continuous_dimension_type</definition>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::DimV =  typename GridV::continuous_dimension_type</definition>
         <argsstring></argsstring>
         <name>DimV</name>
         <qualifiedname>BslAdvectionSpatial::DimV</qualifiedname>
@@ -109,11 +143,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="32" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionSpatial_1ab3c0b781a42b32c1350182889e5f91a4" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a3ec27dfded23b4d74baaa2013117f74f" prot="private" static="no">
         <type>ddc::remove_dims_of_t&lt; typename Geometry::IdxRangeFdistribu, <ref refid="structSpecies" kindref="compound">Species</ref> &gt;</type>
-        <definition>using BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxRangeSpaceVelocity =  ddc::remove_dims_of_t&lt;typename Geometry::IdxRangeFdistribu, Species&gt;</definition>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::IdxRangeSpaceVelocity =  ddc::remove_dims_of_t&lt;typename Geometry::IdxRangeFdistribu, Species&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeSpaceVelocity</name>
         <qualifiedname>BslAdvectionSpatial::IdxRangeSpaceVelocity</qualifiedname>
@@ -123,11 +157,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="33" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="34" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a5277e68b8b4a6f989ecd3a8de5083650" prot="private" static="no">
+      <memberdef kind="typedef" id="classBslAdvectionSpatial_1a19fa041d3061d2f943cbc71656f23b4d" prot="private" static="no">
         <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; FunctionBuilder &gt;::template batched_basis_idx_range_type&lt; IdxRangeSpaceVelocity &gt;</type>
-        <definition>using BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::IdxRangeFunctionBasis =  typename InterpolationBuilderTraits&lt; FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeSpaceVelocity&gt;</definition>
+        <definition>using BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::IdxRangeFunctionBasis =  typename InterpolationBuilderTraits&lt; FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeSpaceVelocity&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeFunctionBasis</name>
         <qualifiedname>BslAdvectionSpatial::IdxRangeFunctionBasis</qualifiedname>
@@ -137,13 +171,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="38" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classBslAdvectionSpatial_1a60f68e982a4be7bcab7c3ba6d78b4924" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classBslAdvectionSpatial_1a1f9a15f44d7d25047b3ca25a37121281" prot="private" static="no" mutable="no">
         <type>FunctionBuilder const  &amp;</type>
-        <definition>FunctionBuilder const&amp; BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::m_function_builder</definition>
+        <definition>FunctionBuilder const&amp; BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::m_function_builder</definition>
         <argsstring></argsstring>
         <name>m_function_builder</name>
         <qualifiedname>BslAdvectionSpatial::m_function_builder</qualifiedname>
@@ -153,11 +187,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="40" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="40" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="44" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classBslAdvectionSpatial_1a766ef3d7d03a0f3373ca7d2b72f74774" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classBslAdvectionSpatial_1ab81efffd765b9a38325f081ed7edebd6" prot="private" static="no" mutable="no">
         <type>FunctionEvaluator const  &amp;</type>
-        <definition>FunctionEvaluator const&amp; BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::m_function_evaluator</definition>
+        <definition>FunctionEvaluator const&amp; BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::m_function_evaluator</definition>
         <argsstring></argsstring>
         <name>m_function_evaluator</name>
         <qualifiedname>BslAdvectionSpatial::m_function_evaluator</qualifiedname>
@@ -167,13 +201,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="41" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="41" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="45" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classBslAdvectionSpatial_1a10b7fcd67d6326ec1a67b0ca2ff4fd1b" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classBslAdvectionSpatial_1ad12ee397dd9411205145448f4d389de2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::BslAdvectionSpatial</definition>
+        <definition>BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::BslAdvectionSpatial</definition>
         <argsstring>(FunctionBuilder const &amp;function_builder, FunctionEvaluator const &amp;function_evaluator)</argsstring>
         <name>BslAdvectionSpatial</name>
         <qualifiedname>BslAdvectionSpatial::BslAdvectionSpatial</qualifiedname>
@@ -210,11 +244,40 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="51" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="51" bodyend="57"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="55" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="55" bodyend="61"/>
       </memberdef>
-      <memberdef kind="function" id="classBslAdvectionSpatial_1adefe881f2096f2c3ec0f9dc6e9c0248f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classBslAdvectionSpatial_1a1bbd4a8ca15c1a9faafd5f97ebac2343" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::~BslAdvectionSpatial</definition>
+        <definition>BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::BslAdvectionSpatial</definition>
+        <argsstring>(FunctionInterpolator const &amp;function_interpolator)</argsstring>
+        <name>BslAdvectionSpatial</name>
+        <qualifiedname>BslAdvectionSpatial::BslAdvectionSpatial</qualifiedname>
+        <param>
+          <type>FunctionInterpolator const &amp;</type>
+          <declname>function_interpolator</declname>
+        </param>
+        <briefdescription>
+<para>Constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">function_interpolator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Interpolator along the <ref refid="structGridX" kindref="compound">GridX</ref> direction used to build and evaluate the interpolation representation of the advected function. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="68" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="68" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="classBslAdvectionSpatial_1a289ed202def22ed5f4aff22c5b13db3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::~BslAdvectionSpatial</definition>
         <argsstring>() override=default</argsstring>
         <name>~BslAdvectionSpatial</name>
         <qualifiedname>BslAdvectionSpatial::~BslAdvectionSpatial</qualifiedname>
@@ -224,11 +287,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="59" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="74" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classBslAdvectionSpatial_1ab21a38d11aba44530dc54edfe269a6af" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classBslAdvectionSpatial_1a5d4c41979f85be049fa4115aebd292f4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>Field&lt; DataType, IdxRangeFdistrib &gt;</type>
-        <definition>Field&lt; DataType, IdxRangeFdistrib &gt; BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;::operator()</definition>
+        <definition>Field&lt; DataType, IdxRangeFdistrib &gt; BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;::operator()</definition>
         <argsstring>(Field&lt; DataType, IdxRangeFdistrib &gt; const allfdistribu, DataType const dt) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>BslAdvectionSpatial::operator()</qualifiedname>
@@ -267,7 +330,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="67" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="67" bodyend="113"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="82" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="82" bodyend="128"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -277,7 +340,7 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="1">
-        <label>BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;</label>
+        <label>BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;</label>
         <link refid="classBslAdvectionSpatial"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -289,7 +352,7 @@
     </inheritancegraph>
     <collaborationgraph>
       <node id="1">
-        <label>BslAdvectionSpatial&lt; Geometry, GridX, FunctionBuilder, FunctionEvaluator, DataType &gt;</label>
+        <label>BslAdvectionSpatial&lt; Geometry, FunctionInterpolator, DataType &gt;</label>
         <link refid="classBslAdvectionSpatial"/>
         <childnode refid="2" relation="public-inheritance">
         </childnode>
@@ -299,22 +362,26 @@
         <link refid="classIAdvectionSpatial"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="24" bodyend="114"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" line="17" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp" bodystart="23" bodyend="129"/>
     <listofallmembers>
-      <member refid="classBslAdvectionSpatial_1a10b7fcd67d6326ec1a67b0ca2ff4fd1b" prot="public" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>BslAdvectionSpatial</name></member>
-      <member refid="classBslAdvectionSpatial_1a82fa2bfaf4f52527724ee9cdd7390f60" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>DimV</name></member>
-      <member refid="classBslAdvectionSpatial_1a8c3e1779087697f4a3087b8dfece611a" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>DimX</name></member>
-      <member refid="classBslAdvectionSpatial_1a35aa6dfce6f0f95bfb431f89b87dddb1" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>GridV</name></member>
-      <member refid="classBslAdvectionSpatial_1a6e0cac3c1b097f7878b10f5a754df9b0" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxRangeFdistrib</name></member>
-      <member refid="classBslAdvectionSpatial_1a5277e68b8b4a6f989ecd3a8de5083650" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxRangeFunctionBasis</name></member>
-      <member refid="classBslAdvectionSpatial_1ab3c0b781a42b32c1350182889e5f91a4" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxRangeSpaceVelocity</name></member>
-      <member refid="classBslAdvectionSpatial_1ac78bd76070a91dd181d4c259067204d0" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxV</name></member>
-      <member refid="classBslAdvectionSpatial_1a4ba1e9b2f9cd3ed6dcebce55641edabe" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxX</name></member>
-      <member refid="classBslAdvectionSpatial_1a60f68e982a4be7bcab7c3ba6d78b4924" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>m_function_builder</name></member>
-      <member refid="classBslAdvectionSpatial_1a766ef3d7d03a0f3373ca7d2b72f74774" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>m_function_evaluator</name></member>
-      <member refid="classBslAdvectionSpatial_1ab21a38d11aba44530dc54edfe269a6af" prot="public" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>operator()</name></member>
+      <member refid="classBslAdvectionSpatial_1ad12ee397dd9411205145448f4d389de2" prot="public" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>BslAdvectionSpatial</name></member>
+      <member refid="classBslAdvectionSpatial_1a1bbd4a8ca15c1a9faafd5f97ebac2343" prot="public" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>BslAdvectionSpatial</name></member>
+      <member refid="classBslAdvectionSpatial_1ac136c3bfcec168de647652e9baaa18a7" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>DimV</name></member>
+      <member refid="classBslAdvectionSpatial_1a4d0be592e718d4280bbec8db23222277" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>DimX</name></member>
+      <member refid="classBslAdvectionSpatial_1a57f1fc7af2bf6dc2936be8124b7bd8ee" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>FunctionBuilder</name></member>
+      <member refid="classBslAdvectionSpatial_1a6bcf93ec82aaa5c1ebb3c1c2c1af7102" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>FunctionEvaluator</name></member>
+      <member refid="classBslAdvectionSpatial_1a2c1179970a63ee9366bc0b13508c630b" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>GridV</name></member>
+      <member refid="classBslAdvectionSpatial_1ace5b23cc38022f44c8d397c6be14247f" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>GridX</name></member>
+      <member refid="classBslAdvectionSpatial_1aaffeb787a04ffa64709fcd876bb85bf9" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxRangeFdistrib</name></member>
+      <member refid="classBslAdvectionSpatial_1a19fa041d3061d2f943cbc71656f23b4d" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxRangeFunctionBasis</name></member>
+      <member refid="classBslAdvectionSpatial_1a3ec27dfded23b4d74baaa2013117f74f" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxRangeSpaceVelocity</name></member>
+      <member refid="classBslAdvectionSpatial_1a98fc1b81c117804cd8d524da45e7a86b" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxV</name></member>
+      <member refid="classBslAdvectionSpatial_1a724ef6d556b318494e7003d4b041f72b" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>IdxX</name></member>
+      <member refid="classBslAdvectionSpatial_1a1f9a15f44d7d25047b3ca25a37121281" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>m_function_builder</name></member>
+      <member refid="classBslAdvectionSpatial_1ab81efffd765b9a38325f081ed7edebd6" prot="private" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>m_function_evaluator</name></member>
+      <member refid="classBslAdvectionSpatial_1a5d4c41979f85be049fa4115aebd292f4" prot="public" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>operator()</name></member>
       <member refid="classIAdvectionSpatial_1a96124b9a27ea3bb8c49e32163135bd6e" prot="public" virt="pure-virtual" ambiguityscope="IAdvectionSpatial::"><scope>BslAdvectionSpatial</scope><name>operator()</name></member>
-      <member refid="classBslAdvectionSpatial_1adefe881f2096f2c3ec0f9dc6e9c0248f" prot="public" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>~BslAdvectionSpatial</name></member>
+      <member refid="classBslAdvectionSpatial_1a289ed202def22ed5f4aff22c5b13db3a" prot="public" virt="non-virtual"><scope>BslAdvectionSpatial</scope><name>~BslAdvectionSpatial</name></member>
       <member refid="classIAdvectionSpatial_1a71c962707fab5143e2702e6f7d3dd7aa" prot="public" virt="virtual"><scope>BslAdvectionSpatial</scope><name>~IAdvectionSpatial</name></member>
     </listofallmembers>
   </compounddef>
