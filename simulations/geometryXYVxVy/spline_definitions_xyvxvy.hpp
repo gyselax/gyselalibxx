@@ -42,36 +42,23 @@ using SplineInterpPointsVy
         = ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
 
 // SplineBuilder and SplineEvaluator definition
-using SplineYBuilder = ddc::SplineBuilder<
+using SplineInterpolatorY = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
         GridY,
+        PERIODIC,
+        PERIODIC,
         SplineYBoundary,
-        SplineYBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineYEvaluator = ddc::SplineEvaluator<
+        SplineYBoundary>;
+
+using SplineInterpolatorVy = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        ddc::PeriodicExtrapolationRule<Y>,
-        ddc::PeriodicExtrapolationRule<Y>>;
-using SplineVyBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVy,
         GridVy,
+        CONSTANT,
+        CONSTANT,
         SplineVyBoundary,
-        SplineVyBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineVyEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVy,
-        GridVy,
-        ddc::ConstantExtrapolationRule<Vy>,
-        ddc::ConstantExtrapolationRule<Vy>>;
+        SplineVyBoundary>;
 
 using IdxRangeBSY = IdxRange<BSplinesY>;
 using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;

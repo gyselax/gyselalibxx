@@ -3,6 +3,7 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "geometry_xvx.hpp"
+#include "spline_interpolation.hpp"
 
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;
@@ -74,6 +75,26 @@ using SplineVxEvaluator = ddc::SplineEvaluator<
         GridVx,
         ddc::ConstantExtrapolationRule<Vx>,
         ddc::ConstantExtrapolationRule<Vx>>;
+
+ExtrapolationRule constexpr XExtrapRule = X::PERIODIC ? PERIODIC : CONSTANT;
+
+using SplineInterpolatorX = SplineInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        BSplinesX,
+        GridX,
+        XExtrapRule,
+        XExtrapRule,
+        SplineXBoundary,
+        SplineXBoundary>;
+
+using SplineInterpolatorVx = SplineInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        BSplinesVx,
+        GridVx,
+        CONSTANT,
+        CONSTANT,
+        SplineVxBoundary,
+        SplineVxBoundary>;
 
 using IdxRangeBSX = IdxRange<BSplinesX>;
 

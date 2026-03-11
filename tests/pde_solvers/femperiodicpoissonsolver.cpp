@@ -7,9 +7,11 @@
 
 #include "ddc_helper.hpp"
 #include "fem_1d_poisson_solver.hpp"
+#include "i_interpolation.hpp"
 #include "neumann_spline_quadrature.hpp"
 #include "quadrature.hpp"
 #include "species_info.hpp"
+#include "spline_interpolation.hpp"
 
 namespace {
 
@@ -51,22 +53,14 @@ using IdxRangeBatch = IdxRange<GridBatch>;
 
 using IdxRangeBatchX = IdxRange<GridBatch, GridX>;
 
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
+        ExtrapolationRule::PERIODIC,
+        ExtrapolationRule::PERIODIC,
         ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::SplineSolver::LAPACK>;
-
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        ddc::BoundCond::PERIODIC>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 using DFieldMemBatchX = DFieldMem<IdxRangeBatchX>;
@@ -82,13 +76,9 @@ TEST(FemPeriodicPoissonSolver, CosineSource)
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
 
-    SplineXBuilder const builder_x(gridx);
+    SplineXInterpolator const interpolator_x(gridx);
 
-    ddc::PeriodicExtrapolationRule<X> x_extrapolation_rule_min;
-    ddc::PeriodicExtrapolationRule<X> x_extrapolation_rule_max;
-    SplineXEvaluator const spline_x_evaluator(x_extrapolation_rule_min, x_extrapolation_rule_max);
-
-    FEM1DPoissonSolver poisson(builder_x, spline_x_evaluator);
+    FEM1DPoissonSolver poisson(interpolator_x);
 
     host_t<DFieldMemX> electrostatic_potential_host(gridx);
     host_t<DFieldMemX> electric_field_host(gridx);
@@ -141,14 +131,9 @@ TEST(FemPeriodicPoissonSolver, BatchedCosineSource)
 
     IdxRangeBatchX gridbx(gridb, gridx);
 
-    SplineXBuilder const builder_x(gridx);
+    SplineXInterpolator const interpolator_x(gridx);
 
-    ddc::PeriodicExtrapolationRule<X> x_extrapolation_rule_min;
-    ddc::PeriodicExtrapolationRule<X> x_extrapolation_rule_max;
-    SplineXEvaluator const spline_x_evaluator(x_extrapolation_rule_min, x_extrapolation_rule_max);
-
-    FEM1DPoissonSolver<SplineXBuilder, SplineXEvaluator, IdxRangeBatchX>
-            poisson(builder_x, spline_x_evaluator);
+    FEM1DPoissonSolver<SplineXInterpolator, IdxRangeBatchX> poisson(interpolator_x);
 
     host_t<DFieldMemBatchX> electrostatic_potential_host(gridbx);
     host_t<DFieldMemBatchX> electric_field_host(gridbx);

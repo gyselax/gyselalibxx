@@ -3,6 +3,7 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "geometry_xy.hpp"
+#include "spline_interpolation.hpp"
 
 
 int constexpr BSDegreeX = 3;
@@ -29,6 +30,9 @@ struct BSplinesY
 ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
 ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
 
+ExtrapolationRule constexpr SplineXExtrapolation = ExtrapolationRule::PERIODIC;
+ExtrapolationRule constexpr SplineYExtrapolation = ExtrapolationRule::PERIODIC;
+
 // IDim initialisers
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
@@ -37,38 +41,23 @@ using SplineInterpPointsY
 
 
 // SplineBuilder and SplineEvaluator definitions
-using SplineXBuilder_XY = ddc::SplineBuilder<
+using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
+        SplineXExtrapolation,
+        SplineXExtrapolation,
         SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator_XY = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        SplineXBoundary>;
 
-
-using SplineYBuilder_XY = ddc::SplineBuilder<
+using SplineYInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
         GridY,
+        SplineYExtrapolation,
+        SplineYExtrapolation,
         SplineYBoundary,
-        SplineYBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineYEvaluator_XY = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        ddc::PeriodicExtrapolationRule<Y>,
-        ddc::PeriodicExtrapolationRule<Y>>;
+        SplineYBoundary>;
 
 // Spline index range
 using IdxRangeBSX = IdxRange<BSplinesX>;

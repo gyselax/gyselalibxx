@@ -9,10 +9,12 @@
 #include "constant_partial_derivatives.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "i_interpolation.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "spline_1d_partial_derivative.hpp"
 #include "spline_2d_partial_derivative.hpp"
+#include "spline_interpolation.hpp"
 
 namespace {
 
@@ -257,38 +259,24 @@ public:
     using SplineInterpPointsY
             = ddc::GrevilleInterpolationPoints<BSplinesY, SplineBoundary, SplineBoundary>;
 
-    using BSplinesDDim = std::conditional_t<std::is_same_v<DDim, X>, BSplinesX, BSplinesY>;
-    using BSplinesODim = std::conditional_t<std::is_same_v<DDim, X>, BSplinesY, BSplinesX>;
+    using BSplinesDDim = find_grid_t<DDim, ddc::detail::TypeSeq<BSplinesX, BSplinesY>>;
 
-    using GridDDim = std::conditional_t<std::is_same_v<DDim, X>, GridX, GridY>;
-    using GridODim = std::conditional_t<std::is_same_v<DDim, X>, GridY, GridX>;
+    using GridDDim = find_grid_t<DDim, ddc::detail::TypeSeq<GridX, GridY>>;
 
     using SplineInterpPointsDDim
             = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsX, SplineInterpPointsY>;
-    using SplineInterpPointsODim
-            = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsY, SplineInterpPointsX>;
 
-    using SplineDDimBuilder = ddc::SplineBuilder<
+    static constexpr ExtrapolationRule SplineExtrapolation
+            = DDim::PERIODIC ? ExtrapolationRule::PERIODIC : ExtrapolationRule::CONSTANT;
+
+    using SplineDDimInterpolation = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
             BSplinesDDim,
             GridDDim,
+            SplineExtrapolation,
+            SplineExtrapolation,
             SplineBoundary,
-            SplineBoundary,
-            ddc::SplineSolver::LAPACK>;
-
-    using ExtrapolationRule = std::conditional_t<
-            DDim::PERIODIC,
-            ddc::PeriodicExtrapolationRule<DDim>,
-            ddc::ConstantExtrapolationRule<DDim>>;
-
-    using SplineDDimEvaluator = ddc::SplineEvaluator<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesDDim,
-            GridDDim,
-            ExtrapolationRule,
-            ExtrapolationRule>;
+            SplineBoundary>;
 
 public:
     PartialDerivativeTestSpline1D(
@@ -321,24 +309,19 @@ public:
     {
         IdxRangeX const idxrange_x = SplineInterpPointsX::template get_domain<GridX>();
         IdxRangeY const idxrange_y = SplineInterpPointsY::template get_domain<GridY>();
-        IdxRangeXY const idxrange = IdxRangeXY(idxrange_x, idxrange_y);
 
-        double dmin, dmax;
-        if constexpr (std::is_same_v<DDim, X>) {
-            dmin = base_type::m_xmin;
-            dmax = base_type::m_xmax;
-        } else {
-            dmin = base_type::m_ymin;
-            dmax = base_type::m_ymax;
-        }
-        ExtrapolationRule const bv_min(get_bv(Coord<DDim> {dmin}));
-        ExtrapolationRule const bv_max(get_bv(Coord<DDim> {dmax}));
+        IdxRangeXY const idxrange(idxrange_x, idxrange_y);
+        IdxRange<GridDDim> idxrange_ddim(idxrange);
 
-        SplineDDimBuilder const spline_builder(idxrange);
-        SplineDDimEvaluator const spline_evaluator(bv_min, bv_max);
+        SplineDDimInterpolation spline_interpolator(idxrange_ddim);
 
-        Spline1DPartialDerivativeCreator<SplineDDimBuilder, SplineDDimEvaluator, IdxRangeXY> const
-                derivative_creator(spline_builder, spline_evaluator);
+        Spline1DPartialDerivativeCreator<
+                typename SplineDDimInterpolation::BuilderType,
+                typename SplineDDimInterpolation::EvaluatorType,
+                IdxRangeXY> const
+                derivative_creator(
+                        spline_interpolator.get_builder(),
+                        spline_interpolator.get_evaluator());
 
         FunctionToDifferentiateCosine<X, Y> function_to_differentiate;
         double const max_error = base_type::template compute_max_error<

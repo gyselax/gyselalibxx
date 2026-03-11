@@ -11,6 +11,7 @@ target_link_libraries("math_tools"
         DDC::core
         gslx::coord_transformations
         gslx::data_types
+        gslx::interpolation
         gslx::quadrature
 )
 
