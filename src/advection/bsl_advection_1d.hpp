@@ -212,12 +212,12 @@ public:
      *          for the characteristic equation.
      */
     explicit BslAdvection1D(
-            FunctionInterpolator const& function_interpolator,
+            FunctionInterpolator const& interpolator,
             TimeStepperBuilder const& time_stepper_builder)
-        : m_function_builder(function_interpolator.get_builder())
-        , m_function_evaluator(function_interpolator.get_evaluator())
-        , m_adv_field_builder(function_interpolator.get_builder())
-        , m_adv_field_evaluator(function_interpolator.get_evaluator())
+        : m_function_builder(interpolator.get_builder())
+        , m_function_evaluator(interpolator.get_evaluator())
+        , m_adv_field_builder(interpolator.get_builder())
+        , m_adv_field_evaluator(interpolator.get_evaluator())
         , m_time_stepper_builder(time_stepper_builder)
     {
         static_assert(std::is_same_v<FunctionInterpolator, AdvectionFieldInterpolator>);
