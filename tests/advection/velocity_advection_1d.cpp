@@ -286,7 +286,7 @@ TEST_F(Velocity1DAdvectionTest, BatchedLagrange)
             IdxRangeSpXVx,
             LagrangeInterpolatorVx,
             LagrangeInterpolatorVx,
-            EulerBuilder> const lagrange_advection_vx(lag_interpolation, lag_interpolation, euler);
+            EulerBuilder> const lagrange_advection_vx(lag_interpolation, euler);
 
 
     double const err = VelocityAdvection(lagrange_advection_vx, lag_interpolation.get_builder());
@@ -308,7 +308,7 @@ TEST_F(Velocity1DAdvectionTest, SplineBatched)
             IdxRangeSpXVx,
             SplineInterpolatorVx,
             SplineInterpolatorVx,
-            EulerBuilder> const spline_advection_vx(interpolator_vx, interpolator_vx, euler);
+            EulerBuilder> const spline_advection_vx(interpolator_vx, euler);
 
 
     double const err = VelocityAdvection(spline_advection_vx, interpolator_vx.get_builder());

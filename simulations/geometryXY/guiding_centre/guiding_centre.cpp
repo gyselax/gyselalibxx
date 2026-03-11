@@ -95,7 +95,7 @@ int main(int argc, char** argv)
             SplineXInterpolator,
             SplineXInterpolator,
             EulerBuilder>
-            advection_x(interpolator_x, interpolator_x, euler);
+            advection_x(interpolator_x, euler);
 
     BslAdvection1D<
             GridY,
@@ -104,7 +104,7 @@ int main(int argc, char** argv)
             SplineYInterpolator,
             SplineYInterpolator,
             EulerBuilder>
-            advection_y(interpolator_y, interpolator_y, euler);
+            advection_y(interpolator_y, euler);
 
 
     // Create an initialiser ---
