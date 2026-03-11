@@ -28,6 +28,7 @@ eval -- "$(
         kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
+        koliop \
         lapack \
         mpi \
         ninja \

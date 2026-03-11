@@ -15,11 +15,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Add Koliop in all toolchains.
+
 ### Deprecated
 
 ### Removed
 
 - Remove deprecated `Lagrange` class.
+- Remove Koliop submodule.
 
 ## [v0.6.2] - 2026-03-06
 

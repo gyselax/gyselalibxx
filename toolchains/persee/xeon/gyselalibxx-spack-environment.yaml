@@ -8,6 +8,7 @@ spack:
     - 'kokkos-fft@0.3 host_backend=fftw-openmp'
     - 'kokkos-kernels@4.6:4'
     - 'kokkos-tools'
+    - 'koliop@0.1.2:0.1'
     - 'lapack'
     - 'mpi'
     - 'ninja'

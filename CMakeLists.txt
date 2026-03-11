@@ -95,14 +95,7 @@ if(NOT "${DDC_FOUND}")
   add_subdirectory(vendor/ddc SYSTEM)
 endif()
 
-find_package(koliop 0.1.2 QUIET)
-if(NOT "${koliop_FOUND}")
-  set(koliop_ENABLE_Kokkos        "SYSTEM" CACHE STRING "")
-  set(koliop_ENABLE_KokkosKernels "SYSTEM" CACHE STRING "")
-  set(koliop_BUILD_TESTING OFF CACHE BOOL "")
-  set(koliop_ENABLE_LTO OFF CACHE BOOL "")
-  add_subdirectory(vendor/koliop SYSTEM)
-endif()
+find_package(koliop 0.1.2 REQUIRED)
 
 find_package(LAPACKE REQUIRED)
 
