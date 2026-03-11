@@ -13,6 +13,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- Add missing `enable_tensor_type` for `CartesianLeviCivitaTensor` and LeviCivita `size()`.
+
 ### Changed
 
 - Add Koliop in all toolchains.
