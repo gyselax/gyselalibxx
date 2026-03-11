@@ -154,7 +154,7 @@ public:
      * @param[in] time_stepper_builder A builder for the time integration method used
      *          for the characteristic equation.
      */
-    explicit BslAdvection1D(
+    [[deprecated]] explicit BslAdvection1D(
             FunctionBuilder const& function_builder,
             FunctionEvaluator const& function_evaluator,
             AdvectionFieldBuilder const& adv_field_builder,
