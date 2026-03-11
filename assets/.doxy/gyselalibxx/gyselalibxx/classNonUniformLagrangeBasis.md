@@ -10,7 +10,7 @@
 
 
 
-_Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._[More...](#detailed-description)
+_Class describing Lagrange polynomials on a uniform grid._ [More...](#detailed-description)
 
 * `#include <lagrange_basis_non_uniform.hpp>`
 
@@ -40,8 +40,8 @@ Inherits the following classes: detail::NonUniformLagrangeBasisBase
 
 | Type | Name |
 | ---: | :--- |
-| typedef Dim | [**continuous\_dimension\_type**](#typedef-continuous_dimension_type)  <br>_The tag identifying the continuous dimension on which the_ [_**Lagrange**_](classLagrange.md) _polynomials are defined._ |
-| typedef Coord&lt; Dim &gt; | [**coord\_type**](#typedef-coord_type)  <br>_The type of the coordinates on which the_ [_**Lagrange**_](classLagrange.md) _polynomials can be evaluated._ |
+| typedef Dim | [**continuous\_dimension\_type**](#typedef-continuous_dimension_type)  <br>_The tag identifying the continuous dimension on which the Lagrange polynomials are defined._  |
+| typedef Coord&lt; Dim &gt; | [**coord\_type**](#typedef-coord_type)  <br>_The type of the coordinates on which the Lagrange polynomials can be evaluated._  |
 | typedef [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) | [**discrete\_dimension\_type**](#typedef-discrete_dimension_type)  <br>_The discrete dimension representing B-splines._  |
 
 
@@ -69,9 +69,9 @@ Inherits the following classes: detail::NonUniformLagrangeBasisBase
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr std::size\_t | [**degree**](#function-degree) () noexcept<br>_The degree of the_ [_**Lagrange**_](classLagrange.md) _polynomials._ |
-|  constexpr bool | [**is\_periodic**](#function-is_periodic) () noexcept<br>_Indicates if the_ [_**Lagrange**_](classLagrange.md) _polynomials are periodic or not._ |
-|  constexpr bool | [**is\_uniform**](#function-is_uniform) () noexcept<br>_Indicates if the_ [_**Lagrange**_](classLagrange.md) _polynomials are uniform or not (this is the case here)._ |
+|  constexpr std::size\_t | [**degree**](#function-degree) () noexcept<br>_The degree of the Lagrange polynomials._  |
+|  constexpr bool | [**is\_periodic**](#function-is_periodic) () noexcept<br>_Indicates if the Lagrange polynomials are periodic or not._  |
+|  constexpr bool | [**is\_uniform**](#function-is_uniform) () noexcept<br>_Indicates if the Lagrange polynomials are uniform or not (this is the case here)._  |
 
 
 
@@ -101,7 +101,7 @@ Inherits the following classes: detail::NonUniformLagrangeBasisBase
 ## Detailed Description
 
 
-This class uses the second barycentric formulation to evaluate the polynomials. This formula is used for stability. It is described in Barycentric [**Lagrange**](classLagrange.md) Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517
+This class uses the second barycentric formulation to evaluate the polynomials. This formula is used for stability. It is described in Barycentric Lagrange Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517
 
 
 
@@ -109,8 +109,8 @@ This class uses the second barycentric formulation to evaluate the polynomials. 
 **Template parameters:**
 
 
-* `Dim` The dimension on which the [**Lagrange**](classLagrange.md) polynomials are defined. 
-* `D` The degree of the polynomials, equal to the number of cells over which the [**Lagrange**](classLagrange.md) polynomials are defined. 
+* `Dim` The dimension on which the Lagrange polynomials are defined. 
+* `D` The degree of the polynomials, equal to the number of cells over which the Lagrange polynomials are defined. 
 * `DataType` The data type used for the calculations. Double by default. 
 
 
@@ -124,7 +124,7 @@ This class uses the second barycentric formulation to evaluate the polynomials. 
 
 ### typedef continuous\_dimension\_type 
 
-_The tag identifying the continuous dimension on which the_ [_**Lagrange**_](classLagrange.md) _polynomials are defined._
+_The tag identifying the continuous dimension on which the Lagrange polynomials are defined._ 
 ```C++
 using NonUniformLagrangeBasis< Dim, D, DataType >::continuous_dimension_type =  Dim;
 ```
@@ -138,7 +138,7 @@ using NonUniformLagrangeBasis< Dim, D, DataType >::continuous_dimension_type =  
 
 ### typedef coord\_type 
 
-_The type of the coordinates on which the_ [_**Lagrange**_](classLagrange.md) _polynomials can be evaluated._
+_The type of the coordinates on which the Lagrange polynomials can be evaluated._ 
 ```C++
 using NonUniformLagrangeBasis< Dim, D, DataType >::coord_type =  Coord<Dim>;
 ```
@@ -168,7 +168,7 @@ using NonUniformLagrangeBasis< Dim, D, DataType >::discrete_dimension_type =  No
 
 ### function degree 
 
-_The degree of the_ [_**Lagrange**_](classLagrange.md) _polynomials._
+_The degree of the Lagrange polynomials._ 
 ```C++
 static inline constexpr std::size_t NonUniformLagrangeBasis::degree () noexcept
 ```
@@ -193,7 +193,7 @@ The degree.
 
 ### function is\_periodic 
 
-_Indicates if the_ [_**Lagrange**_](classLagrange.md) _polynomials are periodic or not._
+_Indicates if the Lagrange polynomials are periodic or not._ 
 ```C++
 static inline constexpr bool NonUniformLagrangeBasis::is_periodic () noexcept
 ```
@@ -204,7 +204,7 @@ static inline constexpr bool NonUniformLagrangeBasis::is_periodic () noexcept
 
 **Returns:**
 
-A boolean indicating if the [**Lagrange**](classLagrange.md) polynomials are periodic or not. 
+A boolean indicating if the Lagrange polynomials are periodic or not. 
 
 
 
@@ -218,7 +218,7 @@ A boolean indicating if the [**Lagrange**](classLagrange.md) polynomials are per
 
 ### function is\_uniform 
 
-_Indicates if the_ [_**Lagrange**_](classLagrange.md) _polynomials are uniform or not (this is the case here)._
+_Indicates if the Lagrange polynomials are uniform or not (this is the case here)._ 
 ```C++
 static inline constexpr bool NonUniformLagrangeBasis::is_uniform () noexcept
 ```
@@ -229,7 +229,7 @@ static inline constexpr bool NonUniformLagrangeBasis::is_uniform () noexcept
 
 **Returns:**
 
-A boolean indicating if the [**Lagrange**](classLagrange.md) polynomials are uniform or not. 
+A boolean indicating if the Lagrange polynomials are uniform or not. 
 
 
 

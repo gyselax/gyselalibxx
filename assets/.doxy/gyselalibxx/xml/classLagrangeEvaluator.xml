@@ -94,7 +94,7 @@
         <name>lagrange_basis_type</name>
         <qualifiedname>LagrangeEvaluator::lagrange_basis_type</qualifiedname>
         <briefdescription>
-<para>The discrete dimension representing the <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. </para>
+<para>The discrete dimension representing the Lagrange basis. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -173,7 +173,7 @@
         <name>coeff_idx_range_type</name>
         <qualifiedname>LagrangeEvaluator::coeff_idx_range_type</qualifiedname>
         <briefdescription>
-<para>The type of the 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain corresponding to the dimension of interest. </para>
+<para>The type of the 1D Lagrange domain corresponding to the dimension of interest. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -231,7 +231,7 @@
         <name>batched_coeff_idx_range_type</name>
         <qualifiedname>LagrangeEvaluator::batched_coeff_idx_range_type</qualifiedname>
         <briefdescription>
-<para>The type of the whole <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain (cartesian product of 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> domain and batch domain) preserving the order of dimensions. </para>
+<para>The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain and batch domain) preserving the order of dimensions. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
@@ -499,7 +499,7 @@
 <para>Get the lower extrapolation rule. </para>
         </briefdescription>
         <detaileddescription>
-<para>Extrapolation rules are functors used to define the behaviour of the <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> outside the domain where the break points of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis are defined.</para>
+<para>Extrapolation rules are functors used to define the behaviour of the <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> outside the domain where the break points of the Lagrange basis are defined.</para>
 <para><simplesect kind="return"><para>The lower extrapolation rule.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="structNullExtrapolationRule" kindref="compound">NullExtrapolationRule</ref> ConstantExtrapolationRule PeriodicExtrapolationRule </para>
@@ -520,7 +520,7 @@
 <para>Get the upper extrapolation rule. </para>
         </briefdescription>
         <detaileddescription>
-<para>Extrapolation rules are functors used to define the behaviour of the <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> outside the domain where the break points of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis are defined.</para>
+<para>Extrapolation rules are functors used to define the behaviour of the <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> outside the domain where the break points of the Lagrange basis are defined.</para>
 <para><simplesect kind="return"><para>The upper extrapolation rule.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="structNullExtrapolationRule" kindref="compound">NullExtrapolationRule</ref> ConstantExtrapolationRule PeriodicExtrapolationRule </para>
@@ -559,16 +559,16 @@
           <declname>lagrange_coef</declname>
         </param>
         <briefdescription>
-<para>Evaluate 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomial (described by its <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients) at a given coordinate. </para>
+<para>Evaluate 1D Lagrange polynomial (described by its Lagrange coefficients) at a given coordinate. </para>
         </briefdescription>
         <detaileddescription>
-<para>The <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients describe 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials defined on a <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
+<para>The Lagrange coefficients describe 1D Lagrange polynomials defined on a Lagrange basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>coord_eval</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The coordinate where the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomial is evaluated. Note that only the component along the dimension of interest is used. </para>
+<para>The coordinate where the Lagrange polynomial is evaluated. Note that only the component along the dimension of interest is used. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -576,11 +576,11 @@
 <parametername>lagrange_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A Field storing the 1D <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients.</para>
+<para>A Field storing the 1D Lagrange coefficients.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The value of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomial at the desired coordinate. </para>
+<simplesect kind="return"><para>The value of the Lagrange polynomial at the desired coordinate. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -626,17 +626,17 @@
           <declname>lagrange_coef</declname>
         </param>
         <briefdescription>
-<para>Evaluate <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials (described by their <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients) on a mesh. </para>
+<para>Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh. </para>
         </briefdescription>
         <detaileddescription>
-<para>The <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients describe <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials defined on a cartesian product of batch_idx_range and <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
-<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_idx_range_type::discrete_element_type, the evaluation is performed with the 1D set of <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients identified by the same batch_idx_range_type::discrete_element_type.</para>
+<para>The Lagrange coefficients describe Lagrange polynomials defined on a cartesian product of batch_idx_range and Lagrange basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
+<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_idx_range_type::discrete_element_type, the evaluation is performed with the 1D set of Lagrange coefficients identified by the same batch_idx_range_type::discrete_element_type.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">lagrange_eval</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The values of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials at the desired coordinates. </para>
+<para>The values of the Lagrange polynomials at the desired coordinates. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -644,7 +644,7 @@
 <parametername direction="in">coords_eval</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The coordinates where the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are evaluated. Those are stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the points represented by this index range are unused and irrelevant. </para>
+<para>The coordinates where the Lagrange polynomials are evaluated. Those are stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the points represented by this index range are unused and irrelevant. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -652,7 +652,7 @@
 <parametername direction="in">lagrange_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A Field storing the <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients. </para>
+<para>A Field storing the Lagrange coefficients. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -688,17 +688,17 @@
           <declname>lagrange_coef</declname>
         </param>
         <briefdescription>
-<para>Evaluate <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials (described by their <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients) on a mesh. </para>
+<para>Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh. </para>
         </briefdescription>
         <detaileddescription>
-<para>The <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients describe <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials defined on a cartesian product of batch_idx_range and <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
-<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_idx_range_type::discrete_element_type, the evaluation is performed with the 1D set of <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients identified by the same batch_idx_range_type::discrete_element_type.</para>
+<para>The Lagrange coefficients describe Lagrange polynomials defined on a cartesian product of batch_idx_range and Lagrange basis. They can be obtained using the <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>.</para>
+<para>This is not a multidimensional evaluation. This is a batched 1D evaluation. This means that for each slice of coordinates identified by a batch_idx_range_type::discrete_element_type, the evaluation is performed with the 1D set of Lagrange coefficients identified by the same batch_idx_range_type::discrete_element_type.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">lagrange_eval</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The values of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials at the mesh points. </para>
+<para>The values of the Lagrange polynomials at the mesh points. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -706,7 +706,7 @@
 <parametername direction="in">lagrange_coef</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A Field storing the <ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients. </para>
+<para>A Field storing the Lagrange coefficients. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -812,16 +812,16 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>A class to evaluate, differentiate or integrate a <ref refid="classLagrange" kindref="compound">Lagrange</ref> function. </para>
+<para>A class to evaluate, differentiate or integrate a Lagrange function. </para>
     </briefdescription>
     <detaileddescription>
-<para>A class which contains an operator () which can be used to evaluate, or differentiate a <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomial.</para>
+<para>A class which contains an operator () which can be used to evaluate, or differentiate a Lagrange polynomial.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>ExecSpace</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The Kokkos execution space on which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> evaluation is performed. </para>
+<para>The Kokkos execution space on which the Lagrange evaluation is performed. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -829,7 +829,7 @@
 <parametername>MemorySpace</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The Kokkos memory space on which the data (<ref refid="classLagrange" kindref="compound">Lagrange</ref> coefficients and evaluation) is stored. </para>
+<para>The Kokkos memory space on which the data (Lagrange coefficients and evaluation) is stored. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -845,7 +845,7 @@
 <parametername>LagrangeBasis</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The discrete dimension representing the <ref refid="classLagrange" kindref="compound">Lagrange</ref> basis. </para>
+<para>The discrete dimension representing the Lagrange basis. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

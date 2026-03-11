@@ -144,10 +144,10 @@
           <declname>break_point_domain</declname>
         </param>
         <briefdescription>
-<para>Initialise the possible <ref refid="classLagrange" kindref="compound">Lagrange</ref> bases. </para>
+<para>Initialise the possible Lagrange bases. </para>
         </briefdescription>
         <detaileddescription>
-<para>Initialise the class such that <ref refid="classLagrange" kindref="compound">Lagrange</ref> bases can be evaluated on domains derived from the break point domain. </para>
+<para>Initialise the class such that Lagrange bases can be evaluated on domains derived from the break point domain. </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>

@@ -563,7 +563,7 @@
                 <div><h1 id="class-nonuniformlagrangebasis">Class NonUniformLagrangeBasis</h1>
 <p><strong>template &lt;class Dim, std::size_t D, class DataType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classNonUniformLagrangeBasis.html"><strong>NonUniformLagrangeBasis</strong></a></p>
-<p><em>Class describing</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials on a uniform grid.</em><a href="#detailed-description">More...</a></p>
+<p><em>Class describing Lagrange polynomials on a uniform grid.</em> <a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;lagrange_basis_non_uniform.hpp&gt;</code></li>
 </ul>
@@ -594,11 +594,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;">typedef Dim</td>
-<td style="text-align: left;"><a href="#typedef-continuous_dimension_type"><strong>continuous_dimension_type</strong></a>  <br><em>The tag identifying the continuous dimension on which the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials are defined.</em></td>
+<td style="text-align: left;"><a href="#typedef-continuous_dimension_type"><strong>continuous_dimension_type</strong></a>  <br><em>The tag identifying the continuous dimension on which the Lagrange polynomials are defined.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef Coord&lt; Dim &gt;</td>
-<td style="text-align: left;"><a href="#typedef-coord_type"><strong>coord_type</strong></a>  <br><em>The type of the coordinates on which the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials can be evaluated.</em></td>
+<td style="text-align: left;"><a href="#typedef-coord_type"><strong>coord_type</strong></a>  <br><em>The type of the coordinates on which the Lagrange polynomials can be evaluated.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef <a href="classNonUniformLagrangeBasis.html"><strong>NonUniformLagrangeBasis</strong></a></td>
@@ -617,35 +617,35 @@
 <tbody>
 <tr>
 <td style="text-align: right;">constexpr std::size_t</td>
-<td style="text-align: left;"><a href="#function-degree"><strong>degree</strong></a> () noexcept<br><em>The degree of the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials.</em></td>
+<td style="text-align: left;"><a href="#function-degree"><strong>degree</strong></a> () noexcept<br><em>The degree of the Lagrange polynomials.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#function-is_periodic"><strong>is_periodic</strong></a> () noexcept<br><em>Indicates if the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials are periodic or not.</em></td>
+<td style="text-align: left;"><a href="#function-is_periodic"><strong>is_periodic</strong></a> () noexcept<br><em>Indicates if the Lagrange polynomials are periodic or not.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#function-is_uniform"><strong>is_uniform</strong></a> () noexcept<br><em>Indicates if the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials are uniform or not (this is the case here).</em></td>
+<td style="text-align: left;"><a href="#function-is_uniform"><strong>is_uniform</strong></a> () noexcept<br><em>Indicates if the Lagrange polynomials are uniform or not (this is the case here).</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>This class uses the second barycentric formulation to evaluate the polynomials. This formula is used for stability. It is described in Barycentric <a href="classLagrange.html"><strong>Lagrange</strong></a> Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517</p>
+<p>This class uses the second barycentric formulation to evaluate the polynomials. This formula is used for stability. It is described in Barycentric Lagrange Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
-<li><code>Dim</code> The dimension on which the <a href="classLagrange.html"><strong>Lagrange</strong></a> polynomials are defined. </li>
-<li><code>D</code> The degree of the polynomials, equal to the number of cells over which the <a href="classLagrange.html"><strong>Lagrange</strong></a> polynomials are defined. </li>
+<li><code>Dim</code> The dimension on which the Lagrange polynomials are defined. </li>
+<li><code>D</code> The degree of the polynomials, equal to the number of cells over which the Lagrange polynomials are defined. </li>
 <li><code>DataType</code> The data type used for the calculations. Double by default. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-continuous_dimension_type">typedef continuous_dimension_type</h3>
-<p><em>The tag identifying the continuous dimension on which the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials are defined.</em></p>
+<p><em>The tag identifying the continuous dimension on which the Lagrange polynomials are defined.</em> </p>
 <pre><code class="language-C++">using NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::continuous_dimension_type =  Dim;
 </code></pre>
 <hr>
 
 <h3 id="typedef-coord_type">typedef coord_type</h3>
-<p><em>The type of the coordinates on which the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials can be evaluated.</em></p>
+<p><em>The type of the coordinates on which the Lagrange polynomials can be evaluated.</em> </p>
 <pre><code class="language-C++">using NonUniformLagrangeBasis&lt; Dim, D, DataType &gt;::coord_type =  Coord&lt;Dim&gt;;
 </code></pre>
 <hr>
@@ -657,7 +657,7 @@
 <hr>
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
 <h3 id="function-degree">function degree</h3>
-<p><em>The degree of the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials.</em></p>
+<p><em>The degree of the Lagrange polynomials.</em> </p>
 <pre><code class="language-C++">static inline constexpr std::size_t NonUniformLagrangeBasis::degree () noexcept
 </code></pre>
 <p><strong>Returns:</strong></p>
@@ -665,19 +665,19 @@
 <hr>
 
 <h3 id="function-is_periodic">function is_periodic</h3>
-<p><em>Indicates if the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials are periodic or not.</em></p>
+<p><em>Indicates if the Lagrange polynomials are periodic or not.</em> </p>
 <pre><code class="language-C++">static inline constexpr bool NonUniformLagrangeBasis::is_periodic () noexcept
 </code></pre>
 <p><strong>Returns:</strong></p>
-<p>A boolean indicating if the <a href="classLagrange.html"><strong>Lagrange</strong></a> polynomials are periodic or not. </p>
+<p>A boolean indicating if the Lagrange polynomials are periodic or not. </p>
 <hr>
 
 <h3 id="function-is_uniform">function is_uniform</h3>
-<p><em>Indicates if the</em> <a href="classLagrange.html"><em><strong>Lagrange</strong></em></a> <em>polynomials are uniform or not (this is the case here).</em></p>
+<p><em>Indicates if the Lagrange polynomials are uniform or not (this is the case here).</em> </p>
 <pre><code class="language-C++">static inline constexpr bool NonUniformLagrangeBasis::is_uniform () noexcept
 </code></pre>
 <p><strong>Returns:</strong></p>
-<p>A boolean indicating if the <a href="classLagrange.html"><strong>Lagrange</strong></a> polynomials are uniform or not. </p>
+<p>A boolean indicating if the Lagrange polynomials are uniform or not. </p>
 <hr>
 
 <hr>

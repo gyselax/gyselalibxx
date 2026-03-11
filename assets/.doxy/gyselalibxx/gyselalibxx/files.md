@@ -185,7 +185,6 @@ Here is a list of all files with brief descriptions:
             * **file** [**bernstein.hpp**](bernstein_8hpp.md)     
             * **file** [**polar\_bsplines.hpp**](polar__bsplines_8hpp.md)     
             * **file** [**polar\_spline\_evaluator.hpp**](polar__spline__evaluator_8hpp.md)     
-        * **file** [**Lagrange.hpp**](Lagrange_8hpp.md)     
         * **file** [**i\_interpolation\_builder.hpp**](i__interpolation__builder_8hpp.md)     
         * **file** [**i\_interpolation\_evaluator.hpp**](i__interpolation__evaluator_8hpp.md)     
         * **file** [**i\_interpolator\_2d.hpp**](i__interpolator__2d_8hpp.md)     

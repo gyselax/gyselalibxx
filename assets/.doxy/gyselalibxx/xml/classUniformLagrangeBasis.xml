@@ -27,7 +27,7 @@
         <name>continuous_dimension_type</name>
         <qualifiedname>UniformLagrangeBasis::continuous_dimension_type</qualifiedname>
         <briefdescription>
-<para>The tag identifying the continuous dimension on which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are defined. </para>
+<para>The tag identifying the continuous dimension on which the Lagrange polynomials are defined. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -42,7 +42,7 @@
         <name>coord_type</name>
         <qualifiedname>UniformLagrangeBasis::coord_type</qualifiedname>
         <briefdescription>
-<para>The type of the coordinates on which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials can be evaluated. </para>
+<para>The type of the coordinates on which the Lagrange polynomials can be evaluated. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -74,7 +74,7 @@
         <name>degree</name>
         <qualifiedname>UniformLagrangeBasis::degree</qualifiedname>
         <briefdescription>
-<para>The degree of the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials. </para>
+<para>The degree of the Lagrange polynomials. </para>
         </briefdescription>
         <detaileddescription>
 <para><simplesect kind="return"><para>The degree. </para>
@@ -92,10 +92,10 @@
         <name>is_periodic</name>
         <qualifiedname>UniformLagrangeBasis::is_periodic</qualifiedname>
         <briefdescription>
-<para>Indicates if the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are periodic or not. </para>
+<para>Indicates if the Lagrange polynomials are periodic or not. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A boolean indicating if the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are periodic or not. </para>
+<para><simplesect kind="return"><para>A boolean indicating if the Lagrange polynomials are periodic or not. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -110,10 +110,10 @@
         <name>is_uniform</name>
         <qualifiedname>UniformLagrangeBasis::is_uniform</qualifiedname>
         <briefdescription>
-<para>Indicates if the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are uniform or not (this is the case here). </para>
+<para>Indicates if the Lagrange polynomials are uniform or not (this is the case here). </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>A boolean indicating if the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are uniform or not. </para>
+<para><simplesect kind="return"><para>A boolean indicating if the Lagrange polynomials are uniform or not. </para>
 </simplesect>
 </para>
         </detaileddescription>
@@ -123,16 +123,16 @@
       </memberdef>
     </sectiondef>
     <briefdescription>
-<para>Class describing <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials on a uniform grid. </para>
+<para>Class describing Lagrange polynomials on a uniform grid. </para>
     </briefdescription>
     <detaileddescription>
-<para>This class uses the second barycentric formulation to evaluate the polynomials. This formula is used for stability. It is described in Barycentric <ref refid="classLagrange" kindref="compound">Lagrange</ref> Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517</para>
+<para>This class uses the second barycentric formulation to evaluate the polynomials. This formula is used for stability. It is described in Barycentric Lagrange Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>Dim</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The dimension on which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are defined. </para>
+<para>The dimension on which the Lagrange polynomials are defined. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -140,7 +140,7 @@
 <parametername>D</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The degree of the polynomials, equal to the number of cells over which the <ref refid="classLagrange" kindref="compound">Lagrange</ref> polynomials are defined. </para>
+<para>The degree of the polynomials, equal to the number of cells over which the Lagrange polynomials are defined. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

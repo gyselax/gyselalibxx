@@ -9,7 +9,6 @@
 * **BSDegreeTheta** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **BsplineOnUniformCellsR** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **BsplineOnUniformCellsTheta** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
-* **BCond** ([**Lagrange.hpp**](Lagrange_8hpp.md))
 * **BSplines1OnPatch** ([**types.hpp**](types_8hpp.md))
 * **BSplines2OnPatch** ([**types.hpp**](types_8hpp.md))
 

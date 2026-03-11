@@ -57,7 +57,7 @@ concept <ref refid="conceptconcepts_1_1InterpolationBuilder" kindref="compound">
 <para>A concept describing an interpolation builder. </para>
     </briefdescription>
     <detaileddescription>
-<para>An interpolation builder is a callable that takes function values on an interpolation mesh and computes the coefficients of an interpolation representation (e.g. spline or <ref refid="classLagrange" kindref="compound">Lagrange</ref>) of that function.</para>
+<para>An interpolation builder is a callable that takes function values on an interpolation mesh and computes the coefficients of an interpolation representation (e.g. spline or Lagrange) of that function.</para>
 <para>Type information is accessed through InterpolationBuilderTraits&lt;Builder&gt;, which has a primary template delegating to Builder&apos;s own aliases and can be specialised for external builders (e.g. ddc::SplineBuilder).</para>
 <para>The template alias and method requirements are verified using interpolation_idx_range_type as a representative domain. </para>
     </detaileddescription>

@@ -60,7 +60,7 @@ _Storage class of the static attributes of the discrete dimension._ [More...](#d
 | Type | Name |
 | ---: | :--- |
 |   | [**Impl**](#function-impl-24) () = default<br> |
-|   | [**Impl**](#function-impl-34) (IdxRange&lt; Grid1D &gt; break\_point\_domain) <br>_Initialise the possible_ [_**Lagrange**_](classLagrange.md) _bases._ |
+|   | [**Impl**](#function-impl-34) (IdxRange&lt; Grid1D &gt; break\_point\_domain) <br>_Initialise the possible Lagrange bases._  |
 |   | [**Impl**](#function-impl-44) ([**Impl**](classNonUniformLagrangeBasis_1_1Impl.md)&lt; DDim, OriginMemorySpace &gt; const & impl) <br>_Copy-constructs from another_ [_**Impl**_](classNonUniformLagrangeBasis_1_1Impl.md) _with a different Kokkos memory space._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxRange&lt; [**knot\_grid**](classNonUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; | [**break\_point\_domain**](#function-break_point_domain) () const<br>_Returns the index range of the break points._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**eval\_basis**](#function-eval_basis) (Span1D&lt; DataType &gt; values, [**coord\_type**](classNonUniformLagrangeBasis.md#typedef-coord_type) const & x, Idx&lt; [**knot\_grid**](classNonUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; poly\_start) const<br>_Evaluate the selected set of bases at the coordinate._  |
@@ -147,7 +147,7 @@ NonUniformLagrangeBasis::Impl::Impl () = default
 
 ### function Impl [3/4]
 
-_Initialise the possible_ [_**Lagrange**_](classLagrange.md) _bases._
+_Initialise the possible Lagrange bases._ 
 ```C++
 template<class Grid1D>
 inline explicit NonUniformLagrangeBasis::Impl::Impl (
@@ -157,7 +157,7 @@ inline explicit NonUniformLagrangeBasis::Impl::Impl (
 
 
 
-Initialise the class such that [**Lagrange**](classLagrange.md) bases can be evaluated on domains derived from the break point domain. 
+Initialise the class such that Lagrange bases can be evaluated on domains derived from the break point domain. 
 
 
         

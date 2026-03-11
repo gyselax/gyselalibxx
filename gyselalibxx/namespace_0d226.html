@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>File Lagrange.hpp - GyselalibX</title>
+    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp} - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "File Lagrange.hpp";
-        var mkdocs_page_input_path = "gyselalibxx/Lagrange_8hpp_source.md";
+        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}";
+        var mkdocs_page_input_path = "gyselalibxx/namespace_0d226.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -550,9 +550,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">File Lagrange.hpp</li>
+      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/Lagrange_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d226.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -560,181 +560,10 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="file-lagrangehpp">File Lagrange.hpp</h1>
-<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_264890e5c091f8c8d7fe1f842870c25e.html"><strong>interpolation</strong></a> <strong>&gt;</strong> <a href="Lagrange_8hpp.html"><strong>Lagrange.hpp</strong></a></p>
-<p><a href="Lagrange_8hpp.html">Go to the documentation of this file</a></p>
-<pre><code class="language-C++">// SPDX-License-Identifier: MIT
-#pragma once
-
-#include &lt;ddc/ddc.hpp&gt;
-
-#include "ddc_aliases.hpp"
-#include "ddc_helper.hpp"
-
-enum class BCond { PERIODIC, DIRICHLET };
-
-template &lt;class Execspace, class GridInterp, BCond BcMin, BCond BcMax&gt;
-class Lagrange
-{
-    static_assert((BcMin == BCond::PERIODIC) == (BcMax == BCond::PERIODIC));
-    using IdxInterp = Idx&lt;GridInterp&gt;;
-    using IdxStepInterp = IdxStep&lt;GridInterp&gt;;
-    using IdxRangeInterp = IdxRange&lt;GridInterp&gt;;
-
-    using CoordDimI = Coord&lt;typename GridInterp::continuous_dimension_type&gt;;
-
-private:
-    IdxRangeInterp m_idx_range;
-    IdxRangeInterp m_inner_idx_range;
-    Field&lt;double, IdxRangeInterp, typename Execspace::memory_space&gt; m_lagrange_coeffs;
-    CoordDimI m_left_bound;
-    CoordDimI m_right_bound;
-    IdxStepInterp m_poly_support;
-
-public:
-    KOKKOS_FUNCTION [[deprecated]] Lagrange(
-            int degree,
-            Field&lt;double, IdxRangeInterp, typename Execspace::memory_space&gt; x_nodes_fnodes,
-            IdxRangeInterp idx_range,
-            IdxStepInterp ghost)
-        : m_idx_range(idx_range)
-        , m_inner_idx_range(idx_range.remove(ghost, ghost))
-        , m_lagrange_coeffs(x_nodes_fnodes)
-        , m_left_bound(ddc::coordinate(m_inner_idx_range.front()))
-        , m_right_bound(ddc::coordinate(m_inner_idx_range.back()))
-        , m_poly_support(degree + 1)
-    {
-    }
-
-    KOKKOS_FUNCTION double evaluate(CoordDimI x_interp) const;
-
-private:
-    IdxInterp getclosest(CoordDimI value) const;
-
-    KOKKOS_FUNCTION IdxInterp getclosest_binsearch(CoordDimI value) const;
-
-    KOKKOS_FUNCTION double evaluate_lagrange(CoordDimI x_interp) const;
-
-    KOKKOS_FUNCTION double apply_bc(CoordDimI x_interp) const;
-
-    KOKKOS_FUNCTION double compute_basis(
-            CoordDimI x_interp,
-            IdxInterp j,
-            IdxRangeInterp polynom_subidx_range) const;
-};
-
-template &lt;typename Execspace, class GridInterp, BCond BcMin, BCond BcMax&gt;
-Idx&lt;GridInterp&gt; Lagrange&lt;Execspace, GridInterp, BcMin, BcMax&gt;::getclosest(CoordDimI value) const
-{
-    assert(value &gt;= m_left_bound &amp;&amp; value &lt;= m_right_bound);
-    auto it = std::
-            min_element(m_idx_range.begin(), m_idx_range.end(), [=](IdxInterp x, IdxInterp y) {
-                return std::abs(ddc::coordinate(x) - value) &lt; std::abs(ddc::coordinate(y) - value);
-            });
-    return *it;
-}
-template &lt;typename Execspace, class GridInterp, BCond BcMin, BCond BcMax&gt;
-KOKKOS_INLINE_FUNCTION Idx&lt;GridInterp&gt; Lagrange&lt;Execspace, GridInterp, BcMin, BcMax&gt;::
-        getclosest_binsearch(CoordDimI x_interp) const
-{
-    assert(x_interp &gt;= m_left_bound &amp;&amp; x_interp &lt;= m_right_bound);
-    IdxInterp begin = m_idx_range.front();
-    IdxInterp end = m_idx_range.back();
-    IdxInterp elm_cell = begin + (end - begin) / 2;
-    while (x_interp &lt; ddc::coordinate(elm_cell)
-           || x_interp &gt; ddc::coordinate(elm_cell + IdxStepInterp(1))) {
-        if (x_interp &lt; ddc::coordinate(elm_cell)) {
-            end = elm_cell;
-        } else {
-            begin = elm_cell;
-        }
-
-        elm_cell = begin + (end - begin) / 2;
-    }
-    return elm_cell;
-}
-
-template &lt;typename Execspace, class GridInterp, BCond BcMin, BCond BcMax&gt;
-KOKKOS_INLINE_FUNCTION double Lagrange&lt;Execspace, GridInterp, BcMin, BcMax&gt;::compute_basis(
-        CoordDimI x_interp,
-        IdxInterp j,
-        IdxRangeInterp polynom_subidx_range) const
-{
-    double w(1);
-    CoordDimI coord_j = ddc::coordinate(j);
-    for (IdxInterp const i : polynom_subidx_range) {
-        CoordDimI coord_i = ddc::coordinate(i);
-        if (coord_i != coord_j) {
-            w *= (x_interp - coord_i) / (coord_j - coord_i);
-        }
-    }
-    return w;
-}
-
-template &lt;typename Execspace, class GridInterp, BCond BcMin, BCond BcMax&gt;
-KOKKOS_INLINE_FUNCTION double Lagrange&lt;Execspace, GridInterp, BcMin, BcMax&gt;::apply_bc(
-        CoordDimI x_interp) const
-{
-    CoordDimI bc_val = x_interp;
-    const double d = m_right_bound - m_left_bound;
-    if constexpr (BcMin == BCond::PERIODIC) {
-        bc_val -= Kokkos::floor((x_interp - m_left_bound) / d) * d;
-    } else {
-        if (x_interp &lt; m_left_bound &amp;&amp; BcMin == BCond::DIRICHLET) {
-            bc_val = m_left_bound;
-        } else if (x_interp &gt; m_right_bound &amp;&amp; BcMax == BCond::DIRICHLET) {
-            bc_val = m_right_bound;
-        }
-    }
-    return evaluate_lagrange(bc_val);
-}
-
-template &lt;typename Execspace, class GridInterp, BCond BcMin, BCond BcMax&gt;
-KOKKOS_INLINE_FUNCTION double Lagrange&lt;Execspace, GridInterp, BcMin, BcMax&gt;::evaluate(
-        CoordDimI x_interp) const
-{
-    if (x_interp &lt; m_left_bound || m_right_bound &lt; x_interp) {
-        return apply_bc(x_interp);
-    } else {
-        return evaluate_lagrange(x_interp);
-    }
-}
-
-template &lt;typename Execspace, class GridInterp, BCond BcMin, BCond BcMax&gt;
-KOKKOS_INLINE_FUNCTION double Lagrange&lt;Execspace, GridInterp, BcMin, BcMax&gt;::evaluate_lagrange(
-        CoordDimI x_intern) const
-{
-    assert(x_intern &gt;= m_left_bound &amp;&amp; x_intern &lt;= m_right_bound);
-
-    IdxInterp begin, end;
-    IdxInterp icell = getclosest_binsearch(x_intern);
-    IdxInterp mid = icell;
-    if (mid &gt;= m_inner_idx_range.back() &amp;&amp; BcMax == BCond::PERIODIC) {
-        begin = mid - m_poly_support / 2;
-        end = Kokkos::min(m_inner_idx_range.back(), begin + m_poly_support);
-    } else if (mid &lt;= m_inner_idx_range.front() &amp;&amp; BcMin == BCond::PERIODIC) {
-        begin = Kokkos::max(m_idx_range.front(), mid - m_poly_support / 2);
-        end = begin + m_poly_support;
-    } else {
-        if (m_inner_idx_range.front() + m_poly_support / 2 &gt; mid) {
-            begin = m_inner_idx_range.front();
-        } else {
-            begin = mid - m_poly_support / 2;
-        }
-        end = Kokkos::min(m_idx_range.back() + IdxStepInterp(1), begin + m_poly_support);
-    }
-
-    if (end == m_idx_range.back())
-        begin = end - m_poly_support;
-    IdxStepInterp npoints_subidx_range(end - begin);
-    IdxRangeInterp subidx_range(begin, npoints_subidx_range);
-    double p = 0;
-    for (IdxInterp const ix : subidx_range) {
-        p += compute_basis(x_intern, ix, subidx_range) * m_lagrange_coeffs(ix);
-    }
-    return p;
-}
-</code></pre></div>
+                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadraturespline_quadraturehpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</h1>
+<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d226.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp}</strong></a></p>
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/spline_quadrature.hpp</code></p></div>
               
             </div>
           </div><footer>

@@ -114,8 +114,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b.md) 
 * **class** [**InverseJacobianMatrix**](classInverseJacobianMatrix.md) 
 * **class** [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md) _Initialise the allfdistribu function._ 
-* **class** [**Lagrange**](classLagrange.md) _A class which implements_ [_**Lagrange**_](classLagrange.md) _polynomials._
-* **class** [**LagrangeEvaluator**](classLagrangeEvaluator.md) _A class to evaluate, differentiate or integrate a_ [_**Lagrange**_](classLagrange.md) _function._
+* **class** [**LagrangeEvaluator**](classLagrangeEvaluator.md) _A class to evaluate, differentiate or integrate a Lagrange function._ 
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md) 
 * **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._
 * **class** [**LinearCoordTransform**](classLinearCoordTransform.md) _A class describing a linear coordinate transformation._ 
@@ -278,11 +277,11 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**tensor\_tools::vector\_index\_set\_dual**](structtensor__tools_1_1vector__index__set__dual.md) _A helper structure to find a VectorIndexSet describing the covariant indices from a VectorIndexSet describing contravariant indices or to find a VectorIndexSet describing the contravariant indices from a VectorIndexSet describing covariant indices._ 
 * **struct** [**tensor\_tools::vector\_index\_set\_dual&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1vector__index__set__dual_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md) _The implementation of_ [_**vector\_index\_set\_dual**_](structtensor__tools_1_1vector__index__set__dual.md) _for a VectorIndexSet._
 * **class** **detail::NonUniformLagrangeBasisBase**    
-    * **class** [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) _Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._
+    * **class** [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) _Class describing Lagrange polynomials on a uniform grid._ 
 * **class** **IAdvectionV< IdxRangeFdistribu, IdxRangeSpatial >**    
     * **class** [**NullAdvectionVelocity**](classNullAdvectionVelocity.md) _This is a class which imitates a velocity advection. It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes._ 
 * **class** **detail::UniformLagrangeBasisBase**    
-    * **class** [**UniformLagrangeBasis**](classUniformLagrangeBasis.md) _Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._
+    * **class** [**UniformLagrangeBasis**](classUniformLagrangeBasis.md) _Class describing Lagrange polynomials on a uniform grid._ 
 * **class** **std::conditional_t< BsplineOnUniformCellsR, ddc::UniformBSplines< R, BSDegreeR >, ddc::NonUniformBSplines< R, BSDegreeR > >**    
     * **struct** [**BSplinesR**](structBSplinesR.md) 
 * **class** **std::conditional_t< BsplineOnUniformCellsTheta, ddc::UniformBSplines< Theta, BSDegreeTheta >, ddc::NonUniformBSplines< Theta, BSDegreeTheta > >**    

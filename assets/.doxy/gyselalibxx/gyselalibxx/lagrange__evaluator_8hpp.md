@@ -32,7 +32,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**LagrangeEvaluator**](classLagrangeEvaluator.md) &lt;class ExecSpace, class MemorySpace, class DataType, class LagrangeBasis, class InterpolationGrid, class LowerExtrapolationRule, class UpperExtrapolationRule&gt;<br>_A class to evaluate, differentiate or integrate a_ [_**Lagrange**_](classLagrange.md) _function._ |
+| class | [**LagrangeEvaluator**](classLagrangeEvaluator.md) &lt;class ExecSpace, class MemorySpace, class DataType, class LagrangeBasis, class InterpolationGrid, class LowerExtrapolationRule, class UpperExtrapolationRule&gt;<br>_A class to evaluate, differentiate or integrate a Lagrange function._  |
 
 
 

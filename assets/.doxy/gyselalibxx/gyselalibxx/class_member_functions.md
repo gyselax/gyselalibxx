@@ -11,7 +11,6 @@
 * **assemble\_multipatch\_field\_k\_total** ([**ITimeStepper**](classITimeStepper.md))
 * **assemble\_multipatch\_field\_k\_total\_on\_patch** ([**ITimeStepper**](classITimeStepper.md))
 * **assemble\_vector\_field\_k\_total** ([**ITimeStepper**](classITimeStepper.md))
-* **apply\_bc** ([**Lagrange**](classLagrange.md))
 * **adjust\_indexes** ([**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md))
 * **apply\_evaluator** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **apply\_integrate** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
@@ -76,7 +75,6 @@
 * **check\_distributed\_idx\_ranges\_are\_first** ([**IMPILayout**](classIMPILayout.md))
 * **copy** ([**ITimeStepper**](classITimeStepper.md))
 * **connected\_to\_patch** ([**Interface**](structInterface.md))
-* **compute\_basis** ([**Lagrange**](classLagrange.md))
 * **call\_all\_to\_all** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **check\_stability** ([**MatrixBatchTridiag**](classMatrixBatchTridiag.md))
 * **calculate\_delta\_to\_factorise** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))
@@ -126,8 +124,6 @@
 * **EdgeTransformation** ([**EdgeTransformation**](classEdgeTransformation.md))
 * **Euler** ([**Euler**](classEuler.md))
 * **ExplicitTimeStepperBuilder** ([**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md))
-* **evaluate** ([**Lagrange**](classLagrange.md))
-* **evaluate\_lagrange** ([**Lagrange**](classLagrange.md))
 * **eval** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **eval\_no\_bc** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **eval\_basis** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
@@ -194,8 +190,7 @@
 * **Gradient** ([**Gradient**](classGradient.md))
 * **GyroAverageOperator** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **get\_amplitudes** ([**KrookSourceAdaptive**](classKrookSourceAdaptive.md))
-* **getclosest** ([**Lagrange**](classLagrange.md), [**LagrangeEvaluator**](classLagrangeEvaluator.md))
-* **getclosest\_binsearch** ([**Lagrange**](classLagrange.md))
+* **getclosest** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
 * **get\_distribution** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **get\_local\_idx\_range** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **get\_conforming\_idx\_vector** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
@@ -291,7 +286,6 @@
 
 ## l
 
-* **Lagrange** ([**Lagrange**](classLagrange.md))
 * **LagrangeEvaluator** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
 * **lower\_extrapolation\_rule** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
 * **LeviCivitaTensor** ([**LeviCivitaTensor**](classLeviCivitaTensor.md))

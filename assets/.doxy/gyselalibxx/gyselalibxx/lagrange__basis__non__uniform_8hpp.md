@@ -35,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) &lt;class Dim, D, class DataType&gt;<br>_Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._ |
+| class | [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) &lt;class Dim, D, class DataType&gt;<br>_Class describing Lagrange polynomials on a uniform grid._  |
 | class | [**Impl**](classNonUniformLagrangeBasis_1_1Impl.md) &lt;class DDim, class MemorySpace&gt;<br>_Storage class of the static attributes of the discrete dimension._  |
 | struct | [**NonUniformLagrangeKnots**](structNonUniformLagrangeKnots.md) &lt;class T&gt;<br> |
 | struct | [**is\_non\_uniform\_lagrange\_basis**](structis__non__uniform__lagrange__basis.md) &lt;class DDim&gt;<br> |

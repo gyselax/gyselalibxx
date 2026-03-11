@@ -124,8 +124,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**KineticSource**](classKineticSource.md) _A class that describes a source of particles._     
 * **class** [**KrookSourceAdaptive**](classKrookSourceAdaptive.md) _A class that describes a source of particles._     
 * **class** [**KrookSourceConstant**](classKrookSourceConstant.md) _A class that describes a source of particles._     
-* **class** [**Lagrange**](classLagrange.md) _A class which implements_ [_**Lagrange**_](classLagrange.md) _polynomials._    
-* **class** [**LagrangeEvaluator**](classLagrangeEvaluator.md) _A class to evaluate, differentiate or integrate a_ [_**Lagrange**_](classLagrange.md) _function._    
+* **class** [**LagrangeEvaluator**](classLagrangeEvaluator.md) _A class to evaluate, differentiate or integrate a Lagrange function._     
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md)     
 * **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._    
 * **class** [**LinearCoordTransform**](classLinearCoordTransform.md) _A class describing a linear coordinate transformation._     
@@ -164,7 +163,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**eval\_type**](structMultipatchSplineEvaluator2D_1_1eval__type.md) _Tag to indicate that the value of the spline should be evaluated._ 
 * **class** [**MultipatchType**](classMultipatchType.md) _A class to store several objects that are of a type which is templated by the patch._     
 * **class** [**NoPerturbInitialisation**](classNoPerturbInitialisation.md) _Initialisation operator with no perturbation, i.e the distribution function equal to the Maxwellian._     
-* **class** [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) _Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._    
+* **class** [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) _Class describing Lagrange polynomials on a uniform grid._     
     * **class** [**Impl**](classNonUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._     
 * **struct** [**NonUniformLagrangeKnots**](structNonUniformLagrangeKnots.md) 
 * **class** [**NullAdvectionVelocity**](classNullAdvectionVelocity.md) _This is a class which imitates a velocity advection. It inherits from IAdvectionV and can be used as an advection operator but does not actually modify the distribution function. This can be useful for debugging purposes._     
@@ -235,7 +234,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._    
 * **class** [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md) _A class which evaluates the triangular Bernstein polynomials._     
     * **class** [**Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md)     
-* **class** [**UniformLagrangeBasis**](classUniformLagrangeBasis.md) _Class describing_ [_**Lagrange**_](classLagrange.md) _polynomials on a uniform grid._    
+* **class** [**UniformLagrangeBasis**](classUniformLagrangeBasis.md) _Class describing Lagrange polynomials on a uniform grid._     
     * **class** [**Impl**](classUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._     
 * **struct** [**UniformLagrangeKnots**](structUniformLagrangeKnots.md) 
 * **class** [**VectorField**](classVectorField.md) _A class which holds multiple (scalar) fields in order to represent a vector field._     
@@ -253,10 +252,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d97.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d221.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d223.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d225.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d227.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d220.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d222.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d224.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d226.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     

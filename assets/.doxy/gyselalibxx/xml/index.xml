@@ -1681,25 +1681,6 @@
     <member refid="classKrookSourceConstant_1ae881ed7d8768c9f8bb103d10a1b625cb" kind="function"><name>~KrookSourceConstant</name></member>
     <member refid="classKrookSourceConstant_1a266237a1a58a6f8f000ee4e910353dcc" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="classLagrange" kind="class"><name>Lagrange</name>
-    <member refid="classLagrange_1a94ca4d5db39b0b36a50464146630f6a3" kind="typedef"><name>IdxInterp</name></member>
-    <member refid="classLagrange_1aadb4c34afd2a669e55d3d68d0eb846d1" kind="typedef"><name>IdxStepInterp</name></member>
-    <member refid="classLagrange_1ac265002a3a4f50742011639ed082bbc5" kind="typedef"><name>IdxRangeInterp</name></member>
-    <member refid="classLagrange_1a009b22e97be2477145bdbde4774f10e0" kind="typedef"><name>CoordDimI</name></member>
-    <member refid="classLagrange_1a2272badb5e95fa3b0930906b3147094a" kind="variable"><name>m_idx_range</name></member>
-    <member refid="classLagrange_1abad8a62bcbe42207fdbce8bf965c7908" kind="variable"><name>m_inner_idx_range</name></member>
-    <member refid="classLagrange_1a2e4767efbfac0d9150197e5e89c48433" kind="variable"><name>m_lagrange_coeffs</name></member>
-    <member refid="classLagrange_1a35484dd315f0547ce4b45fd3b9baebf7" kind="variable"><name>m_left_bound</name></member>
-    <member refid="classLagrange_1ae3b251390ac7a09bc1455ea71eb67df6" kind="variable"><name>m_right_bound</name></member>
-    <member refid="classLagrange_1a87de093fb842819e2746bd770960ce1d" kind="variable"><name>m_poly_support</name></member>
-    <member refid="classLagrange_1a774c7976c0cb9bdbe1797cfcd9734a9f" kind="function"><name>Lagrange</name></member>
-    <member refid="classLagrange_1a74b5dae43695245aaf9063c1dedc0523" kind="function"><name>evaluate</name></member>
-    <member refid="classLagrange_1a5442e2d6ce58e93de422eed1dd236cf6" kind="function"><name>getclosest</name></member>
-    <member refid="classLagrange_1a01f5c54dfd98329732a1dd753c4e9eff" kind="function"><name>getclosest_binsearch</name></member>
-    <member refid="classLagrange_1aea4d15d2d289535f0d8aa1055e51f014" kind="function"><name>evaluate_lagrange</name></member>
-    <member refid="classLagrange_1a57098c6ee680509b5c3ca9cbc21d0065" kind="function"><name>apply_bc</name></member>
-    <member refid="classLagrange_1a8dc0fdd92e84e3e3ce6c95200a0fa581" kind="function"><name>compute_basis</name></member>
-  </compound>
   <compound refid="classLagrangeEvaluator" kind="class"><name>LagrangeEvaluator</name>
     <member refid="classLagrangeEvaluator_1ace70f78b0de89a44f8d33b11c689d6c9" kind="typedef"><name>exec_space</name></member>
     <member refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kind="typedef"><name>memory_space</name></member>
@@ -3192,13 +3173,13 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d221" kind="namespace"><name>@221</name>
+  <compound refid="namespace_0d220" kind="namespace"><name>@220</name>
   </compound>
-  <compound refid="namespace_0d223" kind="namespace"><name>@223</name>
+  <compound refid="namespace_0d222" kind="namespace"><name>@222</name>
   </compound>
-  <compound refid="namespace_0d225" kind="namespace"><name>@225</name>
+  <compound refid="namespace_0d224" kind="namespace"><name>@224</name>
   </compound>
-  <compound refid="namespace_0d227" kind="namespace"><name>@227</name>
+  <compound refid="namespace_0d226" kind="namespace"><name>@226</name>
   </compound>
   <compound refid="namespace_0d97" kind="namespace"><name>@97</name>
   </compound>
@@ -3955,11 +3936,6 @@
   <compound refid="i__interpolator__2d_8hpp" kind="file"><name>i_interpolator_2d.hpp</name>
   </compound>
   <compound refid="identity__interpolation__builder_8hpp" kind="file"><name>identity_interpolation_builder.hpp</name>
-  </compound>
-  <compound refid="Lagrange_8hpp" kind="file"><name>Lagrange.hpp</name>
-    <member refid="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53" kind="enum"><name>BCond</name></member>
-    <member refid="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53ad9d83fc826ae0d42075af007a477e2c9" kind="enumvalue"><name>PERIODIC</name></member>
-    <member refid="Lagrange_8hpp_1a05d08ed50dc087ae90514e2294deca53ae151350b63efc6c3bbe2e3f0d27863ba" kind="enumvalue"><name>DIRICHLET</name></member>
   </compound>
   <compound refid="lagrange__basis__non__uniform_8hpp" kind="file"><name>lagrange_basis_non_uniform.hpp</name>
   </compound>
