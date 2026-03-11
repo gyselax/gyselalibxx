@@ -14,10 +14,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `SplineInterpolator` class to group a compatible DDC spline builder and evaluator.
 - Add `LagrangeInterpolator` class to group a compatible builder and evaluator.
 - Add constructors taking a `concepts::Interpolator` class instance for:
-    - `BslAdvectionSpatial`
-    - `BslAdvectionVelocity`
-    - `BslAdvection1D`
-    - `FEM1DPoissonSolver`
+  - `BslAdvectionSpatial`
+  - `BslAdvectionVelocity`
+  - `BslAdvection1D`
+  - `FEM1DPoissonSolver`
 - Add a constructor to `BslAdvection1D` to use the same interpolator type for both the advected function and the advection field.
 
 ### Fixed
@@ -29,10 +29,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 
 - Deprecate constructors taking both builders and evaluators n favour of constructors taking Interpolator classes for:
-    - `BslAdvectionSpatial`
-    - `BslAdvectionVelocity`
-    - `BslAdvection1D`
-    - `FEM1DPoissonSolver`
+  - `BslAdvectionSpatial`
+  - `BslAdvectionVelocity`
+  - `BslAdvection1D`
+  - `FEM1DPoissonSolver`
 
 ### Removed
 
