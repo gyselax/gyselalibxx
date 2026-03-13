@@ -173,7 +173,10 @@ public:
      * @param[in] idx_range The index range on which the chunk will be defined.
      * @param[in] allocator An optional allocator used to create the chunks.
      */
-    explicit VectorFieldMem(std::string const& label, index_range_type const& idx_range, Allocator allocator = Allocator())
+    explicit VectorFieldMem(
+            std::string const& label,
+            index_range_type const& idx_range,
+            Allocator allocator = Allocator())
         : VectorFieldMem(label, idx_range, allocator, std::make_index_sequence<base_type::NDims> {})
     {
     }
