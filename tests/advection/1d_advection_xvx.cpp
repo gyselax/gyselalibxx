@@ -223,7 +223,7 @@ TEST_F(XVxAdvection1DTest, AdvectionXVx)
             IdxRangeXVx,
             SplineInterpolatorX,
             SplineInterpolatorX,
-            RK2Builder> const advection(spline_interpolation, spline_interpolation, time_stepper);
+            RK2Builder> const advection(spline_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionXVx(advection);
     EXPECT_LE(max_relative_error, 5.e-7);

@@ -196,6 +196,33 @@ public:
     {
     }
 
+    /**
+     * @brief Constructor when the advection domain and the function domain are different.
+     *
+     * When IdxRangeAdvection and IdxRangeFunction are different, we need one builder and
+     * evaluator for each index range.
+     *
+     * We can also use it when we want two different builders/evaluators but defined on the same
+     * domain (e.g. different boundary conditions for the evaluators).
+     *
+     * @param[in] interpolator Interpolator along the GridInterest direction used to
+     *          build a continuous representation and evaluate both the advected function
+     *          and the advection field at the characteristic feet.
+     * @param[in] time_stepper_builder A builder for the time integration method used
+     *          for the characteristic equation.
+     */
+    explicit BslAdvection1D(
+            FunctionInterpolator const& interpolator,
+            TimeStepperBuilder const& time_stepper_builder)
+        : m_function_builder(interpolator.get_builder())
+        , m_function_evaluator(interpolator.get_evaluator())
+        , m_adv_field_builder(interpolator.get_builder())
+        , m_adv_field_evaluator(interpolator.get_evaluator())
+        , m_time_stepper_builder(time_stepper_builder)
+    {
+        static_assert(std::is_same_v<FunctionInterpolator, AdvectionFieldInterpolator>);
+    }
+
     ~BslAdvection1D() = default;
 
     /**

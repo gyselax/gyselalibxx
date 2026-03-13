@@ -318,16 +318,14 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
             IdxRangeXYVxVy,
             SplineInterpolatorX,
             SplineInterpolatorX,
-            RK2Builder> const
-            advection_x(spline_interpolation_x, spline_interpolation_x, time_stepper);
+            RK2Builder> const advection_x(spline_interpolation_x, time_stepper);
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXYVxVy,
             SplineInterpolatorY,
             SplineInterpolatorY,
-            RK2Builder> const
-            advection_y(spline_interpolation_y, spline_interpolation_y, time_stepper);
+            RK2Builder> const advection_y(spline_interpolation_y, time_stepper);
 
 
     double const max_relative_error = AdvectionXY(advection_x, advection_y);
