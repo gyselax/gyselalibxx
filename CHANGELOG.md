@@ -16,6 +16,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Add Koliop in all toolchains.
+- Changed spline boundary condition in velocity dimensions in the XVx and XYVxVy geometries to use homogeneous Hermite boundary conditions.
+- Change `BslAdvectionVelocity` to stop providing values for the derivatives at the boundaries.
 
 ### Deprecated
 
