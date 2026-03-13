@@ -19,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `BslAdvection1D`
   - `FEM1DPoissonSolver`
 - Add a constructor to `BslAdvection1D` to use the same interpolator type for both the advected function and the advection field.
+- Add new constructors for `VectorFieldMem` to support labels as used in DDC and Kokkos.
 
 ### Fixed
 
