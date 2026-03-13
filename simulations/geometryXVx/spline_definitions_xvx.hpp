@@ -32,7 +32,7 @@ struct BSplinesVx
 };
 
 auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
-auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+auto constexpr SplineVxBoundary = ddc::BoundCond::HOMOGENEOUS_HERMITE;
 
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
