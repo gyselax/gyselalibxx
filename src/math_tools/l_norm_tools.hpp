@@ -82,7 +82,8 @@ double norm_inf(ExecSpace exec_space, FuncType function)
     using IdxRangeFunc = typename FuncType::discrete_domain_type;
     using IdxFunc = typename IdxRangeFunc::discrete_element_type;
     IdxRangeFunc idx_range = get_idx_range(function);
-    return ddc::parallel_transform_reduce(
+    const std::source_location location = std::source_location::current();
+    return ddc::parallel_transform_reduce(location.function_name(),
             exec_space,
             idx_range,
             0.,
@@ -100,7 +101,8 @@ double error_norm_inf(ExecSpace exec_space, FuncType function, ExactFuncType exa
     using IdxRangeFunc = typename FuncType::discrete_domain_type;
     using IdxFunc = typename IdxRangeFunc::discrete_element_type;
     IdxRangeFunc idx_range = get_idx_range(function);
-    return ddc::parallel_transform_reduce(
+    const std::source_location location = std::source_location::current();
+    return ddc::parallel_transform_reduce(location.function_name(),
             exec_space,
             idx_range,
             0.,

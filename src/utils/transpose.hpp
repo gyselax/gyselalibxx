@@ -111,7 +111,7 @@ auto create_transpose_mirror_view_and_copy(
     } else {
         TargetDomain transposed_domain(src.domain());
         using ElemType = std::remove_const_t<ElementType>;
-        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
+        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc("field (create_transpose_mirror_view_and_copy)", transposed_domain);
         transpose_layout(execution_space, get_field(field_alloc), get_const_field(src));
         return field_alloc;
     }
@@ -145,7 +145,7 @@ auto create_transpose_mirror(
     } else {
         TargetDomain transposed_domain(src.domain());
         using ElemType = std::remove_const_t<ElementType>;
-        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc(transposed_domain);
+        FieldMem<ElemType, TargetDomain, MemSpace> field_alloc("field (create_transpose_mirror)", transposed_domain);
         return field_alloc;
     }
 }

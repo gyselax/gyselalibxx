@@ -82,7 +82,8 @@ public:
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
         } else {
-            return ddc::parallel_transform_reduce(
+            const std::source_location location = std::source_location::current();
+            return ddc::parallel_transform_reduce(location.function_name(),
                     exec_space,
                     get_idx_range(coeff_proxy),
                     0.0,

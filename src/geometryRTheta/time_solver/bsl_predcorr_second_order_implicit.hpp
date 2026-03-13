@@ -458,7 +458,8 @@ public:
 
             // Convergence test:
             LogicalToPhysicalMapping logical_to_physical_proxy = m_logical_to_physical;
-            square_difference_feet = ddc::parallel_transform_reduce(
+            const std::source_location location = std::source_location::current();
+            square_difference_feet = ddc::parallel_transform_reduce(location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     0.0,

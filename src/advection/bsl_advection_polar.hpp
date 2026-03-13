@@ -167,7 +167,7 @@ public:
                 = m_interpolator.preallocate();
 
         // Initialise the feet
-        CFieldMemFeetRTheta feet_rtheta_alloc(get_idx_range(advection_field_xy));
+        CFieldMemFeetRTheta feet_rtheta_alloc("feet_rtheta (bsl_advection_polar.hpp)", get_idx_range(advection_field_xy));
         CFieldFeetRTheta feet_rtheta = get_field(feet_rtheta_alloc);
         const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 ExecSpace(),
@@ -227,9 +227,10 @@ public:
                 grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
         IdxRangeBatched const Opoint_grid(radial_grid.take_first(IdxStepR(1)), no_r_grid);
 
-
         // Convert advection field on RTheta to advection field on XY
-        DVectorFieldMemAdvectionXY advection_field_xy_alloc(grid);
+        Kokkos::Profiling::pushRegion("PolarAdvection/RThetaToXY");
+
+        DVectorFieldMemAdvectionXY advection_field_xy_alloc("advection_field_xy (BslAdvectionPolar::operator())", grid);
         DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
 
         LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy
@@ -241,6 +242,8 @@ public:
                 advection_field_xy[grid_without_Opoint],
                 logical_to_physical_mapping_proxy,
                 advection_field_rtheta[grid_without_Opoint]);
+
+        Kokkos::Profiling::popRegion();
 
         const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 ExecSpace(),
@@ -311,7 +314,9 @@ public:
                 no_r_grid);
 
         // Convert advection field on RTheta to advection field on XY
-        DVectorFieldMemAdvectionXY advection_field_xy_alloc(grid);
+        Kokkos::Profiling::pushRegion("PolarAdvection/RThetaToXY");
+
+        DVectorFieldMemAdvectionXY advection_field_xy_alloc("advection_field_xy (BslAdvectionPolar::operator())", grid);
         DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
 
         // (Ax, Ay) = J (Ar, Atheta)
@@ -320,6 +325,8 @@ public:
                 advection_field_xy[grid_without_Opoint],
                 logical_to_physical_mapping_proxy,
                 advection_field_rtheta[grid_without_Opoint]);
+
+        Kokkos::Profiling::popRegion();
 
         // Treatment for the O-point.
         if (first_row_is_o_point) {

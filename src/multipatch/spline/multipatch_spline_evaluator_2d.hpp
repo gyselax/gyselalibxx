@@ -572,7 +572,8 @@ public:
         ddc::integrals(exec_space(), values1);
         ddc::integrals(exec_space(), values2);
 
-        integral = ddc::parallel_transform_reduce(
+        const std::source_location location = std::source_location::current();
+        integral = ddc::parallel_transform_reduce(location.function_name(),
                 exec_space(),
                 get_idx_range(spline_coef),
                 0.0,
