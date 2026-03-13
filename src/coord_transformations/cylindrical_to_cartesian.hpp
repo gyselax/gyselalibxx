@@ -24,7 +24,7 @@ class CartesianToCylindrical;
  *
  * @f$ y(R, Z, \zeta) = R \sin(\zeta). @f$
  *
- * @f$ z(R, Z, \zeta) = z. @f$
+ * @f$ z(R, Z, \zeta) = Z. @f$
  *
  * It and its Jacobian matrix are invertible everywhere except for @f$ R = 0 @f$.
  *
@@ -149,10 +149,10 @@ public:
      */
     KOKKOS_FUNCTION CoordResult operator()(CoordArg const& coord) const
     {
-        const double r = ddc::get<R>(coord);
+        const double R = ddc::get<R>(coord);
         const double zeta = ddc::get<Zeta>(coord);
-        Coord<X> x(r * Kokkos::cos(zeta));
-        Coord<Y> y(r * Kokkos::sin(zeta));
+        Coord<X> x(R * Kokkos::cos(zeta));
+        Coord<Y> y(R * Kokkos::sin(zeta));
         return CoordResult(x, y, ddc::select<Z>(coord));
     }
 
@@ -166,8 +166,8 @@ public:
      */
     KOKKOS_FUNCTION double jacobian(CoordArg const& coord) const
     {
-        double r = ddc::get<R>(coord);
-        return -r;
+        double R = ddc::get<R>(coord);
+        return -R;
     }
 
     /**
@@ -184,15 +184,15 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<X, Y, Z>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>>
     jacobian_matrix(CoordArg const& coord) const
     {
-        const double r = ddc::get<R>(coord);
+        const double R = ddc::get<R>(coord);
         const double zeta = ddc::get<Zeta>(coord);
         DTensor<VectorIndexSet<X, Y, Z>, VectorIndexSet<R_cov, Z_cov, Zeta_cov>> jacobian_matrix;
         ddcHelper::get<X, R_cov>(jacobian_matrix) = Kokkos::cos(zeta);
         ddcHelper::get<X, Z_cov>(jacobian_matrix) = 0;
-        ddcHelper::get<X, Zeta_cov>(jacobian_matrix) = -r * Kokkos::sin(zeta);
+        ddcHelper::get<X, Zeta_cov>(jacobian_matrix) = -R * Kokkos::sin(zeta);
         ddcHelper::get<Y, R_cov>(jacobian_matrix) = Kokkos::sin(zeta);
         ddcHelper::get<Y, Z_cov>(jacobian_matrix) = 0;
-        ddcHelper::get<Y, Zeta_cov>(jacobian_matrix) = r * Kokkos::cos(zeta);
+        ddcHelper::get<Y, Zeta_cov>(jacobian_matrix) = R * Kokkos::cos(zeta);
         ddcHelper::get<Z, R_cov>(jacobian_matrix) = 0;
         ddcHelper::get<Z, Z_cov>(jacobian_matrix) = 1;
         ddcHelper::get<Z, Zeta_cov>(jacobian_matrix) = 0;
@@ -216,19 +216,19 @@ public:
         const double zeta = ddc::get<Zeta>(coord);
 
         if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, R_cov>) {
-            //Compute the (1,1) coefficient of the Jacobian matrix, i.e J^x_r.
+            //Compute the (1,1) coefficient of the Jacobian matrix, i.e J^x_R.
             return Kokkos::cos(zeta);
         } else if constexpr (std::is_same_v<IndexTag1, X> && std::is_same_v<IndexTag2, Zeta_cov>) {
-            //Compute the (1,2) coefficient of the Jacobian matrix, i.e J^x_theta.
-            const double r = ddc::get<R>(coord);
-            return -r * Kokkos::sin(zeta);
+            //Compute the (1,3) coefficient of the Jacobian matrix, i.e J^x_zeta.
+            const double R = ddc::get<R>(coord);
+            return -R * Kokkos::sin(zeta);
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, R_cov>) {
-            //Compute the (2,1) coefficient of the Jacobian matrix, i.e J^y_r.
+            //Compute the (2,1) coefficient of the Jacobian matrix, i.e J^y_R.
             return Kokkos::sin(zeta);
         } else if constexpr (std::is_same_v<IndexTag1, Y> && std::is_same_v<IndexTag2, Zeta_cov>) {
-            //Compute the (2,2) coefficient of the Jacobian matrix, i.e J^y_theta.
-            const double r = ddc::get<R>(coord);
-            return r * Kokkos::cos(zeta);
+            //Compute the (2,3) coefficient of the Jacobian matrix, i.e J^y_zeta.
+            const double R = ddc::get<R>(coord);
+            return R * Kokkos::cos(zeta);
         } else if constexpr (std::is_same_v<IndexTag1, Z> && std::is_same_v<IndexTag2, Z_cov>) {
             return 1;
         } else {
@@ -251,15 +251,15 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<X_cov, Y_cov, Z_cov>>
     inv_jacobian_matrix(CoordArg const& coord) const
     {
-        const double r = ddc::get<R>(coord);
+        const double R = ddc::get<R>(coord);
         const double zeta = ddc::get<Zeta>(coord);
-        assert(fabs(r) >= 1e-15);
+        assert(fabs(R) >= 1e-15);
 
         DTensor<VectorIndexSet<R, Z, Zeta>, VectorIndexSet<X_cov, Y_cov, Z_cov>> matrix(0);
         ddcHelper::get<R, X_cov>(matrix) = Kokkos::cos(zeta);
         ddcHelper::get<R, Y_cov>(matrix) = Kokkos::sin(zeta);
-        ddcHelper::get<Zeta, X_cov>(matrix) = -1 / r * Kokkos::sin(zeta);
-        ddcHelper::get<Zeta, Y_cov>(matrix) = 1 / r * Kokkos::cos(zeta);
+        ddcHelper::get<Zeta, X_cov>(matrix) = -1 / R * Kokkos::sin(zeta);
+        ddcHelper::get<Zeta, Y_cov>(matrix) = 1 / R * Kokkos::cos(zeta);
         ddcHelper::get<Z, Z_cov>(matrix) = 1;
         return matrix;
     }
@@ -294,14 +294,14 @@ public:
         } else if constexpr (std::is_same_v<IndexTag1, Z> || std::is_same_v<IndexTag2, Z_cov>) {
             return 0;
         } else {
-            const double r = ddc::get<R>(coord);
-            assert(fabs(r) >= 1e-15);
+            const double R = ddc::get<R>(coord);
+            assert(fabs(R) >= 1e-15);
             if constexpr (std::is_same_v<IndexTag2, X_cov>) {
-                //Compute the (2,1) coefficient of the inverse Jacobian matrix.
-                return -1 / r * Kokkos::sin(zeta);
+                //Compute the (3,1) coefficient of the inverse Jacobian matrix.
+                return -1 / R * Kokkos::sin(zeta);
             } else {
-                //Compute the (2,2) coefficient of the inverse Jacobian matrix.
-                return 1 / r * Kokkos::cos(zeta);
+                //Compute the (3,2) coefficient of the inverse Jacobian matrix.
+                return 1 / R * Kokkos::cos(zeta);
             }
         }
     }
