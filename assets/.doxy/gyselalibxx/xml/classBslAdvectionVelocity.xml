@@ -145,20 +145,6 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="37" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="38" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvectionVelocity_1ab909cf253b48cab320ae5fcf54bc7507" prot="private" static="no">
-        <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; FunctionBuilder &gt;::template batched_derivs_idx_range_type&lt; IdxRangeSpaceVelocity &gt;</type>
-        <definition>using BslAdvectionVelocity&lt; Geometry, FunctionInterpolator, DataType &gt;::IdxRangeFunctionDeriv =  typename InterpolationBuilderTraits&lt; FunctionBuilder&gt;::template batched_derivs_idx_range_type&lt;IdxRangeSpaceVelocity&gt;</definition>
-        <argsstring></argsstring>
-        <name>IdxRangeFunctionDeriv</name>
-        <qualifiedname>BslAdvectionVelocity::IdxRangeFunctionDeriv</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="42" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="typedef" id="classBslAdvectionVelocity_1abd1d27bf6afdd222cb8f92895bad2db4" prot="private" static="no">
         <type>typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt; FunctionBuilder &gt;::template batched_basis_idx_range_type&lt; IdxRangeSpaceVelocity &gt;</type>
         <definition>using BslAdvectionVelocity&lt; Geometry, FunctionInterpolator, DataType &gt;::IdxRangeFunctionBasis =  typename InterpolationBuilderTraits&lt; FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeSpaceVelocity&gt;</definition>
@@ -171,7 +157,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="41" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -187,7 +173,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="46" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="46" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="44" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classBslAdvectionVelocity_1ad9901027fe06aa60b27eceb530fcc445" prot="private" static="no" mutable="no">
         <type>FunctionEvaluator const  &amp;</type>
@@ -201,7 +187,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="47" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="45" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="45" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -244,7 +230,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="57" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="57" bodyend="63"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="55" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="55" bodyend="61"/>
       </memberdef>
       <memberdef kind="function" id="classBslAdvectionVelocity_1a351d7f94a0262c0dcb80c763c1490ed4" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -273,7 +259,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="70" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="70" bodyend="74"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="68" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="68" bodyend="72"/>
       </memberdef>
       <memberdef kind="function" id="classBslAdvectionVelocity_1a44c4a572e7bd547e49ab67132cdb9cdf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -287,7 +273,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="76" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="74" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classBslAdvectionVelocity_1ad9a616f1bd1c3dfa1c4729b2d89eb071" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>Field&lt; DataType, IdxRangeFdistribu &gt;</type>
@@ -342,7 +328,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="85" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="85" bodyend="147"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="83" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="83" bodyend="134"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -374,7 +360,7 @@
         <link refid="classIAdvectionVelocity"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="24" bodyend="148"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp" bodystart="24" bodyend="135"/>
     <listofallmembers>
       <member refid="classBslAdvectionVelocity_1a83d596fe19728ac17b7d5707f75aa513" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>BslAdvectionVelocity</name></member>
       <member refid="classBslAdvectionVelocity_1a351d7f94a0262c0dcb80c763c1490ed4" prot="public" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>BslAdvectionVelocity</name></member>
@@ -384,7 +370,6 @@
       <member refid="classBslAdvectionVelocity_1a310bc925eb819f140b1eaa54fe2ecbcc" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>GridV</name></member>
       <member refid="classBslAdvectionVelocity_1ae07abddb2e16f74a14642e6037765a22" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFdistribu</name></member>
       <member refid="classBslAdvectionVelocity_1abd1d27bf6afdd222cb8f92895bad2db4" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFunctionBasis</name></member>
-      <member refid="classBslAdvectionVelocity_1ab909cf253b48cab320ae5fcf54bc7507" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeFunctionDeriv</name></member>
       <member refid="classBslAdvectionVelocity_1a03ea110ce106497e095dd12e41005f27" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeSpaceVelocity</name></member>
       <member refid="classBslAdvectionVelocity_1a7e2133ddbcfbe364a02b7a031a9eb1b2" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxRangeSpatial</name></member>
       <member refid="classBslAdvectionVelocity_1a687925ba89e644b3c7b185bd8a6f2dcf" prot="private" virt="non-virtual"><scope>BslAdvectionVelocity</scope><name>IdxSpatial</name></member>

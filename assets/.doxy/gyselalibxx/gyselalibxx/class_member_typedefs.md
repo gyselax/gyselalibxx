@@ -308,7 +308,7 @@
 * **IdxRangeAdvecFieldDeriv** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **IdxRangeBSAdvection** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **IdxRangeFunctionBasis** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
-* **IdxRangeFunctionDeriv** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
+* **IdxRangeFunctionDeriv** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **IdxRangeInterest** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **IdxBatch** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md), [**GyroAverageOperator**](classGyroAverageOperator.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **IdxBatched** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))

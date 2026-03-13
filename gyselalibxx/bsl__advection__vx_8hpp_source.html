@@ -600,8 +600,6 @@ class BslAdvectionVelocity
             = ddc::remove_dims_of_t&lt;typename Geometry::IdxRangeFdistribu, Species&gt;;
 
 private:
-    using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits&lt;
-            FunctionBuilder&gt;::template batched_derivs_idx_range_type&lt;IdxRangeSpaceVelocity&gt;;
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits&lt;
             FunctionBuilder&gt;::template batched_basis_idx_range_type&lt;IdxRangeSpaceVelocity&gt;;
 
@@ -641,13 +639,6 @@ public:
 
         IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
 
-        FieldMem&lt;DataType, IdxRangeFunctionDeriv&gt; derivs_min(
-                m_function_builder.batched_derivs_xmin_domain(batched_feet_idx_range));
-        FieldMem&lt;DataType, IdxRangeFunctionDeriv&gt; derivs_max(
-                m_function_builder.batched_derivs_xmax_domain(batched_feet_idx_range));
-        ddc::parallel_fill(derivs_min, 0.);
-        ddc::parallel_fill(derivs_max, 0.);
-
         // pre-allocate some memory to prevent allocation later in loop
         FieldMem&lt;Coord&lt;DimV&gt;, IdxRangeSpaceVelocity&gt; feet_coords_alloc(batched_feet_idx_range);
         Field&lt;Coord&lt;DimV&gt;, IdxRangeSpaceVelocity&gt; feet_coords(get_field(feet_coords_alloc));
@@ -674,11 +665,7 @@ public:
                             feet_coords(iv, ib) = Coord&lt;DimV&gt;(ddc::coordinate(iv) - dvx);
                         }
                     });
-            m_function_builder(
-                    get_field(function_coefs_alloc),
-                    get_const_field(allfdistribu[isp]),
-                    std::optional(get_const_field(derivs_min)),
-                    std::optional(get_const_field(derivs_max)));
+            m_function_builder(get_field(function_coefs_alloc), get_const_field(allfdistribu[isp]));
             m_function_evaluator(
                     allfdistribu[isp],
                     get_const_field(feet_coords),

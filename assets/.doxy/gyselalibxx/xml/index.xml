@@ -151,7 +151,6 @@
     <member refid="classBslAdvectionVelocity_1a98d6f1421ea7624cd1eb86b6e2cdb5b0" kind="typedef"><name>IdxV</name></member>
     <member refid="classBslAdvectionVelocity_1afca2c16a23e6d199b55299620298e89e" kind="typedef"><name>DimV</name></member>
     <member refid="classBslAdvectionVelocity_1a03ea110ce106497e095dd12e41005f27" kind="typedef"><name>IdxRangeSpaceVelocity</name></member>
-    <member refid="classBslAdvectionVelocity_1ab909cf253b48cab320ae5fcf54bc7507" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
     <member refid="classBslAdvectionVelocity_1abd1d27bf6afdd222cb8f92895bad2db4" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
     <member refid="classBslAdvectionVelocity_1ae1953ef22a277abb42c3bee06e54459e" kind="variable"><name>m_function_builder</name></member>
     <member refid="classBslAdvectionVelocity_1ad9901027fe06aa60b27eceb530fcc445" kind="variable"><name>m_function_evaluator</name></member>
