@@ -76,6 +76,7 @@
     <member refid="classBslAdvection1D_1a8cde1b8cafb6c5e12328eb57fe72e521" kind="variable"><name>m_time_stepper_builder</name></member>
     <member refid="classBslAdvection1D_1aee118d87bb78b3a242b31ea073a73fe8" kind="function"><name>BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1ae7cad7b6ea28b79402059c7087948088" kind="function"><name>BslAdvection1D</name></member>
+    <member refid="classBslAdvection1D_1aae7aecf6f16dd5afaad21409ac5a8b78" kind="function"><name>BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1a231cd2d2423f12e1adc6c6a51d22d56e" kind="function"><name>~BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1a618ef33d5c081227eed9b034cc59e550" kind="function"><name>operator()</name></member>
   </compound>

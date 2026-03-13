@@ -62,8 +62,9 @@ _A class which computes the advection along the dimension of interest GridIntere
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvection1D**](#function-bsladvection1d-12) ([**FunctionBuilder**](classBslAdvection1D.md#typedef-functionbuilder) const & function\_builder, [**FunctionEvaluator**](classBslAdvection1D.md#typedef-functionevaluator) const & function\_evaluator, [**AdvectionFieldBuilder**](classBslAdvection1D.md#typedef-advectionfieldbuilder) const & adv\_field\_builder, [**AdvectionFieldEvaluator**](classBslAdvection1D.md#typedef-advectionfieldevaluator) const & adv\_field\_evaluator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
-|   | [**BslAdvection1D**](#function-bsladvection1d-22) (FunctionInterpolator const & function\_interpolator, AdvectionFieldInterpolator const & adv\_field\_interpolator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
+|   | [**BslAdvection1D**](#function-bsladvection1d-13) ([**FunctionBuilder**](classBslAdvection1D.md#typedef-functionbuilder) const & function\_builder, [**FunctionEvaluator**](classBslAdvection1D.md#typedef-functionevaluator) const & function\_evaluator, [**AdvectionFieldBuilder**](classBslAdvection1D.md#typedef-advectionfieldbuilder) const & adv\_field\_builder, [**AdvectionFieldEvaluator**](classBslAdvection1D.md#typedef-advectionfieldevaluator) const & adv\_field\_evaluator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
+|   | [**BslAdvection1D**](#function-bsladvection1d-23) (FunctionInterpolator const & function\_interpolator, AdvectionFieldInterpolator const & adv\_field\_interpolator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
+|   | [**BslAdvection1D**](#function-bsladvection1d-33) (FunctionInterpolator const & interpolator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
 |  FunctionField | [**operator()**](#function-operator) (FunctionField const allfdistribu, AdvecField const advection\_field, DataType const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_max=std::nullopt) const<br>_Advects allfdistribu along the advection dimension GridInterest for a duration dt._  |
 |   | [**~BslAdvection1D**](#function-bsladvection1d) () = default<br> |
 
@@ -201,7 +202,7 @@ using BslAdvection1D< GridInterest, IdxRangeAdvection, IdxRangeFunction, Functio
 
 
 
-### function BslAdvection1D [1/2]
+### function BslAdvection1D [1/3]
 
 _Constructor when the advection domain and the function domain are different._ 
 ```C++
@@ -242,7 +243,7 @@ We can also use it when we want two different builders/evaluators but defined on
 
 
 
-### function BslAdvection1D [2/2]
+### function BslAdvection1D [2/3]
 
 _Constructor when the advection domain and the function domain are different._ 
 ```C++
@@ -268,6 +269,41 @@ We can also use it when we want two different builders/evaluators but defined on
 
 * `function_interpolator` Interpolator along the GridInterest direction used to build a continuous representation and evaluate the advected function at the characteristic feet. 
 * `adv_field_interpolator` Interpolator along the GridInterest direction used to build a continuous representation and evaluate the advection field at the characteristic feet. 
+* `time_stepper_builder` A builder for the time integration method used for the characteristic equation. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function BslAdvection1D [3/3]
+
+_Constructor when the advection domain and the function domain are different._ 
+```C++
+inline explicit BslAdvection1D::BslAdvection1D (
+    FunctionInterpolator const & interpolator,
+    TimeStepperBuilder const & time_stepper_builder
+) 
+```
+
+
+
+When IdxRangeAdvection and IdxRangeFunction are different, we need one builder and evaluator for each index range.
+
+
+We can also use it when we want two different builders/evaluators but defined on the same domain (e.g. different boundary conditions for the evaluators).
+
+
+
+
+**Parameters:**
+
+
+* `interpolator` Interpolator along the GridInterest direction used to build a continuous representation and evaluate both the advected function and the advection field at the characteristic feet. 
 * `time_stepper_builder` A builder for the time integration method used for the characteristic equation. 
 
 

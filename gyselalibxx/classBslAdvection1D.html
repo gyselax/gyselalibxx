@@ -605,11 +605,15 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bsladvection1d-12"><strong>BslAdvection1D</strong></a> (<a href="classBslAdvection1D.html#typedef-functionbuilder"><strong>FunctionBuilder</strong></a> const &amp; function_builder, <a href="classBslAdvection1D.html#typedef-functionevaluator"><strong>FunctionEvaluator</strong></a> const &amp; function_evaluator, <a href="classBslAdvection1D.html#typedef-advectionfieldbuilder"><strong>AdvectionFieldBuilder</strong></a> const &amp; adv_field_builder, <a href="classBslAdvection1D.html#typedef-advectionfieldevaluator"><strong>AdvectionFieldEvaluator</strong></a> const &amp; adv_field_evaluator, TimeStepperBuilder const &amp; time_stepper_builder) <br><em>Constructor when the advection domain and the function domain are different.</em></td>
+<td style="text-align: left;"><a href="#function-bsladvection1d-13"><strong>BslAdvection1D</strong></a> (<a href="classBslAdvection1D.html#typedef-functionbuilder"><strong>FunctionBuilder</strong></a> const &amp; function_builder, <a href="classBslAdvection1D.html#typedef-functionevaluator"><strong>FunctionEvaluator</strong></a> const &amp; function_evaluator, <a href="classBslAdvection1D.html#typedef-advectionfieldbuilder"><strong>AdvectionFieldBuilder</strong></a> const &amp; adv_field_builder, <a href="classBslAdvection1D.html#typedef-advectionfieldevaluator"><strong>AdvectionFieldEvaluator</strong></a> const &amp; adv_field_evaluator, TimeStepperBuilder const &amp; time_stepper_builder) <br><em>Constructor when the advection domain and the function domain are different.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bsladvection1d-22"><strong>BslAdvection1D</strong></a> (FunctionInterpolator const &amp; function_interpolator, AdvectionFieldInterpolator const &amp; adv_field_interpolator, TimeStepperBuilder const &amp; time_stepper_builder) <br><em>Constructor when the advection domain and the function domain are different.</em></td>
+<td style="text-align: left;"><a href="#function-bsladvection1d-23"><strong>BslAdvection1D</strong></a> (FunctionInterpolator const &amp; function_interpolator, AdvectionFieldInterpolator const &amp; adv_field_interpolator, TimeStepperBuilder const &amp; time_stepper_builder) <br><em>Constructor when the advection domain and the function domain are different.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-bsladvection1d-33"><strong>BslAdvection1D</strong></a> (FunctionInterpolator const &amp; interpolator, TimeStepperBuilder const &amp; time_stepper_builder) <br><em>Constructor when the advection domain and the function domain are different.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">FunctionField</td>
@@ -666,7 +670,7 @@
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-bsladvection1d-12">function BslAdvection1D [1/2]</h3>
+<h3 id="function-bsladvection1d-13">function BslAdvection1D [1/3]</h3>
 <p><em>Constructor when the advection domain and the function domain are different.</em> </p>
 <pre><code class="language-C++">inline explicit BslAdvection1D::BslAdvection1D (
     FunctionBuilder const &amp; function_builder,
@@ -688,7 +692,7 @@
 </ul>
 <hr>
 
-<h3 id="function-bsladvection1d-22">function BslAdvection1D [2/2]</h3>
+<h3 id="function-bsladvection1d-23">function BslAdvection1D [2/3]</h3>
 <p><em>Constructor when the advection domain and the function domain are different.</em> </p>
 <pre><code class="language-C++">inline explicit BslAdvection1D::BslAdvection1D (
     FunctionInterpolator const &amp; function_interpolator,
@@ -702,6 +706,22 @@
 <ul>
 <li><code>function_interpolator</code> Interpolator along the GridInterest direction used to build a continuous representation and evaluate the advected function at the characteristic feet. </li>
 <li><code>adv_field_interpolator</code> Interpolator along the GridInterest direction used to build a continuous representation and evaluate the advection field at the characteristic feet. </li>
+<li><code>time_stepper_builder</code> A builder for the time integration method used for the characteristic equation. </li>
+</ul>
+<hr>
+
+<h3 id="function-bsladvection1d-33">function BslAdvection1D [3/3]</h3>
+<p><em>Constructor when the advection domain and the function domain are different.</em> </p>
+<pre><code class="language-C++">inline explicit BslAdvection1D::BslAdvection1D (
+    FunctionInterpolator const &amp; interpolator,
+    TimeStepperBuilder const &amp; time_stepper_builder
+) 
+</code></pre>
+<p>When IdxRangeAdvection and IdxRangeFunction are different, we need one builder and evaluator for each index range.</p>
+<p>We can also use it when we want two different builders/evaluators but defined on the same domain (e.g. different boundary conditions for the evaluators).</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>interpolator</code> Interpolator along the GridInterest direction used to build a continuous representation and evaluate both the advected function and the advection field at the characteristic feet. </li>
 <li><code>time_stepper_builder</code> A builder for the time integration method used for the characteristic equation. </li>
 </ul>
 <hr>

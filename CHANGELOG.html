@@ -567,6 +567,16 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <hr>
 <h2 id="unreleased">[UNRELEASED]</h2>
 <h3 id="added">Added</h3>
+<ul>
+<li>Add <code>SplineInterpolator</code> class to group a compatible DDC spline builder and evaluator.</li>
+<li>Add <code>LagrangeInterpolator</code> class to group a compatible builder and evaluator.</li>
+<li>Add constructors taking a <code>concepts::Interpolator</code> class instance for:</li>
+<li><code>BslAdvectionSpatial</code></li>
+<li><code>BslAdvectionVelocity</code></li>
+<li><code>BslAdvection1D</code></li>
+<li><code>FEM1DPoissonSolver</code></li>
+<li>Add a constructor to <code>BslAdvection1D</code> to use the same interpolator type for both the advected function and the advection field.</li>
+</ul>
 <h3 id="fixed">Fixed</h3>
 <h3 id="changed">Changed</h3>
 <ul>
@@ -575,6 +585,13 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Change <code>BslAdvectionVelocity</code> to stop providing values for the derivatives at the boundaries.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
+<ul>
+<li>Deprecate constructors taking both builders and evaluators n favour of constructors taking Interpolator classes for:</li>
+<li><code>BslAdvectionSpatial</code></li>
+<li><code>BslAdvectionVelocity</code></li>
+<li><code>BslAdvection1D</code></li>
+<li><code>FEM1DPoissonSolver</code></li>
+</ul>
 <h3 id="removed">Removed</h3>
 <ul>
 <li>Remove deprecated <code>Lagrange</code> class.</li>

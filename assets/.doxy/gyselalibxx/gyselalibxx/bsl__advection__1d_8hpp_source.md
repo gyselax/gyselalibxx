@@ -126,6 +126,18 @@ public:
     {
     }
 
+    explicit BslAdvection1D(
+            FunctionInterpolator const& interpolator,
+            TimeStepperBuilder const& time_stepper_builder)
+        : m_function_builder(interpolator.get_builder())
+        , m_function_evaluator(interpolator.get_evaluator())
+        , m_adv_field_builder(interpolator.get_builder())
+        , m_adv_field_evaluator(interpolator.get_evaluator())
+        , m_time_stepper_builder(time_stepper_builder)
+    {
+        static_assert(std::is_same_v<FunctionInterpolator, AdvectionFieldInterpolator>);
+    }
+
     ~BslAdvection1D() = default;
 
     FunctionField operator()(
