@@ -316,7 +316,8 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
             get_const_field(density),
             get_const_field(temperature));
 
-    DFieldMem<IdxRangeSpXVx_ghosted> dvDcoll_alloc("dvDcoll (collisions_intra.cpp)", m_mesh_ghosted);
+    DFieldMem<IdxRangeSpXVx_ghosted>
+            dvDcoll_alloc("dvDcoll (collisions_intra.cpp)", m_mesh_ghosted);
     DField<IdxRangeSpXVx_ghosted> dvDcoll = get_field(dvDcoll_alloc);
     compute_dvDcoll<GhostedVx>(
             dvDcoll,
@@ -324,7 +325,9 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
             get_const_field(density),
             get_const_field(temperature));
 
-    DFieldMem<IdxRangeSpXVx_ghosted_staggered> Dcoll_staggered_alloc("Dcoll_staggered (collisions_intra.cpp)", m_mesh_ghosted_staggered);
+    DFieldMem<IdxRangeSpXVx_ghosted_staggered> Dcoll_staggered_alloc(
+            "Dcoll_staggered (collisions_intra.cpp)",
+            m_mesh_ghosted_staggered);
     DField<IdxRangeSpXVx_ghosted_staggered> Dcoll_staggered = get_field(Dcoll_staggered_alloc);
     compute_Dcoll<GhostedVxStaggered>(
             Dcoll_staggered,
@@ -372,7 +375,7 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
             AA_view(AA.data_handle(), batch_size, mat_size);
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
-            BB_view( BB.data_handle(), batch_size, mat_size);
+            BB_view(BB.data_handle(), batch_size, mat_size);
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
             CC_view(CC.data_handle(), batch_size, mat_size);
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>

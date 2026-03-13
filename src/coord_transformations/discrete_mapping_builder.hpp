@@ -142,7 +142,9 @@ public:
                         typename Mapping::curvilinear_tag_theta>;
         using CartesianCoeff = Coord<X, Y>;
 
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 interpolation_idx_range,
                 KOKKOS_LAMBDA(IdxInterpolationPoints el) {
@@ -447,7 +449,9 @@ public:
                         typename Mapping::curvilinear_tag_theta>;
         using CartesianCoeff = Coord<X, Y>;
 
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 interpolation_idx_range,
                 KOKKOS_LAMBDA(IdxInterpolationPoints el) {

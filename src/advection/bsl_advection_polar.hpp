@@ -167,9 +167,13 @@ public:
                 = m_interpolator.preallocate();
 
         // Initialise the feet
-        CFieldMemFeetRTheta feet_rtheta_alloc("feet_rtheta (bsl_advection_polar.hpp)", get_idx_range(advection_field_xy));
+        CFieldMemFeetRTheta feet_rtheta_alloc(
+                "feet_rtheta (bsl_advection_polar.hpp)",
+                get_idx_range(advection_field_xy));
         CFieldFeetRTheta feet_rtheta = get_field(feet_rtheta_alloc);
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(advection_field_xy),
                 KOKKOS_LAMBDA(IdxBatched const idx) {
@@ -230,7 +234,9 @@ public:
         // Convert advection field on RTheta to advection field on XY
         Kokkos::Profiling::pushRegion("PolarAdvection/RThetaToXY");
 
-        DVectorFieldMemAdvectionXY advection_field_xy_alloc("advection_field_xy (BslAdvectionPolar::operator())", grid);
+        DVectorFieldMemAdvectionXY advection_field_xy_alloc(
+                "advection_field_xy (BslAdvectionPolar::operator())",
+                grid);
         DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
 
         LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy
@@ -245,7 +251,9 @@ public:
 
         Kokkos::Profiling::popRegion();
 
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 Opoint_grid,
                 KOKKOS_LAMBDA(IdxBatched const idx) {
@@ -316,7 +324,9 @@ public:
         // Convert advection field on RTheta to advection field on XY
         Kokkos::Profiling::pushRegion("PolarAdvection/RThetaToXY");
 
-        DVectorFieldMemAdvectionXY advection_field_xy_alloc("advection_field_xy (BslAdvectionPolar::operator())", grid);
+        DVectorFieldMemAdvectionXY advection_field_xy_alloc(
+                "advection_field_xy (BslAdvectionPolar::operator())",
+                grid);
         DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
 
         // (Ax, Ay) = J (Ar, Atheta)
@@ -338,7 +348,9 @@ public:
 
             // Jacobian ill-defined at the O-point, we average the values around the O-point,
             std::size_t ntheta_points = theta_grid.size();
-            const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+            const std::source_location location = std::source_location::current();
+            ddc::parallel_for_each(
+                    location.function_name(),
                     ExecSpace(),
                     no_rtheta_grid,
                     KOKKOS_LAMBDA(IdxBatch const idx_batch) {

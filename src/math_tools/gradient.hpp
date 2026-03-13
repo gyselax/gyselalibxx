@@ -121,7 +121,9 @@ public:
     {
         static_assert(is_accessible_v<Kokkos::DefaultExecutionSpace, MetricTensorType>);
         using IdxType = typename IdxRange::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(gradient),
                 KOKKOS_CLASS_LAMBDA(IdxType const idx) {

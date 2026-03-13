@@ -137,7 +137,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -159,7 +161,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(spline_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -273,7 +277,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -300,7 +306,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(spline_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -326,7 +334,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -349,7 +359,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(spline_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -376,7 +388,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -400,7 +414,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(spline_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -429,7 +445,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(coords_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {
@@ -455,7 +473,9 @@ public:
             DConstField<IdxRange<PolarBSplinesType>, MemorySpace> const spline_coef) const
     {
         using IdxEval = typename Domain::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(spline_eval),
                 KOKKOS_CLASS_LAMBDA(IdxEval i) {

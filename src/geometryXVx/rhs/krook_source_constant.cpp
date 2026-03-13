@@ -74,7 +74,9 @@ DFieldSpXVx KrookSourceConstant::operator()(DFieldSpXVx const allfdistribu, doub
     DConstFieldX mask = get_const_field(m_mask);
     double const amplitude = m_amplitude;
 
-    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+    const std::source_location location = std::source_location::current();
+    ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {

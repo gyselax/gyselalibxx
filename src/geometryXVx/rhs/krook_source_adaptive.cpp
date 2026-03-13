@@ -92,7 +92,9 @@ void KrookSourceAdaptive::get_amplitudes(DFieldSpX amplitudes, DConstFieldSpXVx 
 
     auto const& amplitude = m_amplitude;
     auto const& density = m_density;
-    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+    const std::source_location location = std::source_location::current();
+    ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range<GridX>(allfdistribu),
             KOKKOS_LAMBDA(IdxX const ix) {
@@ -123,7 +125,9 @@ void KrookSourceAdaptive::get_derivative(
     auto ftarget(get_field(m_ftarget));
     auto mask(get_field(m_mask));
 
-    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+    const std::source_location location = std::source_location::current();
+    ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {

@@ -140,7 +140,9 @@ public:
         static_assert(is_accessible_v<ExecSpace, Mapping3D>);
         static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
         using IdxType = typename IdxRange::discrete_element_type;
-        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space,
                 get_idx_range(poisson_bracket),
                 KOKKOS_CLASS_LAMBDA(IdxType const idx) {

@@ -808,7 +808,9 @@ DField<IdxRange<DDim>, MemorySpace> integrals(
 
     IdxRange<DDim> tensor_bspline_idx_range(ddc::discrete_space<DDim>().tensor_bspline_idx_range());
 
-    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
+    const std::source_location location = std::source_location::current();
+    ddc::parallel_for_each(
+            location.function_name(),
             execution_space,
             tensor_bspline_idx_range,
             KOKKOS_LAMBDA(Idx<DDim> idx) {
