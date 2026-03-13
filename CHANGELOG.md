@@ -11,14 +11,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add `SplineInterpolator` class to group a compatible DDC spline builder and evaluator.
+- Add `LagrangeInterpolator` class to group a compatible builder and evaluator.
+- Add constructors taking a `concepts::Interpolator` class instance for:
+  - `BslAdvectionSpatial`
+  - `BslAdvectionVelocity`
+  - `BslAdvection1D`
+  - `FEM1DPoissonSolver`
+- Add a constructor to `BslAdvection1D` to use the same interpolator type for both the advected function and the advection field.
+- Add new constructors for `VectorFieldMem` to support labels as used in DDC and Kokkos.
+
 ### Fixed
 
 ### Changed
 
 - Add Koliop in all toolchains.
+- Changed spline boundary condition in velocity dimensions in the XVx and XYVxVy geometries to use homogeneous Hermite boundary conditions.
+- Change `BslAdvectionVelocity` to stop providing values for the derivatives at the boundaries.
 - Add labels to all parallel constructs and many variable allocations.
 
 ### Deprecated
+
+- Deprecate constructors taking both builders and evaluators n favour of constructors taking Interpolator classes for:
+  - `BslAdvectionSpatial`
+  - `BslAdvectionVelocity`
+  - `BslAdvection1D`
+  - `FEM1DPoissonSolver`
 
 ### Removed
 

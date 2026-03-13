@@ -33,7 +33,7 @@ struct BSplinesVy
 };
 
 ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::HERMITE;
+ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::HOMOGENEOUS_HERMITE;
 
 // IDim initialisers
 using SplineInterpPointsY

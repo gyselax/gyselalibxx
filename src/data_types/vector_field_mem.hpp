@@ -136,7 +136,10 @@ private:
             index_range_type const& idx_range,
             Allocator allocator,
             std::index_sequence<Is...> const&)
-        : base_type(((void)Is, chunk_type(label, idx_range, allocator))...)
+        : base_type(
+                ((void)Is,
+                 chunk_type(label + " (" + std::to_string(Is) + ")", idx_range, allocator))...)
+
     {
     }
 
