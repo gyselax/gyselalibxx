@@ -86,10 +86,11 @@ Inherits the following classes: [VectorFieldCommon](classVectorFieldCommon.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**VectorFieldMem**](#function-vectorfieldmem-25) () = default<br>_Empty_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._ |
-|   | [**VectorFieldMem**](#function-vectorfieldmem-35) ([**index\_range\_type**](classVectorFieldMem.md#typedef-index_range_type) const & idx\_range, [**Allocator**](classVectorFieldMem.md#typedef-allocator) allocator=[**Allocator**](classVectorFieldMem.md#typedef-allocator)()) <br> |
-|   | [**VectorFieldMem**](#function-vectorfieldmem-45) ([**VectorFieldMem**](classVectorFieldMem.md) const & other) = delete<br>_Deleted: use deepcopy instead._  |
-|   | [**VectorFieldMem**](#function-vectorfieldmem-55) ([**VectorFieldMem**](classVectorFieldMem.md) && other) = default<br> |
+|   | [**VectorFieldMem**](#function-vectorfieldmem-37) () = default<br>_Empty_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._ |
+|   | [**VectorFieldMem**](#function-vectorfieldmem-47) ([**index\_range\_type**](classVectorFieldMem.md#typedef-index_range_type) const & idx\_range, [**Allocator**](classVectorFieldMem.md#typedef-allocator) allocator=[**Allocator**](classVectorFieldMem.md#typedef-allocator)()) <br> |
+|   | [**VectorFieldMem**](#function-vectorfieldmem-57) (std::string const & label, [**index\_range\_type**](classVectorFieldMem.md#typedef-index_range_type) const & idx\_range, [**Allocator**](classVectorFieldMem.md#typedef-allocator) allocator=[**Allocator**](classVectorFieldMem.md#typedef-allocator)()) <br> |
+|   | [**VectorFieldMem**](#function-vectorfieldmem-67) ([**VectorFieldMem**](classVectorFieldMem.md) const & other) = delete<br>_Deleted: use deepcopy instead._  |
+|   | [**VectorFieldMem**](#function-vectorfieldmem-77) ([**VectorFieldMem**](classVectorFieldMem.md) && other) = default<br> |
 |  constexpr chunk\_span\_type | [**get**](#function-get-12) () noexcept<br>_Get the Field describing the component in the QueryTag direction._  |
 |  constexpr chunk\_view\_type | [**get**](#function-get-22) () noexcept const<br>_Get the Field describing the component in the QueryTag direction._  |
 |  element\_type const | [**operator()**](#function-operator) (ddc::DiscreteElement&lt; ODDims &gt; const &... delems) noexcept const<br> |
@@ -300,7 +301,7 @@ This is a DDC keyword used to make this class interchangeable with Field.
 
 
 
-### function VectorFieldMem [2/5]
+### function VectorFieldMem [3/7]
 
 _Empty_ [_**VectorFieldMem**_](classVectorFieldMem.md) _._
 ```C++
@@ -314,7 +315,7 @@ VectorFieldMem::VectorFieldMem () = default
 
 
 
-### function VectorFieldMem [3/5]
+### function VectorFieldMem [4/7]
 
 ```C++
 inline explicit VectorFieldMem::VectorFieldMem (
@@ -345,7 +346,40 @@ Construct a [**VectorFieldMem**](classVectorFieldMem.md) on an index range with 
 
 
 
-### function VectorFieldMem [4/5]
+### function VectorFieldMem [5/7]
+
+```C++
+inline explicit VectorFieldMem::VectorFieldMem (
+    std::string const & label,
+    index_range_type const & idx_range,
+    Allocator allocator=Allocator ()
+) 
+```
+
+
+
+Construct a [**VectorFieldMem**](classVectorFieldMem.md) on an index range with uninitialized values
+
+
+
+
+**Parameters:**
+
+
+* `label` A name that will be associated to this array when profiling. 
+* `idx_range` The index range on which the chunk will be defined. 
+* `allocator` An optional allocator used to create the chunks. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function VectorFieldMem [6/7]
 
 _Deleted: use deepcopy instead._ 
 ```C++
@@ -361,7 +395,7 @@ VectorFieldMem::VectorFieldMem (
 
 
 
-### function VectorFieldMem [5/5]
+### function VectorFieldMem [7/7]
 
 ```C++
 VectorFieldMem::VectorFieldMem (

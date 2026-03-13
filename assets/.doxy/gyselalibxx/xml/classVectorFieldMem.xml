@@ -178,6 +178,43 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="124" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="124" bodyend="130"/>
       </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1abe439e1867e7ac8d564e77ba3c78e621" prot="private" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>std::size_t...</type>
+            <declname>Is</declname>
+            <defname>Is</defname>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::VectorFieldMem</definition>
+        <argsstring>(std::string const &amp;label, index_range_type const &amp;idx_range, Allocator allocator, std::index_sequence&lt; Is... &gt; const &amp;)</argsstring>
+        <name>VectorFieldMem</name>
+        <qualifiedname>VectorFieldMem::VectorFieldMem</qualifiedname>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorFieldMem_1a9b16375d74b5200bcd8fed9c55e57c92" kindref="member">index_range_type</ref> const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" kindref="member">Allocator</ref></type>
+          <declname>allocator</declname>
+        </param>
+        <param>
+          <type>std::index_sequence&lt; Is... &gt; const &amp;</type>
+        </param>
+        <briefdescription>
+<para>Construct a <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> on an index range with uninitialized values. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="134" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="134" bodyend="144"/>
+      </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a73403b839e5a86b3e4fbfb067def3173" prot="private" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
           <param>
@@ -224,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="137" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="137" bodyend="141"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="151" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="151" bodyend="155"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -241,7 +278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="145" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="159" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a81b4258a4747f9c97202980c7218a438" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
@@ -283,7 +320,61 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="153" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="153" bodyend="156"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="167" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="167" bodyend="170"/>
+      </memberdef>
+      <memberdef kind="function" id="classVectorFieldMem_1aff256d9dfc07862551c5f232334d8c50" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>VectorFieldMem&lt; ElementType, IdxRangeType, VectorIndexSetType, MemSpace &gt;::VectorFieldMem</definition>
+        <argsstring>(std::string const &amp;label, index_range_type const &amp;idx_range, Allocator allocator=Allocator())</argsstring>
+        <name>VectorFieldMem</name>
+        <qualifiedname>VectorFieldMem::VectorFieldMem</qualifiedname>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorFieldMem_1a9b16375d74b5200bcd8fed9c55e57c92" kindref="member">index_range_type</ref> const &amp;</type>
+          <declname>idx_range</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" kindref="member">Allocator</ref></type>
+          <declname>allocator</declname>
+          <defval><ref refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" kindref="member">Allocator</ref>()</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Construct a <ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> on an index range with uninitialized values</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">label</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A name that will be associated to this array when profiling. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the chunk will be defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">allocator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An optional allocator used to create the chunks. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="179" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="179" bodyend="185"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a388c820f99c6290ee89ec1cca4685e66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -302,7 +393,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="159" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="188" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a43fb3313fbd0e4c96ebd7b7252031532" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -330,7 +421,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="165" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="194" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a13e8628ef73113e5c9d09c63eb6d159d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> &amp;</type>
@@ -349,7 +440,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="168" column="20"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="197" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1ac813597853877e75100199b476a73828" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem</ref> &amp;</type>
@@ -379,7 +470,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="175" column="20"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="204" column="20"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1ae0c51ded5f7792cba8913a70036e49f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -393,7 +484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="177" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="206" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a13245a7aa41f076008d0e5f391a1af9c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">view_type</ref></type>
@@ -412,7 +503,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="187" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="187" bodyend="190"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="216" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="216" bodyend="219"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a5c5366a96f56e4422e59e8dec1e9c850" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" kindref="member">view_type</ref></type>
@@ -431,7 +522,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="200" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="200" bodyend="203"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="229" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="229" bodyend="232"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a94522577e4477ec70867222321b1c6ae" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classVectorFieldMem_1a1706adefbd7b99f3421d6ec1a39d845c" kindref="member">span_type</ref></type>
@@ -450,7 +541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="213" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="213" bodyend="216"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="242" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="242" bodyend="245"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a5b66c7eca07a6ec79a9963fc13e2b6cc" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -487,7 +578,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="223" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="223" bodyend="228"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="252" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="252" bodyend="257"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a4a5b0921086127d5a1e57ee4d587c5d5" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -528,7 +619,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="235" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="235" bodyend="238"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="264" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="264" bodyend="267"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a7a81a04ae5a72fd9236b3a3886dded3b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -567,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="252" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="252" bodyend="255"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="281" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="281" bodyend="284"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a803238e91bdec84b861d8e7eb11cc8af" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -606,7 +697,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="268" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="268" bodyend="271"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="297" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="297" bodyend="300"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a8f37de8cfbcb2dd9bc3b5a82acf98dc4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -645,7 +736,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="283" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="283" bodyend="286"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="312" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="312" bodyend="315"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a5770ccc15ea62e4105e65aab707837e7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -684,7 +775,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="298" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="298" bodyend="301"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="327" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="327" bodyend="330"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1a7c254b8e4de647c26d5961ed7976f573" prot="public" static="no" constexpr="yes" const="no" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -707,7 +798,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="309" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="309" bodyend="313"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="338" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="338" bodyend="342"/>
       </memberdef>
       <memberdef kind="function" id="classVectorFieldMem_1ac34d633f44e6b30ac0500b7262bf6b7c" prot="public" static="no" constexpr="yes" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -730,7 +821,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="321" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="321" bodyend="325"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="350" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="350" bodyend="354"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -798,7 +889,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="56" bodyend="326"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp" bodystart="56" bodyend="355"/>
     <listofallmembers>
       <member refid="classVectorFieldMem_1a86493fc429a78ba32b03e9311c17d202" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>Allocator</name></member>
       <member refid="classVectorFieldMem_1a6f62b5396ee5c34d3aa9abbfdb3ae30b" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>base_type</name></member>
@@ -822,8 +913,10 @@
       <member refid="classVectorFieldMem_1a5c5366a96f56e4422e59e8dec1e9c850" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_view</name></member>
       <member refid="classVectorFieldMem_1a94522577e4477ec70867222321b1c6ae" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>span_view</name></member>
       <member refid="classVectorFieldMem_1a69b83be2aa9a2e350191b76b4dde1b0e" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
+      <member refid="classVectorFieldMem_1abe439e1867e7ac8d564e77ba3c78e621" prot="private" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a044e87b9de9db522db0e3d2aaac2545d" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a81b4258a4747f9c97202980c7218a438" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
+      <member refid="classVectorFieldMem_1aff256d9dfc07862551c5f232334d8c50" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a388c820f99c6290ee89ec1cca4685e66" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a43fb3313fbd0e4c96ebd7b7252031532" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>VectorFieldMem</name></member>
       <member refid="classVectorFieldMem_1a87fe35819bfe4e143f6e1081ce23e726" prot="public" virt="non-virtual"><scope>VectorFieldMem</scope><name>view_type</name></member>

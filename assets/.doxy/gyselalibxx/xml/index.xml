@@ -3118,9 +3118,11 @@
     <member refid="classVectorFieldMem_1a4399b76b097cfac6b274dae5204a548c" kind="typedef"><name>memory_space</name></member>
     <member refid="classVectorFieldMem_1a6f62b5396ee5c34d3aa9abbfdb3ae30b" kind="typedef"><name>base_type</name></member>
     <member refid="classVectorFieldMem_1a69b83be2aa9a2e350191b76b4dde1b0e" kind="function"><name>VectorFieldMem</name></member>
+    <member refid="classVectorFieldMem_1abe439e1867e7ac8d564e77ba3c78e621" kind="function"><name>VectorFieldMem</name></member>
     <member refid="classVectorFieldMem_1a73403b839e5a86b3e4fbfb067def3173" kind="function"><name>operator()</name></member>
     <member refid="classVectorFieldMem_1a044e87b9de9db522db0e3d2aaac2545d" kind="function"><name>VectorFieldMem</name></member>
     <member refid="classVectorFieldMem_1a81b4258a4747f9c97202980c7218a438" kind="function"><name>VectorFieldMem</name></member>
+    <member refid="classVectorFieldMem_1aff256d9dfc07862551c5f232334d8c50" kind="function"><name>VectorFieldMem</name></member>
     <member refid="classVectorFieldMem_1a388c820f99c6290ee89ec1cca4685e66" kind="function"><name>VectorFieldMem</name></member>
     <member refid="classVectorFieldMem_1a43fb3313fbd0e4c96ebd7b7252031532" kind="function"><name>VectorFieldMem</name></member>
     <member refid="classVectorFieldMem_1a13e8628ef73113e5c9d09c63eb6d159d" kind="function"><name>operator=</name></member>

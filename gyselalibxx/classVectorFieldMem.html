@@ -618,19 +618,23 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-vectorfieldmem-25"><strong>VectorFieldMem</strong></a> () = default<br><em>Empty</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-vectorfieldmem-37"><strong>VectorFieldMem</strong></a> () = default<br><em>Empty</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-vectorfieldmem-35"><strong>VectorFieldMem</strong></a> (<a href="classVectorFieldMem.html#typedef-index_range_type"><strong>index_range_type</strong></a> const &amp; idx_range, <a href="classVectorFieldMem.html#typedef-allocator"><strong>Allocator</strong></a> allocator=<a href="classVectorFieldMem.html#typedef-allocator"><strong>Allocator</strong></a>()) <br></td>
+<td style="text-align: left;"><a href="#function-vectorfieldmem-47"><strong>VectorFieldMem</strong></a> (<a href="classVectorFieldMem.html#typedef-index_range_type"><strong>index_range_type</strong></a> const &amp; idx_range, <a href="classVectorFieldMem.html#typedef-allocator"><strong>Allocator</strong></a> allocator=<a href="classVectorFieldMem.html#typedef-allocator"><strong>Allocator</strong></a>()) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-vectorfieldmem-45"><strong>VectorFieldMem</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> const &amp; other) = delete<br><em>Deleted: use deepcopy instead.</em></td>
+<td style="text-align: left;"><a href="#function-vectorfieldmem-57"><strong>VectorFieldMem</strong></a> (std::string const &amp; label, <a href="classVectorFieldMem.html#typedef-index_range_type"><strong>index_range_type</strong></a> const &amp; idx_range, <a href="classVectorFieldMem.html#typedef-allocator"><strong>Allocator</strong></a> allocator=<a href="classVectorFieldMem.html#typedef-allocator"><strong>Allocator</strong></a>()) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-vectorfieldmem-55"><strong>VectorFieldMem</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> &amp;&amp; other) = default<br></td>
+<td style="text-align: left;"><a href="#function-vectorfieldmem-67"><strong>VectorFieldMem</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> const &amp; other) = delete<br><em>Deleted: use deepcopy instead.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-vectorfieldmem-77"><strong>VectorFieldMem</strong></a> (<a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> &amp;&amp; other) = default<br></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr chunk_span_type</td>
@@ -746,13 +750,13 @@
 <p>This is a DDC keyword used to make this class interchangeable with Field. </p>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-vectorfieldmem-25">function VectorFieldMem [2/5]</h3>
+<h3 id="function-vectorfieldmem-37">function VectorFieldMem [3/7]</h3>
 <p><em>Empty</em> <a href="classVectorFieldMem.html"><em><strong>VectorFieldMem</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">VectorFieldMem::VectorFieldMem () = default
 </code></pre>
 <hr>
 
-<h3 id="function-vectorfieldmem-35">function VectorFieldMem [3/5]</h3>
+<h3 id="function-vectorfieldmem-47">function VectorFieldMem [4/7]</h3>
 <pre><code class="language-C++">inline explicit VectorFieldMem::VectorFieldMem (
     index_range_type const &amp; idx_range,
     Allocator allocator=Allocator ()
@@ -766,7 +770,23 @@
 </ul>
 <hr>
 
-<h3 id="function-vectorfieldmem-45">function VectorFieldMem [4/5]</h3>
+<h3 id="function-vectorfieldmem-57">function VectorFieldMem [5/7]</h3>
+<pre><code class="language-C++">inline explicit VectorFieldMem::VectorFieldMem (
+    std::string const &amp; label,
+    index_range_type const &amp; idx_range,
+    Allocator allocator=Allocator ()
+) 
+</code></pre>
+<p>Construct a <a href="classVectorFieldMem.html"><strong>VectorFieldMem</strong></a> on an index range with uninitialized values</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>label</code> A name that will be associated to this array when profiling. </li>
+<li><code>idx_range</code> The index range on which the chunk will be defined. </li>
+<li><code>allocator</code> An optional allocator used to create the chunks. </li>
+</ul>
+<hr>
+
+<h3 id="function-vectorfieldmem-67">function VectorFieldMem [6/7]</h3>
 <p><em>Deleted: use deepcopy instead.</em> </p>
 <pre><code class="language-C++">VectorFieldMem::VectorFieldMem (
     VectorFieldMem const &amp; other
@@ -774,7 +794,7 @@
 </code></pre>
 <hr>
 
-<h3 id="function-vectorfieldmem-55">function VectorFieldMem [5/5]</h3>
+<h3 id="function-vectorfieldmem-77">function VectorFieldMem [7/7]</h3>
 <pre><code class="language-C++">VectorFieldMem::VectorFieldMem (
     VectorFieldMem &amp;&amp; other
 ) = default

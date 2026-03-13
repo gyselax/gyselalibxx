@@ -647,6 +647,19 @@ private:
     {
     }
 
+    template &lt;std::size_t... Is&gt;
+    explicit VectorFieldMem(
+            std::string const&amp; label,
+            index_range_type const&amp; idx_range,
+            Allocator allocator,
+            std::index_sequence&lt;Is...&gt; const&amp;)
+        : base_type(
+                ((void)Is,
+                 chunk_type(label + " (" + std::to_string(Is) + ")", idx_range, allocator))...)
+
+    {
+    }
+
     template &lt;class... ODDims, typename T, T... ints&gt;
     element_type const operator()(Idx&lt;ODDims...&gt; const&amp; delems, std::integer_sequence&lt;T, ints...&gt;)
             const noexcept
@@ -659,6 +672,14 @@ public:
 
     explicit VectorFieldMem(index_range_type const&amp; idx_range, Allocator allocator = Allocator())
         : VectorFieldMem(idx_range, allocator, std::make_index_sequence&lt;base_type::NDims&gt; {})
+    {
+    }
+
+    explicit VectorFieldMem(
+            std::string const&amp; label,
+            index_range_type const&amp; idx_range,
+            Allocator allocator = Allocator())
+        : VectorFieldMem(label, idx_range, allocator, std::make_index_sequence&lt;base_type::NDims&gt; {})
     {
     }
 
