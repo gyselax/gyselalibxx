@@ -132,7 +132,7 @@ public:
                       DFieldMemXY advection_field_y_alloc(idx_range);
                       DFieldXY advection_field_x = get_field(advection_field_x_alloc);
                       DFieldXY advection_field_y = get_field(advection_field_y_alloc);
-                      ddc::parallel_for_each(
+                      const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                               Kokkos::DefaultExecutionSpace(),
                               meshXY,
                               KOKKOS_LAMBDA(IdxXY const i_xy) {

@@ -54,7 +54,7 @@ Field<ElementType, IdxRangeIn, MemorySpace, LayoutStridedPolicyOut> transpose_la
 
     if constexpr (n_dims < 7) {
         using ToTransposeIndex = typename IdxRangeOut::discrete_element_type;
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 execution_space,
                 idx_range,
                 KOKKOS_LAMBDA(ToTransposeIndex idx) {
@@ -69,7 +69,7 @@ Field<ElementType, IdxRangeIn, MemorySpace, LayoutStridedPolicyOut> transpose_la
         using IdxSerial = typename IdxRangeSerial::discrete_element_type;
         IdxRangeParallel parallel_idx_range(idx_range);
         IdxRangeSerial serial_idx_range(idx_range);
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 execution_space,
                 parallel_idx_range,
                 KOKKOS_LAMBDA(IdxParallel p_idx) {

@@ -150,7 +150,7 @@ inline void dump_coordinates(
         ExecSpace exec_space,
         DField<IdxRange<Grid1D>, Layout, MemorySpace> dump_coord)
 {
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             exec_space,
             dump_coord.domain(),
             KOKKOS_LAMBDA(Idx<Grid1D> i) { dump_coord(i) = ddc::coordinate(i); });
@@ -170,7 +170,7 @@ inline void dump_coordinates(
               Layout,
               MemorySpace> dump_coord)
 {
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             exec_space,
             dump_coord.domain(),
             KOKKOS_LAMBDA(Idx<Grid1D> i) { dump_coord(i) = ddc::coordinate(i); });

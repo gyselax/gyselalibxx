@@ -43,7 +43,7 @@ void compute_Dcoll(
         DConstFieldSpX density,
         DConstFieldSpX temperature)
 {
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(Dcoll),
             KOKKOS_LAMBDA(Idx<Species, GridX, LocalGridVx> const ispxdimvx) {
@@ -87,7 +87,7 @@ void compute_dvDcoll(
         DConstFieldSpX density,
         DConstFieldSpX temperature)
 {
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(dvDcoll),
             KOKKOS_LAMBDA(Idx<Species, GridX, LocalGridVx> const ispxdimvx) {
@@ -173,7 +173,7 @@ void compute_Vcoll_Tcoll(
     DFieldSpXVx I3mean_integrand = get_field(I3mean_integrand_alloc);
     DFieldSpXVx I4mean_integrand = get_field(I4mean_integrand_alloc);
 
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
@@ -210,7 +210,7 @@ void compute_Vcoll_Tcoll(
 
     IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(allfdistribu));
 
-    ddc::parallel_for_each(
+    ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IdxSpX const ispx) {
@@ -245,7 +245,7 @@ void compute_Nucoll(
         DConstFieldSpX Vcoll,
         DConstFieldSpX Tcoll)
 {
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(Dcoll),
             KOKKOS_LAMBDA(Idx<Species, GridX, LocalGridVx> const ispxdimvx) {

@@ -325,7 +325,7 @@ public:
         std::function<void(CFieldFeet, DVectorConstFieldAdvection, double)> update_function
                 = [&](CFieldFeet feet, DVectorConstFieldAdvection advection_field, double dt) {
                       // Compute the characteristic feet at t^n:
-                      ddc::parallel_for_each(
+                      const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                               ExecSpace(),
                               get_idx_range(feet),
                               KOKKOS_LAMBDA(IdxOperator const idx) {
@@ -385,7 +385,7 @@ public:
         IdxR r0_idx = r_idx_range.front();
         IdxTheta theta0_idx = theta_idx_range.front();
         if (Kokkos::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
-            ddc::parallel_for_each(
+            const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                     ExecSpace(),
                     batched_idx_range,
                     KOKKOS_LAMBDA(const IdxBatch ib) {
@@ -426,7 +426,7 @@ public:
         IdxR r0_idx = r_idx_range.front();
         IdxTheta theta0_idx = theta_idx_range.front();
         if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
-            ddc::parallel_for_each(
+            const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                     ExecSpace(),
                     batched_idx_range,
                     KOKKOS_LAMBDA(const IdxBatch ib) {

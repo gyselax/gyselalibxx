@@ -36,7 +36,7 @@ void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfd
     IdxSp const last_species = get_idx_range(charges_host).back();
     if (last_kin_species != last_species) {
         double chargedens_adiabspecies = double(charge(last_species));
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(rho),
                 KOKKOS_LAMBDA(IdxXY ixy) { rho(ixy) += chargedens_adiabspecies; });

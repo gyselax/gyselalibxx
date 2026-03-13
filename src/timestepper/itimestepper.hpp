@@ -118,7 +118,7 @@ public:
         static_assert(ddc::is_chunk_v<FieldMem>);
         using Idx = typename IdxRange::discrete_element_type;
         update(exec_space, y, dt, dy_calculator, [&](ValField y, DerivConstField dy, double dt) {
-            ddc::parallel_for_each(
+            const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                     exec_space,
                     get_idx_range(y),
                     KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
@@ -229,7 +229,7 @@ public:
     {
         static_assert(ddc::is_chunk_v<FieldType>);
         using Idx = typename FieldType::discrete_domain_type::discrete_element_type;
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 exec_space,
                 get_idx_range(k_total),
                 KOKKOS_LAMBDA(Idx const i) {
@@ -260,7 +260,7 @@ public:
         static_assert(is_vector_field_v<FieldType>);
         using element_type = typename FieldType::element_type;
         using Idx = typename FieldType::discrete_domain_type::discrete_element_type;
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 exec_space,
                 get_idx_range(k_total),
                 KOKKOS_LAMBDA(Idx const i) {

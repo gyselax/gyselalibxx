@@ -169,7 +169,7 @@ public:
         // Initialise the feet
         CFieldMemFeetRTheta feet_rtheta_alloc(get_idx_range(advection_field_xy));
         CFieldFeetRTheta feet_rtheta = get_field(feet_rtheta_alloc);
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 ExecSpace(),
                 get_idx_range(advection_field_xy),
                 KOKKOS_LAMBDA(IdxBatched const idx) {
@@ -242,7 +242,7 @@ public:
                 logical_to_physical_mapping_proxy,
                 advection_field_rtheta[grid_without_Opoint]);
 
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 ExecSpace(),
                 Opoint_grid,
                 KOKKOS_LAMBDA(IdxBatched const idx) {
@@ -331,7 +331,7 @@ public:
 
             // Jacobian ill-defined at the O-point, we average the values around the O-point,
             std::size_t ntheta_points = theta_grid.size();
-            ddc::parallel_for_each(
+            const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                     ExecSpace(),
                     no_rtheta_grid,
                     KOKKOS_LAMBDA(IdxBatch const idx_batch) {

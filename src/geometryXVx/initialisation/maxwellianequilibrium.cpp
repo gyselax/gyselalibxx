@@ -29,7 +29,7 @@ DFieldSpVx MaxwellianEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
                 m_temperature_eq(isp),
                 m_mean_velocity_eq(isp));
 
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 gridvx,
                 KOKKOS_LAMBDA(IdxVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
@@ -47,7 +47,7 @@ void MaxwellianEquilibrium::compute_maxwellian(
 {
     double const inv_sqrt_2piT = 1. / Kokkos::sqrt(2. * M_PI * temperature);
     IdxRangeVx const gridvx = get_idx_range(fMaxwellian);
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             gridvx,
             KOKKOS_LAMBDA(IdxVx const ivx) {

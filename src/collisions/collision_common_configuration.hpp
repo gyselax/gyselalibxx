@@ -234,7 +234,7 @@ public:
             DField<IdxRange0> destination,
             DConstField<IdxRange1> source)
     {
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(destination),
                 KOKKOS_LAMBDA(typename IdxRange0::discrete_element_type destination_index) {

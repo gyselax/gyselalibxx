@@ -86,7 +86,7 @@ void MaxwellianEquilibrium::compute_maxwellian(
     //  - n the density, T the temperature and Upar the mean velocity
     //  - B the magnetic field and
     //  - energy = (0.5*(vpar-Upar)**2+mu*B)/T
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             idxrange_vparmu,
             KOKKOS_LAMBDA(IdxVparMu const ivparmu) {

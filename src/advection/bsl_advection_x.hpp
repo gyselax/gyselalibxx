@@ -102,7 +102,7 @@ public:
 
         for (IdxSp const isp : sp_idx_range) {
             DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
-            ddc::parallel_for_each(
+            const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
                     KOKKOS_LAMBDA(IdxBatch const ib) {

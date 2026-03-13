@@ -145,7 +145,7 @@ void CollisionsIntra::compute_matrix_coeff(
         DField<IdxRangeSpXVx_ghosted> Nucoll,
         double deltat) const
 {
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(AA),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
@@ -227,7 +227,7 @@ void CollisionsIntra::compute_rhs_vector(
 {
     IdxRangeVx const idx_range_vx(get_idx_range<GridVx>(AA));
 
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(RR),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
@@ -280,7 +280,7 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
 
     //Moments computation
     ddc::parallel_fill(density, 0.);
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IdxSpX const ispx) {

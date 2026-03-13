@@ -526,7 +526,7 @@ public:
                 typename batched_evaluation_idx_range_type<StoringPatch>::discrete_element_type;
         batched_evaluation_idx_range_type<StoringPatch> idx_range = get_idx_range(patch_values);
 
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 exec_space(),
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {

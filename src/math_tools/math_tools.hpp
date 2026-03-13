@@ -77,7 +77,7 @@ void norm(
     using IdxType = typename IdxRangeType::discrete_element_type;
 
     if constexpr (is_contravariant_vector_index_set_v<VectorIndexSetType>) {
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 exec_space,
                 get_idx_range(vals),
                 KOKKOS_LAMBDA(IdxType idx) {
@@ -85,7 +85,7 @@ void norm(
                     norm_vals(idx) = norm(metric, vals(idx));
                 });
     } else {
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 exec_space,
                 get_idx_range(vals),
                 KOKKOS_LAMBDA(IdxType idx) {

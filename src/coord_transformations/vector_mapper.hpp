@@ -139,7 +139,7 @@ void copy_to_vector_space(
     using IdxType = typename IdxRangeType::discrete_element_type;
     using CoordType = typename Mapping::CoordJacobian;
     using IdxJacobianType = find_idx_t<CoordType, IdxRangeType>;
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             exec_space,
             get_idx_range(vector_field),
             KOKKOS_LAMBDA(IdxType idx) {

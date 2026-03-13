@@ -86,7 +86,7 @@ public:
                 double const c3 = -h1 / (h2 * (h1 + h2));
                 double const c2 = 1. / h1 + 1. / h2;
                 double const c1 = -c3 - c2;
-                ddc::parallel_for_each(
+                const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                         Kokkos::DefaultExecutionSpace(),
                         idxrange_batch,
                         KOKKOS_LAMBDA(IdxBatch ib) {
@@ -105,7 +105,7 @@ public:
                 double const c3 = h1 / (h2 * (h1 + h2));
                 double const c2 = -(h1 + h2) / (h1 * h2);
                 double const c1 = -c3 - c2;
-                ddc::parallel_for_each(
+                const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                         Kokkos::DefaultExecutionSpace(),
                         idxrange_batch,
                         KOKKOS_LAMBDA(IdxBatch ib) {
@@ -119,7 +119,7 @@ public:
             IdxDeriv const ix_front(idxrange_deriv.front());
             IdxDeriv const ix_back(idxrange_deriv.back());
             double domain_length = ddcHelper::total_interval_length(idxrange_deriv);
-            ddc::parallel_for_each(
+            const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_batch,
                     KOKKOS_LAMBDA(IdxBatch ib) {
@@ -152,7 +152,7 @@ public:
         {
             IdxRangeDeriv idxrange_deriv_central = idxrange_deriv.remove(step, step);
             IdxRangeFull idxrange_central(idxrange_deriv_central, idxrange_batch);
-            ddc::parallel_for_each(
+            const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     idxrange_central,
                     KOKKOS_LAMBDA(IdxFull ibx) {

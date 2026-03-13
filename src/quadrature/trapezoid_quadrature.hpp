@@ -33,7 +33,7 @@ DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> trapezoid_quadratu
                       .remove(IdxStep<Grid1D>(1),
                               IdxStep<Grid1D>(!Grid1D::continuous_dimension_type::PERIODIC));
 
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             ExecSpace(),
             middle_idx_range,
             KOKKOS_LAMBDA(Idx<Grid1D> const idx) {

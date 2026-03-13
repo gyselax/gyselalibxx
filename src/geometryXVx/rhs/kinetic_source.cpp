@@ -56,7 +56,7 @@ DFieldSpXVx KineticSource::operator()(DFieldSpXVx const allfdistribu, double con
 
     double const amplitude = m_amplitude;
 
-    ddc::parallel_for_each(
+    const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {

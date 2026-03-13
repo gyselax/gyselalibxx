@@ -258,7 +258,7 @@ public:
         */
         FeetFieldMem slice_feet_alloc(idx_range_advection);
         FeetField slice_feet = get_field(slice_feet_alloc);
-        ddc::parallel_for_each(
+        const std::source_location location = std::source_location::current();ddc::parallel_for_each(location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 idx_range_advection,
                 KOKKOS_LAMBDA(IdxAdvection const idx) {
@@ -300,7 +300,7 @@ public:
         */
         FieldMem<CoordInterest, IdxRangeFunction> feet_alloc(idx_range_function);
         Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
-        ddc::parallel_for_each(
+        ddc::parallel_for_each(location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 idx_range_function,
                 KOKKOS_LAMBDA(IdxFunction const idx) {
