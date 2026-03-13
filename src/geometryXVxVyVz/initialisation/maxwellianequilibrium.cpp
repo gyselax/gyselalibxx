@@ -22,7 +22,7 @@ DFieldSpVxVyVz MaxwellianEquilibrium::operator()(DFieldSpVxVyVz const allfequili
     // Initialisation of the maxwellian
     DFieldMemVxVyVz maxwellian_alloc(gridvxvyvz);
     DFieldVxVyVz maxwellian = get_field(maxwellian_alloc);
-    ddc::for_each(gridsp, [&](IdxSp const isp) {
+    ddc::host_for_each(gridsp, [&](IdxSp const isp) {
         compute_maxwellian(
                 maxwellian,
                 m_density_eq(isp),

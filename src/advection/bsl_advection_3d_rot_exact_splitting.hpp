@@ -193,11 +193,11 @@ using namespace std;
             magnetic_field_z);
 
  
-        ddc::for_each(idx_range_spx, [&](IdxSpX const ispx) {
+        ddc::host_for_each(idx_range_spx, [&](IdxSpX const ispx) {
             IdxSp const isp(ispx);
             IdxSpatial const ix(ispx);
             double q_over_m = -charge(isp)/mass(isp);
-        //ddc::for_each(idx_range_x, [&](IdxSpatial const ix) {
+        //ddc::host_for_each(idx_range_x, [&](IdxSpatial const ix) {
 
             double Bfield[3] = {q_over_m * host_magnetic_x(ix), q_over_m * host_magnetic_y(ix), q_over_m * host_magnetic_z(ix)};
             //double B_abs = std::sqrt(Bfield[0] * Bfield[0] + Bfield[1] * Bfield[1] + Bfield[2] * Bfield[2]);

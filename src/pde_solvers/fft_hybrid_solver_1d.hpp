@@ -171,7 +171,7 @@ private:
         hybrid_idx_range_type idx_range(get_idx_range(values));
         batch_idx_range_type batch_idx_range(get_idx_range(values));
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
                 // Perform the inverse FFT
                 ddc::fft(ExecSpace(), get_field(intermediate_chunk), values[ib], ddc::kwArgs_fft {m_norm});
                 /// Derivative at the direction Dim
@@ -190,7 +190,7 @@ private:
         hybrid_idx_range_type idx_range(get_idx_range(values_in));
         batch_idx_range_type batch_idx_range(get_idx_range(values_in));
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
                 // Perform the inverse FFT
                 ddc::fft(ExecSpace(), get_field(intermediate_chunk), values_in[ib], ddc::kwArgs_fft {m_norm});
                 /// Derivative at the direction Dim
@@ -335,7 +335,7 @@ public:
         fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
             solve_poisson_equation(intermediate_chunk, rho[ib]);
 
             // Perform the inverse 1D FFT of the solution to deduce the electrostatic potential
@@ -379,7 +379,7 @@ public:
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
         fourier_field_type fourier_efield = get_field(fourier_efield_alloc);
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
             solve_poisson_equation(intermediate_chunk, rho[ib]);
             get_gradient(E[ib], fourier_efield, intermediate_chunk);
 
@@ -693,7 +693,7 @@ public:
                     });
 
             // decomposition of p/rho, and compute u_bar.
-            ddc::for_each(kin_species_idx_range, [&](IdxSp isp) {
+            ddc::host_for_each(kin_species_idx_range, [&](IdxSp isp) {
             ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 idx_range,
@@ -926,7 +926,7 @@ public:
         
         // Before the picard iteration, set field_old = field
 
-         ddc::for_each(kin_species_idx_range, [&](IdxSp isp) {
+         ddc::host_for_each(kin_species_idx_range, [&](IdxSp isp) {
             ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 idx_range,

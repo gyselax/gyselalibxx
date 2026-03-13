@@ -241,7 +241,7 @@ void MomentsCalculator::operator()(DFieldSpXY rho, DConstFieldSpVxVyXY allfdistr
     }
     */
 
-    ddc::for_each(kin_species_idx_range, [&](IdxSp isp) {
+    ddc::host_for_each(kin_species_idx_range, [&](IdxSp isp) {
         m_quadrature(
             Kokkos::DefaultExecutionSpace(),
             rho[isp],
@@ -283,7 +283,7 @@ void MomentsCalculator::operator()(DFieldSpXY mean_current_x, DFieldSpXY mean_cu
             = create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), kinetic_charges_host);
     DConstFieldSp kinetic_charges = get_const_field(kinetic_charges_alloc);
 
-    ddc::for_each(kin_species_idx_range, [&](IdxSp isp) {
+    ddc::host_for_each(kin_species_idx_range, [&](IdxSp isp) {
         m_quadrature(
             Kokkos::DefaultExecutionSpace(),
             mean_current_x[isp],
@@ -296,7 +296,7 @@ void MomentsCalculator::operator()(DFieldSpXY mean_current_x, DFieldSpXY mean_cu
             });   
     });
 
-    ddc::for_each(kin_species_idx_range, [&](IdxSp isp) {
+    ddc::host_for_each(kin_species_idx_range, [&](IdxSp isp) {
         m_quadrature(
             Kokkos::DefaultExecutionSpace(),
             mean_current_y[isp],
