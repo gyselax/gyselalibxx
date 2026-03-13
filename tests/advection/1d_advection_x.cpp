@@ -206,7 +206,7 @@ TEST_F(XAdvection1DTestDouble, AdvectionX)
             IdxRangeX,
             SplineInterpolatorX,
             SplineInterpolatorX,
-            RK2Builder> const advection(spline_interpolation, spline_interpolation, time_stepper);
+            RK2Builder> const advection(spline_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);
@@ -248,7 +248,7 @@ TEST_F(XAdvection1DTestFloat, AdvectionX)
             LagrangeInterpolatorFloatX,
             LagrangeInterpolatorFloatX,
             RK2Builder,
-            float> const advection(lag_interpolation, lag_interpolation, time_stepper);
+            float> const advection(lag_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);
