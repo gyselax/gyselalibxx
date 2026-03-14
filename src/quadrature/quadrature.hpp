@@ -139,8 +139,8 @@ public:
         if constexpr (ddc::is_chunk_v<IntegratorFunction>) {
             // Sanity check ensure that the front and back are in the domain
             // If this fails data may be distributed across MPI ranks
-            assert(get_idx_range(integrated_function).contains(get_idx_range(coeff_proxy).front()));
-            assert(get_idx_range(integrated_function).contains(get_idx_range(coeff_proxy).back()));
+            assert(get_idx_range(integrated_function).contains(get_idx_range(m_coefficients).front()));
+            assert(get_idx_range(integrated_function).contains(get_idx_range(m_coefficients).back()));
         }
 
         // Get useful index types
