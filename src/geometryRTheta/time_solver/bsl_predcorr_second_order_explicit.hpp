@@ -250,7 +250,9 @@ public:
             m_advection_solver(get_field(density_predicted_alloc), advection_field, dt);
 
             // --- advect also the feet because it is needed for the next step
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -294,6 +296,7 @@ public:
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {

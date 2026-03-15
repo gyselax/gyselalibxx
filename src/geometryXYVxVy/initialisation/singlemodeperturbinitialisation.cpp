@@ -34,7 +34,9 @@ DFieldSpXYVxVy SingleModePerturbInitialisation::operator()(DFieldSpXYVxVy const 
                 m_init_perturb_amplitude(isp));
 
         // Initialisation of the distribution function --> fill values
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 gridxyvxvy,
                 KOKKOS_LAMBDA(IdxXYVxVy const ixyvxvy) {
@@ -87,7 +89,9 @@ void SingleModePerturbInitialisation::perturbation_initialisation(
     double const ky = perturb_mode * 2. * M_PI
                       / ddcHelper::total_interval_length(ddc::select<GridY>(gridxy));
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             gridxy,
             KOKKOS_LAMBDA(IdxXY const ixy) {

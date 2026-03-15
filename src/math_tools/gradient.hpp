@@ -122,6 +122,8 @@ public:
         static_assert(is_accessible_v<Kokkos::DefaultExecutionSpace, MetricTensorType>);
         using IdxType = typename IdxRange::discrete_element_type;
         ddc::parallel_for_each(
+                "void Gradient<MetricTensorType>::operator()(DVectorFieldType<IdxRange>, "
+                "DVectorConstFieldCovType<IdxRange>)",
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(gradient),
                 KOKKOS_CLASS_LAMBDA(IdxType const idx) {
