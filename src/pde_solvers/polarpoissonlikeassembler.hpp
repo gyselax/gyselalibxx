@@ -475,8 +475,6 @@ public:
                 values_csr_host("values_csr", batch_size, n_matrix_elements);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 col_idx_csr_host("idx_csr", n_matrix_elements);
-        Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace>
-                nnz_per_row_csr("nnz_per_row_csr", m_matrix_size + 1);
         Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace>
                 nnz_per_row_csr_host("nnz_per_row_csr", m_matrix_size + 1);
 
@@ -491,24 +489,28 @@ public:
                 preconditioner_max_block_size);
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
-        Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
 
         compute_singular_elements(
                 coeff_alpha,
                 coeff_beta,
                 mapping,
                 spline_evaluator,
-                values_csr_host,
-                col_idx_csr_host,
-                nnz_per_row_csr_host);
+                values,
+                col_idx,
+                nnz_per_row);
         compute_overlapping_singular_elements(
                 coeff_alpha,
                 coeff_beta,
                 mapping,
                 spline_evaluator,
-                values_csr_host,
-                col_idx_csr_host,
-                nnz_per_row_csr_host);
+                values,
+                col_idx,
+                nnz_per_row);
+
+        Kokkos::deep_copy(values_csr_host, values);
+        Kokkos::deep_copy(col_idx_csr_host, col_idx);
+        Kokkos::deep_copy(nnz_per_row_csr_host, nnz_per_row);
+
         compute_stencil_elements(
                 coeff_alpha,
                 coeff_beta,
@@ -518,10 +520,11 @@ public:
                 col_idx_csr_host,
                 nnz_per_row_csr_host);
 
-        assert(nnz_per_row_csr_host(m_matrix_size) == n_matrix_elements);
         Kokkos::deep_copy(values, values_csr_host);
         Kokkos::deep_copy(col_idx, col_idx_csr_host);
         Kokkos::deep_copy(nnz_per_row, nnz_per_row_csr_host);
+
+        assert(nnz_per_row_csr_host(m_matrix_size) == n_matrix_elements);
         gko_matrix->setup_solver();
     }
 
@@ -553,9 +556,12 @@ public:
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
-            Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace> const values_csr_host,
-            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const col_idx_csr_host,
-            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const nnz_per_row_csr_host)
+            Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    values_csr,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    col_idx_csr,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    nnz_per_row_csr)
     {
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
@@ -563,38 +569,55 @@ public:
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
+        const int batch_idx = m_batch_idx;
+        const int n_singular = idxrange_singular.size();
+
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
         const std::source_location location = std::source_location::current();
         // Calculate the matrix elements corresponding to the B-splines which cover the singular point
-        ddc::host_for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
-            ddc::host_for_each(idxrange_singular, [&](IdxBSPolar const idx_trial) {
-                // Calculate the weak integral
-                double const element = ddc::parallel_transform_reduce(
-                        location.function_name(),
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        idx_range_quad_singular,
-                        0.0,
-                        ddc::reducer::sum<double>(),
-                        KOKKOS_LAMBDA(Idx<QDimRMesh, QDimThetaMesh> const& idx_quad) {
-                            return weak_integral_element(
-                                    idx_test,
-                                    idx_trial,
-                                    idx_quad,
-                                    coeff_alpha,
-                                    coeff_beta,
-                                    spline_evaluator,
-                                    mapping,
-                                    int_volume_proxy);
-                        });
-                const int row_idx = idx_test - idxrange_singular.front();
-                const int col_idx = idx_trial - idxrange_singular.front();
-                const int csr_idx_singular_area = nnz_per_row_csr_host(row_idx + 1);
-                //Fill the C matrix corresponding to the splines on the singular point
-                col_idx_csr_host(csr_idx_singular_area) = col_idx;
-                values_csr_host(m_batch_idx, csr_idx_singular_area) = element;
-                nnz_per_row_csr_host(row_idx + 1)++;
-            });
-        });
+                        n_singular * n_singular,
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    const int row_idx = team.league_rank() / n_singular;
+                    const int col_idx = team.league_rank() % n_singular;
+                    IdxBSPolar idx_test = idxrange_singular.front() + IdxStepBSPolar(row_idx);
+                    IdxBSPolar idx_trial = idxrange_singular.front() + IdxStepBSPolar(col_idx);
+                    double element = 0;
+                    // Calculate the weak integral
+                    Kokkos::parallel_reduce(
+                            Kokkos::TeamThreadMDRange(
+                                    team,
+                                    idx_range_quad_singular.template extent<QDimRMesh>(),
+                                    idx_range_quad_singular.template extent<QDimThetaMesh>()),
+                            [&](int r_thread_index, int theta_thread_index, double& sum) {
+                                IdxQuadratureRTheta idx_quad = idx_range_quad_singular.front()
+                                                               + IdxStep<QDimRMesh, QDimThetaMesh>(
+                                                                       r_thread_index,
+                                                                       theta_thread_index);
+                                sum += weak_integral_element(
+                                        idx_test,
+                                        idx_trial,
+                                        idx_quad,
+                                        coeff_alpha,
+                                        coeff_beta,
+                                        spline_evaluator,
+                                        mapping,
+                                        int_volume_proxy);
+                            },
+                            element);
+                    const int csr_idx_singular_area = nnz_per_row_csr(row_idx + 1) + col_idx;
+                    //Fill the C matrix corresponding to the splines on the singular point
+                    col_idx_csr(csr_idx_singular_area) = col_idx;
+                    values_csr(batch_idx, csr_idx_singular_area) = element;
+                });
+        Kokkos::parallel_for(
+                "to_remove",
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular + 1),
+                KOKKOS_LAMBDA(const int i) { nnz_per_row_csr(i) += n_singular; });
     }
 
     /**
@@ -625,9 +648,12 @@ public:
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
-            Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::HostSpace> const values_csr_host,
-            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const col_idx_csr_host,
-            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::HostSpace> const nnz_per_row_csr_host)
+            Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    values_csr,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    col_idx_csr,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    nnz_per_row_csr)
     {
         // Create index ranges associated with the 2D splines
         IdxRangeBSPolar idxrange_singular
@@ -643,80 +669,114 @@ public:
         IdxRangeQuadratureRTheta
                 full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
 
+		IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
+
+        const int batch_idx = m_batch_idx;
+        const int n_singular = idxrange_singular.size();
+        const int n_overlapping_singular = idxrange_non_singular_near_centre.size();
+
+        const std::source_location location = std::source_location::current();
+
         // Calculate the matrix elements where bspline products overlap the B-splines which cover the singular point
-        ddc::host_for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
-            ddc::host_for_each(idxrange_non_singular_near_centre, [&](IdxBSRTheta const idx_trial) {
-                const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
-                const IdxBSR idx_trial_r(idx_trial);
-                const IdxBSTheta idx_trial_theta(idx_trial);
-
-                auto& bspl_r = ddc::discrete_space<BSplinesR>();
-                auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
-
-                // Find the index range covering the cells where both the test and trial functions are non-zero
-                const Idx<KnotsR> start_non_zero_r(
-                        std::
-                                max(bspl_r.break_point_domain().front(),
-                                    bspl_r.get_first_support_knot(idx_trial_r)));
-                const Idx<KnotsR> end_non_zero_r(
-                        std::
-                                min(bspl_r.get_last_support_knot(
-                                            IdxBSR(PolarBSplinesRTheta::continuity)),
-                                    bspl_r.get_last_support_knot(idx_trial_r)));
-
-                const Idx<KnotsTheta> start_non_zero_theta(
-                        bspl_theta.get_first_support_knot(idx_trial_theta));
-                const Idx<KnotsTheta> end_non_zero_theta(
-                        bspl_theta.get_last_support_knot(idx_trial_theta));
-                const IdxRangeQuadratureRTheta quad_range
-                        = detail_poisson::get_quadrature_between_knots<
-                                QDimRMesh,
-                                QDimThetaMesh,
-                                BSplinesR,
-                                BSplinesTheta>(
-                                start_non_zero_r,
-                                end_non_zero_r,
-                                start_non_zero_theta,
-                                end_non_zero_theta,
-                                m_idxrange_quadrature.front());
-                assert(quad_range.size() > 0);
-                // Calculate the weak integral
-                const std::source_location location = std::source_location::current();
-                double element = ddc::parallel_transform_reduce(
-                        location.function_name(),
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        quad_range,
-                        0.0,
-                        ddc::reducer::sum<double>(),
-                        KOKKOS_LAMBDA(IdxQuadratureRTheta idx_quad) {
-                            // Manage periodicity
-                            if (!full_quad_idx_range.contains(idx_quad)) {
-                                idx_quad -= full_quad_idx_range.template extent<QDimThetaMesh>();
-                            }
+                        n_singular * n_overlapping_singular,
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    const IdxStepBSPolar idx_step_test(team.league_rank() / n_overlapping_singular);
+                    const IdxStepBSPolar idx_step_trial(
+                            team.league_rank() % n_overlapping_singular);
+                    IdxBSPolar idx_test = idxrange_singular.front() + idx_step_test;
+                    const IdxBSPolar idx_trial_polar(idxrange_singular.back() + 1 + idx_step_trial);
+                    IdxBSRTheta idx_trial = PolarBSplinesRTheta::get_2d_index(idx_trial_polar);
+                    IdxBSR idx_trial_r(idx_trial);
+                    IdxBSTheta idx_trial_theta(idx_trial);
 
-                            return weak_integral_element<Mapping>(
-                                    idx_test,
-                                    idx_trial_polar,
-                                    idx_quad,
-                                    coeff_alpha,
-                                    coeff_beta,
-                                    spline_evaluator,
-                                    mapping,
-                                    int_volume_proxy);
-                        });
+                    auto& bspl_r = ddc::discrete_space<BSplinesR>();
+                    auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
 
-                int const row_idx = idx_test - idxrange_singular.front();
-                int const col_idx = idx_trial_polar - idxrange_singular.front();
-                //a_ij
-                col_idx_csr_host(nnz_per_row_csr_host(row_idx + 1)) = col_idx;
-                values_csr_host(m_batch_idx, nnz_per_row_csr_host(row_idx + 1)) = element;
-                nnz_per_row_csr_host(row_idx + 1)++;
-                //a_ji
-                col_idx_csr_host(nnz_per_row_csr_host(col_idx + 1)) = row_idx;
-                values_csr_host(m_batch_idx, nnz_per_row_csr_host(col_idx + 1)) = element;
-                nnz_per_row_csr_host(col_idx + 1)++;
-            });
-        });
+                    // Find the index range covering the cells where both the test and trial functions are non-zero
+                    const Idx<KnotsR> start_non_zero_r(
+                            std::
+                                    max(bspl_r.break_point_domain().front(),
+                                        bspl_r.get_first_support_knot(idx_trial_r)));
+                    const Idx<KnotsR> end_non_zero_r(
+                            std::
+                                    min(bspl_r.get_last_support_knot(
+                                                IdxBSR(PolarBSplinesRTheta::continuity)),
+                                        bspl_r.get_last_support_knot(idx_trial_r)));
+
+                    const Idx<KnotsTheta> start_non_zero_theta(
+                            bspl_theta.get_first_support_knot(idx_trial_theta));
+                    const Idx<KnotsTheta> end_non_zero_theta(
+                            bspl_theta.get_last_support_knot(idx_trial_theta));
+                    const IdxRangeQuadratureRTheta quad_range
+                            = detail_poisson::get_quadrature_between_knots<
+                                    QDimRMesh,
+                                    QDimThetaMesh,
+                                    BSplinesR,
+                                    BSplinesTheta>(
+                                    start_non_zero_r,
+                                    end_non_zero_r,
+                                    start_non_zero_theta,
+                                    end_non_zero_theta,
+                                    idxrange_quadrature_front);
+                    assert(quad_range.size() > 0);
+                    double element = 0;
+                    // Calculate the weak integral
+                    Kokkos::parallel_reduce(
+                            Kokkos::TeamThreadMDRange(
+                                    team,
+                                    quad_range.template extent<QDimRMesh>(),
+                                    quad_range.template extent<QDimThetaMesh>()),
+                            [&](int r_thread_index, int theta_thread_index, double& sum) {
+                                IdxQuadratureRTheta idx_quad = quad_range.front()
+                                                               + IdxStep<QDimRMesh, QDimThetaMesh>(
+                                                                       r_thread_index,
+                                                                       theta_thread_index);
+                                // Manage periodicity
+                                if (!full_quad_idx_range.contains(idx_quad)) {
+                                    idx_quad
+                                            -= full_quad_idx_range.template extent<QDimThetaMesh>();
+                                }
+
+                                element += weak_integral_element<Mapping>(
+                                        idx_test,
+                                        idx_trial_polar,
+                                        idx_quad,
+                                        coeff_alpha,
+                                        coeff_beta,
+                                        spline_evaluator,
+                                        mapping,
+                                        int_volume_proxy);
+                            },
+                            element);
+
+                    const int row_idx = idx_step_test.value();
+                    const int col_idx = idx_step_trial.value() + n_singular;
+
+                    //a_ij
+                    col_idx_csr(nnz_per_row_csr(row_idx + 1) - n_singular + col_idx) = col_idx;
+                    values_csr(batch_idx, nnz_per_row_csr(row_idx + 1) - n_singular + col_idx) = element;
+                    //a_ji
+                    col_idx_csr(nnz_per_row_csr(col_idx + 1) + row_idx) = row_idx;
+                    values_csr(batch_idx, nnz_per_row_csr(col_idx + 1) + row_idx) = element;
+
+                    //nnz_per_row_csr(row_idx + 1)++;
+                    //nnz_per_row_csr(col_idx + 1)++;
+                });
+        Kokkos::parallel_for(
+                "to_remove",
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular + 1),
+                KOKKOS_LAMBDA(const int i) { nnz_per_row_csr(i) += n_overlapping_singular; });
+        Kokkos::parallel_for(
+                "to_remove",
+                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(
+                        n_singular + 1,
+                        n_singular + n_overlapping_singular + 1),
+                KOKKOS_LAMBDA(const int i) { nnz_per_row_csr(i) += n_singular; });
     }
     /**
      * @brief Computes the matrix element corresponding to the regular stencil
