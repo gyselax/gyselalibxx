@@ -38,6 +38,18 @@ KOKKOS_FUNCTION IdxStep<BSplinesTheta> theta_mod(IdxStep<BSplinesTheta> idx_thet
     return idx_theta;
 }
 
+template <typename DDom, std::enable_if_t<DDom::continuous_dimension_type::PERIODIC, bool> = true>
+KOKKOS_FUNCTION Idx<DDom> mod_add(Idx<DDom> idx, IdxStep<DDom> idx_step, IdxRange<DDom> idx_range)
+{
+    if (idx - idx_range.front() < -idx_step) {
+        return idx + idx_range.extents() + idx_step;
+    } else if (idx_range.back() - idx < idx_step) {
+        return idx + idx_step - idx_range.extents();
+    } else {
+        return idx + idx_step;
+    }
+}
+
 /**
     * @brief Calculates the index which is inside the poloidal domain using the periodicity properties.
     * 
@@ -132,6 +144,11 @@ get_polar_bspline_vals_and_derivs(
         IdxStep<BSplinesR> ir(offset);
         IdxStep<BSplinesTheta> itheta(
                 detail_poisson::theta_mod<BSplinesTheta>(IdxStep<BSplinesTheta>(offset)));
+
+        assert(0 <= ir);
+        assert(ir < n_non_zero_bases_r);
+        assert(0 <= itheta);
+        assert(itheta < n_non_zero_bases_theta);
 
         val = vals(ir, itheta);
         if constexpr (calculate_derivs) {
@@ -807,90 +824,56 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
         // Get index range for basis elements (last element removed due to homogeneous Dirichlet)
-        IdxRangeBSR full_idx_range_r
-                = ddc::discrete_space<BSplinesR>().full_domain().remove_last(IdxStepBSR(1));
+        IdxRangeBSTheta full_idx_range_theta
+                = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
+                        IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
+
+        IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
+                IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
 
         // Calculate the matrix elements following a stencil
         ddc::host_for_each(m_idxrange_fem_non_singular, [&](IdxBSPolar const idx_test_polar) {
             const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
             const IdxBSR idx_test_r(idx_test);
             const IdxBSTheta idx_test_theta(idx_test);
+            int const row_idx = idx_test_polar - idxrange_singular.front();
 
-            // Calculate the index of the elements that are already filled
-            IdxRangeBSTheta remaining_theta(
-                    idx_test_theta,
-                    IdxStep<BSplinesTheta> {BSplinesTheta::degree() + 1});
-            ddc::host_for_each(remaining_theta, [&](IdxBSTheta const idx_trial_theta) {
-                IdxBSRTheta idx_trial(idx_test_r, idx_trial_theta);
-                IdxBSPolar idx_trial_polar(
-                        to_polar(detail_poisson::theta_mod<BSplinesTheta>(idx_trial)));
-                double element = get_matrix_stencil_element(
-                        idx_test,
-                        idx_trial,
-                        coeff_alpha,
-                        coeff_beta,
-                        spline_evaluator,
-                        mapping);
-                int const int_polar_idx_test = idx_test_polar - idxrange_singular.front();
-                if (idx_test_polar == idx_trial_polar) {
-                    const int idx = nnz_per_row_csr_host(int_polar_idx_test + 1);
-                    col_idx_csr_host(idx) = int_polar_idx_test;
-                    values_csr_host(m_batch_idx, idx) = element;
-                    nnz_per_row_csr_host(int_polar_idx_test + 1)++;
-                } else {
-                    int const int_polar_idx_trial = idx_trial_polar - idxrange_singular.front();
-
-                    const int aij_idx = nnz_per_row_csr_host(int_polar_idx_test + 1);
-                    col_idx_csr_host(aij_idx) = int_polar_idx_trial;
+            IdxStepBSR idx_step_trial_r_offset_min(
+                    Kokkos::
+                            max(IdxStepBSR(-BSplinesR::degree()),
+                                idx_range_fem_r.front() - idx_test_r));
+            IdxStepBSR idx_step_trial_r_offset_max(
+                    Kokkos::
+                            min(IdxStepBSR(BSplinesR::degree() + 1),
+                                idx_range_fem_r.back() - idx_test_r));
+            IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
+            IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
+            for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
+                 idx_step_trial_r < idx_step_trial_r_offset_max;
+                 ++idx_step_trial_r) {
+                for (IdxStepBSTheta idx_step_trial_theta(idx_step_trial_theta_offset_min);
+                     idx_step_trial_theta < idx_step_trial_theta_offset_max;
+                     ++idx_step_trial_theta) {
+                    const IdxBSRTheta idx_trial(
+                            idx_test_r + idx_step_trial_r,
+                            detail_poisson::
+                                    mod_add(idx_test_theta,
+                                            idx_step_trial_theta,
+                                            full_idx_range_theta));
+                    double element = get_matrix_stencil_element(
+                            idx_test,
+                            idx_trial,
+                            coeff_alpha,
+                            coeff_beta,
+                            spline_evaluator,
+                            mapping);
+                    int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
+                    const int aij_idx = nnz_per_row_csr_host(row_idx + 1);
+                    col_idx_csr_host(aij_idx) = col_idx;
                     values_csr_host(m_batch_idx, aij_idx) = element;
-                    nnz_per_row_csr_host(int_polar_idx_test + 1)++;
-
-                    const int aji_idx = nnz_per_row_csr_host(int_polar_idx_trial + 1);
-                    col_idx_csr_host(aji_idx) = int_polar_idx_test;
-                    values_csr_host(m_batch_idx, aji_idx) = element;
-                    nnz_per_row_csr_host(int_polar_idx_trial + 1)++;
+                    nnz_per_row_csr_host(row_idx + 1)++;
                 }
-            });
-            IdxStepBSR n_remaining_r(std::
-                                             min(IdxStepBSR(BSplinesR::degree()),
-                                                 full_idx_range_r.back() - idx_test_r));
-            IdxRangeBSR remaining_r(idx_test_r + 1, n_remaining_r);
-            IdxRangeBSTheta relevant_theta(
-                    idx_test_theta + ddc::discrete_space<BSplinesTheta>().nbasis()
-                            - BSplinesTheta::degree(),
-                    IdxStepBSTheta {2 * BSplinesTheta::degree() + 1});
-
-            IdxRangeBSRTheta trial_idx_range(remaining_r, relevant_theta);
-
-            ddc::host_for_each(trial_idx_range, [&](IdxBSRTheta const idx_trial) {
-                IdxBSPolar idx_trial_polar(
-                        to_polar(detail_poisson::theta_mod<BSplinesTheta>(idx_trial)));
-                double element = get_matrix_stencil_element(
-                        idx_test,
-                        idx_trial,
-                        coeff_alpha,
-                        coeff_beta,
-                        spline_evaluator,
-                        mapping);
-                int const int_polar_idx_test = idx_test_polar - idxrange_singular.front();
-                if (idx_test_polar == idx_trial_polar) {
-                    const int idx = nnz_per_row_csr_host(int_polar_idx_test + 1);
-                    col_idx_csr_host(idx) = int_polar_idx_test;
-                    values_csr_host(m_batch_idx, idx) = element;
-                    nnz_per_row_csr_host(int_polar_idx_test + 1)++;
-                } else {
-                    int const int_polar_idx_trial = idx_trial_polar - idxrange_singular.front();
-                    const int aij_idx = nnz_per_row_csr_host(int_polar_idx_test + 1);
-                    col_idx_csr_host(aij_idx) = int_polar_idx_trial;
-                    values_csr_host(m_batch_idx, aij_idx) = element;
-                    nnz_per_row_csr_host(int_polar_idx_test + 1)++;
-
-                    const int aji_idx = nnz_per_row_csr_host(int_polar_idx_trial + 1);
-                    col_idx_csr_host(aji_idx) = int_polar_idx_test;
-                    values_csr_host(m_batch_idx, aji_idx) = element;
-                    nnz_per_row_csr_host(int_polar_idx_trial + 1)++;
-                }
-            });
+            }
         });
 
         Kokkos::Profiling::popRegion();
