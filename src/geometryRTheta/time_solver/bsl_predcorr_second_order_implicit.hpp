@@ -280,7 +280,6 @@ public:
                     ddcHelper::get<Y>(get_const_field(advection_field_coefs_k)));
 
             // Compute the new advection field (E^n(X^n) + E^n(X^P)) /2:
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
@@ -299,7 +298,6 @@ public:
             m_advection_solver(density_predicted, get_const_field(advection_field_k), dt / 2.);
 
             // --- advect also the feet because it is needed for the next step
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
@@ -334,7 +332,6 @@ public:
 
 
             // initialisation:
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
@@ -361,7 +358,6 @@ public:
                     ddcHelper::get<Y>(get_const_field(advection_field_coefs_k)));
 
             // Computed advection field (A^P(X^n) + A^P(X^P)) /2:
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
@@ -459,7 +455,6 @@ public:
             ddc::parallel_deepcopy(feet_coords_tmp, feet_coords);
 
             // X^k = X^n - dt* X^k:
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
@@ -472,7 +467,6 @@ public:
 
             // Convergence test:
             LogicalToPhysicalMapping logical_to_physical_proxy = m_logical_to_physical;
-            const std::source_location location = std::source_location::current();
             square_difference_feet = ddc::parallel_transform_reduce(
                     location.function_name(),
                     Kokkos::DefaultExecutionSpace(),

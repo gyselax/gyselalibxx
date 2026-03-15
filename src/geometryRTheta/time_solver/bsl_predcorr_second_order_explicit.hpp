@@ -295,7 +295,6 @@ public:
 
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
-            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
                     location.function_name(),
                     Kokkos::DefaultExecutionSpace(),

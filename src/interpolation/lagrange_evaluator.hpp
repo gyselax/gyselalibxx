@@ -271,7 +271,6 @@ public:
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
-                "Lagrange_evaluate",
                 exec_space(),
                 batch_idx_range,
                 KOKKOS_CLASS_LAMBDA(IdxBatchInterpolation const j) {
@@ -311,7 +310,6 @@ public:
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
-                "lagrange_evaluate",
                 exec_space(),
                 batch_idx_range,
                 KOKKOS_CLASS_LAMBDA(typename batch_idx_range_type<
