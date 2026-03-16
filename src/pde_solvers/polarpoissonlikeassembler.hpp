@@ -945,6 +945,8 @@ public:
      * @brief Computes the matrix element corresponding to two tensor product splines
      *        with index idx_test and idx_trial
      *
+     * @param[in] team
+     *      The team of threads from which this function is called.
      * @param[in] idx_test
      *      The index for polar B-spline in the test space.
      * @param[in] idx_trial
