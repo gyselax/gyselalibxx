@@ -760,7 +760,9 @@ public:
         Kokkos::parallel_for(
                 "to_remove",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular + 1),
-                KOKKOS_LAMBDA(const int i) { nnz_per_row_csr(i) += n_overlapping_singular + n_singular; });
+                KOKKOS_LAMBDA(const int i) {
+                    nnz_per_row_csr(i) += n_overlapping_singular + n_singular;
+                });
         Kokkos::parallel_for(
                 "to_remove",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(
