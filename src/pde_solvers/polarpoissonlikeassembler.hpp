@@ -735,7 +735,7 @@ public:
                                             -= full_quad_idx_range.template extent<QDimThetaMesh>();
                                 }
 
-                                element += weak_integral_element<Mapping>(
+                                sum += weak_integral_element<Mapping>(
                                         idx_test,
                                         idx_trial_polar,
                                         idx_quad,
