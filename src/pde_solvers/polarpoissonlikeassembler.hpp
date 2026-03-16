@@ -869,12 +869,12 @@ public:
                                     full_quad_idx_range,
                                     int_volume_proxy);
                             int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
-							Kokkos::single(Kokkos::PerTeam(team), [&]() {
-                            const int aij_idx = nnz_per_row_csr(row_idx + 1);
-                            col_idx_csr(aij_idx) = col_idx;
-                            values_csr(batch_idx, aij_idx) = element;
-                            nnz_per_row_csr(row_idx + 1)++;
-							});
+                            Kokkos::single(Kokkos::PerTeam(team), [&]() {
+                                const int aij_idx = nnz_per_row_csr(row_idx + 1);
+                                col_idx_csr(aij_idx) = col_idx;
+                                values_csr(batch_idx, aij_idx) = element;
+                                nnz_per_row_csr(row_idx + 1)++;
+                            });
                         }
                     }
                 });
