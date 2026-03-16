@@ -979,6 +979,12 @@ public:
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
+     * @param[in] full_quad_idx_range
+     *      The index range of all the quadrature points.
+     * @param[in] int_volume
+     *      The field describing the quadrature coefficients including the
+     *      Jacobian multiplication factor responsible for ensuring the correct
+     *      volume for the integral.
      * @return 
      *      The value of the matrix element.
      */
