@@ -591,7 +591,7 @@ public:
                                     team,
                                     idx_range_quad_singular.template extent<QDimRMesh>(),
                                     idx_range_quad_singular.template extent<QDimThetaMesh>()),
-                            KOKKOS_LAMBDA(int r_thread_index, int theta_thread_index, double& sum) {
+                            [&](int r_thread_index, int theta_thread_index, double& sum) {
                                 IdxQuadratureRTheta idx_quad = idx_range_quad_singular.front()
                                                                + IdxStep<QDimRMesh, QDimThetaMesh>(
                                                                        r_thread_index,
@@ -1143,7 +1143,7 @@ public:
                     // Loop over poloidal dimensions
                     Kokkos::parallel_for(
                             Kokkos::TeamThreadRange(team, nbasis_theta_proxy),
-                            KOKKOS_LAMBDA(int const& thread_index) {
+                            [&](int const& thread_index) {
                                 IdxStepBSTheta itheta(thread_index);
                                 IdxBSRTheta k_2d = idxrange_singular_overlap.front() + ir + itheta;
                                 IdxBSPolar k(to_polar(k_2d));
