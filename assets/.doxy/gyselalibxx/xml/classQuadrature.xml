@@ -142,7 +142,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="60" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="60" bodyend="94"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="60" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="60" bodyend="101"/>
       </memberdef>
       <memberdef kind="function" id="classQuadrature_1ae02eb072db0c97909145dc712629c824" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -209,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="112" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="112" bodyend="166"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="119" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="119" bodyend="182"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -264,7 +264,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="180" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="180" bodyend="192"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="196" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="196" bodyend="208"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -298,7 +298,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="28" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="29" bodyend="193"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" line="28" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature.hpp" bodystart="29" bodyend="209"/>
     <listofallmembers>
       <member refid="classQuadrature_1a21847eb865943b66e0f6aad3d18b6a22" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>IdxQuadrature</name></member>
       <member refid="classQuadrature_1a4459d395596756d33cb2b965a6f1f80d" prot="private" virt="non-virtual"><scope>Quadrature</scope><name>m_coefficients</name></member>
