@@ -69,6 +69,13 @@ public:
 
         QuadConstField const coeff_proxy = m_coefficients;
 
+        if constexpr (ddc::is_chunk_v<IntegratorFunction>) {
+            // Sanity check ensure that the front and back are in the domain
+            // If this fails data may be distributed across MPI ranks
+            assert(get_idx_range(integrated_function).contains(get_idx_range(coeff_proxy).front()));
+            assert(get_idx_range(integrated_function).contains(get_idx_range(coeff_proxy).back()));
+        }
+
         // This fence helps avoid a CPU seg fault. See #290 for more details
         exec_space.fence();
         // This condition is necessary to execute in serial, even in a device activated build.
@@ -128,6 +135,15 @@ public:
                 ddc::type_seq_same_v<ddc::to_type_seq_t<BatchIdxRange>, ExpectedBatchDims>,
                 "The batch idx_range deduced from the type of result does not match the class "
                 "template parameters.");
+
+        if constexpr (ddc::is_chunk_v<IntegratorFunction>) {
+            // Sanity check ensure that the front and back are in the domain
+            // If this fails data may be distributed across MPI ranks
+            assert(IdxRangeQuadrature(get_idx_range(integrated_function))
+                           .contains(get_idx_range(m_coefficients).front()));
+            assert(IdxRangeQuadrature(get_idx_range(integrated_function))
+                           .contains(get_idx_range(m_coefficients).back()));
+        }
 
         // Get useful index types
         using IdxTotal = typename IdxRangeTotal::discrete_element_type;
