@@ -389,7 +389,7 @@ private:
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
-    Field<double, IdxRangeQuadratureRTheta> m_int_volume;
+    DField<IdxRangeQuadratureRTheta> m_int_volume;
 
 public:
     /**
@@ -660,10 +660,9 @@ public:
                 m_idxrange_bsplines_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
-        IdxRangeQuadratureRTheta
-                full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
+        IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
-		IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
+        IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
 
         const int batch_idx = m_batch_idx;
         const int n_singular = idxrange_singular.size();
@@ -815,6 +814,14 @@ public:
         IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
 
+        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_non_singular.front();
+
+        DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+
+        IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
+
+        const int batch_idx = m_batch_idx;
+
         // Calculate the matrix elements following a stencil
         Kokkos::parallel_for(
                 Kokkos::TeamPolicy<>(
@@ -823,8 +830,7 @@ public:
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     IdxBSPolar const idx_test_polar(
-                            m_idxrange_fem_non_singular.front()
-                            + IdxStepBSPolar {team.league_rank()});
+                            idxrange_fem_non_singular_front + IdxStepBSPolar {team.league_rank()});
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
                     const IdxBSR idx_test_r(idx_test);
                     const IdxBSTheta idx_test_theta(idx_test);
@@ -859,11 +865,13 @@ public:
                                     coeff_alpha,
                                     coeff_beta,
                                     spline_evaluator,
-                                    mapping);
+                                    mapping,
+                                    full_quad_idx_range,
+                                    int_volume_proxy);
                             int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
                             const int aij_idx = nnz_per_row_csr(row_idx + 1);
                             col_idx_csr(aij_idx) = col_idx;
-                            values_csr(m_batch_idx, aij_idx) = element;
+                            values_csr(batch_idx, aij_idx) = element;
                             nnz_per_row_csr(row_idx + 1)++;
                         }
                     }
@@ -966,17 +974,17 @@ public:
      *      The value of the matrix element.
      */
     template <class Mapping>
-    double get_matrix_stencil_element(
+    static KOKKOS_FUNCTION double get_matrix_stencil_element(
             const Kokkos::TeamPolicy<>::member_type& team,
             IdxBSRTheta idx_test,
             IdxBSRTheta idx_trial,
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             SplineRThetaEvaluatorNullBound const& evaluator,
-            Mapping const& mapping)
+            Mapping const& mapping,
+            IdxRangeQuadratureRTheta const& full_quad_idx_range,
+            DField<IdxRangeQuadratureRTheta> int_volume)
     {
-        IdxRangeQuadratureRTheta
-                full_quad_idx_range(m_idxrange_quadrature_r, m_idxrange_quadrature_theta);
         const IdxBSR idx_test_r(idx_test);
         const IdxBSR idx_trial_r(idx_trial);
         const IdxBSTheta idx_test_theta(
@@ -1026,9 +1034,7 @@ public:
                         end_non_zero_r,
                         start_non_zero_theta,
                         end_non_zero_theta,
-                        m_idxrange_quadrature.front());
-
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+                        full_quad_idx_range.front());
 
         const IdxBSPolar idx_test_polar(to_polar(idx_test));
         const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
@@ -1058,7 +1064,7 @@ public:
                             coeff_beta,
                             evaluator,
                             mapping,
-                            int_volume_proxy);
+                            int_volume);
                 },
                 result);
         return result;
