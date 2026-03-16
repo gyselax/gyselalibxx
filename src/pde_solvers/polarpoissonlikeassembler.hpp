@@ -1025,9 +1025,9 @@ public:
             last_support_knot_theta_test += ddc::discrete_space<BSplinesTheta>().nbasis();
         }
         const Idx<KnotsTheta> start_non_zero_theta(
-                std::max(first_support_knot_theta_test, first_support_knot_theta_trial));
+                Kokkos::max(first_support_knot_theta_test, first_support_knot_theta_trial));
         const Idx<KnotsTheta> end_non_zero_theta(
-                std::min(last_support_knot_theta_test, last_support_knot_theta_trial));
+                Kokkos::min(last_support_knot_theta_test, last_support_knot_theta_trial));
         const IdxRangeQuadratureRTheta quad_range = detail_poisson::
                 get_quadrature_between_knots<QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta>(
                         start_non_zero_r,
