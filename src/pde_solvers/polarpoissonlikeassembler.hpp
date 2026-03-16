@@ -614,10 +614,6 @@ public:
                     col_idx_csr(csr_idx_singular_area) = col_idx;
                     values_csr(batch_idx, csr_idx_singular_area) = element;
                 });
-        Kokkos::parallel_for(
-                "to_remove",
-                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular + 1),
-                KOKKOS_LAMBDA(const int i) { nnz_per_row_csr(i) += n_singular; });
     }
 
     /**
@@ -758,19 +754,16 @@ public:
                     const int col_idx = idx_step_trial.value() + n_singular;
 
                     //a_ij
-                    col_idx_csr(nnz_per_row_csr(row_idx + 1) - n_singular + col_idx) = col_idx;
-                    values_csr(batch_idx, nnz_per_row_csr(row_idx + 1) - n_singular + col_idx) = element;
+                    col_idx_csr(nnz_per_row_csr(row_idx + 1) + col_idx) = col_idx;
+                    values_csr(batch_idx, nnz_per_row_csr(row_idx + 1) + col_idx) = element;
                     //a_ji
                     col_idx_csr(nnz_per_row_csr(col_idx + 1) + row_idx) = row_idx;
                     values_csr(batch_idx, nnz_per_row_csr(col_idx + 1) + row_idx) = element;
-
-                    //nnz_per_row_csr(row_idx + 1)++;
-                    //nnz_per_row_csr(col_idx + 1)++;
                 });
         Kokkos::parallel_for(
                 "to_remove",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular + 1),
-                KOKKOS_LAMBDA(const int i) { nnz_per_row_csr(i) += n_overlapping_singular; });
+                KOKKOS_LAMBDA(const int i) { nnz_per_row_csr(i) += n_overlapping_singular + n_singular; });
         Kokkos::parallel_for(
                 "to_remove",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(
