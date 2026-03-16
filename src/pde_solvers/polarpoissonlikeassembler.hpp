@@ -692,11 +692,11 @@ public:
 
                     // Find the index range covering the cells where both the test and trial functions are non-zero
                     const Idx<KnotsR> start_non_zero_r(
-                            std::
+                            Kokkos::
                                     max(bspl_r.break_point_domain().front(),
                                         bspl_r.get_first_support_knot(idx_trial_r)));
                     const Idx<KnotsR> end_non_zero_r(
-                            std::
+                            Kokkos::
                                     min(bspl_r.get_last_support_knot(
                                                 IdxBSR(PolarBSplinesRTheta::continuity)),
                                         bspl_r.get_last_support_knot(idx_trial_r)));
@@ -996,15 +996,15 @@ public:
         auto& bspl_theta = ddc::discrete_space<BSplinesTheta>();
 
         const Idx<KnotsR> start_non_zero_r(
-                std::
+                Kokkos::
                         max(bspl_r.break_point_domain().front(),
-                            std::
+                            Kokkos::
                                     max(bspl_r.get_first_support_knot(idx_test_r),
                                         bspl_r.get_first_support_knot(idx_trial_r))));
         const Idx<KnotsR> end_non_zero_r(
-                std::
+                Kokkos::
                         min(bspl_r.break_point_domain().back(),
-                            std::
+                            Kokkos::
                                     min(bspl_r.get_last_support_knot(idx_test_r),
                                         bspl_r.get_last_support_knot(idx_trial_r))));
 
