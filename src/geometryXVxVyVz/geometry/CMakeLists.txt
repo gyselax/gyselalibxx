@@ -11,5 +11,6 @@ target_link_libraries("geometry_xvxvyvz" INTERFACE
     gslx::mpi_parallelisation
     gslx::speciesinfo
     gslx::utils
+    gslx::geometry_xyvxvy
 )
 add_library("gslx::geometry_xvxvyvz" ALIAS "geometry_xvxvyvz")

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvxvyvz.hpp"
 
 /**
  * @brief An abstract class that allows for initialising a distribution function.

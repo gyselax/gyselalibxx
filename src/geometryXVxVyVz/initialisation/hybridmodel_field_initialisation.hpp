@@ -3,7 +3,7 @@
 #pragma once
 
 #include <paraconf.h>
-#include "geometry.hpp"
+#include "geometry_xvxvyvz.hpp"
 #include "ifieldinitialisation.hpp"
 #include "paraconfpp.hpp"
 

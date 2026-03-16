@@ -2,13 +2,10 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvxvyvz.hpp"
+#include "iadvectionvx.hpp"
+#include "iadvectionx.hpp"
 #include "ivlasovsolver.hpp"
-
-template <class Geometry, class GridX>
-class IAdvectionSpatial;
-template <class Geometry, class GridV>
-class IAdvectionVelocity;
 
 /**
  * @brief A class that solves a Vlasov equation using Strang's splitting.

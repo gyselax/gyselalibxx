@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvxvyvz.hpp"
 
 /**
  * @brief An abstract class for solving a Vlasov equation.

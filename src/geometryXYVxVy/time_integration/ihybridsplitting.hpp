@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvxvyvz.hpp"
 
 /**
  * @brief An abstract class for solving the hybrid plasma model with kinetic ions 

@@ -5,7 +5,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "vector_field.hpp"
-#include "geometry.hpp"
+#include "geometry_xvxvyvz.hpp"
 
 template <class IdxRangeHybrid, class IdxRangeFull, class MemorySpace, class LayoutSpace>
 class IHybridSolver1d;

@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 
 /**
  * @brief An abstract class for solving the Vlasov equation in the hybrid model 

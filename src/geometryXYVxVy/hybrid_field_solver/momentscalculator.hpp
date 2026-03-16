@@ -5,7 +5,7 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_helper.hpp"
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 #include "imomentscalculator.hpp"
 #include "quadrature.hpp"
 

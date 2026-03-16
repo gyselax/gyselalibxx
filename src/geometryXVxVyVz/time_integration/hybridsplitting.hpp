@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvxvyvz.hpp"
 #include "ihybridsplitting.hpp"
 
 class IHybridFieldSolver;

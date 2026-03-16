@@ -4,7 +4,7 @@
 
 #include <ddc/ddc.hpp>
 
-#include "geometry.hpp"
+#include "geometry_xvxvyvz.hpp"
 
 /**
  * @brief A class which computes velocity moments of the distribution functions.
