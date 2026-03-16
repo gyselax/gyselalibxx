@@ -846,6 +846,7 @@ public:
                                         idx_range_fem_r.back() - idx_test_r));
                     IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
                     IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
+                    int col_offset = 0;
                     for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
                          idx_step_trial_r < idx_step_trial_r_offset_max;
                          ++idx_step_trial_r) {
@@ -870,13 +871,17 @@ public:
                                     int_volume_proxy);
                             int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
                             Kokkos::single(Kokkos::PerTeam(team), [&]() {
-                                const int aij_idx = nnz_per_row_csr(row_idx + 1);
+                                const int aij_idx = nnz_per_row_csr(row_idx + 1) + col_offset;
                                 col_idx_csr(aij_idx) = col_idx;
                                 values_csr(batch_idx, aij_idx) = element;
-                                nnz_per_row_csr(row_idx + 1)++;
+                                col_offset++;
                             });
                         }
                     }
+                    nnz_per_row_csr(row_idx + 1)
+                            += (idx_step_trial_r_offset_max - idx_step_trial_r_offset_min)
+                               * (idx_step_trial_theta_offset_max
+                                  - idx_step_trial_theta_offset_min);
                 });
 
         Kokkos::Profiling::popRegion();
