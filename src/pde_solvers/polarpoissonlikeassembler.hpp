@@ -810,9 +810,6 @@ public:
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
-        IdxRangeBSR central_radial_bspline_idx_range(
-                m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
-
         const int batch_idx = m_batch_idx;
         const std::source_location location = std::source_location::current();
 
