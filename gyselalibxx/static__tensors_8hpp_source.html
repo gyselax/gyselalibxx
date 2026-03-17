@@ -614,7 +614,7 @@ public:
     }
 
     template &lt;std::size_t dim&gt;
-    using vector_index_set_t = std::conditional_t&lt;dim == 0, ValidIndexSetRow, ValidIndexSetCol&gt;;
+    using vector_index_set_t = ddc::type_seq_element_t&lt;dim, index_set&gt;;
 };
 
 template &lt;class ElementType, class ValidIndexSet&gt;
@@ -622,6 +622,16 @@ class CartesianLeviCivitaTensor
 {
     static_assert(is_vector_index_set_v&lt;ValidIndexSet&gt;);
     static_assert(std::is_same_v&lt;ValidIndexSet, vector_index_set_dual_t&lt;ValidIndexSet&gt;&gt;);
+
+private:
+    KOKKOS_FUNCTION static constexpr std::size_t compute_size()
+    {
+        std::size_t result = 1;
+        for (std::size_t i = 0; i &lt; rank(); ++i) {
+            result *= ddc::type_seq_size_v&lt;ValidIndexSet&gt;;
+        }
+        return result;
+    }
 
 public:
     using element_type = ElementType;
@@ -633,7 +643,7 @@ public:
 
     KOKKOS_FUNCTION static constexpr std::size_t size()
     {
-        return rank() * rank();
+        return compute_size();
     }
 
     using index_set = type_seq_duplicate_t&lt;ValidIndexSet, rank()&gt;;
@@ -662,7 +672,15 @@ class LeviCivitaTensor
             || (is_contravariant_vector_index_set_v&lt;ValidIndexSet&gt;));
 
 private:
-    double m_coeff;
+    ElementType m_coeff;
+    KOKKOS_FUNCTION static constexpr std::size_t compute_size()
+    {
+        std::size_t result = 1;
+        for (std::size_t i = 0; i &lt; rank(); ++i) {
+            result *= ddc::type_seq_size_v&lt;ValidIndexSet&gt;;
+        }
+        return result;
+    }
 
 public:
     using element_type = ElementType;
@@ -674,12 +692,12 @@ public:
 
     KOKKOS_FUNCTION static constexpr std::size_t size()
     {
-        return rank() * rank();
+        return compute_size();
     }
 
     using index_set = type_seq_duplicate_t&lt;ValidIndexSet, rank()&gt;;
 
-    explicit KOKKOS_FUNCTION LeviCivitaTensor(double jacobian)
+    explicit KOKKOS_FUNCTION LeviCivitaTensor(ElementType jacobian)
     {
         if constexpr (is_covariant_vector_index_set_v&lt;ValidIndexSet&gt;) {
             m_coeff = jacobian;
@@ -693,7 +711,7 @@ public:
     template &lt;class QueryTensorIndexElement&gt;
     KOKKOS_INLINE_FUNCTION ElementType get() const
     {
-        double constexpr eps = type_seq_permutation_parity_v&lt;
+        int constexpr eps = type_seq_permutation_parity_v&lt;
                 typename QueryTensorIndexElement::IdxTypeSeq,
                 ValidIndexSet&gt;;
         return eps * m_coeff;
@@ -741,6 +759,10 @@ inline constexpr bool
 
 template &lt;class ElementType, class ValidIndexSet&gt;
 inline constexpr bool enable_tensor_type&lt;LeviCivitaTensor&lt;ElementType, ValidIndexSet&gt;&gt; = true;
+
+template &lt;class ElementType, class ValidIndexSet&gt;
+inline constexpr bool
+        enable_tensor_type&lt;CartesianLeviCivitaTensor&lt;ElementType, ValidIndexSet&gt;&gt; = true;
 
 } // namespace detail
 </code></pre></div>

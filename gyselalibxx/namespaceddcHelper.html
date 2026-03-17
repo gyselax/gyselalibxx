@@ -674,15 +674,15 @@
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION constexpr double</td>
-<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classIdentityTensor.html"><strong>IdentityTensor</strong></a>&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const &amp; tensor) <br><em>A helper function to get a modifiable reference to an element of the tensor.</em></td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classIdentityTensor.html"><strong>IdentityTensor</strong></a>&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const &amp; tensor) <br><em>A helper function to get the value of an element of the tensor.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION constexpr double</td>
-<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classCartesianLeviCivitaTensor.html"><strong>CartesianLeviCivitaTensor</strong></a>&lt; ElementType, ValidIndexSet &gt; const &amp; tensor) <br><em>A helper function to get a modifiable reference to an element of the tensor.</em></td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classCartesianLeviCivitaTensor.html"><strong>CartesianLeviCivitaTensor</strong></a>&lt; ElementType, ValidIndexSet &gt; const &amp; tensor) <br><em>A helper function to get the value of an element of the tensor.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION constexpr double</td>
-<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classLeviCivitaTensor.html"><strong>LeviCivitaTensor</strong></a>&lt; ElementType, ValidIndexSet &gt; const &amp; tensor) <br><em>A helper function to get a modifiable reference to an element of the tensor.</em></td>
+<td style="text-align: left;"><a href="#function-get"><strong>get</strong></a> (<a href="classLeviCivitaTensor.html"><strong>LeviCivitaTensor</strong></a>&lt; ElementType, ValidIndexSet &gt; const &amp; tensor) <br><em>A helper function to get the value of an element of the tensor.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">KOKKOS_INLINE_FUNCTION storage_type::element_type &amp;</td>
@@ -908,7 +908,7 @@ inline void ddcHelper::dump_coordinates (
 <hr>
 
 <h3 id="function-get">function get</h3>
-<p><em>A helper function to get a modifiable reference to an element of the tensor.</em> </p>
+<p><em>A helper function to get the value of an element of the tensor.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class ValidIndexSetRow, class ValidIndexSetCol&gt;
 KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
     IdentityTensor &lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const &amp; tensor
@@ -927,7 +927,7 @@ KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
 <hr>
 
 <h3 id="function-get_1">function get</h3>
-<p><em>A helper function to get a modifiable reference to an element of the tensor.</em> </p>
+<p><em>A helper function to get the value of an element of the tensor.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class ValidIndexSet&gt;
 KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
     CartesianLeviCivitaTensor &lt; ElementType, ValidIndexSet &gt; const &amp; tensor
@@ -946,7 +946,7 @@ KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
 <hr>
 
 <h3 id="function-get_2">function get</h3>
-<p><em>A helper function to get a modifiable reference to an element of the tensor.</em> </p>
+<p><em>A helper function to get the value of an element of the tensor.</em> </p>
 <pre><code class="language-C++">template&lt;class... QueryIndexTag, class ElementType, class ValidIndexSet&gt;
 KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
     LeviCivitaTensor &lt; ElementType, ValidIndexSet &gt; const &amp; tensor

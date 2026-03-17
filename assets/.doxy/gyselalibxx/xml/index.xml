@@ -243,6 +243,7 @@
     <member refid="classCartesianLeviCivitaTensor_1a46108038ed89fc61152be2653c0c41d7" kind="typedef"><name>element_type</name></member>
     <member refid="classCartesianLeviCivitaTensor_1ae7475b5ff0e11bf3a4328c9ddafe1493" kind="typedef"><name>index_set</name></member>
     <member refid="classCartesianLeviCivitaTensor_1a80cee0d09c3172393519e8e41c8b6ea1" kind="typedef"><name>vector_index_set_t</name></member>
+    <member refid="classCartesianLeviCivitaTensor_1ae7185eb318f7179173e61087de4f3008" kind="function"><name>compute_size</name></member>
     <member refid="classCartesianLeviCivitaTensor_1af7f8f379b022f9c0a966a4530df1fdb7" kind="function"><name>rank</name></member>
     <member refid="classCartesianLeviCivitaTensor_1ad70c0f0045352fa847b7861dfbdcefc7" kind="function"><name>size</name></member>
     <member refid="classCartesianLeviCivitaTensor_1a23f31e27b014ef50783740dc3377d6a7" kind="function"><name>get</name></member>
@@ -1279,7 +1280,7 @@
   <compound refid="classIdentityTensor" kind="class"><name>IdentityTensor</name>
     <member refid="classIdentityTensor_1a27a7de561c7c5ea7b5789abcfa85810e" kind="typedef"><name>element_type</name></member>
     <member refid="classIdentityTensor_1abdb0049eae9e619f3a545a474de1777b" kind="typedef"><name>index_set</name></member>
-    <member refid="classIdentityTensor_1ae90497b7184dc9f1fbf5bfa1a75b3254" kind="typedef"><name>vector_index_set_t</name></member>
+    <member refid="classIdentityTensor_1af70d3f53f0ec061baff71744feccea51" kind="typedef"><name>vector_index_set_t</name></member>
     <member refid="classIdentityTensor_1a2a80ec08e6bb253d22d2944a2dc3641f" kind="function"><name>rank</name></member>
     <member refid="classIdentityTensor_1a8226c063830730770e62aee983ccbc7f" kind="function"><name>size</name></member>
     <member refid="classIdentityTensor_1ac03c37d10bf94bfcea328f4d4822a13d" kind="function"><name>get</name></member>
@@ -1752,10 +1753,11 @@
     <member refid="classLeviCivitaTensor_1a75ae281b08da04242aa4b8fe07a61c67" kind="typedef"><name>element_type</name></member>
     <member refid="classLeviCivitaTensor_1ae7830c67e0842b80b8b9566fe83fc7b0" kind="typedef"><name>index_set</name></member>
     <member refid="classLeviCivitaTensor_1a0e1c1e6577d4c49cceaf6f338361084f" kind="typedef"><name>vector_index_set_t</name></member>
-    <member refid="classLeviCivitaTensor_1ac964d2254ea09312b9aa0498e24b46b2" kind="variable"><name>m_coeff</name></member>
+    <member refid="classLeviCivitaTensor_1a14f2c29da4096a87cc7b4bc8079066bb" kind="variable"><name>m_coeff</name></member>
+    <member refid="classLeviCivitaTensor_1ab81ed66e947119aecf7939587061622c" kind="function"><name>compute_size</name></member>
     <member refid="classLeviCivitaTensor_1a861d4050938002b7643f5d106da33054" kind="function"><name>rank</name></member>
     <member refid="classLeviCivitaTensor_1a9d2c687cdde551ff289df0020e0d5dc7" kind="function"><name>size</name></member>
-    <member refid="classLeviCivitaTensor_1a21bb487458fcecb9331f6a877e7a3f70" kind="function"><name>LeviCivitaTensor</name></member>
+    <member refid="classLeviCivitaTensor_1ab8c759abfb75cdde0085fcb7932f0da9" kind="function"><name>LeviCivitaTensor</name></member>
     <member refid="classLeviCivitaTensor_1a673eb02fe7eb428a85eaf0233ab2c4a2" kind="function"><name>get</name></member>
   </compound>
   <compound refid="classLiePoissonBracket" kind="class"><name>LiePoissonBracket</name>

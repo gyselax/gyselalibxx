@@ -44,6 +44,7 @@
 * **compute\_advection\_field\_XY** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
 * **compute\_twomaxwellian** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **CartesianLeviCivitaTensor** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md))
+* **compute\_size** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md))
 * **CartesianToBarycentric** ([**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **CartesianToCircular** ([**CartesianToCircular**](classCartesianToCircular.md))
 * **CartesianToCylindrical** ([**CartesianToCylindrical**](classCartesianToCylindrical.md))

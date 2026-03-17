@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="104" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="114" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="114" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianLeviCivitaTensor_1ae7475b5ff0e11bf3a4328c9ddafe1493" prot="public" static="no">
         <type>type_seq_duplicate_t&lt; ValidIndexSet, <ref refid="classCartesianLeviCivitaTensor_1af7f8f379b022f9c0a966a4530df1fdb7" kindref="member">rank</ref>()&gt;</type>
@@ -40,7 +40,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="130" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="130" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="140" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="140" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classCartesianLeviCivitaTensor_1a80cee0d09c3172393519e8e41c8b6ea1" prot="public" static="no">
         <templateparamlist>
@@ -72,7 +72,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="157" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="157" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="167" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="167" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classCartesianLeviCivitaTensor_1ae7185eb318f7179173e61087de4f3008" prot="private" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION constexpr std::size_t</type>
+        <definition>static KOKKOS_FUNCTION constexpr std::size_t CartesianLeviCivitaTensor&lt; ElementType, ValidIndexSet &gt;::compute_size</definition>
+        <argsstring>()</argsstring>
+        <name>compute_size</name>
+        <qualifiedname>CartesianLeviCivitaTensor::compute_size</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="103" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="103" bodyend="110"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -92,7 +108,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="113" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="113" bodyend="116"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="123" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="123" bodyend="126"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianLeviCivitaTensor_1ad70c0f0045352fa847b7861dfbdcefc7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION constexpr std::size_t</type>
@@ -110,7 +126,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="124" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="124" bodyend="127"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="134" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="134" bodyend="137"/>
       </memberdef>
       <memberdef kind="function" id="classCartesianLeviCivitaTensor_1a23f31e27b014ef50783740dc3377d6a7" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -142,7 +158,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="143" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="143" bodyend="149"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="153" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="153" bodyend="159"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -159,7 +175,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="135" column="31"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="145" column="31"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -184,9 +200,10 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="97" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="98" bodyend="158"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" line="97" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/static_tensors.hpp" bodystart="98" bodyend="168"/>
     <listofallmembers>
       <member refid="classCartesianLeviCivitaTensor_1afe409e1296d58dd222a2307757b38574" prot="public" virt="non-virtual"><scope>CartesianLeviCivitaTensor</scope><name>CartesianLeviCivitaTensor</name></member>
+      <member refid="classCartesianLeviCivitaTensor_1ae7185eb318f7179173e61087de4f3008" prot="private" virt="non-virtual"><scope>CartesianLeviCivitaTensor</scope><name>compute_size</name></member>
       <member refid="classCartesianLeviCivitaTensor_1a46108038ed89fc61152be2653c0c41d7" prot="public" virt="non-virtual"><scope>CartesianLeviCivitaTensor</scope><name>element_type</name></member>
       <member refid="classCartesianLeviCivitaTensor_1a23f31e27b014ef50783740dc3377d6a7" prot="public" virt="non-virtual"><scope>CartesianLeviCivitaTensor</scope><name>get</name></member>
       <member refid="classCartesianLeviCivitaTensor_1ae7475b5ff0e11bf3a4328c9ddafe1493" prot="public" virt="non-virtual"><scope>CartesianLeviCivitaTensor</scope><name>index_set</name></member>

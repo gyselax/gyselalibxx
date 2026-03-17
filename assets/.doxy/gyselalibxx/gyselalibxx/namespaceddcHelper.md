@@ -80,9 +80,9 @@
 |  void | [**deepcopy**](#function-deepcopy) ([**MultipatchField**](classMultipatchField.md)&lt; T1, Patches... &gt; dst, [**MultipatchField**](classMultipatchField.md)&lt; T2, Patches... &gt; src) <br>_Copy the data from one_ [_**MultipatchField**_](classMultipatchField.md) _into another._ |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, DField&lt; IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
 |  void | [**dump\_coordinates**](#function-dump_coordinates) (ExecSpace exec\_space, Field&lt; Coord&lt; typename Grid1D::continuous\_dimension\_type &gt;, IdxRange&lt; Grid1D &gt;, Layout, MemorySpace &gt; dump\_coord) <br>_Dump the coordinates of a field into the field._  |
-|  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**IdentityTensor**](classIdentityTensor.md)&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
-|  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md)&lt; ElementType, ValidIndexSet &gt; const & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
-|  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**LeviCivitaTensor**](classLeviCivitaTensor.md)&lt; ElementType, ValidIndexSet &gt; const & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
+|  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**IdentityTensor**](classIdentityTensor.md)&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt; const & tensor) <br>_A helper function to get the value of an element of the tensor._  |
+|  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md)&lt; ElementType, ValidIndexSet &gt; const & tensor) <br>_A helper function to get the value of an element of the tensor._  |
+|  KOKKOS\_INLINE\_FUNCTION constexpr double | [**get**](#function-get) ([**LeviCivitaTensor**](classLeviCivitaTensor.md)&lt; ElementType, ValidIndexSet &gt; const & tensor) <br>_A helper function to get the value of an element of the tensor._  |
 |  KOKKOS\_INLINE\_FUNCTION storage\_type::element\_type & | [**get**](#function-get) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ValidIndexSet... &gt; & tensor) <br>_A helper function to get a modifiable reference to an element of the tensor._  |
 |  KOKKOS\_INLINE\_FUNCTION storage\_type::element\_type const & | [**get**](#function-get) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ValidIndexSet... &gt; const & tensor) <br>_A helper function to get an element of the tensor._  |
 |  constexpr auto | [**get**](#function-get) (VectorFieldType const & field) noexcept<br> |
@@ -496,7 +496,7 @@ inline void ddcHelper::dump_coordinates (
 
 ### function get 
 
-_A helper function to get a modifiable reference to an element of the tensor._ 
+_A helper function to get the value of an element of the tensor._ 
 ```C++
 template<class... QueryIndexTag, class ElementType, class ValidIndexSetRow, class ValidIndexSetCol>
 KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
@@ -538,7 +538,7 @@ The relevant element of the tensor.
 
 ### function get 
 
-_A helper function to get a modifiable reference to an element of the tensor._ 
+_A helper function to get the value of an element of the tensor._ 
 ```C++
 template<class... QueryIndexTag, class ElementType, class ValidIndexSet>
 KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (
@@ -580,7 +580,7 @@ The relevant element of the tensor.
 
 ### function get 
 
-_A helper function to get a modifiable reference to an element of the tensor._ 
+_A helper function to get the value of an element of the tensor._ 
 ```C++
 template<class... QueryIndexTag, class ElementType, class ValidIndexSet>
 KOKKOS_INLINE_FUNCTION constexpr double ddcHelper::get (

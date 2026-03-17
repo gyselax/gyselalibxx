@@ -114,6 +114,7 @@
 * **CurvilinearBasis** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **compute\_twomaxwellian** ([**BumpontailEquilibrium**](classBumpontailEquilibrium.md))
 * **CartesianLeviCivitaTensor** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md))
+* **compute\_size** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md))
 * **CartesianToBarycentric** ([**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **CartesianToCircular** ([**CartesianToCircular**](classCartesianToCircular.md))
 * **CoordJacobian** ([**CartesianToCircular**](classCartesianToCircular.md), [**CartesianToCylindrical**](classCartesianToCylindrical.md), [**CircularToCartesian**](classCircularToCartesian.md), [**CombinedMapping**](classCombinedMapping.md), [**CylindricalToCartesian**](classCylindricalToCartesian.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**IdentityCoordinateChange**](classIdentityCoordinateChange.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md), [**LinearCoordTransform**](classLinearCoordTransform.md), [**OrthogonalCoordTransforms**](classOrthogonalCoordTransforms.md), [**ToroidalToCylindrical**](classToroidalToCylindrical.md))

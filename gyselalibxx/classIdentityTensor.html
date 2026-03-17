@@ -585,7 +585,7 @@
 <td style="text-align: left;"><a href="#typedef-index_set"><strong>index_set</strong></a>  <br><em>The TensorIndexSet describing the possible indices.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef std::conditional_t&lt; dim==0, ValidIndexSetRow, ValidIndexSetCol &gt;</td>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; dim, <a href="classIdentityTensor.html#typedef-index_set"><strong>index_set</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-vector_index_set_t"><strong>vector_index_set_t</strong></a>  <br><em>A helper type alias to get all possible indices along a specified dimension.</em></td>
 </tr>
 </tbody>
@@ -651,7 +651,7 @@
 
 <h3 id="typedef-vector_index_set_t">typedef vector_index_set_t</h3>
 <p><em>A helper type alias to get all possible indices along a specified dimension.</em> </p>
-<pre><code class="language-C++">using IdentityTensor&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt;::vector_index_set_t =  std::conditional_t&lt;dim == 0, ValidIndexSetRow, ValidIndexSetCol&gt;;
+<pre><code class="language-C++">using IdentityTensor&lt; ElementType, ValidIndexSetRow, ValidIndexSetCol &gt;::vector_index_set_t =  ddc::type_seq_element_t&lt;dim, index_set&gt;;
 </code></pre>
 <p><strong>Template parameters:</strong></p>
 <ul>

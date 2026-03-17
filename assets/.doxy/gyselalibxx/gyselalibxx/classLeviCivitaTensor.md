@@ -61,7 +61,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  KOKKOS\_FUNCTION | [**LeviCivitaTensor**](#function-levicivitatensor) (double jacobian) <br>_Construct an uninitialised tensor object._  |
+|  KOKKOS\_FUNCTION | [**LeviCivitaTensor**](#function-levicivitatensor) (ElementType jacobian) <br>_Construct an uninitialised tensor object._  |
 |  KOKKOS\_INLINE\_FUNCTION ElementType | [**get**](#function-get) () const<br>_Get an element of the tensor._  |
 
 
@@ -177,7 +177,7 @@ using LeviCivitaTensor< ElementType, ValidIndexSet >::vector_index_set_t =  Vali
 _Construct an uninitialised tensor object._ 
 ```C++
 inline explicit KOKKOS_FUNCTION LeviCivitaTensor::LeviCivitaTensor (
-    double jacobian
+    ElementType jacobian
 ) 
 ```
 
