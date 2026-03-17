@@ -872,7 +872,7 @@ public:
                                         idx_step_trial_theta_offset_max,
                                         full_idx_range_theta);
                         IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
-                        // If the start is after the start then the periodicity wraps the b-splines
+                        // If the start is after the end then the periodicity wraps the b-splines
                         // first_periodic_idx_trial_theta is modified to fill the wrapped area (at the
                         // right hand side of the block) last.
                         if (first_idx_trial_theta > last_idx_trial_theta) {
