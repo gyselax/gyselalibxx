@@ -824,8 +824,11 @@ public:
 
         const int batch_idx = m_batch_idx;
 
+        const std::source_location location = std::source_location::current();
+
         // Calculate the matrix elements following a stencil
         Kokkos::parallel_for(
+                location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
                         m_idxrange_fem_non_singular.size(),
