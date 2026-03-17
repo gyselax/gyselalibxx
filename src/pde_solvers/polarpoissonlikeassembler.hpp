@@ -608,7 +608,7 @@ public:
                             },
                             element);
                     const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
-                    //Fill the C matrix corresponding to the splines on the singular point
+                    //Fill the dense matrix corresponding to the b-splines on the singular point
                     col_idx_csr(csr_idx_singular_area) = col_idx;
                     values_csr(batch_idx, csr_idx_singular_area) = element;
                 });
@@ -818,6 +818,7 @@ public:
         const std::source_location location = std::source_location::current();
 
         // Calculate the matrix elements following a stencil
+        // Teams loop over rows
         Kokkos::parallel_for(
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
@@ -825,13 +826,17 @@ public:
                         m_idxrange_fem_non_singular.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
                             idxrange_fem_non_singular_front + IdxStepBSPolar {team.league_rank()});
+
+                    // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
                     const IdxBSR idx_test_r(idx_test);
                     const IdxBSTheta idx_test_theta(idx_test);
-                    int const row_idx = idx_test_polar - idxrange_singular.front();
 
+                    // Calculate the offsets to locate all trial b-splines which are non-zero
+                    // somewhere in the support of the test b-spline.
                     IdxStepBSR idx_step_trial_r_offset_min(
                             Kokkos::
                                     max(IdxStepBSR(-BSplinesR::degree()),
@@ -842,12 +847,22 @@ public:
                                         idx_range_fem_r.back() - idx_test_r));
                     IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
                     IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
+
+                    // Calculate the row index and the first possible column index
+                    int const row_idx = idx_test_polar - idxrange_singular.front();
                     int col_offset
                             = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
+
+                    // Loop over the radial offset to a trial b-spline
                     for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
                          idx_step_trial_r < idx_step_trial_r_offset_max;
                          ++idx_step_trial_r) {
                         const IdxBSR idx_trial_r = idx_test_r + idx_step_trial_r;
+
+                        // As theta is periodic the theta component must be split in 2 to
+                        // guarantee that col_idx and values (from the CSR format) are
+                        // filled in order.
+                        // Calculate the start and end of the theta offset
                         IdxBSTheta first_idx_trial_theta = detail_poisson::
                                 mod_add(idx_test_theta,
                                         idx_step_trial_theta_offset_min,
@@ -857,10 +872,14 @@ public:
                                         idx_step_trial_theta_offset_max,
                                         full_idx_range_theta);
                         IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
+                        // If the start is after the start then the periodicity wraps the b-splines
+                        // first_periodic_idx_trial_theta is modified to fill the wrapped area (at the
+                        // right hand side of the block) last.
                         if (first_idx_trial_theta > last_idx_trial_theta) {
                             first_periodic_idx_trial_theta = first_idx_trial_theta;
                             first_idx_trial_theta = full_idx_range_theta.front();
                         }
+                        // Loop over the poloidal offset to a trial b-spline
                         for (IdxBSTheta idx_trial_theta(first_idx_trial_theta);
                              idx_trial_theta < last_idx_trial_theta;
                              ++idx_trial_theta) {
@@ -881,6 +900,8 @@ public:
                             values_csr(batch_idx, aij_idx) = element;
                             col_offset++;
                         }
+                        // Loop over the poloidal offset to a trial b-spline for any elements that
+                        // are to the right of zeros following the elements already set
                         for (IdxBSTheta idx_trial_theta(first_periodic_idx_trial_theta);
                              idx_trial_theta < full_idx_range_theta.back() + 1;
                              ++idx_trial_theta) {
