@@ -801,6 +801,9 @@ public:
                 = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                         IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
 
+        IdxRangeBSR central_radial_bspline_idx_range(
+                m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
+
         IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
 
@@ -811,6 +814,7 @@ public:
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
         const int batch_idx = m_batch_idx;
+        const int n_singular = idxrange_singular.size();
         const std::source_location location = std::source_location::current();
 
         // Calculate the matrix elements following a stencil
@@ -838,7 +842,7 @@ public:
                                         idx_range_fem_r.back() - idx_test_r));
                     IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
                     IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
-                    int col_offset = 0;
+                    int col_offset = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
                     for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
                          idx_step_trial_r < idx_step_trial_r_offset_max;
                          ++idx_step_trial_r) {
