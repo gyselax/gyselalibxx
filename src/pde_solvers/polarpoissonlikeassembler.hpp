@@ -842,19 +842,49 @@ public:
                                         idx_range_fem_r.back() - idx_test_r));
                     IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
                     IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
-                    int col_offset = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
+                    int col_offset
+                            = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
                     for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
                          idx_step_trial_r < idx_step_trial_r_offset_max;
                          ++idx_step_trial_r) {
-                        for (IdxStepBSTheta idx_step_trial_theta(idx_step_trial_theta_offset_min);
-                             idx_step_trial_theta < idx_step_trial_theta_offset_max;
-                             ++idx_step_trial_theta) {
-                            const IdxBSRTheta idx_trial(
-                                    idx_test_r + idx_step_trial_r,
-                                    detail_poisson::
-                                            mod_add(idx_test_theta,
-                                                    idx_step_trial_theta,
-                                                    full_idx_range_theta));
+                        const IdxBSR idx_trial_r = idx_test_r + idx_step_trial_r;
+                        IdxBSTheta first_idx_trial_theta = detail_poisson::
+                                mod_add(idx_test_theta,
+                                        idx_step_trial_theta_offset_min,
+                                        full_idx_range_theta);
+                        const IdxBSTheta last_idx_trial_theta = detail_poisson::
+                                mod_add(idx_test_theta,
+                                        idx_step_trial_theta_offset_max,
+                                        full_idx_range_theta);
+                        IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
+                        if (first_idx_trial_theta > last_idx_trial_theta) {
+                            first_periodic_idx_trial_theta = first_idx_trial_theta;
+                            first_idx_trial_theta = full_idx_range_theta.front();
+                        }
+                        for (IdxBSTheta idx_trial_theta(first_idx_trial_theta);
+                             idx_trial_theta < last_idx_trial_theta;
+                             ++idx_trial_theta) {
+                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
+                            double element = get_matrix_stencil_element(
+                                    team,
+                                    idx_test,
+                                    idx_trial,
+                                    coeff_alpha,
+                                    coeff_beta,
+                                    spline_evaluator,
+                                    mapping,
+                                    full_quad_idx_range,
+                                    int_volume_proxy);
+                            int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
+                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
+                            col_idx_csr(aij_idx) = col_idx;
+                            values_csr(batch_idx, aij_idx) = element;
+                            col_offset++;
+                        }
+                        for (IdxBSTheta idx_trial_theta(first_periodic_idx_trial_theta);
+                             idx_trial_theta < full_idx_range_theta.back() + 1;
+                             ++idx_trial_theta) {
+                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
                             double element = get_matrix_stencil_element(
                                     team,
                                     idx_test,
