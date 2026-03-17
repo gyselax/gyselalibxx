@@ -763,12 +763,6 @@ public:
                 KOKKOS_LAMBDA(const int i) {
                     nnz_per_row_csr(i) += n_overlapping_singular + n_singular;
                 });
-        Kokkos::parallel_for(
-                "to_remove",
-                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(
-                        n_singular + 1,
-                        n_singular + n_overlapping_singular + 1),
-                KOKKOS_LAMBDA(const int i) { nnz_per_row_csr(i) += n_singular; });
     }
     /**
      * @brief Computes the matrix element corresponding to the regular stencil
@@ -822,7 +816,11 @@ public:
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
+        IdxRangeBSR central_radial_bspline_idx_range(
+                m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
+
         const int batch_idx = m_batch_idx;
+        const int n_singular = idxrange_singular.size();
 
         const std::source_location location = std::source_location::current();
 
@@ -875,7 +873,7 @@ public:
                                     full_quad_idx_range,
                                     int_volume_proxy);
                             int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
-                            const int aij_idx = nnz_per_row_csr(row_idx + 1) + col_offset;
+                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
                             col_idx_csr(aij_idx) = col_idx;
                             values_csr(batch_idx, aij_idx) = element;
                             col_offset++;
@@ -883,7 +881,7 @@ public:
                     }
                     Kokkos::single(Kokkos::PerTeam(team), [&]() {
                         nnz_per_row_csr(row_idx + 1)
-                                += (idx_step_trial_r_offset_max - idx_step_trial_r_offset_min)
+                                += n_singular*central_radial_bspline_idx_range.contains(idx_test_r) + (idx_step_trial_r_offset_max - idx_step_trial_r_offset_min)
                                    * (idx_step_trial_theta_offset_max
                                       - idx_step_trial_theta_offset_min);
                     });
