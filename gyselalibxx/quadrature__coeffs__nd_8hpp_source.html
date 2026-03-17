@@ -593,7 +593,9 @@ DFieldMem&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt; quad
     std::tuple&lt;CoefficientField1D&lt;ExecSpace, DDims&gt;...&gt; current_dim_coeffs(get_field(
             std::get&lt;CoefficientFieldMem1D&lt;ExecSpace, DDims&gt;&gt;(current_dim_coeffs_alloc))...);
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             ExecSpace(),
             idx_range,
             KOKKOS_LAMBDA(Idx&lt;DDims...&gt; const idim) {

@@ -128,7 +128,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="47" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="47" bodyend="64"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="47" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="47" bodyend="66"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -139,7 +139,7 @@
 <para>and <formula id="300">$ f_0(x, y) = f_{eq}(x, y) + \varepsilon \cos(kx) $</formula>,</para>
 <para>with <formula id="17">$ \varepsilon $</formula> an amplitude of perturbation and <formula id="301">$ k $</formula> mode equal to <formula id="302">$ 2\pi $</formula> divided by the length of the index range on <formula id="110">$ x $</formula>. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="24" bodyend="65"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/initialisation/initialisation_Kelvin_Helmholtz.hpp" bodystart="24" bodyend="67"/>
     <listofallmembers>
       <member refid="classKelvinHelmholtzInstabilityInitialisation_1a02c15d97613432489efdafaf5b3f3657" prot="public" virt="non-virtual"><scope>KelvinHelmholtzInstabilityInitialisation</scope><name>KelvinHelmholtzInstabilityInitialisation</name></member>
       <member refid="classKelvinHelmholtzInstabilityInitialisation_1aea24b966a750ad0e02d276c3df240d96" prot="private" virt="non-virtual"><scope>KelvinHelmholtzInstabilityInitialisation</scope><name>m_epsilon</name></member>

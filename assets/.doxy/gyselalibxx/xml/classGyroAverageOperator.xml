@@ -623,7 +623,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="160" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="160" bodyend="228"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="160" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="160" bodyend="230"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -667,7 +667,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="32" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="33" bodyend="229"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" line="32" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/gyroaverage/gyroaverage_operator.hpp" bodystart="33" bodyend="231"/>
     <listofallmembers>
       <member refid="classGyroAverageOperator_1a2333d3c4f4327fdaf60d19c0be7b4659" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>BSplinesRminor</name></member>
       <member refid="classGyroAverageOperator_1a1648e1bbc9cf1b44f6314480a2f22c4e" prot="private" virt="non-virtual"><scope>GyroAverageOperator</scope><name>BSplinesTheta</name></member>

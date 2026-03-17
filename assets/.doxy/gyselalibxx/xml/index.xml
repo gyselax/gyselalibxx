@@ -1158,7 +1158,7 @@
     <member refid="classGradient_1a18b2e093f6d021c5297507d1f0a69394" kind="function"><name>operator()</name></member>
     <member refid="classGradient_1a1388160bf8e4ba98bc79760d4729d6ea" kind="function"><name>operator()</name></member>
     <member refid="classGradient_1a91c56b0cb7dc0ec63a708029db468ab4" kind="function"><name>operator()</name></member>
-    <member refid="classGradient_1add6ab7bc7357e5b74821190bc43fc6b5" kind="function"><name>operator()</name></member>
+    <member refid="classGradient_1a275ba4967fb94de83ac117458eeb7eda" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8" kind="struct"><name>FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;::GridFourier</name>
   </compound>

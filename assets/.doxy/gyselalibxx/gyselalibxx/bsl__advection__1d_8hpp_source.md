@@ -158,6 +158,7 @@ public:
 
         // Build spline representation of the advection field ....................................
         AdvecFieldSplineMem advection_field_coefs_alloc(
+                "advection_field_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_adv_field_builder, get_idx_range(advection_field)));
         AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);
 
@@ -169,6 +170,7 @@ public:
 
         // Allocate buffer for the function interpolation coefficients ...........................
         FunctionBasisFieldMem function_coefs_alloc(
+                "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
 
         // Build derivatives on boundaries and fill with zeros....................................
@@ -185,9 +187,12 @@ public:
             need to be defined on the same index range as the advection field. We then work on space
             slices of the characteristic feet.
         */
-        FeetFieldMem slice_feet_alloc(idx_range_advection);
+        FeetFieldMem
+                slice_feet_alloc("slice_feet (BslAdvection1D::operator())", idx_range_advection);
         FeetField slice_feet = get_field(slice_feet_alloc);
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 idx_range_advection,
                 KOKKOS_LAMBDA(IdxAdvection const idx) {
@@ -227,9 +232,11 @@ public:
             To interpolate the function we want to advect, we build for the feet a Field defined
             on the index range where the function is defined.
         */
-        FieldMem<CoordInterest, IdxRangeFunction> feet_alloc(idx_range_function);
+        FieldMem<CoordInterest, IdxRangeFunction>
+                feet_alloc("feet (BslAdvection1D::operator())", idx_range_function);
         Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 idx_range_function,
                 KOKKOS_LAMBDA(IdxFunction const idx) {

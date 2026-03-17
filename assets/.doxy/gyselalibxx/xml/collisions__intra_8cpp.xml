@@ -10,22 +10,22 @@
     <includes refid="fluid__moments_8hpp" local="yes">fluid_moments.hpp</includes>
     <includes refid="matrix__batch__tridiag_8hpp" local="yes">matrix_batch_tridiag.hpp</includes>
     <incdepgraph>
-      <node id="10">
+      <node id="11">
         <label>geometry_xvx.hpp</label>
         <link refid="geometry__xvx_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
-        </childnode>
-        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="15" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
         </childnode>
         <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="18" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -39,11 +39,11 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-        <childnode refid="30" relation="include">
-        </childnode>
         <childnode refid="31" relation="include">
         </childnode>
         <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -57,98 +57,98 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="18" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
       </node>
-      <node id="30">
+      <node id="31">
         <label>collisions_utils.hpp</label>
         <link refid="collisions__utils_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="27" relation="include">
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="29" relation="include">
+        </childnode>
+      </node>
+      <node id="19">
+        <label>irighthandside.hpp</label>
+        <link refid="irighthandside_8hpp_source"/>
+        <childnode refid="11" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>fluid_moments.hpp</label>
+        <link refid="fluid__moments_8hpp_source"/>
+        <childnode refid="11" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
       </node>
-      <node id="18">
-        <label>irighthandside.hpp</label>
-        <link refid="irighthandside_8hpp_source"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-      </node>
-      <node id="31">
-        <label>fluid_moments.hpp</label>
-        <link refid="fluid__moments_8hpp_source"/>
-        <childnode refid="10" relation="include">
-        </childnode>
-        <childnode refid="27" relation="include">
-        </childnode>
-      </node>
-      <node id="21">
+      <node id="22">
         <label>matrix.hpp</label>
         <link refid="matrix_8hpp_source"/>
-        <childnode refid="22" relation="include">
-        </childnode>
-        <childnode refid="20" relation="include">
-        </childnode>
         <childnode refid="23" relation="include">
-        </childnode>
-      </node>
-      <node id="19">
-        <label>matrix_banded.hpp</label>
-        <link refid="matrix__banded_8hpp_source"/>
-        <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="21" relation="include">
         </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
       </node>
-      <node id="33">
+      <node id="20">
+        <label>matrix_banded.hpp</label>
+        <link refid="matrix__banded_8hpp_source"/>
+        <childnode refid="21" relation="include">
+        </childnode>
+        <childnode refid="22" relation="include">
+        </childnode>
+      </node>
+      <node id="34">
         <label>matrix_batch.hpp</label>
         <link refid="matrix__batch_8hpp_source"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="23" relation="include">
+        <childnode refid="24" relation="include">
         </childnode>
       </node>
-      <node id="32">
+      <node id="33">
         <label>matrix_batch_tridiag.hpp</label>
         <link refid="matrix__batch__tridiag_8hpp_source"/>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="33" relation="include">
+        <childnode refid="34" relation="include">
         </childnode>
       </node>
-      <node id="27">
+      <node id="28">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="26" relation="include">
+        <childnode refid="27" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="29">
+      <node id="30">
         <label>quadrature_coeffs_nd.hpp</label>
         <link refid="quadrature__coeffs__nd_8hpp"/>
         <childnode refid="3" relation="include">
@@ -156,38 +156,38 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="28">
+      <node id="29">
         <label>trapezoid_quadrature.hpp</label>
         <link refid="trapezoid__quadrature_8hpp"/>
         <childnode refid="3" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="29" relation="include">
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
-      <node id="15">
+      <node id="16">
         <label>moments.hpp</label>
         <link refid="moments_8hpp_source"/>
       </node>
-      <node id="17">
+      <node id="18">
         <label>species_info.hpp</label>
         <link refid="species__info_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="14" relation="include">
+        <childnode refid="15" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="12">
         <label>ddc_alias_inline_functions.hpp</label>
         <link refid="ddc__alias__inline__functions_8hpp_source"/>
-        <childnode refid="12" relation="include">
-        </childnode>
         <childnode refid="13" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
@@ -197,12 +197,14 @@
       <node id="8">
         <label>ddc_aliases.hpp</label>
         <link refid="ddc__aliases_8hpp_source"/>
-        <childnode refid="3" relation="include">
-        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
-      <node id="14">
+      <node id="15">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -214,7 +216,7 @@
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="16">
+      <node id="17">
         <label>non_uniform_interpolation_points.hpp</label>
         <link refid="non__uniform__interpolation__points_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -223,27 +225,27 @@
         </childnode>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="9" relation="include">
+        <childnode refid="10" relation="include">
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
       </node>
-      <node id="23">
+      <node id="24">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
-        <childnode refid="24" relation="include">
-        </childnode>
         <childnode refid="25" relation="include">
-        </childnode>
-        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="26" relation="include">
         </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="27" relation="include">
+        </childnode>
       </node>
-      <node id="26">
+      <node id="27">
         <label>Kokkos_Core.hpp</label>
       </node>
-      <node id="24">
+      <node id="25">
         <label>array</label>
       </node>
       <node id="6">
@@ -255,7 +257,7 @@
       <node id="3">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="9">
+      <node id="10">
         <label>ddc/kernels/splines.hpp</label>
       </node>
       <node id="4">
@@ -264,19 +266,22 @@
       <node id="2">
         <label>iomanip</label>
       </node>
-      <node id="22">
+      <node id="23">
         <label>iosfwd</label>
       </node>
-      <node id="20">
+      <node id="21">
         <label>memory</label>
       </node>
-      <node id="25">
+      <node id="26">
         <label>ostream</label>
       </node>
-      <node id="12">
-        <label>type_traits</label>
+      <node id="9">
+        <label>source_location</label>
       </node>
       <node id="13">
+        <label>type_traits</label>
+      </node>
+      <node id="14">
         <label>utility</label>
       </node>
     </incdepgraph>
@@ -551,9 +556,9 @@
 <codeline lineno="264"><highlight class="normal"></highlight></codeline>
 <codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSpX<sp/>grid_sp_x(get_idx_range&lt;Species,<sp/>GridX&gt;(allfdistribu));</highlight></codeline>
 <codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>density<sp/>and<sp/>temperature</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>density_alloc(grid_sp_x);</highlight></codeline>
-<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>fluid_velocity_alloc(grid_sp_x);</highlight></codeline>
-<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>temperature_alloc(grid_sp_x);</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>density_alloc(</highlight><highlight class="stringliteral">&quot;density<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>grid_sp_x);</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>fluid_velocity_alloc(</highlight><highlight class="stringliteral">&quot;fluid_velocity<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>grid_sp_x);</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>temperature_alloc(</highlight><highlight class="stringliteral">&quot;temperature<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>grid_sp_x);</highlight></codeline>
 <codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>density<sp/>=<sp/>get_field(density_alloc);</highlight></codeline>
 <codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>fluid_velocity<sp/>=<sp/>get_field(fluid_velocity_alloc);</highlight></codeline>
 <codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>temperature<sp/>=<sp/>get_field(temperature_alloc);</highlight></codeline>
@@ -586,7 +591,7 @@
 <codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>});</highlight></codeline>
 <codeline lineno="300"><highlight class="normal"></highlight></codeline>
 <codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>collision<sp/>frequency</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>collfreq_alloc(grid_sp_x);</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>collfreq_alloc(</highlight><highlight class="stringliteral">&quot;collfreq<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>grid_sp_x);</highlight></codeline>
 <codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>collfreq<sp/>=<sp/>get_field(collfreq_alloc);</highlight></codeline>
 <codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_collfreq(</highlight></codeline>
 <codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>collfreq,</highlight></codeline>
@@ -595,7 +600,7 @@
 <codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(temperature));</highlight></codeline>
 <codeline lineno="309"><highlight class="normal"></highlight></codeline>
 <codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>diffusion<sp/>coefficient</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeSpXVx_ghosted&gt;<sp/>Dcoll_alloc(m_mesh_ghosted);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeSpXVx_ghosted&gt;<sp/>Dcoll_alloc(</highlight><highlight class="stringliteral">&quot;Dcoll<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>m_mesh_ghosted);</highlight></codeline>
 <codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRangeSpXVx_ghosted&gt;<sp/>Dcoll<sp/>=<sp/>get_field(Dcoll_alloc);</highlight></codeline>
 <codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_Dcoll&lt;GhostedVx&gt;(</highlight></codeline>
 <codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Dcoll,</highlight></codeline>
@@ -603,78 +608,81 @@
 <codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(density),</highlight></codeline>
 <codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(temperature));</highlight></codeline>
 <codeline lineno="318"><highlight class="normal"></highlight></codeline>
-<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeSpXVx_ghosted&gt;<sp/>dvDcoll_alloc(m_mesh_ghosted);</highlight></codeline>
-<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRangeSpXVx_ghosted&gt;<sp/>dvDcoll<sp/>=<sp/>get_field(dvDcoll_alloc);</highlight></codeline>
-<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_dvDcoll&lt;GhostedVx&gt;(</highlight></codeline>
-<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dvDcoll,</highlight></codeline>
-<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(collfreq),</highlight></codeline>
-<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(density),</highlight></codeline>
-<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(temperature));</highlight></codeline>
-<codeline lineno="326"><highlight class="normal"></highlight></codeline>
-<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeSpXVx_ghosted_staggered&gt;<sp/>Dcoll_staggered_alloc(m_mesh_ghosted_staggered);</highlight></codeline>
-<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRangeSpXVx_ghosted_staggered&gt;<sp/>Dcoll_staggered<sp/>=<sp/>get_field(Dcoll_staggered_alloc);</highlight></codeline>
-<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_Dcoll&lt;GhostedVxStaggered&gt;(</highlight></codeline>
-<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Dcoll_staggered,</highlight></codeline>
-<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(collfreq),</highlight></codeline>
-<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(density),</highlight></codeline>
-<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(temperature));</highlight></codeline>
-<codeline lineno="334"><highlight class="normal"></highlight></codeline>
-<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>kernel<sp/>maxwellian<sp/>fluid<sp/>moments</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>Vcoll_alloc(grid_sp_x);</highlight></codeline>
-<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>Tcoll_alloc(grid_sp_x);</highlight></codeline>
-<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>Vcoll<sp/>=<sp/>get_field(Vcoll_alloc);</highlight></codeline>
-<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>Tcoll<sp/>=<sp/>get_field(Tcoll_alloc);</highlight></codeline>
-<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_Vcoll_Tcoll&lt;GhostedVx&gt;(Vcoll,<sp/>Tcoll,<sp/>get_const_field(allfdistribu),<sp/>Dcoll,<sp/>dvDcoll);</highlight></codeline>
-<codeline lineno="341"><highlight class="normal"></highlight></codeline>
-<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>convection<sp/>coefficient<sp/>Nucoll</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeSpXVx_ghosted&gt;<sp/>Nucoll_alloc(m_mesh_ghosted);</highlight></codeline>
-<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRangeSpXVx_ghosted&gt;<sp/>Nucoll<sp/>=<sp/>get_field(Nucoll_alloc);</highlight></codeline>
-<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_Nucoll&lt;GhostedVx&gt;(Nucoll,<sp/>Dcoll,<sp/>get_const_field(Vcoll),<sp/>get_const_field(Tcoll));</highlight></codeline>
-<codeline lineno="346"><highlight class="normal"></highlight></codeline>
-<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>matrix<sp/>coefficients</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>AA_alloc(get_idx_range(allfdistribu));</highlight></codeline>
-<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>BB_alloc(get_idx_range(allfdistribu));</highlight></codeline>
-<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>CC_alloc(get_idx_range(allfdistribu));</highlight></codeline>
-<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>AA<sp/>=<sp/>get_field(AA_alloc);</highlight></codeline>
-<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>BB<sp/>=<sp/>get_field(BB_alloc);</highlight></codeline>
-<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>CC<sp/>=<sp/>get_field(CC_alloc);</highlight></codeline>
-<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsIntra_1aa3c59137d3bc0e30d7ca9b413039b050" kindref="member">compute_matrix_coeff</ref>(AA,<sp/>BB,<sp/>CC,<sp/>Dcoll,<sp/>Dcoll_staggered,<sp/>Nucoll,<sp/>dt);</highlight></codeline>
-<codeline lineno="355"><highlight class="normal"></highlight></codeline>
-<codeline lineno="356"><highlight class="normal"></highlight></codeline>
-<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>rhs<sp/>vector<sp/>coefficient</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="358"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>RR_alloc(get_idx_range(allfdistribu));</highlight></codeline>
-<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>RR<sp/>=<sp/>get_field(RR_alloc);</highlight></codeline>
-<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsIntra_1a21406b811ef83d4f90a80c0139ddb5de" kindref="member">compute_rhs_vector</ref>(</highlight></codeline>
-<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RR,</highlight></codeline>
-<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(AA),</highlight></codeline>
-<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(BB),</highlight></codeline>
-<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(CC),</highlight></codeline>
-<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(allfdistribu),</highlight></codeline>
-<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_fthresh);</highlight></codeline>
-<codeline lineno="367"><highlight class="normal"></highlight></codeline>
-<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>batch_size<sp/>=<sp/>get_idx_range&lt;Species,<sp/>GridX&gt;(allfdistribu).size();</highlight></codeline>
-<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>mat_size<sp/>=<sp/>get_idx_range&lt;GridVx&gt;(allfdistribu).size();</highlight></codeline>
-<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Here<sp/>we<sp/>do<sp/>not<sp/>use<sp/>allocation_kokkos_view()<sp/>ddc<sp/>function<sp/>since<sp/>we<sp/>change<sp/>the<sp/>shape<sp/></highlight></codeline>
-<codeline lineno="371"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>from<sp/>(Sp,X,Vx)--&gt;(batch_dim,Vx)*/</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::View&lt;double**,<sp/>Kokkos::LayoutRight,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
-<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AA_view(AA.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
-<codeline lineno="374"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::View&lt;double**,<sp/>Kokkos::LayoutRight,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
-<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BB_view(BB.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
-<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::View&lt;double**,<sp/>Kokkos::LayoutRight,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
-<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CC_view(CC.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
-<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::View&lt;double**,<sp/>Kokkos::LayoutRight,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
-<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RR_view(RR.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
-<codeline lineno="380"><highlight class="normal"></highlight></codeline>
-<codeline lineno="381"><highlight class="normal"></highlight></codeline>
-<codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrixBatchTridiag" kindref="compound">MatrixBatchTridiag&lt;Kokkos::DefaultExecutionSpace&gt;</ref></highlight></codeline>
-<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>matrix(batch_size,<sp/>mat_size,<sp/>AA_view,<sp/>BB_view,<sp/>CC_view);</highlight></codeline>
-<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix.setup_solver();</highlight></codeline>
-<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix.solve(RR_view);</highlight></codeline>
-<codeline lineno="386"><highlight class="normal"></highlight></codeline>
-<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(allfdistribu,<sp/>RR);</highlight></codeline>
-<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::popRegion();</highlight></codeline>
-<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>allfdistribu;</highlight></codeline>
-<codeline lineno="390"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeSpXVx_ghosted&gt;</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dvDcoll_alloc(</highlight><highlight class="stringliteral">&quot;dvDcoll<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>m_mesh_ghosted);</highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRangeSpXVx_ghosted&gt;<sp/>dvDcoll<sp/>=<sp/>get_field(dvDcoll_alloc);</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_dvDcoll&lt;GhostedVx&gt;(</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>dvDcoll,</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(collfreq),</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(density),</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(temperature));</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeSpXVx_ghosted_staggered&gt;<sp/>Dcoll_staggered_alloc(</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;Dcoll_staggered<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_mesh_ghosted_staggered);</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRangeSpXVx_ghosted_staggered&gt;<sp/>Dcoll_staggered<sp/>=<sp/>get_field(Dcoll_staggered_alloc);</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_Dcoll&lt;GhostedVxStaggered&gt;(</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Dcoll_staggered,</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(collfreq),</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(density),</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(temperature));</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"></highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>kernel<sp/>maxwellian<sp/>fluid<sp/>moments</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>Vcoll_alloc(</highlight><highlight class="stringliteral">&quot;Vcoll<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>grid_sp_x);</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>Tcoll_alloc(</highlight><highlight class="stringliteral">&quot;Tcoll<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>grid_sp_x);</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>Vcoll<sp/>=<sp/>get_field(Vcoll_alloc);</highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpX<sp/>Tcoll<sp/>=<sp/>get_field(Tcoll_alloc);</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_Vcoll_Tcoll&lt;GhostedVx&gt;(Vcoll,<sp/>Tcoll,<sp/>get_const_field(allfdistribu),<sp/>Dcoll,<sp/>dvDcoll);</highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>convection<sp/>coefficient<sp/>Nucoll</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeSpXVx_ghosted&gt;<sp/>Nucoll_alloc(</highlight><highlight class="stringliteral">&quot;Nucoll<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>m_mesh_ghosted);</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/>DField&lt;IdxRangeSpXVx_ghosted&gt;<sp/>Nucoll<sp/>=<sp/>get_field(Nucoll_alloc);</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/>compute_Nucoll&lt;GhostedVx&gt;(Nucoll,<sp/>Dcoll,<sp/>get_const_field(Vcoll),<sp/>get_const_field(Tcoll));</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>matrix<sp/>coefficients</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>AA_alloc(</highlight><highlight class="stringliteral">&quot;AA<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>get_idx_range(allfdistribu));</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>BB_alloc(</highlight><highlight class="stringliteral">&quot;BB<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>get_idx_range(allfdistribu));</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>CC_alloc(</highlight><highlight class="stringliteral">&quot;CC<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>get_idx_range(allfdistribu));</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>AA<sp/>=<sp/>get_field(AA_alloc);</highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>BB<sp/>=<sp/>get_field(BB_alloc);</highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>CC<sp/>=<sp/>get_field(CC_alloc);</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsIntra_1aa3c59137d3bc0e30d7ca9b413039b050" kindref="member">compute_matrix_coeff</ref>(AA,<sp/>BB,<sp/>CC,<sp/>Dcoll,<sp/>Dcoll_staggered,<sp/>Nucoll,<sp/>dt);</highlight></codeline>
+<codeline lineno="358"><highlight class="normal"></highlight></codeline>
+<codeline lineno="359"><highlight class="normal"></highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>rhs<sp/>vector<sp/>coefficient</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpXVx<sp/>RR_alloc(</highlight><highlight class="stringliteral">&quot;RR<sp/>(collisions_intra.cpp)&quot;</highlight><highlight class="normal">,<sp/>get_idx_range(allfdistribu));</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldSpXVx<sp/>RR<sp/>=<sp/>get_field(RR_alloc);</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classCollisionsIntra_1a21406b811ef83d4f90a80c0139ddb5de" kindref="member">compute_rhs_vector</ref>(</highlight></codeline>
+<codeline lineno="364"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RR,</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(AA),</highlight></codeline>
+<codeline lineno="366"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(BB),</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(CC),</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_const_field(allfdistribu),</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>m_fthresh);</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"></highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>batch_size<sp/>=<sp/>get_idx_range&lt;Species,<sp/>GridX&gt;(allfdistribu).size();</highlight></codeline>
+<codeline lineno="372"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>mat_size<sp/>=<sp/>get_idx_range&lt;GridVx&gt;(allfdistribu).size();</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>Here<sp/>we<sp/>do<sp/>not<sp/>use<sp/>allocation_kokkos_view()<sp/>ddc<sp/>function<sp/>since<sp/>we<sp/>change<sp/>the<sp/>shape<sp/></highlight></codeline>
+<codeline lineno="374"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/>from<sp/>(Sp,X,Vx)--&gt;(batch_dim,Vx)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::View&lt;double**,<sp/>Kokkos::LayoutRight,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>AA_view(AA.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::View&lt;double**,<sp/>Kokkos::LayoutRight,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>BB_view(BB.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::View&lt;double**,<sp/>Kokkos::LayoutRight,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
+<codeline lineno="380"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>CC_view(CC.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::View&lt;double**,<sp/>Kokkos::LayoutRight,<sp/>Kokkos::DefaultExecutionSpace&gt;</highlight></codeline>
+<codeline lineno="382"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>RR_view(RR.data_handle(),<sp/>batch_size,<sp/>mat_size);</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"></highlight></codeline>
+<codeline lineno="384"><highlight class="normal"></highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMatrixBatchTridiag" kindref="compound">MatrixBatchTridiag&lt;Kokkos::DefaultExecutionSpace&gt;</ref></highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>matrix(batch_size,<sp/>mat_size,<sp/>AA_view,<sp/>BB_view,<sp/>CC_view);</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix.setup_solver();</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/>matrix.solve(RR_view);</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"></highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(allfdistribu,<sp/>RR);</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::popRegion();</highlight></codeline>
+<codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>allfdistribu;</highlight></codeline>
+<codeline lineno="393"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/rhs/collisions_intra.cpp"/>
   </compounddef>

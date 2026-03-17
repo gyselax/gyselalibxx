@@ -583,7 +583,9 @@ DFieldMem&lt;IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt; trapez
                       .remove(IdxStep&lt;Grid1D&gt;(1),
                               IdxStep&lt;Grid1D&gt;(!Grid1D::continuous_dimension_type::PERIODIC));
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             ExecSpace(),
             middle_idx_range,
             KOKKOS_LAMBDA(Idx&lt;Grid1D&gt; const idx) {

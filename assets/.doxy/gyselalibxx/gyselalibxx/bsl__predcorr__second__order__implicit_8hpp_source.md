@@ -206,7 +206,9 @@ public:
                     ddcHelper::get<Y>(get_const_field(advection_field)));
 
             // initialisation:
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -233,6 +235,7 @@ public:
 
             // Compute the new advection field (E^n(X^n) + E^n(X^P)) /2:
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -250,6 +253,7 @@ public:
 
             // --- advect also the feet because it is needed for the next step
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -283,6 +287,7 @@ public:
 
             // initialisation:
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -308,6 +313,7 @@ public:
 
             // Computed advection field (A^P(X^n) + A^P(X^P)) /2:
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -374,7 +380,9 @@ public:
                     ddcHelper::get<Y>(advection_field_coefs_k));
 
             // Compute the new advection field A(X^n) + A(X^{k-1}):
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -389,6 +397,7 @@ public:
 
             // X^k = X^n - dt* X^k:
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -400,6 +409,7 @@ public:
             // Convergence test:
             LogicalToPhysicalMapping logical_to_physical_proxy = m_logical_to_physical;
             square_difference_feet = ddc::parallel_transform_reduce(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     0.0,

@@ -730,7 +730,9 @@ public:
     void fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
     {
         // Fill the field with correct layout.
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(function_and_derivs),
                 KOKKOS_LAMBDA(Idx&lt;Grid1, Grid2&gt; const idx) {
@@ -743,7 +745,9 @@ public:
             DerivFieldType function_and_derivs,
             Idx&lt;Grid1&gt; idx_slice) const
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(deriv1),
                 KOKKOS_LAMBDA(Idx&lt;Deriv1, Grid2&gt; const idx) {
@@ -756,7 +760,9 @@ public:
             DerivFieldType function_and_derivs,
             Idx&lt;Grid2&gt; idx_slice) const
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(deriv2),
                 KOKKOS_LAMBDA(Idx&lt;Grid1, Deriv2&gt; const idx) {
@@ -770,7 +776,9 @@ public:
             Idx&lt;Grid1&gt; idx_slice_1,
             Idx&lt;Grid2&gt; idx_slice_2) const
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 get_idx_range(cross_deriv),
                 KOKKOS_LAMBDA(Idx&lt;Deriv1, Deriv2&gt; idx_derivs) {
                     cross_deriv(idx_derivs)

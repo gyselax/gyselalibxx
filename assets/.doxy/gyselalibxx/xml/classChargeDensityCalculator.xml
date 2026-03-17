@@ -106,7 +106,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.hpp" line="39" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.cpp" bodystart="9" bodyend="41"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.hpp" line="39" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.cpp" bodystart="9" bodyend="43"/>
       </memberdef>
       <memberdef kind="function" id="classChargeDensityCalculator_1a384d7a001ede75b2ccf2053e299ceba9" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
@@ -177,7 +177,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/chargedensitycalculator.hpp" line="38" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/chargedensitycalculator.cpp" bodystart="12" bodyend="46"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/chargedensitycalculator.hpp" line="38" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson/chargedensitycalculator.cpp" bodystart="12" bodyend="48"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

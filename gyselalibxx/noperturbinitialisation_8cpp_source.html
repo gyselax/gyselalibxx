@@ -581,7 +581,9 @@ DFieldSpVparMu NoPerturbInitialisation::operator()(DFieldSpVparMu const allfdist
     IdxRangeSpVparMu const idxrange_spvparmu = get_idx_range(allfdistribu);
 
     DConstFieldSpVparMu fequilibrium_proxy = get_field(m_fequilibrium);
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             idxrange_spvparmu,
             KOKKOS_LAMBDA(IdxSpVparMu const ispvparmu) {

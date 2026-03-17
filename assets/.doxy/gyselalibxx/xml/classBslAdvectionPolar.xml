@@ -652,7 +652,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="160" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="160" bodyend="187"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="160" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="160" bodyend="191"/>
       </memberdef>
       <memberdef kind="function" id="classBslAdvectionPolar_1a9b6adb162851ad7a823eef10716eab07" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>DFieldFDistribu</type>
@@ -721,7 +721,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="211" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="211" bodyend="260"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="215" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="215" bodyend="271"/>
       </memberdef>
       <memberdef kind="function" id="classBslAdvectionPolar_1a52f2664379eeb2d3a47ea93fbfb9238e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>DFieldFDistribu</type>
@@ -777,7 +777,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="283" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="283" bodyend="371"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="294" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="294" bodyend="390"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -797,7 +797,7 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="55" bodyend="372"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp" bodystart="55" bodyend="391"/>
     <listofallmembers>
       <member refid="classBslAdvectionPolar_1abe7f0ff58d6edbc35e60f37a9600d10c" prot="public" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>BslAdvectionPolar</name></member>
       <member refid="classBslAdvectionPolar_1a739c5c224b11f13194450b14c2b28095" prot="private" virt="non-virtual"><scope>BslAdvectionPolar</scope><name>CartesianBasis</name></member>

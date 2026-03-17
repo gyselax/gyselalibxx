@@ -434,7 +434,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="195" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="195" bodyend="204"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="195" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="195" bodyend="206"/>
       </memberdef>
       <memberdef kind="function" id="classSplineBuliderDerivField2D_1a1abd8724064d97b3cc4e49c7d3f6b212" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -487,7 +487,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="213" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="213" bodyend="224"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="215" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="215" bodyend="228"/>
       </memberdef>
       <memberdef kind="function" id="classSplineBuliderDerivField2D_1a9df363ba433e1c5e276fd747c193583e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -540,7 +540,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="233" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="233" bodyend="244"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="237" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="237" bodyend="250"/>
       </memberdef>
       <memberdef kind="function" id="classSplineBuliderDerivField2D_1a0bb44474e00453075e52b61d8f251951" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -605,7 +605,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="256" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="256" bodyend="268"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="262" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="262" bodyend="276"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -615,7 +615,7 @@
 <para><ref refid="classDerivField" kindref="compound">DerivField</ref> stores the values and the derivatives of a function. The inputs of the SplineBuilder2D are on different layouts than the fields we can get from the <ref refid="classDerivField" kindref="compound">DerivField</ref>. <ref refid="classSplineBuliderDerivField2D" kindref="compound">SplineBuliderDerivField2D</ref> allows to directly apply a stored SplineBuilder2D to a <ref refid="classDerivField" kindref="compound">DerivField</ref> by copying data in fields with correct layout.</para>
 <para>Implemented only for 2D case. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="34" bodyend="269"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp" bodystart="34" bodyend="277"/>
     <listofallmembers>
       <member refid="classSplineBuliderDerivField2D_1a370176a149d41646f3776ca72b6be7c0" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>Builder2D</name></member>
       <member refid="classSplineBuliderDerivField2D_1a8f97b3ebd8253d046ffe03aa96a4589c" prot="private" virt="non-virtual"><scope>SplineBuliderDerivField2D</scope><name>CrossDerivConstField</name></member>

@@ -85,9 +85,12 @@ public:
         IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
 
         // pre-allocate some memory to prevent allocation later in loop
-        FieldMem<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
+        FieldMem<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords_alloc(
+                "feet_coords (BslAdvectionVelocity::operator())",
+                batched_feet_idx_range);
         Field<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
         DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
+                "function_coefs (BslAdvectionVelocity::operator())",
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);
@@ -96,7 +99,9 @@ public:
             DataType const charge_proxy
                     = charge(isp); // TODO: consider proper way to access charge from device
             DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
                     KOKKOS_LAMBDA(IdxBatch const ib) {

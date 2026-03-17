@@ -22,12 +22,17 @@
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
-      </node>
-      <node id="4">
-        <label>ddc/ddc.hpp</label>
+        <childnode refid="6" relation="include">
+        </childnode>
       </node>
       <node id="5">
+        <label>ddc/ddc.hpp</label>
+      </node>
+      <node id="6">
         <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="4">
+        <label>source_location</label>
       </node>
       <node id="2">
         <label>type_traits</label>

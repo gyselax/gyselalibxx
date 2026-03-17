@@ -671,7 +671,9 @@ public:
         static_assert(Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible);
         static_assert(std::is_same_v&lt;R, typename GridR::continuous_dimension_type&gt;);
         static_assert(std::is_same_v&lt;Theta, typename GridTheta::continuous_dimension_type&gt;);
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space,
                 get_idx_range(coords),
                 KOKKOS_CLASS_LAMBDA(IdxRTheta idx) {
@@ -790,7 +792,9 @@ public:
             Field&lt;Coord&lt;X, Y&gt;, IdxRange&lt;BSplineR, BSplineTheta&gt;, MemorySpace&gt; pts) const
     {
         static_assert(Kokkos::SpaceAccessibility&lt;ExecSpace, MemorySpace&gt;::accessible);
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space,
                 get_idx_range(pts),
                 KOKKOS_CLASS_LAMBDA(Idx&lt;BSplineR, BSplineTheta&gt; idx) {

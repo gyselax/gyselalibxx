@@ -443,7 +443,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" line="134" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" bodystart="134" bodyend="154"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" line="134" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" bodystart="134" bodyend="156"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -485,7 +485,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" bodystart="23" bodyend="155"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_mapping_builder.hpp" bodystart="23" bodyend="157"/>
     <listofallmembers>
       <member refid="classDiscreteToCartesianBuilder_1a0436b5afe292e723f5db3570c56f211d" prot="private" virt="non-virtual"><scope>DiscreteToCartesianBuilder</scope><name>BSplinesR</name></member>
       <member refid="classDiscreteToCartesianBuilder_1a9d8349559b7316fd87006b13a41fa3fb" prot="private" virt="non-virtual"><scope>DiscreteToCartesianBuilder</scope><name>BSplinesTheta</name></member>

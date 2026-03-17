@@ -25,7 +25,7 @@
         </childnode>
         <childnode refid="8" relation="include">
         </childnode>
-        <childnode refid="10" relation="include">
+        <childnode refid="11" relation="include">
         </childnode>
       </node>
       <node id="5">
@@ -43,17 +43,19 @@
       <node id="8">
         <label>ddc_aliases.hpp</label>
         <link refid="ddc__aliases_8hpp_source"/>
-        <childnode refid="4" relation="include">
-        </childnode>
         <childnode refid="9" relation="include">
         </childnode>
+        <childnode refid="4" relation="include">
+        </childnode>
+        <childnode refid="10" relation="include">
+        </childnode>
       </node>
-      <node id="10">
+      <node id="11">
         <label>ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
-        <childnode refid="11" relation="include">
-        </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="4" relation="include">
         </childnode>
@@ -63,17 +65,20 @@
       <node id="2">
         <label>array</label>
       </node>
-      <node id="11">
+      <node id="12">
         <label>cassert</label>
       </node>
-      <node id="12">
+      <node id="13">
         <label>cmath</label>
       </node>
       <node id="4">
         <label>ddc/ddc.hpp</label>
       </node>
-      <node id="9">
+      <node id="10">
         <label>ddc/kernels/splines.hpp</label>
+      </node>
+      <node id="9">
+        <label>source_location</label>
       </node>
       <node id="6">
         <label>type_traits</label>

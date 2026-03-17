@@ -29,7 +29,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="332" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="332" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="338" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="338" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1aa238a8fb325126a81a31cd8fc6a436cc" prot="public" static="no">
         <templateparamlist>
@@ -52,7 +52,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="336" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="337" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="342" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="343" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="ddc__helper_8hpp_1a8fe773985cd825fa9ddac001aef03324" prot="public" static="no">
         <templateparamlist>
@@ -72,7 +72,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="341" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="341" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="347" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="347" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
@@ -1069,7 +1069,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="149" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="149" bodyend="157"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="149" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="149" bodyend="159"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1a3b54b16fd66648bf6dd0376da991f596" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1124,7 +1124,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="166" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="166" bodyend="177"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="168" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="168" bodyend="181"/>
       </memberdef>
       <memberdef kind="function" id="ddc__helper_8hpp_1a9e2ce2d2ae35d41cf6d260b465560976" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1160,7 +1160,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="188" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="188" bodyend="206"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="192" column="8" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="192" bodyend="212"/>
       </memberdef>
       <memberdef kind="function" id="transpose_8hpp_1a427b2ef16466ccf26ea2f81563bbedb4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1223,7 +1223,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp" line="103" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp" bodystart="103" bodyend="118"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp" line="107" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp" bodystart="107" bodyend="123"/>
       </memberdef>
       <memberdef kind="function" id="transpose_8hpp_1a46df5800c3318a0b386395442dce6ba8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1286,7 +1286,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp" line="137" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp" bodystart="137" bodyend="151"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp" line="142" column="6" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp" bodystart="142" bodyend="157"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

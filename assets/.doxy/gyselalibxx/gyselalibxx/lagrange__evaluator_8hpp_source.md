@@ -158,8 +158,9 @@ public:
         using IdxBatchInterpolation =
                 typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
-                "Lagrange_evaluate",
+                location.function_name(),
                 exec_space(),
                 batch_idx_range,
                 KOKKOS_CLASS_LAMBDA(IdxBatchInterpolation const j) {
@@ -183,8 +184,9 @@ public:
         batch_idx_range_type<BatchedInterpolationIdxRange> const batch_idx_range(
                 get_idx_range(lagrange_eval));
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
-                "lagrange_evaluate",
+                location.function_name(),
                 exec_space(),
                 batch_idx_range,
                 KOKKOS_CLASS_LAMBDA(typename batch_idx_range_type<

@@ -398,11 +398,13 @@ public:
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
+        const std::source_location location = std::source_location::current();
         // Calculate the matrix elements corresponding to the B-splines which cover the singular point
         ddc::host_for_each(idxrange_singular, [&](IdxBSPolar const idx_test) {
             ddc::host_for_each(idxrange_singular, [&](IdxBSPolar const idx_trial) {
                 // Calculate the weak integral
                 double const element = ddc::parallel_transform_reduce(
+                        location.function_name(),
                         Kokkos::DefaultExecutionSpace(),
                         idx_range_quad_singular,
                         0.0,
@@ -491,7 +493,9 @@ public:
                                 m_idxrange_quadrature.front());
                 assert(quad_range.size() > 0);
                 // Calculate the weak integral
+                const std::source_location location = std::source_location::current();
                 double element = ddc::parallel_transform_reduce(
+                        location.function_name(),
                         Kokkos::DefaultExecutionSpace(),
                         quad_range,
                         0.0,
@@ -736,7 +740,9 @@ public:
         const IdxBSPolar idx_test_polar(to_polar(idx_test));
         const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
 
+        const std::source_location location = std::source_location::current();
         return ddc::parallel_transform_reduce(
+                location.function_name(),
                 quad_range,
                 0.0,
                 ddc::reducer::sum<double>(),

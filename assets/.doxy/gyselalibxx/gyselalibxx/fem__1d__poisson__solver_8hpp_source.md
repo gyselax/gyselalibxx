@@ -217,7 +217,9 @@ public:
         m_spline_fem_evaluator(phi, get_const_field(phi_coefs));
         m_spline_fem_evaluator.deriv(Idx<ddc::Deriv<PDEDim>>(1), E, get_const_field(phi_coefs));
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(phi),
                 KOKKOS_LAMBDA(full_index const idx) { E(idx) = -E(idx); });
@@ -367,7 +369,9 @@ public:
         // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
         // Rk: phi_rhs no longer contains spline coefficients, but is the
         //     RHS of the matrix equation
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 rhs_build_idx_range,
                 KOKKOS_LAMBDA(IdxRHSQuadrature const idx) {
@@ -419,7 +423,9 @@ public:
             IdxFEMBSplines first_repeat_bspline(ddc::discrete_space<FEMBSplines>().nbasis());
             // Copy the first d coefficients into the last d coefficients
             // These coefficients refer to the same InputBSplines which cross the boundaries
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     exec_space(),
                     batch_idx_range,
                     KOKKOS_LAMBDA(batch_index_type ib) {

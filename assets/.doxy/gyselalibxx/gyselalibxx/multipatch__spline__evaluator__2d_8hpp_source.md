@@ -317,7 +317,9 @@ public:
                 typename batched_evaluation_idx_range_type<StoringPatch>::discrete_element_type;
         batched_evaluation_idx_range_type<StoringPatch> idx_range = get_idx_range(patch_values);
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {
@@ -358,7 +360,9 @@ public:
         ddc::integrals(exec_space(), values1);
         ddc::integrals(exec_space(), values2);
 
+        const std::source_location location = std::source_location::current();
         integral = ddc::parallel_transform_reduce(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(spline_coef),
                 0.0,

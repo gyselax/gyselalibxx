@@ -347,7 +347,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="133" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="133" bodyend="153"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="133" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="133" bodyend="155"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -373,7 +373,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="30" bodyend="154"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/lie_poisson_bracket.hpp" bodystart="30" bodyend="156"/>
     <listofallmembers>
       <member refid="classLiePoissonBracket_1ad4f13fd2924cd042582abb251b766055" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>BasisSpatial</name></member>
       <member refid="classLiePoissonBracket_1a76ca386b6c4baa90e13d482ae634cde4" prot="private" virt="non-virtual"><scope>LiePoissonBracket</scope><name>CovBasisSpatial</name></member>
