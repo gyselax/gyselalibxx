@@ -416,7 +416,9 @@ public:
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
         IdxRangeQuadratureTheta full_quad_idx_range_theta(full_quad_idx_range);
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 m_idxrange_fem_non_singular,
                 KOKKOS_LAMBDA(IdxBSPolar const idx) {
                     const IdxBSRTheta idx_2d(PolarBSplinesRTheta::get_2d_index(idx));
@@ -485,6 +487,7 @@ public:
 
         // Fill the spline
         ddc::parallel_for_each(
+                location.function_name(),
                 polar_bspl_idx_range,
                 KOKKOS_LAMBDA(IdxBSPolar const idx) { spline(idx) = x_init(batch_idx, idx); });
         ddc::parallel_fill(spline[bc_polar_bspl_idx_range], 0.0);

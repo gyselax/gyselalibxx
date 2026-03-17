@@ -210,7 +210,9 @@ public:
 
         // Solve Poisson's equation -\Delta phi = -(\sum_j \partial_j^2) \phi = rho
         //   in Fourier space as -(\sum_j i*k_i * i*k_i) FFT(Phi) = FFT(rho))
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 k_mesh,
                 KOKKOS_LAMBDA(fourier_index_type const ik) {
@@ -236,7 +238,9 @@ public:
             const
     {
         Kokkos::complex<DataType> imaginary_unit(0.0, 1.0);
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(values),
                 KOKKOS_LAMBDA(fourier_index_type const ik) {

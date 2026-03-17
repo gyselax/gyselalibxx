@@ -45,7 +45,9 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
 
     //Moments computation
     ddc::parallel_fill(density, 0.);
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             grid_sp_x,
             KOKKOS_LAMBDA(IdxSpX const ispx) {
@@ -88,6 +90,7 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
     DFieldMemSpXVx fmaxwellian_alloc(get_idx_range(allfdistribu));
     DFieldSpXVx fmaxwellian = get_field(fmaxwellian_alloc);
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {
@@ -105,6 +108,7 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
 
 
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(allfdistribu),
             KOKKOS_LAMBDA(IdxSpXVx const ispxvx) {

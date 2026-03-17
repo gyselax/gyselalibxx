@@ -29,7 +29,9 @@ DFieldX ChargeDensityCalculator::operator()(DFieldX const rho, DConstFieldSpXVx 
     if (last_kin_species != last_species) {
         double const chargedens_adiabspecies = charge(last_species);
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 get_idx_range(rho),
                 KOKKOS_LAMBDA(IdxX ix) { rho(ix) += chargedens_adiabspecies; });
