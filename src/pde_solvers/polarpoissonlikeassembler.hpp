@@ -607,7 +607,7 @@ public:
                                         int_volume_proxy);
                             },
                             element);
-                    const int csr_idx_singular_area = nnz_per_row_csr(row_idx + 1) + col_idx;
+                    const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
                     //Fill the C matrix corresponding to the splines on the singular point
                     col_idx_csr(csr_idx_singular_area) = col_idx;
                     values_csr(batch_idx, csr_idx_singular_area) = element;
@@ -751,17 +751,11 @@ public:
                     const int col_idx = idx_step_trial.value() + n_singular;
 
                     //a_ij
-                    col_idx_csr(nnz_per_row_csr(row_idx + 1) + col_idx) = col_idx;
-                    values_csr(batch_idx, nnz_per_row_csr(row_idx + 1) + col_idx) = element;
+                    col_idx_csr(nnz_per_row_csr(row_idx) + col_idx) = col_idx;
+                    values_csr(batch_idx, nnz_per_row_csr(row_idx) + col_idx) = element;
                     //a_ji
-                    col_idx_csr(nnz_per_row_csr(col_idx + 1) + row_idx) = row_idx;
-                    values_csr(batch_idx, nnz_per_row_csr(col_idx + 1) + row_idx) = element;
-                });
-        Kokkos::parallel_for(
-                "to_remove",
-                Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular + 1),
-                KOKKOS_LAMBDA(const int i) {
-                    nnz_per_row_csr(i) += n_overlapping_singular + n_singular;
+                    col_idx_csr(nnz_per_row_csr(col_idx) + row_idx) = row_idx;
+                    values_csr(batch_idx, nnz_per_row_csr(col_idx) + row_idx) = element;
                 });
     }
     /**
@@ -820,8 +814,6 @@ public:
                 m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
 
         const int batch_idx = m_batch_idx;
-        const int n_singular = idxrange_singular.size();
-
         const std::source_location location = std::source_location::current();
 
         // Calculate the matrix elements following a stencil
@@ -879,12 +871,6 @@ public:
                             col_offset++;
                         }
                     }
-                    Kokkos::single(Kokkos::PerTeam(team), [&]() {
-                        nnz_per_row_csr(row_idx + 1)
-                                += n_singular*central_radial_bspline_idx_range.contains(idx_test_r) + (idx_step_trial_r_offset_max - idx_step_trial_r_offset_min)
-                                   * (idx_step_trial_theta_offset_max
-                                      - idx_step_trial_theta_offset_min);
-                    });
                 });
 
         Kokkos::Profiling::popRegion();
@@ -1115,8 +1101,8 @@ public:
         assert(mat_size == polar_bspl_idx_range.size());
         // nnz per line
         Field<int, IdxRangeBSPolar>
-                nnz(Kokkos::subview(nnz_per_row, std::pair<int, int>(2, mat_size + 1)),
-                    polar_bspl_idx_range.remove_last(IdxStepBSPolar(1)));
+                nnz(Kokkos::subview(nnz_per_row, std::pair<int, int>(1, mat_size + 1)),
+                    polar_bspl_idx_range);
 
         size_t constexpr n_singular_basis = PolarBSplinesRTheta::n_singular_basis();
         size_t constexpr degree = BSplinesR::degree();
@@ -1134,7 +1120,7 @@ public:
         Kokkos::parallel_for(
                 "overlap singular radial",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular_basis + 1),
-                KOKKOS_LAMBDA(const int k) { nnz_per_row(k + 1) = k * nnz_for_sigular_rows; });
+                KOKKOS_LAMBDA(const int k) { nnz_per_row(k) = k * nnz_for_sigular_rows; });
 
         int nnz_sum = nnz_for_sigular_rows * n_singular_basis;
 
@@ -1202,7 +1188,7 @@ public:
         IdxRangeBSRTheta outer_bsplines_2d(outer_bsplines_r, idxrange_bsplines_theta);
         IdxRangeBSPolar outer_bsplines(
                 to_polar(outer_bsplines_2d.front()),
-                IdxStepBSPolar(outer_bsplines_2d.size() - 1));
+                IdxStepBSPolar(outer_bsplines_2d.size()));
         assert(outer_bsplines.back() == get_idx_range(nnz).back());
         // Approaching the external boundary the overlapping possibilities between two radial splines decrease
         Kokkos::parallel_for(
