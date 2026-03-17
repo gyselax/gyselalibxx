@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed spline boundary condition in velocity dimensions in the XVx and XYVxVy geometries to use homogeneous Hermite boundary conditions.
 - Change `BslAdvectionVelocity` to stop providing values for the derivatives at the boundaries.
 - Add labels to all parallel constructs and many variable allocations.
+- Completed the porting of `PolarSplineFEMPoissonLikeAssembler` to GPU (less memory, fewer data transfers, faster execution).
 
 ### Deprecated
 
