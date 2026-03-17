@@ -2465,15 +2465,15 @@
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1ac22b5d1d9e9f801f090e797212d14016" kind="variable"><name>m_idxrange_quadrature_singular</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a86de9590fddca13f14cf70ad08c40f88" kind="variable"><name>m_idxrange_quadrature</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a2aad241b05108d705ea50f8f8529cf7f" kind="variable"><name>m_batch_idx</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a4dabaac0e98bc5c06c4d8619677c7191" kind="variable"><name>m_int_volume</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1afb1295f09be8a8996366815bb1a7b429" kind="variable"><name>m_int_volume</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a934e3e0fece4b2070001ee5d1d9e699c" kind="function"><name>PolarSplineFEMPoissonLikeAssembler</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1abc0ce99a71c2b00034f2199bda6c9614" kind="function"><name>operator()</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a0a247174185eff8fa38b2bc93ea1227a" kind="function"><name>compute_singular_elements</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a41e32c99985b1df2350ee1d9f84f12ca" kind="function"><name>compute_overlapping_singular_elements</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a9ecfde2b6c8bd1c64caece74390ea655" kind="function"><name>compute_stencil_elements</name></member>
-    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aafe773776f261e32daa04d80e9c994ee" kind="function"><name>get_matrix_stencil_element</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1a9ee48516c8f2c48ab011498adfe02e37" kind="function"><name>compute_singular_elements</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1aa92090d39452c7b32055aef8d17df0b1" kind="function"><name>compute_overlapping_singular_elements</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1afa92fcaefbe5c2ae4c2a1187a25cf8a9" kind="function"><name>compute_stencil_elements</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a037ea0e3df142ead46779f23a0973c3c" kind="function"><name>init_nnz_per_line</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a62a231709128ef1dc7670bbddd17fd9b" kind="function"><name>weak_integral_element</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeAssembler_1af046b2defd8321d47a3e5d8c8905fa67" kind="function"><name>get_matrix_stencil_element</name></member>
     <member refid="classPolarSplineFEMPoissonLikeAssembler_1a79971ed2f9d16481d9a6da774d2b4a1c" kind="function"><name>to_polar</name></member>
   </compound>
   <compound refid="classPolarSplineFEMPoissonLikeSolver" kind="class"><name>PolarSplineFEMPoissonLikeSolver</name>
@@ -3283,6 +3283,7 @@
   </compound>
   <compound refid="namespacedetail__poisson" kind="namespace"><name>detail_poisson</name>
     <member refid="polarpoissonlikeassembler_8hpp_1a65137404e884acc2dcaee94b2b25c073" kind="function"><name>theta_mod</name></member>
+    <member refid="polarpoissonlikeassembler_8hpp_1a247dc6ba30ff36eeea601bff9becfe7b" kind="function"><name>mod_add</name></member>
     <member refid="polarpoissonlikeassembler_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" kind="function"><name>theta_mod</name></member>
     <member refid="polarpoissonlikeassembler_8hpp_1a3f94a5d4864782525d1774e4ea602cf6" kind="function"><name>get_polar_bspline_vals_and_derivs</name></member>
     <member refid="polarpoissonlikeassembler_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" kind="function"><name>get_quadrature_between_knots</name></member>

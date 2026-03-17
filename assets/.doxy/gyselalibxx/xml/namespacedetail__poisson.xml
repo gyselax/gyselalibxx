@@ -48,6 +48,41 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="31" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="31" bodyend="39"/>
       </memberdef>
+      <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a247dc6ba30ff36eeea601bff9becfe7b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>typename DDom</type>
+          </param>
+          <param>
+            <type>std::enable_if_t&lt; DDom::continuous_dimension_type::PERIODIC, bool &gt;</type>
+            <defval>true</defval>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION Idx&lt; DDom &gt;</type>
+        <definition>KOKKOS_FUNCTION Idx&lt; DDom &gt; detail_poisson::mod_add</definition>
+        <argsstring>(Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx_step, IdxRange&lt; DDom &gt; idx_range)</argsstring>
+        <name>mod_add</name>
+        <qualifiedname>detail_poisson::mod_add</qualifiedname>
+        <param>
+          <type>Idx&lt; DDom &gt;</type>
+          <declname>idx</declname>
+        </param>
+        <param>
+          <type>IdxStep&lt; DDom &gt;</type>
+          <declname>idx_step</declname>
+        </param>
+        <param>
+          <type>IdxRange&lt; DDom &gt;</type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="42" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="42" bodyend="51"/>
+      </memberdef>
       <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a24c6fafb7429f56b452e0b991dcfb45a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
           <param>
@@ -102,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="52" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="52" bodyend="65"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="64" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="64" bodyend="77"/>
       </memberdef>
       <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a3f94a5d4864782525d1774e4ea602cf6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -186,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="90" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="90" bodyend="148"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="102" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="102" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="polarpoissonlikeassembler_8hpp_1a313e1ea754090f2fc842e3787c83ccf4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -313,7 +348,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="181" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="181" bodyend="216"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="198" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="198" bodyend="233"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

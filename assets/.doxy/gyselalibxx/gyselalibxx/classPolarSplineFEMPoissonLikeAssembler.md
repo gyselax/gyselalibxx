@@ -66,10 +66,9 @@ _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._
 | Type | Name |
 | ---: | :--- |
 |   | [**PolarSplineFEMPoissonLikeAssembler**](#function-polarsplinefempoissonlikeassembler) (Field&lt; double, IdxRangeQuadratureRTheta &gt; int\_volume) <br>_Instantiate the assembler operator._  |
-|  void | [**compute\_overlapping\_singular\_elements**](#function-compute_overlapping_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to singular elements overlapping with regular grid._  |
-|  void | [**compute\_singular\_elements**](#function-compute_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point._  |
-|  void | [**compute\_stencil\_elements**](#function-compute_stencil_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const values\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const col\_idx\_csr\_host, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::HostSpace &gt; const nnz\_per\_row\_csr\_host) <br>_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._  |
-|  double | [**get\_matrix\_stencil\_element**](#function-get_matrix_stencil_element) (IdxBSRTheta idx\_test, IdxBSRTheta idx\_trial, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & evaluator, Mapping const & mapping) <br>_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._  |
+|  void | [**compute\_overlapping\_singular\_elements**](#function-compute_overlapping_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix element corresponding to singular elements overlapping with regular grid._  |
+|  void | [**compute\_singular\_elements**](#function-compute_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point._  |
+|  void | [**compute\_stencil\_elements**](#function-compute_stencil_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._  |
 |  void | [**init\_nnz\_per\_line**](#function-init_nnz_per_line) (Kokkos::View&lt; int \*, Kokkos::LayoutRight &gt; nnz\_per\_row) const<br>_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz\_per\_row[0] = 0. nnz\_per\_row[1] = 0. nnz\_per\_row[2] = number of non-zero elements in line 0. nnz\_per\_row[3] = number of non-zero elements in lines 0-1. ...\_per\_row nnz\_per\_row[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._ |
 |  void | [**operator()**](#function-operator) (std::unique\_ptr&lt; [**MatrixBatchCsr**](classMatrixBatchCsr.md)&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; & gko\_matrix, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Assemble the stiffness matrix._  |
 
@@ -78,6 +77,7 @@ _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._
 
 | Type | Name |
 | ---: | :--- |
+|  KOKKOS\_FUNCTION double | [**get\_matrix\_stencil\_element**](#function-get_matrix_stencil_element) (const Kokkos::TeamPolicy&lt;&gt;::member\_type & team, IdxBSRTheta idx\_test, IdxBSRTheta idx\_trial, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & evaluator, Mapping const & mapping, IdxRangeQuadratureRTheta const & full\_quad\_idx\_range, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume) <br>_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._  |
 |  KOKKOS\_INLINE\_FUNCTION IdxBSPolar | [**to\_polar**](#function-to_polar) (IdxBSRTheta idx) <br>_Convert a 2D (r,theta) bspline index into a polar bspline index._  |
 |  KOKKOS\_FUNCTION double | [**weak\_integral\_element**](#function-weak_integral_element) (IdxBSPolar idx\_test, IdxBSPolar idx\_trial, IdxQuadratureRTheta idx\_quad, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Mapping const & mapping, DField&lt; IdxRangeQuadratureRTheta &gt; int\_volume) <br>_Computes a quadrature summand for computing the integral corresponding to the inner product._  |
 
@@ -202,9 +202,9 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_overlapping_singular_ele
     ConstSpline2D coeff_beta,
     Mapping const & mapping,
     SplineRThetaEvaluatorNullBound const & spline_evaluator,
-    Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::HostSpace > const values_csr_host,
-    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::HostSpace > const col_idx_csr_host,
-    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::HostSpace > const nnz_per_row_csr_host
+    Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const values_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const col_idx_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const nnz_per_row_csr
 ) 
 ```
 
@@ -219,9 +219,9 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_overlapping_singular_ele
 * `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
-* `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
-* `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
-* `nnz_per_row_csr_host` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
+* `values_csr` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
+* `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
+* `nnz_per_row_csr` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
 
 
 
@@ -242,9 +242,9 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_elements (
     ConstSpline2D coeff_beta,
     Mapping const & mapping,
     SplineRThetaEvaluatorNullBound const & spline_evaluator,
-    Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::HostSpace > const values_csr_host,
-    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::HostSpace > const col_idx_csr_host,
-    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::HostSpace > const nnz_per_row_csr_host
+    Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const values_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const col_idx_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const nnz_per_row_csr
 ) 
 ```
 
@@ -259,9 +259,9 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_elements (
 * `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
-* `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
-* `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix). 
-* `nnz_per_row_csr_host` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
+* `values_csr` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
+* `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix). 
+* `nnz_per_row_csr` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
 
 
 
@@ -282,9 +282,9 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_stencil_elements (
     ConstSpline2D coeff_beta,
     Mapping const & mapping,
     SplineRThetaEvaluatorNullBound const & spline_evaluator,
-    Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::HostSpace > const values_csr_host,
-    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::HostSpace > const col_idx_csr_host,
-    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::HostSpace > const nnz_per_row_csr_host
+    Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const values_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const col_idx_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const nnz_per_row_csr
 ) 
 ```
 
@@ -299,54 +299,9 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_stencil_elements (
 * `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
-* `values_csr_host` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
-* `col_idx_csr_host` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
-* `nnz_per_row_csr_host` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
-
-
-
-
-        
-
-<hr>
-
-
-
-### function get\_matrix\_stencil\_element 
-
-_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._ 
-```C++
-template<class Mapping>
-inline double PolarSplineFEMPoissonLikeAssembler::get_matrix_stencil_element (
-    IdxBSRTheta idx_test,
-    IdxBSRTheta idx_trial,
-    ConstSpline2D coeff_alpha,
-    ConstSpline2D coeff_beta,
-    SplineRThetaEvaluatorNullBound const & evaluator,
-    Mapping const & mapping
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `idx_test` The index for polar B-spline in the test space. 
-* `idx_trial` The index for polar B-spline in the trial space. 
-* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
-* `evaluator` An evaluator for evaluating 2D splines on \((r, \theta)\). 
-* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-
-
-
-**Returns:**
-
-The value of the matrix element. 
-
+* `values_csr` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
+* `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
+* `nnz_per_row_csr` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
 
 
 
@@ -434,6 +389,57 @@ inline void PolarSplineFEMPoissonLikeAssembler::operator() (
 <hr>
 ## Public Static Functions Documentation
 
+
+
+
+### function get\_matrix\_stencil\_element 
+
+_Computes the matrix element corresponding to two tensor product splines with index idx\_test and idx\_trial._ 
+```C++
+template<class Mapping>
+static inline KOKKOS_FUNCTION double PolarSplineFEMPoissonLikeAssembler::get_matrix_stencil_element (
+    const Kokkos::TeamPolicy<>::member_type & team,
+    IdxBSRTheta idx_test,
+    IdxBSRTheta idx_trial,
+    ConstSpline2D coeff_alpha,
+    ConstSpline2D coeff_beta,
+    SplineRThetaEvaluatorNullBound const & evaluator,
+    Mapping const & mapping,
+    IdxRangeQuadratureRTheta const & full_quad_idx_range,
+    DField< IdxRangeQuadratureRTheta > int_volume
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `team` The team of threads from which this function is called. 
+* `idx_test` The index for polar B-spline in the test space. 
+* `idx_trial` The index for polar B-spline in the trial space. 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
+* `evaluator` An evaluator for evaluating 2D splines on \((r, \theta)\). 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
+* `full_quad_idx_range` The index range of all the quadrature points. 
+* `int_volume` The field describing the quadrature coefficients including the Jacobian multiplication factor responsible for ensuring the correct volume for the integral. 
+
+
+
+**Returns:**
+
+The value of the matrix element. 
+
+
+
+
+
+        
+
+<hr>
 
 
 

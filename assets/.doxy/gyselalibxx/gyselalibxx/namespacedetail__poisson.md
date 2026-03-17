@@ -53,6 +53,7 @@
 | ---: | :--- |
 |  KOKKOS\_FUNCTION std::conditional\_t&lt; calculate\_derivs, [**DVector**](classTensor.md)&lt; typename PolarBSplinesRTheta::R::Dual, typename PolarBSplinesRTheta::Theta::Dual &gt;, void &gt; | [**get\_polar\_bspline\_vals\_and\_derivs**](#function-get_polar_bspline_vals_and_derivs) (double & val, Coord&lt; typename [**PolarBSplinesRTheta::R**](classPolarBSplines.md#typedef-r), typename [**PolarBSplinesRTheta::Theta**](classPolarBSplines.md#typedef-theta) &gt; coord, Idx&lt; [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) &gt; idx) <br>_Get the value and derivative of the specified polar bspline at the specified quadrature point._  |
 |  KOKKOS\_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; | [**get\_quadrature\_between\_knots**](#function-get_quadrature_between_knots) (Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; start\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesR**](structBSplinesR.md) &gt; &gt; end\_knot\_r, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; start\_knot\_theta, Idx&lt; ddc::knot\_discrete\_dimension\_t&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; &gt; end\_knot\_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx\_quad\_front) <br>_Compute the quadrature range between a provided set of knots._  |
+|  KOKKOS\_FUNCTION Idx&lt; DDom &gt; | [**mod\_add**](#function-mod_add) (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx\_step, IdxRange&lt; DDom &gt; idx\_range) <br> |
 |  KOKKOS\_FUNCTION IdxStep&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; | [**theta\_mod**](#function-theta_mod) (IdxStep&lt; [**BSplinesTheta**](structBSplinesTheta.md) &gt; idx\_theta) <br>_Calculates the modulo idx\_theta in relation to cells number along_ \(\theta\) _direction._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxType | [**theta\_mod**](#function-theta_mod) (IdxType idx) <br>_Calculates the index which is inside the poloidal domain using the periodicity properties._  |
 
@@ -189,6 +190,24 @@ The range of quadrature points in the specified domain.
 
 
         
+
+<hr>
+
+
+
+### function mod\_add 
+
+```C++
+template<typename DDom, std::enable_if_t< DDom::continuous_dimension_type::PERIODIC, bool >>
+KOKKOS_FUNCTION Idx< DDom > detail_poisson::mod_add (
+    Idx< DDom > idx,
+    IdxStep< DDom > idx_step,
+    IdxRange< DDom > idx_range
+) 
+```
+
+
+
 
 <hr>
 

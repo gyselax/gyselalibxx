@@ -580,6 +580,10 @@
 <td style="text-align: left;"><a href="#function-get_quadrature_between_knots"><strong>get_quadrature_between_knots</strong></a> (Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> &gt; &gt; start_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a> &gt; &gt; end_knot_r, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; &gt; start_knot_theta, Idx&lt; ddc::knot_discrete_dimension_t&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; &gt; end_knot_theta, Idx&lt; QDimRMesh, QDimThetaMesh &gt; idx_quad_front) <br><em>Compute the quadrature range between a provided set of knots.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_FUNCTION Idx&lt; DDom &gt;</td>
+<td style="text-align: left;"><a href="#function-mod_add"><strong>mod_add</strong></a> (Idx&lt; DDom &gt; idx, IdxStep&lt; DDom &gt; idx_step, IdxRange&lt; DDom &gt; idx_range) <br></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION IdxStep&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#function-theta_mod"><strong>theta_mod</strong></a> (IdxStep&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> &gt; idx_theta) <br><em>Calculates the modulo idx_theta in relation to cells number along</em> <span class="arithmatex">\(\theta\)</span> <em>direction.</em></td>
 </tr>
@@ -644,6 +648,16 @@ KOKKOS_FUNCTION IdxRange&lt; QDimRMesh, QDimThetaMesh &gt; detail_poisson::get_q
 </ul>
 <p><strong>Returns:</strong></p>
 <p>The range of quadrature points in the specified domain. </p>
+<hr>
+
+<h3 id="function-mod_add">function mod_add</h3>
+<pre><code class="language-C++">template&lt;typename DDom, std::enable_if_t&lt; DDom::continuous_dimension_type::PERIODIC, bool &gt;&gt;
+KOKKOS_FUNCTION Idx&lt; DDom &gt; detail_poisson::mod_add (
+    Idx&lt; DDom &gt; idx,
+    IdxStep&lt; DDom &gt; idx_step,
+    IdxRange&lt; DDom &gt; idx_range
+) 
+</code></pre>
 <hr>
 
 <h3 id="function-theta_mod">function theta_mod</h3>

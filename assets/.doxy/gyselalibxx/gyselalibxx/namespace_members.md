@@ -57,6 +57,7 @@
 ## m
 
 * **maximum\_distance\_between\_adjacent\_points** ([**ddcHelper**](namespaceddcHelper.md))
+* **mod\_add** ([**detail\_poisson**](namespacedetail__poisson.md))
 
 
 ## n
