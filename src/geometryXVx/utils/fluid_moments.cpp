@@ -47,7 +47,9 @@ void FluidMoments::operator()(
     DFieldMemVx integrand_alloc(get_idx_range(fdistribu));
     DFieldVx integrand = get_field(integrand_alloc);
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             get_idx_range(fdistribu),
             KOKKOS_LAMBDA(IdxVx const ivx) {
