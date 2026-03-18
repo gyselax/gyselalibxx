@@ -10,8 +10,10 @@
 #include "bsl_advection_1d.hpp"
 #include "ddc_helper.hpp"
 #include "itimestepper.hpp"
+#include "lagrange_basis_uniform.hpp"
+#include "lagrange_interpolation.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator.hpp"
+#include "spline_interpolation.hpp"
 #include "vector_field_common.hpp"
 
 namespace {
@@ -49,32 +51,51 @@ using IdxStepX = IdxStep<GridX>;
 // Field types
 template <class ElementType>
 using FieldMemX = FieldMem<ElementType, IdxRangeX>;
-using DFieldMemX = FieldMemX<double>;
 
 template <class ElementType>
 using FieldX = Field<ElementType, IdxRangeX>;
-using DFieldX = FieldX<double>;
 
 
 // Operators
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
+        PERIODIC,
+        PERIODIC,
         SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
+        SplineXBoundary>;
 
-using SplineXEvaluator = ddc::SplineEvaluator<
+// Lagrange basis for the advection field interpolation
+struct LagBasisX : UniformLagrangeBasis<X, 3, double>
+{
+};
+
+struct LagBasisFloatX : UniformLagrangeBasis<X, 3, float>
+{
+};
+
+using LagrangeInterpolatorX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
+        LagBasisX,
         GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        PERIODIC,
+        PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC>;
+
+using LagrangeInterpolatorFloatX = LagrangeInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        LagBasisFloatX,
+        GridX,
+        PERIODIC,
+        PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        float>;
 
 
+template <class DataType>
 class XAdvection1DTest : public ::testing::Test
 {
 protected:
@@ -94,42 +115,48 @@ public:
     {
         ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
         ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
+        IdxRangeX interpolation_idx_range(SplineInterpPointsX::get_domain<GridX>());
+        IdxRangeX lagrange_break_point_idx_range(
+                interpolation_idx_range.front(),
+                interpolation_idx_range.extents() + 1);
+        ddc::init_discrete_space<LagBasisX>(lagrange_break_point_idx_range);
+        ddc::init_discrete_space<LagBasisFloatX>(lagrange_break_point_idx_range);
     }
 
     template <class AdvectionOperator>
     double AdvectionX(AdvectionOperator const& advection)
     {
         // TIME PARAMETERS ---------------------------------------------------------------------------
-        double const dt = 0.05;
-        double const final_t = 0.4;
+        DataType const dt = 0.05;
+        DataType const final_t = 0.4;
         int const time_iter = int(final_t / dt);
 
         // INITIALISATION ----------------------------------------------------------------------------
-        DFieldMemX function_alloc(interpolation_idx_range);
-        DFieldX function = get_field(function_alloc);
+        FieldMemX<DataType> function_alloc(interpolation_idx_range);
+        FieldX<DataType> function = get_field(function_alloc);
 
-        DFieldMemX advection_field_alloc(interpolation_idx_range);
-        DFieldX advection_field = get_field(advection_field_alloc);
+        FieldMemX<DataType> advection_field_alloc(interpolation_idx_range);
+        FieldX<DataType> advection_field = get_field(advection_field_alloc);
 
         ddc::parallel_for_each(
                 Kokkos::DefaultExecutionSpace(),
                 interpolation_idx_range,
                 KOKKOS_LAMBDA(IdxX const idx) {
-                    double const x = ddc::coordinate(idx);
+                    DataType const x = ddc::coordinate(idx);
                     function(idx) = Kokkos::sin(2 * x);
                     advection_field(idx) = Kokkos::sin(x);
                 });
 
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
-        host_t<DFieldMemX> exact_function(interpolation_idx_range);
+        host_t<FieldMemX<DataType>> exact_function(interpolation_idx_range);
         ddc::host_for_each(interpolation_idx_range, [&](IdxX const idx) {
-            double const x0 = ddc::coordinate(idx);
-            double x = 2 * std::atan(std::tan(x0 / 2.) * std::exp(-final_t));
+            DataType const x0 = ddc::coordinate(idx);
+            DataType x = 2 * std::atan(std::tan(x0 / 2.) * std::exp(-final_t));
             // Replace the feet inside the domain if the dimension is periodic
             if (X::PERIODIC) {
-                x = fmod(x - double(x_min), double(x_max - x_min)) + double(x_min);
-                x = x > double(x_min) ? x : x + double(x_max - x_min);
+                x = std::fmod(x - DataType(x_min), DataType(x_max - x_min)) + DataType(x_min);
+                x = x > DataType(x_min) ? x : x + DataType(x_max - x_min);
             }
             exact_function(idx) = std::sin(2 * x);
         });
@@ -155,27 +182,73 @@ public:
     }
 };
 
+class XAdvection1DTestDouble : public XAdvection1DTest<double>
+{
+};
+
+class XAdvection1DTestFloat : public XAdvection1DTest<float>
+{
+};
 
 } // end namespace
 
 
 
-TEST_F(XAdvection1DTest, AdvectionX)
+TEST_F(XAdvection1DTestDouble, AdvectionX)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder(interpolation_idx_range);
-
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_evaluator(bv_x_min, bv_x_max);
-
-    PreallocatableSplineInterpolator const
-            spline_interpolator(builder, spline_evaluator, interpolation_idx_range);
-
+    SplineInterpolatorX spline_interpolation(interpolation_idx_range);
 
     RK2Builder time_stepper;
-    BslAdvection1D<GridX, IdxRangeX, IdxRangeX, SplineXBuilder, SplineXEvaluator, RK2Builder> const
-            advection(spline_interpolator, builder, spline_evaluator, time_stepper);
+    BslAdvection1D<
+            GridX,
+            IdxRangeX,
+            IdxRangeX,
+            SplineInterpolatorX,
+            SplineInterpolatorX,
+            RK2Builder> const advection(spline_interpolation, time_stepper);
+
+    double const max_relative_error = AdvectionX(advection);
+    EXPECT_LE(max_relative_error, 5.e-3);
+    std::cout << "Test on " << x_size << " grid: max relative error = " << max_relative_error
+              << std::endl;
+}
+
+TEST_F(XAdvection1DTestDouble, AdvectionXLagrange)
+{
+    // CREATING OPERATORS ------------------------------------------------------------------------
+    SplineInterpolatorX spline_interpolation(interpolation_idx_range);
+    LagrangeInterpolatorX lag_interpolation;
+
+    RK2Builder time_stepper;
+    BslAdvection1D<
+            GridX,
+            IdxRangeX,
+            IdxRangeX,
+            SplineInterpolatorX,
+            LagrangeInterpolatorX,
+            RK2Builder> const advection(spline_interpolation, lag_interpolation, time_stepper);
+
+    double const max_relative_error = AdvectionX(advection);
+    EXPECT_LE(max_relative_error, 5.e-2);
+    std::cout << "Lagrange test on " << x_size
+              << " grid: max relative error = " << max_relative_error << std::endl;
+}
+
+TEST_F(XAdvection1DTestFloat, AdvectionX)
+{
+    // CREATING OPERATORS ------------------------------------------------------------------------
+    LagrangeInterpolatorFloatX lag_interpolation;
+
+    RK2Builder time_stepper;
+    BslAdvection1D<
+            GridX,
+            IdxRangeX,
+            IdxRangeX,
+            LagrangeInterpolatorFloatX,
+            LagrangeInterpolatorFloatX,
+            RK2Builder,
+            float> const advection(lag_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionX(advection);
     EXPECT_LE(max_relative_error, 5.e-3);

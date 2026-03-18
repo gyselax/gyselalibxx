@@ -33,7 +33,6 @@
 #include "species_info.hpp"
 #include "species_init.hpp"
 #include "spline_definitions_xvx.hpp"
-#include "spline_interpolator.hpp"
 #include "splitvlasovsolver.hpp"
 
 using std::cerr;
@@ -69,8 +68,8 @@ int main(int argc, char** argv)
     IdxRangeSpXVx const meshSpXVx(idx_range_kinsp, meshXVx);
     IdxRangeSpVx const meshSpVx(idx_range_kinsp, mesh_vx);
 
-    SplineXBuilder const builder_x(mesh_x);
-    SplineVxBuilder const builder_vx(mesh_vx);
+    SplineInterpolatorX spline_interpolation_x(mesh_x);
+    SplineInterpolatorVx spline_interpolation_vx(mesh_vx);
 
     // Initialisation of the distribution function
     DFieldMemSpVx allfequilibrium(meshSpVx);
@@ -103,33 +102,16 @@ int main(int argc, char** argv)
     double const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
-#ifdef PERIODIC_RDIMX
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-#else
-    ddc::ConstantExtrapolationRule<X> bv_x_min(ddc::coordinate(mesh_x.front()));
-    ddc::ConstantExtrapolationRule<X> bv_x_max(ddc::coordinate(mesh_x.back()));
-#endif
-
     // Creating operators
-    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, meshXVx);
-
-    ddc::ConstantExtrapolationRule<Vx> bv_v_min(ddc::coordinate(mesh_vx.front()));
-    ddc::ConstantExtrapolationRule<Vx> bv_v_max(ddc::coordinate(mesh_vx.back()));
-
-    SplineVxEvaluator const spline_vx_evaluator(bv_v_min, bv_v_max);
-    PreallocatableSplineInterpolator const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator, meshXVx);
-
-    BslAdvectionSpatial<GeometryXVx, GridX> const advection_x(spline_x_interpolator);
-    BslAdvectionVelocity<GeometryXVx, GridVx> const advection_vx(spline_vx_interpolator);
+    BslAdvectionSpatial<GeometryXVx, SplineInterpolatorX> const advection_x(spline_interpolation_x);
+    BslAdvectionVelocity<GeometryXVx, SplineInterpolatorVx> const advection_vx(
+            spline_interpolation_vx);
 
     SplitVlasovSolver const vlasov(advection_x, advection_vx);
 
-    DFieldMemVx const quadrature_coeffs(neumann_spline_quadrature_coefficients<
-                                        Kokkos::DefaultExecutionSpace>(mesh_vx, builder_vx));
+    DFieldMemVx const quadrature_coeffs(
+            neumann_spline_quadrature_coefficients<
+                    Kokkos::DefaultExecutionSpace>(mesh_vx, spline_interpolation_vx.get_builder()));
 
     ChargeDensityCalculator rhs(get_field(quadrature_coeffs));
     FFTPoissonSolver<IdxRangeX> fft_poisson_solver(mesh_x);

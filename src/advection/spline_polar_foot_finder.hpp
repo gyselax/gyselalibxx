@@ -77,13 +77,13 @@ class SplinePolarFootFinder
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
                   ddc::to_type_seq_t<IdxRangeBatched>>);
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmin == 0,
+            SplineRThetaBuilderAdvection::builder_type1::s_nbe_xmin == 0,
             "This class is designed to work with a spline builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "
             "check the choice of boundary conditions).");
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmax == 0,
+            SplineRThetaBuilderAdvection::builder_type1::s_nbe_xmax == 0,
             "This class is designed to work with a spline builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "
@@ -325,7 +325,9 @@ public:
         std::function<void(CFieldFeet, DVectorConstFieldAdvection, double)> update_function
                 = [&](CFieldFeet feet, DVectorConstFieldAdvection advection_field, double dt) {
                       // Compute the characteristic feet at t^n:
+                      const std::source_location location = std::source_location::current();
                       ddc::parallel_for_each(
+                              location.function_name(),
                               ExecSpace(),
                               get_idx_range(feet),
                               KOKKOS_LAMBDA(IdxOperator const idx) {
@@ -385,7 +387,9 @@ public:
         IdxR r0_idx = r_idx_range.front();
         IdxTheta theta0_idx = theta_idx_range.front();
         if (Kokkos::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     ExecSpace(),
                     batched_idx_range,
                     KOKKOS_LAMBDA(const IdxBatch ib) {
@@ -426,7 +430,9 @@ public:
         IdxR r0_idx = r_idx_range.front();
         IdxTheta theta0_idx = theta_idx_range.front();
         if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     ExecSpace(),
                     batched_idx_range,
                     KOKKOS_LAMBDA(const IdxBatch ib) {

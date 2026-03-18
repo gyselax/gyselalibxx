@@ -69,6 +69,13 @@ public:
 
         QuadConstField const coeff_proxy = m_coefficients;
 
+        if constexpr (ddc::is_chunk_v<IntegratorFunction>) {
+            // Sanity check ensure that the front and back are in the domain
+            // If this fails data may be distributed across MPI ranks
+            assert(get_idx_range(integrated_function).contains(get_idx_range(coeff_proxy).front()));
+            assert(get_idx_range(integrated_function).contains(get_idx_range(coeff_proxy).back()));
+        }
+
         // This fence helps avoid a CPU seg fault. See #290 for more details
         exec_space.fence();
         // This condition is necessary to execute in serial, even in a device activated build.
@@ -82,7 +89,9 @@ public:
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
         } else {
+            const std::source_location location = std::source_location::current();
             return ddc::parallel_transform_reduce(
+                    location.function_name(),
                     exec_space,
                     get_idx_range(coeff_proxy),
                     0.0,
@@ -108,10 +117,10 @@ public:
      *        Please note that a Field fulfils the described criteria.
      *        If the exec_space is a GPU the function that is passed must be accessible from GPU.
      */
-    template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction>
+    template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
     void operator()(
             ExecutionSpace exec_space,
-            Field<double, BatchIdxRange, MemorySpace> const result,
+            Field<double, BatchIdxRange, MemorySpace, Layout> const result,
             IntegratorFunction integrated_function) const
     {
         static_assert(
@@ -128,6 +137,15 @@ public:
                 ddc::type_seq_same_v<ddc::to_type_seq_t<BatchIdxRange>, ExpectedBatchDims>,
                 "The batch idx_range deduced from the type of result does not match the class "
                 "template parameters.");
+
+        if constexpr (ddc::is_chunk_v<IntegratorFunction>) {
+            // Sanity check ensure that the front and back are in the domain
+            // If this fails data may be distributed across MPI ranks
+            assert(IdxRangeQuadrature(get_idx_range(integrated_function))
+                           .contains(get_idx_range(m_coefficients).front()));
+            assert(IdxRangeQuadrature(get_idx_range(integrated_function))
+                           .contains(get_idx_range(m_coefficients).back()));
+        }
 
         // Get useful index types
         using IdxTotal = typename IdxRangeTotal::discrete_element_type;

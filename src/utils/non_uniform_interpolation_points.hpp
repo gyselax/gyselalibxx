@@ -92,7 +92,7 @@ public:
             double domain_len = ddc::discrete_space<BSplines>().rmax()
                                 - ddc::discrete_space<BSplines>().rmin();
             // Insert final periodic point to ensure all cell sizes are known
-            interp_points.push_back(interp_points.back() + domain_len);
+            interp_points.push_back(interp_points.front() + domain_len);
         }
         int n_points_in_cell = 0;
         IdxBreakPoints current_cell_end_idx

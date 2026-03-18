@@ -54,14 +54,16 @@ RUN chmod +x /bin/bash_run \
  && cd .. \
  && rm -rf ginkgo \
  && git clone --branch 4.7.01 --depth 1 https://github.com/kokkos/kokkos.git \
+ && git clone --branch v0.4.0 --depth 1 https://github.com/kokkos/kokkos-fft.git \
  && git clone --branch 4.7.01 --depth 1 https://github.com/kokkos/kokkos-kernels.git \
  && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
- && git clone --branch v0.4.0 --depth 1 https://github.com/kokkos/kokkos-fft.git \
- && git clone --branch v0.10.0 --depth 1 https://github.com/CExA-project/ddc.git \
+ && git clone --branch v0.1.2 --depth 1 https://gitlab.com/cines/code.gysela/libkoliop \
+ && git clone --branch v0.11.0 --depth 1 https://github.com/CExA-project/ddc.git \
  && export Kokkos_ROOT=/opt/serial/Kokkos \
  && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/serial/KokkosKernels \
  && export KokkosTools_ROOT=/opt/serial/KokkosTools \
+ && export koliop_ROOT=/opt/serial/koliop \
  && export DDC_ROOT=/opt/serial/DDC \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_SERIAL=ON -B build -S kokkos \
  && cmake --build build \
@@ -79,6 +81,10 @@ RUN chmod +x /bin/bash_run \
  && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
  && rm -rf build \
+ && cmake -DCMAKE_BUILD_TYPE=Release -B build -S libkoliop \
+ && cmake --build build \
+ && cmake --install build --prefix $koliop_ROOT \
+ && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
  && cmake --build build \
  && cmake --install build --prefix $DDC_ROOT \
@@ -87,6 +93,7 @@ RUN chmod +x /bin/bash_run \
  && export KokkosFFT_ROOT=/opt/openmp/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/openmp/KokkosKernels \
  && export KokkosTools_ROOT=/opt/openmp/KokkosTools \
+ && export koliop_ROOT=/opt/openmp/koliop \
  && export DDC_ROOT=/opt/openmp/DDC \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_OPENMP=ON -B build -S kokkos \
  && cmake --build build \
@@ -103,6 +110,10 @@ RUN chmod +x /bin/bash_run \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S kokkos-tools \
  && cmake --build build \
  && cmake --install build --prefix $KokkosTools_ROOT \
+ && rm -rf build \
+ && cmake -DCMAKE_BUILD_TYPE=Release -B build -S libkoliop \
+ && cmake --build build \
+ && cmake --install build --prefix $koliop_ROOT \
  && rm -rf build \
  && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
  && cmake --build build \

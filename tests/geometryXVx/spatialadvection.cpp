@@ -5,7 +5,6 @@
 #include "bsl_advection_x.hpp"
 #include "geometry_xvx.hpp"
 #include "spline_definitions_xvx.hpp"
-#include "spline_interpolator.hpp"
 
 
 
@@ -97,13 +96,9 @@ TEST(SpatialAdvection, SplineBatched)
 {
     auto [idx_range_x, idx_range_vx] = Init_idx_range_spatial_adv();
     IdxRangeXVx meshXVx(idx_range_x, idx_range_vx);
-    SplineXBuilder const builder_x(idx_range_x);
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, meshXVx);
-    BslAdvectionSpatial<GeometryXVx, GridX> const spline_advection_x(spline_x_interpolator);
+    SplineInterpolatorX spline_interpolation(idx_range_x);
+    BslAdvectionSpatial<GeometryXVx, SplineInterpolatorX> const spline_advection_x(
+            spline_interpolation);
     double const err
             = SpatialAdvection<GeometryXVx, GridX>(spline_advection_x, idx_range_x, idx_range_vx);
     EXPECT_LE(err, 1.e-6);

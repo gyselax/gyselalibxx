@@ -7,14 +7,14 @@ then
     exit 1
 fi
 
+module purge
+
 export SPACK_USER_PREFIX=$ALL_CCFRWORK/spack-user-install
 export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
 export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
 
 # Avoid too many temporary files in the Spack installation tree
 export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
-
-module purge
 . $ALL_CCFRWORK/spack/share/spack/setup-env.sh
 
 eval -- "$(
@@ -22,12 +22,14 @@ eval -- "$(
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
+        gcc \
         ginkgo \
         googletest \
         kokkos \
         kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
+        koliop \
         lapack \
         mpi \
         ninja \

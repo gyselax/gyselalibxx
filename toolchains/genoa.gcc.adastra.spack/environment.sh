@@ -7,6 +7,8 @@ then
     exit 1
 fi
 
+module purge
+
 SPACK_USER_VERSION="spack-user-5.0.0"
 
 export SPACK_USER_PREFIX="${ALL_CCFRWORK}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
@@ -14,8 +16,6 @@ export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 # Avoid too many temporary files in the Spack installation tree
 export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
-
-module purge
 
 module load develop "${SPACK_USER_VERSION}"
 which spack
@@ -44,6 +44,7 @@ eval -- "$(
         kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
+        koliop \
         lapack \
         mpi \
         ninja \

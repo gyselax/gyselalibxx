@@ -3,6 +3,7 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "geometry_xvx.hpp"
+#include "spline_interpolation.hpp"
 
 int constexpr BSDegreeX = 3;
 int constexpr BSDegreeVx = 3;
@@ -31,49 +32,32 @@ struct BSplinesVx
 };
 
 auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
-auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+auto constexpr SplineVxBoundary = ddc::BoundCond::HOMOGENEOUS_HERMITE;
 
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
 using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
 
-using SplineXBuilder = ddc::SplineBuilder<
+ExtrapolationRule constexpr XExtrapRule = X::PERIODIC ? PERIODIC : CONSTANT;
+
+using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
+        XExtrapRule,
+        XExtrapRule,
         SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
+        SplineXBoundary>;
+
+using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        std::conditional_t<
-                X::PERIODIC,
-                ddc::PeriodicExtrapolationRule<X>,
-                ddc::ConstantExtrapolationRule<X>>,
-        std::conditional_t<
-                X::PERIODIC,
-                ddc::PeriodicExtrapolationRule<X>,
-                ddc::ConstantExtrapolationRule<X>>>;
-using SplineVxBuilder = ddc::SplineBuilder<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
         GridVx,
+        CONSTANT,
+        CONSTANT,
         SplineVxBoundary,
-        SplineVxBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineVxEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesVx,
-        GridVx,
-        ddc::ConstantExtrapolationRule<Vx>,
-        ddc::ConstantExtrapolationRule<Vx>>;
+        SplineVxBoundary>;
 
 using IdxRangeBSX = IdxRange<BSplinesX>;
 

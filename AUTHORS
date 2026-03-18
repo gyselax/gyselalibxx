@@ -1,6 +1,10 @@
+# Authors
+
+## Major contributions
+
 Multiple people have contributed to Gyselalib++. To show our appreciation for
-their public spirit, we list here in alphabetical order a condensed list of their
-contributions.
+their public spirit, we list here in alphabetical order a condensed list of
+major contributions:
 
 
 Julien Bigot <julien.bigot@cea.fr>
@@ -39,6 +43,9 @@ Etienne Malaboeuf
 Yann Munschy
 - Developments in the (x, vx) geometry
 
+Kevin Obrejan <kevin.obrejan@cea.fr>
+- Profiling and performance analysis
+
 Thomas Padioleau <thomas.padioleau@cea.fr>
 - Initial C++ design
 - Fortran to C++ port
@@ -58,3 +65,8 @@ Pauline Vidal
 
 Yuuichi Asahi
 - Gyroaverage operator
+
+## Minor contributions
+
+We would also like to thank contributors who have provided bug fixes and minor contributions:
+- Md Sajid Khan

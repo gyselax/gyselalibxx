@@ -11,19 +11,86 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add `SplineInterpolator` class to group a compatible DDC spline builder and evaluator.
+- Add `LagrangeInterpolator` class to group a compatible builder and evaluator.
+- Add constructors taking a `concepts::Interpolator` class instance for:
+  - `BslAdvectionSpatial`
+  - `BslAdvectionVelocity`
+  - `BslAdvection1D`
+  - `FEM1DPoissonSolver`
+- Add a constructor to `BslAdvection1D` to use the same interpolator type for both the advected function and the advection field.
+- Add new constructors for `VectorFieldMem` to support labels as used in DDC and Kokkos.
+- Added index range assertions in `Quadrature`.
+
+### Fixed
+
+- Add missing `enable_tensor_type` for `CartesianLeviCivitaTensor` and LeviCivita `size()`.
+
+### Changed
+
+- Add Koliop in all toolchains.
+- Changed spline boundary condition in velocity dimensions in the XVx and XYVxVy geometries to use homogeneous Hermite boundary conditions.
+- Change `BslAdvectionVelocity` to stop providing values for the derivatives at the boundaries.
+- Add labels to all parallel constructs and many variable allocations.
+- Completed the porting of `PolarSplineFEMPoissonLikeAssembler` to GPU (less memory, fewer data transfers, faster execution).
+
+### Deprecated
+
+- Deprecate constructors taking both builders and evaluators n favour of constructors taking Interpolator classes for:
+  - `BslAdvectionSpatial`
+  - `BslAdvectionVelocity`
+  - `BslAdvection1D`
+  - `FEM1DPoissonSolver`
+
+### Removed
+
+- Remove deprecated `Lagrange` class.
+- Remove Koliop submodule.
+
+## [v0.6.2] - 2026-03-06
+
+### Fixed
+
+- Ensure `CoordRTheta` is defined in `polarpoissonlikeassembler.hpp`.
+
+## [v0.6.1] - 2026-03-06
+
+### Fixed
+
+- Allow `neumann_spline_quadrature_coefficients_1d` to work with `HOMOGENEOUS_HERMITE` boundary conditions.
+- Fix non-uniform periodic interpolation point selection.
+
+### Changed
+
+- Modified `Quadrature` to allow the batched operator to work on strided data.
+
+### Removed
+
+- Removed the mini-app and moved it to its own repository [mini-app](https://github.com/gyselax/gysela-mini-app_io).
+
+## [v0.6.0] - 2026-03-05
+
+### Added
+
 - Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
 - Add the fluid moments computation in pycall block to the mini-application
 - Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
 - Add `LagrangeEvaluator` to evaluate a Lagrange polynomial centred on a given point.
 - Added error messages when wrong input is provided to a simulation.
+- Add `concepts::InterpolationBuilder` to make `IdentityInterpolationBuilder` and `ddc::SplineBuilder` interchangeable.
+- Add `concepts::InterpolationEvaluator` to make `LagrangeEvaluator` and `ddc::SplineEvaluator` interchangeable.
+- Allow `BslAdvection1D`, `BslAdvectionSpatial`, and `BslAdvectionVelocity` to use variable precision.
 
 ### Fixed
 
+- Fix incorrect `memory_space` type alias in `DerivFieldMem`.
+- Fix incorrect `memory_space` type alias in `DerivField`.
 - Fix a memory leak in `DerivFieldMem`.
 - Fix `ddc::coordinate` called on `ddc::DiscreteElement` outside of the domain of definition in `single_interface_derivatives_calculator.hpp` and tests.
 - Fix a memory leak related to an object of type `PC_tree_t` not destroyed.
 - Fix boundary conditions in `single_interface_derivatives_calculator_collection_test.cpp`.
 - Fix the finite differences method on a periodic domain.
+- Fix the warning for using the deprecated target `PDI::pdi` starting from PDI 1.10.1.
 
 ### Changed
 
@@ -31,12 +98,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use generic binaries in the CPU Spack toolchain.
 - Remove Kokkos-related submodules.
 - Remove recursion from submodules synchronisation.
+- Add missing `module purge` in Persee toolchains.
+- Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
+- Use GCC 14 in the Jean-Zay toolchain.
+- Reduce memory footprint of `FEM1DPoissonSolver`.
+- Update DDC to [v0.11.0](https://github.com/CExA-project/ddc/releases/tag/v0.11.0).
+- Moved assembly of the stiffness matrix from `PolarSplineFEMPoissonLikeSolver` to new `PolarSplineFEMPoissonLikeAssembler` class.
 
 ### Deprecated
+
+- Deprecated `Lagrange` class.
 
 ### Removed
 
 - Remove the default PDI configuration file for the mini-app.
+- Remove `Interpolator` classes:
+  - `IInterpolator`
+  - `LagrangeInterpolator`
+  - `SplineInterpolator`
 
 ## [v0.5.0] - 2026-02-04
 

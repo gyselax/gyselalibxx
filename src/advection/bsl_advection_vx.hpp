@@ -1,20 +1,34 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <type_traits>
+
 #include <ddc/ddc.hpp>
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "i_interpolation.hpp"
 #include "iadvectionvx.hpp"
-#include "iinterpolator.hpp"
 #include "species_info.hpp"
 
 /**
  * @brief A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry.
  */
-template <class Geometry, class GridV>
-class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>
+template <class Geometry, concepts::Interpolation FunctionInterpolator, class DataType = double>
+class BslAdvectionVelocity
+    : public IAdvectionVelocity<
+              Geometry,
+              typename InterpolationBuilderTraits<
+                      typename FunctionInterpolator::BuilderType>::interpolation_grid_type,
+              DataType>
 {
+    static_assert(std::is_floating_point_v<DataType>);
+
+    using FunctionBuilder = typename FunctionInterpolator::BuilderType;
+    using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
+
+    using GridV = typename InterpolationBuilderTraits<FunctionBuilder>::interpolation_grid_type;
+
     using IdxRangeFdistribu = typename Geometry::IdxRangeFdistribu;
     using IdxRangeSpatial = typename Geometry::IdxRangeSpatial;
     using IdxSpatial = typename IdxRangeSpatial::discrete_element_type;
@@ -24,21 +38,36 @@ class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV>
             = ddc::remove_dims_of_t<typename Geometry::IdxRangeFdistribu, Species>;
 
 private:
-    using PreallocatableInterpolatorType = interpolator_on_idx_range_t<
-            IPreallocatableInterpolator,
-            GridV,
-            IdxRangeSpaceVelocity>;
-    using InterpolatorType
-            = interpolator_on_idx_range_t<IInterpolator, GridV, IdxRangeSpaceVelocity>;
-    PreallocatableInterpolatorType const& m_interpolator_v;
+    using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
+            FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeSpaceVelocity>;
+
+    FunctionBuilder const& m_function_builder;
+    FunctionEvaluator const& m_function_evaluator;
 
 public:
     /**
-     * @brief Constructor 
-     * @param[in] interpolator_v interpolator along the GridV direction which refers to the velocity space.  
+     * @brief Constructor
+     * @param[in] function_builder Builder along the GridV direction used to build
+     *          the interpolation representation of the advected function.
+     * @param[in] function_evaluator Evaluator along the GridV direction used to evaluate
+     *          the advected function at the characteristic feet.
      */
-    explicit BslAdvectionVelocity(PreallocatableInterpolatorType const& interpolator_v)
-        : m_interpolator_v(interpolator_v)
+    [[deprecated]] explicit BslAdvectionVelocity(
+            FunctionBuilder const& function_builder,
+            FunctionEvaluator const& function_evaluator)
+        : m_function_builder(function_builder)
+        , m_function_evaluator(function_evaluator)
+    {
+    }
+
+    /**
+     * @brief Constructor
+     * @param[in] function_interpolator Interpolator along the GridVx direction used to build
+     *          and evaluate the interpolation representation of the advected function.
+     */
+    explicit BslAdvectionVelocity(FunctionInterpolator const& function_interpolator)
+        : m_function_builder(function_interpolator.get_builder())
+        , m_function_evaluator(function_interpolator.get_evaluator())
     {
     }
 
@@ -51,10 +80,10 @@ public:
      * @param[in] dt Time step
      * @return A reference to the allfdistribu array containing the value of the function at the coordinates.
      */
-    Field<double, IdxRangeFdistribu> operator()(
-            Field<double, IdxRangeFdistribu> const allfdistribu,
-            Field<const double, IdxRangeSpatial> const electric_field,
-            double const dt) const override
+    Field<DataType, IdxRangeFdistribu> operator()(
+            Field<DataType, IdxRangeFdistribu> const allfdistribu,
+            ConstField<DataType, IdxRangeSpatial> const electric_field,
+            DataType const dt) const override
     {
         using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFdistribu, Species, GridV>;
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
@@ -65,37 +94,32 @@ public:
         IdxRange<GridV> const idx_range_v = ddc::select<GridV>(idx_range);
         IdxRange<Species> const idx_range_sp = ddc::select<Species>(idx_range);
 
-        FieldMem<double, typename InterpolatorType::batched_derivs_idx_range_type> derivs_min(
-                m_interpolator_v.batched_derivs_idx_range_xmin(
-                        ddc::remove_dims_of<Species>(idx_range)));
-        FieldMem<double, typename InterpolatorType::batched_derivs_idx_range_type> derivs_max(
-                m_interpolator_v.batched_derivs_idx_range_xmax(
-                        ddc::remove_dims_of<Species>(idx_range)));
-        ddc::parallel_fill(derivs_min, 0.);
-        ddc::parallel_fill(derivs_max, 0.);
+        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
 
         // pre-allocate some memory to prevent allocation later in loop
-        IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
-        FieldMem<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
+        FieldMem<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords_alloc(
+                "feet_coords (BslAdvectionVelocity::operator())",
+                batched_feet_idx_range);
         Field<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
-        std::unique_ptr<InterpolatorType> const interpolator_v_ptr = m_interpolator_v.preallocate();
-        InterpolatorType const& interpolator_v = *interpolator_v_ptr;
-
-        IdxRangeSpatial const idx_range_spatial(get_idx_range(allfdistribu));
+        DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
+                "function_coefs (BslAdvectionVelocity::operator())",
+                batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);
 
         ddc::host_for_each(idx_range_sp, [&](IdxSp const isp) {
-            double const charge_proxy
+            DataType const charge_proxy
                     = charge(isp); // TODO: consider proper way to access charge from device
-            double const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
                     KOKKOS_LAMBDA(IdxBatch const ib) {
                         IdxSpatial const ix(ib);
                         // compute the displacement
-                        double const dvx
+                        DataType const dvx
                                 = charge_proxy * sqrt_me_on_mspecies * dt * electric_field(ix);
 
                         // compute the coordinates of the feet
@@ -103,11 +127,11 @@ public:
                             feet_coords(iv, ib) = Coord<DimV>(ddc::coordinate(iv) - dvx);
                         }
                     });
-            interpolator_v(
+            m_function_builder(get_field(function_coefs_alloc), get_const_field(allfdistribu[isp]));
+            m_function_evaluator(
                     allfdistribu[isp],
                     get_const_field(feet_coords),
-                    get_const_field(derivs_min),
-                    get_const_field(derivs_max));
+                    get_const_field(function_coefs_alloc));
         });
 
         Kokkos::Profiling::popRegion();

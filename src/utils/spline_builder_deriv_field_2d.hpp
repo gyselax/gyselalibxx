@@ -95,16 +95,16 @@ public:
         // Check that the DerivField contains the necessary derivatives for the builder.
         IdxRange<Deriv1> idx_range_d1_min(
                 Idx<Deriv1>(1),
-                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbc_xmin));
+                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbv_xmin));
         IdxRange<Deriv1> idx_range_d1_max(
                 Idx<Deriv1>(1),
-                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbc_xmax));
+                IdxStep<Deriv1>(Builder2D::builder_type1::s_nbv_xmax));
         IdxRange<Deriv2> idx_range_d2_min(
                 Idx<Deriv2>(1),
-                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbc_xmin));
+                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbv_xmin));
         IdxRange<Deriv2> idx_range_d2_max(
                 Idx<Deriv2>(1),
-                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbc_xmax));
+                IdxStep<Deriv2>(Builder2D::builder_type2::s_nbv_xmax));
 
         IdxRange<Deriv1, Deriv2> idx_range_d1d2_min_min(idx_range_d1_min, idx_range_d2_min);
         IdxRange<Deriv1, Deriv2> idx_range_d1d2_max_min(idx_range_d1_max, idx_range_d2_min);
@@ -195,7 +195,9 @@ public:
     void fill_in_function(FunctField function, DerivFieldType function_and_derivs) const
     {
         // Fill the field with correct layout.
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(function_and_derivs),
                 KOKKOS_LAMBDA(Idx<Grid1, Grid2> const idx) {
@@ -215,7 +217,9 @@ public:
             DerivFieldType function_and_derivs,
             Idx<Grid1> idx_slice) const
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(deriv1),
                 KOKKOS_LAMBDA(Idx<Deriv1, Grid2> const idx) {
@@ -235,7 +239,9 @@ public:
             DerivFieldType function_and_derivs,
             Idx<Grid2> idx_slice) const
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 ExecSpace(),
                 get_idx_range(deriv2),
                 KOKKOS_LAMBDA(Idx<Grid1, Deriv2> const idx) {
@@ -259,7 +265,9 @@ public:
             Idx<Grid1> idx_slice_1,
             Idx<Grid2> idx_slice_2) const
     {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 get_idx_range(cross_deriv),
                 KOKKOS_LAMBDA(Idx<Deriv1, Deriv2> idx_derivs) {
                     cross_deriv(idx_derivs)

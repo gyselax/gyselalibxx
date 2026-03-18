@@ -50,14 +50,16 @@ neumann_spline_quadrature_coefficients_1d(
         IdxRange<Grid1D> const& idx_range,
         SplineBuilder const& builder)
 {
-    constexpr int nbc_xmin = SplineBuilder::s_nbc_xmin;
-    constexpr int nbc_xmax = SplineBuilder::s_nbc_xmax;
+    constexpr int nbc_xmin = SplineBuilder::s_nbe_xmin;
+    constexpr int nbc_xmax = SplineBuilder::s_nbe_xmax;
     static_assert(
-            SplineBuilder::s_bc_xmin == ddc::BoundCond::HERMITE,
+            SplineBuilder::s_bc_xmin == ddc::BoundCond::HERMITE
+                    || SplineBuilder::s_bc_xmin == ddc::BoundCond::HOMOGENEOUS_HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
-            SplineBuilder::s_bc_xmax == ddc::BoundCond::HERMITE,
+            SplineBuilder::s_bc_xmax == ddc::BoundCond::HERMITE
+                    || SplineBuilder::s_bc_xmax == ddc::BoundCond::HOMOGENEOUS_HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
