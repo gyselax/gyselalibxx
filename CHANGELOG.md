@@ -11,6 +11,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+### Fixed
+
+### Changed
+
+### Deprecated
+
+### Removed
+
+## [v0.7.0] - 2026-03-18
+
+### Added
+
 - Add `SplineInterpolator` class to group a compatible DDC spline builder and evaluator.
 - Add `LagrangeInterpolator` class to group a compatible builder and evaluator.
 - Add constructors taking a `concepts::Interpolator` class instance for:
