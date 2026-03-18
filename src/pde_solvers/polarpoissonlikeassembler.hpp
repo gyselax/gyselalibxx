@@ -1023,11 +1023,6 @@ public:
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
-        // Get index range for basis elements (last element removed due to homogeneous Dirichlet)
-        IdxRangeBSTheta full_idx_range_theta
-                = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
-                        IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
-
         IdxRangeBSR central_radial_bspline_idx_range(
                 m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
 
