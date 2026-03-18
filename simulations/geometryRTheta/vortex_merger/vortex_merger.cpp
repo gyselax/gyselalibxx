@@ -29,7 +29,7 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polarsplinefempoissonlikesolver.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "quadrature.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"

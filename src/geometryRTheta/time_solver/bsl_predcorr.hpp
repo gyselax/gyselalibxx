@@ -17,7 +17,7 @@
 #include "itimesolver.hpp"
 #include "l_norm_tools.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polarsplinefempoissonlikesolver.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "rk2.hpp"
 #include "spline_definitions_r_theta.hpp"
 
