@@ -189,7 +189,9 @@ public:
             ToLogicalCoordTransform coordinate_transform = m_coordinate_transform;
             std::size_t nb_gyro_points = m_nb_gyro_points;
             // Loop over r, theta
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     ExecutionSpace(),
                     rtheta_idx_range,
                     KOKKOS_LAMBDA(IdxRminorTheta const irtheta) {

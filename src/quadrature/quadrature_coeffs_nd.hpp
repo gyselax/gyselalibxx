@@ -42,7 +42,9 @@ DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> quadrature_coeff
     std::tuple<CoefficientField1D<ExecSpace, DDims>...> current_dim_coeffs(get_field(
             std::get<CoefficientFieldMem1D<ExecSpace, DDims>>(current_dim_coeffs_alloc))...);
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             ExecSpace(),
             idx_range,
             KOKKOS_LAMBDA(Idx<DDims...> const idim) {

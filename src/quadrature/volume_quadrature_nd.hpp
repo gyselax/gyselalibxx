@@ -53,7 +53,9 @@ DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space> compute_coeffs_on_ma
     using IdxCoeffs = typename IdxRangeCoeffs::discrete_element_type;
     IdxRangeCoeffs grid = get_idx_range(coefficients_alloc);
     DField<IdxRangeCoeffs, typename ExecSpace::memory_space> coefficients(coefficients_alloc);
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             exec_space,
             grid,
             KOKKOS_LAMBDA(IdxCoeffs const idx) {

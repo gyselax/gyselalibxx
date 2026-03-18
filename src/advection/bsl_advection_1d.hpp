@@ -9,8 +9,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "euler.hpp"
-#include "i_interpolation_builder.hpp"
-#include "i_interpolation_evaluator.hpp"
+#include "i_interpolation.hpp"
 #include "itimestepper.hpp"
 
 
@@ -45,14 +44,10 @@
  *          It had to also be defined on the GridInterest for the time integration method.
  * @tparam IdxRangeFunction
  *          The index range of @f$ \Omega @f$ where allfdistribu is defined.
- * @tparam FunctionBuilder
- *          The type of the interpolation builder for the advected function along GridInterest.
- * @tparam FunctionEvaluator
- *          The type of the interpolation evaluator for the advected function along GridInterest.
- * @tparam AdvectionFieldBuilder
- *          The type of the spline builder for the advection field (see SplineBuilder).
- * @tparam AdvectionFieldEvaluator
- *          The type of the spline evaluator for the advection field (see SplineEvaluator).
+ * @tparam FunctionInterpolator
+ *          The type of the interpolation for the advected function along GridInterest.
+ * @tparam AdvectionFieldInterpolator
+ *          The type of the interpolation for the advection field (see SplineBuilder).
  * @tparam TimeStepperBuilder
  *          A time stepper builder indicating which time integration method should be
  *          applied to solve the characteristic equation.
@@ -61,16 +56,24 @@ template <
         class GridInterest,
         class IdxRangeAdvection,
         class IdxRangeFunction,
-        concepts::InterpolationBuilder FunctionBuilder,
-        concepts::InterpolationEvaluator FunctionEvaluator,
-        concepts::InterpolationBuilder AdvectionFieldBuilder,
-        concepts::InterpolationEvaluator AdvectionFieldEvaluator,
+        concepts::Interpolation FunctionInterpolator,
+        concepts::Interpolation AdvectionFieldInterpolator,
         class TimeStepperBuilder = EulerBuilder,
         class DataType = double>
 class BslAdvection1D
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(std::is_floating_point_v<DataType>);
+
+public:
+    /// The type of the interpolation builder for the advected function along GridInterest.
+    using FunctionBuilder = typename FunctionInterpolator::BuilderType;
+    /// The type of the interpolation evaluator for the advected function along GridInterest.
+    using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
+    /// The type of the spline builder for the advection field (see SplineBuilder).
+    using AdvectionFieldBuilder = typename AdvectionFieldInterpolator::BuilderType;
+    /// The type of the spline evaluator for the advection field (see SplineEvaluator).
+    using AdvectionFieldEvaluator = typename AdvectionFieldInterpolator::EvaluatorType;
 
 private:
     // Advection index range element:
@@ -151,7 +154,7 @@ public:
      * @param[in] time_stepper_builder A builder for the time integration method used
      *          for the characteristic equation.
      */
-    explicit BslAdvection1D(
+    [[deprecated]] explicit BslAdvection1D(
             FunctionBuilder const& function_builder,
             FunctionEvaluator const& function_evaluator,
             AdvectionFieldBuilder const& adv_field_builder,
@@ -163,6 +166,61 @@ public:
         , m_adv_field_evaluator(adv_field_evaluator)
         , m_time_stepper_builder(time_stepper_builder)
     {
+    }
+
+    /**
+     * @brief Constructor when the advection domain and the function domain are different.
+     *
+     * When IdxRangeAdvection and IdxRangeFunction are different, we need one builder and
+     * evaluator for each index range.
+     *
+     * We can also use it when we want two different builders/evaluators but defined on the same
+     * domain (e.g. different boundary conditions for the evaluators).
+     *
+     * @param[in] function_interpolator Interpolator along the GridInterest direction used to
+     *          build a continuous representation and evaluate the advected function at the characteristic feet.
+     * @param[in] adv_field_interpolator Interpolator along the GridInterest direction used to
+     *          build a continuous representation and evaluate the advection field at the characteristic feet.
+     * @param[in] time_stepper_builder A builder for the time integration method used
+     *          for the characteristic equation.
+     */
+    explicit BslAdvection1D(
+            FunctionInterpolator const& function_interpolator,
+            AdvectionFieldInterpolator const& adv_field_interpolator,
+            TimeStepperBuilder const& time_stepper_builder)
+        : m_function_builder(function_interpolator.get_builder())
+        , m_function_evaluator(function_interpolator.get_evaluator())
+        , m_adv_field_builder(adv_field_interpolator.get_builder())
+        , m_adv_field_evaluator(adv_field_interpolator.get_evaluator())
+        , m_time_stepper_builder(time_stepper_builder)
+    {
+    }
+
+    /**
+     * @brief Constructor when the advection domain and the function domain are different.
+     *
+     * When IdxRangeAdvection and IdxRangeFunction are different, we need one builder and
+     * evaluator for each index range.
+     *
+     * We can also use it when we want two different builders/evaluators but defined on the same
+     * domain (e.g. different boundary conditions for the evaluators).
+     *
+     * @param[in] interpolator Interpolator along the GridInterest direction used to
+     *          build a continuous representation and evaluate both the advected function
+     *          and the advection field at the characteristic feet.
+     * @param[in] time_stepper_builder A builder for the time integration method used
+     *          for the characteristic equation.
+     */
+    explicit BslAdvection1D(
+            FunctionInterpolator const& interpolator,
+            TimeStepperBuilder const& time_stepper_builder)
+        : m_function_builder(interpolator.get_builder())
+        , m_function_evaluator(interpolator.get_evaluator())
+        , m_adv_field_builder(interpolator.get_builder())
+        , m_adv_field_evaluator(interpolator.get_evaluator())
+        , m_time_stepper_builder(time_stepper_builder)
+    {
+        static_assert(std::is_same_v<FunctionInterpolator, AdvectionFieldInterpolator>);
     }
 
     ~BslAdvection1D() = default;
@@ -198,6 +256,7 @@ public:
 
         // Build spline representation of the advection field ....................................
         AdvecFieldSplineMem advection_field_coefs_alloc(
+                "advection_field_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_adv_field_builder, get_idx_range(advection_field)));
         AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);
 
@@ -209,6 +268,7 @@ public:
 
         // Allocate buffer for the function interpolation coefficients ...........................
         FunctionBasisFieldMem function_coefs_alloc(
+                "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
 
         // Build derivatives on boundaries and fill with zeros....................................
@@ -225,9 +285,12 @@ public:
             need to be defined on the same index range as the advection field. We then work on space
             slices of the characteristic feet.
         */
-        FeetFieldMem slice_feet_alloc(idx_range_advection);
+        FeetFieldMem
+                slice_feet_alloc("slice_feet (BslAdvection1D::operator())", idx_range_advection);
         FeetField slice_feet = get_field(slice_feet_alloc);
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 idx_range_advection,
                 KOKKOS_LAMBDA(IdxAdvection const idx) {
@@ -267,9 +330,11 @@ public:
             To interpolate the function we want to advect, we build for the feet a Field defined
             on the index range where the function is defined.
         */
-        FieldMem<CoordInterest, IdxRangeFunction> feet_alloc(idx_range_function);
+        FieldMem<CoordInterest, IdxRangeFunction>
+                feet_alloc("feet (BslAdvection1D::operator())", idx_range_function);
         Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 idx_range_function,
                 KOKKOS_LAMBDA(IdxFunction const idx) {

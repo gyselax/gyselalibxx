@@ -268,3 +268,6 @@ struct is_uniform_lagrange_basis
     : public std::is_base_of<detail::UniformLagrangeBasisBase, DDim>::type
 {
 };
+
+template <class DDim>
+constexpr bool is_uniform_lagrange_basis_v = is_uniform_lagrange_basis<DDim>::value;

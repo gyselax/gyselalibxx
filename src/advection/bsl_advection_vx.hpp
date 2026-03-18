@@ -7,23 +7,27 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "i_interpolation_builder.hpp"
-#include "i_interpolation_evaluator.hpp"
+#include "i_interpolation.hpp"
 #include "iadvectionvx.hpp"
 #include "species_info.hpp"
 
 /**
  * @brief A class which computes the velocity advection along the dimension of interest GridV. Working for every Cartesian geometry.
  */
-template <
-        class Geometry,
-        class GridV,
-        concepts::InterpolationBuilder FunctionBuilder,
-        concepts::InterpolationEvaluator FunctionEvaluator,
-        class DataType = double>
-class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV, DataType>
+template <class Geometry, concepts::Interpolation FunctionInterpolator, class DataType = double>
+class BslAdvectionVelocity
+    : public IAdvectionVelocity<
+              Geometry,
+              typename InterpolationBuilderTraits<
+                      typename FunctionInterpolator::BuilderType>::interpolation_grid_type,
+              DataType>
 {
     static_assert(std::is_floating_point_v<DataType>);
+
+    using FunctionBuilder = typename FunctionInterpolator::BuilderType;
+    using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
+
+    using GridV = typename InterpolationBuilderTraits<FunctionBuilder>::interpolation_grid_type;
 
     using IdxRangeFdistribu = typename Geometry::IdxRangeFdistribu;
     using IdxRangeSpatial = typename Geometry::IdxRangeSpatial;
@@ -34,8 +38,6 @@ class BslAdvectionVelocity : public IAdvectionVelocity<Geometry, GridV, DataType
             = ddc::remove_dims_of_t<typename Geometry::IdxRangeFdistribu, Species>;
 
 private:
-    using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
-            FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeSpaceVelocity>;
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeSpaceVelocity>;
 
@@ -50,11 +52,22 @@ public:
      * @param[in] function_evaluator Evaluator along the GridV direction used to evaluate
      *          the advected function at the characteristic feet.
      */
-    explicit BslAdvectionVelocity(
+    [[deprecated]] explicit BslAdvectionVelocity(
             FunctionBuilder const& function_builder,
             FunctionEvaluator const& function_evaluator)
         : m_function_builder(function_builder)
         , m_function_evaluator(function_evaluator)
+    {
+    }
+
+    /**
+     * @brief Constructor
+     * @param[in] function_interpolator Interpolator along the GridVx direction used to build
+     *          and evaluate the interpolation representation of the advected function.
+     */
+    explicit BslAdvectionVelocity(FunctionInterpolator const& function_interpolator)
+        : m_function_builder(function_interpolator.get_builder())
+        , m_function_evaluator(function_interpolator.get_evaluator())
     {
     }
 
@@ -83,17 +96,13 @@ public:
 
         IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
 
-        FieldMem<DataType, IdxRangeFunctionDeriv> derivs_min(
-                m_function_builder.batched_derivs_xmin_domain(batched_feet_idx_range));
-        FieldMem<DataType, IdxRangeFunctionDeriv> derivs_max(
-                m_function_builder.batched_derivs_xmax_domain(batched_feet_idx_range));
-        ddc::parallel_fill(derivs_min, 0.);
-        ddc::parallel_fill(derivs_max, 0.);
-
         // pre-allocate some memory to prevent allocation later in loop
-        FieldMem<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
+        FieldMem<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords_alloc(
+                "feet_coords (BslAdvectionVelocity::operator())",
+                batched_feet_idx_range);
         Field<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
         DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
+                "function_coefs (BslAdvectionVelocity::operator())",
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);
@@ -102,7 +111,9 @@ public:
             DataType const charge_proxy
                     = charge(isp); // TODO: consider proper way to access charge from device
             DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
                     KOKKOS_LAMBDA(IdxBatch const ib) {
@@ -116,11 +127,7 @@ public:
                             feet_coords(iv, ib) = Coord<DimV>(ddc::coordinate(iv) - dvx);
                         }
                     });
-            m_function_builder(
-                    get_field(function_coefs_alloc),
-                    get_const_field(allfdistribu[isp]),
-                    std::optional(get_const_field(derivs_min)),
-                    std::optional(get_const_field(derivs_max)));
+            m_function_builder(get_field(function_coefs_alloc), get_const_field(allfdistribu[isp]));
             m_function_evaluator(
                     allfdistribu[isp],
                     get_const_field(feet_coords),

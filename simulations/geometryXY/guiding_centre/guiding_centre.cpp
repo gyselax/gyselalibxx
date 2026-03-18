@@ -80,17 +80,8 @@ int main(int argc, char** argv)
 
     // DEFINING OPERATORS ------------------------------------------------------------------------
     // Create spline builderss ---
-    SplineXBuilder_XY const builder_x(interpolation_idx_range_x);
-    SplineYBuilder_XY const builder_y(interpolation_idx_range_y);
-
-    // Create spline evaluators ---
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator_XY const spline_x_evaluator(bv_x_min, bv_x_max);
-
-    ddc::PeriodicExtrapolationRule<Y> bv_y_min;
-    ddc::PeriodicExtrapolationRule<Y> bv_y_max;
-    SplineYEvaluator_XY const spline_y_evaluator(bv_y_min, bv_y_max);
+    SplineXInterpolator interpolator_x(interpolation_idx_range_x);
+    SplineYInterpolator interpolator_y(interpolation_idx_range_y);
 
     // Create Poisson solver ---
     FFTPoissonSolver<IdxRangeXY> const poisson_solver(meshXY);
@@ -101,23 +92,19 @@ int main(int argc, char** argv)
             GridX,
             IdxRangeXY,
             IdxRangeXY,
-            SplineXBuilder_XY,
-            SplineXEvaluator_XY,
-            SplineXBuilder_XY,
-            SplineXEvaluator_XY,
+            SplineXInterpolator,
+            SplineXInterpolator,
             EulerBuilder>
-            advection_x(builder_x, spline_x_evaluator, builder_x, spline_x_evaluator, euler);
+            advection_x(interpolator_x, euler);
 
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXY,
-            SplineYBuilder_XY,
-            SplineYEvaluator_XY,
-            SplineYBuilder_XY,
-            SplineYEvaluator_XY,
+            SplineYInterpolator,
+            SplineYInterpolator,
             EulerBuilder>
-            advection_y(builder_y, spline_y_evaluator, builder_y, spline_y_evaluator, euler);
+            advection_y(interpolator_y, euler);
 
 
     // Create an initialiser ---

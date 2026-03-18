@@ -10,6 +10,7 @@
 #include "ddc_helper.hpp"
 #include "itimestepper.hpp"
 #include "rk2.hpp"
+#include "spline_interpolation.hpp"
 #include "vector_field_common.hpp"
 
 
@@ -120,37 +121,23 @@ using DFieldXYVxVy = FieldXYVxVy<double>;
 
 
 // Operators
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
+        PERIODIC,
+        PERIODIC,
         SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        SplineXBoundary>;
 
-using SplineYBuilder = ddc::SplineBuilder<
+using SplineInterpolatorY = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesY,
         GridY,
+        PERIODIC,
+        PERIODIC,
         SplineYBoundary,
-        SplineYBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineYEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesY,
-        GridY,
-        ddc::PeriodicExtrapolationRule<Y>,
-        ddc::PeriodicExtrapolationRule<Y>>;
+        SplineYBoundary>;
 
 
 
@@ -320,18 +307,8 @@ public:
 TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder_x(interpolation_idx_range_x);
-    SplineYBuilder const builder_y(interpolation_idx_range_y);
-
-
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
-
-    ddc::PeriodicExtrapolationRule<Y> bv_y_min;
-    ddc::PeriodicExtrapolationRule<Y> bv_y_max;
-    SplineYEvaluator const spline_evaluator_y(bv_y_min, bv_y_max);
-
+    SplineInterpolatorX spline_interpolation_x(interpolation_idx_range_x);
+    SplineInterpolatorY spline_interpolation_y(interpolation_idx_range_y);
 
     RK2Builder time_stepper;
 
@@ -339,22 +316,16 @@ TEST_F(XYVxVyAdvection1DTest, AdvectionXY)
             GridX,
             IdxRangeXY,
             IdxRangeXYVxVy,
-            SplineXBuilder,
-            SplineXEvaluator,
-            SplineXBuilder,
-            SplineXEvaluator,
-            RK2Builder> const
-            advection_x(builder_x, spline_evaluator_x, builder_x, spline_evaluator_x, time_stepper);
+            SplineInterpolatorX,
+            SplineInterpolatorX,
+            RK2Builder> const advection_x(spline_interpolation_x, time_stepper);
     BslAdvection1D<
             GridY,
             IdxRangeXY,
             IdxRangeXYVxVy,
-            SplineYBuilder,
-            SplineYEvaluator,
-            SplineYBuilder,
-            SplineYEvaluator,
-            RK2Builder> const
-            advection_y(builder_y, spline_evaluator_y, builder_y, spline_evaluator_y, time_stepper);
+            SplineInterpolatorY,
+            SplineInterpolatorY,
+            RK2Builder> const advection_y(spline_interpolation_y, time_stepper);
 
 
     double const max_relative_error = AdvectionXY(advection_x, advection_y);

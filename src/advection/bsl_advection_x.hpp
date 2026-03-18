@@ -6,23 +6,27 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "i_interpolation_builder.hpp"
-#include "i_interpolation_evaluator.hpp"
+#include "i_interpolation.hpp"
 #include "iadvectionx.hpp"
 #include "species_info.hpp"
 
 /**
  * @brief A class which computes the spatial advection along the dimension of interest GridX. Working for every Cartesian geometry.
  */
-template <
-        class Geometry,
-        class GridX,
-        concepts::InterpolationBuilder FunctionBuilder,
-        concepts::InterpolationEvaluator FunctionEvaluator,
-        class DataType = double>
-class BslAdvectionSpatial : public IAdvectionSpatial<Geometry, GridX, DataType>
+template <class Geometry, concepts::Interpolation FunctionInterpolator, class DataType = double>
+class BslAdvectionSpatial
+    : public IAdvectionSpatial<
+              Geometry,
+              typename InterpolationBuilderTraits<
+                      typename FunctionInterpolator::BuilderType>::interpolation_grid_type,
+              DataType>
 {
     static_assert(std::is_floating_point_v<DataType>);
+
+    using FunctionBuilder = typename FunctionInterpolator::BuilderType;
+    using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
+
+    using GridX = typename InterpolationBuilderTraits<FunctionBuilder>::interpolation_grid_type;
 
     using GridV = typename Geometry::template velocity_dim_for<GridX>;
     using IdxRangeFdistrib = typename Geometry::IdxRangeFdistribu;
@@ -48,11 +52,22 @@ public:
      * @param[in] function_evaluator Evaluator along the GridX direction used to evaluate
      *          the advected function at the characteristic feet.
      */
-    explicit BslAdvectionSpatial(
+    [[deprecated]] explicit BslAdvectionSpatial(
             FunctionBuilder const& function_builder,
             FunctionEvaluator const& function_evaluator)
         : m_function_builder(function_builder)
         , m_function_evaluator(function_evaluator)
+    {
+    }
+
+    /**
+     * @brief Constructor
+     * @param[in] function_interpolator Interpolator along the GridX direction used to build
+     *          and evaluate the interpolation representation of the advected function.
+     */
+    explicit BslAdvectionSpatial(FunctionInterpolator const& function_interpolator)
+        : m_function_builder(function_interpolator.get_builder())
+        , m_function_evaluator(function_interpolator.get_evaluator())
     {
     }
 
@@ -78,16 +93,21 @@ public:
 
         // pre-allocate some memory to prevent allocation later in loop
         IdxRangeSpaceVelocity batched_feet_idx_range(idx_range);
-        FieldMem<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords_alloc(batched_feet_idx_range);
+        FieldMem<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords_alloc(
+                "feet_coords (BslAdvectionVelocity::operator())",
+                batched_feet_idx_range);
         Field<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
         DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
+                "function_coefs (BslAdvectionVelocity::operator())",
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 
         IdxRangeBatch batch_idx_range(idx_range);
 
         for (IdxSp const isp : sp_idx_range) {
             DataType const sqrt_me_on_mspecies = std::sqrt(mass(ielec()) / mass(isp));
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     batch_idx_range,
                     KOKKOS_LAMBDA(IdxBatch const ib) {

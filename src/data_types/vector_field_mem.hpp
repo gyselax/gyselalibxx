@@ -129,6 +129,20 @@ private:
     {
     }
 
+    /// Construct a VectorFieldMem on an index range with uninitialized values
+    template <std::size_t... Is>
+    explicit VectorFieldMem(
+            std::string const& label,
+            index_range_type const& idx_range,
+            Allocator allocator,
+            std::index_sequence<Is...> const&)
+        : base_type(
+                ((void)Is,
+                 chunk_type(label + " (" + std::to_string(Is) + ")", idx_range, allocator))...)
+
+    {
+    }
+
     /** Element access using a multi-dimensional Idx
      * @param delems discrete coordinates
      * @return copy of this element
@@ -152,6 +166,21 @@ public:
      */
     explicit VectorFieldMem(index_range_type const& idx_range, Allocator allocator = Allocator())
         : VectorFieldMem(idx_range, allocator, std::make_index_sequence<base_type::NDims> {})
+    {
+    }
+
+    /**
+     * Construct a VectorFieldMem on an index range with uninitialized values
+     *
+     * @param[in] label A name that will be associated to this array when profiling.
+     * @param[in] idx_range The index range on which the chunk will be defined.
+     * @param[in] allocator An optional allocator used to create the chunks.
+     */
+    explicit VectorFieldMem(
+            std::string const& label,
+            index_range_type const& idx_range,
+            Allocator allocator = Allocator())
+        : VectorFieldMem(label, idx_range, allocator, std::make_index_sequence<base_type::NDims> {})
     {
     }
 
