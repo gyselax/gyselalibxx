@@ -1083,91 +1083,31 @@ public:
                     // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
                     const IdxBSR idx_test_r(idx_test);
-                    const IdxBSTheta idx_test_theta(idx_test);
-
-                    // Calculate the offsets to locate all trial b-splines which are non-zero
-                    // somewhere in the support of the test b-spline.
-                    IdxStepBSR idx_step_trial_r_offset_min(
-                            Kokkos::
-                                    max(IdxStepBSR(-BSplinesR::degree()),
-                                        idx_range_fem_r.front() - idx_test_r));
-                    IdxStepBSR idx_step_trial_r_offset_max(
-                            Kokkos::
-                                    min(IdxStepBSR(BSplinesR::degree() + 1),
-                                        idx_range_fem_r.back() - idx_test_r));
-                    IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
-                    IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
 
                     // Calculate the row index and the first possible column index
                     int const row_idx = idx_test_polar - idxrange_singular.front();
-                    int col_offset
+                    int const first_col_idx
                             = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
 
-                    // Loop over the radial offset to a trial b-spline
-                    for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
-                         idx_step_trial_r < idx_step_trial_r_offset_max;
-                         ++idx_step_trial_r) {
-                        const IdxBSR idx_trial_r = idx_test_r + idx_step_trial_r;
-
-                        // As theta is periodic the theta component must be split in 2 to
-                        // guarantee that col_idx and values (from the CSR format) are
-                        // filled in order.
-                        // Calculate the start and end of the theta offset
-                        IdxBSTheta first_idx_trial_theta = detail_poisson::
-                                mod_add(idx_test_theta,
-                                        idx_step_trial_theta_offset_min,
-                                        full_idx_range_theta);
-                        const IdxBSTheta last_idx_trial_theta = detail_poisson::
-                                mod_add(idx_test_theta,
-                                        idx_step_trial_theta_offset_max,
-                                        full_idx_range_theta);
-                        IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
-                        // If the start is after the end then the periodicity wraps the b-splines
-                        // first_periodic_idx_trial_theta is modified to fill the wrapped area (at the
-                        // right hand side of the block) last.
-                        if (first_idx_trial_theta > last_idx_trial_theta) {
-                            first_periodic_idx_trial_theta = first_idx_trial_theta;
-                            first_idx_trial_theta = full_idx_range_theta.front();
-                        }
-                        // Loop over the poloidal offset to a trial b-spline
-                        for (IdxBSTheta idx_trial_theta(first_idx_trial_theta);
-                             idx_trial_theta < last_idx_trial_theta;
-                             ++idx_trial_theta) {
-                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
-                            double element = get_matrix_stencil_element(
-                                    team,
-                                    idx_test,
-                                    idx_trial,
-                                    coeff_alpha,
-                                    coeff_beta,
-                                    spline_evaluator,
-                                    mapping,
-                                    full_quad_idx_range,
-                                    int_volume_proxy);
-                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
-                            values_csr(batch_idx, aij_idx) = element;
-                            col_offset++;
-                        }
-                        // Loop over the poloidal offset to a trial b-spline for any elements that
-                        // are to the right of zeros following the elements already set
-                        for (IdxBSTheta idx_trial_theta(first_periodic_idx_trial_theta);
-                             idx_trial_theta < full_idx_range_theta.back() + 1;
-                             ++idx_trial_theta) {
-                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
-                            double element = get_matrix_stencil_element(
-                                    team,
-                                    idx_test,
-                                    idx_trial,
-                                    coeff_alpha,
-                                    coeff_beta,
-                                    spline_evaluator,
-                                    mapping,
-                                    full_quad_idx_range,
-                                    int_volume_proxy);
-                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
-                            values_csr(batch_idx, aij_idx) = element;
-                            col_offset++;
-                        }
+                    // Loop over the poloidal offset to a trial b-spline
+                    for (int col_nnz_idx = nnz_per_row_csr[row_idx] + first_col_idx;
+                         col_nnz_idx < nnz_per_row_csr[row_idx + 1];
+                         ++col_nnz_idx) {
+                        int const col_idx = col_idx_csr[col_nnz_idx];
+                        IdxBSPolar const idx_trial_polar = idxrange_singular.front() + col_idx;
+                        const IdxBSRTheta idx_trial
+                                = PolarBSplinesRTheta::get_2d_index(idx_trial_polar);
+                        double element = get_matrix_stencil_element(
+                                team,
+                                idx_test,
+                                idx_trial,
+                                coeff_alpha,
+                                coeff_beta,
+                                spline_evaluator,
+                                mapping,
+                                full_quad_idx_range,
+                                int_volume_proxy);
+                        values_csr(batch_idx, col_nnz_idx) = element;
                     }
                 });
 
