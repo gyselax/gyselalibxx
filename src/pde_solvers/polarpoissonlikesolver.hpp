@@ -169,32 +169,6 @@ private:
             PolarBSplinesRTheta,
             ddc::NullExtrapolationRule>;
 
-public:
-    // TODO: Are these types needed?
-    /**
-    * @brief Object storing a value and a value of the derivative
-    * of a 1D function.
-    */
-    struct EvalDeriv1DType
-    {
-        /// The value of the function @f$f(x)@f$.
-        double value;
-        /// The derivative of the function @f$\partial_x f(x)@f$.
-        double derivative;
-    };
-
-    /**
-    * @brief Object storing a value and a value of the derivatives
-    * in each direction of a 2D function.
-    */
-    struct EvalDeriv2DType
-    {
-        /// The value of the function @f$f(r, \theta)@f$.
-        double value;
-        /// The gradient of the function @f$\nabla f(r, \theta)@f$.
-        DVector<R_cov, Theta_cov> derivative;
-    };
-
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
     static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
