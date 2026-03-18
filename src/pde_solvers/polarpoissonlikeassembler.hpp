@@ -1026,9 +1026,6 @@ public:
         IdxRangeBSR central_radial_bspline_idx_range(
                 m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
 
-        IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
-
         IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_non_singular.front();
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
