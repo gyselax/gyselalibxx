@@ -58,6 +58,8 @@
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  * @tparam LogicalToPseudoPhysicalMapping
  *      A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates.
+ * @tparam PolarPoissonLikeSolver
+ *      The type of the solver for the Poisson-like equation on the polar plane.
  */
 template <
         class LogicalToPhysicalMapping,

@@ -50,6 +50,8 @@
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  * @tparam FootFinder
  *      A IFootFinder class.
+ * @tparam PolarPoissonLikeSolver
+ *      The type of the solver for the Poisson-like equation on the polar plane.
  *
  */
 template <class Mapping, class FootFinder, class PolarPoissonLikeSolver>
