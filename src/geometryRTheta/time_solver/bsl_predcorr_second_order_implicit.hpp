@@ -40,14 +40,14 @@
  * for @f$ n \geq 0 @f$,
  *
  * First, it predicts:
- * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
  * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes implicitly @f$\rho^P@f$ with a BslAdvectionPolar on @f$ \frac{dt}{4} @f$:
  *      - the characteristic feet @f$X^P@f$ is such that @f$X^P = X^k@f$ with @f$X^k@f$ the result of the implicit method:
  *          - @f$ X^k = X^n - \frac{dt}{4} \partial_t X^k@f$.
  * 
  * Secondly, it corrects: 
- * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarPoissonLikeSolver;
  * - 5. From @f$\phi^P@f$, it computes @f$A^P@f$ with a AdvectionFieldFinder;
  * - 6. From @f$\rho^n@f$ and @f$ A^{P} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionPolar on @f$ \frac{dt}{2} @f$.
  *      - the characteristic feet @f$X^C@f$ is such that @f$X^C = X^k@f$ with @f$X^k@f$ the result of the implicit method:
@@ -59,7 +59,7 @@
  * @tparam LogicalToPseudoPhysicalMapping
  *      A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates.
  */
-template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
+template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class PolarPoissonLikeSolver>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -86,11 +86,7 @@ private:
     EulerBuilder const m_euler;
     SplinePolarFootFinderType const m_foot_finder;
 
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorConstBound const& m_evaluator;
@@ -124,11 +120,7 @@ public:
             BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver,
+            PolarPoissonLikeSolver const& poisson_solver,
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
