@@ -266,10 +266,8 @@ template <
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler
 {
-    // TODO: Add a batch loop to operator()
-    static_assert(
-            std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
-            "PolarSplineFEMPoissonLikeAssembler is not yet batched");
+    static_assert(ddc::in_tags_v<GridR, ddc::to_type_seq_t<IdxRangeFull>>);
+    static_assert(ddc::in_tags_v<GridTheta, ddc::to_type_seq_t<IdxRangeFull>>);
 
 public:
     /// The radial dimension
@@ -279,11 +277,6 @@ public:
 
     static_assert(R::IS_CONTRAVARIANT);
     static_assert(Theta::IS_CONTRAVARIANT);
-
-    /// The tag for the batch dimension for the equation. This is public due to Cuda.
-    struct InternalBatchDim
-    {
-    };
 
 private:
     /// The radial dimension
@@ -316,6 +309,8 @@ private:
     using IdxStepBSR = IdxStep<BSplinesR>;
     using IdxStepBSTheta = IdxStep<BSplinesTheta>;
     using IdxStepBSRTheta = IdxStep<BSplinesR, BSplinesTheta>;
+
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridR, GridTheta>;
 
     using IdxRangeBatchedBSRTheta
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
@@ -386,8 +381,6 @@ private:
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
-    const int m_batch_idx {0}; // TODO: Remove when batching is supported
-
     DField<IdxRangeQuadratureRTheta> m_int_volume;
 
 public:
@@ -441,6 +434,7 @@ public:
             std::unique_ptr<
                     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>&
                     gko_matrix,
+            IdxRangeFull batched_idx_range,
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -465,10 +459,12 @@ public:
 
         const int n_matrix_elements = n_elements_singular + n_elements_overlap + n_elements_stencil;
 
+        IdxRangeBatch batch_idx_range(batched_idx_range);
+
         //CSR data storage
         gko_matrix = std::make_unique<
                 MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>(
-                1,
+                batch_idx_range.size(),
                 m_matrix_size,
                 n_matrix_elements,
                 max_iter,
@@ -512,6 +508,8 @@ public:
     {
         //CSR data storage
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
+
+        assert(IdxRangeBatch(get_idx_range(coeff_alpha)).size() == values.extent(0));
 
         compute_singular_singular_elements(
                 coeff_alpha,
@@ -796,7 +794,7 @@ public:
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
-        const int batch_idx = m_batch_idx;
+        const int n_batch = values_csr.extents(0);
         const int n_singular = idxrange_singular.size();
 
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
@@ -806,10 +804,12 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        n_singular * n_singular,
+                        n_batch * n_singular * n_singular,
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const int row_idx = team.league_rank() / n_singular;
+                    const int batch_idx = team.league_rank() / (n_singular * n_singular);
+                    const int row_col_idx = team.league_rank() % (n_singular * n_singular);
+                    const int row_idx = row_col_idx / n_singular;
                     const int col_idx = team.league_rank() % n_singular;
                     IdxBSPolar idx_test = idxrange_singular.front() + IdxStepBSPolar(row_idx);
                     IdxBSPolar idx_trial = idxrange_singular.front() + IdxStepBSPolar(col_idx);
@@ -892,7 +892,7 @@ public:
 
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
 
-        const int batch_idx = m_batch_idx;
+        const int n_batch = values_csr.extents(0);
         // Number of polar bsplines which traverse the singular point
         const int n_singular = idxrange_singular.size();
         // Number of tensor product polar bsplines which overlap with polar bsplines which
@@ -906,10 +906,13 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        n_singular * n_overlapping_singular,
+                        n_batch * n_singular * n_overlapping_singular,
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const IdxStepBSPolar idx_step_test(team.league_rank() / n_overlapping_singular);
+                    const int idx_batch(team.league_rank() / (n_singular * n_overlapping_singular));
+                    const int idx_test_trial(
+                            team.league_rank() % (n_singular * n_overlapping_singular));
+                    const IdxStepBSPolar idx_step_test(idx_test_trial / n_overlapping_singular);
                     const IdxStepBSPolar idx_step_trial(
                             team.league_rank() % n_overlapping_singular);
                     IdxBSPolar idx_test = idxrange_singular.front() + idx_step_test;
@@ -1035,7 +1038,7 @@ public:
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
-        const int batch_idx = m_batch_idx;
+        const int n_batch = values_csr.extents(0);
         const int n_singular = idxrange_singular.size();
         const std::source_location location = std::source_location::current();
 
@@ -1045,12 +1048,15 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_tensor_basis.size(),
+                        n_batch * m_idxrange_fem_tensor_basis.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    const int batch_idx = team.league_rank() / m_idxrange_fem_non_singular.size();
                     // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
-                            idxrange_fem_non_singular_front + IdxStepBSPolar {team.league_rank()});
+                            idxrange_fem_non_singular_front
+                            + IdxStepBSPolar {
+                                    team.league_rank() % m_idxrange_fem_non_singular.size()});
 
                     // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
