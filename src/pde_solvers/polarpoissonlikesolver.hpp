@@ -326,16 +326,18 @@ public:
                 QDimRMesh,
                 QDimThetaMesh>;
         PoissonAssembler assembler(get_field(m_int_volume_alloc));
+        assembler.setup_sparse_matrix(
+                m_gko_matrix,
+                max_iter,
+                res_tol,
+                batch_solver_logger,
+                preconditioner_max_block_size);
         assembler(
                 m_gko_matrix,
                 coeff_alpha,
                 coeff_beta,
                 mapping,
-                spline_evaluator,
-                max_iter,
-                res_tol,
-                batch_solver_logger,
-                preconditioner_max_block_size);
+                spline_evaluator);
     }
 
     /**
