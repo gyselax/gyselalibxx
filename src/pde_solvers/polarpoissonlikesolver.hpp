@@ -26,6 +26,8 @@
  * @tparam PolarBSplinesRTheta The type of the 2D polar B-splines (on the coordinate
  *          system @f$(r,\theta)@f$ including B-splines which traverse the O point).
  * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
+ * @tparam Mapping The type of the mapping from the logical domain to the physical domain where
+ *          the equation is defined.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
 template <

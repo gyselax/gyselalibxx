@@ -502,16 +502,6 @@ public:
      *      the equation is defined.
      * @param[in] spline_evaluator
      *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
-     * @param[in] max_iter
-     *      The maximum number of iterations possible for the batched CSR solver.
-     * @param[in] res_tol
-     *      The residual tolerance for the batched CSR solver. Be careful! the relative residual
-     *      provided here, will be used as "implicit residual" in ginkgo solver.
-     * @param[in] batch_solver_logger
-     *      Indicates whether log information such as the residual and the number of iterations
-     *      should be monitored.
-     * @param[in] preconditioner_max_block_size
-     *      The maximum size of the Jacobi preconditioner used by the batched CSR solver.
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
@@ -646,19 +636,6 @@ public:
      * @brief Computes the matrix element corresponding to the regular stencil
      *        ie: out to singular or overlapping areas.
      *
-     * @param[in] coeff_alpha
-     *      The spline representation of the @f$ \alpha @f$ function in the
-     *      definition of the Poisson-like equation.
-     * @param[in] coeff_beta
-     *      The spline representation of the  @f$ \beta @f$ function in the
-     *      definition of the Poisson-like equation.
-     * @param[in] mapping
-     *      The mapping from the logical domain to the physical domain where
-     *      the equation is defined.
-     * @param[in] spline_evaluator
-     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
-     * @param[out] values_csr
-     *             A 2D Kokkos view which stores the values of non-zero elements for the whole batch.
      * @param[out] col_idx_csr
      *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix)
      * @param[in] nnz_per_row_csr
