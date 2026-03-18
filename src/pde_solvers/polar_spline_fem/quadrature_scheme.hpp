@@ -78,10 +78,14 @@ public:
                 last_cell_offset += ddc::discrete_space<BSplines>().nbasis();
         }
 
-        Idx<QuadratureGrid> idx_first_possible(
+        // Approximately 1 interpolation point per cell
+        Idx<QuadratureGrid> idx_likely_first(
                 m_idx_range_quadrature.front() + first_cell_offset.value()
                 - ddc::discrete_space<BSplines>().degree());
-        while (ddc::coordinate(idx_first_possible) < ddc::coordinate(idx_range_knots)) {
+        while (ddc::coordinate(idx_likely_first) >= ddc::coordinate(idx_range_knots.front()) and idx_likely_first > m_idx_range_quadrature.front()) [[unlikely]] {
+            idx_first_possible -= 1;
+        }
+        while (ddc::coordinate(idx_likely_first) < ddc::coordinate(idx_range_knots.front())) {
             idx_first_possible += 1;
         }
         Idx<QuadratureGrid> idx_last_possible(
