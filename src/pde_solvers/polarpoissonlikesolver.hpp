@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
-#include "polarpoissonlikeassembler.hpp"
+#include "polar_spline_fem/poisson_like_assembler.hpp"
 
 /**
 * @brief Define a polar PDE solver for a Poisson-like equation.
