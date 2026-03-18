@@ -4,7 +4,7 @@
 #include <ddc/ddc.hpp>
 
 template <class IdxRangeLaplacian, class IdxRangeFull, class MemorySpace, class LayoutSpace>
-class IPoissonLikeSolver;
+class IPolarPoissonLikeSolver;
 
 /**
  * An abstract class from which a Poisson-like solver can inherit.
@@ -21,7 +21,7 @@ class IPoissonLikeSolver;
  *                      are saved.
  */
 template <class... ODims, class IdxRangeFull, class MemorySpace, class LayoutSpace>
-class IPoissonLikeSolver<IdxRange<ODims...>, IdxRangeFull, MemorySpace, LayoutSpace>
+class IPolarPoissonLikeSolver<IdxRange<ODims...>, IdxRangeFull, MemorySpace, LayoutSpace>
 {
 protected:
     /// @brief The tags describing the real dimensions in the equation.
@@ -64,7 +64,7 @@ public:
     using memory_space = MemorySpace;
 
 public:
-    virtual ~IPoissonLikeSolver() = default;
+    virtual ~IPolarPoissonLikeSolver() = default;
 
     /**
      * @brief Update the coefficients @f$ alpha @f$ and @f$ beta @f$ that define the equation.
