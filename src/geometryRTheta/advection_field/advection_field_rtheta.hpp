@@ -82,8 +82,6 @@
  *
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
- *
- * @see PolarSplineFEMPoissonLikeSolver
  */
 template <class Mapping>
 class AdvectionFieldFinder

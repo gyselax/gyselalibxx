@@ -26,6 +26,8 @@
  * @tparam PolarBSplinesRTheta The type of the 2D polar B-splines (on the coordinate
  *          system @f$(r,\theta)@f$ including B-splines which traverse the O point).
  * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
+ * @tparam Mapping The type of the mapping from the logical domain to the physical domain where
+ *          the equation is defined.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
  */
 template <
@@ -33,6 +35,7 @@ template <
         class GridTheta,
         class PolarBSplinesRTheta,
         class SplineRThetaEvaluatorNullBound,
+        class Mapping,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
 {
@@ -154,31 +157,19 @@ private:
     using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
     using DFieldRTheta = DField<IdxRangeRTheta>;
 
-public:
-    // TODO: Are these types needed?
-    /**
-    * @brief Object storing a value and a value of the derivative
-    * of a 1D function.
-    */
-    struct EvalDeriv1DType
-    {
-        /// The value of the function @f$f(x)@f$.
-        double value;
-        /// The derivative of the function @f$\partial_x f(x)@f$.
-        double derivative;
-    };
+    using PoissonAssembler = PolarSplineFEMPoissonLikeAssembler<
+            GridR,
+            GridTheta,
+            PolarBSplinesRTheta,
+            SplineRThetaEvaluatorNullBound,
+            QDimRMesh,
+            QDimThetaMesh>;
 
-    /**
-    * @brief Object storing a value and a value of the derivatives
-    * in each direction of a 2D function.
-    */
-    struct EvalDeriv2DType
-    {
-        /// The value of the function @f$f(r, \theta)@f$.
-        double value;
-        /// The gradient of the function @f$\nabla f(r, \theta)@f$.
-        DVector<R_cov, Theta_cov> derivative;
-    };
+    using PolarSplineEval = PolarSplineEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            PolarBSplinesRTheta,
+            ddc::NullExtrapolationRule>;
 
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
@@ -205,20 +196,20 @@ private:
     IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
-    FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume_alloc;
+    Mapping m_mapping;
+    SplineRThetaEvaluatorNullBound m_spline_evaluator;
 
-    PolarSplineEvaluator<
-            Kokkos::DefaultExecutionSpace,
-            Kokkos::DefaultExecutionSpace::memory_space,
-            PolarBSplinesRTheta,
-            ddc::NullExtrapolationRule>
-            m_polar_spline_evaluator;
+    PolarSplineEval m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
     mutable PolarSplineMemRTheta m_phi_spline_coef_alloc;
     mutable DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> m_x_init_alloc;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
+
+    FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume_alloc;
+    PoissonAssembler m_assembler;
+
 public:
     /**
      * @brief Instantiate a polar Poisson-like solver using FEM with B-splines.
@@ -229,12 +220,6 @@ public:
      *
      *  @f$  \phi = 0 @f$, on  @f$ \partial \Omega@f$.
      *
-     * @param[in] coeff_alpha
-     *      The spline representation of the @f$ \alpha @f$ function in the
-     *      definition of the Poisson-like equation.
-     * @param[in] coeff_beta
-     *      The spline representation of the  @f$ \beta @f$ function in the
-     *      definition of the Poisson-like equation.
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
@@ -253,10 +238,7 @@ public:
      *
      * @tparam Mapping A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
      */
-    template <class Mapping>
     PolarSplineFEMPoissonLikeSolver(
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             std::optional<int> max_iter = std::nullopt,
@@ -284,6 +266,8 @@ public:
                           IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
                   m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
+        , m_mapping(mapping)
+        , m_spline_evaluator(spline_evaluator)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef_alloc(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
         , m_x_init_alloc(
@@ -294,48 +278,33 @@ public:
                                   1,
                                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                                           - ddc::discrete_space<BSplinesTheta>().nbasis())))
+        , m_int_volume_alloc(calculate_int_volume(mapping))
+        , m_assembler(get_field(m_int_volume_alloc))
     {
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
         ddc::parallel_fill(get_field(m_x_init_alloc), 0);
-        // Get break points
-        IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
-        IdxRange<KnotsTheta> idxrange_theta_edges
-                = ddc::discrete_space<BSplinesTheta>().break_point_domain();
-        host_t<FieldMem<Coord<R>, IdxRange<KnotsR>>> breaks_r(idxrange_r_edges);
-        host_t<FieldMem<Coord<Theta>, IdxRange<KnotsTheta>>> breaks_theta(idxrange_theta_edges);
 
-        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_r));
-        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_theta));
-
-        // Define quadrature points and weights
-        GaussLegendre<QDimRMesh, s_n_gauss_legendre_r> gl_coeffs_r(get_const_field(breaks_r));
-        GaussLegendre<QDimThetaMesh, s_n_gauss_legendre_theta> gl_coeffs_theta(
-                get_const_field(breaks_theta));
-        m_int_volume_alloc = compute_coeffs_on_mapping(
-                Kokkos::DefaultExecutionSpace(),
-                mapping,
-                gauss_legendre_quadrature_coefficients<
-                        Kokkos::DefaultExecutionSpace>(gl_coeffs_r, gl_coeffs_theta));
-
-        using PoissonAssembler = PolarSplineFEMPoissonLikeAssembler<
-                GridR,
-                GridTheta,
-                PolarBSplinesRTheta,
-                SplineRThetaEvaluatorNullBound,
-                QDimRMesh,
-                QDimThetaMesh>;
-        PoissonAssembler assembler(get_field(m_int_volume_alloc));
-        assembler(
+        m_assembler.setup_sparse_matrix(
                 m_gko_matrix,
-                coeff_alpha,
-                coeff_beta,
-                mapping,
-                spline_evaluator,
                 max_iter,
                 res_tol,
                 batch_solver_logger,
                 preconditioner_max_block_size);
+    }
+
+    /**
+     * @brief Update the coefficients @f$ alpha @f$ and @f$ beta @f$ that define the equation.
+     * @param[in] coeff_alpha
+     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      definition of the Poisson-like equation.
+     * @param[in] coeff_beta
+     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      definition of the Poisson-like equation.
+     */
+    void update_coefficients(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta)
+    {
+        m_assembler(m_gko_matrix, coeff_alpha, coeff_beta, m_mapping, m_spline_evaluator);
     }
 
     /**
@@ -536,5 +505,29 @@ public:
         detail_poisson::
                 get_polar_bspline_vals_and_derivs<PolarBSplinesRTheta, false>(val, coord, idx);
         return val;
+    }
+
+private:
+    static FieldMem<double, IdxRangeQuadratureRTheta> calculate_int_volume(Mapping const& mapping)
+    {
+        // Get break points
+        IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
+        IdxRange<KnotsTheta> idxrange_theta_edges
+                = ddc::discrete_space<BSplinesTheta>().break_point_domain();
+        host_t<FieldMem<Coord<R>, IdxRange<KnotsR>>> breaks_r(idxrange_r_edges);
+        host_t<FieldMem<Coord<Theta>, IdxRange<KnotsTheta>>> breaks_theta(idxrange_theta_edges);
+
+        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_r));
+        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_theta));
+
+        // Define quadrature points and weights
+        GaussLegendre<QDimRMesh, s_n_gauss_legendre_r> gl_coeffs_r(get_const_field(breaks_r));
+        GaussLegendre<QDimThetaMesh, s_n_gauss_legendre_theta> gl_coeffs_theta(
+                get_const_field(breaks_theta));
+        return compute_coeffs_on_mapping(
+                Kokkos::DefaultExecutionSpace(),
+                mapping,
+                gauss_legendre_quadrature_coefficients<
+                        Kokkos::DefaultExecutionSpace>(gl_coeffs_r, gl_coeffs_theta));
     }
 };
