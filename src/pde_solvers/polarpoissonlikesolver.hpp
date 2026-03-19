@@ -2,6 +2,7 @@
 #pragma once
 
 #include "polar_spline_fem/poisson_like_assembler.hpp"
+#include "polar_spline_fem/quadrature_scheme.hpp"
 
 /**
 * @brief Define a polar PDE solver for a Poisson-like equation.
@@ -163,7 +164,9 @@ private:
             PolarBSplinesRTheta,
             SplineRThetaEvaluatorNullBound,
             QDimRMesh,
-            QDimThetaMesh>;
+            QDimThetaMesh,
+            QuadratureBetweenBreakPoints<QDimRMesh, BSplinesR>,
+            QuadratureBetweenBreakPoints<QDimThetaMesh, BSplinesTheta>>;
 
     using PolarSplineEval = PolarSplineEvaluator<
             Kokkos::DefaultExecutionSpace,
@@ -279,7 +282,14 @@ public:
                                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                                           - ddc::discrete_space<BSplinesTheta>().nbasis())))
         , m_int_volume_alloc(calculate_int_volume(mapping))
-        , m_assembler(get_field(m_int_volume_alloc))
+        , m_assembler(
+                  get_field(m_int_volume_alloc),
+                  QuadratureBetweenBreakPoints<
+                          QDimRMesh,
+                          BSplinesR>(m_idxrange_quadrature_r, s_n_gauss_legendre_r),
+                  QuadratureBetweenBreakPoints<
+                          QDimThetaMesh,
+                          BSplinesTheta>(m_idxrange_quadrature_theta, s_n_gauss_legendre_theta))
     {
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
@@ -385,6 +395,11 @@ public:
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
         IdxRangeQuadratureTheta full_quad_idx_range_theta(full_quad_idx_range);
 
+        QuadratureBetweenBreakPoints<QDimRMesh, BSplinesR>
+                quad_locator_r(m_idxrange_quadrature_r, s_n_gauss_legendre_r);
+        QuadratureBetweenBreakPoints<QDimThetaMesh, BSplinesTheta>
+                quad_locator_theta(m_idxrange_quadrature_theta, s_n_gauss_legendre_theta);
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
@@ -411,17 +426,14 @@ public:
                             bspl_theta.get_first_support_knot(idx_theta));
                     const Idx<KnotsTheta> end_non_zero_theta(
                             bspl_theta.get_last_support_knot(idx_theta));
-                    const IdxRangeQuadratureRTheta quad_range
-                            = detail_poisson::get_quadrature_between_knots<
-                                    QDimRMesh,
-                                    QDimThetaMesh,
-                                    BSplinesR,
-                                    BSplinesTheta>(
-                                    start_non_zero_r,
-                                    end_non_zero_r,
+
+                    const IdxRangeQuadratureR quad_range_r(quad_locator_r.get_relevant_idx_range(
+                            IdxRange(start_non_zero_r, end_non_zero_r - start_non_zero_r)));
+                    const IdxRangeQuadratureTheta quad_range_theta(
+                            quad_locator_theta.get_relevant_idx_range(IdxRange(
                                     start_non_zero_theta,
-                                    end_non_zero_theta,
-                                    full_quad_idx_range.front());
+                                    end_non_zero_theta - start_non_zero_theta)));
+                    const IdxRangeQuadratureRTheta quad_range(quad_range_r, quad_range_theta);
 
                     // Calculate the weak integral
                     b(batch_idx, idx) = 0.0;
