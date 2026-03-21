@@ -42,3 +42,24 @@ PUBLIC
 target_compile_definitions("${test_name_gtest}" PUBLIC)
 gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
 
+
+# InterfaceExactDerivativeMatrix test =================================================================
+set(test_name_gtest "interface_derivative_matrix_test")
+add_executable("${test_name_gtest}"
+    interface_derivative_matrix_Greville_periodic_test.cpp
+    interface_derivative_matrix_Hermite_test.cpp
+    ../../main.cpp
+)
+target_link_libraries("${test_name_gtest}"
+PUBLIC
+    DDC::core
+    GTest::gtest
+    GTest::gmock
+
+    gslx::multipatch_geometries
+    gslx::multipatch_spline
+    gslx::multipatch_interface_derivatives
+    gslx::utils
+)
+target_compile_definitions("${test_name_gtest}" PUBLIC -D${TEST_CASE})
+gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST)
