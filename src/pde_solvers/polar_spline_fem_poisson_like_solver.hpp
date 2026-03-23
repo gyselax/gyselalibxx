@@ -339,7 +339,7 @@ public:
 
         m_assembler.setup_sparse_matrix(
                 m_gko_matrix,
-                IdxRange<>(),
+                1,
                 max_iter,
                 res_tol,
                 batch_solver_logger,
