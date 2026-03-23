@@ -482,9 +482,9 @@ public:
                 preconditioner_max_block_size);
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
-        compute_singular_col_idx(col_idx, nnz_per_row);
-        compute_overlapping_singular_col_idx(col_idx, nnz_per_row);
-        compute_stencil_col_idx(col_idx, nnz_per_row);
+        compute_singular_singular_col_idx(col_idx, nnz_per_row);
+        compute_singular_tensor_col_idx(col_idx, nnz_per_row);
+        compute_tensor_tensor_col_idx(col_idx, nnz_per_row);
     }
 
     /**
@@ -518,7 +518,7 @@ public:
         //CSR data storage
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
 
-        compute_singular_elements(
+        compute_singular_singular_elements(
                 coeff_alpha,
                 coeff_beta,
                 mapping,
@@ -526,7 +526,7 @@ public:
                 values,
                 col_idx,
                 nnz_per_row);
-        compute_overlapping_singular_elements(
+        compute_singular_tensor_elements(
                 coeff_alpha,
                 coeff_beta,
                 mapping,
@@ -534,7 +534,7 @@ public:
                 values,
                 col_idx,
                 nnz_per_row);
-        compute_stencil_elements(
+        compute_tensor_tensor_elements(
                 coeff_alpha,
                 coeff_beta,
                 mapping,
@@ -547,15 +547,15 @@ public:
     }
 
     /**
-     * @brief Computes the matrix element corresponding to the singular area.
-     *        ie: the region enclosing the O-point.
+     * @brief Computes the column indices of the matrix elements corresponding to the
+     * inner products of singular basis functions and singular basis functions.
      *
      * @param[out] col_idx_csr
      *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix).
      * @param[in] nnz_per_row_csr
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
-    void compute_singular_col_idx(
+    void compute_singular_singular_col_idx(
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     col_idx_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -581,15 +581,15 @@ public:
     }
 
     /**
-     * @brief Computes the matrix element corresponding to singular elements overlapping
-     *        with regular grid.
+     * @brief Computes the column indices of the matrix elements corresponding to the
+     * inner products of singular basis functions and tensor basis functions.
      *
      * @param[out] col_idx_csr
      *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix)
      * @param[in] nnz_per_row_csr
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
-    void compute_overlapping_singular_col_idx(
+    void compute_singular_tensor_col_idx(
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     col_idx_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -633,15 +633,15 @@ public:
     }
 
     /**
-     * @brief Computes the matrix element corresponding to the regular stencil
-     *        ie: out to singular or overlapping areas.
+     * @brief Computes the column indices of the matrix elements corresponding to the
+     * inner products of tensor basis functions and tensor basis functions.
      *
      * @param[out] col_idx_csr
      *             A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix)
      * @param[in] nnz_per_row_csr
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
-    void compute_stencil_col_idx(
+    void compute_tensor_tensor_col_idx(
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     col_idx_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -756,8 +756,8 @@ public:
     }
 
     /**
-     * @brief Computes the matrix element corresponding to the singular area.
-     *        ie: the region enclosing the O-point.
+     * @brief Computes the matrix elements corresponding to the inner products of singular
+     * basis functions and singular basis functions.
      *
      * @param[in] coeff_alpha
      *      The spline representation of the @f$ \alpha @f$ function in the
@@ -778,7 +778,7 @@ public:
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
     template <class Mapping>
-    void compute_singular_elements(
+    void compute_singular_singular_elements(
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
@@ -843,8 +843,8 @@ public:
     }
 
     /**
-     * @brief Computes the matrix element corresponding to singular elements overlapping
-     *        with regular grid.
+     * @brief Computes the matrix elements corresponding to the inner products of singular
+     * basis functions and tensor basis functions.
      *
      * @param[in] coeff_alpha
      *      The spline representation of the @f$ \alpha @f$ function in the
@@ -865,7 +865,7 @@ public:
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
     template <class Mapping>
-    void compute_overlapping_singular_elements(
+    void compute_singular_tensor_elements(
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
@@ -986,8 +986,8 @@ public:
     }
 
     /**
-     * @brief Computes the matrix element corresponding to the regular stencil
-     *        ie: out to singular or overlapping areas.
+     * @brief Computes the matrix elements corresponding to the inner products of tensor
+     * basis functions and tensor basis functions.
      *
      * @param[in] coeff_alpha
      *      The spline representation of the @f$ \alpha @f$ function in the
@@ -1008,7 +1008,7 @@ public:
      *               A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix.
      */
     template <class Mapping>
-    void compute_stencil_elements(
+    void compute_tensor_tensor_elements(
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
