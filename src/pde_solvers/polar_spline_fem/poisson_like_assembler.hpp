@@ -322,7 +322,7 @@ private:
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
-    DField<IdxRangeQuadratureRTheta> m_int_volume;
+    DConstField<IdxRangeQuadratureRTheta> m_int_volume;
     QuadratureLocatorR m_quad_locator_r;
     QuadratureLocatorTheta m_quad_locator_theta;
 
@@ -333,7 +333,7 @@ public:
      * @param int_volume The initialised field of Jacobian values of the mapping. 
      */
     explicit PolarSplineFEMPoissonLikeAssembler(
-            DField<IdxRangeQuadratureRTheta> int_volume,
+            DConstField<IdxRangeQuadratureRTheta> int_volume,
             QuadratureLocatorR const& quad_locator_r,
             QuadratureLocatorTheta const& quad_locator_theta)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
@@ -735,7 +735,7 @@ public:
                         IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
                 m_idxrange_quadrature_theta);
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        DConstField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
         const int batch_idx = m_batch_idx;
         const int n_singular = idxrange_singular.size();
@@ -828,7 +828,7 @@ public:
                 central_radial_bspline_idx_range,
                 m_idxrange_bsplines_theta);
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        DConstField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
@@ -970,7 +970,7 @@ public:
 
         IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        DConstField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
@@ -1068,7 +1068,7 @@ public:
             ConstSpline2D coeff_beta,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume)
+            DConstField<IdxRangeQuadratureRTheta> int_volume)
     {
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
@@ -1139,7 +1139,7 @@ public:
             SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping,
             IdxRangeQuadratureRTheta const& full_quad_idx_range,
-            DField<IdxRangeQuadratureRTheta> int_volume,
+            DConstField<IdxRangeQuadratureRTheta> int_volume,
             QuadratureLocatorR const& quad_locator_r,
             QuadratureLocatorTheta const& quad_locator_theta)
     {
