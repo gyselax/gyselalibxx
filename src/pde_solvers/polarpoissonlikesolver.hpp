@@ -37,7 +37,14 @@ template <
         class PolarBSplinesRTheta,
         class SplineRThetaEvaluatorNullBound,
         class Mapping,
-        class IdxRangeFull = IdxRange<GridR, GridTheta>>
+        class IdxRangeFull = IdxRange<GridR, GridTheta>,
+        class GridQuadratureR = GridR,
+        class GridQuadratureTheta = GridTheta,
+        class QuadraturePositionSelectorR
+        = QuadratureOnInterpolationPoints<GridR, typename PolarBSplinesRTheta::BSplinesR_tag>,
+        class QuadraturePositionSelectorTheta = QuadratureOnInterpolationPoints<
+                GridTheta,
+                typename PolarBSplinesRTheta::BSplinesTheta_tag>>
 class PolarSplineFEMPoissonLikeSolver
 {
     // TODO: Add a batch loop to operator()
@@ -62,19 +69,6 @@ private:
 
 
 public:
-    /**
-     * @brief Tag the first dimension for the quadrature mesh.
-     */
-    struct QDimRMesh : NonUniformGridBase<R>
-    {
-    };
-    /**
-     * @brief Tag the second dimension for the quadrature mesh.
-     */
-    struct QDimThetaMesh : NonUniformGridBase<Theta>
-    {
-    };
-
     /// The tag for the batch dimension for the equation. This is public due to Cuda.
     struct InternalBatchDim
     {
@@ -120,35 +114,35 @@ private:
     /**
      * @brief Tag the quadrature index range in the first dimension.
      */
-    using IdxRangeQuadratureR = IdxRange<QDimRMesh>;
+    using IdxRangeQuadratureR = IdxRange<GridQuadratureR>;
     /**
      * @brief Tag the quadrature index range in the second dimension.
      */
-    using IdxRangeQuadratureTheta = IdxRange<QDimThetaMesh>;
+    using IdxRangeQuadratureTheta = IdxRange<GridQuadratureTheta>;
     /**
      * @brief Tag the quadrature index range.
      */
-    using IdxRangeQuadratureRTheta = IdxRange<QDimRMesh, QDimThetaMesh>;
+    using IdxRangeQuadratureRTheta = IdxRange<GridQuadratureR, GridQuadratureTheta>;
     /**
      * @brief Tag the elements (index) of the quadrature index range in the first dimension.
      */
-    using IdxQuadratureR = Idx<QDimRMesh>;
+    using IdxQuadratureR = Idx<GridQuadratureR>;
     /**
      * @brief Tag the elements (index) of the quadrature index range in the second dimension.
      */
-    using IdxQuadratureTheta = Idx<QDimThetaMesh>;
+    using IdxQuadratureTheta = Idx<GridQuadratureTheta>;
     /**
      * @brief Tag the elements (index) of the quadrature index range.
      */
-    using IdxQuadratureRTheta = Idx<QDimRMesh, QDimThetaMesh>;
+    using IdxQuadratureRTheta = Idx<GridQuadratureR, GridQuadratureTheta>;
     /**
      * @brief Tag a vector on the first dimension of the quadrature mesh.
      */
-    using IdxStepQuadratureR = IdxStep<QDimRMesh>;
+    using IdxStepQuadratureR = IdxStep<GridQuadratureR>;
     /**
      * @brief Tag a vector on the second dimension of the quadrature mesh.
      */
-    using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
+    using IdxStepQuadratureTheta = IdxStep<GridQuadratureTheta>;
 
     using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
     using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
@@ -163,10 +157,10 @@ private:
             GridTheta,
             PolarBSplinesRTheta,
             SplineRThetaEvaluatorNullBound,
-            QDimRMesh,
-            QDimThetaMesh,
-            QuadratureBetweenBreakPoints<QDimRMesh, BSplinesR>,
-            QuadratureBetweenBreakPoints<QDimThetaMesh, BSplinesTheta>>;
+            GridQuadratureR,
+            GridQuadratureTheta,
+            QuadraturePositionSelectorR,
+            QuadraturePositionSelectorTheta>;
 
     using PolarSplineEval = PolarSplineEvaluator<
             Kokkos::DefaultExecutionSpace,
@@ -198,8 +192,8 @@ private:
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
-    QuadratureBetweenBreakPoints<QDimRMesh, BSplinesR> m_quad_locator_r;
-    QuadratureBetweenBreakPoints<QDimThetaMesh, BSplinesTheta> m_quad_locator_theta;
+    QuadraturePositionSelectorR m_quad_locator_r;
+    QuadraturePositionSelectorTheta m_quad_locator_theta;
 
     IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
 
@@ -214,7 +208,7 @@ private:
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
-    FieldMem<double, IdxRangeQuadratureRTheta> m_int_volume_alloc;
+    DConstField<IdxRangeQuadratureRTheta> m_int_volume;
     PoissonAssembler m_assembler;
 
 public:
@@ -248,6 +242,7 @@ public:
     PolarSplineFEMPoissonLikeSolver(
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            DConstField<IdxRangeQuadratureRTheta> quadrature_coeffs,
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -260,14 +255,8 @@ public:
                   IdxStepBSR {m_n_overlap_cells}))
         , m_idxrange_bsplines_theta(ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
                   IdxStepBSTheta {m_nbasis_theta}))
-        , m_idxrange_quadrature_r(
-                  Idx<QDimRMesh>(0),
-                  IdxStep<QDimRMesh>(
-                          s_n_gauss_legendre_r * ddc::discrete_space<BSplinesR>().ncells()))
-        , m_idxrange_quadrature_theta(
-                  Idx<QDimThetaMesh>(0),
-                  IdxStep<QDimThetaMesh>(
-                          s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
+        , m_idxrange_quadrature_r(get_idx_range<GridQuadratureR>(quadrature_coeffs))
+        , m_idxrange_quadrature_theta(get_idx_range<GridQuadratureTheta>(quadrature_coeffs))
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_quad_locator_r(m_idxrange_quadrature_r)
         , m_quad_locator_theta(m_idxrange_quadrature_theta)
@@ -288,8 +277,8 @@ public:
                                   1,
                                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                                           - ddc::discrete_space<BSplinesTheta>().nbasis())))
-        , m_int_volume_alloc(calculate_int_volume(mapping))
-        , m_assembler(get_field(m_int_volume_alloc), m_quad_locator_r, m_quad_locator_theta)
+        , m_int_volume(quadrature_coeffs)
+        , m_assembler(m_int_volume, m_quad_locator_r, m_quad_locator_theta)
     {
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
@@ -355,7 +344,7 @@ public:
         // Get initial guess
         DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> x_init = get_field(m_x_init_alloc);
 
-        DConstField<IdxRangeQuadratureRTheta> int_volume = get_const_field(m_int_volume_alloc);
+        DConstField<IdxRangeQuadratureRTheta> int_volume = m_int_volume;
 
         IdxRangeBSPolar idx_range_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
@@ -376,13 +365,14 @@ public:
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadMDRange(
                                     team,
-                                    idx_range_quad_singular.template extent<QDimRMesh>(),
-                                    idx_range_quad_singular.template extent<QDimThetaMesh>()),
+                                    idx_range_quad_singular.template extent<GridQuadratureR>(),
+                                    idx_range_quad_singular.template extent<GridQuadratureTheta>()),
                             [&](int r_thread_index, int theta_thread_index, double& sum) {
-                                IdxQuadratureRTheta idx_quad = idx_range_quad_singular.front()
-                                                               + IdxStep<QDimRMesh, QDimThetaMesh>(
-                                                                       r_thread_index,
-                                                                       theta_thread_index);
+                                IdxQuadratureRTheta idx_quad
+                                        = idx_range_quad_singular.front()
+                                          + IdxStep<GridQuadratureR, GridQuadratureTheta>(
+                                                  r_thread_index,
+                                                  theta_thread_index);
                                 const CoordRTheta coord(ddc::coordinate(idx_quad));
                                 sum += rhs(coord) * get_polar_bspline_vals(coord, idx)
                                        * int_volume(idx_quad);
@@ -395,9 +385,8 @@ public:
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
         IdxRangeQuadratureTheta full_quad_idx_range_theta(full_quad_idx_range);
 
-        QuadratureBetweenBreakPoints<QDimRMesh, BSplinesR> quad_locator_r = m_quad_locator_r;
-        QuadratureBetweenBreakPoints<QDimThetaMesh, BSplinesTheta> quad_locator_theta
-                = m_quad_locator_theta;
+        QuadraturePositionSelectorR quad_locator_r = m_quad_locator_r;
+        QuadraturePositionSelectorTheta quad_locator_theta = m_quad_locator_theta;
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -437,12 +426,12 @@ public:
                     // Calculate the weak integral
                     b(batch_idx, idx) = 0.0;
                     for (IdxQuadratureTheta idx_quad_theta :
-                         ddc::select<QDimThetaMesh>(quad_range)) {
+                         ddc::select<GridQuadratureTheta>(quad_range)) {
                         // Manage periodicity
                         if (!full_quad_idx_range_theta.contains(idx_quad_theta)) {
                             idx_quad_theta -= full_quad_idx_range_theta.extents();
                         }
-                        for (IdxQuadratureR idx_quad_r : ddc::select<QDimRMesh>(quad_range)) {
+                        for (IdxQuadratureR idx_quad_r : ddc::select<GridQuadratureR>(quad_range)) {
                             IdxQuadratureRTheta idx_quad(idx_quad_r, idx_quad_theta);
                             CoordRTheta coord(ddc::coordinate(idx_quad));
                             b(batch_idx, idx) += rhs(coord) * get_polar_bspline_vals(coord, idx)
@@ -516,21 +505,5 @@ public:
         detail_poisson::
                 get_polar_bspline_vals_and_derivs<PolarBSplinesRTheta, false>(val, coord, idx);
         return val;
-    }
-
-private:
-    static FieldMem<double, IdxRangeQuadratureRTheta> calculate_int_volume(Mapping const& mapping)
-    {
-        // Define quadrature points and weights
-        GaussLegendre<QDimRMesh, s_n_gauss_legendre_r> gl_coeffs_r(
-                ddc::discrete_space<BSplinesR>().break_point_domain());
-        GaussLegendre<QDimThetaMesh, s_n_gauss_legendre_theta> gl_coeffs_theta(
-                ddc::discrete_space<BSplinesTheta>().break_point_domain());
-
-        return compute_coeffs_on_mapping(
-                Kokkos::DefaultExecutionSpace(),
-                mapping,
-                gauss_legendre_quadrature_coefficients<
-                        Kokkos::DefaultExecutionSpace>(gl_coeffs_r, gl_coeffs_theta));
     }
 };

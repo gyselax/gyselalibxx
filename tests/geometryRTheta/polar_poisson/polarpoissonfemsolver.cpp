@@ -36,19 +36,35 @@ using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorNullBound_host>;
 
-using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
-        GridR,
-        GridTheta,
-        PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound,
-        typename DiscreteMappingBuilder::MappingType>;
-
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
 #elif defined(CARTESIAN_SOLUTION)
 using LHSFunction = CartesianSolution<Mapping>;
 #endif
 using RHSFunction = ManufacturedPoissonTest<LHSFunction>;
+
+struct GridQuadratureR : NonUniformGridBase<R>
+{
+};
+struct GridQuadratureTheta : NonUniformGridBase<Theta>
+{
+};
+
+using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
+        GridR,
+        GridTheta,
+        PolarBSplinesRTheta,
+        SplineRThetaEvaluatorNullBound,
+        typename DiscreteMappingBuilder::MappingType,
+        IdxRange<GridR, GridTheta>,
+        GridQuadratureR,
+        GridQuadratureTheta,
+        QuadratureBetweenBreakPoints<GridQuadratureR, BSplinesR>,
+        QuadratureBetweenBreakPoints<GridQuadratureTheta, BSplinesTheta>>;
+
+static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
+static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
+
 
 constexpr bool discrete_rhs = false;
 
@@ -175,7 +191,19 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(discrete_mapping, evaluator);
+    GaussLegendre<GridQuadratureR, s_n_gauss_legendre_r> gl_coeffs_r(
+            ddc::discrete_space<BSplinesR>().break_point_domain());
+    GaussLegendre<GridQuadratureTheta, s_n_gauss_legendre_theta> gl_coeffs_theta(
+            ddc::discrete_space<BSplinesTheta>().break_point_domain());
+
+    DFieldMem<IdxRange<GridQuadratureR, GridQuadratureTheta>> quadrature_coeffs
+            = compute_coeffs_on_mapping(
+                    Kokkos::DefaultExecutionSpace(),
+                    discrete_mapping,
+                    gauss_legendre_quadrature_coefficients<
+                            Kokkos::DefaultExecutionSpace>(gl_coeffs_r, gl_coeffs_theta));
+
+    PoissonSolver solver(discrete_mapping, evaluator, get_const_field(quadrature_coeffs));
 
     solver.update_coefficients(
             get_const_field(coeff_alpha_spline),
