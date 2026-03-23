@@ -30,8 +30,8 @@ public:
      * derivative along each of the dimensions.
      */
     explicit GradientCreator(IPartialDerivativeCreator<
-                    IdxRangeFull,
-                    DerivativeDims> const&... partial_derivative_operator)
+                             IdxRangeFull,
+                             DerivativeDims> const&... partial_derivative_operator)
         : m_derivative_creators(std::tie(partial_derivative_operator...))
     {
     }
