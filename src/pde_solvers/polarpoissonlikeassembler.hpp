@@ -18,6 +18,37 @@
 
 namespace detail_poisson {
 
+/// The tag for the batch dimension for the equation.
+struct BatchDDim
+{
+};
+
+template <class ElementType, class... GridDims>
+auto to_batch_access(Field<ElementType, IdxRange<GridDims...>> field)
+{
+    constexpr std::size_t ndims = sizeof...(GridDims);
+    using BatchTypeSeq = type_seq_range_t<ddc::detail::TypeSeq<GridDims...>, 0, ndims - 2>;
+    using PolarTypeSeq = ddc::type_seq_remove_t<ddc::detail::TypeSeq<GridDims...>, BatchTypeSeq>;
+    using OutTypeSeq = ddc::type_seq_cat_t<ddc::detail::TypeSeq<BatchDDim>, PolarTypeSeq>;
+    using IdxRangeBatch = ddc::detail::convert_type_seq_to_discrete_domain_t<BatchTypeSeq>;
+    using IdxRangePolar = ddc::detail::convert_type_seq_to_discrete_domain_t<PolarTypeSeq>;
+    using IdxRangeOut = ddc::detail::convert_type_seq_to_discrete_domain_t<OutTypeSeq>;
+
+    IdxRange<GridDims...> full_idx_range(get_idx_range(field));
+    IdxRangeBatch batch_idx_range(full_idx_range);
+    IdxRangePolar polar_idx_range(full_idx_range);
+
+    Idx<BatchDDim> batch_start(0);
+    IdxStep<BatchDDim> batch_len(batch_idx_range.size());
+    IdxRange<BatchDDim> solver_batch_idx_range(batch_start, batch_len);
+
+    IdxRangeOut new_idx_range(solver_batch_idx_range, polar_idx_range);
+
+    assert(new_idx_range.size() == full_idx_range.size());
+    return Field<ElementType, IdxRangeOut>(field.data_handle(), new_idx_range);
+}
+
+
 /**
     * @brief Calculates the modulo idx_theta in relation to cells number along  @f$ \theta @f$ direction.
     *
@@ -262,13 +293,9 @@ template <
         typename PolarBSplinesRTheta,
         typename SplineRThetaEvaluatorNullBound,
         typename QDimRMesh,
-        typename QDimThetaMesh,
-        class IdxRangeFull = IdxRange<GridR, GridTheta>>
+        typename QDimThetaMesh>
 class PolarSplineFEMPoissonLikeAssembler
 {
-    static_assert(ddc::in_tags_v<GridR, ddc::to_type_seq_t<IdxRangeFull>>);
-    static_assert(ddc::in_tags_v<GridTheta, ddc::to_type_seq_t<IdxRangeFull>>);
-
 public:
     /// The radial dimension
     using R = typename GridR::continuous_dimension_type;
@@ -293,6 +320,8 @@ private:
     using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
     using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
 
+    using IdxRangeFull = IdxRange<detail_poisson::BatchDDim, GridR, GridTheta>;
+
     /// The type of an index range over the polar B-splines
     using IdxRangeBSPolar = IdxRange<PolarBSplinesRTheta>;
     using IdxBSPolar = Idx<PolarBSplinesRTheta>;
@@ -310,13 +339,9 @@ private:
     using IdxStepBSTheta = IdxStep<BSplinesTheta>;
     using IdxStepBSRTheta = IdxStep<BSplinesR, BSplinesTheta>;
 
-    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, GridR, GridTheta>;
+    using IdxRangeBatchedBSRTheta = IdxRange<detail_poisson::BatchDDim, BSplinesR, BSplinesTheta>;
 
-    using IdxRangeBatchedBSRTheta
-            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
-                    ddc::to_type_seq_t<IdxRangeFull>,
-                    ddc::detail::TypeSeq<GridR, GridTheta>,
-                    ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
+    using IdxBatch = Idx<detail_poisson::BatchDDim>;
 
     /**
      * @brief Tag the quadrature index range in the first dimension.
@@ -351,7 +376,9 @@ private:
      */
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
-    using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
+    using ConstSplineBatched2D = DConstField<IdxRangeBatchedBSRTheta>;
+
+    using ConstSpline2D = DConstField<IdxRangeBSRTheta>;
 
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
@@ -417,6 +444,7 @@ public:
      * @brief Compute the sparsity pattern for the stiffness matrix.
      * 
      * @param[out] gko_matrix The pointer to the assembled matrix.
+     * @param[in] n_batch The number of matrix equations to solve.
      * @param[in] max_iter
      *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
@@ -434,7 +462,7 @@ public:
             std::unique_ptr<
                     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>&
                     gko_matrix,
-            IdxRangeBatch batch_idx_range,
+            std::size_t n_batch,
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -462,7 +490,7 @@ public:
         //CSR data storage
         gko_matrix = std::make_unique<
                 MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>(
-                batch_idx_range.size(),
+                n_batch,
                 m_matrix_size,
                 n_matrix_elements,
                 max_iter,
@@ -499,15 +527,15 @@ public:
             std::unique_ptr<
                     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>> const&
                     gko_matrix,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
+            ConstSplineBatched2D coeff_alpha,
+            ConstSplineBatched2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator)
     {
         //CSR data storage
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
 
-        assert(IdxRangeBatch(get_idx_range(coeff_alpha)).size() == values.extent(0));
+        assert(get_idx_range<detail_poisson::BatchDDim>(coeff_alpha).size() == values.extent(0));
 
         compute_singular_singular_elements(
                 coeff_alpha,
@@ -772,8 +800,8 @@ public:
      */
     template <class Mapping>
     void compute_singular_singular_elements(
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
+            ConstSplineBatched2D coeff_alpha,
+            ConstSplineBatched2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -805,7 +833,7 @@ public:
                         n_batch * n_singular * n_singular,
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const int batch_idx = team.league_rank() / (n_singular * n_singular);
+                    const int idx_batch = team.league_rank() / (n_singular * n_singular);
                     const int row_col_idx = team.league_rank() % (n_singular * n_singular);
                     const int row_idx = row_col_idx / n_singular;
                     const int col_idx = team.league_rank() % n_singular;
@@ -827,8 +855,8 @@ public:
                                         idx_test,
                                         idx_trial,
                                         idx_quad,
-                                        coeff_alpha,
-                                        coeff_beta,
+                                        coeff_alpha[IdxBatch {idx_batch}],
+                                        coeff_beta[IdxBatch {idx_batch}],
                                         spline_evaluator,
                                         mapping,
                                         int_volume_proxy);
@@ -836,7 +864,7 @@ public:
                             element);
                     const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
                     //Fill the dense matrix corresponding to the b-splines on the singular point
-                    values_csr(batch_idx, csr_idx_singular_area) = element;
+                    values_csr(idx_batch, csr_idx_singular_area) = element;
                 });
     }
 
@@ -864,8 +892,8 @@ public:
      */
     template <class Mapping>
     void compute_singular_tensor_elements(
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
+            ConstSplineBatched2D coeff_alpha,
+            ConstSplineBatched2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -971,8 +999,8 @@ public:
                                         idx_test,
                                         idx_trial_polar,
                                         idx_quad,
-                                        coeff_alpha,
-                                        coeff_beta,
+                                        coeff_alpha[IdxBatch {idx_batch}],
+                                        coeff_beta[IdxBatch {idx_batch}],
                                         spline_evaluator,
                                         mapping,
                                         int_volume_proxy);
@@ -1013,8 +1041,8 @@ public:
      */
     template <class Mapping>
     void compute_tensor_tensor_elements(
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
+            ConstSplineBatched2D coeff_alpha,
+            ConstSplineBatched2D coeff_beta,
             Mapping const& mapping,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -1049,7 +1077,7 @@ public:
                         n_batch * m_idxrange_fem_tensor_basis.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const int batch_idx = team.league_rank() / m_idxrange_fem_tensor_basis.size();
+                    const int idx_batch = team.league_rank() / m_idxrange_fem_tensor_basis.size();
                     // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
                             idxrange_fem_non_singular_front
@@ -1077,13 +1105,13 @@ public:
                                 team,
                                 idx_test,
                                 idx_trial,
-                                coeff_alpha,
-                                coeff_beta,
+                                coeff_alpha[IdxBatch {idx_batch}],
+                                coeff_beta[IdxBatch {idx_batch}],
                                 spline_evaluator,
                                 mapping,
                                 full_quad_idx_range,
                                 int_volume_proxy);
-                        values_csr(batch_idx, csr_idx) = element;
+                        values_csr(idx_batch, csr_idx) = element;
                     }
                 });
 

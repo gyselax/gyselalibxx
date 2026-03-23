@@ -287,7 +287,7 @@ public:
 
         m_assembler.setup_sparse_matrix(
                 m_gko_matrix,
-                IdxRange<>(),
+                1,
                 max_iter,
                 res_tol,
                 batch_solver_logger,
@@ -305,7 +305,12 @@ public:
      */
     void update_coefficients(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta)
     {
-        m_assembler(m_gko_matrix, coeff_alpha, coeff_beta, m_mapping, m_spline_evaluator);
+        m_assembler(
+                m_gko_matrix,
+                detail_poisson::to_batch_access(coeff_alpha),
+                detail_poisson::to_batch_access(coeff_beta),
+                m_mapping,
+                m_spline_evaluator);
     }
 
     /**
