@@ -20,7 +20,7 @@
  * @tparam Mapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  */
-template <class Mapping>
+template <class Mapping, class PolarPoissonLikeSolver>
 class VortexMergerEquilibria
 {
 private:
@@ -28,11 +28,7 @@ private:
     IdxRangeRTheta const& m_grid;
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorNullBound const& m_evaluator;
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
 public:
     /**
@@ -57,11 +53,7 @@ public:
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
             SplineRThetaEvaluatorNullBound const& evaluator,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
+            PolarPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
         , m_builder(builder)

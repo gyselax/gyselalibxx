@@ -44,13 +44,14 @@
 
 
 namespace {
+using DiscreteMappingBuilder
+        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound>;
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+        SplineRThetaEvaluatorNullBound,
+        typename DiscreteMappingBuilder::MappingType>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
 namespace fs = std::filesystem;
@@ -182,11 +183,10 @@ int main(int argc, char** argv)
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
-    PoissonSolver poisson_solver(
+    PoissonSolver poisson_solver(discrete_mapping, spline_evaluator);
+    poisson_solver.update_coefficients(
             get_const_field(coeff_alpha_spline),
-            get_const_field(coeff_beta_spline),
-            discrete_mapping,
-            spline_evaluator);
+            get_const_field(coeff_beta_spline));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
 #if defined(PREDCORR)
