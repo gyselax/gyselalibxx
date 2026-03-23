@@ -378,13 +378,12 @@ private:
     const int m_matrix_size;
 
     // Domains
-    IdxRangeBSPolar m_idxrange_fem_non_singular;
+    IdxRangeBSPolar m_idxrange_fem_tensor_basis;
     IdxRangeBSR m_idxrange_bsplines_r;
     IdxRangeBSTheta m_idxrange_bsplines_theta;
 
     IdxRangeQuadratureR m_idxrange_quadrature_r;
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
-    IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
@@ -401,7 +400,7 @@ public:
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
-        , m_idxrange_fem_non_singular(
+        , m_idxrange_fem_tensor_basis(
                   ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
                           IdxStepBSPolar {m_nbasis_theta}))
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
@@ -416,10 +415,6 @@ public:
                   Idx<QDimThetaMesh>(0),
                   IdxStep<QDimThetaMesh>(
                           s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
-        , m_idxrange_quadrature_singular(
-                  m_idxrange_quadrature_r.take_first(
-                          IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
-                  m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_int_volume(int_volume)
     {
@@ -456,7 +451,7 @@ public:
         constexpr int n_elements_singular
                 = PolarBSplinesRTheta::n_singular_basis() * PolarBSplinesRTheta::n_singular_basis();
         // Number of non-zero elements in the matrix corresponding to the inner product of
-        // polar splines at the singular point and the other splines
+        // polar bsplines which traverse the singular point and other polar bsplines
         const int n_elements_overlap = 2
                                        * (PolarBSplinesRTheta::n_singular_basis()
                                           * BSplinesR::degree() * m_nbasis_theta);
@@ -606,6 +601,8 @@ public:
                 m_idxrange_bsplines_theta);
 
         const int n_singular = idxrange_singular.size();
+        // Number of tensor product polar bsplines which overlap with polar bsplines which
+        // traverse the singular point
         const int n_overlapping_singular = idxrange_non_singular_near_centre.size();
 
         const std::source_location location = std::source_location::current();
@@ -661,7 +658,7 @@ public:
         IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
                 IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
 
-        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_non_singular.front();
+        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
         const int n_singular = idxrange_singular.size();
         const std::source_location location = std::source_location::current();
@@ -672,7 +669,7 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_non_singular.size(),
+                        m_idxrange_fem_tensor_basis.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     // Calculate the index of the test b-spline
@@ -792,7 +789,10 @@ public:
     {
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
-        IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
+        IdxRangeQuadratureRTheta idx_range_quad_singular(
+                m_idxrange_quadrature_r.take_first(
+                        IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
+                m_idxrange_quadrature_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
@@ -893,7 +893,10 @@ public:
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
 
         const int batch_idx = m_batch_idx;
+        // Number of polar bsplines which traverse the singular point
         const int n_singular = idxrange_singular.size();
+        // Number of tensor product polar bsplines which overlap with polar bsplines which
+        // traverse the singular point
         const int n_overlapping_singular = idxrange_non_singular_near_centre.size();
 
         const std::source_location location = std::source_location::current();
@@ -1026,7 +1029,7 @@ public:
         IdxRangeBSR central_radial_bspline_idx_range(
                 m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
 
-        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_non_singular.front();
+        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
@@ -1042,7 +1045,7 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_non_singular.size(),
+                        m_idxrange_fem_tensor_basis.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     // Calculate the index of the test b-spline
