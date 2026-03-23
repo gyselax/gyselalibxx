@@ -14,9 +14,6 @@
 
 TEST(GradientCreator, Call)
 {
-    using TestMapping = CircularToCartesian<R, Theta, X, Y>;
-    TestMapping const mapping;
-
     IdxStepR nbcells_r(4);
     std::vector<CoordR> point_sampling_r
             = build_uniform_break_points(CoordR(1e-5), CoordR(1.), nbcells_r);
@@ -34,8 +31,7 @@ TEST(GradientCreator, Call)
 
     ConstantPartialDerivativeCreator<IdxRange<GridR, GridTheta>, R> r_deriv(0);
     ConstantPartialDerivativeCreator<IdxRange<GridR, GridTheta>, Theta> theta_deriv(1);
-    GradientCreator<TestMapping, IdxRange<GridR, GridTheta>, R, Theta>
-            get_gradient(mapping, r_deriv, theta_deriv);
+    GradientCreator<IdxRange<GridR, GridTheta>, R, Theta> get_gradient(r_deriv, theta_deriv);
 
     DVectorFieldMem<IdxRange<GridR, GridTheta>, VectorIndexSet<R_cov, Theta_cov>>
             grad_func_cov_alloc(idxrange_rtheta);
