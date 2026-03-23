@@ -2,7 +2,7 @@
 
 # Class BslPredCorrRTheta
 
-**template &lt;class Mapping, class FootFinder&gt;**
+**template &lt;class Mapping, class FootFinder, class PolarPoissonLikeSolver&gt;**
 
 
 
@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, SplineRThetaBuilder const & builder, SplineRThetaEvaluatorNullBound const & rhs\_evaluator, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
+|   | [**BslPredCorrRTheta**](#function-bslpredcorrrtheta) (Mapping const & mapping, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, SplineRThetaBuilder const & builder, SplineRThetaEvaluatorNullBound const & rhs\_evaluator, PolarPoissonLikeSolver const & poisson\_solver) <br>_Instantiate a_ [_**BslPredCorrRTheta**_](classBslPredCorrRTheta.md) _._ |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) override const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
 
@@ -172,7 +172,7 @@ for \(n \geq 0\),
 
 
 First, it advects on a half time step:
-* 1. From \(\rho^n\), it computes \(\phi^n\) with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
+* 1. From \(\rho^n\), it computes \(\phi^n\) with a PolarPoissonLikeSolver;
 * 2. From \(\phi^n\), it computes \(A^n\) with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
 * 3. From \(\rho^n\) and \(A^n\), it computes \(\rho^{n+1/2}\) with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on \(\frac{dt}{2}\);
 
@@ -180,7 +180,7 @@ First, it advects on a half time step:
 
 
 Secondly, it advects on a full time step:
-* 4. From \(\rho^{n+1/2}\), it computes \(\phi^{n+1/2}\) with a [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md);
+* 4. From \(\rho^{n+1/2}\), it computes \(\phi^{n+1/2}\) with a PolarPoissonLikeSolver;
 * 5. From \(\phi^{n+1/2}\), it computes \(A^{n+1/2}\) with a [**AdvectionFieldFinder**](classAdvectionFieldFinder.md);
 * 6. From \(\rho^n\) and \(A^{n+1/2}\), it computes \(\rho^{n+1}\) with a [**BslAdvectionPolar**](classBslAdvectionPolar.md) on \(dt\).
 
@@ -194,6 +194,7 @@ Secondly, it advects on a full time step:
 
 * `Mapping` A class describing a mapping from curvilinear coordinates to Cartesian coordinates. 
 * `FootFinder` A IFootFinder class. 
+* `PolarPoissonLikeSolver` The type of the solver for the Poisson-like equation on the polar plane. 
 
 
 
@@ -213,7 +214,7 @@ inline BslPredCorrRTheta::BslPredCorrRTheta (
     BslAdvectionRTheta const & advection_solver,
     SplineRThetaBuilder const & builder,
     SplineRThetaEvaluatorNullBound const & rhs_evaluator,
-    PolarSplineFEMPoissonLikeSolver < GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound > const & poisson_solver
+    PolarPoissonLikeSolver const & poisson_solver
 ) 
 ```
 

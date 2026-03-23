@@ -578,7 +578,7 @@
 #include "spline_definitions_r_theta.hpp"
 
 
-template &lt;class Mapping&gt;
+template &lt;class Mapping, class PolarPoissonLikeSolver&gt;
 class VortexMergerEquilibria
 {
 private:
@@ -586,11 +586,7 @@ private:
     IdxRangeRTheta const&amp; m_grid;
     SplineRThetaBuilder const&amp; m_builder;
     SplineRThetaEvaluatorNullBound const&amp; m_evaluator;
-    PolarSplineFEMPoissonLikeSolver&lt;
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound&gt; const&amp; m_poisson_solver;
+    PolarPoissonLikeSolver const&amp; m_poisson_solver;
 
 public:
     VortexMergerEquilibria(
@@ -598,11 +594,7 @@ public:
             IdxRangeRTheta const&amp; grid,
             SplineRThetaBuilder const&amp; builder,
             SplineRThetaEvaluatorNullBound const&amp; evaluator,
-            PolarSplineFEMPoissonLikeSolver&lt;
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound&gt; const&amp; poisson_solver)
+            PolarPoissonLikeSolver const&amp; poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
         , m_builder(builder)

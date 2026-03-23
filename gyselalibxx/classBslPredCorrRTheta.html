@@ -561,7 +561,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-bslpredcorrrtheta">Class BslPredCorrRTheta</h1>
-<p><strong>template &lt;class Mapping, class FootFinder&gt;</strong></p>
+<p><strong>template &lt;class Mapping, class FootFinder, class PolarPoissonLikeSolver&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslPredCorrRTheta.html"><strong>BslPredCorrRTheta</strong></a></p>
 <p><em>Predictor-corrector for the Vlasov-Poisson equations.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -579,7 +579,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bslpredcorrrtheta"><strong>BslPredCorrRTheta</strong></a> (Mapping const &amp; mapping, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, SplineRThetaBuilder const &amp; builder, SplineRThetaEvaluatorNullBound const &amp; rhs_evaluator, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-bslpredcorrrtheta"><strong>BslPredCorrRTheta</strong></a> (Mapping const &amp; mapping, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, SplineRThetaBuilder const &amp; builder, SplineRThetaEvaluatorNullBound const &amp; rhs_evaluator, PolarPoissonLikeSolver const &amp; poisson_solver) <br><em>Instantiate a</em> <a href="classBslPredCorrRTheta.html"><em><strong>BslPredCorrRTheta</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
@@ -634,17 +634,18 @@
 <p>This method is mainly a Runge-Kutta 2 method:</p>
 <p>for <span class="arithmatex">\(n \geq 0\)</span>,</p>
 <p>First, it advects on a half time step:
-* 1. From <span class="arithmatex">\(\rho^n\)</span>, it computes <span class="arithmatex">\(\phi^n\)</span> with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
+* 1. From <span class="arithmatex">\(\rho^n\)</span>, it computes <span class="arithmatex">\(\phi^n\)</span> with a PolarPoissonLikeSolver;
 * 2. From <span class="arithmatex">\(\phi^n\)</span>, it computes <span class="arithmatex">\(A^n\)</span> with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
 * 3. From <span class="arithmatex">\(\rho^n\)</span> and <span class="arithmatex">\(A^n\)</span>, it computes <span class="arithmatex">\(\rho^{n+1/2}\)</span> with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on <span class="arithmatex">\(\frac{dt}{2}\)</span>;</p>
 <p>Secondly, it advects on a full time step:
-* 4. From <span class="arithmatex">\(\rho^{n+1/2}\)</span>, it computes <span class="arithmatex">\(\phi^{n+1/2}\)</span> with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
+* 4. From <span class="arithmatex">\(\rho^{n+1/2}\)</span>, it computes <span class="arithmatex">\(\phi^{n+1/2}\)</span> with a PolarPoissonLikeSolver;
 * 5. From <span class="arithmatex">\(\phi^{n+1/2}\)</span>, it computes <span class="arithmatex">\(A^{n+1/2}\)</span> with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
 * 6. From <span class="arithmatex">\(\rho^n\)</span> and <span class="arithmatex">\(A^{n+1/2}\)</span>, it computes <span class="arithmatex">\(\rho^{n+1}\)</span> with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on <span class="arithmatex">\(dt\)</span>.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>Mapping</code> A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </li>
 <li><code>FootFinder</code> A IFootFinder class. </li>
+<li><code>PolarPoissonLikeSolver</code> The type of the solver for the Poisson-like equation on the polar plane. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-bslpredcorrrtheta">function BslPredCorrRTheta</h3>
@@ -654,7 +655,7 @@
     BslAdvectionRTheta const &amp; advection_solver,
     SplineRThetaBuilder const &amp; builder,
     SplineRThetaEvaluatorNullBound const &amp; rhs_evaluator,
-    PolarSplineFEMPoissonLikeSolver &lt; GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver
+    PolarPoissonLikeSolver const &amp; poisson_solver
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>

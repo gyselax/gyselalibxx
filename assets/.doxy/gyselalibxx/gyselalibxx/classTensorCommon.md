@@ -18,7 +18,6 @@ _A superclass for_ [_**Tensor**_](classTensor.md) _calculations._[_**Tensor**_](
 
 
 
-Inherited by the following classes: [Tensor](classTensor.md)
 
 
 

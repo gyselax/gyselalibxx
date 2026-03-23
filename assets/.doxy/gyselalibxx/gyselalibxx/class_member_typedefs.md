@@ -528,6 +528,8 @@
 * **PDEDim** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **PerpEdgeGrid1** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
 * **PerpEdgeGrid2** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
+* **PoissonAssembler** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **PolarSplineEval** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **PolarSplineMemRTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **PolarSplineRTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **PoissonSolver** ([**QNSolver**](classQNSolver.md))

@@ -2,7 +2,7 @@
 
 # Class VortexMergerEquilibria
 
-**template &lt;class Mapping&gt;**
+**template &lt;class Mapping, class PolarPoissonLikeSolver&gt;**
 
 
 
@@ -54,7 +54,7 @@ _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates
 
 | Type | Name |
 | ---: | :--- |
-|   | [**VortexMergerEquilibria**](#function-vortexmergerequilibria) (Mapping const & mapping, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, SplineRThetaEvaluatorNullBound const & evaluator, [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), SplineRThetaEvaluatorNullBound &gt; const & poisson\_solver) <br>_Instantiate a_ [_**VortexMergerEquilibria**_](classVortexMergerEquilibria.md) _._ |
+|   | [**VortexMergerEquilibria**](#function-vortexmergerequilibria) (Mapping const & mapping, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, SplineRThetaEvaluatorNullBound const & evaluator, PolarPoissonLikeSolver const & poisson\_solver) <br>_Instantiate a_ [_**VortexMergerEquilibria**_](classVortexMergerEquilibria.md) _._ |
 |  void | [**find\_equilibrium**](#function-find_equilibrium) (host\_t&lt; DFieldRTheta &gt; sigma\_host, host\_t&lt; DFieldRTheta &gt; phi\_eq\_host, host\_t&lt; DFieldRTheta &gt; rho\_eq\_host, std::function&lt; double(double const)&gt; const & function, double const phi\_max, double const tau, int count\_max=25) const<br>_Get an equilibrium._  |
 |  void | [**set\_equilibrium**](#function-set_equilibrium) (host\_t&lt; DFieldRTheta &gt; rho\_eq\_host, std::function&lt; double(double const)&gt; function, double const phi\_max, double const tau) <br>_Set an equilibrium._  |
 
@@ -113,7 +113,7 @@ inline VortexMergerEquilibria::VortexMergerEquilibria (
     IdxRangeRTheta const & grid,
     SplineRThetaBuilder const & builder,
     SplineRThetaEvaluatorNullBound const & evaluator,
-    PolarSplineFEMPoissonLikeSolver < GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound > const & poisson_solver
+    PolarPoissonLikeSolver const & poisson_solver
 ) 
 ```
 

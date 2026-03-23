@@ -33,7 +33,10 @@
 
 
 
-template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
+template <
+        class LogicalToPhysicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class PolarPoissonLikeSolver>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -60,11 +63,7 @@ private:
     EulerBuilder const m_euler;
     SplinePolarFootFinderType const m_foot_finder;
 
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorConstBound const& m_evaluator;
@@ -78,11 +77,7 @@ public:
             BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver,
+            PolarPoissonLikeSolver const& poisson_solver,
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)

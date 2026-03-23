@@ -561,7 +561,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-bslexplicitpredcorrrtheta">Class BslExplicitPredCorrRTheta</h1>
-<p><strong>template &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping&gt;</strong></p>
+<p><strong>template &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class PolarPoissonLikeSolver&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslExplicitPredCorrRTheta.html"><strong>BslExplicitPredCorrRTheta</strong></a></p>
 <p><em>A second order explicit predictor-corrector for the Vlasov-Poisson equations.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -579,7 +579,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bslexplicitpredcorrrtheta"><strong>BslExplicitPredCorrRTheta</strong></a> (LogicalToPhysicalMapping const &amp; logical_to_physical, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder const &amp; builder, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver, SplineRThetaEvaluatorConstBound const &amp; advection_evaluator) <br><em>Instantiate a</em> <a href="classBslExplicitPredCorrRTheta.html"><em><strong>BslExplicitPredCorrRTheta</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-bslexplicitpredcorrrtheta"><strong>BslExplicitPredCorrRTheta</strong></a> (LogicalToPhysicalMapping const &amp; logical_to_physical, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder const &amp; builder, PolarPoissonLikeSolver const &amp; poisson_solver, SplineRThetaEvaluatorConstBound const &amp; advection_evaluator) <br><em>Instantiate a</em> <a href="classBslExplicitPredCorrRTheta.html"><em><strong>BslExplicitPredCorrRTheta</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual host_t&lt; DFieldRTheta &gt;</td>
@@ -634,12 +634,12 @@
 <p>The second order explicit predictor-corrector is also detailed in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <p>for <span class="arithmatex">\(n \geq 0\)</span>,</p>
 <p>First, it predicts:
-* 1. From <span class="arithmatex">\(\rho^n\)</span>, it computes <span class="arithmatex">\(\phi^n\)</span> with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
+* 1. From <span class="arithmatex">\(\rho^n\)</span>, it computes <span class="arithmatex">\(\phi^n\)</span> with a PolarPoissonLikeSolver;
 * 2. From <span class="arithmatex">\(\phi^n\)</span>, it computes <span class="arithmatex">\(A^n\)</span> with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
 * 3. From <span class="arithmatex">\(\rho^n\)</span> and <span class="arithmatex">\(A^n\)</span>, it computes <span class="arithmatex">\(\rho^P\)</span> with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on <span class="arithmatex">\(dt\)</span>;</p>
 <p>We write <span class="arithmatex">\(X^P\)</span> the characteristic feet such that <span class="arithmatex">\(\partial_t X^P = A^n(X^n)\)</span>.</p>
 <p>Secondly, it corrects:
-* 4. From <span class="arithmatex">\(\rho^P\)</span>, it computes <span class="arithmatex">\(\phi^P\)</span> with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
+* 4. From <span class="arithmatex">\(\rho^P\)</span>, it computes <span class="arithmatex">\(\phi^P\)</span> with a PolarPoissonLikeSolver;
 * 5. From <span class="arithmatex">\(\phi^P\)</span>, it computes <span class="arithmatex">\(A^P\)</span> with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
 * 6. From <span class="arithmatex">\(\rho^n\)</span> and <span class="arithmatex">\(\frac{A^{P}(X^n) + A^n(X^P)}{2}\)</span>, it computes <span class="arithmatex">\(\rho^{n+1}\)</span> with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on <span class="arithmatex">\(dt\)</span>.</p>
 <p>(With <span class="arithmatex">\(X^C\)</span> the characteristic feet such that <span class="arithmatex">\(\partial_t X^C = \frac{A^{P}(X^n) + A^n(X^P)}{2}\)</span>.)</p>
@@ -647,6 +647,7 @@
 <ul>
 <li><code>LogicalToPhysicalMapping</code> A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </li>
 <li><code>LogicalToPseudoPhysicalMapping</code> A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates. </li>
+<li><code>PolarPoissonLikeSolver</code> The type of the solver for the Poisson-like equation on the polar plane. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-bslexplicitpredcorrrtheta">function BslExplicitPredCorrRTheta</h3>
@@ -657,7 +658,7 @@
     BslAdvectionRTheta const &amp; advection_solver,
     IdxRangeRTheta const &amp; grid,
     SplineRThetaBuilder const &amp; builder,
-    PolarSplineFEMPoissonLikeSolver &lt; GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver,
+    PolarPoissonLikeSolver const &amp; poisson_solver,
     SplineRThetaEvaluatorConstBound const &amp; advection_evaluator
 ) 
 </code></pre>

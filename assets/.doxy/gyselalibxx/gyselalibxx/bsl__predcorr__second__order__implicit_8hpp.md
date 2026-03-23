@@ -46,7 +46,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md) &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping&gt;<br>_A second order implicit predictor-corrector for the Vlasov-Poisson equations._  |
+| class | [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md) &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class PolarPoissonLikeSolver&gt;<br>_A second order implicit predictor-corrector for the Vlasov-Poisson equations._  |
 
 
 

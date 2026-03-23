@@ -267,13 +267,12 @@ private:
     const int m_matrix_size;
 
     // Domains
-    IdxRangeBSPolar m_idxrange_fem_non_singular;
+    IdxRangeBSPolar m_idxrange_fem_tensor_basis;
     IdxRangeBSR m_idxrange_bsplines_r;
     IdxRangeBSTheta m_idxrange_bsplines_theta;
 
     IdxRangeQuadratureR m_idxrange_quadrature_r;
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
-    IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
@@ -285,7 +284,7 @@ public:
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
-        , m_idxrange_fem_non_singular(
+        , m_idxrange_fem_tensor_basis(
                   ddc::discrete_space<PolarBSplinesRTheta>().tensor_bspline_idx_range().remove_last(
                           IdxStepBSPolar {m_nbasis_theta}))
         , m_idxrange_bsplines_r(ddc::discrete_space<BSplinesR>().full_domain().remove_first(
@@ -300,23 +299,15 @@ public:
                   Idx<QDimThetaMesh>(0),
                   IdxStep<QDimThetaMesh>(
                           s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
-        , m_idxrange_quadrature_singular(
-                  m_idxrange_quadrature_r.take_first(
-                          IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
-                  m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_int_volume(int_volume)
     {
     }
-    template <typename Mapping>
-    void operator()(
+
+    void setup_sparse_matrix(
             std::unique_ptr<
                     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>&
                     gko_matrix,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
-            Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator,
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -327,7 +318,7 @@ public:
         constexpr int n_elements_singular
                 = PolarBSplinesRTheta::n_singular_basis() * PolarBSplinesRTheta::n_singular_basis();
         // Number of non-zero elements in the matrix corresponding to the inner product of
-        // polar splines at the singular point and the other splines
+        // polar bsplines which traverse the singular point and other polar bsplines
         const int n_elements_overlap = 2
                                        * (PolarBSplinesRTheta::n_singular_basis()
                                           * BSplinesR::degree() * m_nbasis_theta);
@@ -353,8 +344,25 @@ public:
                 preconditioner_max_block_size);
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
         init_nnz_per_line(nnz_per_row);
+        compute_singular_singular_col_idx(col_idx, nnz_per_row);
+        compute_singular_tensor_col_idx(col_idx, nnz_per_row);
+        compute_tensor_tensor_col_idx(col_idx, nnz_per_row);
+    }
 
-        compute_singular_elements(
+    template <typename Mapping>
+    void operator()(
+            std::unique_ptr<
+                    MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>> const&
+                    gko_matrix,
+            ConstSpline2D coeff_alpha,
+            ConstSpline2D coeff_beta,
+            Mapping const& mapping,
+            SplineRThetaEvaluatorNullBound const& spline_evaluator)
+    {
+        //CSR data storage
+        auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
+
+        compute_singular_singular_elements(
                 coeff_alpha,
                 coeff_beta,
                 mapping,
@@ -362,7 +370,7 @@ public:
                 values,
                 col_idx,
                 nnz_per_row);
-        compute_overlapping_singular_elements(
+        compute_singular_tensor_elements(
                 coeff_alpha,
                 coeff_beta,
                 mapping,
@@ -370,7 +378,7 @@ public:
                 values,
                 col_idx,
                 nnz_per_row);
-        compute_stencil_elements(
+        compute_tensor_tensor_elements(
                 coeff_alpha,
                 coeff_beta,
                 mapping,
@@ -382,8 +390,192 @@ public:
         gko_matrix->setup_solver();
     }
 
+    void compute_singular_singular_col_idx(
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    col_idx_csr,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    nnz_per_row_csr)
+    {
+        IdxRangeBSPolar idxrange_singular
+                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
+        const int n_singular = idxrange_singular.size();
+
+        Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
+        const std::source_location location = std::source_location::current();
+        // Calculate the matrix elements corresponding to the B-splines which cover the singular point
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::MDRangePolicy<
+                        Kokkos::Rank<2>,
+                        Kokkos::DefaultExecutionSpace>({0, 0}, {n_singular, n_singular}),
+                KOKKOS_LAMBDA(const int row_idx, const int col_idx) {
+                    const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
+                    //Fill the dense matrix corresponding to the b-splines on the singular point
+                    col_idx_csr(csr_idx_singular_area) = col_idx;
+                });
+    }
+
+    void compute_singular_tensor_col_idx(
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    col_idx_csr,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    nnz_per_row_csr)
+    {
+        // Create index ranges associated with the 2D splines
+        IdxRangeBSPolar idxrange_singular
+                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
+        IdxRangeBSR central_radial_bspline_idx_range(
+                m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
+
+        IdxRangeBSRTheta idxrange_non_singular_near_centre(
+                central_radial_bspline_idx_range,
+                m_idxrange_bsplines_theta);
+
+        const int n_singular = idxrange_singular.size();
+        // Number of tensor product polar bsplines which overlap with polar bsplines which
+        // traverse the singular point
+        const int n_overlapping_singular = idxrange_non_singular_near_centre.size();
+
+        const std::source_location location = std::source_location::current();
+
+        // Calculate the matrix elements where bspline products overlap the B-splines which cover the singular point
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::TeamPolicy<>(
+                        Kokkos::DefaultExecutionSpace(),
+                        n_singular * n_overlapping_singular,
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    const IdxStepBSPolar idx_step_test(team.league_rank() / n_overlapping_singular);
+                    const IdxStepBSPolar idx_step_trial(
+                            team.league_rank() % n_overlapping_singular);
+
+                    const int row_idx = idx_step_test.value();
+                    const int col_idx = idx_step_trial.value() + n_singular;
+
+                    //a_ij
+                    col_idx_csr(nnz_per_row_csr(row_idx) + col_idx) = col_idx;
+                    //a_ji
+                    col_idx_csr(nnz_per_row_csr(col_idx) + row_idx) = row_idx;
+                });
+    }
+
+    void compute_tensor_tensor_col_idx(
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    col_idx_csr,
+            Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
+                    nnz_per_row_csr)
+    {
+        IdxRangeBSPolar idxrange_singular
+                = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
+
+        // Get index range for basis elements (last element removed due to homogeneous Dirichlet)
+        IdxRangeBSTheta full_idx_range_theta
+                = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
+                        IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
+
+        IdxRangeBSR central_radial_bspline_idx_range(
+                m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
+
+        IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
+                IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
+
+        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
+
+        const int n_singular = idxrange_singular.size();
+        const std::source_location location = std::source_location::current();
+
+        // Calculate the matrix elements following a stencil
+        // Teams loop over rows
+        Kokkos::parallel_for(
+                location.function_name(),
+                Kokkos::TeamPolicy<>(
+                        Kokkos::DefaultExecutionSpace(),
+                        m_idxrange_fem_tensor_basis.size(),
+                        Kokkos::AUTO),
+                KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
+                    // Calculate the index of the test b-spline
+                    IdxBSPolar const idx_test_polar(
+                            idxrange_fem_non_singular_front + IdxStepBSPolar {team.league_rank()});
+
+                    // Calculate the radial and poloidal components of the test b-spline
+                    const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
+                    const IdxBSR idx_test_r(idx_test);
+                    const IdxBSTheta idx_test_theta(idx_test);
+
+                    // Calculate the offsets to locate all trial b-splines which are non-zero
+                    // somewhere in the support of the test b-spline.
+                    IdxStepBSR idx_step_trial_r_offset_min(
+                            Kokkos::
+                                    max(IdxStepBSR(-BSplinesR::degree()),
+                                        idx_range_fem_r.front() - idx_test_r));
+                    IdxStepBSR idx_step_trial_r_offset_max(
+                            Kokkos::
+                                    min(IdxStepBSR(BSplinesR::degree() + 1),
+                                        idx_range_fem_r.back() - idx_test_r));
+                    IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
+                    IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
+
+                    // Calculate the row index and the first possible column index
+                    int const row_idx = idx_test_polar - idxrange_singular.front();
+                    int col_offset
+                            = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
+
+                    // Loop over the radial offset to a trial b-spline
+                    for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
+                         idx_step_trial_r < idx_step_trial_r_offset_max;
+                         ++idx_step_trial_r) {
+                        const IdxBSR idx_trial_r = idx_test_r + idx_step_trial_r;
+
+                        // As theta is periodic the theta component must be split in 2 to
+                        // guarantee that col_idx and values (from the CSR format) are
+                        // filled in order.
+                        // Calculate the start and end of the theta offset
+                        IdxBSTheta first_idx_trial_theta = detail_poisson::
+                                mod_add(idx_test_theta,
+                                        idx_step_trial_theta_offset_min,
+                                        full_idx_range_theta);
+                        const IdxBSTheta last_idx_trial_theta = detail_poisson::
+                                mod_add(idx_test_theta,
+                                        idx_step_trial_theta_offset_max,
+                                        full_idx_range_theta);
+                        IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
+                        // If the start is after the end then the periodicity wraps the b-splines
+                        // first_periodic_idx_trial_theta is modified to fill the wrapped area (at the
+                        // right hand side of the block) last.
+                        if (first_idx_trial_theta > last_idx_trial_theta) {
+                            first_periodic_idx_trial_theta = first_idx_trial_theta;
+                            first_idx_trial_theta = full_idx_range_theta.front();
+                        }
+                        // Loop over the poloidal offset to a trial b-spline
+                        for (IdxBSTheta idx_trial_theta(first_idx_trial_theta);
+                             idx_trial_theta < last_idx_trial_theta;
+                             ++idx_trial_theta) {
+                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
+                            int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
+                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
+                            col_idx_csr(aij_idx) = col_idx;
+                            col_offset++;
+                        }
+                        // Loop over the poloidal offset to a trial b-spline for any elements that
+                        // are to the right of zeros following the elements already set
+                        for (IdxBSTheta idx_trial_theta(first_periodic_idx_trial_theta);
+                             idx_trial_theta < full_idx_range_theta.back() + 1;
+                             ++idx_trial_theta) {
+                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
+                            int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
+                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
+                            col_idx_csr(aij_idx) = col_idx;
+                            col_offset++;
+                        }
+                    }
+                });
+
+        Kokkos::Profiling::popRegion();
+    }
+
     template <class Mapping>
-    void compute_singular_elements(
+    void compute_singular_singular_elements(
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
@@ -397,7 +589,10 @@ public:
     {
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
-        IdxRangeQuadratureRTheta idx_range_quad_singular = m_idxrange_quadrature_singular;
+        IdxRangeQuadratureRTheta idx_range_quad_singular(
+                m_idxrange_quadrature_r.take_first(
+                        IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
+                m_idxrange_quadrature_theta);
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
@@ -443,13 +638,12 @@ public:
                             element);
                     const int csr_idx_singular_area = nnz_per_row_csr(row_idx) + col_idx;
                     //Fill the dense matrix corresponding to the b-splines on the singular point
-                    col_idx_csr(csr_idx_singular_area) = col_idx;
                     values_csr(batch_idx, csr_idx_singular_area) = element;
                 });
     }
 
     template <class Mapping>
-    void compute_overlapping_singular_elements(
+    void compute_singular_tensor_elements(
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
@@ -477,7 +671,10 @@ public:
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
 
         const int batch_idx = m_batch_idx;
+        // Number of polar bsplines which traverse the singular point
         const int n_singular = idxrange_singular.size();
+        // Number of tensor product polar bsplines which overlap with polar bsplines which
+        // traverse the singular point
         const int n_overlapping_singular = idxrange_non_singular_near_centre.size();
 
         const std::source_location location = std::source_location::current();
@@ -563,15 +760,14 @@ public:
                     const int col_idx = idx_step_trial.value() + n_singular;
 
                     //a_ij
-                    col_idx_csr(nnz_per_row_csr(row_idx) + col_idx) = col_idx;
                     values_csr(batch_idx, nnz_per_row_csr(row_idx) + col_idx) = element;
                     //a_ji
-                    col_idx_csr(nnz_per_row_csr(col_idx) + row_idx) = row_idx;
                     values_csr(batch_idx, nnz_per_row_csr(col_idx) + row_idx) = element;
                 });
     }
+
     template <class Mapping>
-    void compute_stencil_elements(
+    void compute_tensor_tensor_elements(
             ConstSpline2D coeff_alpha,
             ConstSpline2D coeff_beta,
             Mapping const& mapping,
@@ -586,18 +782,10 @@ public:
         IdxRangeBSPolar idxrange_singular
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
 
-        // Get index range for basis elements (last element removed due to homogeneous Dirichlet)
-        IdxRangeBSTheta full_idx_range_theta
-                = ddc::discrete_space<BSplinesTheta>().full_domain().take_first(
-                        IdxStepBSTheta(ddc::discrete_space<BSplinesTheta>().nbasis()));
-
         IdxRangeBSR central_radial_bspline_idx_range(
                 m_idxrange_bsplines_r.take_first(IdxStep<BSplinesR> {BSplinesR::degree()}));
 
-        IdxRangeBSR idx_range_fem_r = ddc::discrete_space<BSplinesR>().full_domain().remove_first(
-                IdxStepBSR(PolarBSplinesRTheta::continuity + 1));
-
-        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_non_singular.front();
+        IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
@@ -613,7 +801,7 @@ public:
                 location.function_name(),
                 Kokkos::TeamPolicy<>(
                         Kokkos::DefaultExecutionSpace(),
-                        m_idxrange_fem_non_singular.size(),
+                        m_idxrange_fem_tensor_basis.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
                     // Calculate the index of the test b-spline
@@ -623,95 +811,31 @@ public:
                     // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
                     const IdxBSR idx_test_r(idx_test);
-                    const IdxBSTheta idx_test_theta(idx_test);
-
-                    // Calculate the offsets to locate all trial b-splines which are non-zero
-                    // somewhere in the support of the test b-spline.
-                    IdxStepBSR idx_step_trial_r_offset_min(
-                            Kokkos::
-                                    max(IdxStepBSR(-BSplinesR::degree()),
-                                        idx_range_fem_r.front() - idx_test_r));
-                    IdxStepBSR idx_step_trial_r_offset_max(
-                            Kokkos::
-                                    min(IdxStepBSR(BSplinesR::degree() + 1),
-                                        idx_range_fem_r.back() - idx_test_r));
-                    IdxStepBSTheta idx_step_trial_theta_offset_min(-BSplinesTheta::degree());
-                    IdxStepBSTheta idx_step_trial_theta_offset_max(BSplinesTheta::degree() + 1);
 
                     // Calculate the row index and the first possible column index
                     int const row_idx = idx_test_polar - idxrange_singular.front();
-                    int col_offset
+                    int const csr_idx_first_stencil_element
                             = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
 
-                    // Loop over the radial offset to a trial b-spline
-                    for (IdxStepBSR idx_step_trial_r(idx_step_trial_r_offset_min);
-                         idx_step_trial_r < idx_step_trial_r_offset_max;
-                         ++idx_step_trial_r) {
-                        const IdxBSR idx_trial_r = idx_test_r + idx_step_trial_r;
-
-                        // As theta is periodic the theta component must be split in 2 to
-                        // guarantee that col_idx and values (from the CSR format) are
-                        // filled in order.
-                        // Calculate the start and end of the theta offset
-                        IdxBSTheta first_idx_trial_theta = detail_poisson::
-                                mod_add(idx_test_theta,
-                                        idx_step_trial_theta_offset_min,
-                                        full_idx_range_theta);
-                        const IdxBSTheta last_idx_trial_theta = detail_poisson::
-                                mod_add(idx_test_theta,
-                                        idx_step_trial_theta_offset_max,
-                                        full_idx_range_theta);
-                        IdxBSTheta first_periodic_idx_trial_theta = full_idx_range_theta.back() + 1;
-                        // If the start is after the end then the periodicity wraps the b-splines
-                        // first_periodic_idx_trial_theta is modified to fill the wrapped area (at the
-                        // right hand side of the block) last.
-                        if (first_idx_trial_theta > last_idx_trial_theta) {
-                            first_periodic_idx_trial_theta = first_idx_trial_theta;
-                            first_idx_trial_theta = full_idx_range_theta.front();
-                        }
-                        // Loop over the poloidal offset to a trial b-spline
-                        for (IdxBSTheta idx_trial_theta(first_idx_trial_theta);
-                             idx_trial_theta < last_idx_trial_theta;
-                             ++idx_trial_theta) {
-                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
-                            double element = get_matrix_stencil_element(
-                                    team,
-                                    idx_test,
-                                    idx_trial,
-                                    coeff_alpha,
-                                    coeff_beta,
-                                    spline_evaluator,
-                                    mapping,
-                                    full_quad_idx_range,
-                                    int_volume_proxy);
-                            int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
-                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
-                            col_idx_csr(aij_idx) = col_idx;
-                            values_csr(batch_idx, aij_idx) = element;
-                            col_offset++;
-                        }
-                        // Loop over the poloidal offset to a trial b-spline for any elements that
-                        // are to the right of zeros following the elements already set
-                        for (IdxBSTheta idx_trial_theta(first_periodic_idx_trial_theta);
-                             idx_trial_theta < full_idx_range_theta.back() + 1;
-                             ++idx_trial_theta) {
-                            const IdxBSRTheta idx_trial(idx_trial_r, idx_trial_theta);
-                            double element = get_matrix_stencil_element(
-                                    team,
-                                    idx_test,
-                                    idx_trial,
-                                    coeff_alpha,
-                                    coeff_beta,
-                                    spline_evaluator,
-                                    mapping,
-                                    full_quad_idx_range,
-                                    int_volume_proxy);
-                            int const col_idx = to_polar(idx_trial) - idxrange_singular.front();
-                            const int aij_idx = nnz_per_row_csr(row_idx) + col_offset;
-                            col_idx_csr(aij_idx) = col_idx;
-                            values_csr(batch_idx, aij_idx) = element;
-                            col_offset++;
-                        }
+                    // Loop over the poloidal offset to a trial b-spline
+                    for (int csr_idx = nnz_per_row_csr[row_idx] + csr_idx_first_stencil_element;
+                         csr_idx < nnz_per_row_csr[row_idx + 1];
+                         ++csr_idx) {
+                        int const col_idx = col_idx_csr[csr_idx];
+                        IdxBSPolar const idx_trial_polar = idxrange_singular.front() + col_idx;
+                        const IdxBSRTheta idx_trial
+                                = PolarBSplinesRTheta::get_2d_index(idx_trial_polar);
+                        double element = get_matrix_stencil_element(
+                                team,
+                                idx_test,
+                                idx_trial,
+                                coeff_alpha,
+                                coeff_beta,
+                                spline_evaluator,
+                                mapping,
+                                full_quad_idx_range,
+                                int_volume_proxy);
+                        values_csr(batch_idx, csr_idx) = element;
                     }
                 });
 

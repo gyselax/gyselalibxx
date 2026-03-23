@@ -82,9 +82,13 @@
 * **check\_stability** ([**MatrixBatchTridiag**](classMatrixBatchTridiag.md))
 * **calculate\_delta\_to\_factorise** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))
 * **compute\_maxwellian** ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md))
-* **compute\_overlapping\_singular\_elements** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
-* **compute\_singular\_elements** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
-* **compute\_stencil\_elements** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **compute\_singular\_singular\_col\_idx** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **compute\_singular\_singular\_elements** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **compute\_singular\_tensor\_col\_idx** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **compute\_singular\_tensor\_elements** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **compute\_tensor\_tensor\_col\_idx** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **compute\_tensor\_tensor\_elements** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
+* **calculate\_int\_volume** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **check\_additional\_interpolation\_points\_location** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **check\_break\_points\_are\_interpolation\_points** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **correction\_boundary** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
@@ -423,6 +427,7 @@
 * **solve\_lambda\_section\_transpose** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))
 * **set\_and\_check\_radii** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **singular\_idx\_range** ([**PolarBSplines**](classPolarBSplines.md))
+* **setup\_sparse\_matrix** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **SingleInterfaceDerivativesCalculator** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **set\_coefficients\_non\_uniform\_case** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **set\_coefficients\_uniform\_per\_patch\_case** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
@@ -462,6 +467,7 @@
 
 * **update** ([**CrankNicolson**](classCrankNicolson.md), [**Euler**](classEuler.md), [**ITimeStepper**](classITimeStepper.md), [**RK2**](classRK2.md), [**RK3**](classRK3.md), [**RK4**](classRK4.md))
 * **upper\_extrapolation\_rule** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
+* **update\_coefficients** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **unify\_value\_at\_centre\_pt** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 
 

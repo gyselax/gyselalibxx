@@ -587,12 +587,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="378" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="378" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1aedcead144250427020118bca9b3073cb" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a3f1b7d68d41d7ff49902a9963ad87f06" prot="private" static="no" mutable="no">
         <type>IdxRangeBSPolar</type>
-        <definition>IdxRangeBSPolar PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::m_idxrange_fem_non_singular</definition>
+        <definition>IdxRangeBSPolar PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::m_idxrange_fem_tensor_basis</definition>
         <argsstring></argsstring>
-        <name>m_idxrange_fem_non_singular</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::m_idxrange_fem_non_singular</qualifiedname>
+        <name>m_idxrange_fem_tensor_basis</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::m_idxrange_fem_tensor_basis</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -657,20 +657,6 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="386" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="386" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1ac22b5d1d9e9f801f090e797212d14016" prot="private" static="no" mutable="no">
-        <type>IdxRangeQuadratureRTheta</type>
-        <definition>IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::m_idxrange_quadrature_singular</definition>
-        <argsstring></argsstring>
-        <name>m_idxrange_quadrature_singular</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::m_idxrange_quadrature_singular</qualifiedname>
-        <briefdescription>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="387" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="387" bodyend="-1"/>
-      </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a86de9590fddca13f14cf70ad08c40f88" prot="private" static="no" mutable="no">
         <type>IdxRangeQuadratureRTheta</type>
         <definition>IdxRangeQuadratureRTheta PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::m_idxrange_quadrature</definition>
@@ -683,7 +669,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="388" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="388" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="387" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="387" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1a2aad241b05108d705ea50f8f8529cf7f" prot="private" static="no" mutable="no">
         <type>const int</type>
@@ -698,7 +684,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="390" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="390" bodyend="390"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="389" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="389" bodyend="389"/>
       </memberdef>
       <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeAssembler_1afb1295f09be8a8996366815bb1a7b429" prot="private" static="no" mutable="no">
         <type>DField&lt; IdxRangeQuadratureRTheta &gt;</type>
@@ -712,7 +698,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="392" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="392" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="391" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="391" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -743,38 +729,17 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="400" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="400" bodyend="426"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="399" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="399" bodyend="421"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1abc0ce99a71c2b00034f2199bda6c9614" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>typename Mapping</type>
-          </param>
-        </templateparamlist>
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a301383e248759fbcc24412fe234adb09" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::operator()</definition>
-        <argsstring>(std::unique_ptr&lt; MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; &amp;gko_matrix, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt)</argsstring>
-        <name>operator()</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::operator()</qualifiedname>
+        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::setup_sparse_matrix</definition>
+        <argsstring>(std::unique_ptr&lt; MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; &amp;gko_matrix, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt)</argsstring>
+        <name>setup_sparse_matrix</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::setup_sparse_matrix</qualifiedname>
         <param>
           <type>std::unique_ptr&lt; <ref refid="classMatrixBatchCsr" kindref="compound">MatrixBatchCsr</ref>&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; &amp;</type>
           <declname>gko_matrix</declname>
-        </param>
-        <param>
-          <type>ConstSpline2D</type>
-          <declname>coeff_alpha</declname>
-        </param>
-        <param>
-          <type>ConstSpline2D</type>
-          <declname>coeff_beta</declname>
-        </param>
-        <param>
-          <type>Mapping const &amp;</type>
-          <declname>mapping</declname>
-        </param>
-        <param>
-          <type>SplineRThetaEvaluatorNullBound const &amp;</type>
-          <declname>spline_evaluator</declname>
         </param>
         <param>
           <type>std::optional&lt; int &gt;</type>
@@ -797,7 +762,7 @@
           <defval>std::nullopt</defval>
         </param>
         <briefdescription>
-<para>Assemble the stiffness matrix. </para>
+<para>Compute the sparsity pattern for the stiffness matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -806,38 +771,6 @@
 </parameternamelist>
 <parameterdescription>
 <para>The pointer to the assembled matrix. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">coeff_alpha</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The spline representation of the <formula id="155">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">coeff_beta</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The spline representation of the <formula id="156">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">mapping</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">spline_evaluator</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -886,19 +819,23 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="456" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="456" bodyend="527"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="440" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="440" bodyend="483"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a9ee48516c8f2c48ab011498adfe02e37" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a751918a98fbc10c53b4b4c6c2349a881" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class Mapping</type>
+            <type>typename Mapping</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_singular_elements</definition>
-        <argsstring>(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr)</argsstring>
-        <name>compute_singular_elements</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_singular_elements</qualifiedname>
+        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::operator()</definition>
+        <argsstring>(std::unique_ptr&lt; MatrixBatchCsr&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; const &amp;gko_matrix, ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator)</argsstring>
+        <name>operator()</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::operator()</qualifiedname>
+        <param>
+          <type>std::unique_ptr&lt; <ref refid="classMatrixBatchCsr" kindref="compound">MatrixBatchCsr</ref>&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; const &amp;</type>
+          <declname>gko_matrix</declname>
+        </param>
         <param>
           <type>ConstSpline2D</type>
           <declname>coeff_alpha</declname>
@@ -915,23 +852,19 @@
           <type>SplineRThetaEvaluatorNullBound const &amp;</type>
           <declname>spline_evaluator</declname>
         </param>
-        <param>
-          <type>Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
-          <declname>values_csr</declname>
-        </param>
-        <param>
-          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
-          <declname>col_idx_csr</declname>
-        </param>
-        <param>
-          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
-          <declname>nnz_per_row_csr</declname>
-        </param>
         <briefdescription>
-<para>Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point. </para>
+<para>Assemble the stiffness matrix. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">gko_matrix</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The pointer to the assembled matrix. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
 <parameternamelist>
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
@@ -960,18 +893,44 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>.</para>
 </parameterdescription>
 </parameteritem>
-<parameteritem>
+</parameterlist>
+<parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
-<parametername direction="out">values_csr</parametername>
+<parametername>Mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A 2D Kokkos view which stores the values of non-zero elements for the whole batch. </para>
+<para>A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </para>
 </parameterdescription>
 </parameteritem>
-<parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="504" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="504" bodyend="542"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a6edc941e11daa827f8284aea272a6eb9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_singular_singular_col_idx</definition>
+        <argsstring>(Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr)</argsstring>
+        <name>compute_singular_singular_col_idx</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_singular_singular_col_idx</qualifiedname>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>col_idx_csr</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>nnz_per_row_csr</declname>
+        </param>
+        <briefdescription>
+<para>Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and singular basis functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">col_idx_csr</parametername>
 </parameternamelist>
@@ -981,7 +940,7 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="inout">nnz_per_row_csr</parametername>
+<parametername direction="in">nnz_per_row_csr</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </para>
@@ -992,19 +951,101 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="552" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="552" bodyend="615"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="553" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="553" bodyend="576"/>
       </memberdef>
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1aa92090d39452c7b32055aef8d17df0b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a2d1574511560fa91a03210414320a04f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_singular_tensor_col_idx</definition>
+        <argsstring>(Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr)</argsstring>
+        <name>compute_singular_tensor_col_idx</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_singular_tensor_col_idx</qualifiedname>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>col_idx_csr</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>nnz_per_row_csr</declname>
+        </param>
+        <briefdescription>
+<para>Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and tensor basis functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">col_idx_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nnz_per_row_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="587" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="587" bodyend="630"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1afd07dcd2c7687814d9dc6d6d402f2206" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_tensor_tensor_col_idx</definition>
+        <argsstring>(Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr)</argsstring>
+        <name>compute_tensor_tensor_col_idx</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_tensor_tensor_col_idx</qualifiedname>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>col_idx_csr</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>nnz_per_row_csr</declname>
+        </param>
+        <briefdescription>
+<para>Computes the column indices of the matrix elements corresponding to the inner products of tensor basis functions and tensor basis functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">col_idx_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nnz_per_row_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="641" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="641" bodyend="753"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1af9a659b25648dfe6aff2f22da15c0e28" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class Mapping</type>
           </param>
         </templateparamlist>
         <type>void</type>
-        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_overlapping_singular_elements</definition>
+        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_singular_singular_elements</definition>
         <argsstring>(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr)</argsstring>
-        <name>compute_overlapping_singular_elements</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_overlapping_singular_elements</qualifiedname>
+        <name>compute_singular_singular_elements</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_singular_singular_elements</qualifiedname>
         <param>
           <type>ConstSpline2D</type>
           <declname>coeff_alpha</declname>
@@ -1034,7 +1075,219 @@
           <declname>nnz_per_row_csr</declname>
         </param>
         <briefdescription>
-<para>Computes the matrix element corresponding to singular elements overlapping with regular grid. </para>
+<para>Computes the matrix elements corresponding to the inner products of singular basis functions and singular basis functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_alpha</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline representation of the <formula id="155">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_beta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline representation of the <formula id="156">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spline_evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">values_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 2D Kokkos view which stores the values of non-zero elements for the whole batch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">col_idx_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nnz_per_row_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="778" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="778" bodyend="843"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a547b54b4bd03f366c4b32aa567be12b5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Mapping</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_singular_tensor_elements</definition>
+        <argsstring>(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr)</argsstring>
+        <name>compute_singular_tensor_elements</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_singular_tensor_elements</qualifiedname>
+        <param>
+          <type>ConstSpline2D</type>
+          <declname>coeff_alpha</declname>
+        </param>
+        <param>
+          <type>ConstSpline2D</type>
+          <declname>coeff_beta</declname>
+        </param>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <param>
+          <type>SplineRThetaEvaluatorNullBound const &amp;</type>
+          <declname>spline_evaluator</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>values_csr</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>col_idx_csr</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>nnz_per_row_csr</declname>
+        </param>
+        <briefdescription>
+<para>Computes the matrix elements corresponding to the inner products of singular basis functions and tensor basis functions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_alpha</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline representation of the <formula id="155">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coeff_beta</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline representation of the <formula id="156">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">spline_evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">values_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 2D Kokkos view which stores the values of non-zero elements for the whole batch. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">col_idx_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">nnz_per_row_csr</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="868" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="868" bodyend="989"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a73dab51e774360ac5cf8df7b107b195c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Mapping</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_tensor_tensor_elements</definition>
+        <argsstring>(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr)</argsstring>
+        <name>compute_tensor_tensor_elements</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_tensor_tensor_elements</qualifiedname>
+        <param>
+          <type>ConstSpline2D</type>
+          <declname>coeff_alpha</declname>
+        </param>
+        <param>
+          <type>ConstSpline2D</type>
+          <declname>coeff_beta</declname>
+        </param>
+        <param>
+          <type>Mapping const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <param>
+          <type>SplineRThetaEvaluatorNullBound const &amp;</type>
+          <declname>spline_evaluator</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>values_csr</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>col_idx_csr</declname>
+        </param>
+        <param>
+          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
+          <declname>nnz_per_row_csr</declname>
+        </param>
+        <briefdescription>
+<para>Computes the matrix elements corresponding to the inner products of tensor basis functions and tensor basis functions. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -1087,7 +1340,7 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="inout">nnz_per_row_csr</parametername>
+<parametername direction="in">nnz_per_row_csr</parametername>
 </parameternamelist>
 <parameterdescription>
 <para>A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </para>
@@ -1098,113 +1351,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="640" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="640" bodyend="760"/>
-      </memberdef>
-      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1afa92fcaefbe5c2ae4c2a1187a25cf8a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <templateparamlist>
-          <param>
-            <type>class Mapping</type>
-          </param>
-        </templateparamlist>
-        <type>void</type>
-        <definition>void PolarSplineFEMPoissonLikeAssembler&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, QDimRMesh, QDimThetaMesh, IdxRangeFull &gt;::compute_stencil_elements</definition>
-        <argsstring>(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp;mapping, SplineRThetaEvaluatorNullBound const &amp;spline_evaluator, Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col_idx_csr, Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz_per_row_csr)</argsstring>
-        <name>compute_stencil_elements</name>
-        <qualifiedname>PolarSplineFEMPoissonLikeAssembler::compute_stencil_elements</qualifiedname>
-        <param>
-          <type>ConstSpline2D</type>
-          <declname>coeff_alpha</declname>
-        </param>
-        <param>
-          <type>ConstSpline2D</type>
-          <declname>coeff_beta</declname>
-        </param>
-        <param>
-          <type>Mapping const &amp;</type>
-          <declname>mapping</declname>
-        </param>
-        <param>
-          <type>SplineRThetaEvaluatorNullBound const &amp;</type>
-          <declname>spline_evaluator</declname>
-        </param>
-        <param>
-          <type>Kokkos::View&lt; double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
-          <declname>values_csr</declname>
-        </param>
-        <param>
-          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
-          <declname>col_idx_csr</declname>
-        </param>
-        <param>
-          <type>Kokkos::View&lt; int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const</type>
-          <declname>nnz_per_row_csr</declname>
-        </param>
-        <briefdescription>
-<para>Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas. </para>
-        </briefdescription>
-        <detaileddescription>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername direction="in">coeff_alpha</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The spline representation of the <formula id="155">$ \alpha $</formula> function in the definition of the Poisson-like equation. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">coeff_beta</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The spline representation of the <formula id="156">$ \beta $</formula> function in the definition of the Poisson-like equation. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">mapping</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The mapping from the logical domain to the physical domain where the equation is defined. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="in">spline_evaluator</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">values_csr</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A 2D Kokkos view which stores the values of non-zero elements for the whole batch. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="out">col_idx_csr</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername direction="inout">nnz_per_row_csr</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>A 1D Kokkos view of length matrix_size+1 which stores the count of the non-zeros along the lines of the matrix. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="784" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="784" bodyend="929"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="1014" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="1014" bodyend="1087"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a037ea0e3df142ead46779f23a0973c3c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -1233,7 +1380,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="1142" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="1142" bodyend="1274"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="1300" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="1300" bodyend="1432"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -1356,7 +1503,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="961" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="961" bodyend="998"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="1119" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="1119" bodyend="1156"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1af046b2defd8321d47a3e5d8c8905fa67" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1488,7 +1635,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="1031" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="1031" bodyend="1125"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="1189" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="1189" bodyend="1283"/>
       </memberdef>
       <memberdef kind="function" id="classPolarSplineFEMPoissonLikeAssembler_1a79971ed2f9d16481d9a6da774d2b4a1c" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxBSPolar</type>
@@ -1519,7 +1666,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="1281" column="46" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="1281" bodyend="1284"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="1439" column="46" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="1439" bodyend="1442"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1587,13 +1734,16 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="267" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="268" bodyend="1285"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" line="267" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp" bodystart="268" bodyend="1443"/>
     <listofallmembers>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1aa5309f9db9c56dd3d418989f23684586" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>BSplinesR</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a7828a2baf4cabd466b37d7f348caef6a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>BSplinesTheta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1aa92090d39452c7b32055aef8d17df0b1" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_overlapping_singular_elements</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a9ee48516c8f2c48ab011498adfe02e37" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_singular_elements</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1afa92fcaefbe5c2ae4c2a1187a25cf8a9" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_stencil_elements</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a6edc941e11daa827f8284aea272a6eb9" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_singular_singular_col_idx</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1af9a659b25648dfe6aff2f22da15c0e28" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_singular_singular_elements</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a2d1574511560fa91a03210414320a04f" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_singular_tensor_col_idx</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a547b54b4bd03f366c4b32aa567be12b5" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_singular_tensor_elements</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1afd07dcd2c7687814d9dc6d6d402f2206" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_tensor_tensor_col_idx</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a73dab51e774360ac5cf8df7b107b195c" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>compute_tensor_tensor_elements</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a7038f8979b44b716ad49f83b68c3258e" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>ConstSpline2D</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1af046b2defd8321d47a3e5d8c8905fa67" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>get_matrix_stencil_element</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a62c387571dc733f62a5eb75dddc4bdcc" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>IdxBSPolar</name></member>
@@ -1623,10 +1773,9 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a2aad241b05108d705ea50f8f8529cf7f" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_batch_idx</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a7604cb107a61f1f1fed25ade9dc7ddd8" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_idxrange_bsplines_r</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1af9611c0a40db77d5e2ee1c783669d073" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_idxrange_bsplines_theta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1aedcead144250427020118bca9b3073cb" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_idxrange_fem_non_singular</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a3f1b7d68d41d7ff49902a9963ad87f06" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_idxrange_fem_tensor_basis</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a86de9590fddca13f14cf70ad08c40f88" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_idxrange_quadrature</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a3cfd33d07ffe136f94c33508442feff4" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_idxrange_quadrature_r</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1ac22b5d1d9e9f801f090e797212d14016" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_idxrange_quadrature_singular</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a1210373c6b99f1bda0502ddc370b28d7" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_idxrange_quadrature_theta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1afb1295f09be8a8996366815bb1a7b429" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_int_volume</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1aee7b60f8ccea3ce50d4565849e307931" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_matrix_size</name></member>
@@ -1635,12 +1784,13 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a1fefe304632b2a6402d09590d75d368a" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_n_overlap_cells</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a5dc81e628fed540b357880ea65745d74" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_nbasis_r</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1af324b680bb01bed21301bed20d1f2d08" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>m_nbasis_theta</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeAssembler_1abc0ce99a71c2b00034f2199bda6c9614" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>operator()</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a751918a98fbc10c53b4b4c6c2349a881" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>operator()</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a934e3e0fece4b2070001ee5d1d9e699c" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>PolarSplineFEMPoissonLikeAssembler</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1ac0c488acc8ed72e59c9ed0ace960243a" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>R</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a81eee1dc14a1efaeb9d5e53524eeb119" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>R_cov</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a69153c3d917f8f07e049896076270963" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>s_n_gauss_legendre_r</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1aca494b633aac4cb2bd931a128c4587b7" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>s_n_gauss_legendre_theta</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeAssembler_1a301383e248759fbcc24412fe234adb09" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>setup_sparse_matrix</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a664cf25bf879ea172a7e0edf86b826d4" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>Theta</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a14ecbd7099fbd0a670670f4a1b5b16ed" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>Theta_cov</name></member>
       <member refid="classPolarSplineFEMPoissonLikeAssembler_1a79971ed2f9d16481d9a6da774d2b4a1c" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeAssembler</scope><name>to_polar</name></member>

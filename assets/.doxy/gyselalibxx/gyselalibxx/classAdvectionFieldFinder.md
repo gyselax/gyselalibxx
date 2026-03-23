@@ -164,11 +164,8 @@ The equation (1) is solved thanks to advection operator (IAdvectionRTheta).
 **Template parameters:**
 
 
-* `Mapping` A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
+* `Mapping` A class describing a mapping from curvilinear coordinates to Cartesian coordinates. 
 
-
-
-**See also:** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) 
 
 
 

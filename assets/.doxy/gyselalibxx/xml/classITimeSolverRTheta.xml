@@ -2,9 +2,9 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classITimeSolverRTheta" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>ITimeSolverRTheta</compoundname>
-    <derivedcompoundref refid="classBslExplicitPredCorrRTheta" prot="public" virt="non-virtual">BslExplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classBslImplicitPredCorrRTheta" prot="public" virt="non-virtual">BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classBslPredCorrRTheta" prot="public" virt="non-virtual">BslPredCorrRTheta&lt; Mapping, FootFinder &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslExplicitPredCorrRTheta" prot="public" virt="non-virtual">BslExplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, PolarPoissonLikeSolver &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslImplicitPredCorrRTheta" prot="public" virt="non-virtual">BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, PolarPoissonLikeSolver &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslPredCorrRTheta" prot="public" virt="non-virtual">BslPredCorrRTheta&lt; Mapping, FootFinder, PolarPoissonLikeSolver &gt;</derivedcompoundref>
     <includes refid="geometryRTheta_2time__solver_2itimesolver_8hpp" local="no">itimesolver.hpp</includes>
     <sectiondef kind="public-func">
       <memberdef kind="function" id="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
@@ -27,9 +27,9 @@
         <argsstring>(host_t&lt; DFieldRTheta &gt; density, double const dt, int const steps=1) const =0</argsstring>
         <name>operator()</name>
         <qualifiedname>ITimeSolverRTheta::operator()</qualifiedname>
-        <reimplementedby refid="classBslExplicitPredCorrRTheta_1a4a2276bdff30b6251ee191e7b46b8129">operator()</reimplementedby>
-        <reimplementedby refid="classBslImplicitPredCorrRTheta_1adc590a931bd7c3e2e526feaf8ae9b49e">operator()</reimplementedby>
-        <reimplementedby refid="classBslPredCorrRTheta_1aa1f25f66a355af5b80febe9155fa50f4">operator()</reimplementedby>
+        <reimplementedby refid="classBslExplicitPredCorrRTheta_1aa73ad33bc9838ee3bca8d46a3cbf1bb3">operator()</reimplementedby>
+        <reimplementedby refid="classBslImplicitPredCorrRTheta_1a46ef9663688c541ff473a4953c9e1eda">operator()</reimplementedby>
+        <reimplementedby refid="classBslPredCorrRTheta_1a52597adc2bfbd8fde8394be591361291">operator()</reimplementedby>
         <param>
           <type>host_t&lt; DFieldRTheta &gt;</type>
           <declname>density</declname>
@@ -144,19 +144,19 @@
     </detaileddescription>
     <inheritancegraph>
       <node id="2">
-        <label>BslExplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</label>
+        <label>BslExplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, PolarPoissonLikeSolver &gt;</label>
         <link refid="classBslExplicitPredCorrRTheta"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="3">
-        <label>BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping &gt;</label>
+        <label>BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, PolarPoissonLikeSolver &gt;</label>
         <link refid="classBslImplicitPredCorrRTheta"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>
       </node>
       <node id="4">
-        <label>BslPredCorrRTheta&lt; Mapping, FootFinder &gt;</label>
+        <label>BslPredCorrRTheta&lt; Mapping, FootFinder, PolarPoissonLikeSolver &gt;</label>
         <link refid="classBslPredCorrRTheta"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>

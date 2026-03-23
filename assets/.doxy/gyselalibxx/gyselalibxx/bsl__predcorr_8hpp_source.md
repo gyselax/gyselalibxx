@@ -31,7 +31,7 @@
 #include "rk2.hpp"
 #include "spline_definitions_r_theta.hpp"
 
-template <class Mapping, class FootFinder>
+template <class Mapping, class FootFinder, class PolarPoissonLikeSolver>
 class BslPredCorrRTheta : public ITimeSolverRTheta
 {
     using BslAdvectionRTheta = BslAdvectionPolar<
@@ -47,11 +47,7 @@ private:
 
     BslAdvectionRTheta const& m_advection_solver;
 
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorNullBound const& m_spline_evaluator;
@@ -63,11 +59,7 @@ public:
             BslAdvectionRTheta const& advection_solver,
             SplineRThetaBuilder const& builder,
             SplineRThetaEvaluatorNullBound const& rhs_evaluator,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
+            PolarPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)

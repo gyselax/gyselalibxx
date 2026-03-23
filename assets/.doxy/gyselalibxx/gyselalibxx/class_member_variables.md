@@ -30,7 +30,6 @@
 * **distributed\_idx\_ranges\_are\_first** ([**IMPILayout**](classIMPILayout.md))
 * **delta** ([**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **d** ([**Matrix\_PDS\_Tridiag**](classMatrix__PDS__Tridiag.md))
-* **derivative** ([**PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md), [**PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md))
 
 
 ## e
@@ -65,9 +64,9 @@
 ## m
 
 * **m\_epsilon** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**CartesianToCzarny**](classCartesianToCzarny.md), [**CombinedMapping**](classCombinedMapping.md), [**CrankNicolson**](classCrankNicolson.md), [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md), [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md))
-* **m\_mapping** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**Curl**](classCurl.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md), [**LiePoissonBracket**](classLiePoissonBracket.md), [**MetricTensorEvaluator**](classMetricTensorEvaluator.md), [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md), [**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
+* **m\_mapping** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**Curl**](classCurl.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md), [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b.md), [**InverseJacobianMatrix**](classInverseJacobianMatrix.md), [**LiePoissonBracket**](classLiePoissonBracket.md), [**MetricTensorEvaluator**](classMetricTensorEvaluator.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**VortexMergerDensitySolution**](classVortexMergerDensitySolution.md), [**VortexMergerEquilibria**](classVortexMergerEquilibria.md))
 * **m\_polar\_spline\_evaluator** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **m\_spline\_evaluator** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md), [**GyroAverageOperator**](classGyroAverageOperator.md))
+* **m\_spline\_evaluator** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**DiscreteToCartesian**](classDiscreteToCartesian.md), [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md), [**GyroAverageOperator**](classGyroAverageOperator.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_corner1** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **m\_corner2** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **m\_corner3** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
@@ -225,10 +224,9 @@
 * **m\_batch\_idx** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_bsplines\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_bsplines\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **m\_idxrange\_fem\_non\_singular** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_idxrange\_fem\_tensor\_basis** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **m\_idxrange\_quadrature** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_quadrature\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
-* **m\_idxrange\_quadrature\_singular** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_idxrange\_quadrature\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_int\_volume** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **m\_n\_non\_zero\_bases\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
@@ -236,7 +234,10 @@
 * **m\_n\_overlap\_cells** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_nbasis\_r** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md))
 * **m\_nbasis\_theta** ([**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_assembler** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_gko\_matrix** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_idxrange\_fem\_non\_singular** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
+* **m\_idxrange\_quadrature\_singular** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_int\_volume\_alloc** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_phi\_spline\_coef\_alloc** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **m\_x\_init\_alloc** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
@@ -349,7 +350,7 @@
 
 ## v
 
-* **value** ([**PolarSplineFEMPoissonLikeSolver::EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md), [**PolarSplineFEMPoissonLikeSolver::EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md), [**tensor\_tools::is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md), [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md))
+* **value** ([**tensor\_tools::is\_contravariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__contravariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md), [**tensor\_tools::is\_covariant\_vector\_index\_set&lt; VectorIndexSet&lt; Dims... &gt; &gt;**](structtensor__tools_1_1is__covariant__vector__index__set_3_01VectorIndexSet_3_01Dims_8_8_8_01_4_01_4.md))
 
 
 ## w

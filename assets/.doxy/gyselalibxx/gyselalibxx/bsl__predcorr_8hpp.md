@@ -46,7 +46,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslPredCorrRTheta**](classBslPredCorrRTheta.md) &lt;class Mapping, class FootFinder&gt;<br>_Predictor-corrector for the Vlasov-Poisson equations._  |
+| class | [**BslPredCorrRTheta**](classBslPredCorrRTheta.md) &lt;class Mapping, class FootFinder, class PolarPoissonLikeSolver&gt;<br>_Predictor-corrector for the Vlasov-Poisson equations._  |
 
 
 

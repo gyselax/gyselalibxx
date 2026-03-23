@@ -2,7 +2,7 @@
 
 # Class PolarSplineFEMPoissonLikeSolver
 
-**template &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), class SplineRThetaEvaluatorNullBound, class IdxRangeFull&gt;**
+**template &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md), class SplineRThetaEvaluatorNullBound, class Mapping, class IdxRangeFull&gt;**
 
 
 
@@ -32,8 +32,6 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 
 | Type | Name |
 | ---: | :--- |
-| struct | [**EvalDeriv1DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.md) <br>_Object storing a value and a value of the derivative of a 1D function._  |
-| struct | [**EvalDeriv2DType**](structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.md) <br>_Object storing a value and a value of the derivatives in each direction of a 2D function._  |
 | struct | [**InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) <br>_The tag for the batch dimension for the equation. This is public due to Cuda._  |
 | struct | [**QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) <br>_Tag the first dimension for the quadrature mesh._  |
 | struct | [**QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) <br>_Tag the second dimension for the quadrature mesh._  |
@@ -69,9 +67,10 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 
 | Type | Name |
 | ---: | :--- |
-|   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
+|   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
 |  void | [**operator()**](#function-operator) (RHSFunction const & rhs, PolarSplineRTheta spline) const<br>_Solve the Poisson-like equation._  |
 |  void | [**operator()**](#function-operator_1) (RHSFunction const & rhs, DFieldRTheta phi) const<br>_Solve the Poisson-like equation._  |
+|  void | [**update\_coefficients**](#function-update_coefficients) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta) <br>_Update the coefficients_ \(alpha\) _and_\(beta\) _that define the equation._ |
 
 
 ## Public Static Functions
@@ -133,6 +132,7 @@ As finite element basis functions we will use polar b-splines which are divided 
 * [**GridR**](structGridR.md) The poloidal grid type. 
 * [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md) The type of the 2D polar B-splines (on the coordinate system \((r,\theta)\) including B-splines which traverse the O point). 
 * `SplineRThetaEvaluatorNullBound` The type of the 2D (cross-product) spline evaluator. 
+* `Mapping` The type of the mapping from the logical domain to the physical domain where the equation is defined. 
 * `IdxRangeFull` The full index range of \(\phi\) including any batch dimensions. 
 
 
@@ -148,7 +148,7 @@ As finite element basis functions we will use polar b-splines which are divided 
 
 _The radial dimension._ 
 ```C++
-using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull >::R =  typename GridR::continuous_dimension_type;
+using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, Mapping, IdxRangeFull >::R =  typename GridR::continuous_dimension_type;
 ```
 
 
@@ -162,7 +162,7 @@ using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, Sp
 
 _The poloidal dimension._ 
 ```C++
-using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull >::Theta =  typename GridTheta::continuous_dimension_type;
+using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, Mapping, IdxRangeFull >::Theta =  typename GridTheta::continuous_dimension_type;
 ```
 
 
@@ -178,10 +178,7 @@ using PolarSplineFEMPoissonLikeSolver< GridR, GridTheta, PolarBSplinesRTheta, Sp
 
 _Instantiate a polar Poisson-like solver using FEM with B-splines._ 
 ```C++
-template<class Mapping>
 inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
-    ConstSpline2D coeff_alpha,
-    ConstSpline2D coeff_beta,
     Mapping const & mapping,
     SplineRThetaEvaluatorNullBound const & spline_evaluator,
     std::optional< int > max_iter=std::nullopt,
@@ -207,8 +204,6 @@ The equation we are studying:
 **Parameters:**
 
 
-* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 * `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
 * `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
 * `max_iter` The maximum number of iterations possible for the batched CSR solver. 
@@ -288,6 +283,35 @@ This operator uses the other operator () and returns the values on the grid of t
 
 * `rhs` The rhs \(\rho\) of the Poisson-like equation. The type is templated but we can use the [**PoissonLikeRHSFunction**](classPoissonLikeRHSFunction.md) class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. 
 * `phi` The values of the solution \(\phi\) on the given coords\_eval. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function update\_coefficients 
+
+_Update the coefficients_ \(alpha\) _and_\(beta\) _that define the equation._
+```C++
+inline void PolarSplineFEMPoissonLikeSolver::update_coefficients (
+    ConstSpline2D coeff_alpha,
+    ConstSpline2D coeff_beta
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
 
 
 

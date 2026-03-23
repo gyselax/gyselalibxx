@@ -561,7 +561,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-polarsplinefempoissonlikesolver">Class PolarSplineFEMPoissonLikeSolver</h1>
-<p><strong>template &lt;class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, class SplineRThetaEvaluatorNullBound, class IdxRangeFull&gt;</strong></p>
+<p><strong>template &lt;class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, class SplineRThetaEvaluatorNullBound, class Mapping, class IdxRangeFull&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a></p>
 <p><em>Define a polar PDE solver for a Poisson-like equation.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -576,14 +576,6 @@
 </tr>
 </thead>
 <tbody>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv1DType.html"><strong>EvalDeriv1DType</strong></a> <br><em>Object storing a value and a value of the derivative of a 1D function.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1EvalDeriv2DType.html"><strong>EvalDeriv2DType</strong></a> <br><em>Object storing a value and a value of the derivatives in each direction of a 2D function.</em></td>
-</tr>
 <tr>
 <td style="text-align: right;">struct</td>
 <td style="text-align: left;"><a href="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.html"><strong>InternalBatchDim</strong></a> <br><em>The tag for the batch dimension for the equation. This is public due to Cuda.</em></td>
@@ -628,7 +620,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-polarsplinefempoissonlikesolver"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> (ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta, Mapping const &amp; mapping, SplineRThetaEvaluatorNullBound const &amp; spline_evaluator, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt) <br><em>Instantiate a polar Poisson-like solver using FEM with B-splines.</em></td>
+<td style="text-align: left;"><a href="#function-polarsplinefempoissonlikesolver"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> (Mapping const &amp; mapping, SplineRThetaEvaluatorNullBound const &amp; spline_evaluator, std::optional&lt; int &gt; max_iter=std::nullopt, std::optional&lt; double &gt; res_tol=std::nullopt, std::optional&lt; bool &gt; batch_solver_logger=std::nullopt, std::optional&lt; int &gt; preconditioner_max_block_size=std::nullopt) <br><em>Instantiate a polar Poisson-like solver using FEM with B-splines.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -637,6 +629,10 @@
 <tr>
 <td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (RHSFunction const &amp; rhs, DFieldRTheta phi) const<br><em>Solve the Poisson-like equation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-update_coefficients"><strong>update_coefficients</strong></a> (ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta) <br><em>Update the coefficients</em> <span class="arithmatex">\(alpha\)</span> <em>and</em><span class="arithmatex">\(beta\)</span> <em>that define the equation.</em></td>
 </tr>
 </tbody>
 </table>
@@ -668,27 +664,25 @@
 <li><a href="structGridR.html"><strong>GridR</strong></a> The poloidal grid type. </li>
 <li><a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a> The type of the 2D polar B-splines (on the coordinate system <span class="arithmatex">\((r,\theta)\)</span> including B-splines which traverse the O point). </li>
 <li><code>SplineRThetaEvaluatorNullBound</code> The type of the 2D (cross-product) spline evaluator. </li>
+<li><code>Mapping</code> The type of the mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>IdxRangeFull</code> The full index range of <span class="arithmatex">\(\phi\)</span> including any batch dimensions. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-r">typedef R</h3>
 <p><em>The radial dimension.</em> </p>
-<pre><code class="language-C++">using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::R =  typename GridR::continuous_dimension_type;
+<pre><code class="language-C++">using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, Mapping, IdxRangeFull &gt;::R =  typename GridR::continuous_dimension_type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-theta">typedef Theta</h3>
 <p><em>The poloidal dimension.</em> </p>
-<pre><code class="language-C++">using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, IdxRangeFull &gt;::Theta =  typename GridTheta::continuous_dimension_type;
+<pre><code class="language-C++">using PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, SplineRThetaEvaluatorNullBound, Mapping, IdxRangeFull &gt;::Theta =  typename GridTheta::continuous_dimension_type;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-polarsplinefempoissonlikesolver">function PolarSplineFEMPoissonLikeSolver</h3>
 <p><em>Instantiate a polar Poisson-like solver using FEM with B-splines.</em> </p>
-<pre><code class="language-C++">template&lt;class Mapping&gt;
-inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
-    ConstSpline2D coeff_alpha,
-    ConstSpline2D coeff_beta,
+<pre><code class="language-C++">inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
     Mapping const &amp; mapping,
     SplineRThetaEvaluatorNullBound const &amp; spline_evaluator,
     std::optional&lt; int &gt; max_iter=std::nullopt,
@@ -702,8 +696,6 @@ inline PolarSplineFEMPoissonLikeSolver::PolarSplineFEMPoissonLikeSolver (
 <p><span class="arithmatex">\(\phi = 0\)</span>, on <span class="arithmatex">\(\partial \Omega\)</span>.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>coeff_alpha</code> The spline representation of the <span class="arithmatex">\(\alpha\)</span> function in the definition of the Poisson-like equation. </li>
-<li><code>coeff_beta</code> The spline representation of the <span class="arithmatex">\(\beta\)</span> function in the definition of the Poisson-like equation. </li>
 <li><code>mapping</code> The mapping from the logical domain to the physical domain where the equation is defined. </li>
 <li><code>spline_evaluator</code> An evaluator for evaluating 2D splines on <span class="arithmatex">\((r,\theta)\)</span>. </li>
 <li><code>max_iter</code> The maximum number of iterations possible for the batched CSR solver. </li>
@@ -746,6 +738,20 @@ inline void PolarSplineFEMPoissonLikeSolver::operator() (
 <ul>
 <li><code>rhs</code> The rhs <span class="arithmatex">\(\rho\)</span> of the Poisson-like equation. The type is templated but we can use the <a href="classPoissonLikeRHSFunction.html"><strong>PoissonLikeRHSFunction</strong></a> class. It must be an object with an operator() which evaluates a CoordRTheta and can be called from GPU. </li>
 <li><code>phi</code> The values of the solution <span class="arithmatex">\(\phi\)</span> on the given coords_eval. </li>
+</ul>
+<hr>
+
+<h3 id="function-update_coefficients">function update_coefficients</h3>
+<p><em>Update the coefficients</em> <span class="arithmatex">\(alpha\)</span> <em>and</em><span class="arithmatex">\(beta\)</span> <em>that define the equation.</em></p>
+<pre><code class="language-C++">inline void PolarSplineFEMPoissonLikeSolver::update_coefficients (
+    ConstSpline2D coeff_alpha,
+    ConstSpline2D coeff_beta
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>coeff_alpha</code> The spline representation of the <span class="arithmatex">\(\alpha\)</span> function in the definition of the Poisson-like equation. </li>
+<li><code>coeff_beta</code> The spline representation of the <span class="arithmatex">\(\beta\)</span> function in the definition of the Poisson-like equation. </li>
 </ul>
 <hr>
 <h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>

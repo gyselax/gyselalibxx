@@ -38,7 +38,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**VortexMergerEquilibria**](classVortexMergerEquilibria.md) &lt;class Mapping&gt;<br>_Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates._  |
+| class | [**VortexMergerEquilibria**](classVortexMergerEquilibria.md) &lt;class Mapping, class PolarPoissonLikeSolver&gt;<br>_Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates._  |
 
 
 

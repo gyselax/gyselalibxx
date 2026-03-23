@@ -66,11 +66,15 @@ _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._
 | Type | Name |
 | ---: | :--- |
 |   | [**PolarSplineFEMPoissonLikeAssembler**](#function-polarsplinefempoissonlikeassembler) (Field&lt; double, IdxRangeQuadratureRTheta &gt; int\_volume) <br>_Instantiate the assembler operator._  |
-|  void | [**compute\_overlapping\_singular\_elements**](#function-compute_overlapping_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix element corresponding to singular elements overlapping with regular grid._  |
-|  void | [**compute\_singular\_elements**](#function-compute_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point._  |
-|  void | [**compute\_stencil\_elements**](#function-compute_stencil_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._  |
+|  void | [**compute\_singular\_singular\_col\_idx**](#function-compute_singular_singular_col_idx) (Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and singular basis functions._  |
+|  void | [**compute\_singular\_singular\_elements**](#function-compute_singular_singular_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix elements corresponding to the inner products of singular basis functions and singular basis functions._  |
+|  void | [**compute\_singular\_tensor\_col\_idx**](#function-compute_singular_tensor_col_idx) (Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and tensor basis functions._  |
+|  void | [**compute\_singular\_tensor\_elements**](#function-compute_singular_tensor_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix elements corresponding to the inner products of singular basis functions and tensor basis functions._  |
+|  void | [**compute\_tensor\_tensor\_col\_idx**](#function-compute_tensor_tensor_col_idx) (Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the column indices of the matrix elements corresponding to the inner products of tensor basis functions and tensor basis functions._  |
+|  void | [**compute\_tensor\_tensor\_elements**](#function-compute_tensor_tensor_elements) (ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, Kokkos::View&lt; double \*\*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const values\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const col\_idx\_csr, Kokkos::View&lt; int \*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace &gt; const nnz\_per\_row\_csr) <br>_Computes the matrix elements corresponding to the inner products of tensor basis functions and tensor basis functions._  |
 |  void | [**init\_nnz\_per\_line**](#function-init_nnz_per_line) (Kokkos::View&lt; int \*, Kokkos::LayoutRight &gt; nnz\_per\_row) const<br>_Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on_ \((r,\theta)\) _splines. After this function the array will contain: nnz\_per\_row[0] = 0. nnz\_per\_row[1] = 0. nnz\_per\_row[2] = number of non-zero elements in line 0. nnz\_per\_row[3] = number of non-zero elements in lines 0-1. ...\_per\_row nnz\_per\_row[matrix\_size] = number of non-zero elements in lines 0-(matrix\_size-1)._ |
-|  void | [**operator()**](#function-operator) (std::unique\_ptr&lt; [**MatrixBatchCsr**](classMatrixBatchCsr.md)&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; & gko\_matrix, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Assemble the stiffness matrix._  |
+|  void | [**operator()**](#function-operator) (std::unique\_ptr&lt; [**MatrixBatchCsr**](classMatrixBatchCsr.md)&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; const & gko\_matrix, ConstSpline2D coeff\_alpha, ConstSpline2D coeff\_beta, Mapping const & mapping, SplineRThetaEvaluatorNullBound const & spline\_evaluator) <br>_Assemble the stiffness matrix._  |
+|  void | [**setup\_sparse\_matrix**](#function-setup_sparse_matrix) (std::unique\_ptr&lt; [**MatrixBatchCsr**](classMatrixBatchCsr.md)&lt; Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG &gt; &gt; & gko\_matrix, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Compute the sparsity pattern for the stiffness matrix._  |
 
 
 ## Public Static Functions
@@ -192,17 +196,11 @@ inline explicit PolarSplineFEMPoissonLikeAssembler::PolarSplineFEMPoissonLikeAss
 
 
 
-### function compute\_overlapping\_singular\_elements 
+### function compute\_singular\_singular\_col\_idx 
 
-_Computes the matrix element corresponding to singular elements overlapping with regular grid._ 
+_Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and singular basis functions._ 
 ```C++
-template<class Mapping>
-inline void PolarSplineFEMPoissonLikeAssembler::compute_overlapping_singular_elements (
-    ConstSpline2D coeff_alpha,
-    ConstSpline2D coeff_beta,
-    Mapping const & mapping,
-    SplineRThetaEvaluatorNullBound const & spline_evaluator,
-    Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const values_csr,
+inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_singular_col_idx (
     Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const col_idx_csr,
     Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const nnz_per_row_csr
 ) 
@@ -215,12 +213,7 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_overlapping_singular_ele
 **Parameters:**
 
 
-* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
-* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
-* `values_csr` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
-* `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
+* `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix). 
 * `nnz_per_row_csr` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
 
 
@@ -232,12 +225,12 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_overlapping_singular_ele
 
 
 
-### function compute\_singular\_elements 
+### function compute\_singular\_singular\_elements 
 
-_Computes the matrix element corresponding to the singular area. ie: the region enclosing the O-point._ 
+_Computes the matrix elements corresponding to the inner products of singular basis functions and singular basis functions._ 
 ```C++
 template<class Mapping>
-inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_elements (
+inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_singular_elements (
     ConstSpline2D coeff_alpha,
     ConstSpline2D coeff_beta,
     Mapping const & mapping,
@@ -272,12 +265,110 @@ inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_elements (
 
 
 
-### function compute\_stencil\_elements 
+### function compute\_singular\_tensor\_col\_idx 
 
-_Computes the matrix element corresponding to the regular stencil ie: out to singular or overlapping areas._ 
+_Computes the column indices of the matrix elements corresponding to the inner products of singular basis functions and tensor basis functions._ 
+```C++
+inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_tensor_col_idx (
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const col_idx_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const nnz_per_row_csr
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
+* `nnz_per_row_csr` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function compute\_singular\_tensor\_elements 
+
+_Computes the matrix elements corresponding to the inner products of singular basis functions and tensor basis functions._ 
 ```C++
 template<class Mapping>
-inline void PolarSplineFEMPoissonLikeAssembler::compute_stencil_elements (
+inline void PolarSplineFEMPoissonLikeAssembler::compute_singular_tensor_elements (
+    ConstSpline2D coeff_alpha,
+    ConstSpline2D coeff_beta,
+    Mapping const & mapping,
+    SplineRThetaEvaluatorNullBound const & spline_evaluator,
+    Kokkos::View< double **, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const values_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const col_idx_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const nnz_per_row_csr
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
+* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
+* `values_csr` A 2D Kokkos view which stores the values of non-zero elements for the whole batch. 
+* `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
+* `nnz_per_row_csr` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function compute\_tensor\_tensor\_col\_idx 
+
+_Computes the column indices of the matrix elements corresponding to the inner products of tensor basis functions and tensor basis functions._ 
+```C++
+inline void PolarSplineFEMPoissonLikeAssembler::compute_tensor_tensor_col_idx (
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const col_idx_csr,
+    Kokkos::View< int *, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace > const nnz_per_row_csr
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `col_idx_csr` A 1D Kokkos view which stores the column indices for each non-zero component.(only for one matrix) 
+* `nnz_per_row_csr` A 1D Kokkos view of length matrix\_size+1 which stores the count of the non-zeros along the lines of the matrix. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function compute\_tensor\_tensor\_elements 
+
+_Computes the matrix elements corresponding to the inner products of tensor basis functions and tensor basis functions._ 
+```C++
+template<class Mapping>
+inline void PolarSplineFEMPoissonLikeAssembler::compute_tensor_tensor_elements (
     ConstSpline2D coeff_alpha,
     ConstSpline2D coeff_beta,
     Mapping const & mapping,
@@ -345,11 +436,49 @@ _Assemble the stiffness matrix._
 ```C++
 template<typename Mapping>
 inline void PolarSplineFEMPoissonLikeAssembler::operator() (
-    std::unique_ptr< MatrixBatchCsr < Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG > > & gko_matrix,
+    std::unique_ptr< MatrixBatchCsr < Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG > > const & gko_matrix,
     ConstSpline2D coeff_alpha,
     ConstSpline2D coeff_beta,
     Mapping const & mapping,
-    SplineRThetaEvaluatorNullBound const & spline_evaluator,
+    SplineRThetaEvaluatorNullBound const & spline_evaluator
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `gko_matrix` The pointer to the assembled matrix. 
+* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
+* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
+* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
+* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\).
+
+
+
+**Template parameters:**
+
+
+* `Mapping` A class describing a mapping from curvilinear coordinates to Cartesian coordinates. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function setup\_sparse\_matrix 
+
+_Compute the sparsity pattern for the stiffness matrix._ 
+```C++
+inline void PolarSplineFEMPoissonLikeAssembler::setup_sparse_matrix (
+    std::unique_ptr< MatrixBatchCsr < Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG > > & gko_matrix,
     std::optional< int > max_iter=std::nullopt,
     std::optional< double > res_tol=std::nullopt,
     std::optional< bool > batch_solver_logger=std::nullopt,
@@ -365,10 +494,6 @@ inline void PolarSplineFEMPoissonLikeAssembler::operator() (
 
 
 * `gko_matrix` The pointer to the assembled matrix. 
-* `coeff_alpha` The spline representation of the \(\alpha\) function in the definition of the Poisson-like equation. 
-* `coeff_beta` The spline representation of the \(\beta\) function in the definition of the Poisson-like equation. 
-* `mapping` The mapping from the logical domain to the physical domain where the equation is defined. 
-* `spline_evaluator` An evaluator for evaluating 2D splines on \((r,\theta)\). 
 * `max_iter` The maximum number of iterations possible for the batched CSR solver. 
 * `res_tol` The residual tolerance for the batched CSR solver. Be careful! the relative residual provided here, will be used as "implicit residual" in ginkgo solver. 
 * `batch_solver_logger` Indicates whether log information such as the residual and the number of iterations should be monitored. 

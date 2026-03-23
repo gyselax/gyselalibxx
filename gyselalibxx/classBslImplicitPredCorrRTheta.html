@@ -561,7 +561,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-bslimplicitpredcorrrtheta">Class BslImplicitPredCorrRTheta</h1>
-<p><strong>template &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping&gt;</strong></p>
+<p><strong>template &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class PolarPoissonLikeSolver&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslImplicitPredCorrRTheta.html"><strong>BslImplicitPredCorrRTheta</strong></a></p>
 <p><em>A second order implicit predictor-corrector for the Vlasov-Poisson equations.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -579,7 +579,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bslimplicitpredcorrrtheta"><strong>BslImplicitPredCorrRTheta</strong></a> (LogicalToPhysicalMapping const &amp; logical_to_physical, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder const &amp; builder, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>&lt; <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver, SplineRThetaEvaluatorConstBound const &amp; advection_evaluator) <br><em>Instantiate a</em> <a href="classBslImplicitPredCorrRTheta.html"><em><strong>BslImplicitPredCorrRTheta</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-bslimplicitpredcorrrtheta"><strong>BslImplicitPredCorrRTheta</strong></a> (LogicalToPhysicalMapping const &amp; logical_to_physical, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical, <a href="classBslAdvectionPolar.html"><strong>BslAdvectionRTheta</strong></a> const &amp; advection_solver, IdxRangeRTheta const &amp; grid, SplineRThetaBuilder const &amp; builder, PolarPoissonLikeSolver const &amp; poisson_solver, SplineRThetaEvaluatorConstBound const &amp; advection_evaluator) <br><em>Instantiate a</em> <a href="classBslImplicitPredCorrRTheta.html"><em><strong>BslImplicitPredCorrRTheta</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -638,13 +638,13 @@
 <p>The second order implicit predictor-corrector is also detailed in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
 <p>for <span class="arithmatex">\(n \geq 0\)</span>,</p>
 <p>First, it predicts:
-* 1. From <span class="arithmatex">\(\rho^n\)</span>, it computes <span class="arithmatex">\(\phi^n\)</span> with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
+* 1. From <span class="arithmatex">\(\rho^n\)</span>, it computes <span class="arithmatex">\(\phi^n\)</span> with a PolarPoissonLikeSolver;
 * 2. From <span class="arithmatex">\(\phi^n\)</span>, it computes <span class="arithmatex">\(A^n\)</span> with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
 * 3. From <span class="arithmatex">\(\rho^n\)</span> and <span class="arithmatex">\(A^n\)</span>, it computes implicitly <span class="arithmatex">\(\rho^P\)</span> with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on <span class="arithmatex">\(\frac{dt}{4}\)</span>:
   * the characteristic feet <span class="arithmatex">\(X^P\)</span> is such that <span class="arithmatex">\(X^P = X^k\)</span> with <span class="arithmatex">\(X^k\)</span> the result of the implicit method:
     * <span class="arithmatex">\(X^k = X^n - \frac{dt}{4} \partial_t X^k\)</span>.</p>
 <p>Secondly, it corrects:
-* 4. From <span class="arithmatex">\(\rho^P\)</span>, it computes <span class="arithmatex">\(\phi^P\)</span> with a <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>;
+* 4. From <span class="arithmatex">\(\rho^P\)</span>, it computes <span class="arithmatex">\(\phi^P\)</span> with a PolarPoissonLikeSolver;
 * 5. From <span class="arithmatex">\(\phi^P\)</span>, it computes <span class="arithmatex">\(A^P\)</span> with a <a href="classAdvectionFieldFinder.html"><strong>AdvectionFieldFinder</strong></a>;
 * 6. From <span class="arithmatex">\(\rho^n\)</span> and <span class="arithmatex">\(A^{P}\)</span>, it computes <span class="arithmatex">\(\rho^{n+1}\)</span> with a <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> on <span class="arithmatex">\(\frac{dt}{2}\)</span>.
   * the characteristic feet <span class="arithmatex">\(X^C\)</span> is such that <span class="arithmatex">\(X^C = X^k\)</span> with <span class="arithmatex">\(X^k\)</span> the result of the implicit method:
@@ -653,6 +653,7 @@
 <ul>
 <li><code>LogicalToPhysicalMapping</code> A class describing a mapping from curvilinear coordinates to Cartesian coordinates. </li>
 <li><code>LogicalToPseudoPhysicalMapping</code> A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates. </li>
+<li><code>PolarPoissonLikeSolver</code> The type of the solver for the Poisson-like equation on the polar plane. </li>
 </ul>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-bslimplicitpredcorrrtheta">function BslImplicitPredCorrRTheta</h3>
@@ -663,7 +664,7 @@
     BslAdvectionRTheta const &amp; advection_solver,
     IdxRangeRTheta const &amp; grid,
     SplineRThetaBuilder const &amp; builder,
-    PolarSplineFEMPoissonLikeSolver &lt; GridR , GridTheta , PolarBSplinesRTheta , SplineRThetaEvaluatorNullBound &gt; const &amp; poisson_solver,
+    PolarPoissonLikeSolver const &amp; poisson_solver,
     SplineRThetaEvaluatorConstBound const &amp; advection_evaluator
 ) 
 </code></pre>

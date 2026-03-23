@@ -2,7 +2,6 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="classTensorCommon" kind="class" language="C++" prot="public">
     <compoundname>TensorCommon</compoundname>
-    <derivedcompoundref refid="classTensor" prot="public" virt="non-virtual">Tensor&lt; R_cov, Theta_cov &gt;</derivedcompoundref>
     <includes refid="tensor__common_8hpp" local="no">tensor_common.hpp</includes>
     <templateparamlist>
       <param>
@@ -581,18 +580,6 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <inheritancegraph>
-      <node id="2">
-        <label>Tensor&lt; R_cov, Theta_cov &gt;</label>
-        <link refid="classTensor"/>
-        <childnode refid="1" relation="public-inheritance">
-        </childnode>
-      </node>
-      <node id="1">
-        <label>TensorCommon&lt; DataStorageType, ValidIndexSet &gt;</label>
-        <link refid="classTensorCommon"/>
-      </node>
-    </inheritancegraph>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" line="34" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor_common.hpp" bodystart="35" bodyend="249"/>
     <listofallmembers>
       <member refid="classTensorCommon_1a71fe0ef37137a48f7d12adda3c520389" prot="public" virt="non-virtual"><scope>TensorCommon</scope><name>element_type</name></member>
