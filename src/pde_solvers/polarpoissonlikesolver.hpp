@@ -74,11 +74,6 @@ public:
     {
     };
 
-    /// The tag for the batch dimension for the equation. This is public due to Cuda.
-    struct InternalBatchDim
-    {
-    };
-
 private:
     using CoordRTheta = Coord<R, Theta>;
     /// The 1D B-splines in the radial direction
@@ -203,7 +198,7 @@ private:
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
             m_gko_matrix;
     mutable PolarSplineMemRTheta m_phi_spline_coef_alloc;
-    mutable DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> m_x_init_alloc;
+    mutable DFieldMem<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>> m_x_init_alloc;
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
@@ -272,9 +267,9 @@ public:
         , m_phi_spline_coef_alloc(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
         , m_x_init_alloc(
                   "x_init",
-                  IdxRange<InternalBatchDim, PolarBSplinesRTheta>(
-                          Idx<InternalBatchDim, PolarBSplinesRTheta>(0, 0),
-                          IdxStep<InternalBatchDim, PolarBSplinesRTheta>(
+                  IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>(
+                          Idx<detail_poisson::BatchDDim, PolarBSplinesRTheta>(0, 0),
+                          IdxStep<detail_poisson::BatchDDim, PolarBSplinesRTheta>(
                                   1,
                                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                                           - ddc::discrete_space<BSplinesTheta>().nbasis())))
@@ -287,6 +282,7 @@ public:
 
         m_assembler.setup_sparse_matrix(
                 m_gko_matrix,
+                1,
                 max_iter,
                 res_tol,
                 batch_solver_logger,
@@ -304,7 +300,12 @@ public:
      */
     void update_coefficients(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta)
     {
-        m_assembler(m_gko_matrix, coeff_alpha, coeff_beta, m_mapping, m_spline_evaluator);
+        m_assembler(
+                m_gko_matrix,
+                detail_poisson::to_batch_access(coeff_alpha),
+                detail_poisson::to_batch_access(coeff_beta),
+                m_mapping,
+                m_spline_evaluator);
     }
 
     /**
@@ -331,19 +332,20 @@ public:
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
         assert(get_idx_range(spline) == ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
-        IdxRange<InternalBatchDim> batch_idx_range(get_idx_range(m_x_init_alloc));
+        IdxRange<detail_poisson::BatchDDim> batch_idx_range(get_idx_range(m_x_init_alloc));
 
         assert(batch_idx_range.size() == 1);
 
-        Idx<InternalBatchDim> batch_idx = batch_idx_range.front();
+        Idx<detail_poisson::BatchDDim> batch_idx = batch_idx_range.front();
 
         // Create b for rhs
-        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b_alloc(
+        DFieldMem<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>> b_alloc(
                 get_idx_range(m_x_init_alloc));
-        DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
+        DField<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
 
         // Get initial guess
-        DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> x_init = get_field(m_x_init_alloc);
+        DField<IdxRange<detail_poisson::BatchDDim, PolarBSplinesRTheta>> x_init
+                = get_field(m_x_init_alloc);
 
         DConstField<IdxRangeQuadratureRTheta> int_volume = get_const_field(m_int_volume_alloc);
 
