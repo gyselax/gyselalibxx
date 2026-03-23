@@ -1049,12 +1049,12 @@ public:
                         n_batch * m_idxrange_fem_tensor_basis.size(),
                         Kokkos::AUTO),
                 KOKKOS_LAMBDA(const Kokkos::TeamPolicy<>::member_type& team) {
-                    const int batch_idx = team.league_rank() / m_idxrange_fem_non_singular.size();
+                    const int batch_idx = team.league_rank() / m_idxrange_fem_tensor_basis.size();
                     // Calculate the index of the test b-spline
                     IdxBSPolar const idx_test_polar(
                             idxrange_fem_non_singular_front
                             + IdxStepBSPolar {
-                                    team.league_rank() % m_idxrange_fem_non_singular.size()});
+                                    team.league_rank() % m_idxrange_fem_tensor_basis.size()});
 
                     // Calculate the radial and poloidal components of the test b-spline
                     const IdxBSRTheta idx_test(PolarBSplinesRTheta::get_2d_index(idx_test_polar));
