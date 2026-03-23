@@ -164,74 +164,6 @@ get_polar_bspline_vals_and_derivs(
     }
 }
 
-/**
- * @brief Compute the quadrature range between a provided set of knots.
- *
- * Compute the range of quadrature points which are found between a set of knots
- * in both the radial and poloidal directions. In order to return a contiguous range
- * the result may include indices which are outside the domain. A modulo operator
- * should be applied before using the indices.
- * 
- * @tparam QDimRMesh Quadrature mesh in radial direction.
- * @tparam QDimThetaMesh Quadrature mesh in poloidal direction.
- * @tparam BSplinesR Splines in radial direction.
- * @tparam BSplinesTheta Splines in poloidal direction.
- *
- * @param[in] start_knot_r
- *      The index of the knot describing the lower bound of the domain of interest
- *      in the radial direction.
- * @param[in] end_knot_r
- *      The index of the knot describing the upper bound of the domain of interest
- *      in the radial direction.
- * @param[in] start_knot_theta
- *      The index of the knot describing the lower bound of the domain of interest
- *      in the poloidal direction.
- * @param[in] end_knot_theta
- *      The index of the knot describing the upper bound of the domain of interest
- *      in the poloidal direction.
- * @param[in] idx_quad_front
- *      The first index of the index range of the quadrature points.
- * @return 
- *      The range of quadrature points in the specified domain.
- */
-template <typename QDimRMesh, typename QDimThetaMesh, typename BSplinesR, typename BSplinesTheta>
-KOKKOS_FUNCTION IdxRange<QDimRMesh, QDimThetaMesh> get_quadrature_between_knots(
-        Idx<ddc::knot_discrete_dimension_t<BSplinesR>> start_knot_r,
-        Idx<ddc::knot_discrete_dimension_t<BSplinesR>> end_knot_r,
-        Idx<ddc::knot_discrete_dimension_t<BSplinesTheta>> start_knot_theta,
-        Idx<ddc::knot_discrete_dimension_t<BSplinesTheta>> end_knot_theta,
-        Idx<QDimRMesh, QDimThetaMesh> idx_quad_front)
-{
-    using KnotsR = ddc::knot_discrete_dimension_t<BSplinesR>;
-    using KnotsTheta = ddc::knot_discrete_dimension_t<BSplinesTheta>;
-
-    const IdxRange<KnotsR> k_range_r(start_knot_r, end_knot_r - start_knot_r);
-    const IdxRange<KnotsTheta> k_range_theta(start_knot_theta, end_knot_theta - start_knot_theta);
-
-    constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
-    IdxStep<KnotsR> k_r_offset
-            = k_range_r.front() - ddc::discrete_space<BSplinesR>().break_point_domain().front();
-    Idx<QDimRMesh> q_r_offset
-            = Idx<QDimRMesh>(idx_quad_front) + k_r_offset.value() * s_n_gauss_legendre_r;
-    IdxStep<QDimRMesh> q_r_len(k_range_r.extents().value() * s_n_gauss_legendre_r);
-    IdxRange<QDimRMesh> q_range_r(q_r_offset, q_r_len);
-
-    constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
-    IdxStep<KnotsTheta> k_theta_offset
-            = k_range_theta.front()
-              - ddc::discrete_space<BSplinesTheta>().break_point_domain().front();
-    if (k_theta_offset < 0)
-        k_theta_offset += ddc::discrete_space<BSplinesTheta>().nbasis();
-    Idx<QDimThetaMesh> q_theta_offset = Idx<QDimThetaMesh>(idx_quad_front)
-                                        + k_theta_offset.value() * s_n_gauss_legendre_theta;
-    IdxStep<QDimThetaMesh> q_theta_len(k_range_theta.extents().value() * s_n_gauss_legendre_theta);
-    IdxRange<QDimThetaMesh> q_range_theta(q_theta_offset, q_theta_len);
-    assert(q_range_r.extents() > 0);
-    assert(q_range_theta.extents() > 0);
-
-    return IdxRange<QDimRMesh, QDimThetaMesh>(q_range_r, q_range_theta);
-}
-
 } // namespace detail_poisson
 
 
@@ -263,6 +195,8 @@ template <
         typename SplineRThetaEvaluatorNullBound,
         typename QDimRMesh,
         typename QDimThetaMesh,
+        typename QuadratureLocatorR,
+        typename QuadratureLocatorTheta,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeAssembler
 {
@@ -388,7 +322,9 @@ private:
 
     const int m_batch_idx {0}; // TODO: Remove when batching is supported
 
-    DField<IdxRangeQuadratureRTheta> m_int_volume;
+    DConstField<IdxRangeQuadratureRTheta> m_int_volume;
+    QuadratureLocatorR m_quad_locator_r;
+    QuadratureLocatorTheta m_quad_locator_theta;
 
 public:
     /**
@@ -396,7 +332,10 @@ public:
      *
      * @param int_volume The initialised field of Jacobian values of the mapping. 
      */
-    explicit PolarSplineFEMPoissonLikeAssembler(Field<double, IdxRangeQuadratureRTheta> int_volume)
+    explicit PolarSplineFEMPoissonLikeAssembler(
+            DConstField<IdxRangeQuadratureRTheta> int_volume,
+            QuadratureLocatorR const& quad_locator_r,
+            QuadratureLocatorTheta const& quad_locator_theta)
         : m_nbasis_r(ddc::discrete_space<BSplinesR>().nbasis() - m_n_overlap_cells - 1)
         , m_nbasis_theta(ddc::discrete_space<BSplinesTheta>().nbasis())
         , m_matrix_size(ddc::discrete_space<PolarBSplinesRTheta>().nbasis() - m_nbasis_theta)
@@ -417,6 +356,8 @@ public:
                           s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_int_volume(int_volume)
+        , m_quad_locator_r(quad_locator_r)
+        , m_quad_locator_theta(quad_locator_theta)
     {
     }
 
@@ -794,7 +735,7 @@ public:
                         IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
                 m_idxrange_quadrature_theta);
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        DConstField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
         const int batch_idx = m_batch_idx;
         const int n_singular = idxrange_singular.size();
@@ -887,10 +828,13 @@ public:
                 central_radial_bspline_idx_range,
                 m_idxrange_bsplines_theta);
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        DConstField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
+
+        QuadratureLocatorR quad_locator_r = m_quad_locator_r;
+        QuadratureLocatorTheta quad_locator_theta = m_quad_locator_theta;
 
         const int batch_idx = m_batch_idx;
         // Number of polar bsplines which traverse the singular point
@@ -936,18 +880,13 @@ public:
                             bspl_theta.get_first_support_knot(idx_trial_theta));
                     const Idx<KnotsTheta> end_non_zero_theta(
                             bspl_theta.get_last_support_knot(idx_trial_theta));
-                    const IdxRangeQuadratureRTheta quad_range
-                            = detail_poisson::get_quadrature_between_knots<
-                                    QDimRMesh,
-                                    QDimThetaMesh,
-                                    BSplinesR,
-                                    BSplinesTheta>(
-                                    start_non_zero_r,
-                                    end_non_zero_r,
+                    const IdxRangeQuadratureR quad_range_r(quad_locator_r.get_relevant_idx_range(
+                            IdxRange(start_non_zero_r, end_non_zero_r - start_non_zero_r)));
+                    const IdxRangeQuadratureTheta quad_range_theta(
+                            quad_locator_theta.get_relevant_idx_range(IdxRange(
                                     start_non_zero_theta,
-                                    end_non_zero_theta,
-                                    idxrange_quadrature_front);
-                    assert(quad_range.size() > 0);
+                                    end_non_zero_theta - start_non_zero_theta)));
+                    const IdxRangeQuadratureRTheta quad_range(quad_range_r, quad_range_theta);
                     double element = 0;
                     // Calculate the weak integral
                     Kokkos::parallel_reduce(
@@ -1031,9 +970,12 @@ public:
 
         IdxBSPolar idxrange_fem_non_singular_front = m_idxrange_fem_tensor_basis.front();
 
-        DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
+        DConstField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
+
+        QuadratureLocatorR quad_locator_r = m_quad_locator_r;
+        QuadratureLocatorTheta quad_locator_theta = m_quad_locator_theta;
 
         const int batch_idx = m_batch_idx;
         const int n_singular = idxrange_singular.size();
@@ -1078,7 +1020,9 @@ public:
                                 spline_evaluator,
                                 mapping,
                                 full_quad_idx_range,
-                                int_volume_proxy);
+                                int_volume_proxy,
+                                quad_locator_r,
+                                quad_locator_theta);
                         values_csr(batch_idx, csr_idx) = element;
                     }
                 });
@@ -1124,7 +1068,7 @@ public:
             ConstSpline2D coeff_beta,
             SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Mapping const& mapping,
-            DField<IdxRangeQuadratureRTheta> int_volume)
+            DConstField<IdxRangeQuadratureRTheta> int_volume)
     {
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
@@ -1195,7 +1139,9 @@ public:
             SplineRThetaEvaluatorNullBound const& evaluator,
             Mapping const& mapping,
             IdxRangeQuadratureRTheta const& full_quad_idx_range,
-            DField<IdxRangeQuadratureRTheta> int_volume)
+            DConstField<IdxRangeQuadratureRTheta> int_volume,
+            QuadratureLocatorR const& quad_locator_r,
+            QuadratureLocatorTheta const& quad_locator_theta)
     {
         const IdxBSR idx_test_r(idx_test);
         const IdxBSR idx_trial_r(idx_trial);
@@ -1240,13 +1186,11 @@ public:
                 Kokkos::max(first_support_knot_theta_test, first_support_knot_theta_trial));
         const Idx<KnotsTheta> end_non_zero_theta(
                 Kokkos::min(last_support_knot_theta_test, last_support_knot_theta_trial));
-        const IdxRangeQuadratureRTheta quad_range = detail_poisson::
-                get_quadrature_between_knots<QDimRMesh, QDimThetaMesh, BSplinesR, BSplinesTheta>(
-                        start_non_zero_r,
-                        end_non_zero_r,
-                        start_non_zero_theta,
-                        end_non_zero_theta,
-                        full_quad_idx_range.front());
+        const IdxRangeQuadratureR quad_range_r(quad_locator_r.get_relevant_idx_range(
+                IdxRange(start_non_zero_r, end_non_zero_r - start_non_zero_r)));
+        const IdxRangeQuadratureTheta quad_range_theta(quad_locator_theta.get_relevant_idx_range(
+                IdxRange(start_non_zero_theta, end_non_zero_theta - start_non_zero_theta)));
+        const IdxRangeQuadratureRTheta quad_range(quad_range_r, quad_range_theta);
 
         const IdxBSPolar idx_test_polar(to_polar(idx_test));
         const IdxBSPolar idx_trial_polar(to_polar(idx_trial));
