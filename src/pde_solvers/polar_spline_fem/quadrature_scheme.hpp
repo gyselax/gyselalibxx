@@ -20,11 +20,9 @@ private:
     int m_npoints_per_cell;
 
 public:
-    explicit QuadratureBetweenBreakPoints(
-            IdxRange<QuadratureGrid> idx_range_quadrature,
-            int npoints_per_cell)
+    explicit QuadratureBetweenBreakPoints(IdxRange<QuadratureGrid> idx_range_quadrature)
         : m_idx_range_quadrature(idx_range_quadrature)
-        , m_npoints_per_cell(npoints_per_cell)
+        , m_npoints_per_cell(idx_range_quadrature.size() / ddc::discrete_space<BSplines>().ncells())
     {
     }
 
