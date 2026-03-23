@@ -298,20 +298,12 @@ public:
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
         ddc::parallel_fill(get_field(m_x_init_alloc), 0);
-        // Get break points
-        IdxRange<KnotsR> idxrange_r_edges = ddc::discrete_space<BSplinesR>().break_point_domain();
-        IdxRange<KnotsTheta> idxrange_theta_edges
-                = ddc::discrete_space<BSplinesTheta>().break_point_domain();
-        host_t<FieldMem<Coord<R>, IdxRange<KnotsR>>> breaks_r(idxrange_r_edges);
-        host_t<FieldMem<Coord<Theta>, IdxRange<KnotsTheta>>> breaks_theta(idxrange_theta_edges);
-
-        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_r));
-        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_theta));
 
         // Define quadrature points and weights
-        GaussLegendre<QDimRMesh, s_n_gauss_legendre_r> gl_coeffs_r(get_const_field(breaks_r));
+        GaussLegendre<QDimRMesh, s_n_gauss_legendre_r> gl_coeffs_r(
+                ddc::discrete_space<BSplinesR>().break_point_domain());
         GaussLegendre<QDimThetaMesh, s_n_gauss_legendre_theta> gl_coeffs_theta(
-                get_const_field(breaks_theta));
+                ddc::discrete_space<BSplinesTheta>().break_point_domain());
         m_int_volume_alloc = compute_coeffs_on_mapping(
                 Kokkos::DefaultExecutionSpace(),
                 mapping,
