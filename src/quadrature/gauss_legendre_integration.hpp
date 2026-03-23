@@ -225,7 +225,7 @@ private:
 
         int k(0);
         for (Idx<Grid1D> mesh_idx(mesh_edges_idx_range.front());
-             mesh_idx < mesh_edges_idx_range.size() - 1;
+             mesh_idx < mesh_edges_idx_range.back() - 1;
              mesh_idx++) {
             get_sampling_on_cell(
                     grid,
