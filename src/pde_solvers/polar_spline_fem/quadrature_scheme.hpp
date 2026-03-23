@@ -97,9 +97,8 @@ public:
             idx_likely_first += 1;
         }
         Idx<QuadratureGrid> idx_likely_last(
-                m_idx_range_quadrature.front() + last_cell_offset.value()
-                + ddc::discrete_space<BSplines>().degree());
-        while (ddc::coordinate(idx_likely_last) > ddc::coordinate(idx_range_knots)) {
+                m_idx_range_quadrature.front() + last_cell_offset.value() + BSplines::degree());
+        while (ddc::coordinate(idx_likely_last) > ddc::coordinate(idx_range_knots.back())) {
             idx_likely_last -= 1;
         }
 
