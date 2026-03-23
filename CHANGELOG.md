@@ -47,6 +47,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change `BslAdvectionVelocity` to stop providing values for the derivatives at the boundaries.
 - Add labels to all parallel constructs and many variable allocations.
 - Completed the porting of `PolarSplineFEMPoissonLikeAssembler` to GPU (less memory, fewer data transfers, faster execution).
+- Changed interface of PolarSplineFEMPoissonLikeSolver to split initialisation from coefficient setting.
 
 ### Deprecated
 
