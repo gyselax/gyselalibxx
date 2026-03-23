@@ -120,6 +120,22 @@ public:
     }
 
     /**
+     * @brief A constructor of the GaussLegendre class.
+     * @param[in] mesh_edge_idx_range An index range indicating the coordinates of the edges
+     *          of the cells on which the Gauss-Legendre quadrature is calculated.
+     */
+    template <class Grid1D>
+    explicit GaussLegendre(IdxRange<Grid1D> mesh_edge_idx_range)
+        : m_nbcells(mesh_edge_idx_range.size() - 1)
+        , m_valid_idx_range(
+                  Idx<GLGrid>(0),
+                  IdxStep<GLGrid>((mesh_edge_idx_range.size() - 1) * NPoints))
+        , m_cell_lengths(m_nbcells)
+    {
+        ddc::init_discrete_space<GLGrid>(get_sampling(mesh_edge_idx_range));
+    }
+
+    /**
      * @brief Get the index range of the points of the Gauss-Legendre quadrature.
      * @return The index range where functions should be evaluated.
      */
@@ -198,6 +214,25 @@ private:
             x0 = x1;
             x1 = mesh_edges(++mesh_idx);
             get_sampling_on_cell(grid, x0, x1, i, k);
+        }
+        return grid;
+    }
+
+    template <class Grid1D>
+    std::vector<Coord<Dim>> get_sampling(IdxRange<Grid1D> mesh_edges_idx_range)
+    {
+        std::vector<Coord<Dim>> grid(m_nbcells * NPoints);
+
+        int k(0);
+        for (Idx<Grid1D> mesh_idx(mesh_edges_idx_range.front());
+             mesh_idx < mesh_edges_idx_range.size() - 1;
+             mesh_idx++) {
+            get_sampling_on_cell(
+                    grid,
+                    ddc::coordinate(mesh_idx),
+                    ddc::coordinate(mesh_idx + 1),
+                    mesh_idx - mesh_edges_idx_range.front(),
+                    k);
         }
         return grid;
     }
