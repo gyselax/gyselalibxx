@@ -434,7 +434,7 @@ public:
             std::unique_ptr<
                     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>&
                     gko_matrix,
-            IdxRangeFull batched_idx_range,
+            IdxRangeBatch batch_idx_range,
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -458,8 +458,6 @@ public:
         const int n_elements_stencil = n_stencil_r * n_stencil_theta;
 
         const int n_matrix_elements = n_elements_singular + n_elements_overlap + n_elements_stencil;
-
-        IdxRangeBatch batch_idx_range(batched_idx_range);
 
         //CSR data storage
         gko_matrix = std::make_unique<
@@ -794,7 +792,7 @@ public:
 
         DField<IdxRangeQuadratureRTheta> int_volume_proxy = m_int_volume;
 
-        const int n_batch = values_csr.extents(0);
+        const int n_batch = values_csr.extent(0);
         const int n_singular = idxrange_singular.size();
 
         Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
@@ -892,7 +890,7 @@ public:
 
         IdxQuadratureRTheta idxrange_quadrature_front = m_idxrange_quadrature.front();
 
-        const int n_batch = values_csr.extents(0);
+        const int n_batch = values_csr.extent(0);
         // Number of polar bsplines which traverse the singular point
         const int n_singular = idxrange_singular.size();
         // Number of tensor product polar bsplines which overlap with polar bsplines which
@@ -985,9 +983,9 @@ public:
                     const int col_idx = idx_step_trial.value() + n_singular;
 
                     //a_ij
-                    values_csr(batch_idx, nnz_per_row_csr(row_idx) + col_idx) = element;
+                    values_csr(idx_batch, nnz_per_row_csr(row_idx) + col_idx) = element;
                     //a_ji
-                    values_csr(batch_idx, nnz_per_row_csr(col_idx) + row_idx) = element;
+                    values_csr(idx_batch, nnz_per_row_csr(col_idx) + row_idx) = element;
                 });
     }
 
@@ -1038,7 +1036,7 @@ public:
 
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
 
-        const int n_batch = values_csr.extents(0);
+        const int n_batch = values_csr.extent(0);
         const int n_singular = idxrange_singular.size();
         const std::source_location location = std::source_location::current();
 
