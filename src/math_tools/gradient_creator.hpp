@@ -18,7 +18,6 @@ template <typename IdxRangeFull, typename... DerivativeDims>
 class GradientCreator
 {
     static_assert((DerivativeDims::IS_CONTRAVARIANT && ...));
-    static_assert(is_accessible_v<Kokkos::DefaultExecutionSpace, MappingType>);
 
 private:
     std::tuple<IPartialDerivativeCreator<IdxRangeFull, DerivativeDims> const&...>
@@ -30,7 +29,7 @@ public:
      * @param[in] partial_derivative_operator The operators used to calculate the
      * derivative along each of the dimensions.
      */
-    GradientCreator(IPartialDerivativeCreator<
+    explicit GradientCreator(IPartialDerivativeCreator<
                     IdxRangeFull,
                     DerivativeDims> const&... partial_derivative_operator)
         : m_derivative_creators(std::tie(partial_derivative_operator...))
