@@ -1058,14 +1058,14 @@ public:
 
                     // Calculate the row index and the first possible column index
                     int const row_idx = idx_test_polar - idxrange_singular.front();
-                    int const first_col_idx
+                    int const csr_idx_first_stencil_element
                             = n_singular * central_radial_bspline_idx_range.contains(idx_test_r);
 
                     // Loop over the poloidal offset to a trial b-spline
-                    for (int col_nnz_idx = nnz_per_row_csr[row_idx] + first_col_idx;
-                         col_nnz_idx < nnz_per_row_csr[row_idx + 1];
-                         ++col_nnz_idx) {
-                        int const col_idx = col_idx_csr[col_nnz_idx];
+                    for (int csr_idx = nnz_per_row_csr[row_idx] + csr_idx_first_stencil_element;
+                         csr_idx < nnz_per_row_csr[row_idx + 1];
+                         ++csr_idx) {
+                        int const col_idx = col_idx_csr[csr_idx];
                         IdxBSPolar const idx_trial_polar = idxrange_singular.front() + col_idx;
                         const IdxBSRTheta idx_trial
                                 = PolarBSplinesRTheta::get_2d_index(idx_trial_polar);
@@ -1079,7 +1079,7 @@ public:
                                 mapping,
                                 full_quad_idx_range,
                                 int_volume_proxy);
-                        values_csr(batch_idx, col_nnz_idx) = element;
+                        values_csr(batch_idx, csr_idx) = element;
                     }
                 });
 
