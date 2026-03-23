@@ -169,17 +169,8 @@ private:
             ddc::NullExtrapolationRule>;
 
 private:
-    static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
-    static constexpr int s_n_gauss_legendre_theta = BSplinesTheta::degree() + 1;
     // The number of cells (in the radial direction) in which both types of basis splines can be found
     static constexpr int m_n_overlap_cells = PolarBSplinesRTheta::continuity + 1;
-
-    // Number of cells over which a radial B-splines has its support
-    // This is the case for b-splines which are not affected by the higher knot multiplicity at the boundary.
-    static constexpr int m_n_non_zero_bases_r = BSplinesR::degree() + 1;
-
-    // Number of cells over which a poloidal B-splines has its support
-    static constexpr int m_n_non_zero_bases_theta = BSplinesTheta::degree() + 1;
 
     const int m_nbasis_theta;
 
