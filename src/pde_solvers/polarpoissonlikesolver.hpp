@@ -196,8 +196,12 @@ private:
 
     IdxRangeQuadratureR m_idxrange_quadrature_r;
     IdxRangeQuadratureTheta m_idxrange_quadrature_theta;
-    IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
+
+    QuadratureBetweenBreakPoints<QDimRMesh, BSplinesR> m_quad_locator_r;
+    QuadratureBetweenBreakPoints<QDimThetaMesh, BSplinesTheta> m_quad_locator_theta;
+
+    IdxRangeQuadratureRTheta m_idxrange_quadrature_singular;
 
     Mapping m_mapping;
     SplineRThetaEvaluatorNullBound m_spline_evaluator;
@@ -264,11 +268,14 @@ public:
                   Idx<QDimThetaMesh>(0),
                   IdxStep<QDimThetaMesh>(
                           s_n_gauss_legendre_theta * ddc::discrete_space<BSplinesTheta>().ncells()))
-        , m_idxrange_quadrature_singular(
-                  m_idxrange_quadrature_r.take_first(
-                          IdxStep<QDimRMesh> {m_n_overlap_cells * s_n_gauss_legendre_r}),
-                  m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
+        , m_quad_locator_r(m_idxrange_quadrature_r)
+        , m_quad_locator_theta(m_idxrange_quadrature_theta)
+        , m_idxrange_quadrature_singular(
+                  m_quad_locator_r.get_relevant_idx_range(
+                          ddc::discrete_space<BSplinesR>().break_point_domain().take_first(
+                                  IdxStep<KnotsR>(m_n_overlap_cells))),
+                  m_idxrange_quadrature_theta)
         , m_mapping(mapping)
         , m_spline_evaluator(spline_evaluator)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
@@ -282,14 +289,7 @@ public:
                                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                                           - ddc::discrete_space<BSplinesTheta>().nbasis())))
         , m_int_volume_alloc(calculate_int_volume(mapping))
-        , m_assembler(
-                  get_field(m_int_volume_alloc),
-                  QuadratureBetweenBreakPoints<
-                          QDimRMesh,
-                          BSplinesR>(m_idxrange_quadrature_r, s_n_gauss_legendre_r),
-                  QuadratureBetweenBreakPoints<
-                          QDimThetaMesh,
-                          BSplinesTheta>(m_idxrange_quadrature_theta, s_n_gauss_legendre_theta))
+        , m_assembler(get_field(m_int_volume_alloc), m_quad_locator_r, m_quad_locator_theta)
     {
         static_assert(has_jacobian_v<Mapping>);
         //initialise x_init
@@ -395,10 +395,9 @@ public:
         IdxRangeQuadratureRTheta full_quad_idx_range = m_idxrange_quadrature;
         IdxRangeQuadratureTheta full_quad_idx_range_theta(full_quad_idx_range);
 
-        QuadratureBetweenBreakPoints<QDimRMesh, BSplinesR>
-                quad_locator_r(m_idxrange_quadrature_r, s_n_gauss_legendre_r);
-        QuadratureBetweenBreakPoints<QDimThetaMesh, BSplinesTheta>
-                quad_locator_theta(m_idxrange_quadrature_theta, s_n_gauss_legendre_theta);
+        QuadratureBetweenBreakPoints<QDimRMesh, BSplinesR> quad_locator_r = m_quad_locator_r;
+        QuadratureBetweenBreakPoints<QDimThetaMesh, BSplinesTheta> quad_locator_theta
+                = m_quad_locator_theta;
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
