@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 #include "ddc_aliases.hpp"
@@ -19,7 +20,7 @@ private:
     int m_npoints_per_cell;
 
 public:
-    QuadratureBetweenBreakPoints(
+    explicit QuadratureBetweenBreakPoints(
             IdxRange<QuadratureGrid> idx_range_quadrature,
             int npoints_per_cell)
         : m_idx_range_quadrature(idx_range_quadrature)
@@ -63,7 +64,7 @@ private:
     int m_npoints_per_cell;
 
 public:
-    QuadratureOnInterpolationPoints(IdxRange<Grid1D> idx_range_quadrature)
+    explicit QuadratureOnInterpolationPoints(IdxRange<Grid1D> idx_range_quadrature)
         : m_idx_range_quadrature(idx_range_quadrature)
     {
     }
