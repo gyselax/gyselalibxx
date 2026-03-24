@@ -174,61 +174,14 @@ public:
             Coord<CoordsDims...> const& coord,
             ConstField<data_type, NdCoeffIdxRange, memory_space, Layout> const coeff) const
     {
-        using knot_grid = HeadCoeffGrid;
-
-        // Extract the head coordinate component and apply periodic wrapping if needed.
         Coord<HeadContDim> coord_head(coord);
-        if constexpr (HeadBasis::is_periodic()) {
-            if (coord_head < ddc::discrete_space<HeadBasis>().rmin()
-                || coord_head > ddc::discrete_space<HeadBasis>().rmax()) {
-                coord_head -= Kokkos::floor(
-                                      (coord_head - ddc::discrete_space<HeadBasis>().rmin())
-                                      / ddc::discrete_space<HeadBasis>().length())
-                              * ddc::discrete_space<HeadBasis>().length();
-            }
-        }
-
-        // Identify the stencil window in the head dimension.
-        Idx<knot_grid> const closest_knot = m_head_evaluator.getclosest(coord_head);
-        Idx<knot_grid> const first_knot
-                = ddc::discrete_space<HeadBasis>().break_point_domain().front();
-        Idx<knot_grid> const last_knot
-                = ddc::discrete_space<HeadBasis>().break_point_domain().back();
-
-        // Offset from the closest knot to the first stencil knot.
-        IdxStep<knot_grid> const step(
-                -static_cast<int>(HeadBasis::degree() / 2)
-                - static_cast<int>(HeadBasis::degree() % 2)
-                          * static_cast<int>(ddc::coordinate(closest_knot) > coord_head));
-
-        Idx<knot_grid> first_lagrange_knot;
-        if constexpr (HeadBasis::is_periodic()) {
-            first_lagrange_knot = closest_knot
-                                  + (last_knot - first_knot)
-                                            * static_cast<int>((first_knot - closest_knot) > step)
-                                  + step;
-            // If the stencil wraps across the period boundary, shift the coordinate
-            // forward so that eval_basis evaluation remains valid.
-            if (first_lagrange_knot > closest_knot) {
-                coord_head += ddc::discrete_space<HeadBasis>().length();
-            }
-        } else {
-            if ((first_knot - closest_knot) > step) {
-                first_lagrange_knot = first_knot;
-            } else {
-                first_lagrange_knot = closest_knot + step;
-                Idx<knot_grid> const last_possible = last_knot - HeadBasis::degree();
-                if (first_lagrange_knot > last_possible) {
-                    first_lagrange_knot = last_possible;
-                }
-            }
-        }
+        Idx<HeadCoeffGrid> first_lagrange_knot = find_stencil(coord_head);
 
         // Evaluate the Lagrange basis functions at the (adjusted) head coordinate.
         std::array<data_type, HeadBasis::degree() + 1> vals_ptr;
         Kokkos::mdspan<data_type, Kokkos::extents<std::size_t, HeadBasis::degree() + 1>> const
                 vals(vals_ptr.data());
-        ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
+        ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head_adj, first_lagrange_knot);
 
         // Tensor-product recursion: for each stencil knot, slice the coefficient
         // array along the head dimension and delegate to the (N-1)D tail evaluator.
@@ -236,7 +189,8 @@ public:
         // and operator() applies its configured extrapolation rules.
         data_type result = 0.;
         for (std::size_t i = 0; i < HeadBasis::degree() + 1; ++i) {
-            Idx<knot_grid> const knot_i = first_lagrange_knot + IdxStep<knot_grid>(i);
+            Idx<HeadCoeffGrid> const knot_i
+                    = first_lagrange_knot + IdxStep<HeadCoeffGrid>(i);
             result += vals[i] * m_tail_evaluator(coord, coeff[knot_i]);
         }
         return result;
