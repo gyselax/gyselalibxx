@@ -6,34 +6,10 @@
 #include <type_traits>
 
 #include "lagrange_evaluator.hpp"
-
-namespace detail {
-
-/**
- * @brief Helper to merge two Coord types into one.
- *
- * Given Coord<D1...> and Coord<D2...>, provides the member type alias
- * @c type = Coord<D1..., D2...>.
- */
-template <class Coord1, class Coord2>
-struct MergeCoords;
-
-template <class... D1, class... D2>
-struct MergeCoords<Coord<D1...>, Coord<D2...>>
-{
-    using type = Coord<D1..., D2...>;
-};
-
-} // namespace detail
+#include "type_seq_tools.hpp"
 
 // Forward declaration
-template <
-        class ExecSpace,
-        class MemorySpace,
-        class DataType,
-        class HeadEvaluator,
-        class First,
-        class... Rest>
+template <class HeadEvaluator, class... Evaluators1D>
 class NDLagrangeEvaluator;
 
 /**
@@ -61,44 +37,50 @@ template <class HeadEvaluator, class... Evaluators1D>
 class NDLagrangeEvaluator
 {
     static_assert(sizeof...(Evaluators1D) > 0);
-    static_assert((std::is_same_v<HeadEvaluator::exec_space, Evaluators1D::exec_space> && ...));
-    static_assert((std::is_same_v<HeadEvaluator::memory_space, Evaluators1D::memory_space> && ...));
-    static_assert((std::is_same_v<HeadEvaluator::data_type, Evaluators1D::data_type> && ...));
+    static_assert(
+            (std::is_same_v<
+                     typename HeadEvaluator::exec_space,
+                     typename Evaluators1D::exec_space> && ...));
+    static_assert(
+            (std::is_same_v<
+                     typename HeadEvaluator::memory_space,
+                     typename Evaluators1D::memory_space> && ...));
+    static_assert(
+            (std::is_same_v<
+                     typename HeadEvaluator::data_type,
+                     typename Evaluators1D::data_type> && ...));
 
     // Get the type of the (N-1)D LagrangeEvaluator
     using nd_minus_1_evaluator_type = std::conditional_t<
             (sizeof...(Evaluators1D) > 1),
             NDLagrangeEvaluator<Evaluators1D...>,
-            ddc::type_seq_element_t<0, ddc::detail::TypeSeq<Evaluators1D>>>;
+            ddc::type_seq_element_t<0, ddc::detail::TypeSeq<Evaluators1D...>>>;
 
     HeadEvaluator m_head_evaluator;
-    tail_nd_type m_tail_evaluator;
+    nd_minus_1_evaluator_type m_tail_evaluator;
 
     using HeadBasis = typename HeadEvaluator::lagrange_basis_type;
     using HeadCoeffGrid = typename HeadEvaluator::coeff_grid_type;
+    using HeadContDim = typename HeadBasis::continuous_dimension_type;
 
     // Extract the InterpolationGrid from evaluation_idx_range_type = IdxRange<Grid>.
     using IdxRangeHeadEval = typename HeadEvaluator::evaluation_idx_range_type;
-    using IdxHeadEval = typename IdxRangeHeadEval::discrete_element_type;
-    // Same for the tail's (1D) evaluator, needed when sizeof...(Rest) == 0.
-    using TailEvalGrid = ddc::
-            type_seq_element_t<0, ddc::to_type_seq_t<typename First::evaluation_idx_range_type>>;
-    using TailContDim = typename First::lagrange_basis_type::continuous_dimension_type;
 
 public:
     /// @brief The type of the Kokkos execution space.
-    using exec_space = ExecSpace;
+    using exec_space = typename HeadEvaluator::exec_space;
 
     /// @brief The type of the Kokkos memory space.
-    using memory_space = MemorySpace;
+    using memory_space = typename HeadEvaluator::memory_space;
 
     /// @brief The data type.
-    using data_type = DataType;
+    using data_type = typename HeadEvaluator::data_type;
 
-    /// @brief The type of the domain for the 1D evaluation mesh used by this class.
-    using evaluation_idx_range_type = ddc::convert_type_seq_to_discrete_domain_t<type_seq_cat_t<
-            IdxRangeHeadEval,
-            ddc::to_type_seq_t<typename Evaluators1D::evaluation_idx_range_type>...>>;
+    /// @brief The type of the domain for the ND evaluation mesh used by this class.
+    using evaluation_idx_range_type
+            = ddc::detail::convert_type_seq_to_discrete_domain_t<type_seq_cat_t<
+                    ddc::to_type_seq_t<IdxRangeHeadEval>,
+                    ddc::to_type_seq_t<typename Evaluators1D::evaluation_idx_range_type>...>>;
 
     /**
      * @brief The type of the whole domain representing evaluation points.
@@ -111,7 +93,7 @@ public:
     using batched_evaluation_idx_range_type = BatchedInterpolationIdxRange;
 
     /**
-     * @brief The type of the batch domain (obtained by removing the dimension of interest
+     * @brief The type of the batch domain (obtained by removing the dimensions of interest
      * from the whole domain).
      *
      * @tparam The batched discrete domain on which the interpolation points are defined.
@@ -119,15 +101,17 @@ public:
     template <
             class BatchedInterpolationIdxRange,
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationIdxRange>>>
-    using batch_idx_range_type = ddc::convert_type_seq_to_discrete_domain_t<ddc::type_seq_remove_t<
-            ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
-            ddc::to_type_seq_t<evaluation_idx_range_type>>>;
+    using batch_idx_range_type
+            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_remove_t<
+                    ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
+                    ddc::to_type_seq_t<evaluation_idx_range_type>>>;
 
-    /// @brief The type of the ND Lagrange domain corresponding to the dimension of interest.
-    using coeff_idx_range_type = IdxRange<HeadCoeffGrid, typename Evaluators1D::coeff_grid_type>;
+    /// @brief The type of the ND Lagrange domain corresponding to the dimensions of interest.
+    using coeff_idx_range_type
+            = IdxRange<HeadCoeffGrid, typename Evaluators1D::coeff_grid_type...>;
 
     /**
-     * @brief The type of the whole Lagrange domain (cartesian product of 1D Lagrange domain
+     * @brief The type of the whole Lagrange domain (cartesian product of ND Lagrange domain
      * and batch domain) preserving the order of dimensions.
      *
      * @tparam The batched discrete domain on which the interpolation points are defined.
@@ -136,25 +120,23 @@ public:
             class BatchedInterpolationIdxRange,
             class = std::enable_if_t<ddc::is_discrete_domain_v<BatchedInterpolationIdxRange>>>
     using batched_coeff_idx_range_type
-            = ddc::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
+            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
                     ddc::to_type_seq_t<evaluation_idx_range_type>,
-                    coeff_idx_range_type>>;
+                    ddc::to_type_seq_t<coeff_idx_range_type>>>;
 
 public:
     /**
      * @brief Construct from a sequence of 1D LagrangeEvaluators, one per dimension.
      *
-     * @param head_ev  The evaluator for the first dimension.
-     * @param first_ev The evaluator for the second dimension.
-     * @param rest_ev  The evaluators for the remaining dimensions.
+     * @param head_ev   The evaluator for the first dimension.
+     * @param tail_evs  The evaluators for the remaining dimensions.
      */
     explicit NDLagrangeEvaluator(
             HeadEvaluator const& head_ev,
-            First const& first_ev,
-            Rest const&... rest_ev)
+            Evaluators1D const&... tail_evs)
         : m_head_evaluator(head_ev)
-        , m_tail_evaluator(first_ev, rest_ev...)
+        , m_tail_evaluator(tail_evs...)
     {
     }
 
@@ -188,9 +170,9 @@ public:
      * @return The interpolated value.
      */
     template <class Layout, class... CoordsDims, class NdCoeffIdxRange>
-    KOKKOS_FUNCTION DataType operator()(
+    KOKKOS_FUNCTION data_type operator()(
             Coord<CoordsDims...> const& coord,
-            ConstField<DataType, NdCoeffIdxRange, MemorySpace, Layout> const coeff) const
+            ConstField<data_type, NdCoeffIdxRange, memory_space, Layout> const coeff) const
     {
         using knot_grid = HeadCoeffGrid;
 
@@ -207,7 +189,7 @@ public:
         }
 
         // Identify the stencil window in the head dimension.
-        Idx<knot_grid> const closest_knot = getclosest(coord_head);
+        Idx<knot_grid> const closest_knot = m_head_evaluator.getclosest(coord_head);
         Idx<knot_grid> const first_knot
                 = ddc::discrete_space<HeadBasis>().break_point_domain().front();
         Idx<knot_grid> const last_knot
@@ -243,16 +225,16 @@ public:
         }
 
         // Evaluate the Lagrange basis functions at the (adjusted) head coordinate.
-        std::array<DataType, HeadBasis::degree() + 1> vals_ptr;
-        Kokkos::mdspan<DataType, Kokkos::extents<std::size_t, HeadBasis::degree() + 1>> const vals(
-                vals_ptr.data());
+        std::array<data_type, HeadBasis::degree() + 1> vals_ptr;
+        Kokkos::mdspan<data_type, Kokkos::extents<std::size_t, HeadBasis::degree() + 1>> const
+                vals(vals_ptr.data());
         ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
 
         // Tensor-product recursion: for each stencil knot, slice the coefficient
         // array along the head dimension and delegate to the (N-1)D tail evaluator.
-        // When sizeof...(Rest)==0, m_tail_evaluator is the 1D LagrangeEvaluator (First)
+        // When sizeof...(Evaluators1D)==1, m_tail_evaluator is the 1D LagrangeEvaluator
         // and operator() applies its configured extrapolation rules.
-        DataType result = 0.;
+        data_type result = 0.;
         for (std::size_t i = 0; i < HeadBasis::degree() + 1; ++i) {
             Idx<knot_grid> const knot_i = first_lagrange_knot + IdxStep<knot_grid>(i);
             result += vals[i] * m_tail_evaluator(coord, coeff[knot_i]);
@@ -278,12 +260,12 @@ public:
             class IdxRangeBatched,
             class... CoordsDims>
     void operator()(
-            Field<DataType, IdxRangeBatched, MemorySpace, Layout1> lagrange_eval,
-            ConstField<Coord<CoordsDims...>, IdxRangeBatched, MemorySpace, Layout2> coords_eval,
+            Field<data_type, IdxRangeBatched, memory_space, Layout1> lagrange_eval,
+            ConstField<Coord<CoordsDims...>, IdxRangeBatched, memory_space, Layout2> coords_eval,
             ConstField<
-                    DataType,
+                    data_type,
                     batched_coeff_idx_range_type<IdxRangeBatched>,
-                    MemorySpace,
+                    memory_space,
                     Layout3> lagrange_coef) const
     {
         using FullIdx = typename IdxRangeBatched::discrete_element_type;
@@ -313,14 +295,15 @@ public:
      */
     template <class Layout1, class Layout2, class IdxRangeBatched>
     void operator()(
-            Field<DataType, IdxRangeBatched, MemorySpace, Layout1> lagrange_eval,
+            Field<data_type, IdxRangeBatched, memory_space, Layout1> lagrange_eval,
             ConstField<
-                    DataType,
+                    data_type,
                     batched_coeff_idx_range_type<IdxRangeBatched>,
-                    MemorySpace,
+                    memory_space,
                     Layout2> lagrange_coef) const
     {
         using FullIdx = typename IdxRangeBatched::discrete_element_type;
+        using EvalIdx = typename evaluation_idx_range_type::discrete_element_type;
         using BatchIdx = typename batch_idx_range_type<IdxRangeBatched>::discrete_element_type;
 
         const std::source_location location = std::source_location::current();
@@ -330,8 +313,9 @@ public:
                 get_idx_range(lagrange_eval),
                 KOKKOS_CLASS_LAMBDA(FullIdx const full_idx) {
                     BatchIdx const batch_idx(full_idx);
+                    EvalIdx const eval_idx(full_idx);
                     lagrange_eval(full_idx)
-                            = (*this)(make_eval_coord(full_idx), lagrange_coef[batch_idx]);
+                            = (*this)(ddc::coordinate(eval_idx), lagrange_coef[batch_idx]);
                 });
     }
 };
