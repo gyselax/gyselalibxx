@@ -220,16 +220,16 @@ public:
                     memory_space,
                     Layout3> lagrange_coef) const
     {
-        using FullIdx = typename IdxRangeBatched::discrete_element_type;
-        using BatchIdx = typename batch_idx_range_type<IdxRangeBatched>::discrete_element_type;
+        using IdxFull = typename IdxRangeBatched::discrete_element_type;
+        using IdxBatch = typename batch_idx_range_type<IdxRangeBatched>::discrete_element_type;
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 exec_space(),
                 get_idx_range(lagrange_eval),
-                KOKKOS_CLASS_LAMBDA(FullIdx const full_idx) {
-                    BatchIdx const batch_idx(full_idx);
+                KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
+                    IdxBatch const batch_idx(full_idx);
                     lagrange_eval(full_idx)
                             = (*this)(coords_eval(full_idx), lagrange_coef[batch_idx]);
                 });
@@ -254,18 +254,18 @@ public:
                     memory_space,
                     Layout2> lagrange_coef) const
     {
-        using FullIdx = typename IdxRangeBatched::discrete_element_type;
-        using EvalIdx = typename evaluation_idx_range_type::discrete_element_type;
-        using BatchIdx = typename batch_idx_range_type<IdxRangeBatched>::discrete_element_type;
+        using IdxFull = typename IdxRangeBatched::discrete_element_type;
+        using IdxEval = typename evaluation_idx_range_type::discrete_element_type;
+        using IdxBatch = typename batch_idx_range_type<IdxRangeBatched>::discrete_element_type;
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 exec_space(),
                 get_idx_range(lagrange_eval),
-                KOKKOS_CLASS_LAMBDA(FullIdx const full_idx) {
-                    BatchIdx const batch_idx(full_idx);
-                    EvalIdx const eval_idx(full_idx);
+                KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
+                    IdxBatch const batch_idx(full_idx);
+                    IdxEval const eval_idx(full_idx);
                     lagrange_eval(full_idx)
                             = (*this)(ddc::coordinate(eval_idx), lagrange_coef[batch_idx]);
                 });
