@@ -42,5 +42,7 @@ void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfd
                 KOKKOS_LAMBDA(IdxXY ixy) { rho(ixy) += chargedens_adiabspecies; });
     }
 
+    Kokkos::DefaultExecutionSpace().fence("Fence local ChargeDensityCalculator");
+
     Kokkos::Profiling::popRegion();
 }
