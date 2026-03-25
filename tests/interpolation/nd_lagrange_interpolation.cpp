@@ -148,9 +148,6 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
                 build_random_non_uniform_break_points(ymin, ymax, IdxStep<GridY>(ncells), 0.5));
     }
 
-    IdxRange<GridX> const x_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
-    IdxRange<GridY> const y_range(Idx<GridY>(0), IdxStep<GridY>(ncells + 1));
-    IdxRange<GridX, GridY> const idx_range(x_range, y_range);
     ddc::init_discrete_space<LagBasisX>(x_range);
     ddc::init_discrete_space<LagBasisY>(y_range);
 
