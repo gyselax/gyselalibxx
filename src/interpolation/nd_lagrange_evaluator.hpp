@@ -15,7 +15,7 @@ class NDLagrangeEvaluator;
 /**
  * @brief Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations.
  *
- * The evaluation is recursive. Given N 1D @c LagrangeEvaluator instances (one per
+ * The evaluation is recursive. Given N 1D LagrangeEvaluator instances (one per
  * interpolation dimension), the operator computes
  * @f[
  *   f(x_1, \ldots, x_N)
@@ -27,7 +27,7 @@ class NDLagrangeEvaluator;
  * where @f$k_i@f$ is the i-th stencil knot along the first dimension.
  *
  * The recursion terminates when only one evaluator remains: in that case the tail
- * type is the @c LagrangeEvaluator itself and the 1D evaluation (including its
+ * type is the LagrangeEvaluator itself and the 1D evaluation (including its
  * configured extrapolation rules) is invoked directly.
  *
  * @tparam HeadEvaluator The 1D LagrangeEvaluator for the first dimension.
@@ -159,8 +159,8 @@ public:
      *
      * For the head dimension this method:
      * 1. Wraps the coordinate (periodic) or clips the stencil (non-periodic).
-     * 2. Computes the @c degree+1 Lagrange basis values at the head coordinate.
-     * 3. For each stencil knot @c k, slices @p coeff along the head dimension and
+     * 2. Computes the degree+1 Lagrange basis values at the head coordinate.
+     * 3. For each stencil knot k, slices @p coeff along the head dimension and
      *    calls the (N-1)D tail evaluator on the resulting slice.
      * 4. Returns the dot product of the basis values and the recursive results.
      *
@@ -198,7 +198,7 @@ public:
      * @brief Evaluate the ND Lagrange polynomial on a mesh (with explicit coordinates).
      *
      * The evaluation is parallelised over the full (batch + ND evaluation) domain.
-     * For each point the single-point @c operator() is called with the corresponding
+     * For each point the single-point operator() is called with the corresponding
      * coordinate and batch-sliced coefficient field.
      *
      * @param[out] lagrange_eval  The interpolated values on the full batched domain.
@@ -238,7 +238,7 @@ public:
     /**
      * @brief Evaluate the ND Lagrange polynomial on a mesh (coordinates from the grid).
      *
-     * Coordinates are derived from the evaluation grid indices via @c ddc::coordinate.
+     * Coordinates are derived from the evaluation grid indices via ddc::coordinate.
      * This variant requires all evaluation grids to be genuine discrete approximations
      * of continuous dimensions.
      *
