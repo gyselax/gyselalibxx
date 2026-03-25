@@ -15,16 +15,16 @@ class NDLagrangeEvaluator;
 /**
  * @brief Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations.
  *
- * The evaluation is recursive. Given N 1D LagrangeEvaluator instances (one per
- * interpolation dimension), the operator computes
+ * The ND Lagrange polynomial is defined as:
  * @f[
- *   f(x_1, \ldots, x_N)
- *   = \sum_{i=0}^{d_1} L^{(1)}_i(x_1)\;
- *     \underbrace{
- *       f^{(N-1)}\!\left(x_2, \ldots, x_N;\; c[k_i, \cdot, \ldots, \cdot]\right)
- *     }_{(N-1)\text{D evaluation on slice }c[k_i,\cdot,\ldots,\cdot]}
+ *   L(x_1, \ldots, x_N)
+ *   = \sum_{i_1=0}^{d_1}\dots\sum_{i_N=0}^{d_N} \prod_{j=1}^N f(x_1, \ldots, x_N) l_{j,i_j}(x_j)
  * @f]
- * where @f$k_i@f$ is the i-th stencil knot along the first dimension.
+ * The evaluation is recursive:
+ * @f[
+ *   L(x_1, \ldots, x_N)
+ *   = \sum_{i_1=0}^{d_1} l_{1,i_1}(x_1) L(x_2, \dots, x_N)
+ * @f]
  *
  * The recursion terminates when only one evaluator remains: in that case the tail
  * type is the LagrangeEvaluator itself and the 1D evaluation (including its
@@ -61,7 +61,6 @@ private:
     using HeadCoeffGrid = typename HeadEvaluator::coeff_grid_type;
     using HeadContDim = typename HeadBasis::continuous_dimension_type;
 
-    // Extract the InterpolationGrid from evaluation_idx_range_type = IdxRange<Grid>.
     using IdxRangeHeadEval = typename HeadEvaluator::evaluation_idx_range_type;
 
 private:
@@ -78,14 +77,15 @@ public:
     /// @brief The data type.
     using data_type = typename HeadEvaluator::data_type;
 
-    /// @brief The type of the domain for the ND evaluation mesh used by this class.
+    /// @brief The type of the index range for the ND evaluation mesh used by this class.
     using evaluation_idx_range_type
             = ddc::detail::convert_type_seq_to_discrete_domain_t<type_seq_cat_t<
                     ddc::to_type_seq_t<IdxRangeHeadEval>,
                     ddc::to_type_seq_t<typename Evaluators1D::evaluation_idx_range_type>...>>;
 
     /**
-     * @brief The type of the whole domain representing evaluation points.
+     * @brief The type of the whole index range representing evaluation points including
+     * any batch dimensions.
      *
      * @tparam The batched discrete domain on which the interpolation points are defined.
      */
@@ -95,10 +95,10 @@ public:
     using batched_evaluation_idx_range_type = BatchedInterpolationIdxRange;
 
     /**
-     * @brief The type of the batch domain (obtained by removing the dimensions of interest
+     * @brief The type of the batch index range (obtained by removing the dimensions of interest
      * from the whole domain).
      *
-     * @tparam The batched discrete domain on which the interpolation points are defined.
+     * @tparam The batched index range on which the interpolation points are defined.
      */
     template <
             class BatchedInterpolationIdxRange,
@@ -108,14 +108,14 @@ public:
                     ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
                     ddc::to_type_seq_t<evaluation_idx_range_type>>>;
 
-    /// @brief The type of the ND Lagrange domain corresponding to the dimensions of interest.
+    /// @brief The type of the ND index range on which the Lagrange coefficients are defined.
     using coeff_idx_range_type = IdxRange<HeadCoeffGrid, typename Evaluators1D::coeff_grid_type...>;
 
     /**
-     * @brief The type of the whole Lagrange domain (cartesian product of ND Lagrange domain
-     * and batch domain) preserving the order of dimensions.
+     * @brief The type of the ND index range on which the Lagrange coefficients are defined
+     * plus any batch dimensions.
      *
-     * @tparam The batched discrete domain on which the interpolation points are defined.
+     * @tparam The batched index range on which the interpolation points are defined.
      */
     template <
             class BatchedInterpolationIdxRange,
@@ -130,39 +130,32 @@ public:
     /**
      * @brief Construct from a sequence of 1D LagrangeEvaluators, one per dimension.
      *
-     * @param head_ev   The evaluator for the first dimension.
-     * @param tail_evs  The evaluators for the remaining dimensions.
+     * @param head_eval   The evaluator for the first dimension.
+     * @param tail_evals  The evaluators for the remaining dimensions.
      */
-    explicit NDLagrangeEvaluator(HeadEvaluator const& head_ev, Evaluators1D const&... tail_evs)
-        : m_head_evaluator(head_ev)
-        , m_tail_evaluator(tail_evs...)
+    explicit NDLagrangeEvaluator(HeadEvaluator const& head_eval, Evaluators1D const&... tail_evals)
+        : m_head_evaluator(head_eval)
+        , m_tail_evaluator(tail_evals...)
     {
     }
 
-    /// @brief Copy-constructs.
+    /// @brief Copy-construct.
     NDLagrangeEvaluator(NDLagrangeEvaluator const& x) = default;
 
-    /// @brief Move-constructs.
+    /// @brief Move-construct.
     NDLagrangeEvaluator(NDLagrangeEvaluator&& x) = default;
 
-    /// @brief Destructs.
+    /// @brief Destruct.
     ~NDLagrangeEvaluator() = default;
 
-    /// @brief Copy-assigns.
+    /// @brief Copy-assign.
     NDLagrangeEvaluator& operator=(NDLagrangeEvaluator const& x) = default;
 
-    /// @brief Move-assigns.
+    /// @brief Move-assign.
     NDLagrangeEvaluator& operator=(NDLagrangeEvaluator&& x) = default;
 
     /**
      * @brief Evaluate the ND Lagrange polynomial at a single coordinate.
-     *
-     * For the head dimension this method:
-     * 1. Wraps the coordinate (periodic) or clips the stencil (non-periodic).
-     * 2. Computes the degree+1 Lagrange basis values at the head coordinate.
-     * 3. For each stencil knot k, slices @p coeff along the head dimension and
-     *    calls the (N-1)D tail evaluator on the resulting slice.
-     * 4. Returns the dot product of the basis values and the recursive results.
      *
      * @param coord The ND evaluation coordinate.
      * @param coeff The ND Lagrange coefficient field (no batch dimensions).

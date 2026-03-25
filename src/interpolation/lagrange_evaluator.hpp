@@ -405,11 +405,11 @@ private:
             ConstField<DataType, coeff_idx_range_type, memory_space, Layout> const lagrange_coef)
             const
     {
+        using deriv_dim = ddc::Deriv<continuous_dimension_type>;
         using knot_grid = std::conditional_t<
                 LagrangeBasis::is_uniform(),
                 UniformLagrangeKnots<LagrangeBasis>,
                 NonUniformLagrangeKnots<LagrangeBasis>>;
-        using deriv_dim = ddc::Deriv<continuous_dimension_type>;
         static_assert(
                 sizeof...(DerivDims) == 0
                         || ddc::type_seq_same_v<
