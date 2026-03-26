@@ -276,3 +276,11 @@ tensor_product(
             mapping.jacobian(coord));
     return tensor_mul(index<'i', 'j', 'k'>(eps), index<'j'>(a), index<'k'>(b));
 }
+
+/**
+ * @detail Calculate (-1)^pow.
+ */
+KOKKOS_INLINE_FUNCTION static int neg_1_pow(int pow)
+{
+return (1 - 2 * (pow % 2));
+}
