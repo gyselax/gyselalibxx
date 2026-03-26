@@ -292,16 +292,17 @@ public:
             KOKKOS_ASSERT(derivs.extent(1) == n_derivs + 1)
 
             constexpr std::size_t n_basis = degree() + 1;
+            DataType dx = ddc::discrete_space<knot_grid>().step();
+            double inv_dx = 1. / dx;
+            DataType offset = (x - ddc::coordinate(poly_start)) * inv_dx;
             DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
-
+            int icell = static_cast<int>(offset);
+            DataType local_offset = offset - icell;
             int node(-1);
-            for (std::size_t i(0); i < n_basis; ++i) {
-                if (Kokkos::fabs(x - ddc::coordinate(poly_start + i)) < eps) {
-                    node = i;
-                    for (int j(0); j < n_basis; ++j) {
-                        derivs(j, 0) = static_cast<int>(j == i);
-                    }
-                }
+            if (local_offset < eps) {
+                node = icell;
+            } else if (local_offset > (1 - eps)) {
+                node = icell + 1;
             }
 
             // If coordinate not found at a node
