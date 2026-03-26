@@ -10,7 +10,7 @@ runs:
       shell: bash
     - name: Restore cached cppcheck
       id: cache-cppcheck-restore
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v5
       with:
         path: |
           /usr/local/share/Cppcheck/
