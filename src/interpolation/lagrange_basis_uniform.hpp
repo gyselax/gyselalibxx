@@ -235,28 +235,13 @@ public:
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
             KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
-            DataType dx = ddc::discrete_space<knot_grid>().step();
-            double inv_dx = 1. / dx;
-            DataType offset = (x - ddc::coordinate(poly_start)) * inv_dx;
-            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
-            int icell = static_cast<int>(offset);
-            DataType local_offset = offset - icell;
-            if (local_offset < eps) {
-                for (int j(0); j < D + 1; ++j) {
-                    values(j) = static_cast<int>(j == icell);
-                }
-            } else if (local_offset > (1 - eps)) {
-                for (int j(0); j < D + 1; ++j) {
-                    values(j) = static_cast<int>(j == (icell + 1));
-                }
+            DataType offset;
+            int node = check_if_node(offset, x, poly_start);
+            if (node == -1) {
+                calculate_values_between_nodes(values, x, poly_start, offset);
             } else {
-                for (int i(0); i < D + 1; ++i) {
-                    DataType numerator = m_weights[i] / (dx * (offset - i));
-                    DataType denominator(0.0);
-                    for (int j(0); j < D + 1; ++j) {
-                        denominator += m_weights[j] / (dx * (offset - j));
-                    }
-                    values(i) = numerator / denominator;
+                for (int j(0); j < D + 1; ++j) {
+                    values(j) = static_cast<int>(j == node);
                 }
             }
         }
@@ -292,24 +277,14 @@ public:
             KOKKOS_ASSERT(derivs.extent(1) == n_derivs + 1)
 
             constexpr std::size_t n_basis = degree() + 1;
-            DataType dx = ddc::discrete_space<knot_grid>().step();
-            double inv_dx = 1. / dx;
-            DataType offset = (x - ddc::coordinate(poly_start)) * inv_dx;
-            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
-            int icell = static_cast<int>(offset);
-            DataType local_offset = offset - icell;
-            int node(-1);
-            if (local_offset < eps) {
-                node = icell;
-            } else if (local_offset > (1 - eps)) {
-                node = icell + 1;
-            }
+            DataType offset;
+            int node = check_if_node(offset, x, poly_start);
 
             // If coordinate not found at a node
             if (node == -1) {
                 std::array<DataType, n_basis> vals_ptr;
                 Span1D<DataType> values(vals_ptr.data(), n_basis);
-                eval_basis(values, x, poly_start);
+                calculate_values_between_nodes(values, x, poly_start, offset);
 
                 std::array<int, n_basis> combinations;
 
@@ -378,6 +353,45 @@ public:
                         derivs(node, n) -= derivs(j, n);
                     }
                 }
+            }
+        }
+
+    private:
+        /// Check if x is found at a node
+        KOKKOS_INLINE_FUNCTION static int check_if_node(
+                DataType& offset,
+                coord_type const& x,
+                Idx<knot_grid> poly_start)
+        {
+            DataType dx = ddc::discrete_space<knot_grid>().step();
+            DataType inv_dx = 1. / dx;
+            offset = (x - ddc::coordinate(poly_start)) * inv_dx;
+            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
+            int icell = static_cast<int>(offset);
+            DataType local_offset = offset - icell;
+            int node(-1);
+            if (local_offset < eps) {
+                node = icell;
+            } else if (local_offset > (1 - eps)) {
+                node = icell + 1;
+            }
+            return node;
+        }
+
+        KOKKOS_INLINE_FUNCTION void calculate_values_between_nodes(
+                Span1D<DataType> values,
+                coord_type const& x,
+                Idx<knot_grid> poly_start,
+                DataType offset) const
+        {
+            DataType dx = ddc::discrete_space<knot_grid>().step();
+            for (int i(0); i < D + 1; ++i) {
+                DataType numerator = m_weights[i] / (dx * (offset - i));
+                DataType denominator(0.0);
+                for (int j(0); j < D + 1; ++j) {
+                    denominator += m_weights[j] / (dx * (offset - j));
+                }
+                values(i) = numerator / denominator;
             }
         }
     };
