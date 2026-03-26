@@ -2,10 +2,10 @@ spack:
   definitions:
   - packages:
     - cmake
+    - 'ddc@0.12 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +cuda cuda_arch=90
     - googletest +gmock
     - kokkos@4.7 ~openmp +cuda +cuda_relocatable_device_code +cuda_constexpr cuda_arch=90
-    - kokkos-fft@0.4 host_backend=fftw-serial device_backend=cufft
     - kokkos-kernels@4.7 ~shared
     - kokkos-tools
     - 'koliop@0.1.2:0.1'
@@ -70,6 +70,8 @@ spack:
               c: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gcc
               cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/g++
               fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gfortran
+    kokkos-fft:
+      require: '@0.4 host_backend=fftw-serial device_backend=cufft'
     lapack:
       require: openblas
     mpi:

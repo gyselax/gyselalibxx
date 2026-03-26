@@ -4,10 +4,10 @@ spack:
   definitions:
   - packages:
     - 'cmake@3.30'
+    - 'ddc@0.12 +fft +pdi +splines'
     - 'ginkgo@1.9'
     - 'googletest@1.14 +gmock'
     - 'kokkos@4.7 +serial'
-    - 'kokkos-fft@0.4 host_backend=fftw-serial'
     - 'kokkos-kernels@4.7'
     - 'kokkos-tools'
     - 'koliop@0.1.2:0.1'
@@ -48,6 +48,8 @@ spack:
       variants: ~fortran ~mpi ~openmp cxxstd=17
     blas:
       require: openblas@0.3
+    kokkos-fft:
+      require: '@0.4 host_backend=fftw-serial'
     lapack:
       require: openblas@0.3
     mpi:

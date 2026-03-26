@@ -2,10 +2,10 @@ spack:
   definitions:
   - packages:
     - 'cmake@3.22:3'
+    - 'ddc@0.12 +fft +pdi +splines'
     - 'ginkgo@1.9 +openmp'
     - 'googletest +gmock'
     - 'kokkos@4.6:4 +openmp'
-    - 'kokkos-fft@0.3 host_backend=fftw-openmp'
     - 'kokkos-kernels@4.6:4'
     - 'kokkos-tools'
     - 'koliop@0.1.2:0.1'
@@ -55,6 +55,8 @@ spack:
       require: gcc@13
     cxx:
       require: gcc@13
+    kokkos-fft:
+      require: '@0.3 host_backend=fftw-openmp'
     lapack:
       require: openblas
     mpi:
