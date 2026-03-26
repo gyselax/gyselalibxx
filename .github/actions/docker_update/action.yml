@@ -62,7 +62,7 @@ runs:
         password: ${{ github.token }}
     - name: Build and push to tag
       if: (inputs.always_push == 'true') || (steps.rebuild-check.outputs.rebuild == 'true')
-      uses: docker/build-push-action@v6
+      uses: docker/build-push-action@v7
       with:
         context: ./docker/gyselalibxx_env
         cache-from: type=registry,ref=ghcr.io/gyselax/gyselalibxx_env:latest
