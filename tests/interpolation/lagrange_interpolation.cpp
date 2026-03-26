@@ -98,8 +98,7 @@ struct LagrangePeriodicEvaluatorFixture<std::tuple<
 };
 
 using degrees = std::integer_sequence<std::size_t, 2, 3, 4>;
-//using uniformity = std::integer_sequence<bool, true, false>;
-using uniformity = std::integer_sequence<bool, true>;
+using uniformity = std::integer_sequence<bool, true, false>;
 using Cases = tuple_to_types_t<cartesian_product_t<degrees, std::tuple<double, float>, uniformity>>;
 
 template <class X, class DataType, std::size_t N>
