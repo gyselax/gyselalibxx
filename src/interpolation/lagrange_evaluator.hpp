@@ -335,7 +335,7 @@ public:
      *
      * @return The derivative of the spline function at the desired coordinate.
      */
-    template <class... DerivDims, class Layout, class... CoordsDims>
+    template <class... DerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
     KOKKOS_FUNCTION double deriv(
             Idx<DerivDims...> const& deriv_order,
             Coord<CoordsDims...> const& coord_eval,
@@ -495,11 +495,9 @@ private:
                                 ddc::detail::TypeSeq<deriv_dim>>,
                 "The only valid dimension for deriv_order is Deriv<Dim>");
 
-        std::array<DataType, lagrange_basis_type::degree() + 1> vals_ptr;
-        Kokkos::mdspan<
-                DataType,
-                Kokkos::extents<std::size_t, lagrange_basis_type::degree() + 1>> const
-                vals(vals_ptr.data());
+        constexpr std::size_t n_basis = lagrange_basis_type::degree() + 1;
+        std::array<DataType, n_basis> vals_ptr;
+        Kokkos::mdspan<DataType, Kokkos::extents<std::size_t, n_basis>> const vals(vals_ptr.data());
         Coord<continuous_dimension_type> coord_eval_interest(coord_eval);
         Idx<knot_grid> closest_knot = getclosest(coord_eval);
         Idx<knot_grid> first_knot
@@ -543,27 +541,25 @@ private:
             auto const order = deriv_order.uid();
             KOKKOS_ASSERT(order > 0 && order <= lagrange_basis_type::degree())
 
-            std::array<
-                    double,
-                    (lagrange_basis_type::degree() + 1) * (lagrange_basis_type::degree() + 1)>
-                    derivs_ptr;
+            std::array<DataType, n_basis * n_basis> derivs_ptr;
             Kokkos::mdspan<
-                    double,
-                    Kokkos::extents<
-                            std::size_t,
-                            lagrange_basis_type::degree() + 1,
-                            Kokkos::dynamic_extent>> const derivs(derivs_ptr.data(), order + 1);
+                    DataType,
+                    Kokkos::extents<std::size_t, n_basis, Kokkos::dynamic_extent>> const
+                    derivs(derivs_ptr.data(), order + 1);
 
-            ddc::discrete_space<lagrange_basis_type>()
-                    .eval_basis_and_n_derivs(vals, coord_eval_interest, first_lagrange_knot, order);
+            ddc::discrete_space<lagrange_basis_type>().eval_basis_and_n_derivs(
+                    derivs,
+                    coord_eval_interest,
+                    first_lagrange_knot,
+                    order);
 
-            for (std::size_t i = 0; i < bsplines_type::degree() + 1; ++i) {
+            for (std::size_t i = 0; i < n_basis; ++i) {
                 vals[i] = DDC_MDSPAN_ACCESS_OP(derivs, i, order);
             }
         }
 
         DataType y = 0.0;
-        for (std::size_t i = 0; i < lagrange_basis_type::degree() + 1; ++i) {
+        for (std::size_t i = 0; i < n_basis; ++i) {
             y += lagrange_coef(first_lagrange_knot + i) * vals[i];
         }
         return y;
