@@ -86,6 +86,21 @@ KOKKOS_FUNCTION DataType polynomial(Coord<Dim> coord, std::array<DataType, N> co
     return result;
 }
 
+template <class DataType, class Dim1, class Dim2, std::size_t N>
+void fill_polynomial_2d(
+        Field<DataType, IdxRange<Dim1, Dim2>> poly_coeffs,
+        std::array<DataType, N> const& coeffs1,
+        std::array<DataType, N> const& coeffs2)
+{
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(poly_coeffs),
+            KOKKOS_LAMBDA(Idx<Dim1, Dim2> idx) {
+                poly_coeffs(idx) = polynomial(ddc::coordinate(Idx<Dim1>(idx)), coeffs1)
+                                   * polynomial(ddc::coordinate(Idx<Dim2>(idx)), coeffs2);
+            });
+}
+
 } // namespace
 
 TYPED_TEST_SUITE(NDLagrangeNonPeriodicFixture, Cases);
@@ -186,13 +201,7 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
     FieldMem<DataType, IdxRange<LagrangeKnotsX, LagrangeKnotsY>> poly_coeffs_alloc(
             lagrange_coeff_idx_range);
     Field<DataType, IdxRange<LagrangeKnotsX, LagrangeKnotsY>> poly_coeffs(poly_coeffs_alloc);
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            lagrange_coeff_idx_range,
-            KOKKOS_LAMBDA(Idx<LagrangeKnotsX, LagrangeKnotsY> idx) {
-                poly_coeffs(idx) = polynomial(ddc::coordinate(Idx<KnotGridX>(idx)), coeffs_x)
-                                   * polynomial(ddc::coordinate(Idx<KnotGridY>(idx)), coeffs_y);
-            });
+    fill_polynomial_2d(poly_coeffs, coeffs_x, coeffs_y);
 
     // Evaluate on the test grid
     ddc::NullExtrapolationRule const null_extrap;
