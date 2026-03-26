@@ -145,9 +145,6 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
             ddc::NullExtrapolationRule>;
     using Eval2D = NDLagrangeEvaluator<EvalX, EvalY>;
 
-    using KnotGridX = typename EvalX::coeff_grid_type;
-    using KnotGridY = typename EvalY::coeff_grid_type;
-
     // Set up the domains
     Coord<X> xmin(0.0), xmax(2.0);
     Coord<Y> ymin(0.0), ymax(3.0);
