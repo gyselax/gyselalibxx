@@ -240,7 +240,9 @@ public:
                 std::array<DataType, D + 1> weights = get_weights(poly_start);
                 calculate_values_between_nodes(values, x, poly_start, weights);
             } else {
-                calculate_values_at_node(values, node);
+                for (int j(0); j < D + 1; ++j) {
+                    values(j) = static_cast<int>(j == node);
+                }
             }
         }
 
@@ -356,7 +358,13 @@ public:
         }
 
     private:
-        /// Check if x is found at a node
+        /**
+         * Check if x is found at a node.
+         * @param[in] x The coordinate.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         * @returns The node at which x is found.
+         */
         KOKKOS_INLINE_FUNCTION static int check_if_node(
                 coord_type const& x,
                 Idx<knot_grid> poly_start)
@@ -370,6 +378,7 @@ public:
             return -1;
         }
 
+        /// Get the weights for the selected knots
         KOKKOS_INLINE_FUNCTION static std::array<DataType, D + 1> get_weights(
                 Idx<knot_grid> poly_start)
         {
@@ -388,6 +397,15 @@ public:
             return weights;
         }
 
+        /**
+         * Calculate the Lagrange polynomial for @f$ x \ne x_j \forall j @f$
+         *
+         * @param[out] values The values of each basis at the coordinate x.
+         * @param[in] x The coordinate.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         * @param[in] weights The weights for the relevant knots.
+         */
         KOKKOS_INLINE_FUNCTION static void calculate_values_between_nodes(
                 Span1D<DataType> values,
                 coord_type const& x,
@@ -401,15 +419,6 @@ public:
                     denominator += weights[j] / (x - ddc::coordinate(poly_start + j));
                 }
                 values(i) = numerator / denominator;
-            }
-        }
-
-        KOKKOS_INLINE_FUNCTION static void calculate_values_at_node(
-                Span1D<DataType> values,
-                int node)
-        {
-            for (int j(0); j < D + 1; ++j) {
-                values(j) = static_cast<int>(j == node);
             }
         }
     };

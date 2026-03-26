@@ -357,7 +357,14 @@ public:
         }
 
     private:
-        /// Check if x is found at a node
+        /**
+         * Check if x is found at a node.
+         * @param[out] offset The relative offset of the point x in the cell.
+         * @param[in] x The coordinate.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         * @returns The node at which x is found.
+         */
         KOKKOS_INLINE_FUNCTION static int check_if_node(
                 DataType& offset,
                 coord_type const& x,
@@ -378,6 +385,15 @@ public:
             return node;
         }
 
+        /**
+         * Calculate the Lagrange polynomial for @f$ x \ne x_j \forall j @f$
+         *
+         * @param[out] values The values of each basis at the coordinate x.
+         * @param[in] x The coordinate.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         * @param[in] offset The relative offset of the point x in the cell.
+         */
         KOKKOS_INLINE_FUNCTION void calculate_values_between_nodes(
                 Span1D<DataType> values,
                 coord_type const& x,
