@@ -324,9 +324,6 @@ public:
     /**
      * @brief Differentiate 1D Lagrange function at a given coordinate.
      *
-     * @param deriv_order An Idx containing the order of differentiation for the dimension of interest.
-     * If the dimension is not present, the order of derivation is considered to be 0.
-     *
      * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
      * If the dimension is not present, the order of derivation is considered to be 0.
      * @param coord_eval The coordinate where the polynomial is differentiated.

@@ -278,7 +278,7 @@ tensor_product(
 }
 
 /**
- * @detail Calculate (-1)^pow.
+ * @brief Calculate (-1)^pow.
  */
 KOKKOS_INLINE_FUNCTION static int neg_1_pow(int pow)
 {
