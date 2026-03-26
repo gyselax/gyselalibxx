@@ -41,7 +41,7 @@ jobs:
           pwd
           ls -a
       - name: Markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v19
+        uses: DavidAnson/markdownlint-cli2-action@v23
         with:
           config: './.markdownlint.json'
           globs: '**/*.md,!.github/**/*.md,!.gitlab/**/*.md'
