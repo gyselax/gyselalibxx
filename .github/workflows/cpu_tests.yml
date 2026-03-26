@@ -163,7 +163,7 @@ jobs:
           sed '/^BRF:/d' -i coverage.lcov
       - name: Archive code coverage results
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'ci_coverage_toolchain'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: code-coverage-report
           path: coverage.lcov
