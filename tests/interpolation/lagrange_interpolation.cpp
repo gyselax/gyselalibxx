@@ -207,6 +207,8 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
                 TOL);
     });
 
+    double dx_max = ddcHelper::maximum_distance_between_adjacent_points(idx_range);
+
     for (int n_deriv(1); n_deriv < degree; ++n_deriv) {
         evaluator
                 .deriv(Idx<ddc::Deriv<X>>(n_deriv),
@@ -221,21 +223,15 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
             falling_factorial *= (degree + 1 - k);
         }
 
-        std::cout << "Derivative " << n_deriv << std::endl;
-        double max_err = 0;
         ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
-            double err = std::abs(
-                    function_values_host(idx)
-                    - polynomial(test_coords_host_alloc(idx), coeffs, n_deriv));
-            std::cout << err << "<" << TOL << std::endl;
-            max_err = max_err < err ? err : max_err;
+            double tolerance = factorial(n_deriv) // max_norm
+                               * TOL * (degree + 1) // approx max of number of calculations
+                               / ipow(dx_max, n_deriv);
             EXPECT_NEAR(
                     function_values_host(idx),
                     polynomial(test_coords_host_alloc(idx), coeffs, n_deriv),
-                    20 * TOL * falling_factorial // Increase tolerance based on max norm
-            );
+                    tolerance);
         });
-        std::cout << "Max err : " << max_err << std::endl;
     }
 }
 
