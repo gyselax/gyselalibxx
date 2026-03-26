@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: code_branch
       - name: Checkout documentation
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: documentation
           path: doc_branch
@@ -60,7 +60,7 @@ jobs:
     environment: 'GitLab GPU trigger'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: gysela-developpers/gyselalibxx
           token: ${{secrets.GITLAB_PAT}}

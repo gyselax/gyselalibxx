@@ -37,7 +37,7 @@ jobs:
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: skip_check
         uses: ./.github/actions/duplicate_check
       - name: Wait
@@ -61,7 +61,7 @@ jobs:
     if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
     steps:
       - name: Checkout gyselalibxx
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: "Filter tests"
         uses: ./.github/actions/test_filter
       - name: "Send to persee"
@@ -105,7 +105,7 @@ jobs:
   #  steps:
   #    - name: Checkout gyselalibxx
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-  #      uses: actions/checkout@v4
+  #      uses: actions/checkout@v6
   #      with:
   #        submodules: true
   #    - name: "Filter tests"
