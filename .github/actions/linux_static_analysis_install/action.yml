@@ -30,7 +30,7 @@ runs:
     - name: Save cppcache
       id: cache-cppcheck-save
       if: steps.cache-cppcheck-restore.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         path: |
           /usr/local/share/Cppcheck/
