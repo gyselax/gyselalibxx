@@ -409,9 +409,31 @@ private:
             }
         }
 
-        static_assert(sizeof...(DerivDims) == 0);
-        ddc::discrete_space<lagrange_basis_type>()
-                .eval_basis(vals, coord_eval_interest, first_lagrange_knot);
+        if constexpr (sizeof...(DerivDims) == 0) {
+            ddc::discrete_space<lagrange_basis_type>()
+                    .eval_basis(vals, coord_eval_interest, first_lagrange_knot);
+        } else {
+            auto const order = deriv_order.uid();
+            KOKKOS_ASSERT(order > 0 && order <= lagrange_basis_type::degree())
+
+            std::array<
+                    double,
+                    (lagrange_basis_type::degree() + 1) * (lagrange_basis_type::degree() + 1)>
+                    derivs_ptr;
+            Kokkos::mdspan<
+                    double,
+                    Kokkos::extents<
+                            std::size_t,
+                            lagrange_basis_type::degree() + 1,
+                            Kokkos::dynamic_extent>> const derivs(derivs_ptr.data(), order + 1);
+
+            ddc::discrete_space<lagrange_basis_type>()
+                    .eval_basis_and_n_derivs(vals, coord_eval_interest, first_lagrange_knot, order);
+
+            for (std::size_t i = 0; i < bsplines_type::degree() + 1; ++i) {
+                vals[i] = DDC_MDSPAN_ACCESS_OP(derivs, i, order);
+            }
+        }
 
         DataType y = 0.0;
         for (std::size_t i = 0; i < lagrange_basis_type::degree() + 1; ++i) {
