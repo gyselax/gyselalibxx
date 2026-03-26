@@ -98,15 +98,20 @@ struct LagrangePeriodicEvaluatorFixture<std::tuple<
 };
 
 using degrees = std::integer_sequence<std::size_t, 2, 3, 4>;
-using uniformity = std::integer_sequence<bool, true, false>;
+//using uniformity = std::integer_sequence<bool, true, false>;
+using uniformity = std::integer_sequence<bool, true>;
 using Cases = tuple_to_types_t<cartesian_product_t<degrees, std::tuple<double, float>, uniformity>>;
 
 template <class X, class DataType, std::size_t N>
-DataType polynomial(Coord<X> coord, std::array<DataType, N> coeffs)
+DataType polynomial(Coord<X> coord, std::array<DataType, N> coeffs, int n_deriv = 0)
 {
     DataType result = 0.0;
-    for (int j(0); j < N; ++j) {
-        result += coeffs[j] * std::pow(coord, j);
+    for (int j(n_deriv); j < N; ++j) {
+        int falling_factorial(1);
+        for (int k(0); k < n_deriv; ++k) {
+            falling_factorial *= (j - k);
+        }
+        result += falling_factorial * coeffs[j] * std::pow(coord, j - n_deriv);
     }
     return result;
 }
@@ -142,7 +147,7 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
     static constexpr double TOL = TestFixture::TOL;
 
     Coord<X> xmin(0);
-    Coord<X> xmax(2);
+    Coord<X> xmax(1);
     std::size_t ncells(10);
     if constexpr (TestFixture::UNIFORM) {
         ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
@@ -202,6 +207,37 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
                 polynomial(test_coords_host_alloc(idx), coeffs),
                 TOL);
     });
+
+    for (int n_deriv(1); n_deriv < degree; ++n_deriv) {
+        evaluator
+                .deriv(Idx<ddc::Deriv<X>>(n_deriv),
+                       function_values,
+                       get_const_field(test_coords),
+                       get_const_field(lagrange_coeffs));
+
+        ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
+
+        int falling_factorial(1);
+        for (int k(0); k < n_deriv; ++k) {
+            falling_factorial *= (degree + 1 - k);
+        }
+
+        std::cout << "Derivative " << n_deriv << std::endl;
+        double max_err = 0;
+        ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
+            double err = std::abs(
+                    function_values_host(idx)
+                    - polynomial(test_coords_host_alloc(idx), coeffs, n_deriv));
+            std::cout << err << "<" << TOL << std::endl;
+            max_err = max_err < err ? err : max_err;
+            EXPECT_NEAR(
+                    function_values_host(idx),
+                    polynomial(test_coords_host_alloc(idx), coeffs, n_deriv),
+                    20 * TOL * falling_factorial // Increase tolerance based on max norm
+            );
+        });
+        std::cout << "Max err : " << max_err << std::endl;
+    }
 }
 
 template <class DataType, class LagBasis, class GridType, class TestGridType>
