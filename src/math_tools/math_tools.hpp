@@ -282,5 +282,5 @@ tensor_product(
  */
 KOKKOS_INLINE_FUNCTION static int neg_1_pow(int pow)
 {
-return (1 - 2 * (pow % 2));
+    return (1 - 2 * (pow % 2));
 }
