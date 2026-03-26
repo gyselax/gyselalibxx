@@ -59,9 +59,10 @@ _An operator for constructing a Gauss-Legendre quadrature._ [More...](#detailed-
 
 | Type | Name |
 | ---: | :--- |
-|   | [**GaussLegendre**](#function-gausslegendre-13) (InputIt mesh\_edges\_begin, InputIt mesh\_edges\_end) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
-|   | [**GaussLegendre**](#function-gausslegendre-23) (std::initializer\_list&lt; Coord&lt; Dim &gt; &gt; const mesh\_edges) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
-|   | [**GaussLegendre**](#function-gausslegendre-33) (ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; [**Grid1D**](classGaussLegendre.md#typedef-grid1d) &gt;, Kokkos::HostSpace &gt; mesh\_edges) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
+|   | [**GaussLegendre**](#function-gausslegendre-14) (InputIt mesh\_edges\_begin, InputIt mesh\_edges\_end) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
+|   | [**GaussLegendre**](#function-gausslegendre-24) (std::initializer\_list&lt; Coord&lt; Dim &gt; &gt; const mesh\_edges) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
+|   | [**GaussLegendre**](#function-gausslegendre-34) (ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; [**Grid1D**](classGaussLegendre.md#typedef-grid1d) &gt;, Kokkos::HostSpace &gt; mesh\_edges) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
+|   | [**GaussLegendre**](#function-gausslegendre-44) (IdxRange&lt; [**Grid1D**](classGaussLegendre.md#typedef-grid1d) &gt; mesh\_edge\_idx\_range) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
 |  DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory\_space &gt; | [**gauss\_legendre\_coefficients**](#function-gauss_legendre_coefficients) () const<br>_Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature._  |
 |  IdxRange&lt; GLGrid &gt; | [**get\_idx\_range**](#function-get_idx_range) () const<br>_Get the index range of the points of the Gauss-Legendre quadrature._  |
 
@@ -133,7 +134,7 @@ using GaussLegendre< GLGrid, NPoints >::Grid1D =  GLGrid;
 
 
 
-### function GaussLegendre [1/3]
+### function GaussLegendre [1/4]
 
 _A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._
 ```C++
@@ -163,7 +164,7 @@ inline GaussLegendre::GaussLegendre (
 
 
 
-### function GaussLegendre [2/3]
+### function GaussLegendre [2/4]
 
 _A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._
 ```C++
@@ -190,7 +191,7 @@ inline explicit GaussLegendre::GaussLegendre (
 
 
 
-### function GaussLegendre [3/3]
+### function GaussLegendre [3/4]
 
 _A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._
 ```C++
@@ -208,6 +209,34 @@ inline explicit GaussLegendre::GaussLegendre (
 
 
 * `mesh_edges` A constant Field containing the edges of the cells on which the Gauss-Legendre quadrature is calculated. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function GaussLegendre [4/4]
+
+_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._
+```C++
+template<class Grid1D>
+inline explicit GaussLegendre::GaussLegendre (
+    IdxRange< Grid1D > mesh_edge_idx_range
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `mesh_edge_idx_range` An index range indicating the coordinates of the edges of the cells on which the Gauss-Legendre quadrature is calculated. 
 
 
 

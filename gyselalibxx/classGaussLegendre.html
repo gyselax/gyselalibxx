@@ -593,15 +593,19 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-gausslegendre-13"><strong>GaussLegendre</strong></a> (InputIt mesh_edges_begin, InputIt mesh_edges_end) <br><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-gausslegendre-14"><strong>GaussLegendre</strong></a> (InputIt mesh_edges_begin, InputIt mesh_edges_end) <br><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-gausslegendre-23"><strong>GaussLegendre</strong></a> (std::initializer_list&lt; Coord&lt; Dim &gt; &gt; const mesh_edges) <br><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-gausslegendre-24"><strong>GaussLegendre</strong></a> (std::initializer_list&lt; Coord&lt; Dim &gt; &gt; const mesh_edges) <br><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-gausslegendre-33"><strong>GaussLegendre</strong></a> (ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; <a href="classGaussLegendre.html#typedef-grid1d"><strong>Grid1D</strong></a> &gt;, Kokkos::HostSpace &gt; mesh_edges) <br><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-gausslegendre-34"><strong>GaussLegendre</strong></a> (ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; <a href="classGaussLegendre.html#typedef-grid1d"><strong>Grid1D</strong></a> &gt;, Kokkos::HostSpace &gt; mesh_edges) <br><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-gausslegendre-44"><strong>GaussLegendre</strong></a> (IdxRange&lt; <a href="classGaussLegendre.html#typedef-grid1d"><strong>Grid1D</strong></a> &gt; mesh_edge_idx_range) <br><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt;</td>
@@ -641,7 +645,7 @@
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-gausslegendre-13">function GaussLegendre [1/3]</h3>
+<h3 id="function-gausslegendre-14">function GaussLegendre [1/4]</h3>
 <p><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">template&lt;class InputIt&gt;
 inline GaussLegendre::GaussLegendre (
@@ -656,7 +660,7 @@ inline GaussLegendre::GaussLegendre (
 </ul>
 <hr>
 
-<h3 id="function-gausslegendre-23">function GaussLegendre [2/3]</h3>
+<h3 id="function-gausslegendre-24">function GaussLegendre [2/4]</h3>
 <p><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">inline explicit GaussLegendre::GaussLegendre (
     std::initializer_list&lt; Coord&lt; Dim &gt; &gt; const mesh_edges
@@ -668,7 +672,7 @@ inline GaussLegendre::GaussLegendre (
 </ul>
 <hr>
 
-<h3 id="function-gausslegendre-33">function GaussLegendre [3/3]</h3>
+<h3 id="function-gausslegendre-34">function GaussLegendre [3/4]</h3>
 <p><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">template&lt;class Grid1D&gt;
 inline explicit GaussLegendre::GaussLegendre (
@@ -678,6 +682,19 @@ inline explicit GaussLegendre::GaussLegendre (
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>mesh_edges</code> A constant Field containing the edges of the cells on which the Gauss-Legendre quadrature is calculated. </li>
+</ul>
+<hr>
+
+<h3 id="function-gausslegendre-44">function GaussLegendre [4/4]</h3>
+<p><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></p>
+<pre><code class="language-C++">template&lt;class Grid1D&gt;
+inline explicit GaussLegendre::GaussLegendre (
+    IdxRange&lt; Grid1D &gt; mesh_edge_idx_range
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>mesh_edge_idx_range</code> An index range indicating the coordinates of the edges of the cells on which the Gauss-Legendre quadrature is calculated. </li>
 </ul>
 <hr>
 

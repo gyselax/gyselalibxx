@@ -937,20 +937,12 @@ public:
 private:
     static FieldMem&lt;double, IdxRangeQuadratureRTheta&gt; calculate_int_volume(Mapping const&amp; mapping)
     {
-        // Get break points
-        IdxRange&lt;KnotsR&gt; idxrange_r_edges = ddc::discrete_space&lt;BSplinesR&gt;().break_point_domain();
-        IdxRange&lt;KnotsTheta&gt; idxrange_theta_edges
-                = ddc::discrete_space&lt;BSplinesTheta&gt;().break_point_domain();
-        host_t&lt;FieldMem&lt;Coord&lt;R&gt;, IdxRange&lt;KnotsR&gt;&gt;&gt; breaks_r(idxrange_r_edges);
-        host_t&lt;FieldMem&lt;Coord&lt;Theta&gt;, IdxRange&lt;KnotsTheta&gt;&gt;&gt; breaks_theta(idxrange_theta_edges);
-
-        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_r));
-        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(breaks_theta));
-
         // Define quadrature points and weights
-        GaussLegendre&lt;QDimRMesh, s_n_gauss_legendre_r&gt; gl_coeffs_r(get_const_field(breaks_r));
+        GaussLegendre&lt;QDimRMesh, s_n_gauss_legendre_r&gt; gl_coeffs_r(
+                ddc::discrete_space&lt;BSplinesR&gt;().break_point_domain());
         GaussLegendre&lt;QDimThetaMesh, s_n_gauss_legendre_theta&gt; gl_coeffs_theta(
-                get_const_field(breaks_theta));
+                ddc::discrete_space&lt;BSplinesTheta&gt;().break_point_domain());
+
         return compute_coeffs_on_mapping(
                 Kokkos::DefaultExecutionSpace(),
                 mapping,

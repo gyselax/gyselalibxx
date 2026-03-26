@@ -1094,11 +1094,13 @@
     <member refid="classGaussLegendre_1ab95e7e25b98a2ccf293b2462b3817a84" kind="function"><name>GaussLegendre</name></member>
     <member refid="classGaussLegendre_1abb70874897c85fa6df64c91511e2d24e" kind="function"><name>GaussLegendre</name></member>
     <member refid="classGaussLegendre_1a9f220a3c718cd167fc78e412c734a3c2" kind="function"><name>GaussLegendre</name></member>
+    <member refid="classGaussLegendre_1afa291b553d2e1b204e059edc5ce53b53" kind="function"><name>GaussLegendre</name></member>
     <member refid="classGaussLegendre_1aaeeb0f98363b55a366f009b2fb77ed2f" kind="function"><name>get_idx_range</name></member>
     <member refid="classGaussLegendre_1a421cde58db551c40987077ee12b4e954" kind="function"><name>gauss_legendre_coefficients</name></member>
     <member refid="classGaussLegendre_1a924ba0b8565dbaf3c43f3ac0dd8cc9f5" kind="function"><name>get_sampling_on_cell</name></member>
     <member refid="classGaussLegendre_1adaf63a7bb1daa9e80870cb432e8dba2d" kind="function"><name>get_sampling</name></member>
     <member refid="classGaussLegendre_1aaa8e737921aa05a24f4e7b9f6ae3c996" kind="function"><name>get_sampling</name></member>
+    <member refid="classGaussLegendre_1a695356d3ea4ed49113136ae3f647451d" kind="function"><name>get_sampling</name></member>
   </compound>
   <compound refid="structGaussLegendreCoefficients" kind="struct"><name>GaussLegendreCoefficients</name>
     <member refid="structGaussLegendreCoefficients_1a37090be09a17b4e59533dd21298bbc04" kind="variable"><name>pos</name></member>

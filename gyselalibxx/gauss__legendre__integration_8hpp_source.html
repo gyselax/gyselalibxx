@@ -641,6 +641,17 @@ public:
         ddc::init_discrete_space&lt;GLGrid&gt;(get_sampling(mesh_edges));
     }
 
+    template &lt;class Grid1D&gt;
+    explicit GaussLegendre(IdxRange&lt;Grid1D&gt; mesh_edge_idx_range)
+        : m_nbcells(mesh_edge_idx_range.size() - 1)
+        , m_valid_idx_range(
+                  Idx&lt;GLGrid&gt;(0),
+                  IdxStep&lt;GLGrid&gt;((mesh_edge_idx_range.size() - 1) * NPoints))
+        , m_cell_lengths(m_nbcells)
+    {
+        ddc::init_discrete_space&lt;GLGrid&gt;(get_sampling(mesh_edge_idx_range));
+    }
+
     IdxRange&lt;GLGrid&gt; get_idx_range() const
     {
         return m_valid_idx_range;
@@ -712,6 +723,25 @@ private:
             x0 = x1;
             x1 = mesh_edges(++mesh_idx);
             get_sampling_on_cell(grid, x0, x1, i, k);
+        }
+        return grid;
+    }
+
+    template &lt;class Grid1D&gt;
+    std::vector&lt;Coord&lt;Dim&gt;&gt; get_sampling(IdxRange&lt;Grid1D&gt; mesh_edges_idx_range)
+    {
+        std::vector&lt;Coord&lt;Dim&gt;&gt; grid(m_nbcells * NPoints);
+
+        int k(0);
+        for (Idx&lt;Grid1D&gt; mesh_idx(mesh_edges_idx_range.front());
+             mesh_idx &lt; mesh_edges_idx_range.back();
+             mesh_idx++) {
+            get_sampling_on_cell(
+                    grid,
+                    ddc::coordinate(mesh_idx),
+                    ddc::coordinate(mesh_idx + 1),
+                    mesh_idx - mesh_edges_idx_range.front(),
+                    k);
         }
         return grid;
     }
