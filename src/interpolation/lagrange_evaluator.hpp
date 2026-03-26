@@ -321,6 +321,133 @@ public:
                 });
     }
 
+    /**
+     * @brief Differentiate 1D Lagrange function at a given coordinate.
+     *
+     * @param deriv_order An Idx containing the order of differentiation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param coord_eval The coordinate where the polynomial is differentiated.
+     *                   Note that only the component along the dimension of interest is used.
+     * @param lagrange_coef A Field storing the 1D Lagrange coefficients.
+     *
+     * @return The derivative of the spline function at the desired coordinate.
+     */
+    template <class... DerivDims, class Layout, class... CoordsDims>
+    KOKKOS_FUNCTION double deriv(
+            Idx<DerivDims...> const& deriv_order,
+            Coord<CoordsDims...> const& coord_eval,
+            ConstField<DataType, BatchedLagrangeIdxRange, memory_space, Layout> const lagrange_coef)
+            const
+    {
+        return eval_no_bc(deriv_order, coord_eval, lagrange_coef);
+    }
+
+    /**
+     * @brief Differentiate 1D spline function (described by its spline coefficients) on a mesh.
+     *
+     * The spline coefficients represent a spline function defined on a cartesian product of batch_domain and B-splines
+     * (basis splines). They can be obtained via various methods, such as using a SplineBuilder.
+     *
+     * The derivation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation.
+     * This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type,
+     * the derivation is performed with the 1D set of spline coefficients identified by the same batch_domain_type::discrete_element_type.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param[out] lagrange_eval The values of the derivatives of the Lagrange polynomials at the desired coordinates.
+     * @param[in] coords_eval The coordinates where the Lagrange polynomials are evaluated. Those are
+     * stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the
+     * points represented by this index range are unused and irrelevant.
+     * @param lagrange_coef A Field storing the 1D Lagrange coefficients.
+     */
+    template <
+            class... DerivDims,
+            class Layout1,
+            class Layout2,
+            class Layout3,
+            class IdxRangeBatchedInterpolation,
+            class... CoordsDims>
+    void deriv(
+            Idx<DerivDims...> const& deriv_order,
+            Field<DataType, IdxRangeBatchedInterpolation, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    Coord<CoordsDims...>,
+                    IdxRangeBatchedInterpolation,
+                    memory_space,
+                    Layout2> const coords_eval,
+            ConstField<
+                    DataType,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout3> const lagrange_coef) const
+    {
+        evaluation_idx_range_type const evaluation_idx_range(get_idx_range(lagrange_eval));
+        batch_idx_range_type<IdxRangeBatchedInterpolation> const batch_idx_range(
+                get_idx_range(lagrange_eval));
+
+        using IdxBatchInterpolation =
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                batch_idx_range,
+                KOKKOS_CLASS_LAMBDA(IdxBatchInterpolation const j) {
+                    for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
+                        lagrange_eval(j, i)
+                                = eval_no_bc(deriv_order, coords_eval(j, i), lagrange_coef[j]);
+                    }
+                });
+    }
+
+    /**
+     * @brief Differentiate 1D Lagrange function on a mesh.
+     *
+     * The differentiation is not performed in a multidimensional way (in any sense).
+     * This is a batched 1D derivation. This means that for each slice of lagrange_eval the
+     * evaluation is performed with the relevant 1D set of Lagrange coefficients.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param[out] lagrange_eval The derivatives of the spline function at the coordinates.
+     * @param[in] lagrange_coef A ChunkSpan storing the spline coefficients.
+     */
+    template <class... DerivDims, class Layout1, class Layout2, class IdxRangeBatchedInterpolation>
+    void deriv(
+            Idx<DerivDims...> const& deriv_order,
+            Field<DataType, IdxRangeBatchedInterpolation, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    DataType,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout2> const lagrange_coef) const
+    {
+        evaluation_idx_range_type const evaluation_idx_range(get_idx_range(lagrange_eval));
+        batch_idx_range_type<IdxRangeBatchedInterpolation> const batch_idx_range(
+                get_idx_range(lagrange_eval));
+
+        using IdxBatchInterpolation =
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                batch_idx_range,
+                KOKKOS_CLASS_LAMBDA(IdxBatchInterpolation const j) {
+                    for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
+                        lagrange_eval(j, i)
+                                = eval_no_bc(deriv_order, ddc::coordinate(i), lagrange_coef[j]);
+                    }
+                });
+    }
+
 private:
     template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType
