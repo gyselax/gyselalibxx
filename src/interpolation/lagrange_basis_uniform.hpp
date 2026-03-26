@@ -261,6 +261,24 @@ public:
             }
         }
 
+        /**
+         * @brief Evaluate the selected set of bases and their derivatives at the coordinate.
+         *
+         * Evaluate all d+1 bases which span the domain
+         * [coordinate(poly_start), coordinate(poly_start+d)]
+         * at the coordinate x.
+         * The derivatives are also calculated. The calculations are derived using
+         * the method described in:
+         *   Barycentric Lagrange Interpolation
+         *   Jean-Paul Berrut and Lloyd N. Trefethen
+         *   SIAM Review 2004 46:3, 501-517
+         *
+         * @param[out] derivs The values and derivatives of each basis at the coordinate x.
+         * @param[in] x The coordinate where the bases are evaluated.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         * @param[in] n_derivs The number of derivatives to be calculated.
+         */
         KOKKOS_INLINE_FUNCTION void eval_basis_and_n_derivs(
                 Span2D<DataType> derivs,
                 coord_type const& x,
