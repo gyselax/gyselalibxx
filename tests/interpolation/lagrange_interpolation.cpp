@@ -261,7 +261,7 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
                                / ipow(dx_max, n_deriv);
             EXPECT_NEAR(
                     function_values_host(idx),
-                    polynomial(test_coords_host_alloc(idx), coeffs, n_deriv),
+                    polynomial(ddc::coordinate(idx), coeffs, n_deriv),
                     tolerance);
         });
     }
