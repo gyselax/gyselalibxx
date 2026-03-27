@@ -325,6 +325,7 @@ public:
             } else {
                 DataType xi = ddc::coordinate(poly_start + node);
                 for (std::size_t j(0); j < n_basis; ++j) {
+                    derivs(j, 0) = static_cast<int>(j == node);
                     DataType xj = ddc::coordinate(poly_start + j);
                     if (j == node)
                         continue;
