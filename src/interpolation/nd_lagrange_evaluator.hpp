@@ -166,32 +166,7 @@ public:
             Coord<CoordsDims...> const& coord,
             ConstField<data_type, NdCoeffIdxRange, memory_space, Layout> const& coeff) const
     {
-        static_assert(
-                (ddc::in_tags_v<HeadContDim, ddc::detail::TypeSeq<CoordsDims...>>)&&(
-                        ddc::in_tags_v<
-                                typename Evaluators1D::continuous_dimension_type,
-                                ddc::detail::TypeSeq<CoordsDims...>> && ...),
-                "Evaluation coordinate must contain the evaluation dimensions");
-
-        Coord<HeadContDim> coord_head(coord);
-        Idx<HeadCoeffGrid> first_lagrange_knot = m_head_evaluator.find_stencil(coord_head);
-
-        // Evaluate the Lagrange basis functions at the (adjusted) head coordinate.
-        std::array<data_type, HeadBasis::degree() + 1> vals_ptr;
-        Kokkos::mdspan<data_type, Kokkos::extents<std::size_t, HeadBasis::degree() + 1>> const vals(
-                vals_ptr.data());
-        ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
-
-        // Tensor-product recursion: for each stencil knot, slice the coefficient
-        // array along the head dimension and delegate to the (N-1)D tail evaluator.
-        // When sizeof...(Evaluators1D)==1, m_tail_evaluator is the 1D LagrangeEvaluator
-        // and operator() applies its configured extrapolation rules.
-        data_type result = 0.;
-        for (std::size_t i = 0; i < HeadBasis::degree() + 1; ++i) {
-            Idx<HeadCoeffGrid> const knot_i = first_lagrange_knot + IdxStep<HeadCoeffGrid>(i);
-            result += vals[i] * m_tail_evaluator(coord, coeff[knot_i]);
-        }
-        return result;
+        return eval_no_bc(Idx<>(), coord, coeff);
     }
 
     /**
@@ -231,7 +206,7 @@ public:
                 KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
                     IdxBatch const batch_idx(full_idx);
                     lagrange_eval(full_idx)
-                            = (*this)(coords_eval(full_idx), lagrange_coef[batch_idx]);
+                            = eval_no_bc(Idx<>(), coords_eval(full_idx), lagrange_coef[batch_idx]);
                 });
     }
 
@@ -266,8 +241,189 @@ public:
                 KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
                     IdxBatch const batch_idx(full_idx);
                     IdxEval const eval_idx(full_idx);
-                    lagrange_eval(full_idx)
-                            = (*this)(ddc::coordinate(eval_idx), lagrange_coef[batch_idx]);
+                    lagrange_eval(full_idx) = eval_no_bc(
+                            Idx<>(),
+                            ddc::coordinate(eval_idx),
+                            lagrange_coef[batch_idx]);
                 });
+    }
+
+    /**
+     * @brief Differentiate 1D Lagrange function at a given coordinate.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param coord_eval The coordinate where the polynomial is differentiated.
+     *                   Note that only the component along the dimension of interest is used.
+     * @param lagrange_coef A Field storing the 1D Lagrange coefficients.
+     *
+     * @return The derivative of the spline function at the desired coordinate.
+     */
+    template <class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
+    KOKKOS_FUNCTION double deriv(
+            IdxDerivDims const& deriv_order,
+            Coord<CoordsDims...> const& coord_eval,
+            ConstField<data_type, BatchedLagrangeIdxRange, memory_space, Layout> const
+                    lagrange_coef) const
+    {
+        return eval_no_bc(deriv_order, coord_eval, lagrange_coef);
+    }
+
+    /**
+     * @brief Differentiate 1D spline function (described by its spline coefficients) on a mesh.
+     *
+     * The spline coefficients represent a spline function defined on a cartesian product of batch_domain and B-splines
+     * (basis splines). They can be obtained via various methods, such as using a SplineBuilder.
+     *
+     * The derivation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation.
+     * This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type,
+     * the derivation is performed with the 1D set of spline coefficients identified by the same batch_domain_type::discrete_element_type.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param[out] lagrange_eval The values of the derivatives of the Lagrange polynomials at the desired coordinates.
+     * @param[in] coords_eval The coordinates where the Lagrange polynomials are evaluated. Those are
+     * stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the
+     * points represented by this index range are unused and irrelevant.
+     * @param lagrange_coef A Field storing the 1D Lagrange coefficients.
+     */
+    template <
+            class IdxDerivDims,
+            class Layout1,
+            class Layout2,
+            class Layout3,
+            class IdxRangeBatchedInterpolation,
+            class... CoordsDims>
+    void deriv(
+            IdxDerivDims const& deriv_order,
+            Field<data_type, IdxRangeBatchedInterpolation, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    Coord<CoordsDims...>,
+                    IdxRangeBatchedInterpolation,
+                    memory_space,
+                    Layout2> const coords_eval,
+            ConstField<
+                    data_type,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout3> const lagrange_coef) const
+    {
+        using IdxFull = typename IdxRangeBatchedInterpolation::discrete_element_type;
+        using IdxBatch =
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                get_idx_range(lagrange_eval),
+                KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
+                    IdxBatch const batch_idx(full_idx);
+                    lagrange_eval(full_idx) = eval_no_bc(
+                            deriv_order,
+                            coords_eval(full_idx),
+                            lagrange_coef[batch_idx]);
+                });
+    }
+
+    /**
+     * @brief Differentiate 1D Lagrange function on a mesh.
+     *
+     * The differentiation is not performed in a multidimensional way (in any sense).
+     * This is a batched 1D derivation. This means that for each slice of lagrange_eval the
+     * evaluation is performed with the relevant 1D set of Lagrange coefficients.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param[out] lagrange_eval The derivatives of the spline function at the coordinates.
+     * @param[in] lagrange_coef A ChunkSpan storing the spline coefficients.
+     */
+    template <class IdxDerivDims, class Layout1, class Layout2, class IdxRangeBatchedInterpolation>
+    void deriv(
+            IdxDerivDims const& deriv_order,
+            Field<data_type, IdxRangeBatchedInterpolation, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    data_type,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout2> const lagrange_coef) const
+    {
+        using IdxFull = typename IdxRangeBatchedInterpolation::discrete_element_type;
+        using IdxEval = typename evaluation_idx_range_type::discrete_element_type;
+        using IdxBatch =
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                get_idx_range(lagrange_eval),
+                KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
+                    IdxBatch const batch_idx(full_idx);
+                    IdxEval const eval_idx(full_idx);
+                    lagrange_eval(full_idx) = eval_no_bc(
+                            deriv_order,
+                            ddc::coordinate(eval_idx),
+                            lagrange_coef[batch_idx]);
+                });
+    }
+
+private:
+    template <class... DerivDims, class Layout, class... CoordsDims>
+    KOKKOS_INLINE_FUNCTION data_type eval_no_bc(
+            Idx<DerivDims...> const& deriv_order,
+            Coord<CoordsDims...> const& coord,
+            ConstField<data_type, coeff_idx_range_type, memory_space, Layout> const lagrange_coef)
+            const
+    {
+        static_assert(
+                (ddc::in_tags_v<HeadContDim, ddc::detail::TypeSeq<CoordsDims...>>)&&(
+                        ddc::in_tags_v<
+                                typename Evaluators1D::continuous_dimension_type,
+                                ddc::detail::TypeSeq<CoordsDims...>> && ...),
+                "Evaluation coordinate must contain the evaluation dimensions");
+
+        constexpr std::size_t n_head_basis = HeadBasis::degree() + 1;
+        Coord<HeadContDim> coord_head(coord);
+        Idx<HeadCoeffGrid> first_lagrange_knot = m_head_evaluator.find_stencil(coord_head);
+
+        // Evaluate the Lagrange basis functions at the (adjusted) head coordinate.
+        std::array<data_type, n_head_basis> vals_ptr;
+        Kokkos::mdspan<data_type, Kokkos::extents<std::size_t, n_head_basis>> const vals(
+                vals_ptr.data());
+        ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
+        if constexpr (ddc::in_tags_v<ddc::Deriv<HeadContDim>, ddc::detail::TypeSeq<DerivDims...>>) {
+            auto const order = ddc::select<ddc::Deriv<HeadContDim>>(deriv_order).uid();
+            KOKKOS_ASSERT(order > 0 && order <= HeadBasis::degree())
+
+            std::array<data_type, n_head_basis * n_head_basis> derivs_ptr;
+            Kokkos::mdspan<
+                    data_type,
+                    Kokkos::extents<std::size_t, n_head_basis, Kokkos::dynamic_extent>> const
+                    derivs(derivs_ptr.data(), order + 1);
+
+            ddc::discrete_space<HeadBasis>()
+                    .eval_basis_and_n_derivs(derivs, coord_head, first_lagrange_knot, order);
+
+            for (std::size_t i = 0; i < n_head_basis; ++i) {
+                vals(i) = derivs(i, order);
+            }
+        } else {
+            ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
+        }
+
+        // Tensor-product recursion: for each stencil knot, slice the coefficient
+        // array along the head dimension and delegate to the (N-1)D tail evaluator.
+        // When sizeof...(Evaluators1D)==1, m_tail_evaluator is the 1D LagrangeEvaluator
+        // and operator() applies its configured extrapolation rules.
+        data_type result = 0.;
+        for (std::size_t i = 0; i < n_head_basis; ++i) {
+            Idx<HeadCoeffGrid> const knot_i = first_lagrange_knot + IdxStep<HeadCoeffGrid>(i);
+            result += vals[i]
+                      * m_tail_evaluator.eval_no_bc(deriv_order, coord, lagrange_coef[knot_i]);
+        }
+        return result;
     }
 };
