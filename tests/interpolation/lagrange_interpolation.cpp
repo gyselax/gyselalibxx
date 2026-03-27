@@ -215,10 +215,7 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
     ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
 
     ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
-        EXPECT_NEAR(
-                function_values_host(idx),
-                polynomial(ddc::coordinate(idx), coeffs),
-                TOL);
+        EXPECT_NEAR(function_values_host(idx), polynomial(ddc::coordinate(idx), coeffs), TOL);
     });
 
     double dx_max = ddcHelper::maximum_distance_between_adjacent_points(idx_range);
