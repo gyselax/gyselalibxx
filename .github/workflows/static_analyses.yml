@@ -22,7 +22,7 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env
       options: --user 1001
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - shell: bash
         run: |
           ./bin/indent -td
@@ -31,8 +31,8 @@ jobs:
     name: Markdown format check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
         with:
           python-version: '3.10'
       - name: Get Python dependencies
@@ -41,7 +41,7 @@ jobs:
           pwd
           ls -a
       - name: Markdownlint
-        uses: DavidAnson/markdownlint-cli2-action@v19
+        uses: DavidAnson/markdownlint-cli2-action@v23
         with:
           config: './.markdownlint.json'
           globs: '**/*.md,!.github/**/*.md,!.gitlab/**/*.md'
@@ -61,7 +61,7 @@ jobs:
       image: ghcr.io/gyselax/gyselalibxx_env
       options: --user 1001
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Run pylint
@@ -86,7 +86,7 @@ jobs:
     name: Documentation check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
       - name: Install doxygen
@@ -94,7 +94,7 @@ jobs:
           sudo apt-get install doxygen
         shell: bash
       - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.11
       - name: Install Python dependencies
@@ -129,9 +129,9 @@ jobs:
     name: CppCheck static analysis errors
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.12
       - uses: ./.github/actions/linux_static_analysis_install
@@ -144,9 +144,9 @@ jobs:
     name: CppCheck static analysis warnings
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.12
       - uses: ./.github/actions/linux_static_analysis_install
@@ -159,9 +159,9 @@ jobs:
     name: CMake static analysis
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.12
       - run: |
@@ -172,7 +172,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout Actions Repository
-      uses: actions/checkout@v4
+      uses: actions/checkout@v6
     - name: Spell Check Repo
       uses: crate-ci/typos@v1.29.10
       with:
@@ -184,7 +184,7 @@ jobs:
     needs: [Indentation, Markdown, Python, Documentation, cppcheck_static_analysis_errors, cmake_static_analysis, spelling]
     if: failure()
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/set_pr_status
         with:
           status: "failure"
