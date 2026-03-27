@@ -57,7 +57,7 @@ jobs:
       toolchain_matrix: ${{ steps.set-matrix.outputs.toolchain_matrix }}
       backend_matrix: ${{ steps.set-matrix.outputs.backend_matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: skip_check
         uses: ./.github/actions/duplicate_check
       - if: github.event_name != 'workflow_dispatch' && github.event_name != 'push'
@@ -89,7 +89,7 @@ jobs:
       image_tag: ${{ steps.docker.outputs.image_tag }}
     if: github.repository == 'gyselax/gyselalibxx' && (github.event_name != 'pull_request' || github.event.pull_request.draft == false)
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: docker
         uses: ./.github/actions/docker_update
         with:
@@ -133,7 +133,7 @@ jobs:
     steps:
       - name: Checkout gyselalibxx
         if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: true
       - name: "Filter tests"
@@ -163,7 +163,7 @@ jobs:
           sed '/^BRF:/d' -i coverage.lcov
       - name: Archive code coverage results
         if: needs.pre_job.outputs.should_skip == 'false' && matrix.toolchain == 'ci_coverage_toolchain'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: code-coverage-report
           path: coverage.lcov
@@ -175,13 +175,13 @@ jobs:
     if: (github.event_name != 'workflow_dispatch' || inputs.toolchain == 'ci_coverage_toolchain') && needs.pre_job.outputs.should_skip == 'false'
     steps:
       - name: Checkout gyselalibxx
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: Download a single artifact
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: code-coverage-report
       - name: Upload coverage reports to Codecov with GitHub Action
-        uses: codecov/codecov-action@v5
+        uses: codecov/codecov-action@v6
         with:
           files: coverage.lcov
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -193,7 +193,7 @@ jobs:
     needs: [cpu_tests]
     if: always() && (github.event_name == 'pull_request' && github.event.pull_request.draft == false)
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/set_pr_status
         with:
           status: ${{ needs.cpu_tests.result }}

@@ -1,7 +1,7 @@
 
 
 #########################################################################################################
-# All possiibilities for TIME_METHOD:                                                                   #
+# All possibilities for TIME_METHOD:                                                                    #
 # "EULER_METHOD" "CRANK_NICOLSON_METHOD" "RK3_METHOD" "RK4_METHOD"                                      #
 #                                                                                                       #
 # All possibilities for PREDCORR:                                                                       #
