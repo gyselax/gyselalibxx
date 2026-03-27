@@ -49,13 +49,13 @@ using CzarnyToCartMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CartToCircularMapping = CartesianToCircular<X, Y, R, Theta>;
 using CartToCzarnyMapping = CartesianToCzarny<X, Y, R, Theta>;
 using CircularToPseudoCartMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
-using DiscreteMappingBuilderHost = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilderHost = DiscretePolarToCartesianSplineBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorConstBound_host>;
 using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+        = DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace
@@ -339,13 +339,13 @@ int main(int argc, char** argv)
             from_czarny_map,
             builder_host,
             spline_evaluator_extrapol_host);
-    DiscreteToCartesian const from_discrete_czarny_map_host = discrete_czarny_map_builder_host();
+    DiscretePolarToCartesianSpline const from_discrete_czarny_map_host = discrete_czarny_map_builder_host();
     DiscreteMappingBuilder const discrete_czarny_map_builder(
             Kokkos::DefaultExecutionSpace(),
             from_czarny_map,
             builder,
             spline_evaluator_extrapol);
-    DiscreteToCartesian const from_discrete_czarny_map = discrete_czarny_map_builder();
+    DiscretePolarToCartesianSpline const from_discrete_czarny_map = discrete_czarny_map_builder();
 
     std::tuple simulations = std::make_tuple(
             SimulationParameters(

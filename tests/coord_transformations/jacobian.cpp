@@ -107,13 +107,13 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
+    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
                     builder,
                     evaluator);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePolarToCartesianSpline mapping = mapping_builder();
 
     static_assert(has_jacobian_v<decltype(mapping)>);
     InverseJacobianMatrix inv_jacobian(mapping);
@@ -176,21 +176,21 @@ TEST_P(InvJacobianMatrix3D, InverseMatrixToroidalDiscCzarMap)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
+    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping_2d,
                     builder,
                     evaluator);
 
-    using Mapping2D = DiscreteToCartesian<
+    using Mapping2D = DiscretePolarToCartesianSpline<
             X,
             Y,
             SplineRThetaEvaluator_host,
             R,
             Theta,
             typename Kokkos::DefaultHostExecutionSpace::memory_space>;
-    DiscreteToCartesian mapping_2d = mapping_builder();
+    DiscretePolarToCartesianSpline mapping_2d = mapping_builder();
 
     ToroidalToCylindrical<Mapping2D, Zeta, Phi> mapping(mapping_2d);
 

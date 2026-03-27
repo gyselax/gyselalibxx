@@ -45,7 +45,7 @@
 
 namespace {
 using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+        = DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
@@ -121,7 +121,7 @@ int main(int argc, char** argv)
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePolarToCartesianSpline const discrete_mapping = discrete_mapping_builder();
 
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);

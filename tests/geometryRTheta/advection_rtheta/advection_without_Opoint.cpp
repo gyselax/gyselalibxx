@@ -44,7 +44,7 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder = DiscretePolarToCartesianSplineBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,

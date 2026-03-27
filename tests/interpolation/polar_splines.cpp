@@ -171,12 +171,12 @@ TEST(PolarSplineTest, ConstantEval)
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+    DiscretePolarToCartesianSplineBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             coord_changer,
             builder_rtheta,
             evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePolarToCartesianSpline mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem coef(ddc::discrete_space<BSplines>().full_domain());
@@ -292,12 +292,12 @@ void test_polar_spline_eval_gpu()
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+    DiscretePolarToCartesianSplineBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             coord_changer,
             builder_rtheta,
             evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePolarToCartesianSpline mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem coef(ddc::discrete_space<BSplines>().full_domain());
@@ -411,12 +411,12 @@ void test_polar_integrals()
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+    DiscretePolarToCartesianSplineBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             coord_changer,
             builder_rtheta,
             evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePolarToCartesianSpline mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem bspline_integrals_alloc(ddc::discrete_space<BSplines>().full_domain());

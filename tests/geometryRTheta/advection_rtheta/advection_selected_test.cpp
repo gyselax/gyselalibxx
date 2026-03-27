@@ -208,20 +208,20 @@ int main(int argc, char** argv)
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
+    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
             mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
                     builder_host,
                     spline_evaluator_extrapol_host);
-    DiscreteToCartesian to_physical_mapping_host = mapping_builder_host();
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
+    DiscretePolarToCartesianSpline to_physical_mapping_host = mapping_builder_host();
+    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
             mapping_builder(
                     Kokkos::DefaultExecutionSpace(),
                     to_physical_analytical_mapping,
                     builder,
                     spline_evaluator_extrapol);
-    DiscreteToCartesian to_physical_mapping = mapping_builder();
+    DiscretePolarToCartesianSpline to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "DISCRETE";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";

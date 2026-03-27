@@ -223,13 +223,13 @@ public:
                 CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCircToCart
                 pseudo_cart_to_circ_to_cart(circ_to_cart, pseudo_cart_to_circ, 1e-12);
-        DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+        DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
                 mapping_builder_circ(
                         Kokkos::DefaultHostExecutionSpace(),
                         circ_to_cart,
                         builder,
                         spline_evaluator);
-        DiscreteToCartesian discrete_mapping_circ_to_cart = mapping_builder_circ();
+        DiscretePolarToCartesianSpline discrete_mapping_circ_to_cart = mapping_builder_circ();
         using DiscreteMappingCirc = CombinedMapping<
                 decltype(discrete_mapping_circ_to_cart),
                 CartesianToCircular<X_pC, Y_pC, R, Theta>>;
@@ -258,13 +258,13 @@ public:
                 CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCzarnyToCart
                 pseudo_cart_to_czarny_to_cart(czarny_to_cart, pseudo_cart_to_circ, 1e-12);
-        DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+        DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
                 mapping_builder_czarny(
                         Kokkos::DefaultHostExecutionSpace(),
                         czarny_to_cart,
                         builder,
                         spline_evaluator);
-        DiscreteToCartesian discrete_mapping_czarny_to_cart = mapping_builder_czarny();
+        DiscretePolarToCartesianSpline discrete_mapping_czarny_to_cart = mapping_builder_czarny();
         using DiscreteMappingCzarny = CombinedMapping<
                 decltype(discrete_mapping_czarny_to_cart),
                 CartesianToCircular<X_pC, Y_pC, R, Theta>>;

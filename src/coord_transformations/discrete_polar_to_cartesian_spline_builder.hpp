@@ -177,7 +177,7 @@ template <
         class SplineEvaluator,
         int ncells_r,
         int ncells_theta>
-class RefinedDiscreteToCartesianBuilder
+class RefinedDiscretePolarToCartesianSplineBuilder
 {
     static_assert(std::is_same_v<
                   typename SplineBuilder::memory_space,
@@ -323,7 +323,7 @@ public:
      * @param[in] evaluator A spline evaluator to be used to evaluate a spline approximating the analytical mapping.
      */
     template <class Mapping>
-    RefinedDiscreteToCartesianBuilder(
+    RefinedDiscretePolarToCartesianSplineBuilder(
             ExecSpace exec_space,
             Mapping const& analytical_mapping,
             SplineBuilder const& builder,

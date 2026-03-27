@@ -28,9 +28,9 @@ using Mapping = CircularToCartesian<R, Theta, X, Y>;
 using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
 using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
+        = DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
 
-using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder_host = DiscretePolarToCartesianSplineBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
@@ -123,7 +123,7 @@ int main(int argc, char** argv)
 
     DiscreteMappingBuilder const
             discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, builder, evaluator);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePolarToCartesianSpline const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 

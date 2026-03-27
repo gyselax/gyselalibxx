@@ -218,13 +218,13 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    DiscreteToCartesianBuilder<
+    DiscretePolarToCartesianSplineBuilder<
             X,
             Y,
             SplineRThetaBuilder<HostExecSpace>,
             SplineRThetaEvaluator<HostExecSpace>>
             mapping_builder(HostExecSpace(), analytical_mapping, builder, evaluator);
-    DiscreteToCartesian to_physical_mapping = mapping_builder();
+    DiscretePolarToCartesianSpline to_physical_mapping = mapping_builder();
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(to_physical_mapping)>);
 
@@ -330,13 +330,13 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    DiscreteToCartesianBuilder<
+    DiscretePolarToCartesianSplineBuilder<
             X,
             Y,
             SplineRThetaBuilder<DeviceExecSpace>,
             SplineRThetaEvaluator<DeviceExecSpace>>
             mapping_builder(DeviceExecSpace(), analytical_mapping, builder, evaluator);
-    DiscreteToCartesian to_physical_mapping = mapping_builder();
+    DiscretePolarToCartesianSpline to_physical_mapping = mapping_builder();
     static_assert(is_accessible_v<DeviceExecSpace, decltype(to_physical_mapping)>);
 
     // Test coordinates

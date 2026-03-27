@@ -263,7 +263,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     SplineRThetaEvaluatorConstBound_host
             spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_knots_min, bv_knots_max);
 
-    DiscreteToCartesianBuilder<
+    DiscretePolarToCartesianSplineBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -273,7 +273,7 @@ TEST_P(SplineQuadrature, TestFunctions)
                     mapping_1,
                     builder,
                     spline_evaluator_extrapol);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePolarToCartesianSpline const discrete_mapping = discrete_mapping_builder();
     TOLs[0][0] = 5e-6;
     TOLs[0][1] = 5e-7;
     TOLs[1][0] = 5e-3;

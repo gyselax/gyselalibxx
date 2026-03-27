@@ -186,7 +186,7 @@ J (R, Z, \zeta) =
 
 ## Discrete coordinate transformation defined on B-splines
 
-- Mapping (DiscreteToCartesian)
+- Mapping (DiscretePolarToCartesianSpline)
 
 ```math
 \left\{

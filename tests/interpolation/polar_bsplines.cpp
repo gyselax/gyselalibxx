@@ -197,13 +197,13 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             theta_extrapolation_rule);
 
     const CircToCart coord_changer;
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     coord_changer,
                     builder_rp,
                     evaluator_rp);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePolarToCartesianSpline mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     int const n_eval = (BSplinesR::degree() + 1) * (BSplinesTheta::degree() + 1);

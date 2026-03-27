@@ -41,7 +41,7 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder = DiscretePolarToCartesianSplineBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
@@ -134,7 +134,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             to_physical_mapping,
             builder_host,
             spline_evaluator_extrapol_host);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePolarToCartesianSpline const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 

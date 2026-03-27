@@ -449,15 +449,15 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     // Tests ---
     std::array<double, 3> results;
 
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
+    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
                     builder,
                     spline_evaluator);
-    DiscreteToCartesian discrete_mapping = mapping_builder();
+    DiscretePolarToCartesianSpline discrete_mapping = mapping_builder();
 
-    RefinedDiscreteToCartesianBuilder<
+    RefinedDiscretePolarToCartesianSplineBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -469,9 +469,9 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     analytical_mapping,
                     builder,
                     spline_evaluator);
-    DiscreteToCartesian refined_mapping_16x32 = mapping_builder_16x32();
+    DiscretePolarToCartesianSpline refined_mapping_16x32 = mapping_builder_16x32();
 
-    RefinedDiscreteToCartesianBuilder<
+    RefinedDiscretePolarToCartesianSplineBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -483,9 +483,9 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     analytical_mapping,
                     builder,
                     spline_evaluator);
-    DiscreteToCartesian refined_mapping_32x64 = mapping_builder_32x64();
+    DiscretePolarToCartesianSpline refined_mapping_32x64 = mapping_builder_32x64();
 
-    RefinedDiscreteToCartesianBuilder<
+    RefinedDiscretePolarToCartesianSplineBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -497,7 +497,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     analytical_mapping,
                     builder,
                     spline_evaluator);
-    DiscreteToCartesian refined_mapping_64x128 = mapping_builder_64x128();
+    DiscretePolarToCartesianSpline refined_mapping_64x128 = mapping_builder_64x128();
 
 
     std::cout << std::endl
