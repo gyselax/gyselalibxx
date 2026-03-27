@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           path: code_branch
       - name: Checkout documentation
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: documentation
           path: doc_branch
@@ -25,7 +25,7 @@ jobs:
           sudo apt-get install doxygen
         shell: bash
       - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
           python-version: 3.11
       - name: Install Python dependencies
@@ -60,7 +60,7 @@ jobs:
     environment: 'GitLab GPU trigger'
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           repository: gysela-developpers/gyselalibxx
           token: ${{secrets.GITLAB_PAT}}
