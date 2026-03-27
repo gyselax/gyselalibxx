@@ -306,7 +306,7 @@ public:
                                 combinations[k] += static_cast<int>(combinations[k] == j);
                             }
                             i = n - 1;
-                            double divisor(1);
+                            DataType divisor(1);
                             for (std::size_t k(0); k < n; ++k) {
                                 divisor *= (x - ddc::coordinate(poly_start + combinations[k]));
                             }
