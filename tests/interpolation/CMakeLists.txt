@@ -82,6 +82,7 @@ add_executable(lagrange_tests
     ../main.cpp
     lagrange_bsplines.cpp
     lagrange_interpolation.cpp
+    nd_lagrange_interpolation.cpp
 )
 target_link_libraries(lagrange_tests
     PUBLIC
