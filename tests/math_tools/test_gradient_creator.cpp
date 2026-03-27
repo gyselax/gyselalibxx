@@ -46,7 +46,7 @@ TEST(GradientCreator, Call)
             create_mirror_view_and_copy(Kokkos::DefaultHostExecutionSpace(), grad_func_cov);
 
     ddc::host_for_each(get_idx_range(gradient_cov_host), [&](IdxRTheta const irtheta) {
-        EXPECT_EQ(ddcHelper::get<R_cov>(grad_func_cov)(irtheta), 0.0);
-        EXPECT_EQ(ddcHelper::get<Theta_cov>(grad_func_cov)(irtheta), 1.0);
+        EXPECT_EQ(ddcHelper::get<R_cov>(gradient_cov_host)(irtheta), 0.0);
+        EXPECT_EQ(ddcHelper::get<Theta_cov>(gradient_cov_host)(irtheta), 1.0);
     });
 }
