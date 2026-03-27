@@ -319,7 +319,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondHermiteTest)
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    SplineBuliderDerivField2D<
+    SplineBuilderDerivField2D<
             ExecSpace,
             BSplinesX,
             BSplinesY,
@@ -430,7 +430,7 @@ TEST(SplineBuilderDerivField2DTest, DDCBoundCondGrevilleTest)
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    SplineBuliderDerivField2D<
+    SplineBuilderDerivField2D<
             ExecSpace,
             BSplinesX,
             BSplinesY,
@@ -571,7 +571,7 @@ TEST(SplineBuilderDerivField2DTest, HybridDDCBoundCondTest)
             ddc::SplineSolver::LAPACK>
             builder(idx_range_xy);
 
-    SplineBuliderDerivField2D<
+    SplineBuilderDerivField2D<
             ExecSpace,
             BSplinesX,
             BSplinesY,

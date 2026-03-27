@@ -1323,16 +1323,16 @@ public:
         // left or to its right
         IdxStepBSR n_one_side_overlap(BSplinesR::degree());
 
-        int nnz_for_sigular_rows = n_singular_basis + degree * nbasis_theta_proxy;
+        int nnz_for_singular_rows = n_singular_basis + degree * nbasis_theta_proxy;
 
         // rows representing the bsplines which cover the singular domain
         // These overlap with other singular domain splines and degree radial splines
         Kokkos::parallel_for(
                 "overlap singular radial",
                 Kokkos::RangePolicy<Kokkos::DefaultExecutionSpace>(1, n_singular_basis + 1),
-                KOKKOS_LAMBDA(const int k) { nnz_per_row(k) = k * nnz_for_sigular_rows; });
+                KOKKOS_LAMBDA(const int k) { nnz_per_row(k) = k * nnz_for_singular_rows; });
 
-        int nnz_sum = nnz_for_sigular_rows * n_singular_basis;
+        int nnz_sum = nnz_for_singular_rows * n_singular_basis;
 
         IdxRangeBSR idxrange_bsplines_r_overlapping_singular
                 = m_idxrange_bsplines_r.take_first(n_one_side_overlap);

@@ -14,7 +14,7 @@
  * 
  * DerivField stores the values and the derivatives of a function. 
  * The inputs of the SplineBuilder2D are on different layouts than the fields
- * we can get from the DerivField. SplineBuliderDerivField2D allows to 
+ * we can get from the DerivField. SplineBuilderDerivField2D allows to 
  * directly apply a stored SplineBuilder2D to a DerivField by copying 
  * data in fields with correct layout. 
  * 
@@ -30,7 +30,7 @@ template <
         ddc::BoundCond BoundCond1max,
         ddc::BoundCond BoundCond2min,
         ddc::BoundCond BoundCond2max>
-class SplineBuliderDerivField2D
+class SplineBuilderDerivField2D
 {
     using MemorySpace = typename ExecSpace::memory_space;
 
@@ -81,7 +81,7 @@ public:
      * @param[in] builder A reference to SplineBuilder2D from DDC that we store
      * in the class. 
      */
-    explicit SplineBuliderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
+    explicit SplineBuilderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
 
     /**
      * @brief Build the spline representation of the function given in a 
