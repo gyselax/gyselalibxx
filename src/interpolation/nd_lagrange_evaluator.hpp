@@ -389,7 +389,7 @@ private:
         using TailDerivDimsTypeSeq = ddc::
                 type_seq_remove_t<DerivDimsTypeSeq, ddc::detail::TypeSeq<ddc::Deriv<HeadContDim>>>;
         using IdxTailDerivDims = typename ddc::detail::convert_type_seq_to_discrete_domain_t<
-                TypeSeq>::discrete_element_type;
+                TailDerivDimsTypeSeq>::discrete_element_type;
 
         constexpr std::size_t n_head_basis = HeadBasis::degree() + 1;
         Coord<HeadContDim> coord_head(coord);
