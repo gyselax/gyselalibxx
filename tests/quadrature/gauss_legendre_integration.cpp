@@ -36,9 +36,9 @@ struct GaussLegendreFixture<std::tuple<
 using orders = std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10>;
 using domain_idx = std::integer_sequence<std::size_t, 0, 1, 2, 3>;
 
-using Cases = tuple_to_types_t<cartesian_product_t<orders, domain_idx>>;
+using CasesTest = tuple_to_types_t<cartesian_product_t<orders, domain_idx>>;
 
-TYPED_TEST_SUITE(GaussLegendreFixture, Cases);
+TYPED_TEST_SUITE(GaussLegendreFixture, CasesTest);
 
 class fn
 {
