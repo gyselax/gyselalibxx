@@ -26,6 +26,7 @@ extend-ignore-identifiers-re = [
 [default.extend-words]
 # Don't correct these word (parts)
 iy = "iy"
+iz = "iz"
 ND = "ND"
 Strang = "Strang"
 Ax = "Ax"
