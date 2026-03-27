@@ -237,7 +237,10 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
 }
 
 template <class DataType, class LagBasis, class GridType, class TestGridType>
-DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> test_idx_range)
+DataType get_cosine_error(
+        IdxRange<GridType> idx_range,
+        IdxRange<TestGridType> test_idx_range,
+        Idx<ddc::Deriv<typename GridType::continuous_dimension_type>> deriv_order)
 {
     using Dim = typename GridType::continuous_dimension_type;
     using Builder = IdentityInterpolationBuilder<
@@ -279,13 +282,14 @@ DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> t
 
     FieldMem<DataType, IdxRange<TestGridType>> values_at_test_points_alloc(test_idx_range);
     Field<DataType, IdxRange<TestGridType>> values_at_test_points(values_at_test_points_alloc);
-    evaluator(values_at_test_points, get_const_field(lagrange_coeffs));
+    evaluator.deriv(deriv_order, values_at_test_points, get_const_field(lagrange_coeffs));
 
     return error_norm_inf(
             Kokkos::DefaultExecutionSpace(),
             get_const_field(values_at_test_points),
             KOKKOS_LAMBDA(Idx<TestGridType> idx) {
-                return static_cast<DataType>(Kokkos::cos(ddc::coordinate(idx)));
+                return static_cast<DataType>(Kokkos::cos(
+                        0.5 * Kokkos::numbers::pi * deriv_order.uid() + ddc::coordinate(idx)));
             });
 }
 
@@ -330,19 +334,26 @@ TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
 
     IdxRange<TestGrid> test_idx_range(Idx<TestGrid>(0), IdxStep<TestGrid>(6 * ncells));
 
-    DataType cosine_error = get_cosine_error<DataType, LagBasis>(
-            idx_range.remove_last(IdxStep<GridY>(1)), // Remove repeat periodic point
-            test_idx_range);
-    DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(
-            refined_idx_range.remove_last(IdxStep<RefinedGridY>(1)), // Remove repeat periodic point
-            test_idx_range);
+    for (int n_deriv(0); n_deriv < degree; ++n_deriv) {
+        Idx<ddc::Deriv<Y>> deriv_order(n_deriv);
+        DataType cosine_error = get_cosine_error<DataType, LagBasis>(
+                idx_range.remove_last(IdxStep<GridY>(1)), // Remove repeat periodic point
+                test_idx_range,
+                deriv_order);
+        DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(
+                refined_idx_range.remove_last(
+                        IdxStep<RefinedGridY>(1)), // Remove repeat periodic point
+                test_idx_range,
+                deriv_order);
 
-    DataType order = std::log(cosine_error / refined_cosine_error) / std::log(2.0);
+        DataType order = std::log(cosine_error / refined_cosine_error) / std::log(2.0);
 
-    std::cout << cosine_error << " " << refined_cosine_error << " " << order << std::endl;
-    if constexpr (TestFixture::UNIFORM) {
-        EXPECT_NEAR(order, degree + 1, 0.5);
-    } else {
-        EXPECT_GT(order, degree);
+        std::cout << "Derivative " << n_deriv << " : " << cosine_error << " "
+                  << refined_cosine_error << " " << order << std::endl;
+        if constexpr (TestFixture::UNIFORM) {
+            EXPECT_NEAR(order, degree + 1 - n_deriv, 0.5);
+        } else {
+            EXPECT_GT(order, degree - n_deriv);
+        }
     }
 }
