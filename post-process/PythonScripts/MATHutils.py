@@ -123,8 +123,8 @@ def Deriv_nthorder(F, dx, periodic=0, nth_deriv=1, order=4):
                 dnFdxn[nx-2-index] = np.dot(cm_m, F[nx-index-len(cm_m):nx-index])
     else:
         # boundary indexes to fill -> ex for 4th order: 0,1,nx-2,nx-1
-        indx_bound = np.concatenate((np.arange(offset), nx-offset+np.arange(offset)))
-        for index in indx_bound:
+        index_bound = np.concatenate((np.arange(offset), nx-offset+np.arange(offset)))
+        for index in index_bound:
             for i, coeff in enumerate(cc):
                 dnFdxn[index] = dnFdxn[index] + coeff*F[np.fmod(index+i-offset, nx)]
 
