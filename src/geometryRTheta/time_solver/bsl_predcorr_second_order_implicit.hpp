@@ -391,7 +391,7 @@ public:
 
 
     /**
-     * @brief The implicit loop which calculates the feet of the charateristics.
+     * @brief The implicit loop which calculates the feet of the characteristicss.
      *
      * This function should be private but cannot be as it contains Kokkos lambda
      * functions.
