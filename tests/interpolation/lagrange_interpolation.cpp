@@ -226,7 +226,7 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
         ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
             double tolerance
                     = factorial(n_deriv) // max_norm
-                      * TOL * ((degree + 1) * (n_deriv - 1)) // approx max of number of calculations
+                      * TOL * ((degree + 1) * n_deriv) // approx max of number of calculations
                       / ipow(dx_max, n_deriv);
             EXPECT_NEAR(
                     function_values_host(idx),
