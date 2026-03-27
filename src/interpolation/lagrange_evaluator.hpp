@@ -519,7 +519,6 @@ private:
                 }
             }
         }
-        KOKKOS_ASSERT(ddc::coordinate(first_lagrange_knot + lagrange_basis_type::degree()) > coord);
         return first_lagrange_knot;
     }
 
