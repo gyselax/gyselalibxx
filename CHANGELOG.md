@@ -19,8 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Changed the name of class `SplineBuliderDerivField2D` to fix typo (->`SplineBuilderDerivField2D`).
-- Renamed `DiscreteToCartesian` -> `DiscretePolarToCartesianSpline`.
-- Renamed `DiscreteToCartesianBuilder` -> `DiscretePolarToCartesianSplineBuilder`.
+- Renamed `DiscreteToCartesian` -> `DiscretePoloidalCSSplineMapping`.
+- Renamed `DiscreteToCartesianBuilder` -> `DiscretePoloidalCSSplineMappingBuilder`.
 
 ### Deprecated
 
