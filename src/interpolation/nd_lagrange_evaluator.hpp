@@ -164,7 +164,7 @@ public:
     template <class Layout, class... CoordsDims, class NdCoeffIdxRange>
     KOKKOS_FUNCTION data_type operator()(
             Coord<CoordsDims...> const& coord,
-            ConstField<data_type, NdCoeffIdxRange, memory_space, Layout> const coeff) const
+            ConstField<data_type, NdCoeffIdxRange, memory_space, Layout> const& coeff) const
     {
         Coord<HeadContDim> coord_head(coord);
         Idx<HeadCoeffGrid> first_lagrange_knot = m_head_evaluator.find_stencil(coord_head);
