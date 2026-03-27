@@ -9,7 +9,7 @@
 #include "discrete_to_cartesian.hpp"
 
 /**
- * @brief A class to create a DiscreteToCartesian instance from an analytical mapping.
+ * @brief A class to create a DiscretePolarToCartesianSpline instance from an analytical mapping.
  * This class creates and stores splines memory spaces describing the analytical mapping.
  * The discrete mapping is then created using the splines without copying data.
  *
@@ -19,7 +19,7 @@
  * @tparam SplineEvaluator An operator for evaluating a spline.
  */
 template <class X, class Y, class SplineBuilder, class SplineEvaluator>
-class DiscreteToCartesianBuilder
+class DiscretePolarToCartesianSplineBuilder
 {
     static_assert(
             ddc::is_evaluator_admissible_v<SplineBuilder, SplineEvaluator>,
@@ -33,7 +33,7 @@ class DiscreteToCartesianBuilder
 
 public:
     /// The type of the mapping that will be created.
-    using MappingType = DiscreteToCartesian<X, Y, SplineEvaluator>;
+    using MappingType = DiscretePolarToCartesianSpline<X, Y, SplineEvaluator>;
 
 private:
     using ExecSpace = typename SplineBuilder::exec_space;
@@ -65,7 +65,7 @@ private:
 
 public:
     /**
-     * @brief Create an instance of the class capable of providing a DiscreteToCartesian class instance.
+     * @brief Create an instance of the class capable of providing a DiscretePolarToCartesianSpline class instance.
      *
      * @param[in] exec_space The execution space where this class runs any for loops.
      * @param[in] analytical_mapping The analytical mapping to be described by this discrete mapping.
@@ -73,7 +73,7 @@ public:
      * @param[in] evaluator A spline evaluator to be used to evaluate a spline approximating the analytical mapping.
      */
     template <class Mapping>
-    DiscreteToCartesianBuilder(
+    DiscretePolarToCartesianSplineBuilder(
             ExecSpace exec_space,
             Mapping const& analytical_mapping,
             SplineBuilder const& builder,
@@ -105,13 +105,13 @@ public:
     }
 
     /**
-     * @brief Get a DiscreteToCartesian class instance.
+     * @brief Get a DiscretePolarToCartesianSpline class instance.
      *
      * @return An instance of the mapping.
      */
-    DiscreteToCartesian<X, Y, SplineEvaluator> operator()() const
+    DiscretePolarToCartesianSpline<X, Y, SplineEvaluator> operator()() const
     {
-        return DiscreteToCartesian<X, Y, SplineEvaluator>(
+        return DiscretePolarToCartesianSpline<X, Y, SplineEvaluator>(
                 get_const_field(m_curvilinear_to_x_spline_alloc),
                 get_const_field(m_curvilinear_to_y_spline_alloc),
                 m_evaluator,
@@ -157,7 +157,7 @@ public:
 };
 
 /**
- * @brief A class to create a DiscreteToCartesian instance from an analytical mapping.
+ * @brief A class to create a DiscretePolarToCartesianSpline instance from an analytical mapping.
  * This class creates an instance which uses more refined splines than the provided builder and
  * evaluator.
  * This class creates and stores splines memory spaces describing the analytical mapping.
@@ -305,7 +305,7 @@ private:
 
 public:
     /// The type of the mapping that will be created.
-    using MappingType = DiscreteToCartesian<X, Y, RefinedSplineEvaluator>;
+    using MappingType = DiscretePolarToCartesianSpline<X, Y, RefinedSplineEvaluator>;
 
 private:
     SplineCoeffsMem m_curvilinear_to_x_spline_alloc;
@@ -315,7 +315,7 @@ private:
 
 public:
     /**
-     * @brief Create an instance of the class capable of providing a DiscreteToCartesian class instance.
+     * @brief Create an instance of the class capable of providing a DiscretePolarToCartesianSpline class instance.
      *
      * @param[in] exec_space The execution space where this class runs any for loops.
      * @param[in] analytical_mapping The analytical mapping to be described by this discrete mapping.
@@ -412,13 +412,13 @@ public:
     }
 
     /**
-     * @brief Get a DiscreteToCartesian class instance.
+     * @brief Get a DiscretePolarToCartesianSpline class instance.
      *
      * @return An instance of the mapping.
      */
-    DiscreteToCartesian<X, Y, RefinedSplineEvaluator> operator()() const
+    DiscretePolarToCartesianSpline<X, Y, RefinedSplineEvaluator> operator()() const
     {
-        return DiscreteToCartesian<X, Y, RefinedSplineEvaluator>(
+        return DiscretePolarToCartesianSpline<X, Y, RefinedSplineEvaluator>(
                 get_const_field(m_curvilinear_to_x_spline_alloc),
                 get_const_field(m_curvilinear_to_y_spline_alloc),
                 m_evaluator,
