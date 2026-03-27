@@ -323,24 +323,22 @@ public:
                     }
                 }
             } else {
-                DataType xi = ddc::coordinate(poly_start + node);
+                // TODO: Fix equation to take normalisation into consideration
                 for (std::size_t j(0); j < n_basis; ++j) {
                     derivs(j, 0) = static_cast<int>(j == node);
-                    DataType xj = ddc::coordinate(poly_start + j);
                     if (j == node)
                         continue;
                     for (std::size_t n(1); n < n_derivs + 1; ++n) {
                         // \partial^nl_j(x_i) = n!/wi [ (-1)^(n+1) wj/(xi-xj)^n
                         //                      - \sum_k=1^{n-1}\sum_{p\ne i} (-1)^(n+1-k)
                         //                                       wp \partial^k l_j(x_i) / k! / (xi-xp)^n ]
-                        derivs(j, n) = neg_1_pow(n + 1) * m_weights[j] / Kokkos::pow(xi - xj, n);
+                        derivs(j, n) = neg_1_pow(n + 1) * m_weights[j] / ipow(node - j, n);
                         for (std::size_t p(0); p < n_basis; ++p) {
                             if (p == node)
                                 continue;
-                            DataType xp = ddc::coordinate(poly_start + p);
                             for (std::size_t k(1); k < n; ++k) {
                                 derivs(j, n) -= neg_1_pow(n + 1 - k) * m_weights[p] * derivs(j, k)
-                                                / factorial(k) / ipow(xi - xp, n - k);
+                                                / factorial(k) / ipow(node - p, n - k);
                             }
                         }
                         derivs(j, n) *= factorial(n) / m_weights[node];
