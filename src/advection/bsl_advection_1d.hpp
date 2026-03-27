@@ -300,7 +300,7 @@ public:
 
         // Compute the characteristic feet .......................................................
         /*
-            We use a time stepper method to solve the characteristics equation.
+            We use a time stepper method to solve the characteristic equation.
             A TimeStepper needs a function to compute the updated advection field and a function to
             compute the updated feet.
                 * update_adv_field: evaluate the advection field spline at the updated feet.
