@@ -24,8 +24,8 @@
 #include "circular_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "inverse_jacobian_matrix.hpp"
@@ -44,7 +44,7 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,

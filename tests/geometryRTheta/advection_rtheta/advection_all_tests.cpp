@@ -20,8 +20,8 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
@@ -49,13 +49,16 @@ using CzarnyToCartMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CartToCircularMapping = CartesianToCircular<X, Y, R, Theta>;
 using CartToCzarnyMapping = CartesianToCzarny<X, Y, R, Theta>;
 using CircularToPseudoCartMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
-using DiscreteMappingBuilderHost = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilderHost = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorConstBound_host>;
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace
@@ -339,13 +342,14 @@ int main(int argc, char** argv)
             from_czarny_map,
             builder_host,
             spline_evaluator_extrapol_host);
-    DiscreteToCartesian const from_discrete_czarny_map_host = discrete_czarny_map_builder_host();
+    DiscretePoloidalCSSplineMapping const from_discrete_czarny_map_host
+            = discrete_czarny_map_builder_host();
     DiscreteMappingBuilder const discrete_czarny_map_builder(
             Kokkos::DefaultExecutionSpace(),
             from_czarny_map,
             builder,
             spline_evaluator_extrapol);
-    DiscreteToCartesian const from_discrete_czarny_map = discrete_czarny_map_builder();
+    DiscretePoloidalCSSplineMapping const from_discrete_czarny_map = discrete_czarny_map_builder();
 
     std::tuple simulations = std::make_tuple(
             SimulationParameters(

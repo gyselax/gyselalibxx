@@ -12,8 +12,8 @@
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_r_theta.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
@@ -27,10 +27,13 @@ using Mapping = CircularToCartesian<R, Theta, X, Y>;
 #elif defined(CZARNY_MAPPING)
 using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorNullBound>;
 
-using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder_host = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
@@ -123,7 +126,7 @@ int main(int argc, char** argv)
 
     DiscreteMappingBuilder const
             discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, builder, evaluator);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
