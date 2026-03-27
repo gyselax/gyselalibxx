@@ -6,7 +6,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_polar_to_cartesian_spline.hpp"
 
 /**
  * @brief A class to create a DiscretePolarToCartesianSpline instance from an analytical mapping.

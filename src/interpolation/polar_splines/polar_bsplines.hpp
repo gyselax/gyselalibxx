@@ -10,7 +10,7 @@
 #include "cartesian_to_barycentric.hpp"
 #include "coord_transformation_tools.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_polar_to_cartesian_spline.hpp"
 #include "view.hpp"
 
 namespace PolarSplines {

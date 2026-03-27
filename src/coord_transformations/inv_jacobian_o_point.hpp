@@ -5,7 +5,7 @@
 #include "circular_to_cartesian.hpp"
 #include "coord_transformation_tools.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_polar_to_cartesian_spline.hpp"
 #include "indexed_tensor.hpp"
 #include "view.hpp"
 
