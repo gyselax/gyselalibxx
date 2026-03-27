@@ -313,7 +313,7 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactDerivatives)
     std::array<DataType, degree + 1> coeffs_x, coeffs_y;
     std::mt19937 gen(42);
     std::uniform_real_distribution<double> dis(0.0, 1.0);
-    for (std::size_t i(0); i < degree+1; ++i) {
+    for (std::size_t i(0); i < degree + 1; ++i) {
         coeffs_x[i] = static_cast<DataType>(dis(gen));
         coeffs_y[i] = static_cast<DataType>(dis(gen));
     }
