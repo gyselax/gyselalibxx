@@ -13,18 +13,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add a new constructor for `GaussLegendre` from an index range describing the cell edges.
 - Add a `GradientCreator` operator to group derivative calculations.
+- Add a `NDLagrangeEvaluator` class.
 
 ### Fixed
 
 ### Changed
 
 - Changed the name of class `SplineBuliderDerivField2D` to fix typo (->`SplineBuilderDerivField2D`).
+- Update DDC to [v0.12.0](https://github.com/CExA-project/ddc/releases/tag/v0.12.0).
+- Changed FindLAPACKE CMake module to the version in DDC.
 - Renamed `DiscreteToCartesian` -> `DiscretePoloidalCSSplineMapping`.
 - Renamed `DiscreteToCartesianBuilder` -> `DiscretePoloidalCSSplineMappingBuilder`.
 
 ### Deprecated
 
 ### Removed
+
+- Remove DDC submodule.
 
 ## [v0.7.0] - 2026-03-18
 

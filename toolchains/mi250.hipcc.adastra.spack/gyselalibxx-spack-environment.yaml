@@ -2,10 +2,10 @@ spack:
   definitions:
   - packages:
     - cmake
+    - 'ddc@0.12 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +rocm amdgpu_target=gfx90a
     - googletest +gmock
     - kokkos@4.7 ~openmp +rocm +hip_relocatable_device_code amdgpu_target=gfx90a
-    - kokkos-fft@0.4 host_backend=fftw-serial device_backend=hipfft
     - kokkos-kernels@4.7 ~shared
     - kokkos-tools
     - 'koliop@0.1.2:0.1'
@@ -59,6 +59,8 @@ spack:
       require: gcc@13.2.1
     cxx:
       require: gcc@13.2.1
+    kokkos-fft:
+      require: '@0.4 host_backend=fftw-serial device_backend=hipfft'
     lapack:
       require: openblas
     mpi:

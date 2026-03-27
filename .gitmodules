@@ -2,6 +2,3 @@
 	path = vendor/googletest
 	url = https://github.com/google/googletest.git
 	branch = master
-[submodule "vendor/ddc"]
-	path = vendor/ddc
-	url = https://github.com/CExA-project/ddc.git
