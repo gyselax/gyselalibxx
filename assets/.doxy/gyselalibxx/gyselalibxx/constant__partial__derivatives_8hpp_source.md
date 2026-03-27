@@ -10,6 +10,9 @@
 ```C++
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <memory>
+
+#include "ipartial_derivative.hpp"
 
 template <class IdxRangeFull, class DerivativeDimension>
 class ConstantPartialDerivative : public IPartialDerivative<IdxRangeFull, DerivativeDimension>

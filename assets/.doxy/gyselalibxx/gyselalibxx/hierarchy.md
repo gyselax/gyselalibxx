@@ -77,6 +77,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**GeometryXVx**](classGeometryXVx.md) _A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections._ 
 * **class** [**GeometryXYVxVy**](classGeometryXYVxVy.md) _A class providing aliases for useful subindex ranges of the geometry when the data is saved with the spatial dimensions distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections._ 
 * **class** [**Gradient**](classGradient.md) _A class which implements a gradient operator._ 
+* **class** [**GradientCreator**](classGradientCreator.md) _Operator to calculate the gradient of a function._ 
 * **class** [**GyroAverageOperator**](classGyroAverageOperator.md) _Operator to compute the gyroaverage of a field in (r, theta) coordinates._ 
 * **class** [**IBoltzmannSolver**](classIBoltzmannSolver.md) _An abstract class for solving a Boltzmann equation._     
     * **class** [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md) _A class that solves a Boltzmann equation using Strang's splitting._ 

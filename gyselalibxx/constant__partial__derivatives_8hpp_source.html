@@ -565,6 +565,9 @@
 <p><a href="constant__partial__derivatives_8hpp.html">Go to the documentation of this file</a></p>
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
+#include &lt;memory&gt;
+
+#include "ipartial_derivative.hpp"
 
 template &lt;class IdxRangeFull, class DerivativeDimension&gt;
 class ConstantPartialDerivative : public IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;

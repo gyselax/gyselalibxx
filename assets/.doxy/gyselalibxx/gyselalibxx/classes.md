@@ -183,6 +183,7 @@
 * [**GhostedVxStaggered**](structCollisionsIntra_1_1GhostedVxStaggered.md)
 ([**CollisionsIntra**](classCollisionsIntra.md))
 * [**Gradient**](classGradient.md)
+* [**GradientCreator**](classGradientCreator.md)
 * [**GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8.md)
 ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05.md))
 * [**GridMom**](structGridMom.md)

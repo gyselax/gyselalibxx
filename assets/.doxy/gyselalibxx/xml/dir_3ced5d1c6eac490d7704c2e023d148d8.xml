@@ -7,6 +7,7 @@
     <innerfile refid="constant__partial__derivatives_8hpp">constant_partial_derivatives.hpp</innerfile>
     <innerfile refid="curl_8hpp">curl.hpp</innerfile>
     <innerfile refid="gradient_8hpp">gradient.hpp</innerfile>
+    <innerfile refid="gradient__creator_8hpp">gradient_creator.hpp</innerfile>
     <innerfile refid="ipartial__derivative_8hpp">ipartial_derivative.hpp</innerfile>
     <innerfile refid="l__norm__tools_8hpp">l_norm_tools.hpp</innerfile>
     <innerfile refid="lie__poisson__bracket_8hpp">lie_poisson_bracket.hpp</innerfile>

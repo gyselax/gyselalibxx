@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classGradientCreator" kind="class" language="C++" prot="public">
+    <compoundname>GradientCreator</compoundname>
+    <includes refid="gradient__creator_8hpp" local="no">gradient_creator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename IdxRangeFull</type>
+      </param>
+      <param>
+        <type>typename...</type>
+        <declname>DerivativeDims</declname>
+        <defname>DerivativeDims</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGradientCreator_1a1f2c7be215de3d2080050ff1d95f645d" prot="private" static="no" mutable="no">
+        <type>std::tuple&lt; <ref refid="classIPartialDerivativeCreator" kindref="compound">IPartialDerivativeCreator</ref>&lt; IdxRangeFull, DerivativeDims &gt; const  &amp;... &gt;</type>
+        <definition>std::tuple&lt;IPartialDerivativeCreator&lt;IdxRangeFull, DerivativeDims&gt; const&amp;...&gt; GradientCreator&lt; IdxRangeFull, DerivativeDims &gt;::m_derivative_creators</definition>
+        <argsstring></argsstring>
+        <name>m_derivative_creators</name>
+        <qualifiedname>GradientCreator::m_derivative_creators</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient_creator.hpp" line="24" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient_creator.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGradientCreator_1aeb6b4595fbf744b2450e0b31199ed8b0" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>GradientCreator&lt; IdxRangeFull, DerivativeDims &gt;::GradientCreator</definition>
+        <argsstring>(IPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDims &gt; const &amp;... partial_derivative_operator)</argsstring>
+        <name>GradientCreator</name>
+        <qualifiedname>GradientCreator::GradientCreator</qualifiedname>
+        <param>
+          <type><ref refid="classIPartialDerivativeCreator" kindref="compound">IPartialDerivativeCreator</ref>&lt; IdxRangeFull, DerivativeDims &gt; const &amp;...</type>
+          <declname>partial_derivative_operator</declname>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="classGradientCreator" kindref="compound">GradientCreator</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">partial_derivative_operator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The operators used to calculate the derivative along each of the dimensions. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient_creator.hpp" line="32" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient_creator.hpp" bodystart="32" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="classGradientCreator_1aa1f804109caec00432da5e3bee3f0c94" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void GradientCreator&lt; IdxRangeFull, DerivativeDims &gt;::operator()</definition>
+        <argsstring>(DVectorField&lt; IdxRangeFull, get_covariant_dims_t&lt; VectorIndexSet&lt; DerivativeDims... &gt; &gt; &gt; grad_func_cov, DConstField&lt; IdxRangeFull &gt; func) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>GradientCreator::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; IdxRangeFull, get_covariant_dims_t&lt; VectorIndexSet&lt; DerivativeDims... &gt; &gt; &gt;</type>
+          <declname>grad_func_cov</declname>
+        </param>
+        <param>
+          <type>DConstField&lt; IdxRangeFull &gt;</type>
+          <declname>func</declname>
+        </param>
+        <briefdescription>
+<para>Fill a <ref refid="classVectorField" kindref="compound">VectorField</ref> with the values of the gradient of a function. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">grad_func_cov</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The gradient of the function expressed as a covariant vector. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">func</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function whose gradient is calculated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient_creator.hpp" line="45" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient_creator.hpp" bodystart="45" bodyend="55"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Operator to calculate the gradient of a function. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>IdxRangeFull</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the function being differentiated should be defined. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DerivativeDims</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The dimensions along which the function should be differentiated to construct the gradient. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient_creator.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/gradient_creator.hpp" bodystart="19" bodyend="56"/>
+    <listofallmembers>
+      <member refid="classGradientCreator_1aeb6b4595fbf744b2450e0b31199ed8b0" prot="public" virt="non-virtual"><scope>GradientCreator</scope><name>GradientCreator</name></member>
+      <member refid="classGradientCreator_1a1f2c7be215de3d2080050ff1d95f645d" prot="private" virt="non-virtual"><scope>GradientCreator</scope><name>m_derivative_creators</name></member>
+      <member refid="classGradientCreator_1aa1f804109caec00432da5e3bee3f0c94" prot="public" virt="non-virtual"><scope>GradientCreator</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

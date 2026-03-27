@@ -145,6 +145,7 @@
 * **m\_glc** ([**GaussLegendre**](classGaussLegendre.md))
 * **m\_nbcells** ([**GaussLegendre**](classGaussLegendre.md))
 * **m\_valid\_idx\_range** ([**GaussLegendre**](classGaussLegendre.md))
+* **m\_derivative\_creators** ([**GradientCreator**](classGradientCreator.md))
 * **m\_coordinate\_transform** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **m\_nb\_gyro\_points** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **m\_rho\_L** ([**GyroAverageOperator**](classGyroAverageOperator.md))

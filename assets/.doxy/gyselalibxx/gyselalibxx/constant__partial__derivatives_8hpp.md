@@ -10,6 +10,8 @@
 
 
 
+* `#include <memory>`
+* `#include "ipartial_derivative.hpp"`
 
 
 
