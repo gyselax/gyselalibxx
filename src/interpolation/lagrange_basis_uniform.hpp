@@ -290,7 +290,7 @@ public:
 
                 // For each basis element
                 for (std::size_t j(0); j < n_basis; ++j) {
-                    derivs(j, 0) = values[j];
+                    derivs(j, 0) = values(j);
                     for (std::size_t n(1); n < n_derivs + 1; ++n) {
                         DataType factor = 0;
                         combinations[0] = -1;
