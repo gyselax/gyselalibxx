@@ -385,6 +385,12 @@ private:
                                 ddc::detail::TypeSeq<CoordsDims...>> && ...),
                 "Evaluation coordinate must contain the evaluation dimensions");
 
+        using DerivDimsTypeSeq = ddc::detail::TypeSeq<DerivDims...>;
+        using TailDerivDimsTypeSeq = ddc::
+                type_seq_remove_t<DerivDimsTypeSeq, ddc::detail::TypeSeq<ddc::Deriv<HeadContDim>>>;
+        using IdxTailDerivDims = typename ddc::detail::convert_type_seq_to_discrete_domain_t<
+                TypeSeq>::discrete_element_type;
+
         constexpr std::size_t n_head_basis = HeadBasis::degree() + 1;
         Coord<HeadContDim> coord_head(coord);
         Idx<HeadCoeffGrid> first_lagrange_knot = m_head_evaluator.find_stencil(coord_head);
@@ -394,7 +400,7 @@ private:
         Kokkos::mdspan<data_type, Kokkos::extents<std::size_t, n_head_basis>> const vals(
                 vals_ptr.data());
         ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
-        if constexpr (ddc::in_tags_v<ddc::Deriv<HeadContDim>, ddc::detail::TypeSeq<DerivDims...>>) {
+        if constexpr (ddc::in_tags_v<ddc::Deriv<HeadContDim>, DerivDimsTypeSeq>) {
             auto const order = ddc::select<ddc::Deriv<HeadContDim>>(deriv_order).uid();
             KOKKOS_ASSERT(order > 0 && order <= HeadBasis::degree())
 
@@ -414,6 +420,7 @@ private:
             ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
         }
 
+        IdxTailDerivDims tail_deriv_order(deriv_order);
         // Tensor-product recursion: for each stencil knot, slice the coefficient
         // array along the head dimension and delegate to the (N-1)D tail evaluator.
         // When sizeof...(Evaluators1D)==1, m_tail_evaluator is the 1D LagrangeEvaluator
@@ -422,7 +429,7 @@ private:
         for (std::size_t i = 0; i < n_head_basis; ++i) {
             Idx<HeadCoeffGrid> const knot_i = first_lagrange_knot + IdxStep<HeadCoeffGrid>(i);
             result += vals[i]
-                      * m_tail_evaluator.eval_no_bc(deriv_order, coord, lagrange_coef[knot_i]);
+                      * m_tail_evaluator.eval_no_bc(tail_deriv_order, coord, lagrange_coef[knot_i]);
         }
         return result;
     }
