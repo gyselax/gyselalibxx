@@ -9,8 +9,8 @@
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 
 

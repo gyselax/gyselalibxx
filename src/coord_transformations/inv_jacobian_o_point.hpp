@@ -267,9 +267,15 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> operator()()
             const
     {
-        DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace> const& discrete_mapping
-                = m_mapping.template get<
-                        DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace>>();
+        DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace> const&
+                discrete_mapping
+                = m_mapping.template get<DiscretePolarToCartesianSpline<
+                        X,
+                        Y,
+                        SplineEvaluator,
+                        R,
+                        Theta,
+                        MemorySpace>>();
         DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> J(0.0);
         IdxRangeRTheta idx_range_singular_point = discrete_mapping.idx_range_singular_point();
         // Average the values at (r = 0, theta):

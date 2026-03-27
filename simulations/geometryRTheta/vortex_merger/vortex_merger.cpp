@@ -19,8 +19,8 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
@@ -44,8 +44,11 @@
 
 
 namespace {
-using DiscreteMappingBuilder
-        = DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder = DiscretePolarToCartesianSplineBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorConstBound>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,

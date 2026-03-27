@@ -462,12 +462,14 @@ struct MappingAccessibility<
 };
 
 template <class X, class Y, class SplineEvaluator, class R, class Theta, class MemorySpace>
-struct HasOPoint<DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace>> : std::true_type
+struct HasOPoint<DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
+    : std::true_type
 {
 };
 
 template <class X, class Y, class SplineEvaluator, class R, class Theta, class MemorySpace>
-struct SingularOPointInvJacobian<DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
+struct SingularOPointInvJacobian<
+        DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
     : std::true_type
 {
 };

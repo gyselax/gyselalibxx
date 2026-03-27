@@ -20,8 +20,8 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
@@ -54,8 +54,11 @@ using DiscreteMappingBuilderHost = DiscretePolarToCartesianSplineBuilder<
         Y,
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorConstBound_host>;
-using DiscreteMappingBuilder
-        = DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder = DiscretePolarToCartesianSplineBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace
@@ -339,7 +342,8 @@ int main(int argc, char** argv)
             from_czarny_map,
             builder_host,
             spline_evaluator_extrapol_host);
-    DiscretePolarToCartesianSpline const from_discrete_czarny_map_host = discrete_czarny_map_builder_host();
+    DiscretePolarToCartesianSpline const from_discrete_czarny_map_host
+            = discrete_czarny_map_builder_host();
     DiscreteMappingBuilder const discrete_czarny_map_builder(
             Kokkos::DefaultExecutionSpace(),
             from_czarny_map,

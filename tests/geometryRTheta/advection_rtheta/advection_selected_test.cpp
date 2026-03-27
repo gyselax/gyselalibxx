@@ -18,8 +18,8 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "euler.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "geometry_r_theta.hpp"
@@ -208,14 +208,22 @@ int main(int argc, char** argv)
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
-    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
+    DiscretePolarToCartesianSplineBuilder<
+            X,
+            Y,
+            SplineRThetaBuilder_host,
+            SplineRThetaEvaluatorConstBound_host>
             mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
                     builder_host,
                     spline_evaluator_extrapol_host);
     DiscretePolarToCartesianSpline to_physical_mapping_host = mapping_builder_host();
-    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
+    DiscretePolarToCartesianSplineBuilder<
+            X,
+            Y,
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorConstBound>
             mapping_builder(
                     Kokkos::DefaultExecutionSpace(),
                     to_physical_analytical_mapping,

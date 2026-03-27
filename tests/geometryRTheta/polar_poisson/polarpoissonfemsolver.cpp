@@ -12,8 +12,8 @@
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "geometry_r_theta.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
@@ -27,8 +27,11 @@ using Mapping = CircularToCartesian<R, Theta, X, Y>;
 #elif defined(CZARNY_MAPPING)
 using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
-using DiscreteMappingBuilder
-        = DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
+using DiscreteMappingBuilder = DiscretePolarToCartesianSplineBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorNullBound>;
 
 using DiscreteMappingBuilder_host = DiscretePolarToCartesianSplineBuilder<
         X,

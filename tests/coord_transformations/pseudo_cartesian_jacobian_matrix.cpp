@@ -6,8 +6,8 @@
 #include "circular_to_cartesian.hpp"
 #include "combined_mapping.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "math_tools.hpp"
 

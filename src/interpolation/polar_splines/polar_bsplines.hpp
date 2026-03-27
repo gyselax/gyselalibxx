@@ -302,12 +302,22 @@ public:
          *                                  the new basis splines which cross the singular point.
          */
         template <class X, class Y, class SplineEvaluator, class EvalMemorySpace>
-        explicit Impl(const DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, EvalMemorySpace>&
-                              curvilinear_to_cartesian)
+        explicit Impl(const DiscretePolarToCartesianSpline<
+                      X,
+                      Y,
+                      SplineEvaluator,
+                      R,
+                      Theta,
+                      EvalMemorySpace>& curvilinear_to_cartesian)
         {
             static_assert(std::is_same_v<MemorySpace, Kokkos::HostSpace>);
-            using DiscreteMapping
-                    = DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, EvalMemorySpace>;
+            using DiscreteMapping = DiscretePolarToCartesianSpline<
+                    X,
+                    Y,
+                    SplineEvaluator,
+                    R,
+                    Theta,
+                    EvalMemorySpace>;
             static_assert(std::is_same_v<typename DiscreteMapping::BSplineR, BSplinesR>);
             static_assert(std::is_same_v<typename DiscreteMapping::BSplineTheta, BSplinesTheta>);
             using EvalExecSpace = std::conditional_t<

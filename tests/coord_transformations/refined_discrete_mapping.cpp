@@ -11,8 +11,8 @@
 #include "combined_mapping.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "inv_jacobian_o_point.hpp"
@@ -449,7 +449,11 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     // Tests ---
     std::array<double, 3> results;
 
-    DiscretePolarToCartesianSplineBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
+    DiscretePolarToCartesianSplineBuilder<
+            X,
+            Y,
+            SplineRThetaBuilder_host,
+            SplineRThetaEvaluator_host>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,

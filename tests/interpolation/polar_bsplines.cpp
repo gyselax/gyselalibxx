@@ -7,8 +7,8 @@
 #include <gtest/gtest.h>
 
 #include "circular_to_cartesian.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_polar_to_cartesian_spline_builder.hpp"
 #include "polar_bsplines.hpp"
 #include "test_utils.hpp"
 #include "view.hpp"
