@@ -605,7 +605,12 @@ private:
 
                 elm_cell = first + (last - first) / 2;
             }
-            return elm_cell;
+            DataType cell_len
+                    = ddc::coordinate(elm_cell + IdxStep<knot_grid>(1)) - ddc::coordinate(elm_cell);
+            return elm_cell
+                   + IdxStep<knot_grid>(
+                           ((lagrange_basis_type::degree() + 1) % 2)
+                           * static_cast<int>(x_interp - ddc::coordinate(elm_cell) > cell_len / 2));
         }
     }
 };
