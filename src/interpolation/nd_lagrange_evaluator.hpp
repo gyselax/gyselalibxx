@@ -166,10 +166,11 @@ public:
             Coord<CoordsDims...> const& coord,
             ConstField<data_type, NdCoeffIdxRange, memory_space, Layout> const& coeff) const
     {
-        static_assert((ddc::in_tags_v<HeadContDim, ddc::detail::TypeSeq<CoordsDims...>>)&&(
-                ddc::in_tags_v<
-                        typename Evaluators1D::continuous_dimension_type,
-                        ddc::detail::TypeSeq<CoordsDims...>> && ...),
+        static_assert(
+                (ddc::in_tags_v<HeadContDim, ddc::detail::TypeSeq<CoordsDims...>>)&&(
+                        ddc::in_tags_v<
+                                typename Evaluators1D::continuous_dimension_type,
+                                ddc::detail::TypeSeq<CoordsDims...>> && ...),
                 "Evaluation coordinate must contain the evaluation dimensions");
 
         Coord<HeadContDim> coord_head(coord);
