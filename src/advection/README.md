@@ -204,7 +204,7 @@ The advection field should be computed before calling this class.
 
 - If the advection field is expressed on the $`(e_r, e_\theta)`$ contravariant basis of the logical domain, then we need to compute the advection field on the $`(e_x, e_y)`$ basis to advect in the physical domain.
 
-To pass from the composants on the $`(e_r, e_\theta)`$ contravariant basis to the composants on the $`(e_x, e_y)`$ basis, we use the Jacobian matrix *J* of the coordinate transformation $`(r,\theta) \mapsto (x,y)`$,
+To pass from the components on the $`(e_r, e_\theta)`$ contravariant basis to the components on the $`(e_x, e_y)`$ basis, we use the Jacobian matrix *J* of the coordinate transformation $`(r,\theta) \mapsto (x,y)`$,
 
 ```math
 \begin{bmatrix}
