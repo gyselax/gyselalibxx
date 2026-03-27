@@ -8,8 +8,8 @@
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_polar_to_cartesian_spline.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "mesh_builder.hpp"
@@ -107,7 +107,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscretePolarToCartesianSplineBuilder<
+    DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -117,7 +117,7 @@ TEST_P(InvJacobianMatrix, InverseMatrixDiscCzarMap)
                     analytical_mapping,
                     builder,
                     evaluator);
-    DiscretePolarToCartesianSpline mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
 
     static_assert(has_jacobian_v<decltype(mapping)>);
     InverseJacobianMatrix inv_jacobian(mapping);
@@ -180,7 +180,7 @@ TEST_P(InvJacobianMatrix3D, InverseMatrixToroidalDiscCzarMap)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscretePolarToCartesianSplineBuilder<
+    DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -191,14 +191,14 @@ TEST_P(InvJacobianMatrix3D, InverseMatrixToroidalDiscCzarMap)
                     builder,
                     evaluator);
 
-    using Mapping2D = DiscretePolarToCartesianSpline<
+    using Mapping2D = DiscretePoloidalCSSplineMapping<
             X,
             Y,
             SplineRThetaEvaluator_host,
             R,
             Theta,
             typename Kokkos::DefaultHostExecutionSpace::memory_space>;
-    DiscretePolarToCartesianSpline mapping_2d = mapping_builder();
+    DiscretePoloidalCSSplineMapping mapping_2d = mapping_builder();
 
     ToroidalToCylindrical<Mapping2D, Zeta, Phi> mapping(mapping_2d);
 

@@ -183,7 +183,7 @@ host_t<FieldMemRTheta<CoordRTheta>> compute_exact_feet_rtheta(
 {
     static_assert(!std::is_same_v<
                   LogicalToPhysicalMapping,
-                  DiscretePolarToCartesianSpline<X, Y, SplineRThetaEvaluatorConstBound_host>>);
+                  DiscretePoloidalCSSplineMapping<X, Y, SplineRThetaEvaluatorConstBound_host>>);
 
     host_t<FieldMemRTheta<CoordRTheta>> feet_coords_rtheta(idx_range_rtheta);
     CoordXY const coord_xy_centre = CoordXY(logical_to_physical_mapping.o_point());

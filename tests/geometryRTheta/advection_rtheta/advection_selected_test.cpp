@@ -18,8 +18,8 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_polar_to_cartesian_spline.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "geometry_r_theta.hpp"
@@ -208,7 +208,7 @@ int main(int argc, char** argv)
 #elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
-    DiscretePolarToCartesianSplineBuilder<
+    DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -218,8 +218,8 @@ int main(int argc, char** argv)
                     to_physical_analytical_mapping,
                     builder_host,
                     spline_evaluator_extrapol_host);
-    DiscretePolarToCartesianSpline to_physical_mapping_host = mapping_builder_host();
-    DiscretePolarToCartesianSplineBuilder<
+    DiscretePoloidalCSSplineMapping to_physical_mapping_host = mapping_builder_host();
+    DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder,
@@ -229,7 +229,7 @@ int main(int argc, char** argv)
                     to_physical_analytical_mapping,
                     builder,
                     spline_evaluator_extrapol);
-    DiscretePolarToCartesianSpline to_physical_mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "DISCRETE";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";

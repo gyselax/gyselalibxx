@@ -11,8 +11,8 @@
 #include "combined_mapping.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_polar_to_cartesian_spline.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "inv_jacobian_o_point.hpp"
@@ -449,7 +449,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
     // Tests ---
     std::array<double, 3> results;
 
-    DiscretePolarToCartesianSplineBuilder<
+    DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -459,9 +459,9 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     analytical_mapping,
                     builder,
                     spline_evaluator);
-    DiscretePolarToCartesianSpline discrete_mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping discrete_mapping = mapping_builder();
 
-    RefinedDiscretePolarToCartesianSplineBuilder<
+    RefinedDiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -473,9 +473,9 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     analytical_mapping,
                     builder,
                     spline_evaluator);
-    DiscretePolarToCartesianSpline refined_mapping_16x32 = mapping_builder_16x32();
+    DiscretePoloidalCSSplineMapping refined_mapping_16x32 = mapping_builder_16x32();
 
-    RefinedDiscretePolarToCartesianSplineBuilder<
+    RefinedDiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -487,9 +487,9 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     analytical_mapping,
                     builder,
                     spline_evaluator);
-    DiscretePolarToCartesianSpline refined_mapping_32x64 = mapping_builder_32x64();
+    DiscretePoloidalCSSplineMapping refined_mapping_32x64 = mapping_builder_32x64();
 
-    RefinedDiscretePolarToCartesianSplineBuilder<
+    RefinedDiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -501,7 +501,7 @@ TEST(RefinedDiscreteMapping, TestRefinedDiscreteMapping)
                     analytical_mapping,
                     builder,
                     spline_evaluator);
-    DiscretePolarToCartesianSpline refined_mapping_64x128 = mapping_builder_64x128();
+    DiscretePoloidalCSSplineMapping refined_mapping_64x128 = mapping_builder_64x128();
 
 
     std::cout << std::endl

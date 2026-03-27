@@ -5,7 +5,7 @@
 #include "circular_to_cartesian.hpp"
 #include "coord_transformation_tools.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "indexed_tensor.hpp"
 #include "view.hpp"
 
@@ -187,7 +187,7 @@ template <
         class Ypc>
 class InvJacobianOPoint<
         CombinedMapping<
-                DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
+                DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
                 CartesianToCircular<Xpc, Ypc, R, Theta>,
                 Coord<R, Theta>>,
         Coord<R, Theta>>
@@ -206,7 +206,7 @@ class InvJacobianOPoint<
 
 private:
     using Mapping = CombinedMapping<
-            DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
+            DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
             CartesianToCircular<Xpc, Ypc, R, Theta>,
             Coord<R, Theta>>;
 
@@ -267,9 +267,9 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> operator()()
             const
     {
-        DiscretePolarToCartesianSpline<X, Y, SplineEvaluator, R, Theta, MemorySpace> const&
+        DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace> const&
                 discrete_mapping
-                = m_mapping.template get<DiscretePolarToCartesianSpline<
+                = m_mapping.template get<DiscretePoloidalCSSplineMapping<
                         X,
                         Y,
                         SplineEvaluator,

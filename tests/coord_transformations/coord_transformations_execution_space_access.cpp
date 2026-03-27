@@ -9,8 +9,8 @@
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_polar_to_cartesian_spline.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 
 
@@ -218,13 +218,13 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    DiscretePolarToCartesianSplineBuilder<
+    DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder<HostExecSpace>,
             SplineRThetaEvaluator<HostExecSpace>>
             mapping_builder(HostExecSpace(), analytical_mapping, builder, evaluator);
-    DiscretePolarToCartesianSpline to_physical_mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(to_physical_mapping)>);
 
@@ -330,13 +330,13 @@ TEST_F(MappingMemoryAccess, DeviceDiscreteCoordConverter)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    DiscretePolarToCartesianSplineBuilder<
+    DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder<DeviceExecSpace>,
             SplineRThetaEvaluator<DeviceExecSpace>>
             mapping_builder(DeviceExecSpace(), analytical_mapping, builder, evaluator);
-    DiscretePolarToCartesianSpline to_physical_mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     static_assert(is_accessible_v<DeviceExecSpace, decltype(to_physical_mapping)>);
 
     // Test coordinates

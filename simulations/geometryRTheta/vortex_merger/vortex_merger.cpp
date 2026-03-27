@@ -19,8 +19,8 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "discrete_polar_to_cartesian_spline.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
@@ -44,7 +44,7 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscretePolarToCartesianSplineBuilder<
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
         SplineRThetaBuilder,
@@ -119,7 +119,7 @@ int main(int argc, char** argv)
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
-    DiscretePolarToCartesianSpline const discrete_mapping = discrete_mapping_builder();
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 

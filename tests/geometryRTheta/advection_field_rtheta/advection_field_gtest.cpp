@@ -22,8 +22,8 @@
 #include "circular_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_polar_to_cartesian_spline.hpp"
-#include "discrete_polar_to_cartesian_spline_builder.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "l_norm_tools.hpp"
@@ -41,7 +41,7 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscretePolarToCartesianSplineBuilder<
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
@@ -134,7 +134,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             to_physical_mapping,
             builder_host,
             spline_evaluator_extrapol_host);
-    DiscretePolarToCartesianSpline const discrete_mapping = discrete_mapping_builder();
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 

@@ -10,7 +10,7 @@
 #include "cartesian_to_barycentric.hpp"
 #include "coord_transformation_tools.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_polar_to_cartesian_spline.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "view.hpp"
 
 namespace PolarSplines {
@@ -302,7 +302,7 @@ public:
          *                                  the new basis splines which cross the singular point.
          */
         template <class X, class Y, class SplineEvaluator, class EvalMemorySpace>
-        explicit Impl(const DiscretePolarToCartesianSpline<
+        explicit Impl(const DiscretePoloidalCSSplineMapping<
                       X,
                       Y,
                       SplineEvaluator,
@@ -311,7 +311,7 @@ public:
                       EvalMemorySpace>& curvilinear_to_cartesian)
         {
             static_assert(std::is_same_v<MemorySpace, Kokkos::HostSpace>);
-            using DiscreteMapping = DiscretePolarToCartesianSpline<
+            using DiscreteMapping = DiscretePoloidalCSSplineMapping<
                     X,
                     Y,
                     SplineEvaluator,
