@@ -1,12 +1,12 @@
 
 
-# Class SplineBuliderDerivField2D
+# Class SplineBuilderDerivField2D
 
 **template &lt;class ExecSpace, class BSplines1, class BSplines2, class Grid1, class Grid2, ddc::BoundCond BoundCond1min, ddc::BoundCond BoundCond1max, ddc::BoundCond BoundCond2min, ddc::BoundCond BoundCond2max&gt;**
 
 
 
-[**ClassList**](annotated.md) **>** [**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md)
+[**ClassList**](annotated.md) **>** [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md)
 
 
 
@@ -54,7 +54,7 @@ _[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SplineBuliderDerivField2D**](#function-splinebuliderderivfield2d) (Builder2D const & builder) <br>_Instantiate the class by storing a reference to the spline builder we can to use._  |
+|   | [**SplineBuilderDerivField2D**](#function-splinebuilderderivfield2d) (Builder2D const & builder) <br>_Instantiate the class by storing a reference to the spline builder we can to use._  |
 |  void | [**fill\_in\_cross\_deriv**](#function-fill_in_cross_deriv) (CrossDerivField cross\_deriv, [**DerivFieldType**](classDerivField.md) function\_and\_derivs, Idx&lt; Grid1 &gt; idx\_slice\_1, Idx&lt; Grid2 &gt; idx\_slice\_2) const<br>_Fill in the cross\_deriv field with the cross derivatives stored in the function\_and\_derivs._  |
 |  void | [**fill\_in\_deriv1**](#function-fill_in_deriv1) (Deriv1Field deriv1, [**DerivFieldType**](classDerivField.md) function\_and\_derivs, Idx&lt; Grid1 &gt; idx\_slice) const<br>_Fill in the deriv1 field with the derivatives along the first dimension stored in the function\_and\_derivs._  |
 |  void | [**fill\_in\_deriv2**](#function-fill_in_deriv2) (Deriv2Field deriv2, [**DerivFieldType**](classDerivField.md) function\_and\_derivs, Idx&lt; Grid2 &gt; idx\_slice) const<br>_Fill in the deriv2 field with the derivatives along the second dimension stored in the function\_and\_derivs._  |
@@ -91,7 +91,7 @@ _[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md
 ## Detailed Description
 
 
-[**DerivField**](classDerivField.md) stores the values and the derivatives of a function. The inputs of the SplineBuilder2D are on different layouts than the fields we can get from the [**DerivField**](classDerivField.md). [**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md) allows to directly apply a stored SplineBuilder2D to a [**DerivField**](classDerivField.md) by copying data in fields with correct layout.
+[**DerivField**](classDerivField.md) stores the values and the derivatives of a function. The inputs of the SplineBuilder2D are on different layouts than the fields we can get from the [**DerivField**](classDerivField.md). [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md) allows to directly apply a stored SplineBuilder2D to a [**DerivField**](classDerivField.md) by copying data in fields with correct layout.
 
 
 Implemented only for 2D case. 
@@ -103,11 +103,11 @@ Implemented only for 2D case.
 
 
 
-### function SplineBuliderDerivField2D 
+### function SplineBuilderDerivField2D 
 
 _Instantiate the class by storing a reference to the spline builder we can to use._ 
 ```C++
-inline explicit SplineBuliderDerivField2D::SplineBuliderDerivField2D (
+inline explicit SplineBuilderDerivField2D::SplineBuilderDerivField2D (
     Builder2D const & builder
 ) 
 ```
@@ -134,7 +134,7 @@ inline explicit SplineBuliderDerivField2D::SplineBuliderDerivField2D (
 
 _Fill in the cross\_deriv field with the cross derivatives stored in the function\_and\_derivs._ 
 ```C++
-inline void SplineBuliderDerivField2D::fill_in_cross_deriv (
+inline void SplineBuilderDerivField2D::fill_in_cross_deriv (
     CrossDerivField cross_deriv,
     DerivFieldType function_and_derivs,
     Idx< Grid1 > idx_slice_1,
@@ -167,7 +167,7 @@ inline void SplineBuliderDerivField2D::fill_in_cross_deriv (
 
 _Fill in the deriv1 field with the derivatives along the first dimension stored in the function\_and\_derivs._ 
 ```C++
-inline void SplineBuliderDerivField2D::fill_in_deriv1 (
+inline void SplineBuilderDerivField2D::fill_in_deriv1 (
     Deriv1Field deriv1,
     DerivFieldType function_and_derivs,
     Idx< Grid1 > idx_slice
@@ -198,7 +198,7 @@ inline void SplineBuliderDerivField2D::fill_in_deriv1 (
 
 _Fill in the deriv2 field with the derivatives along the second dimension stored in the function\_and\_derivs._ 
 ```C++
-inline void SplineBuliderDerivField2D::fill_in_deriv2 (
+inline void SplineBuilderDerivField2D::fill_in_deriv2 (
     Deriv2Field deriv2,
     DerivFieldType function_and_derivs,
     Idx< Grid2 > idx_slice
@@ -229,7 +229,7 @@ inline void SplineBuliderDerivField2D::fill_in_deriv2 (
 
 _Fill in the function field with the values stored in the function\_and\_derivs._ 
 ```C++
-inline void SplineBuliderDerivField2D::fill_in_function (
+inline void SplineBuilderDerivField2D::fill_in_function (
     FunctField function,
     DerivFieldType function_and_derivs
 ) const
@@ -258,7 +258,7 @@ inline void SplineBuliderDerivField2D::fill_in_function (
 
 _Build the spline representation of the function given in a_ [_**DerivField**_](classDerivField.md) _applying the referenced spline builder stored in the class._
 ```C++
-inline void SplineBuliderDerivField2D::operator() (
+inline void SplineBuilderDerivField2D::operator() (
     SplineType spline,
     DerivFieldType function_and_derivs
 ) const

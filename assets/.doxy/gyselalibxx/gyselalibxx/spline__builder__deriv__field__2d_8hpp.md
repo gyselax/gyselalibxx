@@ -36,7 +36,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md) &lt;class ExecSpace, class BSplines1, class BSplines2, class Grid1, class Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max&gt;<br>_[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md) _._ |
+| class | [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md) &lt;class ExecSpace, class BSplines1, class BSplines2, class Grid1, class Grid2, BoundCond1min, BoundCond1max, BoundCond2min, BoundCond2max&gt;<br>_[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md) _._ |
 
 
 

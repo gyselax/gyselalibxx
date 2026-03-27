@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Class SplineBuliderDerivField2D - GyselalibX</title>
+    <title>Class SplineBuilderDerivField2D - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Class SplineBuliderDerivField2D";
-        var mkdocs_page_input_path = "gyselalibxx/classSplineBuliderDerivField2D.md";
+        var mkdocs_page_name = "Class SplineBuilderDerivField2D";
+        var mkdocs_page_input_path = "gyselalibxx/classSplineBuilderDerivField2D.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -344,7 +344,7 @@
                 </li>
                 <li class="toctree-l3"><a class="reference internal" >utils</a>
     <ul>
-                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utilitary functions</a>
+                <li class="toctree-l4"><a class="reference internal" href="../src/multipatch/utils/index.html">Multipatch utility functions</a>
                 </li>
     </ul>
                 </li>
@@ -550,9 +550,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Class SplineBuliderDerivField2D</li>
+      <li class="breadcrumb-item active">Class SplineBuilderDerivField2D</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classSplineBuliderDerivField2D.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classSplineBuilderDerivField2D.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -560,9 +560,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="class-splinebuliderderivfield2d">Class SplineBuliderDerivField2D</h1>
+                <div><h1 id="class-splinebuilderderivfield2d">Class SplineBuilderDerivField2D</h1>
 <p><strong>template &lt;class ExecSpace, class BSplines1, class BSplines2, class Grid1, class Grid2, ddc::BoundCond BoundCond1min, ddc::BoundCond BoundCond1max, ddc::BoundCond BoundCond2min, ddc::BoundCond BoundCond2max&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSplineBuliderDerivField2D.html"><strong>SplineBuliderDerivField2D</strong></a></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSplineBuilderDerivField2D.html"><strong>SplineBuilderDerivField2D</strong></a></p>
 <p><em>[Temporary] Apply a SplineBuilder2D to a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>.</em><a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;spline_builder_deriv_field_2d.hpp&gt;</code></li>
@@ -578,7 +578,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splinebuliderderivfield2d"><strong>SplineBuliderDerivField2D</strong></a> (Builder2D const &amp; builder) <br><em>Instantiate the class by storing a reference to the spline builder we can to use.</em></td>
+<td style="text-align: left;"><a href="#function-splinebuilderderivfield2d"><strong>SplineBuilderDerivField2D</strong></a> (Builder2D const &amp; builder) <br><em>Instantiate the class by storing a reference to the spline builder we can to use.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
@@ -603,12 +603,12 @@
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p><a href="classDerivField.html"><strong>DerivField</strong></a> stores the values and the derivatives of a function. The inputs of the SplineBuilder2D are on different layouts than the fields we can get from the <a href="classDerivField.html"><strong>DerivField</strong></a>. <a href="classSplineBuliderDerivField2D.html"><strong>SplineBuliderDerivField2D</strong></a> allows to directly apply a stored SplineBuilder2D to a <a href="classDerivField.html"><strong>DerivField</strong></a> by copying data in fields with correct layout.</p>
+<p><a href="classDerivField.html"><strong>DerivField</strong></a> stores the values and the derivatives of a function. The inputs of the SplineBuilder2D are on different layouts than the fields we can get from the <a href="classDerivField.html"><strong>DerivField</strong></a>. <a href="classSplineBuilderDerivField2D.html"><strong>SplineBuilderDerivField2D</strong></a> allows to directly apply a stored SplineBuilder2D to a <a href="classDerivField.html"><strong>DerivField</strong></a> by copying data in fields with correct layout.</p>
 <p>Implemented only for 2D case. </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-splinebuliderderivfield2d">function SplineBuliderDerivField2D</h3>
+<h3 id="function-splinebuilderderivfield2d">function SplineBuilderDerivField2D</h3>
 <p><em>Instantiate the class by storing a reference to the spline builder we can to use.</em> </p>
-<pre><code class="language-C++">inline explicit SplineBuliderDerivField2D::SplineBuliderDerivField2D (
+<pre><code class="language-C++">inline explicit SplineBuilderDerivField2D::SplineBuilderDerivField2D (
     Builder2D const &amp; builder
 ) 
 </code></pre>
@@ -620,7 +620,7 @@
 
 <h3 id="function-fill_in_cross_deriv">function fill_in_cross_deriv</h3>
 <p><em>Fill in the cross_deriv field with the cross derivatives stored in the function_and_derivs.</em> </p>
-<pre><code class="language-C++">inline void SplineBuliderDerivField2D::fill_in_cross_deriv (
+<pre><code class="language-C++">inline void SplineBuilderDerivField2D::fill_in_cross_deriv (
     CrossDerivField cross_deriv,
     DerivFieldType function_and_derivs,
     Idx&lt; Grid1 &gt; idx_slice_1,
@@ -638,7 +638,7 @@
 
 <h3 id="function-fill_in_deriv1">function fill_in_deriv1</h3>
 <p><em>Fill in the deriv1 field with the derivatives along the first dimension stored in the function_and_derivs.</em> </p>
-<pre><code class="language-C++">inline void SplineBuliderDerivField2D::fill_in_deriv1 (
+<pre><code class="language-C++">inline void SplineBuilderDerivField2D::fill_in_deriv1 (
     Deriv1Field deriv1,
     DerivFieldType function_and_derivs,
     Idx&lt; Grid1 &gt; idx_slice
@@ -654,7 +654,7 @@
 
 <h3 id="function-fill_in_deriv2">function fill_in_deriv2</h3>
 <p><em>Fill in the deriv2 field with the derivatives along the second dimension stored in the function_and_derivs.</em> </p>
-<pre><code class="language-C++">inline void SplineBuliderDerivField2D::fill_in_deriv2 (
+<pre><code class="language-C++">inline void SplineBuilderDerivField2D::fill_in_deriv2 (
     Deriv2Field deriv2,
     DerivFieldType function_and_derivs,
     Idx&lt; Grid2 &gt; idx_slice
@@ -670,7 +670,7 @@
 
 <h3 id="function-fill_in_function">function fill_in_function</h3>
 <p><em>Fill in the function field with the values stored in the function_and_derivs.</em> </p>
-<pre><code class="language-C++">inline void SplineBuliderDerivField2D::fill_in_function (
+<pre><code class="language-C++">inline void SplineBuilderDerivField2D::fill_in_function (
     FunctField function,
     DerivFieldType function_and_derivs
 ) const
@@ -684,7 +684,7 @@
 
 <h3 id="function-operator">function operator()</h3>
 <p><em>Build the spline representation of the function given in a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>applying the referenced spline builder stored in the class.</em></p>
-<pre><code class="language-C++">inline void SplineBuliderDerivField2D::operator() (
+<pre><code class="language-C++">inline void SplineBuilderDerivField2D::operator() (
     SplineType spline,
     DerivFieldType function_and_derivs
 ) const

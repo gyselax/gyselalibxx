@@ -630,7 +630,7 @@
 <codeline lineno="300"><highlight class="normal"></highlight></codeline>
 <codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Compute<sp/>the<sp/>characteristic<sp/>feet<sp/>.......................................................</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
-<codeline lineno="303"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>We<sp/>use<sp/>a<sp/>time<sp/>stepper<sp/>method<sp/>to<sp/>solve<sp/>the<sp/>charateristic<sp/>equation.</highlight></codeline>
+<codeline lineno="303"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>We<sp/>use<sp/>a<sp/>time<sp/>stepper<sp/>method<sp/>to<sp/>solve<sp/>the<sp/>characteristic<sp/>equation.</highlight></codeline>
 <codeline lineno="304"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>A<sp/>TimeStepper<sp/>needs<sp/>a<sp/>function<sp/>to<sp/>compute<sp/>the<sp/>updated<sp/>advection<sp/>field<sp/>and<sp/>a<sp/>function<sp/>to</highlight></codeline>
 <codeline lineno="305"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>compute<sp/>the<sp/>updated<sp/>feet.</highlight></codeline>
 <codeline lineno="306"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>update_adv_field:<sp/>evaluate<sp/>the<sp/>advection<sp/>field<sp/>spline<sp/>at<sp/>the<sp/>updated<sp/>feet.</highlight></codeline>

@@ -424,7 +424,7 @@
 * [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md)
 * [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md)
 * [**SplineBuilder2DCache**](classSplineBuilder2DCache.md)
-* [**SplineBuliderDerivField2D**](classSplineBuliderDerivField2D.md)
+* [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md)
 * [**SplineInterpolator**](classSplineInterpolator.md)
 * [**SplineInterpolator2D**](classSplineInterpolator2D.md)
 * [**SplinePolarFootFinder**](classSplinePolarFootFinder.md)

@@ -330,7 +330,7 @@
           <declname>tau</declname>
         </param>
         <briefdescription>
-<para>The implicit loop which calculates the feet of the charateristics. </para>
+<para>The implicit loop which calculates the feet of the characteristicss. </para>
         </briefdescription>
         <detaileddescription>
 <para>This function should be private but cannot be as it contains Kokkos lambda functions.</para>

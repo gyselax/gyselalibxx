@@ -29,7 +29,7 @@ template <
         ddc::BoundCond BoundCond1max,
         ddc::BoundCond BoundCond2min,
         ddc::BoundCond BoundCond2max>
-class SplineBuliderDerivField2D
+class SplineBuilderDerivField2D
 {
     using MemorySpace = typename ExecSpace::memory_space;
 
@@ -73,7 +73,7 @@ private:
     Builder2D const& m_builder;
 
 public:
-    explicit SplineBuliderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
+    explicit SplineBuilderDerivField2D(Builder2D const& builder) : m_builder(builder) {}
 
     void operator()(SplineType spline, DerivFieldType function_and_derivs) const
     {
