@@ -416,6 +416,7 @@ private:
                                 ddc::detail::TypeSeq<DerivDims...>,
                                 ddc::detail::TypeSeq<deriv_dim>>,
                 "The only valid dimension for deriv_order is Deriv<Dim>");
+        static_assert(sizeof...(DerivDims) == 0);
 
         std::array<DataType, lagrange_basis_type::degree() + 1> vals_ptr;
         Kokkos::mdspan<
