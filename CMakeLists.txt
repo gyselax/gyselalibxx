@@ -39,11 +39,6 @@ set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
 
 set(GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES ${GYSELALIBXX_BUILD_TESTING} CACHE BOOL "Indicates if the testing dependencies should be included. By default they are only included if the tests are built.")
 
-# Set default DDC options when included in GYSELA
-option(DDC_BUILD_BENCHMARKS       "Build DDC benchmarks." OFF)
-option(DDC_BUILD_EXAMPLES         "Build DDC examples" OFF)
-option(DDC_BUILD_TESTS            "Build DDC tests if BUILD_TESTING is enabled" OFF)
-
 ###############################################################################################
 #                                     Get dependencies
 ###############################################################################################
@@ -89,11 +84,7 @@ find_package(Kokkos 4.4.1...<5 REQUIRED)
 
 find_package(KokkosKernels 4.5.1...<5 REQUIRED)
 
-find_package(DDC 0.11.0 QUIET COMPONENTS fft pdi splines)
-if(NOT "${DDC_FOUND}")
-  ## Use the discrete domain computation library (ddc) from `vendor/`
-  add_subdirectory(vendor/ddc SYSTEM)
-endif()
+find_package(DDC 0.12.0 REQUIRED COMPONENTS fft pdi splines)
 
 find_package(koliop 0.1.2 REQUIRED)
 

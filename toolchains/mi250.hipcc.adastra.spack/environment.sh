@@ -37,11 +37,11 @@ eval -- "$(
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
+        ddc \
         gcc \
         ginkgo \
         googletest \
         kokkos \
-        kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
         koliop \
@@ -70,5 +70,3 @@ eval -- "$(
 
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
-
-export GYSELALIBXX_OPENBLAS_ROOT="$(spack location -i openblas)"
