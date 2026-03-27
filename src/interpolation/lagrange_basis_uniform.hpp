@@ -378,11 +378,13 @@ public:
             int icell = static_cast<int>(offset);
             DataType local_offset = offset - icell;
             int node(-1);
-            if (local_offset <= eps) {
+            if (local_offset <= eps or icell == degree()) {
                 node = icell;
             } else if ((local_offset - 1) >= -eps) {
                 node = icell + 1;
             }
+            KOKKOS_ASSERT(node >= -1);
+            KOKKOS_ASSERT(node <= int(degree()));
             return node;
         }
 
