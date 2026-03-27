@@ -374,13 +374,13 @@ public:
             DataType dx = ddc::discrete_space<knot_grid>().step();
             DataType inv_dx = 1. / dx;
             offset = (x - ddc::coordinate(poly_start)) * inv_dx;
-            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
+            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * (degree() + 1);
             int icell = static_cast<int>(offset);
             DataType local_offset = offset - icell;
             int node(-1);
-            if (local_offset < eps) {
+            if (local_offset <= eps) {
                 node = icell;
-            } else if (local_offset > (1 - eps)) {
+            } else if ((local_offset - 1) >= -eps) {
                 node = icell + 1;
             }
             return node;
