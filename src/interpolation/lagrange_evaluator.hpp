@@ -588,11 +588,12 @@ private:
         Idx<knot_grid> first = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
         if constexpr (ddc::is_uniform_point_sampling_v<knot_grid>) {
             if constexpr (lagrange_basis_type::degree() % 2 == 0) {
-                int knot_offset = static_cast<int>(
-                        Kokkos::round((x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>()));
+                int knot_offset = static_cast<int>(Kokkos::round(
+                        (x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>()));
                 return first + knot_offset;
             } else {
-                int knot_offset = static_cast<int>((x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>());
+                int knot_offset = static_cast<int>(
+                        (x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>());
                 return first + knot_offset;
             }
         } else {

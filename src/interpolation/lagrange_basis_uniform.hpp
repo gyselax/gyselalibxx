@@ -333,16 +333,14 @@ public:
                         // \partial^nl_j(x_i) = n!/wi [ (-1)^(n+1) wj/(xi-xj)^n
                         //                      - \sum_k=1^{n-1}\sum_{p\ne i} (-1)^(n+1-k)
                         //                                       wp \partial^k l_j(x_i) / k! / (xi-xp)^(n-k) ]
-                        derivs(j, n)
-                                = neg_1_pow(n + 1) * m_weights[j] / Kokkos::pow(xi-xj, n);
+                        derivs(j, n) = neg_1_pow(n + 1) * m_weights[j] / Kokkos::pow(xi - xj, n);
                         for (std::size_t p(0); p < n_basis; ++p) {
                             if (p == node)
                                 continue;
                             DataType xp = ddc::coordinate(poly_start + p);
                             for (std::size_t k(1); k < n; ++k) {
                                 derivs(j, n) -= neg_1_pow(n + 1 - k) * m_weights[p] * derivs(j, k)
-                                                / factorial(k)
-                                                / Kokkos::pow(xi - xp, n - k);
+                                                / factorial(k) / Kokkos::pow(xi - xp, n - k);
                             }
                         }
                         derivs(j, n) *= factorial(n) / m_weights[node];
