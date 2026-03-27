@@ -12,12 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Add a new constructor for `GaussLegendre` from an index range describing the cell edges.
+- Add a `GradientCreator` operator to group derivative calculations.
 - Add `eval_basis_and_n_derivs` function to Lagrange basis operators.
 - Add `deriv` function to Lagrange evaluation.
 
 ### Fixed
 
 ### Changed
+
+- Changed the name of class `SplineBuliderDerivField2D` to fix typo (->`SplineBuilderDerivField2D`).
 
 ### Deprecated
 

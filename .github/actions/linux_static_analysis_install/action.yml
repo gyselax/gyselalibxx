@@ -10,7 +10,7 @@ runs:
       shell: bash
     - name: Restore cached cppcheck
       id: cache-cppcheck-restore
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v5
       with:
         path: |
           /usr/local/share/Cppcheck/
@@ -30,7 +30,7 @@ runs:
     - name: Save cppcache
       id: cache-cppcheck-save
       if: steps.cache-cppcheck-restore.outputs.cache-hit != 'true'
-      uses: actions/cache/save@v4
+      uses: actions/cache/save@v5
       with:
         path: |
           /usr/local/share/Cppcheck/
