@@ -140,9 +140,8 @@ public:
             }
 
             // Calculate weights
-            DataType dx = ddc::discrete_space<knot_grid>().step();
             for (int i(0); i < D + 1; ++i) {
-                DataType numerator = dx;
+                DataType numerator = 1;
                 for (int j(0); j < D + 1; ++j) {
                     if (i == j)
                         continue;
@@ -279,6 +278,7 @@ public:
             constexpr std::size_t n_basis = degree() + 1;
             DataType offset;
             int node = check_if_node(offset, x, poly_start);
+            DataType dx = ddc::discrete_space<knot_grid>().step();
 
             // If coordinate not found at a node
             if (node == -1) {
@@ -308,7 +308,7 @@ public:
                             i = n - 1;
                             double divisor(1);
                             for (std::size_t k(0); k < n; ++k) {
-                                divisor *= (x - ddc::coordinate(poly_start + combinations[k]));
+                                divisor *= dx * (offset - combinations[k]);
                             }
                             factor += 1.0 / divisor;
                             int max_val_along_dim = i + n_basis - n;
@@ -323,22 +323,26 @@ public:
                     }
                 }
             } else {
-                // TODO: Fix equation to take normalisation into consideration
+                DataType xi = ddc::coordinate(poly_start + node);
                 for (std::size_t j(0); j < n_basis; ++j) {
                     derivs(j, 0) = static_cast<int>(j == node);
                     if (j == node)
                         continue;
+                    DataType xj = ddc::coordinate(poly_start + j);
                     for (std::size_t n(1); n < n_derivs + 1; ++n) {
                         // \partial^nl_j(x_i) = n!/wi [ (-1)^(n+1) wj/(xi-xj)^n
                         //                      - \sum_k=1^{n-1}\sum_{p\ne i} (-1)^(n+1-k)
-                        //                                       wp \partial^k l_j(x_i) / k! / (xi-xp)^n ]
-                        derivs(j, n) = neg_1_pow(n + 1) * m_weights[j] / ipow(node - j, n);
+                        //                                       wp \partial^k l_j(x_i) / k! / (xi-xp)^(n-k) ]
+                        derivs(j, n)
+                                = neg_1_pow(n + 1) * m_weights[j] / Kokkos::pow(xi-xj, n);
                         for (std::size_t p(0); p < n_basis; ++p) {
                             if (p == node)
                                 continue;
+                            DataType xp = ddc::coordinate(poly_start + p);
                             for (std::size_t k(1); k < n; ++k) {
                                 derivs(j, n) -= neg_1_pow(n + 1 - k) * m_weights[p] * derivs(j, k)
-                                                / factorial(k) / ipow(node - p, n - k);
+                                                / factorial(k)
+                                                / Kokkos::pow(xi - xp, n - k);
                             }
                         }
                         derivs(j, n) *= factorial(n) / m_weights[node];
@@ -376,7 +380,7 @@ public:
             int icell = static_cast<int>(offset);
             DataType local_offset = offset - icell;
             int node(-1);
-            if (local_offset <= eps or icell == degree()) {
+            if (local_offset <= eps) {
                 node = icell;
             } else if ((local_offset - 1) >= -eps) {
                 node = icell + 1;
@@ -401,12 +405,12 @@ public:
                 Idx<knot_grid> poly_start,
                 DataType offset) const
         {
-            DataType dx = ddc::discrete_space<knot_grid>().step();
+            //DataType dx = ddc::discrete_space<knot_grid>().step();
             for (int i(0); i < D + 1; ++i) {
-                DataType numerator = m_weights[i] / (dx * (offset - i));
+                DataType numerator = m_weights[i] / (offset - i);
                 DataType denominator(0.0);
                 for (int j(0); j < D + 1; ++j) {
-                    denominator += m_weights[j] / (dx * (offset - j));
+                    denominator += m_weights[j] / (offset - j);
                 }
                 values(i) = numerator / denominator;
             }
