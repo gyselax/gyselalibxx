@@ -1,0 +1,672 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classNDLagrangeEvaluator" kind="class" language="C++" prot="public">
+    <compoundname>NDLagrangeEvaluator</compoundname>
+    <includes refid="nd__lagrange__evaluator_8hpp" local="no">nd_lagrange_evaluator.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class HeadEvaluator</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>Evaluators1D</declname>
+        <defname>Evaluators1D</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1abc233087240378eee9b7b06bed38bda2" prot="private" static="no">
+        <type>std::conditional_t&lt;(sizeof...(Evaluators1D) &gt; 1), <ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref>&lt; Evaluators1D... &gt;, ddc::type_seq_element_t&lt; 0, ddc::detail::TypeSeq&lt; Evaluators1D... &gt; &gt; &gt;</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::nd_minus_1_evaluator_type =  std::conditional_t&lt; (sizeof...(Evaluators1D) &gt; 1), NDLagrangeEvaluator&lt;Evaluators1D...&gt;, ddc::type_seq_element_t&lt;0, ddc::detail::TypeSeq&lt;Evaluators1D...&gt; &gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>nd_minus_1_evaluator_type</name>
+        <qualifiedname>NDLagrangeEvaluator::nd_minus_1_evaluator_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1af4f756c8b981e6245fde3dd39846f6dd" prot="private" static="no">
+        <type>typename HeadEvaluator::lagrange_basis_type</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::HeadBasis =  typename HeadEvaluator::lagrange_basis_type</definition>
+        <argsstring></argsstring>
+        <name>HeadBasis</name>
+        <qualifiedname>NDLagrangeEvaluator::HeadBasis</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1a906410eb15683caea72617cec47f423f" prot="private" static="no">
+        <type>typename HeadEvaluator::coeff_grid_type</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::HeadCoeffGrid =  typename HeadEvaluator::coeff_grid_type</definition>
+        <argsstring></argsstring>
+        <name>HeadCoeffGrid</name>
+        <qualifiedname>NDLagrangeEvaluator::HeadCoeffGrid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1abd73020a1f2a43ea8da630d0f91eeaee" prot="private" static="no">
+        <type>typename HeadBasis::continuous_dimension_type</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::HeadContDim =  typename HeadBasis::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>HeadContDim</name>
+        <qualifiedname>NDLagrangeEvaluator::HeadContDim</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1a6cb6f01be35c143a8a2a59f5cdf9554f" prot="private" static="no">
+        <type>typename HeadEvaluator::evaluation_idx_range_type</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::IdxRangeHeadEval =  typename HeadEvaluator::evaluation_idx_range_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeHeadEval</name>
+        <qualifiedname>NDLagrangeEvaluator::IdxRangeHeadEval</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1a307f1aa39ca34a93bbeed8963d655bf5" prot="public" static="no">
+        <type>typename HeadEvaluator::exec_space</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::exec_space =  typename HeadEvaluator::exec_space</definition>
+        <argsstring></argsstring>
+        <name>exec_space</name>
+        <qualifiedname>NDLagrangeEvaluator::exec_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos execution space. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" prot="public" static="no">
+        <type>typename HeadEvaluator::memory_space</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::memory_space =  typename HeadEvaluator::memory_space</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>NDLagrangeEvaluator::memory_space</qualifiedname>
+        <briefdescription>
+<para>The type of the Kokkos memory space. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" prot="public" static="no">
+        <type>typename HeadEvaluator::data_type</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::data_type =  typename HeadEvaluator::data_type</definition>
+        <argsstring></argsstring>
+        <name>data_type</name>
+        <qualifiedname>NDLagrangeEvaluator::data_type</qualifiedname>
+        <briefdescription>
+<para>The data type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1ac6444ea0210b96fbfca636f42077c967" prot="public" static="no">
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; type_seq_cat_t&lt; ddc::to_type_seq_t&lt; IdxRangeHeadEval &gt;, ddc::to_type_seq_t&lt; typename Evaluators1D::evaluation_idx_range_type &gt;... &gt; &gt;</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::evaluation_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;type_seq_cat_t&lt; ddc::to_type_seq_t&lt;IdxRangeHeadEval&gt;, ddc::to_type_seq_t&lt;typename Evaluators1D::evaluation_idx_range_type&gt;...&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>evaluation_idx_range_type</name>
+        <qualifiedname>NDLagrangeEvaluator::evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the index range for the ND evaluation mesh used by this class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1a31f3ed8c37e9f62331f75e64eed9c92e" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationIdxRange</type>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationIdxRange&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>BatchedInterpolationIdxRange</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::batched_evaluation_idx_range_type =  BatchedInterpolationIdxRange</definition>
+        <argsstring></argsstring>
+        <name>batched_evaluation_idx_range_type</name>
+        <qualifiedname>NDLagrangeEvaluator::batched_evaluation_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the whole index range representing evaluation points including any batch dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batched discrete domain on which the interpolation points are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1aa2ed85ce3283c2dd15b117b5d69f64f5" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationIdxRange</type>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationIdxRange&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_remove_t&lt; ddc::to_type_seq_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to_type_seq_t&lt; <ref refid="classNDLagrangeEvaluator_1ac6444ea0210b96fbfca636f42077c967" kindref="member">evaluation_idx_range_type</ref> &gt; &gt; &gt;</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::batch_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_remove_t&lt; ddc::to_type_seq_t&lt;BatchedInterpolationIdxRange&gt;, ddc::to_type_seq_t&lt;evaluation_idx_range_type&gt; &gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>batch_idx_range_type</name>
+        <qualifiedname>NDLagrangeEvaluator::batch_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the batch index range (obtained by removing the dimensions of interest from the whole domain). </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batched index range on which the interpolation points are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="109" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1ab58868beecca408992d3210df35ebfbf" prot="public" static="no">
+        <type>IdxRange&lt; HeadCoeffGrid, typename Evaluators1D::coeff_grid_type... &gt;</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::coeff_idx_range_type =  IdxRange&lt;HeadCoeffGrid, typename Evaluators1D::coeff_grid_type...&gt;</definition>
+        <argsstring></argsstring>
+        <name>coeff_idx_range_type</name>
+        <qualifiedname>NDLagrangeEvaluator::coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the ND index range on which the Lagrange coefficients are defined. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="112" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="112" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classNDLagrangeEvaluator_1aa6a950abe3a7cd3a7aacde18d7f74e76" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class BatchedInterpolationIdxRange</type>
+          </param>
+          <param>
+            <type>class</type>
+            <defval>std::enable_if_t&lt;ddc::is_discrete_domain_v&lt;BatchedInterpolationIdxRange&gt;&gt;</defval>
+          </param>
+        </templateparamlist>
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; BatchedInterpolationIdxRange &gt;, ddc::to_type_seq_t&lt; <ref refid="classNDLagrangeEvaluator_1ac6444ea0210b96fbfca636f42077c967" kindref="member">evaluation_idx_range_type</ref> &gt;, ddc::to_type_seq_t&lt; <ref refid="classNDLagrangeEvaluator_1ab58868beecca408992d3210df35ebfbf" kindref="member">coeff_idx_range_type</ref> &gt; &gt; &gt;</type>
+        <definition>using NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::batched_coeff_idx_range_type =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt;BatchedInterpolationIdxRange&gt;, ddc::to_type_seq_t&lt;evaluation_idx_range_type&gt;, ddc::to_type_seq_t&lt;coeff_idx_range_type&gt; &gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>batched_coeff_idx_range_type</name>
+        <qualifiedname>NDLagrangeEvaluator::batched_coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The type of the ND index range on which the Lagrange coefficients are defined plus any batch dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>The</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>batched index range on which the interpolation points are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="123" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="127" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classNDLagrangeEvaluator_1af267ffa27bb9aeabf2418c7f2c6162da" prot="private" static="no" mutable="no">
+        <type>HeadEvaluator</type>
+        <definition>HeadEvaluator NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::m_head_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_head_evaluator</name>
+        <qualifiedname>NDLagrangeEvaluator::m_head_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="67" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classNDLagrangeEvaluator_1ab9ad2a8a9fb8a286ce2b5cbdea7f3a35" prot="private" static="no" mutable="no">
+        <type>nd_minus_1_evaluator_type</type>
+        <definition>nd_minus_1_evaluator_type NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::m_tail_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_tail_evaluator</name>
+        <qualifiedname>NDLagrangeEvaluator::m_tail_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="68" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="68" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1afb145c537b203fd22b1f55e9eb80a29c" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::NDLagrangeEvaluator</definition>
+        <argsstring>(HeadEvaluator const &amp;head_eval, Evaluators1D const &amp;... tail_evals)</argsstring>
+        <name>NDLagrangeEvaluator</name>
+        <qualifiedname>NDLagrangeEvaluator::NDLagrangeEvaluator</qualifiedname>
+        <param>
+          <type>HeadEvaluator const &amp;</type>
+          <declname>head_eval</declname>
+        </param>
+        <param>
+          <type>Evaluators1D const &amp;...</type>
+          <declname>tail_evals</declname>
+        </param>
+        <briefdescription>
+<para>Construct from a sequence of 1D LagrangeEvaluators, one per dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>head_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluator for the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>tail_evals</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluators for the remaining dimensions. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="136" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="136" bodyend="140"/>
+      </memberdef>
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1a44d4d2b584d8f0dc8ef23e326fc8df29" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::NDLagrangeEvaluator</definition>
+        <argsstring>(NDLagrangeEvaluator const &amp;x)=default</argsstring>
+        <name>NDLagrangeEvaluator</name>
+        <qualifiedname>NDLagrangeEvaluator::NDLagrangeEvaluator</qualifiedname>
+        <param>
+          <type><ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Copy-construct. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="143" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1a13a799cb538756bdb1a04e10d0ea4eaa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::NDLagrangeEvaluator</definition>
+        <argsstring>(NDLagrangeEvaluator &amp;&amp;x)=default</argsstring>
+        <name>NDLagrangeEvaluator</name>
+        <qualifiedname>NDLagrangeEvaluator::NDLagrangeEvaluator</qualifiedname>
+        <param>
+          <type><ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Move-construct. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="146" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1ad7b5f8366ceaf8be1605a271d47ea92f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::~NDLagrangeEvaluator</definition>
+        <argsstring>()=default</argsstring>
+        <name>~NDLagrangeEvaluator</name>
+        <qualifiedname>NDLagrangeEvaluator::~NDLagrangeEvaluator</qualifiedname>
+        <briefdescription>
+<para>Destruct. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="149" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1a175c19a2f91cda2189a36972ab175232" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref> &amp;</type>
+        <definition>NDLagrangeEvaluator &amp; NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::operator=</definition>
+        <argsstring>(NDLagrangeEvaluator const &amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>NDLagrangeEvaluator::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Copy-assign. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="152" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1a67cdd130e3975b0236351f3097199804" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref> &amp;</type>
+        <definition>NDLagrangeEvaluator &amp; NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::operator=</definition>
+        <argsstring>(NDLagrangeEvaluator &amp;&amp;x)=default</argsstring>
+        <name>operator=</name>
+        <qualifiedname>NDLagrangeEvaluator::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classNDLagrangeEvaluator" kindref="compound">NDLagrangeEvaluator</ref> &amp;&amp;</type>
+          <declname>x</declname>
+        </param>
+        <briefdescription>
+<para>Move-assign. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="155" column="25"/>
+      </memberdef>
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1a7e576bc8e8c98eb3688b5bdeb58cb48e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>CoordsDims</declname>
+            <defname>CoordsDims</defname>
+          </param>
+          <param>
+            <type>class NdCoeffIdxRange</type>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION <ref refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kindref="member">data_type</ref></type>
+        <definition>KOKKOS_FUNCTION data_type NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::operator()</definition>
+        <argsstring>(Coord&lt; CoordsDims... &gt; const &amp;coord, ConstField&lt; data_type, NdCoeffIdxRange, memory_space, Layout &gt; const &amp;coeff) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>NDLagrangeEvaluator::operator()</qualifiedname>
+        <param>
+          <type>Coord&lt; CoordsDims... &gt; const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; <ref refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kindref="member">data_type</ref>, NdCoeffIdxRange, <ref refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" kindref="member">memory_space</ref>, Layout &gt; const &amp;</type>
+          <declname>coeff</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the ND Lagrange polynomial at a single coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>coord</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND evaluation coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coeff</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND Lagrange coefficient field (no batch dimensions). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The interpolated value. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="165" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="165" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1ae4d5c978b81d2eee2ccbc665f21685c0" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+          <param>
+            <type>class Layout3</type>
+          </param>
+          <param>
+            <type>class IdxRangeBatched</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>CoordsDims</declname>
+            <defname>CoordsDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::operator()</definition>
+        <argsstring>(Field&lt; data_type, IdxRangeBatched, memory_space, Layout1 &gt; lagrange_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatched, memory_space, Layout2 &gt; coords_eval, ConstField&lt; data_type, batched_coeff_idx_range_type&lt; IdxRangeBatched &gt;, memory_space, Layout3 &gt; lagrange_coef) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>NDLagrangeEvaluator::operator()</qualifiedname>
+        <param>
+          <type>Field&lt; <ref refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kindref="member">data_type</ref>, IdxRangeBatched, <ref refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" kindref="member">memory_space</ref>, Layout1 &gt;</type>
+          <declname>lagrange_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatched, <ref refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" kindref="member">memory_space</ref>, Layout2 &gt;</type>
+          <declname>coords_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; <ref refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kindref="member">data_type</ref>, <ref refid="classNDLagrangeEvaluator_1aa6a950abe3a7cd3a7aacde18d7f74e76" kindref="member">batched_coeff_idx_range_type</ref>&lt; IdxRangeBatched &gt;, <ref refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" kindref="member">memory_space</ref>, Layout3 &gt;</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the ND Lagrange polynomial on a mesh (with explicit coordinates). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The evaluation is parallelised over the full (batch + ND evaluation) domain. For each point the single-point operator() is called with the corresponding coordinate and batch-sliced coefficient field.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">lagrange_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolated values on the full batched domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coords_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The evaluation coordinates on the full batched domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lagrange_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Lagrange coefficients on the batched coefficient domain. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="214" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="214" bodyend="236"/>
+      </memberdef>
+      <memberdef kind="function" id="classNDLagrangeEvaluator_1a180b9a6b2ee4a00bc7a6225932da6399" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+          <param>
+            <type>class IdxRangeBatched</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void NDLagrangeEvaluator&lt; HeadEvaluator, Evaluators1D &gt;::operator()</definition>
+        <argsstring>(Field&lt; data_type, IdxRangeBatched, memory_space, Layout1 &gt; lagrange_eval, ConstField&lt; data_type, batched_coeff_idx_range_type&lt; IdxRangeBatched &gt;, memory_space, Layout2 &gt; lagrange_coef) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>NDLagrangeEvaluator::operator()</qualifiedname>
+        <param>
+          <type>Field&lt; <ref refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kindref="member">data_type</ref>, IdxRangeBatched, <ref refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" kindref="member">memory_space</ref>, Layout1 &gt;</type>
+          <declname>lagrange_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; <ref refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kindref="member">data_type</ref>, <ref refid="classNDLagrangeEvaluator_1aa6a950abe3a7cd3a7aacde18d7f74e76" kindref="member">batched_coeff_idx_range_type</ref>&lt; IdxRangeBatched &gt;, <ref refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" kindref="member">memory_space</ref>, Layout2 &gt;</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the ND Lagrange polynomial on a mesh (coordinates from the grid). </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Coordinates are derived from the evaluation grid indices via ddc::coordinate. This variant requires all evaluation grids to be genuine discrete approximations of continuous dimensions.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">lagrange_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolated values on the full batched domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lagrange_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Lagrange coefficients on the batched coefficient domain. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="249" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="249" bodyend="272"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The ND Lagrange polynomial is defined as:  <formula id="317">\[
+  L(x_1, \ldots, x_N)
+  = \sum_{i_1=0}^{d_1}\dots\sum_{i_N=0}^{d_N} \prod_{j=1}^N f(x_1, \ldots, x_N) l_{j,i_j}(x_j)
+\]</formula> The evaluation is recursive:  <formula id="318">\[
+  L(x_1, \ldots, x_N)
+  = \sum_{i_1=0}^{d_1} l_{1,i_1}(x_1) L(x_2, \dots, x_N)
+\]</formula></para>
+<para>The recursion terminates when only one evaluator remains: in that case the tail type is the <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> itself and the 1D evaluation (including its configured extrapolation rules) is invoked directly.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>HeadEvaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D <ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref> for the first dimension. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Evaluators1D</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The 1D LagrangeEvaluators for the remaining dimensions. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" line="37" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp" bodystart="38" bodyend="273"/>
+    <listofallmembers>
+      <member refid="classNDLagrangeEvaluator_1aa2ed85ce3283c2dd15b117b5d69f64f5" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>batch_idx_range_type</name></member>
+      <member refid="classNDLagrangeEvaluator_1aa6a950abe3a7cd3a7aacde18d7f74e76" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>batched_coeff_idx_range_type</name></member>
+      <member refid="classNDLagrangeEvaluator_1a31f3ed8c37e9f62331f75e64eed9c92e" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>batched_evaluation_idx_range_type</name></member>
+      <member refid="classNDLagrangeEvaluator_1ab58868beecca408992d3210df35ebfbf" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>coeff_idx_range_type</name></member>
+      <member refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>data_type</name></member>
+      <member refid="classNDLagrangeEvaluator_1ac6444ea0210b96fbfca636f42077c967" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>evaluation_idx_range_type</name></member>
+      <member refid="classNDLagrangeEvaluator_1a307f1aa39ca34a93bbeed8963d655bf5" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>exec_space</name></member>
+      <member refid="classNDLagrangeEvaluator_1af4f756c8b981e6245fde3dd39846f6dd" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>HeadBasis</name></member>
+      <member refid="classNDLagrangeEvaluator_1a906410eb15683caea72617cec47f423f" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>HeadCoeffGrid</name></member>
+      <member refid="classNDLagrangeEvaluator_1abd73020a1f2a43ea8da630d0f91eeaee" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>HeadContDim</name></member>
+      <member refid="classNDLagrangeEvaluator_1a6cb6f01be35c143a8a2a59f5cdf9554f" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>IdxRangeHeadEval</name></member>
+      <member refid="classNDLagrangeEvaluator_1af267ffa27bb9aeabf2418c7f2c6162da" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>m_head_evaluator</name></member>
+      <member refid="classNDLagrangeEvaluator_1ab9ad2a8a9fb8a286ce2b5cbdea7f3a35" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>m_tail_evaluator</name></member>
+      <member refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>memory_space</name></member>
+      <member refid="classNDLagrangeEvaluator_1abc233087240378eee9b7b06bed38bda2" prot="private" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>nd_minus_1_evaluator_type</name></member>
+      <member refid="classNDLagrangeEvaluator_1afb145c537b203fd22b1f55e9eb80a29c" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>NDLagrangeEvaluator</name></member>
+      <member refid="classNDLagrangeEvaluator_1a44d4d2b584d8f0dc8ef23e326fc8df29" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>NDLagrangeEvaluator</name></member>
+      <member refid="classNDLagrangeEvaluator_1a13a799cb538756bdb1a04e10d0ea4eaa" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>NDLagrangeEvaluator</name></member>
+      <member refid="classNDLagrangeEvaluator_1a7e576bc8e8c98eb3688b5bdeb58cb48e" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>operator()</name></member>
+      <member refid="classNDLagrangeEvaluator_1ae4d5c978b81d2eee2ccbc665f21685c0" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>operator()</name></member>
+      <member refid="classNDLagrangeEvaluator_1a180b9a6b2ee4a00bc7a6225932da6399" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>operator()</name></member>
+      <member refid="classNDLagrangeEvaluator_1a175c19a2f91cda2189a36972ab175232" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>operator=</name></member>
+      <member refid="classNDLagrangeEvaluator_1a67cdd130e3975b0236351f3097199804" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>operator=</name></member>
+      <member refid="classNDLagrangeEvaluator_1ad7b5f8366ceaf8be1605a271d47ea92f" prot="public" virt="non-virtual"><scope>NDLagrangeEvaluator</scope><name>~NDLagrangeEvaluator</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

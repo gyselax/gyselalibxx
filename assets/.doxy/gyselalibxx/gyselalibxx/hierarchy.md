@@ -143,6 +143,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md) _A class to call all the builders of all the patches once._ 
 * **class** [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md) _A class to call all the builders of all the patches once._ 
 * **class** [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) _A class to evaluate all the splines of all the patches at once._ 
+* **class** [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md) _Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations._ 
 * **class** [**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._ 
 * **class** [**OnionPatchLocator**](classOnionPatchLocator.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._
 * **class** [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._

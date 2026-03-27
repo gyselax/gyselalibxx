@@ -14,6 +14,7 @@
     <innerfile refid="lagrange__basis__uniform_8hpp">lagrange_basis_uniform.hpp</innerfile>
     <innerfile refid="lagrange__evaluator_8hpp">lagrange_evaluator.hpp</innerfile>
     <innerfile refid="lagrange__interpolation_8hpp">lagrange_interpolation.hpp</innerfile>
+    <innerfile refid="nd__lagrange__evaluator_8hpp">nd_lagrange_evaluator.hpp</innerfile>
     <innerfile refid="spline__interpolation_8hpp">spline_interpolation.hpp</innerfile>
     <innerfile refid="spline__interpolator__2d_8hpp">spline_interpolator_2d.hpp</innerfile>
     <briefdescription>

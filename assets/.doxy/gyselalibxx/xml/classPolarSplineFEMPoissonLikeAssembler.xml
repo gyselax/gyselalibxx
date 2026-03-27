@@ -893,7 +893,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>.</para>
+<para>An evaluator for evaluating 2D splines on <formula id="376">$(r,\theta)$</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1107,7 +1107,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="376">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1213,7 +1213,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="376">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1319,7 +1319,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="376">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1364,7 +1364,7 @@
           <declname>nnz_per_row</declname>
         </param>
         <briefdescription>
-<para>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on <formula id="373">$(r,\theta)$</formula> splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1). </para>
+<para>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on <formula id="376">$(r,\theta)$</formula> splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1). </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -1477,7 +1477,7 @@
 <parametername direction="in">spline_evaluator</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>An evaluator for evaluating 2D splines on <formula id="373">$(r,\theta)$</formula>. </para>
+<para>An evaluator for evaluating 2D splines on <formula id="376">$(r,\theta)$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1673,7 +1673,7 @@
 <para>An operator to assemble a Poisson-like stiffness matrix using polar B-splines. </para>
     </briefdescription>
     <detaileddescription>
-<para>Assemble the finite element stiffness matrix with entries <formula id="370">$ \int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx $</formula> for <formula id="371">$0 &lt; i,j &lt; N $</formula> where <formula id="372">$ N $</formula> is the number of polar splines. We only consider splines that vanish on the boundary.</para>
+<para>Assemble the finite element stiffness matrix with entries <formula id="373">$ \int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx $</formula> for <formula id="374">$0 &lt; i,j &lt; N $</formula> where <formula id="375">$ N $</formula> is the number of polar splines. We only consider splines that vanish on the boundary.</para>
 <para>For more details see the <computeroutput><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref></computeroutput> and Emily Bourne&apos;s thesis (&quot;Non-Uniform Numerical Schemes for the Modelling of Turbulence
 in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
@@ -1696,7 +1696,7 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
 <parametername><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The type of the 2D polar B-splines (on the coordinate system <formula id="373">$(r,\theta)$</formula> including B-splines which traverse the O point). </para>
+<para>The type of the 2D polar B-splines (on the coordinate system <formula id="376">$(r,\theta)$</formula> including B-splines which traverse the O point). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

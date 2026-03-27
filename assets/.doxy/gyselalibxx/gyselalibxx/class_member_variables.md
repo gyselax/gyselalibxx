@@ -209,6 +209,8 @@
 * **m\_extrapolation\_rule** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **m\_patch\_locator** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **m\_tuple** ([**MultipatchType**](classMultipatchType.md))
+* **m\_head\_evaluator** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
+* **m\_tail\_evaluator** ([**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md))
 * **m\_fequilibrium** ([**NoPerturbInitialisation**](classNoPerturbInitialisation.md), [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md))
 * **m\_break\_point\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **m\_knot\_domain** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))

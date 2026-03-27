@@ -517,7 +517,7 @@
 <parametername direction="in">deriv_order</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The index of the derivative order (e.g. Idx&lt;ddc::Deriv&lt;R&gt;, ddc::Deriv&lt;Theta&gt;&gt;(1,3) for the cross derivative <formula id="322">$ dr d \theta^3 $</formula>.</para>
+<para>The index of the derivative order (e.g. Idx&lt;ddc::Deriv&lt;R&gt;, ddc::Deriv&lt;Theta&gt;&gt;(1,3) for the cross derivative <formula id="325">$ dr d \theta^3 $</formula>.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

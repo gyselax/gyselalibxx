@@ -346,6 +346,7 @@
 
 ## n
 
+* [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md)
 * [**NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md)
 ([**ddcHelper**](namespaceddcHelper.md))
 * [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md)

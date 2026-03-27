@@ -1717,6 +1717,7 @@
     <member refid="classLagrangeEvaluator_1a1f62d58f6ca9f533846027355a3b5d2c" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
     <member refid="classLagrangeEvaluator_1a653c9afe4c6a14def4643d12e1546bb0" kind="typedef"><name>lower_extrapolation_rule_type</name></member>
     <member refid="classLagrangeEvaluator_1aa6a81e8a7ad93e886018bcfaa7002de2" kind="typedef"><name>upper_extrapolation_rule_type</name></member>
+    <member refid="classLagrangeEvaluator_1a65ef07a9dbb9b563ced71e566f44bc35" kind="friend"><name>NDLagrangeEvaluator</name></member>
     <member refid="classLagrangeEvaluator_1a34aba36b5a0acf596daa83f7a8bd0013" kind="variable"><name>m_lower_extrap_rule</name></member>
     <member refid="classLagrangeEvaluator_1ae869b4e35a85568d53d75f533163369a" kind="variable"><name>m_upper_extrap_rule</name></member>
     <member refid="classLagrangeEvaluator_1aa422bd8a3350eed1e85c8c5609a17c1f" kind="function"><name>LagrangeEvaluator</name></member>
@@ -1731,6 +1732,7 @@
     <member refid="classLagrangeEvaluator_1a940bc8a12231b0dc1d82dd5b60f0ea75" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1ad4bb1d5d33263f705594b4a999eec9dd" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" kind="function"><name>eval</name></member>
+    <member refid="classLagrangeEvaluator_1ab6bb89e95f3a481282e212ac1a76d006" kind="function"><name>find_stencil</name></member>
     <member refid="classLagrangeEvaluator_1a5dd80d5c33512b83f508a62bc3657093" kind="function"><name>eval_no_bc</name></member>
     <member refid="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" kind="function"><name>getclosest</name></member>
   </compound>
@@ -2230,6 +2232,32 @@
     <member refid="classMultipatchType_1a4257d5324630c6b8326d8601b5fa1d86" kind="function"><name>get</name></member>
     <member refid="classMultipatchType_1a6a44d19ff0704be6f0b4e1d476cefbcc" kind="function"><name>get_tuple</name></member>
     <member refid="classMultipatchType_1a8bd7585483ea579822748d6100ae3edb" kind="function"><name>size</name></member>
+  </compound>
+  <compound refid="classNDLagrangeEvaluator" kind="class"><name>NDLagrangeEvaluator</name>
+    <member refid="classNDLagrangeEvaluator_1abc233087240378eee9b7b06bed38bda2" kind="typedef"><name>nd_minus_1_evaluator_type</name></member>
+    <member refid="classNDLagrangeEvaluator_1af4f756c8b981e6245fde3dd39846f6dd" kind="typedef"><name>HeadBasis</name></member>
+    <member refid="classNDLagrangeEvaluator_1a906410eb15683caea72617cec47f423f" kind="typedef"><name>HeadCoeffGrid</name></member>
+    <member refid="classNDLagrangeEvaluator_1abd73020a1f2a43ea8da630d0f91eeaee" kind="typedef"><name>HeadContDim</name></member>
+    <member refid="classNDLagrangeEvaluator_1a6cb6f01be35c143a8a2a59f5cdf9554f" kind="typedef"><name>IdxRangeHeadEval</name></member>
+    <member refid="classNDLagrangeEvaluator_1a307f1aa39ca34a93bbeed8963d655bf5" kind="typedef"><name>exec_space</name></member>
+    <member refid="classNDLagrangeEvaluator_1ac0a2ca5dad59bded2d52a7ad1c3564c8" kind="typedef"><name>memory_space</name></member>
+    <member refid="classNDLagrangeEvaluator_1a1eb3e3ac1a65284263d6d347581b2581" kind="typedef"><name>data_type</name></member>
+    <member refid="classNDLagrangeEvaluator_1ac6444ea0210b96fbfca636f42077c967" kind="typedef"><name>evaluation_idx_range_type</name></member>
+    <member refid="classNDLagrangeEvaluator_1a31f3ed8c37e9f62331f75e64eed9c92e" kind="typedef"><name>batched_evaluation_idx_range_type</name></member>
+    <member refid="classNDLagrangeEvaluator_1aa2ed85ce3283c2dd15b117b5d69f64f5" kind="typedef"><name>batch_idx_range_type</name></member>
+    <member refid="classNDLagrangeEvaluator_1ab58868beecca408992d3210df35ebfbf" kind="typedef"><name>coeff_idx_range_type</name></member>
+    <member refid="classNDLagrangeEvaluator_1aa6a950abe3a7cd3a7aacde18d7f74e76" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
+    <member refid="classNDLagrangeEvaluator_1af267ffa27bb9aeabf2418c7f2c6162da" kind="variable"><name>m_head_evaluator</name></member>
+    <member refid="classNDLagrangeEvaluator_1ab9ad2a8a9fb8a286ce2b5cbdea7f3a35" kind="variable"><name>m_tail_evaluator</name></member>
+    <member refid="classNDLagrangeEvaluator_1afb145c537b203fd22b1f55e9eb80a29c" kind="function"><name>NDLagrangeEvaluator</name></member>
+    <member refid="classNDLagrangeEvaluator_1a44d4d2b584d8f0dc8ef23e326fc8df29" kind="function"><name>NDLagrangeEvaluator</name></member>
+    <member refid="classNDLagrangeEvaluator_1a13a799cb538756bdb1a04e10d0ea4eaa" kind="function"><name>NDLagrangeEvaluator</name></member>
+    <member refid="classNDLagrangeEvaluator_1ad7b5f8366ceaf8be1605a271d47ea92f" kind="function"><name>~NDLagrangeEvaluator</name></member>
+    <member refid="classNDLagrangeEvaluator_1a175c19a2f91cda2189a36972ab175232" kind="function"><name>operator=</name></member>
+    <member refid="classNDLagrangeEvaluator_1a67cdd130e3975b0236351f3097199804" kind="function"><name>operator=</name></member>
+    <member refid="classNDLagrangeEvaluator_1a7e576bc8e8c98eb3688b5bdeb58cb48e" kind="function"><name>operator()</name></member>
+    <member refid="classNDLagrangeEvaluator_1ae4d5c978b81d2eee2ccbc665f21685c0" kind="function"><name>operator()</name></member>
+    <member refid="classNDLagrangeEvaluator_1a180b9a6b2ee4a00bc7a6225932da6399" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classddcHelper_1_1NonUniformInterpolationPoints" kind="class"><name>ddcHelper::NonUniformInterpolationPoints</name>
     <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1ab8ff930d36034282ebc3165145af6ab9" kind="typedef"><name>Dim</name></member>
@@ -3237,13 +3265,13 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d226" kind="namespace"><name>@226</name>
+  <compound refid="namespace_0d227" kind="namespace"><name>@227</name>
   </compound>
-  <compound refid="namespace_0d228" kind="namespace"><name>@228</name>
+  <compound refid="namespace_0d229" kind="namespace"><name>@229</name>
   </compound>
-  <compound refid="namespace_0d230" kind="namespace"><name>@230</name>
+  <compound refid="namespace_0d231" kind="namespace"><name>@231</name>
   </compound>
-  <compound refid="namespace_0d232" kind="namespace"><name>@232</name>
+  <compound refid="namespace_0d233" kind="namespace"><name>@233</name>
   </compound>
   <compound refid="namespace_0d97" kind="namespace"><name>@97</name>
   </compound>
@@ -4025,6 +4053,8 @@
   <compound refid="lagrange__evaluator_8hpp" kind="file"><name>lagrange_evaluator.hpp</name>
   </compound>
   <compound refid="lagrange__interpolation_8hpp" kind="file"><name>lagrange_interpolation.hpp</name>
+  </compound>
+  <compound refid="nd__lagrange__evaluator_8hpp" kind="file"><name>nd_lagrange_evaluator.hpp</name>
   </compound>
   <compound refid="bernstein_8hpp" kind="file"><name>bernstein.hpp</name>
   </compound>

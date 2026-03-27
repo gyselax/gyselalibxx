@@ -620,6 +620,9 @@ public:
 
 
 private:
+    template &lt;class, class...&gt;
+    friend class NDLagrangeEvaluator;
+
     LowerExtrapolationRule m_lower_extrap_rule;
 
     UpperExtrapolationRule m_upper_extrap_rule;
@@ -781,6 +784,43 @@ private:
         return eval_no_bc(Idx&lt;&gt;(), coord_eval_interest, lagrange_coef);
     }
 
+    KOKKOS_INLINE_FUNCTION Idx&lt;coeff_grid_type&gt; find_stencil(
+            Coord&lt;continuous_dimension_type&gt;&amp; coord) const
+    {
+        Idx&lt;coeff_grid_type&gt; const closest_knot = getclosest(coord);
+        Idx&lt;coeff_grid_type&gt; const first_knot
+                = ddc::discrete_space&lt;lagrange_basis_type&gt;().break_point_domain().front();
+        Idx&lt;coeff_grid_type&gt; const last_knot
+                = ddc::discrete_space&lt;lagrange_basis_type&gt;().break_point_domain().back();
+        // The step from the closest knot to the start of the stencil
+        IdxStep&lt;coeff_grid_type&gt; const step(
+                -static_cast&lt;int&gt;(lagrange_basis_type::degree() / 2)
+                - static_cast&lt;int&gt;(lagrange_basis_type::degree() % 2)
+                          * static_cast&lt;int&gt;(ddc::coordinate(closest_knot) &gt; coord));
+        Idx&lt;coeff_grid_type&gt; first_lagrange_knot;
+        if constexpr (lagrange_basis_type::is_periodic()) {
+            first_lagrange_knot = closest_knot
+                                  + (last_knot - first_knot)
+                                            * static_cast&lt;int&gt;((first_knot - closest_knot) &gt; step)
+                                  + step;
+            if (first_lagrange_knot &gt; closest_knot) {
+                coord += ddc::discrete_space&lt;lagrange_basis_type&gt;().length();
+            }
+        } else {
+            if ((first_knot - closest_knot) &gt; step) {
+                first_lagrange_knot = first_knot;
+            } else {
+                first_lagrange_knot = closest_knot + step;
+                Idx&lt;coeff_grid_type&gt; const last_possible
+                        = last_knot - lagrange_basis_type::degree();
+                if (first_lagrange_knot &gt; last_possible) {
+                    first_lagrange_knot = last_possible;
+                }
+            }
+        }
+        return first_lagrange_knot;
+    }
+
     template &lt;class... DerivDims, class Layout, class... CoordsDims&gt;
     KOKKOS_INLINE_FUNCTION DataType eval_no_bc(
             Idx&lt;DerivDims...&gt; const&amp; deriv_order,
@@ -799,51 +839,18 @@ private:
                                 ddc::detail::TypeSeq&lt;DerivDims...&gt;,
                                 ddc::detail::TypeSeq&lt;deriv_dim&gt;&gt;,
                 "The only valid dimension for deriv_order is Deriv&lt;Dim&gt;");
+        static_assert(sizeof...(DerivDims) == 0);
 
         std::array&lt;DataType, lagrange_basis_type::degree() + 1&gt; vals_ptr;
         Kokkos::mdspan&lt;
                 DataType,
                 Kokkos::extents&lt;std::size_t, lagrange_basis_type::degree() + 1&gt;&gt; const
                 vals(vals_ptr.data());
-        Coord&lt;continuous_dimension_type&gt; coord_eval_interest(coord_eval);
-        Idx&lt;knot_grid&gt; closest_knot = getclosest(coord_eval);
-        Idx&lt;knot_grid&gt; first_knot
-                = ddc::discrete_space&lt;LagrangeBasis&gt;().break_point_domain().front();
-        Idx&lt;knot_grid&gt; last_knot = ddc::discrete_space&lt;LagrangeBasis&gt;().break_point_domain().back();
-        // The step from the closest knot to the start of the domain
-        IdxStep&lt;knot_grid&gt; step(
-                -static_cast&lt;int&gt;(lagrange_basis_type::degree() / 2) // back over half the domain
-                - static_cast&lt;int&gt;(
-                          lagrange_basis_type::degree()
-                          % 2) // ensure coord is in the central cell if even number of points
-                          * static_cast&lt;int&gt;(ddc::coordinate(closest_knot) &gt; coord_eval));
-        Idx&lt;knot_grid&gt; first_lagrange_knot;
 
-        if constexpr (lagrange_basis_type::is_periodic()) {
-            first_lagrange_knot = closest_knot
-                                  + (last_knot - first_knot)
-                                            * static_cast&lt;int&gt;((first_knot - closest_knot) &gt; step)
-                                  + step;
-            if (first_lagrange_knot &gt; closest_knot) {
-                coord_eval_interest
-                        = coord_eval_interest + ddc::discrete_space&lt;lagrange_basis_type&gt;().length();
-            }
-        } else {
-            if ((first_knot - closest_knot) &gt; step) {
-                // if first_lagrange_knot would be &lt; 0
-                first_lagrange_knot = first_knot;
-            } else {
-                first_lagrange_knot = closest_knot + step;
-                Idx&lt;knot_grid&gt; last_possible = last_knot - (lagrange_basis_type::degree());
-                if (first_lagrange_knot &gt; last_possible) {
-                    first_lagrange_knot = last_possible;
-                }
-            }
-        }
-
-        static_assert(sizeof...(DerivDims) == 0);
+        Coord&lt;continuous_dimension_type&gt; coord_interest(coord_eval);
+        Idx&lt;knot_grid&gt; first_lagrange_knot = find_stencil(coord_interest);
         ddc::discrete_space&lt;lagrange_basis_type&gt;()
-                .eval_basis(vals, coord_eval_interest, first_lagrange_knot);
+                .eval_basis(vals, coord_interest, first_lagrange_knot);
 
         DataType y = 0.0;
         for (std::size_t i = 0; i &lt; lagrange_basis_type::degree() + 1; ++i) {
