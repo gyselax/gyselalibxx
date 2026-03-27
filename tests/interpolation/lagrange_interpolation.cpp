@@ -196,6 +196,8 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
     ConstField<Coord<X>, IdxRange<GridX>> test_coords = get_const_field(test_coords_alloc);
 
     builder(lagrange_coeffs, get_const_field(function_values));
+
+    // Check between knots
     evaluator(function_values, get_const_field(test_coords), get_const_field(lagrange_coeffs));
 
     ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
@@ -207,9 +209,22 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
                 TOL);
     });
 
+    // Check at knots
+    evaluator(function_values, get_const_field(lagrange_coeffs));
+
+    ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
+
+    ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
+        EXPECT_NEAR(
+                function_values_host(idx),
+                polynomial(ddc::coordinate(idx), coeffs),
+                TOL);
+    });
+
     double dx_max = ddcHelper::maximum_distance_between_adjacent_points(idx_range);
 
     for (int n_deriv(1); n_deriv < degree; ++n_deriv) {
+        // Check between knots
         evaluator
                 .deriv(Idx<ddc::Deriv<X>>(n_deriv),
                        function_values,
@@ -222,6 +237,25 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
         for (int k(0); k < n_deriv; ++k) {
             falling_factorial *= (degree + 1 - k);
         }
+
+        ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
+            double tolerance = factorial(n_deriv) // max_norm
+                               * TOL
+                               * ((degree + 1) * n_deriv) // approx max of number of calculations
+                               / ipow(dx_max, n_deriv);
+            EXPECT_NEAR(
+                    function_values_host(idx),
+                    polynomial(test_coords_host_alloc(idx), coeffs, n_deriv),
+                    tolerance);
+        });
+
+        // Check at knots
+        evaluator
+                .deriv(Idx<ddc::Deriv<X>>(n_deriv),
+                       function_values,
+                       get_const_field(lagrange_coeffs));
+
+        ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
 
         ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
             double tolerance = factorial(n_deriv) // max_norm
