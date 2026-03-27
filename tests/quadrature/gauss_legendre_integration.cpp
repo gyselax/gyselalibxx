@@ -36,14 +36,14 @@ struct GaussLegendreFixture<std::tuple<
 using orders = std::integer_sequence<std::size_t, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10>;
 using domain_idx = std::integer_sequence<std::size_t, 0, 1, 2, 3>;
 
-using CasesTest = tuple_to_types_t<cartesian_product_t<orders, domain_idx>>;
+using Cases = tuple_to_types_t<cartesian_product_t<orders, domain_idx>>;
 
-TYPED_TEST_SUITE(GaussLegendreFixture, CasesTest);
+TYPED_TEST_SUITE(GaussLegendreFixture, Cases);
 
 class fn
 {
 public:
-    constexpr fn(std::size_t n) : m_n(n) {}
+    constexpr explicit fn(std::size_t n) : m_n(n) {}
 
     template <class Grid1D>
     KOKKOS_FUNCTION double operator()(Idx<Grid1D> idx) const noexcept
