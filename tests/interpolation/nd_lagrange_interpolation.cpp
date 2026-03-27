@@ -86,6 +86,17 @@ KOKKOS_FUNCTION DataType polynomial(Coord<Dim> coord, std::array<DataType, N> co
     return result;
 }
 
+template <class Dim, class DataType, std::size_t N>
+KOKKOS_FUNCTION DataType polynomial_deriv(Coord<Dim> coord, std::array<DataType, N> const& coeffs)
+{
+    DataType result = 0;
+    for (std::size_t j = 1; j < N; ++j) {
+        result += static_cast<DataType>(j) * coeffs[j]
+                  * static_cast<DataType>(Kokkos::pow(static_cast<DataType>(coord), j - 1));
+    }
+    return result;
+}
+
 template <class DataType, class Dim1, class Dim2, std::size_t N>
 void fill_polynomial_2d(
         Field<DataType, IdxRange<Dim1, Dim2>> poly_coeffs,
@@ -218,5 +229,142 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
                 static_cast<double>(result_host(idx)),
                 static_cast<double>(expected),
                 TOL * expected);
+    });
+}
+
+/**
+ * @brief Test that NDLagrangeEvaluator reproduces partial and cross-derivatives of a separable
+ * polynomial exactly.
+ *
+ * For f(x,y) = p(x)*q(y):
+ *   - d/dx f = p'(x)*q(y)
+ *   - d/dy f = p(x)*q'(y)
+ *   - d²/dxdy f = p'(x)*q'(y)
+ *
+ * Each of these is a polynomial of lower degree that the degree-D Lagrange evaluator reproduces
+ * exactly. We therefore expect only floating-point roundoff error.
+ */
+TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactDerivatives)
+{
+    using DataType = typename TestFixture::DataType;
+    using GridX = typename TestFixture::GridX;
+    using GridY = typename TestFixture::GridY;
+    using LagBasisX = typename TestFixture::LagBasisX;
+    using LagBasisY = typename TestFixture::LagBasisY;
+    using TestGridX = typename TestFixture::TestGridX;
+    using TestGridY = typename TestFixture::TestGridY;
+
+    constexpr std::size_t degree = TestFixture::degree;
+    static constexpr double TOL = TestFixture::TOL;
+
+    using EvalX = LagrangeEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            DataType,
+            LagBasisX,
+            TestGridX,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule>;
+    using EvalY = LagrangeEvaluator<
+            Kokkos::DefaultExecutionSpace,
+            Kokkos::DefaultExecutionSpace::memory_space,
+            DataType,
+            LagBasisY,
+            TestGridY,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule>;
+    using Eval2D = NDLagrangeEvaluator<EvalX, EvalY>;
+
+    using LagrangeKnotsX = std::conditional_t<
+            TestFixture::UNIFORM,
+            UniformLagrangeKnots<LagBasisX>,
+            NonUniformLagrangeKnots<LagBasisX>>;
+    using LagrangeKnotsY = std::conditional_t<
+            TestFixture::UNIFORM,
+            UniformLagrangeKnots<LagBasisY>,
+            NonUniformLagrangeKnots<LagBasisY>>;
+
+    Coord<X> xmin(0.0), xmax(1.0);
+    Coord<Y> ymin(0.0), ymax(1.0);
+    std::size_t const ncells = 10;
+
+    if constexpr (TestFixture::UNIFORM) {
+        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
+        ddc::init_discrete_space<GridY>(GridY::init(ymin, ymax, IdxStep<GridY>(ncells + 1)));
+    } else {
+        ddc::init_discrete_space<GridX>(
+                build_random_non_uniform_break_points(xmin, xmax, IdxStep<GridX>(ncells), 0.5));
+        ddc::init_discrete_space<GridY>(
+                build_random_non_uniform_break_points(ymin, ymax, IdxStep<GridY>(ncells), 0.5));
+    }
+
+    IdxRange<GridX> const x_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
+    IdxRange<GridY> const y_range(Idx<GridY>(0), IdxStep<GridY>(ncells + 1));
+    ddc::init_discrete_space<LagBasisX>(x_range);
+    ddc::init_discrete_space<LagBasisY>(y_range);
+
+    std::size_t const ntest = 7;
+    ddc::init_discrete_space<TestGridX>(TestGridX::init(xmin, xmax, IdxStep<TestGridX>(ntest)));
+    ddc::init_discrete_space<TestGridY>(TestGridY::init(ymin, ymax, IdxStep<TestGridY>(ntest)));
+    IdxRange<TestGridX> const test_x_range(Idx<TestGridX>(0), IdxStep<TestGridX>(ntest));
+    IdxRange<TestGridY> const test_y_range(Idx<TestGridY>(0), IdxStep<TestGridY>(ntest));
+    IdxRange<TestGridX, TestGridY> const test_range(test_x_range, test_y_range);
+
+    std::array<DataType, degree + 1> coeffs_x, coeffs_y;
+    std::mt19937 gen(42);
+    std::uniform_real_distribution<double> dis(0.0, 1.0);
+    for (std::size_t i(0); i < degree+1; ++i) {
+        coeffs_x[i] = static_cast<DataType>(dis(gen));
+        coeffs_y[i] = static_cast<DataType>(dis(gen));
+    }
+
+    IdxRange<LagrangeKnotsX, LagrangeKnotsY> const lagrange_coeff_idx_range(
+            ddc::discrete_space<LagBasisX>().full_domain(),
+            ddc::discrete_space<LagBasisY>().full_domain());
+    FieldMem<DataType, IdxRange<LagrangeKnotsX, LagrangeKnotsY>> poly_coeffs_alloc(
+            lagrange_coeff_idx_range);
+    fill_polynomial_2d(get_field(poly_coeffs_alloc), coeffs_x, coeffs_y);
+
+    ddc::NullExtrapolationRule const null_extrap;
+    Eval2D const eval2d(EvalX(null_extrap, null_extrap), EvalY(null_extrap, null_extrap));
+
+    // Derivative tolerances scale with cell size (derivative basis values scale as 1/dx^n)
+    double const dx_max = ddcHelper::maximum_distance_between_adjacent_points(x_range);
+    double const dy_max = ddcHelper::maximum_distance_between_adjacent_points(y_range);
+    double const tol_dx = TOL * (degree + 1) / dx_max;
+    double const tol_dy = TOL * (degree + 1) / dy_max;
+    double const tol_dxdy = TOL * (degree + 1) * (degree + 1) / (dx_max * dy_max);
+
+    FieldMem<DataType, IdxRange<TestGridX, TestGridY>> deriv_alloc(test_range);
+    auto const deriv_host = ddc::create_mirror_view(get_field(deriv_alloc));
+
+    // d/dx f = p'(x) * q(y)
+    Idx<ddc::Deriv<X>> dx(1);
+    eval2d.deriv(dx, get_field(deriv_alloc), get_const_field(poly_coeffs_alloc));
+    ddc::parallel_deepcopy(get_field(deriv_host), get_const_field(deriv_alloc));
+    ddc::host_for_each(test_range, [&](Idx<TestGridX, TestGridY> idx) {
+        double const expected = polynomial_deriv(ddc::coordinate(Idx<TestGridX>(idx)), coeffs_x)
+                                * polynomial(ddc::coordinate(Idx<TestGridY>(idx)), coeffs_y);
+        EXPECT_NEAR(static_cast<double>(deriv_host(idx)), expected, tol_dx);
+    });
+
+    // d/dy f = p(x) * q'(y)
+    Idx<ddc::Deriv<Y>> dy(1);
+    eval2d.deriv(dy, get_field(deriv_alloc), get_const_field(poly_coeffs_alloc));
+    ddc::parallel_deepcopy(get_field(deriv_host), get_const_field(deriv_alloc));
+    ddc::host_for_each(test_range, [&](Idx<TestGridX, TestGridY> idx) {
+        double const expected = polynomial(ddc::coordinate(Idx<TestGridX>(idx)), coeffs_x)
+                                * polynomial_deriv(ddc::coordinate(Idx<TestGridY>(idx)), coeffs_y);
+        EXPECT_NEAR(static_cast<double>(deriv_host(idx)), expected, tol_dy);
+    });
+
+    // d²/dxdy f = p'(x) * q'(y)
+    Idx<ddc::Deriv<X>, ddc::Deriv<Y>> dxdy(1, 1);
+    eval2d.deriv(dxdy, get_field(deriv_alloc), get_const_field(poly_coeffs_alloc));
+    ddc::parallel_deepcopy(get_field(deriv_host), get_const_field(deriv_alloc));
+    ddc::host_for_each(test_range, [&](Idx<TestGridX, TestGridY> idx) {
+        double const expected = polynomial_deriv(ddc::coordinate(Idx<TestGridX>(idx)), coeffs_x)
+                                * polynomial_deriv(ddc::coordinate(Idx<TestGridY>(idx)), coeffs_y);
+        EXPECT_NEAR(static_cast<double>(deriv_host(idx)), expected, tol_dxdy);
     });
 }
