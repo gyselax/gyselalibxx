@@ -118,15 +118,15 @@ def Deriv_nthorder(F, dx, periodic=0, nth_deriv=1, order=4):
         dnFdxn[nx-1] = np.dot(cb, F[nx-len(cb):])
         # mixed differences for dnFdxn[1] and dnFdxn[nx-2] of 4th order
         if order > 2:
-            for indx in np.arange(offset-1):
-                dnFdxn[indx+1] = np.dot(cm_p, F[indx:indx+len(cm_p)])
-                dnFdxn[nx-2-indx] = np.dot(cm_m, F[nx-indx-len(cm_m):nx-indx])
+            for index in np.arange(offset-1):
+                dnFdxn[index+1] = np.dot(cm_p, F[index:index+len(cm_p)])
+                dnFdxn[nx-2-index] = np.dot(cm_m, F[nx-index-len(cm_m):nx-index])
     else:
         # boundary indexes to fill -> ex for 4th order: 0,1,nx-2,nx-1
         indx_bound = np.concatenate((np.arange(offset), nx-offset+np.arange(offset)))
-        for indx in indx_bound:
+        for index in indx_bound:
             for i, coeff in enumerate(cc):
-                dnFdxn[indx] = dnFdxn[indx] + coeff*F[np.fmod(indx+i-offset, nx)]
+                dnFdxn[index] = dnFdxn[index] + coeff*F[np.fmod(index+i-offset, nx)]
 
     dnFdxn = dnFdxn / math.pow(dx, nth_deriv)
 
