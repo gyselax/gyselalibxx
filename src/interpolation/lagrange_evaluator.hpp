@@ -332,9 +332,9 @@ public:
      *
      * @return The derivative of the spline function at the desired coordinate.
      */
-    template <class... DerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
+    template <class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
     KOKKOS_FUNCTION double deriv(
-            Idx<DerivDims...> const& deriv_order,
+            IdxDerivDims const& deriv_order,
             Coord<CoordsDims...> const& coord_eval,
             ConstField<DataType, BatchedLagrangeIdxRange, memory_space, Layout> const lagrange_coef)
             const
@@ -361,14 +361,14 @@ public:
      * @param lagrange_coef A Field storing the 1D Lagrange coefficients.
      */
     template <
-            class... DerivDims,
+            class IdxDerivDims,
             class Layout1,
             class Layout2,
             class Layout3,
             class IdxRangeBatchedInterpolation,
             class... CoordsDims>
     void deriv(
-            Idx<DerivDims...> const& deriv_order,
+            IdxDerivDims const& deriv_order,
             Field<DataType, IdxRangeBatchedInterpolation, memory_space, Layout1> const
                     lagrange_eval,
             ConstField<
@@ -414,9 +414,9 @@ public:
      * @param[out] lagrange_eval The derivatives of the spline function at the coordinates.
      * @param[in] lagrange_coef A ChunkSpan storing the spline coefficients.
      */
-    template <class... DerivDims, class Layout1, class Layout2, class IdxRangeBatchedInterpolation>
+    template <class IdxDerivDims, class Layout1, class Layout2, class IdxRangeBatchedInterpolation>
     void deriv(
-            Idx<DerivDims...> const& deriv_order,
+            IdxDerivDims const& deriv_order,
             Field<DataType, IdxRangeBatchedInterpolation, memory_space, Layout1> const
                     lagrange_eval,
             ConstField<
