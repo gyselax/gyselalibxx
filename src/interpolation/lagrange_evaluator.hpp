@@ -540,7 +540,6 @@ private:
                                 ddc::detail::TypeSeq<DerivDims...>,
                                 ddc::detail::TypeSeq<deriv_dim>>,
                 "The only valid dimension for deriv_order is Deriv<Dim>");
-        static_assert(sizeof...(DerivDims) == 0);
 
         constexpr std::size_t n_basis = lagrange_basis_type::degree() + 1;
         std::array<DataType, n_basis> vals_ptr;
@@ -567,7 +566,7 @@ private:
                     .eval_basis_and_n_derivs(derivs, coord_interest, first_lagrange_knot, order);
 
             for (std::size_t i = 0; i < n_basis; ++i) {
-                vals[i] = DDC_MDSPAN_ACCESS_OP(derivs, i, order);
+                vals(i) = derivs(i, order);
             }
         }
 
