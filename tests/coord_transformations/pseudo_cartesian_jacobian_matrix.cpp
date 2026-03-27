@@ -223,7 +223,11 @@ public:
                 CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCircToCart
                 pseudo_cart_to_circ_to_cart(circ_to_cart, pseudo_cart_to_circ, 1e-12);
-        DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+        DiscretePoloidalCSSplineMappingBuilder<
+                X,
+                Y,
+                SplineRThetaBuilder_host,
+                SplineRThetaEvaluator>
                 mapping_builder_circ(
                         Kokkos::DefaultHostExecutionSpace(),
                         circ_to_cart,
@@ -258,7 +262,11 @@ public:
                 CartesianToCircular<X_pC, Y_pC, R, Theta>>;
         const PseudoCartToCzarnyToCart
                 pseudo_cart_to_czarny_to_cart(czarny_to_cart, pseudo_cart_to_circ, 1e-12);
-        DiscretePoloidalCSSplineMappingBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator>
+        DiscretePoloidalCSSplineMappingBuilder<
+                X,
+                Y,
+                SplineRThetaBuilder_host,
+                SplineRThetaEvaluator>
                 mapping_builder_czarny(
                         Kokkos::DefaultHostExecutionSpace(),
                         czarny_to_cart,
