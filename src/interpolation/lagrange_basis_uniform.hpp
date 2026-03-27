@@ -272,9 +272,9 @@ public:
         {
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
             KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
-            KOKKOS_ASSERT(n_derivs <= degree())
-            KOKKOS_ASSERT(derivs.extent(0) == degree() + 1)
-            KOKKOS_ASSERT(derivs.extent(1) == n_derivs + 1)
+            KOKKOS_ASSERT(n_derivs <= degree());
+            KOKKOS_ASSERT(derivs.extent(0) == degree() + 1);
+            KOKKOS_ASSERT(derivs.extent(1) == n_derivs + 1);
 
             constexpr std::size_t n_basis = degree() + 1;
             DataType offset;
