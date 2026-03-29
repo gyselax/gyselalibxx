@@ -2,9 +2,10 @@
 
 #pragma once
 
+#include <cassert>
+
 #include "ddc_aliases.hpp"
 #include "i_interpolation_builder.hpp"
-#include <cassert>
 
 /**
  * @brief A builder class for copying data.
