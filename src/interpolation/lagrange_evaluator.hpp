@@ -325,6 +325,10 @@ public:
     }
 
 private:
+    using knot_grid = std::conditional_t<
+            LagrangeBasis::is_uniform(),
+            UniformLagrangeKnots<LagrangeBasis>,
+            sNonUniformLagrangeKnots<LagrangeBasis>>;
     template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType
     eval(Coord<CoordsDims...> const& coord_eval,
@@ -406,10 +410,6 @@ private:
             const
     {
         using deriv_dim = ddc::Deriv<continuous_dimension_type>;
-        using knot_grid = std::conditional_t<
-                LagrangeBasis::is_uniform(),
-                UniformLagrangeKnots<LagrangeBasis>,
-                NonUniformLagrangeKnots<LagrangeBasis>>;
         static_assert(
                 sizeof...(DerivDims) == 0
                         || ddc::type_seq_same_v<
@@ -440,10 +440,6 @@ private:
      */
     KOKKOS_INLINE_FUNCTION auto getclosest(Coord<continuous_dimension_type> x_interp) const
     {
-        using knot_grid = std::conditional_t<
-                LagrangeBasis::is_uniform(),
-                UniformLagrangeKnots<LagrangeBasis>,
-                NonUniformLagrangeKnots<LagrangeBasis>>;
         Idx<knot_grid> first = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
         if constexpr (ddc::is_uniform_point_sampling_v<knot_grid>) {
             int knot_offset = static_cast<int>(
