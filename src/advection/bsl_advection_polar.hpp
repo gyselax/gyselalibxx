@@ -83,7 +83,8 @@ class BslAdvectionPolar
     using MemorySpace = typename FootFinder::memory_space;
     using ExecSpace = typename FootFinder::ExecSpace;
 
-    using IdxRangeBSRTheta = typename Builder2D::template batched_spline_domain_type<IdxRangeBatched>;
+    using IdxRangeBSRTheta =
+            typename Builder2D::template batched_spline_domain_type<IdxRangeBatched>;
 
     using DFieldFDistribu = DField<IdxRangeBatched, MemorySpace>;
 
@@ -190,7 +191,10 @@ public:
 
         // Interpolate the function on the feet of the characteristics. --------------------------
         m_builder_2d(get_field(coefs), get_const_field(allfdistribu));
-        m_evaluator_2d(get_field(allfdistribu), get_const_field(feet_rtheta), get_const_field(coefs));
+        m_evaluator_2d(
+                get_field(allfdistribu),
+                get_const_field(feet_rtheta),
+                get_const_field(coefs));
 
         return allfdistribu;
     }
