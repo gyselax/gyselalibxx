@@ -3,11 +3,9 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "i_interpolator_2d.hpp"
 #include "indexed_tensor.hpp"
 #include "l_norm_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
-#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -50,7 +48,7 @@
  *
  * @see IPolarFootFinder
  */
-template <class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar>
+template <class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D>
 class BslAdvectionPolar
 {
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
@@ -85,6 +83,9 @@ class BslAdvectionPolar
     using MemorySpace = typename FootFinder::memory_space;
     using ExecSpace = typename FootFinder::ExecSpace;
 
+    using IdxRangeBSRTheta =
+            typename Builder2D::template batched_spline_domain_type<IdxRangeBatched>;
+
     using DFieldFDistribu = DField<IdxRangeBatched, MemorySpace>;
 
     using CFieldMemFeetRTheta = FieldMem<CoordRTheta, IdxRangeBatched, MemorySpace>;
@@ -107,7 +108,9 @@ class BslAdvectionPolar
             = DVectorConstField<IdxRangeBatched, CurvilinearBasis, MemorySpace>;
 
 private:
-    InterpolatorPolar const& m_interpolator;
+    Builder2D const& m_builder_2d;
+
+    Evaluator2D const& m_evaluator_2d;
 
     FootFinder const& m_find_feet;
 
@@ -118,23 +121,25 @@ public:
     /**
      * @brief Instantiate an advection operator.
      *
-     * @param [in] function_interpolator
-     *       The polar interpolator to interpolate the function once the
-     *      characteristics have been computed.
+     * @param[in] builder_2d
+     *      The 2D builder used to compute interpolations coefficients from
+     *      the function values at interpolation points.
+     * @param[in] evaluator_2d
+     *      The 2D evaluator used to evaluate the interpolating function at the
+     *      feet of the characteristics.
      * @param[in] foot_finder
      *      An IFootFinder which computes the feet of the characteristics.
      * @param[in] logical_to_physical_mapping
      *      The mapping function from the logical domain to the physical
-     *      domain. 
-     *
-     * @tparam IFootFinder
-     *      A child class of IFootFinder.
+     *      domain.
      */
     BslAdvectionPolar(
-            InterpolatorPolar const& function_interpolator,
+            Builder2D const& builder_2d,
+            Evaluator2D const& evaluator_2d,
             FootFinder const& foot_finder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping)
-        : m_interpolator(function_interpolator)
+        : m_builder_2d(builder_2d)
+        , m_evaluator_2d(evaluator_2d)
         , m_find_feet(foot_finder)
         , m_logical_to_physical_mapping(logical_to_physical_mapping)
     {
@@ -162,9 +167,9 @@ public:
             DVectorConstFieldAdvectionXY advection_field_xy,
             double dt) const
     {
-        // Pre-allocate some memory to prevent allocation later in loop
-        std::unique_ptr<IInterpolator2D<IdxRangeRTheta, IdxRangeBatched>> const interpolator_ptr
-                = m_interpolator.preallocate();
+        // Pre-allocate spline coefficient storage
+        DFieldMem<IdxRangeBSRTheta, MemorySpace> coefs(
+                m_builder_2d.batched_spline_domain(get_idx_range(allfdistribu)));
 
         // Initialise the feet
         CFieldMemFeetRTheta feet_rtheta_alloc(
@@ -185,7 +190,11 @@ public:
         m_find_feet(feet_rtheta, get_const_field(advection_field_xy), dt);
 
         // Interpolate the function on the feet of the characteristics. --------------------------
-        (*interpolator_ptr)(get_field(allfdistribu), get_const_field(feet_rtheta));
+        m_builder_2d(get_field(coefs), get_const_field(allfdistribu));
+        m_evaluator_2d(
+                get_field(allfdistribu),
+                get_const_field(feet_rtheta),
+                get_const_field(coefs));
 
         return allfdistribu;
     }
