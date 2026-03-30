@@ -12,7 +12,6 @@
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_interpolator_2d.hpp"
 
 
 /*
@@ -137,8 +136,12 @@ void Interpolation_on_random_coord(
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    SplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-    interpolator(get_field(function_evaluated), get_const_field(random_coords));
+    DFieldMem<IdxRangeBSRTheta> coefs_alloc(builder.batched_spline_domain(grid));
+    builder(get_field(coefs_alloc), get_const_field(function_evaluated));
+    spline_evaluator(
+            get_field(function_evaluated),
+            get_const_field(random_coords),
+            get_const_field(coefs_alloc));
 
     // Compare the obtained values with the exact function. ----------------------------------
     double max_err = ddc::parallel_transform_reduce(

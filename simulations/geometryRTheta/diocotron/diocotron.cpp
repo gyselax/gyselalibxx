@@ -36,7 +36,6 @@
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -155,8 +154,6 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, mesh_rtheta);
-
     SplinePolarFootFinder find_feet(
             mesh_rtheta,
             time_stepper,
@@ -165,7 +162,7 @@ int main(int argc, char** argv)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
 
 
 
