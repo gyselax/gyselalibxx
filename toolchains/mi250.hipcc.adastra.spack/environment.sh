@@ -53,6 +53,7 @@ eval -- "$(
         pdiplugin-decl-hdf5 \
         pdiplugin-decl-netcdf \
         pdiplugin-mpi \
+        pdiplugin-pycall \
         pdiplugin-set-value \
         pdiplugin-trace \
         python \
@@ -62,10 +63,10 @@ eval -- "$(
         py-matplotlib \
         py-netcdf4 \
         py-numpy \
+        py-pyyaml \
         py-scipy \
         py-sympy \
-        py-xarray \
-        py-pyyaml
+        py-xarray
 )"
 
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
