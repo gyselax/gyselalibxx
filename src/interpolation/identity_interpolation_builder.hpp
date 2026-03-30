@@ -105,7 +105,7 @@ public:
         IdxRange<basis_domain_type> bp_idx_range
                 = ddc::discrete_space<Basis>().break_point_domain().remove_last(
                         IdxStep<basis_domain_type>(static_cast<int>(Basis::is_periodic())));
-        assert(coeffs[bp_idx_range].size() == vals.size());
+        assert(bp_idx_range.size() == vals.size());
         Kokkos::deep_copy(
                 coeffs[bp_idx_range].allocation_kokkos_view(),
                 vals.allocation_kokkos_view());
