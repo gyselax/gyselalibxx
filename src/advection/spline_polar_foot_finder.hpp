@@ -378,7 +378,7 @@ public:
      *
      */
     template <class T>
-    void is_unified(Field<T, IdxRangeOperator, memory_space> const& values) const
+    static void is_unified(Field<T, IdxRangeOperator, memory_space> const& values)
     {
         IdxRangeOperator full_idx_range = get_idx_range(values);
         IdxRangeBatch const batched_idx_range(full_idx_range);
@@ -421,7 +421,7 @@ public:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_centre_pt(Field<T, IdxRangeOperator, memory_space> values) const
+    static void unify_value_at_centre_pt(Field<T, IdxRangeOperator, memory_space> values)
     {
         IdxRangeOperator full_idx_range = get_idx_range(values);
         IdxRangeBatch const batched_idx_range(full_idx_range);
