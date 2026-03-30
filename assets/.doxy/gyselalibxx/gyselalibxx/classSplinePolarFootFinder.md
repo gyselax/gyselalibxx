@@ -101,9 +101,7 @@ See [IPolarFootFinder](classIPolarFootFinder.md)
 | Type | Name |
 | ---: | :--- |
 |   | [**SplinePolarFootFinder**](#function-splinepolarfootfinder) (IdxRangeBatched const & idx\_range\_operator, TimeStepperBuilder const & time\_stepper\_builder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical\_mapping, SplineRThetaBuilderAdvection const & builder\_advection\_field, SplineRThetaEvaluatorAdvection const & evaluator\_advection\_field, double epsilon=1e-12) <br>_Instantiate a time integration method for the advection operator._  |
-|  void | [**is\_unified**](#function-is_unified) (Field&lt; T, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; const & values) const<br>_Check if the values at the centre point are the same._  |
 |  void | [**operator()**](#function-operator) ([**CFieldFeet**](classSplinePolarFootFinder.md#typedef-cfieldfeet) feet, [**DVectorConstField**](classVectorField.md)&lt; [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**VectorIndexSetAdvectionDims**](classSplinePolarFootFinder.md#typedef-vectorindexsetadvectiondims), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; advection\_field, double dt) const<br>_Advect the feet over_ \(dt\) _._ |
-|  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; T, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; values) const<br>_Replace the value at_ \((r=0, \theta)\) _point by the value at_\((r=0,0)\) _for all_\(\theta\) _._ |
 
 
 ## Public Functions inherited from IPolarFootFinder
@@ -116,6 +114,12 @@ See [IPolarFootFinder](classIPolarFootFinder.md)
 | virtual  | [**~IPolarFootFinder**](classIPolarFootFinder.md#function-ipolarfootfinder) () = default<br> |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  void | [**is\_unified**](#function-is_unified) (Field&lt; T, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; const & values) <br>_Check if the values at the centre point are the same._  |
+|  void | [**unify\_value\_at\_centre\_pt**](#function-unify_value_at_centre_pt) (Field&lt; T, [**IdxRangeOperator**](classSplinePolarFootFinder.md#typedef-idxrangeoperator), [**memory\_space**](classSplinePolarFootFinder.md#typedef-memory_space) &gt; values) <br>_Replace the value at_ \((r=0, \theta)\) _point by the value at_\((r=0,0)\) _for all_\(\theta\) _._ |
 
 
 
@@ -437,37 +441,6 @@ inline SplinePolarFootFinder::SplinePolarFootFinder (
 
 
 
-### function is\_unified 
-
-_Check if the values at the centre point are the same._ 
-```C++
-template<class T>
-inline void SplinePolarFootFinder::is_unified (
-    Field< T, IdxRangeOperator , memory_space > const & values
-) const
-```
-
-
-
-For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for \(r = 0\) have the same value. This function check if for \(r= 0\), the values \(\forall \theta\) are the same.
-
-
-
-
-**Parameters:**
-
-
-* `values` A table of values we want to check if the centre point has an unique value. 
-
-
-
-
-        
-
-<hr>
-
-
-
 ### function operator() 
 
 _Advect the feet over_ \(dt\) _._
@@ -499,6 +472,39 @@ From the advection field in the physical domain, compute the advection field in 
         
 
 <hr>
+## Public Static Functions Documentation
+
+
+
+
+### function is\_unified 
+
+_Check if the values at the centre point are the same._ 
+```C++
+template<class T>
+static inline void SplinePolarFootFinder::is_unified (
+    Field< T, IdxRangeOperator , memory_space > const & values
+) 
+```
+
+
+
+For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for \(r = 0\) have the same value. This function check if for \(r= 0\), the values \(\forall \theta\) are the same.
+
+
+
+
+**Parameters:**
+
+
+* `values` A table of values we want to check if the centre point has an unique value. 
+
+
+
+
+        
+
+<hr>
 
 
 
@@ -507,9 +513,9 @@ From the advection field in the physical domain, compute the advection field in 
 _Replace the value at_ \((r=0, \theta)\) _point by the value at_\((r=0,0)\) _for all_\(\theta\) _._
 ```C++
 template<class T>
-inline void SplinePolarFootFinder::unify_value_at_centre_pt (
+static inline void SplinePolarFootFinder::unify_value_at_centre_pt (
     Field< T, IdxRangeOperator , memory_space > values
-) const
+) 
 ```
 
 

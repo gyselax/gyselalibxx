@@ -2,7 +2,7 @@
 
 # Class BslAdvectionPolar
 
-**template &lt;class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar&gt;**
+**template &lt;class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D&gt;**
 
 
 
@@ -54,7 +54,7 @@ _Define an advection operator on 2D_ \((r, \theta)\) _domain._[More...](#detaile
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvectionPolar**](#function-bsladvectionpolar) (InterpolatorPolar const & function\_interpolator, FootFinder const & foot\_finder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping) <br>_Instantiate an advection operator._  |
+|   | [**BslAdvectionPolar**](#function-bsladvectionpolar) (Builder2D const & builder\_2d, Evaluator2D const & evaluator\_2d, FootFinder const & foot\_finder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping) <br>_Instantiate an advection operator._  |
 |  DFieldFDistribu | [**operator()**](#function-operator) (DFieldFDistribu allfdistribu, [**DVectorConstFieldAdvectionXY**](classVectorField.md) advection\_field\_xy, double dt) const<br>_Advect a function over a time step dt with the given advection field along the physical directions._  |
 |  DFieldFDistribu | [**operator()**](#function-operator_1) (DFieldFDistribu allfdistribu, [**DVectorConstFieldAdvectionRTheta**](classVectorField.md) advection\_field\_rtheta, [**DTensor**](classTensor.md)&lt; CartesianBasis &gt; const & advection\_field\_xy\_centre, double dt) const<br>_Advect a function over a time step dt with the given advection field along the logical directions and physical directions for the O-point._  |
 |  DFieldFDistribu | [**operator()**](#function-operator_2) (DFieldFDistribu allfdistribu, [**DVectorConstFieldAdvectionRTheta**](classVectorField.md) advection\_field\_rtheta, double dt) const<br>_Advect a function over a time step dt with the given advection field along the logical directions. It builds the advection field along the physical directions at the O-point though averaged values on the first ring._  |
@@ -140,7 +140,8 @@ The interpolation of the function is always done in the logical domain, where th
 _Instantiate an advection operator._ 
 ```C++
 inline BslAdvectionPolar::BslAdvectionPolar (
-    InterpolatorPolar const & function_interpolator,
+    Builder2D const & builder_2d,
+    Evaluator2D const & evaluator_2d,
     FootFinder const & foot_finder,
     LogicalToPhysicalMapping const & logical_to_physical_mapping
 ) 
@@ -153,16 +154,10 @@ inline BslAdvectionPolar::BslAdvectionPolar (
 **Parameters:**
 
 
-* `function_interpolator` The polar interpolator to interpolate the function once the characteristics have been computed. 
+* `builder_2d` The 2D builder used to compute interpolations coefficients from the function values at interpolation points. 
+* `evaluator_2d` The 2D evaluator used to evaluate the interpolating function at the feet of the characteristics. 
 * `foot_finder` An IFootFinder which computes the feet of the characteristics. 
-* `logical_to_physical_mapping` The mapping function from the logical domain to the physical domain.
-
-
-
-**Template parameters:**
-
-
-* `IFootFinder` A child class of IFootFinder. 
+* `logical_to_physical_mapping` The mapping function from the logical domain to the physical domain. 
 
 
 

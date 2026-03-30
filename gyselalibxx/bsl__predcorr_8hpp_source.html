@@ -592,10 +592,8 @@ class BslPredCorrRTheta : public ITimeSolverRTheta
     using BslAdvectionRTheta = BslAdvectionPolar&lt;
             FootFinder,
             Mapping,
-            PreallocatableSplineInterpolator2D&lt;
-                    SplineRThetaBuilder,
-                    SplineRThetaEvaluatorNullBound,
-                    IdxRangeRTheta&gt;&gt;;
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound&gt;;
 
 private:
     Mapping const&amp; m_mapping;

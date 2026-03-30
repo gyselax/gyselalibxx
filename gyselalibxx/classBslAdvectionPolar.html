@@ -561,7 +561,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-bsladvectionpolar">Class BslAdvectionPolar</h1>
-<p><strong>template &lt;class FootFinder, class LogicalToPhysicalMapping, class InterpolatorPolar&gt;</strong></p>
+<p><strong>template &lt;class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a></p>
 <p><em>Define an advection operator on 2D</em> <span class="arithmatex">\((r, \theta)\)</span> <em>domain.</em><a href="#detailed-description">More...</a></p>
 <ul>
@@ -578,7 +578,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bsladvectionpolar"><strong>BslAdvectionPolar</strong></a> (InterpolatorPolar const &amp; function_interpolator, FootFinder const &amp; foot_finder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping) <br><em>Instantiate an advection operator.</em></td>
+<td style="text-align: left;"><a href="#function-bsladvectionpolar"><strong>BslAdvectionPolar</strong></a> (Builder2D const &amp; builder_2d, Evaluator2D const &amp; evaluator_2d, FootFinder const &amp; foot_finder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping) <br><em>Instantiate an advection operator.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">DFieldFDistribu</td>
@@ -616,20 +616,18 @@
 <h3 id="function-bsladvectionpolar">function BslAdvectionPolar</h3>
 <p><em>Instantiate an advection operator.</em> </p>
 <pre><code class="language-C++">inline BslAdvectionPolar::BslAdvectionPolar (
-    InterpolatorPolar const &amp; function_interpolator,
+    Builder2D const &amp; builder_2d,
+    Evaluator2D const &amp; evaluator_2d,
     FootFinder const &amp; foot_finder,
     LogicalToPhysicalMapping const &amp; logical_to_physical_mapping
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>function_interpolator</code> The polar interpolator to interpolate the function once the characteristics have been computed. </li>
+<li><code>builder_2d</code> The 2D builder used to compute interpolations coefficients from the function values at interpolation points. </li>
+<li><code>evaluator_2d</code> The 2D evaluator used to evaluate the interpolating function at the feet of the characteristics. </li>
 <li><code>foot_finder</code> An IFootFinder which computes the feet of the characteristics. </li>
-<li><code>logical_to_physical_mapping</code> The mapping function from the logical domain to the physical domain.</li>
-</ul>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>IFootFinder</code> A child class of IFootFinder. </li>
+<li><code>logical_to_physical_mapping</code> The mapping function from the logical domain to the physical domain. </li>
 </ul>
 <hr>
 

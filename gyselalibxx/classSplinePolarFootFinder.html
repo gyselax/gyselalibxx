@@ -666,15 +666,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-is_unified"><strong>is_unified</strong></a> (Field&lt; T, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; const &amp; values) const<br><em>Check if the values at the centre point are the same.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classSplinePolarFootFinder.html#typedef-cfieldfeet"><strong>CFieldFeet</strong></a> feet, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field, double dt) const<br><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-unify_value_at_centre_pt"><strong>unify_value_at_centre_pt</strong></a> (Field&lt; T, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; values) const<br><em>Replace the value at</em> <span class="arithmatex">\((r=0, \theta)\)</span> <em>point by the value at</em><span class="arithmatex">\((r=0,0)\)</span> <em>for all</em><span class="arithmatex">\(\theta\)</span> <em>.</em></td>
 </tr>
 </tbody>
 </table>
@@ -695,6 +687,25 @@
 <tr>
 <td style="text-align: right;">virtual</td>
 <td style="text-align: left;"><a href="classIPolarFootFinder.html#function-ipolarfootfinder"><strong>~IPolarFootFinder</strong></a> () = default<br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-is_unified"><strong>is_unified</strong></a> (Field&lt; T, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; const &amp; values) <br><em>Check if the values at the centre point are the same.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-unify_value_at_centre_pt"><strong>unify_value_at_centre_pt</strong></a> (Field&lt; T, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; values) <br><em>Replace the value at</em> <span class="arithmatex">\((r=0, \theta)\)</span> <em>point by the value at</em><span class="arithmatex">\((r=0,0)\)</span> <em>for all</em><span class="arithmatex">\(\theta\)</span> <em>.</em></td>
 </tr>
 </tbody>
 </table>
@@ -846,20 +857,6 @@
 <p><strong>See also:</strong> <a href="classITimeStepper.html"><strong>ITimeStepper</strong></a> </p>
 <hr>
 
-<h3 id="function-is_unified">function is_unified</h3>
-<p><em>Check if the values at the centre point are the same.</em> </p>
-<pre><code class="language-C++">template&lt;class T&gt;
-inline void SplinePolarFootFinder::is_unified (
-    Field&lt; T, IdxRangeOperator , memory_space &gt; const &amp; values
-) const
-</code></pre>
-<p>For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for <span class="arithmatex">\(r = 0\)</span> have the same value. This function check if for <span class="arithmatex">\(r= 0\)</span>, the values <span class="arithmatex">\(\forall \theta\)</span> are the same.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>values</code> A table of values we want to check if the centre point has an unique value. </li>
-</ul>
-<hr>
-
 <h3 id="function-operator">function operator()</h3>
 <p><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></p>
 <pre><code class="language-C++">inline void SplinePolarFootFinder::operator() (
@@ -876,13 +873,27 @@ inline void SplinePolarFootFinder::is_unified (
 <li><code>dt</code> The time step. </li>
 </ul>
 <hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-is_unified">function is_unified</h3>
+<p><em>Check if the values at the centre point are the same.</em> </p>
+<pre><code class="language-C++">template&lt;class T&gt;
+static inline void SplinePolarFootFinder::is_unified (
+    Field&lt; T, IdxRangeOperator , memory_space &gt; const &amp; values
+) 
+</code></pre>
+<p>For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for <span class="arithmatex">\(r = 0\)</span> have the same value. This function check if for <span class="arithmatex">\(r= 0\)</span>, the values <span class="arithmatex">\(\forall \theta\)</span> are the same.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>values</code> A table of values we want to check if the centre point has an unique value. </li>
+</ul>
+<hr>
 
 <h3 id="function-unify_value_at_centre_pt">function unify_value_at_centre_pt</h3>
 <p><em>Replace the value at</em> <span class="arithmatex">\((r=0, \theta)\)</span> <em>point by the value at</em><span class="arithmatex">\((r=0,0)\)</span> <em>for all</em><span class="arithmatex">\(\theta\)</span> <em>.</em></p>
 <pre><code class="language-C++">template&lt;class T&gt;
-inline void SplinePolarFootFinder::unify_value_at_centre_pt (
+static inline void SplinePolarFootFinder::unify_value_at_centre_pt (
     Field&lt; T, IdxRangeOperator , memory_space &gt; values
-) const
+) 
 </code></pre>
 <p>For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for <span class="arithmatex">\(r = 0\)</span> have the same value. As the computation of the values of a table can induces machine errors, this function is useful to reset the values at the central point at the same value.</p>
 <p><strong>Parameters:</strong></p>

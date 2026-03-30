@@ -830,7 +830,7 @@ public:
 
 
     template &lt;class T&gt;
-    void is_unified(Field&lt;T, IdxRangeOperator, memory_space&gt; const&amp; values) const
+    static void is_unified(Field&lt;T, IdxRangeOperator, memory_space&gt; const&amp; values)
     {
         IdxRangeOperator full_idx_range = get_idx_range(values);
         IdxRangeBatch const batched_idx_range(full_idx_range);
@@ -860,7 +860,7 @@ public:
 
 
     template &lt;class T&gt;
-    void unify_value_at_centre_pt(Field&lt;T, IdxRangeOperator, memory_space&gt; values) const
+    static void unify_value_at_centre_pt(Field&lt;T, IdxRangeOperator, memory_space&gt; values)
     {
         IdxRangeOperator full_idx_range = get_idx_range(values);
         IdxRangeBatch const batched_idx_range(full_idx_range);

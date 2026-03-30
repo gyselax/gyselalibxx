@@ -606,10 +606,8 @@ private:
     using BslAdvectionRTheta = BslAdvectionPolar&lt;
             SplinePolarFootFinderType,
             LogicalToPhysicalMapping,
-            PreallocatableSplineInterpolator2D&lt;
-                    SplineRThetaBuilder,
-                    SplineRThetaEvaluatorNullBound,
-                    IdxRangeRTheta&gt;&gt;;
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound&gt;;
 
     LogicalToPhysicalMapping const&amp; m_logical_to_physical;
 

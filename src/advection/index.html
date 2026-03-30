@@ -804,9 +804,6 @@ SplineRThetaEvaluator spline_evaluator(
         extrapolation_rule_thetamin,
         extrapolation_rule_thetamax);
 
-// Define a spline interpolator for the advected function. 
-PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
 // Define a feet finder to compute the feet of the characteristics.  
 RK3Builder const time_stepper_builder;      // a given time integration method to solve equation of the characteristics. 
 SplinePolarFootFinder find_feet(        
@@ -818,7 +815,7 @@ SplinePolarFootFinder find_feet(
         evaluator_advection_field);         // spline evaluator for the advection field. 
 
 // Define the advection operator. 
-BslAdvectionPolar advection_operator(interpolator, find_feet, logical_to_physical_mapping);
+BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, logical_to_physical_mapping);
 </code></pre>
 <p>Currently, there are three <code>operator()</code> implemented.</p>
 <ol>

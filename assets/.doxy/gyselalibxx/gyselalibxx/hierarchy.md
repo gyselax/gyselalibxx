@@ -87,9 +87,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**RestartInitialisation**](classRestartInitialisation.md) _A class that initialises the distribution function from a previous simulation._ 
     * **class** [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md) _A class that initialises the distribution function as a perturbed Maxwellian._ 
     * **class** [**SingleModePerturbInitialisation**](classSingleModePerturbInitialisation.md) _A class that initialises the distribution function as a perturbed Maxwellian._ 
-* **class** [**IInterpolator2D**](classIInterpolator2D.md) _A class which provides an interpolating function._     
-    * **class** [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md) _A class which provides access to an interpolating function which can be preallocated where useful._ 
-    * **class** [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md) _A class which provides access to an interpolating function which can be preallocated where useful._ 
 * **class** [**IMPILayout**](classIMPILayout.md) _A super class describing a way in which data may be laid out across MPI processes._ 
 * **class** [**IMPITranspose**](classIMPITranspose.md) _A superclass describing an operator for converting from/to different MPI layouts._     
     * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._ 

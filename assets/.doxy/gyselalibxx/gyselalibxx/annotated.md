@@ -93,7 +93,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**IChargeDensityCalculator**](classIChargeDensityCalculator.md) _A class which computes charges density._     
 * **class** [**IEquilibrium**](classIEquilibrium.md) _An abstract class for initialising a distribution function in (species,vpar,mu)._     
 * **class** [**IInitialisation**](classIInitialisation.md) _An abstract class that allows for initialising a distribution function._     
-* **class** [**IInterpolator2D**](classIInterpolator2D.md) _A class which provides an interpolating function._     
 * **class** [**IMPILayout**](classIMPILayout.md) _A super class describing a way in which data may be laid out across MPI processes._     
 * **class** [**IMPITranspose**](classIMPITranspose.md) _A superclass describing an operator for converting from/to different MPI layouts._     
 * **class** [**IPartialDerivative**](classIPartialDerivative.md) _An abstract class for a partial derivative operator._     
@@ -101,7 +100,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**IPoissonSolver**](classIPoissonSolver.md) 
 * **class** [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md)     
 * **class** [**IPolarFootFinder**](classIPolarFootFinder.md) _Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_ \((r,\theta)\) _plane)._    
-* **class** [**IPreallocatableInterpolator2D**](classIPreallocatableInterpolator2D.md) _A class which provides access to an interpolating function which can be preallocated where useful._     
 * **class** [**IQNSolver**](classIQNSolver.md) _Base class for a Quasi-Neutrality solver._     
 * **class** [**IRightHandSide**](classIRightHandSide.md) _An abstract class representing a source in Boltzmann equation._     
 * **class** [**ITimeSolver**](classITimeSolver.md) _An abstract class for solving a Boltzmann-Poisson system of equations._     
@@ -195,7 +193,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**QDimRMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh.md) _Tag the first dimension for the quadrature mesh._ 
     * **struct** [**QDimThetaMesh**](structPolarSplineFEMPoissonLikeSolver_1_1QDimThetaMesh.md) _Tag the second dimension for the quadrature mesh._ 
 * **namespace** [**PolarSplines**](namespacePolarSplines.md)     
-* **class** [**PreallocatableSplineInterpolator2D**](classPreallocatableSplineInterpolator2D.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**SplineInterpolator2D**_](classSplineInterpolator2D.md) _class._    
 * **class** [**PredCorr**](classPredCorr.md) _A class that solves a Boltzmann-Poisson system of equations using a predictor-corrector scheme._     
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._    
 * **class** [**QNSolver**](classQNSolver.md) _An operator which solves the Quasi-Neutrality equation using a fast Fourier transform._     
@@ -226,7 +223,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) _A class that stores spline builder coefficients and recomputes them when required._     
 * **class** [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md) _[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md) _._    
 * **class** [**SplineInterpolator**](classSplineInterpolator.md) _An owning interpolation object that bundles a spline builder and evaluator._     
-* **class** [**SplineInterpolator2D**](classSplineInterpolator2D.md) _A class for interpolating a function using a 2D tensor product of splines._     
 * **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._    
 * **class** [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md) _A class that solves a Boltzmann equation using Strang's splitting._     
 * **class** [**SplitVlasovSolver**](classSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting._     
@@ -255,10 +251,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d97.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d227.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d229.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d231.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d233.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d225.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d227.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d229.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d231.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
