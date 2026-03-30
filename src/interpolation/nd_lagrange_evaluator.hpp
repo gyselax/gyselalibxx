@@ -401,7 +401,7 @@ private:
                 vals_ptr.data());
         ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
         if constexpr (ddc::in_tags_v<ddc::Deriv<HeadContDim>, DerivDimsTypeSeq>) {
-            auto const order = ddc::select<ddc::Deriv<HeadContDim>>(deriv_order).uid();
+            unsigned long const order = ddc::select<ddc::Deriv<HeadContDim>>(deriv_order).uid();
             KOKKOS_ASSERT(order > 0 && order <= HeadBasis::degree())
 
             std::array<data_type, n_head_basis * n_head_basis> derivs_ptr;
