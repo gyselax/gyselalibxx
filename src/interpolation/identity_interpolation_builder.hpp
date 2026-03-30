@@ -100,8 +100,6 @@ public:
                     memory_space>> derivs_xmax
             = std::nullopt) const
     {
-        assert(!derivs_xmin.has_value() || derivs_xmin->size() == 0);
-        assert(!derivs_xmax.has_value() || derivs_xmax->size() == 0);
         IdxRange<basis_domain_type> bp_idx_range
                 = ddc::discrete_space<Basis>().break_point_domain().remove_last(
                         IdxStep<basis_domain_type>(static_cast<int>(Basis::is_periodic())));
