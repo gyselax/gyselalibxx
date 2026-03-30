@@ -202,7 +202,10 @@ int main(int argc, char** argv)
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "czarny_pseudo_cartesian";
 
-#elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+#else
+#if not defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+    static_assert(false, "No mapping macro defined");
+#endif
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
@@ -223,8 +226,6 @@ int main(int argc, char** argv)
     std::string const mapping_name = "DISCRETE";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "discrete_pseudo_cartesian";
-#else
-    static_assert(false, "No mapping macro defined");
 #endif
 #endif
 
