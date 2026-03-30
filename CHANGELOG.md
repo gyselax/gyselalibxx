@@ -14,8 +14,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a new constructor for `GaussLegendre` from an index range describing the cell edges.
 - Add a `GradientCreator` operator to group derivative calculations.
 - Add a `NDLagrangeEvaluator` class.
+- Add `eval_basis_and_n_derivs` function to Lagrange basis operators.
+- Add `deriv` function to Lagrange evaluation.
 
 ### Fixed
+
+- Fixed missing load of `pdiplugin-pycall` in some Spack-based toolchains.
 
 ### Changed
 
@@ -24,12 +28,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed FindLAPACKE CMake module to the version in DDC.
 - Renamed `DiscreteToCartesian` -> `DiscretePoloidalCSSplineMapping`.
 - Renamed `DiscreteToCartesianBuilder` -> `DiscretePoloidalCSSplineMappingBuilder`.
+- Changed `BslAdvectionPolar` template parameters and constructor to take a builder and evaluator instead of an `Interpolator2D`.
 
 ### Deprecated
 
 ### Removed
 
 - Remove DDC submodule.
+- Remove 2D `Interpolator` classes:
+  - `IInterpolator2D`
+  - `SplineInterpolator2D`
 
 ## [v0.7.0] - 2026-03-18
 

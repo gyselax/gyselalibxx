@@ -36,7 +36,6 @@
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -129,8 +128,6 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
     RK3Builder const time_stepper;
     SplinePolarFootFinder find_feet(
             grid,
@@ -140,7 +137,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
     AdvectionFieldFinder advection_field_computer(to_physical_mapping);

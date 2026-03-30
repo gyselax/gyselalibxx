@@ -147,9 +147,6 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
-
     // --- Evaluator for the test advection field:
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
@@ -205,7 +202,10 @@ int main(int argc, char** argv)
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "czarny_pseudo_cartesian";
 
-#elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+#else
+#if not defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+    static_assert(false, "No mapping macro defined");
+#endif
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
     DiscretePoloidalCSSplineMappingBuilder<
@@ -295,7 +295,8 @@ int main(int argc, char** argv)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(interpolator, foot_finder, to_physical_mapping);
+    BslAdvectionPolar
+            advection_operator(builder, spline_evaluator, foot_finder, to_physical_mapping);
 
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;

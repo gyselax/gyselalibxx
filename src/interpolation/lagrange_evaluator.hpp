@@ -324,6 +324,130 @@ public:
                 });
     }
 
+    /**
+     * @brief Differentiate 1D Lagrange function at a given coordinate.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param coord_eval The coordinate where the polynomial is differentiated.
+     *                   Note that only the component along the dimension of interest is used.
+     * @param lagrange_coef A Field storing the 1D Lagrange coefficients.
+     *
+     * @return The derivative of the spline function at the desired coordinate.
+     */
+    template <class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
+    KOKKOS_FUNCTION double deriv(
+            IdxDerivDims const& deriv_order,
+            Coord<CoordsDims...> const& coord_eval,
+            ConstField<DataType, BatchedLagrangeIdxRange, memory_space, Layout> const lagrange_coef)
+            const
+    {
+        return eval_no_bc(deriv_order, coord_eval, lagrange_coef);
+    }
+
+    /**
+     * @brief Differentiate 1D spline function (described by its spline coefficients) on a mesh.
+     *
+     * The spline coefficients represent a spline function defined on a cartesian product of batch_domain and B-splines
+     * (basis splines). They can be obtained via various methods, such as using a SplineBuilder.
+     *
+     * The derivation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation.
+     * This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type,
+     * the derivation is performed with the 1D set of spline coefficients identified by the same batch_domain_type::discrete_element_type.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param[out] lagrange_eval The values of the derivatives of the Lagrange polynomials at the desired coordinates.
+     * @param[in] coords_eval The coordinates where the Lagrange polynomials are evaluated. Those are
+     * stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the
+     * points represented by this index range are unused and irrelevant.
+     * @param lagrange_coef A Field storing the 1D Lagrange coefficients.
+     */
+    template <
+            class IdxDerivDims,
+            class Layout1,
+            class Layout2,
+            class Layout3,
+            class IdxRangeBatchedInterpolation,
+            class... CoordsDims>
+    void deriv(
+            IdxDerivDims const& deriv_order,
+            Field<DataType, IdxRangeBatchedInterpolation, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    Coord<CoordsDims...>,
+                    IdxRangeBatchedInterpolation,
+                    memory_space,
+                    Layout2> const coords_eval,
+            ConstField<
+                    DataType,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout3> const lagrange_coef) const
+    {
+        evaluation_idx_range_type const evaluation_idx_range(get_idx_range(lagrange_eval));
+        batch_idx_range_type<IdxRangeBatchedInterpolation> const batch_idx_range(
+                get_idx_range(lagrange_eval));
+
+        using IdxBatchInterpolation =
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                batch_idx_range,
+                KOKKOS_CLASS_LAMBDA(IdxBatchInterpolation const j) {
+                    for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
+                        lagrange_eval(j, i)
+                                = eval_no_bc(deriv_order, coords_eval(j, i), lagrange_coef[j]);
+                    }
+                });
+    }
+
+    /**
+     * @brief Differentiate 1D Lagrange function on a mesh.
+     *
+     * The differentiation is not performed in a multidimensional way (in any sense).
+     * This is a batched 1D derivation. This means that for each slice of lagrange_eval the
+     * evaluation is performed with the relevant 1D set of Lagrange coefficients.
+     *
+     * @param[in] deriv_order An Idx containing the order of derivation for the dimension of interest.
+     * If the dimension is not present, the order of derivation is considered to be 0.
+     * @param[out] lagrange_eval The derivatives of the spline function at the coordinates.
+     * @param[in] lagrange_coef A ChunkSpan storing the spline coefficients.
+     */
+    template <class IdxDerivDims, class Layout1, class Layout2, class IdxRangeBatchedInterpolation>
+    void deriv(
+            IdxDerivDims const& deriv_order,
+            Field<DataType, IdxRangeBatchedInterpolation, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    DataType,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout2> const lagrange_coef) const
+    {
+        evaluation_idx_range_type const evaluation_idx_range(get_idx_range(lagrange_eval));
+        batch_idx_range_type<IdxRangeBatchedInterpolation> const batch_idx_range(
+                get_idx_range(lagrange_eval));
+
+        using IdxBatchInterpolation =
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                batch_idx_range,
+                KOKKOS_CLASS_LAMBDA(IdxBatchInterpolation const j) {
+                    for (Idx<InterpolationGrid> const i : evaluation_idx_range) {
+                        lagrange_eval(j, i)
+                                = eval_no_bc(deriv_order, ddc::coordinate(i), lagrange_coef[j]);
+                    }
+                });
+    }
+
 private:
     template <class Layout, class... CoordsDims>
     KOKKOS_INLINE_FUNCTION DataType
@@ -416,21 +540,38 @@ private:
                                 ddc::detail::TypeSeq<DerivDims...>,
                                 ddc::detail::TypeSeq<deriv_dim>>,
                 "The only valid dimension for deriv_order is Deriv<Dim>");
-        static_assert(sizeof...(DerivDims) == 0);
 
-        std::array<DataType, lagrange_basis_type::degree() + 1> vals_ptr;
-        Kokkos::mdspan<
-                DataType,
-                Kokkos::extents<std::size_t, lagrange_basis_type::degree() + 1>> const
-                vals(vals_ptr.data());
+        constexpr std::size_t n_basis = lagrange_basis_type::degree() + 1;
+        std::array<DataType, n_basis> vals_ptr;
+        Kokkos::mdspan<DataType, Kokkos::extents<std::size_t, n_basis>> const vals(vals_ptr.data());
 
         Coord<continuous_dimension_type> coord_interest(coord_eval);
         Idx<knot_grid> first_lagrange_knot = find_stencil(coord_interest);
         ddc::discrete_space<lagrange_basis_type>()
                 .eval_basis(vals, coord_interest, first_lagrange_knot);
+        if constexpr (sizeof...(DerivDims) == 0) {
+            ddc::discrete_space<lagrange_basis_type>()
+                    .eval_basis(vals, coord_interest, first_lagrange_knot);
+        } else {
+            unsigned long const order = deriv_order.uid();
+            KOKKOS_ASSERT(order <= lagrange_basis_type::degree());
+
+            std::array<DataType, n_basis * n_basis> derivs_ptr;
+            Kokkos::mdspan<
+                    DataType,
+                    Kokkos::extents<std::size_t, n_basis, Kokkos::dynamic_extent>> const
+                    derivs(derivs_ptr.data(), order + 1);
+
+            ddc::discrete_space<lagrange_basis_type>()
+                    .eval_basis_and_n_derivs(derivs, coord_interest, first_lagrange_knot, order);
+
+            for (std::size_t i = 0; i < n_basis; ++i) {
+                vals(i) = derivs(i, order);
+            }
+        }
 
         DataType y = 0.0;
-        for (std::size_t i = 0; i < lagrange_basis_type::degree() + 1; ++i) {
+        for (std::size_t i = 0; i < n_basis; ++i) {
             y += lagrange_coef(first_lagrange_knot + i) * vals[i];
         }
         return y;
@@ -446,9 +587,15 @@ private:
                 NonUniformLagrangeKnots<LagrangeBasis>>;
         Idx<knot_grid> first = ddc::discrete_space<LagrangeBasis>().break_point_domain().front();
         if constexpr (ddc::is_uniform_point_sampling_v<knot_grid>) {
-            int knot_offset = static_cast<int>(
-                    Kokkos::round((x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>()));
-            return first + knot_offset;
+            if constexpr (lagrange_basis_type::degree() % 2 == 0) {
+                int knot_offset = static_cast<int>(Kokkos::round(
+                        (x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>()));
+                return first + knot_offset;
+            } else {
+                int knot_offset = static_cast<int>(
+                        (x_interp - ddc::coordinate(first)) / ddc::step<knot_grid>());
+                return first + knot_offset;
+            }
         } else {
             Idx<knot_grid> last = ddc::discrete_space<LagrangeBasis>().break_point_domain().back();
             KOKKOS_ASSERT(x_interp >= ddc::discrete_space<LagrangeBasis>().rmin());
@@ -464,7 +611,12 @@ private:
 
                 elm_cell = first + (last - first) / 2;
             }
-            return elm_cell;
+            DataType cell_len
+                    = ddc::coordinate(elm_cell + IdxStep<knot_grid>(1)) - ddc::coordinate(elm_cell);
+            return elm_cell
+                   + IdxStep<knot_grid>(
+                           ((lagrange_basis_type::degree() + 1) % 2)
+                           * static_cast<int>(x_interp - ddc::coordinate(elm_cell) > cell_len / 2));
         }
     }
 };
