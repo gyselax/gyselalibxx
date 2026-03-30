@@ -41,6 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove 2D `Interpolator` classes:
   - `IInterpolator2D`
   - `SplineInterpolator2D`
+- Remove Google Test submodule.
 
 ## [v0.7.0] - 2026-03-18
 
