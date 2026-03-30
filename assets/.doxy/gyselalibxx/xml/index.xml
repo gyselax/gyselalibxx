@@ -1348,6 +1348,10 @@
     <member refid="classNonUniformLagrangeBasis_1_1Impl_1afab457f35ffd170e46a266cdf2536abe" kind="function"><name>break_point_domain</name></member>
     <member refid="classNonUniformLagrangeBasis_1_1Impl_1a764a42c0119e24c304e5c6b6bbf545d5" kind="function"><name>full_domain</name></member>
     <member refid="classNonUniformLagrangeBasis_1_1Impl_1aaa83daa104489e6a24ef782e1cfb247c" kind="function"><name>eval_basis</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a29aab7ac13cd66506b45c62f95e90464" kind="function"><name>eval_basis_and_n_derivs</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1afd93297bdb1df60a71d77980067d6e18" kind="function"><name>check_if_node</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1adea9c2c5fbf5e3454b49c94e3a433070" kind="function"><name>get_weights</name></member>
+    <member refid="classNonUniformLagrangeBasis_1_1Impl_1a726e836523fd04fb01ccafeaa48c0d81" kind="function"><name>calculate_values_between_nodes</name></member>
   </compound>
   <compound refid="classPolarBSplines_1_1Impl" kind="class"><name>PolarBSplines::Impl</name>
     <member refid="classPolarBSplines_1_1Impl_1a75f86d6c1815cbb80b0a0046e81800a6" kind="typedef"><name>singular_basis_linear_combination_idx_range_type</name></member>
@@ -1428,6 +1432,9 @@
     <member refid="classUniformLagrangeBasis_1_1Impl_1ab68b76df208aad2026fb10590e655272" kind="function"><name>break_point_domain</name></member>
     <member refid="classUniformLagrangeBasis_1_1Impl_1a399e6614ad017d771b6d9ffbd8d4da8a" kind="function"><name>full_domain</name></member>
     <member refid="classUniformLagrangeBasis_1_1Impl_1a4fbf13e1e13127ef98f6477df2e809c8" kind="function"><name>eval_basis</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a4d5bbe6bba43296fe238b74a96a88b02" kind="function"><name>eval_basis_and_n_derivs</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1a3e81136046a5b219d0c0c481b23e8b5d" kind="function"><name>check_if_node</name></member>
+    <member refid="classUniformLagrangeBasis_1_1Impl_1ae46e943a9a3bbcdd22489d4ca6e67b10" kind="function"><name>calculate_values_between_nodes</name></member>
   </compound>
   <compound refid="classtensor__tools_1_1IndexedTensor" kind="class"><name>tensor_tools::IndexedTensor</name>
     <member refid="classtensor__tools_1_1IndexedTensor_1a9b1aa0cb99b47fe5ea64752e79c6d30a" kind="typedef"><name>index_pattern</name></member>
@@ -1731,6 +1738,9 @@
     <member refid="classLagrangeEvaluator_1a84a9e487a0487108b83726a130fa8f14" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1a940bc8a12231b0dc1d82dd5b60f0ea75" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1ad4bb1d5d33263f705594b4a999eec9dd" kind="function"><name>operator()</name></member>
+    <member refid="classLagrangeEvaluator_1a5f91945de08749e6c081570d48ea7678" kind="function"><name>deriv</name></member>
+    <member refid="classLagrangeEvaluator_1a26528549f3a1bc381121bc390752fc91" kind="function"><name>deriv</name></member>
+    <member refid="classLagrangeEvaluator_1a746eed33d7a8255c093475e9fbdc2f27" kind="function"><name>deriv</name></member>
     <member refid="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" kind="function"><name>eval</name></member>
     <member refid="classLagrangeEvaluator_1ab6bb89e95f3a481282e212ac1a76d006" kind="function"><name>find_stencil</name></member>
     <member refid="classLagrangeEvaluator_1a5dd80d5c33512b83f508a62bc3657093" kind="function"><name>eval_no_bc</name></member>
@@ -2258,6 +2268,10 @@
     <member refid="classNDLagrangeEvaluator_1a7e576bc8e8c98eb3688b5bdeb58cb48e" kind="function"><name>operator()</name></member>
     <member refid="classNDLagrangeEvaluator_1ae4d5c978b81d2eee2ccbc665f21685c0" kind="function"><name>operator()</name></member>
     <member refid="classNDLagrangeEvaluator_1a180b9a6b2ee4a00bc7a6225932da6399" kind="function"><name>operator()</name></member>
+    <member refid="classNDLagrangeEvaluator_1a60c2e10b43141645fb6462a99d29647e" kind="function"><name>deriv</name></member>
+    <member refid="classNDLagrangeEvaluator_1a84858db154d6cc6a3d654d6d85ba4188" kind="function"><name>deriv</name></member>
+    <member refid="classNDLagrangeEvaluator_1ab65ca2fd7980133f91911b6b4caad224" kind="function"><name>deriv</name></member>
+    <member refid="classNDLagrangeEvaluator_1a2cc75c71441a6c6d4c3a6dc19a0d21c2" kind="function"><name>eval_no_bc</name></member>
   </compound>
   <compound refid="classddcHelper_1_1NonUniformInterpolationPoints" kind="class"><name>ddcHelper::NonUniformInterpolationPoints</name>
     <member refid="classddcHelper_1_1NonUniformInterpolationPoints_1ab8ff930d36034282ebc3165145af6ab9" kind="typedef"><name>Dim</name></member>
@@ -4123,7 +4137,7 @@
     <member refid="math__tools_8hpp_1a68d288f6885715deb685f21226119541" kind="function"><name>modulo</name></member>
     <member refid="math__tools_8hpp_1a5d9515eb56ff81f9a4c38ded97484cbd" kind="function"><name>ipow</name></member>
     <member refid="math__tools_8hpp_1a0885ea4a7de46b14ff02034701db4b73" kind="function"><name>ipow</name></member>
-    <member refid="math__tools_8hpp_1a9fa3e41343ad34036f70704cefaa6ceb" kind="function"><name>factorial</name></member>
+    <member refid="math__tools_8hpp_1acab1b2a91b076221fbac6fe4e8c762fb" kind="function"><name>factorial</name></member>
     <member refid="math__tools_8hpp_1abc6ba7d1d05608b655ee20062561f832" kind="function"><name>determinant</name></member>
     <member refid="math__tools_8hpp_1a2deb990134f24f0c77ece7175c26ff5d" kind="function"><name>determinant</name></member>
     <member refid="math__tools_8hpp_1a9de28c918be129163f42d4ad149ae3ae" kind="function"><name>inverse</name></member>
@@ -4131,6 +4145,7 @@
     <member refid="math__tools_8hpp_1a4b94584345d8207149d6605394979122" kind="function"><name>scalar_product</name></member>
     <member refid="math__tools_8hpp_1a094865009892a55b1c1221dbbb818a66" kind="function"><name>scalar_product</name></member>
     <member refid="math__tools_8hpp_1a390eb9ac6774591ccf0ec39facd40c25" kind="function"><name>tensor_product</name></member>
+    <member refid="math__tools_8hpp_1a402ad1cdce811a36a996bd442b4e2173" kind="function"><name>neg_1_pow</name></member>
   </compound>
   <compound refid="spline__1d__partial__derivative_8hpp" kind="file"><name>spline_1d_partial_derivative.hpp</name>
   </compound>

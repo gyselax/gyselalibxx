@@ -743,6 +743,234 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="300" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="300" bodyend="325"/>
       </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a5f91945de08749e6c081570d48ea7678" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxDerivDims</type>
+          </param>
+          <param>
+            <type>class Layout</type>
+          </param>
+          <param>
+            <type>class BatchedLagrangeIdxRange</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>CoordsDims</declname>
+            <defname>CoordsDims</defname>
+          </param>
+        </templateparamlist>
+        <type>KOKKOS_FUNCTION double</type>
+        <definition>KOKKOS_FUNCTION double LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::deriv</definition>
+        <argsstring>(IdxDerivDims const &amp;deriv_order, Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, BatchedLagrangeIdxRange, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
+        <name>deriv</name>
+        <qualifiedname>LagrangeEvaluator::deriv</qualifiedname>
+        <param>
+          <type>IdxDerivDims const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>Coord&lt; CoordsDims... &gt; const &amp;</type>
+          <declname>coord_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, BatchedLagrangeIdxRange, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout &gt; const</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+<para>Differentiate 1D Lagrange function at a given coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>coord_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the polynomial is differentiated. Note that only the component along the dimension of interest is used. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lagrange_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field storing the 1D Lagrange coefficients.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The derivative of the spline function at the desired coordinate. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="339" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="339" bodyend="346"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a26528549f3a1bc381121bc390752fc91" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxDerivDims</type>
+          </param>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+          <param>
+            <type>class Layout3</type>
+          </param>
+          <param>
+            <type>class IdxRangeBatchedInterpolation</type>
+          </param>
+          <param>
+            <type>class...</type>
+            <declname>CoordsDims</declname>
+            <defname>CoordsDims</defname>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::deriv</definition>
+        <argsstring>(IdxDerivDims const &amp;deriv_order, Field&lt; DataType, IdxRangeBatchedInterpolation, memory_space, Layout1 &gt; const lagrange_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, memory_space, Layout2 &gt; const coords_eval, ConstField&lt; DataType, batched_coeff_idx_range_type&lt; IdxRangeBatchedInterpolation &gt;, memory_space, Layout3 &gt; const lagrange_coef) const</argsstring>
+        <name>deriv</name>
+        <qualifiedname>LagrangeEvaluator::deriv</qualifiedname>
+        <param>
+          <type>IdxDerivDims const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>Field&lt; DataType, IdxRangeBatchedInterpolation, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout1 &gt; const</type>
+          <declname>lagrange_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout2 &gt; const</type>
+          <declname>coords_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1a1f62d58f6ca9f533846027355a3b5d2c" kindref="member">batched_coeff_idx_range_type</ref>&lt; IdxRangeBatchedInterpolation &gt;, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout3 &gt; const</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+<para>Differentiate 1D spline function (described by its spline coefficients) on a mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The spline coefficients represent a spline function defined on a cartesian product of batch_domain and B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder.</para>
+<para>The derivation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation. This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type, the derivation is performed with the 1D set of spline coefficients identified by the same batch_domain_type::discrete_element_type.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">lagrange_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the derivatives of the Lagrange polynomials at the desired coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coords_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinates where the Lagrange polynomials are evaluated. Those are stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the points represented by this index range are unused and irrelevant. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>lagrange_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A Field storing the 1D Lagrange coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="373" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="373" bodyend="406"/>
+      </memberdef>
+      <memberdef kind="function" id="classLagrangeEvaluator_1a746eed33d7a8255c093475e9fbdc2f27" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class IdxDerivDims</type>
+          </param>
+          <param>
+            <type>class Layout1</type>
+          </param>
+          <param>
+            <type>class Layout2</type>
+          </param>
+          <param>
+            <type>class IdxRangeBatchedInterpolation</type>
+          </param>
+        </templateparamlist>
+        <type>void</type>
+        <definition>void LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::deriv</definition>
+        <argsstring>(IdxDerivDims const &amp;deriv_order, Field&lt; DataType, IdxRangeBatchedInterpolation, memory_space, Layout1 &gt; const lagrange_eval, ConstField&lt; DataType, batched_coeff_idx_range_type&lt; IdxRangeBatchedInterpolation &gt;, memory_space, Layout2 &gt; const lagrange_coef) const</argsstring>
+        <name>deriv</name>
+        <qualifiedname>LagrangeEvaluator::deriv</qualifiedname>
+        <param>
+          <type>IdxDerivDims const &amp;</type>
+          <declname>deriv_order</declname>
+        </param>
+        <param>
+          <type>Field&lt; DataType, IdxRangeBatchedInterpolation, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout1 &gt; const</type>
+          <declname>lagrange_eval</declname>
+        </param>
+        <param>
+          <type>ConstField&lt; DataType, <ref refid="classLagrangeEvaluator_1a1f62d58f6ca9f533846027355a3b5d2c" kindref="member">batched_coeff_idx_range_type</ref>&lt; IdxRangeBatchedInterpolation &gt;, <ref refid="classLagrangeEvaluator_1a80b6653fdddebac2b5fb7b244d01703b" kindref="member">memory_space</ref>, Layout2 &gt; const</type>
+          <declname>lagrange_coef</declname>
+        </param>
+        <briefdescription>
+<para>Differentiate 1D Lagrange function on a mesh. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The differentiation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation. This means that for each slice of lagrange_eval the evaluation is performed with the relevant 1D set of Lagrange coefficients.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">deriv_order</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="out">lagrange_eval</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The derivatives of the spline function at the coordinates. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">lagrange_coef</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A ChunkSpan storing the spline coefficients. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="421" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="421" bodyend="449"/>
+      </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
       <memberdef kind="function" id="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
@@ -775,7 +1003,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="330" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="330" bodyend="353"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="454" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="454" bodyend="477"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1ab6bb89e95f3a481282e212ac1a76d006" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION Idx&lt; <ref refid="classLagrangeEvaluator_1aa14805621516e8acab534ae3a52251b1" kindref="member">coeff_grid_type</ref> &gt;</type>
@@ -791,7 +1019,7 @@
 <para>Find the first stencil knot and adjust the coordinate for periodic wrap-around. </para>
         </briefdescription>
         <detaileddescription>
-<para>Assumes <computeroutput>coord</computeroutput> has already been wrapped into <formula id="316">$[\text{rmin}, \text{rmax}]$</formula> for periodic bases (the caller is responsible for that initial wrap).</para>
+<para>Assumes <computeroutput>coord</computeroutput> has already been wrapped into <formula id="317">$[\text{rmin}, \text{rmax}]$</formula> for periodic bases (the caller is responsible for that initial wrap).</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>coord</parametername>
@@ -807,7 +1035,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="364" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="364" bodyend="399"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="488" column="32" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="488" bodyend="523"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1a5dd80d5c33512b83f508a62bc3657093" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -848,7 +1076,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="402" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="402" bodyend="437"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="526" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="526" bodyend="578"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION auto</type>
@@ -867,7 +1095,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="441" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="441" bodyend="469"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="582" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="582" bodyend="621"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -934,7 +1162,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="30" bodyend="470"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="30" bodyend="622"/>
     <listofallmembers>
       <member refid="classLagrangeEvaluator_1aec086914105c4d1cc46b4105ab04095c" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batch_idx_range_type</name></member>
       <member refid="classLagrangeEvaluator_1a1f62d58f6ca9f533846027355a3b5d2c" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>batched_coeff_idx_range_type</name></member>
@@ -943,6 +1171,9 @@
       <member refid="classLagrangeEvaluator_1ac4f442b7234a311f049383d3e336b934" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>coeff_idx_range_type</name></member>
       <member refid="classLagrangeEvaluator_1afd2dd964bf9a6c2b38ddb5b91a6299da" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>continuous_dimension_type</name></member>
       <member refid="classLagrangeEvaluator_1ad0d109fd894110740bee3523ab5fef28" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>data_type</name></member>
+      <member refid="classLagrangeEvaluator_1a5f91945de08749e6c081570d48ea7678" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>deriv</name></member>
+      <member refid="classLagrangeEvaluator_1a26528549f3a1bc381121bc390752fc91" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>deriv</name></member>
+      <member refid="classLagrangeEvaluator_1a746eed33d7a8255c093475e9fbdc2f27" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>deriv</name></member>
       <member refid="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval</name></member>
       <member refid="classLagrangeEvaluator_1a5dd80d5c33512b83f508a62bc3657093" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval_no_bc</name></member>
       <member refid="classLagrangeEvaluator_1a2b3881bc56af00edf8ca7a956185dfd8" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>evaluation_idx_range_type</name></member>

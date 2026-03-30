@@ -14,6 +14,7 @@
     <includedby refid="combined__mapping_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/combined_mapping.hpp</includedby>
     <includedby refid="discrete__to__cartesian_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/discrete_to_cartesian.hpp</includedby>
     <includedby refid="inverse__jacobian__matrix_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</includedby>
+    <includedby refid="lagrange__basis__non__uniform_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp</includedby>
     <includedby refid="bernstein_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</includedby>
     <includedby refid="polarpoissonlikeassembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</includedby>
     <incdepgraph>
@@ -255,6 +256,12 @@
       </node>
     </incdepgraph>
     <invincdepgraph>
+      <node id="33">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp</label>
+        <link refid="bsl__advection__1d_8hpp_source"/>
+        <childnode refid="34" relation="include">
+        </childnode>
+      </node>
       <node id="4">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp</label>
         <link refid="bsl__advection__polar_8hpp_source"/>
@@ -264,6 +271,14 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
+      </node>
+      <node id="35">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_vx.hpp</label>
+        <link refid="bsl__advection__vx_8hpp_source"/>
+      </node>
+      <node id="36">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_x.hpp</label>
+        <link refid="bsl__advection__x_8hpp_source"/>
       </node>
       <node id="3">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
@@ -449,7 +464,57 @@
         <childnode refid="7" relation="include">
         </childnode>
       </node>
+      <node id="34">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
+        <link refid="predcorr__RK2_8hpp_source"/>
+      </node>
+      <node id="37">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/extrapolation_rule_choice.hpp</label>
+        <link refid="extrapolation__rule__choice_8hpp_source"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="39" relation="include">
+        </childnode>
+      </node>
+      <node id="32">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp</label>
+        <link refid="i__interpolation_8hpp_source"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="37" relation="include">
+        </childnode>
+      </node>
       <node id="31">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp</label>
+        <link refid="lagrange__basis__non__uniform_8hpp_source"/>
+        <childnode refid="32" relation="include">
+        </childnode>
+        <childnode refid="40" relation="include">
+        </childnode>
+        <childnode refid="38" relation="include">
+        </childnode>
+      </node>
+      <node id="40">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp</label>
+        <link refid="lagrange__evaluator_8hpp_source"/>
+        <childnode refid="38" relation="include">
+        </childnode>
+        <childnode refid="41" relation="include">
+        </childnode>
+      </node>
+      <node id="38">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</label>
+        <link refid="lagrange__interpolation_8hpp_source"/>
+      </node>
+      <node id="41">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_lagrange_evaluator.hpp</label>
+        <link refid="nd__lagrange__evaluator_8hpp_source"/>
+      </node>
+      <node id="42">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</label>
         <link refid="bernstein_8hpp_source"/>
         <childnode refid="11" relation="include">
@@ -460,6 +525,10 @@
         <link refid="polar__bsplines_8hpp_source"/>
         <childnode refid="12" relation="include">
         </childnode>
+      </node>
+      <node id="39">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</label>
+        <link refid="spline__interpolation_8hpp_source"/>
       </node>
       <node id="25">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/curl.hpp</label>
@@ -491,6 +560,8 @@
         <childnode refid="21" relation="include">
         </childnode>
         <childnode refid="31" relation="include">
+        </childnode>
+        <childnode refid="42" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
@@ -757,9 +828,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="117" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="117" bodyend="131"/>
       </memberdef>
-      <memberdef kind="function" id="math__tools_8hpp_1a9fa3e41343ad34036f70704cefaa6ceb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
-        <type>std::size_t</type>
-        <definition>std::size_t factorial</definition>
+      <memberdef kind="function" id="math__tools_8hpp_1acab1b2a91b076221fbac6fe4e8c762fb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION std::size_t</type>
+        <definition>KOKKOS_INLINE_FUNCTION std::size_t factorial</definition>
         <argsstring>(std::size_t f)</argsstring>
         <name>factorial</name>
         <param>
@@ -772,7 +843,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="133" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="133" bodyend="140"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="133" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="133" bodyend="140"/>
       </memberdef>
       <memberdef kind="function" id="math__tools_8hpp_1abc6ba7d1d05608b655ee20062561f832" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <templateparamlist>
@@ -1017,6 +1088,24 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="268" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="268" bodyend="278"/>
       </memberdef>
+      <memberdef kind="function" id="math__tools_8hpp_1a402ad1cdce811a36a996bd442b4e2173" prot="public" static="yes" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION int</type>
+        <definition>static KOKKOS_INLINE_FUNCTION int neg_1_pow</definition>
+        <argsstring>(int pow)</argsstring>
+        <name>neg_1_pow</name>
+        <param>
+          <type>int</type>
+          <declname>pow</declname>
+        </param>
+        <briefdescription>
+<para>Calculate (-1)^pow. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" line="283" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp" bodystart="283" bodyend="286"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -1155,7 +1244,7 @@
 <codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>r;</highlight></codeline>
 <codeline lineno="131"><highlight class="normal">}</highlight></codeline>
 <codeline lineno="132"><highlight class="normal"></highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>std::size_t<sp/>factorial(std::size_t<sp/>f)</highlight></codeline>
+<codeline lineno="133"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/>std::size_t<sp/>factorial(std::size_t<sp/>f)</highlight></codeline>
 <codeline lineno="134"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>std::size_t<sp/>r<sp/>=<sp/>1;</highlight></codeline>
 <codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(std::size_t<sp/>i(2);<sp/>i<sp/>&lt;<sp/>f<sp/>+<sp/>1;<sp/>++i)<sp/>{</highlight></codeline>
@@ -1301,6 +1390,11 @@
 <codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>mapping.jacobian(coord));</highlight></codeline>
 <codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="indexed__tensor_8hpp_1ad8dde2095d734c21601a6cf275da4223" kindref="member">tensor_mul</ref>(<ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;i&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">,<sp/></highlight><highlight class="charliteral">&apos;k&apos;</highlight><highlight class="normal">&gt;(eps),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;j&apos;</highlight><highlight class="normal">&gt;(a),<sp/><ref refid="indexed__tensor_8hpp_1a8fef2d2da09ec84f74e44e63491ff4aa" kindref="member">index</ref>&lt;</highlight><highlight class="charliteral">&apos;k&apos;</highlight><highlight class="normal">&gt;(b));</highlight></codeline>
 <codeline lineno="278"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal">KOKKOS_INLINE_FUNCTION<sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>neg_1_pow(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>pow)</highlight></codeline>
+<codeline lineno="284"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(1<sp/>-<sp/>2<sp/>*<sp/>(pow<sp/>%<sp/>2));</highlight></codeline>
+<codeline lineno="286"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/math_tools.hpp"/>
   </compounddef>

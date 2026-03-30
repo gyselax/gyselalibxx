@@ -62,7 +62,7 @@
 | ---: | :--- |
 |  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
 |  KOKKOS\_INLINE\_FUNCTION double | [**determinant**](#function-determinant) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
-|  std::size\_t | [**factorial**](#function-factorial) (std::size\_t f) <br> |
+|  KOKKOS\_INLINE\_FUNCTION std::size\_t | [**factorial**](#function-factorial) (std::size\_t f) <br> |
 |  KOKKOS\_INLINE\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual &gt; &gt; | [**inverse**](#function-inverse) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2 &gt;, VectorIndexSet&lt; ColDim1, ColDim2 &gt; &gt; arr) <br> |
 |  KOKKOS\_FUNCTION [**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; typename ColDim1::Dual, typename ColDim2::Dual, typename ColDim3::Dual &gt;, VectorIndexSet&lt; typename RowDim1::Dual, typename RowDim2::Dual, typename RowDim3::Dual &gt; &gt; | [**inverse**](#function-inverse) ([**DTensor**](classTensor.md)&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br> |
 |  KOKKOS\_INLINE\_FUNCTION constexpr double | [**ipow**](#function-ipow) (double a, std::size\_t i) <br> |
@@ -78,6 +78,11 @@
 |  KOKKOS\_INLINE\_FUNCTION [**Tensor**](classTensor.md)&lt; ElementType, vector\_index\_set\_dual\_t&lt; VectorIndexSetType &gt; &gt; | [**tensor\_product**](#function-tensor_product) (Mapping const & mapping, CoordType const & coord, [**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType &gt; const & a, [**Tensor**](classTensor.md)&lt; ElementType, VectorIndexSetType &gt; const & b) <br> |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  KOKKOS\_INLINE\_FUNCTION int | [**neg\_1\_pow**](#function-neg_1_pow) (int pow) <br>_Calculate (-1)^pow._  |
 
 
 
@@ -144,7 +149,7 @@ KOKKOS_INLINE_FUNCTION double determinant (
 ### function factorial 
 
 ```C++
-inline std::size_t factorial (
+KOKKOS_INLINE_FUNCTION std::size_t factorial (
     std::size_t f
 ) 
 ```
@@ -368,6 +373,24 @@ KOKKOS_INLINE_FUNCTION Tensor < ElementType, vector_index_set_dual_t< VectorInde
     CoordType const & coord,
     Tensor < ElementType, VectorIndexSetType > const & a,
     Tensor < ElementType, VectorIndexSetType > const & b
+) 
+```
+
+
+
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function neg\_1\_pow 
+
+_Calculate (-1)^pow._ 
+```C++
+static KOKKOS_INLINE_FUNCTION int neg_1_pow (
+    int pow
 ) 
 ```
 

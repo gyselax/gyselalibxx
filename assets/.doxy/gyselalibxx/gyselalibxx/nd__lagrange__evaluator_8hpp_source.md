@@ -114,32 +114,7 @@ public:
             Coord<CoordsDims...> const& coord,
             ConstField<data_type, NdCoeffIdxRange, memory_space, Layout> const& coeff) const
     {
-        static_assert(
-                (ddc::in_tags_v<HeadContDim, ddc::detail::TypeSeq<CoordsDims...>>)&&(
-                        ddc::in_tags_v<
-                                typename Evaluators1D::continuous_dimension_type,
-                                ddc::detail::TypeSeq<CoordsDims...>> && ...),
-                "Evaluation coordinate must contain the evaluation dimensions");
-
-        Coord<HeadContDim> coord_head(coord);
-        Idx<HeadCoeffGrid> first_lagrange_knot = m_head_evaluator.find_stencil(coord_head);
-
-        // Evaluate the Lagrange basis functions at the (adjusted) head coordinate.
-        std::array<data_type, HeadBasis::degree() + 1> vals_ptr;
-        Kokkos::mdspan<data_type, Kokkos::extents<std::size_t, HeadBasis::degree() + 1>> const vals(
-                vals_ptr.data());
-        ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
-
-        // Tensor-product recursion: for each stencil knot, slice the coefficient
-        // array along the head dimension and delegate to the (N-1)D tail evaluator.
-        // When sizeof...(Evaluators1D)==1, m_tail_evaluator is the 1D LagrangeEvaluator
-        // and operator() applies its configured extrapolation rules.
-        data_type result = 0.;
-        for (std::size_t i = 0; i < HeadBasis::degree() + 1; ++i) {
-            Idx<HeadCoeffGrid> const knot_i = first_lagrange_knot + IdxStep<HeadCoeffGrid>(i);
-            result += vals[i] * m_tail_evaluator(coord, coeff[knot_i]);
-        }
-        return result;
+        return eval_no_bc(Idx<>(), coord, coeff);
     }
 
     template <
@@ -168,7 +143,7 @@ public:
                 KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
                     IdxBatch const batch_idx(full_idx);
                     lagrange_eval(full_idx)
-                            = (*this)(coords_eval(full_idx), lagrange_coef[batch_idx]);
+                            = eval_no_bc(Idx<>(), coords_eval(full_idx), lagrange_coef[batch_idx]);
                 });
     }
 
@@ -193,9 +168,156 @@ public:
                 KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
                     IdxBatch const batch_idx(full_idx);
                     IdxEval const eval_idx(full_idx);
-                    lagrange_eval(full_idx)
-                            = (*this)(ddc::coordinate(eval_idx), lagrange_coef[batch_idx]);
+                    lagrange_eval(full_idx) = eval_no_bc(
+                            Idx<>(),
+                            ddc::coordinate(eval_idx),
+                            lagrange_coef[batch_idx]);
                 });
+    }
+
+    template <class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
+    KOKKOS_FUNCTION double deriv(
+            IdxDerivDims const& deriv_order,
+            Coord<CoordsDims...> const& coord_eval,
+            ConstField<data_type, BatchedLagrangeIdxRange, memory_space, Layout> const
+                    lagrange_coef) const
+    {
+        return eval_no_bc(deriv_order, coord_eval, lagrange_coef);
+    }
+
+    template <
+            class IdxDerivDims,
+            class Layout1,
+            class Layout2,
+            class Layout3,
+            class IdxRangeBatchedInterpolation,
+            class... CoordsDims>
+    void deriv(
+            IdxDerivDims const& deriv_order,
+            Field<data_type, IdxRangeBatchedInterpolation, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    Coord<CoordsDims...>,
+                    IdxRangeBatchedInterpolation,
+                    memory_space,
+                    Layout2> const coords_eval,
+            ConstField<
+                    data_type,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout3> const lagrange_coef) const
+    {
+        using IdxFull = typename IdxRangeBatchedInterpolation::discrete_element_type;
+        using IdxBatch =
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                get_idx_range(lagrange_eval),
+                KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
+                    IdxBatch const batch_idx(full_idx);
+                    lagrange_eval(full_idx) = eval_no_bc(
+                            deriv_order,
+                            coords_eval(full_idx),
+                            lagrange_coef[batch_idx]);
+                });
+    }
+
+    template <class IdxDerivDims, class Layout1, class Layout2, class IdxRangeBatchedInterpolation>
+    void deriv(
+            IdxDerivDims const& deriv_order,
+            Field<data_type, IdxRangeBatchedInterpolation, memory_space, Layout1> const
+                    lagrange_eval,
+            ConstField<
+                    data_type,
+                    batched_coeff_idx_range_type<IdxRangeBatchedInterpolation>,
+                    memory_space,
+                    Layout2> const lagrange_coef) const
+    {
+        using IdxFull = typename IdxRangeBatchedInterpolation::discrete_element_type;
+        using IdxEval = typename evaluation_idx_range_type::discrete_element_type;
+        using IdxBatch =
+                typename batch_idx_range_type<IdxRangeBatchedInterpolation>::discrete_element_type;
+
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space(),
+                get_idx_range(lagrange_eval),
+                KOKKOS_CLASS_LAMBDA(IdxFull const full_idx) {
+                    IdxBatch const batch_idx(full_idx);
+                    IdxEval const eval_idx(full_idx);
+                    lagrange_eval(full_idx) = eval_no_bc(
+                            deriv_order,
+                            ddc::coordinate(eval_idx),
+                            lagrange_coef[batch_idx]);
+                });
+    }
+
+private:
+    template <class... DerivDims, class Layout, class... CoordsDims>
+    KOKKOS_INLINE_FUNCTION data_type eval_no_bc(
+            Idx<DerivDims...> const& deriv_order,
+            Coord<CoordsDims...> const& coord,
+            ConstField<data_type, coeff_idx_range_type, memory_space, Layout> const lagrange_coef)
+            const
+    {
+        static_assert(
+                (ddc::in_tags_v<HeadContDim, ddc::detail::TypeSeq<CoordsDims...>>)&&(
+                        ddc::in_tags_v<
+                                typename Evaluators1D::continuous_dimension_type,
+                                ddc::detail::TypeSeq<CoordsDims...>> && ...),
+                "Evaluation coordinate must contain the evaluation dimensions");
+
+        using DerivDimsTypeSeq = ddc::detail::TypeSeq<DerivDims...>;
+        using TailDerivDimsTypeSeq = ddc::
+                type_seq_remove_t<DerivDimsTypeSeq, ddc::detail::TypeSeq<ddc::Deriv<HeadContDim>>>;
+        using IdxTailDerivDims = typename ddc::detail::convert_type_seq_to_discrete_domain_t<
+                TailDerivDimsTypeSeq>::discrete_element_type;
+
+        constexpr std::size_t n_head_basis = HeadBasis::degree() + 1;
+        Coord<HeadContDim> coord_head(coord);
+        Idx<HeadCoeffGrid> first_lagrange_knot = m_head_evaluator.find_stencil(coord_head);
+
+        // Evaluate the Lagrange basis functions at the (adjusted) head coordinate.
+        std::array<data_type, n_head_basis> vals_ptr;
+        Kokkos::mdspan<data_type, Kokkos::extents<std::size_t, n_head_basis>> const vals(
+                vals_ptr.data());
+        ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
+        if constexpr (ddc::in_tags_v<ddc::Deriv<HeadContDim>, DerivDimsTypeSeq>) {
+            unsigned long const order = ddc::select<ddc::Deriv<HeadContDim>>(deriv_order).uid();
+            KOKKOS_ASSERT(order > 0 && order <= HeadBasis::degree())
+
+            std::array<data_type, n_head_basis * n_head_basis> derivs_ptr;
+            Kokkos::mdspan<
+                    data_type,
+                    Kokkos::extents<std::size_t, n_head_basis, Kokkos::dynamic_extent>> const
+                    derivs(derivs_ptr.data(), order + 1);
+
+            ddc::discrete_space<HeadBasis>()
+                    .eval_basis_and_n_derivs(derivs, coord_head, first_lagrange_knot, order);
+
+            for (std::size_t i = 0; i < n_head_basis; ++i) {
+                vals(i) = derivs(i, order);
+            }
+        } else {
+            ddc::discrete_space<HeadBasis>().eval_basis(vals, coord_head, first_lagrange_knot);
+        }
+
+        IdxTailDerivDims tail_deriv_order(deriv_order);
+        // Tensor-product recursion: for each stencil knot, slice the coefficient
+        // array along the head dimension and delegate to the (N-1)D tail evaluator.
+        // When sizeof...(Evaluators1D)==1, m_tail_evaluator is the 1D LagrangeEvaluator
+        // and operator() applies its configured extrapolation rules.
+        data_type result = 0.;
+        for (std::size_t i = 0; i < n_head_basis; ++i) {
+            Idx<HeadCoeffGrid> const knot_i = first_lagrange_knot + IdxStep<HeadCoeffGrid>(i);
+            result += vals[i]
+                      * m_tail_evaluator.eval_no_bc(tail_deriv_order, coord, lagrange_coef[knot_i]);
+        }
+        return result;
     }
 };
 ```

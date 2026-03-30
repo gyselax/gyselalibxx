@@ -592,7 +592,7 @@
 <td style="text-align: left;"><a href="#function-determinant"><strong>determinant</strong></a> (<a href="classTensor.html"><strong>DTensor</strong></a>&lt; VectorIndexSet&lt; RowDim1, RowDim2, RowDim3 &gt;, VectorIndexSet&lt; ColDim1, ColDim2, ColDim3 &gt; &gt; arr) <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">std::size_t</td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION std::size_t</td>
 <td style="text-align: left;"><a href="#function-factorial"><strong>factorial</strong></a> (std::size_t f) <br></td>
 </tr>
 <tr>
@@ -649,6 +649,21 @@
 </tr>
 </tbody>
 </table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION int</td>
+<td style="text-align: left;"><a href="#function-neg_1_pow"><strong>neg_1_pow</strong></a> (int pow) <br><em>Calculate (-1)^pow.</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-determinant">function determinant</h3>
 <pre><code class="language-C++">template&lt;class RowDim1, class RowDim2, class ColDim1, class ColDim2&gt;
@@ -667,7 +682,7 @@ KOKKOS_INLINE_FUNCTION double determinant (
 <hr>
 
 <h3 id="function-factorial">function factorial</h3>
-<pre><code class="language-C++">inline std::size_t factorial (
+<pre><code class="language-C++">KOKKOS_INLINE_FUNCTION std::size_t factorial (
     std::size_t f
 ) 
 </code></pre>
@@ -787,6 +802,14 @@ KOKKOS_INLINE_FUNCTION Tensor &lt; ElementType, vector_index_set_dual_t&lt; Vect
     CoordType const &amp; coord,
     Tensor &lt; ElementType, VectorIndexSetType &gt; const &amp; a,
     Tensor &lt; ElementType, VectorIndexSetType &gt; const &amp; b
+) 
+</code></pre>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-neg_1_pow">function neg_1_pow</h3>
+<p><em>Calculate (-1)^pow.</em> </p>
+<pre><code class="language-C++">static KOKKOS_INLINE_FUNCTION int neg_1_pow (
+    int pow
 ) 
 </code></pre>
 <hr>

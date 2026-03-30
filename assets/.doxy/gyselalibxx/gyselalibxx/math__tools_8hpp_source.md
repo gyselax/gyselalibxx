@@ -140,7 +140,7 @@ KOKKOS_INLINE_FUNCTION double ipow(double a, int i)
     return r;
 }
 
-inline std::size_t factorial(std::size_t f)
+KOKKOS_INLINE_FUNCTION std::size_t factorial(std::size_t f)
 {
     std::size_t r = 1;
     for (std::size_t i(2); i < f + 1; ++i) {
@@ -285,6 +285,11 @@ tensor_product(
     LeviCivitaTensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> eps(
             mapping.jacobian(coord));
     return tensor_mul(index<'i', 'j', 'k'>(eps), index<'j'>(a), index<'k'>(b));
+}
+
+KOKKOS_INLINE_FUNCTION static int neg_1_pow(int pow)
+{
+    return (1 - 2 * (pow % 2));
 }
 ```
 

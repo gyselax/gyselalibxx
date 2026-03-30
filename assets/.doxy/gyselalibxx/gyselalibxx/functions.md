@@ -89,6 +89,7 @@
 * **norm\_L1** ([**l\_norm\_tools.hpp**](l__norm__tools_8hpp.md))
 * **norm\_L2** ([**l\_norm\_tools.hpp**](l__norm__tools_8hpp.md))
 * **norm\_inf** ([**l\_norm\_tools.hpp**](l__norm__tools_8hpp.md), [**multipatch\_math\_tools.hpp**](multipatch__math__tools_8hpp.md))
+* **neg\_1\_pow** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **norm** ([**math\_tools.hpp**](math__tools_8hpp.md))
 * **neumann\_spline\_quadrature\_coefficients** ([**neumann\_spline\_quadrature.hpp**](neumann__spline__quadrature_8hpp.md))
 * **neumann\_spline\_quadrature\_coefficients\_1d** ([**neumann\_spline\_quadrature.hpp**](neumann__spline__quadrature_8hpp.md))

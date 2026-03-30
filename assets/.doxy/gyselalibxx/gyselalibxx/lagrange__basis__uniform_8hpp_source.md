@@ -106,9 +106,8 @@ public:
             }
 
             // Calculate weights
-            DataType dx = ddc::discrete_space<knot_grid>().step();
             for (int i(0); i < D + 1; ++i) {
-                DataType numerator = dx;
+                DataType numerator = 1;
                 for (int j(0); j < D + 1; ++j) {
                     if (i == j)
                         continue;
@@ -166,29 +165,148 @@ public:
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
             KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
-            DataType dx = ddc::discrete_space<knot_grid>().step();
-            double inv_dx = 1. / dx;
-            DataType offset = (x - ddc::coordinate(poly_start)) * inv_dx;
-            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
-            int icell = static_cast<int>(offset);
-            DataType local_offset = offset - icell;
-            if (local_offset < eps) {
+            DataType offset;
+            int node = check_if_node(offset, x, poly_start);
+            if (node == -1) {
+                calculate_values_between_nodes(values, x, poly_start, offset);
+            } else {
                 for (int j(0); j < D + 1; ++j) {
-                    values(j) = static_cast<int>(j == icell);
+                    values(j) = static_cast<int>(j == node);
                 }
-            } else if (local_offset > (1 - eps)) {
-                for (int j(0); j < D + 1; ++j) {
-                    values(j) = static_cast<int>(j == (icell + 1));
+            }
+        }
+
+        KOKKOS_INLINE_FUNCTION void eval_basis_and_n_derivs(
+                Span2D<DataType> derivs,
+                coord_type const& x,
+                Idx<knot_grid> poly_start,
+                std::size_t n_derivs) const
+        {
+            KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
+            KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
+            KOKKOS_ASSERT(n_derivs <= degree());
+            KOKKOS_ASSERT(derivs.extent(0) == degree() + 1);
+            KOKKOS_ASSERT(derivs.extent(1) == n_derivs + 1);
+
+            constexpr std::size_t n_basis = degree() + 1;
+            DataType offset;
+            int node = check_if_node(offset, x, poly_start);
+            DataType dx = ddc::discrete_space<knot_grid>().step();
+
+            // If coordinate not found at a node
+            if (node == -1) {
+                std::array<DataType, n_basis> vals_ptr;
+                Span1D<DataType> values(vals_ptr.data(), n_basis);
+                calculate_values_between_nodes(values, x, poly_start, offset);
+
+                std::array<int, n_basis> combinations;
+
+                // For each basis element
+                for (std::size_t j(0); j < n_basis; ++j) {
+                    derivs(j, 0) = values(j);
+                    for (std::size_t n(1); n < n_derivs + 1; ++n) {
+                        DataType factor = 0;
+                        combinations[0] = -1;
+                        for (std::size_t i(1); i < n; ++i) {
+                            combinations[i] = 0;
+                        }
+                        int i = 0;
+                        while (i > -1) {
+                            combinations[i] += 1;
+                            combinations[i] += static_cast<int>(combinations[i] == j);
+                            for (std::size_t k(i + 1); k < n; ++k) {
+                                combinations[k] = combinations[k - 1] + 1;
+                                combinations[k] += static_cast<int>(combinations[k] == j);
+                            }
+                            i = n - 1;
+                            double divisor(1);
+                            for (std::size_t k(0); k < n; ++k) {
+                                divisor *= dx * (offset - combinations[k]);
+                            }
+                            factor += 1.0 / divisor;
+                            int max_val_along_dim = i + n_basis - n;
+                            max_val_along_dim -= static_cast<int>(max_val_along_dim <= j);
+                            while (i > -1 and combinations[i] == max_val_along_dim) {
+                                i--;
+                                max_val_along_dim = i + n_basis - n;
+                                max_val_along_dim -= static_cast<int>(max_val_along_dim <= j);
+                            }
+                        }
+                        derivs(j, n) = values(j) * factor * factorial(n);
+                    }
                 }
             } else {
-                for (int i(0); i < D + 1; ++i) {
-                    DataType numerator = m_weights[i] / (dx * (offset - i));
-                    DataType denominator(0.0);
-                    for (int j(0); j < D + 1; ++j) {
-                        denominator += m_weights[j] / (dx * (offset - j));
+                DataType xi = ddc::coordinate(poly_start + node);
+                for (std::size_t j(0); j < n_basis; ++j) {
+                    derivs(j, 0) = static_cast<int>(j == node);
+                    if (j == node)
+                        continue;
+                    DataType xj = ddc::coordinate(poly_start + j);
+                    for (std::size_t n(1); n < n_derivs + 1; ++n) {
+                        // \partial^nl_j(x_i) = n!/wi [ (-1)^(n+1) wj/(xi-xj)^n
+                        //                      - \sum_k=1^{n-1}\sum_{p\ne i} (-1)^(n+1-k)
+                        //                                       wp \partial^k l_j(x_i) / k! / (xi-xp)^(n-k) ]
+                        derivs(j, n) = neg_1_pow(n + 1) * m_weights[j] / Kokkos::pow(xi - xj, n);
+                        for (std::size_t p(0); p < n_basis; ++p) {
+                            if (p == node)
+                                continue;
+                            DataType xp = ddc::coordinate(poly_start + p);
+                            for (std::size_t k(1); k < n; ++k) {
+                                derivs(j, n) -= neg_1_pow(n + 1 - k) * m_weights[p] * derivs(j, k)
+                                                / factorial(k) / Kokkos::pow(xi - xp, n - k);
+                            }
+                        }
+                        derivs(j, n) *= factorial(n) / m_weights[node];
                     }
-                    values(i) = numerator / denominator;
                 }
+                for (std::size_t n(1); n < n_derivs + 1; ++n) {
+                    derivs(node, n) = 0;
+                    for (std::size_t j(0); j < n_basis; ++j) {
+                        if (j == node)
+                            continue;
+                        derivs(node, n) -= derivs(j, n);
+                    }
+                }
+            }
+        }
+
+    private:
+        KOKKOS_INLINE_FUNCTION static int check_if_node(
+                DataType& offset,
+                coord_type const& x,
+                Idx<knot_grid> poly_start)
+        {
+            DataType dx = ddc::discrete_space<knot_grid>().step();
+            DataType inv_dx = 1. / dx;
+            offset = (x - ddc::coordinate(poly_start)) * inv_dx;
+            DataType eps = Kokkos::Experimental::epsilon_v<DataType> * (degree() + 1);
+            int icell = static_cast<int>(offset);
+            DataType local_offset = offset - icell;
+            int node(-1);
+            if (local_offset <= eps) {
+                node = icell;
+            } else if ((local_offset - 1) >= -eps) {
+                node = icell + 1;
+            }
+            KOKKOS_ASSERT(node >= -1);
+            KOKKOS_ASSERT(node <= int(degree()));
+            return node;
+        }
+
+        KOKKOS_INLINE_FUNCTION void calculate_values_between_nodes(
+                Span1D<DataType> values,
+                coord_type const& x,
+                Idx<knot_grid> poly_start,
+                DataType offset) const
+        {
+            //DataType dx = ddc::discrete_space<knot_grid>().step();
+            for (int i(0); i < D + 1; ++i) {
+                DataType numerator = m_weights[i] / (offset - i);
+                DataType denominator(0.0);
+                for (int j(0); j < D + 1; ++j) {
+                    denominator += m_weights[j] / (offset - j);
+                }
+                values(i) = numerator / denominator;
             }
         }
     };

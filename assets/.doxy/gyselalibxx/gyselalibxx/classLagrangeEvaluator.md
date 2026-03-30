@@ -74,6 +74,9 @@ _A class to evaluate, differentiate or integrate a Lagrange function._ [More...]
 |   | [**LagrangeEvaluator**](#function-lagrangeevaluator-13) (LowerExtrapolationRule const & lower\_extrap\_rule, UpperExtrapolationRule const & upper\_extrap\_rule) <br>_Build a_ [_**LagrangeEvaluator**_](classLagrangeEvaluator.md) _acting on batched\_lagrange\_domain._ |
 |   | [**LagrangeEvaluator**](#function-lagrangeevaluator-23) ([**LagrangeEvaluator**](classLagrangeEvaluator.md) const & x) = default<br>_Copy-constructs._  |
 |   | [**LagrangeEvaluator**](#function-lagrangeevaluator-33) ([**LagrangeEvaluator**](classLagrangeEvaluator.md) && x) = default<br>_Move-constructs._  |
+|  KOKKOS\_FUNCTION double | [**deriv**](#function-deriv-13) (IdxDerivDims const & deriv\_order, Coord&lt; CoordsDims... &gt; const & coord\_eval, ConstField&lt; DataType, BatchedLagrangeIdxRange, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout &gt; const lagrange\_coef) const<br>_Differentiate 1D Lagrange function at a given coordinate._  |
+|  void | [**deriv**](#function-deriv-23) (IdxDerivDims const & deriv\_order, Field&lt; DataType, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const coords\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; IdxRangeBatchedInterpolation &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout3 &gt; const lagrange\_coef) const<br>_Differentiate 1D spline function (described by its spline coefficients) on a mesh._  |
+|  void | [**deriv**](#function-deriv-33) (IdxDerivDims const & deriv\_order, Field&lt; DataType, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; IdxRangeBatchedInterpolation &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const lagrange\_coef) const<br>_Differentiate 1D Lagrange function on a mesh._  |
 |  [**lower\_extrapolation\_rule\_type**](classLagrangeEvaluator.md#typedef-lower_extrapolation_rule_type) | [**lower\_extrapolation\_rule**](#function-lower_extrapolation_rule) () const<br>_Get the lower extrapolation rule._  |
 |  KOKKOS\_FUNCTION DataType | [**operator()**](#function-operator) (Coord&lt; CoordsDims... &gt; const & coord\_eval, ConstField&lt; DataType, BatchedLagrangeIdxRange, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout &gt; const lagrange\_coef) const<br>_Evaluate 1D Lagrange polynomial (described by its Lagrange coefficients) at a given coordinate._  |
 |  void | [**operator()**](#function-operator_1) (Field&lt; DataType, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout1 &gt; const lagrange\_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout2 &gt; const coords\_eval, ConstField&lt; DataType, [**batched\_coeff\_idx\_range\_type**](classLagrangeEvaluator.md#typedef-batched_coeff_idx_range_type)&lt; IdxRangeBatchedInterpolation &gt;, [**memory\_space**](classLagrangeEvaluator.md#typedef-memory_space), Layout3 &gt; const lagrange\_coef) const<br>_Evaluate Lagrange polynomials (described by their Lagrange coefficients) on a mesh._  |
@@ -431,6 +434,120 @@ LagrangeEvaluator::LagrangeEvaluator (
 
 
 * `x` An rvalue to another [**LagrangeEvaluator**](classLagrangeEvaluator.md). 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function deriv [1/3]
+
+_Differentiate 1D Lagrange function at a given coordinate._ 
+```C++
+template<class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
+inline KOKKOS_FUNCTION double LagrangeEvaluator::deriv (
+    IdxDerivDims const & deriv_order,
+    Coord< CoordsDims... > const & coord_eval,
+    ConstField< DataType, BatchedLagrangeIdxRange, memory_space , Layout > const lagrange_coef
+) const
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `deriv_order` An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. 
+* `coord_eval` The coordinate where the polynomial is differentiated. Note that only the component along the dimension of interest is used. 
+* `lagrange_coef` A Field storing the 1D Lagrange coefficients.
+
+
+
+**Returns:**
+
+The derivative of the spline function at the desired coordinate. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function deriv [2/3]
+
+_Differentiate 1D spline function (described by its spline coefficients) on a mesh._ 
+```C++
+template<class IdxDerivDims, class Layout1, class Layout2, class Layout3, class IdxRangeBatchedInterpolation, class... CoordsDims>
+inline void LagrangeEvaluator::deriv (
+    IdxDerivDims const & deriv_order,
+    Field< DataType, IdxRangeBatchedInterpolation, memory_space , Layout1 > const lagrange_eval,
+    ConstField< Coord< CoordsDims... >, IdxRangeBatchedInterpolation, memory_space , Layout2 > const coords_eval,
+    ConstField< DataType, batched_coeff_idx_range_type < IdxRangeBatchedInterpolation >, memory_space , Layout3 > const lagrange_coef
+) const
+```
+
+
+
+The spline coefficients represent a spline function defined on a cartesian product of batch\_domain and B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder.
+
+
+The derivation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation. This means that for each slice of coordinates identified by a batch\_domain\_type::discrete\_element\_type, the derivation is performed with the 1D set of spline coefficients identified by the same batch\_domain\_type::discrete\_element\_type.
+
+
+
+
+**Parameters:**
+
+
+* `deriv_order` An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. 
+* `lagrange_eval` The values of the derivatives of the Lagrange polynomials at the desired coordinates. 
+* `coords_eval` The coordinates where the Lagrange polynomials are evaluated. Those are stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the points represented by this index range are unused and irrelevant. 
+* `lagrange_coef` A Field storing the 1D Lagrange coefficients. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function deriv [3/3]
+
+_Differentiate 1D Lagrange function on a mesh._ 
+```C++
+template<class IdxDerivDims, class Layout1, class Layout2, class IdxRangeBatchedInterpolation>
+inline void LagrangeEvaluator::deriv (
+    IdxDerivDims const & deriv_order,
+    Field< DataType, IdxRangeBatchedInterpolation, memory_space , Layout1 > const lagrange_eval,
+    ConstField< DataType, batched_coeff_idx_range_type < IdxRangeBatchedInterpolation >, memory_space , Layout2 > const lagrange_coef
+) const
+```
+
+
+
+The differentiation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation. This means that for each slice of lagrange\_eval the evaluation is performed with the relevant 1D set of Lagrange coefficients.
+
+
+
+
+**Parameters:**
+
+
+* `deriv_order` An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. 
+* `lagrange_eval` The derivatives of the spline function at the coordinates. 
+* `lagrange_coef` A ChunkSpan storing the spline coefficients. 
 
 
 

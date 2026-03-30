@@ -151,7 +151,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="117" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="117" bodyend="153"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="117" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="117" bodyend="152"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a13a3867798502cab994edb10ab9dd896" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -185,7 +185,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="160" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="160" bodyend="166"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="159" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="159" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1af70e236878aa1b7478656dc0a26617ff" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" kindref="member">coord_type</ref></type>
@@ -203,7 +203,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="172" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="172" bodyend="175"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="171" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="171" bodyend="174"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a51060f9366b8e5a6d1eb5821e06932d4" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" kindref="member">coord_type</ref></type>
@@ -221,7 +221,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="181" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="181" bodyend="184"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="180" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="180" bodyend="183"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a8fa6a1354109591d08a79a2928acc0e8" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION DataType</type>
@@ -239,7 +239,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="190" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="190" bodyend="193"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="189" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="189" bodyend="192"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1ab68b76df208aad2026fb10590e655272" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxRange&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
@@ -257,7 +257,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="199" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="199" bodyend="202"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="198" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="198" bodyend="201"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a399e6614ad017d771b6d9ffbd8d4da8a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxRange&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
@@ -275,7 +275,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="208" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="208" bodyend="211"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="207" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="207" bodyend="210"/>
       </memberdef>
       <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a4fbf13e1e13127ef98f6477df2e809c8" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -329,7 +329,196 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="224" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="224" bodyend="262"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="223" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="223" bodyend="246"/>
+      </memberdef>
+      <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a4d5bbe6bba43296fe238b74a96a88b02" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION void</type>
+        <definition>KOKKOS_INLINE_FUNCTION void UniformLagrangeBasis&lt; Dim, D, DataType &gt;::Impl&lt; DDim, MemorySpace &gt;::eval_basis_and_n_derivs</definition>
+        <argsstring>(Span2D&lt; DataType &gt; derivs, coord_type const &amp;x, Idx&lt; knot_grid &gt; poly_start, std::size_t n_derivs) const</argsstring>
+        <name>eval_basis_and_n_derivs</name>
+        <qualifiedname>UniformLagrangeBasis::Impl::eval_basis_and_n_derivs</qualifiedname>
+        <param>
+          <type>Span2D&lt; DataType &gt;</type>
+          <declname>derivs</declname>
+        </param>
+        <param>
+          <type><ref refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" kindref="member">coord_type</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
+          <declname>poly_start</declname>
+        </param>
+        <param>
+          <type>std::size_t</type>
+          <declname>n_derivs</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the selected set of bases and their derivatives at the coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Evaluate all d+1 bases which span the domain [coordinate(poly_start), coordinate(poly_start+d)] at the coordinate x. The derivatives are also calculated. The calculations are derived using the method described in: Barycentric Lagrange Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values and derivatives of each basis at the coordinate x. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate where the bases are evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">poly_start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the first of the d+1 knots describing the set of bases to be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">n_derivs</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The number of derivatives to be calculated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="266" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="266" bodyend="358"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-static-func">
+      <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1a3e81136046a5b219d0c0c481b23e8b5d" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION int</type>
+        <definition>static KOKKOS_INLINE_FUNCTION int UniformLagrangeBasis&lt; Dim, D, DataType &gt;::Impl&lt; DDim, MemorySpace &gt;::check_if_node</definition>
+        <argsstring>(DataType &amp;offset, coord_type const &amp;x, Idx&lt; knot_grid &gt; poly_start)</argsstring>
+        <name>check_if_node</name>
+        <qualifiedname>UniformLagrangeBasis::Impl::check_if_node</qualifiedname>
+        <param>
+          <type>DataType &amp;</type>
+          <declname>offset</declname>
+        </param>
+        <param>
+          <type><ref refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" kindref="member">coord_type</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
+          <declname>poly_start</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Check if x is found at a node. <parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The relative offset of the point x in the cell. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">poly_start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the first of the d+1 knots describing the set of bases to be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The node at which x is found. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="369" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="369" bodyend="389"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classUniformLagrangeBasis_1_1Impl_1ae46e943a9a3bbcdd22489d4ca6e67b10" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION void</type>
+        <definition>KOKKOS_INLINE_FUNCTION void UniformLagrangeBasis&lt; Dim, D, DataType &gt;::Impl&lt; DDim, MemorySpace &gt;::calculate_values_between_nodes</definition>
+        <argsstring>(Span1D&lt; DataType &gt; values, coord_type const &amp;x, Idx&lt; knot_grid &gt; poly_start, DataType offset) const</argsstring>
+        <name>calculate_values_between_nodes</name>
+        <qualifiedname>UniformLagrangeBasis::Impl::calculate_values_between_nodes</qualifiedname>
+        <param>
+          <type>Span1D&lt; DataType &gt;</type>
+          <declname>values</declname>
+        </param>
+        <param>
+          <type><ref refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" kindref="member">coord_type</ref> const &amp;</type>
+          <declname>x</declname>
+        </param>
+        <param>
+          <type>Idx&lt; <ref refid="classUniformLagrangeBasis_1_1Impl_1a5e821c2300679aeb71a04716ec2fc857" kindref="member">knot_grid</ref> &gt;</type>
+          <declname>poly_start</declname>
+        </param>
+        <param>
+          <type>DataType</type>
+          <declname>offset</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Calculate the Lagrange polynomial for <formula id="316">$ x \ne x_j \forall j $</formula></para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="out">values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of each basis at the coordinate x. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">x</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">poly_start</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index of the first of the d+1 knots describing the set of bases to be evaluated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">offset</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The relative offset of the point x in the cell. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="400" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="400" bodyend="415"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -355,10 +544,13 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="92" bodyend="263"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="91" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="92" bodyend="416"/>
     <listofallmembers>
       <member refid="classUniformLagrangeBasis_1_1Impl_1ab68b76df208aad2026fb10590e655272" prot="public" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>break_point_domain</name></member>
+      <member refid="classUniformLagrangeBasis_1_1Impl_1ae46e943a9a3bbcdd22489d4ca6e67b10" prot="private" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>calculate_values_between_nodes</name></member>
+      <member refid="classUniformLagrangeBasis_1_1Impl_1a3e81136046a5b219d0c0c481b23e8b5d" prot="private" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>check_if_node</name></member>
       <member refid="classUniformLagrangeBasis_1_1Impl_1a4fbf13e1e13127ef98f6477df2e809c8" prot="public" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>eval_basis</name></member>
+      <member refid="classUniformLagrangeBasis_1_1Impl_1a4d5bbe6bba43296fe238b74a96a88b02" prot="public" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>eval_basis_and_n_derivs</name></member>
       <member refid="classUniformLagrangeBasis_1_1Impl_1a399e6614ad017d771b6d9ffbd8d4da8a" prot="public" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>full_domain</name></member>
       <member refid="classUniformLagrangeBasis_1_1Impl_1adcaf2527acc2c7a0a18f741240082b56" prot="private" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>Impl</name></member>
       <member refid="classUniformLagrangeBasis_1_1Impl_1ac09e4ce9139b4092076ee9cad89b4ea4" prot="public" virt="non-virtual"><scope>UniformLagrangeBasis::Impl</scope><name>Impl</name></member>

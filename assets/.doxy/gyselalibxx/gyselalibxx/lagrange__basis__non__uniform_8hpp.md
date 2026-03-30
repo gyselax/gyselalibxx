@@ -15,6 +15,7 @@
 * `#include <type_traits>`
 * `#include <vector>`
 * `#include "ddc_aliases.hpp"`
+* `#include "math_tools.hpp"`
 * `#include "view.hpp"`
 
 

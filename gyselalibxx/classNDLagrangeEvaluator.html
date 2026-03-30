@@ -632,6 +632,18 @@
 <td style="text-align: left;"><a href="#function-ndlagrangeevaluator-33"><strong>NDLagrangeEvaluator</strong></a> (<a href="classNDLagrangeEvaluator.html"><strong>NDLagrangeEvaluator</strong></a> &amp;&amp; x) = default<br><em>Move-construct.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">KOKKOS_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-deriv-13"><strong>deriv</strong></a> (IdxDerivDims const &amp; deriv_order, Coord&lt; CoordsDims... &gt; const &amp; coord_eval, ConstField&lt; <a href="classNDLagrangeEvaluator.html#typedef-data_type"><strong>data_type</strong></a>, BatchedLagrangeIdxRange, <a href="classNDLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout &gt; const lagrange_coef) const<br><em>Differentiate 1D Lagrange function at a given coordinate.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-deriv-23"><strong>deriv</strong></a> (IdxDerivDims const &amp; deriv_order, Field&lt; <a href="classNDLagrangeEvaluator.html#typedef-data_type"><strong>data_type</strong></a>, IdxRangeBatchedInterpolation, <a href="classNDLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout1 &gt; const lagrange_eval, ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, <a href="classNDLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout2 &gt; const coords_eval, ConstField&lt; <a href="classNDLagrangeEvaluator.html#typedef-data_type"><strong>data_type</strong></a>, <a href="classNDLagrangeEvaluator.html#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>&lt; IdxRangeBatchedInterpolation &gt;, <a href="classNDLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout3 &gt; const lagrange_coef) const<br><em>Differentiate 1D spline function (described by its spline coefficients) on a mesh.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-deriv-33"><strong>deriv</strong></a> (IdxDerivDims const &amp; deriv_order, Field&lt; <a href="classNDLagrangeEvaluator.html#typedef-data_type"><strong>data_type</strong></a>, IdxRangeBatchedInterpolation, <a href="classNDLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout1 &gt; const lagrange_eval, ConstField&lt; <a href="classNDLagrangeEvaluator.html#typedef-data_type"><strong>data_type</strong></a>, <a href="classNDLagrangeEvaluator.html#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>&lt; IdxRangeBatchedInterpolation &gt;, <a href="classNDLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout2 &gt; const lagrange_coef) const<br><em>Differentiate 1D Lagrange function on a mesh.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">KOKKOS_FUNCTION <a href="classNDLagrangeEvaluator.html#typedef-data_type"><strong>data_type</strong></a></td>
 <td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (Coord&lt; CoordsDims... &gt; const &amp; coord, ConstField&lt; <a href="classNDLagrangeEvaluator.html#typedef-data_type"><strong>data_type</strong></a>, NdCoeffIdxRange, <a href="classNDLagrangeEvaluator.html#typedef-memory_space"><strong>memory_space</strong></a>, Layout &gt; const &amp; coeff) const<br><em>Evaluate the ND Lagrange polynomial at a single coordinate.</em></td>
 </tr>
@@ -760,6 +772,64 @@
     NDLagrangeEvaluator &amp;&amp; x
 ) = default
 </code></pre>
+<hr>
+
+<h3 id="function-deriv-13">function deriv [1/3]</h3>
+<p><em>Differentiate 1D Lagrange function at a given coordinate.</em> </p>
+<pre><code class="language-C++">template&lt;class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims&gt;
+inline KOKKOS_FUNCTION double NDLagrangeEvaluator::deriv (
+    IdxDerivDims const &amp; deriv_order,
+    Coord&lt; CoordsDims... &gt; const &amp; coord_eval,
+    ConstField&lt; data_type , BatchedLagrangeIdxRange, memory_space , Layout &gt; const lagrange_coef
+) const
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>deriv_order</code> An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. </li>
+<li><code>coord_eval</code> The coordinate where the polynomial is differentiated. Note that only the component along the dimension of interest is used. </li>
+<li><code>lagrange_coef</code> A Field storing the 1D Lagrange coefficients.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>The derivative of the spline function at the desired coordinate. </p>
+<hr>
+
+<h3 id="function-deriv-23">function deriv [2/3]</h3>
+<p><em>Differentiate 1D spline function (described by its spline coefficients) on a mesh.</em> </p>
+<pre><code class="language-C++">template&lt;class IdxDerivDims, class Layout1, class Layout2, class Layout3, class IdxRangeBatchedInterpolation, class... CoordsDims&gt;
+inline void NDLagrangeEvaluator::deriv (
+    IdxDerivDims const &amp; deriv_order,
+    Field&lt; data_type , IdxRangeBatchedInterpolation, memory_space , Layout1 &gt; const lagrange_eval,
+    ConstField&lt; Coord&lt; CoordsDims... &gt;, IdxRangeBatchedInterpolation, memory_space , Layout2 &gt; const coords_eval,
+    ConstField&lt; data_type , batched_coeff_idx_range_type &lt; IdxRangeBatchedInterpolation &gt;, memory_space , Layout3 &gt; const lagrange_coef
+) const
+</code></pre>
+<p>The spline coefficients represent a spline function defined on a cartesian product of batch_domain and B-splines (basis splines). They can be obtained via various methods, such as using a SplineBuilder.</p>
+<p>The derivation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation. This means that for each slice of coordinates identified by a batch_domain_type::discrete_element_type, the derivation is performed with the 1D set of spline coefficients identified by the same batch_domain_type::discrete_element_type.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>deriv_order</code> An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. </li>
+<li><code>lagrange_eval</code> The values of the derivatives of the Lagrange polynomials at the desired coordinates. </li>
+<li><code>coords_eval</code> The coordinates where the Lagrange polynomials are evaluated. Those are stored in a Field defined on a BatchedInterpolationIdxRange. Note that the coordinates of the points represented by this index range are unused and irrelevant. </li>
+<li><code>lagrange_coef</code> A Field storing the 1D Lagrange coefficients. </li>
+</ul>
+<hr>
+
+<h3 id="function-deriv-33">function deriv [3/3]</h3>
+<p><em>Differentiate 1D Lagrange function on a mesh.</em> </p>
+<pre><code class="language-C++">template&lt;class IdxDerivDims, class Layout1, class Layout2, class IdxRangeBatchedInterpolation&gt;
+inline void NDLagrangeEvaluator::deriv (
+    IdxDerivDims const &amp; deriv_order,
+    Field&lt; data_type , IdxRangeBatchedInterpolation, memory_space , Layout1 &gt; const lagrange_eval,
+    ConstField&lt; data_type , batched_coeff_idx_range_type &lt; IdxRangeBatchedInterpolation &gt;, memory_space , Layout2 &gt; const lagrange_coef
+) const
+</code></pre>
+<p>The differentiation is not performed in a multidimensional way (in any sense). This is a batched 1D derivation. This means that for each slice of lagrange_eval the evaluation is performed with the relevant 1D set of Lagrange coefficients.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>deriv_order</code> An Idx containing the order of derivation for the dimension of interest. If the dimension is not present, the order of derivation is considered to be 0. </li>
+<li><code>lagrange_eval</code> The derivatives of the spline function at the coordinates. </li>
+<li><code>lagrange_coef</code> A ChunkSpan storing the spline coefficients. </li>
+</ul>
 <hr>
 
 <h3 id="function-operator">function operator()</h3>

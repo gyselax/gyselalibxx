@@ -176,7 +176,7 @@
         <label>detail::UniformLagrangeBasisBase</label>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="42" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="43" bodyend="264"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" line="42" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_uniform.hpp" bodystart="43" bodyend="417"/>
     <listofallmembers>
       <member refid="classUniformLagrangeBasis_1a52fb1551ae10b33aae017a7df70d83b1" prot="public" virt="non-virtual"><scope>UniformLagrangeBasis</scope><name>continuous_dimension_type</name></member>
       <member refid="classUniformLagrangeBasis_1ada7578d60e9fd0a9fadc0a05d866d24e" prot="public" virt="non-virtual"><scope>UniformLagrangeBasis</scope><name>coord_type</name></member>

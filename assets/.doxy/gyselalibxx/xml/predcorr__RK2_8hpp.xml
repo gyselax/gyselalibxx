@@ -39,6 +39,24 @@
         <childnode refid="20" relation="include">
         </childnode>
       </node>
+      <node id="49">
+        <label>coord_transformation_tools.hpp</label>
+        <link refid="coord__transformation__tools_8hpp_source"/>
+        <childnode refid="19" relation="include">
+        </childnode>
+        <childnode refid="50" relation="include">
+        </childnode>
+        <childnode refid="8" relation="include">
+        </childnode>
+        <childnode refid="11" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
+      </node>
       <node id="26">
         <label>deriv_details.hpp</label>
         <link refid="deriv__details_8hpp_source"/>
@@ -95,6 +113,28 @@
         <childnode refid="6" relation="include">
         </childnode>
         <childnode refid="12" relation="include">
+        </childnode>
+      </node>
+      <node id="53">
+        <label>indexed_tensor.hpp</label>
+        <link refid="indexed__tensor_8hpp"/>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="35" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="54">
+        <label>static_tensors.hpp</label>
+        <link refid="static__tensors_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="34" relation="include">
+        </childnode>
+        <childnode refid="28" relation="include">
+        </childnode>
+        <childnode refid="36" relation="include">
         </childnode>
       </node>
       <node id="33">
@@ -185,7 +225,7 @@
         <childnode refid="6" relation="include">
         </childnode>
       </node>
-      <node id="50">
+      <node id="56">
         <label>geometry_xy.hpp</label>
         <link refid="geometry__xy_8hpp_source"/>
         <childnode refid="6" relation="include">
@@ -222,13 +262,13 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="50" relation="include">
-        </childnode>
-        <childnode refid="51" relation="include">
-        </childnode>
-        <childnode refid="53" relation="include">
+        <childnode refid="56" relation="include">
         </childnode>
         <childnode refid="57" relation="include">
+        </childnode>
+        <childnode refid="59" relation="include">
+        </childnode>
+        <childnode refid="63" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
@@ -248,7 +288,7 @@
         </childnode>
         <childnode refid="43" relation="include">
         </childnode>
-        <childnode refid="49" relation="include">
+        <childnode refid="55" relation="include">
         </childnode>
         <childnode refid="28" relation="include">
         </childnode>
@@ -286,8 +326,10 @@
         </childnode>
         <childnode refid="46" relation="include">
         </childnode>
+        <childnode refid="51" relation="include">
+        </childnode>
       </node>
-      <node id="49">
+      <node id="55">
         <label>lagrange_basis_uniform.hpp</label>
         <link refid="lagrange__basis__uniform_8hpp_source"/>
         <childnode refid="19" relation="include">
@@ -298,19 +340,41 @@
         </childnode>
         <childnode refid="12" relation="include">
         </childnode>
-        <childnode refid="46" relation="include">
+        <childnode refid="51" relation="include">
         </childnode>
       </node>
-      <node id="51">
+      <node id="57">
         <label>l_norm_tools.hpp</label>
         <link refid="l__norm__tools_8hpp"/>
         <childnode refid="6" relation="include">
         </childnode>
-        <childnode refid="52" relation="include">
+        <childnode refid="58" relation="include">
         </childnode>
         <childnode refid="30" relation="include">
         </childnode>
         <childnode refid="36" relation="include">
+        </childnode>
+      </node>
+      <node id="46">
+        <label>math_tools.hpp</label>
+        <link refid="math__tools_8hpp_source"/>
+        <childnode refid="47" relation="include">
+        </childnode>
+        <childnode refid="17" relation="include">
+        </childnode>
+        <childnode refid="6" relation="include">
+        </childnode>
+        <childnode refid="48" relation="include">
+        </childnode>
+        <childnode refid="49" relation="include">
+        </childnode>
+        <childnode refid="53" relation="include">
+        </childnode>
+        <childnode refid="54" relation="include">
+        </childnode>
+        <childnode refid="33" relation="include">
+        </childnode>
+        <childnode refid="30" relation="include">
         </childnode>
       </node>
       <node id="21">
@@ -357,21 +421,21 @@
         <childnode refid="36" relation="include">
         </childnode>
       </node>
-      <node id="53">
+      <node id="59">
         <label>paraconfpp.hpp</label>
         <link refid="paraconfpp_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
-        <childnode refid="54" relation="include">
+        <childnode refid="60" relation="include">
         </childnode>
-        <childnode refid="55" relation="include">
+        <childnode refid="61" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-        <childnode refid="56" relation="include">
+        <childnode refid="62" relation="include">
         </childnode>
       </node>
-      <node id="52">
+      <node id="58">
         <label>quadrature.hpp</label>
         <link refid="quadrature_8hpp_source"/>
         <childnode refid="16" relation="include">
@@ -417,7 +481,7 @@
         <childnode refid="37" relation="include">
         </childnode>
       </node>
-      <node id="57">
+      <node id="63">
         <label>rk2.hpp</label>
         <link refid="rk2_8hpp_source"/>
         <childnode refid="19" relation="include">
@@ -477,12 +541,12 @@
         <label>type_seq_tools.hpp</label>
         <link refid="type__seq__tools_8hpp_source"/>
       </node>
-      <node id="46">
+      <node id="51">
         <label>view.hpp</label>
         <link refid="view_8hpp_source"/>
         <childnode refid="19" relation="include">
         </childnode>
-        <childnode refid="47" relation="include">
+        <childnode refid="52" relation="include">
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
@@ -491,6 +555,9 @@
       </node>
       <node id="48">
         <label>Kokkos_Core.hpp</label>
+      </node>
+      <node id="47">
+        <label>algorithm</label>
       </node>
       <node id="19">
         <label>array</label>
@@ -503,6 +570,9 @@
       </node>
       <node id="17">
         <label>cmath</label>
+      </node>
+      <node id="50">
+        <label>concepts</label>
       </node>
       <node id="44">
         <label>cstddef</label>
@@ -528,19 +598,19 @@
       <node id="41">
         <label>optional</label>
       </node>
-      <node id="47">
+      <node id="52">
         <label>ostream</label>
       </node>
-      <node id="56">
+      <node id="62">
         <label>paraconf.h</label>
       </node>
       <node id="13">
         <label>source_location</label>
       </node>
-      <node id="54">
+      <node id="60">
         <label>stdexcept</label>
       </node>
-      <node id="55">
+      <node id="61">
         <label>string</label>
       </node>
       <node id="8">

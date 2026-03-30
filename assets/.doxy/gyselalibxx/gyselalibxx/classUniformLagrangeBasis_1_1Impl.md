@@ -64,6 +64,7 @@ _Storage class of the static attributes of the discrete dimension._ [More...](#d
 |   | [**Impl**](#function-impl-44) ([**Impl**](classUniformLagrangeBasis_1_1Impl.md)&lt; DDim, OriginMemorySpace &gt; const & impl) <br>_Copy-constructs from another_ [_**Impl**_](classUniformLagrangeBasis_1_1Impl.md) _with a different Kokkos memory space._ |
 |  KOKKOS\_INLINE\_FUNCTION IdxRange&lt; [**knot\_grid**](classUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; | [**break\_point\_domain**](#function-break_point_domain) () const<br>_Returns the index range of the break points._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**eval\_basis**](#function-eval_basis) (Span1D&lt; DataType &gt; values, [**coord\_type**](classUniformLagrangeBasis.md#typedef-coord_type) x, Idx&lt; [**knot\_grid**](classUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; poly\_start) const<br>_Evaluate the selected set of bases at the coordinate._  |
+|  KOKKOS\_INLINE\_FUNCTION void | [**eval\_basis\_and\_n\_derivs**](#function-eval_basis_and_n_derivs) (Span2D&lt; DataType &gt; derivs, [**coord\_type**](classUniformLagrangeBasis.md#typedef-coord_type) const & x, Idx&lt; [**knot\_grid**](classUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; poly\_start, std::size\_t n\_derivs) const<br>_Evaluate the selected set of bases and their derivatives at the coordinate._  |
 |  KOKKOS\_INLINE\_FUNCTION IdxRange&lt; [**knot\_grid**](classUniformLagrangeBasis_1_1Impl.md#typedef-knot_grid) &gt; | [**full\_domain**](#function-full_domain) () const<br>_Returns the index range including eventual duplicate values for the periodic case._  |
 |  KOKKOS\_INLINE\_FUNCTION DataType | [**length**](#function-length) () noexcept const<br>_Returns the length of the domain._  |
 |  KOKKOS\_INLINE\_FUNCTION [**coord\_type**](classUniformLagrangeBasis.md#typedef-coord_type) | [**rmax**](#function-rmax) () noexcept const<br>_Returns the coordinate of the upper bound of the domain on which the B-splines are defined._  |
@@ -243,6 +244,42 @@ Evaluate all d+1 bases which span the domain [coordinate(poly\_start), coordinat
 * `values` The values of each basis at the coordinate x. 
 * `x` The coordinate where the bases are evaluated. 
 * `poly_start` The index of the first of the d+1 knots describing the set of bases to be evaluated. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function eval\_basis\_and\_n\_derivs 
+
+_Evaluate the selected set of bases and their derivatives at the coordinate._ 
+```C++
+inline KOKKOS_INLINE_FUNCTION void UniformLagrangeBasis::Impl::eval_basis_and_n_derivs (
+    Span2D< DataType > derivs,
+    coord_type const & x,
+    Idx< knot_grid > poly_start,
+    std::size_t n_derivs
+) const
+```
+
+
+
+Evaluate all d+1 bases which span the domain [coordinate(poly\_start), coordinate(poly\_start+d)] at the coordinate x. The derivatives are also calculated. The calculations are derived using the method described in: Barycentric Lagrange Interpolation Jean-Paul Berrut and Lloyd N. Trefethen SIAM Review 2004 46:3, 501-517
+
+
+
+
+**Parameters:**
+
+
+* `derivs` The values and derivatives of each basis at the coordinate x. 
+* `x` The coordinate where the bases are evaluated. 
+* `poly_start` The index of the first of the d+1 knots describing the set of bases to be evaluated. 
+* `n_derivs` The number of derivatives to be calculated. 
 
 
 
