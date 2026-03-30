@@ -34,7 +34,6 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -160,11 +159,8 @@ public:
 struct GeneralParameters
 {
     IdxRangeRTheta grid;
-    PreallocatableSplineInterpolator2D<
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorNullBound,
-            IdxRangeRTheta> const& interpolator;
     SplineRThetaBuilder const& advection_builder;
+    SplineRThetaEvaluatorNullBound const& interpolation_evaluator;
     SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
     bool if_save_curves;
@@ -203,7 +199,11 @@ void run_simulations_with_methods(
             params.advection_builder,
             params.advection_evaluator);
 
-    BslAdvectionPolar advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+    BslAdvectionPolar advection_operator(
+            params.advection_builder,
+            params.interpolation_evaluator,
+            foot_finder,
+            sim.to_physical_mapping);
 
     run_simulations(
             sim.to_physical_mapping_host,
@@ -304,9 +304,6 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
-
     // --- Evaluator for the test advection field:
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
@@ -396,8 +393,8 @@ int main(int argc, char** argv)
 
     GeneralParameters params
             = {grid,
-               interpolator,
                builder,
+               spline_evaluator,
                spline_evaluator_extrapol,
                final_time,
                if_save_curves,
