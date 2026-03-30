@@ -336,7 +336,7 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactDerivatives)
     double const tol_dxdy = TOL * (degree + 1) * (degree + 1) / (dx_max * dy_max);
 
     FieldMem<DataType, IdxRange<TestGridX, TestGridY>> deriv_alloc(test_range);
-    auto const deriv_host = ddc::create_mirror_view(get_field(deriv_alloc));
+    auto deriv_host = ddc::create_mirror_view(get_field(deriv_alloc));
 
     // d/dx f = p'(x) * q(y)
     Idx<ddc::Deriv<X>> dx(1);
