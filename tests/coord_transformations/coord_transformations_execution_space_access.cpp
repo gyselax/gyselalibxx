@@ -9,10 +9,14 @@
 #include "cartesian_to_czarny.hpp"
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
+#include "discrete_mapping.hpp"
 #include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
-
+#include "lagrange_evaluator.hpp"
+#include "nd_lagrange_evaluator.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 
 namespace {
@@ -62,6 +66,9 @@ public:
 
         ddc::init_discrete_space<BSplinesR>(r_break_points);
         ddc::init_discrete_space<BSplinesTheta>(theta_break_points);
+
+        ddc::init_discrete_space<LagBasisR>(r_break_points);
+        ddc::init_discrete_space<LagBasisTheta>(theta_break_points);
 
         ddc::init_discrete_space<GridR>(InterpPointsR::get_sampling<GridR>());
         ddc::init_discrete_space<GridTheta>(InterpPointsTheta::get_sampling<GridTheta>());
@@ -225,6 +232,71 @@ TEST_F(MappingMemoryAccess, HostDiscreteCoordConverter)
             SplineRThetaEvaluator<HostExecSpace>>
             mapping_builder(HostExecSpace(), analytical_mapping, builder, evaluator);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
+    static_assert(
+            is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(to_physical_mapping)>);
+
+    // Test coordinates
+    double const r = .75;
+    double const theta = 1 / 3. * M_PI;
+    CoordRTheta const coord_rtheta(r, theta);
+
+    const double tmp1 = std::sqrt(epsilon * (epsilon + 2.0 * r * std::cos(theta)) + 1.0);
+    const double x = (1.0 - tmp1) / epsilon;
+    const double y
+            = e * r * std::sin(theta) / (std::sqrt(1.0 - 0.25 * epsilon * epsilon) * (2.0 - tmp1));
+    CoordXY const coord_xy(x, y);
+
+    // Coord converter: logical -> physical.
+    CoordXY diff_coord_xy = to_physical_mapping(coord_rtheta) - coord_xy;
+    EXPECT_LE(ddc::get<X>(diff_coord_xy), 1e-7);
+    EXPECT_LE(ddc::get<Y>(diff_coord_xy), 1e-7);
+}
+
+TEST_F(MappingMemoryAccess, HostDiscreteLagrangeCoordConverter)
+{
+    using LagEvalR = LagrangeEvaluator<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::HostSpace,
+            double,
+            LagBasisR,
+            GridR,
+            ddc::NullExtrapolationRule,
+            ddc::NullExtrapolationRule>;
+    using LagEvalTheta = LagrangeEvaluator<
+            Kokkos::DefaultHostExecutionSpace,
+            Kokkos::HostSpace,
+            double,
+            LagBasisTheta,
+            GridTheta,
+            ddc::PeriodicExtrapolationRule<Theta>,
+            ddc::PeriodicExtrapolationRule<Theta>>;
+    using LagEval = NDLagrangeEvaluator<LagEvalR, LagEvalTheta>;
+    // Mapping
+    double const epsilon = 0.3;
+    double const e = 1.4;
+    CzarnyToCartesian<R, Theta, X, Y> const analytical_mapping(epsilon, e);
+    static_assert(
+            is_accessible_v<Kokkos::DefaultHostExecutionSpace, CzarnyToCartesian<R, Theta, X, Y>>);
+
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
+    LagEvalR r_evaluator(r_extrapolation_rule, r_extrapolation_rule);
+    LagEvalTheta theta_evaluator(theta_extrapolation_rule, theta_extrapolation_rule);
+    LagEval evaluator(r_evaluator, theta_evaluator);
+
+    VectorFieldMem<double, IdxRangeRTheta, VectorIndexSet<X, Y>> coeff_representation_alloc(
+            interpolation_idx_range_rtheta);
+    VectorField<double, IdxRangeRTheta, VectorIndexSet<X, Y>> coeff_representation(
+            coeff_representation_alloc);
+
+    ddc::host_for_each(interpolation_idx_range_rtheta, [&](IdxRTheta idx) {
+        CoordXY coord = analytical_mapping(ddc::coordinate(idx));
+        ddcHelper::get<X>(coeff_representation)(idx) = ddc::get<X>(coord);
+        ddcHelper::get<Y>(coeff_representation)(idx) = ddc::get<Y>(coord);
+    });
+
+    DiscreteMapping<Coord<R, Theta>, Coord<X, Y>, LagEval>
+            to_physical_mapping(coeff_representation, evaluator);
     static_assert(
             is_accessible_v<Kokkos::DefaultHostExecutionSpace, decltype(to_physical_mapping)>);
 
