@@ -122,24 +122,24 @@ public:
     }
 
 private:
-//template<class ChosenGridDim>
-//copy_periodic_data(IdxRangeFull) {
-//    using Dim = typename ChosenGridDim::continuous_dimension_type;
-//    if constexpr (Dim::PERIODIC) {
-//        using Basis = find_grid_t<Dim, ddc::detail::TypeSeq<Bases...>>;
-//        using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
-//        IdxRange<basis_domain_type> bp_idx_range
-//                = ddc::discrete_space<Basis>().break_point_domain().remove_last(
-//                        IdxStep<basis_domain_type>(static_cast<int>(Basis::is_periodic())));
-//        IdxRange<basis_domain_type> extended_domain(
-//                ddc::discrete_space<Basis>().full_domain().remove_first(
-//                        bp_idx_range.extents()));
-//        typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(
-//                extended_domain.size());
-//        BatchedInterpolationIdxRange repeat_domain(get_idx_range(vals).take_first(nrepeat));
-//        Kokkos::deep_copy(
-//                coeffs[extended_domain].allocation_kokkos_view(),
-//                vals[repeat_domain].allocation_kokkos_view());
-//    }
-//}
+    //template<class ChosenGridDim>
+    //copy_periodic_data(IdxRangeFull) {
+    //    using Dim = typename ChosenGridDim::continuous_dimension_type;
+    //    if constexpr (Dim::PERIODIC) {
+    //        using Basis = find_grid_t<Dim, ddc::detail::TypeSeq<Bases...>>;
+    //        using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
+    //        IdxRange<basis_domain_type> bp_idx_range
+    //                = ddc::discrete_space<Basis>().break_point_domain().remove_last(
+    //                        IdxStep<basis_domain_type>(static_cast<int>(Basis::is_periodic())));
+    //        IdxRange<basis_domain_type> extended_domain(
+    //                ddc::discrete_space<Basis>().full_domain().remove_first(
+    //                        bp_idx_range.extents()));
+    //        typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(
+    //                extended_domain.size());
+    //        BatchedInterpolationIdxRange repeat_domain(get_idx_range(vals).take_first(nrepeat));
+    //        Kokkos::deep_copy(
+    //                coeffs[extended_domain].allocation_kokkos_view(),
+    //                vals[repeat_domain].allocation_kokkos_view());
+    //    }
+    //}
 };
