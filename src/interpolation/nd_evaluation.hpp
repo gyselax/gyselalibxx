@@ -147,7 +147,8 @@ void evaluate(
                 MemorySpace,
                 LayoutCoeff> coeffs)
 {
-    (evaluator(ddcHelper::get<VectorDims>(output), coords, ddcHelper::get<VectorDims>(coeffs)), ...);
+    (evaluator(ddcHelper::get<VectorDims>(output), coords, ddcHelper::get<VectorDims>(coeffs)),
+     ...);
 }
 
 /**
@@ -194,10 +195,10 @@ void deriv(
         ConstField<ElementType, CoeffIdxRange, MemorySpace, LayoutCoeff> coeffs)
 {
     static_assert((VectorDims::IS_COVARIANT && ...));
-    (evaluator.deriv(
-             Idx<ddc::Deriv<typename VectorDims::Dual>>(1),
-             ddcHelper::get<VectorDims>(output),
-             coeffs),
+    (evaluator
+             .deriv(Idx<ddc::Deriv<typename VectorDims::Dual>>(1),
+                    ddcHelper::get<VectorDims>(output),
+                    coeffs),
      ...);
 }
 
@@ -249,11 +250,11 @@ void deriv(
         ConstField<ElementType, CoeffIdxRange, MemorySpace, LayoutCoeff> coeffs)
 {
     static_assert((VectorDims::IS_COVARIANT && ...));
-    (evaluator.deriv(
-             Idx<ddc::Deriv<typename VectorDims::Dual>>(1),
-             ddcHelper::get<VectorDims>(output),
-             coords,
-             coeffs),
+    (evaluator
+             .deriv(Idx<ddc::Deriv<typename VectorDims::Dual>>(1),
+                    ddcHelper::get<VectorDims>(output),
+                    coords,
+                    coeffs),
      ...);
 }
 
