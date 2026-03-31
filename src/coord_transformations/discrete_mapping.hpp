@@ -1,7 +1,14 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <ddc/ddc.hpp>
+
+#include "ddc_aliases.hpp"
 #include "i_interpolation_evaluator.hpp"
+#include "math_tools.hpp"
+#include "tensor.hpp"
+#include "tensor_common.hpp"
+#include "vector_field.hpp"
 
 namespace details {
 
@@ -10,7 +17,8 @@ void fill_jacobian_matrix_row(
         Tensor<DataType, VectorIndexSet<RDim...>, VectorIndexSet<ADim...>> jacobian_matrix,
         Mapping mapping)
 {
-    ((ddc::get<RowDim, ADim>(jacobian_matrix) = mapping.jacobian_component<RowDim, ADim>), ...);
+    ((ddc::get<RowDim, ADim>(jacobian_matrix) = mapping.template jacobian_component<RowDim, ADim>),
+     ...);
 }
 
 template <class DataType, class... RDim, class... ADim, class Mapping>
@@ -18,14 +26,17 @@ void fill_jacobian_matrix(
         Tensor<DataType, VectorIndexSet<RDim...>, VectorIndexSet<ADim...>> jacobian_matrix,
         Mapping mapping)
 {
-    fill_jacobian_matrix_row<RDim>(jacobian_matrix, mapping);
+    ((fill_jacobian_matrix_row<RDim>(jacobian_matrix, mapping)), ...);
 }
 
 } // namespace details
 
-template <class StartCoord, class EndCoord, class NDEvaluator>
+template <class StartCoord, class EndCoord, concepts::InterpolationEvaluator NDEvaluator>
 class DiscreteMapping
 {
+    static_assert(InterpolationEvaluatorTraits<NDEvaluator>::rank() == StartCoord::size());
+
+public:
     /// The type of the argument of the function described by this mapping
     using CoordArg = StartCoord;
     /// The type of the result of the function described by this mapping
@@ -33,14 +44,14 @@ class DiscreteMapping
     /// The type of the coordinate that can be used to evaluate the Jacobian of this mapping
     using CoordJacobian = StartCoord;
 
-    using DataType = typename NDEvaluator::data_type;
+    using DataType = typename InterpolationEvaluatorTraits<NDEvaluator>::data_type;
     using ArgBasis = ddc::to_type_seq_t<StartCoord>;
     using ResultBasis = ddc::to_type_seq_t<EndCoord>;
 
 private:
     using CoeffField = VectorField<
-            typename NDEvaluator::DataType,
-            typename NDEvaluator::coeff_idx_range_type,
+            DataType,
+            typename InterpolationEvaluatorTraits<NDEvaluator>::coeff_idx_range_type,
             ddc::to_type_seq_t<CoordResult>>;
 
 private:
@@ -68,9 +79,9 @@ public:
      * @param[in] evaluator
      * 		The evaluator used to evaluate the mapping.
      */
-    DiscreteMapping(CoeffField coeff_representation, SplineEvaluator const& evaluator)
+    DiscreteMapping(CoeffField coeff_representation, NDEvaluator const& evaluator)
         : m_coeff_representation(coeff_representation)
-        , m_spline_evaluator(evaluator)
+        , m_evaluator(evaluator)
     {
     }
 
@@ -104,7 +115,8 @@ public:
     template <class ExecSpace, class... GridType>
     void operator()(ExecSpace exec_space, Field<CoordResult, IdxRange<GridType...>> coords)
     {
-        static_assert(Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible);
+        static_assert(Kokkos::SpaceAccessibility<ExecSpace, typename NDEvaluator::memory_space>::
+                              accessible);
         static_assert(((ddc::in_tags_v<
                         typename GridType::continuous_dimension_type,
                         ddc::to_type_seq_t<StartCoord>>)&&...));
@@ -152,14 +164,14 @@ public:
      * @see SplineEvaluator2D
      */
     template <class IndexTag1, class IndexTag2>
-    KOKKOS_INLINE_FUNCTION double jacobian_component(Coord<R, Theta> coord) const
+    KOKKOS_INLINE_FUNCTION double jacobian_component(CoordJacobian coord) const
     {
         static_assert(ddc::in_tags_v<IndexTag1, ddc::to_type_seq_t<EndCoord>>);
         static_assert(
                 ddc::in_tags_v<IndexTag2, get_covariant_dims_t<ddc::to_type_seq_t<StartCoord>>>);
 
         return m_evaluator
-                .deriv(Idx < ddc::Deriv<typename IndexTag2::Dual>(1),
+                .deriv(Idx<ddc::Deriv<typename IndexTag2::Dual>>(1),
                        coord,
                        get_const_field(ddc::get<IndexTag1>(m_coeff_representation)));
     }
