@@ -135,8 +135,8 @@ public:
 /**
  * @brief Get the batched basis index range for a builder.
  *
- * Dispatches to @c batched_basis_idx_range if available (e.g. IdentityInterpolationBuilder),
- * otherwise falls back to @c batched_spline_domain (e.g. ddc::SplineBuilder).
+ * Dispatches to batched_basis_idx_range if available (e.g. IdentityInterpolationBuilder),
+ * otherwise falls back to batched_spline_domain (e.g. ddc::SplineBuilder).
  *
  * @param builder The interpolation builder.
  * @param batched_interpolation_domain The batched interpolation domain.
@@ -168,9 +168,9 @@ namespace concepts {
  * primary template delegating to Builder's own aliases and can be specialised for
  * external builders (e.g. ddc::SplineBuilder).
  *
- * The callable requirement is verified using @c interpolation_idx_range_type as the
+ * The callable requirement is verified using interpolation_idx_range_type as the
  * representative non-batched domain:
- *  - @c b(coeffs, vals) — build interpolation coefficients from function values.
+ *  - b(coeffs, vals) — build interpolation coefficients from function values.
  */
 template <class Builder>
 concept InterpolationBuilder = requires
@@ -197,9 +197,9 @@ concept InterpolationBuilder = requires
 /**
  * @brief A concept describing a 1D interpolation builder.
  *
- * Refines @c InterpolationBuilder with the additional requirements that:
- *   - The builder operates over exactly one interpolation dimension (@c rank() == 1).
- *   - @c InterpolationBuilderTraits<Builder>::basis_domain_type is defined, i.e. the
+ * Refines InterpolationBuilder with the additional requirements that:
+ *   - The builder operates over exactly one interpolation dimension (rank() == 1).
+ *   - InterpolationBuilderTraits<Builder>::basis_domain_type is defined, i.e. the
  *     builder exposes a discrete dimension for its basis coefficients.
  */
 template <class Builder>
