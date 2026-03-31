@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include <optional>
 #include <type_traits>
 
 #include "ddc_aliases.hpp"
@@ -204,7 +205,43 @@ concept InterpolationBuilder = requires
  */
 template <class Builder>
 concept InterpolationBuilder1D
-        = InterpolationBuilder<Builder> &&(InterpolationBuilderTraits<Builder>::rank() == 1);
+        = InterpolationBuilder<Builder> &&(InterpolationBuilderTraits<Builder>::rank() == 1)
+          && requires(
+                  Builder const& b,
+                  typename InterpolationBuilderTraits<Builder>::interpolation_idx_range_type domain,
+                  Field<typename InterpolationBuilderTraits<Builder>::data_type,
+                        typename InterpolationBuilderTraits<Builder>::
+                                template batched_basis_idx_range_type<
+                                        typename InterpolationBuilderTraits<
+                                                Builder>::interpolation_idx_range_type>,
+                        typename Builder::memory_space> coeffs,
+                  ConstField<
+                          typename InterpolationBuilderTraits<Builder>::data_type,
+                          typename InterpolationBuilderTraits<
+                                  Builder>::interpolation_idx_range_type,
+                          typename Builder::memory_space> vals,
+                  std::optional<ConstField<
+                          typename InterpolationBuilderTraits<Builder>::data_type,
+                          typename InterpolationBuilderTraits<Builder>::
+                                  template batched_derivs_idx_range_type<
+                                          typename InterpolationBuilderTraits<
+                                                  Builder>::interpolation_idx_range_type>,
+                          typename Builder::memory_space>> derivs)
+{
+    {b(coeffs, vals, derivs, derivs)};
+    {
+        b.batched_derivs_xmin_domain(domain)
+        } -> std::same_as<
+                typename InterpolationBuilderTraits<Builder>::
+                        template batched_derivs_idx_range_type<typename InterpolationBuilderTraits<
+                                Builder>::interpolation_idx_range_type>>;
+    {
+        b.batched_derivs_xmax_domain(domain)
+        } -> std::same_as<
+                typename InterpolationBuilderTraits<Builder>::
+                        template batched_derivs_idx_range_type<typename InterpolationBuilderTraits<
+                                Builder>::interpolation_idx_range_type>>;
+};
 
 } // namespace concepts
 
