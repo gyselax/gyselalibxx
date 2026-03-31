@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a `NDLagrangeEvaluator` class.
 - Add `eval_basis_and_n_derivs` function to Lagrange basis operators.
 - Add `deriv` function to Lagrange evaluation.
+- Add `concepts::InterpolationBuilder1D` and `concepts::Interpolation1D`.
 
 ### Fixed
 
@@ -29,6 +30,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `DiscreteToCartesian` -> `DiscretePoloidalCSSplineMapping`.
 - Renamed `DiscreteToCartesianBuilder` -> `DiscretePoloidalCSSplineMappingBuilder`.
 - Changed `BslAdvectionPolar` template parameters and constructor to take a builder and evaluator instead of an `Interpolator2D`.
+- Changed new `concepts::InterpolationEvaluator` concept and associated `InterpolationEvaluatorTraits` class to generalise to ND.
+- Changed new `concepts::InterpolationBuilder` concept and associated `InterpolationBuilderTraits` class to generalise to ND.
 
 ### Deprecated
 

@@ -5,6 +5,7 @@
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
 #include "indexed_tensor.hpp"
+#include "lagrange_basis_non_uniform.hpp"
 #include "tensor.hpp"
 
 struct X
@@ -146,6 +147,13 @@ struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
 {
 };
 struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
+{
+};
+
+struct LagBasisR : NonUniformLagrangeBasis<R, BSDegree>
+{
+};
+struct LagBasisTheta : NonUniformLagrangeBasis<Theta, BSDegree>
 {
 };
 
