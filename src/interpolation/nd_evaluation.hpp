@@ -34,7 +34,47 @@ namespace ndEval {
  * @param[in]  coeffs     The interpolation coefficients for each vector component.
  */
 template <
-        class Evaluator,
+        concepts::InterpolationEvaluator Evaluator,
+        class CoordType,
+        class ElementType,
+        class CoeffIdxRange,
+        class MemorySpace,
+        class LayoutCoeff,
+        class... VectorDims>
+KOKKOS_FUNCTION Vector<ElementType, VectorIndexSet<VectorDims...>> evaluate(
+        Evaluator const& evaluator,
+        CoordType const& coord,
+        VectorField<
+                const ElementType,
+                CoeffIdxRange,
+                VectorIndexSet<VectorDims...>,
+                MemorySpace,
+                LayoutCoeff> coeffs)
+{
+    static_assert(detail::is_tagged_vector_v<CoordType>);
+    (evaluator(coord, ddcHelper::get<VectorDims>(coeffs)), ...);
+}
+
+/**
+ * @brief Evaluate an ND interpolation on each component of a VectorField.
+ *
+ * For each dimension @c VectorDim in @c VectorDims..., calls
+ * @code
+ *   evaluator(ddcHelper::get<VectorDim>(output), ddcHelper::get<VectorDim>(coeffs));
+ * @endcode
+ *
+ * This is the VectorField counterpart of @c evaluator.operator()(eval, coeffs).
+ *
+ * @tparam Evaluator   A class satisfying @c concepts::InterpolationEvaluator.
+ * @tparam VectorDims  The dimensions labelling the vector components (passed to
+ *                     @c ddcHelper::get to extract the corresponding scalar field).
+ *
+ * @param[in]  evaluator  The ND interpolation evaluator.
+ * @param[out] output     On output, the interpolated values for each vector component.
+ * @param[in]  coeffs     The interpolation coefficients for each vector component.
+ */
+template <
+        concepts::InterpolationEvaluator Evaluator,
         class ElementType,
         class EvalIdxRange,
         class CoeffIdxRange,
@@ -42,7 +82,6 @@ template <
         class LayoutOut,
         class LayoutCoeff,
         class... VectorDims>
-        requires concepts::InterpolationEvaluator<Evaluator>
 void evaluate(
         Evaluator const& evaluator,
         VectorField<
@@ -81,7 +120,7 @@ void evaluate(
  * @param[in]  coeffs     The interpolation coefficients for each vector component.
  */
 template <
-        class Evaluator,
+        concepts::InterpolationEvaluator Evaluator,
         class ElementType,
         class EvalIdxRange,
         class CoordType,
@@ -92,7 +131,6 @@ template <
         class LayoutCoords,
         class LayoutCoeff,
         class... VectorDims>
-        requires concepts::InterpolationEvaluator<Evaluator>
 void evaluate(
         Evaluator const& evaluator,
         VectorField<
@@ -137,7 +175,7 @@ void evaluate(
  * @param[in]  coeffs     The scalar interpolation coefficients.
  */
 template <
-        class Evaluator,
+        concepts::InterpolationEvaluator Evaluator,
         class ElementType,
         class EvalIdxRange,
         class CoeffIdxRange,
@@ -145,7 +183,6 @@ template <
         class LayoutOut,
         class LayoutCoeff,
         class... VectorDims>
-        requires concepts::InterpolationEvaluator<Evaluator>
 void deriv(
         Evaluator const& evaluator,
         VectorField<
@@ -189,7 +226,7 @@ void deriv(
  * @param[in]  coeffs     The scalar interpolation coefficients.
  */
 template <
-        class Evaluator,
+        concepts::InterpolationEvaluator Evaluator,
         class ElementType,
         class EvalIdxRange,
         class CoordType,
@@ -200,7 +237,6 @@ template <
         class LayoutCoords,
         class LayoutCoeff,
         class... VectorDims>
-        requires concepts::InterpolationEvaluator<Evaluator>
 void deriv(
         Evaluator const& evaluator,
         VectorField<
