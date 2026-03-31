@@ -336,10 +336,10 @@ public:
      * @return The derivative of the spline function at the desired coordinate.
      */
     template <class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
-    KOKKOS_FUNCTION DataType deriv(
-            IdxDerivDims const& deriv_order,
-            Coord<CoordsDims...> const& coord_eval,
-            ConstField<DataType, BatchedLagrangeIdxRange, memory_space, Layout> const lagrange_coef)
+    KOKKOS_FUNCTION DataType
+    deriv(IdxDerivDims const& deriv_order,
+          Coord<CoordsDims...> const& coord_eval,
+          ConstField<DataType, BatchedLagrangeIdxRange, memory_space, Layout> const lagrange_coef)
             const
     {
         return eval_no_bc(deriv_order, coord_eval, lagrange_coef);

@@ -61,7 +61,8 @@ struct InterpolationEvaluatorTraits
     using evaluation_idx_range_type = typename Evaluator::evaluation_idx_range_type;
 
     /// @brief The ND coordinate type corresponding to the evaluation mesh.
-    using coord_type = ddc::coordinate_of_t<typename evaluation_idx_range_type::discrete_element_type>;
+    using coord_type
+            = ddc::coordinate_of_t<typename evaluation_idx_range_type::discrete_element_type>;
 
     /// @brief The type of the ND index range on which the interpolation coefficients are defined.
     using coeff_idx_range_type = typename Evaluator::coeff_idx_range_type;
@@ -181,7 +182,9 @@ concept InterpolationEvaluator = requires
 }
 &&requires()
 {
-    {InterpolationEvaluatorTraits<Evaluator>::rank()} -> std::same_as<std::size_t>;
+    {
+        InterpolationEvaluatorTraits<Evaluator>::rank()
+        } -> std::same_as<std::size_t>;
 }
 &&requires(
         Evaluator const& e,
