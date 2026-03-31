@@ -26,6 +26,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed the name of class `SplineBuliderDerivField2D` to fix typo (->`SplineBuilderDerivField2D`).
 - Update DDC to [v0.12.0](https://github.com/CExA-project/ddc/releases/tag/v0.12.0).
 - Changed FindLAPACKE CMake module to the version in DDC.
+- Renamed `DiscreteToCartesian` -> `DiscretePoloidalCSSplineMapping`.
+- Renamed `DiscreteToCartesianBuilder` -> `DiscretePoloidalCSSplineMappingBuilder`.
 - Changed `BslAdvectionPolar` template parameters and constructor to take a builder and evaluator instead of an `Interpolator2D`.
 
 ### Deprecated
