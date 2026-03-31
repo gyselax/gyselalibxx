@@ -186,7 +186,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a57eec0bfb81f5e6f493b18ceeba92fe9" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classPolarBSplines_1_1Impl_1ad7c51d11ed3761c1d422a4429cb67b76" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class <ref refid="structX" kindref="compound">X</ref></type>
@@ -203,11 +203,11 @@
         </templateparamlist>
         <type></type>
         <definition>PolarBSplines&lt; BSplinesR, BSplinesTheta, C &gt;::Impl&lt; DDim, MemorySpace &gt;::Impl</definition>
-        <argsstring>(const DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, EvalMemorySpace &gt; &amp;curvilinear_to_cartesian)</argsstring>
+        <argsstring>(const DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, EvalMemorySpace &gt; &amp;curvilinear_to_cartesian)</argsstring>
         <name>Impl</name>
         <qualifiedname>PolarBSplines::Impl::Impl</qualifiedname>
         <param>
-          <type>const <ref refid="classDiscreteToCartesian" kindref="compound">DiscreteToCartesian</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, SplineEvaluator, <ref refid="classPolarBSplines_1a648dc9ce69b7875ee05df11ca91ca831" kindref="member">R</ref>, <ref refid="classPolarBSplines_1ac4cbfc152e798720dd2615390e96d894" kindref="member">Theta</ref>, EvalMemorySpace &gt; &amp;</type>
+          <type>const <ref refid="classDiscretePoloidalCSSplineMapping" kindref="compound">DiscretePoloidalCSSplineMapping</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, SplineEvaluator, <ref refid="classPolarBSplines_1a648dc9ce69b7875ee05df11ca91ca831" kindref="member">R</ref>, <ref refid="classPolarBSplines_1ac4cbfc152e798720dd2615390e96d894" kindref="member">Theta</ref>, EvalMemorySpace &gt; &amp;</type>
           <declname>curvilinear_to_cartesian</declname>
         </param>
         <briefdescription>
@@ -227,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="305" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="305" bodyend="438"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="305" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="305" bodyend="448"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1aad7f0ed019b40ca8bea9259f53d94a83" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="446" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="446" bodyend="451"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="456" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="456" bodyend="461"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1af79c5cc9a060916b31c8a41e5f7cd7da" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -290,7 +290,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="458" column="9"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="468" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a386e9fe73ec0a24b3773353aa4ad1af2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -319,7 +319,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="465" column="9"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="475" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1aa4c6ff5c6a2e63283fc779ef1a6befd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -334,7 +334,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="470" column="9"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="480" column="9"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a954186a181dc16f537322080f4484a1f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classPolarBSplines_1_1Impl" kindref="compound">Impl</ref> &amp;</type>
@@ -365,7 +365,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="479" column="14"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="489" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a44b135ad2f6adec16d22471819ed98c1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type><ref refid="classPolarBSplines_1_1Impl" kindref="compound">Impl</ref> &amp;</type>
@@ -396,7 +396,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="488" column="14"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="498" column="14"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1adec6c6cf4f627326407640a8894fd3e9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classPolarBSplines_1a9d78494d89fbe4d9abea58a61619fae8" kindref="member">tensor_product_index_type</ref></type>
@@ -452,7 +452,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="507" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="507" bodyend="510"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="517" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="517" bodyend="520"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1aa92ffeccf0abc11aff9948eefc108941" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -527,7 +527,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="531" column="51" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="531" bodyend="538"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="541" column="51" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="541" bodyend="548"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a048bd64b848a231da48e25a5ec826234" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classPolarBSplines_1a9d78494d89fbe4d9abea58a61619fae8" kindref="member">tensor_product_index_type</ref></type>
@@ -583,7 +583,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="558" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="558" bodyend="561"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="568" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="568" bodyend="571"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a5e27aec07cc21c6c2e4308ee231dc0d4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classPolarBSplines_1a9d78494d89fbe4d9abea58a61619fae8" kindref="member">tensor_product_index_type</ref></type>
@@ -639,7 +639,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="581" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="581" bodyend="584"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="591" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="591" bodyend="594"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a592d956b5cc0db73b20d29c2d750b84f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION <ref refid="classPolarBSplines_1a9d78494d89fbe4d9abea58a61619fae8" kindref="member">tensor_product_index_type</ref></type>
@@ -695,7 +695,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="605" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="605" bodyend="608"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="615" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="615" bodyend="618"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a1ca0df2d7f5defe89ecf42ef6bcfb9fa" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>std::size_t</type>
@@ -713,7 +713,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="615" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="615" bodyend="620"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="625" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="625" bodyend="630"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1a244d6ebb4a31d96e25c1844614979cc7" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classPolarBSplines_1_1Impl_1aede52d653b3250142ef44aadb56904f8" kindref="member">discrete_domain_type</ref></type>
@@ -731,7 +731,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="627" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="627" bodyend="630"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="637" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="637" bodyend="640"/>
       </memberdef>
       <memberdef kind="function" id="classPolarBSplines_1_1Impl_1af3133a4ea7b7cc4796da428de9bba352" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type><ref refid="classPolarBSplines_1_1Impl_1aede52d653b3250142ef44aadb56904f8" kindref="member">discrete_domain_type</ref></type>
@@ -749,7 +749,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="639" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="639" bodyend="642"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="649" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="649" bodyend="652"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
@@ -788,7 +788,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="646" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="658" bodyend="749"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="656" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="668" bodyend="759"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -806,7 +806,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="231" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="232" bodyend="651"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" line="231" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/polar_bsplines.hpp" bodystart="232" bodyend="661"/>
     <listofallmembers>
       <member refid="classPolarBSplines_1_1Impl_1a00a05a8522a019c5e4324e26ecc780d3" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>discrete_dimension_type</name></member>
       <member refid="classPolarBSplines_1_1Impl_1aede52d653b3250142ef44aadb56904f8" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>discrete_domain_type</name></member>
@@ -820,7 +820,7 @@
       <member refid="classPolarBSplines_1_1Impl_1a5e27aec07cc21c6c2e4308ee231dc0d4" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>eval_deriv_theta</name></member>
       <member refid="classPolarBSplines_1_1Impl_1a244d6ebb4a31d96e25c1844614979cc7" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>full_domain</name></member>
       <member refid="classPolarBSplines_1_1Impl_1adcaf2527acc2c7a0a18f741240082b56" prot="private" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>Impl</name></member>
-      <member refid="classPolarBSplines_1_1Impl_1a57eec0bfb81f5e6f493b18ceeba92fe9" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>Impl</name></member>
+      <member refid="classPolarBSplines_1_1Impl_1ad7c51d11ed3761c1d422a4429cb67b76" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>Impl</name></member>
       <member refid="classPolarBSplines_1_1Impl_1aad7f0ed019b40ca8bea9259f53d94a83" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>Impl</name></member>
       <member refid="classPolarBSplines_1_1Impl_1af79c5cc9a060916b31c8a41e5f7cd7da" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>Impl</name></member>
       <member refid="classPolarBSplines_1_1Impl_1a386e9fe73ec0a24b3773353aa4ad1af2" prot="public" virt="non-virtual"><scope>PolarBSplines::Impl</scope><name>Impl</name></member>

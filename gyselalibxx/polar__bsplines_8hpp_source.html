@@ -575,7 +575,7 @@
 #include "cartesian_to_barycentric.hpp"
 #include "coord_transformation_tools.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "view.hpp"
 
 namespace PolarSplines {
@@ -756,12 +756,22 @@ public:
         using discrete_vector_type = IdxStep&lt;DDim&gt;;
 
         template &lt;class X, class Y, class SplineEvaluator, class EvalMemorySpace&gt;
-        explicit Impl(const DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, EvalMemorySpace&gt;&amp;
-                              curvilinear_to_cartesian)
+        explicit Impl(const DiscretePoloidalCSSplineMapping&lt;
+                      X,
+                      Y,
+                      SplineEvaluator,
+                      R,
+                      Theta,
+                      EvalMemorySpace&gt;&amp; curvilinear_to_cartesian)
         {
             static_assert(std::is_same_v&lt;MemorySpace, Kokkos::HostSpace&gt;);
-            using DiscreteMapping
-                    = DiscreteToCartesian&lt;X, Y, SplineEvaluator, R, Theta, EvalMemorySpace&gt;;
+            using DiscreteMapping = DiscretePoloidalCSSplineMapping&lt;
+                    X,
+                    Y,
+                    SplineEvaluator,
+                    R,
+                    Theta,
+                    EvalMemorySpace&gt;;
             static_assert(std::is_same_v&lt;typename DiscreteMapping::BSplineR, BSplinesR&gt;);
             static_assert(std::is_same_v&lt;typename DiscreteMapping::BSplineTheta, BSplinesTheta&gt;);
             using EvalExecSpace = std::conditional_t&lt;

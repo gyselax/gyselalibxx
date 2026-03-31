@@ -18,7 +18,7 @@
 * `#include "cartesian_to_barycentric.hpp"`
 * `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_helper.hpp"`
-* `#include "discrete_to_cartesian.hpp"`
+* `#include "discrete_poloidal_cs_spline_mapping.hpp"`
 * `#include "view.hpp"`
 
 

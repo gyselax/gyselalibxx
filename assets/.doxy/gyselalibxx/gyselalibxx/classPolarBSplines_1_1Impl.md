@@ -70,7 +70,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|   | [**Impl**](#function-impl-25) (const [**DiscreteToCartesian**](classDiscreteToCartesian.md)&lt; [**X**](structX.md), [**Y**](structY.md), SplineEvaluator, [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta), EvalMemorySpace &gt; & curvilinear\_to\_cartesian) <br> |
+|   | [**Impl**](#function-impl-25) (const [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md)&lt; [**X**](structX.md), [**Y**](structY.md), SplineEvaluator, [**R**](classPolarBSplines.md#typedef-r), [**Theta**](classPolarBSplines.md#typedef-theta), EvalMemorySpace &gt; & curvilinear\_to\_cartesian) <br> |
 |   | [**Impl**](#function-impl-35) ([**Impl**](classPolarBSplines_1_1Impl.md)&lt; DDim, OriginMemorySpace &gt; const & impl) <br> |
 |   | [**Impl**](#function-impl-45) ([**Impl**](classPolarBSplines_1_1Impl.md) const & x) = default<br> |
 |   | [**Impl**](#function-impl-55) ([**Impl**](classPolarBSplines_1_1Impl.md) && x) = default<br> |
@@ -198,7 +198,7 @@ using PolarBSplines< BSplinesR, BSplinesTheta, C >::Impl< DDim, MemorySpace >::d
 ```C++
 template<class X, class Y, class SplineEvaluator, class EvalMemorySpace>
 inline explicit PolarBSplines::Impl::Impl (
-    const DiscreteToCartesian < X , Y , SplineEvaluator, R , Theta , EvalMemorySpace > & curvilinear_to_cartesian
+    const DiscretePoloidalCSSplineMapping < X , Y , SplineEvaluator, R , Theta , EvalMemorySpace > & curvilinear_to_cartesian
 ) 
 ```
 

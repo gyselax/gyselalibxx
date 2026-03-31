@@ -64,8 +64,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md) _An abstract class which holds a chunk of memory describing a field and its derivatives. This is the superclass for_ [_**DerivFieldMem**_](classDerivFieldMem.md) _and_[_**DerivField**_](classDerivField.md) _._
 * **class** [**DerivFieldMem**](classDerivFieldMem.md) 
 * **class** [**DiocotronDensitySolution**](classDiocotronDensitySolution.md) _The diocotron exact solution of the density_ \(\rho\) _._
-* **class** [**DiscreteToCartesian**](classDiscreteToCartesian.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._ 
-* **class** [**DiscreteToCartesianBuilder**](classDiscreteToCartesianBuilder.md) _A class to create a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
+* **class** [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._ 
+* **class** [**DiscretePoloidalCSSplineMappingBuilder**](classDiscretePoloidalCSSplineMappingBuilder.md) _A class to create a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**EdgeTransformation**](classEdgeTransformation.md) _Transform a coordinate or an index from one edge to the one on the other edge._ 
 * **class** [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md) _A class to indicate that an explicit time stepper should be constructed for use in other operators._ 
 * **class** [**IPoissonSolver**](classIPoissonSolver.md)     
@@ -110,7 +110,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**InvJacobianOPoint**](classInvJacobianOPoint.md) _An operator for calculating the inverse of the Jacobian at an O-point. This class is used in_ [_**CombinedMapping**_](classCombinedMapping.md) _to calculate the inverse of the Jacobian at an O-point when one of the mappings does not allow the evaluation of its Jacobian/inverse Jacobian at the O-point._
 * **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; CircularToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CircularToCartesian_3_01R_00_01Theta_00_01X_00_011f0856ff18a48089a53c5f1911a7657f.md) 
 * **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; CzarnyToCartesian&lt; R, Theta, X, Y &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9.md) 
-* **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b.md) 
+* **class** [**InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;**](classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7.md) 
 * **class** [**InverseJacobianMatrix**](classInverseJacobianMatrix.md) 
 * **class** [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md) _Initialise the allfdistribu function._ 
 * **class** [**LagrangeEvaluator**](classLagrangeEvaluator.md) _A class to evaluate, differentiate or integrate a Lagrange function._ 
@@ -153,7 +153,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._ 
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._
 * **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._ 
-* **class** [**RefinedDiscreteToCartesianBuilder**](classRefinedDiscreteToCartesianBuilder.md) _A class to create a_ [_**DiscreteToCartesian**_](classDiscreteToCartesian.md) _instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
+* **class** [**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md) _A class to create a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md) _Compute the derivative of an equivalent global spline at the interface between two patches._ 
 * **class** [**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md) _A class to store a collection of interface derivative calculators templated on the interfaces._ 
 * **class** [**SpeciesInformation**](classSpeciesInformation.md) [_**Species**_](structSpecies.md) _discrete dimension to access constant attributes related to species._    
@@ -205,8 +205,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**PolarSplineFEMPoissonLikeSolver::InternalBatchDim**](structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim.md) _The tag for the batch dimension for the equation. This is public due to Cuda._ 
 * **struct** [**R**](structR.md) _Define non periodic real contravariant_ [_**R**_](structR.md) _dimension._
 * **struct** [**R\_cov**](structR__cov.md) _Define non periodic real covariant_ [_**R**_](structR.md) _dimension._
-* **struct** [**RefinedDiscreteToCartesianBuilder::Build\_BuilderType**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType.md) 
-* **struct** [**RefinedDiscreteToCartesianBuilder::Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exedad782e8118e0de272f3e04e2a3c2f85.md) 
+* **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::Build\_BuilderType**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType.md) 
+* **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::Build\_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda326959160c43cc0407d32cd32699b94.md) 
 * **struct** [**Theta**](structTheta.md) _Define periodic real contravariant_ [_**Theta**_](structTheta.md) _dimension._
 * **struct** [**Theta\_cov**](structTheta__cov.md) _Define periodic real covariant_ [_**Theta**_](structTheta.md) _dimension._
 * **struct** [**Vpar**](structVpar.md) _Define non periodic parallel velocity_ \(v_\parallel\) _._
@@ -318,13 +318,13 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** **NonUniformGridBase< T::continuous_dimension_type >**    
     * **struct** [**NonUniformLagrangeKnots**](structNonUniformLagrangeKnots.md) 
 * **class** **std::conditional_t< BSplinesROriginal::is_uniform(), ddc::UniformBSplines< R, BSplinesROriginal::degree()>, ddc::NonUniformBSplines< R, BSplinesROriginal::degree()> >**    
-    * **struct** [**RefinedDiscreteToCartesianBuilder::BSplinesRRefined**](structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined.md) _The type of the radial B-splines on which the new mapping will be defined._ 
+    * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesRRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined.md) _The type of the radial B-splines on which the new mapping will be defined._ 
 * **class** **std::conditional_t< BSplinesThetaOriginal::is_uniform(), ddc::UniformBSplines< Theta, BSplinesThetaOriginal::degree()>, ddc::NonUniformBSplines< Theta, BSplinesThetaOriginal::degree()> >**    
-    * **struct** [**RefinedDiscreteToCartesianBuilder::BSplinesThetaRefined**](structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined.md) _The type of the poloidal B-splines on which the new mapping will be defined._ 
+    * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesThetaRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined.md) _The type of the poloidal B-splines on which the new mapping will be defined._ 
 * **class** **GrevillePointsR::interpolation_discrete_dimension_type**    
-    * **struct** [**RefinedDiscreteToCartesianBuilder::GridRRefined**](structRefinedDiscreteToCartesianBuilder_1_1GridRRefined.md) _The type of the grid of radial points on which the new mapping will be defined._ 
+    * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::GridRRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined.md) _The type of the grid of radial points on which the new mapping will be defined._ 
 * **class** **GrevillePointsTheta::interpolation_discrete_dimension_type**    
-    * **struct** [**RefinedDiscreteToCartesianBuilder::GridThetaRefined**](structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined.md) _The type of the grid of poloidal points on which the new mapping will be defined._ 
+    * **struct** [**RefinedDiscretePoloidalCSSplineMappingBuilder::GridThetaRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridThetaRefined.md) _The type of the grid of poloidal points on which the new mapping will be defined._ 
 * **class** **UniformGridBase< T::continuous_dimension_type >**    
     * **struct** [**UniformLagrangeKnots**](structUniformLagrangeKnots.md) 
 * **class** **std::false_type**    

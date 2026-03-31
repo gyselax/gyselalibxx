@@ -15,7 +15,7 @@
 #include "circular_to_cartesian.hpp"
 #include "coord_transformation_tools.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "indexed_tensor.hpp"
 #include "view.hpp"
 
@@ -120,7 +120,7 @@ template <
         class Ypc>
 class InvJacobianOPoint<
         CombinedMapping<
-                DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
+                DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
                 CartesianToCircular<Xpc, Ypc, R, Theta>,
                 Coord<R, Theta>>,
         Coord<R, Theta>>
@@ -136,7 +136,7 @@ class InvJacobianOPoint<
 
 private:
     using Mapping = CombinedMapping<
-            DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
+            DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace>,
             CartesianToCircular<Xpc, Ypc, R, Theta>,
             Coord<R, Theta>>;
 
@@ -155,9 +155,15 @@ public:
     KOKKOS_FUNCTION DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> operator()()
             const
     {
-        DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace> const& discrete_mapping
-                = m_mapping.template get<
-                        DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>();
+        DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace> const&
+                discrete_mapping
+                = m_mapping.template get<DiscretePoloidalCSSplineMapping<
+                        X,
+                        Y,
+                        SplineEvaluator,
+                        R,
+                        Theta,
+                        MemorySpace>>();
         DTensor<VectorIndexSet<Xpc, Ypc>, VectorIndexSet<X_cov, Y_cov>> J(0.0);
         IdxRangeRTheta idx_range_singular_point = discrete_mapping.idx_range_singular_point();
         // Average the values at (r = 0, theta):

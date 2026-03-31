@@ -201,11 +201,11 @@
   </compound>
   <compound refid="structBSplinesR" kind="struct"><name>BSplinesR</name>
   </compound>
-  <compound refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesRRefined" kind="struct"><name>RefinedDiscreteToCartesianBuilder::BSplinesRRefined</name>
+  <compound refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined" kind="struct"><name>RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesRRefined</name>
   </compound>
   <compound refid="structBSplinesTheta" kind="struct"><name>BSplinesTheta</name>
   </compound>
-  <compound refid="structRefinedDiscreteToCartesianBuilder_1_1BSplinesThetaRefined" kind="struct"><name>RefinedDiscreteToCartesianBuilder::BSplinesThetaRefined</name>
+  <compound refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesThetaRefined" kind="struct"><name>RefinedDiscretePoloidalCSSplineMappingBuilder::BSplinesThetaRefined</name>
   </compound>
   <compound refid="structMultipatchSplineBuilder2D_1_1Build__BuilderType" kind="struct"><name>MultipatchSplineBuilder2D::Build_BuilderType</name>
   </compound>
@@ -215,10 +215,10 @@
     <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1aed748b0a7ab22349f565cf4c4b5c058e" kind="typedef"><name>type</name></member>
     <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1a0059407e36a55458c20823d11d48967d" kind="variable"><name>patch_id</name></member>
   </compound>
-  <compound refid="structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType" kind="struct"><name>RefinedDiscreteToCartesianBuilder::Build_BuilderType</name>
+  <compound refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType" kind="struct"><name>RefinedDiscretePoloidalCSSplineMappingBuilder::Build_BuilderType</name>
   </compound>
-  <compound refid="structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exedad782e8118e0de272f3e04e2a3c2f85" kind="struct"><name>RefinedDiscreteToCartesianBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;</name>
-    <member refid="structRefinedDiscreteToCartesianBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilder2D_3_01Exedad782e8118e0de272f3e04e2a3c2f85_1aaa74a82ef1665d721c358a3fbb2bfb17" kind="typedef"><name>type</name></member>
+  <compound refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda326959160c43cc0407d32cd32699b94" kind="struct"><name>RefinedDiscretePoloidalCSSplineMappingBuilder::Build_BuilderType&lt; ddc::SplineBuilder2D&lt; ExecSpace, MemorySpace, BSplinesROriginal, BSplinesThetaOriginal, GridROriginal, GridThetaOriginal, BcLower1, BcUpper1, BcLower2, BcUpper2, Solver &gt; &gt;</name>
+    <member refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1Build__BuilderType_3_01ddc_1_1SplineBuilda326959160c43cc0407d32cd32699b94_1a7f42652813239e0a08f7aacc861e1ec5" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727" kind="struct"><name>MultipatchSplineBuilder2D::Build_BuilderType&lt; Patch, DConstField&lt; IdxRange&lt; Grid1D... &gt;, MemorySpace &gt; &gt;</name>
     <member refid="structMultipatchSplineBuilder2D_1_1Build__BuilderType_3_01Patch_00_01DConstField_3_01IdxRange_3_388990a8744187d12e0f612652c86727_1a9b38a74b7dae71d3f11313919655d776" kind="typedef"><name>lower_matching_edge1</name></member>
@@ -821,66 +821,66 @@
     <member refid="classDiocotronDensitySolution_1a9615447cc5be0e3addf4f885660af89a" kind="function"><name>equilibrium</name></member>
     <member refid="classDiocotronDensitySolution_1a82887cb9488adf181e8ec74cf4b1eb1e" kind="function"><name>dispersion_relation</name></member>
   </compound>
-  <compound refid="classDiscreteToCartesian" kind="class"><name>DiscreteToCartesian</name>
-    <member refid="classDiscreteToCartesian_1a77815368f1e5e77222cf4a66b3589c2e" kind="typedef"><name>BSplineR</name></member>
-    <member refid="classDiscreteToCartesian_1aee74ab0f1f920e05ef94fbb15b36f6fc" kind="typedef"><name>BSplineTheta</name></member>
-    <member refid="classDiscreteToCartesian_1a7e46471be9fce4ff796a971c9a660c97" kind="typedef"><name>cartesian_tag_x</name></member>
-    <member refid="classDiscreteToCartesian_1a6c115a3ce558a2d1d1256a09f8e7408a" kind="typedef"><name>cartesian_tag_y</name></member>
-    <member refid="classDiscreteToCartesian_1aec413130c64ea6b59a0c177566eb9d7e" kind="typedef"><name>curvilinear_tag_r</name></member>
-    <member refid="classDiscreteToCartesian_1a44d272af350574b3d72f696e38f2159d" kind="typedef"><name>curvilinear_tag_theta</name></member>
-    <member refid="classDiscreteToCartesian_1a2b2e0b6ec7ee087fdb814f9fa22aec01" kind="typedef"><name>CoordArg</name></member>
-    <member refid="classDiscreteToCartesian_1ad3524c5f93fade40f00a204901975a33" kind="typedef"><name>CoordResult</name></member>
-    <member refid="classDiscreteToCartesian_1abeb60464a16b00d2718751bf092cff7b" kind="typedef"><name>CoordJacobian</name></member>
-    <member refid="classDiscreteToCartesian_1a9c137067e23580e1970c360a02f295ce" kind="typedef"><name>X_cov</name></member>
-    <member refid="classDiscreteToCartesian_1a646b426effc493a17d533449660e648e" kind="typedef"><name>Y_cov</name></member>
-    <member refid="classDiscreteToCartesian_1a45e63566bd132456f6d966218c2d3253" kind="typedef"><name>R_cov</name></member>
-    <member refid="classDiscreteToCartesian_1a2103653283a7597142ab62f30b999e22" kind="typedef"><name>Theta_cov</name></member>
-    <member refid="classDiscreteToCartesian_1a45c6accac73934322acb395686992e45" kind="typedef"><name>spline_idx_range</name></member>
-    <member refid="classDiscreteToCartesian_1a45d1e5d607665f22d6d15985b0492a5e" kind="typedef"><name>SplineType</name></member>
-    <member refid="classDiscreteToCartesian_1a962d2592fdf435268fbdcc16462c6ea9" kind="typedef"><name>IdxRangeRTheta</name></member>
-    <member refid="classDiscreteToCartesian_1af73b4a990bd92c6d60aac4a3a5b85c15" kind="typedef"><name>IdxRangeTheta</name></member>
-    <member refid="classDiscreteToCartesian_1aba715a48c61ec9dab43c6710d5441ef8" kind="typedef"><name>IdxTheta</name></member>
-    <member refid="classDiscreteToCartesian_1a5c367a0b10cd18e68d6448c9ea18453a" kind="typedef"><name>IdxRTheta</name></member>
-    <member refid="classDiscreteToCartesian_1abe902a959f2b25d4e3ddc3b81ef037a7" kind="typedef"><name>IdxStepRTheta</name></member>
-    <member refid="classDiscreteToCartesian_1aca828b903d607e653835e2629ec1429c" kind="variable"><name>m_x_spline_representation</name></member>
-    <member refid="classDiscreteToCartesian_1a3069591a9fa5104762c952ce8cb4d1ea" kind="variable"><name>m_y_spline_representation</name></member>
-    <member refid="classDiscreteToCartesian_1aaf655d15b62e9989a5518971c0ca63bb" kind="variable"><name>m_spline_evaluator</name></member>
-    <member refid="classDiscreteToCartesian_1a610157e2cd2ee7205c9e627ed8d03e6b" kind="variable"><name>m_idx_range_singular_point</name></member>
-    <member refid="classDiscreteToCartesian_1aff5f7393a2c27d69ec078f1eabea0077" kind="variable"><name>m_o_point</name></member>
-    <member refid="classDiscreteToCartesian_1a1709f1d85fa975e265d2fa7d103399c0" kind="function"><name>DiscreteToCartesian</name></member>
-    <member refid="classDiscreteToCartesian_1abd58ec7211cfdc44b2b26fd505734cba" kind="function"><name>o_point</name></member>
-    <member refid="classDiscreteToCartesian_1ae9e0ebea2c8a75a561ed90494e0fc201" kind="function"><name>operator()</name></member>
-    <member refid="classDiscreteToCartesian_1acff82acdda8bb289b4885bf2a3127695" kind="function"><name>operator()</name></member>
-    <member refid="classDiscreteToCartesian_1a9c809652342ab04ae993c142a21262f7" kind="function"><name>jacobian_matrix</name></member>
-    <member refid="classDiscreteToCartesian_1aae3c6b00328f75ccee203c5ca76c863b" kind="function"><name>jacobian_component</name></member>
-    <member refid="classDiscreteToCartesian_1af13e543668b38ffc52ac252997e9f1e8" kind="function"><name>jacobian</name></member>
-    <member refid="classDiscreteToCartesian_1afea2c72f045e6d7a609b76d1fb2b494e" kind="function"><name>first_order_jacobian_matrix_r_rtheta</name></member>
-    <member refid="classDiscreteToCartesian_1aeade6cd026d0d03df92d00b0f2651195" kind="function"><name>idx_range_singular_point</name></member>
-    <member refid="classDiscreteToCartesian_1a6c57fdeacc0c42720881993b7905ef38" kind="function"><name>control_point</name></member>
-    <member refid="classDiscreteToCartesian_1ab09fd0542b042ed470da778b6268e229" kind="function"><name>control_points</name></member>
+  <compound refid="classDiscretePoloidalCSSplineMapping" kind="class"><name>DiscretePoloidalCSSplineMapping</name>
+    <member refid="classDiscretePoloidalCSSplineMapping_1af2666886352469160d73ace3e44ea67e" kind="typedef"><name>BSplineR</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a392b5ffe5886c6d138dc56d37e1e0134" kind="typedef"><name>BSplineTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1accd0a75d1a5969672861a85f9b7b9a8e" kind="typedef"><name>cartesian_tag_x</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1abc189b0fe5e812f89b439322e6363b9b" kind="typedef"><name>cartesian_tag_y</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1aeb67760d9547fa8f3a53f5947f08cdf6" kind="typedef"><name>curvilinear_tag_r</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a2b78f9a8f0341223d452120fefde75e6" kind="typedef"><name>curvilinear_tag_theta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a4d9ab128689ed5eeaf37281e34bd140e" kind="typedef"><name>CoordArg</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a84c11ad7f13021751731e42adb57900d" kind="typedef"><name>CoordResult</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a1a491f0f957f5920abd5632c6df094e0" kind="typedef"><name>CoordJacobian</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a1200acc285d091414dbf91e80e46826e" kind="typedef"><name>X_cov</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a597672f655d89e88992ff0db05aa01cf" kind="typedef"><name>Y_cov</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a64530f08f7985257806364087b9e2df3" kind="typedef"><name>R_cov</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a3f31fd91ddfa76c12df8a8f019e84360" kind="typedef"><name>Theta_cov</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1abaea940e655bad1b86651aa5083f3cea" kind="typedef"><name>spline_idx_range</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a9116804b0bfe02655238b3a9d9f895d7" kind="typedef"><name>SplineType</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a728e14241ab8d115a3bfe3c29c63e82f" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a2a518c42048ffe20e817aff69b8b1d29" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1adb996b4151c1f1802a6893564e307e57" kind="typedef"><name>IdxTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a9c5f3b04be494502180b773855af559e" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a775c9004ab1df0e67996782614d8465d" kind="typedef"><name>IdxStepRTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1af5f3e9bd909bb5432bd670de03ad0b25" kind="variable"><name>m_x_spline_representation</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a531fe289a962d99870f50a814205b702" kind="variable"><name>m_y_spline_representation</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1aab4bf9e851f9dfeca7da557fd33a9e57" kind="variable"><name>m_spline_evaluator</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a5a0a49fb871f8ba56329df16fb787140" kind="variable"><name>m_idx_range_singular_point</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a0bfdbbaae2c09dba48edfa3408819aa2" kind="variable"><name>m_o_point</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1ab9372c7b0bb0606ed79dc546984a99ae" kind="function"><name>DiscretePoloidalCSSplineMapping</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a98cb795af65e4bc7788a58abfb2ab4ff" kind="function"><name>o_point</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a2fe3decc4b62f3ee09e82c50973104fd" kind="function"><name>operator()</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1ab124bb2a4ee66483ca378853e7b8d55c" kind="function"><name>operator()</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1af2f9dc7fbf7f5b316dbaf841bcdc2511" kind="function"><name>jacobian_matrix</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a642532c43cf1b5a70849525cac1b6a65" kind="function"><name>jacobian_component</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1ae7f419607f2f3f8244b9b5b2763c30f9" kind="function"><name>jacobian</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1ad985df5230d0f8a29e00a6d80b56b778" kind="function"><name>first_order_jacobian_matrix_r_rtheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1ab41d8cdd5e5597472e8c174c0a5862a3" kind="function"><name>idx_range_singular_point</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1adfcd215b2a90906e1d17e2e8232ed35a" kind="function"><name>control_point</name></member>
+    <member refid="classDiscretePoloidalCSSplineMapping_1a27fb3bdcfc20a1906761d95935d70a60" kind="function"><name>control_points</name></member>
   </compound>
-  <compound refid="classDiscreteToCartesianBuilder" kind="class"><name>DiscreteToCartesianBuilder</name>
-    <member refid="classDiscreteToCartesianBuilder_1a502be02cf17241c3bf0c5cc45c5c6c0e" kind="typedef"><name>MappingType</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a655a32041c031c73ddfcfbe404b8e3b0" kind="typedef"><name>ExecSpace</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a3f8037c8259885e752878d00fe5c020c" kind="typedef"><name>MemorySpace</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a0436b5afe292e723f5db3570c56f211d" kind="typedef"><name>BSplinesR</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a9d8349559b7316fd87006b13a41fa3fb" kind="typedef"><name>BSplinesTheta</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a523d4bec79cfcf9f70de77f6610b0e35" kind="typedef"><name>GridR</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a118d97ec84768b9756eb4bdbe80c747e" kind="typedef"><name>GridTheta</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1aab792d0088365b3752e1fe5dc1af3144" kind="typedef"><name>IdxRangeSplines</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a5bcbafc2862bffa57b36777deb806c65" kind="typedef"><name>IdxRangeInterpolationPoints</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a3b0033f22410ab506847cf34a4df6d05" kind="typedef"><name>IdxInterpolationPoints</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a34e4c0c847b6d207ba57f60a8201767d" kind="typedef"><name>SplineCoeffsMem</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a9bc72b9e075a618a96a2babccdecfcec" kind="typedef"><name>SplineCoeffs</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a3608875bc783168fafc493af54a93537" kind="typedef"><name>InterpolationFieldMem</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1ae7cafd5d817a767330f7ceaa44a004d1" kind="typedef"><name>InterpolationField</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a7dbfc81a5cf46bffea1c7e3b200f7b01" kind="variable"><name>m_curvilinear_to_x_spline_alloc</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a5a6690f025282b5eebe40f90f8553515" kind="variable"><name>m_curvilinear_to_y_spline_alloc</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a1b57b7569413ae6d635b535739426c63" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1ade5e6f4190cdae3c7f53accbbc86550c" kind="variable"><name>m_idx_range_singular_point</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1aaceea5d628916172449bdbdc4c08eb76" kind="function"><name>DiscreteToCartesianBuilder</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1ae85a1541fb4b1695515c7d97526b8d40" kind="function"><name>operator()</name></member>
-    <member refid="classDiscreteToCartesianBuilder_1a458cd2e7da2eed26ed4f64612cef71ec" kind="function"><name>set_curvilinear_to_cartesian_values</name></member>
+  <compound refid="classDiscretePoloidalCSSplineMappingBuilder" kind="class"><name>DiscretePoloidalCSSplineMappingBuilder</name>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a13b81e963bf8628062cf0ca3443ca7c7" kind="typedef"><name>MappingType</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aac5ca73e4c4b795e98681ff97661ae84" kind="typedef"><name>ExecSpace</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a8536c96544897c99010f83adb77f6f83" kind="typedef"><name>MemorySpace</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a135002c677aa9b1ebbf72ed123c2f222" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a3788f84b264611ef97e8b2c2077fa938" kind="typedef"><name>BSplinesTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a14883df7c42e11df2c85fbdf2bdcfcf9" kind="typedef"><name>GridR</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ad904d6a0974a7b26070c855e0282647d" kind="typedef"><name>GridTheta</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a6eacfc9538b9ca41aa00348d1ed6a35d" kind="typedef"><name>IdxRangeSplines</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae3d5b965dffc3d53e37cb35cb74a168e" kind="typedef"><name>IdxRangeInterpolationPoints</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a5b3e343a08e467b25208e6a3cd5ec451" kind="typedef"><name>IdxInterpolationPoints</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1ae11c6c3d46ffc7dfd2051c687d7c1d8b" kind="typedef"><name>SplineCoeffsMem</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1af49f7d6d74d8a67442da7b313d7f1050" kind="typedef"><name>SplineCoeffs</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a0313b2fde12b97176ec27739adca99e0" kind="typedef"><name>InterpolationFieldMem</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a937a441e4269af0b54f3c49a304973bb" kind="typedef"><name>InterpolationField</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aff05dfc7ed59ffeb00ded6389f2ac1fc" kind="variable"><name>m_curvilinear_to_x_spline_alloc</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a97bf0b7c22b1fc0ea38b8e9be7810b3c" kind="variable"><name>m_curvilinear_to_y_spline_alloc</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a059964e65fa48a173034e61ae6ee867f" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a4e3047f349ed1792f5a0ed5c07e596fe" kind="variable"><name>m_idx_range_singular_point</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a962ce79500cc403b4b5ed4b3d1956932" kind="function"><name>DiscretePoloidalCSSplineMappingBuilder</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1a28613591ab08736f71e054512cd21d5c" kind="function"><name>operator()</name></member>
+    <member refid="classDiscretePoloidalCSSplineMappingBuilder_1aae666b52c5faf857382f34dc03c546e3" kind="function"><name>set_curvilinear_to_cartesian_values</name></member>
   </compound>
   <compound refid="structEdge" kind="struct"><name>Edge</name>
     <member refid="structEdge_1a01bafe4f74a4d717a45f57c4f7e023a9" kind="typedef"><name>associated_patch</name></member>
@@ -1172,11 +1172,11 @@
   </compound>
   <compound refid="structGridR" kind="struct"><name>GridR</name>
   </compound>
-  <compound refid="structRefinedDiscreteToCartesianBuilder_1_1GridRRefined" kind="struct"><name>RefinedDiscreteToCartesianBuilder::GridRRefined</name>
+  <compound refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridRRefined" kind="struct"><name>RefinedDiscretePoloidalCSSplineMappingBuilder::GridRRefined</name>
   </compound>
   <compound refid="structGridTheta" kind="struct"><name>GridTheta</name>
   </compound>
-  <compound refid="structRefinedDiscreteToCartesianBuilder_1_1GridThetaRefined" kind="struct"><name>RefinedDiscreteToCartesianBuilder::GridThetaRefined</name>
+  <compound refid="structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1GridThetaRefined" kind="struct"><name>RefinedDiscretePoloidalCSSplineMappingBuilder::GridThetaRefined</name>
   </compound>
   <compound refid="structGridVpar" kind="struct"><name>GridVpar</name>
   </compound>
@@ -1356,7 +1356,7 @@
     <member refid="classPolarBSplines_1_1Impl_1a854872ad8191a00c53e84d731b4bb353" kind="friend"><name>PolarSplines::integrals</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a8ef3dd86e684d3496e02867489f0238e" kind="variable"><name>m_singular_basis_elements_alloc</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a11b300625f730f47b6db45626e121d88" kind="variable"><name>m_singular_basis_elements</name></member>
-    <member refid="classPolarBSplines_1_1Impl_1a57eec0bfb81f5e6f493b18ceeba92fe9" kind="function"><name>Impl</name></member>
+    <member refid="classPolarBSplines_1_1Impl_1ad7c51d11ed3761c1d422a4429cb67b76" kind="function"><name>Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1aad7f0ed019b40ca8bea9259f53d94a83" kind="function"><name>Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1af79c5cc9a060916b31c8a41e5f7cd7da" kind="function"><name>Impl</name></member>
     <member refid="classPolarBSplines_1_1Impl_1a386e9fe73ec0a24b3773353aa4ad1af2" kind="function"><name>Impl</name></member>
@@ -1518,23 +1518,23 @@
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a755ef2b433106ec410ccfa743dac3393" kind="function"><name>InvJacobianOPoint</name></member>
     <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01CzarnyToCartesian_3_01R_00_01Theta_00_01X_00_01Y_f284f6a7d72ad542b1021d394c9404b9_1a9b4712e64671e3d412d0c9d3d4c9bb77" kind="function"><name>operator()</name></member>
   </compound>
-  <compound refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b" kind="class"><name>InvJacobianOPoint&lt; CombinedMapping&lt; DiscreteToCartesian&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</name>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1aaed3cc420188b6b11d99d39af1c686bf" kind="typedef"><name>CoordRTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1ad7b40f7d82e8ce9d2440e9c8fc4d8a9f" kind="typedef"><name>X_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1ab07fbd1b318f6e53be6d8ca07c2dd4ce" kind="typedef"><name>Y_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1ab438df2067129aef3a65b2e14113855b" kind="typedef"><name>Xpc_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1aeec3008016c3dbe7de8f7cfac7bf513a" kind="typedef"><name>Ypc_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3f9fa9ba9276c9df69a285f59c92aa01" kind="typedef"><name>R_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a7a803e4859ff08d6667582eb18b60b9e" kind="typedef"><name>Theta_cov</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a4497f9bbbabb34420898458b229f2292" kind="typedef"><name>Mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a01feb6a249fd7da981393afadaeb77d8" kind="typedef"><name>IdxRangeR</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a72be074cc99432b0ffbbf8d860b8eba7" kind="typedef"><name>IdxRangeTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3d22d8997db55b507de11c2278c21931" kind="typedef"><name>IdxRangeRTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1ae2d6c1fa3a2d2392c979c0a7432ace71" kind="typedef"><name>IdxR</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a0ba5a1fbdf3fbe9a122d91c8d4f3e6b2" kind="typedef"><name>IdxTheta</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a2f5d5b4c7b568ff1615df675c698ef03" kind="variable"><name>m_mapping</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a3184b7b72cd5621d627f62e793c94ecc" kind="function"><name>InvJacobianOPoint</name></member>
-    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscreteToCartesian_3_01X_00_01Y_00_01SplineEvalu87e172e6ebb8e90a8cd02328541a469b_1a762e83a88cdb2b379becdb9f87b31872" kind="function"><name>operator()</name></member>
+  <compound refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7" kind="class"><name>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</name>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1acba078ab64db0ce15e7ce0d3a3f02d58" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a24cf2625ad9b74fde2dfe576c4b20afb" kind="typedef"><name>X_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a8c0fd00219470699879c633711086069" kind="typedef"><name>Y_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1adc613efafeec156ff9af9591f7f28260" kind="typedef"><name>Xpc_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a64efacf879a97c17242dd84fbea25717" kind="typedef"><name>Ypc_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a5e482a99e07b40206c4314f84ed5164b" kind="typedef"><name>R_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a9f37eb2fdc2f95483d1fdff291ae9748" kind="typedef"><name>Theta_cov</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a1820d1a8d511b6b34ed8c47bc0505a21" kind="typedef"><name>Mapping</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1ad441bccb55f0f21adcc1f016df0f2a4d" kind="typedef"><name>IdxRangeR</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a7a509b3e4ad4f121d081c1fab827735a" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1abd2aef7b39f835da470443f4cd657abf" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1ac1c6618e249c61c032bdbaf0affca6ec" kind="typedef"><name>IdxR</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aec05d7d132f7d6c8dbe9729671902ff1" kind="typedef"><name>IdxTheta</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1abf97c4126e35ccf34c4d79a5a88c3fb0" kind="variable"><name>m_mapping</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aaf6019c176df4f16a31ed633979d1469" kind="function"><name>InvJacobianOPoint</name></member>
+    <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a9e01f463b7bcc0cb3d04006ea1455ed1" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classIPartialDerivative" kind="class"><name>IPartialDerivative</name>
     <member refid="classIPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" kind="typedef"><name>DFieldType</name></member>
@@ -2639,34 +2639,34 @@
     <member refid="structGyroAverageOperator_1_1R__gyro_1a84e24cedd3763682987663a5d278d671" kind="typedef"><name>Dual</name></member>
     <member refid="structGyroAverageOperator_1_1R__gyro_1a3a43c0c95a9a15f4bec1265f1e9944f0" kind="variable"><name>PERIODIC</name></member>
   </compound>
-  <compound refid="classRefinedDiscreteToCartesianBuilder" kind="class"><name>RefinedDiscreteToCartesianBuilder</name>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1adcf354a8ab0445ffa948f4581666abf5" kind="typedef"><name>ExecSpace</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1ab43ab8c41ca8b2ce4a05c7ea554beca1" kind="typedef"><name>MemorySpace</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1af9dc7d5d84cad8410cb3475efb6c885b" kind="typedef"><name>BSplinesROriginal</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a41e5394ebcfc3bf9801cf4688c30c2df" kind="typedef"><name>BSplinesThetaOriginal</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1ac8bb33c60660c9c3ef06be05691c2fa3" kind="typedef"><name>R</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1aed2f81c9fa41ddc84f0eeaea706ff557" kind="typedef"><name>Theta</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a08632547b7021db2fccedb34ccea0520" kind="typedef"><name>GrevillePointsR</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a947fd2c55bdec316273137051a140f68" kind="typedef"><name>GrevillePointsTheta</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a1ac982a4a159d3cfbdb11e2a5d2a038e" kind="typedef"><name>GridROriginal</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1aa78365f371dc18bff722bb788c879658" kind="typedef"><name>GridThetaOriginal</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a81f5fab2cc5e693c076912734ca5db81" kind="typedef"><name>RefinedSplineBuilder</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a97eaaa60434f1a176f71f217fd074a9c" kind="typedef"><name>RefinedSplineEvaluator</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a93b430086f0244cc2d5d5f814a1b88b9" kind="typedef"><name>IdxRangeSplines</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a1d0dc26f04d96f2ca87d9f3c2f2598ad" kind="typedef"><name>IdxRangeInterpolationPoints</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a630675537540d5d56cc669d50064567a" kind="typedef"><name>IdxInterpolationPoints</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a607efe00f172e8652026c9d8e9ad97b4" kind="typedef"><name>SplineCoeffsMem</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1adec8be181792e3ea6241e0fb5ca2569b" kind="typedef"><name>SplineCoeffs</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1aee42b628260fb31b9aba6733050d9b3b" kind="typedef"><name>InterpolationFieldMem</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a3520a72588e22d5881fb5259c9360086" kind="typedef"><name>InterpolationField</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1aa275ab992ce75c4f25a36802144b614d" kind="typedef"><name>MappingType</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a78a1653c0e5dc317c2c5ec6bb7aa1dbe" kind="variable"><name>m_curvilinear_to_x_spline_alloc</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a97e68a126ef4c9d03bcd9771967f3dd6" kind="variable"><name>m_curvilinear_to_y_spline_alloc</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1abc91465254724f9c06227b8ee8d2096e" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1a98c7aa5459e478c1c85c30a70bc8cb86" kind="variable"><name>m_idx_range_singular_point</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1aa499a9cf34b44f04e5fc0cc29892256a" kind="function"><name>RefinedDiscreteToCartesianBuilder</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1ad569e80c83f31dfec64813d24bfb2e25" kind="function"><name>operator()</name></member>
-    <member refid="classRefinedDiscreteToCartesianBuilder_1af736d95b521a444e5e24ed3632ae9481" kind="function"><name>set_curvilinear_to_cartesian_values</name></member>
+  <compound refid="classRefinedDiscretePoloidalCSSplineMappingBuilder" kind="class"><name>RefinedDiscretePoloidalCSSplineMappingBuilder</name>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a2f8b6907287fe0cdf23cd034b2368e21" kind="typedef"><name>ExecSpace</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a020c74f8deec782a837ab7472a8a0f70" kind="typedef"><name>MemorySpace</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1aabd798e5331f34ab6c5a05e6f4f59b65" kind="typedef"><name>BSplinesROriginal</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a917b03158ef2e8a49af27f4a7315c5f2" kind="typedef"><name>BSplinesThetaOriginal</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1af12f2fcefb892054e6e0425a450747af" kind="typedef"><name>R</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a5792ba24b3c86fd40ab3f4bfbef993fe" kind="typedef"><name>Theta</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1aa884ac1be5baf0c3145b561d762409f7" kind="typedef"><name>GrevillePointsR</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a2d5937495f941d6c628779ee917429d5" kind="typedef"><name>GrevillePointsTheta</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a531e9e873279ea8ef58b113db58d4010" kind="typedef"><name>GridROriginal</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a181b463ee72d92acfbd26905555ed97a" kind="typedef"><name>GridThetaOriginal</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1aad7effef9c054b497b207ccb61781829" kind="typedef"><name>RefinedSplineBuilder</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a1906fbde6c53ee2d1e5f30fd3334016a" kind="typedef"><name>RefinedSplineEvaluator</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a89946688da64dc18ca2ef2df1303ef81" kind="typedef"><name>IdxRangeSplines</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a83e99596b99dbc72715ed76b23981429" kind="typedef"><name>IdxRangeInterpolationPoints</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1af42ba1f20e76fc046f91ac758c6e2b97" kind="typedef"><name>IdxInterpolationPoints</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1ac2d50c2889889e02477879ece792af5d" kind="typedef"><name>SplineCoeffsMem</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a41e9360767ea3cbe350bf952dfac6bcc" kind="typedef"><name>SplineCoeffs</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1aea998b8319fd335cc088c96102e46a17" kind="typedef"><name>InterpolationFieldMem</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a6fcbbf383437fe0efe6b4c9efd7d07e4" kind="typedef"><name>InterpolationField</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a0b59a49c271e6e81b0344f0a4f1a18f0" kind="typedef"><name>MappingType</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a620a39c0c0783450b7367a60befdb7a5" kind="variable"><name>m_curvilinear_to_x_spline_alloc</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a88064b26db5de4deb0ff1f80b02112b2" kind="variable"><name>m_curvilinear_to_y_spline_alloc</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a571e83c44151d257c10e36777875a998" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1ad54ad8340416eccd1c0adfb3b4381163" kind="variable"><name>m_idx_range_singular_point</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a35ff9a07b24d3440db098f7c83261418" kind="function"><name>RefinedDiscretePoloidalCSSplineMappingBuilder</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a91477886a790e9596d8408b54ed00ecc" kind="function"><name>operator()</name></member>
+    <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a38a515f527c58257fdf0308b309f5d63" kind="function"><name>set_curvilinear_to_cartesian_values</name></member>
   </compound>
   <compound refid="classRestartInitialisation" kind="class"><name>RestartInitialisation</name>
     <member refid="classRestartInitialisation_1a53e9c1841bea892ecfd9a256909da63f" kind="variable"><name>m_time_start</name></member>
@@ -3397,9 +3397,9 @@
   </compound>
   <compound refid="czarny__to__cartesian_8hpp" kind="file"><name>czarny_to_cartesian.hpp</name>
   </compound>
-  <compound refid="discrete__mapping__builder_8hpp" kind="file"><name>discrete_mapping_builder.hpp</name>
+  <compound refid="discrete__poloidal__cs__spline__mapping_8hpp" kind="file"><name>discrete_poloidal_cs_spline_mapping.hpp</name>
   </compound>
-  <compound refid="discrete__to__cartesian_8hpp" kind="file"><name>discrete_to_cartesian.hpp</name>
+  <compound refid="discrete__poloidal__cs__spline__mapping__builder_8hpp" kind="file"><name>discrete_poloidal_cs_spline_mapping_builder.hpp</name>
   </compound>
   <compound refid="geometry__pseudo__cartesian_8hpp" kind="file"><name>geometry_pseudo_cartesian.hpp</name>
     <member refid="geometry__pseudo__cartesian_8hpp_1a56e674ac7c43bffaa8becca4fb0e0202" kind="typedef"><name>CoordX_pC</name></member>

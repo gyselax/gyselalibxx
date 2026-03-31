@@ -1,0 +1,333 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7" kind="class" language="C++" prot="public">
+    <compoundname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</compoundname>
+    <includes refid="inv__jacobian__o__point_8hpp" local="no">inv_jacobian_o_point.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structX" kindref="compound">X</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structY" kindref="compound">Y</ref></type>
+      </param>
+      <param>
+        <type>class SplineEvaluator</type>
+      </param>
+      <param>
+        <type>class <ref refid="structR" kindref="compound">R</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structTheta" kindref="compound">Theta</ref></type>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+      </param>
+      <param>
+        <type>class Xpc</type>
+      </param>
+      <param>
+        <type>class Ypc</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1acba078ab64db0ce15e7ce0d3a3f02d58" prot="private" static="no">
+        <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::CoordRTheta =  Coord&lt;R, Theta&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordRTheta</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::CoordRTheta</qualifiedname>
+        <briefdescription>
+<para>The coordinate system in which the inverse of the Jacobian is calculated. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="196" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="196" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a24cf2625ad9b74fde2dfe576c4b20afb" prot="private" static="no">
+        <type>typename <ref refid="structX_1a11361f8ff006d764ec79d4b06fa3f45f" kindref="member">X::Dual</ref></type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::X_cov =  typename X::Dual</definition>
+        <argsstring></argsstring>
+        <name>X_cov</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::X_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the first physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="199" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="199" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a8c0fd00219470699879c633711086069" prot="private" static="no">
+        <type>typename <ref refid="structY_1aad98c6afa465f3fb654029648420df1f" kindref="member">Y::Dual</ref></type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Y_cov =  typename Y::Dual</definition>
+        <argsstring></argsstring>
+        <name>Y_cov</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Y_cov</qualifiedname>
+        <briefdescription>
+<para>The covariant form of the second physical coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="201" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1adc613efafeec156ff9af9591f7f28260" prot="private" static="no">
+        <type>typename Xpc::Dual</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Xpc_cov =  typename Xpc::Dual</definition>
+        <argsstring></argsstring>
+        <name>Xpc_cov</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Xpc_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="202" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="202" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a64efacf879a97c17242dd84fbea25717" prot="private" static="no">
+        <type>typename Ypc::Dual</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Ypc_cov =  typename Ypc::Dual</definition>
+        <argsstring></argsstring>
+        <name>Ypc_cov</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Ypc_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="203" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="203" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a5e482a99e07b40206c4314f84ed5164b" prot="private" static="no">
+        <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::R_cov =  typename R::Dual</definition>
+        <argsstring></argsstring>
+        <name>R_cov</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::R_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="204" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="204" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a9f37eb2fdc2f95483d1fdff291ae9748" prot="private" static="no">
+        <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Theta_cov =  typename Theta::Dual</definition>
+        <argsstring></argsstring>
+        <name>Theta_cov</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Theta_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="205" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="205" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a1820d1a8d511b6b34ed8c47bc0505a21" prot="private" static="no">
+        <type><ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref>&lt; <ref refid="classDiscretePoloidalCSSplineMapping" kindref="compound">DiscretePoloidalCSSplineMapping</ref>&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref>, SplineEvaluator, <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref>, MemorySpace &gt;, <ref refid="classCartesianToCircular" kindref="compound">CartesianToCircular</ref>&lt; Xpc, Ypc, <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;, Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt; &gt;</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Mapping =  CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt;X, Y, SplineEvaluator, R, Theta, MemorySpace&gt;, CartesianToCircular&lt;Xpc, Ypc, R, Theta&gt;, Coord&lt;R, Theta&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>Mapping</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::Mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="208" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="211" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1ad441bccb55f0f21adcc1f016df0f2a4d" prot="private" static="no">
+        <type>typename SplineEvaluator::evaluation_domain_type1</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxRangeR =  typename SplineEvaluator::evaluation_domain_type1</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeR</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxRangeR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="213" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="213" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a7a509b3e4ad4f121d081c1fab827735a" prot="private" static="no">
+        <type>typename SplineEvaluator::evaluation_domain_type2</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxRangeTheta =  typename SplineEvaluator::evaluation_domain_type2</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeTheta</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxRangeTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="214" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="214" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1abd2aef7b39f835da470443f4cd657abf" prot="private" static="no">
+        <type>typename SplineEvaluator::evaluation_domain_type</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxRangeRTheta =  typename SplineEvaluator::evaluation_domain_type</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeRTheta</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxRangeRTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="215" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="215" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1ac1c6618e249c61c032bdbaf0affca6ec" prot="private" static="no">
+        <type>typename IdxRangeR::discrete_element_type</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxR =  typename IdxRangeR::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxR</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="216" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="216" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aec05d7d132f7d6c8dbe9729671902ff1" prot="private" static="no">
+        <type>typename IdxRangeTheta::discrete_element_type</type>
+        <definition>using InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxTheta =  typename IdxRangeTheta::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxTheta</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::IdxTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="217" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="217" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1abf97c4126e35ccf34c4d79a5a88c3fb0" prot="private" static="no" mutable="no">
+        <type><ref refid="classCombinedMapping" kindref="compound">Mapping</ref></type>
+        <definition>Mapping InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::m_mapping</definition>
+        <argsstring></argsstring>
+        <name>m_mapping</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::m_mapping</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="220" column="13" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="220" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aaf6019c176df4f16a31ed633979d1469" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION</type>
+        <definition>KOKKOS_FUNCTION InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::InvJacobianOPoint</definition>
+        <argsstring>(Mapping const &amp;mapping)</argsstring>
+        <name>InvJacobianOPoint</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::InvJacobianOPoint</qualifiedname>
+        <param>
+          <type><ref refid="classCombinedMapping" kindref="compound">Mapping</ref> const &amp;</type>
+          <declname>mapping</declname>
+        </param>
+        <briefdescription>
+<para>The constructor of <ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">mapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping for which the inverse of the Jacobian is calculated. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="227" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="227" bodyend="227"/>
+      </memberdef>
+      <memberdef kind="function" id="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a9e01f463b7bcc0cb3d04006ea1455ed1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FUNCTION <ref refid="classTensor" kindref="compound">DTensor</ref>&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt;</type>
+        <definition>KOKKOS_FUNCTION DTensor&lt; VectorIndexSet&lt; Xpc, Ypc &gt;, VectorIndexSet&lt; X_cov, Y_cov &gt; &gt; InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::operator()</definition>
+        <argsstring>() const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;::operator()</qualifiedname>
+        <briefdescription>
+<para>Compute the full inverse Jacobian matrix from a coordinate system (x_pc, y_pc) to a coordinate system (x, y) at the central point. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>The discrete mappings can be difficult to inverse especially at the central point. In case of non analytical invertible mapping, we can work in another domain called pseudo-Cartesian domain. In this domain, it is easier to inverse the Jacobian matrix. The idea is detailed in Edoardo Zoni&apos;s article (<emphasis>Solving hyperbolic-elliptic problems on singular mapped disk-like domains with the method of characteristics and spline finite elements</emphasis>, <ulink url="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</ulink>)</para>
+<para>The current mapping maps from the logical domain to the physical domain <formula id="143">$ \mathcal{F}: (r,\theta) \mapsto (x, y)$</formula>. The pseudo-Cartesian domain is built with <formula id="65">$ \mathcal{F} $</formula> and using the circular mapping <formula id="66">$ \mathcal{G} $</formula>:<itemizedlist>
+<listitem><para><formula id="144">$ \mathcal{G}_{11}(r, \theta) = \cos(\theta),
+     \qquad\quad \mathcal{G}_{12}(r, \theta) = \sin(\theta) $</formula>,</para>
+</listitem><listitem><para><formula id="145">$ \mathcal{G}_{21}(r, \theta) = -\frac{1}{r}\sin(\theta),
+     \qquad\quad \mathcal{G}_{22}(r, \theta) = \frac{1}{r}\cos(\theta) $</formula>.</para>
+</listitem></itemizedlist>
+</para>
+<para>The pseudo-Cartesian domain is obtained by the composition of both mappings: <formula id="146">$ (\mathcal{F} \circ \mathcal{G}^{-1})^{-1} $</formula>. This new mapping is invertible and its inverse at the central point is given by<itemizedlist>
+<listitem><para><formula id="147">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{11}(0, \theta) = \partial_r x (0, \theta) \cos(\theta)
+             - \partial_{r \theta} x (0, \theta) \sin(\theta), $</formula></para>
+</listitem><listitem><para><formula id="148">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{12}(0, \theta) = \partial_r x (0, \theta) \sin(\theta)
+             + \partial_{r \theta} x (0, \theta) \cos(\theta), $</formula></para>
+</listitem><listitem><para><formula id="149">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{21}(0, \theta) = \partial_r y (0, \theta) \cos(\theta)
+             - \partial_{r \theta} y (0, \theta) \sin(\theta), $</formula></para>
+</listitem><listitem><para><formula id="150">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})_{22}(0, \theta) = \partial_r y (0, \theta) \sin(\theta)
+             + \partial_{r \theta} y (0, \theta) \cos(\theta). $</formula></para>
+</listitem></itemizedlist>
+</para>
+<para>So the pseudo-Cartesian Jacobian matrix at the central point, <formula id="151">$ (J_{\mathcal{F}}J_{\mathcal{G}}^{-1})^{-1}(0, \theta) $</formula>, is obtained by inversing this matrix.</para>
+<para><simplesect kind="return"><para>The matrix evaluated at the central point.</para>
+</simplesect>
+<simplesect kind="see"><para>BslAdvection </para>
+</simplesect>
+<simplesect kind="see"><para>AdvectionDomain </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="267" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="267" bodyend="304"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>A specialisation of <ref refid="classInvJacobianOPoint" kindref="compound">InvJacobianOPoint</ref> for a combined mapping <formula id="67">$ \mathcal{F} \circ \mathcal{G} $</formula> where <formula id="65">$ \mathcal{F} $</formula> is a discrete mapping from logical to physical, and <formula id="66">$ \mathcal{G} $</formula> is an inverse circular mapping from physical to logical. The combined mapping <formula id="67">$ \mathcal{F} \circ \mathcal{G} $</formula> therefore maps from a physical domain <formula id="133">$ (X_{pc}, Y_{pc}) $</formula> to a physical domain <formula id="134">$ (X, Y) $</formula>. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" line="188" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inv_jacobian_o_point.hpp" bodystart="194" bodyend="305"/>
+    <listofallmembers>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1acba078ab64db0ce15e7ce0d3a3f02d58" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>CoordRTheta</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1ac1c6618e249c61c032bdbaf0affca6ec" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>IdxR</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1ad441bccb55f0f21adcc1f016df0f2a4d" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>IdxRangeR</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1abd2aef7b39f835da470443f4cd657abf" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>IdxRangeRTheta</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a7a509b3e4ad4f121d081c1fab827735a" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>IdxRangeTheta</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aec05d7d132f7d6c8dbe9729671902ff1" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>IdxTheta</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1aaf6019c176df4f16a31ed633979d1469" prot="public" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>InvJacobianOPoint</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1abf97c4126e35ccf34c4d79a5a88c3fb0" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>m_mapping</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a1820d1a8d511b6b34ed8c47bc0505a21" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>Mapping</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a9e01f463b7bcc0cb3d04006ea1455ed1" prot="public" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>operator()</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a5e482a99e07b40206c4314f84ed5164b" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>R_cov</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a9f37eb2fdc2f95483d1fdff291ae9748" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>Theta_cov</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a24cf2625ad9b74fde2dfe576c4b20afb" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>X_cov</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1adc613efafeec156ff9af9591f7f28260" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>Xpc_cov</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a8c0fd00219470699879c633711086069" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>Y_cov</name></member>
+      <member refid="classInvJacobianOPoint_3_01CombinedMapping_3_01DiscretePoloidalCSSplineMapping_3_01X_00_01Y_00_0094100a2a6124b5e8871c4c2d8bff0e7_1a64efacf879a97c17242dd84fbea25717" prot="private" virt="non-virtual"><scope>InvJacobianOPoint&lt; CombinedMapping&lt; DiscretePoloidalCSSplineMapping&lt; X, Y, SplineEvaluator, R, Theta, MemorySpace &gt;, CartesianToCircular&lt; Xpc, Ypc, R, Theta &gt;, Coord&lt; R, Theta &gt; &gt;, Coord&lt; R, Theta &gt; &gt;</scope><name>Ypc_cov</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
