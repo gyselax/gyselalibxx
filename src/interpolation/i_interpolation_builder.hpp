@@ -19,6 +19,7 @@
  *   Type aliases:
  *   - data_type
  *   - interpolation_idx_range_type
+ *   - coeff_idx_range_type
  *   Static functions:
  *   - rank()
  *   Type calculators:
@@ -35,6 +36,9 @@ struct InterpolationBuilderTraits
 
     /// @brief The ND index range for the interpolation mesh.
     using interpolation_idx_range_type = typename Builder::interpolation_idx_range_type;
+
+    /// @brief The index range for the interpolation coefficients.
+    using coeff_idx_range_type = typename Builder::coeff_idx_range_type;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -104,6 +108,9 @@ public:
 
     /// @brief The 1D index range for the interpolation mesh.
     using interpolation_idx_range_type = typename Builder::interpolation_domain_type;
+
+    /// @brief The index range for the interpolation coefficients.
+    using coeff_idx_range_type = IdxRange<typename Builder::bsplines_type>;
 
     /// @brief The number of interpolation dimensions (always 1 for SplineBuilder).
     static constexpr std::size_t rank()
@@ -187,4 +194,23 @@ concept InterpolationBuilder = requires
     {b(coeffs, vals)};
 };
 
+/**
+ * @brief A concept describing a 1D interpolation builder.
+ *
+ * Refines @c InterpolationBuilder with the additional requirements that:
+ *   - The builder operates over exactly one interpolation dimension (@c rank() == 1).
+ *   - @c InterpolationBuilderTraits<Builder>::basis_domain_type is defined, i.e. the
+ *     builder exposes a discrete dimension for its basis coefficients.
+ */
+template <class Builder>
+concept InterpolationBuilder1D
+        = InterpolationBuilder<Builder> &&(InterpolationBuilderTraits<Builder>::rank() == 1);
+
 } // namespace concepts
+
+/// @brief The discrete grid on which interpolation values are given (1D builders only).
+template <concepts::InterpolationBuilder1D BuilderType>
+using interpolation_grid_type = ddc::type_seq_element_t<
+        0,
+        ddc::to_type_seq_t<
+                typename InterpolationBuilderTraits<BuilderType>::interpolation_idx_range_type>>;
