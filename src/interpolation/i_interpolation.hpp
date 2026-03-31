@@ -37,9 +37,14 @@ concept Interpolation = requires
 {
     typename T::BuilderType;
     typename T::EvaluatorType;
+    {
+        T::rank()
+        } -> std::same_as<std::size_t>;
 }
 &&concepts::InterpolationBuilder<typename T::BuilderType>&& concepts::InterpolationEvaluator<
-        typename T::EvaluatorType>&& requires(T const& t)
+        typename T::
+                EvaluatorType> && (InterpolationBuilderTraits<typename T::BuilderType>::rank() == InterpolationEvaluatorTraits<typename T::EvaluatorType>::rank())
+        && requires(T const& t)
 {
     {
         t.get_builder()
