@@ -60,7 +60,7 @@ concept Interpolation = requires
  * @tparam T The interpolation type to check.
  */
 template <typename T>
-concept Interpolation1D = Interpolation<Builder> && InterpolationBuilder1D<typename T::BuilderType>;
+concept Interpolation1D = Interpolation<T> && InterpolationBuilder1D<typename T::BuilderType>;
 
 } // namespace concepts
 
