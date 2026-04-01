@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
 
+#include "i_interpolation.hpp"
 #include "polarpoissonlikeassembler.hpp"
 
 /**
@@ -22,10 +23,12 @@
  * in the 5D GYSELA Code". December 2022.)
  *
  * @tparam GridR The radial grid type.
- * @tparam GridR The poloidal grid type.
+ * @tparam GridTheta The poloidal grid type.
  * @tparam PolarBSplinesRTheta The type of the 2D polar B-splines (on the coordinate
  *          system @f$(r,\theta)@f$ including B-splines which traverse the O point).
- * @tparam SplineRThetaEvaluatorNullBound The type of the 2D (cross-product) spline evaluator.
+ * @tparam Interpolation2D The type of the 2D interpolation object used to evaluate
+ *          the @f$\alpha@f$ and @f$\beta@f$ coefficient fields. Must satisfy
+ *          concepts::Interpolation.
  * @tparam Mapping The type of the mapping from the logical domain to the physical domain where
  *          the equation is defined.
  * @tparam IdxRangeFull The full index range of @f$ \phi @f$ including any batch dimensions.
@@ -34,7 +37,7 @@ template <
         class GridR,
         class GridTheta,
         class PolarBSplinesRTheta,
-        class SplineRThetaEvaluatorNullBound,
+        concepts::Interpolation Interpolation2D,
         class Mapping,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
@@ -108,11 +111,8 @@ private:
     using IdxStepBSTheta = IdxStep<BSplinesTheta>;
     using IdxStepBSRTheta = IdxStep<BSplinesR, BSplinesTheta>;
 
-    using IdxRangeBatchedBSRTheta
-            = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
-                    ddc::to_type_seq_t<IdxRangeFull>,
-                    ddc::detail::TypeSeq<GridR, GridTheta>,
-                    ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
+    /// The evaluator type extracted from the Interpolation2D object.
+    using EvaluatorType = typename Interpolation2D::EvaluatorType;
 
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFull, IdxRange<GridR>, IdxRange<GridTheta>>;
 
@@ -149,7 +149,9 @@ private:
      */
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
-    using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
+    using ConstCoeffs2D = DConstField<
+            typename InterpolationEvaluatorTraits<EvaluatorType>::template batched_coeff_idx_range_type<
+                    IdxRangeFull>>;
     using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
     using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
 
@@ -225,7 +227,7 @@ private:
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
     Mapping m_mapping;
-    SplineRThetaEvaluatorNullBound m_spline_evaluator;
+    EvaluatorType m_evaluator;
 
     PolarSplineEval m_polar_spline_evaluator;
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>>
@@ -251,8 +253,10 @@ public:
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
-     * @param[in] spline_evaluator
-     *      An evaluator for evaluating 2D splines on @f$(r,\theta)@f$.
+     * @param[in] interpolation
+     *      An interpolation object satisfying concepts::Interpolation. Its evaluator
+     *      is used to evaluate the @f$\alpha@f$ and @f$\beta@f$ coefficient fields
+     *      at quadrature points.
      * @param[in] max_iter
      *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
@@ -268,7 +272,7 @@ public:
      */
     PolarSplineFEMPoissonLikeSolver(
             Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            Interpolation2D const& interpolation,
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -295,7 +299,7 @@ public:
                   m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_mapping(mapping)
-        , m_spline_evaluator(spline_evaluator)
+        , m_evaluator(interpolation.get_evaluator())
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef_alloc(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
         , m_x_init_alloc(
@@ -324,16 +328,16 @@ public:
     /**
      * @brief Update the coefficients @f$ alpha @f$ and @f$ beta @f$ that define the equation.
      * @param[in] coeff_alpha
-     *      The spline representation of the @f$ \alpha @f$ function in the
+     *      The interpolation coefficients for the @f$ \alpha @f$ function in the
      *      definition of the Poisson-like equation.
      * @param[in] coeff_beta
-     *      The spline representation of the  @f$ \beta @f$ function in the
+     *      The interpolation coefficients for the @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      */
-    void update_coefficients(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta)
+    void update_coefficients(ConstCoeffs2D coeff_alpha, ConstCoeffs2D coeff_beta)
     {
-        SplineCoeffEvaluator alpha_func(m_spline_evaluator, coeff_alpha);
-        SplineCoeffEvaluator beta_func(m_spline_evaluator, coeff_beta);
+        SplineCoeffEvaluator alpha_func(m_evaluator, coeff_alpha);
+        SplineCoeffEvaluator beta_func(m_evaluator, coeff_beta);
         m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
     }
 
