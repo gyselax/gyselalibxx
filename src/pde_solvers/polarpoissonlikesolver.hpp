@@ -161,7 +161,6 @@ private:
             GridR,
             GridTheta,
             PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound,
             QDimRMesh,
             QDimThetaMesh>;
 
@@ -170,6 +169,35 @@ private:
             Kokkos::DefaultExecutionSpace::memory_space,
             PolarBSplinesRTheta,
             ddc::NullExtrapolationRule>;
+
+    /**
+     * @brief A wrapper that binds a spline evaluator with its coefficient field to
+     * present a single callable `double operator()(CoordRTheta)`.
+     *
+     * This allows the spline-based @f$ \alpha @f$ and @f$ \beta @f$ coefficients to be
+     * passed to `PolarSplineFEMPoissonLikeAssembler`, which expects a generic callable.
+     *
+     * @tparam SplineEvaluator The type of the 2D spline evaluator.
+     * @tparam SplineCoeff The type of the spline coefficient field.
+     */
+    template <class SplineEvaluator, class SplineCoeff>
+    class SplineCoeffEvaluator
+    {
+        SplineEvaluator const& m_evaluator;
+        SplineCoeff m_spline_coeff;
+
+    public:
+        SplineCoeffEvaluator(SplineEvaluator const& evaluator, SplineCoeff spline_coeff)
+            : m_evaluator(evaluator)
+            , m_spline_coeff(spline_coeff)
+        {
+        }
+
+        KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const& coord) const
+        {
+            return m_evaluator(coord, m_spline_coeff);
+        }
+    };
 
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
@@ -304,7 +332,9 @@ public:
      */
     void update_coefficients(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta)
     {
-        m_assembler(m_gko_matrix, coeff_alpha, coeff_beta, m_mapping, m_spline_evaluator);
+        SplineCoeffEvaluator alpha_func(m_spline_evaluator, coeff_alpha);
+        SplineCoeffEvaluator beta_func(m_spline_evaluator, coeff_beta);
+        m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
     }
 
     /**
