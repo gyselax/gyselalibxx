@@ -148,21 +148,21 @@ private:
     {
         using Dim = typename ChosenGridDim::continuous_dimension_type;
         if constexpr (Dim::PERIODIC) {
-            using IdxRangeOthers = ddc::remove_dims_of_t<IdxRangeFull, ChosenGridDim>;
             using ChosenBasis = find_grid_t<Dim, ddc::detail::TypeSeq<Basis...>>;
-            using basis_domain_type =
+            using BasisKnots =
                     typename ChosenBasis::template Impl<ChosenBasis, MemorySpace>::knot_grid;
+            static_assert(ddc::in_tags_v<BasisKnots, ddc::to_type_seq_t<IdxRangeFull>>);
+            using IdxRangeOthers = ddc::remove_dims_of_t<IdxRangeFull, BasisKnots>;
             IdxRangeOthers batch_idx_range(filled_index_range);
-            IdxRange<basis_domain_type> bp_idx_range
+            IdxRange<BasisKnots> bp_idx_range
                     = ddc::discrete_space<ChosenBasis>().break_point_domain().remove_last(
-                            IdxStep<basis_domain_type>(
-                                    static_cast<int>(ChosenBasis::is_periodic())));
-            IdxRange<basis_domain_type> extended_domain(
+                            IdxStep<BasisKnots>(static_cast<int>(ChosenBasis::is_periodic())));
+            IdxRange<BasisKnots> extended_domain(
                     ddc::discrete_space<ChosenBasis>().full_domain().remove_first(
                             bp_idx_range.extents()));
-            IdxStep<basis_domain_type> nrepeat(extended_domain.size());
-            IdxRange<basis_domain_type> repeat_domain(
-                    ddc::select<basis_domain_type>(filled_index_range).take_first(nrepeat));
+            IdxStep<BasisKnots> nrepeat(extended_domain.size());
+            IdxRange<BasisKnots> repeat_domain(
+                    ddc::select<BasisKnots>(filled_index_range).take_first(nrepeat));
             IdxRangeFull to_fill(extended_domain, batch_idx_range);
             IdxRangeFull to_copy(repeat_domain, batch_idx_range);
             Kokkos::deep_copy(
