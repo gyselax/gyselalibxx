@@ -47,7 +47,8 @@ class PolarSplineFEMPoissonLikeSolver
             std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
             "PolarSplineFEMPoissonLikeSolver is not yet batched");
 
-    static_assert(iInterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
+    static_assert(
+            iInterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
 
 public:
     /// The radial dimension
@@ -151,9 +152,8 @@ private:
      */
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
-    using ConstCoeffs2D = DConstField<
-            typename InterpolationEvaluatorTraits<EvaluatorType>::template batched_coeff_idx_range_type<
-                    IdxRangeFull>>;
+    using ConstCoeffs2D = DConstField<typename InterpolationEvaluatorTraits<
+            EvaluatorType>::template batched_coeff_idx_range_type<IdxRangeFull>>;
     using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
     using PolarSplineRTheta = DField<IdxRange<PolarBSplinesRTheta>>;
 
@@ -510,16 +510,16 @@ public:
      * This operator uses the other operator () and returns the values on
      * the grid of the solution @f$\phi@f$.
      *
+     * @param[inout] phi
+     *      The values of the solution @f$\phi@f$ on the given coords_eval.
      * @param[in] rhs
      *      The rhs @f$ \rho@f$ of the Poisson-like equation.
      *      The type is templated but we can use the PoissonLikeRHSFunction
      *      class. It must be an object with an operator() which evaluates a
      *      CoordRTheta and can be called from GPU.
-     * @param[inout] phi
-     *      The values of the solution @f$\phi@f$ on the given coords_eval.
      */
     template <class RHSFunction>
-    void operator()(RHSFunction const& rhs, DFieldRTheta phi) const
+    void operator()(DFieldRTheta phi, RHSFunction const& rhs) const
     {
         static_assert(
                 std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
@@ -529,6 +529,29 @@ public:
         (*this)(rhs, get_field(m_phi_spline_coef_alloc));
         CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
         m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc));
+    }
+
+    /**
+     * @brief Solve the Poisson-like equation.
+     *
+     * This operator uses the other operator () and returns the values on
+     * the grid of the solution @f$\phi@f$.
+     *
+     * @param[inout] phi
+     *      The values of the solution @f$\phi@f$ on the grid.
+     * @param[in] rhs
+     *      The rhs @f$ \rho@f$ of the Poisson-like equation on the grid.
+     */
+    void operator()(DFieldRTheta phi, DConstFieldRTheta const& rhs) const
+    {
+        static_assert(
+                std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
+                "RHSFunction must have an operator() which takes a coordinate and returns a "
+                "double");
+        PolarSplineMemRTheta rhs_alloc(get_spline_idx_range(m_builder));
+        CoeffEvaluator rhs(m_evaluator, get_field(rhs_alloc));
+
+        (*this)(phi, rhs);
     }
 
     /**
