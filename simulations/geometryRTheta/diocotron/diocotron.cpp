@@ -184,9 +184,7 @@ int main(int argc, char** argv)
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
     PoissonSolver poisson_solver(discrete_mapping, spline_evaluator);
-    poisson_solver.update_coefficients(
-            get_const_field(coeff_alpha_spline),
-            get_const_field(coeff_beta_spline));
+    poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
 #if defined(PREDCORR)

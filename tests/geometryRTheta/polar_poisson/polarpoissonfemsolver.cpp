@@ -157,20 +157,6 @@ int main(int argc, char** argv)
                 y(irtheta) = ddc::get<Y>(cartesian_coord);
             });
 
-    Spline2DMem coeff_alpha_spline(idx_range_bsplinesRTheta);
-    Spline2DMem coeff_beta_spline(idx_range_bsplinesRTheta);
-
-    builder(get_field(coeff_alpha_spline),
-            get_const_field(coeff_alpha)); // coeff_alpha_spline are the coefficients
-    // of the spline representation of the values given by coeff_alpha.
-    builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
-
-    Spline2DMem x_spline_representation(idx_range_bsplinesRTheta);
-    Spline2DMem y_spline_representation(idx_range_bsplinesRTheta);
-
-    builder(get_field(x_spline_representation), get_const_field(x));
-    builder(get_field(y_spline_representation), get_const_field(y));
-
     end_time = std::chrono::system_clock::now();
     std::cout << "Setup time : "
               << std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time)
@@ -180,9 +166,7 @@ int main(int argc, char** argv)
 
     PoissonSolver solver(discrete_mapping, evaluator);
 
-    solver.update_coefficients(
-            get_const_field(coeff_alpha_spline),
-            get_const_field(coeff_beta_spline));
+    solver.update_coefficients(get_const_field(x), get_const_field(y));
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Poisson initialisation time : "
