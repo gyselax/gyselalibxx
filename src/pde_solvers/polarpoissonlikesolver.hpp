@@ -47,6 +47,8 @@ class PolarSplineFEMPoissonLikeSolver
             std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
             "PolarSplineFEMPoissonLikeSolver is not yet batched");
 
+    static_assert(iInterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
+
 public:
     /// The radial dimension
     using R = typename GridR::continuous_dimension_type;
@@ -179,25 +181,25 @@ private:
      * This allows the spline-based @f$ \alpha @f$ and @f$ \beta @f$ coefficients to be
      * passed to `PolarSplineFEMPoissonLikeAssembler`, which expects a generic callable.
      *
-     * @tparam SplineEvaluator The type of the 2D spline evaluator.
-     * @tparam SplineCoeff The type of the spline coefficient field.
+     * @tparam Evaluator The type of the 2D evaluator.
+     * @tparam Coeff The type of the spline coefficient field.
      */
-    template <class SplineEvaluator, class SplineCoeff>
-    class SplineCoeffEvaluator
+    template <class Evaluator, class Coeff>
+    class CoeffEvaluator
     {
-        SplineEvaluator const& m_evaluator;
-        SplineCoeff m_spline_coeff;
+        Evaluator const& m_evaluator;
+        Coeff m_coeff;
 
     public:
-        SplineCoeffEvaluator(SplineEvaluator const& evaluator, SplineCoeff spline_coeff)
+        CoeffEvaluator(Evaluator const& evaluator, Coeff coeff)
             : m_evaluator(evaluator)
-            , m_spline_coeff(spline_coeff)
+            , m_coeff(coeff)
         {
         }
 
         KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const& coord) const
         {
-            return m_evaluator(coord, m_spline_coeff);
+            return m_evaluator(coord, m_coeff);
         }
     };
 
@@ -227,6 +229,7 @@ private:
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
     Mapping m_mapping;
+    BuilderType m_builder;
     EvaluatorType m_evaluator;
 
     PolarSplineEval m_polar_spline_evaluator;
@@ -299,6 +302,7 @@ public:
                   m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_mapping(mapping)
+        , m_builder(interpolation.get_builder())
         , m_evaluator(interpolation.get_evaluator())
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef_alloc(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
@@ -334,10 +338,13 @@ public:
      *      The interpolation coefficients for the @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      */
-    void update_coefficients(ConstCoeffs2D coeff_alpha, ConstCoeffs2D coeff_beta)
+    void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
     {
-        SplineCoeffEvaluator alpha_func(m_evaluator, coeff_alpha);
-        SplineCoeffEvaluator beta_func(m_evaluator, coeff_beta);
+        PolarSplineMemRTheta coeff_alpha_alloc(get_spline_idx_range(m_builder));
+        PolarSplineMemRTheta coeff_beta_alloc(get_spline_idx_range(m_builder));
+
+        CoeffEvaluator alpha_func(m_evaluator, get_field(coeff_alpha_alloc));
+        CoeffEvaluator beta_func(m_evaluator, get_field(coeff_beta_alloc));
         m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
     }
 
