@@ -97,13 +97,15 @@ public:
                   memory_space> coeffs,
             ConstField<DataType, BatchedInterpolationIdxRange, memory_space> vals) const
     {
-        static_assert(
-                (!Bases::is_periodic() && ...),
-                "NDIdentityInterpolationBuilder: periodic bases are not yet supported. "
-                "For periodic dimensions the coefficient array has one extra wrap-around "
-                "point per periodic dimension; implement the 2^k-copy logic and remove "
-                "this assert.");
-        Kokkos::deep_copy(coeffs.allocation_kokkos_view(), vals.allocation_kokkos_view());
+        using IdxRangeFull = batched_basis_idx_range_type<BatchedInterpolationIdxRange>;
+        using IdxRangeBatch
+                = ddc::remove_dims_t<BatchedInterpolationIdxRange, InterpolationGrids...>;
+        IdxRangeBatch idx_range_batch(get_idx_range(coeffs));
+        coeff_idx_range_type idx_range_without_repeats((ddc::discrete_space<Basis>().break_point_domain().remove_last(
+                        IdxStep<typename Basis::template Impl<Basis, MemorySpace>::knot_grid>(static_cast<int>(Basis::is_periodic())))...);
+        IdxRangeFull idx_range_to_fill(idx_range_batch, idx_range_without_repeats);
+        Kokkos::deep_copy(coeffs[idx_range_to_fill].allocation_kokkos_view(), vals.allocation_kokkos_view());
+        copy_periodic_data(idx_range_to_fill);
     }
 
     /**
@@ -122,24 +124,45 @@ public:
     }
 
 private:
-    //template<class ChosenGridDim>
-    //copy_periodic_data(IdxRangeFull) {
-    //    using Dim = typename ChosenGridDim::continuous_dimension_type;
-    //    if constexpr (Dim::PERIODIC) {
-    //        using Basis = find_grid_t<Dim, ddc::detail::TypeSeq<Bases...>>;
-    //        using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
-    //        IdxRange<basis_domain_type> bp_idx_range
-    //                = ddc::discrete_space<Basis>().break_point_domain().remove_last(
-    //                        IdxStep<basis_domain_type>(static_cast<int>(Basis::is_periodic())));
-    //        IdxRange<basis_domain_type> extended_domain(
-    //                ddc::discrete_space<Basis>().full_domain().remove_first(
-    //                        bp_idx_range.extents()));
-    //        typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(
-    //                extended_domain.size());
-    //        BatchedInterpolationIdxRange repeat_domain(get_idx_range(vals).take_first(nrepeat));
-    //        Kokkos::deep_copy(
-    //                coeffs[extended_domain].allocation_kokkos_view(),
-    //                vals[repeat_domain].allocation_kokkos_view());
-    //    }
-    //}
+    template <std::size_t DimIdx = 0, class IdxRangeFull>
+    void copy_periodic_data(IdxRangeFull filled_index_range)
+    {
+        using CurrentGrid
+                = ddc::type_seq_element_t<DimIdx, ddc::detail::TypeSeq<InterpolationGrids...>>;
+        IdxRangeFull new_filled_index_range
+                = copy_periodic_data_on_dim<CurrentGrid>(filled_index_range);
+        if constexpr (DimIdx < sizeof...(InterpolationGrids)) {
+            copy_periodic_data<DimIdx + 1>(new_filled_index_range);
+        }
+    }
+
+    template <class ChosenGridDim, class IdxRangeFull>
+    IdxRangeFull copy_periodic_data_on_dim(IdxRangeFull filled_index_range)
+    {
+        using Dim = typename ChosenGridDim::continuous_dimension_type;
+        if constexpr (Dim::PERIODIC) {
+            using IdxRangeOthers = ddc::remove_dims_of_t<IdxRangeFull, ChosenGridDim>;
+            using Basis = find_grid_t<Dim, ddc::detail::TypeSeq<Bases...>>;
+            using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
+            IdxRangeOthers batch_idx_range(filled_index_range);
+            IdxRange<basis_domain_type> bp_idx_range
+                    = ddc::discrete_space<Basis>().break_point_domain().remove_last(
+                            IdxStep<basis_domain_type>(static_cast<int>(Basis::is_periodic())));
+            IdxRange<basis_domain_type> extended_domain(
+                    ddc::discrete_space<Basis>().full_domain().remove_first(
+                            bp_idx_range.extents()));
+            IdxStep<basis_domain_type> nrepeat(extended_domain.size());
+            IdxRange<basis_domain_type> repeat_domain(
+                    ddc::select<basis_domain_type>(filled_index_range).take_first(nrepeat));
+            IdxRangeFull to_fill(extended_domain, batch_idx_range);
+            IdxRangeFull to_copy(repeat_domain, batch_idx_range);
+            Kokkos::deep_copy(
+                    coeffs[to_fill].allocation_kokkos_view(),
+                    vals[to_copy].allocation_kokkos_view());
+            IdxRangeFull new_filled_index_range(batch_idx_range, extended_domain);
+            return
+        } else {
+            return filled_index_range;
+        }
+    }
 };
