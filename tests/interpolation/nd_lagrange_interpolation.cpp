@@ -134,6 +134,19 @@ void fill_polynomial_2d(
             });
 }
 
+template <class DataType, class GridX, class GridY>
+void fill_cos_2d(Field<DataType, IdxRange<GridX, GridY>> vals)
+{
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(vals),
+            KOKKOS_LAMBDA(Idx<GridX, GridY> idx) {
+                DataType const x = ddc::coordinate(Idx<GridX>(idx));
+                DataType const y = ddc::coordinate(Idx<GridY>(idx));
+                vals(idx) = Kokkos::cos(x) * (1.0 + y);
+            });
+}
+
 } // namespace
 
 TYPED_TEST_SUITE(NDLagrangeNonPeriodicFixture, Cases);
@@ -482,14 +495,7 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
     // Function values on the interpolation mesh: f(x, y) = cos(x) * (1 + y)
     FieldMem<DataType, IdxRange<GridX, GridY>> vals_alloc("vals", idx_range);
     Field<DataType, IdxRange<GridX, GridY>> vals(vals_alloc);
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            idx_range,
-            KOKKOS_LAMBDA(Idx<GridX, GridY> idx) {
-                DataType const x = ddc::coordinate(Idx<GridX>(idx));
-                DataType const y = ddc::coordinate(Idx<GridY>(idx));
-                vals(idx) = Kokkos::cos(x) * (1.0 + y);
-            });
+    fill_cos_2d(vals);
 
     // Build coefficients via the identity builder
     Builder const builder;
