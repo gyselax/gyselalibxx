@@ -4,22 +4,14 @@ Gyselalib++ is built on DDC which is in turn built on [Kokkos](https://kokkos.or
 
 ## General Profiling with Kokkos Tools
 
-Kokkos Tools must be compiled before they can be used. If you have a system installation or an instance of Kokkos Tools elsewhere on you system then this can be used. Otherwise the Kokkos-tools repository can be found as a submodule of Gyselalib++ in `vendor/kokkos-tools/`.
-
-To compile all Kokkos Tools libraries simply run:
-
-```bash
-cd $GYSELALIB_ROOT/vendor/kokkos-tools
-cmake -B build .
-cmake --build build
-```
+Kokkos Tools must be compiled before they can be used. If you have a system installation or an instance of Kokkos Tools elsewhere on you system then this can be used.
 
 Kokkos Tools provide hooks to measure and annotate performance data. You can enable a tool by setting the `KOKKOS_PROFILE_LIBRARY` environment variable to point to the shared library implementing the tool.
 
 For example:
 
 ```bash
-export KOKKOS_TOOLS_LIBS=$GYSELALIB_ROOT/vendor/kokkos-tools/build/profiling/simple-kernel-timer/libkp_kernel_timer.so
+export KOKKOS_TOOLS_LIBS=libkp_kernel_timer.so
 ```
 
 Gyselalib++ will then automatically invoke the tool for all Kokkos kernels.
