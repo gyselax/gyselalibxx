@@ -618,7 +618,7 @@ private:
                 return m_extrapolation_rule(coord, patches_splines, patch_idx);
             } else {
                 Kokkos::abort("The spline derivatives cannot be evaluated at coordinates "
-                              "outside of the domain.");// cppcheck-suppress missingReturn
+                              "outside of the domain."); // cppcheck-suppress missingReturn
             }
         } else {
             if (patch_idx == TestPatchIdx) {
