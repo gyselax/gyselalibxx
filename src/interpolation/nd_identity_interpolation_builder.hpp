@@ -16,7 +16,7 @@
  * @tparam DataType            The data type of field values and coefficients.
  * @tparam IdxRangeInterpolation  The ND index range for the interpolation mesh,
  *                             of the form IdxRange<Grid1, Grid2, ...>.
- * @tparam BasisIdxRange       The ND index range for the basis types, one per
+ * @tparam IdxRangeBasis       The ND index range for the basis types, one per
  *                             interpolation dimension, in the same order as the
  *                             grids in IdxRangeInterpolation.
  */
@@ -25,7 +25,7 @@ template <
         class MemorySpace,
         class DataType,
         class IdxRangeInterpolation,
-        class BasisIdxRange>
+        class IdxRangeBasis>
 class NDIdentityInterpolationBuilder;
 
 /// The implementation of NDIdentityInterpolationBuilder. This is separate to allow a variadic Basis.
