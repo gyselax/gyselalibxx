@@ -3,10 +3,14 @@
 foreach(PRECISION_VARIANT IN LISTS PRECISION_VARIANTS_LIST)
 
 add_library("geometry_xyvxvy_${PRECISION_VARIANT}" INTERFACE)
-target_include_directories("geometry_xyvxvy_${PRECISION_VARIANT}"
+
+target_sources("geometry_xyvxvy_${PRECISION_VARIANT}"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                geometry_xyvxvy.hpp
 )
+
 target_link_libraries("geometry_xyvxvy_${PRECISION_VARIANT}" INTERFACE
     DDC::core
     gslx::data_types
@@ -17,5 +21,7 @@ target_link_libraries("geometry_xyvxvy_${PRECISION_VARIANT}" INTERFACE
 )
 target_compile_definitions(geometry_xyvxvy_${PRECISION_VARIANT} INTERFACE GYSELALIBXX_BUILD_REAL_PRECISION=${PRECISION_VARIANT})
 add_library("gslx::geometry_xyvxvy_${PRECISION_VARIANT}" ALIAS "geometry_xyvxvy_${PRECISION_VARIANT}")
+
+install(TARGETS geometry_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 endforeach()

@@ -7,8 +7,14 @@ add_library("initialisation_xyvxvy_${PRECISION_VARIANT}" STATIC
     singlemodeperturbinitialisation.cpp
 )
 
-target_include_directories("initialisation_xyvxvy_${PRECISION_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("initialisation_xyvxvy_${PRECISION_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                iequilibrium.hpp
+                iinitialisation.hpp
+                maxwellianequilibrium.hpp
+                singlemodeperturbinitialisation.hpp
 )
 
 target_link_libraries("initialisation_xyvxvy_${PRECISION_VARIANT}"
@@ -20,5 +26,7 @@ target_link_libraries("initialisation_xyvxvy_${PRECISION_VARIANT}"
 )
 
 add_library("gslx::initialisation_xyvxvy_${PRECISION_VARIANT}" ALIAS "initialisation_xyvxvy_${PRECISION_VARIANT}")
+
+install(TARGETS initialisation_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 endforeach()

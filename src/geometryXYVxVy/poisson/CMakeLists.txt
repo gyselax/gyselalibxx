@@ -9,8 +9,16 @@ add_library("poisson_xy_${PRECISION_VARIANT}" STATIC
     qnsolver.cpp
 )
 
-target_include_directories("poisson_xy_${PRECISION_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("poisson_xy_${PRECISION_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                chargedensitycalculator.hpp
+                ichargedensitycalculator.hpp
+                iqnsolver.hpp
+                mpichargedensitycalculator.hpp
+                nullqnsolver.hpp
+                qnsolver.hpp
 )
 
 target_link_libraries("poisson_xy_${PRECISION_VARIANT}"
@@ -28,5 +36,7 @@ target_link_libraries("poisson_xy_${PRECISION_VARIANT}"
 )
 
 add_library("gslx::poisson_xy_${PRECISION_VARIANT}" ALIAS "poisson_xy_${PRECISION_VARIANT}")
+
+install(TARGETS poisson_xy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 endforeach()

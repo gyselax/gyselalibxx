@@ -2,8 +2,24 @@
 
 add_library("advection" INTERFACE)
 
-target_include_directories("advection"
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("advection"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                polar_foot_finders/elementwise_choice.hpp
+                polar_foot_finders/logical_advection_logical_foot_finder.hpp
+                polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp
+                polar_foot_finders/physical_advection_physical_foot_finder.hpp
+                polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp
+                bsl_advection_1d.hpp
+                bsl_advection_polar.hpp
+                bsl_advection_vx.hpp
+                bsl_advection_x.hpp
+                iadvectionvx.hpp
+                iadvectionx.hpp
+                nulladvectionvx.hpp
+                polar_foot_finder.hpp
+                spline_polar_foot_finder.hpp
 )
 
 target_link_libraries("advection"
@@ -17,3 +33,5 @@ target_link_libraries("advection"
 )
 
 add_library("gslx::advection" ALIAS "advection")
+
+install(TARGETS advection EXPORT GyselalibxxTargets FILE_SET HEADERS)

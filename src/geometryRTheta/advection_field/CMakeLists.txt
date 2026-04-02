@@ -1,10 +1,14 @@
 
 
 add_library("advection_field_RTheta" INTERFACE)
-target_include_directories("advection_field_RTheta"
+
+target_sources("advection_field_RTheta"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                advection_field_rtheta.hpp
 )
+
 target_link_libraries("advection_field_RTheta" INTERFACE
     DDC::core
     gslx::coord_transformations
@@ -15,3 +19,5 @@ target_link_libraries("advection_field_RTheta" INTERFACE
     gslx::utils
 )
 add_library("gslx::advection_field_RTheta" ALIAS "advection_field_RTheta")
+
+install(TARGETS advection_field_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS)

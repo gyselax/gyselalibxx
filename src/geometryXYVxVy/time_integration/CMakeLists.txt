@@ -6,8 +6,12 @@ add_library("time_integration_xyvxvy_${PRECISION_VARIANT}" STATIC
     predcorr.cpp
 )
 
-target_include_directories("time_integration_xyvxvy_${PRECISION_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("time_integration_xyvxvy_${PRECISION_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                itimesolver.hpp
+                predcorr.hpp
 )
 
 target_link_libraries("time_integration_xyvxvy_${PRECISION_VARIANT}"
@@ -23,5 +27,6 @@ target_link_libraries("time_integration_xyvxvy_${PRECISION_VARIANT}"
 
 add_library("gslx::time_integration_xyvxvy_${PRECISION_VARIANT}" ALIAS "time_integration_xyvxvy_${PRECISION_VARIANT}")
 
-endforeach()
+install(TARGETS time_integration_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
+endforeach()

@@ -5,8 +5,13 @@ add_library("io"
     input.cpp
 )
 
-target_include_directories("io"
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("io"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                input.hpp
+                output.hpp
+                pdi_helper.hpp
 )
 
 target_link_libraries("io"
@@ -19,3 +24,5 @@ target_link_libraries("io"
 )
 
 add_library("gslx::io" ALIAS "io")
+
+install(TARGETS io EXPORT GyselalibxxTargets FILE_SET HEADERS)

@@ -5,8 +5,16 @@ add_library("mpi_parallelisation"
     mpi_scope_guard.cpp
 )
 
-target_include_directories("mpi_parallelisation"
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("mpi_parallelisation"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                impilayout.hpp
+                impitranspose.hpp
+                mpi_scope_guard.hpp
+                mpilayout.hpp
+                mpitools.hpp
+                mpitransposealltoall.hpp
 )
 
 target_link_libraries("mpi_parallelisation"
@@ -17,3 +25,5 @@ target_link_libraries("mpi_parallelisation"
 )
 
 add_library("gslx::mpi_parallelisation" ALIAS "mpi_parallelisation")
+
+install(TARGETS mpi_parallelisation EXPORT GyselalibxxTargets FILE_SET HEADERS)
