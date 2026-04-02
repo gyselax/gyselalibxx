@@ -81,6 +81,12 @@ public:
             extrapolation_rule_t<MinExtrapRule, CoeffGridType>,
             extrapolation_rule_t<MaxExtrapRule, CoeffGridType>>;
 
+    /// @brief The number of interpolation dimensions.
+    static constexpr std::size_t rank()
+    {
+        return 1;
+    }
+
 private:
     extrapolation_rule_t<MinExtrapRule, CoeffGridType> m_min_extrapolation;
     extrapolation_rule_t<MaxExtrapRule, CoeffGridType> m_max_extrapolation;

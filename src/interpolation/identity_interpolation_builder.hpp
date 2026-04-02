@@ -43,6 +43,9 @@ public:
     /// @brief The grid on which the interpolation coefficients should be provided.
     using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
 
+    /// @brief The index range for the interpolation coefficients.
+    using coeff_idx_range_type = IdxRange<basis_domain_type>;
+
     /// @brief The type of the Deriv dimension at the boundaries.
     using deriv_type = ddc::Deriv<continuous_dimension_type>;
 
