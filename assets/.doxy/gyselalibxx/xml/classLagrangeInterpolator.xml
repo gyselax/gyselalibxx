@@ -133,7 +133,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="85" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="85" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="91" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classLagrangeInterpolator_1aa5e7274b82fbae1df9cd597349feb780" prot="private" static="no" mutable="no">
         <type>extrapolation_rule_t&lt; MaxExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref> &gt;</type>
@@ -147,7 +147,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="86" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="86" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="92" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classLagrangeInterpolator_1a715cee2d98524edf5b0b1233220fb244" prot="private" static="no" mutable="no">
         <type><ref refid="classLagrangeInterpolator_1af18468e103a52b14c01ca54c0ef4d3d4" kindref="member">BuilderType</ref></type>
@@ -161,7 +161,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="87" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="87" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="93" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classLagrangeInterpolator_1a71b02deb7ec56f468b3f6a371b23a8ea" prot="private" static="no" mutable="no">
         <type><ref refid="classLagrangeInterpolator_1ac2772f3ef56ead727e9093d9323e60ac" kindref="member">EvaluatorType</ref></type>
@@ -175,7 +175,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="88" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="88" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="94" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classLagrangeInterpolator_1af55baa821103ff7249385620b17aa49b" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>LagrangeInterpolator::rank</qualifiedname>
+        <briefdescription>
+<para>The number of interpolation dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="85" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="85" bodyend="88"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -193,7 +210,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="98" bodyend="105"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="104" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="104" bodyend="111"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeInterpolator_1a394b85e66c65eb6a2f207ec0f0c725dd" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classLagrangeInterpolator_1af18468e103a52b14c01ca54c0ef4d3d4" kindref="member">BuilderType</ref> const &amp;</type>
@@ -211,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="111" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="111" bodyend="114"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="117" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="117" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeInterpolator_1a2572e88d65f8e0e06d4c2387ef62d6c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classLagrangeInterpolator_1ac2772f3ef56ead727e9093d9323e60ac" kindref="member">EvaluatorType</ref> const &amp;</type>
@@ -229,7 +246,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="120" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="120" bodyend="123"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="126" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="126" bodyend="129"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -306,7 +323,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="49" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="50" bodyend="124"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="49" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="50" bodyend="130"/>
     <listofallmembers>
       <member refid="classLagrangeInterpolator_1af18468e103a52b14c01ca54c0ef4d3d4" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>BuilderType</name></member>
       <member refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>CoeffGridType</name></member>
@@ -320,6 +337,7 @@
       <member refid="classLagrangeInterpolator_1a71b02deb7ec56f468b3f6a371b23a8ea" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_evaluator</name></member>
       <member refid="classLagrangeInterpolator_1aa5e7274b82fbae1df9cd597349feb780" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_max_extrapolation</name></member>
       <member refid="classLagrangeInterpolator_1aa94133c74b86ec96288e1239771b8428" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_min_extrapolation</name></member>
+      <member refid="classLagrangeInterpolator_1af55baa821103ff7249385620b17aa49b" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>rank</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

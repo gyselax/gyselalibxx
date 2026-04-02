@@ -118,7 +118,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="73" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="73" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="79" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSplineInterpolator_1a52957a0179ed761b6a6dcc7c5155a73c" prot="private" static="no" mutable="no">
         <type>extrapolation_rule_t&lt; MaxExtrapRule, Basis &gt;</type>
@@ -132,7 +132,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="74" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="74" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="80" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSplineInterpolator_1a6f394ea211d048ed0de9e84b377363ae" prot="private" static="no" mutable="no">
         <type><ref refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kindref="member">BuilderType</ref></type>
@@ -146,7 +146,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="75" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="75" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="81" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSplineInterpolator_1a4de6b5624065659fa7c93dfa0ac7482b" prot="private" static="no" mutable="no">
         <type><ref refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kindref="member">EvaluatorType</ref></type>
@@ -160,7 +160,24 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="76" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="76" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="82" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="82" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classSplineInterpolator_1aa044a8ca3d0ca692d6c222079dd3ad7a" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>SplineInterpolator::rank</qualifiedname>
+        <briefdescription>
+<para>The number of interpolation dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="73" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="73" bodyend="76"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -192,7 +209,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="87" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="87" bodyend="93"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="93" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="93" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kindref="member">BuilderType</ref> const &amp;</type>
@@ -210,7 +227,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="99" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="99" bodyend="102"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="105" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="105" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kindref="member">EvaluatorType</ref> const &amp;</type>
@@ -228,7 +245,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="108" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="108" bodyend="111"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="114" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="114" bodyend="117"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -304,7 +321,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="39" bodyend="112"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" line="38" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp" bodystart="39" bodyend="118"/>
     <listofallmembers>
       <member refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>BuilderType</name></member>
       <member refid="classSplineInterpolator_1a6ccadb16c290f6a7de78a1aefb544c48" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>continuous_dimension_type</name></member>
@@ -316,6 +333,7 @@
       <member refid="classSplineInterpolator_1a4de6b5624065659fa7c93dfa0ac7482b" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_evaluator</name></member>
       <member refid="classSplineInterpolator_1a52957a0179ed761b6a6dcc7c5155a73c" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_max_extrapolation</name></member>
       <member refid="classSplineInterpolator_1a348292ac795d3196975a390463610c1a" prot="private" virt="non-virtual"><scope>SplineInterpolator</scope><name>m_min_extrapolation</name></member>
+      <member refid="classSplineInterpolator_1aa044a8ca3d0ca692d6c222079dd3ad7a" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>rank</name></member>
       <member refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" prot="public" virt="non-virtual"><scope>SplineInterpolator</scope><name>SplineInterpolator</name></member>
     </listofallmembers>
   </compounddef>

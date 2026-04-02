@@ -589,6 +589,10 @@
 <td style="text-align: left;"><a href="#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>The batched domain type with interpolation_grid_type replaced by deriv_type.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef IdxRange&lt; <a href="classIdentityInterpolationBuilder.html#typedef-basis_domain_type"><strong>basis_domain_type</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a>  <br><em>The index range for the interpolation coefficients.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename InterpolationGrid::continuous_dimension_type</td>
 <td style="text-align: left;"><a href="#typedef-continuous_dimension_type"><strong>continuous_dimension_type</strong></a>  <br><em>The type of the interpolation continuous dimension (continuous dimension of interest) used by this class.</em></td>
 </tr>
@@ -694,6 +698,12 @@
 <h3 id="typedef-batched_derivs_idx_range_type">typedef batched_derivs_idx_range_type</h3>
 <p><em>The batched domain type with interpolation_grid_type replaced by deriv_type.</em> </p>
 <pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::batched_derivs_idx_range_type =  ddc:: replace_dim_of_t&lt;BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coeff_idx_range_type">typedef coeff_idx_range_type</h3>
+<p><em>The index range for the interpolation coefficients.</em> </p>
+<pre><code class="language-C++">using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::coeff_idx_range_type =  IdxRange&lt;basis_domain_type&gt;;
 </code></pre>
 <hr>
 

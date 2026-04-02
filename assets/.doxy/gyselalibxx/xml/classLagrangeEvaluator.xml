@@ -743,7 +743,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="300" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="300" bodyend="325"/>
       </memberdef>
-      <memberdef kind="function" id="classLagrangeEvaluator_1a5f91945de08749e6c081570d48ea7678" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classLagrangeEvaluator_1af32bdc604af164d7e5b5bcecb35e9e0c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class IdxDerivDims</type>
@@ -760,8 +760,8 @@
             <defname>CoordsDims</defname>
           </param>
         </templateparamlist>
-        <type>KOKKOS_FUNCTION double</type>
-        <definition>KOKKOS_FUNCTION double LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::deriv</definition>
+        <type>KOKKOS_FUNCTION DataType</type>
+        <definition>KOKKOS_FUNCTION DataType LagrangeEvaluator&lt; ExecSpace, MemorySpace, DataType, LagrangeBasis, InterpolationGrid, LowerExtrapolationRule, UpperExtrapolationRule &gt;::deriv</definition>
         <argsstring>(IdxDerivDims const &amp;deriv_order, Coord&lt; CoordsDims... &gt; const &amp;coord_eval, ConstField&lt; DataType, BatchedLagrangeIdxRange, memory_space, Layout &gt; const lagrange_coef) const</argsstring>
         <name>deriv</name>
         <qualifiedname>LagrangeEvaluator::deriv</qualifiedname>
@@ -812,7 +812,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="339" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="339" bodyend="346"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" line="340" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_evaluator.hpp" bodystart="340" bodyend="346"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeEvaluator_1a26528549f3a1bc381121bc390752fc91" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -1171,7 +1171,7 @@
       <member refid="classLagrangeEvaluator_1ac4f442b7234a311f049383d3e336b934" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>coeff_idx_range_type</name></member>
       <member refid="classLagrangeEvaluator_1afd2dd964bf9a6c2b38ddb5b91a6299da" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>continuous_dimension_type</name></member>
       <member refid="classLagrangeEvaluator_1ad0d109fd894110740bee3523ab5fef28" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>data_type</name></member>
-      <member refid="classLagrangeEvaluator_1a5f91945de08749e6c081570d48ea7678" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>deriv</name></member>
+      <member refid="classLagrangeEvaluator_1af32bdc604af164d7e5b5bcecb35e9e0c" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>deriv</name></member>
       <member refid="classLagrangeEvaluator_1a26528549f3a1bc381121bc390752fc91" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>deriv</name></member>
       <member refid="classLagrangeEvaluator_1a746eed33d7a8255c093475e9fbdc2f27" prot="public" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>deriv</name></member>
       <member refid="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" prot="private" virt="non-virtual"><scope>LagrangeEvaluator</scope><name>eval</name></member>

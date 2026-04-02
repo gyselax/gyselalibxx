@@ -411,9 +411,9 @@
         </briefdescription>
         <detaileddescription>
 <para><itemizedlist>
-<listitem><para><computeroutput>PERIODIC</computeroutput> : the function is assumed to be periodic. The value at a point outside the domain is taken as the value at the equivalent point inside the domain.</para>
-</listitem><listitem><para><computeroutput>NULL_VALUE</computeroutput> : the function evaluates to zero outside the domain.</para>
-</listitem><listitem><para><computeroutput>CONSTANT</computeroutput> : the function is clamped to the value at the nearest boundary point. </para>
+<listitem><para>PERIODIC : the function is assumed to be periodic. The value at a point outside the domain is taken as the value at the equivalent point inside the domain.</para>
+</listitem><listitem><para>NULL_VALUE : the function evaluates to zero outside the domain.</para>
+</listitem><listitem><para>CONSTANT : the function is clamped to the value at the nearest boundary point. </para>
 </listitem></itemizedlist>
 </para>
         </detaileddescription>
@@ -435,7 +435,7 @@
         <name>is_lagrange_basis_v</name>
         <initializer>= is_uniform_lagrange_basis_v&lt;Basis&gt; || is_non_uniform_lagrange_basis_v&lt;Basis&gt;</initializer>
         <briefdescription>
-<para>A type trait that is true when <computeroutput>Basis</computeroutput> is a Lagrange basis type. </para>
+<para>A type trait that is true when Basis is a Lagrange basis type. </para>
         </briefdescription>
         <detaileddescription>
 <para>Evaluates to true for both <ref refid="classUniformLagrangeBasis" kindref="compound">UniformLagrangeBasis</ref> and <ref refid="classNonUniformLagrangeBasis" kindref="compound">NonUniformLagrangeBasis</ref> instantiations, false for all other types.</para>
@@ -452,7 +452,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="63" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="64" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="76" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="i__interpolation_8hpp_1a0e8d6b32dd36dd4f6bc5b7f4834d6473" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
@@ -466,7 +466,7 @@
         <name>is_spline_basis_v</name>
         <initializer>= ddc::is_uniform_bsplines_v&lt;Basis&gt; || ddc::is_non_uniform_bsplines_v&lt;Basis&gt;</initializer>
         <briefdescription>
-<para>A type trait that is true when <computeroutput>Basis</computeroutput> is a B-spline basis type. </para>
+<para>A type trait that is true when Basis is a B-spline basis type. </para>
         </briefdescription>
         <detaileddescription>
 <para>Evaluates to true for both ddc::UniformBSplines and ddc::NonUniformBSplines instantiations, false for all other types.</para>
@@ -483,7 +483,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="75" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="76" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="88" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="89" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -511,27 +511,35 @@
 <codeline lineno="37"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T::BuilderType;</highlight></codeline>
 <codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T::EvaluatorType;</highlight></codeline>
-<codeline lineno="40"><highlight class="normal">}</highlight></codeline>
-<codeline lineno="41"><highlight class="normal">&amp;&amp;<ref refid="conceptconcepts_1_1InterpolationBuilder" kindref="compound">concepts::InterpolationBuilder&lt;typename T::BuilderType&gt;</ref>&amp;&amp;<sp/><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref>&lt;</highlight></codeline>
-<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T::EvaluatorType&gt;&amp;&amp;<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>t)</highlight></codeline>
-<codeline lineno="43"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.get_builder()</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;typename<sp/>T::BuilderType<sp/>const&amp;&gt;;</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.get_evaluator()</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;typename<sp/>T::EvaluatorType<sp/>const&amp;&gt;;</highlight></codeline>
-<codeline lineno="50"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>concepts</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Basis&gt;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_lagrange_basis_v</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>is_uniform_lagrange_basis_v&lt;Basis&gt;<sp/>||<sp/>is_non_uniform_lagrange_basis_v&lt;Basis&gt;;</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Basis&gt;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_spline_basis_v</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::is_uniform_bsplines_v&lt;Basis&gt;<sp/>||<sp/>ddc::is_non_uniform_bsplines_v&lt;Basis&gt;;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>T::rank()</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;std::size_t&gt;;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">&amp;&amp;<ref refid="conceptconcepts_1_1InterpolationBuilder" kindref="compound">concepts::InterpolationBuilder&lt;typename T::BuilderType&gt;</ref>&amp;&amp;<sp/><ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref>&lt;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T::</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>EvaluatorType&gt;<sp/>&amp;&amp;<sp/>(<ref refid="structInterpolationBuilderTraits_1abac68ee97aea6d2e8fa58d645c68bf70" kindref="member">InterpolationBuilderTraits&lt;typename T::BuilderType&gt;::rank</ref>()<sp/>==<sp/><ref refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kindref="member">InterpolationEvaluatorTraits&lt;typename T::EvaluatorType&gt;::rank</ref>())</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/></highlight><highlight class="keyword">requires</highlight><highlight class="normal">(T<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>t)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.get_builder()</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;typename<sp/>T::BuilderType<sp/>const&amp;&gt;;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>t.get_evaluator()</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/>-&gt;<sp/>std::same_as&lt;typename<sp/>T::EvaluatorType<sp/>const&amp;&gt;;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="63" refid="conceptconcepts_1_1Interpolation1D" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">concept<sp/></highlight><highlight class="normal"><ref refid="conceptconcepts_1_1Interpolation1D" kindref="compound">Interpolation1D</ref><sp/>=<sp/><ref refid="conceptconcepts_1_1Interpolation" kindref="compound">Interpolation&lt;T&gt;</ref><sp/>&amp;&amp;<sp/><ref refid="conceptconcepts_1_1InterpolationBuilder1D" kindref="compound">InterpolationBuilder1D&lt;typename T::BuilderType&gt;</ref>;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>concepts</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Basis&gt;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_lagrange_basis_v</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>is_uniform_lagrange_basis_v&lt;Basis&gt;<sp/>||<sp/>is_non_uniform_lagrange_basis_v&lt;Basis&gt;;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Basis&gt;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_spline_basis_v</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>ddc::is_uniform_bsplines_v&lt;Basis&gt;<sp/>||<sp/>ddc::is_non_uniform_bsplines_v&lt;Basis&gt;;</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp"/>
   </compounddef>

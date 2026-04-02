@@ -65,6 +65,11 @@ _An owning interpolation object that bundles a spline builder and evaluator._ [M
 |  [**EvaluatorType**](classSplineInterpolator.md#typedef-evaluatortype) const & | [**get\_evaluator**](#function-get_evaluator) () const<br>_Return a const reference to the owned spline evaluator._  |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions._  |
 
 
 
@@ -228,6 +233,22 @@ The EvaluatorType instance.
 
 
         
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function rank 
+
+_The number of interpolation dimensions._ 
+```C++
+static inline constexpr std::size_t SplineInterpolator::rank () 
+```
+
+
+
 
 <hr>
 

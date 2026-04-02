@@ -578,15 +578,19 @@
 <tbody>
 <tr>
 <td style="text-align: right;">typedef typename Evaluator::template <a href="structInterpolationEvaluatorTraits.html#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>&lt; D &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>  <br><em>Batched domain with the evaluation grid replaced by coeff_grid_type.</em></td>
+<td style="text-align: left;"><a href="#typedef-batched_coeff_idx_range_type"><strong>batched_coeff_idx_range_type</strong></a>  <br><em>Batched domain with the evaluation grid replaced by the coefficient grid(s).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Evaluator::template <a href="structInterpolationEvaluatorTraits.html#typedef-batched_evaluation_idx_range_type"><strong>batched_evaluation_idx_range_type</strong></a>&lt; BatchedInterpolationIdxRange &gt;</td>
 <td style="text-align: left;"><a href="#typedef-batched_evaluation_idx_range_type"><strong>batched_evaluation_idx_range_type</strong></a>  <br><em>Batched index range for the evaluation.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename Evaluator::coeff_grid_type</td>
-<td style="text-align: left;"><a href="#typedef-coeff_grid_type"><strong>coeff_grid_type</strong></a>  <br><em>The discrete dimension for the interpolation coefficients.</em></td>
+<td style="text-align: right;">typedef typename Evaluator::coeff_idx_range_type</td>
+<td style="text-align: left;"><a href="#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a>  <br><em>The type of the ND index range on which the interpolation coefficients are defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::coordinate_of_t&lt; typename evaluation_idx_range_type::discrete_element_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coord_type"><strong>coord_type</strong></a>  <br><em>The ND coordinate type corresponding to the evaluation mesh.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Evaluator::data_type</td>
@@ -594,20 +598,43 @@
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Evaluator::evaluation_idx_range_type</td>
-<td style="text-align: left;"><a href="#typedef-evaluation_idx_range_type"><strong>evaluation_idx_range_type</strong></a>  <br><em>The 1D index range for the evaluation mesh.</em></td>
+<td style="text-align: left;"><a href="#typedef-evaluation_idx_range_type"><strong>evaluation_idx_range_type</strong></a>  <br><em>The ND index range for the evaluation mesh.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>The primary template delegates to the evaluator's own type aliases. It handles the common case where an evaluator already uses the convention names (e.g. <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> exposes <code>evaluation_idx_range_type</code> and <code>batched_coeff_idx_range_type</code> directly).</p>
 <p>Specialise this struct to adapt external evaluators whose alias names differ (e.g. ddc::SplineEvaluator).</p>
+<p>Defines: Type aliases:
+* data_type
+* evaluation_idx_range_type
+* coord_type
+* coeff_idx_range_type Static functions
+* <a href="structInterpolationEvaluatorTraits.html#function-rank"><strong>rank()</strong></a> Type calculators
+* batched_evaluation_idx_range_type
+* batched_coeff_idx_range_type</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>Evaluator</code> The interpolation evaluator type. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-batched_coeff_idx_range_type">typedef batched_coeff_idx_range_type</h3>
-<p><em>Batched domain with the evaluation grid replaced by coeff_grid_type.</em> </p>
+<p><em>Batched domain with the evaluation grid replaced by the coefficient grid(s).</em> </p>
 <pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::batched_coeff_idx_range_type =  typename Evaluator::template batched_coeff_idx_range_type&lt;D&gt;;
 </code></pre>
 <hr>
@@ -618,9 +645,15 @@
 </code></pre>
 <hr>
 
-<h3 id="typedef-coeff_grid_type">typedef coeff_grid_type</h3>
-<p><em>The discrete dimension for the interpolation coefficients.</em> </p>
-<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::coeff_grid_type =  typename Evaluator::coeff_grid_type;
+<h3 id="typedef-coeff_idx_range_type">typedef coeff_idx_range_type</h3>
+<p><em>The type of the ND index range on which the interpolation coefficients are defined.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::coeff_idx_range_type =  typename Evaluator::coeff_idx_range_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coord_type">typedef coord_type</h3>
+<p><em>The ND coordinate type corresponding to the evaluation mesh.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::coord_type =  ddc::coordinate_of_t&lt;typename evaluation_idx_range_type::discrete_element_type&gt;;
 </code></pre>
 <hr>
 
@@ -631,8 +664,14 @@
 <hr>
 
 <h3 id="typedef-evaluation_idx_range_type">typedef evaluation_idx_range_type</h3>
-<p><em>The 1D index range for the evaluation mesh.</em> </p>
+<p><em>The ND index range for the evaluation mesh.</em> </p>
 <pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; Evaluator &gt;::evaluation_idx_range_type =  typename Evaluator::evaluation_idx_range_type;
+</code></pre>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-rank">function rank</h3>
+<p><em>The number of interpolation dimensions.</em> </p>
+<pre><code class="language-C++">static inline constexpr std::size_t InterpolationEvaluatorTraits::rank () 
 </code></pre>
 <hr>
 

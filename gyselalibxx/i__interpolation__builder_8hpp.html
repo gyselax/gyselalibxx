@@ -602,6 +602,21 @@
 </tr>
 </tbody>
 </table>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename <a href="structInterpolationBuilderTraits.html"><strong>InterpolationBuilderTraits</strong></a>&lt; BuilderType &gt;::interpolation_idx_range_type &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-interpolation_grid_t"><strong>interpolation_grid_t</strong></a>  <br><em>The discrete grid on which interpolation values are given (1D builders only).</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
@@ -617,6 +632,12 @@
 </tr>
 </tbody>
 </table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-interpolation_grid_t">typedef interpolation_grid_t</h3>
+<p><em>The discrete grid on which interpolation values are given (1D builders only).</em> </p>
+<pre><code class="language-C++">using interpolation_grid_t =  ddc::type_seq_element_t&lt; 0, ddc::to_type_seq_t&lt; typename InterpolationBuilderTraits&lt;BuilderType&gt;::interpolation_idx_range_type&gt; &gt;;
+</code></pre>
+<hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-batched_basis_idx_range">function batched_basis_idx_range</h3>
 <p><em>Get the batched basis index range for a builder.</em> </p>
@@ -626,7 +647,7 @@ auto batched_basis_idx_range (
     IdxRangeBatchedInterpolation const &amp; batched_interpolation_domain
 ) 
 </code></pre>
-<p>Dispatches to <code>batched_basis_idx_range</code> if available (e.g. <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a>), otherwise falls back to <code>batched_spline_domain</code> (e.g. ddc::SplineBuilder).</p>
+<p>Dispatches to batched_basis_idx_range if available (e.g. <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a>), otherwise falls back to batched_spline_domain (e.g. ddc::SplineBuilder).</p>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>builder</code> The interpolation builder. </li>

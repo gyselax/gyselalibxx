@@ -402,31 +402,36 @@
 <codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>extrapolation_rule_t&lt;MinExtrapRule,<sp/>Basis&gt;,</highlight></codeline>
 <codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>extrapolation_rule_t&lt;MaxExtrapRule,<sp/>Basis&gt;&gt;;</highlight></codeline>
 <codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>extrapolation_rule_t&lt;MinExtrapRule,<sp/>Basis&gt;<sp/>m_min_extrapolation;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>extrapolation_rule_t&lt;MaxExtrapRule,<sp/>Basis&gt;<sp/>m_max_extrapolation;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kindref="member">BuilderType</ref><sp/>m_builder;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kindref="member">EvaluatorType</ref><sp/>m_evaluator;</highlight></codeline>
+<codeline lineno="73" refid="classSplineInterpolator_1aa044a8ca3d0ca692d6c222079dd3ad7a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>std::size_t<sp/><ref refid="classSplineInterpolator_1aa044a8ca3d0ca692d6c222079dd3ad7a" kindref="member">rank</ref>()</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
 <codeline lineno="77"><highlight class="normal"></highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="87" refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" kindref="member">SplineInterpolator</ref>(IdxRange&lt;InterpGrid&gt;<sp/>idx_range)</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_min_extrapolation(get_extrapolation&lt;MinExtrapRule,<sp/>Basis&gt;(Extremity::FRONT))</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_extrapolation(get_extrapolation&lt;MaxExtrapRule,<sp/>Basis&gt;(Extremity::BACK))</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_builder(idx_range)</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(m_min_extrapolation,<sp/>m_max_extrapolation)</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99" refid="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kindref="member">BuilderType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" kindref="member">get_builder</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="100"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_builder;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight></codeline>
-<codeline lineno="108" refid="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kindref="member">EvaluatorType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" kindref="member">get_evaluator</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="109"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_evaluator;</highlight></codeline>
-<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="112"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/>extrapolation_rule_t&lt;MinExtrapRule,<sp/>Basis&gt;<sp/>m_min_extrapolation;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/>extrapolation_rule_t&lt;MaxExtrapRule,<sp/>Basis&gt;<sp/>m_max_extrapolation;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kindref="member">BuilderType</ref><sp/>m_builder;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kindref="member">EvaluatorType</ref><sp/>m_evaluator;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="93" refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" kindref="member">SplineInterpolator</ref>(IdxRange&lt;InterpGrid&gt;<sp/>idx_range)</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_min_extrapolation(get_extrapolation&lt;MinExtrapRule,<sp/>Basis&gt;(Extremity::FRONT))</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_extrapolation(get_extrapolation&lt;MaxExtrapRule,<sp/>Basis&gt;(Extremity::BACK))</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_builder(idx_range)</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(m_min_extrapolation,<sp/>m_max_extrapolation)</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kindref="member">BuilderType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" kindref="member">get_builder</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="106"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_builder;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kindref="member">EvaluatorType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" kindref="member">get_evaluator</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="115"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_evaluator;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp"/>
   </compounddef>

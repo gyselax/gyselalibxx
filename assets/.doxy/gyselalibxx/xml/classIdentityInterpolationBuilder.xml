@@ -126,6 +126,21 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="44" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="44" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="typedef" id="classIdentityInterpolationBuilder_1a1e94e3cf345552d299316b9a09a5263d" prot="public" static="no">
+        <type>IdxRange&lt; <ref refid="classIdentityInterpolationBuilder_1abe782ddcb0181c0e7b7d0dde595cea54" kindref="member">basis_domain_type</ref> &gt;</type>
+        <definition>using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::coeff_idx_range_type =  IdxRange&lt;basis_domain_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>coeff_idx_range_type</name>
+        <qualifiedname>IdentityInterpolationBuilder::coeff_idx_range_type</qualifiedname>
+        <briefdescription>
+<para>The index range for the interpolation coefficients. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="47" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="classIdentityInterpolationBuilder_1a63c15db52b118b689c837fd7aaf9c33b" prot="public" static="no">
         <type>ddc::Deriv&lt; <ref refid="classIdentityInterpolationBuilder_1a66d63156646828b159326c870f157bee" kindref="member">continuous_dimension_type</ref> &gt;</type>
         <definition>using IdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis &gt;::deriv_type =  ddc::Deriv&lt;continuous_dimension_type&gt;</definition>
@@ -139,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="47" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="50" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classIdentityInterpolationBuilder_1a5ce180cadfffa6db674ea0f5fa68e5b3" prot="public" static="no">
         <templateparamlist>
@@ -159,7 +174,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="51" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="54" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="54" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="57" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" prot="public" static="no">
         <templateparamlist>
@@ -179,7 +194,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="58" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="62" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
@@ -197,7 +212,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="63" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="63" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="66" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classIdentityInterpolationBuilder_1ad7a730453d02850a3fe29dadf91c49b2" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr int</type>
@@ -213,7 +228,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="66" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="66" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="69" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="69" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -229,7 +244,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="69" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="72" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityInterpolationBuilder_1a6c2055a41e5b848229308895930d99c7" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -302,7 +317,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="85" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="85" bodyend="118"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="88" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="88" bodyend="121"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityInterpolationBuilder_1a70d7e70b1683afc4ccb46525e3596e67" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -339,7 +354,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="130" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="130" bodyend="136"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="133" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="133" bodyend="139"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityInterpolationBuilder_1a48c4b088dc35e841dc702f2ad9200d36" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -376,7 +391,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="148" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="148" bodyend="154"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="151" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="151" bodyend="157"/>
       </memberdef>
       <memberdef kind="function" id="classIdentityInterpolationBuilder_1a6e1cf38340ea153cf8e9f483b519c3ee" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <templateparamlist>
@@ -412,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="164" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="164" bodyend="170"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="167" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="167" bodyend="173"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -463,7 +478,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="23" bodyend="171"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/identity_interpolation_builder.hpp" bodystart="23" bodyend="174"/>
     <listofallmembers>
       <member refid="classIdentityInterpolationBuilder_1abe782ddcb0181c0e7b7d0dde595cea54" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>basis_domain_type</name></member>
       <member refid="classIdentityInterpolationBuilder_1a6e1cf38340ea153cf8e9f483b519c3ee" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_basis_idx_range</name></member>
@@ -471,6 +486,7 @@
       <member refid="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_derivs_idx_range_type</name></member>
       <member refid="classIdentityInterpolationBuilder_1a48c4b088dc35e841dc702f2ad9200d36" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_derivs_xmax_domain</name></member>
       <member refid="classIdentityInterpolationBuilder_1a70d7e70b1683afc4ccb46525e3596e67" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>batched_derivs_xmin_domain</name></member>
+      <member refid="classIdentityInterpolationBuilder_1a1e94e3cf345552d299316b9a09a5263d" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>coeff_idx_range_type</name></member>
       <member refid="classIdentityInterpolationBuilder_1a66d63156646828b159326c870f157bee" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>continuous_dimension_type</name></member>
       <member refid="classIdentityInterpolationBuilder_1a295359b62e5227ae0eb9b83b87d6257f" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>data_type</name></member>
       <member refid="classIdentityInterpolationBuilder_1a63c15db52b118b689c837fd7aaf9c33b" prot="public" virt="non-virtual"><scope>IdentityInterpolationBuilder</scope><name>deriv_type</name></member>

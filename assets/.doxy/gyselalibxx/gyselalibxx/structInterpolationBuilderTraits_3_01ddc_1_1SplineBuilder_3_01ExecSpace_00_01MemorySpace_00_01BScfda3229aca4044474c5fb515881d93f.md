@@ -37,6 +37,7 @@ _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilde
 | typedef typename Builder::bsplines\_type | [**basis\_domain\_type**](#typedef-basis_domain_type)  <br>_The discrete dimension for the B-spline coefficients._  |
 | typedef typename Builder::template batched\_spline\_domain\_type&lt; IdxRangeBatchedInterpolation &gt; | [**batched\_basis\_idx\_range\_type**](#typedef-batched_basis_idx_range_type)  <br>_Batched domain with InterpolationDDim replaced by BSplines._  |
 | typedef typename Builder::template batched\_derivs\_domain\_type&lt; IdxRangeBatchedInterpolation &gt; | [**batched\_derivs\_idx\_range\_type**](#typedef-batched_derivs_idx_range_type)  <br>_Batched domain with InterpolationDDim replaced by deriv\_type._  |
+| typedef IdxRange&lt; typename Builder::bsplines\_type &gt; | [**coeff\_idx\_range\_type**](#typedef-coeff_idx_range_type)  <br>_The index range for the interpolation coefficients._  |
 | typedef double | [**data\_type**](#typedef-data_type)  <br>_The data type that the data is saved on._  |
 | typedef typename Builder::interpolation\_discrete\_dimension\_type | [**interpolation\_grid\_type**](#typedef-interpolation_grid_type)  <br>_The discrete grid on which interpolation values are given._  |
 | typedef typename Builder::interpolation\_domain\_type | [**interpolation\_idx\_range\_type**](#typedef-interpolation_idx_range_type)  <br>_The 1D index range for the interpolation mesh._  |
@@ -62,6 +63,11 @@ _Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilde
 
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr std::size\_t | [**rank**](#function-rank) () <br>_The number of interpolation dimensions (always 1 for SplineBuilder)._  |
 
 
 
@@ -145,6 +151,20 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 
 
 
+### typedef coeff\_idx\_range\_type 
+
+_The index range for the interpolation coefficients._ 
+```C++
+using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::coeff_idx_range_type =  IdxRange<typename Builder::bsplines_type>;
+```
+
+
+
+
+<hr>
+
+
+
 ### typedef data\_type 
 
 _The data type that the data is saved on._ 
@@ -178,6 +198,22 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 _The 1D index range for the interpolation mesh._ 
 ```C++
 using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::interpolation_idx_range_type =  typename Builder::interpolation_domain_type;
+```
+
+
+
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function rank 
+
+_The number of interpolation dimensions (always 1 for SplineBuilder)._ 
+```C++
+static inline constexpr std::size_t InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::rank () 
 ```
 
 

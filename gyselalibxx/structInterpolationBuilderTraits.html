@@ -577,54 +577,72 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename Builder::basis_domain_type</td>
-<td style="text-align: left;"><a href="#typedef-basis_domain_type"><strong>basis_domain_type</strong></a>  <br><em>The discrete dimension for the interpolation coefficients.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">typedef typename Builder::template <a href="structInterpolationBuilderTraits.html#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>&lt; IdxRangeBatchedInterpolation &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>  <br><em>Batched domain with interpolation_grid_type replaced by basis_domain_type.</em></td>
+<td style="text-align: left;"><a href="#typedef-batched_basis_idx_range_type"><strong>batched_basis_idx_range_type</strong></a>  <br><em>Batched domain with the interpolation grid(s) replaced by the basis grid(s).</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Builder::template <a href="structInterpolationBuilderTraits.html#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>&lt; IdxRangeBatchedInterpolation &gt;</td>
-<td style="text-align: left;"><a href="#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>Batched domain with interpolation_grid_type replaced by deriv_type.</em></td>
+<td style="text-align: left;"><a href="#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>Batched domain with the interpolation grid replaced by the deriv type.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename Builder::coeff_idx_range_type</td>
+<td style="text-align: left;"><a href="#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a>  <br><em>The index range for the interpolation coefficients.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef typename Builder::data_type</td>
 <td style="text-align: left;"><a href="#typedef-data_type"><strong>data_type</strong></a>  <br><em>The data type that the data is saved on.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename Builder::interpolation_grid_type</td>
-<td style="text-align: left;"><a href="#typedef-interpolation_grid_type"><strong>interpolation_grid_type</strong></a>  <br><em>The discrete grid on which interpolation values are given.</em></td>
-</tr>
-<tr>
 <td style="text-align: right;">typedef typename Builder::interpolation_idx_range_type</td>
-<td style="text-align: left;"><a href="#typedef-interpolation_idx_range_type"><strong>interpolation_idx_range_type</strong></a>  <br><em>The 1D index range for the interpolation mesh.</em></td>
+<td style="text-align: left;"><a href="#typedef-interpolation_idx_range_type"><strong>interpolation_idx_range_type</strong></a>  <br><em>The ND index range for the interpolation mesh.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>The primary template delegates to the builder's own type aliases, so any class that defines them directly (e.g. <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a>, SplineBuilder1D) satisfies the InterpolationBuilder concept without specialisation.</p>
+<p>The primary template delegates to the builder's own type aliases, so any class that defines them directly (e.g. <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a>) satisfies the InterpolationBuilder concept without specialisation.</p>
 <p>Specialise this struct to adapt external builders whose alias names differ from the convention (e.g. ddc::SplineBuilder).</p>
+<p>Defines: Type aliases:
+* data_type
+* interpolation_idx_range_type
+* coeff_idx_range_type Static functions:
+* <a href="structInterpolationBuilderTraits.html#function-rank"><strong>rank()</strong></a> Type calculators:
+* batched_basis_idx_range_type
+* batched_derivs_idx_range_type (1D builders only; not required by the concept)</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>Builder</code> The interpolation builder type. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-basis_domain_type">typedef basis_domain_type</h3>
-<p><em>The discrete dimension for the interpolation coefficients.</em> </p>
-<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::basis_domain_type =  typename Builder::basis_domain_type;
-</code></pre>
-<hr>
-
 <h3 id="typedef-batched_basis_idx_range_type">typedef batched_basis_idx_range_type</h3>
-<p><em>Batched domain with interpolation_grid_type replaced by basis_domain_type.</em> </p>
+<p><em>Batched domain with the interpolation grid(s) replaced by the basis grid(s).</em> </p>
 <pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::batched_basis_idx_range_type =  typename Builder::template batched_basis_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-batched_derivs_idx_range_type">typedef batched_derivs_idx_range_type</h3>
-<p><em>Batched domain with interpolation_grid_type replaced by deriv_type.</em> </p>
+<p><em>Batched domain with the interpolation grid replaced by the deriv type.</em> </p>
 <pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::batched_derivs_idx_range_type =  typename Builder::template batched_derivs_idx_range_type&lt;IdxRangeBatchedInterpolation&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coeff_idx_range_type">typedef coeff_idx_range_type</h3>
+<p><em>The index range for the interpolation coefficients.</em> </p>
+<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::coeff_idx_range_type =  typename Builder::coeff_idx_range_type;
 </code></pre>
 <hr>
 
@@ -634,15 +652,15 @@
 </code></pre>
 <hr>
 
-<h3 id="typedef-interpolation_grid_type">typedef interpolation_grid_type</h3>
-<p><em>The discrete grid on which interpolation values are given.</em> </p>
-<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::interpolation_grid_type =  typename Builder::interpolation_grid_type;
+<h3 id="typedef-interpolation_idx_range_type">typedef interpolation_idx_range_type</h3>
+<p><em>The ND index range for the interpolation mesh.</em> </p>
+<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::interpolation_idx_range_type =  typename Builder::interpolation_idx_range_type;
 </code></pre>
 <hr>
-
-<h3 id="typedef-interpolation_idx_range_type">typedef interpolation_idx_range_type</h3>
-<p><em>The 1D index range for the interpolation mesh.</em> </p>
-<pre><code class="language-C++">using InterpolationBuilderTraits&lt; Builder &gt;::interpolation_idx_range_type =  typename Builder::interpolation_idx_range_type;
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-rank">function rank</h3>
+<p><em>The number of interpolation dimensions.</em> </p>
+<pre><code class="language-C++">static inline constexpr std::size_t InterpolationBuilderTraits::rank () 
 </code></pre>
 <hr>
 

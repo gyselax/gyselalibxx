@@ -570,6 +570,19 @@
 
 #include "ddc_aliases.hpp"
 
+namespace detail {
+
+template &lt;class IdxElem&gt;
+struct ToDerivIdx;
+
+template &lt;class... Grids&gt;
+struct ToDerivIdx&lt;Idx&lt;Grids...&gt;&gt;
+{
+    using type = Idx&lt;ddc::Deriv&lt;typename Grids::continuous_dimension_type&gt;...&gt;;
+};
+
+} // namespace detail
+
 template &lt;class Evaluator&gt;
 struct InterpolationEvaluatorTraits
 {
@@ -577,7 +590,15 @@ struct InterpolationEvaluatorTraits
 
     using evaluation_idx_range_type = typename Evaluator::evaluation_idx_range_type;
 
-    using coeff_grid_type = typename Evaluator::coeff_grid_type;
+    using coord_type
+            = ddc::coordinate_of_t&lt;typename evaluation_idx_range_type::discrete_element_type&gt;;
+
+    using coeff_idx_range_type = typename Evaluator::coeff_idx_range_type;
+
+    static constexpr std::size_t rank()
+    {
+        return evaluation_idx_range_type::rank();
+    }
 
     template &lt;class BatchedInterpolationIdxRange&gt;
     using batched_evaluation_idx_range_type =
@@ -618,7 +639,14 @@ public:
 
     using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
 
-    using coeff_grid_type = typename Evaluator::bsplines_type;
+    using coord_type = Coord&lt;typename EvaluationDDim::continuous_dimension_type&gt;;
+
+    using coeff_idx_range_type = typename Evaluator::spline_domain_type;
+
+    static constexpr std::size_t rank()
+    {
+        return 1;
+    }
 
     template &lt;class BatchedInterpolationIdxRange&gt;
     using batched_evaluation_idx_range_type =
@@ -637,12 +665,16 @@ concept InterpolationEvaluator = requires
 {
     typename Evaluator::exec_space;
     typename Evaluator::memory_space;
-    typename Evaluator::continuous_dimension_type;
     typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type;
     typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type;
-    typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coeff_grid_type;
-    typename Evaluator::lower_extrapolation_rule_type;
-    typename Evaluator::upper_extrapolation_rule_type;
+    typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type;
+    typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coeff_idx_range_type;
+}
+&amp;&amp;requires()
+{
+    {
+        InterpolationEvaluatorTraits&lt;Evaluator&gt;::rank()
+        } -&gt; std::same_as&lt;std::size_t&gt;;
 }
 &amp;&amp;requires(
         Evaluator const&amp; e,
@@ -656,12 +688,16 @@ concept InterpolationEvaluator = requires
                                 Evaluator&gt;::evaluation_idx_range_type&gt;,
                 typename Evaluator::memory_space&gt; coeffs,
         ConstField&lt;
-                Coord&lt;typename Evaluator::continuous_dimension_type&gt;,
+                typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type,
                 typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::evaluation_idx_range_type,
-                typename Evaluator::memory_space&gt; coords)
+                typename Evaluator::memory_space&gt; coords,
+        typename detail::ToDerivIdx&lt;typename InterpolationEvaluatorTraits&lt;
+                Evaluator&gt;::evaluation_idx_range_type::discrete_element_type&gt;::type deriv_order)
 {
     {e(eval, coeffs)};
     {e(eval, coords, coeffs)};
+    {e.deriv(deriv_order, eval, coeffs)};
+    {e.deriv(deriv_order, eval, coords, coeffs)};
 }
 &amp;&amp;requires(
         Evaluator const&amp; e,
@@ -671,10 +707,15 @@ concept InterpolationEvaluator = requires
                         template batched_coeff_idx_range_type&lt;typename InterpolationEvaluatorTraits&lt;
                                 Evaluator&gt;::evaluation_idx_range_type&gt;,
                 typename Evaluator::memory_space&gt; coeffs,
-        Coord&lt;typename Evaluator::continuous_dimension_type&gt; coord)
+        typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::coord_type coord,
+        typename detail::ToDerivIdx&lt;typename InterpolationEvaluatorTraits&lt;
+                Evaluator&gt;::evaluation_idx_range_type::discrete_element_type&gt;::type deriv_order)
 {
     {
         e(coord, coeffs)
+        } -&gt; std::same_as&lt;typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type&gt;;
+    {
+        e.deriv(deriv_order, coord, coeffs)
         } -&gt; std::same_as&lt;typename InterpolationEvaluatorTraits&lt;Evaluator&gt;::data_type&gt;;
 };
 

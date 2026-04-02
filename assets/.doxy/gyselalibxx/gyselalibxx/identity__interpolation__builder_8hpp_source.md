@@ -33,6 +33,8 @@ public:
 
     using basis_domain_type = typename Basis::template Impl<Basis, MemorySpace>::knot_grid;
 
+    using coeff_idx_range_type = IdxRange<basis_domain_type>;
+
     using deriv_type = ddc::Deriv<continuous_dimension_type>;
 
     template <class BatchedInterpolationIdxRange>

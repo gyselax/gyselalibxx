@@ -41,6 +41,11 @@
 | struct | [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f.md) &lt;class ExecSpace, class MemorySpace, class BSplines, class InterpolationDDim, BcLower, BcUpper, Solver&gt;<br>_Specialisation of_ [_**InterpolationBuilderTraits**_](structInterpolationBuilderTraits.md) _for ddc::SplineBuilder._ |
 
 
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef ddc::type\_seq\_element\_t&lt; 0, ddc::to\_type\_seq\_t&lt; typename [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md)&lt; BuilderType &gt;::interpolation\_idx\_range\_type &gt; &gt; | [**interpolation\_grid\_t**](#typedef-interpolation_grid_t)  <br>_The discrete grid on which interpolation values are given (1D builders only)._  |
 
 
 
@@ -94,6 +99,22 @@
 
 
 
+## Public Types Documentation
+
+
+
+
+### typedef interpolation\_grid\_t 
+
+_The discrete grid on which interpolation values are given (1D builders only)._ 
+```C++
+using interpolation_grid_t =  ddc::type_seq_element_t< 0, ddc::to_type_seq_t< typename InterpolationBuilderTraits<BuilderType>::interpolation_idx_range_type> >;
+```
+
+
+
+
+<hr>
 ## Public Functions Documentation
 
 
@@ -112,7 +133,7 @@ auto batched_basis_idx_range (
 
 
 
-Dispatches to `batched_basis_idx_range` if available (e.g. [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md)), otherwise falls back to `batched_spline_domain` (e.g. ddc::SplineBuilder).
+Dispatches to batched\_basis\_idx\_range if available (e.g. [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md)), otherwise falls back to batched\_spline\_domain (e.g. ddc::SplineBuilder).
 
 
 

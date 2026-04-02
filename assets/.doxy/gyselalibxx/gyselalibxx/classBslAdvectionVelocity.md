@@ -2,7 +2,7 @@
 
 # Class BslAdvectionVelocity
 
-**template &lt;class Geometry, concepts::Interpolation FunctionInterpolator, class DataType&gt;**
+**template &lt;class Geometry, concepts::Interpolation1D FunctionInterpolator, class DataType&gt;**
 
 
 

@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1Interpolation1D" kind="concept">
+    <compoundname>concepts::Interpolation1D</compoundname>
+    <includes refid="i__interpolation_8hpp" local="no">i_interpolation.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="conceptconcepts_1_1Interpolation1D" kindref="compound">concepts::Interpolation1D</ref> =  Interpolation&lt;T&gt; &amp;&amp; InterpolationBuilder1D&lt;typename T::BuilderType&gt;    </initializer>
+    <briefdescription>
+<para>A concept describing a 1D interpolation object. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>T</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The interpolation type to check. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="63" column="1"/>
+  </compounddef>
+</doxygen>

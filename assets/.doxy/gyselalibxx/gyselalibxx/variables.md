@@ -400,6 +400,7 @@
 * **IdxXYVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **is\_lagrange\_basis\_v** ([**i\_interpolation.hpp**](i__interpolation_8hpp.md))
 * **is\_spline\_basis\_v** ([**i\_interpolation.hpp**](i__interpolation_8hpp.md))
+* **interpolation\_grid\_t** ([**i\_interpolation\_builder.hpp**](i__interpolation__builder_8hpp.md))
 * **is\_non\_uniform\_lagrange\_basis\_v** ([**lagrange\_basis\_non\_uniform.hpp**](lagrange__basis__non__uniform_8hpp.md))
 * **is\_uniform\_lagrange\_basis\_v** ([**lagrange\_basis\_uniform.hpp**](lagrange__basis__uniform_8hpp.md))
 * **insert\_into\_seq\_before\_t** ([**mpitools.hpp**](mpitools_8hpp.md))

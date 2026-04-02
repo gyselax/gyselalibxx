@@ -613,11 +613,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_lagrange_basis_v"><strong>is_lagrange_basis_v</strong></a>   = <code>is\_uniform\_lagrange\_basis\_v&amp;lt;Basis&amp;gt; \|\| is\_non\_uniform\_lagrange\_basis\_v&amp;lt;Basis&amp;gt;</code><br><em>A type trait that is true when</em> <code>Basis</code> <em>is a Lagrange basis type.</em></td>
+<td style="text-align: left;"><a href="#variable-is_lagrange_basis_v"><strong>is_lagrange_basis_v</strong></a>   = <code>is\_uniform\_lagrange\_basis\_v&amp;lt;Basis&amp;gt; \|\| is\_non\_uniform\_lagrange\_basis\_v&amp;lt;Basis&amp;gt;</code><br><em>A type trait that is true when Basis is a Lagrange basis type.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">constexpr bool</td>
-<td style="text-align: left;"><a href="#variable-is_spline_basis_v"><strong>is_spline_basis_v</strong></a>   = <code>ddc::is\_uniform\_bsplines\_v&amp;lt;Basis&amp;gt; \|\| ddc::is\_non\_uniform\_bsplines\_v&amp;lt;Basis&amp;gt;</code><br><em>A type trait that is true when</em> <code>Basis</code> <em>is a B-spline basis type.</em></td>
+<td style="text-align: left;"><a href="#variable-is_spline_basis_v"><strong>is_spline_basis_v</strong></a>   = <code>ddc::is\_uniform\_bsplines\_v&amp;lt;Basis&amp;gt; \|\| ddc::is\_non\_uniform\_bsplines\_v&amp;lt;Basis&amp;gt;</code><br><em>A type trait that is true when Basis is a B-spline basis type.</em></td>
 </tr>
 </tbody>
 </table>
@@ -631,14 +631,14 @@
 };
 </code></pre>
 <ul>
-<li><code>PERIODIC</code> : the function is assumed to be periodic. The value at a point outside the domain is taken as the value at the equivalent point inside the domain.</li>
-<li><code>NULL_VALUE</code> : the function evaluates to zero outside the domain.</li>
-<li><code>CONSTANT</code> : the function is clamped to the value at the nearest boundary point. </li>
+<li>PERIODIC : the function is assumed to be periodic. The value at a point outside the domain is taken as the value at the equivalent point inside the domain.</li>
+<li>NULL_VALUE : the function evaluates to zero outside the domain.</li>
+<li>CONSTANT : the function is clamped to the value at the nearest boundary point. </li>
 </ul>
 <hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-is_lagrange_basis_v">variable is_lagrange_basis_v</h3>
-<p><em>A type trait that is true when</em> <code>Basis</code> <em>is a Lagrange basis type.</em></p>
+<p><em>A type trait that is true when Basis is a Lagrange basis type.</em> </p>
 <pre><code class="language-C++">constexpr bool is_lagrange_basis_v;
 </code></pre>
 <p>Evaluates to true for both <a href="classUniformLagrangeBasis.html"><strong>UniformLagrangeBasis</strong></a> and <a href="classNonUniformLagrangeBasis.html"><strong>NonUniformLagrangeBasis</strong></a> instantiations, false for all other types.</p>
@@ -649,7 +649,7 @@
 <hr>
 
 <h3 id="variable-is_spline_basis_v">variable is_spline_basis_v</h3>
-<p><em>A type trait that is true when</em> <code>Basis</code> <em>is a B-spline basis type.</em></p>
+<p><em>A type trait that is true when Basis is a B-spline basis type.</em> </p>
 <pre><code class="language-C++">constexpr bool is_spline_basis_v;
 </code></pre>
 <p>Evaluates to true for both ddc::UniformBSplines and ddc::NonUniformBSplines instantiations, false for all other types.</p>

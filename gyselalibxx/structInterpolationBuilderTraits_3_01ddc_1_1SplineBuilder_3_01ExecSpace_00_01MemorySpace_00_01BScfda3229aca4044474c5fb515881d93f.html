@@ -589,6 +589,10 @@
 <td style="text-align: left;"><a href="#typedef-batched_derivs_idx_range_type"><strong>batched_derivs_idx_range_type</strong></a>  <br><em>Batched domain with InterpolationDDim replaced by deriv_type.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef IdxRange&lt; typename Builder::bsplines_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a>  <br><em>The index range for the interpolation coefficients.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef double</td>
 <td style="text-align: left;"><a href="#typedef-data_type"><strong>data_type</strong></a>  <br><em>The data type that the data is saved on.</em></td>
 </tr>
@@ -599,6 +603,21 @@
 <tr>
 <td style="text-align: right;">typedef typename Builder::interpolation_domain_type</td>
 <td style="text-align: left;"><a href="#typedef-interpolation_idx_range_type"><strong>interpolation_idx_range_type</strong></a>  <br><em>The 1D index range for the interpolation mesh.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions (always 1 for SplineBuilder).</em></td>
 </tr>
 </tbody>
 </table>
@@ -624,6 +643,12 @@
 </code></pre>
 <hr>
 
+<h3 id="typedef-coeff_idx_range_type">typedef coeff_idx_range_type</h3>
+<p><em>The index range for the interpolation coefficients.</em> </p>
+<pre><code class="language-C++">using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::coeff_idx_range_type =  IdxRange&lt;typename Builder::bsplines_type&gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-data_type">typedef data_type</h3>
 <p><em>The data type that the data is saved on.</em> </p>
 <pre><code class="language-C++">using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::data_type =  double;
@@ -639,6 +664,12 @@
 <h3 id="typedef-interpolation_idx_range_type">typedef interpolation_idx_range_type</h3>
 <p><em>The 1D index range for the interpolation mesh.</em> </p>
 <pre><code class="language-C++">using InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::interpolation_idx_range_type =  typename Builder::interpolation_domain_type;
+</code></pre>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-rank">function rank</h3>
+<p><em>The number of interpolation dimensions (always 1 for SplineBuilder).</em> </p>
+<pre><code class="language-C++">static inline constexpr std::size_t InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;::rank () 
 </code></pre>
 <hr>
 

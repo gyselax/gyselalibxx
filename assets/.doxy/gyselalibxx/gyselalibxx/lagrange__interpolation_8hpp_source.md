@@ -58,6 +58,11 @@ public:
             extrapolation_rule_t<MinExtrapRule, CoeffGridType>,
             extrapolation_rule_t<MaxExtrapRule, CoeffGridType>>;
 
+    static constexpr std::size_t rank()
+    {
+        return 1;
+    }
+
 private:
     extrapolation_rule_t<MinExtrapRule, CoeffGridType> m_min_extrapolation;
     extrapolation_rule_t<MaxExtrapRule, CoeffGridType> m_max_extrapolation;

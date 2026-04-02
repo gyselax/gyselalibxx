@@ -609,6 +609,21 @@
 </tr>
 </tbody>
 </table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions.</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p><a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a> constructs and owns a matching ddc::SplineBuilder and ddc::SplineEvaluator for a given dimension. It satisfies the concepts::Interpolation concept and is the recommended way to create a spline interpolation for use with advection operators and similar algorithms.</p>
 <p>The boundary condition (MinBound / MaxBound) and extrapolation rule (MinExtrapRule / MaxExtrapRule) must be consistent: both must be PERIODIC for periodic dimensions and both must be non-PERIODIC for non-periodic dimensions.</p>
@@ -663,6 +678,12 @@
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The EvaluatorType instance. </p>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-rank">function rank</h3>
+<p><em>The number of interpolation dimensions.</em> </p>
+<pre><code class="language-C++">static inline constexpr std::size_t SplineInterpolator::rank () 
+</code></pre>
 <hr>
 
 <hr>

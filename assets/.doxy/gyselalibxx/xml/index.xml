@@ -128,7 +128,7 @@
   <compound refid="classBslAdvectionSpatial" kind="class"><name>BslAdvectionSpatial</name>
     <member refid="classBslAdvectionSpatial_1a57f1fc7af2bf6dc2936be8124b7bd8ee" kind="typedef"><name>FunctionBuilder</name></member>
     <member refid="classBslAdvectionSpatial_1a6bcf93ec82aaa5c1ebb3c1c2c1af7102" kind="typedef"><name>FunctionEvaluator</name></member>
-    <member refid="classBslAdvectionSpatial_1ace5b23cc38022f44c8d397c6be14247f" kind="typedef"><name>GridX</name></member>
+    <member refid="classBslAdvectionSpatial_1a1133b363f6a49b0c9ac445747e6fd03c" kind="typedef"><name>GridX</name></member>
     <member refid="classBslAdvectionSpatial_1a2c1179970a63ee9366bc0b13508c630b" kind="typedef"><name>GridV</name></member>
     <member refid="classBslAdvectionSpatial_1aaffeb787a04ffa64709fcd876bb85bf9" kind="typedef"><name>IdxRangeFdistrib</name></member>
     <member refid="classBslAdvectionSpatial_1a724ef6d556b318494e7003d4b041f72b" kind="typedef"><name>IdxX</name></member>
@@ -147,7 +147,7 @@
   <compound refid="classBslAdvectionVelocity" kind="class"><name>BslAdvectionVelocity</name>
     <member refid="classBslAdvectionVelocity_1a0fedd8bd3196be65cc79109408bd8f91" kind="typedef"><name>FunctionBuilder</name></member>
     <member refid="classBslAdvectionVelocity_1a3c0a1c16126080710cc494cdc9c55e75" kind="typedef"><name>FunctionEvaluator</name></member>
-    <member refid="classBslAdvectionVelocity_1a310bc925eb819f140b1eaa54fe2ecbcc" kind="typedef"><name>GridV</name></member>
+    <member refid="classBslAdvectionVelocity_1af4d9cc04df3acdfbff765faf08946469" kind="typedef"><name>GridV</name></member>
     <member refid="classBslAdvectionVelocity_1ae07abddb2e16f74a14642e6037765a22" kind="typedef"><name>IdxRangeFdistribu</name></member>
     <member refid="classBslAdvectionVelocity_1a7e2133ddbcfbe364a02b7a031a9eb1b2" kind="typedef"><name>IdxRangeSpatial</name></member>
     <member refid="classBslAdvectionVelocity_1a687925ba89e644b3c7b185bd8a6f2dcf" kind="typedef"><name>IdxSpatial</name></member>
@@ -1267,6 +1267,7 @@
     <member refid="classIdentityInterpolationBuilder_1a6f9f1c74b1d2eb5b3247098e4cd96093" kind="typedef"><name>interpolation_grid_type</name></member>
     <member refid="classIdentityInterpolationBuilder_1a1c6bce80a06b04fb58e60821efbb9669" kind="typedef"><name>interpolation_idx_range_type</name></member>
     <member refid="classIdentityInterpolationBuilder_1abe782ddcb0181c0e7b7d0dde595cea54" kind="typedef"><name>basis_domain_type</name></member>
+    <member refid="classIdentityInterpolationBuilder_1a1e94e3cf345552d299316b9a09a5263d" kind="typedef"><name>coeff_idx_range_type</name></member>
     <member refid="classIdentityInterpolationBuilder_1a63c15db52b118b689c837fd7aaf9c33b" kind="typedef"><name>deriv_type</name></member>
     <member refid="classIdentityInterpolationBuilder_1a5ce180cadfffa6db674ea0f5fa68e5b3" kind="typedef"><name>batched_basis_idx_range_type</name></member>
     <member refid="classIdentityInterpolationBuilder_1a54ae04e8475264b053315affb21bd406" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
@@ -1457,35 +1458,41 @@
   </compound>
   <compound refid="structInterpolationBuilderTraits" kind="struct"><name>InterpolationBuilderTraits</name>
     <member refid="structInterpolationBuilderTraits_1a1cfb37f788c7cf72aba5f9cac0929d90" kind="typedef"><name>data_type</name></member>
-    <member refid="structInterpolationBuilderTraits_1a3f39b3128d44ce418c4a1f6d1da6396d" kind="typedef"><name>interpolation_grid_type</name></member>
     <member refid="structInterpolationBuilderTraits_1a28f0e9c3a2146db9ea37f936330d19e5" kind="typedef"><name>interpolation_idx_range_type</name></member>
-    <member refid="structInterpolationBuilderTraits_1a204e857eb6527a3f216f748f80b51ab7" kind="typedef"><name>basis_domain_type</name></member>
+    <member refid="structInterpolationBuilderTraits_1af3333eb7bf31870254a4b741da8f4389" kind="typedef"><name>coeff_idx_range_type</name></member>
     <member refid="structInterpolationBuilderTraits_1a1571c2b75b4b5eda61672305d05f7ee9" kind="typedef"><name>batched_basis_idx_range_type</name></member>
     <member refid="structInterpolationBuilderTraits_1ab26d18a8e7463c40e3bef78c6200bf0b" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
+    <member refid="structInterpolationBuilderTraits_1abac68ee97aea6d2e8fa58d645c68bf70" kind="function"><name>rank</name></member>
   </compound>
   <compound refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f" kind="struct"><name>InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;</name>
     <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1aded9831a468c2a2af3832b84e738fd31" kind="typedef"><name>Builder</name></member>
     <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a3ff779bdc5f86fd5eea961109edb78c3" kind="typedef"><name>data_type</name></member>
     <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a2265dd8bff4ed58f7914775d82f6deae" kind="typedef"><name>interpolation_grid_type</name></member>
     <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1af385a490a57b692489c51a1370e19f56" kind="typedef"><name>interpolation_idx_range_type</name></member>
+    <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a92cb366b2ba6ff8f7c5ef4f7c6dc1487" kind="typedef"><name>coeff_idx_range_type</name></member>
     <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a31b127598131cc7547cff3fb73b0c0a4" kind="typedef"><name>basis_domain_type</name></member>
     <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1ab191085003650de44fc7e4f4efc9fa3a" kind="typedef"><name>batched_basis_idx_range_type</name></member>
     <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a632524bb9d4a459a58605d8d62ab72dd" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
+    <member refid="structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f_1a33374c66661cfdc64f5ec0a9e85aa05e" kind="function"><name>rank</name></member>
   </compound>
   <compound refid="structInterpolationEvaluatorTraits" kind="struct"><name>InterpolationEvaluatorTraits</name>
     <member refid="structInterpolationEvaluatorTraits_1a05e385b598cc80bbb05e348df7e5dbc6" kind="typedef"><name>data_type</name></member>
     <member refid="structInterpolationEvaluatorTraits_1a886b49ae248245afc8d0c1f82ad41203" kind="typedef"><name>evaluation_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_1a1285ea0f7b6a58fee335155575ccf392" kind="typedef"><name>coeff_grid_type</name></member>
+    <member refid="structInterpolationEvaluatorTraits_1a3fff06256e205182c99cbbf83efe4a3c" kind="typedef"><name>coord_type</name></member>
+    <member refid="structInterpolationEvaluatorTraits_1ac0e86356f0ceab4e17761687d2cb6e46" kind="typedef"><name>coeff_idx_range_type</name></member>
     <member refid="structInterpolationEvaluatorTraits_1a19bb1b14421bc5c63617e38b52592551" kind="typedef"><name>batched_evaluation_idx_range_type</name></member>
     <member refid="structInterpolationEvaluatorTraits_1aa3307759834c89348e6b133d7eaf86e9" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
+    <member refid="structInterpolationEvaluatorTraits_1a33d1de468afb4e5a7de4fc5e8e90b9d4" kind="function"><name>rank</name></member>
   </compound>
   <compound refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c" kind="struct"><name>InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;</name>
     <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a328f4ad6b728a1c68bbfde69d9886aa3" kind="typedef"><name>Evaluator</name></member>
     <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a36b30301f8bf4518ad1f409673dbf8f4" kind="typedef"><name>data_type</name></member>
     <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1ae9dcac4e52df684fce626f79d68da013" kind="typedef"><name>evaluation_idx_range_type</name></member>
-    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a5d923eed686b3021719fe8f71116d8b4" kind="typedef"><name>coeff_grid_type</name></member>
+    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a04edf2088a8171da4c9d183671abd54d" kind="typedef"><name>coord_type</name></member>
+    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a9ebca70fefcbc9b9b40ad684784a0b99" kind="typedef"><name>coeff_idx_range_type</name></member>
     <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1ab2a5f148bf40c77728bd8c376534bcad" kind="typedef"><name>batched_evaluation_idx_range_type</name></member>
     <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1a04def3c71792a9479779645966462f24" kind="typedef"><name>batched_coeff_idx_range_type</name></member>
+    <member refid="structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c_1ad8f7297ea959275df8412c906bb6179f" kind="function"><name>rank</name></member>
   </compound>
   <compound refid="classInverseJacobianMatrix" kind="class"><name>InverseJacobianMatrix</name>
     <member refid="classInverseJacobianMatrix_1a7988d90c0e9ad18cff9a1e635943428b" kind="typedef"><name>ValidArgIndices</name></member>
@@ -1727,7 +1734,7 @@
     <member refid="classLagrangeEvaluator_1a84a9e487a0487108b83726a130fa8f14" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1a940bc8a12231b0dc1d82dd5b60f0ea75" kind="function"><name>operator()</name></member>
     <member refid="classLagrangeEvaluator_1ad4bb1d5d33263f705594b4a999eec9dd" kind="function"><name>operator()</name></member>
-    <member refid="classLagrangeEvaluator_1a5f91945de08749e6c081570d48ea7678" kind="function"><name>deriv</name></member>
+    <member refid="classLagrangeEvaluator_1af32bdc604af164d7e5b5bcecb35e9e0c" kind="function"><name>deriv</name></member>
     <member refid="classLagrangeEvaluator_1a26528549f3a1bc381121bc390752fc91" kind="function"><name>deriv</name></member>
     <member refid="classLagrangeEvaluator_1a746eed33d7a8255c093475e9fbdc2f27" kind="function"><name>deriv</name></member>
     <member refid="classLagrangeEvaluator_1a29a0870fa01fd44e5943fd4a2620ba7a" kind="function"><name>eval</name></member>
@@ -1745,6 +1752,7 @@
     <member refid="classLagrangeInterpolator_1aa5e7274b82fbae1df9cd597349feb780" kind="variable"><name>m_max_extrapolation</name></member>
     <member refid="classLagrangeInterpolator_1a715cee2d98524edf5b0b1233220fb244" kind="variable"><name>m_builder</name></member>
     <member refid="classLagrangeInterpolator_1a71b02deb7ec56f468b3f6a371b23a8ea" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classLagrangeInterpolator_1af55baa821103ff7249385620b17aa49b" kind="function"><name>rank</name></member>
     <member refid="classLagrangeInterpolator_1a0cc956579fc3968beba84b295abd75ab" kind="function"><name>LagrangeInterpolator</name></member>
     <member refid="classLagrangeInterpolator_1a394b85e66c65eb6a2f207ec0f0c725dd" kind="function"><name>get_builder</name></member>
     <member refid="classLagrangeInterpolator_1a2572e88d65f8e0e06d4c2387ef62d6c5" kind="function"><name>get_evaluator</name></member>
@@ -2892,6 +2900,7 @@
     <member refid="classSplineInterpolator_1a52957a0179ed761b6a6dcc7c5155a73c" kind="variable"><name>m_max_extrapolation</name></member>
     <member refid="classSplineInterpolator_1a6f394ea211d048ed0de9e84b377363ae" kind="variable"><name>m_builder</name></member>
     <member refid="classSplineInterpolator_1a4de6b5624065659fa7c93dfa0ac7482b" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classSplineInterpolator_1aa044a8ca3d0ca692d6c222079dd3ad7a" kind="function"><name>rank</name></member>
     <member refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" kind="function"><name>SplineInterpolator</name></member>
     <member refid="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" kind="function"><name>get_builder</name></member>
     <member refid="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" kind="function"><name>get_evaluator</name></member>
@@ -3228,7 +3237,11 @@
   </compound>
   <compound refid="conceptconcepts_1_1Interpolation" kind="concept"><name>concepts::Interpolation</name>
   </compound>
+  <compound refid="conceptconcepts_1_1Interpolation1D" kind="concept"><name>concepts::Interpolation1D</name>
+  </compound>
   <compound refid="conceptconcepts_1_1InterpolationBuilder" kind="concept"><name>concepts::InterpolationBuilder</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1InterpolationBuilder1D" kind="concept"><name>concepts::InterpolationBuilder1D</name>
   </compound>
   <compound refid="conceptconcepts_1_1InterpolationEvaluator" kind="concept"><name>concepts::InterpolationEvaluator</name>
   </compound>
@@ -4017,6 +4030,7 @@
     <member refid="i__interpolation_8hpp_1a0e8d6b32dd36dd4f6bc5b7f4834d6473" kind="variable"><name>is_spline_basis_v</name></member>
   </compound>
   <compound refid="i__interpolation__builder_8hpp" kind="file"><name>i_interpolation_builder.hpp</name>
+    <member refid="i__interpolation__builder_8hpp_1a1584b968b14633a3c046edc116c5cbd3" kind="typedef"><name>interpolation_grid_t</name></member>
     <member refid="i__interpolation__builder_8hpp_1a14aacf03ea22182825b120f6448c1f59" kind="function"><name>batched_basis_idx_range</name></member>
   </compound>
   <compound refid="i__interpolation__evaluator_8hpp" kind="file"><name>i_interpolation_evaluator.hpp</name>

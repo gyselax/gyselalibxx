@@ -52,8 +52,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  constexpr bool | [**is\_lagrange\_basis\_v**](#variable-is_lagrange_basis_v)   = `is\_uniform\_lagrange\_basis\_v&lt;Basis&gt; \|\| is\_non\_uniform\_lagrange\_basis\_v&lt;Basis&gt;`<br>_A type trait that is true when_ `Basis` _is a Lagrange basis type._ |
-|  constexpr bool | [**is\_spline\_basis\_v**](#variable-is_spline_basis_v)   = `ddc::is\_uniform\_bsplines\_v&lt;Basis&gt; \|\| ddc::is\_non\_uniform\_bsplines\_v&lt;Basis&gt;`<br>_A type trait that is true when_ `Basis` _is a B-spline basis type._ |
+|  constexpr bool | [**is\_lagrange\_basis\_v**](#variable-is_lagrange_basis_v)   = `is\_uniform\_lagrange\_basis\_v&lt;Basis&gt; \|\| is\_non\_uniform\_lagrange\_basis\_v&lt;Basis&gt;`<br>_A type trait that is true when Basis is a Lagrange basis type._  |
+|  constexpr bool | [**is\_spline\_basis\_v**](#variable-is_spline_basis_v)   = `ddc::is\_uniform\_bsplines\_v&lt;Basis&gt; \|\| ddc::is\_non\_uniform\_bsplines\_v&lt;Basis&gt;`<br>_A type trait that is true when Basis is a B-spline basis type._  |
 
 
 
@@ -117,9 +117,9 @@ enum ExtrapolationRule {
 
 
 
-* `PERIODIC` : the function is assumed to be periodic. The value at a point outside the domain is taken as the value at the equivalent point inside the domain.
-* `NULL_VALUE` : the function evaluates to zero outside the domain.
-* `CONSTANT` : the function is clamped to the value at the nearest boundary point. 
+* PERIODIC : the function is assumed to be periodic. The value at a point outside the domain is taken as the value at the equivalent point inside the domain.
+* NULL\_VALUE : the function evaluates to zero outside the domain.
+* CONSTANT : the function is clamped to the value at the nearest boundary point. 
 
 
 
@@ -134,7 +134,7 @@ enum ExtrapolationRule {
 
 ### variable is\_lagrange\_basis\_v 
 
-_A type trait that is true when_ `Basis` _is a Lagrange basis type._
+_A type trait that is true when Basis is a Lagrange basis type._ 
 ```C++
 constexpr bool is_lagrange_basis_v;
 ```
@@ -162,7 +162,7 @@ Evaluates to true for both [**UniformLagrangeBasis**](classUniformLagrangeBasis.
 
 ### variable is\_spline\_basis\_v 
 
-_A type trait that is true when_ `Basis` _is a B-spline basis type._
+_A type trait that is true when Basis is a B-spline basis type._ 
 ```C++
 constexpr bool is_spline_basis_v;
 ```

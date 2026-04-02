@@ -585,8 +585,12 @@
 <td style="text-align: left;"><a href="#typedef-batched_evaluation_idx_range_type"><strong>batched_evaluation_idx_range_type</strong></a>  <br><em>Batched index range for the evaluation.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename Evaluator::bsplines_type</td>
-<td style="text-align: left;"><a href="#typedef-coeff_grid_type"><strong>coeff_grid_type</strong></a>  <br><em>The discrete dimension for the B-spline coefficients.</em></td>
+<td style="text-align: right;">typedef typename Evaluator::spline_domain_type</td>
+<td style="text-align: left;"><a href="#typedef-coeff_idx_range_type"><strong>coeff_idx_range_type</strong></a>  <br><em>The type of the ND index range on which the interpolation coefficients are defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef Coord&lt; typename EvaluationDDim::continuous_dimension_type &gt;</td>
+<td style="text-align: left;"><a href="#typedef-coord_type"><strong>coord_type</strong></a>  <br><em>The 1D coordinate type corresponding to the evaluation mesh.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef double</td>
@@ -598,9 +602,24 @@
 </tr>
 </tbody>
 </table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions (always 1 for SplineEvaluator).</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>ddc::SplineEvaluator uses different alias names from the InterpolationEvaluator convention. This specialisation provides the mapping so that ddc::SplineEvaluator can be used directly as an InterpolationEvaluator.</p>
-<p>Mapping: evaluation_discrete_dimension_type -&gt; (defines evaluation_idx_range_type) evaluation_domain_type -&gt; evaluation_idx_range_type bsplines_type -&gt; coeff_grid_type batched_spline_domain_type&lt;D&gt; -&gt; batched_coeff_idx_range_type&lt;D&gt; </p>
+<p>Mapping: evaluation_discrete_dimension_type -&gt; (defines evaluation_idx_range_type) evaluation_domain_type -&gt; evaluation_idx_range_type spline_domain_type -&gt; coeff_idx_range_type batched_spline_domain_type&lt;D&gt; -&gt; batched_coeff_idx_range_type&lt;D&gt; </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-batched_coeff_idx_range_type">typedef batched_coeff_idx_range_type</h3>
 <p><em>Batched domain with the evaluation grid replaced by BSplines.</em> </p>
@@ -614,9 +633,15 @@
 </code></pre>
 <hr>
 
-<h3 id="typedef-coeff_grid_type">typedef coeff_grid_type</h3>
-<p><em>The discrete dimension for the B-spline coefficients.</em> </p>
-<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;::coeff_grid_type =  typename Evaluator::bsplines_type;
+<h3 id="typedef-coeff_idx_range_type">typedef coeff_idx_range_type</h3>
+<p><em>The type of the ND index range on which the interpolation coefficients are defined.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;::coeff_idx_range_type =  typename Evaluator::spline_domain_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-coord_type">typedef coord_type</h3>
+<p><em>The 1D coordinate type corresponding to the evaluation mesh.</em> </p>
+<pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;::coord_type =  Coord&lt;typename EvaluationDDim::continuous_dimension_type&gt;;
 </code></pre>
 <hr>
 
@@ -629,6 +654,12 @@
 <h3 id="typedef-evaluation_idx_range_type">typedef evaluation_idx_range_type</h3>
 <p><em>The 1D index range for the evaluation mesh.</em> </p>
 <pre><code class="language-C++">using InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;::evaluation_idx_range_type =  typename Evaluator::evaluation_domain_type;
+</code></pre>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-rank">function rank</h3>
+<p><em>The number of interpolation dimensions (always 1 for SplineEvaluator).</em> </p>
+<pre><code class="language-C++">static inline constexpr std::size_t InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;::rank () 
 </code></pre>
 <hr>
 

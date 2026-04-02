@@ -611,6 +611,11 @@ public:
             extrapolation_rule_t&lt;MinExtrapRule, Basis&gt;,
             extrapolation_rule_t&lt;MaxExtrapRule, Basis&gt;&gt;;
 
+    static constexpr std::size_t rank()
+    {
+        return 1;
+    }
+
 private:
     extrapolation_rule_t&lt;MinExtrapRule, Basis&gt; m_min_extrapolation;
     extrapolation_rule_t&lt;MaxExtrapRule, Basis&gt; m_max_extrapolation;

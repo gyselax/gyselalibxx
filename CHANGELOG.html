@@ -573,6 +573,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add a <code>NDLagrangeEvaluator</code> class.</li>
 <li>Add <code>eval_basis_and_n_derivs</code> function to Lagrange basis operators.</li>
 <li>Add <code>deriv</code> function to Lagrange evaluation.</li>
+<li>Add <code>concepts::InterpolationBuilder1D</code> and <code>concepts::Interpolation1D</code>.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -586,6 +587,8 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Renamed <code>DiscreteToCartesian</code> -&gt; <code>DiscretePoloidalCSSplineMapping</code>.</li>
 <li>Renamed <code>DiscreteToCartesianBuilder</code> -&gt; <code>DiscretePoloidalCSSplineMappingBuilder</code>.</li>
 <li>Changed <code>BslAdvectionPolar</code> template parameters and constructor to take a builder and evaluator instead of an <code>Interpolator2D</code>.</li>
+<li>Changed new <code>concepts::InterpolationEvaluator</code> concept and associated <code>InterpolationEvaluatorTraits</code> class to generalise to ND.</li>
+<li>Changed new <code>concepts::InterpolationBuilder</code> concept and associated <code>InterpolationBuilderTraits</code> class to generalise to ND.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

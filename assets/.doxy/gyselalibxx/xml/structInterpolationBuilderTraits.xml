@@ -22,22 +22,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="25" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="25" bodyend="-1"/>
-      </memberdef>
-      <memberdef kind="typedef" id="structInterpolationBuilderTraits_1a3f39b3128d44ce418c4a1f6d1da6396d" prot="public" static="no">
-        <type>typename Builder::interpolation_grid_type</type>
-        <definition>using InterpolationBuilderTraits&lt; Builder &gt;::interpolation_grid_type =  typename Builder::interpolation_grid_type</definition>
-        <argsstring></argsstring>
-        <name>interpolation_grid_type</name>
-        <qualifiedname>InterpolationBuilderTraits::interpolation_grid_type</qualifiedname>
-        <briefdescription>
-<para>The discrete grid on which interpolation values are given. </para>
-        </briefdescription>
-        <detaileddescription>
-        </detaileddescription>
-        <inbodydescription>
-        </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="28" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="28" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="36" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="36" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationBuilderTraits_1a28f0e9c3a2146db9ea37f936330d19e5" prot="public" static="no">
         <type>typename Builder::interpolation_idx_range_type</type>
@@ -46,28 +31,28 @@
         <name>interpolation_idx_range_type</name>
         <qualifiedname>InterpolationBuilderTraits::interpolation_idx_range_type</qualifiedname>
         <briefdescription>
-<para>The 1D index range for the interpolation mesh. </para>
+<para>The ND index range for the interpolation mesh. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="31" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="31" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="39" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="39" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structInterpolationBuilderTraits_1a204e857eb6527a3f216f748f80b51ab7" prot="public" static="no">
-        <type>typename Builder::basis_domain_type</type>
-        <definition>using InterpolationBuilderTraits&lt; Builder &gt;::basis_domain_type =  typename Builder::basis_domain_type</definition>
+      <memberdef kind="typedef" id="structInterpolationBuilderTraits_1af3333eb7bf31870254a4b741da8f4389" prot="public" static="no">
+        <type>typename Builder::coeff_idx_range_type</type>
+        <definition>using InterpolationBuilderTraits&lt; Builder &gt;::coeff_idx_range_type =  typename Builder::coeff_idx_range_type</definition>
         <argsstring></argsstring>
-        <name>basis_domain_type</name>
-        <qualifiedname>InterpolationBuilderTraits::basis_domain_type</qualifiedname>
+        <name>coeff_idx_range_type</name>
+        <qualifiedname>InterpolationBuilderTraits::coeff_idx_range_type</qualifiedname>
         <briefdescription>
-<para>The discrete dimension for the interpolation coefficients. </para>
+<para>The index range for the interpolation coefficients. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="34" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="34" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="42" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="42" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationBuilderTraits_1a1571c2b75b4b5eda61672305d05f7ee9" prot="public" static="no">
         <templateparamlist>
@@ -81,13 +66,13 @@
         <name>batched_basis_idx_range_type</name>
         <qualifiedname>InterpolationBuilderTraits::batched_basis_idx_range_type</qualifiedname>
         <briefdescription>
-<para>Batched domain with interpolation_grid_type replaced by basis_domain_type. </para>
+<para>Batched domain with the interpolation grid(s) replaced by the basis grid(s). </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="38" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="39" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="52" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="53" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="structInterpolationBuilderTraits_1ab26d18a8e7463c40e3bef78c6200bf0b" prot="public" static="no">
         <templateparamlist>
@@ -101,21 +86,47 @@
         <name>batched_derivs_idx_range_type</name>
         <qualifiedname>InterpolationBuilderTraits::batched_derivs_idx_range_type</qualifiedname>
         <briefdescription>
-<para>Batched domain with interpolation_grid_type replaced by deriv_type. </para>
+<para>Batched domain with the interpolation grid replaced by the deriv type. </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="43" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="44" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="57" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="58" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structInterpolationBuilderTraits_1abac68ee97aea6d2e8fa58d645c68bf70" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr std::size_t</type>
+        <definition>static constexpr std::size_t InterpolationBuilderTraits&lt; Builder &gt;::rank</definition>
+        <argsstring>()</argsstring>
+        <name>rank</name>
+        <qualifiedname>InterpolationBuilderTraits::rank</qualifiedname>
+        <briefdescription>
+<para>The number of interpolation dimensions. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="45" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="45" bodyend="48"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
 <para>A traits struct for accessing type aliases of an interpolation builder. </para>
     </briefdescription>
     <detaileddescription>
-<para>The primary template delegates to the builder&apos;s own type aliases, so any class that defines them directly (e.g. <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>, SplineBuilder1D) satisfies the InterpolationBuilder concept without specialisation.</para>
+<para>The primary template delegates to the builder&apos;s own type aliases, so any class that defines them directly (e.g. <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>) satisfies the InterpolationBuilder concept without specialisation.</para>
 <para>Specialise this struct to adapt external builders whose alias names differ from the convention (e.g. ddc::SplineBuilder).</para>
+<para>Defines: Type aliases:<itemizedlist>
+<listitem><para>data_type</para>
+</listitem><listitem><para>interpolation_idx_range_type</para>
+</listitem><listitem><para>coeff_idx_range_type Static functions:</para>
+</listitem><listitem><para><ref refid="structInterpolationBuilderTraits_1abac68ee97aea6d2e8fa58d645c68bf70" kindref="member">rank()</ref> Type calculators:</para>
+</listitem><listitem><para>batched_basis_idx_range_type</para>
+</listitem><listitem><para>batched_derivs_idx_range_type (1D builders only; not required by the concept)</para>
+</listitem></itemizedlist>
+</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>Builder</parametername>
@@ -127,14 +138,14 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="22" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="23" bodyend="45"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="33" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" bodystart="34" bodyend="59"/>
     <listofallmembers>
-      <member refid="structInterpolationBuilderTraits_1a204e857eb6527a3f216f748f80b51ab7" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>basis_domain_type</name></member>
       <member refid="structInterpolationBuilderTraits_1a1571c2b75b4b5eda61672305d05f7ee9" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>batched_basis_idx_range_type</name></member>
       <member refid="structInterpolationBuilderTraits_1ab26d18a8e7463c40e3bef78c6200bf0b" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>batched_derivs_idx_range_type</name></member>
+      <member refid="structInterpolationBuilderTraits_1af3333eb7bf31870254a4b741da8f4389" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>coeff_idx_range_type</name></member>
       <member refid="structInterpolationBuilderTraits_1a1cfb37f788c7cf72aba5f9cac0929d90" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>data_type</name></member>
-      <member refid="structInterpolationBuilderTraits_1a3f39b3128d44ce418c4a1f6d1da6396d" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>interpolation_grid_type</name></member>
       <member refid="structInterpolationBuilderTraits_1a28f0e9c3a2146db9ea37f936330d19e5" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>interpolation_idx_range_type</name></member>
+      <member refid="structInterpolationBuilderTraits_1abac68ee97aea6d2e8fa58d645c68bf70" prot="public" virt="non-virtual"><scope>InterpolationBuilderTraits</scope><name>rank</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

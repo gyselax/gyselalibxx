@@ -576,12 +576,11 @@
 #include "iadvectionvx.hpp"
 #include "species_info.hpp"
 
-template &lt;class Geometry, concepts::Interpolation FunctionInterpolator, class DataType = double&gt;
+template &lt;class Geometry, concepts::Interpolation1D FunctionInterpolator, class DataType = double&gt;
 class BslAdvectionVelocity
     : public IAdvectionVelocity&lt;
               Geometry,
-              typename InterpolationBuilderTraits&lt;
-                      typename FunctionInterpolator::BuilderType&gt;::interpolation_grid_type,
+              interpolation_grid_t&lt;typename FunctionInterpolator::BuilderType&gt;,
               DataType&gt;
 {
     static_assert(std::is_floating_point_v&lt;DataType&gt;);
@@ -589,7 +588,7 @@ class BslAdvectionVelocity
     using FunctionBuilder = typename FunctionInterpolator::BuilderType;
     using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
 
-    using GridV = typename InterpolationBuilderTraits&lt;FunctionBuilder&gt;::interpolation_grid_type;
+    using GridV = interpolation_grid_t&lt;typename FunctionInterpolator::BuilderType&gt;;
 
     using IdxRangeFdistribu = typename Geometry::IdxRangeFdistribu;
     using IdxRangeSpatial = typename Geometry::IdxRangeSpatial;

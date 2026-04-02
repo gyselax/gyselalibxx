@@ -613,6 +613,21 @@
 </tr>
 </tbody>
 </table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr std::size_t</td>
+<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions.</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p><a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a> constructs and owns a matching <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a> and <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> for a given dimension. It satisfies the concepts::Interpolation concept and is the recommended way to create a Lagrange interpolation for use with advection operators and similar algorithms.</p>
 <p>The builder is an identity operation: it passes function values on the interpolation grid directly as coefficients to the evaluator, which then performs local polynomial reconstruction via the Lagrange basis.</p>
@@ -668,6 +683,12 @@
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The EvaluatorType instance. </p>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-rank">function rank</h3>
+<p><em>The number of interpolation dimensions.</em> </p>
+<pre><code class="language-C++">static inline constexpr std::size_t LagrangeInterpolator::rank () 
+</code></pre>
 <hr>
 
 <hr>

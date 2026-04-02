@@ -13,9 +13,14 @@ concept <ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concept
 {
     typename T::BuilderType;
     typename T::EvaluatorType;
+    {
+        T::rank()
+        } -&gt; std::same_as&lt;std::size_t&gt;;
 }
 &amp;&amp;<ref refid="conceptconcepts_1_1InterpolationBuilder" kindref="compound">concepts::InterpolationBuilder</ref>&lt;typename T::BuilderType&gt;&amp;&amp; <ref refid="conceptconcepts_1_1InterpolationEvaluator" kindref="compound">concepts::InterpolationEvaluator</ref>&lt;
-        typename T::EvaluatorType&gt;&amp;&amp; requires(T const&amp; t)
+        typename T::
+                EvaluatorType&gt; &amp;&amp; (<ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;typename T::BuilderType&gt;::rank() == <ref refid="structInterpolationEvaluatorTraits" kindref="compound">InterpolationEvaluatorTraits</ref>&lt;typename T::EvaluatorType&gt;::rank())
+        &amp;&amp; requires(T const&amp; t)
 {
     {
         t.get_builder()
@@ -28,7 +33,7 @@ concept <ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concept
 <para>A concept describing an interpolation object that owns a matching builder–evaluator pair. </para>
     </briefdescription>
     <detaileddescription>
-<para>An <computeroutput>Interpolation</computeroutput> bundles a builder (which converts function values on the interpolation mesh into interpolation coefficients) and an evaluator (which reconstructs function values from those coefficients) into a single owning object.</para>
+<para>An Interpolation bundles a builder (which converts function values on the interpolation mesh into interpolation coefficients) and an evaluator (which reconstructs function values from those coefficients) into a single owning object.</para>
 <para>Concrete models include <ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref> and <ref refid="classLagrangeInterpolator" kindref="compound">LagrangeInterpolator</ref>.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>

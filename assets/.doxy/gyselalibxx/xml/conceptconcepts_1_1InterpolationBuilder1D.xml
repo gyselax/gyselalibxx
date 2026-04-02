@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1InterpolationBuilder1D" kind="concept">
+    <compoundname>concepts::InterpolationBuilder1D</compoundname>
+    <includes refid="i__interpolation__builder_8hpp" local="no">i_interpolation_builder.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Builder</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;class Builder&gt;
+concept <ref refid="conceptconcepts_1_1InterpolationBuilder1D" kindref="compound">concepts::InterpolationBuilder1D</ref> =  InterpolationBuilder&lt;Builder&gt; &amp;&amp;(<ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::rank() == 1)
+          &amp;&amp; requires(
+                  Builder const&amp; b,
+                  typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::interpolation_idx_range_type domain,
+                  Field&lt;typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::data_type,
+                        typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::
+                                template batched_basis_idx_range_type&lt;
+                                        typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;
+                                                Builder&gt;::interpolation_idx_range_type&gt;,
+                        typename Builder::memory_space&gt; coeffs,
+                  ConstField&lt;
+                          typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::data_type,
+                          typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;
+                                  Builder&gt;::interpolation_idx_range_type,
+                          typename Builder::memory_space&gt; vals,
+                  std::optional&lt;ConstField&lt;
+                          typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::data_type,
+                          typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::
+                                  template batched_derivs_idx_range_type&lt;
+                                          typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;
+                                                  Builder&gt;::interpolation_idx_range_type&gt;,
+                          typename Builder::memory_space&gt;&gt; derivs)
+{
+    {b(coeffs, vals, derivs, derivs)};
+    {
+        b.batched_derivs_xmin_domain(domain)
+        } -&gt; std::same_as&lt;
+                typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::
+                        template batched_derivs_idx_range_type&lt;typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;
+                                Builder&gt;::interpolation_idx_range_type&gt;&gt;;
+    {
+        b.batched_derivs_xmax_domain(domain)
+        } -&gt; std::same_as&lt;
+                typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;Builder&gt;::
+                        template batched_derivs_idx_range_type&lt;typename <ref refid="structInterpolationBuilderTraits" kindref="compound">InterpolationBuilderTraits</ref>&lt;
+                                Builder&gt;::interpolation_idx_range_type&gt;&gt;;
+}    </initializer>
+    <briefdescription>
+<para>A concept describing a 1D interpolation builder. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Refines InterpolationBuilder with the additional requirements that:<itemizedlist>
+<listitem><para>The builder operates over exactly one interpolation dimension (rank() == 1).</para>
+</listitem><listitem><para>InterpolationBuilderTraits&lt;Builder&gt;::basis_domain_type is defined, i.e. the builder exposes a discrete dimension for its basis coefficients. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation_builder.hpp" line="207" column="1"/>
+  </compounddef>
+</doxygen>

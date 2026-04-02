@@ -37,6 +37,7 @@ _A builder class for copying data._ [More...](#detailed-description)
 | typedef typename Basis::template Impl&lt; Basis, MemorySpace &gt;::knot\_grid | [**basis\_domain\_type**](#typedef-basis_domain_type)  <br>_The grid on which the interpolation coefficients should be provided._  |
 | typedef ddc::replace\_dim\_of\_t&lt; BatchedInterpolationIdxRange, [**interpolation\_grid\_type**](classIdentityInterpolationBuilder.md#typedef-interpolation_grid_type), [**basis\_domain\_type**](classIdentityInterpolationBuilder.md#typedef-basis_domain_type) &gt; | [**batched\_basis\_idx\_range\_type**](#typedef-batched_basis_idx_range_type)  <br>_The batched domain type with interpolation\_grid\_type replaced by basis\_domain\_type._  |
 | typedef ddc::replace\_dim\_of\_t&lt; BatchedInterpolationIdxRange, [**interpolation\_grid\_type**](classIdentityInterpolationBuilder.md#typedef-interpolation_grid_type), [**deriv\_type**](classIdentityInterpolationBuilder.md#typedef-deriv_type) &gt; | [**batched\_derivs\_idx\_range\_type**](#typedef-batched_derivs_idx_range_type)  <br>_The batched domain type with interpolation\_grid\_type replaced by deriv\_type._  |
+| typedef IdxRange&lt; [**basis\_domain\_type**](classIdentityInterpolationBuilder.md#typedef-basis_domain_type) &gt; | [**coeff\_idx\_range\_type**](#typedef-coeff_idx_range_type)  <br>_The index range for the interpolation coefficients._  |
 | typedef typename InterpolationGrid::continuous\_dimension\_type | [**continuous\_dimension\_type**](#typedef-continuous_dimension_type)  <br>_The type of the interpolation continuous dimension (continuous dimension of interest) used by this class._  |
 | typedef DataType | [**data\_type**](#typedef-data_type)  <br>_The data type that the data is saved on._  |
 | typedef ddc::Deriv&lt; [**continuous\_dimension\_type**](classIdentityInterpolationBuilder.md#typedef-continuous_dimension_type) &gt; | [**deriv\_type**](#typedef-deriv_type)  <br>_The type of the Deriv dimension at the boundaries._  |
@@ -166,6 +167,20 @@ using IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, Interpolat
 _The batched domain type with interpolation\_grid\_type replaced by deriv\_type._ 
 ```C++
 using IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis >::batched_derivs_idx_range_type =  ddc:: replace_dim_of_t<BatchedInterpolationIdxRange, interpolation_grid_type, deriv_type>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef coeff\_idx\_range\_type 
+
+_The index range for the interpolation coefficients._ 
+```C++
+using IdentityInterpolationBuilder< ExecSpace, MemorySpace, DataType, InterpolationGrid, Basis >::coeff_idx_range_type =  IdxRange<basis_domain_type>;
 ```
 
 
