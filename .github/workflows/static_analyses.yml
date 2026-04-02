@@ -148,10 +148,12 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v6
+        with:
+          submodules: recursive
       - name: Set up Python
         uses: actions/setup-python@v6
         with:
-          submodules: recursive
+          python-version: 3.12
       - uses: ./.github/actions/linux_static_analysis_install
       - uses: ./.github/actions/test_filter
       - run: |
