@@ -35,10 +35,6 @@ option(GYSELALIBXX_COMPILE_SOURCE "Enable compilation of the source code (this s
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Gyselalib++")
 option(ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
 
-set(GYSELALIBXX_DEPENDENCY_POLICIES "AUTO" "EMBEDDED" "INSTALLED")
-
-set(GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES ${GYSELALIBXX_BUILD_TESTING} CACHE BOOL "Indicates if the testing dependencies should be included. By default they are only included if the tests are built.")
-
 ###############################################################################################
 #                                     Get dependencies
 ###############################################################################################
@@ -62,23 +58,7 @@ find_package(paraconf 1.0.0...<2 REQUIRED COMPONENTS C)
 ### Look for a pre-installed PDI
 find_package(PDI 1.10.1...<2 REQUIRED COMPONENTS C)
 
-## if tests are enabled, use googletest from `vendor/`
-### we use it to write unit tests
-if("${GYSELALIBXX_INCLUDE_TESTING_DEPENDENCIES}")
-  set(GYSELALIBXX_GTest_DEPENDENCY_POLICY "AUTO" CACHE STRING "Policy to find the `GTest` package. Options: ${GYSELALIBXX_DEPENDENCY_POLICIES}")
-  set_property(CACHE GYSELALIBXX_GTest_DEPENDENCY_POLICY PROPERTY STRINGS ${GYSELALIBXX_DEPENDENCY_POLICIES})
-
-  if("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "AUTO")
-    find_package(GTest "1.12" QUIET)
-    if(NOT "${GTest_FOUND}")
-      add_subdirectory(vendor/googletest SYSTEM)
-    endif()
-  elseif("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "EMBEDDED")
-    add_subdirectory(vendor/googletest SYSTEM)
-  elseif("${GYSELALIBXX_GTest_DEPENDENCY_POLICY}" STREQUAL "INSTALLED")
-    find_package(GTest "1.12" REQUIRED)
-  endif()
-endif()
+find_package(GTest 1.12 REQUIRED)
 
 find_package(Kokkos 4.4.1...<5 REQUIRED)
 
