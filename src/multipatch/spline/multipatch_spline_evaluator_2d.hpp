@@ -400,7 +400,7 @@ public:
         static_assert((std::is_same_v<InterestDim, Dim1>) || (std::is_same_v<InterestDim, Dim2>));
         if constexpr (std::is_same_v<InterestDim, Dim1>) {
             return deriv_dim_1(coord_eval, patches_splines);
-        } else if constexpr (std::is_same_v<InterestDim, Dim2>) {
+        } else {
             return deriv_dim_2(coord_eval, patches_splines);
         }
     }
@@ -618,7 +618,7 @@ private:
                 return m_extrapolation_rule(coord, patches_splines, patch_idx);
             } else {
                 Kokkos::abort("The spline derivatives cannot be evaluated at coordinates "
-                              "outside of the domain.");
+                              "outside of the domain.");// cppcheck-suppress missingReturn
             }
         } else {
             if (patch_idx == TestPatchIdx) {
