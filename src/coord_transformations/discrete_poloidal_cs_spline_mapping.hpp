@@ -14,7 +14,7 @@
 /**
  * @brief A class for describing discrete 2D mappings from the logical domain to the physical domain.
  *
- * The mapping describe here is only defined on a grid. The DiscreteToCartesian class decomposes the mapping
+ * The mapping describe here is only defined on a grid. The DiscretePoloidalCSSplineMapping class decomposes the mapping
  * on B-splines to evaluate it on the physical domain.
  *
  * @f$ x(r,\theta) = \sum_k c_{x,k} B_k(r,\theta),@f$
@@ -30,7 +30,7 @@ template <
         class R = typename SplineEvaluator::continuous_dimension_type1,
         class Theta = typename SplineEvaluator::continuous_dimension_type2,
         class MemorySpace = typename SplineEvaluator::memory_space>
-class DiscreteToCartesian
+class DiscretePoloidalCSSplineMapping
 {
     static_assert(std::is_same_v<MemorySpace, typename SplineEvaluator::memory_space>);
 
@@ -90,14 +90,14 @@ private:
 
 public:
     /**
-     * @brief Instantiate a DiscreteToCartesian from the coefficients of 2D splines approximating the mapping.
+     * @brief Instantiate a DiscretePoloidalCSSplineMapping from the coefficients of 2D splines approximating the mapping.
      *
      * A discrete mapping is a mapping whose values are known only at the mesh points of the grid.
-     * To interpolate the mapping, we use B-splines. The DiscreteToCartesian mapping is initialised
+     * To interpolate the mapping, we use B-splines. The DiscretePoloidalCSSplineMapping mapping is initialised
      * from the coefficients in front of the basis splines which arise when we approximate the
      * functions @f$ x(r,\theta) @f$, and @f$ y(r,\theta) @f$ (with @f$ x @f$ and @f$ y @f$ the physical dimensions in
      * the logical domain) with Splines (using SplineBuilder2D). Then to interpolate the mapping,
-     * we will evaluate the decomposed functions on B-splines (see DiscreteToCartesian::operator()).
+     * we will evaluate the decomposed functions on B-splines (see DiscretePoloidalCSSplineMapping::operator()).
 
      *
      * Here, the evaluator is given as input.
@@ -116,10 +116,10 @@ public:
      *
      *
      * @see SplineBuilder2D
-     * @see DiscreteToCartesian::operator()
+     * @see DiscretePoloidalCSSplineMapping::operator()
      * @see SplineBoundaryValue
      */
-    DiscreteToCartesian(
+    DiscretePoloidalCSSplineMapping(
             SplineType curvilinear_to_x,
             SplineType curvilinear_to_y,
             SplineEvaluator const& evaluator,
@@ -456,18 +456,20 @@ template <
         class ExecSpace>
 struct MappingAccessibility<
         ExecSpace,
-        DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
+        DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
 {
     static constexpr bool value = Kokkos::SpaceAccessibility<ExecSpace, MemorySpace>::accessible;
 };
 
 template <class X, class Y, class SplineEvaluator, class R, class Theta, class MemorySpace>
-struct HasOPoint<DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>> : std::true_type
+struct HasOPoint<DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
+    : std::true_type
 {
 };
 
 template <class X, class Y, class SplineEvaluator, class R, class Theta, class MemorySpace>
-struct SingularOPointInvJacobian<DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
+struct SingularOPointInvJacobian<
+        DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator, R, Theta, MemorySpace>>
     : std::true_type
 {
 };
