@@ -44,6 +44,7 @@ if __name__ == '__main__':
            '--library=googletest', '--max-ctu-depth=5', '--check-level=exhaustive',
            '--std=c++17', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
            '--suppress=knownConditionTrueFalse', '--suppress=ctuOneDefinitionRuleViolation',
+           '--inline-suppr',
            f'--addon={GYSELALIB_ROOT}/bin/ci_tools/check_naming_conventions',
            f'--addon={GYSELALIB_ROOT}/bin/ci_tools/check_for_memory_misuse',
            f'--project={build_dir}/relevant_compile_commands.json']
