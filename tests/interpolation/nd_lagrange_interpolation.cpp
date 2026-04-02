@@ -227,9 +227,9 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
     FieldMem<DataType, IdxRange<GridX, GridY>> vals_alloc("vals", idx_range);
     fill_polynomial_2d(get_field(vals_alloc), coeffs_x, coeffs_y);
     Builder const builder;
-    using CoeffIdxRange = InterpolationBuilderTraits<
+    using IdxRangeCoeff = InterpolationBuilderTraits<
             Builder>::template batched_basis_idx_range_type<IdxRange<GridX, GridY>>;
-    FieldMem<DataType, CoeffIdxRange>
+    FieldMem<DataType, IdxRangeCoeff>
             poly_coeffs_alloc("coeffs", batched_basis_idx_range(builder, idx_range));
     builder(get_field(poly_coeffs_alloc), get_const_field(vals_alloc));
 
@@ -493,11 +493,11 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
 
     // Build coefficients via the identity builder
     Builder const builder;
-    using CoeffIdxRange = InterpolationBuilderTraits<
+    using IdxRangeCoeff = InterpolationBuilderTraits<
             Builder>::template batched_basis_idx_range_type<IdxRange<GridX, GridY>>;
-    static_assert(std::is_same_v<IdxRange<LagKnotsX, LagKnotsY>, CoeffIdxRange>);
-    CoeffIdxRange knot_idx_range(batched_basis_idx_range(builder, idx_range));
-    FieldMem<DataType, CoeffIdxRange> coeffs_alloc("coeffs", knot_idx_range);
+    static_assert(std::is_same_v<IdxRange<LagKnotsX, LagKnotsY>, IdxRangeCoeff>);
+    IdxRangeCoeff knot_idx_range(batched_basis_idx_range(builder, idx_range));
+    FieldMem<DataType, IdxRangeCoeff> coeffs_alloc("coeffs", knot_idx_range);
     builder(get_field(coeffs_alloc), get_const_field(vals_alloc));
 
     // Check 1: wrap-around coefficients.
