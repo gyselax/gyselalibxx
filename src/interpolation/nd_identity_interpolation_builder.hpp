@@ -141,8 +141,8 @@ private:
     template <std::size_t DimIdx = 0, class IdxRangeFull, class CoeffField>
     void copy_periodic_data(CoeffField coeffs, IdxRangeFull filled_index_range) const
     {
-        using CurrentGrid = ddc::type_seq_element_t < DimIdx,
-              ddc::to_type_seq_t<IdxRangeInterpolation>;
+        using CurrentGrid
+                = ddc::type_seq_element_t<DimIdx, ddc::to_type_seq_t<IdxRangeInterpolation>>;
         IdxRangeFull new_filled_index_range
                 = copy_periodic_data_on_dim<CurrentGrid>(coeffs, filled_index_range);
         if constexpr (DimIdx + 1 < IdxRangeInterpolation::rank()) {
