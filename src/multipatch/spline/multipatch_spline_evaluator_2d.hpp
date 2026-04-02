@@ -617,8 +617,9 @@ private:
                 replace_periodic_coord_inside<AnyPatch>(coord);
                 return m_extrapolation_rule(coord, patches_splines, patch_idx);
             } else {
-                Kokkos::abort("The spline derivatives cannot be evaluated at coordinates "
-                              "outside of the domain."); // cppcheck-suppress missingReturn
+                Kokkos::abort( // cppcheck-suppress missingReturn
+                        "The spline derivatives cannot be evaluated at coordinates "
+                        "outside of the domain.");
             }
         } else {
             if (patch_idx == TestPatchIdx) {
