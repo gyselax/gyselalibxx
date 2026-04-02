@@ -11,7 +11,7 @@ add_test(NAME TestSimulationBumpontailFFT
 set_property(TEST TestSimulationBumpontailFFT PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationBumpontailFFT PROPERTY COST 100)
 
-if (${ACTIVATE_RESTART_TESTS})
+if (${GYSELALIBXX_ACTIVATE_RESTART_TESTS})
     add_test(NAME TestSimulationBumpontailRestartFFT_XVx
         COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_bumpontail_restart.sh"
             "${PROJECT_SOURCE_DIR}"
@@ -33,7 +33,7 @@ add_test(NAME TestSimulationBumpontailFemUniform_xperiod_vx
 set_property(TEST TestSimulationBumpontailFemUniform_xperiod_vx PROPERTY TIMEOUT 250)
 set_property(TEST TestSimulationBumpontailFemUniform_xperiod_vx PROPERTY COST 100)
 
-if (${ACTIVATE_RESTART_TESTS})
+if (${GYSELALIBXX_ACTIVATE_RESTART_TESTS})
     add_test(NAME TestSimulationBumpontailRestartFemUniform_xperiod_vx
         COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_bumpontail_restart.sh"
             "${PROJECT_SOURCE_DIR}"

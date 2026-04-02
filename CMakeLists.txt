@@ -6,16 +6,10 @@ cmake_minimum_required(VERSION 3.25)
 file(READ "${CMAKE_CURRENT_SOURCE_DIR}/src/version.txt" GYSELALIBXX_VERSION_STRING)
 string(STRIP "${GYSELALIBXX_VERSION_STRING}" GYSELALIBXX_VERSION_STRING)
 
-# Split into components
-string(REPLACE "." ";" VERSION_LIST ${GYSELALIBXX_VERSION_STRING})
-list(GET VERSION_LIST 0 GYSELALIBXX_VERSION_MAJOR)
-list(GET VERSION_LIST 1 GYSELALIBXX_VERSION_MINOR)
-list(GET VERSION_LIST 2 GYSELALIBXX_VERSION_PATCH)
-
 # Set project language and version
 project(gyselalibxx
     LANGUAGES C CXX
-    VERSION ${GYSELALIBXX_VERSION_MAJOR}.${GYSELALIBXX_VERSION_MINOR}.${GYSELALIBXX_VERSION_PATCH})
+    VERSION ${GYSELALIBXX_VERSION_STRING})
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
 
@@ -33,7 +27,7 @@ option(GYSELALIBXX_BUILD_TESTING "Build the tests." ON)
 option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
 option(GYSELALIBXX_COMPILE_SOURCE "Enable compilation of the source code (this should be set to off to build documentation without the C++ dependencies)" ON)
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Gyselalib++")
-option(ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
+option(GYSELALIBXX_ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
 
 ###############################################################################################
 #                                     Get dependencies
@@ -46,16 +40,12 @@ if ("${GYSELALIBXX_COMPILE_SOURCE}")
 ## Use CTest for running tests
 include(CTest)
 
-## Look for a pre-installed LAPACK
 find_package(LAPACK REQUIRED)
 
-## Look for a pre-installed MPI
 find_package(MPI REQUIRED)
 
-## Look for a pre-installed paraconf
 find_package(paraconf 1.0.0...<2 REQUIRED COMPONENTS C)
 
-### Look for a pre-installed PDI
 find_package(PDI 1.10.1...<2 REQUIRED COMPONENTS C)
 
 find_package(GTest 1.12 REQUIRED)
