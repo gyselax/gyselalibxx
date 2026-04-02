@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a `NDLagrangeEvaluator` class.
 - Add `eval_basis_and_n_derivs` function to Lagrange basis operators.
 - Add `deriv` function to Lagrange evaluation.
+- Add a `NDIdentityInterpolationBuilder` class.
 
 ### Fixed
 
