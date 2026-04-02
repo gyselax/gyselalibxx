@@ -136,7 +136,7 @@ void fill_polynomial_2d(
 
 } // namespace
 
-//TYPED_TEST_SUITE(NDLagrangeNonPeriodicFixture, Cases);
+TYPED_TEST_SUITE(NDLagrangeNonPeriodicFixture, Cases);
 TYPED_TEST_SUITE(NDLagrangePeriodicFixture, Cases);
 
 /**
