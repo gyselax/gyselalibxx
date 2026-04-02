@@ -48,8 +48,8 @@
 template <
         class IdxRangeBatched,
         class TimeStepperBuilder,
-        class LogicalToPhysicalMapping,
-        class LogicalToPseudoPhysicalMapping,
+        concepts::Mapping LogicalToPhysicalMapping,
+        concepts::AnalyticalMapping LogicalToPseudoPhysicalMapping,
         class SplineRThetaBuilderAdvection,
         class SplineRThetaEvaluatorAdvection>
 class SplinePolarFootFinder
@@ -61,9 +61,6 @@ class SplinePolarFootFinder
               typename SplineRThetaBuilderAdvection::memory_space>
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
-    static_assert(is_mapping_v<LogicalToPhysicalMapping>);
-    static_assert(is_mapping_v<LogicalToPseudoPhysicalMapping>);
-    static_assert(is_analytical_mapping_v<LogicalToPseudoPhysicalMapping>);
     static_assert(std::is_same_v<
                   typename SplineRThetaBuilderAdvection::memory_space,
                   typename SplineRThetaEvaluatorAdvection::memory_space>);
@@ -80,13 +77,13 @@ class SplinePolarFootFinder
                   typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
                   ddc::to_type_seq_t<IdxRangeBatched>>);
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmin == 0,
+            SplineRThetaBuilderAdvection::builder_type1::s_nbe_xmin == 0,
             "This class is designed to work with a spline builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "
             "check the choice of boundary conditions).");
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_nbc_xmax == 0,
+            SplineRThetaBuilderAdvection::builder_type1::s_nbe_xmax == 0,
             "This class is designed to work with a spline builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "
@@ -123,8 +120,11 @@ public:
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
 
-private:
+public:
+    /// @brief Execution space.
     using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
+
+private:
     using MemSpace = typename ExecSpace::memory_space;
     /**
      * @brief Tag the first dimension in the advection domain.
@@ -325,7 +325,9 @@ public:
         std::function<void(CFieldFeet, DVectorConstFieldAdvection, double)> update_function
                 = [&](CFieldFeet feet, DVectorConstFieldAdvection advection_field, double dt) {
                       // Compute the characteristic feet at t^n:
+                      const std::source_location location = std::source_location::current();
                       ddc::parallel_for_each(
+                              location.function_name(),
                               ExecSpace(),
                               get_idx_range(feet),
                               KOKKOS_LAMBDA(IdxOperator const idx) {
@@ -376,7 +378,7 @@ public:
      *
      */
     template <class T>
-    void is_unified(Field<T, IdxRangeOperator, memory_space> const& values) const
+    static void is_unified(Field<T, IdxRangeOperator, memory_space> const& values)
     {
         IdxRangeOperator full_idx_range = get_idx_range(values);
         IdxRangeBatch const batched_idx_range(full_idx_range);
@@ -385,7 +387,9 @@ public:
         IdxR r0_idx = r_idx_range.front();
         IdxTheta theta0_idx = theta_idx_range.front();
         if (Kokkos::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     ExecSpace(),
                     batched_idx_range,
                     KOKKOS_LAMBDA(const IdxBatch ib) {
@@ -417,7 +421,7 @@ public:
      *      The table of values we want to unify at the central point.
      */
     template <class T>
-    void unify_value_at_centre_pt(Field<T, IdxRangeOperator, memory_space> values) const
+    static void unify_value_at_centre_pt(Field<T, IdxRangeOperator, memory_space> values)
     {
         IdxRangeOperator full_idx_range = get_idx_range(values);
         IdxRangeBatch const batched_idx_range(full_idx_range);
@@ -426,7 +430,9 @@ public:
         IdxR r0_idx = r_idx_range.front();
         IdxTheta theta0_idx = theta_idx_range.front();
         if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     ExecSpace(),
                     batched_idx_range,
                     KOKKOS_LAMBDA(const IdxBatch ib) {

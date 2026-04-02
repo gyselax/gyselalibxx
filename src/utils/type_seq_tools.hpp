@@ -192,6 +192,21 @@ public:
     using type = ddc::detail::TypeSeq<get_element<Is>...>;
 };
 
+template <template <typename P> typename Condition, class... T>
+class GetFirst;
+
+template <template <typename P> typename Condition, class First, class... T>
+class GetFirst<Condition, First, T...>
+{
+    using type = std::conditional_t<Condition<First>::value, First, GetFirst<Condition, T...>>;
+};
+
+template <template <typename P> typename Condition>
+class GetFirst<Condition>
+{
+    using type = void;
+};
+
 } // namespace detail
 
 /// A tool to get a subset of a TypeSeq by slicing [Start:End]
@@ -232,8 +247,7 @@ constexpr bool type_seq_has_unique_elements_v
 /**
  * @brief Determine if the permutation parity of a type sequence.
  * @tparam TypeSeqType The type sequence whose permutation parity is calculated.
- * @tparam OrderedTypeSeq The final order of the indices.whose permutation parity is calculated.
- * @tparam OrderedTypeSeq The final order of the indices.
+ * @tparam OrderedTypeSeq The final order of the indices whose permutation parity is calculated.
  */
 template <class TypeSeqType, class OrderedTypeSeq>
 constexpr int type_seq_permutation_parity_v
@@ -255,3 +269,11 @@ using type_seq_duplicate_t =
  */
 template <class CoordType, class IdxRangeType>
 using find_idx_t = typename detail::FindIdxType<CoordType, IdxRangeType>::type;
+
+/**
+ * @brief Get the first type which satisfies the condition.
+ * @tparam Condition The condition that must be satisfied.
+ * @tparam T The possible types
+ */
+template <template <typename P> typename Condition, class... T>
+using get_first_t = typename detail::GetFirst<Condition, T...>::type;

@@ -400,7 +400,7 @@ public:
         static_assert((std::is_same_v<InterestDim, Dim1>) || (std::is_same_v<InterestDim, Dim2>));
         if constexpr (std::is_same_v<InterestDim, Dim1>) {
             return deriv_dim_1(coord_eval, patches_splines);
-        } else if constexpr (std::is_same_v<InterestDim, Dim2>) {
+        } else {
             return deriv_dim_2(coord_eval, patches_splines);
         }
     }
@@ -526,7 +526,9 @@ public:
                 typename batched_evaluation_idx_range_type<StoringPatch>::discrete_element_type;
         batched_evaluation_idx_range_type<StoringPatch> idx_range = get_idx_range(patch_values);
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 idx_range,
                 KOKKOS_CLASS_LAMBDA(Index const& idx) {
@@ -572,7 +574,9 @@ public:
         ddc::integrals(exec_space(), values1);
         ddc::integrals(exec_space(), values2);
 
+        const std::source_location location = std::source_location::current();
         integral = ddc::parallel_transform_reduce(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(spline_coef),
                 0.0,
@@ -613,8 +617,9 @@ private:
                 replace_periodic_coord_inside<AnyPatch>(coord);
                 return m_extrapolation_rule(coord, patches_splines, patch_idx);
             } else {
-                Kokkos::abort("The spline derivatives cannot be evaluated at coordinates "
-                              "outside of the domain.");
+                Kokkos::abort( // cppcheck-suppress missingReturn
+                        "The spline derivatives cannot be evaluated at coordinates "
+                        "outside of the domain.");
             }
         } else {
             if (patch_idx == TestPatchIdx) {
@@ -669,12 +674,12 @@ private:
             using TargetMapping = typename PatchLocator::
                     template get_mapping_on_logical_dim_t<TargetDim1, TargetDim2>;
 
-            static_assert(is_curvilinear_2d_mapping_v<CurrentMapping>);
+            static_assert(is_coord_transform_with_o_point_v<CurrentMapping>);
             static_assert((std::is_same_v<
                            Coord<typename CurrentMapping::curvilinear_tag_r,
                                  typename CurrentMapping::curvilinear_tag_theta>,
                            Coord<CurrentDim1, CurrentDim2>>));
-            static_assert(is_curvilinear_2d_mapping_v<TargetMapping>);
+            static_assert(is_coord_transform_with_o_point_v<TargetMapping>);
             static_assert((std::is_same_v<
                            Coord<typename TargetMapping::curvilinear_tag_r,
                                  typename TargetMapping::curvilinear_tag_theta>,

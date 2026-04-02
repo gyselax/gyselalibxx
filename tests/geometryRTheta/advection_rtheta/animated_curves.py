@@ -183,7 +183,7 @@ explanations  = """
 
 
 # Get the inputs -----------------------------------------------
-executable, yaml_parameters, _, verbose = set_input(0, 1, 60, 120, 0.01, 0.8,  True, False)
+executable, yaml_parameters, _, verbose = set_input(0, 1, 60, 120, 0.01, 0.8, curves_def=True, feet_def=False)
 
 executable_name = os.path.basename(executable)
 

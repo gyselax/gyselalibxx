@@ -13,12 +13,13 @@
 #include "bsl_advection_polar.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "itimesolver.hpp"
 #include "l_norm_tools.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
 #include "rk2.hpp"
+#include "spline_definitions_r_theta.hpp"
 
 /**
  * @brief Predictor-corrector for the Vlasov-Poisson equations.
@@ -36,12 +37,12 @@
  * for @f$ n \geq 0 @f$,
  *
  * First, it advects on a half time step:
- * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
  * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^{n+1/2}@f$ with a BslAdvectionPolar on @f$\frac{dt}{2}@f$;
  *
  * Secondly, it advects on a full time step:
- * - 4. From @f$\rho^{n+1/2}@f$, it computes @f$\phi^{n+1/2}@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 4. From @f$\rho^{n+1/2}@f$, it computes @f$\phi^{n+1/2}@f$ with a PolarPoissonLikeSolver;
  * - 5. From @f$\phi^{n+1/2}@f$, it computes @f$A^{n+1/2}@f$ with a AdvectionFieldFinder;
  * - 6. From @f$\rho^n@f$ and @f$A^{n+1/2}@f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionPolar on @f$dt@f$.
  *
@@ -49,29 +50,25 @@
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  * @tparam FootFinder
  *      A IFootFinder class.
+ * @tparam PolarPoissonLikeSolver
+ *      The type of the solver for the Poisson-like equation on the polar plane.
  *
  */
-template <class Mapping, class FootFinder>
+template <class Mapping, class FootFinder, class PolarPoissonLikeSolver>
 class BslPredCorrRTheta : public ITimeSolverRTheta
 {
     using BslAdvectionRTheta = BslAdvectionPolar<
             FootFinder,
             Mapping,
-            PreallocatableSplineInterpolator2D<
-                    SplineRThetaBuilder,
-                    SplineRThetaEvaluatorNullBound,
-                    IdxRangeRTheta>>;
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound>;
 
 private:
     Mapping const& m_mapping;
 
     BslAdvectionRTheta const& m_advection_solver;
 
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorNullBound const& m_spline_evaluator;
@@ -100,11 +97,7 @@ public:
             BslAdvectionRTheta const& advection_solver,
             SplineRThetaBuilder const& builder,
             SplineRThetaEvaluatorNullBound const& rhs_evaluator,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver)
+            PolarPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_advection_solver(advection_solver)
         , m_poisson_solver(poisson_solver)

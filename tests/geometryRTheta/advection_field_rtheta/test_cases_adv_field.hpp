@@ -6,7 +6,7 @@
 
 #include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "math_tools.hpp"
 #include "polar_spline_evaluator.hpp"
 
@@ -180,7 +180,7 @@ public:
  *
  * @f$ A(x,y) = J_{\mathcal{F}}[v^r, v^\theta] = [-\partial_y \phi, \partial_x \phi]^T @f$,
  *
- * with @f$ v^r @f$ and @f$ v^\theta @f$ constants composants in the contravariant basis 
+ * with @f$ v^r @f$ and @f$ v^\theta @f$ constants components in the contravariant basis 
  * and @f$\mathcal{F}@f$ the circular mapping.
  * 
  * An adapted electrostatic potential for  @f$ v^r = 0 @f$ is 

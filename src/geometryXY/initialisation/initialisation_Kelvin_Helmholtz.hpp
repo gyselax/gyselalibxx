@@ -4,7 +4,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_xy.hpp"
 
 
 /**
@@ -50,7 +50,9 @@ public:
         double const epsilon_proxy = m_epsilon;
         double const mode_k_proxy = m_mode_k;
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 idx_range,
                 KOKKOS_LAMBDA(IdxXY const i_xy) {

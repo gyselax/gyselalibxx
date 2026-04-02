@@ -5,6 +5,7 @@ extend-ignore-re = ["capitalize()",
                     "PDI_[^(\\s]*",
                     "CMAKE_\\S*",
                     "ddc::[^(\\s]*",
+                    "Kokkos::[^(\\s]*",
                     "gko_exec->\\S*",
                     "on_finalize:",
                     "colors.Normalize",
@@ -25,6 +26,7 @@ extend-ignore-identifiers-re = [
 [default.extend-words]
 # Don't correct these word (parts)
 iy = "iy"
+iz = "iz"
 ND = "ND"
 Strang = "Strang"
 Ax = "Ax"

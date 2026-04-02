@@ -2,7 +2,7 @@
 
 #pragma once
 
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 
 /**
  * @brief An abstract class for solving a Boltzmann equation.

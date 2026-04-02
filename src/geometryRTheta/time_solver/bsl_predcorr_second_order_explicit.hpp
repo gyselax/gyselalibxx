@@ -14,10 +14,11 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_polar_foot_finder.hpp"
 
 
@@ -39,14 +40,14 @@
  * for @f$ n \geq 0 @f$,
  *
  * First, it predicts:
- * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
  * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^P@f$ with a BslAdvectionPolar on @f$ dt @f$;
  *
  * We write @f$X^P@f$ the characteristic feet such that @f$\partial_t X^P = A^n(X^n)@f$.
  *
  * Secondly, it corrects:
- * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarPoissonLikeSolver;
  * - 5. From @f$\phi^P@f$, it computes @f$A^P@f$ with a AdvectionFieldFinder;
  * - 6. From @f$\rho^n@f$ and @f$\frac{A^{P}(X^n) + A^n(X^P)}{2} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionPolar on @f$ dt @f$.
  *
@@ -56,8 +57,13 @@
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  * @tparam LogicalToPseudoPhysicalMapping
  *      A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates.
+ * @tparam PolarPoissonLikeSolver
+ *      The type of the solver for the Poisson-like equation on the polar plane.
  */
-template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
+template <
+        class LogicalToPhysicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class PolarPoissonLikeSolver>
 class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -72,10 +78,8 @@ private:
     using BslAdvectionRTheta = BslAdvectionPolar<
             SplinePolarFootFinderType,
             LogicalToPhysicalMapping,
-            PreallocatableSplineInterpolator2D<
-                    SplineRThetaBuilder,
-                    SplineRThetaEvaluatorNullBound,
-                    IdxRangeRTheta>>;
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound>;
 
 
     LogicalToPhysicalMapping const& m_logical_to_physical;
@@ -85,11 +89,7 @@ private:
     EulerBuilder const m_euler;
     SplinePolarFootFinderType const m_find_feet;
 
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorConstBound const& m_evaluator;
@@ -123,11 +123,7 @@ public:
             BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver,
+            PolarPoissonLikeSolver const& poisson_solver,
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
@@ -249,7 +245,9 @@ public:
             m_advection_solver(get_field(density_predicted_alloc), advection_field, dt);
 
             // --- advect also the feet because it is needed for the next step
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -293,6 +291,7 @@ public:
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {

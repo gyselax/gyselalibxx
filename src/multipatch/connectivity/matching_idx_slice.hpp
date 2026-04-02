@@ -172,7 +172,7 @@ private:
             std::vector<Idx<EdgeGrid2>>& conforming_idx_vec_2)
     {
         EdgeTransformation<Interface> edge_transformation(m_idx_range_edge_1, m_idx_range_edge_2);
-        ddc::for_each(m_idx_range_edge_1, [&](Idx<EdgeGrid1> const& idx_1) {
+        ddc::host_for_each(m_idx_range_edge_1, [&](Idx<EdgeGrid1> const& idx_1) {
             Idx<EdgeGrid2> idx_2 = edge_transformation.template search_for_match<EdgeGrid2>(idx_1);
             if (idx_2 != out_of_bounds_idx<EdgeGrid2>) {
                 conforming_idx_vec_1.push_back(idx_1);

@@ -3,8 +3,8 @@
 #include <gtest/gtest.h>
 
 #include "bsl_advection_x.hpp"
-#include "geometry.hpp"
-#include "spline_interpolator.hpp"
+#include "geometry_xvx.hpp"
+#include "spline_definitions_xvx.hpp"
 
 
 
@@ -53,7 +53,7 @@ double SpatialAdvection(
     ddc::init_discrete_space<Species>(std::move(charges_host), std::move(masses_host));
     // Initialisation of the distribution function
     host_t<DFieldMemSpXVx> allfdistribu_host(meshSpXVx);
-    ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
+    ddc::host_for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
         IdxX const ix = ddc::select<GridX>(ispxvx);
         allfdistribu_host(ispxvx) = cos(ddc::coordinate(ix));
     });
@@ -68,7 +68,7 @@ double SpatialAdvection(
     advection_x(get_field(allfdistribu), timestep);
     ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
 
-    ddc::for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
+    ddc::host_for_each(meshSpXVx, [&](IdxSpXVx const ispxvx) {
         IdxX const ix = ddc::select<GridX>(ispxvx);
         IdxVx const ivx = ddc::select<GridVx>(ispxvx);
         double const err = std::abs(
@@ -77,7 +77,7 @@ double SpatialAdvection(
         Error.push_back(err);
     });
 
-    double const m_advection_error = ddc::transform_reduce(
+    double const m_advection_error = ddc::host_transform_reduce(
             meshSpXVx,
             0.0,
             ddc::reducer::max<double>(),
@@ -96,13 +96,9 @@ TEST(SpatialAdvection, SplineBatched)
 {
     auto [idx_range_x, idx_range_vx] = Init_idx_range_spatial_adv();
     IdxRangeXVx meshXVx(idx_range_x, idx_range_vx);
-    SplineXBuilder const builder_x(idx_range_x);
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, meshXVx);
-    BslAdvectionSpatial<GeometryXVx, GridX> const spline_advection_x(spline_x_interpolator);
+    SplineInterpolatorX spline_interpolation(idx_range_x);
+    BslAdvectionSpatial<GeometryXVx, SplineInterpolatorX> const spline_advection_x(
+            spline_interpolation);
     double const err
             = SpatialAdvection<GeometryXVx, GridX>(spline_advection_x, idx_range_x, idx_range_vx);
     EXPECT_LE(err, 1.e-6);

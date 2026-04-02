@@ -7,6 +7,7 @@
 [![Issues](https://img.shields.io/github/issues/gyselax/gyselalibxx)](https://github.com/gyselax/gyselalibxx/issues)
 [![codecov](https://codecov.io/gh/gyselax/gyselalibxx/branch/devel/graph/badge.svg)](https://codecov.io/gh/gyselax/gyselalibxx)
 [![CPU acceptance tests](https://github.com/gyselax/gyselalibxx/actions/workflows/cpu_tests.yml/badge.svg)](https://github.com/gyselax/gyselalibxx/actions/workflows/cpu_tests.yml)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.08582/status.svg)](https://doi.org/10.21105/joss.08582)
 
 Gyselalib++ is a library that provides functionality for solving kinetic and gyrokinetic problems on exascale computing architectures.
 

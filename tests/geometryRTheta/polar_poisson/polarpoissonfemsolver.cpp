@@ -12,35 +12,39 @@
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
-#include "geometry.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
+#include "geometry_r_theta.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "test_cases.hpp"
-
-
-using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
-        GridR,
-        GridTheta,
-        PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound>;
 
 #if defined(CIRCULAR_MAPPING)
 using Mapping = CircularToCartesian<R, Theta, X, Y>;
 #elif defined(CZARNY_MAPPING)
 using Mapping = CzarnyToCartesian<R, Theta, X, Y>;
 #endif
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorNullBound>;
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorNullBound>;
 
-using DiscreteMappingBuilder_host = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder_host = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorNullBound_host>;
+
+using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
+        GridR,
+        GridTheta,
+        PolarBSplinesRTheta,
+        SplineRThetaEvaluatorNullBound,
+        typename DiscreteMappingBuilder::MappingType>;
 
 #if defined(CURVILINEAR_SOLUTION)
 using LHSFunction = CurvilinearSolution<Mapping>;
@@ -122,7 +126,7 @@ int main(int argc, char** argv)
 
     DiscreteMappingBuilder const
             discrete_mapping_builder(Kokkos::DefaultExecutionSpace(), mapping, builder, evaluator);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
@@ -174,11 +178,11 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver
-            solver(get_const_field(coeff_alpha_spline),
-                   get_const_field(coeff_beta_spline),
-                   discrete_mapping,
-                   evaluator);
+    PoissonSolver solver(discrete_mapping, evaluator);
+
+    solver.update_coefficients(
+            get_const_field(coeff_alpha_spline),
+            get_const_field(coeff_beta_spline));
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Poisson initialisation time : "
@@ -192,7 +196,7 @@ int main(int argc, char** argv)
     DFieldMemRTheta result_alloc(grid);
     DField<IdxRangeRTheta> result = get_field(result_alloc);
 
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         coords(irtheta) = CoordRTheta(
                 ddc::coordinate(ddc::select<GridR>(irtheta)),
                 ddc::coordinate(ddc::select<GridTheta>(irtheta)));
@@ -202,7 +206,7 @@ int main(int argc, char** argv)
         Spline2DMem rhs_spline(idx_range_bsplinesRTheta);
         host_t<DFieldMemRTheta> rhs_vals_host(grid);
 
-        ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+        ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             rhs_vals_host(irtheta) = rhs(coords(irtheta));
         });
         auto rhs_vals = ddc::create_mirror_view_and_copy(
@@ -231,7 +235,7 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
 
     double max_err = 0.0;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         const double err = result_host(irtheta) - lhs(coords(irtheta));
         if (err > 0) {
             max_err = max_err > err ? max_err : err;

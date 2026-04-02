@@ -11,6 +11,246 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Add a new constructor for `GaussLegendre` from an index range describing the cell edges.
+- Add a `GradientCreator` operator to group derivative calculations.
+- Add a `NDLagrangeEvaluator` class.
+- Add `eval_basis_and_n_derivs` function to Lagrange basis operators.
+- Add `deriv` function to Lagrange evaluation.
+- Add `concepts::InterpolationBuilder1D` and `concepts::Interpolation1D`.
+
+### Fixed
+
+- Fixed missing load of `pdiplugin-pycall` in some Spack-based toolchains.
+
+### Changed
+
+- Changed the name of class `SplineBuliderDerivField2D` to fix typo (->`SplineBuilderDerivField2D`).
+- Update DDC to [v0.12.0](https://github.com/CExA-project/ddc/releases/tag/v0.12.0).
+- Changed FindLAPACKE CMake module to the version in DDC.
+- Renamed `DiscreteToCartesian` -> `DiscretePoloidalCSSplineMapping`.
+- Renamed `DiscreteToCartesianBuilder` -> `DiscretePoloidalCSSplineMappingBuilder`.
+- Changed `BslAdvectionPolar` template parameters and constructor to take a builder and evaluator instead of an `Interpolator2D`.
+- Changed new `concepts::InterpolationEvaluator` concept and associated `InterpolationEvaluatorTraits` class to generalise to ND.
+- Changed new `concepts::InterpolationBuilder` concept and associated `InterpolationBuilderTraits` class to generalise to ND.
+
+### Deprecated
+
+### Removed
+
+- Remove DDC submodule.
+- Remove 2D `Interpolator` classes:
+  - `IInterpolator2D`
+  - `SplineInterpolator2D`
+
+## [v0.7.0] - 2026-03-18
+
+### Added
+
+- Add `SplineInterpolator` class to group a compatible DDC spline builder and evaluator.
+- Add `LagrangeInterpolator` class to group a compatible builder and evaluator.
+- Add constructors taking a `concepts::Interpolator` class instance for:
+  - `BslAdvectionSpatial`
+  - `BslAdvectionVelocity`
+  - `BslAdvection1D`
+  - `FEM1DPoissonSolver`
+- Add a constructor to `BslAdvection1D` to use the same interpolator type for both the advected function and the advection field.
+- Add new constructors for `VectorFieldMem` to support labels as used in DDC and Kokkos.
+- Added index range assertions in `Quadrature`.
+
+### Fixed
+
+- Add missing `enable_tensor_type` for `CartesianLeviCivitaTensor` and LeviCivita `size()`.
+
+### Changed
+
+- Add Koliop in all toolchains.
+- Changed spline boundary condition in velocity dimensions in the XVx and XYVxVy geometries to use homogeneous Hermite boundary conditions.
+- Change `BslAdvectionVelocity` to stop providing values for the derivatives at the boundaries.
+- Add labels to all parallel constructs and many variable allocations.
+- Completed the porting of `PolarSplineFEMPoissonLikeAssembler` to GPU (less memory, fewer data transfers, faster execution).
+- Changed interface of PolarSplineFEMPoissonLikeSolver to split initialisation from coefficient setting.
+
+### Deprecated
+
+- Deprecate constructors taking both builders and evaluators n favour of constructors taking Interpolator classes for:
+  - `BslAdvectionSpatial`
+  - `BslAdvectionVelocity`
+  - `BslAdvection1D`
+  - `FEM1DPoissonSolver`
+
+### Removed
+
+- Remove deprecated `Lagrange` class.
+- Remove Koliop submodule.
+
+## [v0.6.2] - 2026-03-06
+
+### Fixed
+
+- Ensure `CoordRTheta` is defined in `polarpoissonlikeassembler.hpp`.
+
+## [v0.6.1] - 2026-03-06
+
+### Fixed
+
+- Allow `neumann_spline_quadrature_coefficients_1d` to work with `HOMOGENEOUS_HERMITE` boundary conditions.
+- Fix non-uniform periodic interpolation point selection.
+
+### Changed
+
+- Modified `Quadrature` to allow the batched operator to work on strided data.
+
+### Removed
+
+- Removed the mini-app and moved it to its own repository [mini-app](https://github.com/gyselax/gysela-mini-app_io).
+
+## [v0.6.0] - 2026-03-05
+
+### Added
+
+- Add `UniformLagrangeBasis` and `NonUniformLagrangeBasis` classes describing Lagrange bases using the second barycentric formulation.
+- Add the fluid moments computation in pycall block to the mini-application
+- Add `IdentityInterpolationBuilder` to copy data required for an interpolation operator.
+- Add `LagrangeEvaluator` to evaluate a Lagrange polynomial centred on a given point.
+- Added error messages when wrong input is provided to a simulation.
+- Add `concepts::InterpolationBuilder` to make `IdentityInterpolationBuilder` and `ddc::SplineBuilder` interchangeable.
+- Add `concepts::InterpolationEvaluator` to make `LagrangeEvaluator` and `ddc::SplineEvaluator` interchangeable.
+- Allow `BslAdvection1D`, `BslAdvectionSpatial`, and `BslAdvectionVelocity` to use variable precision.
+
+### Fixed
+
+- Fix incorrect `memory_space` type alias in `DerivFieldMem`.
+- Fix incorrect `memory_space` type alias in `DerivField`.
+- Fix a memory leak in `DerivFieldMem`.
+- Fix `ddc::coordinate` called on `ddc::DiscreteElement` outside of the domain of definition in `single_interface_derivatives_calculator.hpp` and tests.
+- Fix a memory leak related to an object of type `PC_tree_t` not destroyed.
+- Fix boundary conditions in `single_interface_derivatives_calculator_collection_test.cpp`.
+- Fix the finite differences method on a periodic domain.
+- Fix the warning for using the deprecated target `PDI::pdi` starting from PDI 1.10.1.
+
+### Changed
+
+- Remove `ddc_sync` utility.
+- Use generic binaries in the CPU Spack toolchain.
+- Remove Kokkos-related submodules.
+- Remove recursion from submodules synchronisation.
+- Add missing `module purge` in Persee toolchains.
+- Advection operators are now templated on `InterpolationBuilder` and `InterpolationEvaluator` concepts instead of `Interpolator` classes.
+- Use GCC 14 in the Jean-Zay toolchain.
+- Reduce memory footprint of `FEM1DPoissonSolver`.
+- Update DDC to [v0.11.0](https://github.com/CExA-project/ddc/releases/tag/v0.11.0).
+- Moved assembly of the stiffness matrix from `PolarSplineFEMPoissonLikeSolver` to new `PolarSplineFEMPoissonLikeAssembler` class.
+
+### Deprecated
+
+- Deprecated `Lagrange` class.
+
+### Removed
+
+- Remove the default PDI configuration file for the mini-app.
+- Remove `Interpolator` classes:
+  - `IInterpolator`
+  - `LagrangeInterpolator`
+  - `SplineInterpolator`
+
+## [v0.5.0] - 2026-02-04
+
+### Added
+
+- Add a temporary `SplineBuliderDerivField2D` to allow building a 2D spline representation from data stored
+in a `DerivField`.
+- Allow `FFTPoissonSolver` to use variable precision.
+- Add `SingleInterfaceDerivativesCalculator` to compute an interface derivative of an equivalent global spline.
+- Add `SingleInterfaceDerivativeCalculatorCollection` to collect different `SingleInterfaceDerivativesCalculator`.
+- Add a mini-application `gys_io.cpp` to test I/O performance and in-situ diagnostics on 5D distribution functions
+- Add Kokkos Tools in the environment on Persee toolchains
+- Add a constructor of `SingleInterfaceDerivativesCalculator` for the approximated interface derivatives.
+- Added support for A100 Raven cluster Spack toolchain.
+- Add new function `ddcHelper::assign_elements` to assign elements of a tensor to another tensor containing the same elements.
+- Add a new coordinate transformation `LinearCoordTransform`.
+- Add a new coordinate transformation `OrthogonalCoordTransforms`.
+
+### Fixed
+
+- Fix derivative indexing of a `DerivField` object.
+- Fix transposition of arrays with more than 7 dimensions.
+- Fix missing guards in `FindLAPACKE.cmake` leading to duplicate target.
+- Fix spurious segfaults for toolchains based on Spack environment views.
+
+### Changed
+
+- Extract spline definitions from `geometry.hpp` files into files called `spline_definitions_<geom_descriptor>.hpp` which are dedicated to tests or simulations.
+- Rename `geometry.hpp` files to `geometry_<geom_descriptor>.hpp` to reflect the geometry that they describe.
+- `DerivField` objects are initialised on GPU by default.
+- Update DDC to [v0.10.0](https://github.com/CExA-project/ddc/releases/tag/v0.10.0).
+- Change some Python class `scattered_coord` arguments to keyword-only.
+- Increase C++ version to 20.
+- Use concepts to describe coordinate transformation classes.
+- Update koliop to [v0.1.2](https://gitlab.com/cines/code.gysela/libkoliop/-/tags/v0.1.2).
+- Make koliop discoverable with `find_package`.
+- Simplify toolchains by disabling koliop LTO by default.
+- Update Persee toolchains to GCC 13.
+
+### Deprecated
+
+- `PolarBSplines::eval_deriv_r`, `PolarBSplines::eval_deriv_theta`, and `PolarBSplines::eval_deriv_r_and_theta` are deprecated in favour of `PolarBSplines::eval_deriv`.
+- `PolarSplineEvaluator::deriv_dim_1`, `PolarSplineEvaluator::deriv_dim_2`, and `PolarSplineEvaluator::deriv_dim_1_and_2` are deprecated in favour of `PolarSplineEvaluator::deriv`.
+
+### Removed
+
+- Remove unused temporal dimension `T` in `geometryXVx`.
+
+## [v0.4.1] - 2025-12-12
+
+### Fixed
+
+- Allow access to slices extracted from `const DerivField`.
+- Fixed `LAPACKE` CMake target definition.
+- Uses patched cray-mpich package forcing using of the GTL on dependencies.
+
+## [v0.4.0] - 2025-12-10
+
+### Added
+
+- Add getters to `DerivField` types to access the associated index ranges.
+- Add H100 Jean-Zay toolchain.
+- Add an `operator()` in `BslAdvectionPolar` to advect a function with an advection field along `<R, Theta>`.
+The operator averages the values of the advection field on the first ring to get its value at the O-point.
+- Add `static_assert` expressions for spline builder/evaluator pairs.
+- Added `equilibrium::init_from_input` method to choose XVx equililibrium in input file.
+
+### Fixed
+
+- Ensure `std::abs` or `Kokkos::abs` is preferred over `abs`.
+- Specify return type for Lie-Poisson operator explicitly for better error messages.
+- Ensure `copy_to_vector_space` can be called for different memory layouts.
+
+### Changed
+
+- Use patched recipes for the CPU Spack toolchain.
+- Inject Kokkos Tools lib directory to `LD_LIBRARY_PATH` in the Adastra toolchains.
+- Update and reorganize the Persee toolchains.
+- Add pdiplugin-pycall to Persee toolchains.
+- Add an assertion to `PolarSplines` to ensure that the domain matches the assumptions.
+- Allow a local installation of Kokkos > v4.4.1 to be used by CMake.
+- Rename static variable `is_curvilinear_2d_mapping_v` to the more accurate: `is_coord_transform_with_o_point_v`.
+- Move Python cache files out of the Spack installation tree on Adastra and Jean-Zay.
+- Use CCFR environment variables on CINES and IDRIS machines when possible.
+- Update DDC dependency to v0.9.0.
+- Combine `landau_fft` and `bumpontail_fft` executables into a `vlasovpoisson_xvx_fft` executable.
+- Combine `landau_fem_uniform` and `bumpontail_fem_uniform` executables into a `vlasovpoisson_xvx_fem_uniform` executable.
+- Make the choice of equililibrium an input parameter for `vlasovpoisson_xvx` executables.
+- Move static class method `BumpontailEquilibrium::init_from_input` to namespace `bumpontail_equilibrium::init_from_input`.
+- Move static class method `MaxwellianEquilibrium::init_from_input` to namespace `maxwellian_equilibrium::init_from_input`.
+- Update CPU Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
+- Update Adastra Spack toolchains to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:. Use OpenBLAS instead of Cray LibSci and raw GCC compilers.
+- Update Jean-Zay Spack toolchain to Spack v1 and update packages, for example Kokkos 4.7, Python 3.12:.
+- Use LAPACKE to call LAPACK functions.
+
+## [v0.3.0] - 2025-09-03
+
+### Added
+
 - Add a curl operator.
 - Port `PolarSplineEvaluator` methods to GPU.
 - Add methods to `PolarSplineEvaluator` to avoid unnecessary creation of fields of coordinates.
@@ -54,7 +294,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change constructor argument of `PoissonLikeRHSFunction` from the (r, theta) geometry to pass spline coefficients on GPU.
 - Use Spack to install the Kokkos ecosystem in the MI250 Adastra toolchain.
 - Use Spack to install the Kokkos ecosystem in the GENOA Adastra toolchain.
-- Use patched recipes for the CPU Spack toolchain.
+- Use a single rocm stack on Adastra.
 
 ### Deprecated
 

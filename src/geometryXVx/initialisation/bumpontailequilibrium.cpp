@@ -22,14 +22,16 @@ DFieldSpVx BumpontailEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
     // Initialisation of the maxwellian
     DFieldMemVx maxwellian_alloc(gridvx);
     DFieldVx maxwellian = get_field(maxwellian_alloc);
-    ddc::for_each(gridsp, [&](IdxSp const isp) {
+    ddc::host_for_each(gridsp, [&](IdxSp const isp) {
         compute_twomaxwellian(
                 maxwellian,
                 m_epsilon_bot(isp),
                 m_temperature_bot(isp),
                 m_mean_velocity_bot(isp));
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 gridvx,
                 KOKKOS_LAMBDA(IdxVx const ivx) { allfequilibrium(isp, ivx) = maxwellian(ivx); });
@@ -37,7 +39,7 @@ DFieldSpVx BumpontailEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
     return allfequilibrium;
 }
 
-BumpontailEquilibrium BumpontailEquilibrium::init_from_input(
+BumpontailEquilibrium bumpontail_equilibrium::init_from_input(
         IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {
@@ -69,7 +71,9 @@ void BumpontailEquilibrium::compute_twomaxwellian(
     double const inv_sqrt_2pi = 1. / sqrt(2. * M_PI);
     double const norm_f2 = inv_sqrt_2pi / sqrt(temperature_bot);
     IdxRangeVx const gridvx = get_idx_range(fMaxwellian);
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             gridvx,
             KOKKOS_LAMBDA(IdxVx const ivx) {

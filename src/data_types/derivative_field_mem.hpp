@@ -11,7 +11,11 @@
 /**
  * See @ref DerivFieldMemImplementation
  */
-template <class ElementType, class Domain, int NDerivs, class MemSpace = Kokkos::HostSpace>
+template <
+        class ElementType,
+        class Domain,
+        int NDerivs,
+        class MemSpace = Kokkos::DefaultExecutionSpace::memory_space>
 class DerivFieldMem;
 
 template <class ElementType, class SupportType, int NDerivs, class MemSpace>
@@ -60,7 +64,7 @@ public:
     using element_type = typename base_type::element_type;
 
     /// @brief The type of the memory space where the field is saved (CPU vs GPU).
-    using memory_space = typename base_type::element_type;
+    using memory_space = MemSpace;
 
     /**
      * @brief The IdxRange on which the chunks in this object are defined.
@@ -244,6 +248,22 @@ private:
          ...);
     }
 
+    /// @brief Free the internal pointer that is saved in internal_fields at the index ArrayIndex.
+    template <std::size_t ArrayIndex>
+    void free_ptr(ElementType* const ptr, allocator_type allocator)
+    {
+        std::size_t alloc_size(((get_mdspan_size<DDims, ArrayIndex>()) * ...));
+        allocator.deallocate(ptr, alloc_size);
+    }
+
+    /// @brief Free the chunks inside internal_fields.
+    template <std::size_t... ArrayIndex>
+    void free_chunks(allocator_type allocator, std::index_sequence<ArrayIndex...>)
+    {
+        (free_ptr<ArrayIndex>(base_type::internal_fields[ArrayIndex].data_handle(), allocator),
+         ...);
+    }
+
 public:
     /**
      * @brief The constructor for DerivFieldMem. The constructor initialises the chunks using
@@ -287,8 +307,11 @@ public:
         initialise_chunks(allocator, std::make_integer_sequence<std::size_t, n_fields> {});
     }
 
-    /// Defaulted destructor
-    ~DerivFieldMem() = default;
+    /// Destructor, responsible to deallocate memory.
+    ~DerivFieldMem()
+    {
+        free_chunks(allocator_type {}, std::make_integer_sequence<std::size_t, n_fields> {});
+    }
 
     /// Deleted copy operator
     DerivFieldMem& operator=(DerivFieldMem const& other) = delete;
@@ -333,6 +356,70 @@ public:
         using full_index_type = detail::combine_t<DElem...>;
         full_index_type elem(elems...);
         return base_type::get_internal_field(elem)();
+    }
+
+    /**
+     * @brief Get a ConstField describing a subset of the data.
+     *
+     * @param slice_spec A discrete element describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns ConstField A subset of the data.
+     */
+    template <class... QueryDDims>
+    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec) const
+    {
+        return base_type::get_internal_field(slice_spec).span_cview();
+    }
+
+    /**
+     * @brief Get a Field describing a subset of the data.
+     *
+     * @param slice_spec A discrete element describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns Field A subset of the data.
+     */
+    template <class... QueryDDims>
+    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)
+    {
+        return base_type::get_internal_field(slice_spec);
+    }
+
+    /**
+     * @brief Get a Field describing a subset of the data.
+     * This function allows a slice to be obtained however it is designed to return a Field. It is
+     * therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).
+     *
+     * @param oidx_range A discrete index range describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns Field A subset of the data.
+     */
+    template <class... QueryDDims>
+    KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
+    {
+        return base_type::get_internal_field(oidx_range);
+    }
+
+    /**
+     * @brief Get a ConstField describing a subset of the data.
+     * This function allows a slice to be obtained however it is designed to return a ConstField. It is
+     * therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).
+     *
+     * @param oidx_range A discrete index range describing the position at which these dimensions should be
+     *          indexed. If information about the derivatives is missing then it is assumed that the
+     *          0-th order derivative is requested.
+     *
+     * @returns ConstField A subset of the data.
+     */
+    template <class... QueryDDims>
+    KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
+    {
+        return base_type::get_internal_field(oidx_range).span_cview();
     }
 
     /**

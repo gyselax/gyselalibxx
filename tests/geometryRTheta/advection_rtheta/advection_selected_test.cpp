@@ -18,11 +18,11 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "geometry_r_theta.hpp"
 #include "input.hpp"
 #include "itimestepper.hpp"
 #include "math_tools.hpp"
@@ -33,6 +33,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_polar_foot_finder.hpp"
 
 
@@ -124,7 +125,7 @@ int main(int argc, char** argv)
               << interpolation_idx_range_theta.size() << " AND dt = " << dt << ": " << std::endl;
 
     std::ofstream file("r_interpolation_points.txt");
-    for_each(interpolation_idx_range_r, [&](IdxR ir) {
+    host_for_each(interpolation_idx_range_r, [&](IdxR ir) {
         file << (ir - interpolation_idx_range_r.front()).value() << " "
              << double(ddc::coordinate(ir)) << std::endl;
     });
@@ -145,9 +146,6 @@ int main(int argc, char** argv)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
 
     // --- Evaluator for the test advection field:
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
@@ -204,23 +202,34 @@ int main(int argc, char** argv)
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
     key += "czarny_pseudo_cartesian";
 
-#elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+#else
+#if not defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+    static_assert(false, "No mapping macro defined");
+#endif
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluatorConstBound_host>
+    DiscretePoloidalCSSplineMappingBuilder<
+            X,
+            Y,
+            SplineRThetaBuilder_host,
+            SplineRThetaEvaluatorConstBound_host>
             mapping_builder_host(
                     Kokkos::DefaultHostExecutionSpace(),
                     to_physical_analytical_mapping,
                     builder_host,
                     spline_evaluator_extrapol_host);
-    DiscreteToCartesian to_physical_mapping_host = mapping_builder_host();
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>
+    DiscretePoloidalCSSplineMapping to_physical_mapping_host = mapping_builder_host();
+    DiscretePoloidalCSSplineMappingBuilder<
+            X,
+            Y,
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorConstBound>
             mapping_builder(
                     Kokkos::DefaultExecutionSpace(),
                     to_physical_analytical_mapping,
                     builder,
                     spline_evaluator_extrapol);
-    DiscreteToCartesian to_physical_mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "DISCRETE";
     std::string const adv_domain_name = "PSEUDO CARTESIAN";
@@ -286,7 +295,8 @@ int main(int argc, char** argv)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(interpolator, foot_finder, to_physical_mapping);
+    BslAdvectionPolar
+            advection_operator(builder, spline_evaluator, foot_finder, to_physical_mapping);
 
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;

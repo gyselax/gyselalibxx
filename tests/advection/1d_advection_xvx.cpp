@@ -13,7 +13,7 @@
 #include "ddc_helper.hpp"
 #include "itimestepper.hpp"
 #include "rk2.hpp"
-#include "spline_interpolator.hpp"
+#include "spline_interpolation.hpp"
 #include "vector_field_common.hpp"
 
 namespace {
@@ -100,21 +100,14 @@ using DFieldXVx = FieldXVx<double>;
 
 
 // Operators
-using SplineXBuilder = ddc::SplineBuilder<
+using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
+        PERIODIC,
+        PERIODIC,
         SplineXBoundary,
-        SplineXBoundary,
-        ddc::SplineSolver::LAPACK>;
-using SplineXEvaluator = ddc::SplineEvaluator<
-        Kokkos::DefaultExecutionSpace,
-        Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesX,
-        GridX,
-        ddc::PeriodicExtrapolationRule<X>,
-        ddc::PeriodicExtrapolationRule<X>>;
+        SplineXBoundary>;
 
 
 class XVxAdvection1DTest : public ::testing::Test
@@ -179,7 +172,7 @@ public:
 
         // EXACT ADVECTED FUNCTION -------------------------------------------------------------------
         host_t<DFieldMemXVx> exact_function(idx_range_xvx);
-        ddc::for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
+        ddc::host_for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
             double const x0 = ddc::coordinate(IdxX(xv_idx));
             double const v = ddc::coordinate(IdxVx(xv_idx));
             double x = x0 - final_t * v;
@@ -203,8 +196,8 @@ public:
         */
         auto function_host = ddc::create_mirror_view_and_copy(function);
         double max_relative_error = 0;
-        ddc::for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
-            double const relative_error = abs(function_host(xv_idx) - exact_function(xv_idx));
+        ddc::host_for_each(idx_range_xvx, [&](IdxXVx const xv_idx) {
+            double const relative_error = std::abs(function_host(xv_idx) - exact_function(xv_idx));
             EXPECT_LE(relative_error, 5.e-7);
             max_relative_error
                     = max_relative_error > relative_error ? max_relative_error : relative_error;
@@ -221,24 +214,16 @@ public:
 TEST_F(XVxAdvection1DTest, AdvectionXVx)
 {
     // CREATING OPERATORS ------------------------------------------------------------------------
-    SplineXBuilder const builder_x(idx_range_x);
-
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_evaluator_x(bv_x_min, bv_x_max);
-
-    PreallocatableSplineInterpolator const
-            spline_interpolator_x(builder_x, spline_evaluator_x, idx_range_xvx);
+    SplineInterpolatorX spline_interpolation(idx_range_x);
 
     RK2Builder time_stepper;
     BslAdvection1D<
             GridX,
             IdxRangeXVx,
             IdxRangeXVx,
-            SplineXBuilder,
-            SplineXEvaluator,
-            RK2Builder> const
-            advection(spline_interpolator_x, builder_x, spline_evaluator_x, time_stepper);
+            SplineInterpolatorX,
+            SplineInterpolatorX,
+            RK2Builder> const advection(spline_interpolation, time_stepper);
 
     double const max_relative_error = AdvectionXVx(advection);
     EXPECT_LE(max_relative_error, 5.e-7);

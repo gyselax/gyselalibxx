@@ -11,7 +11,7 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
             DDC::core
             DDC::pdi
             paraconf::paraconf
-            PDI::pdi
+            PDI::PDI_C
             gslx::geometry_RTheta
             gslx::paraconfpp
             gslx::pde_solvers
@@ -22,10 +22,13 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
 
     find_package(Python3 REQUIRED COMPONENTS Interpreter)
 
-    add_test(NAME TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION}
-        COMMAND "$<TARGET_FILE:Python3::Interpreter>" "${CMAKE_CURRENT_SOURCE_DIR}/test_poisson.py"
-            "$<TARGET_FILE:${test_name}>")
-    set_property(TEST TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION} PROPERTY TIMEOUT 300)
-    set_property(TEST TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION} PROPERTY COST 100)
+    if (NOT "${CMAKE_CXX_FLAGS}" MATCHES "--coverage")
+        # Test is much too slow with coverage activated
+        add_test(NAME TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION}
+            COMMAND "$<TARGET_FILE:Python3::Interpreter>" "${CMAKE_CURRENT_SOURCE_DIR}/test_poisson.py"
+                "$<TARGET_FILE:${test_name}>")
+        set_property(TEST TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION} PROPERTY TIMEOUT 300)
+        set_property(TEST TestPoissonConvergence_${MAPPING_TYPE}_${SOLUTION} PROPERTY COST 100)
+    endif()
   endforeach()
 endforeach()

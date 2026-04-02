@@ -9,9 +9,10 @@
 #include <gtest/gtest.h>
 
 #include "ddc_alias_inline_functions.hpp"
-#include "geometry.hpp"
+#include "geometry_xvx.hpp"
 #include "mask_tanh.hpp"
 #include "quadrature.hpp"
+#include "spline_definitions_xvx.hpp"
 #include "trapezoid_quadrature.hpp"
 
 TEST(Masks, Ordering)
@@ -26,17 +27,6 @@ TEST(Masks, Ordering)
     ddc::init_discrete_space<GridX>(SplineInterpPointsX::get_sampling<GridX>());
 
     IdxRangeX gridx(SplineInterpPointsX::get_domain<GridX>());
-
-    SplineXBuilder const builder_x(gridx);
-
-#ifdef PERIODIC_RDIMX
-    ddc::PeriodicExtrapolationRule<X> extrapolation_rule_min;
-    ddc::PeriodicExtrapolationRule<X> extrapolation_rule_max;
-#else
-    ddc::ConstantExtrapolationRule<X> extrapolation_rule_min(x_min);
-    ddc::ConstantExtrapolationRule<X> extrapolation_rule_max(x_max);
-#endif
-    SplineXEvaluator const spline_x_evaluator(extrapolation_rule_min, extrapolation_rule_max);
 
     double const extent = 0.25;
     double const stiffness = 1e-2;

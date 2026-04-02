@@ -214,7 +214,7 @@ TEST(MatrixBatchEllFixture, SolveSparse)
         for (int i = 0; i < mat_size; i++) {
             cpt = 0;
             for (int j = 0; j < mat_size; j++) {
-                if (abs(matvalues[batch_idx][i][j]) > 1e-16 && cpt < non_zero_per_col) {
+                if (std::abs(matvalues[batch_idx][i][j]) > 1e-16 && cpt < non_zero_per_col) {
                     idx_host(i, cpt) = j;
                     values_host(batch_idx, i, cpt) = matvalues[batch_idx][i][j];
                     cpt++;

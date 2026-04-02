@@ -30,7 +30,7 @@ jobs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: skip_check
         uses: ./.github/actions/duplicate_check
         with:
@@ -46,9 +46,14 @@ jobs:
     if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
     steps:
       - name: Checkout gyselalibxx
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           submodules: true
+      - name: Install appropriate Python version
+        if: matrix.os == 'macos-14'
+        uses: actions/setup-python@v6
+        with:
+          python-version: 3.12
       - name: Install spack
         run: |
           mkdir -p spack_setup && cd spack_setup
@@ -71,7 +76,7 @@ jobs:
     needs: [spack_test]
     if: always() && (github.event_name == 'pull_request' && github.event.pull_request.draft == false) && needs.pre_job.outputs.should_skip == 'false'
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: ./.github/actions/set_pr_status
         with:
           status: ${{ needs.spack_test.result }}

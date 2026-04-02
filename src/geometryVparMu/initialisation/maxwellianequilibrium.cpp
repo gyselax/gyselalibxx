@@ -28,7 +28,7 @@ DFieldSpVparMu MaxwellianEquilibrium::operator()(DFieldSpVparMu const allfequili
     // Initialisation of the maxwellian
     DFieldMemVparMu maxwellian_alloc(idxrange_vparmu);
     DFieldVparMu maxwellian = get_field(maxwellian_alloc);
-    ddc::for_each(idxrange_sp, [&](IdxSp const isp) {
+    ddc::host_for_each(idxrange_sp, [&](IdxSp const isp) {
         compute_maxwellian(
                 maxwellian,
                 m_mass(isp),
@@ -86,7 +86,9 @@ void MaxwellianEquilibrium::compute_maxwellian(
     //  - n the density, T the temperature and Upar the mean velocity
     //  - B the magnetic field and
     //  - energy = (0.5*(vpar-Upar)**2+mu*B)/T
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             idxrange_vparmu,
             KOKKOS_LAMBDA(IdxVparMu const ivparmu) {

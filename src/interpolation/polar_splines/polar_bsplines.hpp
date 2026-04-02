@@ -10,7 +10,7 @@
 #include "cartesian_to_barycentric.hpp"
 #include "coord_transformation_tools.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "view.hpp"
 
 namespace PolarSplines {
@@ -49,16 +49,6 @@ class PolarBSplines
     static_assert(!BSplinesR::is_periodic(), "Radial B-splines must not be periodic.");
     static_assert(!BSplinesR::is_uniform(), "Radial B-splines must have knots at the boundary.");
     static_assert(BSplinesTheta::is_periodic(), "Poloidal B-splines should be periodic.");
-
-private:
-    // Tags to determine what to evaluate
-    struct eval_type
-    {
-    };
-
-    struct eval_deriv_type
-    {
-    };
 
 public:
     /// The radial bspline from which the polar B-splines are constructed.
@@ -312,18 +302,35 @@ public:
          *                                  the new basis splines which cross the singular point.
          */
         template <class X, class Y, class SplineEvaluator, class EvalMemorySpace>
-        explicit Impl(const DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, EvalMemorySpace>&
-                              curvilinear_to_cartesian)
+        explicit Impl(const DiscretePoloidalCSSplineMapping<
+                      X,
+                      Y,
+                      SplineEvaluator,
+                      R,
+                      Theta,
+                      EvalMemorySpace>& curvilinear_to_cartesian)
         {
             static_assert(std::is_same_v<MemorySpace, Kokkos::HostSpace>);
-            using DiscreteMapping
-                    = DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, EvalMemorySpace>;
+            using DiscreteMapping = DiscretePoloidalCSSplineMapping<
+                    X,
+                    Y,
+                    SplineEvaluator,
+                    R,
+                    Theta,
+                    EvalMemorySpace>;
             static_assert(std::is_same_v<typename DiscreteMapping::BSplineR, BSplinesR>);
             static_assert(std::is_same_v<typename DiscreteMapping::BSplineTheta, BSplinesTheta>);
             using EvalExecSpace = std::conditional_t<
                     std::is_same_v<EvalMemorySpace, Kokkos::HostSpace>,
                     Kokkos::DefaultHostExecutionSpace,
                     Kokkos::DefaultExecutionSpace>;
+            // Check that BSplines are defined on the expected domain.
+            // The radial direction should extend to r=0
+            // The poloidal domain should have length 2*M_PI
+            assert(fabs(ddc::discrete_space<BSplinesR>().rmin()) < 1e-15);
+            assert(fabs(ddc::discrete_space<BSplinesTheta>().rmax()
+                        - ddc::discrete_space<BSplinesTheta>().rmin() - 2. * M_PI)
+                   < 1e-14);
             if constexpr (C > -1) {
                 IdxRange<BSplinesR> idx_range_r_ctrl_pts(IdxR(0), IdxStepR(std::max(2, C + 1)));
                 IdxRange<BSplinesR, BSplinesTheta> idx_range_ctrl_pts(
@@ -507,7 +514,38 @@ public:
          * @returns The 2D tensor product index of the first b-spline element in the values array.
          */
         KOKKOS_FUNCTION tensor_product_index_type
-        eval_basis(DSpan1D singular_values, DSpan2D values, Coord<R, Theta> p) const;
+        eval_basis(DSpan1D singular_values, DSpan2D values, Coord<R, Theta> p) const
+        {
+            return eval(singular_values, values, p, Idx<>());
+        }
+
+        /**
+         * @brief Evaluate the derivative of the polar basis splines at the coordinate p.
+         *
+         * Evaluate the derivative of all the b-spline elements near the singular point which
+         * cannot be expressed as a tensor product of 1D B-splines, as well as the non-zero b-spline
+         * elements which can be expressed as a tensor product of 1D B-splines.
+         *
+         * @param[out] singular_derivs  The value of the radial derivative b-spline elements near the
+         *                              singular point which cannot be expressed as a tensor product
+         *                              of 1D B-splines, evaluated at the coordinate p.
+         * @param[out] derivs           The value of the radial derivative of the non-zero b-spline
+         *                              elements which can be expressed as a tensor product of 1D B-splines.
+         * @param[in] p                 The coordinate where the basis functions are evaluated.
+         * @param[in] deriv_order       The index of the derivative order (e.g. Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1,3)
+         *                              for the cross derivative @f$ dr d \theta^3 @f$.
+         *
+         * @returns The 2D tensor product index of the first b-spline element in the values array.
+         */
+        template <class... DerivDims>
+        KOKKOS_FUNCTION tensor_product_index_type eval_deriv(
+                DSpan1D singular_derivs,
+                DSpan2D derivs,
+                Coord<R, Theta> p,
+                Idx<DerivDims...> deriv_order) const
+        {
+            return eval(singular_derivs, derivs, p, deriv_order);
+        }
 
         /**
          * @brief Evaluate the radial derivative of the polar basis splines at the coordinate p.
@@ -525,8 +563,12 @@ public:
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
          */
-        KOKKOS_FUNCTION tensor_product_index_type
-        eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const;
+        [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<R>>(1)) instead")]] KOKKOS_FUNCTION
+                tensor_product_index_type
+                eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const
+        {
+            return eval(singular_derivs, derivs, p, Idx<ddc::Deriv<R>>(1));
+        }
 
         /**
          * @brief Evaluate the poloidal derivative of the polar basis splines at the coordinate p.
@@ -544,8 +586,12 @@ public:
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
          */
-        KOKKOS_FUNCTION tensor_product_index_type
-        eval_deriv_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const;
+        [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<Theta>>(1)) "
+                     "instead")]] KOKKOS_FUNCTION tensor_product_index_type
+        eval_deriv_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const
+        {
+            return eval(singular_derivs, derivs, p, Idx<ddc::Deriv<Theta>>(1));
+        }
 
         /**
          * @brief Evaluate the second order derivative of the polar basis splines in the radial and poloidal
@@ -564,8 +610,12 @@ public:
          *
          * @returns The 2D tensor product index of the first b-spline element in the values array.
          */
-        KOKKOS_FUNCTION tensor_product_index_type
-        eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const;
+        [[deprecated("Use eval_deriv(..., Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1)) "
+                     "instead")]] KOKKOS_FUNCTION tensor_product_index_type
+        eval_deriv_r_and_theta(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const
+        {
+            return eval(singular_derivs, derivs, p, Idx<ddc::Deriv<R>, ddc::Deriv<Theta>>(1, 1));
+        }
 
         /**
          * Get the total number of basis functions.
@@ -602,75 +652,34 @@ public:
         }
 
     private:
-        template <class EvalTypeR, class EvalTypeTheta>
+        template <class... DerivDims>
         KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> eval(
                 DSpan1D singular_values,
                 DSpan2D values,
                 Coord<R, Theta> coord_eval,
-                EvalTypeR const,
-                EvalTypeTheta const) const;
+                Idx<DerivDims...> deriv_order) const;
     };
 };
 
 template <class BSplinesR, class BSplinesTheta, int C>
 template <class DDim, class MemorySpace>
-KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<
-        DDim,
-        MemorySpace>::eval_basis(DSpan1D singular_values, DSpan2D values, Coord<R, Theta> p) const
-{
-    return eval(singular_values, values, p, eval_type(), eval_type());
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::Impl<
-        DDim,
-        MemorySpace>::eval_deriv_r(DSpan1D singular_derivs, DSpan2D derivs, Coord<R, Theta> p) const
-{
-    return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_type());
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
-        Impl<DDim, MemorySpace>::eval_deriv_theta(
-                DSpan1D singular_derivs,
-                DSpan2D derivs,
-                Coord<R, Theta> p) const
-{
-    return eval(singular_derivs, derivs, p, eval_type(), eval_deriv_type());
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
-        Impl<DDim, MemorySpace>::eval_deriv_r_and_theta(
-                DSpan1D singular_derivs,
-                DSpan2D derivs,
-                Coord<R, Theta> p) const
-{
-    return eval(singular_derivs, derivs, p, eval_deriv_type(), eval_deriv_type());
-}
-
-template <class BSplinesR, class BSplinesTheta, int C>
-template <class DDim, class MemorySpace>
-template <class EvalTypeR, class EvalTypeTheta>
+template <class... DerivDims>
 KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesTheta, C>::
         Impl<DDim, MemorySpace>::eval(
                 DSpan1D singular_values,
                 DSpan2D values,
                 Coord<R, Theta> coord_eval,
-                EvalTypeR const,
-                EvalTypeTheta const) const
+                Idx<DerivDims...> deriv_order) const
 {
+    using deriv_r = ddc::Deriv<R>;
+    using deriv_theta = ddc::Deriv<Theta>;
+    using deriv_dims = ddc::detail::TypeSeq<DerivDims...>;
+
+    static_assert((ddc::in_tags_v<DerivDims, ddc::detail::TypeSeq<deriv_r, deriv_theta>> && ...));
+
     assert(singular_values.extent(0) == n_singular_basis());
     assert(values.extent(0) == BSplinesR::degree() + 1);
     assert(values.extent(1) == BSplinesTheta::degree() + 1);
-    static_assert(
-            std::is_same_v<EvalTypeR, eval_type> || std::is_same_v<EvalTypeR, eval_deriv_type>);
-    static_assert(
-            (std::is_same_v<EvalTypeTheta, eval_type>)
-            || (std::is_same_v<EvalTypeTheta, eval_deriv_type>));
 
     Idx<BSplinesR> jmin_r;
     Idx<BSplinesTheta> jmin_theta;
@@ -683,17 +692,34 @@ KOKKOS_FUNCTION Idx<BSplinesR, BSplinesTheta> PolarBSplines<BSplinesR, BSplinesT
     DSpan1D const vals_r(vals_r_ptr.data(), nr);
     DSpan1D const vals_theta(vals_theta_ptr.data(), ntheta);
 
-    if constexpr (std::is_same_v<EvalTypeR, eval_type>) {
+    if constexpr (!ddc::in_tags_v<deriv_r, deriv_dims>) {
         jmin_r = ddc::discrete_space<BSplinesR>().eval_basis(vals_r, ddc::select<R>(coord_eval));
-    } else if constexpr (std::is_same_v<EvalTypeR, eval_deriv_type>) {
-        jmin_r = ddc::discrete_space<BSplinesR>().eval_deriv(vals_r, ddc::select<R>(coord_eval));
+    } else {
+        int nderivs_r = (Idx<deriv_r>(deriv_order) - Idx<deriv_r>(0)).value();
+        std::array<double, nr * nr> derivs_r_ptr;
+        Kokkos::mdspan<double, Kokkos::extents<std::size_t, nr, Kokkos::dynamic_extent>> const
+                derivs_r(derivs_r_ptr.data(), nderivs_r + 1);
+        jmin_r = ddc::discrete_space<BSplinesR>()
+                         .eval_basis_and_n_derivs(derivs_r, ddc::select<R>(coord_eval), nderivs_r);
+        for (int i(0); i < nr; ++i) {
+            vals_r(i) = derivs_r(i, nderivs_r);
+        }
     }
-    if constexpr (std::is_same_v<EvalTypeTheta, eval_type>) {
+    if constexpr (!ddc::in_tags_v<deriv_theta, deriv_dims>) {
         jmin_theta = ddc::discrete_space<BSplinesTheta>()
                              .eval_basis(vals_theta, ddc::select<Theta>(coord_eval));
-    } else if constexpr (std::is_same_v<EvalTypeTheta, eval_deriv_type>) {
-        jmin_theta = ddc::discrete_space<BSplinesTheta>()
-                             .eval_deriv(vals_theta, ddc::select<Theta>(coord_eval));
+    } else {
+        int nderivs_theta = (Idx<deriv_theta>(deriv_order) - Idx<deriv_theta>(0)).value();
+        std::array<double, ntheta * ntheta> derivs_theta_ptr;
+        Kokkos::mdspan<double, Kokkos::extents<std::size_t, ntheta, Kokkos::dynamic_extent>> const
+                derivs_theta(derivs_theta_ptr.data(), nderivs_theta + 1);
+        jmin_theta = ddc::discrete_space<BSplinesTheta>().eval_basis_and_n_derivs(
+                derivs_theta,
+                ddc::select<Theta>(coord_eval),
+                nderivs_theta);
+        for (int i(0); i < ntheta; ++i) {
+            vals_theta(i) = derivs_theta(i, nderivs_theta);
+        }
     }
 
     std::size_t nr_done = 0;
@@ -792,7 +818,9 @@ DField<IdxRange<DDim>, MemorySpace> integrals(
 
     IdxRange<DDim> tensor_bspline_idx_range(ddc::discrete_space<DDim>().tensor_bspline_idx_range());
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             execution_space,
             tensor_bspline_idx_range,
             KOKKOS_LAMBDA(Idx<DDim> idx) {

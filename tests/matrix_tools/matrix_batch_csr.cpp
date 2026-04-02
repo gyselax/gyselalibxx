@@ -107,7 +107,7 @@ TEST(MatrixBatchCsrFixture, Coo_to_Csr)
 
     std::unique_ptr<MatrixBatchCsr<Kokkos::DefaultExecutionSpace>> test_instance
             = std::make_unique<MatrixBatchCsr<
-                    Kokkos::DefaultExecutionSpace>>(batch_size, mat_size, non_zero_per_system);
+                    Kokkos::DefaultExecutionSpace>>(batch_size, mat_size, non_zero_per_system, 50);
     convert_coo_to_csr(test_instance, vals_coo_host, row_coo_host, col_coo_host);
     test_instance->setup_solver();
     Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
@@ -193,12 +193,11 @@ void solve_sparse_system()
             nnz_per_row_view_host(nnz_per_row, mat_size + 1);
     Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
             solution_view_host(solution, batch_size * mat_size);
-    int cpt;
     for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
-        cpt = 0;
+        int cpt = 0;
         for (int i = 0; i < mat_size; i++) {
             for (int j = 0; j < mat_size; j++) {
-                if (abs(matvalues[batch_idx][i][j]) > 1e-16) {
+                if (std::abs(matvalues[batch_idx][i][j]) > 1e-16) {
                     if (batch_idx == 0) {
                         idx_view_host(cpt) = j;
                     }
@@ -253,12 +252,11 @@ void solve_pds_system()
                 nnz_per_row_view_host(nnz_per_row, mat_size + 1);
         Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::DefaultHostExecutionSpace>
                 solution_view_host(solution, batch_size * mat_size);
-        int cpt;
         for (int batch_idx = 0; batch_idx < batch_size; batch_idx++) {
-            cpt = 0;
+            int cpt = 0;
             for (int i = 0; i < mat_size; i++) {
                 for (int j = 0; j < mat_size; j++) {
-                    if (abs(matvalues[batch_idx][i][j]) > 1e-16) {
+                    if (std::abs(matvalues[batch_idx][i][j]) > 1e-16) {
                         if (batch_idx == 0) {
                             idx_view_host(cpt) = j;
                         }

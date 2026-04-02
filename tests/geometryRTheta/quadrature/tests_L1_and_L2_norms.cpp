@@ -4,12 +4,13 @@
 
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
-#include "geometry.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
+#include "geometry_r_theta.hpp"
 #include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"
 #include "quadrature.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "volume_quadrature_nd.hpp"
@@ -138,12 +139,12 @@ void launch_tests(
 
     // --- TEST 1 -------------------------------------------------------------------------------------
     std::cout << "TEST 1: f(r,theta ) = 1. " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) { test(irtheta) = 1.; });
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) { test(irtheta) = 1.; });
     check_norms(quadrature, get_field(test), expected_norms[0], TOLs[0]);
 
     // --- TEST 2 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 2: f(r,theta ) = cos(theta) " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         double const th = ddc::select<Theta>(ddc::coordinate(irtheta));
         test(irtheta) = std::cos(th);
     });
@@ -152,7 +153,7 @@ void launch_tests(
 
     // --- TEST 3 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 3: f(r,theta ) = r " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         double const r = ddc::select<R>(ddc::coordinate(irtheta));
         test(irtheta) = r;
     });
@@ -160,7 +161,7 @@ void launch_tests(
 
     // --- TEST 4 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 4: f(r,theta ) = r cos(theta) " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         double const r = ddc::select<R>(ddc::coordinate(irtheta));
         double const th = ddc::select<Theta>(ddc::coordinate(irtheta));
         test(irtheta) = r * std::cos(th);
@@ -170,7 +171,7 @@ void launch_tests(
 
     // --- TEST 5 -------------------------------------------------------------------------------------
     std::cout << std::endl << "TEST 5: f(r,theta ) = r⁵ cos(10*theta) " << std::endl;
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         double const r = ddc::select<R>(ddc::coordinate(irtheta));
         double const th = ddc::select<Theta>(ddc::coordinate(irtheta));
         test(irtheta) = std::pow(r, 5) * std::cos(10 * th);
@@ -262,7 +263,7 @@ TEST_P(SplineQuadrature, TestFunctions)
     SplineRThetaEvaluatorConstBound_host
             spline_evaluator_extrapol(bv_r_min, bv_r_max, bv_knots_min, bv_knots_max);
 
-    DiscreteToCartesianBuilder<
+    DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
             SplineRThetaBuilder_host,
@@ -272,7 +273,7 @@ TEST_P(SplineQuadrature, TestFunctions)
                     mapping_1,
                     builder,
                     spline_evaluator_extrapol);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
     TOLs[0][0] = 5e-6;
     TOLs[0][1] = 5e-7;
     TOLs[1][0] = 5e-3;

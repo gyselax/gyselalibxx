@@ -37,7 +37,7 @@ jobs:
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - id: skip_check
         uses: ./.github/actions/duplicate_check
       - name: Wait
@@ -61,7 +61,7 @@ jobs:
     if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
     steps:
       - name: Checkout gyselalibxx
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
       - name: "Filter tests"
         uses: ./.github/actions/test_filter
       - name: "Send to persee"
@@ -84,7 +84,7 @@ jobs:
     if: ${{ needs.pre_job.outputs.should_skip == 'true' }}
     steps:
       - name: "Get bot token"
-        uses: actions/create-github-app-token@v1
+        uses: actions/create-github-app-token@v3
         id: app-token
         with:
           app-id: 1132905
@@ -105,22 +105,22 @@ jobs:
   #  steps:
   #    - name: Checkout gyselalibxx
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
-  #      uses: actions/checkout@v4
+  #      uses: actions/checkout@v6
   #      with:
-  #        submodules: recursive
+  #        submodules: true
   #    - name: "Filter tests"
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/test_filter
   #    - name: Setup environment
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      run: |
-  #        . toolchains/v100.persee/environment.sh
+  #        . toolchains/persee/v100/environment.sh
   #      shell: bash
   #    - name: Build code
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/build_code
   #      with:
-  #        toolchain: toolchains/v100.persee/toolchain.cmake
+  #        toolchain: toolchains/persee/v100/toolchain.cmake
   #    - name: Run tests
   #      if: ${{ needs.pre_job.outputs.should_skip == 'false' }}
   #      uses: ./.github/actions/run_tests

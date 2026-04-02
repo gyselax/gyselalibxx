@@ -177,7 +177,7 @@ def set_plot_imshow(index, Values_list, title):
 
 
 # Get the inputs ------------------------------------------------
-executable, yaml_parameters, _, verbose = set_input(0, 1, 40, 80, 0.1, 0.8,  False, True)
+executable, yaml_parameters, _, verbose = set_input(0, 1, 40, 80, 0.1, 0.8, curves_def=False, feet_def=True)
 
 executable_name = os.path.basename(executable)
 if executable_name == "advection_ALL" :

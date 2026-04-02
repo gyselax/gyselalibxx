@@ -77,7 +77,9 @@ void norm(
     using IdxType = typename IdxRangeType::discrete_element_type;
 
     if constexpr (is_contravariant_vector_index_set_v<VectorIndexSetType>) {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space,
                 get_idx_range(vals),
                 KOKKOS_LAMBDA(IdxType idx) {
@@ -85,7 +87,9 @@ void norm(
                     norm_vals(idx) = norm(metric, vals(idx));
                 });
     } else {
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space,
                 get_idx_range(vals),
                 KOKKOS_LAMBDA(IdxType idx) {
@@ -126,7 +130,7 @@ KOKKOS_INLINE_FUNCTION double ipow(double a, int i)
     return r;
 }
 
-inline std::size_t factorial(std::size_t f)
+KOKKOS_INLINE_FUNCTION std::size_t factorial(std::size_t f)
 {
     std::size_t r = 1;
     for (std::size_t i(2); i < f + 1; ++i) {
@@ -255,7 +259,11 @@ KOKKOS_INLINE_FUNCTION double scalar_product(
     return tensor_mul(index<'i'>(a), index<'i', 'j'>(metric), index<'j'>(b));
 }
 
-template <class Mapping, class CoordType, class ElementType, class VectorIndexSetType>
+template <
+        concepts::MappingWithJacobian Mapping,
+        class CoordType,
+        class ElementType,
+        class VectorIndexSetType>
 KOKKOS_INLINE_FUNCTION Tensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>>
 tensor_product(
         Mapping const& mapping,
@@ -264,9 +272,15 @@ tensor_product(
         Tensor<ElementType, VectorIndexSetType> const& b)
 {
     static_assert(ddc::type_seq_size_v<VectorIndexSetType> == 3);
-    static_assert(is_mapping_v<Mapping>);
-    static_assert(has_jacobian_v<Mapping>);
     LeviCivitaTensor<ElementType, vector_index_set_dual_t<VectorIndexSetType>> eps(
             mapping.jacobian(coord));
     return tensor_mul(index<'i', 'j', 'k'>(eps), index<'j'>(a), index<'k'>(b));
+}
+
+/**
+ * @brief Calculate (-1)^pow.
+ */
+KOKKOS_INLINE_FUNCTION static int neg_1_pow(int pow)
+{
+    return (1 - 2 * (pow % 2));
 }

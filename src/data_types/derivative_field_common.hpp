@@ -459,70 +459,6 @@ public:
     KOKKOS_DEFAULTED_FUNCTION ~DerivFieldCommon() = default;
 
     /**
-     * @brief Get a ConstField describing a subset of the data.
-     *
-     * @param slice_spec A discrete element describing the position at which these dimensions should be
-     *          indexed. If information about the derivatives is missing then it is assumed that the
-     *          0-th order derivative is requested.
-     *
-     * @returns ConstField A subset of the data.
-     */
-    template <class... QueryDDims>
-    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec) const
-    {
-        return get_internal_field(slice_spec).span_cview();
-    }
-
-    /**
-     * @brief Get a Field describing a subset of the data.
-     *
-     * @param slice_spec A discrete element describing the position at which these dimensions should be
-     *          indexed. If information about the derivatives is missing then it is assumed that the
-     *          0-th order derivative is requested.
-     *
-     * @returns Field A subset of the data.
-     */
-    template <class... QueryDDims>
-    constexpr auto operator[](Idx<QueryDDims...> const& slice_spec)
-    {
-        return get_internal_field(slice_spec);
-    }
-
-    /**
-     * @brief Get a Field describing a subset of the data.
-     * This function allows a slice to be obtained however it is designed to return a Field. It is
-     * therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).
-     *
-     * @param oidx_range A discrete index range describing the position at which these dimensions should be
-     *          indexed. If information about the derivatives is missing then it is assumed that the
-     *          0-th order derivative is requested.
-     *
-     * @returns Field A subset of the data.
-     */
-    template <class... QueryDDims>
-    KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range)
-    {
-        return get_internal_field(oidx_range);
-    }
-
-    /**
-     * @brief Get a ConstField describing a subset of the data.
-     * This function allows a slice to be obtained however it is designed to return a ConstField. It is
-     * therefore not possible to request data from multiple fields (e.g. derivatives from 0 to 3).
-     *
-     * @param oidx_range A discrete index range describing the position at which these dimensions should be
-     *          indexed. If information about the derivatives is missing then it is assumed that the
-     *          0-th order derivative is requested.
-     *
-     * @returns ConstField A subset of the data.
-     */
-    template <class... QueryDDims>
-    KOKKOS_FUNCTION constexpr auto operator[](IdxRange<QueryDDims...> const& oidx_range) const
-    {
-        return get_internal_field(oidx_range).span_cview();
-    }
-
-    /**
      * @brief Get one of the mdspans from the internal array internal_fields.
      * This function takes index ranges on the derivative directions. Where derivatives are
      * missing it is assumed that the 0-th order derivative is requested. This dimension
@@ -579,7 +515,7 @@ public:
      *
      * @returns Field The field on the physical index range.
      */
-    auto get_values_field()
+    auto get_values_field() const
     {
         IdxRange<> no_specified_dims;
         return get_internal_field(no_specified_dims);
@@ -596,5 +532,47 @@ public:
     {
         IdxRange<> no_specified_dims;
         return get_internal_field(no_specified_dims).span_cview();
+    }
+
+    /**
+     * @brief Get the physical index range on which the Field is defined.
+     * This method is equivalent to calling `get_idx_range(this->get_values_field())`
+     */
+    KOKKOS_FUNCTION physical_idx_range_type idx_range() const
+    {
+        return m_physical_idx_range;
+    }
+
+    /**
+     * @brief Get the index ranges describing which derivatives are defined
+     * for each dimension.
+     *
+     * E.g. for a DerivFieldMem<double, IdxRange<ddc::Deriv<X>, GridX, GridY>, 2>
+     * This will return IdxRange<ddc::Deriv<X>>(1,2) indicating that the first
+     * and second derivatives are defined for the X dimension.
+     * E.g. for a DerivField<double, IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>, GridX, GridY>>
+     * This will return IdxRange<ddc::Deriv<X>, ddc::Deriv<Y>> indicating how many of
+     * the X and Y derivatives are saved in this field (this may be a subset of the
+     * derivatives available in the originally allocated DerivFieldMem.
+     */
+    discrete_deriv_idx_range_type derivative_idx_range() const
+    {
+        return m_deriv_idx_range;
+    }
+
+    /**
+     * @brief Get the physical index range along Grid1D on which the derivatives of that
+     * dimension are defined.
+     *
+     * This is equivalent to retrieving the argument deriv_idx_range_x from a dxField defined as:
+     * DerivFieldMem<double, IdxRange<dX, GridX, GridY>, 1> dxField(idx_range_x_y, deriv_idx_range_x);
+     */
+    template <class Grid1D>
+    IdxRangeSlice<Grid1D> idx_range_for_deriv() const
+    {
+        static_assert(
+                ddc::in_tags_v<Grid1D, physical_deriv_grids>,
+                "Cannot request index range for a dimension where no derivatives are present.");
+        return IdxRangeSlice<Grid1D>(m_cross_derivative_idx_range);
     }
 };

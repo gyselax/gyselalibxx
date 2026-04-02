@@ -7,14 +7,17 @@ then
     exit 1
 fi
 
-SPACK_USER_VERSION="spack-user-4.0.0"
-
-export SPACK_USER_PREFIX="${SHAREDWORKDIR}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
-export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
-
 module purge
 
-module load "${SPACK_USER_VERSION}"
+SPACK_USER_VERSION="spack-user-5.0.0"
+
+export SPACK_USER_PREFIX="${ALL_CCFRWORK}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
+
+# Avoid too many temporary files in the Spack installation tree
+export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
+
+module load develop "${SPACK_USER_VERSION}"
 which spack
 spack debug report
 # Spack must work in a clean, purged environment so it can load modules without
@@ -34,18 +37,23 @@ eval -- "$(
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
+        ddc \
+        gcc \
         ginkgo \
         googletest \
         kokkos \
-        kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
+        koliop \
+        lapack \
+        mpi \
         ninja \
         paraconf \
         pdi \
         pdiplugin-decl-hdf5 \
         pdiplugin-decl-netcdf \
         pdiplugin-mpi \
+        pdiplugin-pycall \
         pdiplugin-set-value \
         pdiplugin-trace \
         python \
@@ -55,33 +63,11 @@ eval -- "$(
         py-matplotlib \
         py-netcdf4 \
         py-numpy \
+        py-pyyaml \
         py-scipy \
         py-sympy \
-        py-xarray \
-        py-pyyaml
+        py-xarray
 )"
 
-# Due to https://github.com/gyselax/gyselalibxx/pull/198#issuecomment-2943081411
-# we use a different HIP compiler to build dependencies and to build gyselalib. 
-# It is fine except we must unset some environment variables defined by spack's 
-# HIP packages so they do not interfere with HIPCC/clang in the 6.3.3 version.
-# Notably:
-unset ROCM_PATH                  # /opt/rocm-6.1.2
-unset HIP_CLANG_PATH             # /opt/rocm-6.1.2/llvm/bin
-unset HSA_PATH                   # /opt/rocm-6.1.2
-unset ROCMINFO_PATH              # /opt/rocm-6.1.2
-unset DEVICE_LIB_PATH            # /opt/rocm-6.1.2/amdgcn/bitcode
-unset HIP_DEVICE_LIB_PATH        # /opt/rocm-6.1.2/amdgcn/bitcode
-unset LLVM_PATH                  # /opt/rocm-6.1.2/llvm
-unset COMGR_PATH                 # /opt/rocm-6.1.2
-unset HIPCC_COMPILE_FLAGS_APPEND # --rocm-path=/opt/rocm-6.1.2 --gcc-toolchain=/opt/rh/gcc-toolset-13/root/usr --rocm-path=/opt/rocm-6.1.2 --gcc-toolchain=/opt/rh/gcc-toolset-13/root/usr
-unset HIPFLAGS                   # --gcc-toolchain=/opt/rh/gcc-toolset-13/root/usr --gcc-toolchain=/opt/rh/gcc-toolset-13/root/usr
-
-module load cpe/24.07
-module load craype-x86-trento craype-accel-amd-gfx90a
-# NOTE: Force 6.3.3 due to startup failures (https://github.com/gyselax/gyselalibxx/pull/198#issuecomment-2943081411)
-module load PrgEnv-gnu-amd amd-mixed/6.3.3
-
-module list
-
-export MPICH_GPU_SUPPORT_ENABLED=1
+# Add Kokkos Tools to the `LD_LIBRARY_PATH`
+export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"

@@ -50,14 +50,16 @@ neumann_spline_quadrature_coefficients_1d(
         IdxRange<Grid1D> const& idx_range,
         SplineBuilder const& builder)
 {
-    constexpr int nbc_xmin = SplineBuilder::s_nbc_xmin;
-    constexpr int nbc_xmax = SplineBuilder::s_nbc_xmax;
+    constexpr int nbc_xmin = SplineBuilder::s_nbe_xmin;
+    constexpr int nbc_xmax = SplineBuilder::s_nbe_xmax;
     static_assert(
-            SplineBuilder::s_bc_xmin == ddc::BoundCond::HERMITE,
+            SplineBuilder::s_bc_xmin == ddc::BoundCond::HERMITE
+                    || SplineBuilder::s_bc_xmin == ddc::BoundCond::HOMOGENEOUS_HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
-            SplineBuilder::s_bc_xmax == ddc::BoundCond::HERMITE,
+            SplineBuilder::s_bc_xmax == ddc::BoundCond::HERMITE
+                    || SplineBuilder::s_bc_xmax == ddc::BoundCond::HOMOGENEOUS_HERMITE,
             "The neumann spline quadrature requires a builder which uses Hermite boundary "
             "conditions.");
     static_assert(
@@ -124,7 +126,7 @@ neumann_spline_quadrature_coefficients(
     host_t<DField<IdxRange<DDims...>>> coefficients(get_field(coefficients_alloc_host));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
     // (see https://github.com/kokkos/kokkos/pull/7059)
-    ddc::for_each(idx_range, [&](Idx<DDims...> const idim) {
+    ddc::host_for_each(idx_range, [&](Idx<DDims...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
                 = (std::get<CoefficientField1D<Kokkos::DefaultHostExecutionSpace, DDims>>(

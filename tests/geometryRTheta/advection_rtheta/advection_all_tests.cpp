@@ -1,4 +1,3 @@
-//#pragma once
 #include <array>
 #include <chrono>
 #include <cstring>
@@ -21,10 +20,10 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "input.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
@@ -34,7 +33,7 @@
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
-#include "spline_interpolator_2d.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
@@ -49,13 +48,16 @@ using CzarnyToCartMapping = CzarnyToCartesian<R, Theta, X, Y>;
 using CartToCircularMapping = CartesianToCircular<X, Y, R, Theta>;
 using CartToCzarnyMapping = CartesianToCzarny<X, Y, R, Theta>;
 using CircularToPseudoCartMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
-using DiscreteMappingBuilderHost = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilderHost = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
         SplineRThetaEvaluatorConstBound_host>;
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorConstBound>;
 
 
 } // end namespace
@@ -160,11 +162,8 @@ public:
 struct GeneralParameters
 {
     IdxRangeRTheta grid;
-    PreallocatableSplineInterpolator2D<
-            SplineRThetaBuilder,
-            SplineRThetaEvaluatorNullBound,
-            IdxRangeRTheta> const& interpolator;
     SplineRThetaBuilder const& advection_builder;
+    SplineRThetaEvaluatorNullBound const& interpolation_evaluator;
     SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
     bool if_save_curves;
@@ -203,7 +202,11 @@ void run_simulations_with_methods(
             params.advection_builder,
             params.advection_evaluator);
 
-    BslAdvectionPolar advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
+    BslAdvectionPolar advection_operator(
+            params.advection_builder,
+            params.interpolation_evaluator,
+            foot_finder,
+            sim.to_physical_mapping);
 
     run_simulations(
             sim.to_physical_mapping_host,
@@ -304,9 +307,6 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
-
     // --- Evaluator for the test advection field:
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_right(rmax);
@@ -339,13 +339,14 @@ int main(int argc, char** argv)
             from_czarny_map,
             builder_host,
             spline_evaluator_extrapol_host);
-    DiscreteToCartesian const from_discrete_czarny_map_host = discrete_czarny_map_builder_host();
+    DiscretePoloidalCSSplineMapping const from_discrete_czarny_map_host
+            = discrete_czarny_map_builder_host();
     DiscreteMappingBuilder const discrete_czarny_map_builder(
             Kokkos::DefaultExecutionSpace(),
             from_czarny_map,
             builder,
             spline_evaluator_extrapol);
-    DiscreteToCartesian const from_discrete_czarny_map = discrete_czarny_map_builder();
+    DiscretePoloidalCSSplineMapping const from_discrete_czarny_map = discrete_czarny_map_builder();
 
     std::tuple simulations = std::make_tuple(
             SimulationParameters(
@@ -396,8 +397,8 @@ int main(int argc, char** argv)
 
     GeneralParameters params
             = {grid,
-               interpolator,
                builder,
+               spline_evaluator,
                spline_evaluator_extrapol,
                final_time,
                if_save_curves,

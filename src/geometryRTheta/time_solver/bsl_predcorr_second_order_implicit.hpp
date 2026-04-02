@@ -14,10 +14,11 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polarpoissonlikesolver.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_polar_foot_finder.hpp"
 
 
@@ -39,14 +40,14 @@
  * for @f$ n \geq 0 @f$,
  *
  * First, it predicts:
- * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
  * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes implicitly @f$\rho^P@f$ with a BslAdvectionPolar on @f$ \frac{dt}{4} @f$:
  *      - the characteristic feet @f$X^P@f$ is such that @f$X^P = X^k@f$ with @f$X^k@f$ the result of the implicit method:
  *          - @f$ X^k = X^n - \frac{dt}{4} \partial_t X^k@f$.
  * 
  * Secondly, it corrects: 
- * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarPoissonLikeSolver;
  * - 5. From @f$\phi^P@f$, it computes @f$A^P@f$ with a AdvectionFieldFinder;
  * - 6. From @f$\rho^n@f$ and @f$ A^{P} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionPolar on @f$ \frac{dt}{2} @f$.
  *      - the characteristic feet @f$X^C@f$ is such that @f$X^C = X^k@f$ with @f$X^k@f$ the result of the implicit method:
@@ -57,8 +58,13 @@
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  * @tparam LogicalToPseudoPhysicalMapping
  *      A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates.
+ * @tparam PolarPoissonLikeSolver
+ *      The type of the solver for the Poisson-like equation on the polar plane.
  */
-template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
+template <
+        class LogicalToPhysicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class PolarPoissonLikeSolver>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -73,10 +79,8 @@ private:
     using BslAdvectionRTheta = BslAdvectionPolar<
             SplinePolarFootFinderType,
             LogicalToPhysicalMapping,
-            PreallocatableSplineInterpolator2D<
-                    SplineRThetaBuilder,
-                    SplineRThetaEvaluatorNullBound,
-                    IdxRangeRTheta>>;
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound>;
 
     LogicalToPhysicalMapping const& m_logical_to_physical;
 
@@ -85,11 +89,7 @@ private:
     EulerBuilder const m_euler;
     SplinePolarFootFinderType const m_foot_finder;
 
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorConstBound const& m_evaluator;
@@ -123,11 +123,7 @@ public:
             BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver,
+            PolarPoissonLikeSolver const& poisson_solver,
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
@@ -251,7 +247,9 @@ public:
                     ddcHelper::get<Y>(get_const_field(advection_field)));
 
             // initialisation:
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -278,6 +276,7 @@ public:
 
             // Compute the new advection field (E^n(X^n) + E^n(X^P)) /2:
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -295,6 +294,7 @@ public:
 
             // --- advect also the feet because it is needed for the next step
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -328,6 +328,7 @@ public:
 
             // initialisation:
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -353,6 +354,7 @@ public:
 
             // Computed advection field (A^P(X^n) + A^P(X^P)) /2:
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -387,7 +389,7 @@ public:
 
 
     /**
-     * @brief The implicit loop which calculates the feet of the charateristics.
+     * @brief The implicit loop which calculates the feet of the characteristicss.
      *
      * This function should be private but cannot be as it contains Kokkos lambda
      * functions.
@@ -432,7 +434,9 @@ public:
                     ddcHelper::get<Y>(advection_field_coefs_k));
 
             // Compute the new advection field A(X^n) + A(X^{k-1}):
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -447,6 +451,7 @@ public:
 
             // X^k = X^n - dt* X^k:
             ddc::parallel_for_each(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
@@ -458,6 +463,7 @@ public:
             // Convergence test:
             LogicalToPhysicalMapping logical_to_physical_proxy = m_logical_to_physical;
             square_difference_feet = ddc::parallel_transform_reduce(
+                    location.function_name(),
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     0.0,

@@ -22,27 +22,25 @@
  *                  By default: the 1D index range of the interpolation points for the spline builder.
  */
 template <
-        class SplineBuilder,
-        class SplineEvaluator,
-        class IdxRangeBatched = typename SplineBuilder::interpolation_domain_type>
+        class SplineInterpolatorType,
+        class IdxRangeBatched =
+                typename SplineInterpolatorType::BuilderType::interpolation_domain_type>
 class FEM1DPoissonSolver
     : public IPoissonSolver<
-              typename SplineEvaluator::evaluation_domain_type,
+              typename SplineInterpolatorType::EvaluatorType::evaluation_domain_type,
               IdxRangeBatched,
-              typename SplineEvaluator::memory_space,
+              double,
+              typename SplineInterpolatorType::EvaluatorType::memory_space,
               Kokkos::layout_right>
 {
-    static_assert(std::is_same_v<
-                  typename SplineBuilder::interpolation_discrete_dimension_type,
-                  typename SplineEvaluator::evaluation_discrete_dimension_type>);
-    static_assert(ddc::in_tags_v<
-                  typename SplineBuilder::interpolation_discrete_dimension_type,
-                  ddc::to_type_seq_t<IdxRangeBatched>>);
-
 private:
+    using SplineBuilder = typename SplineInterpolatorType::BuilderType;
+    using SplineEvaluator = typename SplineInterpolatorType::EvaluatorType;
+
     using base_type = IPoissonSolver<
             typename SplineEvaluator::evaluation_domain_type,
             IdxRangeBatched,
+            double,
             typename SplineEvaluator::memory_space,
             Kokkos::layout_right>;
 
@@ -198,33 +196,33 @@ public:
     /**
      * Construct the FemQNSolver operator.
      *
+     * @param spline_interpolator A spline interpolator containing the builder
+     *                           which calculates the coefficients of a spline representation
+     *                           and the associated evaluator which provides the value of the
+     *                           spline representation from its coefficients.
+     */
+    explicit FEM1DPoissonSolver(SplineInterpolatorType const& spline_interpolator)
+        : m_spline_builder(spline_interpolator.get_builder())
+        , m_spline_evaluator(spline_interpolator.get_evaluator())
+        , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_interpolator.get_evaluator()))
+    {
+        build_matrix();
+    }
+
+    /**
+     * Construct the FemQNSolver operator.
+     *
      * @param spline_builder A spline builder which calculates the coefficients of a spline representation.
      * @param spline_evaluator A spline evaluator which provides the value of a spline representation from its coefficients.
      */
-    FEM1DPoissonSolver(SplineBuilder const& spline_builder, SplineEvaluator const& spline_evaluator)
+    [[deprecated]] FEM1DPoissonSolver(
+            SplineBuilder const& spline_builder,
+            SplineEvaluator const& spline_evaluator)
         : m_spline_builder(spline_builder)
         , m_spline_evaluator(spline_evaluator)
         , m_spline_fem_evaluator(jit_build_nubsplinesx(spline_evaluator))
     {
-        using break_point_grid = ddc::knot_discrete_dimension_t<InputBSplines>;
-        IdxRange<break_point_grid> break_point_idx_range
-                = ddc::discrete_space<InputBSplines>().break_point_domain();
-        host_t<FieldMem<CoordPDEDim, IdxRange<break_point_grid>>> break_points_alloc(
-                break_point_idx_range);
-        ddcHelper::dump_coordinates(
-                Kokkos::DefaultHostExecutionSpace(),
-                get_field(break_points_alloc));
-
-        // Calculate the integration coefficients
-        GaussLegendre<GridPDEDimQ, s_npts_gauss> const gl(get_const_field(break_points_alloc));
-        m_quad_coef = gl.template gauss_legendre_coefficients<memory_space>();
-
-        // Build the finite elements matrix
-        if constexpr (InputBSplines::is_periodic()) {
-            build_periodic_matrix();
-        } else {
-            build_non_periodic_matrix();
-        }
+        build_matrix();
     }
 
     /**
@@ -246,17 +244,7 @@ public:
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
-        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
-        CoordField eval_pts = get_field(eval_pts_alloc);
-
-        ddc::parallel_for_each(
-                exec_space(),
-                get_idx_range(eval_pts),
-                KOKKOS_LAMBDA(full_index const idx) {
-                    eval_pts(idx) = ddc::coordinate(ddc::select<GridPDEDim>(idx));
-                });
-
-        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
+        m_spline_fem_evaluator(phi, get_const_field(phi_coefs));
 
         return phi;
     }
@@ -283,20 +271,12 @@ public:
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
-        CoordFieldMem eval_pts_alloc(get_idx_range(phi));
-        CoordField eval_pts = get_field(eval_pts_alloc);
+        m_spline_fem_evaluator(phi, get_const_field(phi_coefs));
+        m_spline_fem_evaluator.deriv(Idx<ddc::Deriv<PDEDim>>(1), E, get_const_field(phi_coefs));
 
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
-                exec_space(),
-                get_idx_range(eval_pts),
-                KOKKOS_LAMBDA(full_index const idx) {
-                    eval_pts(idx) = ddc::coordinate(ddc::select<GridPDEDim>(idx));
-                });
-
-        m_spline_fem_evaluator(phi, get_const_field(eval_pts), get_const_field(phi_coefs));
-        m_spline_fem_evaluator.deriv(E, get_const_field(eval_pts), get_const_field(phi_coefs));
-
-        ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 get_idx_range(phi),
                 KOKKOS_LAMBDA(full_index const idx) { E(idx) = -E(idx); });
@@ -328,7 +308,7 @@ private:
         // Fill the banded part of the matrix
         std::array<double, s_degree + 1> derivs_alloc;
         DSpan1D derivs = as_span(derivs_alloc);
-        ddc::for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
+        ddc::host_for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
             CoordPDEDim const coord = ddc::coordinate(ix);
             IdxFEMBSplines const jmin_idx
                     = ddc::discrete_space<FEMBSplines>().eval_deriv(derivs, coord);
@@ -390,7 +370,7 @@ private:
         // Fill the banded part of the matrix
         std::array<double, s_degree + 1> derivs_alloc;
         DSpan1D derivs = as_span(derivs_alloc);
-        ddc::for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
+        ddc::host_for_each(get_idx_range(m_quad_coef), [&](IdxQ const ix) {
             CoordPDEDim const coord = ddc::coordinate(ix);
             IdxFEMBSplines const jmin_idx
                     = ddc::discrete_space<FEMBSplines>().eval_deriv(derivs, coord);
@@ -452,7 +432,9 @@ public:
         // Fill phi_rhs(i) with \int rho(x) b_i(x) dx
         // Rk: phi_rhs no longer contains spline coefficients, but is the
         //     RHS of the matrix equation
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 exec_space(),
                 rhs_build_idx_range,
                 KOKKOS_LAMBDA(IdxRHSQuadrature const idx) {
@@ -483,7 +465,7 @@ public:
 
         int constexpr n_implicit_min_bcs(!InputBSplines::is_periodic());
 
-        ddc::for_each(batch_idx_range, [&](batch_index_type ib) {
+        ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
             IdxRangeFEMBSplines solve_idx_range(
                     fem_idx_range.front() + n_implicit_min_bcs,
                     IdxStep<FEMBSplines>(m_matrix_size));
@@ -504,7 +486,9 @@ public:
             IdxFEMBSplines first_repeat_bspline(ddc::discrete_space<FEMBSplines>().nbasis());
             // Copy the first d coefficients into the last d coefficients
             // These coefficients refer to the same InputBSplines which cross the boundaries
+            const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
+                    location.function_name(),
                     exec_space(),
                     batch_idx_range,
                     KOKKOS_LAMBDA(batch_index_type ib) {
@@ -542,6 +526,29 @@ private:
             }
             // Boundary values are never evaluated
             return FEMSplineEvaluator(ddc::NullExtrapolationRule(), ddc::NullExtrapolationRule());
+        }
+    }
+
+    void build_matrix()
+    {
+        using break_point_grid = ddc::knot_discrete_dimension_t<InputBSplines>;
+        IdxRange<break_point_grid> break_point_idx_range
+                = ddc::discrete_space<InputBSplines>().break_point_domain();
+        host_t<FieldMem<CoordPDEDim, IdxRange<break_point_grid>>> break_points_alloc(
+                break_point_idx_range);
+        ddcHelper::dump_coordinates(
+                Kokkos::DefaultHostExecutionSpace(),
+                get_field(break_points_alloc));
+
+        // Calculate the integration coefficients
+        GaussLegendre<GridPDEDimQ, s_npts_gauss> const gl(get_const_field(break_points_alloc));
+        m_quad_coef = gl.template gauss_legendre_coefficients<memory_space>();
+
+        // Build the finite elements matrix
+        if constexpr (InputBSplines::is_periodic()) {
+            build_periodic_matrix();
+        } else {
+            build_non_periodic_matrix();
         }
     }
 };

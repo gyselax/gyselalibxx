@@ -8,8 +8,8 @@
 
 #include "circular_to_cartesian.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "polar_bsplines.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "view.hpp"
@@ -171,12 +171,12 @@ TEST(PolarSplineTest, ConstantEval)
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
             Kokkos::DefaultHostExecutionSpace(),
             coord_changer,
             builder_rtheta,
             evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem coef(ddc::discrete_space<BSplines>().full_domain());
@@ -193,8 +193,12 @@ TEST(PolarSplineTest, ConstantEval)
         for (std::size_t j(0); j < n_test_points; ++j) {
             PolarCoord const test_point(r0 + i * dr, theta0 + j * dp);
             const double val = spline_evaluator(test_point, get_const_field(coef));
-            const double deriv_1 = spline_evaluator.deriv_dim_1(test_point, get_const_field(coef));
-            const double deriv_2 = spline_evaluator.deriv_dim_2(test_point, get_const_field(coef));
+            const double deriv_1
+                    = spline_evaluator
+                              .deriv(Idx<ddc::Deriv<R>>(1), test_point, get_const_field(coef));
+            const double deriv_2
+                    = spline_evaluator
+                              .deriv(Idx<ddc::Deriv<Theta>>(1), test_point, get_const_field(coef));
 
             EXPECT_LE(fabs(val - 1.0), 1.0e-14);
             EXPECT_LE(fabs(deriv_1), 1.0e-13);
@@ -288,12 +292,12 @@ void test_polar_spline_eval_gpu()
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             coord_changer,
             builder_rtheta,
             evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem coef(ddc::discrete_space<BSplines>().full_domain());
@@ -307,14 +311,14 @@ void test_polar_spline_eval_gpu()
     DFieldMem<IdxRange<GridR, GridTheta>> derivs_2(interpolation_idx_range);
 
     spline_evaluator(get_field(vals), get_const_field(coef));
-    spline_evaluator.deriv_dim_1(get_field(derivs_1), get_const_field(coef));
-    spline_evaluator.deriv_dim_2(get_field(derivs_2), get_const_field(coef));
+    spline_evaluator.deriv(Idx<ddc::Deriv<R>>(1), get_field(derivs_1), get_const_field(coef));
+    spline_evaluator.deriv(Idx<ddc::Deriv<Theta>>(1), get_field(derivs_2), get_const_field(coef));
 
     auto vals_host = ddc::create_mirror_view_and_copy(get_field(vals));
     auto derivs_1_host = ddc::create_mirror_view_and_copy(get_field(derivs_1));
     auto derivs_2_host = ddc::create_mirror_view_and_copy(get_field(derivs_2));
 
-    ddc::for_each(interpolation_idx_range, [&](Idx<GridR, GridTheta> idx) {
+    ddc::host_for_each(interpolation_idx_range, [&](Idx<GridR, GridTheta> idx) {
         EXPECT_NEAR(vals_host(idx), 1.0, 1.0e-14);
         EXPECT_NEAR(derivs_1_host(idx), 0.0, 1.0e-13);
         EXPECT_NEAR(derivs_2_host(idx), 0.0, 1.0e-13);
@@ -407,12 +411,12 @@ void test_polar_integrals()
 #elif defined(CZARNY_MAPPING)
     CircToCart const coord_changer(0.3, 1.4);
 #endif
-    DiscreteToCartesianBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
+    DiscretePoloidalCSSplineMappingBuilder<X, Y, BuilderRTheta, EvaluatorRTheta> mapping_builder(
             Kokkos::DefaultExecutionSpace(),
             coord_changer,
             builder_rtheta,
             evaluator_rtheta);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
     ddc::init_discrete_space<BSplines>(mapping);
 
     SplineMem bspline_integrals_alloc(ddc::discrete_space<BSplines>().full_domain());

@@ -4,7 +4,7 @@
 #include <ddc/ddc.hpp>
 
 #include "ddc_aliases.hpp"
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 
 /**
  * @brief An operator which solves the Quasi-Neutrality equation using a fast

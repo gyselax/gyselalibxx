@@ -13,12 +13,14 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#include "../spline_definitions_xyvxvy.hpp"
+
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
 #include "chargedensitycalculator.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "fft_poisson_solver.hpp"
-#include "geometry.hpp"
+#include "geometry_xyvxvy.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
 #include "mpichargedensitycalculator.hpp"
@@ -34,7 +36,6 @@
 #include "singlemodeperturbinitialisation.hpp"
 #include "species_info.hpp"
 #include "species_init.hpp"
-#include "spline_interpolator.hpp"
 
 using std::cerr;
 using std::endl;
@@ -90,10 +91,11 @@ int main(int argc, char** argv)
 
     IdxRangeVxVyXY idxrange_vxvyxy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
     IdxRangeXYVxVy idxrange_xyvxvy_x2Dsplit(idxrange_spxyvxvy_x2Dsplit);
-    SplineXBuilder const builder_x(idxrange_x);
-    SplineYBuilder const builder_y(idxrange_y);
-    SplineVxBuilder const builder_vx(idxrange_vx);
-    SplineVyBuilder const builder_vy(idxrange_vy);
+
+    SplineInterpolatorX const interpolator_x(idxrange_x);
+    SplineInterpolatorY const interpolator_y(idxrange_y);
+    SplineInterpolatorVx const interpolator_vx(idxrange_vx);
+    SplineInterpolatorVy const interpolator_vy(idxrange_vy);
 
     IdxRangeSpVxVy idxrange_spvxvy_local(idxrange_spxyvxvy_x2Dsplit);
     // Initialisation of the distribution function
@@ -115,47 +117,20 @@ int main(int argc, char** argv)
     double const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
-    // Create spline evaluator
-    ddc::PeriodicExtrapolationRule<X> bv_x_min;
-    ddc::PeriodicExtrapolationRule<X> bv_x_max;
-    SplineXEvaluator const spline_x_evaluator(bv_x_min, bv_x_max);
-
-    PreallocatableSplineInterpolator const
-            spline_x_interpolator(builder_x, spline_x_evaluator, idxrange_vxvyxy_v2Dsplit);
-
-    ddc::PeriodicExtrapolationRule<Y> bv_y_min;
-    ddc::PeriodicExtrapolationRule<Y> bv_y_max;
-    SplineYEvaluator const spline_y_evaluator(bv_y_min, bv_y_max);
-
-    PreallocatableSplineInterpolator const
-            spline_y_interpolator(builder_y, spline_y_evaluator, idxrange_vxvyxy_v2Dsplit);
-
-    ddc::ConstantExtrapolationRule<Vx> bv_vx_min(ddc::coordinate(idxrange_vx.front()));
-    ddc::ConstantExtrapolationRule<Vx> bv_vx_max(ddc::coordinate(idxrange_vx.back()));
-    SplineVxEvaluator const spline_vx_evaluator(bv_vx_min, bv_vx_max);
-
-    PreallocatableSplineInterpolator const
-            spline_vx_interpolator(builder_vx, spline_vx_evaluator, idxrange_xyvxvy_x2Dsplit);
-
-    ddc::ConstantExtrapolationRule<Vy> bv_vy_min(ddc::coordinate(idxrange_vy.front()));
-    ddc::ConstantExtrapolationRule<Vy> bv_vy_max(ddc::coordinate(idxrange_vy.back()));
-    SplineVyEvaluator const spline_vy_evaluator(bv_vy_min, bv_vy_max);
-
-    PreallocatableSplineInterpolator const
-            spline_vy_interpolator(builder_vy, spline_vy_evaluator, idxrange_xyvxvy_x2Dsplit);
-
     // Create advection operator
-    BslAdvectionSpatial<GeometryVxVyXY, GridX> const advection_x(spline_x_interpolator);
-    BslAdvectionSpatial<GeometryVxVyXY, GridY> const advection_y(spline_y_interpolator);
-    BslAdvectionVelocity<GeometryXYVxVy, GridVx> const advection_vx(spline_vx_interpolator);
-    BslAdvectionVelocity<GeometryXYVxVy, GridVy> const advection_vy(spline_vy_interpolator);
+    BslAdvectionSpatial<GeometryVxVyXY, SplineInterpolatorX> const advection_x(interpolator_x);
+    BslAdvectionSpatial<GeometryVxVyXY, SplineInterpolatorY> const advection_y(interpolator_y);
+    BslAdvectionVelocity<GeometryXYVxVy, SplineInterpolatorVx> const advection_vx(interpolator_vx);
+    BslAdvectionVelocity<GeometryXYVxVy, SplineInterpolatorVy> const advection_vy(interpolator_vy);
 
     MpiSplitVlasovSolver const
             vlasov(advection_x, advection_y, advection_vx, advection_vy, transpose);
 
     DFieldMemVxVy const quadrature_coeffs(
-            neumann_spline_quadrature_coefficients<
-                    Kokkos::DefaultExecutionSpace>(idxrange_vxvy, builder_vx, builder_vy));
+            neumann_spline_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
+                    idxrange_vxvy,
+                    interpolator_vx.get_builder(),
+                    interpolator_vy.get_builder()));
     DFieldMemVxVy local_quadrature_coeffs(idxrange_vxvy_v2Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs),

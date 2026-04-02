@@ -489,3 +489,62 @@ TEST(TensorTest, Identity2D)
     static_assert(ddcHelper::get<Z, R>(identity) == 0);
     static_assert(ddcHelper::get<Z, Z>(identity) == 1);
 }
+
+TEST(TensorTest, ElementAssign)
+{
+    using Tensor2x2 = Tensor<int, VectorIndexSet<X, Y>, VectorIndexSet<X, Y>>;
+    using Tensor3x3 = Tensor<int, VectorIndexSet<X, Y, Z>, VectorIndexSet<X, Y, Z>>;
+    Tensor2x2 small;
+    ddcHelper::get<X, X>(small) = 1;
+    ddcHelper::get<X, Y>(small) = 2;
+    ddcHelper::get<Y, X>(small) = 3;
+    ddcHelper::get<Y, Y>(small) = 4;
+    Tensor3x3 big;
+    ddcHelper::assign_elements(big, small);
+    EXPECT_EQ((ddcHelper::get<X, X>(small)), (ddcHelper::get<X, X>(big)));
+    EXPECT_EQ((ddcHelper::get<X, Y>(small)), (ddcHelper::get<X, Y>(big)));
+    EXPECT_EQ((ddcHelper::get<Y, X>(small)), (ddcHelper::get<Y, X>(big)));
+    EXPECT_EQ((ddcHelper::get<Y, Y>(small)), (ddcHelper::get<Y, Y>(big)));
+}
+
+TEST(TensorTest, CartesianLeviCivitaEnabledAsTensorType)
+{
+    using CartLC = CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y, Z>>;
+    static_assert(
+            is_tensor_type_v<CartLC>,
+            "CartesianLeviCivitaTensor should be recognised as a tensor type");
+    using LC = LeviCivitaTensor<int, VectorIndexSet<R, Theta>>;
+    using Id = IdentityTensor<int, VectorIndexSet<R, Z>, VectorIndexSet<R, Z>>;
+    static_assert(is_tensor_type_v<LC>);
+    static_assert(is_tensor_type_v<Id>);
+}
+
+TEST(TensorTest, LeviCivitaSize3D)
+{
+    using CartLC3D = CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y, Z>>;
+    using LC3D = LeviCivitaTensor<double, VectorIndexSet<R, Theta, Z>>;
+    static_assert(CartLC3D::size() == 27);
+    static_assert(LC3D::size() == 27);
+    static_assert(CartLC3D::rank() == 3);
+    static_assert(LC3D::rank() == 3);
+    using CartLC2D = CartesianLeviCivitaTensor<int, VectorIndexSet<X, Y>>;
+    using LC2D = LeviCivitaTensor<double, VectorIndexSet<R, Theta>>;
+    static_assert(CartLC2D::size() == 4);
+    static_assert(LC2D::size() == 4);
+}
+
+TEST(TensorTest, LeviCivitaFloatElementType)
+{
+    LeviCivitaTensor<float, VectorIndexSet<R, Theta>> lc_float(2.0f);
+    static_assert(std::is_same_v<decltype(lc_float)::element_type, float>);
+    float val_rt = ddcHelper::get<R, Theta>(lc_float);
+    float val_tr = ddcHelper::get<Theta, R>(lc_float);
+    float val_rr = ddcHelper::get<R, R>(lc_float);
+
+    EXPECT_FLOAT_EQ(val_rt, 0.5f);
+    EXPECT_FLOAT_EQ(val_tr, -0.5f);
+    EXPECT_FLOAT_EQ(val_rr, 0.0f);
+
+    CartesianLeviCivitaTensor<float, VectorIndexSet<X, Y>> cart_lc_float;
+    static_assert(std::is_same_v<decltype(cart_lc_float)::element_type, float>);
+}

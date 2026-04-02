@@ -26,13 +26,15 @@ DFieldSpXVx SingleModePerturbInitialisation::operator()(DFieldSpXVx const allfdi
     DFieldMemX perturbation_alloc(gridx);
     DConstFieldSpVx fequilibrium_proxy = get_const_field(m_fequilibrium);
     DFieldX perturbation_proxy = get_field(perturbation_alloc);
-    ddc::for_each(gridsp, [&](IdxSp const isp) {
+    ddc::host_for_each(gridsp, [&](IdxSp const isp) {
         perturbation_initialisation(
                 perturbation_proxy,
                 m_init_perturb_mode(isp),
                 m_init_perturb_amplitude(isp));
         // Initialisation of the distribution function --> fill values
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
+                location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 gridxvx,
                 KOKKOS_LAMBDA(IdxXVx const ixvx) {
@@ -81,7 +83,9 @@ void SingleModePerturbInitialisation::perturbation_initialisation(
     double const Lx = ddcHelper::total_interval_length(gridx);
 
     double const kx = perturb_mode * 2. * M_PI / Lx;
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             gridx,
             KOKKOS_LAMBDA(IdxX const ix) {

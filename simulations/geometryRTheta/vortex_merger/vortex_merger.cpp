@@ -19,10 +19,10 @@
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
-#include "geometry.hpp"
+#include "geometry_r_theta.hpp"
 #include "input.hpp"
 #include "l_norm_tools.hpp"
 #include "paraconfpp.hpp"
@@ -34,7 +34,7 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
-#include "spline_interpolator_2d.hpp"
+#include "spline_definitions_r_theta.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -43,13 +43,17 @@
 
 
 namespace {
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
+        X,
+        Y,
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorConstBound>;
 using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
-        SplineRThetaEvaluatorNullBound>;
-using DiscreteMappingBuilder
-        = DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder, SplineRThetaEvaluatorConstBound>;
+        SplineRThetaEvaluatorNullBound,
+        typename DiscreteMappingBuilder::MappingType>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
 
 } // end namespace
@@ -114,7 +118,7 @@ int main(int argc, char** argv)
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
@@ -134,8 +138,6 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
     SplinePolarFootFinder find_feet(
             grid,
             time_stepper,
@@ -144,7 +146,7 @@ int main(int argc, char** argv)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
 
 
 
@@ -162,11 +164,10 @@ int main(int argc, char** argv)
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
-    PoissonSolver poisson_solver(
+    PoissonSolver poisson_solver(discrete_mapping, spline_evaluator);
+    poisson_solver.update_coefficients(
             get_const_field(coeff_alpha_spline),
-            get_const_field(coeff_beta_spline),
-            discrete_mapping,
-            spline_evaluator);
+            get_const_field(coeff_beta_spline));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
     BslImplicitPredCorrRTheta predcorr_operator(
@@ -199,10 +200,10 @@ int main(int argc, char** argv)
 
     host_t<FieldMemR<CoordR>> coords_r(ddc::select<GridR>(grid));
     host_t<FieldMemTheta<CoordTheta>> coords_p(ddc::select<GridTheta>(grid));
-    ddc::for_each(ddc::select<GridR>(grid), [&](IdxR const ir) {
+    ddc::host_for_each(ddc::select<GridR>(grid), [&](IdxR const ir) {
         coords_r(ir) = ddc::coordinate(ir);
     });
-    ddc::for_each(ddc::select<GridTheta>(grid), [&](IdxTheta const itheta) {
+    ddc::host_for_each(ddc::select<GridTheta>(grid), [&](IdxTheta const itheta) {
         coords_p(itheta) = ddc::coordinate(itheta);
     });
 
@@ -221,7 +222,7 @@ int main(int argc, char** argv)
     host_t<FieldMemRTheta<CoordX>> coords_x(grid);
     host_t<FieldMemRTheta<CoordY>> coords_y(grid);
     host_t<DFieldMemRTheta> jacobian(grid);
-    ddc::for_each(grid, [&](IdxRTheta const irtheta) {
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         CoordXY coords_xy = to_physical_mapping(ddc::coordinate(irtheta));
         coords_x(irtheta) = ddc::select<X>(coords_xy);
         coords_y(irtheta) = ddc::select<Y>(coords_xy);

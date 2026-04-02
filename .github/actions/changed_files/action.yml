@@ -4,9 +4,17 @@ runs:
   using: "composite"
   steps:
     - run: |
-        git config --global --add safe.directory $(pwd)
         git fetch --no-recurse-submodules origin ${CHANGES_REF}
-        git diff --name-only ${CHANGES_REF} > changed_files.txt
+        if [[ -n "$(git branch -r --list origin/${CHANGES_REF})" ]]
+        then
+          REF=$(git log -1 --format=%H origin/${CHANGES_REF})
+        else
+          REF=${CHANGES_REF}
+        fi
+
+        git config --global --add safe.directory $(pwd)
+        git diff --name-only ${REF} > changed_files.txt
+        cat changed_files.txt
       shell: bash
     - if: github.event_name == 'push'
       run: |

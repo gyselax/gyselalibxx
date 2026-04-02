@@ -120,6 +120,22 @@ public:
     }
 
     /**
+     * @brief A constructor of the GaussLegendre class.
+     * @param[in] mesh_edge_idx_range An index range indicating the coordinates of the edges
+     *          of the cells on which the Gauss-Legendre quadrature is calculated.
+     */
+    template <class Grid1D>
+    explicit GaussLegendre(IdxRange<Grid1D> mesh_edge_idx_range)
+        : m_nbcells(mesh_edge_idx_range.size() - 1)
+        , m_valid_idx_range(
+                  Idx<GLGrid>(0),
+                  IdxStep<GLGrid>((mesh_edge_idx_range.size() - 1) * NPoints))
+        , m_cell_lengths(m_nbcells)
+    {
+        ddc::init_discrete_space<GLGrid>(get_sampling(mesh_edge_idx_range));
+    }
+
+    /**
      * @brief Get the index range of the points of the Gauss-Legendre quadrature.
      * @return The index range where functions should be evaluated.
      */
@@ -139,7 +155,7 @@ public:
         DFieldMem<IdxRange<GLGrid>, typename ExecSpace::memory_space> coefficients_alloc(
                 m_valid_idx_range);
         auto coefficients_host = ddc::create_mirror_view(get_field(coefficients_alloc));
-        ddc::for_each(m_valid_idx_range, [&](Idx<GLGrid> ix) {
+        ddc::host_for_each(m_valid_idx_range, [&](Idx<GLGrid> ix) {
             int i = (ix - m_valid_idx_range.front()) / NPoints;
             int j = (ix - m_valid_idx_range.front()) % NPoints;
             coefficients_host(ix) = m_cell_lengths[i] * m_glc.weight[j];
@@ -201,6 +217,25 @@ private:
         }
         return grid;
     }
+
+    template <class Grid1D>
+    std::vector<Coord<Dim>> get_sampling(IdxRange<Grid1D> mesh_edges_idx_range)
+    {
+        std::vector<Coord<Dim>> grid(m_nbcells * NPoints);
+
+        int k(0);
+        for (Idx<Grid1D> mesh_idx(mesh_edges_idx_range.front());
+             mesh_idx < mesh_edges_idx_range.back();
+             mesh_idx++) {
+            get_sampling_on_cell(
+                    grid,
+                    ddc::coordinate(mesh_idx),
+                    ddc::coordinate(mesh_idx + 1),
+                    mesh_idx - mesh_edges_idx_range.front(),
+                    k);
+        }
+        return grid;
+    }
 };
 
 /**
@@ -229,7 +264,7 @@ gauss_legendre_quadrature_coefficients(GaussLegendreQuad const&... gl)
     auto coefficients_host = ddc::create_mirror(get_field(coefficients));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
     // (see https://github.com/kokkos/kokkos/pull/7059)
-    ddc::for_each(idx_range, [&](Idx<typename GaussLegendreQuad::Grid1D...> const idim) {
+    ddc::host_for_each(idx_range, [&](Idx<typename GaussLegendreQuad::Grid1D...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients_host(idim)
                 = (std::get<host_t<DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D>>>>(

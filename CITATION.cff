@@ -3,10 +3,8 @@
 
 cff-version: 1.2.0
 title: Gyselalib++
-message: >-
-  If you use this software, please cite it using the
-  metadata from this file. The provided reference should be
-  replaced with a reference to an article shortly.
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
 type: software
 authors:
   - given-names: Emily
@@ -86,11 +84,73 @@ authors:
       Max-Planck-Institut für Plasmaphysik, Garching,
       Germany
     orcid: 'https://orcid.org/0009-0008-7233-6351'
+doi: 10.5281/zenodo.17044083
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Bourne
+    given-names: Emily
+    orcid: "https://orcid.org/0000-0002-3469-2338"
+  - family-names: Grandgirard
+    given-names: Virginie
+    orcid: "https://orcid.org/0000-0001-7821-9107"
+  - family-names: Asahi
+    given-names: Yuuichi
+    orcid: "https://orcid.org/0000-0002-9997-1274"
+  - family-names: Bigot
+    given-names: Julien
+    orcid: "https://orcid.org/0000-0002-0015-4304"
+  - family-names: Donnel
+    given-names: Peter
+    orcid: "https://orcid.org/0000-0002-6669-416X"
+  - family-names: Hoffmann
+    given-names: Alexander
+    orcid: "https://orcid.org/0009-0005-0736-6122"
+  - family-names: Kara
+    given-names: Abdelhadi
+    orcid: "https://orcid.org/0009-0000-9693-5828"
+  - family-names: Krah
+    given-names: Philipp
+    orcid: "https://orcid.org/0000-0001-8982-4230"
+  - family-names: Legouix
+    given-names: Baptiste
+    orcid: "https://orcid.org/0009-0006-7585-669X"
+  - family-names: Malaboeuf
+    given-names: Etienne
+    orcid: "https://orcid.org/0009-0007-3320-1406"
+  - family-names: Munschy
+    given-names: Yann
+    orcid: "https://orcid.org/0000-0002-3002-9352"
+  - family-names: Obrejan
+    given-names: Kevin
+    orcid: "https://orcid.org/0000-0002-1906-4181"
+  - family-names: Padioleau
+    given-names: Thomas
+    orcid: "https://orcid.org/0000-0001-5496-0013"
+  - family-names: Protais
+    given-names: Matthieu
+    orcid: "https://orcid.org/0009-0003-5852-7446"
+  - family-names: Vidal
+    given-names: Pauline
+    orcid: "https://orcid.org/0009-0008-7233-6351"
+  date-published: 2025-09-09
+  doi: 10.21105/joss.08582
+  issn: 2475-9066
+  issue: 113
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 8582
+  title: "Gyselalib++: A Portable C++ Library for Semi-Lagrangian
+    Kinetic and Gyrokinetic Simulations"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.08582"
+  volume: 10
+title: "Gyselalib++: A Portable C++ Library for Semi-Lagrangian Kinetic
+  and Gyrokinetic Simulations"
 repository-code: 'https://github.com/gyselax/gyselalibxx'
 url: 'https://gyselax.github.io/gyselalibxx/'
-abstract: >-
-  Gyselalib++ is a collection of C++ components for writing
-  gyrokinetic semi-lagrangian codes and similar.
 keywords:
   - hpc
   - ddc
