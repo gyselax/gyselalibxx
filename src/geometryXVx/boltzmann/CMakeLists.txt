@@ -7,8 +7,13 @@ add_library("boltzmann_${GEOMETRY_VARIANT}" STATIC
     splitrighthandsidesolver.cpp
 )
 
-target_include_directories("boltzmann_${GEOMETRY_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("boltzmann_${GEOMETRY_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                iboltzmannsolver.hpp
+                splitrighthandsidesolver.hpp
+                splitvlasovsolver.hpp
 )
 
 target_link_libraries("boltzmann_${GEOMETRY_VARIANT}"
@@ -22,5 +27,7 @@ target_link_libraries("boltzmann_${GEOMETRY_VARIANT}"
 )
 
 add_library("gslx::boltzmann_${GEOMETRY_VARIANT}" ALIAS "boltzmann_${GEOMETRY_VARIANT}")
+
+install(TARGETS boltzmann_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 endforeach()

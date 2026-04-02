@@ -4,10 +4,14 @@
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("geometry_${GEOMETRY_VARIANT}" INTERFACE)
-target_include_directories("geometry_${GEOMETRY_VARIANT}"
+
+target_sources("geometry_${GEOMETRY_VARIANT}"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                geometry_xvx.hpp
 )
+
 target_link_libraries("geometry_${GEOMETRY_VARIANT}" INTERFACE
     DDC::core
     gslx::speciesinfo
@@ -15,6 +19,8 @@ target_link_libraries("geometry_${GEOMETRY_VARIANT}" INTERFACE
     gslx::utils
 )
 add_library("gslx::geometry_${GEOMETRY_VARIANT}" ALIAS "geometry_${GEOMETRY_VARIANT}")
+
+install(TARGETS geometry_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 endforeach()
 

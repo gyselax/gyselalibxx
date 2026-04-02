@@ -2,11 +2,18 @@
 
 
 add_library(time_integration_RTheta INTERFACE)
-target_include_directories(time_integration_RTheta
+
+target_sources("time_integration_RTheta"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                bsl_predcorr.hpp
+                bsl_predcorr_second_order_explicit.hpp
+                bsl_predcorr_second_order_implicit.hpp
+                itimesolver.hpp
 )
-target_link_libraries(time_integration_RTheta 
+
+target_link_libraries(time_integration_RTheta
     INTERFACE
         DDC::core
         gslx::advection
@@ -18,4 +25,4 @@ target_link_libraries(time_integration_RTheta
 )
 add_library(gslx::time_integration_RTheta ALIAS time_integration_RTheta)
 
-            
+install(TARGETS time_integration_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS)

@@ -1,10 +1,20 @@
-
-
 add_library("multipatch_connectivity" INTERFACE)
-target_include_directories("multipatch_connectivity"
+
+target_sources("multipatch_connectivity"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                connectivity_details.hpp
+                connectivity.hpp
+                edge.hpp
+                edge_transformation.hpp
+                interface.hpp
+                matching_idx_slice.hpp
+                onion_patch_locator.hpp
+                patch.hpp
+                utils_patch_locators.hpp
 )
+
 target_link_libraries("multipatch_connectivity" INTERFACE
     DDC::core
     gslx::coord_transformations
@@ -13,3 +23,5 @@ target_link_libraries("multipatch_connectivity" INTERFACE
     gslx::utils
 )
 add_library("gslx::multipatch_connectivity" ALIAS "multipatch_connectivity")
+
+install(TARGETS multipatch_connectivity EXPORT GyselalibxxTargets FILE_SET HEADERS)

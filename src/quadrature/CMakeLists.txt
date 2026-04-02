@@ -2,9 +2,19 @@
 add_library(quadrature STATIC
     gauss_legendre_integration.cpp
     )
-target_include_directories(quadrature
-    PUBLIC
-    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+
+target_sources("quadrature"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                gauss_legendre_integration.hpp
+                neumann_spline_quadrature.hpp
+                quadrature_coeffs_nd.hpp
+                quadrature.hpp
+                simpson_quadrature.hpp
+                spline_quadrature.hpp
+                trapezoid_quadrature.hpp
+                volume_quadrature_nd.hpp
 )
 
 target_link_libraries(quadrature PUBLIC
@@ -14,3 +24,5 @@ target_link_libraries(quadrature PUBLIC
 )
 
 add_library(gslx::quadrature ALIAS quadrature)
+
+install(TARGETS quadrature EXPORT GyselalibxxTargets FILE_SET HEADERS)

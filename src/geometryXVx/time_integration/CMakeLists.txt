@@ -6,8 +6,12 @@ add_library("time_integration_${GEOMETRY_VARIANT}" STATIC
     predcorr.cpp
 )
 
-target_include_directories("time_integration_${GEOMETRY_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("time_integration_${GEOMETRY_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                itimesolver.hpp
+                predcorr.hpp
 )
 
 target_link_libraries("time_integration_${GEOMETRY_VARIANT}"
@@ -22,5 +26,7 @@ target_link_libraries("time_integration_${GEOMETRY_VARIANT}"
 )
 
 add_library("gslx::time_integration_${GEOMETRY_VARIANT}" ALIAS "time_integration_${GEOMETRY_VARIANT}")
+
+install(TARGETS time_integration_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 endforeach()

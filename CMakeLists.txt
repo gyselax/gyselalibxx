@@ -85,4 +85,38 @@ if("${GYSELALIBXX_BUILD_TESTING}")
     add_subdirectory(tests/)
 endif()
 
+include(CMakePackageConfigHelpers)
+include(GNUInstallDirs)
+
+## Installation of Config and ConfigVersion files
+
+set(GYSELALIBXX_INSTALL_CMAKEDIR ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME})
+
+install(FILES cmake/FindLAPACKE.cmake DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
+
+install(EXPORT GyselalibxxTargets NAMESPACE gslx:: DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR})
+
+configure_package_config_file(
+    cmake/GyselalibxxConfig.cmake.in
+    ${CMAKE_CURRENT_BINARY_DIR}/GyselalibxxConfig.cmake
+    INSTALL_DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR}
+    NO_SET_AND_CHECK_MACRO
+)
+
+# We use SameMinorVersion until major version 1
+if(PROJECT_VERSION VERSION_GREATER_EQUAL 1)
+    message(FATAL_ERROR "Gyselalibxx must switch COMPATIBILITY mode to SameMajorVersion")
+endif()
+write_basic_package_version_file(
+    ${CMAKE_CURRENT_BINARY_DIR}/GyselalibxxConfigVersion.cmake
+    COMPATIBILITY SameMinorVersion
+)
+
+install(
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/GyselalibxxConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/GyselalibxxConfigVersion.cmake
+    DESTINATION ${GYSELALIBXX_INSTALL_CMAKEDIR}
+)
+
 endif() # GYSELALIBXX_COMPILE_SOURCE

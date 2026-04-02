@@ -1,8 +1,11 @@
 # SPDX-License-Identifier: MIT
 add_library(gyroaverage INTERFACE)
 
-target_include_directories(gyroaverage
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("gyroaverage"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                gyroaverage_operator.hpp
 )
 
 target_link_libraries(gyroaverage
@@ -14,3 +17,4 @@ target_link_libraries(gyroaverage
 
 add_library(gslx::gyroaverage ALIAS gyroaverage)
 
+install(TARGETS gyroaverage EXPORT GyselalibxxTargets FILE_SET HEADERS)
