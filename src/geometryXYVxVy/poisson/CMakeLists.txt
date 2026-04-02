@@ -7,8 +7,16 @@ add_library("poisson_xy" STATIC
     qnsolver.cpp
 )
 
-target_include_directories("poisson_xy"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("poisson_xy"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                chargedensitycalculator.hpp
+                ichargedensitycalculator.hpp
+                iqnsolver.hpp
+                mpichargedensitycalculator.hpp
+                nullqnsolver.hpp
+                qnsolver.hpp
 )
 
 target_link_libraries("poisson_xy"
@@ -26,3 +34,5 @@ target_link_libraries("poisson_xy"
 )
 
 add_library("gslx::poisson_xy" ALIAS "poisson_xy")
+
+install(TARGETS poisson_xy EXPORT GyselalibxxTargets FILE_SET HEADERS)

@@ -4,8 +4,12 @@ add_library("collisions" STATIC
     collision_operator.cpp
 )
 
-target_include_directories("collisions"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("collisions"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                collision_common_configuration.hpp
+                collision_operator.hpp
 )
 
 target_link_libraries("collisions"
@@ -19,3 +23,5 @@ target_link_libraries("collisions"
 )
 
 add_library("gslx::collisions" ALIAS "collisions")
+
+install(TARGETS collisions EXPORT GyselalibxxTargets FILE_SET HEADERS)

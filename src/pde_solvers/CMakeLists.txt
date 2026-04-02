@@ -2,8 +2,15 @@
 
 add_library("pde_solvers" INTERFACE)
 
-target_include_directories("pde_solvers"
-    INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("pde_solvers"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                fem_1d_poisson_solver.hpp
+                fft_poisson_solver.hpp
+                ipoisson_solver.hpp
+                polarpoissonlikeassembler.hpp
+                polarpoissonlikesolver.hpp
 )
 
 target_link_libraries("pde_solvers"
@@ -17,3 +24,5 @@ target_link_libraries("pde_solvers"
 )
 
 add_library("gslx::pde_solvers" ALIAS "pde_solvers")
+
+install(TARGETS pde_solvers EXPORT GyselalibxxTargets FILE_SET HEADERS)

@@ -1,9 +1,18 @@
 
 add_library(timestepper INTERFACE)
-target_include_directories(timestepper
+
+target_sources("timestepper"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                crank_nicolson.hpp
+                euler.hpp
+                itimestepper.hpp
+                rk2.hpp
+                rk3.hpp
+                rk4.hpp
 )
+
 target_link_libraries(timestepper INTERFACE
     DDC::core
     gslx::data_types
@@ -13,3 +22,5 @@ target_link_libraries(timestepper INTERFACE
     gslx::utils
 )
 add_library(gslx::timestepper ALIAS timestepper)
+
+install(TARGETS timestepper EXPORT GyselalibxxTargets FILE_SET HEADERS)

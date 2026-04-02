@@ -1,0 +1,33 @@
+# Copyright (C) The DDC development team, see COPYRIGHT.md file
+#
+# SPDX-License-Identifier: MIT
+
+@PACKAGE_INIT@
+
+include(CMakeFindDependencyMacro)
+
+find_dependency(LAPACK)
+
+find_dependency(MPI)
+
+find_dependency(paraconf COMPONENTS C)
+
+find_dependency(PDI COMPONENTS C)
+
+find_dependency(GTest)
+
+find_dependency(Kokkos)
+
+find_dependency(KokkosKernels)
+
+find_dependency(DDC COMPONENTS fft pdi splines)
+
+find_dependency(koliop)
+
+find_dependency(LAPACKE)
+
+find_dependency(Ginkgo)
+
+include(${CMAKE_CURRENT_LIST_DIR}/GyselalibxxTargets.cmake)
+
+check_required_components(Gyselalibxx)

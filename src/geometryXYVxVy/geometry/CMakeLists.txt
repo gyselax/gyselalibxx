@@ -2,10 +2,14 @@
 
 
 add_library("geometry_xyvxvy" INTERFACE)
-target_include_directories("geometry_xyvxvy"
+
+target_sources("geometry_xyvxvy"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                geometry_xyvxvy.hpp
 )
+
 target_link_libraries("geometry_xyvxvy" INTERFACE
     DDC::core
     gslx::data_types
@@ -15,3 +19,5 @@ target_link_libraries("geometry_xyvxvy" INTERFACE
     gslx::geometry_xperiod_vx
 )
 add_library("gslx::geometry_xyvxvy" ALIAS "geometry_xyvxvy")
+
+install(TARGETS geometry_xyvxvy EXPORT GyselalibxxTargets FILE_SET HEADERS)

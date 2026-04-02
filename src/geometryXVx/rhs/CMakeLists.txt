@@ -11,8 +11,18 @@ add_library("rhs_${GEOMETRY_VARIANT}" STATIC
     mask_tanh.cpp
 )
 
-target_include_directories("rhs_${GEOMETRY_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("rhs_${GEOMETRY_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                collisions_inter.hpp
+                collisions_intra.hpp
+                collisions_utils.hpp
+                irighthandside.hpp
+                kinetic_source.hpp
+                krook_source_adaptive.hpp
+                krook_source_constant.hpp
+                mask_tanh.hpp
 )
 
 target_link_libraries("rhs_${GEOMETRY_VARIANT}"
@@ -30,5 +40,7 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
 )
 
 add_library("gslx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
+
+install(TARGETS rhs_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 endforeach()

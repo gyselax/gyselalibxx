@@ -1,13 +1,19 @@
 # SPDX-License-Identifier: MIT
 
 add_library("geometry_XY" INTERFACE)
-target_include_directories("geometry_XY"
+
+target_sources("geometry_XY"
     INTERFACE
-        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
+        FILE_SET HEADERS
+            FILES
+                geometry_xy.hpp
 )
+
 target_link_libraries("geometry_XY" INTERFACE
     DDC::core
     DDC::splines
     gslx::utils
 )
 add_library("gslx::geometry_XY" ALIAS "geometry_XY")
+
+install(TARGETS geometry_XY EXPORT GyselalibxxTargets FILE_SET HEADERS)

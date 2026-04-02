@@ -10,8 +10,16 @@ add_library("initialisation_${GEOMETRY_VARIANT}" STATIC
     singlemodeperturbinitialisation.cpp
 )
 
-target_include_directories("initialisation_${GEOMETRY_VARIANT}"
-    PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}"
+target_sources("initialisation_${GEOMETRY_VARIANT}"
+    INTERFACE
+        FILE_SET HEADERS
+            FILES
+                bumpontailequilibrium.hpp
+                iequilibrium.hpp
+                iinitialisation.hpp
+                maxwellianequilibrium.hpp
+                restartinitialisation.hpp
+                singlemodeperturbinitialisation.hpp
 )
 
 target_link_libraries("initialisation_${GEOMETRY_VARIANT}"
@@ -24,5 +32,7 @@ target_link_libraries("initialisation_${GEOMETRY_VARIANT}"
 )
 
 add_library("gslx::initialisation_${GEOMETRY_VARIANT}" ALIAS "initialisation_${GEOMETRY_VARIANT}")
+
+install(TARGETS initialisation_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 endforeach()
