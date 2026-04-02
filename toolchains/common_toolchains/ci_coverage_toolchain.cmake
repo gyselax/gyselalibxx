@@ -11,4 +11,4 @@ set(CMAKE_CXX_FLAGS_INIT "-Og --coverage -fprofile-update=atomic")
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specific to Gyselalib++" FORCE)
 
 # Activate/deactivate parts of the code
-set(ACTIVATE_RESTART_TESTS ON)
+set(GYSELALIBXX_ACTIVATE_RESTART_TESTS ON)

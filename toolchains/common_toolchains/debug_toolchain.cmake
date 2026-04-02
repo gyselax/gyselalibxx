@@ -8,4 +8,4 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS_INIT "-Wall -Werror=parentheses -Werror=unused-local-typedefs -Werror=unused-variable -Wno-sign-compare")
 
 # Activate/deactivate parts of the code
-set(ACTIVATE_RESTART_TESTS ON)
+set(GYSELALIBXX_ACTIVATE_RESTART_TESTS ON)
