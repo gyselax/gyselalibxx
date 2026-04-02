@@ -162,8 +162,7 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
             Kokkos::DefaultExecutionSpace::memory_space,
             DataType,
             IdxRange<GridX, GridY>,
-            LagBasisX,
-            LagBasisY>;
+            IdxRange<LagBasisX, LagBasisY>>;
 
     constexpr std::size_t degree = TestFixture::degree;
     static constexpr double TOL = TestFixture::TOL;
@@ -431,8 +430,7 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
             Kokkos::DefaultExecutionSpace::memory_space,
             DataType,
             IdxRange<GridX, GridY>,
-            LagBasisX,
-            LagBasisY>;
+            IdxRange<LagBasisX, LagBasisY>>;
     using EvalX = LagrangeEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,

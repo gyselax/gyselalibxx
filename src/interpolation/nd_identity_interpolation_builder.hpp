@@ -16,15 +16,16 @@
  * @tparam DataType            The data type of field values and coefficients.
  * @tparam InterpolationIdxRange  The ND index range for the interpolation mesh,
  *                             of the form IdxRange<Grid1, Grid2, ...>.
- * @tparam Basis               The basis types, one per interpolation dimension, in the
- *                             same order as the grids in InterpolationIdxRange.
+ * @tparam BasisIdxRange       The ND index range for the basis types, one per
+ *                             interpolation dimension, in the same order as the
+ *                             grids in InterpolationIdxRange.
  */
 template <
         class ExecSpace,
         class MemorySpace,
         class DataType,
         class InterpolationIdxRange,
-        class... Basis>
+        class BasisIdxRange>
 class NDIdentityInterpolationBuilder;
 
 template <
@@ -38,7 +39,7 @@ class NDIdentityInterpolationBuilder<
         MemorySpace,
         DataType,
         IdxRange<InterpolationGrids...>,
-        Basis...>
+        IdxRange<Basis...>>
 {
     static_assert(sizeof...(InterpolationGrids) == sizeof...(Basis));
     static_assert(sizeof...(InterpolationGrids) > 0);
