@@ -28,21 +28,23 @@ template <
         class BasisIdxRange>
 class NDIdentityInterpolationBuilder;
 
+/// The implementation of NDIdentityInterpolationBuilder. This is separate to allow a variadic Basis.
 template <
         class ExecSpace,
         class MemorySpace,
         class DataType,
-        class... InterpolationGrids,
+        class InterpolationIdxRange,
         class... Basis>
 class NDIdentityInterpolationBuilder<
         ExecSpace,
         MemorySpace,
         DataType,
-        IdxRange<InterpolationGrids...>,
+        InterpolationIdxRange,
         IdxRange<Basis...>>
 {
-    static_assert(sizeof...(InterpolationGrids) == sizeof...(Basis));
-    static_assert(sizeof...(InterpolationGrids) > 0);
+    static_assert(ddc::is_discrete_domain_v<InterpolationIdxRange>);
+    static_assert(InterpolationIdxRange::rank() == sizeof...(Basis));
+    static_assert(InterpolationIdxRange::rank() > 0);
 
 public:
     /// @brief The type of the Kokkos execution space.
@@ -55,8 +57,9 @@ public:
     using data_type = DataType;
 
     /// @brief The ND index range for the interpolation mesh.
-    using interpolation_idx_range_type = IdxRange<InterpolationGrids...>;
+    using interpolation_idx_range_type = InterpolationIdxRange;
 
+    /// @brief The type of the index range for the bases over which coefficients of an ND Lagrange interpolation are defined.
     using coeff_idx_range_type
             = IdxRange<typename Basis::template Impl<Basis, MemorySpace>::knot_grid...>;
 
@@ -69,10 +72,11 @@ public:
     using batched_basis_idx_range_type
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
-                    ddc::detail::TypeSeq<InterpolationGrids...>,
+                    ddc::to_type_seq_t<InterpolationIdxRange>,
                     ddc::detail::TypeSeq<
                             typename Basis::template Impl<Basis, MemorySpace>::knot_grid...>>>;
 
+    /// @brief The type of the index range on which derivatives should be provided (here unused).
     template <class BatchedInterpolationIdxRange>
     using batched_derivs_idx_range_type = BatchedInterpolationIdxRange;
 
@@ -103,7 +107,9 @@ public:
     {
         using IdxRangeFull = batched_basis_idx_range_type<BatchedInterpolationIdxRange>;
         using IdxRangeBatch
-                = ddc::remove_dims_of_t<BatchedInterpolationIdxRange, InterpolationGrids...>;
+                = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_remove_t<
+                        ddc::to_type_seq_t<BatchedInterpolationIdxRange>,
+                        ddc::to_type_seq_t<InterpolationIdxRange>>>;
         IdxRangeBatch idx_range_batch(get_idx_range(coeffs));
         coeff_idx_range_type idx_range_without_repeats(
                 (ddc::discrete_space<Basis>().break_point_domain().remove_last(
@@ -135,11 +141,11 @@ private:
     template <std::size_t DimIdx = 0, class IdxRangeFull, class CoeffField>
     void copy_periodic_data(CoeffField coeffs, IdxRangeFull filled_index_range) const
     {
-        using CurrentGrid
-                = ddc::type_seq_element_t<DimIdx, ddc::detail::TypeSeq<InterpolationGrids...>>;
+        using CurrentGrid = ddc::type_seq_element_t < DimIdx,
+              ddc::to_type_seq_t<InterpolationIdxRange>;
         IdxRangeFull new_filled_index_range
                 = copy_periodic_data_on_dim<CurrentGrid>(coeffs, filled_index_range);
-        if constexpr (DimIdx + 1 < (sizeof...(InterpolationGrids))) {
+        if constexpr (DimIdx + 1 < InterpolationIdxRange::rank()) {
             copy_periodic_data<DimIdx + 1>(coeffs, new_filled_index_range);
         }
     }
