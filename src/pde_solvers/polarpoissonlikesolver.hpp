@@ -331,10 +331,10 @@ public:
 
     /**
      * @brief Update the coefficients @f$ alpha @f$ and @f$ beta @f$ that define the equation.
-     * @param[in] coeff_alpha
+     * @param[in] alpha
      *      The interpolation coefficients for the @f$ \alpha @f$ function in the
      *      definition of the Poisson-like equation.
-     * @param[in] coeff_beta
+     * @param[in] beta
      *      The interpolation coefficients for the @f$ \beta @f$ function in the
      *      definition of the Poisson-like equation.
      */
