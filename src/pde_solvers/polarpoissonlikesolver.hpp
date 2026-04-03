@@ -281,7 +281,9 @@ public:
                                   1,
                                   ddc::discrete_space<PolarBSplinesRTheta>().nbasis()
                                           - ddc::discrete_space<BSplinesTheta>().nbasis())))
-        , m_int_volume_alloc(calculate_int_volume(mapping))
+        , m_int_volume_alloc(
+                  "m_int_volume (PolarSplineFEMPoisonLikeSolver::PolarSplineFEMPoissonLikeSolver)",
+                  calculate_int_volume(mapping))
         , m_assembler(get_field(m_int_volume_alloc))
     {
         static_assert(has_jacobian_v<Mapping>);

@@ -312,7 +312,7 @@ Currently, there are three `operator()` implemented.
 DVectorFieldMemRTheta<X, Y> advection_field_xy_alloc (grid); 
 DVectorFieldRTheta<X, Y> advection_field_xy (advection_field_xy_alloc);
 
-DFieldMemRTheta function_alloc(grid);   // a function. 
+DFieldMemRTheta function_alloc("function", grid);   // a function. 
 DFieldRTheta function(function_alloc); 
 
 double dt; // a time step
@@ -339,7 +339,7 @@ DVectorFieldRTheta<R,Theta> advection_field_rtheta (advection_field_rtheta_alloc
 // The additional value of the advection field on <X,Y> at the O-point. 
 DVector<X, Y> advection_field_xy_centre;
 
-DFieldMemRTheta function_alloc(grid);   // a function. 
+DFieldMemRTheta function_alloc("function", grid);   // a function. 
 DFieldRTheta function(function_alloc); 
 
 double dt; // a time step
@@ -361,7 +361,7 @@ If the `grid` does not contain the O-point, then the averaging treatment is not 
 DVectorFieldMemRTheta<R, Theta> advection_field_rtheta_alloc (grid_with_or_without_Opoint); 
 DVectorFieldRTheta<R,Theta> advection_field_rtheta (advection_field_rtheta_alloc);
 
-DFieldMemRTheta function_alloc(grid);   // a function. 
+DFieldMemRTheta function_alloc("function", grid);   // a function. 
 DFieldRTheta function(function_alloc); 
 
 double dt; // a time step

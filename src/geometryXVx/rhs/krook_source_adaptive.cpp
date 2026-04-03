@@ -87,6 +87,7 @@ void KrookSourceAdaptive::get_amplitudes(DFieldSpX amplitudes, DConstFieldSpXVx 
     IdxSp iion(iion_opt.value());
     IdxRangeVx const gridvx = get_idx_range<GridVx>(allfdistribu);
     DFieldMemVx const quadrature_coeffs_alloc(
+            "quadrature_coeffs (KrookSourceAdaptive::get_amplitudes)",
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridvx));
     DConstFieldVx quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
 
@@ -118,7 +119,7 @@ void KrookSourceAdaptive::get_derivative(
 {
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
 
-    DFieldMemSpX amplitudes_alloc(grid_sp_x);
+    DFieldMemSpX amplitudes_alloc("amplitudes (KrookSourceAdaptive::get_derivative)", grid_sp_x);
     auto amplitudes = get_field(amplitudes_alloc);
     get_amplitudes(amplitudes, allfdistribu);
 
