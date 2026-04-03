@@ -277,7 +277,6 @@ DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) con
     DFieldSpX temperature = get_field(temperature_alloc);
 
     DFieldMemVx const quadrature_coeffs_alloc(
-            "quadrature_coeffs (DFieldSpXVx CollisionsIntra::operator())",
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
                     get_idx_range<GridVx>(allfdistribu)));
     DConstFieldVx quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);

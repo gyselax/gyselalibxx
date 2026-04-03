@@ -161,7 +161,6 @@ void compute_Vcoll_Tcoll(
         DField<IdxRange<Species, GridX, LocalGridVx>> dvDcoll)
 {
     DFieldMemVx const quadrature_coeffs_alloc(
-            "quadrature_coeffs (compute_Vcoll_Tcoll)",
             trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
                     get_idx_range<GridVx>(allfdistribu)));
     DConstFieldVx const quadrature_coeffs = get_const_field(quadrature_coeffs_alloc);
