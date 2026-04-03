@@ -115,7 +115,6 @@ neumann_spline_quadrature_coefficients(
     // Get coefficients for each dimension
     std::tuple<CoefficientFieldMem1D<Kokkos::DefaultHostExecutionSpace, DDims>...>
             current_dim_coeffs_alloc(
-                    "current_dim_coeffs (neumann_spline_quadrature_coefficients)",
                     neumann_spline_quadrature_coefficients_1d<Kokkos::DefaultHostExecutionSpace>(
                             ddc::select<DDims>(idx_range),
                             builders)...);
