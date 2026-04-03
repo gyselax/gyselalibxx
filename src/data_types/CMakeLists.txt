@@ -2,6 +2,8 @@
 
 add_library("data_types" INTERFACE)
 
+target_compile_features("data_types" INTERFACE cxx_std_20)
+
 target_sources("data_types"
     INTERFACE
         FILE_SET HEADERS

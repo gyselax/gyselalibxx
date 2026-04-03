@@ -2,6 +2,8 @@
 
 add_library("geometry_XY" INTERFACE)
 
+target_compile_features("geometry_XY" INTERFACE cxx_std_20)
+
 target_sources("geometry_XY"
     INTERFACE
         FILE_SET HEADERS

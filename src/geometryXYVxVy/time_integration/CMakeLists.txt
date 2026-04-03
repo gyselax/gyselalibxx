@@ -4,6 +4,8 @@ add_library("time_integration_xyvxvy" STATIC
     predcorr.cpp
 )
 
+target_compile_features("time_integration_xyvxvy" PUBLIC cxx_std_20)
+
 target_sources("time_integration_xyvxvy"
     INTERFACE
         FILE_SET HEADERS

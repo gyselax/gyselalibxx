@@ -4,6 +4,8 @@ add_library(speciesinfo STATIC
     species_init.cpp
 )
 
+target_compile_features("speciesinfo" PUBLIC cxx_std_20)
+
 target_sources("speciesinfo"
     INTERFACE
         FILE_SET HEADERS

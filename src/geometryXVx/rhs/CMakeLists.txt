@@ -11,6 +11,8 @@ add_library("rhs_${GEOMETRY_VARIANT}" STATIC
     mask_tanh.cpp
 )
 
+target_compile_features("rhs_${GEOMETRY_VARIANT}" PUBLIC cxx_std_20)
+
 target_sources("rhs_${GEOMETRY_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

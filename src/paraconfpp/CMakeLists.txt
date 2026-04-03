@@ -2,6 +2,8 @@
 
 add_library(paraconfpp INTERFACE)
 
+target_compile_features("paraconfpp" INTERFACE cxx_std_20)
+
 target_sources("paraconfpp"
     INTERFACE
         FILE_SET HEADERS

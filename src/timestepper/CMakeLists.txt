@@ -1,6 +1,8 @@
 
 add_library(timestepper INTERFACE)
 
+target_compile_features("timestepper" INTERFACE cxx_std_20)
+
 target_sources("timestepper"
     INTERFACE
         FILE_SET HEADERS

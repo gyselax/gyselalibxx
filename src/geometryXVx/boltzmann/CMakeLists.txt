@@ -7,6 +7,8 @@ add_library("boltzmann_${GEOMETRY_VARIANT}" STATIC
     splitrighthandsidesolver.cpp
 )
 
+target_compile_features("boltzmann_${GEOMETRY_VARIANT}" PUBLIC cxx_std_20)
+
 target_sources("boltzmann_${GEOMETRY_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

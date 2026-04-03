@@ -4,6 +4,8 @@ add_library("collisions" STATIC
     collision_operator.cpp
 )
 
+target_compile_features("collisions" PUBLIC cxx_std_20)
+
 target_sources("collisions"
     INTERFACE
         FILE_SET HEADERS

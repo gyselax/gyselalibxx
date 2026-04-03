@@ -2,6 +2,8 @@
 
 add_library("initialisation_Kelvin_Helmholtz" INTERFACE)
 
+target_compile_features("initialisation_Kelvin_Helmholtz" INTERFACE cxx_std_20)
+
 target_sources("initialisation_Kelvin_Helmholtz"
     INTERFACE
         FILE_SET HEADERS

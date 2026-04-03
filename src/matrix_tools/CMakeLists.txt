@@ -9,6 +9,8 @@ add_library(matrix_tools STATIC
     matrix_pds_tridiag.cpp
 )
 
+target_compile_features("matrix_tools" PUBLIC cxx_std_20)
+
 target_sources("matrix_tools"
     INTERFACE
         FILE_SET HEADERS

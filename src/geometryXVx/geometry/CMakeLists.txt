@@ -5,6 +5,8 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 add_library("geometry_${GEOMETRY_VARIANT}" INTERFACE)
 
+target_compile_features("geometry_${GEOMETRY_VARIANT}" INTERFACE cxx_std_20)
+
 target_sources("geometry_${GEOMETRY_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

@@ -1,5 +1,7 @@
 add_library("multipatch_connectivity" INTERFACE)
 
+target_compile_features("multipatch_connectivity" INTERFACE cxx_std_20)
+
 target_sources("multipatch_connectivity"
     INTERFACE
         FILE_SET HEADERS

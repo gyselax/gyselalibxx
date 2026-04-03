@@ -5,6 +5,8 @@ add_library("vlasov_xyvxvy" STATIC
     splitvlasovsolver.cpp
 )
 
+target_compile_features("vlasov_xyvxvy" PUBLIC cxx_std_20)
+
 target_sources("vlasov_xyvxvy"
     INTERFACE
         FILE_SET HEADERS

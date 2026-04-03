@@ -2,6 +2,8 @@
 
 add_library("mpi_parallelisation" INTERFACE)
 
+target_compile_features("mpi_parallelisation" INTERFACE cxx_std_20)
+
 target_sources("mpi_parallelisation"
     INTERFACE
         FILE_SET HEADERS

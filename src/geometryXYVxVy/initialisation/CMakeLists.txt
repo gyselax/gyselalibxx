@@ -5,6 +5,8 @@ add_library("initialisation_xyvxvy" STATIC
     singlemodeperturbinitialisation.cpp
 )
 
+target_compile_features("initialisation_xyvxvy" PUBLIC cxx_std_20)
+
 target_sources("initialisation_xyvxvy"
     INTERFACE
         FILE_SET HEADERS

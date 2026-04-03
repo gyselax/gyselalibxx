@@ -1,6 +1,8 @@
 
 add_library("multipatch_data_types" INTERFACE)
 
+target_compile_features("multipatch_data_types" INTERFACE cxx_std_20)
+
 target_sources("multipatch_data_types"
     INTERFACE
         FILE_SET HEADERS
