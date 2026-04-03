@@ -7,6 +7,8 @@ add_library("initialisation_xyvxvy_${PRECISION_VARIANT}" STATIC
     singlemodeperturbinitialisation.cpp
 )
 
+target_compile_features("initialisation_xyvxvy_${PRECISION_VARIANT}" PUBLIC cxx_std_20)
+
 target_sources("initialisation_xyvxvy_${PRECISION_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

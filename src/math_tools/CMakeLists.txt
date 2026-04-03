@@ -2,6 +2,8 @@
 
 add_library("math_tools" INTERFACE)
 
+target_compile_features("math_tools" INTERFACE cxx_std_20)
+
 target_sources("math_tools"
     INTERFACE
         FILE_SET HEADERS

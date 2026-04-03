@@ -2,6 +2,8 @@
 
 add_library("polar_splines" INTERFACE)
 
+target_compile_features("polar_splines" INTERFACE cxx_std_20)
+
 target_sources("polar_splines"
     INTERFACE
         FILE_SET HEADERS

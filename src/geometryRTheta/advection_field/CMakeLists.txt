@@ -2,6 +2,8 @@
 
 add_library("advection_field_RTheta" INTERFACE)
 
+target_compile_features("advection_field_RTheta" INTERFACE cxx_std_20)
+
 target_sources("advection_field_RTheta"
     INTERFACE
         FILE_SET HEADERS

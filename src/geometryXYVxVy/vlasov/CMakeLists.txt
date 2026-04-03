@@ -7,6 +7,8 @@ add_library("vlasov_xyvxvy_${PRECISION_VARIANT}" STATIC
     splitvlasovsolver.cpp
 )
 
+target_compile_features("vlasov_xyvxvy_${PRECISION_VARIANT}" PUBLIC cxx_std_20)
+
 target_sources("vlasov_xyvxvy_${PRECISION_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

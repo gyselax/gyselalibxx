@@ -1,6 +1,8 @@
 
 add_library("multipatch_interface_derivatives" INTERFACE)
 
+target_compile_features("multipatch_interface_derivatives" INTERFACE cxx_std_20)
+
 target_sources("multipatch_interface_derivatives"
     INTERFACE
         FILE_SET HEADERS

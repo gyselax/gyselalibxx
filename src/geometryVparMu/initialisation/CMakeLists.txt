@@ -5,6 +5,8 @@ add_library("initialisation_vparmu" STATIC
     noperturbinitialisation.cpp
 )
 
+target_compile_features("initialisation_vparmu" PUBLIC cxx_std_20)
+
 target_sources("initialisation_vparmu"
     INTERFACE
         FILE_SET HEADERS

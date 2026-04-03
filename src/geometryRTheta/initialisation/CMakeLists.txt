@@ -4,6 +4,8 @@ add_library(diocotron_init_eq STATIC
     diocotron_initialisation_equilibrium.cpp
 )
 
+target_compile_features("diocotron_init_eq" PUBLIC cxx_std_20)
+
 target_sources("diocotron_init_eq"
     INTERFACE
         FILE_SET HEADERS
@@ -27,6 +29,8 @@ install(TARGETS diocotron_init_eq EXPORT GyselalibxxTargets FILE_SET HEADERS)
 
 # VORTEX MERGER SIMULATION --------------------------------------
 add_library(vortex_merger_init_eq INTERFACE)
+
+target_compile_features("vortex_merger_init_eq" INTERFACE cxx_std_20)
 
 target_sources("vortex_merger_init_eq"
     INTERFACE

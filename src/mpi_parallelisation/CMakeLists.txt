@@ -5,6 +5,8 @@ add_library("mpi_parallelisation"
     mpi_scope_guard.cpp
 )
 
+target_compile_features("mpi_parallelisation" INTERFACE cxx_std_20)
+
 target_sources("mpi_parallelisation"
     INTERFACE
         FILE_SET HEADERS

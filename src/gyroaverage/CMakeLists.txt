@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: MIT
 add_library(gyroaverage INTERFACE)
 
+target_compile_features("gyroaverage" INTERFACE cxx_std_20)
+
 target_sources("gyroaverage"
     INTERFACE
         FILE_SET HEADERS

@@ -8,6 +8,8 @@ add_library("poisson_${GEOMETRY_VARIANT}" STATIC
     qnsolver.cpp
 )
 
+target_compile_features("poisson_${GEOMETRY_VARIANT}" PUBLIC cxx_std_20)
+
 target_sources("poisson_${GEOMETRY_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

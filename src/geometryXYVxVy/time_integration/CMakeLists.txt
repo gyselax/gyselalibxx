@@ -6,6 +6,8 @@ add_library("time_integration_xyvxvy_${PRECISION_VARIANT}" STATIC
     predcorr.cpp
 )
 
+target_compile_features("time_integration_xyvxvy_${PRECISION_VARIANT}" PUBLIC cxx_std_20)
+
 target_sources("time_integration_xyvxvy_${PRECISION_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

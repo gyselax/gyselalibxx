@@ -3,6 +3,8 @@
 
 add_library("geometry_RTheta" INTERFACE)
 
+target_compile_features("geometry_RTheta" INTERFACE cxx_std_20)
+
 target_sources("geometry_RTheta"
     INTERFACE
         FILE_SET HEADERS

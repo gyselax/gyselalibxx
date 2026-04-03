@@ -10,6 +10,8 @@ add_library("initialisation_${GEOMETRY_VARIANT}" STATIC
     singlemodeperturbinitialisation.cpp
 )
 
+target_compile_features("initialisation_${GEOMETRY_VARIANT}" PUBLIC cxx_std_20)
+
 target_sources("initialisation_${GEOMETRY_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

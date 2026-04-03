@@ -5,6 +5,8 @@ add_library("io"
     input.cpp
 )
 
+target_compile_features("io" PUBLIC cxx_std_20)
+
 target_sources("io"
     INTERFACE
         FILE_SET HEADERS

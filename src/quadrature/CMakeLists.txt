@@ -3,6 +3,8 @@ add_library(quadrature STATIC
     gauss_legendre_integration.cpp
     )
 
+target_compile_features("quadrature" PUBLIC cxx_std_20)
+
 target_sources("quadrature"
     INTERFACE
         FILE_SET HEADERS

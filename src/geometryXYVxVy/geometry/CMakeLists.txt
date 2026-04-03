@@ -4,6 +4,8 @@ foreach(PRECISION_VARIANT IN LISTS PRECISION_VARIANTS_LIST)
 
 add_library("geometry_xyvxvy_${PRECISION_VARIANT}" INTERFACE)
 
+target_compile_features("geometry_xyvxvy_${PRECISION_VARIANT}" INTERFACE cxx_std_20)
+
 target_sources("geometry_xyvxvy_${PRECISION_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

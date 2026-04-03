@@ -9,6 +9,8 @@ add_library("poisson_xy_${PRECISION_VARIANT}" STATIC
     qnsolver.cpp
 )
 
+target_compile_features("poisson_xy_${PRECISION_VARIANT}" PUBLIC cxx_std_20)
+
 target_sources("poisson_xy_${PRECISION_VARIANT}"
     INTERFACE
         FILE_SET HEADERS

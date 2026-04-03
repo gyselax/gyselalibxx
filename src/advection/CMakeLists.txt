@@ -2,6 +2,8 @@
 
 add_library("advection" INTERFACE)
 
+target_compile_features("advection" INTERFACE cxx_std_20)
+
 target_sources("advection"
     INTERFACE
         FILE_SET HEADERS
