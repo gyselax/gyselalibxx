@@ -118,22 +118,38 @@ public:
         IdxRange<Grid2> idx_range_2(idx_range);
 
         // --- allocate memory for fields on the correct layout.
-        FunctFieldMem function_alloc(idx_range);
+        FunctFieldMem function_alloc("function (SplineBuliderDerivField2D::operator())", idx_range);
 
         IdxRange<Deriv1, Grid2> idx_range_d1_2_min(idx_range_d1_min, idx_range_2);
         IdxRange<Deriv1, Grid2> idx_range_d1_2_max(idx_range_d1_max, idx_range_2);
-        Deriv1FieldMem deriv1_min_alloc(idx_range_d1_2_min);
-        Deriv1FieldMem deriv1_max_alloc(idx_range_d1_2_max);
+        Deriv1FieldMem deriv1_min_alloc(
+                "deriv1_min (SplineBuliderDerivField2D::operator())",
+                idx_range_d1_2_min);
+        Deriv1FieldMem deriv1_max_alloc(
+                "deriv1_max (SplineBuliderDerivField2D::operator())",
+                idx_range_d1_2_max);
 
         IdxRange<Grid1, Deriv2> idx_range_1_d2_min(idx_range_1, idx_range_d2_min);
         IdxRange<Grid1, Deriv2> idx_range_1_d2_max(idx_range_1, idx_range_d2_max);
-        Deriv2FieldMem deriv2_min_alloc(idx_range_1_d2_min);
-        Deriv2FieldMem deriv2_max_alloc(idx_range_1_d2_max);
+        Deriv2FieldMem deriv2_min_alloc(
+                "deriv2_min (SplineBuliderDerivField2D::operator())",
+                idx_range_1_d2_min);
+        Deriv2FieldMem deriv2_max_alloc(
+                "deriv2_max (SplineBuliderDerivField2D::operator())",
+                idx_range_1_d2_max);
 
-        CrossDerivFieldMem cross_min_min_alloc(idx_range_d1d2_min_min);
-        CrossDerivFieldMem cross_max_min_alloc(idx_range_d1d2_max_min);
-        CrossDerivFieldMem cross_min_max_alloc(idx_range_d1d2_min_max);
-        CrossDerivFieldMem cross_max_max_alloc(idx_range_d1d2_max_max);
+        CrossDerivFieldMem cross_min_min_alloc(
+                "cross_min_min (SplineBuliderDerivField2D::operator())",
+                idx_range_d1d2_min_min);
+        CrossDerivFieldMem cross_max_min_alloc(
+                "cross_max_min (SplineBuliderDerivField2D::operator())",
+                idx_range_d1d2_max_min);
+        CrossDerivFieldMem cross_min_max_alloc(
+                "cross_min_max (SplineBuliderDerivField2D::operator())",
+                idx_range_d1d2_min_max);
+        CrossDerivFieldMem cross_max_max_alloc(
+                "cross_max_max (SplineBuliderDerivField2D::operator())",
+                idx_range_d1d2_max_max);
 
         // Get slice indices to select the right bound.
         Idx<Grid1> slice1_min = idx_range_1.front();

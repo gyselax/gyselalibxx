@@ -77,7 +77,7 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
-        DerivFieldMem k1_alloc(m_idx_range);
+        DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
         DerivField k1(k1_alloc);
 
         // --------- Calculate k1 ------------

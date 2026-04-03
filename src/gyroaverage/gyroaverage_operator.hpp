@@ -165,7 +165,9 @@ public:
         IdxRangeRminorTheta const rtheta_idx_range(rthetabatch_idx_range);
 
         // Instantiate chunk of spline coefs to receive output of spline_builder (r, theta)
-        DFieldMemBSRminorTheta coef_alloc(get_spline_idx_range(m_spline_builder));
+        DFieldMemBSRminorTheta coef_alloc(
+                "coef (GyroAvrageOperator::operator())",
+                get_spline_idx_range(m_spline_builder));
         DFieldBSRminorTheta const coef = get_field(coef_alloc);
         DConstFieldRminorTheta const rho_L = get_const_field(m_rho_L);
 
@@ -181,7 +183,8 @@ public:
         ddc::host_for_each(batch_idx_range, [&](IdxBatch const ib) {
             SubConstDFieldRminorTheta const sub_A = A[ib];
             SubDFieldRminorTheta sub_A_bar = A_bar[ib];
-            DFieldMemRminorTheta sub_A_alloc(rtheta_idx_range);
+            DFieldMemRminorTheta
+                    sub_A_alloc("sub_A (GyroAvrageOperator::operator())", rtheta_idx_range);
             ddc::parallel_deepcopy(sub_A_alloc, sub_A);
             m_spline_builder(coef, get_const_field(sub_A_alloc));
             SplineRThetaEvaluator spline_evaluator = m_spline_evaluator;
