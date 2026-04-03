@@ -3,6 +3,8 @@
 
 add_library(time_integration_RTheta INTERFACE)
 
+target_compile_features("time_integration_RTheta" INTERFACE cxx_std_20)
+
 target_sources("time_integration_RTheta"
     INTERFACE
         FILE_SET HEADERS

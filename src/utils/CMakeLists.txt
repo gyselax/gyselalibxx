@@ -3,6 +3,8 @@
 add_library("utils" STATIC
             assert.cpp)
 
+target_compile_features("utils" PUBLIC cxx_std_20)
+
 target_sources("utils"
     INTERFACE
         FILE_SET HEADERS

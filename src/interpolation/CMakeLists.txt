@@ -2,6 +2,8 @@
 
 add_library("interpolation" INTERFACE)
 
+target_compile_features("interpolation" INTERFACE cxx_std_20)
+
 target_sources("interpolation"
     INTERFACE
         FILE_SET HEADERS

@@ -3,6 +3,8 @@
 
 add_library(poisson_RTheta INTERFACE)
 
+target_compile_features("poisson_RTheta" INTERFACE cxx_std_20)
+
 target_sources("poisson_RTheta"
     INTERFACE
         FILE_SET HEADERS

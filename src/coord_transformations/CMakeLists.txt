@@ -2,6 +2,8 @@
 
 add_library("coord_transformations" INTERFACE)
 
+target_compile_features("coord_transformations" INTERFACE cxx_std_20)
+
 target_sources("coord_transformations"
     INTERFACE
         FILE_SET HEADERS

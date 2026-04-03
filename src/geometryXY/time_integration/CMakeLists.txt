@@ -2,6 +2,8 @@
 
 add_library("predcorr_rk2_xy" INTERFACE)
 
+target_compile_features("predcorr_rk2_xy" INTERFACE cxx_std_20)
+
 target_sources("predcorr_rk2_xy"
     INTERFACE
         FILE_SET HEADERS

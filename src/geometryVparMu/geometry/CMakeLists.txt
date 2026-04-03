@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: MIT
 
 add_library("geometry_vparmu" INTERFACE)
+
+target_compile_features("geometry_vparmu" INTERFACE cxx_std_20)
 target_sources("geometry_vparmu"
     INTERFACE
         FILE_SET HEADERS

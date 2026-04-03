@@ -2,6 +2,8 @@
 
 add_library("geometry_collisions_vparmu" INTERFACE)
 
+target_compile_features("geometry_collisions_vparmu" INTERFACE cxx_std_20)
+
 target_sources("geometry_collisions_vparmu"
     INTERFACE
         FILE_SET HEADERS

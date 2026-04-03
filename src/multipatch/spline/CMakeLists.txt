@@ -2,6 +2,8 @@
 
 add_library("multipatch_spline" INTERFACE)
 
+target_compile_features("multipatch_spline" INTERFACE cxx_std_20)
+
 target_sources("multipatch_spline"
     INTERFACE
         FILE_SET HEADERS

@@ -2,6 +2,8 @@
 
 add_library("pde_solvers" INTERFACE)
 
+target_compile_features("pde_solvers" INTERFACE cxx_std_20)
+
 target_sources("pde_solvers"
     INTERFACE
         FILE_SET HEADERS

@@ -3,6 +3,8 @@
 
 add_library("geometry_xyvxvy" INTERFACE)
 
+target_compile_features("geometry_xyvxvy" INTERFACE cxx_std_20)
+
 target_sources("geometry_xyvxvy"
     INTERFACE
         FILE_SET HEADERS

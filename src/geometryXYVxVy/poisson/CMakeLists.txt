@@ -7,6 +7,8 @@ add_library("poisson_xy" STATIC
     qnsolver.cpp
 )
 
+target_compile_features("poisson_xy" PUBLIC cxx_std_20)
+
 target_sources("poisson_xy"
     INTERFACE
         FILE_SET HEADERS
