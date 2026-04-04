@@ -103,7 +103,7 @@ ctest --output-on-failure
 If you want to run a specific test you can use the ctest flag `-R` which will use a regex to search for tests with a name containing the specified keyword. For example, for tests related to splines:
 
 ```bash
-ctest -R Splines --verbose --output-on-failure
+ctest -R Spline --verbose --output-on-failure
 ```
 
 ### Expected Test Results
