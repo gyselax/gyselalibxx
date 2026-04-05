@@ -119,9 +119,14 @@ public:
         IdxRangeRTheta grid(get_idx_range(density_host));
 
         // Data
-        DFieldMemRTheta electrical_potential_alloc(grid);
-        Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
+        DFieldMemRTheta electrical_potential_alloc(
+                "electrical_potential (BslPredCorrRTheta::operator())",
+                grid);
+        Spline2DMem density_coef_alloc(
+                "density_coef (BslPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
         PolarSplineMemRTheta electrostatic_potential_coef_alloc(
+                "electrostatic_potential_coef (BslPredCorrRTheta::operator())",
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         auto electrical_potential_alloc_host

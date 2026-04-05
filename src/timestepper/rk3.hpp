@@ -90,11 +90,11 @@ public:
                 "MemorySpace has to be accessible for ExecutionSpace.");
         using element_type = typename DerivField::element_type;
 
-        FieldMem y_prime_alloc(m_idx_range);
-        DerivFieldMem k1_alloc(m_idx_range);
-        DerivFieldMem k2_alloc(m_idx_range);
-        DerivFieldMem k3_alloc(m_idx_range);
-        DerivFieldMem k_total_alloc(m_idx_range);
+        FieldMem y_prime_alloc("y_prime (RK3::update)", m_idx_range);
+        DerivFieldMem k1_alloc("k1 (RK3::update)", m_idx_range);
+        DerivFieldMem k2_alloc("k2 (RK3::update)", m_idx_range);
+        DerivFieldMem k3_alloc("k3 (RK3::update)", m_idx_range);
+        DerivFieldMem k_total_alloc("k_total (RK3::update)", m_idx_range);
 
         ValField y_prime = get_field(y_prime_alloc);
         DerivField k1 = get_field(k1_alloc);

@@ -454,7 +454,9 @@ public:
          */
         template <class OriginMemorySpace>
         explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
-            : m_singular_basis_elements_alloc(get_idx_range(impl.m_singular_basis_elements))
+            : m_singular_basis_elements_alloc(
+                    "m_singular_basis_elements (PolarBSplines::Impl)",
+                    get_idx_range(impl.m_singular_basis_elements))
         {
             m_singular_basis_elements = get_field(m_singular_basis_elements_alloc);
             ddc::parallel_deepcopy(m_singular_basis_elements, impl.m_singular_basis_elements);
@@ -779,8 +781,10 @@ DField<IdxRange<DDim>, MemorySpace> integrals(
     assert(get_idx_range(int_vals) == ddc::discrete_space<DDim>().full_domain());
 
     DFieldMem<IdxRange<BSplinesR>, MemorySpace> r_integrals_alloc(
+            "r_integrals (PolarSplines::integrals)",
             r_bspl_space.full_domain().take_first(IdxStep<BSplinesR> {r_bspl_space.nbasis()}));
     DFieldMem<IdxRange<BSplinesTheta>, MemorySpace> theta_integrals_alloc(
+            "theta_integrals (PolarSplines::integrals)",
             theta_bspl_space.full_domain().take_first(
                     IdxStep<BSplinesTheta> {theta_bspl_space.size()}));
     DField<IdxRange<BSplinesR>, MemorySpace> r_integrals = get_field(r_integrals_alloc);

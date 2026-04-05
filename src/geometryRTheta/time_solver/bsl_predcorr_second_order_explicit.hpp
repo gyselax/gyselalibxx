@@ -156,22 +156,34 @@ public:
         host_t<DFieldMemRTheta> electrical_potential_host(grid);
 
         PolarSplineMemRTheta electrostatic_potential_coef_alloc(
+                "electrostatic_potential_coef (BslExplicitPredCorrRTheta::operator())",
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         auto electrostatic_potential_coef_alloc_host
                 = ddc::create_mirror_view(get_field(electrostatic_potential_coef_alloc));
 
-        Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
-        DFieldMemRTheta density_predicted_alloc(grid);
+        Spline2DMem density_coef_alloc(
+                "density_coef (BslExplicitPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
+        DFieldMemRTheta density_predicted_alloc(
+                "density_predicted (BslExplicitPredCorrRTheta::operator())",
+                grid);
         auto density_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
-        FieldMemRTheta<CoordRTheta> feet_coords_alloc(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_evaluated_alloc(grid);
-        VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_alloc(get_spline_idx_range(m_builder));
+        FieldMemRTheta<CoordRTheta>
+                feet_coords_alloc("feet_coords (BslExplicitPredCorrRTheta::operator())", grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_evaluated_alloc(
+                "advection_field_evaluated (BslExplicitPredCorrRTheta::operator())",
+                grid);
+        VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_alloc(
+                "advection_field_coefs (BslExplicitPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
 
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc_host(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_predicted_alloc(grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_predicted_alloc(
+                "advection_field_predicted (BslExplicitPredCorrRTheta::operator())",
+                grid);
         auto advection_field_alloc = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(advection_field_alloc_host));

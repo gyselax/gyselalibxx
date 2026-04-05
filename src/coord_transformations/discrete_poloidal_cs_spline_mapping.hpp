@@ -136,7 +136,9 @@ public:
         } else {
             IdxRangeRTheta idx_range_o_point
                     = m_idx_range_singular_point.take_first(IdxStepRTheta(1, 1));
-            FieldMem<Coord<X, Y>, IdxRangeRTheta> coord_centre_field_alloc(idx_range_o_point);
+            FieldMem<Coord<X, Y>, IdxRangeRTheta> coord_centre_field_alloc(
+                    "coord_centre_field (DiscreteToCartesian::DiscreteToCartesian)",
+                    idx_range_o_point);
             Field<Coord<X, Y>, IdxRangeRTheta> coord_centre_field
                     = get_field(coord_centre_field_alloc);
             using ExecSpace = typename SplineEvaluator::exec_space;
