@@ -24,7 +24,9 @@ DFieldSpVxVyXY MpiSplitVlasovSolver::operator()(
     IdxRangeSpVxVyXY idxrange_v2Dsplit(m_transpose.get_local_idx_range<V2DSplit>());
     IdxRangeSpXYVxVy idxrange_x2Dsplit(m_transpose.get_local_idx_range<X2DSplit>());
     IdxRangeXY idx_range_xy_v2Dsplit(idxrange_v2Dsplit);
-    DFieldMemSpXYVxVy allfdistribu_x2Dsplit_alloc(idxrange_x2Dsplit);
+    DFieldMemSpXYVxVy allfdistribu_x2Dsplit_alloc(
+            "allfdistribu_x2Dsplit (MpiSplitVlasovSolver::operator())",
+            idxrange_x2Dsplit);
     DFieldSpXYVxVy allfdistribu_x2Dsplit = get_field(allfdistribu_x2Dsplit_alloc);
 
     // Create contiguous memory space to contain the relevant section of the electric field

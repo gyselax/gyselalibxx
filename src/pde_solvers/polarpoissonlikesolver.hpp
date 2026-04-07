@@ -305,9 +305,12 @@ public:
         , m_builder(interpolation.get_builder())
         , m_evaluator(interpolation.get_evaluator())
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
-        , m_phi_spline_coef_alloc(ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
+        , m_phi_spline_coef_alloc(
+                  "m_phi_spline_coef "
+                  "(PolarSplineFEMPoisonLikeSolver::PolarSplineFEMPoissonLikeSolver)",
+                  ddc::discrete_space<PolarBSplinesRTheta>().full_domain())
         , m_x_init_alloc(
-                  "x_init",
+                  "m_x_init (PolarSplineFEMPoisonLikeSolver::PolarSplineFEMPoissonLikeSolver)",
                   IdxRange<InternalBatchDim, PolarBSplinesRTheta>(
                           Idx<InternalBatchDim, PolarBSplinesRTheta>(0, 0),
                           IdxStep<InternalBatchDim, PolarBSplinesRTheta>(
@@ -379,8 +382,9 @@ public:
         Idx<InternalBatchDim> batch_idx = batch_idx_range.front();
 
         // Create b for rhs
-        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b_alloc(
-                get_idx_range(m_x_init_alloc));
+        DFieldMem<IdxRange<InternalBatchDim, PolarBSplinesRTheta>>
+                b_alloc("b (PolarSplineFEMPoisonLikeSolver::operator())",
+                        get_idx_range(m_x_init_alloc));
         DField<IdxRange<InternalBatchDim, PolarBSplinesRTheta>> b = get_field(b_alloc);
 
         // Get initial guess
@@ -527,7 +531,9 @@ public:
                 "double");
 
         (*this)(rhs, get_field(m_phi_spline_coef_alloc));
-        CoordFieldMemRTheta coords_eval_alloc(get_idx_range(phi));
+        CoordFieldMemRTheta coords_eval_alloc(
+                "coords_eval (PolarSplineFEMPoisonLikeSolver::operator())",
+                get_idx_range(phi));
         m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc));
     }
 
