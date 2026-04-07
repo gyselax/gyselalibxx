@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed new `concepts::InterpolationBuilder` concept and associated `InterpolationBuilderTraits` class to generalise to ND.
 - Renamed `ACTIVATE_RESTART_TESTS` -> `GYSELALIBXX_ACTIVATE_RESTART_TESTS`.
 - Renamed `POISSON_2D_BUILD_TESTING` -> `GYSELALIBXX_POISSON_2D_BUILD_TESTING`.
+- Pin toolchains to Python 3.13.
 
 ### Deprecated
 
