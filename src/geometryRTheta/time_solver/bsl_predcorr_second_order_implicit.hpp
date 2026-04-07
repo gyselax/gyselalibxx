@@ -227,7 +227,7 @@ public:
         for (int iter(0); iter < steps; ++iter) {
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
             m_builder(density_coef, get_const_field(density));
-            m_poisson_solver(charge_density, electrostatic_potential_coef);
+            m_poisson_solver(electrostatic_potential_coef, charge_density);
 
             polar_spline_evaluator(
                     get_field(electrical_potential_alloc),
@@ -320,7 +320,7 @@ public:
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             m_builder(density_coef, get_const_field(density_predicted));
-            m_poisson_solver(charge_density, electrostatic_potential_coef);
+            m_poisson_solver(electrostatic_potential_coef, charge_density);
 
             ddc::parallel_deepcopy(
                     electrostatic_potential_coef_host,
@@ -384,7 +384,7 @@ public:
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
         m_builder(density_coef, get_const_field(density));
-        m_poisson_solver(charge_density, get_field(electrical_potential_alloc));
+        m_poisson_solver(get_field(electrical_potential_alloc), charge_density);
         ddc::parallel_deepcopy(
                 get_field(electrical_potential_alloc_host),
                 get_const_field(electrical_potential_alloc));
