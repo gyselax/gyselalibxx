@@ -88,6 +88,22 @@ public:
      * The extrapolation rules are initialised from the discrete space of @c Basis,
      * so the corresponding ddc discrete space must be initialised before construction.
      *
+     * @param label A label used to tag parallel regions and memory allocations for profiling.
+     * @param idx_range The 1D interpolation index range passed to the builder.
+     */
+    explicit SplineInterpolator(std::string const& label, IdxRange<InterpGrid> idx_range)
+        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
+        , m_builder(label, idx_range)
+        , m_evaluator(m_min_extrapolation, m_max_extrapolation)
+    {
+    }
+    /**
+     * @brief Construct a SplineInterpolator on the given interpolation index range.
+     *
+     * The extrapolation rules are initialised from the discrete space of @c Basis,
+     * so the corresponding ddc discrete space must be initialised before construction.
+     *
      * @param idx_range The 1D interpolation index range passed to the builder.
      */
     explicit SplineInterpolator(IdxRange<InterpGrid> idx_range)

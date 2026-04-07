@@ -497,7 +497,7 @@ auto create_mirror_view_and_copy(
                 IdxRangeType,
                 VectorIndexSet<Dims...>,
                 typename ExecSpace::memory_space>
-                field_alloc(get_idx_range(field));
+                field_alloc("field (ddcHelper::create_mirror_view_and_copy)", get_idx_range(field));
         ((ddc::parallel_deepcopy(field_alloc.template get<Dims>(), field.template get<Dims>())),
          ...);
         return field_alloc;

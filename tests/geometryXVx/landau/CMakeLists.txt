@@ -11,7 +11,7 @@ add_test(NAME TestSimulationLandauFFT_XVx
 set_property(TEST TestSimulationLandauFFT_XVx PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationLandauFFT_XVx PROPERTY COST 100)
 
-if (${ACTIVATE_RESTART_TESTS})
+if (${GYSELALIBXX_ACTIVATE_RESTART_TESTS})
     add_test(NAME TestSimulationLandauRestartFFT_XVx
         COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau_restart.sh"
             "${PROJECT_SOURCE_DIR}"
@@ -33,7 +33,7 @@ add_test(NAME TestSimulationLandauFemUniform_xperiod_vx
 set_property(TEST TestSimulationLandauFemUniform_xperiod_vx PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationLandauFemUniform_xperiod_vx PROPERTY COST 100)
 
-if (${ACTIVATE_RESTART_TESTS})
+if (${GYSELALIBXX_ACTIVATE_RESTART_TESTS})
     add_test(NAME TestSimulationLandauRestartFemUniform_xperiod_vx
         COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau_restart.sh"
             "${PROJECT_SOURCE_DIR}"
