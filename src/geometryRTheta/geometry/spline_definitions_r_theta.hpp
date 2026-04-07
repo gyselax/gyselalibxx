@@ -3,7 +3,7 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "geometry_r_theta.hpp"
-#include "spline_interpolation_2d.hpp"
+#include "spline_interpolation.hpp"
 
 // --- Spline definitions
 int constexpr BSDegreeR = 3;

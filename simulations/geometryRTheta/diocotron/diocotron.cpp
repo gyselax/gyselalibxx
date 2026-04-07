@@ -161,8 +161,6 @@ int main(int argc, char** argv)
 
     BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
-
-
     // --- Poisson solver -----------------------------------------------------------------------------
     // Coefficients alpha and beta of the Poisson equation:
     DFieldMemRTheta coeff_alpha(mesh_rtheta);

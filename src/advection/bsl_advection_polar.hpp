@@ -84,8 +84,8 @@ class BslAdvectionPolar
     using MemorySpace = typename FootFinder::memory_space;
     using ExecSpace = typename FootFinder::ExecSpace;
 
-    using Builder2D = typename Interpolator2D::builder_type;
-    using Evaluator2D = typename Interpolator2D::evaluator_type;
+    using Builder2D = typename Interpolator2D::BuilderType;
+    using Evaluator2D = typename Interpolator2D::EvaluatorType;
 
     using IdxRangeBSRTheta =
             typename Builder2D::template batched_spline_domain_type<IdxRangeBatched>;

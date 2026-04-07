@@ -226,6 +226,12 @@ public:
             extrapolation_rule_t<MinExtrapRule2, Basis2>,
             extrapolation_rule_t<MaxExtrapRule2, Basis2>>;
 
+    /// @brief The number of interpolation dimensions.
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
+
 private:
     extrapolation_rule_t<MinExtrapRule1, Basis1> m_min_extrapolation1;
     extrapolation_rule_t<MaxExtrapRule1, Basis1> m_max_extrapolation1;

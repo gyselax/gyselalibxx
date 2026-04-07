@@ -118,9 +118,6 @@ public:
         return 1;
     }
 
-    /// @brief The discrete dimension for the B-spline coefficients.
-    using basis_idx_range_type = IdxRange<typename Builder::bsplines_type>;
-
     /// @brief Batched domain with InterpolationDDim replaced by BSplines.
     template <class IdxRangeBatchedInterpolation>
     using batched_basis_idx_range_type =
@@ -196,7 +193,13 @@ public:
     using interpolation_idx_range_type = typename Builder::interpolation_domain_type;
 
     /// @brief The discrete dimension for the B-spline coefficients.
-    using basis_idx_range_type = IdxRange<typename Builder::bsplines_type1, typename Builder::bsplines_type2>;
+    using coeff_idx_range_type = IdxRange<typename Builder::bsplines_type1, typename Builder::bsplines_type2>;
+
+    /// @brief The number of interpolation dimensions (always 1 for SplineBuilder).
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
 
     /// @brief Batched domain with InterpolationDDim replaced by BSplines.
     template <class IdxRangeBatchedInterpolation>
