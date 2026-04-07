@@ -43,6 +43,7 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
+        SplineRThetaBuilder,
         SplineRThetaEvaluatorNullBound,
         typename DiscreteMappingBuilder::MappingType>;
 
@@ -164,7 +165,7 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(discrete_mapping, evaluator);
+    PoissonSolver solver(discrete_mapping, builder, evaluator);
 
     solver.update_coefficients(get_const_field(x), get_const_field(y));
 
@@ -201,14 +202,14 @@ int main(int argc, char** argv)
         ConstSpline2D rhs_spline_field = get_const_field(rhs_spline);
         start_time = std::chrono::system_clock::now();
         solver(
+                get_field(result),
                 KOKKOS_LAMBDA(CoordRTheta const& coord) {
                     return evaluator(coord, rhs_spline_field);
-                },
-                get_field(result));
+                });
         end_time = std::chrono::system_clock::now();
     } else {
         start_time = std::chrono::system_clock::now();
-        solver(rhs, get_field(result));
+        solver(get_field(result), rhs);
         end_time = std::chrono::system_clock::now();
     }
     auto result_alloc_host = ddc::create_mirror_view_and_copy(result);
