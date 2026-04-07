@@ -63,8 +63,7 @@ struct InterpolationBuilderTraits
  *
  * ddc::SplineBuilder uses different alias names from the InterpolationBuilder
  * convention. This specialisation provides the mapping so that ddc::SplineBuilder
- * can be used directly as an InterpolationBuilder without wrapping it in
- * SplineBuilder1D.
+ * can be used directly as an InterpolationBuilder without wrapping it.
  *
  * Mapping:
  *   interpolation_discrete_dimension_type -> interpolation_grid_type
@@ -120,7 +119,84 @@ public:
     }
 
     /// @brief The discrete dimension for the B-spline coefficients.
-    using basis_domain_type = typename Builder::bsplines_type;
+    using basis_idx_range_type = IdxRange<typename Builder::bsplines_type>;
+
+    /// @brief Batched domain with InterpolationDDim replaced by BSplines.
+    template <class IdxRangeBatchedInterpolation>
+    using batched_basis_idx_range_type =
+            typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
+
+    /// @brief Batched domain with InterpolationDDim replaced by deriv_type.
+    template <class IdxRangeBatchedInterpolation>
+    using batched_derivs_idx_range_type =
+            typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
+};
+
+/**
+ * @brief Specialisation of InterpolationBuilderTraits for ddc::SplineBuilder2D.
+ *
+ * ddc::SplineBuilder2D uses different alias names from the InterpolationBuilder
+ * convention. This specialisation provides the mapping so that ddc::SplineBuilder2D
+ * can be used directly as an InterpolationBuilder without wrapping it.
+ *
+ * Mapping:
+ *   interpolation_discrete_dimension_type -> interpolation_grid_type
+ *   interpolation_domain_type             -> interpolation_idx_range_type
+ *   bsplines_type                         -> basis_domain_type
+ *   batched_spline_domain_type<D>         -> batched_basis_idx_range_type<D>
+ *   batched_derivs_domain_type<D>         -> batched_derivs_idx_range_type<D>
+ */
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class BSpline1,
+        class BSpline2,
+        class InterpolationDDim1,
+        class InterpolationDDim2,
+        ddc::BoundCond BcLower1,
+        ddc::BoundCond BcUpper1,
+        ddc::BoundCond BcLower2,
+        ddc::BoundCond BcUpper2,
+        ddc::SplineSolver Solver>
+struct InterpolationBuilderTraits<ddc::SplineBuilder2D<
+        ExecSpace,
+        MemorySpace,
+        BSpline1,
+        BSpline2,
+        InterpolationDDim1,
+        InterpolationDDim2,
+        BcLower1,
+        BcUpper1,
+        BcLower2,
+        BcUpper2,
+        Solver>>
+{
+private:
+    using Builder = ddc::SplineBuilder2D<
+        ExecSpace,
+        MemorySpace,
+        BSpline1,
+        BSpline2,
+        InterpolationDDim1,
+        InterpolationDDim2,
+        BcLower1,
+        BcUpper1,
+        BcLower2,
+        BcUpper2,
+        Solver>;
+
+public:
+    /// @brief The data type that the data is saved on.
+    using data_type = double;
+
+    /// @brief The discrete grid on which interpolation values are given.
+    //using interpolation_grid_type = typename Builder::interpolation_discrete_dimension_type;
+
+    /// @brief The 1D index range for the interpolation mesh.
+    using interpolation_idx_range_type = typename Builder::interpolation_domain_type;
+
+    /// @brief The discrete dimension for the B-spline coefficients.
+    using basis_idx_range_type = IdxRange<typename Builder::bsplines_type1, typename Builder::bsplines_type2>;
 
     /// @brief Batched domain with InterpolationDDim replaced by BSplines.
     template <class IdxRangeBatchedInterpolation>
