@@ -521,9 +521,9 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
     }
 
     // Check 2: round-trip evaluation inside the domain matches cos(x)*(1+y).
-    // Degree-3 Lagrange on 10 cells: error is O(h^4) with h = 2π/10 ≈ 0.63, so ~0.16.
-    // Use a loose tolerance to test correctness of the coefficient layout, not accuracy.
-    double const tol = 0.2;
+    // Degree-d Lagrange on 10 cells: error is O(h^(d+1)).
+    double h = static_cast<double>(xmax) / static_cast<double>(ncells);
+    double const tol = ipow(h, degree + 1);
     FieldMem<DataType, IdxRange<TestGridX, TestGridY>> result_alloc(test_range);
     ddc::PeriodicExtrapolationRule<XPeriodic> const periodic_extrap;
     ddc::NullExtrapolationRule const null_extrap;
