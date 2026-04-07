@@ -140,6 +140,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md) _A class to call all the builders of all the patches once._ 
 * **class** [**MultipatchSplineBuilder2D**](classMultipatchSplineBuilder2D.md) _A class to call all the builders of all the patches once._ 
 * **class** [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md) _A class to evaluate all the splines of all the patches at once._ 
+* **class** [**NDIdentityInterpolationBuilder**](classNDIdentityInterpolationBuilder.md) _An ND builder that copies function values directly as interpolation coefficients._ 
+* **class** [**NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md) _The implementation of_ [_**NDIdentityInterpolationBuilder**_](classNDIdentityInterpolationBuilder.md) _. This is separate to allow a variadic Basis._
 * **class** [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md) _Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations._ 
 * **class** [**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md) _Storage class of the static attributes of the discrete dimension._ 
 * **class** [**OnionPatchLocator**](classOnionPatchLocator.md) [_**Patch**_](structPatch.md) _locator specialised for "onion" geometry._

@@ -2242,6 +2242,22 @@
     <member refid="classMultipatchType_1a6a44d19ff0704be6f0b4e1d476cefbcc" kind="function"><name>get_tuple</name></member>
     <member refid="classMultipatchType_1a8bd7585483ea579822748d6100ae3edb" kind="function"><name>size</name></member>
   </compound>
+  <compound refid="classNDIdentityInterpolationBuilder" kind="class"><name>NDIdentityInterpolationBuilder</name>
+  </compound>
+  <compound refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff" kind="class"><name>NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;</name>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a25671a174c73fb858944f2c9fe2497e6" kind="typedef"><name>exec_space</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ab38d42154f807eb9a4d594dd1280b56c" kind="typedef"><name>memory_space</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1aaefe5f06dfaf5626e77a501d7484dea7" kind="typedef"><name>data_type</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a1248a0d35c267be808d854a29ec738eb" kind="typedef"><name>interpolation_idx_range_type</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a19ea029994cb0aae2f74e9c987c77c95" kind="typedef"><name>coeff_idx_range_type</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1aa43354c77dcba6531f0f4030ff0b63ca" kind="typedef"><name>batched_basis_idx_range_type</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a93b9b959219af16d32166a8bae3ae0db" kind="typedef"><name>batched_derivs_idx_range_type</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a509f795be3a1d4bf9d084c14ed0d9b90" kind="function"><name>NDIdentityInterpolationBuilder</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1adb7b8b4bb9b7f5966df0577d50b60df6" kind="function"><name>operator()</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1ae90013b973630a93da389fdb8ab05378" kind="function"><name>batched_basis_idx_range</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a6a54d2c595169c1d8c1aaa693006f837" kind="function"><name>copy_periodic_data</name></member>
+    <member refid="classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff_1a1e20a0afd16e37e9a2604e7f88c4a38f" kind="function"><name>copy_periodic_data_on_dim</name></member>
+  </compound>
   <compound refid="classNDLagrangeEvaluator" kind="class"><name>NDLagrangeEvaluator</name>
     <member refid="classNDLagrangeEvaluator_1abc233087240378eee9b7b06bed38bda2" kind="typedef"><name>nd_minus_1_evaluator_type</name></member>
     <member refid="classNDLagrangeEvaluator_1af4f756c8b981e6245fde3dd39846f6dd" kind="typedef"><name>HeadBasis</name></member>
@@ -3262,13 +3278,13 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d225" kind="namespace"><name>@225</name>
+  <compound refid="namespace_0d226" kind="namespace"><name>@226</name>
   </compound>
-  <compound refid="namespace_0d227" kind="namespace"><name>@227</name>
+  <compound refid="namespace_0d228" kind="namespace"><name>@228</name>
   </compound>
-  <compound refid="namespace_0d229" kind="namespace"><name>@229</name>
+  <compound refid="namespace_0d230" kind="namespace"><name>@230</name>
   </compound>
-  <compound refid="namespace_0d231" kind="namespace"><name>@231</name>
+  <compound refid="namespace_0d232" kind="namespace"><name>@232</name>
   </compound>
   <compound refid="namespace_0d97" kind="namespace"><name>@97</name>
   </compound>
@@ -4050,6 +4066,8 @@
   <compound refid="lagrange__evaluator_8hpp" kind="file"><name>lagrange_evaluator.hpp</name>
   </compound>
   <compound refid="lagrange__interpolation_8hpp" kind="file"><name>lagrange_interpolation.hpp</name>
+  </compound>
+  <compound refid="nd__identity__interpolation__builder_8hpp" kind="file"><name>nd_identity_interpolation_builder.hpp</name>
   </compound>
   <compound refid="nd__lagrange__evaluator_8hpp" kind="file"><name>nd_lagrange_evaluator.hpp</name>
   </compound>

@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classNDIdentityInterpolationBuilder" kind="class" language="C++" prot="public">
+    <compoundname>NDIdentityInterpolationBuilder</compoundname>
+    <templateparamlist>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+      </param>
+      <param>
+        <type>class DataType</type>
+      </param>
+      <param>
+        <type>class IdxRangeInterpolation</type>
+      </param>
+      <param>
+        <type>class IdxRangeBasis</type>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+<para>An ND builder that copies function values directly as interpolation coefficients. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>An ND extension of <ref refid="classIdentityInterpolationBuilder" kindref="compound">IdentityInterpolationBuilder</ref>. No computation is required because the interpolation coefficients equal the function values at the grid nodes (e.g. for an ND Lagrange interpolation on a tensor-product grid of nodes).</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ExecSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Kokkos execution space. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>MemorySpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The Kokkos memory space. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>DataType</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The data type of field values and coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeInterpolation</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND index range for the interpolation mesh, of the form IdxRange&lt;Grid1, Grid2, ...&gt;. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeBasis</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The ND index range for the basis types, one per interpolation dimension, in the same order as the grids in IdxRangeInterpolation. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/nd_identity_interpolation_builder.hpp" bodystart="29" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

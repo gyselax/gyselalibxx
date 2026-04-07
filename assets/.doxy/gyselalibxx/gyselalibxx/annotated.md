@@ -163,6 +163,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**eval\_deriv\_type**](structMultipatchSplineEvaluator2D_1_1eval__deriv__type.md) _Tag to indicate that derivative of the spline should be evaluated._ 
     * **struct** [**eval\_type**](structMultipatchSplineEvaluator2D_1_1eval__type.md) _Tag to indicate that the value of the spline should be evaluated._ 
 * **class** [**MultipatchType**](classMultipatchType.md) _A class to store several objects that are of a type which is templated by the patch._     
+* **class** [**NDIdentityInterpolationBuilder**](classNDIdentityInterpolationBuilder.md) _An ND builder that copies function values directly as interpolation coefficients._ 
+* **class** [**NDIdentityInterpolationBuilder&lt; ExecSpace, MemorySpace, DataType, IdxRangeInterpolation, IdxRange&lt; Basis... &gt; &gt;**](classNDIdentityInterpolationBuilder_3_01ExecSpace_00_01MemorySpace_00_01DataType_00_01IdxRangeIn4bcac5b3fb4ccc82c859be6708c9c5ff.md) _The implementation of_ [_**NDIdentityInterpolationBuilder**_](classNDIdentityInterpolationBuilder.md) _. This is separate to allow a variadic Basis._    
 * **class** [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md) _Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations._     
 * **class** [**NoPerturbInitialisation**](classNoPerturbInitialisation.md) _Initialisation operator with no perturbation, i.e the distribution function equal to the Maxwellian._     
 * **class** [**NonUniformLagrangeBasis**](classNonUniformLagrangeBasis.md) _Class describing Lagrange polynomials on a uniform grid._     
@@ -251,10 +253,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d97.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d225.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d227.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d229.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d231.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d226.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d228.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d230.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d232.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
