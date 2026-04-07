@@ -170,17 +170,17 @@ struct InterpolationBuilderTraits<ddc::SplineBuilder2D<
 {
 private:
     using Builder = ddc::SplineBuilder2D<
-        ExecSpace,
-        MemorySpace,
-        BSpline1,
-        BSpline2,
-        InterpolationDDim1,
-        InterpolationDDim2,
-        BcLower1,
-        BcUpper1,
-        BcLower2,
-        BcUpper2,
-        Solver>;
+            ExecSpace,
+            MemorySpace,
+            BSpline1,
+            BSpline2,
+            InterpolationDDim1,
+            InterpolationDDim2,
+            BcLower1,
+            BcUpper1,
+            BcLower2,
+            BcUpper2,
+            Solver>;
 
 public:
     /// @brief The data type that the data is saved on.
@@ -193,7 +193,8 @@ public:
     using interpolation_idx_range_type = typename Builder::interpolation_domain_type;
 
     /// @brief The discrete dimension for the B-spline coefficients.
-    using coeff_idx_range_type = IdxRange<typename Builder::bsplines_type1, typename Builder::bsplines_type2>;
+    using coeff_idx_range_type
+            = IdxRange<typename Builder::bsplines_type1, typename Builder::bsplines_type2>;
 
     /// @brief The number of interpolation dimensions (always 1 for SplineBuilder).
     static constexpr std::size_t rank()
