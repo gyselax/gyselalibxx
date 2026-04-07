@@ -173,8 +173,14 @@ public:
         , m_is_cell_bound_2_with_extra_interpol_pt(Bound2 == ddc::BoundCond::GREVILLE)
         , m_idx_range_perp_1(idx_range_1d_1)
         , m_idx_range_perp_2(idx_range_1d_2)
-        , m_weights_patch_1_alloc(m_idx_range_perp_1)
-        , m_weights_patch_2_alloc(m_idx_range_perp_2)
+        , m_weights_patch_1_alloc(
+                  "m_weights_patch_1 "
+                  "(SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator)",
+                  m_idx_range_perp_1)
+        , m_weights_patch_2_alloc(
+                  "m_weights_patch_2 "
+                  "(SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator)",
+                  m_idx_range_perp_2)
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
     {

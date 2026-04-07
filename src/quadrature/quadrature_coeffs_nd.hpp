@@ -33,7 +33,8 @@ DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> quadrature_coeff
         std::function<DFieldMem<IdxRange<DDims>, typename ExecSpace::memory_space>(
                 IdxRange<DDims>)>... funcs)
 {
-    DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
+    DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space>
+            coefficients_alloc("coefficients (quadrature_coeffs_nd)", idx_range);
     DField<IdxRange<DDims...>, typename ExecSpace::memory_space> coefficients(
             get_field(coefficients_alloc));
     // Get coefficients for each dimension

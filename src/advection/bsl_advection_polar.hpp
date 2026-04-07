@@ -173,7 +173,7 @@ public:
 
         // Initialise the feet
         CFieldMemFeetRTheta feet_rtheta_alloc(
-                "feet_rtheta (bsl_advection_polar.hpp)",
+                "feet_rtheta (BslAdvectionPolar::operator())",
                 get_idx_range(advection_field_xy));
         CFieldFeetRTheta feet_rtheta = get_field(feet_rtheta_alloc);
         const std::source_location location = std::source_location::current();

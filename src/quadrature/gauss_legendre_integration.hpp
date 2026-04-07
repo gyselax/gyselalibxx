@@ -153,6 +153,7 @@ public:
             const
     {
         DFieldMem<IdxRange<GLGrid>, typename ExecSpace::memory_space> coefficients_alloc(
+                "coefficients (GaussLegendre::gauss_legendre_coefficients)",
                 m_valid_idx_range);
         auto coefficients_host = ddc::create_mirror_view(get_field(coefficients_alloc));
         ddc::host_for_each(m_valid_idx_range, [&](Idx<GLGrid> ix) {

@@ -81,9 +81,9 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
-        DerivFieldMem k1_alloc(m_idx_range);
-        DerivFieldMem k2_alloc(m_idx_range);
-        FieldMem y_prime_alloc(m_idx_range);
+        DerivFieldMem k1_alloc("k1 (RK2::update)", m_idx_range);
+        DerivFieldMem k2_alloc("k2 (RK2::update)", m_idx_range);
+        FieldMem y_prime_alloc("y_prime (RK2::update)", m_idx_range);
 
         DerivField k1(k1_alloc);
         DerivField k2(k2_alloc);

@@ -11,7 +11,9 @@
 
 CollisionsInter::CollisionsInter(IdxRangeSpXVx const& mesh, double nustar0)
     : m_nustar0(nustar0)
-    , m_nustar_profile_alloc(ddc::select<Species, GridX>(mesh))
+    , m_nustar_profile_alloc(
+              "m_nustar_profile (CollisionsInter::CollisionsInter)",
+              ddc::select<Species, GridX>(mesh))
 {
     // validity checks
     if (ddc::select<Species>(mesh).size() != 2) {
@@ -69,9 +71,13 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
 
 
     //Collision frequencies, momentum and energy exchange terms
-    DFieldMemSpX collfreq_ab(grid_sp_x);
-    DFieldMemSpX momentum_exchange_ab_alloc(grid_sp_x);
-    DFieldMemSpX energy_exchange_ab_alloc(grid_sp_x);
+    DFieldMemSpX collfreq_ab("collfreq_ab (CollisionsInter::get_derivative)", grid_sp_x);
+    DFieldMemSpX momentum_exchange_ab_alloc(
+            "momentum_exchange_ab (CollisionsInter::get_derivative)",
+            grid_sp_x);
+    DFieldMemSpX energy_exchange_ab_alloc(
+            "energy_exchange_ab (CollisionsInter::get_derivative)",
+            grid_sp_x);
     DFieldSpX momentum_exchange_ab = get_field(momentum_exchange_ab_alloc);
     DFieldSpX energy_exchange_ab = get_field(energy_exchange_ab_alloc);
     compute_collfreq_ab(
@@ -87,7 +93,9 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
             get_const_field(fluid_velocity),
             get_const_field(temperature));
 
-    DFieldMemSpXVx fmaxwellian_alloc(get_idx_range(allfdistribu));
+    DFieldMemSpXVx fmaxwellian_alloc(
+            "fmaxwellian (CollisionsInter::get_derivative)",
+            get_idx_range(allfdistribu));
     DFieldSpXVx fmaxwellian = get_field(fmaxwellian_alloc);
     ddc::parallel_for_each(
             location.function_name(),

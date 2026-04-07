@@ -44,7 +44,7 @@ void FluidMoments::operator()(
         double density,
         FluidMoments::MomentVelocity)
 {
-    DFieldMemVx integrand_alloc(get_idx_range(fdistribu));
+    DFieldMemVx integrand_alloc("integrand (FluidMoments::operator())", get_idx_range(fdistribu));
     DFieldVx integrand = get_field(integrand_alloc);
 
     const std::source_location location = std::source_location::current();

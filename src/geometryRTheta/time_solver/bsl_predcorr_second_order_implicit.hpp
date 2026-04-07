@@ -155,21 +155,36 @@ public:
         IdxRangeRTheta const grid(get_idx_range(density_host));
 
         // --- Electrostatic potential (phi). -------------------------------------------------------------
-        DFieldMemRTheta electrical_potential_alloc(grid);
+        DFieldMemRTheta electrical_potential_alloc(
+                "electrical_potential (BslImplicitPredCorrRTheta::operator())",
+                grid);
         host_t<DFieldMemRTheta> electrical_potential_alloc_host(grid);
 
         PolarSplineMemRTheta electrostatic_potential_coef_alloc(
+                "electrostatic_potential_coef (BslImplicitPredCorrRTheta::operator())",
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
-        DVectorFieldMemRTheta<X, Y> advection_field_alloc(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_k_alloc(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_k_tot_alloc(grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_alloc(
+                "advection_field (BslImplicitPredCorrRTheta::operator())",
+                grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_k_alloc(
+                "advection_field_k (BslImplicitPredCorrRTheta::operator())",
+                grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_k_tot_alloc(
+                "advection_field_k_tot (BslImplicitPredCorrRTheta::operator())",
+                grid);
         VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_k_alloc(
+                "advection_field_coefs_k (BslImplicitPredCorrRTheta::operator())",
                 get_spline_idx_range(m_builder));
-        FieldMemRTheta<CoordRTheta> feet_coords_alloc(grid);
-        DFieldMemRTheta density_predicted_alloc(grid);
-        Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
+        FieldMemRTheta<CoordRTheta>
+                feet_coords_alloc("feet_coords (BslImplicitPredCorrRTheta::operator())", grid);
+        DFieldMemRTheta density_predicted_alloc(
+                "density_predicted (BslImplicitPredCorrRTheta::operator())",
+                grid);
+        Spline2DMem density_coef_alloc(
+                "density_coef (BslImplicitPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
 
         auto advection_field_alloc_host = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultHostExecutionSpace(),
@@ -409,9 +424,15 @@ public:
             double const tau) const
     {
         IdxRangeRTheta const grid = get_idx_range(advection_field);
-        DVectorFieldMemRTheta<X, Y> advection_field_k_alloc(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_k_tot_alloc(grid);
-        FieldMemRTheta<CoordRTheta> feet_coords_tmp_alloc(grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_k_alloc(
+                "advection_field_k (BslImplicitPredCorrRTheta::implicit_loop)",
+                grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_k_tot_alloc(
+                "advection_field_k_tot (BslImplicitPredCorrRTheta::implicit_loop)",
+                grid);
+        FieldMemRTheta<CoordRTheta> feet_coords_tmp_alloc(
+                "feet_coords_tmp (BslImplicitPredCorrRTheta::implicit_loop)",
+                grid);
 
         DVectorFieldRTheta<X, Y> advection_field_k(advection_field_k_alloc);
         DVectorFieldRTheta<X, Y> advection_field_k_tot(advection_field_k_tot_alloc);

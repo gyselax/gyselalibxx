@@ -118,7 +118,7 @@ void KrookSourceAdaptive::get_derivative(
 {
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
 
-    DFieldMemSpX amplitudes_alloc(grid_sp_x);
+    DFieldMemSpX amplitudes_alloc("amplitudes (KrookSourceAdaptive::get_derivative)", grid_sp_x);
     auto amplitudes = get_field(amplitudes_alloc);
     get_amplitudes(amplitudes, allfdistribu);
 
