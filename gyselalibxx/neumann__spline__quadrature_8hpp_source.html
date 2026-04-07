@@ -649,7 +649,8 @@ neumann_spline_quadrature_coefficients(
             get_field(std::get&lt;CoefficientFieldMem1D&lt;Kokkos::DefaultHostExecutionSpace, DDims&gt;&gt;(
                     current_dim_coeffs_alloc))...);
     // Allocate ND coefficients
-    DFieldMem&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt; coefficients_alloc(idx_range);
+    DFieldMem&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt;
+            coefficients_alloc("coefficients (neumann_spline_quadrature_coefficients)", idx_range);
     auto coefficients_alloc_host = ddc::create_mirror(get_field(coefficients_alloc));
     host_t&lt;DField&lt;IdxRange&lt;DDims...&gt;&gt;&gt; coefficients(get_field(coefficients_alloc_host));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments

@@ -68,6 +68,13 @@ private:
     EvaluatorType m_evaluator;
 
 public:
+    explicit SplineInterpolator(std::string const& label, IdxRange<InterpGrid> idx_range)
+        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
+        , m_builder(label, idx_range)
+        , m_evaluator(m_min_extrapolation, m_max_extrapolation)
+    {
+    }
     explicit SplineInterpolator(IdxRange<InterpGrid> idx_range)
         : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
         , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))

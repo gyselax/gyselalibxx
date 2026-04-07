@@ -60,7 +60,8 @@ _An owning interpolation object that bundles a spline builder and evaluator._ [M
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SplineInterpolator**](#function-splineinterpolator) (IdxRange&lt; InterpGrid &gt; idx\_range) <br>_Construct a_ [_**SplineInterpolator**_](classSplineInterpolator.md) _on the given interpolation index range._ |
+|   | [**SplineInterpolator**](#function-splineinterpolator-12) (std::string const & label, IdxRange&lt; InterpGrid &gt; idx\_range) <br>_Construct a_ [_**SplineInterpolator**_](classSplineInterpolator.md) _on the given interpolation index range._ |
+|   | [**SplineInterpolator**](#function-splineinterpolator-22) (IdxRange&lt; InterpGrid &gt; idx\_range) <br>_Construct a_ [_**SplineInterpolator**_](classSplineInterpolator.md) _on the given interpolation index range._ |
 |  [**BuilderType**](classSplineInterpolator.md#typedef-buildertype) const & | [**get\_builder**](#function-get_builder) () const<br>_Return a const reference to the owned spline builder._  |
 |  [**EvaluatorType**](classSplineInterpolator.md#typedef-evaluatortype) const & | [**get\_evaluator**](#function-get_evaluator) () const<br>_Return a const reference to the owned spline evaluator._  |
 
@@ -158,7 +159,39 @@ using SplineInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrap
 
 
 
-### function SplineInterpolator 
+### function SplineInterpolator [1/2]
+
+_Construct a_ [_**SplineInterpolator**_](classSplineInterpolator.md) _on the given interpolation index range._
+```C++
+inline explicit SplineInterpolator::SplineInterpolator (
+    std::string const & label,
+    IdxRange< InterpGrid > idx_range
+) 
+```
+
+
+
+The extrapolation rules are initialised from the discrete space of `Basis`, so the corresponding ddc discrete space must be initialised before construction.
+
+
+
+
+**Parameters:**
+
+
+* `label` A label used to tag parallel regions and memory allocations for profiling. 
+* `idx_range` The 1D interpolation index range passed to the builder. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function SplineInterpolator [2/2]
 
 _Construct a_ [_**SplineInterpolator**_](classSplineInterpolator.md) _on the given interpolation index range._
 ```C++

@@ -96,9 +96,11 @@ See [MultipatchType](classMultipatchType.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-24) (T&lt; Patches &gt;... args) <br> |
-|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-34) (MultipatchObj & other) <br> |
-|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-44) ([**MultipatchFieldMem**](classMultipatchFieldMem.md)&lt; OtherType, OPatches... &gt; && other) <br> |
+|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-26) (std::string const & label, T&lt; Patches &gt;... args) <br> |
+|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-36) (T&lt; Patches &gt;... args) <br>_Version without a label._  |
+|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-46) (std::string const & label, MultipatchObj & other) <br> |
+|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-56) (MultipatchObj & other) <br>_Version without a label._  |
+|   | [**MultipatchFieldMem**](#function-multipatchfieldmem-66) ([**MultipatchFieldMem**](classMultipatchFieldMem.md)&lt; OtherType, OPatches... &gt; && other) <br> |
 |  auto | [**get**](#function-get-12) () const<br> |
 |  auto | [**get**](#function-get-22) () <br> |
 |  auto | [**get\_const\_field**](#function-get_const_field) () const<br>_Get a MultipatchConstField containing constant fields so the values cannot be modified._  |
@@ -354,10 +356,11 @@ using MultipatchFieldMem< T, Patches >::view_type =  MultipatchField<InternalCon
 
 
 
-### function MultipatchFieldMem [2/4]
+### function MultipatchFieldMem [2/6]
 
 ```C++
 inline explicit MultipatchFieldMem::MultipatchFieldMem (
+    std::string const & label,
     T< Patches >... args
 ) 
 ```
@@ -372,6 +375,7 @@ Instantiate the [**MultipatchFieldMem**](classMultipatchFieldMem.md) class from 
 **Parameters:**
 
 
+* `label` A label used to tag parallel regions and memory allocations for profiling. 
 * `args` The objects to be stored in the class. 
 
 
@@ -383,11 +387,28 @@ Instantiate the [**MultipatchFieldMem**](classMultipatchFieldMem.md) class from 
 
 
 
-### function MultipatchFieldMem [3/4]
+### function MultipatchFieldMem [3/6]
+
+_Version without a label._ 
+```C++
+inline explicit MultipatchFieldMem::MultipatchFieldMem (
+    T< Patches >... args
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function MultipatchFieldMem [4/6]
 
 ```C++
 template<class MultipatchObj>
 inline explicit MultipatchFieldMem::MultipatchFieldMem (
+    std::string const & label,
     MultipatchObj & other
 ) 
 ```
@@ -405,6 +426,7 @@ A compatible [**MultipatchFieldMem**](classMultipatchFieldMem.md) is one which u
 **Parameters:**
 
 
+* `label` A label used to tag parallel regions and memory allocations for profiling. 
 * `other` The equivalent [**MultipatchFieldMem**](classMultipatchFieldMem.md) being copied. 
 
 
@@ -416,7 +438,24 @@ A compatible [**MultipatchFieldMem**](classMultipatchFieldMem.md) is one which u
 
 
 
-### function MultipatchFieldMem [4/4]
+### function MultipatchFieldMem [5/6]
+
+_Version without a label._ 
+```C++
+template<class MultipatchObj>
+inline explicit MultipatchFieldMem::MultipatchFieldMem (
+    MultipatchObj & other
+) 
+```
+
+
+
+
+<hr>
+
+
+
+### function MultipatchFieldMem [6/6]
 
 ```C++
 template<template< typename P > typename OtherType, class... OPatches>
@@ -656,7 +695,7 @@ MultipatchFieldMem::~MultipatchFieldMem () noexcept
 
 
 
-### friend MultipatchFieldMem [1/4]
+### friend MultipatchFieldMem [1/6]
 
 ```C++
 template<template< typename P > typename OtherType, class... OPatches>

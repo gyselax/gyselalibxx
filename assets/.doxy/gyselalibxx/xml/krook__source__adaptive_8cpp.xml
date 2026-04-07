@@ -572,7 +572,7 @@
 <codeline lineno="118"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
 <codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSpX<sp/>grid_sp_x(get_idx_range&lt;Species,<sp/>GridX&gt;(allfdistribu));</highlight></codeline>
 <codeline lineno="120"><highlight class="normal"></highlight></codeline>
-<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>amplitudes_alloc(grid_sp_x);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemSpX<sp/>amplitudes_alloc(</highlight><highlight class="stringliteral">&quot;amplitudes<sp/>(KrookSourceAdaptive::get_derivative)&quot;</highlight><highlight class="normal">,<sp/>grid_sp_x);</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>amplitudes<sp/>=<sp/>get_field(amplitudes_alloc);</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classKrookSourceAdaptive_1aa21bf44587670275cda2d33049a5227c" kindref="member">get_amplitudes</ref>(amplitudes,<sp/>allfdistribu);</highlight></codeline>
 <codeline lineno="124"><highlight class="normal"></highlight></codeline>

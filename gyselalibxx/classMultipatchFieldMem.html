@@ -646,15 +646,23 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-multipatchfieldmem-24"><strong>MultipatchFieldMem</strong></a> (T&lt; Patches &gt;... args) <br></td>
+<td style="text-align: left;"><a href="#function-multipatchfieldmem-26"><strong>MultipatchFieldMem</strong></a> (std::string const &amp; label, T&lt; Patches &gt;... args) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-multipatchfieldmem-34"><strong>MultipatchFieldMem</strong></a> (MultipatchObj &amp; other) <br></td>
+<td style="text-align: left;"><a href="#function-multipatchfieldmem-36"><strong>MultipatchFieldMem</strong></a> (T&lt; Patches &gt;... args) <br><em>Version without a label.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-multipatchfieldmem-44"><strong>MultipatchFieldMem</strong></a> (<a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>&lt; OtherType, OPatches... &gt; &amp;&amp; other) <br></td>
+<td style="text-align: left;"><a href="#function-multipatchfieldmem-46"><strong>MultipatchFieldMem</strong></a> (std::string const &amp; label, MultipatchObj &amp; other) <br></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-multipatchfieldmem-56"><strong>MultipatchFieldMem</strong></a> (MultipatchObj &amp; other) <br><em>Version without a label.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-multipatchfieldmem-66"><strong>MultipatchFieldMem</strong></a> (<a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>&lt; OtherType, OPatches... &gt; &amp;&amp; other) <br></td>
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
@@ -838,21 +846,32 @@
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-multipatchfieldmem-24">function MultipatchFieldMem [2/4]</h3>
+<h3 id="function-multipatchfieldmem-26">function MultipatchFieldMem [2/6]</h3>
 <pre><code class="language-C++">inline explicit MultipatchFieldMem::MultipatchFieldMem (
+    std::string const &amp; label,
     T&lt; Patches &gt;... args
 ) 
 </code></pre>
 <p>Instantiate the <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a> class from an arbitrary number of objects.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
+<li><code>label</code> A label used to tag parallel regions and memory allocations for profiling. </li>
 <li><code>args</code> The objects to be stored in the class. </li>
 </ul>
 <hr>
 
-<h3 id="function-multipatchfieldmem-34">function MultipatchFieldMem [3/4]</h3>
+<h3 id="function-multipatchfieldmem-36">function MultipatchFieldMem [3/6]</h3>
+<p><em>Version without a label.</em> </p>
+<pre><code class="language-C++">inline explicit MultipatchFieldMem::MultipatchFieldMem (
+    T&lt; Patches &gt;... args
+) 
+</code></pre>
+<hr>
+
+<h3 id="function-multipatchfieldmem-46">function MultipatchFieldMem [4/6]</h3>
 <pre><code class="language-C++">template&lt;class MultipatchObj&gt;
 inline explicit MultipatchFieldMem::MultipatchFieldMem (
+    std::string const &amp; label,
     MultipatchObj &amp; other
 ) 
 </code></pre>
@@ -860,11 +879,21 @@ inline explicit MultipatchFieldMem::MultipatchFieldMem (
 <p>A compatible <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a> is one which uses all the patches used by this class. The object being copied may include more patches than this <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a>. Further the original <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a> must store objects of the correct type (the type template may be different but return the same type depending on how it is designed.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
+<li><code>label</code> A label used to tag parallel regions and memory allocations for profiling. </li>
 <li><code>other</code> The equivalent <a href="classMultipatchFieldMem.html"><strong>MultipatchFieldMem</strong></a> being copied. </li>
 </ul>
 <hr>
 
-<h3 id="function-multipatchfieldmem-44">function MultipatchFieldMem [4/4]</h3>
+<h3 id="function-multipatchfieldmem-56">function MultipatchFieldMem [5/6]</h3>
+<p><em>Version without a label.</em> </p>
+<pre><code class="language-C++">template&lt;class MultipatchObj&gt;
+inline explicit MultipatchFieldMem::MultipatchFieldMem (
+    MultipatchObj &amp; other
+) 
+</code></pre>
+<hr>
+
+<h3 id="function-multipatchfieldmem-66">function MultipatchFieldMem [6/6]</h3>
 <pre><code class="language-C++">template&lt;template&lt; typename P &gt; typename OtherType, class... OPatches&gt;
 inline MultipatchFieldMem::MultipatchFieldMem (
     MultipatchFieldMem &lt; OtherType, OPatches... &gt; &amp;&amp; other
@@ -948,7 +977,7 @@ inline auto MultipatchFieldMem::get ()
 </code></pre>
 <hr>
 <h2 id="friends-documentation">Friends Documentation</h2>
-<h3 id="friend-multipatchfieldmem-14">friend MultipatchFieldMem [1/4]</h3>
+<h3 id="friend-multipatchfieldmem-16">friend MultipatchFieldMem [1/6]</h3>
 <pre><code class="language-C++">template&lt;template&lt; typename P &gt; typename OtherType, class... OPatches&gt;
 class MultipatchFieldMem::MultipatchFieldMem (
     MultipatchFieldMem

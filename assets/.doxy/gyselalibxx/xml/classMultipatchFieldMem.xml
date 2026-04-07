@@ -200,12 +200,16 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classMultipatchFieldMem_1a4519292b25b58d022ead047fae3c5178" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classMultipatchFieldMem_1a77f63c56f7f710c3baf278a928332767" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>MultipatchFieldMem&lt; T, Patches &gt;::MultipatchFieldMem</definition>
-        <argsstring>(T&lt; Patches &gt;... args)</argsstring>
+        <argsstring>(std::string const &amp;label, T&lt; Patches &gt;... args)</argsstring>
         <name>MultipatchFieldMem</name>
         <qualifiedname>MultipatchFieldMem::MultipatchFieldMem</qualifiedname>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>label</declname>
+        </param>
         <param>
           <type>T&lt; Patches &gt;...</type>
           <declname>args</declname>
@@ -215,6 +219,14 @@
         <detaileddescription>
 <para>Instantiate the <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> class from an arbitrary number of objects.</para>
 <para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>label</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A label used to tag parallel regions and memory allocations for profiling. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
 <parameternamelist>
 <parametername>args</parametername>
 </parameternamelist>
@@ -227,7 +239,73 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="80" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="80" bodyend="80"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="81" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="81" bodyend="84"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchFieldMem_1a4519292b25b58d022ead047fae3c5178" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>MultipatchFieldMem&lt; T, Patches &gt;::MultipatchFieldMem</definition>
+        <argsstring>(T&lt; Patches &gt;... args)</argsstring>
+        <name>MultipatchFieldMem</name>
+        <qualifiedname>MultipatchFieldMem::MultipatchFieldMem</qualifiedname>
+        <param>
+          <type>T&lt; Patches &gt;...</type>
+          <declname>args</declname>
+        </param>
+        <briefdescription>
+<para>Version without a label. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="87" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="87" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="classMultipatchFieldMem_1a1fe8e745555e7a2467831524455c41ea" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class MultipatchObj</type>
+          </param>
+        </templateparamlist>
+        <type></type>
+        <definition>MultipatchFieldMem&lt; T, Patches &gt;::MultipatchFieldMem</definition>
+        <argsstring>(std::string const &amp;label, MultipatchObj &amp;other)</argsstring>
+        <name>MultipatchFieldMem</name>
+        <qualifiedname>MultipatchFieldMem::MultipatchFieldMem</qualifiedname>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>label</declname>
+        </param>
+        <param>
+          <type>MultipatchObj &amp;</type>
+          <declname>other</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Create a <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> class by copying an instance of another compatible <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref>.</para>
+<para>A compatible <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> is one which uses all the patches used by this class. The object being copied may include more patches than this <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref>. Further the original <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> must store objects of the correct type (the type template may be different but return the same type depending on how it is designed.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>label</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A label used to tag parallel regions and memory allocations for profiling. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>other</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The equivalent <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> being copied. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="101" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="101" bodyend="105"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1a37eae3b00efc46c87e14e1eae48fecf5" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -245,24 +323,13 @@
           <declname>other</declname>
         </param>
         <briefdescription>
+<para>Version without a label. </para>
         </briefdescription>
         <detaileddescription>
-<para>Create a <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> class by copying an instance of another compatible <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref>.</para>
-<para>A compatible <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> is one which uses all the patches used by this class. The object being copied may include more patches than this <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref>. Further the original <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> must store objects of the correct type (the type template may be different but return the same type depending on how it is designed.</para>
-<para><parameterlist kind="param"><parameteritem>
-<parameternamelist>
-<parametername>other</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The equivalent <ref refid="classMultipatchFieldMem" kindref="compound">MultipatchFieldMem</ref> being copied. </para>
-</parameterdescription>
-</parameteritem>
-</parameterlist>
-</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="93" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="93" bodyend="97"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="109" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="109" bodyend="111"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1ae39abf1d81ca63a0aa65345a79a638fd" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -303,7 +370,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="106" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="106" bodyend="116"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="120" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="120" bodyend="130"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1a2a8cae51129016feca06ea2ef0aeb91b" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
         <type></type>
@@ -317,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="118" column="5"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="132" column="5"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1a579cfff022a37682e4677b6298559d4f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -349,7 +416,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="127" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="127" bodyend="130"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="141" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="141" bodyend="144"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1a6dab5b5b8e1583e5693c5dd9e9c768a7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -381,7 +448,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="139" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="139" bodyend="142"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="153" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="153" bodyend="156"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1a32fdf886aeabdd36febe191309a0ad43" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -399,7 +466,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="149" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="149" bodyend="153"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="163" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="163" bodyend="167"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1ad662f26d4aab330dae6a7403c2db0b98" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -417,7 +484,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="160" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="160" bodyend="164"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="174" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="174" bodyend="178"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1ad38e389296ed3e9548bc17079c8b0d3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -435,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="172" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="172" bodyend="175"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="186" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="186" bodyend="189"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1a2133a1adff7511566108aa2c8a38d7f5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -453,7 +520,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="182" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="182" bodyend="186"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="196" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="196" bodyend="200"/>
       </memberdef>
       <memberdef kind="function" id="classMultipatchFieldMem_1adc226c7e5d20ea6fa028f1054de505e4" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>auto</type>
@@ -471,7 +538,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="194" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="194" bodyend="197"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="208" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="208" bodyend="211"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -524,7 +591,7 @@
         <link refid="classMultipatchType"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="30" bodyend="198"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/data_types/multipatch_field_mem.hpp" bodystart="30" bodyend="212"/>
     <listofallmembers>
       <member refid="classMultipatchFieldMem_1a4e749f2597001907dbe8cf077ca2da9e" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>base_type</name></member>
       <member refid="classMultipatchFieldMem_1abbd97d1ad7dfdd97b1721d08de4b4c3c" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>discrete_domain_type</name></member>
@@ -542,7 +609,9 @@
       <member refid="classMultipatchType_1ae7480fdbb95f4018d1cd39f809001c14" prot="protected" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>m_tuple</name></member>
       <member refid="classMultipatchFieldMem_1ad7c866614c915394b926d867e3b80e6f" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>memory_space</name></member>
       <member refid="classMultipatchFieldMem_1ab86aa4be4fafa0f8bb60670ce33ffa08" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>MultipatchFieldMem</name></member>
+      <member refid="classMultipatchFieldMem_1a77f63c56f7f710c3baf278a928332767" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>MultipatchFieldMem</name></member>
       <member refid="classMultipatchFieldMem_1a4519292b25b58d022ead047fae3c5178" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>MultipatchFieldMem</name></member>
+      <member refid="classMultipatchFieldMem_1a1fe8e745555e7a2467831524455c41ea" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>MultipatchFieldMem</name></member>
       <member refid="classMultipatchFieldMem_1a37eae3b00efc46c87e14e1eae48fecf5" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>MultipatchFieldMem</name></member>
       <member refid="classMultipatchFieldMem_1ae39abf1d81ca63a0aa65345a79a638fd" prot="public" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>MultipatchFieldMem</name></member>
       <member refid="classMultipatchType_1ae1ab2f08d00d74b0fd692ed0269af5c6" prot="protected" virt="non-virtual"><scope>MultipatchFieldMem</scope><name>MultipatchType</name></member>

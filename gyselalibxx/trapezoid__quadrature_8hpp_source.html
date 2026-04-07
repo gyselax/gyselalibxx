@@ -574,7 +574,8 @@ template &lt;class ExecSpace, class Grid1D&gt;
 DFieldMem&lt;IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt; trapezoid_quadrature_coefficients_1d(
         IdxRange&lt;Grid1D&gt; const&amp; idx_range)
 {
-    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt; coefficients_alloc(idx_range);
+    DFieldMem&lt;IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt;
+            coefficients_alloc("coefficients (trapezoid_quadrature_coefficients_1d)", idx_range);
     DField&lt;IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt; const coefficients
             = get_field(coefficients_alloc);
 

@@ -219,7 +219,7 @@
 <codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>density,</highlight></codeline>
 <codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structFluidMoments_1_1MomentVelocity" kindref="compound">FluidMoments::MomentVelocity</ref>)</highlight></codeline>
 <codeline lineno="46"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemVx<sp/>integrand_alloc(get_idx_range(fdistribu));</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemVx<sp/>integrand_alloc(</highlight><highlight class="stringliteral">&quot;integrand<sp/>(FluidMoments::operator())&quot;</highlight><highlight class="normal">,<sp/>get_idx_range(fdistribu));</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldVx<sp/>integrand<sp/>=<sp/>get_field(integrand_alloc);</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>std::source_location<sp/>location<sp/>=<sp/>std::source_location::current();</highlight></codeline>

@@ -2133,7 +2133,9 @@
     <member refid="classMultipatchFieldMem_1ad7c866614c915394b926d867e3b80e6f" kind="typedef"><name>memory_space</name></member>
     <member refid="classMultipatchFieldMem_1a841face1ddf0be7541b620046ab3fd93" kind="typedef"><name>element_type</name></member>
     <member refid="classMultipatchFieldMem_1ab86aa4be4fafa0f8bb60670ce33ffa08" kind="friend"><name>MultipatchFieldMem</name></member>
+    <member refid="classMultipatchFieldMem_1a77f63c56f7f710c3baf278a928332767" kind="function"><name>MultipatchFieldMem</name></member>
     <member refid="classMultipatchFieldMem_1a4519292b25b58d022ead047fae3c5178" kind="function"><name>MultipatchFieldMem</name></member>
+    <member refid="classMultipatchFieldMem_1a1fe8e745555e7a2467831524455c41ea" kind="function"><name>MultipatchFieldMem</name></member>
     <member refid="classMultipatchFieldMem_1a37eae3b00efc46c87e14e1eae48fecf5" kind="function"><name>MultipatchFieldMem</name></member>
     <member refid="classMultipatchFieldMem_1ae39abf1d81ca63a0aa65345a79a638fd" kind="function"><name>MultipatchFieldMem</name></member>
     <member refid="classMultipatchFieldMem_1a2a8cae51129016feca06ea2ef0aeb91b" kind="function"><name>~MultipatchFieldMem</name></member>
@@ -2901,6 +2903,7 @@
     <member refid="classSplineInterpolator_1a6f394ea211d048ed0de9e84b377363ae" kind="variable"><name>m_builder</name></member>
     <member refid="classSplineInterpolator_1a4de6b5624065659fa7c93dfa0ac7482b" kind="variable"><name>m_evaluator</name></member>
     <member refid="classSplineInterpolator_1aa044a8ca3d0ca692d6c222079dd3ad7a" kind="function"><name>rank</name></member>
+    <member refid="classSplineInterpolator_1ac2a99db22fe1b60ccff83df1b57c1ac6" kind="function"><name>SplineInterpolator</name></member>
     <member refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" kind="function"><name>SplineInterpolator</name></member>
     <member refid="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" kind="function"><name>get_builder</name></member>
     <member refid="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" kind="function"><name>get_evaluator</name></member>
@@ -3436,6 +3439,7 @@
   <compound refid="vector__mapper_8hpp" kind="file"><name>vector_mapper.hpp</name>
     <member refid="vector__mapper_8hpp_1a38e55c617792a81e7b09c659e8e81d98" kind="function"><name>to_vector_space</name></member>
     <member refid="vector__mapper_8hpp_1a041229e77c441db6b66ddff565328422" kind="function"><name>copy_to_vector_space</name></member>
+    <member refid="vector__mapper_8hpp_1a95ec5328e09103c2c0a012effc3cfefd" kind="function"><name>create_mirror_view_and_copy_on_vector_space</name></member>
     <member refid="vector__mapper_8hpp_1a71e6927e680d5568b2a898114a85c8cd" kind="function"><name>create_mirror_view_and_copy_on_vector_space</name></member>
   </compound>
   <compound refid="deriv__details_8hpp" kind="file"><name>deriv_details.hpp</name>

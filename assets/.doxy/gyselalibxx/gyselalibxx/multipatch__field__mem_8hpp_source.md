@@ -58,13 +58,23 @@ public:
     using element_type = typename base_type::example_element::element_type;
 
 public:
-    explicit MultipatchFieldMem(T<Patches>... args) : base_type(args...) {}
+    explicit MultipatchFieldMem(std::string const& label, T<Patches>... args)
+        : base_type(label, args...)
+    {
+    }
+
+    explicit MultipatchFieldMem(T<Patches>... args) : MultipatchFieldMem("no-label", args...) {}
 
     template <class MultipatchObj>
-    explicit MultipatchFieldMem(MultipatchObj& other)
-        : base_type(T<Patches>(other.template get<Patches>())...)
+    explicit MultipatchFieldMem(std::string const& label, MultipatchObj& other)
+        : base_type(T<Patches>(label, other.template get<Patches>())...)
     {
         static_assert(is_multipatch_type_v<MultipatchObj>);
+    }
+
+    template <class MultipatchObj>
+    explicit MultipatchFieldMem(MultipatchObj& other) : MultipatchFieldMem("no-label", other)
+    {
     }
 
     template <template <typename P> typename OtherType, class... OPatches>

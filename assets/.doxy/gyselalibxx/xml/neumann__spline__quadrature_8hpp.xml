@@ -154,7 +154,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp" line="107" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp" bodystart="107" bodyend="138"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp" line="107" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp" bodystart="107" bodyend="139"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -249,21 +249,22 @@
 <codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_field(std::get&lt;CoefficientFieldMem1D&lt;Kokkos::DefaultHostExecutionSpace,<sp/>DDims&gt;&gt;(</highlight></codeline>
 <codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_dim_coeffs_alloc))...);</highlight></codeline>
 <codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Allocate<sp/>ND<sp/>coefficients</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRange&lt;DDims...&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space&gt;<sp/>coefficients_alloc(idx_range);</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>coefficients_alloc_host<sp/>=<sp/>ddc::create_mirror(get_field(coefficients_alloc));</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DField&lt;IdxRange&lt;DDims...&gt;&gt;&gt;<sp/>coefficients(get_field(coefficients_alloc_host));</highlight></codeline>
-<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Serial<sp/>loop<sp/>is<sp/>used<sp/>due<sp/>to<sp/>nvcc<sp/>bug<sp/>concerning<sp/>functions<sp/>with<sp/>variadic<sp/>template<sp/>arguments</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>(see<sp/>https://github.com/kokkos/kokkos/pull/7059)</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::host_for_each(idx_range,<sp/>[&amp;](Idx&lt;DDims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>idim)<sp/>{</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>multiply<sp/>the<sp/>1D<sp/>coefficients<sp/>by<sp/>one<sp/>another</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>coefficients(idim)</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(std::get&lt;CoefficientField1D&lt;Kokkos::DefaultHostExecutionSpace,<sp/>DDims&gt;&gt;(</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>...<sp/>*<sp/>1);</highlight></codeline>
-<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/>});</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(coefficients_alloc,<sp/>coefficients_alloc_host);</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>coefficients_alloc;</highlight></codeline>
-<codeline lineno="138"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRange&lt;DDims...&gt;,<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>ExecSpace::memory_space&gt;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>coefficients_alloc(</highlight><highlight class="stringliteral">&quot;coefficients<sp/>(neumann_spline_quadrature_coefficients)&quot;</highlight><highlight class="normal">,<sp/>idx_range);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">auto</highlight><highlight class="normal"><sp/>coefficients_alloc_host<sp/>=<sp/>ddc::create_mirror(get_field(coefficients_alloc));</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>host_t&lt;DField&lt;IdxRange&lt;DDims...&gt;&gt;&gt;<sp/>coefficients(get_field(coefficients_alloc_host));</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Serial<sp/>loop<sp/>is<sp/>used<sp/>due<sp/>to<sp/>nvcc<sp/>bug<sp/>concerning<sp/>functions<sp/>with<sp/>variadic<sp/>template<sp/>arguments</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>(see<sp/>https://github.com/kokkos/kokkos/pull/7059)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::host_for_each(idx_range,<sp/>[&amp;](Idx&lt;DDims...&gt;<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>idim)<sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>multiply<sp/>the<sp/>1D<sp/>coefficients<sp/>by<sp/>one<sp/>another</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>coefficients(idim)</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>(std::get&lt;CoefficientField1D&lt;Kokkos::DefaultHostExecutionSpace,<sp/>DDims&gt;&gt;(</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>...<sp/>*<sp/>1);</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/>});</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::parallel_deepcopy(coefficients_alloc,<sp/>coefficients_alloc_host);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>coefficients_alloc;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp"/>
   </compounddef>

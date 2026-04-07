@@ -143,6 +143,7 @@ template <
         class InVectorSpace,
         class LayoutStridedPolicy>
 auto create_mirror_view_and_copy_on_vector_space(
+        std::string const& label,
         ExecSpace exec_space,
         VectorField<
                 ElementType,
@@ -160,7 +161,7 @@ auto create_mirror_view_and_copy_on_vector_space(
                 IdxRangeType,
                 OutVectorSpace,
                 typename ExecSpace::memory_space>
-                vector_field_out(get_idx_range(vector_field));
+                vector_field_out(label, get_idx_range(vector_field));
         copy_to_vector_space(
                 exec_space,
                 get_field(vector_field_out),
@@ -168,6 +169,38 @@ auto create_mirror_view_and_copy_on_vector_space(
                 get_const_field(vector_field));
         return vector_field_out;
     }
+}
+
+template <
+        class OutVectorSpace,
+        class ExecSpace,
+        class Mapping,
+        class ElementType,
+        class IdxRangeType,
+        class InVectorSpace,
+        class LayoutStridedPolicy>
+auto create_mirror_view_and_copy_on_vector_space(
+        ExecSpace exec_space,
+        VectorField<
+                ElementType,
+                IdxRangeType,
+                InVectorSpace,
+                typename ExecSpace::memory_space,
+                LayoutStridedPolicy> vector_field,
+        Mapping mapping)
+{
+    return create_mirror_view_and_copy_on_vector_space<
+            OutVectorSpace,
+            ExecSpace,
+            Mapping,
+            ElementType,
+            IdxRangeType,
+            InVectorSpace,
+            LayoutStridedPolicy>(
+            "_ (create_mirror_view_and_copy_on_vector_space)",
+            exec_space,
+            vector_field,
+            mapping);
 }
 ```
 

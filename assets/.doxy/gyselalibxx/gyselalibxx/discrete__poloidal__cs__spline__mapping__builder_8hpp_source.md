@@ -69,14 +69,24 @@ public:
             Mapping const& analytical_mapping,
             SplineBuilder const& builder,
             SplineEvaluator const& evaluator)
-        : m_curvilinear_to_x_spline_alloc(get_spline_idx_range(builder))
-        , m_curvilinear_to_y_spline_alloc(get_spline_idx_range(builder))
+        : m_curvilinear_to_x_spline_alloc(
+                "m_curvilinear_to_x_spline "
+                "(DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                get_spline_idx_range(builder))
+        , m_curvilinear_to_y_spline_alloc(
+                  "m_curvilinear_to_y_spline "
+                  "(DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                  get_spline_idx_range(builder))
         , m_evaluator(evaluator)
     {
         SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
         SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
-        InterpolationFieldMem curvilinear_to_x_vals_alloc(builder.interpolation_domain());
-        InterpolationFieldMem curvilinear_to_y_vals_alloc(builder.interpolation_domain());
+        InterpolationFieldMem curvilinear_to_x_vals_alloc(
+                "curvilinear_to_x_vals (DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                builder.interpolation_domain());
+        InterpolationFieldMem curvilinear_to_y_vals_alloc(
+                "curvilinear_to_y_vals (DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                builder.interpolation_domain());
         InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);
         InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);
 
@@ -343,8 +353,14 @@ public:
         m_curvilinear_to_y_spline_alloc = SplineCoeffsMem(spline_domain);
         SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
         SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
-        InterpolationFieldMem curvilinear_to_x_vals_alloc(refined_domain);
-        InterpolationFieldMem curvilinear_to_y_vals_alloc(refined_domain);
+        InterpolationFieldMem curvilinear_to_x_vals_alloc(
+                "curvilinear_to_x_vals "
+                "(RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder)",
+                refined_domain);
+        InterpolationFieldMem curvilinear_to_y_vals_alloc(
+                "curvilinear_to_y_vals "
+                "(RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder)",
+                refined_domain);
         InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);
         InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);
 

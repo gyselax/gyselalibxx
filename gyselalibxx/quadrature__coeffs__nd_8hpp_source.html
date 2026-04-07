@@ -584,7 +584,8 @@ DFieldMem&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt; quad
         std::function&lt;DFieldMem&lt;IdxRange&lt;DDims&gt;, typename ExecSpace::memory_space&gt;(
                 IdxRange&lt;DDims&gt;)&gt;... funcs)
 {
-    DFieldMem&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt; coefficients_alloc(idx_range);
+    DFieldMem&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt;
+            coefficients_alloc("coefficients (quadrature_coeffs_nd)", idx_range);
     DField&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt; coefficients(
             get_field(coefficients_alloc));
     // Get coefficients for each dimension
