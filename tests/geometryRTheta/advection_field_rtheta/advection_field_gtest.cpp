@@ -139,12 +139,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    SplineInterpolatorRTheta interpolator(grid);
 
     RK3Builder const time_stepper;
     SplinePolarFootFinder find_feet(
@@ -155,7 +150,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
     AdvectionFieldFinder advection_field_computer(to_physical_mapping);

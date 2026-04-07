@@ -130,13 +130,7 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    SplineInterpolatorRTheta interpolator(grid);
 
     SplinePolarFootFinder find_feet(
             grid,
@@ -146,7 +140,7 @@ int main(int argc, char** argv)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
 
 

@@ -138,14 +138,8 @@ int main(int argc, char** argv)
     SplineRThetaBuilder_host const builder_host(grid);
     SplineRThetaBuilder const builder(grid);
 
-    // --- Evaluator for the test function:
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    // --- Interpolator for the test function:
+    SplineInterpolatorRTheta interpolator(grid);
 
     // --- Evaluator for the test advection field:
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
@@ -295,8 +289,7 @@ int main(int argc, char** argv)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar
-            advection_operator(builder, spline_evaluator, foot_finder, to_physical_mapping);
+    BslAdvectionPolar advection_operator(interpolator, foot_finder, to_physical_mapping);
 
     std::cout << mapping_name << " MAPPING - " << adv_domain_name << " DOMAIN - " << method_name
               << " - " << simu_type << " : " << std::endl;

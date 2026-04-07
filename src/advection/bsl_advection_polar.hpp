@@ -3,6 +3,7 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
+#include "i_interpolation.hpp"
 #include "indexed_tensor.hpp"
 #include "l_norm_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
@@ -48,7 +49,7 @@
  *
  * @see IPolarFootFinder
  */
-template <class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D>
+template <class FootFinder, class LogicalToPhysicalMapping, concepts::Interpolation Interpolator2D>
 class BslAdvectionPolar
 {
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
@@ -82,6 +83,9 @@ class BslAdvectionPolar
 
     using MemorySpace = typename FootFinder::memory_space;
     using ExecSpace = typename FootFinder::ExecSpace;
+
+    using Builder2D = typename Interpolator2D::builder_type;
+    using Evaluator2D = typename Interpolator2D::evaluator_type;
 
     using IdxRangeBSRTheta =
             typename Builder2D::template batched_spline_domain_type<IdxRangeBatched>;
@@ -121,12 +125,9 @@ public:
     /**
      * @brief Instantiate an advection operator.
      *
-     * @param[in] builder_2d
-     *      The 2D builder used to compute interpolations coefficients from
-     *      the function values at interpolation points.
-     * @param[in] evaluator_2d
-     *      The 2D evaluator used to evaluate the interpolating function at the
-     *      feet of the characteristics.
+     * @param[in] interpolator_2d
+     *      The interpolation object used to interpolate the function once
+     *      at the feet of the characteristics.
      * @param[in] foot_finder
      *      An IFootFinder which computes the feet of the characteristics.
      * @param[in] logical_to_physical_mapping
@@ -134,12 +135,11 @@ public:
      *      domain.
      */
     BslAdvectionPolar(
-            Builder2D const& builder_2d,
-            Evaluator2D const& evaluator_2d,
+            Interpolator2D const& interpolator_2d,
             FootFinder const& foot_finder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping)
-        : m_builder_2d(builder_2d)
-        , m_evaluator_2d(evaluator_2d)
+        : m_builder_2d(interpolator_2d.get_builder())
+        , m_evaluator_2d(interpolator_2d.get_evaluator())
         , m_find_feet(foot_finder)
         , m_logical_to_physical_mapping(logical_to_physical_mapping)
     {
