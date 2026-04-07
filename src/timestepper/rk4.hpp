@@ -88,12 +88,12 @@ public:
                 Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMem::memory_space>::
                         accessible,
                 "MemorySpace has to be accessible for ExecutionSpace.");
-        FieldMem y_prime_alloc(m_idx_range);
-        DerivFieldMem k1_alloc(m_idx_range);
-        DerivFieldMem k2_alloc(m_idx_range);
-        DerivFieldMem k3_alloc(m_idx_range);
-        DerivFieldMem k4_alloc(m_idx_range);
-        DerivFieldMem k_total_alloc(m_idx_range);
+        FieldMem y_prime_alloc("y_prime (RK4::update)", m_idx_range);
+        DerivFieldMem k1_alloc("k1 (RK4::update)", m_idx_range);
+        DerivFieldMem k2_alloc("k2 (RK4::update)", m_idx_range);
+        DerivFieldMem k3_alloc("k3 (RK4::update)", m_idx_range);
+        DerivFieldMem k4_alloc("k4 (RK4::update)", m_idx_range);
+        DerivFieldMem k_total_alloc("k_total (RK4::update)", m_idx_range);
 
         ValField y_prime = get_field(y_prime_alloc);
         DerivField k1 = get_field(k1_alloc);

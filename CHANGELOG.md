@@ -17,7 +17,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add `eval_basis_and_n_derivs` function to Lagrange basis operators.
 - Add `deriv` function to Lagrange evaluation.
 - Add `concepts::InterpolationBuilder1D` and `concepts::Interpolation1D`.
-- Add `NDIdentityInterpolationBuilder` class.
+- Add new constructors for `MultipatchFieldMem` to allow labelling.
+- Add more labels to memory allocations.
+- Add a `NDIdentityInterpolationBuilder` class.
 - Add `SplineInterpolator2D.`
 - Add `LagrangeInterpolatorND.`
 
@@ -35,6 +37,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed `BslAdvectionPolar` template parameters and constructor to take a builder and evaluator instead of an `Interpolator2D`.
 - Changed new `concepts::InterpolationEvaluator` concept and associated `InterpolationEvaluatorTraits` class to generalise to ND.
 - Changed new `concepts::InterpolationBuilder` concept and associated `InterpolationBuilderTraits` class to generalise to ND.
+- Renamed `ACTIVATE_RESTART_TESTS` -> `GYSELALIBXX_ACTIVATE_RESTART_TESTS`.
+- Renamed `POISSON_2D_BUILD_TESTING` -> `GYSELALIBXX_POISSON_2D_BUILD_TESTING`.
 
 ### Deprecated
 
@@ -45,6 +49,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `IInterpolator2D`
   - `SplineInterpolator2D`
 - Remove Google Test submodule.
+- Remove ruche toolchain.
+- Remove `GYSELALIBXX_VERSION_*` CMake variables.
 
 ## [v0.7.0] - 2026-03-18
 

@@ -103,11 +103,14 @@ public:
             double const tau,
             int count_max = 25) const
     {
-        DFieldMemRTheta phi_star_alloc(m_grid);
+        DFieldMemRTheta
+                phi_star_alloc("phi_star (VortexMergerEquilibria::find_equilibrium)", m_grid);
         host_t<DFieldMemRTheta> ci_alloc_host(m_grid);
 
         IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
-        Spline2DMem rho_coef_alloc(idx_range_bsplinesRTheta);
+        Spline2DMem rho_coef_alloc(
+                "rho_coef (VortexMergerEquilibria::find_equilibrium)",
+                idx_range_bsplinesRTheta);
 
         auto rho_eq_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), rho_eq_host);
         DFieldRTheta rho_eq(rho_eq_alloc);

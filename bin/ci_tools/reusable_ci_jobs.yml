@@ -9,7 +9,7 @@
     - FOUND_POLAR_SPLINES=$(grep "src/interpolation/polar_splines/.*" -x changed_files.txt || true)
     - if [ -n "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> build.env; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> build.env; fi
     - FOUND_POISSON_2D=$(grep "\(src/pde_solvers/polarpoissonlikesolver.hpp\)\|\(tests/geometryRTheta/polar_poisson/.*\)" -x changed_files.txt || true)
-    - if [ -z "$FOUND_POISSON_2D" ]; then echo "POISSON_2D_BUILD_TESTING=OFF" >> build.env; else echo "POISSON_2D_BUILD_TESTING=ON" >> build.env; fi
+    - if [ -z "$FOUND_POISSON_2D" ]; then echo "GYSELALIBXX_POISSON_2D_BUILD_TESTING=OFF" >> build.env; else echo "GYSELALIBXX_POISSON_2D_BUILD_TESTING=ON" >> build.env; fi
   artifacts:
     expire_in: 1 week
     reports:

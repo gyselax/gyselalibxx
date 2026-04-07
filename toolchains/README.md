@@ -62,7 +62,6 @@ The folder [toolchains/](https://github.com/gyselax/gyselalibxx/tree/devel/toolc
 - `mi250.hipcc.adastra.spack` : Designed for use with the MI250 hardware available on CINES's Adastra supercomputer.
 - `persee/v100` : Designed for use with the V100 hardware available on IRFM's Persee cluster.
 - `persee/xeon` : Designed for use with the CPU hardware available on IRFM's Persee cluster.
-- `v100.ruche` : Designed for use with the V100 hardware available on Mésocentre's Ruche cluster.
 - `a100.raven.spack` : Designed for use with the A100 hardware available on MPCDF raven cluster.
 
 ## Environment Setup
@@ -104,7 +103,7 @@ ctest --output-on-failure
 If you want to run a specific test you can use the ctest flag `-R` which will use a regex to search for tests with a name containing the specified keyword. For example, for tests related to splines:
 
 ```bash
-ctest -R Splines --verbose --output-on-failure
+ctest -R Spline --verbose --output-on-failure
 ```
 
 ### Expected Test Results

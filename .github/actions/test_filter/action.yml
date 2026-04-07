@@ -12,13 +12,13 @@ runs:
       FOUND_POLAR_SPLINES=$(grep "src/interpolation/polar_splines/.*" -x changed_files.txt || true)
       if [ -n "$FOUND_POLAR_SPLINES" ]; then echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> $GITHUB_ENV; echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> $GITHUB_ENV; fi
       FOUND_POISSON_2D=$(grep -P "(src/pde_solvers/polarpoissonlikesolver.hpp)|(src/pde_solvers/polarpoissonlikeassembler.hpp)|(tests/geometryRTheta/polar_poisson/.*)" -x changed_files.txt || true)
-      if [ -z "$FOUND_POISSON_2D" ]; then echo "POISSON_2D_BUILD_TESTING=OFF" >> $GITHUB_ENV; else echo "POISSON_2D_BUILD_TESTING=ON" >> $GITHUB_ENV; fi
+      if [ -z "$FOUND_POISSON_2D" ]; then echo "GYSELALIBXX_POISSON_2D_BUILD_TESTING=OFF" >> $GITHUB_ENV; else echo "GYSELALIBXX_POISSON_2D_BUILD_TESTING=ON" >> $GITHUB_ENV; fi
     shell: bash
   - name: "Check filters"
     if: github.event_name != 'pull_request' && github.event_name != 'merge_request'
     run: |
       echo "POLAR_SPLINES_TEST_DEGREE_MIN=1" >> $GITHUB_ENV
       echo "POLAR_SPLINES_TEST_DEGREE_MIN=6" >> $GITHUB_ENV
-      echo "POISSON_2D_BUILD_TESTING=OFF" >> $GITHUB_ENV
+      echo "GYSELALIBXX_POISSON_2D_BUILD_TESTING=OFF" >> $GITHUB_ENV
     shell: bash
 

@@ -134,9 +134,22 @@ void fill_polynomial_2d(
             });
 }
 
+template <class DataType, class GridX, class GridY>
+void fill_cos_2d(Field<DataType, IdxRange<GridX, GridY>> vals)
+{
+    ddc::parallel_for_each(
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(vals),
+            KOKKOS_LAMBDA(Idx<GridX, GridY> idx) {
+                DataType const x = ddc::coordinate(Idx<GridX>(idx));
+                DataType const y = ddc::coordinate(Idx<GridY>(idx));
+                vals(idx) = Kokkos::cos(x) * (1.0 + y);
+            });
+}
+
 } // namespace
 
-//TYPED_TEST_SUITE(NDLagrangeNonPeriodicFixture, Cases);
+TYPED_TEST_SUITE(NDLagrangeNonPeriodicFixture, Cases);
 TYPED_TEST_SUITE(NDLagrangePeriodicFixture, Cases);
 
 /**
@@ -162,8 +175,7 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
             Kokkos::DefaultExecutionSpace::memory_space,
             DataType,
             IdxRange<GridX, GridY>,
-            LagBasisX,
-            LagBasisY>;
+            IdxRange<LagBasisX, LagBasisY>>;
 
     constexpr std::size_t degree = TestFixture::degree;
     static constexpr double TOL = TestFixture::TOL;
@@ -228,9 +240,9 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, ExactPolynomialInterpolation)
     FieldMem<DataType, IdxRange<GridX, GridY>> vals_alloc("vals", idx_range);
     fill_polynomial_2d(get_field(vals_alloc), coeffs_x, coeffs_y);
     Builder const builder;
-    using CoeffIdxRange = InterpolationBuilderTraits<
+    using IdxRangeCoeff = InterpolationBuilderTraits<
             Builder>::template batched_basis_idx_range_type<IdxRange<GridX, GridY>>;
-    FieldMem<DataType, CoeffIdxRange>
+    FieldMem<DataType, IdxRangeCoeff>
             poly_coeffs_alloc("coeffs", batched_basis_idx_range(builder, idx_range));
     builder(get_field(poly_coeffs_alloc), get_const_field(vals_alloc));
 
@@ -431,8 +443,7 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
             Kokkos::DefaultExecutionSpace::memory_space,
             DataType,
             IdxRange<GridX, GridY>,
-            LagBasisX,
-            LagBasisY>;
+            IdxRange<LagBasisX, LagBasisY>>;
     using EvalX = LagrangeEvaluator<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
@@ -484,22 +495,15 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
     // Function values on the interpolation mesh: f(x, y) = cos(x) * (1 + y)
     FieldMem<DataType, IdxRange<GridX, GridY>> vals_alloc("vals", idx_range);
     Field<DataType, IdxRange<GridX, GridY>> vals(vals_alloc);
-    ddc::parallel_for_each(
-            Kokkos::DefaultExecutionSpace(),
-            idx_range,
-            KOKKOS_LAMBDA(Idx<GridX, GridY> idx) {
-                DataType const x = ddc::coordinate(Idx<GridX>(idx));
-                DataType const y = ddc::coordinate(Idx<GridY>(idx));
-                vals(idx) = Kokkos::cos(x) * (1.0 + y);
-            });
+    fill_cos_2d(vals);
 
     // Build coefficients via the identity builder
     Builder const builder;
-    using CoeffIdxRange = InterpolationBuilderTraits<
+    using IdxRangeCoeff = InterpolationBuilderTraits<
             Builder>::template batched_basis_idx_range_type<IdxRange<GridX, GridY>>;
-    static_assert(std::is_same_v<IdxRange<LagKnotsX, LagKnotsY>, CoeffIdxRange>);
-    CoeffIdxRange knot_idx_range(batched_basis_idx_range(builder, idx_range));
-    FieldMem<DataType, CoeffIdxRange> coeffs_alloc("coeffs", knot_idx_range);
+    static_assert(std::is_same_v<IdxRange<LagKnotsX, LagKnotsY>, IdxRangeCoeff>);
+    IdxRangeCoeff knot_idx_range(batched_basis_idx_range(builder, idx_range));
+    FieldMem<DataType, IdxRangeCoeff> coeffs_alloc("coeffs", knot_idx_range);
     builder(get_field(coeffs_alloc), get_const_field(vals_alloc));
 
     // Check 1: wrap-around coefficients.
@@ -517,9 +521,9 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
     }
 
     // Check 2: round-trip evaluation inside the domain matches cos(x)*(1+y).
-    // Degree-3 Lagrange on 10 cells: error is O(h^4) with h = 2π/10 ≈ 0.63, so ~0.16.
-    // Use a loose tolerance to test correctness of the coefficient layout, not accuracy.
-    double const tol = 0.2;
+    // Degree-d Lagrange on 10 cells: error is O(h^(d+1)).
+    double h = static_cast<double>(xmax) / static_cast<double>(ncells);
+    double const tol = ipow(h, degree + 1);
     FieldMem<DataType, IdxRange<TestGridX, TestGridY>> result_alloc(test_range);
     ddc::PeriodicExtrapolationRule<XPeriodic> const periodic_extrap;
     ddc::NullExtrapolationRule const null_extrap;
