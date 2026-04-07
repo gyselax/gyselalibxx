@@ -37,12 +37,6 @@ public:
      *      to the physical domain.
      * @param[in] grid
      *      The index range where the equilibrium is defined.
-     * @param[in] builder
-     *      A spline builder to get the spline representation
-     *      of the RHS of the PDE.
-     * @param[in] evaluator
-     *      The evaluator of B-splines for the RHS of the
-     *      PDE.
      * @param[in] poisson_solver
      *      The PDE solver which computes the electrical potential.
      */
