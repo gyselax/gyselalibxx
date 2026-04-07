@@ -20,7 +20,7 @@ spack:
     - pdiplugin-pycall
     - pdiplugin-set-value
     - pdiplugin-trace
-    - 'python@3.12:'
+    - 'python@3.13'
 
     - py-dask
     - py-h5py
