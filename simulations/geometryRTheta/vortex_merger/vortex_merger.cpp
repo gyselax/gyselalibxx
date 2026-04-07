@@ -158,6 +158,13 @@ int main(int argc, char** argv)
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
+    ddc::NullExtrapolationRule r_extrapolation_rule;
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
+    SplineRThetaEvaluatorNullBound spline_evaluator(
+            r_extrapolation_rule,
+            r_extrapolation_rule,
+            theta_extrapolation_rule,
+            theta_extrapolation_rule);
     PoissonSolver poisson_solver(discrete_mapping, spline_evaluator);
     poisson_solver.update_coefficients(
             get_const_field(coeff_alpha_spline),
