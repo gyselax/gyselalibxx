@@ -37,8 +37,7 @@ template <
         class GridR,
         class GridTheta,
         class PolarBSplinesRTheta,
-        //concepts::InterpolationBuilder BuilderType,
-        //concepts::InterpolationEvaluator EvaluatorType,
+        //concepts::Interpolation Interpolation2D,
         class BuilderType,
         class EvaluatorType,
         class Mapping,
@@ -50,10 +49,9 @@ class PolarSplineFEMPoissonLikeSolver
             std::is_same_v<IdxRangeFull, IdxRange<GridR, GridTheta>>,
             "PolarSplineFEMPoissonLikeSolver is not yet batched");
 
+    // TODO: Uncomment with #615
     //static_assert(
     //        InterpolationEvaluatorTraits<typename Interpolation2D::EvaluatorType>::rank() == 2);
-    //static_assert(InterpolationBuilderTraits<BuilderType>::rank() == 2);
-    //static_assert(InterpolationEvaluatorTraits<EvaluatorType>::rank() == 2);
 
 public:
     /// The radial dimension
@@ -119,6 +117,7 @@ private:
     using IdxStepBSTheta = IdxStep<BSplinesTheta>;
     using IdxStepBSRTheta = IdxStep<BSplinesR, BSplinesTheta>;
 
+    // TODO: Uncomment with #615
     // /// The builder type extracted from the Interpolation2D object.
     // using BuilderType = typename Interpolation2D::BuilderType;
     // /// The evaluator type extracted from the Interpolation2D object.
@@ -266,10 +265,12 @@ public:
      * @param[in] mapping
      *      The mapping from the logical domain to the physical domain where
      *      the equation is defined.
-     * @param[in] interpolation
-     *      An interpolation object satisfying concepts::Interpolation. Its evaluator
-     *      is used to evaluate the @f$\alpha@f$ and @f$\beta@f$ coefficient fields
-     *      at quadrature points.
+     * @param[in] builder
+     *      An interpolation builder to build coefficients allowing a function to be
+     *      evaluated anywhere on the (r,theta) domain.
+     * @param[in] evaluator
+     *      An interpolation evaluator to evaluate an interpolation function anywhere
+     *      on the (r,theta) domain.
      * @param[in] max_iter
      *      The maximum number of iterations possible for the batched CSR solver.
      * @param[in] res_tol
@@ -285,9 +286,9 @@ public:
      */
     PolarSplineFEMPoissonLikeSolver(
             Mapping const& mapping,
-            //Interpolation2D const& interpolation,
-            BuilderType const& builder,
-            EvaluatorType const& evaluator,
+            //Interpolation2D const& interpolation, // TODO: Uncomment with #615
+            BuilderType const& builder, // TODO: Remove with #615
+            EvaluatorType const& evaluator, // TODO: Remove with #615
             std::optional<int> max_iter = std::nullopt,
             std::optional<double> res_tol = std::nullopt,
             std::optional<bool> batch_solver_logger = std::nullopt,
@@ -349,11 +350,11 @@ public:
     /**
      * @brief Update the coefficients @f$ alpha @f$ and @f$ beta @f$ that define the equation.
      * @param[in] alpha
-     *      The interpolation coefficients for the @f$ \alpha @f$ function in the
-     *      definition of the Poisson-like equation.
+     *      The @f$ \alpha @f$ function in the definition of the Poisson-like equation defined
+     *      at the grid points.
      * @param[in] beta
-     *      The interpolation coefficients for the @f$ \beta @f$ function in the
-     *      definition of the Poisson-like equation.
+     *      The @f$ \beta @f$ function in the definition of the Poisson-like equation defined
+     *      at the grid points.
      */
     void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
     {
