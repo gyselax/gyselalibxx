@@ -109,7 +109,9 @@ template <class ExecSpace, class Grid1D>
 DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> simpson_quadrature_coefficients_1d(
         IdxRange<Grid1D> const& idx_range)
 {
-    DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
+    DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(
+            "current_dim_coeffs (simplson_quadrature_coefficients_1d)",
+            idx_range);
     fill_simpson_quadrature_coefficients_1d<ExecSpace>(get_field(coefficients_alloc));
     return coefficients_alloc;
 }
@@ -139,7 +141,9 @@ simpson_trapezoid_quadrature_coefficients_1d(
     try {
         return simpson_quadrature_coefficients_1d<ExecSpace>(idx_range);
     } catch (const std::runtime_error& error) {
-        DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(idx_range);
+        DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(
+                "coefficients (simplson_trapezoid_quadrature_coefficients_1d)",
+                idx_range);
         DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients(
                 get_field(coefficients_alloc));
         IdxStep<Grid1D> npts_to_remove(1);

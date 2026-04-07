@@ -20,7 +20,9 @@ void MpiChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY al
 {
     Kokkos::Profiling::pushRegion("MpiChargeDensityCalculator");
 
-    DFieldMemXY rho_local_alloc(get_idx_range(rho));
+    DFieldMemXY rho_local_alloc(
+            "rho_local (MpiChargeDensityCalculator::operator())",
+            get_idx_range(rho));
     DFieldXY rho_local = get_field(rho_local_alloc);
 
     m_local_charge_density_calculator(rho_local, allfdistribu);
