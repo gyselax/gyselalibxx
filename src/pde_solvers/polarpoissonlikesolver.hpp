@@ -184,10 +184,10 @@ private:
 
 public:
     /**
-     * @brief A wrapper that binds a spline evaluator with its coefficient field to
+     * @brief A wrapper that binds an evaluator with its coefficient field to
      * present a single callable `double operator()(CoordRTheta)`.
      *
-     * This allows the spline-based @f$ \alpha @f$ and @f$ \beta @f$ coefficients to be
+     * This allows the @f$ \alpha @f$ and @f$ \beta @f$ coefficients to be
      * passed to `PolarSplineFEMPoissonLikeAssembler`, which expects a generic callable.
      *
      * @tparam Evaluator The type of the 2D evaluator.
@@ -201,12 +201,14 @@ public:
         Coeff m_coeff;
 
     public:
+        /// Constructor of an evaluator wrapper
         CoeffEvaluator(Evaluator const& evaluator, Coeff coeff)
             : m_evaluator(evaluator)
             , m_coeff(coeff)
         {
         }
 
+        /// Evaluate the interpolation at the specified coordinate
         KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const& coord) const
         {
             return m_evaluator(coord, m_coeff);
