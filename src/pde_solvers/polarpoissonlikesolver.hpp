@@ -361,6 +361,9 @@ public:
         FieldMemCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
         FieldMemCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
 
+        m_builder(get_field(coeff_alpha_alloc), alpha);
+        m_builder(get_field(coeff_beta_alloc), beta);
+
         CoeffEvaluator alpha_func(m_evaluator, get_const_field(coeff_alpha_alloc));
         CoeffEvaluator beta_func(m_evaluator, get_const_field(coeff_beta_alloc));
         m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
@@ -566,6 +569,7 @@ public:
     void operator()(DFieldRTheta phi, DConstFieldRTheta const& rhs) const
     {
         FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
+        m_builder(get_field(rhs_alloc), rhs);
         CoeffEvaluator rhs_func(m_evaluator, get_const_field(rhs_alloc));
 
         (*this)(phi, rhs_func);
