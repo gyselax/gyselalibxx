@@ -182,6 +182,7 @@ private:
             PolarBSplinesRTheta,
             ddc::NullExtrapolationRule>;
 
+public:
     /**
      * @brief A wrapper that binds a spline evaluator with its coefficient field to
      * present a single callable `double operator()(CoordRTheta)`.
