@@ -83,6 +83,7 @@ LD_LIBRARY_PATH_TMP="$LD_LIBRARY_PATH"
 . \${SPACK_PATH}/share/spack/setup-env.sh
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_TMP"
 unset LD_LIBRARY_PATH_TMP
+spack --env gyselalibxx-env repo update
 spack env activate -p gyselalibxx-env
 export PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
 EOL

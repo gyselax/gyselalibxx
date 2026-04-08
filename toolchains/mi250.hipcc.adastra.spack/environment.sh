@@ -32,6 +32,8 @@ spack debug report
 #     eval "$(spack env deactivate --sh)"
 # }
 
+spack --env gyselalibxx-spack-environment repo update
+
 eval -- "$(
     spack \
         --env gyselalibxx-spack-environment \
