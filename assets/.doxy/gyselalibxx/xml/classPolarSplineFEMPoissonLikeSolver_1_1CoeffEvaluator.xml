@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator" kind="class" language="C++" prot="public">
+    <compoundname>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</compoundname>
+    <includes refid="polarpoissonlikesolver_8hpp" local="no">polarpoissonlikesolver.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class Evaluator</type>
+      </param>
+      <param>
+        <type>class Coeff</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a360b725d19bb5a7a8048df9b27aac351" prot="private" static="no" mutable="no">
+        <type>Evaluator const  &amp;</type>
+        <definition>Evaluator const&amp; PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;::CoeffEvaluator&lt; Evaluator, Coeff &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="200" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="200" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a06ff41df5b756172163355916a8e27a9" prot="private" static="no" mutable="no">
+        <type>Coeff</type>
+        <definition>Coeff PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;::CoeffEvaluator&lt; Evaluator, Coeff &gt;::m_coeff</definition>
+        <argsstring></argsstring>
+        <name>m_coeff</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator::m_coeff</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="201" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="201" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1ac86b140d03c4617090d59570fdada7f2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;::CoeffEvaluator&lt; Evaluator, Coeff &gt;::CoeffEvaluator</definition>
+        <argsstring>(Evaluator const &amp;evaluator, Coeff coeff)</argsstring>
+        <name>CoeffEvaluator</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator::CoeffEvaluator</qualifiedname>
+        <param>
+          <type>Evaluator const &amp;</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>Coeff</type>
+          <declname>coeff</declname>
+        </param>
+        <briefdescription>
+<para>Constructor of an evaluator wrapper. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="205" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="205" bodyend="209"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a81305bf7faa840fe3db93e87e2fed097" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;::CoeffEvaluator&lt; Evaluator, Coeff &gt;::operator()</definition>
+        <argsstring>(CoordRTheta const &amp;coord) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator::operator()</qualifiedname>
+        <param>
+          <type>CoordRTheta const &amp;</type>
+          <declname>coord</declname>
+        </param>
+        <briefdescription>
+<para>Evaluate the interpolation at the specified coordinate. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="212" column="39" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="212" bodyend="215"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A wrapper that binds an evaluator with its coefficient field to present a single callable <computeroutput>double operator()(CoordRTheta)</computeroutput>. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This allows the <formula id="155">$ \alpha $</formula> and <formula id="156">$ \beta $</formula> coefficients to be passed to <computeroutput><ref refid="classPolarSplineFEMPoissonLikeAssembler" kindref="compound">PolarSplineFEMPoissonLikeAssembler</ref></computeroutput>, which expects a generic callable.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>Evaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the 2D evaluator. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>Coeff</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the spline coefficient field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="197" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="198" bodyend="216"/>
+    <listofallmembers>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1ac86b140d03c4617090d59570fdada7f2" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>CoeffEvaluator</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a06ff41df5b756172163355916a8e27a9" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>m_coeff</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a360b725d19bb5a7a8048df9b27aac351" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>m_evaluator</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a81305bf7faa840fe3db93e87e2fed097" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>operator()</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

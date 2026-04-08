@@ -181,7 +181,6 @@ template <
         typename GridR,
         typename GridTheta,
         typename PolarBSplinesRTheta,
-        typename SplineRThetaEvaluatorNullBound,
         typename QDimRMesh,
         typename QDimThetaMesh,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
@@ -244,8 +243,6 @@ private:
     using IdxQuadratureRTheta = Idx<QDimRMesh, QDimThetaMesh>;
     using IdxStepQuadratureR = IdxStep<QDimRMesh>;
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
-
-    using ConstSpline2D = DConstField<IdxRangeBatchedBSRTheta>;
 
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
@@ -349,15 +346,14 @@ public:
         compute_tensor_tensor_col_idx(col_idx, nnz_per_row);
     }
 
-    template <typename Mapping>
+    template <class CoeffAlpha, class CoeffBeta, class Mapping>
     void operator()(
             std::unique_ptr<
                     MatrixBatchCsr<Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG>> const&
                     gko_matrix,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
-            Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator)
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
+            Mapping const& mapping)
     {
         //CSR data storage
         auto [values, col_idx, nnz_per_row] = gko_matrix->get_batch_csr();
@@ -366,7 +362,6 @@ public:
                 coeff_alpha,
                 coeff_beta,
                 mapping,
-                spline_evaluator,
                 values,
                 col_idx,
                 nnz_per_row);
@@ -374,7 +369,6 @@ public:
                 coeff_alpha,
                 coeff_beta,
                 mapping,
-                spline_evaluator,
                 values,
                 col_idx,
                 nnz_per_row);
@@ -382,7 +376,6 @@ public:
                 coeff_alpha,
                 coeff_beta,
                 mapping,
-                spline_evaluator,
                 values,
                 col_idx,
                 nnz_per_row);
@@ -574,12 +567,11 @@ public:
         Kokkos::Profiling::popRegion();
     }
 
-    template <class Mapping>
+    template <class CoeffAlpha, class CoeffBeta, class Mapping>
     void compute_singular_singular_elements(
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -631,7 +623,6 @@ public:
                                         idx_quad,
                                         coeff_alpha,
                                         coeff_beta,
-                                        spline_evaluator,
                                         mapping,
                                         int_volume_proxy);
                             },
@@ -642,12 +633,11 @@ public:
                 });
     }
 
-    template <class Mapping>
+    template <class CoeffAlpha, class CoeffBeta, class Mapping>
     void compute_singular_tensor_elements(
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -744,13 +734,12 @@ public:
                                             -= full_quad_idx_range.template extent<QDimThetaMesh>();
                                 }
 
-                                sum += weak_integral_element<Mapping>(
+                                sum += weak_integral_element(
                                         idx_test,
                                         idx_trial_polar,
                                         idx_quad,
                                         coeff_alpha,
                                         coeff_beta,
-                                        spline_evaluator,
                                         mapping,
                                         int_volume_proxy);
                             },
@@ -766,12 +755,11 @@ public:
                 });
     }
 
-    template <class Mapping>
+    template <class CoeffAlpha, class CoeffBeta, class Mapping>
     void compute_tensor_tensor_elements(
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator,
             Kokkos::View<double**, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
                     values_csr,
             Kokkos::View<int*, Kokkos::LayoutRight, Kokkos::DefaultExecutionSpace> const
@@ -831,7 +819,6 @@ public:
                                 idx_trial,
                                 coeff_alpha,
                                 coeff_beta,
-                                spline_evaluator,
                                 mapping,
                                 full_quad_idx_range,
                                 int_volume_proxy);
@@ -842,21 +829,20 @@ public:
         Kokkos::Profiling::popRegion();
     }
 
-    template <class Mapping>
+    template <class CoeffAlpha, class CoeffBeta, class Mapping>
     static KOKKOS_FUNCTION double weak_integral_element(
             IdxBSPolar idx_test,
             IdxBSPolar idx_trial,
             IdxQuadratureRTheta idx_quad,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
-            SplineRThetaEvaluatorNullBound const& spline_evaluator,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping,
             DField<IdxRangeQuadratureRTheta> int_volume)
     {
         // Calculate coefficients at quadrature point
         Coord<R, Theta> coord(ddc::coordinate(idx_quad));
-        const double alpha = spline_evaluator(coord, coeff_alpha);
-        const double beta = spline_evaluator(coord, coeff_beta);
+        const double alpha = coeff_alpha(coord);
+        const double beta = coeff_beta(coord);
 
         // Define the value and gradient of the test and trial basis functions
         double basis_val_test_space;
@@ -882,14 +868,13 @@ public:
                   + beta * basis_val_test_space * basis_val_trial_space);
     }
 
-    template <class Mapping>
+    template <class CoeffAlpha, class CoeffBeta, class Mapping>
     static KOKKOS_FUNCTION double get_matrix_stencil_element(
             const Kokkos::TeamPolicy<>::member_type& team,
             IdxBSRTheta idx_test,
             IdxBSRTheta idx_trial,
-            ConstSpline2D coeff_alpha,
-            ConstSpline2D coeff_beta,
-            SplineRThetaEvaluatorNullBound const& evaluator,
+            CoeffAlpha const& coeff_alpha,
+            CoeffBeta const& coeff_beta,
             Mapping const& mapping,
             IdxRangeQuadratureRTheta const& full_quad_idx_range,
             DField<IdxRangeQuadratureRTheta> int_volume)
@@ -954,7 +939,7 @@ public:
                         team,
                         quad_range.template extent<QDimRMesh>(),
                         quad_range.template extent<QDimThetaMesh>()),
-                KOKKOS_LAMBDA(int r_thread_index, int theta_thread_index, double& sum) {
+                [&](int r_thread_index, int theta_thread_index, double& sum) {
                     IdxQuadratureRTheta idx_quad
                             = quad_range.front()
                               + IdxStep<
@@ -971,7 +956,6 @@ public:
                             idx_quad,
                             coeff_alpha,
                             coeff_beta,
-                            evaluator,
                             mapping,
                             int_volume);
                 },

@@ -597,6 +597,11 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Renamed <code>POISSON_2D_BUILD_TESTING</code> -&gt; <code>GYSELALIBXX_POISSON_2D_BUILD_TESTING</code>.</li>
 <li>Pin toolchains to Python 3.13.</li>
 <li>Disable some costly variants in Spack based toolchains.</li>
+<li>Changed the order of arguments to <code>PolarSplineFEMPoissonLikeSolver</code> to respect output argument first convention.</li>
+<li>Use any callable in <code>PolarSplineFEMPoissonLikeAssembler</code> instead of spline coefficients.</li>
+<li>Add interpolation operators to <code>PolarSplineFEMPoissonLikeSolver</code> constructor.</li>
+<li>Take pointwise values for <code>PolarSplineFEMPoissonLikeSolver::update_coefficients</code>.</li>
+<li>Allow pointwise values to be passed to <code>PolarSplineFEMPoissonLikeSolver::operator()</code>.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

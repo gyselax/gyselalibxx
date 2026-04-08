@@ -564,6 +564,7 @@
 <p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a> <strong>&gt;</strong> <a href="polarpoissonlikesolver_8hpp.html"><strong>polarpoissonlikesolver.hpp</strong></a></p>
 <p><a href="polarpoissonlikesolver_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
+<li><code>#include "i_interpolation.hpp"</code></li>
 <li><code>#include "polarpoissonlikeassembler.hpp"</code></li>
 </ul>
 <h2 id="classes">Classes</h2>
@@ -577,7 +578,11 @@
 <tbody>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> &lt;class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, class SplineRThetaEvaluatorNullBound, class Mapping, class IdxRangeFull&gt;<br><em>Define a polar PDE solver for a Poisson-like equation.</em></td>
+<td style="text-align: left;"><a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a> &lt;class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class <a href="structPolarBSplinesRTheta.html"><strong>PolarBSplinesRTheta</strong></a>, class BuilderType, class EvaluatorType, class Mapping, class IdxRangeFull&gt;<br><em>Define a polar PDE solver for a Poisson-like equation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.html"><strong>CoeffEvaluator</strong></a> &lt;class Evaluator, class Coeff&gt;<br><em>A wrapper that binds an evaluator with its coefficient field to present a single callable</em> <code>double operator()(CoordRTheta)</code> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>

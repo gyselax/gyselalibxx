@@ -50,6 +50,8 @@
 * [**CentralFDMPartialDerivativeWithBValueCreator**](classCentralFDMPartialDerivativeWithBValueCreator.md)
 * [**ChargeDensityCalculator**](classChargeDensityCalculator.md)
 * [**CircularToCartesian**](classCircularToCartesian.md)
+* [**CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md)
+([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * [**CollectAllGridsOnDim**](structconnectivity__details_1_1CollectAllGridsOnDim.md)
 ([**connectivity\_details**](namespaceconnectivity__details.md))
 * [**CollectAllInterfacesOnDim**](structconnectivity__details_1_1CollectAllInterfacesOnDim.md)

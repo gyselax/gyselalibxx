@@ -566,13 +566,16 @@
 <pre><code class="language-C++">// SPDX-License-Identifier: MIT
 #pragma once
 
+#include "i_interpolation.hpp"
 #include "polarpoissonlikeassembler.hpp"
 
 template &lt;
         class GridR,
         class GridTheta,
         class PolarBSplinesRTheta,
-        class SplineRThetaEvaluatorNullBound,
+        //concepts::Interpolation Interpolation2D,
+        class BuilderType,
+        class EvaluatorType,
         class Mapping,
         class IdxRangeFull = IdxRange&lt;GridR, GridTheta&gt;&gt;
 class PolarSplineFEMPoissonLikeSolver
@@ -581,6 +584,10 @@ class PolarSplineFEMPoissonLikeSolver
     static_assert(
             std::is_same_v&lt;IdxRangeFull, IdxRange&lt;GridR, GridTheta&gt;&gt;,
             "PolarSplineFEMPoissonLikeSolver is not yet batched");
+
+    // TODO: Uncomment with #615
+    //static_assert(
+    //        InterpolationEvaluatorTraits&lt;typename Interpolation2D::EvaluatorType&gt;::rank() == 2);
 
 public:
     using R = typename GridR::continuous_dimension_type;
@@ -632,11 +639,11 @@ private:
     using IdxStepBSTheta = IdxStep&lt;BSplinesTheta&gt;;
     using IdxStepBSRTheta = IdxStep&lt;BSplinesR, BSplinesTheta&gt;;
 
-    using IdxRangeBatchedBSRTheta
-            = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt;
-                    ddc::to_type_seq_t&lt;IdxRangeFull&gt;,
-                    ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;,
-                    ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt;&gt;&gt;;
+    // TODO: Uncomment with #615
+    // /// The builder type extracted from the Interpolation2D object.
+    // using BuilderType = typename Interpolation2D::BuilderType;
+    // /// The evaluator type extracted from the Interpolation2D object.
+    // using EvaluatorType = typename Interpolation2D::EvaluatorType;
 
     using IdxRangeBatch = ddc::remove_dims_of_t&lt;IdxRangeFull, IdxRange&lt;GridR&gt;, IdxRange&lt;GridTheta&gt;&gt;;
 
@@ -649,7 +656,10 @@ private:
     using IdxStepQuadratureR = IdxStep&lt;QDimRMesh&gt;;
     using IdxStepQuadratureTheta = IdxStep&lt;QDimThetaMesh&gt;;
 
-    using ConstSpline2D = DConstField&lt;IdxRangeBatchedBSRTheta&gt;;
+    //using FieldMemCoeffsSpline2D = DFieldMem&lt;typename InterpolationEvaluatorTraits&lt;
+    //        EvaluatorType&gt;::template batched_coeff_idx_range_type&lt;IdxRangeFull&gt;&gt;;DConstField&lt;
+    using FieldMemCoeffsSpline2D
+            = DFieldMem&lt;typename EvaluatorType::template batched_spline_domain_type&lt;IdxRangeFull&gt;&gt;;
     using PolarSplineMemRTheta = DFieldMem&lt;IdxRange&lt;PolarBSplinesRTheta&gt;&gt;;
     using PolarSplineRTheta = DField&lt;IdxRange&lt;PolarBSplinesRTheta&gt;&gt;;
 
@@ -661,7 +671,6 @@ private:
             GridR,
             GridTheta,
             PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound,
             QDimRMesh,
             QDimThetaMesh&gt;;
 
@@ -670,6 +679,27 @@ private:
             Kokkos::DefaultExecutionSpace::memory_space,
             PolarBSplinesRTheta,
             ddc::NullExtrapolationRule&gt;;
+
+public:
+    template &lt;class Evaluator, class Coeff&gt;
+    class CoeffEvaluator
+    {
+        static_assert(std::is_same_v&lt;Coeff, typename Coeff::view_type&gt;);
+        Evaluator const&amp; m_evaluator;
+        Coeff m_coeff;
+
+    public:
+        CoeffEvaluator(Evaluator const&amp; evaluator, Coeff coeff)
+            : m_evaluator(evaluator)
+            , m_coeff(coeff)
+        {
+        }
+
+        KOKKOS_INLINE_FUNCTION double operator()(CoordRTheta const&amp; coord) const
+        {
+            return m_evaluator(coord, m_coeff);
+        }
+    };
 
 private:
     static constexpr int s_n_gauss_legendre_r = BSplinesR::degree() + 1;
@@ -697,7 +727,8 @@ private:
     IdxRangeQuadratureRTheta m_idxrange_quadrature;
 
     Mapping m_mapping;
-    SplineRThetaEvaluatorNullBound m_spline_evaluator;
+    BuilderType const&amp; m_builder;
+    EvaluatorType const&amp; m_evaluator;
 
     PolarSplineEval m_polar_spline_evaluator;
     std::unique_ptr&lt;MatrixBatchCsr&lt;Kokkos::DefaultExecutionSpace, MatrixBatchCsrSolver::CG&gt;&gt;
@@ -713,7 +744,9 @@ private:
 public:
     PolarSplineFEMPoissonLikeSolver(
             Mapping const&amp; mapping,
-            SplineRThetaEvaluatorNullBound const&amp; spline_evaluator,
+            //Interpolation2D const&amp; interpolation, // TODO: Uncomment with #615
+            BuilderType const&amp; builder, // TODO: Remove with #615
+            EvaluatorType const&amp; evaluator, // TODO: Remove with #615
             std::optional&lt;int&gt; max_iter = std::nullopt,
             std::optional&lt;double&gt; res_tol = std::nullopt,
             std::optional&lt;bool&gt; batch_solver_logger = std::nullopt,
@@ -740,7 +773,10 @@ public:
                   m_idxrange_quadrature_theta)
         , m_idxrange_quadrature(m_idxrange_quadrature_r, m_idxrange_quadrature_theta)
         , m_mapping(mapping)
-        , m_spline_evaluator(spline_evaluator)
+        //, m_builder(interpolation.get_builder())
+        //, m_evaluator(interpolation.get_evaluator())
+        , m_builder(builder)
+        , m_evaluator(evaluator)
         , m_polar_spline_evaluator(ddc::NullExtrapolationRule())
         , m_phi_spline_coef_alloc(
                   "m_phi_spline_coef "
@@ -769,13 +805,21 @@ public:
                 preconditioner_max_block_size);
     }
 
-    void update_coefficients(ConstSpline2D coeff_alpha, ConstSpline2D coeff_beta)
+    void update_coefficients(DConstField&lt;IdxRangeRTheta&gt; alpha, DConstField&lt;IdxRangeRTheta&gt; beta)
     {
-        m_assembler(m_gko_matrix, coeff_alpha, coeff_beta, m_mapping, m_spline_evaluator);
+        FieldMemCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
+        FieldMemCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
+
+        m_builder(get_field(coeff_alpha_alloc), alpha);
+        m_builder(get_field(coeff_beta_alloc), beta);
+
+        CoeffEvaluator alpha_func(m_evaluator, get_const_field(coeff_alpha_alloc));
+        CoeffEvaluator beta_func(m_evaluator, get_const_field(coeff_beta_alloc));
+        m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
     }
 
     template &lt;class RHSFunction&gt;
-    void operator()(RHSFunction const&amp; rhs, PolarSplineRTheta spline) const
+    void operator()(PolarSplineRTheta spline, RHSFunction const&amp; rhs) const
     {
         Kokkos::Profiling::pushRegion("PolarPoissonRHS");
 
@@ -918,18 +962,27 @@ public:
     }
 
     template &lt;class RHSFunction&gt;
-    void operator()(RHSFunction const&amp; rhs, DFieldRTheta phi) const
+    void operator()(DFieldRTheta phi, RHSFunction const&amp; rhs) const
     {
         static_assert(
                 std::is_invocable_r_v&lt;double, RHSFunction, CoordRTheta&gt;,
                 "RHSFunction must have an operator() which takes a coordinate and returns a "
                 "double");
 
-        (*this)(rhs, get_field(m_phi_spline_coef_alloc));
+        (*this)(get_field(m_phi_spline_coef_alloc), rhs);
         CoordFieldMemRTheta coords_eval_alloc(
                 "coords_eval (PolarSplineFEMPoisonLikeSolver::operator())",
                 get_idx_range(phi));
         m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc));
+    }
+
+    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const
+    {
+        FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
+        m_builder(get_field(rhs_alloc), rhs);
+        CoeffEvaluator rhs_func(m_evaluator, get_const_field(rhs_alloc));
+
+        (*this)(phi, rhs_func);
     }
 
     static KOKKOS_INLINE_FUNCTION double get_polar_bspline_vals(CoordRTheta coord, IdxBSPolar idx)

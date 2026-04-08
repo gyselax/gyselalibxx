@@ -54,7 +54,7 @@ _Equilibrium solution of a Vlasov-Poissson equations system in polar coordinates
 
 | Type | Name |
 | ---: | :--- |
-|   | [**VortexMergerEquilibria**](#function-vortexmergerequilibria) (Mapping const & mapping, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, SplineRThetaEvaluatorNullBound const & evaluator, PolarPoissonLikeSolver const & poisson\_solver) <br>_Instantiate a_ [_**VortexMergerEquilibria**_](classVortexMergerEquilibria.md) _._ |
+|   | [**VortexMergerEquilibria**](#function-vortexmergerequilibria) (Mapping const & mapping, IdxRangeRTheta const & grid, PolarPoissonLikeSolver const & poisson\_solver) <br>_Instantiate a_ [_**VortexMergerEquilibria**_](classVortexMergerEquilibria.md) _._ |
 |  void | [**find\_equilibrium**](#function-find_equilibrium) (host\_t&lt; DFieldRTheta &gt; sigma\_host, host\_t&lt; DFieldRTheta &gt; phi\_eq\_host, host\_t&lt; DFieldRTheta &gt; rho\_eq\_host, std::function&lt; double(double const)&gt; const & function, double const phi\_max, double const tau, int count\_max=25) const<br>_Get an equilibrium._  |
 |  void | [**set\_equilibrium**](#function-set_equilibrium) (host\_t&lt; DFieldRTheta &gt; rho\_eq\_host, std::function&lt; double(double const)&gt; function, double const phi\_max, double const tau) <br>_Set an equilibrium._  |
 
@@ -111,8 +111,6 @@ _Instantiate a_ [_**VortexMergerEquilibria**_](classVortexMergerEquilibria.md) _
 inline VortexMergerEquilibria::VortexMergerEquilibria (
     Mapping const & mapping,
     IdxRangeRTheta const & grid,
-    SplineRThetaBuilder const & builder,
-    SplineRThetaEvaluatorNullBound const & evaluator,
     PolarPoissonLikeSolver const & poisson_solver
 ) 
 ```
@@ -126,8 +124,6 @@ inline VortexMergerEquilibria::VortexMergerEquilibria (
 
 * `mapping` The mapping function from the logical domain to the physical domain. 
 * `grid` The index range where the equilibrium is defined. 
-* `builder` A spline builder to get the spline representation of the RHS of the PDE. 
-* `evaluator` The evaluator of B-splines for the RHS of the PDE. 
 * `poisson_solver` The PDE solver which computes the electrical potential. 
 
 
