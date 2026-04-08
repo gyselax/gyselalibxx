@@ -26,8 +26,6 @@ class VortexMergerEquilibria
 private:
     Mapping const& m_mapping;
     IdxRangeRTheta const& m_grid;
-    SplineRThetaBuilder const& m_builder;
-    SplineRThetaEvaluatorNullBound const& m_evaluator;
     PolarPoissonLikeSolver const& m_poisson_solver;
 
 public:
@@ -39,26 +37,18 @@ public:
      *      to the physical domain.
      * @param[in] grid
      *      The index range where the equilibrium is defined.
-     * @param[in] builder
-     *      A spline builder to get the spline representation
-     *      of the RHS of the PDE.
-     * @param[in] evaluator
-     *      The evaluator of B-splines for the RHS of the
-     *      PDE.
      * @param[in] poisson_solver
      *      The PDE solver which computes the electrical potential.
      */
     VortexMergerEquilibria(
             Mapping const& mapping,
             IdxRangeRTheta const& grid,
-            SplineRThetaBuilder const& builder,
-            SplineRThetaEvaluatorNullBound const& evaluator,
             PolarPoissonLikeSolver const& poisson_solver)
         : m_mapping(mapping)
         , m_grid(grid)
-        , m_builder(builder)
-        , m_evaluator(evaluator)
-        , m_poisson_solver(poisson_solver) {};
+        , m_poisson_solver(poisson_solver)
+    {
+    }
 
     /**
      * @brief Get an equilibrium.
@@ -106,12 +96,6 @@ public:
         DFieldMemRTheta
                 phi_star_alloc("phi_star (VortexMergerEquilibria::find_equilibrium)", m_grid);
         host_t<DFieldMemRTheta> ci_alloc_host(m_grid);
-
-        IdxRangeBSRTheta idx_range_bsplinesRTheta = get_spline_idx_range(m_builder);
-        Spline2DMem rho_coef_alloc(
-                "rho_coef (VortexMergerEquilibria::find_equilibrium)",
-                idx_range_bsplinesRTheta);
-
         auto rho_eq_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), rho_eq_host);
         DFieldRTheta rho_eq(rho_eq_alloc);
 
@@ -128,9 +112,7 @@ public:
 
             // STEP 2: compute phi_star^i with PDE solver
             ddc::parallel_deepcopy(rho_eq, get_const_field(rho_eq_host));
-            m_builder(get_field(rho_coef_alloc), get_const_field(rho_eq));
-            PoissonLikeRHSFunction poisson_rhs(get_const_field(rho_coef_alloc), m_evaluator);
-            m_poisson_solver(poisson_rhs, get_field(phi_star_alloc));
+            m_poisson_solver(get_field(phi_star_alloc), get_const_field(rho_eq));
             auto phi_star_host = ddc::create_mirror_view_and_copy(get_field(phi_star_alloc));
 
             // STEP 3: compute c^i
