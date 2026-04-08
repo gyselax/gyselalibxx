@@ -1221,7 +1221,7 @@ public:
                         team,
                         quad_range.template extent<QDimRMesh>(),
                         quad_range.template extent<QDimThetaMesh>()),
-                KOKKOS_LAMBDA(int r_thread_index, int theta_thread_index, double& sum) {
+                [&](int r_thread_index, int theta_thread_index, double& sum) {
                     IdxQuadratureRTheta idx_quad
                             = quad_range.front()
                               + IdxStep<
