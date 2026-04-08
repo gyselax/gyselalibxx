@@ -566,7 +566,7 @@ public:
      * @param[in] rhs
      *      The rhs @f$ \rho@f$ of the Poisson-like equation on the grid.
      */
-    void operator()(DFieldRTheta phi, DConstFieldRTheta const& rhs) const
+    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const
     {
         FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
         m_builder(get_field(rhs_alloc), rhs);
