@@ -82,5 +82,7 @@ spack:
       - spec: openmpi@5.0.9+cuda~java~memchecker~rocm~static~wrapper-rpath fabrics=psm2,ucx schedulers=none
         prefix: /mpcdf/soft/SLE_15/packages/skylake/openmpi_gpu/cuda_12.8-12.8.1-gcc_14-14.1.0/5.0.9
     py-dask:
-      variants: ~dataframe
+      prefer: ['~dataframe']
+    py-pandas:
+      prefer: ['~performance']
   view: false

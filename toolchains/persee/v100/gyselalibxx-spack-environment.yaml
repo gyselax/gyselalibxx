@@ -60,3 +60,7 @@ spack:
       require: openblas
     mpi:
       require: openmpi +cuda
+    py-dask:
+      prefer: ['~dataframe']
+    py-pandas:
+      prefer: ['~performance']
