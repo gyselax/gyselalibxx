@@ -158,6 +158,8 @@ int main(int argc, char** argv)
     auto allfdistribu_equilibrium_host = ddc::create_mirror_and_copy(allfdistribu_equilibrium);
     ddc::expose_to_pdi("fdistribu_equilibrium", allfdistribu_equilibrium_host);
 
+    ddc::PdiEvent("initialisation");
+
     int const iter = 0;
     auto allfdistribu_host = ddc::create_mirror_and_copy(allfdistribu);
     auto electrostatic_potential_host = ddc::create_mirror_and_copy(electrostatic_potential);
