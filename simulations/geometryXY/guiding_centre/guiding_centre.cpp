@@ -156,8 +156,7 @@ int main(int argc, char** argv)
     ddc::expose_to_pdi("final_time", final_time);
 
     auto allfdistribu_equilibrium_host = ddc::create_mirror_and_copy(allfdistribu_equilibrium);
-    ddc::PdiEvent("initialisation").with("fdistribu_equilibrium",
-	         allfdistribu_equilibrium_host);
+    ddc::PdiEvent("initialisation").with("fdistribu_equilibrium", allfdistribu_equilibrium_host);
 
     int const iter = 0;
     auto allfdistribu_host = ddc::create_mirror_and_copy(allfdistribu);
