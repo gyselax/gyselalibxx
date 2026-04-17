@@ -27,7 +27,6 @@ metadata:
     subtype: double
     size: [ '$MeshY_extents[0]' ]
 
-
 data:
   fdistribu_equilibrium_extents : { type: array, subtype: int64, size: 2 }
   fdistribu_equilibrium:
