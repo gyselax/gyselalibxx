@@ -90,5 +90,5 @@ method of characteristics and spline finite elements", <https://doi.org/10.1016/
 ## Contents
 
 - iqnsolver.hpp : Define a base class for the Quasi-Neutrality solvers: IQNSolver.
-- polar_spline_fem_poisson_like_solver.hpp : Define a Poisson-like solver using FEM on B-splines: PolarSplineFEMPoissonLikeSolver.
+- polar\_spline\_fem\_poisson\_like\_solver.hpp : Define a Poisson-like solver using FEM on B-splines: PolarSplineFEMPoissonLikeSolver.
 - poisson\_rhs\_function.hpp : Define a rhs object (PoissonLikeRHSFunction) for the Poisson-like equation (mainly used for vlasovpoissonsolver.hpp): PoissonLikeRHSFunction.
