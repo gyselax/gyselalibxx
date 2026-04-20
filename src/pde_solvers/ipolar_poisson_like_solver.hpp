@@ -3,7 +3,11 @@
 
 #include <ddc/ddc.hpp>
 
-template <class IdxRangeLaplacian, class IdxRangeFull, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space, class LayoutSpace = Kokkos::layout_right>
+template <
+        class IdxRangeLaplacian,
+        class IdxRangeFull,
+        class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space,
+        class LayoutSpace = Kokkos::layout_right>
 class IPolarPoissonLikeSolver;
 
 /**
