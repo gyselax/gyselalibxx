@@ -87,5 +87,5 @@ public:
      * @param[out] phi The solution to Poisson's equation.
      * @param[in] rho The right-hand side of Poisson's equation.
      */
-    virtual void operator()(field_type phi, field_type rho) const = 0;
+    virtual void operator()(field_type phi, const_field_type rho) const = 0;
 };
