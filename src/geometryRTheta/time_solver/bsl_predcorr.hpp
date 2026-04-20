@@ -146,7 +146,7 @@ public:
 
         // Setup
         m_builder(density_coef, get_const_field(density));
-        m_poisson_solver(charge_density, electrical_potential);
+        m_poisson_solver(electrical_potential, charge_density);
         ddc::parallel_deepcopy(electrical_potential_host, get_const_field(electrical_potential));
         ddc::PdiEvent("iteration")
                 .with("iter", 0)
@@ -159,7 +159,7 @@ public:
                 [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta density) {
                     // --- compute electrostatic potential:
                     m_builder(density_coef, get_const_field(density));
-                    m_poisson_solver(charge_density, electrostatic_potential_coef);
+                    m_poisson_solver(electrostatic_potential_coef, charge_density);
 
                     auto advection_field_alloc_host = ddcHelper::create_mirror_view_and_copy(
                             Kokkos::DefaultHostExecutionSpace(),
@@ -191,7 +191,7 @@ public:
                             m_advection_solver);
 
             m_builder(density_coef, get_const_field(density));
-            m_poisson_solver(charge_density, electrical_potential);
+            m_poisson_solver(electrical_potential, charge_density);
             ddc::parallel_deepcopy(density_host, get_const_field(density));
             ddc::parallel_deepcopy(
                     electrical_potential_host,

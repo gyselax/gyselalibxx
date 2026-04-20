@@ -25,7 +25,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- Fixed missing load of `pdiplugin-pycall` in some Spack-based toolchains.
+- Fix missing load of `pdiplugin-pycall` in some Spack-based toolchains.
+- Fix missing update of Spack repos before loading environments.
 
 ### Changed
 
@@ -40,6 +41,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Renamed `ACTIVATE_RESTART_TESTS` -> `GYSELALIBXX_ACTIVATE_RESTART_TESTS`.
 - Renamed `POISSON_2D_BUILD_TESTING` -> `GYSELALIBXX_POISSON_2D_BUILD_TESTING`.
 - Pin toolchains to Python 3.13.
+- Disable some costly variants in Spack based toolchains.
+- Changed the order of arguments to `PolarSplineFEMPoissonLikeSolver` to respect output argument first convention.
+- Use any callable in `PolarSplineFEMPoissonLikeAssembler` instead of spline coefficients.
+- Add interpolation operators to `PolarSplineFEMPoissonLikeSolver` constructor.
+- Take pointwise values for `PolarSplineFEMPoissonLikeSolver::update_coefficients`.
+- Allow pointwise values to be passed to `PolarSplineFEMPoissonLikeSolver::operator()`.
 
 ### Deprecated
 

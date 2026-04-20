@@ -43,6 +43,7 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
+        SplineRThetaBuilder,
         SplineRThetaEvaluatorNullBound,
         typename DiscreteMappingBuilder::MappingType>;
 
@@ -134,13 +135,9 @@ int main(int argc, char** argv)
 
     DFieldMemRTheta coeff_alpha_alloc(grid); // values of the coefficient alpha
     DFieldMemRTheta coeff_beta_alloc(grid);
-    DFieldMemRTheta x_alloc(grid);
-    DFieldMemRTheta y_alloc(grid);
 
     DFieldRTheta coeff_alpha = get_field(coeff_alpha_alloc); // values of the coefficient alpha
     DFieldRTheta coeff_beta = get_field(coeff_beta_alloc);
-    DFieldRTheta x = get_field(x_alloc);
-    DFieldRTheta y = get_field(y_alloc);
 
     ddc::parallel_for_each(
             Kokkos::DefaultExecutionSpace(),
@@ -149,27 +146,7 @@ int main(int argc, char** argv)
                 coeff_alpha(irtheta) = Kokkos::exp(
                         -Kokkos::tanh((ddc::coordinate(ddc::select<GridR>(irtheta)) - 0.7) / 0.05));
                 coeff_beta(irtheta) = 1.0 / coeff_alpha(irtheta);
-                Coord<R, Theta>
-                        coord(ddc::coordinate(ddc::select<GridR>(irtheta)),
-                              ddc::coordinate(ddc::select<GridTheta>(irtheta)));
-                Coord<X, Y> cartesian_coord = mapping(coord);
-                x(irtheta) = ddc::get<X>(cartesian_coord);
-                y(irtheta) = ddc::get<Y>(cartesian_coord);
             });
-
-    Spline2DMem coeff_alpha_spline(idx_range_bsplinesRTheta);
-    Spline2DMem coeff_beta_spline(idx_range_bsplinesRTheta);
-
-    builder(get_field(coeff_alpha_spline),
-            get_const_field(coeff_alpha)); // coeff_alpha_spline are the coefficients
-    // of the spline representation of the values given by coeff_alpha.
-    builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
-
-    Spline2DMem x_spline_representation(idx_range_bsplinesRTheta);
-    Spline2DMem y_spline_representation(idx_range_bsplinesRTheta);
-
-    builder(get_field(x_spline_representation), get_const_field(x));
-    builder(get_field(y_spline_representation), get_const_field(y));
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Setup time : "
@@ -178,11 +155,9 @@ int main(int argc, char** argv)
               << "ms" << std::endl;
     start_time = std::chrono::system_clock::now();
 
-    PoissonSolver solver(discrete_mapping, evaluator);
+    PoissonSolver solver(discrete_mapping, builder, evaluator);
 
-    solver.update_coefficients(
-            get_const_field(coeff_alpha_spline),
-            get_const_field(coeff_beta_spline));
+    solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     end_time = std::chrono::system_clock::now();
     std::cout << "Poisson initialisation time : "
@@ -217,14 +192,14 @@ int main(int argc, char** argv)
         ConstSpline2D rhs_spline_field = get_const_field(rhs_spline);
         start_time = std::chrono::system_clock::now();
         solver(
+                get_field(result),
                 KOKKOS_LAMBDA(CoordRTheta const& coord) {
                     return evaluator(coord, rhs_spline_field);
-                },
-                get_field(result));
+                });
         end_time = std::chrono::system_clock::now();
     } else {
         start_time = std::chrono::system_clock::now();
-        solver(rhs, get_field(result));
+        solver(get_field(result), rhs);
         end_time = std::chrono::system_clock::now();
     }
     auto result_alloc_host = ddc::create_mirror_view_and_copy(result);

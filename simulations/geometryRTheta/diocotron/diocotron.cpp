@@ -52,6 +52,7 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
+        SplineRThetaBuilder,
         SplineRThetaEvaluatorNullBound,
         typename DiscreteMappingBuilder::MappingType>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
@@ -168,24 +169,8 @@ int main(int argc, char** argv)
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
-
-    Spline2DMem coeff_alpha_spline(idx_range_bsplinesRTheta);
-    Spline2DMem coeff_beta_spline(idx_range_bsplinesRTheta);
-
-    builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
-    builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
-
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
-    PoissonSolver poisson_solver(discrete_mapping, spline_evaluator);
-    poisson_solver.update_coefficients(
-            get_const_field(coeff_alpha_spline),
-            get_const_field(coeff_beta_spline));
+    PoissonSolver poisson_solver(discrete_mapping, builder, spline_evaluator);
+    poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
 #if defined(PREDCORR)
@@ -287,7 +272,7 @@ int main(int argc, char** argv)
     Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
     PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
-    poisson_solver(poisson_rhs_eq, get_field(phi_eq_alloc));
+    poisson_solver(get_field(phi_eq_alloc), poisson_rhs_eq);
     ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
     // --- Save initial data --------------------------------------------------------------------------

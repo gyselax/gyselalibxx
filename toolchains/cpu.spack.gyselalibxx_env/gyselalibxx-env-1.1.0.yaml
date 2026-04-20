@@ -57,5 +57,7 @@ spack:
       require: openmpi@5.0
     pdi:
       require: ~python
+    py-dask:
+      prefer: ['~dataframe']
     py-pandas:
-      require: ~performance
+      prefer: ['~performance']
