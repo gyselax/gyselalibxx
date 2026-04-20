@@ -43,6 +43,11 @@ template <
         class Mapping,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
+    : IPolarPoissonLikeSolver<
+              IdxRange<GridR, GridTheta>,
+              IdxRangeFull,
+              Kokkos::DefaultExecutionSpace::memory_space,
+              Kokkos::layout_right>
 {
     // TODO: Add a batch loop to operator()
     static_assert(
@@ -359,7 +364,7 @@ public:
      *      The @f$ \beta @f$ function in the definition of the Poisson-like equation defined
      *      at the grid points.
      */
-    void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
+    void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta) override
     {
         FieldMemCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
         FieldMemCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
@@ -569,7 +574,7 @@ public:
      * @param[in] rhs
      *      The rhs @f$ \rho@f$ of the Poisson-like equation on the grid.
      */
-    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const
+    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const override
     {
         FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
         m_builder(get_field(rhs_alloc), rhs);
