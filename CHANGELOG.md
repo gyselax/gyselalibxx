@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new constructors for `MultipatchFieldMem` to allow labelling.
 - Add more labels to memory allocations.
 - Add a `NDIdentityInterpolationBuilder` class.
+- Add a new abstract class `IPolarPoissonLikeSolver`.
 
 ### Fixed
 
@@ -45,6 +46,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add interpolation operators to `PolarSplineFEMPoissonLikeSolver` constructor.
 - Take pointwise values for `PolarSplineFEMPoissonLikeSolver::update_coefficients`.
 - Allow pointwise values to be passed to `PolarSplineFEMPoissonLikeSolver::operator()`.
+- Rename `polarpoissonlikesolver.hpp` -> `polar_spline_fem_poisson_like_solver.hpp`.
 
 ### Deprecated
 

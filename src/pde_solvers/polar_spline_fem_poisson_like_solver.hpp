@@ -2,7 +2,8 @@
 #pragma once
 
 #include "i_interpolation.hpp"
-#include "polarpoissonlikeassembler.hpp"
+#include "ipolar_poisson_like_solver.hpp"
+#include "polar_spline_fem_poisson_like_assembler.hpp"
 
 /**
 * @brief Define a polar PDE solver for a Poisson-like equation.
@@ -43,6 +44,11 @@ template <
         class Mapping,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
+    : public IPolarPoissonLikeSolver<
+              IdxRange<GridR, GridTheta>,
+              IdxRangeFull,
+              Kokkos::DefaultExecutionSpace::memory_space,
+              Kokkos::layout_right>
 {
     // TODO: Add a batch loop to operator()
     static_assert(
@@ -361,6 +367,7 @@ public:
      *      at the grid points.
      */
     void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
+            override
     {
         FieldMemCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
         FieldMemCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
@@ -570,7 +577,7 @@ public:
      * @param[in] rhs
      *      The rhs @f$ \rho@f$ of the Poisson-like equation on the grid.
      */
-    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const
+    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const override
     {
         FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
         m_builder(get_field(rhs_alloc), rhs);

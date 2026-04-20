@@ -18,7 +18,7 @@
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
 #include "test_cases.hpp"
 
