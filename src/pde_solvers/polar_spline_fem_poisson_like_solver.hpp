@@ -174,6 +174,7 @@ private:
     using CoordFieldMemRTheta = FieldMem<CoordRTheta, IdxRangeRTheta>;
     using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
     using DFieldRTheta = DField<IdxRangeRTheta>;
+    using DConstFieldRTheta = DConstField<IdxRangeRTheta>;
 
     using PoissonAssembler = PolarSplineFEMPoissonLikeAssembler<
             GridR,
