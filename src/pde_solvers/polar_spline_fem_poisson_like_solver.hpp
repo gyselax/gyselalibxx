@@ -44,7 +44,7 @@ template <
         class Mapping,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
-    : IPolarPoissonLikeSolver<
+    : public IPolarPoissonLikeSolver<
               IdxRange<GridR, GridTheta>,
               IdxRangeFull,
               Kokkos::DefaultExecutionSpace::memory_space,
