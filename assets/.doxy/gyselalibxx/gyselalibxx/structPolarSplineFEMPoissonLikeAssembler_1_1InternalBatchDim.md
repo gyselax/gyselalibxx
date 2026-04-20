@@ -10,7 +10,7 @@
 
 _The tag for the batch dimension for the equation. This is public due to Cuda._ 
 
-* `#include <polarpoissonlikeassembler.hpp>`
+* `#include <polar_spline_fem_poisson_like_assembler.hpp>`
 
 
 
@@ -78,5 +78,5 @@ _The tag for the batch dimension for the equation. This is public due to Cuda._
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp`
 

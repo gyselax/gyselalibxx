@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classIPolarPoissonLikeSolver" kind="class" language="C++" prot="public">
+    <compoundname>IPolarPoissonLikeSolver</compoundname>
+    <derivedcompoundref refid="classPolarSplineFEMPoissonLikeSolver" prot="public" virt="non-virtual">PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;</derivedcompoundref>
+    <templateparamlist>
+      <param>
+        <type>class IdxRangeLaplacian</type>
+      </param>
+      <param>
+        <type>class IdxRangeFull</type>
+      </param>
+      <param>
+        <type>class MemorySpace</type>
+        <defval>Kokkos::DefaultExecutionSpace::memory_space</defval>
+      </param>
+      <param>
+        <type>class LayoutSpace</type>
+        <defval>Kokkos::layout_right</defval>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="1">
+        <label>IPolarPoissonLikeSolver&lt; IdxRangeLaplacian, IdxRangeFull, MemorySpace, LayoutSpace &gt;</label>
+        <link refid="classIPolarPoissonLikeSolver"/>
+      </node>
+      <node id="2">
+        <label>PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;</label>
+        <link refid="classPolarSplineFEMPoissonLikeSolver"/>
+        <childnode refid="1" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp" line="11" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp" bodystart="11" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -16,7 +16,7 @@
     <includedby refid="inverse__jacobian__matrix_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/inverse_jacobian_matrix.hpp</includedby>
     <includedby refid="lagrange__basis__non__uniform_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp</includedby>
     <includedby refid="bernstein_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines/bernstein.hpp</includedby>
-    <includedby refid="polarpoissonlikeassembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</includedby>
+    <includedby refid="polar__spline__fem__poisson__like__assembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</includedby>
     <incdepgraph>
       <node id="6">
         <label>coord_transformation_tools.hpp</label>
@@ -569,14 +569,14 @@
         </childnode>
       </node>
       <node id="28">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</label>
-        <link refid="polarpoissonlikeassembler_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</label>
+        <link refid="polar__spline__fem__poisson__like__assembler_8hpp_source"/>
         <childnode refid="29" relation="include">
         </childnode>
       </node>
       <node id="29">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
-        <link refid="polarpoissonlikesolver_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</label>
+        <link refid="polar__spline__fem__poisson__like__solver_8hpp_source"/>
         <childnode refid="13" relation="include">
         </childnode>
         <childnode refid="15" relation="include">

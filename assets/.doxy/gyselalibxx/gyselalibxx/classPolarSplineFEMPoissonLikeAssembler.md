@@ -12,7 +12,7 @@
 
 _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._ [More...](#detailed-description)
 
-* `#include <polarpoissonlikeassembler.hpp>`
+* `#include <polar_spline_fem_poisson_like_assembler.hpp>`
 
 
 
@@ -642,5 +642,5 @@ Value of the quadrature summand
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp`
 

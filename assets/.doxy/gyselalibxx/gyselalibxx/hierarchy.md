@@ -93,6 +93,9 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._ 
 * **class** [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md) 
 * **class** [**IPolarFootFinder**](classIPolarFootFinder.md) _Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_ \((r,\theta)\) _plane)._
+* **class** [**IPolarPoissonLikeSolver**](classIPolarPoissonLikeSolver.md)     
+    * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._ 
+* **class** [**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md) 
 * **class** [**IQNSolver**](classIQNSolver.md) _Base class for a Quasi-Neutrality solver._     
     * **class** [**NullQNSolver**](classNullQNSolver.md) _Null operator._ 
     * **class** [**NullQNSolver**](classNullQNSolver.md) _Null operator._ 
@@ -152,7 +155,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md) 
 * **class** [**PolarSplineEvaluator**](classPolarSplineEvaluator.md) _Define an evaluator on polar B-splines._ 
 * **class** [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md) _An operator to assemble a Poisson-like stiffness matrix using polar B-splines._ 
-* **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._ 
 * **class** [**PolarSplineFEMPoissonLikeSolver::CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) _A wrapper that binds an evaluator with its coefficient field to present a single callable_ `double operator()(CoordRTheta)` _._
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._
 * **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._ 

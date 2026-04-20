@@ -12,7 +12,7 @@
 
 _A wrapper that binds an evaluator with its coefficient field to present a single callable_ `double operator()(CoordRTheta)` _._[More...](#detailed-description)
 
-* `#include <polarpoissonlikesolver.hpp>`
+* `#include <polar_spline_fem_poisson_like_solver.hpp>`
 
 
 
@@ -139,5 +139,5 @@ inline KOKKOS_INLINE_FUNCTION double PolarSplineFEMPoissonLikeSolver::CoeffEvalu
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp`
 

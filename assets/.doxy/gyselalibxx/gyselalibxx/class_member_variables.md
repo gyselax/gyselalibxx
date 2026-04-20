@@ -348,7 +348,7 @@
 ## u
 
 * **uniform\_edge\_v** ([**CollisionsIntra**](classCollisionsIntra.md))
-* **using\_vector\_field** ([**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md))
+* **using\_vector\_field** ([**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md), [**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md))
 
 
 ## v

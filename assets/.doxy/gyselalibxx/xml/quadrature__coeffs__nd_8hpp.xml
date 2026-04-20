@@ -4,7 +4,7 @@
     <compoundname>quadrature_coeffs_nd.hpp</compoundname>
     <includes local="no">ddc/ddc.hpp</includes>
     <includes refid="ddc__aliases_8hpp" local="yes">ddc_aliases.hpp</includes>
-    <includedby refid="polarpoissonlikeassembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</includedby>
+    <includedby refid="polar__spline__fem__poisson__like__assembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</includedby>
     <includedby refid="simpson__quadrature_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/simpson_quadrature.hpp</includedby>
     <includedby refid="trapezoid__quadrature_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/trapezoid_quadrature.hpp</includedby>
     <incdepgraph>
@@ -82,14 +82,14 @@
         <link refid="collisions__utils_8hpp_source"/>
       </node>
       <node id="2">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</label>
-        <link refid="polarpoissonlikeassembler_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</label>
+        <link refid="polar__spline__fem__poisson__like__assembler_8hpp_source"/>
         <childnode refid="3" relation="include">
         </childnode>
       </node>
       <node id="3">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
-        <link refid="polarpoissonlikesolver_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</label>
+        <link refid="polar__spline__fem__poisson__like__solver_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="8" relation="include">

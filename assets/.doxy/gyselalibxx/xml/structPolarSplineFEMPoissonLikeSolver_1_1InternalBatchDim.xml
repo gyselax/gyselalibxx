@@ -2,13 +2,13 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="structPolarSplineFEMPoissonLikeSolver_1_1InternalBatchDim" kind="struct" language="C++" prot="public">
     <compoundname>PolarSplineFEMPoissonLikeSolver::InternalBatchDim</compoundname>
-    <includes refid="polarpoissonlikesolver_8hpp" local="no">polarpoissonlikesolver.hpp</includes>
+    <includes refid="polar__spline__fem__poisson__like__solver_8hpp" local="no">polar_spline_fem_poisson_like_solver.hpp</includes>
     <briefdescription>
 <para>The tag for the batch dimension for the equation. This is public due to Cuda. </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="87" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="88" bodyend="89"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="94" bodyend="95"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

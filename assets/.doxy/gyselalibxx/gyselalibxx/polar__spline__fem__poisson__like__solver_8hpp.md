@@ -1,17 +1,18 @@
 
 
-# File polarpoissonlikesolver.hpp
+# File polar\_spline\_fem\_poisson\_like\_solver.hpp
 
 
 
-[**FileList**](files.md) **>** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md) **>** [**polarpoissonlikesolver.hpp**](polarpoissonlikesolver_8hpp.md)
+[**FileList**](files.md) **>** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md) **>** [**polar\_spline\_fem\_poisson\_like\_solver.hpp**](polar__spline__fem__poisson__like__solver_8hpp.md)
 
-[Go to the source code of this file](polarpoissonlikesolver_8hpp_source.md)
+[Go to the source code of this file](polar__spline__fem__poisson__like__solver_8hpp_source.md)
 
 
 
 * `#include "i_interpolation.hpp"`
-* `#include "polarpoissonlikeassembler.hpp"`
+* `#include "ipolar_poisson_like_solver.hpp"`
+* `#include "polar_spline_fem_poisson_like_assembler.hpp"`
 
 
 
@@ -88,5 +89,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp`
 

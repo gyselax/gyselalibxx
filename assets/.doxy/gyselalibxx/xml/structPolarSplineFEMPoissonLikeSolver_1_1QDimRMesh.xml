@@ -3,7 +3,7 @@
   <compounddef id="structPolarSplineFEMPoissonLikeSolver_1_1QDimRMesh" kind="struct" language="C++" prot="public">
     <compoundname>PolarSplineFEMPoissonLikeSolver::QDimRMesh</compoundname>
     <basecompoundref prot="public" virt="non-virtual">NonUniformGridBase&lt; R &gt;</basecompoundref>
-    <includes refid="polarpoissonlikesolver_8hpp" local="no">polarpoissonlikesolver.hpp</includes>
+    <includes refid="polar__spline__fem__poisson__like__solver_8hpp" local="no">polar_spline_fem_poisson_like_solver.hpp</includes>
     <briefdescription>
 <para>Tag the first dimension for the quadrature mesh. </para>
     </briefdescription>
@@ -31,7 +31,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp" bodystart="77" bodyend="78"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" line="82" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp" bodystart="83" bodyend="84"/>
     <listofallmembers>
     </listofallmembers>
   </compounddef>

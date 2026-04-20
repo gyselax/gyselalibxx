@@ -1,12 +1,12 @@
 
 
-# File polarpoissonlikeassembler.hpp
+# File polar\_spline\_fem\_poisson\_like\_assembler.hpp
 
 
 
-[**FileList**](files.md) **>** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md) **>** [**polarpoissonlikeassembler.hpp**](polarpoissonlikeassembler_8hpp.md)
+[**FileList**](files.md) **>** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md) **>** [**polar\_spline\_fem\_poisson\_like\_assembler.hpp**](polar__spline__fem__poisson__like__assembler_8hpp.md)
 
-[Go to the source code of this file](polarpoissonlikeassembler_8hpp_source.md)
+[Go to the source code of this file](polar__spline__fem__poisson__like__assembler_8hpp_source.md)
 
 
 
@@ -100,5 +100,5 @@
 
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp`
 

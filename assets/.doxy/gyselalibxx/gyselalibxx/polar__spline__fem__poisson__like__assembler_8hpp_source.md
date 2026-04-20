@@ -1,10 +1,10 @@
 
 
-# File polarpoissonlikeassembler.hpp
+# File polar\_spline\_fem\_poisson\_like\_assembler.hpp
 
-[**File List**](files.md) **>** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md) **>** [**polarpoissonlikeassembler.hpp**](polarpoissonlikeassembler_8hpp.md)
+[**File List**](files.md) **>** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md) **>** [**polar\_spline\_fem\_poisson\_like\_assembler.hpp**](polar__spline__fem__poisson__like__assembler_8hpp.md)
 
-[Go to the documentation of this file](polarpoissonlikeassembler_8hpp.md)
+[Go to the documentation of this file](polar__spline__fem__poisson__like__assembler_8hpp.md)
 
 
 ```C++

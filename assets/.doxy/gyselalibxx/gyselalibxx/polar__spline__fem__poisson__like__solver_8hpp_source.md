@@ -1,10 +1,10 @@
 
 
-# File polarpoissonlikesolver.hpp
+# File polar\_spline\_fem\_poisson\_like\_solver.hpp
 
-[**File List**](files.md) **>** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md) **>** [**polarpoissonlikesolver.hpp**](polarpoissonlikesolver_8hpp.md)
+[**File List**](files.md) **>** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md) **>** [**polar\_spline\_fem\_poisson\_like\_solver.hpp**](polar__spline__fem__poisson__like__solver_8hpp.md)
 
-[Go to the documentation of this file](polarpoissonlikesolver_8hpp.md)
+[Go to the documentation of this file](polar__spline__fem__poisson__like__solver_8hpp.md)
 
 
 ```C++
@@ -12,7 +12,8 @@
 #pragma once
 
 #include "i_interpolation.hpp"
-#include "polarpoissonlikeassembler.hpp"
+#include "ipolar_poisson_like_solver.hpp"
+#include "polar_spline_fem_poisson_like_assembler.hpp"
 
 template <
         class GridR,
@@ -24,6 +25,11 @@ template <
         class Mapping,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
+    : public IPolarPoissonLikeSolver<
+              IdxRange<GridR, GridTheta>,
+              IdxRangeFull,
+              Kokkos::DefaultExecutionSpace::memory_space,
+              Kokkos::layout_right>
 {
     // TODO: Add a batch loop to operator()
     static_assert(
@@ -252,6 +258,7 @@ public:
     }
 
     void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
+            override
     {
         FieldMemCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
         FieldMemCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
@@ -422,7 +429,7 @@ public:
         m_polar_spline_evaluator(phi, get_const_field(m_phi_spline_coef_alloc));
     }
 
-    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const
+    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const override
     {
         FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
         m_builder(get_field(rhs_alloc), rhs);

@@ -12,10 +12,11 @@
 
 _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-description)
 
-* `#include <polarpoissonlikesolver.hpp>`
+* `#include <polar_spline_fem_poisson_like_solver.hpp>`
 
 
 
+Inherits the following classes: [IPolarPoissonLikeSolver](classIPolarPoissonLikeSolver.md)
 
 
 
@@ -64,6 +65,26 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## Public Functions
 
 | Type | Name |
@@ -71,8 +92,10 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 |   | [**PolarSplineFEMPoissonLikeSolver**](#function-polarsplinefempoissonlikesolver) (Mapping const & mapping, BuilderType const & builder, EvaluatorType const & evaluator, std::optional&lt; int &gt; max\_iter=std::nullopt, std::optional&lt; double &gt; res\_tol=std::nullopt, std::optional&lt; bool &gt; batch\_solver\_logger=std::nullopt, std::optional&lt; int &gt; preconditioner\_max\_block\_size=std::nullopt) <br>_Instantiate a polar Poisson-like solver using FEM with B-splines._  |
 |  void | [**operator()**](#function-operator) (PolarSplineRTheta spline, RHSFunction const & rhs) const<br>_Solve the Poisson-like equation._  |
 |  void | [**operator()**](#function-operator_1) (DFieldRTheta phi, RHSFunction const & rhs) const<br>_Solve the Poisson-like equation._  |
-|  void | [**operator()**](#function-operator_2) (DFieldRTheta phi, DConstFieldRTheta rhs) const<br>_Solve the Poisson-like equation._  |
-|  void | [**update\_coefficients**](#function-update_coefficients) (DConstField&lt; IdxRangeRTheta &gt; alpha, DConstField&lt; IdxRangeRTheta &gt; beta) <br>_Update the coefficients_ \(alpha\) _and_\(beta\) _that define the equation._ |
+|  void | [**operator()**](#function-operator_2) (DFieldRTheta phi, DConstFieldRTheta rhs) override const<br>_Solve the Poisson-like equation._  |
+|  void | [**update\_coefficients**](#function-update_coefficients) (DConstField&lt; IdxRangeRTheta &gt; alpha, DConstField&lt; IdxRangeRTheta &gt; beta) override<br>_Update the coefficients_ \(alpha\) _and_\(beta\) _that define the equation._ |
+
+
 
 
 ## Public Static Functions
@@ -80,6 +103,32 @@ _Define a polar PDE solver for a Poisson-like equation._ [More...](#detailed-des
 | Type | Name |
 | ---: | :--- |
 |  KOKKOS\_INLINE\_FUNCTION double | [**get\_polar\_bspline\_vals**](#function-get_polar_bspline_vals) (CoordRTheta coord, IdxBSPolar idx) <br>_Get the value of the specified polar bspline at the specified point._  |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -304,7 +353,7 @@ _Solve the Poisson-like equation._
 inline void PolarSplineFEMPoissonLikeSolver::operator() (
     DFieldRTheta phi,
     DConstFieldRTheta rhs
-) const
+) override const
 ```
 
 
@@ -336,7 +385,7 @@ _Update the coefficients_ \(alpha\) _and_\(beta\) _that define the equation._
 inline void PolarSplineFEMPoissonLikeSolver::update_coefficients (
     DConstField< IdxRangeRTheta > alpha,
     DConstField< IdxRangeRTheta > beta
-) 
+) override
 ```
 
 
@@ -395,5 +444,5 @@ The value of the polar bspline at the coordinate.
 <hr>
 
 ------------------------------
-The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp`
+The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp`
 

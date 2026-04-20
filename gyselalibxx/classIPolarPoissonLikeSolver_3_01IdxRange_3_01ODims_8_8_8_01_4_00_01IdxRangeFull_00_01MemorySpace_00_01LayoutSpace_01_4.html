@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp} - GyselalibX</title>
+    <title>Class IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt; - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d226.md";
+        var mkdocs_page_name = "Class IPolarPoissonLikeSolver\u0026lt; IdxRange\u0026lt; ODims... \u0026gt;, IdxRangeFull, MemorySpace, LayoutSpace \u0026gt;";
+        var mkdocs_page_input_path = "gyselalibxx/classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -550,9 +550,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</li>
+      <li class="breadcrumb-item active">Class IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d226.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -560,10 +560,246 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadraturegauss_legendre_integrationcpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d226.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</strong></a></p>
+                <div><h1 id="class-ipolarpoissonlikesolver-idxrange-odims-idxrangefull-memoryspace-layoutspace">Class IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</h1>
+<p><strong>template &lt;class... ODims, class IdxRangeFull, class MemorySpace, class LayoutSpace&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html"><strong>IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;</strong></a></p>
+<p><a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;ipolar_poisson_like_solver.hpp&gt;</code></li>
+</ul>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt; <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-batch_tags"><strong>batch_tags</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batch_idx_range_type"><strong>batch_idx_range_type</strong></a>  <br><em>The index range type describing the batch dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef typename batch_idx_range_type::discrete_element_type</td>
+<td style="text-align: left;"><a href="#typedef-batch_index_type"><strong>batch_index_type</strong></a>  <br><em>The index for indexing a batch dimension.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DConstField&lt; IdxRangeFull, MemorySpace, LayoutSpace &gt;</td>
+<td style="text-align: left;"><a href="#typedef-const_field_type"><strong>const_field_type</strong></a>  <br><em>The const Field type of the arguments to operator().</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef DField&lt; IdxRangeFull, MemorySpace, LayoutSpace &gt;</td>
+<td style="text-align: left;"><a href="#typedef-field_type"><strong>field_type</strong></a>  <br><em>The Field type of the arguments to operator().</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef IdxRange&lt; ODims... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-laplacian_idx_range_type"><strong>laplacian_idx_range_type</strong></a>  <br><em>The type of the index range on which the equation is defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef LayoutSpace</td>
+<td style="text-align: left;"><a href="#typedef-layout_space"><strong>layout_space</strong></a>  <br><em>The layout space of the Fields passed to operator().</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef MemorySpace</td>
+<td style="text-align: left;"><a href="#typedef-memory_space"><strong>memory_space</strong></a>  <br><em>The space (CPU/GPU) where the Fields passed to operator() are saved.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef std::conditional_t&lt; ddc::type_seq_size_v&lt; <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-laplacian_tags"><strong>laplacian_tags</strong></a> &gt;==1, <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a>, <a href="classVectorField.html"><strong>VectorField</strong></a>&lt; double, IdxRangeFull, <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-real_laplacian_tags"><strong>real_laplacian_tags</strong></a>, MemorySpace, LayoutSpace &gt; &gt;</td>
+<td style="text-align: left;"><a href="#typedef-vector_field_type"><strong>vector_field_type</strong></a>  <br><em>The type of the derivative of</em> <span class="arithmatex">\(\phi\)</span> <em>.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">virtual void</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-field_type"><strong>field_type</strong></a> phi, <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-const_field_type"><strong>const_field_type</strong></a> rho) const = 0<br><em>An operator which calculates the solution</em> <span class="arithmatex">\(\phi\)</span> <em>to the Poisson-like equation: (1)</em><span class="arithmatex">\(L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\)</span> <em>, in</em><span class="arithmatex">\(\Omega\)</span> <em>,.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">virtual void</td>
+<td style="text-align: left;"><a href="#function-update_coefficients"><strong>update_coefficients</strong></a> (<a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-const_field_type"><strong>const_field_type</strong></a> alpha, <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-const_field_type"><strong>const_field_type</strong></a> beta) = 0<br><em>Update the coefficients</em> <span class="arithmatex">\(alpha\)</span> <em>and</em><span class="arithmatex">\(beta\)</span> <em>that define the equation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">virtual</td>
+<td style="text-align: left;"><a href="#function-ipolarpoissonlikesolver"><strong>~IPolarPoissonLikeSolver</strong></a> () = default<br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-types">Protected Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_remove_t&lt; <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-space_tags"><strong>space_tags</strong></a>, <a href="classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.html#typedef-laplacian_tags"><strong>laplacian_tags</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-batch_tags"><strong>batch_tags</strong></a>  <br><em>The tags describing the batched dimensions.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; ODims... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-laplacian_tags"><strong>laplacian_tags</strong></a>  <br><em>The tags describing the discrete dimensions in the equation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; typename ODims::continuous_dimension_type... &gt;</td>
+<td style="text-align: left;"><a href="#typedef-real_laplacian_tags"><strong>real_laplacian_tags</strong></a>  <br><em>The tags describing the real dimensions in the equation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::to_type_seq_t&lt; IdxRangeFull &gt;</td>
+<td style="text-align: left;"><a href="#typedef-space_tags"><strong>space_tags</strong></a>  <br><em>The tags describing the dimensions of the index range on which the operator acts.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="protected-static-attributes">Protected Static Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-using_vector_field"><strong>using_vector_field</strong></a>   = <code>ddc::type\_seq\_size\_v&amp;lt;[**laplacian\_tags**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md#typedef-laplacian_tags)&amp;gt; == 1</code><br><em>Indicates whether the gradient is represented by a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>or a Field.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>An abstract class from which a Poisson-like solver can inherit. Classes inheriting from this must implement a way to solve the following equation: (1) <span class="arithmatex">\(L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\)</span>, in <span class="arithmatex">\(\Omega\)</span>,</p>
+<p><span class="arithmatex">\(\phi = 0\)</span>, on <span class="arithmatex">\(\partial \Omega\)</span>,</p>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>IdxRangeLaplacian</code> The index range on which the equation is defined. </li>
+<li><code>IdxRangeFull</code> The index range on which the operator() acts. This is equal to the IdxRangeLaplacian plus any batched dimensions. </li>
+<li><code>MemorySpace</code> The space (CPU/GPU) where the Fields passed to operator() are saved. </li>
+<li><code>LayoutSpace</code> The layout space of the Fields passed to operator(). </li>
+</ul>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-batch_idx_range_type">typedef batch_idx_range_type</h3>
+<p><em>The index range type describing the batch dimensions.</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::batch_idx_range_type =  typename ddc::detail::convert_type_seq_to_discrete_domain_t&lt;batch_tags&gt;;
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp</code></p></div>
+
+<h3 id="typedef-batch_index_type">typedef batch_index_type</h3>
+<p><em>The index for indexing a batch dimension.</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::batch_index_type =  typename batch_idx_range_type::discrete_element_type;
+</code></pre>
+<hr>
+
+<h3 id="typedef-const_field_type">typedef const_field_type</h3>
+<p><em>The const Field type of the arguments to operator().</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::const_field_type =  DConstField&lt;IdxRangeFull, MemorySpace, LayoutSpace&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-field_type">typedef field_type</h3>
+<p><em>The Field type of the arguments to operator().</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::field_type =  DField&lt;IdxRangeFull, MemorySpace, LayoutSpace&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-laplacian_idx_range_type">typedef laplacian_idx_range_type</h3>
+<p><em>The type of the index range on which the equation is defined.</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::laplacian_idx_range_type =  IdxRange&lt;ODims...&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-layout_space">typedef layout_space</h3>
+<p><em>The layout space of the Fields passed to operator().</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::layout_space =  LayoutSpace;
+</code></pre>
+<hr>
+
+<h3 id="typedef-memory_space">typedef memory_space</h3>
+<p><em>The space (CPU/GPU) where the Fields passed to operator() are saved.</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::memory_space =  MemorySpace;
+</code></pre>
+<hr>
+
+<h3 id="typedef-vector_field_type">typedef vector_field_type</h3>
+<p><em>The type of the derivative of</em> <span class="arithmatex">\(\phi\)</span> <em>.</em></p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::vector_field_type =  std::conditional_t&lt; ddc::type_seq_size_v&lt;laplacian_tags&gt; == 1, field_type, VectorField&lt;double, IdxRangeFull, real_laplacian_tags, MemorySpace, LayoutSpace&gt; &gt;;
+</code></pre>
+<hr>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-operator">function operator()</h3>
+<p><em>An operator which calculates the solution</em> <span class="arithmatex">\(\phi\)</span> <em>to the Poisson-like equation: (1)</em><span class="arithmatex">\(L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho\)</span> <em>, in</em><span class="arithmatex">\(\Omega\)</span> <em>,.</em></p>
+<pre><code class="language-C++">virtual void IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::operator() (
+    field_type phi,
+    const_field_type rho
+) const = 0
+</code></pre>
+<p><span class="arithmatex">\(\phi = 0\)</span>, on <span class="arithmatex">\(\partial \Omega\)</span>,</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>phi</code> The solution to Poisson's equation. </li>
+<li><code>rho</code> The right-hand side of Poisson's equation. </li>
+</ul>
+<hr>
+
+<h3 id="function-update_coefficients">function update_coefficients</h3>
+<p><em>Update the coefficients</em> <span class="arithmatex">\(alpha\)</span> <em>and</em><span class="arithmatex">\(beta\)</span> <em>that define the equation.</em></p>
+<pre><code class="language-C++">virtual void IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::update_coefficients (
+    const_field_type alpha,
+    const_field_type beta
+) = 0
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>alpha</code> The values of alpha at the grid points. </li>
+<li><code>beta</code> The values of beta at the grid points. </li>
+</ul>
+<hr>
+
+<h3 id="function-ipolarpoissonlikesolver">function ~IPolarPoissonLikeSolver</h3>
+<pre><code class="language-C++">virtual IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::~IPolarPoissonLikeSolver () = default
+</code></pre>
+<hr>
+<h2 id="protected-types-documentation">Protected Types Documentation</h2>
+<h3 id="typedef-batch_tags">typedef batch_tags</h3>
+<p><em>The tags describing the batched dimensions.</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::batch_tags =  ddc::type_seq_remove_t&lt;space_tags, laplacian_tags&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-laplacian_tags">typedef laplacian_tags</h3>
+<p><em>The tags describing the discrete dimensions in the equation.</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::laplacian_tags =  ddc::detail::TypeSeq&lt;ODims...&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-real_laplacian_tags">typedef real_laplacian_tags</h3>
+<p><em>The tags describing the real dimensions in the equation.</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::real_laplacian_tags =  ddc::detail::TypeSeq&lt;typename ODims::continuous_dimension_type...&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-space_tags">typedef space_tags</h3>
+<p><em>The tags describing the dimensions of the index range on which the operator acts.</em> </p>
+<pre><code class="language-C++">using IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::space_tags =  ddc::to_type_seq_t&lt;IdxRangeFull&gt;;
+</code></pre>
+<hr>
+<h2 id="protected-static-attributes-documentation">Protected Static Attributes Documentation</h2>
+<h3 id="variable-using_vector_field">variable using_vector_field</h3>
+<p><em>Indicates whether the gradient is represented by a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>or a Field.</em></p>
+<pre><code class="language-C++">constexpr bool IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;::using_vector_field;
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipolar_poisson_like_solver.hpp</code></p></div>
               
             </div>
           </div><footer>

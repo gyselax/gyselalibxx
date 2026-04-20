@@ -261,6 +261,8 @@
 * [**IPoissonSolver**](classIPoissonSolver.md)
 * [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md)
 * [**IPolarFootFinder**](classIPolarFootFinder.md)
+* [**IPolarPoissonLikeSolver**](classIPolarPoissonLikeSolver.md)
+* [**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md)
 * [**IQNSolver**](classIQNSolver.md)
 * [**IRightHandSide**](classIRightHandSide.md)
 * [**is\_contravariant\_vector\_index\_set**](structtensor__tools_1_1is__contravariant__vector__index__set.md)

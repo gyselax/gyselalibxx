@@ -30,7 +30,7 @@
     <includedby refid="matrix__corner__block_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_corner_block.hpp</includedby>
     <includedby refid="matrix__periodic__banded_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/matrix_tools/matrix_periodic_banded.hpp</includedby>
     <includedby refid="multipatch__spline__evaluator__2d_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_evaluator_2d.hpp</includedby>
-    <includedby refid="polarpoissonlikeassembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</includedby>
+    <includedby refid="polar__spline__fem__poisson__like__assembler_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</includedby>
     <incdepgraph>
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/view.hpp</label>
@@ -593,14 +593,14 @@
         <link refid="fem__1d__poisson__solver_8hpp_source"/>
       </node>
       <node id="39">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikeassembler.hpp</label>
-        <link refid="polarpoissonlikeassembler_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_assembler.hpp</label>
+        <link refid="polar__spline__fem__poisson__like__assembler_8hpp_source"/>
         <childnode refid="40" relation="include">
         </childnode>
       </node>
       <node id="40">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polarpoissonlikesolver.hpp</label>
-        <link refid="polarpoissonlikesolver_8hpp_source"/>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/polar_spline_fem_poisson_like_solver.hpp</label>
+        <link refid="polar__spline__fem__poisson__like__solver_8hpp_source"/>
         <childnode refid="20" relation="include">
         </childnode>
         <childnode refid="22" relation="include">

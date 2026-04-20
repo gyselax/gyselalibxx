@@ -100,6 +100,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**IPoissonSolver**](classIPoissonSolver.md) 
 * **class** [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md)     
 * **class** [**IPolarFootFinder**](classIPolarFootFinder.md) _Define a base class for all the time integration methods used to find the foot of a characteristic on a polar domain (a polar domain is a domain defined on the_ \((r,\theta)\) _plane)._    
+* **class** [**IPolarPoissonLikeSolver**](classIPolarPoissonLikeSolver.md) 
+* **class** [**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md)     
 * **class** [**IQNSolver**](classIQNSolver.md) _Base class for a Quasi-Neutrality solver._     
 * **class** [**IRightHandSide**](classIRightHandSide.md) _An abstract class representing a source in Boltzmann equation._     
 * **class** [**ITimeSolver**](classITimeSolver.md) _An abstract class for solving a Boltzmann-Poisson system of equations._     
@@ -254,10 +256,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d97.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d226.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d228.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d230.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d232.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d227.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d229.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d231.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d233.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     
