@@ -3,7 +3,7 @@
 
 #include <ddc/ddc.hpp>
 
-template <class IdxRangeLaplacian, class IdxRangeFull, class MemorySpace, class LayoutSpace>
+template <class IdxRangeLaplacian, class IdxRangeFull, class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space, class LayoutSpace = Kokkos::layout_right>
 class IPolarPoissonLikeSolver;
 
 /**
@@ -16,9 +16,9 @@ class IPolarPoissonLikeSolver;
  * @tparam IdxRangeLaplacian The index range on which the equation is defined.
  * @tparam IdxRangeFull The index range on which the operator() acts. This is equal to the
  *                      IdxRangeLaplacian plus any batched dimensions.
- * @tparam LayoutSpace The layout space of the Fields passed to operator().
  * @tparam MemorySpace The space (CPU/GPU) where the Fields passed to operator()
  *                      are saved.
+ * @tparam LayoutSpace The layout space of the Fields passed to operator().
  */
 template <class... ODims, class IdxRangeFull, class MemorySpace, class LayoutSpace>
 class IPolarPoissonLikeSolver<IdxRange<ODims...>, IdxRangeFull, MemorySpace, LayoutSpace>
@@ -74,8 +74,11 @@ public:
     virtual void update_coefficients(const_field_type alpha, const_field_type beta) = 0;
 
     /**
-     * @brief An operator which calculates the solution @f$\phi@f$ to Poisson's equation:
-     * @f$ -\Delta \phi = \rho @f$
+     * @brief An operator which calculates the solution @f$\phi@f$ to the Poisson-like equation:
+     * (1) @f$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho @f$, in  @f$ \Omega@f$,
+     *
+     * @f$  \phi = 0 @f$, on  @f$ \partial \Omega@f$,
+     *
      *
      * @param[out] phi The solution to Poisson's equation.
      * @param[in] rho The right-hand side of Poisson's equation.
@@ -83,18 +86,4 @@ public:
      * @return A reference to the solution to Poisson's equation.
      */
     virtual field_type operator()(field_type phi, field_type rho) const = 0;
-
-    /**
-     * @brief An operator which calculates the solution @f$\phi@f$ to Poisson's equation and
-     * its derivative:
-     * @f$ - \Delta \phi = \rho @f$
-     * @f$ E = - \nabla \phi @f$
-     *
-     * @param[out] phi The solution to Poisson's equation.
-     * @param[out] E The derivative of the solution to Poisson's equation.
-     * @param[in] rho The right-hand side of Poisson's equation.
-     *
-     * @return A reference to the solution to Poisson's equation.
-     */
-    virtual field_type operator()(field_type phi, vector_field_type E, field_type rho) const = 0;
 };
