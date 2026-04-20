@@ -45,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add interpolation operators to `PolarSplineFEMPoissonLikeSolver` constructor.
 - Take pointwise values for `PolarSplineFEMPoissonLikeSolver::update_coefficients`.
 - Allow pointwise values to be passed to `PolarSplineFEMPoissonLikeSolver::operator()`.
+- Add NSCC A100 toolchain.
 
 ### Deprecated
 
