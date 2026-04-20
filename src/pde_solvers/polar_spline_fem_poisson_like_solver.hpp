@@ -2,6 +2,7 @@
 #pragma once
 
 #include "i_interpolation.hpp"
+#include "ipolar_poisson_like_solver.hpp"
 #include "polar_spline_fem_poisson_like_assembler.hpp"
 
 /**
@@ -364,7 +365,8 @@ public:
      *      The @f$ \beta @f$ function in the definition of the Poisson-like equation defined
      *      at the grid points.
      */
-    void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta) override
+    void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
+            override
     {
         FieldMemCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
         FieldMemCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
