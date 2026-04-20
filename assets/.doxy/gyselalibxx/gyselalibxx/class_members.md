@@ -310,6 +310,7 @@
 * **Dim2** ([**Patch&lt; grid1, grid2, bsplines\_dim1, bsplines\_dim2 &gt;**](structPatch_3_01grid1_00_01grid2_00_01bsplines__dim1_00_01bsplines__dim2_01_4.md), [**SplineBuilder2DCache**](classSplineBuilder2DCache.md), [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
 * **discrete\_vector\_type** ([**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md), [**TriangularBernsteinPolynomialBasis::Impl**](classTriangularBernsteinPolynomialBasis_1_1Impl.md))
 * **deriv\_dim\_1\_and\_2** ([**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
+* **DConstFieldRTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **DFieldRTheta** ([**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **DerivCalculatorTypeSeq** ([**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md))
 * **DFieldBS** ([**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md), [**Spline2DPartialDerivative**](classSpline2DPartialDerivative.md))

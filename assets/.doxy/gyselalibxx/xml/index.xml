@@ -2578,6 +2578,7 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a1c93157710949d3bfc985ef348a4487e" kind="typedef"><name>CoordFieldMemRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a9365bafbcc946105af446db3db347197" kind="typedef"><name>CoordFieldRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a75f668645d1d3469ae886fc2dc9b831e" kind="typedef"><name>DFieldRTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1adb815b57ad12f6ea38c9c82418978246" kind="typedef"><name>DConstFieldRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ad5d57bc6e22803d6ac2592ceadd39ad8" kind="typedef"><name>PoissonAssembler</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a2bc4d29739434f3f520ff56d151b1926" kind="typedef"><name>PolarSplineEval</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ae78b3e0b2bcb208c97d736639fee36fe" kind="variable"><name>s_n_gauss_legendre_r</name></member>
