@@ -1,4 +1,5 @@
 #include <GMGPolar/gmgpolar.h>
+#include "ipolar_poisson_like_solver.hpp"
 
 namespace GMGPolarTools {
 
@@ -21,41 +22,29 @@ public:
     explicit MappingToDomainGeometry(ToPhysicalMapping to_physical) : m_to_physical(to_physical) {}
 
     // In earlier versions denoted by 'x' and 'y'.
-    double Fx(
-            const double& r,
-            const double& theta) const final
+    double Fx(const double& r, const double& theta) const final
     {
         return Coord<X>(m_to_physical(Coord<R, Theta>(r, theta)));
     }
-    double Fy(
-            const double& r,
-            const double& theta) const final
+    double Fy(const double& r, const double& theta) const final
     {
         return Coord<Y>(m_to_physical(Coord<R, Theta>(r, theta)));
     }
 
     // In earlier versions denoted by 'Jrr', 'Jtr', 'Jrt' and 'Jtt'.
-    double dFx_dr(
-            const double& r,
-            const double& theta) const final
+    double dFx_dr(const double& r, const double& theta) const final
     {
         return m_to_physical.template jacobian_component<X, R_cov>(Coord<R, Theta>(r, theta));
     }
-    double dFy_dr(
-            const double& r,
-            const double& theta) const final
+    double dFy_dr(const double& r, const double& theta) const final
     {
         return m_to_physical.template jacobian_component<Y, R_cov>(Coord<R, Theta>(r, theta));
     }
-    double dFx_dt(
-            const double& r,
-            const double& theta) const final
+    double dFx_dt(const double& r, const double& theta) const final
     {
         return m_to_physical.template jacobian_component<X, Theta_cov>(Coord<R, Theta>(r, theta));
     }
-    double dFy_dt(
-            const double& r,
-            const double& theta) const final
+    double dFy_dt(const double& r, const double& theta) const final
     {
         return m_to_physical.template jacobian_component<Y, Theta_cov>(Coord<R, Theta>(r, theta));
     }
@@ -64,16 +53,12 @@ public:
 class HomogeneousDirichletBoundaryConditions
 {
 public:
-    double u_D(
-            const double& r,
-            const double& theta) const final
+    double u_D(const double& r, const double& theta) const final
     {
         return 0.0;
     }
     // Only used if DirBC_Interior = true
-    double u_D_Interior(
-            const double& r,
-            const double& theta) const
+    double u_D_Interior(const double& r, const double& theta) const
     {
         assert(false);
         return 0.0;
@@ -89,7 +74,8 @@ class PolarPoissonLikeCoefficients
     using Theta = typename BSplinesTheta::continuous_dimension_type;
     using CoordTheta = Coord<Theta>;
 
-    using DConstSplineRTheta_host = DConstField<IdxRange<BSplinesR, BSplinesTheta>, Kokkos::HostSpace>;
+    using DConstSplineRTheta_host
+            = DConstField<IdxRange<BSplinesR, BSplinesTheta>, Kokkos::HostSpace>;
 
 private:
     SplineEvaluator_host m_evaluator_r;
@@ -132,6 +118,7 @@ template <
         class BSplinesR,
         class RadialSplineEvaluator_host>
 class GMGPolarPoissonLikeSolver
+    : public IPolarPoissonLikeSolver<IdxRange<GridR, GridTheta>, IdxRange<GridR, GridTheta>>
 {
     using R = typename ToPhysicalMapping::curvilinear_tag_r;
     using Theta = typename ToPhysicalMapping::curvilinear_tag_r;
