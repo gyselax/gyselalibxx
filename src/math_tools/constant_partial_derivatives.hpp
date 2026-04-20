@@ -1,5 +1,8 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <memory>
+
+#include "ipartial_derivative.hpp"
 
 /**
  * @brief A class to get the derivative of a constant function.

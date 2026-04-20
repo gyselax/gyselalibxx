@@ -405,7 +405,7 @@ def search_for_bad_aliases(file):
                        "can be multi-D. Please use Grid1D")
                 report_error(STYLE, file, linenr, msg)
             # Beginning with verbs is ok as are some specific prefixes
-            valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx', 'TypeSeq', 'MatchingIdxSlice')
+            valid_start_names = ('Idx', 'MultipatchIdx', 'HasIdx', 'InternalIdx', 'Select', 'Find', 'InputIdx', 'TypeSeq', 'MatchingIdxSlice', 'To')
             if 'Idx' in a_name and not any(a_name.startswith(valid_start_name) for valid_start_name in valid_start_names):
                 prefix = 'Multipatch' if 'Multipatch' in a_name else ''
                 name = a_name.replace('Multipatch','')
@@ -826,7 +826,8 @@ if __name__ == '__main__':
 
     cppcheck_command = ['cppcheck', '--dump', '--library=googletest', '--check-level=exhaustive', '--enable=style',
                         '--std=c++17', '--max-ctu-depth=5', '--suppress=unusedStructMember', '--suppress=useStlAlgorithm',
-                        '--error-exitcode=1', '--suppress=knownConditionTrueFalse', '--suppress=ctuOneDefinitionRuleViolation']
+                        '--error-exitcode=1', '--suppress=knownConditionTrueFalse', '--suppress=ctuOneDefinitionRuleViolation',
+                        '--inline-suppr']
     for f in multipatch_geom:
         if no_file_filter or f in (*filter_files, spec_info):
             print("------------- Checking ", f, " -------------")

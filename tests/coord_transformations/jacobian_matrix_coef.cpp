@@ -10,8 +10,8 @@
 #include "czarny_to_cartesian.hpp"
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "geometry_coord_transformations_tests.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "linear_coord_transform.hpp"
@@ -207,13 +207,17 @@ TEST_P(JacobianMatrixAndJacobianCoefficients, MatrixDiscCzarMap)
             r_extrapolation_rule,
             theta_extrapolation_rule,
             theta_extrapolation_rule);
-    DiscreteToCartesianBuilder<X, Y, SplineRThetaBuilder_host, SplineRThetaEvaluator_host>
+    DiscretePoloidalCSSplineMappingBuilder<
+            X,
+            Y,
+            SplineRThetaBuilder_host,
+            SplineRThetaEvaluator_host>
             mapping_builder(
                     Kokkos::DefaultHostExecutionSpace(),
                     analytical_mapping,
                     builder,
                     evaluator);
-    DiscreteToCartesian mapping = mapping_builder();
+    DiscretePoloidalCSSplineMapping mapping = mapping_builder();
 
     static_assert(has_jacobian_v<decltype(mapping)>);
     InverseJacobianMatrix inv_jacobian(mapping);

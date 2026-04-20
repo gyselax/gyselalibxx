@@ -22,8 +22,8 @@
 #include "circular_to_cartesian.hpp"
 #include "crank_nicolson.hpp"
 #include "czarny_to_cartesian.hpp"
-#include "discrete_mapping_builder.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
+#include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "l_norm_tools.hpp"
@@ -33,7 +33,6 @@
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_interpolator_2d.hpp"
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "test_cases_adv_field.hpp"
@@ -41,7 +40,7 @@
 
 
 namespace {
-using DiscreteMappingBuilder = DiscreteToCartesianBuilder<
+using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
         X,
         Y,
         SplineRThetaBuilder_host,
@@ -134,7 +133,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             to_physical_mapping,
             builder_host,
             spline_evaluator_extrapol_host);
-    DiscreteToCartesian const discrete_mapping = discrete_mapping_builder();
+    DiscretePoloidalCSSplineMapping const discrete_mapping = discrete_mapping_builder();
 
     ddc::init_discrete_space<PolarBSplinesRTheta>(discrete_mapping);
 
@@ -147,8 +146,6 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    PreallocatableSplineInterpolator2D interpolator(builder, spline_evaluator, grid);
-
     RK3Builder const time_stepper;
     SplinePolarFootFinder find_feet(
             grid,
@@ -158,7 +155,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
     AdvectionFieldFinder advection_field_computer(to_physical_mapping);

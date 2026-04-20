@@ -40,14 +40,14 @@
  * for @f$ n \geq 0 @f$,
  *
  * First, it predicts:
- * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 1. From @f$\rho^n@f$, it computes @f$\phi^n@f$ with a PolarPoissonLikeSolver;
  * - 2. From @f$\phi^n@f$, it computes @f$A^n@f$ with a AdvectionFieldFinder;
  * - 3. From @f$\rho^n@f$ and @f$A^n@f$, it computes @f$\rho^P@f$ with a BslAdvectionPolar on @f$ dt @f$;
  *
  * We write @f$X^P@f$ the characteristic feet such that @f$\partial_t X^P = A^n(X^n)@f$.
  *
  * Secondly, it corrects:
- * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarSplineFEMPoissonLikeSolver;
+ * - 4. From @f$\rho^P@f$, it computes @f$\phi^P@f$ with a PolarPoissonLikeSolver;
  * - 5. From @f$\phi^P@f$, it computes @f$A^P@f$ with a AdvectionFieldFinder;
  * - 6. From @f$\rho^n@f$ and @f$\frac{A^{P}(X^n) + A^n(X^P)}{2} @f$, it computes @f$\rho^{n+1}@f$ with a BslAdvectionPolar on @f$ dt @f$.
  *
@@ -57,8 +57,13 @@
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
  * @tparam LogicalToPseudoPhysicalMapping
  *      A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates.
+ * @tparam PolarPoissonLikeSolver
+ *      The type of the solver for the Poisson-like equation on the polar plane.
  */
-template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
+template <
+        class LogicalToPhysicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class PolarPoissonLikeSolver>
 class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -73,10 +78,8 @@ private:
     using BslAdvectionRTheta = BslAdvectionPolar<
             SplinePolarFootFinderType,
             LogicalToPhysicalMapping,
-            PreallocatableSplineInterpolator2D<
-                    SplineRThetaBuilder,
-                    SplineRThetaEvaluatorNullBound,
-                    IdxRangeRTheta>>;
+            SplineRThetaBuilder,
+            SplineRThetaEvaluatorNullBound>;
 
 
     LogicalToPhysicalMapping const& m_logical_to_physical;
@@ -86,11 +89,7 @@ private:
     EulerBuilder const m_euler;
     SplinePolarFootFinderType const m_find_feet;
 
-    PolarSplineFEMPoissonLikeSolver<
-            GridR,
-            GridTheta,
-            PolarBSplinesRTheta,
-            SplineRThetaEvaluatorNullBound> const& m_poisson_solver;
+    PolarPoissonLikeSolver const& m_poisson_solver;
 
     SplineRThetaBuilder const& m_builder;
     SplineRThetaEvaluatorConstBound const& m_evaluator;
@@ -124,11 +123,7 @@ public:
             BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
-            PolarSplineFEMPoissonLikeSolver<
-                    GridR,
-                    GridTheta,
-                    PolarBSplinesRTheta,
-                    SplineRThetaEvaluatorNullBound> const& poisson_solver,
+            PolarPoissonLikeSolver const& poisson_solver,
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
@@ -161,22 +156,34 @@ public:
         host_t<DFieldMemRTheta> electrical_potential_host(grid);
 
         PolarSplineMemRTheta electrostatic_potential_coef_alloc(
+                "electrostatic_potential_coef (BslExplicitPredCorrRTheta::operator())",
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         auto electrostatic_potential_coef_alloc_host
                 = ddc::create_mirror_view(get_field(electrostatic_potential_coef_alloc));
 
-        Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
-        DFieldMemRTheta density_predicted_alloc(grid);
+        Spline2DMem density_coef_alloc(
+                "density_coef (BslExplicitPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
+        DFieldMemRTheta density_predicted_alloc(
+                "density_predicted (BslExplicitPredCorrRTheta::operator())",
+                grid);
         auto density_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
-        FieldMemRTheta<CoordRTheta> feet_coords_alloc(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_evaluated_alloc(grid);
-        VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_alloc(get_spline_idx_range(m_builder));
+        FieldMemRTheta<CoordRTheta>
+                feet_coords_alloc("feet_coords (BslExplicitPredCorrRTheta::operator())", grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_evaluated_alloc(
+                "advection_field_evaluated (BslExplicitPredCorrRTheta::operator())",
+                grid);
+        VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_alloc(
+                "advection_field_coefs (BslExplicitPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
 
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc_host(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_predicted_alloc(grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_predicted_alloc(
+                "advection_field_predicted (BslExplicitPredCorrRTheta::operator())",
+                grid);
         auto advection_field_alloc = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(advection_field_alloc_host));
@@ -215,7 +222,7 @@ public:
 
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
             m_builder(density_coef, get_const_field(density));
-            m_poisson_solver(charge_density, get_field(electrostatic_potential_coef_alloc));
+            m_poisson_solver(get_field(electrostatic_potential_coef_alloc), charge_density);
 
             polar_spline_evaluator(
                     get_field(electrical_potential),
@@ -262,7 +269,7 @@ public:
 
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             m_builder(density_coef, get_const_field(density_predicted_alloc));
-            m_poisson_solver(charge_density, get_field(electrostatic_potential_coef_alloc));
+            m_poisson_solver(get_field(electrostatic_potential_coef_alloc), charge_density);
 
             ddc::parallel_deepcopy(
                     get_field(electrostatic_potential_coef_alloc_host),
@@ -313,7 +320,7 @@ public:
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
         m_builder(density_coef, get_const_field(density));
-        m_poisson_solver(charge_density, get_field(electrical_potential));
+        m_poisson_solver(get_field(electrical_potential), charge_density);
 
         ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
         ddc::parallel_deepcopy(density_host, density);

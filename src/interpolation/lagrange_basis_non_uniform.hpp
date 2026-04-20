@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "ddc_aliases.hpp"
+#include "math_tools.hpp"
 #include "view.hpp"
 
 namespace detail {
@@ -234,26 +235,183 @@ public:
             KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
             KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
 
+            int node = check_if_node(x, poly_start);
+            if (node == -1) {
+                std::array<DataType, D + 1> weights = get_weights(poly_start);
+                calculate_values_between_nodes(values, x, poly_start, weights);
+            } else {
+                for (int j(0); j < D + 1; ++j) {
+                    values(j) = static_cast<int>(j == node);
+                }
+            }
+        }
+
+        /**
+         * @brief Evaluate the selected set of bases and their derivatives at the coordinate.
+         *
+         * Evaluate all d+1 bases which span the domain
+         * [coordinate(poly_start), coordinate(poly_start+d)]
+         * at the coordinate x.
+         * The derivatives are also calculated. The calculations are derived using
+         * the method described in:
+         *   Barycentric Lagrange Interpolation
+         *   Jean-Paul Berrut and Lloyd N. Trefethen
+         *   SIAM Review 2004 46:3, 501-517
+         *
+         * @param[out] derivs The values and derivatives of each basis at the coordinate x.
+         * @param[in] x The coordinate where the bases are evaluated.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         * @param[in] n_derivs The number of derivatives to be calculated.
+         */
+        KOKKOS_INLINE_FUNCTION void eval_basis_and_n_derivs(
+                Span2D<DataType> derivs,
+                coord_type const& x,
+                Idx<knot_grid> poly_start,
+                std::size_t n_derivs) const
+        {
+            KOKKOS_ASSERT(x >= ddc::coordinate(poly_start));
+            KOKKOS_ASSERT(x <= ddc::coordinate(poly_start + degree()));
+            KOKKOS_ASSERT(n_derivs <= degree());
+            KOKKOS_ASSERT(derivs.extent(0) == degree() + 1);
+            KOKKOS_ASSERT(derivs.extent(1) == n_derivs + 1);
+
+            constexpr std::size_t n_basis = degree() + 1;
+            int node = check_if_node(x, poly_start);
+            std::array<DataType, D + 1> weights = get_weights(poly_start);
+
+            // If coordinate not found at a node
+            if (node == -1) {
+                std::array<DataType, n_basis> vals_ptr;
+                Span1D<DataType> values(vals_ptr.data(), n_basis);
+                calculate_values_between_nodes(values, x, poly_start, weights);
+
+                std::array<int, n_basis> combinations;
+
+                // For each basis element
+                for (std::size_t j(0); j < n_basis; ++j) {
+                    derivs(j, 0) = values(j);
+                    for (std::size_t n(1); n < n_derivs + 1; ++n) {
+                        DataType factor = 0;
+                        combinations[0] = -1;
+                        for (std::size_t i(1); i < n; ++i) {
+                            combinations[i] = 0;
+                        }
+                        int i = 0;
+                        while (i > -1) {
+                            combinations[i] += 1;
+                            combinations[i] += static_cast<int>(combinations[i] == j);
+                            for (std::size_t k(i + 1); k < n; ++k) {
+                                combinations[k] = combinations[k - 1] + 1;
+                                combinations[k] += static_cast<int>(combinations[k] == j);
+                            }
+                            i = n - 1;
+                            DataType divisor(1);
+                            for (std::size_t k(0); k < n; ++k) {
+                                divisor *= (x - ddc::coordinate(poly_start + combinations[k]));
+                            }
+                            factor += 1.0 / divisor;
+                            int max_val_along_dim = i + n_basis - n;
+                            max_val_along_dim -= static_cast<int>(max_val_along_dim <= j);
+                            while (i > -1 and combinations[i] == max_val_along_dim) {
+                                i--;
+                                max_val_along_dim = i + n_basis - n;
+                                max_val_along_dim -= static_cast<int>(max_val_along_dim <= j);
+                            }
+                        }
+                        derivs(j, n) = values(j) * factor * factorial(n);
+                    }
+                }
+            } else {
+                DataType xi = ddc::coordinate(poly_start + node);
+                for (std::size_t j(0); j < n_basis; ++j) {
+                    derivs(j, 0) = static_cast<int>(j == node);
+                    DataType xj = ddc::coordinate(poly_start + j);
+                    if (j == node)
+                        continue;
+                    for (std::size_t n(1); n < n_derivs + 1; ++n) {
+                        // \partial^nl_j(x_i) = n!/wi [ (-1)^(n+1) wj/(xi-xj)^n
+                        //                      - \sum_k=1^{n-1}\sum_{p\ne i} (-1)^(n+1-k)
+                        //                                       wp \partial^k l_j(x_i) / k! / (xi-xp)^n ]
+                        derivs(j, n) = neg_1_pow(n + 1) * weights[j] / Kokkos::pow(xi - xj, n);
+                        for (std::size_t p(0); p < n_basis; ++p) {
+                            if (p == node)
+                                continue;
+                            DataType xp = ddc::coordinate(poly_start + p);
+                            for (std::size_t k(1); k < n; ++k) {
+                                derivs(j, n) -= neg_1_pow(n + 1 - k) * weights[p] * derivs(j, k)
+                                                / factorial(k) / ipow(xi - xp, n - k);
+                            }
+                        }
+                        derivs(j, n) *= factorial(n) / weights[node];
+                    }
+                }
+                for (std::size_t n(1); n < n_derivs + 1; ++n) {
+                    derivs(node, n) = 0;
+                    for (std::size_t j(0); j < n_basis; ++j) {
+                        if (j == node)
+                            continue;
+                        derivs(node, n) -= derivs(j, n);
+                    }
+                }
+            }
+        }
+
+    private:
+        /**
+         * Check if x is found at a node.
+         * @param[in] x The coordinate.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         * @returns The node at which x is found.
+         */
+        KOKKOS_INLINE_FUNCTION static int check_if_node(
+                coord_type const& x,
+                Idx<knot_grid> poly_start)
+        {
             DataType eps = Kokkos::Experimental::epsilon_v<DataType> * 4;
             for (std::size_t i(0); i < D + 1; ++i) {
                 if (Kokkos::fabs(x - ddc::coordinate(poly_start + i)) < eps) {
-                    for (int j(0); j < D + 1; ++j) {
-                        values(j) = static_cast<int>(j == i);
-                    }
-                    return;
+                    return i;
                 }
             }
+            return -1;
+        }
+
+        /// Get the weights for the selected knots
+        KOKKOS_INLINE_FUNCTION static std::array<DataType, D + 1> get_weights(
+                Idx<knot_grid> poly_start)
+        {
             std::array<DataType, D + 1> weights;
             for (std::size_t i(0); i < D + 1; ++i) {
+                DataType xi = ddc::coordinate(poly_start + i);
                 DataType numerator = 1;
                 for (std::size_t j(0); j < D + 1; ++j) {
                     if (i == j)
                         continue;
-                    numerator
-                            *= (ddc::coordinate(poly_start + i) - ddc::coordinate(poly_start + j));
+                    DataType xj = ddc::coordinate(poly_start + j);
+                    numerator *= (xi - xj);
                 }
                 weights[i] = 1.0 / numerator;
             }
+            return weights;
+        }
+
+        /**
+         * Calculate the Lagrange polynomial for @f$ x \ne x_j \forall j @f$
+         *
+         * @param[out] values The values of each basis at the coordinate x.
+         * @param[in] x The coordinate.
+         * @param[in] poly_start The index of the first of the d+1 knots describing
+         *                       the set of bases to be evaluated.
+         * @param[in] weights The weights for the relevant knots.
+         */
+        KOKKOS_INLINE_FUNCTION static void calculate_values_between_nodes(
+                Span1D<DataType> values,
+                coord_type const& x,
+                Idx<knot_grid> poly_start,
+                std::array<DataType, D + 1> const& weights)
+        {
             for (int i(0); i < D + 1; ++i) {
                 DataType numerator = weights[i] / (x - ddc::coordinate(poly_start + i));
                 DataType denominator(0.0);

@@ -32,7 +32,3 @@ The spline interpolation method is based entirely on the SplineBuilder and Splin
 ### Polar Spline Interpolation
 
 There is no method to construct a polar spline from the values of a function. It should be possible to construct such a `PolarSplineBuilder`, but it is not clear where the interpolation points should be placed near the O-point in order to obtain a well-conditioned problem. The B-splines, splines and the spline evaluator for the polar splines can be found in the sub-folder [polar\_splines](./polar_splines/README.md).
-
-## Memory concerns
-
-SplineInterpolator contains a 1D array of spline coefficients. These are unused in most of the code but are used repeatedly in advections. As a result the class PreallocatableSplineInterpolator exists (which inherits from the more general IPreallocatableInterpolator). This class allows a SplineInterpolator to be allocated locally. It is stored in an InterpolatorProxy which means it is deallocated once it goes out of scope. This ensures that the 1D array is not occupying memory during the execution of the rest of the code, but also that the array is only allocated once in each advection operator.

@@ -14,7 +14,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     - if: github.repository == 'gyselax/gyselalibxx' && inputs.status == 'success'
       run: |
         STATES=$(gh pr checks ${{ inputs.pr_number }} --required --json state || true)

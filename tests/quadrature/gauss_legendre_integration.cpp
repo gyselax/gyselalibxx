@@ -43,7 +43,7 @@ TYPED_TEST_SUITE(GaussLegendreFixture, Cases);
 class fn
 {
 public:
-    constexpr fn(std::size_t n) : m_n(n) {}
+    constexpr explicit fn(std::size_t n) : m_n(n) {}
 
     template <class Grid1D>
     KOKKOS_FUNCTION double operator()(Idx<Grid1D> idx) const noexcept

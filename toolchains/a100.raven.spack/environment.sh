@@ -17,15 +17,17 @@ export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
 export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
 . $HOME/spack/share/spack/setup-env.sh
 
+spack --env gyselalibxx-spack-environment repo update
+
 eval -- "$(
     spack \
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
+        ddc \
         ginkgo \
         googletest \
         kokkos \
-        kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
         koliop \
@@ -37,6 +39,7 @@ eval -- "$(
         pdiplugin-decl-hdf5 \
         pdiplugin-decl-netcdf \
         pdiplugin-mpi \
+        pdiplugin-pycall \
         pdiplugin-set-value \
         pdiplugin-trace \
         python \
@@ -46,15 +49,13 @@ eval -- "$(
         py-matplotlib \
         py-netcdf4 \
         py-numpy \
+        py-pyyaml \
         py-scipy \
         py-sympy \
-        py-xarray \
-        py-pyyaml
+        py-xarray
 )"
 
 module load gcc/14
 
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
-
-export GYSELALIBXX_OPENBLAS_ROOT="$(spack location -i openblas)"

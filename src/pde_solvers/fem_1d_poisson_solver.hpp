@@ -240,7 +240,8 @@ public:
         IdxRangeBatchedFEMBSplines phi_coefs_idx_range(
                 idx_range_batch,
                 ddc::discrete_space<FEMBSplines>().full_domain());
-        BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
+        BatchedFEMBSplinesCoeffMem
+                phi_coefs_alloc("phi_coefs (FEM1DPoissonSolver::operator())", phi_coefs_idx_range);
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
@@ -267,7 +268,8 @@ public:
         IdxRangeBatchedFEMBSplines phi_coefs_idx_range(
                 idx_range_batch,
                 ddc::discrete_space<FEMBSplines>().full_domain());
-        BatchedFEMBSplinesCoeffMem phi_coefs_alloc(phi_coefs_idx_range);
+        BatchedFEMBSplinesCoeffMem
+                phi_coefs_alloc("phi_coefs (FEM1DPoissonSolver::operator())", phi_coefs_idx_range);
         BatchedFEMBSplinesCoeff phi_coefs(phi_coefs_alloc);
         solve_matrix_system(phi_coefs, rho);
 
@@ -410,7 +412,9 @@ public:
         IdxRangeBatchedBSplines rho_spline_coef_idx_range(
                 batch_idx_range_type(get_idx_range(rho)),
                 get_spline_idx_range(m_spline_builder));
-        RHSSplineCoeffMem rho_spline_coef_alloc(rho_spline_coef_idx_range);
+        RHSSplineCoeffMem rho_spline_coef_alloc(
+                "phi_coefs (FEM1DPoissonSolver::solve_matrix_system)",
+                rho_spline_coef_idx_range);
         RHSSplineCoeff rho_spline_coef(rho_spline_coef_alloc);
         m_spline_builder(rho_spline_coef, get_const_field(rho));
 
@@ -535,6 +539,7 @@ private:
         IdxRange<break_point_grid> break_point_idx_range
                 = ddc::discrete_space<InputBSplines>().break_point_domain();
         host_t<FieldMem<CoordPDEDim, IdxRange<break_point_grid>>> break_points_alloc(
+                "break_points (FEM1DPoissonSolver::build_matrix)",
                 break_point_idx_range);
         ddcHelper::dump_coordinates(
                 Kokkos::DefaultHostExecutionSpace(),

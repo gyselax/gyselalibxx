@@ -5,7 +5,7 @@
 # "CIRCULAR_MAPPING" "CZARNY_MAPPING_PHYSICAL" "CZARNY_MAPPING_PSEUDO_CARTESIAN" "DISCRETE_MAPPING"     #
 # "REFINED_DISCRETE_MAPPING"                                                                            #
 #                                                                                                       #
-# All possiibilities for TIME_METHOD:                                                                   #
+# All possibilities for TIME_METHOD:                                                                    #
 # "EULER_METHOD" "CRANK_NICOLSON_METHOD" "RK3_METHOD" "RK4_METHOD"                                      #
 #                                                                                                       #
 # All possibilities for SIMULATION:                                                                     #

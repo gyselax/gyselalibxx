@@ -107,11 +107,11 @@ public:
                 "MemorySpace has to be accessible for ExecutionSpace.");
         using element_type = typename DerivField::element_type;
 
-        FieldMem y_init_alloc(m_idx_range);
-        FieldMem y_old_alloc(m_idx_range);
-        DerivFieldMem k1_alloc(m_idx_range);
-        DerivFieldMem k_new_alloc(m_idx_range);
-        DerivFieldMem k_total_alloc(m_idx_range);
+        FieldMem y_init_alloc("y_init (CrankNicholson::update)", m_idx_range);
+        FieldMem y_old_alloc("y_old (CrankNicholson::update)", m_idx_range);
+        DerivFieldMem k1_alloc("k1 (CrankNicholson::update)", m_idx_range);
+        DerivFieldMem k_new_alloc("k_new (CrankNicholson::update)", m_idx_range);
+        DerivFieldMem k_total_alloc("k_total (CrankNicholson::update)", m_idx_range);
         ValField y_init = get_field(y_init_alloc);
         ValField y_old = get_field(y_old_alloc);
         DerivField k1 = get_field(k1_alloc);

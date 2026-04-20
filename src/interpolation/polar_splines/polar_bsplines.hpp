@@ -10,7 +10,7 @@
 #include "cartesian_to_barycentric.hpp"
 #include "coord_transformation_tools.hpp"
 #include "ddc_helper.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
 #include "view.hpp"
 
 namespace PolarSplines {
@@ -302,12 +302,22 @@ public:
          *                                  the new basis splines which cross the singular point.
          */
         template <class X, class Y, class SplineEvaluator, class EvalMemorySpace>
-        explicit Impl(const DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, EvalMemorySpace>&
-                              curvilinear_to_cartesian)
+        explicit Impl(const DiscretePoloidalCSSplineMapping<
+                      X,
+                      Y,
+                      SplineEvaluator,
+                      R,
+                      Theta,
+                      EvalMemorySpace>& curvilinear_to_cartesian)
         {
             static_assert(std::is_same_v<MemorySpace, Kokkos::HostSpace>);
-            using DiscreteMapping
-                    = DiscreteToCartesian<X, Y, SplineEvaluator, R, Theta, EvalMemorySpace>;
+            using DiscreteMapping = DiscretePoloidalCSSplineMapping<
+                    X,
+                    Y,
+                    SplineEvaluator,
+                    R,
+                    Theta,
+                    EvalMemorySpace>;
             static_assert(std::is_same_v<typename DiscreteMapping::BSplineR, BSplinesR>);
             static_assert(std::is_same_v<typename DiscreteMapping::BSplineTheta, BSplinesTheta>);
             using EvalExecSpace = std::conditional_t<
@@ -444,7 +454,9 @@ public:
          */
         template <class OriginMemorySpace>
         explicit Impl(Impl<DDim, OriginMemorySpace> const& impl)
-            : m_singular_basis_elements_alloc(get_idx_range(impl.m_singular_basis_elements))
+            : m_singular_basis_elements_alloc(
+                    "m_singular_basis_elements (PolarBSplines::Impl)",
+                    get_idx_range(impl.m_singular_basis_elements))
         {
             m_singular_basis_elements = get_field(m_singular_basis_elements_alloc);
             ddc::parallel_deepcopy(m_singular_basis_elements, impl.m_singular_basis_elements);
@@ -769,8 +781,10 @@ DField<IdxRange<DDim>, MemorySpace> integrals(
     assert(get_idx_range(int_vals) == ddc::discrete_space<DDim>().full_domain());
 
     DFieldMem<IdxRange<BSplinesR>, MemorySpace> r_integrals_alloc(
+            "r_integrals (PolarSplines::integrals)",
             r_bspl_space.full_domain().take_first(IdxStep<BSplinesR> {r_bspl_space.nbasis()}));
     DFieldMem<IdxRange<BSplinesTheta>, MemorySpace> theta_integrals_alloc(
+            "theta_integrals (PolarSplines::integrals)",
             theta_bspl_space.full_domain().take_first(
                     IdxStep<BSplinesTheta> {theta_bspl_space.size()}));
     DField<IdxRange<BSplinesR>, MemorySpace> r_integrals = get_field(r_integrals_alloc);

@@ -102,11 +102,15 @@ using uniformity = std::integer_sequence<bool, true, false>;
 using Cases = tuple_to_types_t<cartesian_product_t<degrees, std::tuple<double, float>, uniformity>>;
 
 template <class X, class DataType, std::size_t N>
-DataType polynomial(Coord<X> coord, std::array<DataType, N> coeffs)
+DataType polynomial(Coord<X> coord, std::array<DataType, N> coeffs, int n_deriv = 0)
 {
     DataType result = 0.0;
-    for (int j(0); j < N; ++j) {
-        result += coeffs[j] * std::pow(coord, j);
+    for (int j(n_deriv); j < N; ++j) {
+        int falling_factorial(1);
+        for (int k(0); k < n_deriv; ++k) {
+            falling_factorial *= (j - k);
+        }
+        result += falling_factorial * coeffs[j] * std::pow(coord, j - n_deriv);
     }
     return result;
 }
@@ -142,7 +146,7 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
     static constexpr double TOL = TestFixture::TOL;
 
     Coord<X> xmin(0);
-    Coord<X> xmax(2);
+    Coord<X> xmax(1);
     std::size_t ncells(10);
     if constexpr (TestFixture::UNIFORM) {
         ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
@@ -192,6 +196,8 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
     ConstField<Coord<X>, IdxRange<GridX>> test_coords = get_const_field(test_coords_alloc);
 
     builder(lagrange_coeffs, get_const_field(function_values));
+
+    // Check between knots
     evaluator(function_values, get_const_field(test_coords), get_const_field(lagrange_coeffs));
 
     ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
@@ -202,10 +208,70 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
                 polynomial(test_coords_host_alloc(idx), coeffs),
                 TOL);
     });
+
+    // Check at knots
+    evaluator(function_values, get_const_field(lagrange_coeffs));
+
+    ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
+
+    ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
+        EXPECT_NEAR(function_values_host(idx), polynomial(ddc::coordinate(idx), coeffs), TOL);
+    });
+
+    double dx_max = ddcHelper::maximum_distance_between_adjacent_points(idx_range);
+
+    for (int n_deriv(1); n_deriv < degree; ++n_deriv) {
+        // Check between knots
+        evaluator
+                .deriv(Idx<ddc::Deriv<X>>(n_deriv),
+                       function_values,
+                       get_const_field(test_coords),
+                       get_const_field(lagrange_coeffs));
+
+        ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
+
+        int falling_factorial(1);
+        for (int k(0); k < n_deriv; ++k) {
+            falling_factorial *= (degree + 1 - k);
+        }
+
+        ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
+            double tolerance = factorial(n_deriv) // max_norm
+                               * TOL
+                               * ((degree + 1) * n_deriv) // approx max of number of calculations
+                               / ipow(dx_max, n_deriv);
+            EXPECT_NEAR(
+                    function_values_host(idx),
+                    polynomial(test_coords_host_alloc(idx), coeffs, n_deriv),
+                    tolerance);
+        });
+
+        // Check at knots
+        evaluator
+                .deriv(Idx<ddc::Deriv<X>>(n_deriv),
+                       function_values,
+                       get_const_field(lagrange_coeffs));
+
+        ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
+
+        ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
+            double tolerance = factorial(n_deriv) // max_norm
+                               * TOL
+                               * ((degree + 1) * n_deriv) // approx max of number of calculations
+                               / ipow(dx_max, n_deriv);
+            EXPECT_NEAR(
+                    function_values_host(idx),
+                    polynomial(ddc::coordinate(idx), coeffs, n_deriv),
+                    tolerance);
+        });
+    }
 }
 
 template <class DataType, class LagBasis, class GridType, class TestGridType>
-DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> test_idx_range)
+DataType get_cosine_error(
+        IdxRange<GridType> idx_range,
+        IdxRange<TestGridType> test_idx_range,
+        Idx<ddc::Deriv<typename GridType::continuous_dimension_type>> deriv_order)
 {
     using Dim = typename GridType::continuous_dimension_type;
     using Builder = IdentityInterpolationBuilder<
@@ -247,13 +313,14 @@ DataType get_cosine_error(IdxRange<GridType> idx_range, IdxRange<TestGridType> t
 
     FieldMem<DataType, IdxRange<TestGridType>> values_at_test_points_alloc(test_idx_range);
     Field<DataType, IdxRange<TestGridType>> values_at_test_points(values_at_test_points_alloc);
-    evaluator(values_at_test_points, get_const_field(lagrange_coeffs));
+    evaluator.deriv(deriv_order, values_at_test_points, get_const_field(lagrange_coeffs));
 
     return error_norm_inf(
             Kokkos::DefaultExecutionSpace(),
             get_const_field(values_at_test_points),
             KOKKOS_LAMBDA(Idx<TestGridType> idx) {
-                return static_cast<DataType>(Kokkos::cos(ddc::coordinate(idx)));
+                return static_cast<DataType>(Kokkos::cos(
+                        0.5 * Kokkos::numbers::pi * deriv_order.uid() + ddc::coordinate(idx)));
             });
 }
 
@@ -298,19 +365,26 @@ TYPED_TEST(LagrangePeriodicEvaluatorFixture, Convergence)
 
     IdxRange<TestGrid> test_idx_range(Idx<TestGrid>(0), IdxStep<TestGrid>(6 * ncells));
 
-    DataType cosine_error = get_cosine_error<DataType, LagBasis>(
-            idx_range.remove_last(IdxStep<GridY>(1)), // Remove repeat periodic point
-            test_idx_range);
-    DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(
-            refined_idx_range.remove_last(IdxStep<RefinedGridY>(1)), // Remove repeat periodic point
-            test_idx_range);
+    for (int n_deriv(0); n_deriv < degree; ++n_deriv) {
+        Idx<ddc::Deriv<Y>> deriv_order(n_deriv);
+        DataType cosine_error = get_cosine_error<DataType, LagBasis>(
+                idx_range.remove_last(IdxStep<GridY>(1)), // Remove repeat periodic point
+                test_idx_range,
+                deriv_order);
+        DataType refined_cosine_error = get_cosine_error<DataType, RefinedLagBasis>(
+                refined_idx_range.remove_last(
+                        IdxStep<RefinedGridY>(1)), // Remove repeat periodic point
+                test_idx_range,
+                deriv_order);
 
-    DataType order = std::log(cosine_error / refined_cosine_error) / std::log(2.0);
+        DataType order = std::log(cosine_error / refined_cosine_error) / std::log(2.0);
 
-    std::cout << cosine_error << " " << refined_cosine_error << " " << order << std::endl;
-    if constexpr (TestFixture::UNIFORM) {
-        EXPECT_NEAR(order, degree + 1, 0.5);
-    } else {
-        EXPECT_GT(order, degree);
+        std::cout << "Derivative " << n_deriv << " : " << cosine_error << " "
+                  << refined_cosine_error << " " << order << std::endl;
+        if constexpr (TestFixture::UNIFORM) {
+            EXPECT_NEAR(order, degree + 1 - n_deriv, 0.5);
+        } else {
+            EXPECT_GT(order, degree - n_deriv);
+        }
     }
 }

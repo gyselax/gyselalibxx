@@ -20,7 +20,7 @@ DFieldSpVxVy MaxwellianEquilibrium::operator()(DFieldSpVxVy const allfequilibriu
     IdxRangeVxVy const gridvxvy = get_idx_range<GridVx, GridVy>(allfequilibrium);
 
     // Initialisation of the maxwellian
-    DFieldMemVxVy maxwellian_alloc(gridvxvy);
+    DFieldMemVxVy maxwellian_alloc("maxwellian (MaxwellianEquilibrium::operator())", gridvxvy);
     DFieldVxVy maxwellian = get_field(maxwellian_alloc);
     ddc::host_for_each(gridsp, [&](IdxSp const isp) {
         compute_maxwellian(

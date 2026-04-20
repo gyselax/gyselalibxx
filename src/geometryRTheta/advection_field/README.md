@@ -152,7 +152,7 @@ In 2D with $`(q_1, q_2) = (r,\theta)`$ and $`(x_1, x_2) = (x,y)`$, it can be rew
 = \partial_r f e^r + \partial_\theta f e^\theta
 ```
 
-With the composants linked by the following relation,
+With the components linked by the following relation,
 
 ```math
 \begin{bmatrix}

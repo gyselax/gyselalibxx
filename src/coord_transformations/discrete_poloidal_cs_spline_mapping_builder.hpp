@@ -6,10 +6,10 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
-#include "discrete_to_cartesian.hpp"
+#include "discrete_poloidal_cs_spline_mapping.hpp"
 
 /**
- * @brief A class to create a DiscreteToCartesian instance from an analytical mapping.
+ * @brief A class to create a DiscretePoloidalCSSplineMapping instance from an analytical mapping.
  * This class creates and stores splines memory spaces describing the analytical mapping.
  * The discrete mapping is then created using the splines without copying data.
  *
@@ -19,7 +19,7 @@
  * @tparam SplineEvaluator An operator for evaluating a spline.
  */
 template <class X, class Y, class SplineBuilder, class SplineEvaluator>
-class DiscreteToCartesianBuilder
+class DiscretePoloidalCSSplineMappingBuilder
 {
     static_assert(
             ddc::is_evaluator_admissible_v<SplineBuilder, SplineEvaluator>,
@@ -33,7 +33,7 @@ class DiscreteToCartesianBuilder
 
 public:
     /// The type of the mapping that will be created.
-    using MappingType = DiscreteToCartesian<X, Y, SplineEvaluator>;
+    using MappingType = DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator>;
 
 private:
     using ExecSpace = typename SplineBuilder::exec_space;
@@ -65,7 +65,7 @@ private:
 
 public:
     /**
-     * @brief Create an instance of the class capable of providing a DiscreteToCartesian class instance.
+     * @brief Create an instance of the class capable of providing a DiscretePoloidalCSSplineMapping class instance.
      *
      * @param[in] exec_space The execution space where this class runs any for loops.
      * @param[in] analytical_mapping The analytical mapping to be described by this discrete mapping.
@@ -73,19 +73,29 @@ public:
      * @param[in] evaluator A spline evaluator to be used to evaluate a spline approximating the analytical mapping.
      */
     template <class Mapping>
-    DiscreteToCartesianBuilder(
+    DiscretePoloidalCSSplineMappingBuilder(
             ExecSpace exec_space,
             Mapping const& analytical_mapping,
             SplineBuilder const& builder,
             SplineEvaluator const& evaluator)
-        : m_curvilinear_to_x_spline_alloc(get_spline_idx_range(builder))
-        , m_curvilinear_to_y_spline_alloc(get_spline_idx_range(builder))
+        : m_curvilinear_to_x_spline_alloc(
+                "m_curvilinear_to_x_spline "
+                "(DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                get_spline_idx_range(builder))
+        , m_curvilinear_to_y_spline_alloc(
+                  "m_curvilinear_to_y_spline "
+                  "(DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                  get_spline_idx_range(builder))
         , m_evaluator(evaluator)
     {
         SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
         SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
-        InterpolationFieldMem curvilinear_to_x_vals_alloc(builder.interpolation_domain());
-        InterpolationFieldMem curvilinear_to_y_vals_alloc(builder.interpolation_domain());
+        InterpolationFieldMem curvilinear_to_x_vals_alloc(
+                "curvilinear_to_x_vals (DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                builder.interpolation_domain());
+        InterpolationFieldMem curvilinear_to_y_vals_alloc(
+                "curvilinear_to_y_vals (DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                builder.interpolation_domain());
         InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);
         InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);
 
@@ -105,13 +115,13 @@ public:
     }
 
     /**
-     * @brief Get a DiscreteToCartesian class instance.
+     * @brief Get a DiscretePoloidalCSSplineMapping class instance.
      *
      * @return An instance of the mapping.
      */
-    DiscreteToCartesian<X, Y, SplineEvaluator> operator()() const
+    DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator> operator()() const
     {
-        return DiscreteToCartesian<X, Y, SplineEvaluator>(
+        return DiscretePoloidalCSSplineMapping<X, Y, SplineEvaluator>(
                 get_const_field(m_curvilinear_to_x_spline_alloc),
                 get_const_field(m_curvilinear_to_y_spline_alloc),
                 m_evaluator,
@@ -157,7 +167,7 @@ public:
 };
 
 /**
- * @brief A class to create a DiscreteToCartesian instance from an analytical mapping.
+ * @brief A class to create a DiscretePoloidalCSSplineMapping instance from an analytical mapping.
  * This class creates an instance which uses more refined splines than the provided builder and
  * evaluator.
  * This class creates and stores splines memory spaces describing the analytical mapping.
@@ -177,7 +187,7 @@ template <
         class SplineEvaluator,
         int ncells_r,
         int ncells_theta>
-class RefinedDiscreteToCartesianBuilder
+class RefinedDiscretePoloidalCSSplineMappingBuilder
 {
     static_assert(std::is_same_v<
                   typename SplineBuilder::memory_space,
@@ -305,7 +315,7 @@ private:
 
 public:
     /// The type of the mapping that will be created.
-    using MappingType = DiscreteToCartesian<X, Y, RefinedSplineEvaluator>;
+    using MappingType = DiscretePoloidalCSSplineMapping<X, Y, RefinedSplineEvaluator>;
 
 private:
     SplineCoeffsMem m_curvilinear_to_x_spline_alloc;
@@ -315,7 +325,7 @@ private:
 
 public:
     /**
-     * @brief Create an instance of the class capable of providing a DiscreteToCartesian class instance.
+     * @brief Create an instance of the class capable of providing a DiscretePoloidalCSSplineMapping class instance.
      *
      * @param[in] exec_space The execution space where this class runs any for loops.
      * @param[in] analytical_mapping The analytical mapping to be described by this discrete mapping.
@@ -323,7 +333,7 @@ public:
      * @param[in] evaluator A spline evaluator to be used to evaluate a spline approximating the analytical mapping.
      */
     template <class Mapping>
-    RefinedDiscreteToCartesianBuilder(
+    RefinedDiscretePoloidalCSSplineMappingBuilder(
             ExecSpace exec_space,
             Mapping const& analytical_mapping,
             SplineBuilder const& builder,
@@ -396,8 +406,14 @@ public:
         m_curvilinear_to_y_spline_alloc = SplineCoeffsMem(spline_domain);
         SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
         SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
-        InterpolationFieldMem curvilinear_to_x_vals_alloc(refined_domain);
-        InterpolationFieldMem curvilinear_to_y_vals_alloc(refined_domain);
+        InterpolationFieldMem curvilinear_to_x_vals_alloc(
+                "curvilinear_to_x_vals "
+                "(RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder)",
+                refined_domain);
+        InterpolationFieldMem curvilinear_to_y_vals_alloc(
+                "curvilinear_to_y_vals "
+                "(RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder)",
+                refined_domain);
         InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);
         InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);
 
@@ -412,13 +428,13 @@ public:
     }
 
     /**
-     * @brief Get a DiscreteToCartesian class instance.
+     * @brief Get a DiscretePoloidalCSSplineMapping class instance.
      *
      * @return An instance of the mapping.
      */
-    DiscreteToCartesian<X, Y, RefinedSplineEvaluator> operator()() const
+    DiscretePoloidalCSSplineMapping<X, Y, RefinedSplineEvaluator> operator()() const
     {
-        return DiscreteToCartesian<X, Y, RefinedSplineEvaluator>(
+        return DiscretePoloidalCSSplineMapping<X, Y, RefinedSplineEvaluator>(
                 get_const_field(m_curvilinear_to_x_spline_alloc),
                 get_const_field(m_curvilinear_to_y_spline_alloc),
                 m_evaluator,
