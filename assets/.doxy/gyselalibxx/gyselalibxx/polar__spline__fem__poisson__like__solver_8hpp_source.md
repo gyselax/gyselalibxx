@@ -108,7 +108,9 @@ private:
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
     //using FieldMemCoeffsSpline2D = DFieldMem<typename InterpolationEvaluatorTraits<
-    //        EvaluatorType>::template batched_coeff_idx_range_type<IdxRangeFull>>;DConstField<
+    //        EvaluatorType>::template batched_coeff_idx_range_type<IdxRangeFull>>;
+    using ConstFieldCoeffsSpline2D = DConstField<
+            typename EvaluatorType::template batched_spline_domain_type<IdxRangeFull>>;
     using FieldMemCoeffsSpline2D
             = DFieldMem<typename EvaluatorType::template batched_spline_domain_type<IdxRangeFull>>;
     using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
@@ -266,8 +268,10 @@ public:
         m_builder(get_field(coeff_alpha_alloc), alpha);
         m_builder(get_field(coeff_beta_alloc), beta);
 
-        CoeffEvaluator alpha_func(m_evaluator, get_const_field(coeff_alpha_alloc));
-        CoeffEvaluator beta_func(m_evaluator, get_const_field(coeff_beta_alloc));
+        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
+                alpha_func(m_evaluator, get_const_field(coeff_alpha_alloc));
+        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
+                beta_func(m_evaluator, get_const_field(coeff_beta_alloc));
         m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
     }
 
@@ -433,7 +437,8 @@ public:
     {
         FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
         m_builder(get_field(rhs_alloc), rhs);
-        CoeffEvaluator rhs_func(m_evaluator, get_const_field(rhs_alloc));
+        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
+                rhs_func(m_evaluator, get_const_field(rhs_alloc));
 
         (*this)(phi, rhs_func);
     }

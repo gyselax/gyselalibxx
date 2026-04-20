@@ -2592,6 +2592,7 @@
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a71ae660a985f06dd52586a6ddbd124fc" kind="typedef"><name>IdxQuadratureRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a79dbd397d14121c1611def3494db5c6d" kind="typedef"><name>IdxStepQuadratureR</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1ac93e870d28effc5608008ef9cb31f665" kind="typedef"><name>IdxStepQuadratureTheta</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1a01b712ddbbfe6cf5713a189f471ae3b0" kind="typedef"><name>ConstFieldCoeffsSpline2D</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1af203ac64379ce64eec39f1ffc6f114ca" kind="typedef"><name>FieldMemCoeffsSpline2D</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a82a454804a2fd0f239a1e71d8ea1a721" kind="typedef"><name>PolarSplineMemRTheta</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1a20ad1349d259e0508123d0585493884f" kind="typedef"><name>PolarSplineRTheta</name></member>
