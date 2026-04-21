@@ -114,6 +114,7 @@ private:
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeFunction>;
     using FunctionBasisFieldMem = FieldMem<DataType, IdxRangeFunctionBasis>;
+    using FunctionBasisConstField = ConstField<DataType, IdxRangeFunctionBasis>;
 
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
@@ -337,6 +338,8 @@ public:
                 std::optional(get_const_field(function_derivatives_min)),
                 std::optional(get_const_field(function_derivatives_max)));
 
+        FunctionBasisConstField function_coefs = get_const_field(function_coefs_alloc);
+
         FunctionEvaluator const& function_evaluator_proxy = m_function_evaluator;
         // Evaluate the function at the characteristic feet
         ddc::parallel_for_each(
@@ -345,10 +348,8 @@ public:
                 idx_range_function,
                 KOKKOS_LAMBDA(IdxFunction const idx) {
                     IdxAdvection slice_foot_index(idx);
-                    function_evaluator_proxy(
-                            allfdistribu,
-                            slice_feet(slice_foot_index),
-                            get_const_field(function_coefs_alloc));
+                    CoordInterest coord = slice_feet(slice_foot_index);
+                    allfdistribu(idx) = function_evaluator_proxy(coord, function_coefs);
                 });
 
 
