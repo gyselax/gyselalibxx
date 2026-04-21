@@ -192,6 +192,13 @@ private:
 
 
 public:
+    /**
+     * @brief Construct a GMGPolarPoissonLikeSolver.
+     *
+     * @param[in] to_physical The mapping from the logical to the physical domain.
+     * @param[in] builder A builder to construct the coefficients of the interpolation.
+     * @param[in] evaluator The evaluator for the interpolation.
+     */
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
             SplineBuilder_host const& builder,
