@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add more labels to memory allocations.
 - Add a `NDIdentityInterpolationBuilder` class.
 - Add a new abstract class `IPolarPoissonLikeSolver`.
+- Add class `GMGPolarPoissonLikeSolver` to allow the use of [GMGPolar](https://github.com/SciCompMod/GMGPolar) as a polar Poisson solver.
 
 ### Fixed
 
