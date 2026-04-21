@@ -1411,14 +1411,18 @@ public:
 
         MetricTensorEvaluator&lt;Mapping, Coord&lt;R, Theta&gt;&gt; get_metric_tensor(mapping);
 
+        using Spatial2DVectorSpace = VectorIndexSet&lt;R, Theta&gt;;
+
         Tensor inv_metric_tensor = get_metric_tensor.inverse(coord);
+        DTensor&lt;Spatial2DVectorSpace, Spatial2DVectorSpace&gt; inv_metric_tensor_2d;
+        ddcHelper::assign_elements(inv_metric_tensor_2d, inv_metric_tensor);
 
         // Assemble the weak integral element
         return int_volume(idx_quad)
                * (alpha
                           * tensor_mul(
                                   index&lt;'i'&gt;(basis_derivs_test_space),
-                                  index&lt;'i', 'j'&gt;(inv_metric_tensor),
+                                  index&lt;'i', 'j'&gt;(inv_metric_tensor_2d),
                                   index&lt;'j'&gt;(basis_derivs_trial_space))
                   + beta * basis_val_test_space * basis_val_trial_space);
     }

@@ -719,7 +719,7 @@ template &lt;
         class... OutputValidIndexSet,
         class... InputValidIndexSet,
         std::size_t... InternalIdx&gt;
-KOKKOS_INLINE_FUNCTION void assign_elements(
+KOKKOS_INLINE_FUNCTION void assign_elements_from_subset(
         TensorCommon&lt;OutputStorageType, OutputValidIndexSet...&gt;&amp; tensor_to_fill,
         TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt; const&amp; tensor_input,
         std::index_sequence&lt;InternalIdx...&gt;)
@@ -732,6 +732,28 @@ KOKKOS_INLINE_FUNCTION void assign_elements(
                       InputTensorIndexSet&gt;::IdxTypeSeq&gt;&gt;()
       = tensor_input.template get&lt;
               tensor_tools::get_nth_tensor_index_element_t&lt;InternalIdx, InputTensorIndexSet&gt;&gt;()),
+     ...);
+}
+
+template &lt;
+        class InputStorageType,
+        class OutputStorageType,
+        class... OutputValidIndexSet,
+        class... InputValidIndexSet,
+        std::size_t... InternalIdx&gt;
+KOKKOS_INLINE_FUNCTION void assign_elements_to_subset(
+        TensorCommon&lt;OutputStorageType, OutputValidIndexSet...&gt;&amp; tensor_to_fill,
+        TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt; const&amp; tensor_input,
+        std::index_sequence&lt;InternalIdx...&gt;)
+{
+    using OutputTensorIndexSet = ddc::detail::TypeSeq&lt;OutputValidIndexSet...&gt;;
+    ((tensor_to_fill.template get&lt;tensor_tools::to_tensor_index_element_t&lt;
+              ddc::detail::TypeSeq&lt;OutputValidIndexSet...&gt;,
+              typename tensor_tools::get_nth_tensor_index_element_t&lt;
+                      InternalIdx,
+                      OutputTensorIndexSet&gt;::IdxTypeSeq&gt;&gt;()
+      = tensor_input.template get&lt;
+              tensor_tools::get_nth_tensor_index_element_t&lt;InternalIdx, OutputTensorIndexSet&gt;&gt;()),
      ...);
 }
 } // namespace detail
@@ -772,11 +794,21 @@ KOKKOS_INLINE_FUNCTION void assign_elements(
         TensorCommon&lt;OutputStorageType, OutputValidIndexSet...&gt;&amp; tensor_to_fill,
         TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt; const&amp; tensor_input)
 {
-    detail::assign_elements(
-            tensor_to_fill,
-            tensor_input,
-            std::make_index_sequence&lt;
-                    TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt;::size()&gt;());
+    constexpr std::size_t n_input_elements
+            = TensorCommon&lt;InputStorageType, InputValidIndexSet...&gt;::size();
+    constexpr std::size_t n_output_elements
+            = TensorCommon&lt;OutputStorageType, OutputValidIndexSet...&gt;::size();
+    if constexpr (n_input_elements &lt; n_output_elements) {
+        detail::assign_elements_from_subset(
+                tensor_to_fill,
+                tensor_input,
+                std::make_index_sequence&lt;n_input_elements&gt;());
+    } else {
+        detail::assign_elements_to_subset(
+                tensor_to_fill,
+                tensor_input,
+                std::make_index_sequence&lt;n_output_elements&gt;());
+    }
 }
 
 } // namespace ddcHelper
