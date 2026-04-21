@@ -2,7 +2,7 @@ spack:
   definitions:
   - packages:
     - cmake
-    - ginkgo@1.9 ~openmp +rocm amdgpu_target=gfx90a
+    - ginkgo@1.11 ~openmp +rocm amdgpu_target=gfx90a
     - googletest +gmock
     - kokkos@5.0.1 ~openmp +rocm +hip_relocatable_device_code amdgpu_target=gfx90a
     - kokkos-fft@1.0 host_backend=fftw-serial device_backend=hipfft
