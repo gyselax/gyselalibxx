@@ -1,0 +1,6 @@
+[submodule "vendor/ddc"]
+	path = vendor/ddc
+	url = https://github.com/CExA-project/ddc.git
+[submodule "vendor/libkoliop"]
+	path = vendor/libkoliop
+	url = https://gitlab.com/cines/code.gysela/libkoliop.git
