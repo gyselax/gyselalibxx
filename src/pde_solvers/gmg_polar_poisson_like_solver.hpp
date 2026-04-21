@@ -77,7 +77,7 @@ public:
         return 0.0;
     }
     /// The value of the solution on the inner boundary (at r=rmin). Required for the concept, not needed here.
-    static u_D_Interior(const double& r, const double& theta)
+    static double u_D_Interior(const double& r, const double& theta)
     {
         // Only used if DirBC_Interior = true
         assert(false);
