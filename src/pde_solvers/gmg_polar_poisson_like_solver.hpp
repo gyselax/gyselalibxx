@@ -30,28 +30,35 @@ private:
     ToPhysicalMapping m_to_physical;
 
 public:
+    /// Construct the wrapper class
     explicit MappingToDomainGeometry(ToPhysicalMapping to_physical) : m_to_physical(to_physical) {}
 
+    /// X(r, theta)
     double Fx(const double& r, const double& theta) const
     {
         return Coord<X>(m_to_physical(Coord<R, Theta>(r, theta)));
     }
+    /// Y(r, theta)
     double Fy(const double& r, const double& theta) const
     {
         return Coord<Y>(m_to_physical(Coord<R, Theta>(r, theta)));
     }
+    /// d/dr X(r, theta)
     double dFx_dr(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<X, R_cov>(Coord<R, Theta>(r, theta));
     }
+    /// d/dr Y(r, theta)
     double dFy_dr(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<Y, R_cov>(Coord<R, Theta>(r, theta));
     }
+    /// d/(d theta) X(r, theta)
     double dFx_dt(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<X, Theta_cov>(Coord<R, Theta>(r, theta));
     }
+    /// d/(d theta) Y(r, theta)
     double dFy_dt(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<Y, Theta_cov>(Coord<R, Theta>(r, theta));
@@ -64,13 +71,15 @@ public:
 class HomogeneousDirichletBoundaryConditions
 {
 public:
+    /// The value of the solution on the boundary
     double u_D(const double& r, const double& theta) const
     {
         return 0.0;
     }
-    // Only used if DirBC_Interior = true
+    /// The value of the solution on the inner boundary (at r=rmin). Required for the concept, not needed here.
     double u_D_Interior(const double& r, const double& theta) const
     {
+        // Only used if DirBC_Interior = true
         assert(false);
         return 0.0;
     }
@@ -102,6 +111,7 @@ private:
     DConstSplineRTheta_host m_coeff_beta;
 
 public:
+    /// Build th class instance
     PolarPoissonLikeCoefficients(
             SplineEvaluator_host evaluator,
             DConstSplineRTheta_host coeff_alpha,
@@ -112,16 +122,18 @@ public:
     {
     }
 
+    /// The coefficient alpha in the Poisson-like equation
     double alpha(const double& r, const double& theta) const
     {
         return m_evaluator(Coord<R, Theta>(r, theta), m_coeff_alpha);
     }
+    /// The coefficient beta in the Poisson-like equation
     double beta(const double& r, const double& theta) const
     {
         return m_evaluator(Coord<R, Theta>(r, theta), m_coeff_beta);
     }
 
-    // Only used in custom mesh generation (refinement_radius); not needed here.
+    /// Required for the concept, only used in custom mesh generation (refinement_radius); not needed here.
     double getAlphaJump() const
     {
         assert(false);
