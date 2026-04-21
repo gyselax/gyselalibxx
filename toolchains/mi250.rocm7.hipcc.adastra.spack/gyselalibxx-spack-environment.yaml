@@ -4,9 +4,9 @@ spack:
     - cmake
     - ginkgo@1.9 ~openmp +rocm amdgpu_target=gfx90a
     - googletest +gmock
-    - kokkos@4.7 ~openmp +rocm +hip_relocatable_device_code amdgpu_target=gfx90a
-    - kokkos-fft@0.4 host_backend=fftw-serial device_backend=hipfft
-    - kokkos-kernels@4.7 ~shared
+    - kokkos@5.0.1 ~openmp +rocm +hip_relocatable_device_code amdgpu_target=gfx90a
+    - kokkos-fft@1.0 host_backend=fftw-serial device_backend=hipfft
+    - kokkos-kernels@5.0.1 ~shared
     - kokkos-tools
     - lapack
     - ninja
