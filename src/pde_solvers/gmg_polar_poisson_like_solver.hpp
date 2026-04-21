@@ -72,12 +72,12 @@ class HomogeneousDirichletBoundaryConditions
 {
 public:
     /// The value of the solution on the boundary
-    double u_D(const double& r, const double& theta) const
+    static double u_D(const double& r, const double& theta)
     {
         return 0.0;
     }
     /// The value of the solution on the inner boundary (at r=rmin). Required for the concept, not needed here.
-    double u_D_Interior(const double& r, const double& theta) const
+    static u_D_Interior(const double& r, const double& theta)
     {
         // Only used if DirBC_Interior = true
         assert(false);
@@ -134,7 +134,7 @@ public:
     }
 
     /// Required for the concept, only used in custom mesh generation (refinement_radius); not needed here.
-    double getAlphaJump() const
+    static double getAlphaJump()
     {
         assert(false);
         return 0.0;
