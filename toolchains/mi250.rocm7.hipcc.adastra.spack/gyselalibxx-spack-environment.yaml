@@ -36,6 +36,9 @@ spack:
     - [$packages]
     - [$architectures]
   repos:
+    patches:
+      git: https://github.com/gyselax/spack.git
+      branch: cines-hackathon
     builtin:
       tag: v2026.03.0
   concretizer:
