@@ -60,6 +60,15 @@ concept MappingWithInvJacobian
         } -> std::same_as<double>;
 };
 
+template <typename T, class IntegrationCoord>
+concept MappingWithIntegrationCoord
+        = Mapping<T> && requires(T const& t, IntegrationCoord const& x)
+{
+    {
+        t.jacobian(x)
+        } -> std::same_as<double>;
+};
+
 template <typename T>
 concept AnalyticalMapping = Mapping<T> && requires(T const& t)
 {
