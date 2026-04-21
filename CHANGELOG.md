@@ -26,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix missing load of `pdiplugin-pycall` in some Spack-based toolchains.
 - Fix missing update of Spack repos before loading environments.
+- Fix missing `PDIEvent(initialisation)` in the guiding centre (X,Y) simulation.
 - Fix `compute_coeffs_on_mapping` to allow integration when a coordinate change allows the determinant of the Jacobian to be calculated with less information than is required to calculate the Jacobian matrix.
 
 ### Changed
