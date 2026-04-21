@@ -39,11 +39,11 @@ eval -- "$(
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
-        ddc \
         gcc \
         ginkgo \
         googletest \
         kokkos \
+        kokkos-fft \
         kokkos-kernels \
         kokkos-tools \
         koliop \
