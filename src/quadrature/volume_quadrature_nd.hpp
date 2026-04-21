@@ -57,7 +57,10 @@ DFieldMem<IdxRangeCoeffs, typename ExecSpace::memory_space> compute_coeffs_on_ma
     using IdxJ = typename IdxRangeJ::discrete_element_type;
     using CoordJ = ddc::coordinate_of_t<IdxJ>;
     // Check that the resulting coordinate is valid for retrieving the determinant of the Jacobian
-    static_assert(concepts::MappingWithIntegrationCoord<Mapping, CoordJ>);
+    static_assert(
+            concepts::MappingWithIntegrationCoord<Mapping, CoordJ>,
+            "The provided index range does not give enough positional information to define the "
+            "determinant of the Jacobian");
 
     using IdxCoeffs = typename IdxRangeCoeffs::discrete_element_type;
     IdxRangeCoeffs grid = get_idx_range(coefficients_alloc);
