@@ -13,7 +13,7 @@ set -eu
 cd -- "${TOOLCHAIN_ROOT_DIRECTORY}"
 
 SPACK_USER_VERSION="spack-user-5.0.0"
-export SPACK_USER_PREFIX="${ALL_CCFRWORK}/gyselalibxx-spack-install-MI250/Configuration.${SPACK_USER_VERSION}"
+export SPACK_USER_PREFIX="${ALL_CCFRWORK}/gyselalibxx-MI250-rocm7/Configuration.${SPACK_USER_VERSION}"
 export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
 
 # Avoid too many temporary files in the Spack installation tree
