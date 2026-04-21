@@ -248,6 +248,8 @@ public:
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
             = std::nullopt) const
     {
+        using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
+        using IdxBatchFunction = typename IdxRangeBatchFunction::discrete_element_type;
         Kokkos::Profiling::pushRegion("BslAdvection1D");
 
         // Get index ranges and operators ........................................................
@@ -348,8 +350,10 @@ public:
                 idx_range_function,
                 KOKKOS_LAMBDA(IdxFunction const idx) {
                     IdxAdvection slice_foot_index(idx);
-                    CoordInterest coord = slice_feet(slice_foot_index);
-                    allfdistribu(idx) = function_evaluator_proxy(coord, function_coefs);
+                    IdxBatchFunction batch_idx(idx);
+                    allfdistribu(idx) = function_evaluator_proxy(
+                            slice_feet(slice_foot_index),
+                            function_coefs[batch_idx]);
                 });
 
 
