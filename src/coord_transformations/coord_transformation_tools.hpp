@@ -61,8 +61,7 @@ concept MappingWithInvJacobian
 };
 
 template <typename T, class IntegrationCoord>
-concept MappingWithIntegrationCoord
-        = Mapping<T> && requires(T const& t, IntegrationCoord const& x)
+concept MappingWithIntegrationCoord = Mapping<T> && requires(T const& t, IntegrationCoord const& x)
 {
     {
         t.jacobian(x)
