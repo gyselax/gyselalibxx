@@ -337,6 +337,7 @@ public:
                 std::optional(get_const_field(function_derivatives_min)),
                 std::optional(get_const_field(function_derivatives_max)));
 
+        FunctionEvaluator const& function_evaluator_proxy = m_function_evaluator;
         // Evaluate the function at the characteristic feet
         ddc::parallel_for_each(
                 location.function_name(),
@@ -344,7 +345,7 @@ public:
                 idx_range_function,
                 KOKKOS_LAMBDA(IdxFunction const idx) {
                     IdxAdvection slice_foot_index(idx);
-                    m_function_evaluator(
+                    function_evaluator_proxy(
                             allfdistribu,
                             slice_feet(slice_foot_index),
                             get_const_field(function_coefs_alloc));
