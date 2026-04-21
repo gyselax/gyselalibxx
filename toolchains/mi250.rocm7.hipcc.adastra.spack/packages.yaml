@@ -8,22 +8,8 @@ packages:
       # For MI250X:
       - one_of: [amdgpu_target=gfx90a, amdgpu_target=gfx942]
         when: +rocm
-      - spec: +rocm amdgpu_target=gfx90a ^cray-mpich+rocm amdgpu_target=gfx90a
-        when: +rocm amdgpu_target=gfx90a ^cray-mpich
-      # For MI300A:
-      - spec: +rocm amdgpu_target=gfx942 ^cray-mpich+rocm amdgpu_target=gfx942
-        when: +rocm amdgpu_target=gfx942 ^cray-mpich
       # TODO(Etienne M): Fix all packages requiring MPICH + rocm to effectively
       # propagate the variant.
-  cray-mpich:
-    buildable: false
-    externals:
-      - spec: cray-mpich@8.1.30 +gtl +rocm amdgpu_target=gfx90a %gcc@13.2
-        prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/11.2
-        extra_attributes:
-          environment:
-            prepend_path:
-              LD_LIBRARY_PATH: /opt/cray/libfabric/1.20.1/lib64/
   gcc:
     externals:
       - spec: gcc@13.2.1 languages:='c,c++,fortran'

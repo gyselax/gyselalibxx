@@ -47,13 +47,11 @@ eval -- "$(
         kokkos-kernels \
         kokkos-tools \
         lapack \
-        mpi \
         ninja \
         paraconf \
         pdi \
         pdiplugin-decl-hdf5 \
         pdiplugin-decl-netcdf \
-        pdiplugin-mpi \
         pdiplugin-pycall \
         pdiplugin-set-value \
         pdiplugin-trace \
