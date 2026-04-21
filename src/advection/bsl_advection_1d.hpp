@@ -330,19 +330,6 @@ public:
             To interpolate the function we want to advect, we build for the feet a Field defined
             on the index range where the function is defined.
         */
-        FieldMem<CoordInterest, IdxRangeFunction>
-                feet_alloc("feet (BslAdvection1D::operator())", idx_range_function);
-        Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
-        ddc::parallel_for_each(
-                location.function_name(),
-                Kokkos::DefaultExecutionSpace(),
-                idx_range_function,
-                KOKKOS_LAMBDA(IdxFunction const idx) {
-                    IdxAdvection slice_foot_index(idx);
-                    feet(idx) = slice_feet(slice_foot_index);
-                });
-
-
         // Build interpolation coefficients from the function values
         m_function_builder(
                 get_field(function_coefs_alloc),
@@ -351,10 +338,17 @@ public:
                 std::optional(get_const_field(function_derivatives_max)));
 
         // Evaluate the function at the characteristic feet
-        m_function_evaluator(
-                allfdistribu,
-                get_const_field(feet),
-                get_const_field(function_coefs_alloc));
+        ddc::parallel_for_each(
+                location.function_name(),
+                Kokkos::DefaultExecutionSpace(),
+                idx_range_function,
+                KOKKOS_LAMBDA(IdxFunction const idx) {
+                    IdxAdvection slice_foot_index(idx);
+                    m_function_evaluator(
+                            allfdistribu,
+                            slice_feet(slice_foot_index),
+                            get_const_field(function_coefs_alloc));
+                });
 
 
         Kokkos::Profiling::popRegion();
