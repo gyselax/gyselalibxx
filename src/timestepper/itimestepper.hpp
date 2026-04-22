@@ -151,13 +151,14 @@ struct assemble_helper
 {
     static_assert(!FieldLike<DerivFieldType>);
 
-    template <class FuncType, std::size_t n_args>
+    template <class FuncType, class... T>
     static KOKKOS_FUNCTION void assemble_k_total(
             ExecSpace const& exec_space,
             DerivFieldType& k_total,
             FuncType func,
-            std::array<DerivFieldType, n_args> k_arr)
+            T... k)
     {
+        std::array<DerivFieldType, sizeof...(T)> k_arr({k...});
         k_total = func(k_arr);
     }
 };
@@ -178,13 +179,15 @@ struct assemble_helper<
      * @param[in] func A function which combines an element from each of the derivative fields.
      * @param[in] k_arr The derivative fields being combined.
      */
-    template <class FuncType, std::size_t n_args>
+    template <class FuncType, class... T>
     static void assemble_k_total(
             ExecSpace const& exec_space,
             DerivFieldType k_total,
             FuncType func,
-            std::array<DerivFieldType, n_args> k_arr)
+            T... k)
     {
+        std::size_t constexpr n_args = sizeof...(T);
+        std::array<DerivFieldType, n_args> k_arr({k...});
         using Idx = typename IdxRangeType::discrete_element_type;
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -222,13 +225,15 @@ struct assemble_helper<
      * @param[in] func A function which combines an element from each of the derivative fields.
      * @param[in] k_arr The derivative fields being combined.
      */
-    template <class FuncType, std::size_t n_args>
+    template <class FuncType, class... T>
     static void assemble_k_total(
             ExecSpace const& exec_space,
             DerivFieldType k_total,
             FuncType func,
-            std::array<DerivFieldType, n_args> k_arr)
+            T... k)
     {
+        std::size_t constexpr n_args = sizeof...(T);
+        std::array<DerivFieldType, n_args> k_arr({k...});
         using element_type = Tensor<ElementType, VectorIndexSet>;
         using Idx = typename IdxRangeType::discrete_element_type;
         const std::source_location location = std::source_location::current();
@@ -257,13 +262,14 @@ struct assemble_helper<ExecSpace, MultipatchFieldMem<T, Patches...>>
      * @param[in] func A function which combines an element from each of the derivative fields.
      * @param[in] k_arr The derivative fields being combined.
      */
-    template <class FuncType, std::size_t n_args>
+    template <class FuncType, class... KType>
     static void assemble_k_total(
             ExecSpace const& exec_space,
             MultipatchField<T, Patches...> k_total,
             FuncType func,
-            std::array<MultipatchField<T, Patches...>, n_args> k_arr)
+            KType... k)
     {
+        std::array<MultipatchField<T, Patches...>, sizeof...(KType)> k_arr({k...});
         ((assemble_multipatch_field_k_total_on_patch<Patches>(exec_space, k_total, func, k_arr)),
          ...);
     }
@@ -458,38 +464,11 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
-    virtual void update(
+    virtual KOKKOS_FUNCTION void update(
             ValField y,
             double dt,
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const = 0;
-
-protected:
-    /**
-     * @brief A method to assemble multiple derivative fields into one. This method is responsible
-     * for choosing how this is done depending on the type of the derivative field.
-     *
-     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
-     * @param[out] k_total The field to be filled with the combined derivative fields.
-     * @param[in] func A function which combines an element from each of the derivative fields.
-     * @param[in] k The derivative fields being combined.
-     */
-    template <class FuncType, class... T>
-    static void assemble_k_total(
-            ExecSpace const& exec_space,
-            DerivField k_total,
-            FuncType func,
-            T... k)
-    {
-        static_assert(std::conjunction_v<std::is_same<T, std::remove_reference_t<DerivField>>...>);
-        std::size_t constexpr n_args = sizeof...(T);
-        using element_type = typename timestepper_detail::ElementType<DerivField>::type;
-        static_assert(
-                std::is_invocable_r_v<element_type, FuncType, std::array<element_type, n_args>>);
-        std::array<std::remove_reference_t<DerivField>, n_args> k_arr({k...});
-        timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::
-                assemble_k_total(exec_space, k_total, func, k_arr);
-    }
 };
 
 /**

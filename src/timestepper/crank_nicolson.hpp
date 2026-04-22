@@ -213,7 +213,7 @@ private:
 
             // Calculation of step
             // k_total = k1 + k_new
-            base_type::assemble_k_total(
+            timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::assemble_k_total(
                     exec_space,
                     k_total,
                     KOKKOS_LAMBDA(std::array<element_type, 2> k) { return k[0] + k[1]; },

@@ -217,7 +217,7 @@ private:
         // --------- Update y ------------
         // Calculation of step
         // k_total = k1 + 2 * k2 + 2 * k3 + k4
-        base_type::assemble_k_total(
+        timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::assemble_k_total(
                 exec_space,
                 k_total,
                 KOKKOS_LAMBDA(std::array<element_type, 4> k) {
