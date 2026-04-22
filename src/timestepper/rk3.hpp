@@ -57,11 +57,14 @@ public:
      * @brief Create a RK3 object.
      * @param[in] idx_range The index range on which the points which evolve over time are defined.
      */
-    explicit RK3(IdxRange idx_range) : m_idx_range(idx_range) {}
+    explicit RK3(IdxRange idx_range) : m_idx_range(idx_range)
+    {
+        assert(timestepper_detail::FieldLike<FieldMem>);
+    }
 
     explicit RK3()
     {
-        static_assert(!timestepper_detail::FieldLike<FieldMem>);
+        assert(!timestepper_detail::FieldLike<FieldMem>);
     }
 
     /**

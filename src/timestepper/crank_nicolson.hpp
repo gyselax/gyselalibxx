@@ -74,12 +74,22 @@ public:
         , m_max_counter(counter)
         , m_epsilon(epsilon)
     {
+        assert(timestepper_detail::FieldLike<FieldMem>);
     }
+
+    /**
+     * @brief Create a CrankNicolson object to operate on scalars.
+     * @param[in] counter
+     *      The maximal number of loops for the implicit method.
+     * @param[in] epsilon
+     *      The @f$ \varepsilon @f$ upperbound of the difference of two steps
+     *      in the implicit method: @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$.
+     */
     explicit CrankNicolson(int const counter = int(20), double const epsilon = 1e-12)
         : m_max_counter(counter)
         , m_epsilon(epsilon)
     {
-        static_assert(!timestepper_detail::FieldLike<FieldMem>);
+        assert(!timestepper_detail::FieldLike<FieldMem>);
     }
 
     /**

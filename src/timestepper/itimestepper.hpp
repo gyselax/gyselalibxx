@@ -8,6 +8,7 @@
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
 
+/// @cond
 namespace timestepper_detail {
 
 template <typename T>
