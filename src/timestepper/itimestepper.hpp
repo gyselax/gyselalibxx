@@ -268,7 +268,8 @@ protected:
         } else if constexpr (timestepper_detail::FieldLike<ValField>) {
             ddcHelper::deepcopy(copy_to, copy_from);
         } else {
-            copy_to = copy_from;
+            // For a scalar ValField is a reference to the scalar type (ValField = ValFieldMem&)
+            copy_to = copy_from; // cppcheck-suppress uselessAssignmentArg
         }
     }
 
@@ -320,7 +321,8 @@ protected:
         } else if constexpr (timestepper_detail::FieldLike<DerivField>) {
             assemble_field_k_total(exec_space, k_total, func, k_arr);
         } else {
-            k_total = func(k_arr);
+            // For a scalar DerivField is a reference to the scalar type (DerivField = DerivFieldMem&)
+            k_total = func(k_arr); // cppcheck-suppress uselessAssignmentArg
         }
     }
 
