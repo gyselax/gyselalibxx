@@ -19,35 +19,35 @@ concept FieldLike = requires
 };
 
 template <class T>
-struct GetSpanEquivalent
+struct GetReferenceField
 {
     static_assert(!FieldLike<T>);
     using type = T&;
 };
 
 template <class T>
-struct GetViewEquivalent
+struct GetConstReferenceField
 {
     static_assert(!FieldLike<T>);
     using type = T const&;
 };
 
 template <FieldLike T>
-struct GetSpanEquivalent<T>
+struct GetReferenceField<T>
 {
     using type = typename T::span_type;
 };
 
 template <FieldLike T>
-struct GetViewEquivalent<T>
+struct GetConstReferenceField<T>
 {
     using type = typename T::view_type;
 };
 
 template <class T>
-using span_t = typename GetSpanEquivalent<T>::type;
+using reference_t = typename GetReferenceField<T>::type;
 template <class T>
-using view_t = typename GetViewEquivalent<T>::type;
+using const_reference_t = typename GetConstReferenceField<T>::type;
 
 template <class FieldMem, class DerivFieldMemType>
 concept Compatible
@@ -130,19 +130,19 @@ public:
     using ValFieldMem = FieldMem;
 
     /// The type of the values of the function being evolved.
-    using ValField = timestepper_detail::span_t<FieldMem>;
+    using ValField = timestepper_detail::reference_t<FieldMem>;
 
     /// The constant type of the values of the function being evolved.
-    using ValConstField = timestepper_detail::view_t<FieldMem>;
+    using ValConstField = timestepper_detail::const_reference_t<FieldMem>;
 
     /// The type of the memory allocation for the derivatives of the function being evolved.
     using DerivFieldMem = DerivFieldMemType;
 
     /// The type of the derivatives of the function being evolved.
-    using DerivField = timestepper_detail::span_t<DerivFieldMem>;
+    using DerivField = timestepper_detail::reference_t<DerivFieldMem>;
 
     /// The constant type of the derivatives values of the function being evolved.
-    using DerivConstField = timestepper_detail::view_t<DerivFieldMem>;
+    using DerivConstField = timestepper_detail::const_reference_t<DerivFieldMem>;
 
     /// The space (CPU/GPU) where the calculations are carried out.
     using exec_space = ExecSpace;
