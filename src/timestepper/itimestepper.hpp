@@ -8,33 +8,85 @@
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
 
-namespace detail {
+namespace timestepper_detail {
+
+template <typename T>
+concept FieldLike = requires
+{
+    typename T::span_type;
+    typename T::view_type;
+};
+
 template <class T>
 struct GetSpanEquivalent
 {
-    using type = typename T::span_type;
+    static_assert(!FieldLike<T>);
+    using type = T&;
 };
+
 template <class T>
 struct GetViewEquivalent
 {
+    static_assert(!FieldLike<T>);
+    using type = T const&;
+};
+
+template <FieldLike T>
+struct GetSpanEquivalent<T>
+{
+    using type = typename T::span_type;
+};
+
+template <FieldLike T>
+struct GetViewEquivalent<T>
+{
     using type = typename T::view_type;
-};
-template <>
-struct GetSpanEquivalent<double>
-{
-    using type = double&;
-};
-template <>
-struct GetViewEquivalent<double>
-{
-    using type = double const&;
 };
 
 template <class T>
 using span_t = typename GetSpanEquivalent<T>::type;
 template <class T>
 using view_t = typename GetViewEquivalent<T>::type;
-} // namespace detail
+
+template <class FieldMem, class DerivFieldMemType>
+concept Compatible
+        = !(FieldLike<FieldMem> && FieldLike<DerivFieldMemType>)
+          || (std::is_same_v<
+                  typename FieldMem::discrete_domain_type,
+                  typename DerivFieldMemType::discrete_domain_type>)
+          || (is_multipatch_field_mem_v<FieldMem> && is_multipatch_field_mem_v<DerivFieldMemType>);
+
+template <class ExecSpace, class FieldMem>
+concept Accessible
+        = !(FieldLike<FieldMem>)
+          || Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::accessible;
+
+template <class T>
+struct IdxRangeType
+{
+    static_assert(!FieldLike<T>);
+    using type = IdxRange<>;
+};
+
+template <FieldLike T>
+struct IdxRangeType<T>
+{
+    using type = typename T::discrete_domain_type;
+};
+
+template <class T>
+struct ElementType
+{
+    static_assert(!FieldLike<T>);
+    using type = std::remove_reference_t<T>;
+};
+
+template <FieldLike T>
+struct ElementType<T>
+{
+    using type = typename T::element_type;
+};
+} // namespace timestepper_detail
 
 /**
  * @brief The superclass from which all timestepping methods inherit.
@@ -51,47 +103,45 @@ class ITimeStepper
 {
     static_assert(
             (ddc::is_chunk_v<FieldMem>) or (is_vector_field_v<FieldMem>)
-            or (is_multipatch_field_mem_v<FieldMem>));
+            or (is_multipatch_field_mem_v<FieldMem>) or (std::is_floating_point_v<FieldMem>)
+            or (is_tensor_type_v<FieldMem>) or (ddcHelper::is_coordinate_v<FieldMem>));
     static_assert(
             (ddc::is_chunk_v<DerivFieldMemType>) or (is_vector_field_v<DerivFieldMemType>)
-            or (is_multipatch_field_mem_v<DerivFieldMemType>));
+            or (is_multipatch_field_mem_v<DerivFieldMemType>)
+            or (std::is_floating_point_v<DerivFieldMemType>)
+            or (is_tensor_type_v<DerivFieldMemType>)
+            or (ddcHelper::is_coordinate_v<DerivFieldMemType>));
+
+    static_assert(timestepper_detail::Compatible<FieldMem, DerivFieldMemType>);
 
     static_assert(
-            (std::is_same_v<
-                    typename FieldMem::discrete_domain_type,
-                    typename DerivFieldMemType::discrete_domain_type>)
-            || (is_multipatch_field_mem_v<
-                        FieldMem> && is_multipatch_field_mem_v<DerivFieldMemType>));
-
-    static_assert(
-            Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::accessible,
+            timestepper_detail::Accessible<ExecSpace, FieldMem>,
             "MemorySpace has to be accessible for ExecutionSpace.");
     static_assert(
-            Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMemType::memory_space>::
-                    accessible,
+            timestepper_detail::Accessible<ExecSpace, DerivFieldMemType>,
             "MemorySpace has to be accessible for ExecutionSpace.");
 
 public:
     /// The type of the index range on which the values of the function are defined.
-    using IdxRange = typename FieldMem::discrete_domain_type;
+    using IdxRange = typename timestepper_detail::IdxRangeType<FieldMem>::type;
 
     /// The type of the memory allocation for the values of the function being evolved.
     using ValFieldMem = FieldMem;
 
     /// The type of the values of the function being evolved.
-    using ValField = detail::span_t<FieldMem>;
+    using ValField = timestepper_detail::span_t<FieldMem>;
 
     /// The constant type of the values of the function being evolved.
-    using ValConstField = detail::view_t<FieldMem>;
+    using ValConstField = timestepper_detail::view_t<FieldMem>;
 
     /// The type of the memory allocation for the derivatives of the function being evolved.
     using DerivFieldMem = DerivFieldMemType;
 
     /// The type of the derivatives of the function being evolved.
-    using DerivField = detail::span_t<DerivFieldMem>;
+    using DerivField = timestepper_detail::span_t<DerivFieldMem>;
 
     /// The constant type of the derivatives values of the function being evolved.
-    using DerivConstField = detail::view_t<DerivFieldMem>;
+    using DerivConstField = timestepper_detail::view_t<DerivFieldMem>;
 
     /// The space (CPU/GPU) where the calculations are carried out.
     using exec_space = ExecSpace;
@@ -144,15 +194,21 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator) const
     {
         static_assert(ddc::is_chunk_v<FieldMem>);
-        using Idx = typename IdxRange::discrete_element_type;
-        update(exec_space, y, dt, dy_calculator, [&](ValField y, DerivConstField dy, double dt) {
-            const std::source_location location = std::source_location::current();
-            ddc::parallel_for_each(
-                    location.function_name(),
-                    exec_space,
-                    get_idx_range(y),
-                    KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
-        });
+        if constexpr (ddc::is_chunk_v<FieldMem>) {
+            using Idx = typename IdxRange::discrete_element_type;
+            update(exec_space,
+                   y,
+                   dt,
+                   dy_calculator,
+                   [&](ValField y, DerivConstField dy, double dt) {
+                       const std::source_location location = std::source_location::current();
+                       ddc::parallel_for_each(
+                               location.function_name(),
+                               exec_space,
+                               get_idx_range(y),
+                               KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
+                   });
+        }
     }
 
     /**
@@ -177,6 +233,25 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const = 0;
 
+    /**
+     * @brief Carry out one step of the timestepping scheme.
+     *
+     * @param[inout] y
+     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
+     *     of the index range.
+     * @param[in] dt
+     *     The time step over which the values should be evolved.
+     * @param[in] dy_calculator
+     *     The function describing how the derivative of the evolve function is calculated.
+     * @param[in] y_update
+     *     The function describing how the value(s) are updated using the derivative.
+     */
+    virtual void update(
+            ValField y,
+            double dt,
+            std::function<void(DerivField, ValConstField)> dy_calculator,
+            std::function<void(ValField, DerivConstField, double)> y_update) const = 0;
+
 protected:
     /**
      * @brief Make a copy of the values of the function being evolved.
@@ -188,10 +263,10 @@ protected:
     {
         if constexpr (ddc::is_chunk_v<ValField>) {
             ddc::parallel_deepcopy(copy_to, copy_from);
-        } else if constexpr (std::is_floating_point_v<ValField>) {
-            copy_to = copy_from;
-        } else {
+        } else if constexpr (timestepper_detail::FieldLike<ValField>) {
             ddcHelper::deepcopy(copy_to, copy_from);
+        } else {
+            copy_to = copy_from;
         }
     }
 
@@ -227,20 +302,20 @@ protected:
     void assemble_k_total(ExecSpace const& exec_space, DerivField k_total, FuncType func, T... k)
             const
     {
-        static_assert(std::conjunction_v<std::is_same<T, DerivField>...>);
+        static_assert(std::conjunction_v<std::is_same<T, std::remove_reference_t<DerivField>>...>);
         std::size_t constexpr n_args = sizeof...(T);
-        using element_type = typename DerivField::element_type;
+        using element_type = typename timestepper_detail::ElementType<DerivField>::type;
         static_assert(
                 std::is_invocable_r_v<element_type, FuncType, std::array<element_type, n_args>>);
-        std::array<DerivField, n_args> k_arr({k...});
+        std::array<std::remove_reference_t<DerivField>, n_args> k_arr({k...});
         if constexpr (is_vector_field_v<DerivField>) {
             assemble_vector_field_k_total(exec_space, k_total, func, k_arr);
         } else if constexpr (is_multipatch_field_v<DerivField>) {
             assemble_multipatch_field_k_total(exec_space, k_total, func, k_arr);
-        } else if constexpr (std::is_floating_point_v<DerivField>) {
-            k_total = func(k_arr);
-        } else {
+        } else if constexpr (timestepper_detail::FieldLike<DerivField>) {
             assemble_field_k_total(exec_space, k_total, func, k_arr);
+        } else {
+            k_total = func(k_arr);
         }
     }
 

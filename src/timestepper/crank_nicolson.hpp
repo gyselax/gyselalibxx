@@ -75,6 +75,12 @@ public:
         , m_epsilon(epsilon)
     {
     }
+    explicit CrankNicolson(int const counter = int(20), double const epsilon = 1e-12)
+        : m_max_counter(counter)
+        , m_epsilon(epsilon)
+    {
+        static_assert(!timestepper_detail::FieldLike<FieldMem>);
+    }
 
     /**
      * @brief Carry out one step of the Crank-Nicolson scheme.
@@ -98,32 +104,82 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
-        static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::accessible,
-                "MemorySpace has to be accessible for ExecutionSpace.");
-        static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMem::memory_space>::
-                        accessible,
-                "MemorySpace has to be accessible for ExecutionSpace.");
-        using element_type = typename DerivField::element_type;
+        if constexpr (timestepper_detail::FieldLike<FieldMem>) {
+            using element_type = typename timestepper_detail::ElementType<DerivField>::type;
 
-        FieldMem y_init_alloc("y_init (CrankNicholson::update)", m_idx_range);
-        FieldMem y_old_alloc("y_old (CrankNicholson::update)", m_idx_range);
-        DerivFieldMem k1_alloc("k1 (CrankNicholson::update)", m_idx_range);
-        DerivFieldMem k_new_alloc("k_new (CrankNicholson::update)", m_idx_range);
-        DerivFieldMem k_total_alloc("k_total (CrankNicholson::update)", m_idx_range);
-        ValField y_init = get_field(y_init_alloc);
-        ValField y_old = get_field(y_old_alloc);
-        DerivField k1 = get_field(k1_alloc);
-        DerivField k_new = get_field(k_new_alloc);
-        DerivField k_total = get_field(k_total_alloc);
+            FieldMem y_init_alloc("y_init (CrankNicholson::update)", m_idx_range);
+            FieldMem y_old_alloc("y_old (CrankNicholson::update)", m_idx_range);
+            DerivFieldMem k1_alloc("k1 (CrankNicholson::update)", m_idx_range);
+            DerivFieldMem k_new_alloc("k_new (CrankNicholson::update)", m_idx_range);
+            DerivFieldMem k_total_alloc("k_total (CrankNicholson::update)", m_idx_range);
+            ValField y_init = get_field(y_init_alloc);
 
+            base_type::copy(y_init, get_const_field(y));
 
-        base_type::copy(y_init, get_const_field(y));
+            update<element_type>(
+                    exec_space,
+                    y,
+                    dt,
+                    y_init,
+                    get_field(y_old_alloc),
+                    get_field(k1_alloc),
+                    get_field(k_new_alloc),
+                    get_field(k_total_alloc),
+                    dy_calculator,
+                    y_update);
+        } else {
+            static_assert(!timestepper_detail::FieldLike<FieldMem>);
+        }
+    }
 
+    void update(
+            ValField y,
+            double dt,
+            std::function<void(DerivField, ValConstField)> dy_calculator,
+            std::function<void(ValField, DerivConstField, double)> y_update) const final
+    {
+        if constexpr (!timestepper_detail::FieldLike<FieldMem>) {
+            FieldMem y_init;
+            FieldMem y_old;
+            DerivFieldMem k1;
+            DerivFieldMem k_new;
+            DerivFieldMem k_total;
+
+            y_init = y;
+
+            update<DerivFieldMem>(
+                    Kokkos::Serial(),
+                    y,
+                    dt,
+                    y_init,
+                    y_old,
+                    k1,
+                    k_new,
+                    k_total,
+                    dy_calculator,
+                    y_update);
+        } else {
+            static_assert(timestepper_detail::FieldLike<FieldMem>);
+        }
+    }
+
+private:
+    template <class element_type>
+    void update(
+            ExecSpace const& exec_space,
+            ValField y,
+            double dt,
+            ValField y_init,
+            ValField y_old,
+            DerivField k1,
+            DerivField k_new,
+            DerivField k_total,
+            std::function<void(DerivField, ValConstField)> dy_calculator,
+            std::function<void(ValField, DerivConstField, double)> y_update) const
+    {
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
-        dy_calculator(k1, get_const_field(y));
+        dy_calculator(k1, ValConstField(y));
 
         // -------- Calculate k_new ----------
         bool not_converged = true;
@@ -132,7 +188,7 @@ public:
             counter++;
 
             // Calculate k_new = f(y_new)
-            dy_calculator(k_new, get_const_field(y));
+            dy_calculator(k_new, ValConstField(y));
 
             // Calculation of step
             // k_total = k1 + k_new
@@ -144,18 +200,17 @@ public:
                     k_new);
 
             // Save the old characteristic feet
-            base_type::copy(y_old, get_const_field(y));
+            base_type::copy(y_old, ValConstField(y));
 
             // Re-initialise the characteristic feet
-            base_type::copy(y, get_const_field(y_init));
+            base_type::copy(y, ValConstField(y_init));
 
             // Calculate y_new := y_n + h/2*(k_1 + k_new)
-            y_update(y, get_const_field(k_total), 0.5 * dt);
+            y_update(y, DerivConstField(k_total), 0.5 * dt);
 
 
             // Check convergence
-            not_converged
-                    = not have_converged(exec_space, get_const_field(y_old), get_const_field(y));
+            not_converged = not have_converged(exec_space, ValConstField(y_old), ValConstField(y));
 
 
         } while (not_converged and (counter < m_max_counter));
@@ -180,9 +235,16 @@ public:
      */
     bool have_converged(ExecSpace const& exec_space, ValConstField y_old, ValConstField y_new) const
     {
-        double norm_old = norm_inf(exec_space, y_old);
+        double norm_old;
+        double max_diff;
 
-        double max_diff = error_norm_inf(exec_space, y_old, y_new);
+        if constexpr (timestepper_detail::FieldLike<ValField>) {
+            norm_old = norm_inf(exec_space, y_old);
+            max_diff = error_norm_inf(exec_space, y_old, y_new);
+        } else {
+            norm_old = norm_inf(y_old);
+            max_diff = norm_inf(y_old - y_new);
+        }
 
         return (max_diff / norm_old) < m_epsilon;
     }
