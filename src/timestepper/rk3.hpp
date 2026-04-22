@@ -64,7 +64,6 @@ public:
 
     /**
      * @brief Create a RK3 object to operate on scalars.
-     * @param[in] idx_range The index range on which the points which evolve over time are defined.
      */
     explicit RK3()
     {
