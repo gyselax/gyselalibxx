@@ -130,7 +130,7 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
-    void update(
+    KOKKOS_FUNCTION void update(
             ValField y,
             double dt,
             std::function<void(DerivField, ValConstField)> dy_calculator,
