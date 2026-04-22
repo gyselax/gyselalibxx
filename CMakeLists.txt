@@ -63,7 +63,7 @@ find_package(LAPACKE REQUIRED)
 find_package(Ginkgo 1.8 REQUIRED)
 
 set(GMGPOLAR_BUILD_TESTS OFF CACHE BOOL "")
-add_subdirectory("vendor/GMGPolar/" "GMGPolar" EXCLUDE_FROM_ALL SYSTEM)
+add_subdirectory(vendor/GMGPolar EXCLUDE_FROM_ALL SYSTEM)
 # Suppress -Werror=unused-variable inherited via CMAKE_CXX_FLAGS_INIT so that GMGPolar warnings don't break the build.
 target_compile_options(GMGPolarLib PRIVATE -Wno-error=unused-variable)
 
