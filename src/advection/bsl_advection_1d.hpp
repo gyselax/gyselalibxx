@@ -119,7 +119,7 @@ private:
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeFunction>;
-    using FunctionDerivFieldMem = FieldMem<DataType, IdxRangeFunctionDeriv>;
+    using FunctionDerivConstField = ConstField<DataType, IdxRangeFunctionDeriv>;
 
     using TimeStepper =
             typename TimeStepperBuilder::template time_stepper_t<CoordInterest, DataType>;
@@ -230,11 +230,23 @@ public:
      *
      * @param[in, out] allfdistribu Reference to the advected function, allocated on the device
      * @param[in] advection_field Reference to the advection field, allocated on the device.
+     * @param[in] dt Time step.
      * @param[in] advection_field_derivatives_min Reference to the advection field
      *              derivatives at the left side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the advection field is represented using a
+     *              spline with Hermite boundary conditions.
      * @param[in] advection_field_derivatives_max Reference to the advection field
      *              derivatives at the right side of the interest dimension, allocated on the device.
-     * @param[in] dt Time step.
+     *              This only needs to be provided if the advection field is represented using a
+     *              spline with Hermite boundary conditions.
+     * @param[in] function_derivatives_min Reference to the function
+     *              derivatives at the left side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the function is represented using a
+     *              spline with Hermite boundary conditions.
+     * @param[in] function_derivatives_max Reference to the function
+     *              derivatives at the right side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the function is represented using a
+     *              spline with Hermite boundary conditions.
      *
      * @return A reference to the allfdistribu array after advection on dt.
      */
@@ -245,6 +257,9 @@ public:
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
             = std::nullopt,
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
+            = std::nullopt,
+            std::optional<FunctionDerivConstField> const function_derivatives_min = std::nullopt,
+            std::optional<FunctionDerivConstField> const function_derivatives_max
             = std::nullopt) const
     {
         using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
@@ -275,15 +290,6 @@ public:
                 "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
 
-        // Build derivatives on boundaries and fill with zeros....................................
-        FunctionDerivFieldMem function_derivatives_min(
-                m_function_builder.batched_derivs_xmin_domain(idx_range_function));
-        FunctionDerivFieldMem function_derivatives_max(
-                m_function_builder.batched_derivs_xmax_domain(idx_range_function));
-        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
-        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
-
-
         // Interpolate the function ..............................................................
         /*
             To interpolate the function we want to advect, we build for the feet a Field defined
@@ -293,8 +299,8 @@ public:
         m_function_builder(
                 get_field(function_coefs_alloc),
                 get_const_field(allfdistribu),
-                std::optional(get_const_field(function_derivatives_min)),
-                std::optional(get_const_field(function_derivatives_max)));
+                function_derivatives_min,
+                function_derivatives_max);
 
 
         // Compute the characteristic feet .......................................................
