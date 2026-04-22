@@ -88,6 +88,7 @@ struct ElementType<T>
     using type = typename T::element_type;
 };
 } // namespace timestepper_detail
+/// @endcond
 
 /**
  * @brief The superclass from which all timestepping methods inherit.
