@@ -173,10 +173,8 @@ public:
             ddc::BoundCond const& Bound1 = ddc::BoundCond::HERMITE,
             ddc::BoundCond const& Bound2 = ddc::BoundCond::HERMITE)
         : SingleInterfaceDerivativesCalculator(
-                IdxRange1DPerp_1(
-                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
-                IdxRange1DPerp_2(
-                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
+                IdxRange1DPerp_1(idx_range_a, idx_range_b),
+                IdxRange1DPerp_2(idx_range_a, idx_range_b),
                 Bound1,
                 Bound2)
     {
@@ -210,10 +208,8 @@ public:
             IdxRangeB const& idx_range_b,
             std::size_t const number_chosen_cells)
         : SingleInterfaceDerivativesCalculator(
-                IdxRange1DPerp_1(
-                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
-                IdxRange1DPerp_2(
-                        ddc::cartesian_prod_t<IdxRangeA, IdxRangeB>(idx_range_a, idx_range_b)),
+                IdxRange1DPerp_1(idx_range_a, idx_range_b),
+                IdxRange1DPerp_2(idx_range_a, idx_range_b),
                 number_chosen_cells)
     {
         static_assert(ddc::is_discrete_domain_v<IdxRangeA>);
