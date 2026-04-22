@@ -101,19 +101,25 @@ public:
             DerivFieldMem k3_alloc("k3 (RK3::update)", m_idx_range);
             DerivFieldMem k_total_alloc("k_total (RK3::update)", m_idx_range);
 
+            ValField y_prime = get_field(y_prime_alloc);
+            DerivField k1 = get_field(k1_alloc);
+            DerivField k2 = get_field(k2_alloc);
+            DerivField k3 = get_field(k3_alloc);
+            DerivField k_total = get_field(k_total_alloc);
+
             // Save initial conditions
-            timestepper_detail::copy_helper<FieldMem>::copy(y_prime, ValConstField(y));
+            timestepper_detail::copy_helper<FieldMem>::copy(y_prime, get_const_field(y));
 
             // --------- Calculate k1 ------------
             // Calculate k1 = f(y)
-            dy_calculator(k1, ValConstField(y));
+            dy_calculator(k1, get_const_field(y));
 
             // --------- Calculate k2 ------------
             // Calculate y_new := y_n + h/2*k_1
-            y_update(y_prime, DerivConstField(k1), 0.5 * dt);
+            y_update(y_prime, get_const_field(k1), 0.5 * dt);
 
             // Calculate k2 = f(y_new)
-            dy_calculator(k2, ValConstField(y_prime));
+            dy_calculator(k2, get_const_field(y_prime));
 
             // --------- Calculate k3 ------------
             // Calculation of step
@@ -126,13 +132,13 @@ public:
                     k2);
 
             // Collect initial conditions
-            timestepper_detail::copy_helper<FieldMem>::copy(y_prime, ValConstField(y));
+            timestepper_detail::copy_helper<FieldMem>::copy(y_prime, get_const_field(y));
 
             // Calculate y_new := y_n + h*(2*k_2-k_1)
-            y_update(y_prime, DerivConstField(k_total), dt);
+            y_update(y_prime, get_const_field(k_total), dt);
 
             // Calculate k3 = f(y_new)
-            dy_calculator(k3, ValConstField(y_prime));
+            dy_calculator(k3, get_const_field(y_prime));
 
             // --------- Update y ------------
             // Calculation of step
@@ -146,7 +152,7 @@ public:
                     k3);
 
             // Calculate y_{n+1} := y_n + (k1 + 4 * k2 + k3) * h/6
-            y_update(y, DerivConstField(k_total), dt / 6.);
+            y_update(y, get_const_field(k_total), dt / 6.);
         } else {
             static_assert(!timestepper_detail::FieldLike<FieldMem>);
         }
@@ -178,43 +184,42 @@ public:
         ValField y_prime = y_prime_storage;
 
         // Save initial conditions
-        timestepper_detail::copy_helper<FieldMem>::copy(y_prime, ValConstField(y));
+        timestepper_detail::copy_helper<FieldMem>::copy(y_prime, y);
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y)
-        dy_calculator(k1, ValConstField(y));
+        dy_calculator(k1, y);
 
         // --------- Calculate k2 ------------
         // Calculate y_new := y_n + h/2*k_1
-        y_update(y_prime, DerivConstField(k1), 0.5 * dt);
+        y_update(y_prime, k1, 0.5 * dt);
 
         // Calculate k2 = f(y_new)
-        dy_calculator(k2, ValConstField(y_prime));
+        dy_calculator(k2, y_prime);
 
         // --------- Calculate k3 ------------
         // Calculation of step
         // k_total = 2 * k2 - k1
         timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::assemble_k_total(
-                exec_space,
                 k_total,
                 KOKKOS_LAMBDA(std::array<DerivFieldMem, 2> k) { return 2 * k[1] - k[0]; },
                 k1,
                 k2);
 
         // Collect initial conditions
-        timestepper_detail::copy_helper<FieldMem>::copy(y_prime, ValConstField(y));
+        timestepper_detail::copy_helper<FieldMem>::copy(y_prime, y);
 
         // Calculate y_new := y_n + h*(2*k_2-k_1)
-        y_update(y_prime, DerivConstField(k_total), dt);
+        y_update(y_prime, k_total, dt);
 
         // Calculate k3 = f(y_new)
-        dy_calculator(k3, ValConstField(y_prime));
+        dy_calculator(k3, y_prime);
 
         // --------- Update y ------------
         // Calculation of step
         // k_total = k1 + 4 * k2 + k3
         timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::assemble_k_total(
-                exec_space,
+                ExecSpace(),
                 k_total,
                 KOKKOS_LAMBDA(std::array<DerivFieldMem, 3> k) { return k[0] + 4 * k[1] + k[2]; },
                 k1,
@@ -222,7 +227,7 @@ public:
                 k3);
 
         // Calculate y_{n+1} := y_n + (k1 + 4 * k2 + k3) * h/6
-        y_update(y, DerivConstField(k_total), dt / 6.);
+        y_update(y, k_total, dt / 6.);
     }
 };
 

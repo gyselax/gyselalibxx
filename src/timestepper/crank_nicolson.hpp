@@ -123,19 +123,57 @@ public:
             DerivFieldMem k_new_alloc("k_new (CrankNicholson::update)", m_idx_range);
             DerivFieldMem k_total_alloc("k_total (CrankNicholson::update)", m_idx_range);
 
-            update<element_type>(
-                    exec_space,
-                    y,
-                    dt,
-                    get_field(y_init_alloc),
-                    get_field(y_old_alloc),
-                    get_field(k1_alloc),
-                    get_field(k_new_alloc),
-                    get_field(k_total_alloc),
-                    dy_calculator,
-                    y_update);
+            ValField y_init = get_field(y_init_alloc);
+            ValField y_old = get_field(y_old_alloc);
+            DerivField k1 = get_field(k1_alloc);
+            DerivField k_new = get_field(k_new_alloc);
+            DerivField k_total = get_field(k_total_alloc);
+
+            // Save initial conditions
+            timestepper_detail::copy_helper<FieldMem>::copy(y_init, get_const_field(y));
+
+            // --------- Calculate k1 ------------
+            // Calculate k1 = f(y_n)
+            dy_calculator(k1, get_const_field(y));
+
+            // -------- Calculate k_new ----------
+            bool not_converged = true;
+            int counter = 0;
+            do {
+                counter++;
+
+                // Calculate k_new = f(y_new)
+                dy_calculator(k_new, get_const_field(y));
+
+                // Calculation of step
+                // k_total = k1 + k_new
+                timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::assemble_k_total(
+                        exec_space,
+                        k_total,
+                        KOKKOS_LAMBDA(std::array<element_type, 2> k) { return k[0] + k[1]; },
+                        k1,
+                        k_new);
+
+                // Save the old characteristic feet
+                timestepper_detail::copy_helper<FieldMem>::copy(y_old, get_const_field(y));
+
+                // Re-initialise the characteristic feet
+                timestepper_detail::copy_helper<FieldMem>::copy(y, get_const_field(y_init));
+
+                // Calculate y_new := y_n + h/2*(k_1 + k_new)
+                y_update(y, get_const_field(k_total), 0.5 * dt);
+
+
+                // Check convergence
+                not_converged
+                        = (error_norm_inf(exec_space, get_const_field(y_old), get_const_field(y))
+                           / norm_inf(exec_space, get_const_field(y_old)))
+                          >= m_epsilon;
+
+
+            } while (not_converged and (counter < m_max_counter));
         } else {
-            static_assert(!timestepper_detail::FieldLike<FieldMem>);
+            assert(timestepper_detail::FieldLike<FieldMem>);
         }
     }
 
@@ -152,49 +190,17 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
-    KOKKOS_FUNCTION void update(
-            ValField y,
-            double dt,
-            std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update) const final
+    template <class DYFunctor, class YFunctor>
+    KOKKOS_FUNCTION void update(ValField y, double dt, DYFunctor dy_calculator, YFunctor y_update)
+            const
     {
-        if constexpr (!timestepper_detail::FieldLike<FieldMem>) {
-            FieldMem y_init;
-            FieldMem y_old;
-            DerivFieldMem k1;
-            DerivFieldMem k_new;
-            DerivFieldMem k_total;
+        static_assert(!timestepper_detail::FieldLike<FieldMem>);
+        FieldMem y_init;
+        FieldMem y_old;
+        DerivFieldMem k1;
+        DerivFieldMem k_new;
+        DerivFieldMem k_total;
 
-            update<DerivFieldMem>(
-                    ExecSpace(),
-                    y,
-                    dt,
-                    y_init,
-                    y_old,
-                    k1,
-                    k_new,
-                    k_total,
-                    dy_calculator,
-                    y_update);
-        } else {
-            static_assert(timestepper_detail::FieldLike<FieldMem>);
-        }
-    }
-
-private:
-    template <class element_type>
-    void update(
-            ExecSpace const& exec_space,
-            ValField y,
-            double dt,
-            ValField y_init,
-            ValField y_old,
-            DerivField k1,
-            DerivField k_new,
-            DerivField k_total,
-            std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update) const
-    {
         // Save initial conditions
         timestepper_detail::copy_helper<FieldMem>::copy(y_init, ValConstField(y));
 
@@ -214,9 +220,8 @@ private:
             // Calculation of step
             // k_total = k1 + k_new
             timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::assemble_k_total(
-                    exec_space,
                     k_total,
-                    KOKKOS_LAMBDA(std::array<element_type, 2> k) { return k[0] + k[1]; },
+                    KOKKOS_LAMBDA(std::array<DerivFieldMem, 2> k) { return k[0] + k[1]; },
                     k1,
                     k_new);
 
@@ -231,43 +236,10 @@ private:
 
 
             // Check convergence
-            not_converged = not have_converged(exec_space, ValConstField(y_old), ValConstField(y));
+            not_converged = (norm_inf(y_old - y) / norm_inf(y_old)) >= m_epsilon;
 
 
         } while (not_converged and (counter < m_max_counter));
-    }
-
-
-    /**
-     * Check if the relative difference of the function between
-     * two time steps is below epsilon.
-     *
-     * This function should be private. It is not due to the inclusion of a KOKKOS_LAMBDA
-     * function.
-     *
-     * @param[in] exec_space
-     *     The space on which the function is executed (CPU/GPU).
-     * @param[in] y_old
-     *     The value of the function at the previous time step.
-     * @param[in] y_new
-     *     The updated value of the function at the new time step.
-     * @returns
-     *     True if converged, False otherwise.
-     */
-    bool have_converged(ExecSpace const& exec_space, ValConstField y_old, ValConstField y_new) const
-    {
-        double norm_old;
-        double max_diff;
-
-        if constexpr (timestepper_detail::FieldLike<ValField>) {
-            norm_old = norm_inf(exec_space, y_old);
-            max_diff = error_norm_inf(exec_space, y_old, y_new);
-        } else {
-            norm_old = norm_inf(y_old);
-            max_diff = norm_inf(y_old - y_new);
-        }
-
-        return (max_diff / norm_old) < m_epsilon;
     }
 };
 

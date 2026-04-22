@@ -94,11 +94,11 @@ public:
 
             // --------- Calculate k1 ------------
             // Calculate k1 = f(y_n)
-            dy_calculator(k1, ValConstField(y));
+            dy_calculator(k1, get_const_field(y));
 
             // ----------- Update y --------------
             // Calculate y_new := y_n + h*k_1
-            y_update(y, DerivConstField(k1), dt);
+            y_update(y, get_const_field(k1), dt);
         } else {
             assert(timestepper_detail::FieldLike<FieldMem>);
         }

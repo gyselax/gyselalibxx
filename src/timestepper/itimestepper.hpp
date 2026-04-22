@@ -152,11 +152,7 @@ struct assemble_helper
     static_assert(!FieldLike<DerivFieldType>);
 
     template <class FuncType, class... T>
-    static KOKKOS_FUNCTION void assemble_k_total(
-            ExecSpace const& exec_space,
-            DerivFieldType& k_total,
-            FuncType func,
-            T... k)
+    static KOKKOS_FUNCTION void assemble_k_total(DerivFieldType& k_total, FuncType func, T... k)
     {
         std::array<DerivFieldType, sizeof...(T)> k_arr({k...});
         k_total = func(k_arr);
@@ -254,6 +250,8 @@ struct assemble_helper<
 template <class ExecSpace, template <typename P> typename T, class... Patches>
 struct assemble_helper<ExecSpace, MultipatchFieldMem<T, Patches...>>
 {
+    using DerivFieldType = MultipatchFieldMem<T, Patches...>::span_type;
+
     /**
      * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a MultipatchField.
      *
@@ -265,12 +263,11 @@ struct assemble_helper<ExecSpace, MultipatchFieldMem<T, Patches...>>
     template <class FuncType, class... KType>
     static void assemble_k_total(
             ExecSpace const& exec_space,
-            MultipatchField<T, Patches...> k_total,
+            DerivFieldType k_total,
             FuncType func,
             KType... k)
     {
-        std::array<MultipatchField<T, Patches...>, sizeof...(KType)> k_arr({k...});
-        ((assemble_multipatch_field_k_total_on_patch<Patches>(exec_space, k_total, func, k_arr)),
+        ((assemble_multipatch_field_k_total_on_patch<Patches>(exec_space, k_total, func, k...)),
          ...);
     }
 
@@ -283,22 +280,18 @@ private:
      * @param[in] func A function which combines an element from each of the derivative fields.
      * @param[in] k_arr The derivative fields being combined.
      */
-    template <class Patch, class FuncType, std::size_t n_args>
+    template <class Patch, class FuncType, class... KType>
     static void assemble_multipatch_field_k_total_on_patch(
             ExecSpace const& exec_space,
-            MultipatchField<T, Patches...> k_total,
+            DerivFieldType k_total,
             FuncType func,
-            std::array<MultipatchField<T, Patches...>, n_args> k_arr)
+            KType... k)
     {
-        using FieldType = T<Patch>;
-        static_assert((ddc::is_chunk_v<FieldType>) or (is_vector_field_v<FieldType>));
-        std::array<FieldType, n_args> k_arr_on_patch;
-        FieldType k_total_on_patch = k_total.template get<Patch>();
-        for (std::size_t i(0); i < n_args; ++i) {
-            k_arr_on_patch[i] = k_arr[i].template get<Patch>();
-        }
-        timestepper_detail::assemble_helper<ExecSpace, FieldType>::
-                assemble_k_total(exec_space, k_total_on_patch, func, k_arr_on_patch);
+        timestepper_detail::assemble_helper<ExecSpace, T<Patch>>::assemble_k_total(
+                exec_space,
+                k_total.template get<Patch>(),
+                func,
+                k.template get<Patch>()...);
     }
 };
 
