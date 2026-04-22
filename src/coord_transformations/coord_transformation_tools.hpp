@@ -27,6 +27,26 @@ concept Mapping = requires
         } -> std::same_as<typename T::CoordResult>;
 };
 
+template <typename T, typename CoordTransform>
+concept JacobianMatrix
+        = is_tensor_type_v<T> && std::is_floating_point_v<typename T::element_type> && std::same_as<
+                T,
+                Tensor<typename T::element_type,
+                       get_contravariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordResult>>,
+                       get_covariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordArg>>>>;
+
+template <typename T, typename CoordTransform>
+concept InvJacobianMatrix
+        = is_tensor_type_v<T> && std::is_floating_point_v<typename T::element_type> && std::same_as<
+                T,
+                Tensor<typename T::element_type,
+                       get_contravariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordArg>>,
+                       get_covariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordResult>>>>;
+
 template <typename T>
 concept MappingWithJacobian = Mapping<T> && requires
 {
@@ -35,15 +55,13 @@ concept MappingWithJacobian = Mapping<T> && requires
 {
     {
         t.jacobian_matrix(x)
-        } -> std::same_as<
-                DTensor<get_contravariant_dims_t<ddc::to_type_seq_t<typename T::CoordResult>>,
-                        get_covariant_dims_t<ddc::to_type_seq_t<typename T::CoordArg>>>>;
+        } -> JacobianMatrix<T>;
     {
         t.template jacobian_component<int, int>(x)
-        } -> std::same_as<double>;
+        } -> std::floating_point;
     {
         t.jacobian(x)
-        } -> std::same_as<double>;
+        } -> std::floating_point;
 };
 
 template <typename T>
@@ -52,12 +70,18 @@ concept MappingWithInvJacobian
 {
     {
         t.inv_jacobian_matrix(x)
-        } -> std::same_as<
-                DTensor<get_contravariant_dims_t<ddc::to_type_seq_t<typename T::CoordArg>>,
-                        get_covariant_dims_t<ddc::to_type_seq_t<typename T::CoordResult>>>>;
+        } -> InvJacobianMatrix<T>;
     {
         t.template inv_jacobian_component<int, int>(x)
-        } -> std::same_as<double>;
+        } -> std::floating_point;
+};
+
+template <typename T, class IntegrationCoord>
+concept MappingWithIntegrationCoord = Mapping<T> && requires(T const& t, IntegrationCoord const& x)
+{
+    {
+        t.jacobian(x)
+        } -> std::floating_point;
 };
 
 template <typename T>

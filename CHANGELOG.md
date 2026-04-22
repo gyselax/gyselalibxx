@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix `ddcHelper::assign_elements` to allow a ND tensor to be truncated to a MD tensor (with M\<N).
 - Fix use of `PolarSplineFEMPoissonLikeSolver` with a ND metric tensor (with N\>2).
 - Decrease memory usage in `BslAdvection1D`.
+- Fix `compute_coeffs_on_mapping` to allow integration when a coordinate change allows the determinant of the Jacobian to be calculated with less information than is required to calculate the Jacobian matrix.
 
 ### Changed
 
@@ -51,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Take pointwise values for `PolarSplineFEMPoissonLikeSolver::update_coefficients`.
 - Allow pointwise values to be passed to `PolarSplineFEMPoissonLikeSolver::operator()`.
 - Rename `polarpoissonlikesolver.hpp` -> `polar_spline_fem_poisson_like_solver.hpp`.
+- Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.
 
 ### Deprecated
 
