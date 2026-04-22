@@ -58,7 +58,7 @@ find_package(KokkosKernels 4.5.1...<5 REQUIRED)
 add_subdirectory(vendor/ddc SYSTEM)
 
 # find_package(koliop 0.1.2 REQUIRED)
-add_subdirectory(vendor/koliop SYSTEM)
+add_subdirectory(vendor/libkoliop SYSTEM)
 
 find_package(LAPACKE REQUIRED)
 
