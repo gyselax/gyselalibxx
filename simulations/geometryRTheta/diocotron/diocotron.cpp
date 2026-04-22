@@ -158,7 +158,7 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    SplinePolarFootFinder find_feet(
+    InterpolationPolarFootFinder find_feet(
             mesh_rtheta,
             time_stepper,
             to_physical_mapping,

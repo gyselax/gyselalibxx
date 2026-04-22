@@ -287,7 +287,7 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
-    SplinePolarFootFinder const foot_finder(
+    InterpolationPolarFootFinder const foot_finder(
             grid,
             time_stepper,
             to_physical_mapping,

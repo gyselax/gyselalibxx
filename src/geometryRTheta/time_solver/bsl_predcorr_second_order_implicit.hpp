@@ -68,7 +68,7 @@ template <
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using SplinePolarFootFinderType = SplinePolarFootFinder<
+    using InterpolationPolarFootFinderType = InterpolationPolarFootFinder<
             IdxRangeRTheta,
             EulerBuilder,
             LogicalToPhysicalMapping,
@@ -77,7 +77,7 @@ private:
             SplineRThetaEvaluatorConstBound>;
 
     using BslAdvectionRTheta = BslAdvectionPolar<
-            SplinePolarFootFinderType,
+            InterpolationPolarFootFinderType,
             LogicalToPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorNullBound>;
@@ -87,7 +87,7 @@ private:
     BslAdvectionRTheta const& m_advection_solver;
 
     EulerBuilder const m_euler;
-    SplinePolarFootFinderType const m_foot_finder;
+    InterpolationPolarFootFinderType const m_foot_finder;
 
     PolarPoissonLikeSolver const& m_poisson_solver;
 

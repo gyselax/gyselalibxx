@@ -194,7 +194,7 @@ void run_simulations_with_methods(
                   << to_lower(num.method_name) << "-";
     std::string output_stem = output_stream.str();
 
-    SplinePolarFootFinder const foot_finder(
+    InterpolationPolarFootFinder const foot_finder(
             params.grid,
             num.time_stepper,
             sim.to_physical_mapping,

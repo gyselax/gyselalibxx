@@ -40,10 +40,10 @@
  * They are defined in the IPolarFootFinder class.
  *
  * The feet can be advected on different domains (physical domain or pseudo-physical domain)
- * which are determined in the SplinePolarFootFinder operator. 
+ * which are determined in the InterpolationPolarFootFinder operator.
  *
  * The interpolation of the function is always done in the logical domain,
- * where the B-splines are defined. 
+ * where the basis functions are defined.
  *
  *
  * @see IPolarFootFinder

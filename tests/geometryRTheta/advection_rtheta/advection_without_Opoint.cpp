@@ -129,7 +129,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
             theta_extrapolation_rule);
 
     RK3Builder const time_stepper;
-    SplinePolarFootFinder find_feet(
+    InterpolationPolarFootFinder find_feet(
             grid,
             time_stepper,
             to_physical_mapping,

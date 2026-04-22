@@ -277,7 +277,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     TimeStepperBuilder time_stepper;
     AdvectionField advection_field = init_field<AdvectionField>();
 
-    SplinePolarFootFinder const batched_foot_finder(
+    InterpolationPolarFootFinder const batched_foot_finder(
             batched_idx_range,
             time_stepper,
             to_physical,
