@@ -193,8 +193,7 @@ public:
             double dt,
             std::function<void(DerivField, ValConstField)> dy_calculator) const
     {
-        static_assert(ddc::is_chunk_v<FieldMem>);
-        if constexpr (ddc::is_chunk_v<FieldMem>) {
+        if constexpr (timestepper_detail::FieldLike<FieldMem>) {
             using Idx = typename IdxRange::discrete_element_type;
             update(exec_space,
                    y,
@@ -208,6 +207,8 @@ public:
                                get_idx_range(y),
                                KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
                    });
+        } else {
+            assert("Method should only be used on a FieldLike object");
         }
     }
 
