@@ -55,6 +55,11 @@ public:
      */
     explicit Euler(IdxRange idx_range) : m_idx_range(idx_range) {}
 
+    explicit Euler()
+    {
+        static_assert(!timestepper_detail::FieldLike<FieldMem>);
+    }
+
     /**
      * @brief Carry out one step of the explicit Euler scheme.
      *
@@ -77,16 +82,47 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
-        DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
-        DerivField k1(k1_alloc);
+        if constexpr (timestepper_detail::FieldLike<FieldMem>) {
+            DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
+            DerivField k1 = get_field(k1_alloc);
 
+            update(exec_space, y, dt, k1, dy_calculator, y_update);
+        } else {
+            static_assert(!timestepper_detail::FieldLike<FieldMem>);
+        }
+    }
+
+    void update(
+            ValField y,
+            double dt,
+            std::function<void(DerivField, ValConstField)> dy_calculator,
+            std::function<void(ValField, DerivConstField, double)> y_update) const final
+    {
+        if constexpr (!timestepper_detail::FieldLike<FieldMem>) {
+            DerivFieldMem k1;
+
+            update(Kokkos::Serial(), y, dt, k1, dy_calculator, y_update);
+        } else {
+            static_assert(timestepper_detail::FieldLike<FieldMem>);
+        }
+    }
+
+private:
+    void update(
+            ExecSpace const& exec_space,
+            ValField y,
+            double dt,
+            DerivField k1,
+            std::function<void(DerivField, ValConstField)> dy_calculator,
+            std::function<void(ValField, DerivConstField, double)> y_update) const
+    {
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
-        dy_calculator(k1, get_const_field(y));
+        dy_calculator(k1, ValConstField(y));
 
         // ----------- Update y --------------
         // Calculate y_new := y_n + h*k_1
-        y_update(y, get_const_field(k1), dt);
+        y_update(y, DerivConstField(k1), dt);
     }
 };
 

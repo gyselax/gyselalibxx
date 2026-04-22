@@ -59,6 +59,11 @@ public:
      */
     explicit RK3(IdxRange idx_range) : m_idx_range(idx_range) {}
 
+    explicit RK3()
+    {
+        static_assert(!timestepper_detail::FieldLike<FieldMem>);
+    }
+
     /**
      * @brief Carry out one step of the Runge-Kutta scheme.
      *
@@ -81,40 +86,94 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
-        static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::accessible,
-                "MemorySpace has to be accessible for ExecutionSpace.");
-        static_assert(
-                Kokkos::SpaceAccessibility<ExecSpace, typename DerivFieldMem::memory_space>::
-                        accessible,
-                "MemorySpace has to be accessible for ExecutionSpace.");
-        using element_type = typename DerivField::element_type;
+        if constexpr (timestepper_detail::FieldLike<FieldMem>) {
+            using element_type = typename timestepper_detail::ElementType<DerivField>::type;
 
-        FieldMem y_prime_alloc("y_prime (RK3::update)", m_idx_range);
-        DerivFieldMem k1_alloc("k1 (RK3::update)", m_idx_range);
-        DerivFieldMem k2_alloc("k2 (RK3::update)", m_idx_range);
-        DerivFieldMem k3_alloc("k3 (RK3::update)", m_idx_range);
-        DerivFieldMem k_total_alloc("k_total (RK3::update)", m_idx_range);
+            FieldMem y_prime_alloc("y_prime (RK3::update)", m_idx_range);
+            DerivFieldMem k1_alloc("k1 (RK3::update)", m_idx_range);
+            DerivFieldMem k2_alloc("k2 (RK3::update)", m_idx_range);
+            DerivFieldMem k3_alloc("k3 (RK3::update)", m_idx_range);
+            DerivFieldMem k_total_alloc("k_total (RK3::update)", m_idx_range);
 
-        ValField y_prime = get_field(y_prime_alloc);
-        DerivField k1 = get_field(k1_alloc);
-        DerivField k2 = get_field(k2_alloc);
-        DerivField k3 = get_field(k3_alloc);
-        DerivField k_total = get_field(k_total_alloc);
+            ValField y_prime = get_field(y_prime_alloc);
+            DerivField k1 = get_field(k1_alloc);
+            DerivField k2 = get_field(k2_alloc);
+            DerivField k3 = get_field(k3_alloc);
+            DerivField k_total = get_field(k_total_alloc);
 
+            update<element_type>(
+                    exec_space,
+                    y,
+                    dt,
+                    y_prime,
+                    k1,
+                    k2,
+                    k3,
+                    k_total,
+                    dy_calculator,
+                    y_update);
+        } else {
+            static_assert(!timestepper_detail::FieldLike<FieldMem>);
+        }
+    }
+
+    void update(
+            ValField y,
+            double dt,
+            std::function<void(DerivField, ValConstField)> dy_calculator,
+            std::function<void(ValField, DerivConstField, double)> y_update) const final
+    {
+        if constexpr (!timestepper_detail::FieldLike<FieldMem>) {
+            FieldMem y_prime_storage;
+            DerivFieldMem k1;
+            DerivFieldMem k2;
+            DerivFieldMem k3;
+            DerivFieldMem k_total;
+            ValField y_prime = y_prime_storage;
+
+            update<DerivFieldMem>(
+                    Kokkos::Serial(),
+                    y,
+                    dt,
+                    y_prime,
+                    k1,
+                    k2,
+                    k3,
+                    k_total,
+                    dy_calculator,
+                    y_update);
+        } else {
+            static_assert(timestepper_detail::FieldLike<FieldMem>);
+        }
+    }
+
+private:
+    template <class element_type>
+    void update(
+            ExecSpace const& exec_space,
+            ValField y,
+            double dt,
+            ValField y_prime,
+            DerivField k1,
+            DerivField k2,
+            DerivField k3,
+            DerivField k_total,
+            std::function<void(DerivField, ValConstField)> dy_calculator,
+            std::function<void(ValField, DerivConstField, double)> y_update) const
+    {
         // Save initial conditions
-        base_type::copy(y_prime, get_const_field(y));
+        base_type::copy(y_prime, ValConstField(y));
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y)
-        dy_calculator(k1, get_const_field(y));
+        dy_calculator(k1, ValConstField(y));
 
         // --------- Calculate k2 ------------
         // Calculate y_new := y_n + h/2*k_1
-        y_update(y_prime, get_const_field(k1), 0.5 * dt);
+        y_update(y_prime, DerivConstField(k1), 0.5 * dt);
 
         // Calculate k2 = f(y_new)
-        dy_calculator(k2, get_const_field(y_prime));
+        dy_calculator(k2, ValConstField(y_prime));
 
         // --------- Calculate k3 ------------
         // Calculation of step
@@ -127,13 +186,13 @@ public:
                 k2);
 
         // Collect initial conditions
-        base_type::copy(y_prime, get_const_field(y));
+        base_type::copy(y_prime, ValConstField(y));
 
         // Calculate y_new := y_n + h*(2*k_2-k_1)
-        y_update(y_prime, get_const_field(k_total), dt);
+        y_update(y_prime, DerivConstField(k_total), dt);
 
         // Calculate k3 = f(y_new)
-        dy_calculator(k3, get_const_field(y_prime));
+        dy_calculator(k3, ValConstField(y_prime));
 
         // --------- Update y ------------
         // Calculation of step
@@ -147,7 +206,7 @@ public:
                 k3);
 
         // Calculate y_{n+1} := y_n + (k1 + 4 * k2 + k3) * h/6
-        y_update(y, get_const_field(k_total), dt / 6.);
+        y_update(y, DerivConstField(k_total), dt / 6.);
     }
 };
 
