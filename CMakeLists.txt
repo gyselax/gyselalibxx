@@ -50,9 +50,9 @@ find_package(PDI 1.10.1...<2 REQUIRED COMPONENTS C)
 
 find_package(GTest 1.12 REQUIRED)
 
-find_package(Kokkos 4.4.1...<5 REQUIRED)
+find_package(Kokkos 4.4.1...<6 REQUIRED)
 
-find_package(KokkosKernels 4.5.1...<5 REQUIRED)
+find_package(KokkosKernels 4.5.1...<6 REQUIRED)
 
 # find_package(DDC 0.12.0 REQUIRED COMPONENTS fft pdi splines)
 add_subdirectory(vendor/ddc SYSTEM)
