@@ -3291,7 +3291,13 @@
   </compound>
   <compound refid="conceptconcepts_1_1InterpolationEvaluator" kind="concept"><name>concepts::InterpolationEvaluator</name>
   </compound>
+  <compound refid="conceptconcepts_1_1InvJacobianMatrix" kind="concept"><name>concepts::InvJacobianMatrix</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1JacobianMatrix" kind="concept"><name>concepts::JacobianMatrix</name>
+  </compound>
   <compound refid="conceptconcepts_1_1Mapping" kind="concept"><name>concepts::Mapping</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1MappingWithIntegrationCoord" kind="concept"><name>concepts::MappingWithIntegrationCoord</name>
   </compound>
   <compound refid="conceptconcepts_1_1MappingWithInvJacobian" kind="concept"><name>concepts::MappingWithInvJacobian</name>
   </compound>

@@ -587,6 +587,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Fix <code>ddcHelper::assign_elements</code> to allow a ND tensor to be truncated to a MD tensor (with M\&lt;N).</li>
 <li>Fix use of <code>PolarSplineFEMPoissonLikeSolver</code> with a ND metric tensor (with N&gt;2).</li>
 <li>Decrease memory usage in <code>BslAdvection1D</code>.</li>
+<li>Fix <code>compute_coeffs_on_mapping</code> to allow integration when a coordinate change allows the determinant of the Jacobian to be calculated with less information than is required to calculate the Jacobian matrix.</li>
 </ul>
 <h3 id="changed">Changed</h3>
 <ul>
@@ -608,6 +609,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Take pointwise values for <code>PolarSplineFEMPoissonLikeSolver::update_coefficients</code>.</li>
 <li>Allow pointwise values to be passed to <code>PolarSplineFEMPoissonLikeSolver::operator()</code>.</li>
 <li>Rename <code>polarpoissonlikesolver.hpp</code> -&gt; <code>polar_spline_fem_poisson_like_solver.hpp</code>.</li>
+<li>Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

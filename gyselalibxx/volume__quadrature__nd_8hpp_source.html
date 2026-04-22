@@ -580,8 +580,20 @@ DFieldMem&lt;IdxRangeCoeffs, typename ExecSpace::memory_space&gt; compute_coeffs
         Mapping&amp; mapping,
         DFieldMem&lt;IdxRangeCoeffs, typename ExecSpace::memory_space&gt;&amp;&amp; coefficients_alloc)
 {
-    using CoordJ = typename Mapping::CoordJacobian;
-    using IdxJ = find_idx_t&lt;CoordJ, IdxRangeCoeffs&gt;;
+    // Get type information about Jacobian definition
+    using CoordJacobian = typename Mapping::CoordJacobian;
+    using IdxJacobian = find_idx_t&lt;CoordJacobian, IdxRangeCoeffs&gt;;
+    using TypeSeqJacobian = ddc::to_type_seq_t&lt;IdxJacobian&gt;;
+    // Strip any Grids not found in the index range
+    using TypeSeqJ = ddc::type_seq_remove_t&lt;TypeSeqJacobian, ddc::detail::TypeSeq&lt;void&gt;&gt;;
+    using IdxRangeJ = ddc::detail::convert_type_seq_to_discrete_domain_t&lt;TypeSeqJ&gt;;
+    using IdxJ = typename IdxRangeJ::discrete_element_type;
+    using CoordJ = ddc::coordinate_of_t&lt;IdxJ&gt;;
+    // Check that the resulting coordinate is valid for retrieving the determinant of the Jacobian
+    static_assert(
+            concepts::MappingWithIntegrationCoord&lt;Mapping, CoordJ&gt;,
+            "The provided index range does not give enough positional information to define the "
+            "determinant of the Jacobian");
 
     using IdxCoeffs = typename IdxRangeCoeffs::discrete_element_type;
     IdxRangeCoeffs grid = get_idx_range(coefficients_alloc);
