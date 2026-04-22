@@ -88,6 +88,39 @@ struct ElementType<T>
 {
     using type = typename T::element_type;
 };
+
+template <class FieldType>
+struct copy_helper
+{
+    static_assert(!FieldLike<FieldType>);
+    static KOKKOS_FUNCTION void copy(FieldType& copy_to, FieldType const& copy_from)
+    {
+        copy_to = copy_from;
+    }
+};
+
+template <timestepper_detail::FieldLike FieldMemType>
+struct copy_helper<FieldMemType>
+{
+    static_assert(!ddc::is_chunk_v<FieldMemType>);
+    static void copy(
+            reference_t<FieldMemType> copy_to,
+            const_reference_t<FieldMemType> const& copy_from)
+    {
+        ddcHelper::deepcopy(copy_to, copy_from);
+    }
+};
+
+template <class ElementType, class IdxRangeType, class MemSpace>
+struct copy_helper<ddc::Chunk<ElementType, IdxRangeType, ddc::KokkosAllocator<ElementType, MemSpace>>>
+{
+    static void copy(
+            Field<ElementType, IdxRangeType, MemSpace> copy_to,
+            ConstField<ElementType, IdxRangeType, MemSpace> copy_from)
+    {
+        ddc::parallel_deepcopy(copy_to, copy_from);
+    }
+};
 } // namespace timestepper_detail
 /// @endcond
 
@@ -265,14 +298,7 @@ protected:
      */
     static void copy(ValField copy_to, ValConstField copy_from)
     {
-        if constexpr (ddc::is_chunk_v<ValField>) {
-            ddc::parallel_deepcopy(copy_to, copy_from);
-        } else if constexpr (timestepper_detail::FieldLike<ValField>) {
-            ddcHelper::deepcopy(copy_to, copy_from);
-        } else {
-            // For a scalar ValField is a reference to the scalar type (ValField = ValFieldMem&)
-            copy_to = copy_from; // cppcheck-suppress uselessAssignmentArg
-        }
+        timestepper_detail::copy_helper<ValFieldMem>::copy(copy_to, copy_from);
     }
 
     /**
