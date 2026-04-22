@@ -421,7 +421,7 @@
     <member refid="classCircularToCartesian_1a6ce3ab4a4fa9a80c52479be9fbdd62b7" kind="function"><name>get_inverse_mapping</name></member>
   </compound>
   <compound refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator" kind="class"><name>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</name>
-    <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a360b725d19bb5a7a8048df9b27aac351" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1af7c11e1b2efc497acfe69e0c24c53812" kind="variable"><name>m_evaluator</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a06ff41df5b756172163355916a8e27a9" kind="variable"><name>m_coeff</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1ac86b140d03c4617090d59570fdada7f2" kind="function"><name>CoeffEvaluator</name></member>
     <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a81305bf7faa840fe3db93e87e2fed097" kind="function"><name>operator()</name></member>

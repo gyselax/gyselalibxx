@@ -694,7 +694,7 @@ public:
     class CoeffEvaluator
     {
         static_assert(std::is_same_v&lt;Coeff, typename Coeff::view_type&gt;);
-        Evaluator const&amp; m_evaluator;
+        Evaluator const m_evaluator;
         Coeff m_coeff;
 
     public:

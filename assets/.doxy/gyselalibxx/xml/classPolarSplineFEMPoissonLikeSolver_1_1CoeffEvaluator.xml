@@ -12,9 +12,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a360b725d19bb5a7a8048df9b27aac351" prot="private" static="no" mutable="no">
-        <type>Evaluator const  &amp;</type>
-        <definition>Evaluator const&amp; PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;::CoeffEvaluator&lt; Evaluator, Coeff &gt;::m_evaluator</definition>
+      <memberdef kind="variable" id="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1af7c11e1b2efc497acfe69e0c24c53812" prot="private" static="no" mutable="no">
+        <type>Evaluator const</type>
+        <definition>Evaluator const PolarSplineFEMPoissonLikeSolver&lt; GridR, GridTheta, PolarBSplinesRTheta, BuilderType, EvaluatorType, Mapping, IdxRangeFull &gt;::CoeffEvaluator&lt; Evaluator, Coeff &gt;::m_evaluator</definition>
         <argsstring></argsstring>
         <name>m_evaluator</name>
         <qualifiedname>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator::m_evaluator</qualifiedname>
@@ -113,7 +113,7 @@
     <listofallmembers>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1ac86b140d03c4617090d59570fdada7f2" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>CoeffEvaluator</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a06ff41df5b756172163355916a8e27a9" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>m_coeff</name></member>
-      <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a360b725d19bb5a7a8048df9b27aac351" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>m_evaluator</name></member>
+      <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1af7c11e1b2efc497acfe69e0c24c53812" prot="private" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>m_evaluator</name></member>
       <member refid="classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator_1a81305bf7faa840fe3db93e87e2fed097" prot="public" virt="non-virtual"><scope>PolarSplineFEMPoissonLikeSolver::CoeffEvaluator</scope><name>operator()</name></member>
     </listofallmembers>
   </compounddef>
