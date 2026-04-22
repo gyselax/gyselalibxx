@@ -60,7 +60,8 @@ concept Compatible
 template <class ExecSpace, class FieldMem>
 concept Accessible
         = !(FieldLike<FieldMem>)
-          || Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::accessible;
+          || bool(Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::
+                          accessible);
 
 template <class T>
 struct IdxRangeType
