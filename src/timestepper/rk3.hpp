@@ -175,7 +175,7 @@ private:
             std::function<void(ValField, DerivConstField, double)> y_update) const
     {
         // Save initial conditions
-        base_type::copy(y_prime, ValConstField(y));
+        timestepper_detail::copy_helper<FieldMem>::copy(y_prime, ValConstField(y));
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y)
@@ -199,7 +199,7 @@ private:
                 k2);
 
         // Collect initial conditions
-        base_type::copy(y_prime, ValConstField(y));
+        timestepper_detail::copy_helper<FieldMem>::copy(y_prime, ValConstField(y));
 
         // Calculate y_new := y_n + h*(2*k_2-k_1)
         y_update(y_prime, DerivConstField(k_total), dt);

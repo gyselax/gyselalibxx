@@ -97,6 +97,12 @@ template <class FieldType>
 struct copy_helper
 {
     static_assert(!FieldLike<FieldType>);
+    /**
+     * @brief Make a copy of the values of the function being evolved.
+     *
+     * @param[out] copy_to the field that the values should be copied to.
+     * @param[in] copy_from The field that the values should be copied from.
+     */
     static KOKKOS_FUNCTION void copy(FieldType& copy_to, FieldType const& copy_from)
     {
         copy_to = copy_from;
@@ -459,17 +465,6 @@ public:
             std::function<void(ValField, DerivConstField, double)> y_update) const = 0;
 
 protected:
-    /**
-     * @brief Make a copy of the values of the function being evolved.
-     *
-     * @param[out] copy_to the field that the values should be copied to.
-     * @param[in] copy_from The field that the values should be copied from.
-     */
-    static void copy(ValField copy_to, ValConstField copy_from)
-    {
-        timestepper_detail::copy_helper<ValFieldMem>::copy(copy_to, copy_from);
-    }
-
     /**
      * @brief A method to assemble multiple derivative fields into one. This method is responsible
      * for choosing how this is done depending on the type of the derivative field.

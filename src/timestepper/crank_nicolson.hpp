@@ -196,7 +196,7 @@ private:
             std::function<void(ValField, DerivConstField, double)> y_update) const
     {
         // Save initial conditions
-        base_type::copy(y_init, ValConstField(y));
+        timestepper_detail::copy_helper<FieldMem>::copy(y_init, ValConstField(y));
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
@@ -221,10 +221,10 @@ private:
                     k_new);
 
             // Save the old characteristic feet
-            base_type::copy(y_old, ValConstField(y));
+            timestepper_detail::copy_helper<FieldMem>::copy(y_old, ValConstField(y));
 
             // Re-initialise the characteristic feet
-            base_type::copy(y, ValConstField(y_init));
+            timestepper_detail::copy_helper<FieldMem>::copy(y, ValConstField(y_init));
 
             // Calculate y_new := y_n + h/2*(k_1 + k_new)
             y_update(y, DerivConstField(k_total), 0.5 * dt);
