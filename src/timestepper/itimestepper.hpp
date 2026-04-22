@@ -475,6 +475,10 @@ public:
     /**
      * The type of the TimeStepper that will be constructed to solve an equation whose field
      * and derivative(s) have the specified type.
+     * @tparam FieldMem The type of the data storage for the function.
+     * @tparam DerivFieldMem The type of the data storage for the derivative of the function.
+     * @tparam ExecSpace The space (CPU/GPU) where the calculations are carried out.
+     *                   This template parameter is ignored if the FieldMem is a scalar.
      */
     template <
             class FieldMem,
