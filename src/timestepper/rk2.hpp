@@ -132,7 +132,7 @@ public:
             DerivFieldMem k2;
             ValField y_prime = y_prime_storage;
 
-            update(Kokkos::Serial(), y, dt, y_prime, k1, k2, dy_calculator, y_update);
+            update(ExecSpace(), y, dt, y_prime, k1, k2, dy_calculator, y_update);
         } else {
             static_assert(timestepper_detail::FieldLike<FieldMem>);
         }

@@ -102,23 +102,17 @@ public:
             DerivFieldMem k4_alloc("k4 (RK4::update)", m_idx_range);
             DerivFieldMem k_total_alloc("k_total (RK4::update)", m_idx_range);
 
-            ValField y_prime = get_field(y_prime_alloc);
-            DerivField k1 = get_field(k1_alloc);
-            DerivField k2 = get_field(k2_alloc);
-            DerivField k3 = get_field(k3_alloc);
-            DerivField k4 = get_field(k4_alloc);
-            DerivField k_total = get_field(k_total_alloc);
 
             update<element_type>(
                     exec_space,
                     y,
                     dt,
-                    y_prime,
-                    k1,
-                    k2,
-                    k3,
-                    k4,
-                    k_total,
+                    get_field(y_prime_alloc),
+                    get_field(k1_alloc),
+                    get_field(k2_alloc),
+                    get_field(k3_alloc),
+                    get_field(k4_alloc),
+                    get_field(k_total_alloc),
                     dy_calculator,
                     y_update);
         } else {
@@ -155,7 +149,7 @@ public:
             ValField y_prime = y_prime_storage;
 
             update<DerivFieldMem>(
-                    Kokkos::Serial(),
+                    ExecSpace(),
                     y,
                     dt,
                     y_prime,

@@ -122,15 +122,12 @@ public:
             DerivFieldMem k1_alloc("k1 (CrankNicholson::update)", m_idx_range);
             DerivFieldMem k_new_alloc("k_new (CrankNicholson::update)", m_idx_range);
             DerivFieldMem k_total_alloc("k_total (CrankNicholson::update)", m_idx_range);
-            ValField y_init = get_field(y_init_alloc);
-
-            base_type::copy(y_init, get_const_field(y));
 
             update<element_type>(
                     exec_space,
                     y,
                     dt,
-                    y_init,
+                    get_field(y_init_alloc),
                     get_field(y_old_alloc),
                     get_field(k1_alloc),
                     get_field(k_new_alloc),
@@ -168,10 +165,8 @@ public:
             DerivFieldMem k_new;
             DerivFieldMem k_total;
 
-            y_init = y;
-
             update<DerivFieldMem>(
-                    Kokkos::Serial(),
+                    ExecSpace(),
                     y,
                     dt,
                     y_init,
@@ -200,6 +195,9 @@ private:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const
     {
+        // Save initial conditions
+        base_type::copy(y_init, ValConstField(y));
+
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
         dy_calculator(k1, ValConstField(y));

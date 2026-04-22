@@ -120,7 +120,7 @@ public:
         if constexpr (!timestepper_detail::FieldLike<FieldMem>) {
             DerivFieldMem k1;
 
-            update(Kokkos::Serial(), y, dt, k1, dy_calculator, y_update);
+            update(ExecSpace(), y, dt, k1, dy_calculator, y_update);
         } else {
             static_assert(timestepper_detail::FieldLike<FieldMem>);
         }
