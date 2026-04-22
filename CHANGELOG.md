@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix missing `PDIEvent(initialisation)` in the guiding centre (X,Y) simulation.
 - Fix `ddcHelper::assign_elements` to allow a ND tensor to be truncated to a MD tensor (with M\<N).
 - Fix use of `PolarSplineFEMPoissonLikeSolver` with a ND metric tensor (with N\>2).
+- Decrease memory usage in `BslAdvection1D`.
 
 ### Changed
 
