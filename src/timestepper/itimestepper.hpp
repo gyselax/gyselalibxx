@@ -122,8 +122,7 @@ struct copy_helper<FieldMemType>
 };
 
 template <class ElementType, class IdxRangeType, class MemSpace>
-struct copy_helper<
-        ddc::Chunk<ElementType, IdxRangeType, ddc::KokkosAllocator<ElementType, MemSpace>>>
+struct copy_helper<FieldMem<ElementType, IdxRangeType, MemSpace>>
 {
     static void copy(
             Field<ElementType, IdxRangeType, MemSpace> copy_to,
@@ -160,9 +159,7 @@ struct assemble_helper
 };
 
 template <class ExecSpace, class ElementType, class IdxRangeType, class MemSpace>
-struct assemble_helper<
-        ExecSpace,
-        ddc::Chunk<ElementType, IdxRangeType, ddc::KokkosAllocator<ElementType, MemSpace>>>
+struct assemble_helper<ExecSpace, FieldMem<ElementType, IdxRangeType, MemSpace>>
 {
     using DerivFieldType = Field<ElementType, IdxRangeType, MemSpace>;
 
