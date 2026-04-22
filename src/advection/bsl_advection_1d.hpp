@@ -119,7 +119,7 @@ private:
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeFunction>;
-    using FunctionDerivFieldMem = FieldMem<DataType, IdxRangeFunctionDeriv>;
+    using FunctionDerivConstField = ConstField<DataType, IdxRangeFunctionDeriv>;
 
     using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
             FieldMem<Coord<typename GridInterest::continuous_dimension_type>, IdxRangeAdvection>,
@@ -246,6 +246,9 @@ public:
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
             = std::nullopt,
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
+            = std::nullopt,
+            std::optional<FunctionDerivConstField> const function_derivatives_min = std::nullopt,
+            std::optional<FunctionDerivConstField> const function_derivatives_max
             = std::nullopt) const
     {
         using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
@@ -273,14 +276,6 @@ public:
         FunctionBasisFieldMem function_coefs_alloc(
                 "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
-
-        // Build derivatives on boundaries and fill with zeros....................................
-        FunctionDerivFieldMem function_derivatives_min(
-                m_function_builder.batched_derivs_xmin_domain(idx_range_function));
-        FunctionDerivFieldMem function_derivatives_max(
-                m_function_builder.batched_derivs_xmax_domain(idx_range_function));
-        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
-        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
 
         // Initialise the characteristics on the mesh points .....................................
         /*
@@ -337,8 +332,8 @@ public:
         m_function_builder(
                 get_field(function_coefs_alloc),
                 get_const_field(allfdistribu),
-                std::optional(get_const_field(function_derivatives_min)),
-                std::optional(get_const_field(function_derivatives_max)));
+                function_derivatives_min,
+                function_derivatives_max);
 
         FunctionBasisConstField function_coefs = get_const_field(function_coefs_alloc);
 
