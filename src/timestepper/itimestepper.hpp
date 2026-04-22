@@ -475,13 +475,16 @@ public:
     using time_stepper_t = TimeStepper<FieldMem, DerivFieldMem, ExecSpace>;
 
     /**
-     * @brief Allocate the TimeStepper object
+     * @brief Allocate the TimeStepper object for FieldLike types.
      * @tparam ChosenTimeStepper The type of the TimeStepper to be constructed (obtained from time_stepper_t).
      * @param[in] idx_range The index range on which the operator will act (and allocate memory).
      */
     template <class ChosenTimeStepper>
     auto preallocate(typename ChosenTimeStepper::IdxRange const idx_range) const
     {
+        static_assert(
+                timestepper_detail::FieldLike<typename ChosenTimeStepper::ValFieldMem>,
+                "An index range should not be provided to preallocate for scalar timesteppers.");
         static_assert(std::is_same_v<
                       ChosenTimeStepper,
                       time_stepper_t<
@@ -489,6 +492,25 @@ public:
                               typename ChosenTimeStepper::DerivFieldMem,
                               typename ChosenTimeStepper::exec_space>>);
         return ChosenTimeStepper(idx_range);
+    }
+
+    /**
+     * @brief Allocate the TimeStepper object for scalar (non-FieldLike) types.
+     * @tparam ChosenTimeStepper The type of the TimeStepper to be constructed (obtained from time_stepper_t).
+     */
+    template <class ChosenTimeStepper>
+    auto preallocate() const
+    {
+        static_assert(
+                !timestepper_detail::FieldLike<typename ChosenTimeStepper::ValFieldMem>,
+                "An index range must be provided to preallocate for FieldLike timesteppers.");
+        static_assert(std::is_same_v<
+                      ChosenTimeStepper,
+                      time_stepper_t<
+                              typename ChosenTimeStepper::ValFieldMem,
+                              typename ChosenTimeStepper::DerivFieldMem,
+                              typename ChosenTimeStepper::exec_space>>);
+        return ChosenTimeStepper();
     }
 };
 

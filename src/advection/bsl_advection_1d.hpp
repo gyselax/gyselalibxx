@@ -306,8 +306,7 @@ public:
         */
         // The function describing how the derivative of the evolve function is calculated.
 
-        TimeStepper time_stepper
-                = m_time_stepper_builder.template preallocate<TimeStepper>(IdxRange<>());
+        TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
 
 
         FunctionBasisConstField function_coefs = get_const_field(function_coefs_alloc);
