@@ -312,6 +312,7 @@ public:
         FunctionBasisConstField function_coefs = get_const_field(function_coefs_alloc);
 
         FunctionEvaluator const& function_evaluator_proxy = m_function_evaluator;
+        AdvectionFieldEvaluator const& adv_field_evaluator_proxy = m_adv_field_evaluator;
         // Evaluate the function at the characteristic feet
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -323,7 +324,7 @@ public:
 
                     std::function<void(DataType&, CoordInterest const&)> update_adv_field
                             = [&](DataType& updated_advection_field, CoordInterest const& foot) {
-                                  updated_advection_field = m_adv_field_evaluator(
+                                  updated_advection_field = adv_field_evaluator_proxy(
                                           foot,
                                           get_const_field(
                                                   advection_field_coefs[IdxBatchAdvecField(idx)]));
