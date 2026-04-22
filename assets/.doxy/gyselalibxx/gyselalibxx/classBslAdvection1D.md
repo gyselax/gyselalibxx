@@ -65,7 +65,7 @@ _A class which computes the advection along the dimension of interest GridIntere
 |   | [**BslAdvection1D**](#function-bsladvection1d-13) ([**FunctionBuilder**](classBslAdvection1D.md#typedef-functionbuilder) const & function\_builder, [**FunctionEvaluator**](classBslAdvection1D.md#typedef-functionevaluator) const & function\_evaluator, [**AdvectionFieldBuilder**](classBslAdvection1D.md#typedef-advectionfieldbuilder) const & adv\_field\_builder, [**AdvectionFieldEvaluator**](classBslAdvection1D.md#typedef-advectionfieldevaluator) const & adv\_field\_evaluator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
 |   | [**BslAdvection1D**](#function-bsladvection1d-23) (FunctionInterpolator const & function\_interpolator, AdvectionFieldInterpolator const & adv\_field\_interpolator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
 |   | [**BslAdvection1D**](#function-bsladvection1d-33) (FunctionInterpolator const & interpolator, TimeStepperBuilder const & time\_stepper\_builder) <br>_Constructor when the advection domain and the function domain are different._  |
-|  FunctionField | [**operator()**](#function-operator) (FunctionField const allfdistribu, AdvecField const advection\_field, DataType const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_max=std::nullopt) const<br>_Advects allfdistribu along the advection dimension GridInterest for a duration dt._  |
+|  FunctionField | [**operator()**](#function-operator) (FunctionField const allfdistribu, AdvecField const advection\_field, DataType const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection\_field\_derivatives\_max=std::nullopt, std::optional&lt; FunctionDerivConstField &gt; const function\_derivatives\_min=std::nullopt, std::optional&lt; FunctionDerivConstField &gt; const function\_derivatives\_max=std::nullopt) const<br>_Advects allfdistribu along the advection dimension GridInterest for a duration dt._  |
 |   | [**~BslAdvection1D**](#function-bsladvection1d) () = default<br> |
 
 
@@ -324,7 +324,9 @@ inline FunctionField BslAdvection1D::operator() (
     AdvecField const advection_field,
     DataType const dt,
     std::optional< AdvecFieldDerivConstField > const advection_field_derivatives_min=std::nullopt,
-    std::optional< AdvecFieldDerivConstField > const advection_field_derivatives_max=std::nullopt
+    std::optional< AdvecFieldDerivConstField > const advection_field_derivatives_max=std::nullopt,
+    std::optional< FunctionDerivConstField > const function_derivatives_min=std::nullopt,
+    std::optional< FunctionDerivConstField > const function_derivatives_max=std::nullopt
 ) const
 ```
 
@@ -337,9 +339,11 @@ inline FunctionField BslAdvection1D::operator() (
 
 * `allfdistribu` Reference to the advected function, allocated on the device 
 * `advection_field` Reference to the advection field, allocated on the device. 
-* `advection_field_derivatives_min` Reference to the advection field derivatives at the left side of the interest dimension, allocated on the device. 
-* `advection_field_derivatives_max` Reference to the advection field derivatives at the right side of the interest dimension, allocated on the device. 
-* `dt` Time step.
+* `dt` Time step. 
+* `advection_field_derivatives_min` Reference to the advection field derivatives at the left side of the interest dimension, allocated on the device. This only needs to be provided if the advection field is represented using a spline with Hermite boundary conditions. 
+* `advection_field_derivatives_max` Reference to the advection field derivatives at the right side of the interest dimension, allocated on the device. This only needs to be provided if the advection field is represented using a spline with Hermite boundary conditions. 
+* `function_derivatives_min` Reference to the function derivatives at the left side of the interest dimension, allocated on the device. This only needs to be provided if the function is represented using a spline with Hermite boundary conditions. 
+* `function_derivatives_max` Reference to the function derivatives at the right side of the interest dimension, allocated on the device. This only needs to be provided if the function is represented using a spline with Hermite boundary conditions.
 
 
 

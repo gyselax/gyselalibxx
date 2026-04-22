@@ -617,7 +617,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">FunctionField</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (FunctionField const allfdistribu, AdvecField const advection_field, DataType const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt) const<br><em>Advects allfdistribu along the advection dimension GridInterest for a duration dt.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (FunctionField const allfdistribu, AdvecField const advection_field, DataType const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt, std::optional&lt; FunctionDerivConstField &gt; const function_derivatives_min=std::nullopt, std::optional&lt; FunctionDerivConstField &gt; const function_derivatives_max=std::nullopt) const<br><em>Advects allfdistribu along the advection dimension GridInterest for a duration dt.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"></td>
@@ -733,16 +733,20 @@
     AdvecField const advection_field,
     DataType const dt,
     std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt,
-    std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt
+    std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt,
+    std::optional&lt; FunctionDerivConstField &gt; const function_derivatives_min=std::nullopt,
+    std::optional&lt; FunctionDerivConstField &gt; const function_derivatives_max=std::nullopt
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>allfdistribu</code> Reference to the advected function, allocated on the device </li>
 <li><code>advection_field</code> Reference to the advection field, allocated on the device. </li>
-<li><code>advection_field_derivatives_min</code> Reference to the advection field derivatives at the left side of the interest dimension, allocated on the device. </li>
-<li><code>advection_field_derivatives_max</code> Reference to the advection field derivatives at the right side of the interest dimension, allocated on the device. </li>
-<li><code>dt</code> Time step.</li>
+<li><code>dt</code> Time step. </li>
+<li><code>advection_field_derivatives_min</code> Reference to the advection field derivatives at the left side of the interest dimension, allocated on the device. This only needs to be provided if the advection field is represented using a spline with Hermite boundary conditions. </li>
+<li><code>advection_field_derivatives_max</code> Reference to the advection field derivatives at the right side of the interest dimension, allocated on the device. This only needs to be provided if the advection field is represented using a spline with Hermite boundary conditions. </li>
+<li><code>function_derivatives_min</code> Reference to the function derivatives at the left side of the interest dimension, allocated on the device. This only needs to be provided if the function is represented using a spline with Hermite boundary conditions. </li>
+<li><code>function_derivatives_max</code> Reference to the function derivatives at the right side of the interest dimension, allocated on the device. This only needs to be provided if the function is represented using a spline with Hermite boundary conditions.</li>
 </ul>
 <p><strong>Returns:</strong></p>
 <p>A reference to the allfdistribu array after advection on dt. </p>

@@ -68,7 +68,7 @@
     <member refid="classBslAdvection1D_1a0c0da8de5232bfd7bf9e8db3288049c9" kind="typedef"><name>FunctionBasisFieldMem</name></member>
     <member refid="classBslAdvection1D_1adf40b96d80d76d9c380e497e58560b66" kind="typedef"><name>FunctionBasisConstField</name></member>
     <member refid="classBslAdvection1D_1aee0a7b63e170ccd57a0c538567ece78b" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
-    <member refid="classBslAdvection1D_1a675e8d6f4a3dd6b0484def671e2cb6d0" kind="typedef"><name>FunctionDerivFieldMem</name></member>
+    <member refid="classBslAdvection1D_1a58050bcfff91ec5f6d5949fbce1d0004" kind="typedef"><name>FunctionDerivConstField</name></member>
     <member refid="classBslAdvection1D_1a7a21cefda8e0b31fa6585c8e7befd0cc" kind="typedef"><name>TimeStepper</name></member>
     <member refid="classBslAdvection1D_1a6b4ae6a8b94fe3dc1a55f2f766405bb6" kind="variable"><name>m_function_builder</name></member>
     <member refid="classBslAdvection1D_1aec4375534b3c370e5f3be10ed0a3448f" kind="variable"><name>m_function_evaluator</name></member>
@@ -79,7 +79,7 @@
     <member refid="classBslAdvection1D_1ae7cad7b6ea28b79402059c7087948088" kind="function"><name>BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1aae7aecf6f16dd5afaad21409ac5a8b78" kind="function"><name>BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1a231cd2d2423f12e1adc6c6a51d22d56e" kind="function"><name>~BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1a618ef33d5c081227eed9b034cc59e550" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvection1D_1a69d440999392ca94a124ad9a18d814d1" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionPolar" kind="class"><name>BslAdvectionPolar</name>
     <member refid="classBslAdvectionPolar_1a6e36e24474068c1cfac75ea3dfbecd1c" kind="typedef"><name>R</name></member>

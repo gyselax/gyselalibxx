@@ -249,7 +249,7 @@
 * **FunctionBasisConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionBasisFieldMem** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionBuilder** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
-* **FunctionDerivFieldMem** ([**BslAdvection1D**](classBslAdvection1D.md))
+* **FunctionDerivConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionEvaluator** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
 * **FunctionField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FEMBSplines** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))

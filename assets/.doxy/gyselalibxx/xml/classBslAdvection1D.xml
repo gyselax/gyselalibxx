@@ -403,12 +403,12 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="120" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="121" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classBslAdvection1D_1a675e8d6f4a3dd6b0484def671e2cb6d0" prot="private" static="no">
-        <type>FieldMem&lt; DataType, IdxRangeFunctionDeriv &gt;</type>
-        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, FunctionInterpolator, AdvectionFieldInterpolator, TimeStepperBuilder, DataType &gt;::FunctionDerivFieldMem =  FieldMem&lt;DataType, IdxRangeFunctionDeriv&gt;</definition>
+      <memberdef kind="typedef" id="classBslAdvection1D_1a58050bcfff91ec5f6d5949fbce1d0004" prot="private" static="no">
+        <type>ConstField&lt; DataType, IdxRangeFunctionDeriv &gt;</type>
+        <definition>using BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, FunctionInterpolator, AdvectionFieldInterpolator, TimeStepperBuilder, DataType &gt;::FunctionDerivConstField =  ConstField&lt;DataType, IdxRangeFunctionDeriv&gt;</definition>
         <argsstring></argsstring>
-        <name>FunctionDerivFieldMem</name>
-        <qualifiedname>BslAdvection1D::FunctionDerivFieldMem</qualifiedname>
+        <name>FunctionDerivConstField</name>
+        <qualifiedname>BslAdvection1D::FunctionDerivConstField</qualifiedname>
         <briefdescription>
         </briefdescription>
         <detaileddescription>
@@ -696,10 +696,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="227" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classBslAdvection1D_1a618ef33d5c081227eed9b034cc59e550" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classBslAdvection1D_1a69d440999392ca94a124ad9a18d814d1" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>FunctionField</type>
         <definition>FunctionField BslAdvection1D&lt; GridInterest, IdxRangeAdvection, IdxRangeFunction, FunctionInterpolator, AdvectionFieldInterpolator, TimeStepperBuilder, DataType &gt;::operator()</definition>
-        <argsstring>(FunctionField const allfdistribu, AdvecField const advection_field, DataType const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt) const</argsstring>
+        <argsstring>(FunctionField const allfdistribu, AdvecField const advection_field, DataType const dt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_min=std::nullopt, std::optional&lt; AdvecFieldDerivConstField &gt; const advection_field_derivatives_max=std::nullopt, std::optional&lt; FunctionDerivConstField &gt; const function_derivatives_min=std::nullopt, std::optional&lt; FunctionDerivConstField &gt; const function_derivatives_max=std::nullopt) const</argsstring>
         <name>operator()</name>
         <qualifiedname>BslAdvection1D::operator()</qualifiedname>
         <param>
@@ -724,6 +724,16 @@
           <declname>advection_field_derivatives_max</declname>
           <defval>std::nullopt</defval>
         </param>
+        <param>
+          <type>std::optional&lt; FunctionDerivConstField &gt; const</type>
+          <declname>function_derivatives_min</declname>
+          <defval>std::nullopt</defval>
+        </param>
+        <param>
+          <type>std::optional&lt; FunctionDerivConstField &gt; const</type>
+          <declname>function_derivatives_max</declname>
+          <defval>std::nullopt</defval>
+        </param>
         <briefdescription>
 <para>Advects allfdistribu along the advection dimension GridInterest for a duration dt. </para>
         </briefdescription>
@@ -746,10 +756,18 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Time step. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername direction="in">advection_field_derivatives_min</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Reference to the advection field derivatives at the left side of the interest dimension, allocated on the device. </para>
+<para>Reference to the advection field derivatives at the left side of the interest dimension, allocated on the device. This only needs to be provided if the advection field is represented using a spline with Hermite boundary conditions. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -757,15 +775,23 @@
 <parametername direction="in">advection_field_derivatives_max</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Reference to the advection field derivatives at the right side of the interest dimension, allocated on the device. </para>
+<para>Reference to the advection field derivatives at the right side of the interest dimension, allocated on the device. This only needs to be provided if the advection field is represented using a spline with Hermite boundary conditions. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername direction="in">dt</parametername>
+<parametername direction="in">function_derivatives_min</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Time step.</para>
+<para>Reference to the function derivatives at the left side of the interest dimension, allocated on the device. This only needs to be provided if the function is represented using a spline with Hermite boundary conditions. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">function_derivatives_max</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Reference to the function derivatives at the right side of the interest dimension, allocated on the device. This only needs to be provided if the function is represented using a spline with Hermite boundary conditions.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -775,7 +801,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="242" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="242" bodyend="362"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="254" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="254" bodyend="369"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -844,7 +870,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="63" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="64" bodyend="363"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" line="63" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_1d.hpp" bodystart="64" bodyend="370"/>
     <listofallmembers>
       <member refid="classBslAdvection1D_1a52b466daba20fce25ee956901c5b1dca" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>AdvecField</name></member>
       <member refid="classBslAdvection1D_1ad5d8680c7934205817f147026826dcd8" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>AdvecFieldDerivConstField</name></member>
@@ -865,7 +891,7 @@
       <member refid="classBslAdvection1D_1adf40b96d80d76d9c380e497e58560b66" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionBasisConstField</name></member>
       <member refid="classBslAdvection1D_1a0c0da8de5232bfd7bf9e8db3288049c9" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionBasisFieldMem</name></member>
       <member refid="classBslAdvection1D_1a91a6f4418b7540c4a5acfe52b5beaff8" prot="public" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionBuilder</name></member>
-      <member refid="classBslAdvection1D_1a675e8d6f4a3dd6b0484def671e2cb6d0" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionDerivFieldMem</name></member>
+      <member refid="classBslAdvection1D_1a58050bcfff91ec5f6d5949fbce1d0004" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionDerivConstField</name></member>
       <member refid="classBslAdvection1D_1a857681aedc7098fa0397e75dfad71c79" prot="public" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionEvaluator</name></member>
       <member refid="classBslAdvection1D_1a736bd6e0733a08aec56cc843dc522de0" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>FunctionField</name></member>
       <member refid="classBslAdvection1D_1ae6036a466b2c7edd05bb3e0b908ceb83" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>IdxAdvection</name></member>
@@ -881,7 +907,7 @@
       <member refid="classBslAdvection1D_1a6b4ae6a8b94fe3dc1a55f2f766405bb6" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>m_function_builder</name></member>
       <member refid="classBslAdvection1D_1aec4375534b3c370e5f3be10ed0a3448f" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>m_function_evaluator</name></member>
       <member refid="classBslAdvection1D_1a8cde1b8cafb6c5e12328eb57fe72e521" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>m_time_stepper_builder</name></member>
-      <member refid="classBslAdvection1D_1a618ef33d5c081227eed9b034cc59e550" prot="public" virt="non-virtual"><scope>BslAdvection1D</scope><name>operator()</name></member>
+      <member refid="classBslAdvection1D_1a69d440999392ca94a124ad9a18d814d1" prot="public" virt="non-virtual"><scope>BslAdvection1D</scope><name>operator()</name></member>
       <member refid="classBslAdvection1D_1a7a21cefda8e0b31fa6585c8e7befd0cc" prot="private" virt="non-virtual"><scope>BslAdvection1D</scope><name>TimeStepper</name></member>
       <member refid="classBslAdvection1D_1a231cd2d2423f12e1adc6c6a51d22d56e" prot="public" virt="non-virtual"><scope>BslAdvection1D</scope><name>~BslAdvection1D</name></member>
     </listofallmembers>
