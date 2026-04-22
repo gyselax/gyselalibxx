@@ -10,11 +10,11 @@ target_link_libraries("pde_solvers"
     INTERFACE
         DDC::core
         DDC::fft
+        GMGPolar::GMGPolarLib
         gslx::coord_transformations
         gslx::data_types
         gslx::matrix_tools
         gslx::utils
-        GMGPolarLib
 )
 
 add_library("gslx::pde_solvers" ALIAS "pde_solvers")
