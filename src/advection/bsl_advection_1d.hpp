@@ -231,11 +231,23 @@ public:
      *
      * @param[in, out] allfdistribu Reference to the advected function, allocated on the device
      * @param[in] advection_field Reference to the advection field, allocated on the device.
+     * @param[in] dt Time step.
      * @param[in] advection_field_derivatives_min Reference to the advection field
      *              derivatives at the left side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the advection field is represented using a
+     *              spline with Hermite boundary conditions.
      * @param[in] advection_field_derivatives_max Reference to the advection field
      *              derivatives at the right side of the interest dimension, allocated on the device.
-     * @param[in] dt Time step.
+     *              This only needs to be provided if the advection field is represented using a
+     *              spline with Hermite boundary conditions.
+     * @param[in] function_derivatives_min Reference to the function
+     *              derivatives at the left side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the function is represented using a
+     *              spline with Hermite boundary conditions.
+     * @param[in] function_derivatives_max Reference to the function
+     *              derivatives at the right side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the function is represented using a
+     *              spline with Hermite boundary conditions.
      *
      * @return A reference to the allfdistribu array after advection on dt.
      */
