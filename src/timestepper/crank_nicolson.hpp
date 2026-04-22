@@ -142,6 +142,19 @@ public:
         }
     }
 
+    /**
+     * @brief Carry out one step of the Crank-Nicolson scheme on a scalar.
+     *
+     * @param[inout] y
+     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
+     *     of the index range.
+     * @param[in] dt
+     *     The time step over which the values should be evolved.
+     * @param[in] dy_calculator
+     *     The function describing how the derivative of the evolve function is calculated.
+     * @param[in] y_update
+     *     The function describing how the value(s) are updated using the derivative.
+     */
     void update(
             ValField y,
             double dt,

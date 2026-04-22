@@ -237,7 +237,7 @@ public:
             std::function<void(ValField, DerivConstField, double)> y_update) const = 0;
 
     /**
-     * @brief Carry out one step of the timestepping scheme.
+     * @brief Carry out one step of the timestepping scheme on a scalar.
      *
      * @param[inout] y
      *     The value(s) which should be evolved over time defined on each of the dimensions at each point
