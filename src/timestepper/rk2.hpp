@@ -101,9 +101,25 @@ public:
             DerivField k2 = get_field(k2_alloc);
             ValField y_prime = get_field(y_prime_alloc);
 
-            update(exec_space, y, dt, y_prime, k1, k2, dy_calculator, y_update);
+            // Save initial conditions
+            timestepper_detail::copy_helper<FieldMem>::copy(y_prime, ValConstField(y));
+
+            // --------- Calculate k1 ------------
+            // Calculate k1 = f(y)
+            dy_calculator(k1, ValConstField(y));
+
+            // --------- Calculate k2 ------------
+            // Calculate y_new := y_n + h/2*k_1
+            y_update(y_prime, DerivConstField(k1), 0.5 * dt);
+
+            // Calculate k2 = f(y_new)
+            dy_calculator(k2, ValConstField(y_prime));
+
+            // ----------- Update y --------------
+            // Calculate y_{n+1} := y_n + h*k_2
+            y_update(y, DerivConstField(k2), dt);
         } else {
-            static_assert(!timestepper_detail::FieldLike<FieldMem>);
+            assert(timestepper_detail::FieldLike<FieldMem>);
         }
     }
 
@@ -120,35 +136,16 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
-    KOKKOS_FUNCTION void update(
-            ValField y,
-            double dt,
-            std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update) const final
+    template <class DYFunctor, class YFunctor>
+    KOKKOS_FUNCTION void update(ValField y, double dt, DYFunctor dy_calculator, YFunctor y_update)
+            const
     {
-        if constexpr (!timestepper_detail::FieldLike<FieldMem>) {
-            FieldMem y_prime_storage;
-            DerivFieldMem k1;
-            DerivFieldMem k2;
-            ValField y_prime = y_prime_storage;
+        static_assert(!timestepper_detail::FieldLike<FieldMem>);
+        FieldMem y_prime_storage;
+        DerivFieldMem k1;
+        DerivFieldMem k2;
+        ValField y_prime = y_prime_storage;
 
-            update(ExecSpace(), y, dt, y_prime, k1, k2, dy_calculator, y_update);
-        } else {
-            static_assert(timestepper_detail::FieldLike<FieldMem>);
-        }
-    }
-
-private:
-    void update(
-            ExecSpace const& exec_space,
-            ValField y,
-            double dt,
-            ValField y_prime,
-            DerivField k1,
-            DerivField k2,
-            std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update) const
-    {
         // Save initial conditions
         timestepper_detail::copy_helper<FieldMem>::copy(y_prime, ValConstField(y));
 

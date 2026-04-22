@@ -92,9 +92,15 @@ public:
             DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
             DerivField k1 = get_field(k1_alloc);
 
-            update(exec_space, y, dt, k1, dy_calculator, y_update);
+            // --------- Calculate k1 ------------
+            // Calculate k1 = f(y_n)
+            dy_calculator(k1, ValConstField(y));
+
+            // ----------- Update y --------------
+            // Calculate y_new := y_n + h*k_1
+            y_update(y, DerivConstField(k1), dt);
         } else {
-            static_assert(!timestepper_detail::FieldLike<FieldMem>);
+            assert(timestepper_detail::FieldLike<FieldMem>);
         }
     }
 
@@ -111,30 +117,13 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
-    KOKKOS_FUNCTION void update(
-            ValField y,
-            double dt,
-            std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update) const final
+    template <class DYFunctor, class YFunctor>
+    KOKKOS_FUNCTION void update(ValField y, double dt, DYFunctor dy_calculator, YFunctor y_update)
+            const
     {
-        if constexpr (!timestepper_detail::FieldLike<FieldMem>) {
-            DerivFieldMem k1;
+        static_assert(!timestepper_detail::FieldLike<FieldMem>);
+        DerivFieldMem k1;
 
-            update(ExecSpace(), y, dt, k1, dy_calculator, y_update);
-        } else {
-            static_assert(timestepper_detail::FieldLike<FieldMem>);
-        }
-    }
-
-private:
-    static void update(
-            ExecSpace const& exec_space,
-            ValField y,
-            double dt,
-            DerivField k1,
-            std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update)
-    {
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
         dy_calculator(k1, ValConstField(y));
