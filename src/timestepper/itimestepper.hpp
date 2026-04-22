@@ -8,6 +8,34 @@
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
 
+namespace detail {
+template <class T>
+struct GetSpanEquivalent
+{
+    using type = typename T::span_type;
+};
+template <class T>
+struct GetViewEquivalent
+{
+    using type = typename T::view_type;
+};
+template <>
+struct GetSpanEquivalent<double>
+{
+    using type = double&;
+};
+template <>
+struct GetViewEquivalent<double>
+{
+    using type = double const&;
+};
+
+template <class T>
+using span_t = typename GetSpanEquivalent<T>::type;
+template <class T>
+using view_t = typename GetViewEquivalent<T>::type;
+} // namespace detail
+
 /**
  * @brief The superclass from which all timestepping methods inherit.
  *
@@ -51,19 +79,19 @@ public:
     using ValFieldMem = FieldMem;
 
     /// The type of the values of the function being evolved.
-    using ValField = typename FieldMem::span_type;
+    using ValField = detail::span_t<FieldMem>;
 
     /// The constant type of the values of the function being evolved.
-    using ValConstField = typename FieldMem::view_type;
+    using ValConstField = detail::view_t<FieldMem>;
 
     /// The type of the memory allocation for the derivatives of the function being evolved.
     using DerivFieldMem = DerivFieldMemType;
 
     /// The type of the derivatives of the function being evolved.
-    using DerivField = typename DerivFieldMem::span_type;
+    using DerivField = detail::span_t<DerivFieldMem>;
 
     /// The constant type of the derivatives values of the function being evolved.
-    using DerivConstField = typename DerivFieldMem::view_type;
+    using DerivConstField = detail::view_t<DerivFieldMem>;
 
     /// The space (CPU/GPU) where the calculations are carried out.
     using exec_space = ExecSpace;
@@ -160,6 +188,8 @@ protected:
     {
         if constexpr (ddc::is_chunk_v<ValField>) {
             ddc::parallel_deepcopy(copy_to, copy_from);
+        } else if constexpr (std::is_floating_point_v<ValField>) {
+            copy_to = copy_from;
         } else {
             ddcHelper::deepcopy(copy_to, copy_from);
         }
@@ -207,6 +237,8 @@ protected:
             assemble_vector_field_k_total(exec_space, k_total, func, k_arr);
         } else if constexpr (is_multipatch_field_v<DerivField>) {
             assemble_multipatch_field_k_total(exec_space, k_total, func, k_arr);
+        } else if constexpr (std::is_floating_point_v<DerivField>) {
+            k_total = func(k_arr);
         } else {
             assemble_field_k_total(exec_space, k_total, func, k_arr);
         }
