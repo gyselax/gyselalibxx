@@ -5,8 +5,12 @@
 
 #include <ddc/ddc.hpp>
 
+#include "ddc_aliases.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
+#include "tensor.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
 
 /// @cond
 namespace timestepper_detail {
@@ -112,7 +116,8 @@ struct copy_helper<FieldMemType>
 };
 
 template <class ElementType, class IdxRangeType, class MemSpace>
-struct copy_helper<ddc::Chunk<ElementType, IdxRangeType, ddc::KokkosAllocator<ElementType, MemSpace>>>
+struct copy_helper<
+        ddc::Chunk<ElementType, IdxRangeType, ddc::KokkosAllocator<ElementType, MemSpace>>>
 {
     static void copy(
             Field<ElementType, IdxRangeType, MemSpace> copy_to,
@@ -121,6 +126,170 @@ struct copy_helper<ddc::Chunk<ElementType, IdxRangeType, ddc::KokkosAllocator<El
         ddc::parallel_deepcopy(copy_to, copy_from);
     }
 };
+
+/**
+ * @brief A method to fill an element of a vector field.
+ *
+ * @param[out] k_total The vector field that will be filled.
+ * @param[in] i The index where the vector field should be filled.
+ * @param[in] new_val The coordinate that should be saved to the vector field.
+ */
+template <class DerivFieldType, class Idx, class... DDims>
+KOKKOS_FUNCTION void fill_k_total(DerivFieldType k_total, Idx i, DVector<DDims...> new_val)
+{
+    ((ddcHelper::get<DDims>(k_total)(i) = ddcHelper::get<DDims>(new_val)), ...);
+}
+
+template <class ExecSpace, class DerivFieldType>
+struct assemble_helper
+{
+    static_assert(!FieldLike<DerivFieldType>);
+
+    template <class FuncType, std::size_t n_args>
+    static KOKKOS_FUNCTION void assemble_k_total(
+            ExecSpace const& exec_space,
+            DerivFieldType& k_total,
+            FuncType func,
+            std::array<DerivFieldType, n_args> k_arr)
+    {
+        k_total = func(k_arr);
+    }
+};
+
+template <class ExecSpace, class ElementType, class IdxRangeType, class MemSpace>
+struct assemble_helper<
+        ExecSpace,
+        ddc::Chunk<ElementType, IdxRangeType, ddc::KokkosAllocator<ElementType, MemSpace>>>
+{
+    using DerivFieldType = Field<ElementType, IdxRangeType, MemSpace>;
+
+    /**
+     * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a Field (ddc::ChunkSpan).
+     * This function should be private but is public due to Cuda restrictions.
+     *
+     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
+     * @param[out] k_total The field to be filled with the combined derivative fields.
+     * @param[in] func A function which combines an element from each of the derivative fields.
+     * @param[in] k_arr The derivative fields being combined.
+     */
+    template <class FuncType, std::size_t n_args>
+    static void assemble_k_total(
+            ExecSpace const& exec_space,
+            DerivFieldType k_total,
+            FuncType func,
+            std::array<DerivFieldType, n_args> k_arr)
+    {
+        using Idx = typename IdxRangeType::discrete_element_type;
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space,
+                get_idx_range(k_total),
+                KOKKOS_LAMBDA(Idx const i) {
+                    std::array<ElementType, n_args> k_elems;
+                    for (int j(0); j < n_args; ++j) {
+                        k_elems[j] = k_arr[j](i);
+                    }
+                    k_total(i) = func(k_elems);
+                });
+    }
+};
+
+template <
+        class ExecSpace,
+        class ElementType,
+        class IdxRangeType,
+        class VectorIndexSet,
+        class MemSpace>
+struct assemble_helper<
+        ExecSpace,
+        VectorFieldMem<ElementType, IdxRangeType, VectorIndexSet, MemSpace>>
+{
+    using DerivFieldType = VectorField<ElementType, IdxRangeType, VectorIndexSet, MemSpace>;
+
+    /**
+     * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a VectorField.
+     * This function should be private but is public due to Cuda restrictions.
+     *
+     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
+     * @param[out] k_total The field to be filled with the combined derivative fields.
+     * @param[in] func A function which combines an element from each of the derivative fields.
+     * @param[in] k_arr The derivative fields being combined.
+     */
+    template <class FuncType, std::size_t n_args>
+    static void assemble_k_total(
+            ExecSpace const& exec_space,
+            DerivFieldType k_total,
+            FuncType func,
+            std::array<DerivFieldType, n_args> k_arr)
+    {
+        using element_type = Tensor<ElementType, VectorIndexSet>;
+        using Idx = typename IdxRangeType::discrete_element_type;
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space,
+                get_idx_range(k_total),
+                KOKKOS_LAMBDA(Idx const i) {
+                    std::array<element_type, n_args> k_elems;
+                    for (int j(0); j < n_args; ++j) {
+                        k_elems[j] = k_arr[j](i);
+                    }
+                    fill_k_total(k_total, i, func(k_elems));
+                });
+    }
+};
+
+template <class ExecSpace, template <typename P> typename T, class... Patches>
+struct assemble_helper<ExecSpace, MultipatchFieldMem<T, Patches...>>
+{
+    /**
+     * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a MultipatchField.
+     *
+     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
+     * @param[out] k_total The field to be filled with the combined derivative fields.
+     * @param[in] func A function which combines an element from each of the derivative fields.
+     * @param[in] k_arr The derivative fields being combined.
+     */
+    template <class FuncType, std::size_t n_args>
+    static void assemble_k_total(
+            ExecSpace const& exec_space,
+            MultipatchField<T, Patches...> k_total,
+            FuncType func,
+            std::array<MultipatchField<T, Patches...>, n_args> k_arr)
+    {
+        ((assemble_multipatch_field_k_total_on_patch<Patches>(exec_space, k_total, func, k_arr)),
+         ...);
+    }
+
+private:
+    /**
+     * Calculate func(k_arr[0], k_arr[1], ...) on one patch of a MultipatchField.
+     *
+     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
+     * @param[out] k_total The field to be filled with the combined derivative fields.
+     * @param[in] func A function which combines an element from each of the derivative fields.
+     * @param[in] k_arr The derivative fields being combined.
+     */
+    template <class Patch, class FuncType, std::size_t n_args>
+    static void assemble_multipatch_field_k_total_on_patch(
+            ExecSpace const& exec_space,
+            MultipatchField<T, Patches...> k_total,
+            FuncType func,
+            std::array<MultipatchField<T, Patches...>, n_args> k_arr)
+    {
+        using FieldType = T<Patch>;
+        static_assert((ddc::is_chunk_v<FieldType>) or (is_vector_field_v<FieldType>));
+        std::array<FieldType, n_args> k_arr_on_patch;
+        FieldType k_total_on_patch = k_total.template get<Patch>();
+        for (std::size_t i(0); i < n_args; ++i) {
+            k_arr_on_patch[i] = k_arr[i].template get<Patch>();
+        }
+        timestepper_detail::assemble_helper<ExecSpace, FieldType>::
+                assemble_k_total(exec_space, k_total_on_patch, func, k_arr_on_patch);
+    }
+};
+
 } // namespace timestepper_detail
 /// @endcond
 
@@ -302,25 +471,6 @@ protected:
     }
 
     /**
-     * @brief A method to fill an element of a vector field.
-     *
-     * @param[out] k_total The vector field that will be filled.
-     * @param[in] i The index where the vector field should be filled.
-     * @param[in] new_val The coordinate that should be saved to the vector field.
-     */
-    template <class DerivFieldType, class Idx, class... DDims>
-    KOKKOS_FUNCTION static void fill_k_total(
-            DerivFieldType k_total,
-            Idx i,
-            DVector<DDims...> new_val)
-    {
-        static_assert(
-                (std::is_same_v<DerivField, DerivFieldType>)
-                || (is_multipatch_field_v<DerivField>));
-        ((ddcHelper::get<DDims>(k_total)(i) = ddcHelper::get<DDims>(new_val)), ...);
-    }
-
-    /**
      * @brief A method to assemble multiple derivative fields into one. This method is responsible
      * for choosing how this is done depending on the type of the derivative field.
      *
@@ -342,142 +492,8 @@ protected:
         static_assert(
                 std::is_invocable_r_v<element_type, FuncType, std::array<element_type, n_args>>);
         std::array<std::remove_reference_t<DerivField>, n_args> k_arr({k...});
-        if constexpr (is_vector_field_v<DerivField>) {
-            assemble_vector_field_k_total(exec_space, k_total, func, k_arr);
-        } else if constexpr (is_multipatch_field_v<DerivField>) {
-            assemble_multipatch_field_k_total(exec_space, k_total, func, k_arr);
-        } else if constexpr (timestepper_detail::FieldLike<DerivField>) {
-            assemble_field_k_total(exec_space, k_total, func, k_arr);
-        } else {
-            // For a scalar DerivField is a reference to the scalar type (DerivField = DerivFieldMem&)
-            k_total = func(k_arr); // cppcheck-suppress uselessAssignmentArg
-        }
-    }
-
-public:
-    /**
-     * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a Field (ddc::ChunkSpan).
-     * This function should be private but is public due to Cuda restrictions.
-     *
-     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
-     * @param[out] k_total The field to be filled with the combined derivative fields.
-     * @param[in] func A function which combines an element from each of the derivative fields.
-     * @param[in] k_arr The derivative fields being combined.
-     */
-    template <class FieldType, class FuncType, std::size_t n_args>
-    static void assemble_field_k_total(
-            ExecSpace const& exec_space,
-            FieldType k_total,
-            FuncType func,
-            std::array<FieldType, n_args> k_arr)
-    {
-        static_assert(ddc::is_chunk_v<FieldType>);
-        using Idx = typename FieldType::discrete_domain_type::discrete_element_type;
-        const std::source_location location = std::source_location::current();
-        ddc::parallel_for_each(
-                location.function_name(),
-                exec_space,
-                get_idx_range(k_total),
-                KOKKOS_LAMBDA(Idx const i) {
-                    std::array<double, n_args> k_elems;
-                    for (int j(0); j < n_args; ++j) {
-                        k_elems[j] = k_arr[j](i);
-                    }
-                    k_total(i) = func(k_elems);
-                });
-    }
-
-    /**
-     * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a VectorField.
-     * This function should be private but is public due to Cuda restrictions.
-     *
-     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
-     * @param[out] k_total The field to be filled with the combined derivative fields.
-     * @param[in] func A function which combines an element from each of the derivative fields.
-     * @param[in] k_arr The derivative fields being combined.
-     */
-    template <class FieldType, class FuncType, std::size_t n_args>
-    static void assemble_vector_field_k_total(
-            ExecSpace const& exec_space,
-            FieldType k_total,
-            FuncType func,
-            std::array<FieldType, n_args> k_arr)
-    {
-        static_assert(is_vector_field_v<FieldType>);
-        using element_type = typename FieldType::element_type;
-        using Idx = typename FieldType::discrete_domain_type::discrete_element_type;
-        const std::source_location location = std::source_location::current();
-        ddc::parallel_for_each(
-                location.function_name(),
-                exec_space,
-                get_idx_range(k_total),
-                KOKKOS_LAMBDA(Idx const i) {
-                    std::array<element_type, n_args> k_elems;
-                    for (int j(0); j < n_args; ++j) {
-                        k_elems[j] = k_arr[j](i);
-                    }
-                    fill_k_total(k_total, i, func(k_elems));
-                });
-    }
-
-private:
-    /**
-     * Calculate func(k_arr[0], k_arr[1], ...) on one patch of a MultipatchField.
-     *
-     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
-     * @param[out] k_total The field to be filled with the combined derivative fields.
-     * @param[in] func A function which combines an element from each of the derivative fields.
-     * @param[in] k_arr The derivative fields being combined.
-     */
-    template <
-            class Patch,
-            template <typename P>
-            typename T,
-            class... Patches,
-            class FuncType,
-            std::size_t n_args>
-    static void assemble_multipatch_field_k_total_on_patch(
-            ExecSpace const& exec_space,
-            MultipatchField<T, Patches...> k_total,
-            FuncType func,
-            std::array<MultipatchField<T, Patches...>, n_args> k_arr)
-    {
-        using FieldType = T<Patch>;
-        static_assert((ddc::is_chunk_v<FieldType>) or (is_vector_field_v<FieldType>));
-        std::array<FieldType, n_args> k_arr_on_patch;
-        FieldType k_total_on_patch = k_total.template get<Patch>();
-        for (std::size_t i(0); i < n_args; ++i) {
-            k_arr_on_patch[i] = k_arr[i].template get<Patch>();
-        }
-        if constexpr (is_vector_field_v<FieldType>) {
-            assemble_vector_field_k_total(exec_space, k_total_on_patch, func, k_arr_on_patch);
-        } else {
-            assemble_field_k_total(exec_space, k_total_on_patch, func, k_arr_on_patch);
-        }
-    }
-
-    /**
-     * Calculate func(k_arr[0], k_arr[1], ...) when FieldType is a MultipatchField.
-     *
-     * @param[in] exec_space The space (CPU/GPU) where the calculation should be executed.
-     * @param[out] k_total The field to be filled with the combined derivative fields.
-     * @param[in] func A function which combines an element from each of the derivative fields.
-     * @param[in] k_arr The derivative fields being combined.
-     */
-    template <
-            template <typename P>
-            typename T,
-            class... Patches,
-            class FuncType,
-            std::size_t n_args>
-    static void assemble_multipatch_field_k_total(
-            ExecSpace const& exec_space,
-            MultipatchField<T, Patches...> k_total,
-            FuncType func,
-            std::array<MultipatchField<T, Patches...>, n_args> k_arr)
-    {
-        ((assemble_multipatch_field_k_total_on_patch<Patches>(exec_space, k_total, func, k_arr)),
-         ...);
+        timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::
+                assemble_k_total(exec_space, k_total, func, k_arr);
     }
 };
 
