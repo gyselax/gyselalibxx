@@ -66,6 +66,7 @@
     <member refid="classBslAdvection1D_1ad5d8680c7934205817f147026826dcd8" kind="typedef"><name>AdvecFieldDerivConstField</name></member>
     <member refid="classBslAdvection1D_1a958135e99317a68f990eae7f919a6365" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
     <member refid="classBslAdvection1D_1a0c0da8de5232bfd7bf9e8db3288049c9" kind="typedef"><name>FunctionBasisFieldMem</name></member>
+    <member refid="classBslAdvection1D_1adf40b96d80d76d9c380e497e58560b66" kind="typedef"><name>FunctionBasisConstField</name></member>
     <member refid="classBslAdvection1D_1aee0a7b63e170ccd57a0c538567ece78b" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
     <member refid="classBslAdvection1D_1a675e8d6f4a3dd6b0484def671e2cb6d0" kind="typedef"><name>FunctionDerivFieldMem</name></member>
     <member refid="classBslAdvection1D_1a7a21cefda8e0b31fa6585c8e7befd0cc" kind="typedef"><name>TimeStepper</name></member>

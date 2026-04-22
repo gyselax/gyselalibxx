@@ -246,6 +246,7 @@
 * **FeetConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FeetField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FeetFieldMem** ([**BslAdvection1D**](classBslAdvection1D.md))
+* **FunctionBasisConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionBasisFieldMem** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionBuilder** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
 * **FunctionDerivFieldMem** ([**BslAdvection1D**](classBslAdvection1D.md))

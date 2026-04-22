@@ -81,6 +81,7 @@ private:
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeFunction>;
     using FunctionBasisFieldMem = FieldMem<DataType, IdxRangeFunctionBasis>;
+    using FunctionBasisConstField = ConstField<DataType, IdxRangeFunctionBasis>;
 
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
@@ -149,6 +150,8 @@ public:
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
             = std::nullopt) const
     {
+        using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
+        using IdxBatchFunction = typename IdxRangeBatchFunction::discrete_element_type;
         Kokkos::Profiling::pushRegion("BslAdvection1D");
 
         // Get index ranges and operators ........................................................
@@ -232,19 +235,6 @@ public:
             To interpolate the function we want to advect, we build for the feet a Field defined
             on the index range where the function is defined.
         */
-        FieldMem<CoordInterest, IdxRangeFunction>
-                feet_alloc("feet (BslAdvection1D::operator())", idx_range_function);
-        Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
-        ddc::parallel_for_each(
-                location.function_name(),
-                Kokkos::DefaultExecutionSpace(),
-                idx_range_function,
-                KOKKOS_LAMBDA(IdxFunction const idx) {
-                    IdxAdvection slice_foot_index(idx);
-                    feet(idx) = slice_feet(slice_foot_index);
-                });
-
-
         // Build interpolation coefficients from the function values
         m_function_builder(
                 get_field(function_coefs_alloc),
@@ -252,11 +242,21 @@ public:
                 std::optional(get_const_field(function_derivatives_min)),
                 std::optional(get_const_field(function_derivatives_max)));
 
+        FunctionBasisConstField function_coefs = get_const_field(function_coefs_alloc);
+
+        FunctionEvaluator const& function_evaluator_proxy = m_function_evaluator;
         // Evaluate the function at the characteristic feet
-        m_function_evaluator(
-                allfdistribu,
-                get_const_field(feet),
-                get_const_field(function_coefs_alloc));
+        ddc::parallel_for_each(
+                location.function_name(),
+                Kokkos::DefaultExecutionSpace(),
+                idx_range_function,
+                KOKKOS_LAMBDA(IdxFunction const idx) {
+                    IdxAdvection slice_foot_index(idx);
+                    IdxBatchFunction batch_idx(idx);
+                    allfdistribu(idx) = function_evaluator_proxy(
+                            slice_feet(slice_foot_index),
+                            function_coefs[batch_idx]);
+                });
 
 
         Kokkos::Profiling::popRegion();
