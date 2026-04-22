@@ -108,13 +108,13 @@ public:
     }
 
 private:
-    void update(
+    static void update(
             ExecSpace const& exec_space,
             ValField y,
             double dt,
             DerivField k1,
             std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update) const
+            std::function<void(ValField, DerivConstField, double)> y_update)
     {
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)

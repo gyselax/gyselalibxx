@@ -260,7 +260,7 @@ protected:
      * @param[out] copy_to the field that the values should be copied to.
      * @param[in] copy_from The field that the values should be copied from.
      */
-    void copy(ValField copy_to, ValConstField copy_from) const
+    static void copy(ValField copy_to, ValConstField copy_from)
     {
         if constexpr (ddc::is_chunk_v<ValField>) {
             ddc::parallel_deepcopy(copy_to, copy_from);
@@ -300,8 +300,11 @@ protected:
      * @param[in] k The derivative fields being combined.
      */
     template <class FuncType, class... T>
-    void assemble_k_total(ExecSpace const& exec_space, DerivField k_total, FuncType func, T... k)
-            const
+    static void assemble_k_total(
+            ExecSpace const& exec_space,
+            DerivField k_total,
+            FuncType func,
+            T... k)
     {
         static_assert(std::conjunction_v<std::is_same<T, std::remove_reference_t<DerivField>>...>);
         std::size_t constexpr n_args = sizeof...(T);
@@ -331,11 +334,11 @@ public:
      * @param[in] k_arr The derivative fields being combined.
      */
     template <class FieldType, class FuncType, std::size_t n_args>
-    void assemble_field_k_total(
+    static void assemble_field_k_total(
             ExecSpace const& exec_space,
             FieldType k_total,
             FuncType func,
-            std::array<FieldType, n_args> k_arr) const
+            std::array<FieldType, n_args> k_arr)
     {
         static_assert(ddc::is_chunk_v<FieldType>);
         using Idx = typename FieldType::discrete_domain_type::discrete_element_type;
@@ -363,11 +366,11 @@ public:
      * @param[in] k_arr The derivative fields being combined.
      */
     template <class FieldType, class FuncType, std::size_t n_args>
-    void assemble_vector_field_k_total(
+    static void assemble_vector_field_k_total(
             ExecSpace const& exec_space,
             FieldType k_total,
             FuncType func,
-            std::array<FieldType, n_args> k_arr) const
+            std::array<FieldType, n_args> k_arr)
     {
         static_assert(is_vector_field_v<FieldType>);
         using element_type = typename FieldType::element_type;
@@ -402,11 +405,11 @@ private:
             class... Patches,
             class FuncType,
             std::size_t n_args>
-    void assemble_multipatch_field_k_total_on_patch(
+    static void assemble_multipatch_field_k_total_on_patch(
             ExecSpace const& exec_space,
             MultipatchField<T, Patches...> k_total,
             FuncType func,
-            std::array<MultipatchField<T, Patches...>, n_args> k_arr) const
+            std::array<MultipatchField<T, Patches...>, n_args> k_arr)
     {
         using FieldType = T<Patch>;
         static_assert((ddc::is_chunk_v<FieldType>) or (is_vector_field_v<FieldType>));
@@ -436,11 +439,11 @@ private:
             class... Patches,
             class FuncType,
             std::size_t n_args>
-    void assemble_multipatch_field_k_total(
+    static void assemble_multipatch_field_k_total(
             ExecSpace const& exec_space,
             MultipatchField<T, Patches...> k_total,
             FuncType func,
-            std::array<MultipatchField<T, Patches...>, n_args> k_arr) const
+            std::array<MultipatchField<T, Patches...>, n_args> k_arr)
     {
         ((assemble_multipatch_field_k_total_on_patch<Patches>(exec_space, k_total, func, k_arr)),
          ...);
@@ -480,7 +483,7 @@ public:
      * @param[in] idx_range The index range on which the operator will act (and allocate memory).
      */
     template <class ChosenTimeStepper>
-    auto preallocate(typename ChosenTimeStepper::IdxRange const idx_range) const
+    static auto preallocate(typename ChosenTimeStepper::IdxRange const idx_range)
     {
         static_assert(
                 timestepper_detail::FieldLike<typename ChosenTimeStepper::ValFieldMem>,
@@ -499,7 +502,7 @@ public:
      * @tparam ChosenTimeStepper The type of the TimeStepper to be constructed (obtained from time_stepper_t).
      */
     template <class ChosenTimeStepper>
-    auto preallocate() const
+    static auto preallocate()
     {
         static_assert(
                 !timestepper_detail::FieldLike<typename ChosenTimeStepper::ValFieldMem>,
