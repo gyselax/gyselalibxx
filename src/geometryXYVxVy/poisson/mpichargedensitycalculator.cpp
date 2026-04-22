@@ -5,14 +5,11 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
 #include "mpichargedensitycalculator.hpp"
-#include "mpitools.hpp"
 #include "species_info.hpp"
 
 MpiChargeDensityCalculator::MpiChargeDensityCalculator(
-        MPI_Comm comm,
         IChargeDensityCalculator const& local_charge_density_calculator)
     : m_local_charge_density_calculator(local_charge_density_calculator)
-    , m_comm(comm)
 {
 }
 
@@ -29,13 +26,7 @@ void MpiChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY al
 
     Kokkos::DefaultExecutionSpace().fence("Fence local ChargeDensityCalculator");
 
-    MPI_Allreduce(
-            rho_local.data_handle(),
-            rho.data_handle(),
-            rho.size(),
-            MPI_type_descriptor_t<double>,
-            MPI_SUM,
-            m_comm);
+    ddc::parallel_deepcopy(rho, rho_local);
 
     Kokkos::Profiling::popRegion();
 }

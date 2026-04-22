@@ -21,8 +21,6 @@ target_link_libraries("poisson_xy"
         gslx::quadrature
         gslx::speciesinfo
         gslx::utils
-
-        MPI::MPI_CXX
 )
 
 add_library("gslx::poisson_xy" ALIAS "poisson_xy")

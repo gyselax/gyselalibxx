@@ -47,14 +47,10 @@ int main(int argc, char** argv)
     PC_tree_t conf_gyselalibxx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
     PC_errhandler(PC_NULL_HANDLER);
-    MPI_Init(&argc, &argv);
     PDI_init(conf_pdi);
 
     Kokkos::ScopeGuard kokkos_scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
-
-    int rank;
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
     // Reading config
     // --> Mesh info
@@ -82,7 +78,7 @@ int main(int argc, char** argv)
 
     IdxRangeSpXYVxVy const idxrange_glob_spxyvxvy(idx_range_kinsp, idxrange_xyvxvy);
 
-    MPITransposeAllToAll<X2DSplit, V2DSplit> transpose(idxrange_glob_spxyvxvy, MPI_COMM_WORLD);
+    MPITransposeAllToAll<X2DSplit, V2DSplit> transpose(idxrange_glob_spxyvxvy);
 
     IdxRangeSpXYVxVy idxrange_spxyvxvy_x2Dsplit(transpose.get_local_idx_range<X2DSplit>());
     IdxRangeSpVxVyXY idxrange_spvxvyxy_v2Dsplit(transpose.get_local_idx_range<V2DSplit>());
@@ -138,7 +134,7 @@ int main(int argc, char** argv)
 
     FFTPoissonSolver<IdxRangeXY> fft_poisson_solver(idxrange_xy);
     ChargeDensityCalculator const rhs_local(get_const_field(local_quadrature_coeffs));
-    MpiChargeDensityCalculator const rhs(MPI_COMM_WORLD, rhs_local);
+    MpiChargeDensityCalculator const rhs(rhs_local);
     QNSolver const poisson(fft_poisson_solver, rhs);
 
     // Create predcorr operator
@@ -187,8 +183,6 @@ int main(int argc, char** argv)
     PC_tree_destroy(&conf_pdi);
 
     PDI_finalize();
-
-    MPI_Finalize();
 
     PC_tree_destroy(&conf_gyselalibxx);
 

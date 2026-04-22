@@ -2,8 +2,6 @@
 
 #pragma once
 
-#include <mpi.h>
-
 #include <ddc/ddc.hpp>
 
 #include "ddc_helper.hpp"
@@ -23,7 +21,6 @@ class MpiChargeDensityCalculator : public IChargeDensityCalculator
 {
 private:
     IChargeDensityCalculator const& m_local_charge_density_calculator;
-    MPI_Comm m_comm;
 
 public:
     /**
@@ -35,7 +32,6 @@ public:
      *                 will then be combined using MPI.
      */
     explicit MpiChargeDensityCalculator(
-            MPI_Comm comm,
             IChargeDensityCalculator const& local_charge_density_calculator);
 
     /**

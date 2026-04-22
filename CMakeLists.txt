@@ -42,7 +42,7 @@ include(CTest)
 
 find_package(LAPACK REQUIRED)
 
-find_package(MPI REQUIRED)
+# find_package(MPI REQUIRED)
 
 find_package(paraconf 1.0.0...<2 REQUIRED COMPONENTS C)
 

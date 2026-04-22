@@ -7,9 +7,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
-#include "impitranspose.hpp"
 #include "mpilayout.hpp"
-#include "mpitools.hpp"
 #include "transpose.hpp"
 
 /**
@@ -21,7 +19,7 @@
  * @tparam Layout2 The other MPI layouts.
  */
 template <class Layout1, class Layout2>
-class MPITransposeAllToAll : public IMPITranspose<Layout1, Layout2>
+class MPITransposeAllToAll
 {
 public:
     /// The type of the index range of the first MPI layout.
@@ -60,8 +58,7 @@ public:
      * @param comm The MPI communicator.
      */
     template <class IdxRange>
-    MPITransposeAllToAll(IdxRange global_idx_range, MPI_Comm comm)
-        : IMPITranspose<Layout1, Layout2>(comm)
+    explicit MPITransposeAllToAll(IdxRange global_idx_range)
     {
         static_assert(
                 std::is_same_v<
@@ -70,9 +67,8 @@ public:
                 "The initialisation global idx_range should be described by one of the layouts");
         idx_range_type1 global_idx_range_layout_1(global_idx_range);
         idx_range_type2 global_idx_range_layout_2(global_idx_range);
-        int rank;
-        MPI_Comm_size(comm, &m_comm_size);
-        MPI_Comm_rank(comm, &rank);
+        m_comm_size = 1;
+        int rank = 0;
         distributed_idx_range_type1 distrib_idx_range(global_idx_range_layout_1);
         if (m_comm_size > distrib_idx_range.size()) {
             throw std::runtime_error("The number of MPI ranks is greater than the number that "
@@ -330,14 +326,7 @@ private:
             ConstField<ElementType, MPISendIdxRange, MemSpace> send_field) const
     {
         Kokkos::fence("fencing before mpi_all_to_all");
-        MPI_Alltoall(
-                send_field.data_handle(),
-                send_field.size() / m_comm_size,
-                MPI_type_descriptor_t<ElementType>,
-                recv_field.data_handle(),
-                recv_field.size() / m_comm_size,
-                MPI_type_descriptor_t<ElementType>,
-                IMPITranspose<Layout1, Layout2>::m_comm);
+        ddc::parallel_deepcopy(execution_space, recv_field, send_field)
     }
 
     template <class... DistributedDims>

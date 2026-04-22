@@ -10,7 +10,6 @@ target_link_libraries("mpi_parallelisation"
     INTERFACE
         DDC::core
         gslx::utils
-        MPI::MPI_CXX
 )
 
 add_library("gslx::mpi_parallelisation" ALIAS "mpi_parallelisation")
