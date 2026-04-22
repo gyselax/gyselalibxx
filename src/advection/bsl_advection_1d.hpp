@@ -322,15 +322,18 @@ public:
                 KOKKOS_LAMBDA(IdxFunction const idx) {
                     CoordInterest foot = ddc::coordinate(IdxInterest(idx));
 
-                    std::function<void(DataType&, CoordInterest const&)> update_adv_field
-                            = [&](DataType& updated_advection_field, CoordInterest const& foot) {
-                                  updated_advection_field = adv_field_evaluator_proxy(
-                                          foot,
-                                          get_const_field(
-                                                  advection_field_coefs[IdxBatchAdvecField(idx)]));
-                              };
                     // Solve the characteristic equation with a time integration method
-                    time_stepper.update(foot, -dt, update_adv_field);
+                    time_stepper
+                            .update(foot,
+                                    -dt,
+                                    [&](DataType& updated_advection_field,
+                                        CoordInterest const& foot) {
+                                        updated_advection_field = adv_field_evaluator_proxy(
+                                                foot,
+                                                get_const_field(
+                                                        advection_field_coefs[IdxBatchAdvecField(
+                                                                idx)]));
+                                    });
                     allfdistribu(idx)
                             = function_evaluator_proxy(foot, function_coefs[IdxBatchFunction(idx)]);
                 });
