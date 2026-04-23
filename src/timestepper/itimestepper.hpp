@@ -298,16 +298,15 @@ private:
     }
 };
 
-template <class ValField, class DerivConstField>
-struct serial_y_updater
+template <
+        class ValField,
+        class DerivConstField,
+        typename = std::enable_if_t<FieldLike<ValField>::value>,
+        typename = std::enable_if_t<FieldLike<DerivConstField>::value>>
+static void serial_y_update(ValField y, DerivConstField dy, double dt)
 {
-    static_assert(!FieldLike<ValField>);
-    static_assert(!FieldLike<DerivConstField>);
-    static void y_update(ValField y, DerivConstField dy, double dt)
-    {
-        y += dy * dt;
-    }
-};
+    y += dy * dt;
+}
 
 } // namespace timestepper_detail
 /// @endcond
@@ -362,6 +361,28 @@ public:
     using exec_space = ExecSpace;
 
 public:
+    /**
+     * @brief Carry out one step of the timestepping scheme.
+     *
+     * This function is a wrapper around the update function below. The values of the function are
+     * updated using the trivial method $f += df * dt$. This is the standard method however some
+     * cases may need a more complex update function which is why the more explicit method is
+     * also provided.
+     *
+     * @param[inout] y
+     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
+     *     of the index range.
+     * @param[in] dt
+     *     The time step over which the values should be evolved.
+     * @param[in] dy_calculator
+     *     The function describing how the derivative of the evolve function is calculated.
+     */
+    void update(ValField y, double dt, std::function<void(DerivField, ValConstField)> dy_calculator)
+            const
+    {
+        update(ExecSpace(), y, dt, dy_calculator);
+    }
+
     /**
      * @brief Carry out one step of the timestepping scheme.
      *
