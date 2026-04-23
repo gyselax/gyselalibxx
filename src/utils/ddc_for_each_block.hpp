@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: MIT
+
+#pragma once
+
 #include <array>
 #include <cstddef>
 #include <span>
