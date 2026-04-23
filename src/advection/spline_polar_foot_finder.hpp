@@ -308,6 +308,10 @@ public:
 
         TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
 
+        SplineRThetaEvaluatorAdvection const& evaluator_advection_field_proxy
+                = m_evaluator_advection_field;
+        PseudoPhysicalToPhysicalMapping pseudo_physical_to_physical = m_pseudo_physical_to_physical;
+
         // Compute the characteristic feet at t^n:
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -318,46 +322,41 @@ public:
                     IdxBatch idx_batch(idx);
                     IdxRTheta idx_rtheta(idx);
                     // The function describing how the derivative of the evolve function is calculated.
-                    std::function<void(DVector<X_adv, Y_adv>&, CoordRTheta const&)> dy
-                            = [&](DVector<X_adv, Y_adv>& updated_advection_field,
+                    auto dy = [&](DVector<X_adv, Y_adv>& updated_advection_field,
                                   CoordRTheta const& foot) {
-                                  DVector<AdvDim1, AdvDim2> updated_advection_field_adv_space;
-                                  ddcHelper::get<AdvDim1>(updated_advection_field_adv_space)
-                                          = m_evaluator_advection_field(
-                                                  foot,
-                                                  get_const_field(ddcHelper::get<AdvDim1>(
-                                                          advection_field_coefs)[idx_batch]));
-                                  ddcHelper::get<AdvDim2>(updated_advection_field_adv_space)
-                                          = m_evaluator_advection_field(
-                                                  foot,
-                                                  get_const_field(ddcHelper::get<AdvDim2>(
-                                                          advection_field_coefs)[idx_batch]));
-                                  updated_advection_field
-                                          = to_vector_space<VectorIndexSet<X_adv, Y_adv>>(
-                                                  m_pseudo_physical_to_physical,
-                                                  foot,
-                                                  updated_advection_field_adv_space);
-                              };
+                        DVector<AdvDim1, AdvDim2> updated_advection_field_adv_space;
+                        ddcHelper::get<AdvDim1>(updated_advection_field_adv_space)
+                                = evaluator_advection_field_proxy(
+                                        foot,
+                                        get_const_field(ddcHelper::get<AdvDim1>(
+                                                advection_field_coefs)[idx_batch]));
+                        ddcHelper::get<AdvDim2>(updated_advection_field_adv_space)
+                                = evaluator_advection_field_proxy(
+                                        foot,
+                                        get_const_field(ddcHelper::get<AdvDim2>(
+                                                advection_field_coefs)[idx_batch]));
+                        updated_advection_field = to_vector_space<VectorIndexSet<X_adv, Y_adv>>(
+                                pseudo_physical_to_physical,
+                                foot,
+                                updated_advection_field_adv_space);
+                    };
 
                     // The function describing how the value(s) are updated using the derivative.
-                    std::function<void(CoordRTheta&, DVector<X_adv, Y_adv> const&, double)>
-                            update_function = [&](CoordRTheta& foot_rtheta,
-                                                  DVector<X_adv, Y_adv> const& advection_field,
-                                                  double dt) {
-                                CoordXY_adv const coord_xy
-                                        = logical_to_pseudo_physical_proxy(foot_rtheta);
-                                CoordXY_adv const foot_xy = coord_xy - dt * advection_field;
+                    auto update_function = [&](CoordRTheta& foot_rtheta,
+                                               DVector<X_adv, Y_adv> const& advection_field,
+                                               double dt) {
+                        CoordXY_adv const coord_xy = logical_to_pseudo_physical_proxy(foot_rtheta);
+                        CoordXY_adv const foot_xy = coord_xy - dt * advection_field;
 
-                                if (norm_inf(foot_xy - coord_centre) < 1e-15) {
-                                    foot_rtheta = CoordRTheta(0, 0);
-                                } else {
-                                    foot_rtheta = pseudo_physical_to_logical_proxy(foot_xy);
-                                    ddc::select<Theta>(foot_rtheta)
-                                            = ddcHelper::restrict_to_idx_range(
-                                                    ddc::select<Theta>(foot_rtheta),
-                                                    idx_range_theta);
-                                }
-                            };
+                        if (norm_inf(foot_xy - coord_centre) < 1e-15) {
+                            foot_rtheta = CoordRTheta(0, 0);
+                        } else {
+                            foot_rtheta = pseudo_physical_to_logical_proxy(foot_xy);
+                            ddc::select<Theta>(foot_rtheta) = ddcHelper::restrict_to_idx_range(
+                                    ddc::select<Theta>(foot_rtheta),
+                                    idx_range_theta);
+                        }
+                    };
 
                     feet(idx) = ddc::coordinate(idx_rtheta);
                     // Solve the characteristic equation
