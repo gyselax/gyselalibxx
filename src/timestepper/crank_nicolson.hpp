@@ -338,6 +338,25 @@ public:
                               typename TimeStepper::exec_space>>);
         return TimeStepper(idx_range, m_max_counter, m_epsilon);
     }
+
+    /**
+     * @brief Allocate the TimeStepper object for scalar (non-FieldLike) types.
+     * @tparam ChosenTimeStepper The type of the TimeStepper to be constructed (obtained from time_stepper_t).
+     */
+    template <class TimeStepper>
+    auto preallocate() const
+    {
+        static_assert(
+                !timestepper_detail::FieldLike<typename TimeStepper::ValFieldMem>,
+                "An index range must be provided to preallocate for FieldLike timesteppers.");
+        static_assert(std::is_same_v<
+                      TimeStepper,
+                      time_stepper_t<
+                              typename TimeStepper::ValFieldMem,
+                              typename TimeStepper::DerivFieldMem,
+                              typename TimeStepper::exec_space>>);
+        return TimeStepper(m_max_counter, m_epsilon);
+    }
 };
 
 namespace detail {
