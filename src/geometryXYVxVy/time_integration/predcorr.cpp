@@ -50,7 +50,7 @@ DFieldSpVxVyXY PredCorr::operator()(
                 get_field(electric_field),
                 get_const_field(allfdistribu_v2D_split));
 
-        Kokkos::Profiling::pushRegion("PDIWrite");
+        Kokkos::Profiling::pushRegion("(GSLX) PDIWrite");
         transpose_layout(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(allfdistribu_v2D_split_output_layout),
@@ -89,7 +89,7 @@ DFieldSpVxVyXY PredCorr::operator()(
             get_field(electric_field),
             get_const_field(allfdistribu_v2D_split));
 
-    Kokkos::Profiling::pushRegion("PDIWrite");
+    Kokkos::Profiling::pushRegion("(GSLX) PDIWrite");
     transpose_layout(
             Kokkos::DefaultExecutionSpace(),
             get_field(allfdistribu_v2D_split_output_layout),
