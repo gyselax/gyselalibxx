@@ -62,7 +62,8 @@ TEST(CrankNicolsonFixture, CrankNicolsonOrder)
 
         for (int i(0); i < Nt; ++i) {
             crank_nicolson
-                    .update(get_field(vals),
+                    .update(Kokkos::DefaultHostExecutionSpace(),
+                            get_field(vals),
                             dt,
                             [&](host_t<DField<IdxRangeX>> dy, host_t<DConstField<IdxRangeX>> y) {
                                 ddc::host_for_each(idx_range, [&](IdxX ix) {
