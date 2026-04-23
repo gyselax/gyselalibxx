@@ -67,6 +67,12 @@ concept Accessible
           || bool(Kokkos::SpaceAccessibility<ExecSpace, typename FieldMem::memory_space>::
                           accessible);
 
+template <class FieldMem>
+concept ExpectedTimeStepperType
+        = (ddc::is_chunk_v<FieldMem>) || (is_vector_field_v<FieldMem>)
+          || (is_multipatch_field_mem_v<FieldMem>) || (std::is_floating_point_v<FieldMem>)
+          || (is_tensor_type_v<FieldMem>) || (ddcHelper::is_coordinate_v<FieldMem>);
+
 template <class T>
 struct IdxRangeType
 {
@@ -334,17 +340,8 @@ template <
         class ExecSpace = Kokkos::DefaultExecutionSpace>
 class ITimeStepper
 {
-    static_assert(
-            (ddc::is_chunk_v<FieldMem>) or (is_vector_field_v<FieldMem>)
-            or (is_multipatch_field_mem_v<FieldMem>) or (std::is_floating_point_v<FieldMem>)
-            or (is_tensor_type_v<FieldMem>) or (ddcHelper::is_coordinate_v<FieldMem>));
-    static_assert(
-            (ddc::is_chunk_v<DerivFieldMemType>) or (is_vector_field_v<DerivFieldMemType>)
-            or (is_multipatch_field_mem_v<DerivFieldMemType>)
-            or (std::is_floating_point_v<DerivFieldMemType>)
-            or (is_tensor_type_v<DerivFieldMemType>)
-            or (ddcHelper::is_coordinate_v<DerivFieldMemType>));
-
+    static_assert(timestepper_detail::ExpectedTimeStepperType<FieldMem>);
+    static_assert(timestepper_detail::ExpectedTimeStepperType<DerivFieldMemType>);
     static_assert(timestepper_detail::Compatible<FieldMem, DerivFieldMemType>);
 
     static_assert(
