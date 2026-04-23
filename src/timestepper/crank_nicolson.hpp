@@ -112,7 +112,9 @@ public:
             ValField y,
             double dt,
             std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update) const final
+            std::function<void(ValField, DerivConstField, double)> y_update
+            = timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update)
+            const final
     {
         if constexpr (timestepper_detail::FieldLike<FieldMem>) {
             using element_type = typename timestepper_detail::ElementType<DerivField>::type;
@@ -190,9 +192,16 @@ public:
      * @param[in] y_update
      *     The function describing how the value(s) are updated using the derivative.
      */
-    template <class DYFunctor, class YFunctor>
-    KOKKOS_FUNCTION void update(ValField y, double dt, DYFunctor dy_calculator, YFunctor y_update)
-            const
+    template <
+            class DYFunctor,
+            class YFunctor
+            = decltype(timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update)>
+    KOKKOS_FUNCTION void update(
+            ValField y,
+            double dt,
+            DYFunctor dy_calculator,
+            YFunctor y_update
+            = timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update) const
     {
         static_assert(!timestepper_detail::FieldLike<FieldMem>);
         FieldMem y_init;
