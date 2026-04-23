@@ -292,6 +292,32 @@ private:
     }
 };
 
+template <class ValField, class DerivConstField>
+struct default_y_updater
+{
+    static_assert(!FieldLike<ValField>);
+    static_assert(!FieldLike<DerivConstField>);
+    static void y_update(ValField y, DerivConstField dy, double dt)
+    {
+        y += dy * dt;
+    }
+};
+
+template <FieldLike ValField, FieldLike DerivConstField>
+struct default_y_updater<ValField, DerivConstField>
+{
+    static void y_update(ValField y, DerivConstField dy, double dt)
+    {
+        using Idx = typename IdxRangeType<ValField>::type::discrete_element_type;
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                Kokkos::Serial(),//exec_space,
+                get_idx_range(y),
+                KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
+    }
+};
+
 } // namespace timestepper_detail
 /// @endcond
 
@@ -362,28 +388,6 @@ public:
      * cases may need a more complex update function which is why the more explicit method is
      * also provided.
      *
-     * @param[inout] y
-     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
-     * @param[in] dt
-     *     The time step over which the values should be evolved.
-     * @param[in] dy_calculator
-     *     The function describing how the derivative of the evolve function is calculated.
-     */
-    void update(ValField y, double dt, std::function<void(DerivField, ValConstField)> dy_calculator)
-            const
-    {
-        update(ExecSpace(), y, dt, dy_calculator);
-    }
-
-    /**
-     * @brief Carry out one step of the timestepping scheme.
-     *
-     * This function is a wrapper around the update function below. The values of the function are
-     * updated using the trivial method $f += df * dt$. This is the standard method however some
-     * cases may need a more complex update function which is why the more explicit method is
-     * also provided.
-     *
      * @param[in] exec_space
      *     The space on which the function is executed (CPU/GPU).
      * @param[inout] y
@@ -401,19 +405,11 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator) const
     {
         if constexpr (timestepper_detail::FieldLike<FieldMem>) {
-            using Idx = typename IdxRange::discrete_element_type;
             update(exec_space,
                    y,
                    dt,
                    dy_calculator,
-                   [&](ValField y, DerivConstField dy, double dt) {
-                       const std::source_location location = std::source_location::current();
-                       ddc::parallel_for_each(
-                               location.function_name(),
-                               exec_space,
-                               get_idx_range(y),
-                               KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
-                   });
+                   timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update);
         } else {
             assert("Method should only be used on a FieldLike object");
         }
