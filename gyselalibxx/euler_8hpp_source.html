@@ -573,11 +573,52 @@
 #include "itimestepper.hpp"
 #include "vector_field_common.hpp"
 
+template &lt;class ValType, class DerivType = ValType, class ExecSpace = Kokkos::DefaultExecutionSpace&gt;
+class Euler
+{
+    static_assert(!timestepper_detail::FieldLike&lt;ValType&gt;);
+    static_assert(!timestepper_detail::FieldLike&lt;DerivType&gt;);
+
+public:
+    using ValFieldMem = ValType;
+
+    using DerivFieldMem = DerivType;
+
+    using exec_space = ExecSpace;
+
+public:
+    explicit KOKKOS_DEFAULTED_FUNCTION Euler() = default;
+
+    template &lt;
+            class DYFunctor,
+            class YFunctor
+            = decltype(timestepper_detail::serial_y_update&lt;ValType&amp;, DerivType const&amp;&gt;)&gt;
+    KOKKOS_FUNCTION void update(
+            ValType&amp; y,
+            double dt,
+            DYFunctor dy_calculator,
+            YFunctor y_update
+            = timestepper_detail::serial_y_update&lt;ValType&amp;, DerivType const&amp;&gt;) const
+    {
+        static_assert(std::is_invocable_v&lt;DYFunctor, DerivType&amp;, ValType&gt;);
+        DerivType k1;
+
+        // --------- Calculate k1 ------------
+        // Calculate k1 = f(y_n)
+        dy_calculator(k1, y);
+
+        // ----------- Update y --------------
+        // Calculate y_new := y_n + h*k_1
+        y_update(y, k1, dt);
+    }
+};
+
 template &lt;
-        class FieldMem,
-        class DerivFieldMem = FieldMem,
-        class ExecSpace = Kokkos::DefaultExecutionSpace&gt;
-class Euler : public ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;
+        timestepper_detail::FieldLike FieldMem,
+        timestepper_detail::FieldLike DerivFieldMem,
+        class ExecSpace&gt;
+class Euler&lt;FieldMem, DerivFieldMem, ExecSpace&gt;
+    : public ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;
 {
     using base_type = ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;;
 
@@ -607,7 +648,7 @@ public:
             std::function&lt;void(ValField, DerivConstField, double)&gt; y_update) const final
     {
         DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
-        DerivField k1(k1_alloc);
+        DerivField k1 = get_field(k1_alloc);
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)

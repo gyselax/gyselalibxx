@@ -30,7 +30,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="227" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="227" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="323" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="323" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
@@ -46,7 +46,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="201" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="201" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="297" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="297" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classCrankNicolsonBuilder_1a0a2eebd9e1569e4ac6c8b276b91724ad" prot="private" static="no" mutable="no">
         <type>double const</type>
@@ -60,7 +60,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="202" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="202" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="298" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="298" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -105,7 +105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="213" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="213" bodyend="217"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="309" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="309" bodyend="313"/>
       </memberdef>
       <memberdef kind="function" id="classCrankNicolsonBuilder_1a24223feb261747e262c51a08ce2a834a" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -148,7 +148,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="235" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="235" bodyend="244"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="331" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="331" bodyend="340"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -157,7 +157,7 @@
     <detaileddescription>
 <para>This class is a time stepper builder. A time stepper builder is designed to construct a time stepper upon request. This allows the simulation to choose the method without needing to know the specifics of the types with which it should be initialised. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="198" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="199" bodyend="245"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" line="294" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp" bodystart="295" bodyend="341"/>
     <listofallmembers>
       <member refid="classCrankNicolsonBuilder_1a3a21ef1dbfdd98ea8b0e1d17f40a2a3e" prot="public" virt="non-virtual"><scope>CrankNicolsonBuilder</scope><name>CrankNicolsonBuilder</name></member>
       <member refid="classCrankNicolsonBuilder_1a0a2eebd9e1569e4ac6c8b276b91724ad" prot="private" virt="non-virtual"><scope>CrankNicolsonBuilder</scope><name>m_epsilon</name></member>

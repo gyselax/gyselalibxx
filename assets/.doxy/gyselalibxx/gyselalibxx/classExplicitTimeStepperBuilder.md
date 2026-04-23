@@ -60,9 +60,14 @@ _A class to indicate that an explicit time stepper should be constructed for use
 | Type | Name |
 | ---: | :--- |
 |   | [**ExplicitTimeStepperBuilder**](#function-explicittimestepperbuilder) () <br>_A constructor for the TimeStepperBuilder._  |
-|  auto | [**preallocate**](#function-preallocate) (typename ChosenTimeStepper::IdxRange const idx\_range) const<br>_Allocate the TimeStepper object._  |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  auto | [**preallocate**](#function-preallocate-12) (typename ChosenTimeStepper::IdxRange const idx\_range) <br>_Allocate the TimeStepper object for FieldLike types._  |
+|  auto | [**preallocate**](#function-preallocate-22) () <br>_Allocate the TimeStepper object for scalar (non-FieldLike) types._  |
 
 
 
@@ -111,6 +116,15 @@ using ExplicitTimeStepperBuilder< TimeStepper >::time_stepper_t =  TimeStepper<F
 
 The type of the TimeStepper that will be constructed to solve an equation whose field and derivative(s) have the specified type. 
 
+**Template parameters:**
+
+
+* `FieldMem` The type of the data storage for the function. 
+* [**DerivFieldMem**](classDerivFieldMem.md) The type of the data storage for the derivative of the function. 
+* `ExecSpace` The space (CPU/GPU) where the calculations are carried out. This template parameter is ignored if the FieldMem is a scalar. 
+
+
+
 
         
 
@@ -131,17 +145,19 @@ inline ExplicitTimeStepperBuilder::ExplicitTimeStepperBuilder ()
 
 
 <hr>
+## Public Static Functions Documentation
 
 
 
-### function preallocate 
 
-_Allocate the TimeStepper object._ 
+### function preallocate [1/2]
+
+_Allocate the TimeStepper object for FieldLike types._ 
 ```C++
 template<class ChosenTimeStepper>
-inline auto ExplicitTimeStepperBuilder::preallocate (
+static inline auto ExplicitTimeStepperBuilder::preallocate (
     typename ChosenTimeStepper::IdxRange const idx_range
-) const
+) 
 ```
 
 
@@ -159,6 +175,32 @@ inline auto ExplicitTimeStepperBuilder::preallocate (
 
 
 * `idx_range` The index range on which the operator will act (and allocate memory). 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function preallocate [2/2]
+
+_Allocate the TimeStepper object for scalar (non-FieldLike) types._ 
+```C++
+template<class ChosenTimeStepper>
+static inline auto ExplicitTimeStepperBuilder::preallocate () 
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from time\_stepper\_t). 
 
 
 

@@ -48,6 +48,7 @@
 * **integrals** ([**PolarSplines**](namespacePolarSplines.md))
 * **init\_from\_input** ([**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md), [**equilibrium**](namespaceequilibrium.md), [**maxwellian\_equilibrium**](namespacemaxwellian__equilibrium.md))
 * **InsertPosition** ([**connectivity\_details**](namespaceconnectivity__details.md))
+* **is\_coordinate\_v** ([**ddcHelper**](namespaceddcHelper.md))
 * **is\_non\_uniform\_interpolation\_points\_v** ([**ddcHelper**](namespaceddcHelper.md))
 * **index\_identifiers\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 * **is\_indexed\_tensor\_v** ([**tensor\_tools**](namespacetensor__tools.md))

@@ -69,7 +69,7 @@
     <member refid="classBslAdvection1D_1adf40b96d80d76d9c380e497e58560b66" kind="typedef"><name>FunctionBasisConstField</name></member>
     <member refid="classBslAdvection1D_1aee0a7b63e170ccd57a0c538567ece78b" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
     <member refid="classBslAdvection1D_1a58050bcfff91ec5f6d5949fbce1d0004" kind="typedef"><name>FunctionDerivConstField</name></member>
-    <member refid="classBslAdvection1D_1a7a21cefda8e0b31fa6585c8e7befd0cc" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classBslAdvection1D_1a9eb89b3fa476c01dbb66e0b3b0fd4a16" kind="typedef"><name>TimeStepper</name></member>
     <member refid="classBslAdvection1D_1a6b4ae6a8b94fe3dc1a55f2f766405bb6" kind="variable"><name>m_function_builder</name></member>
     <member refid="classBslAdvection1D_1aec4375534b3c370e5f3be10ed0a3448f" kind="variable"><name>m_function_evaluator</name></member>
     <member refid="classBslAdvection1D_1adbde36dd5d8e63c92c630b238a3fd22a" kind="variable"><name>m_adv_field_builder</name></member>
@@ -587,21 +587,21 @@
   <compound refid="structPolarBSplines_1_1Impl_1_1Corner3Tag" kind="struct"><name>PolarBSplines::Impl::Corner3Tag</name>
   </compound>
   <compound refid="classCrankNicolson" kind="class"><name>CrankNicolson</name>
-    <member refid="classCrankNicolson_1a1a86676d28229e9279602739dd2b3e53" kind="typedef"><name>base_type</name></member>
-    <member refid="classCrankNicolson_1ae25dd92b3ce241ef3153e4e12e719d97" kind="variable"><name>m_idx_range</name></member>
-    <member refid="classCrankNicolson_1a21005b26b9fa75dd3d3251355e4713e0" kind="variable"><name>m_max_counter</name></member>
-    <member refid="classCrankNicolson_1a3d882bbc034753c5b1b890b612878657" kind="variable"><name>m_epsilon</name></member>
-    <member refid="classCrankNicolson_1acee28614e8739edfb476a51aa7c2fe91" kind="function"><name>CrankNicolson</name></member>
-    <member refid="classCrankNicolson_1aae3a7f2977fb6afa91841769d3fad20b" kind="function"><name>update</name></member>
-    <member refid="classCrankNicolson_1a7b3fb7a2fee1adc8bda9d98920d071e0" kind="function"><name>have_converged</name></member>
-    <member refid="classCrankNicolson_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
-    <member refid="classCrankNicolson_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
-    <member refid="classCrankNicolson_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
-    <member refid="classCrankNicolson_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classCrankNicolson_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classCrankNicolson_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
-    <member refid="classCrankNicolson_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classCrankNicolson_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
+    <member refid="classCrankNicolson_1aeca1caf0a1d3031a7607f0e8debe162c" kind="typedef"><name>ValFieldMem</name></member>
+    <member refid="classCrankNicolson_1a747ae99807f5be36392c7b7eebd6cfa4" kind="typedef"><name>DerivFieldMem</name></member>
+    <member refid="classCrankNicolson_1a95bdc821a5aaacd25d9d765f7d74e45b" kind="typedef"><name>exec_space</name></member>
+    <member refid="classCrankNicolson_1ad2052c5be912a7b2784c673c79ccbb4c" kind="variable"><name>m_max_counter</name></member>
+    <member refid="classCrankNicolson_1a761393eefd4ab6b48113eece2d7c67e1" kind="variable"><name>m_epsilon</name></member>
+    <member refid="classCrankNicolson_1a4dd3225c8a4df696ff015b05aa1c7df1" kind="function"><name>CrankNicolson</name></member>
+    <member refid="classCrankNicolson_1a25f5a0173c6f56256b508eb9aed91804" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4" kind="class"><name>CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</name>
+    <member refid="classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a1a86676d28229e9279602739dd2b3e53" kind="typedef"><name>base_type</name></member>
+    <member refid="classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1ae25dd92b3ce241ef3153e4e12e719d97" kind="variable"><name>m_idx_range</name></member>
+    <member refid="classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a21005b26b9fa75dd3d3251355e4713e0" kind="variable"><name>m_max_counter</name></member>
+    <member refid="classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a3d882bbc034753c5b1b890b612878657" kind="variable"><name>m_epsilon</name></member>
+    <member refid="classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1acee28614e8739edfb476a51aa7c2fe91" kind="function"><name>CrankNicolson</name></member>
+    <member refid="classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1aae3a7f2977fb6afa91841769d3fad20b" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classCrankNicolsonBuilder" kind="class"><name>CrankNicolsonBuilder</name>
     <member refid="classCrankNicolsonBuilder_1a2b8c0af37ff0168399e6f19dc646095b" kind="typedef"><name>time_stepper_t</name></member>
@@ -925,18 +925,17 @@
     <member refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01FirstEdge_00_01Edge2_788676fcb3310ca4c1ec984ff0b4531b_1a83a7cb1884c62494474e32842dc2ce9a" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classEuler" kind="class"><name>Euler</name>
-    <member refid="classEuler_1a83bfb7d3eddb453f57d60578c14d9136" kind="typedef"><name>base_type</name></member>
-    <member refid="classEuler_1a722897362aa3fc1bc7cd6a2a1ac47008" kind="variable"><name>m_idx_range</name></member>
-    <member refid="classEuler_1af50845d5ab16f17f2008250aee1bacb0" kind="function"><name>Euler</name></member>
-    <member refid="classEuler_1acf769dde50a76d24b37794eb4bfc812f" kind="function"><name>update</name></member>
-    <member refid="classEuler_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
-    <member refid="classEuler_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
-    <member refid="classEuler_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
-    <member refid="classEuler_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classEuler_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classEuler_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
-    <member refid="classEuler_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classEuler_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
+    <member refid="classEuler_1a60855f791c3238fc3763713fe915b91a" kind="typedef"><name>ValFieldMem</name></member>
+    <member refid="classEuler_1a30bbd17abdf7a5de0b2f716efa11f684" kind="typedef"><name>DerivFieldMem</name></member>
+    <member refid="classEuler_1aa8dc78133f365df818973bb923eacad9" kind="typedef"><name>exec_space</name></member>
+    <member refid="classEuler_1a1bd1aeb8ed4be8548506f4c4763f2804" kind="function"><name>Euler</name></member>
+    <member refid="classEuler_1a02538adb0aa68db6d2a50d47d6fe19c6" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4" kind="class"><name>Euler&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</name>
+    <member refid="classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a83bfb7d3eddb453f57d60578c14d9136" kind="typedef"><name>base_type</name></member>
+    <member refid="classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a722897362aa3fc1bc7cd6a2a1ac47008" kind="variable"><name>m_idx_range</name></member>
+    <member refid="classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1af50845d5ab16f17f2008250aee1bacb0" kind="function"><name>Euler</name></member>
+    <member refid="classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1acf769dde50a76d24b37794eb4bfc812f" kind="function"><name>update</name></member>
   </compound>
   <compound refid="structMultipatchSplineEvaluator2D_1_1eval__deriv__type" kind="struct"><name>MultipatchSplineEvaluator2D::eval_deriv_type</name>
   </compound>
@@ -945,7 +944,8 @@
   <compound refid="classExplicitTimeStepperBuilder" kind="class"><name>ExplicitTimeStepperBuilder</name>
     <member refid="classExplicitTimeStepperBuilder_1a37ec04e4a03c1080891a68fb27395573" kind="typedef"><name>time_stepper_t</name></member>
     <member refid="classExplicitTimeStepperBuilder_1a7878f402b4b32ffd49b5dbb23ecd75c2" kind="function"><name>ExplicitTimeStepperBuilder</name></member>
-    <member refid="classExplicitTimeStepperBuilder_1af949d058cd0686c13dccca5df26a02be" kind="function"><name>preallocate</name></member>
+    <member refid="classExplicitTimeStepperBuilder_1a0362eb97efb94f6492d39dac041d1a34" kind="function"><name>preallocate</name></member>
+    <member refid="classExplicitTimeStepperBuilder_1a6b43c765213ac43bb0682937912301b2" kind="function"><name>preallocate</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1ExtractPatches" kind="struct"><name>connectivity_details::ExtractPatches</name>
   </compound>
@@ -1662,24 +1662,17 @@
     <member refid="classITimeSolverRTheta_1a5503beee2f7240e8b09ef8ac3be2af24" kind="function"><name>display_time_difference</name></member>
   </compound>
   <compound refid="classITimeStepper" kind="class"><name>ITimeStepper</name>
-    <member refid="classITimeStepper_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
+    <member refid="classITimeStepper_1a3334e21d853756b80b60b1b2902d56af" kind="typedef"><name>IdxRange</name></member>
     <member refid="classITimeStepper_1aefaad1f5fe74ef88c3d18942c11e9b48" kind="typedef"><name>ValFieldMem</name></member>
-    <member refid="classITimeStepper_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
-    <member refid="classITimeStepper_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
+    <member refid="classITimeStepper_1a9f14b3f4c770449b26643b59e3fd9df2" kind="typedef"><name>ValField</name></member>
+    <member refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" kind="typedef"><name>ValConstField</name></member>
     <member refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" kind="typedef"><name>DerivFieldMem</name></member>
-    <member refid="classITimeStepper_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
-    <member refid="classITimeStepper_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
+    <member refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" kind="typedef"><name>DerivField</name></member>
+    <member refid="classITimeStepper_1a70082a22831aae26f2f9d4f7bd3b55e2" kind="typedef"><name>DerivConstField</name></member>
     <member refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" kind="typedef"><name>exec_space</name></member>
     <member refid="classITimeStepper_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
     <member refid="classITimeStepper_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
     <member refid="classITimeStepper_1abb0814af8999ce3f3d724a42233e2c97" kind="function"><name>update</name></member>
-    <member refid="classITimeStepper_1a31d847cdc043162216055bd9445d6172" kind="function"><name>assemble_field_k_total</name></member>
-    <member refid="classITimeStepper_1a317441863bfb699241f81150ae1a9ea5" kind="function"><name>assemble_vector_field_k_total</name></member>
-    <member refid="classITimeStepper_1af0b2c72cbd3c7be4d2b3767b4a4c2857" kind="function"><name>copy</name></member>
-    <member refid="classITimeStepper_1a77be010c79547fa1d809afcd793c0f20" kind="function"><name>assemble_k_total</name></member>
-    <member refid="classITimeStepper_1a32de68ecf77ae389c4ef267b6d37e7c6" kind="function"><name>fill_k_total</name></member>
-    <member refid="classITimeStepper_1a73e8b665f637dd49d92ffd2dc347ad28" kind="function"><name>assemble_multipatch_field_k_total_on_patch</name></member>
-    <member refid="classITimeStepper_1afdeb848ce8ca8b935373f065fbf22535" kind="function"><name>assemble_multipatch_field_k_total</name></member>
   </compound>
   <compound refid="classIVlasovSolver" kind="class"><name>IVlasovSolver</name>
     <member refid="classIVlasovSolver_1a10c7130ab540e2f3502ecea9bf67da1e" kind="function"><name>~IVlasovSolver</name></member>
@@ -2730,46 +2723,43 @@
     <member refid="classRestartInitialisation_1a5dcc26f6971e00320fa74261c9d382f0" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classRK2" kind="class"><name>RK2</name>
-    <member refid="classRK2_1a6834c283e76bdb2834b983ce012d0669" kind="typedef"><name>base_type</name></member>
-    <member refid="classRK2_1a0a635e6e8a7e3dcb1d44c3e7603eb77d" kind="variable"><name>m_idx_range</name></member>
-    <member refid="classRK2_1a0fca8b7c95e42ae9d8ca939677e8ff8e" kind="function"><name>RK2</name></member>
-    <member refid="classRK2_1af39ff8c3200cb2b37a4254030288963d" kind="function"><name>update</name></member>
-    <member refid="classRK2_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
-    <member refid="classRK2_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
-    <member refid="classRK2_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
-    <member refid="classRK2_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classRK2_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classRK2_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
-    <member refid="classRK2_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classRK2_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
+    <member refid="classRK2_1a02b1d185caf4c8cee24693a8450bc5be" kind="typedef"><name>ValFieldMem</name></member>
+    <member refid="classRK2_1a4b083594912a288b69b4215c87a2ea63" kind="typedef"><name>DerivFieldMem</name></member>
+    <member refid="classRK2_1af71aa3050eeb546a098b26c3d054f35b" kind="typedef"><name>exec_space</name></member>
+    <member refid="classRK2_1aef7ce2f4f95b11433c6371f4af9e2e2f" kind="function"><name>RK2</name></member>
+    <member refid="classRK2_1af02cb8c319308823ec8eb6911eb8f979" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4" kind="class"><name>RK2&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</name>
+    <member refid="classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a6834c283e76bdb2834b983ce012d0669" kind="typedef"><name>base_type</name></member>
+    <member refid="classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a0a635e6e8a7e3dcb1d44c3e7603eb77d" kind="variable"><name>m_idx_range</name></member>
+    <member refid="classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a0fca8b7c95e42ae9d8ca939677e8ff8e" kind="function"><name>RK2</name></member>
+    <member refid="classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1af39ff8c3200cb2b37a4254030288963d" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classRK3" kind="class"><name>RK3</name>
-    <member refid="classRK3_1a4e035359670b272d53dff67d9e7c0716" kind="typedef"><name>base_type</name></member>
-    <member refid="classRK3_1adf9f896127748637d8afca8c22104c61" kind="variable"><name>m_idx_range</name></member>
-    <member refid="classRK3_1aa007e2d8c88c0213ead0a9159a03e054" kind="function"><name>RK3</name></member>
-    <member refid="classRK3_1a5b66359b6132c575734d8970fda25a56" kind="function"><name>update</name></member>
-    <member refid="classRK3_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
-    <member refid="classRK3_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
-    <member refid="classRK3_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
-    <member refid="classRK3_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classRK3_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classRK3_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
-    <member refid="classRK3_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classRK3_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
+    <member refid="classRK3_1a97aee4dd206a556811a89cfe71004a54" kind="typedef"><name>ValFieldMem</name></member>
+    <member refid="classRK3_1aac3a800e66286822ffe97432d10f973a" kind="typedef"><name>DerivFieldMem</name></member>
+    <member refid="classRK3_1a8d3b43f9e0ed3beb7a7ba7cb1ac58524" kind="typedef"><name>exec_space</name></member>
+    <member refid="classRK3_1a47de7bc5a634ed650d8db20e7d162754" kind="function"><name>RK3</name></member>
+    <member refid="classRK3_1a94efc5863ea959f58086b383d13ad9ee" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4" kind="class"><name>RK3&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</name>
+    <member refid="classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a4e035359670b272d53dff67d9e7c0716" kind="typedef"><name>base_type</name></member>
+    <member refid="classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1adf9f896127748637d8afca8c22104c61" kind="variable"><name>m_idx_range</name></member>
+    <member refid="classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1aa007e2d8c88c0213ead0a9159a03e054" kind="function"><name>RK3</name></member>
+    <member refid="classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a5b66359b6132c575734d8970fda25a56" kind="function"><name>update</name></member>
   </compound>
   <compound refid="classRK4" kind="class"><name>RK4</name>
-    <member refid="classRK4_1a509cfc736d56cbb71043ed266e2f6f81" kind="typedef"><name>base_type</name></member>
-    <member refid="classRK4_1a53572e5cd405f7af9221d8333e7562ba" kind="variable"><name>m_idx_range</name></member>
-    <member refid="classRK4_1a5956fc372c34f2d14a030fd0dd66be5f" kind="function"><name>RK4</name></member>
-    <member refid="classRK4_1aa00962aea26427ba1af53522b7dc1395" kind="function"><name>update</name></member>
-    <member refid="classRK4_1a0580b80dd9c61ac350895e80958c15dc" kind="function"><name>update</name></member>
-    <member refid="classRK4_1a55c46c1cd9abbf8299648add1589d51d" kind="function"><name>update</name></member>
-    <member refid="classRK4_1a86f1b0334df3fae50bd69fbfa32f9954" kind="function"><name>update</name></member>
-    <member refid="classRK4_1afdbd0d8a324c9f3a169e5776127e174f" kind="typedef"><name>IdxRange</name></member>
-    <member refid="classRK4_1a8b67d47c34f88b2838fe16f98ce61372" kind="typedef"><name>ValConstField</name></member>
-    <member refid="classRK4_1ae1fa0645a608965479f0974abcff81ff" kind="typedef"><name>ValField</name></member>
-    <member refid="classRK4_1a32837c6aa6ab0a17eb422efd8e0f933e" kind="typedef"><name>DerivConstField</name></member>
-    <member refid="classRK4_1adb99057a5a7ea3b43495c356cdc68b45" kind="typedef"><name>DerivField</name></member>
+    <member refid="classRK4_1a22c05256cf19700e9c3c5b1dd7c9ab0b" kind="typedef"><name>ValFieldMem</name></member>
+    <member refid="classRK4_1acd4eeec35af248ac08ba1ab6efaad16d" kind="typedef"><name>DerivFieldMem</name></member>
+    <member refid="classRK4_1a369197461716ac41e96deea831b5bd46" kind="typedef"><name>exec_space</name></member>
+    <member refid="classRK4_1ae28692c2a1a6c872eac0d7aef39db4d2" kind="function"><name>RK4</name></member>
+    <member refid="classRK4_1a620fa4eecf00881e13c77ba0b38040b4" kind="function"><name>update</name></member>
+  </compound>
+  <compound refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4" kind="class"><name>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</name>
+    <member refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a509cfc736d56cbb71043ed266e2f6f81" kind="typedef"><name>base_type</name></member>
+    <member refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a53572e5cd405f7af9221d8333e7562ba" kind="variable"><name>m_idx_range</name></member>
+    <member refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a5956fc372c34f2d14a030fd0dd66be5f" kind="function"><name>RK4</name></member>
+    <member refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1aa00962aea26427ba1af53522b7dc1395" kind="function"><name>update</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1SelectRelevantIdxRangeType" kind="struct"><name>connectivity_details::SelectRelevantIdxRangeType</name>
   </compound>
@@ -3338,6 +3328,7 @@
     <member refid="ddc__helper_8hpp_1aabbf4cbd249da175f1cea2ae2cb61aee" kind="typedef"><name>apply_template_to_type_seq_t</name></member>
     <member refid="ddc__helper_8hpp_1aa238a8fb325126a81a31cd8fc6a436cc" kind="typedef"><name>type_seq_intersection_t</name></member>
     <member refid="ddc__helper_8hpp_1a8fe773985cd825fa9ddac001aef03324" kind="typedef"><name>to_coord_t</name></member>
+    <member refid="ddc__helper_8hpp_1a48f5e65491099151b885595706e2136d" kind="variable"><name>is_coordinate_v</name></member>
     <member refid="non__uniform__interpolation__points_8hpp_1a6ba00773b16df1063519790796f9c1dd" kind="variable"><name>is_non_uniform_interpolation_points_v</name></member>
     <member refid="derivative__field_8hpp_1a9a2d3927b6e69a7dee15d2d617bf6655" kind="function"><name>deepcopy</name></member>
     <member refid="derivative__field_8hpp_1ada5630e0ff2c91e9524e0c32aaa8ad77" kind="function"><name>deepcopy</name></member>

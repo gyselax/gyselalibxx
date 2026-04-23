@@ -36,7 +36,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**CrankNicolson**](classCrankNicolson.md) &lt;class FieldMem, class [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem), class ExecSpace&gt;<br>_A class which provides an implementation of a Crank-Nicolson method._  |
+| class | [**CrankNicolson**](classCrankNicolson.md) &lt;class ValType, class DerivType, class ExecSpace&gt;<br>_A class which provides an implementation of a Crank-Nicolson method._  |
+| class | [**CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) &lt;FieldMem, DerivFieldMem, class ExecSpace&gt;<br>_A class which provides an implementation of a Crank-Nicolson method._  |
 | class | [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md) <br>_A class to indicate that a Crank-Nicolson time stepper should be constructed for use in other operators._  |
 
 

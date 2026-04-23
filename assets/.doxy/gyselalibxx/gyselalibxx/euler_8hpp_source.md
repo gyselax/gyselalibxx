@@ -18,11 +18,52 @@
 #include "itimestepper.hpp"
 #include "vector_field_common.hpp"
 
+template <class ValType, class DerivType = ValType, class ExecSpace = Kokkos::DefaultExecutionSpace>
+class Euler
+{
+    static_assert(!timestepper_detail::FieldLike<ValType>);
+    static_assert(!timestepper_detail::FieldLike<DerivType>);
+
+public:
+    using ValFieldMem = ValType;
+
+    using DerivFieldMem = DerivType;
+
+    using exec_space = ExecSpace;
+
+public:
+    explicit KOKKOS_DEFAULTED_FUNCTION Euler() = default;
+
+    template <
+            class DYFunctor,
+            class YFunctor
+            = decltype(timestepper_detail::serial_y_update<ValType&, DerivType const&>)>
+    KOKKOS_FUNCTION void update(
+            ValType& y,
+            double dt,
+            DYFunctor dy_calculator,
+            YFunctor y_update
+            = timestepper_detail::serial_y_update<ValType&, DerivType const&>) const
+    {
+        static_assert(std::is_invocable_v<DYFunctor, DerivType&, ValType>);
+        DerivType k1;
+
+        // --------- Calculate k1 ------------
+        // Calculate k1 = f(y_n)
+        dy_calculator(k1, y);
+
+        // ----------- Update y --------------
+        // Calculate y_new := y_n + h*k_1
+        y_update(y, k1, dt);
+    }
+};
+
 template <
-        class FieldMem,
-        class DerivFieldMem = FieldMem,
-        class ExecSpace = Kokkos::DefaultExecutionSpace>
-class Euler : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
+        timestepper_detail::FieldLike FieldMem,
+        timestepper_detail::FieldLike DerivFieldMem,
+        class ExecSpace>
+class Euler<FieldMem, DerivFieldMem, ExecSpace>
+    : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
 {
     using base_type = ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>;
 
@@ -52,7 +93,7 @@ public:
             std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
         DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
-        DerivField k1(k1_alloc);
+        DerivField k1 = get_field(k1_alloc);
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)

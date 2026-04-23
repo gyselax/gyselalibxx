@@ -18,7 +18,6 @@ _The superclass from which all timestepping methods inherit._ [More...](#detaile
 
 
 
-Inherited by the following classes: [CrankNicolson](classCrankNicolson.md),  [Euler](classEuler.md),  [RK2](classRK2.md),  [RK3](classRK3.md),  [RK4](classRK4.md)
 
 
 
@@ -35,12 +34,12 @@ Inherited by the following classes: [CrankNicolson](classCrankNicolson.md),  [Eu
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename DerivFieldMem::view\_type | [**DerivConstField**](#typedef-derivconstfield)  <br>_The constant type of the derivatives values of the function being evolved._  |
-| typedef typename DerivFieldMem::span\_type | [**DerivField**](#typedef-derivfield)  <br>_The type of the derivatives of the function being evolved._  |
+| typedef timestepper\_detail::const\_reference\_t&lt; [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem) &gt; | [**DerivConstField**](#typedef-derivconstfield)  <br>_The constant type of the derivatives values of the function being evolved._  |
+| typedef timestepper\_detail::reference\_t&lt; [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem) &gt; | [**DerivField**](#typedef-derivfield)  <br>_The type of the derivatives of the function being evolved._  |
 | typedef DerivFieldMemType | [**DerivFieldMem**](#typedef-derivfieldmem)  <br>_The type of the memory allocation for the derivatives of the function being evolved._  |
-| typedef typename FieldMem::discrete\_domain\_type | [**IdxRange**](#typedef-idxrange)  <br>_The type of the index range on which the values of the function are defined._  |
-| typedef typename FieldMem::view\_type | [**ValConstField**](#typedef-valconstfield)  <br>_The constant type of the values of the function being evolved._  |
-| typedef typename FieldMem::span\_type | [**ValField**](#typedef-valfield)  <br>_The type of the values of the function being evolved._  |
+| typedef typename timestepper\_detail::IdxRangeType&lt; FieldMem &gt;::type | [**IdxRange**](#typedef-idxrange)  <br>_The type of the index range on which the values of the function are defined._  |
+| typedef timestepper\_detail::const\_reference\_t&lt; FieldMem &gt; | [**ValConstField**](#typedef-valconstfield)  <br>_The constant type of the values of the function being evolved._  |
+| typedef timestepper\_detail::reference\_t&lt; FieldMem &gt; | [**ValField**](#typedef-valfield)  <br>_The type of the values of the function being evolved._  |
 | typedef FieldMem | [**ValFieldMem**](#typedef-valfieldmem)  <br>_The type of the memory allocation for the values of the function being evolved._  |
 | typedef ExecSpace | [**exec\_space**](#typedef-exec_space)  <br>_The space (CPU/GPU) where the calculations are carried out._  |
 
@@ -67,8 +66,6 @@ Inherited by the following classes: [CrankNicolson](classCrankNicolson.md),  [Eu
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**assemble\_field\_k\_total**](#function-assemble_field_k_total) (ExecSpace const & exec\_space, FieldType k\_total, FuncType func, std::array&lt; FieldType, n\_args &gt; k\_arr) const<br> |
-|  void | [**assemble\_vector\_field\_k\_total**](#function-assemble_vector_field_k_total) (ExecSpace const & exec\_space, FieldType k\_total, FuncType func, std::array&lt; FieldType, n\_args &gt; k\_arr) const<br> |
 |  void | [**update**](#function-update-13) ([**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator) const<br>_Carry out one step of the timestepping scheme._  |
 |  void | [**update**](#function-update-23) (ExecSpace const & exec\_space, [**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator) const<br>_Carry out one step of the timestepping scheme._  |
 | virtual void | [**update**](#function-update-33) (ExecSpace const & exec\_space, [**ValField**](classITimeStepper.md#typedef-valfield) y, double dt, std::function&lt; void([**DerivField**](classITimeStepper.md#typedef-derivfield), [**ValConstField**](classITimeStepper.md#typedef-valconstfield))&gt; dy\_calculator, std::function&lt; void([**ValField**](classITimeStepper.md#typedef-valfield), [**DerivConstField**](classITimeStepper.md#typedef-derivconstfield), double)&gt; y\_update) const = 0<br>_Carry out one step of the timestepping scheme._  |
@@ -96,19 +93,8 @@ Inherited by the following classes: [CrankNicolson](classCrankNicolson.md),  [Eu
 
 
 
-## Protected Functions
-
-| Type | Name |
-| ---: | :--- |
-|  void | [**assemble\_k\_total**](#function-assemble_k_total) (ExecSpace const & exec\_space, [**DerivField**](classITimeStepper.md#typedef-derivfield) k\_total, FuncType func, T... k) const<br>_A method to assemble multiple derivative fields into one. This method is responsible for choosing how this is done depending on the type of the derivative field._  |
-|  void | [**copy**](#function-copy) ([**ValField**](classITimeStepper.md#typedef-valfield) copy\_to, [**ValConstField**](classITimeStepper.md#typedef-valconstfield) copy\_from) const<br>_Make a copy of the values of the function being evolved._  |
 
 
-## Protected Static Functions
-
-| Type | Name |
-| ---: | :--- |
-|  KOKKOS\_FUNCTION void | [**fill\_k\_total**](#function-fill_k_total) (DerivFieldType k\_total, Idx i, [**DVector**](classTensor.md)&lt; DDims... &gt; new\_val) <br>_A method to fill an element of a vector field._  |
 
 
 ## Detailed Description
@@ -127,7 +113,7 @@ The class exposes three update functions which are used to carry out one step of
 
 _The constant type of the derivatives values of the function being evolved._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::DerivConstField =  typename DerivFieldMem::view_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::DerivConstField =  timestepper_detail::const_reference_t<DerivFieldMem>;
 ```
 
 
@@ -141,7 +127,7 @@ using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::DerivConstField = 
 
 _The type of the derivatives of the function being evolved._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::DerivField =  typename DerivFieldMem::span_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::DerivField =  timestepper_detail::reference_t<DerivFieldMem>;
 ```
 
 
@@ -169,7 +155,7 @@ using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::DerivFieldMem =  D
 
 _The type of the index range on which the values of the function are defined._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::IdxRange =  typename FieldMem::discrete_domain_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::IdxRange =  typename timestepper_detail::IdxRangeType<FieldMem>::type;
 ```
 
 
@@ -183,7 +169,7 @@ using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::IdxRange =  typena
 
 _The constant type of the values of the function being evolved._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::ValConstField =  typename FieldMem::view_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::ValConstField =  timestepper_detail::const_reference_t<FieldMem>;
 ```
 
 
@@ -197,7 +183,7 @@ using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::ValConstField =  t
 
 _The type of the values of the function being evolved._ 
 ```C++
-using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::ValField =  typename FieldMem::span_type;
+using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::ValField =  timestepper_detail::reference_t<FieldMem>;
 ```
 
 
@@ -234,78 +220,6 @@ using ITimeStepper< FieldMem, DerivFieldMemType, ExecSpace >::exec_space =  Exec
 <hr>
 ## Public Functions Documentation
 
-
-
-
-### function assemble\_field\_k\_total 
-
-```C++
-template<class FieldType, class FuncType, std::size_t n_args>
-inline void ITimeStepper::assemble_field_k_total (
-    ExecSpace const & exec_space,
-    FieldType k_total,
-    FuncType func,
-    std::array< FieldType, n_args > k_arr
-) const
-```
-
-
-
-Calculate func(k\_arr[0], k\_arr[1], ...) when FieldType is a Field (ddc::ChunkSpan). This function should be private but is public due to Cuda restrictions.
-
-
-
-
-**Parameters:**
-
-
-* `exec_space` The space (CPU/GPU) where the calculation should be executed. 
-* `k_total` The field to be filled with the combined derivative fields. 
-* `func` A function which combines an element from each of the derivative fields. 
-* `k_arr` The derivative fields being combined. 
-
-
-
-
-        
-
-<hr>
-
-
-
-### function assemble\_vector\_field\_k\_total 
-
-```C++
-template<class FieldType, class FuncType, std::size_t n_args>
-inline void ITimeStepper::assemble_vector_field_k_total (
-    ExecSpace const & exec_space,
-    FieldType k_total,
-    FuncType func,
-    std::array< FieldType, n_args > k_arr
-) const
-```
-
-
-
-Calculate func(k\_arr[0], k\_arr[1], ...) when FieldType is a [**VectorField**](classVectorField.md). This function should be private but is public due to Cuda restrictions.
-
-
-
-
-**Parameters:**
-
-
-* `exec_space` The space (CPU/GPU) where the calculation should be executed. 
-* `k_total` The field to be filled with the combined derivative fields. 
-* `func` A function which combines an element from each of the derivative fields. 
-* `k_arr` The derivative fields being combined. 
-
-
-
-
-        
-
-<hr>
 
 
 
@@ -404,105 +318,6 @@ virtual void ITimeStepper::update (
 * `dt` The time step over which the values should be evolved. 
 * `dy_calculator` The function describing how the derivative of the evolve function is calculated. 
 * `y_update` The function describing how the value(s) are updated using the derivative. 
-
-
-
-
-        
-
-<hr>
-## Protected Functions Documentation
-
-
-
-
-### function assemble\_k\_total 
-
-_A method to assemble multiple derivative fields into one. This method is responsible for choosing how this is done depending on the type of the derivative field._ 
-```C++
-template<class FuncType, class... T>
-inline void ITimeStepper::assemble_k_total (
-    ExecSpace const & exec_space,
-    DerivField k_total,
-    FuncType func,
-    T... k
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `exec_space` The space (CPU/GPU) where the calculation should be executed. 
-* `k_total` The field to be filled with the combined derivative fields. 
-* `func` A function which combines an element from each of the derivative fields. 
-* `k` The derivative fields being combined. 
-
-
-
-
-        
-
-<hr>
-
-
-
-### function copy 
-
-_Make a copy of the values of the function being evolved._ 
-```C++
-inline void ITimeStepper::copy (
-    ValField copy_to,
-    ValConstField copy_from
-) const
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `copy_to` the field that the values should be copied to. 
-* `copy_from` The field that the values should be copied from. 
-
-
-
-
-        
-
-<hr>
-## Protected Static Functions Documentation
-
-
-
-
-### function fill\_k\_total 
-
-_A method to fill an element of a vector field._ 
-```C++
-template<class DerivFieldType, class Idx, class... DDims>
-static inline KOKKOS_FUNCTION void ITimeStepper::fill_k_total (
-    DerivFieldType k_total,
-    Idx i,
-    DVector < DDims... > new_val
-) 
-```
-
-
-
-
-
-**Parameters:**
-
-
-* `k_total` The vector field that will be filled. 
-* `i` The index where the vector field should be filled. 
-* `new_val` The coordinate that should be saved to the vector field. 
 
 
 

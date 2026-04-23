@@ -570,8 +570,262 @@
 
 #include &lt;ddc/ddc.hpp&gt;
 
+#include "ddc_aliases.hpp"
 #include "multipatch_field.hpp"
 #include "multipatch_field_mem.hpp"
+#include "tensor.hpp"
+#include "vector_field.hpp"
+#include "vector_field_mem.hpp"
+
+namespace timestepper_detail {
+
+template &lt;typename T&gt;
+concept FieldLike = requires
+{
+    typename T::span_type;
+    typename T::view_type;
+};
+
+template &lt;class T&gt;
+struct GetReferenceField
+{
+    static_assert(!FieldLike&lt;T&gt;);
+    using type = T&amp;;
+};
+
+template &lt;class T&gt;
+struct GetConstReferenceField
+{
+    static_assert(!FieldLike&lt;T&gt;);
+    using type = T const&amp;;
+};
+
+template &lt;FieldLike T&gt;
+struct GetReferenceField&lt;T&gt;
+{
+    using type = typename T::span_type;
+};
+
+template &lt;FieldLike T&gt;
+struct GetConstReferenceField&lt;T&gt;
+{
+    using type = typename T::view_type;
+};
+
+template &lt;class T&gt;
+using reference_t = typename GetReferenceField&lt;T&gt;::type;
+template &lt;class T&gt;
+using const_reference_t = typename GetConstReferenceField&lt;T&gt;::type;
+
+template &lt;class FieldMem, class DerivFieldMemType&gt;
+concept Compatible
+        = !(FieldLike&lt;FieldMem&gt; &amp;&amp; FieldLike&lt;DerivFieldMemType&gt;)
+          || (std::is_same_v&lt;
+                  typename FieldMem::discrete_domain_type,
+                  typename DerivFieldMemType::discrete_domain_type&gt;)
+          || (is_multipatch_field_mem_v&lt;FieldMem&gt; &amp;&amp; is_multipatch_field_mem_v&lt;DerivFieldMemType&gt;);
+
+template &lt;class ExecSpace, class FieldMem&gt;
+concept Accessible
+        = !(FieldLike&lt;FieldMem&gt;)
+          || bool(Kokkos::SpaceAccessibility&lt;ExecSpace, typename FieldMem::memory_space&gt;::
+                          accessible);
+
+template &lt;class FieldMem&gt;
+concept ExpectedTimeStepperType
+        = (ddc::is_chunk_v&lt;FieldMem&gt;) || (is_vector_field_v&lt;FieldMem&gt;)
+          || (is_multipatch_field_mem_v&lt;FieldMem&gt;) || (std::is_floating_point_v&lt;FieldMem&gt;)
+          || (is_tensor_type_v&lt;FieldMem&gt;) || (ddcHelper::is_coordinate_v&lt;FieldMem&gt;);
+
+template &lt;class T&gt;
+struct IdxRangeType
+{
+    static_assert(!FieldLike&lt;T&gt;);
+    using type = IdxRange&lt;&gt;;
+};
+
+template &lt;FieldLike T&gt;
+struct IdxRangeType&lt;T&gt;
+{
+    using type = typename T::discrete_domain_type;
+};
+
+template &lt;class T&gt;
+struct ElementType
+{
+    static_assert(!FieldLike&lt;T&gt;);
+    using type = std::remove_reference_t&lt;T&gt;;
+};
+
+template &lt;FieldLike T&gt;
+struct ElementType&lt;T&gt;
+{
+    using type = typename T::element_type;
+};
+
+template &lt;class FieldType&gt;
+struct copy_helper
+{
+    static_assert(!FieldLike&lt;FieldType&gt;);
+    static KOKKOS_FUNCTION void copy(FieldType&amp; copy_to, FieldType const&amp; copy_from)
+    {
+        copy_to = copy_from;
+    }
+};
+
+template &lt;timestepper_detail::FieldLike FieldMemType&gt;
+struct copy_helper&lt;FieldMemType&gt;
+{
+    static_assert(!ddc::is_chunk_v&lt;FieldMemType&gt;);
+    static void copy(
+            reference_t&lt;FieldMemType&gt; copy_to,
+            const_reference_t&lt;FieldMemType&gt; const&amp; copy_from)
+    {
+        ddcHelper::deepcopy(copy_to, copy_from);
+    }
+};
+
+template &lt;class ElementType, class IdxRangeType, class MemSpace&gt;
+struct copy_helper&lt;FieldMem&lt;ElementType, IdxRangeType, MemSpace&gt;&gt;
+{
+    static void copy(
+            Field&lt;ElementType, IdxRangeType, MemSpace&gt; copy_to,
+            ConstField&lt;ElementType, IdxRangeType, MemSpace&gt; copy_from)
+    {
+        ddc::parallel_deepcopy(copy_to, copy_from);
+    }
+};
+
+template &lt;class DerivFieldType, class Idx, class... DDims&gt;
+KOKKOS_FUNCTION void fill_k_total(DerivFieldType k_total, Idx i, DVector&lt;DDims...&gt; new_val)
+{
+    ((ddcHelper::get&lt;DDims&gt;(k_total)(i) = ddcHelper::get&lt;DDims&gt;(new_val)), ...);
+}
+
+template &lt;class ExecSpace, class DerivFieldType&gt;
+struct assemble_helper
+{
+    static_assert(!FieldLike&lt;DerivFieldType&gt;);
+
+    template &lt;class FuncType, class... T&gt;
+    static KOKKOS_FUNCTION void assemble_k_total(DerivFieldType&amp; k_total, FuncType func, T... k)
+    {
+        std::array&lt;DerivFieldType, sizeof...(T)&gt; k_arr({k...});
+        k_total = func(k_arr);
+    }
+};
+
+template &lt;class ExecSpace, class ElementType, class IdxRangeType, class MemSpace&gt;
+struct assemble_helper&lt;ExecSpace, FieldMem&lt;ElementType, IdxRangeType, MemSpace&gt;&gt;
+{
+    using DerivFieldType = Field&lt;ElementType, IdxRangeType, MemSpace&gt;;
+
+    template &lt;class FuncType, class... T&gt;
+    static void assemble_k_total(
+            ExecSpace const&amp; exec_space,
+            DerivFieldType k_total,
+            FuncType func,
+            T... k)
+    {
+        std::size_t constexpr n_args = sizeof...(T);
+        std::array&lt;DerivFieldType, n_args&gt; k_arr({k...});
+        using Idx = typename IdxRangeType::discrete_element_type;
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space,
+                get_idx_range(k_total),
+                KOKKOS_LAMBDA(Idx const i) {
+                    std::array&lt;ElementType, n_args&gt; k_elems;
+                    for (int j(0); j &lt; n_args; ++j) {
+                        k_elems[j] = k_arr[j](i);
+                    }
+                    k_total(i) = func(k_elems);
+                });
+    }
+};
+
+template &lt;
+        class ExecSpace,
+        class ElementType,
+        class IdxRangeType,
+        class VectorIndexSet,
+        class MemSpace&gt;
+struct assemble_helper&lt;
+        ExecSpace,
+        VectorFieldMem&lt;ElementType, IdxRangeType, VectorIndexSet, MemSpace&gt;&gt;
+{
+    using DerivFieldType = VectorField&lt;ElementType, IdxRangeType, VectorIndexSet, MemSpace&gt;;
+
+    template &lt;class FuncType, class... T&gt;
+    static void assemble_k_total(
+            ExecSpace const&amp; exec_space,
+            DerivFieldType k_total,
+            FuncType func,
+            T... k)
+    {
+        std::size_t constexpr n_args = sizeof...(T);
+        std::array&lt;DerivFieldType, n_args&gt; k_arr({k...});
+        using element_type = Tensor&lt;ElementType, VectorIndexSet&gt;;
+        using Idx = typename IdxRangeType::discrete_element_type;
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                exec_space,
+                get_idx_range(k_total),
+                KOKKOS_LAMBDA(Idx const i) {
+                    std::array&lt;element_type, n_args&gt; k_elems;
+                    for (int j(0); j &lt; n_args; ++j) {
+                        k_elems[j] = k_arr[j](i);
+                    }
+                    fill_k_total(k_total, i, func(k_elems));
+                });
+    }
+};
+
+template &lt;class ExecSpace, template &lt;typename P&gt; typename T, class... Patches&gt;
+struct assemble_helper&lt;ExecSpace, MultipatchFieldMem&lt;T, Patches...&gt;&gt;
+{
+    using DerivFieldType = MultipatchFieldMem&lt;T, Patches...&gt;::span_type;
+
+    template &lt;class FuncType, class... KType&gt;
+    static void assemble_k_total(
+            ExecSpace const&amp; exec_space,
+            DerivFieldType k_total,
+            FuncType func,
+            KType... k)
+    {
+        ((assemble_multipatch_field_k_total_on_patch&lt;Patches&gt;(exec_space, k_total, func, k...)),
+         ...);
+    }
+
+private:
+    template &lt;class Patch, class FuncType, class... KType&gt;
+    static void assemble_multipatch_field_k_total_on_patch(
+            ExecSpace const&amp; exec_space,
+            DerivFieldType k_total,
+            FuncType func,
+            KType... k)
+    {
+        timestepper_detail::assemble_helper&lt;ExecSpace, T&lt;Patch&gt;&gt;::assemble_k_total(
+                exec_space,
+                k_total.template get&lt;Patch&gt;(),
+                func,
+                k.template get&lt;Patch&gt;()...);
+    }
+};
+
+template &lt;
+        class ValField,
+        class DerivConstField,
+        typename = std::enable_if_t&lt;!FieldLike&lt;ValField&gt;&gt;,
+        typename = std::enable_if_t&lt;!FieldLike&lt;DerivConstField&gt;&gt;&gt;
+KOKKOS_FUNCTION void serial_y_update(ValField y, DerivConstField dy, double dt)
+{
+    y += dy * dt;
+}
+
+} // namespace timestepper_detail
 
 template &lt;
         class FieldMem,
@@ -579,42 +833,31 @@ template &lt;
         class ExecSpace = Kokkos::DefaultExecutionSpace&gt;
 class ITimeStepper
 {
-    static_assert(
-            (ddc::is_chunk_v&lt;FieldMem&gt;) or (is_vector_field_v&lt;FieldMem&gt;)
-            or (is_multipatch_field_mem_v&lt;FieldMem&gt;));
-    static_assert(
-            (ddc::is_chunk_v&lt;DerivFieldMemType&gt;) or (is_vector_field_v&lt;DerivFieldMemType&gt;)
-            or (is_multipatch_field_mem_v&lt;DerivFieldMemType&gt;));
+    static_assert(timestepper_detail::FieldLike&lt;FieldMem&gt;);
+    static_assert(timestepper_detail::FieldLike&lt;DerivFieldMemType&gt;);
+    static_assert(timestepper_detail::Compatible&lt;FieldMem, DerivFieldMemType&gt;);
 
     static_assert(
-            (std::is_same_v&lt;
-                    typename FieldMem::discrete_domain_type,
-                    typename DerivFieldMemType::discrete_domain_type&gt;)
-            || (is_multipatch_field_mem_v&lt;
-                        FieldMem&gt; &amp;&amp; is_multipatch_field_mem_v&lt;DerivFieldMemType&gt;));
-
-    static_assert(
-            Kokkos::SpaceAccessibility&lt;ExecSpace, typename FieldMem::memory_space&gt;::accessible,
+            timestepper_detail::Accessible&lt;ExecSpace, FieldMem&gt;,
             "MemorySpace has to be accessible for ExecutionSpace.");
     static_assert(
-            Kokkos::SpaceAccessibility&lt;ExecSpace, typename DerivFieldMemType::memory_space&gt;::
-                    accessible,
+            timestepper_detail::Accessible&lt;ExecSpace, DerivFieldMemType&gt;,
             "MemorySpace has to be accessible for ExecutionSpace.");
 
 public:
-    using IdxRange = typename FieldMem::discrete_domain_type;
+    using IdxRange = typename timestepper_detail::IdxRangeType&lt;FieldMem&gt;::type;
 
     using ValFieldMem = FieldMem;
 
-    using ValField = typename FieldMem::span_type;
+    using ValField = timestepper_detail::reference_t&lt;FieldMem&gt;;
 
-    using ValConstField = typename FieldMem::view_type;
+    using ValConstField = timestepper_detail::const_reference_t&lt;FieldMem&gt;;
 
     using DerivFieldMem = DerivFieldMemType;
 
-    using DerivField = typename DerivFieldMem::span_type;
+    using DerivField = timestepper_detail::reference_t&lt;DerivFieldMem&gt;;
 
-    using DerivConstField = typename DerivFieldMem::view_type;
+    using DerivConstField = timestepper_detail::const_reference_t&lt;DerivFieldMem&gt;;
 
     using exec_space = ExecSpace;
 
@@ -631,7 +874,6 @@ public:
             double dt,
             std::function&lt;void(DerivField, ValConstField)&gt; dy_calculator) const
     {
-        static_assert(ddc::is_chunk_v&lt;FieldMem&gt;);
         using Idx = typename IdxRange::discrete_element_type;
         update(exec_space, y, dt, dy_calculator, [&amp;](ValField y, DerivConstField dy, double dt) {
             const std::source_location location = std::source_location::current();
@@ -649,139 +891,6 @@ public:
             double dt,
             std::function&lt;void(DerivField, ValConstField)&gt; dy_calculator,
             std::function&lt;void(ValField, DerivConstField, double)&gt; y_update) const = 0;
-
-protected:
-    void copy(ValField copy_to, ValConstField copy_from) const
-    {
-        if constexpr (ddc::is_chunk_v&lt;ValField&gt;) {
-            ddc::parallel_deepcopy(copy_to, copy_from);
-        } else {
-            ddcHelper::deepcopy(copy_to, copy_from);
-        }
-    }
-
-    template &lt;class DerivFieldType, class Idx, class... DDims&gt;
-    KOKKOS_FUNCTION static void fill_k_total(
-            DerivFieldType k_total,
-            Idx i,
-            DVector&lt;DDims...&gt; new_val)
-    {
-        static_assert(
-                (std::is_same_v&lt;DerivField, DerivFieldType&gt;)
-                || (is_multipatch_field_v&lt;DerivField&gt;));
-        ((ddcHelper::get&lt;DDims&gt;(k_total)(i) = ddcHelper::get&lt;DDims&gt;(new_val)), ...);
-    }
-
-    template &lt;class FuncType, class... T&gt;
-    void assemble_k_total(ExecSpace const&amp; exec_space, DerivField k_total, FuncType func, T... k)
-            const
-    {
-        static_assert(std::conjunction_v&lt;std::is_same&lt;T, DerivField&gt;...&gt;);
-        std::size_t constexpr n_args = sizeof...(T);
-        using element_type = typename DerivField::element_type;
-        static_assert(
-                std::is_invocable_r_v&lt;element_type, FuncType, std::array&lt;element_type, n_args&gt;&gt;);
-        std::array&lt;DerivField, n_args&gt; k_arr({k...});
-        if constexpr (is_vector_field_v&lt;DerivField&gt;) {
-            assemble_vector_field_k_total(exec_space, k_total, func, k_arr);
-        } else if constexpr (is_multipatch_field_v&lt;DerivField&gt;) {
-            assemble_multipatch_field_k_total(exec_space, k_total, func, k_arr);
-        } else {
-            assemble_field_k_total(exec_space, k_total, func, k_arr);
-        }
-    }
-
-public:
-    template &lt;class FieldType, class FuncType, std::size_t n_args&gt;
-    void assemble_field_k_total(
-            ExecSpace const&amp; exec_space,
-            FieldType k_total,
-            FuncType func,
-            std::array&lt;FieldType, n_args&gt; k_arr) const
-    {
-        static_assert(ddc::is_chunk_v&lt;FieldType&gt;);
-        using Idx = typename FieldType::discrete_domain_type::discrete_element_type;
-        const std::source_location location = std::source_location::current();
-        ddc::parallel_for_each(
-                location.function_name(),
-                exec_space,
-                get_idx_range(k_total),
-                KOKKOS_LAMBDA(Idx const i) {
-                    std::array&lt;double, n_args&gt; k_elems;
-                    for (int j(0); j &lt; n_args; ++j) {
-                        k_elems[j] = k_arr[j](i);
-                    }
-                    k_total(i) = func(k_elems);
-                });
-    }
-
-    template &lt;class FieldType, class FuncType, std::size_t n_args&gt;
-    void assemble_vector_field_k_total(
-            ExecSpace const&amp; exec_space,
-            FieldType k_total,
-            FuncType func,
-            std::array&lt;FieldType, n_args&gt; k_arr) const
-    {
-        static_assert(is_vector_field_v&lt;FieldType&gt;);
-        using element_type = typename FieldType::element_type;
-        using Idx = typename FieldType::discrete_domain_type::discrete_element_type;
-        const std::source_location location = std::source_location::current();
-        ddc::parallel_for_each(
-                location.function_name(),
-                exec_space,
-                get_idx_range(k_total),
-                KOKKOS_LAMBDA(Idx const i) {
-                    std::array&lt;element_type, n_args&gt; k_elems;
-                    for (int j(0); j &lt; n_args; ++j) {
-                        k_elems[j] = k_arr[j](i);
-                    }
-                    fill_k_total(k_total, i, func(k_elems));
-                });
-    }
-
-private:
-    template &lt;
-            class Patch,
-            template &lt;typename P&gt;
-            typename T,
-            class... Patches,
-            class FuncType,
-            std::size_t n_args&gt;
-    void assemble_multipatch_field_k_total_on_patch(
-            ExecSpace const&amp; exec_space,
-            MultipatchField&lt;T, Patches...&gt; k_total,
-            FuncType func,
-            std::array&lt;MultipatchField&lt;T, Patches...&gt;, n_args&gt; k_arr) const
-    {
-        using FieldType = T&lt;Patch&gt;;
-        static_assert((ddc::is_chunk_v&lt;FieldType&gt;) or (is_vector_field_v&lt;FieldType&gt;));
-        std::array&lt;FieldType, n_args&gt; k_arr_on_patch;
-        FieldType k_total_on_patch = k_total.template get&lt;Patch&gt;();
-        for (std::size_t i(0); i &lt; n_args; ++i) {
-            k_arr_on_patch[i] = k_arr[i].template get&lt;Patch&gt;();
-        }
-        if constexpr (is_vector_field_v&lt;FieldType&gt;) {
-            assemble_vector_field_k_total(exec_space, k_total_on_patch, func, k_arr_on_patch);
-        } else {
-            assemble_field_k_total(exec_space, k_total_on_patch, func, k_arr_on_patch);
-        }
-    }
-
-    template &lt;
-            template &lt;typename P&gt;
-            typename T,
-            class... Patches,
-            class FuncType,
-            std::size_t n_args&gt;
-    void assemble_multipatch_field_k_total(
-            ExecSpace const&amp; exec_space,
-            MultipatchField&lt;T, Patches...&gt; k_total,
-            FuncType func,
-            std::array&lt;MultipatchField&lt;T, Patches...&gt;, n_args&gt; k_arr) const
-    {
-        ((assemble_multipatch_field_k_total_on_patch&lt;Patches&gt;(exec_space, k_total, func, k_arr)),
-         ...);
-    }
 };
 
 template &lt;template &lt;class FieldMem, class DerivFieldMem, class ExecSpace&gt; typename TimeStepper&gt;
@@ -797,8 +906,11 @@ public:
     using time_stepper_t = TimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;;
 
     template &lt;class ChosenTimeStepper&gt;
-    auto preallocate(typename ChosenTimeStepper::IdxRange const idx_range) const
+    static auto preallocate(typename ChosenTimeStepper::IdxRange const idx_range)
     {
+        static_assert(
+                timestepper_detail::FieldLike&lt;typename ChosenTimeStepper::ValFieldMem&gt;,
+                "An index range should not be provided to preallocate for scalar timesteppers.");
         static_assert(std::is_same_v&lt;
                       ChosenTimeStepper,
                       time_stepper_t&lt;
@@ -806,6 +918,21 @@ public:
                               typename ChosenTimeStepper::DerivFieldMem,
                               typename ChosenTimeStepper::exec_space&gt;&gt;);
         return ChosenTimeStepper(idx_range);
+    }
+
+    template &lt;class ChosenTimeStepper&gt;
+    static auto preallocate()
+    {
+        static_assert(
+                !timestepper_detail::FieldLike&lt;typename ChosenTimeStepper::ValFieldMem&gt;,
+                "An index range must be provided to preallocate for FieldLike timesteppers.");
+        static_assert(std::is_same_v&lt;
+                      ChosenTimeStepper,
+                      time_stepper_t&lt;
+                              typename ChosenTimeStepper::ValFieldMem,
+                              typename ChosenTimeStepper::DerivFieldMem,
+                              typename ChosenTimeStepper::exec_space&gt;&gt;);
+        return ChosenTimeStepper();
     }
 };
 

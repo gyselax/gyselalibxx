@@ -76,6 +76,26 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="var">
+      <memberdef kind="variable" id="ddc__helper_8hpp_1a48f5e65491099151b885595706e2136d" prot="public" static="no" constexpr="yes" mutable="no">
+        <templateparamlist>
+          <param>
+            <type>class T</type>
+          </param>
+        </templateparamlist>
+        <type>bool constexpr</type>
+        <definition>bool constexpr ddcHelper::is_coordinate_v</definition>
+        <argsstring></argsstring>
+        <name>is_coordinate_v</name>
+        <qualifiedname>ddcHelper::is_coordinate_v</qualifiedname>
+        <initializer>= ddc::detail::is_tagged_vector_v&lt;T&gt;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" line="350" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp" bodystart="350" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="non__uniform__interpolation__points_8hpp_1a6ba00773b16df1063519790796f9c1dd" prot="public" static="no" constexpr="yes" mutable="no">
         <templateparamlist>
           <param>

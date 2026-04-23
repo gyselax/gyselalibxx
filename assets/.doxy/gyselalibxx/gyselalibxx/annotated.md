@@ -39,6 +39,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**ConstantPartialDerivative**](classConstantPartialDerivative.md) _A class to get the derivative of a constant function. When the derivative of a function is known to be 0 but the dimension is still needed this class can be used to avoid unnecessary calculations._     
 * **class** [**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md) _A class to create a_ [_**ConstantPartialDerivative**_](classConstantPartialDerivative.md) _via a create\_instance function._    
 * **class** [**CrankNicolson**](classCrankNicolson.md) _A class which provides an implementation of a Crank-Nicolson method._     
+* **class** [**CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) _A class which provides an implementation of a Crank-Nicolson method._     
 * **class** [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md) _A class to indicate that a Crank-Nicolson time stepper should be constructed for use in other operators._     
 * **class** [**Curl**](classCurl.md) _A class which implements a curl operator The implemented equation is:_ \(\nabla \cross \mathbf{F}\) __\(\nabla \cross \mathbf{F} = {\cal J}_{\rm x}^{-1}\epsilon^{klm}\partial_{x^l} F_m\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(F_m\) _the covariant components of F and_\(\epsilon^{klm}\) _the Levi-Civita symbol._    
 * **class** [**CylindricalToCartesian**](classCylindricalToCartesian.md) _A class for describing the cylindrical 3D mapping._     
@@ -55,6 +56,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Edge**](structEdge.md) _Define an edge of a given patch._     
 * **class** [**EdgeTransformation**](classEdgeTransformation.md) _Transform a coordinate or an index from one edge to the one on the other edge._     
 * **class** [**Euler**](classEuler.md) _A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._    
+* **class** [**Euler&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) _A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._    
 * **class** [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md) _A class to indicate that an explicit time stepper should be constructed for use in other operators._     
 * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md)     
     * **struct** [**GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) _The grid of quadrature points along the PDEDim direction._ 
@@ -204,8 +206,11 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._     
 * **struct** [**R**](structR.md) _Define non periodic real contravariant_ [_**R**_](structR.md) _dimension._    
 * **class** [**RK2**](classRK2.md) _A class which provides an implementation of a second-order Runge-Kutta method._     
+* **class** [**RK2&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) _A class which provides an implementation of a second-order Runge-Kutta method._     
 * **class** [**RK3**](classRK3.md) _A class which provides an implementation of a third-order Runge-Kutta method._     
+* **class** [**RK3&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) _A class which provides an implementation of a third-order Runge-Kutta method._     
 * **class** [**RK4**](classRK4.md) _A class which provides an implementation of a fourth-order Runge-Kutta method._     
+* **class** [**RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) _A class which provides an implementation of a fourth-order Runge-Kutta method._     
 * **struct** [**R\_cov**](structR__cov.md) _Define non periodic real covariant_ [_**R**_](structR.md) _dimension._    
 * **class** [**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md) _A class to create a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._    
     * **struct** [**BSplinesRRefined**](structRefinedDiscretePoloidalCSSplineMappingBuilder_1_1BSplinesRRefined.md) _The type of the radial B-splines on which the new mapping will be defined._ 

@@ -804,6 +804,9 @@ using type_seq_intersection_t =
 
 template &lt;class ValidIndexSet&gt;
 using to_coord_t = typename detail::ToCoord&lt;ValidIndexSet&gt;::type;
+
+template &lt;class T&gt;
+bool constexpr is_coordinate_v = ddc::detail::is_tagged_vector_v&lt;T&gt;;
 } // namespace ddcHelper
 </code></pre></div>
               

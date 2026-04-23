@@ -35,7 +35,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**Euler**](classEuler.md) &lt;class FieldMem, class [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem), class ExecSpace&gt;<br>_A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._ |
+| class | [**Euler**](classEuler.md) &lt;class ValType, class DerivType, class ExecSpace&gt;<br>_A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._ |
+| class | [**Euler&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) &lt;FieldMem, DerivFieldMem, class ExecSpace&gt;<br>_A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._ |
 
 
 ## Public Types

@@ -13,8 +13,12 @@
 * `#include <array>`
 * `#include <type_traits>`
 * `#include <ddc/ddc.hpp>`
+* `#include "ddc_aliases.hpp"`
 * `#include "multipatch_field.hpp"`
 * `#include "multipatch_field_mem.hpp"`
+* `#include "tensor.hpp"`
+* `#include "vector_field.hpp"`
+* `#include "vector_field_mem.hpp"`
 
 
 

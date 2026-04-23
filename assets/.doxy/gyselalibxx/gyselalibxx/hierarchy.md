@@ -49,12 +49,8 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**KrookSourceConstant**](classKrookSourceConstant.md) _A class that describes a source of particles._ 
 * **class** [**CombinedMapping**](classCombinedMapping.md) _A class which describes a mapping which is constructed by combining two mappings. Let us denote Mapping1 as_ \(\mathcal{F}\) _and Mapping2 as_\(\mathcal{G}\) _then this mapping represents:_\(\mathcal{F} \circ \mathcal{G}\) _._
 * **class** [**ConstantIdentityInterpolationExtrapolationRule**](classConstantIdentityInterpolationExtrapolationRule.md) _A constant extrapolation rule for identity-based (Lagrange) interpolation._ 
-* **class** [**ITimeStepper**](classITimeStepper.md) _The superclass from which all timestepping methods inherit._     
-    * **class** [**CrankNicolson**](classCrankNicolson.md) _A class which provides an implementation of a Crank-Nicolson method._ 
-    * **class** [**Euler**](classEuler.md) _A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._
-    * **class** [**RK2**](classRK2.md) _A class which provides an implementation of a second-order Runge-Kutta method._ 
-    * **class** [**RK3**](classRK3.md) _A class which provides an implementation of a third-order Runge-Kutta method._ 
-    * **class** [**RK4**](classRK4.md) _A class which provides an implementation of a fourth-order Runge-Kutta method._ 
+* **class** [**CrankNicolson**](classCrankNicolson.md) _A class which provides an implementation of a Crank-Nicolson method._ 
+* **class** [**ITimeStepper**](classITimeStepper.md) _The superclass from which all timestepping methods inherit._ 
 * **class** [**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md) _A class to indicate that a Crank-Nicolson time stepper should be constructed for use in other operators._ 
 * **class** [**Curl**](classCurl.md) _A class which implements a curl operator The implemented equation is:_ \(\nabla \cross \mathbf{F}\) __\(\nabla \cross \mathbf{F} = {\cal J}_{\rm x}^{-1}\epsilon^{klm}\partial_{x^l} F_m\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(F_m\) _the covariant components of F and_\(\epsilon^{klm}\) _the Levi-Civita symbol._
 * **class** [**CylindricalToCartesian**](classCylindricalToCartesian.md) _A class for describing the cylindrical 3D mapping._ 
@@ -67,6 +63,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md) _A class for describing discrete 2D mappings from the logical domain to the physical domain._ 
 * **class** [**DiscretePoloidalCSSplineMappingBuilder**](classDiscretePoloidalCSSplineMappingBuilder.md) _A class to create a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _instance from an analytical mapping. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**EdgeTransformation**](classEdgeTransformation.md) _Transform a coordinate or an index from one edge to the one on the other edge._ 
+* **class** [**Euler**](classEuler.md) _A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._
 * **class** [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md) _A class to indicate that an explicit time stepper should be constructed for use in other operators._ 
 * **class** [**IPoissonSolver**](classIPoissonSolver.md)     
     * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md) 
@@ -158,6 +155,9 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**PolarSplineFEMPoissonLikeSolver::CoeffEvaluator**](classPolarSplineFEMPoissonLikeSolver_1_1CoeffEvaluator.md) _A wrapper that binds an evaluator with its coefficient field to present a single callable_ `double operator()(CoordRTheta)` _._
 * **class** [**PredCorrRK2XY**](classPredCorrRK2XY.md) _Predictor-corrector based on_ [_**RK2**_](classRK2.md) _for the guiding-centre model._
 * **class** [**Quadrature**](classQuadrature.md) _A class providing an operator for integrating functions defined on known grid points._ 
+* **class** [**RK2**](classRK2.md) _A class which provides an implementation of a second-order Runge-Kutta method._ 
+* **class** [**RK3**](classRK3.md) _A class which provides an implementation of a third-order Runge-Kutta method._ 
+* **class** [**RK4**](classRK4.md) _A class which provides an implementation of a fourth-order Runge-Kutta method._ 
 * **class** [**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md) _A class to create a_ [_**DiscretePoloidalCSSplineMapping**_](classDiscretePoloidalCSSplineMapping.md) _instance from an analytical mapping. This class creates an instance which uses more refined splines than the provided builder and evaluator. This class creates and stores splines memory spaces describing the analytical mapping. The discrete mapping is then created using the splines without copying data._
 * **class** [**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md) _Compute the derivative of an equivalent global spline at the interface between two patches._ 
 * **class** [**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md) _A class to store a collection of interface derivative calculators templated on the interfaces._ 

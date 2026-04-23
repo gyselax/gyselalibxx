@@ -561,13 +561,12 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-rk4">Class RK4</h1>
-<p><strong>template &lt;class FieldMem, class <a href="classITimeStepper.html#typedef-derivfieldmem"><strong>DerivFieldMem</strong></a>, class ExecSpace&gt;</strong></p>
+<p><strong>template &lt;class ValType, class DerivType, class ExecSpace&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classRK4.html"><strong>RK4</strong></a></p>
 <p><em>A class which provides an implementation of a fourth-order Runge-Kutta method.</em> <a href="#detailed-description">More...</a></p>
 <ul>
 <li><code>#include &lt;rk4.hpp&gt;</code></li>
 </ul>
-<p>Inherits the following classes: <a href="classITimeStepper.html">ITimeStepper</a></p>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -578,68 +577,16 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef typename DerivFieldMem::view_type</td>
-<td style="text-align: left;"><a href="#typedef-derivconstfield"><strong>DerivConstField</strong></a>  <br><em>The constant type of the derivatives values of the function being evolved.</em></td>
+<td style="text-align: right;">typedef DerivType</td>
+<td style="text-align: left;"><a href="#typedef-derivfieldmem"><strong>DerivFieldMem</strong></a>  <br><em>The type of the memory allocation for the derivatives of the function being evolved.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename DerivFieldMem::span_type</td>
-<td style="text-align: left;"><a href="#typedef-derivfield"><strong>DerivField</strong></a>  <br><em>The type of the derivatives of the function being evolved.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename FieldMem::discrete_domain_type</td>
-<td style="text-align: left;"><a href="#typedef-idxrange"><strong>IdxRange</strong></a>  <br><em>The type of the index range on which the values of the function are defined.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename FieldMem::view_type</td>
-<td style="text-align: left;"><a href="#typedef-valconstfield"><strong>ValConstField</strong></a>  <br><em>The constant type of the values of the function being evolved.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename FieldMem::span_type</td>
-<td style="text-align: left;"><a href="#typedef-valfield"><strong>ValField</strong></a>  <br><em>The type of the values of the function being evolved.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-types-inherited-from-itimestepper">Public Types inherited from ITimeStepper</h2>
-<p>See <a href="classITimeStepper.html">ITimeStepper</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">typedef typename DerivFieldMem::view_type</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>  <br><em>The constant type of the derivatives values of the function being evolved.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename DerivFieldMem::span_type</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>  <br><em>The type of the derivatives of the function being evolved.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef DerivFieldMemType</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#typedef-derivfieldmem"><strong>DerivFieldMem</strong></a>  <br><em>The type of the memory allocation for the derivatives of the function being evolved.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename FieldMem::discrete_domain_type</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#typedef-idxrange"><strong>IdxRange</strong></a>  <br><em>The type of the index range on which the values of the function are defined.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename FieldMem::view_type</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>  <br><em>The constant type of the values of the function being evolved.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename FieldMem::span_type</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a>  <br><em>The type of the values of the function being evolved.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef FieldMem</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#typedef-valfieldmem"><strong>ValFieldMem</strong></a>  <br><em>The type of the memory allocation for the values of the function being evolved.</em></td>
+<td style="text-align: right;">typedef ValType</td>
+<td style="text-align: left;"><a href="#typedef-valfieldmem"><strong>ValFieldMem</strong></a>  <br><em>The type of the memory allocation for the values of the function being evolved.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">typedef ExecSpace</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#typedef-exec_space"><strong>exec_space</strong></a>  <br><em>The space (CPU/GPU) where the calculations are carried out.</em></td>
+<td style="text-align: left;"><a href="#typedef-exec_space"><strong>exec_space</strong></a>  <br><em>The space (CPU/GPU) where the calculations are carried out.</em></td>
 </tr>
 </tbody>
 </table>
@@ -653,97 +600,17 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-rk4"><strong>RK4</strong></a> (<a href="classRK4.html#typedef-idxrange"><strong>IdxRange</strong></a> idx_range) <br><em>Create a</em> <a href="classRK4.html"><em><strong>RK4</strong></em></a> <em>object.</em></td>
+<td style="text-align: right;">KOKKOS_DEFAULTED_FUNCTION</td>
+<td style="text-align: left;"><a href="#function-rk4"><strong>RK4</strong></a> () = default<br><em>Create a</em> <a href="classRK4.html"><em><strong>RK4</strong></em></a> <em>object to operate on scalars.</em></td>
 </tr>
-<tr>
-<td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="#function-update-14"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classRK4.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classRK4.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator, std::function&lt; void(<a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a>, <a href="classRK4.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>, double)&gt; y_update) const<br><em>Carry out one step of the Runge-Kutta scheme.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-update-24"><strong>update</strong></a> (<a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classRK4.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classRK4.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-update-34"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classRK4.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classRK4.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="#function-update-44"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classRK4.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classRK4.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator, std::function&lt; void(<a href="classRK4.html#typedef-valfield"><strong>ValField</strong></a>, <a href="classRK4.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>, double)&gt; y_update) const<br><em>Carry out one step of the timestepping scheme.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-functions-inherited-from-itimestepper">Public Functions inherited from ITimeStepper</h2>
-<p>See <a href="classITimeStepper.html">ITimeStepper</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#function-assemble_field_k_total"><strong>assemble_field_k_total</strong></a> (ExecSpace const &amp; exec_space, FieldType k_total, FuncType func, std::array&lt; FieldType, n_args &gt; k_arr) const<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#function-assemble_vector_field_k_total"><strong>assemble_vector_field_k_total</strong></a> (ExecSpace const &amp; exec_space, FieldType k_total, FuncType func, std::array&lt; FieldType, n_args &gt; k_arr) const<br></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#function-update-13"><strong>update</strong></a> (<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#function-update-23"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator) const<br><em>Carry out one step of the timestepping scheme.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#function-update-33"><strong>update</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> y, double dt, std::function&lt; void(<a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a>, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a>)&gt; dy_calculator, std::function&lt; void(<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a>, <a href="classITimeStepper.html#typedef-derivconstfield"><strong>DerivConstField</strong></a>, double)&gt; y_update) const = 0<br><em>Carry out one step of the timestepping scheme.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="protected-functions-inherited-from-itimestepper">Protected Functions inherited from ITimeStepper</h2>
-<p>See <a href="classITimeStepper.html">ITimeStepper</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#function-assemble_k_total"><strong>assemble_k_total</strong></a> (ExecSpace const &amp; exec_space, <a href="classITimeStepper.html#typedef-derivfield"><strong>DerivField</strong></a> k_total, FuncType func, T... k) const<br><em>A method to assemble multiple derivative fields into one. This method is responsible for choosing how this is done depending on the type of the derivative field.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#function-copy"><strong>copy</strong></a> (<a href="classITimeStepper.html#typedef-valfield"><strong>ValField</strong></a> copy_to, <a href="classITimeStepper.html#typedef-valconstfield"><strong>ValConstField</strong></a> copy_from) const<br><em>Make a copy of the values of the function being evolved.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="protected-static-functions-inherited-from-itimestepper">Protected Static Functions inherited from ITimeStepper</h2>
-<p>See <a href="classITimeStepper.html">ITimeStepper</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
 <tr>
 <td style="text-align: right;">KOKKOS_FUNCTION void</td>
-<td style="text-align: left;"><a href="classITimeStepper.html#function-fill_k_total"><strong>fill_k_total</strong></a> (DerivFieldType k_total, Idx i, <a href="classTensor.html"><strong>DVector</strong></a>&lt; DDims... &gt; new_val) <br><em>A method to fill an element of a vector field.</em></td>
+<td style="text-align: left;"><a href="#function-update"><strong>update</strong></a> (ValType &amp; y, double dt, DYFunctor dy_calculator, YFunctor y_update=timestepper_detail::serial_y_update&lt; ValType &amp;, DerivType const &amp; &gt;) const<br><em>Carry out one step of the Runge-Kutta scheme on a scalar.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>A class which provides an implementation of a fourth-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. The values which evolve are defined on an index range.</p>
+<p>A class which provides an implementation of a fourth-order Runge-Kutta method in order to evolve values over time. This specialisation handles elementwise operations and can be called from GPU.</p>
 <p>For the following ODE : <span class="arithmatex">\(\partial_t y(t) = f(t, y(t))\)</span>,</p>
 <p>the Runge-Kutta 3 method is given by : <span class="arithmatex">\(y^{n+1} =  y^{n} + \frac{dt}{6} \left(k_1 + 2k_2 + 2k_3 + k_4 \right)\)</span>,</p>
 <p>with</p>
@@ -754,124 +621,47 @@
 <li><span class="arithmatex">\(k_3 = f(t^{n}, y^{n} + dt k_3 )\)</span>. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-derivconstfield">typedef DerivConstField</h3>
-<p><em>The constant type of the derivatives values of the function being evolved.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivConstField =  typename DerivFieldMem::view_type;
+<h3 id="typedef-derivfieldmem">typedef DerivFieldMem</h3>
+<p><em>The type of the memory allocation for the derivatives of the function being evolved.</em> </p>
+<pre><code class="language-C++">using RK4&lt; ValType, DerivType, ExecSpace &gt;::DerivFieldMem =  DerivType;
 </code></pre>
 <hr>
 
-<h3 id="typedef-derivfield">typedef DerivField</h3>
-<p><em>The type of the derivatives of the function being evolved.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::DerivField =  typename DerivFieldMem::span_type;
+<h3 id="typedef-valfieldmem">typedef ValFieldMem</h3>
+<p><em>The type of the memory allocation for the values of the function being evolved.</em> </p>
+<pre><code class="language-C++">using RK4&lt; ValType, DerivType, ExecSpace &gt;::ValFieldMem =  ValType;
 </code></pre>
 <hr>
 
-<h3 id="typedef-idxrange">typedef IdxRange</h3>
-<p><em>The type of the index range on which the values of the function are defined.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::IdxRange =  typename FieldMem::discrete_domain_type;
-</code></pre>
-<hr>
-
-<h3 id="typedef-valconstfield">typedef ValConstField</h3>
-<p><em>The constant type of the values of the function being evolved.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::ValConstField =  typename FieldMem::view_type;
-</code></pre>
-<hr>
-
-<h3 id="typedef-valfield">typedef ValField</h3>
-<p><em>The type of the values of the function being evolved.</em> </p>
-<pre><code class="language-C++">using ITimeStepper&lt; FieldMem, DerivFieldMemType, ExecSpace &gt;::ValField =  typename FieldMem::span_type;
+<h3 id="typedef-exec_space">typedef exec_space</h3>
+<p><em>The space (CPU/GPU) where the calculations are carried out.</em> </p>
+<pre><code class="language-C++">using RK4&lt; ValType, DerivType, ExecSpace &gt;::exec_space =  ExecSpace;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-rk4">function RK4</h3>
-<p><em>Create a</em> <a href="classRK4.html"><em><strong>RK4</strong></em></a> <em>object.</em></p>
-<pre><code class="language-C++">inline explicit RK4::RK4 (
-    IdxRange idx_range
-) 
+<p><em>Create a</em> <a href="classRK4.html"><em><strong>RK4</strong></em></a> <em>object to operate on scalars.</em></p>
+<pre><code class="language-C++">explicit KOKKOS_DEFAULTED_FUNCTION RK4::RK4 () = default
 </code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range</code> The index range on which the points which evolve over time are defined. </li>
-</ul>
 <hr>
 
-<h3 id="function-update-14">function update [1/4]</h3>
-<p><em>Carry out one step of the Runge-Kutta scheme.</em> </p>
-<pre><code class="language-C++">inline virtual void RK4::update (
-    ExecSpace const &amp; exec_space,
-    ValField y,
+<h3 id="function-update">function update</h3>
+<p><em>Carry out one step of the Runge-Kutta scheme on a scalar.</em> </p>
+<pre><code class="language-C++">template&lt;class DYFunctor, class YFunctor&gt;
+inline KOKKOS_FUNCTION void RK4::update (
+    ValType &amp; y,
     double dt,
-    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator,
-    std::function&lt; void( ValField , DerivConstField , double)&gt; y_update
+    DYFunctor dy_calculator,
+    YFunctor y_update=timestepper_detail::serial_y_update&lt; ValType &amp;, DerivType const &amp; &gt;
 ) const
 </code></pre>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
 <li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
 <li><code>dt</code> The time step over which the values should be evolved. </li>
 <li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
 <li><code>y_update</code> The function describing how the value(s) are updated using the derivative. </li>
 </ul>
-<p>Implements <a href="classITimeStepper.html#function-update-33"><em>ITimeStepper::update</em></a></p>
-<hr>
-
-<h3 id="function-update-24">function update [2/4]</h3>
-<p><em>Carry out one step of the timestepping scheme.</em> </p>
-<pre><code class="language-C++">inline void RK4::update (
-    ValField y,
-    double dt,
-    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator
-) const
-</code></pre>
-<p>This function is a wrapper around the update function below. The values of the function are updated using the trivial method <span class="arithmatex">\(f += df \* dt\)</span>. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
-<li><code>dt</code> The time step over which the values should be evolved. </li>
-<li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
-</ul>
-<hr>
-
-<h3 id="function-update-34">function update [3/4]</h3>
-<p><em>Carry out one step of the timestepping scheme.</em> </p>
-<pre><code class="language-C++">inline void RK4::update (
-    ExecSpace const &amp; exec_space,
-    ValField y,
-    double dt,
-    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator
-) const
-</code></pre>
-<p>This function is a wrapper around the update function below. The values of the function are updated using the trivial method <span class="arithmatex">\(f += df \* dt\)</span>. This is the standard method however some cases may need a more complex update function which is why the more explicit method is also provided.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
-<li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
-<li><code>dt</code> The time step over which the values should be evolved. </li>
-<li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
-</ul>
-<hr>
-
-<h3 id="function-update-44">function update [4/4]</h3>
-<p><em>Carry out one step of the timestepping scheme.</em> </p>
-<pre><code class="language-C++">virtual void RK4::update (
-    ExecSpace const &amp; exec_space,
-    ValField y,
-    double dt,
-    std::function&lt; void( DerivField , ValConstField )&gt; dy_calculator,
-    std::function&lt; void( ValField , DerivConstField , double)&gt; y_update
-) const
-</code></pre>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
-<li><code>y</code> The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </li>
-<li><code>dt</code> The time step over which the values should be evolved. </li>
-<li><code>dy_calculator</code> The function describing how the derivative of the evolve function is calculated. </li>
-<li><code>y_update</code> The function describing how the value(s) are updated using the derivative. </li>
-</ul>
-<p>Implements <a href="classITimeStepper.html#function-update-33"><em>ITimeStepper::update</em></a></p>
 <hr>
 
 <hr>

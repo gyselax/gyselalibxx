@@ -49,6 +49,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  bool constexpr | [**is\_coordinate\_v**](#variable-is_coordinate_v)   = `ddc::detail::is\_tagged\_vector\_v&lt;T&gt;`<br> |
 |  constexpr bool | [**is\_non\_uniform\_interpolation\_points\_v**](#variable-is_non_uniform_interpolation_points_v)   = `[**is\_non\_uniform\_interpolation\_points**](structddcHelper_1_1is__non__uniform__interpolation__points.md)&lt;T&gt;::value`<br> |
 
 
@@ -168,6 +169,19 @@ using ddcHelper::type_seq_intersection_t = typedef typename detail::TypeSeqInter
 <hr>
 ## Public Attributes Documentation
 
+
+
+
+### variable is\_coordinate\_v 
+
+```C++
+bool constexpr ddcHelper::is_coordinate_v;
+```
+
+
+
+
+<hr>
 
 
 

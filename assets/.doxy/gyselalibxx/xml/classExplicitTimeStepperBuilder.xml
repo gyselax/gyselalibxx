@@ -33,11 +33,36 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>The type of the TimeStepper that will be constructed to solve an equation whose field and derivative(s) have the specified type. </para>
+<para>The type of the TimeStepper that will be constructed to solve an equation whose field and derivative(s) have the specified type. <parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>FieldMem</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the data storage for the function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="classDerivFieldMem" kindref="compound">DerivFieldMem</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the data storage for the derivative of the function. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>ExecSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space (CPU/GPU) where the calculations are carried out. This template parameter is ignored if the FieldMem is a scalar. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="367" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="367" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="473" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="473" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -54,17 +79,19 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="357" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="357" bodyend="357"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="459" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="459" bodyend="459"/>
       </memberdef>
-      <memberdef kind="function" id="classExplicitTimeStepperBuilder_1af949d058cd0686c13dccca5df26a02be" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classExplicitTimeStepperBuilder_1a0362eb97efb94f6492d39dac041d1a34" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ChosenTimeStepper</type>
           </param>
         </templateparamlist>
         <type>auto</type>
-        <definition>auto ExplicitTimeStepperBuilder&lt; TimeStepper &gt;::preallocate</definition>
-        <argsstring>(typename ChosenTimeStepper::IdxRange const idx_range) const</argsstring>
+        <definition>static auto ExplicitTimeStepperBuilder&lt; TimeStepper &gt;::preallocate</definition>
+        <argsstring>(typename ChosenTimeStepper::IdxRange const idx_range)</argsstring>
         <name>preallocate</name>
         <qualifiedname>ExplicitTimeStepperBuilder::preallocate</qualifiedname>
         <param>
@@ -72,7 +99,7 @@
           <declname>idx_range</declname>
         </param>
         <briefdescription>
-<para>Allocate the TimeStepper object. </para>
+<para>Allocate the TimeStepper object for FieldLike types. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="templateparam"><parameteritem>
@@ -97,7 +124,37 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="375" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="375" bodyend="384"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="481" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="481" bodyend="493"/>
+      </memberdef>
+      <memberdef kind="function" id="classExplicitTimeStepperBuilder_1a6b43c765213ac43bb0682937912301b2" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class ChosenTimeStepper</type>
+          </param>
+        </templateparamlist>
+        <type>auto</type>
+        <definition>static auto ExplicitTimeStepperBuilder&lt; TimeStepper &gt;::preallocate</definition>
+        <argsstring>()</argsstring>
+        <name>preallocate</name>
+        <qualifiedname>ExplicitTimeStepperBuilder::preallocate</qualifiedname>
+        <briefdescription>
+<para>Allocate the TimeStepper object for scalar (non-FieldLike) types. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ChosenTimeStepper</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The type of the TimeStepper to be constructed (obtained from time_stepper_t). </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="500" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="500" bodyend="512"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -106,10 +163,11 @@
     <detaileddescription>
 <para>This class is a time stepper builder. A time stepper builder is designed to construct a time stepper upon request. This allows the simulation to choose the method without needing to know the specifics of the types with which it should be initialised. This class should be specialised for the explicit time stepper builders. </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="351" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="352" bodyend="385"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" line="453" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/itimestepper.hpp" bodystart="454" bodyend="513"/>
     <listofallmembers>
       <member refid="classExplicitTimeStepperBuilder_1a7878f402b4b32ffd49b5dbb23ecd75c2" prot="public" virt="non-virtual"><scope>ExplicitTimeStepperBuilder</scope><name>ExplicitTimeStepperBuilder</name></member>
-      <member refid="classExplicitTimeStepperBuilder_1af949d058cd0686c13dccca5df26a02be" prot="public" virt="non-virtual"><scope>ExplicitTimeStepperBuilder</scope><name>preallocate</name></member>
+      <member refid="classExplicitTimeStepperBuilder_1a0362eb97efb94f6492d39dac041d1a34" prot="public" virt="non-virtual"><scope>ExplicitTimeStepperBuilder</scope><name>preallocate</name></member>
+      <member refid="classExplicitTimeStepperBuilder_1a6b43c765213ac43bb0682937912301b2" prot="public" virt="non-virtual"><scope>ExplicitTimeStepperBuilder</scope><name>preallocate</name></member>
       <member refid="classExplicitTimeStepperBuilder_1a37ec04e4a03c1080891a68fb27395573" prot="public" virt="non-virtual"><scope>ExplicitTimeStepperBuilder</scope><name>time_stepper_t</name></member>
     </listofallmembers>
   </compounddef>

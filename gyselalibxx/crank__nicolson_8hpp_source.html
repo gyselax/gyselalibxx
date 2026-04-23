@@ -575,11 +575,94 @@
 #include "vector_field_common.hpp"
 
 
+template &lt;class ValType, class DerivType = ValType, class ExecSpace = Kokkos::DefaultExecutionSpace&gt;
+class CrankNicolson
+{
+    static_assert(!timestepper_detail::FieldLike&lt;ValType&gt;);
+    static_assert(!timestepper_detail::FieldLike&lt;DerivType&gt;);
+
+public:
+    using ValFieldMem = ValType;
+
+    using DerivFieldMem = DerivType;
+
+    using exec_space = ExecSpace;
+
+private:
+    int const m_max_counter;
+    double const m_epsilon;
+
+public:
+    explicit CrankNicolson(int const counter = int(20), double const epsilon = 1e-12)
+        : m_max_counter(counter)
+        , m_epsilon(epsilon)
+    {
+    }
+
+    template &lt;
+            class DYFunctor,
+            class YFunctor
+            = decltype(timestepper_detail::serial_y_update&lt;ValType&amp;, DerivType const&amp;&gt;)&gt;
+    KOKKOS_FUNCTION void update(
+            ValType&amp; y,
+            double dt,
+            DYFunctor dy_calculator,
+            YFunctor y_update
+            = timestepper_detail::serial_y_update&lt;ValType&amp;, DerivType const&amp;&gt;) const
+    {
+        static_assert(std::is_invocable_v&lt;DYFunctor, DerivType&amp;, ValType&gt;);
+        ValType y_init;
+        ValType y_old;
+        DerivType k1;
+        DerivType k_new;
+        DerivType k_total;
+
+        // Save initial conditions
+        timestepper_detail::copy_helper&lt;ValType&gt;::copy(y_init, y);
+
+        // --------- Calculate k1 ------------
+        // Calculate k1 = f(y_n)
+        dy_calculator(k1, y);
+
+        // -------- Calculate k_new ----------
+        bool not_converged = true;
+        int counter = 0;
+        do {
+            counter++;
+
+            // Calculate k_new = f(y_new)
+            dy_calculator(k_new, y);
+
+            // Calculation of step
+            // k_total = k1 + k_new
+            timestepper_detail::assemble_helper&lt;ExecSpace, DerivType&gt;::assemble_k_total(
+                    k_total,
+                    KOKKOS_LAMBDA(std::array&lt;DerivType, 2&gt; k) { return k[0] + k[1]; },
+                    k1,
+                    k_new);
+
+            // Save the old characteristic feet
+            timestepper_detail::copy_helper&lt;ValType&gt;::copy(y_old, y);
+
+            // Re-initialise the characteristic feet
+            timestepper_detail::copy_helper&lt;ValType&gt;::copy(y, y_init);
+
+            // Calculate y_new := y_n + h/2*(k_1 + k_new)
+            y_update(y, k_total, 0.5 * dt);
+
+            // Check convergence
+            not_converged = (norm_inf(y_old - y) / norm_inf(y_old)) &gt;= m_epsilon;
+
+        } while (not_converged and (counter &lt; m_max_counter));
+    }
+};
+
 template &lt;
-        class FieldMem,
-        class DerivFieldMem = FieldMem,
-        class ExecSpace = Kokkos::DefaultExecutionSpace&gt;
-class CrankNicolson : public ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;
+        timestepper_detail::FieldLike FieldMem,
+        timestepper_detail::FieldLike DerivFieldMem,
+        class ExecSpace&gt;
+class CrankNicolson&lt;FieldMem, DerivFieldMem, ExecSpace&gt;
+    : public ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;
 {
     using base_type = ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;;
 
@@ -618,28 +701,22 @@ public:
             std::function&lt;void(DerivField, ValConstField)&gt; dy_calculator,
             std::function&lt;void(ValField, DerivConstField, double)&gt; y_update) const final
     {
-        static_assert(
-                Kokkos::SpaceAccessibility&lt;ExecSpace, typename FieldMem::memory_space&gt;::accessible,
-                "MemorySpace has to be accessible for ExecutionSpace.");
-        static_assert(
-                Kokkos::SpaceAccessibility&lt;ExecSpace, typename DerivFieldMem::memory_space&gt;::
-                        accessible,
-                "MemorySpace has to be accessible for ExecutionSpace.");
-        using element_type = typename DerivField::element_type;
+        using element_type = typename timestepper_detail::ElementType&lt;DerivField&gt;::type;
 
         FieldMem y_init_alloc("y_init (CrankNicholson::update)", m_idx_range);
         FieldMem y_old_alloc("y_old (CrankNicholson::update)", m_idx_range);
         DerivFieldMem k1_alloc("k1 (CrankNicholson::update)", m_idx_range);
         DerivFieldMem k_new_alloc("k_new (CrankNicholson::update)", m_idx_range);
         DerivFieldMem k_total_alloc("k_total (CrankNicholson::update)", m_idx_range);
+
         ValField y_init = get_field(y_init_alloc);
         ValField y_old = get_field(y_old_alloc);
         DerivField k1 = get_field(k1_alloc);
         DerivField k_new = get_field(k_new_alloc);
         DerivField k_total = get_field(k_total_alloc);
 
-
-        base_type::copy(y_init, get_const_field(y));
+        // Save initial conditions
+        timestepper_detail::copy_helper&lt;FieldMem&gt;::copy(y_init, get_const_field(y));
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
@@ -656,7 +733,7 @@ public:
 
             // Calculation of step
             // k_total = k1 + k_new
-            base_type::assemble_k_total(
+            timestepper_detail::assemble_helper&lt;ExecSpace, DerivFieldMem&gt;::assemble_k_total(
                     exec_space,
                     k_total,
                     KOKKOS_LAMBDA(std::array&lt;element_type, 2&gt; k) { return k[0] + k[1]; },
@@ -664,31 +741,22 @@ public:
                     k_new);
 
             // Save the old characteristic feet
-            base_type::copy(y_old, get_const_field(y));
+            timestepper_detail::copy_helper&lt;FieldMem&gt;::copy(y_old, get_const_field(y));
 
             // Re-initialise the characteristic feet
-            base_type::copy(y, get_const_field(y_init));
+            timestepper_detail::copy_helper&lt;FieldMem&gt;::copy(y, get_const_field(y_init));
 
             // Calculate y_new := y_n + h/2*(k_1 + k_new)
             y_update(y, get_const_field(k_total), 0.5 * dt);
 
 
             // Check convergence
-            not_converged
-                    = not have_converged(exec_space, get_const_field(y_old), get_const_field(y));
+            not_converged = (error_norm_inf(exec_space, get_const_field(y_old), get_const_field(y))
+                             / norm_inf(exec_space, get_const_field(y_old)))
+                            &gt;= m_epsilon;
 
 
         } while (not_converged and (counter &lt; m_max_counter));
-    }
-
-
-    bool have_converged(ExecSpace const&amp; exec_space, ValConstField y_old, ValConstField y_new) const
-    {
-        double norm_old = norm_inf(exec_space, y_old);
-
-        double max_diff = error_norm_inf(exec_space, y_old, y_new);
-
-        return (max_diff / norm_old) &lt; m_epsilon;
     }
 };
 

@@ -1,0 +1,221 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4" kind="class" language="C++" prot="public">
+    <compoundname>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</compoundname>
+    <basecompoundref refid="classITimeStepper" prot="public" virt="non-virtual">ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</basecompoundref>
+    <includes refid="rk4_8hpp" local="no">rk4.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>timestepper_detail::FieldLike</type>
+        <declname>FieldMem</declname>
+        <defname>FieldMem</defname>
+      </param>
+      <param>
+        <type>timestepper_detail::FieldLike</type>
+        <declname>DerivFieldMem</declname>
+        <defname>DerivFieldMem</defname>
+      </param>
+      <param>
+        <type>class ExecSpace</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a509cfc736d56cbb71043ed266e2f6f81" prot="private" static="no">
+        <type><ref refid="classITimeStepper" kindref="compound">ITimeStepper</ref>&lt; FieldMem, <ref refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" kindref="member">DerivFieldMem</ref>, ExecSpace &gt;</type>
+        <definition>using RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::base_type =  ITimeStepper&lt;FieldMem, DerivFieldMem, ExecSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>base_type</name>
+        <qualifiedname>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::base_type</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" line="166" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" bodystart="166" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a53572e5cd405f7af9221d8333e7562ba" prot="private" static="no" mutable="no">
+        <type><ref refid="classITimeStepper_1a3334e21d853756b80b60b1b2902d56af" kindref="member">IdxRange</ref> const</type>
+        <definition>IdxRange const RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::m_idx_range</definition>
+        <argsstring></argsstring>
+        <name>m_idx_range</name>
+        <qualifiedname>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::m_idx_range</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" line="178" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" bodystart="178" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a5956fc372c34f2d14a030fd0dd66be5f" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::RK4</definition>
+        <argsstring>(IdxRange idx_range)</argsstring>
+        <name>RK4</name>
+        <qualifiedname>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::RK4</qualifiedname>
+        <param>
+          <type><ref refid="classITimeStepper_1a3334e21d853756b80b60b1b2902d56af" kindref="member">IdxRange</ref></type>
+          <declname>idx_range</declname>
+        </param>
+        <briefdescription>
+<para>Create a <ref refid="classRK4" kindref="compound">RK4</ref> object. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the points which evolve over time are defined. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" line="188" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" bodystart="188" bodyend="188"/>
+      </memberdef>
+      <memberdef kind="function" id="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1aa00962aea26427ba1af53522b7dc1395" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
+        <type>void</type>
+        <definition>void RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</definition>
+        <argsstring>(ExecSpace const &amp;exec_space, ValField y, double dt, std::function&lt; void(DerivField, ValConstField)&gt; dy_calculator, std::function&lt; void(ValField, DerivConstField, double)&gt; y_update) const final</argsstring>
+        <name>update</name>
+        <qualifiedname>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::update</qualifiedname>
+        <reimplements refid="classITimeStepper_1abb0814af8999ce3f3d724a42233e2c97">update</reimplements>
+        <param>
+          <type>ExecSpace const &amp;</type>
+          <declname>exec_space</declname>
+        </param>
+        <param>
+          <type><ref refid="classITimeStepper_1a9f14b3f4c770449b26643b59e3fd9df2" kindref="member">ValField</ref></type>
+          <declname>y</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" kindref="member">DerivField</ref>, <ref refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" kindref="member">ValConstField</ref>)&gt;</type>
+          <declname>dy_calculator</declname>
+        </param>
+        <param>
+          <type>std::function&lt; void(<ref refid="classITimeStepper_1a9f14b3f4c770449b26643b59e3fd9df2" kindref="member">ValField</ref>, <ref refid="classITimeStepper_1a70082a22831aae26f2f9d4f7bd3b55e2" kindref="member">DerivConstField</ref>, double)&gt;</type>
+          <declname>y_update</declname>
+        </param>
+        <briefdescription>
+<para>Carry out one step of the Runge-Kutta scheme. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">exec_space</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space on which the function is executed (CPU/GPU). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="inout">y</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The value(s) which should be evolved over time defined on each of the dimensions at each point of the index range. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step over which the values should be evolved. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dy_calculator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function describing how the derivative of the evolve function is calculated. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">y_update</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The function describing how the value(s) are updated using the derivative. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" line="205" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" bodystart="205" bodyend="278"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A class which provides an implementation of a fourth-order Runge-Kutta method. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>A class which provides an implementation of a fourth-order Runge-Kutta method in order to evolve values over time. The values may be either scalars or vectors. In the case of vectors the appropriate dimensions must be passed as template parameters. This specialisation handles Field-like objects (Field, <ref refid="classVectorField" kindref="compound">VectorField</ref>, <ref refid="classMultipatchField" kindref="compound">MultipatchField</ref>). The values which evolve are defined on an index range.</para>
+<para>For the following ODE : <formula id="398">$\partial_t y(t) = f(t, y(t)) $</formula>,</para>
+<para>the Runge-Kutta 3 method is given by : <formula id="408">$ y^{n+1} =  y^{n} + \frac{dt}{6} \left(k_1 + 2k_2 + 2k_3 + k_4 \right) $</formula>,</para>
+<para>with</para>
+<para><itemizedlist>
+<listitem><para><formula id="404">$ k_1 = f(t^{n}, y^{n}) $</formula>,</para>
+</listitem><listitem><para><formula id="405">$ k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) $</formula>,</para>
+</listitem><listitem><para><formula id="409">$ k_3 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_2 ) $</formula>,</para>
+</listitem><listitem><para><formula id="410">$ k_3 = f(t^{n}, y^{n} + dt k_3 ) $</formula>. </para>
+</listitem></itemizedlist>
+</para>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <link refid="classITimeStepper"/>
+      </node>
+      <node id="1">
+        <label>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <link refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <link refid="classITimeStepper"/>
+      </node>
+      <node id="1">
+        <label>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</label>
+        <link refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" line="163" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/rk4.hpp" bodystart="165" bodyend="279"/>
+    <listofallmembers>
+      <member refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a509cfc736d56cbb71043ed266e2f6f81" prot="private" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>base_type</name></member>
+      <member refid="classITimeStepper_1a70082a22831aae26f2f9d4f7bd3b55e2" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>DerivConstField</name></member>
+      <member refid="classITimeStepper_1ac0d666d9572e4ece819a1fcec9588b6c" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>DerivField</name></member>
+      <member refid="classITimeStepper_1a6d59a37a2b1374291a1af0a3fc4ca1ec" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>DerivFieldMem</name></member>
+      <member refid="classITimeStepper_1a05d1482e28b0b24d18e0fd2366ba3ce7" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>exec_space</name></member>
+      <member refid="classITimeStepper_1a3334e21d853756b80b60b1b2902d56af" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>IdxRange</name></member>
+      <member refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a53572e5cd405f7af9221d8333e7562ba" prot="private" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>m_idx_range</name></member>
+      <member refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1a5956fc372c34f2d14a030fd0dd66be5f" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>RK4</name></member>
+      <member refid="classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4_1aa00962aea26427ba1af53522b7dc1395" prot="public" virt="virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>update</name></member>
+      <member refid="classITimeStepper_1a0580b80dd9c61ac350895e80958c15dc" prot="public" virt="non-virtual" ambiguityscope="ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>update</name></member>
+      <member refid="classITimeStepper_1a55c46c1cd9abbf8299648add1589d51d" prot="public" virt="non-virtual" ambiguityscope="ITimeStepper&lt; FieldMem, DerivFieldMem, ExecSpace &gt;::"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>update</name></member>
+      <member refid="classITimeStepper_1a7eb3e34902d5ffb8a7cb0d562fa2f533" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>ValConstField</name></member>
+      <member refid="classITimeStepper_1a9f14b3f4c770449b26643b59e3fd9df2" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>ValField</name></member>
+      <member refid="classITimeStepper_1aefaad1f5fe74ef88c3d18942c11e9b48" prot="public" virt="non-virtual"><scope>RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;</scope><name>ValFieldMem</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

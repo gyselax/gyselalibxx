@@ -16,6 +16,7 @@
 
 ## i
 
+* **is\_coordinate\_v** ([**ddcHelper**](namespaceddcHelper.md))
 * **is\_non\_uniform\_interpolation\_points\_v** ([**ddcHelper**](namespaceddcHelper.md))
 * **is\_indexed\_tensor\_v** ([**tensor\_tools**](namespacetensor__tools.md))
 * **is\_tensor\_index\_element\_v** ([**tensor\_tools**](namespacetensor__tools.md))

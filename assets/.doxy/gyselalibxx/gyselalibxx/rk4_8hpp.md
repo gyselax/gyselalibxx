@@ -34,7 +34,8 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**RK4**](classRK4.md) &lt;class FieldMem, class [**DerivFieldMem**](classITimeStepper.md#typedef-derivfieldmem), class ExecSpace&gt;<br>_A class which provides an implementation of a fourth-order Runge-Kutta method._  |
+| class | [**RK4**](classRK4.md) &lt;class ValType, class DerivType, class ExecSpace&gt;<br>_A class which provides an implementation of a fourth-order Runge-Kutta method._  |
+| class | [**RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) &lt;FieldMem, DerivFieldMem, class ExecSpace&gt;<br>_A class which provides an implementation of a fourth-order Runge-Kutta method._  |
 
 
 ## Public Types

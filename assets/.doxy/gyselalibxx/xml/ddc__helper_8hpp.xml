@@ -268,6 +268,8 @@
         </childnode>
         <childnode refid="95" relation="include">
         </childnode>
+        <childnode refid="85" relation="include">
+        </childnode>
       </node>
       <node id="99">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/vector_field_mem.hpp</label>
@@ -289,6 +291,8 @@
         <childnode refid="33" relation="include">
         </childnode>
         <childnode refid="76" relation="include">
+        </childnode>
+        <childnode refid="85" relation="include">
         </childnode>
       </node>
       <node id="22">
@@ -1563,7 +1567,10 @@
 <codeline lineno="344"><highlight class="normal"></highlight></codeline>
 <codeline lineno="346"><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Val</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">IndexSet&gt;</highlight></codeline>
 <codeline lineno="347"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">to_coord_t<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>detail::ToCoord&lt;ValidIndexSet&gt;::type;</highlight></codeline>
-<codeline lineno="348"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="348"><highlight class="normal"></highlight></codeline>
+<codeline lineno="349"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>is_coordinate_v<sp/>=<sp/>ddc::detail::is_tagged_vector_v&lt;T&gt;;</highlight></codeline>
+<codeline lineno="351"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>ddcHelper</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp"/>
   </compounddef>

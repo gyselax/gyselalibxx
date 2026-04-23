@@ -6,11 +6,6 @@
 ## a
 
 * **AdvectionFieldFinder** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
-* **assemble\_field\_k\_total** ([**ITimeStepper**](classITimeStepper.md))
-* **assemble\_k\_total** ([**ITimeStepper**](classITimeStepper.md))
-* **assemble\_multipatch\_field\_k\_total** ([**ITimeStepper**](classITimeStepper.md))
-* **assemble\_multipatch\_field\_k\_total\_on\_patch** ([**ITimeStepper**](classITimeStepper.md))
-* **assemble\_vector\_field\_k\_total** ([**ITimeStepper**](classITimeStepper.md))
 * **adjust\_indexes** ([**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md))
 * **apply\_evaluator** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **apply\_integrate** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
@@ -68,7 +63,7 @@
 * **ConstantIdentityInterpolationExtrapolationRule** ([**ConstantIdentityInterpolationExtrapolationRule**](classConstantIdentityInterpolationExtrapolationRule.md))
 * **ConstantPartialDerivative** ([**ConstantPartialDerivative**](classConstantPartialDerivative.md))
 * **ConstantPartialDerivativeCreator** ([**ConstantPartialDerivativeCreator**](classConstantPartialDerivativeCreator.md))
-* **CrankNicolson** ([**CrankNicolson**](classCrankNicolson.md))
+* **CrankNicolson** ([**CrankNicolson**](classCrankNicolson.md), [**CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md))
 * **CrankNicolsonBuilder** ([**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md))
 * **Curl** ([**Curl**](classCurl.md))
 * **CylindricalToCartesian** ([**CylindricalToCartesian**](classCylindricalToCartesian.md))
@@ -76,7 +71,6 @@
 * **control\_point** ([**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
 * **control\_points** ([**DiscretePoloidalCSSplineMapping**](classDiscretePoloidalCSSplineMapping.md))
 * **check\_distributed\_idx\_ranges\_are\_first** ([**IMPILayout**](classIMPILayout.md))
-* **copy** ([**ITimeStepper**](classITimeStepper.md))
 * **connected\_to\_patch** ([**Interface**](structInterface.md))
 * **call\_all\_to\_all** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **check\_stability** ([**MatrixBatchTridiag**](classMatrixBatchTridiag.md))
@@ -134,7 +128,7 @@
 * **epsilon** ([**CartesianToCzarny**](classCartesianToCzarny.md), [**CzarnyToCartesian**](classCzarnyToCartesian.md))
 * **equilibrium** ([**DiocotronDensitySolution**](classDiocotronDensitySolution.md))
 * **EdgeTransformation** ([**EdgeTransformation**](classEdgeTransformation.md))
-* **Euler** ([**Euler**](classEuler.md))
+* **Euler** ([**Euler**](classEuler.md), [**Euler&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md))
 * **ExplicitTimeStepperBuilder** ([**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md))
 * **eval** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**PolarBSplines::Impl**](classPolarBSplines_1_1Impl.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
 * **eval\_no\_bc** ([**LagrangeEvaluator**](classLagrangeEvaluator.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**NDLagrangeEvaluator**](classNDLagrangeEvaluator.md), [**PolarSplineEvaluator**](classPolarSplineEvaluator.md))
@@ -156,7 +150,6 @@
 * **FEM1DPoissonSolver** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **FFTPoissonSolver** ([**FFTPoissonSolver&lt; IdxRange&lt; GridPDEDim1D... &gt;, IdxRangeFull, ExecSpace, DataType, LayoutSpace &gt;**](classFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace_1c9dfec6217f60d85d58886a3eeace05.md))
 * **FluidMoments** ([**FluidMoments**](classFluidMoments.md))
-* **fill\_k\_total** ([**ITimeStepper**](classITimeStepper.md))
 * **fill\_diagonal\_elements** ([**IdentityCoordinateChange**](classIdentityCoordinateChange.md))
 * **find\_stencil** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
 * **factorise** ([**Matrix**](classMatrix.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
@@ -247,11 +240,6 @@
 * **get\_2d\_polar\_mapping** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **get\_slice** ([**VectorField**](classVectorField.md))
 * **get\_domain** ([**ddcHelper::NonUniformInterpolationPoints**](classddcHelper_1_1NonUniformInterpolationPoints.md))
-
-
-## h
-
-* **have\_converged** ([**CrankNicolson**](classCrankNicolson.md))
 
 
 ## i
@@ -404,9 +392,9 @@
 * **replace\_periodic\_coord\_inside** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **rmax** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
 * **rmin** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
-* **RK2** ([**RK2**](classRK2.md))
-* **RK3** ([**RK3**](classRK3.md))
-* **RK4** ([**RK4**](classRK4.md))
+* **RK2** ([**RK2**](classRK2.md), [**RK2&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md))
+* **RK3** ([**RK3**](classRK3.md), [**RK3&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md))
+* **RK4** ([**RK4**](classRK4.md), [**RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md))
 * **RefinedDiscretePoloidalCSSplineMappingBuilder** ([**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md))
 * **RestartInitialisation** ([**RestartInitialisation**](classRestartInitialisation.md))
 * **recursion** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
@@ -474,7 +462,7 @@
 
 ## u
 
-* **update** ([**CrankNicolson**](classCrankNicolson.md), [**Euler**](classEuler.md), [**ITimeStepper**](classITimeStepper.md), [**RK2**](classRK2.md), [**RK3**](classRK3.md), [**RK4**](classRK4.md))
+* **update** ([**CrankNicolson**](classCrankNicolson.md), [**CrankNicolson&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classCrankNicolson_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md), [**Euler**](classEuler.md), [**Euler&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md), [**ITimeStepper**](classITimeStepper.md), [**RK2**](classRK2.md), [**RK2&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK2_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md), [**RK3**](classRK3.md), [**RK3&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK3_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md), [**RK4**](classRK4.md), [**RK4&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classRK4_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md))
 * **update\_coefficients** ([**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md))
 * **upper\_extrapolation\_rule** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
 * **unify\_value\_at\_centre\_pt** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
