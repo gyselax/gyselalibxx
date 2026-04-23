@@ -126,11 +126,11 @@ public:
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
-        dy_calculator(k1, ValConstField(y));
+        dy_calculator(k1, y);
 
         // ----------- Update y --------------
         // Calculate y_new := y_n + h*k_1
-        y_update(y, DerivConstField(k1), dt);
+        y_update(y, k1, dt);
     }
 };
 
