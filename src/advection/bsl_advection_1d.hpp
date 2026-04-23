@@ -265,7 +265,7 @@ public:
     {
         using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
         using IdxBatchFunction = typename IdxRangeBatchFunction::discrete_element_type;
-        Kokkos::Profiling::pushRegion("BslAdvection1D");
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvection1D");
 
         // Get index ranges and operators ........................................................
         IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
