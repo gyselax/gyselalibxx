@@ -24,6 +24,7 @@
 #include "geometry_pseudo_cartesian.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
+#include "interpolation_polar_foot_finder.hpp"
 #include "itimestepper.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
@@ -34,7 +35,6 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 
 
 
@@ -287,7 +287,7 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
-    SplinePolarFootFinder const foot_finder(
+    InterpolationPolarFootFinder const foot_finder(
             grid,
             time_stepper,
             to_physical_mapping,

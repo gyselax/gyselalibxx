@@ -15,11 +15,11 @@
 #include "ddc_aliases.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
+#include "interpolation_polar_foot_finder.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
 #include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 
 
 
@@ -67,7 +67,7 @@ template <
 class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using SplinePolarFootFinderType = SplinePolarFootFinder<
+    using InterpolationPolarFootFinderType = InterpolationPolarFootFinder<
             IdxRangeRTheta,
             EulerBuilder,
             LogicalToPhysicalMapping,
@@ -76,7 +76,7 @@ private:
             SplineRThetaEvaluatorConstBound>;
 
     using BslAdvectionRTheta = BslAdvectionPolar<
-            SplinePolarFootFinderType,
+            InterpolationPolarFootFinderType,
             LogicalToPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorNullBound>;
@@ -87,7 +87,7 @@ private:
     BslAdvectionRTheta const& m_advection_solver;
 
     EulerBuilder const m_euler;
-    SplinePolarFootFinderType const m_find_feet;
+    InterpolationPolarFootFinderType const m_find_feet;
 
     PolarPoissonLikeSolver const& m_poisson_solver;
 

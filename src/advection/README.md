@@ -291,7 +291,7 @@ SplineRThetaEvaluator spline_evaluator(
 
 // Define a feet finder to compute the feet of the characteristics.  
 RK3Builder const time_stepper_builder;      // a given time integration method to solve equation of the characteristics. 
-SplinePolarFootFinder find_feet(        
+InterpolationPolarFootFinder find_feet(
         grid,
         time_stepper_builder,
         logical_to_physical_mapping,

@@ -9,11 +9,11 @@
 #include "czarny_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "interpolation_polar_foot_finder.hpp"
 #include "mesh_builder.hpp"
 #include "r_theta_test_cases.hpp"
 #include "rk4.hpp"
 #include "species_info.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
@@ -277,7 +277,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     TimeStepperBuilder time_stepper;
     AdvectionField advection_field = init_field<AdvectionField>();
 
-    SplinePolarFootFinder const batched_foot_finder(
+    InterpolationPolarFootFinder const batched_foot_finder(
             batched_idx_range,
             time_stepper,
             to_physical,

@@ -26,6 +26,7 @@
 #include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
+#include "interpolation_polar_foot_finder.hpp"
 #include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"
 #include "quadrature.hpp"
@@ -33,7 +34,6 @@
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "test_cases_adv_field.hpp"
 #include "trapezoid_quadrature.hpp"
@@ -147,7 +147,7 @@ TEST(AdvectionFieldRThetaComputation, TestAdvectionFieldFinder)
             theta_extrapolation_rule);
 
     RK3Builder const time_stepper;
-    SplinePolarFootFinder find_feet(
+    InterpolationPolarFootFinder find_feet(
             grid,
             time_stepper,
             to_physical_mapping,

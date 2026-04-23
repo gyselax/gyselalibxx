@@ -24,6 +24,7 @@
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
+#include "interpolation_polar_foot_finder.hpp"
 #include "l_norm_tools.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -35,7 +36,6 @@
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vortex_merger_equilibrium.hpp"
@@ -139,7 +139,7 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    SplinePolarFootFinder find_feet(
+    InterpolationPolarFootFinder find_feet(
             grid,
             time_stepper,
             to_physical_mapping,

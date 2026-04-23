@@ -36,10 +36,10 @@
  *      A mapping from the logical domain to the domain where the advection is
  *      carried out. This may be a pseudo-physical domain or the physical domain
  *      itself.
- * @tparam SplineRThetaBuilderAdvection
- *      A 2D SplineBuilder to construct a spline on a polar domain.
- * @tparam SplineRThetaEvaluatorAdvection
- *      A 2D SplineEvaluator to evaluate a spline on a polar domain.
+ * @tparam RThetaBuilderAdvection
+ *      A 2D Builder to construct an interpolation on a polar domain.
+ * @tparam RThetaEvaluatorAdvection
+ *      A 2D Evaluator to evaluate an interpolation on a polar domain.
  *      A boundary condition must be provided in case the foot of the characteristic
  *      is found outside the domain.
  *
@@ -50,63 +50,54 @@ template <
         class TimeStepperBuilder,
         concepts::Mapping LogicalToPhysicalMapping,
         concepts::AnalyticalMapping LogicalToPseudoPhysicalMapping,
-        class SplineRThetaBuilderAdvection,
-        class SplineRThetaEvaluatorAdvection>
-class SplinePolarFootFinder
+        class RThetaBuilderAdvection,
+        class RThetaEvaluatorAdvection>
+class InterpolationPolarFootFinder
     : public IPolarFootFinder<
-              typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
-              typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
+              interpolation_grid_t<
+                      0,
+                      InterpolationBuilderTraits<
+                              RThetaBuilderAdvection>::interpolation_idx_range_type>,
+              interpolation_grid_t<
+                      1,
+                      InterpolationBuilderTraits<
+                              RThetaBuilderAdvection>::interpolation_idx_range_type>,
               ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
               IdxRangeBatched,
-              typename SplineRThetaBuilderAdvection::memory_space>
+              typename RThetaBuilderAdvection::memory_space>
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(std::is_same_v<
-                  typename SplineRThetaBuilderAdvection::memory_space,
-                  typename SplineRThetaEvaluatorAdvection::memory_space>);
+                  typename RThetaBuilderAdvection::memory_space,
+                  typename RThetaEvaluatorAdvection::memory_space>);
+    static_assert(
+            is_accessible_v<typename RThetaBuilderAdvection::exec_space, LogicalToPhysicalMapping>);
     static_assert(is_accessible_v<
-                  typename SplineRThetaBuilderAdvection::exec_space,
-                  LogicalToPhysicalMapping>);
-    static_assert(is_accessible_v<
-                  typename SplineRThetaBuilderAdvection::exec_space,
+                  typename RThetaBuilderAdvection::exec_space,
                   LogicalToPseudoPhysicalMapping>);
-    static_assert(ddc::in_tags_v<
-                  typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
-                  ddc::to_type_seq_t<IdxRangeBatched>>);
-    static_assert(ddc::in_tags_v<
-                  typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
-                  ddc::to_type_seq_t<IdxRangeBatched>>);
+    static_assert(ddc::type_seq_contains_v<
+                  ddc::to_type_seq_t<IdxRangeBatched>,
+                  ddc::to_type_seq_t<InterpolationBuilderTraits<
+                          RThetaBuilderAdvection>::interpolation_idx_range_type>>);
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_nbe_xmin == 0,
-            "This class is designed to work with a spline builder which does not require "
+            RThetaBuilderAdvection::batched_derivs_idx_range_type<IdxRangeBatched>::rank() == 0,
+            "This class is designed to work with a builder which does not require "
             "additional information at the boundaries (e.g. Hermite boundary conditions require "
             "information about the derivatives and therefore will not work with this class. Please "
             "check the choice of boundary conditions).");
-    static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_nbe_xmax == 0,
-            "This class is designed to work with a spline builder which does not require "
-            "additional information at the boundaries (e.g. Hermite boundary conditions require "
-            "information about the derivatives and therefore will not work with this class. Please "
-            "check the choice of boundary conditions).");
-    static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_bc_xmin != ddc::BoundCond::PERIODIC,
-            "Periodic boundary conditions in the radial direction are nonsensical.");
-    static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_bc_xmax != ddc::BoundCond::PERIODIC,
-            "Periodic boundary conditions in the radial direction are nonsensical.");
-    static_assert(
-            SplineRThetaBuilderAdvection::builder_type2::s_bc_xmin == ddc::BoundCond::PERIODIC,
-            "Expected periodic boundary conditions in the poloidal direction.");
-    static_assert(
-            SplineRThetaBuilderAdvection::builder_type2::s_bc_xmax == ddc::BoundCond::PERIODIC,
-            "Expected periodic boundary conditions in the poloidal direction.");
 
     using base_type = IPolarFootFinder<
-            typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
-            typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
+            interpolation_grid_t<
+                    0,
+                    InterpolationBuilderTraits<
+                            RThetaBuilderAdvection>::interpolation_idx_range_type>,
+            interpolation_grid_t<
+                    1,
+                    InterpolationBuilderTraits<
+                            RThetaBuilderAdvection>::interpolation_idx_range_type>,
             ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
             IdxRangeBatched,
-            typename SplineRThetaBuilderAdvection::memory_space>;
+            typename RThetaBuilderAdvection::memory_space>;
 
 public:
     using typename base_type::GridR;
@@ -122,7 +113,7 @@ private:
 
 public:
     /// @brief Execution space.
-    using ExecSpace = typename SplineRThetaBuilderAdvection::exec_space;
+    using ExecSpace = typename RThetaBuilderAdvection::exec_space;
 
 private:
     using MemSpace = typename ExecSpace::memory_space;
@@ -157,14 +148,18 @@ private:
     using PseudoPhysicalToPhysicalMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
-    using BSplinesR = typename SplineRThetaBuilderAdvection::bsplines_type1;
-    using BSplinesTheta = typename SplineRThetaBuilderAdvection::bsplines_type2;
+    using BasisR = interpolation_grid_t<
+            0,
+            InterpolationBuilderTraits<RThetaBuilderAdvection>::coeff_idx_range_type>;
+    using BasisTheta = interpolation_grid_t<
+            1,
+            InterpolationBuilderTraits<RThetaBuilderAdvection>::coeff_idx_range_type>;
 
-    using IdxRangeSplineBatched
+    using IdxRangeCoeffBatched
             = ddc::detail::convert_type_seq_to_discrete_domain_t<ddc::type_seq_replace_t<
                     ddc::to_type_seq_t<IdxRangeOperator>,
                     ddc::detail::TypeSeq<GridR, GridTheta>,
-                    ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
+                    ddc::detail::TypeSeq<BasisR, BasisTheta>>>;
 
     using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
             FieldMem<CoordRTheta, IdxRangeBatched, MemSpace>,
@@ -177,8 +172,8 @@ private:
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
 
-    SplineRThetaBuilderAdvection const& m_builder_advection_field;
-    SplineRThetaEvaluatorAdvection const& m_evaluator_advection_field;
+    RThetaBuilderAdvection const& m_builder_advection_field;
+    RThetaEvaluatorAdvection const& m_evaluator_advection_field;
 
 public:
     /**
@@ -208,11 +203,11 @@ public:
             = DVectorConstField<IdxRangeOperator, PseudoCartesianBasis, memory_space>;
 
     /**
-     * @brief The type of 2 batched splines representing the x and y components of a vector
+     * @brief The type of 2 batched interpolation coefficients representing the x and y components of a vector
      * on the polar plane on a compatible memory space.
      */
-    using VectorSplineCoeffsMem
-            = DVectorFieldMem<IdxRangeSplineBatched, PseudoCartesianBasis, memory_space>;
+    using VectorCoeffsMem
+            = DVectorFieldMem<IdxRangeCoeffBatched, PseudoCartesianBasis, memory_space>;
 
 public:
     /**
@@ -229,23 +224,23 @@ public:
      * @param[in] logical_to_pseudo_physical_mapping
      *      The mapping from the logical domain to the pseudo-physical domain.
      * @param[in] builder_advection_field
-     *      The spline builder which computes the spline representation
+     *      The builder which computes the interpolating representation
      *      of the advection field.
      * @param[in] evaluator_advection_field
-     *      The B-splines evaluator to evaluate the advection field.
+     *      The evaluator to evaluate the advection field interpolation.
      * @param[in] epsilon
      *      @f$ \varepsilon @f$ parameter used for the linearisation of the
      *      advection field around the central point.
      *
      * @see ITimeStepper
      */
-    SplinePolarFootFinder(
+    InterpolationPolarFootFinder(
             IdxRangeBatched const& idx_range_operator,
             TimeStepperBuilder const& time_stepper_builder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical_mapping,
-            SplineRThetaBuilderAdvection const& builder_advection_field,
-            SplineRThetaEvaluatorAdvection const& evaluator_advection_field,
+            RThetaBuilderAdvection const& builder_advection_field,
+            RThetaEvaluatorAdvection const& evaluator_advection_field,
             double epsilon = 1e-12)
         : m_time_stepper_builder(time_stepper_builder)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
@@ -263,7 +258,7 @@ public:
      * @brief Advect the feet over @f$ dt @f$.
      *
      * From the advection field in the physical domain, compute the advection field
-     * in the right domain an compute its B-splines coefficients.
+     * in the right domain an compute its interpolation coefficients.
      * Then, use the given time integration method (time_stepper) to solve the
      * characteristic equation over @f$ dt @f$.
      *
@@ -281,8 +276,8 @@ public:
                     advection_field,
             double dt) const final
     {
-        VectorSplineCoeffsMem advection_field_in_adv_domain_coefs(
-                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
+        VectorCoeffsMem advection_field_in_adv_domain_coefs(
+                batched_basis_idx_range(m_builder_advection_field, get_idx_range(advection_field)));
 
         // Compute the advection field in the advection domain.
         auto advection_field_in_adv_domain = create_mirror_view_and_copy_on_vector_space<

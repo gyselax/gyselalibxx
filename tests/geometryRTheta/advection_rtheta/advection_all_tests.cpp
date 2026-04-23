@@ -25,6 +25,7 @@
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
 #include "input.hpp"
+#include "interpolation_polar_foot_finder.hpp"
 #include "math_tools.hpp"
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
@@ -34,7 +35,6 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -194,7 +194,7 @@ void run_simulations_with_methods(
                   << to_lower(num.method_name) << "-";
     std::string output_stem = output_stream.str();
 
-    SplinePolarFootFinder const foot_finder(
+    InterpolationPolarFootFinder const foot_finder(
             params.grid,
             num.time_stepper,
             sim.to_physical_mapping,
