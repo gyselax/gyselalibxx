@@ -303,7 +303,7 @@ template <
         class DerivConstField,
         typename = std::enable_if_t<!FieldLike<ValField>>,
         typename = std::enable_if_t<!FieldLike<DerivConstField>>>
-static void serial_y_update(ValField y, DerivConstField dy, double dt)
+KOKKOS_FUNCTION void serial_y_update(ValField y, DerivConstField dy, double dt)
 {
     y += dy * dt;
 }
