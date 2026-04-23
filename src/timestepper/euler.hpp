@@ -64,7 +64,7 @@ public:
             class YFunctor
             = decltype(timestepper_detail::serial_y_update<ValType&, DerivType const&>)>
     KOKKOS_FUNCTION void update(
-            ValType y,
+            ValType& y,
             double dt,
             DYFunctor dy_calculator,
             YFunctor y_update
