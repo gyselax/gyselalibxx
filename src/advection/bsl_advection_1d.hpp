@@ -270,8 +270,6 @@ public:
 
         // Get index ranges and operators ........................................................
         IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
-        IdxRangeAdvection const idx_range_advection = get_idx_range(advection_field);
-
 
         // Build spline representation of the advection field ....................................
         AdvecFieldSplineMem advection_field_coefs_alloc(
