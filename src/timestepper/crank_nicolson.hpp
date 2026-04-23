@@ -80,13 +80,13 @@ public:
     template <
             class DYFunctor,
             class YFunctor
-            = decltype(timestepper_detail::serial_y_updater<ValType&, DerivType const&>::y_update)>
+            = decltype(timestepper_detail::serial_y_update<ValType&, DerivType const&>)>
     KOKKOS_FUNCTION void update(
             ValType y,
             double dt,
             DYFunctor dy_calculator,
             YFunctor y_update
-            = timestepper_detail::serial_y_updater<ValType&, DerivType const&>::y_update) const
+            = timestepper_detail::serial_y_update<ValType&, DerivType const&>) const
     {
         static_assert(std::is_invocable_v<DYFunctor, DerivType&, ValType>);
         ValType y_init;

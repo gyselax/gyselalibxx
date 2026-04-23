@@ -301,8 +301,8 @@ private:
 template <
         class ValField,
         class DerivConstField,
-        typename = std::enable_if_t<FieldLike<ValField>::value>,
-        typename = std::enable_if_t<FieldLike<DerivConstField>::value>>
+        typename = std::enable_if_t<!FieldLike<ValField>>,
+        typename = std::enable_if_t<!FieldLike<DerivConstField>>>
 static void serial_y_update(ValField y, DerivConstField dy, double dt)
 {
     y += dy * dt;
