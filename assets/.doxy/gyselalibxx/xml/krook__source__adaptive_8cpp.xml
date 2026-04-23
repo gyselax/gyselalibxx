@@ -603,7 +603,7 @@
 <codeline lineno="141"><highlight class="normal"></highlight></codeline>
 <codeline lineno="142"><highlight class="normal">DFieldSpXVx<sp/><ref refid="classKrookSourceAdaptive_1a1f7a6ce3a4f5f93214352a4787ba7888" kindref="member">KrookSourceAdaptive::operator()</ref>(DFieldSpXVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="143"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;KrookSource&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;(GSLX)<sp/>KrookSource&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classRK2" kindref="compound">RK2&lt;DFieldMemSpXVx&gt;</ref><sp/>timestepper(get_idx_range(allfdistribu));</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"></highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>timestepper.update(allfdistribu,<sp/>dt,<sp/>[&amp;](DFieldSpXVx<sp/>df,<sp/>DConstFieldSpXVx<sp/>f)<sp/>{</highlight></codeline>

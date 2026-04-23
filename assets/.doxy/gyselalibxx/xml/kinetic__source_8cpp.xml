@@ -209,7 +209,7 @@
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>
 <codeline lineno="50"><highlight class="normal">DFieldSpXVx<sp/><ref refid="classKineticSource_1a384f4c655ebe246d99964de77ee780d2" kindref="member">KineticSource::operator()</ref>(DFieldSpXVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="51"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;KineticSource&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;(GSLX)<sp/>KineticSource&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldVx<sp/>velocity_shape<sp/>=<sp/>get_field(m_velocity_shape);</highlight></codeline>
 <codeline lineno="54"><highlight class="normal"></highlight></codeline>
 <codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldX<sp/>spatial_extent<sp/>=<sp/>get_field(m_spatial_extent);</highlight></codeline>

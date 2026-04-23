@@ -611,7 +611,7 @@
 <codeline lineno="136"><highlight class="normal"></highlight></codeline>
 <codeline lineno="137"><highlight class="normal">DFieldSpXVx<sp/><ref refid="classCollisionsInter_1a1f8104eb5930b71b25856a0640c534bf" kindref="member">CollisionsInter::operator()</ref>(DFieldSpXVx<sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="138"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;CollisionsInter&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;(GSLX)<sp/>CollisionsInter&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classRK2" kindref="compound">RK2&lt;DFieldMemSpXVx&gt;</ref><sp/>timestepper(get_idx_range(allfdistribu));</highlight></codeline>
 <codeline lineno="141"><highlight class="normal"></highlight></codeline>
 <codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/>timestepper.update(allfdistribu,<sp/>dt,<sp/>[&amp;](DFieldSpXVx<sp/>dy,<sp/>DConstFieldSpXVx<sp/>y)<sp/>{</highlight></codeline>

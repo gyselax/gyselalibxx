@@ -633,7 +633,7 @@ KrookSourceConstant::KrookSourceConstant(
 
 DFieldSpXVx KrookSourceConstant::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
-    Kokkos::Profiling::pushRegion("KrookSource");
+    Kokkos::Profiling::pushRegion("(GSLX) KrookSource");
 
     DConstFieldVx ftarget = get_const_field(m_ftarget);
     DConstFieldX mask = get_const_field(m_mask);

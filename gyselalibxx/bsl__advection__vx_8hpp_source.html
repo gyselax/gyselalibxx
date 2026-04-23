@@ -631,7 +631,7 @@ public:
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
 
-        Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionVelocity");
         IdxRangeFdistribu const idx_range = get_idx_range(allfdistribu);
         IdxRange&lt;GridV&gt; const idx_range_v = ddc::select&lt;GridV&gt;(idx_range);
         IdxRange&lt;Species&gt; const idx_range_sp = ddc::select&lt;Species&gt;(idx_range);

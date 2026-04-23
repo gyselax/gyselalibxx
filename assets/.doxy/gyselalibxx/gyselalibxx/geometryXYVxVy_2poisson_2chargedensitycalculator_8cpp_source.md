@@ -21,7 +21,7 @@ ChargeDensityCalculator::ChargeDensityCalculator(DConstFieldVxVy coeffs) : m_qua
 
 void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfdistribu) const
 {
-    Kokkos::Profiling::pushRegion("ChargeDensityCalculator");
+    Kokkos::Profiling::pushRegion("(GSLX) ChargeDensityCalculator");
 
     IdxRangeSp const kin_species_idx_range = get_idx_range<Species>(allfdistribu);
     host_t<DConstFieldSp> const charges_host = ddc::host_discrete_space<Species>().charges();

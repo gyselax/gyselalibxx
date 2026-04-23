@@ -629,7 +629,7 @@ public:
         using IdxRangeBatch = ddc::remove_dims_of_t&lt;IdxRangeFdistrib, Species, GridX&gt;;
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
-        Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionSpatial");
         IdxRangeFdistrib const idx_range = get_idx_range(allfdistribu);
         IdxRange&lt;GridX&gt; const x_idx_range = ddc::select&lt;GridX&gt;(idx_range);
         IdxRange&lt;Species&gt; const sp_idx_range = ddc::select&lt;Species&gt;(idx_range);

@@ -355,7 +355,7 @@
 <codeline lineno="18"><highlight class="normal"></highlight></codeline>
 <codeline lineno="19"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="classMpiChargeDensityCalculator_1a686ac85ff511649317275df829e71ba2" kindref="member">MpiChargeDensityCalculator::operator()</ref>(DFieldXY<sp/>rho,<sp/>DConstFieldSpVxVyXY<sp/>allfdistribu)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="20"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;MpiChargeDensityCalculator&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;(GSLX)<sp/>MpiChargeDensityCalculator&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight></codeline>
 <codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>DFieldMemXY<sp/>rho_local_alloc(</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;rho_local<sp/>(MpiChargeDensityCalculator::operator())&quot;</highlight><highlight class="normal">,</highlight></codeline>

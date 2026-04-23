@@ -132,14 +132,18 @@ public:
                 });
 
         // Compute the feet of the characteristics at tn -----------------------------------------
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/FootFinder");
         m_find_feet(feet_rtheta, get_const_field(advection_field_xy), dt);
+        Kokkos::Profiling::popRegion();
 
         // Interpolate the function on the feet of the characteristics. --------------------------
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
         m_builder_2d(get_field(coefs), get_const_field(allfdistribu));
         m_evaluator_2d(
                 get_field(allfdistribu),
                 get_const_field(feet_rtheta),
                 get_const_field(coefs));
+        Kokkos::Profiling::popRegion();
 
         return allfdistribu;
     }
@@ -152,7 +156,7 @@ public:
             double dt) const
     {
         using IdxRangeBatchedWithoutR = ddc::remove_dims_of_t<IdxRangeBatched, GridR>;
-        Kokkos::Profiling::pushRegion("PolarAdvection");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection");
         IdxRangeBatched grid(get_idx_range(allfdistribu));
         IdxRangeR radial_grid(grid);
         IdxRangeBatchedWithoutR no_r_grid(grid);
@@ -165,7 +169,7 @@ public:
         IdxRangeBatched const Opoint_grid(radial_grid.take_first(IdxStepR(1)), no_r_grid);
 
         // Convert advection field on RTheta to advection field on XY
-        Kokkos::Profiling::pushRegion("PolarAdvection/RThetaToXY");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection/RThetaToXY");
 
         DVectorFieldMemAdvectionXY advection_field_xy_alloc(
                 "advection_field_xy (BslAdvectionPolar::operator())",
@@ -209,7 +213,7 @@ public:
             double dt) const
     {
         using IdxRangeBatchedWithoutR = ddc::remove_dims_of_t<IdxRangeBatched, GridR>;
-        Kokkos::Profiling::pushRegion("PolarAdvection");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection");
         IdxRangeBatched grid(get_idx_range(allfdistribu));
         IdxRangeR radial_grid(grid);
         IdxRangeTheta theta_grid(grid);
@@ -234,7 +238,7 @@ public:
                 no_r_grid);
 
         // Convert advection field on RTheta to advection field on XY
-        Kokkos::Profiling::pushRegion("PolarAdvection/RThetaToXY");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection/RThetaToXY");
 
         DVectorFieldMemAdvectionXY advection_field_xy_alloc(
                 "advection_field_xy (BslAdvectionPolar::operator())",

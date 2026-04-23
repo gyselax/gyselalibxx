@@ -833,7 +833,7 @@ public:
     template &lt;class RHSFunction&gt;
     void operator()(PolarSplineRTheta spline, RHSFunction const&amp; rhs) const
     {
-        Kokkos::Profiling::pushRegion("PolarPoissonRHS");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonRHS");
 
         static_assert(
                 std::is_invocable_r_v&lt;double, RHSFunction, CoordRTheta&gt;,
@@ -953,7 +953,7 @@ public:
         Kokkos::Profiling::popRegion();
 
         // Solve the matrix equation
-        Kokkos::Profiling::pushRegion("PolarPoissonSolve");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonSolve");
         m_gko_matrix-&gt;solve(x_init.allocation_kokkos_view(), b.allocation_kokkos_view());
         //-----------------
         IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);

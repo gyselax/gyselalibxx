@@ -614,7 +614,7 @@ KineticSource::KineticSource(
 
 DFieldSpXVx KineticSource::operator()(DFieldSpXVx const allfdistribu, double const dt) const
 {
-    Kokkos::Profiling::pushRegion("KineticSource");
+    Kokkos::Profiling::pushRegion("(GSLX) KineticSource");
     DConstFieldVx velocity_shape = get_field(m_velocity_shape);
 
     DConstFieldX spatial_extent = get_field(m_spatial_extent);

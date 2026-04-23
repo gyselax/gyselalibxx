@@ -241,7 +241,7 @@
 <codeline lineno="68"><highlight class="normal"></highlight></codeline>
 <codeline lineno="69"><highlight class="normal">DFieldSpXVx<sp/><ref refid="classKrookSourceConstant_1a266237a1a58a6f8f000ee4e910353dcc" kindref="member">KrookSourceConstant::operator()</ref>(DFieldSpXVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="70"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;KrookSource&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;(GSLX)<sp/>KrookSource&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="72"><highlight class="normal"></highlight></codeline>
 <codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldVx<sp/>ftarget<sp/>=<sp/>get_const_field(m_ftarget);</highlight></codeline>
 <codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/>DConstFieldX<sp/>mask<sp/>=<sp/>get_const_field(m_mask);</highlight></codeline>

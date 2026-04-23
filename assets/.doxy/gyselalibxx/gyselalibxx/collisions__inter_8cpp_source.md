@@ -146,7 +146,7 @@ void CollisionsInter::get_derivative(DFieldSpXVx const df, DConstFieldSpXVx cons
 
 DFieldSpXVx CollisionsInter::operator()(DFieldSpXVx allfdistribu, double dt) const
 {
-    Kokkos::Profiling::pushRegion("CollisionsInter");
+    Kokkos::Profiling::pushRegion("(GSLX) CollisionsInter");
     RK2<DFieldMemSpXVx> timestepper(get_idx_range(allfdistribu));
 
     timestepper.update(allfdistribu, dt, [&](DFieldSpXVx dy, DConstFieldSpXVx y) {

@@ -111,7 +111,7 @@ public:
             Field<ElementType, IdxRangeOut, MemSpace> recv_field,
             ConstField<ElementType, InIdxRange, MemSpace> send_field) const
     {
-        Kokkos::Profiling::pushRegion("MpiTranspose");
+        Kokkos::Profiling::pushRegion("(GSLX) MpiTranspose");
         static_assert(!std::is_same_v<InIdxRange, IdxRangeOut>);
         static_assert(
                 (std::is_same_v<InIdxRange, typename Layout1::discrete_domain_type>)

@@ -554,7 +554,7 @@
 <codeline lineno="262"><highlight class="normal"></highlight></codeline>
 <codeline lineno="263"><highlight class="normal">DFieldSpXVx<sp/><ref refid="classCollisionsIntra_1ad066a79f6c0a9dcf3720dbfc5e9056e0" kindref="member">CollisionsIntra::operator()</ref>(DFieldSpXVx<sp/>allfdistribu,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dt)</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
 <codeline lineno="264"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;CollisionsIntra&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;(GSLX)<sp/>CollisionsIntra&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="266"><highlight class="normal"></highlight></codeline>
 <codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSpX<sp/>grid_sp_x(get_idx_range&lt;Species,<sp/>GridX&gt;(allfdistribu));</highlight></codeline>
 <codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>density<sp/>and<sp/>temperature</highlight><highlight class="normal"></highlight></codeline>

@@ -172,7 +172,7 @@
 <codeline lineno="9"><highlight class="normal">DFieldX<sp/><ref refid="classChargeDensityCalculator_1a164ef05aba41f41d7862c1aa216c154e" kindref="member">ChargeDensityCalculator::operator()</ref>(DFieldX<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>rho,<sp/>DConstFieldSpXVx<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>allfdistribu)</highlight><highlight class="keyword"></highlight></codeline>
 <codeline lineno="10"><highlight class="keyword"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>const</highlight></codeline>
 <codeline lineno="11"><highlight class="keyword"></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;ChargeDensityCalculator&quot;</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/>Kokkos::Profiling::pushRegion(</highlight><highlight class="stringliteral">&quot;(GSLX)<sp/>ChargeDensityCalculator&quot;</highlight><highlight class="normal">);</highlight></codeline>
 <codeline lineno="13"><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRangeSp<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>kin_species_idx_range<sp/>=<sp/>get_idx_range&lt;Species&gt;(allfdistribu);</highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>

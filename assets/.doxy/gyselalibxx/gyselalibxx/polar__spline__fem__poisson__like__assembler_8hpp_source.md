@@ -393,7 +393,7 @@ public:
                 = PolarBSplinesRTheta::template singular_idx_range<PolarBSplinesRTheta>();
         const int n_singular = idxrange_singular.size();
 
-        Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonFillFemMatrix");
         const std::source_location location = std::source_location::current();
         // Calculate the matrix elements corresponding to the B-splines which cover the singular point
         Kokkos::parallel_for(
@@ -591,7 +591,7 @@ public:
         const int batch_idx = m_batch_idx;
         const int n_singular = idxrange_singular.size();
 
-        Kokkos::Profiling::pushRegion("PolarPoissonFillFemMatrix");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonFillFemMatrix");
         const std::source_location location = std::source_location::current();
         // Calculate the matrix elements corresponding to the B-splines which cover the singular point
         Kokkos::parallel_for(
@@ -970,7 +970,7 @@ public:
 
     void init_nnz_per_line(Kokkos::View<int*, Kokkos::LayoutRight> nnz_per_row) const
     {
-        Kokkos::Profiling::pushRegion("PolarPoissonInitNnz");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonInitNnz");
         size_t const mat_size = nnz_per_row.extent(0) - 1;
         IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
         IdxRangeBSPolar polar_bspl_idx_range

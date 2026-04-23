@@ -52,7 +52,7 @@ DFieldSpXVx PredCorr::operator()(
 
     int iter = 0;
     for (; iter < steps; ++iter) {
-        Kokkos::Profiling::pushRegion("Time step");
+        Kokkos::Profiling::pushRegion("(GSLX) Time step");
         double const iter_time = time_start + iter * dt;
 
         // computation of the electrostatic potential at time tn and
@@ -64,7 +64,7 @@ DFieldSpXVx PredCorr::operator()(
         // copies necessary to PDI
         ddc::parallel_deepcopy(allfdistribu_host, allfdistribu);
         ddc::parallel_deepcopy(electrostatic_potential_host, electrostatic_potential);
-        Kokkos::Profiling::pushRegion("HDF5_Output");
+        Kokkos::Profiling::pushRegion("(GSLX) HDF5_Output");
         ddc::PdiEvent("iteration")
                 .with("iter", iter)
                 .with("time_saved", iter_time)
