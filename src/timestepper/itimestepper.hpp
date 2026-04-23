@@ -325,8 +325,8 @@ template <
         class ExecSpace = Kokkos::DefaultExecutionSpace>
 class ITimeStepper
 {
-    static_assert(timestepper_detail::ExpectedTimeStepperType<FieldMem>);
-    static_assert(timestepper_detail::ExpectedTimeStepperType<DerivFieldMemType>);
+    static_assert(timestepper_detail::FieldLike<FieldMem>);
+    static_assert(timestepper_detail::FieldLike<DerivFieldMemType>);
     static_assert(timestepper_detail::Compatible<FieldMem, DerivFieldMemType>);
 
     static_assert(
@@ -386,23 +386,15 @@ public:
             double dt,
             std::function<void(DerivField, ValConstField)> dy_calculator) const
     {
-        if constexpr (timestepper_detail::FieldLike<FieldMem>) {
-            using Idx = typename IdxRangeType<ValField>::type::discrete_element_type;
-            update(exec_space,
-                   y,
-                   dt,
-                   dy_calculator,
-                   [&](ValField y, DerivConstField dy, double dt) {
-                       const std::source_location location = std::source_location::current();
-                       ddc::parallel_for_each(
-                               location.function_name(),
-                               exec_space,
-                               get_idx_range(y),
-                               KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
-                   });
-        } else {
-            assert("Method should only be used on a FieldLike object");
-        }
+        using Idx = typename IdxRange::discrete_element_type;
+        update(exec_space, y, dt, dy_calculator, [&](ValField y, DerivConstField dy, double dt) {
+            const std::source_location location = std::source_location::current();
+            ddc::parallel_for_each(
+                    location.function_name(),
+                    exec_space,
+                    get_idx_range(y),
+                    KOKKOS_LAMBDA(Idx const idx) { y(idx) = y(idx) + dy(idx) * dt; });
+        });
     }
 
     /**

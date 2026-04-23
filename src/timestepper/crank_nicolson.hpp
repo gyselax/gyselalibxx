@@ -30,11 +30,108 @@
  * The method is order 2.
  *
  */
+template <class ValType, class DerivType = ValType, class ExecSpace = Kokkos::DefaultExecutionSpace>
+class CrankNicolson
+{
+    static_assert(!timestepper_detail::FieldLike<ValType>);
+    static_assert(!timestepper_detail::FieldLike<DerivType>);
+
+private:
+    int const m_max_counter;
+    double const m_epsilon;
+
+public:
+    /**
+     * @brief Create a CrankNicolson object to operate on scalars.
+     * @param[in] counter
+     *      The maximal number of loops for the implicit method.
+     * @param[in] epsilon
+     *      The @f$ \varepsilon @f$ upperbound of the difference of two steps
+     *      in the implicit method: @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$.
+     */
+    explicit CrankNicolson(int const counter = int(20), double const epsilon = 1e-12)
+        : m_max_counter(counter)
+        , m_epsilon(epsilon)
+    {
+    }
+
+    /**
+     * @brief Carry out one step of the Crank-Nicolson scheme on a scalar.
+     *
+     * @param[inout] y
+     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
+     *     of the index range.
+     * @param[in] dt
+     *     The time step over which the values should be evolved.
+     * @param[in] dy_calculator
+     *     The function describing how the derivative of the evolve function is calculated.
+     * @param[in] y_update
+     *     The function describing how the value(s) are updated using the derivative.
+     */
+    template <
+            class DYFunctor,
+            class YFunctor
+            = decltype(timestepper_detail::serial_y_updater<ValType&, DerivType const&>::y_update)>
+    KOKKOS_FUNCTION void update(
+            ValType y,
+            double dt,
+            DYFunctor dy_calculator,
+            YFunctor y_update
+            = timestepper_detail::serial_y_updater<ValType&, DerivType const&>::y_update) const
+    {
+        static_assert(std::is_invocable_v<DYFunctor, DerivType&, ValType>);
+        ValType y_init;
+        ValType y_old;
+        DerivType k1;
+        DerivType k_new;
+        DerivType k_total;
+
+        // Save initial conditions
+        timestepper_detail::copy_helper<ValType>::copy(y_init, y);
+
+        // --------- Calculate k1 ------------
+        // Calculate k1 = f(y_n)
+        dy_calculator(k1, y);
+
+        // -------- Calculate k_new ----------
+        bool not_converged = true;
+        int counter = 0;
+        do {
+            counter++;
+
+            // Calculate k_new = f(y_new)
+            dy_calculator(k_new, y);
+
+            // Calculation of step
+            // k_total = k1 + k_new
+            timestepper_detail::assemble_helper<ExecSpace, DerivType>::assemble_k_total(
+                    k_total,
+                    KOKKOS_LAMBDA(std::array<DerivType, 2> k) { return k[0] + k[1]; },
+                    k1,
+                    k_new);
+
+            // Save the old characteristic feet
+            timestepper_detail::copy_helper<ValType>::copy(y_old, y);
+
+            // Re-initialise the characteristic feet
+            timestepper_detail::copy_helper<ValType>::copy(y, y_init);
+
+            // Calculate y_new := y_n + h/2*(k_1 + k_new)
+            y_update(y, k_total, 0.5 * dt);
+
+            // Check convergence
+            not_converged = (norm_inf(y_old - y) / norm_inf(y_old)) >= m_epsilon;
+
+        } while (not_converged and (counter < m_max_counter));
+    }
+};
+
 template <
-        class FieldMem,
-        class DerivFieldMem = FieldMem,
-        class ExecSpace = Kokkos::DefaultExecutionSpace>
-class CrankNicolson : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
+        timestepper_detail::FieldLike FieldMem,
+        timestepper_detail::FieldLike DerivFieldMem,
+        class ExecSpace>
+class CrankNicolson<FieldMem, DerivFieldMem, ExecSpace>
+    : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
 {
     using base_type = ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>;
 
@@ -74,22 +171,6 @@ public:
         , m_max_counter(counter)
         , m_epsilon(epsilon)
     {
-        assert(timestepper_detail::FieldLike<FieldMem>);
-    }
-
-    /**
-     * @brief Create a CrankNicolson object to operate on scalars.
-     * @param[in] counter
-     *      The maximal number of loops for the implicit method.
-     * @param[in] epsilon
-     *      The @f$ \varepsilon @f$ upperbound of the difference of two steps
-     *      in the implicit method: @f$ |y^{k+1} -  y^{k}| < \varepsilon @f$.
-     */
-    explicit CrankNicolson(int const counter = int(20), double const epsilon = 1e-12)
-        : m_max_counter(counter)
-        , m_epsilon(epsilon)
-    {
-        assert(!timestepper_detail::FieldLike<FieldMem>);
     }
 
     /**
@@ -114,106 +195,26 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
-        if constexpr (timestepper_detail::FieldLike<FieldMem>) {
-            using element_type = typename timestepper_detail::ElementType<DerivField>::type;
+        using element_type = typename timestepper_detail::ElementType<DerivField>::type;
 
-            FieldMem y_init_alloc("y_init (CrankNicholson::update)", m_idx_range);
-            FieldMem y_old_alloc("y_old (CrankNicholson::update)", m_idx_range);
-            DerivFieldMem k1_alloc("k1 (CrankNicholson::update)", m_idx_range);
-            DerivFieldMem k_new_alloc("k_new (CrankNicholson::update)", m_idx_range);
-            DerivFieldMem k_total_alloc("k_total (CrankNicholson::update)", m_idx_range);
+        FieldMem y_init_alloc("y_init (CrankNicholson::update)", m_idx_range);
+        FieldMem y_old_alloc("y_old (CrankNicholson::update)", m_idx_range);
+        DerivFieldMem k1_alloc("k1 (CrankNicholson::update)", m_idx_range);
+        DerivFieldMem k_new_alloc("k_new (CrankNicholson::update)", m_idx_range);
+        DerivFieldMem k_total_alloc("k_total (CrankNicholson::update)", m_idx_range);
 
-            ValField y_init = get_field(y_init_alloc);
-            ValField y_old = get_field(y_old_alloc);
-            DerivField k1 = get_field(k1_alloc);
-            DerivField k_new = get_field(k_new_alloc);
-            DerivField k_total = get_field(k_total_alloc);
-
-            // Save initial conditions
-            timestepper_detail::copy_helper<FieldMem>::copy(y_init, get_const_field(y));
-
-            // --------- Calculate k1 ------------
-            // Calculate k1 = f(y_n)
-            dy_calculator(k1, get_const_field(y));
-
-            // -------- Calculate k_new ----------
-            bool not_converged = true;
-            int counter = 0;
-            do {
-                counter++;
-
-                // Calculate k_new = f(y_new)
-                dy_calculator(k_new, get_const_field(y));
-
-                // Calculation of step
-                // k_total = k1 + k_new
-                timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::assemble_k_total(
-                        exec_space,
-                        k_total,
-                        KOKKOS_LAMBDA(std::array<element_type, 2> k) { return k[0] + k[1]; },
-                        k1,
-                        k_new);
-
-                // Save the old characteristic feet
-                timestepper_detail::copy_helper<FieldMem>::copy(y_old, get_const_field(y));
-
-                // Re-initialise the characteristic feet
-                timestepper_detail::copy_helper<FieldMem>::copy(y, get_const_field(y_init));
-
-                // Calculate y_new := y_n + h/2*(k_1 + k_new)
-                y_update(y, get_const_field(k_total), 0.5 * dt);
-
-
-                // Check convergence
-                not_converged
-                        = (error_norm_inf(exec_space, get_const_field(y_old), get_const_field(y))
-                           / norm_inf(exec_space, get_const_field(y_old)))
-                          >= m_epsilon;
-
-
-            } while (not_converged and (counter < m_max_counter));
-        } else {
-            assert(timestepper_detail::FieldLike<FieldMem>);
-        }
-    }
-
-    /**
-     * @brief Carry out one step of the Crank-Nicolson scheme on a scalar.
-     *
-     * @param[inout] y
-     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
-     * @param[in] dt
-     *     The time step over which the values should be evolved.
-     * @param[in] dy_calculator
-     *     The function describing how the derivative of the evolve function is calculated.
-     * @param[in] y_update
-     *     The function describing how the value(s) are updated using the derivative.
-     */
-    template <
-            class DYFunctor,
-            class YFunctor
-            = decltype(timestepper_detail::serial_y_updater<ValField, DerivConstField>::y_update)>
-    KOKKOS_FUNCTION void update(
-            ValField y,
-            double dt,
-            DYFunctor dy_calculator,
-            YFunctor y_update
-            = timestepper_detail::serial_y_updater<ValField, DerivConstField>::y_update) const
-    {
-        static_assert(!timestepper_detail::FieldLike<FieldMem>);
-        FieldMem y_init;
-        FieldMem y_old;
-        DerivFieldMem k1;
-        DerivFieldMem k_new;
-        DerivFieldMem k_total;
+        ValField y_init = get_field(y_init_alloc);
+        ValField y_old = get_field(y_old_alloc);
+        DerivField k1 = get_field(k1_alloc);
+        DerivField k_new = get_field(k_new_alloc);
+        DerivField k_total = get_field(k_total_alloc);
 
         // Save initial conditions
-        timestepper_detail::copy_helper<FieldMem>::copy(y_init, ValConstField(y));
+        timestepper_detail::copy_helper<FieldMem>::copy(y_init, get_const_field(y));
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
-        dy_calculator(k1, ValConstField(y));
+        dy_calculator(k1, get_const_field(y));
 
         // -------- Calculate k_new ----------
         bool not_converged = true;
@@ -222,28 +223,31 @@ public:
             counter++;
 
             // Calculate k_new = f(y_new)
-            dy_calculator(k_new, ValConstField(y));
+            dy_calculator(k_new, get_const_field(y));
 
             // Calculation of step
             // k_total = k1 + k_new
             timestepper_detail::assemble_helper<ExecSpace, DerivFieldMem>::assemble_k_total(
+                    exec_space,
                     k_total,
-                    KOKKOS_LAMBDA(std::array<DerivFieldMem, 2> k) { return k[0] + k[1]; },
+                    KOKKOS_LAMBDA(std::array<element_type, 2> k) { return k[0] + k[1]; },
                     k1,
                     k_new);
 
             // Save the old characteristic feet
-            timestepper_detail::copy_helper<FieldMem>::copy(y_old, ValConstField(y));
+            timestepper_detail::copy_helper<FieldMem>::copy(y_old, get_const_field(y));
 
             // Re-initialise the characteristic feet
-            timestepper_detail::copy_helper<FieldMem>::copy(y, ValConstField(y_init));
+            timestepper_detail::copy_helper<FieldMem>::copy(y, get_const_field(y_init));
 
             // Calculate y_new := y_n + h/2*(k_1 + k_new)
-            y_update(y, DerivConstField(k_total), 0.5 * dt);
+            y_update(y, get_const_field(k_total), 0.5 * dt);
 
 
             // Check convergence
-            not_converged = (norm_inf(y_old - y) / norm_inf(y_old)) >= m_epsilon;
+            not_converged = (error_norm_inf(exec_space, get_const_field(y_old), get_const_field(y))
+                             / norm_inf(exec_space, get_const_field(y_old)))
+                            >= m_epsilon;
 
 
         } while (not_converged and (counter < m_max_counter));

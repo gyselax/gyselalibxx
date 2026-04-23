@@ -25,11 +25,61 @@
  * The method is order 1.
  *
  */
+template <class ValType, class DerivType = ValType, class ExecSpace = Kokkos::DefaultExecutionSpace>
+class Euler
+{
+    static_assert(!timestepper_detail::FieldLike<ValType>);
+    static_assert(!timestepper_detail::FieldLike<DerivType>);
+
+public:
+    /**
+     * @brief Create a Euler object to operate on scalars.
+     */
+    explicit KOKKOS_DEFAULTED_FUNCTION Euler() = default;
+
+    /**
+     * @brief Carry out one step of the explicit Euler scheme on a scalar.
+     *
+     * @param[inout] y
+     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
+     *     of the index range.
+     * @param[in] dt
+     *     The time step over which the values should be evolved.
+     * @param[in] dy_calculator
+     *     The function describing how the derivative of the evolve function is calculated.
+     * @param[in] y_update
+     *     The function describing how the value(s) are updated using the derivative.
+     */
+    template <
+            class DYFunctor,
+            class YFunctor
+            = decltype(timestepper_detail::serial_y_updater<ValType&, DerivType const&>::y_update)>
+    KOKKOS_FUNCTION void update(
+            ValType y,
+            double dt,
+            DYFunctor dy_calculator,
+            YFunctor y_update
+            = timestepper_detail::serial_y_updater<ValType&, DerivType const&>::y_update) const
+    {
+        static_assert(std::is_invocable_v<DYFunctor, DerivType&, ValType>);
+        DerivType k1;
+
+        // --------- Calculate k1 ------------
+        // Calculate k1 = f(y_n)
+        dy_calculator(k1, y);
+
+        // ----------- Update y --------------
+        // Calculate y_new := y_n + h*k_1
+        y_update(y, k1, dt);
+    }
+};
+
 template <
-        class FieldMem,
-        class DerivFieldMem = FieldMem,
-        class ExecSpace = Kokkos::DefaultExecutionSpace>
-class Euler : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
+        timestepper_detail::FieldLike FieldMem,
+        timestepper_detail::FieldLike DerivFieldMem,
+        class ExecSpace>
+class Euler<FieldMem, DerivFieldMem, ExecSpace>
+    : public ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>
 {
     using base_type = ITimeStepper<FieldMem, DerivFieldMem, ExecSpace>;
 
@@ -53,18 +103,7 @@ public:
      * @brief Create a Euler object.
      * @param[in] idx_range The index range on which the points which evolve over time are defined.
      */
-    explicit Euler(IdxRange idx_range) : m_idx_range(idx_range)
-    {
-        assert(timestepper_detail::FieldLike<FieldMem>);
-    }
-
-    /**
-     * @brief Create a Euler object to operate on scalars.
-     */
-    explicit Euler()
-    {
-        assert(!timestepper_detail::FieldLike<FieldMem>);
-    }
+    explicit Euler(IdxRange idx_range) : m_idx_range(idx_range) {}
 
     /**
      * @brief Carry out one step of the explicit Euler scheme.
@@ -88,56 +127,16 @@ public:
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
-        if constexpr (timestepper_detail::FieldLike<FieldMem>) {
-            DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
-            DerivField k1 = get_field(k1_alloc);
-
-            // --------- Calculate k1 ------------
-            // Calculate k1 = f(y_n)
-            dy_calculator(k1, get_const_field(y));
-
-            // ----------- Update y --------------
-            // Calculate y_new := y_n + h*k_1
-            y_update(y, get_const_field(k1), dt);
-        } else {
-            assert(timestepper_detail::FieldLike<FieldMem>);
-        }
-    }
-
-    /**
-     * @brief Carry out one step of the explicit Euler scheme on a scalar.
-     *
-     * @param[inout] y
-     *     The value(s) which should be evolved over time defined on each of the dimensions at each point
-     *     of the index range.
-     * @param[in] dt
-     *     The time step over which the values should be evolved.
-     * @param[in] dy_calculator
-     *     The function describing how the derivative of the evolve function is calculated.
-     * @param[in] y_update
-     *     The function describing how the value(s) are updated using the derivative.
-     */
-    template <
-            class DYFunctor,
-            class YFunctor
-            = decltype(timestepper_detail::serial_y_updater<ValField, DerivConstField>::y_update)>
-    KOKKOS_FUNCTION void update(
-            ValField y,
-            double dt,
-            DYFunctor dy_calculator,
-            YFunctor y_update
-            = timestepper_detail::serial_y_updater<ValField, DerivConstField>::y_update) const
-    {
-        static_assert(!timestepper_detail::FieldLike<FieldMem>);
-        DerivFieldMem k1;
+        DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
+        DerivField k1 = get_field(k1_alloc);
 
         // --------- Calculate k1 ------------
         // Calculate k1 = f(y_n)
-        dy_calculator(k1, y);
+        dy_calculator(k1, get_const_field(y));
 
         // ----------- Update y --------------
         // Calculate y_new := y_n + h*k_1
-        y_update(y, k1, dt);
+        y_update(y, get_const_field(k1), dt);
     }
 };
 
