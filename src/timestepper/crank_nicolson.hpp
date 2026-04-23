@@ -35,6 +35,16 @@ class CrankNicolson
     static_assert(!timestepper_detail::FieldLike<ValType>);
     static_assert(!timestepper_detail::FieldLike<DerivType>);
 
+public:
+    /// The type of the memory allocation for the values of the function being evolved.
+    using ValFieldMem = ValType;
+
+    /// The type of the memory allocation for the derivatives of the function being evolved.
+    using DerivFieldMem = DerivType;
+
+    /// The space (CPU/GPU) where the calculations are carried out.
+    using exec_space = ExecSpace;
+
 private:
     int const m_max_counter;
     double const m_epsilon;
