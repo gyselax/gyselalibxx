@@ -12,9 +12,8 @@
  * @brief A class which provides an implementation of an explicit Euler method.
  *
  * A class which provides an implementation of an explicit Euler method in
- * order to evolve values over time. The values may be either scalars or vectors. In the
- * case of vectors the appropriate dimensions must be passed as template parameters.
- * The values which evolve are defined on an index range.
+ * order to evolve values over time. This specialisation handles elementwise
+ * operations and can be called from GPU.
  *
  * For the following ODE :
  * @f$\partial_t y(t) = f(t, y(t)) @f$,
@@ -74,6 +73,24 @@ public:
     }
 };
 
+/**
+ * @brief A class which provides an implementation of an explicit Euler method.
+ *
+ * A class which provides an implementation of an explicit Euler method in
+ * order to evolve values over time. The values may be either scalars or vectors. In the
+ * case of vectors the appropriate dimensions must be passed as template parameters.
+ * This specialisation handles Field-like objects (Field, VectorField, MultipatchField).
+ * The values which evolve are defined on an index range.
+ *
+ * For the following ODE :
+ * @f$\partial_t y(t) = f(t, y(t)) @f$,
+ *
+ * the explicit Euler method is given by :
+ * @f$ y^{n+1} =  y^{n} + dt f(t^{n}, y^{n})@f$.
+ *
+ * The method is order 1.
+ *
+ */
 template <
         timestepper_detail::FieldLike FieldMem,
         timestepper_detail::FieldLike DerivFieldMem,

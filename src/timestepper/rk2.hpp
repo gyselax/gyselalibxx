@@ -13,9 +13,8 @@
  * @brief A class which provides an implementation of a second-order Runge-Kutta method.
  *
  * A class which provides an implementation of a second-order Runge-Kutta method in
- * order to evolve values over time. The values may be either scalars or vectors. In the
- * case of vectors the appropriate dimensions must be passed as template parameters.
- * The values which evolve are defined on an index range.
+ * order to evolve values over time. This specialisation handles elementwise
+ * operations and can be called from GPU.
  *
  *
  * For the following ODE :
@@ -90,6 +89,27 @@ public:
     }
 };
 
+/**
+ * @brief A class which provides an implementation of a second-order Runge-Kutta method.
+ *
+ * A class which provides an implementation of a second-order Runge-Kutta method in
+ * order to evolve values over time. The values may be either scalars or vectors. In the
+ * case of vectors the appropriate dimensions must be passed as template parameters.
+ * This specialisation handles Field-like objects (Field, VectorField, MultipatchField).
+ * The values which evolve are defined on an index range.
+ *
+ *
+ * For the following ODE :
+ * @f$\partial_t y(t) = f(t, y(t)) @f$,
+ *
+ * the Runge-Kutta 2 method is given by :
+ * @f$ y^{n+1} =  y^{n} + dt k_2 @f$,
+ *
+ * with
+ *
+ * - @f$ k_1 = f(t^{n}, y^{n}) @f$,
+ * - @f$ k_2 = f(t^{n+1/2}, y^{n} + \frac{dt}{2} k_1 ) @f$,
+ */
 template <
         timestepper_detail::FieldLike FieldMem,
         timestepper_detail::FieldLike DerivFieldMem,
