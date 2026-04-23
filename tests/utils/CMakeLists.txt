@@ -4,6 +4,7 @@
 include(GoogleTest)
 
 add_executable(unit_tests_utils
+    for_each_block.cpp
     non_uniform_interpolation_points.cpp
     spline_builder_deriv_field_2d_test.cpp
     test_ddcHelpers.cpp
