@@ -166,10 +166,8 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
-            FieldMem<CoordRTheta, IdxRangeBatched, MemSpace>,
-            DVectorFieldMem<IdxRangeBatched, VectorIndexSet<X_adv, Y_adv>, MemSpace>,
-            ExecSpace>;
+    using TimeStepper = typename TimeStepperBuilder::
+            template time_stepper_t<CoordRTheta, DVector<X_adv, Y_adv>>;
 
     TimeStepperBuilder const& m_time_stepper_builder;
 
@@ -281,36 +279,23 @@ public:
                     advection_field,
             double dt) const final
     {
-        VectorSplineCoeffsMem advection_field_in_adv_domain_coefs(
-                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
+        static_assert(ddc::type_seq_size_v<VectorIndexSetAdvectionDims> == 2);
+        using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
+        using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
 
-        // Compute the advection field in the advection domain.
-        auto advection_field_in_adv_domain = create_mirror_view_and_copy_on_vector_space<
-                PseudoCartesianBasis>(ExecSpace(), advection_field, m_pseudo_physical_to_physical);
+        DVectorFieldMem<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>
+                advection_field_coefs_alloc(m_builder_advection_field.batched_spline_domain(
+                        get_idx_range(advection_field)));
+        DVectorField<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>
+                advection_field_coefs(advection_field_coefs_alloc);
 
         // Get the coefficients of the advection field in the advection domain.
         m_builder_advection_field(
-                ddcHelper::get<X_adv>(advection_field_in_adv_domain_coefs),
-                ddcHelper::get<X_adv>(get_const_field(advection_field_in_adv_domain)));
+                ddcHelper::get<AdvDim1>(advection_field_coefs),
+                ddcHelper::get<AdvDim1>(get_const_field(advection_field)));
         m_builder_advection_field(
-                ddcHelper::get<Y_adv>(advection_field_in_adv_domain_coefs),
-                ddcHelper::get<Y_adv>(get_const_field(advection_field_in_adv_domain)));
-
-
-        // The function describing how the derivative of the evolve function is calculated.
-        std::function<void(DVectorFieldAdvection, CConstFieldFeet)> dy
-                = [&](DVectorFieldAdvection updated_advection_field, CConstFieldFeet feet) {
-                      m_evaluator_advection_field(
-                              get_field(ddcHelper::get<X_adv>(updated_advection_field)),
-                              get_const_field(feet),
-                              get_const_field(
-                                      ddcHelper::get<X_adv>(advection_field_in_adv_domain_coefs)));
-                      m_evaluator_advection_field(
-                              get_field(ddcHelper::get<Y_adv>(updated_advection_field)),
-                              get_const_field(feet),
-                              get_const_field(
-                                      ddcHelper::get<Y_adv>(advection_field_in_adv_domain_coefs)));
-                  };
+                ddcHelper::get<AdvDim2>(advection_field_coefs),
+                ddcHelper::get<AdvDim2>(get_const_field(advection_field)));
 
         CoordXY_adv coord_centre(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
         LogicalToPseudoPhysicalMapping logical_to_pseudo_physical_proxy
@@ -321,45 +306,67 @@ public:
         IdxRangeOperator idx_range = get_idx_range(feet);
         IdxRangeTheta idx_range_theta(idx_range);
 
-        // The function describing how the value(s) are updated using the derivative.
-        std::function<void(CFieldFeet, DVectorConstFieldAdvection, double)> update_function
-                = [&](CFieldFeet feet, DVectorConstFieldAdvection advection_field, double dt) {
-                      // Compute the characteristic feet at t^n:
-                      const std::source_location location = std::source_location::current();
-                      ddc::parallel_for_each(
-                              location.function_name(),
-                              ExecSpace(),
-                              get_idx_range(feet),
-                              KOKKOS_LAMBDA(IdxOperator const idx) {
-                                  CoordRTheta const coord_rtheta(feet(idx));
-                                  CoordXY_adv const coord_xy
-                                          = logical_to_pseudo_physical_proxy(coord_rtheta);
+        TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
 
-                                  CoordXY_adv const feet_xy = coord_xy - dt * advection_field(idx);
+        // Compute the characteristic feet at t^n:
+        const std::source_location location = std::source_location::current();
+        ddc::parallel_for_each(
+                location.function_name(),
+                ExecSpace(),
+                get_idx_range(feet),
+                KOKKOS_LAMBDA(IdxOperator const idx) {
+                    IdxBatch idx_batch(idx);
+                    IdxRTheta idx_rtheta(idx);
+                    // The function describing how the derivative of the evolve function is calculated.
+                    std::function<void(DVector<X_adv, Y_adv>&, CoordRTheta const&)> dy
+                            = [&](DVector<X_adv, Y_adv>& updated_advection_field,
+                                  CoordRTheta const& foot) {
+                                  DVector<AdvDim1, AdvDim2> updated_advection_field_adv_space;
+                                  ddcHelper::get<AdvDim1>(updated_advection_field_adv_space)
+                                          = m_evaluator_advection_field(
+                                                  foot,
+                                                  get_const_field(ddcHelper::get<AdvDim1>(
+                                                          advection_field_coefs)[idx_batch]));
+                                  ddcHelper::get<AdvDim2>(updated_advection_field_adv_space)
+                                          = m_evaluator_advection_field(
+                                                  foot,
+                                                  get_const_field(ddcHelper::get<AdvDim2>(
+                                                          advection_field_coefs)[idx_batch]));
+                                  updated_advection_field
+                                          = to_vector_space<VectorIndexSet<X_adv, Y_adv>>(
+                                                  m_pseudo_physical_to_physical,
+                                                  foot,
+                                                  updated_advection_field_adv_space);
+                              };
 
-                                  if (norm_inf(feet_xy - coord_centre) < 1e-15) {
-                                      feet(idx) = CoordRTheta(0, 0);
-                                  } else {
-                                      feet(idx) = pseudo_physical_to_logical_proxy(feet_xy);
-                                      ddc::select<Theta>(feet(idx))
-                                              = ddcHelper::restrict_to_idx_range(
-                                                      ddc::select<Theta>(feet(idx)),
-                                                      idx_range_theta);
-                                  }
-                              });
+                    // The function describing how the value(s) are updated using the derivative.
+                    std::function<void(CoordRTheta&, DVector<X_adv, Y_adv> const&, double)>
+                            update_function = [&](CoordRTheta& foot_rtheta,
+                                                  DVector<X_adv, Y_adv> const& advection_field,
+                                                  double dt) {
+                                CoordXY_adv const coord_xy
+                                        = logical_to_pseudo_physical_proxy(foot_rtheta);
+                                CoordXY_adv const foot_xy = coord_xy - dt * advection_field;
 
-                      // Treatment to conserve the C0 property of the advected function:
-                      unify_value_at_centre_pt(feet);
-                      // Test if the values are the same at the centre point
-                      is_unified(feet);
-                  };
+                                if (norm_inf(foot_xy - coord_centre) < 1e-15) {
+                                    foot_rtheta = CoordRTheta(0, 0);
+                                } else {
+                                    foot_rtheta = pseudo_physical_to_logical_proxy(foot_xy);
+                                    ddc::select<Theta>(foot_rtheta)
+                                            = ddcHelper::restrict_to_idx_range(
+                                                    ddc::select<Theta>(foot_rtheta),
+                                                    idx_range_theta);
+                                }
+                            };
 
-        TimeStepper time_stepper
-                = m_time_stepper_builder.template preallocate<TimeStepper>(get_idx_range(feet));
+                    feet(idx) = ddc::coordinate(idx_rtheta);
+                    // Solve the characteristic equation
+                    time_stepper.update(feet(idx), dt, dy, update_function);
+                });
 
-        // Solve the characteristic equation
-        time_stepper.update(ExecSpace(), feet, dt, dy, update_function);
-
+        // Treatment to conserve the C0 property of the advected function:
+        unify_value_at_centre_pt(feet);
+        // Test if the values are the same at the centre point
         is_unified(feet);
     }
 
