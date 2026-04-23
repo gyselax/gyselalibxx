@@ -57,8 +57,7 @@ TEST(EulerFixture, EulerOrder)
 
         for (int i(0); i < Nt; ++i) {
             euler
-                    .update(Kokkos::DefaultHostExecutionSpace(),
-                            get_field(vals),
+                    .update(get_field(vals),
                             dt,
                             [&](host_t<DField<IdxRangeX>> dy, host_t<DConstField<IdxRangeX>> y) {
                                 ddc::host_for_each(idx_range, [&](IdxX ix) {
@@ -128,16 +127,12 @@ void EulerOrderGPUTest()
                 KOKKOS_LAMBDA(IdxX ix) { vals(ix) = double(ix - IdxX(0)); });
 
         for (int i(0); i < Nt; ++i) {
-            euler
-                    .update(Kokkos::DefaultExecutionSpace(),
-                            vals,
-                            dt,
-                            [&](DField<IdxRangeX> dy, DConstField<IdxRangeX> y) {
-                                ddc::parallel_for_each(
-                                        Kokkos::DefaultExecutionSpace(),
-                                        idx_range,
-                                        KOKKOS_LAMBDA(IdxX ix) { dy(ix) = 5.0 * y(ix) - 3.0; });
-                            });
+            euler.update(vals, dt, [&](DField<IdxRangeX> dy, DConstField<IdxRangeX> y) {
+                ddc::parallel_for_each(
+                        Kokkos::DefaultExecutionSpace(),
+                        idx_range,
+                        KOKKOS_LAMBDA(IdxX ix) { dy(ix) = 5.0 * y(ix) - 3.0; });
+            });
         }
 
         auto vals_host = ddc::create_mirror_view_and_copy(vals);
