@@ -90,9 +90,7 @@ public:
             ValField y,
             double dt,
             std::function<void(DerivField, ValConstField)> dy_calculator,
-            std::function<void(ValField, DerivConstField, double)> y_update
-            = timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update)
-            const final
+            std::function<void(ValField, DerivConstField, double)> y_update) const final
     {
         if constexpr (timestepper_detail::FieldLike<FieldMem>) {
             DerivFieldMem k1_alloc("k1 (RK2::update)", m_idx_range);
@@ -141,13 +139,13 @@ public:
     template <
             class DYFunctor,
             class YFunctor
-            = decltype(timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update)>
+            = decltype(timestepper_detail::serial_y_updater<ValField, DerivConstField>::y_update)>
     KOKKOS_FUNCTION void update(
             ValField y,
             double dt,
             DYFunctor dy_calculator,
             YFunctor y_update
-            = timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update) const
+            = timestepper_detail::serial_y_updater<ValField, DerivConstField>::y_update) const
     {
         static_assert(!timestepper_detail::FieldLike<FieldMem>);
         FieldMem y_prime;
