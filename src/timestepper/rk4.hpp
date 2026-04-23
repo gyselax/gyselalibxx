@@ -91,7 +91,8 @@ public:
             double dt,
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update
-            = timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update) const final
+            = timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update)
+            const final
     {
         if constexpr (timestepper_detail::FieldLike<FieldMem>) {
             using element_type = typename timestepper_detail::ElementType<DerivField>::type;

@@ -87,7 +87,8 @@ public:
             double dt,
             std::function<void(DerivField, ValConstField)> dy_calculator,
             std::function<void(ValField, DerivConstField, double)> y_update
-            = timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update) const final
+            = timestepper_detail::default_y_updater<ValField, DerivConstField>::y_update)
+            const final
     {
         if constexpr (timestepper_detail::FieldLike<FieldMem>) {
             DerivFieldMem k1_alloc("k1 (Euler::update)", m_idx_range);
