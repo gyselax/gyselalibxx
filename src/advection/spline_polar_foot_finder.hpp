@@ -335,9 +335,16 @@ public:
                                         foot,
                                         get_const_field(ddcHelper::get<AdvDim2>(
                                                 advection_field_coefs)[idx_batch]));
+                        // Ensure coord is inside the domain as splines can't extrapolate
+                        // derivates (clamping)
+                        CoordRTheta advection_location_for_mapping(
+                                Kokkos::
+                                        min(ddc::select<R>(foot),
+                                            ddc::discrete_space<BSplinesR>().rmax()),
+                                ddc::select<Theta>(foot));
                         updated_advection_field = to_vector_space<VectorIndexSet<X_adv, Y_adv>>(
                                 pseudo_physical_to_physical,
-                                foot,
+                                advection_location_for_mapping,
                                 updated_advection_field_adv_space);
                     };
 
