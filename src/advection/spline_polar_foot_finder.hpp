@@ -335,13 +335,23 @@ public:
                                             min(ddc::select<R>(foot_rtheta),
                                                 ddc::discrete_space<BSplinesR>().rmax()),
                                     ddc::select<Theta>(foot_rtheta));
-                            DVector<X_pc, Y_pc> advection_field_xy
-                                    = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
-                                            pseudo_physical_to_adv_domain,
-                                            advection_location_for_mapping,
-                                            advection_field);
+                            using CoordJ =
+                                    typename PseudoPhysicalToAdvectionDomainMapping::CoordJacobian;
+                            DVector<X_pc, Y_pc> advection_field_xy;
+                            if constexpr (std::is_same_v<CoordRTheta, CoordJ>) {
+                                advection_field_xy = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+                                        pseudo_physical_to_adv_domain,
+                                        advection_location_for_mapping,
+                                        advection_field);
+                            }
                             CoordXY_pc const coord_xy
                                     = logical_to_pseudo_physical_proxy(foot_rtheta);
+                            if constexpr (!std::is_same_v<CoordRTheta, CoordJ>) {
+                                advection_field_xy = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+                                        pseudo_physical_to_adv_domain,
+                                        coord_xy,
+                                        advection_field);
+                            }
                             foot_xy = coord_xy - dt * advection_field_xy;
                         } else {
                             // TODO

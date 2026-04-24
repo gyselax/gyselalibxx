@@ -134,14 +134,14 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     SplinePolarFootFinder find_feet_from_rtheta(
             grid,
             time_stepper,
-            id_mapping,
+            to_physical_mapping.get_inverse_mapping(),
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
     SplinePolarFootFinder find_feet_from_xy(
             grid,
             time_stepper,
-            to_physical_mapping,
+            id_mapping,
             to_physical_mapping,
             builder,
             spline_evaluator_extrapol);
