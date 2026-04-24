@@ -89,16 +89,7 @@ public:
 
         // --------- Update y ------------
         // Calculation of step
-        // k_total = k1 + 2 * k2 + 2 * k3 + k4
-        timestepper_detail::assemble_helper<ExecSpace, DerivType>::assemble_k_total(
-                k_total,
-                KOKKOS_LAMBDA(std::array<DerivType, 4> k) {
-                    return k[0] + 2 * k[1] + 2 * k[2] + k[3];
-                },
-                k1,
-                k2,
-                k3,
-                k4);
+        k_total = k1 + 2 * k2 + 2 * k3 + k4;
 
         // Calculate y_{n+1} := y_n + (k1 + 2 * k2 + 2 * k3 + k4) * h/6
         y_update(y, k_total, dt / 6.);

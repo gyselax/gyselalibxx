@@ -634,12 +634,7 @@ public:
             dy_calculator(k_new, y);
 
             // Calculation of step
-            // k_total = k1 + k_new
-            timestepper_detail::assemble_helper&lt;ExecSpace, DerivType&gt;::assemble_k_total(
-                    k_total,
-                    KOKKOS_LAMBDA(std::array&lt;DerivType, 2&gt; k) { return k[0] + k[1]; },
-                    k1,
-                    k_new);
+            k_total = k1 + k_new;
 
             // Save the old characteristic feet
             timestepper_detail::copy_helper&lt;ValType&gt;::copy(y_old, y);
@@ -789,6 +784,21 @@ public:
                               typename TimeStepper::DerivFieldMem,
                               typename TimeStepper::exec_space&gt;&gt;);
         return TimeStepper(idx_range, m_max_counter, m_epsilon);
+    }
+
+    template &lt;class TimeStepper&gt;
+    auto preallocate() const
+    {
+        static_assert(
+                !timestepper_detail::FieldLike&lt;typename TimeStepper::ValFieldMem&gt;,
+                "An index range must be provided to preallocate for FieldLike timesteppers.");
+        static_assert(std::is_same_v&lt;
+                      TimeStepper,
+                      time_stepper_t&lt;
+                              typename TimeStepper::ValFieldMem,
+                              typename TimeStepper::DerivFieldMem,
+                              typename TimeStepper::exec_space&gt;&gt;);
+        return TimeStepper(m_max_counter, m_epsilon);
     }
 };
 

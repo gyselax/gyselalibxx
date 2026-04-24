@@ -703,17 +703,7 @@ KOKKOS_FUNCTION void fill_k_total(DerivFieldType k_total, Idx i, DVector&lt;DDim
 }
 
 template &lt;class ExecSpace, class DerivFieldType&gt;
-struct assemble_helper
-{
-    static_assert(!FieldLike&lt;DerivFieldType&gt;);
-
-    template &lt;class FuncType, class... T&gt;
-    static KOKKOS_FUNCTION void assemble_k_total(DerivFieldType&amp; k_total, FuncType func, T... k)
-    {
-        std::array&lt;DerivFieldType, sizeof...(T)&gt; k_arr({k...});
-        k_total = func(k_arr);
-    }
-};
+struct assemble_helper;
 
 template &lt;class ExecSpace, class ElementType, class IdxRangeType, class MemSpace&gt;
 struct assemble_helper&lt;ExecSpace, FieldMem&lt;ElementType, IdxRangeType, MemSpace&gt;&gt;

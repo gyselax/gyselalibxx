@@ -340,9 +340,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="163" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="167" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classSplinePolarFootFinder_1ad9757fb91afefddf169426ae59204f6b" prot="private" static="no">
-        <type>typename TimeStepperBuilder::template time_stepper_t&lt; FieldMem&lt; CoordRTheta, IdxRangeBatched, MemSpace &gt;, <ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMem</ref>&lt; IdxRangeBatched, VectorIndexSet&lt; X_adv, Y_adv &gt;, MemSpace &gt;, <ref refid="classSplinePolarFootFinder_1adc90a7a89091b5ae0dff71697666b57d" kindref="member">ExecSpace</ref> &gt;</type>
-        <definition>using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::TimeStepper =  typename TimeStepperBuilder::template time_stepper_t&lt; FieldMem&lt;CoordRTheta, IdxRangeBatched, MemSpace&gt;, DVectorFieldMem&lt;IdxRangeBatched, VectorIndexSet&lt;X_adv, Y_adv&gt;, MemSpace&gt;, ExecSpace&gt;</definition>
+      <memberdef kind="typedef" id="classSplinePolarFootFinder_1a1c4dab49e0ab378316a996e22a2d2287" prot="private" static="no">
+        <type>typename TimeStepperBuilder::template time_stepper_t&lt; CoordRTheta, <ref refid="classTensor" kindref="compound">DVector</ref>&lt; X_adv, Y_adv &gt; &gt;</type>
+        <definition>using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::TimeStepper =  typename TimeStepperBuilder:: template time_stepper_t&lt;CoordRTheta, DVector&lt;X_adv, Y_adv&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>TimeStepper</name>
         <qualifiedname>SplinePolarFootFinder::TimeStepper</qualifiedname>
@@ -352,7 +352,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="169" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="172" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="169" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="170" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
@@ -384,7 +384,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="188" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="188" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="186" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="186" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSplinePolarFootFinder_1a2039ffcb222e9318d4b65a78f66f30b4" prot="public" static="no">
         <type>ConstField&lt; CoordRTheta, <ref refid="classSplinePolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kindref="member">IdxRangeOperator</ref>, <ref refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" kindref="member">memory_space</ref> &gt;</type>
@@ -399,7 +399,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="194" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="194" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="192" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="192" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSplinePolarFootFinder_1adbf76668dde4d640ee4fe9a541904c32" prot="public" static="no">
         <type><ref refid="classVectorField" kindref="compound">DVectorField</ref>&lt; <ref refid="classSplinePolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kindref="member">IdxRangeOperator</ref>, PseudoCartesianBasis, <ref refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" kindref="member">memory_space</ref> &gt;</type>
@@ -414,7 +414,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="200" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="201" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="198" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="199" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSplinePolarFootFinder_1a473fb430dbdadb3e420074a6ef137811" prot="public" static="no">
         <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; <ref refid="classSplinePolarFootFinder_1a592e542edca9e79dd8786ce11327582a" kindref="member">IdxRangeOperator</ref>, PseudoCartesianBasis, <ref refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" kindref="member">memory_space</ref> &gt;</type>
@@ -429,7 +429,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="207" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="208" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="205" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="206" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSplinePolarFootFinder_1a5c95805a7ed946296977d376561395e7" prot="public" static="no">
         <type><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMem</ref>&lt; IdxRangeSplineBatched, PseudoCartesianBasis, <ref refid="classSplinePolarFootFinder_1a89a4b20b79c346032013798317f6b9a7" kindref="member">memory_space</ref> &gt;</type>
@@ -444,7 +444,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="214" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="215" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="212" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="213" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="classSplinePolarFootFinder_1a51e91cc4664a2e74009c09a44cbe61fe" prot="public" static="no">
         <type>GridRadial</type>
@@ -565,7 +565,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="174" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="174" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="172" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="172" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSplinePolarFootFinder_1a9b088c0e7e7cd0d837d38718cfdb6c9c" prot="private" static="no" mutable="no">
         <type>LogicalToPseudoPhysicalMapping</type>
@@ -579,7 +579,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="176" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="176" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="174" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="174" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSplinePolarFootFinder_1aab1186eff57dce5e9ef175fe6d16e351" prot="private" static="no" mutable="no">
         <type>PseudoPhysicalToLogicalMapping</type>
@@ -593,7 +593,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="177" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="177" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="175" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="175" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSplinePolarFootFinder_1a56d2f3dabe971daf5e8de82417d1cbe9" prot="private" static="no" mutable="no">
         <type><ref refid="classCombinedMapping" kindref="compound">PseudoPhysicalToPhysicalMapping</ref></type>
@@ -607,7 +607,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="178" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="178" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="176" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="176" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSplinePolarFootFinder_1a2070c2208ecf9c2426269db6ec8f7254" prot="private" static="no" mutable="no">
         <type>SplineRThetaBuilderAdvection const  &amp;</type>
@@ -621,7 +621,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="180" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="180" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="178" column="40" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="178" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classSplinePolarFootFinder_1a042eaa82d42cf9060fa4029cff1bfd99" prot="private" static="no" mutable="no">
         <type>SplineRThetaEvaluatorAdvection const  &amp;</type>
@@ -635,7 +635,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="181" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="181" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="179" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="179" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -741,7 +741,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="242" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="242" bodyend="260"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="240" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="240" bodyend="258"/>
       </memberdef>
       <memberdef kind="function" id="classSplinePolarFootFinder_1acd4731e29b30f28ded8b3e9a98b995ee" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="non-virtual">
         <type>void</type>
@@ -795,7 +795,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="278" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="278" bodyend="364"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="276" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="276" bodyend="377"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
@@ -832,7 +832,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="381" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="381" bodyend="407"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="394" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="394" bodyend="420"/>
       </memberdef>
       <memberdef kind="function" id="classSplinePolarFootFinder_1ac98925d9ddc5849677e7265ebef2a820" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -867,7 +867,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="424" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="424" bodyend="444"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="437" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="437" bodyend="457"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -945,7 +945,7 @@
         </childnode>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="62" bodyend="445"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="62" bodyend="458"/>
     <listofallmembers>
       <member refid="classSplinePolarFootFinder_1aea7bc16fdc724a4d2cee1076dc58f95d" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>base_type</name></member>
       <member refid="classSplinePolarFootFinder_1ac4cbe709d1cb35200bcc9966bcad5026" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>BSplinesR</name></member>
@@ -988,7 +988,7 @@
       <member refid="classSplinePolarFootFinder_1ace88cae6d3bedc6053d79f8b1489566c" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>R</name></member>
       <member refid="classSplinePolarFootFinder_1a9253aaee6ab75941419a5020398757f2" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>SplinePolarFootFinder</name></member>
       <member refid="classSplinePolarFootFinder_1a62a4d72ada8c3cad0dc33f0637568793" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>Theta</name></member>
-      <member refid="classSplinePolarFootFinder_1ad9757fb91afefddf169426ae59204f6b" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>TimeStepper</name></member>
+      <member refid="classSplinePolarFootFinder_1a1c4dab49e0ab378316a996e22a2d2287" prot="private" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>TimeStepper</name></member>
       <member refid="classSplinePolarFootFinder_1ac98925d9ddc5849677e7265ebef2a820" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>unify_value_at_centre_pt</name></member>
       <member refid="classSplinePolarFootFinder_1a8a0925a2865c4685111cc1d5ff7bff4c" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>VectorIndexSetAdvectionDims</name></member>
       <member refid="classSplinePolarFootFinder_1a5c95805a7ed946296977d376561395e7" prot="public" virt="non-virtual"><scope>SplinePolarFootFinder</scope><name>VectorSplineCoeffsMem</name></member>

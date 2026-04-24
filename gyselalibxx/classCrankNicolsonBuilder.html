@@ -596,7 +596,11 @@
 </tr>
 <tr>
 <td style="text-align: right;">auto</td>
-<td style="text-align: left;"><a href="#function-preallocate"><strong>preallocate</strong></a> (typename TimeStepper::IdxRange const idx_range) const<br><em>Allocate the TimeStepper object.</em></td>
+<td style="text-align: left;"><a href="#function-preallocate-12"><strong>preallocate</strong></a> (typename TimeStepper::IdxRange const idx_range) const<br><em>Allocate the TimeStepper object.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">auto</td>
+<td style="text-align: left;"><a href="#function-preallocate-22"><strong>preallocate</strong></a> () const<br><em>Allocate the TimeStepper object for scalar (non-FieldLike) types.</em></td>
 </tr>
 </tbody>
 </table>
@@ -623,7 +627,7 @@
 </ul>
 <hr>
 
-<h3 id="function-preallocate">function preallocate</h3>
+<h3 id="function-preallocate-12">function preallocate [1/2]</h3>
 <p><em>Allocate the TimeStepper object.</em> </p>
 <pre><code class="language-C++">template&lt;class TimeStepper&gt;
 inline auto CrankNicolsonBuilder::preallocate (
@@ -637,6 +641,17 @@ inline auto CrankNicolsonBuilder::preallocate (
 <p><strong>Parameters:</strong></p>
 <ul>
 <li><code>idx_range</code> The index range on which the operator will act (and allocate memory). </li>
+</ul>
+<hr>
+
+<h3 id="function-preallocate-22">function preallocate [2/2]</h3>
+<p><em>Allocate the TimeStepper object for scalar (non-FieldLike) types.</em> </p>
+<pre><code class="language-C++">template&lt;class TimeStepper&gt;
+inline auto CrankNicolsonBuilder::preallocate () const
+</code></pre>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>ChosenTimeStepper</code> The type of the TimeStepper to be constructed (obtained from time_stepper_t). </li>
 </ul>
 <hr>
 

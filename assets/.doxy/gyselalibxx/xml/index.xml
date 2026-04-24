@@ -609,6 +609,7 @@
     <member refid="classCrankNicolsonBuilder_1a0a2eebd9e1569e4ac6c8b276b91724ad" kind="variable"><name>m_epsilon</name></member>
     <member refid="classCrankNicolsonBuilder_1a3a21ef1dbfdd98ea8b0e1d17f40a2a3e" kind="function"><name>CrankNicolsonBuilder</name></member>
     <member refid="classCrankNicolsonBuilder_1a24223feb261747e262c51a08ce2a834a" kind="function"><name>preallocate</name></member>
+    <member refid="classCrankNicolsonBuilder_1afdca51e923308cb5583bcc6f91347392" kind="function"><name>preallocate</name></member>
   </compound>
   <compound refid="classCurl" kind="class"><name>Curl</name>
     <member refid="classCurl_1a97f67a8c712a875caa7c22a14c144866" kind="typedef"><name>BasisSpatial</name></member>
@@ -2966,7 +2967,7 @@
     <member refid="classSplinePolarFootFinder_1ac4cbe709d1cb35200bcc9966bcad5026" kind="typedef"><name>BSplinesR</name></member>
     <member refid="classSplinePolarFootFinder_1ae5abd972e6dd0a0877f48234354d85d4" kind="typedef"><name>BSplinesTheta</name></member>
     <member refid="classSplinePolarFootFinder_1a30d3c2a5477eebd67cf96d90d71fc2b3" kind="typedef"><name>IdxRangeSplineBatched</name></member>
-    <member refid="classSplinePolarFootFinder_1ad9757fb91afefddf169426ae59204f6b" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classSplinePolarFootFinder_1a1c4dab49e0ab378316a996e22a2d2287" kind="typedef"><name>TimeStepper</name></member>
     <member refid="classSplinePolarFootFinder_1adc90a7a89091b5ae0dff71697666b57d" kind="typedef"><name>ExecSpace</name></member>
     <member refid="classSplinePolarFootFinder_1ad07796a01c78348d540d9f80a404d1dc" kind="typedef"><name>CFieldFeet</name></member>
     <member refid="classSplinePolarFootFinder_1a2039ffcb222e9318d4b65a78f66f30b4" kind="typedef"><name>CConstFieldFeet</name></member>

@@ -58,7 +58,8 @@ _A class to indicate that a Crank-Nicolson time stepper should be constructed fo
 | Type | Name |
 | ---: | :--- |
 |   | [**CrankNicolsonBuilder**](#function-cranknicolsonbuilder) (int const counter=20, double const epsilon=1e-12) <br>_A constructor for the_ [_**CrankNicolsonBuilder**_](classCrankNicolsonBuilder.md) _._ |
-|  auto | [**preallocate**](#function-preallocate) (typename TimeStepper::IdxRange const idx\_range) const<br>_Allocate the TimeStepper object._  |
+|  auto | [**preallocate**](#function-preallocate-12) (typename TimeStepper::IdxRange const idx\_range) const<br>_Allocate the TimeStepper object._  |
+|  auto | [**preallocate**](#function-preallocate-22) () const<br>_Allocate the TimeStepper object for scalar (non-FieldLike) types._  |
 
 
 
@@ -147,7 +148,7 @@ inline explicit CrankNicolsonBuilder::CrankNicolsonBuilder (
 
 
 
-### function preallocate 
+### function preallocate [1/2]
 
 _Allocate the TimeStepper object._ 
 ```C++
@@ -172,6 +173,32 @@ inline auto CrankNicolsonBuilder::preallocate (
 
 
 * `idx_range` The index range on which the operator will act (and allocate memory). 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function preallocate [2/2]
+
+_Allocate the TimeStepper object for scalar (non-FieldLike) types._ 
+```C++
+template<class TimeStepper>
+inline auto CrankNicolsonBuilder::preallocate () const
+```
+
+
+
+
+
+**Template parameters:**
+
+
+* `ChosenTimeStepper` The type of the TimeStepper to be constructed (obtained from time\_stepper\_t). 
 
 
 
