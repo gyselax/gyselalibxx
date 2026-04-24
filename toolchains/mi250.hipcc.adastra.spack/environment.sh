@@ -32,7 +32,8 @@ spack debug report
 #     eval "$(spack env deactivate --sh)"
 # }
 
-spack --env gyselalibxx-spack-environment repo update
+# Problematic on Adastra, git repositories are shared between users.
+# spack --env gyselalibxx-spack-environment repo update
 
 eval -- "$(
     spack \
