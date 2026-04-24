@@ -97,12 +97,7 @@ public:
 
         // --------- Calculate k3 ------------
         // Calculation of step
-        // k_total = 2 * k2 - k1
-        timestepper_detail::assemble_helper<ExecSpace, DerivType>::assemble_k_total(
-                k_total,
-                KOKKOS_LAMBDA(std::array<DerivType, 2> k) { return 2 * k[1] - k[0]; },
-                k1,
-                k2);
+        k_total = 2 * k2 - k1;
 
         // Collect initial conditions
         timestepper_detail::copy_helper<ValType>::copy(y_prime, y);
@@ -115,13 +110,7 @@ public:
 
         // --------- Update y ------------
         // Calculation of step
-        // k_total = k1 + 4 * k2 + k3
-        timestepper_detail::assemble_helper<ExecSpace, DerivType>::assemble_k_total(
-                k_total,
-                KOKKOS_LAMBDA(std::array<DerivType, 3> k) { return k[0] + 4 * k[1] + k[2]; },
-                k1,
-                k2,
-                k3);
+        k_total = k1 + 4 * k2 + k3;
 
         // Calculate y_{n+1} := y_n + (k1 + 4 * k2 + k3) * h/6
         y_update(y, k_total, dt / 6.);
