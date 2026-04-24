@@ -112,12 +112,7 @@ public:
             dy_calculator(k_new, y);
 
             // Calculation of step
-            // k_total = k1 + k_new
-            timestepper_detail::assemble_helper<ExecSpace, DerivType>::assemble_k_total(
-                    k_total,
-                    KOKKOS_LAMBDA(std::array<DerivType, 2> k) { return k[0] + k[1]; },
-                    k1,
-                    k_new);
+            k_total = k1 + k_new;
 
             // Save the old characteristic feet
             timestepper_detail::copy_helper<ValType>::copy(y_old, y);
