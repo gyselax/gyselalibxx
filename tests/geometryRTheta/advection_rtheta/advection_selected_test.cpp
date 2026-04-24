@@ -167,6 +167,7 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE MAPPING AND THE ADVECTION DOMAIN.
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
+    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
     CircularToCartesian<R, Theta, X, Y> to_physical_analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping_host;
@@ -182,6 +183,7 @@ int main(int argc, char** argv)
     double const czarny_epsilon = 1.4;
 
 #if defined(CZARNY_MAPPING_PHYSICAL)
+    using LogicalToPseudoPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping_host(czarny_e, czarny_epsilon);
@@ -193,6 +195,7 @@ int main(int argc, char** argv)
     key += "czarny_physical";
 
 #elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
+    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping_host(czarny_e, czarny_epsilon);
@@ -229,6 +232,7 @@ int main(int argc, char** argv)
                     to_physical_analytical_mapping,
                     builder,
                     spline_evaluator_extrapol);
+    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "DISCRETE";
@@ -287,10 +291,18 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
+    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
+    using PseudoPhysicalToPhysicalMapping
+            = CombinedMapping<decltype(to_physical_mapping), PseudoCartesianToCircular>;
+    PseudoPhysicalToPhysicalMapping
+            pseudo_physical_to_physical(to_physical_mapping, PseudoCartesianToCircular(), 1e-12);
+
     SplinePolarFootFinder const foot_finder(
             grid,
             time_stepper,
-            to_physical_mapping,
+            pseudo_physical_to_physical,
             logical_to_pseudo_cart_mapping,
             builder,
             spline_evaluator_extrapol);

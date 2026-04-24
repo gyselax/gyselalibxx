@@ -28,6 +28,7 @@
 #include "discrete_poloidal_cs_spline_mapping_builder.hpp"
 #include "euler.hpp"
 #include "geometry_r_theta.hpp"
+#include "identity_coordinate_change.hpp"
 #include "inverse_jacobian_matrix.hpp"
 #include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"
@@ -39,7 +40,6 @@
 #include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
-
 
 
 namespace {
@@ -129,7 +129,16 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
             theta_extrapolation_rule);
 
     RK3Builder const time_stepper;
-    SplinePolarFootFinder find_feet(
+    using CartesianBasis = VectorIndexSet<X, Y>;
+    IdentityCoordinateChange<CartesianBasis, CartesianBasis> id_mapping;
+    SplinePolarFootFinder find_feet_from_rtheta(
+            grid,
+            time_stepper,
+            id_mapping,
+            to_physical_mapping,
+            builder,
+            spline_evaluator_extrapol);
+    SplinePolarFootFinder find_feet_from_xy(
             grid,
             time_stepper,
             to_physical_mapping,
@@ -137,7 +146,16 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
+    BslAdvectionPolar advection_operator_from_rtheta(
+            builder,
+            spline_evaluator,
+            find_feet_from_rtheta,
+            to_physical_mapping);
+    BslAdvectionPolar advection_operator_from_xy(
+            builder,
+            spline_evaluator,
+            find_feet_from_xy,
+            to_physical_mapping);
 
     // --- Advection field finder ---------------------------------------------------------------------
     AdvectionFieldFinder advection_field_computer(to_physical_mapping);
@@ -232,12 +250,12 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     // ================================================================================================
     for (int iter(0); iter < iter_nb; ++iter) {
         // --- operator() 2: compute a value for the O-point from the other values.
-        advection_operator(
+        advection_operator_from_rtheta(
                 get_field(density_rtheta_averaged_device),
                 get_const_field(advection_field_rtheta_device),
                 dt);
         // --- operator() 3: directly give the advection field on (x,y). No extra computations.
-        advection_operator(
+        advection_operator_from_xy(
                 get_field(density_xy_device),
                 get_const_field(advection_field_xy_device),
                 dt);

@@ -181,6 +181,9 @@ void run_simulations_with_methods(
     using X_adv = typename std::remove_const_t<std::remove_reference_t<decltype(sim)>>::X_adv;
     using Y_adv = typename std::remove_const_t<std::remove_reference_t<decltype(sim)>>::Y_adv;
 
+    using LogicalToPhysicalMapping = typename std::remove_const_t<
+            std::remove_reference_t<decltype(sim.to_physical_mapping)>>;
+
     Numerics<X_adv, Y_adv> methods(num_params);
     auto& num = std::get<i_feet>(methods.numerics);
 
@@ -194,10 +197,18 @@ void run_simulations_with_methods(
                   << to_lower(num.method_name) << "-";
     std::string output_stem = output_stream.str();
 
+    using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
+    using PseudoPhysicalToPhysicalMapping
+            = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
+    PseudoPhysicalToPhysicalMapping pseudo_physical_to_physical(
+            sim.to_physical_mapping,
+            PseudoCartesianToCircular(),
+            1e-12);
+
     SplinePolarFootFinder const foot_finder(
             params.grid,
             num.time_stepper,
-            sim.to_physical_mapping,
+            pseudo_physical_to_physical,
             sim.analytical_to_pseudo_physical_mapping,
             params.advection_builder,
             params.advection_evaluator);

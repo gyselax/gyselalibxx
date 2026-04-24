@@ -277,10 +277,18 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     TimeStepperBuilder time_stepper;
     AdvectionField advection_field = init_field<AdvectionField>();
 
+    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
+    using PseudoPhysicalToPhysicalMapping
+            = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
+    PseudoPhysicalToPhysicalMapping
+            pseudo_physical_to_physical(to_physical, PseudoCartesianToCircular(), 1e-12);
+
     SplinePolarFootFinder const batched_foot_finder(
             batched_idx_range,
             time_stepper,
-            to_physical,
+            pseudo_physical_to_physical,
             to_pseudo_physical,
             builder,
             evaluator);
