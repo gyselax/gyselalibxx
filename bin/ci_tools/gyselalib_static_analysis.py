@@ -272,6 +272,10 @@ def search_for_unnecessary_auto(file):
                 start = end + 1
                 end = next(i for i,v in enumerate(config.data[start:], start) if v['str'] == ';')
 
+            if config.data[start+2]['str'] == '[':
+                # Allow lambdas to be saved to auto
+                continue
+
             if any(v['str'] == 'gko' for v in config.data[start:end]) and any(v['str'] == 'create' for v in config.data[start:end]):
                 continue
 
