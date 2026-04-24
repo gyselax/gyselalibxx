@@ -74,7 +74,7 @@ void host_for_each_block_impl(
     }
 }
 
-template <class Support, std::size_t N, class Functor, class... DDoms1d>
+template <class Support, std::size_t N, class Functor>
 void host_for_each_block(
         Support const& domain,
         std::array<ddc::DiscreteVectorElement, N> const& nb_blocks_per_dim,
@@ -85,7 +85,7 @@ void host_for_each_block(
 
 } // namespace detail
 
-template <class Support, class Functor, class... DDoms1d>
+template <class Support, class Functor>
 void host_for_each_block(Support const& domain, std::size_t nb_blocks, Functor const& f) noexcept
 {
     std::array<ddc::DiscreteVectorElement, Support::rank()> nb_blocks_per_dim {};
