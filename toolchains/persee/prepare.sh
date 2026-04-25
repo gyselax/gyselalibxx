@@ -27,9 +27,6 @@ fi
 
 spack config --scope site add 'config:install_tree:projections:all:"{compiler.name}-{compiler.version}/{name}-{version}-{hash}"'
 
-spack config --scope site add 'packages:all:permissions:read:world'
-spack config --scope site add 'packages:all:permissions:write:group'
-spack config --scope site add 'packages:all:permissions:group:gysela'
 spack config --scope site add 'packages:all:providers:blas:[openblas]'
 spack config --scope site add 'packages:all:providers:lapack:[openblas]'
 spack config --scope site add 'packages:git:version:[":2.46"]'

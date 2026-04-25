@@ -53,6 +53,10 @@ spack:
       exclude: ['gcc-runtime']
   packages:
     all:
+      permissions:
+        group: gysela
+        read: world
+        write: group
       variants: ~fortran ~mpi +openmp cxxstd=17
     c:
       require: gcc@13
