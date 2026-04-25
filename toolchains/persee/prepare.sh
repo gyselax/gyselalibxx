@@ -25,12 +25,6 @@ if [ ! -d "$SPACK_PATH" ]; then
 fi
 . $SPACK_PATH/share/spack/setup-env.sh
 
-spack config --scope site add 'config:install_tree:projections:all:"{compiler.name}-{compiler.version}/{name}-{version}-{hash}"'
-
-spack config --scope site add 'packages:all:providers:blas:[openblas]'
-spack config --scope site add 'packages:all:providers:lapack:[openblas]'
-spack config --scope site add 'packages:git:version:[":2.46"]'
-
 module load gcc/13
 spack compiler find --scope site ${GCC_HOME}
 module purge
