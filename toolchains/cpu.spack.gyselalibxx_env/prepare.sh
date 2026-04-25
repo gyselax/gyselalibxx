@@ -25,10 +25,7 @@ if [ -d "${SPACK_PATH}" ]; then
         exit 1
     fi
 else
-    # Download spack
-    wget https://github.com/spack/spack/releases/download/v1.1.0/spack-1.1.0.tar.gz
-    tar -xf spack-1.1.0.tar.gz
-    rm spack-1.1.0.tar.gz
+    git clone --branch v1.1.0 --depth 1 https://github.com/spack/spack.git $SPACK_PATH
 fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )

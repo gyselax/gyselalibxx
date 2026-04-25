@@ -20,6 +20,7 @@ set -eu
 
 cd -- "${TOOLCHAIN_ROOT_DIRECTORY}"
 
+export SPACK_PATH=$ALL_CCFRWORK/spack
 export SPACK_USER_PREFIX=$ALL_CCFRWORK/spack-user-install
 export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
 export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
@@ -29,8 +30,10 @@ export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
 
 module purge
 
-git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $ALL_CCFRWORK/spack || true
-. $ALL_CCFRWORK/spack/share/spack/setup-env.sh
+if [ ! -d "$SPACK_PATH" ]; then
+    git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $SPACK_PATH
+fi
+. $SPACK_PATH/share/spack/setup-env.sh
 
 # Bootstrap must happen before getting on a compute node
 spack bootstrap now

@@ -9,13 +9,14 @@ fi
 
 module purge
 
+export SPACK_PATH=$HOME/spack
 export SPACK_USER_PREFIX=$HOME/spack-user-install
 export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
 export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
 
 # Avoid too many temporary files in the Spack installation tree
 export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
-. $HOME/spack/share/spack/setup-env.sh
+. $SPACK_PATH/share/spack/setup-env.sh
 
 spack --env gyselalibxx-spack-environment repo update
 

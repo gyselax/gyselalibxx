@@ -17,17 +17,12 @@ module purge
 
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 
-SPACK_VERSION="1.1.1"
+export SPACK_PATH=/data/gyselarunner/spack
 
-export SPACK_PREFIX=/data/gyselarunner/spack-${SPACK_VERSION}
-
-cd /tmp
-wget https://github.com/spack/spack/releases/download/v${SPACK_VERSION}/spack-${SPACK_VERSION}.tar.gz
-tar -xvf spack-${SPACK_VERSION}.tar.gz
-rm spack-${SPACK_VERSION}.tar.gz
-mv /tmp/spack-${SPACK_VERSION} ${SPACK_PREFIX}
-
-. ${SPACK_PREFIX}/share/spack/setup-env.sh
+if [ ! -d "$SPACK_PATH" ]; then
+    git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $SPACK_PATH
+fi
+. $SPACK_PATH/share/spack/setup-env.sh
 
 spack config --scope site add 'config:install_tree:projections:all:"{compiler.name}-{compiler.version}/{name}-{version}-{hash}"'
 spack config --scope site add 'config:connect_timeout:60'

@@ -9,13 +9,14 @@ fi
 
 module purge
 
+export SPACK_PATH=$ALL_CCFRWORK/spack
 export SPACK_USER_PREFIX=$ALL_CCFRWORK/spack-user-install
 export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
 export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
 
 # Avoid too many temporary files in the Spack installation tree
 export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
-. $ALL_CCFRWORK/spack/share/spack/setup-env.sh
+. $SPACK_PATH/share/spack/setup-env.sh
 
 spack --env gyselalibxx-spack-environment repo update
 

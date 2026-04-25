@@ -12,6 +12,7 @@ set -eu
 
 cd -- "${TOOLCHAIN_ROOT_DIRECTORY}"
 
+export SPACK_PATH=$HOME/spack
 export SPACK_USER_PREFIX=$HOME/spack-user-install
 export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
 export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
@@ -21,8 +22,10 @@ export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
 
 module purge
 
-git clone --branch v1.1.0 --depth 1 https://github.com/spack/spack.git $HOME/spack || true
-. $HOME/spack/share/spack/setup-env.sh
+if [ ! -d "$SPACK_PATH" ]; then
+    git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $SPACK_PATH
+fi
+. $SPACK_PATH/share/spack/setup-env.sh
 
 spack env remove --yes-to-all gyselalibxx-spack-environment
 spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyselalibxx-spack-environment.yaml"

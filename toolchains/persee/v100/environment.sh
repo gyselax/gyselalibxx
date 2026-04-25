@@ -9,11 +9,13 @@ fi
 
 module purge
 
+export SPACK_PATH=/data/gyselarunner/spack
+
 if command -v spack >/dev/null 2>&1
 then
     spack env deactivate
 else
-    . /data/gyselarunner/spack-1.1.1/share/spack/setup-env.sh
+    . $SPACK_PATH/share/spack/setup-env.sh
 fi
 
 spack --env gyselalibxx-env-omp-cuda repo update

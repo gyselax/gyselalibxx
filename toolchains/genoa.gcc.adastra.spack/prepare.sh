@@ -12,19 +12,20 @@ set -eu
 
 cd -- "${TOOLCHAIN_ROOT_DIRECTORY}"
 
-SPACK_USER_VERSION="spack-user-5.0.0"
-export SPACK_USER_PREFIX="${ALL_CCFRWORK}/gyselalibxx-spack-install-GENOA/Configuration.${SPACK_USER_VERSION}"
-export SPACK_USER_CACHE_PATH="${SPACK_USER_PREFIX}/cache"
+export SPACK_PATH=$ALL_CCFRWORK/spack
+export SPACK_USER_PREFIX=$ALL_CCFRWORK/gyselalibxx-spack-install-GENOA
+export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
+export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
 
 # Avoid too many temporary files in the Spack installation tree
 export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
 
 module purge
-module load develop "${SPACK_USER_VERSION}"
-module list
 
-which spack
-spack debug report
+if [ ! -d "$SPACK_PATH" ]; then
+    git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $SPACK_PATH
+fi
+. $SPACK_PATH/share/spack/setup-env.sh
 
 cp "${TOOLCHAIN_ROOT_DIRECTORY}/packages.yaml" "${SPACK_USER_CONFIG_PATH}"
 
