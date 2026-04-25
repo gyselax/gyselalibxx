@@ -1,6 +1,7 @@
 spack:
   concretizer:
     unify: true
+    reuse: false
   definitions:
   - packages:
     - 'cmake@3.30'

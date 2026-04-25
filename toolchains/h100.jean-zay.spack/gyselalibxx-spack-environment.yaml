@@ -49,6 +49,7 @@ spack:
       destination: $ALL_CCFRWORK/spack-packages-2025.11.0
   concretizer:
     unify: true
+    reuse: false
   packages:
     all:
       permissions:

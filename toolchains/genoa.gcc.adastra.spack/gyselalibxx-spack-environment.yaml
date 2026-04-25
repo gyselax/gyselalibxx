@@ -50,8 +50,6 @@ spack:
   concretizer:
     unify: true
     reuse: false
-    duplicates:
-      strategy: none
   packages:
     all:
       permissions:

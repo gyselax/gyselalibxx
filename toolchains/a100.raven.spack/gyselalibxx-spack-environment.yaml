@@ -49,6 +49,7 @@ spack:
       destination: $HOME/spack-packages-2025.11.0
   concretizer:
     unify: true
+    reuse: false
   packages:
     all:
       permissions:

@@ -45,12 +45,12 @@ echo "Preparing the Spack environment..."
 
 spack --env gyselalibxx-env-omp-cuda external find cuda
 spack --env gyselalibxx-env-omp-cuda repo update
-spack --env gyselalibxx-env-omp-cuda concretize --fresh --force
+spack --env gyselalibxx-env-omp-cuda concretize --force
 spack --env gyselalibxx-env-omp-cuda install --concurrent-packages 2 --jobs 16
 
 spack env remove --yes-to-all gyselalibxx-env-omp
 spack env create gyselalibxx-env-omp "${TOOLCHAIN_ROOT_DIRECTORY}/xeon/gyselalibxx-spack-environment.yaml"
 
 spack --env gyselalibxx-env-omp repo update
-spack --env gyselalibxx-env-omp concretize --fresh --force
+spack --env gyselalibxx-env-omp concretize --force
 spack --env gyselalibxx-env-omp install --concurrent-packages 2 --jobs 16
