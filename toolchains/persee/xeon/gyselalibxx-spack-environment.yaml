@@ -7,7 +7,7 @@ spack:
     - 'googletest +gmock'
     - 'kokkos@4.6:4 +openmp'
     - 'kokkos-kernels@4.6:4'
-    - 'kokkos-tools'
+    - 'kokkos-tools@git.e222e7b6cc7faae5d096e3520d95ca832fb9f889'
     - 'koliop@0.1.2:0.1'
     - 'lapack'
     - 'mpi'

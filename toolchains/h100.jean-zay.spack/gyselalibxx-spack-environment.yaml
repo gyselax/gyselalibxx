@@ -7,7 +7,7 @@ spack:
     - googletest +gmock
     - kokkos@4.7 ~openmp +cuda +cuda_relocatable_device_code +cuda_constexpr cuda_arch=90
     - kokkos-kernels@4.7 ~shared
-    - kokkos-tools
+    - kokkos-tools@git.e222e7b6cc7faae5d096e3520d95ca832fb9f889
     - 'koliop@0.1.2:0.1'
     - lapack
     - mpi
