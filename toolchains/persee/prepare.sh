@@ -25,16 +25,11 @@ if [ ! -d "$SPACK_PATH" ]; then
 fi
 . $SPACK_PATH/share/spack/setup-env.sh
 
-module load gcc/13
-spack compiler find --scope site ${GCC_HOME}
-module purge
-
 spack env remove --yes-to-all gyselalibxx-env-omp-cuda
 spack env create gyselalibxx-env-omp-cuda "${TOOLCHAIN_ROOT_DIRECTORY}/v100/gyselalibxx-spack-environment.yaml"
 
 echo "Preparing the Spack environment..."
 
-spack --env gyselalibxx-env-omp-cuda external find cuda
 spack --env gyselalibxx-env-omp-cuda repo update
 spack --env gyselalibxx-env-omp-cuda concretize --force
 spack --env gyselalibxx-env-omp-cuda install --concurrent-packages 2 --jobs 16

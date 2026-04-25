@@ -60,9 +60,18 @@ spack:
       require: ~cuda
       variants: ~fortran ~mpi +openmp cxxstd=17
     c:
-      require: gcc@13
+      require: gcc@13.2.0
     cxx:
-      require: gcc@13
+      require: gcc@13.2.0
+    gcc:
+      externals:
+      - spec: gcc@13.2.0 languages:='c,c++,fortran'
+        prefix: /Applications/compilers/gcc/13.2.0
+        extra_attributes:
+          compilers:
+            c: /Applications/compilers/gcc/13.2.0/bin/gcc
+            cxx: /Applications/compilers/gcc/13.2.0/bin/g++
+            fortran: /Applications/compilers/gcc/13.2.0/bin/gfortran
     kokkos-fft:
       require: '@0.3 host_backend=fftw-openmp'
     lapack:
