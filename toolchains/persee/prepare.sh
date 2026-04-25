@@ -17,10 +17,11 @@ module purge
 
 TOOLCHAIN_ROOT_DIRECTORY="$(dirname -- "$(readlink -f -- "${BASH_SOURCE[0]:-${0}}")")"
 
+export SPACK_VERSION=1.1.1
 export SPACK_PATH=/data/gyselarunner/spack
 
 if [ ! -d "$SPACK_PATH" ]; then
-    git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $SPACK_PATH
+    git clone --branch "v${SPACK_VERSION}" --depth 1 https://github.com/spack/spack.git $SPACK_PATH
 fi
 . $SPACK_PATH/share/spack/setup-env.sh
 

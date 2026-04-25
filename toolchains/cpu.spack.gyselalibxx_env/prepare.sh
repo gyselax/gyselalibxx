@@ -8,7 +8,8 @@ fi
 
 # set paths for spack to not use home ~/.spack folder
 CURRENT_DIR=$(pwd)
-export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
+export SPACK_VERSION=1.1.1
+export SPACK_PATH=${CURRENT_DIR}/spack
 export SPACK_USER_CONFIG_PATH="${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="${SPACK_PATH}/user_cache"
@@ -25,7 +26,7 @@ if [ -d "${SPACK_PATH}" ]; then
         exit 1
     fi
 else
-    git clone --branch v1.1.0 --depth 1 https://github.com/spack/spack.git $SPACK_PATH
+    git clone --branch "v${SPACK_VERSION}" --depth 1 https://github.com/spack/spack.git $SPACK_PATH
 fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -55,7 +56,7 @@ else
   COMPILER='gcc@11:'
 fi
 
-spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.1.0.yaml
+spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-spack-environment.yaml
 spack --env gyselalibxx-env config --scope env:gyselalibxx-env add packages:all:target:[$(spack arch --family --target)]
 spack --env gyselalibxx-env repo update
 spack --env gyselalibxx-env install --jobs 2
@@ -71,7 +72,7 @@ then
     exit 1
 fi
 
-export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
+export SPACK_PATH=${CURRENT_DIR}/spack
 export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"

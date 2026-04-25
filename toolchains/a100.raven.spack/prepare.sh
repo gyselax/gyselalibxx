@@ -12,6 +12,7 @@ set -eu
 
 cd -- "${TOOLCHAIN_ROOT_DIRECTORY}"
 
+export SPACK_VERSION=1.1.1
 export SPACK_PATH=$HOME/spack
 export SPACK_USER_PREFIX=$HOME/spack-user-install
 export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
@@ -23,7 +24,7 @@ export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
 module purge
 
 if [ ! -d "$SPACK_PATH" ]; then
-    git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $SPACK_PATH
+    git clone --branch "v${SPACK_VERSION}" --depth 1 https://github.com/spack/spack.git $SPACK_PATH
 fi
 . $SPACK_PATH/share/spack/setup-env.sh
 
