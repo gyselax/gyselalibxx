@@ -61,7 +61,7 @@ spack:
     cxx:
       require: gcc@13.2.1
     kokkos-fft:
-      require: '@0.4 host_backend=fftw-openmp'
+      require: 'host_backend=fftw-openmp'
     lapack:
       require: openblas
     mpi:

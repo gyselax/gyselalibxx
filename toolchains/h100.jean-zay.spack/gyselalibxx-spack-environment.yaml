@@ -75,7 +75,7 @@ spack:
               cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/g++
               fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gfortran
     kokkos-fft:
-      require: '@0.4 host_backend=fftw-serial device_backend=cufft'
+      require: 'host_backend=fftw-serial device_backend=cufft'
     lapack:
       require: openblas
     mpi:

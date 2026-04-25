@@ -51,7 +51,7 @@ spack:
     blas:
       require: openblas@0.3
     kokkos-fft:
-      require: '@0.4 host_backend=fftw-serial'
+      require: 'host_backend=fftw-serial'
     lapack:
       require: openblas@0.3
     mpi:

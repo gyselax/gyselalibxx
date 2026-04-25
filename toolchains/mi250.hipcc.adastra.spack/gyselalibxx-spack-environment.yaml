@@ -61,7 +61,7 @@ spack:
     cxx:
       require: gcc@13.2.1
     kokkos-fft:
-      require: '@0.4 host_backend=fftw-serial device_backend=hipfft'
+      require: 'host_backend=fftw-serial device_backend=hipfft'
     lapack:
       require: openblas
     mpi:

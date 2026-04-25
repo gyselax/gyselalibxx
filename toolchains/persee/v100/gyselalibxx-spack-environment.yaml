@@ -77,7 +77,7 @@ spack:
             cxx: /Applications/compilers/gcc/13.2.0/bin/g++
             fortran: /Applications/compilers/gcc/13.2.0/bin/gfortran
     kokkos-fft:
-      require: '@0.3 host_backend=fftw-openmp device_backend=cufft'
+      require: 'host_backend=fftw-openmp device_backend=cufft'
     lapack:
       require: openblas
     mpi:

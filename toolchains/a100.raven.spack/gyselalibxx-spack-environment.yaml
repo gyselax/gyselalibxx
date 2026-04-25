@@ -75,7 +75,7 @@ spack:
             cxx: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/g++
             fortran: /mpcdf/soft/SLE_15/packages/x86_64/gcc/14.1.0/bin/gfortran
     kokkos-fft:
-      require: '@0.4 host_backend=fftw-serial device_backend=cufft'
+      require: 'host_backend=fftw-serial device_backend=cufft'
     lapack:
       require: openblas
     mpi:
