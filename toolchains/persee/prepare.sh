@@ -26,7 +26,6 @@ fi
 . $SPACK_PATH/share/spack/setup-env.sh
 
 spack config --scope site add 'config:install_tree:projections:all:"{compiler.name}-{compiler.version}/{name}-{version}-{hash}"'
-spack config --scope site add 'config:connect_timeout:60'
 
 spack config --scope site add 'packages:all:permissions:read:world'
 spack config --scope site add 'packages:all:permissions:write:group'

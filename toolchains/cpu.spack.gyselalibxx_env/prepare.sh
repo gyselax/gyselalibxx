@@ -34,9 +34,6 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 # Activate spack
 . ${SPACK_PATH}/share/spack/setup-env.sh
 
-# Increase the time out that is by default too short for some packages (like PDI)
-spack config --scope site add 'config:connect_timeout:60'
-
 spack compiler find
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
