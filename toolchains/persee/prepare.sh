@@ -25,10 +25,10 @@ if [ ! -d "$SPACK_PATH" ]; then
 fi
 . $SPACK_PATH/share/spack/setup-env.sh
 
+echo "Preparing the Spack environments..."
+
 spack env remove --yes-to-all gyselalibxx-env-omp-cuda
 spack env create gyselalibxx-env-omp-cuda "${TOOLCHAIN_ROOT_DIRECTORY}/v100/gyselalibxx-spack-environment.yaml"
-
-echo "Preparing the Spack environment..."
 
 spack --env gyselalibxx-env-omp-cuda repo update
 spack --env gyselalibxx-env-omp-cuda concretize --force

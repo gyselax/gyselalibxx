@@ -28,10 +28,10 @@ if [ ! -d "$SPACK_PATH" ]; then
 fi
 . $SPACK_PATH/share/spack/setup-env.sh
 
+echo "Preparing the Spack environment..."
+
 spack env remove --yes-to-all gyselalibxx-spack-environment
 spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyselalibxx-spack-environment.yaml"
-
-echo "Preparing the Spack environment..."
 
 # Concretize on the compute node
 spack --env gyselalibxx-spack-environment repo update

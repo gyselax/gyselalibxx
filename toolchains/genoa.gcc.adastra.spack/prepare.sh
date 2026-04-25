@@ -30,10 +30,10 @@ fi
 
 cp "${TOOLCHAIN_ROOT_DIRECTORY}/packages.yaml" "${SPACK_USER_CONFIG_PATH}"
 
+echo "Preparing the Spack environment..."
+
 spack env remove --yes-to-all gyselalibxx-spack-environment
 spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyselalibxx-spack-environment.yaml"
-
-echo "Preparing the Spack environment..."
 
 spack --env gyselalibxx-spack-environment repo update
 spack --env gyselalibxx-spack-environment concretize --force
