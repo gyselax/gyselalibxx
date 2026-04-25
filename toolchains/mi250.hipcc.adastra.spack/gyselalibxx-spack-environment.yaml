@@ -42,8 +42,11 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2025.11
+      destination: $ALL_CCFRWORK/patches-2025.11.0
     builtin:
+      git: https://github.com/spack/spack-packages.git
       tag: v2025.11.0
+      destination: $ALL_CCFRWORK/spack-packages-2025.11.0
   concretizer:
     unify: true
     reuse: false

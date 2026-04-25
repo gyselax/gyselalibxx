@@ -18,8 +18,6 @@ else
     . $SPACK_PATH/share/spack/setup-env.sh
 fi
 
-spack --env gyselalibxx-env-omp repo update
-
 # The hdf5 package is injecting the environment view `lib` path to `LD_LIBRARY_PATH`
 # which causes spurious segfaults for system executables, we manually remove it.
 LD_LIBRARY_PATH_TMP="$LD_LIBRARY_PATH"

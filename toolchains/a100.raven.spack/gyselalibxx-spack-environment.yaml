@@ -42,8 +42,11 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2025.11
+      destination: $HOME/patches-2025.11.0
     builtin:
-      branch: releases/v2025.11
+      git: https://github.com/spack/spack-packages.git
+      tag: v2025.11.0
+      destination: $HOME/spack-packages-2025.11.0
   concretizer:
     unify: true
   packages:

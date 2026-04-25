@@ -40,6 +40,7 @@ spack bootstrap now
 
 spack env remove --yes-to-all gyselalibxx-spack-environment
 spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyselalibxx-spack-environment.yaml"
+spack --env gyselalibxx-spack-environment repo update
 
 echo "Preparing the Spack environment..."
 
