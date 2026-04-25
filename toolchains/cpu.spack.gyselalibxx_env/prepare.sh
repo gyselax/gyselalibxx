@@ -56,6 +56,7 @@ fi
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-spack-environment.yaml
 spack --env gyselalibxx-env config --scope env:gyselalibxx-env add packages:all:target:[$(spack arch --family --target)]
 spack --env gyselalibxx-env repo update
+spack --env gyselalibxx-env concretize --force
 spack --env gyselalibxx-env install --jobs 2
 spack env activate -p gyselalibxx-env
 PYTHON_EXECUTABLE=$(which python3)

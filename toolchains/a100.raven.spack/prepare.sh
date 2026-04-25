@@ -35,4 +35,5 @@ echo "Preparing the Spack environment..."
 
 # Concretize on the compute node
 spack --env gyselalibxx-spack-environment repo update
+spack --env gyselalibxx-spack-environment concretize --force
 spack --env gyselalibxx-spack-environment install --concurrent-packages 2 --jobs 8
