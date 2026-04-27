@@ -159,8 +159,6 @@ private:
     using IdxTheta = Idx<GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
 
-    using PseudoCartesianToCircular = CartesianToCircular<X_pc, Y_pc, R, Theta>;
-
     using BSplinesR = typename SplineRThetaBuilderAdvection::bsplines_type1;
     using BSplinesTheta = typename SplineRThetaBuilderAdvection::bsplines_type2;
 
@@ -343,14 +341,13 @@ public:
                                         pseudo_physical_to_adv_domain,
                                         advection_location_for_mapping,
                                         advection_field);
-                            }
-                            if constexpr (!std::is_same_v<CoordRTheta, CoordJ>) {
+                            } else {
                                 advection_field_xy = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
                                         pseudo_physical_to_adv_domain,
                                         foot_xy,
                                         advection_field);
                             }
-                            foot_xy -= foot_xy - dt * advection_field_xy;
+                            foot_xy -= dt * advection_field_xy;
                         } else {
                             // TODO
                             std::cout << "DOING NOTHING" << std::endl;
