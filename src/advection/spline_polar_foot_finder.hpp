@@ -323,7 +323,7 @@ public:
                                                DVector<AdvDim1, AdvDim2> const& advection_field,
                                                double dt) {
                         double radial_coord = ddc::select<R>(foot_rtheta);
-                        CoordXY_pc foot_xy;
+                        CoordXY_pc foot_xy = logical_to_pseudo_physical_proxy(foot_rtheta);
                         constexpr bool adv_provided_on_polar
                                 = (ddc::in_tags_v<AdvDim1, PolarBasis>)&&(
                                         ddc::in_tags_v<AdvDim2, PolarBasis>);
@@ -344,17 +344,16 @@ public:
                                         advection_location_for_mapping,
                                         advection_field);
                             }
-                            CoordXY_pc const coord_xy
-                                    = logical_to_pseudo_physical_proxy(foot_rtheta);
                             if constexpr (!std::is_same_v<CoordRTheta, CoordJ>) {
                                 advection_field_xy = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
                                         pseudo_physical_to_adv_domain,
-                                        coord_xy,
+                                        foot_xy,
                                         advection_field);
                             }
-                            foot_xy = coord_xy - dt * advection_field_xy;
+                            foot_xy -= foot_xy - dt * advection_field_xy;
                         } else {
                             // TODO
+                            std::cout << "DOING NOTHING" << std::endl;
                         }
 
                         if (norm_inf(foot_xy - coord_centre) < 1e-15) {
