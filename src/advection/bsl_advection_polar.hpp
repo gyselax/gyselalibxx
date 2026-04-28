@@ -98,7 +98,10 @@ class BslAdvectionPolar
     using DVectorConstFieldAdvectionXY
             = DVectorConstField<IdxRangeBatched, CartesianBasis, MemorySpace>;
 
-    using DVectorConstFieldAdvection = DVectorConstField<IdxRangeBatched, typename FootFinder::VectorIndexSetAdvectionDims, MemorySpace>;
+    using DVectorConstFieldAdvection = DVectorConstField<
+            IdxRangeBatched,
+            typename FootFinder::VectorIndexSetAdvectionDims,
+            MemorySpace>;
 
     using DVectorFieldMemAdvectionXYOnBatch
             = DVectorFieldMem<IdxRangeBatch, CartesianBasis, MemorySpace>;
