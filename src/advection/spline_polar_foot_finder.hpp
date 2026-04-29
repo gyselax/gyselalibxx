@@ -168,8 +168,8 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    using TimeStepper = typename TimeStepperBuilder::
-            template time_stepper_t<CoordRTheta, DVector<AdvDim1, AdvDim2>>;
+    using TimeStepper =
+            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
 
     TimeStepperBuilder const& m_time_stepper_builder;
 
@@ -292,6 +292,9 @@ public:
         PseudoPhysicalToAdvectionDomainMapping pseudo_physical_to_adv_domain
                 = m_pseudo_physical_to_adv_domain;
 
+        constexpr bool adv_provided_on_polar
+                = (ddc::in_tags_v<AdvDim1, PolarBasis>)&&(ddc::in_tags_v<AdvDim2, PolarBasis>);
+
         // Compute the characteristic feet at t^n:
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
@@ -303,39 +306,28 @@ public:
                     IdxRTheta idx_rtheta(idx);
                     VectorConstFieldSplineCoef advection_field_coefs_slice
                             = get_const_field(advection_field_coefs)[idx_batch];
-                    // The function describing how the derivative of the evolve function is calculated.
-                    auto dy = [&](DVector<AdvDim1, AdvDim2>& updated_advection_field,
-                                  CoordRTheta const& foot) {
-                        ddcHelper::get<AdvDim1>(updated_advection_field)
-                                = evaluator_advection_field_proxy(
-                                        foot,
-                                        ddcHelper::get<AdvDim1>(advection_field_coefs_slice));
-                        ddcHelper::get<AdvDim2>(updated_advection_field)
-                                = evaluator_advection_field_proxy(
-                                        foot,
-                                        ddcHelper::get<AdvDim2>(advection_field_coefs_slice));
-                    };
 
-                    // The function describing how the value(s) are updated using the derivative.
-                    auto update_function = [&](CoordRTheta& foot_rtheta,
-                                               DVector<AdvDim1, AdvDim2> const& advection_field,
-                                               double dt) {
-                        double radial_coord = ddc::select<R>(foot_rtheta);
-                        CoordXY_pc foot_xy = logical_to_pseudo_physical_proxy(foot_rtheta);
-                        constexpr bool adv_provided_on_polar
-                                = (ddc::in_tags_v<AdvDim1, PolarBasis>)&&(
-                                        ddc::in_tags_v<AdvDim2, PolarBasis>);
+                    // The function describing how the derivative of the evolve function is calculated.
+                    auto dy = [&](DVector<X_pc, Y_pc>& advection_field_xy,
+                                  CoordRTheta const& foot) {
+                        DVector<AdvDim1, AdvDim2> advection_field;
+                        ddcHelper::get<AdvDim1>(advection_field) = evaluator_advection_field_proxy(
+                                foot,
+                                ddcHelper::get<AdvDim1>(advection_field_coefs_slice));
+                        ddcHelper::get<AdvDim2>(advection_field) = evaluator_advection_field_proxy(
+                                foot,
+                                ddcHelper::get<AdvDim2>(advection_field_coefs_slice));
+                        double radial_coord = ddc::select<R>(foot);
                         if (!adv_provided_on_polar or radial_coord > 1e-15) {
                             // Ensure coord is inside the domain as splines can't extrapolate
                             // derivates (clamping)
                             CoordRTheta advection_location_for_mapping(
                                     Kokkos::
-                                            min(ddc::select<R>(foot_rtheta),
+                                            min(ddc::select<R>(foot),
                                                 ddc::discrete_space<BSplinesR>().rmax()),
-                                    ddc::select<Theta>(foot_rtheta));
+                                    ddc::select<Theta>(foot));
                             using CoordJ =
                                     typename PseudoPhysicalToAdvectionDomainMapping::CoordJacobian;
-                            DVector<X_pc, Y_pc> advection_field_xy;
                             if constexpr (std::is_same_v<CoordRTheta, CoordJ>) {
                                 advection_field_xy = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
                                         pseudo_physical_to_adv_domain,
@@ -344,14 +336,21 @@ public:
                             } else {
                                 advection_field_xy = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
                                         pseudo_physical_to_adv_domain,
-                                        foot_xy,
+                                        logical_to_pseudo_physical_proxy(foot),
                                         advection_field);
                             }
-                            foot_xy -= dt * advection_field_xy;
                         } else {
                             // TODO
                             std::cout << "DOING NOTHING" << std::endl;
                         }
+                    };
+
+                    // The function describing how the value(s) are updated using the derivative.
+                    auto update_function = [&](CoordRTheta& foot_rtheta,
+                                               DVector<X_pc, Y_pc> const& advection_field,
+                                               double dt) {
+                        CoordXY_pc foot_xy = logical_to_pseudo_physical_proxy(foot_rtheta);
+                        foot_xy -= dt * advection_field;
 
                         if (norm_inf(foot_xy - coord_centre) < 1e-15) {
                             foot_rtheta = CoordRTheta(0, 0);
