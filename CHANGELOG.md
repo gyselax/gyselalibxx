@@ -20,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add new constructors for `MultipatchFieldMem` to allow labelling.
 - Add more labels to memory allocations.
 - Add a `NDIdentityInterpolationBuilder` class.
+- Add a new abstract class `IPolarPoissonLikeSolver`.
 - Add `SplineInterpolator2D.`
 - Add `LagrangeInterpolatorND.`
 
@@ -27,6 +28,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Fix missing load of `pdiplugin-pycall` in some Spack-based toolchains.
 - Fix missing update of Spack repos before loading environments.
+- Fix missing `PDIEvent(initialisation)` in the guiding centre (X,Y) simulation.
+- Fix `ddcHelper::assign_elements` to allow a ND tensor to be truncated to a MD tensor (with M\<N).
+- Fix use of `PolarSplineFEMPoissonLikeSolver` with a ND metric tensor (with N\>2).
+- Decrease memory usage in `BslAdvection1D`.
+- Fix `compute_coeffs_on_mapping` to allow integration when a coordinate change allows the determinant of the Jacobian to be calculated with less information than is required to calculate the Jacobian matrix.
+- Fix hardcoded Homogeneous Hermite boundary conditions in `BslAdvection1D`.
+- Decrease memory usage in `SplinePolarFootFinder`.
 
 ### Changed
 
@@ -47,6 +55,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add interpolation operators to `PolarSplineFEMPoissonLikeSolver` constructor.
 - Take pointwise values for `PolarSplineFEMPoissonLikeSolver::update_coefficients`.
 - Allow pointwise values to be passed to `PolarSplineFEMPoissonLikeSolver::operator()`.
+- Rename `polarpoissonlikesolver.hpp` -> `polar_spline_fem_poisson_like_solver.hpp`.
+- Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.
+- Prefixed the name of the Kokkos region with "(GSLX)"
 
 ### Deprecated
 

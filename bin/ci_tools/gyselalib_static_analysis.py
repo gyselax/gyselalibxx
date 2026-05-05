@@ -272,6 +272,10 @@ def search_for_unnecessary_auto(file):
                 start = end + 1
                 end = next(i for i,v in enumerate(config.data[start:], start) if v['str'] == ';')
 
+            if config.data[start+2]['str'] == '[':
+                # Allow lambdas to be saved to auto
+                continue
+
             if any(v['str'] == 'gko' for v in config.data[start:end]) and any(v['str'] == 'create' for v in config.data[start:end]):
                 continue
 
@@ -787,7 +791,7 @@ def check_exec_space_usage(file):
                               'integer_sequence', 'pair', 'declval', 'tuple_cat', 'integral_constant', 'size_t', 'move',
                               'make_integer_sequence', 'make_index_sequence', 'index_sequence',
                               'experimental::full_extent', 'experimental::submdspan', 'conjunction_v', 'disjunction_v',
-                              'conjunction', 'disjunction')
+                              'conjunction', 'disjunction', 'is_invocable_v')
             if 'std' in code_keys:
                 idx = code_keys.index('std')
                 func = None

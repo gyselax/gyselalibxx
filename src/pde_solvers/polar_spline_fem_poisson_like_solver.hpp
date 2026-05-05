@@ -2,7 +2,8 @@
 #pragma once
 
 #include "i_interpolation.hpp"
-#include "polarpoissonlikeassembler.hpp"
+#include "ipolar_poisson_like_solver.hpp"
+#include "polar_spline_fem_poisson_like_assembler.hpp"
 
 /**
 * @brief Define a polar PDE solver for a Poisson-like equation.
@@ -43,6 +44,11 @@ template <
         class Mapping,
         class IdxRangeFull = IdxRange<GridR, GridTheta>>
 class PolarSplineFEMPoissonLikeSolver
+    : public IPolarPoissonLikeSolver<
+              IdxRange<GridR, GridTheta>,
+              IdxRangeFull,
+              Kokkos::DefaultExecutionSpace::memory_space,
+              Kokkos::layout_right>
 {
     // TODO: Add a batch loop to operator()
     static_assert(
@@ -159,7 +165,9 @@ private:
     using IdxStepQuadratureTheta = IdxStep<QDimThetaMesh>;
 
     //using FieldMemCoeffsSpline2D = DFieldMem<typename InterpolationEvaluatorTraits<
-    //        EvaluatorType>::template batched_coeff_idx_range_type<IdxRangeFull>>;DConstField<
+    //        EvaluatorType>::template batched_coeff_idx_range_type<IdxRangeFull>>;
+    using ConstFieldCoeffsSpline2D = DConstField<
+            typename EvaluatorType::template batched_spline_domain_type<IdxRangeFull>>;
     using FieldMemCoeffsSpline2D
             = DFieldMem<typename EvaluatorType::template batched_spline_domain_type<IdxRangeFull>>;
     using PolarSplineMemRTheta = DFieldMem<IdxRange<PolarBSplinesRTheta>>;
@@ -168,6 +176,7 @@ private:
     using CoordFieldMemRTheta = FieldMem<CoordRTheta, IdxRangeRTheta>;
     using CoordFieldRTheta = Field<CoordRTheta, IdxRangeRTheta>;
     using DFieldRTheta = DField<IdxRangeRTheta>;
+    using DConstFieldRTheta = DConstField<IdxRangeRTheta>;
 
     using PoissonAssembler = PolarSplineFEMPoissonLikeAssembler<
             GridR,
@@ -197,7 +206,7 @@ public:
     class CoeffEvaluator
     {
         static_assert(std::is_same_v<Coeff, typename Coeff::view_type>);
-        Evaluator const& m_evaluator;
+        Evaluator const m_evaluator;
         Coeff m_coeff;
 
     public:
@@ -360,6 +369,7 @@ public:
      *      at the grid points.
      */
     void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
+            override
     {
         FieldMemCoeffsSpline2D coeff_alpha_alloc(get_spline_idx_range(m_builder));
         FieldMemCoeffsSpline2D coeff_beta_alloc(get_spline_idx_range(m_builder));
@@ -367,8 +377,10 @@ public:
         m_builder(get_field(coeff_alpha_alloc), alpha);
         m_builder(get_field(coeff_beta_alloc), beta);
 
-        CoeffEvaluator alpha_func(m_evaluator, get_const_field(coeff_alpha_alloc));
-        CoeffEvaluator beta_func(m_evaluator, get_const_field(coeff_beta_alloc));
+        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
+                alpha_func(m_evaluator, get_const_field(coeff_alpha_alloc));
+        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
+                beta_func(m_evaluator, get_const_field(coeff_beta_alloc));
         m_assembler(m_gko_matrix, alpha_func, beta_func, m_mapping);
     }
 
@@ -389,7 +401,7 @@ public:
     template <class RHSFunction>
     void operator()(PolarSplineRTheta spline, RHSFunction const& rhs) const
     {
-        Kokkos::Profiling::pushRegion("PolarPoissonRHS");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonRHS");
 
         static_assert(
                 std::is_invocable_r_v<double, RHSFunction, CoordRTheta>,
@@ -509,7 +521,7 @@ public:
         Kokkos::Profiling::popRegion();
 
         // Solve the matrix equation
-        Kokkos::Profiling::pushRegion("PolarPoissonSolve");
+        Kokkos::Profiling::pushRegion("(GSLX) PolarPoissonSolve");
         m_gko_matrix->solve(x_init.allocation_kokkos_view(), b.allocation_kokkos_view());
         //-----------------
         IdxStepBSPolar radial_boundary_splines(m_nbasis_theta);
@@ -569,11 +581,12 @@ public:
      * @param[in] rhs
      *      The rhs @f$ \rho@f$ of the Poisson-like equation on the grid.
      */
-    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const
+    void operator()(DFieldRTheta phi, DConstFieldRTheta rhs) const override
     {
         FieldMemCoeffsSpline2D rhs_alloc(get_spline_idx_range(m_builder));
         m_builder(get_field(rhs_alloc), rhs);
-        CoeffEvaluator rhs_func(m_evaluator, get_const_field(rhs_alloc));
+        CoeffEvaluator<EvaluatorType, ConstFieldCoeffsSpline2D>
+                rhs_func(m_evaluator, get_const_field(rhs_alloc));
 
         (*this)(phi, rhs_func);
     }
