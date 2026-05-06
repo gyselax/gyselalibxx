@@ -56,9 +56,9 @@ spack:
         write: group
       variants: ~fortran ~mpi
     c:
-      require: gcc@13.2.1
+      require: gcc@13.3.1
     cxx:
-      require: gcc@13.2.1
+      require: gcc@13.3.1
     kokkos-fft:
       require: '@0.4 host_backend=fftw-openmp'
     lapack:
