@@ -18,7 +18,7 @@ packages:
   cray-mpich:
     buildable: false
     externals:
-      - spec: cray-mpich@8.1.30 +gtl +rocm amdgpu_target=gfx90a %gcc@13.2
+      - spec: cray-mpich@8.1.30 +gtl +rocm amdgpu_target=gfx90a %gcc@13.3
         prefix: /opt/cray/pe/mpich/8.1.30/ofi/gnu/11.2
         extra_attributes:
           environment:
@@ -26,7 +26,7 @@ packages:
               LD_LIBRARY_PATH: /opt/cray/libfabric/1.20.1/lib64/
   gcc:
     externals:
-      - spec: gcc@13.2.1 languages:='c,c++,fortran'
+      - spec: gcc@13.3.1 languages:='c,c++,fortran'
         prefix: /opt/rh/gcc-toolset-13/root/usr
         extra_attributes:
           compilers:

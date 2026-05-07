@@ -33,6 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix `compute_coeffs_on_mapping` to allow integration when a coordinate change allows the determinant of the Jacobian to be calculated with less information than is required to calculate the Jacobian matrix.
 - Fix hardcoded Homogeneous Hermite boundary conditions in `BslAdvection1D`.
 - Decrease memory usage in `SplinePolarFootFinder`.
+- Fix GCC version on Adastra toolchains.
 
 ### Changed
 
