@@ -27,6 +27,9 @@ concept Mapping = requires
         } -> std::same_as<typename T::CoordResult>;
 };
 
+/**
+ * @brief A helper concept to determine if a type is a mapping with a definition of a Jacobian matrix.
+ */
 template <typename T, typename CoordTransform>
 concept JacobianMatrix
         = is_tensor_type_v<T> && std::is_floating_point_v<typename T::element_type> && std::same_as<
