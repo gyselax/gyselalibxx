@@ -164,10 +164,10 @@ inline double error_norm_inf(
     return detail::error_norm_inf(exec_space, function, exact_function);
 }
 
+namespace concepts {
 /**
  * @brief A concept confirming that a function is compatible for use like a field.
  */
-namespace concepts {
 template <class F, class ElementType, class IdxType>
 concept CompatibleFunc = requires(F const& f, IdxType idx)
 {
