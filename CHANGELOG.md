@@ -69,6 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove Google Test submodule.
 - Remove ruche toolchain.
 - Remove `GYSELALIBXX_VERSION_*` CMake variables.
+- Remove out-of-date Leonardo toolchain.
 
 ## [v0.7.0] - 2026-03-18
 

@@ -54,11 +54,11 @@ Ideally this script should be run exactly once per machine. The script should be
 
 The folder [toolchains/](https://github.com/gyselax/gyselalibxx/tree/devel/toolchains) contains sub-folders with files that can be used for dependency management (`prepare.sh`, environment setup (`environment.sh`), and compilation `toolchain.cmake`. Each sub-folder is designed to work in a different environment. You should choose the folder which best fits your work environment. The available sub-folders are:
 
-- `a100.leonardo.spack` : Designed for use with the A100 hardware available on Cineca's Leonardo supercomputer.
 - `cpu.spack.gyselalibxx_env` : Designed for use on a local computer. Installation is handled by spack.
 - `docker.gyselalibxx_env` : Designed for use with a docker container. This is used by the CI.
     Should you wish to try Gyselalib++ rapidly, the docker container can be found hosted on the GitHub Container Registry : [`ghcr.io/gyselax/gyselalibxx_env:latest`](https://github.com/gyselax/gyselalibxx/pkgs/container/gyselalibxx_env). The provided `environment.sh` file will drop you into a container with access to Gyselalib++'s files.
 - `h100.jean-zay.spack` : Designed for use with the H100 hardware available on IDRIS' Jean-Zay supercomputer. It installs a new Spack instance in the shared work directory of the project. It may need to be adapted depending on your needs.
+- `genoa.gcc.adastra.spack` : Designed for use with the GENOA hardware available on CINES's Adastra supercomputer.
 - `mi250.hipcc.adastra.spack` : Designed for use with the MI250 hardware available on CINES's Adastra supercomputer.
 - `persee/v100` : Designed for use with the V100 hardware available on IRFM's Persee cluster.
 - `persee/xeon` : Designed for use with the CPU hardware available on IRFM's Persee cluster.
