@@ -4,7 +4,7 @@ spack:
   definitions:
   - packages:
     - 'cmake@3.30'
-    - 'ddc@0.12 +fft +pdi +splines'
+    - 'ddc@0.14 +fft +pdi +splines'
     - 'ginkgo@1.9'
     - 'googletest@1.14 +gmock'
     - 'kokkos@4.7 +serial'
