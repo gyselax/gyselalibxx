@@ -2,6 +2,7 @@
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
   <compounddef id="conceptconcepts_1_1InvJacobianMatrix" kind="concept">
     <compoundname>concepts::InvJacobianMatrix</compoundname>
+    <includes refid="coord__transformation__tools_8hpp" local="no">coord_transformation_tools.hpp</includes>
     <templateparamlist>
       <param>
         <type>typename T</type>
@@ -19,9 +20,10 @@ concept <ref refid="conceptconcepts_1_1InvJacobianMatrix" kindref="compound">con
                        get_covariant_dims_t&lt;
                                ddc::to_type_seq_t&lt;typename CoordTransform::CoordResult&gt;&gt;&gt;&gt;    </initializer>
     <briefdescription>
+<para>A concept describing the type of the inverse of a Jacobian matrix of a coordinate transformation. </para>
     </briefdescription>
     <detaileddescription>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="41" column="1"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/coord_transformation_tools.hpp" line="47" column="1"/>
   </compounddef>
 </doxygen>
