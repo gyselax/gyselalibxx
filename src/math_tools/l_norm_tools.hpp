@@ -165,6 +165,9 @@ inline double error_norm_inf(
 }
 
 namespace concepts {
+/**
+ * @brief A concept confirming that a function is compatible for use like a field.
+ */
 template <class F, class ElementType, class IdxType>
 concept CompatibleFunc = requires(F const& f, IdxType idx)
 {
