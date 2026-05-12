@@ -150,13 +150,7 @@ int main(int argc, char** argv)
 
 
     // --- Advection operator -------------------------------------------------------------------------
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    SplineInterpolatorRTheta interpolator(mesh_rtheta);
 
     SplinePolarFootFinder find_feet(
             mesh_rtheta,
@@ -166,9 +160,7 @@ int main(int argc, char** argv)
             builder,
             spline_evaluator_extrapol);
 
-    BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
-
-
+    BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
     // --- Poisson solver -----------------------------------------------------------------------------
     // Coefficients alpha and beta of the Poisson equation:
@@ -176,13 +168,6 @@ int main(int argc, char** argv)
     DFieldMemRTheta coeff_beta(mesh_rtheta);
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
-
-
-    Spline2DMem coeff_alpha_spline(idx_range_bsplinesRTheta);
-    Spline2DMem coeff_beta_spline(idx_range_bsplinesRTheta);
-
-    builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
-    builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
     PoissonSolver poisson_solver(discrete_mapping, builder, spline_evaluator);
     poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));

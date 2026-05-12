@@ -153,6 +153,88 @@ public:
             typename Evaluator::template batched_spline_domain_type<BatchedInterpolationIdxRange>;
 };
 
+/**
+ * @brief Specialisation of InterpolationEvaluatorTraits for ddc::SplineEvaluator2D.
+ *
+ * ddc::SplineEvaluator2D uses different alias names from the InterpolationEvaluator
+ * convention. This specialisation provides the mapping so that ddc::SplineEvaluator2D
+ * can be used directly as an InterpolationEvaluator.
+ *
+ * Mapping:
+ *   evaluation_discrete_dimension_type -> (defines evaluation_idx_range_type)
+ *   evaluation_domain_type             -> evaluation_idx_range_type
+ *   spline_domain_type                 -> coeff_idx_range_type
+ *   batched_spline_domain_type<D>      -> batched_coeff_idx_range_type<D>
+ */
+template <
+        class ExecSpace,
+        class MemorySpace,
+        class BSplines1,
+        class BSplines2,
+        class EvaluationDDim1,
+        class EvaluationDDim2,
+        class LowerExtrapolationRule1,
+        class UpperExtrapolationRule1,
+        class LowerExtrapolationRule2,
+        class UpperExtrapolationRule2>
+struct InterpolationEvaluatorTraits<ddc::SplineEvaluator2D<
+        ExecSpace,
+        MemorySpace,
+        BSplines1,
+        BSplines2,
+        EvaluationDDim1,
+        EvaluationDDim2,
+        LowerExtrapolationRule1,
+        UpperExtrapolationRule1,
+        LowerExtrapolationRule2,
+        UpperExtrapolationRule2>>
+{
+private:
+    using Evaluator = ddc::SplineEvaluator2D<
+            ExecSpace,
+            MemorySpace,
+            BSplines1,
+            BSplines2,
+            EvaluationDDim1,
+            EvaluationDDim2,
+            LowerExtrapolationRule1,
+            UpperExtrapolationRule1,
+            LowerExtrapolationRule2,
+            UpperExtrapolationRule2>;
+
+public:
+    /// @brief The data type that the data is saved on.
+    using data_type = double;
+
+    /// @brief The 1D index range for the evaluation mesh.
+    using evaluation_idx_range_type = typename Evaluator::evaluation_domain_type;
+
+    /// @brief The 1D coordinate type corresponding to the evaluation mesh.
+    using coord_type
+            = Coord<typename EvaluationDDim1::continuous_dimension_type,
+                    typename EvaluationDDim2::continuous_dimension_type>;
+
+    /// @brief The type of the ND index range on which the interpolation coefficients are defined.
+    using coeff_idx_range_type = typename Evaluator::spline_domain_type;
+
+    /// @brief The number of interpolation dimensions (always 1 for SplineEvaluator).
+    static constexpr std::size_t rank()
+    {
+        return 2;
+    }
+
+    /// @brief Batched index range for the evaluation
+    template <class BatchedInterpolationIdxRange>
+    using batched_evaluation_idx_range_type =
+            typename Evaluator::template batched_evaluation_domain_type<
+                    BatchedInterpolationIdxRange>;
+
+    /// @brief Batched domain with the evaluation grid replaced by BSplines.
+    template <class BatchedInterpolationIdxRange>
+    using batched_coeff_idx_range_type =
+            typename Evaluator::template batched_spline_domain_type<BatchedInterpolationIdxRange>;
+};
+
 namespace concepts {
 
 /**

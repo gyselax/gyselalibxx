@@ -162,8 +162,8 @@ public:
 struct GeneralParameters
 {
     IdxRangeRTheta grid;
+    SplineInterpolatorRTheta const& interpolator;
     SplineRThetaBuilder const& advection_builder;
-    SplineRThetaEvaluatorNullBound const& interpolation_evaluator;
     SplineRThetaEvaluatorConstBound& advection_evaluator;
     double final_time;
     bool if_save_curves;
@@ -202,11 +202,7 @@ void run_simulations_with_methods(
             params.advection_builder,
             params.advection_evaluator);
 
-    BslAdvectionPolar advection_operator(
-            params.advection_builder,
-            params.interpolation_evaluator,
-            foot_finder,
-            sim.to_physical_mapping);
+    BslAdvectionPolar advection_operator(params.interpolator, foot_finder, sim.to_physical_mapping);
 
     run_simulations(
             sim.to_physical_mapping_host,
@@ -298,14 +294,8 @@ int main(int argc, char** argv)
     SplineRThetaBuilder_host const builder_host(grid);
     SplineRThetaBuilder const builder(grid);
 
-    // --- Evaluator for the test function:
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-    ddc::PeriodicExtrapolationRule<Theta> theta_extrapolation_rule;
-    SplineRThetaEvaluatorNullBound spline_evaluator(
-            r_extrapolation_rule,
-            r_extrapolation_rule,
-            theta_extrapolation_rule,
-            theta_extrapolation_rule);
+    // --- Interpolator for the test function:
+    SplineInterpolatorRTheta spline_interpolator(grid);
 
     // --- Evaluator for the test advection field:
     ddc::ConstantExtrapolationRule<R, Theta> boundary_condition_r_left(rmin);
@@ -397,8 +387,8 @@ int main(int argc, char** argv)
 
     GeneralParameters params
             = {grid,
+               spline_interpolator,
                builder,
-               spline_evaluator,
                spline_evaluator_extrapol,
                final_time,
                if_save_curves,

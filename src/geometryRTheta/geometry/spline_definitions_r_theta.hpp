@@ -3,6 +3,7 @@
 #include <ddc/kernels/splines.hpp>
 
 #include "geometry_r_theta.hpp"
+#include "spline_interpolation.hpp"
 
 // --- Spline definitions
 int constexpr BSDegreeR = 3;
@@ -111,6 +112,21 @@ using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D<
         ddc::NullExtrapolationRule, // boundary at rmax
         ddc::PeriodicExtrapolationRule<Theta>,
         ddc::PeriodicExtrapolationRule<Theta>>;
+
+using SplineInterpolatorRTheta = SplineInterpolator2D<
+        Kokkos::DefaultExecutionSpace,
+        BSplinesR,
+        BSplinesTheta,
+        GridR,
+        GridTheta,
+        ExtrapolationRule::NULL_VALUE, // below r=0
+        ExtrapolationRule::NULL_VALUE, // above rmax
+        ExtrapolationRule::PERIODIC, // below theta=0
+        ExtrapolationRule::PERIODIC, // above theta=2*pi
+        SplineRBoundary, // boundary at r=0
+        SplineRBoundary, // boundary at rmax
+        SplineThetaBoundary,
+        SplineThetaBoundary>;
 
 using IdxRangeBSR = IdxRange<BSplinesR>;
 using IdxRangeBSTheta = IdxRange<BSplinesTheta>;
