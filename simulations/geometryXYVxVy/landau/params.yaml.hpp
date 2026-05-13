@@ -39,16 +39,16 @@ Output:
 constexpr char const* const params_yaml = R"PDI_CFG(Mesh:
   x_min: 0.0
   x_max: 12.56637061435917
-  x_ncells: 31
+  x_ncells: 32
   y_min: 0.0
   y_max: 12.56637061435917
-  y_ncells : 31
+  y_ncells : 32
   vx_min: -6.0
   vx_max: +6.0
-  vx_ncells: 33
+  vx_ncells: 31
   vy_min: -6.0
   vy_max: +6.0
-  vy_ncells: 33
+  vy_ncells: 31
 
 SpeciesInfo:
 - charge: -1.

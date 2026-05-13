@@ -182,7 +182,7 @@ inline IdxRange<Grid1D> init_lagrange_dependent_idx_range(
         Coord1D max(PCpp_double(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_max"));
         IdxStep<Grid1D> ncells(PCpp_int(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_ncells"));
         ddc::init_discrete_space<Grid1D>(Grid1D::template init<Grid1D>(min, max, ncells + 1));
-        interpolation_idx_range = IdxRange<Grid1D>(Idx<Grid1D> {0}, ncells);
+        interpolation_idx_range = IdxRange<Grid1D>(Idx<Grid1D> {0}, ncells + 1);
     } else {
         std::vector<Coord1D> breakpoints;
         PDI_get_arrays("read_" + mesh_identifier, "breakpoints_" + mesh_identifier, breakpoints);
