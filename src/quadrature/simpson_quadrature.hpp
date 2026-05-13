@@ -196,5 +196,6 @@ simpson_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
     return quadrature_coeffs_nd<ExecSpace, DataType, ODims...>(
             idx_range,
             (std::function<FieldMem<DataType, IdxRange<ODims>, typename ExecSpace::memory_space>(
-                     IdxRange<ODims>)>(simpson_quadrature_coefficients_1d<ExecSpace, DataType, ODims>))...);
+                     IdxRange<ODims>)>(
+                    simpson_quadrature_coefficients_1d<ExecSpace, DataType, ODims>))...);
 }

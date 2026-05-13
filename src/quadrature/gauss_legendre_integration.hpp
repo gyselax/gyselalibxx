@@ -149,8 +149,8 @@ public:
      * @return The Gauss-Legendre quadrature.
      */
     template <class ExecSpace>
-    FieldMem<DataType, IdxRange<GLGrid>, typename ExecSpace::memory_space> gauss_legendre_coefficients()
-            const
+    FieldMem<DataType, IdxRange<GLGrid>, typename ExecSpace::memory_space>
+    gauss_legendre_coefficients() const
     {
         FieldMem<DataType, IdxRange<GLGrid>, typename ExecSpace::memory_space> coefficients_alloc(
                 "coefficients (GaussLegendre::gauss_legendre_coefficients)",
