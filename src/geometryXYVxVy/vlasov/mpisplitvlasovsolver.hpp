@@ -21,14 +21,14 @@
 class MpiSplitVlasovSolver : public IVlasovSolver
 {
     /// Advection operator in the x direction
-    IAdvectionSpatial<GeometryVxVyXY, GridX> const& m_advec_x;
+    IAdvectionSpatial<GeometryVxVyXY, GridX, Real> const& m_advec_x;
     /// Advection operator in the y direction
-    IAdvectionSpatial<GeometryVxVyXY, GridY> const& m_advec_y;
+    IAdvectionSpatial<GeometryVxVyXY, GridY, Real> const& m_advec_y;
 
     /// Advection operator in the vx direction
-    IAdvectionVelocity<GeometryXYVxVy, GridVx> const& m_advec_vx;
+    IAdvectionVelocity<GeometryXYVxVy, GridVx, Real> const& m_advec_vx;
     /// Advection operator in the vy direction
-    IAdvectionVelocity<GeometryXYVxVy, GridVy> const& m_advec_vy;
+    IAdvectionVelocity<GeometryXYVxVy, GridVy, Real> const& m_advec_vy;
 
     /// MPI transpose operator
     MPITransposeAllToAll<X2DSplit, V2DSplit> const& m_transpose;
@@ -43,10 +43,10 @@ public:
      * @param[in] transpose A MPI transpose operator to move between layouts.
      */
     MpiSplitVlasovSolver(
-            IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,
-            IAdvectionSpatial<GeometryVxVyXY, GridY> const& advec_y,
-            IAdvectionVelocity<GeometryXYVxVy, GridVx> const& advec_vx,
-            IAdvectionVelocity<GeometryXYVxVy, GridVy> const& advec_vy,
+            IAdvectionSpatial<GeometryVxVyXY, GridX, Real> const& advec_x,
+            IAdvectionSpatial<GeometryVxVyXY, GridY, Real> const& advec_y,
+            IAdvectionVelocity<GeometryXYVxVy, GridVx, Real> const& advec_vx,
+            IAdvectionVelocity<GeometryXYVxVy, GridVy, Real> const& advec_vy,
             MPITransposeAllToAll<X2DSplit, V2DSplit> const& transpose);
 
     ~MpiSplitVlasovSolver() override = default;
@@ -65,5 +65,5 @@ public:
     DFieldSpVxVyXY operator()(
             DFieldSpVxVyXY allfdistribu,
             DVectorConstFieldXY electric_field,
-            double dt) const override;
+            Real dt) const override;
 };
