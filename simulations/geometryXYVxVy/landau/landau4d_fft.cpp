@@ -13,7 +13,11 @@
 #include <paraconf.h>
 #include <pdi.h>
 
+#ifdef SPLINE
 #include "../spline_definitions_xyvxvy.hpp"
+#elif defined(LAGRANGE)
+#include "../lagrange_definitions_xyvxvy.hpp"
+#endif
 
 #include "bsl_advection_vx.hpp"
 #include "bsl_advection_x.hpp"
@@ -26,7 +30,7 @@
 #include "mpichargedensitycalculator.hpp"
 #include "mpisplitvlasovsolver.hpp"
 #include "mpitransposealltoall.hpp"
-#include "neumann_spline_quadrature.hpp"
+#include "simpson_quadrature.hpp"
 #include "output.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
@@ -41,6 +45,18 @@ using std::cerr;
 using std::endl;
 using std::chrono::steady_clock;
 namespace fs = std::filesystem;
+
+#ifdef SPLINE
+using InterpolatorX = SplineInterpolatorX;
+using InterpolatorY = SplineInterpolatorY;
+using InterpolatorVx = SplineInterpolatorVx;
+using InterpolatorVy = SplineInterpolatorVy;
+#elif defined(LAGRANGE)
+using InterpolatorX = LagrangeInterpolatorX;
+using InterpolatorY = LagrangeInterpolatorY;
+using InterpolatorVx = LagrangeInterpolatorVx;
+using InterpolatorVy = LagrangeInterpolatorVy;
+#endif
 
 int main(int argc, char** argv)
 {
@@ -58,6 +74,7 @@ int main(int argc, char** argv)
 
     // Reading config
     // --> Mesh info
+#ifdef SPLINE
     IdxRangeX const idxrange_x = init_spline_dependent_idx_range<
             GridX,
             BSplinesX,
@@ -74,6 +91,16 @@ int main(int argc, char** argv)
             GridVy,
             BSplinesVy,
             SplineInterpPointsVy>(conf_gyselalibxx, "vy");
+#elif defined(LAGRANGE)
+    IdxRangeX const idxrange_x
+            = init_lagrange_dependent_idx_range<GridX, LagrangeX>(conf_gyselalibxx, "x");
+    IdxRangeY const idxrange_y
+            = init_lagrange_dependent_idx_range<GridY, LagrangeY>(conf_gyselalibxx, "y");
+    IdxRangeVx const idxrange_vx
+            = init_lagrange_dependent_idx_range<GridVx, LagrangeVx>(conf_gyselalibxx, "vx");
+    IdxRangeVy const idxrange_vy
+            = init_lagrange_dependent_idx_range<GridVy, LagrangeVy>(conf_gyselalibxx, "vy");
+#endif
     IdxRangeXY const idxrange_xy(idxrange_x, idxrange_y);
     IdxRangeVxVy idxrange_vxvy(idxrange_vx, idxrange_vy);
     IdxRangeXYVxVy const idxrange_xyvxvy(idxrange_x, idxrange_y, idxrange_vx, idxrange_vy);
@@ -92,10 +119,10 @@ int main(int argc, char** argv)
     IdxRangeVxVyXY idxrange_vxvyxy_v2Dsplit(idxrange_spvxvyxy_v2Dsplit);
     IdxRangeXYVxVy idxrange_xyvxvy_x2Dsplit(idxrange_spxyvxvy_x2Dsplit);
 
-    SplineInterpolatorX const interpolator_x(idxrange_x);
-    SplineInterpolatorY const interpolator_y(idxrange_y);
-    SplineInterpolatorVx const interpolator_vx(idxrange_vx);
-    SplineInterpolatorVy const interpolator_vy(idxrange_vy);
+    InterpolatorX const interpolator_x(idxrange_x);
+    InterpolatorY const interpolator_y(idxrange_y);
+    InterpolatorVx const interpolator_vx(idxrange_vx);
+    InterpolatorVy const interpolator_vy(idxrange_vy);
 
     IdxRangeSpVxVy idxrange_spvxvy_local(idxrange_spxyvxvy_x2Dsplit);
     // Initialisation of the distribution function
@@ -118,19 +145,16 @@ int main(int argc, char** argv)
     int const nbstep_diag = int(time_diag / deltat);
 
     // Create advection operator
-    BslAdvectionSpatial<GeometryVxVyXY, SplineInterpolatorX> const advection_x(interpolator_x);
-    BslAdvectionSpatial<GeometryVxVyXY, SplineInterpolatorY> const advection_y(interpolator_y);
-    BslAdvectionVelocity<GeometryXYVxVy, SplineInterpolatorVx> const advection_vx(interpolator_vx);
-    BslAdvectionVelocity<GeometryXYVxVy, SplineInterpolatorVy> const advection_vy(interpolator_vy);
+    BslAdvectionSpatial<GeometryVxVyXY, InterpolatorX> const advection_x(interpolator_x);
+    BslAdvectionSpatial<GeometryVxVyXY, InterpolatorY> const advection_y(interpolator_y);
+    BslAdvectionVelocity<GeometryXYVxVy, InterpolatorVx> const advection_vx(interpolator_vx);
+    BslAdvectionVelocity<GeometryXYVxVy, InterpolatorVy> const advection_vy(interpolator_vy);
 
     MpiSplitVlasovSolver const
             vlasov(advection_x, advection_y, advection_vx, advection_vy, transpose);
 
     DFieldMemVxVy const quadrature_coeffs(
-            neumann_spline_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(
-                    idxrange_vxvy,
-                    interpolator_vx.get_builder(),
-                    interpolator_vy.get_builder()));
+            simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(idxrange_vxvy));
     DFieldMemVxVy local_quadrature_coeffs(idxrange_vxvy_v2Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs),
@@ -145,10 +169,12 @@ int main(int argc, char** argv)
     PredCorr const predcorr(vlasov, poisson);
 
     // Starting the code
+#ifdef SPLINE
     ddc::expose_to_pdi("Nx_spline_cells", ddc::discrete_space<BSplinesX>().ncells());
     ddc::expose_to_pdi("Ny_spline_cells", ddc::discrete_space<BSplinesY>().ncells());
     ddc::expose_to_pdi("Nvx_spline_cells", ddc::discrete_space<BSplinesVx>().ncells());
     ddc::expose_to_pdi("Nvy_spline_cells", ddc::discrete_space<BSplinesVy>().ncells());
+#endif
     expose_mesh_to_pdi("MeshX", idxrange_x);
     expose_mesh_to_pdi("MeshY", idxrange_y);
     expose_mesh_to_pdi("MeshVx", idxrange_vx);
