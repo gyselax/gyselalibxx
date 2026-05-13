@@ -20,7 +20,7 @@
  *
  * @return The quadrature coefficients for the trapezoid method defined on the provided index range.
  */
-template <class ExecSpace, class DataType = double, class Grid1D>
+template <class ExecSpace, std::floating_point DataType = double, class Grid1D>
 FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
 trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
 {
@@ -78,7 +78,7 @@ trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
  * @return The quadrature coefficients for the trapezoid method defined on the provided idx_range.
  *         The allocation place (host or device ) will depend on the ExecSpace.
  */
-template <class ExecSpace, class DataType = double, class... ODims>
+template <class ExecSpace, std::floating_point DataType = double, class... ODims>
 FieldMem<DataType, IdxRange<ODims...>, typename ExecSpace::memory_space>
 trapezoid_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
 {

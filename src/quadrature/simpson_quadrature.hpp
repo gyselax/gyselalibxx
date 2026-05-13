@@ -19,7 +19,7 @@
  * @param[in] coefficients
  * 	The field where the quadrature coefficients should be saved.
  */
-template <class ExecSpace, class Grid1D, class DataType = double>
+template <class ExecSpace, class Grid1D, std::floating_point DataType = double>
 void fill_simpson_quadrature_coefficients_1d(
         Field<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients)
 {
@@ -105,7 +105,7 @@ void fill_simpson_quadrature_coefficients_1d(
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided index range.
  */
-template <class ExecSpace, class DataType = double, class Grid1D>
+template <class ExecSpace, std::floating_point DataType = double, class Grid1D>
 FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
 simpson_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
 {
@@ -129,7 +129,7 @@ simpson_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided index range.
  */
-template <class ExecSpace, class Grid1D, class DataType = double>
+template <class ExecSpace, class Grid1D, std::floating_point DataType = double>
 FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
 simpson_trapezoid_quadrature_coefficients_1d(
         IdxRange<Grid1D> const& idx_range,
@@ -189,7 +189,7 @@ simpson_trapezoid_quadrature_coefficients_1d(
  * @return The quadrature coefficients for the trapezoid method defined on the provided idx_range.
  *         The allocation place (host or device ) will depend on the ExecSpace.
  */
-template <class ExecSpace, class DataType = double, class... ODims>
+template <class ExecSpace, std::floating_point DataType = double, class... ODims>
 FieldMem<DataType, IdxRange<ODims...>, typename ExecSpace::memory_space>
 simpson_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
 {

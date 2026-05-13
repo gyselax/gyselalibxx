@@ -51,6 +51,7 @@ template <class GLGrid, std::size_t NPoints, class DataType = double>
 class GaussLegendre
 {
     static_assert(ddc::is_non_uniform_point_sampling_v<GLGrid>);
+    static_assert(std::is_floating_point_v<DataType>);
 
     using Dim = typename GLGrid::continuous_dimension_type;
 
