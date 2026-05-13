@@ -25,7 +25,7 @@ void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfd
             Kokkos::DefaultExecutionSpace(),
             rho,
             KOKKOS_LAMBDA(IdxXYVxVy idx) {
-                double sum = 0.0;
+                Real sum = 0.0;
                 for (IdxSp isp : kin_species_idx_range) {
                     sum += kinetic_charges(isp) * allfdistribu(isp, idx);
                 }
@@ -35,7 +35,7 @@ void ChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY allfd
     IdxSp const last_kin_species = kin_species_idx_range.back();
     IdxSp const last_species = get_idx_range(charges_host).back();
     if (last_kin_species != last_species) {
-        double chargedens_adiabspecies = double(charge(last_species));
+        Real chargedens_adiabspecies = Real(charge(last_species));
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),

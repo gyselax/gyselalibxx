@@ -14,4 +14,5 @@ target_link_libraries("geometry_xyvxvy" INTERFACE
     gslx::utils
     gslx::geometry_xperiod_vx
 )
+target_compile_definitions(geometry_xyvxvy INTERFACE GYSELALIBXX_BUILD_REAL_PRECISION=float)
 add_library("gslx::geometry_xyvxvy" ALIAS "geometry_xyvxvy")

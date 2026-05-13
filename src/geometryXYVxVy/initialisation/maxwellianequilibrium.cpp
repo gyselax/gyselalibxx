@@ -5,9 +5,9 @@
 #include "maxwellianequilibrium.hpp"
 
 MaxwellianEquilibrium::MaxwellianEquilibrium(
-        host_t<DFieldMemSp> density_eq,
-        host_t<DFieldMemSp> temperature_eq,
-        host_t<DFieldMemSp> mean_velocity_eq)
+        host_t<FieldMemSp<Real>> density_eq,
+        host_t<FieldMemSp<Real>> temperature_eq,
+        host_t<FieldMemSp<Real>> mean_velocity_eq)
     : m_density_eq(std::move(density_eq))
     , m_temperature_eq(std::move(temperature_eq))
     , m_mean_velocity_eq(std::move(mean_velocity_eq))
@@ -46,9 +46,9 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
         IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<DFieldMemSp> density_eq(idx_range_kinsp);
-    host_t<DFieldMemSp> temperature_eq(idx_range_kinsp);
-    host_t<DFieldMemSp> mean_velocity_eq(idx_range_kinsp);
+    host_t<FieldMemSp<Real>> density_eq(idx_range_kinsp);
+    host_t<FieldMemSp<Real>> temperature_eq(idx_range_kinsp);
+    host_t<FieldMemSp<Real>> mean_velocity_eq(idx_range_kinsp);
 
     for (IdxSp const isp : idx_range_kinsp) {
         PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
@@ -72,11 +72,11 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
 */
 void MaxwellianEquilibrium::compute_maxwellian(
         DFieldVxVy const fMaxwellian,
-        double const density,
-        double const temperature,
-        double const mean_velocity)
+        Real const density,
+        Real const temperature,
+        Real const mean_velocity)
 {
-    double const inv_2pi = 1. / (2. * M_PI * temperature);
+    Real const inv_2pi = 1. / (2. * M_PI * temperature);
     IdxRangeVxVy const gridvxvy = get_idx_range<GridVx, GridVy>(fMaxwellian);
 
     const std::source_location location = std::source_location::current();
@@ -85,8 +85,8 @@ void MaxwellianEquilibrium::compute_maxwellian(
             Kokkos::DefaultExecutionSpace(),
             gridvxvy,
             KOKKOS_LAMBDA(IdxVxVy const ivxvy) {
-                double const vx = ddc::coordinate(ddc::select<GridVx>(ivxvy));
-                double const vy = ddc::coordinate(ddc::select<GridVy>(ivxvy));
+                Real const vx = ddc::coordinate(ddc::select<GridVx>(ivxvy));
+                Real const vy = ddc::coordinate(ddc::select<GridVy>(ivxvy));
                 fMaxwellian(ivxvy) = density * inv_2pi
                                      * Kokkos::exp(
                                              -((vx - mean_velocity) * (vx - mean_velocity)
