@@ -2,7 +2,7 @@ spack:
   definitions:
   - packages:
     - cmake
-    - 'ddc@0.12 +fft +pdi +splines'
+    - 'ddc@0.14 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +cuda cuda_arch=90
     - googletest +gmock
     - kokkos@4.7 ~openmp +cuda +cuda_relocatable_device_code +cuda_constexpr cuda_arch=90

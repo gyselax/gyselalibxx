@@ -27,6 +27,35 @@ concept Mapping = requires
         } -> std::same_as<typename T::CoordResult>;
 };
 
+/**
+ * @brief A concept describing the type of a Jacobian matrix of a coordinate transformation.
+ */
+template <typename T, typename CoordTransform>
+concept JacobianMatrix
+        = is_tensor_type_v<T> && std::is_floating_point_v<typename T::element_type> && std::same_as<
+                T,
+                Tensor<typename T::element_type,
+                       get_contravariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordResult>>,
+                       get_covariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordArg>>>>;
+
+/**
+ * @brief A concept describing the type of the inverse of a Jacobian matrix of a coordinate transformation.
+ */
+template <typename T, typename CoordTransform>
+concept InvJacobianMatrix
+        = is_tensor_type_v<T> && std::is_floating_point_v<typename T::element_type> && std::same_as<
+                T,
+                Tensor<typename T::element_type,
+                       get_contravariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordArg>>,
+                       get_covariant_dims_t<
+                               ddc::to_type_seq_t<typename CoordTransform::CoordResult>>>>;
+
+/**
+ * @brief A helper concept to determine if a type is a mapping with a definition of a Jacobian matrix.
+ */
 template <typename T>
 concept MappingWithJacobian = Mapping<T> && requires
 {
@@ -35,31 +64,44 @@ concept MappingWithJacobian = Mapping<T> && requires
 {
     {
         t.jacobian_matrix(x)
-        } -> std::same_as<
-                DTensor<get_contravariant_dims_t<ddc::to_type_seq_t<typename T::CoordResult>>,
-                        get_covariant_dims_t<ddc::to_type_seq_t<typename T::CoordArg>>>>;
+        } -> JacobianMatrix<T>;
     {
         t.template jacobian_component<int, int>(x)
-        } -> std::same_as<double>;
+        } -> std::floating_point;
     {
         t.jacobian(x)
-        } -> std::same_as<double>;
+        } -> std::floating_point;
 };
 
+/**
+ * @brief A helper concept to determine if a type is a mapping with a definition of the inverse of the Jacobian matrix.
+ */
 template <typename T>
 concept MappingWithInvJacobian
         = MappingWithJacobian<T> && requires(T const& t, typename T::CoordJacobian const& x)
 {
     {
         t.inv_jacobian_matrix(x)
-        } -> std::same_as<
-                DTensor<get_contravariant_dims_t<ddc::to_type_seq_t<typename T::CoordArg>>,
-                        get_covariant_dims_t<ddc::to_type_seq_t<typename T::CoordResult>>>>;
+        } -> InvJacobianMatrix<T>;
     {
         t.template inv_jacobian_component<int, int>(x)
-        } -> std::same_as<double>;
+        } -> std::floating_point;
 };
 
+/**
+ * @brief A helper concept to determine if a coordinate transformation provides a jacobian method that can be used for integration.
+ */
+template <typename T, class IntegrationCoord>
+concept MappingWithIntegrationCoord = Mapping<T> && requires(T const& t, IntegrationCoord const& x)
+{
+    {
+        t.jacobian(x)
+        } -> std::floating_point;
+};
+
+/**
+ * @brief A helper concept to determine if a coordinate transformation is analytical and therefore invertible.
+ */
 template <typename T>
 concept AnalyticalMapping = Mapping<T> && requires(T const& t)
 {

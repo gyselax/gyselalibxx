@@ -114,15 +114,15 @@ private:
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_basis_idx_range_type<IdxRangeFunction>;
     using FunctionBasisFieldMem = FieldMem<DataType, IdxRangeFunctionBasis>;
+    using FunctionBasisConstField = ConstField<DataType, IdxRangeFunctionBasis>;
 
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeFunction>;
-    using FunctionDerivFieldMem = FieldMem<DataType, IdxRangeFunctionDeriv>;
+    using FunctionDerivConstField = ConstField<DataType, IdxRangeFunctionDeriv>;
 
-    using TimeStepper = typename TimeStepperBuilder::template time_stepper_t<
-            FieldMem<Coord<typename GridInterest::continuous_dimension_type>, IdxRangeAdvection>,
-            FieldMem<DataType, IdxRangeAdvection>>;
+    using TimeStepper =
+            typename TimeStepperBuilder::template time_stepper_t<CoordInterest, DataType>;
 
     FunctionBuilder const& m_function_builder;
     FunctionEvaluator const& m_function_evaluator;
@@ -230,11 +230,23 @@ public:
      *
      * @param[in, out] allfdistribu Reference to the advected function, allocated on the device
      * @param[in] advection_field Reference to the advection field, allocated on the device.
+     * @param[in] dt Time step.
      * @param[in] advection_field_derivatives_min Reference to the advection field
      *              derivatives at the left side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the advection field is represented using a
+     *              spline with Hermite boundary conditions.
      * @param[in] advection_field_derivatives_max Reference to the advection field
      *              derivatives at the right side of the interest dimension, allocated on the device.
-     * @param[in] dt Time step.
+     *              This only needs to be provided if the advection field is represented using a
+     *              spline with Hermite boundary conditions.
+     * @param[in] function_derivatives_min Reference to the function
+     *              derivatives at the left side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the function is represented using a
+     *              spline with Hermite boundary conditions.
+     * @param[in] function_derivatives_max Reference to the function
+     *              derivatives at the right side of the interest dimension, allocated on the device.
+     *              This only needs to be provided if the function is represented using a
+     *              spline with Hermite boundary conditions.
      *
      * @return A reference to the allfdistribu array after advection on dt.
      */
@@ -245,14 +257,20 @@ public:
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
             = std::nullopt,
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
+            = std::nullopt,
+            std::optional<FunctionDerivConstField> const function_derivatives_min = std::nullopt,
+            std::optional<FunctionDerivConstField> const function_derivatives_max
             = std::nullopt) const
     {
-        Kokkos::Profiling::pushRegion("BslAdvection1D");
+        using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
+        using IdxBatchFunction = typename IdxRangeBatchFunction::discrete_element_type;
+
+        using IdxRangeBatchAdvecField = ddc::remove_dims_of_t<IdxRangeAdvection, GridInterest>;
+        using IdxBatchAdvecField = typename IdxRangeBatchAdvecField::discrete_element_type;
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvection1D");
 
         // Get index ranges and operators ........................................................
         IdxRangeFunction const idx_range_function = get_idx_range(allfdistribu);
-        IdxRangeAdvection const idx_range_advection = get_idx_range(advection_field);
-
 
         // Build spline representation of the advection field ....................................
         AdvecFieldSplineMem advection_field_coefs_alloc(
@@ -271,31 +289,17 @@ public:
                 "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
 
-        // Build derivatives on boundaries and fill with zeros....................................
-        FunctionDerivFieldMem function_derivatives_min(
-                m_function_builder.batched_derivs_xmin_domain(idx_range_function));
-        FunctionDerivFieldMem function_derivatives_max(
-                m_function_builder.batched_derivs_xmax_domain(idx_range_function));
-        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_min, 0.);
-        ddc::parallel_fill(Kokkos::DefaultExecutionSpace(), function_derivatives_max, 0.);
-
-        // Initialise the characteristics on the mesh points .....................................
+        // Interpolate the function ..............................................................
         /*
-            For the time integration solver, the function we advect (here the characteristics)
-            need to be defined on the same index range as the advection field. We then work on space
-            slices of the characteristic feet.
+            To interpolate the function we want to advect, we build for the feet a Field defined
+            on the index range where the function is defined.
         */
-        FeetFieldMem
-                slice_feet_alloc("slice_feet (BslAdvection1D::operator())", idx_range_advection);
-        FeetField slice_feet = get_field(slice_feet_alloc);
-        const std::source_location location = std::source_location::current();
-        ddc::parallel_for_each(
-                location.function_name(),
-                Kokkos::DefaultExecutionSpace(),
-                idx_range_advection,
-                KOKKOS_LAMBDA(IdxAdvection const idx) {
-                    slice_feet(idx) = ddc::coordinate(IdxInterest(idx));
-                });
+        // Build interpolation coefficients from the function values
+        m_function_builder(
+                get_field(function_coefs_alloc),
+                get_const_field(allfdistribu),
+                function_derivatives_min,
+                function_derivatives_max);
 
 
         // Compute the characteristic feet .......................................................
@@ -306,55 +310,38 @@ public:
                 * update_adv_field: evaluate the advection field spline at the updated feet.
         */
         // The function describing how the derivative of the evolve function is calculated.
-        std::function<void(AdvecField, FeetConstField)> update_adv_field
-                = [&](AdvecField updated_advection_field, FeetConstField slice_feet) {
-                      m_adv_field_evaluator(
-                              updated_advection_field,
-                              slice_feet,
-                              get_const_field(advection_field_coefs));
-                  };
 
-        TimeStepper time_stepper
-                = m_time_stepper_builder.template preallocate<TimeStepper>(idx_range_advection);
-
-        // Solve the characteristic equation with a time integration method
-        time_stepper
-                .update(Kokkos::DefaultExecutionSpace(),
-                        get_field(slice_feet),
-                        -dt,
-                        update_adv_field);
+        TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
 
 
-        // Interpolate the function ..............................................................
-        /*
-            To interpolate the function we want to advect, we build for the feet a Field defined
-            on the index range where the function is defined.
-        */
-        FieldMem<CoordInterest, IdxRangeFunction>
-                feet_alloc("feet (BslAdvection1D::operator())", idx_range_function);
-        Field<CoordInterest, IdxRangeFunction> feet = get_field(feet_alloc);
+        FunctionBasisConstField function_coefs = get_const_field(function_coefs_alloc);
+
+        FunctionEvaluator const& function_evaluator_proxy = m_function_evaluator;
+        AdvectionFieldEvaluator const& adv_field_evaluator_proxy = m_adv_field_evaluator;
+        // Evaluate the function at the characteristic feet
+        const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 Kokkos::DefaultExecutionSpace(),
                 idx_range_function,
                 KOKKOS_LAMBDA(IdxFunction const idx) {
-                    IdxAdvection slice_foot_index(idx);
-                    feet(idx) = slice_feet(slice_foot_index);
+                    CoordInterest foot = ddc::coordinate(IdxInterest(idx));
+
+                    // Solve the characteristic equation with a time integration method
+                    time_stepper
+                            .update(foot,
+                                    -dt,
+                                    [&](DataType& updated_advection_field,
+                                        CoordInterest const& foot) {
+                                        updated_advection_field = adv_field_evaluator_proxy(
+                                                foot,
+                                                get_const_field(
+                                                        advection_field_coefs[IdxBatchAdvecField(
+                                                                idx)]));
+                                    });
+                    allfdistribu(idx)
+                            = function_evaluator_proxy(foot, function_coefs[IdxBatchFunction(idx)]);
                 });
-
-
-        // Build interpolation coefficients from the function values
-        m_function_builder(
-                get_field(function_coefs_alloc),
-                get_const_field(allfdistribu),
-                std::optional(get_const_field(function_derivatives_min)),
-                std::optional(get_const_field(function_derivatives_max)));
-
-        // Evaluate the function at the characteristic feet
-        m_function_evaluator(
-                allfdistribu,
-                get_const_field(feet),
-                get_const_field(function_coefs_alloc));
 
 
         Kokkos::Profiling::popRegion();

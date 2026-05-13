@@ -93,10 +93,10 @@ jobs:
         run:
           sudo apt-get install doxygen
         shell: bash
-      - name: Set up Python 3.11
+      - name: Set up Python 3.13
         uses: actions/setup-python@v6
         with:
-          python-version: 3.11
+          python-version: 3.13
       - name: Install Python dependencies
         run:
           pip install -r requirements.txt
@@ -174,7 +174,7 @@ jobs:
     - name: Checkout Actions Repository
       uses: actions/checkout@v6
     - name: Spell Check Repo
-      uses: crate-ci/typos@v1.45.0
+      uses: crate-ci/typos@v1.46.0
       with:
         files: ./AUTHORS ./CMakeLists.txt ./docs/ ./post-process ./README.md ./simulations ./src ./tests/ ./bin
 
