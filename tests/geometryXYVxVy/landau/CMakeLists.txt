@@ -8,15 +8,17 @@ add_test(NAME TestSimulationLandauFFT_XYVxVy_spline
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:landau4d_fft_spline>"
         "$<TARGET_FILE:Python3::Interpreter>"
-        "fft")
+        "fft"
+        "${CMAKE_CURRENT_SOURCE_DIR}/landau_small.yaml")
 set_property(TEST TestSimulationLandauFFT_XYVxVy_spline PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationLandauFFT_XYVxVy_spline PROPERTY COST 100)
 
 add_test(NAME TestSimulationLandauFFT_XYVxVy_lagrange
-    COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau4d_small_lagrange.sh"
+    COMMAND bash "${CMAKE_CURRENT_SOURCE_DIR}/test_landau4d_small.sh"
         "${PROJECT_SOURCE_DIR}"
         "$<TARGET_FILE:landau4d_fft_lagrange>"
         "$<TARGET_FILE:Python3::Interpreter>"
-        "fft")
+        "fft"
+        "${CMAKE_CURRENT_SOURCE_DIR}/landau_small_lagrange.yaml")
 set_property(TEST TestSimulationLandauFFT_XYVxVy_lagrange PROPERTY TIMEOUT 200)
 set_property(TEST TestSimulationLandauFFT_XYVxVy_lagrange PROPERTY COST 100)
