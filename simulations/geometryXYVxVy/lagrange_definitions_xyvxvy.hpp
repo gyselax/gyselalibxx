@@ -5,7 +5,6 @@
 #include "geometry_xyvxvy.hpp"
 #include "lagrange_interpolation.hpp"
 
-
 int constexpr LDegreeX = 3;
 int constexpr LDegreeY = 3;
 
@@ -21,32 +20,32 @@ bool constexpr LagrangeOnUniformCellsVy = true;
 struct LagrangeX
     : std::conditional_t<
               LagrangeOnUniformCellsX,
-              UniformLagrangeBasis<X, LDegreeX>,
-              NonUniformLagrangeBasis<X, LDegreeX>>
+              UniformLagrangeBasis<X, LDegreeX, Real>,
+              NonUniformLagrangeBasis<X, LDegreeX, Real>>
 {
 };
 
 struct LagrangeY
     : std::conditional_t<
               LagrangeOnUniformCellsY,
-              UniformLagrangeBasis<Y, LDegreeY>,
-              NonUniformLagrangeBasis<Y, LDegreeY>>
+              UniformLagrangeBasis<Y, LDegreeY, Real>,
+              NonUniformLagrangeBasis<Y, LDegreeY, Real>>
 {
 };
 
 struct LagrangeVx
     : std::conditional_t<
               LagrangeOnUniformCellsVx,
-              UniformLagrangeBasis<Vx, LDegreeVx>,
-              NonUniformLagrangeBasis<Vx, LDegreeVx>>
+              UniformLagrangeBasis<Vx, LDegreeVx, Real>,
+              NonUniformLagrangeBasis<Vx, LDegreeVx, Real>>
 {
 };
 
 struct LagrangeVy
     : std::conditional_t<
               LagrangeOnUniformCellsVy,
-              UniformLagrangeBasis<Vy, LDegreeVy>,
-              NonUniformLagrangeBasis<Vy, LDegreeVy>>
+              UniformLagrangeBasis<Vy, LDegreeVy, Real>,
+              NonUniformLagrangeBasis<Vy, LDegreeVy, Real>>
 {
 };
 
@@ -54,23 +53,43 @@ ddc::BoundCond constexpr LagrangeYBoundary = ddc::BoundCond::PERIODIC;
 ddc::BoundCond constexpr LagrangeVyBoundary = ddc::BoundCond::HOMOGENEOUS_HERMITE;
 
 // SplineBuilder and SplineEvaluator definition
-using LagrangeInterpolatorX
-        = LagrangeInterpolator<Kokkos::DefaultExecutionSpace, LagrangeX, GridX, PERIODIC, PERIODIC>;
-using LagrangeInterpolatorY
-        = LagrangeInterpolator<Kokkos::DefaultExecutionSpace, LagrangeY, GridY, PERIODIC, PERIODIC>;
+using LagrangeInterpolatorX = LagrangeInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        LagrangeX,
+        GridX,
+        PERIODIC,
+        PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        Real>;
+using LagrangeInterpolatorY = LagrangeInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        LagrangeY,
+        GridY,
+        PERIODIC,
+        PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        ddc::BoundCond::PERIODIC,
+        Real>;
 
 using LagrangeInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagrangeVx,
         GridVx,
         CONSTANT,
-        CONSTANT>;
+        CONSTANT,
+        ddc::BoundCond::GREVILLE,
+        ddc::BoundCond::GREVILLE,
+        Real>;
 using LagrangeInterpolatorVy = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagrangeVy,
         GridVy,
         CONSTANT,
-        CONSTANT>;
+        CONSTANT,
+        ddc::BoundCond::GREVILLE,
+        ddc::BoundCond::GREVILLE,
+        Real>;
 
 using IdxRangeLY = IdxRange<LagrangeY>;
 using IdxRangeLXY = IdxRange<LagrangeX, LagrangeY>;
@@ -79,4 +98,3 @@ using IdxRangeLVxVy = IdxRange<LagrangeVx, LagrangeVy>;
 
 template <class ElementType>
 using LConstFieldXY = Field<ElementType const, IdxRangeLXY>;
-using DLConstFieldXY = LConstFieldXY<double>;
