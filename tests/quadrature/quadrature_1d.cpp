@@ -112,8 +112,8 @@ double compute_error(int n_cells, Method quad_method)
     using DimY = typename ComputeErrorTraits<N>::Y;
     using GridY = typename ComputeErrorTraits<N>::GridY;
     using IdxRangeY = IdxRange<GridY>;
-    using DFieldMemY = FieldMem<double, IdxRangeY>;
-    using DFieldY = Field<double, IdxRangeY>;
+    using DFieldMemY = DFieldMem<IdxRangeY>;
+    using DFieldY = DField<IdxRangeY>;
 
     Coord<DimY> const y_min(0.0);
     Coord<DimY> const y_max(M_PI);
