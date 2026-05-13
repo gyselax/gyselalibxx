@@ -214,8 +214,15 @@ private:
 };
 
 namespace detail {
-template <class NewMemorySpace, class IdxRangeQuadrature, class IdxRangeTotal, class DataType, class MemorySpace>
-struct OnMemorySpace<NewMemorySpace, Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace>>
+template <
+        class NewMemorySpace,
+        class IdxRangeQuadrature,
+        class IdxRangeTotal,
+        class DataType,
+        class MemorySpace>
+struct OnMemorySpace<
+        NewMemorySpace,
+        Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace>>
 {
     using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, NewMemorySpace>;
 };

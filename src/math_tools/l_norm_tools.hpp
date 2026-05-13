@@ -238,7 +238,8 @@ inline double error_norm_inf(
 template <class IdxRangeQuad, class ExecSpace, class DataType>
 double norm_L1(
         ExecSpace exec_space,
-        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space> quadrature,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space>
+                quadrature,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> function)
 {
     using IdxQuad = typename IdxRangeQuad::discrete_element_type;
@@ -258,7 +259,8 @@ double norm_L1(
 template <class IdxRangeQuad, class ExecSpace, class DataType>
 double error_norm_L1(
         ExecSpace exec_space,
-        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space> quadrature,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space>
+                quadrature,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> function,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> exact_function)
 {
@@ -288,7 +290,8 @@ double error_norm_L1(
 template <class IdxRangeQuad, class ExecSpace, class DataType>
 double norm_L2(
         ExecSpace exec_space,
-        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space> quadrature,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space>
+                quadrature,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> function)
 {
     using IdxQuad = typename IdxRangeQuad::discrete_element_type;
@@ -308,7 +311,8 @@ double norm_L2(
 template <class IdxRangeQuad, class ExecSpace, class DataType>
 double error_norm_L2(
         ExecSpace exec_space,
-        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space> quadrature,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space>
+                quadrature,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> function,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> exact_function)
 {
