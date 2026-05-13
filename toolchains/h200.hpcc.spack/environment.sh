@@ -8,9 +8,6 @@ then
 fi
 
 module purge
-module load gnu/gcc-12.3
-module load openmpi/gpu/4.1.5
-module load cuda/12.9
 
 export SPACK_USER_PREFIX=$HOME/spack-user-install
 export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
@@ -54,7 +51,9 @@ eval -- "$(
         py-pyyaml
 )"
 
+module load gnu/gcc-12.3
+module load openmpi/gpu/4.1.5
+module load cuda/12.9
+
 # Add Kokkos Tools to the `LD_LIBRARY_PATH`
 export LD_LIBRARY_PATH="$(spack location -i kokkos-tools)/lib64:$LD_LIBRARY_PATH"
-
-export GYSELALIBXX_OPENBLAS_ROOT="$(spack location -i openblas)"

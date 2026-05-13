@@ -2,10 +2,10 @@ spack:
   definitions:
   - packages:
     - cmake
+    - 'ddc@0.12 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +cuda cuda_arch=90
     - googletest +gmock
     - kokkos@4.7 ~openmp +cuda +cuda_relocatable_device_code +cuda_constexpr cuda_arch=90
-    - kokkos-fft@0.4 host_backend=fftw-serial device_backend=cufft
     - kokkos-kernels@4.7 ~shared
     - kokkos-tools
     - koliop@0.1.2:0.1
@@ -20,7 +20,7 @@ spack:
     - pdiplugin-pycall
     - pdiplugin-set-value
     - pdiplugin-trace
-    - python@3.12
+    - python@3.13
     - py-dask
     - py-h5py
     - py-imageio
@@ -69,7 +69,6 @@ spack:
             c: /usr/local/gcc-12.3/bin/gcc
             cxx: /usr/local/gcc-12.3/bin/g++
             fortran: /usr/local/gcc-12.3/bin/gfortran
-
     lapack:
       require: openblas
     mpi:
@@ -80,5 +79,7 @@ spack:
       - spec: openmpi@4.1.5+cuda+cxx~cxx_exceptions~java~memchecker+pmi~rocm+static~wrapper-rpath fabrics=ucx schedulers=none
         prefix: /usr/local/openmpi-4.1.5/gpu-ext
     py-dask:
-      variants: ~dataframe
+      prefer: ['~dataframe']
+    py-pandas:
+      prefer: ['~performance']
   view: false

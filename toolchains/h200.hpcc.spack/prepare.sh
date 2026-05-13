@@ -20,9 +20,6 @@ export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
 export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
 
 module purge
-module load gnu/gcc-12.3
-module load openmpi/gpu/4.1.5
-module load cuda/12.9
 
 git clone --branch v1.1.0 --depth 1 https://github.com/spack/spack.git $HOME/spack || true
 . $HOME/spack/share/spack/setup-env.sh
