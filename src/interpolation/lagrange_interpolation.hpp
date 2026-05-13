@@ -52,6 +52,8 @@ class LagrangeInterpolator
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
+    static_assert(is_periodic == (MinBound == ddc::BoundCond::PERIODIC));
+    static_assert(is_periodic == (MaxBound == ddc::BoundCond::PERIODIC));
     static_assert(is_periodic == (MinExtrapRule == ExtrapolationRule::PERIODIC));
     static_assert(is_periodic == (MaxExtrapRule == ExtrapolationRule::PERIODIC));
 
@@ -98,11 +100,8 @@ public:
      * The extrapolation rules are initialised from the discrete space of @c Basis,
      * so the corresponding ddc discrete space must be initialised before construction.
      * No index range is required because the identity builder needs none.
-     *
-     * @param idx_range The index range on which the interpolator will act. This is
-     *                  unused but is included to match the SplineInterpolator interface.
      */
-    LagrangeInterpolator(IdxRange<InterpGrid> idx_range)
+    LagrangeInterpolator()
         : m_min_extrapolation(
                 get_extrapolation<MinExtrapRule, CoeffGridType, DataType, Basis>(Extremity::FRONT))
         , m_max_extrapolation(
