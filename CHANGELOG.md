@@ -35,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix hardcoded Homogeneous Hermite boundary conditions in `BslAdvection1D`.
 - Decrease memory usage in `SplinePolarFootFinder`.
 - Fix GCC version on Adastra toolchains.
+- Fix `IdentityInterpolationBuilder` when used with a batch dimension.
 
 ### Changed
 
