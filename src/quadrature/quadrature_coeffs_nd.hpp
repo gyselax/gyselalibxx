@@ -11,10 +11,10 @@
 
 
 namespace {
-template <class ExecSpace, class Grid1D, class DataType>
+template <class ExecSpace, class Grid1D, std::floating_point DataType>
 using CoefficientFieldMem1D
         = FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>;
-template <class ExecSpace, class Grid1D, class DataType>
+template <class ExecSpace, class Grid1D, std::floating_point DataType>
 using CoefficientField1D = Field<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>;
 } // namespace
 
