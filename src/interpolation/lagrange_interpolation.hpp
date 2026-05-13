@@ -102,7 +102,7 @@ public:
      * @param idx_range The index range on which the interpolator will act. This is
      *                  unused but is included to match the SplineInterpolator interface.
      */
-    explicit LagrangeInterpolator(IdxRange<InterpGrid> idx_range)
+    explicit LagrangeInterpolator(IdxRange<InterpGrid> idx_range = IdxRange<InterpGrid> {})
         : m_min_extrapolation(
                 get_extrapolation<MinExtrapRule, CoeffGridType, Basis>(Extremity::FRONT))
         , m_max_extrapolation(
