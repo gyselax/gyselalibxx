@@ -54,18 +54,10 @@ ddc::BoundCond constexpr LagrangeYBoundary = ddc::BoundCond::PERIODIC;
 ddc::BoundCond constexpr LagrangeVyBoundary = ddc::BoundCond::HOMOGENEOUS_HERMITE;
 
 // SplineBuilder and SplineEvaluator definition
-using LagrangeInterpolatorX = LagrangeInterpolator<
-        Kokkos::DefaultExecutionSpace,
-        LagrangeX,
-        GridX,
-        PERIODIC,
-        PERIODIC>;
-using LagrangeInterpolatorY = LagrangeInterpolator<
-        Kokkos::DefaultExecutionSpace,
-        LagrangeY,
-        GridY,
-        PERIODIC,
-        PERIODIC>;
+using LagrangeInterpolatorX
+        = LagrangeInterpolator<Kokkos::DefaultExecutionSpace, LagrangeX, GridX, PERIODIC, PERIODIC>;
+using LagrangeInterpolatorY
+        = LagrangeInterpolator<Kokkos::DefaultExecutionSpace, LagrangeY, GridY, PERIODIC, PERIODIC>;
 
 using LagrangeInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
