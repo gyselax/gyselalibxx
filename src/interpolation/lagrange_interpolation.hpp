@@ -76,8 +76,8 @@ public:
             DataType,
             Basis,
             InterpGrid,
-            extrapolation_rule_t<MinExtrapRule, CoeffGridType>,
-            extrapolation_rule_t<MaxExtrapRule, CoeffGridType>>;
+            extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>,
+            extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType>>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -86,8 +86,8 @@ public:
     }
 
 private:
-    extrapolation_rule_t<MinExtrapRule, CoeffGridType> m_min_extrapolation;
-    extrapolation_rule_t<MaxExtrapRule, CoeffGridType> m_max_extrapolation;
+    extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType> m_min_extrapolation;
+    extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType> m_max_extrapolation;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
@@ -104,9 +104,9 @@ public:
      */
     LagrangeInterpolator(IdxRange<InterpGrid> idx_range)
         : m_min_extrapolation(
-                get_extrapolation<MinExtrapRule, CoeffGridType, Basis>(Extremity::FRONT))
+                get_extrapolation<MinExtrapRule, CoeffGridType, DataType, Basis>(Extremity::FRONT))
         , m_max_extrapolation(
-                  get_extrapolation<MaxExtrapRule, CoeffGridType, Basis>(Extremity::BACK))
+                  get_extrapolation<MaxExtrapRule, CoeffGridType, DataType, Basis>(Extremity::BACK))
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
