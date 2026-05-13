@@ -87,9 +87,9 @@ void SingleModePerturbInitialisation::perturbation_initialisation(
 {
     IdxRangeXY const gridxy = get_idx_range<GridX, GridY>(perturbation);
     Real const kx = perturb_mode * 2. * M_PI
-                      / ddcHelper::total_interval_length(ddc::select<GridX>(gridxy));
+                    / ddcHelper::total_interval_length(ddc::select<GridX>(gridxy));
     Real const ky = perturb_mode * 2. * M_PI
-                      / ddcHelper::total_interval_length(ddc::select<GridY>(gridxy));
+                    / ddcHelper::total_interval_length(ddc::select<GridY>(gridxy));
 
     const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(

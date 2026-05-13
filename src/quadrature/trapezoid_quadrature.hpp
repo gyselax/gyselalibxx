@@ -85,5 +85,6 @@ trapezoid_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
     return quadrature_coeffs_nd<ExecSpace, DataType, ODims...>(
             idx_range,
             (std::function<DFieldMem<IdxRange<ODims>, typename ExecSpace::memory_space>(
-                     IdxRange<ODims>)>(trapezoid_quadrature_coefficients_1d<ExecSpace, ODims, DataType>))...);
+                     IdxRange<ODims>)>(
+                    trapezoid_quadrature_coefficients_1d<ExecSpace, ODims, DataType>))...);
 }

@@ -106,8 +106,8 @@ void fill_simpson_quadrature_coefficients_1d(
  * @return The quadrature coefficients for the Simpson method defined on the provided index range.
  */
 template <class ExecSpace, class Grid1D, class DataType = double>
-FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> simpson_quadrature_coefficients_1d(
-        IdxRange<Grid1D> const& idx_range)
+FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
+simpson_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
 {
     FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(
             "current_dim_coeffs (simplson_quadrature_coefficients_1d)",
@@ -190,8 +190,8 @@ simpson_trapezoid_quadrature_coefficients_1d(
  *         The allocation place (host or device ) will depend on the ExecSpace.
  */
 template <class ExecSpace, class DataType = double, class... ODims>
-FieldMem<DataType, IdxRange<ODims...>, typename ExecSpace::memory_space> simpson_quadrature_coefficients(
-        IdxRange<ODims...> const& idx_range)
+FieldMem<DataType, IdxRange<ODims...>, typename ExecSpace::memory_space>
+simpson_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
 {
     return quadrature_coeffs_nd<ExecSpace, DataType, ODims...>(
             idx_range,
