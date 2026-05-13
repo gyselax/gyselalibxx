@@ -12,7 +12,7 @@ namespace {
 
 enum Method { TRAPEZ, SIMPSON };
 
-template <bool Periodic>
+template <bool Periodic, class Real = double>
 struct ConstantFuncCheck
 {
     struct XPeriod
@@ -25,7 +25,7 @@ struct ConstantFuncCheck
     };
     using IdxRangeXPeriod = IdxRange<GridXPeriod>;
     using CoordXPeriod = Coord<XPeriod>;
-    using DFieldMemX = DFieldMem<IdxRangeXPeriod>;
+    using DFieldMemX = FieldMem<Real, IdxRangeXPeriod>;
 
     static double check_1d(Method quad_method)
     {
@@ -45,12 +45,13 @@ struct ConstantFuncCheck
         switch (quad_method) {
         case Method::TRAPEZ: {
             quadrature_coeffs_alloc
-                    = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridx);
+                    = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, Real>(gridx);
             break;
         }
         case Method::SIMPSON: {
             quadrature_coeffs_alloc
-                    = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridx);
+                    = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace, Real>(
+                            gridx);
             break;
         }
         }
@@ -111,8 +112,8 @@ double compute_error(int n_cells, Method quad_method)
     using DimY = typename ComputeErrorTraits<N>::Y;
     using GridY = typename ComputeErrorTraits<N>::GridY;
     using IdxRangeY = IdxRange<GridY>;
-    using DFieldMemY = DFieldMem<IdxRangeY>;
-    using DFieldY = DField<IdxRangeY>;
+    using DFieldMemY = FieldMem<double, IdxRangeY>;
+    using DFieldY = Field<double, IdxRangeY>;
 
     Coord<DimY> const y_min(0.0);
     Coord<DimY> const y_max(M_PI);
@@ -129,12 +130,12 @@ double compute_error(int n_cells, Method quad_method)
     switch (quad_method) {
     case Method::TRAPEZ: {
         quadrature_coeffs_alloc
-                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(gridy);
+                = trapezoid_quadrature_coefficients<Kokkos::DefaultExecutionSpace, double>(gridy);
         break;
     }
     case Method::SIMPSON: {
         quadrature_coeffs_alloc
-                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace>(gridy);
+                = simpson_quadrature_coefficients_1d<Kokkos::DefaultExecutionSpace, double>(gridy);
         break;
     }
     }
@@ -192,6 +193,36 @@ TEST(SimpsonTrapezoidFrontNonUniformNonPeriodicQuadrature1D, ExactForConstantFun
 TEST(SimpsonTrapezoidBackNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
 {
     EXPECT_LE(ConstantFuncCheck<false>::check_simpson_trapezoid_1d(Extremity::BACK), 1e-11);
+}
+
+TEST(FloatTrapezoidNonUniformPeriodicQuadrature1D, ExactForConstantFunc)
+{
+    EXPECT_LE(ConstantFuncCheck<true>::check_1d(Method::TRAPEZ), 1e-7);
+}
+
+TEST(FloatSimpsonNonUniformPeriodicQuadrature1D, ExactForConstantFunc)
+{
+    EXPECT_LE(ConstantFuncCheck<true>::check_1d(Method::SIMPSON), 1e-7);
+}
+
+TEST(FloatTrapezoidNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
+{
+    EXPECT_LE(ConstantFuncCheck<false>::check_1d(Method::TRAPEZ), 1e-7);
+}
+
+TEST(FloatSimpsonNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
+{
+    EXPECT_LE(ConstantFuncCheck<false>::check_1d(Method::SIMPSON), 1e-7);
+}
+
+TEST(FloatSimpsonTrapezoidFrontNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
+{
+    EXPECT_LE(ConstantFuncCheck<false>::check_simpson_trapezoid_1d(Extremity::FRONT), 1e-7);
+}
+
+TEST(FloatSimpsonTrapezoidBackNonUniformNonPeriodicQuadrature1D, ExactForConstantFunc)
+{
+    EXPECT_LE(ConstantFuncCheck<false>::check_simpson_trapezoid_1d(Extremity::BACK), 1e-7);
 }
 
 TEST(TrapezoidUniformNonPeriodicQuadrature1D, Convergence)
