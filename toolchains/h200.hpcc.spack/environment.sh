@@ -20,6 +20,7 @@ eval -- "$(
         --env gyselalibxx-spack-environment \
         load --sh \
         cmake \
+        ddc \
         ginkgo \
         googletest \
         kokkos \
