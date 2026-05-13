@@ -59,6 +59,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `polarpoissonlikesolver.hpp` -> `polar_spline_fem_poisson_like_solver.hpp`.
 - Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.
 - Prefixed the name of the Kokkos region with "(GSLX)"
+- Use Simpson quadrature for XYVxVy Landau damping.
 
 ### Deprecated
 
