@@ -154,7 +154,20 @@ int main(int argc, char** argv)
             vlasov(advection_x, advection_y, advection_vx, advection_vy, transpose);
 
     DFieldMemVxVy const quadrature_coeffs(
-            simpson_quadrature_coefficients<Kokkos::DefaultExecutionSpace>(idxrange_vxvy));
+            quadrature_coeffs_nd<Kokkos::DefaultExecutionSpace, GridVx, GridVy>(
+                    idxrange_vxvy,
+                    std::
+                            bind(simpson_trapezoid_quadrature_coefficients_1d<
+                                         Kokkos::DefaultExecutionSpace,
+                                         GridVx>,
+                                 std::placeholders::_1,
+                                 Extremity::FRONT),
+                    std::
+                            bind(simpson_trapezoid_quadrature_coefficients_1d<
+                                         Kokkos::DefaultExecutionSpace,
+                                         GridVy>,
+                                 std::placeholders::_1,
+                                 Extremity::FRONT)));
     DFieldMemVxVy local_quadrature_coeffs(idxrange_vxvy_v2Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs),
