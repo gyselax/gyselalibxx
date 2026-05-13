@@ -20,7 +20,7 @@
  *
  * @return The quadrature coefficients for the trapezoid method defined on the provided index range.
  */
-template <class ExecSpace, class Grid1D, class DataType = double>
+template <class ExecSpace, class DataType = double, class Grid1D>
 FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
 trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
 {
@@ -86,5 +86,5 @@ trapezoid_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
             idx_range,
             (std::function<DFieldMem<IdxRange<ODims>, typename ExecSpace::memory_space>(
                      IdxRange<ODims>)>(
-                    trapezoid_quadrature_coefficients_1d<ExecSpace, ODims, DataType>))...);
+                    trapezoid_quadrature_coefficients_1d<ExecSpace, DataType, ODims>))...);
 }

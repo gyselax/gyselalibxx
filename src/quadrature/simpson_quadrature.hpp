@@ -105,7 +105,7 @@ void fill_simpson_quadrature_coefficients_1d(
  *
  * @return The quadrature coefficients for the Simpson method defined on the provided index range.
  */
-template <class ExecSpace, class Grid1D, class DataType = double>
+template <class ExecSpace, class DataType = double, class Grid1D>
 FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
 simpson_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
 {
@@ -139,7 +139,7 @@ simpson_trapezoid_quadrature_coefficients_1d(
             !Grid1D::continuous_dimension_type::PERIODIC,
             "The extremity is non-sensical in a Periodic dimension");
     try {
-        return simpson_quadrature_coefficients_1d<ExecSpace, Grid1D, DataType>(idx_range);
+        return simpson_quadrature_coefficients_1d<ExecSpace, DataType, Grid1D>(idx_range);
     } catch (const std::runtime_error& error) {
         FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(
                 "coefficients (simplson_trapezoid_quadrature_coefficients_1d)",
@@ -196,5 +196,5 @@ simpson_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
     return quadrature_coeffs_nd<ExecSpace, DataType, ODims...>(
             idx_range,
             (std::function<FieldMem<DataType, IdxRange<ODims>, typename ExecSpace::memory_space>(
-                     IdxRange<ODims>)>(simpson_quadrature_coefficients_1d<ExecSpace, ODims>))...);
+                     IdxRange<ODims>)>(simpson_quadrature_coefficients_1d<ExecSpace, DataType, ODims>))...);
 }
