@@ -637,9 +637,9 @@ public:
             IdxRange&lt;basis_domain_type&gt; extended_domain(
                     ddc::discrete_space&lt;Basis&gt;().full_domain().remove_first(
                             bp_idx_range.extents()));
-            typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(
-                    extended_domain.size());
-            BatchedInterpolationIdxRange repeat_domain(get_idx_range(vals).take_first(nrepeat));
+            IdxStep&lt;InterpolationGrid&gt; nrepeat(extended_domain.size());
+            IdxRange&lt;InterpolationGrid&gt; repeat_domain(
+                    get_idx_range&lt;InterpolationGrid&gt;(vals).take_first(nrepeat));
             Kokkos::deep_copy(
                     coeffs[extended_domain].allocation_kokkos_view(),
                     vals[repeat_domain].allocation_kokkos_view());

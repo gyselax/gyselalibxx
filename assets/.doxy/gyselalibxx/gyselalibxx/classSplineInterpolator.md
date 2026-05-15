@@ -35,7 +35,7 @@ _An owning interpolation object that bundles a spline builder and evaluator._ [M
 | Type | Name |
 | ---: | :--- |
 | typedef ddc::SplineBuilder&lt; ExecSpace, typename ExecSpace::memory\_space, Basis, InterpGrid, MinBound, MaxBound, Solver &gt; | [**BuilderType**](#typedef-buildertype)  <br>_The ddc::SplineBuilder type built from the template parameters._  |
-| typedef ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory\_space, Basis, InterpGrid, extrapolation\_rule\_t&lt; MinExtrapRule, Basis &gt;, extrapolation\_rule\_t&lt; MaxExtrapRule, Basis &gt; &gt; | [**EvaluatorType**](#typedef-evaluatortype)  <br>_The ddc::SplineEvaluator type built from the template parameters._  |
+| typedef ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory\_space, Basis, InterpGrid, extrapolation\_rule\_t&lt; MinExtrapRule, Basis, double &gt;, extrapolation\_rule\_t&lt; MaxExtrapRule, Basis, double &gt; &gt; | [**EvaluatorType**](#typedef-evaluatortype)  <br>_The ddc::SplineEvaluator type built from the template parameters._  |
 
 
 
@@ -147,7 +147,7 @@ using SplineInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrap
 
 _The ddc::SplineEvaluator type built from the template parameters._ 
 ```C++
-using SplineInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver >::EvaluatorType =  ddc::SplineEvaluator< ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, extrapolation_rule_t<MinExtrapRule, Basis>, extrapolation_rule_t<MaxExtrapRule, Basis> >;
+using SplineInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver >::EvaluatorType =  ddc::SplineEvaluator< ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, extrapolation_rule_t<MinExtrapRule, Basis, double>, extrapolation_rule_t<MaxExtrapRule, Basis, double> >;
 ```
 
 

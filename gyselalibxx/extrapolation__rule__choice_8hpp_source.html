@@ -571,58 +571,58 @@
 namespace details {
 
 // Get the class describing the interpolation rule
-template &lt;ExtrapolationRule Rule, class CoeffGrid&gt;
+template &lt;ExtrapolationRule Rule, class CoeffGrid, class DataType&gt;
 struct GetExtrapolationRuleClass;
 
-template &lt;class CoeffGrid&gt;
-struct GetExtrapolationRuleClass&lt;PERIODIC, CoeffGrid&gt;
+template &lt;class CoeffGrid, class DataType&gt;
+struct GetExtrapolationRuleClass&lt;PERIODIC, CoeffGrid, DataType&gt;
 {
     using type = ddc::PeriodicExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;;
 };
 
-template &lt;class CoeffGrid&gt;
-struct GetExtrapolationRuleClass&lt;NULL_VALUE, CoeffGrid&gt;
+template &lt;class CoeffGrid, class DataType&gt;
+struct GetExtrapolationRuleClass&lt;NULL_VALUE, CoeffGrid, DataType&gt;
 {
     using type = ddc::NullExtrapolationRule;
 };
 
-template &lt;class CoeffGrid&gt;
-struct GetExtrapolationRuleClass&lt;CONSTANT, CoeffGrid&gt;
+template &lt;class CoeffGrid, class DataType&gt;
+struct GetExtrapolationRuleClass&lt;CONSTANT, CoeffGrid, DataType&gt;
 {
     using type = std::conditional_t&lt;
             is_spline_basis_v&lt;CoeffGrid&gt;,
             ddc::ConstantExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;,
-            ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid&gt;&gt;;
+            ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid, DataType&gt;&gt;;
 };
 
 } // namespace details
 
-template &lt;ExtrapolationRule Rule, class CoeffGrid&gt;
-using extrapolation_rule_t = details::GetExtrapolationRuleClass&lt;Rule, CoeffGrid&gt;::type;
+template &lt;ExtrapolationRule Rule, class CoeffGrid, class DataType&gt;
+using extrapolation_rule_t = details::GetExtrapolationRuleClass&lt;Rule, CoeffGrid, DataType&gt;::type;
 
-template &lt;ExtrapolationRule Rule, class CoeffGrid, class Basis = CoeffGrid&gt;
-extrapolation_rule_t&lt;Rule, CoeffGrid&gt; get_extrapolation(Extremity extremity)
+template &lt;ExtrapolationRule Rule, class CoeffGrid, class DataType, class Basis = CoeffGrid&gt;
+extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt; get_extrapolation(Extremity extremity)
 {
     if constexpr (Rule == CONSTANT) {
         if constexpr (is_spline_basis_v&lt;Basis&gt;) {
             if (extremity == Extremity::FRONT) {
-                return extrapolation_rule_t&lt;Rule, CoeffGrid&gt;(
+                return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;(
                         ddc::discrete_space&lt;CoeffGrid&gt;().rmin());
             } else {
-                return extrapolation_rule_t&lt;Rule, CoeffGrid&gt;(
+                return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;(
                         ddc::discrete_space&lt;CoeffGrid&gt;().rmax());
             }
         } else {
             if (extremity == Extremity::FRONT) {
-                return extrapolation_rule_t&lt;Rule, CoeffGrid&gt;(
+                return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;(
                         ddc::discrete_space&lt;Basis&gt;().full_domain().front());
             } else {
-                return extrapolation_rule_t&lt;Rule, CoeffGrid&gt;(
+                return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;(
                         ddc::discrete_space&lt;Basis&gt;().full_domain().back());
             }
         }
     } else {
-        return extrapolation_rule_t&lt;Rule, CoeffGrid&gt;();
+        return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;();
     }
 }
 </code></pre></div>

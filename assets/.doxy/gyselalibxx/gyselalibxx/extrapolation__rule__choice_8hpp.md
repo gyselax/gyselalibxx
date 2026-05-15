@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef details::GetExtrapolationRuleClass&lt; Rule, CoeffGrid &gt;::type | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br> |
+| typedef details::GetExtrapolationRuleClass&lt; Rule, CoeffGrid, DataType &gt;::type | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br> |
 
 
 
@@ -58,7 +58,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  extrapolation\_rule\_t&lt; Rule, CoeffGrid &gt; | [**get\_extrapolation**](#function-get_extrapolation) (Extremity extremity) <br> |
+|  extrapolation\_rule\_t&lt; Rule, CoeffGrid, DataType &gt; | [**get\_extrapolation**](#function-get_extrapolation) (Extremity extremity) <br> |
 
 
 
@@ -95,7 +95,7 @@
 ### typedef extrapolation\_rule\_t 
 
 ```C++
-using extrapolation_rule_t =  details::GetExtrapolationRuleClass<Rule, CoeffGrid>::type;
+using extrapolation_rule_t =  details::GetExtrapolationRuleClass<Rule, CoeffGrid, DataType>::type;
 ```
 
 
@@ -110,8 +110,8 @@ using extrapolation_rule_t =  details::GetExtrapolationRuleClass<Rule, CoeffGrid
 ### function get\_extrapolation 
 
 ```C++
-template<ExtrapolationRule Rule, class CoeffGrid, class Basis>
-extrapolation_rule_t< Rule, CoeffGrid > get_extrapolation (
+template<ExtrapolationRule Rule, class CoeffGrid, class DataType, class Basis>
+extrapolation_rule_t< Rule, CoeffGrid, DataType > get_extrapolation (
     Extremity extremity
 ) 
 ```

@@ -87,9 +87,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="72" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classLagrangeInterpolator_1ac2772f3ef56ead727e9093d9323e60ac" prot="public" static="no">
-        <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt; MinExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref> &gt;, extrapolation_rule_t&lt; MaxExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref> &gt; &gt;</type>
-        <definition>using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::EvaluatorType =  LagrangeEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, CoeffGridType&gt;, extrapolation_rule_t&lt;MaxExtrapRule, CoeffGridType&gt; &gt;</definition>
+      <memberdef kind="typedef" id="classLagrangeInterpolator_1a66726b8c29c0c88bc79de1a524e4cf04" prot="public" static="no">
+        <type><ref refid="classLagrangeEvaluator" kindref="compound">LagrangeEvaluator</ref>&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt; MinExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref>, DataType &gt;, extrapolation_rule_t&lt; MaxExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref>, DataType &gt; &gt;</type>
+        <definition>using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::EvaluatorType =  LagrangeEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, CoeffGridType, DataType&gt;, extrapolation_rule_t&lt;MaxExtrapRule, CoeffGridType, DataType&gt; &gt;</definition>
         <argsstring></argsstring>
         <name>EvaluatorType</name>
         <qualifiedname>LagrangeInterpolator::EvaluatorType</qualifiedname>
@@ -121,9 +121,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classLagrangeInterpolator_1aa94133c74b86ec96288e1239771b8428" prot="private" static="no" mutable="no">
-        <type>extrapolation_rule_t&lt; MinExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref> &gt;</type>
-        <definition>extrapolation_rule_t&lt;MinExtrapRule, CoeffGridType&gt; LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::m_min_extrapolation</definition>
+      <memberdef kind="variable" id="classLagrangeInterpolator_1acca4cea293add372e124f9555b3dfd6b" prot="private" static="no" mutable="no">
+        <type>extrapolation_rule_t&lt; MinExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref>, DataType &gt;</type>
+        <definition>extrapolation_rule_t&lt;MinExtrapRule, CoeffGridType, DataType&gt; LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::m_min_extrapolation</definition>
         <argsstring></argsstring>
         <name>m_min_extrapolation</name>
         <qualifiedname>LagrangeInterpolator::m_min_extrapolation</qualifiedname>
@@ -135,9 +135,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="91" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="91" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classLagrangeInterpolator_1aa5e7274b82fbae1df9cd597349feb780" prot="private" static="no" mutable="no">
-        <type>extrapolation_rule_t&lt; MaxExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref> &gt;</type>
-        <definition>extrapolation_rule_t&lt;MaxExtrapRule, CoeffGridType&gt; LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::m_max_extrapolation</definition>
+      <memberdef kind="variable" id="classLagrangeInterpolator_1afca04402c3e14bdd90c0dcde3462b1ea" prot="private" static="no" mutable="no">
+        <type>extrapolation_rule_t&lt; MaxExtrapRule, <ref refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kindref="member">CoeffGridType</ref>, DataType &gt;</type>
+        <definition>extrapolation_rule_t&lt;MaxExtrapRule, CoeffGridType, DataType&gt; LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::m_max_extrapolation</definition>
         <argsstring></argsstring>
         <name>m_max_extrapolation</name>
         <qualifiedname>LagrangeInterpolator::m_max_extrapolation</qualifiedname>
@@ -164,7 +164,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="93" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="93" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classLagrangeInterpolator_1a71b02deb7ec56f468b3f6a371b23a8ea" prot="private" static="no" mutable="no">
-        <type><ref refid="classLagrangeInterpolator_1ac2772f3ef56ead727e9093d9323e60ac" kindref="member">EvaluatorType</ref></type>
+        <type><ref refid="classLagrangeInterpolator_1a66726b8c29c0c88bc79de1a524e4cf04" kindref="member">EvaluatorType</ref></type>
         <definition>EvaluatorType LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::m_evaluator</definition>
         <argsstring></argsstring>
         <name>m_evaluator</name>
@@ -231,7 +231,7 @@
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="117" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="117" bodyend="120"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeInterpolator_1a2572e88d65f8e0e06d4c2387ef62d6c5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
-        <type><ref refid="classLagrangeInterpolator_1ac2772f3ef56ead727e9093d9323e60ac" kindref="member">EvaluatorType</ref> const &amp;</type>
+        <type><ref refid="classLagrangeInterpolator_1a66726b8c29c0c88bc79de1a524e4cf04" kindref="member">EvaluatorType</ref> const &amp;</type>
         <definition>EvaluatorType const  &amp; LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::get_evaluator</definition>
         <argsstring>() const</argsstring>
         <name>get_evaluator</name>
@@ -328,15 +328,15 @@
       <member refid="classLagrangeInterpolator_1af18468e103a52b14c01ca54c0ef4d3d4" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>BuilderType</name></member>
       <member refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>CoeffGridType</name></member>
       <member refid="classLagrangeInterpolator_1a706864ae674aecad884ac0e948cdb915" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>continuous_dimension_type</name></member>
-      <member refid="classLagrangeInterpolator_1ac2772f3ef56ead727e9093d9323e60ac" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>EvaluatorType</name></member>
+      <member refid="classLagrangeInterpolator_1a66726b8c29c0c88bc79de1a524e4cf04" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>EvaluatorType</name></member>
       <member refid="classLagrangeInterpolator_1a394b85e66c65eb6a2f207ec0f0c725dd" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>get_builder</name></member>
       <member refid="classLagrangeInterpolator_1a2572e88d65f8e0e06d4c2387ef62d6c5" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>get_evaluator</name></member>
       <member refid="classLagrangeInterpolator_1a65031a88b88be2c7406b6c7f032cabd4" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>is_periodic</name></member>
       <member refid="classLagrangeInterpolator_1a0cc956579fc3968beba84b295abd75ab" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>LagrangeInterpolator</name></member>
       <member refid="classLagrangeInterpolator_1a715cee2d98524edf5b0b1233220fb244" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_builder</name></member>
       <member refid="classLagrangeInterpolator_1a71b02deb7ec56f468b3f6a371b23a8ea" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_evaluator</name></member>
-      <member refid="classLagrangeInterpolator_1aa5e7274b82fbae1df9cd597349feb780" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_max_extrapolation</name></member>
-      <member refid="classLagrangeInterpolator_1aa94133c74b86ec96288e1239771b8428" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_min_extrapolation</name></member>
+      <member refid="classLagrangeInterpolator_1afca04402c3e14bdd90c0dcde3462b1ea" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_max_extrapolation</name></member>
+      <member refid="classLagrangeInterpolator_1acca4cea293add372e124f9555b3dfd6b" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_min_extrapolation</name></member>
       <member refid="classLagrangeInterpolator_1af55baa821103ff7249385620b17aa49b" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>rank</name></member>
     </listofallmembers>
   </compounddef>

@@ -1767,10 +1767,10 @@
     <member refid="classLagrangeInterpolator_1a706864ae674aecad884ac0e948cdb915" kind="typedef"><name>continuous_dimension_type</name></member>
     <member refid="classLagrangeInterpolator_1af18468e103a52b14c01ca54c0ef4d3d4" kind="typedef"><name>BuilderType</name></member>
     <member refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kind="typedef"><name>CoeffGridType</name></member>
-    <member refid="classLagrangeInterpolator_1ac2772f3ef56ead727e9093d9323e60ac" kind="typedef"><name>EvaluatorType</name></member>
+    <member refid="classLagrangeInterpolator_1a66726b8c29c0c88bc79de1a524e4cf04" kind="typedef"><name>EvaluatorType</name></member>
     <member refid="classLagrangeInterpolator_1a65031a88b88be2c7406b6c7f032cabd4" kind="variable"><name>is_periodic</name></member>
-    <member refid="classLagrangeInterpolator_1aa94133c74b86ec96288e1239771b8428" kind="variable"><name>m_min_extrapolation</name></member>
-    <member refid="classLagrangeInterpolator_1aa5e7274b82fbae1df9cd597349feb780" kind="variable"><name>m_max_extrapolation</name></member>
+    <member refid="classLagrangeInterpolator_1acca4cea293add372e124f9555b3dfd6b" kind="variable"><name>m_min_extrapolation</name></member>
+    <member refid="classLagrangeInterpolator_1afca04402c3e14bdd90c0dcde3462b1ea" kind="variable"><name>m_max_extrapolation</name></member>
     <member refid="classLagrangeInterpolator_1a715cee2d98524edf5b0b1233220fb244" kind="variable"><name>m_builder</name></member>
     <member refid="classLagrangeInterpolator_1a71b02deb7ec56f468b3f6a371b23a8ea" kind="variable"><name>m_evaluator</name></member>
     <member refid="classLagrangeInterpolator_1af55baa821103ff7249385620b17aa49b" kind="function"><name>rank</name></member>
@@ -2932,10 +2932,10 @@
   <compound refid="classSplineInterpolator" kind="class"><name>SplineInterpolator</name>
     <member refid="classSplineInterpolator_1a6ccadb16c290f6a7de78a1aefb544c48" kind="typedef"><name>continuous_dimension_type</name></member>
     <member refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kind="typedef"><name>BuilderType</name></member>
-    <member refid="classSplineInterpolator_1a6f15d4849795fdce83e050c75ce7698e" kind="typedef"><name>EvaluatorType</name></member>
+    <member refid="classSplineInterpolator_1a64ff6718a029aab810df7ddfb78acbc2" kind="typedef"><name>EvaluatorType</name></member>
     <member refid="classSplineInterpolator_1a2db070d5637b9e19a7201c95017101dd" kind="variable"><name>is_periodic</name></member>
-    <member refid="classSplineInterpolator_1a348292ac795d3196975a390463610c1a" kind="variable"><name>m_min_extrapolation</name></member>
-    <member refid="classSplineInterpolator_1a52957a0179ed761b6a6dcc7c5155a73c" kind="variable"><name>m_max_extrapolation</name></member>
+    <member refid="classSplineInterpolator_1a65108aee05adb4d6e60229867e13211c" kind="variable"><name>m_min_extrapolation</name></member>
+    <member refid="classSplineInterpolator_1a8c22844dc4fdb188ea9bb9b41bbce555" kind="variable"><name>m_max_extrapolation</name></member>
     <member refid="classSplineInterpolator_1a6f394ea211d048ed0de9e84b377363ae" kind="variable"><name>m_builder</name></member>
     <member refid="classSplineInterpolator_1a4de6b5624065659fa7c93dfa0ac7482b" kind="variable"><name>m_evaluator</name></member>
     <member refid="classSplineInterpolator_1aa044a8ca3d0ca692d6c222079dd3ad7a" kind="function"><name>rank</name></member>
@@ -4063,8 +4063,8 @@
   <compound refid="constant__identity__interpolation__extrapolation__rule_8hpp" kind="file"><name>constant_identity_interpolation_extrapolation_rule.hpp</name>
   </compound>
   <compound refid="extrapolation__rule__choice_8hpp" kind="file"><name>extrapolation_rule_choice.hpp</name>
-    <member refid="extrapolation__rule__choice_8hpp_1a54ac1aeeb95c4035f62b9d5f7ddb8fd5" kind="typedef"><name>extrapolation_rule_t</name></member>
-    <member refid="extrapolation__rule__choice_8hpp_1a86dd70dd4aa31cc2d83f8ebe08c1c9f3" kind="function"><name>get_extrapolation</name></member>
+    <member refid="extrapolation__rule__choice_8hpp_1a8a8b07cd157e3ef869cd3cd8f84be98f" kind="typedef"><name>extrapolation_rule_t</name></member>
+    <member refid="extrapolation__rule__choice_8hpp_1aa6b4312ac6241951c8cefa00646bdd72" kind="function"><name>get_extrapolation</name></member>
   </compound>
   <compound refid="i__interpolation_8hpp" kind="file"><name>i_interpolation.hpp</name>
     <member refid="i__interpolation_8hpp_1aff8781cc8ba44dbb49ecfdfe29e2f1e1" kind="enum"><name>ExtrapolationRule</name></member>

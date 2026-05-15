@@ -585,7 +585,7 @@
 <td style="text-align: left;"><a href="#typedef-coeffgridtype"><strong>CoeffGridType</strong></a>  <br><em>The discrete grid type used for the Lagrange coefficients (the Lagrange basis grid).</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt; MinExtrapRule, <a href="classLagrangeInterpolator.html#typedef-coeffgridtype"><strong>CoeffGridType</strong></a> &gt;, extrapolation_rule_t&lt; MaxExtrapRule, <a href="classLagrangeInterpolator.html#typedef-coeffgridtype"><strong>CoeffGridType</strong></a> &gt; &gt;</td>
+<td style="text-align: right;">typedef <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a>&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt; MinExtrapRule, <a href="classLagrangeInterpolator.html#typedef-coeffgridtype"><strong>CoeffGridType</strong></a>, DataType &gt;, extrapolation_rule_t&lt; MaxExtrapRule, <a href="classLagrangeInterpolator.html#typedef-coeffgridtype"><strong>CoeffGridType</strong></a>, DataType &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-evaluatortype"><strong>EvaluatorType</strong></a>  <br><em>The</em> <a href="classLagrangeEvaluator.html"><em><strong>LagrangeEvaluator</strong></em></a> <em>type built from the template parameters.</em></td>
 </tr>
 </tbody>
@@ -658,7 +658,7 @@
 
 <h3 id="typedef-evaluatortype">typedef EvaluatorType</h3>
 <p><em>The</em> <a href="classLagrangeEvaluator.html"><em><strong>LagrangeEvaluator</strong></em></a> <em>type built from the template parameters.</em></p>
-<pre><code class="language-C++">using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::EvaluatorType =  LagrangeEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, CoeffGridType&gt;, extrapolation_rule_t&lt;MaxExtrapRule, CoeffGridType&gt; &gt;;
+<pre><code class="language-C++">using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::EvaluatorType =  LagrangeEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, CoeffGridType, DataType&gt;, extrapolation_rule_t&lt;MaxExtrapRule, CoeffGridType, DataType&gt; &gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

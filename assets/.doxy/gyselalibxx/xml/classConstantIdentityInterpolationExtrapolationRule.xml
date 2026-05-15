@@ -118,7 +118,7 @@
     </briefdescription>
     <detaileddescription>
 <para>When an evaluation coordinate falls outside the interpolation domain, this rule returns the interpolation coefficient at a fixed boundary index (<computeroutput>m_coeff_idx</computeroutput>) rather than extrapolating the polynomial. This is the Lagrange analog of ddc::ConstantExtrapolationRule used with spline evaluators.</para>
-<para>It is intended to be constructed via get_extrapolation&lt;CONSTANT, CoeffGrid, Basis&gt;(), which supplies the appropriate boundary index automatically.</para>
+<para>It is intended to be constructed via get_extrapolation&lt;CONSTANT, CoeffGrid, DataType, Basis&gt;(), which supplies the appropriate boundary index automatically.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>CoeffGrid</parametername>

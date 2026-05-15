@@ -581,7 +581,7 @@
 <td style="text-align: left;"><a href="#typedef-buildertype"><strong>BuilderType</strong></a>  <br><em>The ddc::SplineBuilder type built from the template parameters.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, extrapolation_rule_t&lt; MinExtrapRule, Basis &gt;, extrapolation_rule_t&lt; MaxExtrapRule, Basis &gt; &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, extrapolation_rule_t&lt; MinExtrapRule, Basis, double &gt;, extrapolation_rule_t&lt; MaxExtrapRule, Basis, double &gt; &gt;</td>
 <td style="text-align: left;"><a href="#typedef-evaluatortype"><strong>EvaluatorType</strong></a>  <br><em>The ddc::SplineEvaluator type built from the template parameters.</em></td>
 </tr>
 </tbody>
@@ -651,7 +651,7 @@
 
 <h3 id="typedef-evaluatortype">typedef EvaluatorType</h3>
 <p><em>The ddc::SplineEvaluator type built from the template parameters.</em> </p>
-<pre><code class="language-C++">using SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::EvaluatorType =  ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, Basis&gt;, extrapolation_rule_t&lt;MaxExtrapRule, Basis&gt; &gt;;
+<pre><code class="language-C++">using SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::EvaluatorType =  ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, Basis, double&gt;, extrapolation_rule_t&lt;MaxExtrapRule, Basis, double&gt; &gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

@@ -90,7 +90,7 @@ _A constant extrapolation rule for identity-based (Lagrange) interpolation._ [Mo
 When an evaluation coordinate falls outside the interpolation domain, this rule returns the interpolation coefficient at a fixed boundary index (`m_coeff_idx`) rather than extrapolating the polynomial. This is the Lagrange analog of ddc::ConstantExtrapolationRule used with spline evaluators.
 
 
-It is intended to be constructed via get\_extrapolation&lt;CONSTANT, CoeffGrid, Basis&gt;(), which supplies the appropriate boundary index automatically.
+It is intended to be constructed via get\_extrapolation&lt;CONSTANT, CoeffGrid, DataType, Basis&gt;(), which supplies the appropriate boundary index automatically.
 
 
 

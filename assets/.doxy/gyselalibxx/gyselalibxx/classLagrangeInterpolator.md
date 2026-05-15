@@ -36,7 +36,7 @@ _An owning interpolation object that bundles a Lagrange builder and evaluator._ 
 | ---: | :--- |
 | typedef [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md)&lt; ExecSpace, typename ExecSpace::memory\_space, DataType, InterpGrid, Basis &gt; | [**BuilderType**](#typedef-buildertype)  <br>_The_ [_**IdentityInterpolationBuilder**_](classIdentityInterpolationBuilder.md) _type built from the template parameters._ |
 | typedef typename [**BuilderType::basis\_domain\_type**](classIdentityInterpolationBuilder.md#typedef-basis_domain_type) | [**CoeffGridType**](#typedef-coeffgridtype)  <br>_The discrete grid type used for the Lagrange coefficients (the Lagrange basis grid)._  |
-| typedef [**LagrangeEvaluator**](classLagrangeEvaluator.md)&lt; ExecSpace, typename ExecSpace::memory\_space, DataType, Basis, InterpGrid, extrapolation\_rule\_t&lt; MinExtrapRule, [**CoeffGridType**](classLagrangeInterpolator.md#typedef-coeffgridtype) &gt;, extrapolation\_rule\_t&lt; MaxExtrapRule, [**CoeffGridType**](classLagrangeInterpolator.md#typedef-coeffgridtype) &gt; &gt; | [**EvaluatorType**](#typedef-evaluatortype)  <br>_The_ [_**LagrangeEvaluator**_](classLagrangeEvaluator.md) _type built from the template parameters._ |
+| typedef [**LagrangeEvaluator**](classLagrangeEvaluator.md)&lt; ExecSpace, typename ExecSpace::memory\_space, DataType, Basis, InterpGrid, extrapolation\_rule\_t&lt; MinExtrapRule, [**CoeffGridType**](classLagrangeInterpolator.md#typedef-coeffgridtype), DataType &gt;, extrapolation\_rule\_t&lt; MaxExtrapRule, [**CoeffGridType**](classLagrangeInterpolator.md#typedef-coeffgridtype), DataType &gt; &gt; | [**EvaluatorType**](#typedef-evaluatortype)  <br>_The_ [_**LagrangeEvaluator**_](classLagrangeEvaluator.md) _type built from the template parameters._ |
 
 
 
@@ -164,7 +164,7 @@ using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtr
 
 _The_ [_**LagrangeEvaluator**_](classLagrangeEvaluator.md) _type built from the template parameters._
 ```C++
-using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType >::EvaluatorType =  LagrangeEvaluator< ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t<MinExtrapRule, CoeffGridType>, extrapolation_rule_t<MaxExtrapRule, CoeffGridType> >;
+using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType >::EvaluatorType =  LagrangeEvaluator< ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>, extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType> >;
 ```
 
 

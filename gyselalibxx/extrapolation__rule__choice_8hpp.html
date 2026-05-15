@@ -577,7 +577,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef details::GetExtrapolationRuleClass&lt; Rule, CoeffGrid &gt;::type</td>
+<td style="text-align: right;">typedef details::GetExtrapolationRuleClass&lt; Rule, CoeffGrid, DataType &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-extrapolation_rule_t"><strong>extrapolation_rule_t</strong></a>  <br></td>
 </tr>
 </tbody>
@@ -592,20 +592,20 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">extrapolation_rule_t&lt; Rule, CoeffGrid &gt;</td>
+<td style="text-align: right;">extrapolation_rule_t&lt; Rule, CoeffGrid, DataType &gt;</td>
 <td style="text-align: left;"><a href="#function-get_extrapolation"><strong>get_extrapolation</strong></a> (Extremity extremity) <br></td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-extrapolation_rule_t">typedef extrapolation_rule_t</h3>
-<pre><code class="language-C++">using extrapolation_rule_t =  details::GetExtrapolationRuleClass&lt;Rule, CoeffGrid&gt;::type;
+<pre><code class="language-C++">using extrapolation_rule_t =  details::GetExtrapolationRuleClass&lt;Rule, CoeffGrid, DataType&gt;::type;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-get_extrapolation">function get_extrapolation</h3>
-<pre><code class="language-C++">template&lt;ExtrapolationRule Rule, class CoeffGrid, class Basis&gt;
-extrapolation_rule_t&lt; Rule, CoeffGrid &gt; get_extrapolation (
+<pre><code class="language-C++">template&lt;ExtrapolationRule Rule, class CoeffGrid, class DataType, class Basis&gt;
+extrapolation_rule_t&lt; Rule, CoeffGrid, DataType &gt; get_extrapolation (
     Extremity extremity
 ) 
 </code></pre>

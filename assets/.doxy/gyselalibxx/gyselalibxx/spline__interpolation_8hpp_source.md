@@ -53,8 +53,8 @@ public:
             typename ExecSpace::memory_space,
             Basis,
             InterpGrid,
-            extrapolation_rule_t<MinExtrapRule, Basis>,
-            extrapolation_rule_t<MaxExtrapRule, Basis>>;
+            extrapolation_rule_t<MinExtrapRule, Basis, double>,
+            extrapolation_rule_t<MaxExtrapRule, Basis, double>>;
 
     static constexpr std::size_t rank()
     {
@@ -62,22 +62,22 @@ public:
     }
 
 private:
-    extrapolation_rule_t<MinExtrapRule, Basis> m_min_extrapolation;
-    extrapolation_rule_t<MaxExtrapRule, Basis> m_max_extrapolation;
+    extrapolation_rule_t<MinExtrapRule, Basis, double> m_min_extrapolation;
+    extrapolation_rule_t<MaxExtrapRule, Basis, double> m_max_extrapolation;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
 public:
     explicit SplineInterpolator(std::string const& label, IdxRange<InterpGrid> idx_range)
-        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
+        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis, double>(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis, double>(Extremity::BACK))
         , m_builder(label, idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
     explicit SplineInterpolator(IdxRange<InterpGrid> idx_range)
-        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis>(Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis>(Extremity::BACK))
+        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis, double>(Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis, double>(Extremity::BACK))
         , m_builder(idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
