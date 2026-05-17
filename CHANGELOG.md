@@ -48,7 +48,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed new `concepts::InterpolationBuilder` concept and associated `InterpolationBuilderTraits` class to generalise to ND.
 - Renamed `ACTIVATE_RESTART_TESTS` -> `GYSELALIBXX_ACTIVATE_RESTART_TESTS`.
 - Renamed `POISSON_2D_BUILD_TESTING` -> `GYSELALIBXX_POISSON_2D_BUILD_TESTING`.
-- Pin toolchains to Python 3.13.
 - Disable some costly variants in Spack based toolchains.
 - Changed the order of arguments to `PolarSplineFEMPoissonLikeSolver` to respect output argument first convention.
 - Use any callable in `PolarSplineFEMPoissonLikeAssembler` instead of spline coefficients.
@@ -58,6 +57,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `polarpoissonlikesolver.hpp` -> `polar_spline_fem_poisson_like_solver.hpp`.
 - Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.
 - Prefixed the name of the Kokkos region with "(GSLX)"
+- Pin toolchains to Python 3.12.
 
 ### Deprecated
 
