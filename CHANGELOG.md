@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add more labels to memory allocations.
 - Add a `NDIdentityInterpolationBuilder` class.
 - Add a new abstract class `IPolarPoissonLikeSolver`.
+- Add data type parametrisation to `ConstantIdentityInterpolationExtrapolationRule`.
 - Add a `landau4d_fft_lagrange` target for 3D Landau damping with Lagrange interpolation.
 - Add an optional `IdxRange` argument to the constructor of `LagrangeInterpolator`.
 - Add a new `init_lagrange_dependent_idx_range` method.
