@@ -339,14 +339,14 @@ int main(int argc, char** argv)
             from_czarny_map,
             builder_host,
             spline_evaluator_extrapol_host);
-    DiscretePoloidalCSSplineMapping const from_discrete_czarny_map_host
-            = discrete_czarny_map_builder_host();
-    DiscreteMappingBuilder const discrete_czarny_map_builder(
-            Kokkos::DefaultExecutionSpace(),
-            from_czarny_map,
-            builder,
-            spline_evaluator_extrapol);
-    DiscretePoloidalCSSplineMapping const from_discrete_czarny_map = discrete_czarny_map_builder();
+    //DiscretePoloidalCSSplineMapping const from_discrete_czarny_map_host
+    //        = discrete_czarny_map_builder_host();
+    //DiscreteMappingBuilder const discrete_czarny_map_builder(
+    //        Kokkos::DefaultExecutionSpace(),
+    //        from_czarny_map,
+    //        builder,
+    //        spline_evaluator_extrapol);
+    //DiscretePoloidalCSSplineMapping const from_discrete_czarny_map = discrete_czarny_map_builder();
 
     std::tuple simulations = std::make_tuple(
             SimulationParameters(
