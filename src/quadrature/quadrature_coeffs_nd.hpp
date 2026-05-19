@@ -11,10 +11,11 @@
 
 
 namespace {
-template <class ExecSpace, class Grid1D>
-using CoefficientFieldMem1D = DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
-template <class ExecSpace, class Grid1D>
-using CoefficientField1D = DField<IdxRange<Grid1D>, typename ExecSpace::memory_space>;
+template <class ExecSpace, class Grid1D, std::floating_point DataType>
+using CoefficientFieldMem1D
+        = FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>;
+template <class ExecSpace, class Grid1D, std::floating_point DataType>
+using CoefficientField1D = Field<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>;
 } // namespace
 
 /**
@@ -27,21 +28,22 @@ using CoefficientField1D = DField<IdxRange<Grid1D>, typename ExecSpace::memory_s
  *
  * @returns The coefficients which define the quadrature method in ND.
  */
-template <class ExecSpace, class... DDims>
-DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> quadrature_coeffs_nd(
+template <class ExecSpace, class DataType, class... DDims>
+FieldMem<DataType, IdxRange<DDims...>, typename ExecSpace::memory_space> quadrature_coeffs_nd(
         IdxRange<DDims...> const& idx_range,
-        std::function<DFieldMem<IdxRange<DDims>, typename ExecSpace::memory_space>(
+        std::function<FieldMem<DataType, IdxRange<DDims>, typename ExecSpace::memory_space>(
                 IdxRange<DDims>)>... funcs)
 {
-    DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space>
+    FieldMem<DataType, IdxRange<DDims...>, typename ExecSpace::memory_space>
             coefficients_alloc("coefficients (quadrature_coeffs_nd)", idx_range);
-    DField<IdxRange<DDims...>, typename ExecSpace::memory_space> coefficients(
+    Field<DataType, IdxRange<DDims...>, typename ExecSpace::memory_space> coefficients(
             get_field(coefficients_alloc));
     // Get coefficients for each dimension
-    std::tuple<CoefficientFieldMem1D<ExecSpace, DDims>...> current_dim_coeffs_alloc(
+    std::tuple<CoefficientFieldMem1D<ExecSpace, DDims, DataType>...> current_dim_coeffs_alloc(
             funcs(ddc::select<DDims>(idx_range))...);
-    std::tuple<CoefficientField1D<ExecSpace, DDims>...> current_dim_coeffs(get_field(
-            std::get<CoefficientFieldMem1D<ExecSpace, DDims>>(current_dim_coeffs_alloc))...);
+    std::tuple<CoefficientField1D<ExecSpace, DDims, DataType>...> current_dim_coeffs(
+            get_field(std::get<CoefficientFieldMem1D<ExecSpace, DDims, DataType>>(
+                    current_dim_coeffs_alloc))...);
 
     const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
@@ -52,8 +54,8 @@ DFieldMem<IdxRange<DDims...>, typename ExecSpace::memory_space> quadrature_coeff
                 // multiply the 1D coefficients by one another
 
                 coefficients(idim)
-                        = (std::get<CoefficientField1D<ExecSpace, DDims>>(current_dim_coeffs)(
-                                   ddc::select<DDims>(idim))
+                        = (std::get<CoefficientField1D<ExecSpace, DDims, DataType>>(
+                                   current_dim_coeffs)(ddc::select<DDims>(idim))
                            * ... * 1);
             });
     return coefficients_alloc;

@@ -235,10 +235,11 @@ inline double error_norm_inf(
  *
  * @return A double containing the L1 norm of the function.
  */
-template <class IdxRangeQuad, class ExecSpace>
+template <class IdxRangeQuad, class ExecSpace, class DataType>
 double norm_L1(
         ExecSpace exec_space,
-        Quadrature<IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space> quadrature,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space>
+                quadrature,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> function)
 {
     using IdxQuad = typename IdxRangeQuad::discrete_element_type;
@@ -255,10 +256,11 @@ double norm_L1(
  * @param[in] exact_function The exact function with which the calculated function is compared.
  * @return A double containing the value of the infinity norm.
  */
-template <class IdxRangeQuad, class ExecSpace>
+template <class IdxRangeQuad, class ExecSpace, class DataType>
 double error_norm_L1(
         ExecSpace exec_space,
-        Quadrature<IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space> quadrature,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space>
+                quadrature,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> function,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> exact_function)
 {
@@ -285,10 +287,11 @@ double error_norm_L1(
  *
  * @return A double containing the L2 norm of the function.
  */
-template <class IdxRangeQuad, class ExecSpace>
+template <class IdxRangeQuad, class ExecSpace, class DataType>
 double norm_L2(
         ExecSpace exec_space,
-        Quadrature<IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space> quadrature,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space>
+                quadrature,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> function)
 {
     using IdxQuad = typename IdxRangeQuad::discrete_element_type;
@@ -305,10 +308,11 @@ double norm_L2(
  * @param[in] exact_function The exact function with which the calculated function is compared.
  * @return A double containing the value of the infinity norm.
  */
-template <class IdxRangeQuad, class ExecSpace>
+template <class IdxRangeQuad, class ExecSpace, class DataType>
 double error_norm_L2(
         ExecSpace exec_space,
-        Quadrature<IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space> quadrature,
+        Quadrature<IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space>
+                quadrature,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> function,
         DField<IdxRangeQuad, typename ExecSpace::memory_space> exact_function)
 {
