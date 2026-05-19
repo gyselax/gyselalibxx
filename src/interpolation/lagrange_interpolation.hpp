@@ -19,22 +19,11 @@
  * grid directly as coefficients to the evaluator, which then performs local polynomial
  * reconstruction via the Lagrange basis.
  *
- * The boundary condition (MinBound / MaxBound) and extrapolation rule
- * (MinExtrapRule / MaxExtrapRule) must be consistent: both must be PERIODIC for
- * periodic dimensions and both must be non-PERIODIC for non-periodic dimensions.
- * Note: @c CONSTANT extrapolation is not supported for Lagrange interpolation.
- *
  * @tparam ExecSpace     The Kokkos execution space used for computations.
  * @tparam Basis         The Lagrange basis type (uniform or non-uniform).
  * @tparam InterpGrid    The discrete grid on which function values are provided.
  * @tparam MinExtrapRule The ExtrapolationRule applied below the lower boundary.
  * @tparam MaxExtrapRule The ExtrapolationRule applied above the upper boundary.
- * @tparam MinBound      The ddc::BoundCond at the lower boundary (default: GREVILLE).
- *                       This is included to have an interface interchangeable with SplineBuilder
- *                       but is unused.
- * @tparam MaxBound      The ddc::BoundCond at the upper boundary (default: GREVILLE).
- *                       This is included to have an interface interchangeable with SplineBuilder
- *                       but is unused.
  * @tparam DataType      The floating-point type of the function values (default: double).
  */
 template <
@@ -43,8 +32,6 @@ template <
         class InterpGrid,
         ExtrapolationRule MinExtrapRule,
         ExtrapolationRule MaxExtrapRule,
-        ddc::BoundCond MinBound = ddc::BoundCond::GREVILLE,
-        ddc::BoundCond MaxBound = ddc::BoundCond::GREVILLE,
         class DataType = double>
 class LagrangeInterpolator
 {
@@ -52,8 +39,6 @@ class LagrangeInterpolator
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
-    static_assert(is_periodic == (MinBound == ddc::BoundCond::PERIODIC));
-    static_assert(is_periodic == (MaxBound == ddc::BoundCond::PERIODIC));
     static_assert(is_periodic == (MinExtrapRule == ExtrapolationRule::PERIODIC));
     static_assert(is_periodic == (MaxExtrapRule == ExtrapolationRule::PERIODIC));
 
