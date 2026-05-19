@@ -100,7 +100,7 @@ public:
                 "feet_coords (BslAdvectionVelocity::operator())",
                 batched_feet_idx_range);
         Field<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
-        DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
+        FieldMem<DataType, IdxRangeFunctionBasis> function_coefs_alloc(
                 "function_coefs (BslAdvectionVelocity::operator())",
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 

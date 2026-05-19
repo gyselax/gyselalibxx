@@ -51,6 +51,10 @@ using InterpolatorX = SplineInterpolatorX;
 using InterpolatorY = SplineInterpolatorY;
 using InterpolatorVx = SplineInterpolatorVx;
 using InterpolatorVy = SplineInterpolatorVy;
+#ifdef FLOAT
+static_assert(false, "Splines don't support floats");
+#endif
+using Real = double;
 #elif defined(LAGRANGE)
 using InterpolatorX = LagrangeInterpolatorX;
 using InterpolatorY = LagrangeInterpolatorY;
@@ -126,54 +130,57 @@ int main(int argc, char** argv)
 
     IdxRangeSpVxVy idxrange_spvxvy_local(idxrange_spxyvxvy_x2Dsplit);
     // Initialisation of the distribution function
-    DFieldMemSpVxVy allfequilibrium(idxrange_spvxvy_local);
+    FieldMemSpVxVy<Real> allfequilibrium(idxrange_spvxvy_local);
     MaxwellianEquilibrium const init_fequilibrium
             = MaxwellianEquilibrium::init_from_input(idx_range_kinsp, conf_gyselalibxx);
     init_fequilibrium(get_field(allfequilibrium));
-    DFieldMemSpXYVxVy allfdistribu_x2D_split(idxrange_spxyvxvy_x2Dsplit);
-    DFieldMemSpVxVyXY allfdistribu_v2D_split(idxrange_spvxvyxy_v2Dsplit);
+    FieldMemSpXYVxVy<Real> allfdistribu_x2D_split(idxrange_spxyvxvy_x2Dsplit);
+    FieldMemSpVxVyXY<Real> allfdistribu_v2D_split(idxrange_spvxvyxy_v2Dsplit);
     SingleModePerturbInitialisation const init = SingleModePerturbInitialisation::
             init_from_input(get_const_field(allfequilibrium), idx_range_kinsp, conf_gyselalibxx);
     init(get_field(allfdistribu_x2D_split));
 
     // --> Algorithm info
-    double const deltat = PCpp_double(conf_gyselalibxx, ".Algorithm.deltat");
+    Real const deltat = PCpp_double(conf_gyselalibxx, ".Algorithm.deltat");
     int const nbiter = static_cast<int>(PCpp_int(conf_gyselalibxx, ".Algorithm.nbiter"));
 
     // --> Output info
-    double const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
+    Real const time_diag = PCpp_double(conf_gyselalibxx, ".Output.time_diag");
     int const nbstep_diag = int(time_diag / deltat);
 
     // Create advection operator
-    BslAdvectionSpatial<GeometryVxVyXY, InterpolatorX> const advection_x(interpolator_x);
-    BslAdvectionSpatial<GeometryVxVyXY, InterpolatorY> const advection_y(interpolator_y);
-    BslAdvectionVelocity<GeometryXYVxVy, InterpolatorVx> const advection_vx(interpolator_vx);
-    BslAdvectionVelocity<GeometryXYVxVy, InterpolatorVy> const advection_vy(interpolator_vy);
+    BslAdvectionSpatial<GeometryVxVyXY, InterpolatorX, Real> const advection_x(interpolator_x);
+    BslAdvectionSpatial<GeometryVxVyXY, InterpolatorY, Real> const advection_y(interpolator_y);
+    BslAdvectionVelocity<GeometryXYVxVy, InterpolatorVx, Real> const advection_vx(interpolator_vx);
+    BslAdvectionVelocity<GeometryXYVxVy, InterpolatorVy, Real> const advection_vy(interpolator_vy);
 
     MpiSplitVlasovSolver const
             vlasov(advection_x, advection_y, advection_vx, advection_vy, transpose);
 
-    DFieldMemVxVy const quadrature_coeffs(
-            quadrature_coeffs_nd<Kokkos::DefaultExecutionSpace, GridVx, GridVy>(
+    FieldMemVxVy<Real> const quadrature_coeffs(
+            quadrature_coeffs_nd<Kokkos::DefaultExecutionSpace, Real, GridVx, GridVy>(
                     idxrange_vxvy,
                     std::
                             bind(simpson_trapezoid_quadrature_coefficients_1d<
                                          Kokkos::DefaultExecutionSpace,
-                                         GridVx>,
+                                         GridVx,
+                                         Real>,
                                  std::placeholders::_1,
                                  Extremity::FRONT),
                     std::
                             bind(simpson_trapezoid_quadrature_coefficients_1d<
                                          Kokkos::DefaultExecutionSpace,
-                                         GridVy>,
+                                         GridVy,
+                                         Real>,
                                  std::placeholders::_1,
                                  Extremity::FRONT)));
-    DFieldMemVxVy local_quadrature_coeffs(idxrange_vxvy_v2Dsplit);
+    FieldMemVxVy<Real> local_quadrature_coeffs(idxrange_vxvy_v2Dsplit);
     ddc::parallel_deepcopy(
             get_field(local_quadrature_coeffs),
             quadrature_coeffs[idxrange_vxvy_v2Dsplit]);
 
-    FFTPoissonSolver<IdxRangeXY> fft_poisson_solver(idxrange_xy);
+    FFTPoissonSolver<IdxRangeXY, IdxRangeXY, Kokkos::DefaultExecutionSpace, Real>
+            fft_poisson_solver(idxrange_xy);
     ChargeDensityCalculator const rhs_local(get_const_field(local_quadrature_coeffs));
     MpiChargeDensityCalculator const rhs(MPI_COMM_WORLD, rhs_local);
     QNSolver const poisson(fft_poisson_solver, rhs);
@@ -220,7 +227,7 @@ int main(int argc, char** argv)
 
     steady_clock::time_point const end = steady_clock::now();
 
-    double const simulation_time = std::chrono::duration<double>(end - start).count();
+    Real const simulation_time = std::chrono::duration<Real>(end - start).count();
     std::cout << "Simulation time: " << simulation_time << "s\n";
 
     PC_tree_destroy(&conf_pdi);

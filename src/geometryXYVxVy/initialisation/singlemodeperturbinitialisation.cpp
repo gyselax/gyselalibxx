@@ -46,7 +46,7 @@ DFieldSpXYVxVy SingleModePerturbInitialisation::operator()(DFieldSpXYVxVy const 
                     IdxY const iy = ddc::select<GridY>(ixyvxvy);
                     IdxVx const ivx = ddc::select<GridVx>(ixyvxvy);
                     IdxVy const ivy = ddc::select<GridVy>(ixyvxvy);
-                    double fdistribu_val
+                    Real fdistribu_val
                             = fequilibrium_proxy(isp, ivx, ivy) * (1. + perturbation_proxy(ix, iy));
                     if (fdistribu_val < 1.e-60) {
                         fdistribu_val = 1.e-60;
@@ -83,13 +83,13 @@ SingleModePerturbInitialisation SingleModePerturbInitialisation::init_from_input
 void SingleModePerturbInitialisation::perturbation_initialisation(
         DFieldXY const perturbation,
         int const perturb_mode,
-        double const perturb_amplitude) const
+        Real const perturb_amplitude) const
 {
     IdxRangeXY const gridxy = get_idx_range<GridX, GridY>(perturbation);
-    double const kx = perturb_mode * 2. * M_PI
-                      / ddcHelper::total_interval_length(ddc::select<GridX>(gridxy));
-    double const ky = perturb_mode * 2. * M_PI
-                      / ddcHelper::total_interval_length(ddc::select<GridY>(gridxy));
+    Real const kx = perturb_mode * 2. * M_PI
+                    / ddcHelper::total_interval_length(ddc::select<GridX>(gridxy));
+    Real const ky = perturb_mode * 2. * M_PI
+                    / ddcHelper::total_interval_length(ddc::select<GridY>(gridxy));
 
     const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
