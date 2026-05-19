@@ -72,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove ruche toolchain.
 - Remove `GYSELALIBXX_VERSION_*` CMake variables.
 - Remove out-of-date Leonardo toolchain.
+- Remove unuseful defaulted template parameters `MinBound` and `MaxBound` from `LagrangeInterpolator`.
 
 ## [v0.7.0] - 2026-03-18
 
