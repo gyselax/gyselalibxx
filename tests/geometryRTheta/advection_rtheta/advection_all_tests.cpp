@@ -365,22 +365,22 @@ int main(int argc, char** argv)
                     from_czarny_map,
                     "CZARNY",
                     "PHYSICAL"));
-            //SimulationParameters(
-            //        from_czarny_map,
-            //        from_czarny_map,
-            //        to_pseudo_circ_map,
-            //        to_czarny_map,
-            //        from_czarny_map,
-            //        "CZARNY",
-            //        "PSEUDO CARTESIAN"),
-            //SimulationParameters(
-            //        from_discrete_czarny_map_host,
-            //        from_discrete_czarny_map,
-            //        to_pseudo_circ_map,
-            //        to_czarny_map,
-            //        from_czarny_map,
-            //        "DISCRETE",
-            //        "PSEUDO CARTESIAN"));
+    //SimulationParameters(
+    //        from_czarny_map,
+    //        from_czarny_map,
+    //        to_pseudo_circ_map,
+    //        to_czarny_map,
+    //        from_czarny_map,
+    //        "CZARNY",
+    //        "PSEUDO CARTESIAN"),
+    //SimulationParameters(
+    //        from_discrete_czarny_map_host,
+    //        from_discrete_czarny_map,
+    //        to_pseudo_circ_map,
+    //        to_czarny_map,
+    //        from_czarny_map,
+    //        "DISCRETE",
+    //        "PSEUDO CARTESIAN"));
 
 
     NumericalParams num_params = {grid, dt};
