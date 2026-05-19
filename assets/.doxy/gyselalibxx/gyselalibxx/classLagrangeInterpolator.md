@@ -2,7 +2,7 @@
 
 # Class LagrangeInterpolator
 
-**template &lt;class ExecSpace, class Basis, class InterpGrid, ExtrapolationRule MinExtrapRule, ExtrapolationRule MaxExtrapRule, ddc::BoundCond MinBound, ddc::BoundCond MaxBound, class DataType&gt;**
+**template &lt;class ExecSpace, class Basis, class InterpGrid, ExtrapolationRule MinExtrapRule, ExtrapolationRule MaxExtrapRule, class DataType&gt;**
 
 
 
@@ -106,9 +106,6 @@ _An owning interpolation object that bundles a Lagrange builder and evaluator._ 
 The builder is an identity operation: it passes function values on the interpolation grid directly as coefficients to the evaluator, which then performs local polynomial reconstruction via the Lagrange basis.
 
 
-The boundary condition (MinBound / MaxBound) and extrapolation rule (MinExtrapRule / MaxExtrapRule) must be consistent: both must be PERIODIC for periodic dimensions and both must be non-PERIODIC for non-periodic dimensions. Note: `CONSTANT` extrapolation is not supported for Lagrange interpolation.
-
-
 
 
 **Template parameters:**
@@ -119,8 +116,6 @@ The boundary condition (MinBound / MaxBound) and extrapolation rule (MinExtrapRu
 * `InterpGrid` The discrete grid on which function values are provided. 
 * `MinExtrapRule` The ExtrapolationRule applied below the lower boundary. 
 * `MaxExtrapRule` The ExtrapolationRule applied above the upper boundary. 
-* `MinBound` The ddc::BoundCond at the lower boundary (default: GREVILLE). This is included to have an interface interchangeable with SplineBuilder but is unused. 
-* `MaxBound` The ddc::BoundCond at the upper boundary (default: GREVILLE). This is included to have an interface interchangeable with SplineBuilder but is unused. 
 * `DataType` The floating-point type of the function values (default: double). 
 
 
@@ -136,7 +131,7 @@ The boundary condition (MinBound / MaxBound) and extrapolation rule (MinExtrapRu
 
 _The_ [_**IdentityInterpolationBuilder**_](classIdentityInterpolationBuilder.md) _type built from the template parameters._
 ```C++
-using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType >::BuilderType =  IdentityInterpolationBuilder< ExecSpace, typename ExecSpace::memory_space, DataType, InterpGrid, Basis>;
+using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType >::BuilderType =  IdentityInterpolationBuilder< ExecSpace, typename ExecSpace::memory_space, DataType, InterpGrid, Basis>;
 ```
 
 
@@ -150,7 +145,7 @@ using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtr
 
 _The discrete grid type used for the Lagrange coefficients (the Lagrange basis grid)._ 
 ```C++
-using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType >::CoeffGridType =  typename BuilderType::basis_domain_type;
+using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType >::CoeffGridType =  typename BuilderType::basis_domain_type;
 ```
 
 
@@ -164,7 +159,7 @@ using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtr
 
 _The_ [_**LagrangeEvaluator**_](classLagrangeEvaluator.md) _type built from the template parameters._
 ```C++
-using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType >::EvaluatorType =  LagrangeEvaluator< ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>, extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType> >;
+using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType >::EvaluatorType =  LagrangeEvaluator< ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>, extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType> >;
 ```
 
 

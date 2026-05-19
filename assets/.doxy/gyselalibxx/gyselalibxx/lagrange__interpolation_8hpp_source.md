@@ -23,8 +23,6 @@ template <
         class InterpGrid,
         ExtrapolationRule MinExtrapRule,
         ExtrapolationRule MaxExtrapRule,
-        ddc::BoundCond MinBound = ddc::BoundCond::GREVILLE,
-        ddc::BoundCond MaxBound = ddc::BoundCond::GREVILLE,
         class DataType = double>
 class LagrangeInterpolator
 {
@@ -32,8 +30,6 @@ class LagrangeInterpolator
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
-    static_assert(is_periodic == (MinBound == ddc::BoundCond::PERIODIC));
-    static_assert(is_periodic == (MaxBound == ddc::BoundCond::PERIODIC));
     static_assert(is_periodic == (MinExtrapRule == ExtrapolationRule::PERIODIC));
     static_assert(is_periodic == (MaxExtrapRule == ExtrapolationRule::PERIODIC));
 

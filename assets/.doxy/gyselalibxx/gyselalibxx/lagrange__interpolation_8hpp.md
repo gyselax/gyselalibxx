@@ -34,7 +34,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**LagrangeInterpolator**](classLagrangeInterpolator.md) &lt;class ExecSpace, class Basis, class InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, class DataType&gt;<br>_An owning interpolation object that bundles a Lagrange builder and evaluator._  |
+| class | [**LagrangeInterpolator**](classLagrangeInterpolator.md) &lt;class ExecSpace, class Basis, class InterpGrid, MinExtrapRule, MaxExtrapRule, class DataType&gt;<br>_An owning interpolation object that bundles a Lagrange builder and evaluator._  |
 
 
 

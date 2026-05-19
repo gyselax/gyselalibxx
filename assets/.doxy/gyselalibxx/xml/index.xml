@@ -1764,19 +1764,19 @@
     <member refid="classLagrangeEvaluator_1a9f720539efb81a4d21f5ce023d0b71d8" kind="function"><name>getclosest</name></member>
   </compound>
   <compound refid="classLagrangeInterpolator" kind="class"><name>LagrangeInterpolator</name>
-    <member refid="classLagrangeInterpolator_1a706864ae674aecad884ac0e948cdb915" kind="typedef"><name>continuous_dimension_type</name></member>
-    <member refid="classLagrangeInterpolator_1af18468e103a52b14c01ca54c0ef4d3d4" kind="typedef"><name>BuilderType</name></member>
-    <member refid="classLagrangeInterpolator_1a6ba0a3086df5cb8756f856c594e1ca1c" kind="typedef"><name>CoeffGridType</name></member>
-    <member refid="classLagrangeInterpolator_1a66726b8c29c0c88bc79de1a524e4cf04" kind="typedef"><name>EvaluatorType</name></member>
-    <member refid="classLagrangeInterpolator_1a65031a88b88be2c7406b6c7f032cabd4" kind="variable"><name>is_periodic</name></member>
-    <member refid="classLagrangeInterpolator_1acca4cea293add372e124f9555b3dfd6b" kind="variable"><name>m_min_extrapolation</name></member>
-    <member refid="classLagrangeInterpolator_1afca04402c3e14bdd90c0dcde3462b1ea" kind="variable"><name>m_max_extrapolation</name></member>
-    <member refid="classLagrangeInterpolator_1a715cee2d98524edf5b0b1233220fb244" kind="variable"><name>m_builder</name></member>
-    <member refid="classLagrangeInterpolator_1a71b02deb7ec56f468b3f6a371b23a8ea" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classLagrangeInterpolator_1af55baa821103ff7249385620b17aa49b" kind="function"><name>rank</name></member>
-    <member refid="classLagrangeInterpolator_1a0cc956579fc3968beba84b295abd75ab" kind="function"><name>LagrangeInterpolator</name></member>
-    <member refid="classLagrangeInterpolator_1a394b85e66c65eb6a2f207ec0f0c725dd" kind="function"><name>get_builder</name></member>
-    <member refid="classLagrangeInterpolator_1a2572e88d65f8e0e06d4c2387ef62d6c5" kind="function"><name>get_evaluator</name></member>
+    <member refid="classLagrangeInterpolator_1a6a6ef881ab9f541bee72d23402f718f3" kind="typedef"><name>continuous_dimension_type</name></member>
+    <member refid="classLagrangeInterpolator_1abb7cc397d8a31585050c9dcd731cd3e8" kind="typedef"><name>BuilderType</name></member>
+    <member refid="classLagrangeInterpolator_1a0b39edd1c1d1287a21c6d8739d8c3972" kind="typedef"><name>CoeffGridType</name></member>
+    <member refid="classLagrangeInterpolator_1a751f1f09b56751c3865d446bb5f9dc18" kind="typedef"><name>EvaluatorType</name></member>
+    <member refid="classLagrangeInterpolator_1a460e5cf11a041e462ae01f4e615daaf1" kind="variable"><name>is_periodic</name></member>
+    <member refid="classLagrangeInterpolator_1abe1d053c210195fc6cb6278913f2a3ce" kind="variable"><name>m_min_extrapolation</name></member>
+    <member refid="classLagrangeInterpolator_1a51a53561b335ebe6c613e9a6acd5128d" kind="variable"><name>m_max_extrapolation</name></member>
+    <member refid="classLagrangeInterpolator_1a24173291aefe41b454321b3abcf213e0" kind="variable"><name>m_builder</name></member>
+    <member refid="classLagrangeInterpolator_1a2de809db131307b4e34459aac65c2f5f" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classLagrangeInterpolator_1a0d842fc9431acf76753830fb3c3fadc0" kind="function"><name>rank</name></member>
+    <member refid="classLagrangeInterpolator_1a331639bfa8f6b3e34b40c028918733c5" kind="function"><name>LagrangeInterpolator</name></member>
+    <member refid="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" kind="function"><name>get_builder</name></member>
+    <member refid="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" kind="function"><name>get_evaluator</name></member>
   </compound>
   <compound refid="classLeviCivitaTensor" kind="class"><name>LeviCivitaTensor</name>
     <member refid="classLeviCivitaTensor_1a75ae281b08da04242aa4b8fe07a61c67" kind="typedef"><name>element_type</name></member>

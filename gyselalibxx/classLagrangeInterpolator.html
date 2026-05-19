@@ -561,7 +561,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-lagrangeinterpolator">Class LagrangeInterpolator</h1>
-<p><strong>template &lt;class ExecSpace, class Basis, class InterpGrid, ExtrapolationRule MinExtrapRule, ExtrapolationRule MaxExtrapRule, ddc::BoundCond MinBound, ddc::BoundCond MaxBound, class DataType&gt;</strong></p>
+<p><strong>template &lt;class ExecSpace, class Basis, class InterpGrid, ExtrapolationRule MinExtrapRule, ExtrapolationRule MaxExtrapRule, class DataType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a></p>
 <p><em>An owning interpolation object that bundles a Lagrange builder and evaluator.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -631,7 +631,6 @@
 <h2 id="detailed-description">Detailed Description</h2>
 <p><a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a> constructs and owns a matching <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a> and <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> for a given dimension. It satisfies the concepts::Interpolation concept and is the recommended way to create a Lagrange interpolation for use with advection operators and similar algorithms.</p>
 <p>The builder is an identity operation: it passes function values on the interpolation grid directly as coefficients to the evaluator, which then performs local polynomial reconstruction via the Lagrange basis.</p>
-<p>The boundary condition (MinBound / MaxBound) and extrapolation rule (MinExtrapRule / MaxExtrapRule) must be consistent: both must be PERIODIC for periodic dimensions and both must be non-PERIODIC for non-periodic dimensions. Note: <code>CONSTANT</code> extrapolation is not supported for Lagrange interpolation.</p>
 <p><strong>Template parameters:</strong></p>
 <ul>
 <li><code>ExecSpace</code> The Kokkos execution space used for computations. </li>
@@ -639,26 +638,24 @@
 <li><code>InterpGrid</code> The discrete grid on which function values are provided. </li>
 <li><code>MinExtrapRule</code> The ExtrapolationRule applied below the lower boundary. </li>
 <li><code>MaxExtrapRule</code> The ExtrapolationRule applied above the upper boundary. </li>
-<li><code>MinBound</code> The ddc::BoundCond at the lower boundary (default: GREVILLE). This is included to have an interface interchangeable with SplineBuilder but is unused. </li>
-<li><code>MaxBound</code> The ddc::BoundCond at the upper boundary (default: GREVILLE). This is included to have an interface interchangeable with SplineBuilder but is unused. </li>
 <li><code>DataType</code> The floating-point type of the function values (default: double). </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-buildertype">typedef BuilderType</h3>
 <p><em>The</em> <a href="classIdentityInterpolationBuilder.html"><em><strong>IdentityInterpolationBuilder</strong></em></a> <em>type built from the template parameters.</em></p>
-<pre><code class="language-C++">using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::BuilderType =  IdentityInterpolationBuilder&lt; ExecSpace, typename ExecSpace::memory_space, DataType, InterpGrid, Basis&gt;;
+<pre><code class="language-C++">using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType &gt;::BuilderType =  IdentityInterpolationBuilder&lt; ExecSpace, typename ExecSpace::memory_space, DataType, InterpGrid, Basis&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-coeffgridtype">typedef CoeffGridType</h3>
 <p><em>The discrete grid type used for the Lagrange coefficients (the Lagrange basis grid).</em> </p>
-<pre><code class="language-C++">using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::CoeffGridType =  typename BuilderType::basis_domain_type;
+<pre><code class="language-C++">using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType &gt;::CoeffGridType =  typename BuilderType::basis_domain_type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-evaluatortype">typedef EvaluatorType</h3>
 <p><em>The</em> <a href="classLagrangeEvaluator.html"><em><strong>LagrangeEvaluator</strong></em></a> <em>type built from the template parameters.</em></p>
-<pre><code class="language-C++">using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, DataType &gt;::EvaluatorType =  LagrangeEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, CoeffGridType, DataType&gt;, extrapolation_rule_t&lt;MaxExtrapRule, CoeffGridType, DataType&gt; &gt;;
+<pre><code class="language-C++">using LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType &gt;::EvaluatorType =  LagrangeEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t&lt;MinExtrapRule, CoeffGridType, DataType&gt;, extrapolation_rule_t&lt;MaxExtrapRule, CoeffGridType, DataType&gt; &gt;;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
