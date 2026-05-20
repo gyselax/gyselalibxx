@@ -220,4 +220,3 @@ public:
         return density_host;
     }
 };
-

@@ -425,4 +425,3 @@ BslAdvectionPolar(Builder2D, Evaluator2D, FootFinder, LogicalToPhysicalMapping)
                 Evaluator2D,
                 typename FootFinder::VectorIndexSetAdvectionDims,
                 typename FootFinder::IdxRangeOperator>;
-
