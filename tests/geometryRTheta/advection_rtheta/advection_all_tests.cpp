@@ -62,78 +62,21 @@ using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
 
 } // end namespace
 
-static constexpr std::array<const char*, 4> time_stepper_choices
-        = {"EULER", "CRANK_NICOLSON", "RK3", "RK4"};
+enum TimeStepperChoice { TS_EULER, TS_CRANK_NICOLSON, TS_RK3, TS_RK4 };
 
-template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
-std::unique_ptr<
-        IPolarFootFinder<GridR, GridTheta, VectorIndexSet<X, Y>, IdxRangeRTheta, Kokkos::HostSpace>>
-get_foot_finder(
-        IdxRangeRTheta const grid,
-        std::string time_stepper_choice,
-        LogicalToPhysicalMapping const& to_physical_mapping,
-        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
-        SplineRThetaBuilder const& advection_builder,
-        SplineRThetaEvaluatorConstBound& advection_evaluator)
+template <
+        TimeStepperChoice TSChoice>
+auto get_time_stepper_builder()
 {
-    if (time_stepper_choice == "EULER") {
-        return std::make_unique<SplinePolarFootFinder<
-                IdxRangeRTheta,
-                EulerBuilder,
-                LogicalToPhysicalMapping,
-                LogicalToPseudoPhysicalMapping,
-                SplineRThetaBuilder,
-                SplineRThetaEvaluatorConstBound>>(
-                grid,
-                EulerBuilder(),
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                advection_builder,
-                advection_evaluator);
-    } else if (time_stepper_choice == "CRANK_NICOLSON") {
-        return std::make_unique<SplinePolarFootFinder<
-                IdxRangeRTheta,
-                CrankNicolsonBuilder,
-                LogicalToPhysicalMapping,
-                LogicalToPseudoPhysicalMapping,
-                SplineRThetaBuilder,
-                SplineRThetaEvaluatorConstBound>>(
-                grid,
-                CrankNicolsonBuilder(20, 1e-12),
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                advection_builder,
-                advection_evaluator);
-    } else if (time_stepper_choice == "RK3") {
-        return std::make_unique<SplinePolarFootFinder<
-                IdxRangeRTheta,
-                RK3Builder,
-                LogicalToPhysicalMapping,
-                LogicalToPseudoPhysicalMapping,
-                SplineRThetaBuilder,
-                SplineRThetaEvaluatorConstBound>>(
-                grid,
-                RK3Builder(),
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                advection_builder,
-                advection_evaluator);
-    } else if (time_stepper_choice == "RK4") {
-        return std::make_unique<SplinePolarFootFinder<
-                IdxRangeRTheta,
-                RK4Builder,
-                LogicalToPhysicalMapping,
-                LogicalToPseudoPhysicalMapping,
-                SplineRThetaBuilder,
-                SplineRThetaEvaluatorConstBound>>(
-                grid,
-                RK4Builder(),
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                advection_builder,
-                advection_evaluator);
+    if constexpr (TSChoice == TS_EULER) {
+        return EulerBuilder();
+    } else if constexpr (TSChoice == TS_CRANK_NICOLSON) {
+        return CrankNicolsonBuilder(20, 1e-12);
+    } else if constexpr (TSChoice == TS_RK3) {
+        return RK3Builder();
+    } else if constexpr (TSChoice == TS_RK4) {
+        return RK4Builder();
     }
-    assert(false);
 }
 
 struct GeneralParameters
@@ -146,6 +89,55 @@ struct GeneralParameters
     bool if_save_curves;
     bool if_save_feet;
 };
+
+template <
+        TimeStepperChoice TSChoice,
+        class LogicalToPhysicalMappingHost,
+        class LogicalToPhysicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class AnalyticalPhysicalToLogicalMapping,
+        class AnalyticalLogicalToPhysicalMapping>
+void run_simulations_with_foot_finder_method(
+        double const dt,
+        GeneralParameters params,
+        LogicalToPhysicalMappingHost const& to_physical_mapping_host,
+        LogicalToPhysicalMapping const& to_physical_mapping,
+        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
+        AnalyticalPhysicalToLogicalMapping const& to_logical_mapping,
+        AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
+        std::string const& simulation_name,
+        std::string const& output_stem)
+{
+    SplinePolarFootFinder foot_finder(
+                params.grid,
+                get_time_stepper_builder<TSChoice>(),
+                to_physical_mapping,
+                analytical_to_pseudo_physical_mapping,
+                params.advection_builder,
+                params.advection_evaluator);
+
+    BslAdvectionPolar advection_operator(
+            params.advection_builder,
+            params.interpolation_evaluator,
+            foot_finder,
+            to_physical_mapping);
+
+    run_simulations(
+            to_physical_mapping_host,
+            to_physical_mapping,
+            to_logical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            analytical_to_physical_mapping,
+            params.grid,
+            foot_finder,
+            advection_operator,
+            params.final_time,
+            dt,
+            params.if_save_curves,
+            params.if_save_feet,
+            output_stem,
+            simulation_name);
+}
 
 template <
         class LogicalToPhysicalMappingHost,
@@ -164,52 +156,57 @@ void run_simulations_with_methods(
         std::string const& mapping_name,
         std::string const& domain_name)
 {
-    for (auto choice : time_stepper_choices) {
         std::ostringstream name_stream;
-        name_stream << mapping_name << " MAPPING - " << domain_name << " DOMAIN - " << choice
-                    << " - ";
-        std::string simulation_name = name_stream.str();
+        name_stream << mapping_name << " MAPPING - " << domain_name << " DOMAIN - EULER - ";
+        std::string simulation_name = mapping_name + " MAPPING - " + domain_name + " DOMAIN - EULER - ";
 
         std::ostringstream output_stream;
-        output_stream << to_lower(mapping_name) << "_" << to_lower(domain_name) << "-"
-                      << to_lower(choice) << "-";
+        output_stream << to_lower(mapping_name) << "_" << to_lower(domain_name) << "-euler-";
         std::string output_stem = output_stream.str();
 
-        double time_step = dt;
-        if (std::string(choice) == "EULER") {
-            time_step *= 0.1;
-        }
-
-        std::unique_ptr foot_finder = get_foot_finder(
-                params.grid,
-                choice,
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                params.advection_builder,
-                params.advection_evaluator);
-
-        BslAdvectionPolar advection_operator(
-                params.advection_builder,
-                params.interpolation_evaluator,
-                *foot_finder,
-                to_physical_mapping);
-
-        run_simulations(
+        run_simulations_with_foot_finder_method<TS_EULER>(
+                dt * 0.1,
+                params,
                 to_physical_mapping_host,
                 to_physical_mapping,
-                to_logical_mapping,
                 analytical_to_pseudo_physical_mapping,
+                to_logical_mapping,
                 analytical_to_physical_mapping,
-                params.grid,
-                *foot_finder,
-                advection_operator,
-                params.final_time,
-                time_step,
-                params.if_save_curves,
-                params.if_save_feet,
-                output_stem,
-                simulation_name);
-    }
+                mapping_name,
+                domain_name);
+
+        run_simulations_with_foot_finder_method<TS_CRANK_NICOLSON>(
+                dt,
+                params,
+                to_physical_mapping_host,
+                to_physical_mapping,
+                analytical_to_pseudo_physical_mapping,
+                to_logical_mapping,
+                analytical_to_physical_mapping,
+                mapping_name,
+                domain_name);
+
+        run_simulations_with_foot_finder_method<TS_RK3>(
+                dt,
+                params,
+                to_physical_mapping_host,
+                to_physical_mapping,
+                analytical_to_pseudo_physical_mapping,
+                to_logical_mapping,
+                analytical_to_physical_mapping,
+                mapping_name,
+                domain_name);
+
+        run_simulations_with_foot_finder_method<TS_RK4>(
+                dt,
+                params,
+                to_physical_mapping_host,
+                to_physical_mapping,
+                analytical_to_pseudo_physical_mapping,
+                to_logical_mapping,
+                analytical_to_physical_mapping,
+                mapping_name,
+                domain_name);
 }
 
 int main(int argc, char** argv)
