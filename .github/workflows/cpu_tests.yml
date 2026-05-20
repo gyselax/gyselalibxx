@@ -120,9 +120,6 @@ jobs:
             toolchain: 'ci_coverage_toolchain'
           - backend: 'openmp'
             toolchain: 'debug_toolchain'
-          - backend: 'openmp' # Clang + OpenMP leads to compiler failure with Clang 14.0.0
-            compiler:
-              name: 'clang'
       fail-fast: false
     container:
       image: ${{ needs.docker_update.outputs.image_tag }}

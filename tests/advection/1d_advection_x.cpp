@@ -75,14 +75,8 @@ struct LagBasisFloatX : UniformLagrangeBasis<X, 3, float>
 {
 };
 
-using LagrangeInterpolatorX = LagrangeInterpolator<
-        Kokkos::DefaultExecutionSpace,
-        LagBasisX,
-        GridX,
-        PERIODIC,
-        PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+using LagrangeInterpolatorX
+        = LagrangeInterpolator<Kokkos::DefaultExecutionSpace, LagBasisX, GridX, PERIODIC, PERIODIC>;
 
 using LagrangeInterpolatorFloatX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
@@ -90,8 +84,6 @@ using LagrangeInterpolatorFloatX = LagrangeInterpolator<
         GridX,
         PERIODIC,
         PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
         float>;
 
 
