@@ -76,10 +76,11 @@ private:
             SplineRThetaEvaluatorConstBound>;
 
     using BslAdvectionRTheta = BslAdvectionPolar<
-            SplinePolarFootFinderType,
             LogicalToPhysicalMapping,
             SplineRThetaBuilder,
-            SplineRThetaEvaluatorNullBound>;
+            SplineRThetaEvaluatorNullBound,
+            ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
+            IdxRangeRTheta>;
 
 
     LogicalToPhysicalMapping const& m_logical_to_physical;

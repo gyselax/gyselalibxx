@@ -54,14 +54,19 @@
  *      The type of the solver for the Poisson-like equation on the polar plane.
  *
  */
-template <class Mapping, class FootFinder, class PolarPoissonLikeSolver>
+template <
+        class Mapping,
+        class VectorIndexSetAdvDims,
+        class IdxRangeBatched,
+        class PolarPoissonLikeSolver>
 class BslPredCorrRTheta : public ITimeSolverRTheta
 {
     using BslAdvectionRTheta = BslAdvectionPolar<
-            FootFinder,
             Mapping,
             SplineRThetaBuilder,
-            SplineRThetaEvaluatorNullBound>;
+            SplineRThetaEvaluatorNullBound,
+            VectorIndexSetAdvDims,
+            IdxRangeBatched>;
 
 private:
     Mapping const& m_mapping;
@@ -215,3 +220,4 @@ public:
         return density_host;
     }
 };
+
