@@ -61,44 +61,6 @@ using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
 
 
 } // end namespace
-template <
-        class LogicalToPhysicalMappingHost,
-        class LogicalToPhysicalMapping,
-        class LogicalToPseudoPhysicalMapping,
-        class AnalyticalPhysicalToLogicalMapping,
-        class AnalyticalLogicalToPhysicalMapping>
-struct SimulationParameters
-{
-public:
-    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
-
-public:
-    LogicalToPhysicalMappingHost const& to_physical_mapping_host;
-    LogicalToPhysicalMapping const& to_physical_mapping;
-    AnalyticalPhysicalToLogicalMapping const to_logical_mapping;
-    LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping;
-    AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping;
-    std::string mapping_name;
-    std::string domain_name;
-    SimulationParameters(
-            LogicalToPhysicalMappingHost const& map_host,
-            LogicalToPhysicalMapping const& map,
-            LogicalToPseudoPhysicalMapping const& pseudo_cart_map,
-            AnalyticalPhysicalToLogicalMapping const& rev_map,
-            AnalyticalLogicalToPhysicalMapping const& a_map,
-            std::string const& map_name,
-            std::string const& dom_name)
-        : to_physical_mapping_host(map_host)
-        , to_physical_mapping(map)
-        , to_logical_mapping(rev_map)
-        , analytical_to_pseudo_physical_mapping(pseudo_cart_map)
-        , analytical_to_physical_mapping(a_map)
-        , mapping_name(map_name)
-        , domain_name(dom_name)
-    {
-    }
-};
 
 static constexpr std::array<const char*, 4> time_stepper_choices
         = {"EULER", "CRANK_NICOLSON", "RK3", "RK4"};
@@ -185,17 +147,31 @@ struct GeneralParameters
     bool if_save_feet;
 };
 
-template <class Simulation>
-void run_simulation_with_methods(Simulation const& sim, double const dt, GeneralParameters params)
+template <
+        class LogicalToPhysicalMappingHost,
+        class LogicalToPhysicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class AnalyticalPhysicalToLogicalMapping,
+        class AnalyticalLogicalToPhysicalMapping>
+void run_simulations_with_methods(
+        double const dt,
+        GeneralParameters params,
+        LogicalToPhysicalMappingHost const& to_physical_mapping_host,
+        LogicalToPhysicalMapping const& to_physical_mapping,
+        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
+        AnalyticalPhysicalToLogicalMapping const& to_logical_mapping,
+        AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
+        std::string const& mapping_name,
+        std::string const& domain_name)
 {
     for (auto choice : time_stepper_choices) {
         std::ostringstream name_stream;
-        name_stream << sim.mapping_name << " MAPPING - " << sim.domain_name << " DOMAIN - "
-                    << choice << " - ";
+        name_stream << mapping_name << " MAPPING - " << domain_name << " DOMAIN - " << choice
+                    << " - ";
         std::string simulation_name = name_stream.str();
 
         std::ostringstream output_stream;
-        output_stream << to_lower(sim.mapping_name) << "_" << to_lower(sim.domain_name) << "-"
+        output_stream << to_lower(mapping_name) << "_" << to_lower(domain_name) << "-"
                       << to_lower(choice) << "-";
         std::string output_stem = output_stream.str();
 
@@ -207,8 +183,8 @@ void run_simulation_with_methods(Simulation const& sim, double const dt, General
         std::unique_ptr foot_finder = get_foot_finder(
                 params.grid,
                 choice,
-                sim.to_physical_mapping,
-                sim.analytical_to_pseudo_physical_mapping,
+                to_physical_mapping,
+                analytical_to_pseudo_physical_mapping,
                 params.advection_builder,
                 params.advection_evaluator);
 
@@ -216,14 +192,14 @@ void run_simulation_with_methods(Simulation const& sim, double const dt, General
                 params.advection_builder,
                 params.interpolation_evaluator,
                 *foot_finder,
-                sim.to_physical_mapping);
+                to_physical_mapping);
 
         run_simulations(
-                sim.to_physical_mapping_host,
-                sim.to_physical_mapping,
-                sim.to_logical_mapping,
-                sim.analytical_to_pseudo_physical_mapping,
-                sim.analytical_to_physical_mapping,
+                to_physical_mapping_host,
+                to_physical_mapping,
+                to_logical_mapping,
+                analytical_to_pseudo_physical_mapping,
+                analytical_to_physical_mapping,
                 params.grid,
                 *foot_finder,
                 advection_operator,
@@ -234,15 +210,6 @@ void run_simulation_with_methods(Simulation const& sim, double const dt, General
                 output_stem,
                 simulation_name);
     }
-}
-
-template <class... Simulation>
-void run_simulations_with_methods(
-        std::tuple<Simulation...> const& simulations,
-        IdxRangeRTheta const grid,
-        GeneralParameters params)
-{
-    ((run_simulation_with_methods(std::get<Simulation>(simulations), grid, params)), ...);
 }
 
 int main(int argc, char** argv)
@@ -360,40 +327,6 @@ int main(int argc, char** argv)
             spline_evaluator_extrapol);
     DiscretePoloidalCSSplineMapping const from_discrete_czarny_map = discrete_czarny_map_builder();
 
-    std::tuple simulations = std::make_tuple(
-            SimulationParameters(
-                    from_circ_map,
-                    from_circ_map,
-                    from_circ_map,
-                    to_circ_map,
-                    from_circ_map,
-                    "CIRCULAR",
-                    "PHYSICAL"),
-            SimulationParameters(
-                    from_czarny_map,
-                    from_czarny_map,
-                    from_czarny_map,
-                    to_czarny_map,
-                    from_czarny_map,
-                    "CZARNY",
-                    "PHYSICAL"),
-            SimulationParameters(
-                    from_czarny_map,
-                    from_czarny_map,
-                    to_pseudo_circ_map,
-                    to_czarny_map,
-                    from_czarny_map,
-                    "CZARNY",
-                    "PSEUDO CARTESIAN"),
-            SimulationParameters(
-                    from_discrete_czarny_map_host,
-                    from_discrete_czarny_map,
-                    to_pseudo_circ_map,
-                    to_czarny_map,
-                    from_czarny_map,
-                    "DISCRETE",
-                    "PSEUDO CARTESIAN"));
-
 
     // TO CLOCK THE SIMULATION --------------------------------------------------------------
     std::chrono::time_point<std::chrono::system_clock> start_full_simulation;
@@ -412,7 +345,47 @@ int main(int argc, char** argv)
                final_time,
                if_save_curves,
                if_save_feet};
-    run_simulations_with_methods(simulations, grid, params);
+
+    run_simulations_with_methods(
+            dt,
+            params,
+            from_circ_map,
+            from_circ_map,
+            from_circ_map,
+            to_circ_map,
+            from_circ_map,
+            "CIRCULAR",
+            "PHYSICAL");
+    run_simulations_with_methods(
+            dt,
+            params,
+            from_czarny_map,
+            from_czarny_map,
+            from_czarny_map,
+            to_czarny_map,
+            from_czarny_map,
+            "CZARNY",
+            "PHYSICAL");
+    run_simulations_with_methods(
+            dt,
+            params,
+            from_czarny_map,
+            from_czarny_map,
+            to_pseudo_circ_map,
+            to_czarny_map,
+            from_czarny_map,
+            "CZARNY",
+            "PSEUDO CARTESIAN");
+    run_simulations_with_methods(
+            dt,
+            params,
+            from_discrete_czarny_map_host,
+            from_discrete_czarny_map,
+            to_pseudo_circ_map,
+            to_czarny_map,
+            from_czarny_map,
+            "DISCRETE",
+            "PSEUDO CARTESIAN");
 
     end_full_simulation = std::chrono::system_clock::now();
     display_time(start_full_simulation, end_full_simulation, "   Full simulation time:    ");
