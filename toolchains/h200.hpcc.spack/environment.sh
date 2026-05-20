@@ -13,6 +13,7 @@ export SPACK_USER_PREFIX=$HOME/spack-user-install
 export SPACK_USER_CONFIG_PATH=$SPACK_USER_PREFIX/configuration
 export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
 
+export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
 . $HOME/spack/share/spack/setup-env.sh
 
 eval -- "$(

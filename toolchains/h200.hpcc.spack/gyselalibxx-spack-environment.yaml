@@ -69,6 +69,8 @@ spack:
             c: /usr/local/gcc-12.3/bin/gcc
             cxx: /usr/local/gcc-12.3/bin/g++
             fortran: /usr/local/gcc-12.3/bin/gfortran
+    kokkos-fft:
+      require: '@0.4 host_backend=fftw-serial device_backend=cufft'
     lapack:
       require: openblas
     mpi:
