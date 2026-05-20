@@ -48,21 +48,9 @@
  *
  * @see IPolarFootFinder
  */
-template <
-        class LogicalToPhysicalMapping,
-        class Builder2D,
-        class Evaluator2D,
-        class VectorIndexSetAdvDims,
-        class IdxRangeBatched>
+template <class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D>
 class BslAdvectionPolar
 {
-    static_assert(
-            std::is_same_v<typename Builder2D::memory_space, typename Evaluator2D::memory_space>);
-    static_assert(std::is_same_v<typename Builder2D::exec_space, typename Evaluator2D::exec_space>);
-
-    using MemorySpace = Builder2D::memory_space;
-    using ExecSpace = Builder2D::exec_space;
-
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
     using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
 
@@ -75,15 +63,10 @@ class BslAdvectionPolar
     using CartesianBasis = ddc::to_type_seq_t<CoordXY>;
     using CurvilinearBasis = ddc::to_type_seq_t<CoordRTheta>;
 
+    using IdxRangeBatched = typename FootFinder::IdxRangeOperator;
+
     using GridR = find_grid_t<R, ddc::to_type_seq_t<IdxRangeBatched>>;
     using GridTheta = find_grid_t<Theta, ddc::to_type_seq_t<IdxRangeBatched>>;
-
-    using FootFinder = IPolarFootFinder<
-            GridR,
-            GridTheta,
-            VectorIndexSetAdvDims,
-            IdxRangeBatched,
-            MemorySpace>;
 
     using IdxRangeRTheta = IdxRange<GridR, GridTheta>;
     using IdxRangeR = IdxRange<GridR>;
@@ -96,6 +79,9 @@ class BslAdvectionPolar
     using IdxBatched = typename IdxRangeBatched::discrete_element_type;
     using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using IdxStepR = typename IdxRangeR::discrete_vector_type;
+
+    using MemorySpace = typename FootFinder::memory_space;
+    using ExecSpace = typename FootFinder::ExecSpace;
 
     using IdxRangeBSRTheta =
             typename Builder2D::template batched_spline_domain_type<IdxRangeBatched>;
@@ -416,12 +402,3 @@ public:
         return allfdistribu;
     }
 };
-
-template <class Builder2D, class Evaluator2D, class FootFinder, class LogicalToPhysicalMapping>
-BslAdvectionPolar(Builder2D, Evaluator2D, FootFinder, LogicalToPhysicalMapping)
-        -> BslAdvectionPolar<
-                LogicalToPhysicalMapping,
-                Builder2D,
-                Evaluator2D,
-                typename FootFinder::VectorIndexSetAdvectionDims,
-                typename FootFinder::IdxRangeOperator>;
