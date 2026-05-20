@@ -100,18 +100,8 @@ public:
     }
 };
 
-
-struct NumericalParams
-{
-    IdxRangeRTheta const grid;
-    double const dt;
-
-    NumericalParams(IdxRangeRTheta grid, double dt) : grid(grid), dt(dt) {}
-    NumericalParams(NumericalParams&& params) = default;
-    NumericalParams(NumericalParams& params) = default;
-};
-
-static constexpr std::array<const char*, 4> time_stepper_choices = {"EULER", "CRANK_NICOLSON", "RK3", "RK4"};
+static constexpr std::array<const char*, 4> time_stepper_choices
+        = {"EULER", "CRANK_NICOLSON", "RK3", "RK4"};
 
 template <class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping>
 std::unique_ptr<
@@ -196,10 +186,7 @@ struct GeneralParameters
 };
 
 template <class Simulation>
-void run_simulation_with_methods(
-        Simulation const& sim,
-        NumericalParams& num_params,
-        GeneralParameters params)
+void run_simulation_with_methods(Simulation const& sim, double const dt, GeneralParameters params)
 {
     for (auto choice : time_stepper_choices) {
         std::ostringstream name_stream;
@@ -212,7 +199,7 @@ void run_simulation_with_methods(
                       << to_lower(choice) << "-";
         std::string output_stem = output_stream.str();
 
-        double time_step = num_params.dt;
+        double time_step = dt;
         if (std::string(choice) == "EULER") {
             time_step *= 0.1;
         }
@@ -252,9 +239,10 @@ void run_simulation_with_methods(
 template <class... Simulation>
 void run_simulations_with_methods(
         std::tuple<Simulation...> const& simulations,
-        NumericalParams& num_params,
-        GeneralParameters params) {
-    ((run_simulation_with_methods(std::get<Simulation>(simulations), num_params, params)),...);
+        IdxRangeRTheta const grid,
+        GeneralParameters params)
+{
+    ((run_simulation_with_methods(std::get<Simulation>(simulations), grid, params)), ...);
 }
 
 int main(int argc, char** argv)
@@ -406,8 +394,6 @@ int main(int argc, char** argv)
                     "DISCRETE",
                     "PSEUDO CARTESIAN"));
 
-    NumericalParams num_params = {grid, dt};
-
 
     // TO CLOCK THE SIMULATION --------------------------------------------------------------
     std::chrono::time_point<std::chrono::system_clock> start_full_simulation;
@@ -426,7 +412,7 @@ int main(int argc, char** argv)
                final_time,
                if_save_curves,
                if_save_feet};
-    run_simulations_with_methods(simulations, num_params, params);
+    run_simulations_with_methods(simulations, grid, params);
 
     end_full_simulation = std::chrono::system_clock::now();
     display_time(start_full_simulation, end_full_simulation, "   Full simulation time:    ");
