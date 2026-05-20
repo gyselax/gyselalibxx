@@ -155,13 +155,8 @@ void run_simulations_with_methods(
         std::string const& mapping_name,
         std::string const& domain_name)
 {
-    std::ostringstream name_stream;
-    name_stream << mapping_name << " MAPPING - " << domain_name << " DOMAIN - EULER - ";
-    std::string simulation_name = mapping_name + " MAPPING - " + domain_name + " DOMAIN - EULER - ";
-
-    std::ostringstream output_stream;
-    output_stream << to_lower(mapping_name) << "_" << to_lower(domain_name) << "-euler-";
-    std::string output_stem = output_stream.str();
+    std::string simulation_name = mapping_name + " MAPPING - " + domain_name + " DOMAIN -";
+    std::string output_stem = to_lower(mapping_name) + "_" + to_lower(domain_name) + "-";
 
     run_simulations_with_foot_finder_method<TS_EULER>(
             dt * 0.1,
@@ -171,8 +166,8 @@ void run_simulations_with_methods(
             analytical_to_pseudo_physical_mapping,
             to_logical_mapping,
             analytical_to_physical_mapping,
-            mapping_name,
-            domain_name);
+            simulation_name + "EULER - ",
+            output_stem + "euler-");
 
     run_simulations_with_foot_finder_method<TS_CRANK_NICOLSON>(
             dt,
@@ -182,8 +177,8 @@ void run_simulations_with_methods(
             analytical_to_pseudo_physical_mapping,
             to_logical_mapping,
             analytical_to_physical_mapping,
-            mapping_name,
-            domain_name);
+            simulation_name + "CRANK NICOLSON - ",
+            output_stem + "crank nicolson-");
 
     run_simulations_with_foot_finder_method<TS_RK3>(
             dt,
@@ -193,8 +188,8 @@ void run_simulations_with_methods(
             analytical_to_pseudo_physical_mapping,
             to_logical_mapping,
             analytical_to_physical_mapping,
-            mapping_name,
-            domain_name);
+            simulation_name + "RK3 - ",
+            output_stem + "rk3-");
 
     run_simulations_with_foot_finder_method<TS_RK4>(
             dt,
@@ -204,8 +199,8 @@ void run_simulations_with_methods(
             analytical_to_pseudo_physical_mapping,
             to_logical_mapping,
             analytical_to_physical_mapping,
-            mapping_name,
-            domain_name);
+            simulation_name + "RK4 - ",
+            output_stem + "rk4-");
 }
 
 int main(int argc, char** argv)
