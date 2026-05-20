@@ -64,8 +64,7 @@ using DiscreteMappingBuilder = DiscretePoloidalCSSplineMappingBuilder<
 
 enum TimeStepperChoice { TS_EULER, TS_CRANK_NICOLSON, TS_RK3, TS_RK4 };
 
-template <
-        TimeStepperChoice TSChoice>
+template <TimeStepperChoice TSChoice>
 auto get_time_stepper_builder()
 {
     if constexpr (TSChoice == TS_EULER) {
@@ -109,12 +108,12 @@ void run_simulations_with_foot_finder_method(
         std::string const& output_stem)
 {
     SplinePolarFootFinder foot_finder(
-                params.grid,
-                get_time_stepper_builder<TSChoice>(),
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                params.advection_builder,
-                params.advection_evaluator);
+            params.grid,
+            get_time_stepper_builder<TSChoice>(),
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            params.advection_builder,
+            params.advection_evaluator);
 
     BslAdvectionPolar advection_operator(
             params.advection_builder,
@@ -156,57 +155,57 @@ void run_simulations_with_methods(
         std::string const& mapping_name,
         std::string const& domain_name)
 {
-        std::ostringstream name_stream;
-        name_stream << mapping_name << " MAPPING - " << domain_name << " DOMAIN - EULER - ";
-        std::string simulation_name = mapping_name + " MAPPING - " + domain_name + " DOMAIN - EULER - ";
+    std::ostringstream name_stream;
+    name_stream << mapping_name << " MAPPING - " << domain_name << " DOMAIN - EULER - ";
+    std::string simulation_name = mapping_name + " MAPPING - " + domain_name + " DOMAIN - EULER - ";
 
-        std::ostringstream output_stream;
-        output_stream << to_lower(mapping_name) << "_" << to_lower(domain_name) << "-euler-";
-        std::string output_stem = output_stream.str();
+    std::ostringstream output_stream;
+    output_stream << to_lower(mapping_name) << "_" << to_lower(domain_name) << "-euler-";
+    std::string output_stem = output_stream.str();
 
-        run_simulations_with_foot_finder_method<TS_EULER>(
-                dt * 0.1,
-                params,
-                to_physical_mapping_host,
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                to_logical_mapping,
-                analytical_to_physical_mapping,
-                mapping_name,
-                domain_name);
+    run_simulations_with_foot_finder_method<TS_EULER>(
+            dt * 0.1,
+            params,
+            to_physical_mapping_host,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            mapping_name,
+            domain_name);
 
-        run_simulations_with_foot_finder_method<TS_CRANK_NICOLSON>(
-                dt,
-                params,
-                to_physical_mapping_host,
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                to_logical_mapping,
-                analytical_to_physical_mapping,
-                mapping_name,
-                domain_name);
+    run_simulations_with_foot_finder_method<TS_CRANK_NICOLSON>(
+            dt,
+            params,
+            to_physical_mapping_host,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            mapping_name,
+            domain_name);
 
-        run_simulations_with_foot_finder_method<TS_RK3>(
-                dt,
-                params,
-                to_physical_mapping_host,
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                to_logical_mapping,
-                analytical_to_physical_mapping,
-                mapping_name,
-                domain_name);
+    run_simulations_with_foot_finder_method<TS_RK3>(
+            dt,
+            params,
+            to_physical_mapping_host,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            mapping_name,
+            domain_name);
 
-        run_simulations_with_foot_finder_method<TS_RK4>(
-                dt,
-                params,
-                to_physical_mapping_host,
-                to_physical_mapping,
-                analytical_to_pseudo_physical_mapping,
-                to_logical_mapping,
-                analytical_to_physical_mapping,
-                mapping_name,
-                domain_name);
+    run_simulations_with_foot_finder_method<TS_RK4>(
+            dt,
+            params,
+            to_physical_mapping_host,
+            to_physical_mapping,
+            analytical_to_pseudo_physical_mapping,
+            to_logical_mapping,
+            analytical_to_physical_mapping,
+            mapping_name,
+            domain_name);
 }
 
 int main(int argc, char** argv)
