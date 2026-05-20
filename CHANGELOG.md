@@ -21,6 +21,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add more labels to memory allocations.
 - Add a `NDIdentityInterpolationBuilder` class.
 - Add a new abstract class `IPolarPoissonLikeSolver`.
+- Add data type parametrisation to `ConstantIdentityInterpolationExtrapolationRule`.
 
 ### Fixed
 
@@ -70,6 +71,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove ruche toolchain.
 - Remove `GYSELALIBXX_VERSION_*` CMake variables.
 - Remove out-of-date Leonardo toolchain.
+- Remove unuseful defaulted template parameters `MinBound` and `MaxBound` from `LagrangeInterpolator`.
 
 ## [v0.7.0] - 2026-03-18
 
