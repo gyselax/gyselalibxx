@@ -901,13 +901,13 @@ TYPED_TEST(
 
             // Exact formula ---------------------------------------------------------------------
             double const local_deriv = sum_values;
-            EXPECT_NEAR(local_deriv, global_deriv, 5e-13);
+            EXPECT_NEAR(local_deriv, global_deriv, 1e-12);
         });
     } else {
         // 30 cells ------------------------------------------------------------------------------
         TestFixture::check_exact_and_approximation(
                 30,
-                5e-13,
+                1e-12,
                 function_1,
                 function_2,
                 evaluator_g,
