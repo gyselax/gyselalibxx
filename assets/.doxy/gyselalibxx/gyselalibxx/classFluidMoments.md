@@ -170,7 +170,7 @@ A static instance of [**MomentVelocity**](structFluidMoments_1_1MomentVelocity.m
 ### function FluidMoments 
 
 ```C++
-FluidMoments::FluidMoments (
+explicit FluidMoments::FluidMoments (
     Quadrature < IdxRangeVx, IdxRangeSpXVx > integrate_v
 ) 
 ```

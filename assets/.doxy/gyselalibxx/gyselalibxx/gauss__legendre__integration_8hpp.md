@@ -35,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**GaussLegendre**](classGaussLegendre.md) &lt;class GLGrid, NPoints&gt;<br>_An operator for constructing a Gauss-Legendre quadrature._  |
+| class | [**GaussLegendre**](classGaussLegendre.md) &lt;class GLGrid, NPoints, class DataType&gt;<br>_An operator for constructing a Gauss-Legendre quadrature._  |
 | struct | [**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md) &lt;NPoints&gt;<br>_A structure containing the weights and positions associated with a Gauss-Legendre quadrature using NPoints points._  |
 
 
@@ -63,7 +63,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  DFieldMem&lt; IdxRange&lt; typename GaussLegendreQuad::Grid1D... &gt;, typename ExecSpace::memory\_space &gt; | [**gauss\_legendre\_quadrature\_coefficients**](#function-gauss_legendre_quadrature_coefficients) (GaussLegendreQuad const &... gl) <br>_Get the spline quadrature coefficients in ND from N 1D quadrature coefficient._  |
+|  FieldMem&lt; DataType, IdxRange&lt; typename GaussLegendreQuad::Grid1D... &gt;, typename ExecSpace::memory\_space &gt; | [**gauss\_legendre\_quadrature\_coefficients**](#function-gauss_legendre_quadrature_coefficients) (GaussLegendreQuad const &... gl) <br>_Get the spline quadrature coefficients in ND from N 1D quadrature coefficient._  |
 
 
 
@@ -101,8 +101,8 @@
 
 _Get the spline quadrature coefficients in ND from N 1D quadrature coefficient._ 
 ```C++
-template<class ExecSpace, class... GaussLegendreQuad>
-DFieldMem< IdxRange< typename GaussLegendreQuad::Grid1D... >, typename ExecSpace::memory_space > gauss_legendre_quadrature_coefficients (
+template<class ExecSpace, class DataType, class... GaussLegendreQuad>
+FieldMem< DataType, IdxRange< typename GaussLegendreQuad::Grid1D... >, typename ExecSpace::memory_space > gauss_legendre_quadrature_coefficients (
     GaussLegendreQuad const &... gl
 ) 
 ```

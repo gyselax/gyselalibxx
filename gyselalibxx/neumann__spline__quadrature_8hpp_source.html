@@ -577,10 +577,11 @@
 
 
 namespace {
-template &lt;class ExecSpace, class Grid1D&gt;
-using CoefficientFieldMem1D = DFieldMem&lt;IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt;;
-template &lt;class ExecSpace, class Grid1D&gt;
-using CoefficientField1D = DField&lt;IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt;;
+template &lt;class ExecSpace, class Grid1D, std::floating_point DataType&gt;
+using CoefficientFieldMem1D
+        = FieldMem&lt;DataType, IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt;;
+template &lt;class ExecSpace, class Grid1D, std::floating_point DataType&gt;
+using CoefficientField1D = Field&lt;DataType, IdxRange&lt;Grid1D&gt;, typename ExecSpace::memory_space&gt;;
 
 } // namespace
 
@@ -641,12 +642,13 @@ neumann_spline_quadrature_coefficients(
                     typename SplineBuilders::continuous_dimension_type&gt; and ...));
 
     // Get coefficients for each dimension
-    std::tuple&lt;CoefficientFieldMem1D&lt;Kokkos::DefaultHostExecutionSpace, DDims&gt;...&gt;
+    std::tuple&lt;CoefficientFieldMem1D&lt;Kokkos::DefaultHostExecutionSpace, DDims, double&gt;...&gt;
     current_dim_coeffs_alloc(
             neumann_spline_quadrature_coefficients_1d&lt;
                     Kokkos::DefaultHostExecutionSpace&gt;(ddc::select&lt;DDims&gt;(idx_range), builders)...);
-    std::tuple&lt;CoefficientField1D&lt;Kokkos::DefaultHostExecutionSpace, DDims&gt;...&gt; current_dim_coeffs(
-            get_field(std::get&lt;CoefficientFieldMem1D&lt;Kokkos::DefaultHostExecutionSpace, DDims&gt;&gt;(
+    std::tuple&lt;CoefficientField1D&lt;Kokkos::DefaultHostExecutionSpace, DDims, double&gt;...&gt;
+    current_dim_coeffs(get_field(
+            std::get&lt;CoefficientFieldMem1D&lt;Kokkos::DefaultHostExecutionSpace, DDims, double&gt;&gt;(
                     current_dim_coeffs_alloc))...);
     // Allocate ND coefficients
     DFieldMem&lt;IdxRange&lt;DDims...&gt;, typename ExecSpace::memory_space&gt;
@@ -658,7 +660,7 @@ neumann_spline_quadrature_coefficients(
     ddc::host_for_each(idx_range, [&amp;](Idx&lt;DDims...&gt; const idim) {
         // multiply the 1D coefficients by one another
         coefficients(idim)
-                = (std::get&lt;CoefficientField1D&lt;Kokkos::DefaultHostExecutionSpace, DDims&gt;&gt;(
+                = (std::get&lt;CoefficientField1D&lt;Kokkos::DefaultHostExecutionSpace, DDims, double&gt;&gt;(
                            current_dim_coeffs)(ddc::select&lt;DDims&gt;(idim))
                    * ... * 1);
     });

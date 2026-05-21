@@ -38,10 +38,11 @@ extern template struct GaussLegendreCoefficients<8>;
 extern template struct GaussLegendreCoefficients<9>;
 extern template struct GaussLegendreCoefficients<10>;
 
-template <class GLGrid, std::size_t NPoints>
+template <class GLGrid, std::size_t NPoints, class DataType = double>
 class GaussLegendre
 {
     static_assert(ddc::is_non_uniform_point_sampling_v<GLGrid>);
+    static_assert(std::is_floating_point_v<DataType>);
 
     using Dim = typename GLGrid::continuous_dimension_type;
 
@@ -103,10 +104,10 @@ public:
     }
 
     template <class ExecSpace>
-    DFieldMem<IdxRange<GLGrid>, typename ExecSpace::memory_space> gauss_legendre_coefficients()
-            const
+    FieldMem<DataType, IdxRange<GLGrid>, typename ExecSpace::memory_space>
+    gauss_legendre_coefficients() const
     {
-        DFieldMem<IdxRange<GLGrid>, typename ExecSpace::memory_space> coefficients_alloc(
+        FieldMem<DataType, IdxRange<GLGrid>, typename ExecSpace::memory_space> coefficients_alloc(
                 "coefficients (GaussLegendre::gauss_legendre_coefficients)",
                 m_valid_idx_range);
         auto coefficients_host = ddc::create_mirror_view(get_field(coefficients_alloc));
@@ -193,18 +194,24 @@ private:
     }
 };
 
-template <class ExecSpace, class... GaussLegendreQuad>
-DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D...>, typename ExecSpace::memory_space>
+template <class ExecSpace, class DataType = double, class... GaussLegendreQuad>
+FieldMem<
+        DataType,
+        IdxRange<typename GaussLegendreQuad::Grid1D...>,
+        typename ExecSpace::memory_space>
 gauss_legendre_quadrature_coefficients(GaussLegendreQuad const&... gl)
 {
     // Get coefficients for each dimension
-    std::tuple<host_t<DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D>>>...>
+    std::tuple<host_t<FieldMem<DataType, IdxRange<typename GaussLegendreQuad::Grid1D>>>...>
     current_dim_coeffs(gl.template gauss_legendre_coefficients<Kokkos::HostSpace>()...);
 
     IdxRange<typename GaussLegendreQuad::Grid1D...> idx_range(gl.get_idx_range()...);
 
     // Allocate ND coefficients
-    DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D...>, typename ExecSpace::memory_space>
+    FieldMem<
+            DataType,
+            IdxRange<typename GaussLegendreQuad::Grid1D...>,
+            typename ExecSpace::memory_space>
             coefficients(idx_range);
     auto coefficients_host = ddc::create_mirror(get_field(coefficients));
     // Serial loop is used due to nvcc bug concerning functions with variadic template arguments
@@ -212,7 +219,8 @@ gauss_legendre_quadrature_coefficients(GaussLegendreQuad const&... gl)
     ddc::host_for_each(idx_range, [&](Idx<typename GaussLegendreQuad::Grid1D...> const idim) {
         // multiply the 1D coefficients by one another
         coefficients_host(idim)
-                = (std::get<host_t<DFieldMem<IdxRange<typename GaussLegendreQuad::Grid1D>>>>(
+                = (std::get<host_t<
+                           FieldMem<DataType, IdxRange<typename GaussLegendreQuad::Grid1D>>>>(
                            current_dim_coeffs)(
                            ddc::select<typename GaussLegendreQuad::Grid1D>(idim))
                    * ... * 1);

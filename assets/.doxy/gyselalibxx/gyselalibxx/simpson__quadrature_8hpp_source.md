@@ -18,9 +18,9 @@
 #include "quadrature_coeffs_nd.hpp"
 #include "trapezoid_quadrature.hpp"
 
-template <class ExecSpace, class Grid1D>
+template <class ExecSpace, class Grid1D, std::floating_point DataType = double>
 void fill_simpson_quadrature_coefficients_1d(
-        DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients)
+        Field<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients)
 {
     IdxRange<Grid1D> idx_range = get_idx_range(coefficients);
     if constexpr (Grid1D::continuous_dimension_type::PERIODIC) {
@@ -42,9 +42,9 @@ void fill_simpson_quadrature_coefficients_1d(
                     idx_range.size() / 2 - int(Grid1D::continuous_dimension_type::PERIODIC)),
             KOKKOS_LAMBDA(const int i) {
                 Idx<Grid1D> idx_c = idx_range.front() + i * 2 + 1;
-                double const dx_l = distance_at_left(idx_c);
-                double const dx_r = distance_at_right(idx_c);
-                double const dx_sum = dx_l + dx_r;
+                DataType const dx_l = distance_at_left(idx_c);
+                DataType const dx_r = distance_at_right(idx_c);
+                DataType const dx_sum = dx_l + dx_r;
                 coefficients(idx_c - 1) = dx_sum * (2. * dx_l - dx_r) / (6. * dx_l);
                 coefficients(idx_c) = dx_sum * dx_sum * dx_sum / (6. * dx_l * dx_r);
             });
@@ -57,9 +57,9 @@ void fill_simpson_quadrature_coefficients_1d(
                     idx_range.size() / 2 - int(Grid1D::continuous_dimension_type::PERIODIC) - 1),
             KOKKOS_LAMBDA(const int i) {
                 Idx<Grid1D> idx_c = idx_range.front() + i * 2 + 1;
-                double const dx_l = distance_at_left(idx_c);
-                double const dx_r = distance_at_right(idx_c);
-                double const dx_sum = dx_l + dx_r;
+                DataType const dx_l = distance_at_left(idx_c);
+                DataType const dx_r = distance_at_right(idx_c);
+                DataType const dx_sum = dx_l + dx_r;
                 coefficients(idx_c + 1) += dx_sum * (2. * dx_r - dx_l) / (6. * dx_r);
             });
 
@@ -69,9 +69,9 @@ void fill_simpson_quadrature_coefficients_1d(
             KOKKOS_LAMBDA(const int i) {
                 Idx<Grid1D> idx_c
                         = idx_range.back() - 1 - int(Grid1D::continuous_dimension_type::PERIODIC);
-                double const dx_l = distance_at_left(idx_c);
-                double const dx_r = distance_at_right(idx_c);
-                double const dx_sum = dx_l + dx_r;
+                DataType const dx_l = distance_at_left(idx_c);
+                DataType const dx_r = distance_at_right(idx_c);
+                DataType const dx_sum = dx_l + dx_r;
                 coefficients(idx_c + 1) = dx_sum * (2. * dx_r - dx_l) / (6. * dx_r);
             });
 
@@ -81,9 +81,9 @@ void fill_simpson_quadrature_coefficients_1d(
                 Kokkos::RangePolicy<ExecSpace>(0, 1),
                 KOKKOS_LAMBDA(const int i) {
                     Idx<Grid1D> idx_c = idx_range.back();
-                    double const dx_l = distance_at_left(idx_c);
-                    double const dx_r = distance_at_right(idx_c);
-                    double const dx_sum = dx_l + dx_r;
+                    DataType const dx_l = distance_at_left(idx_c);
+                    DataType const dx_r = distance_at_right(idx_c);
+                    DataType const dx_sum = dx_l + dx_r;
                     coefficients(idx_c - 1) += dx_sum * (2. * dx_l - dx_r) / (6. * dx_l);
                     coefficients(idx_c) = dx_sum * dx_sum * dx_sum / (6. * dx_l * dx_r);
                     coefficients(idx_range.front()) += dx_sum * (2. * dx_r - dx_l) / (6. * dx_r);
@@ -91,19 +91,19 @@ void fill_simpson_quadrature_coefficients_1d(
     }
 }
 
-template <class ExecSpace, class Grid1D>
-DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> simpson_quadrature_coefficients_1d(
-        IdxRange<Grid1D> const& idx_range)
+template <class ExecSpace, std::floating_point DataType = double, class Grid1D>
+FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
+simpson_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
 {
-    DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(
+    FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(
             "current_dim_coeffs (simplson_quadrature_coefficients_1d)",
             idx_range);
     fill_simpson_quadrature_coefficients_1d<ExecSpace>(get_field(coefficients_alloc));
     return coefficients_alloc;
 }
 
-template <class ExecSpace, class Grid1D>
-DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space>
+template <class ExecSpace, class Grid1D, std::floating_point DataType = double>
+FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
 simpson_trapezoid_quadrature_coefficients_1d(
         IdxRange<Grid1D> const& idx_range,
         Extremity trapezoid_extremity)
@@ -112,35 +112,35 @@ simpson_trapezoid_quadrature_coefficients_1d(
             !Grid1D::continuous_dimension_type::PERIODIC,
             "The extremity is non-sensical in a Periodic dimension");
     try {
-        return simpson_quadrature_coefficients_1d<ExecSpace>(idx_range);
+        return simpson_quadrature_coefficients_1d<ExecSpace, DataType, Grid1D>(idx_range);
     } catch (const std::runtime_error& error) {
-        DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(
+        FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients_alloc(
                 "coefficients (simplson_trapezoid_quadrature_coefficients_1d)",
                 idx_range);
-        DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients(
+        Field<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> coefficients(
                 get_field(coefficients_alloc));
         IdxStep<Grid1D> npts_to_remove(1);
         if (trapezoid_extremity == Extremity::FRONT) {
-            fill_simpson_quadrature_coefficients_1d<ExecSpace>(
+            fill_simpson_quadrature_coefficients_1d<ExecSpace, Grid1D, DataType>(
                     coefficients_alloc[idx_range.remove_first(npts_to_remove)]);
             Kokkos::parallel_for(
                     "trapezoid_region",
                     Kokkos::RangePolicy<ExecSpace>(0, 1),
                     KOKKOS_LAMBDA(const int i) {
                         Idx<Grid1D> idx_l = idx_range.front();
-                        double dx_cell = 0.5 * distance_at_right(idx_l);
+                        DataType dx_cell = 0.5 * distance_at_right(idx_l);
                         coefficients(idx_l) = dx_cell;
                         coefficients(idx_l + 1) += dx_cell;
                     });
         } else {
-            fill_simpson_quadrature_coefficients_1d<ExecSpace>(
+            fill_simpson_quadrature_coefficients_1d<ExecSpace, Grid1D, DataType>(
                     coefficients_alloc[idx_range.remove_last(npts_to_remove)]);
             Kokkos::parallel_for(
                     "trapezoid_region",
                     Kokkos::RangePolicy<ExecSpace>(0, 1),
                     KOKKOS_LAMBDA(const int i) {
                         Idx<Grid1D> idx_r = idx_range.back();
-                        double dx_cell = 0.5 * distance_at_left(idx_r);
+                        DataType dx_cell = 0.5 * distance_at_left(idx_r);
                         coefficients(idx_r) = dx_cell;
                         coefficients(idx_r - 1) += dx_cell;
                     });
@@ -149,14 +149,15 @@ simpson_trapezoid_quadrature_coefficients_1d(
     }
 }
 
-template <class ExecSpace, class... ODims>
-DFieldMem<IdxRange<ODims...>, typename ExecSpace::memory_space> simpson_quadrature_coefficients(
-        IdxRange<ODims...> const& idx_range)
+template <class ExecSpace, std::floating_point DataType = double, class... ODims>
+FieldMem<DataType, IdxRange<ODims...>, typename ExecSpace::memory_space>
+simpson_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
 {
-    return quadrature_coeffs_nd<ExecSpace, ODims...>(
+    return quadrature_coeffs_nd<ExecSpace, DataType, ODims...>(
             idx_range,
-            (std::function<DFieldMem<IdxRange<ODims>, typename ExecSpace::memory_space>(
-                     IdxRange<ODims>)>(simpson_quadrature_coefficients_1d<ExecSpace, ODims>))...);
+            (std::function<FieldMem<DataType, IdxRange<ODims>, typename ExecSpace::memory_space>(
+                     IdxRange<ODims>)>(
+                    simpson_quadrature_coefficients_1d<ExecSpace, DataType, ODims>))...);
 }
 ```
 

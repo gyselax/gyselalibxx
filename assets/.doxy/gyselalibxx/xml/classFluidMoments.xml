@@ -73,7 +73,7 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classFluidMoments_1a5c0e28b4c6f0f4eaf93ed730c3ab81b6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classFluidMoments_1a5c0e28b4c6f0f4eaf93ed730c3ab81b6" prot="public" static="no" const="no" explicit="yes" inline="no" virt="non-virtual">
         <type></type>
         <definition>FluidMoments::FluidMoments</definition>
         <argsstring>(Quadrature&lt; IdxRangeVx, IdxRangeSpXVx &gt; integrate_v)</argsstring>
@@ -100,7 +100,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="62" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="9" bodyend="14"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="62" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="9" bodyend="12"/>
       </memberdef>
       <memberdef kind="function" id="classFluidMoments_1a1627a95ed02643b0dc08c2f64dbf5ae8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -167,7 +167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="74" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="19" bodyend="25"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="74" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="17" bodyend="23"/>
       </memberdef>
       <memberdef kind="function" id="classFluidMoments_1a2ae74d24f0db28d93e39b88d885b90cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -220,7 +220,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="83" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="30" bodyend="36"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="83" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="28" bodyend="34"/>
       </memberdef>
       <memberdef kind="function" id="classFluidMoments_1a4ab19d391047e94ce2dcc8e73bf94faa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -285,7 +285,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="94" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="41" bodyend="61"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="94" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="39" bodyend="59"/>
       </memberdef>
       <memberdef kind="function" id="classFluidMoments_1a60e881623a1a0db3245c690b4d7cc27f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -350,7 +350,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="108" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="65" bodyend="80"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="108" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="63" bodyend="78"/>
       </memberdef>
       <memberdef kind="function" id="classFluidMoments_1a180dd355d3d536623a0393c243af58d3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -427,7 +427,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="124" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="85" bodyend="100"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="124" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="83" bodyend="98"/>
       </memberdef>
       <memberdef kind="function" id="classFluidMoments_1ac15b6dd021fe761a18301a5475035aae" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
@@ -504,7 +504,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="140" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="104" bodyend="120"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.hpp" line="140" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/utils/fluid_moments.cpp" bodystart="102" bodyend="118"/>
       </memberdef>
     </sectiondef>
     <briefdescription>

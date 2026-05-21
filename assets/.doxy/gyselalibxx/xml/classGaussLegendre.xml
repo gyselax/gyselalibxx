@@ -12,11 +12,15 @@
         <declname>NPoints</declname>
         <defname>NPoints</defname>
       </param>
+      <param>
+        <type>class DataType</type>
+        <defval>double</defval>
+      </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classGaussLegendre_1ad4552a9f3e6ea1cc39562f7eb0e72eb6" prot="private" static="no">
+      <memberdef kind="typedef" id="classGaussLegendre_1acdb60816c12d913b9fa0e255fbac057c" prot="private" static="no">
         <type>typename GLGrid::continuous_dimension_type</type>
-        <definition>using GaussLegendre&lt; GLGrid, NPoints &gt;::Dim =  typename GLGrid::continuous_dimension_type</definition>
+        <definition>using GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::Dim =  typename GLGrid::continuous_dimension_type</definition>
         <argsstring></argsstring>
         <name>Dim</name>
         <qualifiedname>GaussLegendre::Dim</qualifiedname>
@@ -26,13 +30,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="55" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="55" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="56" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" prot="public" static="no">
+      <memberdef kind="typedef" id="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" prot="public" static="no">
         <type>GLGrid</type>
-        <definition>using GaussLegendre&lt; GLGrid, NPoints &gt;::Grid1D =  GLGrid</definition>
+        <definition>using GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::Grid1D =  GLGrid</definition>
         <argsstring></argsstring>
         <name>Grid1D</name>
         <qualifiedname>GaussLegendre::Grid1D</qualifiedname>
@@ -43,13 +47,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="59" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="60" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="60" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classGaussLegendre_1acb7916716244e4bc43f9c47cea014b06" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classGaussLegendre_1a184fde491840fffee78b1608291cb96a" prot="private" static="no" mutable="no">
         <type><ref refid="structGaussLegendreCoefficients" kindref="compound">GaussLegendreCoefficients</ref>&lt; NPoints &gt;</type>
-        <definition>GaussLegendreCoefficients&lt;NPoints&gt; GaussLegendre&lt; GLGrid, NPoints &gt;::m_glc</definition>
+        <definition>GaussLegendreCoefficients&lt;NPoints&gt; GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::m_glc</definition>
         <argsstring></argsstring>
         <name>m_glc</name>
         <qualifiedname>GaussLegendre::m_glc</qualifiedname>
@@ -59,11 +63,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="72" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="72" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="73" column="31" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGaussLegendre_1ab9fcccb220d98d957e302bbd4fca02ee" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classGaussLegendre_1a3c02dcb8529ddf7636ecbdbdecedc022" prot="private" static="no" mutable="no">
         <type>std::size_t const</type>
-        <definition>std::size_t const GaussLegendre&lt; GLGrid, NPoints &gt;::m_nbcells</definition>
+        <definition>std::size_t const GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::m_nbcells</definition>
         <argsstring></argsstring>
         <name>m_nbcells</name>
         <qualifiedname>GaussLegendre::m_nbcells</qualifiedname>
@@ -73,11 +77,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="73" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="73" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="74" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGaussLegendre_1affc731d1af0d0f6b56b5d172c88f5a08" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classGaussLegendre_1ae1c236184917c958119eaf622131b491" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; GLGrid &gt;</type>
-        <definition>IdxRange&lt;GLGrid&gt; GaussLegendre&lt; GLGrid, NPoints &gt;::m_valid_idx_range</definition>
+        <definition>IdxRange&lt;GLGrid&gt; GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::m_valid_idx_range</definition>
         <argsstring></argsstring>
         <name>m_valid_idx_range</name>
         <qualifiedname>GaussLegendre::m_valid_idx_range</qualifiedname>
@@ -87,11 +91,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="74" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="74" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="75" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="75" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classGaussLegendre_1a3356db20af78a5857c7d59537819efe1" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classGaussLegendre_1af5ad626606320d2403cbbfc5dc052f04" prot="private" static="no" mutable="no">
         <type>std::vector&lt; double &gt;</type>
-        <definition>std::vector&lt;double&gt; GaussLegendre&lt; GLGrid, NPoints &gt;::m_cell_lengths</definition>
+        <definition>std::vector&lt;double&gt; GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::m_cell_lengths</definition>
         <argsstring></argsstring>
         <name>m_cell_lengths</name>
         <qualifiedname>GaussLegendre::m_cell_lengths</qualifiedname>
@@ -101,13 +105,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="75" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="75" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="76" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="76" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-func">
-      <memberdef kind="function" id="classGaussLegendre_1a24a562fa02d5517588d6c4b4daa8c171" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1acf289b55a3b0992dc208a960aad91d58" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>constexpr std::size_t</type>
-        <definition>static constexpr std::size_t GaussLegendre&lt; GLGrid, NPoints &gt;::order</definition>
+        <definition>static constexpr std::size_t GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::order</definition>
         <argsstring>()</argsstring>
         <name>order</name>
         <qualifiedname>GaussLegendre::order</qualifiedname>
@@ -121,18 +125,18 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="66" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="66" bodyend="69"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="67" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="67" bodyend="70"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classGaussLegendre_1ab95e7e25b98a2ccf293b2462b3817a84" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1a8f2ee0ff3531368ed5f1a350faef0df1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class InputIt</type>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>GaussLegendre&lt; GLGrid, NPoints &gt;::GaussLegendre</definition>
+        <definition>GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::GaussLegendre</definition>
         <argsstring>(InputIt mesh_edges_begin, InputIt mesh_edges_end)</argsstring>
         <name>GaussLegendre</name>
         <qualifiedname>GaussLegendre::GaussLegendre</qualifiedname>
@@ -169,11 +173,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="88" bodyend="96"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="89" bodyend="97"/>
       </memberdef>
-      <memberdef kind="function" id="classGaussLegendre_1abb70874897c85fa6df64c91511e2d24e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1ad3fae076178b9e2167e0175443373e0e" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>GaussLegendre&lt; GLGrid, NPoints &gt;::GaussLegendre</definition>
+        <definition>GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::GaussLegendre</definition>
         <argsstring>(std::initializer_list&lt; Coord&lt; Dim &gt; &gt; const mesh_edges)</argsstring>
         <name>GaussLegendre</name>
         <qualifiedname>GaussLegendre::GaussLegendre</qualifiedname>
@@ -198,21 +202,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="103" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="103" bodyend="106"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="104" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="104" bodyend="107"/>
       </memberdef>
-      <memberdef kind="function" id="classGaussLegendre_1a9f220a3c718cd167fc78e412c734a3c2" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1ac467c423fea6641a297474fd0201dcae" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class <ref refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kindref="member">Grid1D</ref></type>
+            <type>class <ref refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kindref="member">Grid1D</ref></type>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>GaussLegendre&lt; GLGrid, NPoints &gt;::GaussLegendre</definition>
+        <definition>GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::GaussLegendre</definition>
         <argsstring>(ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; Grid1D &gt;, Kokkos::HostSpace &gt; mesh_edges)</argsstring>
         <name>GaussLegendre</name>
         <qualifiedname>GaussLegendre::GaussLegendre</qualifiedname>
         <param>
-          <type>ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; <ref refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kindref="member">Grid1D</ref> &gt;, Kokkos::HostSpace &gt;</type>
+          <type>ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; <ref refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kindref="member">Grid1D</ref> &gt;, Kokkos::HostSpace &gt;</type>
           <declname>mesh_edges</declname>
         </param>
         <briefdescription>
@@ -232,21 +236,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="114" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="114" bodyend="120"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="115" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="115" bodyend="121"/>
       </memberdef>
-      <memberdef kind="function" id="classGaussLegendre_1afa291b553d2e1b204e059edc5ce53b53" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1aadcb2e3cbe1a1b5702df717795fc7fbd" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class <ref refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kindref="member">Grid1D</ref></type>
+            <type>class <ref refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kindref="member">Grid1D</ref></type>
           </param>
         </templateparamlist>
         <type></type>
-        <definition>GaussLegendre&lt; GLGrid, NPoints &gt;::GaussLegendre</definition>
+        <definition>GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::GaussLegendre</definition>
         <argsstring>(IdxRange&lt; Grid1D &gt; mesh_edge_idx_range)</argsstring>
         <name>GaussLegendre</name>
         <qualifiedname>GaussLegendre::GaussLegendre</qualifiedname>
         <param>
-          <type>IdxRange&lt; <ref refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kindref="member">Grid1D</ref> &gt;</type>
+          <type>IdxRange&lt; <ref refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kindref="member">Grid1D</ref> &gt;</type>
           <declname>mesh_edge_idx_range</declname>
         </param>
         <briefdescription>
@@ -266,11 +270,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="128" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="128" bodyend="136"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="129" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="129" bodyend="137"/>
       </memberdef>
-      <memberdef kind="function" id="classGaussLegendre_1aaeeb0f98363b55a366f009b2fb77ed2f" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1a4ef7f216e6e55a92d328104a3ed6c970" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>IdxRange&lt; GLGrid &gt;</type>
-        <definition>IdxRange&lt; GLGrid &gt; GaussLegendre&lt; GLGrid, NPoints &gt;::get_idx_range</definition>
+        <definition>IdxRange&lt; GLGrid &gt; GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::get_idx_range</definition>
         <argsstring>() const</argsstring>
         <name>get_idx_range</name>
         <qualifiedname>GaussLegendre::get_idx_range</qualifiedname>
@@ -284,16 +288,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="142" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="142" bodyend="145"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="143" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="143" bodyend="146"/>
       </memberdef>
-      <memberdef kind="function" id="classGaussLegendre_1a421cde58db551c40987077ee12b4e954" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1a71b1929912ce38f3eeceae0e2b6a978e" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class ExecSpace</type>
           </param>
         </templateparamlist>
-        <type>DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt;</type>
-        <definition>DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt; GaussLegendre&lt; GLGrid, NPoints &gt;::gauss_legendre_coefficients</definition>
+        <type>FieldMem&lt; DataType, IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt;</type>
+        <definition>FieldMem&lt; DataType, IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt; GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::gauss_legendre_coefficients</definition>
         <argsstring>() const</argsstring>
         <name>gauss_legendre_coefficients</name>
         <qualifiedname>GaussLegendre::gauss_legendre_coefficients</qualifiedname>
@@ -307,13 +311,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="152" column="15" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="152" bodyend="166"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="154" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="154" bodyend="167"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-func">
-      <memberdef kind="function" id="classGaussLegendre_1a924ba0b8565dbaf3c43f3ac0dd8cc9f5" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1ae410d687438f4bf7003203fa45cd904c" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
-        <definition>void GaussLegendre&lt; GLGrid, NPoints &gt;::get_sampling_on_cell</definition>
+        <definition>void GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::get_sampling_on_cell</definition>
         <argsstring>(std::vector&lt; Coord&lt; Dim &gt; &gt; &amp;grid, Coord&lt; Dim &gt; x0, Coord&lt; Dim &gt; x1, int i, int &amp;k)</argsstring>
         <name>get_sampling_on_cell</name>
         <qualifiedname>GaussLegendre::get_sampling_on_cell</qualifiedname>
@@ -343,16 +347,16 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="169" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="169" bodyend="182"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="170" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="170" bodyend="183"/>
       </memberdef>
-      <memberdef kind="function" id="classGaussLegendre_1adaf63a7bb1daa9e80870cb432e8dba2d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1a813cd067c77e15bdf462e2d512188ae8" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class InputIt</type>
           </param>
         </templateparamlist>
         <type>std::vector&lt; Coord&lt; Dim &gt; &gt;</type>
-        <definition>std::vector&lt; Coord&lt; Dim &gt; &gt; GaussLegendre&lt; GLGrid, NPoints &gt;::get_sampling</definition>
+        <definition>std::vector&lt; Coord&lt; Dim &gt; &gt; GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::get_sampling</definition>
         <argsstring>(InputIt mesh_edges_begin, InputIt mesh_edges_end)</argsstring>
         <name>get_sampling</name>
         <qualifiedname>GaussLegendre::get_sampling</qualifiedname>
@@ -370,21 +374,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="185" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="185" bodyend="199"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="186" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="186" bodyend="200"/>
       </memberdef>
-      <memberdef kind="function" id="classGaussLegendre_1aaa8e737921aa05a24f4e7b9f6ae3c996" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1a24421e663925c8c0a40c4e492be8155e" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class <ref refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kindref="member">Grid1D</ref></type>
+            <type>class <ref refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kindref="member">Grid1D</ref></type>
           </param>
         </templateparamlist>
         <type>std::vector&lt; Coord&lt; Dim &gt; &gt;</type>
-        <definition>std::vector&lt; Coord&lt; Dim &gt; &gt; GaussLegendre&lt; GLGrid, NPoints &gt;::get_sampling</definition>
+        <definition>std::vector&lt; Coord&lt; Dim &gt; &gt; GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::get_sampling</definition>
         <argsstring>(ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; Grid1D &gt;, Kokkos::HostSpace &gt; mesh_edges)</argsstring>
         <name>get_sampling</name>
         <qualifiedname>GaussLegendre::get_sampling</qualifiedname>
         <param>
-          <type>ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; <ref refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kindref="member">Grid1D</ref> &gt;, Kokkos::HostSpace &gt;</type>
+          <type>ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; <ref refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kindref="member">Grid1D</ref> &gt;, Kokkos::HostSpace &gt;</type>
           <declname>mesh_edges</declname>
         </param>
         <briefdescription>
@@ -393,21 +397,21 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="202" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="202" bodyend="220"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="203" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="203" bodyend="221"/>
       </memberdef>
-      <memberdef kind="function" id="classGaussLegendre_1a695356d3ea4ed49113136ae3f647451d" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGaussLegendre_1a8fb6516cf7c982e6a22bfa4fb1a07d84" prot="private" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
-            <type>class <ref refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kindref="member">Grid1D</ref></type>
+            <type>class <ref refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kindref="member">Grid1D</ref></type>
           </param>
         </templateparamlist>
         <type>std::vector&lt; Coord&lt; Dim &gt; &gt;</type>
-        <definition>std::vector&lt; Coord&lt; Dim &gt; &gt; GaussLegendre&lt; GLGrid, NPoints &gt;::get_sampling</definition>
+        <definition>std::vector&lt; Coord&lt; Dim &gt; &gt; GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::get_sampling</definition>
         <argsstring>(IdxRange&lt; Grid1D &gt; mesh_edges_idx_range)</argsstring>
         <name>get_sampling</name>
         <qualifiedname>GaussLegendre::get_sampling</qualifiedname>
         <param>
-          <type>IdxRange&lt; <ref refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kindref="member">Grid1D</ref> &gt;</type>
+          <type>IdxRange&lt; <ref refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kindref="member">Grid1D</ref> &gt;</type>
           <declname>mesh_edges_idx_range</declname>
         </param>
         <briefdescription>
@@ -416,7 +420,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="223" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="223" bodyend="239"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="224" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="224" bodyend="240"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -442,25 +446,25 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="51" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="52" bodyend="240"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" line="51" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.hpp" bodystart="52" bodyend="241"/>
     <listofallmembers>
-      <member refid="classGaussLegendre_1ad4552a9f3e6ea1cc39562f7eb0e72eb6" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>Dim</name></member>
-      <member refid="classGaussLegendre_1a421cde58db551c40987077ee12b4e954" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>gauss_legendre_coefficients</name></member>
-      <member refid="classGaussLegendre_1ab95e7e25b98a2ccf293b2462b3817a84" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>GaussLegendre</name></member>
-      <member refid="classGaussLegendre_1abb70874897c85fa6df64c91511e2d24e" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>GaussLegendre</name></member>
-      <member refid="classGaussLegendre_1a9f220a3c718cd167fc78e412c734a3c2" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>GaussLegendre</name></member>
-      <member refid="classGaussLegendre_1afa291b553d2e1b204e059edc5ce53b53" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>GaussLegendre</name></member>
-      <member refid="classGaussLegendre_1aaeeb0f98363b55a366f009b2fb77ed2f" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>get_idx_range</name></member>
-      <member refid="classGaussLegendre_1adaf63a7bb1daa9e80870cb432e8dba2d" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>get_sampling</name></member>
-      <member refid="classGaussLegendre_1aaa8e737921aa05a24f4e7b9f6ae3c996" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>get_sampling</name></member>
-      <member refid="classGaussLegendre_1a695356d3ea4ed49113136ae3f647451d" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>get_sampling</name></member>
-      <member refid="classGaussLegendre_1a924ba0b8565dbaf3c43f3ac0dd8cc9f5" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>get_sampling_on_cell</name></member>
-      <member refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>Grid1D</name></member>
-      <member refid="classGaussLegendre_1a3356db20af78a5857c7d59537819efe1" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>m_cell_lengths</name></member>
-      <member refid="classGaussLegendre_1acb7916716244e4bc43f9c47cea014b06" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>m_glc</name></member>
-      <member refid="classGaussLegendre_1ab9fcccb220d98d957e302bbd4fca02ee" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>m_nbcells</name></member>
-      <member refid="classGaussLegendre_1affc731d1af0d0f6b56b5d172c88f5a08" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>m_valid_idx_range</name></member>
-      <member refid="classGaussLegendre_1a24a562fa02d5517588d6c4b4daa8c171" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>order</name></member>
+      <member refid="classGaussLegendre_1acdb60816c12d913b9fa0e255fbac057c" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>Dim</name></member>
+      <member refid="classGaussLegendre_1a71b1929912ce38f3eeceae0e2b6a978e" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>gauss_legendre_coefficients</name></member>
+      <member refid="classGaussLegendre_1a8f2ee0ff3531368ed5f1a350faef0df1" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>GaussLegendre</name></member>
+      <member refid="classGaussLegendre_1ad3fae076178b9e2167e0175443373e0e" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>GaussLegendre</name></member>
+      <member refid="classGaussLegendre_1ac467c423fea6641a297474fd0201dcae" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>GaussLegendre</name></member>
+      <member refid="classGaussLegendre_1aadcb2e3cbe1a1b5702df717795fc7fbd" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>GaussLegendre</name></member>
+      <member refid="classGaussLegendre_1a4ef7f216e6e55a92d328104a3ed6c970" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>get_idx_range</name></member>
+      <member refid="classGaussLegendre_1a813cd067c77e15bdf462e2d512188ae8" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>get_sampling</name></member>
+      <member refid="classGaussLegendre_1a24421e663925c8c0a40c4e492be8155e" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>get_sampling</name></member>
+      <member refid="classGaussLegendre_1a8fb6516cf7c982e6a22bfa4fb1a07d84" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>get_sampling</name></member>
+      <member refid="classGaussLegendre_1ae410d687438f4bf7003203fa45cd904c" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>get_sampling_on_cell</name></member>
+      <member refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>Grid1D</name></member>
+      <member refid="classGaussLegendre_1af5ad626606320d2403cbbfc5dc052f04" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>m_cell_lengths</name></member>
+      <member refid="classGaussLegendre_1a184fde491840fffee78b1608291cb96a" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>m_glc</name></member>
+      <member refid="classGaussLegendre_1a3c02dcb8529ddf7636ecbdbdecedc022" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>m_nbcells</name></member>
+      <member refid="classGaussLegendre_1ae1c236184917c958119eaf622131b491" prot="private" virt="non-virtual"><scope>GaussLegendre</scope><name>m_valid_idx_range</name></member>
+      <member refid="classGaussLegendre_1acf289b55a3b0992dc208a960aad91d58" prot="public" virt="non-virtual"><scope>GaussLegendre</scope><name>order</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -561,7 +561,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-gausslegendre">Class GaussLegendre</h1>
-<p><strong>template &lt;class GLGrid, std::size_t NPoints&gt;</strong></p>
+<p><strong>template &lt;class GLGrid, std::size_t NPoints, class DataType&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a></p>
 <p><em>An operator for constructing a Gauss-Legendre quadrature.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -608,7 +608,7 @@
 <td style="text-align: left;"><a href="#function-gausslegendre-44"><strong>GaussLegendre</strong></a> (IdxRange&lt; <a href="classGaussLegendre.html#typedef-grid1d"><strong>Grid1D</strong></a> &gt; mesh_edge_idx_range) <br><em>A constructor of the</em> <a href="classGaussLegendre.html"><em><strong>GaussLegendre</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt;</td>
+<td style="text-align: right;">FieldMem&lt; DataType, IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt;</td>
 <td style="text-align: left;"><a href="#function-gauss_legendre_coefficients"><strong>gauss_legendre_coefficients</strong></a> () const<br><em>Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature.</em></td>
 </tr>
 <tr>
@@ -641,7 +641,7 @@
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-grid1d">typedef Grid1D</h3>
 <p><em>The grid on which the quadrature scheme is defined.</em> </p>
-<pre><code class="language-C++">using GaussLegendre&lt; GLGrid, NPoints &gt;::Grid1D =  GLGrid;
+<pre><code class="language-C++">using GaussLegendre&lt; GLGrid, NPoints, DataType &gt;::Grid1D =  GLGrid;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -701,7 +701,7 @@ inline explicit GaussLegendre::GaussLegendre (
 <h3 id="function-gauss_legendre_coefficients">function gauss_legendre_coefficients</h3>
 <p><em>Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecSpace&gt;
-inline DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt; GaussLegendre::gauss_legendre_coefficients () const
+inline FieldMem&lt; DataType, IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory_space &gt; GaussLegendre::gauss_legendre_coefficients () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>The Gauss-Legendre quadrature. </p>

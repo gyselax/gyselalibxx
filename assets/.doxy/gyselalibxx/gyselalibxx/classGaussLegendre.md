@@ -2,7 +2,7 @@
 
 # Class GaussLegendre
 
-**template &lt;class GLGrid, std::size\_t NPoints&gt;**
+**template &lt;class GLGrid, std::size\_t NPoints, class DataType&gt;**
 
 
 
@@ -63,7 +63,7 @@ _An operator for constructing a Gauss-Legendre quadrature._ [More...](#detailed-
 |   | [**GaussLegendre**](#function-gausslegendre-24) (std::initializer\_list&lt; Coord&lt; Dim &gt; &gt; const mesh\_edges) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
 |   | [**GaussLegendre**](#function-gausslegendre-34) (ConstField&lt; Coord&lt; Dim &gt;, IdxRange&lt; [**Grid1D**](classGaussLegendre.md#typedef-grid1d) &gt;, Kokkos::HostSpace &gt; mesh\_edges) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
 |   | [**GaussLegendre**](#function-gausslegendre-44) (IdxRange&lt; [**Grid1D**](classGaussLegendre.md#typedef-grid1d) &gt; mesh\_edge\_idx\_range) <br>_A constructor of the_ [_**GaussLegendre**_](classGaussLegendre.md) _class._ |
-|  DFieldMem&lt; IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory\_space &gt; | [**gauss\_legendre\_coefficients**](#function-gauss_legendre_coefficients) () const<br>_Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature._  |
+|  FieldMem&lt; DataType, IdxRange&lt; GLGrid &gt;, typename ExecSpace::memory\_space &gt; | [**gauss\_legendre\_coefficients**](#function-gauss_legendre_coefficients) () const<br>_Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature._  |
 |  IdxRange&lt; GLGrid &gt; | [**get\_idx\_range**](#function-get_idx_range) () const<br>_Get the index range of the points of the Gauss-Legendre quadrature._  |
 
 
@@ -122,7 +122,7 @@ _An operator for constructing a Gauss-Legendre quadrature._ [More...](#detailed-
 
 _The grid on which the quadrature scheme is defined._ 
 ```C++
-using GaussLegendre< GLGrid, NPoints >::Grid1D =  GLGrid;
+using GaussLegendre< GLGrid, NPoints, DataType >::Grid1D =  GLGrid;
 ```
 
 
@@ -252,7 +252,7 @@ inline explicit GaussLegendre::GaussLegendre (
 _Get a FieldMem containing the coefficients for the Gauss-Legendre quadrature._ 
 ```C++
 template<class ExecSpace>
-inline DFieldMem< IdxRange< GLGrid >, typename ExecSpace::memory_space > GaussLegendre::gauss_legendre_coefficients () const
+inline FieldMem< DataType, IdxRange< GLGrid >, typename ExecSpace::memory_space > GaussLegendre::gauss_legendre_coefficients () const
 ```
 
 

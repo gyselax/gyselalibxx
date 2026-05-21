@@ -595,51 +595,59 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-error_norm_l1"><strong>error_norm_L1</strong></a> (ExecSpace exec_space, <a href="classQuadrature.html"><strong>Quadrature</strong></a>&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function, DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; exact_function) <br><em>Compute the L1 norm of the error between 2 Fields.</em></td>
+<td style="text-align: right;">DataType</td>
+<td style="text-align: left;"><a href="#function-error_norm_l1"><strong>error_norm_L1</strong></a> (ExecSpace exec_space, <a href="classQuadrature.html"><strong>Quadrature</strong></a>&lt; IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space &gt; quadrature, Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; function, Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; exact_function) <br><em>Compute the L1 norm of the error between 2 Fields.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-error_norm_l2"><strong>error_norm_L2</strong></a> (ExecSpace exec_space, <a href="classQuadrature.html"><strong>Quadrature</strong></a>&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function, DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; exact_function) <br><em>Compute the L2 norm of the error between 2 Fields.</em></td>
+<td style="text-align: right;">DataType</td>
+<td style="text-align: left;"><a href="#function-error_norm_l2"><strong>error_norm_L2</strong></a> (ExecSpace exec_space, <a href="classQuadrature.html"><strong>Quadrature</strong></a>&lt; IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space &gt; quadrature, Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; function, Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; exact_function) <br><em>Compute the L2 norm of the error between 2 Fields.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">double</td>
+<td style="text-align: right;">ElementType</td>
 <td style="text-align: left;"><a href="#function-error_norm_inf"><strong>error_norm_inf</strong></a> (ExecSpace exec_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; exact_function) <br><em>Compute the infinity norm of the error between 2 Fields.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">ddc::Real</td>
+<td style="text-align: left;"><a href="#function-error_norm_inf"><strong>error_norm_inf</strong></a> (ExecSpace exec_space, ConstField&lt; Coord&lt; CoordDims... &gt;, IdxRange, typename ExecSpace::memory_space &gt; function, ConstField&lt; Coord&lt; CoordDims... &gt;, IdxRange, typename ExecSpace::memory_space &gt; exact_function) <br><em>Compute the infinity norm of the error between 2 Fields.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">ElementType</td>
 <td style="text-align: left;"><a href="#function-error_norm_inf"><strong>error_norm_inf</strong></a> (ExecSpace exec_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function, ExactFunc exact_function) <br><em>Compute the infinity norm of the error between 2 Fields.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">double</td>
+<td style="text-align: right;">ElementType</td>
 <td style="text-align: left;"><a href="#function-error_norm_inf"><strong>error_norm_inf</strong></a> (ExecSpace exec_space, <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; function, <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; exact_function) <br><em>Compute the infinity norm of the error between 2 VectorFields.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-norm_l1"><strong>norm_L1</strong></a> (ExecSpace exec_space, <a href="classQuadrature.html"><strong>Quadrature</strong></a>&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function) <br><em>Compute L1 norm of a function with a given quadrature.</em></td>
+<td style="text-align: right;">DataType</td>
+<td style="text-align: left;"><a href="#function-norm_l1"><strong>norm_L1</strong></a> (ExecSpace exec_space, <a href="classQuadrature.html"><strong>Quadrature</strong></a>&lt; IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space &gt; quadrature, Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; function) <br><em>Compute L1 norm of a function with a given quadrature.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">double</td>
-<td style="text-align: left;"><a href="#function-norm_l2"><strong>norm_L2</strong></a> (ExecSpace exec_space, <a href="classQuadrature.html"><strong>Quadrature</strong></a>&lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature, DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function) <br><em>Compute L2 norm of a function with a given quadrature.</em></td>
+<td style="text-align: right;">DataType</td>
+<td style="text-align: left;"><a href="#function-norm_l2"><strong>norm_L2</strong></a> (ExecSpace exec_space, <a href="classQuadrature.html"><strong>Quadrature</strong></a>&lt; IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space &gt; quadrature, Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; function) <br><em>Compute L2 norm of a function with a given quadrature.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION double</td>
+<td style="text-align: right;">KOKKOS_FUNCTION ddc::Real</td>
 <td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (Coord&lt; Tags... &gt; coord) <br><em>Compute the infinity norm.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (<a href="classTensor.html"><strong>DVector</strong></a>&lt; Tags... &gt; vec) <br><em>Compute the infinity norm of a vector on an orthonormal coordinate system.</em></td>
+<td style="text-align: right;">KOKKOS_FUNCTION ElementType</td>
+<td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (<a href="classTensor.html"><strong>Vector</strong></a>&lt; ElementType, Tags... &gt; vec) <br><em>Compute the infinity norm of a vector on an orthonormal coordinate system.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
-<td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (double const coord) <br><em>Compute the infinity norm.</em></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION T</td>
+<td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (T const coord) <br><em>Compute the infinity norm.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">double</td>
+<td style="text-align: right;">ElementType</td>
 <td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (ExecSpace exec_space, ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function) <br><em>Compute the infinity norm for a Field.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">double</td>
+<td style="text-align: right;">ddc::Real</td>
+<td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (ExecSpace exec_space, ConstField&lt; Coord&lt; CoordDims... &gt;, IdxRange, typename ExecSpace::memory_space &gt; function) <br><em>Compute the infinity norm for a Field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">ElementType</td>
 <td style="text-align: left;"><a href="#function-norm_inf"><strong>norm_inf</strong></a> (ExecSpace exec_space, <a href="classVectorField.html"><strong>VectorConstField</strong></a>&lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; function) <br><em>Compute the infinity norm for a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>.</em></td>
 </tr>
 </tbody>
@@ -649,12 +657,12 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-error_norm_l1">function error_norm_L1</h3>
 <p><em>Compute the L1 norm of the error between 2 Fields.</em> </p>
-<pre><code class="language-C++">template&lt;class IdxRangeQuad, class ExecSpace&gt;
-double error_norm_L1 (
+<pre><code class="language-C++">template&lt;class IdxRangeQuad, class ExecSpace, class DataType&gt;
+DataType error_norm_L1 (
     ExecSpace exec_space,
-    Quadrature &lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature,
-    DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function,
-    DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; exact_function
+    Quadrature &lt; IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space &gt; quadrature,
+    Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; function,
+    Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; exact_function
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -665,17 +673,17 @@ double error_norm_L1 (
 <li><code>exact_function</code> The exact function with which the calculated function is compared. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <h3 id="function-error_norm_l2">function error_norm_L2</h3>
 <p><em>Compute the L2 norm of the error between 2 Fields.</em> </p>
-<pre><code class="language-C++">template&lt;class IdxRangeQuad, class ExecSpace&gt;
-double error_norm_L2 (
+<pre><code class="language-C++">template&lt;class IdxRangeQuad, class ExecSpace, class DataType&gt;
+DataType error_norm_L2 (
     ExecSpace exec_space,
-    Quadrature &lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature,
-    DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function,
-    DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; exact_function
+    Quadrature &lt; IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space &gt; quadrature,
+    Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; function,
+    Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; exact_function
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -686,13 +694,13 @@ double error_norm_L2 (
 <li><code>exact_function</code> The exact function with which the calculated function is compared. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <h3 id="function-error_norm_inf">function error_norm_inf</h3>
 <p><em>Compute the infinity norm of the error between 2 Fields.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecSpace, class ElementType, class IdxRange&gt;
-inline double error_norm_inf (
+inline ElementType error_norm_inf (
     ExecSpace exec_space,
     ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function,
     ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; exact_function
@@ -705,10 +713,29 @@ inline double error_norm_inf (
 <li><code>exact_function</code> The exact function with which the calculated function is compared. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <h3 id="function-error_norm_inf_1">function error_norm_inf</h3>
+<p><em>Compute the infinity norm of the error between 2 Fields.</em> </p>
+<pre><code class="language-C++">template&lt;class ExecSpace, class IdxRange, class... CoordDims&gt;
+inline ddc::Real error_norm_inf (
+    ExecSpace exec_space,
+    ConstField&lt; Coord&lt; CoordDims... &gt;, IdxRange, typename ExecSpace::memory_space &gt; function,
+    ConstField&lt; Coord&lt; CoordDims... &gt;, IdxRange, typename ExecSpace::memory_space &gt; exact_function
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><code>function</code> The calculated function. </li>
+<li><code>exact_function</code> The exact function with which the calculated function is compared. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A floating point containing the value of the infinity norm. </p>
+<hr>
+
+<h3 id="function-error_norm_inf_2">function error_norm_inf</h3>
 <p><em>Compute the infinity norm of the error between 2 Fields.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecSpace, class ElementType, class IdxRange, class ExactFunc&gt;
 inline ElementType error_norm_inf (
@@ -724,13 +751,13 @@ inline ElementType error_norm_inf (
 <li><code>exact_function</code> The exact function with which the calculated function is compared. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
-<h3 id="function-error_norm_inf_2">function error_norm_inf</h3>
+<h3 id="function-error_norm_inf_3">function error_norm_inf</h3>
 <p><em>Compute the infinity norm of the error between 2 VectorFields.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecSpace, class ElementType, class IdxRange, class VectorIndexSetType&gt;
-inline double error_norm_inf (
+inline ElementType error_norm_inf (
     ExecSpace exec_space,
     VectorConstField &lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; function,
     VectorConstField &lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; exact_function
@@ -743,16 +770,16 @@ inline double error_norm_inf (
 <li><code>exact_function</code> The exact function with which the calculated function is compared. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <h3 id="function-norm_l1">function norm_L1</h3>
 <p><em>Compute L1 norm of a function with a given quadrature.</em> </p>
-<pre><code class="language-C++">template&lt;class IdxRangeQuad, class ExecSpace&gt;
-double norm_L1 (
+<pre><code class="language-C++">template&lt;class IdxRangeQuad, class ExecSpace, class DataType&gt;
+DataType norm_L1 (
     ExecSpace exec_space,
-    Quadrature &lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature,
-    DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function
+    Quadrature &lt; IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space &gt; quadrature,
+    Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; function
 ) 
 </code></pre>
 <div class="arithmatex">\[\int_{\Omega} |f(X)|  dX\]</div>
@@ -763,16 +790,16 @@ double norm_L1 (
 <li><code>function</code> A Field to the value of the function on the quadrature grid.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the L1 norm of the function. </p>
+<p>A floating point containing the L1 norm of the function. </p>
 <hr>
 
 <h3 id="function-norm_l2">function norm_L2</h3>
 <p><em>Compute L2 norm of a function with a given quadrature.</em> </p>
-<pre><code class="language-C++">template&lt;class IdxRangeQuad, class ExecSpace&gt;
-double norm_L2 (
+<pre><code class="language-C++">template&lt;class IdxRangeQuad, class ExecSpace, class DataType&gt;
+DataType norm_L2 (
     ExecSpace exec_space,
-    Quadrature &lt; IdxRangeQuad, IdxRangeQuad, typename ExecSpace::memory_space &gt; quadrature,
-    DField&lt; IdxRangeQuad, typename ExecSpace::memory_space &gt; function
+    Quadrature &lt; IdxRangeQuad, IdxRangeQuad, DataType, typename ExecSpace::memory_space &gt; quadrature,
+    Field&lt; DataType, IdxRangeQuad, typename ExecSpace::memory_space &gt; function
 ) 
 </code></pre>
 <div class="arithmatex">\[\sqrt{\int_{\Omega} |f(X)|^2  dX}\]</div>
@@ -783,13 +810,13 @@ double norm_L2 (
 <li><code>function</code> A Field to the value of the function on the quadrature grid.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the L2 norm of the function. </p>
+<p>A floating point containing the L2 norm of the function. </p>
 <hr>
 
 <h3 id="function-norm_inf">function norm_inf</h3>
 <p><em>Compute the infinity norm.</em> </p>
 <pre><code class="language-C++">template&lt;class... Tags&gt;
-KOKKOS_FUNCTION double norm_inf (
+KOKKOS_FUNCTION ddc::Real norm_inf (
     Coord&lt; Tags... &gt; coord
 ) 
 </code></pre>
@@ -799,14 +826,14 @@ KOKKOS_FUNCTION double norm_inf (
 <li><code>coord</code> The given vector.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <h3 id="function-norm_inf_1">function norm_inf</h3>
 <p><em>Compute the infinity norm of a vector on an orthonormal coordinate system.</em> </p>
-<pre><code class="language-C++">template&lt;class... Tags&gt;
-KOKKOS_FUNCTION double norm_inf (
-    DVector &lt; Tags... &gt; vec
+<pre><code class="language-C++">template&lt;class ElementType, class... Tags&gt;
+KOKKOS_FUNCTION ElementType norm_inf (
+    Vector &lt; ElementType, Tags... &gt; vec
 ) 
 </code></pre>
 <p>For a given vector <span class="arithmatex">\(x\)</span> , compute <span class="arithmatex">\(|Vert x |Vert_{\infty} = \sup_n |x_n|\)</span>.</p>
@@ -815,28 +842,29 @@ KOKKOS_FUNCTION double norm_inf (
 <li><code>vec</code> The given vector.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <h3 id="function-norm_inf_2">function norm_inf</h3>
 <p><em>Compute the infinity norm.</em> </p>
-<pre><code class="language-C++">KOKKOS_INLINE_FUNCTION double norm_inf (
-    double const coord
+<pre><code class="language-C++">template&lt;std::floating_point T&gt;
+KOKKOS_INLINE_FUNCTION T norm_inf (
+    T const coord
 ) 
 </code></pre>
 <p>In case of scalar, the infinity norm returns the scalar.</p>
 <p><strong>Parameters:</strong></p>
 <ul>
-<li><code>coord</code> The given double.</li>
+<li><code>coord</code> The given scalar.</li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <h3 id="function-norm_inf_3">function norm_inf</h3>
 <p><em>Compute the infinity norm for a Field.</em> </p>
 <pre><code class="language-C++">template&lt;class ExecSpace, class ElementType, class IdxRange&gt;
-inline double norm_inf (
+inline ElementType norm_inf (
     ExecSpace exec_space,
     ConstField&lt; ElementType, IdxRange, typename ExecSpace::memory_space &gt; function
 ) 
@@ -847,13 +875,30 @@ inline double norm_inf (
 <li><code>function</code> The function whose norm is calculated. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <h3 id="function-norm_inf_4">function norm_inf</h3>
+<p><em>Compute the infinity norm for a Field.</em> </p>
+<pre><code class="language-C++">template&lt;class ExecSpace, class IdxRange, class... CoordDims&gt;
+inline ddc::Real norm_inf (
+    ExecSpace exec_space,
+    ConstField&lt; Coord&lt; CoordDims... &gt;, IdxRange, typename ExecSpace::memory_space &gt; function
+) 
+</code></pre>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>exec_space</code> The space on which the function is executed (CPU/GPU). </li>
+<li><code>function</code> The function whose norm is calculated. </li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>A floating point containing the value of the infinity norm. </p>
+<hr>
+
+<h3 id="function-norm_inf_5">function norm_inf</h3>
 <p><em>Compute the infinity norm for a</em> <a href="classVectorField.html"><em><strong>VectorField</strong></em></a> <em>.</em></p>
 <pre><code class="language-C++">template&lt;class ExecSpace, class ElementType, class IdxRange, class VectorIndexSetType&gt;
-inline double norm_inf (
+inline ElementType norm_inf (
     ExecSpace exec_space,
     VectorConstField &lt; ElementType, IdxRange, VectorIndexSetType, typename ExecSpace::memory_space &gt; function
 ) 
@@ -864,7 +909,7 @@ inline double norm_inf (
 <li><code>function</code> The function whose norm is calculated. </li>
 </ul>
 <p><strong>Returns:</strong></p>
-<p>A double containing the value of the infinity norm. </p>
+<p>A floating point containing the value of the infinity norm. </p>
 <hr>
 
 <hr>

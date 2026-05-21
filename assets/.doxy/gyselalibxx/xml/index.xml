@@ -1094,23 +1094,23 @@
     <member refid="classFluidMoments_1ac15b6dd021fe761a18301a5475035aae" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classGaussLegendre" kind="class"><name>GaussLegendre</name>
-    <member refid="classGaussLegendre_1ad4552a9f3e6ea1cc39562f7eb0e72eb6" kind="typedef"><name>Dim</name></member>
-    <member refid="classGaussLegendre_1ad4beb0ab162fcd8fd6961ae9013c3f61" kind="typedef"><name>Grid1D</name></member>
-    <member refid="classGaussLegendre_1acb7916716244e4bc43f9c47cea014b06" kind="variable"><name>m_glc</name></member>
-    <member refid="classGaussLegendre_1ab9fcccb220d98d957e302bbd4fca02ee" kind="variable"><name>m_nbcells</name></member>
-    <member refid="classGaussLegendre_1affc731d1af0d0f6b56b5d172c88f5a08" kind="variable"><name>m_valid_idx_range</name></member>
-    <member refid="classGaussLegendre_1a3356db20af78a5857c7d59537819efe1" kind="variable"><name>m_cell_lengths</name></member>
-    <member refid="classGaussLegendre_1a24a562fa02d5517588d6c4b4daa8c171" kind="function"><name>order</name></member>
-    <member refid="classGaussLegendre_1ab95e7e25b98a2ccf293b2462b3817a84" kind="function"><name>GaussLegendre</name></member>
-    <member refid="classGaussLegendre_1abb70874897c85fa6df64c91511e2d24e" kind="function"><name>GaussLegendre</name></member>
-    <member refid="classGaussLegendre_1a9f220a3c718cd167fc78e412c734a3c2" kind="function"><name>GaussLegendre</name></member>
-    <member refid="classGaussLegendre_1afa291b553d2e1b204e059edc5ce53b53" kind="function"><name>GaussLegendre</name></member>
-    <member refid="classGaussLegendre_1aaeeb0f98363b55a366f009b2fb77ed2f" kind="function"><name>get_idx_range</name></member>
-    <member refid="classGaussLegendre_1a421cde58db551c40987077ee12b4e954" kind="function"><name>gauss_legendre_coefficients</name></member>
-    <member refid="classGaussLegendre_1a924ba0b8565dbaf3c43f3ac0dd8cc9f5" kind="function"><name>get_sampling_on_cell</name></member>
-    <member refid="classGaussLegendre_1adaf63a7bb1daa9e80870cb432e8dba2d" kind="function"><name>get_sampling</name></member>
-    <member refid="classGaussLegendre_1aaa8e737921aa05a24f4e7b9f6ae3c996" kind="function"><name>get_sampling</name></member>
-    <member refid="classGaussLegendre_1a695356d3ea4ed49113136ae3f647451d" kind="function"><name>get_sampling</name></member>
+    <member refid="classGaussLegendre_1acdb60816c12d913b9fa0e255fbac057c" kind="typedef"><name>Dim</name></member>
+    <member refid="classGaussLegendre_1a1c6225a8d83df8eeb36b71e6a7029fc8" kind="typedef"><name>Grid1D</name></member>
+    <member refid="classGaussLegendre_1a184fde491840fffee78b1608291cb96a" kind="variable"><name>m_glc</name></member>
+    <member refid="classGaussLegendre_1a3c02dcb8529ddf7636ecbdbdecedc022" kind="variable"><name>m_nbcells</name></member>
+    <member refid="classGaussLegendre_1ae1c236184917c958119eaf622131b491" kind="variable"><name>m_valid_idx_range</name></member>
+    <member refid="classGaussLegendre_1af5ad626606320d2403cbbfc5dc052f04" kind="variable"><name>m_cell_lengths</name></member>
+    <member refid="classGaussLegendre_1acf289b55a3b0992dc208a960aad91d58" kind="function"><name>order</name></member>
+    <member refid="classGaussLegendre_1a8f2ee0ff3531368ed5f1a350faef0df1" kind="function"><name>GaussLegendre</name></member>
+    <member refid="classGaussLegendre_1ad3fae076178b9e2167e0175443373e0e" kind="function"><name>GaussLegendre</name></member>
+    <member refid="classGaussLegendre_1ac467c423fea6641a297474fd0201dcae" kind="function"><name>GaussLegendre</name></member>
+    <member refid="classGaussLegendre_1aadcb2e3cbe1a1b5702df717795fc7fbd" kind="function"><name>GaussLegendre</name></member>
+    <member refid="classGaussLegendre_1a4ef7f216e6e55a92d328104a3ed6c970" kind="function"><name>get_idx_range</name></member>
+    <member refid="classGaussLegendre_1a71b1929912ce38f3eeceae0e2b6a978e" kind="function"><name>gauss_legendre_coefficients</name></member>
+    <member refid="classGaussLegendre_1ae410d687438f4bf7003203fa45cd904c" kind="function"><name>get_sampling_on_cell</name></member>
+    <member refid="classGaussLegendre_1a813cd067c77e15bdf462e2d512188ae8" kind="function"><name>get_sampling</name></member>
+    <member refid="classGaussLegendre_1a24421e663925c8c0a40c4e492be8155e" kind="function"><name>get_sampling</name></member>
+    <member refid="classGaussLegendre_1a8fb6516cf7c982e6a22bfa4fb1a07d84" kind="function"><name>get_sampling</name></member>
   </compound>
   <compound refid="structGaussLegendreCoefficients" kind="struct"><name>GaussLegendreCoefficients</name>
     <member refid="structGaussLegendreCoefficients_1a37090be09a17b4e59533dd21298bbc04" kind="variable"><name>pos</name></member>
@@ -2664,13 +2664,13 @@
     <member refid="classQNSolver_1aa32f5284dd9ce1e47665705cb7783268" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classQuadrature" kind="class"><name>Quadrature</name>
-    <member refid="classQuadrature_1a21847eb865943b66e0f6aad3d18b6a22" kind="typedef"><name>IdxQuadrature</name></member>
-    <member refid="classQuadrature_1a870fe16d8b2b27bef3c482b642558318" kind="typedef"><name>QuadConstField</name></member>
-    <member refid="classQuadrature_1a4459d395596756d33cb2b965a6f1f80d" kind="variable"><name>m_coefficients</name></member>
-    <member refid="classQuadrature_1add77c7dd792c607d8047825fa2097b55" kind="function"><name>Quadrature</name></member>
-    <member refid="classQuadrature_1acc3a757e91e2d185ee290c409156fd4f" kind="function"><name>operator()</name></member>
-    <member refid="classQuadrature_1ae02eb072db0c97909145dc712629c824" kind="function"><name>operator()</name></member>
-    <member refid="classQuadrature_1a5a2dcb3fe87e46decb8fe4f26d204fed" kind="function"><name>to_discrete_element</name></member>
+    <member refid="classQuadrature_1a504fc9d2ec3a9dad536243892652d911" kind="typedef"><name>IdxQuadrature</name></member>
+    <member refid="classQuadrature_1ab7c4f91954ec84e84440705f58a7207b" kind="typedef"><name>QuadConstField</name></member>
+    <member refid="classQuadrature_1a3e263d91c3140bd253fd98a2987452a0" kind="variable"><name>m_coefficients</name></member>
+    <member refid="classQuadrature_1ad493a4ea4ba6638cac95c8ba3f2a8d4c" kind="function"><name>Quadrature</name></member>
+    <member refid="classQuadrature_1ada860631e6050ea034ad82eb3cf669cb" kind="function"><name>operator()</name></member>
+    <member refid="classQuadrature_1aef02301cb8d25655275d45d24c8b662d" kind="function"><name>operator()</name></member>
+    <member refid="classQuadrature_1adf6456df5a8b93d15b5a84d0d0dc1530" kind="function"><name>to_discrete_element</name></member>
   </compound>
   <compound refid="structR" kind="struct"><name>R</name>
     <member refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kind="typedef"><name>Dual</name></member>
@@ -4137,18 +4137,20 @@
   <compound refid="ipartial__derivative_8hpp" kind="file"><name>ipartial_derivative.hpp</name>
   </compound>
   <compound refid="l__norm__tools_8hpp" kind="file"><name>l_norm_tools.hpp</name>
-    <member refid="l__norm__tools_8hpp_1a053b3b58add1e97a59c6998fadd051dc" kind="function"><name>norm_inf</name></member>
-    <member refid="l__norm__tools_8hpp_1ae78caab94d9b010c79a18002ffc99331" kind="function"><name>norm_inf</name></member>
-    <member refid="l__norm__tools_8hpp_1af586948949594fb53ccfd4010d0a0fd6" kind="function"><name>norm_inf</name></member>
-    <member refid="l__norm__tools_8hpp_1a4c8219dfeea80b86bff16a853e188f8d" kind="function"><name>norm_inf</name></member>
-    <member refid="l__norm__tools_8hpp_1a1e7039002a54c7de373d8c9b27de00ca" kind="function"><name>norm_inf</name></member>
-    <member refid="l__norm__tools_8hpp_1adaecce94200353e1fc9bd3e73d9e85ca" kind="function"><name>error_norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1a61d74f9926c59120d9d583329a93db08" kind="function"><name>norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1a1cf1e40b723868f2ca5f8c7f7f1bbadb" kind="function"><name>norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1af6cbb9faa2342fec827cca0ef4ecb4d8" kind="function"><name>norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1ab37121a69aea059874456a2c5ebdc34e" kind="function"><name>norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1a61e8c316c4c95c5624b2e3f858e7b137" kind="function"><name>norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1a51fd7823c5cc86e3e7d753dfdcfb1471" kind="function"><name>norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1ae88afaf9e53757beb5a965bd85aeaa00" kind="function"><name>error_norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1a0ae64d1eae112b1d49fc68fca029ffa5" kind="function"><name>error_norm_inf</name></member>
     <member refid="l__norm__tools_8hpp_1a4225526c98d8298b3f8490b11ae40348" kind="function"><name>error_norm_inf</name></member>
-    <member refid="l__norm__tools_8hpp_1abd8c6a554b42bfe5b2e272cf286993a7" kind="function"><name>error_norm_inf</name></member>
-    <member refid="l__norm__tools_8hpp_1a7f4a4eefdd0dcdf92e87faf0a722f611" kind="function"><name>norm_L1</name></member>
-    <member refid="l__norm__tools_8hpp_1a27082a4ff6b4ad2c890a613983f6f287" kind="function"><name>error_norm_L1</name></member>
-    <member refid="l__norm__tools_8hpp_1a14de4af65e74d5300abfafe870ef954b" kind="function"><name>norm_L2</name></member>
-    <member refid="l__norm__tools_8hpp_1a67052dc8560915ab8cf2d26716926883" kind="function"><name>error_norm_L2</name></member>
+    <member refid="l__norm__tools_8hpp_1a31144bf2ce8b35e109a87fcb291b6c71" kind="function"><name>error_norm_inf</name></member>
+    <member refid="l__norm__tools_8hpp_1a534a71bb7de58e36da6345380b11fce3" kind="function"><name>norm_L1</name></member>
+    <member refid="l__norm__tools_8hpp_1a4d3b95ce8cd432b3e401b4db8d5e1951" kind="function"><name>error_norm_L1</name></member>
+    <member refid="l__norm__tools_8hpp_1afe6c84df4c66c8dd5396a581da263abd" kind="function"><name>norm_L2</name></member>
+    <member refid="l__norm__tools_8hpp_1afb5d25fa3bc4ad99831b7e1f7ca4ea13" kind="function"><name>error_norm_L2</name></member>
   </compound>
   <compound refid="lie__poisson__bracket_8hpp" kind="file"><name>lie_poisson_bracket.hpp</name>
   </compound>
@@ -4387,7 +4389,7 @@
   <compound refid="gauss__legendre__integration_8cpp" kind="file"><name>gauss_legendre_integration.cpp</name>
   </compound>
   <compound refid="gauss__legendre__integration_8hpp" kind="file"><name>gauss_legendre_integration.hpp</name>
-    <member refid="gauss__legendre__integration_8hpp_1a08f97f555b0d12482859bee85132b4ae" kind="function"><name>gauss_legendre_quadrature_coefficients</name></member>
+    <member refid="gauss__legendre__integration_8hpp_1a29dce274e3d7d2dbbe9c1aa8fb4070b9" kind="function"><name>gauss_legendre_quadrature_coefficients</name></member>
   </compound>
   <compound refid="neumann__spline__quadrature_8hpp" kind="file"><name>neumann_spline_quadrature.hpp</name>
     <member refid="neumann__spline__quadrature_8hpp_1a37299f0bf453ce5d896cedeed766a92d" kind="function"><name>neumann_spline_quadrature_coefficients_1d</name></member>
@@ -4396,21 +4398,21 @@
   <compound refid="quadrature_8hpp" kind="file"><name>quadrature.hpp</name>
   </compound>
   <compound refid="quadrature__coeffs__nd_8hpp" kind="file"><name>quadrature_coeffs_nd.hpp</name>
-    <member refid="quadrature__coeffs__nd_8hpp_1a56334602cc056e84c19d35f298a13aa6" kind="function"><name>quadrature_coeffs_nd</name></member>
+    <member refid="quadrature__coeffs__nd_8hpp_1af8ba056471fb1ea4ad7a8c15db08f24d" kind="function"><name>quadrature_coeffs_nd</name></member>
   </compound>
   <compound refid="simpson__quadrature_8hpp" kind="file"><name>simpson_quadrature.hpp</name>
-    <member refid="simpson__quadrature_8hpp_1a3fa29f39898c7f5fe9ae2aeb12cdf5e1" kind="function"><name>fill_simpson_quadrature_coefficients_1d</name></member>
-    <member refid="simpson__quadrature_8hpp_1ade095055d9f55ed616ecf4d95965f428" kind="function"><name>simpson_quadrature_coefficients_1d</name></member>
-    <member refid="simpson__quadrature_8hpp_1a34b992103d549cb89383ac76a3eceac1" kind="function"><name>simpson_trapezoid_quadrature_coefficients_1d</name></member>
-    <member refid="simpson__quadrature_8hpp_1a3b2f44f0ef1e08d00ddfaaa53ab7e815" kind="function"><name>simpson_quadrature_coefficients</name></member>
+    <member refid="simpson__quadrature_8hpp_1aebbf31db0205056c672dea8ce130c4dd" kind="function"><name>fill_simpson_quadrature_coefficients_1d</name></member>
+    <member refid="simpson__quadrature_8hpp_1acfd1b73d6f5066e0951f17770de51113" kind="function"><name>simpson_quadrature_coefficients_1d</name></member>
+    <member refid="simpson__quadrature_8hpp_1a84d97e5840f90f5c675ad53a589999ae" kind="function"><name>simpson_trapezoid_quadrature_coefficients_1d</name></member>
+    <member refid="simpson__quadrature_8hpp_1ab0aef659bf7bcd158c838a4cade294b3" kind="function"><name>simpson_quadrature_coefficients</name></member>
   </compound>
   <compound refid="spline__quadrature_8hpp" kind="file"><name>spline_quadrature.hpp</name>
     <member refid="spline__quadrature_8hpp_1a7ba2798b4e65365dc3ddf922cad024ae" kind="function"><name>spline_quadrature_coefficients_1d</name></member>
     <member refid="spline__quadrature_8hpp_1a23fc7a03f5433595ee746bbddafded55" kind="function"><name>spline_quadrature_coefficients</name></member>
   </compound>
   <compound refid="trapezoid__quadrature_8hpp" kind="file"><name>trapezoid_quadrature.hpp</name>
-    <member refid="trapezoid__quadrature_8hpp_1a00b23ab6bb69740215a7962df6bcb2f8" kind="function"><name>trapezoid_quadrature_coefficients_1d</name></member>
-    <member refid="trapezoid__quadrature_8hpp_1a70e64a14c696ce6d674297e947ff7074" kind="function"><name>trapezoid_quadrature_coefficients</name></member>
+    <member refid="trapezoid__quadrature_8hpp_1a4145740dbd5656149f70583cdf6b98db" kind="function"><name>trapezoid_quadrature_coefficients_1d</name></member>
+    <member refid="trapezoid__quadrature_8hpp_1a2e9e7d21b2da01a44fb6d6399a13fa0e" kind="function"><name>trapezoid_quadrature_coefficients</name></member>
   </compound>
   <compound refid="volume__quadrature__nd_8hpp" kind="file"><name>volume_quadrature_nd.hpp</name>
     <member refid="volume__quadrature__nd_8hpp_1a606ed8438555c5104a22658ba68f32ae" kind="function"><name>compute_coeffs_on_mapping</name></member>

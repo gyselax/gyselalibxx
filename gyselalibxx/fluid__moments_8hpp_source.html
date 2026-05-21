@@ -592,7 +592,7 @@ public:
     static constexpr MomentVelocity s_velocity = MomentVelocity();
     static constexpr MomentTemperature s_temperature = MomentTemperature();
 
-    FluidMoments(Quadrature&lt;IdxRangeVx, IdxRangeSpXVx&gt; integrate_v);
+    explicit FluidMoments(Quadrature&lt;IdxRangeVx, IdxRangeSpXVx&gt; integrate_v);
 
     ~FluidMoments() = default;
 

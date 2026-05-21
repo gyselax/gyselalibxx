@@ -582,7 +582,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a> &lt;class GLGrid, NPoints&gt;<br><em>An operator for constructing a Gauss-Legendre quadrature.</em></td>
+<td style="text-align: left;"><a href="classGaussLegendre.html"><strong>GaussLegendre</strong></a> &lt;class GLGrid, NPoints, class DataType&gt;<br><em>An operator for constructing a Gauss-Legendre quadrature.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
@@ -600,7 +600,7 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">DFieldMem&lt; IdxRange&lt; typename GaussLegendreQuad::Grid1D... &gt;, typename ExecSpace::memory_space &gt;</td>
+<td style="text-align: right;">FieldMem&lt; DataType, IdxRange&lt; typename GaussLegendreQuad::Grid1D... &gt;, typename ExecSpace::memory_space &gt;</td>
 <td style="text-align: left;"><a href="#function-gauss_legendre_quadrature_coefficients"><strong>gauss_legendre_quadrature_coefficients</strong></a> (GaussLegendreQuad const &amp;... gl) <br><em>Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.</em></td>
 </tr>
 </tbody>
@@ -608,8 +608,8 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-gauss_legendre_quadrature_coefficients">function gauss_legendre_quadrature_coefficients</h3>
 <p><em>Get the spline quadrature coefficients in ND from N 1D quadrature coefficient.</em> </p>
-<pre><code class="language-C++">template&lt;class ExecSpace, class... GaussLegendreQuad&gt;
-DFieldMem&lt; IdxRange&lt; typename GaussLegendreQuad::Grid1D... &gt;, typename ExecSpace::memory_space &gt; gauss_legendre_quadrature_coefficients (
+<pre><code class="language-C++">template&lt;class ExecSpace, class DataType, class... GaussLegendreQuad&gt;
+FieldMem&lt; DataType, IdxRange&lt; typename GaussLegendreQuad::Grid1D... &gt;, typename ExecSpace::memory_space &gt; gauss_legendre_quadrature_coefficients (
     GaussLegendreQuad const &amp;... gl
 ) 
 </code></pre>

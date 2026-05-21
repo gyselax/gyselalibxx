@@ -54,8 +54,8 @@
 
 | Type | Name |
 | ---: | :--- |
-|  DFieldMem&lt; IdxRange&lt; ODims... &gt;, typename ExecSpace::memory\_space &gt; | [**trapezoid\_quadrature\_coefficients**](#function-trapezoid_quadrature_coefficients) (IdxRange&lt; ODims... &gt; const & idx\_range) <br>_Get the trapezoid coefficients in ND._  |
-|  DFieldMem&lt; IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory\_space &gt; | [**trapezoid\_quadrature\_coefficients\_1d**](#function-trapezoid_quadrature_coefficients_1d) (IdxRange&lt; Grid1D &gt; const & idx\_range) <br>_Get the trapezoid coefficients in 1D._  |
+|  FieldMem&lt; DataType, IdxRange&lt; ODims... &gt;, typename ExecSpace::memory\_space &gt; | [**trapezoid\_quadrature\_coefficients**](#function-trapezoid_quadrature_coefficients) (IdxRange&lt; ODims... &gt; const & idx\_range) <br>_Get the trapezoid coefficients in ND._  |
+|  FieldMem&lt; DataType, IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory\_space &gt; | [**trapezoid\_quadrature\_coefficients\_1d**](#function-trapezoid_quadrature_coefficients_1d) (IdxRange&lt; Grid1D &gt; const & idx\_range) <br>_Get the trapezoid coefficients in 1D._  |
 
 
 
@@ -100,8 +100,8 @@ File providing quadrature coefficients via the trapezoidal method.
 
 _Get the trapezoid coefficients in ND._ 
 ```C++
-template<class ExecSpace, class... ODims>
-DFieldMem< IdxRange< ODims... >, typename ExecSpace::memory_space > trapezoid_quadrature_coefficients (
+template<class ExecSpace, std::floating_point DataType, class... ODims>
+FieldMem< DataType, IdxRange< ODims... >, typename ExecSpace::memory_space > trapezoid_quadrature_coefficients (
     IdxRange< ODims... > const & idx_range
 ) 
 ```
@@ -145,8 +145,8 @@ The quadrature coefficients for the trapezoid method defined on the provided idx
 
 _Get the trapezoid coefficients in 1D._ 
 ```C++
-template<class ExecSpace, class Grid1D>
-DFieldMem< IdxRange< Grid1D >, typename ExecSpace::memory_space > trapezoid_quadrature_coefficients_1d (
+template<class ExecSpace, std::floating_point DataType, class Grid1D>
+FieldMem< DataType, IdxRange< Grid1D >, typename ExecSpace::memory_space > trapezoid_quadrature_coefficients_1d (
     IdxRange< Grid1D > const & idx_range
 ) 
 ```

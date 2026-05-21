@@ -2,7 +2,7 @@
 
 # Class Quadrature
 
-**template &lt;class IdxRangeQuadrature, class IdxRangeTotal, class MemorySpace&gt;**
+**template &lt;class IdxRangeQuadrature, class IdxRangeTotal, class DataType, class MemorySpace&gt;**
 
 
 
@@ -55,8 +55,8 @@ _A class providing an operator for integrating functions defined on known grid p
 | Type | Name |
 | ---: | :--- |
 |   | [**Quadrature**](#function-quadrature) (QuadConstField coeffs) <br>_Create a_ [_**Quadrature**_](classQuadrature.md) _object._ |
-|  double | [**operator()**](#function-operator) (ExecutionSpace exec\_space, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on known grid points._  |
-|  void | [**operator()**](#function-operator_1) (ExecutionSpace exec\_space, Field&lt; double, BatchIdxRange, MemorySpace, Layout &gt; const result, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._  |
+|  DataType | [**operator()**](#function-operator) (ExecutionSpace exec\_space, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on known grid points._  |
+|  void | [**operator()**](#function-operator_1) (ExecutionSpace exec\_space, Field&lt; DataType, BatchIdxRange, MemorySpace, Layout &gt; const result, IntegratorFunction integrated\_function) const<br>_An operator for calculating the integral of a function defined on a discrete domain by cycling over batch dimensions._  |
 
 
 
@@ -138,7 +138,7 @@ inline explicit Quadrature::Quadrature (
 _An operator for calculating the integral of a function defined on known grid points._ 
 ```C++
 template<class ExecutionSpace, class IntegratorFunction>
-inline double Quadrature::operator() (
+inline DataType Quadrature::operator() (
     ExecutionSpace exec_space,
     IntegratorFunction integrated_function
 ) const
@@ -177,7 +177,7 @@ _An operator for calculating the integral of a function defined on a discrete do
 template<class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
 inline void Quadrature::operator() (
     ExecutionSpace exec_space,
-    Field< double, BatchIdxRange, MemorySpace, Layout > const result,
+    Field< DataType, BatchIdxRange, MemorySpace, Layout > const result,
     IntegratorFunction integrated_function
 ) const
 ```

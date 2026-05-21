@@ -578,8 +578,8 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">DFieldMem&lt; IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt;</td>
-<td style="text-align: left;"><a href="#function-quadrature_coeffs_nd"><strong>quadrature_coeffs_nd</strong></a> (IdxRange&lt; DDims... &gt; const &amp; idx_range, std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, typename ExecSpace::memory_space &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs) <br><em>Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</em></td>
+<td style="text-align: right;">FieldMem&lt; DataType, IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt;</td>
+<td style="text-align: left;"><a href="#function-quadrature_coeffs_nd"><strong>quadrature_coeffs_nd</strong></a> (IdxRange&lt; DDims... &gt; const &amp; idx_range, std::function&lt; FieldMem&lt; DataType, IdxRange&lt; DDims &gt;, typename ExecSpace::memory_space &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs) <br><em>Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</em></td>
 </tr>
 </tbody>
 </table>
@@ -588,10 +588,10 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-quadrature_coeffs_nd">function quadrature_coeffs_nd</h3>
 <p><em>Helper function which creates ND dimensions from N 1D quadrature coefficient functions.</em> </p>
-<pre><code class="language-C++">template&lt;class ExecSpace, class... DDims&gt;
-DFieldMem&lt; IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt; quadrature_coeffs_nd (
+<pre><code class="language-C++">template&lt;class ExecSpace, class DataType, class... DDims&gt;
+FieldMem&lt; DataType, IdxRange&lt; DDims... &gt;, typename ExecSpace::memory_space &gt; quadrature_coeffs_nd (
     IdxRange&lt; DDims... &gt; const &amp; idx_range,
-    std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, typename ExecSpace::memory_space &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs
+    std::function&lt; FieldMem&lt; DataType, IdxRange&lt; DDims &gt;, typename ExecSpace::memory_space &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>

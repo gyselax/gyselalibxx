@@ -53,7 +53,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  DFieldMem&lt; IdxRange&lt; DDims... &gt;, typename ExecSpace::memory\_space &gt; | [**quadrature\_coeffs\_nd**](#function-quadrature_coeffs_nd) (IdxRange&lt; DDims... &gt; const & idx\_range, std::function&lt; DFieldMem&lt; IdxRange&lt; DDims &gt;, typename ExecSpace::memory\_space &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs) <br>_Helper function which creates ND dimensions from N 1D quadrature coefficient functions._  |
+|  FieldMem&lt; DataType, IdxRange&lt; DDims... &gt;, typename ExecSpace::memory\_space &gt; | [**quadrature\_coeffs\_nd**](#function-quadrature_coeffs_nd) (IdxRange&lt; DDims... &gt; const & idx\_range, std::function&lt; FieldMem&lt; DataType, IdxRange&lt; DDims &gt;, typename ExecSpace::memory\_space &gt;(IdxRange&lt; DDims &gt;)&gt;... funcs) <br>_Helper function which creates ND dimensions from N 1D quadrature coefficient functions._  |
 
 
 
@@ -98,10 +98,10 @@ File providing helper functions for defining multi-dimensional quadrature method
 
 _Helper function which creates ND dimensions from N 1D quadrature coefficient functions._ 
 ```C++
-template<class ExecSpace, class... DDims>
-DFieldMem< IdxRange< DDims... >, typename ExecSpace::memory_space > quadrature_coeffs_nd (
+template<class ExecSpace, class DataType, class... DDims>
+FieldMem< DataType, IdxRange< DDims... >, typename ExecSpace::memory_space > quadrature_coeffs_nd (
     IdxRange< DDims... > const & idx_range,
-    std::function< DFieldMem< IdxRange< DDims >, typename ExecSpace::memory_space >(IdxRange< DDims >)>... funcs
+    std::function< FieldMem< DataType, IdxRange< DDims >, typename ExecSpace::memory_space >(IdxRange< DDims >)>... funcs
 ) 
 ```
 

@@ -579,11 +579,11 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">DFieldMem&lt; IdxRange&lt; ODims... &gt;, typename ExecSpace::memory_space &gt;</td>
+<td style="text-align: right;">FieldMem&lt; DataType, IdxRange&lt; ODims... &gt;, typename ExecSpace::memory_space &gt;</td>
 <td style="text-align: left;"><a href="#function-trapezoid_quadrature_coefficients"><strong>trapezoid_quadrature_coefficients</strong></a> (IdxRange&lt; ODims... &gt; const &amp; idx_range) <br><em>Get the trapezoid coefficients in ND.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">DFieldMem&lt; IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory_space &gt;</td>
+<td style="text-align: right;">FieldMem&lt; DataType, IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory_space &gt;</td>
 <td style="text-align: left;"><a href="#function-trapezoid_quadrature_coefficients_1d"><strong>trapezoid_quadrature_coefficients_1d</strong></a> (IdxRange&lt; Grid1D &gt; const &amp; idx_range) <br><em>Get the trapezoid coefficients in 1D.</em></td>
 </tr>
 </tbody>
@@ -593,8 +593,8 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-trapezoid_quadrature_coefficients">function trapezoid_quadrature_coefficients</h3>
 <p><em>Get the trapezoid coefficients in ND.</em> </p>
-<pre><code class="language-C++">template&lt;class ExecSpace, class... ODims&gt;
-DFieldMem&lt; IdxRange&lt; ODims... &gt;, typename ExecSpace::memory_space &gt; trapezoid_quadrature_coefficients (
+<pre><code class="language-C++">template&lt;class ExecSpace, std::floating_point DataType, class... ODims&gt;
+FieldMem&lt; DataType, IdxRange&lt; ODims... &gt;, typename ExecSpace::memory_space &gt; trapezoid_quadrature_coefficients (
     IdxRange&lt; ODims... &gt; const &amp; idx_range
 ) 
 </code></pre>
@@ -613,8 +613,8 @@ DFieldMem&lt; IdxRange&lt; ODims... &gt;, typename ExecSpace::memory_space &gt; 
 
 <h3 id="function-trapezoid_quadrature_coefficients_1d">function trapezoid_quadrature_coefficients_1d</h3>
 <p><em>Get the trapezoid coefficients in 1D.</em> </p>
-<pre><code class="language-C++">template&lt;class ExecSpace, class Grid1D&gt;
-DFieldMem&lt; IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory_space &gt; trapezoid_quadrature_coefficients_1d (
+<pre><code class="language-C++">template&lt;class ExecSpace, std::floating_point DataType, class Grid1D&gt;
+FieldMem&lt; DataType, IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory_space &gt; trapezoid_quadrature_coefficients_1d (
     IdxRange&lt; Grid1D &gt; const &amp; idx_range
 ) 
 </code></pre>

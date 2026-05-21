@@ -56,10 +56,10 @@
 
 | Type | Name |
 | ---: | :--- |
-|  void | [**fill\_simpson\_quadrature\_coefficients\_1d**](#function-fill_simpson_quadrature_coefficients_1d) (DField&lt; IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory\_space &gt; coefficients) <br>_Get the Simpson coefficients in 1D._  |
-|  DFieldMem&lt; IdxRange&lt; ODims... &gt;, typename ExecSpace::memory\_space &gt; | [**simpson\_quadrature\_coefficients**](#function-simpson_quadrature_coefficients) (IdxRange&lt; ODims... &gt; const & idx\_range) <br>_Get the simpson coefficients in ND._  |
-|  DFieldMem&lt; IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory\_space &gt; | [**simpson\_quadrature\_coefficients\_1d**](#function-simpson_quadrature_coefficients_1d) (IdxRange&lt; Grid1D &gt; const & idx\_range) <br>_Get the Simpson coefficients in 1D._  |
-|  DFieldMem&lt; IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory\_space &gt; | [**simpson\_trapezoid\_quadrature\_coefficients\_1d**](#function-simpson_trapezoid_quadrature_coefficients_1d) (IdxRange&lt; Grid1D &gt; const & idx\_range, Extremity trapezoid\_extremity) <br>_Get the Simpson coefficients in 1D._  |
+|  void | [**fill\_simpson\_quadrature\_coefficients\_1d**](#function-fill_simpson_quadrature_coefficients_1d) (Field&lt; DataType, IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory\_space &gt; coefficients) <br>_Get the Simpson coefficients in 1D._  |
+|  FieldMem&lt; DataType, IdxRange&lt; ODims... &gt;, typename ExecSpace::memory\_space &gt; | [**simpson\_quadrature\_coefficients**](#function-simpson_quadrature_coefficients) (IdxRange&lt; ODims... &gt; const & idx\_range) <br>_Get the simpson coefficients in ND._  |
+|  FieldMem&lt; DataType, IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory\_space &gt; | [**simpson\_quadrature\_coefficients\_1d**](#function-simpson_quadrature_coefficients_1d) (IdxRange&lt; Grid1D &gt; const & idx\_range) <br>_Get the Simpson coefficients in 1D._  |
+|  FieldMem&lt; DataType, IdxRange&lt; Grid1D &gt;, typename ExecSpace::memory\_space &gt; | [**simpson\_trapezoid\_quadrature\_coefficients\_1d**](#function-simpson_trapezoid_quadrature_coefficients_1d) (IdxRange&lt; Grid1D &gt; const & idx\_range, Extremity trapezoid\_extremity) <br>_Get the Simpson coefficients in 1D._  |
 
 
 
@@ -97,9 +97,9 @@
 
 _Get the Simpson coefficients in 1D._ 
 ```C++
-template<class ExecSpace, class Grid1D>
+template<class ExecSpace, class Grid1D, std::floating_point DataType>
 void fill_simpson_quadrature_coefficients_1d (
-    DField< IdxRange< Grid1D >, typename ExecSpace::memory_space > coefficients
+    Field< DataType, IdxRange< Grid1D >, typename ExecSpace::memory_space > coefficients
 ) 
 ```
 
@@ -131,8 +131,8 @@ Calculate the quadrature coefficients for the Simpson method defined on the prov
 
 _Get the simpson coefficients in ND._ 
 ```C++
-template<class ExecSpace, class... ODims>
-DFieldMem< IdxRange< ODims... >, typename ExecSpace::memory_space > simpson_quadrature_coefficients (
+template<class ExecSpace, std::floating_point DataType, class... ODims>
+FieldMem< DataType, IdxRange< ODims... >, typename ExecSpace::memory_space > simpson_quadrature_coefficients (
     IdxRange< ODims... > const & idx_range
 ) 
 ```
@@ -176,8 +176,8 @@ The quadrature coefficients for the trapezoid method defined on the provided idx
 
 _Get the Simpson coefficients in 1D._ 
 ```C++
-template<class ExecSpace, class Grid1D>
-DFieldMem< IdxRange< Grid1D >, typename ExecSpace::memory_space > simpson_quadrature_coefficients_1d (
+template<class ExecSpace, std::floating_point DataType, class Grid1D>
+FieldMem< DataType, IdxRange< Grid1D >, typename ExecSpace::memory_space > simpson_quadrature_coefficients_1d (
     IdxRange< Grid1D > const & idx_range
 ) 
 ```
@@ -217,8 +217,8 @@ The quadrature coefficients for the Simpson method defined on the provided index
 
 _Get the Simpson coefficients in 1D._ 
 ```C++
-template<class ExecSpace, class Grid1D>
-DFieldMem< IdxRange< Grid1D >, typename ExecSpace::memory_space > simpson_trapezoid_quadrature_coefficients_1d (
+template<class ExecSpace, class Grid1D, std::floating_point DataType>
+FieldMem< DataType, IdxRange< Grid1D >, typename ExecSpace::memory_space > simpson_trapezoid_quadrature_coefficients_1d (
     IdxRange< Grid1D > const & idx_range,
     Extremity trapezoid_extremity
 ) 
