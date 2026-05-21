@@ -154,7 +154,7 @@ int main(int argc, char** argv)
             vlasov(advection_x, advection_y, advection_vx, advection_vy, transpose);
 
     DFieldMemVxVy const quadrature_coeffs(
-            quadrature_coeffs_nd<Kokkos::DefaultExecutionSpace, GridVx, GridVy>(
+            quadrature_coeffs_nd<Kokkos::DefaultExecutionSpace, double, GridVx, GridVy>(
                     idxrange_vxvy,
                     std::
                             bind(simpson_trapezoid_quadrature_coefficients_1d<
