@@ -222,6 +222,15 @@ using Vector = Tensor<ElementType, VectorIndexSet<Dims...>>;
 template <class... Dims>
 using DVector = Vector<double, Dims...>;
 
+template<class ElementType, class Dim1, class... TailDims>
+std::ostream& operator<<(std::ostream& o, Vector<ElementType, Dim1, TailDims...> vec) {
+    o << "(";
+    o << ddcHelper::get<Dim1>(vec);
+    ((o << ", " << ddcHelper::get<TailDims>(vec)),...);
+    o << ")";
+    return o;
+}
+
 namespace detail {
 
 template <class ElementType, class... ValidIndexSet>
