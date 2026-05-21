@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a `NDIdentityInterpolationBuilder` class.
 - Add a new abstract class `IPolarPoissonLikeSolver`.
 - Add data type parametrisation to `ConstantIdentityInterpolationExtrapolationRule`.
+- Add support for arbitrary precision quadrature.
+- Add support for arbitrary precision norm calculations.
 - Add a `landau4d_fft_lagrange` target for 3D Landau damping with Lagrange interpolation.
 - Add an optional `IdxRange` argument to the constructor of `LagrangeInterpolator`.
 - Add a new `init_lagrange_dependent_idx_range` method.
@@ -38,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix hardcoded Homogeneous Hermite boundary conditions in `BslAdvection1D`.
 - Decrease memory usage in `SplinePolarFootFinder`.
 - Fix GCC version on Adastra toolchains.
+- Fix use of `BslAdvectionSpatial` and `BslAdvectionVelocity` with non-double precision.
 
 ### Changed
 

@@ -24,14 +24,17 @@
 template <
         class IdxRangeQuadrature,
         class IdxRangeTotal = IdxRangeQuadrature,
+        class DataType = double,
         class MemorySpace = Kokkos::DefaultExecutionSpace::memory_space>
 class Quadrature
 {
+    static_assert(std::is_floating_point_v<DataType>);
+
 private:
     /// The type of an element of an index of the quadrature coefficients.
     using IdxQuadrature = typename IdxRangeQuadrature::discrete_element_type;
 
-    using QuadConstField = DConstField<IdxRangeQuadrature, MemorySpace>;
+    using QuadConstField = ConstField<DataType, IdxRangeQuadrature, MemorySpace>;
 
     QuadConstField m_coefficients;
 
@@ -57,7 +60,7 @@ public:
      * @returns The integral of the function over the domain.
      */
     template <class ExecutionSpace, class IntegratorFunction>
-    double operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
+    DataType operator()(ExecutionSpace exec_space, IntegratorFunction integrated_function) const
     {
         static_assert(
                 Kokkos::SpaceAccessibility<ExecutionSpace, MemorySpace>::accessible,
@@ -84,7 +87,7 @@ public:
             return ddc::host_transform_reduce(
                     get_idx_range(coeff_proxy),
                     0.0,
-                    ddc::reducer::sum<double>(),
+                    ddc::reducer::sum<DataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
@@ -95,7 +98,7 @@ public:
                     exec_space,
                     get_idx_range(coeff_proxy),
                     0.0,
-                    ddc::reducer::sum<double>(),
+                    ddc::reducer::sum<DataType>(),
                     KOKKOS_LAMBDA(IdxQuadrature const ix) {
                         return coeff_proxy(ix) * integrated_function(ix);
                     });
@@ -120,7 +123,7 @@ public:
     template <class ExecutionSpace, class BatchIdxRange, class IntegratorFunction, class Layout>
     void operator()(
             ExecutionSpace exec_space,
-            Field<double, BatchIdxRange, MemorySpace, Layout> const result,
+            Field<DataType, BatchIdxRange, MemorySpace, Layout> const result,
             IntegratorFunction integrated_function) const
     {
         static_assert(
@@ -169,10 +172,10 @@ public:
                     IdxBatch ib = to_discrete_element(idx, batch_idx_range);
 
                     // Sum over quadrature dimensions
-                    double teamSum = 0;
+                    DataType teamSum = 0;
                     Kokkos::parallel_reduce(
                             Kokkos::TeamThreadRange(team, quad_idx_range.size()),
-                            [&](int const& thread_index, double& sum) {
+                            [&](int const& thread_index, DataType& sum) {
                                 IdxQuadrature iq
                                         = to_discrete_element(thread_index, quad_idx_range);
                                 IdxTotal it(ib, iq);
@@ -211,9 +214,16 @@ private:
 };
 
 namespace detail {
-template <class NewMemorySpace, class IdxRangeQuadrature, class IdxRangeTotal, class MemorySpace>
-struct OnMemorySpace<NewMemorySpace, Quadrature<IdxRangeQuadrature, IdxRangeTotal, MemorySpace>>
+template <
+        class NewMemorySpace,
+        class IdxRangeQuadrature,
+        class IdxRangeTotal,
+        class DataType,
+        class MemorySpace>
+struct OnMemorySpace<
+        NewMemorySpace,
+        Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, MemorySpace>>
 {
-    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, NewMemorySpace>;
+    using type = Quadrature<IdxRangeQuadrature, IdxRangeTotal, DataType, NewMemorySpace>;
 };
 } // namespace detail
