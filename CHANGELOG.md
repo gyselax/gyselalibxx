@@ -22,6 +22,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a `NDIdentityInterpolationBuilder` class.
 - Add a new abstract class `IPolarPoissonLikeSolver`.
 - Add data type parametrisation to `ConstantIdentityInterpolationExtrapolationRule`.
+- Add support for arbitrary precision quadrature.
+- Add support for arbitrary precision norm calculations.
 
 ### Fixed
 
