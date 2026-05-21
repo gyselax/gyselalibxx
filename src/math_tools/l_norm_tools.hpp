@@ -65,7 +65,7 @@ KOKKOS_FUNCTION ElementType norm_inf(Vector<ElementType, Tags...> vec)
  *
  * @return A double containing the value of the infinity norm.
  */
-template<std::floating_point T>
+template <std::floating_point T>
 KOKKOS_INLINE_FUNCTION T norm_inf(T const coord)
 {
     return Kokkos::fabs(coord);
