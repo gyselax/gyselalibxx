@@ -20,13 +20,13 @@
  *
  * @return The quadrature coefficients for the trapezoid method defined on the provided index range.
  */
-template <class ExecSpace, class Grid1D>
-DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> trapezoid_quadrature_coefficients_1d(
-        IdxRange<Grid1D> const& idx_range)
+template <class ExecSpace, std::floating_point DataType = double, class Grid1D>
+FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
+trapezoid_quadrature_coefficients_1d(IdxRange<Grid1D> const& idx_range)
 {
-    DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space>
+    FieldMem<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space>
             coefficients_alloc("coefficients (trapezoid_quadrature_coefficients_1d)", idx_range);
-    DField<IdxRange<Grid1D>, typename ExecSpace::memory_space> const coefficients
+    Field<DataType, IdxRange<Grid1D>, typename ExecSpace::memory_space> const coefficients
             = get_field(coefficients_alloc);
 
     IdxRange<Grid1D> middle_idx_range
@@ -78,12 +78,13 @@ DFieldMem<IdxRange<Grid1D>, typename ExecSpace::memory_space> trapezoid_quadratu
  * @return The quadrature coefficients for the trapezoid method defined on the provided idx_range.
  *         The allocation place (host or device ) will depend on the ExecSpace.
  */
-template <class ExecSpace, class... ODims>
-DFieldMem<IdxRange<ODims...>, typename ExecSpace::memory_space> trapezoid_quadrature_coefficients(
-        IdxRange<ODims...> const& idx_range)
+template <class ExecSpace, std::floating_point DataType = double, class... ODims>
+FieldMem<DataType, IdxRange<ODims...>, typename ExecSpace::memory_space>
+trapezoid_quadrature_coefficients(IdxRange<ODims...> const& idx_range)
 {
-    return quadrature_coeffs_nd<ExecSpace, ODims...>(
+    return quadrature_coeffs_nd<ExecSpace, DataType, ODims...>(
             idx_range,
             (std::function<DFieldMem<IdxRange<ODims>, typename ExecSpace::memory_space>(
-                     IdxRange<ODims>)>(trapezoid_quadrature_coefficients_1d<ExecSpace, ODims>))...);
+                     IdxRange<ODims>)>(
+                    trapezoid_quadrature_coefficients_1d<ExecSpace, DataType, ODims>))...);
 }

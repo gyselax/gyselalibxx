@@ -6,9 +6,7 @@
 #include "quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 
-FluidMoments::FluidMoments(
-        Quadrature<IdxRangeVx, IdxRangeSpXVx, Kokkos::DefaultExecutionSpace::memory_space>
-                integrate_v)
+FluidMoments::FluidMoments(Quadrature<IdxRangeVx, IdxRangeSpXVx> integrate_v)
     : m_integrate_v(integrate_v)
 {
 }
