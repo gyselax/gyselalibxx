@@ -107,10 +107,18 @@ void run_simulations_with_foot_finder_method(
         std::string const& simulation_name,
         std::string const& output_stem)
 {
+    using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
+    using PseudoPhysicalToPhysicalMapping
+            = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
+    PseudoPhysicalToPhysicalMapping pseudo_physical_to_physical(
+            to_physical_mapping,
+            PseudoCartesianToCircular(),
+            1e-12);
+￼
     SplinePolarFootFinder foot_finder(
             params.grid,
             get_time_stepper_builder<TSChoice>(),
-            to_physical_mapping,
+            pseudo_physical_to_physical,
             analytical_to_pseudo_physical_mapping,
             params.advection_builder,
             params.advection_evaluator);
