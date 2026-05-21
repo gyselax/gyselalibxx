@@ -449,7 +449,7 @@
 <codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;feet_coords<sp/>(BslAdvectionVelocity::operator())&quot;</highlight><highlight class="normal">,</highlight></codeline>
 <codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>batched_feet_idx_range);</highlight></codeline>
 <codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Field&lt;Coord&lt;DimX&gt;,<sp/>IdxRangeSpaceVelocity&gt;<sp/>feet_coords(get_field(feet_coords_alloc));</highlight></codeline>
-<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>DFieldMem&lt;IdxRangeFunctionBasis&gt;<sp/>function_coefs_alloc(</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>FieldMem&lt;DataType,<sp/>IdxRangeFunctionBasis&gt;<sp/>function_coefs_alloc(</highlight></codeline>
 <codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="stringliteral">&quot;function_coefs<sp/>(BslAdvectionVelocity::operator())&quot;</highlight><highlight class="normal">,</highlight></codeline>
 <codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>batched_basis_idx_range(m_function_builder,<sp/>batched_feet_idx_range));</highlight></codeline>
 <codeline lineno="102"><highlight class="normal"></highlight></codeline>
