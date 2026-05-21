@@ -42,11 +42,6 @@ metadata:
     type: array
     subtype: double
     size: [ '$fdistribu_masses_extents[0]' ]
-  fdistribu_eq_extents : { type: array, subtype: int64, size: 3 }
-  fdistribu_eq:
-    type: array
-    subtype: double
-    size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]', '$fdistribu_eq_extents[2]' ]
 
   #-- Parallel data
   local_fdistribu_starts: { type: array, subtype: size_t, size: 5 }
@@ -54,6 +49,11 @@ metadata:
 
 
 data:
+  fdistribu_eq_extents : { type: array, subtype: int64, size: 3 }
+  fdistribu_eq:
+    type: array
+    subtype: double
+    size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]', '$fdistribu_eq_extents[2]' ]
   fdistribu:
     type: array
     subtype: double
