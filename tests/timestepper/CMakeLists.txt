@@ -27,4 +27,4 @@ target_link_libraries(unit_tests_timestepper
         gslx::utils
 )
 
-gtest_discover_tests(unit_tests_timestepper DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_timestepper DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)

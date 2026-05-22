@@ -27,6 +27,7 @@ target_compile_definitions(unit_tests_advection PUBLIC)
 
 
 gtest_discover_tests(unit_tests_advection
-    PROPERTIES TIMEOUT 10
-    DISCOVERY_MODE PRE_TEST
+    PROPERTIES TIMEOUT 100
+    DISCOVERY_TIMEOUT 100
+    DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100
 )

@@ -20,7 +20,7 @@ target_link_libraries(unit_tests_quadrature
 )
 target_include_directories(unit_tests_quadrature PRIVATE "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>/..")
 gtest_discover_tests(unit_tests_quadrature
-        DISCOVERY_MODE PRE_TEST)
+        DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
 target_compile_definitions(unit_tests_quadrature PUBLIC)
 
 foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
@@ -40,6 +40,6 @@ foreach(GEOMETRY_VARIANT IN LISTS GEOMETRY_XVx_VARIANTS_LIST)
 
 	gtest_discover_tests(spline_quadrature_tests_${GEOMETRY_VARIANT}
 	    TEST_SUFFIX "_${GEOMETRY_VARIANT}"
-        DISCOVERY_MODE PRE_TEST)
+        DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
 endforeach()
 target_compile_definitions(spline_quadrature_tests_xperiod_vx INTERFACE PERIODIC_RDIMX)

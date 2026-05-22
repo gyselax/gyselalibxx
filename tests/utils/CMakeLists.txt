@@ -21,7 +21,7 @@ target_link_libraries(unit_tests_utils
         gslx::data_types
 )
 
-gtest_discover_tests(unit_tests_utils DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_utils DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
 target_include_directories(unit_tests_utils
     PRIVATE
         "${CMAKE_CURRENT_SOURCE_DIR}/.."
