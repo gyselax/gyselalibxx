@@ -169,36 +169,29 @@ public:
             double dt) const
     {
         // Pre-allocate spline coefficient storage
-        DFieldMem<IdxRangeBSRTheta, MemorySpace> coefs(
+        DFieldMem<IdxRangeBSRTheta, MemorySpace> coefs_alloc(
                 m_builder_2d.batched_spline_domain(get_idx_range(allfdistribu)));
 
-        // Initialise the feet
-        CFieldMemFeetRTheta feet_rtheta_alloc(
-                "feet_rtheta (BslAdvectionPolar::operator())",
-                get_idx_range(advection_field_xy));
-        CFieldFeetRTheta feet_rtheta = get_field(feet_rtheta_alloc);
+        // Compute the feet of the characteristics at tn -----------------------------------------
+        typename FootFinder::ElementwiseOperator find_foot
+                = m_find_feet(get_const_field(advection_field_xy), dt);
+
+        // Interpolate the function on the feet of the characteristics. --------------------------
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
+        m_builder_2d(get_field(coefs_alloc), get_const_field(allfdistribu));
+
+        Evaluator2D const& evaluator_2d_proxy = m_evaluator_2d;
+
+        DConstField<IdxRangeBSRTheta, MemorySpace> coefs = get_const_field(coefs_alloc);
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 ExecSpace(),
-                get_idx_range(advection_field_xy),
+                get_idx_range(allfdistribu),
                 KOKKOS_LAMBDA(IdxBatched const idx) {
-                    IdxRTheta const irtheta(idx);
-                    feet_rtheta(idx) = ddc::coordinate(irtheta);
+                    allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs);
                 });
-
-        // Compute the feet of the characteristics at tn -----------------------------------------
-        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/FootFinder");
-        m_find_feet(feet_rtheta, get_const_field(advection_field_xy), dt);
-        Kokkos::Profiling::popRegion();
-
-        // Interpolate the function on the feet of the characteristics. --------------------------
-        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
-        m_builder_2d(get_field(coefs), get_const_field(allfdistribu));
-        m_evaluator_2d(
-                get_field(allfdistribu),
-                get_const_field(feet_rtheta),
-                get_const_field(coefs));
         Kokkos::Profiling::popRegion();
 
         return allfdistribu;
