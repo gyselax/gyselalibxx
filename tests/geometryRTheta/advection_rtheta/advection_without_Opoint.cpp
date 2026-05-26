@@ -66,7 +66,11 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     // Build the grid for the space. ------------------------------------------------------------------
     int const Nr(20);
     int const Nt(40);
+#if defined(ROTATION)
     double const dt(0.1);
+#else
+    double const dt(0.001);
+#endif
     double const final_T(0.8);
 
     double const rmin(0.1);
