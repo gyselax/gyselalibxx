@@ -51,6 +51,7 @@
 template <class FootFinder, class LogicalToPhysicalMapping, class Builder2D, class Evaluator2D>
 class BslAdvectionPolar
 {
+    static_assert(!std::is_const_v<FootFinder>);
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
     using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
 
@@ -112,7 +113,7 @@ private:
 
     Evaluator2D const& m_evaluator_2d;
 
-    FootFinder const& m_find_feet;
+    FootFinder& m_find_feet;
 
     LogicalToPhysicalMapping const& m_logical_to_physical_mapping;
 
@@ -136,7 +137,7 @@ public:
     BslAdvectionPolar(
             Builder2D const& builder_2d,
             Evaluator2D const& evaluator_2d,
-            FootFinder const& foot_finder,
+            FootFinder& foot_finder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping)
         : m_builder_2d(builder_2d)
         , m_evaluator_2d(evaluator_2d)
