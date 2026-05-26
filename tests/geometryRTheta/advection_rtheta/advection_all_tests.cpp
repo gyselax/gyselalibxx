@@ -107,7 +107,11 @@ void run_simulations_with_foot_finder_method(
         std::string const& simulation_name,
         std::string const& output_stem)
 {
-    using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
+    using PseudoCartesianToCircular = CartesianToCircular<
+            typename LogicalToPseudoPhysicalMapping::cartesian_tag_x,
+            typename LogicalToPseudoPhysicalMapping::cartesian_tag_y,
+            R,
+            Theta>;
     using PseudoPhysicalToPhysicalMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
     PseudoPhysicalToPhysicalMapping
