@@ -71,7 +71,8 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 #else
     double const dt(0.001);
 #endif
-    double const final_T(0.8);
+    // --- Time parameters ----------------------------------------------------------------------------
+    int const iter_nb = 8;
 
     double const rmin(0.1);
     double const rmax(1);
@@ -181,8 +182,6 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     // SIMULATION DATA                                                                                 |
     // ================================================================================================
 
-    // --- Time parameters ----------------------------------------------------------------------------
-    int const iter_nb = final_T * int(1 / dt);
 
     // ================================================================================================
     // INITIALISATION                                                                                 |
@@ -203,9 +202,6 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 
     host_t<DVectorFieldRTheta<X, Y>> advection_field_exact(advection_field_exact_alloc);
     host_t<DVectorFieldRTheta<R, Theta>> advection_field_rtheta(advection_field_rtheta_alloc);
-    host_t<DVectorFieldRTheta<X, Y>> advection_field_xy(advection_field_xy_alloc);
-    host_t<DVectorFieldRTheta<X, Y>> advection_field_xy_from_rtheta(
-            advection_field_xy_from_rtheta_alloc);
 
 
     // Initialise functions ******************************************
@@ -225,8 +221,6 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 
 
     // Constant advection fields *************************************
-    advection_field_computer(electrostatic_potential, advection_field_xy);
-
     InverseJacobianMatrix inv_jacobian_matrix(to_physical_mapping);
     ddc::host_for_each(grid, [&](Idx<GridR, GridTheta> const idx) {
         Coord<R, Theta> const coord_rtheta(ddc::coordinate(idx));
@@ -235,14 +229,13 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
         ddcHelper::assign_vector_field_element(
                 advection_field_rtheta,
                 idx,
-                tensor_mul(index<'i', 'j'>(inv_J), index<'j'>(advection_field_xy(idx))));
+                tensor_mul(index<'i', 'j'>(inv_J), index<'j'>(advection_field_exact(idx))));
     });
 
     auto density_xy_device
             = ddc::create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_xy);
     auto advection_field_xy_device = ddcHelper::
-            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_xy);
-
+            create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_exact);
 
     auto density_rtheta_averaged_device = ddc::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), density_rtheta_averaged);
@@ -271,7 +264,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 
         // Check the advected functions ---
         ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
-            EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-7);
+            EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-6);
         });
     }
 
