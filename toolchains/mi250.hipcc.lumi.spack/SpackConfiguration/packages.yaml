@@ -75,4 +75,3 @@ packages:
     externals:
       - spec: hipblas@6.4.3
         prefix: /appl/lumi/SW/LUMI-25.09/G/EB/rocm/6.4.4
-

@@ -1,8 +1,10 @@
 concretizer:
   reuse: false
   targets:
-    host_compatible: false # true
-    granularity: generic # microarchitectures
+    # Allow cross compiling.
+    host_compatible: false
+    # Target arcghitectures that are not specific to the computer, say,  avx_v3 vs znver3.
+    granularity: generic
   unify: false
   duplicates:
-    strategy: minimal # none
+    strategy: minimal

@@ -1,6 +1,6 @@
 config:
   install_tree:
-    root: ${SPACK_USER_PREFIX}/Binaries
+    root: ${SPACK_USER_PREFIX}
     padded_length: 128
   source_cache: $user_cache_path
-  environments_root: ${SPACK_USER_PREFIX}/Environments
+  environments_root: ${SPACK_USER_PREFIX}/environments
