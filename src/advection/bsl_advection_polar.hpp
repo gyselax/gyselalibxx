@@ -194,6 +194,8 @@ public:
                 });
         Kokkos::Profiling::popRegion();
 
+        m_find_feet.free_memory();
+
         return allfdistribu;
     }
 

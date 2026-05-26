@@ -514,6 +514,10 @@ public:
         m_advection_field_coefs_alloc = nullptr;
     }
 
+    void free_memory() {
+        m_advection_field_coefs_alloc = nullptr;
+    }
+
 
 
     /**
