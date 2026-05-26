@@ -196,6 +196,8 @@ public:
 
         m_find_feet.free_memory();
 
+        unify_value_at_centre_pt(allfdistribu);
+
         return allfdistribu;
     }
 
@@ -397,4 +399,41 @@ public:
 
         return allfdistribu;
     }
+
+    /**
+     * @brief Replace the value at @f$  (r=0, \theta)@f$  point
+     *  by the value at @f$ (r=0,0) @f$ for all @f$ \theta @f$.
+     *
+     *  For polar geometry, to ensure continuity at the centre point, we
+     *  have to be sure that all the points for @f$ r = 0 @f$ have the same value.
+     *  As the computation of the values of a table can induces machine errors,
+     *  this function is useful to reset the values at the central point at
+     *  the same value.
+     *
+     *  @param[in, out] values
+     *      The table of values we want to unify at the central point.
+     */
+    template <class T>
+    static void unify_value_at_centre_pt(Field<T, IdxRangeBatched, MemorySpace> values)
+    {
+        IdxRangeOperator full_idx_range = get_idx_range(values);
+        IdxRangeBatch const batched_idx_range(full_idx_range);
+        IdxRangeR const r_idx_range(full_idx_range);
+        IdxRangeTheta const theta_idx_range(full_idx_range);
+        IdxR r0_idx = r_idx_range.front();
+        IdxTheta theta0_idx = theta_idx_range.front();
+        if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
+            const std::source_location location = std::source_location::current();
+            ddc::parallel_for_each(
+                    location.function_name(),
+                    ExecSpace(),
+                    batched_idx_range,
+                    KOKKOS_LAMBDA(const IdxBatch ib) {
+                        for (IdxTheta itheta : theta_idx_range) {
+                            values(ib, r0_idx, itheta) = values(ib, r0_idx, theta0_idx);
+                        }
+                    });
+        }
+    }
+
 };
