@@ -173,8 +173,9 @@ public:
                 m_builder_2d.batched_spline_domain(get_idx_range(allfdistribu)));
 
         // Compute the feet of the characteristics at tn -----------------------------------------
-        typename FootFinder::ElementwiseOperator find_foot
-                = m_find_feet(get_const_field(advection_field_xy), dt);
+        typename FootFinder::ElementwiseOperator find_foot_for_advection_field
+                = m_find_feet(get_const_field(advection_field_xy));
+        auto find_foot_for_advection_field_on_dt = find_foot_for_advection_field(dt);
 
         // Interpolate the function on the feet of the characteristics. --------------------------
         Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
@@ -190,11 +191,10 @@ public:
                 ExecSpace(),
                 get_idx_range(allfdistribu),
                 KOKKOS_LAMBDA(IdxBatched const idx) {
-                    allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs);
+                    allfdistribu(idx)
+                            = evaluator_2d_proxy(find_foot_for_advection_field_on_dt(idx), coefs);
                 });
         Kokkos::Profiling::popRegion();
-
-        m_find_feet.free_memory();
 
         unify_value_at_centre_pt(allfdistribu);
 
@@ -416,7 +416,7 @@ public:
     template <class T>
     static void unify_value_at_centre_pt(Field<T, IdxRangeBatched, MemorySpace> values)
     {
-        IdxRangeOperator full_idx_range = get_idx_range(values);
+        IdxRangeBatched full_idx_range = get_idx_range(values);
         IdxRangeBatch const batched_idx_range(full_idx_range);
         IdxRangeR const r_idx_range(full_idx_range);
         IdxRangeTheta const theta_idx_range(full_idx_range);
