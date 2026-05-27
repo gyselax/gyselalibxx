@@ -59,8 +59,6 @@ using LagrangeInterpolatorX = LagrangeInterpolator<
         GridX,
         PERIODIC,
         PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
         Real>;
 using LagrangeInterpolatorY = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
@@ -68,8 +66,6 @@ using LagrangeInterpolatorY = LagrangeInterpolator<
         GridY,
         PERIODIC,
         PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
         Real>;
 
 using LagrangeInterpolatorVx = LagrangeInterpolator<
@@ -78,8 +74,6 @@ using LagrangeInterpolatorVx = LagrangeInterpolator<
         GridVx,
         CONSTANT,
         CONSTANT,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
         Real>;
 using LagrangeInterpolatorVy = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
@@ -87,8 +81,6 @@ using LagrangeInterpolatorVy = LagrangeInterpolator<
         GridVy,
         CONSTANT,
         CONSTANT,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
         Real>;
 
 using IdxRangeLY = IdxRange<LagrangeY>;
