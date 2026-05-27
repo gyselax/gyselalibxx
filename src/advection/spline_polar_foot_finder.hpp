@@ -577,8 +577,12 @@ public:
     using VectorSplineCoeffsMem
             = DVectorFieldMem<IdxRangeSplineBatched, PseudoCartesianBasis, memory_space>;
 
+    /// The first dimension of the advection field.
     using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
+    /// The second dimension of the advection field.
     using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
+
+    /// The operator returned by operator() which calculates the feet elementwise.
     using ElementwiseOperator = ElementwiseSplinePolarFootFinderMem<
             GridR,
             GridTheta,
@@ -642,20 +646,19 @@ public:
     }
 
     /**
-     * @brief Advect the feet over @f$ dt @f$.
+     * @brief Get an elementwise operator providing a GPU copyable functor capable of
+     * calculating the feet of the characteristics.
      *
      * From the advection field in the physical domain, compute the advection field
      * in the right domain an compute its B-splines coefficients.
      * Then, use the given time integration method (time_stepper) to solve the
      * characteristic equation over @f$ dt @f$.
      *
-     * @param[in, out] feet
-     *      On input: the mesh points.
-     *      On output: the characteristic feet.
      * @param[in] advection_field
-     *      The advection field in the physical domain.
-     * @param[in] dt
-     *      The time step.
+     *      The advection field in the chosen domain.
+     *
+     * @returns An elementwise operator providing a GPU copyable functor capable of
+     *      calculating the feet of the characteristics.
      */
     ElementwiseOperator operator()(
             DVectorConstField<IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space>
@@ -690,6 +693,23 @@ public:
                 idx_range_theta);
         return elementwise;
     }
+
+    /**
+     * @brief Advect the feet over @f$ dt @f$.
+     *
+     * From the advection field in the physical domain, compute the advection field
+     * in the right domain an compute its B-splines coefficients.
+     * Then, use the given time integration method (time_stepper) to solve the
+     * characteristic equation over @f$ dt @f$.
+     *
+     * @param[in, out] feet
+     *      On input: the mesh points.
+     *      On output: the characteristic feet.
+     * @param[in] advection_field
+     *      The advection field in the physical domain.
+     * @param[in] dt
+     *      The time step.
+     */
     void operator()(
             CFieldFeet feet,
             DVectorConstField<IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space>
