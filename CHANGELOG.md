@@ -24,6 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add data type parametrisation to `ConstantIdentityInterpolationExtrapolationRule`.
 - Add support for arbitrary precision quadrature.
 - Add support for arbitrary precision norm calculations.
+- Add an element-wise version of `SplinePolarFootFinder` to reduce memory consumption.
 
 ### Fixed
 
@@ -75,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove `GYSELALIBXX_VERSION_*` CMake variables.
 - Remove out-of-date Leonardo toolchain.
 - Remove unuseful defaulted template parameters `MinBound` and `MaxBound` from `LagrangeInterpolator`.
+- Remove unused superclass `IPolarFootFinder`.
 
 ## [v0.7.0] - 2026-03-18
 
