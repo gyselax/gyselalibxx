@@ -86,7 +86,7 @@ private:
 
     Evaluator2D const& m_evaluator_2d;
 
-    FootFinder const& m_find_feet;
+    FootFinder& m_find_feet_method;
 
     LogicalToPhysicalMapping const& m_logical_to_physical_mapping;
 
@@ -95,11 +95,11 @@ public:
     BslAdvectionPolar(
             Builder2D const& builder_2d,
             Evaluator2D const& evaluator_2d,
-            FootFinder const& foot_finder,
+            FootFinder& foot_finder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping)
         : m_builder_2d(builder_2d)
         , m_evaluator_2d(evaluator_2d)
-        , m_find_feet(foot_finder)
+        , m_find_feet_method(foot_finder)
         , m_logical_to_physical_mapping(logical_to_physical_mapping)
     {
     }
@@ -113,37 +113,33 @@ public:
             double dt) const
     {
         // Pre-allocate spline coefficient storage
-        DFieldMem<IdxRangeBSRTheta, MemorySpace> coefs(
+        DFieldMem<IdxRangeBSRTheta, MemorySpace> coefs_alloc(
                 m_builder_2d.batched_spline_domain(get_idx_range(allfdistribu)));
 
-        // Initialise the feet
-        CFieldMemFeetRTheta feet_rtheta_alloc(
-                "feet_rtheta (BslAdvectionPolar::operator())",
-                get_idx_range(advection_field_xy));
-        CFieldFeetRTheta feet_rtheta = get_field(feet_rtheta_alloc);
+        // Compute the feet of the characteristics at tn -----------------------------------------
+        typename FootFinder::ElementwiseOperator find_foot_alloc
+                = m_find_feet_method(get_const_field(advection_field_xy));
+        typename FootFinder::ElementwiseOperator::GPUCompat find_foot = find_foot_alloc(dt);
+
+        // Interpolate the function on the feet of the characteristics. --------------------------
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
+        m_builder_2d(get_field(coefs_alloc), get_const_field(allfdistribu));
+
+        Evaluator2D const& evaluator_2d_proxy = m_evaluator_2d;
+
+        DConstField<IdxRangeBSRTheta, MemorySpace> coefs = get_const_field(coefs_alloc);
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 ExecSpace(),
-                get_idx_range(advection_field_xy),
+                get_idx_range(allfdistribu),
                 KOKKOS_LAMBDA(IdxBatched const idx) {
-                    IdxRTheta const irtheta(idx);
-                    feet_rtheta(idx) = ddc::coordinate(irtheta);
+                    allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs);
                 });
-
-        // Compute the feet of the characteristics at tn -----------------------------------------
-        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/FootFinder");
-        m_find_feet(feet_rtheta, get_const_field(advection_field_xy), dt);
         Kokkos::Profiling::popRegion();
 
-        // Interpolate the function on the feet of the characteristics. --------------------------
-        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
-        m_builder_2d(get_field(coefs), get_const_field(allfdistribu));
-        m_evaluator_2d(
-                get_field(allfdistribu),
-                get_const_field(feet_rtheta),
-                get_const_field(coefs));
-        Kokkos::Profiling::popRegion();
+        unify_value_at_centre_pt(allfdistribu);
 
         return allfdistribu;
     }
@@ -303,6 +299,29 @@ public:
         Kokkos::Profiling::popRegion();
 
         return allfdistribu;
+    }
+
+    template <class T>
+    static void unify_value_at_centre_pt(Field<T, IdxRangeBatched, MemorySpace> values)
+    {
+        IdxRangeBatched full_idx_range = get_idx_range(values);
+        IdxRangeBatch const batched_idx_range(full_idx_range);
+        IdxRangeR const r_idx_range(full_idx_range);
+        IdxRangeTheta const theta_idx_range(full_idx_range);
+        IdxR r0_idx = r_idx_range.front();
+        IdxTheta theta0_idx = theta_idx_range.front();
+        if (std::fabs(ddc::coordinate(r0_idx)) < 1e-15) {
+            const std::source_location location = std::source_location::current();
+            ddc::parallel_for_each(
+                    location.function_name(),
+                    ExecSpace(),
+                    batched_idx_range,
+                    KOKKOS_LAMBDA(const IdxBatch ib) {
+                        for (IdxTheta itheta : theta_idx_range) {
+                            values(ib, r0_idx, itheta) = values(ib, r0_idx, theta0_idx);
+                        }
+                    });
+        }
     }
 };
 ```

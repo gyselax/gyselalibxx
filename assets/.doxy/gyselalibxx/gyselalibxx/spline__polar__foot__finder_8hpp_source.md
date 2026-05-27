@@ -18,11 +18,215 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
-#include "ipolar_foot_finder.hpp"
 #include "itimestepper.hpp"
 #include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
+
+template <
+        class GridR,
+        class GridTheta,
+        class X_pc,
+        class Y_pc,
+        class AdvDim1,
+        class AdvDim2,
+        class BSplinesR,
+        class BSplinesTheta,
+        class IdxRangeOperator,
+        class SplineRThetaEvaluatorAdvection,
+        class PseudoPhysicalToAdvectionMapping,
+        class PseudoPhysicalToLogicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class AdvecCoefField,
+        class TimeStepper>
+class ElementwiseSplinePolarFootFinder
+{
+    using R = typename GridR::continuous_dimension_type;
+    using Theta = typename GridTheta::continuous_dimension_type;
+    using IdxRTheta = Idx<GridR, GridTheta>;
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
+    using IdxOperator = typename IdxRangeOperator::discrete_element_type;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+    using CoordRTheta = Coord<R, Theta>;
+
+private:
+    SplineRThetaEvaluatorAdvection m_evaluator_advection_field;
+
+    PseudoPhysicalToAdvectionMapping m_pseudo_physical_to_advection;
+    PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
+    LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
+
+    TimeStepper m_time_stepper;
+
+    AdvecCoefField m_advection_field_coefs;
+    Coord<X_pc, Y_pc> m_coord_centre;
+    IdxRange<GridTheta> m_idx_range_theta;
+    double m_dt;
+
+public:
+    ElementwiseSplinePolarFootFinder(
+            SplineRThetaEvaluatorAdvection const& evaluator_advection_field,
+            PseudoPhysicalToAdvectionMapping const& pseudo_physical_to_advection,
+            PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
+            LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
+            TimeStepper const& time_stepper,
+            AdvecCoefField const& advection_field_coefs,
+            Coord<X_pc, Y_pc> coord_centre,
+            IdxRange<GridTheta> idx_range_theta,
+            double dt)
+        : m_evaluator_advection_field(evaluator_advection_field)
+        , m_pseudo_physical_to_advection(pseudo_physical_to_advection)
+        , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
+        , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
+        , m_advection_field_coefs(advection_field_coefs)
+        , m_coord_centre(coord_centre)
+        , m_idx_range_theta(idx_range_theta)
+        , m_dt(dt)
+    {
+    }
+
+    KOKKOS_FUNCTION CoordRTheta operator()(IdxOperator const idx) const
+    {
+        IdxBatch idx_batch(idx);
+        IdxRTheta idx_rtheta(idx);
+        // The function describing how the derivative of the evolve function is calculated.
+        auto dy = [&](DVector<X_pc, Y_pc>& updated_advection_field, CoordRTheta const& foot) {
+            DVector<AdvDim1, AdvDim2> updated_advection_field_adv_space;
+            ddcHelper::get<AdvDim1>(updated_advection_field_adv_space)
+                    = m_evaluator_advection_field(
+                            foot,
+                            get_const_field(
+                                    ddcHelper::get<AdvDim1>(m_advection_field_coefs)[idx_batch]));
+            ddcHelper::get<AdvDim2>(updated_advection_field_adv_space)
+                    = m_evaluator_advection_field(
+                            foot,
+                            get_const_field(
+                                    ddcHelper::get<AdvDim2>(m_advection_field_coefs)[idx_batch]));
+            // Ensure coord is inside the domain as splines can't extrapolate
+            // derivates (clamping)
+            CoordRTheta advection_location_for_mapping(
+                    Kokkos::min(ddc::select<R>(foot), ddc::discrete_space<BSplinesR>().rmax()),
+                    ddc::select<Theta>(foot));
+            updated_advection_field = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+                    m_pseudo_physical_to_advection,
+                    advection_location_for_mapping,
+                    updated_advection_field_adv_space);
+        };
+
+        // The function describing how the value(s) are updated using the derivative.
+        auto update_function = [&](CoordRTheta& foot_rtheta,
+                                   DVector<X_pc, Y_pc> const& advection_field,
+                                   double dt) {
+            Coord<X_pc, Y_pc> const coord_xy = m_logical_to_pseudo_physical(foot_rtheta);
+            Coord<X_pc, Y_pc> const foot_xy = coord_xy - dt * advection_field;
+
+            if (norm_inf(foot_xy - m_coord_centre) < 1e-15) {
+                foot_rtheta = CoordRTheta(0, 0);
+            } else {
+                foot_rtheta = m_pseudo_physical_to_logical(foot_xy);
+                ddc::select<Theta>(foot_rtheta) = ddcHelper::
+                        restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
+            }
+        };
+
+        CoordRTheta foot = ddc::coordinate(idx_rtheta);
+        // Solve the characteristic equation
+        m_time_stepper.update(foot, m_dt, dy, update_function);
+        return foot;
+    }
+};
+
+template <
+        class GridR,
+        class GridTheta,
+        class X_pc,
+        class Y_pc,
+        class AdvDim1,
+        class AdvDim2,
+        class BSplinesR,
+        class BSplinesTheta,
+        class IdxRangeOperator,
+        class SplineRThetaEvaluatorAdvection,
+        class PseudoPhysicalToAdvectionMapping,
+        class PseudoPhysicalToLogicalMapping,
+        class LogicalToPseudoPhysicalMapping,
+        class AdvecCoefFieldMem,
+        class TimeStepper>
+class ElementwiseSplinePolarFootFinderMem
+{
+    using R = typename GridR::continuous_dimension_type;
+    using Theta = typename GridTheta::continuous_dimension_type;
+    using IdxRTheta = Idx<GridR, GridTheta>;
+    using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
+    using IdxOperator = typename IdxRangeOperator::discrete_element_type;
+    using IdxBatch = typename IdxRangeBatch::discrete_element_type;
+    using CoordRTheta = Coord<R, Theta>;
+
+public:
+    using GPUCompat = ElementwiseSplinePolarFootFinder<
+            GridR,
+            GridTheta,
+            X_pc,
+            Y_pc,
+            AdvDim1,
+            AdvDim2,
+            BSplinesR,
+            BSplinesTheta,
+            IdxRangeOperator,
+            SplineRThetaEvaluatorAdvection,
+            PseudoPhysicalToAdvectionMapping,
+            PseudoPhysicalToLogicalMapping,
+            LogicalToPseudoPhysicalMapping,
+            typename AdvecCoefFieldMem::view_type,
+            TimeStepper>;
+
+private:
+    SplineRThetaEvaluatorAdvection m_evaluator_advection_field;
+
+    PseudoPhysicalToAdvectionMapping m_pseudo_physical_to_advection;
+    PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
+    LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
+
+    TimeStepper m_time_stepper;
+
+    AdvecCoefFieldMem m_advection_field_coefs_alloc;
+    Coord<X_pc, Y_pc> m_coord_centre;
+    IdxRange<GridTheta> m_idx_range_theta;
+
+public:
+    ElementwiseSplinePolarFootFinderMem(
+            SplineRThetaEvaluatorAdvection const& evaluator_advection_field,
+            PseudoPhysicalToAdvectionMapping const& pseudo_physical_to_advection,
+            PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
+            LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
+            TimeStepper const& time_stepper,
+            AdvecCoefFieldMem&& advection_field_coefs,
+            Coord<X_pc, Y_pc> coord_centre,
+            IdxRange<GridTheta> idx_range_theta)
+        : m_evaluator_advection_field(evaluator_advection_field)
+        , m_pseudo_physical_to_advection(pseudo_physical_to_advection)
+        , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
+        , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
+        , m_advection_field_coefs_alloc(std::move(advection_field_coefs))
+        , m_coord_centre(coord_centre)
+        , m_idx_range_theta(idx_range_theta)
+    {
+    }
+
+    GPUCompat operator()(double dt)
+    {
+        return GPUCompat(
+                m_evaluator_advection_field,
+                m_pseudo_physical_to_advection,
+                m_pseudo_physical_to_logical,
+                m_logical_to_pseudo_physical,
+                m_time_stepper,
+                get_const_field(m_advection_field_coefs_alloc),
+                m_coord_centre,
+                m_idx_range_theta,
+                dt);
+    }
+};
 
 template <
         class IdxRangeBatched,
@@ -32,12 +236,6 @@ template <
         class SplineRThetaBuilderAdvection,
         class SplineRThetaEvaluatorAdvection>
 class SplinePolarFootFinder
-    : public IPolarFootFinder<
-              typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
-              typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
-              ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
-              IdxRangeBatched,
-              typename SplineRThetaBuilderAdvection::memory_space>
 {
     static_assert(is_timestepper_builder_v<TimeStepperBuilder>);
     static_assert(std::is_same_v<
@@ -80,21 +278,17 @@ class SplinePolarFootFinder
             SplineRThetaBuilderAdvection::builder_type2::s_bc_xmax == ddc::BoundCond::PERIODIC,
             "Expected periodic boundary conditions in the poloidal direction.");
 
-    using base_type = IPolarFootFinder<
-            typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1,
-            typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2,
-            ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>,
-            IdxRangeBatched,
-            typename SplineRThetaBuilderAdvection::memory_space>;
-
 public:
-    using typename base_type::GridR;
-    using typename base_type::GridTheta;
-    using typename base_type::IdxRangeOperator;
-    using typename base_type::memory_space;
-    using typename base_type::R;
-    using typename base_type::Theta;
-    using typename base_type::VectorIndexSetAdvectionDims;
+    using GridR = typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1;
+    using GridTheta = typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2;
+
+    using IdxRangeOperator = IdxRangeBatched;
+    using memory_space = typename SplineRThetaBuilderAdvection::memory_space;
+
+    using R = typename GridR::continuous_dimension_type;
+    using Theta = typename GridTheta::continuous_dimension_type;
+    using VectorIndexSetAdvectionDims
+            = ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>;
 
 private:
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
@@ -104,11 +298,11 @@ public:
 
 private:
     using MemSpace = typename ExecSpace::memory_space;
-    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
-    using CoordXY_adv = typename LogicalToPseudoPhysicalMapping::CoordResult;
+    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using CoordXY_pc = typename LogicalToPseudoPhysicalMapping::CoordResult;
 
-    using PseudoCartesianBasis = ddc::to_type_seq_t<CoordXY_adv>;
+    using PseudoCartesianBasis = ddc::to_type_seq_t<CoordXY_pc>;
 
     using CoordRTheta = Coord<R, Theta>;
 
@@ -122,8 +316,8 @@ private:
     using IdxTheta = Idx<GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
 
-    using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
-    using PseudoPhysicalToPhysicalMapping
+    using PseudoCartesianToCircular = CartesianToCircular<X_pc, Y_pc, R, Theta>;
+    using PseudoPhysicalToAdvectionMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
     using BSplinesR = typename SplineRThetaBuilderAdvection::bsplines_type1;
@@ -135,14 +329,14 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    using TimeStepper = typename TimeStepperBuilder::
-            template time_stepper_t<CoordRTheta, DVector<X_adv, Y_adv>>;
+    using TimeStepper =
+            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
 
     TimeStepperBuilder const& m_time_stepper_builder;
 
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
-    PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
+    PseudoPhysicalToAdvectionMapping m_pseudo_physical_to_advection;
 
     SplineRThetaBuilderAdvection const& m_builder_advection_field;
     SplineRThetaEvaluatorAdvection const& m_evaluator_advection_field;
@@ -161,6 +355,26 @@ public:
     using VectorSplineCoeffsMem
             = DVectorFieldMem<IdxRangeSplineBatched, PseudoCartesianBasis, memory_space>;
 
+    using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
+    using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
+
+    using ElementwiseOperator = ElementwiseSplinePolarFootFinderMem<
+            GridR,
+            GridTheta,
+            X_pc,
+            Y_pc,
+            AdvDim1,
+            AdvDim2,
+            BSplinesR,
+            BSplinesTheta,
+            IdxRangeOperator,
+            SplineRThetaEvaluatorAdvection,
+            PseudoPhysicalToAdvectionMapping,
+            PseudoPhysicalToLogicalMapping,
+            LogicalToPseudoPhysicalMapping,
+            DVectorFieldMem<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>,
+            TimeStepper>;
+
 public:
     SplinePolarFootFinder(
             IdxRangeBatched const& idx_range_operator,
@@ -173,7 +387,7 @@ public:
         : m_time_stepper_builder(time_stepper_builder)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
         , m_pseudo_physical_to_logical(logical_to_pseudo_physical_mapping.get_inverse_mapping())
-        , m_pseudo_physical_to_physical(
+        , m_pseudo_physical_to_advection(
                   logical_to_physical_mapping,
                   PseudoCartesianToCircular(),
                   epsilon)
@@ -182,21 +396,15 @@ public:
     {
     }
 
-    void operator()(
-            CFieldFeet feet,
+    ElementwiseOperator operator()(
             DVectorConstField<IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space>
-                    advection_field,
-            double dt) const final
+                    advection_field) const
     {
         static_assert(ddc::type_seq_size_v<VectorIndexSetAdvectionDims> == 2);
-        using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
-        using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
 
         DVectorFieldMem<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>
-                advection_field_coefs_alloc(m_builder_advection_field.batched_spline_domain(
+                advection_field_coefs(m_builder_advection_field.batched_spline_domain(
                         get_idx_range(advection_field)));
-        DVectorField<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>
-                advection_field_coefs(advection_field_coefs_alloc);
 
         // Get the coefficients of the advection field in the advection domain.
         m_builder_advection_field(
@@ -206,20 +414,59 @@ public:
                 ddcHelper::get<AdvDim2>(advection_field_coefs),
                 ddcHelper::get<AdvDim2>(get_const_field(advection_field)));
 
-        CoordXY_adv coord_centre(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
-        LogicalToPseudoPhysicalMapping logical_to_pseudo_physical_proxy
-                = m_logical_to_pseudo_physical;
-        PseudoPhysicalToLogicalMapping pseudo_physical_to_logical_proxy
-                = m_pseudo_physical_to_logical;
-
-        IdxRangeOperator idx_range = get_idx_range(feet);
-        IdxRangeTheta idx_range_theta(idx_range);
+        IdxRangeTheta idx_range_theta(get_idx_range(advection_field));
 
         TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
 
-        SplineRThetaEvaluatorAdvection const& evaluator_advection_field_proxy
-                = m_evaluator_advection_field;
-        PseudoPhysicalToPhysicalMapping pseudo_physical_to_physical = m_pseudo_physical_to_physical;
+        ElementwiseOperator elementwise(
+                m_evaluator_advection_field,
+                m_pseudo_physical_to_advection,
+                m_pseudo_physical_to_logical,
+                m_logical_to_pseudo_physical,
+                time_stepper,
+                std::move(advection_field_coefs),
+                m_logical_to_pseudo_physical(CoordRTheta(0, 0)),
+                idx_range_theta);
+        return elementwise;
+    }
+
+    void operator()(
+            CFieldFeet feet,
+            DVectorConstField<IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space>
+                    advection_field,
+            double dt) const
+    {
+        static_assert(ddc::type_seq_size_v<VectorIndexSetAdvectionDims> == 2);
+        using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
+        using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
+
+        DVectorFieldMem<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>
+                advection_field_coefs(m_builder_advection_field.batched_spline_domain(
+                        get_idx_range(advection_field)));
+
+        // Get the coefficients of the advection field in the advection domain.
+        m_builder_advection_field(
+                ddcHelper::get<AdvDim1>(advection_field_coefs),
+                ddcHelper::get<AdvDim1>(get_const_field(advection_field)));
+        m_builder_advection_field(
+                ddcHelper::get<AdvDim2>(advection_field_coefs),
+                ddcHelper::get<AdvDim2>(get_const_field(advection_field)));
+
+        IdxRangeTheta idx_range_theta(get_idx_range(advection_field));
+
+        TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
+
+        ElementwiseOperator elementwise_mem(
+                m_evaluator_advection_field,
+                m_pseudo_physical_to_advection,
+                m_pseudo_physical_to_logical,
+                m_logical_to_pseudo_physical,
+                time_stepper,
+                std::move(advection_field_coefs),
+                m_logical_to_pseudo_physical(CoordRTheta(0, 0)),
+                idx_range_theta);
+
+        typename ElementwiseOperator::GPUCompat elementwise = elementwise_mem(dt);
 
         // Compute the characteristic feet at t^n:
         const std::source_location location = std::source_location::current();
@@ -227,57 +474,7 @@ public:
                 location.function_name(),
                 ExecSpace(),
                 get_idx_range(feet),
-                KOKKOS_LAMBDA(IdxOperator const idx) {
-                    IdxBatch idx_batch(idx);
-                    IdxRTheta idx_rtheta(idx);
-                    // The function describing how the derivative of the evolve function is calculated.
-                    auto dy = [&](DVector<X_adv, Y_adv>& updated_advection_field,
-                                  CoordRTheta const& foot) {
-                        DVector<AdvDim1, AdvDim2> updated_advection_field_adv_space;
-                        ddcHelper::get<AdvDim1>(updated_advection_field_adv_space)
-                                = evaluator_advection_field_proxy(
-                                        foot,
-                                        get_const_field(ddcHelper::get<AdvDim1>(
-                                                advection_field_coefs)[idx_batch]));
-                        ddcHelper::get<AdvDim2>(updated_advection_field_adv_space)
-                                = evaluator_advection_field_proxy(
-                                        foot,
-                                        get_const_field(ddcHelper::get<AdvDim2>(
-                                                advection_field_coefs)[idx_batch]));
-                        // Ensure coord is inside the domain as splines can't extrapolate
-                        // derivates (clamping)
-                        CoordRTheta advection_location_for_mapping(
-                                Kokkos::
-                                        min(ddc::select<R>(foot),
-                                            ddc::discrete_space<BSplinesR>().rmax()),
-                                ddc::select<Theta>(foot));
-                        updated_advection_field = to_vector_space<VectorIndexSet<X_adv, Y_adv>>(
-                                pseudo_physical_to_physical,
-                                advection_location_for_mapping,
-                                updated_advection_field_adv_space);
-                    };
-
-                    // The function describing how the value(s) are updated using the derivative.
-                    auto update_function = [&](CoordRTheta& foot_rtheta,
-                                               DVector<X_adv, Y_adv> const& advection_field,
-                                               double dt) {
-                        CoordXY_adv const coord_xy = logical_to_pseudo_physical_proxy(foot_rtheta);
-                        CoordXY_adv const foot_xy = coord_xy - dt * advection_field;
-
-                        if (norm_inf(foot_xy - coord_centre) < 1e-15) {
-                            foot_rtheta = CoordRTheta(0, 0);
-                        } else {
-                            foot_rtheta = pseudo_physical_to_logical_proxy(foot_xy);
-                            ddc::select<Theta>(foot_rtheta) = ddcHelper::restrict_to_idx_range(
-                                    ddc::select<Theta>(foot_rtheta),
-                                    idx_range_theta);
-                        }
-                    };
-
-                    feet(idx) = ddc::coordinate(idx_rtheta);
-                    // Solve the characteristic equation
-                    time_stepper.update(feet(idx), dt, dy, update_function);
-                });
+                KOKKOS_LAMBDA(IdxOperator const idx) { feet(idx) = elementwise(idx); });
 
         // Treatment to conserve the C0 property of the advected function:
         unify_value_at_centre_pt(feet);

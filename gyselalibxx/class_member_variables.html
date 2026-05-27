@@ -627,7 +627,7 @@
 <li><strong>m_time_stepper_builder</strong> (<a href="classBslAdvection1D.html"><strong>BslAdvection1D</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
 <li><strong>m_builder_2d</strong> (<a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a>)</li>
 <li><strong>m_evaluator_2d</strong> (<a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a>)</li>
-<li><strong>m_find_feet</strong> (<a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a>, <a href="classBslExplicitPredCorrRTheta.html"><strong>BslExplicitPredCorrRTheta</strong></a>)</li>
+<li><strong>m_find_feet_method</strong> (<a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a>, <a href="classBslExplicitPredCorrRTheta.html"><strong>BslExplicitPredCorrRTheta</strong></a>)</li>
 <li><strong>m_logical_to_physical_mapping</strong> (<a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a>)</li>
 <li><strong>m_advection_solver</strong> (<a href="classBslExplicitPredCorrRTheta.html"><strong>BslExplicitPredCorrRTheta</strong></a>, <a href="classBslImplicitPredCorrRTheta.html"><strong>BslImplicitPredCorrRTheta</strong></a>, <a href="classBslPredCorrRTheta.html"><strong>BslPredCorrRTheta</strong></a>)</li>
 <li><strong>m_builder</strong> (<a href="classBslExplicitPredCorrRTheta.html"><strong>BslExplicitPredCorrRTheta</strong></a>, <a href="classBslImplicitPredCorrRTheta.html"><strong>BslImplicitPredCorrRTheta</strong></a>, <a href="classBslPredCorrRTheta.html"><strong>BslPredCorrRTheta</strong></a>, <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a>, <a href="classPolarSplineFEMPoissonLikeSolver.html"><strong>PolarSplineFEMPoissonLikeSolver</strong></a>, <a href="classSpline1DPartialDerivative.html"><strong>Spline1DPartialDerivative</strong></a>, <a href="classSpline1DPartialDerivativeCreator.html"><strong>Spline1DPartialDerivativeCreator</strong></a>, <a href="classSplineBuilderDerivField2D.html"><strong>SplineBuilderDerivField2D</strong></a>, <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a>)</li>
@@ -685,6 +685,16 @@
 <li><strong>m_curvilinear_to_y_spline_alloc</strong> (<a href="classDiscretePoloidalCSSplineMappingBuilder.html"><strong>DiscretePoloidalCSSplineMappingBuilder</strong></a>, <a href="classRefinedDiscretePoloidalCSSplineMappingBuilder.html"><strong>RefinedDiscretePoloidalCSSplineMappingBuilder</strong></a>)</li>
 <li><strong>m_idx_range_patch_1</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
 <li><strong>m_idx_range_patch_2</strong> (<a href="classEdgeTransformation.html"><strong>EdgeTransformation</strong></a>)</li>
+<li><strong>m_advection_field_coefs</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>)</li>
+<li><strong>m_coord_centre</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>, <a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>)</li>
+<li><strong>m_dt</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>)</li>
+<li><strong>m_evaluator_advection_field</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>, <a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
+<li><strong>m_idx_range_theta</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>, <a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>)</li>
+<li><strong>m_logical_to_pseudo_physical</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>, <a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
+<li><strong>m_pseudo_physical_to_advection</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>, <a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
+<li><strong>m_pseudo_physical_to_logical</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>, <a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>, <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
+<li><strong>m_time_stepper</strong> (<a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a>, <a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>)</li>
+<li><strong>m_advection_field_coefs_alloc</strong> (<a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>)</li>
 <li><strong>m_fem_matrix</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
 <li><strong>m_matrix_size</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>, <a href="classPolarSplineFEMPoissonLikeAssembler.html"><strong>PolarSplineFEMPoissonLikeAssembler</strong></a>)</li>
 <li><strong>m_quad_coef</strong> (<a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>)</li>
@@ -828,10 +838,6 @@
 <li><strong>m_compute_coeffs_dim2</strong> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>)</li>
 <li><strong>m_spline_coeffs</strong> (<a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a>)</li>
 <li><strong>m_builder_advection_field</strong> (<a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
-<li><strong>m_evaluator_advection_field</strong> (<a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
-<li><strong>m_logical_to_pseudo_physical</strong> (<a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
-<li><strong>m_pseudo_physical_to_logical</strong> (<a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
-<li><strong>m_pseudo_physical_to_physical</strong> (<a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a>)</li>
 <li><strong>m_rhs</strong> (<a href="classSplitRightHandSideSolver.html"><strong>SplitRightHandSideSolver</strong></a>)</li>
 <li><strong>m_data</strong> (<a href="classTensorCommon.html"><strong>TensorCommon</strong></a>)</li>
 <li><strong>m_mapping_2d</strong> (<a href="classToroidalToCylindrical.html"><strong>ToroidalToCylindrical</strong></a>)</li>

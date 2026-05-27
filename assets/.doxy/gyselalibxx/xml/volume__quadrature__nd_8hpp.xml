@@ -306,7 +306,7 @@
 <parametername direction="in">mapping</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The mapping function from the logical domain <formula id="15">$ (r,\theta) $</formula> to the physical domain <formula id="395">$ (x, y) $</formula>. </para>
+<para>The mapping function from the logical domain <formula id="19">$ (r,\theta) $</formula> to the physical domain <formula id="395">$ (x, y) $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

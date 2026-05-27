@@ -112,6 +112,8 @@
 
 * [**Edge**](structEdge.md)
 * [**EdgeTransformation**](classEdgeTransformation.md)
+* [**ElementwiseSplinePolarFootFinder**](classElementwiseSplinePolarFootFinder.md)
+* [**ElementwiseSplinePolarFootFinderMem**](classElementwiseSplinePolarFootFinderMem.md)
 * [**EnforceFirstInterfaceEdge**](structconnectivity__details_1_1EnforceFirstInterfaceEdge.md)
 ([**connectivity\_details**](namespaceconnectivity__details.md))
 * [**EnforceFirstInterfaceEdge&lt; Interface&lt; Edge2, FirstEdge, Orientations &gt;, FirstEdge &gt;**](structconnectivity__details_1_1EnforceFirstInterfaceEdge_3_01Interface_3_01Edge2_00_01FirstEdge_221a02b03250a49af1745b2263467420.md)
@@ -262,7 +264,6 @@
 * [**IPartialDerivativeCreator**](classIPartialDerivativeCreator.md)
 * [**IPoissonSolver**](classIPoissonSolver.md)
 * [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md)
-* [**IPolarFootFinder**](classIPolarFootFinder.md)
 * [**IPolarPoissonLikeSolver**](classIPolarPoissonLikeSolver.md)
 * [**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md)
 * [**IQNSolver**](classIQNSolver.md)

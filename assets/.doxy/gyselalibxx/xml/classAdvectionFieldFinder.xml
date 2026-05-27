@@ -133,7 +133,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The parameter <formula id="17">$ \varepsilon $</formula> for the linearisation of the electric field. </para>
+<para>The parameter <formula id="22">$ \varepsilon $</formula> for the linearisation of the electric field. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

@@ -376,7 +376,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the coordinate (x,y) to the equivalent <formula id="32">$ (r, \theta) $</formula> coordinate. </para>
+<para>Convert the coordinate (x,y) to the equivalent <formula id="21">$ (r, \theta) $</formula> coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -521,16 +521,16 @@
 <para>A class for describing the circular 2D mapping. </para>
     </briefdescription>
     <detaileddescription>
-<para>The mapping <formula id="24">$ (x,y)\mapsto (r,\theta) $</formula> is defined as follow :</para>
-<para><formula id="25">$ r(x,y) = \sqrt (x-x_0)^2+(y-y_0)^2 ,$</formula></para>
-<para><formula id="26">$ \theta(x,y) = atan2(\frac{y-y_0}{x-x_0}) .$</formula></para>
+<para>The mapping <formula id="25">$ (x,y)\mapsto (r,\theta) $</formula> is defined as follow :</para>
+<para><formula id="26">$ r(x,y) = \sqrt (x-x_0)^2+(y-y_0)^2 ,$</formula></para>
+<para><formula id="27">$ \theta(x,y) = atan2(\frac{y-y_0}{x-x_0}) .$</formula></para>
 <para>It and its Jacobian matrix are invertible everywhere except for <formula id="18">$ r = 0 $</formula>.</para>
 <para>The Jacobian matrix coefficients are defined as follow</para>
-<para><formula id="27">$ J_{11}(x,y)  =\frac{x-x_0}{\sqrt{(x-x_0)^2+(y-y_0)^2}}  $</formula></para>
-<para><formula id="28">$ J_{12}(x,y)  =\frac{y-y_0}{\sqrt{(x-x_0)^2+(y-y_0)^2}}  $</formula></para>
-<para><formula id="29">$ J_{21}(x,y)  =\frac{-(y-y_0)}{(x-x_0)^2+(y-y_0)^2}  $</formula></para>
-<para><formula id="30">$ J_{22}(x,y)  =\frac{x-x_0}{(x-x_0)^2+(y-y_0)^2}  $</formula></para>
-<para>and the matrix determinant: <formula id="31">$ det(J) = 1/((x-x_0)^2+(y-y_0)^2) $</formula>. </para>
+<para><formula id="28">$ J_{11}(x,y)  =\frac{x-x_0}{\sqrt{(x-x_0)^2+(y-y_0)^2}}  $</formula></para>
+<para><formula id="29">$ J_{12}(x,y)  =\frac{y-y_0}{\sqrt{(x-x_0)^2+(y-y_0)^2}}  $</formula></para>
+<para><formula id="30">$ J_{21}(x,y)  =\frac{-(y-y_0)}{(x-x_0)^2+(y-y_0)^2}  $</formula></para>
+<para><formula id="31">$ J_{22}(x,y)  =\frac{x-x_0}{(x-x_0)^2+(y-y_0)^2}  $</formula></para>
+<para>and the matrix determinant: <formula id="32">$ det(J) = 1/((x-x_0)^2+(y-y_0)^2) $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp" line="40" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_circular.hpp" bodystart="41" bodyend="220"/>
     <listofallmembers>

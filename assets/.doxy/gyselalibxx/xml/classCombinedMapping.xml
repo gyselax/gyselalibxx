@@ -258,7 +258,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The parameter <formula id="17">$ \varepsilon $</formula> which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on <formula id="73">$ r \in [0, \varepsilon] $</formula>. </para>
+<para>The parameter <formula id="22">$ \varepsilon $</formula> which determines when a point is close enough to the central O-point for linearisation to be required when calculating the inverse of the Jacobian. The Jacobian is linearised on <formula id="73">$ r \in [0, \varepsilon] $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

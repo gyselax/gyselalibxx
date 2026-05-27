@@ -12,7 +12,6 @@ Here is a list of all files with brief descriptions:
         * **file** [**bsl\_advection\_x.hpp**](bsl__advection__x_8hpp.md)     
         * **file** [**iadvectionvx.hpp**](iadvectionvx_8hpp.md)     
         * **file** [**iadvectionx.hpp**](iadvectionx_8hpp.md)     
-        * **file** [**ipolar\_foot\_finder.hpp**](ipolar__foot__finder_8hpp.md)     
         * **file** [**nulladvectionvx.hpp**](nulladvectionvx_8hpp.md)     
         * **file** [**spline\_polar\_foot\_finder.hpp**](spline__polar__foot__finder_8hpp.md)     
     * **dir** [**collisions**](dir_64163437c27c8707f17f92558da22106.md)     

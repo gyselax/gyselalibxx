@@ -395,7 +395,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the <formula id="32">$ (r, \theta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
+<para>Convert the <formula id="21">$ (r, \theta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>

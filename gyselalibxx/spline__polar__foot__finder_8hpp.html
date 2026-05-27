@@ -571,7 +571,6 @@
 <li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
 <li><code>#include "ddc_aliases.hpp"</code></li>
 <li><code>#include "geometry_pseudo_cartesian.hpp"</code></li>
-<li><code>#include "ipolar_foot_finder.hpp"</code></li>
 <li><code>#include "itimestepper.hpp"</code></li>
 <li><code>#include "l_norm_tools.hpp"</code></li>
 <li><code>#include "vector_index_tools.hpp"</code></li>
@@ -586,6 +585,14 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a> &lt;class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class X_pc, class Y_pc, class AdvDim1, class AdvDim2, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, class IdxRangeOperator, class SplineRThetaEvaluatorAdvection, class PseudoPhysicalToAdvectionMapping, class PseudoPhysicalToLogicalMapping, class LogicalToPseudoPhysicalMapping, class AdvecCoefField, class TimeStepper&gt;<br><em>A device-callable functor that finds the foot of the characteristic at a single grid point in polar coordinates using spline interpolation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a> &lt;class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class X_pc, class Y_pc, class AdvDim1, class AdvDim2, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, class IdxRangeOperator, class SplineRThetaEvaluatorAdvection, class PseudoPhysicalToAdvectionMapping, class PseudoPhysicalToLogicalMapping, class LogicalToPseudoPhysicalMapping, class AdvecCoefFieldMem, class TimeStepper&gt;<br><em>The owning counterpart to</em> <a href="classElementwiseSplinePolarFootFinder.html"><em><strong>ElementwiseSplinePolarFootFinder</strong></em></a> <em>.</em></td>
+</tr>
 <tr>
 <td style="text-align: right;">class</td>
 <td style="text-align: left;"><a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a> &lt;class IdxRangeBatched, class TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, class SplineRThetaBuilderAdvection, class SplineRThetaEvaluatorAdvection&gt;<br><em>A class to find the foot of the characteristics on the</em> <span class="arithmatex">\((r,\theta)\)</span> <em>plane.</em></td>

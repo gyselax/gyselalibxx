@@ -8,7 +8,6 @@
     <innerfile refid="bsl__advection__x_8hpp">bsl_advection_x.hpp</innerfile>
     <innerfile refid="iadvectionvx_8hpp">iadvectionvx.hpp</innerfile>
     <innerfile refid="iadvectionx_8hpp">iadvectionx.hpp</innerfile>
-    <innerfile refid="ipolar__foot__finder_8hpp">ipolar_foot_finder.hpp</innerfile>
     <innerfile refid="nulladvectionvx_8hpp">nulladvectionvx.hpp</innerfile>
     <innerfile refid="spline__polar__foot__finder_8hpp">spline_polar_foot_finder.hpp</innerfile>
     <briefdescription>

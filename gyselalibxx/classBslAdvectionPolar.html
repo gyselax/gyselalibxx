@@ -578,7 +578,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bsladvectionpolar"><strong>BslAdvectionPolar</strong></a> (Builder2D const &amp; builder_2d, Evaluator2D const &amp; evaluator_2d, FootFinder const &amp; foot_finder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping) <br><em>Instantiate an advection operator.</em></td>
+<td style="text-align: left;"><a href="#function-bsladvectionpolar"><strong>BslAdvectionPolar</strong></a> (Builder2D const &amp; builder_2d, Evaluator2D const &amp; evaluator_2d, FootFinder &amp; foot_finder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping) <br><em>Instantiate an advection operator.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">DFieldFDistribu</td>
@@ -598,6 +598,21 @@
 </tr>
 </tbody>
 </table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">void</td>
+<td style="text-align: left;"><a href="#function-unify_value_at_centre_pt"><strong>unify_value_at_centre_pt</strong></a> (Field&lt; T, IdxRangeBatched, MemorySpace &gt; values) <br><em>Replace the value at</em> <span class="arithmatex">\((r=0, \theta)\)</span> <em>point by the value at</em><span class="arithmatex">\((r=0,0)\)</span> <em>for all</em><span class="arithmatex">\(\theta\)</span> <em>.</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>The advection operator uses a backward semi-Lagrangian method. The method is based on the property that the solution is constant along the characteristics.</p>
 <p>For the following equation: 
@@ -608,17 +623,17 @@
 [f(t, x) = f(0, X(t; 0, x)), \quad \forall t.]</p>
 <p>So the first step of the advection operator is to compute the feet of the characteristics <span class="arithmatex">\(X(t; t+\Delta t, x_i)\)</span> for each mesh point <span class="arithmatex">\(x_i\)</span>.</p>
 <p>For the second step, we interpolate the function at the computed feet of the characteristics, and obtain the function at the next time step: <span class="arithmatex">\(f(t + \Delta t, x) = f(t, X(t; t+\Delta, x))\)</span>.</p>
-<p>Different time integration methods are implemented to solve the equation of the characteristics. They are defined in the <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a> class.</p>
+<p>Different time integration methods are implemented to solve the equation of the characteristics. They are defined in the IPolarFootFinder class.</p>
 <p>The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a> operator.</p>
 <p>The interpolation of the function is always done in the logical domain, where the B-splines are defined.</p>
-<p><strong>See also:</strong> <a href="classIPolarFootFinder.html"><strong>IPolarFootFinder</strong></a> </p>
+<p><strong>See also:</strong> IPolarFootFinder </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-bsladvectionpolar">function BslAdvectionPolar</h3>
 <p><em>Instantiate an advection operator.</em> </p>
 <pre><code class="language-C++">inline BslAdvectionPolar::BslAdvectionPolar (
     Builder2D const &amp; builder_2d,
     Evaluator2D const &amp; evaluator_2d,
-    FootFinder const &amp; foot_finder,
+    FootFinder &amp; foot_finder,
     LogicalToPhysicalMapping const &amp; logical_to_physical_mapping
 ) 
 </code></pre>
@@ -693,6 +708,20 @@
 <h3 id="function-bsladvectionpolar_1">function ~BslAdvectionPolar</h3>
 <pre><code class="language-C++">BslAdvectionPolar::~BslAdvectionPolar () = default
 </code></pre>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-unify_value_at_centre_pt">function unify_value_at_centre_pt</h3>
+<p><em>Replace the value at</em> <span class="arithmatex">\((r=0, \theta)\)</span> <em>point by the value at</em><span class="arithmatex">\((r=0,0)\)</span> <em>for all</em><span class="arithmatex">\(\theta\)</span> <em>.</em></p>
+<pre><code class="language-C++">template&lt;class T&gt;
+static inline void BslAdvectionPolar::unify_value_at_centre_pt (
+    Field&lt; T, IdxRangeBatched, MemorySpace &gt; values
+) 
+</code></pre>
+<p>For polar geometry, to ensure continuity at the centre point, we have to be sure that all the points for <span class="arithmatex">\(r = 0\)</span> have the same value. As the computation of the values of a table can induces machine errors, this function is useful to reset the values at the central point at the same value.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>values</code> The table of values we want to unify at the central point. </li>
+</ul>
 <hr>
 
 <hr>

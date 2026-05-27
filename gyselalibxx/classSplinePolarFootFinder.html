@@ -567,7 +567,6 @@
 <ul>
 <li><code>#include &lt;spline_polar_foot_finder.hpp&gt;</code></li>
 </ul>
-<p>Inherits the following classes: <a href="classIPolarFootFinder.html">IPolarFootFinder</a></p>
 <h2 id="public-types">Public Types</h2>
 <table>
 <thead>
@@ -577,6 +576,14 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; 0, <a href="classSplinePolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-advdim1"><strong>AdvDim1</strong></a>  <br><em>The first dimension of the advection field.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::type_seq_element_t&lt; 1, <a href="classSplinePolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-advdim2"><strong>AdvDim2</strong></a>  <br><em>The second dimension of the advection field.</em></td>
+</tr>
 <tr>
 <td style="text-align: right;">typedef ConstField&lt; CoordRTheta, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-cconstfieldfeet"><strong>CConstFieldFeet</strong></a>  <br><em>The type of a constant field of (r, theta) coordinates at every grid point, saved on a compatible memory space.</em></td>
@@ -594,15 +601,19 @@
 <td style="text-align: left;"><a href="#typedef-dvectorfieldadvection"><strong>DVectorFieldAdvection</strong></a>  <br><em>The type of a vector field defined on the pseudo-Cartesian basis at every grid point, saved on a compatible memory space.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;">typedef <a href="classElementwiseSplinePolarFootFinderMem.html"><strong>ElementwiseSplinePolarFootFinderMem</strong></a>&lt; <a href="classSplinePolarFootFinder.html#typedef-gridr"><strong>GridR</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-gridtheta"><strong>GridTheta</strong></a>, X_pc, Y_pc, <a href="classSplinePolarFootFinder.html#typedef-advdim1"><strong>AdvDim1</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-advdim2"><strong>AdvDim2</strong></a>, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, SplineRThetaEvaluatorAdvection, <a href="classCombinedMapping.html"><strong>PseudoPhysicalToAdvectionMapping</strong></a>, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, <a href="classVectorFieldMem.html"><strong>DVectorFieldMem</strong></a>&lt; IdxRangeSplineBatched, <a href="classSplinePolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt;, TimeStepper &gt;</td>
+<td style="text-align: left;"><a href="#typedef-elementwiseoperator"><strong>ElementwiseOperator</strong></a>  <br><em>The operator returned by operator() which calculates the feet elementwise.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef typename SplineRThetaBuilderAdvection::exec_space</td>
 <td style="text-align: left;"><a href="#typedef-execspace"><strong>ExecSpace</strong></a>  <br><em>Execution space.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef GridRadial</td>
+<td style="text-align: right;">typedef typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1</td>
 <td style="text-align: left;"><a href="#typedef-gridr"><strong>GridR</strong></a>  <br><em>The continuous radial dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef GridPoloidal</td>
+<td style="text-align: right;">typedef typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2</td>
 <td style="text-align: left;"><a href="#typedef-gridtheta"><strong>GridTheta</strong></a>  <br><em>The continuous poloidal dimension.</em></td>
 </tr>
 <tr>
@@ -618,7 +629,7 @@
 <td style="text-align: left;"><a href="#typedef-theta"><strong>Theta</strong></a>  <br><em>The continuous poloidal dimension.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef VectorIndexSetAdvDims</td>
+<td style="text-align: right;">typedef ddc::to_type_seq_t&lt; typename LogicalToPhysicalMapping::CoordResult &gt;</td>
 <td style="text-align: left;"><a href="#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>  <br><em>The continuous radial dimension.</em></td>
 </tr>
 <tr>
@@ -626,28 +637,8 @@
 <td style="text-align: left;"><a href="#typedef-vectorsplinecoeffsmem"><strong>VectorSplineCoeffsMem</strong></a>  <br><em>The type of 2 batched splines representing the x and y components of a vector on the polar plane on a compatible memory space.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef MemorySpace</td>
+<td style="text-align: right;">typedef typename SplineRThetaBuilderAdvection::memory_space</td>
 <td style="text-align: left;"><a href="#typedef-memory_space"><strong>memory_space</strong></a>  <br><em>The type of the memory space where the field is saved (CPU vs GPU).</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-types-inherited-from-ipolarfootfinder">Public Types inherited from IPolarFootFinder</h2>
-<p>See <a href="classIPolarFootFinder.html">IPolarFootFinder</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">typedef IdxRangeBatched</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>  <br><em>The type of the index range over which the operator works.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef MemorySpace</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a>  <br><em>The type of the memory space where the field is saved (CPU vs GPU).</em></td>
 </tr>
 </tbody>
 </table>
@@ -665,28 +656,12 @@
 <td style="text-align: left;"><a href="#function-splinepolarfootfinder"><strong>SplinePolarFootFinder</strong></a> (IdxRangeBatched const &amp; idx_range_operator, TimeStepperBuilder const &amp; time_stepper_builder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping, LogicalToPseudoPhysicalMapping const &amp; logical_to_pseudo_physical_mapping, SplineRThetaBuilderAdvection const &amp; builder_advection_field, SplineRThetaEvaluatorAdvection const &amp; evaluator_advection_field, double epsilon=1e-12) <br><em>Instantiate a time integration method for the advection operator.</em></td>
 </tr>
 <tr>
+<td style="text-align: right;"><a href="classSplinePolarFootFinder.html#typedef-elementwiseoperator"><strong>ElementwiseOperator</strong></a></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field) const<br><em>Get an elementwise operator providing a GPU copyable functor capable of calculating the feet of the characteristics.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classSplinePolarFootFinder.html#typedef-cfieldfeet"><strong>CFieldFeet</strong></a> feet, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field, double dt) const<br><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-functions-inherited-from-ipolarfootfinder">Public Functions inherited from IPolarFootFinder</h2>
-<p>See <a href="classIPolarFootFinder.html">IPolarFootFinder</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">virtual void</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#function-operator"><strong>operator()</strong></a> (Field&lt; Coord&lt; <a href="classIPolarFootFinder.html#typedef-r"><strong>R</strong></a>, <a href="classIPolarFootFinder.html#typedef-theta"><strong>Theta</strong></a> &gt;, <a href="classIPolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classIPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; feet, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; <a href="classIPolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classIPolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>, <a href="classIPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field, double dt) const = 0<br><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">virtual</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#function-ipolarfootfinder"><strong>~IPolarFootFinder</strong></a> () = default<br></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (<a href="classSplinePolarFootFinder.html#typedef-cfieldfeet"><strong>CFieldFeet</strong></a> feet, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; <a href="classSplinePolarFootFinder.html#typedef-idxrangeoperator"><strong>IdxRangeOperator</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>, <a href="classSplinePolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field, double dt) const<br><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></td>
 </tr>
 </tbody>
 </table>
@@ -709,38 +684,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="protected-types-inherited-from-ipolarfootfinder">Protected Types inherited from IPolarFootFinder</h2>
-<p>See <a href="classIPolarFootFinder.html">IPolarFootFinder</a></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">typedef GridRadial</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#typedef-gridr"><strong>GridR</strong></a>  <br><em>The continuous radial dimension.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef GridPoloidal</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#typedef-gridtheta"><strong>GridTheta</strong></a>  <br><em>The continuous poloidal dimension.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename GridR::continuous_dimension_type</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#typedef-r"><strong>R</strong></a>  <br><em>The continuous radial dimension.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef typename GridTheta::continuous_dimension_type</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#typedef-theta"><strong>Theta</strong></a>  <br><em>The continuous poloidal dimension.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef VectorIndexSetAdvDims</td>
-<td style="text-align: left;"><a href="classIPolarFootFinder.html#typedef-vectorindexsetadvectiondims"><strong>VectorIndexSetAdvectionDims</strong></a>  <br><em>The continuous radial dimension.</em></td>
-</tr>
-</tbody>
-</table>
 <h2 id="detailed-description">Detailed Description</h2>
 <p>The natural advection domain is the physical domain, where the studied equation is given. However, not all the mappings used are analytically invertible and inverting the Jacobian matrix of the mapping could be costly and could introduce numerical errors. That is why, we also introduce a pseudo-Cartesian domain.</p>
 <p>More details can be found in Edoardo Zoni's article (<a href="https://doi.org/10.1016/j.jcp.2019.108889">https://doi.org/10.1016/j.jcp.2019.108889</a>).</p>
@@ -754,6 +697,18 @@
 </ul>
 <p><strong>See also:</strong> <a href="classBslAdvectionPolar.html"><strong>BslAdvectionPolar</strong></a> </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-advdim1">typedef AdvDim1</h3>
+<p><em>The first dimension of the advection field.</em> </p>
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::AdvDim1 =  ddc::type_seq_element_t&lt;0, VectorIndexSetAdvectionDims&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-advdim2">typedef AdvDim2</h3>
+<p><em>The second dimension of the advection field.</em> </p>
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::AdvDim2 =  ddc::type_seq_element_t&lt;1, VectorIndexSetAdvectionDims&gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-cconstfieldfeet">typedef CConstFieldFeet</h3>
 <p><em>The type of a constant field of (r, theta) coordinates at every grid point, saved on a compatible memory space.</em> </p>
 <pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::CConstFieldFeet =  ConstField&lt;CoordRTheta, IdxRangeOperator, memory_space&gt;;
@@ -778,6 +733,12 @@
 </code></pre>
 <hr>
 
+<h3 id="typedef-elementwiseoperator">typedef ElementwiseOperator</h3>
+<p><em>The operator returned by operator() which calculates the feet elementwise.</em> </p>
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::ElementwiseOperator =  ElementwiseSplinePolarFootFinderMem&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, DVectorFieldMem&lt;IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space&gt;, TimeStepper&gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-execspace">typedef ExecSpace</h3>
 <p><em>Execution space.</em> </p>
 <pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::ExecSpace =  typename SplineRThetaBuilderAdvection::exec_space;
@@ -786,37 +747,37 @@
 
 <h3 id="typedef-gridr">typedef GridR</h3>
 <p><em>The continuous radial dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::GridR =  GridRadial;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::GridR =  typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type1;
 </code></pre>
 <hr>
 
 <h3 id="typedef-gridtheta">typedef GridTheta</h3>
 <p><em>The continuous poloidal dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::GridTheta =  GridPoloidal;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::GridTheta =  typename SplineRThetaBuilderAdvection::interpolation_discrete_dimension_type2;
 </code></pre>
 <hr>
 
 <h3 id="typedef-idxrangeoperator">typedef IdxRangeOperator</h3>
 <p><em>The type of the index range over which the operator works.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::IdxRangeOperator =  IdxRangeBatched;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::IdxRangeOperator =  IdxRangeBatched;
 </code></pre>
 <hr>
 
 <h3 id="typedef-r">typedef R</h3>
 <p><em>The continuous radial dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::R =  typename GridR::continuous_dimension_type;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::R =  typename GridR::continuous_dimension_type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-theta">typedef Theta</h3>
 <p><em>The continuous poloidal dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::Theta =  typename GridTheta::continuous_dimension_type;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::Theta =  typename GridTheta::continuous_dimension_type;
 </code></pre>
 <hr>
 
 <h3 id="typedef-vectorindexsetadvectiondims">typedef VectorIndexSetAdvectionDims</h3>
 <p><em>The continuous radial dimension.</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::VectorIndexSetAdvectionDims =  VectorIndexSetAdvDims;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::VectorIndexSetAdvectionDims =  ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;;
 </code></pre>
 <hr>
 
@@ -828,7 +789,7 @@
 
 <h3 id="typedef-memory_space">typedef memory_space</h3>
 <p><em>The type of the memory space where the field is saved (CPU vs GPU).</em> </p>
-<pre><code class="language-C++">using IPolarFootFinder&lt; GridRadial, GridPoloidal, VectorIndexSetAdvDims, IdxRangeBatched, MemorySpace &gt;::memory_space =  MemorySpace;
+<pre><code class="language-C++">using SplinePolarFootFinder&lt; IdxRangeBatched, TimeStepperBuilder, LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, SplineRThetaBuilderAdvection, SplineRThetaEvaluatorAdvection &gt;::memory_space =  typename SplineRThetaBuilderAdvection::memory_space;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
@@ -858,6 +819,21 @@
 <hr>
 
 <h3 id="function-operator">function operator()</h3>
+<p><em>Get an elementwise operator providing a GPU copyable functor capable of calculating the feet of the characteristics.</em> </p>
+<pre><code class="language-C++">inline ElementwiseOperator SplinePolarFootFinder::operator() (
+    DVectorConstField &lt; IdxRangeOperator , VectorIndexSetAdvectionDims , memory_space &gt; advection_field
+) const
+</code></pre>
+<p>From the advection field in the physical domain, compute the advection field in the right domain an compute its B-splines coefficients. Then, use the given time integration method (time_stepper) to solve the characteristic equation over <span class="arithmatex">\(dt\)</span>.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>advection_field</code> The advection field in the chosen domain.</li>
+</ul>
+<p><strong>Returns:</strong></p>
+<p>An elementwise operator providing a GPU copyable functor capable of calculating the feet of the characteristics. </p>
+<hr>
+
+<h3 id="function-operator_1">function operator()</h3>
 <p><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></p>
 <pre><code class="language-C++">inline void SplinePolarFootFinder::operator() (
     CFieldFeet feet,
