@@ -662,7 +662,7 @@ public:
      */
     ElementwiseOperator operator()(
             DVectorConstField<IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space>
-                    advection_field)
+                    advection_field) const
     {
         static_assert(ddc::type_seq_size_v<VectorIndexSetAdvectionDims> == 2);
 
@@ -714,7 +714,7 @@ public:
             CFieldFeet feet,
             DVectorConstField<IdxRangeOperator, VectorIndexSetAdvectionDims, memory_space>
                     advection_field,
-            double dt)
+            double dt) const
     {
         static_assert(ddc::type_seq_size_v<VectorIndexSetAdvectionDims> == 2);
         using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
