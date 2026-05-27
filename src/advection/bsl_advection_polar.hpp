@@ -113,7 +113,7 @@ private:
 
     Evaluator2D const& m_evaluator_2d;
 
-    FootFinder& m_find_feet;
+    FootFinder& m_find_feet_method;
 
     LogicalToPhysicalMapping const& m_logical_to_physical_mapping;
 
@@ -141,7 +141,7 @@ public:
             LogicalToPhysicalMapping const& logical_to_physical_mapping)
         : m_builder_2d(builder_2d)
         , m_evaluator_2d(evaluator_2d)
-        , m_find_feet(foot_finder)
+        , m_find_feet_method(foot_finder)
         , m_logical_to_physical_mapping(logical_to_physical_mapping)
     {
     }
@@ -173,10 +173,9 @@ public:
                 m_builder_2d.batched_spline_domain(get_idx_range(allfdistribu)));
 
         // Compute the feet of the characteristics at tn -----------------------------------------
-        typename FootFinder::ElementwiseOperator find_foot_for_advection_field
-                = m_find_feet(get_const_field(advection_field_xy));
-        typename FootFinder::ElementwiseOperator::GPUCompat find_foot_for_advection_field_on_dt
-                = find_foot_for_advection_field(dt);
+        typename FootFinder::ElementwiseOperator find_foot_alloc
+                = m_find_feet_method(get_const_field(advection_field_xy));
+        typename FootFinder::ElementwiseOperator::GPUCompat find_foot = find_foot_alloc(dt);
 
         // Interpolate the function on the feet of the characteristics. --------------------------
         Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
@@ -192,8 +191,7 @@ public:
                 ExecSpace(),
                 get_idx_range(allfdistribu),
                 KOKKOS_LAMBDA(IdxBatched const idx) {
-                    allfdistribu(idx)
-                            = evaluator_2d_proxy(find_foot_for_advection_field_on_dt(idx), coefs);
+                    allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs);
                 });
         Kokkos::Profiling::popRegion();
 
