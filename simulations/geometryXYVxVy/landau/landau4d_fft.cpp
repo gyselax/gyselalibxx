@@ -51,10 +51,7 @@ using InterpolatorX = SplineInterpolatorX;
 using InterpolatorY = SplineInterpolatorY;
 using InterpolatorVx = SplineInterpolatorVx;
 using InterpolatorVy = SplineInterpolatorVy;
-#ifdef FLOAT
-static_assert(false, "Splines don't support floats");
-#endif
-using Real = double;
+static_assert(std::is_same_v<Real, double>, "Splines don't support floats");
 #elif defined(LAGRANGE)
 using InterpolatorX = LagrangeInterpolatorX;
 using InterpolatorY = LagrangeInterpolatorY;
