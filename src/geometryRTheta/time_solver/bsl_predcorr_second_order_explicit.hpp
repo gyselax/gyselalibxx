@@ -279,8 +279,9 @@ public:
                     ddcHelper::get<Y>(get_const_field(advection_field_predicted)));
 
             typename SplinePolarFootFinderType::ElementwiseOperator find_foot_alloc
-                = m_find_feet_method(get_const_field(advection_field));
-            typename SplinePolarFootFinderType::ElementwiseOperator::GPUCompat find_foot = find_foot_alloc(dt);
+                    = m_find_feet_method(get_const_field(advection_field));
+            typename SplinePolarFootFinderType::ElementwiseOperator::GPUCompat find_foot
+                    = find_foot_alloc(dt);
 
             const std::source_location location = std::source_location::current();
             ddc::parallel_for_each(
@@ -288,8 +289,12 @@ public:
                     Kokkos::DefaultExecutionSpace(),
                     grid,
                     KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                    ddcHelper::get<X>(advection_field_evaluated)(irtheta) = evaluator_proxy(find_foot(irtheta), ddcHelper::get<X>(get_const_field(advection_field_coefs)));
-                    ddcHelper::get<Y>(advection_field_evaluated)(irtheta) = evaluator_proxy(find_foot(irtheta), ddcHelper::get<Y>(get_const_field(advection_field_coefs)));
+                        ddcHelper::get<X>(advection_field_evaluated)(irtheta) = evaluator_proxy(
+                                find_foot(irtheta),
+                                ddcHelper::get<X>(get_const_field(advection_field_coefs)));
+                        ddcHelper::get<Y>(advection_field_evaluated)(irtheta) = evaluator_proxy(
+                                find_foot(irtheta),
+                                ddcHelper::get<Y>(get_const_field(advection_field_coefs)));
                     });
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
