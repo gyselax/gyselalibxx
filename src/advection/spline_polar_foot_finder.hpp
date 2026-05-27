@@ -13,18 +13,66 @@
 #include "vector_index_tools.hpp"
 #include "vector_mapper.hpp"
 
+/**
+ * @brief A device-callable functor that finds the foot of the characteristic at a single
+ *        grid point in polar coordinates using spline interpolation.
+ *
+ * This class holds non-owning views of all the objects needed to solve the
+ * characteristic equation at a single index, and so it can be copied to and
+ * called from the device. It is the innermost computation unit of
+ * @ref SplinePolarFootFinder.
+ * The calculation of the foot is carried out in Cartesian or pseudo-Cartesian coordinates
+ * to avoir problems related to the O-point, namely:
+ * - The advection field is undefined in polar coordinates at the O-point.
+ * - Calculating the foot of a characteristic crossing the O-point could lead to negative
+ *   radial values.
+ *
+ * @tparam GridR
+ *      The discrete radial dimension.
+ * @tparam GridTheta
+ *      The discrete poloidal dimension.
+ * @tparam X_pc
+ *      The first axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated.
+ * @tparam Y_pc
+ *      The second axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated.
+ * @tparam AdvDim1
+ *      The first dimension of the advection field.
+ * @tparam AdvDim2
+ *      The second dimension of the advection field.
+ * @tparam BSplinesR
+ *      The B-spline basis in the radial direction.
+ * @tparam BSplinesTheta
+ *      The B-spline basis in the poloidal direction.
+ * @tparam IdxRangeOperator
+ *      The full index range over which the operator acts (may include batch dimensions).
+ * @tparam SplineRThetaEvaluatorAdvection
+ *      The evaluator used to evaluate the spline representation of the advection field.
+ * @tparam PseudoPhysicalToAdvectionMapping
+ *      A mapping from the pseudo-physical domain to the domain where the advection field is defined.
+ * @tparam PseudoPhysicalToLogicalMapping
+ *      A mapping from the pseudo-physical domain to the logical domain.
+ * @tparam LogicalToPseudoPhysicalMapping
+ *      A mapping from the logical domain to the pseudo-physical domain.
+ * @tparam AdvecCoefField
+ *      A non-owning field (view) type holding the spline coefficients of the advection field.
+ * @tparam TimeStepper
+ *      The time integration method used to solve the characteristic equation.
+ *
+ * @see ElementwiseSplinePolarFootFinderMem
+ * @see SplinePolarFootFinder
+ */
 template <
         class GridR,
         class GridTheta,
-        class X_adv,
-        class Y_adv,
+        class X_pc,
+        class Y_pc,
         class AdvDim1,
         class AdvDim2,
         class BSplinesR,
         class BSplinesTheta,
         class IdxRangeOperator,
         class SplineRThetaEvaluatorAdvection,
-        class PseudoPhysicalToPhysicalMapping,
+        class PseudoPhysicalToAdvectionMapping,
         class PseudoPhysicalToLogicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class AdvecCoefField,
@@ -44,30 +92,54 @@ class ElementwiseSplinePolarFootFinder
 private:
     SplineRThetaEvaluatorAdvection m_evaluator_advection_field;
 
-    PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
+    PseudoPhysicalToAdvectionMapping m_pseudo_physical_to_advection;
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
 
     TimeStepper m_time_stepper;
 
     AdvecCoefField m_advection_field_coefs;
-    Coord<X_adv, Y_adv> m_coord_centre;
+    Coord<X_pc, Y_pc> m_coord_centre;
     IdxRange<GridTheta> m_idx_range_theta;
     double m_dt;
 
 public:
+    /**
+     * @brief Construct an ElementwiseSplinePolarFootFinder.
+     *
+     * @param[in] evaluator_advection_field
+     *      The evaluator for the spline representation of the advection field.
+     * @param[in] pseudo_physical_to_advection
+     *      The mapping from the pseudo-physical domain to the advection field domain.
+     * @param[in] pseudo_physical_to_logical
+     *      The mapping from the pseudo-physical domain to the logical domain.
+     * @param[in] logical_to_pseudo_physical
+     *      The mapping from the logical domain to the pseudo-physical domain.
+     * @param[in] time_stepper
+     *      The time integration method.
+     * @param[in] advection_field_coefs
+     *      A non-owning view of the pre-built spline coefficients of the advection field.
+     * @param[in] coord_centre
+     *      The coordinate of the polar centre in the pseudo-physical domain,
+     *      used to handle the degenerate point at @f$ r = 0 @f$.
+     * @param[in] idx_range_theta
+     *      The poloidal index range, used to wrap the angular coordinate into
+     *      the periodic domain after each time step.
+     * @param[in] dt
+     *      The time step for the characteristic equation.
+     */
     ElementwiseSplinePolarFootFinder(
             SplineRThetaEvaluatorAdvection const& evaluator_advection_field,
-            PseudoPhysicalToPhysicalMapping const& pseudo_physical_to_physical,
+            PseudoPhysicalToAdvectionMapping const& pseudo_physical_to_advection,
             PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             TimeStepper const& time_stepper,
             AdvecCoefField const& advection_field_coefs,
-            Coord<X_adv, Y_adv> coord_centre,
+            Coord<X_pc, Y_pc> coord_centre,
             IdxRange<GridTheta> idx_range_theta,
             double dt)
         : m_evaluator_advection_field(evaluator_advection_field)
-        , m_pseudo_physical_to_physical(pseudo_physical_to_physical)
+        , m_pseudo_physical_to_advection(pseudo_physical_to_advection)
         , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
         , m_advection_field_coefs(advection_field_coefs)
@@ -77,12 +149,23 @@ public:
     {
     }
 
+    /**
+     * @brief Find the foot of the characteristic at a single grid index.
+     *
+     * Solves the characteristic equation over @f$ dt @f$ using the stored
+     * time stepper and returns the resulting @f$ (r, \theta) @f$ coordinate.
+     *
+     * @param[in] idx
+     *      The operator index, encoding both batch and @f$ (r, \theta) @f$ indices.
+     *
+     * @return The @f$ (r, \theta) @f$ coordinate of the characteristic foot.
+     */
     KOKKOS_FUNCTION CoordRTheta operator()(IdxOperator const idx) const
     {
         IdxBatch idx_batch(idx);
         IdxRTheta idx_rtheta(idx);
         // The function describing how the derivative of the evolve function is calculated.
-        auto dy = [&](DVector<X_adv, Y_adv>& updated_advection_field, CoordRTheta const& foot) {
+        auto dy = [&](DVector<X_pc, Y_pc>& updated_advection_field, CoordRTheta const& foot) {
             DVector<AdvDim1, AdvDim2> updated_advection_field_adv_space;
             ddcHelper::get<AdvDim1>(updated_advection_field_adv_space)
                     = m_evaluator_advection_field(
@@ -99,18 +182,18 @@ public:
             CoordRTheta advection_location_for_mapping(
                     Kokkos::min(ddc::select<R>(foot), ddc::discrete_space<BSplinesR>().rmax()),
                     ddc::select<Theta>(foot));
-            updated_advection_field = to_vector_space<VectorIndexSet<X_adv, Y_adv>>(
-                    m_pseudo_physical_to_physical,
+            updated_advection_field = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+                    m_pseudo_physical_to_advection,
                     advection_location_for_mapping,
                     updated_advection_field_adv_space);
         };
 
         // The function describing how the value(s) are updated using the derivative.
         auto update_function = [&](CoordRTheta& foot_rtheta,
-                                   DVector<X_adv, Y_adv> const& advection_field,
+                                   DVector<X_pc, Y_pc> const& advection_field,
                                    double dt) {
-            Coord<X_adv, Y_adv> const coord_xy = m_logical_to_pseudo_physical(foot_rtheta);
-            Coord<X_adv, Y_adv> const foot_xy = coord_xy - dt * advection_field;
+            Coord<X_pc, Y_pc> const coord_xy = m_logical_to_pseudo_physical(foot_rtheta);
+            Coord<X_pc, Y_pc> const foot_xy = coord_xy - dt * advection_field;
 
             if (norm_inf(foot_xy - m_coord_centre) < 1e-15) {
                 foot_rtheta = CoordRTheta(0, 0);
@@ -128,18 +211,60 @@ public:
     }
 };
 
+/**
+ * @brief The owning counterpart to ElementwiseSplinePolarFootFinder.
+ *
+ * Allocates and stores the spline coefficients of the advection field on the
+ * appropriate memory space. Calling @c operator()(dt) returns a non-owning
+ * @ref ElementwiseSplinePolarFootFinder configured for the given time step, which
+ * can then be copied to and called from the device.
+ *
+ * @tparam GridR
+ *      The discrete radial dimension.
+ * @tparam GridTheta
+ *      The discrete poloidal dimension.
+ * @tparam X_pc
+ *      The first axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated.
+ * @tparam Y_pc
+ *      The second axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated.
+ * @tparam AdvDim1
+ *      The first dimension of the advection field.
+ * @tparam AdvDim2
+ *      The second dimension of the advection field.
+ * @tparam BSplinesR
+ *      The B-spline basis in the radial direction.
+ * @tparam BSplinesTheta
+ *      The B-spline basis in the poloidal direction.
+ * @tparam IdxRangeOperator
+ *      The full index range over which the operator acts (may include batch dimensions).
+ * @tparam SplineRThetaEvaluatorAdvection
+ *      The evaluator used to evaluate the spline representation of the advection field.
+ * @tparam PseudoPhysicalToAdvectionMapping
+ *      A mapping from the pseudo-physical domain to the domain where the advection field is defined.
+ * @tparam PseudoPhysicalToLogicalMapping
+ *      A mapping from the pseudo-physical domain to the logical domain.
+ * @tparam LogicalToPseudoPhysicalMapping
+ *      A mapping from the logical domain to the pseudo-physical domain.
+ * @tparam AdvecCoefFieldMem
+ *      An owning field type holding the spline coefficients of the advection field.
+ * @tparam TimeStepper
+ *      The time integration method used to solve the characteristic equation.
+ *
+ * @see ElementwiseSplinePolarFootFinder
+ * @see SplinePolarFootFinder
+ */
 template <
         class GridR,
         class GridTheta,
-        class X_adv,
-        class Y_adv,
+        class X_pc,
+        class Y_pc,
         class AdvDim1,
         class AdvDim2,
         class BSplinesR,
         class BSplinesTheta,
         class IdxRangeOperator,
         class SplineRThetaEvaluatorAdvection,
-        class PseudoPhysicalToPhysicalMapping,
+        class PseudoPhysicalToAdvectionMapping,
         class PseudoPhysicalToLogicalMapping,
         class LogicalToPseudoPhysicalMapping,
         class AdvecCoefFieldMem,
@@ -155,18 +280,20 @@ class ElementwiseSplinePolarFootFinderMem
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
     using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using CoordRTheta = Coord<R, Theta>;
-    using NonAlloc = ElementwiseSplinePolarFootFinder<
+public:
+    /// The non-owning operator that can be used on GPU
+    using GPUCompat = ElementwiseSplinePolarFootFinder<
             GridR,
             GridTheta,
-            X_adv,
-            Y_adv,
+            X_pc,
+            Y_pc,
             AdvDim1,
             AdvDim2,
             BSplinesR,
             BSplinesTheta,
             IdxRangeOperator,
             SplineRThetaEvaluatorAdvection,
-            PseudoPhysicalToPhysicalMapping,
+            PseudoPhysicalToAdvectionMapping,
             PseudoPhysicalToLogicalMapping,
             LogicalToPseudoPhysicalMapping,
             typename AdvecCoefFieldMem::view_type,
@@ -175,28 +302,50 @@ class ElementwiseSplinePolarFootFinderMem
 private:
     SplineRThetaEvaluatorAdvection m_evaluator_advection_field;
 
-    PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
+    PseudoPhysicalToAdvectionMapping m_pseudo_physical_to_advection;
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
 
     TimeStepper m_time_stepper;
 
     AdvecCoefFieldMem m_advection_field_coefs_alloc;
-    Coord<X_adv, Y_adv> m_coord_centre;
+    Coord<X_pc, Y_pc> m_coord_centre;
     IdxRange<GridTheta> m_idx_range_theta;
 
 public:
+    /**
+     * @brief Construct an ElementwiseSplinePolarFootFinderMem.
+     *
+     * @param[in] evaluator_advection_field
+     *      The evaluator for the spline representation of the advection field.
+     * @param[in] pseudo_physical_to_advection
+     *      The mapping from the pseudo-physical domain to the advection field domain.
+     * @param[in] pseudo_physical_to_logical
+     *      The mapping from the pseudo-physical domain to the logical domain.
+     * @param[in] logical_to_pseudo_physical
+     *      The mapping from the logical domain to the pseudo-physical domain.
+     * @param[in] time_stepper
+     *      The time integration method.
+     * @param[in] advection_field_coefs
+     *      The spline coefficients of the advection field. Ownership is transferred in.
+     * @param[in] coord_centre
+     *      The coordinate of the polar centre in the pseudo-physical domain,
+     *      used to handle the degenerate point at @f$ r = 0 @f$.
+     * @param[in] idx_range_theta
+     *      The poloidal index range, used to wrap the angular coordinate into
+     *      the periodic domain after each time step.
+     */
     ElementwiseSplinePolarFootFinderMem(
             SplineRThetaEvaluatorAdvection const& evaluator_advection_field,
-            PseudoPhysicalToPhysicalMapping const& pseudo_physical_to_physical,
+            PseudoPhysicalToAdvectionMapping const& pseudo_physical_to_advection,
             PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             TimeStepper const& time_stepper,
             AdvecCoefFieldMem&& advection_field_coefs,
-            Coord<X_adv, Y_adv> coord_centre,
+            Coord<X_pc, Y_pc> coord_centre,
             IdxRange<GridTheta> idx_range_theta)
         : m_evaluator_advection_field(evaluator_advection_field)
-        , m_pseudo_physical_to_physical(pseudo_physical_to_physical)
+        , m_pseudo_physical_to_advection(pseudo_physical_to_advection)
         , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
         , m_advection_field_coefs_alloc(std::move(advection_field_coefs))
@@ -205,11 +354,23 @@ public:
     {
     }
 
-    NonAlloc operator()(double dt)
+    /**
+     * @brief Create an ElementwiseSplinePolarFootFinder for the given time step.
+     *
+     * Returns a non-owning @ref ElementwiseSplinePolarFootFinder that holds views of
+     * the stored spline coefficients and is configured for time step @f$ dt @f$.
+     * The returned object can be copied to and called from the device.
+     *
+     * @param[in] dt
+     *      The time step for the characteristic equation.
+     *
+     * @return A view-based ElementwiseSplinePolarFootFinder for the given time step.
+     */
+    GPUCompat operator()(double dt)
     {
-        return NonAlloc(
+        return GPUCompat(
                 m_evaluator_advection_field,
-                m_pseudo_physical_to_physical,
+                m_pseudo_physical_to_advection,
                 m_pseudo_physical_to_logical,
                 m_logical_to_pseudo_physical,
                 m_time_stepper,
@@ -330,19 +491,19 @@ public:
 private:
     using MemSpace = typename ExecSpace::memory_space;
     /**
-     * @brief Tag the first dimension in the advection domain.
+     * @brief First axis tag of the pseudo-Cartesian domain in which the characteristic equation is solved.
      */
-    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     /**
-     * @brief Tag the second dimension in the advection domain.
+     * @brief Second axis tag of the pseudo-Cartesian domain in which the characteristic equation is solved.
      */
-    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
     /**
-     * @brief The coordinate type associated to the dimensions in the advection domain.
+     * @brief The coordinate type for a point in the pseudo-Cartesian domain.
      */
-    using CoordXY_adv = typename LogicalToPseudoPhysicalMapping::CoordResult;
+    using CoordXY_pc = typename LogicalToPseudoPhysicalMapping::CoordResult;
 
-    using PseudoCartesianBasis = ddc::to_type_seq_t<CoordXY_adv>;
+    using PseudoCartesianBasis = ddc::to_type_seq_t<CoordXY_pc>;
 
     using CoordRTheta = Coord<R, Theta>;
 
@@ -356,8 +517,8 @@ private:
     using IdxTheta = Idx<GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
 
-    using PseudoCartesianToCircular = CartesianToCircular<X_adv, Y_adv, R, Theta>;
-    using PseudoPhysicalToPhysicalMapping
+    using PseudoCartesianToCircular = CartesianToCircular<X_pc, Y_pc, R, Theta>;
+    using PseudoPhysicalToAdvectionMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
     using BSplinesR = typename SplineRThetaBuilderAdvection::bsplines_type1;
@@ -370,13 +531,13 @@ private:
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
     using TimeStepper = typename TimeStepperBuilder::
-            template time_stepper_t<CoordRTheta, DVector<X_adv, Y_adv>>;
+            template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
 
     TimeStepperBuilder const& m_time_stepper_builder;
 
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
-    PseudoPhysicalToPhysicalMapping m_pseudo_physical_to_physical;
+    PseudoPhysicalToAdvectionMapping m_pseudo_physical_to_advection;
 
     SplineRThetaBuilderAdvection const& m_builder_advection_field;
     SplineRThetaEvaluatorAdvection const& m_evaluator_advection_field;
@@ -420,15 +581,15 @@ public:
     using ElementwiseOperator = ElementwiseSplinePolarFootFinderMem<
             GridR,
             GridTheta,
-            X_adv,
-            Y_adv,
+            X_pc,
+            Y_pc,
             AdvDim1,
             AdvDim2,
             BSplinesR,
             BSplinesTheta,
             IdxRangeOperator,
             SplineRThetaEvaluatorAdvection,
-            PseudoPhysicalToPhysicalMapping,
+            PseudoPhysicalToAdvectionMapping,
             PseudoPhysicalToLogicalMapping,
             LogicalToPseudoPhysicalMapping,
             DVectorFieldMem<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>,
@@ -470,7 +631,7 @@ public:
         : m_time_stepper_builder(time_stepper_builder)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical_mapping)
         , m_pseudo_physical_to_logical(logical_to_pseudo_physical_mapping.get_inverse_mapping())
-        , m_pseudo_physical_to_physical(
+        , m_pseudo_physical_to_advection(
                   logical_to_physical_mapping,
                   PseudoCartesianToCircular(),
                   epsilon)
@@ -519,7 +680,7 @@ public:
 
         ElementwiseOperator elementwise(
                 m_evaluator_advection_field,
-                m_pseudo_physical_to_physical,
+                m_pseudo_physical_to_advection,
                 m_pseudo_physical_to_logical,
                 m_logical_to_pseudo_physical,
                 time_stepper,
@@ -556,7 +717,7 @@ public:
 
         ElementwiseOperator elementwise_mem(
                 m_evaluator_advection_field,
-                m_pseudo_physical_to_physical,
+                m_pseudo_physical_to_advection,
                 m_pseudo_physical_to_logical,
                 m_logical_to_pseudo_physical,
                 time_stepper,

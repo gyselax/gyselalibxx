@@ -175,7 +175,8 @@ public:
         // Compute the feet of the characteristics at tn -----------------------------------------
         typename FootFinder::ElementwiseOperator find_foot_for_advection_field
                 = m_find_feet(get_const_field(advection_field_xy));
-        auto find_foot_for_advection_field_on_dt = find_foot_for_advection_field(dt);
+        typename FootFinder::ElementwiseOperator::GPUCompat find_foot_for_advection_field_on_dt
+                = find_foot_for_advection_field(dt);
 
         // Interpolate the function on the feet of the characteristics. --------------------------
         Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionPolar/Interpolation");
