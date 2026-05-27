@@ -280,6 +280,7 @@ class ElementwiseSplinePolarFootFinderMem
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
     using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using CoordRTheta = Coord<R, Theta>;
+
 public:
     /// The non-owning operator that can be used on GPU
     using GPUCompat = ElementwiseSplinePolarFootFinder<
@@ -530,8 +531,8 @@ private:
                     ddc::detail::TypeSeq<GridR, GridTheta>,
                     ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>>>;
 
-    using TimeStepper = typename TimeStepperBuilder::
-            template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
+    using TimeStepper =
+            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
 
     TimeStepperBuilder const& m_time_stepper_builder;
 
