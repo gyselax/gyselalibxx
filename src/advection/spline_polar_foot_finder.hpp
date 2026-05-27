@@ -746,7 +746,7 @@ public:
                 m_logical_to_pseudo_physical(CoordRTheta(0, 0)),
                 idx_range_theta);
 
-        auto elementwise = elementwise_mem(dt);
+        typename ElementwiseOperator::GPUCompat elementwise = elementwise_mem(dt);
 
         // Compute the characteristic feet at t^n:
         const std::source_location location = std::source_location::current();
