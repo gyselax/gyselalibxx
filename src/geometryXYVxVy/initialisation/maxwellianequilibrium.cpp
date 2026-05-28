@@ -46,23 +46,23 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
         IdxRangeSp idx_range_kinsp,
         PC_tree_t const& yaml_input_file)
 {
-    host_t<FieldMemSp<Real>> density_eq(idx_range_kinsp);
-    host_t<FieldMemSp<Real>> temperature_eq(idx_range_kinsp);
-    host_t<FieldMemSp<Real>> mean_velocity_eq(idx_range_kinsp);
+    host_t<FieldMemSp<Real>> l_density_eq(idx_range_kinsp);
+    host_t<FieldMemSp<Real>> l_temperature_eq(idx_range_kinsp);
+    host_t<FieldMemSp<Real>> l_mean_velocity_eq(idx_range_kinsp);
 
     for (IdxSp const isp : idx_range_kinsp) {
         PC_tree_t const conf_isp
                 = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp - idx_range_kinsp.front());
 
-        density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
-        temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
-        mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
+        l_density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
+        l_temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
+        l_mean_velocity_eq(isp) = PCpp_double(conf_isp, ".mean_velocity_eq");
     }
 
     return MaxwellianEquilibrium(
-            std::move(density_eq),
-            std::move(temperature_eq),
-            std::move(mean_velocity_eq));
+            std::move(l_density_eq),
+            std::move(l_temperature_eq),
+            std::move(l_mean_velocity_eq));
 }
 
 
