@@ -66,6 +66,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.
 - Prefixed the name of the Kokkos region with "(GSLX)"
 - Use Simpson quadrature for XYVxVy Landau damping.
+- Update py-dask in the CPU Spack toolchain.
+- Disable python for PDI and pdiplugin-pycall on macOS.
 
 ### Deprecated
 
