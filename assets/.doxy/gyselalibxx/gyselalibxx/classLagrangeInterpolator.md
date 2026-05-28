@@ -61,7 +61,7 @@ _An owning interpolation object that bundles a Lagrange builder and evaluator._ 
 
 | Type | Name |
 | ---: | :--- |
-|   | [**LagrangeInterpolator**](#function-lagrangeinterpolator) () <br>_Construct a_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _._ |
+|   | [**LagrangeInterpolator**](#function-lagrangeinterpolator) (IdxRange&lt; InterpGrid &gt; idx\_range=IdxRange&lt; InterpGrid &gt; {}) <br>_Construct a_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _._ |
 |  [**BuilderType**](classLagrangeInterpolator.md#typedef-buildertype) const & | [**get\_builder**](#function-get_builder) () const<br>_Return a const reference to the owned identity builder._  |
 |  [**EvaluatorType**](classLagrangeInterpolator.md#typedef-evaluatortype) const & | [**get\_evaluator**](#function-get_evaluator) () const<br>_Return a const reference to the owned Lagrange evaluator._  |
 
@@ -175,12 +175,24 @@ using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtr
 
 _Construct a_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _._
 ```C++
-inline LagrangeInterpolator::LagrangeInterpolator () 
+inline explicit LagrangeInterpolator::LagrangeInterpolator (
+    IdxRange< InterpGrid > idx_range=IdxRange< InterpGrid > {}
+) 
 ```
 
 
 
-The extrapolation rules are initialised from the discrete space of `Basis`, so the corresponding ddc discrete space must be initialised before construction. No index range is required because the identity builder needs none. 
+The extrapolation rules are initialised from the discrete space of `Basis`, so the corresponding ddc discrete space must be initialised before construction. No index range is required because the identity builder needs none.
+
+
+
+
+**Parameters:**
+
+
+* `idx_range` The index range on which the interpolator will act. This is unused but is included to match the [**SplineInterpolator**](classSplineInterpolator.md) interface. 
+
+
 
 
         

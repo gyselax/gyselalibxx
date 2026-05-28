@@ -436,25 +436,25 @@
 <codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classLagrangeInterpolator_1a751f1f09b56751c3865d446bb5f9dc18" kindref="member">EvaluatorType</ref><sp/>m_evaluator;</highlight></codeline>
 <codeline lineno="80"><highlight class="normal"></highlight></codeline>
 <codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="89" refid="classLagrangeInterpolator_1a331639bfa8f6b3e34b40c028918733c5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classLagrangeInterpolator_1a331639bfa8f6b3e34b40c028918733c5" kindref="member">LagrangeInterpolator</ref>()</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_min_extrapolation(</highlight></codeline>
-<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_extrapolation&lt;MinExtrapRule,<sp/><ref refid="classLagrangeInterpolator_1a0b39edd1c1d1287a21c6d8739d8c3972" kindref="member">CoeffGridType</ref>,<sp/>DataType,<sp/>Basis&gt;(Extremity::FRONT))</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_extrapolation(</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_extrapolation&lt;MaxExtrapRule,<sp/><ref refid="classLagrangeInterpolator_1a0b39edd1c1d1287a21c6d8739d8c3972" kindref="member">CoeffGridType</ref>,<sp/>DataType,<sp/>Basis&gt;(Extremity::BACK))</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(m_min_extrapolation,<sp/>m_max_extrapolation)</highlight></codeline>
-<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight></codeline>
-<codeline lineno="102" refid="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIdentityInterpolationBuilder" kindref="compound">BuilderType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" kindref="member">get_builder</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="103"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_builder;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111" refid="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classLagrangeEvaluator" kindref="compound">EvaluatorType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" kindref="member">get_evaluator</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
-<codeline lineno="112"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_evaluator;</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
-<codeline lineno="115"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="92" refid="classLagrangeInterpolator_1a6a99820f2559aa04b8f099149b3e2ac6" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classLagrangeInterpolator_1a6a99820f2559aa04b8f099149b3e2ac6" kindref="member">LagrangeInterpolator</ref>(IdxRange&lt;InterpGrid&gt;<sp/>idx_range<sp/>=<sp/>IdxRange&lt;InterpGrid&gt;<sp/>{})</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>:<sp/>m_min_extrapolation(</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_extrapolation&lt;MinExtrapRule,<sp/><ref refid="classLagrangeInterpolator_1a0b39edd1c1d1287a21c6d8739d8c3972" kindref="member">CoeffGridType</ref>,<sp/>DataType,<sp/>Basis&gt;(Extremity::FRONT))</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_max_extrapolation(</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>get_extrapolation&lt;MaxExtrapRule,<sp/><ref refid="classLagrangeInterpolator_1a0b39edd1c1d1287a21c6d8739d8c3972" kindref="member">CoeffGridType</ref>,<sp/>DataType,<sp/>Basis&gt;(Extremity::BACK))</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/>m_evaluator(m_min_extrapolation,<sp/>m_max_extrapolation)</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105" refid="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classIdentityInterpolationBuilder" kindref="compound">BuilderType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" kindref="member">get_builder</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="106"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_builder;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114" refid="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classLagrangeEvaluator" kindref="compound">EvaluatorType</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/><ref refid="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" kindref="member">get_evaluator</ref>()</highlight><highlight class="keyword"><sp/>const</highlight></codeline>
+<codeline lineno="115"><highlight class="keyword"><sp/><sp/><sp/><sp/></highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>m_evaluator;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="118"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp"/>
   </compounddef>

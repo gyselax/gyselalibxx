@@ -582,6 +582,9 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add support for arbitrary precision quadrature.</li>
 <li>Add support for arbitrary precision norm calculations.</li>
 <li>Add an element-wise version of <code>SplinePolarFootFinder</code> to reduce memory consumption.</li>
+<li>Add a <code>landau4d_fft_lagrange</code> target for 3D Landau damping with Lagrange interpolation.</li>
+<li>Add an optional <code>IdxRange</code> argument to the constructor of <code>LagrangeInterpolator</code>.</li>
+<li>Add a new <code>init_lagrange_dependent_idx_range</code> method.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -619,6 +622,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Rename <code>polarpoissonlikesolver.hpp</code> -&gt; <code>polar_spline_fem_poisson_like_solver.hpp</code>.</li>
 <li>Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.</li>
 <li>Prefixed the name of the Kokkos region with "(GSLX)"</li>
+<li>Use Simpson quadrature for XYVxVy Landau damping.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
 <h3 id="removed">Removed</h3>

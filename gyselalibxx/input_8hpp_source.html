@@ -660,6 +660,35 @@ inline IdxRange&lt;Grid1D&gt; init_pseudo_uniform_spline_dependent_idx_range(
     IdxRange&lt;Grid1D&gt; interpolation_idx_range(InterpPointInitMethod::template get_domain&lt;Grid1D&gt;());
     return interpolation_idx_range;
 }
+
+
+template &lt;class Grid1D, class Lagrange&gt;
+inline IdxRange&lt;Grid1D&gt; init_lagrange_dependent_idx_range(
+        PC_tree_t const&amp; conf_gyselalibxx,
+        std::string const&amp; mesh_identifier)
+{
+    using Dim = typename Grid1D::continuous_dimension_type;
+    using Coord1D = Coord&lt;Dim&gt;;
+
+    IdxRange&lt;Grid1D&gt; interpolation_idx_range;
+
+    if constexpr (Lagrange::is_uniform()) {
+        // If uniform Lagrange interpolation is used and interpolation points are calculated from them
+        Coord1D min(PCpp_double(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_min"));
+        Coord1D max(PCpp_double(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_max"));
+        IdxStep&lt;Grid1D&gt; ncells(PCpp_int(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_ncells"));
+        ddc::init_discrete_space&lt;Grid1D&gt;(Grid1D::template init&lt;Grid1D&gt;(min, max, ncells + 1));
+        interpolation_idx_range = IdxRange&lt;Grid1D&gt;(Idx&lt;Grid1D&gt; {0}, ncells + 1);
+    } else {
+        std::vector&lt;Coord1D&gt; breakpoints;
+        PDI_get_arrays("read_" + mesh_identifier, "breakpoints_" + mesh_identifier, breakpoints);
+        ddc::init_discrete_space&lt;Grid1D&gt;(Grid1D::template init&lt;Grid1D&gt;(breakpoints));
+        interpolation_idx_range
+                = IdxRange&lt;Grid1D&gt;(IdxRange&lt;Grid1D&gt; {0}, IdxStep&lt;Grid1D&gt; {breakpoints.size()});
+    }
+    ddc::init_discrete_space&lt;Lagrange&gt;(interpolation_idx_range);
+    return interpolation_idx_range.remove_last(IdxStep&lt;Grid1D&gt; {static_cast&lt;int&gt;(Dim::PERIODIC)});
+}
 </code></pre></div>
               
             </div>

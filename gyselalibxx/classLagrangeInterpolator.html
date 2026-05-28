@@ -601,7 +601,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-lagrangeinterpolator"><strong>LagrangeInterpolator</strong></a> () <br><em>Construct a</em> <a href="classLagrangeInterpolator.html"><em><strong>LagrangeInterpolator</strong></em></a> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-lagrangeinterpolator"><strong>LagrangeInterpolator</strong></a> (IdxRange&lt; InterpGrid &gt; idx_range=IdxRange&lt; InterpGrid &gt; {}) <br><em>Construct a</em> <a href="classLagrangeInterpolator.html"><em><strong>LagrangeInterpolator</strong></em></a> <em>.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classLagrangeInterpolator.html#typedef-buildertype"><strong>BuilderType</strong></a> const &amp;</td>
@@ -661,9 +661,15 @@
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-lagrangeinterpolator">function LagrangeInterpolator</h3>
 <p><em>Construct a</em> <a href="classLagrangeInterpolator.html"><em><strong>LagrangeInterpolator</strong></em></a> <em>.</em></p>
-<pre><code class="language-C++">inline LagrangeInterpolator::LagrangeInterpolator () 
+<pre><code class="language-C++">inline explicit LagrangeInterpolator::LagrangeInterpolator (
+    IdxRange&lt; InterpGrid &gt; idx_range=IdxRange&lt; InterpGrid &gt; {}
+) 
 </code></pre>
-<p>The extrapolation rules are initialised from the discrete space of <code>Basis</code>, so the corresponding ddc discrete space must be initialised before construction. No index range is required because the identity builder needs none. </p>
+<p>The extrapolation rules are initialised from the discrete space of <code>Basis</code>, so the corresponding ddc discrete space must be initialised before construction. No index range is required because the identity builder needs none.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>idx_range</code> The index range on which the interpolator will act. This is unused but is included to match the <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a> interface. </li>
+</ul>
 <hr>
 
 <h3 id="function-get_builder">function get_builder</h3>

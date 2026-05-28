@@ -1804,7 +1804,7 @@
     <member refid="classLagrangeInterpolator_1a24173291aefe41b454321b3abcf213e0" kind="variable"><name>m_builder</name></member>
     <member refid="classLagrangeInterpolator_1a2de809db131307b4e34459aac65c2f5f" kind="variable"><name>m_evaluator</name></member>
     <member refid="classLagrangeInterpolator_1a0d842fc9431acf76753830fb3c3fadc0" kind="function"><name>rank</name></member>
-    <member refid="classLagrangeInterpolator_1a331639bfa8f6b3e34b40c028918733c5" kind="function"><name>LagrangeInterpolator</name></member>
+    <member refid="classLagrangeInterpolator_1a6a99820f2559aa04b8f099149b3e2ac6" kind="function"><name>LagrangeInterpolator</name></member>
     <member refid="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" kind="function"><name>get_builder</name></member>
     <member refid="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" kind="function"><name>get_evaluator</name></member>
   </compound>
@@ -4035,6 +4035,7 @@
     <member refid="geometry__xyvxvy_8hpp_1a32cc743aaf2680ad14658ba167bd69e0" kind="typedef"><name>VectorFieldMemXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a22ed1da55db00cf5062d7f6f205ce947" kind="typedef"><name>DVectorFieldMemXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1aa0dbeac5a6833f0703dc8baa5e55d435" kind="typedef"><name>FieldMemVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1aa0a9972af32ff1752fcc53e7fc28c30b" kind="typedef"><name>DFieldMemVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a31ee626ddacf4775e5580c3effb57cf8" kind="typedef"><name>FieldMemVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1ab636de3a5040e5257839376749851d28" kind="typedef"><name>DFieldMemVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a913e2301e674cdb9ac1f84ce70721eb4" kind="typedef"><name>FieldMemXYVxVy</name></member>
@@ -4144,6 +4145,7 @@
     <member refid="input_8hpp_1ad0798c73945ba76a41854a6e4de7584f" kind="function"><name>parse_executable_arguments</name></member>
     <member refid="input_8hpp_1a6537533138425084d826e0ecd867fa8e" kind="function"><name>init_spline_dependent_idx_range</name></member>
     <member refid="input_8hpp_1a094a1d67fd8cad3b6b67c1c2f447b15c" kind="function"><name>init_pseudo_uniform_spline_dependent_idx_range</name></member>
+    <member refid="input_8hpp_1aad2c84d61a859af6b7908ace85c2a5a9" kind="function"><name>init_lagrange_dependent_idx_range</name></member>
   </compound>
   <compound refid="output_8hpp" kind="file"><name>output.hpp</name>
     <member refid="output_8hpp_1a6105a67d86ae441992237c298c3a331f" kind="function"><name>expose_mesh_to_pdi</name></member>

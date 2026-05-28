@@ -66,7 +66,7 @@ private:
     EvaluatorType m_evaluator;
 
 public:
-    LagrangeInterpolator()
+    explicit LagrangeInterpolator(IdxRange<InterpGrid> idx_range = IdxRange<InterpGrid> {})
         : m_min_extrapolation(
                 get_extrapolation<MinExtrapRule, CoeffGridType, DataType, Basis>(Extremity::FRONT))
         , m_max_extrapolation(

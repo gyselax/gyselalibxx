@@ -184,21 +184,36 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classLagrangeInterpolator_1a331639bfa8f6b3e34b40c028918733c5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classLagrangeInterpolator_1a6a99820f2559aa04b8f099149b3e2ac6" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <type></type>
         <definition>LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType &gt;::LagrangeInterpolator</definition>
-        <argsstring>()</argsstring>
+        <argsstring>(IdxRange&lt; InterpGrid &gt; idx_range=IdxRange&lt; InterpGrid &gt; {})</argsstring>
         <name>LagrangeInterpolator</name>
         <qualifiedname>LagrangeInterpolator::LagrangeInterpolator</qualifiedname>
+        <param>
+          <type>IdxRange&lt; InterpGrid &gt;</type>
+          <declname>idx_range</declname>
+          <defval>IdxRange&lt; InterpGrid &gt; {}</defval>
+        </param>
         <briefdescription>
 <para>Construct a <ref refid="classLagrangeInterpolator" kindref="compound">LagrangeInterpolator</ref>. </para>
         </briefdescription>
         <detaileddescription>
-<para>The extrapolation rules are initialised from the discrete space of <computeroutput>Basis</computeroutput>, so the corresponding ddc discrete space must be initialised before construction. No index range is required because the identity builder needs none. </para>
+<para>The extrapolation rules are initialised from the discrete space of <computeroutput>Basis</computeroutput>, so the corresponding ddc discrete space must be initialised before construction. No index range is required because the identity builder needs none.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>idx_range</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The index range on which the interpolator will act. This is unused but is included to match the <ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref> interface. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="89" bodyend="96"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="92" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="92" bodyend="99"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classLagrangeInterpolator_1abb7cc397d8a31585050c9dcd731cd3e8" kindref="member">BuilderType</ref> const &amp;</type>
@@ -216,7 +231,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="102" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="102" bodyend="105"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="105" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="105" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type><ref refid="classLagrangeInterpolator_1a751f1f09b56751c3865d446bb5f9dc18" kindref="member">EvaluatorType</ref> const &amp;</type>
@@ -234,7 +249,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="111" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="111" bodyend="114"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="114" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="114" bodyend="117"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -294,7 +309,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="37" bodyend="115"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" line="36" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp" bodystart="37" bodyend="118"/>
     <listofallmembers>
       <member refid="classLagrangeInterpolator_1abb7cc397d8a31585050c9dcd731cd3e8" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>BuilderType</name></member>
       <member refid="classLagrangeInterpolator_1a0b39edd1c1d1287a21c6d8739d8c3972" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>CoeffGridType</name></member>
@@ -303,7 +318,7 @@
       <member refid="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>get_builder</name></member>
       <member refid="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>get_evaluator</name></member>
       <member refid="classLagrangeInterpolator_1a460e5cf11a041e462ae01f4e615daaf1" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>is_periodic</name></member>
-      <member refid="classLagrangeInterpolator_1a331639bfa8f6b3e34b40c028918733c5" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>LagrangeInterpolator</name></member>
+      <member refid="classLagrangeInterpolator_1a6a99820f2559aa04b8f099149b3e2ac6" prot="public" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>LagrangeInterpolator</name></member>
       <member refid="classLagrangeInterpolator_1a24173291aefe41b454321b3abcf213e0" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_builder</name></member>
       <member refid="classLagrangeInterpolator_1a2de809db131307b4e34459aac65c2f5f" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_evaluator</name></member>
       <member refid="classLagrangeInterpolator_1a51a53561b335ebe6c613e9a6acd5128d" prot="private" virt="non-virtual"><scope>LagrangeInterpolator</scope><name>m_max_extrapolation</name></member>

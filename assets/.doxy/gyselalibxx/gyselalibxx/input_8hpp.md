@@ -60,6 +60,7 @@
 
 | Type | Name |
 | ---: | :--- |
+|  IdxRange&lt; Grid1D &gt; | [**init\_lagrange\_dependent\_idx\_range**](#function-init_lagrange_dependent_idx_range) (PC\_tree\_t const & conf\_gyselalibxx, std::string const & mesh\_identifier) <br> |
 |  IdxRange&lt; Grid1D &gt; | [**init\_pseudo\_uniform\_spline\_dependent\_idx\_range**](#function-init_pseudo_uniform_spline_dependent_idx_range) (PC\_tree\_t const & conf\_gyselalibxx, std::string const & mesh\_identifier) <br> |
 |  IdxRange&lt; Grid1D &gt; | [**init\_spline\_dependent\_idx\_range**](#function-init_spline_dependent_idx_range) (PC\_tree\_t const & conf\_gyselalibxx, std::string const & mesh\_identifier) <br> |
 |  void | [**parse\_executable\_arguments**](#function-parse_executable_arguments) (PC\_tree\_t & conf\_gyselalibxx, long int & iter\_start, int argc, char \*\* argv, char const \*const params\_yaml) <br>_Extract the paraconf configuration and the restart iteration from the executable arguments._  |
@@ -94,6 +95,47 @@
 
 ## Public Functions Documentation
 
+
+
+
+### function init\_lagrange\_dependent\_idx\_range 
+
+```C++
+template<class Grid1D, class Lagrange>
+inline IdxRange< Grid1D > init_lagrange_dependent_idx_range (
+    PC_tree_t const & conf_gyselalibxx,
+    std::string const & mesh_identifier
+) 
+```
+
+
+
+Initialise an index range which will serve as an interpolation index range for splines.
+
+
+The index range is initialised using information from an input yaml file. If the B-splines are uniform then the information to be read is:
+* .SplineMesh.&lt;mesh\_identifier&gt;\_min
+* .SplineMesh.&lt;mesh\_identifier&gt;\_max
+* .SplineMesh.&lt;mesh\_identifier&gt;\_ncells
+
+
+
+
+If the B-splines are non-uniform then the information to be read is:
+* .SplineMesh.&lt;mesh\_identifier&gt;\_MeshFile
+
+
+
+
+This string indicates the name of a file which contains the knots of the bspline.
+
+
+This information is used to initialise the B-splines. The interpolation index range is then created using the specified method. 
+
+
+        
+
+<hr>
 
 
 

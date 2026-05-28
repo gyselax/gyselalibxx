@@ -485,6 +485,48 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" line="130" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" bodystart="130" bodyend="149"/>
       </memberdef>
+      <memberdef kind="function" id="input_8hpp_1aad2c84d61a859af6b7908ace85c2a5a9" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <templateparamlist>
+          <param>
+            <type>class Grid1D</type>
+          </param>
+          <param>
+            <type>class Lagrange</type>
+          </param>
+        </templateparamlist>
+        <type>IdxRange&lt; Grid1D &gt;</type>
+        <definition>IdxRange&lt; Grid1D &gt; init_lagrange_dependent_idx_range</definition>
+        <argsstring>(PC_tree_t const &amp;conf_gyselalibxx, std::string const &amp;mesh_identifier)</argsstring>
+        <name>init_lagrange_dependent_idx_range</name>
+        <param>
+          <type>PC_tree_t const &amp;</type>
+          <declname>conf_gyselalibxx</declname>
+        </param>
+        <param>
+          <type>std::string const &amp;</type>
+          <declname>mesh_identifier</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initialise an index range which will serve as an interpolation index range for splines.</para>
+<para>The index range is initialised using information from an input yaml file. If the B-splines are uniform then the information to be read is:<itemizedlist>
+<listitem><para>.SplineMesh.&lt;mesh_identifier&gt;_min</para>
+</listitem><listitem><para>.SplineMesh.&lt;mesh_identifier&gt;_max</para>
+</listitem><listitem><para>.SplineMesh.&lt;mesh_identifier&gt;_ncells</para>
+</listitem></itemizedlist>
+</para>
+<para>If the B-splines are non-uniform then the information to be read is:<itemizedlist>
+<listitem><para>.SplineMesh.&lt;mesh_identifier&gt;_MeshFile</para>
+</listitem></itemizedlist>
+</para>
+<para>This string indicates the name of a file which contains the knots of the bspline.</para>
+<para>This information is used to initialise the B-splines. The interpolation index range is then created using the specified method. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" line="170" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp" bodystart="170" bodyend="195"/>
+      </memberdef>
     </sectiondef>
     <briefdescription>
     </briefdescription>
@@ -588,6 +630,35 @@
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange&lt;Grid1D&gt;<sp/>interpolation_idx_range(InterpPointInitMethod::template<sp/>get_domain&lt;Grid1D&gt;());</highlight></codeline>
 <codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>interpolation_idx_range;</highlight></codeline>
 <codeline lineno="149"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Gr</highlight><highlight class="keywordtype">id</highlight><highlight class="normal">1D,<sp/></highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>Lagrange&gt;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/>IdxRange&lt;Grid1D&gt;<sp/>init_lagrange_dependent_idx_range(</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC_tree_t<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>conf_gyselalibxx,</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::string<sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>mesh_identifier)</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Dim<sp/>=<sp/></highlight><highlight class="keyword">typename</highlight><highlight class="normal"><sp/>Grid1D::continuous_dimension_type;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Coord1D<sp/>=<sp/>Coord&lt;Dim&gt;;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>IdxRange&lt;Grid1D&gt;<sp/>interpolation_idx_range;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/>(Lagrange::is_uniform())<sp/>{</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>If<sp/>uniform<sp/>Lagrange<sp/>interpolation<sp/>is<sp/>used<sp/>and<sp/>interpolation<sp/>points<sp/>are<sp/>calculated<sp/>from<sp/>them</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord1D<sp/>min(PCpp_double(conf_gyselalibxx,<sp/></highlight><highlight class="stringliteral">&quot;.Mesh.&quot;</highlight><highlight class="normal"><sp/>+<sp/>mesh_identifier<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;_min&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Coord1D<sp/>max(PCpp_double(conf_gyselalibxx,<sp/></highlight><highlight class="stringliteral">&quot;.Mesh.&quot;</highlight><highlight class="normal"><sp/>+<sp/>mesh_identifier<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;_max&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IdxStep&lt;Grid1D&gt;<sp/>ncells(PCpp_int(conf_gyselalibxx,<sp/></highlight><highlight class="stringliteral">&quot;.Mesh.&quot;</highlight><highlight class="normal"><sp/>+<sp/>mesh_identifier<sp/>+<sp/></highlight><highlight class="stringliteral">&quot;_ncells&quot;</highlight><highlight class="normal">));</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::init_discrete_space&lt;Grid1D&gt;(Grid1D::template<sp/>init&lt;Grid1D&gt;(min,<sp/>max,<sp/>ncells<sp/>+<sp/>1));</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>interpolation_idx_range<sp/>=<sp/>IdxRange&lt;Grid1D&gt;(Idx&lt;Grid1D&gt;<sp/>{0},<sp/>ncells<sp/>+<sp/>1);</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>{</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::vector&lt;Coord1D&gt;<sp/>breakpoints;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PDI_get_arrays(</highlight><highlight class="stringliteral">&quot;read_&quot;</highlight><highlight class="normal"><sp/>+<sp/>mesh_identifier,<sp/></highlight><highlight class="stringliteral">&quot;breakpoints_&quot;</highlight><highlight class="normal"><sp/>+<sp/>mesh_identifier,<sp/>breakpoints);</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::init_discrete_space&lt;Grid1D&gt;(Grid1D::template<sp/>init&lt;Grid1D&gt;(breakpoints));</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>interpolation_idx_range</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>=<sp/>IdxRange&lt;Grid1D&gt;(IdxRange&lt;Grid1D&gt;<sp/>{0},<sp/>IdxStep&lt;Grid1D&gt;<sp/>{breakpoints.size()});</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/>ddc::init_discrete_space&lt;Lagrange&gt;(interpolation_idx_range);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>interpolation_idx_range.remove_last(IdxStep&lt;Grid1D&gt;<sp/>{</highlight><highlight class="keyword">static_cast&lt;</highlight><highlight class="keywordtype">int</highlight><highlight class="keyword">&gt;</highlight><highlight class="normal">(Dim::PERIODIC)});</highlight></codeline>
+<codeline lineno="195"><highlight class="normal">}</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/io/input.hpp"/>
   </compounddef>

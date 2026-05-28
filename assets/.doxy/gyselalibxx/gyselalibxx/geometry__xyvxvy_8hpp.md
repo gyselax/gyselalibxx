@@ -71,6 +71,7 @@
 | typedef FieldMemSpVxVyXY&lt; double &gt; | [**DFieldMemSpVxVyXY**](#typedef-dfieldmemspvxvyxy)  <br> |
 | typedef FieldMemSpXYVxVy&lt; double &gt; | [**DFieldMemSpXYVxVy**](#typedef-dfieldmemspxyvxvy)  <br> |
 | typedef FieldMemVxVy&lt; double &gt; | [**DFieldMemVxVy**](#typedef-dfieldmemvxvy)  <br> |
+| typedef FieldMemVy&lt; double &gt; | [**DFieldMemVy**](#typedef-dfieldmemvy)  <br> |
 | typedef FieldMemXY&lt; double &gt; | [**DFieldMemXY**](#typedef-dfieldmemxy)  <br> |
 | typedef FieldMemXYVxVy&lt; double &gt; | [**DFieldMemXYVxVy**](#typedef-dfieldmemxyvxvy)  <br> |
 | typedef FieldMemY&lt; double &gt; | [**DFieldMemY**](#typedef-dfieldmemy)  <br> |
@@ -425,6 +426,19 @@ using DFieldMemSpXYVxVy =  FieldMemSpXYVxVy<double>;
 
 ```C++
 using DFieldMemVxVy =  FieldMemVxVy<double>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef DFieldMemVy 
+
+```C++
+using DFieldMemVy =  FieldMemVy<double>;
 ```
 
 

@@ -66,6 +66,7 @@
 ## i
 
 * **index** ([**indexed\_tensor.hpp**](indexed__tensor_8hpp.md))
+* **init\_lagrange\_dependent\_idx\_range** ([**input.hpp**](input_8hpp.md))
 * **init\_pseudo\_uniform\_spline\_dependent\_idx\_range** ([**input.hpp**](input_8hpp.md))
 * **init\_spline\_dependent\_idx\_range** ([**input.hpp**](input_8hpp.md))
 * **inverse** ([**math\_tools.hpp**](math__tools_8hpp.md))

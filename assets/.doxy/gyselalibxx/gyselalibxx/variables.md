@@ -144,6 +144,7 @@
 * **DFieldMemSpVxVyXY** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **DFieldMemSpXYVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **DFieldMemVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
+* **DFieldMemVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **DFieldMemXYVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **DFieldSpVxVy** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
 * **DFieldSpVxVyXY** ([**geometry\_xyvxvy.hpp**](geometry__xyvxvy_8hpp.md))
