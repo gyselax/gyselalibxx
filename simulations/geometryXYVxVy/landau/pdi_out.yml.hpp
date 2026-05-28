@@ -3,19 +3,20 @@
 #define STRINGIFY(s) #s
 #define STRING(s) STRINGIFY(s)
 
-constexpr char const* const PDI_CFG = "types:\n"
-"  real_type: &real_type\n"
-                                      "    type: " STRING(GYSELALIBXX_BUILD_REAL_PRECISION) "\n"
-                                      "metadata:\n"
+constexpr char const* const PDI_CFG
+        = "types:\n"
+          "  real_type: &real_type\n"
+          "    type: " STRING(GYSELALIBXX_BUILD_REAL_PRECISION) "\n"
+                                                                "metadata:\n"
 #ifdef SPLINE
-                                      R"PDI_CFG(
+                                                                R"PDI_CFG(
   Nx_spline_cells : int
   Ny_spline_cells : int
   Nvx_spline_cells : int
   Nvy_spline_cells : int
 )PDI_CFG"
 #endif
-                                      R"PDI_CFG(
+                                                                R"PDI_CFG(
   iter : int
   time_saved : real_type
   nbstep_diag: int
@@ -91,15 +92,15 @@ plugins:
       collision_policy: replace_and_warn
 )PDI_CFG"
 #ifdef SPLINE
-                                      R"PDI_CFG(
+                                                                R"PDI_CFG(
       write: [Nx_spline_cells, Nvx_spline_cells, MeshX, MeshY, MeshVx, MeshVy, nbstep_diag, Nkinspecies, fdistribu_charges, fdistribu_masses, fdistribu_eq]
 )PDI_CFG"
 #else
-                                      R"PDI_CFG(
+                                                                R"PDI_CFG(
       write: [MeshX, MeshY, MeshVx, MeshVy, nbstep_diag, Nkinspecies, fdistribu_charges, fdistribu_masses, fdistribu_eq]
 )PDI_CFG"
 #endif
-                                      R"PDI_CFG(
+                                                                R"PDI_CFG(
     - file: 'GYSELALIBXX_${iter_saved:05}.h5'
       communicator: $MPI_COMM_WORLD
       on_event: [iteration, last_iteration]
