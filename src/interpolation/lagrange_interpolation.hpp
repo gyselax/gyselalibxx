@@ -85,8 +85,11 @@ public:
      * The extrapolation rules are initialised from the discrete space of @c Basis,
      * so the corresponding ddc discrete space must be initialised before construction.
      * No index range is required because the identity builder needs none.
+     *
+     * @param idx_range The index range on which the interpolator will act. This is
+     *                  unused but is included to match the SplineInterpolator interface.
      */
-    LagrangeInterpolator()
+    explicit LagrangeInterpolator(IdxRange<InterpGrid> idx_range = IdxRange<InterpGrid> {})
         : m_min_extrapolation(
                 get_extrapolation<MinExtrapRule, CoeffGridType, DataType, Basis>(Extremity::FRONT))
         , m_max_extrapolation(

@@ -147,3 +147,49 @@ inline IdxRange<Grid1D> init_pseudo_uniform_spline_dependent_idx_range(
     IdxRange<Grid1D> interpolation_idx_range(InterpPointInitMethod::template get_domain<Grid1D>());
     return interpolation_idx_range;
 }
+
+
+/**
+ * Initialise an index range which will serve as an interpolation index range for splines.
+ *
+ * The index range is initialised using information from an input yaml file.
+ * If the B-splines are uniform then the information to be read is:
+ * - .SplineMesh.\<mesh_identifier\>_min
+ * - .SplineMesh.\<mesh_identifier\>_max
+ * - .SplineMesh.\<mesh_identifier\>_ncells
+ *
+ * If the B-splines are non-uniform then the information to be read is:
+ * - .SplineMesh.\<mesh_identifier\>_MeshFile
+ *
+ * This string indicates the name of a file which contains the knots of the bspline.
+ *
+ * This information is used to initialise the B-splines. The interpolation index range
+ * is then created using the specified method.
+ */
+template <class Grid1D, class Lagrange>
+inline IdxRange<Grid1D> init_lagrange_dependent_idx_range(
+        PC_tree_t const& conf_gyselalibxx,
+        std::string const& mesh_identifier)
+{
+    using Dim = typename Grid1D::continuous_dimension_type;
+    using Coord1D = Coord<Dim>;
+
+    IdxRange<Grid1D> interpolation_idx_range;
+
+    if constexpr (Lagrange::is_uniform()) {
+        // If uniform Lagrange interpolation is used and interpolation points are calculated from them
+        Coord1D min(PCpp_double(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_min"));
+        Coord1D max(PCpp_double(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_max"));
+        IdxStep<Grid1D> ncells(PCpp_int(conf_gyselalibxx, ".Mesh." + mesh_identifier + "_ncells"));
+        ddc::init_discrete_space<Grid1D>(Grid1D::template init<Grid1D>(min, max, ncells + 1));
+        interpolation_idx_range = IdxRange<Grid1D>(Idx<Grid1D> {0}, ncells + 1);
+    } else {
+        std::vector<Coord1D> breakpoints;
+        PDI_get_arrays("read_" + mesh_identifier, "breakpoints_" + mesh_identifier, breakpoints);
+        ddc::init_discrete_space<Grid1D>(Grid1D::template init<Grid1D>(breakpoints));
+        interpolation_idx_range
+                = IdxRange<Grid1D>(IdxRange<Grid1D> {0}, IdxStep<Grid1D> {breakpoints.size()});
+    }
+    ddc::init_discrete_space<Lagrange>(interpolation_idx_range);
+    return interpolation_idx_range.remove_last(IdxStep<Grid1D> {static_cast<int>(Dim::PERIODIC)});
+}

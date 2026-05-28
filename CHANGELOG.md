@@ -25,6 +25,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add support for arbitrary precision quadrature.
 - Add support for arbitrary precision norm calculations.
 - Add an element-wise version of `SplinePolarFootFinder` to reduce memory consumption.
+- Add a `landau4d_fft_lagrange` target for 3D Landau damping with Lagrange interpolation.
+- Add an optional `IdxRange` argument to the constructor of `LagrangeInterpolator`.
+- Add a new `init_lagrange_dependent_idx_range` method.
 
 ### Fixed
 
@@ -62,6 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `polarpoissonlikesolver.hpp` -> `polar_spline_fem_poisson_like_solver.hpp`.
 - Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.
 - Prefixed the name of the Kokkos region with "(GSLX)"
+- Use Simpson quadrature for XYVxVy Landau damping.
 
 ### Deprecated
 

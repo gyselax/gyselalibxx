@@ -230,11 +230,6 @@ TYPED_TEST(LagrangeNonPeriodicEvaluatorFixture, ExactPolynomialInterpolation)
 
         ddc::parallel_deepcopy(get_field(function_values_host), get_const_field(function_values));
 
-        int falling_factorial(1);
-        for (int k(0); k < n_deriv; ++k) {
-            falling_factorial *= (degree + 1 - k);
-        }
-
         ddc::host_for_each(get_idx_range(test_coords_host_alloc), [&](Idx<GridX> idx) {
             double tolerance = factorial(n_deriv) // max_norm
                                * TOL

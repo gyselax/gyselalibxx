@@ -94,6 +94,7 @@ using DVectorFieldMemXY = VectorFieldMemXY<double>;
 
 template <class ElementType>
 using FieldMemVy = FieldMem<ElementType, IdxRangeVy>;
+using DFieldMemVy = FieldMemVy<double>;
 
 template <class ElementType>
 using FieldMemVxVy = FieldMem<ElementType, IdxRangeVxVy>;
