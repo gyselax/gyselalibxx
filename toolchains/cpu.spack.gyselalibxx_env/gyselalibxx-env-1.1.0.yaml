@@ -21,8 +21,11 @@ spack:
     - 'pdiplugin-set-value@1.10.1:1.10'
     - 'pdiplugin-trace@1.10.1:1.10'
     - 'python@3.13'
+  - linux-packages:
+      - 'pdiplugin-pycall'
+    when: platform!="darwin"
   - python-packages:
-    - 'py-dask@2024.7'
+    - 'py-dask@2025.7'
     - 'py-h5py@3.12'
     - 'py-imageio@2.35'
     - 'py-matplotlib@3.9'
@@ -35,6 +38,8 @@ spack:
   specs:
   - matrix:
     - [$packages]
+  - matrix:
+    - [$linux-packages]
   - matrix:
     - [$python-packages]
   repos:
@@ -56,7 +61,9 @@ spack:
     mpi:
       require: openmpi@5.0
     pdi:
-      require: ~python
+      require:
+        - spec: ~python
+          when: platform=darwin
     py-dask:
       prefer: ['~dataframe']
     py-pandas:
