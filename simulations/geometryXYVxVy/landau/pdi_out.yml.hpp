@@ -1,9 +1,12 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#define STRINGIFY(s) #s
+#define STRING(s) STRINGIFY(s)
 
-constexpr char const* const PDI_CFG = R"PDI_CFG(
-metadata:
-)PDI_CFG"
+constexpr char const* const PDI_CFG = "types:\n"
+"  real_type: &real_type\n"
+                                      "    type: " STRING(GYSELALIBXX_BUILD_REAL_PRECISION) "\n"
+                                      "metadata:\n"
 #ifdef SPLINE
                                       R"PDI_CFG(
   Nx_spline_cells : int
@@ -14,39 +17,39 @@ metadata:
 #endif
                                       R"PDI_CFG(
   iter : int
-  time_saved : double
+  time_saved : real_type
   nbstep_diag: int
   iter_saved : int
   MeshX_extents: { type: array, subtype: int64, size: 1 }
   MeshX:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$MeshX_extents[0]' ]
   MeshY_extents: { type: array, subtype: int64, size: 1 }
   MeshY:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$MeshY_extents[0]' ]
   MeshVx_extents: { type: array, subtype: int64, size: 1 }
   MeshVx:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$MeshVx_extents[0]' ]
   MeshVy_extents: { type: array, subtype: int64, size: 1 }
   MeshVy:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$MeshVy_extents[0]' ]
   Nkinspecies: int
   fdistribu_charges_extents : { type: array, subtype: int64, size: 1 }
   fdistribu_charges:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$fdistribu_charges_extents[0]' ]
   fdistribu_masses_extents : { type: array, subtype: int64, size: 1 }
   fdistribu_masses:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$fdistribu_masses_extents[0]' ]
 
   #-- Parallel data
@@ -58,16 +61,16 @@ data:
   fdistribu_eq_extents : { type: array, subtype: int64, size: 3 }
   fdistribu_eq:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$fdistribu_eq_extents[0]', '$fdistribu_eq_extents[1]', '$fdistribu_eq_extents[2]' ]
   fdistribu:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$local_fdistribu_extents[0]', '$local_fdistribu_extents[1]', '$local_fdistribu_extents[2]', '$local_fdistribu_extents[3]', '$local_fdistribu_extents[4]' ]
   electrostatic_potential_extents: { type: array, subtype: int64, size: 2 }
   electrostatic_potential:
     type: array
-    subtype: double
+    subtype: real_type
     size: [ '$electrostatic_potential_extents[0]', '$electrostatic_potential_extents[1]' ]
 
 plugins:
@@ -105,7 +108,7 @@ plugins:
       datasets:
         fdistribu:
           type: array
-          subtype: double
+          subtype: real_type
           size: [ '$Nkinspecies', '$MeshX_extents[0]', '$MeshY_extents[0]', '$MeshVx_extents[0]', '$MeshVy_extents[0]' ]
       write:
         time_saved: ~
