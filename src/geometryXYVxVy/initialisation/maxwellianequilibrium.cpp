@@ -51,7 +51,8 @@ MaxwellianEquilibrium MaxwellianEquilibrium::init_from_input(
     host_t<FieldMemSp<Real>> mean_velocity_eq(idx_range_kinsp);
 
     for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
+        PC_tree_t const conf_isp
+                = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp - idx_range_kinsp.front());
 
         density_eq(isp) = PCpp_double(conf_isp, ".density_eq");
         temperature_eq(isp) = PCpp_double(conf_isp, ".temperature_eq");
