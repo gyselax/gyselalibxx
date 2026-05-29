@@ -17,16 +17,6 @@ class MpiScopeGuard
 {
 public:
     /**
-     * @brief Initialises the MPI environment.
-     *
-     * Calls `MPI_Init` with no command-line arguments.
-     *
-     * @note This constructor assumes that MPI has not already been
-     * initialised elsewhere.
-     */
-    MpiScopeGuard() noexcept;
-
-    /**
      * @brief Initialises the MPI environment using command-line arguments.
      *
      * Calls `MPI_Init`, forwarding the provided command-line arguments
