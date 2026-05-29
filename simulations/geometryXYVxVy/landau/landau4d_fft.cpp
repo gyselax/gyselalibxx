@@ -27,6 +27,7 @@
 #include "geometry_xyvxvy.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "mpi_scope_guard.hpp"
 #include "mpichargedensitycalculator.hpp"
 #include "mpisplitvlasovsolver.hpp"
 #include "mpitransposealltoall.hpp"
@@ -63,12 +64,13 @@ int main(int argc, char** argv)
 {
     PC_tree_t conf_gyselalibxx = parse_executable_arguments(argc, argv, params_yaml);
     PC_tree_t conf_pdi = PC_parse_string(PDI_CFG);
-    PC_errhandler(PC_NULL_HANDLER);
-    MPI_Init(&argc, &argv);
-    PDI_init(conf_pdi);
 
+    MpiScopeGuard mpi_scope(argc, argv);
     Kokkos::ScopeGuard kokkos_scope(argc, argv);
     ddc::ScopeGuard ddc_scope(argc, argv);
+
+    PC_errhandler(PC_NULL_HANDLER);
+    PDI_init(conf_pdi);
 
     int rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -227,12 +229,9 @@ int main(int argc, char** argv)
     Real const simulation_time = std::chrono::duration<Real>(end - start).count();
     std::cout << "Simulation time: " << simulation_time << "s\n";
 
-    PC_tree_destroy(&conf_pdi);
-
     PDI_finalize();
 
-    MPI_Finalize();
-
+    PC_tree_destroy(&conf_pdi);
     PC_tree_destroy(&conf_gyselalibxx);
 
     return EXIT_SUCCESS;
