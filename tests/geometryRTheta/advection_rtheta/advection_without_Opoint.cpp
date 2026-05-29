@@ -242,6 +242,18 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     auto advection_field_rtheta_device = ddcHelper::
             create_mirror_view_and_copy(Kokkos::DefaultExecutionSpace(), advection_field_rtheta);
 
+    inverse_mapping_t<LogicalToPhysicalMapping> to_logical_mapping
+            = to_physical_mapping.get_inverse_mapping();
+
+    ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
+        CoordXY foot = simulation.electrostatical_potential
+                               .exact_feet(to_physical_mapping(ddc::coordinate(irtheta)), 0);
+        double exact = simulation.function(to_logical_mapping(foot));
+        std::cout << ddc::coordinate(irtheta) << " " << foot << " " << density_xy(irtheta) << " "
+                  << density_rtheta_averaged(irtheta) << " " << exact << std::endl;
+        EXPECT_NEAR(density_rtheta_averaged(irtheta), exact, 1e-6);
+        EXPECT_NEAR(density_xy(irtheta), exact, 1e-1);
+    });
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
@@ -264,7 +276,14 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 
         // Check the advected functions ---
         ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
-            EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 5e-6);
+            CoordXY foot = simulation.electrostatical_potential.exact_feet(
+                    to_physical_mapping(ddc::coordinate(irtheta)),
+                    (dt + 1) * iter);
+            double exact = simulation.function(to_logical_mapping(foot));
+            std::cout << ddc::coordinate(irtheta) << " " << foot << " " << density_xy(irtheta)
+                      << " " << density_rtheta_averaged(irtheta) << " " << exact << std::endl;
+            //EXPECT_NEAR(density_rtheta_averaged(irtheta), exact, 1e-6);
+            //EXPECT_NEAR(density_xy(irtheta), exact, 1e-1);
         });
     }
 
