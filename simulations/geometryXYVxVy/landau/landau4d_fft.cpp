@@ -27,6 +27,7 @@
 #include "geometry_xyvxvy.hpp"
 #include "input.hpp"
 #include "maxwellianequilibrium.hpp"
+#include "mpi_scope_guard.hpp"
 #include "mpichargedensitycalculator.hpp"
 #include "mpisplitvlasovsolver.hpp"
 #include "mpitransposealltoall.hpp"

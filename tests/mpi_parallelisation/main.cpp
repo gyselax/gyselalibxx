@@ -5,6 +5,8 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
+#include "mpi_scope_guard.hpp"
+
 int main(int argc, char** argv)
 {
     ::testing::InitGoogleMock(&argc, argv);
