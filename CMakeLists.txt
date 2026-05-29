@@ -71,6 +71,7 @@ find_package(Ginkgo 1.8 REQUIRED)
 set(CMAKE_CXX_FLAGS "${GYSELALIBXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_grid xnonperiod_vx_user_defined_grid)
+set(PRECISION_VARIANTS_LIST float double)
 
 ## Get the main code in `src/`
 add_subdirectory(src/)
