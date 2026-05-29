@@ -33,7 +33,7 @@ void MpiChargeDensityCalculator::operator()(DFieldXY rho, DConstFieldSpVxVyXY al
             rho_local.data_handle(),
             rho.data_handle(),
             rho.size(),
-            MPI_type_descriptor_t<double>,
+            MPI_type_descriptor_t<Real>,
             MPI_SUM,
             m_comm);
 
