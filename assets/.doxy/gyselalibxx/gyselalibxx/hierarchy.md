@@ -136,6 +136,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**Moments**](classMoments.md) [_**Moments**_](classMoments.md) _discrete dimension to access constant attributes related to fluid moments._    
     * **struct** [**GridMom**](structGridMom.md) 
 * **class** [**Moments::Impl**](classMoments_1_1Impl.md) [_**Impl**_](classMoments_1_1Impl.md) _object storing attributes in_`MemorySpace` _._
+* **class** [**MpiScopeGuard**](classMpiScopeGuard.md) _RAII wrapper for MPI initialisation and finalisation._ 
 * **class** [**MultipatchConnectivity**](classMultipatchConnectivity.md) _A helper class which provides functionalities to recognise how different patches are connected._ 
 * **class** [**MultipatchType**](classMultipatchType.md) _A class to store several objects that are of a type which is templated by the patch._ 
 * **class** [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md) _A class to call all the builders of all the patches once._ 

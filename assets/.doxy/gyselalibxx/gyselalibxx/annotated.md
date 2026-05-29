@@ -154,6 +154,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**Moments**](classMoments.md) [_**Moments**_](classMoments.md) _discrete dimension to access constant attributes related to fluid moments._    
     * **class** [**Impl**](classMoments_1_1Impl.md) [_**Impl**_](classMoments_1_1Impl.md) _object storing attributes in_`MemorySpace` _._    
 * **class** [**MpiChargeDensityCalculator**](classMpiChargeDensityCalculator.md) _A class which computes charges density with Kokkos._     
+* **class** [**MpiScopeGuard**](classMpiScopeGuard.md) _RAII wrapper for MPI initialisation and finalisation._     
 * **class** [**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting on an MPI distributed mesh._     
 * **struct** [**Mu**](structMu.md) _Define non periodic magnetic momentum_ \(\mu\) _._    
 * **class** [**MultipatchConnectivity**](classMultipatchConnectivity.md) _A helper class which provides functionalities to recognise how different patches are connected._     
@@ -262,10 +263,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d96.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d226.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d228.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d230.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d232.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d228.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d230.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d232.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d234.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     

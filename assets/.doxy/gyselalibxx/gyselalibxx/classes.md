@@ -337,6 +337,7 @@
 * [**MpiChargeDensityCalculator**](classMpiChargeDensityCalculator.md)
 * [**MPIDim**](structMPIDim.md)
 * [**MPILayout**](classMPILayout.md)
+* [**MpiScopeGuard**](classMpiScopeGuard.md)
 * [**MpiSplitVlasovSolver**](classMpiSplitVlasovSolver.md)
 * [**MPITransposeAllToAll**](classMPITransposeAllToAll.md)
 * [**Mu**](structMu.md)

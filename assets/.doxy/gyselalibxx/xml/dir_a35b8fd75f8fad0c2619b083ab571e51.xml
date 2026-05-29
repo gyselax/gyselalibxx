@@ -4,6 +4,8 @@
     <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation</compoundname>
     <innerfile refid="impilayout_8hpp">impilayout.hpp</innerfile>
     <innerfile refid="impitranspose_8hpp">impitranspose.hpp</innerfile>
+    <innerfile refid="mpi__scope__guard_8cpp">mpi_scope_guard.cpp</innerfile>
+    <innerfile refid="mpi__scope__guard_8hpp">mpi_scope_guard.hpp</innerfile>
     <innerfile refid="mpilayout_8hpp">mpilayout.hpp</innerfile>
     <innerfile refid="mpitools_8hpp">mpitools.hpp</innerfile>
     <innerfile refid="mpitransposealltoall_8hpp">mpitransposealltoall.hpp</innerfile>

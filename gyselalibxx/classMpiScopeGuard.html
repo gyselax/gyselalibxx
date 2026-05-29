@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp} - GyselalibX</title>
+    <title>Class MpiScopeGuard - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d226.md";
+        var mkdocs_page_name = "Class MpiScopeGuard";
+        var mkdocs_page_input_path = "gyselalibxx/classMpiScopeGuard.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -550,9 +550,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</li>
+      <li class="breadcrumb-item active">Class MpiScopeGuard</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d226.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classMpiScopeGuard.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -560,10 +560,113 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadraturegauss_legendre_integrationcpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d226.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp}</strong></a></p>
+                <div><h1 id="class-mpiscopeguard">Class MpiScopeGuard</h1>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classMpiScopeGuard.html"><strong>MpiScopeGuard</strong></a></p>
+<p><em>RAII wrapper for MPI initialisation and finalisation.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;mpi_scope_guard.hpp&gt;</code></li>
+</ul>
+<h2 id="public-functions">Public Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-mpiscopeguard-13"><strong>MpiScopeGuard</strong></a> (int &amp; argc, char **&amp; argv) noexcept<br><em>Initialises the MPI environment using command-line arguments.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-mpiscopeguard-23"><strong>MpiScopeGuard</strong></a> (<a href="classMpiScopeGuard.html"><strong>MpiScopeGuard</strong></a> const &amp; rhs) = delete<br><em>Deleted copy constructor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-mpiscopeguard-33"><strong>MpiScopeGuard</strong></a> (<a href="classMpiScopeGuard.html"><strong>MpiScopeGuard</strong></a> &amp;&amp; rhs) noexcept<br><em>Deleted move constructor.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classMpiScopeGuard.html"><strong>MpiScopeGuard</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator=</strong></a> (<a href="classMpiScopeGuard.html"><strong>MpiScopeGuard</strong></a> const &amp; rhs) = delete<br><em>Deleted copy assignment operator.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"><a href="classMpiScopeGuard.html"><strong>MpiScopeGuard</strong></a> &amp;</td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator=</strong></a> (<a href="classMpiScopeGuard.html"><strong>MpiScopeGuard</strong></a> &amp;&amp; rhs) noexcept<br><em>Deleted move assignment operator.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-mpiscopeguard"><strong>~MpiScopeGuard</strong></a> () noexcept<br><em>Finalises the MPI environment.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p>This class manages the lifetime of the MPI environment using the Resource Acquisition Is Initialisation (RAII) idiom. Constructing an instance initialises MPI, and destroying the instance finalises MPI.</p>
+<p>The class is non-copyable and non-movable to ensure unique ownership of the MPI runtime state within a process. </p>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-mpiscopeguard-13">function MpiScopeGuard [1/3]</h3>
+<p><em>Initialises the MPI environment using command-line arguments.</em> </p>
+<pre><code class="language-C++">MpiScopeGuard::MpiScopeGuard (
+    int &amp; argc,
+    char **&amp; argv
+) noexcept
+</code></pre>
+<p>Calls <code>MPI_Init</code>, forwarding the provided command-line arguments to the MPI implementation.</p>
+<p><strong>Parameters:</strong></p>
+<ul>
+<li><code>argc</code> Number of command-line arguments. </li>
+<li><code>argv</code> Array of command-line argument strings.</li>
+</ul>
+<p><strong>Note:</strong></p>
+<p>The MPI implementation may modify <code>argc</code> and <code>argv</code>. </p>
+<p><strong>Note:</strong></p>
+<p>This constructor assumes that MPI has not already been initialised elsewhere. </p>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/gauss_legendre_integration.cpp</code></p></div>
+
+<h3 id="function-mpiscopeguard-23">function MpiScopeGuard [2/3]</h3>
+<p><em>Deleted copy constructor.</em> </p>
+<pre><code class="language-C++">MpiScopeGuard::MpiScopeGuard (
+    MpiScopeGuard const &amp; rhs
+) = delete
+</code></pre>
+<p>Copying an <code>MpiScopeGuard</code> is disallowed because MPI lifetime ownership must remain unique. </p>
+<hr>
+
+<h3 id="function-mpiscopeguard-33">function MpiScopeGuard [3/3]</h3>
+<p><em>Deleted move constructor.</em> </p>
+<pre><code class="language-C++">MpiScopeGuard::MpiScopeGuard (
+    MpiScopeGuard &amp;&amp; rhs
+) noexcept
+</code></pre>
+<p>Moving an <code>MpiScopeGuard</code> is disallowed because MPI lifetime ownership cannot be transferred safely. </p>
+<hr>
+
+<h3 id="function-operator">function operator=</h3>
+<p><em>Deleted copy assignment operator.</em> </p>
+<pre><code class="language-C++">MpiScopeGuard &amp; MpiScopeGuard::operator= (
+    MpiScopeGuard const &amp; rhs
+) = delete
+</code></pre>
+<hr>
+
+<h3 id="function-operator_1">function operator=</h3>
+<p><em>Deleted move assignment operator.</em> </p>
+<pre><code class="language-C++">MpiScopeGuard &amp; MpiScopeGuard::operator= (
+    MpiScopeGuard &amp;&amp; rhs
+) noexcept
+</code></pre>
+<hr>
+
+<h3 id="function-mpiscopeguard">function ~MpiScopeGuard</h3>
+<p><em>Finalises the MPI environment.</em> </p>
+<pre><code class="language-C++">MpiScopeGuard::~MpiScopeGuard () noexcept
+</code></pre>
+<p>Calls <code>MPI_Finalize</code> if MPI was successfully initialised by this guard instance. </p>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp</code></p></div>
               
             </div>
           </div><footer>

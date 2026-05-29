@@ -1,0 +1,165 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classMpiScopeGuard" kind="class" language="C++" prot="public">
+    <compoundname>MpiScopeGuard</compoundname>
+    <includes refid="mpi__scope__guard_8hpp" local="no">mpi_scope_guard.hpp</includes>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classMpiScopeGuard_1a6cce09ca9dcd8c9d2d21a54c1b9c2639" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>MpiScopeGuard::MpiScopeGuard</definition>
+        <argsstring>(int &amp;argc, char **&amp;argv) noexcept</argsstring>
+        <name>MpiScopeGuard</name>
+        <qualifiedname>MpiScopeGuard::MpiScopeGuard</qualifiedname>
+        <param>
+          <type>int &amp;</type>
+          <declname>argc</declname>
+        </param>
+        <param>
+          <type>char **&amp;</type>
+          <declname>argv</declname>
+        </param>
+        <briefdescription>
+<para>Initialises the MPI environment using command-line arguments. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calls <computeroutput>MPI_Init</computeroutput>, forwarding the provided command-line arguments to the MPI implementation.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername>argc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Number of command-line arguments. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>argv</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>Array of command-line argument strings.</para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="note"><para>The MPI implementation may modify <computeroutput>argc</computeroutput> and <computeroutput>argv</computeroutput>. </para>
+</simplesect>
+<simplesect kind="note"><para>This constructor assumes that MPI has not already been initialised elsewhere. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp" line="32" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.cpp" bodystart="7" bodyend="10"/>
+      </memberdef>
+      <memberdef kind="function" id="classMpiScopeGuard_1a6d70d4b4d07b8d0205fd843938629adb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>MpiScopeGuard::MpiScopeGuard</definition>
+        <argsstring>(MpiScopeGuard const &amp;rhs)=delete</argsstring>
+        <name>MpiScopeGuard</name>
+        <qualifiedname>MpiScopeGuard::MpiScopeGuard</qualifiedname>
+        <param>
+          <type><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref> const &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>Deleted copy constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Copying an <computeroutput><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref></computeroutput> is disallowed because MPI lifetime ownership must remain unique. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp" line="40" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMpiScopeGuard_1ae3a4368b1a9d7e66123c4ecaaaa025db" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>MpiScopeGuard::MpiScopeGuard</definition>
+        <argsstring>(MpiScopeGuard &amp;&amp;rhs) noexcept=delete</argsstring>
+        <name>MpiScopeGuard</name>
+        <qualifiedname>MpiScopeGuard::MpiScopeGuard</qualifiedname>
+        <param>
+          <type><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref> &amp;&amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>Deleted move constructor. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Moving an <computeroutput><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref></computeroutput> is disallowed because MPI lifetime ownership cannot be transferred safely. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp" line="48" column="5"/>
+      </memberdef>
+      <memberdef kind="function" id="classMpiScopeGuard_1acd9af28359469819e09d14ab75e47b41" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type></type>
+        <definition>MpiScopeGuard::~MpiScopeGuard</definition>
+        <argsstring>() noexcept</argsstring>
+        <name>~MpiScopeGuard</name>
+        <qualifiedname>MpiScopeGuard::~MpiScopeGuard</qualifiedname>
+        <briefdescription>
+<para>Finalises the MPI environment. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Calls <computeroutput>MPI_Finalize</computeroutput> if MPI was successfully initialised by this guard instance. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp" line="56" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.cpp" bodystart="12" bodyend="15"/>
+      </memberdef>
+      <memberdef kind="function" id="classMpiScopeGuard_1a83fa63f40cc0df2dc0dbb6e4d7a90193" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref> &amp;</type>
+        <definition>MpiScopeGuard &amp; MpiScopeGuard::operator=</definition>
+        <argsstring>(MpiScopeGuard const &amp;rhs)=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>MpiScopeGuard::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref> const &amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>Deleted copy assignment operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp" line="61" column="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classMpiScopeGuard_1acebab64c9a9469f80d14ddbb35ec6301" prot="public" static="no" const="no" explicit="no" inline="no" noexcept="yes" virt="non-virtual">
+        <type><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref> &amp;</type>
+        <definition>MpiScopeGuard &amp; MpiScopeGuard::operator=</definition>
+        <argsstring>(MpiScopeGuard &amp;&amp;rhs) noexcept=delete</argsstring>
+        <name>operator=</name>
+        <qualifiedname>MpiScopeGuard::operator=</qualifiedname>
+        <param>
+          <type><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref> &amp;&amp;</type>
+          <declname>rhs</declname>
+        </param>
+        <briefdescription>
+<para>Deleted move assignment operator. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp" line="66" column="19"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>RAII wrapper for MPI initialisation and finalisation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>This class manages the lifetime of the MPI environment using the Resource Acquisition Is Initialisation (RAII) idiom. Constructing an instance initialises MPI, and destroying the instance finalises MPI.</para>
+<para>The class is non-copyable and non-movable to ensure unique ownership of the MPI runtime state within a process. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp" bodystart="17" bodyend="67"/>
+    <listofallmembers>
+      <member refid="classMpiScopeGuard_1a6cce09ca9dcd8c9d2d21a54c1b9c2639" prot="public" virt="non-virtual"><scope>MpiScopeGuard</scope><name>MpiScopeGuard</name></member>
+      <member refid="classMpiScopeGuard_1a6d70d4b4d07b8d0205fd843938629adb" prot="public" virt="non-virtual"><scope>MpiScopeGuard</scope><name>MpiScopeGuard</name></member>
+      <member refid="classMpiScopeGuard_1ae3a4368b1a9d7e66123c4ecaaaa025db" prot="public" virt="non-virtual"><scope>MpiScopeGuard</scope><name>MpiScopeGuard</name></member>
+      <member refid="classMpiScopeGuard_1a83fa63f40cc0df2dc0dbb6e4d7a90193" prot="public" virt="non-virtual"><scope>MpiScopeGuard</scope><name>operator=</name></member>
+      <member refid="classMpiScopeGuard_1acebab64c9a9469f80d14ddbb35ec6301" prot="public" virt="non-virtual"><scope>MpiScopeGuard</scope><name>operator=</name></member>
+      <member refid="classMpiScopeGuard_1acd9af28359469819e09d14ab75e47b41" prot="public" virt="non-virtual"><scope>MpiScopeGuard</scope><name>~MpiScopeGuard</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

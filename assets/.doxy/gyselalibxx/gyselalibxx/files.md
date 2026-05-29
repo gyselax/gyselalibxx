@@ -239,6 +239,8 @@ Here is a list of all files with brief descriptions:
     * **dir** [**mpi\_parallelisation**](dir_a35b8fd75f8fad0c2619b083ab571e51.md)     
         * **file** [**impilayout.hpp**](impilayout_8hpp.md)     
         * **file** [**impitranspose.hpp**](impitranspose_8hpp.md)     
+        * **file** [**mpi\_scope\_guard.cpp**](mpi__scope__guard_8cpp.md) 
+        * **file** [**mpi\_scope\_guard.hpp**](mpi__scope__guard_8hpp.md)     
         * **file** [**mpilayout.hpp**](mpilayout_8hpp.md)     
         * **file** [**mpitools.hpp**](mpitools_8hpp.md)     
         * **file** [**mpitransposealltoall.hpp**](mpitransposealltoall_8hpp.md)     

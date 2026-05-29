@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="mpi__scope__guard_8hpp" kind="file" language="C++">
+    <compoundname>mpi_scope_guard.hpp</compoundname>
+    <includedby refid="mpi__scope__guard_8cpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.cpp</includedby>
+    <innerclass refid="classMpiScopeGuard" prot="public">MpiScopeGuard</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>SPDX-License-Identifier:<sp/>MIT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#pragma<sp/>once</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="classMpiScopeGuard" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref></highlight></codeline>
+<codeline lineno="17"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">&amp;<sp/>argc,<sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal">**&amp;<sp/>argv)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="40" refid="classMpiScopeGuard_1a6d70d4b4d07b8d0205fd843938629adb" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMpiScopeGuard_1a6d70d4b4d07b8d0205fd843938629adb" kindref="member">MpiScopeGuard</ref>(<ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal">&amp;<sp/>rhs)<sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48" refid="classMpiScopeGuard_1ae3a4368b1a9d7e66123c4ecaaaa025db" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMpiScopeGuard_1ae3a4368b1a9d7e66123c4ecaaaa025db" kindref="member">MpiScopeGuard</ref>(<ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref>&amp;&amp;<sp/>rhs)<sp/></highlight><highlight class="keyword">noexcept</highlight><highlight class="normal"><sp/>=<sp/></highlight><highlight class="keyword">delete</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMpiScopeGuard_1acd9af28359469819e09d14ab75e47b41" kindref="member">~MpiScopeGuard</ref>()<sp/>noexcept;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="61" refid="classMpiScopeGuard_1a83fa63f40cc0df2dc0dbb6e4d7a90193" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref>&amp;<sp/>operator=(<ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref><sp/>const&amp;<sp/>rhs)<sp/>=<sp/>delete;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight></codeline>
+<codeline lineno="66" refid="classMpiScopeGuard_1acebab64c9a9469f80d14ddbb35ec6301" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref>&amp;<sp/>operator=(<ref refid="classMpiScopeGuard" kindref="compound">MpiScopeGuard</ref>&amp;&amp;<sp/>rhs)<sp/>noexcept<sp/>=<sp/>delete;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal">};</highlight></codeline>
+    </programlisting>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/mpi_parallelisation/mpi_scope_guard.hpp"/>
+  </compounddef>
+</doxygen>

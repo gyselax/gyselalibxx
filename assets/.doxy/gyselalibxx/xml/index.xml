@@ -2103,6 +2103,14 @@
     <member refid="classMPILayout_1ab32c4d3ad1b3e2475033c0d08bb014e6" kind="function"><name>internal_distribute_idx_range</name></member>
     <member refid="classMPILayout_1afc8ae4453ec8db31580d3a6bf4974fa1" kind="function"><name>internal_distribute_idx_range</name></member>
   </compound>
+  <compound refid="classMpiScopeGuard" kind="class"><name>MpiScopeGuard</name>
+    <member refid="classMpiScopeGuard_1a6cce09ca9dcd8c9d2d21a54c1b9c2639" kind="function"><name>MpiScopeGuard</name></member>
+    <member refid="classMpiScopeGuard_1a6d70d4b4d07b8d0205fd843938629adb" kind="function"><name>MpiScopeGuard</name></member>
+    <member refid="classMpiScopeGuard_1ae3a4368b1a9d7e66123c4ecaaaa025db" kind="function"><name>MpiScopeGuard</name></member>
+    <member refid="classMpiScopeGuard_1acd9af28359469819e09d14ab75e47b41" kind="function"><name>~MpiScopeGuard</name></member>
+    <member refid="classMpiScopeGuard_1a83fa63f40cc0df2dc0dbb6e4d7a90193" kind="function"><name>operator=</name></member>
+    <member refid="classMpiScopeGuard_1acebab64c9a9469f80d14ddbb35ec6301" kind="function"><name>operator=</name></member>
+  </compound>
   <compound refid="classMpiSplitVlasovSolver" kind="class"><name>MpiSplitVlasovSolver</name>
     <member refid="classMpiSplitVlasovSolver_1a41a08d6a362be18fc11fdc6c097af28f" kind="variable"><name>m_advec_x</name></member>
     <member refid="classMpiSplitVlasovSolver_1abe3defc238d1ca15c03eb5ecec763bc9" kind="variable"><name>m_advec_y</name></member>
@@ -3338,13 +3346,13 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d226" kind="namespace"><name>@226</name>
-  </compound>
   <compound refid="namespace_0d228" kind="namespace"><name>@228</name>
   </compound>
   <compound refid="namespace_0d230" kind="namespace"><name>@230</name>
   </compound>
   <compound refid="namespace_0d232" kind="namespace"><name>@232</name>
+  </compound>
+  <compound refid="namespace_0d234" kind="namespace"><name>@234</name>
   </compound>
   <compound refid="namespace_0d96" kind="namespace"><name>@96</name>
   </compound>
@@ -4271,6 +4279,10 @@
   <compound refid="impilayout_8hpp" kind="file"><name>impilayout.hpp</name>
   </compound>
   <compound refid="impitranspose_8hpp" kind="file"><name>impitranspose.hpp</name>
+  </compound>
+  <compound refid="mpi__scope__guard_8cpp" kind="file"><name>mpi_scope_guard.cpp</name>
+  </compound>
+  <compound refid="mpi__scope__guard_8hpp" kind="file"><name>mpi_scope_guard.hpp</name>
   </compound>
   <compound refid="mpilayout_8hpp" kind="file"><name>mpilayout.hpp</name>
   </compound>
