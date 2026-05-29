@@ -54,7 +54,7 @@ Inherited by the following classes: [PredCorr](classPredCorr.md),  [PredCorr](cl
 | Type | Name |
 | ---: | :--- |
 | virtual DFieldSpXVx | [**operator()**](#function-operator) (DFieldSpXVx allfdistribu, double time\_start, double dt, int steps=1) const = 0<br>_Operator for solving the Boltzmann-Poisson system._  |
-| virtual DFieldSpVxVyXY | [**operator()**](#function-operator_1) (DFieldSpVxVyXY allfdistribu, double dt, int steps=1) const = 0<br>_Solves the Vlasov-Poisson system._  |
+| virtual DFieldSpVxVyXY | [**operator()**](#function-operator_1) (DFieldSpVxVyXY allfdistribu, Real dt, int steps=1) const = 0<br>_Solves the Vlasov-Poisson system._  |
 | virtual  | [**~ITimeSolver**](#function-itimesolver-12) () = default<br> |
 | virtual  | [**~ITimeSolver**](#function-itimesolver-12) () = default<br> |
 
@@ -143,7 +143,7 @@ _Solves the Vlasov-Poisson system._
 ```C++
 virtual DFieldSpVxVyXY ITimeSolver::operator() (
     DFieldSpVxVyXY allfdistribu,
-    double dt,
+    Real dt,
     int steps=1
 ) const = 0
 ```

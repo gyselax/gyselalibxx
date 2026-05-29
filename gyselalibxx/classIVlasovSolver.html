@@ -578,7 +578,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;">virtual DFieldSpVxVyXY</td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldSpVxVyXY allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldXY</strong></a> efield, double dt) const = 0<br><em>Solves a Vlasov equation on a timestep dt.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (DFieldSpVxVyXY allfdistribu, <a href="classVectorField.html"><strong>DVectorConstFieldXY</strong></a> efield, Real dt) const = 0<br><em>Solves a Vlasov equation on a timestep dt.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">virtual</td>
@@ -592,7 +592,7 @@
 <pre><code class="language-C++">virtual DFieldSpVxVyXY IVlasovSolver::operator() (
     DFieldSpVxVyXY allfdistribu,
     DVectorConstFieldXY efield,
-    double dt
+    Real dt
 ) const = 0
 </code></pre>
 <p><strong>Parameters:</strong></p>

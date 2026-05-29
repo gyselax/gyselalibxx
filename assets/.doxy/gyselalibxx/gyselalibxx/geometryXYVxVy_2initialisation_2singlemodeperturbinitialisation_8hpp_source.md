@@ -31,7 +31,7 @@ public:
     void perturbation_initialisation(
             DFieldXY perturbation,
             int const perturb_mode,
-            double const perturb_amplitude) const;
+            Real const perturb_amplitude) const;
 
     SingleModePerturbInitialisation(
             DConstFieldSpVxVy fequilibrium,

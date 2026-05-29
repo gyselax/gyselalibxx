@@ -19,25 +19,25 @@
 
 class SplitVlasovSolver : public IVlasovSolver
 {
-    IAdvectionSpatial<GeometryVxVyXY, GridX> const& m_advec_x;
-    IAdvectionSpatial<GeometryVxVyXY, GridY> const& m_advec_y;
+    IAdvectionSpatial<GeometryVxVyXY, GridX, Real> const& m_advec_x;
+    IAdvectionSpatial<GeometryVxVyXY, GridY, Real> const& m_advec_y;
 
-    IAdvectionVelocity<GeometryVxVyXY, GridVx> const& m_advec_vx;
-    IAdvectionVelocity<GeometryVxVyXY, GridVy> const& m_advec_vy;
+    IAdvectionVelocity<GeometryVxVyXY, GridVx, Real> const& m_advec_vx;
+    IAdvectionVelocity<GeometryVxVyXY, GridVy, Real> const& m_advec_vy;
 
 public:
     SplitVlasovSolver(
-            IAdvectionSpatial<GeometryVxVyXY, GridX> const& advec_x,
-            IAdvectionSpatial<GeometryVxVyXY, GridY> const& advec_y,
-            IAdvectionVelocity<GeometryVxVyXY, GridVx> const& advec_vx,
-            IAdvectionVelocity<GeometryVxVyXY, GridVy> const& advec_vy);
+            IAdvectionSpatial<GeometryVxVyXY, GridX, Real> const& advec_x,
+            IAdvectionSpatial<GeometryVxVyXY, GridY, Real> const& advec_y,
+            IAdvectionVelocity<GeometryVxVyXY, GridVx, Real> const& advec_vx,
+            IAdvectionVelocity<GeometryVxVyXY, GridVy, Real> const& advec_vy);
 
     ~SplitVlasovSolver() override = default;
 
     DFieldSpVxVyXY operator()(
             DFieldSpVxVyXY allfdistribu,
             DVectorConstFieldXY electric_field,
-            double dt) const override;
+            Real dt) const override;
 };
 ```
 

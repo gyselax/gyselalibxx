@@ -229,19 +229,19 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/time_integration/predcorr.hpp" line="36" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classPredCorr_1a3b8e02177cabfc230b09eb5d5b49c084" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classPredCorr_1a3db746e672e4a5f94aa4360901b3820e" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>DFieldSpVxVyXY</type>
         <definition>DFieldSpVxVyXY PredCorr::operator()</definition>
-        <argsstring>(DFieldSpVxVyXY allfdistribu, double dt, int steps=1) const override</argsstring>
+        <argsstring>(DFieldSpVxVyXY allfdistribu, Real dt, int steps=1) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>PredCorr::operator()</qualifiedname>
-        <reimplements refid="classITimeSolver_1a1848f9cee5d5c8e3c69a133cb17d0196">operator()</reimplements>
+        <reimplements refid="classITimeSolver_1aa29be3ab42e70da0b6a24ebecf3d1f64">operator()</reimplements>
         <param>
           <type>DFieldSpVxVyXY</type>
           <declname>allfdistribu</declname>
         </param>
         <param>
-          <type>double</type>
+          <type>Real</type>
           <declname>dt</declname>
         </param>
         <param>
@@ -329,7 +329,7 @@
       <member refid="classPredCorr_1abd921586867be022e135265c42f30b4d" prot="private" virt="non-virtual"><scope>PredCorr</scope><name>m_poisson_solver</name></member>
       <member refid="classPredCorr_1acfc4ace8adf60a9e607fbc970a521f54" prot="private" virt="non-virtual"><scope>PredCorr</scope><name>m_vlasov_solver</name></member>
       <member refid="classPredCorr_1a2a3c70566fbfaef1d04bb540c980e7d1" prot="public" virt="virtual"><scope>PredCorr</scope><name>operator()</name></member>
-      <member refid="classPredCorr_1a3b8e02177cabfc230b09eb5d5b49c084" prot="public" virt="virtual"><scope>PredCorr</scope><name>operator()</name></member>
+      <member refid="classPredCorr_1a3db746e672e4a5f94aa4360901b3820e" prot="public" virt="virtual"><scope>PredCorr</scope><name>operator()</name></member>
       <member refid="classPredCorr_1a1c82ebed9dc0ae86a59c279053287061" prot="public" virt="non-virtual"><scope>PredCorr</scope><name>PredCorr</name></member>
       <member refid="classPredCorr_1afc97ef53ef6d27e3dae91eafbf3deb6a" prot="public" virt="non-virtual"><scope>PredCorr</scope><name>PredCorr</name></member>
       <member refid="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" prot="public" virt="virtual"><scope>PredCorr</scope><name>~ITimeSolver</name></member>

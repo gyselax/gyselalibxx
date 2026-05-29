@@ -98,7 +98,7 @@ Inherits the following classes: [IInitialisation](classIInitialisation.md),  [II
 | virtual DFieldSpXVx | [**operator()**](#function-operator) (DFieldSpXVx allfdistribu) override const<br>_Initialises the distribution function as as a perturbed Maxwellian._  |
 | virtual DFieldSpXYVxVy | [**operator()**](#function-operator_1) (DFieldSpXYVxVy allfdistribu) override const<br>_Initialises the distribution function as as a perturbed Maxwellian._  |
 |  void | [**perturbation\_initialisation**](#function-perturbation_initialisation-12) (DFieldX perturbation, int const perturb\_mode, double const perturb\_amplitude) const<br>_Initialisation of the perturbation._  |
-|  void | [**perturbation\_initialisation**](#function-perturbation_initialisation-22) (DFieldXY perturbation, int const perturb\_mode, double const perturb\_amplitude) const<br>_Initialisation of the perturbation._  |
+|  void | [**perturbation\_initialisation**](#function-perturbation_initialisation-22) (DFieldXY perturbation, int const perturb\_mode, Real const perturb\_amplitude) const<br>_Initialisation of the perturbation._  |
 |   | [**~SingleModePerturbInitialisation**](#function-singlemodeperturbinitialisation-12) () override<br> |
 |   | [**~SingleModePerturbInitialisation**](#function-singlemodeperturbinitialisation-12) () override<br> |
 
@@ -402,7 +402,7 @@ _Initialisation of the perturbation._
 void SingleModePerturbInitialisation::perturbation_initialisation (
     DFieldXY perturbation,
     int const perturb_mode,
-    double const perturb_amplitude
+    Real const perturb_amplitude
 ) const
 ```
 

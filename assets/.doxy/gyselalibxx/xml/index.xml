@@ -386,7 +386,7 @@
   </compound>
   <compound refid="classChargeDensityCalculator" kind="class"><name>ChargeDensityCalculator</name>
     <member refid="classChargeDensityCalculator_1ac662eaddab6ba021670646cc2643fb0a" kind="variable"><name>m_quadrature</name></member>
-    <member refid="classChargeDensityCalculator_1a20dcf32beedeac15d43e686f6a6cfcf3" kind="variable"><name>m_quadrature</name></member>
+    <member refid="classChargeDensityCalculator_1a9370b85978661d082ffeb7dd817b7930" kind="variable"><name>m_quadrature</name></member>
     <member refid="classChargeDensityCalculator_1ae129d33bd6dcb7a675e664a53c0a4747" kind="function"><name>ChargeDensityCalculator</name></member>
     <member refid="classChargeDensityCalculator_1a164ef05aba41f41d7862c1aa216c154e" kind="function"><name>operator()</name></member>
     <member refid="classChargeDensityCalculator_1a384d7a001ede75b2ccf2053e299ceba9" kind="function"><name>ChargeDensityCalculator</name></member>
@@ -1685,7 +1685,7 @@
     <member refid="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" kind="function"><name>~ITimeSolver</name></member>
     <member refid="classITimeSolver_1abfdecd652433d1ae388a6489da2ed865" kind="function"><name>operator()</name></member>
     <member refid="classITimeSolver_1a0b6b8b4a38bfe8eb0763c65268a10379" kind="function"><name>~ITimeSolver</name></member>
-    <member refid="classITimeSolver_1a1848f9cee5d5c8e3c69a133cb17d0196" kind="function"><name>operator()</name></member>
+    <member refid="classITimeSolver_1aa29be3ab42e70da0b6a24ebecf3d1f64" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classITimeSolverRTheta" kind="class"><name>ITimeSolverRTheta</name>
     <member refid="classITimeSolverRTheta_1afc3a0e07f492d601b0793a9dfba47bfb" kind="function"><name>~ITimeSolverRTheta</name></member>
@@ -1707,7 +1707,7 @@
   </compound>
   <compound refid="classIVlasovSolver" kind="class"><name>IVlasovSolver</name>
     <member refid="classIVlasovSolver_1a10c7130ab540e2f3502ecea9bf67da1e" kind="function"><name>~IVlasovSolver</name></member>
-    <member refid="classIVlasovSolver_1a83a3669cbcd898b25e7e5613030b9fb9" kind="function"><name>operator()</name></member>
+    <member refid="classIVlasovSolver_1a681dad83ed77cef62729322bc51f4ba8" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classKelvinHelmholtzInstabilityInitialisation" kind="class"><name>KelvinHelmholtzInstabilityInitialisation</name>
     <member refid="classKelvinHelmholtzInstabilityInitialisation_1aea24b966a750ad0e02d276c3df240d96" kind="variable"><name>m_epsilon</name></member>
@@ -2035,6 +2035,9 @@
     <member refid="classMaxwellianEquilibrium_1a732d1afffa2fbc4820336c2fed51abae" kind="variable"><name>m_temperature_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1aba59ca1bbf63e333dd3dd1eb04fe943c" kind="variable"><name>m_mean_velocity_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1a412ad9eaf8136221eb408893ab486fc8" kind="variable"><name>m_magnetic_field</name></member>
+    <member refid="classMaxwellianEquilibrium_1ac3650e893128a40f155bffc2c819dc8c" kind="variable"><name>m_density_eq</name></member>
+    <member refid="classMaxwellianEquilibrium_1a63792a934667ffc747a86795cfbe4006" kind="variable"><name>m_temperature_eq</name></member>
+    <member refid="classMaxwellianEquilibrium_1a4fd4f0bbff2ff1712f715071e6f2978a" kind="variable"><name>m_mean_velocity_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1a52616624ef6c0da7107c05d680a11a74" kind="function"><name>MaxwellianEquilibrium</name></member>
     <member refid="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" kind="function"><name>~MaxwellianEquilibrium</name></member>
     <member refid="classMaxwellianEquilibrium_1a0cc2b9bdb6300dd5661cedbfc27957b3" kind="function"><name>operator()</name></member>
@@ -2050,17 +2053,17 @@
     <member refid="classMaxwellianEquilibrium_1a86de6dac16d6f3a968b16b028c4bee8d" kind="function"><name>density_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1ad82c2908d1306574b250ddc190bc2d28" kind="function"><name>temperature_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1a37c0f236ccb7c4a8ce018c6d560c75c4" kind="function"><name>mean_velocity_eq</name></member>
-    <member refid="classMaxwellianEquilibrium_1a034e0f873e3403b14b56ec4200b44bb9" kind="function"><name>MaxwellianEquilibrium</name></member>
+    <member refid="classMaxwellianEquilibrium_1af49730e7b873acb50176336c6a4f029e" kind="function"><name>MaxwellianEquilibrium</name></member>
     <member refid="classMaxwellianEquilibrium_1a93e6fba9f6003062ba29256213f22dc0" kind="function"><name>~MaxwellianEquilibrium</name></member>
     <member refid="classMaxwellianEquilibrium_1a883dfc9d838b53deeb47e93f178c7655" kind="function"><name>operator()</name></member>
-    <member refid="classMaxwellianEquilibrium_1a0de7a4e921a394a01123af2eae342c21" kind="function"><name>density_eq</name></member>
-    <member refid="classMaxwellianEquilibrium_1aeba2d5c30212bd67b789c87610205263" kind="function"><name>temperature_eq</name></member>
-    <member refid="classMaxwellianEquilibrium_1a19a92489bebf290fb48a26a641c9e292" kind="function"><name>mean_velocity_eq</name></member>
+    <member refid="classMaxwellianEquilibrium_1a84368004d877ee3cafba6fc09f3eaeea" kind="function"><name>density_eq</name></member>
+    <member refid="classMaxwellianEquilibrium_1ab799cfdc24659f7cbeca9f82ede91a95" kind="function"><name>temperature_eq</name></member>
+    <member refid="classMaxwellianEquilibrium_1a535c394678b3df03fdedf002cac32cf4" kind="function"><name>mean_velocity_eq</name></member>
     <member refid="classMaxwellianEquilibrium_1aff3c441bf785e05f0f3b9e6594209876" kind="function"><name>init_from_input</name></member>
     <member refid="classMaxwellianEquilibrium_1ad10e98762e5b6716ed6e62f6768bebd9" kind="function"><name>compute_maxwellian</name></member>
     <member refid="classMaxwellianEquilibrium_1a45ec8865ba58e58d26fb9174e78faff7" kind="function"><name>compute_maxwellian</name></member>
     <member refid="classMaxwellianEquilibrium_1af2e28581eaced8f7962064896b42e6b5" kind="function"><name>init_from_input</name></member>
-    <member refid="classMaxwellianEquilibrium_1a07ab17abcde0a39b82eb76161a8e47c7" kind="function"><name>compute_maxwellian</name></member>
+    <member refid="classMaxwellianEquilibrium_1a1704f2c5ef6fc72bae0f58674a7dd66c" kind="function"><name>compute_maxwellian</name></member>
   </compound>
   <compound refid="classMetricTensorEvaluator" kind="class"><name>MetricTensorEvaluator</name>
     <member refid="classMetricTensorEvaluator_1ad692758b51be7349b111b62c9fe8f1c1" kind="typedef"><name>Dims</name></member>
@@ -2101,14 +2104,14 @@
     <member refid="classMPILayout_1afc8ae4453ec8db31580d3a6bf4974fa1" kind="function"><name>internal_distribute_idx_range</name></member>
   </compound>
   <compound refid="classMpiSplitVlasovSolver" kind="class"><name>MpiSplitVlasovSolver</name>
-    <member refid="classMpiSplitVlasovSolver_1a2c26d07a15c146aa29c725f58d338651" kind="variable"><name>m_advec_x</name></member>
-    <member refid="classMpiSplitVlasovSolver_1ae3d4ae850551356f9067864328142922" kind="variable"><name>m_advec_y</name></member>
-    <member refid="classMpiSplitVlasovSolver_1a6c199241ee9ecb13d91f470979f8af92" kind="variable"><name>m_advec_vx</name></member>
-    <member refid="classMpiSplitVlasovSolver_1aa0eb5c303b8980dde161c27e201d5252" kind="variable"><name>m_advec_vy</name></member>
+    <member refid="classMpiSplitVlasovSolver_1a41a08d6a362be18fc11fdc6c097af28f" kind="variable"><name>m_advec_x</name></member>
+    <member refid="classMpiSplitVlasovSolver_1abe3defc238d1ca15c03eb5ecec763bc9" kind="variable"><name>m_advec_y</name></member>
+    <member refid="classMpiSplitVlasovSolver_1a22e3cff875a4f0e7224a9f55730a5ff9" kind="variable"><name>m_advec_vx</name></member>
+    <member refid="classMpiSplitVlasovSolver_1aaa9779c1fa87155b5aa41598b1a3b6f5" kind="variable"><name>m_advec_vy</name></member>
     <member refid="classMpiSplitVlasovSolver_1a4d259de973ade7f3e5b85f0490178dd7" kind="variable"><name>m_transpose</name></member>
-    <member refid="classMpiSplitVlasovSolver_1ad78d5874fde8002d6dd15a50cb44d3d3" kind="function"><name>MpiSplitVlasovSolver</name></member>
+    <member refid="classMpiSplitVlasovSolver_1a6fe4542ad160c16cecd7bed984bdda3d" kind="function"><name>MpiSplitVlasovSolver</name></member>
     <member refid="classMpiSplitVlasovSolver_1ac26547260517518488b52b800ff82845" kind="function"><name>~MpiSplitVlasovSolver</name></member>
-    <member refid="classMpiSplitVlasovSolver_1ae0988246c635b451aecb09d916bdca9a" kind="function"><name>operator()</name></member>
+    <member refid="classMpiSplitVlasovSolver_1a90652f4a09f86eeebe1623f865418a0d" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classMPITransposeAllToAll" kind="class"><name>MPITransposeAllToAll</name>
     <member refid="classMPITransposeAllToAll_1aaaab817292b16b7950c336c245618f35" kind="typedef"><name>idx_range_type1</name></member>
@@ -2667,7 +2670,7 @@
     <member refid="classPredCorr_1a2a3c70566fbfaef1d04bb540c980e7d1" kind="function"><name>operator()</name></member>
     <member refid="classPredCorr_1afc97ef53ef6d27e3dae91eafbf3deb6a" kind="function"><name>PredCorr</name></member>
     <member refid="classPredCorr_1a7f99203dc020f4337fc4c11c04d2d0ed" kind="function"><name>~PredCorr</name></member>
-    <member refid="classPredCorr_1a3b8e02177cabfc230b09eb5d5b49c084" kind="function"><name>operator()</name></member>
+    <member refid="classPredCorr_1a3db746e672e4a5f94aa4360901b3820e" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classPredCorrRK2XY" kind="class"><name>PredCorrRK2XY</name>
     <member refid="classPredCorrRK2XY_1ab68e54270bf97bd0752b08113a0e40d8" kind="variable"><name>m_poisson_solver</name></member>
@@ -2683,7 +2686,7 @@
   </compound>
   <compound refid="classQNSolver" kind="class"><name>QNSolver</name>
     <member refid="classQNSolver_1a1f8cb21459b0c3214b26d351382967d6" kind="typedef"><name>PoissonSolver</name></member>
-    <member refid="classQNSolver_1a44f5aa907ef5fd0a7d74c639a3cafdcc" kind="typedef"><name>PoissonSolver</name></member>
+    <member refid="classQNSolver_1a92a7086cdc33a404800367916bae7309" kind="typedef"><name>PoissonSolver</name></member>
     <member refid="classQNSolver_1a477aa8a214b2de0f9c73797237a8e2aa" kind="variable"><name>m_solve_poisson</name></member>
     <member refid="classQNSolver_1acb8175fc24afa3b213cf20e11aa4135e" kind="variable"><name>m_compute_rho</name></member>
     <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" kind="function"><name>QNSolver</name></member>
@@ -2868,7 +2871,7 @@
     <member refid="classSingleModePerturbInitialisation_1a53f1ad6e7bf8f78b993c8c29d334f518" kind="function"><name>SingleModePerturbInitialisation</name></member>
     <member refid="classSingleModePerturbInitialisation_1a7b5b1a18f5a18bc9a18a84b8ad1f2727" kind="function"><name>~SingleModePerturbInitialisation</name></member>
     <member refid="classSingleModePerturbInitialisation_1aee5ae2772f04c348393d56e0b314b8e0" kind="function"><name>operator()</name></member>
-    <member refid="classSingleModePerturbInitialisation_1abc8a396d4836e9051751503d7ab5a03c" kind="function"><name>perturbation_initialisation</name></member>
+    <member refid="classSingleModePerturbInitialisation_1acc705602deefbd30029f5cbd51223ee5" kind="function"><name>perturbation_initialisation</name></member>
     <member refid="classSingleModePerturbInitialisation_1a0944b2220d8397e218f67c8b2e67884b" kind="function"><name>SingleModePerturbInitialisation</name></member>
     <member refid="classSingleModePerturbInitialisation_1a7b5b1a18f5a18bc9a18a84b8ad1f2727" kind="function"><name>~SingleModePerturbInitialisation</name></member>
     <member refid="classSingleModePerturbInitialisation_1aa2c7f6908f16ef8088d2609f009b2cf6" kind="function"><name>operator()</name></member>
@@ -3035,16 +3038,16 @@
   <compound refid="classSplitVlasovSolver" kind="class"><name>SplitVlasovSolver</name>
     <member refid="classSplitVlasovSolver_1a0d57f4c91d0be4db9a34a411ca8c834d" kind="variable"><name>m_advec_x</name></member>
     <member refid="classSplitVlasovSolver_1a0b378944fc8980ff16d8e26c5a5e59e9" kind="variable"><name>m_advec_vx</name></member>
-    <member refid="classSplitVlasovSolver_1aa84d1b719041dae600eb0049299321d6" kind="variable"><name>m_advec_x</name></member>
-    <member refid="classSplitVlasovSolver_1a8dffff7f87c466d2856e4454254e3cf9" kind="variable"><name>m_advec_y</name></member>
-    <member refid="classSplitVlasovSolver_1ad4be9cf044d6af823f7cf5ced138c707" kind="variable"><name>m_advec_vx</name></member>
-    <member refid="classSplitVlasovSolver_1a3ef5390c293630083c9d773a6b125a61" kind="variable"><name>m_advec_vy</name></member>
+    <member refid="classSplitVlasovSolver_1aa3efce7edcbd18c92872e5af128856f1" kind="variable"><name>m_advec_x</name></member>
+    <member refid="classSplitVlasovSolver_1a90e538cce28c72e4b31383c1cfc4ce17" kind="variable"><name>m_advec_y</name></member>
+    <member refid="classSplitVlasovSolver_1a13273bbfb0bf343c7d71c66c89632622" kind="variable"><name>m_advec_vx</name></member>
+    <member refid="classSplitVlasovSolver_1afbcce02928f5420363789280f0af39e4" kind="variable"><name>m_advec_vy</name></member>
     <member refid="classSplitVlasovSolver_1aad8ce76367a0be688bfbd8e5a2830040" kind="function"><name>SplitVlasovSolver</name></member>
     <member refid="classSplitVlasovSolver_1a07f850f4fba0e3750db3aa95ebaa5fdd" kind="function"><name>~SplitVlasovSolver</name></member>
     <member refid="classSplitVlasovSolver_1a958b142757ef330191c9c25188294f15" kind="function"><name>operator()</name></member>
-    <member refid="classSplitVlasovSolver_1a34d062e615cb10c3bd82c9b13bf4ebc2" kind="function"><name>SplitVlasovSolver</name></member>
+    <member refid="classSplitVlasovSolver_1a1335b33fc95d0bfd4d793c8b1d79d0e6" kind="function"><name>SplitVlasovSolver</name></member>
     <member refid="classSplitVlasovSolver_1a07f850f4fba0e3750db3aa95ebaa5fdd" kind="function"><name>~SplitVlasovSolver</name></member>
-    <member refid="classSplitVlasovSolver_1aa8a784e4a072df4ae935cae97094119f" kind="function"><name>operator()</name></member>
+    <member refid="classSplitVlasovSolver_1a41d34bb3708aad5628188ae8276b0d15" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1StripOutsideEdges" kind="struct"><name>connectivity_details::StripOutsideEdges</name>
   </compound>
@@ -4008,6 +4011,7 @@
   <compound refid="predcorr__RK2_8hpp" kind="file"><name>predcorr_RK2.hpp</name>
   </compound>
   <compound refid="geometry__xyvxvy_8hpp" kind="file"><name>geometry_xyvxvy.hpp</name>
+    <member refid="geometry__xyvxvy_8hpp_1a5622d0eb511c60429967480d3090635b" kind="typedef"><name>Real</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a6efd472443b007215996db4a3525a96c" kind="typedef"><name>CoordY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a10247c2fe6a1199a77f867e7d345e7ac" kind="typedef"><name>CoordXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a6bb4c25a20696d975f8bdfe1de4d13df" kind="typedef"><name>CoordVy</name></member>
@@ -4029,54 +4033,54 @@
     <member refid="geometry__xyvxvy_8hpp_1afd0c85790ec88796d24cee83a9db686c" kind="typedef"><name>IdxRangeSpXYVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1afc660f8d1931cc89d6c07c125cab855e" kind="typedef"><name>IdxRangeSpVxVyXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a0e88861478f43ddbfe56ea0c982da899" kind="typedef"><name>FieldMemY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1aecd8464841a3ee08bf823a3aacafae10" kind="typedef"><name>DFieldMemY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a08fba836f4d7951c2006e42c01f3e4f7" kind="typedef"><name>DFieldMemY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a6926d8962dd0b43d3341e5c293c8275a" kind="typedef"><name>FieldMemXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a1012caf28a0a3db920dfc10893124df7" kind="typedef"><name>DFieldMemXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a20ad3aaf692c0d81da5b6a1a5278fc88" kind="typedef"><name>DFieldMemXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a32cc743aaf2680ad14658ba167bd69e0" kind="typedef"><name>VectorFieldMemXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a22ed1da55db00cf5062d7f6f205ce947" kind="typedef"><name>DVectorFieldMemXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1aa3fc996e749fd62fb23baa70f21a5086" kind="typedef"><name>DVectorFieldMemXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1aa0dbeac5a6833f0703dc8baa5e55d435" kind="typedef"><name>FieldMemVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1aa0a9972af32ff1752fcc53e7fc28c30b" kind="typedef"><name>DFieldMemVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a5cf86bc36cc6e619990ee353509bfffa" kind="typedef"><name>DFieldMemVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a31ee626ddacf4775e5580c3effb57cf8" kind="typedef"><name>FieldMemVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1ab636de3a5040e5257839376749851d28" kind="typedef"><name>DFieldMemVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a2da4575fdfad095c69516d5240acc7dd" kind="typedef"><name>DFieldMemVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a913e2301e674cdb9ac1f84ce70721eb4" kind="typedef"><name>FieldMemXYVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a83d2b24e754dadebcad44c8ccd292960" kind="typedef"><name>DFieldMemXYVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a99bf0976d9519ad8d50ca917321b4ee9" kind="typedef"><name>DFieldMemXYVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a59e3ac5fcbd1e3e3efe0067bb62b158a" kind="typedef"><name>FieldMemSpVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a89aec0481ac132f4ab352307e0db69e8" kind="typedef"><name>DFieldMemSpVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1adfc52ed790b615efbd20b33b6f4c251b" kind="typedef"><name>DFieldMemSpVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a686dff336a6e460b0105afddec0ab2f7" kind="typedef"><name>FieldMemSpXYVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a155cfb0c46f9875af15f9ad3a803dd60" kind="typedef"><name>DFieldMemSpXYVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a7cb5dc885ec49eebce222178412f9658" kind="typedef"><name>DFieldMemSpXYVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1ad0d4f5c86f63a7816c3f4bb18a828b82" kind="typedef"><name>FieldMemSpVxVyXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1acaeea8a0b3106f02f0ecf26a2a8dab4a" kind="typedef"><name>DFieldMemSpVxVyXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a1821497db5defff943935b613d3656c6" kind="typedef"><name>DFieldMemSpVxVyXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a26a003609a9f95ba4b456c0db2645d83" kind="typedef"><name>FieldY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a7f0a602072ade545e128df4cc31229fa" kind="typedef"><name>DFieldY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1afe31b914f39e266a424928c8417d51c8" kind="typedef"><name>DFieldY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a79497306d40c30da6eb0a63b84b60655" kind="typedef"><name>FieldXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1abf4686803a31574eef0bd6de84308aa5" kind="typedef"><name>DFieldXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1ad248b2869230b0b29067956919a19727" kind="typedef"><name>DFieldXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a9823b62b6394efbf7550435bcc8ccab9" kind="typedef"><name>VectorFieldXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1adc7d466e8c95f4d5326b92cbe3213a2c" kind="typedef"><name>DVectorFieldXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a1d5f34174b69f212c98d39ad0c23ad7d" kind="typedef"><name>DVectorFieldXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a7378029b28720e726400afff0bcbbc49" kind="typedef"><name>FieldVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a36d0b58a285f65c1afa679077b15eb55" kind="typedef"><name>DFieldVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a5cf3556b4d7063f2c7153ca06b7486bf" kind="typedef"><name>DFieldVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1aef74020acd68768e3fe89d2998a65d92" kind="typedef"><name>FieldVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a038861bd6fa730f5f0d35d0d5680b0d3" kind="typedef"><name>DFieldVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a4e433dc3a1a5b3874a2a40a49c5726d4" kind="typedef"><name>DFieldVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a6e9bc2aa61622bd739ee5016ce2254cc" kind="typedef"><name>FieldSpVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1aced42b7c78c84bd8908abcd61902636c" kind="typedef"><name>DFieldSpVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1af00482cbad7be76070ba1dd9c84829cb" kind="typedef"><name>DFieldSpVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1ac48dae4d2a495713b013801f1d339079" kind="typedef"><name>FieldSpXYVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1ace89523a77c5498b6bf1b8bd14ca9e2a" kind="typedef"><name>DFieldSpXYVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1aba2097db036e72dcd28e5054d8b0de0e" kind="typedef"><name>DFieldSpXYVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1ad636ee00a4d666749fb2a4e0e8e77c7b" kind="typedef"><name>FieldSpVxVyXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1aec10c65676c20cb340d04921533acd74" kind="typedef"><name>DFieldSpVxVyXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1acb26ba12c04e128327378650e811b10b" kind="typedef"><name>DFieldSpVxVyXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a4a0ca69b36999899351db5823c34abfa" kind="typedef"><name>ConstFieldY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a9b2b3bf55efff1c5b33e4449adffc601" kind="typedef"><name>ConstFieldXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a03f280f71943aece4bffa9efd47be086" kind="typedef"><name>DConstFieldXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a871d5d603a5ef0c16495fca657330857" kind="typedef"><name>DConstFieldXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1ac98466a89c20154f7363c7dcf623ad96" kind="typedef"><name>VectorConstFieldXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a3b8ada9d3eb6c88ab0322c3414970bcb" kind="typedef"><name>DVectorConstFieldXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a44255fa608706e25e51bb410d9c546b3" kind="typedef"><name>DVectorConstFieldXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1adb839d0310c926528957d0e5c9e7a73b" kind="typedef"><name>ConstFieldVx</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a3be2e97ce92467d0c17972cf24ed2a70" kind="typedef"><name>ConstFieldVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a2aca7efb643d75fca9bd022d3399d03e" kind="typedef"><name>ConstFieldVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a12624a0632e8a3b920197dbbfc858f51" kind="typedef"><name>DConstFieldVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a7e0f938f3cc88c5c6835d00618bb4767" kind="typedef"><name>DConstFieldVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a237fcfa94268a19d5c736731ba4b1747" kind="typedef"><name>ConstFieldSpVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1a0257219c21ff9366a5e36a6e0dca0f7e" kind="typedef"><name>DConstFieldSpVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1aa53b6b2c6edbda84208820d872e307b4" kind="typedef"><name>DConstFieldSpVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1adec401df9b066c79693240ab8e5e7ec2" kind="typedef"><name>ConstFieldSpXYVxVy</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1aa348f8fb5b5e99808d9656ba80888040" kind="typedef"><name>DConstFieldSpXYVxVy</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a7b0d1c570bbb0b49d999c2bf6388d4e1" kind="typedef"><name>DConstFieldSpXYVxVy</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a90f30d4ad179be65a8f4f9c7e94b570a" kind="typedef"><name>ConstFieldSpVxVyXY</name></member>
-    <member refid="geometry__xyvxvy_8hpp_1aea80c462186608683f26df5fe079ada1" kind="typedef"><name>DConstFieldSpVxVyXY</name></member>
+    <member refid="geometry__xyvxvy_8hpp_1a31648fd4521c559783ab692d4924e576" kind="typedef"><name>DConstFieldSpVxVyXY</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a60af2dc395fbdc8c8b31d418e14f703a" kind="typedef"><name>X2DSplit</name></member>
     <member refid="geometry__xyvxvy_8hpp_1a4d93cda361e6a3c4781ac2a28c447476" kind="typedef"><name>V2DSplit</name></member>
   </compound>

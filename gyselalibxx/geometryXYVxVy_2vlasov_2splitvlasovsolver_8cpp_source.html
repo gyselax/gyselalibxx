@@ -570,10 +570,10 @@
 #include "splitvlasovsolver.hpp"
 
 SplitVlasovSolver::SplitVlasovSolver(
-        IAdvectionSpatial&lt;GeometryVxVyXY, GridX&gt; const&amp; advec_x,
-        IAdvectionSpatial&lt;GeometryVxVyXY, GridY&gt; const&amp; advec_y,
-        IAdvectionVelocity&lt;GeometryVxVyXY, GridVx&gt; const&amp; advec_vx,
-        IAdvectionVelocity&lt;GeometryVxVyXY, GridVy&gt; const&amp; advec_vy)
+        IAdvectionSpatial&lt;GeometryVxVyXY, GridX, Real&gt; const&amp; advec_x,
+        IAdvectionSpatial&lt;GeometryVxVyXY, GridY, Real&gt; const&amp; advec_y,
+        IAdvectionVelocity&lt;GeometryVxVyXY, GridVx, Real&gt; const&amp; advec_vx,
+        IAdvectionVelocity&lt;GeometryVxVyXY, GridVy, Real&gt; const&amp; advec_vy)
     : m_advec_x(advec_x)
     , m_advec_y(advec_y)
     , m_advec_vx(advec_vx)
@@ -584,7 +584,7 @@ SplitVlasovSolver::SplitVlasovSolver(
 DFieldSpVxVyXY SplitVlasovSolver::operator()(
         DFieldSpVxVyXY const allfdistribu,
         DVectorConstFieldXY const electric_field,
-        double const dt) const
+        Real const dt) const
 {
     m_advec_x(allfdistribu, dt / 2);
     m_advec_y(allfdistribu, dt / 2);

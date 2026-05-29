@@ -334,7 +334,7 @@
 <codeline lineno="20"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classChargeDensityCalculator" kindref="compound">ChargeDensityCalculator</ref><sp/>:<sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal"><sp/><ref refid="classIChargeDensityCalculator" kindref="compound">IChargeDensityCalculator</ref></highlight></codeline>
 <codeline lineno="21"><highlight class="normal">{</highlight></codeline>
 <codeline lineno="22"><highlight class="normal"></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classQuadrature" kindref="compound">Quadrature&lt;IdxRangeVxVy, IdxRangeXYVxVy&gt;</ref><sp/>m_quadrature;</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="classQuadrature" kindref="compound">Quadrature&lt;IdxRangeVxVy, IdxRangeXYVxVy, Real&gt;</ref><sp/>m_quadrature;</highlight></codeline>
 <codeline lineno="24"><highlight class="normal"></highlight></codeline>
 <codeline lineno="25"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
 <codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">explicit</highlight><highlight class="normal"><sp/><ref refid="classChargeDensityCalculator" kindref="compound">ChargeDensityCalculator</ref>(DConstFieldVxVy<sp/>coeffs);</highlight></codeline>

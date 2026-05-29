@@ -20,9 +20,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/qnsolver.hpp" bodystart="28" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classQNSolver_1a44f5aa907ef5fd0a7d74c639a3cafdcc" prot="private" static="no">
-        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRangeXY, IdxRangeXY, double, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
-        <definition>using QNSolver::PoissonSolver =  IPoissonSolver&lt; IdxRangeXY, IdxRangeXY, double, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
+      <memberdef kind="typedef" id="classQNSolver_1a92a7086cdc33a404800367916bae7309" prot="private" static="no">
+        <type><ref refid="classIPoissonSolver" kindref="compound">IPoissonSolver</ref>&lt; IdxRangeXY, IdxRangeXY, Real, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right &gt;</type>
+        <definition>using QNSolver::PoissonSolver =  IPoissonSolver&lt; IdxRangeXY, IdxRangeXY, Real, typename Kokkos::DefaultExecutionSpace::memory_space, Kokkos::layout_right&gt;</definition>
         <argsstring></argsstring>
         <name>PoissonSolver</name>
         <qualifiedname>QNSolver::PoissonSolver</qualifiedname>
@@ -330,7 +330,7 @@
       <member refid="classQNSolver_1aa32f5284dd9ce1e47665705cb7783268" prot="public" virt="virtual"><scope>QNSolver</scope><name>operator()</name></member>
       <member refid="classIQNSolver_1a948a4ff8d3e0310b132cf7e9a3e27555" prot="public" virt="pure-virtual" ambiguityscope="IQNSolver::"><scope>QNSolver</scope><name>operator()</name></member>
       <member refid="classQNSolver_1a1f8cb21459b0c3214b26d351382967d6" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
-      <member refid="classQNSolver_1a44f5aa907ef5fd0a7d74c639a3cafdcc" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
+      <member refid="classQNSolver_1a92a7086cdc33a404800367916bae7309" prot="private" virt="non-virtual"><scope>QNSolver</scope><name>PoissonSolver</name></member>
       <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>QNSolver</name></member>
       <member refid="classQNSolver_1a8e24e91f5ed1c4bb590e93eb4f1f81ba" prot="public" virt="non-virtual"><scope>QNSolver</scope><name>QNSolver</name></member>
       <member refid="classIQNSolver_1a9ebf91996421a1ebfffe7d0225bc37ec" prot="public" virt="virtual"><scope>QNSolver</scope><name>~IQNSolver</name></member>

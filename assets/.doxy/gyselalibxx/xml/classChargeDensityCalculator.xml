@@ -20,9 +20,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.hpp" line="22" column="16" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson/chargedensitycalculator.hpp" bodystart="22" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classChargeDensityCalculator_1a20dcf32beedeac15d43e686f6a6cfcf3" prot="private" static="no" mutable="no">
-        <type><ref refid="classQuadrature" kindref="compound">Quadrature</ref>&lt; IdxRangeVxVy, IdxRangeXYVxVy &gt;</type>
-        <definition>Quadrature&lt;IdxRangeVxVy, IdxRangeXYVxVy&gt; ChargeDensityCalculator::m_quadrature</definition>
+      <memberdef kind="variable" id="classChargeDensityCalculator_1a9370b85978661d082ffeb7dd817b7930" prot="private" static="no" mutable="no">
+        <type><ref refid="classQuadrature" kindref="compound">Quadrature</ref>&lt; IdxRangeVxVy, IdxRangeXYVxVy, Real &gt;</type>
+        <definition>Quadrature&lt;IdxRangeVxVy, IdxRangeXYVxVy, Real&gt; ChargeDensityCalculator::m_quadrature</definition>
         <argsstring></argsstring>
         <name>m_quadrature</name>
         <qualifiedname>ChargeDensityCalculator::m_quadrature</qualifiedname>
@@ -220,7 +220,7 @@
       <member refid="classChargeDensityCalculator_1ae129d33bd6dcb7a675e664a53c0a4747" prot="public" virt="non-virtual"><scope>ChargeDensityCalculator</scope><name>ChargeDensityCalculator</name></member>
       <member refid="classChargeDensityCalculator_1a384d7a001ede75b2ccf2053e299ceba9" prot="public" virt="non-virtual"><scope>ChargeDensityCalculator</scope><name>ChargeDensityCalculator</name></member>
       <member refid="classChargeDensityCalculator_1ac662eaddab6ba021670646cc2643fb0a" prot="private" virt="non-virtual"><scope>ChargeDensityCalculator</scope><name>m_quadrature</name></member>
-      <member refid="classChargeDensityCalculator_1a20dcf32beedeac15d43e686f6a6cfcf3" prot="private" virt="non-virtual"><scope>ChargeDensityCalculator</scope><name>m_quadrature</name></member>
+      <member refid="classChargeDensityCalculator_1a9370b85978661d082ffeb7dd817b7930" prot="private" virt="non-virtual"><scope>ChargeDensityCalculator</scope><name>m_quadrature</name></member>
       <member refid="classChargeDensityCalculator_1a164ef05aba41f41d7862c1aa216c154e" prot="public" virt="virtual"><scope>ChargeDensityCalculator</scope><name>operator()</name></member>
       <member refid="classChargeDensityCalculator_1a65457db8be8ee9655ca786ae39c1dbbe" prot="public" virt="virtual"><scope>ChargeDensityCalculator</scope><name>operator()</name></member>
     </listofallmembers>

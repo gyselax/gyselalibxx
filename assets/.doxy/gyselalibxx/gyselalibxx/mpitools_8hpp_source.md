@@ -38,6 +38,15 @@ struct MPITypeDescriptor<double>
 };
 
 template <>
+struct MPITypeDescriptor<float>
+{
+    static MPI_Datatype get_type() noexcept
+    {
+        return MPI_FLOAT;
+    }
+};
+
+template <>
 struct MPITypeDescriptor<unsigned long>
 {
     static MPI_Datatype get_type() noexcept

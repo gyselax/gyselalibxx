@@ -53,7 +53,7 @@ Inherited by the following classes: [MpiSplitVlasovSolver](classMpiSplitVlasovSo
 
 | Type | Name |
 | ---: | :--- |
-| virtual DFieldSpVxVyXY | [**operator()**](#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) efield, double dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
+| virtual DFieldSpVxVyXY | [**operator()**](#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) efield, Real dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
 | virtual  | [**~IVlasovSolver**](#function-ivlasovsolver) () = default<br> |
 
 
@@ -95,7 +95,7 @@ _Solves a Vlasov equation on a timestep dt._
 virtual DFieldSpVxVyXY IVlasovSolver::operator() (
     DFieldSpVxVyXY allfdistribu,
     DVectorConstFieldXY efield,
-    double dt
+    Real dt
 ) const = 0
 ```
 

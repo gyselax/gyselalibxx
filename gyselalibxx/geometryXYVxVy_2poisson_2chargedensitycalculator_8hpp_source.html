@@ -577,7 +577,7 @@
 class ChargeDensityCalculator : public IChargeDensityCalculator
 {
 private:
-    Quadrature&lt;IdxRangeVxVy, IdxRangeXYVxVy&gt; m_quadrature;
+    Quadrature&lt;IdxRangeVxVy, IdxRangeXYVxVy, Real&gt; m_quadrature;
 
 public:
     explicit ChargeDensityCalculator(DConstFieldVxVy coeffs);

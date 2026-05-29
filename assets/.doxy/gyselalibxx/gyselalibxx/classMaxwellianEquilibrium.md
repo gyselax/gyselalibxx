@@ -116,21 +116,21 @@ Inherits the following classes: [IEquilibrium](classIEquilibrium.md),  [IEquilib
 |   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-14) (host\_t&lt; DFieldMemSp &gt; mass, host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq, double magnetic\_field) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
 |   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-24) (host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
 |   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-34) ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) &&) = default<br>_Move-construct a_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _._ |
-|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-24) (host\_t&lt; DFieldMemSp &gt; density\_eq, host\_t&lt; DFieldMemSp &gt; temperature\_eq, host\_t&lt; DFieldMemSp &gt; mean\_velocity\_eq) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
+|   | [**MaxwellianEquilibrium**](#function-maxwellianequilibrium-44) (host\_t&lt; FieldMemSp&lt; Real &gt; &gt; density\_eq, host\_t&lt; FieldMemSp&lt; Real &gt; &gt; temperature\_eq, host\_t&lt; FieldMemSp&lt; Real &gt; &gt; mean\_velocity\_eq) <br>_The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._ |
 |  host\_t&lt; DConstFieldSp &gt; | [**density\_eq**](#function-density_eq-13) () const<br>_A method for accessing the m\_density\_eq member variable of the class._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**density\_eq**](#function-density_eq-13) () const<br>_A method for accessing the m\_density\_eq member variable of the class._  |
-|  host\_t&lt; ConstFieldSp&lt; double &gt; &gt; | [**density\_eq**](#function-density_eq-33) () const<br>_A method for accessing the m\_density\_eq member variable of the class._  |
+|  host\_t&lt; ConstFieldSp&lt; Real &gt; &gt; | [**density\_eq**](#function-density_eq-33) () const<br>_A method for accessing the m\_density\_eq member variable of the class._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**mass**](#function-mass) () const<br>_A method for accessing the m\_mass member variable of the class._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**mean\_velocity\_eq**](#function-mean_velocity_eq-13) () const<br>_A method for accessing the m\_mean\_velocity\_eq member variable of the class._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**mean\_velocity\_eq**](#function-mean_velocity_eq-13) () const<br>_A method for accessing the m\_mean\_velocity\_eq member variable of the class._  |
-|  host\_t&lt; ConstFieldSp&lt; double &gt; &gt; | [**mean\_velocity\_eq**](#function-mean_velocity_eq-33) () const<br>_A method for accessing the m\_mean\_velocity\_eq member variable of the class._  |
+|  host\_t&lt; ConstFieldSp&lt; Real &gt; &gt; | [**mean\_velocity\_eq**](#function-mean_velocity_eq-33) () const<br>_A method for accessing the m\_mean\_velocity\_eq member variable of the class._  |
 | virtual DFieldSpVparMu | [**operator()**](#function-operator) (DFieldSpVparMu allfequilibrium) override const<br>_Initialises allfequilibrium as a Maxwellian._  |
 | virtual DFieldSpVx | [**operator()**](#function-operator_1) (DFieldSpVx allfequilibrium) override const<br>_Initialises allfequilibrium as a Maxwellian._  |
 | virtual DFieldSpVxVy | [**operator()**](#function-operator_2) (DFieldSpVxVy allfequilibrium) override const<br>_Initialises allfequilibrium as a Maxwellian._  |
 |  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) & | [**operator=**](#function-operator_3) ([**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) &&) = default<br>_Move-assignment a_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _._ |
 |  host\_t&lt; DConstFieldSp &gt; | [**temperature\_eq**](#function-temperature_eq-13) () const<br>_A method for accessing the m\_temperature\_eq member variable of the class._  |
 |  host\_t&lt; DConstFieldSp &gt; | [**temperature\_eq**](#function-temperature_eq-13) () const<br>_A method for accessing the m\_temperature\_eq member variable of the class._  |
-|  host\_t&lt; ConstFieldSp&lt; double &gt; &gt; | [**temperature\_eq**](#function-temperature_eq-33) () const<br>_A method for accessing the m\_temperature\_eq member variable of the class._  |
+|  host\_t&lt; ConstFieldSp&lt; Real &gt; &gt; | [**temperature\_eq**](#function-temperature_eq-33) () const<br>_A method for accessing the m\_temperature\_eq member variable of the class._  |
 |   | [**~MaxwellianEquilibrium**](#function-maxwellianequilibrium-13) () override<br> |
 |   | [**~MaxwellianEquilibrium**](#function-maxwellianequilibrium-13) () override<br> |
 |   | [**~MaxwellianEquilibrium**](#function-maxwellianequilibrium-13) () override<br> |
@@ -184,7 +184,7 @@ See [IEquilibrium](classIEquilibrium.md)
 | ---: | :--- |
 |  void | [**compute\_maxwellian**](#function-compute_maxwellian-13) (DFieldVparMu const fMaxwellian, double const mass, double const density, double const temperature, double const mean\_velocity, double const magnetic\_field) <br>_Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as Compute $fM(v,mu) = (2\*PI\*T)\*\*1.5\*n\*exp(-E)$ with._  |
 |  void | [**compute\_maxwellian**](#function-compute_maxwellian-23) (DFieldVx const fMaxwellian, double const density, double const temperature, double const mean\_velocity) <br>_Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as $f\_M(v) = n/(sqrt(2\*PI\*T))\*exp(-(v-u)\*\*2/(2\*T))$ with $n$ the density, $T$ the temperature and $u$ is the mean velocity._  |
-|  void | [**compute\_maxwellian**](#function-compute_maxwellian-33) (DFieldVxVy const fMaxwellian, double const density, double const temperature, double const mean\_velocity) <br>_Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as $f\_M(v) = n/(sqrt(2\*PI\*T))\*exp(-(v-u)\*\*2/(2\*T))$ with $n$ the density, $T$ the temperature and $u$ is the mean velocity._  |
+|  void | [**compute\_maxwellian**](#function-compute_maxwellian-33) (DFieldVxVy const fMaxwellian, Real const density, Real const temperature, Real const mean\_velocity) <br>_Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as $f\_M(v) = n/(sqrt(2\*PI\*T))\*exp(-(v-u)\*\*2/(2\*T))$ with $n$ the density, $T$ the temperature and $u$ is the mean velocity._  |
 |  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) | [**init\_from\_input**](#function-init_from_input-12) (IdxRangeSp idx\_range\_kinsp, PC\_tree\_t const & yaml\_input\_file) <br>_Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._  |
 |  [**MaxwellianEquilibrium**](classMaxwellianEquilibrium.md) | [**init\_from\_input**](#function-init_from_input-22) (IdxRangeSp idx\_range\_kinsp, PC\_tree\_t const & yaml\_input\_file) <br>_Read the density, temperature and mean velocity required to initialise the Maxwellian in a YAML input file._  |
 
@@ -385,14 +385,14 @@ MaxwellianEquilibrium::MaxwellianEquilibrium (
 
 
 
-### function MaxwellianEquilibrium [2/4]
+### function MaxwellianEquilibrium [4/4]
 
 _The constructor for the_ [_**MaxwellianEquilibrium**_](classMaxwellianEquilibrium.md) _class._
 ```C++
 MaxwellianEquilibrium::MaxwellianEquilibrium (
-    host_t< DFieldMemSp > density_eq,
-    host_t< DFieldMemSp > temperature_eq,
-    host_t< DFieldMemSp > mean_velocity_eq
+    host_t< FieldMemSp< Real > > density_eq,
+    host_t< FieldMemSp< Real > > temperature_eq,
+    host_t< FieldMemSp< Real > > mean_velocity_eq
 ) 
 ```
 
@@ -470,7 +470,7 @@ A view containing the m\_density\_eq value.
 
 _A method for accessing the m\_density\_eq member variable of the class._ 
 ```C++
-inline host_t< ConstFieldSp< double > > MaxwellianEquilibrium::density_eq () const
+inline host_t< ConstFieldSp< Real > > MaxwellianEquilibrium::density_eq () const
 ```
 
 
@@ -570,7 +570,7 @@ A view containing the m\_velocity\_eq value.
 
 _A method for accessing the m\_mean\_velocity\_eq member variable of the class._ 
 ```C++
-inline host_t< ConstFieldSp< double > > MaxwellianEquilibrium::mean_velocity_eq () const
+inline host_t< ConstFieldSp< Real > > MaxwellianEquilibrium::mean_velocity_eq () const
 ```
 
 
@@ -769,7 +769,7 @@ A view containing the m\_temperature\_eq value.
 
 _A method for accessing the m\_temperature\_eq member variable of the class._ 
 ```C++
-inline host_t< ConstFieldSp< double > > MaxwellianEquilibrium::temperature_eq () const
+inline host_t< ConstFieldSp< Real > > MaxwellianEquilibrium::temperature_eq () const
 ```
 
 
@@ -912,9 +912,9 @@ _Compute a Maxwellian distribution function. The Maxwellian distribution functio
 ```C++
 static void MaxwellianEquilibrium::compute_maxwellian (
     DFieldVxVy const fMaxwellian,
-    double const density,
-    double const temperature,
-    double const mean_velocity
+    Real const density,
+    Real const temperature,
+    Real const mean_velocity
 ) 
 ```
 

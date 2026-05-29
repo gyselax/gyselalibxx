@@ -216,10 +216,10 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.hpp" line="72" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/initialisation/singlemodeperturbinitialisation.cpp" bodystart="19" bodyend="53"/>
       </memberdef>
-      <memberdef kind="function" id="classSingleModePerturbInitialisation_1abc8a396d4836e9051751503d7ab5a03c" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSingleModePerturbInitialisation_1acc705602deefbd30029f5cbd51223ee5" prot="public" static="no" const="yes" explicit="no" inline="no" virt="non-virtual">
         <type>void</type>
         <definition>void SingleModePerturbInitialisation::perturbation_initialisation</definition>
-        <argsstring>(DFieldXY perturbation, int const perturb_mode, double const perturb_amplitude) const</argsstring>
+        <argsstring>(DFieldXY perturbation, int const perturb_mode, Real const perturb_amplitude) const</argsstring>
         <name>perturbation_initialisation</name>
         <qualifiedname>SingleModePerturbInitialisation::perturbation_initialisation</qualifiedname>
         <param>
@@ -231,7 +231,7 @@
           <declname>perturb_mode</declname>
         </param>
         <param>
-          <type>double const</type>
+          <type>Real const</type>
           <declname>perturb_amplitude</declname>
         </param>
         <briefdescription>
@@ -267,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="30" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="83" bodyend="107"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="30" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="84" bodyend="108"/>
       </memberdef>
       <memberdef kind="function" id="classSingleModePerturbInitialisation_1a0944b2220d8397e218f67c8b2e67884b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
@@ -478,7 +478,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="63" column="44" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="61" bodyend="80"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.hpp" line="63" column="44" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/initialisation/singlemodeperturbinitialisation.cpp" bodystart="61" bodyend="81"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -528,7 +528,7 @@
       <member refid="classSingleModePerturbInitialisation_1aa2c7f6908f16ef8088d2609f009b2cf6" prot="public" virt="virtual"><scope>SingleModePerturbInitialisation</scope><name>operator()</name></member>
       <member refid="classIInitialisation_1ae27774990fe287904bf424adb15a9772" prot="public" virt="pure-virtual" ambiguityscope="IInitialisation::"><scope>SingleModePerturbInitialisation</scope><name>operator()</name></member>
       <member refid="classSingleModePerturbInitialisation_1a391dcace1aa2d17922800ac806f7fc9a" prot="public" virt="non-virtual"><scope>SingleModePerturbInitialisation</scope><name>perturbation_initialisation</name></member>
-      <member refid="classSingleModePerturbInitialisation_1abc8a396d4836e9051751503d7ab5a03c" prot="public" virt="non-virtual"><scope>SingleModePerturbInitialisation</scope><name>perturbation_initialisation</name></member>
+      <member refid="classSingleModePerturbInitialisation_1acc705602deefbd30029f5cbd51223ee5" prot="public" virt="non-virtual"><scope>SingleModePerturbInitialisation</scope><name>perturbation_initialisation</name></member>
       <member refid="classSingleModePerturbInitialisation_1a53f1ad6e7bf8f78b993c8c29d334f518" prot="public" virt="non-virtual"><scope>SingleModePerturbInitialisation</scope><name>SingleModePerturbInitialisation</name></member>
       <member refid="classSingleModePerturbInitialisation_1a0944b2220d8397e218f67c8b2e67884b" prot="public" virt="non-virtual"><scope>SingleModePerturbInitialisation</scope><name>SingleModePerturbInitialisation</name></member>
       <member refid="classIInitialisation_1a1031f0b5ddc471102c6024eea4aa74df" prot="public" virt="virtual"><scope>SingleModePerturbInitialisation</scope><name>~IInitialisation</name></member>

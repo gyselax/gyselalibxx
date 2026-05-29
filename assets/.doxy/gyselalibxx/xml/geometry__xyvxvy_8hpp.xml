@@ -400,6 +400,19 @@
     <innerclass refid="classGeometryXYVxVy" prot="public">GeometryXYVxVy</innerclass>
     <innerclass refid="classGeometryVxVyXY" prot="public">GeometryVxVyXY</innerclass>
     <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a5622d0eb511c60429967480d3090635b" prot="public" static="no">
+        <type>GYSELALIBXX_BUILD_REAL_PRECISION</type>
+        <definition>using Real =  GYSELALIBXX_BUILD_REAL_PRECISION</definition>
+        <argsstring></argsstring>
+        <name>Real</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="16" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="16" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a6efd472443b007215996db4a3525a96c" prot="public" static="no">
         <type>Coord&lt; <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
         <definition>using CoordY =  Coord&lt;Y&gt;</definition>
@@ -411,7 +424,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="47" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="47" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="49" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="49" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a10247c2fe6a1199a77f867e7d345e7ac" prot="public" static="no">
         <type>Coord&lt; <ref refid="structX" kindref="compound">X</ref>, <ref refid="structY" kindref="compound">Y</ref> &gt;</type>
@@ -424,7 +437,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="48" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="48" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="50" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a6bb4c25a20696d975f8bdfe1de4d13df" prot="public" static="no">
         <type>Coord&lt; <ref refid="structVy" kindref="compound">Vy</ref> &gt;</type>
@@ -437,7 +450,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="50" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="50" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="52" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="52" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a07e2c8345b43b4014b9544e2c0f2b477" prot="public" static="no">
         <type>Idx&lt; <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -450,7 +463,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="61" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="61" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="63" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="63" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a2b93083d44a706c27f7584e8dfde511f" prot="public" static="no">
         <type>Idx&lt; <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -463,7 +476,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="62" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="62" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="64" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="64" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ae24820e1224c18383605e0782575f0c3" prot="public" static="no">
         <type>Idx&lt; <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -476,7 +489,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="63" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="63" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="65" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a6746ecde3f01cf3808e465b6065ef7c2" prot="public" static="no">
         <type>Idx&lt; <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -489,7 +502,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="64" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="64" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="66" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="66" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a4fbd1720c9419571d46d8e4e82d67f13" prot="public" static="no">
         <type>Idx&lt; <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -502,7 +515,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="65" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="65" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="67" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a484fd52ac97f2ca018ad67d9b864bfec" prot="public" static="no">
         <type>Idx&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -515,7 +528,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="66" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="66" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="68" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="68" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a2de0f1e840806e7b7e2777d792ab1e64" prot="public" static="no">
         <type>IdxStep&lt; <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -528,7 +541,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="69" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="69" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="71" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="71" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ac5dec6a269bb60eefe2e538468853599" prot="public" static="no">
         <type>IdxStep&lt; <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -541,7 +554,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="70" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="70" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="72" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="72" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a87884966e53c36e18472bccbe0df9939" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -554,7 +567,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="73" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="73" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="75" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="75" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aa4faeb10379806b3df4f928015adf816" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -567,7 +580,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="74" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="74" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="76" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="76" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aad8420d56040d0b29e71fc3fca7b6d5f" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -580,7 +593,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="75" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="75" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="77" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="77" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a4047e444328d922f5e915a026db3888c" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -593,7 +606,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="76" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="76" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="78" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="78" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ac0aa9452a06ec8371e5174c127583a3a" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -606,7 +619,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="77" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="77" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="79" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="79" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1acfd5c113b0618f0aad8e72525f02f770" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -619,7 +632,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="78" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="78" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="80" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="80" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a6b1613c7c4ea0b856b0408aa001df9a2" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -632,7 +645,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="79" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="79" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="81" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="81" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1afd0c85790ec88796d24cee83a9db686c" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -645,7 +658,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="80" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="80" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="82" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="82" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1afc660f8d1931cc89d6c07c125cab855e" prot="public" static="no">
         <type>IdxRange&lt; <ref refid="structSpecies" kindref="compound">Species</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -658,7 +671,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="81" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="81" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="83" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a0e88861478f43ddbfe56ea0c982da899" prot="public" static="no">
         <templateparamlist>
@@ -676,11 +689,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="84" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="84" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="86" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="86" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aecd8464841a3ee08bf823a3aacafae10" prot="public" static="no">
-        <type>FieldMemY&lt; double &gt;</type>
-        <definition>using DFieldMemY =  FieldMemY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a08fba836f4d7951c2006e42c01f3e4f7" prot="public" static="no">
+        <type>FieldMemY&lt; Real &gt;</type>
+        <definition>using DFieldMemY =  FieldMemY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemY</name>
         <briefdescription>
@@ -689,7 +702,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="85" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="85" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="87" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="87" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a6926d8962dd0b43d3341e5c293c8275a" prot="public" static="no">
         <templateparamlist>
@@ -707,11 +720,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="88" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="88" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="90" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="90" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a1012caf28a0a3db920dfc10893124df7" prot="public" static="no">
-        <type>FieldMemXY&lt; double &gt;</type>
-        <definition>using DFieldMemXY =  FieldMemXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a20ad3aaf692c0d81da5b6a1a5278fc88" prot="public" static="no">
+        <type>FieldMemXY&lt; Real &gt;</type>
+        <definition>using DFieldMemXY =  FieldMemXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemXY</name>
         <briefdescription>
@@ -720,7 +733,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="89" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="89" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="91" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="91" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a32cc743aaf2680ad14658ba167bd69e0" prot="public" static="no">
         <templateparamlist>
@@ -738,11 +751,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="92" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="92" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="94" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="94" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a22ed1da55db00cf5062d7f6f205ce947" prot="public" static="no">
-        <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY</ref>&lt; double &gt;</type>
-        <definition>using DVectorFieldMemXY =  VectorFieldMemXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aa3fc996e749fd62fb23baa70f21a5086" prot="public" static="no">
+        <type><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY</ref>&lt; Real &gt;</type>
+        <definition>using DVectorFieldMemXY =  VectorFieldMemXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorFieldMemXY</name>
         <briefdescription>
@@ -751,7 +764,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="93" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="93" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="95" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aa0dbeac5a6833f0703dc8baa5e55d435" prot="public" static="no">
         <templateparamlist>
@@ -769,11 +782,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="96" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="96" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="98" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="98" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aa0a9972af32ff1752fcc53e7fc28c30b" prot="public" static="no">
-        <type>FieldMemVy&lt; double &gt;</type>
-        <definition>using DFieldMemVy =  FieldMemVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a5cf86bc36cc6e619990ee353509bfffa" prot="public" static="no">
+        <type>FieldMemVy&lt; Real &gt;</type>
+        <definition>using DFieldMemVy =  FieldMemVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemVy</name>
         <briefdescription>
@@ -782,7 +795,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="97" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="97" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="99" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="99" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a31ee626ddacf4775e5580c3effb57cf8" prot="public" static="no">
         <templateparamlist>
@@ -800,11 +813,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="100" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="100" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="102" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="102" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ab636de3a5040e5257839376749851d28" prot="public" static="no">
-        <type>FieldMemVxVy&lt; double &gt;</type>
-        <definition>using DFieldMemVxVy =  FieldMemVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a2da4575fdfad095c69516d5240acc7dd" prot="public" static="no">
+        <type>FieldMemVxVy&lt; Real &gt;</type>
+        <definition>using DFieldMemVxVy =  FieldMemVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemVxVy</name>
         <briefdescription>
@@ -813,7 +826,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="101" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="101" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="103" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="103" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a913e2301e674cdb9ac1f84ce70721eb4" prot="public" static="no">
         <templateparamlist>
@@ -831,11 +844,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="104" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="104" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="106" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="106" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a83d2b24e754dadebcad44c8ccd292960" prot="public" static="no">
-        <type>FieldMemXYVxVy&lt; double &gt;</type>
-        <definition>using DFieldMemXYVxVy =  FieldMemXYVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a99bf0976d9519ad8d50ca917321b4ee9" prot="public" static="no">
+        <type>FieldMemXYVxVy&lt; Real &gt;</type>
+        <definition>using DFieldMemXYVxVy =  FieldMemXYVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemXYVxVy</name>
         <briefdescription>
@@ -844,7 +857,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="105" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="105" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="107" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="107" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a59e3ac5fcbd1e3e3efe0067bb62b158a" prot="public" static="no">
         <templateparamlist>
@@ -862,11 +875,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="108" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="108" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="110" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="110" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a89aec0481ac132f4ab352307e0db69e8" prot="public" static="no">
-        <type>FieldMemSpVxVy&lt; double &gt;</type>
-        <definition>using DFieldMemSpVxVy =  FieldMemSpVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1adfc52ed790b615efbd20b33b6f4c251b" prot="public" static="no">
+        <type>FieldMemSpVxVy&lt; Real &gt;</type>
+        <definition>using DFieldMemSpVxVy =  FieldMemSpVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemSpVxVy</name>
         <briefdescription>
@@ -875,7 +888,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="109" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="109" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="111" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="111" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a686dff336a6e460b0105afddec0ab2f7" prot="public" static="no">
         <templateparamlist>
@@ -893,11 +906,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="112" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="112" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="114" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="114" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a155cfb0c46f9875af15f9ad3a803dd60" prot="public" static="no">
-        <type>FieldMemSpXYVxVy&lt; double &gt;</type>
-        <definition>using DFieldMemSpXYVxVy =  FieldMemSpXYVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a7cb5dc885ec49eebce222178412f9658" prot="public" static="no">
+        <type>FieldMemSpXYVxVy&lt; Real &gt;</type>
+        <definition>using DFieldMemSpXYVxVy =  FieldMemSpXYVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemSpXYVxVy</name>
         <briefdescription>
@@ -906,7 +919,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="113" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="113" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="115" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="115" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ad0d4f5c86f63a7816c3f4bb18a828b82" prot="public" static="no">
         <templateparamlist>
@@ -924,11 +937,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="116" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="116" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="118" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="118" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1acaeea8a0b3106f02f0ecf26a2a8dab4a" prot="public" static="no">
-        <type>FieldMemSpVxVyXY&lt; double &gt;</type>
-        <definition>using DFieldMemSpVxVyXY =  FieldMemSpVxVyXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a1821497db5defff943935b613d3656c6" prot="public" static="no">
+        <type>FieldMemSpVxVyXY&lt; Real &gt;</type>
+        <definition>using DFieldMemSpVxVyXY =  FieldMemSpVxVyXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldMemSpVxVyXY</name>
         <briefdescription>
@@ -937,7 +950,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="117" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="117" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="119" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="119" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a26a003609a9f95ba4b456c0db2645d83" prot="public" static="no">
         <templateparamlist>
@@ -955,11 +968,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="120" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="120" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="122" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="122" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a7f0a602072ade545e128df4cc31229fa" prot="public" static="no">
-        <type>FieldY&lt; double &gt;</type>
-        <definition>using DFieldY =  FieldY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1afe31b914f39e266a424928c8417d51c8" prot="public" static="no">
+        <type>FieldY&lt; Real &gt;</type>
+        <definition>using DFieldY =  FieldY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldY</name>
         <briefdescription>
@@ -968,7 +981,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="121" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="121" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="123" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="123" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a79497306d40c30da6eb0a63b84b60655" prot="public" static="no">
         <templateparamlist>
@@ -986,11 +999,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="124" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="124" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="126" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="126" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1abf4686803a31574eef0bd6de84308aa5" prot="public" static="no">
-        <type>FieldXY&lt; double &gt;</type>
-        <definition>using DFieldXY =  FieldXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ad248b2869230b0b29067956919a19727" prot="public" static="no">
+        <type>FieldXY&lt; Real &gt;</type>
+        <definition>using DFieldXY =  FieldXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldXY</name>
         <briefdescription>
@@ -999,7 +1012,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="125" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="125" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="127" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="127" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a9823b62b6394efbf7550435bcc8ccab9" prot="public" static="no">
         <templateparamlist>
@@ -1017,11 +1030,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="128" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="128" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="130" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="130" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1adc7d466e8c95f4d5326b92cbe3213a2c" prot="public" static="no">
-        <type><ref refid="classVectorField" kindref="compound">VectorFieldXY</ref>&lt; double &gt;</type>
-        <definition>using DVectorFieldXY =  VectorFieldXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a1d5f34174b69f212c98d39ad0c23ad7d" prot="public" static="no">
+        <type><ref refid="classVectorField" kindref="compound">VectorFieldXY</ref>&lt; Real &gt;</type>
+        <definition>using DVectorFieldXY =  VectorFieldXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorFieldXY</name>
         <briefdescription>
@@ -1030,7 +1043,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="129" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="129" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="131" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="131" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a7378029b28720e726400afff0bcbbc49" prot="public" static="no">
         <templateparamlist>
@@ -1048,11 +1061,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="132" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="132" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="134" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="134" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a36d0b58a285f65c1afa679077b15eb55" prot="public" static="no">
-        <type>FieldVy&lt; double &gt;</type>
-        <definition>using DFieldVy =  FieldVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a5cf3556b4d7063f2c7153ca06b7486bf" prot="public" static="no">
+        <type>FieldVy&lt; Real &gt;</type>
+        <definition>using DFieldVy =  FieldVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldVy</name>
         <briefdescription>
@@ -1061,7 +1074,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="133" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="133" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="135" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="135" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aef74020acd68768e3fe89d2998a65d92" prot="public" static="no">
         <templateparamlist>
@@ -1079,11 +1092,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="136" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="136" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="138" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="138" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a038861bd6fa730f5f0d35d0d5680b0d3" prot="public" static="no">
-        <type>FieldVxVy&lt; double &gt;</type>
-        <definition>using DFieldVxVy =  FieldVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a4e433dc3a1a5b3874a2a40a49c5726d4" prot="public" static="no">
+        <type>FieldVxVy&lt; Real &gt;</type>
+        <definition>using DFieldVxVy =  FieldVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldVxVy</name>
         <briefdescription>
@@ -1092,7 +1105,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="137" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="137" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="139" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="139" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a6e9bc2aa61622bd739ee5016ce2254cc" prot="public" static="no">
         <templateparamlist>
@@ -1110,11 +1123,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="140" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="140" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="142" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="142" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aced42b7c78c84bd8908abcd61902636c" prot="public" static="no">
-        <type>FieldSpVxVy&lt; double &gt;</type>
-        <definition>using DFieldSpVxVy =  FieldSpVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1af00482cbad7be76070ba1dd9c84829cb" prot="public" static="no">
+        <type>FieldSpVxVy&lt; Real &gt;</type>
+        <definition>using DFieldSpVxVy =  FieldSpVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldSpVxVy</name>
         <briefdescription>
@@ -1123,7 +1136,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="141" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="141" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="143" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="143" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ac48dae4d2a495713b013801f1d339079" prot="public" static="no">
         <templateparamlist>
@@ -1141,11 +1154,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="144" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="144" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="146" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="146" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ace89523a77c5498b6bf1b8bd14ca9e2a" prot="public" static="no">
-        <type>FieldSpXYVxVy&lt; double &gt;</type>
-        <definition>using DFieldSpXYVxVy =  FieldSpXYVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aba2097db036e72dcd28e5054d8b0de0e" prot="public" static="no">
+        <type>FieldSpXYVxVy&lt; Real &gt;</type>
+        <definition>using DFieldSpXYVxVy =  FieldSpXYVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldSpXYVxVy</name>
         <briefdescription>
@@ -1154,7 +1167,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="145" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="145" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="147" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="147" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ad636ee00a4d666749fb2a4e0e8e77c7b" prot="public" static="no">
         <templateparamlist>
@@ -1172,11 +1185,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="148" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="148" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="150" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="150" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aec10c65676c20cb340d04921533acd74" prot="public" static="no">
-        <type>FieldSpVxVyXY&lt; double &gt;</type>
-        <definition>using DFieldSpVxVyXY =  FieldSpVxVyXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1acb26ba12c04e128327378650e811b10b" prot="public" static="no">
+        <type>FieldSpVxVyXY&lt; Real &gt;</type>
+        <definition>using DFieldSpVxVyXY =  FieldSpVxVyXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DFieldSpVxVyXY</name>
         <briefdescription>
@@ -1185,7 +1198,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="149" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="149" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="151" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="151" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a4a0ca69b36999899351db5823c34abfa" prot="public" static="no">
         <templateparamlist>
@@ -1203,7 +1216,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="152" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="152" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="154" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="154" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a9b2b3bf55efff1c5b33e4449adffc601" prot="public" static="no">
         <templateparamlist>
@@ -1221,11 +1234,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="155" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="155" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="157" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="157" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a03f280f71943aece4bffa9efd47be086" prot="public" static="no">
-        <type>ConstFieldXY&lt; double &gt;</type>
-        <definition>using DConstFieldXY =  ConstFieldXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a871d5d603a5ef0c16495fca657330857" prot="public" static="no">
+        <type>ConstFieldXY&lt; Real &gt;</type>
+        <definition>using DConstFieldXY =  ConstFieldXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldXY</name>
         <briefdescription>
@@ -1234,7 +1247,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="156" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="156" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="158" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="158" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1ac98466a89c20154f7363c7dcf623ad96" prot="public" static="no">
         <templateparamlist>
@@ -1252,11 +1265,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="159" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="159" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="161" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="161" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a3b8ada9d3eb6c88ab0322c3414970bcb" prot="public" static="no">
-        <type><ref refid="classVectorField" kindref="compound">VectorConstFieldXY</ref>&lt; double &gt;</type>
-        <definition>using DVectorConstFieldXY =  VectorConstFieldXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a44255fa608706e25e51bb410d9c546b3" prot="public" static="no">
+        <type><ref refid="classVectorField" kindref="compound">VectorConstFieldXY</ref>&lt; Real &gt;</type>
+        <definition>using DVectorConstFieldXY =  VectorConstFieldXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DVectorConstFieldXY</name>
         <briefdescription>
@@ -1265,7 +1278,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="160" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="160" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="162" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="162" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1adb839d0310c926528957d0e5c9e7a73b" prot="public" static="no">
         <templateparamlist>
@@ -1283,7 +1296,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="163" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="163" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="165" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="165" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a3be2e97ce92467d0c17972cf24ed2a70" prot="public" static="no">
         <templateparamlist>
@@ -1301,7 +1314,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="166" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="166" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="168" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="168" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a2aca7efb643d75fca9bd022d3399d03e" prot="public" static="no">
         <templateparamlist>
@@ -1319,11 +1332,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="169" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="169" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="171" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="171" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a12624a0632e8a3b920197dbbfc858f51" prot="public" static="no">
-        <type>ConstFieldVxVy&lt; double &gt;</type>
-        <definition>using DConstFieldVxVy =  ConstFieldVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a7e0f938f3cc88c5c6835d00618bb4767" prot="public" static="no">
+        <type>ConstFieldVxVy&lt; Real &gt;</type>
+        <definition>using DConstFieldVxVy =  ConstFieldVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldVxVy</name>
         <briefdescription>
@@ -1332,7 +1345,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="170" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="170" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="172" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="172" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a237fcfa94268a19d5c736731ba4b1747" prot="public" static="no">
         <templateparamlist>
@@ -1350,11 +1363,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="173" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="173" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="175" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="175" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a0257219c21ff9366a5e36a6e0dca0f7e" prot="public" static="no">
-        <type>ConstFieldSpVxVy&lt; double &gt;</type>
-        <definition>using DConstFieldSpVxVy =  ConstFieldSpVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aa53b6b2c6edbda84208820d872e307b4" prot="public" static="no">
+        <type>ConstFieldSpVxVy&lt; Real &gt;</type>
+        <definition>using DConstFieldSpVxVy =  ConstFieldSpVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldSpVxVy</name>
         <briefdescription>
@@ -1363,7 +1376,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="174" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="174" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="176" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="176" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1adec401df9b066c79693240ab8e5e7ec2" prot="public" static="no">
         <templateparamlist>
@@ -1381,11 +1394,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="177" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="177" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="179" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="179" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aa348f8fb5b5e99808d9656ba80888040" prot="public" static="no">
-        <type>ConstFieldSpXYVxVy&lt; double &gt;</type>
-        <definition>using DConstFieldSpXYVxVy =  ConstFieldSpXYVxVy&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a7b0d1c570bbb0b49d999c2bf6388d4e1" prot="public" static="no">
+        <type>ConstFieldSpXYVxVy&lt; Real &gt;</type>
+        <definition>using DConstFieldSpXYVxVy =  ConstFieldSpXYVxVy&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldSpXYVxVy</name>
         <briefdescription>
@@ -1394,7 +1407,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="178" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="178" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="180" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="180" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a90f30d4ad179be65a8f4f9c7e94b570a" prot="public" static="no">
         <templateparamlist>
@@ -1412,11 +1425,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="181" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="181" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="183" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="183" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1aea80c462186608683f26df5fe079ada1" prot="public" static="no">
-        <type>ConstFieldSpVxVyXY&lt; double &gt;</type>
-        <definition>using DConstFieldSpVxVyXY =  ConstFieldSpVxVyXY&lt;double&gt;</definition>
+      <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a31648fd4521c559783ab692d4924e576" prot="public" static="no">
+        <type>ConstFieldSpVxVyXY&lt; Real &gt;</type>
+        <definition>using DConstFieldSpVxVyXY =  ConstFieldSpVxVyXY&lt;Real&gt;</definition>
         <argsstring></argsstring>
         <name>DConstFieldSpVxVyXY</name>
         <briefdescription>
@@ -1425,7 +1438,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="182" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="182" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="184" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="184" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a60af2dc395fbdc8c8b31d418e14f703a" prot="public" static="no">
         <type><ref refid="classMPILayout" kindref="compound">MPILayout</ref>&lt; IdxRangeSpXYVxVy, <ref refid="structGridX" kindref="compound">GridX</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt;</type>
@@ -1438,7 +1451,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="184" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="184" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="186" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="186" bodyend="-1"/>
       </memberdef>
       <memberdef kind="typedef" id="geometry__xyvxvy_8hpp_1a4d93cda361e6a3c4781ac2a28c447476" prot="public" static="no">
         <type><ref refid="classMPILayout" kindref="compound">MPILayout</ref>&lt; IdxRangeSpVxVyXY, <ref refid="structGridVx" kindref="compound">GridVx</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt;</type>
@@ -1451,7 +1464,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="185" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="185" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" line="187" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp" bodystart="187" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -1474,199 +1487,201 @@
 <codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_field_mem.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;vector_index_tools.hpp&quot;</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="15"><highlight class="normal"></highlight></codeline>
-<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref></highlight></codeline>
-<codeline lineno="20"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a0333176b598ab1ac9bf749dfca10cc2f" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="25"><highlight class="normal"></highlight></codeline>
-<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a9743efa727bd8c0249715bf6ac425bc9" kindref="member">IS_COVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="28"><highlight class="normal"></highlight></codeline>
-<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a36729b36e12627fd69c709e3b26ce176" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="31"><highlight class="normal"></highlight></codeline>
-<codeline lineno="33" refid="structY_1aad98c6afa465f3fb654029648420df1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structY" kindref="compound">Y</ref>;</highlight></codeline>
-<codeline lineno="34"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"></highlight></codeline>
-<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVy" kindref="compound">Vy</ref></highlight></codeline>
-<codeline lineno="40"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structVy_1aebef90bce85084cc54c7c89419dce525" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
-<codeline lineno="45"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"></highlight></codeline>
-<codeline lineno="47"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordY<sp/>=<sp/>Coord&lt;Y&gt;;</highlight></codeline>
-<codeline lineno="48"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordXY<sp/>=<sp/>Coord&lt;X,<sp/>Y&gt;;</highlight></codeline>
-<codeline lineno="49"><highlight class="normal"></highlight></codeline>
-<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordVy<sp/>=<sp/>Coord&lt;Vy&gt;;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">Real<sp/>=<sp/>GYSELALIBXX_BUILD_REAL_PRECISION;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Y</ref></highlight></codeline>
+<codeline lineno="22"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a0333176b598ab1ac9bf749dfca10cc2f" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a9743efa727bd8c0249715bf6ac425bc9" kindref="member">IS_COVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structY_1a36729b36e12627fd69c709e3b26ce176" kindref="member">IS_CONTRAVARIANT</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="structY_1aad98c6afa465f3fb654029648420df1f" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="structY" kindref="compound">Dual</ref><sp/>=<sp/><ref refid="structY" kindref="compound">Y</ref>;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structVy" kindref="compound">Vy</ref></highlight></codeline>
+<codeline lineno="42"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/><ref refid="structVy_1aebef90bce85084cc54c7c89419dce525" kindref="member">PERIODIC</ref><sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordY<sp/>=<sp/>Coord&lt;Y&gt;;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordXY<sp/>=<sp/>Coord&lt;X,<sp/>Y&gt;;</highlight></codeline>
 <codeline lineno="51"><highlight class="normal"></highlight></codeline>
-<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IDim<sp/>definition</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="53"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGridY" kindref="compound">GridY</ref><sp/>:<sp/>UniformGridBase&lt;Y&gt;</highlight></codeline>
-<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="55"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="56" refid="structGridVy" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGridVy" kindref="compound">GridVy</ref><sp/>:<sp/>UniformGridBase&lt;Vy&gt;</highlight></codeline>
-<codeline lineno="57"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="58"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="59"><highlight class="normal"></highlight></codeline>
-<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxY<sp/>=<sp/>Idx&lt;GridY&gt;;</highlight></codeline>
-<codeline lineno="62"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxXY<sp/>=<sp/>Idx&lt;GridX,<sp/>GridY&gt;;</highlight></codeline>
-<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxVy<sp/>=<sp/>Idx&lt;GridVy&gt;;</highlight></codeline>
-<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxVxVy<sp/>=<sp/>Idx&lt;GridVx,<sp/>GridVy&gt;;</highlight></codeline>
-<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxXYVxVy<sp/>=<sp/>Idx&lt;GridX,<sp/>GridY,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
-<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxSpXYVxVy<sp/>=<sp/>Idx&lt;Species,<sp/>GridX,<sp/>GridY,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
-<codeline lineno="67"><highlight class="normal"></highlight></codeline>
-<codeline lineno="68"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IVect<sp/>definition</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="69"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepY<sp/>=<sp/>IdxStep&lt;GridY&gt;;</highlight></codeline>
-<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepVy<sp/>=<sp/>IdxStep&lt;GridVy&gt;;</highlight></codeline>
-<codeline lineno="71"><highlight class="normal"></highlight></codeline>
-<codeline lineno="72"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Iindex<sp/>range<sp/>definition</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="73"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeY<sp/>=<sp/>IdxRange&lt;GridY&gt;;</highlight></codeline>
-<codeline lineno="74"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeXY<sp/>=<sp/>IdxRange&lt;GridX,<sp/>GridY&gt;;</highlight></codeline>
-<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeVy<sp/>=<sp/>IdxRange&lt;GridVy&gt;;</highlight></codeline>
-<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeXYVxVy<sp/>=<sp/>IdxRange&lt;GridX,<sp/>GridY,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
-<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeVxVyXY<sp/>=<sp/>IdxRange&lt;GridVx,<sp/>GridVy,<sp/>GridX,<sp/>GridY&gt;;</highlight></codeline>
-<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeVxVy<sp/>=<sp/>IdxRange&lt;GridVx,<sp/>GridVy&gt;;</highlight></codeline>
-<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSpVxVy<sp/>=<sp/>IdxRange&lt;Species,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
-<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSpXYVxVy<sp/>=<sp/>IdxRange&lt;Species,<sp/>GridX,<sp/>GridY,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
-<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSpVxVyXY<sp/>=<sp/>IdxRange&lt;Species,<sp/>GridVx,<sp/>GridVy,<sp/>GridX,<sp/>GridY&gt;;</highlight></codeline>
-<codeline lineno="82"><highlight class="normal"></highlight></codeline>
-<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="84"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeY&gt;;</highlight></codeline>
-<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemY<sp/>=<sp/>FieldMemY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="86"><highlight class="normal"></highlight></codeline>
-<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="88"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemXY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeXY&gt;;</highlight></codeline>
-<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemXY<sp/>=<sp/>FieldMemXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="90"><highlight class="normal"></highlight></codeline>
-<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="92"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMemXY</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY&lt;double&gt;</ref>;</highlight></codeline>
-<codeline lineno="94"><highlight class="normal"></highlight></codeline>
-<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="96"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeVy&gt;;</highlight></codeline>
-<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemVy<sp/>=<sp/>FieldMemVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="98"><highlight class="normal"></highlight></codeline>
-<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="100"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemVxVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeVxVy&gt;;</highlight></codeline>
-<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemVxVy<sp/>=<sp/>FieldMemVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="102"><highlight class="normal"></highlight></codeline>
-<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="104"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemXYVxVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeXYVxVy&gt;;</highlight></codeline>
-<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemXYVxVy<sp/>=<sp/>FieldMemXYVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="106"><highlight class="normal"></highlight></codeline>
-<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="108"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSpVxVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSpVxVy&gt;;</highlight></codeline>
-<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSpVxVy<sp/>=<sp/>FieldMemSpVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="110"><highlight class="normal"></highlight></codeline>
-<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="112"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSpXYVxVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSpXYVxVy&gt;;</highlight></codeline>
-<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSpXYVxVy<sp/>=<sp/>FieldMemSpXYVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="114"><highlight class="normal"></highlight></codeline>
-<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSpVxVyXY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSpVxVyXY&gt;;</highlight></codeline>
-<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSpVxVyXY<sp/>=<sp/>FieldMemSpVxVyXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="118"><highlight class="normal"></highlight></codeline>
-<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="120"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeY&gt;;</highlight></codeline>
-<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldY<sp/>=<sp/>FieldY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="122"><highlight class="normal"></highlight></codeline>
-<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="124"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldXY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeXY&gt;;</highlight></codeline>
-<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldXY<sp/>=<sp/>FieldXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="126"><highlight class="normal"></highlight></codeline>
-<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="128"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">VectorFieldXY</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorFieldXY</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorFieldXY&lt;double&gt;</ref>;</highlight></codeline>
-<codeline lineno="130"><highlight class="normal"></highlight></codeline>
-<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="132"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldVy<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeVy&gt;;</highlight></codeline>
-<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldVy<sp/>=<sp/>FieldVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="134"><highlight class="normal"></highlight></codeline>
-<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="136"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldVxVy<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeVxVy&gt;;</highlight></codeline>
-<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldVxVy<sp/>=<sp/>FieldVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="138"><highlight class="normal"></highlight></codeline>
-<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="140"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSpVxVy<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSpVxVy&gt;;</highlight></codeline>
-<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSpVxVy<sp/>=<sp/>FieldSpVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="142"><highlight class="normal"></highlight></codeline>
-<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSpXYVxVy<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSpXYVxVy&gt;;</highlight></codeline>
-<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSpXYVxVy<sp/>=<sp/>FieldSpXYVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="146"><highlight class="normal"></highlight></codeline>
-<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="148"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSpVxVyXY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSpVxVyXY&gt;;</highlight></codeline>
-<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSpVxVyXY<sp/>=<sp/>FieldSpVxVyXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="150"><highlight class="normal"></highlight></codeline>
-<codeline lineno="151"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="152"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeY&gt;;</highlight></codeline>
-<codeline lineno="153"><highlight class="normal"></highlight></codeline>
-<codeline lineno="154"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="155"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldXY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeXY&gt;;</highlight></codeline>
-<codeline lineno="156"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldXY<sp/>=<sp/>ConstFieldXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="157"><highlight class="normal"></highlight></codeline>
-<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="159"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">VectorConstFieldXY</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorConstField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;</ref>&gt;;</highlight></codeline>
-<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorConstFieldXY</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorConstFieldXY&lt;double&gt;</ref>;</highlight></codeline>
-<codeline lineno="161"><highlight class="normal"></highlight></codeline>
-<codeline lineno="162"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="163"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldVx<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeVx&gt;;</highlight></codeline>
-<codeline lineno="164"><highlight class="normal"></highlight></codeline>
-<codeline lineno="165"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="166"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldVy<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeVy&gt;;</highlight></codeline>
-<codeline lineno="167"><highlight class="normal"></highlight></codeline>
-<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="169"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldVxVy<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeVxVy&gt;;</highlight></codeline>
-<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldVxVy<sp/>=<sp/>ConstFieldVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="171"><highlight class="normal"></highlight></codeline>
-<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="173"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSpVxVy<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeSpVxVy&gt;;</highlight></codeline>
-<codeline lineno="174"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSpVxVy<sp/>=<sp/>ConstFieldSpVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="175"><highlight class="normal"></highlight></codeline>
-<codeline lineno="176"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="177"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSpXYVxVy<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeSpXYVxVy&gt;;</highlight></codeline>
-<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSpXYVxVy<sp/>=<sp/>ConstFieldSpXYVxVy&lt;double&gt;;</highlight></codeline>
-<codeline lineno="179"><highlight class="normal"></highlight></codeline>
-<codeline lineno="180"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
-<codeline lineno="181"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSpVxVyXY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeSpVxVyXY&gt;;</highlight></codeline>
-<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSpVxVyXY<sp/>=<sp/>ConstFieldSpVxVyXY&lt;double&gt;;</highlight></codeline>
-<codeline lineno="183"><highlight class="normal"></highlight></codeline>
-<codeline lineno="184"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMPILayout" kindref="compound">X2DSplit</ref><sp/>=<sp/><ref refid="classMPILayout" kindref="compound">MPILayout&lt;IdxRangeSpXYVxVy, GridX, GridY&gt;</ref>;</highlight></codeline>
-<codeline lineno="185"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMPILayout" kindref="compound">V2DSplit</ref><sp/>=<sp/><ref refid="classMPILayout" kindref="compound">MPILayout&lt;IdxRangeSpVxVyXY, GridVx, GridVy&gt;</ref>;</highlight></codeline>
-<codeline lineno="186"><highlight class="normal"></highlight></codeline>
-<codeline lineno="191" refid="classGeometryXYVxVy" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy" kindref="compound">GeometryXYVxVy</ref></highlight></codeline>
-<codeline lineno="192"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="193"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="198" refid="classGeometryXYVxVy_1a4c9cc4488baf3e8e9f1504f1a97391f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy_1a4c9cc4488baf3e8e9f1504f1a97391f5" kindref="member">velocity_dim_for</ref><sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
-<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;T,<sp/>GridX&gt;,</highlight></codeline>
-<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridVx" kindref="compound">GridVx</ref>,</highlight></codeline>
-<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridY&gt;,<sp/><ref refid="structGridVy" kindref="compound">GridVy</ref>,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">&gt;&gt;;</highlight></codeline>
-<codeline lineno="202"><highlight class="normal"></highlight></codeline>
-<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>T&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>using<sp/>spatial_dim_for<sp/>=<sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridVx&gt;,<sp/>GridX,<sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridVy&gt;,<sp/>GridY,<sp/>void&gt;&gt;;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="208"><highlight class="normal"></highlight></codeline>
-<codeline lineno="212" refid="classGeometryXYVxVy_1a42ee633bb4e12b94dfccb9207bee2840" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy_1a42ee633bb4e12b94dfccb9207bee2840" kindref="member">IdxRangeSpatial</ref><sp/>=<sp/>IdxRangeXY;</highlight></codeline>
-<codeline lineno="213"><highlight class="normal"></highlight></codeline>
-<codeline lineno="217" refid="classGeometryXYVxVy_1a73bbb5da0780d301493db3c107f8e06b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy_1a73bbb5da0780d301493db3c107f8e06b" kindref="member">IdxRangeVelocity</ref><sp/>=<sp/>IdxRangeVxVy;</highlight></codeline>
-<codeline lineno="218"><highlight class="normal"></highlight></codeline>
-<codeline lineno="222" refid="classGeometryXYVxVy_1ad164a1e1a7a2d43424dd9e1f88a66c22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy_1ad164a1e1a7a2d43424dd9e1f88a66c22" kindref="member">IdxRangeFdistribu</ref><sp/>=<sp/>IdxRangeSpXYVxVy;</highlight></codeline>
-<codeline lineno="223"><highlight class="normal">};</highlight></codeline>
-<codeline lineno="224"><highlight class="normal"></highlight></codeline>
-<codeline lineno="229" refid="classGeometryVxVyXY" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref></highlight></codeline>
-<codeline lineno="230"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="231"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
-<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
-<codeline lineno="236" refid="classGeometryVxVyXY_1a84a9fb15350cd97ea073b9843813182c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY_1a84a9fb15350cd97ea073b9843813182c" kindref="member">velocity_dim_for</ref><sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
-<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;T,<sp/>GridX&gt;,</highlight></codeline>
-<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridVx" kindref="compound">GridVx</ref>,</highlight></codeline>
-<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridY&gt;,<sp/><ref refid="structGridVy" kindref="compound">GridVy</ref>,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">&gt;&gt;;</highlight></codeline>
-<codeline lineno="240"><highlight class="normal"></highlight></codeline>
-<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>T&gt;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>using<sp/>spatial_dim_for<sp/>=<sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridVx&gt;,<sp/>GridX,<sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridVy&gt;,<sp/>GridY,<sp/>void&gt;&gt;;</highlight><highlight class="normal"></highlight></codeline>
-<codeline lineno="246"><highlight class="normal"></highlight></codeline>
-<codeline lineno="250" refid="classGeometryVxVyXY_1a5c5c41cdaa9ede1bde1448cb9dd843ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY_1a5c5c41cdaa9ede1bde1448cb9dd843ec" kindref="member">IdxRangeSpatial</ref><sp/>=<sp/>IdxRangeXY;</highlight></codeline>
-<codeline lineno="251"><highlight class="normal"></highlight></codeline>
-<codeline lineno="255" refid="classGeometryVxVyXY_1a26265b9d0fea55e4711a916624a9437a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY_1a26265b9d0fea55e4711a916624a9437a" kindref="member">IdxRangeVelocity</ref><sp/>=<sp/>IdxRangeVxVy;</highlight></codeline>
-<codeline lineno="256"><highlight class="normal"></highlight></codeline>
-<codeline lineno="260" refid="classGeometryVxVyXY_1a8cf5d3c93cc964d7d7e448bea0df6417" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY_1a8cf5d3c93cc964d7d7e448bea0df6417" kindref="member">IdxRangeFdistribu</ref><sp/>=<sp/>IdxRangeSpVxVyXY;</highlight></codeline>
-<codeline lineno="261"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">CoordVy<sp/>=<sp/>Coord&lt;Vy&gt;;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IDim<sp/>definition</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGridY" kindref="compound">GridY</ref><sp/>:<sp/>UniformGridBase&lt;Y&gt;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="58" refid="structGridVy" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structGridVy" kindref="compound">GridVy</ref><sp/>:<sp/>UniformGridBase&lt;Vy&gt;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Index</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxY<sp/>=<sp/>Idx&lt;GridY&gt;;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxXY<sp/>=<sp/>Idx&lt;GridX,<sp/>GridY&gt;;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxVy<sp/>=<sp/>Idx&lt;GridVy&gt;;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxVxVy<sp/>=<sp/>Idx&lt;GridVx,<sp/>GridVy&gt;;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxXYVxVy<sp/>=<sp/>Idx&lt;GridX,<sp/>GridY,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxSpXYVxVy<sp/>=<sp/>Idx&lt;Species,<sp/>GridX,<sp/>GridY,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="comment">//<sp/>IVect<sp/>definition</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepY<sp/>=<sp/>IdxStep&lt;GridY&gt;;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxStepVy<sp/>=<sp/>IdxStep&lt;GridVy&gt;;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Iindex<sp/>range<sp/>definition</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeY<sp/>=<sp/>IdxRange&lt;GridY&gt;;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeXY<sp/>=<sp/>IdxRange&lt;GridX,<sp/>GridY&gt;;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeVy<sp/>=<sp/>IdxRange&lt;GridVy&gt;;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeXYVxVy<sp/>=<sp/>IdxRange&lt;GridX,<sp/>GridY,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeVxVyXY<sp/>=<sp/>IdxRange&lt;GridVx,<sp/>GridVy,<sp/>GridX,<sp/>GridY&gt;;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeVxVy<sp/>=<sp/>IdxRange&lt;GridVx,<sp/>GridVy&gt;;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSpVxVy<sp/>=<sp/>IdxRange&lt;Species,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSpXYVxVy<sp/>=<sp/>IdxRange&lt;Species,<sp/>GridX,<sp/>GridY,<sp/>GridVx,<sp/>GridVy&gt;;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">IdxRangeSpVxVyXY<sp/>=<sp/>IdxRange&lt;Species,<sp/>GridVx,<sp/>GridVy,<sp/>GridX,<sp/>GridY&gt;;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeY&gt;;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemY<sp/>=<sp/>FieldMemY&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemXY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeXY&gt;;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemXY<sp/>=<sp/>FieldMemXY&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMem&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMemXY</ref><sp/>=<sp/><ref refid="classVectorFieldMem" kindref="compound">VectorFieldMemXY&lt;Real&gt;</ref>;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeVy&gt;;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemVy<sp/>=<sp/>FieldMemVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemVxVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeVxVy&gt;;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemVxVy<sp/>=<sp/>FieldMemVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemXYVxVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeXYVxVy&gt;;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemXYVxVy<sp/>=<sp/>FieldMemXYVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSpVxVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSpVxVy&gt;;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSpVxVy<sp/>=<sp/>FieldMemSpVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSpXYVxVy<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSpXYVxVy&gt;;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSpXYVxVy<sp/>=<sp/>FieldMemSpXYVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldMemSpVxVyXY<sp/>=<sp/>FieldMem&lt;ElementType,<sp/>IdxRangeSpVxVyXY&gt;;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldMemSpVxVyXY<sp/>=<sp/>FieldMemSpVxVyXY&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeY&gt;;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldY<sp/>=<sp/>FieldY&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldXY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeXY&gt;;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldXY<sp/>=<sp/>FieldXY&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">VectorFieldXY</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorFieldXY</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorFieldXY&lt;Real&gt;</ref>;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldVy<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeVy&gt;;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldVy<sp/>=<sp/>FieldVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldVxVy<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeVxVy&gt;;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldVxVy<sp/>=<sp/>FieldVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSpVxVy<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSpVxVy&gt;;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSpVxVy<sp/>=<sp/>FieldSpVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSpXYVxVy<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSpXYVxVy&gt;;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSpXYVxVy<sp/>=<sp/>FieldSpXYVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">FieldSpVxVyXY<sp/>=<sp/>Field&lt;ElementType,<sp/>IdxRangeSpVxVyXY&gt;;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DFieldSpVxVyXY<sp/>=<sp/>FieldSpVxVyXY&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeY&gt;;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldXY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeXY&gt;;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldXY<sp/>=<sp/>ConstFieldXY&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">VectorConstFieldXY</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorConstField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;</ref>&gt;;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classVectorField" kindref="compound">DVectorConstFieldXY</ref><sp/>=<sp/><ref refid="classVectorField" kindref="compound">VectorConstFieldXY&lt;Real&gt;</ref>;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldVx<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeVx&gt;;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldVy<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeVy&gt;;</highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldVxVy<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeVxVy&gt;;</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldVxVy<sp/>=<sp/>ConstFieldVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSpVxVy<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeSpVxVy&gt;;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSpVxVy<sp/>=<sp/>ConstFieldSpVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSpXYVxVy<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeSpXYVxVy&gt;;</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSpXYVxVy<sp/>=<sp/>ConstFieldSpXYVxVy&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>ElementType&gt;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">ConstFieldSpVxVyXY<sp/>=<sp/>Field&lt;ElementType<sp/>const,<sp/>IdxRangeSpVxVyXY&gt;;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal">DConstFieldSpVxVyXY<sp/>=<sp/>ConstFieldSpVxVyXY&lt;Real&gt;;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMPILayout" kindref="compound">X2DSplit</ref><sp/>=<sp/><ref refid="classMPILayout" kindref="compound">MPILayout&lt;IdxRangeSpXYVxVy, GridX, GridY&gt;</ref>;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classMPILayout" kindref="compound">V2DSplit</ref><sp/>=<sp/><ref refid="classMPILayout" kindref="compound">MPILayout&lt;IdxRangeSpVxVyXY, GridVx, GridVy&gt;</ref>;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="193" refid="classGeometryXYVxVy" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy" kindref="compound">GeometryXYVxVy</ref></highlight></codeline>
+<codeline lineno="194"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="200" refid="classGeometryXYVxVy_1a4c9cc4488baf3e8e9f1504f1a97391f5" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy_1a4c9cc4488baf3e8e9f1504f1a97391f5" kindref="member">velocity_dim_for</ref><sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;T,<sp/>GridX&gt;,</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridVx" kindref="compound">GridVx</ref>,</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridY&gt;,<sp/><ref refid="structGridVy" kindref="compound">GridVy</ref>,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">&gt;&gt;;</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>T&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>using<sp/>spatial_dim_for<sp/>=<sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridVx&gt;,<sp/>GridX,<sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridVy&gt;,<sp/>GridY,<sp/>void&gt;&gt;;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"></highlight></codeline>
+<codeline lineno="214" refid="classGeometryXYVxVy_1a42ee633bb4e12b94dfccb9207bee2840" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy_1a42ee633bb4e12b94dfccb9207bee2840" kindref="member">IdxRangeSpatial</ref><sp/>=<sp/>IdxRangeXY;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"></highlight></codeline>
+<codeline lineno="219" refid="classGeometryXYVxVy_1a73bbb5da0780d301493db3c107f8e06b" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy_1a73bbb5da0780d301493db3c107f8e06b" kindref="member">IdxRangeVelocity</ref><sp/>=<sp/>IdxRangeVxVy;</highlight></codeline>
+<codeline lineno="220"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224" refid="classGeometryXYVxVy_1ad164a1e1a7a2d43424dd9e1f88a66c22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryXYVxVy_1ad164a1e1a7a2d43424dd9e1f88a66c22" kindref="member">IdxRangeFdistribu</ref><sp/>=<sp/>IdxRangeSpXYVxVy;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="231" refid="classGeometryVxVyXY" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref></highlight></codeline>
+<codeline lineno="232"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">template</highlight><highlight class="normal"><sp/>&lt;</highlight><highlight class="keyword">class</highlight><highlight class="normal"><sp/>T&gt;</highlight></codeline>
+<codeline lineno="238" refid="classGeometryVxVyXY_1a84a9fb15350cd97ea073b9843813182c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY_1a84a9fb15350cd97ea073b9843813182c" kindref="member">velocity_dim_for</ref><sp/>=<sp/>std::conditional_t&lt;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::is_same_v&lt;T,<sp/>GridX&gt;,</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="structGridVx" kindref="compound">GridVx</ref>,</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridY&gt;,<sp/><ref refid="structGridVy" kindref="compound">GridVy</ref>,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal">&gt;&gt;;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>template<sp/>&lt;class<sp/>T&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>using<sp/>spatial_dim_for<sp/>=<sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridVx&gt;,<sp/>GridX,<sp/>std::conditional_t&lt;std::is_same_v&lt;T,<sp/>GridVy&gt;,<sp/>GridY,<sp/>void&gt;&gt;;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252" refid="classGeometryVxVyXY_1a5c5c41cdaa9ede1bde1448cb9dd843ec" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY_1a5c5c41cdaa9ede1bde1448cb9dd843ec" kindref="member">IdxRangeSpatial</ref><sp/>=<sp/>IdxRangeXY;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257" refid="classGeometryVxVyXY_1a26265b9d0fea55e4711a916624a9437a" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY_1a26265b9d0fea55e4711a916624a9437a" kindref="member">IdxRangeVelocity</ref><sp/>=<sp/>IdxRangeVxVy;</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262" refid="classGeometryVxVyXY_1a8cf5d3c93cc964d7d7e448bea0df6417" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">using<sp/></highlight><highlight class="normal"><ref refid="classGeometryVxVyXY_1a8cf5d3c93cc964d7d7e448bea0df6417" kindref="member">IdxRangeFdistribu</ref><sp/>=<sp/>IdxRangeSpVxVyXY;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal">};</highlight></codeline>
     </programlisting>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/geometry/geometry_xyvxvy.hpp"/>
   </compounddef>

@@ -593,6 +593,15 @@ struct MPITypeDescriptor&lt;double&gt;
 };
 
 template &lt;&gt;
+struct MPITypeDescriptor&lt;float&gt;
+{
+    static MPI_Datatype get_type() noexcept
+    {
+        return MPI_FLOAT;
+    }
+};
+
+template &lt;&gt;
 struct MPITypeDescriptor&lt;unsigned long&gt;
 {
     static MPI_Datatype get_type() noexcept

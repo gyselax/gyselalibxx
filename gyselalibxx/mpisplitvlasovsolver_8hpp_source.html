@@ -575,20 +575,20 @@
 
 class MpiSplitVlasovSolver : public IVlasovSolver
 {
-    IAdvectionSpatial&lt;GeometryVxVyXY, GridX&gt; const&amp; m_advec_x;
-    IAdvectionSpatial&lt;GeometryVxVyXY, GridY&gt; const&amp; m_advec_y;
+    IAdvectionSpatial&lt;GeometryVxVyXY, GridX, Real&gt; const&amp; m_advec_x;
+    IAdvectionSpatial&lt;GeometryVxVyXY, GridY, Real&gt; const&amp; m_advec_y;
 
-    IAdvectionVelocity&lt;GeometryXYVxVy, GridVx&gt; const&amp; m_advec_vx;
-    IAdvectionVelocity&lt;GeometryXYVxVy, GridVy&gt; const&amp; m_advec_vy;
+    IAdvectionVelocity&lt;GeometryXYVxVy, GridVx, Real&gt; const&amp; m_advec_vx;
+    IAdvectionVelocity&lt;GeometryXYVxVy, GridVy, Real&gt; const&amp; m_advec_vy;
 
     MPITransposeAllToAll&lt;X2DSplit, V2DSplit&gt; const&amp; m_transpose;
 
 public:
     MpiSplitVlasovSolver(
-            IAdvectionSpatial&lt;GeometryVxVyXY, GridX&gt; const&amp; advec_x,
-            IAdvectionSpatial&lt;GeometryVxVyXY, GridY&gt; const&amp; advec_y,
-            IAdvectionVelocity&lt;GeometryXYVxVy, GridVx&gt; const&amp; advec_vx,
-            IAdvectionVelocity&lt;GeometryXYVxVy, GridVy&gt; const&amp; advec_vy,
+            IAdvectionSpatial&lt;GeometryVxVyXY, GridX, Real&gt; const&amp; advec_x,
+            IAdvectionSpatial&lt;GeometryVxVyXY, GridY, Real&gt; const&amp; advec_y,
+            IAdvectionVelocity&lt;GeometryXYVxVy, GridVx, Real&gt; const&amp; advec_vx,
+            IAdvectionVelocity&lt;GeometryXYVxVy, GridVy, Real&gt; const&amp; advec_vy,
             MPITransposeAllToAll&lt;X2DSplit, V2DSplit&gt; const&amp; transpose);
 
     ~MpiSplitVlasovSolver() override = default;
@@ -596,7 +596,7 @@ public:
     DFieldSpVxVyXY operator()(
             DFieldSpVxVyXY allfdistribu,
             DVectorConstFieldXY electric_field,
-            double dt) const override;
+            Real dt) const override;
 };
 </code></pre></div>
               

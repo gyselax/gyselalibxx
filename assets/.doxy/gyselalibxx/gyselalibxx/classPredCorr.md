@@ -96,7 +96,7 @@ Inherits the following classes: [ITimeSolver](classITimeSolver.md),  [ITimeSolve
 |   | [**PredCorr**](#function-predcorr-12) ([**IBoltzmannSolver**](classIBoltzmannSolver.md) const & boltzmann\_solver, [**IQNSolver**](classIQNSolver.md) const & poisson\_solver) <br>_Creates an instance of the predictor-corrector class._  |
 |   | [**PredCorr**](#function-predcorr-22) ([**IVlasovSolver**](classIVlasovSolver.md) const & vlasov\_solver, [**IQNSolver**](classIQNSolver.md) const & poisson\_solver) <br>_Creates an instance of the predictor-corrector class._  |
 | virtual DFieldSpXVx | [**operator()**](#function-operator) (DFieldSpXVx allfdistribu, double time\_start, double dt, int steps=1) override const<br>_Solves the Boltzmann-Poisson system._  |
-| virtual DFieldSpVxVyXY | [**operator()**](#function-operator_1) (DFieldSpVxVyXY allfdistribu, double dt, int steps=1) override const<br>_Solves the Vlasov-Poisson system._  |
+| virtual DFieldSpVxVyXY | [**operator()**](#function-operator_1) (DFieldSpVxVyXY allfdistribu, Real dt, int steps=1) override const<br>_Solves the Vlasov-Poisson system._  |
 |   | [**~PredCorr**](#function-predcorr-12) () override<br> |
 |   | [**~PredCorr**](#function-predcorr-12) () override<br> |
 
@@ -108,7 +108,7 @@ See [ITimeSolver](classITimeSolver.md)
 | Type | Name |
 | ---: | :--- |
 | virtual DFieldSpXVx | [**operator()**](classITimeSolver.md#function-operator) (DFieldSpXVx allfdistribu, double time\_start, double dt, int steps=1) const = 0<br>_Operator for solving the Boltzmann-Poisson system._  |
-| virtual DFieldSpVxVyXY | [**operator()**](classITimeSolver.md#function-operator_1) (DFieldSpVxVyXY allfdistribu, double dt, int steps=1) const = 0<br>_Solves the Vlasov-Poisson system._  |
+| virtual DFieldSpVxVyXY | [**operator()**](classITimeSolver.md#function-operator_1) (DFieldSpVxVyXY allfdistribu, Real dt, int steps=1) const = 0<br>_Solves the Vlasov-Poisson system._  |
 | virtual  | [**~ITimeSolver**](classITimeSolver.md#function-itimesolver-12) () = default<br> |
 | virtual  | [**~ITimeSolver**](classITimeSolver.md#function-itimesolver-12) () = default<br> |
 
@@ -120,7 +120,7 @@ See [ITimeSolver](classITimeSolver.md)
 | Type | Name |
 | ---: | :--- |
 | virtual DFieldSpXVx | [**operator()**](classITimeSolver.md#function-operator) (DFieldSpXVx allfdistribu, double time\_start, double dt, int steps=1) const = 0<br>_Operator for solving the Boltzmann-Poisson system._  |
-| virtual DFieldSpVxVyXY | [**operator()**](classITimeSolver.md#function-operator_1) (DFieldSpVxVyXY allfdistribu, double dt, int steps=1) const = 0<br>_Solves the Vlasov-Poisson system._  |
+| virtual DFieldSpVxVyXY | [**operator()**](classITimeSolver.md#function-operator_1) (DFieldSpVxVyXY allfdistribu, Real dt, int steps=1) const = 0<br>_Solves the Vlasov-Poisson system._  |
 | virtual  | [**~ITimeSolver**](classITimeSolver.md#function-itimesolver-12) () = default<br> |
 | virtual  | [**~ITimeSolver**](classITimeSolver.md#function-itimesolver-12) () = default<br> |
 
@@ -327,7 +327,7 @@ _Solves the Vlasov-Poisson system._
 ```C++
 virtual DFieldSpVxVyXY PredCorr::operator() (
     DFieldSpVxVyXY allfdistribu,
-    double dt,
+    Real dt,
     int steps=1
 ) override const
 ```

@@ -30,7 +30,7 @@ public:
 
     ~PredCorr() override = default;
 
-    DFieldSpVxVyXY operator()(DFieldSpVxVyXY allfdistribu, double dt, int steps = 1) const override;
+    DFieldSpVxVyXY operator()(DFieldSpVxVyXY allfdistribu, Real dt, int steps = 1) const override;
 };
 ```
 

@@ -73,8 +73,8 @@ Inherits the following classes: [IVlasovSolver](classIVlasovSolver.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**MpiSplitVlasovSolver**](#function-mpisplitvlasovsolver) ([**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridX**](structGridX.md) &gt; const & advec\_x, [**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridY**](structGridY.md) &gt; const & advec\_y, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryXYVxVy**](classGeometryXYVxVy.md), [**GridVx**](structGridVx.md) &gt; const & advec\_vx, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryXYVxVy**](classGeometryXYVxVy.md), [**GridVy**](structGridVy.md) &gt; const & advec\_vy, [**MPITransposeAllToAll**](classMPITransposeAllToAll.md)&lt; [**X2DSplit**](classMPILayout.md), [**V2DSplit**](classMPILayout.md) &gt; const & transpose) <br>_Creates an instance of the split vlasov solver class._  |
-| virtual DFieldSpVxVyXY | [**operator()**](#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) electric\_field, double dt) override const<br>_Solves a Vlasov equation on a timestep dt._  |
+|   | [**MpiSplitVlasovSolver**](#function-mpisplitvlasovsolver) ([**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridX**](structGridX.md), Real &gt; const & advec\_x, [**IAdvectionSpatial**](classIAdvectionSpatial.md)&lt; [**GeometryVxVyXY**](classGeometryVxVyXY.md), [**GridY**](structGridY.md), Real &gt; const & advec\_y, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryXYVxVy**](classGeometryXYVxVy.md), [**GridVx**](structGridVx.md), Real &gt; const & advec\_vx, [**IAdvectionVelocity**](classIAdvectionVelocity.md)&lt; [**GeometryXYVxVy**](classGeometryXYVxVy.md), [**GridVy**](structGridVy.md), Real &gt; const & advec\_vy, [**MPITransposeAllToAll**](classMPITransposeAllToAll.md)&lt; [**X2DSplit**](classMPILayout.md), [**V2DSplit**](classMPILayout.md) &gt; const & transpose) <br>_Creates an instance of the split vlasov solver class._  |
+| virtual DFieldSpVxVyXY | [**operator()**](#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) electric\_field, Real dt) override const<br>_Solves a Vlasov equation on a timestep dt._  |
 |   | [**~MpiSplitVlasovSolver**](#function-mpisplitvlasovsolver) () override<br> |
 
 
@@ -84,7 +84,7 @@ See [IVlasovSolver](classIVlasovSolver.md)
 
 | Type | Name |
 | ---: | :--- |
-| virtual DFieldSpVxVyXY | [**operator()**](classIVlasovSolver.md#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) efield, double dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
+| virtual DFieldSpVxVyXY | [**operator()**](classIVlasovSolver.md#function-operator) (DFieldSpVxVyXY allfdistribu, [**DVectorConstFieldXY**](classVectorField.md) efield, Real dt) const = 0<br>_Solves a Vlasov equation on a timestep dt._  |
 | virtual  | [**~IVlasovSolver**](classIVlasovSolver.md#function-ivlasovsolver) () = default<br> |
 
 
@@ -157,10 +157,10 @@ The Vlasov equation is split between four advection equations along the [**X**](
 _Creates an instance of the split vlasov solver class._ 
 ```C++
 MpiSplitVlasovSolver::MpiSplitVlasovSolver (
-    IAdvectionSpatial < GeometryVxVyXY , GridX > const & advec_x,
-    IAdvectionSpatial < GeometryVxVyXY , GridY > const & advec_y,
-    IAdvectionVelocity < GeometryXYVxVy , GridVx > const & advec_vx,
-    IAdvectionVelocity < GeometryXYVxVy , GridVy > const & advec_vy,
+    IAdvectionSpatial < GeometryVxVyXY , GridX , Real > const & advec_x,
+    IAdvectionSpatial < GeometryVxVyXY , GridY , Real > const & advec_y,
+    IAdvectionVelocity < GeometryXYVxVy , GridVx , Real > const & advec_vx,
+    IAdvectionVelocity < GeometryXYVxVy , GridVy , Real > const & advec_vy,
     MPITransposeAllToAll < X2DSplit , V2DSplit > const & transpose
 ) 
 ```
@@ -194,7 +194,7 @@ _Solves a Vlasov equation on a timestep dt._
 virtual DFieldSpVxVyXY MpiSplitVlasovSolver::operator() (
     DFieldSpVxVyXY allfdistribu,
     DVectorConstFieldXY electric_field,
-    double dt
+    Real dt
 ) override const
 ```
 

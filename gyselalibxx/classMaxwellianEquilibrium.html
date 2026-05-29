@@ -590,7 +590,7 @@
 </tr>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-maxwellianequilibrium-24"><strong>MaxwellianEquilibrium</strong></a> (host_t&lt; DFieldMemSp &gt; density_eq, host_t&lt; DFieldMemSp &gt; temperature_eq, host_t&lt; DFieldMemSp &gt; mean_velocity_eq) <br><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></td>
+<td style="text-align: left;"><a href="#function-maxwellianequilibrium-44"><strong>MaxwellianEquilibrium</strong></a> (host_t&lt; FieldMemSp&lt; Real &gt; &gt; density_eq, host_t&lt; FieldMemSp&lt; Real &gt; &gt; temperature_eq, host_t&lt; FieldMemSp&lt; Real &gt; &gt; mean_velocity_eq) <br><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">host_t&lt; DConstFieldSp &gt;</td>
@@ -601,7 +601,7 @@
 <td style="text-align: left;"><a href="#function-density_eq-13"><strong>density_eq</strong></a> () const<br><em>A method for accessing the m_density_eq member variable of the class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">host_t&lt; ConstFieldSp&lt; double &gt; &gt;</td>
+<td style="text-align: right;">host_t&lt; ConstFieldSp&lt; Real &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-density_eq-33"><strong>density_eq</strong></a> () const<br><em>A method for accessing the m_density_eq member variable of the class.</em></td>
 </tr>
 <tr>
@@ -617,7 +617,7 @@
 <td style="text-align: left;"><a href="#function-mean_velocity_eq-13"><strong>mean_velocity_eq</strong></a> () const<br><em>A method for accessing the m_mean_velocity_eq member variable of the class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">host_t&lt; ConstFieldSp&lt; double &gt; &gt;</td>
+<td style="text-align: right;">host_t&lt; ConstFieldSp&lt; Real &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-mean_velocity_eq-33"><strong>mean_velocity_eq</strong></a> () const<br><em>A method for accessing the m_mean_velocity_eq member variable of the class.</em></td>
 </tr>
 <tr>
@@ -645,7 +645,7 @@
 <td style="text-align: left;"><a href="#function-temperature_eq-13"><strong>temperature_eq</strong></a> () const<br><em>A method for accessing the m_temperature_eq member variable of the class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">host_t&lt; ConstFieldSp&lt; double &gt; &gt;</td>
+<td style="text-align: right;">host_t&lt; ConstFieldSp&lt; Real &gt; &gt;</td>
 <td style="text-align: left;"><a href="#function-temperature_eq-33"><strong>temperature_eq</strong></a> () const<br><em>A method for accessing the m_temperature_eq member variable of the class.</em></td>
 </tr>
 <tr>
@@ -789,7 +789,7 @@
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-compute_maxwellian-33"><strong>compute_maxwellian</strong></a> (DFieldVxVy const fMaxwellian, double const density, double const temperature, double const mean_velocity) <br><em>Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as <span class="arithmatex">\(f\_M(v) = n/(sqrt(2\*PI\*T))\*exp(-(v-u)\*\*2/(2\*T))\)</span> with <span class="arithmatex">\(n\)</span> the density, <span class="arithmatex">\(T\)</span> the temperature and <span class="arithmatex">\(u\)</span> is the mean velocity.</em></td>
+<td style="text-align: left;"><a href="#function-compute_maxwellian-33"><strong>compute_maxwellian</strong></a> (DFieldVxVy const fMaxwellian, Real const density, Real const temperature, Real const mean_velocity) <br><em>Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as <span class="arithmatex">\(f\_M(v) = n/(sqrt(2\*PI\*T))\*exp(-(v-u)\*\*2/(2\*T))\)</span> with <span class="arithmatex">\(n\)</span> the density, <span class="arithmatex">\(T\)</span> the temperature and <span class="arithmatex">\(u\)</span> is the mean velocity.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classMaxwellianEquilibrium.html"><strong>MaxwellianEquilibrium</strong></a></td>
@@ -848,12 +848,12 @@
 </code></pre>
 <hr>
 
-<h3 id="function-maxwellianequilibrium-24_1">function MaxwellianEquilibrium [2/4]</h3>
+<h3 id="function-maxwellianequilibrium-44">function MaxwellianEquilibrium [4/4]</h3>
 <p><em>The constructor for the</em> <a href="classMaxwellianEquilibrium.html"><em><strong>MaxwellianEquilibrium</strong></em></a> <em>class.</em></p>
 <pre><code class="language-C++">MaxwellianEquilibrium::MaxwellianEquilibrium (
-    host_t&lt; DFieldMemSp &gt; density_eq,
-    host_t&lt; DFieldMemSp &gt; temperature_eq,
-    host_t&lt; DFieldMemSp &gt; mean_velocity_eq
+    host_t&lt; FieldMemSp&lt; Real &gt; &gt; density_eq,
+    host_t&lt; FieldMemSp&lt; Real &gt; &gt; temperature_eq,
+    host_t&lt; FieldMemSp&lt; Real &gt; &gt; mean_velocity_eq
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -882,7 +882,7 @@
 
 <h3 id="function-density_eq-33">function density_eq [3/3]</h3>
 <p><em>A method for accessing the m_density_eq member variable of the class.</em> </p>
-<pre><code class="language-C++">inline host_t&lt; ConstFieldSp&lt; double &gt; &gt; MaxwellianEquilibrium::density_eq () const
+<pre><code class="language-C++">inline host_t&lt; ConstFieldSp&lt; Real &gt; &gt; MaxwellianEquilibrium::density_eq () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>A field containing the m_density_eq value. </p>
@@ -914,7 +914,7 @@
 
 <h3 id="function-mean_velocity_eq-33">function mean_velocity_eq [3/3]</h3>
 <p><em>A method for accessing the m_mean_velocity_eq member variable of the class.</em> </p>
-<pre><code class="language-C++">inline host_t&lt; ConstFieldSp&lt; double &gt; &gt; MaxwellianEquilibrium::mean_velocity_eq () const
+<pre><code class="language-C++">inline host_t&lt; ConstFieldSp&lt; Real &gt; &gt; MaxwellianEquilibrium::mean_velocity_eq () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>A field containing the m_velocity_eq value. </p>
@@ -991,7 +991,7 @@
 
 <h3 id="function-temperature_eq-33">function temperature_eq [3/3]</h3>
 <p><em>A method for accessing the m_temperature_eq member variable of the class.</em> </p>
-<pre><code class="language-C++">inline host_t&lt; ConstFieldSp&lt; double &gt; &gt; MaxwellianEquilibrium::temperature_eq () const
+<pre><code class="language-C++">inline host_t&lt; ConstFieldSp&lt; Real &gt; &gt; MaxwellianEquilibrium::temperature_eq () const
 </code></pre>
 <p><strong>Returns:</strong></p>
 <p>A field containing the m_temperature_eq value. </p>
@@ -1061,9 +1061,9 @@
 <p><em>Compute a Maxwellian distribution function. The Maxwellian distribution function is defined as <span class="arithmatex">\(f\_M(v) = n/(sqrt(2\*PI\*T))\*exp(-(v-u)\*\*2/(2\*T))\)</span> with <span class="arithmatex">\(n\)</span> the density, <span class="arithmatex">\(T\)</span> the temperature and <span class="arithmatex">\(u\)</span> is the mean velocity.</em> </p>
 <pre><code class="language-C++">static void MaxwellianEquilibrium::compute_maxwellian (
     DFieldVxVy const fMaxwellian,
-    double const density,
-    double const temperature,
-    double const mean_velocity
+    Real const density,
+    Real const temperature,
+    Real const mean_velocity
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>

@@ -56,7 +56,7 @@ DFieldSpXYVxVy SingleModePerturbInitialisation::operator()(DFieldSpXYVxVy const 
                     IdxY const iy = ddc::select<GridY>(ixyvxvy);
                     IdxVx const ivx = ddc::select<GridVx>(ixyvxvy);
                     IdxVy const ivy = ddc::select<GridVy>(ixyvxvy);
-                    double fdistribu_val
+                    Real fdistribu_val
                             = fequilibrium_proxy(isp, ivx, ivy) * (1. + perturbation_proxy(ix, iy));
                     if (fdistribu_val < 1.e-60) {
                         fdistribu_val = 1.e-60;
@@ -77,7 +77,8 @@ SingleModePerturbInitialisation SingleModePerturbInitialisation::init_from_input
     host_t<DFieldMemSp> init_perturb_amplitude(idx_range_kinsp);
 
     for (IdxSp const isp : idx_range_kinsp) {
-        PC_tree_t const conf_isp = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp.uid());
+        PC_tree_t const conf_isp
+                = PCpp_get(yaml_input_file, ".SpeciesInfo[%d]", isp - idx_range_kinsp.front());
 
         init_perturb_amplitude(isp) = PCpp_double(conf_isp, ".perturb_amplitude");
         init_perturb_mode(isp) = static_cast<int>(PCpp_int(conf_isp, ".perturb_mode"));
@@ -93,13 +94,13 @@ SingleModePerturbInitialisation SingleModePerturbInitialisation::init_from_input
 void SingleModePerturbInitialisation::perturbation_initialisation(
         DFieldXY const perturbation,
         int const perturb_mode,
-        double const perturb_amplitude) const
+        Real const perturb_amplitude) const
 {
     IdxRangeXY const gridxy = get_idx_range<GridX, GridY>(perturbation);
-    double const kx = perturb_mode * 2. * M_PI
-                      / ddcHelper::total_interval_length(ddc::select<GridX>(gridxy));
-    double const ky = perturb_mode * 2. * M_PI
-                      / ddcHelper::total_interval_length(ddc::select<GridY>(gridxy));
+    Real const kx = perturb_mode * 2. * M_PI
+                    / ddcHelper::total_interval_length(ddc::select<GridX>(gridxy));
+    Real const ky = perturb_mode * 2. * M_PI
+                    / ddcHelper::total_interval_length(ddc::select<GridY>(gridxy));
 
     const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(

@@ -62,29 +62,29 @@
 | typedef Coord&lt; [**Vy**](structVy.md) &gt; | [**CoordVy**](#typedef-coordvy)  <br> |
 | typedef Coord&lt; [**X**](structX.md), [**Y**](structY.md) &gt; | [**CoordXY**](#typedef-coordxy)  <br> |
 | typedef Coord&lt; [**Y**](structY.md) &gt; | [**CoordY**](#typedef-coordy)  <br> |
-| typedef ConstFieldSpVxVy&lt; double &gt; | [**DConstFieldSpVxVy**](#typedef-dconstfieldspvxvy)  <br> |
-| typedef ConstFieldSpVxVyXY&lt; double &gt; | [**DConstFieldSpVxVyXY**](#typedef-dconstfieldspvxvyxy)  <br> |
-| typedef ConstFieldSpXYVxVy&lt; double &gt; | [**DConstFieldSpXYVxVy**](#typedef-dconstfieldspxyvxvy)  <br> |
-| typedef ConstFieldVxVy&lt; double &gt; | [**DConstFieldVxVy**](#typedef-dconstfieldvxvy)  <br> |
-| typedef ConstFieldXY&lt; double &gt; | [**DConstFieldXY**](#typedef-dconstfieldxy)  <br> |
-| typedef FieldMemSpVxVy&lt; double &gt; | [**DFieldMemSpVxVy**](#typedef-dfieldmemspvxvy)  <br> |
-| typedef FieldMemSpVxVyXY&lt; double &gt; | [**DFieldMemSpVxVyXY**](#typedef-dfieldmemspvxvyxy)  <br> |
-| typedef FieldMemSpXYVxVy&lt; double &gt; | [**DFieldMemSpXYVxVy**](#typedef-dfieldmemspxyvxvy)  <br> |
-| typedef FieldMemVxVy&lt; double &gt; | [**DFieldMemVxVy**](#typedef-dfieldmemvxvy)  <br> |
-| typedef FieldMemVy&lt; double &gt; | [**DFieldMemVy**](#typedef-dfieldmemvy)  <br> |
-| typedef FieldMemXY&lt; double &gt; | [**DFieldMemXY**](#typedef-dfieldmemxy)  <br> |
-| typedef FieldMemXYVxVy&lt; double &gt; | [**DFieldMemXYVxVy**](#typedef-dfieldmemxyvxvy)  <br> |
-| typedef FieldMemY&lt; double &gt; | [**DFieldMemY**](#typedef-dfieldmemy)  <br> |
-| typedef FieldSpVxVy&lt; double &gt; | [**DFieldSpVxVy**](#typedef-dfieldspvxvy)  <br> |
-| typedef FieldSpVxVyXY&lt; double &gt; | [**DFieldSpVxVyXY**](#typedef-dfieldspvxvyxy)  <br> |
-| typedef FieldSpXYVxVy&lt; double &gt; | [**DFieldSpXYVxVy**](#typedef-dfieldspxyvxvy)  <br> |
-| typedef FieldVxVy&lt; double &gt; | [**DFieldVxVy**](#typedef-dfieldvxvy)  <br> |
-| typedef FieldVy&lt; double &gt; | [**DFieldVy**](#typedef-dfieldvy)  <br> |
-| typedef FieldXY&lt; double &gt; | [**DFieldXY**](#typedef-dfieldxy)  <br> |
-| typedef FieldY&lt; double &gt; | [**DFieldY**](#typedef-dfieldy)  <br> |
-| typedef [**VectorConstFieldXY**](classVectorField.md)&lt; double &gt; | [**DVectorConstFieldXY**](#typedef-dvectorconstfieldxy)  <br> |
-| typedef [**VectorFieldMemXY**](classVectorFieldMem.md)&lt; double &gt; | [**DVectorFieldMemXY**](#typedef-dvectorfieldmemxy)  <br> |
-| typedef [**VectorFieldXY**](classVectorField.md)&lt; double &gt; | [**DVectorFieldXY**](#typedef-dvectorfieldxy)  <br> |
+| typedef ConstFieldSpVxVy&lt; Real &gt; | [**DConstFieldSpVxVy**](#typedef-dconstfieldspvxvy)  <br> |
+| typedef ConstFieldSpVxVyXY&lt; Real &gt; | [**DConstFieldSpVxVyXY**](#typedef-dconstfieldspvxvyxy)  <br> |
+| typedef ConstFieldSpXYVxVy&lt; Real &gt; | [**DConstFieldSpXYVxVy**](#typedef-dconstfieldspxyvxvy)  <br> |
+| typedef ConstFieldVxVy&lt; Real &gt; | [**DConstFieldVxVy**](#typedef-dconstfieldvxvy)  <br> |
+| typedef ConstFieldXY&lt; Real &gt; | [**DConstFieldXY**](#typedef-dconstfieldxy)  <br> |
+| typedef FieldMemSpVxVy&lt; Real &gt; | [**DFieldMemSpVxVy**](#typedef-dfieldmemspvxvy)  <br> |
+| typedef FieldMemSpVxVyXY&lt; Real &gt; | [**DFieldMemSpVxVyXY**](#typedef-dfieldmemspvxvyxy)  <br> |
+| typedef FieldMemSpXYVxVy&lt; Real &gt; | [**DFieldMemSpXYVxVy**](#typedef-dfieldmemspxyvxvy)  <br> |
+| typedef FieldMemVxVy&lt; Real &gt; | [**DFieldMemVxVy**](#typedef-dfieldmemvxvy)  <br> |
+| typedef FieldMemVy&lt; Real &gt; | [**DFieldMemVy**](#typedef-dfieldmemvy)  <br> |
+| typedef FieldMemXY&lt; Real &gt; | [**DFieldMemXY**](#typedef-dfieldmemxy)  <br> |
+| typedef FieldMemXYVxVy&lt; Real &gt; | [**DFieldMemXYVxVy**](#typedef-dfieldmemxyvxvy)  <br> |
+| typedef FieldMemY&lt; Real &gt; | [**DFieldMemY**](#typedef-dfieldmemy)  <br> |
+| typedef FieldSpVxVy&lt; Real &gt; | [**DFieldSpVxVy**](#typedef-dfieldspvxvy)  <br> |
+| typedef FieldSpVxVyXY&lt; Real &gt; | [**DFieldSpVxVyXY**](#typedef-dfieldspvxvyxy)  <br> |
+| typedef FieldSpXYVxVy&lt; Real &gt; | [**DFieldSpXYVxVy**](#typedef-dfieldspxyvxvy)  <br> |
+| typedef FieldVxVy&lt; Real &gt; | [**DFieldVxVy**](#typedef-dfieldvxvy)  <br> |
+| typedef FieldVy&lt; Real &gt; | [**DFieldVy**](#typedef-dfieldvy)  <br> |
+| typedef FieldXY&lt; Real &gt; | [**DFieldXY**](#typedef-dfieldxy)  <br> |
+| typedef FieldY&lt; Real &gt; | [**DFieldY**](#typedef-dfieldy)  <br> |
+| typedef [**VectorConstFieldXY**](classVectorField.md)&lt; Real &gt; | [**DVectorConstFieldXY**](#typedef-dvectorconstfieldxy)  <br> |
+| typedef [**VectorFieldMemXY**](classVectorFieldMem.md)&lt; Real &gt; | [**DVectorFieldMemXY**](#typedef-dvectorfieldmemxy)  <br> |
+| typedef [**VectorFieldXY**](classVectorField.md)&lt; Real &gt; | [**DVectorFieldXY**](#typedef-dvectorfieldxy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpVxVy &gt; | [**FieldMemSpVxVy**](#typedef-fieldmemspvxvy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpVxVyXY &gt; | [**FieldMemSpVxVyXY**](#typedef-fieldmemspvxvyxy)  <br> |
 | typedef FieldMem&lt; ElementType, IdxRangeSpXYVxVy &gt; | [**FieldMemSpXYVxVy**](#typedef-fieldmemspxyvxvy)  <br> |
@@ -117,6 +117,7 @@
 | typedef Idx&lt; [**GridX**](structGridX.md), [**GridY**](structGridY.md) &gt; | [**IdxXY**](#typedef-idxxy)  <br> |
 | typedef Idx&lt; [**GridX**](structGridX.md), [**GridY**](structGridY.md), [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md) &gt; | [**IdxXYVxVy**](#typedef-idxxyvxvy)  <br> |
 | typedef Idx&lt; [**GridY**](structGridY.md) &gt; | [**IdxY**](#typedef-idxy)  <br> |
+| typedef GYSELALIBXX\_BUILD\_REAL\_PRECISION | [**Real**](#typedef-real)  <br> |
 | typedef [**MPILayout**](classMPILayout.md)&lt; IdxRangeSpVxVyXY, [**GridVx**](structGridVx.md), [**GridVy**](structGridVy.md) &gt; | [**V2DSplit**](#typedef-v2dsplit)  <br> |
 | typedef [**VectorConstField**](classVectorField.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorConstFieldXY**](#typedef-vectorconstfieldxy)  <br> |
 | typedef [**VectorFieldMem**](classVectorFieldMem.md)&lt; ElementType, IdxRangeXY, VectorIndexSet&lt; [**X**](structX.md), [**Y**](structY.md) &gt; &gt; | [**VectorFieldMemXY**](#typedef-vectorfieldmemxy)  <br> |
@@ -321,7 +322,7 @@ using CoordY =  Coord<Y>;
 ### typedef DConstFieldSpVxVy 
 
 ```C++
-using DConstFieldSpVxVy =  ConstFieldSpVxVy<double>;
+using DConstFieldSpVxVy =  ConstFieldSpVxVy<Real>;
 ```
 
 
@@ -334,7 +335,7 @@ using DConstFieldSpVxVy =  ConstFieldSpVxVy<double>;
 ### typedef DConstFieldSpVxVyXY 
 
 ```C++
-using DConstFieldSpVxVyXY =  ConstFieldSpVxVyXY<double>;
+using DConstFieldSpVxVyXY =  ConstFieldSpVxVyXY<Real>;
 ```
 
 
@@ -347,7 +348,7 @@ using DConstFieldSpVxVyXY =  ConstFieldSpVxVyXY<double>;
 ### typedef DConstFieldSpXYVxVy 
 
 ```C++
-using DConstFieldSpXYVxVy =  ConstFieldSpXYVxVy<double>;
+using DConstFieldSpXYVxVy =  ConstFieldSpXYVxVy<Real>;
 ```
 
 
@@ -360,7 +361,7 @@ using DConstFieldSpXYVxVy =  ConstFieldSpXYVxVy<double>;
 ### typedef DConstFieldVxVy 
 
 ```C++
-using DConstFieldVxVy =  ConstFieldVxVy<double>;
+using DConstFieldVxVy =  ConstFieldVxVy<Real>;
 ```
 
 
@@ -373,7 +374,7 @@ using DConstFieldVxVy =  ConstFieldVxVy<double>;
 ### typedef DConstFieldXY 
 
 ```C++
-using DConstFieldXY =  ConstFieldXY<double>;
+using DConstFieldXY =  ConstFieldXY<Real>;
 ```
 
 
@@ -386,7 +387,7 @@ using DConstFieldXY =  ConstFieldXY<double>;
 ### typedef DFieldMemSpVxVy 
 
 ```C++
-using DFieldMemSpVxVy =  FieldMemSpVxVy<double>;
+using DFieldMemSpVxVy =  FieldMemSpVxVy<Real>;
 ```
 
 
@@ -399,7 +400,7 @@ using DFieldMemSpVxVy =  FieldMemSpVxVy<double>;
 ### typedef DFieldMemSpVxVyXY 
 
 ```C++
-using DFieldMemSpVxVyXY =  FieldMemSpVxVyXY<double>;
+using DFieldMemSpVxVyXY =  FieldMemSpVxVyXY<Real>;
 ```
 
 
@@ -412,7 +413,7 @@ using DFieldMemSpVxVyXY =  FieldMemSpVxVyXY<double>;
 ### typedef DFieldMemSpXYVxVy 
 
 ```C++
-using DFieldMemSpXYVxVy =  FieldMemSpXYVxVy<double>;
+using DFieldMemSpXYVxVy =  FieldMemSpXYVxVy<Real>;
 ```
 
 
@@ -425,7 +426,7 @@ using DFieldMemSpXYVxVy =  FieldMemSpXYVxVy<double>;
 ### typedef DFieldMemVxVy 
 
 ```C++
-using DFieldMemVxVy =  FieldMemVxVy<double>;
+using DFieldMemVxVy =  FieldMemVxVy<Real>;
 ```
 
 
@@ -438,7 +439,7 @@ using DFieldMemVxVy =  FieldMemVxVy<double>;
 ### typedef DFieldMemVy 
 
 ```C++
-using DFieldMemVy =  FieldMemVy<double>;
+using DFieldMemVy =  FieldMemVy<Real>;
 ```
 
 
@@ -451,7 +452,7 @@ using DFieldMemVy =  FieldMemVy<double>;
 ### typedef DFieldMemXY 
 
 ```C++
-using DFieldMemXY =  FieldMemXY<double>;
+using DFieldMemXY =  FieldMemXY<Real>;
 ```
 
 
@@ -464,7 +465,7 @@ using DFieldMemXY =  FieldMemXY<double>;
 ### typedef DFieldMemXYVxVy 
 
 ```C++
-using DFieldMemXYVxVy =  FieldMemXYVxVy<double>;
+using DFieldMemXYVxVy =  FieldMemXYVxVy<Real>;
 ```
 
 
@@ -477,7 +478,7 @@ using DFieldMemXYVxVy =  FieldMemXYVxVy<double>;
 ### typedef DFieldMemY 
 
 ```C++
-using DFieldMemY =  FieldMemY<double>;
+using DFieldMemY =  FieldMemY<Real>;
 ```
 
 
@@ -490,7 +491,7 @@ using DFieldMemY =  FieldMemY<double>;
 ### typedef DFieldSpVxVy 
 
 ```C++
-using DFieldSpVxVy =  FieldSpVxVy<double>;
+using DFieldSpVxVy =  FieldSpVxVy<Real>;
 ```
 
 
@@ -503,7 +504,7 @@ using DFieldSpVxVy =  FieldSpVxVy<double>;
 ### typedef DFieldSpVxVyXY 
 
 ```C++
-using DFieldSpVxVyXY =  FieldSpVxVyXY<double>;
+using DFieldSpVxVyXY =  FieldSpVxVyXY<Real>;
 ```
 
 
@@ -516,7 +517,7 @@ using DFieldSpVxVyXY =  FieldSpVxVyXY<double>;
 ### typedef DFieldSpXYVxVy 
 
 ```C++
-using DFieldSpXYVxVy =  FieldSpXYVxVy<double>;
+using DFieldSpXYVxVy =  FieldSpXYVxVy<Real>;
 ```
 
 
@@ -529,7 +530,7 @@ using DFieldSpXYVxVy =  FieldSpXYVxVy<double>;
 ### typedef DFieldVxVy 
 
 ```C++
-using DFieldVxVy =  FieldVxVy<double>;
+using DFieldVxVy =  FieldVxVy<Real>;
 ```
 
 
@@ -542,7 +543,7 @@ using DFieldVxVy =  FieldVxVy<double>;
 ### typedef DFieldVy 
 
 ```C++
-using DFieldVy =  FieldVy<double>;
+using DFieldVy =  FieldVy<Real>;
 ```
 
 
@@ -555,7 +556,7 @@ using DFieldVy =  FieldVy<double>;
 ### typedef DFieldXY 
 
 ```C++
-using DFieldXY =  FieldXY<double>;
+using DFieldXY =  FieldXY<Real>;
 ```
 
 
@@ -568,7 +569,7 @@ using DFieldXY =  FieldXY<double>;
 ### typedef DFieldY 
 
 ```C++
-using DFieldY =  FieldY<double>;
+using DFieldY =  FieldY<Real>;
 ```
 
 
@@ -581,7 +582,7 @@ using DFieldY =  FieldY<double>;
 ### typedef DVectorConstFieldXY 
 
 ```C++
-using DVectorConstFieldXY =  VectorConstFieldXY<double>;
+using DVectorConstFieldXY =  VectorConstFieldXY<Real>;
 ```
 
 
@@ -594,7 +595,7 @@ using DVectorConstFieldXY =  VectorConstFieldXY<double>;
 ### typedef DVectorFieldMemXY 
 
 ```C++
-using DVectorFieldMemXY =  VectorFieldMemXY<double>;
+using DVectorFieldMemXY =  VectorFieldMemXY<Real>;
 ```
 
 
@@ -607,7 +608,7 @@ using DVectorFieldMemXY =  VectorFieldMemXY<double>;
 ### typedef DVectorFieldXY 
 
 ```C++
-using DVectorFieldXY =  VectorFieldXY<double>;
+using DVectorFieldXY =  VectorFieldXY<Real>;
 ```
 
 
@@ -1024,6 +1025,19 @@ using IdxXYVxVy =  Idx<GridX, GridY, GridVx, GridVy>;
 
 ```C++
 using IdxY =  Idx<GridY>;
+```
+
+
+
+
+<hr>
+
+
+
+### typedef Real 
+
+```C++
+using Real =  GYSELALIBXX_BUILD_REAL_PRECISION;
 ```
 
 

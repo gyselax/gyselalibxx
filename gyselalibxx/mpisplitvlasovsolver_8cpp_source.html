@@ -568,10 +568,10 @@
 #include "mpisplitvlasovsolver.hpp"
 
 MpiSplitVlasovSolver::MpiSplitVlasovSolver(
-        IAdvectionSpatial&lt;GeometryVxVyXY, GridX&gt; const&amp; advec_x,
-        IAdvectionSpatial&lt;GeometryVxVyXY, GridY&gt; const&amp; advec_y,
-        IAdvectionVelocity&lt;GeometryXYVxVy, GridVx&gt; const&amp; advec_vx,
-        IAdvectionVelocity&lt;GeometryXYVxVy, GridVy&gt; const&amp; advec_vy,
+        IAdvectionSpatial&lt;GeometryVxVyXY, GridX, Real&gt; const&amp; advec_x,
+        IAdvectionSpatial&lt;GeometryVxVyXY, GridY, Real&gt; const&amp; advec_y,
+        IAdvectionVelocity&lt;GeometryXYVxVy, GridVx, Real&gt; const&amp; advec_vx,
+        IAdvectionVelocity&lt;GeometryXYVxVy, GridVy, Real&gt; const&amp; advec_vy,
         MPITransposeAllToAll&lt;X2DSplit, V2DSplit&gt; const&amp; transpose)
     : m_advec_x(advec_x)
     , m_advec_y(advec_y)
@@ -584,7 +584,7 @@ MpiSplitVlasovSolver::MpiSplitVlasovSolver(
 DFieldSpVxVyXY MpiSplitVlasovSolver::operator()(
         DFieldSpVxVyXY const allfdistribu_v2Dsplit,
         DVectorConstFieldXY const electric_field,
-        double const dt) const
+        Real const dt) const
 {
     IdxRangeSpVxVyXY idxrange_v2Dsplit(m_transpose.get_local_idx_range&lt;V2DSplit&gt;());
     IdxRangeSpXYVxVy idxrange_x2Dsplit(m_transpose.get_local_idx_range&lt;X2DSplit&gt;());

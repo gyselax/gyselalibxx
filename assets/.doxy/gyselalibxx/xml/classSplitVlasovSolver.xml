@@ -36,9 +36,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.hpp" line="25" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.hpp" bodystart="25" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSplitVlasovSolver_1aa84d1b719041dae600eb0049299321d6" prot="private" static="no" mutable="no">
-        <type><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridX" kindref="compound">GridX</ref> &gt; const  &amp;</type>
-        <definition>IAdvectionSpatial&lt;GeometryVxVyXY, GridX&gt; const&amp; SplitVlasovSolver::m_advec_x</definition>
+      <memberdef kind="variable" id="classSplitVlasovSolver_1aa3efce7edcbd18c92872e5af128856f1" prot="private" static="no" mutable="no">
+        <type><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, Real &gt; const  &amp;</type>
+        <definition>IAdvectionSpatial&lt;GeometryVxVyXY, GridX, Real&gt; const&amp; SplitVlasovSolver::m_advec_x</definition>
         <argsstring></argsstring>
         <name>m_advec_x</name>
         <qualifiedname>SplitVlasovSolver::m_advec_x</qualifiedname>
@@ -51,9 +51,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" line="22" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" bodystart="22" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSplitVlasovSolver_1a8dffff7f87c466d2856e4454254e3cf9" prot="private" static="no" mutable="no">
-        <type><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt; const  &amp;</type>
-        <definition>IAdvectionSpatial&lt;GeometryVxVyXY, GridY&gt; const&amp; SplitVlasovSolver::m_advec_y</definition>
+      <memberdef kind="variable" id="classSplitVlasovSolver_1a90e538cce28c72e4b31383c1cfc4ce17" prot="private" static="no" mutable="no">
+        <type><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, Real &gt; const  &amp;</type>
+        <definition>IAdvectionSpatial&lt;GeometryVxVyXY, GridY, Real&gt; const&amp; SplitVlasovSolver::m_advec_y</definition>
         <argsstring></argsstring>
         <name>m_advec_y</name>
         <qualifiedname>SplitVlasovSolver::m_advec_y</qualifiedname>
@@ -66,9 +66,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" line="24" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" bodystart="24" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSplitVlasovSolver_1ad4be9cf044d6af823f7cf5ced138c707" prot="private" static="no" mutable="no">
-        <type><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref> &gt; const  &amp;</type>
-        <definition>IAdvectionVelocity&lt;GeometryVxVyXY, GridVx&gt; const&amp; SplitVlasovSolver::m_advec_vx</definition>
+      <memberdef kind="variable" id="classSplitVlasovSolver_1a13273bbfb0bf343c7d71c66c89632622" prot="private" static="no" mutable="no">
+        <type><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref>, Real &gt; const  &amp;</type>
+        <definition>IAdvectionVelocity&lt;GeometryVxVyXY, GridVx, Real&gt; const&amp; SplitVlasovSolver::m_advec_vx</definition>
         <argsstring></argsstring>
         <name>m_advec_vx</name>
         <qualifiedname>SplitVlasovSolver::m_advec_vx</qualifiedname>
@@ -81,9 +81,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" line="27" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" bodystart="27" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classSplitVlasovSolver_1a3ef5390c293630083c9d773a6b125a61" prot="private" static="no" mutable="no">
-        <type><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt; const  &amp;</type>
-        <definition>IAdvectionVelocity&lt;GeometryVxVyXY, GridVy&gt; const&amp; SplitVlasovSolver::m_advec_vy</definition>
+      <memberdef kind="variable" id="classSplitVlasovSolver_1afbcce02928f5420363789280f0af39e4" prot="private" static="no" mutable="no">
+        <type><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref>, Real &gt; const  &amp;</type>
+        <definition>IAdvectionVelocity&lt;GeometryVxVyXY, GridVy, Real&gt; const&amp; SplitVlasovSolver::m_advec_vy</definition>
         <argsstring></argsstring>
         <name>m_advec_vy</name>
         <qualifiedname>SplitVlasovSolver::m_advec_vy</qualifiedname>
@@ -209,26 +209,26 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.hpp" line="48" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.cpp" bodystart="15" bodyend="24"/>
       </memberdef>
-      <memberdef kind="function" id="classSplitVlasovSolver_1a34d062e615cb10c3bd82c9b13bf4ebc2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+      <memberdef kind="function" id="classSplitVlasovSolver_1a1335b33fc95d0bfd4d793c8b1d79d0e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
         <type></type>
         <definition>SplitVlasovSolver::SplitVlasovSolver</definition>
-        <argsstring>(IAdvectionSpatial&lt; GeometryVxVyXY, GridX &gt; const &amp;advec_x, IAdvectionSpatial&lt; GeometryVxVyXY, GridY &gt; const &amp;advec_y, IAdvectionVelocity&lt; GeometryVxVyXY, GridVx &gt; const &amp;advec_vx, IAdvectionVelocity&lt; GeometryVxVyXY, GridVy &gt; const &amp;advec_vy)</argsstring>
+        <argsstring>(IAdvectionSpatial&lt; GeometryVxVyXY, GridX, Real &gt; const &amp;advec_x, IAdvectionSpatial&lt; GeometryVxVyXY, GridY, Real &gt; const &amp;advec_y, IAdvectionVelocity&lt; GeometryVxVyXY, GridVx, Real &gt; const &amp;advec_vx, IAdvectionVelocity&lt; GeometryVxVyXY, GridVy, Real &gt; const &amp;advec_vy)</argsstring>
         <name>SplitVlasovSolver</name>
         <qualifiedname>SplitVlasovSolver::SplitVlasovSolver</qualifiedname>
         <param>
-          <type><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridX" kindref="compound">GridX</ref> &gt; const &amp;</type>
+          <type><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridX" kindref="compound">GridX</ref>, Real &gt; const &amp;</type>
           <declname>advec_x</declname>
         </param>
         <param>
-          <type><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridY" kindref="compound">GridY</ref> &gt; const &amp;</type>
+          <type><ref refid="classIAdvectionSpatial" kindref="compound">IAdvectionSpatial</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridY" kindref="compound">GridY</ref>, Real &gt; const &amp;</type>
           <declname>advec_y</declname>
         </param>
         <param>
-          <type><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref> &gt; const &amp;</type>
+          <type><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridVx" kindref="compound">GridVx</ref>, Real &gt; const &amp;</type>
           <declname>advec_vx</declname>
         </param>
         <param>
-          <type><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref> &gt; const &amp;</type>
+          <type><ref refid="classIAdvectionVelocity" kindref="compound">IAdvectionVelocity</ref>&lt; <ref refid="classGeometryVxVyXY" kindref="compound">GeometryVxVyXY</ref>, <ref refid="structGridVy" kindref="compound">GridVy</ref>, Real &gt; const &amp;</type>
           <declname>advec_vy</declname>
         </param>
         <briefdescription>
@@ -288,13 +288,13 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/vlasov/splitvlasovsolver.hpp" line="45" column="5"/>
       </memberdef>
-      <memberdef kind="function" id="classSplitVlasovSolver_1aa8a784e4a072df4ae935cae97094119f" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
+      <memberdef kind="function" id="classSplitVlasovSolver_1a41d34bb3708aad5628188ae8276b0d15" prot="public" static="no" const="yes" explicit="no" inline="no" virt="virtual">
         <type>DFieldSpVxVyXY</type>
         <definition>DFieldSpVxVyXY SplitVlasovSolver::operator()</definition>
-        <argsstring>(DFieldSpVxVyXY allfdistribu, DVectorConstFieldXY electric_field, double dt) const override</argsstring>
+        <argsstring>(DFieldSpVxVyXY allfdistribu, DVectorConstFieldXY electric_field, Real dt) const override</argsstring>
         <name>operator()</name>
         <qualifiedname>SplitVlasovSolver::operator()</qualifiedname>
-        <reimplements refid="classIVlasovSolver_1a83a3669cbcd898b25e7e5613030b9fb9">operator()</reimplements>
+        <reimplements refid="classIVlasovSolver_1a681dad83ed77cef62729322bc51f4ba8">operator()</reimplements>
         <param>
           <type>DFieldSpVxVyXY</type>
           <declname>allfdistribu</declname>
@@ -304,7 +304,7 @@
           <declname>electric_field</declname>
         </param>
         <param>
-          <type>double</type>
+          <type>Real</type>
           <declname>dt</declname>
         </param>
         <briefdescription>
@@ -391,15 +391,15 @@
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.hpp" line="19" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/boltzmann/splitvlasovsolver.hpp" bodystart="20" bodyend="50"/>
     <listofallmembers>
       <member refid="classSplitVlasovSolver_1a0b378944fc8980ff16d8e26c5a5e59e9" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_vx</name></member>
-      <member refid="classSplitVlasovSolver_1ad4be9cf044d6af823f7cf5ced138c707" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_vx</name></member>
-      <member refid="classSplitVlasovSolver_1a3ef5390c293630083c9d773a6b125a61" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_vy</name></member>
+      <member refid="classSplitVlasovSolver_1a13273bbfb0bf343c7d71c66c89632622" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_vx</name></member>
+      <member refid="classSplitVlasovSolver_1afbcce02928f5420363789280f0af39e4" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_vy</name></member>
       <member refid="classSplitVlasovSolver_1a0d57f4c91d0be4db9a34a411ca8c834d" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_x</name></member>
-      <member refid="classSplitVlasovSolver_1aa84d1b719041dae600eb0049299321d6" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_x</name></member>
-      <member refid="classSplitVlasovSolver_1a8dffff7f87c466d2856e4454254e3cf9" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_y</name></member>
+      <member refid="classSplitVlasovSolver_1aa3efce7edcbd18c92872e5af128856f1" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_x</name></member>
+      <member refid="classSplitVlasovSolver_1a90e538cce28c72e4b31383c1cfc4ce17" prot="private" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>m_advec_y</name></member>
       <member refid="classSplitVlasovSolver_1a958b142757ef330191c9c25188294f15" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>operator()</name></member>
-      <member refid="classSplitVlasovSolver_1aa8a784e4a072df4ae935cae97094119f" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>operator()</name></member>
+      <member refid="classSplitVlasovSolver_1a41d34bb3708aad5628188ae8276b0d15" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>operator()</name></member>
       <member refid="classSplitVlasovSolver_1aad8ce76367a0be688bfbd8e5a2830040" prot="public" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>SplitVlasovSolver</name></member>
-      <member refid="classSplitVlasovSolver_1a34d062e615cb10c3bd82c9b13bf4ebc2" prot="public" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>SplitVlasovSolver</name></member>
+      <member refid="classSplitVlasovSolver_1a1335b33fc95d0bfd4d793c8b1d79d0e6" prot="public" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>SplitVlasovSolver</name></member>
       <member refid="classIBoltzmannSolver_1adedfcbd6d713c24cd39272d512ae8f1b" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>~IBoltzmannSolver</name></member>
       <member refid="classIVlasovSolver_1a10c7130ab540e2f3502ecea9bf67da1e" prot="public" virt="virtual"><scope>SplitVlasovSolver</scope><name>~IVlasovSolver</name></member>
       <member refid="classSplitVlasovSolver_1a07f850f4fba0e3750db3aa95ebaa5fdd" prot="public" virt="non-virtual"><scope>SplitVlasovSolver</scope><name>~SplitVlasovSolver</name></member>

@@ -578,6 +578,8 @@
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
 
+using Real = GYSELALIBXX_BUILD_REAL_PRECISION;
+
 struct Y
 {
     static bool constexpr PERIODIC = true;
@@ -632,82 +634,82 @@ using IdxRangeSpVxVyXY = IdxRange&lt;Species, GridVx, GridVy, GridX, GridY&gt;;
 
 template &lt;class ElementType&gt;
 using FieldMemY = FieldMem&lt;ElementType, IdxRangeY&gt;;
-using DFieldMemY = FieldMemY&lt;double&gt;;
+using DFieldMemY = FieldMemY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldMemXY = FieldMem&lt;ElementType, IdxRangeXY&gt;;
-using DFieldMemXY = FieldMemXY&lt;double&gt;;
+using DFieldMemXY = FieldMemXY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using VectorFieldMemXY = VectorFieldMem&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;&gt;;
-using DVectorFieldMemXY = VectorFieldMemXY&lt;double&gt;;
+using DVectorFieldMemXY = VectorFieldMemXY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldMemVy = FieldMem&lt;ElementType, IdxRangeVy&gt;;
-using DFieldMemVy = FieldMemVy&lt;double&gt;;
+using DFieldMemVy = FieldMemVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldMemVxVy = FieldMem&lt;ElementType, IdxRangeVxVy&gt;;
-using DFieldMemVxVy = FieldMemVxVy&lt;double&gt;;
+using DFieldMemVxVy = FieldMemVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldMemXYVxVy = FieldMem&lt;ElementType, IdxRangeXYVxVy&gt;;
-using DFieldMemXYVxVy = FieldMemXYVxVy&lt;double&gt;;
+using DFieldMemXYVxVy = FieldMemXYVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldMemSpVxVy = FieldMem&lt;ElementType, IdxRangeSpVxVy&gt;;
-using DFieldMemSpVxVy = FieldMemSpVxVy&lt;double&gt;;
+using DFieldMemSpVxVy = FieldMemSpVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldMemSpXYVxVy = FieldMem&lt;ElementType, IdxRangeSpXYVxVy&gt;;
-using DFieldMemSpXYVxVy = FieldMemSpXYVxVy&lt;double&gt;;
+using DFieldMemSpXYVxVy = FieldMemSpXYVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldMemSpVxVyXY = FieldMem&lt;ElementType, IdxRangeSpVxVyXY&gt;;
-using DFieldMemSpVxVyXY = FieldMemSpVxVyXY&lt;double&gt;;
+using DFieldMemSpVxVyXY = FieldMemSpVxVyXY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldY = Field&lt;ElementType, IdxRangeY&gt;;
-using DFieldY = FieldY&lt;double&gt;;
+using DFieldY = FieldY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldXY = Field&lt;ElementType, IdxRangeXY&gt;;
-using DFieldXY = FieldXY&lt;double&gt;;
+using DFieldXY = FieldXY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using VectorFieldXY = VectorField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;&gt;;
-using DVectorFieldXY = VectorFieldXY&lt;double&gt;;
+using DVectorFieldXY = VectorFieldXY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldVy = Field&lt;ElementType, IdxRangeVy&gt;;
-using DFieldVy = FieldVy&lt;double&gt;;
+using DFieldVy = FieldVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldVxVy = Field&lt;ElementType, IdxRangeVxVy&gt;;
-using DFieldVxVy = FieldVxVy&lt;double&gt;;
+using DFieldVxVy = FieldVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldSpVxVy = Field&lt;ElementType, IdxRangeSpVxVy&gt;;
-using DFieldSpVxVy = FieldSpVxVy&lt;double&gt;;
+using DFieldSpVxVy = FieldSpVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldSpXYVxVy = Field&lt;ElementType, IdxRangeSpXYVxVy&gt;;
-using DFieldSpXYVxVy = FieldSpXYVxVy&lt;double&gt;;
+using DFieldSpXYVxVy = FieldSpXYVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using FieldSpVxVyXY = Field&lt;ElementType, IdxRangeSpVxVyXY&gt;;
-using DFieldSpVxVyXY = FieldSpVxVyXY&lt;double&gt;;
+using DFieldSpVxVyXY = FieldSpVxVyXY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using ConstFieldY = Field&lt;ElementType const, IdxRangeY&gt;;
 
 template &lt;class ElementType&gt;
 using ConstFieldXY = Field&lt;ElementType const, IdxRangeXY&gt;;
-using DConstFieldXY = ConstFieldXY&lt;double&gt;;
+using DConstFieldXY = ConstFieldXY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using VectorConstFieldXY = VectorConstField&lt;ElementType, IdxRangeXY, VectorIndexSet&lt;X, Y&gt;&gt;;
-using DVectorConstFieldXY = VectorConstFieldXY&lt;double&gt;;
+using DVectorConstFieldXY = VectorConstFieldXY&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using ConstFieldVx = Field&lt;ElementType const, IdxRangeVx&gt;;
@@ -717,19 +719,19 @@ using ConstFieldVy = Field&lt;ElementType const, IdxRangeVy&gt;;
 
 template &lt;class ElementType&gt;
 using ConstFieldVxVy = Field&lt;ElementType const, IdxRangeVxVy&gt;;
-using DConstFieldVxVy = ConstFieldVxVy&lt;double&gt;;
+using DConstFieldVxVy = ConstFieldVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using ConstFieldSpVxVy = Field&lt;ElementType const, IdxRangeSpVxVy&gt;;
-using DConstFieldSpVxVy = ConstFieldSpVxVy&lt;double&gt;;
+using DConstFieldSpVxVy = ConstFieldSpVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using ConstFieldSpXYVxVy = Field&lt;ElementType const, IdxRangeSpXYVxVy&gt;;
-using DConstFieldSpXYVxVy = ConstFieldSpXYVxVy&lt;double&gt;;
+using DConstFieldSpXYVxVy = ConstFieldSpXYVxVy&lt;Real&gt;;
 
 template &lt;class ElementType&gt;
 using ConstFieldSpVxVyXY = Field&lt;ElementType const, IdxRangeSpVxVyXY&gt;;
-using DConstFieldSpVxVyXY = ConstFieldSpVxVyXY&lt;double&gt;;
+using DConstFieldSpVxVyXY = ConstFieldSpVxVyXY&lt;Real&gt;;
 
 using X2DSplit = MPILayout&lt;IdxRangeSpXYVxVy, GridX, GridY&gt;;
 using V2DSplit = MPILayout&lt;IdxRangeSpVxVyXY, GridVx, GridVy&gt;;

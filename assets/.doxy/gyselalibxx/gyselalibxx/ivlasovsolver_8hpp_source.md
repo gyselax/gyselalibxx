@@ -22,7 +22,7 @@ public:
     virtual DFieldSpVxVyXY operator()(
             DFieldSpVxVyXY allfdistribu,
             DVectorConstFieldXY efield,
-            double dt) const = 0;
+            Real dt) const = 0;
 };
 ```
 
