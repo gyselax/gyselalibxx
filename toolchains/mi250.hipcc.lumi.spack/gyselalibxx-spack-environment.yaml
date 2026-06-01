@@ -43,7 +43,7 @@ spack:
       git: https://github.com/etiennemlb/gysela-spack.git
       branch: releases/v2026.03_lumi_tmp
     builtin:
-      tag: v2026.11.0
+      tag: v2026.03.0
   concretizer:
     unify: true
     reuse: false
