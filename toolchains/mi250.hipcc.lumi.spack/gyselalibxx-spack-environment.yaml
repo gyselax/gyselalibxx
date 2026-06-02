@@ -33,7 +33,7 @@ spack:
     - py-sympy
     - py-xarray
   - architectures:
-    - arch=linux-sles15-zen3
+    - arch=linux-sles15-x86_64_v3
   specs:
   - matrix:
     - [$packages]

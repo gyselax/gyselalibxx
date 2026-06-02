@@ -1,7 +1,5 @@
 ---
 packages:
-  all:
-    target: [x86_64_v3]
   cray-mpich:
     buildable: false
     externals:
