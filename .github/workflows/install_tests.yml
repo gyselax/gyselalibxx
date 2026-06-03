@@ -39,7 +39,7 @@ jobs:
   spack_test:
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-14]
+        os: [ubuntu-24.04, macos-14]
     runs-on: ${{ matrix.os }}
     needs: pre_job
     name: Install Test
@@ -60,6 +60,15 @@ jobs:
           ../toolchains/cpu.spack.gyselalibxx_env/prepare.sh
         shell: bash
         timeout-minutes: 180
+      - name: Push packages and update index
+        shell: bash
+        env:
+          GITHUB_USER: ${{github.actor}}
+          GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
+        run: |
+          source ${GITHUB_WORKSPACE}/toolchains/cpu.spack.gyselalibxx_env/environment.sh
+          spack buildcache push --update-index local-buildcache
+        if: ${{!cancelled()}}
       - name: Build code
         uses: ./.github/actions/build_code
         with:
