@@ -58,22 +58,22 @@ spack:
       - spec: cuda@12.8.61
         prefix: /lustre/fshomisc/sys/common/nvidia/cuda/12.8
     c:
-      require: gcc@14.3.0
+      require: gcc@14.2.0
     cxx:
-      require: gcc@14.3.0
+      require: gcc@14.2.0
     gcc:
       externals:
-      - spec: gcc@14.3.0 languages:='c,c++,fortran'
-        prefix: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y
+      - spec: gcc@14.2.0 languages:='c,c++,fortran'
+        prefix: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o
         extra_attributes:
             compilers:
-              c: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gcc
-              cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/g++
-              fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gfortran
+              c: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/gcc
+              cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/g++
+              fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/gfortran
     kokkos-fft:
       require: '@0.4 host_backend=fftw-serial device_backend=cufft'
     lapack:
-      require: openblas
+      require: openblas ~dynamic_dispatch
     mpi:
       require: openmpi
     openmpi:
