@@ -33,8 +33,9 @@ spack:
     - py-sympy
     - py-xarray
   - architectures:
-    - arch=linux-sles15-x86_64_v3
+    - target=x86_64_v3
   specs:
+  - gcc # NOTE: not in the matrix to avoid unification issues when the packages target arch is not the arch the compiler was compiled for.
   - matrix:
     - [$packages]
     - [$architectures]
@@ -43,7 +44,7 @@ spack:
       git: https://github.com/etiennemlb/gysela-spack.git
       branch: releases/v2026.03_lumi_tmp
     builtin:
-      tag: v2026.03.0
+      tag: v2025.11.0
   concretizer:
     unify: true
     reuse: false
