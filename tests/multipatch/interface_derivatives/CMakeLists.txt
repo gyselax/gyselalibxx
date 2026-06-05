@@ -16,7 +16,7 @@ function (multipatch_single_interface_derivatives_executable MESH_TYPE)
         gslx::multipatch_interface_derivatives
     )
     target_compile_definitions("${test_name_gtest}" PUBLIC -D${MESH_TYPE})
-    gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+    gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 endfunction()
 
 foreach(MESH_TYPE "UNIFORM_MESH" "NON_UNIFORM_MESH")
@@ -40,5 +40,5 @@ PUBLIC
     gslx::multipatch_interface_derivatives
 )
 target_compile_definitions("${test_name_gtest}" PUBLIC)
-gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 

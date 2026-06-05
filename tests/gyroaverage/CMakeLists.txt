@@ -16,5 +16,5 @@ target_link_libraries(unit_tests_gyroaverage
         gslx::gyroaverage
         testing_tools
 )
-gtest_discover_tests(unit_tests_gyroaverage DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+gtest_discover_tests(unit_tests_gyroaverage DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 

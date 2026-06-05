@@ -25,4 +25,4 @@ PUBLIC
         gslx::utils
 )
 target_compile_definitions("unit_tests_connectivity" PUBLIC)
-gtest_discover_tests("unit_tests_connectivity" DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+gtest_discover_tests("unit_tests_connectivity" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

@@ -30,6 +30,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a new `init_lagrange_dependent_idx_range` method.
 - Add a MPI scope guard.
 - Add MI250X toolchain for LUMI.
+- Add a CMake option to control the discovery timeout of Gyselalib++ tests.
 
 ### Fixed
 

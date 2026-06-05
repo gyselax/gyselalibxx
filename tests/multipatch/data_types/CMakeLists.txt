@@ -17,4 +17,4 @@ PUBLIC
         gslx::multipatch_geometries
 )
 target_compile_definitions("${test_name_gtest}" PUBLIC)
-gtest_discover_tests("${test_name_gtest}" DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+gtest_discover_tests("${test_name_gtest}" DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

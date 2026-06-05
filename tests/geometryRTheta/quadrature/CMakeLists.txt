@@ -15,4 +15,4 @@ target_link_libraries(Li_norms_spline_quadrature_tests
         gslx::utils
 
 )
-gtest_discover_tests(Li_norms_spline_quadrature_tests DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+gtest_discover_tests(Li_norms_spline_quadrature_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)

@@ -14,5 +14,5 @@ target_link_libraries(matrix_tests
         gslx::matrix_tools
         gslx::math_tools
 )
-gtest_discover_tests(matrix_tests DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+gtest_discover_tests(matrix_tests DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 

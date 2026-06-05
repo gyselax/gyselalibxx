@@ -41,7 +41,8 @@ function (advection_field_test_executable SIMULATION)
     target_compile_definitions("${test_name_gtest}" PUBLIC -D${SIMULATION})    
     gtest_discover_tests("${test_name_gtest}"
         TEST_SUFFIX ${SIMULATION}
-        DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+        DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
+        DISCOVERY_MODE PRE_TEST)
 endfunction()
 
 # Select the parameters of the simulation: 

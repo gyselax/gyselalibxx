@@ -19,6 +19,6 @@ target_link_libraries(unit_tests_data_types
         gslx::utils
 )
 
-gtest_discover_tests(unit_tests_data_types DISCOVERY_MODE PRE_TEST DISCOVERY_TIMEOUT 100)
+gtest_discover_tests(unit_tests_data_types DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
 
 add_subdirectory(static_assert_tests)
