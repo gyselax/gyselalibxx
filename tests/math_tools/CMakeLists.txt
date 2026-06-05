@@ -25,4 +25,4 @@ target_link_libraries(unit_tests_math_tools
         gslx::utils
 )
 
-gtest_discover_tests(unit_tests_math_tools DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(unit_tests_math_tools DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT} DISCOVERY_MODE PRE_TEST)
