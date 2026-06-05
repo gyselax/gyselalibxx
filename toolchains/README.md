@@ -60,6 +60,7 @@ The folder [toolchains/](https://github.com/gyselax/gyselalibxx/tree/devel/toolc
 - `h100.jean-zay.spack` : Designed for use with the H100 hardware available on IDRIS' Jean-Zay supercomputer. It installs a new Spack instance in the shared work directory of the project. It may need to be adapted depending on your needs.
 - `genoa.gcc.adastra.spack` : Designed for use with the GENOA hardware available on CINES's Adastra supercomputer.
 - `mi250.hipcc.adastra.spack` : Designed for use with the MI250 hardware available on CINES's Adastra supercomputer.
+- `mi250.hipcc.lumi.spack` : Designed for use with the MI250 hardware available on the LUMI supercomputer.
 - `persee/v100` : Designed for use with the V100 hardware available on IRFM's Persee cluster.
 - `persee/xeon` : Designed for use with the CPU hardware available on IRFM's Persee cluster.
 - `a100.raven.spack` : Designed for use with the A100 hardware available on MPCDF raven cluster.
