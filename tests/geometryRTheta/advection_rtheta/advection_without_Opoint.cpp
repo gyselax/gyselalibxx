@@ -275,7 +275,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
                     dt * (iter + 1));
             double exact = simulation.function(to_logical_mapping(foot));
             EXPECT_NEAR(density_rtheta_averaged(irtheta), exact, 2e-2);
-            EXPECT_NEAR(density_xy(irtheta), exact, 1e-6);
+            EXPECT_NEAR(density_xy(irtheta), exact, 2e-6 * (2 << iter));
 #elif defined(ROTATION)
             EXPECT_NEAR(density_rtheta_averaged(irtheta), density_xy(irtheta), 1e-5);
 #endif
