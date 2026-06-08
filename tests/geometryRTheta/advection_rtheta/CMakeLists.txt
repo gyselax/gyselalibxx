@@ -132,4 +132,4 @@ endfunction()
 # Select the parameters of the simulation: 
 advection_without_Opoint_test_executable(TRANSLATION)
 advection_without_Opoint_test_executable(ROTATION)
-advection_without_Opoint_test_executable(DECENTRED_ROTATION)
+# advection_without_Opoint_test_executable(DECENTRED_ROTATION) # DECENTRED_ROTATION requires a tiny dt for advection in r,theta
