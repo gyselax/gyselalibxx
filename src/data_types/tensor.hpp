@@ -238,3 +238,14 @@ template <class ElementType, class... ValidIndexSet>
 inline constexpr bool enable_tensor_type<Tensor<ElementType, ValidIndexSet...>> = true;
 
 }
+
+namespace Kokkos { //reduction identity must be defined in Kokkos namespace
+template <class ElementType, class... ValidIndexSet>
+struct reduction_identity<Tensor<ElementType, ValidIndexSet...>>
+{
+    KOKKOS_FORCEINLINE_FUNCTION static Tensor<ElementType, ValidIndexSet...> sum()
+    {
+        return Tensor<ElementType, ValidIndexSet...>();
+    }
+};
+} // namespace Kokkos

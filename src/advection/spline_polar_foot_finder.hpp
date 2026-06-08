@@ -84,6 +84,7 @@ class ElementwiseSplinePolarFootFinder
     using R = typename GridR::continuous_dimension_type;
     /// The continuous poloidal dimension.
     using Theta = typename GridTheta::continuous_dimension_type;
+    using IdxTheta = Idx<GridTheta>;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
@@ -213,8 +214,30 @@ public:
                             advection_field);
                 }
             } else {
-                // TODO
-                std::cout << "DOING NOTHING" << std::endl;
+                DVector<X_pc, Y_pc> advection_field_centre_sum = ddc::device_transform_reduce(
+                        m_idx_range_theta,
+                        DVector<X_pc, Y_pc>(0, 0),
+                        ddc::reducer::sum<DTensor<PseudoCartesianBasis>>(),
+                        KOKKOS_LAMBDA(IdxTheta const itheta) {
+                            CoordRTheta test_coord(Coord<R>(1e-10), ddc::coordinate(itheta));
+                            DVector<AdvDim1, AdvDim2> adv_field_near_centre;
+                            ddcHelper::get<AdvDim1>(adv_field_near_centre)
+                                    = m_evaluator_advection_field(
+                                            test_coord,
+                                            ddcHelper::get<AdvDim1>(advection_field_coefs_slice));
+                            ddcHelper::get<AdvDim2>(adv_field_near_centre)
+                                    = m_evaluator_advection_field(
+                                            test_coord,
+                                            ddcHelper::get<AdvDim2>(advection_field_coefs_slice));
+                            return to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+                                    m_pseudo_physical_to_advection,
+                                    test_coord,
+                                    adv_field_near_centre);
+                        });
+                ddcHelper::get<X_pc>(advection_field_xy)
+                        = ddcHelper::get<X_pc>(advection_field_centre_sum) / m_idx_range_theta.size();
+                ddcHelper::get<Y_pc>(advection_field_xy)
+                        = ddcHelper::get<Y_pc>(advection_field_centre_sum) / m_idx_range_theta.size();
             }
         };
 
