@@ -64,17 +64,13 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
 
     start_simulation = std::chrono::system_clock::now();
     // Build the grid for the space. ------------------------------------------------------------------
-    int const Nr(20);
-    int const Nt(40);
-#if defined(ROTATION)
+    int const Nr(40);
+    int const Nt(80);
     double const dt(0.1);
-#else
-    double const dt(0.001);
-#endif
     // --- Time parameters ----------------------------------------------------------------------------
     int const iter_nb = 8;
 
-    double const rmin(0.1);
+    double const rmin(1e-5);
     double const rmax(1);
 
     CoordR const r_min(rmin);
@@ -245,6 +241,7 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
     inverse_mapping_t<LogicalToPhysicalMapping> to_logical_mapping
             = to_physical_mapping.get_inverse_mapping();
 
+    //double TOL =
     ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
         CoordXY foot = simulation.electrostatical_potential
                                .exact_feet(to_physical_mapping(ddc::coordinate(irtheta)), 0);
@@ -254,6 +251,8 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
         EXPECT_NEAR(density_rtheta_averaged(irtheta), exact, 1e-6);
         EXPECT_NEAR(density_xy(irtheta), exact, 1e-1);
     });
+
+
     // ================================================================================================
     // SIMULATION                                                                                     |
     // ================================================================================================
@@ -278,12 +277,12 @@ TEST(AdvectionWithoutOpointComputation, TestAdvectionFieldFinder)
         ddc::host_for_each(grid, [&](IdxRTheta const irtheta) {
             CoordXY foot = simulation.electrostatical_potential.exact_feet(
                     to_physical_mapping(ddc::coordinate(irtheta)),
-                    (dt + 1) * iter);
+                    dt * (iter + 1));
             double exact = simulation.function(to_logical_mapping(foot));
             std::cout << ddc::coordinate(irtheta) << " " << foot << " " << density_xy(irtheta)
                       << " " << density_rtheta_averaged(irtheta) << " " << exact << std::endl;
-            //EXPECT_NEAR(density_rtheta_averaged(irtheta), exact, 1e-6);
-            //EXPECT_NEAR(density_xy(irtheta), exact, 1e-1);
+            //EXPECT_NEAR(density_rtheta_averaged(irtheta), exact, TOL);
+            //EXPECT_NEAR(density_xy(irtheta), exact, TOL * (2 << iter));
         });
     }
 
