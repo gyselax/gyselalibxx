@@ -759,8 +759,6 @@ public:
                 ddcHelper::get<AdvDim2>(advection_field_coefs),
                 ddcHelper::get<AdvDim2>(get_const_field(advection_field)));
 
-        CoordXY_pc coord_centre(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
-
         IdxRangeTheta idx_range_theta(get_idx_range(advection_field));
 
         TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
