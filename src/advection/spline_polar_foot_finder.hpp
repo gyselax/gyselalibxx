@@ -177,6 +177,8 @@ public:
      */
     KOKKOS_FUNCTION CoordRTheta operator()(IdxOperator const idx) const
     {
+        using CoordJ = typename PseudoPhysicalToAdvectionMapping::CoordJacobian;
+
         IdxBatch idx_batch(idx);
         IdxRTheta idx_rtheta(idx);
         VectorConstFieldSplineCoef advection_field_coefs_slice
@@ -201,7 +203,6 @@ public:
                 CoordRTheta advection_location_for_mapping(
                         Kokkos::min(ddc::select<R>(foot), ddc::discrete_space<BSplinesR>().rmax()),
                         ddc::select<Theta>(foot));
-                using CoordJ = typename PseudoPhysicalToAdvectionMapping::CoordJacobian;
                 if constexpr (std::is_same_v<CoordRTheta, CoordJ>) {
                     advection_field_xy = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
                             m_pseudo_physical_to_advection,
@@ -229,15 +230,24 @@ public:
                                     = m_evaluator_advection_field(
                                             test_coord,
                                             ddcHelper::get<AdvDim2>(advection_field_coefs_slice));
-                            return to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
-                                    m_pseudo_physical_to_advection,
-                                    test_coord,
-                                    adv_field_near_centre);
+                            if constexpr (std::is_same_v<CoordRTheta, CoordJ>) {
+                                return to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+                                        m_pseudo_physical_to_advection,
+                                        test_coord,
+                                        adv_field_near_centre);
+                            } else {
+                                return to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
+                                        m_pseudo_physical_to_advection,
+                                        m_logical_to_pseudo_physical(test_coord),
+                                        adv_field_near_centre);
+                            }
                         });
                 ddcHelper::get<X_pc>(advection_field_xy)
-                        = ddcHelper::get<X_pc>(advection_field_centre_sum) / m_idx_range_theta.size();
+                        = ddcHelper::get<X_pc>(advection_field_centre_sum)
+                          / m_idx_range_theta.size();
                 ddcHelper::get<Y_pc>(advection_field_xy)
-                        = ddcHelper::get<Y_pc>(advection_field_centre_sum) / m_idx_range_theta.size();
+                        = ddcHelper::get<Y_pc>(advection_field_centre_sum)
+                          / m_idx_range_theta.size();
             }
         };
 
