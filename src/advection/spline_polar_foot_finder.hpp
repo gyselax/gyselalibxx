@@ -589,6 +589,11 @@ private:
     using TimeStepper =
             typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
 
+    using VectorFieldBatchedSplineCoefMem
+            = DVectorFieldMem<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>;
+    using VectorFieldBatchedSplineCoef
+            = DVectorField<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>;
+
     TimeStepperBuilder const& m_time_stepper_builder;
 
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
@@ -604,11 +609,6 @@ public:
      * on a compatible memory space.
      */
     using CFieldFeet = Field<CoordRTheta, IdxRangeOperator, memory_space>;
-
-    using VectorFieldBatchedSplineCoefMem
-            = DVectorFieldMem<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>;
-    using VectorFieldBatchedSplineCoef
-            = DVectorField<IdxRangeSplineBatched, VectorIndexSetAdvectionDims, memory_space>;
 
     /// The first dimension of the advection field.
     using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
@@ -644,8 +644,8 @@ public:
      * @param[in] time_stepper_builder
      *      A builder for the time integration method used for the
      *      characteristic equation. 
-     * @param[in] logical_to_physical_mapping
-     *      The mapping from the logical domain to the physical domain.
+     * @param[in] pseudo_physical_to_advection_domain_mapping
+     *      The mapping from the logical domain to the domain on which the advection field is defined.
      * @param[in] logical_to_pseudo_physical_mapping
      *      The mapping from the logical domain to the pseudo-physical domain.
      * @param[in] builder_advection_field
@@ -653,9 +653,6 @@ public:
      *      of the advection field.
      * @param[in] evaluator_advection_field
      *      The B-splines evaluator to evaluate the advection field.
-     * @param[in] epsilon
-     *      @f$ \varepsilon @f$ parameter used for the linearisation of the
-     *      advection field around the central point.
      *
      * @see ITimeStepper
      */

@@ -240,12 +240,14 @@ inline constexpr bool enable_tensor_type<Tensor<ElementType, ValidIndexSet...>> 
 }
 
 namespace Kokkos { //reduction identity must be defined in Kokkos namespace
+/// A specialisation of Kokkos::reduction_identity to allow calling parallel_transform on tensors
 template <class ElementType, class... ValidIndexSet>
 struct reduction_identity<Tensor<ElementType, ValidIndexSet...>>
 {
+    /// Describe initialisation for summing
     KOKKOS_FORCEINLINE_FUNCTION static Tensor<ElementType, ValidIndexSet...> sum()
     {
-        return Tensor<ElementType, ValidIndexSet...>();
+        return Tensor<ElementType, ValidIndexSet...>(0);
     }
 };
 } // namespace Kokkos
