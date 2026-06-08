@@ -760,10 +760,6 @@ public:
                 ddcHelper::get<AdvDim2>(get_const_field(advection_field)));
 
         CoordXY_pc coord_centre(m_logical_to_pseudo_physical(CoordRTheta(0, 0)));
-        LogicalToPseudoPhysicalMapping logical_to_pseudo_physical_proxy
-                = m_logical_to_pseudo_physical;
-        PseudoPhysicalToLogicalMapping pseudo_physical_to_logical_proxy
-                = m_pseudo_physical_to_logical;
 
         IdxRangeTheta idx_range_theta(get_idx_range(advection_field));
 
