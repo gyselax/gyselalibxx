@@ -159,7 +159,7 @@ public:
      *
      * @param [in, out] allfdistribu
      *      A Field containing the values of the function we want to advect.
-     * @param [in] advection_field_xy
+     * @param [in] advection_field
      *      A field of vectors defined on the Cartesian basis containing the values
      *      of the advection field at each point on the logical grid.
      * @param [in] dt
