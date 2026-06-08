@@ -72,6 +72,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use Simpson quadrature for XYVxVy Landau damping.
 - Update py-dask in the CPU Spack toolchain.
 - Disable python for PDI and pdiplugin-pycall on macOS.
+- In `SplinePolarFootFinder`, interpolate advection field on the provided coordinate system.
 
 ### Deprecated
 
@@ -87,6 +88,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove out-of-date Leonardo toolchain.
 - Remove unuseful defaulted template parameters `MinBound` and `MaxBound` from `LagrangeInterpolator`.
 - Remove unused superclass `IPolarFootFinder`.
+- Remove BslAdvectionPolar::operator() taking `advection_field_xy_centre`.
 
 ## [v0.7.0] - 2026-03-18
 
