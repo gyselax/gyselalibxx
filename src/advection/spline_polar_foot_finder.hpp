@@ -219,7 +219,7 @@ public:
                         m_idx_range_theta,
                         DVector<X_pc, Y_pc>(0, 0),
                         ddc::reducer::sum<DTensor<PseudoCartesianBasis>>(),
-                        KOKKOS_LAMBDA(IdxTheta const itheta) {
+                        [&](IdxTheta const itheta) {
                             CoordRTheta test_coord(Coord<R>(1e-10), ddc::coordinate(itheta));
                             DVector<AdvDim1, AdvDim2> adv_field_near_centre;
                             ddcHelper::get<AdvDim1>(adv_field_near_centre)
