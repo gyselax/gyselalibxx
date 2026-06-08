@@ -169,7 +169,7 @@ public:
      */
     DFieldFDistribu operator()(
             DFieldFDistribu allfdistribu,
-            DVectorConstFieldAdvection advection_field_xy,
+            DVectorConstFieldAdvection advection_field,
             double dt) const
     {
         // Pre-allocate spline coefficient storage
@@ -178,7 +178,7 @@ public:
 
         // Compute the feet of the characteristics at tn -----------------------------------------
         typename FootFinder::ElementwiseOperator find_foot_alloc
-                = m_find_feet_method(get_const_field(advection_field_xy));
+                = m_find_feet_method(get_const_field(advection_field));
         typename FootFinder::ElementwiseOperator::GPUCompat find_foot = find_foot_alloc(dt);
 
         // Interpolate the function on the feet of the characteristics. --------------------------
@@ -204,85 +204,6 @@ public:
         return allfdistribu;
     }
 
-
-    /**
-     * @brief Advect a function over a time step dt with the given advection field
-     * along the logical directions and physical directions for the O-point. 
-     * 
-     * @warning This operator should be applied if the O-point corresponds to 
-     * points of the grid. 
-     *
-     * @param [in, out] allfdistribu
-     *      A Field containing the values of the function we want to advect.
-     * @param [in] advection_field_rtheta
-     *      A field of vectors defined on the Curvilinear basis containing the values
-     *      of the advection field at each point on the logical grid.
-     *      It is expressed on the contravariant basis.
-     * @param [in] advection_field_xy_centre
-     *      A vector in the Cartesian basis, containing the value of the advection
-     *      field at the O-point.
-     * @param [in] dt
-     *      A time step used.
-     *
-     * @return A Field to allfdistribu advected on the time step given.
-     */
-    DFieldFDistribu operator()(
-            DFieldFDistribu allfdistribu,
-            DVectorConstFieldAdvectionRTheta advection_field_rtheta,
-            DTensor<CartesianBasis> const& advection_field_xy_centre,
-            double dt) const
-    {
-        using IdxRangeBatchedWithoutR = ddc::remove_dims_of_t<IdxRangeBatched, GridR>;
-        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection");
-        IdxRangeBatched grid(get_idx_range(allfdistribu));
-        IdxRangeR radial_grid(grid);
-        IdxRangeBatchedWithoutR no_r_grid(grid);
-
-        // Check the first points on R correspond to the O-point.
-        assert(ddc::coordinate(radial_grid.front()) < 1e-13);
-
-        IdxRangeBatched const
-                grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
-        IdxRangeBatched const Opoint_grid(radial_grid.take_first(IdxStepR(1)), no_r_grid);
-
-        // Convert advection field on RTheta to advection field on XY
-        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection/RThetaToXY");
-
-        DVectorFieldMemAdvectionXY advection_field_xy_alloc(
-                "advection_field_xy (BslAdvectionPolar::operator())",
-                grid);
-        DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
-
-        LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy
-                = m_logical_to_physical_mapping;
-
-        // (Ax, Ay) = J (Ar, Atheta)
-        copy_to_vector_space<CartesianBasis>(
-                ExecSpace(),
-                advection_field_xy[grid_without_Opoint],
-                logical_to_physical_mapping_proxy,
-                advection_field_rtheta[grid_without_Opoint]);
-
-        Kokkos::Profiling::popRegion();
-
-        const std::source_location location = std::source_location::current();
-        ddc::parallel_for_each(
-                location.function_name(),
-                ExecSpace(),
-                Opoint_grid,
-                KOKKOS_LAMBDA(IdxBatched const idx) {
-                    ddcHelper::assign_vector_field_element(
-                            advection_field_xy,
-                            idx,
-                            advection_field_xy_centre);
-                });
-
-        (*this)(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
-
-        Kokkos::Profiling::popRegion();
-
-        return allfdistribu;
-    }
 
     /**
      * @brief Replace the value at @f$  (r=0, \theta)@f$  point
