@@ -27,6 +27,7 @@ option(GYSELALIBXX_BUILD_TESTING "Build the tests." ON)
 option(GYSELALIBXX_ENABLE_DEPRECATED "Enable deprecated code" OFF)
 option(GYSELALIBXX_COMPILE_SOURCE "Enable compilation of the source code (this should be set to off to build documentation without the C++ dependencies)" ON)
 set(GYSELALIBXX_DEFAULT_CXX_FLAGS "-O1" CACHE STRING "Default flags for C++ specific to Gyselalib++")
+set(GYSELALIBXX_DISCOVERY_TIMEOUT "100" CACHE STRING "Discovery timeout of Gyselalib++ tests")
 option(GYSELALIBXX_ACTIVATE_RESTART_TESTS "Activate tests which check that a simulation gives the same results after restart." ON)
 
 ###############################################################################################
@@ -71,6 +72,7 @@ find_package(Ginkgo 1.8 REQUIRED)
 set(CMAKE_CXX_FLAGS "${GYSELALIBXX_DEFAULT_CXX_FLAGS} ${CMAKE_CXX_FLAGS}")
 
 set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_grid xnonperiod_vx_user_defined_grid)
+set(PRECISION_VARIANTS_LIST float double)
 
 ## Get the main code in `src/`
 add_subdirectory(src/)

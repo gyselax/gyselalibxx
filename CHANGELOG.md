@@ -28,6 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a `landau4d_fft_lagrange` target for 3D Landau damping with Lagrange interpolation.
 - Add an optional `IdxRange` argument to the constructor of `LagrangeInterpolator`.
 - Add a new `init_lagrange_dependent_idx_range` method.
+- Add a MPI scope guard.
+- Add MI250X toolchain for LUMI.
+- Add a CMake option to control the discovery timeout of Gyselalib++ tests.
 
 ### Fixed
 
@@ -42,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Decrease memory usage in `SplinePolarFootFinder`.
 - Fix GCC version on Adastra toolchains.
 - Fix use of `BslAdvectionSpatial` and `BslAdvectionVelocity` with non-double precision.
+- Fix H100 toolchain on Jean-Zay.
 
 ### Changed
 
@@ -66,6 +70,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow the components and determinant of the Jacobian of a coordinate transformation to be any floating point precision.
 - Prefixed the name of the Kokkos region with "(GSLX)"
 - Use Simpson quadrature for XYVxVy Landau damping.
+- Update py-dask in the CPU Spack toolchain.
+- Disable python for PDI and pdiplugin-pycall on macOS.
 
 ### Deprecated
 
