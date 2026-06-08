@@ -12,7 +12,7 @@ pattern = re.compile(
 )
 
 n_iter = 9
-it = 1
+it = 6
 
 r_coord, theta_coord = [], []
 r_foot, theta_foot = [], []
@@ -105,9 +105,11 @@ ax_rt.set_title('val_rθ', pad=15)
 polar_pcolormesh(ax_ex, EXACT[it], 'plasma', 'exact')
 ax_ex.set_title('val_exact', pad=15)
 
-print("Max error in x,y : ", np.max(np.abs(VAL_XY[it] - EXACT[it])))
-print("Max error in r,theta : ", np.max(np.abs(VAL_RT[it] - EXACT[it])))
-print("Max diff : ", np.max(np.abs(VAL_RT[it] - VAL_XY[it])))
+for it in range(n_iter):
+    print("------ Iteration", it, "-------")
+    print("Max error in x,y : ", np.max(np.abs(VAL_XY[it] - EXACT[it])))
+    print("Max error in r,theta : ", np.max(np.abs(VAL_RT[it] - EXACT[it])))
+    print("Max diff : ", np.max(np.abs(VAL_RT[it] - VAL_XY[it])))
 
 plt.tight_layout()
 plt.savefig(f'{name}_plots.png', dpi=150, bbox_inches='tight')
