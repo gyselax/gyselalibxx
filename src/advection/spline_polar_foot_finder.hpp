@@ -31,18 +31,6 @@
  *      The discrete radial dimension.
  * @tparam GridTheta
  *      The discrete poloidal dimension.
- * @tparam X_pc
- *      The first axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated.
- * @tparam Y_pc
- *      The second axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated.
- * @tparam AdvDim1
- *      The first dimension of the advection field.
- * @tparam AdvDim2
- *      The second dimension of the advection field.
- * @tparam BSplinesR
- *      The B-spline basis in the radial direction.
- * @tparam BSplinesTheta
- *      The B-spline basis in the poloidal direction.
  * @tparam IdxRangeOperator
  *      The full index range over which the operator acts (may include batch dimensions).
  * @tparam SplineRThetaEvaluatorAdvection
@@ -64,12 +52,6 @@
 template <
         class GridR,
         class GridTheta,
-        class X_pc,
-        class Y_pc,
-        class AdvDim1,
-        class AdvDim2,
-        class BSplinesR,
-        class BSplinesTheta,
         class IdxRangeOperator,
         class SplineRThetaEvaluatorAdvection,
         class PseudoPhysicalToAdvectionMapping,
@@ -83,11 +65,22 @@ class ElementwiseSplinePolarFootFinder
     using R = typename GridR::continuous_dimension_type;
     /// The continuous poloidal dimension.
     using Theta = typename GridTheta::continuous_dimension_type;
+    using BSplinesR = find_grid_t<
+            R,
+            ddc::to_type_seq_t<typename SplineRThetaEvaluatorAdvection::spline_domain_type>>;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
     using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using CoordRTheta = Coord<R, Theta>;
+    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using VectorIndexSetAdvectionDims
+            = ddc::to_type_seq_t<typename PseudoPhysicalToAdvectionMapping::CoordResult>;
+    /// The first dimension of the advection field.
+    using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
+    /// The second dimension of the advection field.
+    using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
 
 private:
     SplineRThetaEvaluatorAdvection m_evaluator_advection_field;
@@ -223,18 +216,6 @@ public:
  *      The discrete radial dimension.
  * @tparam GridTheta
  *      The discrete poloidal dimension.
- * @tparam X_pc
- *      The first axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated.
- * @tparam Y_pc
- *      The second axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated.
- * @tparam AdvDim1
- *      The first dimension of the advection field.
- * @tparam AdvDim2
- *      The second dimension of the advection field.
- * @tparam BSplinesR
- *      The B-spline basis in the radial direction.
- * @tparam BSplinesTheta
- *      The B-spline basis in the poloidal direction.
  * @tparam IdxRangeOperator
  *      The full index range over which the operator acts (may include batch dimensions).
  * @tparam SplineRThetaEvaluatorAdvection
@@ -256,12 +237,6 @@ public:
 template <
         class GridR,
         class GridTheta,
-        class X_pc,
-        class Y_pc,
-        class AdvDim1,
-        class AdvDim2,
-        class BSplinesR,
-        class BSplinesTheta,
         class IdxRangeOperator,
         class SplineRThetaEvaluatorAdvection,
         class PseudoPhysicalToAdvectionMapping,
@@ -275,6 +250,8 @@ class ElementwiseSplinePolarFootFinderMem
     using R = typename GridR::continuous_dimension_type;
     /// The continuous poloidal dimension.
     using Theta = typename GridTheta::continuous_dimension_type;
+    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
@@ -286,12 +263,6 @@ public:
     using GPUCompat = ElementwiseSplinePolarFootFinder<
             GridR,
             GridTheta,
-            X_pc,
-            Y_pc,
-            AdvDim1,
-            AdvDim2,
-            BSplinesR,
-            BSplinesTheta,
             IdxRangeOperator,
             SplineRThetaEvaluatorAdvection,
             PseudoPhysicalToAdvectionMapping,
@@ -586,12 +557,6 @@ public:
     using ElementwiseOperator = ElementwiseSplinePolarFootFinderMem<
             GridR,
             GridTheta,
-            X_pc,
-            Y_pc,
-            AdvDim1,
-            AdvDim2,
-            BSplinesR,
-            BSplinesTheta,
             IdxRangeOperator,
             SplineRThetaEvaluatorAdvection,
             PseudoPhysicalToAdvectionMapping,
