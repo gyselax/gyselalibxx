@@ -7,7 +7,7 @@ spack:
     - googletest +gmock
     - kokkos@4.7 ~openmp +rocm +hip_relocatable_device_code amdgpu_target=gfx90a
     - kokkos-kernels@4.7 ~shared
-    - kokkos-tools
+    - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
     - 'koliop@0.1.2:0.1'
     - lapack
     - mpi
