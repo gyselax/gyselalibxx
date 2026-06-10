@@ -1,4 +1,4 @@
-
+#pragma once
 
 namespace polar_foot_finder_details {
 
@@ -7,6 +7,9 @@ template <
         class GridTheta,
         class IdxRangeOperator,
         class RThetaAdvectionEvaluator,
+        class PseudoPhysicalToAdvectionMapping,
+        class PseudoPhysicalToLogicalMapping,
+        class LogicalToPseudoPhysicalMapping,
         class AdvecCoefField,
         class TimeStepper>
 class ElementwisePhysicalAdvPseudoPhysicalFootFinder
@@ -17,7 +20,7 @@ class ElementwisePhysicalAdvPseudoPhysicalFootFinder
     using Theta = typename GridTheta::continuous_dimension_type;
     using BSplinesR = find_grid_t<
             R,
-            ddc::to_type_seq_t<typename SplineRThetaEvaluatorAdvection::spline_domain_type>>;
+            ddc::to_type_seq_t<typename RThetaAdvectionEvaluator::spline_domain_type>>;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
@@ -33,7 +36,7 @@ class ElementwisePhysicalAdvPseudoPhysicalFootFinder
     using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
 
 private:
-    SplineRThetaEvaluatorAdvection m_evaluator_advection_field;
+    RThetaAdvectionEvaluator m_evaluator_advection_field;
 
     PseudoPhysicalToAdvectionMapping m_pseudo_physical_to_advection;
     PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
@@ -47,8 +50,8 @@ private:
     double m_dt;
 
 public:
-    ElementwiseSplinePolarFootFinder(
-            SplineRThetaEvaluatorAdvection const& evaluator_advection_field,
+    ElementwisePhysicalAdvPseudoPhysicalFootFinder(
+            RThetaAdvectionEvaluator const& evaluator_advection_field,
             PseudoPhysicalToAdvectionMapping const& pseudo_physical_to_advection,
             PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
@@ -61,6 +64,7 @@ public:
         , m_pseudo_physical_to_advection(pseudo_physical_to_advection)
         , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
+        , m_time_stepper(time_stepper)
         , m_advection_field_coefs(advection_field_coefs)
         , m_coord_centre(coord_centre)
         , m_idx_range_theta(idx_range_theta)
@@ -133,6 +137,7 @@ class ElementwisePhysicalAdvPseudoPhysicalFootFinderMem
 {
     using R = typename GridR::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
+    using CoordRTheta = Coord<R, Theta>;
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
     using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
@@ -150,6 +155,9 @@ public:
             GridTheta,
             IdxRangeOperator,
             RThetaAdvectionEvaluator,
+            PseudoPhysicalToAdvectionMapping,
+            PseudoPhysicalToLogicalMapping,
+            LogicalToPseudoPhysicalMapping,
             typename AdvecCoefFieldMem::view_type,
             TimeStepper>;
 
@@ -236,6 +244,34 @@ public:
                 m_idx_range_theta,
                 dt);
     }
+};
+
+template <
+        class GridR,
+        class GridTheta,
+        class IdxRangeOperator,
+        class RThetaAdvectionEvaluator,
+        class AdvecCoefField,
+        class TimeStepperBuilder,
+        concepts::Mapping LogicalToPhysicalMapping>
+struct ElementwiseChoice<
+        FootFindingSpace::PSEUDO_PHYSICAL,
+        AdvectionFieldSpace::PHYSICAL,
+        GridR,
+        GridTheta,
+        IdxRangeOperator,
+        RThetaAdvectionEvaluator,
+        AdvecCoefField,
+        TimeStepperBuilder,
+        LogicalToPhysicalMapping>
+{
+    using type = ElementwisePhysicalAdvPseudoPhysicalFootFinderMem<
+            GridR,
+            GridTheta,
+            IdxRangeOperator,
+            RThetaAdvectionEvaluator,
+            AdvecCoefField,
+            TimeStepperBuilder>;
 };
 
 } // namespace polar_foot_finder_details

@@ -44,7 +44,6 @@ private:
 public:
     ElementwiseLogicalAdvPseudoPhysFootFinder(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
-            PseudoPhysicalToAdvectionMapping const& pseudo_physical_to_advection,
             PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             TimeStepper const& time_stepper,
@@ -53,9 +52,9 @@ public:
             IdxRange<GridTheta> idx_range_theta,
             double dt)
         : m_evaluator_advection_field(evaluator_advection_field)
-        , m_pseudo_physical_to_advection(pseudo_physical_to_advection)
         , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
         , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
+        , m_time_stepper(time_stepper)
         , m_advection_field_coefs(advection_field_coefs)
         , m_coord_centre(coord_centre)
         , m_idx_range_theta(idx_range_theta)
@@ -120,12 +119,15 @@ template <
         class LogicalToPseudoPhysicalMapping>
 class ElementwiseLogicalAdvPseudoPhysFootFinderMem
 {
+    using R = typename GridR::continuous_dimension_type;
+    using Theta = typename GridTheta::continuous_dimension_type;
+    using CoordRTheta = Coord<R, Theta>;
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
     using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
     using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
 
     using TimeStepper =
-            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, X_pc>>;
+            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
 
 public:
     /// The non-owning operator that can be used on GPU.
@@ -220,7 +222,7 @@ template <
         class AdvecCoefField,
         class TimeStepperBuilder,
         concepts::Mapping LogicalToPhysicalMapping>
-class ElementwiseChoice<
+struct ElementwiseChoice<
         FootFindingSpace::PSEUDO_PHYSICAL,
         AdvectionFieldSpace::LOGICAL,
         GridR,
@@ -231,7 +233,7 @@ class ElementwiseChoice<
         TimeStepperBuilder,
         LogicalToPhysicalMapping>
 {
-    using type = ElementwiseLogicalAdvPseudoPhysFootFinder<
+    using type = ElementwiseLogicalAdvPseudoPhysFootFinderMem<
             GridR,
             GridTheta,
             IdxRangeOperator,
@@ -253,7 +255,7 @@ template <
         class AdvecCoefField,
         class TimeStepperBuilder,
         concepts::Mapping LogicalToPhysicalMapping>
-class ElementwiseChoice<
+struct ElementwiseChoice<
         FootFindingSpace::PHYSICAL,
         AdvectionFieldSpace::LOGICAL,
         GridR,
@@ -265,7 +267,7 @@ class ElementwiseChoice<
         LogicalToPhysicalMapping>
 {
     static_assert(is_analytical_mapping_v<LogicalToPhysicalMapping>);
-    using type = ElementwiseLogicalAdvPseudoPhysFootFinder<
+    using type = ElementwiseLogicalAdvPseudoPhysFootFinderMem<
             GridR,
             GridTheta,
             IdxRangeOperator,

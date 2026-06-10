@@ -1,4 +1,4 @@
-
+#pragma once
 
 namespace polar_foot_finder_details {
 
@@ -15,9 +15,6 @@ class ElementwiseLogicalAdvLogicalFootFinder
     using R = typename GridR::continuous_dimension_type;
     /// The continuous poloidal dimension.
     using Theta = typename GridTheta::continuous_dimension_type;
-    using BSplinesR = find_grid_t<
-            R,
-            ddc::to_type_seq_t<typename RThetaAdvectionEvaluator::spline_domain_type>>;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
@@ -41,9 +38,7 @@ public:
             IdxRange<GridTheta> idx_range_theta,
             double dt)
         : m_evaluator_advection_field(evaluator_advection_field)
-        , m_pseudo_physical_to_advection(pseudo_physical_to_advection)
-        , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
-        , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
+        , m_time_stepper(time_stepper)
         , m_advection_field_coefs(advection_field_coefs)
         , m_idx_range_theta(idx_range_theta)
         , m_dt(dt)
@@ -77,20 +72,20 @@ public:
 
         // The function describing how the value(s) are updated using the derivative.
         auto update_function = [&](CoordRTheta& foot_rtheta,
-                                   DVector<X_pc, Y_pc> const& advection_field,
+                                   DVector<R, Theta> const& advection_field,
                                    double dt) {
-            foot -= dt * adv;
+            foot_rtheta -= dt * advection_field;
 
             // O-point reflection: if r goes negative, reflect through the origin.
-            double foot_r = ddc::get<R>(foot);
-            double foot_theta = ddc::get<Theta>(foot);
+            double foot_r = ddc::get<R>(foot_rtheta);
+            double foot_theta = ddc::get<Theta>(foot_rtheta);
             int negative_reflexion = static_cast<int>(foot_r < 0);
-            foot = CoordRTheta(
+            foot_rtheta = CoordRTheta(
                     (1 - 2 * negative_reflexion) * foot_r,
                     foot_theta + M_PI * negative_reflexion);
             // Wrap theta into the periodic domain.
-            ddc::select<Theta>(foot)
-                    = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(foot), m_idx_range_theta);
+            ddc::select<Theta>(foot_rtheta)
+                    = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
         };
 
         CoordRTheta foot = ddc::coordinate(idx_rtheta);
@@ -111,6 +106,7 @@ class ElementwiseLogicalAdvLogicalFootFinderMem
 {
     using R = typename GridR::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
+    using CoordRTheta = Coord<R, Theta>;
 
     using TimeStepper =
             typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<R, Theta>>;
@@ -189,11 +185,18 @@ template <
         class AdvecCoefField,
         class TimeStepperBuilder,
         concepts::Mapping LogicalToPhysicalMapping>
-        class ElementwiseChoice < FootFindingSpace::LOGICAL,
-        AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator,
-        AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping >>
+struct ElementwiseChoice<
+        FootFindingSpace::LOGICAL,
+        AdvectionFieldSpace::LOGICAL,
+        GridR,
+        GridTheta,
+        IdxRangeOperator,
+        RThetaAdvectionEvaluator,
+        AdvecCoefField,
+        TimeStepperBuilder,
+        LogicalToPhysicalMapping>
 {
-    using type = ElementwiseLogicalAdvLogicalFootFinder<
+    using type = ElementwiseLogicalAdvLogicalFootFinderMem<
             GridR,
             GridTheta,
             IdxRangeOperator,
