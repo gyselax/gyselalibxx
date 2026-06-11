@@ -131,22 +131,19 @@ template <
         class RThetaAdvectionEvaluator,
         class AdvecCoefFieldMem,
         class TimeStepperBuilder,
-        concepts::Mapping LogicalToPhysicalMapping,
-        concepts::AnalyticalMapping LogicalToPseudoPhysicalMapping>
+        concepts::Mapping LogicalToPhysicalMapping>
 class ElementwisePhysicalAdvPseudoPhysicalFootFinderMem
 {
     using R = typename GridR::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
     using CoordRTheta = Coord<R, Theta>;
     using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
-    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
-    using PseudoCartesianToCircular = CartesianToCircular<X_pc, Y_pc, R, Theta>;
+    using PseudoCartesianToCircular = CartesianToCircular<X_pC, Y_pC, R, Theta>;
     using PseudoPhysicalToAdvectionMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
     using TimeStepper =
-            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pc, Y_pc>>;
+            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pC, Y_pC>>;
 
 public:
     /// The non-owning operator that can be used on GPU.
@@ -205,7 +202,7 @@ public:
             LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             TimeStepper const& time_stepper,
             AdvecCoefFieldMem&& advection_field_coefs,
-            Coord<X_pc, Y_pc> coord_centre,
+            Coord<X_pC, Y_pC> coord_centre,
             IdxRange<GridTheta> idx_range_theta,
             double epsilon = 1e-12)
         : m_evaluator_advection_field(evaluator_advection_field)
