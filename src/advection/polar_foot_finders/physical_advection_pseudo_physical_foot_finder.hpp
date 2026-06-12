@@ -1,4 +1,9 @@
 #pragma once
+#include <ddc/ddc.hpp>
+#include "ddc_aliases.hpp"
+#include "geometry_pseudo_cartesian.hpp"
+#include "tensor.hpp"
+#include "type_seq_tools.hpp"
 
 namespace polar_foot_finder_details {
 
@@ -137,8 +142,8 @@ class ElementwisePhysicalAdvPseudoPhysicalFootFinderMem
     using R = typename GridR::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
     using CoordRTheta = Coord<R, Theta>;
-    using PseudoPhysicalToLogicalMapping = inverse_mapping_t<LogicalToPseudoPhysicalMapping>;
-    using PseudoCartesianToCircular = CartesianToCircular<X_pC, Y_pC, R, Theta>;
+    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
+    using PseudoPhysicalToLogicalMapping = CartesianToCircular<X_pC, Y_pC, R, Theta>;
     using PseudoPhysicalToAdvectionMapping
             = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
 
@@ -198,18 +203,16 @@ public:
     ElementwisePhysicalAdvPseudoPhysicalFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             LogicalToPhysicalMapping const& logical_to_physical,
-            PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
-            LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
-            TimeStepper const& time_stepper,
+            TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
             Coord<X_pC, Y_pC> coord_centre,
             IdxRange<GridTheta> idx_range_theta,
             double epsilon = 1e-12)
         : m_evaluator_advection_field(evaluator_advection_field)
         , m_pseudo_physical_to_advection(logical_to_physical, PseudoCartesianToCircular(), epsilon)
-        , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
-        , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
-        , m_time_stepper(time_stepper)
+        , m_pseudo_physical_to_logical(coord_centre)
+        , m_logical_to_pseudo_physical(coord_centre)
+        , m_time_stepper(time_stepper_builder.template preallocate<TimeStepper>())
         , m_advection_field_coefs_alloc(std::move(advection_field_coefs))
         , m_coord_centre(coord_centre)
         , m_idx_range_theta(idx_range_theta)

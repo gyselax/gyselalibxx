@@ -1,4 +1,7 @@
 #pragma once
+#include <ddc/ddc.hpp>
+#include "ddc_aliases.hpp"
+#include "tensor.hpp"
 
 namespace polar_foot_finder_details {
 
@@ -142,13 +145,16 @@ public:
      *      The poloidal index range, used to wrap the angular coordinate into
      *      the periodic domain after each time step.
      */
+    template <class LogicalToPhysicalMapping, class X_pc, class Y_pc>
     ElementwiseLogicalAdvLogicalFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
-            TimeStepper const& time_stepper,
+            LogicalToPhysicalMapping [[unused]] const& logical_to_physical,
+            TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
+            Coord<X_pc, Y_pc> [[unused]] coord_centre,
             IdxRange<GridTheta> idx_range_theta)
         : m_evaluator_advection_field(evaluator_advection_field)
-        , m_time_stepper(time_stepper)
+        , m_time_stepper(time_stepper_builder.template preallocate<TimeStepper>())
         , m_advection_field_coefs_alloc(std::move(advection_field_coefs))
         , m_idx_range_theta(idx_range_theta)
     {

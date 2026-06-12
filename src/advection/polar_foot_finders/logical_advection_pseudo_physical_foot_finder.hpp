@@ -1,4 +1,10 @@
 #pragma once
+#include <ddc/ddc.hpp>
+
+#include "ddc_aliases.hpp"
+#include "geometry_pseudo_cartesian.hpp"
+#include "tensor.hpp"
+#include "type_seq_tools.hpp"
 
 namespace polar_foot_finder_details {
 
@@ -142,8 +148,8 @@ public:
 
 private:
     RThetaAdvectionEvaluator m_evaluator_advection_field;
-    PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
+    PseudoPhysicalToLogicalMapping m_pseudo_physical_to_logical;
     TimeStepper m_time_stepper;
     AdvecCoefFieldMem m_advection_field_coefs_alloc;
     Coord<X_pc, Y_pc> m_coord_centre;
@@ -170,18 +176,47 @@ public:
      *      The poloidal index range, used to wrap the angular coordinate into
      *      the periodic domain after each time step.
      */
+    template <
+            class LogicalToPhysicalMapping,
+            class = std::enable_if_t<
+                    (std::is_same_v<X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x>)&&(
+                            std::is_same_v<
+                                    Y_pc,
+                                    typename LogicalToPhysicalMapping::cartesian_tag_y>)>>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
-            PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
-            LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
-            TimeStepper const& time_stepper,
+            LogicalToPhysicalMapping const& logical_to_physical,
+            TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
             Coord<X_pc, Y_pc> coord_centre,
             IdxRange<GridTheta> idx_range_theta)
         : m_evaluator_advection_field(evaluator_advection_field)
-        , m_pseudo_physical_to_logical(pseudo_physical_to_logical)
-        , m_logical_to_pseudo_physical(logical_to_pseudo_physical)
-        , m_time_stepper(time_stepper)
+        , m_logical_to_pseudo_physical(logical_to_physical)
+        , m_pseudo_physical_to_logical(logical_to_physical.get_inverse_mapping())
+        , m_time_stepper(time_stepper_builder.template preallocate<TimeStepper>())
+        , m_advection_field_coefs_alloc(std::move(advection_field_coefs))
+        , m_coord_centre(coord_centre)
+        , m_idx_range_theta(idx_range_theta)
+    {
+    }
+    template <
+            class LogicalToPhysicalMapping,
+            class = std::enable_if_t<
+                    !((std::is_same_v<X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x>)&&(
+                            std::is_same_v<
+                                    Y_pc,
+                                    typename LogicalToPhysicalMapping::cartesian_tag_y>))>>
+    ElementwiseLogicalAdvPseudoPhysFootFinderMem(
+            RThetaAdvectionEvaluator const& evaluator_advection_field,
+            LogicalToPhysicalMapping [[unused]] const& logical_to_physical,
+            TimeStepperBuilder const& time_stepper_builder,
+            AdvecCoefFieldMem&& advection_field_coefs,
+            Coord<X_pc, Y_pc> coord_centre,
+            IdxRange<GridTheta> idx_range_theta)
+        : m_evaluator_advection_field(evaluator_advection_field)
+        , m_logical_to_pseudo_physical(coord_centre)
+        , m_pseudo_physical_to_logical(coord_centre)
+        , m_time_stepper(time_stepper_builder.template preallocate<TimeStepper>())
         , m_advection_field_coefs_alloc(std::move(advection_field_coefs))
         , m_coord_centre(coord_centre)
         , m_idx_range_theta(idx_range_theta)
