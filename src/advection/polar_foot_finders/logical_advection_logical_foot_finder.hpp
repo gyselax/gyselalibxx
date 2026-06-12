@@ -1,5 +1,6 @@
 #pragma once
 #include <ddc/ddc.hpp>
+
 #include "ddc_aliases.hpp"
 #include "tensor.hpp"
 
@@ -87,8 +88,8 @@ public:
                     (1 - 2 * negative_reflexion) * foot_r,
                     foot_theta + M_PI * negative_reflexion);
             // Wrap theta into the periodic domain.
-            ddc::select<Theta>(foot_rtheta)
-                    = ddcHelper::restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
+            ddc::select<Theta>(foot_rtheta) = ddcHelper::
+                    restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
         };
 
         CoordRTheta foot = ddc::coordinate(idx_rtheta);

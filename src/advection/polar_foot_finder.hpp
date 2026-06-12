@@ -1,15 +1,16 @@
 #pragma once
 #include <source_location>
 
+#include "polar_foot_finders/elementwise_choice.hpp"
+#include "polar_foot_finders/logical_advection_logical_foot_finder.hpp"
+#include "polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp"
+#include "polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp"
+
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
-#include "polar_foot_finders/elementwise_choice.hpp"
-#include "polar_foot_finders/logical_advection_logical_foot_finder.hpp"
-#include "polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp"
-#include "polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp"
 
 template <
         FootFindingSpace FFSpace,
@@ -40,7 +41,7 @@ class PolarFootFinder
 
     static_assert(
             FFSpace != FootFindingSpace::PHYSICAL
-                    || is_analytical_mapping_v<LogicalToPhysicalMapping>);
+            || is_analytical_mapping_v<LogicalToPhysicalMapping>);
 
     using memory_space = typename RThetaAdvectionBuilder::memory_space;
     using ExecSpace = typename RThetaAdvectionBuilder::exec_space;
@@ -64,9 +65,10 @@ class PolarFootFinder
 
     using CoordRTheta = Coord<R, Theta>;
 
-    using AdvecCoefField = DVectorFieldMem<IdxRangeSplineBatched,
-                                           VectorIndexSet<AdvDim1, AdvDim2>,
-                                           memory_space>;
+    using AdvecCoefField = DVectorFieldMem<
+            IdxRangeSplineBatched,
+            VectorIndexSet<AdvDim1, AdvDim2>,
+            memory_space>;
 
     /// The operator returned by operator() which calculates the feet elementwise.
     using ElementwiseOperator = typename polar_foot_finder_details::ElementwiseChoice<
@@ -145,8 +147,8 @@ public:
             DVectorConstField<IdxRangeBatched, VectorIndexSet<AdvDim1, AdvDim2>, memory_space>
                     advection_field) const
     {
-        AdvecCoefField advection_field_coefs(m_builder_advection_field.batched_spline_domain(
-                get_idx_range(advection_field)));
+        AdvecCoefField advection_field_coefs(
+                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
         m_builder_advection_field(
                 ddcHelper::get<AdvDim1>(advection_field_coefs),
                 ddcHelper::get<AdvDim1>(get_const_field(advection_field)));
@@ -176,8 +178,8 @@ public:
                     advection_field,
             double dt) const
     {
-        AdvecCoefField advection_field_coefs(m_builder_advection_field.batched_spline_domain(
-                get_idx_range(advection_field)));
+        AdvecCoefField advection_field_coefs(
+                m_builder_advection_field.batched_spline_domain(get_idx_range(advection_field)));
         m_builder_advection_field(
                 ddcHelper::get<AdvDim1>(advection_field_coefs),
                 ddcHelper::get<AdvDim1>(get_const_field(advection_field)));

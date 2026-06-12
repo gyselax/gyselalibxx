@@ -1,5 +1,6 @@
 #pragma once
 #include <ddc/ddc.hpp>
+
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "tensor.hpp"
@@ -126,7 +127,6 @@ public:
         m_time_stepper.update(foot, m_dt, dy, update_function);
         return foot;
     }
-
 };
 
 template <
@@ -209,7 +209,10 @@ public:
             IdxRange<GridTheta> idx_range_theta,
             double epsilon = 1e-12)
         : m_evaluator_advection_field(evaluator_advection_field)
-        , m_pseudo_physical_to_advection(logical_to_physical, PseudoPhysicalToLogicalMapping(), epsilon)
+        , m_pseudo_physical_to_advection(
+                  logical_to_physical,
+                  PseudoPhysicalToLogicalMapping(),
+                  epsilon)
         , m_pseudo_physical_to_logical(coord_centre)
         , m_logical_to_pseudo_physical(coord_centre)
         , m_time_stepper(time_stepper_builder.template preallocate<TimeStepper>())
