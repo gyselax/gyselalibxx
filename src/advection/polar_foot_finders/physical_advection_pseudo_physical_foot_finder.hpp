@@ -145,7 +145,7 @@ class ElementwisePhysicalAdvPseudoPhysicalFootFinderMem
     using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
     using PseudoPhysicalToLogicalMapping = CartesianToCircular<X_pC, Y_pC, R, Theta>;
     using PseudoPhysicalToAdvectionMapping
-            = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
+            = CombinedMapping<LogicalToPhysicalMapping, PseudoPhysicalToLogicalMapping>;
 
     using TimeStepper =
             typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<X_pC, Y_pC>>;
@@ -205,11 +205,11 @@ public:
             LogicalToPhysicalMapping const& logical_to_physical,
             TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
-            Coord<X_pC, Y_pC> coord_centre,
+            Coord<X_pc, Y_pc> coord_centre,
             IdxRange<GridTheta> idx_range_theta,
             double epsilon = 1e-12)
         : m_evaluator_advection_field(evaluator_advection_field)
-        , m_pseudo_physical_to_advection(logical_to_physical, PseudoCartesianToCircular(), epsilon)
+        , m_pseudo_physical_to_advection(logical_to_physical, PseudoPhysicalToLogicalMapping(), epsilon)
         , m_pseudo_physical_to_logical(coord_centre)
         , m_logical_to_pseudo_physical(coord_centre)
         , m_time_stepper(time_stepper_builder.template preallocate<TimeStepper>())

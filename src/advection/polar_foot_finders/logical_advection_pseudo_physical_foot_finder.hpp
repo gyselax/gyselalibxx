@@ -208,7 +208,7 @@ public:
                                     typename LogicalToPhysicalMapping::cartesian_tag_y>))>>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
-            LogicalToPhysicalMapping [[unused]] const& logical_to_physical,
+            LogicalToPhysicalMapping [[maybe_unused]] const& logical_to_physical,
             TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
             Coord<X_pc, Y_pc> coord_centre,
