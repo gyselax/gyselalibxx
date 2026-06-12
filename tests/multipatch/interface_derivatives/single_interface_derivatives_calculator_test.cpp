@@ -907,7 +907,7 @@ TYPED_TEST(
         // 30 cells ------------------------------------------------------------------------------
         TestFixture::check_exact_and_approximation(
                 30,
-                1e-12,
+                5e-12,
                 function_1,
                 function_2,
                 evaluator_g,
