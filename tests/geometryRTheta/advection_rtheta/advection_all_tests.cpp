@@ -29,6 +29,7 @@
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "polar_foot_finder.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
@@ -107,11 +108,16 @@ void run_simulations_with_foot_finder_method(
         std::string const& simulation_name,
         std::string const& output_stem)
 {
-    SplinePolarFootFinder foot_finder(
-            params.grid,
+    constexpr FootFindingSpace FFSpace
+            = std::is_same_v<
+                      typename LogicalToPseudoPhysicalMapping::CoordResult,
+                      Coord<X_pC, Y_pC>>
+                      ? FootFindingSpace::PSEUDO_PHYSICAL
+                      : FootFindingSpace::PHYSICAL;
+    PolarFootFinder foot_finder = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
             get_time_stepper_builder<TSChoice>(),
             to_physical_mapping,
-            analytical_to_pseudo_physical_mapping,
+            params.grid,
             params.advection_builder,
             params.advection_evaluator);
 
