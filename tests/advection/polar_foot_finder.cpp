@@ -248,6 +248,34 @@ void fill_feet_and_advection_field(
             });
 }
 
+double calculate_periodic_error(
+        Field<CoordRTheta, IdxRangeSpRTheta> feet,
+        Field<CoordRTheta, IdxRangeSpRTheta> exact_feet)
+{
+    const std::source_location location = std::source_location::current();
+    return ddc::parallel_transform_reduce(
+            location.function_name(),
+            Kokkos::DefaultExecutionSpace(),
+            get_idx_range(feet),
+            0.,
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IdxSpRTheta const idx) {
+                Coord<R, Theta> error = feet(idx) - exact_feet(idx);
+                if (ddc::get<Theta>(error) < -M_PI || ddc::get<Theta>(error) > M_PI) {
+                    double theta_error = std::fmod(ddc::get<Theta>(error), 2 * M_PI);
+                    // Put error on domain [-pi, pi]
+                    if (theta_error > M_PI) {
+                        theta_error -= 2 * M_PI;
+                    }
+                    if (theta_error < -M_PI) {
+                        theta_error += 2 * M_PI;
+                    }
+                    error = Coord<R, Theta>(ddc::get<R>(error), theta_error);
+                }
+                return ::norm_inf(error);
+            });
+}
+
 using TimeSteppers = std::tuple<RK4Builder>;
 using Mappings = std::tuple<
         AnalyticalCircular,
@@ -353,29 +381,7 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
 
     batched_foot_finder(feet, adv_field, dt);
 
-    const std::source_location location = std::source_location::current();
-    double error = ddc::parallel_transform_reduce(
-            location.function_name(),
-            Kokkos::DefaultExecutionSpace(),
-            batched_idx_range,
-            0.,
-            ddc::reducer::max<double>(),
-            KOKKOS_LAMBDA(IdxSpRTheta const idx) {
-                Coord<R, Theta> error = feet(idx) - exact_feet(idx);
-                if (ddc::get<Theta>(error) < -M_PI || ddc::get<Theta>(error) > M_PI) {
-                    double theta_error = std::fmod(ddc::get<Theta>(error), 2 * M_PI);
-                    // Put error on domain [-pi, pi]
-                    if (theta_error > M_PI) {
-                        theta_error -= 2 * M_PI;
-                    }
-                    if (theta_error < -M_PI) {
-                        theta_error += 2 * M_PI;
-                    }
-                    error = Coord<R, Theta>(ddc::get<R>(error), theta_error);
-                }
-                return ::norm_inf(error);
-            });
-
+    double error = calculate_periodic_error(feet, exact_feet);
 
     double TOL = 1e-4;
     EXPECT_NEAR(error, 0.0, TOL);
