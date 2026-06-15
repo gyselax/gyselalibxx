@@ -249,8 +249,12 @@ void fill_feet_and_advection_field(
 }
 
 using TimeSteppers = std::tuple<RK4Builder>;
-using Mappings
-        = std::tuple<AnalyticalCircular, AnalyticalCzarny, PseudoCartCzarny, CircularLogical, PseudoCartCircularLogical>;
+using Mappings = std::tuple<
+        AnalyticalCircular,
+        AnalyticalCzarny,
+        PseudoCartCzarny,
+        CircularLogical,
+        PseudoCartCircularLogical>;
 using AdvectionFieldTypes = std::tuple<
         AdvectionField_translation<X, Y>,
         AdvectionField_rotation<X, Y, R, Theta>,
