@@ -6,8 +6,8 @@
 #include "polar_foot_finders/elementwise_choice.hpp"
 #include "polar_foot_finders/logical_advection_logical_foot_finder.hpp"
 #include "polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp"
-#include "polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp"
 #include "polar_foot_finders/physical_advection_physical_foot_finder.hpp"
+#include "polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp"
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -25,6 +25,12 @@ template <
         class RThetaAdvectionEvaluator>
 class PolarFootFinder
 {
+    static_assert(
+            FFSpace != FootFindingSpace::PHYSICAL
+                    || is_analytical_mapping_v<LogicalToPhysicalMapping>,
+            "It is not possible to find the foot of the characteristic in Physical space as there "
+            "is no way to return to Logical space once the foot is calculated.");
+
 public:
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
     using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
@@ -46,10 +52,6 @@ private:
 
     using AdvDim1 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, X, R>;
     using AdvDim2 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta>;
-
-    static_assert(
-            FFSpace != FootFindingSpace::PHYSICAL
-            || is_analytical_mapping_v<LogicalToPhysicalMapping>);
 
     using BSplinesR = typename RThetaAdvectionBuilder::bsplines_type1;
     using BSplinesTheta = typename RThetaAdvectionBuilder::bsplines_type2;
@@ -217,7 +219,9 @@ private:
             AdvecCoefField&& advection_field_coefs,
             IdxRangeTheta idx_range_theta) const
     {
-        if constexpr (FFSpace == FootFindingSpace::PSEUDO_PHYSICAL && AFSpace == AdvectionFieldSpace::PHYSICAL) {
+        if constexpr (
+                FFSpace == FootFindingSpace::PSEUDO_PHYSICAL
+                && AFSpace == AdvectionFieldSpace::PHYSICAL) {
             // PSEUDO_PHYSICAL/PHYSICAL: uses global pseudo-Cartesian (X_pC, Y_pC) space.
             // The CombinedMapping inside the Mem class requires epsilon.
             return ElementwiseOperator(
