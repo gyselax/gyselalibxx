@@ -119,6 +119,7 @@ public:
         };
 
         CoordRTheta foot = ddc::coordinate(idx_rtheta);
+        KOKKOS_ASSERT(ddc::select<R>(foot) > 1e-13);
         // Solve the characteristic equation
         m_time_stepper.update(foot, m_dt, dy, update_function);
         return foot;
