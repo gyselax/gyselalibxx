@@ -134,7 +134,7 @@ public:
                     Kokkos::min(ddc::select<R>(foot), ddc::discrete_space<BSplinesR>().rmax()),
                     ddc::select<Theta>(foot));
             updated_advection_field = to_vector_space<VectorIndexSet<X_pc, Y_pc>>(
-                    m_pseudo_physical_to_logical,
+                    m_logical_to_pseudo_physical,
                     advection_location_for_mapping,
                     updated_advection_field_adv_space);
         };
