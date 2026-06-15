@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 
 enum class FootFindingSpace { LOGICAL, PSEUDO_PHYSICAL, PHYSICAL };

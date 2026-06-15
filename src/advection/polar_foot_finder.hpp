@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 #pragma once
 #include <source_location>
 
@@ -235,13 +236,12 @@ private:
         } else if constexpr (FFSpace == FootFindingSpace::PHYSICAL) {
             // PHYSICAL/LOGICAL: foot finding in physical (X, Y) space.
             // coord_centre type is Coord<X, Y>, computed from the physical mapping.
-            auto coord_centre = m_logical_to_physical(CoordRTheta(0, 0));
             return ElementwiseOperator(
                     m_evaluator_advection_field,
                     m_logical_to_physical,
                     m_time_stepper_builder,
                     std::move(advection_field_coefs),
-                    coord_centre,
+                    m_logical_to_physical(CoordRTheta(0, 0)),
                     idx_range_theta);
         } else {
             // LOGICAL/LOGICAL or PSEUDO_PHYSICAL/LOGICAL:
