@@ -157,6 +157,14 @@ struct CircularLogical
     using AdvectionBasis = LogicalBasis;
 };
 
+struct PseudoCartCircularLogical
+{
+    using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+    static constexpr FootFindingSpace FFSpace = FootFindingSpace::PSEUDO_PHYSICAL;
+    static constexpr AdvectionFieldSpace AFSpace = AdvectionFieldSpace::LOGICAL;
+    using AdvectionBasis = LogicalBasis;
+};
+
 template <class T>
 struct PolarAdvectionFixture;
 
@@ -242,7 +250,7 @@ void fill_feet_and_advection_field(
 
 using TimeSteppers = std::tuple<RK4Builder>;
 using Mappings
-        = std::tuple<AnalyticalCircular, AnalyticalCzarny, PseudoCartCzarny, CircularLogical>;
+        = std::tuple<AnalyticalCircular, AnalyticalCzarny, PseudoCartCzarny, CircularLogical, PseudoCartCircularLogical>;
 using AdvectionFieldTypes = std::tuple<
         AdvectionField_translation<X, Y>,
         AdvectionField_rotation<X, Y, R, Theta>,
