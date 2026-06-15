@@ -253,6 +253,29 @@ public:
         , m_idx_range_theta(idx_range_theta)
     {
     }
+    /**
+     * @brief Construct an ElementwiseLogicalAdvPseudoPhysFootFinderMem when the
+     *        logical-to-physical mapping does not share the pseudo-physical Cartesian tags.
+     *
+     * In this case @p logical_to_physical is ignored and the pseudo-physical mapping is
+     * constructed directly from @p coord_centre using a default circular mapping.
+     *
+     * @param[in] evaluator_advection_field
+     *      The evaluator for the spline representation of the advection field.
+     * @param[in] logical_to_physical
+     *      Unused; accepted for interface uniformity with the primary constructor.
+     * @param[in] time_stepper_builder
+     *      The factory used to preallocate the time integration method.
+     * @param[in] advection_field_coefs
+     *      The spline coefficients of the advection field. Ownership is transferred in.
+     * @param[in] coord_centre
+     *      The coordinate of the polar centre in the pseudo-physical domain,
+     *      used to initialise the pseudo-physical mappings and handle the degenerate
+     *      point at @f$ r = 0 @f$.
+     * @param[in] idx_range_theta
+     *      The poloidal index range, used to wrap the angular coordinate into
+     *      the periodic domain after each time step.
+     */
     template <
             class LogicalToPhysicalMapping,
             std::enable_if_t<
