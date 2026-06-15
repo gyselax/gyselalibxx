@@ -29,6 +29,7 @@
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "polar_foot_finder.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
@@ -287,11 +288,16 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
-    SplinePolarFootFinder const foot_finder(
-            grid,
+#if defined(CIRCULAR_MAPPING_PHYSICAL) || defined(CZARNY_MAPPING_PHYSICAL)
+    constexpr FootFindingSpace FFSpace = FootFindingSpace::PHYSICAL,
+
+#elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN) || defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+    constexpr FootFindingSpace FFSpace = FootFindingSpace::PSEUDO_PHYSICAL;
+#endif
+
+    PolarFootFinder<FFSpace, AdvectionFieldSpace::PHYSICAL, decltype(to_physical_mapping), std::remove_const_t<decltype(grid)>, decltype(time_stepper), decltype(builder), decltype(spline_evaluator_extrapol)> const foot_finder(
             time_stepper,
             to_physical_mapping,
-            logical_to_pseudo_cart_mapping,
             builder,
             spline_evaluator_extrapol);
 

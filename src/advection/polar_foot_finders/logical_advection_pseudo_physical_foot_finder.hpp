@@ -178,11 +178,11 @@ public:
      */
     template <
             class LogicalToPhysicalMapping,
-            class = std::enable_if_t<
+            std::enable_if_t<
                     (std::is_same_v<X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x>)&&(
                             std::is_same_v<
                                     Y_pc,
-                                    typename LogicalToPhysicalMapping::cartesian_tag_y>)>>
+                                    typename LogicalToPhysicalMapping::cartesian_tag_y>), bool> = true>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             LogicalToPhysicalMapping const& logical_to_physical,
@@ -201,14 +201,14 @@ public:
     }
     template <
             class LogicalToPhysicalMapping,
-            class = std::enable_if_t<
+            std::enable_if_t<
                     !((std::is_same_v<X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x>)&&(
                             std::is_same_v<
                                     Y_pc,
-                                    typename LogicalToPhysicalMapping::cartesian_tag_y>))>>
+                                    typename LogicalToPhysicalMapping::cartesian_tag_y>)), bool> = false>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
-            LogicalToPhysicalMapping [[maybe_unused]] const& logical_to_physical,
+            [[maybe_unused]] LogicalToPhysicalMapping const& logical_to_physical,
             TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
             Coord<X_pc, Y_pc> coord_centre,

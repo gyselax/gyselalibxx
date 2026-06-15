@@ -149,10 +149,10 @@ public:
     template <class LogicalToPhysicalMapping, class X_pc, class Y_pc>
     ElementwiseLogicalAdvLogicalFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
-            LogicalToPhysicalMapping [[maybe_unused]] const& logical_to_physical,
+            [[maybe_unused]] LogicalToPhysicalMapping const& logical_to_physical,
             TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
-            Coord<X_pc, Y_pc> [[maybe_unused]] coord_centre,
+            [[maybe_unused]] Coord<X_pc, Y_pc> coord_centre,
             IdxRange<GridTheta> idx_range_theta)
         : m_evaluator_advection_field(evaluator_advection_field)
         , m_time_stepper(time_stepper_builder.template preallocate<TimeStepper>())

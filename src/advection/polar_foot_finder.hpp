@@ -1,5 +1,6 @@
 #pragma once
 #include <source_location>
+#include <ddc/ddc.hpp>
 
 #include "polar_foot_finders/elementwise_choice.hpp"
 #include "polar_foot_finders/logical_advection_logical_foot_finder.hpp"
@@ -22,9 +23,13 @@ template <
         class RThetaAdvectionEvaluator>
 class PolarFootFinder
 {
+public:
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
     using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
 
+    using memory_space = typename RThetaAdvectionBuilder::memory_space;
+    using ExecSpace = typename RThetaAdvectionBuilder::exec_space;
+private:
     using LogicalSpace = ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordArg>;
     using PhysicalSpace = ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>;
 
@@ -43,8 +48,6 @@ class PolarFootFinder
             FFSpace != FootFindingSpace::PHYSICAL
             || is_analytical_mapping_v<LogicalToPhysicalMapping>);
 
-    using memory_space = typename RThetaAdvectionBuilder::memory_space;
-    using ExecSpace = typename RThetaAdvectionBuilder::exec_space;
     using BSplinesR = typename RThetaAdvectionBuilder::bsplines_type1;
     using BSplinesTheta = typename RThetaAdvectionBuilder::bsplines_type2;
 
@@ -70,6 +73,7 @@ class PolarFootFinder
             VectorIndexSet<AdvDim1, AdvDim2>,
             memory_space>;
 
+public:
     /// The operator returned by operator() which calculates the feet elementwise.
     using ElementwiseOperator = typename polar_foot_finder_details::ElementwiseChoice<
             FFSpace,

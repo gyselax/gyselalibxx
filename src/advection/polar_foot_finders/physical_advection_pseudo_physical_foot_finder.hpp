@@ -170,7 +170,7 @@ private:
     LogicalToPseudoPhysicalMapping m_logical_to_pseudo_physical;
     TimeStepper m_time_stepper;
     AdvecCoefFieldMem m_advection_field_coefs_alloc;
-    Coord<X_pc, Y_pc> m_coord_centre;
+    Coord<X_pC, Y_pC> m_coord_centre;
     IdxRange<GridTheta> m_idx_range_theta;
 
 public:
@@ -205,7 +205,7 @@ public:
             LogicalToPhysicalMapping const& logical_to_physical,
             TimeStepperBuilder const& time_stepper_builder,
             AdvecCoefFieldMem&& advection_field_coefs,
-            Coord<X_pc, Y_pc> coord_centre,
+            Coord<X_pC, Y_pC> coord_centre,
             IdxRange<GridTheta> idx_range_theta,
             double epsilon = 1e-12)
         : m_evaluator_advection_field(evaluator_advection_field)
@@ -274,7 +274,8 @@ struct ElementwiseChoice<
             IdxRangeOperator,
             RThetaAdvectionEvaluator,
             AdvecCoefField,
-            TimeStepperBuilder>;
+            TimeStepperBuilder,
+            LogicalToPhysicalMapping>;
 };
 
 } // namespace polar_foot_finder_details
