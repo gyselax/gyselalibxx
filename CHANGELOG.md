@@ -73,6 +73,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Use Simpson quadrature for XYVxVy Landau damping.
 - Update py-dask in the CPU Spack toolchain.
 - Disable python for PDI and pdiplugin-pycall on macOS.
+- Enforce version of Kokkos Tools in all toolchains for reproducibility.
+- Remove default O1 optimisation flag.
 
 ### Deprecated
 
