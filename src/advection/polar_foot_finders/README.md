@@ -1,7 +1,6 @@
-# Polar foot finder implementation details
+# Ppolar\_foot\_finders/README.mdolar foot finder implementation details
 
-This folder contains the implementation classes used internally by
-[`PolarFootFinder`](../polar_foot_finder.hpp). They are not part of the public API.
+This folder contains the implementation classes used internally by `PolarFootFinder`. They are not part of the public API.
 
 ## Structure
 
