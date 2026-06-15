@@ -13,6 +13,15 @@
 
 namespace polar_foot_finder_details {
 
+/**
+ * @brief GPU-callable functor that finds characteristic feet for logical-space
+ *        advection with foot-finding in pseudo-physical space.
+ *
+ * The advection field is expressed in logical @f$ (r, \theta) @f$ coordinates and
+ * is converted to pseudo-physical @f$ (X_{pC}, Y_{pC}) @f$ space before the
+ * characteristic equation is integrated. Constructed by
+ * @ref ElementwiseLogicalAdvPseudoPhysFootFinderMem.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -53,6 +62,28 @@ private:
     double m_dt;
 
 public:
+    /**
+     * @brief Construct an ElementwiseLogicalAdvPseudoPhysFootFinder.
+     *
+     * @param[in] evaluator_advection_field
+     *      The evaluator for the spline representation of the advection field.
+     * @param[in] pseudo_physical_to_logical
+     *      The mapping from the pseudo-physical domain to the logical domain.
+     * @param[in] logical_to_pseudo_physical
+     *      The mapping from the logical domain to the pseudo-physical domain.
+     * @param[in] time_stepper
+     *      The time integration method.
+     * @param[in] advection_field_coefs
+     *      A view of the spline coefficients of the advection field.
+     * @param[in] coord_centre
+     *      The coordinate of the polar centre in the pseudo-physical domain,
+     *      used to handle the degenerate point at @f$ r = 0 @f$.
+     * @param[in] idx_range_theta
+     *      The poloidal index range, used to wrap the angular coordinate into
+     *      the periodic domain after each time step.
+     * @param[in] dt
+     *      The time step for the characteristic equation.
+     */
     ElementwiseLogicalAdvPseudoPhysFootFinder(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             PseudoPhysicalToLogicalMapping const& pseudo_physical_to_logical,
@@ -73,6 +104,17 @@ public:
     {
     }
 
+    /**
+     * @brief Find the foot of the characteristic at a single grid index.
+     *
+     * Solves the characteristic equation over @f$ dt @f$ using the stored
+     * time stepper and returns the resulting @f$ (r, \theta) @f$ coordinate.
+     *
+     * @param[in] idx
+     *      The operator index, encoding both batch and @f$ (r, \theta) @f$ indices.
+     *
+     * @return The @f$ (r, \theta) @f$ coordinate of the characteristic foot.
+     */
     KOKKOS_FUNCTION CoordRTheta operator()(IdxOperator const idx) const
     {
         IdxBatch idx_batch(idx);
@@ -120,6 +162,13 @@ public:
     }
 };
 
+/**
+ * @brief Owning manager for @ref ElementwiseLogicalAdvPseudoPhysFootFinder.
+ *
+ * Holds the spline coefficient field and the preallocated time stepper. Call
+ * @c operator()(dt) to obtain a GPU-copyable
+ * @ref ElementwiseLogicalAdvPseudoPhysFootFinder configured for time step @p dt.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -166,12 +215,11 @@ public:
      *
      * @param[in] evaluator_advection_field
      *      The evaluator for the spline representation of the advection field.
-     * @param[in] pseudo_physical_to_logical
-     *      The mapping from the pseudo-physical domain to the logical domain.
-     * @param[in] logical_to_pseudo_physical
-     *      The mapping from the logical domain to the pseudo-physical domain.
-     * @param[in] time_stepper
-     *      The time integration method.
+     * @param[in] logical_to_physical
+     *      The mapping from the logical domain to the physical domain, used to
+     *      derive the pseudo-physical mappings.
+     * @param[in] time_stepper_builder
+     *      The factory used to preallocate the time integration method.
      * @param[in] advection_field_coefs
      *      The spline coefficients of the advection field. Ownership is transferred in.
      * @param[in] coord_centre
@@ -256,6 +304,10 @@ public:
     }
 };
 
+/**
+ * @brief Selects @ref ElementwiseLogicalAdvPseudoPhysFootFinderMem (circular pseudo-physical
+ *        mapping) for logical advection with foot-finding in pseudo-physical space.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -275,6 +327,7 @@ struct ElementwiseChoice<
         TimeStepperBuilder,
         LogicalToPhysicalMapping>
 {
+    /// The selected elementwise operator type.
     using type = ElementwiseLogicalAdvPseudoPhysFootFinderMem<
             GridR,
             GridTheta,
@@ -289,6 +342,10 @@ struct ElementwiseChoice<
                     Y_pC>>;
 };
 
+/**
+ * @brief Selects @ref ElementwiseLogicalAdvPseudoPhysFootFinderMem (using the physical
+ *        mapping directly) for logical advection with foot-finding in physical space.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -309,6 +366,7 @@ struct ElementwiseChoice<
         LogicalToPhysicalMapping>
 {
     static_assert(is_analytical_mapping_v<LogicalToPhysicalMapping>);
+    /// The selected elementwise operator type.
     using type = ElementwiseLogicalAdvPseudoPhysFootFinderMem<
             GridR,
             GridTheta,

@@ -10,6 +10,13 @@
 
 namespace polar_foot_finder_details {
 
+/**
+ * @brief GPU-callable functor that finds characteristic feet for logical-space
+ *        advection with foot-finding in logical @f$ (r, \theta) @f$ space.
+ *
+ * Constructed by @ref ElementwiseLogicalAdvLogicalFootFinderMem and intended to be
+ * copied to the device and called elementwise inside a Kokkos kernel.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -39,6 +46,21 @@ private:
     double m_dt;
 
 public:
+    /**
+     * @brief Construct an ElementwiseLogicalAdvLogicalFootFinder.
+     *
+     * @param[in] evaluator_advection_field
+     *      The evaluator for the spline representation of the advection field.
+     * @param[in] time_stepper
+     *      The time integration method.
+     * @param[in] advection_field_coefs
+     *      A view of the spline coefficients of the advection field.
+     * @param[in] idx_range_theta
+     *      The poloidal index range, used to wrap the angular coordinate into
+     *      the periodic domain after each time step.
+     * @param[in] dt
+     *      The time step for the characteristic equation.
+     */
     ElementwiseLogicalAdvLogicalFootFinder(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             TimeStepper const& time_stepper,
@@ -103,6 +125,13 @@ public:
     }
 };
 
+/**
+ * @brief Owning manager for @ref ElementwiseLogicalAdvLogicalFootFinder.
+ *
+ * Holds the spline coefficient field and the preallocated time stepper. Call
+ * @c operator()(dt) to obtain a GPU-copyable
+ * @ref ElementwiseLogicalAdvLogicalFootFinder configured for time step @p dt.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -142,10 +171,16 @@ public:
      *
      * @param[in] evaluator_advection_field
      *      The evaluator for the spline representation of the advection field.
-     * @param[in] time_stepper
-     *      The time integration method.
+     * @param[in] logical_to_physical
+     *      Unused for the logical/logical case; accepted for interface uniformity
+     *      with other ElementwiseChoice specialisations.
+     * @param[in] time_stepper_builder
+     *      The factory used to preallocate the time integration method.
      * @param[in] advection_field_coefs
      *      The spline coefficients of the advection field. Ownership is transferred in.
+     * @param[in] coord_centre
+     *      Unused for the logical/logical case; accepted for interface uniformity
+     *      with other ElementwiseChoice specialisations.
      * @param[in] idx_range_theta
      *      The poloidal index range, used to wrap the angular coordinate into
      *      the periodic domain after each time step.
@@ -188,6 +223,10 @@ public:
     }
 };
 
+/**
+ * @brief Selects @ref ElementwiseLogicalAdvLogicalFootFinderMem for logical advection
+ *        with foot-finding in logical space.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -207,6 +246,7 @@ struct ElementwiseChoice<
         TimeStepperBuilder,
         LogicalToPhysicalMapping>
 {
+    /// The selected elementwise operator type.
     using type = ElementwiseLogicalAdvLogicalFootFinderMem<
             GridR,
             GridTheta,

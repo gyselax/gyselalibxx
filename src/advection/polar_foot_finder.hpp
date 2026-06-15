@@ -16,6 +16,28 @@
 #include "l_norm_tools.hpp"
 #include "vector_index_tools.hpp"
 
+/**
+ * @brief Operator for finding the feet of the characteristics on a polar slice.
+ *
+ * Calculates the spline representation of the advection field and uses it together
+ * with a time-stepping method to solve the characteristic equation. The space in
+ * which the advection field is expressed and the space in which foot-finding is
+ * performed are selected at compile time via @p FFSpace and @p AFSpace.
+ *
+ * @tparam FFSpace     The space in which the foot of the characteristic is found.
+ * @tparam AFSpace     The space in which the advection field is expressed.
+ * @tparam LogicalToPhysicalMapping
+ *      The mapping from the logical @f$ (r, \theta) @f$ domain to the physical
+ *      @f$ (x, y) @f$ domain.
+ * @tparam IdxRangeBatched
+ *      The batched index range over which the operator works.
+ * @tparam TimeStepperBuilder
+ *      The factory type for the time integration method.
+ * @tparam RThetaAdvectionBuilder
+ *      The spline builder for the advection field.
+ * @tparam RThetaAdvectionEvaluator
+ *      The spline evaluator for the advection field.
+ */
 template <
         FootFindingSpace FFSpace,
         AdvectionFieldSpace AFSpace,
@@ -33,10 +55,14 @@ class PolarFootFinder
             "is no way to return to Logical space once the foot is calculated.");
 
 public:
+    /// The continuous radial dimension.
     using R = typename LogicalToPhysicalMapping::curvilinear_tag_r;
+    /// The continuous poloidal dimension.
     using Theta = typename LogicalToPhysicalMapping::curvilinear_tag_theta;
 
+    /// The memory space where fields are stored (e.g. @c Kokkos::HostSpace or a GPU space).
     using memory_space = typename RThetaAdvectionBuilder::memory_space;
+    /// The execution space where kernels are launched.
     using ExecSpace = typename RThetaAdvectionBuilder::exec_space;
 
 private:
@@ -96,7 +122,9 @@ public:
     /// The type of the index range over which the operator works.
     using IdxRangeOperator = IdxRangeBatched;
     /// The type of the memory space where the field is saved (CPU vs GPU).
+    /// A mutable field of @f$ (r, \theta) @f$ coordinates over the batched operator domain.
     using CFieldFeet = Field<CoordRTheta, IdxRangeBatched, memory_space>;
+    /// A read-only field of @f$ (r, \theta) @f$ coordinates over the batched operator domain.
     using CConstFieldFeet = ConstField<CoordRTheta, IdxRangeBatched, memory_space>;
 
 private:

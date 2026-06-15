@@ -98,8 +98,6 @@ public:
      *
      * @param[in] logical_to_physical
      *      The mapping from the logical domain to the physical domain.
-     * @param[in] logical_to_pseudo_physical
-     *      The mapping from the logical domain to the pseudo-physical domain.
      * @param[in] advection_solver
      *      The advection operator with an Euler method.
      * @param[in] grid

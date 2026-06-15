@@ -10,6 +10,13 @@
 
 namespace polar_foot_finder_details {
 
+/**
+ * @brief GPU-callable functor that finds characteristic feet for physical-space
+ *        advection with foot-finding in physical @f$ (x, y) @f$ space.
+ *
+ * The advection field and foot-finding both operate in the physical Cartesian
+ * domain. Constructed by @ref ElementwisePhysicalAdvPhysicalFootFinderMem.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -53,6 +60,26 @@ private:
     double m_dt;
 
 public:
+    /**
+     * @brief Construct an ElementwisePhysicalAdvPhysicalFootFinder.
+     *
+     * @param[in] evaluator_advection_field
+     *      The evaluator for the spline representation of the advection field.
+     * @param[in] time_stepper
+     *      The time integration method.
+     * @param[in] logical_to_physical
+     *      The mapping from the logical domain to the physical domain.
+     * @param[in] advection_field_coefs
+     *      A view of the spline coefficients of the advection field.
+     * @param[in] idx_range_theta
+     *      The poloidal index range, used to wrap the angular coordinate into
+     *      the periodic domain after each time step.
+     * @param[in] coord_centre
+     *      The coordinate of the polar centre in the physical domain,
+     *      used to handle the degenerate point at @f$ r = 0 @f$.
+     * @param[in] dt
+     *      The time step for the characteristic equation.
+     */
     ElementwisePhysicalAdvPhysicalFootFinder(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             TimeStepper const& time_stepper,
@@ -120,6 +147,13 @@ public:
     }
 };
 
+/**
+ * @brief Owning manager for @ref ElementwisePhysicalAdvPhysicalFootFinder.
+ *
+ * Holds the spline coefficient field and the preallocated time stepper. Call
+ * @c operator()(dt) to obtain a GPU-copyable
+ * @ref ElementwisePhysicalAdvPhysicalFootFinder configured for time step @p dt.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -169,10 +203,15 @@ public:
      *
      * @param[in] evaluator_advection_field
      *      The evaluator for the spline representation of the advection field.
-     * @param[in] time_stepper
-     *      The time integration method.
+     * @param[in] logical_to_physical
+     *      The mapping from the logical domain to the physical domain.
+     * @param[in] time_stepper_builder
+     *      The factory used to preallocate the time integration method.
      * @param[in] advection_field_coefs
      *      The spline coefficients of the advection field. Ownership is transferred in.
+     * @param[in] coord_centre
+     *      The coordinate of the polar centre in the physical domain,
+     *      used to handle the degenerate point at @f$ r = 0 @f$.
      * @param[in] idx_range_theta
      *      The poloidal index range, used to wrap the angular coordinate into
      *      the periodic domain after each time step.
@@ -218,6 +257,10 @@ public:
     }
 };
 
+/**
+ * @brief Selects @ref ElementwisePhysicalAdvPhysicalFootFinderMem for physical advection
+ *        with foot-finding in physical space.
+ */
 template <
         class GridR,
         class GridTheta,
@@ -237,6 +280,7 @@ struct ElementwiseChoice<
         TimeStepperBuilder,
         LogicalToPhysicalMapping>
 {
+    /// The selected elementwise operator type.
     using type = ElementwisePhysicalAdvPhysicalFootFinderMem<
             GridR,
             GridTheta,
