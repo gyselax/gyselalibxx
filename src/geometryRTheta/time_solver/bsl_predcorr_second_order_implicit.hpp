@@ -59,9 +59,7 @@
  * @tparam PolarPoissonLikeSolver
  *      The type of the solver for the Poisson-like equation on the polar plane.
  */
-template <
-        class LogicalToPhysicalMapping,
-        class PolarPoissonLikeSolver>
+template <class LogicalToPhysicalMapping, class PolarPoissonLikeSolver>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
@@ -124,11 +122,7 @@ public:
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
-        , m_foot_finder(
-                  m_euler,
-                  logical_to_physical,
-                  builder,
-                  advection_evaluator)
+        , m_foot_finder(m_euler, logical_to_physical, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)

@@ -128,11 +128,7 @@ public:
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
-        , m_find_feet_method(
-                  m_euler,
-                  logical_to_physical,
-                  builder,
-                  advection_evaluator)
+        , m_find_feet_method(m_euler, logical_to_physical, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)

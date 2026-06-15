@@ -140,8 +140,8 @@ class ElementwisePhysicalAdvPhysicalFootFinderMem
     /// The second dimension of the advection field.
     using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
 
-    using TimeStepper =
-            typename TimeStepperBuilder::template time_stepper_t<CoordRTheta, DVector<AdvDim1, AdvDim2>>;
+    using TimeStepper = typename TimeStepperBuilder::
+            template time_stepper_t<CoordRTheta, DVector<AdvDim1, AdvDim2>>;
 
 public:
     /// The non-owning operator that can be used on GPU.
