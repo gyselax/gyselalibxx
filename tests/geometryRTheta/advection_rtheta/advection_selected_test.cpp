@@ -295,12 +295,13 @@ int main(int argc, char** argv)
     constexpr FootFindingSpace FFSpace = FootFindingSpace::PSEUDO_PHYSICAL;
 #endif
 
-    PolarFootFinder const foot_finder = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
-            time_stepper,
-            to_physical_mapping,
-            grid,
-            builder,
-            spline_evaluator_extrapol);
+                               PolarFootFinder const foot_finder
+                               = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
+                                       time_stepper,
+                                       to_physical_mapping,
+                                       grid,
+                                       builder,
+                                       spline_evaluator_extrapol);
 
     BslAdvectionPolar
             advection_operator(builder, spline_evaluator, foot_finder, to_physical_mapping);

@@ -182,7 +182,8 @@ public:
                     (std::is_same_v<X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x>)&&(
                             std::is_same_v<
                                     Y_pc,
-                                    typename LogicalToPhysicalMapping::cartesian_tag_y>), bool> = true>
+                                    typename LogicalToPhysicalMapping::cartesian_tag_y>),
+                    bool> = true>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             LogicalToPhysicalMapping const& logical_to_physical,
@@ -205,7 +206,8 @@ public:
                     !((std::is_same_v<X_pc, typename LogicalToPhysicalMapping::cartesian_tag_x>)&&(
                             std::is_same_v<
                                     Y_pc,
-                                    typename LogicalToPhysicalMapping::cartesian_tag_y>)), bool> = false>
+                                    typename LogicalToPhysicalMapping::cartesian_tag_y>)),
+                    bool> = false>
     ElementwiseLogicalAdvPseudoPhysFootFinderMem(
             RThetaAdvectionEvaluator const& evaluator_advection_field,
             [[maybe_unused]] LogicalToPhysicalMapping const& logical_to_physical,

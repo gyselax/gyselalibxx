@@ -1,5 +1,6 @@
 #pragma once
 #include <source_location>
+
 #include <ddc/ddc.hpp>
 
 #include "polar_foot_finders/elementwise_choice.hpp"
@@ -29,6 +30,7 @@ public:
 
     using memory_space = typename RThetaAdvectionBuilder::memory_space;
     using ExecSpace = typename RThetaAdvectionBuilder::exec_space;
+
 private:
     using LogicalSpace = ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordArg>;
     using PhysicalSpace = ddc::to_type_seq_t<typename LogicalToPhysicalMapping::CoordResult>;
@@ -290,5 +292,11 @@ auto make_polar_foot_finder(
             IdxRangeBatched,
             TimeStepperBuilder,
             RThetaAdvectionBuilder,
-            RThetaAdvectionEvaluator>(time_stepper, mapping, builder, evaluator, coord_centre, epsilon);
+            RThetaAdvectionEvaluator>(
+            time_stepper,
+            mapping,
+            builder,
+            evaluator,
+            coord_centre,
+            epsilon);
 }
