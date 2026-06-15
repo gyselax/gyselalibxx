@@ -295,9 +295,10 @@ int main(int argc, char** argv)
     constexpr FootFindingSpace FFSpace = FootFindingSpace::PSEUDO_PHYSICAL;
 #endif
 
-    PolarFootFinder<FFSpace, AdvectionFieldSpace::PHYSICAL, decltype(to_physical_mapping), std::remove_const_t<decltype(grid)>, decltype(time_stepper), decltype(builder), decltype(spline_evaluator_extrapol)> const foot_finder(
+    PolarFootFinder const foot_finder = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
             time_stepper,
             to_physical_mapping,
+            grid,
             builder,
             spline_evaluator_extrapol);
 

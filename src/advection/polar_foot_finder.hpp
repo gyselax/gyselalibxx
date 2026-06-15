@@ -249,3 +249,46 @@ private:
         }
     }
 };
+
+/**
+ * @brief Construct a PolarFootFinder, deducing all type template parameters from the arguments.
+ *
+ * @c FFSpace and @c AFSpace must still be provided explicitly (they are enum values, not types).
+ * All remaining template parameters are deduced from the function arguments, eliminating the
+ * need for @c decltype at the call site.
+ *
+ * @param[in] time_stepper  A builder for the time integration method.
+ * @param[in] mapping       The mapping from the logical domain to the physical domain.
+ * @param[in] idx_range     The batched index range over which the operator works (used only for
+ *                          type deduction; its value is not forwarded to the constructor).
+ * @param[in] builder       The spline builder for the advection field coefficients.
+ * @param[in] evaluator     The spline evaluator for the advection field.
+ * @param[in] coord_centre  The polar-centre coordinate in pseudo-Cartesian space.
+ * @param[in] epsilon       Linearisation parameter near the O-point.
+ */
+template <
+        FootFindingSpace FFSpace,
+        AdvectionFieldSpace AFSpace,
+        concepts::Mapping LogicalToPhysicalMapping,
+        class IdxRangeBatched,
+        class TimeStepperBuilder,
+        class RThetaAdvectionBuilder,
+        class RThetaAdvectionEvaluator>
+auto make_polar_foot_finder(
+        TimeStepperBuilder const& time_stepper,
+        LogicalToPhysicalMapping const& mapping,
+        [[maybe_unused]] IdxRangeBatched const& idx_range,
+        RThetaAdvectionBuilder const& builder,
+        RThetaAdvectionEvaluator const& evaluator,
+        Coord<X_pC, Y_pC> coord_centre = Coord<X_pC, Y_pC>(0, 0),
+        double epsilon = 1e-12)
+{
+    return PolarFootFinder<
+            FFSpace,
+            AFSpace,
+            LogicalToPhysicalMapping,
+            IdxRangeBatched,
+            TimeStepperBuilder,
+            RThetaAdvectionBuilder,
+            RThetaAdvectionEvaluator>(time_stepper, mapping, builder, evaluator, coord_centre, epsilon);
+}
