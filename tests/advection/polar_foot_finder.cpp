@@ -355,9 +355,12 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     double dt = 0.001;
 
     if ((TestFixture::AFSpace == AdvectionFieldSpace::LOGICAL
-         or TestFixture::FFSpace == FootFindingSpace::LOGICAL)
-        and !std::is_same_v<AdvectionField, AdvectionField_rotation<X, Y, R, Theta>>) {
-        dt /= 8;
+         or TestFixture::FFSpace == FootFindingSpace::LOGICAL)) {
+        if (std::is_same_v<AdvectionField, AdvectionField_translation<X, Y>>) {
+            dt /= 8;
+        } else if (std::is_same_v<AdvectionField, AdvectionField_decentred_rotation<X, Y>>) {
+            dt /= 32;
+        }
     }
 
     DVectorFieldMem<IdxRangeSpRTheta, typename TestFixture::AdvectionBasis> adv_field_alloc(
