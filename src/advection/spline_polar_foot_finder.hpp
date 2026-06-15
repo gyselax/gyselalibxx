@@ -590,7 +590,7 @@ public:
      *
      * @see ITimeStepper
      */
-    SplinePolarFootFinder(
+    [[deprecated("Use PolarFootFinder instead")]] SplinePolarFootFinder(
             IdxRangeBatched const& idx_range_operator,
             TimeStepperBuilder const& time_stepper_builder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping,
