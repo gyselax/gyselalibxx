@@ -10,7 +10,7 @@ algorithm. The compile-time dispatch is handled by `ElementwiseChoice`, a partia
 specialised struct that maps the two enum template parameters to a concrete type.
 
 | `FFSpace` | `AFSpace` | Mem class | GPU functor |
-|-----------|-----------|-----------|-------------|
+| --------- | --------- | --------- | ----------- |
 | `LOGICAL` | `LOGICAL` | `ElementwiseLogicalAdvLogicalFootFinderMem` | `ElementwiseLogicalAdvLogicalFootFinder` |
 | `PSEUDO_PHYSICAL` | `LOGICAL` | `ElementwiseLogicalAdvPseudoPhysFootFinderMem` | `ElementwiseLogicalAdvPseudoPhysFootFinder` |
 | `PHYSICAL` | `LOGICAL` | `ElementwiseLogicalAdvPseudoPhysFootFinderMem` (uses physical mapping directly) | `ElementwiseLogicalAdvPseudoPhysFootFinder` |
