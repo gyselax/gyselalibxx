@@ -262,7 +262,7 @@ double calculate_periodic_error(
             KOKKOS_LAMBDA(IdxSpRTheta const idx) {
                 Coord<R, Theta> error = feet(idx) - exact_feet(idx);
                 if (ddc::get<Theta>(error) < -M_PI || ddc::get<Theta>(error) > M_PI) {
-                    double theta_error = std::fmod(ddc::get<Theta>(error), 2 * M_PI);
+                    double theta_error = Kokkos::fmod(ddc::get<Theta>(error), 2 * M_PI);
                     // Put error on domain [-pi, pi]
                     if (theta_error > M_PI) {
                         theta_error -= 2 * M_PI;
@@ -317,8 +317,9 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
 
     if (TestFixture::AFSpace == AdvectionFieldSpace::LOGICAL) {
         std::vector<Coord<R>> radial_points;
-        auto greville_sampling_r = SplineInterpPointsR::template get_sampling<GridR>();
-        auto ir = greville_sampling_r.front();
+        NonUniformGridBase<R>::Impl<GridR, Kokkos::HostSpace> greville_sampling_r
+                = SplineInterpPointsR::template get_sampling<GridR>();
+        Idx<GridR> ir = greville_sampling_r.front();
         for (int i(0); i < greville_sampling_r.size(); ++i, ++ir) {
             radial_points.push_back(greville_sampling_r.coordinate(ir));
         }
