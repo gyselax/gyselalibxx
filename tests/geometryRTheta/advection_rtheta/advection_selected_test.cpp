@@ -41,25 +41,6 @@
 
 namespace fs = std::filesystem;
 
-namespace {
-#if defined(CIRCULAR_MAPPING_PHYSICAL)
-using X_adv = X;
-using Y_adv = Y;
-#elif defined(CZARNY_MAPPING_PHYSICAL)
-using X_adv = X;
-using Y_adv = Y;
-
-#elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
-using X_adv = X_pC;
-using Y_adv = Y_pC;
-
-#elif defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
-using X_adv = X_pC;
-using Y_adv = Y_pC;
-#endif
-
-} //end namespace
-
 int main(int argc, char** argv)
 {
     ::Kokkos::ScopeGuard kokkos_scope(argc, argv);
@@ -172,43 +153,25 @@ int main(int argc, char** argv)
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping_host;
     CartesianToCircular<X, Y, R, Theta> to_logical_analytical_mapping;
-    CircularToCartesian<R, Theta, X, Y> const& logical_to_pseudo_cart_mapping(
-            to_physical_analytical_mapping);
     std::string const mapping_name = "CIRCULAR";
-    std::string const adv_domain_name = "PHYSICAL";
-    key += "circular_physical";
+    key += "circular";
 #else
 
     double const czarny_e = 0.3;
     double const czarny_epsilon = 1.4;
 
-#if defined(CZARNY_MAPPING_PHYSICAL)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
+    CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
+
+#if defined(CZARNY_MAPPING_PHYSICAL) || defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
     CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping_host(czarny_e, czarny_epsilon);
-    CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
-    CzarnyToCartesian<R, Theta, X, Y> const& logical_to_pseudo_cart_mapping(
-            to_physical_analytical_mapping);
     std::string const mapping_name = "CZARNY";
-    std::string const adv_domain_name = "PHYSICAL";
-    key += "czarny_physical";
+    key += "czarny";
 
-#elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN)
-    CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
-    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping(czarny_e, czarny_epsilon);
-    CzarnyToCartesian<R, Theta, X, Y> to_physical_mapping_host(czarny_e, czarny_epsilon);
-    CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
-    CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
-    std::string const mapping_name = "CZARNY";
-    std::string const adv_domain_name = "PSEUDO CARTESIAN";
-    key += "czarny_pseudo_cartesian";
-
-#else
-#if not defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+#elif not defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
     static_assert(false, "No mapping macro defined");
-#endif
-    CzarnyToCartesian<R, Theta, X, Y> to_physical_analytical_mapping(czarny_e, czarny_epsilon);
-    CartesianToCzarny<X, Y, R, Theta> to_logical_analytical_mapping(czarny_e, czarny_epsilon);
+#else
     DiscretePoloidalCSSplineMappingBuilder<
             X,
             Y,
@@ -231,11 +194,20 @@ int main(int argc, char** argv)
                     builder,
                     spline_evaluator_extrapol);
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
-    CircularToCartesian<R, Theta, X_pC, Y_pC> logical_to_pseudo_cart_mapping;
     std::string const mapping_name = "DISCRETE";
-    std::string const adv_domain_name = "PSEUDO CARTESIAN";
-    key += "discrete_pseudo_cartesian";
+    key += "discrete";
 #endif
+#endif
+
+#if defined(CIRCULAR_MAPPING_PHYSICAL) || defined(CZARNY_MAPPING_PHYSICAL)
+    constexpr FootFindingSpace FFSpace = FootFindingSpace::PHYSICAL;
+    std::string const adv_domain_name = "PHYSICAL";
+    key += "_physical";
+
+#elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN) || defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
+    constexpr FootFindingSpace FFSpace = FootFindingSpace::PSEUDO_PHYSICAL;
+    std::string const adv_domain_name = "PSEUDO CARTESIAN";
+    key += "_pseudo_cartesian";
 #endif
 
     key += "-";
@@ -288,13 +260,6 @@ int main(int argc, char** argv)
         fs::create_directory(output_folder);
     }
 
-#if defined(CIRCULAR_MAPPING_PHYSICAL) || defined(CZARNY_MAPPING_PHYSICAL)
-    constexpr FootFindingSpace FFSpace = FootFindingSpace::PHYSICAL;
-
-#elif defined(CZARNY_MAPPING_PSEUDO_CARTESIAN) || defined(DISCRETE_MAPPING_PSEUDO_CARTESIAN)
-    constexpr FootFindingSpace FFSpace = FootFindingSpace::PSEUDO_PHYSICAL;
-#endif
-
     PolarFootFinder const foot_finder
             = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
                     time_stepper,
@@ -310,9 +275,7 @@ int main(int argc, char** argv)
               << " - " << simu_type << " : " << std::endl;
     simulate(
             to_physical_mapping_host,
-            to_physical_mapping,
             to_logical_analytical_mapping,
-            logical_to_pseudo_cart_mapping,
             to_physical_analytical_mapping,
             grid,
             foot_finder,

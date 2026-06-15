@@ -125,19 +125,19 @@ using CoordRTheta = Coord<R, Theta>;
 struct AnalyticalCircular
 {
     using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
-    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
+    static constexpr FootFindingSpace FFSpace = FootFindingSpace::PHYSICAL;
 };
 
 struct AnalyticalCzarny
 {
     using LogicalToPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
-    using LogicalToPseudoPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
+    static constexpr FootFindingSpace FFSpace = FootFindingSpace::PHYSICAL;
 };
 
 struct PseudoCartCzarny
 {
     using LogicalToPhysicalMapping = CzarnyToCartesian<R, Theta, X, Y>;
-    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
+    static constexpr FootFindingSpace FFSpace = FootFindingSpace::PSEUDO_PHYSICAL;
 };
 
 template <class T>
@@ -148,9 +148,6 @@ struct PolarAdvectionFixture<std::tuple<TimeStepperBuilderType, Mappings, Advect
     : public testing::Test
 {
     using LogicalToPhysicalMapping = typename Mappings::LogicalToPhysicalMapping;
-    using LogicalToPseudoPhysicalMapping = typename Mappings::LogicalToPseudoPhysicalMapping;
-    using X_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
-    using Y_adv = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
     using TimeStepperBuilder = TimeStepperBuilderType;
     using AdvectionField = AdvectionFieldType;
 };
@@ -235,7 +232,6 @@ TYPED_TEST_SUITE(PolarAdvectionFixture, Cases);
 TYPED_TEST(PolarAdvectionFixture, Analytical)
 {
     using LogicalToPhysicalMapping = typename TestFixture::LogicalToPhysicalMapping;
-    using LogicalToPseudoPhysicalMapping = typename TestFixture::LogicalToPseudoPhysicalMapping;
     using TimeStepperBuilder = typename TestFixture::TimeStepperBuilder;
     using AdvectionField = typename TestFixture::AdvectionField;
 
@@ -271,19 +267,17 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     SplineRThetaEvaluator evaluator(r_min_extrap, r_max_extrap, theta_extrap, theta_extrap);
 
     LogicalToPhysicalMapping to_physical = init_mapping<LogicalToPhysicalMapping>();
-    LogicalToPseudoPhysicalMapping to_pseudo_physical
-            = init_mapping<LogicalToPseudoPhysicalMapping>();
 
     TimeStepperBuilder time_stepper;
     AdvectionField advection_field = init_field<AdvectionField>();
 
-    SplinePolarFootFinder const batched_foot_finder(
-            batched_idx_range,
-            time_stepper,
-            to_physical,
-            to_pseudo_physical,
-            builder,
-            evaluator);
+    PolarFootFinder const batched_foot_finder
+            = make_polar_foot_finder<AdvectionField::FFSpace, AdvectionFieldSpace::PHYSICAL>(
+                    time_stepper,
+                    to_physical,
+                    batched_idx_range,
+                    builder,
+                    evaluator);
 
     const double t = 0.0;
     const double dt = 0.001;
