@@ -7,6 +7,7 @@
 #include "polar_foot_finders/logical_advection_logical_foot_finder.hpp"
 #include "polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp"
 #include "polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp"
+#include "polar_foot_finders/physical_advection_physical_foot_finder.hpp"
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_aliases.hpp"
@@ -216,7 +217,7 @@ private:
             AdvecCoefField&& advection_field_coefs,
             IdxRangeTheta idx_range_theta) const
     {
-        if constexpr (AFSpace == AdvectionFieldSpace::PHYSICAL) {
+        if constexpr (FFSpace == FootFindingSpace::PSEUDO_PHYSICAL && AFSpace == AdvectionFieldSpace::PHYSICAL) {
             // PSEUDO_PHYSICAL/PHYSICAL: uses global pseudo-Cartesian (X_pC, Y_pC) space.
             // The CombinedMapping inside the Mem class requires epsilon.
             return ElementwiseOperator(
