@@ -225,7 +225,7 @@ The methods inheriting from IPolarFootFinder provide ways of calculating the fee
 
 The feet of the characteristics are calculated using a time integration method. For details of available methods see [Time Stepping Methods](../timestepper/README.md).
 
-For implementation details of the elementwise operators used internally see [polar\_foot\_finders/README.md](./polar_foot_finders/README.md).
+For implementation details of the elementwise operators used internally see [polar foot finder implementation details](./polar_foot_finders/README.md).
 
 ### Advection domain
 
