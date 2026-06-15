@@ -35,7 +35,6 @@
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -131,7 +130,6 @@ void run_simulations_with_foot_finder_method(
             to_physical_mapping_host,
             to_physical_mapping,
             to_logical_mapping,
-            analytical_to_pseudo_physical_mapping,
             analytical_to_physical_mapping,
             params.grid,
             foot_finder,

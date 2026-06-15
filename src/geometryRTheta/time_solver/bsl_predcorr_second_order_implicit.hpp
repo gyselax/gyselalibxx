@@ -17,9 +17,9 @@
 #include "geometry_r_theta.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
+#include "polar_foot_finder.hpp"
 #include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 
 
 
@@ -56,28 +56,26 @@
  *
  * @tparam LogicalToPhysicalMapping
  *      A class describing a mapping from curvilinear coordinates to Cartesian coordinates.
- * @tparam LogicalToPseudoPhysicalMapping
- *      A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates.
  * @tparam PolarPoissonLikeSolver
  *      The type of the solver for the Poisson-like equation on the polar plane.
  */
 template <
         class LogicalToPhysicalMapping,
-        class LogicalToPseudoPhysicalMapping,
         class PolarPoissonLikeSolver>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using SplinePolarFootFinderType = SplinePolarFootFinder<
+    using PolarFootFinderType = PolarFootFinder<
+            FootFindingSpace::PHYSICAL,
+            AdvectionFieldSpace::PHYSICAL,
+            LogicalToPhysicalMapping,
             IdxRangeRTheta,
             EulerBuilder,
-            LogicalToPhysicalMapping,
-            LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorConstBound>;
 
     using BslAdvectionRTheta = BslAdvectionPolar<
-            SplinePolarFootFinderType,
+            PolarFootFinderType,
             LogicalToPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorNullBound>;
@@ -87,7 +85,7 @@ private:
     BslAdvectionRTheta const& m_advection_solver;
 
     EulerBuilder const m_euler;
-    SplinePolarFootFinderType const m_foot_finder;
+    PolarFootFinderType const m_foot_finder;
 
     PolarPoissonLikeSolver const& m_poisson_solver;
 
@@ -119,7 +117,6 @@ public:
      */
     BslImplicitPredCorrRTheta(
             LogicalToPhysicalMapping const& logical_to_physical,
-            LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
@@ -128,10 +125,8 @@ public:
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
         , m_foot_finder(
-                  grid,
                   m_euler,
                   logical_to_physical,
-                  logical_to_pseudo_physical,
                   builder,
                   advection_evaluator)
         , m_poisson_solver(poisson_solver)

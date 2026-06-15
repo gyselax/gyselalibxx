@@ -10,10 +10,10 @@
 #include "ddc_aliases.hpp"
 #include "geometry_pseudo_cartesian.hpp"
 #include "mesh_builder.hpp"
+#include "polar_foot_finder.hpp"
 #include "r_theta_test_cases.hpp"
 #include "rk4.hpp"
 #include "species_info.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
@@ -150,6 +150,7 @@ struct PolarAdvectionFixture<std::tuple<TimeStepperBuilderType, Mappings, Advect
     using LogicalToPhysicalMapping = typename Mappings::LogicalToPhysicalMapping;
     using TimeStepperBuilder = TimeStepperBuilderType;
     using AdvectionField = AdvectionFieldType;
+    static constexpr FootFindingSpace FFSpace = Mappings::FFSpace;
 };
 
 template <class LogicalToOtherMapping>
@@ -271,13 +272,10 @@ TYPED_TEST(PolarAdvectionFixture, Analytical)
     TimeStepperBuilder time_stepper;
     AdvectionField advection_field = init_field<AdvectionField>();
 
-    PolarFootFinder const batched_foot_finder
-            = make_polar_foot_finder<AdvectionField::FFSpace, AdvectionFieldSpace::PHYSICAL>(
-                    time_stepper,
-                    to_physical,
-                    batched_idx_range,
-                    builder,
-                    evaluator);
+    PolarFootFinder const batched_foot_finder = make_polar_foot_finder<
+            TestFixture::FFSpace,
+            AdvectionFieldSpace::
+                    PHYSICAL>(time_stepper, to_physical, batched_idx_range, builder, evaluator);
 
     const double t = 0.0;
     const double dt = 0.001;

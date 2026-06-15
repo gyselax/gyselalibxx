@@ -1,10 +1,15 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include "combined_mapping.hpp"
 #include "ddc_aliases.hpp"
+#include "ddc_helper.hpp"
 #include "geometry_pseudo_cartesian.hpp"
+#include "l_norm_tools.hpp"
 #include "tensor.hpp"
 #include "type_seq_tools.hpp"
+#include "vector_field.hpp"
+#include "vector_mapper.hpp"
 
 namespace polar_foot_finder_details {
 
