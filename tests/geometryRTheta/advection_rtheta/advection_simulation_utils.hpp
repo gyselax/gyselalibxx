@@ -284,14 +284,11 @@ void display_time(
 /**
  * @brief Run an advection simulation.
  *
- * @param[in] to_physical_mapping
+ * @param[in] to_physical_mapping_host
  *      The mapping function from the logical domain to the physical
  *      domain.
  * @param[in] to_logical_mapping
  *      The mapping function from the physical domain to the logical
- *      domain.
- * @param[in] analytical_to_pseudo_physical_mapping
- *      The mapping function from the logical domain to the pseudo-physical
  *      domain.
  * @param[in] analytical_to_physical_mapping
  *      The analytical version of the mapping.
@@ -330,18 +327,14 @@ void display_time(
  */
 template <
         class LogicalToPhysicalMappingHost,
-        class LogicalToPhysicalMapping,
         class PhysicalToLogicalMapping,
-        class LogicalToPseudoPhysicalMapping,
         class AnalyticalLogicalToPhysicalMapping,
         class PolarFootFinder,
         class AdvectionOperator,
         class Simulation>
 void simulate(
         LogicalToPhysicalMappingHost const& to_physical_mapping_host,
-        LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
-        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
         AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
         IdxRangeRTheta const& grid,
         PolarFootFinder const& foot_finder,
@@ -530,9 +523,6 @@ void simulate(
  * @param[in] to_logical_mapping
  *      The mapping function from the physical domain to the logical
  *      domain.
- * @param[in] analytical_to_pseudo_physical_mapping
- *      The mapping function from the logical domain to the pseudo-physical
- *      domain.
  * @param[in] analytical_to_physical_mapping
  *      The analytical version of the mapping.
  *      It can be different from the mapping if the mapping is discrete.
@@ -572,7 +562,6 @@ template <
         class LogicalToPhysicalMappingHost,
         class LogicalToPhysicalMapping,
         class PhysicalToLogicalMapping,
-        class LogicalToPseudoPhysicalMapping,
         class AnalyticalLogicalToPhysicalMapping,
         class PolarFootFinder,
         class AdvectionOperator>
@@ -580,7 +569,6 @@ void run_simulations(
         LogicalToPhysicalMappingHost const& to_physical_mapping_host,
         LogicalToPhysicalMapping const& to_physical_mapping,
         PhysicalToLogicalMapping const& to_logical_mapping,
-        LogicalToPseudoPhysicalMapping const& analytical_to_pseudo_physical_mapping,
         AnalyticalLogicalToPhysicalMapping const& analytical_to_physical_mapping,
         IdxRangeRTheta const& grid,
         PolarFootFinder const& foot_finder,
@@ -614,9 +602,7 @@ void run_simulations(
     std::cout << title + title_simu_translation << std::endl;
     simulate(
             to_physical_mapping_host,
-            to_physical_mapping,
             to_logical_mapping,
-            analytical_to_pseudo_physical_mapping,
             analytical_to_physical_mapping,
             grid,
             foot_finder,
@@ -635,9 +621,7 @@ void run_simulations(
     std::cout << title + title_simu_rotation << std::endl;
     simulate(
             to_physical_mapping_host,
-            to_physical_mapping,
             to_logical_mapping,
-            analytical_to_pseudo_physical_mapping,
             analytical_to_physical_mapping,
             grid,
             foot_finder,
@@ -656,9 +640,7 @@ void run_simulations(
     std::cout << title + title_simu_decentred_rotation << std::endl;
     simulate(
             to_physical_mapping_host,
-            to_physical_mapping,
             to_logical_mapping,
-            analytical_to_pseudo_physical_mapping,
             analytical_to_physical_mapping,
             grid,
             foot_finder,
