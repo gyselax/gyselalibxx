@@ -148,7 +148,6 @@ int main(int argc, char** argv)
 
     // SELECTION OF THE MAPPING AND THE ADVECTION DOMAIN.
 #if defined(CIRCULAR_MAPPING_PHYSICAL)
-    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
     CircularToCartesian<R, Theta, X, Y> to_physical_analytical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping;
     CircularToCartesian<R, Theta, X, Y> to_physical_mapping_host;
@@ -193,7 +192,6 @@ int main(int argc, char** argv)
                     to_physical_analytical_mapping,
                     builder,
                     spline_evaluator_extrapol);
-    using LogicalToPseudoPhysicalMapping = CircularToCartesian<R, Theta, X_pC, Y_pC>;
     DiscretePoloidalCSSplineMapping to_physical_mapping = mapping_builder();
     std::string const mapping_name = "DISCRETE";
     key += "discrete";
