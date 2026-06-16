@@ -6,7 +6,6 @@
 #include "indexed_tensor.hpp"
 #include "l_norm_tools.hpp"
 #include "metric_tensor_evaluator.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -40,7 +39,7 @@
  * They are defined in the IPolarFootFinder class.
  *
  * The feet can be advected on different domains (physical domain or pseudo-physical domain)
- * which are determined in the SplinePolarFootFinder operator. 
+ * which are determined in the PolarFootFinder operator.
  *
  * The interpolation of the function is always done in the logical domain,
  * where the B-splines are defined. 

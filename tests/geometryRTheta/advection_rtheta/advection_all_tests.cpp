@@ -29,12 +29,12 @@
 #include "mesh_builder.hpp"
 #include "paraconfpp.hpp"
 #include "params.yaml.hpp"
+#include "polar_foot_finder.hpp"
 #include "polar_spline_evaluator.hpp"
 #include "rk2.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 
@@ -107,21 +107,16 @@ void run_simulations_with_foot_finder_method(
         std::string const& simulation_name,
         std::string const& output_stem)
 {
-    using PseudoCartesianToCircular = CartesianToCircular<
-            typename LogicalToPseudoPhysicalMapping::cartesian_tag_x,
-            typename LogicalToPseudoPhysicalMapping::cartesian_tag_y,
-            R,
-            Theta>;
-    using PseudoPhysicalToPhysicalMapping
-            = CombinedMapping<LogicalToPhysicalMapping, PseudoCartesianToCircular>;
-    PseudoPhysicalToPhysicalMapping
-            pseudo_physical_to_physical(to_physical_mapping, PseudoCartesianToCircular(), 1e-12);
-
-    SplinePolarFootFinder foot_finder(
-            params.grid,
+    constexpr FootFindingSpace FFSpace
+            = std::is_same_v<
+                      typename LogicalToPseudoPhysicalMapping::CoordResult,
+                      Coord<X_pC, Y_pC>>
+                      ? FootFindingSpace::PSEUDO_PHYSICAL
+                      : FootFindingSpace::PHYSICAL;
+    PolarFootFinder foot_finder = make_polar_foot_finder<FFSpace, AdvectionFieldSpace::PHYSICAL>(
             get_time_stepper_builder<TSChoice>(),
-            pseudo_physical_to_physical,
-            analytical_to_pseudo_physical_mapping,
+            to_physical_mapping,
+            params.grid,
             params.advection_builder,
             params.advection_evaluator);
 
@@ -135,7 +130,6 @@ void run_simulations_with_foot_finder_method(
             to_physical_mapping_host,
             to_physical_mapping,
             to_logical_mapping,
-            analytical_to_pseudo_physical_mapping,
             analytical_to_physical_mapping,
             params.grid,
             foot_finder,
