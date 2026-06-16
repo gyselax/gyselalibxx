@@ -17,6 +17,6 @@ template <
         class AdvecCoefField,
         class TimeStepperBuilder,
         concepts::Mapping LogicalToPhysicalMapping>
-class ElementwiseChoice;
+struct ElementwiseChoice;
 
 } // namespace polar_foot_finder_details
