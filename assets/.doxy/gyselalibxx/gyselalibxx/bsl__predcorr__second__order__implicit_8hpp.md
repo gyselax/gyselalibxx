@@ -24,9 +24,9 @@
 * `#include "geometry_r_theta.hpp"`
 * `#include "itimesolver.hpp"`
 * `#include "poisson_like_rhs_function.hpp"`
+* `#include "polar_foot_finder.hpp"`
 * `#include "polar_spline_fem_poisson_like_solver.hpp"`
 * `#include "spline_definitions_r_theta.hpp"`
-* `#include "spline_polar_foot_finder.hpp"`
 
 
 
@@ -46,7 +46,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md) &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class PolarPoissonLikeSolver&gt;<br>_A second order implicit predictor-corrector for the Vlasov-Poisson equations._  |
+| class | [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md) &lt;class LogicalToPhysicalMapping, class PolarPoissonLikeSolver&gt;<br>_A second order implicit predictor-corrector for the Vlasov-Poisson equations._  |
 
 
 

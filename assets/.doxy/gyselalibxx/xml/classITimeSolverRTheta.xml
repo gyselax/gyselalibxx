@@ -3,7 +3,7 @@
   <compounddef id="classITimeSolverRTheta" kind="class" language="C++" prot="public" abstract="yes">
     <compoundname>ITimeSolverRTheta</compoundname>
     <derivedcompoundref refid="classBslExplicitPredCorrRTheta" prot="public" virt="non-virtual">BslExplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, PolarPoissonLikeSolver &gt;</derivedcompoundref>
-    <derivedcompoundref refid="classBslImplicitPredCorrRTheta" prot="public" virt="non-virtual">BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, PolarPoissonLikeSolver &gt;</derivedcompoundref>
+    <derivedcompoundref refid="classBslImplicitPredCorrRTheta" prot="public" virt="non-virtual">BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, PolarPoissonLikeSolver &gt;</derivedcompoundref>
     <derivedcompoundref refid="classBslPredCorrRTheta" prot="public" virt="non-virtual">BslPredCorrRTheta&lt; Mapping, FootFinder, PolarPoissonLikeSolver &gt;</derivedcompoundref>
     <includes refid="geometryRTheta_2time__solver_2itimesolver_8hpp" local="no">itimesolver.hpp</includes>
     <sectiondef kind="public-func">
@@ -28,7 +28,7 @@
         <name>operator()</name>
         <qualifiedname>ITimeSolverRTheta::operator()</qualifiedname>
         <reimplementedby refid="classBslExplicitPredCorrRTheta_1aa73ad33bc9838ee3bca8d46a3cbf1bb3">operator()</reimplementedby>
-        <reimplementedby refid="classBslImplicitPredCorrRTheta_1a46ef9663688c541ff473a4953c9e1eda">operator()</reimplementedby>
+        <reimplementedby refid="classBslImplicitPredCorrRTheta_1a2fb82291cc9d9f6ef59b8f8644ec96ab">operator()</reimplementedby>
         <reimplementedby refid="classBslPredCorrRTheta_1a52597adc2bfbd8fde8394be591361291">operator()</reimplementedby>
         <param>
           <type>host_t&lt; DFieldRTheta &gt;</type>
@@ -44,7 +44,7 @@
           <defval>1</defval>
         </param>
         <briefdescription>
-<para>Solves on <formula id="280">$ T = dt*N $</formula> the equations system. </para>
+<para>Solves on <formula id="282">$ T = dt*N $</formula> the equations system. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -52,7 +52,7 @@
 <parametername direction="inout">density</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>On input: the initial condition. On output: the solution at <formula id="281">$ dt *N$</formula>. </para>
+<para>On input: the initial condition. On output: the solution at <formula id="283">$ dt *N$</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -68,7 +68,7 @@
 <parametername direction="in">steps</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The number <formula id="282">$ N$</formula> of time interactions.</para>
+<para>The number <formula id="284">$ N$</formula> of time interactions.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -150,7 +150,7 @@
         </childnode>
       </node>
       <node id="3">
-        <label>BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, LogicalToPseudoPhysicalMapping, PolarPoissonLikeSolver &gt;</label>
+        <label>BslImplicitPredCorrRTheta&lt; LogicalToPhysicalMapping, PolarPoissonLikeSolver &gt;</label>
         <link refid="classBslImplicitPredCorrRTheta"/>
         <childnode refid="1" relation="public-inheritance">
         </childnode>

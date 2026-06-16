@@ -7,6 +7,11 @@
     <includes refid="vector__field_8hpp" local="yes">vector_field.hpp</includes>
     <includes refid="vector__index__tools_8hpp" local="yes">vector_index_tools.hpp</includes>
     <includedby refid="bsl__advection__polar_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/bsl_advection_polar.hpp</includedby>
+    <includedby refid="polar__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp</includedby>
+    <includedby refid="logical__advection__logical__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp</includedby>
+    <includedby refid="logical__advection__pseudo__physical__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp</includedby>
+    <includedby refid="physical__advection__physical__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_physical_foot_finder.hpp</includedby>
+    <includedby refid="physical__advection__pseudo__physical__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp</includedby>
     <includedby refid="spline__polar__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</includedby>
     <includedby refid="vortex__merger__equilibrium_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</includedby>
     <includedby refid="bsl__predcorr_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr.hpp</includedby>
@@ -208,22 +213,48 @@
         </childnode>
       </node>
       <node id="6">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
-        <link refid="spline__polar__foot__finder_8hpp_source"/>
-        <childnode refid="2" relation="include">
-        </childnode>
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp</label>
+        <link refid="polar__foot__finder_8hpp_source"/>
         <childnode refid="4" relation="include">
         </childnode>
         <childnode refid="5" relation="include">
         </childnode>
       </node>
       <node id="7">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
-        <link refid="vortex__merger__equilibrium_8hpp_source"/>
-        <childnode refid="8" relation="include">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp</label>
+        <link refid="logical__advection__logical__foot__finder_8hpp_source"/>
+        <childnode refid="6" relation="include">
         </childnode>
       </node>
       <node id="8">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_pseudo_physical_foot_finder.hpp</label>
+        <link refid="logical__advection__pseudo__physical__foot__finder_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="9">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_physical_foot_finder.hpp</label>
+        <link refid="physical__advection__physical__foot__finder_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="10">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_pseudo_physical_foot_finder.hpp</label>
+        <link refid="physical__advection__pseudo__physical__foot__finder_8hpp_source"/>
+        <childnode refid="6" relation="include">
+        </childnode>
+      </node>
+      <node id="11">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp</label>
+        <link refid="spline__polar__foot__finder_8hpp_source"/>
+      </node>
+      <node id="12">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_equilibrium.hpp</label>
+        <link refid="vortex__merger__equilibrium_8hpp_source"/>
+        <childnode refid="13" relation="include">
+        </childnode>
+      </node>
+      <node id="13">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/initialisation/vortex_merger_initialisation.hpp</label>
         <link refid="vortex__merger__initialisation_8hpp_source"/>
       </node>
@@ -239,7 +270,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryRTheta/time_solver/bsl_predcorr_second_order_implicit.hpp</label>
         <link refid="bsl__predcorr__second__order__implicit_8hpp_source"/>
       </node>
-      <node id="9">
+      <node id="14">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXY/time_integration/predcorr_RK2.hpp</label>
         <link refid="predcorr__RK2_8hpp_source"/>
       </node>
@@ -252,7 +283,7 @@
         </childnode>
         <childnode refid="7" relation="include">
         </childnode>
-        <childnode refid="3" relation="include">
+        <childnode refid="8" relation="include">
         </childnode>
         <childnode refid="9" relation="include">
         </childnode>
@@ -260,14 +291,24 @@
         </childnode>
         <childnode refid="11" relation="include">
         </childnode>
-      </node>
-      <node id="10">
-        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
-        <link refid="multipatch__math__tools_8hpp_source"/>
-        <childnode refid="11" relation="include">
+        <childnode refid="12" relation="include">
+        </childnode>
+        <childnode refid="3" relation="include">
+        </childnode>
+        <childnode refid="14" relation="include">
+        </childnode>
+        <childnode refid="15" relation="include">
+        </childnode>
+        <childnode refid="16" relation="include">
         </childnode>
       </node>
-      <node id="11">
+      <node id="15">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/utils/multipatch_math_tools.hpp</label>
+        <link refid="multipatch__math__tools_8hpp_source"/>
+        <childnode refid="16" relation="include">
+        </childnode>
+      </node>
+      <node id="16">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/timestepper/crank_nicolson.hpp</label>
         <link refid="crank__nicolson_8hpp_source"/>
       </node>
@@ -294,7 +335,7 @@
 <para>Compute the infinity norm. </para>
         </briefdescription>
         <detaileddescription>
-<para>For a given vector <formula id="110">$ x $</formula> , compute <formula id="332">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
+<para>For a given vector <formula id="112">$ x $</formula> , compute <formula id="334">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">coord</parametername>
@@ -335,7 +376,7 @@
 <para>Compute the infinity norm of a vector on an orthonormal coordinate system. </para>
         </briefdescription>
         <detaileddescription>
-<para>For a given vector <formula id="110">$ x $</formula> , compute <formula id="332">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
+<para>For a given vector <formula id="112">$ x $</formula> , compute <formula id="334">$|Vert x |Vert_{\infty} = \sup_n |x_n| $</formula>.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">vec</parametername>
@@ -855,7 +896,7 @@
 <para>Compute L1 norm of a function with a given quadrature. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="333">$ \int_{\Omega} |f(X)|  dX $</formula></para>
+<para><formula id="335">$ \int_{\Omega} |f(X)|  dX $</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">exec_space</parametername>
@@ -998,7 +1039,7 @@
 <para>Compute L2 norm of a function with a given quadrature. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="334">$ \sqrt{\int_{\Omega} |f(X)|^2  dX} $</formula></para>
+<para><formula id="336">$ \sqrt{\int_{\Omega} |f(X)|^2  dX} $</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">exec_space</parametername>

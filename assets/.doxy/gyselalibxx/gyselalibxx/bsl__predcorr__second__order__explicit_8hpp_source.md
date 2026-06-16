@@ -27,9 +27,9 @@
 #include "geometry_r_theta.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
+#include "polar_foot_finder.hpp"
 #include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 
 
 
@@ -40,16 +40,17 @@ template <
 class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using SplinePolarFootFinderType = SplinePolarFootFinder<
+    using PolarFootFinderType = PolarFootFinder<
+            FootFindingSpace::PHYSICAL,
+            AdvectionFieldSpace::PHYSICAL,
+            LogicalToPhysicalMapping,
             IdxRangeRTheta,
             EulerBuilder,
-            LogicalToPhysicalMapping,
-            LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorConstBound>;
 
     using BslAdvectionRTheta = BslAdvectionPolar<
-            SplinePolarFootFinderType,
+            PolarFootFinderType,
             LogicalToPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorNullBound>;
@@ -60,7 +61,7 @@ private:
     BslAdvectionRTheta const& m_advection_solver;
 
     EulerBuilder const m_euler;
-    SplinePolarFootFinderType const m_find_feet_method;
+    PolarFootFinderType const m_find_feet_method;
 
     PolarPoissonLikeSolver const& m_poisson_solver;
 
@@ -80,13 +81,7 @@ public:
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
-        , m_find_feet_method(
-                  grid,
-                  m_euler,
-                  logical_to_physical,
-                  logical_to_pseudo_physical,
-                  builder,
-                  advection_evaluator)
+        , m_find_feet_method(m_euler, logical_to_physical, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)
@@ -231,9 +226,9 @@ public:
                     ddcHelper::get<Y>(advection_field_coefs),
                     ddcHelper::get<Y>(get_const_field(advection_field_predicted)));
 
-            typename SplinePolarFootFinderType::ElementwiseOperator find_foot_alloc
+            typename PolarFootFinderType::ElementwiseOperator find_foot_alloc
                     = m_find_feet_method(get_const_field(advection_field));
-            typename SplinePolarFootFinderType::ElementwiseOperator::GPUCompat find_foot
+            typename PolarFootFinderType::ElementwiseOperator::GPUCompat find_foot
                     = find_foot_alloc(dt);
 
             const std::source_location location = std::source_location::current();

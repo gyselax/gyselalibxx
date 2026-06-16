@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ade857839a3fb92baaf6bd919a12083d58" kind="struct" language="C++" prot="public">
+    <compoundname>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</compoundname>
+    <includes refid="physical__advection__physical__foot__finder_8hpp" local="no">physical_advection_physical_foot_finder.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class <ref refid="structGridR" kindref="compound">GridR</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structGridTheta" kindref="compound">GridTheta</ref></type>
+      </param>
+      <param>
+        <type>class IdxRangeOperator</type>
+      </param>
+      <param>
+        <type>class RThetaAdvectionEvaluator</type>
+      </param>
+      <param>
+        <type>class AdvecCoefField</type>
+      </param>
+      <param>
+        <type>class TimeStepperBuilder</type>
+      </param>
+      <param>
+        <type><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref></type>
+        <declname>LogicalToPhysicalMapping</declname>
+        <defname>LogicalToPhysicalMapping</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ade857839a3fb92baaf6bd919a12083d58_1af907f413b6d7553e62474d623a5c57d1" prot="public" static="no">
+        <type><ref refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem" kindref="compound">ElementwisePhysicalAdvPhysicalFootFinderMem</ref>&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</type>
+        <definition>using polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;::type =  ElementwisePhysicalAdvPhysicalFootFinderMem&lt; GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping&gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;::type</qualifiedname>
+        <briefdescription>
+<para>The selected elementwise operator type. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_physical_foot_finder.hpp" line="284" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_physical_foot_finder.hpp" bodystart="291" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Selects <ref refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem" kindref="compound">ElementwisePhysicalAdvPhysicalFootFinderMem</ref> for physical advection with foot-finding in physical space. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_physical_foot_finder.hpp" line="272" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/physical_advection_physical_foot_finder.hpp" bodystart="282" bodyend="292"/>
+    <listofallmembers>
+      <member refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ade857839a3fb92baaf6bd919a12083d58_1af907f413b6d7553e62474d623a5c57d1" prot="public" virt="non-virtual"><scope>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -392,7 +392,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the coordinate (x,y,z) to the equivalent <formula id="48">$ (r, z, \zeta) $</formula> coordinate. </para>
+<para>Convert the coordinate (x,y,z) to the equivalent <formula id="50">$ (r, z, \zeta) $</formula> coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -538,22 +538,22 @@
 <para>A class for describing the cylindrical 3D mapping. </para>
     </briefdescription>
     <detaileddescription>
-<para>The mapping <formula id="33">$ (x,y,z) \mapsto (r,z, \zeta) $</formula> is defined as follow :</para>
-<para><formula id="34">$ R(x,y,z) = \sqrt{x^2+y^2} ,$</formula></para>
-<para><formula id="35">$ \zeta(x,y,z) = atan2(\frac{y}{x}) .$</formula></para>
-<para><formula id="36">$ Z(x,y,z) = z $</formula></para>
-<para>It and its Jacobian matrix are invertible everywhere except for <formula id="37">$ R = 0 $</formula>.</para>
+<para>The mapping <formula id="35">$ (x,y,z) \mapsto (r,z, \zeta) $</formula> is defined as follow :</para>
+<para><formula id="36">$ R(x,y,z) = \sqrt{x^2+y^2} ,$</formula></para>
+<para><formula id="37">$ \zeta(x,y,z) = atan2(\frac{y}{x}) .$</formula></para>
+<para><formula id="38">$ Z(x,y,z) = z $</formula></para>
+<para>It and its Jacobian matrix are invertible everywhere except for <formula id="39">$ R = 0 $</formula>.</para>
 <para>The Jacobian matrix coefficients are defined as follow</para>
-<para><formula id="38">$ J^R_{\;x}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  $</formula></para>
-<para><formula id="39">$ J^R_{\;y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  $</formula></para>
-<para><formula id="40">$ J^R_{\;z}(x,y,z)  =0  $</formula></para>
-<para><formula id="41">$ J^Z_{\;x}(x,y,z)  =0  $</formula></para>
-<para><formula id="42">$ J^Z_{\;y}(x,y,z)  =0  $</formula></para>
-<para><formula id="43">$ J^Z_{\;z}(x,y,z)  =1  $</formula></para>
-<para><formula id="44">$ J^{\zeta}_{\;x}(x,y,z)  =\frac{-y}{x^2+y^2}  $</formula></para>
-<para><formula id="45">$ J^{\zeta}_{\;y}(x,y,z)  =\frac{x}{x^2+y^2}  $</formula></para>
-<para><formula id="46">$ J^{\zeta}_{\;z}(x,y,z)  =0  $</formula></para>
-<para>and the matrix determinant: <formula id="47">$ det(J) = -\frac{1}{\sqrt{x^2+y^2}} $</formula>. </para>
+<para><formula id="40">$ J^R_{\;x}(x,y,z)  =\frac{x}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="41">$ J^R_{\;y}(x,y,z)  =\frac{y}{\sqrt{x^2+y^2}}  $</formula></para>
+<para><formula id="42">$ J^R_{\;z}(x,y,z)  =0  $</formula></para>
+<para><formula id="43">$ J^Z_{\;x}(x,y,z)  =0  $</formula></para>
+<para><formula id="44">$ J^Z_{\;y}(x,y,z)  =0  $</formula></para>
+<para><formula id="45">$ J^Z_{\;z}(x,y,z)  =1  $</formula></para>
+<para><formula id="46">$ J^{\zeta}_{\;x}(x,y,z)  =\frac{-y}{x^2+y^2}  $</formula></para>
+<para><formula id="47">$ J^{\zeta}_{\;y}(x,y,z)  =\frac{x}{x^2+y^2}  $</formula></para>
+<para><formula id="48">$ J^{\zeta}_{\;z}(x,y,z)  =0  $</formula></para>
+<para>and the matrix determinant: <formula id="49">$ det(J) = -\frac{1}{\sqrt{x^2+y^2}} $</formula>. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" line="55" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_cylindrical.hpp" bodystart="56" bodyend="243"/>
     <listofallmembers>

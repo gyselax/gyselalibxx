@@ -122,7 +122,7 @@ For the second step, we interpolate the function at the computed feet of the cha
 Different time integration methods are implemented to solve the equation of the characteristics. They are defined in the IPolarFootFinder class.
 
 
-The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) operator.
+The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the [**PolarFootFinder**](classPolarFootFinder.md) operator.
 
 
 The interpolation of the function is always done in the logical domain, where the B-splines are defined.

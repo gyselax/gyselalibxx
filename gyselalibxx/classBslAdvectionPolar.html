@@ -84,6 +84,12 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_foot_finders</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/advection/polar_foot_finders/index.html">Ppolar_foot_finders/README.mdolar foot finder implementation details</a>
+                </li>
+    </ul>
+                </li>
     </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" >collisions</a>
@@ -624,7 +630,7 @@
 <p>So the first step of the advection operator is to compute the feet of the characteristics <span class="arithmatex">\(X(t; t+\Delta t, x_i)\)</span> for each mesh point <span class="arithmatex">\(x_i\)</span>.</p>
 <p>For the second step, we interpolate the function at the computed feet of the characteristics, and obtain the function at the next time step: <span class="arithmatex">\(f(t + \Delta t, x) = f(t, X(t; t+\Delta, x))\)</span>.</p>
 <p>Different time integration methods are implemented to solve the equation of the characteristics. They are defined in the IPolarFootFinder class.</p>
-<p>The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a> operator.</p>
+<p>The feet can be advected on different domains (physical domain or pseudo-physical domain) which are determined in the <a href="classPolarFootFinder.html"><strong>PolarFootFinder</strong></a> operator.</p>
 <p>The interpolation of the function is always done in the logical domain, where the B-splines are defined.</p>
 <p><strong>See also:</strong> IPolarFootFinder </p>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>

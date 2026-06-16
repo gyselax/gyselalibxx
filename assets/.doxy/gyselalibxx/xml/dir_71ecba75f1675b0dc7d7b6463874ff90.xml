@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="dir_71ecba75f1675b0dc7d7b6463874ff90" kind="dir">
+    <compoundname>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders</compoundname>
+    <innerfile refid="elementwise__choice_8hpp">elementwise_choice.hpp</innerfile>
+    <innerfile refid="logical__advection__logical__foot__finder_8hpp">logical_advection_logical_foot_finder.hpp</innerfile>
+    <innerfile refid="logical__advection__pseudo__physical__foot__finder_8hpp">logical_advection_pseudo_physical_foot_finder.hpp</innerfile>
+    <innerfile refid="physical__advection__physical__foot__finder_8hpp">physical_advection_physical_foot_finder.hpp</innerfile>
+    <innerfile refid="physical__advection__pseudo__physical__foot__finder_8hpp">physical_advection_pseudo_physical_foot_finder.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/"/>
+  </compounddef>
+</doxygen>

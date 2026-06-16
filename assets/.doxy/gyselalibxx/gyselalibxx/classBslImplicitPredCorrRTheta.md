@@ -2,7 +2,7 @@
 
 # Class BslImplicitPredCorrRTheta
 
-**template &lt;class LogicalToPhysicalMapping, class LogicalToPseudoPhysicalMapping, class PolarPoissonLikeSolver&gt;**
+**template &lt;class LogicalToPhysicalMapping, class PolarPoissonLikeSolver&gt;**
 
 
 
@@ -75,7 +75,7 @@ Inherits the following classes: [ITimeSolverRTheta](classITimeSolverRTheta.md)
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslImplicitPredCorrRTheta**](#function-bslimplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, LogicalToPseudoPhysicalMapping const & logical\_to\_pseudo\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, PolarPoissonLikeSolver const & poisson\_solver, SplineRThetaEvaluatorConstBound const & advection\_evaluator) <br>_Instantiate a_ [_**BslImplicitPredCorrRTheta**_](classBslImplicitPredCorrRTheta.md) _._ |
+|   | [**BslImplicitPredCorrRTheta**](#function-bslimplicitpredcorrrtheta) (LogicalToPhysicalMapping const & logical\_to\_physical, [**BslAdvectionRTheta**](classBslAdvectionPolar.md) const & advection\_solver, IdxRangeRTheta const & grid, SplineRThetaBuilder const & builder, PolarPoissonLikeSolver const & poisson\_solver, SplineRThetaEvaluatorConstBound const & advection\_evaluator) <br>_Instantiate a_ [_**BslImplicitPredCorrRTheta**_](classBslImplicitPredCorrRTheta.md) _._ |
 |  void | [**implicit\_loop**](#function-implicit_loop) ([**DVectorConstFieldRTheta**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field, [**ConstVectorSplineCoeffs2D**](classVectorField.md)&lt; [**X**](structX.md), [**Y**](structY.md) &gt; advection\_field\_coefs\_k, FieldRTheta&lt; CoordRTheta &gt; feet\_coords, double const dt, double const tau) const<br>_The implicit loop which calculates the feet of the characteristicss._  |
 | virtual host\_t&lt; DFieldRTheta &gt; | [**operator()**](#function-operator) (host\_t&lt; DFieldRTheta &gt; density, double const dt, int const steps) const<br>_Solves on_ \(T = dt*N\) _the equations system._ |
 
@@ -206,7 +206,6 @@ Secondly, it corrects:
 
 
 * `LogicalToPhysicalMapping` A class describing a mapping from curvilinear coordinates to Cartesian coordinates. 
-* `LogicalToPseudoPhysicalMapping` A class describing a mapping from curvilinear coordinates to pseudo-Cartesian coordinates. 
 * `PolarPoissonLikeSolver` The type of the solver for the Poisson-like equation on the polar plane. 
 
 
@@ -224,7 +223,6 @@ _Instantiate a_ [_**BslImplicitPredCorrRTheta**_](classBslImplicitPredCorrRTheta
 ```C++
 inline BslImplicitPredCorrRTheta::BslImplicitPredCorrRTheta (
     LogicalToPhysicalMapping const & logical_to_physical,
-    LogicalToPseudoPhysicalMapping const & logical_to_pseudo_physical,
     BslAdvectionRTheta const & advection_solver,
     IdxRangeRTheta const & grid,
     SplineRThetaBuilder const & builder,
@@ -241,7 +239,6 @@ inline BslImplicitPredCorrRTheta::BslImplicitPredCorrRTheta (
 
 
 * `logical_to_physical` The mapping from the logical domain to the physical domain. 
-* `logical_to_pseudo_physical` The mapping from the logical domain to the pseudo-physical domain. 
 * `advection_solver` The advection operator with an [**Euler**](classEuler.md) method. 
 * `grid` The index range on which the functions are defined. 
 * `builder` A spline builder to get the spline representation of the advection field and the rhs. 

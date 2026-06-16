@@ -182,7 +182,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="56">$ \epsilon $</formula> parameter in the definition of the mapping <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>. </para>
+<para>The <formula id="58">$ \epsilon $</formula> parameter in the definition of the mapping <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -190,7 +190,7 @@
 <parametername direction="in">e</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="55">$ e $</formula> parameter in the definition of the mapping <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>. </para>
+<para>The <formula id="57">$ e $</formula> parameter in the definition of the mapping <ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -351,10 +351,10 @@
         <name>epsilon</name>
         <qualifiedname>CartesianToCzarny::epsilon</qualifiedname>
         <briefdescription>
-<para>Return the <formula id="56">$ \epsilon $</formula> parameter. </para>
+<para>Return the <formula id="58">$ \epsilon $</formula> parameter. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The value of <formula id="56">$ \epsilon $</formula>.</para>
+<para><simplesect kind="return"><para>The value of <formula id="58">$ \epsilon $</formula>.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref> </para>
 </simplesect>
@@ -371,10 +371,10 @@
         <name>e</name>
         <qualifiedname>CartesianToCzarny::e</qualifiedname>
         <briefdescription>
-<para>Return the <formula id="55">$ e $</formula> parameter. </para>
+<para>Return the <formula id="57">$ e $</formula> parameter. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The value of <formula id="55">$ e $</formula>.</para>
+<para><simplesect kind="return"><para>The value of <formula id="57">$ e $</formula>.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classCartesianToCzarny" kindref="compound">CartesianToCzarny</ref> </para>
 </simplesect>
@@ -395,7 +395,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the coordinate (x,y) to the equivalent <formula id="21">$ (r, \theta) $</formula> coordinate. </para>
+<para>Convert the coordinate (x,y) to the equivalent <formula id="19">$ (r, \theta) $</formula> coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -438,10 +438,10 @@
 <para>A class for describing the Czarny 2D mapping. </para>
     </briefdescription>
     <detaileddescription>
-<para>The mapping <formula id="49">$ (x,y)  \mapsto (r,\theta)$</formula> is defined by</para>
-<para><formula id="50">$ r(x,y) = \sqrt{\frac{\hat{y}^2 (1+\epsilon \hat{x})^2}{e^2\xi^2+0.25(\epsilon \hat{x}^2-2\hat{x}-\epsilon)^2}},$</formula></para>
-<para><formula id="51">$ \theta (x,y)) = atan2(2. \hat{y} (1+\epsilon \hat{x}), (e \xi (\epsilon \hat{x}^2 - 2\hat{x}-\epsilon))), $</formula></para>
-<para>with <formula id="52">$ \hat{x} = x-x_0 $</formula>, <formula id="53">$ \hat{y} = y-y_0 $</formula>, <formula id="54">$ \xi = 1/\sqrt{1 - \epsilon^2 /4} $</formula> and <formula id="55">$ e $</formula> and <formula id="56">$ \epsilon $</formula> given as parameters.</para>
+<para>The mapping <formula id="51">$ (x,y)  \mapsto (r,\theta)$</formula> is defined by</para>
+<para><formula id="52">$ r(x,y) = \sqrt{\frac{\hat{y}^2 (1+\epsilon \hat{x})^2}{e^2\xi^2+0.25(\epsilon \hat{x}^2-2\hat{x}-\epsilon)^2}},$</formula></para>
+<para><formula id="53">$ \theta (x,y)) = atan2(2. \hat{y} (1+\epsilon \hat{x}), (e \xi (\epsilon \hat{x}^2 - 2\hat{x}-\epsilon))), $</formula></para>
+<para>with <formula id="54">$ \hat{x} = x-x_0 $</formula>, <formula id="55">$ \hat{y} = y-y_0 $</formula>, <formula id="56">$ \xi = 1/\sqrt{1 - \epsilon^2 /4} $</formula> and <formula id="57">$ e $</formula> and <formula id="58">$ \epsilon $</formula> given as parameters.</para>
 <para>See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations. Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001. </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_czarny.hpp" line="29" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/cartesian_to_czarny.hpp" bodystart="30" bodyend="167"/>

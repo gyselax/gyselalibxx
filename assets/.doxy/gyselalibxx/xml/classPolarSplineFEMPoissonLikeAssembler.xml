@@ -854,7 +854,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable object with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning the value of <formula id="155">$ \alpha $</formula> at the given coordinate. </para>
+<para>A callable object with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning the value of <formula id="157">$ \alpha $</formula> at the given coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -862,7 +862,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable object with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning the value of <formula id="156">$ \beta $</formula> at the given coordinate. </para>
+<para>A callable object with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning the value of <formula id="158">$ \beta $</formula> at the given coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -879,7 +879,7 @@
 <parametername>CoeffAlpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable type for evaluating <formula id="155">$ \alpha $</formula> at a coordinate. </para>
+<para>A callable type for evaluating <formula id="157">$ \alpha $</formula> at a coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -887,7 +887,7 @@
 <parametername>CoeffBeta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable type for evaluating <formula id="156">$ \beta $</formula> at a coordinate. </para>
+<para>A callable type for evaluating <formula id="158">$ \beta $</formula> at a coordinate. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1078,7 +1078,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="155">$ \alpha $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="157">$ \alpha $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1086,7 +1086,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="156">$ \beta $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="158">$ \beta $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1178,7 +1178,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="155">$ \alpha $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="157">$ \alpha $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1186,7 +1186,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="156">$ \beta $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="158">$ \beta $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1278,7 +1278,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="155">$ \alpha $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="157">$ \alpha $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1286,7 +1286,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="156">$ \beta $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="158">$ \beta $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1339,7 +1339,7 @@
           <declname>nnz_per_row</declname>
         </param>
         <briefdescription>
-<para>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on <formula id="382">$(r,\theta)$</formula> splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1). </para>
+<para>Fills the nnz data structure by computing the number of non-zero per line. This number is linked to the weak formulation and depends on <formula id="384">$(r,\theta)$</formula> splines. After this function the array will contain: nnz_per_row[0] = 0. nnz_per_row[1] = 0. nnz_per_row[2] = number of non-zero elements in line 0. nnz_per_row[3] = number of non-zero elements in lines 0-1. ..._per_row nnz_per_row[matrix_size] = number of non-zero elements in lines 0-(matrix_size-1). </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -1438,7 +1438,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="155">$ \alpha $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="157">$ \alpha $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1446,7 +1446,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="156">$ \beta $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="158">$ \beta $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1556,7 +1556,7 @@
 <parametername direction="in">coeff_alpha</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="155">$ \alpha $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="157">$ \alpha $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1564,7 +1564,7 @@
 <parametername direction="in">coeff_beta</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="156">$ \beta $</formula>. </para>
+<para>A callable with signature <computeroutput>double operator()(CoordRTheta)</computeroutput> returning <formula id="158">$ \beta $</formula>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1636,7 +1636,7 @@
 <para>An operator to assemble a Poisson-like stiffness matrix using polar B-splines. </para>
     </briefdescription>
     <detaileddescription>
-<para>Assemble the finite element stiffness matrix with entries <formula id="379">$ \int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx $</formula> for <formula id="380">$0 &lt; i,j &lt; N $</formula> where <formula id="381">$ N $</formula> is the number of polar splines. We only consider splines that vanish on the boundary.</para>
+<para>Assemble the finite element stiffness matrix with entries <formula id="381">$ \int \alpha \nabla B_i \cdot \nabla B_j + \beta B_i B_j dx $</formula> for <formula id="382">$0 &lt; i,j &lt; N $</formula> where <formula id="383">$ N $</formula> is the number of polar splines. We only consider splines that vanish on the boundary.</para>
 <para>For more details see the <computeroutput><ref refid="classPolarSplineFEMPoissonLikeSolver" kindref="compound">PolarSplineFEMPoissonLikeSolver</ref></computeroutput> and Emily Bourne&apos;s thesis (&quot;Non-Uniform Numerical Schemes for the Modelling of Turbulence
 in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
@@ -1659,7 +1659,7 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
 <parametername><ref refid="structPolarBSplinesRTheta" kindref="compound">PolarBSplinesRTheta</ref></parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The type of the 2D polar B-splines (on the coordinate system <formula id="382">$(r,\theta)$</formula> including B-splines which traverse the O point). </para>
+<para>The type of the 2D polar B-splines (on the coordinate system <formula id="384">$(r,\theta)$</formula> including B-splines which traverse the O point). </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -1683,7 +1683,7 @@ in the 5D GYSELA Code&quot;. December 2022.) <parameterlist kind="templateparam"
 <parametername>IdxRangeFull</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The full index range of <formula id="168">$ \phi $</formula> including any batch dimensions. </para>
+<para>The full index range of <formula id="170">$ \phi $</formula> including any batch dimensions. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>

@@ -2,7 +2,7 @@
 
 # Class ElementwiseSplinePolarFootFinder
 
-**template &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class X\_pc, class Y\_pc, class AdvDim1, class AdvDim2, class [**BSplinesR**](structBSplinesR.md), class [**BSplinesTheta**](structBSplinesTheta.md), class IdxRangeOperator, class SplineRThetaEvaluatorAdvection, class PseudoPhysicalToAdvectionMapping, class PseudoPhysicalToLogicalMapping, class LogicalToPseudoPhysicalMapping, class AdvecCoefField, class TimeStepper&gt;**
+**template &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class IdxRangeOperator, class SplineRThetaEvaluatorAdvection, class PseudoPhysicalToAdvectionMapping, class PseudoPhysicalToLogicalMapping, class LogicalToPseudoPhysicalMapping, class AdvecCoefField, class TimeStepper&gt;**
 
 
 
@@ -101,12 +101,6 @@ This class holds non-owning views of all the objects needed to solve the charact
 
 * [**GridR**](structGridR.md) The discrete radial dimension. 
 * [**GridTheta**](structGridTheta.md) The discrete poloidal dimension. 
-* `X_pc` The first axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated. 
-* `Y_pc` The second axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated. 
-* `AdvDim1` The first dimension of the advection field. 
-* `AdvDim2` The second dimension of the advection field. 
-* [**BSplinesR**](structBSplinesR.md) The B-spline basis in the radial direction. 
-* [**BSplinesTheta**](structBSplinesTheta.md) The B-spline basis in the poloidal direction. 
 * `IdxRangeOperator` The full index range over which the operator acts (may include batch dimensions). 
 * `SplineRThetaEvaluatorAdvection` The evaluator used to evaluate the spline representation of the advection field. 
 * `PseudoPhysicalToAdvectionMapping` A mapping from the pseudo-physical domain to the domain where the advection field is defined. 

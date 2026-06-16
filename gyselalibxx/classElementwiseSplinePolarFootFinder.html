@@ -84,6 +84,12 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="../src/advection/index.html">Advection methods</a>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_foot_finders</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="../src/advection/polar_foot_finders/index.html">Ppolar_foot_finders/README.mdolar foot finder implementation details</a>
+                </li>
+    </ul>
+                </li>
     </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" >collisions</a>
@@ -561,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-elementwisesplinepolarfootfinder">Class ElementwiseSplinePolarFootFinder</h1>
-<p><strong>template &lt;class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class X_pc, class Y_pc, class AdvDim1, class AdvDim2, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, class IdxRangeOperator, class SplineRThetaEvaluatorAdvection, class PseudoPhysicalToAdvectionMapping, class PseudoPhysicalToLogicalMapping, class LogicalToPseudoPhysicalMapping, class AdvecCoefField, class TimeStepper&gt;</strong></p>
+<p><strong>template &lt;class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class IdxRangeOperator, class SplineRThetaEvaluatorAdvection, class PseudoPhysicalToAdvectionMapping, class PseudoPhysicalToLogicalMapping, class LogicalToPseudoPhysicalMapping, class AdvecCoefField, class TimeStepper&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classElementwiseSplinePolarFootFinder.html"><strong>ElementwiseSplinePolarFootFinder</strong></a></p>
 <p><em>A device-callable functor that finds the foot of the characteristic at a single grid point in polar coordinates using spline interpolation.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -594,12 +600,6 @@
 <ul>
 <li><a href="structGridR.html"><strong>GridR</strong></a> The discrete radial dimension. </li>
 <li><a href="structGridTheta.html"><strong>GridTheta</strong></a> The discrete poloidal dimension. </li>
-<li><code>X_pc</code> The first axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated. </li>
-<li><code>Y_pc</code> The second axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated. </li>
-<li><code>AdvDim1</code> The first dimension of the advection field. </li>
-<li><code>AdvDim2</code> The second dimension of the advection field. </li>
-<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> The B-spline basis in the radial direction. </li>
-<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> The B-spline basis in the poloidal direction. </li>
 <li><code>IdxRangeOperator</code> The full index range over which the operator acts (may include batch dimensions). </li>
 <li><code>SplineRThetaEvaluatorAdvection</code> The evaluator used to evaluate the spline representation of the advection field. </li>
 <li><code>PseudoPhysicalToAdvectionMapping</code> A mapping from the pseudo-physical domain to the domain where the advection field is defined. </li>

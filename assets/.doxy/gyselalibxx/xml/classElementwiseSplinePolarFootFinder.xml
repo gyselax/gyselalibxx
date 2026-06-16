@@ -11,24 +11,6 @@
         <type>class <ref refid="structGridTheta" kindref="compound">GridTheta</ref></type>
       </param>
       <param>
-        <type>class X_pc</type>
-      </param>
-      <param>
-        <type>class Y_pc</type>
-      </param>
-      <param>
-        <type>class AdvDim1</type>
-      </param>
-      <param>
-        <type>class AdvDim2</type>
-      </param>
-      <param>
-        <type>class <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></type>
-      </param>
-      <param>
-        <type>class <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
-      </param>
-      <param>
         <type>class IdxRangeOperator</type>
       </param>
       <param>
@@ -51,9 +33,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="private-type">
-      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1acff6a3a6c8edaaaddd9879d4cc27dcc2" prot="private" static="no">
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a102be4f076bafdecb20e32ccee52429c" prot="private" static="no">
         <type>typename GridR::continuous_dimension_type</type>
-        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::R =  typename GridR::continuous_dimension_type</definition>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::R =  typename GridR::continuous_dimension_type</definition>
         <argsstring></argsstring>
         <name>R</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::R</qualifiedname>
@@ -64,11 +46,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="83" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="65" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="65" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a76707d42cf3dc43986184900ec55ac80" prot="private" static="no">
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a34e0981b2c029d791f2df6df26d1b20d" prot="private" static="no">
         <type>typename GridTheta::continuous_dimension_type</type>
-        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::Theta =  typename GridTheta::continuous_dimension_type</definition>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::Theta =  typename GridTheta::continuous_dimension_type</definition>
         <argsstring></argsstring>
         <name>Theta</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::Theta</qualifiedname>
@@ -79,11 +61,25 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="85" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="85" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="67" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="67" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a8c1221028a67142e5797bb8fec7ba8fb" prot="private" static="no">
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a4e12af90082843e956d973f0ec5ee080" prot="private" static="no">
+        <type>find_grid_t&lt; <ref refid="structR" kindref="compound">R</ref>, ddc::to_type_seq_t&lt; typename SplineRThetaEvaluatorAdvection::spline_domain_type &gt; &gt;</type>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::BSplinesR =  find_grid_t&lt; R, ddc::to_type_seq_t&lt;typename SplineRThetaEvaluatorAdvection::spline_domain_type&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>BSplinesR</name>
+        <qualifiedname>ElementwiseSplinePolarFootFinder::BSplinesR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="68" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a42bcb41931bde06ec5ce409c5e2774c8" prot="private" static="no">
         <type>Idx&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::IdxRTheta =  Idx&lt;GridR, GridTheta&gt;</definition>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::IdxRTheta =  Idx&lt;GridR, GridTheta&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRTheta</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::IdxRTheta</qualifiedname>
@@ -93,11 +89,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="86" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="71" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="71" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1adf7798393c9706511e5a53e3818e18e0" prot="private" static="no">
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a65ecd84a7951fb475941d897eff871ec" prot="private" static="no">
         <type>ddc::remove_dims_of_t&lt; IdxRangeOperator, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeOperator, GridR, GridTheta&gt;</definition>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeOperator, GridR, GridTheta&gt;</definition>
         <argsstring></argsstring>
         <name>IdxRangeBatch</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::IdxRangeBatch</qualifiedname>
@@ -107,11 +103,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="87" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="87" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="72" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1acd9686b6af3a09a998c150a02bea9d8a" prot="private" static="no">
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a434229f3c4eaa7c96e1b7e09ea0a41bc" prot="private" static="no">
         <type>typename IdxRangeOperator::discrete_element_type</type>
-        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::IdxOperator =  typename IdxRangeOperator::discrete_element_type</definition>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::IdxOperator =  typename IdxRangeOperator::discrete_element_type</definition>
         <argsstring></argsstring>
         <name>IdxOperator</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::IdxOperator</qualifiedname>
@@ -121,11 +117,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="88" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="88" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="73" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1ad1917a3804d945eee1bd644d32109136" prot="private" static="no">
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a0d6d4c0435808a98f8e348ddb93fc590" prot="private" static="no">
         <type>typename IdxRangeBatch::discrete_element_type</type>
-        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::IdxBatch =  typename IdxRangeBatch::discrete_element_type</definition>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::IdxBatch =  typename IdxRangeBatch::discrete_element_type</definition>
         <argsstring></argsstring>
         <name>IdxBatch</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::IdxBatch</qualifiedname>
@@ -135,11 +131,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="89" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="89" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="74" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="74" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a9f9b7bf9cc3ce3e81f2415b54c3b9a91" prot="private" static="no">
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a2ab1d959455cdd1c3f0631005368089a" prot="private" static="no">
         <type>Coord&lt; <ref refid="structR" kindref="compound">R</ref>, <ref refid="structTheta" kindref="compound">Theta</ref> &gt;</type>
-        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::CoordRTheta =  Coord&lt;R, Theta&gt;</definition>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::CoordRTheta =  Coord&lt;R, Theta&gt;</definition>
         <argsstring></argsstring>
         <name>CoordRTheta</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::CoordRTheta</qualifiedname>
@@ -149,13 +145,85 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="90" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="90" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a9b541cf6b31dc0899fa5e1943241e277" prot="private" static="no">
+        <type>typename LogicalToPseudoPhysicalMapping::cartesian_tag_x</type>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::X_pc =  typename LogicalToPseudoPhysicalMapping::cartesian_tag_x</definition>
+        <argsstring></argsstring>
+        <name>X_pc</name>
+        <qualifiedname>ElementwiseSplinePolarFootFinder::X_pc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a2977e7079c1612c296173bb10cf8d58f" prot="private" static="no">
+        <type>typename LogicalToPseudoPhysicalMapping::cartesian_tag_y</type>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::Y_pc =  typename LogicalToPseudoPhysicalMapping::cartesian_tag_y</definition>
+        <argsstring></argsstring>
+        <name>Y_pc</name>
+        <qualifiedname>ElementwiseSplinePolarFootFinder::Y_pc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a11cf84fdeae4a0ece419e44bc710228b" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename PseudoPhysicalToAdvectionMapping::CoordResult &gt;</type>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::VectorIndexSetAdvectionDims =  ddc::to_type_seq_t&lt;typename PseudoPhysicalToAdvectionMapping::CoordResult&gt;</definition>
+        <argsstring></argsstring>
+        <name>VectorIndexSetAdvectionDims</name>
+        <qualifiedname>ElementwiseSplinePolarFootFinder::VectorIndexSetAdvectionDims</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1af2d284cc777897d09a0bd8cb67641b23" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, VectorIndexSetAdvectionDims &gt;</type>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::AdvDim1 =  ddc::type_seq_element_t&lt;0, VectorIndexSetAdvectionDims&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvDim1</name>
+        <qualifiedname>ElementwiseSplinePolarFootFinder::AdvDim1</qualifiedname>
+        <briefdescription>
+<para>The first dimension of the advection field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classElementwiseSplinePolarFootFinder_1a2f02ea2d3bc1e19fad9eda453e845960" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 1, VectorIndexSetAdvectionDims &gt;</type>
+        <definition>using ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::AdvDim2 =  ddc::type_seq_element_t&lt;1, VectorIndexSetAdvectionDims&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvDim2</name>
+        <qualifiedname>ElementwiseSplinePolarFootFinder::AdvDim2</qualifiedname>
+        <briefdescription>
+<para>The second dimension of the advection field. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-attrib">
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a0092e44836eb38149bfd4d4e6b8acd88" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a50806a77bc85076ad3d1decb1ff201a5" prot="private" static="no" mutable="no">
         <type>SplineRThetaEvaluatorAdvection</type>
-        <definition>SplineRThetaEvaluatorAdvection ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_evaluator_advection_field</definition>
+        <definition>SplineRThetaEvaluatorAdvection ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_evaluator_advection_field</definition>
         <argsstring></argsstring>
         <name>m_evaluator_advection_field</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_evaluator_advection_field</qualifiedname>
@@ -165,11 +233,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="93" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="93" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="86" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="86" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1aa4ee1b7d812e8c5eeb935578b52ebc57" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a62fecedfba936a7088d9e52193972676" prot="private" static="no" mutable="no">
         <type>PseudoPhysicalToAdvectionMapping</type>
-        <definition>PseudoPhysicalToAdvectionMapping ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_pseudo_physical_to_advection</definition>
+        <definition>PseudoPhysicalToAdvectionMapping ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_pseudo_physical_to_advection</definition>
         <argsstring></argsstring>
         <name>m_pseudo_physical_to_advection</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_pseudo_physical_to_advection</qualifiedname>
@@ -179,11 +247,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="95" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="95" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="88" column="38" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="88" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a7e84ac326b5800dfd523a0cd2d891cb3" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a2130ce062af851a8970fdd8598ab1f52" prot="private" static="no" mutable="no">
         <type>PseudoPhysicalToLogicalMapping</type>
-        <definition>PseudoPhysicalToLogicalMapping ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_pseudo_physical_to_logical</definition>
+        <definition>PseudoPhysicalToLogicalMapping ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_pseudo_physical_to_logical</definition>
         <argsstring></argsstring>
         <name>m_pseudo_physical_to_logical</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_pseudo_physical_to_logical</qualifiedname>
@@ -193,11 +261,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="96" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="96" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="89" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="89" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a69217878e9abb0ca4f257bfc473dc604" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1aa5ed3d96c5cb7e7fb367e450ada01792" prot="private" static="no" mutable="no">
         <type>LogicalToPseudoPhysicalMapping</type>
-        <definition>LogicalToPseudoPhysicalMapping ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_logical_to_pseudo_physical</definition>
+        <definition>LogicalToPseudoPhysicalMapping ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_logical_to_pseudo_physical</definition>
         <argsstring></argsstring>
         <name>m_logical_to_pseudo_physical</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_logical_to_pseudo_physical</qualifiedname>
@@ -207,11 +275,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="97" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="97" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="90" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="90" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a373397db8b80de82ddfad0f484930103" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1aeafb9d346f112af6a7dc078a919b3629" prot="private" static="no" mutable="no">
         <type>TimeStepper</type>
-        <definition>TimeStepper ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_time_stepper</definition>
+        <definition>TimeStepper ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_time_stepper</definition>
         <argsstring></argsstring>
         <name>m_time_stepper</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_time_stepper</qualifiedname>
@@ -221,11 +289,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="99" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="99" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="92" column="17" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="92" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a8bd617b12984d41e64512033d955621f" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a1fb424acf4046be410a231e3b396e6c2" prot="private" static="no" mutable="no">
         <type>AdvecCoefField</type>
-        <definition>AdvecCoefField ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_advection_field_coefs</definition>
+        <definition>AdvecCoefField ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_advection_field_coefs</definition>
         <argsstring></argsstring>
         <name>m_advection_field_coefs</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_advection_field_coefs</qualifiedname>
@@ -235,11 +303,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="101" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="101" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="94" column="20" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="94" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1ad012fd7a84b1211d6b8529c36f3719d4" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1aa714b8e6b420735a4358709b3cf1cfda" prot="private" static="no" mutable="no">
         <type>Coord&lt; X_pc, Y_pc &gt;</type>
-        <definition>Coord&lt;X_pc, Y_pc&gt; ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_coord_centre</definition>
+        <definition>Coord&lt;X_pc, Y_pc&gt; ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_coord_centre</definition>
         <argsstring></argsstring>
         <name>m_coord_centre</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_coord_centre</qualifiedname>
@@ -249,11 +317,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="102" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="102" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="95" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="95" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a3b453fba4d6b7b66f01c6a2f9b7ab541" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a7dcc67444929b4d55125757ea90385f9" prot="private" static="no" mutable="no">
         <type>IdxRange&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
-        <definition>IdxRange&lt;GridTheta&gt; ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_idx_range_theta</definition>
+        <definition>IdxRange&lt;GridTheta&gt; ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_idx_range_theta</definition>
         <argsstring></argsstring>
         <name>m_idx_range_theta</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_idx_range_theta</qualifiedname>
@@ -263,11 +331,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="103" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="103" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="96" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="96" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a1174299ee16b9a12edd085322083eee4" prot="private" static="no" mutable="no">
+      <memberdef kind="variable" id="classElementwiseSplinePolarFootFinder_1a6f1c78c520c828b9ff379217c812963b" prot="private" static="no" mutable="no">
         <type>double</type>
-        <definition>double ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_dt</definition>
+        <definition>double ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::m_dt</definition>
         <argsstring></argsstring>
         <name>m_dt</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::m_dt</qualifiedname>
@@ -277,13 +345,13 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="104" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="104" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="97" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="97" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classElementwiseSplinePolarFootFinder_1a739e35c9fb781533f806be157daece7c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classElementwiseSplinePolarFootFinder_1a66d9c1a20de8ca14ac08ab5018590a30" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
-        <definition>ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::ElementwiseSplinePolarFootFinder</definition>
+        <definition>ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::ElementwiseSplinePolarFootFinder</definition>
         <argsstring>(SplineRThetaEvaluatorAdvection const &amp;evaluator_advection_field, PseudoPhysicalToAdvectionMapping const &amp;pseudo_physical_to_advection, PseudoPhysicalToLogicalMapping const &amp;pseudo_physical_to_logical, LogicalToPseudoPhysicalMapping const &amp;logical_to_pseudo_physical, TimeStepper const &amp;time_stepper, AdvecCoefField const &amp;advection_field_coefs, Coord&lt; X_pc, Y_pc &gt; coord_centre, IdxRange&lt; GridTheta &gt; idx_range_theta, double dt)</argsstring>
         <name>ElementwiseSplinePolarFootFinder</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::ElementwiseSplinePolarFootFinder</qualifiedname>
@@ -404,11 +472,11 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="131" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="131" bodyend="150"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="124" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="124" bodyend="143"/>
       </memberdef>
-      <memberdef kind="function" id="classElementwiseSplinePolarFootFinder_1a39c1f740274fd0efd99e1b88d5176bb9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classElementwiseSplinePolarFootFinder_1a8c23d127bda3ae273fc3b86c4bb3a9bc" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_FUNCTION CoordRTheta</type>
-        <definition>KOKKOS_FUNCTION CoordRTheta ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::operator()</definition>
+        <definition>KOKKOS_FUNCTION CoordRTheta ElementwiseSplinePolarFootFinder&lt; GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefField, TimeStepper &gt;::operator()</definition>
         <argsstring>(IdxOperator const idx) const</argsstring>
         <name>operator()</name>
         <qualifiedname>ElementwiseSplinePolarFootFinder::operator()</qualifiedname>
@@ -420,23 +488,23 @@
 <para>Find the foot of the characteristic at a single grid index. </para>
         </briefdescription>
         <detaileddescription>
-<para>Solves the characteristic equation over <formula id="20">$ dt $</formula> using the stored time stepper and returns the resulting <formula id="21">$ (r, \theta) $</formula> coordinate.</para>
+<para>Solves the characteristic equation over <formula id="23">$ dt $</formula> using the stored time stepper and returns the resulting <formula id="19">$ (r, \theta) $</formula> coordinate.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="in">idx</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The operator index, encoding both batch and <formula id="21">$ (r, \theta) $</formula> indices.</para>
+<para>The operator index, encoding both batch and <formula id="19">$ (r, \theta) $</formula> indices.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="return"><para>The <formula id="21">$ (r, \theta) $</formula> coordinate of the characteristic foot. </para>
+<simplesect kind="return"><para>The <formula id="19">$ (r, \theta) $</formula> coordinate of the characteristic foot. </para>
 </simplesect>
 </para>
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="163" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="163" bodyend="211"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="156" column="33" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="156" bodyend="204"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -462,54 +530,6 @@
 </parameternamelist>
 <parameterdescription>
 <para>The discrete poloidal dimension. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>X_pc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The first axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>Y_pc</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The second axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>AdvDim1</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The first dimension of the advection field. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername>AdvDim2</parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The second dimension of the advection field. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The B-spline basis in the radial direction. </para>
-</parameterdescription>
-</parameteritem>
-<parameteritem>
-<parameternamelist>
-<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
-</parameternamelist>
-<parameterdescription>
-<para>The B-spline basis in the poloidal direction. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -575,26 +595,32 @@
 </simplesect>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="80" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="81" bodyend="212"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" line="62" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/spline_polar_foot_finder.hpp" bodystart="63" bodyend="205"/>
     <listofallmembers>
-      <member refid="classElementwiseSplinePolarFootFinder_1a9f9b7bf9cc3ce3e81f2415b54c3b9a91" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>CoordRTheta</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a739e35c9fb781533f806be157daece7c" prot="public" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>ElementwiseSplinePolarFootFinder</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1ad1917a3804d945eee1bd644d32109136" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>IdxBatch</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1acd9686b6af3a09a998c150a02bea9d8a" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>IdxOperator</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1adf7798393c9706511e5a53e3818e18e0" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>IdxRangeBatch</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a8c1221028a67142e5797bb8fec7ba8fb" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>IdxRTheta</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a8bd617b12984d41e64512033d955621f" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_advection_field_coefs</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1ad012fd7a84b1211d6b8529c36f3719d4" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_coord_centre</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a1174299ee16b9a12edd085322083eee4" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_dt</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a0092e44836eb38149bfd4d4e6b8acd88" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_evaluator_advection_field</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a3b453fba4d6b7b66f01c6a2f9b7ab541" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_idx_range_theta</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a69217878e9abb0ca4f257bfc473dc604" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_logical_to_pseudo_physical</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1aa4ee1b7d812e8c5eeb935578b52ebc57" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_pseudo_physical_to_advection</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a7e84ac326b5800dfd523a0cd2d891cb3" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_pseudo_physical_to_logical</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a373397db8b80de82ddfad0f484930103" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_time_stepper</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a39c1f740274fd0efd99e1b88d5176bb9" prot="public" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>operator()</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1acff6a3a6c8edaaaddd9879d4cc27dcc2" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>R</name></member>
-      <member refid="classElementwiseSplinePolarFootFinder_1a76707d42cf3dc43986184900ec55ac80" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>Theta</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1af2d284cc777897d09a0bd8cb67641b23" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>AdvDim1</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a2f02ea2d3bc1e19fad9eda453e845960" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>AdvDim2</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a4e12af90082843e956d973f0ec5ee080" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>BSplinesR</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a2ab1d959455cdd1c3f0631005368089a" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>CoordRTheta</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a66d9c1a20de8ca14ac08ab5018590a30" prot="public" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>ElementwiseSplinePolarFootFinder</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a0d6d4c0435808a98f8e348ddb93fc590" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>IdxBatch</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a434229f3c4eaa7c96e1b7e09ea0a41bc" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>IdxOperator</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a65ecd84a7951fb475941d897eff871ec" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>IdxRangeBatch</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a42bcb41931bde06ec5ce409c5e2774c8" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>IdxRTheta</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a1fb424acf4046be410a231e3b396e6c2" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_advection_field_coefs</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1aa714b8e6b420735a4358709b3cf1cfda" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_coord_centre</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a6f1c78c520c828b9ff379217c812963b" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_dt</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a50806a77bc85076ad3d1decb1ff201a5" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_evaluator_advection_field</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a7dcc67444929b4d55125757ea90385f9" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_idx_range_theta</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1aa5ed3d96c5cb7e7fb367e450ada01792" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_logical_to_pseudo_physical</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a62fecedfba936a7088d9e52193972676" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_pseudo_physical_to_advection</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a2130ce062af851a8970fdd8598ab1f52" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_pseudo_physical_to_logical</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1aeafb9d346f112af6a7dc078a919b3629" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>m_time_stepper</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a8c23d127bda3ae273fc3b86c4bb3a9bc" prot="public" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>operator()</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a102be4f076bafdecb20e32ccee52429c" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>R</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a34e0981b2c029d791f2df6df26d1b20d" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>Theta</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a11cf84fdeae4a0ece419e44bc710228b" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>VectorIndexSetAdvectionDims</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a9b541cf6b31dc0899fa5e1943241e277" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>X_pc</name></member>
+      <member refid="classElementwiseSplinePolarFootFinder_1a2977e7079c1612c296173bb10cf8d58f" prot="private" virt="non-virtual"><scope>ElementwiseSplinePolarFootFinder</scope><name>Y_pc</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

@@ -885,10 +885,10 @@
 <para>Evaluates an ND Lagrange polynomial via a tensor product of 1D evaluations. </para>
     </briefdescription>
     <detaileddescription>
-<para>The ND Lagrange polynomial is defined as:  <formula id="318">\[
+<para>The ND Lagrange polynomial is defined as:  <formula id="320">\[
   L(x_1, \ldots, x_N)
   = \sum_{i_1=0}^{d_1}\dots\sum_{i_N=0}^{d_N} \prod_{j=1}^N f(x_1, \ldots, x_N) l_{j,i_j}(x_j)
-\]</formula> The evaluation is recursive:  <formula id="319">\[
+\]</formula> The evaluation is recursive:  <formula id="321">\[
   L(x_1, \ldots, x_N)
   = \sum_{i_1=0}^{d_1} l_{1,i_1}(x_1) L(x_2, \dots, x_N)
 \]</formula></para>

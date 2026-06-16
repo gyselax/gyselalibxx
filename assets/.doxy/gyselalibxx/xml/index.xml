@@ -165,12 +165,12 @@
     <member refid="classBslAdvectionVelocity_1ad9a616f1bd1c3dfa1c4729b2d89eb071" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslExplicitPredCorrRTheta" kind="class"><name>BslExplicitPredCorrRTheta</name>
-    <member refid="classBslExplicitPredCorrRTheta_1ae2047ab9a7e23da893196f20ba5fc1d6" kind="typedef"><name>SplinePolarFootFinderType</name></member>
-    <member refid="classBslExplicitPredCorrRTheta_1a033835e0e9a089df2c7e250b152d8714" kind="typedef"><name>BslAdvectionRTheta</name></member>
+    <member refid="classBslExplicitPredCorrRTheta_1a44df6a9beedb0c9e737300124e87f87a" kind="typedef"><name>PolarFootFinderType</name></member>
+    <member refid="classBslExplicitPredCorrRTheta_1a51fbc46b3ccf667f0acb319cc0dbe9cd" kind="typedef"><name>BslAdvectionRTheta</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1ad9d4993fc3d82a76146b2c7ff5b0be36" kind="variable"><name>m_logical_to_physical</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1ab5910276baa7ff34c57d8fb08d5d69b7" kind="variable"><name>m_advection_solver</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1a2916a502be42b78036997bb45f04a841" kind="variable"><name>m_euler</name></member>
-    <member refid="classBslExplicitPredCorrRTheta_1a0ed5927e6da3fdb5c33af427991ac0ac" kind="variable"><name>m_find_feet_method</name></member>
+    <member refid="classBslExplicitPredCorrRTheta_1a5e6134e6961864b86328882150d40901" kind="variable"><name>m_find_feet_method</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1ad90f9097034ef08d36f8900b9f262ccb" kind="variable"><name>m_poisson_solver</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1a85e8759690e708bd5e1c01a7214d2ace" kind="variable"><name>m_builder</name></member>
     <member refid="classBslExplicitPredCorrRTheta_1aa898cc28d26fd90678280aea630b552d" kind="variable"><name>m_evaluator</name></member>
@@ -178,18 +178,18 @@
     <member refid="classBslExplicitPredCorrRTheta_1aa73ad33bc9838ee3bca8d46a3cbf1bb3" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslImplicitPredCorrRTheta" kind="class"><name>BslImplicitPredCorrRTheta</name>
-    <member refid="classBslImplicitPredCorrRTheta_1af76dff08dacc85402df09dfcc2e2a093" kind="typedef"><name>SplinePolarFootFinderType</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a59cf70a6e23f033e78ec07ae8eb8084f" kind="typedef"><name>BslAdvectionRTheta</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a689d5a37db30fc15d82dd018ccb8941c" kind="variable"><name>m_logical_to_physical</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a6ef4321c4851a9541e1006248011fc2b" kind="variable"><name>m_advection_solver</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a07ad04d62abb7f0795c1f969330d1e35" kind="variable"><name>m_euler</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a0850200e5aed7f309ec014c2cff06084" kind="variable"><name>m_foot_finder</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1af7e23e1ecea23f854a3c7db665a80f8a" kind="variable"><name>m_poisson_solver</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a86ac5ad01e3266827f125e9a18a120dc" kind="variable"><name>m_builder</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a0464f8e161d821382b030418b55b46fa" kind="variable"><name>m_evaluator</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a4b5d13ca2f0de244dd9ccc19723f6911" kind="function"><name>BslImplicitPredCorrRTheta</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1a46ef9663688c541ff473a4953c9e1eda" kind="function"><name>operator()</name></member>
-    <member refid="classBslImplicitPredCorrRTheta_1ab825d073ead34efca83fbe7165a5fc6f" kind="function"><name>implicit_loop</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a908dca5260ff2a4c7a67c6e8abfb6d90" kind="typedef"><name>PolarFootFinderType</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1afb6d3ccb794079265b443dabedaf50d9" kind="typedef"><name>BslAdvectionRTheta</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a1f9eb428e3e9bdd90188eb7e23441189" kind="variable"><name>m_logical_to_physical</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1addb9ab68221822d24ddfbd8e5c747dcb" kind="variable"><name>m_advection_solver</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a1b428eec914b38641ceabfa37665f397" kind="variable"><name>m_euler</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1afffd6d4d1390bf345eb7cd55f21cf3d1" kind="variable"><name>m_foot_finder</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a3fcb6ad03e0ce8d08a10506fc48fb9ec" kind="variable"><name>m_poisson_solver</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a8fdd2431616479a7a73b333eb8abdcd2" kind="variable"><name>m_builder</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1aa72681186baf4a2f0300971e81c92622" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1ad18cf838f8267a9e6e1620ebdab001b4" kind="function"><name>BslImplicitPredCorrRTheta</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a2fb82291cc9d9f6ef59b8f8644ec96ab" kind="function"><name>operator()</name></member>
+    <member refid="classBslImplicitPredCorrRTheta_1a29ba9f8e38c0b141457bdd8a3dd4e7f5" kind="function"><name>implicit_loop</name></member>
   </compound>
   <compound refid="classBslPredCorrRTheta" kind="class"><name>BslPredCorrRTheta</name>
     <member refid="classBslPredCorrRTheta_1a9c21dd1d1e03ebbf8811cbe8cde6d37a" kind="typedef"><name>BslAdvectionRTheta</name></member>
@@ -918,45 +918,229 @@
     <member refid="classEdgeTransformation_1a7e6652f22cea94a7db8afea03ee7fef7" kind="function"><name>get_mid</name></member>
     <member refid="classEdgeTransformation_1a74f683e93642ada4263db04cd877f36d" kind="function"><name>get_target_idx</name></member>
   </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwiseChoice" kind="class"><name>polar_foot_finder_details::ElementwiseChoice</name>
+  </compound>
+  <compound refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1LOGICAL_00_01Adv740065543af7658e7ff9fc9e64d77611" kind="struct"><name>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::LOGICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</name>
+    <member refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1LOGICAL_00_01Adv740065543af7658e7ff9fc9e64d77611_1a9bc9884b568ada8f1ec8d4a263b846ad" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ad3551d0dba544ea9678328f5e046fdf7c" kind="struct"><name>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</name>
+    <member refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ad3551d0dba544ea9678328f5e046fdf7c_1a9c88e299913ad8ea6c3a37168e1173d4" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ade857839a3fb92baaf6bd919a12083d58" kind="struct"><name>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</name>
+    <member refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ade857839a3fb92baaf6bd919a12083d58_1af907f413b6d7553e62474d623a5c57d1" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PSEUDO__PHYSICAL9dd916595d37c4cd6c60dc439602516d" kind="struct"><name>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</name>
+    <member refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PSEUDO__PHYSICAL9dd916595d37c4cd6c60dc439602516d_1a680a576b883312a715cb85c189154dca" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PSEUDO__PHYSICAL0e03af03e715868452e393a1a59b4674" kind="struct"><name>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</name>
+    <member refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PSEUDO__PHYSICAL0e03af03e715868452e393a1a59b4674_1abb823b506e511f3bd215a55240fec780" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder" kind="class"><name>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinder</name>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1a9ae8b584a3710782622bb6479a9e3973" kind="typedef"><name>R</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1aeed27fafce8c6eb3fa76296c7bda428b" kind="typedef"><name>Theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1adc9090c790f0df874ba0912217b669cb" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1a366ab6915250c594a4c779c1210b7005" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1ae1025e24df8690be229aefb3ea34e359" kind="typedef"><name>IdxOperator</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1a91258d976c25cca153925f5520a16337" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1aa068b8a5e5539a8e5b5916ec5615f820" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1a3eaa04fac1b3f6dca3918f9f4c04b964" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1ab87e488e8621248cf31fc24c0d9bf9bd" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1a2ca7df4674f26e68dedc38705f3181ba" kind="variable"><name>m_advection_field_coefs</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1a063fb5d56d94a60de20ce5c740166bfe" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1afbd3cd18fb8c4416833db7ec9d8cd1b5" kind="variable"><name>m_dt</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1a854caccd745c03c5fe95ea7abd2709ff" kind="function"><name>ElementwiseLogicalAdvLogicalFootFinder</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder_1a2d57bade830d7d47a3a4015a42507416" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem" kind="class"><name>polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</name>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a66741c511b7c7f24e9d8400b511b43c2" kind="typedef"><name>R</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a50b6cf57feeec91e3dcfe5052a6c64ff" kind="typedef"><name>Theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a0f3b12af2025094c586e56c613037704" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ab73ddc2580d91898622adf1a07e61867" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a9d17fe72e1afb08f856c11969f1b174c" kind="typedef"><name>GPUCompat</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ab394700c2fba6dceb894313f43dcd761" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a96856837d8a412eb8d181c5477393935" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a502d07f16c795972c9d86120ddd409cb" kind="variable"><name>m_advection_field_coefs_alloc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1ac73d76286e4b987b84e325a150b3b6ba" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1a7955aec6f68444254d4196067b5ae910" kind="function"><name>ElementwiseLogicalAdvLogicalFootFinderMem</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem_1abfc67fb7e56b6ca52ea2f3ee42fde8f6" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder" kind="class"><name>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</name>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a56ea19d2d2e80459a2dc95ab480858fa" kind="typedef"><name>PseudoPhysicalToLogicalMapping</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a02dcb91df39a3fb0143b9aeeb712f9f3" kind="typedef"><name>R</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a794de43f6b8cb316dc43af0723b07f56" kind="typedef"><name>Theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a02659782cc25c4e85e724f4d44c86e9f" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1aa967c47b7018e58b0a927bab9411a95d" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a1024a27cd9d37fd4e5686ceb07fa5c53" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a304b69fcf09c23091feeb45eedaab9c4" kind="typedef"><name>IdxOperator</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a6cecfa0bb8e7c20380436275efdabb19" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1af60172a862fb0669aeab744dff74b80e" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1abaf4628acc5815e7487d96c6b170ebd2" kind="typedef"><name>X_pc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a12355536b2206f9f6a0d0ad20ca9bf43" kind="typedef"><name>Y_pc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a0711e2c5a28efcb57142278248bbe46c" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a6c1fdbd7b5a0a161fb0890626ae77027" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a905a21db8028a1e81c1015348d52d6c0" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1ab0786bd6d960b1e8ac01abaedf259069" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1abac20e684226055b1d62f0922538b9ad" kind="variable"><name>m_advection_field_coefs</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a1cf304dca78ec576ac822a8be68ece7f" kind="variable"><name>m_coord_centre</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a593bb054792b3b96f406a904124bc57b" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a48e2307d38a4641f82f2ef29f74d067f" kind="variable"><name>m_dt</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1a7c3faf0853fdf5f7418a23cf6ba74b34" kind="function"><name>ElementwiseLogicalAdvPseudoPhysFootFinder</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder_1ab9a750e4551a868cf91620d7f83a9766" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem" kind="class"><name>polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem</name>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a04b47437e1cf05a7e5f91d168f4d6bea" kind="typedef"><name>R</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1ae99bad49f0534a74689df161967724c8" kind="typedef"><name>Theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a5ddcc6c9a073870b5263b6e50ba72281" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a065ca7c21381a59f7b0bae440cf77b43" kind="typedef"><name>PseudoPhysicalToLogicalMapping</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a1d718ef45c372e2f9879ae4e513e03ec" kind="typedef"><name>X_pc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a3d66cee4cdf7babda2bdcc73907c964f" kind="typedef"><name>Y_pc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1ad2754724deba345e8b0c0f5f09db46b3" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1ae6c51e7da1eb90c3f40f26352d9d0502" kind="typedef"><name>GPUCompat</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a0a5d2b4a96814842b7b9a068717c1315" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a82ed11272c60d3f3b3692cb8b3c428cf" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1ac7dd473060445d79257e56be279f8c57" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a280e45b2c847b6b4d249d9f303cb5d29" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1ac1cd3587ee7eb16201b24e6eb6a1f123" kind="variable"><name>m_advection_field_coefs_alloc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a6c7ee9f5af7eb532dfa30bcc1131960e" kind="variable"><name>m_coord_centre</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a64e991cdd23487ebd5335d5b6fe06b7b" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a4cb1a46fa0fa35e2a20b3139835f61fb" kind="function"><name>ElementwiseLogicalAdvPseudoPhysFootFinderMem</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a4cb1a46fa0fa35e2a20b3139835f61fb" kind="function"><name>ElementwiseLogicalAdvPseudoPhysFootFinderMem</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem_1a41c283f0ebc29411d1884978fbf6ceb7" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder" kind="class"><name>polar_foot_finder_details::ElementwisePhysicalAdvPhysicalFootFinder</name>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a576bc57e6a2be4880dc11ac6081504ed" kind="typedef"><name>R</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a5a970a6863c123da7bdfb6386ef8c75a" kind="typedef"><name>Theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1aa9d7689393d8b2457d8d2bfd084b34a7" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1acb3a354394d04b3107491275523395ef" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a627d0ce82f7e8ea5fb44d0b386442b05" kind="typedef"><name>IdxOperator</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a868f88f5272ce62cbd254b5a24c1add6" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1afe6bd32d70a74583ea36821781edfc1e" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a9e058b0325090bc837092436d6fb539b" kind="typedef"><name>PhysicalToLogicalMapping</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1aa5ccfb58d5b8a050825fe3ff721e5925" kind="typedef"><name>VectorIndexSetAdvectionDims</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1ac87c42e00afded22ddbffd3f3ac3f06b" kind="typedef"><name>AdvDim1</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1ac7dc08ec1526be87cf082738b3f6f6a0" kind="typedef"><name>AdvDim2</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a1f3458c16d1b8524e65a3ee18528ba4d" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a6de7d715bd988c5dae4cd4409eea5706" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a54973399d5a47ff9c62877cdb7cebce9" kind="variable"><name>m_logical_to_physical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a74e9c4edd4df493d1c7213cf58a7921f" kind="variable"><name>m_physical_to_logical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a02eb42e1913f6fa5b5c8d1b8b7d53a3c" kind="variable"><name>m_advection_field_coefs</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a3296feb3e4ea9b99b89b289831d0efe4" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a3fd5938831a692a0ffdad3ebe1970f7d" kind="variable"><name>m_coord_centre</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1adb5f9f6c2ef18e77f974c46a2369c401" kind="variable"><name>m_dt</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1a9df2c46697c7f37bd0a1214bdebfdd4b" kind="function"><name>ElementwisePhysicalAdvPhysicalFootFinder</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder_1aa6340267ddc8067b0ab446cfe7067299" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem" kind="class"><name>polar_foot_finder_details::ElementwisePhysicalAdvPhysicalFootFinderMem</name>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a3cc908d9c5decff101d0906e388bf7f4" kind="typedef"><name>R</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1ad201db9b3dd66a9e54bc3737dfd4e67b" kind="typedef"><name>Theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a17d5146c8f751b13ca69cd954a17f5ed" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a9fcc784c0f8473b1326807091a999fbd" kind="typedef"><name>VectorIndexSetAdvectionDims</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1ad527086d6c26ae9e1a717eda90b3b63f" kind="typedef"><name>AdvDim1</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a78700892a5692cada60b3313cae9550f" kind="typedef"><name>AdvDim2</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a75c205660c091c3f8d4037c9b2fa5290" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1af5c48a6d54210d57def30e1bf0e5775e" kind="typedef"><name>GPUCompat</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a09eabfa4f04b3a38b93f1ab4168847a2" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a540de5f3c064318af52a253e397f50e1" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a4b3cfe36625be28cb641906fba78a4a4" kind="variable"><name>m_logical_to_physical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a21e3d9cb801606e97098d96cacd2e0a8" kind="variable"><name>m_advection_field_coefs_alloc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a989d04fd5129a1cd2bda1ee7fb300e85" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1aad2b96cb5204a1f6b69a3c58fb345803" kind="variable"><name>m_coord_centre</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1af3a266316d09669a70ef9e78788481db" kind="function"><name>ElementwisePhysicalAdvPhysicalFootFinderMem</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem_1a84009e9d7137439dffb4f3b352346567" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder" kind="class"><name>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</name>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ade452015c3d2feb463da2812d720abbd" kind="typedef"><name>R</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a2066028942fff8c3e2e1f17e7f83c453" kind="typedef"><name>Theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a7282a77535661812f6b4d445cceb2967" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ac552edb5cda1fbc008cc7299bed0991b" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a1e35063af50711afd607f8b689c30cc2" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a569a553b9e0702a7a900693b75c8e2b7" kind="typedef"><name>IdxOperator</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a3b66b5a13edf0858304b737c93835587" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a8d1aeeac3f4ab95dd9082096bc868162" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ac01b3b3b995e829d34898b41664ffd18" kind="typedef"><name>X_pc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1aea886a9303157a80f51c3d54c73fa419" kind="typedef"><name>Y_pc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a5165d61b4feae8897ae36af1e57ca3fb" kind="typedef"><name>VectorIndexSetAdvectionDims</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ab04f3ca9783ea255384ca4f35987d6fc" kind="typedef"><name>AdvDim1</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1aa4029f4d2d7cfab650980c975acd23c8" kind="typedef"><name>AdvDim2</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ae9d084e0ad769989eabf69dffa06af21" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a2715558c788a55778d532c87909a405d" kind="variable"><name>m_pseudo_physical_to_advection</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a4a0a1fc21303c87ee4bdf39a1bfb9c3e" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a0be3905c08f88b532bd92894db4254b7" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a59865e006558442c86b2ba4e22111c1c" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a9c4bd97261b6203e1f313c8d19279ae0" kind="variable"><name>m_advection_field_coefs</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a555dcf455f2b63e052e2ae35a8e11d6f" kind="variable"><name>m_coord_centre</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ac138e50b8ad17e425197484d270a521b" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ad3b6fe799a802e9f80b7a63b6fc7dc18" kind="variable"><name>m_dt</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1a0a001fb3bfadb5eb7335ded98f20a8e6" kind="function"><name>ElementwisePhysicalAdvPseudoPhysicalFootFinder</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder_1ae0edadd538a873a24ec97025ed4e46a9" kind="function"><name>operator()</name></member>
+  </compound>
+  <compound refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem" kind="class"><name>polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinderMem</name>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1afc0ef18bf664c70fe197ab255905c239" kind="typedef"><name>R</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a7a22a7c4e3c0fa777fc6ff3a29b55f49" kind="typedef"><name>Theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a79474d389ffc4ff3134dbb510124f8c5" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1aa1e6d862a0309f511647b19c34b33c9e" kind="typedef"><name>LogicalToPseudoPhysicalMapping</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a4d25b4aa2ce39bcf15dbbc7aebd1f578" kind="typedef"><name>PseudoPhysicalToLogicalMapping</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a3b1a7cc2f21fc50fff02604d59d6a19b" kind="typedef"><name>PseudoPhysicalToAdvectionMapping</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a189201f35ac40f4c9d87c90a0cca070a" kind="typedef"><name>TimeStepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1abce78bfebe8bd032879765c3b1175cea" kind="typedef"><name>GPUCompat</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a895d66acf786e4ef48af646f2e0959a2" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a07aea192f49d2abbde29a4c97953265e" kind="variable"><name>m_pseudo_physical_to_advection</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1aca1dfa235d08b4f79b420885de9d27b3" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a53a0da338a07ad5b8e4f82a164a5ff0b" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1af6b0f7e2e4e0e37d71ab1c9c712f3bdc" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a68dda718872f182458a418de6b4843c9" kind="variable"><name>m_advection_field_coefs_alloc</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a5cb2684ba045c933160ae40864ac0957" kind="variable"><name>m_coord_centre</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a2545b7e4e7c3339dd2a87754223b813a" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1a44f8ce8f2c3d1b886d3abb554f8408e5" kind="function"><name>ElementwisePhysicalAdvPseudoPhysicalFootFinderMem</name></member>
+    <member refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem_1ab9e56fba9b6d509cbb415eaf4cad2239" kind="function"><name>operator()</name></member>
+  </compound>
   <compound refid="classElementwiseSplinePolarFootFinder" kind="class"><name>ElementwiseSplinePolarFootFinder</name>
-    <member refid="classElementwiseSplinePolarFootFinder_1acff6a3a6c8edaaaddd9879d4cc27dcc2" kind="typedef"><name>R</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a76707d42cf3dc43986184900ec55ac80" kind="typedef"><name>Theta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a8c1221028a67142e5797bb8fec7ba8fb" kind="typedef"><name>IdxRTheta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1adf7798393c9706511e5a53e3818e18e0" kind="typedef"><name>IdxRangeBatch</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1acd9686b6af3a09a998c150a02bea9d8a" kind="typedef"><name>IdxOperator</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1ad1917a3804d945eee1bd644d32109136" kind="typedef"><name>IdxBatch</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a9f9b7bf9cc3ce3e81f2415b54c3b9a91" kind="typedef"><name>CoordRTheta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a0092e44836eb38149bfd4d4e6b8acd88" kind="variable"><name>m_evaluator_advection_field</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1aa4ee1b7d812e8c5eeb935578b52ebc57" kind="variable"><name>m_pseudo_physical_to_advection</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a7e84ac326b5800dfd523a0cd2d891cb3" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a69217878e9abb0ca4f257bfc473dc604" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a373397db8b80de82ddfad0f484930103" kind="variable"><name>m_time_stepper</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a8bd617b12984d41e64512033d955621f" kind="variable"><name>m_advection_field_coefs</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1ad012fd7a84b1211d6b8529c36f3719d4" kind="variable"><name>m_coord_centre</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a3b453fba4d6b7b66f01c6a2f9b7ab541" kind="variable"><name>m_idx_range_theta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a1174299ee16b9a12edd085322083eee4" kind="variable"><name>m_dt</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a739e35c9fb781533f806be157daece7c" kind="function"><name>ElementwiseSplinePolarFootFinder</name></member>
-    <member refid="classElementwiseSplinePolarFootFinder_1a39c1f740274fd0efd99e1b88d5176bb9" kind="function"><name>operator()</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a102be4f076bafdecb20e32ccee52429c" kind="typedef"><name>R</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a34e0981b2c029d791f2df6df26d1b20d" kind="typedef"><name>Theta</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a4e12af90082843e956d973f0ec5ee080" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a42bcb41931bde06ec5ce409c5e2774c8" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a65ecd84a7951fb475941d897eff871ec" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a434229f3c4eaa7c96e1b7e09ea0a41bc" kind="typedef"><name>IdxOperator</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a0d6d4c0435808a98f8e348ddb93fc590" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a2ab1d959455cdd1c3f0631005368089a" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a9b541cf6b31dc0899fa5e1943241e277" kind="typedef"><name>X_pc</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a2977e7079c1612c296173bb10cf8d58f" kind="typedef"><name>Y_pc</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a11cf84fdeae4a0ece419e44bc710228b" kind="typedef"><name>VectorIndexSetAdvectionDims</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1af2d284cc777897d09a0bd8cb67641b23" kind="typedef"><name>AdvDim1</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a2f02ea2d3bc1e19fad9eda453e845960" kind="typedef"><name>AdvDim2</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a50806a77bc85076ad3d1decb1ff201a5" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a62fecedfba936a7088d9e52193972676" kind="variable"><name>m_pseudo_physical_to_advection</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a2130ce062af851a8970fdd8598ab1f52" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1aa5ed3d96c5cb7e7fb367e450ada01792" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1aeafb9d346f112af6a7dc078a919b3629" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a1fb424acf4046be410a231e3b396e6c2" kind="variable"><name>m_advection_field_coefs</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1aa714b8e6b420735a4358709b3cf1cfda" kind="variable"><name>m_coord_centre</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a7dcc67444929b4d55125757ea90385f9" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a6f1c78c520c828b9ff379217c812963b" kind="variable"><name>m_dt</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a66d9c1a20de8ca14ac08ab5018590a30" kind="function"><name>ElementwiseSplinePolarFootFinder</name></member>
+    <member refid="classElementwiseSplinePolarFootFinder_1a8c23d127bda3ae273fc3b86c4bb3a9bc" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classElementwiseSplinePolarFootFinderMem" kind="class"><name>ElementwiseSplinePolarFootFinderMem</name>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1aeceefbd498ca0f57870e5b2310b49e2c" kind="typedef"><name>R</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1afd02b64bd82d4db1514056581526e870" kind="typedef"><name>Theta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1ae021804bdabcdfbcbfcaa8901f731428" kind="typedef"><name>IdxRTheta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a48a56674005483b91cea2cfda0f2b853" kind="typedef"><name>IdxRangeBatch</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1ae55f93e8d3367d326e651c1b27118077" kind="typedef"><name>IdxOperator</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a76155d0cc15e8e1ecfef51b9bb84df4e" kind="typedef"><name>IdxBatch</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a6d034ff3cb120b2e2d23432f714d3caf" kind="typedef"><name>CoordRTheta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a25d6cff52ab11ab3467a5a06f3f1f52e" kind="typedef"><name>GPUCompat</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a4771b7aa406def4988094380e79bd108" kind="variable"><name>m_evaluator_advection_field</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a9b7e764f7376236f9c7cef14d7bfba5a" kind="variable"><name>m_pseudo_physical_to_advection</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a6b90ce162e54ac4d4a72231245e55d75" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1ac42db208f55d1c400973e5fa5c76902c" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a067b6e69e3ca48bb116245f3bc4d1807" kind="variable"><name>m_time_stepper</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1ac4e551a7e926da412fd78206f596e219" kind="variable"><name>m_advection_field_coefs_alloc</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a7db5a824901350b62be3dfe9e2dda8a4" kind="variable"><name>m_coord_centre</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a2891546af9d8d9b645716afe393a1a79" kind="variable"><name>m_idx_range_theta</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1aacd0f7fc9480db247bbd82ce93dfa6cc" kind="function"><name>ElementwiseSplinePolarFootFinderMem</name></member>
-    <member refid="classElementwiseSplinePolarFootFinderMem_1a920e263f9aa041b586b01116aca03c13" kind="function"><name>operator()</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1a68ac8857749574a6b88b72dfec3f096f" kind="typedef"><name>R</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1aa06352675ef5146a850452cd17f4bae1" kind="typedef"><name>Theta</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1a74fe194cf59d49d214b98964d63f1475" kind="typedef"><name>X_pc</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1ac7caf6d3419d08166869e22756d7d0c8" kind="typedef"><name>Y_pc</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1aafd4bcb4a46d2a1046f8c1acdfd51fb5" kind="typedef"><name>IdxRTheta</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1a9beda70c353ecc368d741067514f8e96" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1aae51d1e62f550ba0dd642f07b9ed8734" kind="typedef"><name>IdxOperator</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1a449be166b1ebce57364d1f9863de67b2" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1a6ea1d94f5edd217dfd191c80b290bf9d" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1a1c8edb72e328e422496f0aac353c2346" kind="typedef"><name>GPUCompat</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1a41790588f277025c5f4ad605b401bd64" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1acb4f46298f5880ad503b4711e9ced6e6" kind="variable"><name>m_pseudo_physical_to_advection</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1a8efb80e4776fa1c16fd83f0881be22b6" kind="variable"><name>m_pseudo_physical_to_logical</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1af389c65649e6ec9d27c5965a1f5173ce" kind="variable"><name>m_logical_to_pseudo_physical</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1af4f2ef29bb8335ddf837f32b7f33c0ba" kind="variable"><name>m_time_stepper</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1acac9caaa900fe0414c500ff455067565" kind="variable"><name>m_advection_field_coefs_alloc</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1ab9c2e92fe1abf79a97e506dbbf0b8305" kind="variable"><name>m_coord_centre</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1aadf4a0eea32bc5ff295e7cdd17ff1eb6" kind="variable"><name>m_idx_range_theta</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1ab760dcee962f214a77b34cc7506f51ed" kind="function"><name>ElementwiseSplinePolarFootFinderMem</name></member>
+    <member refid="classElementwiseSplinePolarFootFinderMem_1aab2a483887d180c0d70629e7a8b9df65" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="structconnectivity__details_1_1EnforceFirstInterfaceEdge" kind="struct"><name>connectivity_details::EnforceFirstInterfaceEdge</name>
   </compound>
@@ -2501,6 +2685,48 @@
   </compound>
   <compound refid="structPolarBSplinesRTheta" kind="struct"><name>PolarBSplinesRTheta</name>
   </compound>
+  <compound refid="classPolarFootFinder" kind="class"><name>PolarFootFinder</name>
+    <member refid="classPolarFootFinder_1aa045a61d68bdd54abd6ff616379a2eed" kind="typedef"><name>R</name></member>
+    <member refid="classPolarFootFinder_1a6c33e77ecfcd4ab7952f4fd0cc232694" kind="typedef"><name>Theta</name></member>
+    <member refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kind="typedef"><name>memory_space</name></member>
+    <member refid="classPolarFootFinder_1a8d091db9ec4de3f95464285610809f2c" kind="typedef"><name>ExecSpace</name></member>
+    <member refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kind="typedef"><name>ElementwiseOperator</name></member>
+    <member refid="classPolarFootFinder_1a32467c2110b8100ab4eee112c272aef2" kind="typedef"><name>IdxRangeOperator</name></member>
+    <member refid="classPolarFootFinder_1aadd1705e4e6643cbd02d6655904e11ea" kind="typedef"><name>CFieldFeet</name></member>
+    <member refid="classPolarFootFinder_1aa269112d3fd1e8a52e8e7cbc4f01d8b0" kind="typedef"><name>CConstFieldFeet</name></member>
+    <member refid="classPolarFootFinder_1a9a6ec5e0f0e9d14f2a7f372d30e96d8b" kind="typedef"><name>LogicalSpace</name></member>
+    <member refid="classPolarFootFinder_1aba5241df5f1f7123ad1a901c6e709a43" kind="typedef"><name>PhysicalSpace</name></member>
+    <member refid="classPolarFootFinder_1acbb69c9edab1c3d9a3ebd2672c4183f1" kind="typedef"><name>X</name></member>
+    <member refid="classPolarFootFinder_1a49a4aea3d6da0fa5188a0037ea09ec6a" kind="typedef"><name>Y</name></member>
+    <member refid="classPolarFootFinder_1a4eb03e380fe0f508f4d32a68257d5734" kind="typedef"><name>PolarGrid</name></member>
+    <member refid="classPolarFootFinder_1a4204d4c8318432bd3ce3db275ae67e25" kind="typedef"><name>GridR</name></member>
+    <member refid="classPolarFootFinder_1a59c5baba576b85d0506f43475cb55eac" kind="typedef"><name>GridTheta</name></member>
+    <member refid="classPolarFootFinder_1ae0530535efea5dba0ff1608e09e00f46" kind="typedef"><name>AdvDim1</name></member>
+    <member refid="classPolarFootFinder_1ad46ac2f6b0652aab2893862dff877b19" kind="typedef"><name>AdvDim2</name></member>
+    <member refid="classPolarFootFinder_1aca60bed337119121dc81126e0295b0ea" kind="typedef"><name>BSplinesR</name></member>
+    <member refid="classPolarFootFinder_1a548e004ab1c828c663da98d3dd13dbb3" kind="typedef"><name>BSplinesTheta</name></member>
+    <member refid="classPolarFootFinder_1a39e57e9b08e2a984ef7f3c0aa7e14365" kind="typedef"><name>IdxRangeSplineBatched</name></member>
+    <member refid="classPolarFootFinder_1a7734f5c3b8c5f8acf82b9a4b9bc2032e" kind="typedef"><name>IdxRangeBatch</name></member>
+    <member refid="classPolarFootFinder_1aeeaeb682e1d803b862a17af5adaa6081" kind="typedef"><name>IdxRangeRTheta</name></member>
+    <member refid="classPolarFootFinder_1a7f182f4c18e15a8fe918bae899a6dce2" kind="typedef"><name>IdxRangeR</name></member>
+    <member refid="classPolarFootFinder_1ac3354cd4ce3436c93382bd6d3ca7f4f2" kind="typedef"><name>IdxRangeTheta</name></member>
+    <member refid="classPolarFootFinder_1ad784d8e34814acf6b8f2551cfd031348" kind="typedef"><name>IdxR</name></member>
+    <member refid="classPolarFootFinder_1a0e04fde0389f73876f58974340224182" kind="typedef"><name>IdxTheta</name></member>
+    <member refid="classPolarFootFinder_1a28057b83c2cd036b5c9be58cf761b230" kind="typedef"><name>IdxBatch</name></member>
+    <member refid="classPolarFootFinder_1a9370a194dce8fe972b149af8dd041dd5" kind="typedef"><name>IdxOperator</name></member>
+    <member refid="classPolarFootFinder_1add5459b4cd73982db080a37747f8dbf9" kind="typedef"><name>CoordRTheta</name></member>
+    <member refid="classPolarFootFinder_1a40666155d8d6f67c9dfe1672e64f7e07" kind="typedef"><name>AdvecCoefField</name></member>
+    <member refid="classPolarFootFinder_1a64cc9be5274a4d38a0e6f84566705651" kind="variable"><name>m_time_stepper_builder</name></member>
+    <member refid="classPolarFootFinder_1a6b7956ead5ac0fcea2d31e3a5c51a66e" kind="variable"><name>m_logical_to_physical</name></member>
+    <member refid="classPolarFootFinder_1ae993acf817480fcd73680aae03e66af1" kind="variable"><name>m_builder_advection_field</name></member>
+    <member refid="classPolarFootFinder_1a44e621322bea4689cf96ac5c3b347a58" kind="variable"><name>m_evaluator_advection_field</name></member>
+    <member refid="classPolarFootFinder_1aed87b8f6c06404b8c066ff2e5537fd87" kind="variable"><name>m_coord_centre_pc</name></member>
+    <member refid="classPolarFootFinder_1a35f134814b07eb7f9abd525b3c50d1aa" kind="variable"><name>m_epsilon</name></member>
+    <member refid="classPolarFootFinder_1aee490f440b7837b3492f5ead0d1b234c" kind="function"><name>PolarFootFinder</name></member>
+    <member refid="classPolarFootFinder_1a5a2256ef5116cb52a6cd64b14fed2f1b" kind="function"><name>operator()</name></member>
+    <member refid="classPolarFootFinder_1ad27696bc3fa322aad6abc06e26b00c76" kind="function"><name>operator()</name></member>
+    <member refid="classPolarFootFinder_1a941fa6c2e39e06084508ed73e324eca5" kind="function"><name>build_elementwise</name></member>
+  </compound>
   <compound refid="classPolarSplineEvaluator" kind="class"><name>PolarSplineEvaluator</name>
     <member refid="classPolarSplineEvaluator_1aa25e933b4a8eddf839133cd51f871eb2" kind="typedef"><name>bsplines_type</name></member>
     <member refid="classPolarSplineEvaluator_1ab8165cae7e1fa3be087c8f6b81c08cf2" kind="typedef"><name>BSplinesR</name></member>
@@ -3001,7 +3227,7 @@
     <member refid="classSplinePolarFootFinder_1a5c95805a7ed946296977d376561395e7" kind="typedef"><name>VectorSplineCoeffsMem</name></member>
     <member refid="classSplinePolarFootFinder_1a559bd33152df071e687b71d8bfe5566a" kind="typedef"><name>AdvDim1</name></member>
     <member refid="classSplinePolarFootFinder_1a1e6a90aa8c2cfc4a620dfcaaec8b29c7" kind="typedef"><name>AdvDim2</name></member>
-    <member refid="classSplinePolarFootFinder_1a9c49c9ab11db0772200f571415c5b64f" kind="typedef"><name>ElementwiseOperator</name></member>
+    <member refid="classSplinePolarFootFinder_1a32ff55454863ef104810386a9a8bcaf8" kind="typedef"><name>ElementwiseOperator</name></member>
     <member refid="classSplinePolarFootFinder_1a583f7299c6887d40a5ec363549e89ba9" kind="typedef"><name>PseudoPhysicalToLogicalMapping</name></member>
     <member refid="classSplinePolarFootFinder_1a41cccd0c523184a0385fd810ac0bb852" kind="typedef"><name>MemSpace</name></member>
     <member refid="classSplinePolarFootFinder_1a6db8527b9cbcbf86d3c3b80c240f036f" kind="typedef"><name>X_pc</name></member>
@@ -3346,15 +3572,15 @@
   </compound>
   <compound refid="conceptis__mapping__v" kind="concept"><name>is_mapping_v</name>
   </compound>
-  <compound refid="namespace_0d228" kind="namespace"><name>@228</name>
-  </compound>
-  <compound refid="namespace_0d230" kind="namespace"><name>@230</name>
-  </compound>
-  <compound refid="namespace_0d232" kind="namespace"><name>@232</name>
+  <compound refid="namespace_0d102" kind="namespace"><name>@102</name>
   </compound>
   <compound refid="namespace_0d234" kind="namespace"><name>@234</name>
   </compound>
-  <compound refid="namespace_0d96" kind="namespace"><name>@96</name>
+  <compound refid="namespace_0d236" kind="namespace"><name>@236</name>
+  </compound>
+  <compound refid="namespace_0d238" kind="namespace"><name>@238</name>
+  </compound>
+  <compound refid="namespace_0d240" kind="namespace"><name>@240</name>
   </compound>
   <compound refid="namespacebumpontail__equilibrium" kind="namespace"><name>bumpontail_equilibrium</name>
     <member refid="bumpontailequilibrium_8hpp_1a904011943d45927909831ec61a31a6da" kind="function"><name>init_from_input</name></member>
@@ -3423,6 +3649,8 @@
   <compound refid="namespacemaxwellian__equilibrium" kind="namespace"><name>maxwellian_equilibrium</name>
     <member refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_1a0664bbc4da7127e97a1a058b72321898" kind="function"><name>init_from_input</name></member>
   </compound>
+  <compound refid="namespacepolar__foot__finder__details" kind="namespace"><name>polar_foot_finder_details</name>
+  </compound>
   <compound refid="namespacePolarSplines" kind="namespace"><name>PolarSplines</name>
     <member refid="polar__bsplines_8hpp_1a3ba12098f03119f39af5886324f72c94" kind="function"><name>integrals</name></member>
   </compound>
@@ -3459,6 +3687,26 @@
   <compound refid="iadvectionx_8hpp" kind="file"><name>iadvectionx.hpp</name>
   </compound>
   <compound refid="nulladvectionvx_8hpp" kind="file"><name>nulladvectionvx.hpp</name>
+  </compound>
+  <compound refid="polar__foot__finder_8hpp" kind="file"><name>polar_foot_finder.hpp</name>
+    <member refid="polar__foot__finder_8hpp_1a2de5d027e85573c1cc06bd4d11de55d3" kind="function"><name>make_polar_foot_finder</name></member>
+  </compound>
+  <compound refid="elementwise__choice_8hpp" kind="file"><name>elementwise_choice.hpp</name>
+    <member refid="elementwise__choice_8hpp_1a068a08b03bed60f84a13248492fb71d4" kind="enum"><name>FootFindingSpace</name></member>
+    <member refid="elementwise__choice_8hpp_1a068a08b03bed60f84a13248492fb71d4a3ac41e252379806a89e97a5755b95011" kind="enumvalue"><name>LOGICAL</name></member>
+    <member refid="elementwise__choice_8hpp_1a068a08b03bed60f84a13248492fb71d4a47aa58ad25e761e7a1e9781f42b3e7e4" kind="enumvalue"><name>PSEUDO_PHYSICAL</name></member>
+    <member refid="elementwise__choice_8hpp_1a068a08b03bed60f84a13248492fb71d4afbefe3f2370fe150be6f4d42f8cc4d4c" kind="enumvalue"><name>PHYSICAL</name></member>
+    <member refid="elementwise__choice_8hpp_1ad11db247fdc71a41043be06372c9d594" kind="enum"><name>AdvectionFieldSpace</name></member>
+    <member refid="elementwise__choice_8hpp_1ad11db247fdc71a41043be06372c9d594afbefe3f2370fe150be6f4d42f8cc4d4c" kind="enumvalue"><name>PHYSICAL</name></member>
+    <member refid="elementwise__choice_8hpp_1ad11db247fdc71a41043be06372c9d594a3ac41e252379806a89e97a5755b95011" kind="enumvalue"><name>LOGICAL</name></member>
+  </compound>
+  <compound refid="logical__advection__logical__foot__finder_8hpp" kind="file"><name>logical_advection_logical_foot_finder.hpp</name>
+  </compound>
+  <compound refid="logical__advection__pseudo__physical__foot__finder_8hpp" kind="file"><name>logical_advection_pseudo_physical_foot_finder.hpp</name>
+  </compound>
+  <compound refid="physical__advection__physical__foot__finder_8hpp" kind="file"><name>physical_advection_physical_foot_finder.hpp</name>
+  </compound>
+  <compound refid="physical__advection__pseudo__physical__foot__finder_8hpp" kind="file"><name>physical_advection_pseudo_physical_foot_finder.hpp</name>
   </compound>
   <compound refid="spline__polar__foot__finder_8hpp" kind="file"><name>spline_polar_foot_finder.hpp</name>
   </compound>
@@ -4683,6 +4931,8 @@
   <compound refid="dir_d78fdb6d05340e24a2e187de33ea09a4" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXVx/poisson</name>
   </compound>
   <compound refid="dir_14c5eb4d397dfd4e1a4d5c7bede9e118" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/geometryXYVxVy/poisson</name>
+  </compound>
+  <compound refid="dir_71ecba75f1675b0dc7d7b6463874ff90" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders</name>
   </compound>
   <compound refid="dir_a6779ae02b71d57f488d261458bab1ce" kind="dir"><name>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/polar_splines</name>
   </compound>

@@ -27,29 +27,27 @@
 #include "geometry_r_theta.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
+#include "polar_foot_finder.hpp"
 #include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 
 
 
-template <
-        class LogicalToPhysicalMapping,
-        class LogicalToPseudoPhysicalMapping,
-        class PolarPoissonLikeSolver>
+template <class LogicalToPhysicalMapping, class PolarPoissonLikeSolver>
 class BslImplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using SplinePolarFootFinderType = SplinePolarFootFinder<
+    using PolarFootFinderType = PolarFootFinder<
+            FootFindingSpace::PHYSICAL,
+            AdvectionFieldSpace::PHYSICAL,
+            LogicalToPhysicalMapping,
             IdxRangeRTheta,
             EulerBuilder,
-            LogicalToPhysicalMapping,
-            LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorConstBound>;
 
     using BslAdvectionRTheta = BslAdvectionPolar<
-            SplinePolarFootFinderType,
+            PolarFootFinderType,
             LogicalToPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorNullBound>;
@@ -59,7 +57,7 @@ private:
     BslAdvectionRTheta const& m_advection_solver;
 
     EulerBuilder const m_euler;
-    SplinePolarFootFinderType const m_foot_finder;
+    PolarFootFinderType const m_foot_finder;
 
     PolarPoissonLikeSolver const& m_poisson_solver;
 
@@ -71,7 +69,6 @@ private:
 public:
     BslImplicitPredCorrRTheta(
             LogicalToPhysicalMapping const& logical_to_physical,
-            LogicalToPseudoPhysicalMapping const& logical_to_pseudo_physical,
             BslAdvectionRTheta const& advection_solver,
             IdxRangeRTheta const& grid,
             SplineRThetaBuilder const& builder,
@@ -79,13 +76,7 @@ public:
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
-        , m_foot_finder(
-                  grid,
-                  m_euler,
-                  logical_to_physical,
-                  logical_to_pseudo_physical,
-                  builder,
-                  advection_evaluator)
+        , m_foot_finder(m_euler, logical_to_physical, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)

@@ -2,7 +2,7 @@
 
 # Class ElementwiseSplinePolarFootFinderMem
 
-**template &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class X\_pc, class Y\_pc, class AdvDim1, class AdvDim2, class [**BSplinesR**](structBSplinesR.md), class [**BSplinesTheta**](structBSplinesTheta.md), class IdxRangeOperator, class SplineRThetaEvaluatorAdvection, class PseudoPhysicalToAdvectionMapping, class PseudoPhysicalToLogicalMapping, class LogicalToPseudoPhysicalMapping, class AdvecCoefFieldMem, class TimeStepper&gt;**
+**template &lt;class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class IdxRangeOperator, class SplineRThetaEvaluatorAdvection, class PseudoPhysicalToAdvectionMapping, class PseudoPhysicalToLogicalMapping, class LogicalToPseudoPhysicalMapping, class AdvecCoefFieldMem, class TimeStepper&gt;**
 
 
 
@@ -34,7 +34,7 @@ _The owning counterpart to_ [_**ElementwiseSplinePolarFootFinder**_](classElemen
 
 | Type | Name |
 | ---: | :--- |
-| typedef [**ElementwiseSplinePolarFootFinder**](classElementwiseSplinePolarFootFinder.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), X\_pc, Y\_pc, AdvDim1, AdvDim2, [**BSplinesR**](structBSplinesR.md), [**BSplinesTheta**](structBSplinesTheta.md), IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, typename AdvecCoefFieldMem::view\_type, TimeStepper &gt; | [**GPUCompat**](#typedef-gpucompat)  <br>_The non-owning operator that can be used on GPU._  |
+| typedef [**ElementwiseSplinePolarFootFinder**](classElementwiseSplinePolarFootFinder.md)&lt; [**GridR**](structGridR.md), [**GridTheta**](structGridTheta.md), IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, typename AdvecCoefFieldMem::view\_type, TimeStepper &gt; | [**GPUCompat**](#typedef-gpucompat)  <br>_The non-owning operator that can be used on GPU._  |
 
 
 
@@ -102,12 +102,6 @@ Allocates and stores the spline coefficients of the advection field on the appro
 
 * [**GridR**](structGridR.md) The discrete radial dimension. 
 * [**GridTheta**](structGridTheta.md) The discrete poloidal dimension. 
-* `X_pc` The first axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated. 
-* `Y_pc` The second axis tag of the pseudo-Cartesian (or Cartesian) domain in which the foot of the characteristic is calculated. 
-* `AdvDim1` The first dimension of the advection field. 
-* `AdvDim2` The second dimension of the advection field. 
-* [**BSplinesR**](structBSplinesR.md) The B-spline basis in the radial direction. 
-* [**BSplinesTheta**](structBSplinesTheta.md) The B-spline basis in the poloidal direction. 
 * `IdxRangeOperator` The full index range over which the operator acts (may include batch dimensions). 
 * `SplineRThetaEvaluatorAdvection` The evaluator used to evaluate the spline representation of the advection field. 
 * `PseudoPhysicalToAdvectionMapping` A mapping from the pseudo-physical domain to the domain where the advection field is defined. 
@@ -135,7 +129,7 @@ Allocates and stores the spline coefficients of the advection field on the appro
 
 _The non-owning operator that can be used on GPU._ 
 ```C++
-using ElementwiseSplinePolarFootFinderMem< GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefFieldMem, TimeStepper >::GPUCompat =  ElementwiseSplinePolarFootFinder< GridR, GridTheta, X_pc, Y_pc, AdvDim1, AdvDim2, BSplinesR, BSplinesTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, typename AdvecCoefFieldMem::view_type, TimeStepper>;
+using ElementwiseSplinePolarFootFinderMem< GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, AdvecCoefFieldMem, TimeStepper >::GPUCompat =  ElementwiseSplinePolarFootFinder< GridR, GridTheta, IdxRangeOperator, SplineRThetaEvaluatorAdvection, PseudoPhysicalToAdvectionMapping, PseudoPhysicalToLogicalMapping, LogicalToPseudoPhysicalMapping, typename AdvecCoefFieldMem::view_type, TimeStepper>;
 ```
 
 

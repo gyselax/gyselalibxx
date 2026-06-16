@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespacepolar__foot__finder__details" kind="namespace" language="C++">
+    <compoundname>polar_foot_finder_details</compoundname>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwiseChoice" prot="public">polar_foot_finder_details::ElementwiseChoice</innerclass>
+    <innerclass refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1LOGICAL_00_01Adv740065543af7658e7ff9fc9e64d77611" prot="public">polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::LOGICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</innerclass>
+    <innerclass refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ad3551d0dba544ea9678328f5e046fdf7c" prot="public">polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</innerclass>
+    <innerclass refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ade857839a3fb92baaf6bd919a12083d58" prot="public">polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</innerclass>
+    <innerclass refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PSEUDO__PHYSICAL9dd916595d37c4cd6c60dc439602516d" prot="public">polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</innerclass>
+    <innerclass refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PSEUDO__PHYSICAL0e03af03e715868452e393a1a59b4674" prot="public">polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</innerclass>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder" prot="public">polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinder</innerclass>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem" prot="public">polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem</innerclass>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinder" prot="public">polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinder</innerclass>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem" prot="public">polar_foot_finder_details::ElementwiseLogicalAdvPseudoPhysFootFinderMem</innerclass>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinder" prot="public">polar_foot_finder_details::ElementwisePhysicalAdvPhysicalFootFinder</innerclass>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem" prot="public">polar_foot_finder_details::ElementwisePhysicalAdvPhysicalFootFinderMem</innerclass>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinder" prot="public">polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinder</innerclass>
+    <innerclass refid="classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPseudoPhysicalFootFinderMem" prot="public">polar_foot_finder_details::ElementwisePhysicalAdvPseudoPhysicalFootFinderMem</innerclass>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/elementwise_choice.hpp" line="8" column="1"/>
+  </compounddef>
+</doxygen>

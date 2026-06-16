@@ -102,6 +102,12 @@
     </li>
     </ul>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_foot_finders</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="polar_foot_finders/index.html">Ppolar_foot_finders/README.mdolar foot finder implementation details</a>
+                </li>
+    </ul>
+                </li>
     </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" >collisions</a>
@@ -754,6 +760,7 @@ J
 <h3 id="polar-foot-finder">Polar Foot Finder</h3>
 <p>The methods inheriting from IPolarFootFinder provide ways of calculating the feet of the characteristics on the polar plane.</p>
 <p>The feet of the characteristics are calculated using a time integration method. For details of available methods see <a href="../timestepper/index.html">Time Stepping Methods</a>.</p>
+<p>For implementation details of the elementwise operators used internally see <a href="polar_foot_finders/index.html">polar foot finder implementation details</a>.</p>
 <h3 id="advection-domain">Advection domain</h3>
 <p>There are two advection domains to consider:</p>
 <ul>
@@ -806,13 +813,13 @@ SplineRThetaEvaluator spline_evaluator(
 
 // Define a feet finder to compute the feet of the characteristics.  
 RK3Builder const time_stepper_builder;      // a given time integration method to solve equation of the characteristics. 
-SplinePolarFootFinder find_feet(        
-        grid,
-        time_stepper_builder,
-        logical_to_physical_mapping,
-        logical_to_pseudo_physical_mapping,
-        builder_advection_field,            // spline builder for the advection field. 
-        evaluator_advection_field);         // spline evaluator for the advection field. 
+PolarFootFinder find_feet
+        = make_polar_foot_finder&lt;FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::PHYSICAL&gt;(
+                time_stepper_builder,
+                logical_to_physical_mapping,
+                grid,
+                builder_advection_field, // spline builder for the advection field.
+                evaluator_advection_field); // spline evaluator for the advection field.
 
 // Define the advection operator. 
 BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, logical_to_physical_mapping);
@@ -898,7 +905,7 @@ Journal of Computational Physics (2019). <a class="footnote-backref" href="#fnr
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
         <a href="../index.html" class="btn btn-neutral float-left" title="Gyselalib++ contents"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../collisions/index.html" class="btn btn-neutral float-right" title="Collisions">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="polar_foot_finders/index.html" class="btn btn-neutral float-right" title="Ppolar_foot_finders/README.mdolar foot finder implementation details">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -928,7 +935,7 @@ Journal of Computational Physics (2019). <a class="footnote-backref" href="#fnr
       <span><a href="../index.html" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../collisions/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="polar_foot_finders/index.html" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

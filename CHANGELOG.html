@@ -84,6 +84,12 @@
     <ul>
                 <li class="toctree-l3"><a class="reference internal" href="src/advection/index.html">Advection methods</a>
                 </li>
+                <li class="toctree-l3"><a class="reference internal" >polar_foot_finders</a>
+    <ul>
+                <li class="toctree-l4"><a class="reference internal" href="src/advection/polar_foot_finders/index.html">Ppolar_foot_finders/README.mdolar foot finder implementation details</a>
+                </li>
+    </ul>
+                </li>
     </ul>
                 </li>
                 <li class="toctree-l2"><a class="reference internal" >collisions</a>
@@ -588,6 +594,7 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Add a MPI scope guard.</li>
 <li>Add MI250X toolchain for LUMI.</li>
 <li>Add a CMake option to control the discovery timeout of Gyselalib++ tests.</li>
+<li>Added <code>PolarFootFinder</code> to replace <code>SplinePolarFootFinder</code> for clarity of Advection and Foot finding spaces.</li>
 </ul>
 <h3 id="fixed">Fixed</h3>
 <ul>
@@ -633,6 +640,9 @@ and this project adheres to <a href="https://semver.org/spec/v2.0.0.html">Semant
 <li>Remove default O1 optimisation flag.</li>
 </ul>
 <h3 id="deprecated">Deprecated</h3>
+<ul>
+<li>Deprecated <code>SplinePolarFootFinder</code>.</li>
+</ul>
 <h3 id="removed">Removed</h3>
 <ul>
 <li>Remove DDC submodule.</li>

@@ -1,0 +1,864 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classPolarFootFinder" kind="class" language="C++" prot="public">
+    <compoundname>PolarFootFinder</compoundname>
+    <includes refid="polar__foot__finder_8hpp" local="no">polar_foot_finder.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>FootFindingSpace</type>
+        <declname>FFSpace</declname>
+        <defname>FFSpace</defname>
+      </param>
+      <param>
+        <type>AdvectionFieldSpace</type>
+        <declname>AFSpace</declname>
+        <defname>AFSpace</defname>
+      </param>
+      <param>
+        <type><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref></type>
+        <declname>LogicalToPhysicalMapping</declname>
+        <defname>LogicalToPhysicalMapping</defname>
+      </param>
+      <param>
+        <type>class IdxRangeBatched</type>
+      </param>
+      <param>
+        <type>class TimeStepperBuilder</type>
+      </param>
+      <param>
+        <type>class RThetaAdvectionBuilder</type>
+      </param>
+      <param>
+        <type>class RThetaAdvectionEvaluator</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="classPolarFootFinder_1aa045a61d68bdd54abd6ff616379a2eed" prot="public" static="no">
+        <type>typename LogicalToPhysicalMapping::curvilinear_tag_r</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::R =  typename LogicalToPhysicalMapping::curvilinear_tag_r</definition>
+        <argsstring></argsstring>
+        <name>R</name>
+        <qualifiedname>PolarFootFinder::R</qualifiedname>
+        <briefdescription>
+<para>The continuous radial dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="59" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a6c33e77ecfcd4ab7952f4fd0cc232694" prot="public" static="no">
+        <type>typename LogicalToPhysicalMapping::curvilinear_tag_theta</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::Theta =  typename LogicalToPhysicalMapping::curvilinear_tag_theta</definition>
+        <argsstring></argsstring>
+        <name>Theta</name>
+        <qualifiedname>PolarFootFinder::Theta</qualifiedname>
+        <briefdescription>
+<para>The continuous poloidal dimension. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="61" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" prot="public" static="no">
+        <type>typename RThetaAdvectionBuilder::memory_space</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::memory_space =  typename RThetaAdvectionBuilder::memory_space</definition>
+        <argsstring></argsstring>
+        <name>memory_space</name>
+        <qualifiedname>PolarFootFinder::memory_space</qualifiedname>
+        <briefdescription>
+<para>The memory space where fields are stored (e.g. <computeroutput>Kokkos::HostSpace</computeroutput> or a GPU space). </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="64" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a8d091db9ec4de3f95464285610809f2c" prot="public" static="no">
+        <type>typename RThetaAdvectionBuilder::exec_space</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::ExecSpace =  typename RThetaAdvectionBuilder::exec_space</definition>
+        <argsstring></argsstring>
+        <name>ExecSpace</name>
+        <qualifiedname>PolarFootFinder::ExecSpace</qualifiedname>
+        <briefdescription>
+<para>The execution space where kernels are launched. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="66" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="66" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" prot="public" static="no">
+        <type>typename <ref refid="classpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">polar_foot_finder_details::ElementwiseChoice</ref>&lt; FFSpace, AFSpace, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref>, IdxRangeBatched, RThetaAdvectionEvaluator, <ref refid="classVectorFieldMem" kindref="compound">AdvecCoefField</ref>, TimeStepperBuilder, LogicalToPhysicalMapping &gt;::type</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::ElementwiseOperator =  typename polar_foot_finder_details::ElementwiseChoice&lt; FFSpace, AFSpace, GridR, GridTheta, IdxRangeBatched, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping&gt;::type</definition>
+        <argsstring></argsstring>
+        <name>ElementwiseOperator</name>
+        <qualifiedname>PolarFootFinder::ElementwiseOperator</qualifiedname>
+        <briefdescription>
+<para>The operator returned by operator() which calculates the feet elementwise. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="119" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a32467c2110b8100ab4eee112c272aef2" prot="public" static="no">
+        <type>IdxRangeBatched</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxRangeOperator =  IdxRangeBatched</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeOperator</name>
+        <qualifiedname>PolarFootFinder::IdxRangeOperator</qualifiedname>
+        <briefdescription>
+<para>The type of the index range over which the operator works. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="123" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="123" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1aadd1705e4e6643cbd02d6655904e11ea" prot="public" static="no">
+        <type>Field&lt; CoordRTheta, IdxRangeBatched, <ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::CFieldFeet =  Field&lt;CoordRTheta, IdxRangeBatched, memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>CFieldFeet</name>
+        <qualifiedname>PolarFootFinder::CFieldFeet</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>The type of the memory space where the field is saved (CPU vs GPU). A mutable field of <formula id="19">$ (r, \theta) $</formula> coordinates over the batched operator domain. </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="126" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="126" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1aa269112d3fd1e8a52e8e7cbc4f01d8b0" prot="public" static="no">
+        <type>ConstField&lt; CoordRTheta, IdxRangeBatched, <ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::CConstFieldFeet =  ConstField&lt;CoordRTheta, IdxRangeBatched, memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>CConstFieldFeet</name>
+        <qualifiedname>PolarFootFinder::CConstFieldFeet</qualifiedname>
+        <briefdescription>
+<para>A read-only field of <formula id="19">$ (r, \theta) $</formula> coordinates over the batched operator domain. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="128" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="128" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classPolarFootFinder_1a9a6ec5e0f0e9d14f2a7f372d30e96d8b" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename LogicalToPhysicalMapping::CoordArg &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::LogicalSpace =  ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordArg&gt;</definition>
+        <argsstring></argsstring>
+        <name>LogicalSpace</name>
+        <qualifiedname>PolarFootFinder::LogicalSpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="69" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1aba5241df5f1f7123ad1a901c6e709a43" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename LogicalToPhysicalMapping::CoordResult &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::PhysicalSpace =  ddc::to_type_seq_t&lt;typename LogicalToPhysicalMapping::CoordResult&gt;</definition>
+        <argsstring></argsstring>
+        <name>PhysicalSpace</name>
+        <qualifiedname>PolarFootFinder::PhysicalSpace</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="70" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1acbb69c9edab1c3d9a3ebd2672c4183f1" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 0, PhysicalSpace &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::X =  ddc::type_seq_element_t&lt;0, PhysicalSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <qualifiedname>PolarFootFinder::X</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="72" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a49a4aea3d6da0fa5188a0037ea09ec6a" prot="private" static="no">
+        <type>ddc::type_seq_element_t&lt; 1, PhysicalSpace &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::Y =  ddc::type_seq_element_t&lt;1, PhysicalSpace&gt;</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <qualifiedname>PolarFootFinder::Y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="73" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a4eb03e380fe0f508f4d32a68257d5734" prot="private" static="no">
+        <type>ddc::to_type_seq_t&lt; typename RThetaAdvectionBuilder::interpolation_domain_type &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::PolarGrid =  ddc::to_type_seq_t&lt;typename RThetaAdvectionBuilder::interpolation_domain_type&gt;</definition>
+        <argsstring></argsstring>
+        <name>PolarGrid</name>
+        <qualifiedname>PolarFootFinder::PolarGrid</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="75" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a4204d4c8318432bd3ce3db275ae67e25" prot="private" static="no">
+        <type>find_grid_t&lt; <ref refid="classPolarFootFinder_1aa045a61d68bdd54abd6ff616379a2eed" kindref="member">R</ref>, PolarGrid &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::GridR =  find_grid_t&lt;R, PolarGrid&gt;</definition>
+        <argsstring></argsstring>
+        <name>GridR</name>
+        <qualifiedname>PolarFootFinder::GridR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="77" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a59c5baba576b85d0506f43475cb55eac" prot="private" static="no">
+        <type>find_grid_t&lt; <ref refid="classPolarFootFinder_1a6c33e77ecfcd4ab7952f4fd0cc232694" kindref="member">Theta</ref>, PolarGrid &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::GridTheta =  find_grid_t&lt;Theta, PolarGrid&gt;</definition>
+        <argsstring></argsstring>
+        <name>GridTheta</name>
+        <qualifiedname>PolarFootFinder::GridTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="78" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1ae0530535efea5dba0ff1608e09e00f46" prot="private" static="no">
+        <type>std::conditional_t&lt; AFSpace==AdvectionFieldSpace::PHYSICAL, <ref refid="structX" kindref="compound">X</ref>, <ref refid="classPolarFootFinder_1aa045a61d68bdd54abd6ff616379a2eed" kindref="member">R</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::AdvDim1 =  std::conditional_t&lt;AFSpace == AdvectionFieldSpace::PHYSICAL, X, R&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvDim1</name>
+        <qualifiedname>PolarFootFinder::AdvDim1</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="80" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1ad46ac2f6b0652aab2893862dff877b19" prot="private" static="no">
+        <type>std::conditional_t&lt; AFSpace==AdvectionFieldSpace::PHYSICAL, <ref refid="structY" kindref="compound">Y</ref>, <ref refid="classPolarFootFinder_1a6c33e77ecfcd4ab7952f4fd0cc232694" kindref="member">Theta</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::AdvDim2 =  std::conditional_t&lt;AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvDim2</name>
+        <qualifiedname>PolarFootFinder::AdvDim2</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="81" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1aca60bed337119121dc81126e0295b0ea" prot="private" static="no">
+        <type>typename RThetaAdvectionBuilder::bsplines_type1</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::BSplinesR =  typename RThetaAdvectionBuilder::bsplines_type1</definition>
+        <argsstring></argsstring>
+        <name>BSplinesR</name>
+        <qualifiedname>PolarFootFinder::BSplinesR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="83" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a548e004ab1c828c663da98d3dd13dbb3" prot="private" static="no">
+        <type>typename RThetaAdvectionBuilder::bsplines_type2</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::BSplinesTheta =  typename RThetaAdvectionBuilder::bsplines_type2</definition>
+        <argsstring></argsstring>
+        <name>BSplinesTheta</name>
+        <qualifiedname>PolarFootFinder::BSplinesTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="84" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a39e57e9b08e2a984ef7f3c0aa7e14365" prot="private" static="no">
+        <type>ddc::detail::convert_type_seq_to_discrete_domain_t&lt; ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt; IdxRangeBatched &gt;, ddc::detail::TypeSeq&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;, ddc::detail::TypeSeq&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt; &gt; &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxRangeSplineBatched =  ddc::detail::convert_type_seq_to_discrete_domain_t&lt;ddc::type_seq_replace_t&lt; ddc::to_type_seq_t&lt;IdxRangeBatched&gt;, ddc::detail::TypeSeq&lt;GridR, GridTheta&gt;, ddc::detail::TypeSeq&lt;BSplinesR, BSplinesTheta&gt; &gt;&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeSplineBatched</name>
+        <qualifiedname>PolarFootFinder::IdxRangeSplineBatched</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="86" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="90" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a7734f5c3b8c5f8acf82b9a4b9bc2032e" prot="private" static="no">
+        <type>ddc::remove_dims_of_t&lt; IdxRangeBatched, <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxRangeBatch =  ddc::remove_dims_of_t&lt;IdxRangeBatched, GridR, GridTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeBatch</name>
+        <qualifiedname>PolarFootFinder::IdxRangeBatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="92" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1aeeaeb682e1d803b862a17af5adaa6081" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref>, <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxRangeRTheta =  IdxRange&lt;GridR, GridTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeRTheta</name>
+        <qualifiedname>PolarFootFinder::IdxRangeRTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="93" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a7f182f4c18e15a8fe918bae899a6dce2" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="structGridR" kindref="compound">GridR</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxRangeR =  IdxRange&lt;GridR&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeR</name>
+        <qualifiedname>PolarFootFinder::IdxRangeR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="94" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1ac3354cd4ce3436c93382bd6d3ca7f4f2" prot="private" static="no">
+        <type>IdxRange&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxRangeTheta =  IdxRange&lt;GridTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxRangeTheta</name>
+        <qualifiedname>PolarFootFinder::IdxRangeTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="95" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1ad784d8e34814acf6b8f2551cfd031348" prot="private" static="no">
+        <type>Idx&lt; <ref refid="structGridR" kindref="compound">GridR</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxR =  Idx&lt;GridR&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxR</name>
+        <qualifiedname>PolarFootFinder::IdxR</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="96" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a0e04fde0389f73876f58974340224182" prot="private" static="no">
+        <type>Idx&lt; <ref refid="structGridTheta" kindref="compound">GridTheta</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxTheta =  Idx&lt;GridTheta&gt;</definition>
+        <argsstring></argsstring>
+        <name>IdxTheta</name>
+        <qualifiedname>PolarFootFinder::IdxTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="97" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a28057b83c2cd036b5c9be58cf761b230" prot="private" static="no">
+        <type>typename IdxRangeBatch::discrete_element_type</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxBatch =  typename IdxRangeBatch::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxBatch</name>
+        <qualifiedname>PolarFootFinder::IdxBatch</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a9370a194dce8fe972b149af8dd041dd5" prot="private" static="no">
+        <type>typename IdxRangeBatched::discrete_element_type</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::IdxOperator =  typename IdxRangeBatched::discrete_element_type</definition>
+        <argsstring></argsstring>
+        <name>IdxOperator</name>
+        <qualifiedname>PolarFootFinder::IdxOperator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="99" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1add5459b4cd73982db080a37747f8dbf9" prot="private" static="no">
+        <type>Coord&lt; <ref refid="classPolarFootFinder_1aa045a61d68bdd54abd6ff616379a2eed" kindref="member">R</ref>, <ref refid="classPolarFootFinder_1a6c33e77ecfcd4ab7952f4fd0cc232694" kindref="member">Theta</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::CoordRTheta =  Coord&lt;R, Theta&gt;</definition>
+        <argsstring></argsstring>
+        <name>CoordRTheta</name>
+        <qualifiedname>PolarFootFinder::CoordRTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="101" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classPolarFootFinder_1a40666155d8d6f67c9dfe1672e64f7e07" prot="private" static="no">
+        <type><ref refid="classVectorFieldMem" kindref="compound">DVectorFieldMem</ref>&lt; IdxRangeSplineBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, <ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref> &gt;</type>
+        <definition>using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::AdvecCoefField =  DVectorFieldMem&lt; IdxRangeSplineBatched, VectorIndexSet&lt;AdvDim1, AdvDim2&gt;, memory_space&gt;</definition>
+        <argsstring></argsstring>
+        <name>AdvecCoefField</name>
+        <qualifiedname>PolarFootFinder::AdvecCoefField</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="103" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="106" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classPolarFootFinder_1a64cc9be5274a4d38a0e6f84566705651" prot="private" static="no" mutable="no">
+        <type>TimeStepperBuilder const  &amp;</type>
+        <definition>TimeStepperBuilder const&amp; PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::m_time_stepper_builder</definition>
+        <argsstring></argsstring>
+        <name>m_time_stepper_builder</name>
+        <qualifiedname>PolarFootFinder::m_time_stepper_builder</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="131" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="131" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPolarFootFinder_1a6b7956ead5ac0fcea2d31e3a5c51a66e" prot="private" static="no" mutable="no">
+        <type>LogicalToPhysicalMapping</type>
+        <definition>LogicalToPhysicalMapping PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::m_logical_to_physical</definition>
+        <argsstring></argsstring>
+        <name>m_logical_to_physical</name>
+        <qualifiedname>PolarFootFinder::m_logical_to_physical</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="132" column="30" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="132" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPolarFootFinder_1ae993acf817480fcd73680aae03e66af1" prot="private" static="no" mutable="no">
+        <type>RThetaAdvectionBuilder const  &amp;</type>
+        <definition>RThetaAdvectionBuilder const&amp; PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::m_builder_advection_field</definition>
+        <argsstring></argsstring>
+        <name>m_builder_advection_field</name>
+        <qualifiedname>PolarFootFinder::m_builder_advection_field</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="133" column="34" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="133" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPolarFootFinder_1a44e621322bea4689cf96ac5c3b347a58" prot="private" static="no" mutable="no">
+        <type>RThetaAdvectionEvaluator const  &amp;</type>
+        <definition>RThetaAdvectionEvaluator const&amp; PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::m_evaluator_advection_field</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator_advection_field</name>
+        <qualifiedname>PolarFootFinder::m_evaluator_advection_field</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="134" column="36" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="134" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPolarFootFinder_1aed87b8f6c06404b8c066ff2e5537fd87" prot="private" static="no" mutable="no">
+        <type>Coord&lt; <ref refid="structX__pC" kindref="compound">X_pC</ref>, <ref refid="structY__pC" kindref="compound">Y_pC</ref> &gt;</type>
+        <definition>Coord&lt;X_pC, Y_pC&gt; PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::m_coord_centre_pc</definition>
+        <argsstring></argsstring>
+        <name>m_coord_centre_pc</name>
+        <qualifiedname>PolarFootFinder::m_coord_centre_pc</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="135" column="11" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="135" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classPolarFootFinder_1a35f134814b07eb7f9abd525b3c50d1aa" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::m_epsilon</definition>
+        <argsstring></argsstring>
+        <name>m_epsilon</name>
+        <qualifiedname>PolarFootFinder::m_epsilon</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="136" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="136" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classPolarFootFinder_1aee490f440b7837b3492f5ead0d1b234c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::PolarFootFinder</definition>
+        <argsstring>(TimeStepperBuilder const &amp;time_stepper_builder, LogicalToPhysicalMapping const &amp;logical_to_physical, RThetaAdvectionBuilder const &amp;builder_advection_field, RThetaAdvectionEvaluator const &amp;evaluator_advection_field, Coord&lt; X_pC, Y_pC &gt; coord_centre_pc=Coord&lt; X_pC, Y_pC &gt;(0, 0), double epsilon=1e-12)</argsstring>
+        <name>PolarFootFinder</name>
+        <qualifiedname>PolarFootFinder::PolarFootFinder</qualifiedname>
+        <param>
+          <type>TimeStepperBuilder const &amp;</type>
+          <declname>time_stepper_builder</declname>
+        </param>
+        <param>
+          <type>LogicalToPhysicalMapping const &amp;</type>
+          <declname>logical_to_physical</declname>
+        </param>
+        <param>
+          <type>RThetaAdvectionBuilder const &amp;</type>
+          <declname>builder_advection_field</declname>
+        </param>
+        <param>
+          <type>RThetaAdvectionEvaluator const &amp;</type>
+          <declname>evaluator_advection_field</declname>
+        </param>
+        <param>
+          <type>Coord&lt; <ref refid="structX__pC" kindref="compound">X_pC</ref>, <ref refid="structY__pC" kindref="compound">Y_pC</ref> &gt;</type>
+          <declname>coord_centre_pc</declname>
+          <defval>Coord&lt; <ref refid="structX__pC" kindref="compound">X_pC</ref>, <ref refid="structY__pC" kindref="compound">Y_pC</ref> &gt;(0, 0)</defval>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>epsilon</declname>
+          <defval>1e-12</defval>
+        </param>
+        <briefdescription>
+<para>Construct a <ref refid="classPolarFootFinder" kindref="compound">PolarFootFinder</ref>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">time_stepper_builder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A builder for the time integration method. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">logical_to_physical</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping from the logical domain to the physical domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">builder_advection_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline builder for the advection field coefficients. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">evaluator_advection_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline evaluator for the advection field. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">coord_centre_pc</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The coordinate of the polar centre in the pseudo-Cartesian domain <formula id="21">$ (X_{pC}, Y_{pC}) $</formula>. Ignored for <computeroutput>LOGICAL</computeroutput> foot finding. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">epsilon</parametername>
+</parameternamelist>
+<parameterdescription>
+<para><formula id="22">$ \varepsilon $</formula> parameter for the <ref refid="classCombinedMapping" kindref="compound">CombinedMapping</ref> linearisation near the O-point. Only used for <computeroutput>PHYSICAL</computeroutput> advection field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="157" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="157" bodyend="171"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarFootFinder_1a5a2256ef5116cb52a6cd64b14fed2f1b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref></type>
+        <definition>ElementwiseOperator PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::operator()</definition>
+        <argsstring>(DVectorConstField&lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, memory_space &gt; advection_field) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>PolarFootFinder::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, <ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref> &gt;</type>
+          <declname>advection_field</declname>
+        </param>
+        <briefdescription>
+<para>Get an elementwise operator capable of calculating the feet of the characteristics. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Computes the spline coefficients of the advection field, then packages them together with the mappings and time stepper into an <ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref>. Calling <computeroutput>operator()(dt)</computeroutput> on the returned object yields a GPU-copyable functor.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field in the domain selected by <computeroutput>AFSpace</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>An <ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref> for the given advection field. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="184" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="184" bodyend="198"/>
+      </memberdef>
+      <memberdef kind="function" id="classPolarFootFinder_1ad27696bc3fa322aad6abc06e26b00c76" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::operator()</definition>
+        <argsstring>(CFieldFeet feet, DVectorConstField&lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, memory_space &gt; advection_field, double dt) const</argsstring>
+        <name>operator()</name>
+        <qualifiedname>PolarFootFinder::operator()</qualifiedname>
+        <param>
+          <type><ref refid="classPolarFootFinder_1aadd1705e4e6643cbd02d6655904e11ea" kindref="member">CFieldFeet</ref></type>
+          <declname>feet</declname>
+        </param>
+        <param>
+          <type><ref refid="classVectorField" kindref="compound">DVectorConstField</ref>&lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, <ref refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kindref="member">memory_space</ref> &gt;</type>
+          <declname>advection_field</declname>
+        </param>
+        <param>
+          <type>double</type>
+          <declname>dt</declname>
+        </param>
+        <briefdescription>
+<para>Advect the feet over <formula id="23">$ dt $</formula>. </para>
+        </briefdescription>
+        <detaileddescription>
+<para>Computes the spline coefficients of the advection field, solves the characteristic equation over <formula id="23">$ dt $</formula> at every grid point, and writes the resulting feet in-place.</para>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="inout">feet</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>On input: the mesh points. On output: the characteristic feet. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">advection_field</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The advection field in the domain selected by <computeroutput>AFSpace</computeroutput>. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">dt</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The time step. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="213" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="213" bodyend="239"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-func">
+      <memberdef kind="function" id="classPolarFootFinder_1a941fa6c2e39e06084508ed73e324eca5" prot="private" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kindref="member">ElementwiseOperator</ref></type>
+        <definition>ElementwiseOperator PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::build_elementwise</definition>
+        <argsstring>(AdvecCoefField &amp;&amp;advection_field_coefs, IdxRangeTheta idx_range_theta) const</argsstring>
+        <name>build_elementwise</name>
+        <qualifiedname>PolarFootFinder::build_elementwise</qualifiedname>
+        <param>
+          <type><ref refid="classVectorFieldMem" kindref="compound">AdvecCoefField</ref> &amp;&amp;</type>
+          <declname>advection_field_coefs</declname>
+        </param>
+        <param>
+          <type>IdxRangeTheta</type>
+          <declname>idx_range_theta</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="242" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="242" bodyend="280"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Operator for finding the feet of the characteristics on a polar slice. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Calculates the spline representation of the advection field and uses it together with a time-stepping method to solve the characteristic equation. The space in which the advection field is expressed and the space in which foot-finding is performed are selected at compile time via <computeroutput>FFSpace</computeroutput> and <computeroutput>AFSpace</computeroutput>.</para>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>FFSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space in which the foot of the characteristic is found. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>AFSpace</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The space in which the advection field is expressed. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>LogicalToPhysicalMapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The mapping from the logical <formula id="19">$ (r, \theta) $</formula> domain to the physical <formula id="20">$ (x, y) $</formula> domain. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>IdxRangeBatched</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The batched index range over which the operator works. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>TimeStepperBuilder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The factory type for the time integration method. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>RThetaAdvectionBuilder</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline builder for the advection field. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername>RThetaAdvectionEvaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The spline evaluator for the advection field. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" line="49" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp" bodystart="50" bodyend="281"/>
+    <listofallmembers>
+      <member refid="classPolarFootFinder_1ae0530535efea5dba0ff1608e09e00f46" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>AdvDim1</name></member>
+      <member refid="classPolarFootFinder_1ad46ac2f6b0652aab2893862dff877b19" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>AdvDim2</name></member>
+      <member refid="classPolarFootFinder_1a40666155d8d6f67c9dfe1672e64f7e07" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>AdvecCoefField</name></member>
+      <member refid="classPolarFootFinder_1aca60bed337119121dc81126e0295b0ea" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>BSplinesR</name></member>
+      <member refid="classPolarFootFinder_1a548e004ab1c828c663da98d3dd13dbb3" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>BSplinesTheta</name></member>
+      <member refid="classPolarFootFinder_1a941fa6c2e39e06084508ed73e324eca5" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>build_elementwise</name></member>
+      <member refid="classPolarFootFinder_1aa269112d3fd1e8a52e8e7cbc4f01d8b0" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>CConstFieldFeet</name></member>
+      <member refid="classPolarFootFinder_1aadd1705e4e6643cbd02d6655904e11ea" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>CFieldFeet</name></member>
+      <member refid="classPolarFootFinder_1add5459b4cd73982db080a37747f8dbf9" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>CoordRTheta</name></member>
+      <member refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>ElementwiseOperator</name></member>
+      <member refid="classPolarFootFinder_1a8d091db9ec4de3f95464285610809f2c" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>ExecSpace</name></member>
+      <member refid="classPolarFootFinder_1a4204d4c8318432bd3ce3db275ae67e25" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>GridR</name></member>
+      <member refid="classPolarFootFinder_1a59c5baba576b85d0506f43475cb55eac" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>GridTheta</name></member>
+      <member refid="classPolarFootFinder_1a28057b83c2cd036b5c9be58cf761b230" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxBatch</name></member>
+      <member refid="classPolarFootFinder_1a9370a194dce8fe972b149af8dd041dd5" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxOperator</name></member>
+      <member refid="classPolarFootFinder_1ad784d8e34814acf6b8f2551cfd031348" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxR</name></member>
+      <member refid="classPolarFootFinder_1a7734f5c3b8c5f8acf82b9a4b9bc2032e" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxRangeBatch</name></member>
+      <member refid="classPolarFootFinder_1a32467c2110b8100ab4eee112c272aef2" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxRangeOperator</name></member>
+      <member refid="classPolarFootFinder_1a7f182f4c18e15a8fe918bae899a6dce2" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxRangeR</name></member>
+      <member refid="classPolarFootFinder_1aeeaeb682e1d803b862a17af5adaa6081" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxRangeRTheta</name></member>
+      <member refid="classPolarFootFinder_1a39e57e9b08e2a984ef7f3c0aa7e14365" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxRangeSplineBatched</name></member>
+      <member refid="classPolarFootFinder_1ac3354cd4ce3436c93382bd6d3ca7f4f2" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxRangeTheta</name></member>
+      <member refid="classPolarFootFinder_1a0e04fde0389f73876f58974340224182" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>IdxTheta</name></member>
+      <member refid="classPolarFootFinder_1a9a6ec5e0f0e9d14f2a7f372d30e96d8b" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>LogicalSpace</name></member>
+      <member refid="classPolarFootFinder_1ae993acf817480fcd73680aae03e66af1" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>m_builder_advection_field</name></member>
+      <member refid="classPolarFootFinder_1aed87b8f6c06404b8c066ff2e5537fd87" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>m_coord_centre_pc</name></member>
+      <member refid="classPolarFootFinder_1a35f134814b07eb7f9abd525b3c50d1aa" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>m_epsilon</name></member>
+      <member refid="classPolarFootFinder_1a44e621322bea4689cf96ac5c3b347a58" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>m_evaluator_advection_field</name></member>
+      <member refid="classPolarFootFinder_1a6b7956ead5ac0fcea2d31e3a5c51a66e" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>m_logical_to_physical</name></member>
+      <member refid="classPolarFootFinder_1a64cc9be5274a4d38a0e6f84566705651" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>m_time_stepper_builder</name></member>
+      <member refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>memory_space</name></member>
+      <member refid="classPolarFootFinder_1a5a2256ef5116cb52a6cd64b14fed2f1b" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>operator()</name></member>
+      <member refid="classPolarFootFinder_1ad27696bc3fa322aad6abc06e26b00c76" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>operator()</name></member>
+      <member refid="classPolarFootFinder_1aba5241df5f1f7123ad1a901c6e709a43" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>PhysicalSpace</name></member>
+      <member refid="classPolarFootFinder_1aee490f440b7837b3492f5ead0d1b234c" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>PolarFootFinder</name></member>
+      <member refid="classPolarFootFinder_1a4eb03e380fe0f508f4d32a68257d5734" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>PolarGrid</name></member>
+      <member refid="classPolarFootFinder_1aa045a61d68bdd54abd6ff616379a2eed" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>R</name></member>
+      <member refid="classPolarFootFinder_1a6c33e77ecfcd4ab7952f4fd0cc232694" prot="public" virt="non-virtual"><scope>PolarFootFinder</scope><name>Theta</name></member>
+      <member refid="classPolarFootFinder_1acbb69c9edab1c3d9a3ebd2672c4183f1" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>X</name></member>
+      <member refid="classPolarFootFinder_1a49a4aea3d6da0fa5188a0037ea09ec6a" prot="private" virt="non-virtual"><scope>PolarFootFinder</scope><name>Y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

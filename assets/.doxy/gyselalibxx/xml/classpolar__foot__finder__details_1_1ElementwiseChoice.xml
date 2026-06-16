@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classpolar__foot__finder__details_1_1ElementwiseChoice" kind="class" language="C++" prot="public">
+    <compoundname>polar_foot_finder_details::ElementwiseChoice</compoundname>
+    <templateparamlist>
+      <param>
+        <type>FootFindingSpace</type>
+        <declname>FFSpace</declname>
+        <defname>FFSpace</defname>
+      </param>
+      <param>
+        <type>AdvectionFieldSpace</type>
+        <declname>AFSpace</declname>
+        <defname>AFSpace</defname>
+      </param>
+      <param>
+        <type>class <ref refid="structGridR" kindref="compound">GridR</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structGridTheta" kindref="compound">GridTheta</ref></type>
+      </param>
+      <param>
+        <type>class IdxRangeOperator</type>
+      </param>
+      <param>
+        <type>class RThetaAdvectionEvaluator</type>
+      </param>
+      <param>
+        <type>class AdvecCoefField</type>
+      </param>
+      <param>
+        <type>class TimeStepperBuilder</type>
+      </param>
+      <param>
+        <type><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref></type>
+        <declname>LogicalToPhysicalMapping</declname>
+        <defname>LogicalToPhysicalMapping</defname>
+      </param>
+    </templateparamlist>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/elementwise_choice.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/elementwise_choice.hpp" bodystart="20" bodyend="-1"/>
+    <listofallmembers>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -257,7 +257,7 @@
 <parametername direction="in">epsilon</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="56">$ \epsilon $</formula> parameter in the definition of the mapping <ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>. </para>
+<para>The <formula id="58">$ \epsilon $</formula> parameter in the definition of the mapping <ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -265,7 +265,7 @@
 <parametername direction="in">e</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The <formula id="55">$ e $</formula> parameter in the definition of the mapping <ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>. </para>
+<para>The <formula id="57">$ e $</formula> parameter in the definition of the mapping <ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref>. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -273,7 +273,7 @@
 <parametername direction="in">coordinate_origin</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The (x,y)-coordinate defining the origin <formula id="105">$(x_0, y_0)$</formula> of the coordinate-system.</para>
+<para>The (x,y)-coordinate defining the origin <formula id="107">$(x_0, y_0)$</formula> of the coordinate-system.</para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -426,10 +426,10 @@
         <name>epsilon</name>
         <qualifiedname>CzarnyToCartesian::epsilon</qualifiedname>
         <briefdescription>
-<para>Return the <formula id="56">$ \epsilon $</formula> parameter. </para>
+<para>Return the <formula id="58">$ \epsilon $</formula> parameter. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The value of <formula id="56">$ \epsilon $</formula>.</para>
+<para><simplesect kind="return"><para>The value of <formula id="58">$ \epsilon $</formula>.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref> </para>
 </simplesect>
@@ -446,10 +446,10 @@
         <name>e</name>
         <qualifiedname>CzarnyToCartesian::e</qualifiedname>
         <briefdescription>
-<para>Return the <formula id="55">$ e $</formula> parameter. </para>
+<para>Return the <formula id="57">$ e $</formula> parameter. </para>
         </briefdescription>
         <detaileddescription>
-<para><simplesect kind="return"><para>The value of <formula id="55">$ e $</formula>.</para>
+<para><simplesect kind="return"><para>The value of <formula id="57">$ e $</formula>.</para>
 </simplesect>
 <simplesect kind="see"><para><ref refid="classCzarnyToCartesian" kindref="compound">CzarnyToCartesian</ref> </para>
 </simplesect>
@@ -489,7 +489,7 @@
           <declname>coord</declname>
         </param>
         <briefdescription>
-<para>Convert the <formula id="21">$ (r, \theta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
+<para>Convert the <formula id="19">$ (r, \theta) $</formula> coordinate to the equivalent (x,y) coordinate. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -706,22 +706,22 @@
 <para>A class for describing the Czarny 2D mapping. </para>
     </briefdescription>
     <detaileddescription>
-<para>The mapping <formula id="57">$ (r,\theta)\mapsto (x,y) $</formula> is defined by</para>
-<para><formula id="98">$ x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right) + x_0,$</formula></para>
-<para><formula id="99">$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } + y_0,$</formula></para>
-<para>with <formula id="54">$ \xi = 1/\sqrt{1 - \epsilon^2 /4} $</formula> and <formula id="55">$ e $</formula> and <formula id="56">$ \epsilon $</formula> given as parameters.</para>
+<para>The mapping <formula id="59">$ (r,\theta)\mapsto (x,y) $</formula> is defined by</para>
+<para><formula id="100">$ x(r,\theta) = \frac{1}{\epsilon} \left( 1 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right) + x_0,$</formula></para>
+<para><formula id="101">$ y(r,\theta) = \frac{e\xi r \sin(\theta)}{2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } + y_0,$</formula></para>
+<para>with <formula id="56">$ \xi = 1/\sqrt{1 - \epsilon^2 /4} $</formula> and <formula id="57">$ e $</formula> and <formula id="58">$ \epsilon $</formula> given as parameters.</para>
 <para>See O. Czarny and G. Huysmans. Bézier surfaces and finite elements for MHD simulations. Journal of Computational Physics, 227(16):7423–7445, 2008. doi:10.1016/j.jcp.2008.04.001.</para>
 <para>It and its Jacobian matrix are invertible everywhere except for <formula id="18">$ r = 0 $</formula>.</para>
 <para>Its Jacobian coefficients are defined as follow</para>
-<para><formula id="100">$ J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } $</formula></para>
-<para><formula id="101">$ J_{12}(r,\theta)  =  r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } $</formula></para>
-<para><formula id="102">$ J_{21}(r,\theta)  =  \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+<para><formula id="102">$ J_{11}(r,\theta) = - \cos(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } $</formula></para>
+<para><formula id="103">$ J_{12}(r,\theta)  =  r\sin(\theta)\frac{1}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} } $</formula></para>
+<para><formula id="104">$ J_{21}(r,\theta)  =  \cos(\theta)\frac{e\epsilon \xi r\sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}  \right)^2 }
 +  \sin(\theta)\frac{e\xi }{ 2- \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }$</formula></para>
-<para><formula id="103">$ J_{22}(r,\theta)  =   r \sin(\theta)\frac{- e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
+<para><formula id="105">$ J_{22}(r,\theta)  =   r \sin(\theta)\frac{- e\epsilon \xi r \sin(\theta)}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \left(
 2 - \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} \right)^2 }
 +  r\cos(\theta)\frac{e\xi }{ 2 -\sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))} }$</formula>.</para>
-<para>and  <formula id="104">$ \det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
+<para>and  <formula id="106">$ \det(J(r, \theta)) = \frac{- r}{ \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}
  \frac{e\xi}{2 -  \sqrt{1 + \epsilon(\epsilon + 2 r \cos(\theta))}}. $</formula> </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" line="54" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/coord_transformations/czarny_to_cartesian.hpp" bodystart="55" bodyend="421"/>

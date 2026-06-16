@@ -26,12 +26,6 @@
 template <
         class GridR,
         class GridTheta,
-        class X_pc,
-        class Y_pc,
-        class AdvDim1,
-        class AdvDim2,
-        class BSplinesR,
-        class BSplinesTheta,
         class IdxRangeOperator,
         class SplineRThetaEvaluatorAdvection,
         class PseudoPhysicalToAdvectionMapping,
@@ -43,11 +37,20 @@ class ElementwiseSplinePolarFootFinder
 {
     using R = typename GridR::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
+    using BSplinesR = find_grid_t<
+            R,
+            ddc::to_type_seq_t<typename SplineRThetaEvaluatorAdvection::spline_domain_type>>;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
     using IdxBatch = typename IdxRangeBatch::discrete_element_type;
     using CoordRTheta = Coord<R, Theta>;
+    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
+    using VectorIndexSetAdvectionDims
+            = ddc::to_type_seq_t<typename PseudoPhysicalToAdvectionMapping::CoordResult>;
+    using AdvDim1 = ddc::type_seq_element_t<0, VectorIndexSetAdvectionDims>;
+    using AdvDim2 = ddc::type_seq_element_t<1, VectorIndexSetAdvectionDims>;
 
 private:
     SplineRThetaEvaluatorAdvection m_evaluator_advection_field;
@@ -139,12 +142,6 @@ public:
 template <
         class GridR,
         class GridTheta,
-        class X_pc,
-        class Y_pc,
-        class AdvDim1,
-        class AdvDim2,
-        class BSplinesR,
-        class BSplinesTheta,
         class IdxRangeOperator,
         class SplineRThetaEvaluatorAdvection,
         class PseudoPhysicalToAdvectionMapping,
@@ -156,6 +153,8 @@ class ElementwiseSplinePolarFootFinderMem
 {
     using R = typename GridR::continuous_dimension_type;
     using Theta = typename GridTheta::continuous_dimension_type;
+    using X_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_x;
+    using Y_pc = typename LogicalToPseudoPhysicalMapping::cartesian_tag_y;
     using IdxRTheta = Idx<GridR, GridTheta>;
     using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeOperator, GridR, GridTheta>;
     using IdxOperator = typename IdxRangeOperator::discrete_element_type;
@@ -166,12 +165,6 @@ public:
     using GPUCompat = ElementwiseSplinePolarFootFinder<
             GridR,
             GridTheta,
-            X_pc,
-            Y_pc,
-            AdvDim1,
-            AdvDim2,
-            BSplinesR,
-            BSplinesTheta,
             IdxRangeOperator,
             SplineRThetaEvaluatorAdvection,
             PseudoPhysicalToAdvectionMapping,
@@ -361,12 +354,6 @@ public:
     using ElementwiseOperator = ElementwiseSplinePolarFootFinderMem<
             GridR,
             GridTheta,
-            X_pc,
-            Y_pc,
-            AdvDim1,
-            AdvDim2,
-            BSplinesR,
-            BSplinesTheta,
             IdxRangeOperator,
             SplineRThetaEvaluatorAdvection,
             PseudoPhysicalToAdvectionMapping,
@@ -376,7 +363,7 @@ public:
             TimeStepper>;
 
 public:
-    SplinePolarFootFinder(
+    [[deprecated("Use PolarFootFinder instead")]] SplinePolarFootFinder(
             IdxRangeBatched const& idx_range_operator,
             TimeStepperBuilder const& time_stepper_builder,
             LogicalToPhysicalMapping const& logical_to_physical_mapping,

@@ -309,7 +309,7 @@
 <para>A multi-dimensional coordinate transformation which can be decomposed into multiple orthogonal coordinate transformations. </para>
     </briefdescription>
     <detaileddescription>
-<para>E.g. <formula id="164">$ (x_1,x_2) = (y_1 + 3, 4*y_2 + 7) $</formula> Here the coordinates <formula id="165">$ y_1 $</formula> and <formula id="166">$ y_2 $</formula> only appear in the description of either <formula id="153">$ x_1 $</formula> or <formula id="154">$ x_2 $</formula>.</para>
+<para>E.g. <formula id="166">$ (x_1,x_2) = (y_1 + 3, 4*y_2 + 7) $</formula> Here the coordinates <formula id="167">$ y_1 $</formula> and <formula id="168">$ y_2 $</formula> only appear in the description of either <formula id="155">$ x_1 $</formula> or <formula id="156">$ x_2 $</formula>.</para>
 <para>E.g. a cylindrical transformation which can be decomposed into a 2D circular transformation and a linear transformation.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>

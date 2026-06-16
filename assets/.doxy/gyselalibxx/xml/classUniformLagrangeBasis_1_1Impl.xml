@@ -480,7 +480,7 @@
         <briefdescription>
         </briefdescription>
         <detaileddescription>
-<para>Calculate the Lagrange polynomial for <formula id="316">$ x \ne x_j \forall j $</formula></para>
+<para>Calculate the Lagrange polynomial for <formula id="318">$ x \ne x_j \forall j $</formula></para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">values</parametername>
