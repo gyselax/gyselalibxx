@@ -73,7 +73,9 @@ private:
     using Y = ddc::type_seq_element_t<1, PhysicalSpace>;
 
 public:
+    /// The first dimension on which the advection field is defined.
     using AdvDim1 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, X, R>;
+    /// The second dimension on which the advection field is defined.
     using AdvDim2 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta>;
 
 private:
