@@ -236,11 +236,6 @@ public:
                 ExecSpace(),
                 get_idx_range(feet),
                 KOKKOS_LAMBDA(IdxOperator const idx) { feet(idx) = elementwise(idx); });
-
-        //// Treatment to conserve the C0 property of the advected function:
-        //unify_value_at_centre_pt(feet);
-        //// Test if the values are the same at the centre point
-        //is_unified(feet);
     }
 
 private:
