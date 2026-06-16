@@ -70,7 +70,9 @@ public:
      */
     KOKKOS_FUNCTION double operator()(Coord<R, Theta> coord_rtheta) const
     {
+        std::cout << coord_rtheta << std::endl;
         Coord<X, Y> const coord_xy(m_mapping(coord_rtheta));
+        std::cout << coord_xy << std::endl;
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
 
@@ -172,16 +174,18 @@ public:
      */
     KOKKOS_FUNCTION double operator()(Coord<R, Theta> coord_rtheta) const
     {
+        std::cout << coord_rtheta << std::endl;
         // Gaussian centred in (x0, y0):
         Coord<X, Y> const coord_xy(m_mapping(coord_rtheta));
+        std::cout << coord_xy << std::endl;
         double const deviation_x = ddc::select<X>(coord_xy) - m_x0;
         double const deviation_y = ddc::select<Y>(coord_xy) - m_y0;
         Coord<R> const r = ddc::select<R>(coord_rtheta);
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
                    * Kokkos::exp(
-                           -ipow(deviation_x, 2) / (2 * m_sig_x * m_sig_x)
-                           - ipow(deviation_y, 2) / (2 * m_sig_y * m_sig_y));
+                           -(deviation_x * deviation_x) / (2 * m_sig_x * m_sig_x)
+                           - (deviation_y * deviation_y) / (2 * m_sig_y * m_sig_y));
         } else {
             return 0.0;
         }
