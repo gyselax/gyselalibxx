@@ -44,7 +44,7 @@ class FunctionToBeAdvected_cos_4_ellipse
     using Theta = typename Mapping::curvilinear_tag_theta;
 
 private:
-    Mapping const& m_mapping;
+    Mapping m_mapping;
 
 public:
     /**
@@ -70,9 +70,7 @@ public:
      */
     KOKKOS_FUNCTION double operator()(Coord<R, Theta> coord_rtheta) const
     {
-        std::cout << coord_rtheta << std::endl;
         Coord<X, Y> const coord_xy(m_mapping(coord_rtheta));
-        std::cout << coord_xy << std::endl;
         double const x = ddc::get<X>(coord_xy);
         double const y = ddc::get<Y>(coord_xy);
 
@@ -109,7 +107,7 @@ class FunctionToBeAdvected_gaussian
     using Theta = typename Mapping::curvilinear_tag_theta;
 
 private:
-    Mapping const& m_mapping;
+    Mapping m_mapping;
     double const m_constant;
     Coord<X> const m_x0;
     Coord<Y> const m_y0;
@@ -174,10 +172,8 @@ public:
      */
     KOKKOS_FUNCTION double operator()(Coord<R, Theta> coord_rtheta) const
     {
-        std::cout << coord_rtheta << std::endl;
         // Gaussian centred in (x0, y0):
         Coord<X, Y> const coord_xy(m_mapping(coord_rtheta));
-        std::cout << coord_xy << std::endl;
         double const deviation_x = ddc::select<X>(coord_xy) - m_x0;
         double const deviation_y = ddc::select<Y>(coord_xy) - m_y0;
         Coord<R> const r = ddc::select<R>(coord_rtheta);
