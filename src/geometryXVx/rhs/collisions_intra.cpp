@@ -262,7 +262,7 @@ void CollisionsIntra::compute_rhs_vector(
 
 DFieldSpXVx CollisionsIntra::operator()(DFieldSpXVx allfdistribu, double dt) const
 {
-    Kokkos::Profiling::pushRegion("CollisionsIntra");
+    Kokkos::Profiling::pushRegion("(GSLX) CollisionsIntra");
 
     IdxRangeSpX grid_sp_x(get_idx_range<Species, GridX>(allfdistribu));
     // density and temperature

@@ -88,7 +88,7 @@ public:
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
 
-        Kokkos::Profiling::pushRegion("BslAdvectionVelocity");
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionVelocity");
         IdxRangeFdistribu const idx_range = get_idx_range(allfdistribu);
         IdxRange<GridV> const idx_range_v = ddc::select<GridV>(idx_range);
         IdxRange<Species> const idx_range_sp = ddc::select<Species>(idx_range);
@@ -100,7 +100,7 @@ public:
                 "feet_coords (BslAdvectionVelocity::operator())",
                 batched_feet_idx_range);
         Field<Coord<DimV>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
-        DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
+        FieldMem<DataType, IdxRangeFunctionBasis> function_coefs_alloc(
                 "function_coefs (BslAdvectionVelocity::operator())",
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 

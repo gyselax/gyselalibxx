@@ -2,12 +2,12 @@ spack:
   definitions:
   - packages:
     - cmake
-    - 'ddc@0.12 +fft +pdi +splines'
+    - 'ddc@0.14 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +cuda cuda_arch=80
     - googletest +gmock
     - kokkos@4.7 ~openmp +cuda +cuda_relocatable_device_code +cuda_constexpr cuda_arch=80
     - kokkos-kernels@4.7 ~shared
-    - kokkos-tools
+    - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
     - 'koliop@0.1.2:0.1'
     - lapack
     - mpi

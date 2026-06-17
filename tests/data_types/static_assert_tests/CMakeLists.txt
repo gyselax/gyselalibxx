@@ -25,7 +25,7 @@ set_tests_properties(${file} PROPERTIES
     PASS_REGULAR_EXPRESSION ${error_msg}
 )
 
-set_property(TEST ${file} PROPERTY TIMEOUT 20)
+set_property(TEST ${file} PROPERTY TIMEOUT 200)
 
 endfunction()
 

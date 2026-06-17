@@ -273,7 +273,7 @@ public:
      */
     virtual field_type operator()(field_type phi, field_type rho) const final
     {
-        Kokkos::Profiling::pushRegion("FFTPoissonSolver");
+        Kokkos::Profiling::pushRegion("(GSLX) FFTPoissonSolver");
 
         laplacian_idx_range_type idx_range(get_idx_range(phi));
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
@@ -316,7 +316,7 @@ public:
      */
     virtual field_type operator()(field_type phi, vector_field_type E, field_type rho) const final
     {
-        Kokkos::Profiling::pushRegion("FFTPoissonSolver");
+        Kokkos::Profiling::pushRegion("(GSLX) FFTPoissonSolver");
 
         laplacian_idx_range_type idx_range(get_idx_range(phi));
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
