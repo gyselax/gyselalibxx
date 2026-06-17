@@ -112,7 +112,7 @@
 
 * [**Edge**](structEdge.md)
 * [**EdgeTransformation**](classEdgeTransformation.md)
-* [**ElementwiseChoice**](classpolar__foot__finder__details_1_1ElementwiseChoice.md)
+* [**ElementwiseChoice**](structpolar__foot__finder__details_1_1ElementwiseChoice.md)
 ([**polar\_foot\_finder\_details**](namespacepolar__foot__finder__details.md))
 * [**ElementwiseChoice&lt; FootFindingSpace::LOGICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;**](structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1LOGICAL_00_01Adv740065543af7658e7ff9fc9e64d77611.md)
 ([**polar\_foot\_finder\_details**](namespacepolar__foot__finder__details.md))
@@ -439,6 +439,8 @@
 * [**R**](structR.md)
 * [**R\_cov**](structR__cov.md)
 * [**R\_gyro**](structGyroAverageOperator_1_1R__gyro.md)
+* [**reduction\_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;**](structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4.md)
+([**Kokkos**](namespaceKokkos.md))
 * [**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md)
 * [**RestartInitialisation**](classRestartInitialisation.md)
 * [**RK2**](classRK2.md)

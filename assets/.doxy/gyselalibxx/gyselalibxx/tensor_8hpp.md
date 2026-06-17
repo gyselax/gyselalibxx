@@ -30,12 +30,18 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**Kokkos**](namespaceKokkos.md) <br> |
 
 
 ## Classes
 
 | Type | Name |
 | ---: | :--- |
+| struct | [**reduction\_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;**](structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4.md) &lt;class ElementType, ValidIndexSet&gt;<br>_A specialisation of Kokkos::reduction\_identity to allow calling parallel\_transform on tensors._  |
 | class | [**Tensor**](classTensor.md) &lt;class ElementType, class ValidIndexSetFirstDim, ValidIndexSet&gt;<br>_A class representing a_ [_**Tensor**_](classTensor.md) _._ |
 
 
@@ -67,6 +73,11 @@
 
 
 
+## Public Functions
+
+| Type | Name |
+| ---: | :--- |
+|  std::ostream & | [**operator&lt;&lt;**](#function-operator) (std::ostream & o, [**Vector**](classTensor.md)&lt; ElementType, Dim1, TailDims... &gt; vec) <br> |
 
 
 
@@ -180,6 +191,25 @@ using Vector =  Tensor<ElementType, VectorIndexSet<Dims...> >;
 
 ```C++
 using to_tensor_t =  typename detail::ToTensor<ElementType, TypeSeqValidIndexSet>::type;
+```
+
+
+
+
+<hr>
+## Public Functions Documentation
+
+
+
+
+### function operator&lt;&lt; 
+
+```C++
+template<class ElementType, class Dim1, class... TailDims>
+std::ostream & operator<< (
+    std::ostream & o,
+    Vector < ElementType, Dim1, TailDims... > vec
+) 
 ```
 
 

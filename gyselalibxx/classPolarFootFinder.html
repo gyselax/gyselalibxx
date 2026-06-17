@@ -583,6 +583,14 @@
 </thead>
 <tbody>
 <tr>
+<td style="text-align: right;">typedef std::conditional_t&lt; AFSpace==AdvectionFieldSpace::PHYSICAL, <a href="structX.html"><strong>X</strong></a>, <a href="classPolarFootFinder.html#typedef-r"><strong>R</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-advdim1"><strong>AdvDim1</strong></a>  <br><em>The first dimension on which the advection field is defined.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef std::conditional_t&lt; AFSpace==AdvectionFieldSpace::PHYSICAL, <a href="structY.html"><strong>Y</strong></a>, <a href="classPolarFootFinder.html#typedef-theta"><strong>Theta</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-advdim2"><strong>AdvDim2</strong></a>  <br><em>The second dimension on which the advection field is defined.</em></td>
+</tr>
+<tr>
 <td style="text-align: right;">typedef ConstField&lt; CoordRTheta, IdxRangeBatched, <a href="classPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt;</td>
 <td style="text-align: left;"><a href="#typedef-cconstfieldfeet"><strong>CConstFieldFeet</strong></a>  <br><em>A read-only field of</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinates over the batched operator domain.</em></td>
 </tr>
@@ -591,7 +599,7 @@
 <td style="text-align: left;"><a href="#typedef-cfieldfeet"><strong>CFieldFeet</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef typename <a href="classpolar__foot__finder__details_1_1ElementwiseChoice.html"><strong>polar_foot_finder_details::ElementwiseChoice</strong></a>&lt; FFSpace, AFSpace, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, IdxRangeBatched, RThetaAdvectionEvaluator, <a href="classVectorFieldMem.html"><strong>AdvecCoefField</strong></a>, TimeStepperBuilder, LogicalToPhysicalMapping &gt;::type</td>
+<td style="text-align: right;">typedef typename <a href="structpolar__foot__finder__details_1_1ElementwiseChoice.html"><strong>polar_foot_finder_details::ElementwiseChoice</strong></a>&lt; FFSpace, AFSpace, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, IdxRangeBatched, RThetaAdvectionEvaluator, <a href="classVectorFieldMem.html"><strong>AdvecCoefField</strong></a>, TimeStepperBuilder, LogicalToPhysicalMapping &gt;::type</td>
 <td style="text-align: left;"><a href="#typedef-elementwiseoperator"><strong>ElementwiseOperator</strong></a>  <br><em>The operator returned by operator() which calculates the feet elementwise.</em></td>
 </tr>
 <tr>
@@ -631,11 +639,11 @@
 </tr>
 <tr>
 <td style="text-align: right;"><a href="classPolarFootFinder.html#typedef-elementwiseoperator"><strong>ElementwiseOperator</strong></a></td>
-<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, <a href="classPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field) const<br><em>Get an elementwise operator capable of calculating the feet of the characteristics.</em></td>
+<td style="text-align: left;"><a href="#function-operator"><strong>operator()</strong></a> (<a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRangeBatched, VectorIndexSet&lt; <a href="classPolarFootFinder.html#typedef-advdim1"><strong>AdvDim1</strong></a>, <a href="classPolarFootFinder.html#typedef-advdim2"><strong>AdvDim2</strong></a> &gt;, <a href="classPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field) const<br><em>Get an elementwise operator capable of calculating the feet of the characteristics.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">void</td>
-<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (<a href="classPolarFootFinder.html#typedef-cfieldfeet"><strong>CFieldFeet</strong></a> feet, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, <a href="classPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field, double dt) const<br><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></td>
+<td style="text-align: left;"><a href="#function-operator_1"><strong>operator()</strong></a> (<a href="classPolarFootFinder.html#typedef-cfieldfeet"><strong>CFieldFeet</strong></a> feet, <a href="classVectorField.html"><strong>DVectorConstField</strong></a>&lt; IdxRangeBatched, VectorIndexSet&lt; <a href="classPolarFootFinder.html#typedef-advdim1"><strong>AdvDim1</strong></a>, <a href="classPolarFootFinder.html#typedef-advdim2"><strong>AdvDim2</strong></a> &gt;, <a href="classPolarFootFinder.html#typedef-memory_space"><strong>memory_space</strong></a> &gt; advection_field, double dt) const<br><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></td>
 </tr>
 </tbody>
 </table>
@@ -652,6 +660,18 @@
 <li><code>RThetaAdvectionEvaluator</code> The spline evaluator for the advection field. </li>
 </ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-advdim1">typedef AdvDim1</h3>
+<p><em>The first dimension on which the advection field is defined.</em> </p>
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::AdvDim1 =  std::conditional_t&lt;AFSpace == AdvectionFieldSpace::PHYSICAL, X, R&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-advdim2">typedef AdvDim2</h3>
+<p><em>The second dimension on which the advection field is defined.</em> </p>
+<pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::AdvDim2 =  std::conditional_t&lt;AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta&gt;;
+</code></pre>
+<hr>
+
 <h3 id="typedef-cconstfieldfeet">typedef CConstFieldFeet</h3>
 <p><em>A read-only field of</em> <span class="arithmatex">\((r, \theta)\)</span> <em>coordinates over the batched operator domain.</em></p>
 <pre><code class="language-C++">using PolarFootFinder&lt; FFSpace, AFSpace, LogicalToPhysicalMapping, IdxRangeBatched, TimeStepperBuilder, RThetaAdvectionBuilder, RThetaAdvectionEvaluator &gt;::CConstFieldFeet =  ConstField&lt;CoordRTheta, IdxRangeBatched, memory_space&gt;;
@@ -725,7 +745,7 @@
 <h3 id="function-operator">function operator()</h3>
 <p><em>Get an elementwise operator capable of calculating the feet of the characteristics.</em> </p>
 <pre><code class="language-C++">inline ElementwiseOperator PolarFootFinder::operator() (
-    DVectorConstField &lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, memory_space &gt; advection_field
+    DVectorConstField &lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1 , AdvDim2 &gt;, memory_space &gt; advection_field
 ) const
 </code></pre>
 <p>Computes the spline coefficients of the advection field, then packages them together with the mappings and time stepper into an <a href="classPolarFootFinder.html#typedef-elementwiseoperator"><strong>ElementwiseOperator</strong></a>. Calling <code>operator()(dt)</code> on the returned object yields a GPU-copyable functor.</p>
@@ -741,7 +761,7 @@
 <p><em>Advect the feet over</em> <span class="arithmatex">\(dt\)</span> <em>.</em></p>
 <pre><code class="language-C++">inline void PolarFootFinder::operator() (
     CFieldFeet feet,
-    DVectorConstField &lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1, AdvDim2 &gt;, memory_space &gt; advection_field,
+    DVectorConstField &lt; IdxRangeBatched, VectorIndexSet&lt; AdvDim1 , AdvDim2 &gt;, memory_space &gt; advection_field,
     double dt
 ) const
 </code></pre>

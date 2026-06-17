@@ -1,12 +1,12 @@
 
 
-# Class polar\_foot\_finder\_details::ElementwiseChoice
+# Struct polar\_foot\_finder\_details::ElementwiseChoice
 
 **template &lt;FootFindingSpace FFSpace, AdvectionFieldSpace AFSpace, class [**GridR**](structGridR.md), class [**GridTheta**](structGridTheta.md), class IdxRangeOperator, class RThetaAdvectionEvaluator, class AdvecCoefField, class TimeStepperBuilder, concepts::Mapping LogicalToPhysicalMapping&gt;**
 
 
 
-[**ClassList**](annotated.md) **>** [**polar\_foot\_finder\_details**](namespacepolar__foot__finder__details.md) **>** [**ElementwiseChoice**](classpolar__foot__finder__details_1_1ElementwiseChoice.md)
+[**ClassList**](annotated.md) **>** [**polar\_foot\_finder\_details**](namespacepolar__foot__finder__details.md) **>** [**ElementwiseChoice**](structpolar__foot__finder__details_1_1ElementwiseChoice.md)
 
 
 

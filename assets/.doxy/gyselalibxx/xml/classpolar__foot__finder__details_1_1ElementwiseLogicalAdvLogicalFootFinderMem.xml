@@ -215,7 +215,7 @@
 <parametername direction="in">logical_to_physical</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Unused for the logical/logical case; accepted for interface uniformity with other <ref refid="classpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">ElementwiseChoice</ref> specialisations. </para>
+<para>Unused for the logical/logical case; accepted for interface uniformity with other <ref refid="structpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">ElementwiseChoice</ref> specialisations. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -239,7 +239,7 @@
 <parametername direction="in">coord_centre</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>Unused for the logical/logical case; accepted for interface uniformity with other <ref refid="classpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">ElementwiseChoice</ref> specialisations. </para>
+<para>Unused for the logical/logical case; accepted for interface uniformity with other <ref refid="structpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">ElementwiseChoice</ref> specialisations. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

@@ -140,10 +140,10 @@ inline polar_foot_finder_details::ElementwiseLogicalAdvLogicalFootFinderMem::Ele
 
 
 * `evaluator_advection_field` The evaluator for the spline representation of the advection field. 
-* `logical_to_physical` Unused for the logical/logical case; accepted for interface uniformity with other [**ElementwiseChoice**](classpolar__foot__finder__details_1_1ElementwiseChoice.md) specialisations. 
+* `logical_to_physical` Unused for the logical/logical case; accepted for interface uniformity with other [**ElementwiseChoice**](structpolar__foot__finder__details_1_1ElementwiseChoice.md) specialisations. 
 * `time_stepper_builder` The factory used to preallocate the time integration method. 
 * `advection_field_coefs` The spline coefficients of the advection field. Ownership is transferred in. 
-* `coord_centre` Unused for the logical/logical case; accepted for interface uniformity with other [**ElementwiseChoice**](classpolar__foot__finder__details_1_1ElementwiseChoice.md) specialisations. 
+* `coord_centre` Unused for the logical/logical case; accepted for interface uniformity with other [**ElementwiseChoice**](structpolar__foot__finder__details_1_1ElementwiseChoice.md) specialisations. 
 * `idx_range_theta` The poloidal index range, used to wrap the angular coordinate into the periodic domain after each time step. 
 
 

@@ -99,13 +99,13 @@
 
 ## o
 
+* **operator&lt;&lt;** ([**tensor.hpp**](tensor_8hpp.md), [**matrix.cpp**](matrix_8cpp.md), [**matrix.hpp**](matrix_8hpp.md), [**view.hpp**](view_8hpp.md))
 * **operator\*** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
 * **operator+** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
 * **operator+=** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
 * **operator-** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
 * **operator-=** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
 * **operator/** ([**tensor\_common.hpp**](tensor__common_8hpp.md))
-* **operator&lt;&lt;** ([**matrix.cpp**](matrix_8cpp.md), [**matrix.hpp**](matrix_8hpp.md), [**view.hpp**](view_8hpp.md))
 * **OnionPatchLocator** ([**onion\_patch\_locator.hpp**](onion__patch__locator_8hpp.md))
 
 

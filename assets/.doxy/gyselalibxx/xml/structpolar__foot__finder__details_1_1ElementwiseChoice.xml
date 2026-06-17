@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='no'?>
 <doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
-  <compounddef id="classpolar__foot__finder__details_1_1ElementwiseChoice" kind="class" language="C++" prot="public">
+  <compounddef id="structpolar__foot__finder__details_1_1ElementwiseChoice" kind="struct" language="C++" prot="public">
     <compoundname>polar_foot_finder_details::ElementwiseChoice</compoundname>
     <templateparamlist>
       <param>

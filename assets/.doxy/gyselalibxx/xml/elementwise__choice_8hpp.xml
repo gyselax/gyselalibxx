@@ -111,7 +111,7 @@
 <codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">AdvecCoefField,</highlight></codeline>
 <codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">TimeStepperBuilder,</highlight></codeline>
 <codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="conceptconcepts_1_1Mapping" kindref="compound">concepts::Mapping</ref><sp/>LogicalToPhysicalMapping&gt;</highlight></codeline>
-<codeline lineno="20" refid="classpolar__foot__finder__details_1_1ElementwiseChoice" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">ElementwiseChoice</ref>;</highlight></codeline>
+<codeline lineno="20" refid="structpolar__foot__finder__details_1_1ElementwiseChoice" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structpolar__foot__finder__details_1_1ElementwiseChoice" kindref="compound">ElementwiseChoice</ref>;</highlight></codeline>
 <codeline lineno="21"><highlight class="normal"></highlight></codeline>
 <codeline lineno="22"><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>namespace<sp/>polar_foot_finder_details</highlight><highlight class="normal"></highlight></codeline>
     </programlisting>

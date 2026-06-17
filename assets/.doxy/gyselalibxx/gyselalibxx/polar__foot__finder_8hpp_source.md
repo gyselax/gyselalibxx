@@ -56,13 +56,15 @@ private:
     using X = ddc::type_seq_element_t<0, PhysicalSpace>;
     using Y = ddc::type_seq_element_t<1, PhysicalSpace>;
 
+public:
+    using AdvDim1 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, X, R>;
+    using AdvDim2 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta>;
+
+private:
     using PolarGrid
             = ddc::to_type_seq_t<typename RThetaAdvectionBuilder::interpolation_domain_type>;
     using GridR = find_grid_t<R, PolarGrid>;
     using GridTheta = find_grid_t<Theta, PolarGrid>;
-
-    using AdvDim1 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, X, R>;
-    using AdvDim2 = std::conditional_t<AFSpace == AdvectionFieldSpace::PHYSICAL, Y, Theta>;
 
     using BSplinesR = typename RThetaAdvectionBuilder::bsplines_type1;
     using BSplinesTheta = typename RThetaAdvectionBuilder::bsplines_type2;

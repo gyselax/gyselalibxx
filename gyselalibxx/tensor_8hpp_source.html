@@ -723,12 +723,33 @@ using Vector = Tensor&lt;ElementType, VectorIndexSet&lt;Dims...&gt;&gt;;
 template &lt;class... Dims&gt;
 using DVector = Vector&lt;double, Dims...&gt;;
 
+template &lt;class ElementType, class Dim1, class... TailDims&gt;
+std::ostream&amp; operator&lt;&lt;(std::ostream&amp; o, Vector&lt;ElementType, Dim1, TailDims...&gt; vec)
+{
+    o &lt;&lt; "(";
+    o &lt;&lt; ddcHelper::get&lt;Dim1&gt;(vec);
+    ((o &lt;&lt; ", " &lt;&lt; ddcHelper::get&lt;TailDims&gt;(vec)), ...);
+    o &lt;&lt; ")";
+    return o;
+}
+
 namespace detail {
 
 template &lt;class ElementType, class... ValidIndexSet&gt;
 inline constexpr bool enable_tensor_type&lt;Tensor&lt;ElementType, ValidIndexSet...&gt;&gt; = true;
 
 }
+
+namespace Kokkos { //reduction identity must be defined in Kokkos namespace
+template &lt;class ElementType, class... ValidIndexSet&gt;
+struct reduction_identity&lt;Tensor&lt;ElementType, ValidIndexSet...&gt;&gt;
+{
+    KOKKOS_FORCEINLINE_FUNCTION static Tensor&lt;ElementType, ValidIndexSet...&gt; sum()
+    {
+        return Tensor&lt;ElementType, ValidIndexSet...&gt;(0);
+    }
+};
+} // namespace Kokkos
 </code></pre></div>
               
             </div>

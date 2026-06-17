@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4" kind="struct" language="C++" prot="public">
+    <compoundname>Kokkos::reduction_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;</compoundname>
+    <includes refid="tensor_8hpp" local="no">tensor.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ElementType</type>
+      </param>
+      <param>
+        <type>class...</type>
+        <declname>ValidIndexSet</declname>
+        <defname>ValidIndexSet</defname>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4_1a3e01e7ef0596f16ac75a51320906180e" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_FORCEINLINE_FUNCTION <ref refid="classTensor" kindref="compound">Tensor</ref>&lt; ElementType, ValidIndexSet... &gt;</type>
+        <definition>static KOKKOS_FORCEINLINE_FUNCTION Tensor&lt; ElementType, ValidIndexSet... &gt; Kokkos::reduction_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;::sum</definition>
+        <argsstring>()</argsstring>
+        <name>sum</name>
+        <qualifiedname>Kokkos::reduction_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;::sum</qualifiedname>
+        <briefdescription>
+<para>Describe initialisation for summing. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="248" column="47" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="248" bodyend="251"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>A specialisation of Kokkos::reduction_identity to allow calling parallel_transform on tensors. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" line="245" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/data_types/tensor.hpp" bodystart="246" bodyend="252"/>
+    <listofallmembers>
+      <member refid="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4_1a3e01e7ef0596f16ac75a51320906180e" prot="public" virt="non-virtual"><scope>Kokkos::reduction_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;</scope><name>sum</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

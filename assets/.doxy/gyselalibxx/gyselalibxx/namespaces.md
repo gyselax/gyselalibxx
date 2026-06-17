@@ -6,6 +6,7 @@ Here is a list of all namespaces with brief descriptions:
 
 * **namespace** [**GrevillePointsR**](namespaceGrevillePointsR.md) 
 * **namespace** [**GrevillePointsTheta**](namespaceGrevillePointsTheta.md) 
+* **namespace** [**Kokkos**](namespaceKokkos.md)     
 * **namespace** [**PolarSplines**](namespacePolarSplines.md)     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d102.md) 
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d234.md) 

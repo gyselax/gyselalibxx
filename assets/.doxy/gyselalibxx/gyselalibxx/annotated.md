@@ -127,6 +127,8 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**InverseJacobianMatrix**](classInverseJacobianMatrix.md)     
 * **class** [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md) _Initialise the allfdistribu function._     
 * **class** [**KineticSource**](classKineticSource.md) _A class that describes a source of particles._     
+* **namespace** [**Kokkos**](namespaceKokkos.md)     
+    * **struct** [**reduction\_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;**](structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4.md) _A specialisation of Kokkos::reduction\_identity to allow calling parallel\_transform on tensors._     
 * **class** [**KrookSourceAdaptive**](classKrookSourceAdaptive.md) _A class that describes a source of particles._     
 * **class** [**KrookSourceConstant**](classKrookSourceConstant.md) _A class that describes a source of particles._     
 * **class** [**LagrangeEvaluator**](classLagrangeEvaluator.md) _A class to evaluate, differentiate or integrate a Lagrange function._     
@@ -332,7 +334,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**is\_uniform\_lagrange\_basis**](structis__uniform__lagrange__basis.md) 
 * **namespace** [**maxwellian\_equilibrium**](namespacemaxwellian__equilibrium.md)     
 * **namespace** [**polar\_foot\_finder\_details**](namespacepolar__foot__finder__details.md)     
-    * **class** [**ElementwiseChoice**](classpolar__foot__finder__details_1_1ElementwiseChoice.md) 
+    * **struct** [**ElementwiseChoice**](structpolar__foot__finder__details_1_1ElementwiseChoice.md) 
     * **struct** [**ElementwiseChoice&lt; FootFindingSpace::LOGICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;**](structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1LOGICAL_00_01Adv740065543af7658e7ff9fc9e64d77611.md) _Selects_ [_**ElementwiseLogicalAdvLogicalFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinderMem.md) _for logical advection with foot-finding in logical space._    
     * **struct** [**ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;**](structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ad3551d0dba544ea9678328f5e046fdf7c.md) _Selects_ [_**ElementwiseLogicalAdvPseudoPhysFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvPseudoPhysFootFinderMem.md) _(using the physical mapping directly) for logical advection with foot-finding in physical space._    
     * **struct** [**ElementwiseChoice&lt; FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;**](structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1PHYSICAL_00_01Ade857839a3fb92baaf6bd919a12083d58.md) _Selects_ [_**ElementwisePhysicalAdvPhysicalFootFinderMem**_](classpolar__foot__finder__details_1_1ElementwisePhysicalAdvPhysicalFootFinderMem.md) _for physical advection with foot-finding in physical space._    

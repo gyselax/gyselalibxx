@@ -227,6 +227,7 @@
 * **DerivDim** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **DimInterest** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **DFieldFDistribu** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
+* **DVectorConstFieldAdvection** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **DVectorConstFieldAdvectionRTheta** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **DVectorConstFieldAdvectionXY** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **DVectorFieldAdvectionRTheta** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
@@ -326,7 +327,6 @@
 * **Deriv2Field** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
 * **Deriv2FieldMem** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
 * **DerivFieldType** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
-* **DVectorConstFieldAdvection** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **DVectorFieldAdvection** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 
 
@@ -1227,6 +1227,7 @@
 * **space\_tags** ([**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md), [**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md))
 * **s\_nbe\_xmax** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
 * **s\_nbe\_xmin** ([**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md))
+* **sum** ([**Kokkos::reduction\_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;**](structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4.md))
 * **set\_element** ([**Matrix**](classMatrix.md), [**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Dense**](classMatrix__Dense.md), [**Matrix\_PDS\_Tridiag**](classMatrix__PDS__Tridiag.md), [**Matrix\_Periodic\_Banded**](classMatrix__Periodic__Banded.md))
 * **solve\_inplace** ([**Matrix**](classMatrix.md), [**Matrix\_Centre\_Block**](classMatrix__Centre__Block.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md))
 * **solve\_inplace\_method** ([**Matrix**](classMatrix.md), [**Matrix\_Banded**](classMatrix__Banded.md), [**Matrix\_Corner\_Block**](classMatrix__Corner__Block.md), [**Matrix\_Dense**](classMatrix__Dense.md), [**Matrix\_PDS\_Tridiag**](classMatrix__PDS__Tridiag.md))

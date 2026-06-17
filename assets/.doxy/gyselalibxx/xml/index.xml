@@ -112,6 +112,7 @@
     <member refid="classBslAdvectionPolar_1a5357cbc4e0a2656b5a76d6a36a130324" kind="typedef"><name>DVectorFieldMemAdvectionXY</name></member>
     <member refid="classBslAdvectionPolar_1abdc78fe407c40023d8d768df593842d7" kind="typedef"><name>DVectorFieldAdvectionXY</name></member>
     <member refid="classBslAdvectionPolar_1a39ab6ce3028092d6b0ecf7a177e784d7" kind="typedef"><name>DVectorConstFieldAdvectionXY</name></member>
+    <member refid="classBslAdvectionPolar_1a4c87e114b0b3ad3d30baf66afcc20f15" kind="typedef"><name>DVectorConstFieldAdvection</name></member>
     <member refid="classBslAdvectionPolar_1a89634de57a3ba39c3daa48edf28d5c88" kind="typedef"><name>DVectorFieldMemAdvectionXYOnBatch</name></member>
     <member refid="classBslAdvectionPolar_1a6f2b8ff72b82fb7e834cc924787cca77" kind="typedef"><name>DVectorFieldAdvectionXYOnBatch</name></member>
     <member refid="classBslAdvectionPolar_1ab6894409461de90778bd6ee2492bade7" kind="typedef"><name>DVectorFieldAdvectionRTheta</name></member>
@@ -122,9 +123,7 @@
     <member refid="classBslAdvectionPolar_1ab07f8ce22217dcbc41b7b9eafe809ad5" kind="variable"><name>m_logical_to_physical_mapping</name></member>
     <member refid="classBslAdvectionPolar_1ac9367aaacc39c5ee50d98f6b38cb8597" kind="function"><name>BslAdvectionPolar</name></member>
     <member refid="classBslAdvectionPolar_1a7142827e276a163625e093d581039b95" kind="function"><name>~BslAdvectionPolar</name></member>
-    <member refid="classBslAdvectionPolar_1a61757f9633771516a1667f291be9d44e" kind="function"><name>operator()</name></member>
-    <member refid="classBslAdvectionPolar_1a22d780d5e069712e2d80f1a333072ff2" kind="function"><name>operator()</name></member>
-    <member refid="classBslAdvectionPolar_1a289ddc2eee54201b6e762435f572c8d6" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvectionPolar_1a44eeac7fa74e256e35902cecc030f7d1" kind="function"><name>operator()</name></member>
     <member refid="classBslAdvectionPolar_1a8f2c499d9bc33ceb4780072241db833c" kind="function"><name>unify_value_at_centre_pt</name></member>
   </compound>
   <compound refid="classBslAdvectionSpatial" kind="class"><name>BslAdvectionSpatial</name>
@@ -918,7 +917,7 @@
     <member refid="classEdgeTransformation_1a7e6652f22cea94a7db8afea03ee7fef7" kind="function"><name>get_mid</name></member>
     <member refid="classEdgeTransformation_1a74f683e93642ada4263db04cd877f36d" kind="function"><name>get_target_idx</name></member>
   </compound>
-  <compound refid="classpolar__foot__finder__details_1_1ElementwiseChoice" kind="class"><name>polar_foot_finder_details::ElementwiseChoice</name>
+  <compound refid="structpolar__foot__finder__details_1_1ElementwiseChoice" kind="struct"><name>polar_foot_finder_details::ElementwiseChoice</name>
   </compound>
   <compound refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1LOGICAL_00_01Adv740065543af7658e7ff9fc9e64d77611" kind="struct"><name>polar_foot_finder_details::ElementwiseChoice&lt; FootFindingSpace::LOGICAL, AdvectionFieldSpace::LOGICAL, GridR, GridTheta, IdxRangeOperator, RThetaAdvectionEvaluator, AdvecCoefField, TimeStepperBuilder, LogicalToPhysicalMapping &gt;</name>
     <member refid="structpolar__foot__finder__details_1_1ElementwiseChoice_3_01FootFindingSpace_1_1LOGICAL_00_01Adv740065543af7658e7ff9fc9e64d77611_1a9bc9884b568ada8f1ec8d4a263b846ad" kind="typedef"><name>type</name></member>
@@ -2690,6 +2689,8 @@
     <member refid="classPolarFootFinder_1a6c33e77ecfcd4ab7952f4fd0cc232694" kind="typedef"><name>Theta</name></member>
     <member refid="classPolarFootFinder_1a7ea499a4333ed4b5d13be222add6fb3c" kind="typedef"><name>memory_space</name></member>
     <member refid="classPolarFootFinder_1a8d091db9ec4de3f95464285610809f2c" kind="typedef"><name>ExecSpace</name></member>
+    <member refid="classPolarFootFinder_1ae0530535efea5dba0ff1608e09e00f46" kind="typedef"><name>AdvDim1</name></member>
+    <member refid="classPolarFootFinder_1ad46ac2f6b0652aab2893862dff877b19" kind="typedef"><name>AdvDim2</name></member>
     <member refid="classPolarFootFinder_1a64a7df1427c937fc27f9df5a26b06054" kind="typedef"><name>ElementwiseOperator</name></member>
     <member refid="classPolarFootFinder_1a32467c2110b8100ab4eee112c272aef2" kind="typedef"><name>IdxRangeOperator</name></member>
     <member refid="classPolarFootFinder_1aadd1705e4e6643cbd02d6655904e11ea" kind="typedef"><name>CFieldFeet</name></member>
@@ -2701,8 +2702,6 @@
     <member refid="classPolarFootFinder_1a4eb03e380fe0f508f4d32a68257d5734" kind="typedef"><name>PolarGrid</name></member>
     <member refid="classPolarFootFinder_1a4204d4c8318432bd3ce3db275ae67e25" kind="typedef"><name>GridR</name></member>
     <member refid="classPolarFootFinder_1a59c5baba576b85d0506f43475cb55eac" kind="typedef"><name>GridTheta</name></member>
-    <member refid="classPolarFootFinder_1ae0530535efea5dba0ff1608e09e00f46" kind="typedef"><name>AdvDim1</name></member>
-    <member refid="classPolarFootFinder_1ad46ac2f6b0652aab2893862dff877b19" kind="typedef"><name>AdvDim2</name></member>
     <member refid="classPolarFootFinder_1aca60bed337119121dc81126e0295b0ea" kind="typedef"><name>BSplinesR</name></member>
     <member refid="classPolarFootFinder_1a548e004ab1c828c663da98d3dd13dbb3" kind="typedef"><name>BSplinesTheta</name></member>
     <member refid="classPolarFootFinder_1a39e57e9b08e2a984ef7f3c0aa7e14365" kind="typedef"><name>IdxRangeSplineBatched</name></member>
@@ -2954,6 +2953,9 @@
   <compound refid="structGyroAverageOperator_1_1R__gyro" kind="struct"><name>GyroAverageOperator::R_gyro</name>
     <member refid="structGyroAverageOperator_1_1R__gyro_1a84e24cedd3763682987663a5d278d671" kind="typedef"><name>Dual</name></member>
     <member refid="structGyroAverageOperator_1_1R__gyro_1a3a43c0c95a9a15f4bec1265f1e9944f0" kind="variable"><name>PERIODIC</name></member>
+  </compound>
+  <compound refid="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4" kind="struct"><name>Kokkos::reduction_identity&lt; Tensor&lt; ElementType, ValidIndexSet... &gt; &gt;</name>
+    <member refid="structKokkos_1_1reduction__identity_3_01Tensor_3_01ElementType_00_01ValidIndexSet_8_8_8_01_4_01_4_1a3e01e7ef0596f16ac75a51320906180e" kind="function"><name>sum</name></member>
   </compound>
   <compound refid="classRefinedDiscretePoloidalCSSplineMappingBuilder" kind="class"><name>RefinedDiscretePoloidalCSSplineMappingBuilder</name>
     <member refid="classRefinedDiscretePoloidalCSSplineMappingBuilder_1a2f8b6907287fe0cdf23cd034b2368e21" kind="typedef"><name>ExecSpace</name></member>
@@ -3646,6 +3648,8 @@
     <member refid="assert_8cpp_1a6ed39ca4c717fcedac91a69fe5d12438" kind="function"><name>PresentErrorExplanation</name></member>
     <member refid="assert_8cpp_1ae96e29834a9be8b4964acd9edaa37989" kind="function"><name>AssertionFailure</name></member>
   </compound>
+  <compound refid="namespaceKokkos" kind="namespace"><name>Kokkos</name>
+  </compound>
   <compound refid="namespacemaxwellian__equilibrium" kind="namespace"><name>maxwellian_equilibrium</name>
     <member refid="geometryXVx_2initialisation_2maxwellianequilibrium_8hpp_1a0664bbc4da7127e97a1a058b72321898" kind="function"><name>init_from_input</name></member>
   </compound>
@@ -3806,6 +3810,7 @@
     <member refid="tensor_8hpp_1a6aee6677463b93014f0a19113c1e4260" kind="typedef"><name>DTensor</name></member>
     <member refid="tensor_8hpp_1ae3239ebdbab479a3e67907f2d16e8eb1" kind="typedef"><name>Vector</name></member>
     <member refid="tensor_8hpp_1ab4d2f0aa26d0a1f32bae61fe748501dc" kind="typedef"><name>DVector</name></member>
+    <member refid="tensor_8hpp_1a5ca1e74d52fd42b3a408388b1d1a8246" kind="function"><name>operator&lt;&lt;</name></member>
   </compound>
   <compound refid="tensor__common_8hpp" kind="file"><name>tensor_common.hpp</name>
     <member refid="tensor__common_8hpp_1afa45bc00e523f8d9d237de8417630539" kind="variable"><name>is_tensor_type_v</name></member>

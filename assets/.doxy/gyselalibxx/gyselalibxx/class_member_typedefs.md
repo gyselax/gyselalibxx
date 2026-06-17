@@ -134,6 +134,7 @@
 * **DerivDim** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **DimInterest** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **DFieldFDistribu** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
+* **DVectorConstFieldAdvection** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **DVectorConstFieldAdvectionRTheta** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **DVectorConstFieldAdvectionXY** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **DVectorFieldAdvectionRTheta** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
@@ -212,7 +213,6 @@
 * **Deriv2Field** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
 * **Deriv2FieldMem** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
 * **DerivFieldType** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
-* **DVectorConstFieldAdvection** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **DVectorFieldAdvection** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 
 

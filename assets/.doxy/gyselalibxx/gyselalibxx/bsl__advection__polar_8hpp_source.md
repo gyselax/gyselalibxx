@@ -71,6 +71,11 @@ class BslAdvectionPolar
     using DVectorConstFieldAdvectionXY
             = DVectorConstField<IdxRangeBatched, CartesianBasis, MemorySpace>;
 
+    using DVectorConstFieldAdvection = DVectorConstField<
+            IdxRangeBatched,
+            VectorIndexSet<typename FootFinder::AdvDim1, typename FootFinder::AdvDim2>,
+            MemorySpace>;
+
     using DVectorFieldMemAdvectionXYOnBatch
             = DVectorFieldMem<IdxRangeBatch, CartesianBasis, MemorySpace>;
     using DVectorFieldAdvectionXYOnBatch = DVectorField<IdxRangeBatch, CartesianBasis, MemorySpace>;
@@ -108,7 +113,7 @@ public:
 
     DFieldFDistribu operator()(
             DFieldFDistribu allfdistribu,
-            DVectorConstFieldAdvectionXY advection_field_xy,
+            DVectorConstFieldAdvection advection_field,
             double dt) const
     {
         // Pre-allocate spline coefficient storage
@@ -117,7 +122,7 @@ public:
 
         // Compute the feet of the characteristics at tn -----------------------------------------
         typename FootFinder::ElementwiseOperator find_foot_alloc
-                = m_find_feet_method(get_const_field(advection_field_xy));
+                = m_find_feet_method(get_const_field(advection_field));
         typename FootFinder::ElementwiseOperator::GPUCompat find_foot = find_foot_alloc(dt);
 
         // Interpolate the function on the feet of the characteristics. --------------------------
@@ -143,162 +148,6 @@ public:
         return allfdistribu;
     }
 
-
-    DFieldFDistribu operator()(
-            DFieldFDistribu allfdistribu,
-            DVectorConstFieldAdvectionRTheta advection_field_rtheta,
-            DTensor<CartesianBasis> const& advection_field_xy_centre,
-            double dt) const
-    {
-        using IdxRangeBatchedWithoutR = ddc::remove_dims_of_t<IdxRangeBatched, GridR>;
-        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection");
-        IdxRangeBatched grid(get_idx_range(allfdistribu));
-        IdxRangeR radial_grid(grid);
-        IdxRangeBatchedWithoutR no_r_grid(grid);
-
-        // Check the first points on R correspond to the O-point.
-        assert(ddc::coordinate(radial_grid.front()) < 1e-13);
-
-        IdxRangeBatched const
-                grid_without_Opoint(radial_grid.remove_first(IdxStep<GridR>(1)), no_r_grid);
-        IdxRangeBatched const Opoint_grid(radial_grid.take_first(IdxStepR(1)), no_r_grid);
-
-        // Convert advection field on RTheta to advection field on XY
-        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection/RThetaToXY");
-
-        DVectorFieldMemAdvectionXY advection_field_xy_alloc(
-                "advection_field_xy (BslAdvectionPolar::operator())",
-                grid);
-        DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
-
-        LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy
-                = m_logical_to_physical_mapping;
-
-        // (Ax, Ay) = J (Ar, Atheta)
-        copy_to_vector_space<CartesianBasis>(
-                ExecSpace(),
-                advection_field_xy[grid_without_Opoint],
-                logical_to_physical_mapping_proxy,
-                advection_field_rtheta[grid_without_Opoint]);
-
-        Kokkos::Profiling::popRegion();
-
-        const std::source_location location = std::source_location::current();
-        ddc::parallel_for_each(
-                location.function_name(),
-                ExecSpace(),
-                Opoint_grid,
-                KOKKOS_LAMBDA(IdxBatched const idx) {
-                    ddcHelper::assign_vector_field_element(
-                            advection_field_xy,
-                            idx,
-                            advection_field_xy_centre);
-                });
-
-        (*this)(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
-
-        Kokkos::Profiling::popRegion();
-
-        return allfdistribu;
-    }
-
-    DFieldFDistribu operator()(
-            DFieldFDistribu allfdistribu,
-            DVectorConstFieldAdvectionRTheta advection_field_rtheta,
-            double dt) const
-    {
-        using IdxRangeBatchedWithoutR = ddc::remove_dims_of_t<IdxRangeBatched, GridR>;
-        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection");
-        IdxRangeBatched grid(get_idx_range(allfdistribu));
-        IdxRangeR radial_grid(grid);
-        IdxRangeTheta theta_grid(grid);
-        IdxRangeBatchedWithoutR no_r_grid(grid);
-        IdxRangeBatch no_rtheta_grid(grid);
-
-        LogicalToPhysicalMapping const& logical_to_physical_mapping_proxy
-                = m_logical_to_physical_mapping;
-
-        // Test if the first points on R correspond to the O-point.
-        bool const first_row_is_o_point = (ddc::coordinate(radial_grid.front()) < 1e-13);
-
-        /*
-            If the O-point is not considered as on the grid, we have to be sure that the grid of 
-            the advection field on (R, Theta) matches with the grid of the advected function.  
-        */
-        assert(first_row_is_o_point
-               || (IdxRangeR(get_idx_range(advection_field_rtheta)) == radial_grid));
-
-        IdxRangeBatched const grid_without_Opoint(
-                radial_grid.remove_first(IdxStep<GridR>(first_row_is_o_point)),
-                no_r_grid);
-
-        // Convert advection field on RTheta to advection field on XY
-        Kokkos::Profiling::pushRegion("(GSLX) PolarAdvection/RThetaToXY");
-
-        DVectorFieldMemAdvectionXY advection_field_xy_alloc(
-                "advection_field_xy (BslAdvectionPolar::operator())",
-                grid);
-        DVectorFieldAdvectionXY advection_field_xy = get_field(advection_field_xy_alloc);
-
-        // (Ax, Ay) = J (Ar, Atheta)
-        copy_to_vector_space<CartesianBasis>(
-                ExecSpace(),
-                advection_field_xy[grid_without_Opoint],
-                logical_to_physical_mapping_proxy,
-                advection_field_rtheta[grid_without_Opoint]);
-
-        Kokkos::Profiling::popRegion();
-
-        // Treatment for the O-point.
-        if (first_row_is_o_point) {
-            IdxRangeBatched const Opoint_grid(radial_grid.take_first(IdxStepR(1)), no_r_grid);
-            IdxRangeRTheta const grid_first_ring(
-                    radial_grid.take_first(IdxStepR(2)).remove_first(IdxStep<GridR>(1)),
-                    theta_grid);
-
-
-            // Jacobian ill-defined at the O-point, we average the values around the O-point,
-            std::size_t ntheta_points = theta_grid.size();
-            const std::source_location location = std::source_location::current();
-            ddc::parallel_for_each(
-                    location.function_name(),
-                    ExecSpace(),
-                    no_rtheta_grid,
-                    KOKKOS_LAMBDA(IdxBatch const idx_batch) {
-                        DTensor<CartesianBasis> advection_field_xy_average_centre(0, 0);
-
-                        IdxR const idx_r(grid_first_ring.front()); // one ring => one r index.
-                        for (IdxTheta const idx_theta : IdxRangeTheta(grid_first_ring)) {
-                            ddcHelper::get<DimX>(advection_field_xy_average_centre)
-                                    += ddcHelper::get<DimX>(
-                                            advection_field_xy)(idx_batch, idx_r, idx_theta);
-                            ddcHelper::get<DimY>(advection_field_xy_average_centre)
-                                    += ddcHelper::get<DimY>(
-                                            advection_field_xy)(idx_batch, idx_r, idx_theta);
-                        }
-
-                        ddcHelper::get<DimX>(advection_field_xy_average_centre) /= ntheta_points;
-                        ddcHelper::get<DimY>(advection_field_xy_average_centre) /= ntheta_points;
-
-                        // and assign the averaged value to all the points at the O-point.
-                        IdxR const idx_r_Opt(radial_grid.front());
-                        for (IdxTheta const idx_theta : IdxRangeTheta(grid_first_ring)) {
-                            ddcHelper::get<DimX>(
-                                    advection_field_xy)(idx_batch, idx_r_Opt, idx_theta)
-                                    = ddcHelper::get<DimX>(advection_field_xy_average_centre);
-                            ddcHelper::get<DimY>(
-                                    advection_field_xy)(idx_batch, idx_r_Opt, idx_theta)
-                                    = ddcHelper::get<DimY>(advection_field_xy_average_centre);
-                        }
-                    });
-        }
-
-        (*this)(get_field(allfdistribu), get_const_field(advection_field_xy), dt);
-
-        Kokkos::Profiling::popRegion();
-
-        return allfdistribu;
-    }
 
     template <class T>
     static void unify_value_at_centre_pt(Field<T, IdxRangeBatched, MemorySpace> values)
