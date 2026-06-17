@@ -81,7 +81,6 @@ def main():
                 has_gpu_constructor = any(s.exec_space != 'CPU' for f,s in zip(functions, function_scopes) \
                                         if f.type == 'Constructor')
 
-                nested_scopes = scope.nestedList
                 # If any methods run on GPU and the class contains references which cannot be created
                 # from GPU objects (because there is no GPU constructor)
                 if gpu_class_functions and \
