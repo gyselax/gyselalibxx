@@ -194,7 +194,8 @@ public:
                 ExecSpace(),
                 get_idx_range(allfdistribu),
                 KOKKOS_LAMBDA(IdxBatched const idx) {
-                    allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs);
+                    IdxBatch batch_idx(idx);
+                    allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs[batch_idx]);
                 });
         Kokkos::Profiling::popRegion();
 
