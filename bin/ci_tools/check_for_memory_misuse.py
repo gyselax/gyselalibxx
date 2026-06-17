@@ -75,14 +75,15 @@ def main():
                 function_scopes = [s for s in scope.nestedList if s.type == 'Function']
                 functions = [s.function for s in function_scopes]
 
+                gpu_class_functions = [f for f,s in zip(functions, function_scopes) if not f.isStatic and getattr(s, 'exec_space', None) == 'GPU']
+
                 # Check if an instance of the class can be created on GPU
                 has_gpu_constructor = any(s.exec_space != 'CPU' for f,s in zip(functions, function_scopes) \
                                         if f.type == 'Constructor')
 
-                nested_scopes = scope.nestedList
                 # If any methods run on GPU and the class contains references which cannot be created
                 # from GPU objects (because there is no GPU constructor)
-                if any(getattr(s, 'exec_space', None) == 'GPU' for s in nested_scopes) and \
+                if gpu_class_functions and \
                         any(v.isReference for v in scope.varlist) and \
                         not has_gpu_constructor:
                     tok = next(tok for tok in cfg.tokenlist if tok.Id == scope.bodyStartId)
