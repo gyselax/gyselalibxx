@@ -247,12 +247,12 @@ public:
                 idx_range_theta.front(),
                 idx_range_theta.extents() + 1);
 
-        host_t<DFieldMem<IdxRangeR>> r_coords(idx_range_r);
-        host_t<DFieldMem<IdxRangeTheta>> theta_coords(idx_range_theta_with_poloidal_point);
-        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(r_coords));
-        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(theta_coords));
+        DFieldMem<IdxRangeR> r_coords(idx_range_r);
+        DFieldMem<IdxRangeTheta> theta_coords(idx_range_theta_with_poloidal_point);
+        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(r_coords));
+        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(theta_coords));
 
-        gmgpolar::PolarGrid const polar_grid(
+        gmgpolar::PolarGrid<gmgpolar::DefaultMemorySpace> const polar_grid(
                 r_coords.allocation_kokkos_view(),
                 theta_coords.allocation_kokkos_view());
 
