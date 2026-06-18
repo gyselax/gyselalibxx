@@ -93,8 +93,7 @@ void test_GMGPolarIntegration__PoissonEquation()
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_max;
 
     SplineRThetaBuilder const builder(grid);
-    SplineRThetaEvaluatorNullBound const
-            evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
+    SplineRThetaEvaluatorNullBound const evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
 
     const Mapping mapping;
 
@@ -116,11 +115,13 @@ void test_GMGPolarIntegration__PoissonEquation()
     // Compute the RHS on the grid
     DFieldMemRTheta rho_alloc(grid);
     DFieldRTheta rho(rho_alloc);
-    ddc::parallel_for_each(grid, KOKKOS_LAMBDA(IdxRTheta irtheta) {
-        double const r = ddc::coordinate(ddc::select<GridR>(irtheta));
-        double const theta = ddc::coordinate(ddc::select<GridTheta>(irtheta));
-        rho(irtheta) = rho_exact(r, theta);
-    });
+    ddc::parallel_for_each(
+            grid,
+            KOKKOS_LAMBDA(IdxRTheta irtheta) {
+                double const r = ddc::coordinate(ddc::select<GridR>(irtheta));
+                double const theta = ddc::coordinate(ddc::select<GridTheta>(irtheta));
+                rho(irtheta) = rho_exact(r, theta);
+            });
 
     // Solve
     DFieldMemRTheta phi_alloc(grid);
@@ -128,13 +129,15 @@ void test_GMGPolarIntegration__PoissonEquation()
     solver(get_field(phi_alloc), get_const_field(rho));
 
     // Check L-inf error
-	DFieldRTheta phi_result(phi_alloc);
-	double max_err = error_norm_inf(
+    DFieldRTheta phi_result(phi_alloc);
+    double max_err = error_norm_inf(
             Kokkos::DefaultExecutionSpace(),
-			get_const_field(phi_result),
-			KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-			return phi_exact(ddc::coordinate(ddc::select<GridR>(irtheta)), ddc::coordinate(ddc::select<GridTheta>(irtheta)));
-			});
+            get_const_field(phi_result),
+            KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                return phi_exact(
+                        ddc::coordinate(ddc::select<GridR>(irtheta)),
+                        ddc::coordinate(ddc::select<GridTheta>(irtheta)));
+            });
 
     std::cout << "Max L-inf error: " << max_err << std::endl;
 
@@ -142,5 +145,5 @@ void test_GMGPolarIntegration__PoissonEquation()
 }
 TEST(GMGPolarIntegration, PoissonEquation)
 {
-		test_GMGPolarIntegration__PoissonEquation();
+    test_GMGPolarIntegration__PoissonEquation();
 }

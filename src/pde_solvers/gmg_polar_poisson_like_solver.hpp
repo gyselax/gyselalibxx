@@ -98,8 +98,7 @@ class PolarPoissonLikeCoefficients
     using R = typename BSplinesR::continuous_dimension_type;
     using Theta = typename BSplinesTheta::continuous_dimension_type;
 
-    using DConstSplineRTheta
-            = DConstField<IdxRange<BSplinesR, BSplinesTheta>>;
+    using DConstSplineRTheta = DConstField<IdxRange<BSplinesR, BSplinesTheta>>;
 
 private:
     SplineEvaluator m_evaluator;
@@ -279,11 +278,13 @@ public:
         //Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::HostSpace> solution = solver.solution();
         Kokkos::View<double*> solution = solver.solution();
 
-        ddc::parallel_for_each(idx_range, KOKKOS_LAMBDA(IdxRTheta idx) {
-            IdxStepRTheta offset(idx - idx_range.front());
-            int i_r = ddc::select<GridR>(offset);
-            int i_theta = ddc::select<GridTheta>(offset);
-            phi(idx) = solution[polar_grid.index(i_r, i_theta)];
-        });
+        ddc::parallel_for_each(
+                idx_range,
+                KOKKOS_LAMBDA(IdxRTheta idx) {
+                    IdxStepRTheta offset(idx - idx_range.front());
+                    int i_r = ddc::select<GridR>(offset);
+                    int i_theta = ddc::select<GridTheta>(offset);
+                    phi(idx) = solution[polar_grid.index(i_r, i_theta)];
+                });
     }
 };
