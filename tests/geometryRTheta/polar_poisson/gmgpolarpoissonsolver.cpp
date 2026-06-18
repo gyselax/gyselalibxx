@@ -44,7 +44,7 @@ constexpr int M_MODE = 3;
 
 KOKKOS_FUNCTION double phi_exact(double r, double theta)
 {
-    return C_MANUF * std::pow(r, 6) * std::pow(r - 1.0, 6) * std::cos(M_MODE * theta);
+    return C_MANUF * Kokkos::pow(r, 6) * Kokkos::pow(r - 1.0, 6) * Kokkos::cos(M_MODE * theta);
 }
 
 // Analytical RHS: rho = -(f'' + f'/r - m^2 * f / r^2) * cos(m*theta)
