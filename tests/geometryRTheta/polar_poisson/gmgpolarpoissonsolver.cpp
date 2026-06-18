@@ -20,6 +20,7 @@
 #include "ddc_alias_inline_functions.hpp"
 #include "geometry_r_theta.hpp"
 #include "gmg_polar_poisson_like_solver.hpp"
+#include "l_norm_tools.hpp"
 #include "mesh_builder.hpp"
 #include "spline_definitions_r_theta.hpp"
 
@@ -31,8 +32,8 @@ using GMGSolver = GMGPolarPoissonLikeSolver<
         GridTheta,
         BSplinesR,
         BSplinesTheta,
-        SplineRThetaBuilder_host,
-        SplineRThetaEvaluatorNullBound_host>;
+        SplineRThetaBuilder,
+        SplineRThetaEvaluatorNullBound>;
 
 namespace {
 
@@ -41,29 +42,29 @@ constexpr double C_MANUF = 1e-4 * 4096.0;
 // Angular mode number
 constexpr int M_MODE = 3;
 
-double phi_exact(double r, double theta)
+KOKKOS_FUNCTION double phi_exact(double r, double theta)
 {
     return C_MANUF * std::pow(r, 6) * std::pow(r - 1.0, 6) * std::cos(M_MODE * theta);
 }
 
 // Analytical RHS: rho = -(f'' + f'/r - m^2 * f / r^2) * cos(m*theta)
 // where f(r) = C * r^6 * (r-1)^6
-double rho_exact(double r, double theta)
+KOKKOS_FUNCTION double rho_exact(double r, double theta)
 {
     if (r == 0.0) {
         return 0.0;
     }
-    const double f = C_MANUF * std::pow(r, 6) * std::pow(r - 1.0, 6);
-    const double fp = 6.0 * C_MANUF * std::pow(r, 5) * std::pow(r - 1.0, 5) * (2.0 * r - 1.0);
-    const double fpp = 6.0 * C_MANUF * std::pow(r, 4) * std::pow(r - 1.0, 4)
-                       * (5.0 * std::pow(2.0 * r - 1.0, 2) + 2.0 * r * (r - 1.0));
+    const double f = C_MANUF * Kokkos::pow(r, 6) * Kokkos::pow(r - 1.0, 6);
+    const double fp = 6.0 * C_MANUF * Kokkos::pow(r, 5) * Kokkos::pow(r - 1.0, 5) * (2.0 * r - 1.0);
+    const double fpp = 6.0 * C_MANUF * Kokkos::pow(r, 4) * Kokkos::pow(r - 1.0, 4)
+                       * (5.0 * Kokkos::pow(2.0 * r - 1.0, 2) + 2.0 * r * (r - 1.0));
     return -(fpp + fp / r - static_cast<double>(M_MODE * M_MODE) * f / (r * r))
-           * std::cos(M_MODE * theta);
+           * Kokkos::cos(M_MODE * theta);
 }
 
 } // namespace
 
-TEST(GMGPolarIntegration, PoissonEquation)
+void test_GMGPolarIntegration__PoissonEquation()
 {
     CoordR const r_min(1e-5);
     CoordR const r_max(1.0);
@@ -91,54 +92,55 @@ TEST(GMGPolarIntegration, PoissonEquation)
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_min;
     ddc::PeriodicExtrapolationRule<Theta> bv_theta_max;
 
-    SplineRThetaBuilder_host const builder_host(grid);
-    SplineRThetaEvaluatorNullBound_host const
-            evaluator_host(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
+    SplineRThetaBuilder const builder(grid);
+    SplineRThetaEvaluatorNullBound const
+            evaluator(bv_r_min, bv_r_max, bv_theta_min, bv_theta_max);
 
     const Mapping mapping;
 
-    GMGSolver solver(mapping, builder_host, evaluator_host);
+    GMGSolver solver(mapping, builder, evaluator);
 
     // Set alpha = 1, beta = 0 everywhere
-    host_t<DFieldMemRTheta> alpha_host(grid);
-    host_t<DFieldMemRTheta> beta_host(grid);
-    ddc::parallel_fill(get_field(alpha_host), 1.0);
-    ddc::parallel_fill(get_field(beta_host), 0.0);
+    DFieldMemRTheta alpha(grid);
+    DFieldMemRTheta beta(grid);
+    ddc::parallel_fill(get_field(alpha), 1.0);
+    ddc::parallel_fill(get_field(beta), 0.0);
 
     DFieldMemRTheta alpha_alloc(grid);
     DFieldMemRTheta beta_alloc(grid);
-    ddc::parallel_deepcopy(get_field(alpha_alloc), get_const_field(alpha_host));
-    ddc::parallel_deepcopy(get_field(beta_alloc), get_const_field(beta_host));
+    ddc::parallel_deepcopy(get_field(alpha_alloc), get_const_field(alpha));
+    ddc::parallel_deepcopy(get_field(beta_alloc), get_const_field(beta));
 
     solver.update_coefficients(get_const_field(alpha_alloc), get_const_field(beta_alloc));
 
     // Compute the RHS on the grid
-    host_t<DFieldMemRTheta> rho_host(grid);
-    ddc::host_for_each(grid, [&](IdxRTheta irtheta) {
+    DFieldMemRTheta rho_alloc(grid);
+    DFieldRTheta rho(rho_alloc);
+    ddc::parallel_for_each(grid, KOKKOS_LAMBDA(IdxRTheta irtheta) {
         double const r = ddc::coordinate(ddc::select<GridR>(irtheta));
         double const theta = ddc::coordinate(ddc::select<GridTheta>(irtheta));
-        rho_host(irtheta) = rho_exact(r, theta);
+        rho(irtheta) = rho_exact(r, theta);
     });
-
-    DFieldMemRTheta rho_alloc(grid);
-    ddc::parallel_deepcopy(get_field(rho_alloc), get_const_field(rho_host));
 
     // Solve
     DFieldMemRTheta phi_alloc(grid);
     ddc::parallel_fill(get_field(phi_alloc), 0.0);
-    solver(get_field(phi_alloc), get_const_field(rho_alloc));
+    solver(get_field(phi_alloc), get_const_field(rho));
 
     // Check L-inf error
-    auto phi_result_host = ddc::create_mirror_view_and_copy(get_const_field(phi_alloc));
-    double max_err = 0.0;
-    ddc::host_for_each(grid, [&](IdxRTheta irtheta) {
-        double const r = ddc::coordinate(ddc::select<GridR>(irtheta));
-        double const theta = ddc::coordinate(ddc::select<GridTheta>(irtheta));
-        double const err = std::abs(phi_result_host(irtheta) - phi_exact(r, theta));
-        max_err = std::max(max_err, err);
-    });
+	DFieldRTheta phi_result(phi_alloc);
+	double max_err = error_norm_inf(
+            Kokkos::DefaultExecutionSpace(),
+			get_const_field(phi_result),
+			KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+			return phi_exact(ddc::coordinate(ddc::select<GridR>(irtheta)), ddc::coordinate(ddc::select<GridTheta>(irtheta)));
+			});
 
     std::cout << "Max L-inf error: " << max_err << std::endl;
 
     EXPECT_LT(max_err, 1e-6);
+}
+TEST(GMGPolarIntegration, PoissonEquation)
+{
+		test_GMGPolarIntegration__PoissonEquation();
 }

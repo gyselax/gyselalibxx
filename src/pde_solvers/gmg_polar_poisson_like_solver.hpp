@@ -34,32 +34,32 @@ public:
     explicit MappingToDomainGeometry(ToPhysicalMapping to_physical) : m_to_physical(to_physical) {}
 
     /// X(r, theta)
-    double Fx(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double Fx(const double& r, const double& theta) const
     {
         return Coord<X>(m_to_physical(Coord<R, Theta>(r, theta)));
     }
     /// Y(r, theta)
-    double Fy(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double Fy(const double& r, const double& theta) const
     {
         return Coord<Y>(m_to_physical(Coord<R, Theta>(r, theta)));
     }
     /// d/dr X(r, theta)
-    double dFx_dr(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double dFx_dr(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<X, R_cov>(Coord<R, Theta>(r, theta));
     }
     /// d/dr Y(r, theta)
-    double dFy_dr(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double dFy_dr(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<Y, R_cov>(Coord<R, Theta>(r, theta));
     }
     /// d/(d theta) X(r, theta)
-    double dFx_dt(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double dFx_dt(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<X, Theta_cov>(Coord<R, Theta>(r, theta));
     }
     /// d/(d theta) Y(r, theta)
-    double dFy_dt(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double dFy_dt(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<Y, Theta_cov>(Coord<R, Theta>(r, theta));
     }
@@ -72,12 +72,12 @@ class HomogeneousDirichletBoundaryConditions
 {
 public:
     /// The value of the solution on the boundary
-    static double u_D(const double& r, const double& theta)
+    static KOKKOS_INLINE_FUNCTION double u_D(const double& r, const double& theta)
     {
         return 0.0;
     }
     /// The value of the solution on the inner boundary (at r=rmin). Required for the concept, not needed here.
-    static double u_D_Interior(const double& r, const double& theta)
+    static KOKKOS_INLINE_FUNCTION double u_D_Interior(const double& r, const double& theta)
     {
         // Only used if DirBC_Interior = true
         assert(false);
@@ -88,34 +88,30 @@ public:
 /**
  * @brief Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar
  *        DensityProfileCoefficients concept.
- * @tparam SplineEvaluator_host A 2D host-space spline evaluator for (BSplinesR, BSplinesTheta).
+ * @tparam SplineEvaluator A 2D spline evaluator for (BSplinesR, BSplinesTheta).
  * @tparam BSplinesR The radial B-spline type.
  * @tparam BSplinesTheta The poloidal B-spline type.
  */
-template <class SplineEvaluator_host, class BSplinesR, class BSplinesTheta>
+template <class SplineEvaluator, class BSplinesR, class BSplinesTheta>
 class PolarPoissonLikeCoefficients
 {
-    static_assert(
-            std::is_same_v<typename SplineEvaluator_host::memory_space, Kokkos::HostSpace>,
-            "SplineEvaluator_host must operate on Kokkos::HostSpace");
-
     using R = typename BSplinesR::continuous_dimension_type;
     using Theta = typename BSplinesTheta::continuous_dimension_type;
 
-    using DConstSplineRTheta_host
-            = DConstField<IdxRange<BSplinesR, BSplinesTheta>, Kokkos::HostSpace>;
+    using DConstSplineRTheta
+            = DConstField<IdxRange<BSplinesR, BSplinesTheta>>;
 
 private:
-    SplineEvaluator_host m_evaluator;
-    DConstSplineRTheta_host m_coeff_alpha;
-    DConstSplineRTheta_host m_coeff_beta;
+    SplineEvaluator m_evaluator;
+    DConstSplineRTheta m_coeff_alpha;
+    DConstSplineRTheta m_coeff_beta;
 
 public:
     /// Build th class instance
     PolarPoissonLikeCoefficients(
-            SplineEvaluator_host evaluator,
-            DConstSplineRTheta_host coeff_alpha,
-            DConstSplineRTheta_host coeff_beta)
+            SplineEvaluator evaluator,
+            DConstSplineRTheta coeff_alpha,
+            DConstSplineRTheta coeff_beta)
         : m_evaluator(evaluator)
         , m_coeff_alpha(coeff_alpha)
         , m_coeff_beta(coeff_beta)
@@ -123,12 +119,12 @@ public:
     }
 
     /// The coefficient alpha in the Poisson-like equation
-    double alpha(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double alpha(const double& r, const double& theta) const
     {
         return m_evaluator(Coord<R, Theta>(r, theta), m_coeff_alpha);
     }
     /// The coefficient beta in the Poisson-like equation
-    double beta(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double beta(const double& r, const double& theta) const
     {
         return m_evaluator(Coord<R, Theta>(r, theta), m_coeff_beta);
     }
@@ -154,8 +150,8 @@ public:
  * @tparam GridTheta            Discrete poloidal grid.
  * @tparam BSplinesR            Radial B-spline space.
  * @tparam BSplinesTheta        Poloidal B-spline space.
- * @tparam SplineBuilder_host   2D host-space spline builder for (GridR × GridTheta).
- * @tparam SplineEvaluator_host 2D host-space spline evaluator for (BSplinesR × BSplinesTheta).
+ * @tparam SplineBuilder        2D spline builder for (GridR × GridTheta).
+ * @tparam SplineEvaluator      2D spline evaluator for (BSplinesR × BSplinesTheta).
  */
 template <
         class ToPhysicalMapping,
@@ -163,8 +159,8 @@ template <
         class GridTheta,
         class BSplinesR,
         class BSplinesTheta,
-        class SplineBuilder_host,
-        class SplineEvaluator_host>
+        class SplineBuilder,
+        class SplineEvaluator>
 class GMGPolarPoissonLikeSolver
     : public IPolarPoissonLikeSolver<IdxRange<GridR, GridTheta>, IdxRange<GridR, GridTheta>>
 {
@@ -176,18 +172,18 @@ class GMGPolarPoissonLikeSolver
     using IdxTheta = Idx<GridTheta>;
     using IdxStepRTheta = IdxStep<GridR, GridTheta>;
 
-    using SplineRThetaMem_host = DFieldMem<IdxRange<BSplinesR, BSplinesTheta>, Kokkos::HostSpace>;
+    using SplineRThetaMem = DFieldMem<IdxRange<BSplinesR, BSplinesTheta>>;
 
     using DomainGeometry = GMGPolarTools::MappingToDomainGeometry<ToPhysicalMapping>;
     using DensityCoeffs = GMGPolarTools::
-            PolarPoissonLikeCoefficients<SplineEvaluator_host, BSplinesR, BSplinesTheta>;
+            PolarPoissonLikeCoefficients<SplineEvaluator, BSplinesR, BSplinesTheta>;
 
 private:
     DomainGeometry const m_domain_geom;
-    SplineBuilder_host const& m_builder;
-    SplineEvaluator_host const& m_evaluator;
-    SplineRThetaMem_host m_coeff_alpha;
-    SplineRThetaMem_host m_coeff_beta;
+    SplineBuilder const& m_builder;
+    SplineEvaluator const& m_evaluator;
+    SplineRThetaMem m_coeff_alpha;
+    SplineRThetaMem m_coeff_beta;
     DensityCoeffs const m_density_coeffs;
 
 
@@ -201,8 +197,8 @@ public:
      */
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
-            SplineBuilder_host const& builder,
-            SplineEvaluator_host const& evaluator)
+            SplineBuilder const& builder,
+            SplineEvaluator const& evaluator)
         : m_domain_geom(to_physical)
         , m_builder(builder)
         , m_evaluator(evaluator)
@@ -223,10 +219,8 @@ public:
     void update_coefficients(DConstField<IdxRangeRTheta> alpha, DConstField<IdxRangeRTheta> beta)
             override
     {
-        auto alpha_host = ddc::create_mirror_view_and_copy(alpha);
-        auto beta_host = ddc::create_mirror_view_and_copy(beta);
-        m_builder(get_field(m_coeff_alpha), get_const_field(alpha_host));
-        m_builder(get_field(m_coeff_beta), get_const_field(beta_host));
+        m_builder(get_field(m_coeff_alpha), get_const_field(alpha));
+        m_builder(get_field(m_coeff_beta), get_const_field(beta));
     }
 
     /**
@@ -237,9 +231,6 @@ public:
      */
     void operator()(DField<IdxRangeRTheta> phi, DConstField<IdxRangeRTheta> rho) const override
     {
-        // Copy rho to host
-        auto rho_host = ddc::create_mirror_view_and_copy(rho);
-
         IdxRangeRTheta idx_range = get_idx_range(phi);
         IdxRangeR idx_range_r(idx_range);
         IdxRangeTheta idx_range_theta(idx_range);
@@ -247,17 +238,19 @@ public:
                 idx_range_theta.front(),
                 idx_range_theta.extents() + 1);
 
-        DFieldMem<IdxRangeR> r_coords(idx_range_r);
-        DFieldMem<IdxRangeTheta> theta_coords(idx_range_theta_with_poloidal_point);
-        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(r_coords));
-        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(theta_coords));
+        host_t<DFieldMem<IdxRangeR>> r_coords(idx_range_r);
+        host_t<DFieldMem<IdxRangeTheta>> theta_coords(idx_range_theta_with_poloidal_point);
+        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(r_coords));
+        ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(theta_coords));
 
-        gmgpolar::PolarGrid<gmgpolar::DefaultMemorySpace> const polar_grid(
+        gmgpolar::PolarGrid<Kokkos::HostSpace> const polar_grid_host(
                 r_coords.allocation_kokkos_view(),
                 theta_coords.allocation_kokkos_view());
 
+        gmgpolar::PolarGrid<gmgpolar::DefaultMemorySpace> const polar_grid(polar_grid_host);
+
         gmgpolar::GMGPolar<DomainGeometry, DensityCoeffs>
-                solver(polar_grid, m_domain_geom, m_density_coeffs);
+                solver(polar_grid_host, m_domain_geom, m_density_coeffs);
 
         // ----------------------------------------------------------------
         // Solver parameters
@@ -280,20 +273,17 @@ public:
 
         // Source term: maps GMGPolar (i_r, i_theta) indices to rho grid values
         GMGPolarTools::HomogeneousDirichletBoundaryConditions const bcs;
-        solver.solve(bcs, rho_host.allocation_kokkos_view());
+        solver.solve(bcs, rho.allocation_kokkos_view());
 
         // Copy solution back to phi
-        auto phi_host = ddc::create_mirror_view(Kokkos::DefaultHostExecutionSpace(), phi);
         //Kokkos::View<double*, Kokkos::LayoutRight, Kokkos::HostSpace> solution = solver.solution();
         Kokkos::View<double*> solution = solver.solution();
 
-        ddc::host_for_each(idx_range, [&](IdxRTheta idx) {
+        ddc::parallel_for_each(idx_range, KOKKOS_LAMBDA(IdxRTheta idx) {
             IdxStepRTheta offset(idx - idx_range.front());
             int i_r = ddc::select<GridR>(offset);
             int i_theta = ddc::select<GridTheta>(offset);
-            phi_host(idx) = solution[polar_grid.index(i_r, i_theta)];
+            phi(idx) = solution[polar_grid.index(i_r, i_theta)];
         });
-
-        ddc::parallel_deepcopy(phi, get_const_field(phi_host));
     }
 };
