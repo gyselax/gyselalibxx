@@ -54,12 +54,12 @@ public:
         return m_to_physical.template jacobian_component<Y, R_cov>(Coord<R, Theta>(r, theta));
     }
     /// d/(d theta) X(r, theta)
-    KOKKOS_INLINE_FUNCTION double dFx_dt(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double dFx_dtheta(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<X, Theta_cov>(Coord<R, Theta>(r, theta));
     }
     /// d/(d theta) Y(r, theta)
-    KOKKOS_INLINE_FUNCTION double dFy_dt(const double& r, const double& theta) const
+    KOKKOS_INLINE_FUNCTION double dFy_dtheta(const double& r, const double& theta) const
     {
         return m_to_physical.template jacobian_component<Y, Theta_cov>(Coord<R, Theta>(r, theta));
     }
