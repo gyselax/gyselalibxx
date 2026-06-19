@@ -242,14 +242,12 @@ public:
         ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(r_coords));
         ddcHelper::dump_coordinates(Kokkos::DefaultHostExecutionSpace(), get_field(theta_coords));
 
-        gmgpolar::PolarGrid<Kokkos::HostSpace> const polar_grid_host(
+        gmgpolar::PolarGrid const polar_grid(
                 r_coords.allocation_kokkos_view(),
                 theta_coords.allocation_kokkos_view());
 
-        gmgpolar::PolarGrid<gmgpolar::DefaultMemorySpace> const polar_grid(polar_grid_host);
-
         gmgpolar::GMGPolar<DomainGeometry, DensityCoeffs>
-                solver(polar_grid_host, m_domain_geom, m_density_coeffs);
+                solver(polar_grid, m_domain_geom, m_density_coeffs);
 
         // ----------------------------------------------------------------
         // Solver parameters
