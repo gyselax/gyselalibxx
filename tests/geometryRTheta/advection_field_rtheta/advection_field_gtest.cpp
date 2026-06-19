@@ -74,7 +74,7 @@ template <
         SimulationType simulation_choice_,
         FootFindingSpace FFSpace_,
         AdvectionFieldSpace AFSpace_,
-        double dt_>
+        int dt_inv>
 struct AdvectionFieldRThetaComputationFixture<std::tuple<
         std::integral_constant<SimulationType, simulation_choice_>,
         std::integral_constant<FootFindingSpace, FFSpace_>,
