@@ -151,7 +151,7 @@ void init_species_withfluid(
  */
 IdxRangeSp init_kinetic_species()
 {
-    std::vector<int> species;
+    std::vector<int64_t> species;
     std::vector<double> charges;
     std::vector<double> masses;
     PDI_get_arrays("read_species", "species", species, "charges", charges, "masses", masses);

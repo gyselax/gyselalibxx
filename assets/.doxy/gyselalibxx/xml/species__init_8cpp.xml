@@ -562,7 +562,7 @@
 <codeline lineno="141"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
 <codeline lineno="142"><highlight class="normal">IdxRangeSp<sp/>init_kinetic_species()</highlight></codeline>
 <codeline lineno="143"><highlight class="normal">{</highlight></codeline>
-<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;int&gt;<sp/>species;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;int64_t&gt;<sp/>species;</highlight></codeline>
 <codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>charges;</highlight></codeline>
 <codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/>std::vector&lt;double&gt;<sp/>masses;</highlight></codeline>
 <codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>PDI_get_arrays(</highlight><highlight class="stringliteral">&quot;read_species&quot;</highlight><highlight class="normal">,<sp/></highlight><highlight class="stringliteral">&quot;species&quot;</highlight><highlight class="normal">,<sp/>species,<sp/></highlight><highlight class="stringliteral">&quot;charges&quot;</highlight><highlight class="normal">,<sp/>charges,<sp/></highlight><highlight class="stringliteral">&quot;masses&quot;</highlight><highlight class="normal">,<sp/>masses);</highlight></codeline>
