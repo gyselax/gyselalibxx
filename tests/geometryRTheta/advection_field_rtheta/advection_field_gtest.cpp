@@ -79,12 +79,12 @@ struct AdvectionFieldRThetaComputationFixture<std::tuple<
         std::integral_constant<SimulationType, simulation_choice_>,
         std::integral_constant<FootFindingSpace, FFSpace_>,
         std::integral_constant<AdvectionFieldSpace, AFSpace_>,
-        std::integral_constant<double, dt_>>> : public testing::Test
+        std::integral_constant<int, dt_inv>>> : public testing::Test
 {
     static constexpr SimulationType simulation_choice = simulation_choice_;
     static constexpr FootFindingSpace FFSpace = FFSpace_;
     static constexpr AdvectionFieldSpace AFSpace = AFSpace_;
-    static constexpr double dt = dt_;
+    static constexpr double dt = 1.0 / dt_inv;
 };
 
 using Cases = ::testing::Types<
@@ -92,22 +92,22 @@ using Cases = ::testing::Types<
                 std::integral_constant<SimulationType, SimulationType::TRANSLATION>,
                 std::integral_constant<FootFindingSpace, FootFindingSpace::PSEUDO_PHYSICAL>,
                 std::integral_constant<AdvectionFieldSpace, AdvectionFieldSpace::PHYSICAL>,
-                std::integral_constant<double, 0.01>>,
+                std::integral_constant<int, 100>>,
         std::tuple<
                 std::integral_constant<SimulationType, SimulationType::ROTATION>,
                 std::integral_constant<FootFindingSpace, FootFindingSpace::PSEUDO_PHYSICAL>,
                 std::integral_constant<AdvectionFieldSpace, AdvectionFieldSpace::PHYSICAL>,
-                std::integral_constant<double, 0.01>>,
+                std::integral_constant<int, 100>>,
         std::tuple<
                 std::integral_constant<SimulationType, SimulationType::DECENTRED_ROTATION>,
                 std::integral_constant<FootFindingSpace, FootFindingSpace::PSEUDO_PHYSICAL>,
                 std::integral_constant<AdvectionFieldSpace, AdvectionFieldSpace::PHYSICAL>,
-                std::integral_constant<double, 0.0001>>,
+                std::integral_constant<int, 10000>>,
         std::tuple<
                 std::integral_constant<SimulationType, SimulationType::ROTATION>,
                 std::integral_constant<FootFindingSpace, FootFindingSpace::LOGICAL>,
                 std::integral_constant<AdvectionFieldSpace, AdvectionFieldSpace::LOGICAL>,
-                std::integral_constant<double, 0.1>>>;
+                std::integral_constant<int, 10>>>;
 
 } // end namespace
 
