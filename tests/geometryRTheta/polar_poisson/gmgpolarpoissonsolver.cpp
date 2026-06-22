@@ -6,8 +6,6 @@
 //
 // With alpha=1, beta=0, the circular mapping gives the standard polar Laplacian:
 //   -Delta phi = -(phi_rr + phi_r/r + phi_tt/r^2) = rho
-//
-// The test passes if the L-inf error is below 1e-2.
 
 #include <cmath>
 #include <iostream>
