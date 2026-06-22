@@ -76,6 +76,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Enforce version of Kokkos Tools in all toolchains for reproducibility.
 - Remove default O1 optimisation flag.
 - Changed type of species identifier read in `read_species` PDI event (from `int` to `int64`).
+- Remove version constraint on the indirect dependency Kokkos-FFT.
 
 ### Deprecated
 
