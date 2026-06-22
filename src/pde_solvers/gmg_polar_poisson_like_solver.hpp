@@ -260,7 +260,8 @@ public:
         solver.paraview(false); // Enable/disable ParaView output
 
         // --- Numerical method setup --- //
-        solver.DirBC_Interior(false); // Use Across-the-origin discretisation
+        // Are boundary conditions provided on the interior. False = Use Across-the-origin discretisation
+        solver.DirBC_Interior(false);
         // Stencil distribution strategy: Take, Give
         solver.stencilDistributionMethod(StencilDistributionMethod::CPU_TAKE);
         // Cache density profile coefficients: alpha, beta
