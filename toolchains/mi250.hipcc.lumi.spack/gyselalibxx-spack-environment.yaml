@@ -5,7 +5,7 @@ spack:
     - 'ddc@0.14 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +rocm amdgpu_target=gfx90a
     - googletest +gmock
-    - kokkos@4.7 ~openmp +rocm +hip_relocatable_device_code amdgpu_target=gfx90a
+    - kokkos@4.7 ~openmp +rocm amdgpu_target=gfx90a
     - kokkos-kernels@4.7 ~shared
     - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
     - 'koliop@0.1.2:0.1'
@@ -61,7 +61,7 @@ spack:
     cxx:
       require: gcc@14.2
     kokkos-fft:
-      require: '@0.4 host_backend=fftw-serial device_backend=hipfft'
+      require: 'host_backend=fftw-serial'
     lapack:
       require: openblas
     mpi:
