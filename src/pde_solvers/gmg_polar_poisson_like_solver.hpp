@@ -255,7 +255,7 @@ public:
         // Solver parameters //
         // ------------------//
 
-        // --- General solver output and visualization settings --- //
+        // --- General solver output and visualisation settings --- //
         solver.verbose(0); // Enable/disable verbose output
         solver.paraview(false); // Enable/disable ParaView output
 
@@ -292,7 +292,7 @@ public:
         solver.absoluteTolerance(1e-10); // Absolute residual tolerance
         solver.relativeTolerance(1e-6); // Relative residual tolerance
 
-        // --- Finalize solver setup --- //
+        // --- Finalise solver setup --- //
         solver.setup();
 
         // Source term: maps GMGPolar (i_r, i_theta) indices to rho grid values
