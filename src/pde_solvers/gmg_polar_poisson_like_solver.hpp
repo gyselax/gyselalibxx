@@ -242,30 +242,57 @@ public:
         ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(r_coords));
         ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(theta_coords));
 
+        // --- Create a cartesian grid representation of the polar grid for GMGPolar --- //
         gmgpolar::PolarGrid const polar_grid(
                 r_coords.allocation_kokkos_view(),
                 theta_coords.allocation_kokkos_view());
 
+        // --- Create GMGPolar solver for the selected geometry and coefficients --- //
         gmgpolar::GMGPolar<DomainGeometry, DensityCoeffs>
                 solver(polar_grid, m_domain_geom, m_density_coeffs);
 
-        // ----------------------------------------------------------------
-        // Solver parameters
-        solver.DirBC_Interior(false); // Use across-origin discretisation
-        solver.FMG(true);
-        solver.FMG_iterations(3);
-        solver.FMG_cycle(MultigridCycleType::F_CYCLE);
-        solver.extrapolation(ExtrapolationType::IMPLICIT_EXTRAPOLATION);
-        solver.maxLevels(7);
-        solver.preSmoothingSteps(1);
-        solver.postSmoothingSteps(1);
-        solver.multigridCycle(MultigridCycleType::F_CYCLE);
-        solver.maxIterations(150);
-        solver.residualNormType(ResidualNormType::EUCLIDEAN);
-        solver.absoluteTolerance(1e-50);
-        solver.relativeTolerance(1e-6);
-        // ----------------------------------------------------------------
+        // ------------------//
+        // Solver parameters //
+        // ------------------//
 
+        // --- General solver output and visualization settings --- //
+        solver.verbose(0); // Enable/disable verbose output
+        solver.paraview(false); // Enable/disable ParaView output
+
+        // --- Numerical method setup --- //
+        solver.DirBC_Interior(false); // Use Across-the-origin discretisation
+        // Stencil distribution strategy: Take, Give
+        solver.stencilDistributionMethod(StencilDistributionMethod::CPU_TAKE);
+        // Cache density profile coefficients: alpha, beta
+        solver.cacheDensityProfileCoefficients(true);
+        // Cache domain geometry data: arr, att, art, detDF
+        solver.cacheDomainGeometry(true);
+
+        // --- Multigrid settings --- //
+        solver.extrapolation(ExtrapolationType::IMPLICIT_EXTRAPOLATION); // Select extrapolation
+        solver.maxLevels(-1); // Max multigrid levels (-1 = use deepest possible)
+        solver.preSmoothingSteps(1); // Smoothing before coarse-grid correction
+        solver.postSmoothingSteps(1); // Smoothing after coarse-grid correction
+        solver.multigridCycle(MultigridCycleType::V_CYCLE); // Multigrid cycle type
+        solver.FMG(true); // Full Multigrid mode on/off
+        solver.FMG_iterations(2); // FMG iteration count
+        solver.FMG_cycle(MultigridCycleType::F_CYCLE); // FMG cycle type
+
+        // --- Preconditioned Conjugate Gradient settings --- //
+        solver.PCG(false); // Preconditioned Conjugate Gradient mode on/off
+        solver.PCG_FMG(true); // Use FMG as preconditioner for PCG
+        solver.PCG_FMG_iterations(1); // FMG iterations for PCG preconditioner
+        solver.PCG_FMG_cycle(MultigridCycleType::V_CYCLE); // FMG cycle type for PCG preconditioner
+        solver.PCG_MG_iterations(1); // Multigrid iterations for PCG preconditioner
+        solver.PCG_MG_cycle(MultigridCycleType::V_CYCLE); // Multigrid cycle type for PCG iterations
+
+        // --- Iterative solver controls --- //
+        solver.maxIterations(100); // Max number of iterations
+        solver.residualNormType(ResidualNormType::WEIGHTED_EUCLIDEAN); // Residual norm type
+        solver.absoluteTolerance(1e-10); // Absolute residual tolerance
+        solver.relativeTolerance(1e-6); // Relative residual tolerance
+
+        // --- Finalize solver setup --- //
         solver.setup();
 
         // Source term: maps GMGPolar (i_r, i_theta) indices to rho grid values
