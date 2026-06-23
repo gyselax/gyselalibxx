@@ -38,6 +38,7 @@ struct Interface
     using OtherEdge = std::conditional_t<std::is_same_v<Edge, Edge1>, Edge2, Edge1>;
 
     /**
+     * @brief Orientation of the parallel grids to the interface. 
      * If True, the parametrisations of the physical edge have the same orientation.
      * If False, the parametrisations of the physical edge have the opposite orientation.
      * (See EdgeTransformation).
