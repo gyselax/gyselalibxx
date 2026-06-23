@@ -263,7 +263,7 @@ public:
         // Are boundary conditions provided on the interior. False = Use Across-the-origin discretisation
         solver.DirBC_Interior(false);
         // Stencil distribution strategy: Take, Give
-        solver.stencilDistributionMethod(StencilDistributionMethod::CPU_TAKE);
+        solver.stencilDistributionMethod(StencilDistributionMethod::TAKE);
         // Cache density profile coefficients: alpha, beta
         solver.cacheDensityProfileCoefficients(true);
         // Cache domain geometry data: arr, att, art, detDF
