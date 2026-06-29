@@ -70,23 +70,28 @@ public:
 namespace concepts {
 
 template <typename T>
-concept LocalPartialDerivativeCreator = requires
-{
-    typename T::partial_derivative_type;
-}
-&&requires()
+concept LocalPartialDerivative = requires()
 {
     {
         T::n_local_points()
         } -> std::same_as<int>;
 }
 &&requires(
-        std::array<double, T::n_local_points()> pos,
-        std::array<double, T::n_local_points()> vals)
+        std::array<
+                Coord<typename T::GridDerivativeDimension::continuous_dimension_type>,
+                T::n_local_points()> const& pos,
+        std::array<double, T::n_local_points()> const& vals)
 {
     {
-        typename T::partial_derivative_type::get_derivative(pos, vals)
+        T::get_derivative(pos, vals)
         } -> std::same_as<double>;
 };
+
+template <typename T>
+concept LocalPartialDerivativeCreator = requires
+{
+    typename T::partial_derivative_type;
+}
+&&LocalPartialDerivative<typename T::partial_derivative_type>;
 
 } // namespace concepts
