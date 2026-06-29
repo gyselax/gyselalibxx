@@ -176,14 +176,21 @@ public:
         }
     }
 
+    /**
+     * @brief Compute the partial derivative locally from the values at 3 known positions.
+     *
+     * @param[in] field_positions The positions where the field is provied, in ascending order.
+     * @param[in] field_values The values of the field at the provided positions.
+     * @return The derivative at the central point.
+     */
     static KOKKOS_INLINE_FUNCTION double get_derivative(
             std::array<Coord<DerivativeDimension>, 3> const& field_positions,
-            std::array<double, 3> const& field_elements)
+            std::array<double, 3> const& field_values)
     {
         return fdm_centred(
-                field_elements[0],
-                field_elements[1],
-                field_elements[2],
+                field_values[0],
+                field_values[1],
+                field_values[2],
                 field_positions[0],
                 field_positions[1],
                 field_positions[2]);
