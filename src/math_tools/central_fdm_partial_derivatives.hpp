@@ -46,6 +46,11 @@ private:
     using IdxStepDeriv = typename IdxRangeDeriv::discrete_vector_type;
 
 public:
+    /**
+     * @brief The number of points required to calculate the derivative locally.
+     *
+     * @return The number of points.
+     */
     static constexpr int n_local_points()
     {
         return 3;
