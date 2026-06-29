@@ -2,12 +2,12 @@ spack:
   definitions:
   - packages:
     - cmake
-    - 'ddc@0.12 +fft +pdi +splines'
+    - 'ddc@0.14 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +cuda cuda_arch=90
     - googletest +gmock
-    - kokkos@4.7 ~openmp +cuda +cuda_relocatable_device_code +cuda_constexpr cuda_arch=90
+    - kokkos@4.7 ~openmp +cuda +cuda_constexpr cuda_arch=90
     - kokkos-kernels@4.7 ~shared
-    - kokkos-tools
+    - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
     - 'koliop@0.1.2:0.1'
     - lapack
     - mpi
@@ -58,22 +58,22 @@ spack:
       - spec: cuda@12.8.61
         prefix: /lustre/fshomisc/sys/common/nvidia/cuda/12.8
     c:
-      require: gcc@14.3.0
+      require: gcc@14.2.0
     cxx:
-      require: gcc@14.3.0
+      require: gcc@14.2.0
     gcc:
       externals:
-      - spec: gcc@14.3.0 languages:='c,c++,fortran'
-        prefix: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y
+      - spec: gcc@14.2.0 languages:='c,c++,fortran'
+        prefix: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o
         extra_attributes:
             compilers:
-              c: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gcc
-              cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/g++
-              fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.3.0/gcc-11.4.1-jqsvuauftoo43tclwxs7qicltsslka3y/bin/gfortran
+              c: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/gcc
+              cxx: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/g++
+              fortran: /lustre/fshomisc/sup/spack_soft/gcc/14.2.0/gcc-11.3.1-sqtxme5svnnm5uzzhqtrderrwbhwkg6o/bin/gfortran
     kokkos-fft:
-      require: '@0.4 host_backend=fftw-serial device_backend=cufft'
+      require: 'host_backend=fftw-serial'
     lapack:
-      require: openblas
+      require: openblas ~dynamic_dispatch
     mpi:
       require: openmpi
     openmpi:

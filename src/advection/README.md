@@ -225,6 +225,8 @@ The methods inheriting from IPolarFootFinder provide ways of calculating the fee
 
 The feet of the characteristics are calculated using a time integration method. For details of available methods see [Time Stepping Methods](../timestepper/README.md).
 
+For implementation details of the elementwise operators used internally see [polar foot finder implementation details](./polar_foot_finders/README.md).
+
 ### Advection domain
 
 There are two advection domains to consider:
@@ -291,13 +293,13 @@ SplineRThetaEvaluator spline_evaluator(
 
 // Define a feet finder to compute the feet of the characteristics.  
 RK3Builder const time_stepper_builder;      // a given time integration method to solve equation of the characteristics. 
-SplinePolarFootFinder find_feet(        
-        grid,
-        time_stepper_builder,
-        logical_to_physical_mapping,
-        logical_to_pseudo_physical_mapping,
-        builder_advection_field,            // spline builder for the advection field. 
-        evaluator_advection_field);         // spline evaluator for the advection field. 
+PolarFootFinder find_feet
+        = make_polar_foot_finder<FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
+                time_stepper_builder,
+                logical_to_physical_mapping,
+                grid,
+                builder_advection_field, // spline builder for the advection field.
+                evaluator_advection_field); // spline evaluator for the advection field.
 
 // Define the advection operator. 
 BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, logical_to_physical_mapping);

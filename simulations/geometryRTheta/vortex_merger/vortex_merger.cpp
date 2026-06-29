@@ -29,13 +29,13 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "poisson_like_rhs_function.hpp"
+#include "polar_foot_finder.hpp"
 #include "polar_spline_fem_poisson_like_solver.hpp"
 #include "quadrature.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 #include "vortex_merger_equilibrium.hpp"
@@ -133,13 +133,13 @@ int main(int argc, char** argv)
     // --- Advection operator -------------------------------------------------------------------------
     SplineInterpolatorRTheta interpolator(grid);
 
-    SplinePolarFootFinder find_feet(
-            grid,
-            time_stepper,
-            to_physical_mapping,
-            to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+    PolarFootFinder find_feet
+            = make_polar_foot_finder<FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
+                    time_stepper,
+                    to_physical_mapping,
+                    grid,
+                    builder,
+                    spline_evaluator_extrapol);
 
     BslAdvectionPolar advection_operator(interpolator, find_feet, to_physical_mapping);
 
@@ -158,7 +158,6 @@ int main(int argc, char** argv)
 
     // --- Predictor corrector operator ---------------------------------------------------------------
     BslImplicitPredCorrRTheta predcorr_operator(
-            to_physical_mapping,
             to_physical_mapping,
             advection_operator,
             grid,
