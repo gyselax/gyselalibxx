@@ -184,7 +184,7 @@ public:
     /**
      * @brief Compute the partial derivative locally from the values at 3 known positions.
      *
-     * @param[in] field_positions The positions where the field is provied, in ascending order.
+     * @param[in] field_positions The positions where the field is provided, in ascending order.
      * @param[in] field_values The values of the field at the provided positions.
      * @return The derivative at the central point.
      */
