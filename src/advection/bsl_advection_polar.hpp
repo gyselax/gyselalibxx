@@ -191,9 +191,10 @@ public:
 
         DConstField<IdxRangeBSRTheta, MemorySpace> coefs = get_const_field(coefs_alloc);
 
-        IdxRangeBatched idx_range_advected_points = m_idx_range_advected_points
-                                                            ? *m_idx_range_advected_points
-                                                            : get_idx_range(allfdistribu);
+        IdxRangeBatched idx_range_advected_points = get_idx_range(allfdistribu);
+        if (m_idx_range_advected_points) {
+            idx_range_advected_points = *m_idx_range_advected_points;
+        }
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
