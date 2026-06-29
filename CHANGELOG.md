@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add MI250X toolchain for LUMI.
 - Add a CMake option to control the discovery timeout of Gyselalib++ tests.
 - Added `PolarFootFinder` to replace `SplinePolarFootFinder` for clarity of Advection and Foot finding spaces.
+- Allow polar advection to modify a subset of the distribution function.
 
 ### Fixed
 
