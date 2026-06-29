@@ -120,6 +120,7 @@ private:
 
     LogicalToPhysicalMapping const& m_logical_to_physical_mapping;
 
+    std::optional<IdxRangeBatched> m_idx_range_advected_points;
 
 public:
     /**
@@ -141,11 +142,13 @@ public:
             Builder2D const& builder_2d,
             Evaluator2D const& evaluator_2d,
             FootFinder& foot_finder,
-            LogicalToPhysicalMapping const& logical_to_physical_mapping)
+            LogicalToPhysicalMapping const& logical_to_physical_mapping,
+            std::optional<IdxRangeBatched> idx_range_advected_points = std::nullopt)
         : m_builder_2d(builder_2d)
         , m_evaluator_2d(evaluator_2d)
         , m_find_feet_method(foot_finder)
         , m_logical_to_physical_mapping(logical_to_physical_mapping)
+        , m_idx_range_advected_points(idx_range_advected_points)
     {
     }
 
@@ -188,11 +191,13 @@ public:
 
         DConstField<IdxRangeBSRTheta, MemorySpace> coefs = get_const_field(coefs_alloc);
 
+        IdxRangeBatched idx_range_advected_points = m_idx_range_advected_points ? *m_idx_range_advected_points : get_idx_range(allfdistribu);
+
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 ExecSpace(),
-                get_idx_range(allfdistribu),
+                idx_range_advected_points,
                 KOKKOS_LAMBDA(IdxBatched const idx) {
                     IdxBatch batch_idx(idx);
                     allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs[batch_idx]);
