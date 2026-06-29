@@ -120,8 +120,6 @@ private:
 
     LogicalToPhysicalMapping const& m_logical_to_physical_mapping;
 
-    std::optional<IdxRangeBatched> m_idx_range_advected_points;
-
 public:
     /**
      * @brief Instantiate an advection operator.
@@ -142,13 +140,11 @@ public:
             Builder2D const& builder_2d,
             Evaluator2D const& evaluator_2d,
             FootFinder& foot_finder,
-            LogicalToPhysicalMapping const& logical_to_physical_mapping,
-            std::optional<IdxRangeBatched> idx_range_advected_points = std::nullopt)
+            LogicalToPhysicalMapping const& logical_to_physical_mapping)
         : m_builder_2d(builder_2d)
         , m_evaluator_2d(evaluator_2d)
         , m_find_feet_method(foot_finder)
         , m_logical_to_physical_mapping(logical_to_physical_mapping)
-        , m_idx_range_advected_points(idx_range_advected_points)
     {
     }
 
@@ -166,13 +162,17 @@ public:
      *      of the advection field at each point on the logical grid.
      * @param [in] dt
      *      A time step used.
+     * @param[in] idx_range_advected_points
+     *      The index range of the parts of the distribution function which are
+     *      modified. This allows regions (e.g. boundary regions) to remain constant.
      *
      * @return A Field to allfdistribu advected on the time step given.
      */
     DFieldFDistribu operator()(
             DFieldFDistribu allfdistribu,
             DVectorConstFieldAdvection advection_field,
-            double dt) const
+            double dt,
+            std::optional<IdxRangeBatched> idx_range_advected_points = std::nullopt) const
     {
         // Pre-allocate spline coefficient storage
         DFieldMem<IdxRangeBSRTheta, MemorySpace> coefs_alloc(
@@ -191,16 +191,15 @@ public:
 
         DConstField<IdxRangeBSRTheta, MemorySpace> coefs = get_const_field(coefs_alloc);
 
-        IdxRangeBatched idx_range_advected_points = get_idx_range(allfdistribu);
-        if (m_idx_range_advected_points) {
-            idx_range_advected_points = *m_idx_range_advected_points;
+        if (!idx_range_advected_points) {
+            idx_range_advected_points = std::optional<IdxRangeBatched>(get_idx_range(allfdistribu));
         }
 
         const std::source_location location = std::source_location::current();
         ddc::parallel_for_each(
                 location.function_name(),
                 ExecSpace(),
-                idx_range_advected_points,
+                *idx_range_advected_points,
                 KOKKOS_LAMBDA(IdxBatched const idx) {
                     IdxBatch batch_idx(idx);
                     allfdistribu(idx) = evaluator_2d_proxy(find_foot(idx), coefs[batch_idx]);
