@@ -176,10 +176,9 @@ public:
         }
     }
 
-    template <class X>
     static KOKKOS_INLINE_FUNCTION double get_derivative(
-            std::array<Coord<X>, 3> field_positions,
-            std::array<double, 3> field_elements)
+            std::array<Coord<DerivativeDimension>, 3> const& field_positions,
+            std::array<double, 3> const& field_elements)
     {
         return fdm_centred(
                 field_elements[0],
