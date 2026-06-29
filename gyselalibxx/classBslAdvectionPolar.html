@@ -584,7 +584,7 @@
 <tbody>
 <tr>
 <td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-bsladvectionpolar"><strong>BslAdvectionPolar</strong></a> (Builder2D const &amp; builder_2d, Evaluator2D const &amp; evaluator_2d, FootFinder &amp; foot_finder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping) <br><em>Instantiate an advection operator.</em></td>
+<td style="text-align: left;"><a href="#function-bsladvectionpolar"><strong>BslAdvectionPolar</strong></a> (Builder2D const &amp; builder_2d, Evaluator2D const &amp; evaluator_2d, FootFinder &amp; foot_finder, LogicalToPhysicalMapping const &amp; logical_to_physical_mapping, std::optional&lt; IdxRangeBatched &gt; idx_range_advected_points=std::nullopt) <br><em>Instantiate an advection operator.</em></td>
 </tr>
 <tr>
 <td style="text-align: right;">DFieldFDistribu</td>
@@ -632,7 +632,8 @@
     Builder2D const &amp; builder_2d,
     Evaluator2D const &amp; evaluator_2d,
     FootFinder &amp; foot_finder,
-    LogicalToPhysicalMapping const &amp; logical_to_physical_mapping
+    LogicalToPhysicalMapping const &amp; logical_to_physical_mapping,
+    std::optional&lt; IdxRangeBatched &gt; idx_range_advected_points=std::nullopt
 ) 
 </code></pre>
 <p><strong>Parameters:</strong></p>
@@ -641,6 +642,7 @@
 <li><code>evaluator_2d</code> The 2D evaluator used to evaluate the interpolating function at the feet of the characteristics. </li>
 <li><code>foot_finder</code> An IFootFinder which computes the feet of the characteristics. </li>
 <li><code>logical_to_physical_mapping</code> The mapping function from the logical domain to the physical domain. </li>
+<li><code>idx_range_advected_points</code> The index range of the parts of the distribution function which are modified. This allows regions (e.g. boundary regions) to remain constant. </li>
 </ul>
 <hr>
 

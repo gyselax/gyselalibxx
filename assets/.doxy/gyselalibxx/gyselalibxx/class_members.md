@@ -801,6 +801,7 @@
 * **m\_builder\_2d** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **m\_evaluator\_2d** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **m\_find\_feet\_method** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md))
+* **m\_idx\_range\_advected\_points** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **m\_logical\_to\_physical\_mapping** ([**BslAdvectionPolar**](classBslAdvectionPolar.md))
 * **m\_advection\_solver** ([**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md), [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md))
 * **m\_builder** ([**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md), [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md), [**BslPredCorrRTheta**](classBslPredCorrRTheta.md), [**LagrangeInterpolator**](classLagrangeInterpolator.md), [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md), [**Spline1DPartialDerivative**](classSpline1DPartialDerivative.md), [**Spline1DPartialDerivativeCreator**](classSpline1DPartialDerivativeCreator.md), [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md), [**SplineInterpolator**](classSplineInterpolator.md))

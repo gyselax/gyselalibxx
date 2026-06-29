@@ -121,7 +121,8 @@
     <member refid="classBslAdvectionPolar_1a5b65002bb91ecaf8840af8029d090b3a" kind="variable"><name>m_evaluator_2d</name></member>
     <member refid="classBslAdvectionPolar_1ae270eae4eba40af0d22cec1913add5ce" kind="variable"><name>m_find_feet_method</name></member>
     <member refid="classBslAdvectionPolar_1ab07f8ce22217dcbc41b7b9eafe809ad5" kind="variable"><name>m_logical_to_physical_mapping</name></member>
-    <member refid="classBslAdvectionPolar_1ac9367aaacc39c5ee50d98f6b38cb8597" kind="function"><name>BslAdvectionPolar</name></member>
+    <member refid="classBslAdvectionPolar_1a465992f64301170636520f60f889063c" kind="variable"><name>m_idx_range_advected_points</name></member>
+    <member refid="classBslAdvectionPolar_1af49a8fe3a1a2b230228ae3ee0ca30f13" kind="function"><name>BslAdvectionPolar</name></member>
     <member refid="classBslAdvectionPolar_1a7142827e276a163625e093d581039b95" kind="function"><name>~BslAdvectionPolar</name></member>
     <member refid="classBslAdvectionPolar_1a44eeac7fa74e256e35902cecc030f7d1" kind="function"><name>operator()</name></member>
     <member refid="classBslAdvectionPolar_1a8f2c499d9bc33ceb4780072241db833c" kind="function"><name>unify_value_at_centre_pt</name></member>

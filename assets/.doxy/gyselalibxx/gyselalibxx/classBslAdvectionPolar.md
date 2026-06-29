@@ -54,7 +54,7 @@ _Define an advection operator on 2D_ \((r, \theta)\) _domain._[More...](#detaile
 
 | Type | Name |
 | ---: | :--- |
-|   | [**BslAdvectionPolar**](#function-bsladvectionpolar) (Builder2D const & builder\_2d, Evaluator2D const & evaluator\_2d, FootFinder & foot\_finder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping) <br>_Instantiate an advection operator._  |
+|   | [**BslAdvectionPolar**](#function-bsladvectionpolar) (Builder2D const & builder\_2d, Evaluator2D const & evaluator\_2d, FootFinder & foot\_finder, LogicalToPhysicalMapping const & logical\_to\_physical\_mapping, std::optional&lt; IdxRangeBatched &gt; idx\_range\_advected\_points=std::nullopt) <br>_Instantiate an advection operator._  |
 |  DFieldFDistribu | [**operator()**](#function-operator) (DFieldFDistribu allfdistribu, [**DVectorConstFieldAdvection**](classVectorField.md) advection\_field, double dt) const<br>_Advect a function over a time step dt with the given advection field along the physical directions._  |
 |   | [**~BslAdvectionPolar**](#function-bsladvectionpolar) () = default<br> |
 
@@ -146,7 +146,8 @@ inline BslAdvectionPolar::BslAdvectionPolar (
     Builder2D const & builder_2d,
     Evaluator2D const & evaluator_2d,
     FootFinder & foot_finder,
-    LogicalToPhysicalMapping const & logical_to_physical_mapping
+    LogicalToPhysicalMapping const & logical_to_physical_mapping,
+    std::optional< IdxRangeBatched > idx_range_advected_points=std::nullopt
 ) 
 ```
 
@@ -161,6 +162,7 @@ inline BslAdvectionPolar::BslAdvectionPolar (
 * `evaluator_2d` The 2D evaluator used to evaluate the interpolating function at the feet of the characteristics. 
 * `foot_finder` An IFootFinder which computes the feet of the characteristics. 
 * `logical_to_physical_mapping` The mapping function from the logical domain to the physical domain. 
+* `idx_range_advected_points` The index range of the parts of the distribution function which are modified. This allows regions (e.g. boundary regions) to remain constant. 
 
 
 
