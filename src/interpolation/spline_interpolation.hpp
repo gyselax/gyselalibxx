@@ -221,10 +221,10 @@ public:
             Basis2,
             InterpGrid1,
             InterpGrid2,
-            extrapolation_rule_t<MinExtrapRule1, Basis1>,
-            extrapolation_rule_t<MaxExtrapRule1, Basis1>,
-            extrapolation_rule_t<MinExtrapRule2, Basis2>,
-            extrapolation_rule_t<MaxExtrapRule2, Basis2>>;
+            extrapolation_rule_t<MinExtrapRule1, Basis1, double>,
+            extrapolation_rule_t<MaxExtrapRule1, Basis1, double>,
+            extrapolation_rule_t<MinExtrapRule2, Basis2, double>,
+            extrapolation_rule_t<MaxExtrapRule2, Basis2, double>>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -233,10 +233,10 @@ public:
     }
 
 private:
-    extrapolation_rule_t<MinExtrapRule1, Basis1> m_min_extrapolation1;
-    extrapolation_rule_t<MaxExtrapRule1, Basis1> m_max_extrapolation1;
-    extrapolation_rule_t<MinExtrapRule2, Basis2> m_min_extrapolation2;
-    extrapolation_rule_t<MaxExtrapRule2, Basis2> m_max_extrapolation2;
+    extrapolation_rule_t<MinExtrapRule1, Basis1, double> m_min_extrapolation1;
+    extrapolation_rule_t<MaxExtrapRule1, Basis1, double> m_max_extrapolation1;
+    extrapolation_rule_t<MinExtrapRule2, Basis2, double> m_min_extrapolation2;
+    extrapolation_rule_t<MaxExtrapRule2, Basis2, double> m_max_extrapolation2;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
@@ -251,10 +251,10 @@ public:
      * @param idx_range The 2D interpolation index range passed to the builder.
      */
     explicit SplineInterpolator2D(IdxRange<InterpGrid1, InterpGrid2> idx_range)
-        : m_min_extrapolation1(get_extrapolation<MinExtrapRule1, Basis1>(Extremity::FRONT))
-        , m_max_extrapolation1(get_extrapolation<MaxExtrapRule1, Basis1>(Extremity::BACK))
-        , m_min_extrapolation2(get_extrapolation<MinExtrapRule2, Basis2>(Extremity::FRONT))
-        , m_max_extrapolation2(get_extrapolation<MaxExtrapRule2, Basis2>(Extremity::BACK))
+        : m_min_extrapolation1(get_extrapolation<MinExtrapRule1, Basis1, double>(Extremity::FRONT))
+        , m_max_extrapolation1(get_extrapolation<MaxExtrapRule1, Basis1, double>(Extremity::BACK))
+        , m_min_extrapolation2(get_extrapolation<MinExtrapRule2, Basis2, double>(Extremity::FRONT))
+        , m_max_extrapolation2(get_extrapolation<MaxExtrapRule2, Basis2, double>(Extremity::BACK))
         , m_builder(idx_range)
         , m_evaluator(
                   m_min_extrapolation1,

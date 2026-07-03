@@ -182,8 +182,6 @@ TYPED_TEST(AdvectionFieldRThetaComputationFixture, TestAdvectionFieldFinder)
             ddc::PeriodicExtrapolationRule<Theta>());
 
 
-    ddc::NullExtrapolationRule r_extrapolation_rule;
-
     // --- Define the to_physical_mapping. ------------------------------------------------------------------------
     const LogicalToPhysicalMapping to_physical_mapping;
     const PhysicalToLogicalMapping to_logical_mapping;

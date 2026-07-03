@@ -169,7 +169,7 @@ int main(int argc, char** argv)
     ddc::parallel_fill(coeff_alpha, -1);
     ddc::parallel_fill(coeff_beta, 0);
 
-    PoissonSolver poisson_solver(discrete_mapping, builder, spline_evaluator);
+    PoissonSolver poisson_solver(discrete_mapping, builder, interpolator.get_evaluator());
     poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
@@ -178,7 +178,7 @@ int main(int argc, char** argv)
             to_physical_mapping,
             advection_operator,
             builder,
-            spline_evaluator,
+            interpolator.get_evaluator(),
             poisson_solver);
 #elif defined(EXPLICIT_PREDCORR)
     BslExplicitPredCorrRTheta predcorr_operator(
@@ -270,7 +270,7 @@ int main(int argc, char** argv)
     host_t<DFieldMemRTheta> phi_eq_alloc_host(mesh_rtheta);
     Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
+    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), interpolator.get_evaluator());
     poisson_solver(get_field(phi_eq_alloc), poisson_rhs_eq);
     ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
