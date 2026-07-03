@@ -24,33 +24,33 @@ constexpr char const* const PDI_CFG
   MeshX_extents: { type: array, subtype: int64, size: 1 }
   MeshX:
     type: array
-    subtype: real_type
+    subtype: double
     size: [ '$MeshX_extents[0]' ]
   MeshY_extents: { type: array, subtype: int64, size: 1 }
   MeshY:
     type: array
-    subtype: real_type
+    subtype: double
     size: [ '$MeshY_extents[0]' ]
   MeshVx_extents: { type: array, subtype: int64, size: 1 }
   MeshVx:
     type: array
-    subtype: real_type
+    subtype: double
     size: [ '$MeshVx_extents[0]' ]
   MeshVy_extents: { type: array, subtype: int64, size: 1 }
   MeshVy:
     type: array
-    subtype: real_type
+    subtype: double
     size: [ '$MeshVy_extents[0]' ]
   Nkinspecies: int
   fdistribu_charges_extents : { type: array, subtype: int64, size: 1 }
   fdistribu_charges:
     type: array
-    subtype: real_type
+    subtype: double
     size: [ '$fdistribu_charges_extents[0]' ]
   fdistribu_masses_extents : { type: array, subtype: int64, size: 1 }
   fdistribu_masses:
     type: array
-    subtype: real_type
+    subtype: double
     size: [ '$fdistribu_masses_extents[0]' ]
 
   #-- Parallel data
