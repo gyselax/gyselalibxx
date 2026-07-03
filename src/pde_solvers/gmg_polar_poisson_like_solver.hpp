@@ -106,7 +106,7 @@ private:
     DConstSplineRTheta m_coeff_beta;
 
 public:
-    /// Build th class instance
+    /// Build the class instance
     PolarPoissonLikeCoefficients(
             SplineEvaluator evaluator,
             DConstSplineRTheta coeff_alpha,
