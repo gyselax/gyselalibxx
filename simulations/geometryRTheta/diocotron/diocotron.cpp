@@ -270,7 +270,8 @@ int main(int argc, char** argv)
     host_t<DFieldMemRTheta> phi_eq_alloc_host(mesh_rtheta);
     Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
-    PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), interpolator.get_evaluator());
+    PoissonLikeRHSFunction
+            poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), interpolator.get_evaluator());
     poisson_solver(get_field(phi_eq_alloc), poisson_rhs_eq);
     ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
