@@ -89,12 +89,13 @@ restrict_to_idx_range(
         Coord<typename IDim::continuous_dimension_type> coord,
         IdxRange<IDim> const& idx_range)
 {
+    using Coord1D = Coord<typename IDim::continuous_dimension_type>;
     double const x_min = ddc::rmin(idx_range);
     double const length = total_interval_length(idx_range);
 
     assert(length > 0);
     coord -= x_min;
-    coord = Kokkos::fmod((double)coord, length);
+    coord = Coord1D(Kokkos::fmod((double)coord, length));
     coord += x_min;
     if (coord < x_min)
         coord += length;
