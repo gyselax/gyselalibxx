@@ -80,6 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove default O1 optimisation flag.
 - Changed type of species identifier read in `read_species` PDI event (from `int` to `int64`).
 - Remove version constraint on the indirect dependency Kokkos-FFT.
+- Simplify `restrict_to_idx_range` implementation.
 
 ### Deprecated
 
