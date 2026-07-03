@@ -31,6 +31,11 @@ Inherits the following classes: [IPartialDerivativeCreator](classIPartialDerivat
 
 
 
+## Public Types
+
+| Type | Name |
+| ---: | :--- |
+| typedef [**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md)&lt; IdxRangeFull, DerivativeDimension &gt; | [**partial\_derivative\_type**](#typedef-partial_derivative_type)  <br>_The type of the partial derivative calculator that will be produced._  |
 
 
 
@@ -155,6 +160,22 @@ This class allows an instance of the [**CentralFDMPartialDerivative**](classCent
 
 
     
+## Public Types Documentation
+
+
+
+
+### typedef partial\_derivative\_type 
+
+_The type of the partial derivative calculator that will be produced._ 
+```C++
+using CentralFDMPartialDerivativeCreator< IdxRangeFull, DerivativeDimension >::partial_derivative_type =  CentralFDMPartialDerivative<IdxRangeFull, DerivativeDimension>;
+```
+
+
+
+
+<hr>
 ## Public Functions Documentation
 
 

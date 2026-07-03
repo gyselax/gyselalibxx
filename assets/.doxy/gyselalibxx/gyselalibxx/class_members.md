@@ -440,13 +440,13 @@
 * **GridV** ([**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
 * **GridX** ([**BslAdvectionSpatial**](classBslAdvectionSpatial.md))
 * **get** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**CombinedMapping**](classCombinedMapping.md), [**IdentityTensor**](classIdentityTensor.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**MatchingIdxSlice**](classMatchingIdxSlice.md), [**MultipatchField**](classMultipatchField.md), [**MultipatchFieldMem**](classMultipatchFieldMem.md), [**MultipatchType**](classMultipatchType.md), [**SingleInterfaceDerivativesCalculatorCollection**](classSingleInterfaceDerivativesCalculatorCollection.md), [**TensorCommon**](classTensorCommon.md), [**VectorField**](classVectorField.md), [**VectorFieldMem**](classVectorFieldMem.md))
+* **get\_derivative** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md), [**CollisionsInter**](classCollisionsInter.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md))
 * **GridMuType** ([**CollisionConfiguration**](classCollisionConfiguration.md))
 * **GridPhiType** ([**CollisionConfiguration**](classCollisionConfiguration.md))
 * **GridRType** ([**CollisionConfiguration**](classCollisionConfiguration.md))
 * **GridSpType** ([**CollisionConfiguration**](classCollisionConfiguration.md))
 * **GridThetaType** ([**CollisionConfiguration**](classCollisionConfiguration.md))
 * **GridVparType** ([**CollisionConfiguration**](classCollisionConfiguration.md))
-* **get\_derivative** ([**CollisionsInter**](classCollisionsInter.md), [**KrookSourceAdaptive**](classKrookSourceAdaptive.md))
 * **get\_nustar0** ([**CollisionsInter**](classCollisionsInter.md), [**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_gridvx\_ghosted** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **get\_gridvx\_ghosted\_staggered** ([**CollisionsIntra**](classCollisionsIntra.md))
@@ -1074,6 +1074,7 @@
 ## n
 
 * **n\_overlap\_cells** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
+* **n\_local\_points** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md))
 * **non\_singular\_inverse\_jacobian\_matrix** ([**CombinedMapping**](classCombinedMapping.md))
 * **n\_patches** ([**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md), [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **n\_fields** ([**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md))
@@ -1122,6 +1123,7 @@
 ## p
 
 * **PolarFootFinderType** ([**BslExplicitPredCorrRTheta**](classBslExplicitPredCorrRTheta.md), [**BslImplicitPredCorrRTheta**](classBslImplicitPredCorrRTheta.md))
+* **partial\_derivative\_type** ([**CentralFDMPartialDerivativeCreator**](classCentralFDMPartialDerivativeCreator.md))
 * **PatchOrdering** ([**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md), [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md), [**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md), [**MultipatchType**](classMultipatchType.md), [**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
 * **preallocate** ([**CrankNicolsonBuilder**](classCrankNicolsonBuilder.md), [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md))
 * **physical\_deriv\_grids** ([**DerivField&lt; ElementType, IdxRange&lt; DDims... &gt;, MemorySpace, LayoutStridedPolicy &gt;**](classDerivField_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01MemorySpace_00_01LayoutStridedPolicy_01_4.md), [**DerivFieldCommon&lt; FieldType, IdxRange&lt; DDims... &gt; &gt;**](classDerivFieldCommon_3_01FieldType_00_01IdxRange_3_01DDims_8_8_8_01_4_01_4.md), [**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))

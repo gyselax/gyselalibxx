@@ -606,6 +606,35 @@ public:
     virtual std::unique_ptr&lt;IPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;&gt; create_instance(
             DConstField&lt;IdxRangeFull&gt; field) const = 0;
 };
+
+namespace concepts {
+
+template &lt;typename T&gt;
+concept LocalPartialDerivative = requires()
+{
+    {
+        T::n_local_points()
+        } -&gt; std::same_as&lt;int&gt;;
+}
+&amp;&amp;requires(
+        std::array&lt;
+                Coord&lt;typename T::GridDerivativeDimension::continuous_dimension_type&gt;,
+                T::n_local_points()&gt; const&amp; pos,
+        std::array&lt;double, T::n_local_points()&gt; const&amp; vals)
+{
+    {
+        T::get_derivative(pos, vals)
+        } -&gt; std::same_as&lt;double&gt;;
+};
+
+template &lt;typename T&gt;
+concept LocalPartialDerivativeCreator = requires
+{
+    typename T::partial_derivative_type;
+}
+&amp;&amp;LocalPartialDerivative&lt;typename T::partial_derivative_type&gt;;
+
+} // namespace concepts
 </code></pre></div>
               
             </div>

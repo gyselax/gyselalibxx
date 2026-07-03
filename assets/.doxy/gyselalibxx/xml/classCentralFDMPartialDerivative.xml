@@ -173,7 +173,70 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="49" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="49" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="61" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classCentralFDMPartialDerivative_1ae8f8ac87a6f138392ad8cba23e68a302" prot="public" static="yes" constexpr="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>constexpr int</type>
+        <definition>static constexpr int CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::n_local_points</definition>
+        <argsstring>()</argsstring>
+        <name>n_local_points</name>
+        <qualifiedname>CentralFDMPartialDerivative::n_local_points</qualifiedname>
+        <briefdescription>
+<para>The number of points required to calculate the derivative locally. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="return"><para>The number of points. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="54" column="26" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="54" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="classCentralFDMPartialDerivative_1a592f746cf68ea37b0a2f8049bbda7846" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>static KOKKOS_INLINE_FUNCTION double CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::get_derivative</definition>
+        <argsstring>(std::array&lt; Coord&lt; DerivativeDimension &gt;, 3 &gt; const &amp;field_positions, std::array&lt; double, 3 &gt; const &amp;field_values)</argsstring>
+        <name>get_derivative</name>
+        <qualifiedname>CentralFDMPartialDerivative::get_derivative</qualifiedname>
+        <param>
+          <type>std::array&lt; Coord&lt; DerivativeDimension &gt;, 3 &gt; const &amp;</type>
+          <declname>field_positions</declname>
+        </param>
+        <param>
+          <type>std::array&lt; double, 3 &gt; const &amp;</type>
+          <declname>field_values</declname>
+        </param>
+        <briefdescription>
+<para>Compute the partial derivative locally from the values at 3 known positions. </para>
+        </briefdescription>
+        <detaileddescription>
+<para><parameterlist kind="param"><parameteritem>
+<parameternamelist>
+<parametername direction="in">field_positions</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The positions where the field is provided, in ascending order. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername direction="in">field_values</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The values of the field at the provided positions. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+<simplesect kind="return"><para>The derivative at the central point. </para>
+</simplesect>
+</para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="191" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="191" bodyend="202"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -204,7 +267,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="57" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="57" bodyend="61"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="69" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="69" bodyend="73"/>
       </memberdef>
       <memberdef kind="function" id="classCentralFDMPartialDerivative_1ae3faa9459a609771457f2677ef709bd5" prot="public" static="no" const="yes" explicit="no" inline="yes" final="yes" virt="virtual">
         <type>void</type>
@@ -234,43 +297,39 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="70" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="70" bodyend="175"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="82" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="82" bodyend="182"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
-      <memberdef kind="function" id="classCentralFDMPartialDerivative_1a273469223bf4a9e8cc2f86c0e3d869fa" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classCentralFDMPartialDerivative_1a1a6260945b81aad2767df37064ce7bad" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION double</type>
         <definition>static KOKKOS_INLINE_FUNCTION double CentralFDMPartialDerivative&lt; IdxRangeFull, DerivativeDimension &gt;::fdm_centred</definition>
-        <argsstring>(DConstFieldType const field, IdxBatch const ib, IdxDeriv const i1, IdxDeriv const i2, IdxDeriv const i3, double const h1, double const h2)</argsstring>
+        <argsstring>(double const field1, double const field2, double const field3, double const x1, double const x2, double const x3)</argsstring>
         <name>fdm_centred</name>
         <qualifiedname>CentralFDMPartialDerivative::fdm_centred</qualifiedname>
         <param>
-          <type>DConstFieldType const</type>
-          <declname>field</declname>
-        </param>
-        <param>
-          <type>IdxBatch const</type>
-          <declname>ib</declname>
-        </param>
-        <param>
-          <type>IdxDeriv const</type>
-          <declname>i1</declname>
-        </param>
-        <param>
-          <type>IdxDeriv const</type>
-          <declname>i2</declname>
-        </param>
-        <param>
-          <type>IdxDeriv const</type>
-          <declname>i3</declname>
+          <type>double const</type>
+          <declname>field1</declname>
         </param>
         <param>
           <type>double const</type>
-          <declname>h1</declname>
+          <declname>field2</declname>
         </param>
         <param>
           <type>double const</type>
-          <declname>h2</declname>
+          <declname>field3</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>x1</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>x2</declname>
+        </param>
+        <param>
+          <type>double const</type>
+          <declname>x3</declname>
         </param>
         <briefdescription>
         </briefdescription>
@@ -278,7 +337,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="178" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="178" bodyend="191"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="205" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="205" bodyend="219"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -328,14 +387,15 @@
         <link refid="classIPartialDerivative"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="24" bodyend="192"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" line="23" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/central_fdm_partial_derivatives.hpp" bodystart="24" bodyend="220"/>
     <listofallmembers>
       <member refid="classCentralFDMPartialDerivative_1a7bdf59407f13c8b5910573a98bf3cac8" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>base_type</name></member>
       <member refid="classCentralFDMPartialDerivative_1a7dc376bbd4bbf568c100816f5bb0b1fe" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>CentralFDMPartialDerivative</name></member>
       <member refid="classCentralFDMPartialDerivative_1a85c8b026718b72ff0c996c4503b95136" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>DConstFieldType</name></member>
       <member refid="classCentralFDMPartialDerivative_1a323d706a205681218b9c28d16e65b4d5" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>DFieldMemType</name></member>
       <member refid="classCentralFDMPartialDerivative_1a47c973564187001a3097fe9b0eb901d5" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>DFieldType</name></member>
-      <member refid="classCentralFDMPartialDerivative_1a273469223bf4a9e8cc2f86c0e3d869fa" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>fdm_centred</name></member>
+      <member refid="classCentralFDMPartialDerivative_1a1a6260945b81aad2767df37064ce7bad" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>fdm_centred</name></member>
+      <member refid="classCentralFDMPartialDerivative_1a592f746cf68ea37b0a2f8049bbda7846" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>get_derivative</name></member>
       <member refid="classIPartialDerivative_1a5b5bbff2fea1001b2a434b28784f288f" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>GridDerivativeDimension</name></member>
       <member refid="classCentralFDMPartialDerivative_1ab10f56286fc79bf60563f0d1b9d9576f" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>IdxBatch</name></member>
       <member refid="classCentralFDMPartialDerivative_1ae3e1c39b938374ea25419e820aa46a73" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>IdxDeriv</name></member>
@@ -344,6 +404,7 @@
       <member refid="classCentralFDMPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>IdxRangeDeriv</name></member>
       <member refid="classCentralFDMPartialDerivative_1af5255c9e4eb9ad6b8598899d4ecee989" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>IdxStepDeriv</name></member>
       <member refid="classCentralFDMPartialDerivative_1a64a1c06f33429b26b0314b5093032a90" prot="private" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>m_field</name></member>
+      <member refid="classCentralFDMPartialDerivative_1ae8f8ac87a6f138392ad8cba23e68a302" prot="public" virt="non-virtual"><scope>CentralFDMPartialDerivative</scope><name>n_local_points</name></member>
       <member refid="classCentralFDMPartialDerivative_1ae3faa9459a609771457f2677ef709bd5" prot="public" virt="virtual"><scope>CentralFDMPartialDerivative</scope><name>operator()</name></member>
       <member refid="classIPartialDerivative_1a596b5a8933c387935c35461a3c5f1fcb" prot="public" virt="virtual"><scope>CentralFDMPartialDerivative</scope><name>~IPartialDerivative</name></member>
     </listofallmembers>

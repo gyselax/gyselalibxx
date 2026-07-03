@@ -100,6 +100,12 @@ See [IPartialDerivative](classIPartialDerivative.md)
 | virtual  | [**~IPartialDerivative**](classIPartialDerivative.md#function-ipartialderivative) () = default<br> |
 
 
+## Public Static Functions
+
+| Type | Name |
+| ---: | :--- |
+|  KOKKOS\_INLINE\_FUNCTION double | [**get\_derivative**](#function-get_derivative) (std::array&lt; Coord&lt; DerivativeDimension &gt;, 3 &gt; const & field\_positions, std::array&lt; double, 3 &gt; const & field\_values) <br>_Compute the partial derivative locally from the values at 3 known positions._  |
+|  constexpr int | [**n\_local\_points**](#function-n_local_points) () <br>_The number of points required to calculate the derivative locally._  |
 
 
 
@@ -223,6 +229,69 @@ inline virtual void CentralFDMPartialDerivative::operator() (
         
 Implements [*IPartialDerivative::operator()*](classIPartialDerivative.md#function-operator)
 
+
+<hr>
+## Public Static Functions Documentation
+
+
+
+
+### function get\_derivative 
+
+_Compute the partial derivative locally from the values at 3 known positions._ 
+```C++
+static inline KOKKOS_INLINE_FUNCTION double CentralFDMPartialDerivative::get_derivative (
+    std::array< Coord< DerivativeDimension >, 3 > const & field_positions,
+    std::array< double, 3 > const & field_values
+) 
+```
+
+
+
+
+
+**Parameters:**
+
+
+* `field_positions` The positions where the field is provided, in ascending order. 
+* `field_values` The values of the field at the provided positions. 
+
+
+
+**Returns:**
+
+The derivative at the central point. 
+
+
+
+
+
+        
+
+<hr>
+
+
+
+### function n\_local\_points 
+
+_The number of points required to calculate the derivative locally._ 
+```C++
+static inline constexpr int CentralFDMPartialDerivative::n_local_points () 
+```
+
+
+
+
+
+**Returns:**
+
+The number of points. 
+
+
+
+
+
+        
 
 <hr>
 

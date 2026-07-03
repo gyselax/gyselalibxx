@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="conceptconcepts_1_1LocalPartialDerivative" kind="concept">
+    <compoundname>concepts::LocalPartialDerivative</compoundname>
+    <templateparamlist>
+      <param>
+        <type>typename T</type>
+      </param>
+    </templateparamlist>
+    <initializer>template&lt;typename T&gt;
+concept <ref refid="conceptconcepts_1_1LocalPartialDerivative" kindref="compound">concepts::LocalPartialDerivative</ref> =  requires()
+{
+    {
+        T::n_local_points()
+        } -&gt; std::same_as&lt;int&gt;;
+}
+&amp;&amp;requires(
+        std::array&lt;
+                Coord&lt;typename T::GridDerivativeDimension::continuous_dimension_type&gt;,
+                T::n_local_points()&gt; const&amp; pos,
+        std::array&lt;double, T::n_local_points()&gt; const&amp; vals)
+{
+    {
+        T::get_derivative(pos, vals)
+        } -&gt; std::same_as&lt;double&gt;;
+}    </initializer>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/math_tools/ipartial_derivative.hpp" line="73" column="1"/>
+  </compounddef>
+</doxygen>

@@ -355,12 +355,15 @@
     <member refid="classCentralFDMPartialDerivative_1ae5e7d597e015b5024376bb27091c096d" kind="typedef"><name>IdxRangeDeriv</name></member>
     <member refid="classCentralFDMPartialDerivative_1a883ec2b528cf2188db6e593ae849fe0e" kind="typedef"><name>IdxRangeBatch</name></member>
     <member refid="classCentralFDMPartialDerivative_1a64a1c06f33429b26b0314b5093032a90" kind="variable"><name>m_field</name></member>
+    <member refid="classCentralFDMPartialDerivative_1ae8f8ac87a6f138392ad8cba23e68a302" kind="function"><name>n_local_points</name></member>
+    <member refid="classCentralFDMPartialDerivative_1a592f746cf68ea37b0a2f8049bbda7846" kind="function"><name>get_derivative</name></member>
     <member refid="classCentralFDMPartialDerivative_1a7dc376bbd4bbf568c100816f5bb0b1fe" kind="function"><name>CentralFDMPartialDerivative</name></member>
     <member refid="classCentralFDMPartialDerivative_1ae3faa9459a609771457f2677ef709bd5" kind="function"><name>operator()</name></member>
-    <member refid="classCentralFDMPartialDerivative_1a273469223bf4a9e8cc2f86c0e3d869fa" kind="function"><name>fdm_centred</name></member>
+    <member refid="classCentralFDMPartialDerivative_1a1a6260945b81aad2767df37064ce7bad" kind="function"><name>fdm_centred</name></member>
   </compound>
   <compound refid="classCentralFDMPartialDerivativeCreator" kind="class"><name>CentralFDMPartialDerivativeCreator</name>
     <member refid="classCentralFDMPartialDerivativeCreator_1abf4fba4727b5f204740920faa551d527" kind="typedef"><name>DConstFieldType</name></member>
+    <member refid="classCentralFDMPartialDerivativeCreator_1abb9a47a8d45103ffb644510ad3bbdef4" kind="typedef"><name>partial_derivative_type</name></member>
     <member refid="classCentralFDMPartialDerivativeCreator_1aca91ad3377b567feffbc6dd3c75656eb" kind="function"><name>CentralFDMPartialDerivativeCreator</name></member>
     <member refid="classCentralFDMPartialDerivativeCreator_1ad19b8c061f9439104762c2c46edbbd6d" kind="function"><name>create_instance</name></member>
   </compound>
@@ -3558,6 +3561,10 @@
   <compound refid="conceptconcepts_1_1InvJacobianMatrix" kind="concept"><name>concepts::InvJacobianMatrix</name>
   </compound>
   <compound refid="conceptconcepts_1_1JacobianMatrix" kind="concept"><name>concepts::JacobianMatrix</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1LocalPartialDerivative" kind="concept"><name>concepts::LocalPartialDerivative</name>
+  </compound>
+  <compound refid="conceptconcepts_1_1LocalPartialDerivativeCreator" kind="concept"><name>concepts::LocalPartialDerivativeCreator</name>
   </compound>
   <compound refid="conceptconcepts_1_1Mapping" kind="concept"><name>concepts::Mapping</name>
   </compound>

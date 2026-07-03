@@ -574,6 +574,21 @@
 <li><code>#include &lt;central_fdm_partial_derivatives.hpp&gt;</code></li>
 </ul>
 <p>Inherits the following classes: <a href="classIPartialDerivativeCreator.html">IPartialDerivativeCreator</a></p>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef <a href="classCentralFDMPartialDerivative.html"><strong>CentralFDMPartialDerivative</strong></a>&lt; IdxRangeFull, DerivativeDimension &gt;</td>
+<td style="text-align: left;"><a href="#typedef-partial_derivative_type"><strong>partial_derivative_type</strong></a>  <br><em>The type of the partial derivative calculator that will be produced.</em></td>
+</tr>
+</tbody>
+</table>
 <h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
@@ -616,6 +631,12 @@
 <li><code>IdxRangeFull</code> The index range of the field on which the operator acts (with all dimensions, batched and dimension of interest). </li>
 <li><code>DerivativeDimension</code> The dimension on which the partial derivative is calculated. </li>
 </ul>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-partial_derivative_type">typedef partial_derivative_type</h3>
+<p><em>The type of the partial derivative calculator that will be produced.</em> </p>
+<pre><code class="language-C++">using CentralFDMPartialDerivativeCreator&lt; IdxRangeFull, DerivativeDimension &gt;::partial_derivative_type =  CentralFDMPartialDerivative&lt;IdxRangeFull, DerivativeDimension&gt;;
+</code></pre>
+<hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-centralfdmpartialderivativecreator">function CentralFDMPartialDerivativeCreator</h3>
 <p><em>Construct an instance of the</em> <a href="classCentralFDMPartialDerivativeCreator.html"><em><strong>CentralFDMPartialDerivativeCreator</strong></em></a> <em>class.</em></p>

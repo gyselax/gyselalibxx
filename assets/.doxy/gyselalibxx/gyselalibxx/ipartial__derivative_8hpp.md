@@ -27,6 +27,11 @@
 
 
 
+## Namespaces
+
+| Type | Name |
+| ---: | :--- |
+| namespace | [**concepts**](namespaceconcepts.md) <br> |
 
 
 ## Classes
