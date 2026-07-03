@@ -184,6 +184,9 @@ private:
     SplineRThetaMem m_coeff_alpha;
     SplineRThetaMem m_coeff_beta;
     DensityCoeffs const m_density_coeffs;
+    int m_max_iterations;
+    double m_absTol;
+    double m_relTol;
 
 
 public:
@@ -197,7 +200,10 @@ public:
     GMGPolarPoissonLikeSolver(
             ToPhysicalMapping to_physical,
             SplineBuilder const& builder,
-            SplineEvaluator const& evaluator)
+            SplineEvaluator const& evaluator,
+            std::optional<int> max_iterations = std::nullopt,
+            std::optional<double> absTol = std::nullopt,
+            std::optional<double> relTol = std::nullopt)
         : m_domain_geom(to_physical)
         , m_builder(builder)
         , m_evaluator(evaluator)
@@ -207,6 +213,9 @@ public:
                   m_evaluator,
                   get_const_field(m_coeff_alpha),
                   get_const_field(m_coeff_beta))
+        , m_max_iterations(max_iterations.value_or(100))
+        , m_absTol(absTol.value_or(1e-10))
+        , m_resTol(resTol.value_or(1e-6))
     {
     }
 
@@ -288,10 +297,10 @@ public:
         solver.PCG_MG_cycle(MultigridCycleType::V_CYCLE); // Multigrid cycle type for PCG iterations
 
         // --- Iterative solver controls --- //
-        solver.maxIterations(100); // Max number of iterations
+        solver.maxIterations(m_max_iterations); // Max number of iterations
         solver.residualNormType(ResidualNormType::WEIGHTED_EUCLIDEAN); // Residual norm type
-        solver.absoluteTolerance(1e-10); // Absolute residual tolerance
-        solver.relativeTolerance(1e-6); // Relative residual tolerance
+        solver.absoluteTolerance(m_absTol); // Absolute residual tolerance
+        solver.relativeTolerance(m_relTol); // Relative residual tolerance
 
         // --- Finalise solver setup --- //
         solver.setup();
