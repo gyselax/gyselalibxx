@@ -92,22 +92,13 @@ restrict_to_idx_range(
     using Coord1D = Coord<typename IDim::continuous_dimension_type>;
     double const x_min = ddc::rmin(idx_range);
     double const length = total_interval_length(idx_range);
-    double const x_max = x_min + length;
 
     assert(length > 0);
     coord -= x_min;
-    if (fabs(coord) > 10 * length) {
-        double periodic_factor = 2 * M_PI / length;
-        double coord_2pi = double(coord) * periodic_factor;
-        coord_2pi = std::copysign(std::acos(std::cos(coord_2pi)), std::sin(coord_2pi));
-        coord = coord_2pi < 0 ? Coord1D((coord_2pi + 2 * M_PI) / periodic_factor)
-                              : Coord1D((coord_2pi) / periodic_factor);
-    }
+    coord = fmod((double)coord, length);
     coord += x_min;
-    while (coord < x_min)
+    if (coord < x_min)
         coord += length;
-    while (coord >= x_max)
-        coord -= length;
     return coord;
 }
 
