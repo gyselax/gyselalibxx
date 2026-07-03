@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp} - GyselalibX</title>
+    <title>File gmg_polar_poisson_like_solver.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d236.md";
+        var mkdocs_page_name = "File gmg_polar_poisson_like_solver.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/gmg__polar__poisson__like__solver_8hpp.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</li>
+      <li class="breadcrumb-item active">File gmg_polar_poisson_like_solver.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d236.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/gmg__polar__poisson__like__solver_8hpp.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,10 +566,60 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadratureneumann_spline_quadraturehpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d236.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp}</strong></a></p>
+                <div><h1 id="file-gmg_polar_poisson_like_solverhpp">File gmg_polar_poisson_like_solver.hpp</h1>
+<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a> <strong>&gt;</strong> <a href="gmg__polar__poisson__like__solver_8hpp.html"><strong>gmg_polar_poisson_like_solver.hpp</strong></a></p>
+<p><a href="gmg__polar__poisson__like__solver_8hpp_source.html">Go to the source code of this file</a></p>
+<ul>
+<li><code>#include &lt;cmath&gt;</code></li>
+<li><code>#include &lt;vector&gt;</code></li>
+<li><code>#include &lt;GMGPolar/gmgpolar.h&gt;</code></li>
+<li><code>#include "ddc_alias_inline_functions.hpp"</code></li>
+<li><code>#include "ipolar_poisson_like_solver.hpp"</code></li>
+</ul>
+<h2 id="namespaces">Namespaces</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">namespace</td>
+<td style="text-align: left;"><a href="namespaceGMGPolarTools.html"><strong>GMGPolarTools</strong></a> <br></td>
+</tr>
+</tbody>
+</table>
+<h2 id="classes">Classes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classGMGPolarPoissonLikeSolver.html"><strong>GMGPolarPoissonLikeSolver</strong></a> &lt;class ToPhysicalMapping, class <a href="structGridR.html"><strong>GridR</strong></a>, class <a href="structGridTheta.html"><strong>GridTheta</strong></a>, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, class SplineBuilder, class SplineEvaluator&gt;<br><em>A Poisson-like solver using the GMGPolar multigrid library.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.html"><strong>HomogeneousDirichletBoundaryConditions</strong></a> <br><em>Homogeneous Dirichlet boundary conditions satisfying the GMGPolar BoundaryConditions concept.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classGMGPolarTools_1_1MappingToDomainGeometry.html"><strong>MappingToDomainGeometry</strong></a> &lt;class ToPhysicalMapping&gt;<br><em>Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry concept.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">class</td>
+<td style="text-align: left;"><a href="classGMGPolarTools_1_1PolarPoissonLikeCoefficients.html"><strong>PolarPoissonLikeCoefficients</strong></a> &lt;class SplineEvaluator, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>&gt;<br><em>Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept.</em></td>
+</tr>
+</tbody>
+</table>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/neumann_spline_quadrature.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp</code></p></div>
               
             </div>
           </div><footer>

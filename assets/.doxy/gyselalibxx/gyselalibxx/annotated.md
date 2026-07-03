@@ -70,6 +70,11 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
     * **struct** [**MomentDensity**](structFluidMoments_1_1MomentDensity.md) 
     * **struct** [**MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) 
     * **struct** [**MomentVelocity**](structFluidMoments_1_1MomentVelocity.md) 
+* **class** [**GMGPolarPoissonLikeSolver**](classGMGPolarPoissonLikeSolver.md) _A Poisson-like solver using the GMGPolar multigrid library._     
+* **namespace** [**GMGPolarTools**](namespaceGMGPolarTools.md)     
+    * **class** [**HomogeneousDirichletBoundaryConditions**](classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.md) _Homogeneous Dirichlet boundary conditions satisfying the GMGPolar BoundaryConditions concept._     
+    * **class** [**MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md) _Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry concept._     
+    * **class** [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md) _Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._     
 * **class** [**GaussLegendre**](classGaussLegendre.md) _An operator for constructing a Gauss-Legendre quadrature._     
 * **struct** [**GaussLegendreCoefficients**](structGaussLegendreCoefficients.md) _A structure containing the weights and positions associated with a Gauss-Legendre quadrature using NPoints points._     
 * **class** [**GeometryVxVyXY**](classGeometryVxVyXY.md) _A class providing aliases for useful subindex ranges of the geometry when the data is saved with the velocity dimensions distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections._     
@@ -266,10 +271,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **struct** [**Y**](structY.md) _Define non periodic real_ [_**Y**_](structY.md) _dimension._    
 * **struct** [**Y\_pC**](structY__pC.md) _Tag the second non periodic dimension in the pseudo physical domain (pseudo-Cartesian coordinates)._     
 * **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/geometryXVx/rhs/collisions\_utils.cpp}**](namespace_0d102.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d234.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d236.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d238.md) 
-* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d240.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/gauss\_legendre\_integration.cpp}**](namespace_0d235.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/neumann\_spline\_quadrature.hpp}**](namespace_0d237.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/quadrature\_coeffs\_nd.hpp}**](namespace_0d239.md) 
+* **namespace** [**anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code\_branch/src/quadrature/spline\_quadrature.hpp}**](namespace_0d241.md) 
 * **namespace** [**bumpontail\_equilibrium**](namespacebumpontail__equilibrium.md)     
 * **namespace** [**concepts**](namespaceconcepts.md) 
 * **namespace** [**connectivity\_details**](namespaceconnectivity__details.md)     

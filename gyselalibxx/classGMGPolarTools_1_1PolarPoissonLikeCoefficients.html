@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers - GyselalibX</title>
+    <title>Class GMGPolarTools::PolarPoissonLikeCoefficients - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers";
-        var mkdocs_page_input_path = "gyselalibxx/dir_be2a347b8fed8e825bae8c199ecc63c1.md";
+        var mkdocs_page_name = "Class GMGPolarTools::PolarPoissonLikeCoefficients";
+        var mkdocs_page_input_path = "gyselalibxx/classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers</li>
+      <li class="breadcrumb-item active">Class GMGPolarTools::PolarPoissonLikeCoefficients</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/dir_be2a347b8fed8e825bae8c199ecc63c1.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,9 +566,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="dir-homerunnerworkgyselalibxxgyselalibxxcode_branchsrcpde_solvers">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a></p>
-<h2 id="files">Files</h2>
+                <div><h1 id="class-gmgpolartoolspolarpoissonlikecoefficients">Class GMGPolarTools::PolarPoissonLikeCoefficients</h1>
+<p><strong>template &lt;class SplineEvaluator, class <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, class <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceGMGPolarTools.html"><strong>GMGPolarTools</strong></a> <strong>&gt;</strong> <a href="classGMGPolarTools_1_1PolarPoissonLikeCoefficients.html"><strong>PolarPoissonLikeCoefficients</strong></a></p>
+<p><em>Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;gmg_polar_poisson_like_solver.hpp&gt;</code></li>
+</ul>
+<h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
 <tr>
@@ -578,37 +583,78 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="fem__1d__poisson__solver_8hpp.html"><strong>fem_1d_poisson_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-polarpoissonlikecoefficients"><strong>PolarPoissonLikeCoefficients</strong></a> (SplineEvaluator evaluator, DConstSplineRTheta coeff_alpha, DConstSplineRTheta coeff_beta) <br><em>Build the class instance.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="fft__poisson__solver_8hpp.html"><strong>fft_poisson_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-alpha"><strong>alpha</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>The coefficient alpha in the Poisson-like equation.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="gmg__polar__poisson__like__solver_8hpp.html"><strong>gmg_polar_poisson_like_solver.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="ipoisson__solver_8hpp.html"><strong>ipoisson_solver.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="ipolar__poisson__like__solver_8hpp.html"><strong>ipolar_poisson_like_solver.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="polar__spline__fem__poisson__like__assembler_8hpp.html"><strong>polar_spline_fem_poisson_like_assembler.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="polar__spline__fem__poisson__like__solver_8hpp.html"><strong>polar_spline_fem_poisson_like_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-beta"><strong>beta</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>The coefficient beta in the Poisson-like equation.</em></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-static-functions">Public Static Functions</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">double</td>
+<td style="text-align: left;"><a href="#function-getalphajump"><strong>getAlphaJump</strong></a> () <br><em>Required for the concept, only used in custom mesh generation (refinement_radius); not needed here.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>SplineEvaluator</code> A 2D spline evaluator for (<a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>). </li>
+<li><a href="structBSplinesR.html"><strong>BSplinesR</strong></a> The radial B-spline type. </li>
+<li><a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a> The poloidal B-spline type. </li>
+</ul>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-polarpoissonlikecoefficients">function PolarPoissonLikeCoefficients</h3>
+<p><em>Build the class instance.</em> </p>
+<pre><code class="language-C++">inline GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients (
+    SplineEvaluator evaluator,
+    DConstSplineRTheta coeff_alpha,
+    DConstSplineRTheta coeff_beta
+) 
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/</code></p></div>
+
+<h3 id="function-alpha">function alpha</h3>
+<p><em>The coefficient alpha in the Poisson-like equation.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients::alpha (
+    const double &amp; r,
+    const double &amp; theta
+) const
+</code></pre>
+<hr>
+
+<h3 id="function-beta">function beta</h3>
+<p><em>The coefficient beta in the Poisson-like equation.</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients::beta (
+    const double &amp; r,
+    const double &amp; theta
+) const
+</code></pre>
+<hr>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-getalphajump">function getAlphaJump</h3>
+<p><em>Required for the concept, only used in custom mesh generation (refinement_radius); not needed here.</em> </p>
+<pre><code class="language-C++">static inline double GMGPolarTools::PolarPoissonLikeCoefficients::getAlphaJump () 
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp</code></p></div>
               
             </div>
           </div><footer>

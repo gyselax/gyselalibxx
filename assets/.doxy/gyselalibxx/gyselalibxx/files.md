@@ -283,6 +283,7 @@ Here is a list of all files with brief descriptions:
     * **dir** [**pde\_solvers**](dir_be2a347b8fed8e825bae8c199ecc63c1.md)     
         * **file** [**fem\_1d\_poisson\_solver.hpp**](fem__1d__poisson__solver_8hpp.md)     
         * **file** [**fft\_poisson\_solver.hpp**](fft__poisson__solver_8hpp.md)     
+        * **file** [**gmg\_polar\_poisson\_like\_solver.hpp**](gmg__polar__poisson__like__solver_8hpp.md)     
         * **file** [**ipoisson\_solver.hpp**](ipoisson__solver_8hpp.md)     
         * **file** [**ipolar\_poisson\_like\_solver.hpp**](ipolar__poisson__like__solver_8hpp.md)     
         * **file** [**polar\_spline\_fem\_poisson\_like\_assembler.hpp**](polar__spline__fem__poisson__like__assembler_8hpp.md)     

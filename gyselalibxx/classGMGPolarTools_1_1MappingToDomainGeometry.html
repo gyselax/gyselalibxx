@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers - GyselalibX</title>
+    <title>Class GMGPolarTools::MappingToDomainGeometry - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers";
-        var mkdocs_page_input_path = "gyselalibxx/dir_be2a347b8fed8e825bae8c199ecc63c1.md";
+        var mkdocs_page_name = "Class GMGPolarTools::MappingToDomainGeometry";
+        var mkdocs_page_input_path = "gyselalibxx/classGMGPolarTools_1_1MappingToDomainGeometry.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers</li>
+      <li class="breadcrumb-item active">Class GMGPolarTools::MappingToDomainGeometry</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/dir_be2a347b8fed8e825bae8c199ecc63c1.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classGMGPolarTools_1_1MappingToDomainGeometry.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,9 +566,14 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="dir-homerunnerworkgyselalibxxgyselalibxxcode_branchsrcpde_solvers">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a></p>
-<h2 id="files">Files</h2>
+                <div><h1 id="class-gmgpolartoolsmappingtodomaingeometry">Class GMGPolarTools::MappingToDomainGeometry</h1>
+<p><strong>template &lt;class ToPhysicalMapping&gt;</strong></p>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceGMGPolarTools.html"><strong>GMGPolarTools</strong></a> <strong>&gt;</strong> <a href="classGMGPolarTools_1_1MappingToDomainGeometry.html"><strong>MappingToDomainGeometry</strong></a></p>
+<p><em>Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry concept.</em> <a href="#detailed-description">More...</a></p>
+<ul>
+<li><code>#include &lt;gmg_polar_poisson_like_solver.hpp&gt;</code></li>
+</ul>
+<h2 id="public-functions">Public Functions</h2>
 <table>
 <thead>
 <tr>
@@ -578,37 +583,105 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="fem__1d__poisson__solver_8hpp.html"><strong>fem_1d_poisson_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-fx"><strong>Fx</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>X(r, theta)</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="fft__poisson__solver_8hpp.html"><strong>fft_poisson_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-fy"><strong>Fy</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>Y(r, theta)</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="gmg__polar__poisson__like__solver_8hpp.html"><strong>gmg_polar_poisson_like_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;"></td>
+<td style="text-align: left;"><a href="#function-mappingtodomaingeometry"><strong>MappingToDomainGeometry</strong></a> (ToPhysicalMapping to_physical) <br><em>Construct the wrapper class.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="ipoisson__solver_8hpp.html"><strong>ipoisson_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-dfx_dr"><strong>dFx_dr</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/dr X(r, theta)</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="ipolar__poisson__like__solver_8hpp.html"><strong>ipolar_poisson_like_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-dfx_dtheta"><strong>dFx_dtheta</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/(d theta) X(r, theta)</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="polar__spline__fem__poisson__like__assembler_8hpp.html"><strong>polar_spline_fem_poisson_like_assembler.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-dfy_dr"><strong>dFy_dr</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/dr Y(r, theta)</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="polar__spline__fem__poisson__like__solver_8hpp.html"><strong>polar_spline_fem_poisson_like_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-dfy_dtheta"><strong>dFy_dtheta</strong></a> (const double &amp; r, const double &amp; theta) const<br><em>d/(d theta) Y(r, theta)</em></td>
 </tr>
 </tbody>
 </table>
+<h2 id="detailed-description">Detailed Description</h2>
+<p><strong>Template parameters:</strong></p>
+<ul>
+<li><code>ToPhysicalMapping</code> A mapping from (r, theta) curvilinear coordinates to (x, y) Cartesian. </li>
+</ul>
+<h2 id="public-functions-documentation">Public Functions Documentation</h2>
+<h3 id="function-fx">function Fx</h3>
+<p><em>X(r, theta)</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::Fx (
+    const double &amp; r,
+    const double &amp; theta
+) const
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/</code></p></div>
+
+<h3 id="function-fy">function Fy</h3>
+<p><em>Y(r, theta)</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::Fy (
+    const double &amp; r,
+    const double &amp; theta
+) const
+</code></pre>
+<hr>
+
+<h3 id="function-mappingtodomaingeometry">function MappingToDomainGeometry</h3>
+<p><em>Construct the wrapper class.</em> </p>
+<pre><code class="language-C++">inline explicit GMGPolarTools::MappingToDomainGeometry::MappingToDomainGeometry (
+    ToPhysicalMapping to_physical
+) 
+</code></pre>
+<hr>
+
+<h3 id="function-dfx_dr">function dFx_dr</h3>
+<p><em>d/dr X(r, theta)</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFx_dr (
+    const double &amp; r,
+    const double &amp; theta
+) const
+</code></pre>
+<hr>
+
+<h3 id="function-dfx_dtheta">function dFx_dtheta</h3>
+<p><em>d/(d theta) X(r, theta)</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFx_dtheta (
+    const double &amp; r,
+    const double &amp; theta
+) const
+</code></pre>
+<hr>
+
+<h3 id="function-dfy_dr">function dFy_dr</h3>
+<p><em>d/dr Y(r, theta)</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFy_dr (
+    const double &amp; r,
+    const double &amp; theta
+) const
+</code></pre>
+<hr>
+
+<h3 id="function-dfy_dtheta">function dFy_dtheta</h3>
+<p><em>d/(d theta) Y(r, theta)</em> </p>
+<pre><code class="language-C++">inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry::dFy_dtheta (
+    const double &amp; r,
+    const double &amp; theta
+) const
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp</code></p></div>
               
             </div>
           </div><footer>

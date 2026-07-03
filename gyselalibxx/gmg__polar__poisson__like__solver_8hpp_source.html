@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp} - GyselalibX</title>
+    <title>File gmg_polar_poisson_like_solver.hpp - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp}";
-        var mkdocs_page_input_path = "gyselalibxx/namespace_0d238.md";
+        var mkdocs_page_name = "File gmg_polar_poisson_like_solver.hpp";
+        var mkdocs_page_input_path = "gyselalibxx/gmg__polar__poisson__like__solver_8hpp_source.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp}</li>
+      <li class="breadcrumb-item active">File gmg_polar_poisson_like_solver.hpp</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/namespace_0d238.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/gmg__polar__poisson__like__solver_8hpp_source.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,10 +566,276 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="namespace-anonymous-namespacehomerunnerworkgyselalibxxgyselalibxxcode_branchsrcquadraturequadrature_coeffs_ndhpp">Namespace anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp}</h1>
-<p><a href="namespaces.html"><strong>Namespace List</strong></a> <strong>&gt;</strong> <a href="namespace_0d238.html"><strong>anonymous namespace{/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp}</strong></a></p>
-<hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/quadrature/quadrature_coeffs_nd.hpp</code></p></div>
+                <div><h1 id="file-gmg_polar_poisson_like_solverhpp">File gmg_polar_poisson_like_solver.hpp</h1>
+<p><a href="files.html"><strong>File List</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a> <strong>&gt;</strong> <a href="gmg__polar__poisson__like__solver_8hpp.html"><strong>gmg_polar_poisson_like_solver.hpp</strong></a></p>
+<p><a href="gmg__polar__poisson__like__solver_8hpp.html">Go to the documentation of this file</a></p>
+<pre><code class="language-C++">// SPDX-License-Identifier: MIT
+#pragma once
+#include &lt;cmath&gt;
+#include &lt;vector&gt;
+
+#include &lt;GMGPolar/gmgpolar.h&gt;
+
+#include "ddc_alias_inline_functions.hpp"
+#include "ipolar_poisson_like_solver.hpp"
+
+namespace GMGPolarTools {
+
+template &lt;class ToPhysicalMapping&gt;
+class MappingToDomainGeometry
+{
+    using R = typename ToPhysicalMapping::curvilinear_tag_r;
+    using Theta = typename ToPhysicalMapping::curvilinear_tag_theta;
+
+    using X = typename ToPhysicalMapping::cartesian_tag_x;
+    using Y = typename ToPhysicalMapping::cartesian_tag_y;
+
+    using R_cov = typename R::Dual;
+    using Theta_cov = typename Theta::Dual;
+
+private:
+    ToPhysicalMapping m_to_physical;
+
+public:
+    explicit MappingToDomainGeometry(ToPhysicalMapping to_physical) : m_to_physical(to_physical) {}
+
+    KOKKOS_INLINE_FUNCTION double Fx(const double&amp; r, const double&amp; theta) const
+    {
+        return Coord&lt;X&gt;(m_to_physical(Coord&lt;R, Theta&gt;(r, theta)));
+    }
+    KOKKOS_INLINE_FUNCTION double Fy(const double&amp; r, const double&amp; theta) const
+    {
+        return Coord&lt;Y&gt;(m_to_physical(Coord&lt;R, Theta&gt;(r, theta)));
+    }
+    KOKKOS_INLINE_FUNCTION double dFx_dr(const double&amp; r, const double&amp; theta) const
+    {
+        return m_to_physical.template jacobian_component&lt;X, R_cov&gt;(Coord&lt;R, Theta&gt;(r, theta));
+    }
+    KOKKOS_INLINE_FUNCTION double dFy_dr(const double&amp; r, const double&amp; theta) const
+    {
+        return m_to_physical.template jacobian_component&lt;Y, R_cov&gt;(Coord&lt;R, Theta&gt;(r, theta));
+    }
+    KOKKOS_INLINE_FUNCTION double dFx_dtheta(const double&amp; r, const double&amp; theta) const
+    {
+        return m_to_physical.template jacobian_component&lt;X, Theta_cov&gt;(Coord&lt;R, Theta&gt;(r, theta));
+    }
+    KOKKOS_INLINE_FUNCTION double dFy_dtheta(const double&amp; r, const double&amp; theta) const
+    {
+        return m_to_physical.template jacobian_component&lt;Y, Theta_cov&gt;(Coord&lt;R, Theta&gt;(r, theta));
+    }
+};
+
+class HomogeneousDirichletBoundaryConditions
+{
+public:
+    static KOKKOS_INLINE_FUNCTION double u_D(const double&amp; r, const double&amp; theta)
+    {
+        return 0.0;
+    }
+    static KOKKOS_INLINE_FUNCTION double u_D_Interior(const double&amp; r, const double&amp; theta)
+    {
+        // Only used if DirBC_Interior = true
+        assert(false);
+        return 0.0;
+    }
+};
+
+template &lt;class SplineEvaluator, class BSplinesR, class BSplinesTheta&gt;
+class PolarPoissonLikeCoefficients
+{
+    using R = typename BSplinesR::continuous_dimension_type;
+    using Theta = typename BSplinesTheta::continuous_dimension_type;
+
+    using DConstSplineRTheta = DConstField&lt;IdxRange&lt;BSplinesR, BSplinesTheta&gt;&gt;;
+
+private:
+    SplineEvaluator m_evaluator;
+    DConstSplineRTheta m_coeff_alpha;
+    DConstSplineRTheta m_coeff_beta;
+
+public:
+    PolarPoissonLikeCoefficients(
+            SplineEvaluator evaluator,
+            DConstSplineRTheta coeff_alpha,
+            DConstSplineRTheta coeff_beta)
+        : m_evaluator(evaluator)
+        , m_coeff_alpha(coeff_alpha)
+        , m_coeff_beta(coeff_beta)
+    {
+    }
+
+    KOKKOS_INLINE_FUNCTION double alpha(const double&amp; r, const double&amp; theta) const
+    {
+        return m_evaluator(Coord&lt;R, Theta&gt;(r, theta), m_coeff_alpha);
+    }
+    KOKKOS_INLINE_FUNCTION double beta(const double&amp; r, const double&amp; theta) const
+    {
+        return m_evaluator(Coord&lt;R, Theta&gt;(r, theta), m_coeff_beta);
+    }
+
+    static double getAlphaJump()
+    {
+        assert(false);
+        return 0.0;
+    }
+};
+
+} // namespace GMGPolarTools
+
+template &lt;
+        class ToPhysicalMapping,
+        class GridR,
+        class GridTheta,
+        class BSplinesR,
+        class BSplinesTheta,
+        class SplineBuilder,
+        class SplineEvaluator&gt;
+class GMGPolarPoissonLikeSolver
+    : public IPolarPoissonLikeSolver&lt;IdxRange&lt;GridR, GridTheta&gt;, IdxRange&lt;GridR, GridTheta&gt;&gt;
+{
+    using IdxRangeR = IdxRange&lt;GridR&gt;;
+    using IdxRangeTheta = IdxRange&lt;GridTheta&gt;;
+    using IdxRangeRTheta = IdxRange&lt;GridR, GridTheta&gt;;
+    using IdxRTheta = Idx&lt;GridR, GridTheta&gt;;
+    using IdxR = Idx&lt;GridR&gt;;
+    using IdxTheta = Idx&lt;GridTheta&gt;;
+    using IdxStepRTheta = IdxStep&lt;GridR, GridTheta&gt;;
+
+    using SplineRThetaMem = DFieldMem&lt;IdxRange&lt;BSplinesR, BSplinesTheta&gt;&gt;;
+
+    using DomainGeometry = GMGPolarTools::MappingToDomainGeometry&lt;ToPhysicalMapping&gt;;
+    using DensityCoeffs = GMGPolarTools::
+            PolarPoissonLikeCoefficients&lt;SplineEvaluator, BSplinesR, BSplinesTheta&gt;;
+
+private:
+    DomainGeometry const m_domain_geom;
+    SplineBuilder const&amp; m_builder;
+    SplineEvaluator const&amp; m_evaluator;
+    SplineRThetaMem m_coeff_alpha;
+    SplineRThetaMem m_coeff_beta;
+    DensityCoeffs const m_density_coeffs;
+    int m_max_iterations;
+    double m_absTol;
+    double m_relTol;
+
+
+public:
+    GMGPolarPoissonLikeSolver(
+            ToPhysicalMapping to_physical,
+            SplineBuilder const&amp; builder,
+            SplineEvaluator const&amp; evaluator,
+            std::optional&lt;int&gt; max_iterations = std::nullopt,
+            std::optional&lt;double&gt; absTol = std::nullopt,
+            std::optional&lt;double&gt; relTol = std::nullopt)
+        : m_domain_geom(to_physical)
+        , m_builder(builder)
+        , m_evaluator(evaluator)
+        , m_coeff_alpha(get_spline_idx_range(m_builder))
+        , m_coeff_beta(get_spline_idx_range(m_builder))
+        , m_density_coeffs(
+                  m_evaluator,
+                  get_const_field(m_coeff_alpha),
+                  get_const_field(m_coeff_beta))
+        , m_max_iterations(max_iterations.value_or(100))
+        , m_absTol(absTol.value_or(1e-10))
+        , m_relTol(relTol.value_or(1e-6))
+    {
+    }
+
+    void update_coefficients(DConstField&lt;IdxRangeRTheta&gt; alpha, DConstField&lt;IdxRangeRTheta&gt; beta)
+            override
+    {
+        m_builder(get_field(m_coeff_alpha), get_const_field(alpha));
+        m_builder(get_field(m_coeff_beta), get_const_field(beta));
+    }
+
+    void operator()(DField&lt;IdxRangeRTheta&gt; phi, DConstField&lt;IdxRangeRTheta&gt; rho) const override
+    {
+        IdxRangeRTheta idx_range = get_idx_range(phi);
+        IdxRangeR idx_range_r(idx_range);
+        IdxRangeTheta idx_range_theta(idx_range);
+        IdxRangeTheta idx_range_theta_with_poloidal_point(
+                idx_range_theta.front(),
+                idx_range_theta.extents() + 1);
+
+        DFieldMem&lt;IdxRangeR&gt; r_coords(idx_range_r);
+        DFieldMem&lt;IdxRangeTheta&gt; theta_coords(idx_range_theta_with_poloidal_point);
+        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(r_coords));
+        ddcHelper::dump_coordinates(Kokkos::DefaultExecutionSpace(), get_field(theta_coords));
+
+        // --- Create a cartesian grid representation of the polar grid for GMGPolar --- //
+        gmgpolar::PolarGrid const polar_grid(
+                r_coords.allocation_kokkos_view(),
+                theta_coords.allocation_kokkos_view());
+
+        // --- Create GMGPolar solver for the selected geometry and coefficients --- //
+        gmgpolar::GMGPolar&lt;DomainGeometry, DensityCoeffs&gt;
+                solver(polar_grid, m_domain_geom, m_density_coeffs);
+
+        // ------------------//
+        // Solver parameters //
+        // ------------------//
+
+        // --- General solver output and visualisation settings --- //
+        solver.verbose(0); // Enable/disable verbose output
+        solver.paraview(false); // Enable/disable ParaView output
+
+        // --- Numerical method setup --- //
+        // Are boundary conditions provided on the interior. False = Use Across-the-origin discretisation
+        solver.DirBC_Interior(false);
+        // Stencil distribution strategy: Take, Give
+        solver.stencilDistributionMethod(StencilDistributionMethod::TAKE);
+        // Cache density profile coefficients: alpha, beta
+        solver.cacheDensityProfileCoefficients(true);
+        // Cache domain geometry data: arr, att, art, detDF
+        solver.cacheDomainGeometry(true);
+
+        // --- Multigrid settings --- //
+        solver.extrapolation(ExtrapolationType::IMPLICIT_EXTRAPOLATION); // Select extrapolation
+        solver.maxLevels(-1); // Max multigrid levels (-1 = use deepest possible)
+        solver.preSmoothingSteps(1); // Smoothing before coarse-grid correction
+        solver.postSmoothingSteps(1); // Smoothing after coarse-grid correction
+        solver.multigridCycle(MultigridCycleType::V_CYCLE); // Multigrid cycle type
+        solver.FMG(true); // Full Multigrid mode on/off
+        solver.FMG_iterations(2); // FMG iteration count
+        solver.FMG_cycle(MultigridCycleType::F_CYCLE); // FMG cycle type
+
+        // --- Preconditioned Conjugate Gradient settings --- //
+        solver.PCG(false); // Preconditioned Conjugate Gradient mode on/off
+        solver.PCG_FMG(true); // Use FMG as preconditioner for PCG
+        solver.PCG_FMG_iterations(1); // FMG iterations for PCG preconditioner
+        solver.PCG_FMG_cycle(MultigridCycleType::V_CYCLE); // FMG cycle type for PCG preconditioner
+        solver.PCG_MG_iterations(1); // Multigrid iterations for PCG preconditioner
+        solver.PCG_MG_cycle(MultigridCycleType::V_CYCLE); // Multigrid cycle type for PCG iterations
+
+        // --- Iterative solver controls --- //
+        solver.maxIterations(m_max_iterations); // Max number of iterations
+        solver.residualNormType(ResidualNormType::WEIGHTED_EUCLIDEAN); // Residual norm type
+        solver.absoluteTolerance(m_absTol); // Absolute residual tolerance
+        solver.relativeTolerance(m_relTol); // Relative residual tolerance
+
+        // --- Finalise solver setup --- //
+        solver.setup();
+
+        // Source term: maps GMGPolar (i_r, i_theta) indices to rho grid values
+        GMGPolarTools::HomogeneousDirichletBoundaryConditions const bcs;
+        solver.solve(bcs, rho.allocation_kokkos_view());
+
+        // Copy solution back to phi
+        //Kokkos::View&lt;double*, Kokkos::LayoutRight, Kokkos::HostSpace&gt; solution = solver.solution();
+        Kokkos::View&lt;double*&gt; solution = solver.solution();
+
+        ddc::parallel_for_each(
+                idx_range,
+                KOKKOS_LAMBDA(IdxRTheta idx) {
+                    IdxStepRTheta offset(idx - idx_range.front());
+                    int i_r = ddc::select&lt;GridR&gt;(offset);
+                    int i_theta = ddc::select&lt;GridTheta&gt;(offset);
+                    phi(idx) = solution[polar_grid.index(i_r, i_theta)];
+                });
+    }
+};
+</code></pre></div>
               
             </div>
           </div><footer>

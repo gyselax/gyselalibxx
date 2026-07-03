@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers - GyselalibX</title>
+    <title>Class GMGPolarTools::HomogeneousDirichletBoundaryConditions - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers";
-        var mkdocs_page_input_path = "gyselalibxx/dir_be2a347b8fed8e825bae8c199ecc63c1.md";
+        var mkdocs_page_name = "Class GMGPolarTools::HomogeneousDirichletBoundaryConditions";
+        var mkdocs_page_input_path = "gyselalibxx/classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers</li>
+      <li class="breadcrumb-item active">Class GMGPolarTools::HomogeneousDirichletBoundaryConditions</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/dir_be2a347b8fed8e825bae8c199ecc63c1.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,9 +566,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="dir-homerunnerworkgyselalibxxgyselalibxxcode_branchsrcpde_solvers">Dir /home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers</h1>
-<p><a href="files.html"><strong>FileList</strong></a> <strong>&gt;</strong> <a href="dir_be2a347b8fed8e825bae8c199ecc63c1.html"><strong>pde_solvers</strong></a></p>
-<h2 id="files">Files</h2>
+                <div><h1 id="class-gmgpolartoolshomogeneousdirichletboundaryconditions">Class GMGPolarTools::HomogeneousDirichletBoundaryConditions</h1>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceGMGPolarTools.html"><strong>GMGPolarTools</strong></a> <strong>&gt;</strong> <a href="classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.html"><strong>HomogeneousDirichletBoundaryConditions</strong></a></p>
+<p><em>Homogeneous Dirichlet boundary conditions satisfying the GMGPolar BoundaryConditions concept.</em> </p>
+<ul>
+<li><code>#include &lt;gmg_polar_poisson_like_solver.hpp&gt;</code></li>
+</ul>
+<h2 id="public-static-functions">Public Static Functions</h2>
 <table>
 <thead>
 <tr>
@@ -578,37 +582,36 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="fem__1d__poisson__solver_8hpp.html"><strong>fem_1d_poisson_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-u_d"><strong>u_D</strong></a> (const double &amp; r, const double &amp; theta) <br><em>The value of the solution on the boundary.</em></td>
 </tr>
 <tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="fft__poisson__solver_8hpp.html"><strong>fft_poisson_solver.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="gmg__polar__poisson__like__solver_8hpp.html"><strong>gmg_polar_poisson_like_solver.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="ipoisson__solver_8hpp.html"><strong>ipoisson_solver.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="ipolar__poisson__like__solver_8hpp.html"><strong>ipolar_poisson_like_solver.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="polar__spline__fem__poisson__like__assembler_8hpp.html"><strong>polar_spline_fem_poisson_like_assembler.hpp</strong></a> <br></td>
-</tr>
-<tr>
-<td style="text-align: right;">file</td>
-<td style="text-align: left;"><a href="polar__spline__fem__poisson__like__solver_8hpp.html"><strong>polar_spline_fem_poisson_like_solver.hpp</strong></a> <br></td>
+<td style="text-align: right;">KOKKOS_INLINE_FUNCTION double</td>
+<td style="text-align: left;"><a href="#function-u_d_interior"><strong>u_D_Interior</strong></a> (const double &amp; r, const double &amp; theta) <br><em>The value of the solution on the inner boundary (at r=rmin). Required for the concept, not needed here.</em></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
+<h3 id="function-u_d">function u_D</h3>
+<p><em>The value of the solution on the boundary.</em> </p>
+<pre><code class="language-C++">static inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::HomogeneousDirichletBoundaryConditions::u_D (
+    const double &amp; r,
+    const double &amp; theta
+) 
+</code></pre>
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/</code></p></div>
+
+<h3 id="function-u_d_interior">function u_D_Interior</h3>
+<p><em>The value of the solution on the inner boundary (at r=rmin). Required for the concept, not needed here.</em> </p>
+<pre><code class="language-C++">static inline KOKKOS_INLINE_FUNCTION double GMGPolarTools::HomogeneousDirichletBoundaryConditions::u_D_Interior (
+    const double &amp; r,
+    const double &amp; theta
+) 
+</code></pre>
+<hr>
+
+<hr>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp</code></p></div>
               
             </div>
           </div><footer>

@@ -23,6 +23,7 @@
 | ---: | :--- |
 | file | [**fem\_1d\_poisson\_solver.hpp**](fem__1d__poisson__solver_8hpp.md) <br> |
 | file | [**fft\_poisson\_solver.hpp**](fft__poisson__solver_8hpp.md) <br> |
+| file | [**gmg\_polar\_poisson\_like\_solver.hpp**](gmg__polar__poisson__like__solver_8hpp.md) <br> |
 | file | [**ipoisson\_solver.hpp**](ipoisson__solver_8hpp.md) <br> |
 | file | [**ipolar\_poisson\_like\_solver.hpp**](ipolar__poisson__like__solver_8hpp.md) <br> |
 | file | [**polar\_spline\_fem\_poisson\_like\_assembler.hpp**](polar__spline__fem__poisson__like__assembler_8hpp.md) <br> |

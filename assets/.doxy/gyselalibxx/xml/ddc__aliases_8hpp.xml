@@ -1527,6 +1527,10 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/fft_poisson_solver.hpp</label>
         <link refid="fft__poisson__solver_8hpp_source"/>
       </node>
+      <node id="194">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp</label>
+        <link refid="gmg__polar__poisson__like__solver_8hpp_source"/>
+      </node>
       <node id="126">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/ipoisson_solver.hpp</label>
         <link refid="ipoisson__solver_8hpp_source"/>
@@ -1802,6 +1806,8 @@
         </childnode>
         <childnode refid="129" relation="include">
         </childnode>
+        <childnode refid="194" relation="include">
+        </childnode>
         <childnode refid="58" relation="include">
         </childnode>
         <childnode refid="185" relation="include">
@@ -1824,7 +1830,7 @@
         </childnode>
         <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="194" relation="include">
+        <childnode refid="195" relation="include">
         </childnode>
       </node>
       <node id="1">
@@ -2072,18 +2078,18 @@
         </childnode>
         <childnode refid="193" relation="include">
         </childnode>
-        <childnode refid="195" relation="include">
-        </childnode>
         <childnode refid="196" relation="include">
         </childnode>
         <childnode refid="197" relation="include">
         </childnode>
+        <childnode refid="198" relation="include">
+        </childnode>
         <childnode refid="86" relation="include">
         </childnode>
-        <childnode refid="194" relation="include">
+        <childnode refid="195" relation="include">
         </childnode>
       </node>
-      <node id="195">
+      <node id="196">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/ddc_helper.hpp</label>
         <link refid="ddc__helper_8hpp_source"/>
         <childnode refid="2" relation="include">
@@ -2167,13 +2173,13 @@
         <childnode refid="86" relation="include">
         </childnode>
       </node>
-      <node id="196">
+      <node id="197">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/mesh_builder.hpp</label>
         <link refid="mesh__builder_8hpp_source"/>
         <childnode refid="123" relation="include">
         </childnode>
       </node>
-      <node id="197">
+      <node id="198">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/non_uniform_interpolation_points.hpp</label>
         <link refid="non__uniform__interpolation__points_8hpp_source"/>
         <childnode refid="137" relation="include">
@@ -2185,7 +2191,7 @@
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/spline_builder_deriv_field_2d.hpp</label>
         <link refid="spline__builder__deriv__field__2d_8hpp_source"/>
       </node>
-      <node id="194">
+      <node id="195">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/utils/transpose.hpp</label>
         <link refid="transpose_8hpp_source"/>
         <childnode refid="177" relation="include">
@@ -2369,7 +2375,7 @@
         <argsstring></argsstring>
         <name>Field</name>
         <briefdescription>
-<para>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid <formula id="412">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a field defined on a grid (e.g. the electric field defined on the grid <formula id="413">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2396,7 +2402,7 @@
         <argsstring></argsstring>
         <name>DField</name>
         <briefdescription>
-<para>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="412">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="413">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2426,7 +2432,7 @@
         <argsstring></argsstring>
         <name>ConstField</name>
         <briefdescription>
-<para>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid <formula id="412">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a constant field defined on a grid (e.g. the electric field defined on the grid <formula id="413">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>
@@ -2453,7 +2459,7 @@
         <argsstring></argsstring>
         <name>DConstField</name>
         <briefdescription>
-<para>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="412">${x_0, x_1, .., x_N}$</formula>) </para>
+<para>An alias describing the type of a constant field of doubles defined on a grid (e.g. the electric field defined on the grid <formula id="413">${x_0, x_1, .., x_N}$</formula>) </para>
         </briefdescription>
         <detaileddescription>
         </detaileddescription>

@@ -216,6 +216,7 @@
 ([**CollisionsIntra**](classCollisionsIntra.md))
 * [**GhostedVxStaggered**](structCollisionsIntra_1_1GhostedVxStaggered.md)
 ([**CollisionsIntra**](classCollisionsIntra.md))
+* [**GMGPolarPoissonLikeSolver**](classGMGPolarPoissonLikeSolver.md)
 * [**Gradient**](classGradient.md)
 * [**GradientCreator**](classGradientCreator.md)
 * [**GridFourier**](structFFTPoissonSolver_3_01IdxRange_3_01GridPDEDim1D_8_8_8_01_4_00_01IdxRangeFull_00_01ExecSpace08643bb19194ad52eddd8dcdca1c1cd8.md)
@@ -242,6 +243,8 @@
 
 * [**HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md)
 ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
+* [**HomogeneousDirichletBoundaryConditions**](classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.md)
+([**GMGPolarTools**](namespaceGMGPolarTools.md))
 
 
 ## i
@@ -341,6 +344,8 @@
 
 ## m
 
+* [**MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md)
+([**GMGPolarTools**](namespaceGMGPolarTools.md))
 * [**MatchingIdxSlice**](classMatchingIdxSlice.md)
 * [**Matrix**](classMatrix.md)
 * [**Matrix\_Banded**](classMatrix__Banded.md)
@@ -417,6 +422,8 @@
 * [**PolarBSplines**](classPolarBSplines.md)
 * [**PolarBSplinesRTheta**](structPolarBSplinesRTheta.md)
 * [**PolarFootFinder**](classPolarFootFinder.md)
+* [**PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md)
+([**GMGPolarTools**](namespaceGMGPolarTools.md))
 * [**PolarSplineEvaluator**](classPolarSplineEvaluator.md)
 * [**PolarSplineFEMPoissonLikeAssembler**](classPolarSplineFEMPoissonLikeAssembler.md)
 * [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md)

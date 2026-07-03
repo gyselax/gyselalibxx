@@ -251,7 +251,7 @@
           <declname>beta</declname>
         </param>
         <briefdescription>
-<para>Update the coefficients <formula id="379">$ alpha $</formula> and <formula id="380">$ beta $</formula> that define the equation. </para>
+<para>Update the coefficients <formula id="380">$ alpha $</formula> and <formula id="381">$ beta $</formula> that define the equation. </para>
         </briefdescription>
         <detaileddescription>
 <para><parameterlist kind="param"><parameteritem>
@@ -292,10 +292,10 @@
           <declname>rho</declname>
         </param>
         <briefdescription>
-<para>An operator which calculates the solution <formula id="206">$\phi$</formula> to the Poisson-like equation: (1) <formula id="376">$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>, in <formula id="7">$ \Omega$</formula>,. </para>
+<para>An operator which calculates the solution <formula id="206">$\phi$</formula> to the Poisson-like equation: (1) <formula id="377">$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>, in <formula id="7">$ \Omega$</formula>,. </para>
         </briefdescription>
         <detaileddescription>
-<para><formula id="377">$  \phi = 0 $</formula>, on <formula id="378">$ \partial \Omega$</formula>,</para>
+<para><formula id="378">$  \phi = 0 $</formula>, on <formula id="379">$ \partial \Omega$</formula>,</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername direction="out">phi</parametername>
@@ -323,8 +323,8 @@
     <briefdescription>
     </briefdescription>
     <detaileddescription>
-<para>An abstract class from which a Poisson-like solver can inherit. Classes inheriting from this must implement a way to solve the following equation: (1) <formula id="376">$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>, in <formula id="7">$ \Omega$</formula>,</para>
-<para><formula id="377">$  \phi = 0 $</formula>, on <formula id="378">$ \partial \Omega$</formula>,</para>
+<para>An abstract class from which a Poisson-like solver can inherit. Classes inheriting from this must implement a way to solve the following equation: (1) <formula id="377">$  L\phi = - \nabla \cdot (\alpha \nabla \phi) + \beta \phi = \rho $</formula>, in <formula id="7">$ \Omega$</formula>,</para>
+<para><formula id="378">$  \phi = 0 $</formula>, on <formula id="379">$ \partial \Omega$</formula>,</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>IdxRangeLaplacian</parametername>

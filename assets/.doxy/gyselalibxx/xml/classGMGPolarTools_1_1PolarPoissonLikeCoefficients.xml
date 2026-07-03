@@ -1,0 +1,242 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients" kind="class" language="C++" prot="public">
+    <compoundname>GMGPolarTools::PolarPoissonLikeCoefficients</compoundname>
+    <includes refid="gmg__polar__poisson__like__solver_8hpp" local="no">gmg_polar_poisson_like_solver.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class SplineEvaluator</type>
+      </param>
+      <param>
+        <type>class <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></type>
+      </param>
+      <param>
+        <type>class <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ae91b3a53c82f0b3353f84e0d4b7ac3fc" prot="private" static="no">
+        <type>typename BSplinesR::continuous_dimension_type</type>
+        <definition>using GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::R =  typename BSplinesR::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>R</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::R</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="98" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a3721349faae6f81bc7d4ba7d0c9de481" prot="private" static="no">
+        <type>typename BSplinesTheta::continuous_dimension_type</type>
+        <definition>using GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::Theta =  typename BSplinesTheta::continuous_dimension_type</definition>
+        <argsstring></argsstring>
+        <name>Theta</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::Theta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="99" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="99" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1aebf6b2b772fd69e98550099343691771" prot="private" static="no">
+        <type>DConstField&lt; IdxRange&lt; <ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref> &gt; &gt;</type>
+        <definition>using GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::DConstSplineRTheta =  DConstField&lt;IdxRange&lt;BSplinesR, BSplinesTheta&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>DConstSplineRTheta</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::DConstSplineRTheta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="101" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="101" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a5bd8168356bc824baebf933304c54447" prot="private" static="no" mutable="no">
+        <type>SplineEvaluator</type>
+        <definition>SplineEvaluator GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::m_evaluator</definition>
+        <argsstring></argsstring>
+        <name>m_evaluator</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::m_evaluator</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="104" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a3a3398fe981bfd6a390508bfe482375a" prot="private" static="no" mutable="no">
+        <type>DConstSplineRTheta</type>
+        <definition>DConstSplineRTheta GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::m_coeff_alpha</definition>
+        <argsstring></argsstring>
+        <name>m_coeff_alpha</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::m_coeff_alpha</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="105" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1abacb0369f025f4b016133ac17c533c00" prot="private" static="no" mutable="no">
+        <type>DConstSplineRTheta</type>
+        <definition>DConstSplineRTheta GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::m_coeff_beta</definition>
+        <argsstring></argsstring>
+        <name>m_coeff_beta</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::m_coeff_beta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="106" column="24" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="106" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a63e76f61a3d1b38dbb6b7ee8d7ae6d3a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::PolarPoissonLikeCoefficients</definition>
+        <argsstring>(SplineEvaluator evaluator, DConstSplineRTheta coeff_alpha, DConstSplineRTheta coeff_beta)</argsstring>
+        <name>PolarPoissonLikeCoefficients</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::PolarPoissonLikeCoefficients</qualifiedname>
+        <param>
+          <type>SplineEvaluator</type>
+          <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>DConstSplineRTheta</type>
+          <declname>coeff_alpha</declname>
+        </param>
+        <param>
+          <type>DConstSplineRTheta</type>
+          <declname>coeff_beta</declname>
+        </param>
+        <briefdescription>
+<para>Build the class instance. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="110" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="110" bodyend="118"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a88ff440d1fa1c1e884d313fa9feae28c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::alpha</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <name>alpha</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::alpha</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>The coefficient alpha in the Poisson-like equation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="121" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="121" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a648ee6175857862138687a920a008a56" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::beta</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <name>beta</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::beta</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>The coefficient beta in the Poisson-like equation. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="126" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="126" bodyend="129"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a1516c90168d08b7021dd960dae8d0ce4" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>static double GMGPolarTools::PolarPoissonLikeCoefficients&lt; SplineEvaluator, BSplinesR, BSplinesTheta &gt;::getAlphaJump</definition>
+        <argsstring>()</argsstring>
+        <name>getAlphaJump</name>
+        <qualifiedname>GMGPolarTools::PolarPoissonLikeCoefficients::getAlphaJump</qualifiedname>
+        <briefdescription>
+<para>Required for the concept, only used in custom mesh generation (refinement_radius); not needed here. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="132" column="19" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="132" bodyend="136"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>SplineEvaluator</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A 2D spline evaluator for (<ref refid="structBSplinesR" kindref="compound">BSplinesR</ref>, <ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref>). </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesR" kindref="compound">BSplinesR</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The radial B-spline type. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
+<parametername><ref refid="structBSplinesTheta" kindref="compound">BSplinesTheta</ref></parametername>
+</parameternamelist>
+<parameterdescription>
+<para>The poloidal B-spline type. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="96" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="97" bodyend="137"/>
+    <listofallmembers>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a88ff440d1fa1c1e884d313fa9feae28c" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>alpha</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a648ee6175857862138687a920a008a56" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>beta</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1aebf6b2b772fd69e98550099343691771" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>DConstSplineRTheta</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a1516c90168d08b7021dd960dae8d0ce4" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>getAlphaJump</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a3a3398fe981bfd6a390508bfe482375a" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>m_coeff_alpha</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1abacb0369f025f4b016133ac17c533c00" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>m_coeff_beta</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a5bd8168356bc824baebf933304c54447" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>m_evaluator</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a63e76f61a3d1b38dbb6b7ee8d7ae6d3a" prot="public" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>PolarPoissonLikeCoefficients</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1ae91b3a53c82f0b3353f84e0d4b7ac3fc" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>R</name></member>
+      <member refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients_1a3721349faae6f81bc7d4ba7d0c9de481" prot="private" virt="non-virtual"><scope>GMGPolarTools::PolarPoissonLikeCoefficients</scope><name>Theta</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

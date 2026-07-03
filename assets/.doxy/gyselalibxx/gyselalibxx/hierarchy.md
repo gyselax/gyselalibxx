@@ -71,6 +71,11 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md) 
 * **class** [**FFTPoissonSolver**](classFFTPoissonSolver.md) 
 * **class** [**FluidMoments**](classFluidMoments.md) _A class that computes fluid moments of the distribution function._ 
+* **class** [**IPolarPoissonLikeSolver**](classIPolarPoissonLikeSolver.md)     
+    * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._ 
+* **class** [**GMGPolarTools::HomogeneousDirichletBoundaryConditions**](classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions.md) _Homogeneous Dirichlet boundary conditions satisfying the GMGPolar BoundaryConditions concept._ 
+* **class** [**GMGPolarTools::MappingToDomainGeometry**](classGMGPolarTools_1_1MappingToDomainGeometry.md) _Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry concept._ 
+* **class** [**GMGPolarTools::PolarPoissonLikeCoefficients**](classGMGPolarTools_1_1PolarPoissonLikeCoefficients.md) _Wraps gyselalibxx spline-represented coefficients to satisfy the GMGPolar DensityProfileCoefficients concept._ 
 * **class** [**GaussLegendre**](classGaussLegendre.md) _An operator for constructing a Gauss-Legendre quadrature._ 
 * **class** [**GeometryVxVyXY**](classGeometryVxVyXY.md) _A class providing aliases for useful subindex ranges of the geometry when the data is saved with the velocity dimensions distributed across MPI ranks. It is used as template parameter for generic dimensionality-agnostic operators such as advections._ 
 * **class** [**GeometryXVx**](classGeometryXVx.md) _A class providing aliases for useful subindex ranges of the geometry. It is used as template parameter for generic dimensionality-agnostic operators such as advections._ 
@@ -91,8 +96,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
     * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._ 
     * **class** [**MPITransposeAllToAll**](classMPITransposeAllToAll.md) _A class describing an operator for converting from/to different MPI layouts using AlltoAll._ 
 * **class** [**IPoissonSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, DataType, MemorySpace, LayoutSpace &gt;**](classIPoissonSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01DataType_00_01MemorySpace_00_01LayoutSpace_01_4.md) 
-* **class** [**IPolarPoissonLikeSolver**](classIPolarPoissonLikeSolver.md)     
-    * **class** [**PolarSplineFEMPoissonLikeSolver**](classPolarSplineFEMPoissonLikeSolver.md) _Define a polar PDE solver for a Poisson-like equation._ 
 * **class** [**IPolarPoissonLikeSolver&lt; IdxRange&lt; ODims... &gt;, IdxRangeFull, MemorySpace, LayoutSpace &gt;**](classIPolarPoissonLikeSolver_3_01IdxRange_3_01ODims_8_8_8_01_4_00_01IdxRangeFull_00_01MemorySpace_00_01LayoutSpace_01_4.md) 
 * **class** [**IQNSolver**](classIQNSolver.md) _Base class for a Quasi-Neutrality solver._     
     * **class** [**NullQNSolver**](classNullQNSolver.md) _Null operator._ 

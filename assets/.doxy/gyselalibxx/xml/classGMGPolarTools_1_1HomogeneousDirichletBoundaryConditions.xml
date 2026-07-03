@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions" kind="class" language="C++" prot="public">
+    <compoundname>GMGPolarTools::HomogeneousDirichletBoundaryConditions</compoundname>
+    <includes refid="gmg__polar__poisson__like__solver_8hpp" local="no">gmg_polar_poisson_like_solver.hpp</includes>
+    <sectiondef kind="public-static-func">
+      <memberdef kind="function" id="classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions_1ab609ff1119216428f4c44c806c6d1010" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>static KOKKOS_INLINE_FUNCTION double GMGPolarTools::HomogeneousDirichletBoundaryConditions::u_D</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta)</argsstring>
+        <name>u_D</name>
+        <qualifiedname>GMGPolarTools::HomogeneousDirichletBoundaryConditions::u_D</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>The value of the solution on the boundary. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="75" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="75" bodyend="78"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions_1af099e5b624a1e041f36bfd89116143b7" prot="public" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>static KOKKOS_INLINE_FUNCTION double GMGPolarTools::HomogeneousDirichletBoundaryConditions::u_D_Interior</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta)</argsstring>
+        <name>u_D_Interior</name>
+        <qualifiedname>GMGPolarTools::HomogeneousDirichletBoundaryConditions::u_D_Interior</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>The value of the solution on the inner boundary (at r=rmin). Required for the concept, not needed here. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="80" column="42" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="80" bodyend="85"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Homogeneous Dirichlet boundary conditions satisfying the GMGPolar BoundaryConditions concept. </para>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="71" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="72" bodyend="86"/>
+    <listofallmembers>
+      <member refid="classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions_1ab609ff1119216428f4c44c806c6d1010" prot="public" virt="non-virtual"><scope>GMGPolarTools::HomogeneousDirichletBoundaryConditions</scope><name>u_D</name></member>
+      <member refid="classGMGPolarTools_1_1HomogeneousDirichletBoundaryConditions_1af099e5b624a1e041f36bfd89116143b7" prot="public" virt="non-virtual"><scope>GMGPolarTools::HomogeneousDirichletBoundaryConditions</scope><name>u_D_Interior</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

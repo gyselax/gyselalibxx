@@ -1,0 +1,305 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="classGMGPolarTools_1_1MappingToDomainGeometry" kind="class" language="C++" prot="public">
+    <compoundname>GMGPolarTools::MappingToDomainGeometry</compoundname>
+    <includes refid="gmg__polar__poisson__like__solver_8hpp" local="no">gmg_polar_poisson_like_solver.hpp</includes>
+    <templateparamlist>
+      <param>
+        <type>class ToPhysicalMapping</type>
+      </param>
+    </templateparamlist>
+    <sectiondef kind="private-type">
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a87ae6fc1becf7bc787165afd77c6aeff" prot="private" static="no">
+        <type>typename ToPhysicalMapping::curvilinear_tag_r</type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::R =  typename ToPhysicalMapping::curvilinear_tag_r</definition>
+        <argsstring></argsstring>
+        <name>R</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::R</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="20" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a842620593fdc3c940e0750ec25aa1fe4" prot="private" static="no">
+        <type>typename ToPhysicalMapping::curvilinear_tag_theta</type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Theta =  typename ToPhysicalMapping::curvilinear_tag_theta</definition>
+        <argsstring></argsstring>
+        <name>Theta</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::Theta</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="21" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a608a1cb204b521c3a494735ff41818a7" prot="private" static="no">
+        <type>typename ToPhysicalMapping::cartesian_tag_x</type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::X =  typename ToPhysicalMapping::cartesian_tag_x</definition>
+        <argsstring></argsstring>
+        <name>X</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::X</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="23" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a509c5d01bde07d317776f7d55497d811" prot="private" static="no">
+        <type>typename ToPhysicalMapping::cartesian_tag_y</type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Y =  typename ToPhysicalMapping::cartesian_tag_y</definition>
+        <argsstring></argsstring>
+        <name>Y</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::Y</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="24" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a90c0ce15a510761e72d7e1a5f16964fe" prot="private" static="no">
+        <type>typename <ref refid="structR_1a35006d7e5031a9bd48e5af62534c421f" kindref="member">R::Dual</ref></type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::R_cov =  typename R::Dual</definition>
+        <argsstring></argsstring>
+        <name>R_cov</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::R_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="26" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a46cd2dc3b2371863a449cafa3046be0e" prot="private" static="no">
+        <type>typename <ref refid="structTheta_1a1f99557f831a14c03c9d03e1a5e33d40" kindref="member">Theta::Dual</ref></type>
+        <definition>using GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Theta_cov =  typename Theta::Dual</definition>
+        <argsstring></argsstring>
+        <name>Theta_cov</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::Theta_cov</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="27" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a7e47bd7600945c0ce9f827cf091ca4d9" prot="private" static="no" mutable="no">
+        <type>ToPhysicalMapping</type>
+        <definition>ToPhysicalMapping GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::m_to_physical</definition>
+        <argsstring></argsstring>
+        <name>m_to_physical</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::m_to_physical</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="30" column="23" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <sectiondef kind="public-func">
+      <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1ad614e6c9e47785710969f043e5359693" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
+        <type></type>
+        <definition>GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::MappingToDomainGeometry</definition>
+        <argsstring>(ToPhysicalMapping to_physical)</argsstring>
+        <name>MappingToDomainGeometry</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::MappingToDomainGeometry</qualifiedname>
+        <param>
+          <type>ToPhysicalMapping</type>
+          <declname>to_physical</declname>
+        </param>
+        <briefdescription>
+<para>Construct the wrapper class. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="34" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="34" bodyend="34"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1ad8f75388f0ff5006f7417e81f9b918f9" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Fx</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <name>Fx</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::Fx</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>X(r, theta) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="37" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="37" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a26744413afee2739a75030d9aa70232c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::Fy</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <name>Fy</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::Fy</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>Y(r, theta) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="42" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="42" bodyend="45"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1a517a0c0437897439c499337513d999a6" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::dFx_dr</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <name>dFx_dr</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::dFx_dr</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>d/dr X(r, theta) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="47" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="47" bodyend="50"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1aa4e3bbcb8a040b3835d95ac4af80cb98" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::dFy_dr</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <name>dFy_dr</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::dFy_dr</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>d/dr Y(r, theta) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="52" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="52" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1adacb9eef0d1ee274384ab738277607ea" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::dFx_dtheta</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <name>dFx_dtheta</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::dFx_dtheta</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>d/(d theta) X(r, theta) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="57" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="57" bodyend="60"/>
+      </memberdef>
+      <memberdef kind="function" id="classGMGPolarTools_1_1MappingToDomainGeometry_1aa5d64b42c29f7756f9c816f16bec1f7b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
+        <type>KOKKOS_INLINE_FUNCTION double</type>
+        <definition>KOKKOS_INLINE_FUNCTION double GMGPolarTools::MappingToDomainGeometry&lt; ToPhysicalMapping &gt;::dFy_dtheta</definition>
+        <argsstring>(const double &amp;r, const double &amp;theta) const</argsstring>
+        <name>dFy_dtheta</name>
+        <qualifiedname>GMGPolarTools::MappingToDomainGeometry::dFy_dtheta</qualifiedname>
+        <param>
+          <type>const double &amp;</type>
+          <declname>r</declname>
+        </param>
+        <param>
+          <type>const double &amp;</type>
+          <declname>theta</declname>
+        </param>
+        <briefdescription>
+<para>d/(d theta) Y(r, theta) </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="62" column="35" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="62" bodyend="65"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Wraps a gyselalibxx coordinate mapping to satisfy the GMGPolar DomainGeometry concept. </para>
+    </briefdescription>
+    <detaileddescription>
+<para><parameterlist kind="templateparam"><parameteritem>
+<parameternamelist>
+<parametername>ToPhysicalMapping</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A mapping from (r, theta) curvilinear coordinates to (x, y) Cartesian. </para>
+</parameterdescription>
+</parameteritem>
+</parameterlist>
+</para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="18" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="19" bodyend="66"/>
+    <listofallmembers>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a517a0c0437897439c499337513d999a6" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>dFx_dr</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1adacb9eef0d1ee274384ab738277607ea" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>dFx_dtheta</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1aa4e3bbcb8a040b3835d95ac4af80cb98" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>dFy_dr</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1aa5d64b42c29f7756f9c816f16bec1f7b" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>dFy_dtheta</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1ad8f75388f0ff5006f7417e81f9b918f9" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Fx</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a26744413afee2739a75030d9aa70232c" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Fy</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a7e47bd7600945c0ce9f827cf091ca4d9" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>m_to_physical</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1ad614e6c9e47785710969f043e5359693" prot="public" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>MappingToDomainGeometry</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a87ae6fc1becf7bc787165afd77c6aeff" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>R</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a90c0ce15a510761e72d7e1a5f16964fe" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>R_cov</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a842620593fdc3c940e0750ec25aa1fe4" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Theta</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a46cd2dc3b2371863a449cafa3046be0e" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Theta_cov</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a608a1cb204b521c3a494735ff41818a7" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>X</name></member>
+      <member refid="classGMGPolarTools_1_1MappingToDomainGeometry_1a509c5d01bde07d317776f7d55497d811" prot="private" virt="non-virtual"><scope>GMGPolarTools::MappingToDomainGeometry</scope><name>Y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
