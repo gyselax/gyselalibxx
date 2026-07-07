@@ -4,6 +4,7 @@ spack:
     - 'cmake@3.22:3'
     - 'ddc@0.14 +fft +pdi +splines'
     - 'ginkgo@1.9 +openmp'
+    - 'gmgpolar@2.3'
     - 'googletest +gmock'
     - 'kokkos@4.6:4 +openmp'
     - 'kokkos-kernels@4.6:4'
