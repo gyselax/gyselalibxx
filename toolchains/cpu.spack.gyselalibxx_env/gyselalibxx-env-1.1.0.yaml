@@ -1,5 +1,6 @@
 spack:
   concretizer:
+    reuse: false
     unify: true
   config:
     install_tree:
