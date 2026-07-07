@@ -66,6 +66,20 @@ spack:
       variants: ~fortran ~mpi ~openmp cxxstd=17
     blas:
       require: openblas@0.3
+    c:
+      require:
+        - spec: 'apple-clang@14:'
+          when: platform=darwin
+        - spec: 'gcc@11:'
+          when: platform=linux
+    cxx:
+      require:
+        - spec: 'apple-clang@14:'
+          when: platform=darwin
+        - spec: 'gcc@11:'
+          when: platform=linux
+    fortran:
+      require: 'gcc@11:'
     kokkos-fft:
       require: 'host_backend=fftw-serial'
     lapack:
