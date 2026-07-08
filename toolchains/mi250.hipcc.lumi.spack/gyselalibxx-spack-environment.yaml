@@ -4,6 +4,7 @@ spack:
     - cmake
     - 'ddc@0.14 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +rocm amdgpu_target=gfx90a
+    - gmgpolar@2.3
     - googletest +gmock
     - kokkos@4.7 ~openmp +rocm amdgpu_target=gfx90a
     - kokkos-kernels@4.7 ~shared

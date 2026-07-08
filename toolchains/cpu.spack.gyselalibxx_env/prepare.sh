@@ -38,9 +38,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 spack compiler find
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  COMPILER='apple-clang@14:'
-else
+if [[ "$OSTYPE" == "linux" ]]; then
   AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
 
   if [ -z "${AVAILABLE_COMPILERS}" ]
@@ -51,8 +49,6 @@ else
       spack compiler find
       spack unload gcc@11
   fi
-
-  COMPILER='gcc@11:'
 fi
 
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.1.0.yaml

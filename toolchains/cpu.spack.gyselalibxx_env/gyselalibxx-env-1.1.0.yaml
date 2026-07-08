@@ -1,5 +1,6 @@
 spack:
   concretizer:
+    reuse: false
     unify: true
   config:
     install_tree:
@@ -17,6 +18,7 @@ spack:
     - 'cmake@3.30'
     - 'ddc@0.14 +fft +pdi +splines'
     - 'ginkgo@1.9'
+    - 'gmgpolar@2.3'
     - 'googletest@1.14 +gmock'
     - 'kokkos@4.7 +serial'
     - 'kokkos-kernels@4.7'
@@ -65,6 +67,20 @@ spack:
       variants: ~fortran ~mpi ~openmp cxxstd=17
     blas:
       require: openblas@0.3
+    c:
+      require:
+        - spec: 'apple-clang@14:'
+          when: platform=darwin
+        - spec: 'gcc@11:'
+          when: platform=linux
+    cxx:
+      require:
+        - spec: 'apple-clang@14:'
+          when: platform=darwin
+        - spec: 'gcc@11:'
+          when: platform=linux
+    fortran:
+      require: 'gcc@11:'
     kokkos-fft:
       require: 'host_backend=fftw-serial'
     lapack:

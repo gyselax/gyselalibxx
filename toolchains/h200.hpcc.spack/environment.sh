@@ -23,6 +23,7 @@ eval -- "$(
         cmake \
         ddc \
         ginkgo \
+        gmgpolar \
         googletest \
         kokkos \
         kokkos-fft \
