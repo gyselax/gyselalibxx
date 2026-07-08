@@ -106,8 +106,10 @@ struct ComputeErrorTraits
     struct BSplinesY : ddc::UniformBSplines<Y, 3>
     {
     };
-    using GrevillePointsY = ddc::
-            KnotsAsInterpolationPoints<BSplinesY, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE>;
+    using GrevillePointsY = ddc::KnotsAsInterpolationPoints<
+            BSplinesY,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE>;
     struct GridY : GrevillePointsY::interpolation_discrete_dimension_type
     {
     };

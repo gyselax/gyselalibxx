@@ -35,17 +35,33 @@ struct NonUniformInterpolationPointsFixture<std::tuple<
 
 using Cases = tuple_to_types_t<std::tuple<
         std::tuple<
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::HERMITE>,
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::HERMITE>>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::HERMITE>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::HERMITE>>,
         std::tuple<
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::GREVILLE>,
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::GREVILLE>>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::GREVILLE>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::GREVILLE>>,
         std::tuple<
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::HERMITE>,
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::GREVILLE>>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::HERMITE>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::GREVILLE>>,
         std::tuple<
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::PERIODIC>,
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::PERIODIC>>>>;
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::PERIODIC>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::PERIODIC>>>>;
 
 TYPED_TEST_SUITE(NonUniformInterpolationPointsFixture, Cases);
 

@@ -31,7 +31,8 @@ struct BSplinesVx
 {
 };
 
-auto constexpr SplineXBoundary = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
+auto constexpr SplineXBoundary
+        = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
 auto constexpr SplineVxBoundary = ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE;
 
 using SplineInterpPointsX

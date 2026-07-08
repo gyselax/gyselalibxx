@@ -72,7 +72,8 @@ struct GridTheta : NonUniformGridBase<Theta>
 
 static constexpr int BSDegree = 3;
 static constexpr ddc::SplineBuilderClosure SplineRBoundary = ddc::SplineBuilderClosure::GREVILLE;
-static constexpr ddc::SplineBuilderClosure SplineThetaBoundary = ddc::SplineBuilderClosure::PERIODIC;
+static constexpr ddc::SplineBuilderClosure SplineThetaBoundary
+        = ddc::SplineBuilderClosure::PERIODIC;
 
 
 struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>

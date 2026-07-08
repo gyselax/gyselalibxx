@@ -133,7 +133,10 @@ public:
         , idx_range_xy1(idx_range_x1, idx_range_y1)
         , idx_range_xy2(idx_range_x2, idx_range_y2)
         , idx_range_xy3(idx_range_x3, idx_range_y3)
-        , derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, ddc::SplineBuilderClosure::GREVILLE)
+        , derivatives_calculator_1_2(
+                  idx_range_xy1,
+                  idx_range_xy2,
+                  ddc::SplineBuilderClosure::GREVILLE)
         , derivatives_calculator_2_3(
                   idx_range_xy2,
                   idx_range_xy3,

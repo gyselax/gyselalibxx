@@ -32,8 +32,10 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-using SplineInterpPointsX = ddc::
-        GrevilleInterpolationPoints<BSplinesX, ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC>;
+using SplineInterpPointsX = ddc::GrevilleInterpolationPoints<
+        BSplinesX,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {

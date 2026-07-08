@@ -50,7 +50,8 @@ struct LagrangeVy
 };
 
 ddc::SplineBuilderClosure constexpr LagrangeYBoundary = ddc::SplineBuilderClosure::PERIODIC;
-ddc::SplineBuilderClosure constexpr LagrangeVyBoundary = ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE;
+ddc::SplineBuilderClosure constexpr LagrangeVyBoundary
+        = ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE;
 
 // SplineBuilder and SplineEvaluator definition
 using LagrangeInterpolatorX = LagrangeInterpolator<

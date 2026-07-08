@@ -27,7 +27,8 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-auto constexpr SplineXBoundary = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
+auto constexpr SplineXBoundary
+        = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
 
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;

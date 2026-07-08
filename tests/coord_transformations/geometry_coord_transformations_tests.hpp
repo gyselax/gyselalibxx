@@ -149,8 +149,10 @@ struct BSplinesTheta : ddc::NonUniformBSplines<Theta, BSDegree>
 {
 };
 
-using InterpPointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE>;
+using InterpPointsR = ddc::GrevilleInterpolationPoints<
+        BSplinesR,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 using InterpPointsTheta = ddc::GrevilleInterpolationPoints<
         BSplinesTheta,
         ddc::SplineBuilderClosure::PERIODIC,

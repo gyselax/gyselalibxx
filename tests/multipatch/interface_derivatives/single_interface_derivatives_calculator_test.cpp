@@ -78,8 +78,10 @@ using Xi = Theta;
 // Interpolation points type for the 2 patches
 // --- patch 1
 template <ddc::SplineBuilderClosure SplineBuilderClosureR>
-using SplineInterpPointsR1 = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesR<1>, SplineBuilderClosureR, ddc::SplineBuilderClosure::HERMITE>;
+using SplineInterpPointsR1 = ddcHelper::NonUniformInterpolationPoints<
+        BSplinesR<1>,
+        SplineBuilderClosureR,
+        ddc::SplineBuilderClosure::HERMITE>;
 using SplineInterpPointsTheta1 = ddc::KnotsAsInterpolationPoints<
         BSplinesTheta<1>,
         ddc::SplineBuilderClosure::PERIODIC,
@@ -87,8 +89,10 @@ using SplineInterpPointsTheta1 = ddc::KnotsAsInterpolationPoints<
 
 // --- patch 2
 template <ddc::SplineBuilderClosure SplineBuilderClosureR>
-using SplineInterpPointsEta2 = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesR<2>, ddc::SplineBuilderClosure::HERMITE, SplineBuilderClosureR>;
+using SplineInterpPointsEta2 = ddcHelper::NonUniformInterpolationPoints<
+        BSplinesR<2>,
+        ddc::SplineBuilderClosure::HERMITE,
+        SplineBuilderClosureR>;
 using SplineInterpPointsXi2 = ddc::KnotsAsInterpolationPoints<
         BSplinesTheta<2>,
         ddc::SplineBuilderClosure::PERIODIC,
@@ -97,8 +101,8 @@ using SplineInterpPointsXi2 = ddc::KnotsAsInterpolationPoints<
 
 // Interpolation points type for the equivalent global spline.
 template <ddc::SplineBuilderClosure SplineBuilderClosureR>
-using SplineInterpPointsRg
-        = ddcHelper::NonUniformInterpolationPoints<BSplinesRg, SplineBuilderClosureR, SplineBuilderClosureR>;
+using SplineInterpPointsRg = ddcHelper::
+        NonUniformInterpolationPoints<BSplinesRg, SplineBuilderClosureR, SplineBuilderClosureR>;
 using SplineInterpPointsThetag = ddcHelper::NonUniformInterpolationPoints<
         BSplinesThetag,
         ddc::SplineBuilderClosure::PERIODIC,
@@ -167,9 +171,9 @@ struct SingleInterfaceDerivativesCalculatorFixture<
     static constexpr Coord<R> r1_min = Coord<R>(0.0);
     static constexpr Coord<R> r1_max = Coord<R>(1.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
-    static constexpr IdxStep<GridR<1>> r1_ncells = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE)
-                                                           ? IdxStep<GridR<1>>(5)
-                                                           : IdxStep<GridR<1>>(30);
+    static constexpr IdxStep<GridR<1>> r1_ncells
+            = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<1>>(5)
+                                                                       : IdxStep<GridR<1>>(30);
 
     static constexpr Coord<Theta> theta1_min = Coord<Theta>(0.0);
     static constexpr Coord<Theta> theta1_max = Coord<Theta>(2 * M_PI);
@@ -182,9 +186,9 @@ struct SingleInterfaceDerivativesCalculatorFixture<
     static constexpr Coord<R> eta2_max
             = (std::is_same_v<Edge2, SouthEdge2>) ? Coord<Eta>(2.0 * 2 * M_PI) : Coord<Eta>(2.0);
     // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
-    static constexpr IdxStep<GridR<2>> eta2_ncells = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE)
-                                                             ? IdxStep<GridR<2>>(5)
-                                                             : IdxStep<GridR<2>>(30);
+    static constexpr IdxStep<GridR<2>> eta2_ncells
+            = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<2>>(5)
+                                                                       : IdxStep<GridR<2>>(30);
 
     // Exchange R and Theta values for a connection with SouthEdge2.
     static constexpr Coord<Theta> xi2_min = Coord<Xi>(0.0);
@@ -567,7 +571,9 @@ using tuple_cat_t = decltype(std::tuple_cat(std::declval<input_t>()...));
 using Cases = tuple_to_types_t<tuple_cat_t<
         cartesian_product_t<
                 std::tuple<
-                        std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::HERMITE>
+                        std::integral_constant<
+                                ddc::SplineBuilderClosure,
+                                ddc::SplineBuilderClosure::HERMITE>
 #if defined(NON_UNIFORM_MESH)
                         /*
                             Test with additional interpolation points as closure.
@@ -576,13 +582,17 @@ using Cases = tuple_to_types_t<tuple_cat_t<
                             points as closure. 
                         */
                         ,
-                        std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::GREVILLE>
+                        std::integral_constant<
+                                ddc::SplineBuilderClosure,
+                                ddc::SplineBuilderClosure::GREVILLE>
 #endif
                         >,
                 std::tuple<EastEdge1, WestEdge1>,
                 std::tuple<EastEdge2, WestEdge2>>,
         std::tuple<std::tuple<
-                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::HERMITE>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::HERMITE>,
                 EastEdge1,
                 SouthEdge2>>>>;
 
