@@ -59,12 +59,14 @@ RUN chmod +x /bin/bash_run \
  && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
  && git clone --branch v0.1.2 --depth 1 https://gitlab.com/cines/code.gysela/libkoliop \
  && git clone --branch v0.14.0 --depth 1 https://github.com/CExA-project/ddc.git \
+ && git clone --branch v2.3.1 --depth 1 https://github.com/SciCompMod/GMGPolar.git \
  && export Kokkos_ROOT=/opt/serial/Kokkos \
  && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/serial/KokkosKernels \
  && export KokkosTools_ROOT=/opt/serial/KokkosTools \
  && export koliop_ROOT=/opt/serial/koliop \
  && export DDC_ROOT=/opt/serial/DDC \
+ && export GMGPolar_ROOT=/opt/serial/GMGPolar \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_SERIAL=ON -B build -S kokkos \
  && cmake --build build \
  && cmake --install build --prefix $Kokkos_ROOT \
@@ -89,12 +91,17 @@ RUN chmod +x /bin/bash_run \
  && cmake --build build \
  && cmake --install build --prefix $DDC_ROOT \
  && rm -rf build \
+ && cmake -DCMAKE_BUILD_TYPE=Release -B build -S GMGPolar \
+ && cmake --build build \
+ && cmake --install build --prefix $GMGPolar_ROOT \
+ && rm -rf build \
  && export Kokkos_ROOT=/opt/openmp/Kokkos \
  && export KokkosFFT_ROOT=/opt/openmp/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/openmp/KokkosKernels \
  && export KokkosTools_ROOT=/opt/openmp/KokkosTools \
  && export koliop_ROOT=/opt/openmp/koliop \
  && export DDC_ROOT=/opt/openmp/DDC \
+ && export GMGPolar_ROOT=/opt/openmp/GMGPolar \
  && cmake -DCMAKE_BUILD_TYPE=Release -DKokkos_ENABLE_DEPRECATED_CODE_4=OFF -DKokkos_ENABLE_OPENMP=ON -B build -S kokkos \
  && cmake --build build \
  && cmake --install build --prefix $Kokkos_ROOT \
@@ -118,7 +125,12 @@ RUN chmod +x /bin/bash_run \
  && cmake -DCMAKE_BUILD_TYPE=Release -DDDC_BUILD_EXAMPLES=OFF -DDDC_BUILD_TESTS=OFF -B build -S ddc \
  && cmake --build build \
  && cmake --install build --prefix $DDC_ROOT \
- && rm -rf build kokkos kokkos-fft kokkos-kernels kokkos-tools ddc \
+ && rm -rf build \
+ && cmake -DCMAKE_BUILD_TYPE=Release -B build -S GMGPolar \
+ && cmake --build build \
+ && cmake --install build --prefix $GMGPolar_ROOT \
+ && rm -rf build \
+ && rm -rf kokkos kokkos-fft kokkos-kernels kokkos-tools ddc gmgpolar \
  && git clone -b release-1.12.1 https://github.com/google/googletest.git \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
  && cmake --build build \
