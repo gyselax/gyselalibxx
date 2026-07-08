@@ -33,7 +33,7 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 };
 
 using SplineInterpPointsX = ddc::
-        GrevilleInterpolationPoints<BSplinesX, ddc::BoundCond::PERIODIC, ddc::BoundCond::PERIODIC>;
+        GrevilleInterpolationPoints<BSplinesX, ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
@@ -59,8 +59,8 @@ using SplineXInterpolator = SplineInterpolator<
         GridX,
         ExtrapolationRule::PERIODIC,
         ExtrapolationRule::PERIODIC,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 using DFieldMemX = DFieldMem<IdxRangeX>;
 using DFieldMemBatchX = DFieldMem<IdxRangeBatchX>;

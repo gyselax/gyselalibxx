@@ -26,8 +26,8 @@ struct BSplinesMu
               ddc::NonUniformBSplines<Mu, BSDegreeMu>>
 {
 };
-ddc::BoundCond constexpr SplineVparBoundary = ddc::BoundCond::HERMITE;
-ddc::BoundCond constexpr SplineMuBoundary = ddc::BoundCond::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineVparBoundary = ddc::SplineBuilderClosure::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineMuBoundary = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsVpar
         = ddc::GrevilleInterpolationPoints<BSplinesVpar, SplineVparBoundary, SplineVparBoundary>;

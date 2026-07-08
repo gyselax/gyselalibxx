@@ -78,8 +78,8 @@ template <
         class MemorySpace,
         class BSplines,
         class InterpolationDDim,
-        ddc::BoundCond BcLower,
-        ddc::BoundCond BcUpper,
+        ddc::SplineBuilderClosure BcLower,
+        ddc::SplineBuilderClosure BcUpper,
         ddc::SplineSolver Solver>
 struct InterpolationBuilderTraits<ddc::SplineBuilder<
         ExecSpace,

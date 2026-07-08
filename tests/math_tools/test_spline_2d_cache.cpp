@@ -30,8 +30,8 @@ struct BSplinesY : ddc::UniformBSplines<Y, 3>
 {
 };
 
-auto constexpr SplineXBoundary = ddc::BoundCond::GREVILLE;
-auto constexpr SplineYBoundary = ddc::BoundCond::GREVILLE;
+auto constexpr SplineXBoundary = ddc::SplineBuilderClosure::GREVILLE;
+auto constexpr SplineYBoundary = ddc::SplineBuilderClosure::GREVILLE;
 
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;

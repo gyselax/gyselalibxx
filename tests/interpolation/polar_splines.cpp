@@ -63,11 +63,11 @@ struct BSplinesTheta : ddc::NonUniformBSplines<Theta, spline_theta_degree>
 #endif
 
 using GrevillePointsR = ddc::
-        GrevilleInterpolationPoints<BSplinesR, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE>;
+        GrevilleInterpolationPoints<BSplinesR, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE>;
 using GrevillePointsTheta = ddc::GrevilleInterpolationPoints<
         BSplinesTheta,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 struct GridR : GrevillePointsR::interpolation_discrete_dimension_type
 {
@@ -103,10 +103,10 @@ TEST(PolarSplineTest, ConstantEval)
             BSplinesTheta,
             GridR,
             GridTheta,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
@@ -224,10 +224,10 @@ void test_polar_spline_eval_gpu()
             BSplinesTheta,
             GridR,
             GridTheta,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<
@@ -343,10 +343,10 @@ void test_polar_integrals()
             BSplinesTheta,
             GridR,
             GridTheta,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
     using EvaluatorRTheta = ddc::SplineEvaluator2D<

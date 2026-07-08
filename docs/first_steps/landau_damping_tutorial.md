@@ -260,8 +260,8 @@ The function `ddc::init_discrete_space` calls the [constructor of `ddc::UniformB
 The grid is constructed from the Greville abscissae of the b-splines using DDC as follows:
 
 ```cpp
-auto constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+auto constexpr SplineXBoundary = ddc::SplineBuilderClosure::PERIODIC;
+auto constexpr SplineVxBoundary = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsX
         = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;

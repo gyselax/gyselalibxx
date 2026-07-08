@@ -47,8 +47,8 @@ struct BSplinesTheta : ddc::UniformBSplines<Theta, BSDegreeTheta>
 {
 };
 
-ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
-ddc::BoundCond constexpr SplineThetaBoundary = ddc::BoundCond::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineRBoundary = ddc::SplineBuilderClosure::GREVILLE;
+ddc::SplineBuilderClosure constexpr SplineThetaBoundary = ddc::SplineBuilderClosure::PERIODIC;
 
 using SplineInterpPointsR
         = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;

@@ -28,13 +28,13 @@ using DeviceExecSpace = Kokkos::DefaultExecutionSpace;
 template <int PatchIdx>
 using SplineInterpPointsR = ddc::GrevilleInterpolationPoints<
         BSplinesR<PatchIdx>,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE>;
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 template <int PatchIdx>
 using SplineInterpPointsTheta = ddc::GrevilleInterpolationPoints<
         BSplinesTheta<PatchIdx>,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 
 template <int PatchIdx, class ExecSpace>
@@ -45,10 +45,10 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         BSplinesTheta<PatchIdx>,
         GridR<PatchIdx>,
         GridTheta<PatchIdx>,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::GREVILLE,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineSolver::LAPACK>;
 
 

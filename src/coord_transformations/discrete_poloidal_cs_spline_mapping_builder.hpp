@@ -228,13 +228,13 @@ public:
 private:
     using GrevillePointsR = ddc::GrevilleInterpolationPoints<
             BSplinesRRefined,
-            SplineBuilder::builder_type1::s_bc_xmin,
-            SplineBuilder::builder_type1::s_bc_xmax>;
+            SplineBuilder::builder_type1::s_sbc_xmin,
+            SplineBuilder::builder_type1::s_sbc_xmax>;
 
     using GrevillePointsTheta = ddc::GrevilleInterpolationPoints<
             BSplinesThetaRefined,
-            SplineBuilder::builder_type2::s_bc_xmin,
-            SplineBuilder::builder_type2::s_bc_xmax>;
+            SplineBuilder::builder_type2::s_sbc_xmin,
+            SplineBuilder::builder_type2::s_sbc_xmax>;
 
 public:
     /// @brief The type of the grid of radial points on which the new mapping will be defined.
@@ -255,10 +255,10 @@ private:
     struct Build_BuilderType;
 
     template <
-            ddc::BoundCond BcLower1,
-            ddc::BoundCond BcUpper1,
-            ddc::BoundCond BcLower2,
-            ddc::BoundCond BcUpper2,
+            ddc::SplineBuilderClosure BcLower1,
+            ddc::SplineBuilderClosure BcUpper1,
+            ddc::SplineBuilderClosure BcLower2,
+            ddc::SplineBuilderClosure BcUpper2,
             ddc::SplineSolver Solver>
     struct Build_BuilderType<ddc::SplineBuilder2D<
             ExecSpace,

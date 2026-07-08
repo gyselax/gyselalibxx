@@ -112,16 +112,16 @@ void launch_tests(
             Kokkos::HostSpace,
             BSplinesR,
             GridR,
-            ddc::BoundCond::GREVILLE, // boundary at r=0
-            ddc::BoundCond::GREVILLE, // boundary at rmax
+            ddc::SplineBuilderClosure::GREVILLE, // boundary at r=0
+            ddc::SplineBuilderClosure::GREVILLE, // boundary at rmax
             ddc::SplineSolver::LAPACK>;
     using SplinePBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::HostSpace,
             BSplinesTheta,
             GridTheta,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
     SplineRBuilder r_builder(ddc::select<GridR>(grid));

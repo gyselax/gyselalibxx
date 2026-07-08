@@ -43,8 +43,8 @@ struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineXBoundary = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineVxBoundary = ddc::SplineBuilderClosure::HERMITE;
 
 
 // Discrete dimension

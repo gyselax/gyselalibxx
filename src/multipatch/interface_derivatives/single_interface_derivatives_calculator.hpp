@@ -57,7 +57,7 @@ inline constexpr bool is_single_derivative_calculator_v
  * to compute the derivatives.  
  * 
  * @warning The applied method only works for interpolation points located on 
- * the break points. In the case where "ddc::BoundCond::GREVILLE" is specified,
+ * the break points. In the case where "ddc::SplineBuilderClosure::GREVILLE" is specified,
  * additional interpolation points are also placed in the first or last cell
  * of the patch.
  * Please be sure to initialise the discrete space of your Grid on the break points
@@ -156,21 +156,21 @@ public:
      * @param idx_range_1d_2 1D index range perpendicular to the Interface, 
      * on the patch 2. 
      * @param Bound1 The boundary condition type on the opposite edge of the interface on 
-     * the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. If 
-     * ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the 
-     * additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense. 
+     * the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If 
+     * ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the 
+     * additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. 
      * @param Bound2 The boundary condition type on the opposite edge of the interface on 
-     * the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. If 
-     * ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the 
-     * additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense.  
+     * the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If 
+     * ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the 
+     * additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense.  
      */
     SingleInterfaceDerivativesCalculator(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
-            ddc::BoundCond const& Bound1 = ddc::BoundCond::HERMITE,
-            ddc::BoundCond const& Bound2 = ddc::BoundCond::HERMITE)
-        : m_is_cell_bound_1_with_extra_interpol_pt(Bound1 == ddc::BoundCond::GREVILLE)
-        , m_is_cell_bound_2_with_extra_interpol_pt(Bound2 == ddc::BoundCond::GREVILLE)
+            ddc::SplineBuilderClosure const& Bound1 = ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure const& Bound2 = ddc::SplineBuilderClosure::HERMITE)
+        : m_is_cell_bound_1_with_extra_interpol_pt(Bound1 == ddc::SplineBuilderClosure::GREVILLE)
+        , m_is_cell_bound_2_with_extra_interpol_pt(Bound2 == ddc::SplineBuilderClosure::GREVILLE)
         , m_idx_range_perp_1(idx_range_1d_1)
         , m_idx_range_perp_2(idx_range_1d_2)
         , m_weights_patch_1_alloc(
@@ -184,8 +184,8 @@ public:
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
     {
-        assert(Bound1 != ddc::BoundCond::PERIODIC);
-        assert(Bound2 != ddc::BoundCond::PERIODIC);
+        assert(Bound1 != ddc::SplineBuilderClosure::PERIODIC);
+        assert(Bound2 != ddc::SplineBuilderClosure::PERIODIC);
 
         // Two interpolation points have to be added if the derivatives are not closure condition.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
@@ -237,16 +237,16 @@ public:
      * @param idx_range_a Index range on one patch. 
      * @param idx_range_b Index range on the other patch. 
      * @param Bound1 The boundary condition type on the opposite edge of the interface on 
-     * the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. 
+     * the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. 
      * @param Bound2 The boundary condition type on the opposite edge of the interface on 
-     * the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. 
+     * the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. 
      */
     template <class IdxRangeA, class IdxRangeB>
     SingleInterfaceDerivativesCalculator(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
-            ddc::BoundCond const& Bound1 = ddc::BoundCond::HERMITE,
-            ddc::BoundCond const& Bound2 = ddc::BoundCond::HERMITE)
+            ddc::SplineBuilderClosure const& Bound1 = ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure const& Bound2 = ddc::SplineBuilderClosure::HERMITE)
         : SingleInterfaceDerivativesCalculator(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
@@ -285,8 +285,8 @@ public:
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size())))
                         : idx_range_1d_2.take_last(IdxStep<EdgePerpGrid2>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size()))),
-                ddc::BoundCond::HERMITE,
-                ddc::BoundCond::HERMITE)
+                ddc::SplineBuilderClosure::HERMITE,
+                ddc::SplineBuilderClosure::HERMITE)
     {
     }
 

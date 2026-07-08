@@ -44,9 +44,9 @@ template <
         typename BSplineOnPatch,
         template <typename P>
         typename GridOnPatch,
-        ddc::BoundCond BcLower,
-        ddc::BoundCond BcUpper,
-        ddc::BoundCond BcTransition,
+        ddc::SplineBuilderClosure BcLower,
+        ddc::SplineBuilderClosure BcUpper,
+        ddc::SplineBuilderClosure BcTransition,
         class Connectivity,
         ddc::SplineSolver Solver,
         template <typename P>

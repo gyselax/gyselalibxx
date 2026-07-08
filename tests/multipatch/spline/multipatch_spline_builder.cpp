@@ -16,14 +16,14 @@
 
 namespace {
 using namespace non_periodic_non_uniform_2d_2patches;
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::GREVILLE;
-ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::GREVILLE;
+ddc::SplineBuilderClosure constexpr SplineXBoundary = ddc::SplineBuilderClosure::GREVILLE;
+ddc::SplineBuilderClosure constexpr SplineYBoundary = ddc::SplineBuilderClosure::GREVILLE;
 
-ddc::BoundCond constexpr SplineX1Boundary = SplineXBoundary;
-ddc::BoundCond constexpr SplineY1Boundary = SplineYBoundary;
+ddc::SplineBuilderClosure constexpr SplineX1Boundary = SplineXBoundary;
+ddc::SplineBuilderClosure constexpr SplineY1Boundary = SplineYBoundary;
 
-ddc::BoundCond constexpr SplineX2Boundary = SplineXBoundary;
-ddc::BoundCond constexpr SplineY2Boundary = SplineYBoundary;
+ddc::SplineBuilderClosure constexpr SplineX2Boundary = SplineXBoundary;
+ddc::SplineBuilderClosure constexpr SplineY2Boundary = SplineYBoundary;
 
 using SplineInterpPointsX1
         = ddc::GrevilleInterpolationPoints<BSplinesX<1>, SplineX1Boundary, SplineX1Boundary>;

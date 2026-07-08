@@ -243,8 +243,8 @@ public:
     using typename base_type::IdxRangeXY;
     using typename base_type::IdxRangeY;
 
-    static constexpr ddc::BoundCond SplineBoundary
-            = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
+    static constexpr ddc::SplineBuilderClosure SplineBoundary
+            = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
 
     struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree>
     {
@@ -365,8 +365,8 @@ public:
     using typename base_type::IdxRangeXY;
     using typename base_type::IdxRangeY;
 
-    static constexpr ddc::BoundCond SplineBoundary
-            = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
+    static constexpr ddc::SplineBuilderClosure SplineBoundary
+            = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
 
     struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree>
     {

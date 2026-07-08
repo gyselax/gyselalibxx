@@ -22,7 +22,7 @@
         |  1  |  2  |  3  |
 
         with the global X dimension with additional points as closure condition
-        (ddc::BoundCond::GREVILLE) and the global Y with Hermite boundary conditions.
+        (ddc::SplineBuilderClosure::GREVILLE) and the global Y with Hermite boundary conditions.
 
 */
 
@@ -39,15 +39,15 @@ using HostExecSpace = Kokkos::DefaultHostExecutionSpace;
 
 
 // Interpolation points type for the patches.
-template <std::size_t PatchIdx, ddc::BoundCond BC1, ddc::BoundCond BC2>
+template <std::size_t PatchIdx, ddc::SplineBuilderClosure BC1, ddc::SplineBuilderClosure BC2>
 using SplineInterpPointsX = ddcHelper::NonUniformInterpolationPoints<BSplinesX<PatchIdx>, BC1, BC2>;
 
-template <std::size_t PatchIdx, ddc::BoundCond BC1, ddc::BoundCond BC2>
+template <std::size_t PatchIdx, ddc::SplineBuilderClosure BC1, ddc::SplineBuilderClosure BC2>
 using SplineInterpPointsY = ddcHelper::NonUniformInterpolationPoints<BSplinesY<PatchIdx>, BC1, BC2>;
 
 
-static constexpr ddc::BoundCond BCH = ddc::BoundCond::HERMITE;
-static constexpr ddc::BoundCond BCG = ddc::BoundCond::GREVILLE;
+static constexpr ddc::SplineBuilderClosure BCH = ddc::SplineBuilderClosure::HERMITE;
+static constexpr ddc::SplineBuilderClosure BCG = ddc::SplineBuilderClosure::GREVILLE;
 
 
 // USEFUL FUNCTIONS ==============================================================================
@@ -133,12 +133,12 @@ public:
         , idx_range_xy1(idx_range_x1, idx_range_y1)
         , idx_range_xy2(idx_range_x2, idx_range_y2)
         , idx_range_xy3(idx_range_x3, idx_range_y3)
-        , derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, ddc::BoundCond::GREVILLE)
+        , derivatives_calculator_1_2(idx_range_xy1, idx_range_xy2, ddc::SplineBuilderClosure::GREVILLE)
         , derivatives_calculator_2_3(
                   idx_range_xy2,
                   idx_range_xy3,
-                  ddc::BoundCond::HERMITE,
-                  ddc::BoundCond::GREVILLE)
+                  ddc::SplineBuilderClosure::HERMITE,
+                  ddc::SplineBuilderClosure::GREVILLE)
     {
     }
 

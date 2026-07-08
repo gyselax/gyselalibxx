@@ -20,7 +20,7 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-auto constexpr SplineXBoundary = ddc::BoundCond::HERMITE;
+auto constexpr SplineXBoundary = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsX
         = ddc::KnotsAsInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
@@ -107,7 +107,7 @@ struct ComputeErrorTraits
     {
     };
     using GrevillePointsY = ddc::
-            KnotsAsInterpolationPoints<BSplinesY, ddc::BoundCond::HERMITE, ddc::BoundCond::HERMITE>;
+            KnotsAsInterpolationPoints<BSplinesY, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE>;
     struct GridY : GrevillePointsY::interpolation_discrete_dimension_type
     {
     };
@@ -125,8 +125,8 @@ double compute_error(int n_elems)
             Kokkos::HostSpace,
             BSplinesY,
             GridY,
-            ddc::BoundCond::HERMITE,
-            ddc::BoundCond::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure::HERMITE,
             ddc::SplineSolver::LAPACK>;
     using IdxRangeY = IdxRange<GridY>;
     using DFieldMemY = DFieldMem<IdxRangeY>;

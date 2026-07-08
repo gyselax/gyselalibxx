@@ -422,16 +422,16 @@ class SplinePolarFootFinder
             "information about the derivatives and therefore will not work with this class. Please "
             "check the choice of boundary conditions).");
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_bc_xmin != ddc::BoundCond::PERIODIC,
+            SplineRThetaBuilderAdvection::builder_type1::s_sbc_xmin != ddc::SplineBuilderClosure::PERIODIC,
             "Periodic boundary conditions in the radial direction are nonsensical.");
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type1::s_bc_xmax != ddc::BoundCond::PERIODIC,
+            SplineRThetaBuilderAdvection::builder_type1::s_sbc_xmax != ddc::SplineBuilderClosure::PERIODIC,
             "Periodic boundary conditions in the radial direction are nonsensical.");
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type2::s_bc_xmin == ddc::BoundCond::PERIODIC,
+            SplineRThetaBuilderAdvection::builder_type2::s_sbc_xmin == ddc::SplineBuilderClosure::PERIODIC,
             "Expected periodic boundary conditions in the poloidal direction.");
     static_assert(
-            SplineRThetaBuilderAdvection::builder_type2::s_bc_xmax == ddc::BoundCond::PERIODIC,
+            SplineRThetaBuilderAdvection::builder_type2::s_sbc_xmax == ddc::SplineBuilderClosure::PERIODIC,
             "Expected periodic boundary conditions in the poloidal direction.");
 
 public:

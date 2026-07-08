@@ -13,14 +13,14 @@
 template <class T>
 struct NonUniformInterpolationPointsFixture;
 
-template <ddc::BoundCond BcMin, ddc::BoundCond BcMax>
+template <ddc::SplineBuilderClosure BcMin, ddc::SplineBuilderClosure BcMax>
 struct NonUniformInterpolationPointsFixture<std::tuple<
-        std::integral_constant<ddc::BoundCond, BcMin>,
-        std::integral_constant<ddc::BoundCond, BcMax>>> : public testing::Test
+        std::integral_constant<ddc::SplineBuilderClosure, BcMin>,
+        std::integral_constant<ddc::SplineBuilderClosure, BcMax>>> : public testing::Test
 {
     struct X
     {
-        static bool constexpr PERIODIC = (BcMin == ddc::BoundCond::PERIODIC);
+        static bool constexpr PERIODIC = (BcMin == ddc::SplineBuilderClosure::PERIODIC);
     };
     struct GridX : NonUniformGridBase<X>
     {
@@ -29,23 +29,23 @@ struct NonUniformInterpolationPointsFixture<std::tuple<
     {
     };
 
-    static constexpr ddc::BoundCond bc_min = BcMin;
-    static constexpr ddc::BoundCond bc_max = BcMax;
+    static constexpr ddc::SplineBuilderClosure bc_min = BcMin;
+    static constexpr ddc::SplineBuilderClosure bc_max = BcMax;
 };
 
 using Cases = tuple_to_types_t<std::tuple<
         std::tuple<
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::HERMITE>,
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::HERMITE>>,
+                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::HERMITE>,
+                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::HERMITE>>,
         std::tuple<
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::GREVILLE>,
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::GREVILLE>>,
+                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::GREVILLE>,
+                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::GREVILLE>>,
         std::tuple<
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::HERMITE>,
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::GREVILLE>>,
+                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::HERMITE>,
+                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::GREVILLE>>,
         std::tuple<
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::PERIODIC>,
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::PERIODIC>>>>;
+                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::PERIODIC>,
+                std::integral_constant<ddc::SplineBuilderClosure, ddc::SplineBuilderClosure::PERIODIC>>>>;
 
 TYPED_TEST_SUITE(NonUniformInterpolationPointsFixture, Cases);
 
@@ -88,7 +88,7 @@ TYPED_TEST(NonUniformInterpolationPointsFixture, CoordinatesMatchAfterInit)
         EXPECT_DOUBLE_EQ(double(ddc::coordinate(idx_range.front() + i)), double(interp_points[i]));
     }
 
-    if constexpr (TestFixture::bc_min == ddc::BoundCond::PERIODIC) {
+    if constexpr (TestFixture::bc_min == ddc::SplineBuilderClosure::PERIODIC) {
         EXPECT_DOUBLE_EQ(ddcHelper::total_interval_length(idx_range), x_max - x_min);
     }
 }

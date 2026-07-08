@@ -27,8 +27,8 @@ struct BSplinesY
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineXBoundary = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineYBoundary = ddc::SplineBuilderClosure::PERIODIC;
 
 ExtrapolationRule constexpr SplineXExtrapolation = ExtrapolationRule::PERIODIC;
 ExtrapolationRule constexpr SplineYExtrapolation = ExtrapolationRule::PERIODIC;

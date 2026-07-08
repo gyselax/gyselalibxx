@@ -32,7 +32,7 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineXBoundary = ddc::SplineBuilderClosure::PERIODIC;
 
 
 // Discrete dimension
