@@ -43,6 +43,7 @@ eval -- "$(
         ddc \
         gcc \
         ginkgo \
+        gmgpolar \
         googletest \
         kokkos \
         kokkos-kernels \
