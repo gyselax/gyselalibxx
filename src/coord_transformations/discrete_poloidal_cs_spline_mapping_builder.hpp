@@ -255,10 +255,10 @@ private:
     struct Build_BuilderType;
 
     template <
-            ddc::SplineBuilderClosure BcLower1,
-            ddc::SplineBuilderClosure BcUpper1,
-            ddc::SplineBuilderClosure BcLower2,
-            ddc::SplineBuilderClosure BcUpper2,
+            ddc::SplineBuilderClosure SBCLower1,
+            ddc::SplineBuilderClosure SBCUpper1,
+            ddc::SplineBuilderClosure SBCLower2,
+            ddc::SplineBuilderClosure SBCUpper2,
             ddc::SplineSolver Solver>
     struct Build_BuilderType<ddc::SplineBuilder2D<
             ExecSpace,
@@ -267,10 +267,10 @@ private:
             BSplinesThetaOriginal,
             GridROriginal,
             GridThetaOriginal,
-            BcLower1,
-            BcUpper1,
-            BcLower2,
-            BcUpper2,
+            SBCLower1,
+            SBCUpper1,
+            SBCLower2,
+            SBCUpper2,
             Solver>>
     {
         using type = ddc::SplineBuilder2D<
@@ -280,10 +280,10 @@ private:
                 BSplinesThetaRefined,
                 GridRRefined,
                 GridThetaRefined,
-                BcLower1,
-                BcUpper1,
-                BcLower2,
-                BcUpper2,
+                SBCLower1,
+                SBCUpper1,
+                SBCLower2,
+                SBCUpper2,
                 Solver>;
     };
 

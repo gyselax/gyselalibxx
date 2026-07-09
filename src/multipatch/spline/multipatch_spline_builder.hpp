@@ -29,8 +29,8 @@
  * @tparam MemorySpace The space (CPU/GPU) where the coefficients and values are stored.
  * @tparam BSplineOnPatch A type alias which provides the BSpline type along which the splines are built.
  * @tparam GridOnPatch A type alias which provides the Grid type along which the interpolation points of the splines are found.
- * @tparam BcLower The lower boundary condition.
- * @tparam BcUpper The upper boundary condition.
+ * @tparam SBCLower The lower spline closure.
+ * @tparam SBCUpper The upper spline closure.
  * @tparam BcTransition The boundary condition used at the interface between 2 patches.
  * @tparam Connectivity A MultipatchConnectivity object describing the interfaces between patches.
  * @tparam Solver The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details.
@@ -44,8 +44,8 @@ template <
         typename BSplineOnPatch,
         template <typename P>
         typename GridOnPatch,
-        ddc::SplineBuilderClosure BcLower,
-        ddc::SplineBuilderClosure BcUpper,
+        ddc::SplineBuilderClosure SBCLower,
+        ddc::SplineBuilderClosure SBCUpper,
         ddc::SplineBuilderClosure BcTransition,
         class Connectivity,
         ddc::SplineSolver Solver,
@@ -87,8 +87,8 @@ class MultipatchSplineBuilder
                 MemorySpace,
                 BSplineOnPatch<Patch>,
                 GridOnPatch<Patch>,
-                std::is_same_v<lower_matching_edge, OutsideEdge> ? BcLower : BcTransition,
-                std::is_same_v<upper_matching_edge, OutsideEdge> ? BcUpper : BcTransition,
+                std::is_same_v<lower_matching_edge, OutsideEdge> ? SBCLower : BcTransition,
+                std::is_same_v<upper_matching_edge, OutsideEdge> ? SBCUpper : BcTransition,
                 Solver>;
     };
 

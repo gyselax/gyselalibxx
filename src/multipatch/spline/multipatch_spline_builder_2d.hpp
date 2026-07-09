@@ -31,10 +31,10 @@
  * @tparam BSpline2OnPatch A type alias which provides the second BSpline type along which the splines are built.
  * @tparam Grid1OnPatch A type alias which provides the first Grid type along which the interpolation points of the splines are found.
  * @tparam Grid2OnPatch A type alias which provides the second Grid type along which the interpolation points of the splines are found.
- * @tparam BcLower1 The lower boundary condition on the first dimension.
- * @tparam BcUpper1 The upper boundary condition on the first dimension.
- * @tparam BcLower2 The lower boundary condition on the second dimension.
- * @tparam BcUpper2 The upper boundary condition on the second dimension.
+ * @tparam SBCLower1 The lower spline closure on the first dimension.
+ * @tparam SBCUpper1 The upper spline closure on the first dimension.
+ * @tparam SBCLower2 The lower spline closure on the second dimension.
+ * @tparam SBCUpper2 The upper spline closure on the second dimension.
  * @tparam BcTransition The boundary condition used at the interface between 2 patches.
  * @tparam Connectivity A MultipatchConnectivity object describing the interfaces between patches.
  * @tparam Solver The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details.
@@ -52,10 +52,10 @@ template <
         typename Grid1OnPatch,
         template <typename P>
         typename Grid2OnPatch,
-        ddc::SplineBuilderClosure BcLower1,
-        ddc::SplineBuilderClosure BcUpper1,
-        ddc::SplineBuilderClosure BcLower2,
-        ddc::SplineBuilderClosure BcUpper2,
+        ddc::SplineBuilderClosure SBCLower1,
+        ddc::SplineBuilderClosure SBCUpper1,
+        ddc::SplineBuilderClosure SBCLower2,
+        ddc::SplineBuilderClosure SBCUpper2,
         ddc::SplineBuilderClosure BcTransition,
         class Connectivity,
         ddc::SplineSolver Solver,
@@ -131,10 +131,10 @@ class MultipatchSplineBuilder2D
                 BSpline2OnPatch<Patch>,
                 Grid1OnPatch<Patch>,
                 Grid2OnPatch<Patch>,
-                std::is_same_v<lower_matching_edge1, OutsideEdge> ? BcLower1 : BcTransition,
-                std::is_same_v<upper_matching_edge1, OutsideEdge> ? BcUpper1 : BcTransition,
-                std::is_same_v<lower_matching_edge2, OutsideEdge> ? BcLower2 : BcTransition,
-                std::is_same_v<upper_matching_edge2, OutsideEdge> ? BcUpper2 : BcTransition,
+                std::is_same_v<lower_matching_edge1, OutsideEdge> ? SBCLower1 : BcTransition,
+                std::is_same_v<upper_matching_edge1, OutsideEdge> ? SBCUpper1 : BcTransition,
+                std::is_same_v<lower_matching_edge2, OutsideEdge> ? SBCLower2 : BcTransition,
+                std::is_same_v<upper_matching_edge2, OutsideEdge> ? SBCUpper2 : BcTransition,
                 Solver>;
     };
 
