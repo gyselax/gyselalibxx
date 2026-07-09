@@ -243,7 +243,7 @@ public:
     using typename base_type::IdxRangeXY;
     using typename base_type::IdxRangeY;
 
-    static constexpr ddc::SplineBuilderClosure SplineBoundary
+    static constexpr ddc::SplineBuilderClosure SplineClosure
             = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC
                           : ddc::SplineBuilderClosure::GREVILLE;
 
@@ -251,14 +251,14 @@ public:
     {
     };
     using SplineInterpPointsX
-            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineBoundary, SplineBoundary>;
+            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineClosure, SplineClosure>;
 
 
     struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree>
     {
     };
     using SplineInterpPointsY
-            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineBoundary, SplineBoundary>;
+            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineClosure, SplineClosure>;
 
     using BSplinesDDim = find_grid_t<DDim, ddc::detail::TypeSeq<BSplinesX, BSplinesY>>;
 
@@ -276,8 +276,8 @@ public:
             GridDDim,
             SplineExtrapolation,
             SplineExtrapolation,
-            SplineBoundary,
-            SplineBoundary>;
+            SplineClosure,
+            SplineClosure>;
 
 public:
     PartialDerivativeTestSpline1D(
@@ -366,7 +366,7 @@ public:
     using typename base_type::IdxRangeXY;
     using typename base_type::IdxRangeY;
 
-    static constexpr ddc::SplineBuilderClosure SplineBoundary
+    static constexpr ddc::SplineBuilderClosure SplineClosure
             = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC
                           : ddc::SplineBuilderClosure::GREVILLE;
 
@@ -374,13 +374,13 @@ public:
     {
     };
     using SplineInterpPointsX
-            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineBoundary, SplineBoundary>;
+            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineClosure, SplineClosure>;
 
     struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree>
     {
     };
     using SplineInterpPointsY
-            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineBoundary, SplineBoundary>;
+            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineClosure, SplineClosure>;
 
     using SplineBuilder2D = ddc::SplineBuilder2D<
             Kokkos::DefaultExecutionSpace,
@@ -389,10 +389,10 @@ public:
             BSplinesY,
             GridX,
             GridY,
-            SplineBoundary,
-            SplineBoundary,
-            SplineBoundary,
-            SplineBoundary,
+            SplineClosure,
+            SplineClosure,
+            SplineClosure,
+            SplineClosure,
             ddc::SplineSolver::LAPACK>;
 
     using XExtrapolationRule = std::conditional_t<

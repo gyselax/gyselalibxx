@@ -56,8 +56,8 @@ struct BSplinesY : ddc::UniformBSplines<Y, 3>
 {
 };
 
-ddc::SplineBuilderClosure constexpr SplineXBoundary = ddc::SplineBuilderClosure::PERIODIC;
-ddc::SplineBuilderClosure constexpr SplineYBoundary = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineYClosure = ddc::SplineBuilderClosure::PERIODIC;
 
 // Discrete dimensions
 struct GridX : UniformGridBase<X>
@@ -75,9 +75,9 @@ struct GridVy : UniformGridBase<Vy>
 
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsY
-        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYClosure, SplineYClosure>;
 
 
 using IdxXY = Idx<GridX, GridY>;
@@ -127,8 +127,8 @@ using SplineInterpolatorX = SplineInterpolator<
         GridX,
         PERIODIC,
         PERIODIC,
-        SplineXBoundary,
-        SplineXBoundary>;
+        SplineXClosure,
+        SplineXClosure>;
 
 using SplineInterpolatorY = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
@@ -136,8 +136,8 @@ using SplineInterpolatorY = SplineInterpolator<
         GridY,
         PERIODIC,
         PERIODIC,
-        SplineYBoundary,
-        SplineYBoundary>;
+        SplineYClosure,
+        SplineYClosure>;
 
 
 

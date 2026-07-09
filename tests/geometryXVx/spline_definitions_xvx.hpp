@@ -31,22 +31,22 @@ struct BSplinesVx
 {
 };
 
-auto constexpr SplineXBoundary
+auto constexpr SplineXClosure
         = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
-auto constexpr SplineVxBoundary = ddc::SplineBuilderClosure::HERMITE;
+auto constexpr SplineVxClosure = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
 using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
-        SplineXBoundary,
-        SplineXBoundary,
+        SplineXClosure,
+        SplineXClosure,
         ddc::SplineSolver::LAPACK>;
 using SplineXEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
@@ -66,8 +66,8 @@ using SplineVxBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
         GridVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
+        SplineVxClosure,
+        SplineVxClosure,
         ddc::SplineSolver::LAPACK>;
 using SplineVxEvaluator = ddc::SplineEvaluator<
         Kokkos::DefaultExecutionSpace,
@@ -85,8 +85,8 @@ using SplineInterpolatorX = SplineInterpolator<
         GridX,
         XExtrapRule,
         XExtrapRule,
-        SplineXBoundary,
-        SplineXBoundary>;
+        SplineXClosure,
+        SplineXClosure>;
 
 using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
@@ -94,8 +94,8 @@ using SplineInterpolatorVx = SplineInterpolator<
         GridVx,
         CONSTANT,
         CONSTANT,
-        SplineVxBoundary,
-        SplineVxBoundary>;
+        SplineVxClosure,
+        SplineVxClosure>;
 
 using IdxRangeBSX = IdxRange<BSplinesX>;
 

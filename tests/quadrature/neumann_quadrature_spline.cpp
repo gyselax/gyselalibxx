@@ -20,10 +20,10 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-auto constexpr SplineXBoundary = ddc::SplineBuilderClosure::HERMITE;
+auto constexpr SplineXClosure = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsX
-        = ddc::KnotsAsInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::KnotsAsInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
@@ -34,8 +34,8 @@ using SplineXBuilder = ddc::SplineBuilder<
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
-        SplineXBoundary,
-        SplineXBoundary,
+        SplineXClosure,
+        SplineXClosure,
         ddc::SplineSolver::LAPACK>;
 
 using IdxStepX = IdxStep<GridX>;

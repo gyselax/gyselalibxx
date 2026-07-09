@@ -27,11 +27,11 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-auto constexpr SplineXBoundary
+auto constexpr SplineXClosure
         = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
@@ -53,8 +53,8 @@ TEST(SplineUniformQuadrature, ExactForConstantFunc)
             Kokkos::HostSpace,
             BSplinesX,
             GridX,
-            SplineXBoundary,
-            SplineXBoundary,
+            SplineXClosure,
+            SplineXClosure,
             ddc::SplineSolver::LAPACK>;
 
     ddc::init_discrete_space<BSplinesX>(x_min, x_max, x_size);
@@ -102,14 +102,14 @@ double compute_error(int n_elems)
     using BSplinesY = typename ComputeErrorTraits<N>::BSplinesY;
     using GrevillePointsY = typename ComputeErrorTraits<N>::GrevillePointsY;
     using GridY = typename ComputeErrorTraits<N>::GridY;
-    auto constexpr SplineYBoundary = ddc::SplineBuilderClosure::GREVILLE;
+    auto constexpr SplineYClosure = ddc::SplineBuilderClosure::GREVILLE;
     using SplineYBuilder = ddc::SplineBuilder<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::HostSpace,
             BSplinesY,
             GridY,
-            SplineYBoundary,
-            SplineYBoundary,
+            SplineYClosure,
+            SplineYClosure,
             ddc::SplineSolver::LAPACK>;
     using IdxRangeY = IdxRange<GridY>;
     using DFieldMemY = DFieldMem<IdxRangeY>;

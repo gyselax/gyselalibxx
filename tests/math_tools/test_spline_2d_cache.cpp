@@ -30,13 +30,13 @@ struct BSplinesY : ddc::UniformBSplines<Y, 3>
 {
 };
 
-auto constexpr SplineXBoundary = ddc::SplineBuilderClosure::GREVILLE;
-auto constexpr SplineYBoundary = ddc::SplineBuilderClosure::GREVILLE;
+auto constexpr SplineXClosure = ddc::SplineBuilderClosure::GREVILLE;
+auto constexpr SplineYClosure = ddc::SplineBuilderClosure::GREVILLE;
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsY
-        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYClosure, SplineYClosure>;
 
 struct GridX : NonUniformGridBase<X>
 {
@@ -60,10 +60,10 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
         BSplinesY,
         GridX,
         GridY,
-        SplineXBoundary,
-        SplineXBoundary,
-        SplineYBoundary,
-        SplineYBoundary,
+        SplineXClosure,
+        SplineXClosure,
+        SplineYClosure,
+        SplineYClosure,
         ddc::SplineSolver::LAPACK>;
 
 using IdxRangeBSXY = SplineXYBuilder::batched_spline_domain_type<IdxRangeXY>;

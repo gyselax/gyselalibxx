@@ -51,9 +51,8 @@ struct GridTheta : NonUniformGridBase<Theta>
 };
 
 static constexpr int BSDegree = 3;
-static constexpr ddc::SplineBuilderClosure SplineRBoundary = ddc::SplineBuilderClosure::GREVILLE;
-static constexpr ddc::SplineBuilderClosure SplineThetaBoundary
-        = ddc::SplineBuilderClosure::PERIODIC;
+static constexpr ddc::SplineBuilderClosure SplineRClosure = ddc::SplineBuilderClosure::GREVILLE;
+static constexpr ddc::SplineBuilderClosure SplineThetaClosure = ddc::SplineBuilderClosure::PERIODIC;
 
 struct BSplinesR : ddc::NonUniformBSplines<R, BSDegree>
 {
@@ -69,10 +68,10 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         BSplinesTheta,
         GridR,
         GridTheta,
-        SplineRBoundary,
-        SplineRBoundary,
-        SplineThetaBoundary,
-        SplineThetaBoundary,
+        SplineRClosure,
+        SplineRClosure,
+        SplineThetaClosure,
+        SplineThetaClosure,
         ddc::SplineSolver::LAPACK>;
 
 using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
@@ -88,9 +87,9 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         ddc::PeriodicExtrapolationRule<Theta>>;
 
 using SplineInterpPointsR
-        = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRClosure, SplineRClosure>;
 using SplineInterpPointsTheta
-        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaClosure, SplineThetaClosure>;
 
 using IdxRangeR = IdxRange<GridR>;
 using IdxRangeTheta = IdxRange<GridTheta>;
