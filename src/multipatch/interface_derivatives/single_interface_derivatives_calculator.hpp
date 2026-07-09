@@ -155,11 +155,11 @@ public:
      * on the patch 1. 
      * @param idx_range_1d_2 1D index range perpendicular to the Interface, 
      * on the patch 2. 
-     * @param Bound1 The boundary condition type on the opposite edge of the interface on 
+     * @param Closure1 The spline closure type on the opposite edge of the interface on 
      * the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If 
      * ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the 
      * additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. 
-     * @param Bound2 The boundary condition type on the opposite edge of the interface on 
+     * @param Closure2 The spline closure type on the opposite edge of the interface on 
      * the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If 
      * ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the 
      * additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense.  
@@ -167,10 +167,10 @@ public:
     SingleInterfaceDerivativesCalculator(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
-            ddc::SplineBuilderClosure const& Bound1 = ddc::SplineBuilderClosure::HERMITE,
-            ddc::SplineBuilderClosure const& Bound2 = ddc::SplineBuilderClosure::HERMITE)
-        : m_is_cell_bound_1_with_extra_interpol_pt(Bound1 == ddc::SplineBuilderClosure::GREVILLE)
-        , m_is_cell_bound_2_with_extra_interpol_pt(Bound2 == ddc::SplineBuilderClosure::GREVILLE)
+            ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure const& Closure2 = ddc::SplineBuilderClosure::HERMITE)
+        : m_is_cell_bound_1_with_extra_interpol_pt(Closure1 == ddc::SplineBuilderClosure::GREVILLE)
+        , m_is_cell_bound_2_with_extra_interpol_pt(Closure2 == ddc::SplineBuilderClosure::GREVILLE)
         , m_idx_range_perp_1(idx_range_1d_1)
         , m_idx_range_perp_2(idx_range_1d_2)
         , m_weights_patch_1_alloc(
@@ -184,8 +184,8 @@ public:
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
     {
-        assert(Bound1 != ddc::SplineBuilderClosure::PERIODIC);
-        assert(Bound2 != ddc::SplineBuilderClosure::PERIODIC);
+        assert(Closure1 != ddc::SplineBuilderClosure::PERIODIC);
+        assert(Closure2 != ddc::SplineBuilderClosure::PERIODIC);
 
         // Two interpolation points have to be added if the derivatives are not closure condition.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
@@ -236,22 +236,22 @@ public:
      * See @ref SingleInterfaceDerivativesCalculatorInstantiator.
      * @param idx_range_a Index range on one patch. 
      * @param idx_range_b Index range on the other patch. 
-     * @param Bound1 The boundary condition type on the opposite edge of the interface on 
+     * @param Closure1 The spline closure type on the opposite edge of the interface on 
      * the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. 
-     * @param Bound2 The boundary condition type on the opposite edge of the interface on 
+     * @param Closure2 The spline closure type on the opposite edge of the interface on 
      * the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. 
      */
     template <class IdxRangeA, class IdxRangeB>
     SingleInterfaceDerivativesCalculator(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
-            ddc::SplineBuilderClosure const& Bound1 = ddc::SplineBuilderClosure::HERMITE,
-            ddc::SplineBuilderClosure const& Bound2 = ddc::SplineBuilderClosure::HERMITE)
+            ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure const& Closure2 = ddc::SplineBuilderClosure::HERMITE)
         : SingleInterfaceDerivativesCalculator(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
-                Bound1,
-                Bound2)
+                Closure1,
+                Closure2)
     {
         static_assert(ddc::is_discrete_domain_v<IdxRangeA>);
         static_assert(ddc::is_discrete_domain_v<IdxRangeB>);
