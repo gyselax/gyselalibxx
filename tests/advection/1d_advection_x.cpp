@@ -32,7 +32,7 @@ struct BSplinesX : ddc::UniformBSplines<X, 3>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
 
 
 // Discrete dimension
@@ -41,7 +41,7 @@ struct GridX : UniformGridBase<X>
 };
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 
 using IdxRangeX = IdxRange<GridX>;
 using IdxX = Idx<GridX>;
@@ -63,8 +63,8 @@ using SplineInterpolatorX = SplineInterpolator<
         GridX,
         PERIODIC,
         PERIODIC,
-        SplineXBoundary,
-        SplineXBoundary>;
+        SplineXClosure,
+        SplineXClosure>;
 
 // Lagrange basis for the advection field interpolation
 struct LagBasisX : UniformLagrangeBasis<X, 3, double>
