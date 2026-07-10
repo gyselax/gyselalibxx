@@ -747,13 +747,13 @@ public:
 private:
     using GrevillePointsR = ddc::GrevilleInterpolationPoints&lt;
             BSplinesRRefined,
-            SplineBuilder::builder_type1::s_bc_xmin,
-            SplineBuilder::builder_type1::s_bc_xmax&gt;;
+            SplineBuilder::builder_type1::s_sbc_xmin,
+            SplineBuilder::builder_type1::s_sbc_xmax&gt;;
 
     using GrevillePointsTheta = ddc::GrevilleInterpolationPoints&lt;
             BSplinesThetaRefined,
-            SplineBuilder::builder_type2::s_bc_xmin,
-            SplineBuilder::builder_type2::s_bc_xmax&gt;;
+            SplineBuilder::builder_type2::s_sbc_xmin,
+            SplineBuilder::builder_type2::s_sbc_xmax&gt;;
 
 public:
     struct GridRRefined : GrevillePointsR::interpolation_discrete_dimension_type
@@ -772,10 +772,10 @@ private:
     struct Build_BuilderType;
 
     template &lt;
-            ddc::BoundCond BcLower1,
-            ddc::BoundCond BcUpper1,
-            ddc::BoundCond BcLower2,
-            ddc::BoundCond BcUpper2,
+            ddc::SplineBuilderClosure SBCLower1,
+            ddc::SplineBuilderClosure SBCUpper1,
+            ddc::SplineBuilderClosure SBCLower2,
+            ddc::SplineBuilderClosure SBCUpper2,
             ddc::SplineSolver Solver&gt;
     struct Build_BuilderType&lt;ddc::SplineBuilder2D&lt;
             ExecSpace,
@@ -784,10 +784,10 @@ private:
             BSplinesThetaOriginal,
             GridROriginal,
             GridThetaOriginal,
-            BcLower1,
-            BcUpper1,
-            BcLower2,
-            BcUpper2,
+            SBCLower1,
+            SBCUpper1,
+            SBCLower2,
+            SBCUpper2,
             Solver&gt;&gt;
     {
         using type = ddc::SplineBuilder2D&lt;
@@ -797,10 +797,10 @@ private:
                 BSplinesThetaRefined,
                 GridRRefined,
                 GridThetaRefined,
-                BcLower1,
-                BcUpper1,
-                BcLower2,
-                BcUpper2,
+                SBCLower1,
+                SBCUpper1,
+                SBCLower2,
+                SBCUpper2,
                 Solver&gt;;
     };
 

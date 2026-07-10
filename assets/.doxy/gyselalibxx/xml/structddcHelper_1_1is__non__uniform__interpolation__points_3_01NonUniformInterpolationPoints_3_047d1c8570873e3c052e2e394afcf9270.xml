@@ -8,12 +8,12 @@
         <type>class BSplines</type>
       </param>
       <param>
-        <type>ddc::BoundCond</type>
+        <type>ddc::SplineBuilderClosure</type>
         <declname>BcXmin</declname>
         <defname>BcXmin</defname>
       </param>
       <param>
-        <type>ddc::BoundCond</type>
+        <type>ddc::SplineBuilderClosure</type>
         <declname>BcXmax</declname>
         <defname>BcXmax</defname>
       </param>

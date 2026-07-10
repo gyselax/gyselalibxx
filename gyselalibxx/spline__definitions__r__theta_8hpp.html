@@ -650,19 +650,19 @@
 <td style="text-align: left;"><a href="#typedef-spline2dmem"><strong>Spline2DMem</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, SplineRBoundary, SplineRBoundary &gt;</td>
+<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, SplineRClosure, SplineRClosure &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splineinterppointsr"><strong>SplineInterpPointsR</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, SplineThetaBoundary, SplineThetaBoundary &gt;</td>
+<td style="text-align: right;">typedef ddc::GrevilleInterpolationPoints&lt; <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, SplineThetaClosure, SplineThetaClosure &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splineinterppointstheta"><strong>SplineInterpPointsTheta</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, SplineRBoundary, SplineRBoundary, SplineThetaBoundary, SplineThetaBoundary, ddc::SplineSolver::LAPACK &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splinerthetabuilder"><strong>SplineRThetaBuilder</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, SplineRBoundary, SplineRBoundary, SplineThetaBoundary, SplineThetaBoundary, ddc::SplineSolver::LAPACK &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, <a href="structBSplinesR.html"><strong>BSplinesR</strong></a>, <a href="structBSplinesTheta.html"><strong>BSplinesTheta</strong></a>, <a href="structGridR.html"><strong>GridR</strong></a>, <a href="structGridTheta.html"><strong>GridTheta</strong></a>, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK &gt;</td>
 <td style="text-align: left;"><a href="#typedef-splinerthetabuilder_host"><strong>SplineRThetaBuilder_host</strong></a>  <br></td>
 </tr>
 <tr>
@@ -717,12 +717,12 @@
 <td style="text-align: left;"><a href="#variable-bsplineonuniformcellstheta"><strong>BsplineOnUniformCellsTheta</strong></a>   = <code>false</code><br></td>
 </tr>
 <tr>
-<td style="text-align: right;">ddc::BoundCond constexpr</td>
-<td style="text-align: left;"><a href="#variable-splinerboundary"><strong>SplineRBoundary</strong></a>   = <code>ddc::BoundCond::GREVILLE</code><br></td>
+<td style="text-align: right;">ddc::SplineBuilderClosure constexpr</td>
+<td style="text-align: left;"><a href="#variable-splinerclosure"><strong>SplineRClosure</strong></a>   = <code>ddc::SplineBuilderClosure::GREVILLE</code><br></td>
 </tr>
 <tr>
-<td style="text-align: right;">ddc::BoundCond constexpr</td>
-<td style="text-align: left;"><a href="#variable-splinethetaboundary"><strong>SplineThetaBoundary</strong></a>   = <code>ddc::BoundCond::PERIODIC</code><br></td>
+<td style="text-align: right;">ddc::SplineBuilderClosure constexpr</td>
+<td style="text-align: left;"><a href="#variable-splinethetaclosure"><strong>SplineThetaClosure</strong></a>   = <code>ddc::SplineBuilderClosure::PERIODIC</code><br></td>
 </tr>
 </tbody>
 </table>
@@ -786,22 +786,22 @@
 <hr>
 
 <h3 id="typedef-splineinterppointsr">typedef SplineInterpPointsR</h3>
-<pre><code class="language-C++">using SplineInterpPointsR =  ddc::GrevilleInterpolationPoints&lt;BSplinesR, SplineRBoundary, SplineRBoundary&gt;;
+<pre><code class="language-C++">using SplineInterpPointsR =  ddc::GrevilleInterpolationPoints&lt;BSplinesR, SplineRClosure, SplineRClosure&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splineinterppointstheta">typedef SplineInterpPointsTheta</h3>
-<pre><code class="language-C++">using SplineInterpPointsTheta =  ddc::GrevilleInterpolationPoints&lt;BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary&gt;;
+<pre><code class="language-C++">using SplineInterpPointsTheta =  ddc::GrevilleInterpolationPoints&lt;BSplinesTheta, SplineThetaClosure, SplineThetaClosure&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinerthetabuilder">typedef SplineRThetaBuilder</h3>
-<pre><code class="language-C++">using SplineRThetaBuilder =  ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRBoundary, SplineRBoundary, SplineThetaBoundary, SplineThetaBoundary, ddc::SplineSolver::LAPACK&gt;;
+<pre><code class="language-C++">using SplineRThetaBuilder =  ddc::SplineBuilder2D&lt; Kokkos::DefaultExecutionSpace, typename Kokkos::DefaultExecutionSpace::memory_space, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-splinerthetabuilder_host">typedef SplineRThetaBuilder_host</h3>
-<pre><code class="language-C++">using SplineRThetaBuilder_host =  ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRBoundary, SplineRBoundary, SplineThetaBoundary, SplineThetaBoundary, ddc::SplineSolver::LAPACK&gt;;
+<pre><code class="language-C++">using SplineRThetaBuilder_host =  ddc::SplineBuilder2D&lt; Kokkos::DefaultHostExecutionSpace, Kokkos::HostSpace, BSplinesR, BSplinesTheta, GridR, GridTheta, SplineRClosure, SplineRClosure, SplineThetaClosure, SplineThetaClosure, ddc::SplineSolver::LAPACK&gt;;
 </code></pre>
 <hr>
 
@@ -855,13 +855,13 @@
 </code></pre>
 <hr>
 
-<h3 id="variable-splinerboundary">variable SplineRBoundary</h3>
-<pre><code class="language-C++">ddc::BoundCond constexpr SplineRBoundary;
+<h3 id="variable-splinerclosure">variable SplineRClosure</h3>
+<pre><code class="language-C++">ddc::SplineBuilderClosure constexpr SplineRClosure;
 </code></pre>
 <hr>
 
-<h3 id="variable-splinethetaboundary">variable SplineThetaBoundary</h3>
-<pre><code class="language-C++">ddc::BoundCond constexpr SplineThetaBoundary;
+<h3 id="variable-splinethetaclosure">variable SplineThetaClosure</h3>
+<pre><code class="language-C++">ddc::SplineBuilderClosure constexpr SplineThetaClosure;
 </code></pre>
 <hr>
 

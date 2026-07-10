@@ -367,8 +367,8 @@
 <codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal">InterpGrid,</highlight></codeline>
 <codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtrapolationRule<sp/>MinExtrapRule,</highlight></codeline>
 <codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ExtrapolationRule<sp/>MaxExtrapRule,</highlight></codeline>
-<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::BoundCond<sp/>MinBound,</highlight></codeline>
-<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::BoundCond<sp/>MaxBound,</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure<sp/>MinBound,</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineBuilderClosure<sp/>MaxBound,</highlight></codeline>
 <codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ddc::SplineSolver<sp/>Solver<sp/>=<sp/>ddc::SplineSolver::LAPACK&gt;</highlight></codeline>
 <codeline lineno="38" refid="classSplineInterpolator" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref></highlight></codeline>
 <codeline lineno="39"><highlight class="normal">{</highlight></codeline>
@@ -377,8 +377,8 @@
 <codeline lineno="42"><highlight class="normal"></highlight></codeline>
 <codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">constexpr</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>is_periodic<sp/>=<sp/>continuous_dimension_type::PERIODIC;</highlight></codeline>
 <codeline lineno="44"><highlight class="normal"></highlight></codeline>
-<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_periodic<sp/>==<sp/>(MinBound<sp/>==<sp/>ddc::BoundCond::PERIODIC));</highlight></codeline>
-<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_periodic<sp/>==<sp/>(MaxBound<sp/>==<sp/>ddc::BoundCond::PERIODIC));</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_periodic<sp/>==<sp/>(MinBound<sp/>==<sp/>ddc::SplineBuilderClosure::PERIODIC));</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_periodic<sp/>==<sp/>(MaxBound<sp/>==<sp/>ddc::SplineBuilderClosure::PERIODIC));</highlight></codeline>
 <codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_periodic<sp/>==<sp/>(MinExtrapRule<sp/>==<sp/>ExtrapolationRule::PERIODIC));</highlight></codeline>
 <codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static_assert</highlight><highlight class="normal">(is_periodic<sp/>==<sp/>(MaxExtrapRule<sp/>==<sp/>ExtrapolationRule::PERIODIC));</highlight></codeline>
 <codeline lineno="49"><highlight class="normal"></highlight></codeline>

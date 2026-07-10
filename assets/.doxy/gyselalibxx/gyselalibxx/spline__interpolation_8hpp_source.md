@@ -21,8 +21,8 @@ template <
         class InterpGrid,
         ExtrapolationRule MinExtrapRule,
         ExtrapolationRule MaxExtrapRule,
-        ddc::BoundCond MinBound,
-        ddc::BoundCond MaxBound,
+        ddc::SplineBuilderClosure MinBound,
+        ddc::SplineBuilderClosure MaxBound,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
 class SplineInterpolator
 {
@@ -31,8 +31,8 @@ private:
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
-    static_assert(is_periodic == (MinBound == ddc::BoundCond::PERIODIC));
-    static_assert(is_periodic == (MaxBound == ddc::BoundCond::PERIODIC));
+    static_assert(is_periodic == (MinBound == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic == (MaxBound == ddc::SplineBuilderClosure::PERIODIC));
     static_assert(is_periodic == (MinExtrapRule == ExtrapolationRule::PERIODIC));
     static_assert(is_periodic == (MaxExtrapRule == ExtrapolationRule::PERIODIC));
 

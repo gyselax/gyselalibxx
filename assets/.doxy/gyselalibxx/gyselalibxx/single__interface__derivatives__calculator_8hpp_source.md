@@ -102,10 +102,10 @@ public:
     SingleInterfaceDerivativesCalculator(
             IdxRange1DPerp_1 const& idx_range_1d_1,
             IdxRange1DPerp_2 const& idx_range_1d_2,
-            ddc::BoundCond const& Bound1 = ddc::BoundCond::HERMITE,
-            ddc::BoundCond const& Bound2 = ddc::BoundCond::HERMITE)
-        : m_is_cell_bound_1_with_extra_interpol_pt(Bound1 == ddc::BoundCond::GREVILLE)
-        , m_is_cell_bound_2_with_extra_interpol_pt(Bound2 == ddc::BoundCond::GREVILLE)
+            ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure const& Closure2 = ddc::SplineBuilderClosure::HERMITE)
+        : m_is_cell_bound_1_with_extra_interpol_pt(Closure1 == ddc::SplineBuilderClosure::GREVILLE)
+        , m_is_cell_bound_2_with_extra_interpol_pt(Closure2 == ddc::SplineBuilderClosure::GREVILLE)
         , m_idx_range_perp_1(idx_range_1d_1)
         , m_idx_range_perp_2(idx_range_1d_2)
         , m_weights_patch_1_alloc(
@@ -119,8 +119,8 @@ public:
         , m_weights_patch_1(m_weights_patch_1_alloc)
         , m_weights_patch_2(m_weights_patch_2_alloc)
     {
-        assert(Bound1 != ddc::BoundCond::PERIODIC);
-        assert(Bound2 != ddc::BoundCond::PERIODIC);
+        assert(Closure1 != ddc::SplineBuilderClosure::PERIODIC);
+        assert(Closure2 != ddc::SplineBuilderClosure::PERIODIC);
 
         // Two interpolation points have to be added if the derivatives are not closure condition.
         if (m_is_cell_bound_1_with_extra_interpol_pt) {
@@ -170,13 +170,13 @@ public:
     SingleInterfaceDerivativesCalculator(
             IdxRangeA const& idx_range_a,
             IdxRangeB const& idx_range_b,
-            ddc::BoundCond const& Bound1 = ddc::BoundCond::HERMITE,
-            ddc::BoundCond const& Bound2 = ddc::BoundCond::HERMITE)
+            ddc::SplineBuilderClosure const& Closure1 = ddc::SplineBuilderClosure::HERMITE,
+            ddc::SplineBuilderClosure const& Closure2 = ddc::SplineBuilderClosure::HERMITE)
         : SingleInterfaceDerivativesCalculator(
                 IdxRange1DPerp_1(idx_range_a, idx_range_b),
                 IdxRange1DPerp_2(idx_range_a, idx_range_b),
-                Bound1,
-                Bound2)
+                Closure1,
+                Closure2)
     {
         static_assert(ddc::is_discrete_domain_v<IdxRangeA>);
         static_assert(ddc::is_discrete_domain_v<IdxRangeB>);
@@ -197,8 +197,8 @@ public:
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size())))
                         : idx_range_1d_2.take_last(IdxStep<EdgePerpGrid2>(
                                 Kokkos::min(number_chosen_cells + 1, idx_range_1d_2.size()))),
-                ddc::BoundCond::HERMITE,
-                ddc::BoundCond::HERMITE)
+                ddc::SplineBuilderClosure::HERMITE,
+                ddc::SplineBuilderClosure::HERMITE)
     {
     }
 

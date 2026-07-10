@@ -583,7 +583,7 @@
 
 namespace ddcHelper {
 
-template &lt;class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax&gt;
+template &lt;class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax&gt;
 class NonUniformInterpolationPoints;
 
 template &lt;class T&gt;
@@ -591,7 +591,7 @@ struct is_non_uniform_interpolation_points : std::false_type
 {
 };
 
-template &lt;class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax&gt;
+template &lt;class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax&gt;
 struct is_non_uniform_interpolation_points&lt;NonUniformInterpolationPoints&lt;BSplines, BcXmin, BcXmax&gt;&gt;
     : std::true_type
 {
@@ -601,7 +601,7 @@ template &lt;class T&gt;
 inline constexpr bool is_non_uniform_interpolation_points_v
         = is_non_uniform_interpolation_points&lt;T&gt;::value;
 
-template &lt;class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax&gt;
+template &lt;class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax&gt;
 class NonUniformInterpolationPoints
 {
     using Dim = typename BSplines::continuous_dimension_type;

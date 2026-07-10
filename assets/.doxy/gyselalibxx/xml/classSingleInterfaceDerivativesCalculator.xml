@@ -482,10 +482,10 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a2d8bbf78b34f506ebe74aafebeec6702" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1ae4b8a6de189d0cb22256240f766bf1f5" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::SingleInterfaceDerivativesCalculator</definition>
-        <argsstring>(IdxRange1DPerp_1 const &amp;idx_range_1d_1, IdxRange1DPerp_2 const &amp;idx_range_1d_2, ddc::BoundCond const &amp;Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const &amp;Bound2=ddc::BoundCond::HERMITE)</argsstring>
+        <argsstring>(IdxRange1DPerp_1 const &amp;idx_range_1d_1, IdxRange1DPerp_2 const &amp;idx_range_1d_2, ddc::SplineBuilderClosure const &amp;Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp;Closure2=ddc::SplineBuilderClosure::HERMITE)</argsstring>
         <name>SingleInterfaceDerivativesCalculator</name>
         <qualifiedname>SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator</qualifiedname>
         <param>
@@ -497,14 +497,14 @@
           <declname>idx_range_1d_2</declname>
         </param>
         <param>
-          <type>ddc::BoundCond const &amp;</type>
-          <declname>Bound1</declname>
-          <defval>ddc::BoundCond::HERMITE</defval>
+          <type>ddc::SplineBuilderClosure const &amp;</type>
+          <declname>Closure1</declname>
+          <defval>ddc::SplineBuilderClosure::HERMITE</defval>
         </param>
         <param>
-          <type>ddc::BoundCond const &amp;</type>
-          <declname>Bound2</declname>
-          <defval>ddc::BoundCond::HERMITE</defval>
+          <type>ddc::SplineBuilderClosure const &amp;</type>
+          <declname>Closure2</declname>
+          <defval>ddc::SplineBuilderClosure::HERMITE</defval>
         </param>
         <briefdescription>
 <para>Instantiate <ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>. </para>
@@ -530,18 +530,18 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>Bound1</parametername>
+<parametername>Closure1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The boundary condition type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. If ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense. </para>
+<para>The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>Bound2</parametername>
+<parametername>Closure2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The boundary condition type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. If ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense. <linebreak/>
+<para>The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. <linebreak/>
  </para>
 </parameterdescription>
 </parameteritem>
@@ -552,7 +552,7 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" line="167" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/interface_derivatives/single_interface_derivatives_calculator.hpp" bodystart="167" bodyend="231"/>
       </memberdef>
-      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1aa628dec3b8a2d8488b14c9b346e31d1f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classSingleInterfaceDerivativesCalculator_1a28cd5eaa003375be1f8146f16472943f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
           <param>
             <type>class IdxRangeA</type>
@@ -563,7 +563,7 @@
         </templateparamlist>
         <type></type>
         <definition>SingleInterfaceDerivativesCalculator&lt; InterfaceType &gt;::SingleInterfaceDerivativesCalculator</definition>
-        <argsstring>(IdxRangeA const &amp;idx_range_a, IdxRangeB const &amp;idx_range_b, ddc::BoundCond const &amp;Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const &amp;Bound2=ddc::BoundCond::HERMITE)</argsstring>
+        <argsstring>(IdxRangeA const &amp;idx_range_a, IdxRangeB const &amp;idx_range_b, ddc::SplineBuilderClosure const &amp;Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const &amp;Closure2=ddc::SplineBuilderClosure::HERMITE)</argsstring>
         <name>SingleInterfaceDerivativesCalculator</name>
         <qualifiedname>SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator</qualifiedname>
         <param>
@@ -575,14 +575,14 @@
           <declname>idx_range_b</declname>
         </param>
         <param>
-          <type>ddc::BoundCond const &amp;</type>
-          <declname>Bound1</declname>
-          <defval>ddc::BoundCond::HERMITE</defval>
+          <type>ddc::SplineBuilderClosure const &amp;</type>
+          <declname>Closure1</declname>
+          <defval>ddc::SplineBuilderClosure::HERMITE</defval>
         </param>
         <param>
-          <type>ddc::BoundCond const &amp;</type>
-          <declname>Bound2</declname>
-          <defval>ddc::BoundCond::HERMITE</defval>
+          <type>ddc::SplineBuilderClosure const &amp;</type>
+          <declname>Closure2</declname>
+          <defval>ddc::SplineBuilderClosure::HERMITE</defval>
         </param>
         <briefdescription>
 <para>Instantiate <ref refid="classSingleInterfaceDerivativesCalculator" kindref="compound">SingleInterfaceDerivativesCalculator</ref>. See <ref refid="classSingleInterfaceDerivativesCalculator_1SingleInterfaceDerivativesCalculatorInstantiator" kindref="member">SingleInterfaceDerivativesCalculatorInstantiator</ref>. </para>
@@ -606,18 +606,18 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>Bound1</parametername>
+<parametername>Closure1</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The boundary condition type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. </para>
+<para>The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>Bound2</parametername>
+<parametername>Closure2</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The boundary condition type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. </para>
+<para>The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. </para>
 </parameterdescription>
 </parameteritem>
 </parameterlist>
@@ -1352,7 +1352,7 @@ The following parameters are array with three elements corresponding to the valu
 </parameterdescription>
 </parameteritem>
 </parameterlist>
-<simplesect kind="warning"><para>The applied method only works for interpolation points located on the break points. In the case where &quot;ddc::BoundCond::GREVILLE&quot; is specified, additional interpolation points are also placed in the first or last cell of the patch. Please be sure to initialise the discrete space of your Grid on the break points (especially in the non-uniform case). </para>
+<simplesect kind="warning"><para>The applied method only works for interpolation points located on the break points. In the case where &quot;ddc::SplineBuilderClosure::GREVILLE&quot; is specified, additional interpolation points are also placed in the first or last cell of the patch. Please be sure to initialise the discrete space of your Grid on the break points (especially in the non-uniform case). </para>
 </simplesect>
 </para>
     </detaileddescription>
@@ -1407,8 +1407,8 @@ The following parameters are array with three elements corresponding to the valu
       <member refid="classSingleInterfaceDerivativesCalculator_1ac98b7ebcb0cb5a9fdc45966b3b50c787" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>recursion</name></member>
       <member refid="classSingleInterfaceDerivativesCalculator_1a69a3d28bb5217d206134bb7e2be9d361" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>set_coefficients_non_uniform_case</name></member>
       <member refid="classSingleInterfaceDerivativesCalculator_1a38bba7bdc0a412bda4063c3dc4a427af" prot="private" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>set_coefficients_uniform_per_patch_case</name></member>
-      <member refid="classSingleInterfaceDerivativesCalculator_1a2d8bbf78b34f506ebe74aafebeec6702" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>SingleInterfaceDerivativesCalculator</name></member>
-      <member refid="classSingleInterfaceDerivativesCalculator_1aa628dec3b8a2d8488b14c9b346e31d1f" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>SingleInterfaceDerivativesCalculator</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1ae4b8a6de189d0cb22256240f766bf1f5" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>SingleInterfaceDerivativesCalculator</name></member>
+      <member refid="classSingleInterfaceDerivativesCalculator_1a28cd5eaa003375be1f8146f16472943f" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>SingleInterfaceDerivativesCalculator</name></member>
       <member refid="classSingleInterfaceDerivativesCalculator_1a22987b1309b065887566d883a8b3c834" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>SingleInterfaceDerivativesCalculator</name></member>
       <member refid="classSingleInterfaceDerivativesCalculator_1a065032a37a9772743c329f85d6467f27" prot="public" virt="non-virtual"><scope>SingleInterfaceDerivativesCalculator</scope><name>SingleInterfaceDerivativesCalculator</name></member>
     </listofallmembers>

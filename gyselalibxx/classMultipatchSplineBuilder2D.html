@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-multipatchsplinebuilder2d">Class MultipatchSplineBuilder2D</h1>
-<p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::BoundCond BcLower1, ddc::BoundCond BcUpper1, ddc::BoundCond BcLower2, ddc::BoundCond BcUpper2, ddc::BoundCond BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;</strong></p>
+<p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::SplineBuilderClosure SBCLower1, ddc::SplineBuilderClosure SBCUpper1, ddc::SplineBuilderClosure SBCLower2, ddc::SplineBuilderClosure SBCUpper2, ddc::SplineBuilderClosure BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classMultipatchSplineBuilder2D.html"><strong>MultipatchSplineBuilder2D</strong></a></p>
 <p><em>A class to call all the builders of all the patches once.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -607,10 +607,10 @@
 <li><code>BSpline2OnPatch</code> A type alias which provides the second BSpline type along which the splines are built. </li>
 <li><code>Grid1OnPatch</code> A type alias which provides the first Grid type along which the interpolation points of the splines are found. </li>
 <li><code>Grid2OnPatch</code> A type alias which provides the second Grid type along which the interpolation points of the splines are found. </li>
-<li><code>BcLower1</code> The lower boundary condition on the first dimension. </li>
-<li><code>BcUpper1</code> The upper boundary condition on the first dimension. </li>
-<li><code>BcLower2</code> The lower boundary condition on the second dimension. </li>
-<li><code>BcUpper2</code> The upper boundary condition on the second dimension. </li>
+<li><code>SBCLower1</code> The lower spline closure on the first dimension. </li>
+<li><code>SBCUpper1</code> The upper spline closure on the first dimension. </li>
+<li><code>SBCLower2</code> The lower spline closure on the second dimension. </li>
+<li><code>SBCUpper2</code> The upper spline closure on the second dimension. </li>
 <li><code>BcTransition</code> The boundary condition used at the interface between 2 patches. </li>
 <li><code>Connectivity</code> A <a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a> object describing the interfaces between patches. </li>
 <li><code>Solver</code> The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details. </li>

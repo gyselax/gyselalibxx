@@ -584,7 +584,7 @@
 <td style="text-align: left;"><a href="#typedef-lower_matching_edge"><strong>lower_matching_edge</strong></a>  <br></td>
 </tr>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, GridOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, std::is_same_v&lt; lower_matching_edge, <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> &gt; ? BcLower :BcTransition, std::is_same_v&lt; upper_matching_edge, <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> &gt; ? BcUpper :BcTransition, Solver &gt;</td>
+<td style="text-align: right;">typedef ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, GridOnPatch&lt; <a href="structPatch.html"><strong>Patch</strong></a> &gt;, std::is_same_v&lt; lower_matching_edge, <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> &gt; ? SBCLower :BcTransition, std::is_same_v&lt; upper_matching_edge, <a href="structOutsideEdge.html"><strong>OutsideEdge</strong></a> &gt; ? SBCUpper :BcTransition, Solver &gt;</td>
 <td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br></td>
 </tr>
 <tr>
@@ -612,22 +612,22 @@
 <p>A small structure allowing the multiple grids to be unpacked from a field and repacked into a SplineBuilder type. </p>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-lower_matching_edge">typedef lower_matching_edge</h3>
-<pre><code class="language-C++">using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::lower_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, FRONT&gt;, typename Connectivity::interface_collection&gt;;
+<pre><code class="language-C++">using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::lower_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, FRONT&gt;, typename Connectivity::interface_collection&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-type">typedef type</h3>
-<pre><code class="language-C++">using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::type =  ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt;Patch&gt;, GridOnPatch&lt;Patch&gt;, std::is_same_v&lt;lower_matching_edge, OutsideEdge&gt; ? BcLower : BcTransition, std::is_same_v&lt;upper_matching_edge, OutsideEdge&gt; ? BcUpper : BcTransition, Solver&gt;;
+<pre><code class="language-C++">using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::type =  ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt;Patch&gt;, GridOnPatch&lt;Patch&gt;, std::is_same_v&lt;lower_matching_edge, OutsideEdge&gt; ? SBCLower : BcTransition, std::is_same_v&lt;upper_matching_edge, OutsideEdge&gt; ? SBCUpper : BcTransition, Solver&gt;;
 </code></pre>
 <hr>
 
 <h3 id="typedef-upper_matching_edge">typedef upper_matching_edge</h3>
-<pre><code class="language-C++">using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::upper_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, BACK&gt;, typename Connectivity::interface_collection&gt;;
+<pre><code class="language-C++">using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::upper_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, BACK&gt;, typename Connectivity::interface_collection&gt;;
 </code></pre>
 <hr>
 <h2 id="public-static-attributes-documentation">Public Static Attributes Documentation</h2>
 <h3 id="variable-patch_id">variable patch_id</h3>
-<pre><code class="language-C++">constexpr std::size_t MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::patch_id;
+<pre><code class="language-C++">constexpr std::size_t MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::patch_id;
 </code></pre>
 <hr>
 

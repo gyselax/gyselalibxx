@@ -8,9 +8,9 @@
       </param>
     </templateparamlist>
     <sectiondef kind="public-type">
-      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_1ac1a9d727b2c7a18438096311605bb6d6" prot="public" static="no">
+      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_1a8b85c59ede9a926416cbbcfa8716e858" prot="public" static="no">
         <type>equivalent_edge_t&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, GridOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, FRONT &gt;, typename Connectivity::interface_collection &gt;</type>
-        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::lower_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, FRONT&gt;, typename Connectivity::interface_collection&gt;</definition>
+        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::lower_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, FRONT&gt;, typename Connectivity::interface_collection&gt;</definition>
         <argsstring></argsstring>
         <name>lower_matching_edge</name>
         <qualifiedname>MultipatchSplineBuilder::Build_BuilderType::lower_matching_edge</qualifiedname>
@@ -22,9 +22,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="78" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="80" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_1a834ca2c18990aee2c173918128389237" prot="public" static="no">
+      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_1a415116754f9a5e4b7982723e1b5358dc" prot="public" static="no">
         <type>equivalent_edge_t&lt; <ref refid="structEdge" kindref="compound">Edge</ref>&lt; <ref refid="structPatch" kindref="compound">Patch</ref>, GridOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, BACK &gt;, typename Connectivity::interface_collection &gt;</type>
-        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::upper_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, BACK&gt;, typename Connectivity::interface_collection&gt;</definition>
+        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::upper_matching_edge =  equivalent_edge_t&lt; Edge&lt;Patch, GridOnPatch&lt;Patch&gt;, BACK&gt;, typename Connectivity::interface_collection&gt;</definition>
         <argsstring></argsstring>
         <name>upper_matching_edge</name>
         <qualifiedname>MultipatchSplineBuilder::Build_BuilderType::upper_matching_edge</qualifiedname>
@@ -36,9 +36,9 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="81" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="83" bodyend="-1"/>
       </memberdef>
-      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_1aed748b0a7ab22349f565cf4c4b5c058e" prot="public" static="no">
-        <type>ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, GridOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, std::is_same_v&lt; lower_matching_edge, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? BcLower :BcTransition, std::is_same_v&lt; upper_matching_edge, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? BcUpper :BcTransition, Solver &gt;</type>
-        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::type =  ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt;Patch&gt;, GridOnPatch&lt;Patch&gt;, std::is_same_v&lt;lower_matching_edge, OutsideEdge&gt; ? BcLower : BcTransition, std::is_same_v&lt;upper_matching_edge, OutsideEdge&gt; ? BcUpper : BcTransition, Solver&gt;</definition>
+      <memberdef kind="typedef" id="structMultipatchSplineBuilder_1_1Build__BuilderType_1ad7fcb135e0537528059ece814d44a30a" prot="public" static="no">
+        <type>ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, GridOnPatch&lt; <ref refid="structPatch" kindref="compound">Patch</ref> &gt;, std::is_same_v&lt; lower_matching_edge, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? SBCLower :BcTransition, std::is_same_v&lt; upper_matching_edge, <ref refid="structOutsideEdge" kindref="compound">OutsideEdge</ref> &gt; ? SBCUpper :BcTransition, Solver &gt;</type>
+        <definition>using MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::type =  ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch&lt;Patch&gt;, GridOnPatch&lt;Patch&gt;, std::is_same_v&lt;lower_matching_edge, OutsideEdge&gt; ? SBCLower : BcTransition, std::is_same_v&lt;upper_matching_edge, OutsideEdge&gt; ? SBCUpper : BcTransition, Solver&gt;</definition>
         <argsstring></argsstring>
         <name>type</name>
         <qualifiedname>MultipatchSplineBuilder::Build_BuilderType::type</qualifiedname>
@@ -52,9 +52,9 @@
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-static-attrib">
-      <memberdef kind="variable" id="structMultipatchSplineBuilder_1_1Build__BuilderType_1a0059407e36a55458c20823d11d48967d" prot="public" static="yes" constexpr="yes" mutable="no">
+      <memberdef kind="variable" id="structMultipatchSplineBuilder_1_1Build__BuilderType_1a7df866051e408964a6cd72ab48810b60" prot="public" static="yes" constexpr="yes" mutable="no">
         <type>constexpr std::size_t</type>
-        <definition>constexpr std::size_t MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::patch_id</definition>
+        <definition>constexpr std::size_t MultipatchSplineBuilder&lt; ExecSpace, MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, Connectivity, Solver, ValuesOnPatch, Patches &gt;::Build_BuilderType&lt; Patch &gt;::patch_id</definition>
         <argsstring></argsstring>
         <name>patch_id</name>
         <qualifiedname>MultipatchSplineBuilder::Build_BuilderType::patch_id</qualifiedname>
@@ -75,10 +75,10 @@
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" line="76" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/multipatch/spline/multipatch_spline_builder.hpp" bodystart="77" bodyend="93"/>
     <listofallmembers>
-      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1ac1a9d727b2c7a18438096311605bb6d6" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType</scope><name>lower_matching_edge</name></member>
-      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1a0059407e36a55458c20823d11d48967d" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType</scope><name>patch_id</name></member>
-      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1aed748b0a7ab22349f565cf4c4b5c058e" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType</scope><name>type</name></member>
-      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1a834ca2c18990aee2c173918128389237" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType</scope><name>upper_matching_edge</name></member>
+      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1a8b85c59ede9a926416cbbcfa8716e858" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType</scope><name>lower_matching_edge</name></member>
+      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1a7df866051e408964a6cd72ab48810b60" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType</scope><name>patch_id</name></member>
+      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1ad7fcb135e0537528059ece814d44a30a" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType</scope><name>type</name></member>
+      <member refid="structMultipatchSplineBuilder_1_1Build__BuilderType_1a415116754f9a5e4b7982723e1b5358dc" prot="public" virt="non-virtual"><scope>MultipatchSplineBuilder::Build_BuilderType</scope><name>upper_matching_edge</name></member>
     </listofallmembers>
   </compounddef>
 </doxygen>

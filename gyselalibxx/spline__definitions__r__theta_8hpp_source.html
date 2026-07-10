@@ -600,13 +600,13 @@ struct PolarBSplinesRTheta : PolarBSplines&lt;BSplinesR, BSplinesTheta, 1&gt;
 {
 };
 
-ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
-ddc::BoundCond constexpr SplineThetaBoundary = ddc::BoundCond::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineRClosure = ddc::SplineBuilderClosure::GREVILLE;
+ddc::SplineBuilderClosure constexpr SplineThetaClosure = ddc::SplineBuilderClosure::PERIODIC;
 
 using SplineInterpPointsR
-        = ddc::GrevilleInterpolationPoints&lt;BSplinesR, SplineRBoundary, SplineRBoundary&gt;;
+        = ddc::GrevilleInterpolationPoints&lt;BSplinesR, SplineRClosure, SplineRClosure&gt;;
 using SplineInterpPointsTheta
-        = ddc::GrevilleInterpolationPoints&lt;BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary&gt;;
+        = ddc::GrevilleInterpolationPoints&lt;BSplinesTheta, SplineThetaClosure, SplineThetaClosure&gt;;
 
 // --- Operators
 using SplineRThetaBuilder_host = ddc::SplineBuilder2D&lt;
@@ -616,10 +616,10 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D&lt;
         BSplinesTheta,
         GridR,
         GridTheta,
-        SplineRBoundary, // boundary at r=0
-        SplineRBoundary, // boundary at rmax
-        SplineThetaBoundary,
-        SplineThetaBoundary,
+        SplineRClosure, // boundary at r=0
+        SplineRClosure, // boundary at rmax
+        SplineThetaClosure,
+        SplineThetaClosure,
         ddc::SplineSolver::LAPACK&gt;;
 
 using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D&lt;
@@ -653,10 +653,10 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D&lt;
         BSplinesTheta,
         GridR,
         GridTheta,
-        SplineRBoundary, // boundary at r=0
-        SplineRBoundary, // boundary at rmax
-        SplineThetaBoundary,
-        SplineThetaBoundary,
+        SplineRClosure, // boundary at r=0
+        SplineRClosure, // boundary at rmax
+        SplineThetaClosure,
+        SplineThetaClosure,
         ddc::SplineSolver::LAPACK&gt;;
 
 using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D&lt;

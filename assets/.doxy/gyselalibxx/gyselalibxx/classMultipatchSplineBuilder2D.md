@@ -2,7 +2,7 @@
 
 # Class MultipatchSplineBuilder2D
 
-**template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::BoundCond BcLower1, ddc::BoundCond BcUpper1, ddc::BoundCond BcLower2, ddc::BoundCond BcUpper2, ddc::BoundCond BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;**
+**template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSpline1OnPatch, template&lt; typename P &gt; typename BSpline2OnPatch, template&lt; typename P &gt; typename Grid1OnPatch, template&lt; typename P &gt; typename Grid2OnPatch, ddc::SplineBuilderClosure SBCLower1, ddc::SplineBuilderClosure SBCUpper1, ddc::SplineBuilderClosure SBCLower2, ddc::SplineBuilderClosure SBCUpper2, ddc::SplineBuilderClosure BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;**
 
 
 
@@ -105,10 +105,10 @@ This function is useful to avoid calling all the builders individually, especial
 * `BSpline2OnPatch` A type alias which provides the second BSpline type along which the splines are built. 
 * `Grid1OnPatch` A type alias which provides the first Grid type along which the interpolation points of the splines are found. 
 * `Grid2OnPatch` A type alias which provides the second Grid type along which the interpolation points of the splines are found. 
-* `BcLower1` The lower boundary condition on the first dimension. 
-* `BcUpper1` The upper boundary condition on the first dimension. 
-* `BcLower2` The lower boundary condition on the second dimension. 
-* `BcUpper2` The upper boundary condition on the second dimension. 
+* `SBCLower1` The lower spline closure on the first dimension. 
+* `SBCUpper1` The upper spline closure on the first dimension. 
+* `SBCLower2` The lower spline closure on the second dimension. 
+* `SBCUpper2` The upper spline closure on the second dimension. 
 * `BcTransition` The boundary condition used at the interface between 2 patches. 
 * `Connectivity` A [**MultipatchConnectivity**](classMultipatchConnectivity.md) object describing the interfaces between patches. 
 * `Solver` The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details. 

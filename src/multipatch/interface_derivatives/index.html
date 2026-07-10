@@ -648,11 +648,11 @@ SingleInterfaceDerivativesCalculator&lt;Interface_12&gt; derivatives_calculator 
 To apply this treatment, we specify it in the template parameter as follows.</p>
 </blockquote>
 <pre><code class="language-cpp">// If we want to apply the treatment on Patch 1 and Patch 2
-SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::BoundCond::GREVILLE, ddc::BoundCond::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 // or if we want to apply the treatment only on Patch 1
-SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::BoundCond::GREVILLE, ddc::BoundCond::HERMITE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::HERMITE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 // or if we want to apply the treatment only on Patch 2
-SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::BoundCond::HERMITE, ddc::BoundCond::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
+SingleInterfaceDerivativesCalculator&lt;Interface_12, ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::GREVILLE&gt; derivatives_calculator (idx_range_patch_1, idx_range_patch_2);
 </code></pre>
 <blockquote>
 <p>If we want to use an approximation where the boundary cells are not involved (even for interpolation points as closure condition on the global domain),

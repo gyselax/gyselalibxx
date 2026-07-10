@@ -567,7 +567,7 @@
             <div class="section" itemprop="articleBody">
               
                 <div><h1 id="class-multipatchsplinebuilder">Class MultipatchSplineBuilder</h1>
-<p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSplineOnPatch, template&lt; typename P &gt; typename GridOnPatch, ddc::BoundCond BcLower, ddc::BoundCond BcUpper, ddc::BoundCond BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;</strong></p>
+<p><strong>template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSplineOnPatch, template&lt; typename P &gt; typename GridOnPatch, ddc::SplineBuilderClosure SBCLower, ddc::SplineBuilderClosure SBCUpper, ddc::SplineBuilderClosure BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;</strong></p>
 <p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classMultipatchSplineBuilder.html"><strong>MultipatchSplineBuilder</strong></a></p>
 <p><em>A class to call all the builders of all the patches once.</em> <a href="#detailed-description">More...</a></p>
 <ul>
@@ -605,8 +605,8 @@
 <li><code>MemorySpace</code> The space (CPU/GPU) where the coefficients and values are stored. </li>
 <li><code>BSplineOnPatch</code> A type alias which provides the BSpline type along which the splines are built. </li>
 <li><code>GridOnPatch</code> A type alias which provides the Grid type along which the interpolation points of the splines are found. </li>
-<li><code>BcLower</code> The lower boundary condition. </li>
-<li><code>BcUpper</code> The upper boundary condition. </li>
+<li><code>SBCLower</code> The lower spline closure. </li>
+<li><code>SBCUpper</code> The upper spline closure. </li>
 <li><code>BcTransition</code> The boundary condition used at the interface between 2 patches. </li>
 <li><code>Connectivity</code> A <a href="classMultipatchConnectivity.html"><strong>MultipatchConnectivity</strong></a> object describing the interfaces between patches. </li>
 <li><code>Solver</code> The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details. </li>

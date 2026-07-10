@@ -593,11 +593,11 @@ template &lt;
         typename Grid1OnPatch,
         template &lt;typename P&gt;
         typename Grid2OnPatch,
-        ddc::BoundCond BcLower1,
-        ddc::BoundCond BcUpper1,
-        ddc::BoundCond BcLower2,
-        ddc::BoundCond BcUpper2,
-        ddc::BoundCond BcTransition,
+        ddc::SplineBuilderClosure SBCLower1,
+        ddc::SplineBuilderClosure SBCUpper1,
+        ddc::SplineBuilderClosure SBCLower2,
+        ddc::SplineBuilderClosure SBCUpper2,
+        ddc::SplineBuilderClosure BcTransition,
         class Connectivity,
         ddc::SplineSolver Solver,
         template &lt;typename P&gt;
@@ -668,10 +668,10 @@ class MultipatchSplineBuilder2D
                 BSpline2OnPatch&lt;Patch&gt;,
                 Grid1OnPatch&lt;Patch&gt;,
                 Grid2OnPatch&lt;Patch&gt;,
-                std::is_same_v&lt;lower_matching_edge1, OutsideEdge&gt; ? BcLower1 : BcTransition,
-                std::is_same_v&lt;upper_matching_edge1, OutsideEdge&gt; ? BcUpper1 : BcTransition,
-                std::is_same_v&lt;lower_matching_edge2, OutsideEdge&gt; ? BcLower2 : BcTransition,
-                std::is_same_v&lt;upper_matching_edge2, OutsideEdge&gt; ? BcUpper2 : BcTransition,
+                std::is_same_v&lt;lower_matching_edge1, OutsideEdge&gt; ? SBCLower1 : BcTransition,
+                std::is_same_v&lt;upper_matching_edge1, OutsideEdge&gt; ? SBCUpper1 : BcTransition,
+                std::is_same_v&lt;lower_matching_edge2, OutsideEdge&gt; ? SBCLower2 : BcTransition,
+                std::is_same_v&lt;upper_matching_edge2, OutsideEdge&gt; ? SBCUpper2 : BcTransition,
                 Solver&gt;;
     };
 

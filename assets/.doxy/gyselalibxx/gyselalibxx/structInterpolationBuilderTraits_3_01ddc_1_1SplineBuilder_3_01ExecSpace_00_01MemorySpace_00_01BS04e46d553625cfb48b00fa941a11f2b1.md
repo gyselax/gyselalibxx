@@ -1,12 +1,12 @@
 
 
-# Struct InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;
+# Struct InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;
 
-**template &lt;class ExecSpace, class MemorySpace, class BSplines, class InterpolationDDim, ddc::BoundCond BcLower, ddc::BoundCond BcUpper, ddc::SplineSolver Solver&gt;**
+**template &lt;class ExecSpace, class MemorySpace, class BSplines, class InterpolationDDim, ddc::SplineBuilderClosure SBCLower, ddc::SplineBuilderClosure SBCUpper, ddc::SplineSolver Solver&gt;**
 
 
 
-[**ClassList**](annotated.md) **>** [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BScfda3229aca4044474c5fb515881d93f.md)
+[**ClassList**](annotated.md) **>** [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md)
 
 
 
@@ -113,7 +113,7 @@ Mapping: interpolation\_discrete\_dimension\_type -&gt; interpolation\_grid\_typ
 
 _The discrete dimension for the B-spline coefficients._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::basis_domain_type =  typename Builder::bsplines_type;
+using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::basis_domain_type =  typename Builder::bsplines_type;
 ```
 
 
@@ -127,7 +127,7 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 
 _Batched domain with InterpolationDDim replaced by BSplines._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::batched_basis_idx_range_type =  typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
+using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::batched_basis_idx_range_type =  typename Builder::template batched_spline_domain_type<IdxRangeBatchedInterpolation>;
 ```
 
 
@@ -141,7 +141,7 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 
 _Batched domain with InterpolationDDim replaced by deriv\_type._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::batched_derivs_idx_range_type =  typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
+using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::batched_derivs_idx_range_type =  typename Builder::template batched_derivs_domain_type<IdxRangeBatchedInterpolation>;
 ```
 
 
@@ -155,7 +155,7 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 
 _The index range for the interpolation coefficients._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::coeff_idx_range_type =  IdxRange<typename Builder::bsplines_type>;
+using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::coeff_idx_range_type =  IdxRange<typename Builder::bsplines_type>;
 ```
 
 
@@ -169,7 +169,7 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 
 _The data type that the data is saved on._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::data_type =  double;
+using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::data_type =  double;
 ```
 
 
@@ -183,7 +183,7 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 
 _The discrete grid on which interpolation values are given._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::interpolation_grid_type =  typename Builder::interpolation_discrete_dimension_type;
+using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::interpolation_grid_type =  typename Builder::interpolation_discrete_dimension_type;
 ```
 
 
@@ -197,7 +197,7 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 
 _The 1D index range for the interpolation mesh._ 
 ```C++
-using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::interpolation_idx_range_type =  typename Builder::interpolation_domain_type;
+using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::interpolation_idx_range_type =  typename Builder::interpolation_domain_type;
 ```
 
 
@@ -213,7 +213,7 @@ using InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BS
 
 _The number of interpolation dimensions (always 1 for SplineBuilder)._ 
 ```C++
-static inline constexpr std::size_t InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, BcLower, BcUpper, Solver > >::rank () 
+static inline constexpr std::size_t InterpolationBuilderTraits< ddc::SplineBuilder< ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver > >::rank () 
 ```
 
 

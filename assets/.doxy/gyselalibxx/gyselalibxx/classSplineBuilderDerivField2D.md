@@ -2,7 +2,7 @@
 
 # Class SplineBuilderDerivField2D
 
-**template &lt;class ExecSpace, class BSplines1, class BSplines2, class Grid1, class Grid2, ddc::BoundCond BoundCond1min, ddc::BoundCond BoundCond1max, ddc::BoundCond BoundCond2min, ddc::BoundCond BoundCond2max&gt;**
+**template &lt;class ExecSpace, class BSplines1, class BSplines2, class Grid1, class Grid2, ddc::SplineBuilderClosure SplineBuilderClosure1min, ddc::SplineBuilderClosure SplineBuilderClosure1max, ddc::SplineBuilderClosure SplineBuilderClosure2min, ddc::SplineBuilderClosure SplineBuilderClosure2max&gt;**
 
 
 

@@ -2,7 +2,7 @@
 
 # Class SplineInterpolator
 
-**template &lt;class ExecSpace, class Basis, class InterpGrid, ExtrapolationRule MinExtrapRule, ExtrapolationRule MaxExtrapRule, ddc::BoundCond MinBound, ddc::BoundCond MaxBound, ddc::SplineSolver Solver&gt;**
+**template &lt;class ExecSpace, class Basis, class InterpGrid, ExtrapolationRule MinExtrapRule, ExtrapolationRule MaxExtrapRule, ddc::SplineBuilderClosure MinBound, ddc::SplineBuilderClosure MaxBound, ddc::SplineSolver Solver&gt;**
 
 
 
@@ -116,8 +116,8 @@ The boundary condition (MinBound / MaxBound) and extrapolation rule (MinExtrapRu
 * `InterpGrid` The discrete grid on which function values are provided. 
 * `MinExtrapRule` The ExtrapolationRule applied below the lower boundary. 
 * `MaxExtrapRule` The ExtrapolationRule applied above the upper boundary. 
-* `MinBound` The ddc::BoundCond at the lower boundary of the spline builder. 
-* `MaxBound` The ddc::BoundCond at the upper boundary of the spline builder. 
+* `MinBound` The ddc::SplineBuilderClosure at the lower boundary of the spline builder. 
+* `MaxBound` The ddc::SplineBuilderClosure at the upper boundary of the spline builder. 
 * `Solver` The spline solver backend (default: LAPACK). 
 
 

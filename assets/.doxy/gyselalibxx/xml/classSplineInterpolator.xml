@@ -24,12 +24,12 @@
         <defname>MaxExtrapRule</defname>
       </param>
       <param>
-        <type>ddc::BoundCond</type>
+        <type>ddc::SplineBuilderClosure</type>
         <declname>MinBound</declname>
         <defname>MinBound</defname>
       </param>
       <param>
-        <type>ddc::BoundCond</type>
+        <type>ddc::SplineBuilderClosure</type>
         <declname>MaxBound</declname>
         <defname>MaxBound</defname>
       </param>
@@ -341,7 +341,7 @@
 <parametername>MinBound</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The ddc::BoundCond at the lower boundary of the spline builder. </para>
+<para>The ddc::SplineBuilderClosure at the lower boundary of the spline builder. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>
@@ -349,7 +349,7 @@
 <parametername>MaxBound</parametername>
 </parameternamelist>
 <parameterdescription>
-<para>The ddc::BoundCond at the upper boundary of the spline builder. </para>
+<para>The ddc::SplineBuilderClosure at the upper boundary of the spline builder. </para>
 </parameterdescription>
 </parameteritem>
 <parameteritem>

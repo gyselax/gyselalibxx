@@ -36,7 +36,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md) &lt;class ExecSpace, class MemorySpace, BSplineOnPatch, GridOnPatch, BcLower, BcUpper, BcTransition, class Connectivity, Solver, ValuesOnPatch, Patches&gt;<br>_A class to call all the builders of all the patches once._  |
+| class | [**MultipatchSplineBuilder**](classMultipatchSplineBuilder.md) &lt;class ExecSpace, class MemorySpace, BSplineOnPatch, GridOnPatch, SBCLower, SBCUpper, BcTransition, class Connectivity, Solver, ValuesOnPatch, Patches&gt;<br>_A class to call all the builders of all the patches once._  |
 
 
 

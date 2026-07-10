@@ -2,7 +2,7 @@
 
 # Class MultipatchSplineBuilder
 
-**template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSplineOnPatch, template&lt; typename P &gt; typename GridOnPatch, ddc::BoundCond BcLower, ddc::BoundCond BcUpper, ddc::BoundCond BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;**
+**template &lt;class ExecSpace, class MemorySpace, template&lt; typename P &gt; typename BSplineOnPatch, template&lt; typename P &gt; typename GridOnPatch, ddc::SplineBuilderClosure SBCLower, ddc::SplineBuilderClosure SBCUpper, ddc::SplineBuilderClosure BcTransition, class Connectivity, ddc::SplineSolver Solver, template&lt; typename P &gt; typename ValuesOnPatch, class... Patches&gt;**
 
 
 
@@ -103,8 +103,8 @@ This function is useful to avoid calling all the builders individually, especial
 * `MemorySpace` The space (CPU/GPU) where the coefficients and values are stored. 
 * `BSplineOnPatch` A type alias which provides the BSpline type along which the splines are built. 
 * `GridOnPatch` A type alias which provides the Grid type along which the interpolation points of the splines are found. 
-* `BcLower` The lower boundary condition. 
-* `BcUpper` The upper boundary condition. 
+* `SBCLower` The lower spline closure. 
+* `SBCUpper` The upper spline closure. 
 * `BcTransition` The boundary condition used at the interface between 2 patches. 
 * `Connectivity` A [**MultipatchConnectivity**](classMultipatchConnectivity.md) object describing the interfaces between patches. 
 * `Solver` The SplineSolver giving the backend used to perform the spline approximation. See DDC for more details. 

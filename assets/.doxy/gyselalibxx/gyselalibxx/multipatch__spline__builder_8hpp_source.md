@@ -28,9 +28,9 @@ template <
         typename BSplineOnPatch,
         template <typename P>
         typename GridOnPatch,
-        ddc::BoundCond BcLower,
-        ddc::BoundCond BcUpper,
-        ddc::BoundCond BcTransition,
+        ddc::SplineBuilderClosure SBCLower,
+        ddc::SplineBuilderClosure SBCUpper,
+        ddc::SplineBuilderClosure BcTransition,
         class Connectivity,
         ddc::SplineSolver Solver,
         template <typename P>
@@ -67,8 +67,8 @@ class MultipatchSplineBuilder
                 MemorySpace,
                 BSplineOnPatch<Patch>,
                 GridOnPatch<Patch>,
-                std::is_same_v<lower_matching_edge, OutsideEdge> ? BcLower : BcTransition,
-                std::is_same_v<upper_matching_edge, OutsideEdge> ? BcUpper : BcTransition,
+                std::is_same_v<lower_matching_edge, OutsideEdge> ? SBCLower : BcTransition,
+                std::is_same_v<upper_matching_edge, OutsideEdge> ? SBCUpper : BcTransition,
                 Solver>;
     };
 

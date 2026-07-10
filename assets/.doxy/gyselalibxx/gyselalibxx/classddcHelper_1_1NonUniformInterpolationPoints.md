@@ -2,7 +2,7 @@
 
 # Class ddcHelper::NonUniformInterpolationPoints
 
-**template &lt;class BSplines, ddc::BoundCond BcXmin, ddc::BoundCond BcXmax&gt;**
+**template &lt;class BSplines, ddc::SplineBuilderClosure BcXmin, ddc::SplineBuilderClosure BcXmax&gt;**
 
 
 

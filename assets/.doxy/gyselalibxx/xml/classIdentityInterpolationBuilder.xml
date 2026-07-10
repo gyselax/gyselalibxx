@@ -338,7 +338,7 @@
 <para>Get the whole domain on which derivatives on lower boundary are defined. </para>
         </briefdescription>
         <detaileddescription>
-<para>This is only used with BoundCond::HERMITE boundary conditions.</para>
+<para>This is only used with SplineBuilderClosure::HERMITE boundary conditions.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>batched_interpolation_domain</parametername>
@@ -375,7 +375,7 @@
 <para>Get the whole domain on which derivatives on upper boundary are defined. </para>
         </briefdescription>
         <detaileddescription>
-<para>This is only used with BoundCond::HERMITE boundary conditions.</para>
+<para>This is only used with SplineBuilderClosure::HERMITE boundary conditions.</para>
 <para><parameterlist kind="param"><parameteritem>
 <parameternamelist>
 <parametername>batched_interpolation_domain</parametername>

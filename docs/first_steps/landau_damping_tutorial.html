@@ -818,13 +818,13 @@ ddc::init_discrete_space&lt;BSplinesVx&gt;(vx_min, vx_max, vx_ncells);
 <hr>
 <h3 id="generating-the-grid-from-the-spline-space">Generating the Grid from the Spline Space</h3>
 <p>The grid is constructed from the Greville abscissae of the b-splines using DDC as follows:</p>
-<pre><code class="language-cpp">auto constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-auto constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+<pre><code class="language-cpp">auto constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
+auto constexpr SplineVxClosure = ddc::SplineBuilderClosure::HERMITE;
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints&lt;BSplinesX, SplineXBoundary, SplineXBoundary&gt;;
+        = ddc::GrevilleInterpolationPoints&lt;BSplinesX, SplineXClosure, SplineXClosure&gt;;
 using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints&lt;BSplinesVx, SplineVxBoundary, SplineVxBoundary&gt;;
+        = ddc::GrevilleInterpolationPoints&lt;BSplinesVx, SplineVxClosure, SplineVxClosure&gt;;
 
 struct GridX : SplineInterpPointsX::interpolation_discrete_dimension_type
 {
@@ -872,8 +872,8 @@ We therefore also need to initialise the global grid of species. Gyselalib++ pro
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesX,
         GridX,
-        SplineXBoundary,
-        SplineXBoundary,
+        SplineXClosure,
+        SplineXClosure,
         ddc::SplineSolver::LAPACK&gt;;
 
 using SplineVxBuilder = ddc::SplineBuilder&lt;
@@ -881,8 +881,8 @@ using SplineVxBuilder = ddc::SplineBuilder&lt;
         Kokkos::DefaultExecutionSpace::memory_space,
         BSplinesVx,
         GridVx,
-        SplineVxBoundary,
-        SplineVxBoundary,
+        SplineVxClosure,
+        SplineVxClosure,
         ddc::SplineSolver::LAPACK&gt;;
 </code></pre>
 <p>where <code>ddc::SplineSolver::LAPACK</code> indicates the solver that will be used to solve the matrix equation, and <code>Kokkos::DefaultExecutionSpace</code> indicates that the builder will act on the default execution space (GPU if enabled, for more information about execution spaces see the <a href="https://kokkos.org/kokkos-core-wiki/API/core/execution_spaces.html">Kokkos documentation</a>).</p>

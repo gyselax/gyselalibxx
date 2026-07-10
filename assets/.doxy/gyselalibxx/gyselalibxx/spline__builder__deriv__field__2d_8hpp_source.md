@@ -25,10 +25,10 @@ template <
         class BSplines2,
         class Grid1,
         class Grid2,
-        ddc::BoundCond BoundCond1min,
-        ddc::BoundCond BoundCond1max,
-        ddc::BoundCond BoundCond2min,
-        ddc::BoundCond BoundCond2max>
+        ddc::SplineBuilderClosure SplineBuilderClosure1min,
+        ddc::SplineBuilderClosure SplineBuilderClosure1max,
+        ddc::SplineBuilderClosure SplineBuilderClosure2min,
+        ddc::SplineBuilderClosure SplineBuilderClosure2max>
 class SplineBuilderDerivField2D
 {
     using MemorySpace = typename ExecSpace::memory_space;
@@ -45,10 +45,10 @@ class SplineBuilderDerivField2D
             BSplines2,
             Grid1,
             Grid2,
-            BoundCond1min,
-            BoundCond1max,
-            BoundCond2min,
-            BoundCond2max,
+            SplineBuilderClosure1min,
+            SplineBuilderClosure1max,
+            SplineBuilderClosure2min,
+            SplineBuilderClosure2max,
             ddc::SplineSolver::LAPACK>;
 
     using SplineType = DField<IdxRange<BSplines1, BSplines2>, MemorySpace>;

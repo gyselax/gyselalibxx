@@ -59,8 +59,8 @@ _Compute the derivative of an equivalent global spline at the interface between 
 
 | Type | Name |
 | ---: | :--- |
-|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-14) (IdxRange1DPerp\_1 const & idx\_range\_1d\_1, IdxRange1DPerp\_2 const & idx\_range\_1d\_2, ddc::BoundCond const & Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const & Bound2=ddc::BoundCond::HERMITE) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _._ |
-|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-24) (IdxRangeA const & idx\_range\_a, IdxRangeB const & idx\_range\_b, ddc::BoundCond const & Bound1=ddc::BoundCond::HERMITE, ddc::BoundCond const & Bound2=ddc::BoundCond::HERMITE) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _._ |
+|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-14) (IdxRange1DPerp\_1 const & idx\_range\_1d\_1, IdxRange1DPerp\_2 const & idx\_range\_1d\_2, ddc::SplineBuilderClosure const & Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const & Closure2=ddc::SplineBuilderClosure::HERMITE) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _._ |
+|   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-24) (IdxRangeA const & idx\_range\_a, IdxRangeB const & idx\_range\_b, ddc::SplineBuilderClosure const & Closure1=ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure const & Closure2=ddc::SplineBuilderClosure::HERMITE) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _._ |
 |   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-34) (IdxRange1DPerp\_1 const & idx\_range\_1d\_1, IdxRange1DPerp\_2 const & idx\_range\_1d\_2, std::size\_t const number\_chosen\_cells) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _. This constructor calculates an approximation of the formula._ |
 |   | [**SingleInterfaceDerivativesCalculator**](#function-singleinterfacederivativescalculator-44) (IdxRangeA const & idx\_range\_a, IdxRangeB const & idx\_range\_b, std::size\_t const number\_chosen\_cells) <br>_Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceDerivativesCalculator.md) _. See_SingleInterfaceDerivativesCalculatorInstantiator _. This constructor calculates an approximation of the formula._ |
 |  double | [**get\_coeff\_deriv\_on\_patch**](#function-get_coeff_deriv_on_patch) () const<br>_Get the coefficient (a) or (b) in front of the derivative on the given patch of the given_ [_**Interface**_](structInterface.md) _._ |
@@ -135,7 +135,7 @@ All the formulae and more details are given in the README.md.
 
 **Warning:**
 
-The applied method only works for interpolation points located on the break points. In the case where "ddc::BoundCond::GREVILLE" is specified, additional interpolation points are also placed in the first or last cell of the patch. Please be sure to initialise the discrete space of your Grid on the break points (especially in the non-uniform case). 
+The applied method only works for interpolation points located on the break points. In the case where "ddc::SplineBuilderClosure::GREVILLE" is specified, additional interpolation points are also placed in the first or last cell of the patch. Please be sure to initialise the discrete space of your Grid on the break points (especially in the non-uniform case). 
 
 
 
@@ -170,8 +170,8 @@ _Instantiate_ [_**SingleInterfaceDerivativesCalculator**_](classSingleInterfaceD
 inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
     IdxRange1DPerp_1 const & idx_range_1d_1,
     IdxRange1DPerp_2 const & idx_range_1d_2,
-    ddc::BoundCond const & Bound1=ddc::BoundCond::HERMITE,
-    ddc::BoundCond const & Bound2=ddc::BoundCond::HERMITE
+    ddc::SplineBuilderClosure const & Closure1=ddc::SplineBuilderClosure::HERMITE,
+    ddc::SplineBuilderClosure const & Closure2=ddc::SplineBuilderClosure::HERMITE
 ) 
 ```
 
@@ -190,8 +190,8 @@ If the interpolation points are uniform, it computes the coefficients with an ex
 
 * `idx_range_1d_1` 1D index range perpendicular to the [**Interface**](structInterface.md), on the patch 1. 
 * `idx_range_1d_2` 1D index range perpendicular to the [**Interface**](structInterface.md), on the patch 2. 
-* `Bound1` The boundary condition type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. If ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense. 
-* `Bound2` The boundary condition type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. If ddc::BoundCond::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::BoundCond::PERIODIC does not make sense. 
+* `Closure1` The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. 
+* `Closure2` The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. If ddc::SplineBuilderClosure::GREVILLE is given, a treatment will be applied to consider the additional interpolation point. Giving ddc::SplineBuilderClosure::PERIODIC does not make sense. 
  
 
 
@@ -211,8 +211,8 @@ template<class IdxRangeA, class IdxRangeB>
 inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculator (
     IdxRangeA const & idx_range_a,
     IdxRangeB const & idx_range_b,
-    ddc::BoundCond const & Bound1=ddc::BoundCond::HERMITE,
-    ddc::BoundCond const & Bound2=ddc::BoundCond::HERMITE
+    ddc::SplineBuilderClosure const & Closure1=ddc::SplineBuilderClosure::HERMITE,
+    ddc::SplineBuilderClosure const & Closure2=ddc::SplineBuilderClosure::HERMITE
 ) 
 ```
 
@@ -225,8 +225,8 @@ inline SingleInterfaceDerivativesCalculator::SingleInterfaceDerivativesCalculato
 
 * `idx_range_a` Index range on one patch. 
 * `idx_range_b` Index range on the other patch. 
-* `Bound1` The boundary condition type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::BoundCond::HERMITE. 
-* `Bound2` The boundary condition type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::BoundCond::HERMITE. 
+* `Closure1` The spline closure type on the opposite edge of the interface on the patch 1. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. 
+* `Closure2` The spline closure type on the opposite edge of the interface on the patch 2. By default, the value is set to ddc::SplineBuilderClosure::HERMITE. 
 
 
 

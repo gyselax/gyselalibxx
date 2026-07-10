@@ -380,7 +380,7 @@ inline batched_derivs_idx_range_type < BatchedInterpolationIdxRange > IdentityIn
 
 
 
-This is only used with BoundCond::HERMITE boundary conditions.
+This is only used with SplineBuilderClosure::HERMITE boundary conditions.
 
 
 
@@ -418,7 +418,7 @@ inline batched_derivs_idx_range_type < BatchedInterpolationIdxRange > IdentityIn
 
 
 
-This is only used with BoundCond::HERMITE boundary conditions.
+This is only used with SplineBuilderClosure::HERMITE boundary conditions.
 
 
 
