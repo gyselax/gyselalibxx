@@ -17,13 +17,13 @@
 namespace {
 using namespace non_periodic_non_uniform_2d_2patches;
 
-template <int PatchIdx, ddc::BoundCond BC>
+template <int PatchIdx, ddc::SplineBuilderClosure BC>
 using SplineInterpPointsX = ddc::GrevilleInterpolationPoints<BSplinesX<PatchIdx>, BC, BC>;
-template <int PatchIdx, ddc::BoundCond BC>
+template <int PatchIdx, ddc::SplineBuilderClosure BC>
 using SplineInterpPointsY = ddc::GrevilleInterpolationPoints<BSplinesY<PatchIdx>, BC, BC>;
 
 // Operators
-template <int PatchIdx, ddc::BoundCond BC>
+template <int PatchIdx, ddc::SplineBuilderClosure BC>
 using SplineXYBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -37,7 +37,7 @@ using SplineXYBuilder = ddc::SplineBuilder2D<
         BC,
         ddc::SplineSolver::LAPACK>;
 
-template <ddc::BoundCond BC>
+template <ddc::SplineBuilderClosure BC>
 using MultipatchSplineBuilderXY = MultipatchSplineBuilder2D<
         Kokkos::DefaultExecutionSpace,
         Kokkos::DefaultExecutionSpace::memory_space,
@@ -187,34 +187,34 @@ public:
 TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
 {
     ddc::init_discrete_space<GridX<1>>(
-            SplineInterpPointsX<1, ddc::BoundCond::GREVILLE>::get_sampling<GridX<1>>());
+            SplineInterpPointsX<1, ddc::SplineBuilderClosure::GREVILLE>::get_sampling<GridX<1>>());
     ddc::init_discrete_space<GridY<1>>(
-            SplineInterpPointsY<1, ddc::BoundCond::GREVILLE>::get_sampling<GridY<1>>());
+            SplineInterpPointsY<1, ddc::SplineBuilderClosure::GREVILLE>::get_sampling<GridY<1>>());
 
     ddc::init_discrete_space<GridX<2>>(
-            SplineInterpPointsX<2, ddc::BoundCond::GREVILLE>::get_sampling<GridX<2>>());
+            SplineInterpPointsX<2, ddc::SplineBuilderClosure::GREVILLE>::get_sampling<GridX<2>>());
     ddc::init_discrete_space<GridY<2>>(
-            SplineInterpPointsY<2, ddc::BoundCond::GREVILLE>::get_sampling<GridY<2>>());
+            SplineInterpPointsY<2, ddc::SplineBuilderClosure::GREVILLE>::get_sampling<GridY<2>>());
 
     IdxRange<GridX<1>> const idx_range_x1
-            = SplineInterpPointsX<1, ddc::BoundCond::GREVILLE>::get_domain<GridX<1>>();
+            = SplineInterpPointsX<1, ddc::SplineBuilderClosure::GREVILLE>::get_domain<GridX<1>>();
     IdxRange<GridY<1>> const idx_range_y1
-            = SplineInterpPointsY<1, ddc::BoundCond::GREVILLE>::get_domain<GridY<1>>();
+            = SplineInterpPointsY<1, ddc::SplineBuilderClosure::GREVILLE>::get_domain<GridY<1>>();
 
     IdxRange<GridX<2>> const idx_range_x2
-            = SplineInterpPointsX<2, ddc::BoundCond::GREVILLE>::get_domain<GridX<2>>();
+            = SplineInterpPointsX<2, ddc::SplineBuilderClosure::GREVILLE>::get_domain<GridX<2>>();
     IdxRange<GridY<2>> const idx_range_y2
-            = SplineInterpPointsY<2, ddc::BoundCond::GREVILLE>::get_domain<GridY<2>>();
+            = SplineInterpPointsY<2, ddc::SplineBuilderClosure::GREVILLE>::get_domain<GridY<2>>();
 
     IdxRange<GridX<1>, GridY<1>> const idx_range_xy1(idx_range_x1, idx_range_y1);
     IdxRange<GridX<2>, GridY<2>> const idx_range_xy2(idx_range_x2, idx_range_y2);
 
     // List of spline builders
-    SplineXYBuilder<1, ddc::BoundCond::GREVILLE> builder1(idx_range_xy1);
-    SplineXYBuilder<2, ddc::BoundCond::GREVILLE> builder2(idx_range_xy2);
+    SplineXYBuilder<1, ddc::SplineBuilderClosure::GREVILLE> builder1(idx_range_xy1);
+    SplineXYBuilder<2, ddc::SplineBuilderClosure::GREVILLE> builder2(idx_range_xy2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderXY<ddc::BoundCond::GREVILLE> builder(builder1, builder2);
+    MultipatchSplineBuilderXY<ddc::SplineBuilderClosure::GREVILLE> builder(builder1, builder2);
 
 
     // Function tests
@@ -275,34 +275,34 @@ TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2D)
 TEST_F(MultipatchSplineBuilder2DTest, TwoPatches2DHermite)
 {
     ddc::init_discrete_space<GridX<1>>(
-            SplineInterpPointsX<1, ddc::BoundCond::HERMITE>::get_sampling<GridX<1>>());
+            SplineInterpPointsX<1, ddc::SplineBuilderClosure::HERMITE>::get_sampling<GridX<1>>());
     ddc::init_discrete_space<GridY<1>>(
-            SplineInterpPointsY<1, ddc::BoundCond::HERMITE>::get_sampling<GridY<1>>());
+            SplineInterpPointsY<1, ddc::SplineBuilderClosure::HERMITE>::get_sampling<GridY<1>>());
 
     ddc::init_discrete_space<GridX<2>>(
-            SplineInterpPointsX<2, ddc::BoundCond::HERMITE>::get_sampling<GridX<2>>());
+            SplineInterpPointsX<2, ddc::SplineBuilderClosure::HERMITE>::get_sampling<GridX<2>>());
     ddc::init_discrete_space<GridY<2>>(
-            SplineInterpPointsY<2, ddc::BoundCond::HERMITE>::get_sampling<GridY<2>>());
+            SplineInterpPointsY<2, ddc::SplineBuilderClosure::HERMITE>::get_sampling<GridY<2>>());
 
     IdxRange<GridX<1>> const idx_range_x1
-            = SplineInterpPointsX<1, ddc::BoundCond::HERMITE>::get_domain<GridX<1>>();
+            = SplineInterpPointsX<1, ddc::SplineBuilderClosure::HERMITE>::get_domain<GridX<1>>();
     IdxRange<GridY<1>> const idx_range_y1
-            = SplineInterpPointsY<1, ddc::BoundCond::HERMITE>::get_domain<GridY<1>>();
+            = SplineInterpPointsY<1, ddc::SplineBuilderClosure::HERMITE>::get_domain<GridY<1>>();
 
     IdxRange<GridX<2>> const idx_range_x2
-            = SplineInterpPointsX<2, ddc::BoundCond::HERMITE>::get_domain<GridX<2>>();
+            = SplineInterpPointsX<2, ddc::SplineBuilderClosure::HERMITE>::get_domain<GridX<2>>();
     IdxRange<GridY<2>> const idx_range_y2
-            = SplineInterpPointsY<2, ddc::BoundCond::HERMITE>::get_domain<GridY<2>>();
+            = SplineInterpPointsY<2, ddc::SplineBuilderClosure::HERMITE>::get_domain<GridY<2>>();
 
     IdxRange<GridX<1>, GridY<1>> const idx_range_xy1(idx_range_x1, idx_range_y1);
     IdxRange<GridX<2>, GridY<2>> const idx_range_xy2(idx_range_x2, idx_range_y2);
 
     // List of spline builders
-    SplineXYBuilder<1, ddc::BoundCond::HERMITE> builder1(idx_range_xy1);
-    SplineXYBuilder<2, ddc::BoundCond::HERMITE> builder2(idx_range_xy2);
+    SplineXYBuilder<1, ddc::SplineBuilderClosure::HERMITE> builder1(idx_range_xy1);
+    SplineXYBuilder<2, ddc::SplineBuilderClosure::HERMITE> builder2(idx_range_xy2);
 
     // Collection of builders for each patch
-    MultipatchSplineBuilderXY<ddc::BoundCond::HERMITE> builder(builder1, builder2);
+    MultipatchSplineBuilderXY<ddc::SplineBuilderClosure::HERMITE> builder(builder1, builder2);
 
 
     // Function tests

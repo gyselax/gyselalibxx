@@ -8,7 +8,7 @@ spack:
   definitions:
   - packages:
     - 'cmake@3.30'
-    - 'ddc@0.14 +fft +pdi +splines'
+    - 'ddc@0.15 +fft +pdi +splines'
     - 'ginkgo@1.9'
     - 'gmgpolar@2.3'
     - 'googletest@1.14 +gmock'

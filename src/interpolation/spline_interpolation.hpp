@@ -22,8 +22,8 @@
  * @tparam InterpGrid    The discrete grid on which function values are provided.
  * @tparam MinExtrapRule The ExtrapolationRule applied below the lower boundary.
  * @tparam MaxExtrapRule The ExtrapolationRule applied above the upper boundary.
- * @tparam MinBound      The ddc::BoundCond at the lower boundary of the spline builder.
- * @tparam MaxBound      The ddc::BoundCond at the upper boundary of the spline builder.
+ * @tparam MinBound      The ddc::SplineBuilderClosure at the lower boundary of the spline builder.
+ * @tparam MaxBound      The ddc::SplineBuilderClosure at the upper boundary of the spline builder.
  * @tparam Solver        The spline solver backend (default: LAPACK).
  */
 template <
@@ -32,8 +32,8 @@ template <
         class InterpGrid,
         ExtrapolationRule MinExtrapRule,
         ExtrapolationRule MaxExtrapRule,
-        ddc::BoundCond MinBound,
-        ddc::BoundCond MaxBound,
+        ddc::SplineBuilderClosure MinBound,
+        ddc::SplineBuilderClosure MaxBound,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
 class SplineInterpolator
 {
@@ -42,8 +42,8 @@ private:
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
-    static_assert(is_periodic == (MinBound == ddc::BoundCond::PERIODIC));
-    static_assert(is_periodic == (MaxBound == ddc::BoundCond::PERIODIC));
+    static_assert(is_periodic == (MinBound == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic == (MaxBound == ddc::SplineBuilderClosure::PERIODIC));
     static_assert(is_periodic == (MinExtrapRule == ExtrapolationRule::PERIODIC));
     static_assert(is_periodic == (MaxExtrapRule == ExtrapolationRule::PERIODIC));
 

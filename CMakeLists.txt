@@ -54,7 +54,7 @@ find_package(Kokkos 4.4.1...<5 REQUIRED)
 
 find_package(KokkosKernels 4.5.1...<5 REQUIRED)
 
-find_package(DDC 0.14.0 REQUIRED COMPONENTS fft pdi splines)
+find_package(DDC 0.15.0 REQUIRED COMPONENTS fft pdi splines)
 
 find_package(koliop 0.1.2 REQUIRED)
 
@@ -62,13 +62,7 @@ find_package(LAPACKE REQUIRED)
 
 find_package(Ginkgo 1.8 REQUIRED)
 
-find_package(GMGPolar 2.3.1)
-if(NOT GMGPolar_FOUND)
-    set(GMGPOLAR_BUILD_TESTS OFF CACHE BOOL "")
-    add_subdirectory(vendor/GMGPolar EXCLUDE_FROM_ALL SYSTEM)
-    # Suppress -Werror=unused-variable inherited via CMAKE_CXX_FLAGS_INIT so that GMGPolar warnings don't break the build.
-    target_compile_options(GMGPolarLib PRIVATE -Wno-error=unused-variable)
-endif()
+find_package(GMGPolar 2.3.1 REQUIRED)
 
 
 ###############################################################################################
