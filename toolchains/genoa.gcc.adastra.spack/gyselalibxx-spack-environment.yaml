@@ -23,16 +23,16 @@ spack:
     - pdiplugin-trace@1.11
     - 'python@3.14'
 
-    - py-dask
-    - py-h5py
-    - py-imageio
-    - py-matplotlib
-    - py-netcdf4 +mpi
-    - py-numpy
-    - py-pyyaml
-    - py-scipy
-    - py-sympy
-    - py-xarray
+    - py-dask@2026.3
+    - py-h5py@3.16
+    - py-imageio@2.37
+    - py-matplotlib@3.11
+    - py-netcdf4@1.7 +mpi
+    - py-numpy@2.4
+    - py-pyyaml@6.0
+    - py-scipy@1.17
+    - py-sympy@1.14
+    - py-xarray@2026.4
   - architectures:
     - arch=linux-rhel8-zen4
   specs:

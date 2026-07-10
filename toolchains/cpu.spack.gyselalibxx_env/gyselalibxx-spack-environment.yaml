@@ -28,16 +28,16 @@ spack:
     - 'pdiplugin-trace@1.11'
     - 'python@3.14'
   - python-packages:
-    - 'py-dask@2025.7'
-    - 'py-h5py@3.12'
-    - 'py-imageio@2.35'
-    - 'py-matplotlib@3.9'
+    - 'py-dask@2026.3'
+    - 'py-h5py@3.16'
+    - 'py-imageio@2.37'
+    - 'py-matplotlib@3.11'
     - 'py-netcdf4@1.7 +mpi'
-    - 'py-numpy@2.1'
+    - 'py-numpy@2.4'
     - 'py-pyyaml@6.0'
-    - 'py-scipy@1.14'
-    - 'py-sympy@1.13'
-    - 'py-xarray@2024.7'
+    - 'py-scipy@1.17'
+    - 'py-sympy@1.14'
+    - 'py-xarray@2026.4'
   specs:
   - matrix:
     - [$packages]
