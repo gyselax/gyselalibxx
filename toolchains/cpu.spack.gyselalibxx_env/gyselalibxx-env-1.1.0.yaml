@@ -23,12 +23,10 @@ spack:
     - 'pdiplugin-decl-hdf5@1.11 +mpi'
     - 'pdiplugin-decl-netcdf@1.11 +mpi'
     - 'pdiplugin-mpi@1.11'
+    - 'pdiplugin-pycall@1.11'
     - 'pdiplugin-set-value@1.11'
     - 'pdiplugin-trace@1.11'
     - 'python@3.14'
-  - linux-packages:
-      - 'pdiplugin-pycall@1.11'
-    when: platform!="darwin"
   - python-packages:
     - 'py-dask@2025.7'
     - 'py-h5py@3.12'
@@ -79,10 +77,6 @@ spack:
       require: openblas@0.3
     mpi:
       require: openmpi@5.0
-    pdi:
-      require:
-        - spec: ~python
-          when: platform=darwin
     py-dask:
       prefer: ['~dataframe']
     py-pandas:
