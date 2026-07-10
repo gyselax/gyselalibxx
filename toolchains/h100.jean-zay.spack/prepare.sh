@@ -29,7 +29,7 @@ export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
 
 module purge
 
-git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $ALL_CCFRWORK/spack || true
+git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git $ALL_CCFRWORK/spack || true
 . $ALL_CCFRWORK/spack/share/spack/setup-env.sh
 
 # Bootstrap must happen before getting on a compute node

@@ -21,7 +21,7 @@ export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
 
 module purge
 
-git clone --branch v1.1.0 --depth 1 https://github.com/spack/spack.git $HOME/spack || true
+git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git $HOME/spack || true
 . $HOME/spack/share/spack/setup-env.sh
 
 spack env remove --yes-to-all gyselalibxx-spack-environment

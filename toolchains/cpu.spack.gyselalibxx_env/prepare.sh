@@ -8,7 +8,7 @@ fi
 
 # set paths for spack to not use home ~/.spack folder
 CURRENT_DIR=$(pwd)
-export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
+export SPACK_PATH=${CURRENT_DIR}/spack-1.2.2/
 export SPACK_USER_CONFIG_PATH="${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="${SPACK_PATH}/user_cache"
@@ -26,9 +26,9 @@ if [ -d "${SPACK_PATH}" ]; then
     fi
 else
     # Download spack
-    wget https://github.com/spack/spack/releases/download/v1.1.0/spack-1.1.0.tar.gz
-    tar -xf spack-1.1.0.tar.gz
-    rm spack-1.1.0.tar.gz
+    wget https://github.com/spack/spack/releases/download/v1.2.2/spack-1.2.2.tar.gz
+    tar -xf spack-1.2.2.tar.gz
+    rm spack-1.2.2.tar.gz
 fi
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
@@ -51,7 +51,7 @@ if [[ "$OSTYPE" == "linux" ]]; then
   fi
 fi
 
-spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.1.0.yaml
+spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.2.1.yaml
 spack --env gyselalibxx-env config --scope env:gyselalibxx-env add packages:all:target:[$(spack arch --family --target)]
 spack --env gyselalibxx-env mirror add \
   --oci-password-variable GITHUB_TOKEN \
@@ -72,7 +72,7 @@ then
     exit 1
 fi
 
-export SPACK_PATH=${CURRENT_DIR}/spack-1.1.0/
+export SPACK_PATH=${CURRENT_DIR}/spack-1.2.2/
 export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"

@@ -13,7 +13,7 @@ if command -v spack >/dev/null 2>&1
 then
     spack env deactivate
 else
-    . /data/gyselarunner/spack-1.1.1/share/spack/setup-env.sh
+    . /data/gyselarunner/spack-1.2.2/share/spack/setup-env.sh
 fi
 
 spack --env gyselalibxx-env-omp repo update

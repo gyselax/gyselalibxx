@@ -26,7 +26,7 @@ mkdir -p -- "${PYTHONPYCACHEPREFIX}"
 module --force purge
 module list
 
-git clone --depth 1 --branch v1.1.1 https://github.com/spack/spack.git "${SPACK_USER_PREFIX}/spack" || true
+git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git "${SPACK_USER_PREFIX}/spack" || true
 source "${SPACK_USER_PREFIX}/spack/share/spack/setup-env.sh"
 
 which spack
