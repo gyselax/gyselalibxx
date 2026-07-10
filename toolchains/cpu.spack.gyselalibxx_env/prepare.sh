@@ -51,16 +51,16 @@ if [[ "$OSTYPE" == "linux" ]]; then
   fi
 fi
 
-spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.2.1.yaml
-spack --env gyselalibxx-env config --scope env:gyselalibxx-env add packages:all:target:[$(spack arch --family --target)]
+spack env create gyselalibxx-spack-environment ${SCRIPT_DIR}/gyselalibxx-spack-environment.yaml
+spack --env gyselalibxx-spack-environment config --scope env:gyselalibxx-spack-environment add packages:all:target:[$(spack arch --family --target)]
 spack --env gyselalibxx-env mirror add \
   --oci-password-variable GITHUB_TOKEN \
   --oci-username-variable GITHUB_TOKEN \
   --unsigned \
   --type binary \
   local-buildcache oci://ghcr.io/gyselax/gyselalibxx-spack-$(spack arch --operating-system)-buildcache
-spack --env gyselalibxx-env install --jobs 2
-spack env activate -p gyselalibxx-env
+spack --env gyselalibxx-spack-environment install --jobs 2
+spack env activate -p gyselalibxx-spack-environment
 PYTHON_EXECUTABLE=$(which python3)
 spack env deactivate
 
@@ -82,7 +82,7 @@ LD_LIBRARY_PATH_TMP="$LD_LIBRARY_PATH"
 . \${SPACK_PATH}/share/spack/setup-env.sh
 export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_TMP"
 unset LD_LIBRARY_PATH_TMP
-spack --env gyselalibxx-env repo update
-spack env activate -p gyselalibxx-env
+spack --env gyselalibxx-spack-environment repo update
+spack env activate -p gyselalibxx-spack-environment
 export PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
 EOL
