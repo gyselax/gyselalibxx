@@ -30,4 +30,4 @@ spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyse
 echo "Preparing the Spack environment..."
 
 # Concretize on the compute node
-spack --env gyselalibxx-spack-environment install --concurrent-packages 4 --jobs 16
+spack --env gyselalibxx-spack-environment install --jobs 64
