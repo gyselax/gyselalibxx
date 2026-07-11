@@ -18,12 +18,7 @@ fi
 
 spack --env gyselalibxx-env-omp repo update
 
-# The hdf5 package is injecting the environment view `lib` path to `LD_LIBRARY_PATH`
-# which causes spurious segfaults for system executables, we manually remove it.
-LD_LIBRARY_PATH_TMP="$LD_LIBRARY_PATH"
 spack env activate gyselalibxx-env-omp
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_TMP"
-unset LD_LIBRARY_PATH_TMP
 
 module load gcc/13
 # Looks suspicious to set LD_PRELOAD, so we unset it

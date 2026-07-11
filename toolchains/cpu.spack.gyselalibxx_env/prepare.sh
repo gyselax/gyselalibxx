@@ -76,12 +76,7 @@ export SPACK_PATH=${CURRENT_DIR}/spack-1.2.2/
 export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"
-# The hdf5 package is injecting the environment view \`lib\` path to \`LD_LIBRARY_PATH\`
-# which causes spurious segfaults for system executables, we manually remove it.
-LD_LIBRARY_PATH_TMP="$LD_LIBRARY_PATH"
 . \${SPACK_PATH}/share/spack/setup-env.sh
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_TMP"
-unset LD_LIBRARY_PATH_TMP
 spack --env gyselalibxx-spack-environment repo update
 spack env activate -p gyselalibxx-spack-environment
 export PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
