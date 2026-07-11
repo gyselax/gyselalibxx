@@ -26,7 +26,7 @@ spack:
     - py-dask@2026.3
     - py-h5py@3.16
     - py-imageio@2.37
-    - py-matplotlib@3.11
+    - py-matplotlib@3.11 ^freetype@2.14.1
     - py-netcdf4@1.7 +mpi
     - py-numpy@2.4
     - py-pyyaml@6.0
