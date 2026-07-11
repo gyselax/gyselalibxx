@@ -50,8 +50,8 @@ spack:
     builtin:
       branch: releases/v2026.06
   concretizer:
-    unify: true
     reuse: false
+    unify: true
     duplicates:
       strategy: none
   packages:

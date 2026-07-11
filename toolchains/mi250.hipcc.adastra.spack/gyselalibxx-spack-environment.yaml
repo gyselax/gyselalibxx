@@ -49,8 +49,8 @@ spack:
     builtin:
       tag: v2026.06.0
   concretizer:
-    unify: true
     reuse: false
+    unify: true
     duplicates:
       strategy: none
   packages:

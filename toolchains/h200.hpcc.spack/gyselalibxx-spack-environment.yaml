@@ -45,6 +45,7 @@ spack:
     builtin:
       branch: releases/v2026.06
   concretizer:
+    reuse: false
     unify: true
   packages:
     all:
