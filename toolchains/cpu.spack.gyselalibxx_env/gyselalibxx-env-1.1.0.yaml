@@ -5,14 +5,6 @@ spack:
   config:
     install_tree:
       padded_length: 128
-  mirrors:
-    local-buildcache:
-      url: oci://ghcr.io/gyselax/gyselalibxx-spack-buildcache
-      binary: true
-      signed: false
-      access_pair:
-        id_variable: GITHUB_USER
-        secret_variable: GITHUB_TOKEN
   definitions:
   - packages:
     - 'cmake@3.30'
