@@ -38,9 +38,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 spack compiler find
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  COMPILER='apple-clang@14:'
-else
+if [[ "$OSTYPE" == "linux" ]]; then
   AVAILABLE_COMPILERS=$(spack compilers | grep "gcc@1[1-9]" || true)
 
   if [ -z "${AVAILABLE_COMPILERS}" ]
@@ -51,12 +49,16 @@ else
       spack compiler find
       spack unload gcc@11
   fi
-
-  COMPILER='gcc@11:'
 fi
 
 spack env create gyselalibxx-env ${SCRIPT_DIR}/gyselalibxx-env-1.1.0.yaml
 spack --env gyselalibxx-env config --scope env:gyselalibxx-env add packages:all:target:[$(spack arch --family --target)]
+spack --env gyselalibxx-env mirror add \
+  --oci-password-variable GITHUB_TOKEN \
+  --oci-username-variable GITHUB_TOKEN \
+  --unsigned \
+  --type binary \
+  local-buildcache oci://ghcr.io/gyselax/gyselalibxx-spack-$(spack arch --operating-system)-buildcache
 spack --env gyselalibxx-env install --jobs 2
 spack env activate -p gyselalibxx-env
 PYTHON_EXECUTABLE=$(which python3)

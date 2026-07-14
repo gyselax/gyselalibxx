@@ -1,3 +1,4 @@
+# SPDX-License-Identifier: MIT
 
 foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
   foreach(SOLUTION "CURVILINEAR_SOLUTION" "CARTESIAN_SOLUTION")
@@ -32,3 +33,19 @@ foreach(MAPPING_TYPE "CIRCULAR_MAPPING" "CZARNY_MAPPING")
     endif()
   endforeach()
 endforeach()
+
+add_executable(gmg_polar_poisson_like_solver_test
+    gmgpolarpoissonsolver.cpp
+    ../../main.cpp
+)
+target_link_libraries(gmg_polar_poisson_like_solver_test
+    PUBLIC
+        GTest::gtest
+	    GTest::gmock
+        DDC::core
+        DDC::splines
+        gslx::geometry_RTheta
+        gslx::pde_solvers
+)
+
+gtest_discover_tests(gmg_polar_poisson_like_solver_test DISCOVERY_MODE PRE_TEST)

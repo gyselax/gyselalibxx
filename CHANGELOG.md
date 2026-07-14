@@ -33,6 +33,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add a CMake option to control the discovery timeout of Gyselalib++ tests.
 - Added `PolarFootFinder` to replace `SplinePolarFootFinder` for clarity of Advection and Foot finding spaces.
 - Allow polar advection to modify a subset of the distribution function.
+- Add a `LocalPartialDerivativeCreator` concept to describe partial derivatives that can be called locally.
+- Add a method `get_derivative` to `CentralFDMPartialDerivative` so it respects the `LocalPartialDerivativeCreator` concept.
+- Add class `GMGPolarPoissonLikeSolver` to allow the use of [GMGPolar](https://github.com/SciCompMod/GMGPolar) as a polar Poisson solver.
+- Add GMGPolar in the toolchains.
 - Add `SplineInterpolator2D.`
 - Add `LagrangeInterpolatorND.`
 
@@ -54,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Changed the name of class `SplineBuliderDerivField2D` to fix typo (->`SplineBuilderDerivField2D`).
-- Update DDC to [v0.14.0](https://github.com/CExA-project/ddc/releases/tag/v0.14.0) (see also [v0.13.0](https://github.com/CExA-project/ddc/releases/tag/v0.13.0)).
+- Update DDC to [v0.15.0](https://github.com/CExA-project/ddc/releases/tag/v0.15.0) (see also [v0.14.0](https://github.com/CExA-project/ddc/releases/tag/v0.14.0) and [v0.13.0](https://github.com/CExA-project/ddc/releases/tag/v0.13.0)).
 - Changed FindLAPACKE CMake module to the version in DDC.
 - Renamed `DiscreteToCartesian` -> `DiscretePoloidalCSSplineMapping`.
 - Renamed `DiscreteToCartesianBuilder` -> `DiscretePoloidalCSSplineMappingBuilder`.
@@ -80,6 +84,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove default O1 optimisation flag.
 - Changed type of species identifier read in `read_species` PDI event (from `int` to `int64`).
 - Remove version constraint on the indirect dependency Kokkos-FFT.
+- Use uppercase L suffix for long double literals.
 
 ### Deprecated
 

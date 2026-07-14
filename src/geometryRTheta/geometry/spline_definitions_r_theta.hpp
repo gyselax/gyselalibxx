@@ -30,13 +30,13 @@ struct PolarBSplinesRTheta : PolarBSplines<BSplinesR, BSplinesTheta, 1>
 {
 };
 
-ddc::BoundCond constexpr SplineRBoundary = ddc::BoundCond::GREVILLE;
-ddc::BoundCond constexpr SplineThetaBoundary = ddc::BoundCond::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineRClosure = ddc::SplineBuilderClosure::GREVILLE;
+ddc::SplineBuilderClosure constexpr SplineThetaClosure = ddc::SplineBuilderClosure::PERIODIC;
 
 using SplineInterpPointsR
-        = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRBoundary, SplineRBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRClosure, SplineRClosure>;
 using SplineInterpPointsTheta
-        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaBoundary, SplineThetaBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesTheta, SplineThetaClosure, SplineThetaClosure>;
 
 // --- Operators
 using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
@@ -46,10 +46,10 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         BSplinesTheta,
         GridR,
         GridTheta,
-        SplineRBoundary, // boundary at r=0
-        SplineRBoundary, // boundary at rmax
-        SplineThetaBoundary,
-        SplineThetaBoundary,
+        SplineRClosure, // boundary at r=0
+        SplineRClosure, // boundary at rmax
+        SplineThetaClosure,
+        SplineThetaClosure,
         ddc::SplineSolver::LAPACK>;
 
 using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D<
@@ -83,10 +83,10 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         BSplinesTheta,
         GridR,
         GridTheta,
-        SplineRBoundary, // boundary at r=0
-        SplineRBoundary, // boundary at rmax
-        SplineThetaBoundary,
-        SplineThetaBoundary,
+        SplineRClosure, // boundary at r=0
+        SplineRClosure, // boundary at rmax
+        SplineThetaClosure,
+        SplineThetaClosure,
         ddc::SplineSolver::LAPACK>;
 
 using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
