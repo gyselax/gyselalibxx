@@ -86,7 +86,7 @@ private:
     // Full index range element:
     using IdxFunction = typename IdxRangeFunction::discrete_element_type;
 
-    using MemSpace = typename FunctionBuilder::mem_space;
+    using MemSpace = typename FunctionBuilder::memory_space;
 
     // Advection dimension (or Interest dimension):
     using DimInterest = typename GridInterest::continuous_dimension_type;
