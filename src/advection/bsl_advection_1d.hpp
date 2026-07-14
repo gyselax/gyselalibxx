@@ -76,8 +76,8 @@ public:
     using AdvectionFieldEvaluator = typename AdvectionFieldInterpolator::EvaluatorType;
 
     static_assert(std::is_same_v<
-                  typename FunctionBuilder::mem_space,
-                  typename AdvectionFieldBuilder::mem_space>);
+                  typename FunctionBuilder::memory_space,
+                  typename AdvectionFieldBuilder::memory_space>);
 
 private:
     // Advection index range element:
