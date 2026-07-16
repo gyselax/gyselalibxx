@@ -52,6 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix GCC version on Adastra toolchains.
 - Fix use of `BslAdvectionSpatial` and `BslAdvectionVelocity` with non-double precision.
 - Fix H100 toolchain on Jean-Zay.
+- Fix Lagrange basis non-uniform initialisation for a sub-domain.
 
 ### Changed
 
