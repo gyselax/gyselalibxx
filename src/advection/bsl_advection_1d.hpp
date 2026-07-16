@@ -109,7 +109,6 @@ private:
     using DerivDim = ddc::Deriv<DimInterest>;
     using IdxRangeAdvecFieldDeriv
             = ddc::replace_dim_of_t<IdxRangeAdvection, GridInterest, DerivDim>;
-    using AdvecFieldDerivConstField = Field<const DataType, IdxRangeAdvecFieldDeriv>;
 
     // Type for the spline representation of the function
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
@@ -120,7 +119,6 @@ private:
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeFunction>;
-    using FunctionDerivConstField = ConstField<DataType, IdxRangeFunctionDeriv>;
 
     using TimeStepper =
             typename TimeStepperBuilder::template time_stepper_t<CoordInterest, DataType>;
@@ -256,12 +254,21 @@ public:
             Field<DataType, IdxRangeFunction, MemSpace, FDistribLayout> const allfdistribu,
             Field<DataType, IdxRangeAdvection, MemSpace, AdvecLayout> const advection_field,
             DataType const dt,
-            std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
+            std::optional<
+                    ConstField<DataType, IdxRangeAdvecFieldDeriv, MemSpace, AdvecLayout>> const
+                    advection_field_derivatives_min
             = std::nullopt,
-            std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
+            std::optional<
+                    ConstField<DataType, IdxRangeAdvecFieldDeriv, MemSpace, AdvecLayout>> const
+                    advection_field_derivatives_max
             = std::nullopt,
-            std::optional<FunctionDerivConstField> const function_derivatives_min = std::nullopt,
-            std::optional<FunctionDerivConstField> const function_derivatives_max
+            std::optional<
+                    ConstField<DataType, IdxRangeFunctionDeriv, MemSpace, FDistribLayout>> const
+                    function_derivatives_min
+            = std::nullopt,
+            std::optional<
+                    ConstField<DataType, IdxRangeFunctionDeriv, MemSpace, FDistribLayout>> const
+                    function_derivatives_max
             = std::nullopt) const
     {
         using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
