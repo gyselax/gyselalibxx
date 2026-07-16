@@ -138,7 +138,7 @@ public:
                     Idx<Grid1D> idx = idx_first + npoints + i - 1;
                     if (idx > idx_back) {
                         points[npoints + i - 1] = ddc::coordinate(idx_back)
-                                                  + (ddc::coordinate(idx - idx_back + 2 * idx_front)
+                                                  + (ddc::coordinate(idx - (idx_back - idx_front))
                                                      - ddc::coordinate(idx_front));
                     } else {
                         points[npoints + i - 1] = ddc::coordinate(idx);
