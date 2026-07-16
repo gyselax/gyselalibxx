@@ -83,6 +83,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed type of species identifier read in `read_species` PDI event (from `int` to `int64`).
 - Remove version constraint on the indirect dependency Kokkos-FFT.
 - Use uppercase L suffix for long double literals.
+- Allow passing fields defined on strided domains to `BslAdvection1D`.
 
 ### Deprecated
 
