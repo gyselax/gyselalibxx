@@ -326,7 +326,7 @@ public:
 
         TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
 
-        ConstField<DataType, IdxRangeBSAdvection> function_coefs_const
+        ConstField<DataType, IdxRangeFunctionBasis> function_coefs_const
                 = get_const_field(function_coefs_alloc);
         FunctionEvaluator const& function_evaluator_proxy = m_function_evaluator;
         AdvectionFieldEvaluator const& adv_field_evaluator_proxy = m_adv_field_evaluator;
