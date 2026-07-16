@@ -324,6 +324,8 @@ public:
 
         TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
 
+        ConstField<DataType, IdxRangeBSAdvection, MemSpace, FDistribLayout> function_coefs_const
+                = get_field(function_coefs_alloc);
         FunctionEvaluator const& function_evaluator_proxy = m_function_evaluator;
         AdvectionFieldEvaluator const& adv_field_evaluator_proxy = m_adv_field_evaluator;
         // Evaluate the function at the characteristic feet
@@ -347,8 +349,9 @@ public:
                                                         advection_field_coefs[IdxBatchAdvecField(
                                                                 idx)]));
                                     });
-                    allfdistribu(idx)
-                            = function_evaluator_proxy(foot, function_coefs[IdxBatchFunction(idx)]);
+                    allfdistribu(idx) = function_evaluator_proxy(
+                            foot,
+                            function_coefs_const[IdxBatchFunction(idx)]);
                 });
 
 
