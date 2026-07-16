@@ -298,7 +298,7 @@ public:
                 "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
         // Use Kokkos view constructor to ensure correct layout
-        Field<DataType, IdxRangeBSAdvection, MemSpace, FDistribLayout> function_coefs(
+        Field<DataType, IdxRangeFunctionBasis, MemSpace, FDistribLayout> function_coefs(
                 function_coefs_alloc.allocation_kokkos_view(),
                 get_idx_range(function_coefs_alloc));
 
