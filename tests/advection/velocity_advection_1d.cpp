@@ -246,8 +246,8 @@ public:
                 allfdistribu,
                 advection_field,
                 timestep,
-                get_const_field(advection_field_derivatives_min),
-                get_const_field(advection_field_derivatives_max));
+                std::optional(get_const_field(advection_field_derivatives_min)),
+                std::optional(get_const_field(advection_field_derivatives_max)));
 
 
         double const max_advection_error = ddc::parallel_transform_reduce(
