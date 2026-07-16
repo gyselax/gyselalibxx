@@ -297,12 +297,9 @@ public:
         FunctionBasisFieldMem function_coefs_alloc(
                 "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
-        Field<DataType, IdxRangeBSAdvection, MemSpace, FDistribLayout> function_coefs;
-        if constexpr (std::is_same_v<FDistribLayout, Kokkos::layout_stride>) {
-            function_coefs = function_coefs_alloc[get_idx_range(function_coefs_alloc)];
-        } else {
-            function_coefs = get_field(function_coefs_alloc);
-        }
+        Field<DataType, IdxRangeBSAdvection, MemSpace, FDistribLayout> function_coefs(
+                function_coefs_alloc.allocation_kokkos_view(),
+                get_idx_range(function_coefs_alloc));
 
         // Interpolate the function ..............................................................
         /*
