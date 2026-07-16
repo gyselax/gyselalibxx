@@ -75,12 +75,18 @@ public:
     /// The type of the spline evaluator for the advection field (see SplineEvaluator).
     using AdvectionFieldEvaluator = typename AdvectionFieldInterpolator::EvaluatorType;
 
+    static_assert(std::is_same_v<
+                  typename FunctionBuilder::memory_space,
+                  typename AdvectionFieldBuilder::memory_space>);
+
 private:
     // Advection index range element:
     using IdxAdvection = typename IdxRangeAdvection::discrete_element_type;
 
     // Full index range element:
     using IdxFunction = typename IdxRangeFunction::discrete_element_type;
+
+    using MemSpace = typename FunctionBuilder::memory_space;
 
     // Advection dimension (or Interest dimension):
     using DimInterest = typename GridInterest::continuous_dimension_type;
@@ -93,22 +99,15 @@ private:
     using FeetField = typename FeetFieldMem::span_type;
     using FeetConstField = typename FeetFieldMem::view_type;
 
-    using AdvecFieldMem = FieldMem<DataType, IdxRangeAdvection>;
-    using AdvecField = typename AdvecFieldMem::span_type;
-
-    using FunctionField = Field<DataType, IdxRangeFunction>;
-
     // Type for spline representation of the advection field
     using IdxRangeBSAdvection = typename InterpolationBuilderTraits<
             AdvectionFieldBuilder>::template batched_basis_idx_range_type<IdxRangeAdvection>;
     using AdvecFieldSplineMem = FieldMem<DataType, IdxRangeBSAdvection>;
-    using AdvecFieldSplineCoeffs = Field<DataType, IdxRangeBSAdvection>;
 
     // Type for the derivatives of the advection field
     using DerivDim = ddc::Deriv<DimInterest>;
     using IdxRangeAdvecFieldDeriv
             = ddc::replace_dim_of_t<IdxRangeAdvection, GridInterest, DerivDim>;
-    using AdvecFieldDerivConstField = Field<const DataType, IdxRangeAdvecFieldDeriv>;
 
     // Type for the spline representation of the function
     using IdxRangeFunctionBasis = typename InterpolationBuilderTraits<
@@ -119,7 +118,6 @@ private:
     // Type for the derivatives of the function
     using IdxRangeFunctionDeriv = typename InterpolationBuilderTraits<
             FunctionBuilder>::template batched_derivs_idx_range_type<IdxRangeFunction>;
-    using FunctionDerivConstField = ConstField<DataType, IdxRangeFunctionDeriv>;
 
     using TimeStepper =
             typename TimeStepperBuilder::template time_stepper_t<CoordInterest, DataType>;
@@ -250,16 +248,26 @@ public:
      *
      * @return A reference to the allfdistribu array after advection on dt.
      */
-    FunctionField operator()(
-            FunctionField const allfdistribu,
-            AdvecField const advection_field,
+    template <class FDistribLayout, class AdvecLayout>
+    Field<DataType, IdxRangeFunction, MemSpace, FDistribLayout> operator()(
+            Field<DataType, IdxRangeFunction, MemSpace, FDistribLayout> const allfdistribu,
+            Field<DataType, IdxRangeAdvection, MemSpace, AdvecLayout> const advection_field,
             DataType const dt,
-            std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
+            std::optional<
+                    ConstField<DataType, IdxRangeAdvecFieldDeriv, MemSpace, AdvecLayout>> const
+                    advection_field_derivatives_min
             = std::nullopt,
-            std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_max
+            std::optional<
+                    ConstField<DataType, IdxRangeAdvecFieldDeriv, MemSpace, AdvecLayout>> const
+                    advection_field_derivatives_max
             = std::nullopt,
-            std::optional<FunctionDerivConstField> const function_derivatives_min = std::nullopt,
-            std::optional<FunctionDerivConstField> const function_derivatives_max
+            std::optional<
+                    ConstField<DataType, IdxRangeFunctionDeriv, MemSpace, FDistribLayout>> const
+                    function_derivatives_min
+            = std::nullopt,
+            std::optional<
+                    ConstField<DataType, IdxRangeFunctionDeriv, MemSpace, FDistribLayout>> const
+                    function_derivatives_max
             = std::nullopt) const
     {
         using IdxRangeBatchFunction = ddc::remove_dims_of_t<IdxRangeFunction, GridInterest>;
@@ -276,7 +284,8 @@ public:
         AdvecFieldSplineMem advection_field_coefs_alloc(
                 "advection_field_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_adv_field_builder, get_idx_range(advection_field)));
-        AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);
+        Field<DataType, IdxRangeBSAdvection, MemSpace, AdvecLayout> advection_field_coefs
+                = get_field(advection_field_coefs_alloc);
 
         m_adv_field_builder(
                 advection_field_coefs,
@@ -288,6 +297,10 @@ public:
         FunctionBasisFieldMem function_coefs_alloc(
                 "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
+        // Use Kokkos view constructor to ensure correct layout
+        Field<DataType, IdxRangeFunctionBasis, MemSpace, FDistribLayout> function_coefs(
+                function_coefs_alloc.allocation_kokkos_view(),
+                get_idx_range(function_coefs_alloc));
 
         // Interpolate the function ..............................................................
         /*
@@ -296,7 +309,7 @@ public:
         */
         // Build interpolation coefficients from the function values
         m_function_builder(
-                get_field(function_coefs_alloc),
+                function_coefs,
                 get_const_field(allfdistribu),
                 function_derivatives_min,
                 function_derivatives_max);
@@ -313,9 +326,8 @@ public:
 
         TimeStepper time_stepper = m_time_stepper_builder.template preallocate<TimeStepper>();
 
-
-        FunctionBasisConstField function_coefs = get_const_field(function_coefs_alloc);
-
+        ConstField<DataType, IdxRangeFunctionBasis> function_coefs_const
+                = get_const_field(function_coefs_alloc);
         FunctionEvaluator const& function_evaluator_proxy = m_function_evaluator;
         AdvectionFieldEvaluator const& adv_field_evaluator_proxy = m_adv_field_evaluator;
         // Evaluate the function at the characteristic feet
@@ -339,8 +351,9 @@ public:
                                                         advection_field_coefs[IdxBatchAdvecField(
                                                                 idx)]));
                                     });
-                    allfdistribu(idx)
-                            = function_evaluator_proxy(foot, function_coefs[IdxBatchFunction(idx)]);
+                    allfdistribu(idx) = function_evaluator_proxy(
+                            foot,
+                            function_coefs_const[IdxBatchFunction(idx)]);
                 });
 
 
