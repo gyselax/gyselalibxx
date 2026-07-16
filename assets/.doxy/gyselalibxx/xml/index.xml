@@ -58,15 +58,12 @@
     <member refid="classBslAdvection1D_1aeeb2ab581f7a4948afc33d2b40dfc93e" kind="typedef"><name>FeetConstField</name></member>
     <member refid="classBslAdvection1D_1a1e94430f105f8dbdf5b809305988b6d6" kind="typedef"><name>IdxRangeBSAdvection</name></member>
     <member refid="classBslAdvection1D_1aa466a74a5019518cee65f37f21e4e43a" kind="typedef"><name>AdvecFieldSplineMem</name></member>
-    <member refid="classBslAdvection1D_1a647aa03f3a142601dd6a760e7ff4c501" kind="typedef"><name>AdvecFieldSplineCoeffs</name></member>
     <member refid="classBslAdvection1D_1a6e58fcf3b7f6bfb24ac383f2ffd81196" kind="typedef"><name>DerivDim</name></member>
     <member refid="classBslAdvection1D_1a1ea2c2efd7eea8b731d0d972735ba42b" kind="typedef"><name>IdxRangeAdvecFieldDeriv</name></member>
-    <member refid="classBslAdvection1D_1ad5d8680c7934205817f147026826dcd8" kind="typedef"><name>AdvecFieldDerivConstField</name></member>
     <member refid="classBslAdvection1D_1a958135e99317a68f990eae7f919a6365" kind="typedef"><name>IdxRangeFunctionBasis</name></member>
     <member refid="classBslAdvection1D_1a0c0da8de5232bfd7bf9e8db3288049c9" kind="typedef"><name>FunctionBasisFieldMem</name></member>
     <member refid="classBslAdvection1D_1adf40b96d80d76d9c380e497e58560b66" kind="typedef"><name>FunctionBasisConstField</name></member>
     <member refid="classBslAdvection1D_1aee0a7b63e170ccd57a0c538567ece78b" kind="typedef"><name>IdxRangeFunctionDeriv</name></member>
-    <member refid="classBslAdvection1D_1a58050bcfff91ec5f6d5949fbce1d0004" kind="typedef"><name>FunctionDerivConstField</name></member>
     <member refid="classBslAdvection1D_1a9eb89b3fa476c01dbb66e0b3b0fd4a16" kind="typedef"><name>TimeStepper</name></member>
     <member refid="classBslAdvection1D_1a6b4ae6a8b94fe3dc1a55f2f766405bb6" kind="variable"><name>m_function_builder</name></member>
     <member refid="classBslAdvection1D_1aec4375534b3c370e5f3be10ed0a3448f" kind="variable"><name>m_function_evaluator</name></member>
@@ -77,7 +74,7 @@
     <member refid="classBslAdvection1D_1ae7cad7b6ea28b79402059c7087948088" kind="function"><name>BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1aae7aecf6f16dd5afaad21409ac5a8b78" kind="function"><name>BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1a231cd2d2423f12e1adc6c6a51d22d56e" kind="function"><name>~BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1ac20cbe617c5adf9f22926d609f3579e2" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvection1D_1a05b3c22a571dceeba389f4f5b00e4f8b" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionPolar" kind="class"><name>BslAdvectionPolar</name>
     <member refid="classBslAdvectionPolar_1a6e36e24474068c1cfac75ea3dfbecd1c" kind="typedef"><name>R</name></member>

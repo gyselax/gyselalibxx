@@ -6,8 +6,6 @@
 ## a
 
 * **AdvectionFieldFinder** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
-* **AdvecFieldDerivConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
-* **AdvecFieldSplineCoeffs** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvecFieldSplineMem** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvectionFieldBuilder** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvectionFieldEvaluator** ([**BslAdvection1D**](classBslAdvection1D.md))
@@ -400,7 +398,6 @@
 * **FunctionBasisConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionBasisFieldMem** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionBuilder** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
-* **FunctionDerivConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionEvaluator** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
 * **fdm\_centred** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md))
 * **fill\_matrix\_with\_coeff** ([**CollisionsIntra**](classCollisionsIntra.md))
