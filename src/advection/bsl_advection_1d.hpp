@@ -103,7 +103,6 @@ private:
     using IdxRangeBSAdvection = typename InterpolationBuilderTraits<
             AdvectionFieldBuilder>::template batched_basis_idx_range_type<IdxRangeAdvection>;
     using AdvecFieldSplineMem = FieldMem<DataType, IdxRangeBSAdvection>;
-    using AdvecFieldSplineCoeffs = Field<DataType, IdxRangeBSAdvection>;
 
     // Type for the derivatives of the advection field
     using DerivDim = ddc::Deriv<DimInterest>;
@@ -285,7 +284,8 @@ public:
         AdvecFieldSplineMem advection_field_coefs_alloc(
                 "advection_field_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_adv_field_builder, get_idx_range(advection_field)));
-        AdvecFieldSplineCoeffs advection_field_coefs = get_field(advection_field_coefs_alloc);
+        Field<DataType, IdxRangeBSAdvection, MemSpace, AdvecLayout> advection_field_coefs
+                = get_field(advection_field_coefs_alloc);
 
         m_adv_field_builder(
                 advection_field_coefs,
@@ -297,6 +297,8 @@ public:
         FunctionBasisFieldMem function_coefs_alloc(
                 "function_coefs (BslAdvection1D::operator())",
                 batched_basis_idx_range(m_function_builder, idx_range_function));
+        Field<DataType, IdxRangeBSAdvection, MemSpace, FDistribLayout> function_coefs
+                = get_field(function_coefs_alloc);
 
         // Interpolate the function ..............................................................
         /*
