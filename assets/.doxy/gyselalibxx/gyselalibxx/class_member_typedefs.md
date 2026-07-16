@@ -5,9 +5,7 @@
 
 ## a
 
-* **AdvecField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvecFieldDerivConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
-* **AdvecFieldMem** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvecFieldSplineCoeffs** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvecFieldSplineMem** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvectionFieldBuilder** ([**BslAdvection1D**](classBslAdvection1D.md))
@@ -258,7 +256,6 @@
 * **FunctionBuilder** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
 * **FunctionDerivConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionEvaluator** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
-* **FunctionField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FEMBSplines** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **FEMBSplinesCoeffMem** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
 * **FEMEvalExtrapolationRule** ([**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md))
@@ -500,6 +497,7 @@
 ## m
 
 * **Matrix\_2x2** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
+* **MemSpace** ([**BslAdvection1D**](classBslAdvection1D.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **MemorySpace** ([**BslAdvectionPolar**](classBslAdvectionPolar.md), [**DiscretePoloidalCSSplineMappingBuilder**](classDiscretePoloidalCSSplineMappingBuilder.md), [**RefinedDiscretePoloidalCSSplineMappingBuilder**](classRefinedDiscretePoloidalCSSplineMappingBuilder.md), [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
 * **MaxRadiusPatch** ([**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md))
 * **MinRadiusPatch** ([**ConstantExtrapolationRuleOnion**](structConstantExtrapolationRuleOnion.md))
@@ -516,7 +514,6 @@
 * **MultipatchCoordField** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **MultipatchSplineCoeff** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **MultipatchIdxRanges** ([**OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;**](classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa.md))
-* **MemSpace** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 
 
 ## n

@@ -6,9 +6,7 @@
 ## a
 
 * **AdvectionFieldFinder** ([**AdvectionFieldFinder**](classAdvectionFieldFinder.md))
-* **AdvecField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvecFieldDerivConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
-* **AdvecFieldMem** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvecFieldSplineCoeffs** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvecFieldSplineMem** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **AdvectionFieldBuilder** ([**BslAdvection1D**](classBslAdvection1D.md))
@@ -404,7 +402,6 @@
 * **FunctionBuilder** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
 * **FunctionDerivConstField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **FunctionEvaluator** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
-* **FunctionField** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **fdm\_centred** ([**CentralFDMPartialDerivative**](classCentralFDMPartialDerivative.md))
 * **fill\_matrix\_with\_coeff** ([**CollisionsIntra**](classCollisionsIntra.md))
 * **free\_chunks** ([**DerivFieldMem&lt; ElementType, IdxRange&lt; DDims... &gt;, NDerivs, MemSpace &gt;**](classDerivFieldMem_3_01ElementType_00_01IdxRange_3_01DDims_8_8_8_01_4_00_01NDerivs_00_01MemSpace_01_4.md))
@@ -805,6 +802,7 @@
 * **m\_corner1** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **m\_corner2** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
 * **m\_corner3** ([**BarycentricToCartesian**](classBarycentricToCartesian.md), [**CartesianToBarycentric**](classCartesianToBarycentric.md))
+* **MemSpace** ([**BslAdvection1D**](classBslAdvection1D.md), [**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **m\_adv\_field\_builder** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **m\_adv\_field\_evaluator** ([**BslAdvection1D**](classBslAdvection1D.md))
 * **m\_function\_builder** ([**BslAdvection1D**](classBslAdvection1D.md), [**BslAdvectionSpatial**](classBslAdvectionSpatial.md), [**BslAdvectionVelocity**](classBslAdvectionVelocity.md))
@@ -1082,7 +1080,6 @@
 * **m\_compute\_coeffs\_dim1** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **m\_compute\_coeffs\_dim2** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **m\_spline\_coeffs** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
-* **MemSpace** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **m\_rhs** ([**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md))
 * **m\_data** ([**TensorCommon**](classTensorCommon.md))
 * **m\_mapping\_2d** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))

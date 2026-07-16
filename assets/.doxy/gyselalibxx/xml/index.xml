@@ -48,6 +48,7 @@
     <member refid="classBslAdvection1D_1af67e14f2d8942fb351f9afa5f3c7d0cb" kind="typedef"><name>AdvectionFieldEvaluator</name></member>
     <member refid="classBslAdvection1D_1ae6036a466b2c7edd05bb3e0b908ceb83" kind="typedef"><name>IdxAdvection</name></member>
     <member refid="classBslAdvection1D_1adf76e392631512c10d87e295ee020ea1" kind="typedef"><name>IdxFunction</name></member>
+    <member refid="classBslAdvection1D_1aeaf0b585bf3d04edb9c84fa14a571154" kind="typedef"><name>MemSpace</name></member>
     <member refid="classBslAdvection1D_1a51ec53a445b819dff3c5e4858cf6479b" kind="typedef"><name>DimInterest</name></member>
     <member refid="classBslAdvection1D_1aa13ac7196947bb9c15527174cfdf05a6" kind="typedef"><name>CoordInterest</name></member>
     <member refid="classBslAdvection1D_1abb35d57c0f5405d9c0fefbbdefe8ecc7" kind="typedef"><name>IdxRangeInterest</name></member>
@@ -55,9 +56,6 @@
     <member refid="classBslAdvection1D_1a14af0dec5aa3e8a19a24c0642f6965fb" kind="typedef"><name>FeetFieldMem</name></member>
     <member refid="classBslAdvection1D_1ab00a1ee36a7edbf2b195d4908724863f" kind="typedef"><name>FeetField</name></member>
     <member refid="classBslAdvection1D_1aeeb2ab581f7a4948afc33d2b40dfc93e" kind="typedef"><name>FeetConstField</name></member>
-    <member refid="classBslAdvection1D_1affab921fdc5ccb3a991fc5dc84897051" kind="typedef"><name>AdvecFieldMem</name></member>
-    <member refid="classBslAdvection1D_1a52b466daba20fce25ee956901c5b1dca" kind="typedef"><name>AdvecField</name></member>
-    <member refid="classBslAdvection1D_1a736bd6e0733a08aec56cc843dc522de0" kind="typedef"><name>FunctionField</name></member>
     <member refid="classBslAdvection1D_1a1e94430f105f8dbdf5b809305988b6d6" kind="typedef"><name>IdxRangeBSAdvection</name></member>
     <member refid="classBslAdvection1D_1aa466a74a5019518cee65f37f21e4e43a" kind="typedef"><name>AdvecFieldSplineMem</name></member>
     <member refid="classBslAdvection1D_1a647aa03f3a142601dd6a760e7ff4c501" kind="typedef"><name>AdvecFieldSplineCoeffs</name></member>
@@ -79,7 +77,7 @@
     <member refid="classBslAdvection1D_1ae7cad7b6ea28b79402059c7087948088" kind="function"><name>BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1aae7aecf6f16dd5afaad21409ac5a8b78" kind="function"><name>BslAdvection1D</name></member>
     <member refid="classBslAdvection1D_1a231cd2d2423f12e1adc6c6a51d22d56e" kind="function"><name>~BslAdvection1D</name></member>
-    <member refid="classBslAdvection1D_1a69d440999392ca94a124ad9a18d814d1" kind="function"><name>operator()</name></member>
+    <member refid="classBslAdvection1D_1ac20cbe617c5adf9f22926d609f3579e2" kind="function"><name>operator()</name></member>
   </compound>
   <compound refid="classBslAdvectionPolar" kind="class"><name>BslAdvectionPolar</name>
     <member refid="classBslAdvectionPolar_1a6e36e24474068c1cfac75ea3dfbecd1c" kind="typedef"><name>R</name></member>

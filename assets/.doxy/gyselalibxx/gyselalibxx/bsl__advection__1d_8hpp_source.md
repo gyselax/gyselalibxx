@@ -42,12 +42,18 @@ public:
     using AdvectionFieldBuilder = typename AdvectionFieldInterpolator::BuilderType;
     using AdvectionFieldEvaluator = typename AdvectionFieldInterpolator::EvaluatorType;
 
+    static_assert(std::is_same_v<
+                  typename FunctionBuilder::memory_space,
+                  typename AdvectionFieldBuilder::memory_space>);
+
 private:
     // Advection index range element:
     using IdxAdvection = typename IdxRangeAdvection::discrete_element_type;
 
     // Full index range element:
     using IdxFunction = typename IdxRangeFunction::discrete_element_type;
+
+    using MemSpace = typename FunctionBuilder::memory_space;
 
     // Advection dimension (or Interest dimension):
     using DimInterest = typename GridInterest::continuous_dimension_type;
@@ -59,11 +65,6 @@ private:
     using FeetFieldMem = FieldMem<CoordInterest, IdxRangeAdvection>;
     using FeetField = typename FeetFieldMem::span_type;
     using FeetConstField = typename FeetFieldMem::view_type;
-
-    using AdvecFieldMem = FieldMem<DataType, IdxRangeAdvection>;
-    using AdvecField = typename AdvecFieldMem::span_type;
-
-    using FunctionField = Field<DataType, IdxRangeFunction>;
 
     // Type for spline representation of the advection field
     using IdxRangeBSAdvection = typename InterpolationBuilderTraits<
@@ -140,9 +141,10 @@ public:
 
     ~BslAdvection1D() = default;
 
-    FunctionField operator()(
-            FunctionField const allfdistribu,
-            AdvecField const advection_field,
+    template <class FDistribLayout, class AdvecLayout>
+    Field<DataType, IdxRangeFunction, MemSpace, FDistribLayout> operator()(
+            Field<DataType, IdxRangeFunction, MemSpace, FDistribLayout> const allfdistribu,
+            Field<DataType, IdxRangeAdvection, MemSpace, AdvecLayout> const advection_field,
             DataType const dt,
             std::optional<AdvecFieldDerivConstField> const advection_field_derivatives_min
             = std::nullopt,
