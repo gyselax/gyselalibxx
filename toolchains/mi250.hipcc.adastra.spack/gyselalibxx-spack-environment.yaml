@@ -65,7 +65,7 @@ spack:
     lapack:
       require: openblas
     mpi:
-      require: adastra_v2025_11.cray-mpich
+      require: cray-mpich
     py-dask:
       prefer: ['~dataframe']
     py-pandas:
