@@ -42,8 +42,11 @@ spack:
     - [$architectures]
   repos:
     patches:
-      git: https://github.com/etiennemlb/gysela-spack.git
-      branch: releases/v2026.03_lumi_tmp
+      git: https://github.com/gyselax/spack.git
+      branch: releases/v2025.11
+      paths:
+        - spack_repo/lumi_v2025_11
+        - spack_repo/patches_v2025_11
     builtin:
       tag: v2025.11.0
   concretizer:
