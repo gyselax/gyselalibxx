@@ -137,7 +137,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="117" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="117" bodyend="159"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="117" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="117" bodyend="165"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1a243a0e2af970857df060f6c9575f3af7" prot="public" static="no" const="no" explicit="yes" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -171,7 +171,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="166" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="166" bodyend="171"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="172" column="18" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="172" bodyend="177"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1abe2663beb2230cb1727701ec139de22c" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classNonUniformLagrangeBasis_1affe26bb323f796a6c4aaf3ddfa8629d6" kindref="member">coord_type</ref></type>
@@ -189,7 +189,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="177" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="177" bodyend="180"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="183" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="183" bodyend="186"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1a729fd847c7657f58bda764bf4bb0898f" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION <ref refid="classNonUniformLagrangeBasis_1affe26bb323f796a6c4aaf3ddfa8629d6" kindref="member">coord_type</ref></type>
@@ -207,7 +207,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="186" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="186" bodyend="189"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="192" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="192" bodyend="195"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1a1761db8c849ada12988a764787d861ec" prot="public" static="no" const="yes" explicit="no" inline="yes" noexcept="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION DataType</type>
@@ -225,7 +225,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="195" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="195" bodyend="198"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="201" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="201" bodyend="204"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1afab457f35ffd170e46a266cdf2536abe" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxRange&lt; <ref refid="classNonUniformLagrangeBasis_1_1Impl_1a2db4a21f8fa52bcad6adaf930dee5a24" kindref="member">knot_grid</ref> &gt;</type>
@@ -243,7 +243,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="204" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="204" bodyend="207"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="210" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="210" bodyend="213"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1a764a42c0119e24c304e5c6b6bbf545d5" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION IdxRange&lt; <ref refid="classNonUniformLagrangeBasis_1_1Impl_1a2db4a21f8fa52bcad6adaf930dee5a24" kindref="member">knot_grid</ref> &gt;</type>
@@ -261,7 +261,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="213" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="213" bodyend="216"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="219" column="41" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="219" bodyend="222"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1aaa83daa104489e6a24ef782e1cfb247c" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -315,7 +315,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="229" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="229" bodyend="247"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="235" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="235" bodyend="253"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1a29aab7ac13cd66506b45c62f95e90464" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -381,7 +381,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="267" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="267" bodyend="358"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="273" column="37" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="273" bodyend="364"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="private-static-func">
@@ -425,7 +425,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="368" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="368" bodyend="379"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="374" column="43" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="374" bodyend="385"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1adea9c2c5fbf5e3454b49c94e3a433070" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION std::array&lt; DataType, D+1 &gt;</type>
@@ -444,7 +444,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="382" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="382" bodyend="398"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="388" column="50" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="388" bodyend="404"/>
       </memberdef>
       <memberdef kind="function" id="classNonUniformLagrangeBasis_1_1Impl_1a726e836523fd04fb01ccafeaa48c0d81" prot="private" static="yes" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>KOKKOS_INLINE_FUNCTION void</type>
@@ -509,7 +509,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="409" column="44" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="409" bodyend="423"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="415" column="44" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="415" bodyend="429"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -535,7 +535,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="94" bodyend="424"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" line="93" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_basis_non_uniform.hpp" bodystart="94" bodyend="430"/>
     <listofallmembers>
       <member refid="classNonUniformLagrangeBasis_1_1Impl_1afab457f35ffd170e46a266cdf2536abe" prot="public" virt="non-virtual"><scope>NonUniformLagrangeBasis::Impl</scope><name>break_point_domain</name></member>
       <member refid="classNonUniformLagrangeBasis_1_1Impl_1a726e836523fd04fb01ccafeaa48c0d81" prot="private" virt="non-virtual"><scope>NonUniformLagrangeBasis::Impl</scope><name>calculate_values_between_nodes</name></member>

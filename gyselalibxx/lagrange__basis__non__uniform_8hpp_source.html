@@ -653,17 +653,23 @@ public:
 
             // Initialise knot grid
             if constexpr (is_periodic()) {
-                std::size_t npoints = ddc::discrete_space&lt;Grid1D&gt;().size();
+                std::size_t npoints = break_point_domain.size();
                 std::vector&lt;coord_type&gt; points(npoints + D);
-                Idx&lt;Grid1D&gt; idx_front = ddc::discrete_space&lt;Grid1D&gt;().front();
-                Idx&lt;Grid1D&gt; idx_back = idx_front + npoints - 1;
+                Idx&lt;Grid1D&gt; idx_first = break_point_domain.front();
                 for (std::size_t i(0); i &lt; npoints; ++i) {
-                    points[i] = ddc::coordinate(idx_front + i);
+                    points[i] = ddc::coordinate(idx_first + i);
                 }
+                Idx&lt;Grid1D&gt; idx_front = ddc::discrete_space&lt;Grid1D&gt;().front();
+                Idx&lt;Grid1D&gt; idx_back = idx_front + ddc::discrete_space&lt;Grid1D&gt;().size() - 1;
                 for (std::size_t i(1); i &lt; D + 1; ++i) {
-                    points[npoints + i - 1]
-                            = ddc::coordinate(idx_back)
-                              + (ddc::coordinate(idx_front + i) - ddc::coordinate(idx_front));
+                    Idx&lt;Grid1D&gt; idx = idx_first + npoints + i - 1;
+                    if (idx &gt; idx_back) {
+                        points[npoints + i - 1] = ddc::coordinate(idx_back)
+                                                  + (ddc::coordinate(idx - (idx_back - idx_front))
+                                                     - ddc::coordinate(idx_front));
+                    } else {
+                        points[npoints + i - 1] = ddc::coordinate(idx);
+                    }
                 }
                 ddc::init_discrete_space&lt;knot_grid&gt;(points);
                 m_knot_domain = IdxRange&lt;knot_grid&gt;(
@@ -671,8 +677,8 @@ public:
                         IdxStep&lt;knot_grid&gt;(break_point_domain.size() + D));
                 m_break_point_domain = m_knot_domain.remove_last(IdxStep&lt;knot_grid&gt;(D));
             } else {
-                std::size_t npoints = ddc::discrete_space&lt;Grid1D&gt;().size();
-                Idx&lt;Grid1D&gt; idx_front = ddc::discrete_space&lt;Grid1D&gt;().front();
+                std::size_t npoints = break_point_domain.size();
+                Idx&lt;Grid1D&gt; idx_front = break_point_domain.front();
                 std::vector&lt;coord_type&gt; points(npoints);
                 for (std::size_t i(0); i &lt; npoints; ++i) {
                     points[i] = ddc::coordinate(idx_front + i);
