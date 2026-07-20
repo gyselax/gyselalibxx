@@ -48,4 +48,6 @@ target_link_libraries(gmg_polar_poisson_like_solver_test
         gslx::pde_solvers
 )
 
-gtest_discover_tests(gmg_polar_poisson_like_solver_test DISCOVERY_MODE PRE_TEST)
+gtest_discover_tests(gmg_polar_poisson_like_solver_test
+    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
+    DISCOVERY_MODE PRE_TEST)

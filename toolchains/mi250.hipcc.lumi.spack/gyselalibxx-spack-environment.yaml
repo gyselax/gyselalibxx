@@ -44,6 +44,9 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2025.11
+      paths:
+        - spack_repo/lumi_v2025_11
+        - spack_repo/patches_v2025_11
     builtin:
       tag: v2025.11.0
   concretizer:
@@ -66,7 +69,7 @@ spack:
     lapack:
       require: openblas
     mpi:
-      require: lumi_v2025_11.cray-mpich
+      require: cray-mpich
     py-dask:
       prefer: ['~dataframe']
     py-pandas:
