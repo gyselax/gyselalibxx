@@ -90,11 +90,28 @@ public:
     {
         IdxBatch idx_batch(idx);
         IdxRTheta idx_rtheta(idx);
+
         // The function describing how the derivative of the evolve function is calculated.
         auto dy = [&](DVector<R, Theta>& updated_advection_field, CoordRTheta const& foot) {
-            ddcHelper::get<R>(updated_advection_field) = m_evaluator_advection_field(
-                    foot,
-                    get_const_field(ddcHelper::get<R>(m_advection_field_coefs)[idx_batch]));
+            // O-point reflection: if r goes negative, reflect through the origin.
+            double foot_r = ddc::get<R>(foot);
+            double foot_theta = ddc::get<Theta>(foot);
+            // 1 if r is negative, 0 otherwise
+            int negative_reflexion = static_cast<int>(foot_r < 0);
+            // -1 if r is negative, 1 otherwise
+            int radial_sign(1 - 2 * negative_reflexion);
+            // Get the equivalent foot with r>0
+            CoordRTheta foot_rtheta(radial_sign * foot_r, foot_theta + M_PI * negative_reflexion);
+            // Wrap theta into the periodic domain.
+            ddc::select<Theta>(foot_rtheta) = ddcHelper::
+                    restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
+
+            ddcHelper::get<R>(updated_advection_field)
+                    = m_evaluator_advection_field(
+                              foot,
+                              get_const_field(
+                                      ddcHelper::get<R>(m_advection_field_coefs)[idx_batch]))
+                      * radial_sign; // Direction is reversed if r<0
             ddcHelper::get<Theta>(updated_advection_field) = m_evaluator_advection_field(
                     foot,
                     get_const_field(ddcHelper::get<Theta>(m_advection_field_coefs)[idx_batch]));
@@ -105,14 +122,6 @@ public:
                                    DVector<R, Theta> const& advection_field,
                                    double dt) {
             foot_rtheta -= dt * advection_field;
-
-            // O-point reflection: if r goes negative, reflect through the origin.
-            double foot_r = ddc::get<R>(foot_rtheta);
-            double foot_theta = ddc::get<Theta>(foot_rtheta);
-            int negative_reflexion = static_cast<int>(foot_r < 0);
-            foot_rtheta = CoordRTheta(
-                    (1 - 2 * negative_reflexion) * foot_r,
-                    foot_theta + M_PI * negative_reflexion);
             // Wrap theta into the periodic domain.
             ddc::select<Theta>(foot_rtheta) = ddcHelper::
                     restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
