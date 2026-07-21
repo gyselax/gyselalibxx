@@ -100,12 +100,12 @@ public:
 
             ddcHelper::get<R>(updated_advection_field)
                     = m_evaluator_advection_field(
-                              foot,
+                              foot_rtheta,
                               get_const_field(
                                       ddcHelper::get<R>(m_advection_field_coefs)[idx_batch]))
                       * radial_sign; // Direction is reversed if r<0
             ddcHelper::get<Theta>(updated_advection_field) = m_evaluator_advection_field(
-                    foot,
+                    foot_rtheta,
                     get_const_field(ddcHelper::get<Theta>(m_advection_field_coefs)[idx_batch]));
         };
 
