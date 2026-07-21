@@ -2,8 +2,10 @@
 #pragma once
 #include <ddc/ddc.hpp>
 
+#include "coord_transformation_tools.hpp"
 #include "ddc_aliases.hpp"
 #include "ddc_helper.hpp"
+#include "elementwise_choice.hpp"
 #include "l_norm_tools.hpp"
 #include "tensor.hpp"
 #include "vector_field.hpp"
@@ -93,18 +95,8 @@ public:
 
         // The function describing how the derivative of the evolve function is calculated.
         auto dy = [&](DVector<R, Theta>& updated_advection_field, CoordRTheta const& foot) {
-            // O-point reflection: if r goes negative, reflect through the origin.
-            double foot_r = ddc::get<R>(foot);
-            double foot_theta = ddc::get<Theta>(foot);
-            // 1 if r is negative, 0 otherwise
-            int negative_reflexion = static_cast<int>(foot_r < 0);
-            // -1 if r is negative, 1 otherwise
-            int radial_sign(1 - 2 * negative_reflexion);
-            // Get the equivalent foot with r>0
-            CoordRTheta foot_rtheta(radial_sign * foot_r, foot_theta + M_PI * negative_reflexion);
-            // Wrap theta into the periodic domain.
-            ddc::select<Theta>(foot_rtheta) = ddcHelper::
-                    restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
+            int radial_sign;
+            CoordRTheta foot_rtheta = apply_o_point_reflexion(radial_sign, foot);
 
             ddcHelper::get<R>(updated_advection_field)
                     = m_evaluator_advection_field(
@@ -131,7 +123,30 @@ public:
         KOKKOS_ASSERT(ddc::select<R>(foot) > 1e-13);
         // Solve the characteristic equation
         m_time_stepper.update(foot, m_dt, dy, update_function);
-        return foot;
+
+        return apply_o_point_reflexion(foot);
+    }
+
+private:
+    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflexion(int& radial_sign, CoordRTheta foot) const {
+        // O-point reflection: if r goes negative, reflect through the origin.
+        double foot_r = ddc::get<R>(foot);
+        double foot_theta = ddc::get<Theta>(foot);
+        // 1 if r is negative, 0 otherwise
+        int negative_reflexion = static_cast<int>(foot_r < 0);
+        // -1 if r is negative, 1 otherwise
+        radial_sign = 1 - 2 * negative_reflexion;
+        // Get the equivalent foot with r>0
+        CoordRTheta foot_rtheta(radial_sign * foot_r, foot_theta + M_PI * negative_reflexion);
+        // Wrap theta into the periodic domain.
+        ddc::select<Theta>(foot_rtheta) = ddcHelper::
+                restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
+        return foot_rtheta;
+    }
+
+    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflexion(CoordRTheta foot) const {
+        int radial_sign;
+        return apply_o_point_reflexion(radial_sign, foot);
     }
 };
 
