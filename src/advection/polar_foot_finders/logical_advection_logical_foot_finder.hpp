@@ -115,7 +115,7 @@ public:
                                    double dt) {
             foot_rtheta -= dt * advection_field;
             // Wrap theta into the periodic domain.
-            ddc::select<Theta>(foot_rtheta) = ddcHelper::
+            ddc::get<Theta>(foot_rtheta) = ddcHelper::
                     restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
         };
 
@@ -128,7 +128,8 @@ public:
     }
 
 private:
-    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflexion(int& radial_sign, CoordRTheta foot) const {
+    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflexion(int& radial_sign, CoordRTheta foot) const
+    {
         // O-point reflection: if r goes negative, reflect through the origin.
         double foot_r = ddc::get<R>(foot);
         double foot_theta = ddc::get<Theta>(foot);
@@ -139,12 +140,13 @@ private:
         // Get the equivalent foot with r>0
         CoordRTheta foot_rtheta(radial_sign * foot_r, foot_theta + M_PI * negative_reflexion);
         // Wrap theta into the periodic domain.
-        ddc::select<Theta>(foot_rtheta) = ddcHelper::
+        ddc::get<Theta>(foot_rtheta) = ddcHelper::
                 restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
         return foot_rtheta;
     }
 
-    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflexion(CoordRTheta foot) const {
+    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflexion(CoordRTheta foot) const
+    {
         int radial_sign;
         return apply_o_point_reflexion(radial_sign, foot);
     }
