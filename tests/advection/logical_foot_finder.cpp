@@ -3,11 +3,12 @@
 
 #include "../test_utils.hpp"
 
+#include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "mesh_builder.hpp"
+#include "polar_foot_finder.hpp"
 #include "rk4.hpp"
 #include "species_info.hpp"
-#include "spline_logical_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
@@ -41,6 +42,20 @@ struct Theta_cov
     static constexpr bool IS_CONTRAVARIANT = false;
     static constexpr bool IS_COVARIANT = true;
     using Dual = Theta;
+};
+struct X
+{
+    static constexpr bool PERIODIC = false;
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = X;
+};
+struct Y
+{
+    static constexpr bool PERIODIC = false;
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = Y;
 };
 
 struct GridR : NonUniformGridBase<R>
@@ -145,7 +160,17 @@ TEST(LogicalFootFinder, PureRotation)
 
     RK4Builder time_stepper;
 
-    SplineLogicalFootFinder const foot_finder(batched_idx_range, time_stepper, builder, evaluator);
+    CircularToCartesian<R, Theta, X, Y> mapping;
+
+    PolarFootFinder<
+            FootFindingSpace::LOGICAL,
+            AdvectionFieldSpace::LOGICAL,
+            CircularToCartesian<R, Theta, X, Y>,
+            IdxRangeSpRTheta,
+            RK4Builder,
+            decltype(builder),
+            decltype(evaluator)>
+            foot_finder(time_stepper, mapping, builder, evaluator);
 
     const double omega = 2 * M_PI;
     const double dt = 0.001;
@@ -219,7 +244,17 @@ TEST(LogicalFootFinder, OPointReflection)
 
     RK4Builder time_stepper;
 
-    SplineLogicalFootFinder const foot_finder(idx_range, time_stepper, builder, evaluator);
+    CircularToCartesian<R, Theta, X, Y> mapping;
+
+    PolarFootFinder<
+            FootFindingSpace::LOGICAL,
+            AdvectionFieldSpace::LOGICAL,
+            CircularToCartesian<R, Theta, X, Y>,
+            IdxRangeRTheta,
+            RK4Builder,
+            decltype(builder),
+            decltype(evaluator)>
+            foot_finder(time_stepper, mapping, builder, evaluator);
 
     // Large positive A^r: foot_r = r - dt * vr < 0 for small r.
     // With r_min = 0.1, dt = 0.1, vr = 5.0: foot_r = r - 0.5 < 0 for r < 0.5.
@@ -247,5 +282,5 @@ TEST(LogicalFootFinder, OPointReflection)
 
     // Mirror to host to check all r values are non-negative.
     auto feet_host = ddc::create_mirror_view_and_copy(get_const_field(feet));
-    ddc::for_each(idx_range, [&](IdxRTheta idx) { EXPECT_GE(ddc::get<R>(feet_host(idx)), 0.0); });
+    ddc::host_for_each(idx_range, [&](IdxRTheta idx) { EXPECT_GE(ddc::get<R>(feet_host(idx)), 0.0); });
 }

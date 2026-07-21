@@ -7,6 +7,7 @@ add_executable(unit_tests_advection
     1d_advection_x.cpp
     1d_advection_xvx.cpp
     1d_advection_xyvxvy.cpp
+    logical_foot_finder.cpp
     polar_foot_finder.cpp
     spatial_advection_1d.cpp
     velocity_advection_1d.cpp
