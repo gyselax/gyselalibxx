@@ -42,8 +42,6 @@ spack:
   - matrix:
     - [$packages]
   - matrix:
-    - [$linux-packages]
-  - matrix:
     - [$python-packages]
   repos:
     patches:
