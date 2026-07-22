@@ -128,7 +128,7 @@ static constexpr Coord<Theta> theta_max(2.0 * M_PI);
  * For a time step @f$ dt @f$, the exact characteristic foot from @f$ (r, \theta) @f$ is:
  * @f$ (r, \theta - \omega \, dt) @f$.
  */
-TEST(LogicalFootFinder, PureRotation)
+void test_LogicalFootFinder_PureRotation() {
 {
     IdxStep<GridR> const nr_cells(25);
     IdxStep<GridTheta> const ntheta_cells(50);
@@ -226,7 +226,7 @@ TEST(LogicalFootFinder, PureRotation)
  * are driven to @f$ r < 0 @f$ and must be reflected through the O-point.
  * After foot-finding, all radial coordinates must be non-negative.
  */
-TEST(LogicalFootFinder, OPointReflection)
+void test_LogicalFootFinder_OPointReflection()
 {
     IdxStep<GridR> const nr_cells(25);
     IdxStep<GridTheta> const ntheta_cells(50);
@@ -300,7 +300,7 @@ TEST(LogicalFootFinder, OPointReflection)
  *
  * The advection field is @f$ (A^x, A^y) = (0, c) @f$ (constant everywhere).
  */
-TEST(LogicalFootFinder, PureVerticalAdvection)
+void test_LogicalFootFinder_PureVerticalAdvection()
 {
     IdxStep<GridR> const nr_cells(10);
     IdxStep<GridTheta> const ntheta_cells(10);
@@ -402,4 +402,14 @@ TEST(LogicalFootFinder, PureVerticalAdvection)
     EXPECT_NEAR(error_outer, 0.0, 1e-4);
 
     // The calculation is not tested near the O-point as large poloidal values give bad results when the advection field is not well aligned with the grid
+}
+
+TEST(LogicalFootFinder, PureRotation) {
+    test_LogicalFootFinder_PureRotation();
+}
+TEST(LogicalFootFinder, OPointReflection) {
+    test_LogicalFootFinder_OPointReflection();
+}
+TEST(LogicalFootFinder, PureVerticalAdvection) {
+    test_LogicalFootFinder_PureVerticalAdvection();
 }
