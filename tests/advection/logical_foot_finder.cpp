@@ -45,14 +45,12 @@ struct Theta_cov
 };
 struct X
 {
-    static constexpr bool PERIODIC = false;
     static constexpr bool IS_CONTRAVARIANT = true;
     static constexpr bool IS_COVARIANT = true;
     using Dual = X;
 };
 struct Y
 {
-    static constexpr bool PERIODIC = false;
     static constexpr bool IS_CONTRAVARIANT = true;
     static constexpr bool IS_COVARIANT = true;
     using Dual = Y;
