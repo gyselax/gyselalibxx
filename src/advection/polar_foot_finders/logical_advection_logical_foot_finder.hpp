@@ -96,7 +96,7 @@ public:
         // The function describing how the derivative of the evolve function is calculated.
         auto dy = [&](DVector<R, Theta>& updated_advection_field, CoordRTheta const& foot) {
             int radial_sign;
-            CoordRTheta foot_rtheta = apply_o_point_reflection(radial_sign, foot);
+            CoordRTheta foot_rtheta = rectify_coord_o_point(radial_sign, foot);
 
             ddcHelper::get<R>(updated_advection_field)
                     = m_evaluator_advection_field(
@@ -124,11 +124,11 @@ public:
         // Solve the characteristic equation
         m_time_stepper.update(foot, m_dt, dy, update_function);
 
-        return apply_o_point_reflection(foot);
+        return rectify_coord_o_point(foot);
     }
 
 private:
-    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflection(int& radial_sign, CoordRTheta foot) const
+    KOKKOS_FUNCTION CoordRTheta rectify_coord_o_point(int& radial_sign, CoordRTheta foot) const
     {
         // O-point reflection: if r goes negative, reflect through the origin.
         double foot_r = ddc::get<R>(foot);
@@ -145,10 +145,11 @@ private:
         return foot_rtheta;
     }
 
-    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflection(CoordRTheta foot) const
+    /// A helper function to allow rectify_coord_o_point be in 1 line when radial_sign is unused
+    KOKKOS_FUNCTION CoordRTheta rectify_coord_o_point(CoordRTheta foot) const
     {
         int radial_sign;
-        return apply_o_point_reflection(radial_sign, foot);
+        return rectify_coord_o_point(radial_sign, foot);
     }
 };
 
