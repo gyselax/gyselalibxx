@@ -59,6 +59,7 @@ spack --env gyselalibxx-spack-environment mirror add \
   --unsigned \
   --type binary \
   local-buildcache oci://ghcr.io/gyselax/gyselalibxx-spack-$(spack arch --operating-system)-buildcache
+spack --env gyselalibxx-spack-environment repo update
 spack --env gyselalibxx-spack-environment install
 spack env activate -p gyselalibxx-spack-environment
 PYTHON_EXECUTABLE=$(which python3)
@@ -77,7 +78,6 @@ export SPACK_USER_CONFIG_PATH="\${SPACK_PATH}/user_config"
 export SPACK_SYSTEM_CONFIG_PATH="\${SPACK_PATH}/sys_config"
 export SPACK_USER_CACHE_PATH="\${SPACK_PATH}/user_cache"
 . \${SPACK_PATH}/share/spack/setup-env.sh
-spack --env gyselalibxx-spack-environment repo update
 spack env activate -p gyselalibxx-spack-environment
 export PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
 EOL

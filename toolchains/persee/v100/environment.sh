@@ -16,8 +16,6 @@ else
     . /data/gyselarunner/spack-1.2.2/share/spack/setup-env.sh
 fi
 
-spack --env gyselalibxx-env-omp-cuda repo update
-
 spack env activate gyselalibxx-env-omp-cuda
 
 module load gcc/13

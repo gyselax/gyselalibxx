@@ -37,5 +37,6 @@ spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyse
 
 echo "Preparing the Spack environment..."
 
+spack --env gyselalibxx-spack-environment repo update
 spack --env gyselalibxx-spack-environment concretize --force
 spack --env gyselalibxx-spack-environment install --jobs 128
