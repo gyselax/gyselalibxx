@@ -96,7 +96,7 @@ public:
         // The function describing how the derivative of the evolve function is calculated.
         auto dy = [&](DVector<R, Theta>& updated_advection_field, CoordRTheta const& foot) {
             int radial_sign;
-            CoordRTheta foot_rtheta = apply_o_point_reflexion(radial_sign, foot);
+            CoordRTheta foot_rtheta = apply_o_point_reflection(radial_sign, foot);
 
             ddcHelper::get<R>(updated_advection_field)
                     = m_evaluator_advection_field(
@@ -124,31 +124,31 @@ public:
         // Solve the characteristic equation
         m_time_stepper.update(foot, m_dt, dy, update_function);
 
-        return apply_o_point_reflexion(foot);
+        return apply_o_point_reflection(foot);
     }
 
 private:
-    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflexion(int& radial_sign, CoordRTheta foot) const
+    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflection(int& radial_sign, CoordRTheta foot) const
     {
         // O-point reflection: if r goes negative, reflect through the origin.
         double foot_r = ddc::get<R>(foot);
         double foot_theta = ddc::get<Theta>(foot);
         // 1 if r is negative, 0 otherwise
-        int negative_reflexion = static_cast<int>(foot_r < 0);
+        int negative_reflection = static_cast<int>(foot_r < 0);
         // -1 if r is negative, 1 otherwise
-        radial_sign = 1 - 2 * negative_reflexion;
+        radial_sign = 1 - 2 * negative_reflection;
         // Get the equivalent foot with r>0
-        CoordRTheta foot_rtheta(radial_sign * foot_r, foot_theta + M_PI * negative_reflexion);
+        CoordRTheta foot_rtheta(radial_sign * foot_r, foot_theta + M_PI * negative_reflection);
         // Wrap theta into the periodic domain.
         ddc::get<Theta>(foot_rtheta) = ddcHelper::
                 restrict_to_idx_range(ddc::select<Theta>(foot_rtheta), m_idx_range_theta);
         return foot_rtheta;
     }
 
-    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflexion(CoordRTheta foot) const
+    KOKKOS_FUNCTION CoordRTheta apply_o_point_reflection(CoordRTheta foot) const
     {
         int radial_sign;
-        return apply_o_point_reflexion(radial_sign, foot);
+        return apply_o_point_reflection(radial_sign, foot);
     }
 };
 
