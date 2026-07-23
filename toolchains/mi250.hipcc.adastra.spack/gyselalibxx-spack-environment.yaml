@@ -43,11 +43,13 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2026.06
+      destination: $spack/var/repos/patches-v2026.06
       paths:
         - spack_repo/patches_adastra
         - spack_repo/patches_common
     builtin:
       tag: v2026.06.0
+      destination: $spack/var/repos/spack-packages-v2026.06.0
   concretizer:
     reuse: false
     unify: true

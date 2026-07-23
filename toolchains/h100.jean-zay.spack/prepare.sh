@@ -40,6 +40,7 @@ spack env create gyselalibxx-spack-environment "${TOOLCHAIN_ROOT_DIRECTORY}/gyse
 
 echo "Preparing the Spack environment..."
 
+spack --env gyselalibxx-spack-environment repo update
 # Concretize on the compute node
 GPUS=1
 CPUS_PER_TASK=$((${GPUS} * ${CPUS_PER_GPU}))
