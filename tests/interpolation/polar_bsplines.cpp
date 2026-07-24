@@ -81,12 +81,12 @@ struct PolarBsplineFixture<std::tuple<
 
     using GrevillePointsR = ddc::GrevilleInterpolationPoints<
             BSplinesR,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE>;
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE>;
     using GrevillePointsTheta = ddc::GrevilleInterpolationPoints<
             BSplinesTheta,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC>;
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC>;
 
     struct GridR : GrevillePointsR::interpolation_discrete_dimension_type
     {
@@ -128,10 +128,10 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             BSplinesTheta,
             GridR,
             GridTheta,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::GREVILLE,
-            ddc::BoundCond::PERIODIC,
-            ddc::BoundCond::PERIODIC,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::GREVILLE,
+            ddc::SplineBuilderClosure::PERIODIC,
+            ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
     using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
             Kokkos::DefaultHostExecutionSpace,

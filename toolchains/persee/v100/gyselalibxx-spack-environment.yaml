@@ -2,12 +2,13 @@ spack:
   definitions:
   - packages:
     - 'cmake@3.22:3'
-    - 'ddc@0.12 +fft +pdi +splines'
+    - 'ddc@0.15 +fft +pdi +splines'
     - 'ginkgo@1.9 +cuda cuda_arch=70 +openmp'
+    - 'gmgpolar@2.3'
     - 'googletest +gmock'
-    - 'kokkos@4.6:4 ~shared +wrapper +cuda +cuda_constexpr +cuda_relocatable_device_code cuda_arch=70 +openmp'
+    - 'kokkos@4.6:4 ~shared +wrapper +cuda +cuda_constexpr cuda_arch=70 +openmp'
     - 'kokkos-kernels@4.6:4 ~shared'
-    - 'kokkos-tools'
+    - 'kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop'
     - 'koliop@0.1.2:0.1'
     - 'lapack'
     - 'mpi'
@@ -20,7 +21,7 @@ spack:
     - 'pdiplugin-pycall'
     - 'pdiplugin-set-value'
     - 'pdiplugin-trace'
-    - 'python@3.12:'
+    - 'python@3.13'
 
     - 'py-dask'
     - 'py-h5py'
@@ -55,8 +56,12 @@ spack:
     cxx:
       require: gcc@13
     kokkos-fft:
-      require: '@0.3 host_backend=fftw-openmp device_backend=cufft'
+      require: 'host_backend=fftw-openmp'
     lapack:
       require: openblas
     mpi:
       require: openmpi +cuda
+    py-dask:
+      prefer: ['~dataframe']
+    py-pandas:
+      prefer: ['~performance']

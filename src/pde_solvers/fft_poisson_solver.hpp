@@ -273,7 +273,7 @@ public:
      */
     virtual field_type operator()(field_type phi, field_type rho) const final
     {
-        Kokkos::Profiling::pushRegion("FFTPoissonSolver");
+        Kokkos::Profiling::pushRegion("(GSLX) FFTPoissonSolver");
 
         laplacian_idx_range_type idx_range(get_idx_range(phi));
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
@@ -282,7 +282,9 @@ public:
         fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
                 GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
 
-        fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
+        fourier_field_mem_type intermediate_chunk_alloc(
+                "intermediate_chunk (FFTPoisonSolver::operator())",
+                k_mesh);
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
 
         ddc::host_for_each(batch_idx_range, [&](batch_index_type ib) {
@@ -314,7 +316,7 @@ public:
      */
     virtual field_type operator()(field_type phi, vector_field_type E, field_type rho) const final
     {
-        Kokkos::Profiling::pushRegion("FFTPoissonSolver");
+        Kokkos::Profiling::pushRegion("(GSLX) FFTPoissonSolver");
 
         laplacian_idx_range_type idx_range(get_idx_range(phi));
         batch_idx_range_type batch_idx_range(get_idx_range(phi));
@@ -323,8 +325,11 @@ public:
         fourier_idx_range_type const k_mesh = ddc::fourier_mesh<
                 GridFourier<typename GridPDEDim1D::continuous_dimension_type>...>(idx_range, false);
 
-        fourier_field_mem_type intermediate_chunk_alloc(k_mesh);
-        fourier_field_mem_type fourier_efield_alloc(k_mesh);
+        fourier_field_mem_type intermediate_chunk_alloc(
+                "intermediate_chunk (FFTPoisonSolver::operator())",
+                k_mesh);
+        fourier_field_mem_type
+                fourier_efield_alloc("fourier_efield (FFTPoisonSolver::operator())", k_mesh);
 
         fourier_field_type intermediate_chunk = get_field(intermediate_chunk_alloc);
         fourier_field_type fourier_efield = get_field(fourier_efield_alloc);

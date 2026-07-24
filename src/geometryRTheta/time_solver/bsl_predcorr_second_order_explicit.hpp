@@ -17,9 +17,9 @@
 #include "geometry_r_theta.hpp"
 #include "itimesolver.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_foot_finder.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 
 
 
@@ -67,16 +67,17 @@ template <
 class BslExplicitPredCorrRTheta : public ITimeSolverRTheta
 {
 private:
-    using SplinePolarFootFinderType = SplinePolarFootFinder<
+    using PolarFootFinderType = PolarFootFinder<
+            FootFindingSpace::PHYSICAL,
+            AdvectionFieldSpace::PHYSICAL,
+            LogicalToPhysicalMapping,
             IdxRangeRTheta,
             EulerBuilder,
-            LogicalToPhysicalMapping,
-            LogicalToPseudoPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorConstBound>;
 
     using BslAdvectionRTheta = BslAdvectionPolar<
-            SplinePolarFootFinderType,
+            PolarFootFinderType,
             LogicalToPhysicalMapping,
             SplineRThetaBuilder,
             SplineRThetaEvaluatorNullBound>;
@@ -87,7 +88,7 @@ private:
     BslAdvectionRTheta const& m_advection_solver;
 
     EulerBuilder const m_euler;
-    SplinePolarFootFinderType const m_find_feet;
+    PolarFootFinderType const m_find_feet_method;
 
     PolarPoissonLikeSolver const& m_poisson_solver;
 
@@ -127,13 +128,7 @@ public:
             SplineRThetaEvaluatorConstBound const& advection_evaluator)
         : m_logical_to_physical(logical_to_physical)
         , m_advection_solver(advection_solver)
-        , m_find_feet(
-                  grid,
-                  m_euler,
-                  logical_to_physical,
-                  logical_to_pseudo_physical,
-                  builder,
-                  advection_evaluator)
+        , m_find_feet_method(m_euler, logical_to_physical, builder, advection_evaluator)
         , m_poisson_solver(poisson_solver)
         , m_builder(builder)
         , m_evaluator(advection_evaluator)
@@ -156,22 +151,33 @@ public:
         host_t<DFieldMemRTheta> electrical_potential_host(grid);
 
         PolarSplineMemRTheta electrostatic_potential_coef_alloc(
+                "electrostatic_potential_coef (BslExplicitPredCorrRTheta::operator())",
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         auto electrostatic_potential_coef_alloc_host
                 = ddc::create_mirror_view(get_field(electrostatic_potential_coef_alloc));
 
-        Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
-        DFieldMemRTheta density_predicted_alloc(grid);
+        Spline2DMem density_coef_alloc(
+                "density_coef (BslExplicitPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
+        DFieldMemRTheta density_predicted_alloc(
+                "density_predicted (BslExplicitPredCorrRTheta::operator())",
+                grid);
         auto density_alloc = ddc::create_mirror_view(Kokkos::DefaultExecutionSpace(), density_host);
-        FieldMemRTheta<CoordRTheta> feet_coords_alloc(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_evaluated_alloc(grid);
-        VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_alloc(get_spline_idx_range(m_builder));
+        DVectorFieldMemRTheta<X, Y> advection_field_evaluated_alloc(
+                "advection_field_evaluated (BslExplicitPredCorrRTheta::operator())",
+                grid);
+        VectorSplineCoeffsMem2D<X, Y> advection_field_coefs_alloc(
+                "advection_field_coefs (BslExplicitPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
+        VectorSplineCoeffs2D<X, Y> advection_field_coefs(advection_field_coefs_alloc);
 
 
         // --- For the computation of advection field from the electrostatic potential (phi): -------------
         host_t<DVectorFieldMemRTheta<X, Y>> advection_field_alloc_host(grid);
-        DVectorFieldMemRTheta<X, Y> advection_field_predicted_alloc(grid);
+        DVectorFieldMemRTheta<X, Y> advection_field_predicted_alloc(
+                "advection_field_predicted (BslExplicitPredCorrRTheta::operator())",
+                grid);
         auto advection_field_alloc = ddcHelper::create_mirror_view_and_copy(
                 Kokkos::DefaultExecutionSpace(),
                 get_field(advection_field_alloc_host));
@@ -181,8 +187,6 @@ public:
         DVectorFieldRTheta<X, Y> advection_field_predicted(advection_field_predicted_alloc);
         DVectorFieldRTheta<X, Y> advection_field(advection_field_alloc);
         DVectorFieldRTheta<X, Y> advection_field_evaluated(advection_field_evaluated_alloc);
-
-        FieldRTheta<CoordRTheta> feet_coords(feet_coords_alloc);
 
         Spline2D density_coef(density_coef_alloc);
         DFieldRTheta density = get_field(density_alloc);
@@ -202,6 +206,7 @@ public:
 
         ddc::parallel_deepcopy(density, get_const_field(density_host));
 
+        SplineRThetaEvaluatorConstBound const& evaluator_proxy = m_evaluator;
 
         // --- Parameter for linearisation of advection field: --------------------------------------------
         start_time = std::chrono::system_clock::now();
@@ -210,7 +215,7 @@ public:
 
             // STEP 1: From rho^n, we compute phi^n: Poisson equation
             m_builder(density_coef, get_const_field(density));
-            m_poisson_solver(charge_density, get_field(electrostatic_potential_coef_alloc));
+            m_poisson_solver(get_field(electrostatic_potential_coef_alloc), charge_density);
 
             polar_spline_evaluator(
                     get_field(electrical_potential),
@@ -244,20 +249,9 @@ public:
             ddc::parallel_deepcopy(get_field(density_predicted_alloc), density);
             m_advection_solver(get_field(density_predicted_alloc), advection_field, dt);
 
-            // --- advect also the feet because it is needed for the next step
-            const std::source_location location = std::source_location::current();
-            ddc::parallel_for_each(
-                    location.function_name(),
-                    Kokkos::DefaultExecutionSpace(),
-                    grid,
-                    KOKKOS_LAMBDA(IdxRTheta const irtheta) {
-                        feet_coords(irtheta) = ddc::coordinate(irtheta);
-                    });
-            m_find_feet(feet_coords, advection_field, dt);
-
             // STEP 4: From rho^P, we compute phi^P: Poisson equation
             m_builder(density_coef, get_const_field(density_predicted_alloc));
-            m_poisson_solver(charge_density, get_field(electrostatic_potential_coef_alloc));
+            m_poisson_solver(get_field(electrostatic_potential_coef_alloc), charge_density);
 
             ddc::parallel_deepcopy(
                     get_field(electrostatic_potential_coef_alloc_host),
@@ -273,21 +267,30 @@ public:
 
             // ---  we evaluate the advection field A^n at the characteristic feet X^P
             m_builder(
-                    ddcHelper::get<X>(advection_field_coefs_alloc),
+                    ddcHelper::get<X>(advection_field_coefs),
                     ddcHelper::get<X>(get_const_field(advection_field_predicted)));
             m_builder(
-                    ddcHelper::get<Y>(advection_field_coefs_alloc),
+                    ddcHelper::get<Y>(advection_field_coefs),
                     ddcHelper::get<Y>(get_const_field(advection_field_predicted)));
 
-            m_evaluator(
-                    ddcHelper::get<X>(advection_field_evaluated),
-                    get_const_field(feet_coords),
-                    ddcHelper::get<X>(get_const_field(advection_field_coefs_alloc)));
-            m_evaluator(
-                    ddcHelper::get<Y>(advection_field_evaluated),
-                    get_const_field(feet_coords),
-                    ddcHelper::get<Y>(get_const_field(advection_field_coefs_alloc)));
+            typename PolarFootFinderType::ElementwiseOperator find_foot_alloc
+                    = m_find_feet_method(get_const_field(advection_field));
+            typename PolarFootFinderType::ElementwiseOperator::GPUCompat find_foot
+                    = find_foot_alloc(dt);
 
+            const std::source_location location = std::source_location::current();
+            ddc::parallel_for_each(
+                    location.function_name(),
+                    Kokkos::DefaultExecutionSpace(),
+                    grid,
+                    KOKKOS_LAMBDA(IdxRTheta const irtheta) {
+                        ddcHelper::get<X>(advection_field_evaluated)(irtheta) = evaluator_proxy(
+                                find_foot(irtheta),
+                                ddcHelper::get<X>(get_const_field(advection_field_coefs)));
+                        ddcHelper::get<Y>(advection_field_evaluated)(irtheta) = evaluator_proxy(
+                                find_foot(irtheta),
+                                ddcHelper::get<Y>(get_const_field(advection_field_coefs)));
+                    });
 
             // STEP 6: From rho^n and (A^n(X^P) + A^P(X^n))/2, we compute rho^{n+1}: Vlasov equation
             ddc::parallel_for_each(
@@ -308,7 +311,7 @@ public:
 
         // STEP 1: From rho^n, we compute phi^n: Poisson equation
         m_builder(density_coef, get_const_field(density));
-        m_poisson_solver(charge_density, get_field(electrical_potential));
+        m_poisson_solver(get_field(electrical_potential), charge_density);
 
         ddc::parallel_deepcopy(electrical_potential_host, electrical_potential);
         ddc::parallel_deepcopy(density_host, density);

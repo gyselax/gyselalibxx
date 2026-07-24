@@ -566,9 +566,11 @@ public:
         using IdxBS12 = typename spline_idx_range_type<Patch>::discrete_element_type;
 
         DFieldMem<IdxRange<bsplines_1>, memory_space> values1_alloc(
+                "values1 (MultipatchSplineEvaluator2D::apply_integrate)",
                 get_idx_range<bsplines_1>(spline_coef));
         DField<IdxRange<bsplines_1>, memory_space> values1 = get_field(values1_alloc);
         DFieldMem<IdxRange<bsplines_2>, memory_space> values2_alloc(
+                "values2 (MultipatchSplineEvaluator2D::apply_integrate)",
                 get_idx_range<bsplines_2>(spline_coef));
         DField<IdxRange<bsplines_2>, memory_space> values2 = get_field(values2_alloc);
         ddc::integrals(exec_space(), values1);

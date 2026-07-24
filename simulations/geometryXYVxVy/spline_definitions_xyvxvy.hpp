@@ -32,14 +32,15 @@ struct BSplinesVy
 {
 };
 
-ddc::BoundCond constexpr SplineYBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVyBoundary = ddc::BoundCond::HOMOGENEOUS_HERMITE;
+ddc::SplineBuilderClosure constexpr SplineYClosure = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineVyClosure
+        = ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE;
 
 // IDim initialisers
 using SplineInterpPointsY
-        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYBoundary, SplineYBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesY, SplineYClosure, SplineYClosure>;
 using SplineInterpPointsVy
-        = ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyBoundary, SplineVyBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVy, SplineVyClosure, SplineVyClosure>;
 
 // SplineBuilder and SplineEvaluator definition
 using SplineInterpolatorY = SplineInterpolator<
@@ -48,8 +49,8 @@ using SplineInterpolatorY = SplineInterpolator<
         GridY,
         PERIODIC,
         PERIODIC,
-        SplineYBoundary,
-        SplineYBoundary>;
+        SplineYClosure,
+        SplineYClosure>;
 
 using SplineInterpolatorVy = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
@@ -57,8 +58,8 @@ using SplineInterpolatorVy = SplineInterpolator<
         GridVy,
         CONSTANT,
         CONSTANT,
-        SplineVyBoundary,
-        SplineVyBoundary>;
+        SplineVyClosure,
+        SplineVyClosure>;
 
 using IdxRangeBSY = IdxRange<BSplinesY>;
 using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;

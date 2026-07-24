@@ -30,13 +30,13 @@
 #include "params.yaml.hpp"
 #include "pdi_out.yml.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_foot_finder.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "quadrature.hpp"
 #include "rk3.hpp"
 #include "rk4.hpp"
 #include "simulation_utils_tools.hpp"
 #include "spline_definitions_r_theta.hpp"
-#include "spline_polar_foot_finder.hpp"
 #include "spline_quadrature.hpp"
 #include "trapezoid_quadrature.hpp"
 
@@ -52,6 +52,7 @@ using PoissonSolver = PolarSplineFEMPoissonLikeSolver<
         GridR,
         GridTheta,
         PolarBSplinesRTheta,
+        SplineRThetaBuilder,
         SplineRThetaEvaluatorNullBound,
         typename DiscreteMappingBuilder::MappingType>;
 using LogicalToPhysicalMapping = CircularToCartesian<R, Theta, X, Y>;
@@ -157,13 +158,13 @@ int main(int argc, char** argv)
             theta_extrapolation_rule,
             theta_extrapolation_rule);
 
-    SplinePolarFootFinder find_feet(
-            mesh_rtheta,
-            time_stepper,
-            to_physical_mapping,
-            to_physical_mapping,
-            builder,
-            spline_evaluator_extrapol);
+    PolarFootFinder find_feet
+            = make_polar_foot_finder<FootFindingSpace::PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
+                    time_stepper,
+                    to_physical_mapping,
+                    mesh_rtheta,
+                    builder,
+                    spline_evaluator_extrapol);
 
     BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, to_physical_mapping);
 
@@ -183,10 +184,8 @@ int main(int argc, char** argv)
     builder(get_field(coeff_alpha_spline), get_const_field(coeff_alpha));
     builder(get_field(coeff_beta_spline), get_const_field(coeff_beta));
 
-    PoissonSolver poisson_solver(discrete_mapping, spline_evaluator);
-    poisson_solver.update_coefficients(
-            get_const_field(coeff_alpha_spline),
-            get_const_field(coeff_beta_spline));
+    PoissonSolver poisson_solver(discrete_mapping, builder, spline_evaluator);
+    poisson_solver.update_coefficients(get_const_field(coeff_alpha), get_const_field(coeff_beta));
 
     // --- Predictor corrector operator ---------------------------------------------------------------
 #if defined(PREDCORR)
@@ -207,7 +206,6 @@ int main(int argc, char** argv)
             spline_evaluator_extrapol);
 #elif defined(IMPLICIT_PREDCORR)
     BslImplicitPredCorrRTheta predcorr_operator(
-            to_physical_mapping,
             to_physical_mapping,
             advection_operator,
             mesh_rtheta,
@@ -288,7 +286,7 @@ int main(int argc, char** argv)
     Spline2DMem rho_coef_eq_alloc(idx_range_bsplinesRTheta);
     builder(get_field(rho_coef_eq_alloc), get_const_field(rho_eq_alloc));
     PoissonLikeRHSFunction poisson_rhs_eq(get_const_field(rho_coef_eq_alloc), spline_evaluator);
-    poisson_solver(poisson_rhs_eq, get_field(phi_eq_alloc));
+    poisson_solver(get_field(phi_eq_alloc), poisson_rhs_eq);
     ddc::parallel_deepcopy(phi_eq_alloc_host, phi_eq_alloc);
 
     // --- Save initial data --------------------------------------------------------------------------

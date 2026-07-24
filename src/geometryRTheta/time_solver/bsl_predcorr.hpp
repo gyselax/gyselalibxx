@@ -17,7 +17,7 @@
 #include "itimesolver.hpp"
 #include "l_norm_tools.hpp"
 #include "poisson_like_rhs_function.hpp"
-#include "polarpoissonlikesolver.hpp"
+#include "polar_spline_fem_poisson_like_solver.hpp"
 #include "rk2.hpp"
 #include "spline_definitions_r_theta.hpp"
 
@@ -119,9 +119,14 @@ public:
         IdxRangeRTheta grid(get_idx_range(density_host));
 
         // Data
-        DFieldMemRTheta electrical_potential_alloc(grid);
-        Spline2DMem density_coef_alloc(get_spline_idx_range(m_builder));
+        DFieldMemRTheta electrical_potential_alloc(
+                "electrical_potential (BslPredCorrRTheta::operator())",
+                grid);
+        Spline2DMem density_coef_alloc(
+                "density_coef (BslPredCorrRTheta::operator())",
+                get_spline_idx_range(m_builder));
         PolarSplineMemRTheta electrostatic_potential_coef_alloc(
+                "electrostatic_potential_coef (BslPredCorrRTheta::operator())",
                 ddc::discrete_space<PolarBSplinesRTheta>().full_domain());
 
         auto electrical_potential_alloc_host
@@ -145,7 +150,7 @@ public:
 
         // Setup
         m_builder(density_coef, get_const_field(density));
-        m_poisson_solver(charge_density, electrical_potential);
+        m_poisson_solver(electrical_potential, charge_density);
         ddc::parallel_deepcopy(electrical_potential_host, get_const_field(electrical_potential));
         ddc::PdiEvent("iteration")
                 .with("iter", 0)
@@ -158,7 +163,7 @@ public:
                 [&](DVectorFieldRTheta<X, Y> advection_field, DConstFieldRTheta density) {
                     // --- compute electrostatic potential:
                     m_builder(density_coef, get_const_field(density));
-                    m_poisson_solver(charge_density, electrostatic_potential_coef);
+                    m_poisson_solver(electrostatic_potential_coef, charge_density);
 
                     auto advection_field_alloc_host = ddcHelper::create_mirror_view_and_copy(
                             Kokkos::DefaultHostExecutionSpace(),
@@ -190,7 +195,7 @@ public:
                             m_advection_solver);
 
             m_builder(density_coef, get_const_field(density));
-            m_poisson_solver(charge_density, electrical_potential);
+            m_poisson_solver(electrical_potential, charge_density);
             ddc::parallel_deepcopy(density_host, get_const_field(density));
             ddc::parallel_deepcopy(
                     electrical_potential_host,

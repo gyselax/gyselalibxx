@@ -2,12 +2,13 @@ spack:
   definitions:
   - packages:
     - cmake
-    - 'ddc@0.12 +fft +pdi +splines'
+    - 'ddc@0.15 +fft +pdi +splines'
     - ginkgo@1.9 ~openmp +rocm amdgpu_target=gfx90a
+    - gmgpolar@2.3
     - googletest +gmock
-    - kokkos@4.7 ~openmp +rocm +hip_relocatable_device_code amdgpu_target=gfx90a
+    - kokkos@4.7 ~openmp +rocm amdgpu_target=gfx90a
     - kokkos-kernels@4.7 ~shared
-    - kokkos-tools
+    - kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop
     - 'koliop@0.1.2:0.1'
     - lapack
     - mpi
@@ -20,7 +21,7 @@ spack:
     - pdiplugin-pycall
     - pdiplugin-set-value
     - pdiplugin-trace
-    - 'python@3.12:'
+    - 'python@3.13'
 
     - py-dask
     - py-h5py
@@ -42,6 +43,9 @@ spack:
     patches:
       git: https://github.com/gyselax/spack.git
       branch: releases/v2025.11
+      paths:
+        - spack_repo/adastra_v2025_11
+        - spack_repo/patches_v2025_11
     builtin:
       tag: v2025.11.0
   concretizer:
@@ -56,17 +60,19 @@ spack:
         write: group
       variants: ~fortran ~mpi
     c:
-      require: gcc@13.2.1
+      require: gcc@13.3.1
     cxx:
-      require: gcc@13.2.1
+      require: gcc@13.3.1
     kokkos-fft:
-      require: '@0.4 host_backend=fftw-serial device_backend=hipfft'
+      require: 'host_backend=fftw-serial'
     lapack:
       require: openblas
     mpi:
       require: cray-mpich
     py-dask:
-      variants: ~dataframe
+      prefer: ['~dataframe']
+    py-pandas:
+      prefer: ['~performance']
   modules:
     default:
       roots: {}

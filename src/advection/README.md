@@ -225,6 +225,8 @@ The methods inheriting from IPolarFootFinder provide ways of calculating the fee
 
 The feet of the characteristics are calculated using a time integration method. For details of available methods see [Time Stepping Methods](../timestepper/README.md).
 
+For implementation details of the elementwise operators used internally see [polar foot finder implementation details](./polar_foot_finders/README.md).
+
 ### Advection domain
 
 There are two advection domains to consider:
@@ -291,13 +293,13 @@ SplineRThetaEvaluator spline_evaluator(
 
 // Define a feet finder to compute the feet of the characteristics.  
 RK3Builder const time_stepper_builder;      // a given time integration method to solve equation of the characteristics. 
-SplinePolarFootFinder find_feet(        
-        grid,
-        time_stepper_builder,
-        logical_to_physical_mapping,
-        logical_to_pseudo_physical_mapping,
-        builder_advection_field,            // spline builder for the advection field. 
-        evaluator_advection_field);         // spline evaluator for the advection field. 
+PolarFootFinder find_feet
+        = make_polar_foot_finder<FootFindingSpace::PSEUDO_PHYSICAL, AdvectionFieldSpace::PHYSICAL>(
+                time_stepper_builder,
+                logical_to_physical_mapping,
+                grid,
+                builder_advection_field, // spline builder for the advection field.
+                evaluator_advection_field); // spline evaluator for the advection field.
 
 // Define the advection operator. 
 BslAdvectionPolar advection_operator(builder, spline_evaluator, find_feet, logical_to_physical_mapping);
@@ -312,7 +314,7 @@ Currently, there are three `operator()` implemented.
 DVectorFieldMemRTheta<X, Y> advection_field_xy_alloc (grid); 
 DVectorFieldRTheta<X, Y> advection_field_xy (advection_field_xy_alloc);
 
-DFieldMemRTheta function_alloc(grid);   // a function. 
+DFieldMemRTheta function_alloc("function", grid);   // a function. 
 DFieldRTheta function(function_alloc); 
 
 double dt; // a time step
@@ -339,7 +341,7 @@ DVectorFieldRTheta<R,Theta> advection_field_rtheta (advection_field_rtheta_alloc
 // The additional value of the advection field on <X,Y> at the O-point. 
 DVector<X, Y> advection_field_xy_centre;
 
-DFieldMemRTheta function_alloc(grid);   // a function. 
+DFieldMemRTheta function_alloc("function", grid);   // a function. 
 DFieldRTheta function(function_alloc); 
 
 double dt; // a time step
@@ -361,7 +363,7 @@ If the `grid` does not contain the O-point, then the averaging treatment is not 
 DVectorFieldMemRTheta<R, Theta> advection_field_rtheta_alloc (grid_with_or_without_Opoint); 
 DVectorFieldRTheta<R,Theta> advection_field_rtheta (advection_field_rtheta_alloc);
 
-DFieldMemRTheta function_alloc(grid);   // a function. 
+DFieldMemRTheta function_alloc("function", grid);   // a function. 
 DFieldRTheta function(function_alloc); 
 
 double dt; // a time step

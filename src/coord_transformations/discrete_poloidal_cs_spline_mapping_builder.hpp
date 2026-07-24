@@ -78,14 +78,24 @@ public:
             Mapping const& analytical_mapping,
             SplineBuilder const& builder,
             SplineEvaluator const& evaluator)
-        : m_curvilinear_to_x_spline_alloc(get_spline_idx_range(builder))
-        , m_curvilinear_to_y_spline_alloc(get_spline_idx_range(builder))
+        : m_curvilinear_to_x_spline_alloc(
+                "m_curvilinear_to_x_spline "
+                "(DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                get_spline_idx_range(builder))
+        , m_curvilinear_to_y_spline_alloc(
+                  "m_curvilinear_to_y_spline "
+                  "(DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                  get_spline_idx_range(builder))
         , m_evaluator(evaluator)
     {
         SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
         SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
-        InterpolationFieldMem curvilinear_to_x_vals_alloc(builder.interpolation_domain());
-        InterpolationFieldMem curvilinear_to_y_vals_alloc(builder.interpolation_domain());
+        InterpolationFieldMem curvilinear_to_x_vals_alloc(
+                "curvilinear_to_x_vals (DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                builder.interpolation_domain());
+        InterpolationFieldMem curvilinear_to_y_vals_alloc(
+                "curvilinear_to_y_vals (DiscreteToCartesianBuilder::DiscreteToCartesianBuilder)",
+                builder.interpolation_domain());
         InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);
         InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);
 
@@ -218,13 +228,13 @@ public:
 private:
     using GrevillePointsR = ddc::GrevilleInterpolationPoints<
             BSplinesRRefined,
-            SplineBuilder::builder_type1::s_bc_xmin,
-            SplineBuilder::builder_type1::s_bc_xmax>;
+            SplineBuilder::builder_type1::s_sbc_xmin,
+            SplineBuilder::builder_type1::s_sbc_xmax>;
 
     using GrevillePointsTheta = ddc::GrevilleInterpolationPoints<
             BSplinesThetaRefined,
-            SplineBuilder::builder_type2::s_bc_xmin,
-            SplineBuilder::builder_type2::s_bc_xmax>;
+            SplineBuilder::builder_type2::s_sbc_xmin,
+            SplineBuilder::builder_type2::s_sbc_xmax>;
 
 public:
     /// @brief The type of the grid of radial points on which the new mapping will be defined.
@@ -245,10 +255,10 @@ private:
     struct Build_BuilderType;
 
     template <
-            ddc::BoundCond BcLower1,
-            ddc::BoundCond BcUpper1,
-            ddc::BoundCond BcLower2,
-            ddc::BoundCond BcUpper2,
+            ddc::SplineBuilderClosure SBCLower1,
+            ddc::SplineBuilderClosure SBCUpper1,
+            ddc::SplineBuilderClosure SBCLower2,
+            ddc::SplineBuilderClosure SBCUpper2,
             ddc::SplineSolver Solver>
     struct Build_BuilderType<ddc::SplineBuilder2D<
             ExecSpace,
@@ -257,10 +267,10 @@ private:
             BSplinesThetaOriginal,
             GridROriginal,
             GridThetaOriginal,
-            BcLower1,
-            BcUpper1,
-            BcLower2,
-            BcUpper2,
+            SBCLower1,
+            SBCUpper1,
+            SBCLower2,
+            SBCUpper2,
             Solver>>
     {
         using type = ddc::SplineBuilder2D<
@@ -270,10 +280,10 @@ private:
                 BSplinesThetaRefined,
                 GridRRefined,
                 GridThetaRefined,
-                BcLower1,
-                BcUpper1,
-                BcLower2,
-                BcUpper2,
+                SBCLower1,
+                SBCUpper1,
+                SBCLower2,
+                SBCUpper2,
                 Solver>;
     };
 
@@ -396,8 +406,14 @@ public:
         m_curvilinear_to_y_spline_alloc = SplineCoeffsMem(spline_domain);
         SplineCoeffs curvilinear_to_x_spline = get_field(m_curvilinear_to_x_spline_alloc);
         SplineCoeffs curvilinear_to_y_spline = get_field(m_curvilinear_to_y_spline_alloc);
-        InterpolationFieldMem curvilinear_to_x_vals_alloc(refined_domain);
-        InterpolationFieldMem curvilinear_to_y_vals_alloc(refined_domain);
+        InterpolationFieldMem curvilinear_to_x_vals_alloc(
+                "curvilinear_to_x_vals "
+                "(RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder)",
+                refined_domain);
+        InterpolationFieldMem curvilinear_to_y_vals_alloc(
+                "curvilinear_to_y_vals "
+                "(RefinedDiscreteToCartesianBuilder::RefinedDiscreteToCartesianBuilder)",
+                refined_domain);
         InterpolationField curvilinear_to_x_vals = get_field(curvilinear_to_x_vals_alloc);
         InterpolationField curvilinear_to_y_vals = get_field(curvilinear_to_y_vals_alloc);
 
