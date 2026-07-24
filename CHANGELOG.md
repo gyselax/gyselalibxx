@@ -85,6 +85,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove version constraint on the indirect dependency Kokkos-FFT.
 - Use uppercase L suffix for long double literals.
 - Allow passing fields defined on strided domains to `BslAdvection1D`.
+- Allow `run_cppcheck` CI script to be run in parallel.
 
 ### Deprecated
 
