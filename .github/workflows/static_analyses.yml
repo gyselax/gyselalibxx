@@ -10,8 +10,6 @@ on:
       - main
   merge_group:
     types: [checks_requested]
-  push:
-    branches: [ebourne_cppcheck_addon]
 
 env:
   CHANGES_REF: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha }}
