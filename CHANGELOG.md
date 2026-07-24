@@ -35,6 +35,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow polar advection to modify a subset of the distribution function.
 - Add a `LocalPartialDerivativeCreator` concept to describe partial derivatives that can be called locally.
 - Add a method `get_derivative` to `CentralFDMPartialDerivative` so it respects the `LocalPartialDerivativeCreator` concept.
+- Add class `GMGPolarPoissonLikeSolver` to allow the use of [GMGPolar](https://github.com/SciCompMod/GMGPolar) as a polar Poisson solver.
+- Add GMGPolar in the toolchains.
 
 ### Fixed
 
@@ -50,11 +52,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix GCC version on Adastra toolchains.
 - Fix use of `BslAdvectionSpatial` and `BslAdvectionVelocity` with non-double precision.
 - Fix H100 toolchain on Jean-Zay.
+- Fix Lagrange basis non-uniform initialisation for a sub-domain.
 
 ### Changed
 
 - Changed the name of class `SplineBuliderDerivField2D` to fix typo (->`SplineBuilderDerivField2D`).
-- Update DDC to [v0.14.0](https://github.com/CExA-project/ddc/releases/tag/v0.14.0) (see also [v0.13.0](https://github.com/CExA-project/ddc/releases/tag/v0.13.0)).
+- Update DDC to [v0.15.0](https://github.com/CExA-project/ddc/releases/tag/v0.15.0) (see also [v0.14.0](https://github.com/CExA-project/ddc/releases/tag/v0.14.0) and [v0.13.0](https://github.com/CExA-project/ddc/releases/tag/v0.13.0)).
 - Changed FindLAPACKE CMake module to the version in DDC.
 - Renamed `DiscreteToCartesian` -> `DiscretePoloidalCSSplineMapping`.
 - Renamed `DiscreteToCartesianBuilder` -> `DiscretePoloidalCSSplineMappingBuilder`.
@@ -80,6 +83,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Remove default O1 optimisation flag.
 - Changed type of species identifier read in `read_species` PDI event (from `int` to `int64`).
 - Remove version constraint on the indirect dependency Kokkos-FFT.
+- Use uppercase L suffix for long double literals.
+- Allow passing fields defined on strided domains to `BslAdvection1D`.
+- Allow `run_cppcheck` CI script to be run in parallel.
 - Simplify `restrict_to_idx_range` implementation.
 
 ### Deprecated

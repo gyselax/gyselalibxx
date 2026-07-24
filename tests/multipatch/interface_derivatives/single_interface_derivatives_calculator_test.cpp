@@ -77,36 +77,40 @@ using Xi = Theta;
 
 // Interpolation points type for the 2 patches
 // --- patch 1
-template <ddc::BoundCond BoundCondR>
-using SplineInterpPointsR1 = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesR<1>, BoundCondR, ddc::BoundCond::HERMITE>;
+template <ddc::SplineBuilderClosure SplineBuilderClosureR>
+using SplineInterpPointsR1 = ddcHelper::NonUniformInterpolationPoints<
+        BSplinesR<1>,
+        SplineBuilderClosureR,
+        ddc::SplineBuilderClosure::HERMITE>;
 using SplineInterpPointsTheta1 = ddc::KnotsAsInterpolationPoints<
         BSplinesTheta<1>,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 // --- patch 2
-template <ddc::BoundCond BoundCondR>
-using SplineInterpPointsEta2 = ddcHelper::
-        NonUniformInterpolationPoints<BSplinesR<2>, ddc::BoundCond::HERMITE, BoundCondR>;
+template <ddc::SplineBuilderClosure SplineBuilderClosureR>
+using SplineInterpPointsEta2 = ddcHelper::NonUniformInterpolationPoints<
+        BSplinesR<2>,
+        ddc::SplineBuilderClosure::HERMITE,
+        SplineBuilderClosureR>;
 using SplineInterpPointsXi2 = ddc::KnotsAsInterpolationPoints<
         BSplinesTheta<2>,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 
 // Interpolation points type for the equivalent global spline.
-template <ddc::BoundCond BoundCondR>
-using SplineInterpPointsRg
-        = ddcHelper::NonUniformInterpolationPoints<BSplinesRg, BoundCondR, BoundCondR>;
+template <ddc::SplineBuilderClosure SplineBuilderClosureR>
+using SplineInterpPointsRg = ddcHelper::
+        NonUniformInterpolationPoints<BSplinesRg, SplineBuilderClosureR, SplineBuilderClosureR>;
 using SplineInterpPointsThetag = ddcHelper::NonUniformInterpolationPoints<
         BSplinesThetag,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC>;
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 
 // Operators on the equivalent global spline
-template <ddc::BoundCond BoundCondR>
+template <ddc::SplineBuilderClosure SplineBuilderClosureR>
 using SplineRThetagBuilder = ddc::SplineBuilder2D<
         HostExecSpace,
         typename HostExecSpace::memory_space,
@@ -114,10 +118,10 @@ using SplineRThetagBuilder = ddc::SplineBuilder2D<
         BSplinesThetag,
         GridRg,
         GridThetag,
-        BoundCondR,
-        BoundCondR,
-        ddc::BoundCond::PERIODIC,
-        ddc::BoundCond::PERIODIC,
+        SplineBuilderClosureR,
+        SplineBuilderClosureR,
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineSolver::LAPACK>;
 
 using SplineRThetagEvaluator = ddc::SplineEvaluator2D<
@@ -157,7 +161,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
 {
     // Get the parameters of the test: patch connection and interpolation type.
     using Interpolation = InterpolationType;
-    static constexpr ddc::BoundCond Interpolation_v = InterpolationType::value;
+    static constexpr ddc::SplineBuilderClosure Interpolation_v = InterpolationType::value;
     using Edge1 = Edge_Patch1;
     using Edge2 = Edge_Patch2;
 
@@ -166,10 +170,10 @@ struct SingleInterfaceDerivativesCalculatorFixture<
     // patch 1 -----------------------------------
     static constexpr Coord<R> r1_min = Coord<R>(0.0);
     static constexpr Coord<R> r1_max = Coord<R>(1.0);
-    // Select less cells for ddc::BoundCond::GREVILLE to test the boundary.
-    static constexpr IdxStep<GridR<1>> r1_ncells = (Interpolation_v == ddc::BoundCond::GREVILLE)
-                                                           ? IdxStep<GridR<1>>(5)
-                                                           : IdxStep<GridR<1>>(30);
+    // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
+    static constexpr IdxStep<GridR<1>> r1_ncells
+            = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<1>>(5)
+                                                                       : IdxStep<GridR<1>>(30);
 
     static constexpr Coord<Theta> theta1_min = Coord<Theta>(0.0);
     static constexpr Coord<Theta> theta1_max = Coord<Theta>(2 * M_PI);
@@ -181,10 +185,10 @@ struct SingleInterfaceDerivativesCalculatorFixture<
             = (std::is_same_v<Edge2, SouthEdge2>) ? Coord<Eta>(1.0 * 2 * M_PI) : Coord<Eta>(1.0);
     static constexpr Coord<R> eta2_max
             = (std::is_same_v<Edge2, SouthEdge2>) ? Coord<Eta>(2.0 * 2 * M_PI) : Coord<Eta>(2.0);
-    // Select less cells for ddc::BoundCond::GREVILLE to test the boundary.
-    static constexpr IdxStep<GridR<2>> eta2_ncells = (Interpolation_v == ddc::BoundCond::GREVILLE)
-                                                             ? IdxStep<GridR<2>>(5)
-                                                             : IdxStep<GridR<2>>(30);
+    // Select less cells for ddc::SplineBuilderClosure::GREVILLE to test the boundary.
+    static constexpr IdxStep<GridR<2>> eta2_ncells
+            = (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) ? IdxStep<GridR<2>>(5)
+                                                                       : IdxStep<GridR<2>>(30);
 
     // Exchange R and Theta values for a connection with SouthEdge2.
     static constexpr Coord<Theta> xi2_min = Coord<Xi>(0.0);
@@ -220,7 +224,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
 #endif
 
         std::vector<Coord<R>> interpolation_points_r1;
-        if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
+        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
             // Add an interpolation point in the cell on the boundary of the equivalent global domain.
             // The other interpolation points are the break points.
             if constexpr (std::is_same_v<Edge1, EastEdge1>) {
@@ -229,7 +233,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                 interpolation_points_r1
                         = get_interpolation_points_add_one_on_right(break_points_r1);
             }
-        } else if (Interpolation_v == ddc::BoundCond::HERMITE) {
+        } else if (Interpolation_v == ddc::SplineBuilderClosure::HERMITE) {
             // Use the break points as interpolation points.
             interpolation_points_r1 = break_points_r1;
         }
@@ -264,7 +268,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
 
         std::vector<Coord<R>> interpolation_points_eta2;
         std::vector<Coord<Theta>> interpolation_points_xi2;
-        if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
+        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
             // Add an interpolation point in the cell on the boundary of the equivalent global domain.
             // The other interpolation points are the break points.
             if constexpr (std::is_same_v<Edge2, EastEdge2>) {
@@ -280,7 +284,7 @@ struct SingleInterfaceDerivativesCalculatorFixture<
                         = get_interpolation_points_add_one_on_right(break_points_xi2);
                 interpolation_points_eta2 = break_points_eta2;
             }
-        } else if (Interpolation_v == ddc::BoundCond::HERMITE) {
+        } else if (Interpolation_v == ddc::SplineBuilderClosure::HERMITE) {
             // Use the break points as interpolation points.
             interpolation_points_eta2 = break_points_eta2;
             interpolation_points_xi2 = break_points_xi2;
@@ -567,7 +571,9 @@ using tuple_cat_t = decltype(std::tuple_cat(std::declval<input_t>()...));
 using Cases = tuple_to_types_t<tuple_cat_t<
         cartesian_product_t<
                 std::tuple<
-                        std::integral_constant<ddc::BoundCond, ddc::BoundCond::HERMITE>
+                        std::integral_constant<
+                                ddc::SplineBuilderClosure,
+                                ddc::SplineBuilderClosure::HERMITE>
 #if defined(NON_UNIFORM_MESH)
                         /*
                             Test with additional interpolation points as closure.
@@ -576,13 +582,17 @@ using Cases = tuple_to_types_t<tuple_cat_t<
                             points as closure. 
                         */
                         ,
-                        std::integral_constant<ddc::BoundCond, ddc::BoundCond::GREVILLE>
+                        std::integral_constant<
+                                ddc::SplineBuilderClosure,
+                                ddc::SplineBuilderClosure::GREVILLE>
 #endif
                         >,
                 std::tuple<EastEdge1, WestEdge1>,
                 std::tuple<EastEdge2, WestEdge2>>,
         std::tuple<std::tuple<
-                std::integral_constant<ddc::BoundCond, ddc::BoundCond::HERMITE>,
+                std::integral_constant<
+                        ddc::SplineBuilderClosure,
+                        ddc::SplineBuilderClosure::HERMITE>,
                 EastEdge1,
                 SouthEdge2>>>>;
 
@@ -595,7 +605,7 @@ TYPED_TEST_SUITE(SingleInterfaceDerivativesCalculatorFixture, Cases);
 TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck)
 {
     // Get parameters of the test.
-    constexpr ddc::BoundCond Interpolation_v = TestFixture::Interpolation_v;
+    constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
     using Edge1 = typename TestFixture::Edge1;
     using Edge2 = typename TestFixture::Edge2;
 
@@ -623,7 +633,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
             Patch1::IdxStep1 idx_r(Patch1::Idx1(idx) - TestFixture::idx_range_r1.front());
             Patch1::IdxStep2 idx_theta(Patch1::Idx2(idx) - TestFixture::idx_range_theta1.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
+            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         TestFixture::r1_ncells.value() + 1 - idx_r.value(),
                         TestFixture::theta1_ncells.value() - 1 - idx_theta.value());
@@ -652,7 +662,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
+            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         TestFixture::eta2_ncells.value() - idx_eta.value()
                                 + TestFixture::r1_ncells.value() + 2,
@@ -680,7 +690,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
             Patch2::IdxStep1 idx_eta(Patch2::Idx1(idx) - TestFixture::idx_range_eta2.front());
             Patch2::IdxStep2 idx_xi(Patch2::Idx2(idx) - TestFixture::idx_range_xi2.front());
             Idx<GridRg, GridThetag> idx_g;
-            if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
+            if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
                 idx_g = Idx<GridRg, GridThetag>(
                         idx_eta.value() + TestFixture::r1_ncells.value() + 1,
                         idx_xi.value());
@@ -701,7 +711,7 @@ TYPED_TEST(SingleInterfaceDerivativesCalculatorFixture, InterpolationPointsCheck
     } else if (std ::is_same_v<Edge2, SouthEdge2>) {
         // Orientation second patch:  ↓→
         // Orientation global domain: ↑→
-        if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
+        if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
             Kokkos::abort("Test case not implemented."
                           "We cannot make the Edge1 on Theta with N points to match with the "
                           "Edge2 on R with N+1 points.");
@@ -734,7 +744,7 @@ TYPED_TEST(
         InterfaceDerivativesExactAndApproximationFormulae)
 {
     // Get parameters of the test.
-    constexpr ddc::BoundCond Interpolation_v = TestFixture::Interpolation_v;
+    constexpr ddc::SplineBuilderClosure Interpolation_v = TestFixture::Interpolation_v;
     using Edge1 = typename TestFixture::Edge1;
     using Edge2 = typename TestFixture::Edge2;
     using Interface_1_2 = typename TestFixture::Interface_1_2;
@@ -821,7 +831,7 @@ TYPED_TEST(
     host_t<DField<IdxRange<BSplinesRg, BSplinesThetag>>> function_g_coef
             = get_field(function_g_coef_alloc);
 
-    if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
+    if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
         // --- Spline builder
         builder_g(function_g_coef, get_const_field(function_g));
     } else {
@@ -864,14 +874,14 @@ TYPED_TEST(
 
 
     // Check the local derivatives with the global ones at the interfaces ========================
-    if constexpr (Interpolation_v == ddc::BoundCond::GREVILLE) {
+    if constexpr (Interpolation_v == ddc::SplineBuilderClosure::GREVILLE) {
         // We test if the boundaries are well treated => only work with 5 cells to better identify an error.
         // 5 cells -------------------------------------------------------------------------------
         SingleInterfaceDerivativesCalculator<Interface_1_2> const derivatives_calculator(
                 TestFixture::idx_range_rtheta1,
                 TestFixture::idx_range_etaxi2,
-                ddc::BoundCond::GREVILLE,
-                ddc::BoundCond::GREVILLE);
+                ddc::SplineBuilderClosure::GREVILLE,
+                ddc::SplineBuilderClosure::GREVILLE);
 
 
         ddc::host_for_each(TestFixture::idx_range_theta1, [&](Patch1::Idx2 const& idx2_1) {
