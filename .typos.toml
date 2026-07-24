@@ -35,6 +35,7 @@ color = "color"
 colors = "colors"
 artifacts = "artifacts"
 GAM = "GAM"
+equil = "equil"
 
 [files]
 extend-exclude = ["*.tex",
