@@ -157,7 +157,7 @@ jobs:
           pip install --upgrade pip
           pip install numpy
           python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
-          ./bin/run_cppcheck toolchains/common_toolchains/debug_toolchain.cmake src simulations tests --disable-style
+          ./bin/run_cppcheck toolchains/common_toolchains/debug_toolchain.cmake src simulations tests --disable-style -j 2
         shell: bash
 
   #cmake_static_analysis:
