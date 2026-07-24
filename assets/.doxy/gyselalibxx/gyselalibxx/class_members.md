@@ -1220,6 +1220,7 @@
 * **recursion** ([**SingleInterfaceDerivativesCalculator**](classSingleInterfaceDerivativesCalculator.md))
 * **Rho** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
 * **Rho\_cov** ([**ToroidalToCylindrical**](classToroidalToCylindrical.md))
+* **rectify\_coord\_o\_point** ([**polar\_foot\_finder\_details::ElementwiseLogicalAdvLogicalFootFinder**](classpolar__foot__finder__details_1_1ElementwiseLogicalAdvLogicalFootFinder.md))
 
 
 ## s

@@ -11,8 +11,10 @@
 
 
 * `#include <ddc/ddc.hpp>`
+* `#include "coord_transformation_tools.hpp"`
 * `#include "ddc_aliases.hpp"`
 * `#include "ddc_helper.hpp"`
+* `#include "elementwise_choice.hpp"`
 * `#include "l_norm_tools.hpp"`
 * `#include "tensor.hpp"`
 * `#include "vector_field.hpp"`

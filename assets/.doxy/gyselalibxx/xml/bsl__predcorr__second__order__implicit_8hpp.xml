@@ -75,9 +75,13 @@
         <link refid="logical__advection__logical__foot__finder_8hpp_source"/>
         <childnode refid="6" relation="include">
         </childnode>
+        <childnode refid="24" relation="include">
+        </childnode>
         <childnode refid="12" relation="include">
         </childnode>
         <childnode refid="16" relation="include">
+        </childnode>
+        <childnode refid="83" relation="include">
         </childnode>
         <childnode refid="69" relation="include">
         </childnode>

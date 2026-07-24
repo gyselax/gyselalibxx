@@ -3,6 +3,7 @@
   <compounddef id="elementwise__choice_8hpp" kind="file" language="C++">
     <compoundname>elementwise_choice.hpp</compoundname>
     <includedby refid="polar__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp</includedby>
+    <includedby refid="logical__advection__logical__foot__finder_8hpp" local="yes">/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp</includedby>
     <invincdepgraph>
       <node id="2">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finder.hpp</label>
@@ -15,6 +16,14 @@
       <node id="1">
         <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/elementwise_choice.hpp</label>
         <link refid="elementwise__choice_8hpp"/>
+        <childnode refid="2" relation="include">
+        </childnode>
+        <childnode refid="5" relation="include">
+        </childnode>
+      </node>
+      <node id="5">
+        <label>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/advection/polar_foot_finders/logical_advection_logical_foot_finder.hpp</label>
+        <link refid="logical__advection__logical__foot__finder_8hpp_source"/>
         <childnode refid="2" relation="include">
         </childnode>
       </node>
