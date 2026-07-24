@@ -144,7 +144,7 @@ jobs:
     name: CppCheck static analysis warnings
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/gyselax/gyselalibxx_env
+      image: ghcr.io/gyselax/gyselalibxx_env:latest
       options: --user 1001
     steps:
       - uses: actions/checkout@v7
