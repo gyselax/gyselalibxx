@@ -617,7 +617,7 @@ total_interval_length(IdxRange&lt;IDim&gt; const&amp; idx_range)
 //TODO: this should be directly handled by ddc::Discretisation really,
 //      in the meantime, we do it ourselves
 template &lt;class IDim&gt;
-constexpr std::enable_if_t&lt;
+KOKKOS_INLINE_FUNCTION std::enable_if_t&lt;
         IDim::continuous_dimension_type::PERIODIC,
         Coord&lt;typename IDim::continuous_dimension_type&gt;&gt;
 restrict_to_idx_range(
@@ -627,22 +627,13 @@ restrict_to_idx_range(
     using Coord1D = Coord&lt;typename IDim::continuous_dimension_type&gt;;
     double const x_min = ddc::rmin(idx_range);
     double const length = total_interval_length(idx_range);
-    double const x_max = x_min + length;
 
     assert(length &gt; 0);
     coord -= x_min;
-    if (fabs(coord) &gt; 10 * length) {
-        double periodic_factor = 2 * M_PI / length;
-        double coord_2pi = double(coord) * periodic_factor;
-        coord_2pi = std::copysign(std::acos(std::cos(coord_2pi)), std::sin(coord_2pi));
-        coord = coord_2pi &lt; 0 ? Coord1D((coord_2pi + 2 * M_PI) / periodic_factor)
-                              : Coord1D((coord_2pi) / periodic_factor);
-    }
+    coord = Coord1D(Kokkos::fmod((double)coord, length));
     coord += x_min;
-    while (coord &lt; x_min)
+    if (coord &lt; x_min)
         coord += length;
-    while (coord &gt;= x_max)
-        coord -= length;
     return coord;
 }
 

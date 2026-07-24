@@ -3681,7 +3681,7 @@
     <member refid="ddc__helper_8hpp_1ab85a32309a76aeb021f849ea7bfd2773" kind="function"><name>total_interval_length</name></member>
     <member refid="ddc__helper_8hpp_1a4d5446b992979ca3b2382c0277626048" kind="function"><name>total_interval_length</name></member>
     <member refid="ddc__helper_8hpp_1a342954bb0c44d8d86ceadb9d9fbea79c" kind="function"><name>total_interval_length</name></member>
-    <member refid="ddc__helper_8hpp_1aa3a54caed10dca08ea894953cd66a5f2" kind="function"><name>restrict_to_idx_range</name></member>
+    <member refid="ddc__helper_8hpp_1acadd8514e782d274e29345ae70a9c465" kind="function"><name>restrict_to_idx_range</name></member>
     <member refid="ddc__helper_8hpp_1ae8ba6761a82dae62be403afdfe82b46b" kind="function"><name>restrict_to_bspline_domain</name></member>
     <member refid="ddc__helper_8hpp_1afc83fef0fd54c18053bb973ee156fa49" kind="function"><name>dump_coordinates</name></member>
     <member refid="ddc__helper_8hpp_1a3b54b16fd66648bf6dd0376da991f596" kind="function"><name>dump_coordinates</name></member>

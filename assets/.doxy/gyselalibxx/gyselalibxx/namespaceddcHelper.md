@@ -90,7 +90,7 @@
 |  constexpr auto | [**get**](#function-get) (VectorFieldType & field) noexcept<br> |
 |  double | [**maximum\_distance\_between\_adjacent\_points**](#function-maximum_distance_between_adjacent_points) (IdxRange&lt; GridDim &gt; const & idx\_range) <br>_Computes the maximum distance between two adjacent points within an IdxRange._  |
 |  KOKKOS\_INLINE\_FUNCTION void | [**restrict\_to\_bspline\_domain**](#function-restrict_to_bspline_domain) (Coord&lt; typename BSpline::continuous\_dimension\_type &gt; & coord) <br>_Calculate the Coordinate inside the domain._  |
-|  constexpr std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC, Coord&lt; typename IDim::continuous\_dimension\_type &gt; &gt; | [**restrict\_to\_idx\_range**](#function-restrict_to_idx_range) (Coord&lt; typename IDim::continuous\_dimension\_type &gt; coord, IdxRange&lt; IDim &gt; const & idx\_range) <br>_Calculate the Coordinate inside the domain._  |
+|  KOKKOS\_INLINE\_FUNCTION std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC, Coord&lt; typename IDim::continuous\_dimension\_type &gt; &gt; | [**restrict\_to\_idx\_range**](#function-restrict_to_idx_range) (Coord&lt; typename IDim::continuous\_dimension\_type &gt; coord, IdxRange&lt; IDim &gt; const & idx\_range) <br>_Calculate the Coordinate inside the domain._  |
 |  KOKKOS\_INLINE\_FUNCTION Coord&lt; Dims... &gt; | [**to\_coord**](#function-to_coord) ([**TensorCommon**](classTensorCommon.md)&lt; storage\_type, ddc::detail::TypeSeq&lt; Dims... &gt; &gt; const & tensor) <br>_A helper function to convert a vector to a coordinate. This is useful in order to add a Vector to a coordinate to obtain a new coordinate (e.g. when calculating the foot of a characteristic._  |
 |  constexpr std::enable\_if\_t&lt;!IDim::continuous\_dimension\_type::PERIODIC, double &gt; | [**total\_interval\_length**](#function-total_interval_length) (IdxRange&lt; IDim &gt; const & idx\_range) <br> |
 |  constexpr std::enable\_if\_t&lt; IDim::continuous\_dimension\_type::PERIODIC &&ddc::is\_uniform\_point\_sampling\_v&lt; IDim &gt;, double &gt; | [**total\_interval\_length**](#function-total_interval_length) (IdxRange&lt; IDim &gt; const & idx\_range) <br> |
@@ -828,7 +828,7 @@ The equivalent coordinate inside the domain.
 _Calculate the Coordinate inside the domain._ 
 ```C++
 template<class IDim>
-constexpr std::enable_if_t< IDim::continuous_dimension_type::PERIODIC, Coord< typename IDim::continuous_dimension_type > > ddcHelper::restrict_to_idx_range (
+KOKKOS_INLINE_FUNCTION std::enable_if_t< IDim::continuous_dimension_type::PERIODIC, Coord< typename IDim::continuous_dimension_type > > ddcHelper::restrict_to_idx_range (
     Coord< typename IDim::continuous_dimension_type > coord,
     IdxRange< IDim > const & idx_range
 ) 
