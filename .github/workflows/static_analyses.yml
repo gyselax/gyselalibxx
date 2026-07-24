@@ -150,14 +150,13 @@ jobs:
       options: --user 1001
     steps:
       - uses: actions/checkout@v7
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: 3.12
       - uses: ./.github/actions/linux_static_analysis_install
-      - uses: ./.github/actions/python-static-analysis-setup
       - uses: ./.github/actions/test_filter
       - run: |
+          python -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install numpy
           python3 bin/ci_tools/gyselalib_static_analysis.py ${CHANGED_FILES}
           ./bin/run_cppcheck toolchains/common_toolchains/debug_toolchain.cmake src simulations tests --disable-style
 
