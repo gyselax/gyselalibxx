@@ -99,12 +99,14 @@ namespace ExtrapolationRule {
  * The value at a point outside the domain is taken as the value at the equivalent
  * point inside the domain.
  */
-struct Periodic
+struct OneSidedPeriodic
 {
     /// @brief The concrete extrapolation rule class for a given CoeffGrid/DataType.
     template <class CoeffGrid, class DataType>
     using type = ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
 };
+
+using Periodic = ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
 
 /// @brief Tag selecting null extrapolation: the function evaluates to zero outside the domain.
 struct NullValue
@@ -113,6 +115,8 @@ struct NullValue
     template <class CoeffGrid, class DataType>
     using type = ddc::NullExtrapolationRule;
 };
+
+using Null_Null = ddc::detail::TypeSeq<NullValue, NullValue>;
 
 /**
  * @brief Tag selecting constant extrapolation.
@@ -128,5 +132,7 @@ struct Constant
             ddc::ConstantExtrapolationRule<typename CoeffGrid::continuous_dimension_type>,
             ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>;
 };
+
+using Constant_Constant = ddc::detail::TypeSeq<Constant, Constant>;
 
 } // namespace ExtrapolationRule

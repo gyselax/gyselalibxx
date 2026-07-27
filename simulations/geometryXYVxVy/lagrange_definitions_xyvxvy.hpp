@@ -58,13 +58,13 @@ using LagrangeInterpolatorX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagrangeX,
         GridX,
-        ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Periodic>,
+        ExtrapolationRule::Periodic,
         Real>;
 using LagrangeInterpolatorY = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagrangeY,
         GridY,
-        ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Periodic>,
+        ExtrapolationRule::Periodic,
         Real>;
 
 using LagrangeInterpolatorVx = LagrangeInterpolator<

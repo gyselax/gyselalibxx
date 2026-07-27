@@ -59,7 +59,7 @@ using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
-        ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Periodic>,
+        ExtrapolationRule::Periodic,
         ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineBuilderClosure::PERIODIC>;
 
