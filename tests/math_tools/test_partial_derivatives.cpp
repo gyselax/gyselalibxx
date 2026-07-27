@@ -466,7 +466,7 @@ public:
     }
 
 private:
-    XExtrapolationRule get_x_bv(Coord<X> xmin, Coord<Y> ymin, Coord<Y> ymax)
+    static XExtrapolationRule get_x_bv(Coord<X> xmin, Coord<Y> ymin, Coord<Y> ymax)
     {
         if constexpr (X::PERIODIC) {
             return XExtrapolationRule();
@@ -474,7 +474,7 @@ private:
             return XExtrapolationRule(xmin, ymin, ymax);
         }
     }
-    YExtrapolationRule get_y_bv(Coord<Y> ymin, Coord<X> xmin, Coord<X> xmax)
+    static YExtrapolationRule get_y_bv(Coord<Y> ymin, Coord<X> xmin, Coord<X> xmax)
     {
         if constexpr (Y::PERIODIC) {
             return YExtrapolationRule();
