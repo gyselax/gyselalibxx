@@ -61,6 +61,9 @@ private:
 
     static_assert(is_spline_basis_v<Basis>);
 
+    using MinExtrapolationRule = extrapolation_rule_t<MinExtrapRule, Basis, double>;
+    using MaxExtrapolationRule = extrapolation_rule_t<MaxExtrapRule, Basis, double>;
+
 public:
     /// @brief The ddc::SplineBuilder type built from the template parameters.
     using BuilderType = ddc::SplineBuilder<
@@ -78,8 +81,8 @@ public:
             typename ExecSpace::memory_space,
             Basis,
             InterpGrid,
-            extrapolation_rule_t<MinExtrapRule, Basis, double>,
-            extrapolation_rule_t<MaxExtrapRule, Basis, double>>;
+            MinExtrapolationRule,
+            MaxExtrapolationRule>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -88,8 +91,8 @@ public:
     }
 
 private:
-    extrapolation_rule_t<MinExtrapRule, Basis, double> m_min_extrapolation;
-    extrapolation_rule_t<MaxExtrapRule, Basis, double> m_max_extrapolation;
+    MinExtrapolationRule m_min_extrapolation;
+    MaxExtrapolationRule m_max_extrapolation;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 

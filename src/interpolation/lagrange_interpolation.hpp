@@ -69,6 +69,9 @@ private:
                     extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType>,
                     ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
 
+    using MinExtrapolationRule = extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>;
+    using MaxExtrapolationRule = extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>;
+
 public:
     /// @brief The LagrangeEvaluator type built from the template parameters.
     using EvaluatorType = LagrangeEvaluator<
@@ -77,8 +80,8 @@ public:
             DataType,
             Basis,
             InterpGrid,
-            extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>,
-            extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType>>;
+            MinExtrapolationRule,
+            MaxExtrapolationRule>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -87,8 +90,8 @@ public:
     }
 
 private:
-    extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType> m_min_extrapolation;
-    extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType> m_max_extrapolation;
+    MinExtrapolationRule m_min_extrapolation;
+    MaxExtrapolationRule m_max_extrapolation;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
