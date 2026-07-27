@@ -267,10 +267,8 @@ public:
     using SplineInterpPointsDDim
             = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsX, SplineInterpPointsY>;
 
-    using SplineExtrapolation = std::conditional_t<
-            DDim::PERIODIC,
-            ExtrapolationRule::Periodic,
-            ExtrapolationRule::Constant>;
+    using SplineExtrapolation = std::
+            conditional_t<DDim::PERIODIC, ExtrapolationRule::Periodic, ExtrapolationRule::Constant>;
 
     using SplineDDimInterpolation = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,

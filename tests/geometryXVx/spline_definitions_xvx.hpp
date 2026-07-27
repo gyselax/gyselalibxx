@@ -77,8 +77,8 @@ using SplineVxEvaluator = ddc::SplineEvaluator<
         ddc::ConstantExtrapolationRule<Vx>,
         ddc::ConstantExtrapolationRule<Vx>>;
 
-using XExtrapRule = std::
-        conditional_t<X::PERIODIC, ExtrapolationRule::Periodic, ExtrapolationRule::Constant>;
+using XExtrapRule
+        = std::conditional_t<X::PERIODIC, ExtrapolationRule::Periodic, ExtrapolationRule::Constant>;
 
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,

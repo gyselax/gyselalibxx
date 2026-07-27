@@ -40,8 +40,10 @@ using extrapolation_rule_t =
 /// from the boundary of the discrete space).
 template <class Rule, class CoeffGrid, class DataType>
 constexpr bool is_extrapolation_rule_auto_constructible_v
-        = std::is_default_constructible_v<extrapolation_rule_t<Rule, CoeffGrid, DataType>>
-          || std::is_same_v<Rule, ExtrapolationRule::Constant>;
+        = std::is_default_constructible_v<extrapolation_rule_t<
+                  Rule,
+                  CoeffGrid,
+                  DataType>> || std::is_same_v<Rule, ExtrapolationRule::Constant>;
 
 /**
  * @brief Initialise the extrapolation rule.

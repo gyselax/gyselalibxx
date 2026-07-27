@@ -111,10 +111,9 @@ public:
      * @param label A label used to tag parallel regions and memory allocations for profiling.
      * @param idx_range The 1D interpolation index range passed to the builder.
      */
-    explicit SplineInterpolator(std::string const& label, IdxRange<InterpGrid> idx_range)
-        requires(
-                is_extrapolation_rule_auto_constructible_v<MinExtrapRule, Basis, double> &&
-                is_extrapolation_rule_auto_constructible_v<MaxExtrapRule, Basis, double>)
+    explicit SplineInterpolator(std::string const& label, IdxRange<InterpGrid> idx_range) requires(
+            is_extrapolation_rule_auto_constructible_v<MinExtrapRule, Basis, double>&&
+                    is_extrapolation_rule_auto_constructible_v<MaxExtrapRule, Basis, double>)
         : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis, double>(Extremity::FRONT))
         , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis, double>(Extremity::BACK))
         , m_builder(label, idx_range)
@@ -132,10 +131,9 @@ public:
      *
      * @param idx_range The 1D interpolation index range passed to the builder.
      */
-    explicit SplineInterpolator(IdxRange<InterpGrid> idx_range)
-        requires(
-                is_extrapolation_rule_auto_constructible_v<MinExtrapRule, Basis, double> &&
-                is_extrapolation_rule_auto_constructible_v<MaxExtrapRule, Basis, double>)
+    explicit SplineInterpolator(IdxRange<InterpGrid> idx_range) requires(
+            is_extrapolation_rule_auto_constructible_v<MinExtrapRule, Basis, double>&&
+                    is_extrapolation_rule_auto_constructible_v<MaxExtrapRule, Basis, double>)
         : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis, double>(Extremity::FRONT))
         , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis, double>(Extremity::BACK))
         , m_builder(idx_range)
