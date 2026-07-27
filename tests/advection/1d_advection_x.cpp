@@ -61,8 +61,8 @@ using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
-        PERIODIC,
-        PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Periodic,
         SplineXClosure,
         SplineXClosure>;
 
@@ -75,15 +75,19 @@ struct LagBasisFloatX : UniformLagrangeBasis<X, 3, float>
 {
 };
 
-using LagrangeInterpolatorX
-        = LagrangeInterpolator<Kokkos::DefaultExecutionSpace, LagBasisX, GridX, PERIODIC, PERIODIC>;
+using LagrangeInterpolatorX = LagrangeInterpolator<
+        Kokkos::DefaultExecutionSpace,
+        LagBasisX,
+        GridX,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Periodic>;
 
 using LagrangeInterpolatorFloatX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagBasisFloatX,
         GridX,
-        PERIODIC,
-        PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Periodic,
         float>;
 
 

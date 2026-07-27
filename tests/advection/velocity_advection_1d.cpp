@@ -120,8 +120,8 @@ using LagrangeInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagBasisVx,
         GridVx,
-        ExtrapolationRule::CONSTANT,
-        ExtrapolationRule::CONSTANT>;
+        ExtrapolationRule::Constant,
+        ExtrapolationRule::Constant>;
 
 
 // Operators
@@ -129,8 +129,8 @@ using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVx,
         GridVx,
-        ExtrapolationRule::CONSTANT,
-        ExtrapolationRule::CONSTANT,
+        ExtrapolationRule::Constant,
+        ExtrapolationRule::Constant,
         SplineVxClosure,
         SplineVxClosure>;
 
@@ -246,8 +246,8 @@ public:
                 allfdistribu,
                 advection_field,
                 timestep,
-                get_const_field(advection_field_derivatives_min),
-                get_const_field(advection_field_derivatives_max));
+                std::optional(get_const_field(advection_field_derivatives_min)),
+                std::optional(get_const_field(advection_field_derivatives_max)));
 
 
         double const max_advection_error = ddc::parallel_transform_reduce(

@@ -27,8 +27,8 @@ using LagInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagBasisVx,
         GridVx,
-        NULL_VALUE,
-        NULL_VALUE>;
+        ExtrapolationRule::NullValue,
+        ExtrapolationRule::NullValue>;
 
 std::pair<IdxRange<GridX>, IdxRange<GridVx>> Init_idx_range_velocity_adv()
 {

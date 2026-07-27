@@ -3,11 +3,12 @@
 
 #include "../test_utils.hpp"
 
+#include "circular_to_cartesian.hpp"
 #include "ddc_aliases.hpp"
 #include "mesh_builder.hpp"
+#include "polar_foot_finder.hpp"
 #include "rk4.hpp"
 #include "species_info.hpp"
-#include "spline_logical_foot_finder.hpp"
 #include "vector_field.hpp"
 #include "vector_field_mem.hpp"
 #include "vector_index_tools.hpp"
@@ -41,6 +42,18 @@ struct Theta_cov
     static constexpr bool IS_CONTRAVARIANT = false;
     static constexpr bool IS_COVARIANT = true;
     using Dual = Theta;
+};
+struct X
+{
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = X;
+};
+struct Y
+{
+    static constexpr bool IS_CONTRAVARIANT = true;
+    static constexpr bool IS_COVARIANT = true;
+    using Dual = Y;
 };
 
 struct GridR : NonUniformGridBase<R>
@@ -81,7 +94,7 @@ using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
         BSplinesTheta,
         GridR,
         GridTheta,
-        ddc::NullExtrapolationRule,
+        ddc::ConstantExtrapolationRule<R, Theta>,
         ddc::ConstantExtrapolationRule<R, Theta>,
         ddc::PeriodicExtrapolationRule<Theta>,
         ddc::PeriodicExtrapolationRule<Theta>>;
@@ -101,7 +114,7 @@ using IdxSpRTheta = Idx<Species, GridR, GridTheta>;
 using LogicalBasis = VectorIndexSet<R, Theta>;
 using CoordRTheta = Coord<R, Theta>;
 
-static constexpr Coord<R> r_min(0.1);
+static constexpr Coord<R> r_min(1e-3);
 static constexpr Coord<R> r_max(1.0);
 static constexpr Coord<Theta> theta_min(0.0);
 static constexpr Coord<Theta> theta_max(2.0 * M_PI);
@@ -115,7 +128,7 @@ static constexpr Coord<Theta> theta_max(2.0 * M_PI);
  * For a time step @f$ dt @f$, the exact characteristic foot from @f$ (r, \theta) @f$ is:
  * @f$ (r, \theta - \omega \, dt) @f$.
  */
-TEST(LogicalFootFinder, PureRotation)
+void test_LogicalFootFinder_PureRotation()
 {
     IdxStep<GridR> const nr_cells(25);
     IdxStep<GridTheta> const ntheta_cells(50);
@@ -137,7 +150,7 @@ TEST(LogicalFootFinder, PureRotation)
     IdxRangeRTheta idx_range(r_idx_range, theta_idx_range);
     IdxRangeSpRTheta batched_idx_range(idx_range_sp, idx_range);
 
-    ddc::NullExtrapolationRule r_min_extrap;
+    ddc::ConstantExtrapolationRule<R, Theta> r_min_extrap(r_min);
     ddc::PeriodicExtrapolationRule<Theta> theta_extrap;
     SplineRThetaBuilder builder(idx_range);
     ddc::ConstantExtrapolationRule<R, Theta> r_max_extrap(r_max);
@@ -145,7 +158,17 @@ TEST(LogicalFootFinder, PureRotation)
 
     RK4Builder time_stepper;
 
-    SplineLogicalFootFinder const foot_finder(batched_idx_range, time_stepper, builder, evaluator);
+    CircularToCartesian<R, Theta, X, Y> mapping;
+
+    PolarFootFinder<
+            FootFindingSpace::LOGICAL,
+            AdvectionFieldSpace::LOGICAL,
+            CircularToCartesian<R, Theta, X, Y>,
+            IdxRangeSpRTheta,
+            RK4Builder,
+            decltype(builder),
+            decltype(evaluator)>
+            foot_finder(time_stepper, mapping, builder, evaluator);
 
     const double omega = 2 * M_PI;
     const double dt = 0.001;
@@ -167,7 +190,9 @@ TEST(LogicalFootFinder, PureRotation)
     Field<CoordRTheta, IdxRangeSpRTheta> feet = get_field(feet_alloc);
     Field<CoordRTheta, IdxRangeSpRTheta> exact_feet = get_field(exact_feet_alloc);
 
+    const std::source_location location = std::source_location::current();
     ddc::parallel_for_each(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
             batched_idx_range,
             KOKKOS_LAMBDA(IdxSpRTheta idx) {
@@ -178,10 +203,18 @@ TEST(LogicalFootFinder, PureRotation)
 
     foot_finder(feet, get_const_field(adv_field), dt);
 
-    double const error = error_norm_inf(
+    double const error = ddc::parallel_transform_reduce(
+            location.function_name(),
             Kokkos::DefaultExecutionSpace(),
-            get_const_field(feet),
-            get_const_field(exact_feet));
+            batched_idx_range,
+            double(0.),
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IdxSpRTheta idx) {
+                double local_err = norm_inf(feet(idx) - exact_feet(idx));
+                local_err = (local_err > M_PI) * Kokkos::fabs(local_err - 2 * M_PI)
+                            + (local_err <= M_PI) * local_err;
+                return local_err;
+            });
 
     EXPECT_NEAR(error, 0.0, 1e-4);
 }
@@ -193,7 +226,7 @@ TEST(LogicalFootFinder, PureRotation)
  * are driven to @f$ r < 0 @f$ and must be reflected through the O-point.
  * After foot-finding, all radial coordinates must be non-negative.
  */
-TEST(LogicalFootFinder, OPointReflection)
+void test_LogicalFootFinder_OPointReflection()
 {
     IdxStep<GridR> const nr_cells(25);
     IdxStep<GridTheta> const ntheta_cells(50);
@@ -211,7 +244,7 @@ TEST(LogicalFootFinder, OPointReflection)
     IdxRangeTheta theta_idx_range(SplineInterpPointsTheta::template get_domain<GridTheta>());
     IdxRangeRTheta idx_range(r_idx_range, theta_idx_range);
 
-    ddc::NullExtrapolationRule r_min_extrap;
+    ddc::ConstantExtrapolationRule<R, Theta> r_min_extrap(r_min);
     ddc::PeriodicExtrapolationRule<Theta> theta_extrap;
     SplineRThetaBuilder builder(idx_range);
     ddc::ConstantExtrapolationRule<R, Theta> r_max_extrap(r_max);
@@ -219,7 +252,17 @@ TEST(LogicalFootFinder, OPointReflection)
 
     RK4Builder time_stepper;
 
-    SplineLogicalFootFinder const foot_finder(idx_range, time_stepper, builder, evaluator);
+    CircularToCartesian<R, Theta, X, Y> mapping;
+
+    PolarFootFinder<
+            FootFindingSpace::LOGICAL,
+            AdvectionFieldSpace::LOGICAL,
+            CircularToCartesian<R, Theta, X, Y>,
+            IdxRangeRTheta,
+            RK4Builder,
+            decltype(builder),
+            decltype(evaluator)>
+            foot_finder(time_stepper, mapping, builder, evaluator);
 
     // Large positive A^r: foot_r = r - dt * vr < 0 for small r.
     // With r_min = 0.1, dt = 0.1, vr = 5.0: foot_r = r - 0.5 < 0 for r < 0.5.
@@ -247,5 +290,129 @@ TEST(LogicalFootFinder, OPointReflection)
 
     // Mirror to host to check all r values are non-negative.
     auto feet_host = ddc::create_mirror_view_and_copy(get_const_field(feet));
-    ddc::for_each(idx_range, [&](IdxRTheta idx) { EXPECT_GE(ddc::get<R>(feet_host(idx)), 0.0); });
+    ddc::host_for_each(idx_range, [&](IdxRTheta idx) {
+        EXPECT_GE(ddc::get<R>(feet_host(idx)), 0.0);
+    });
+}
+
+/**
+ * @brief Test SplineLogicalFootFinder O-point reflection.
+ *
+ * The advection field is @f$ (A^x, A^y) = (0, c) @f$ (constant everywhere).
+ */
+void test_LogicalFootFinder_PureVerticalAdvection()
+{
+    IdxStep<GridR> const nr_cells(10);
+    IdxStep<GridTheta> const ntheta_cells(10);
+
+    ddc::init_discrete_space<BSplinesR>(
+            build_random_non_uniform_break_points(r_min, r_max, nr_cells, 0.5));
+    ddc::init_discrete_space<BSplinesTheta>(
+            build_random_non_uniform_break_points(theta_min, theta_max, ntheta_cells, 0.0));
+
+    ddc::init_discrete_space<GridR>(SplineInterpPointsR::template get_sampling<GridR>());
+    ddc::init_discrete_space<GridTheta>(
+            SplineInterpPointsTheta::template get_sampling<GridTheta>());
+
+    IdxRangeR r_idx_range(SplineInterpPointsR::template get_domain<GridR>());
+    IdxRangeTheta theta_idx_range(SplineInterpPointsTheta::template get_domain<GridTheta>());
+    IdxRangeRTheta idx_range(r_idx_range, theta_idx_range);
+
+    ddc::ConstantExtrapolationRule<R, Theta> r_min_extrap(r_min);
+    ddc::PeriodicExtrapolationRule<Theta> theta_extrap;
+    SplineRThetaBuilder builder(idx_range);
+    ddc::ConstantExtrapolationRule<R, Theta> r_max_extrap(r_max);
+    SplineRThetaEvaluator evaluator(r_min_extrap, r_max_extrap, theta_extrap, theta_extrap);
+
+    RK4Builder time_stepper;
+
+    CircularToCartesian<R, Theta, X, Y> mapping;
+    CartesianToCircular<X, Y, R, Theta> inv_mapping = mapping.get_inverse_mapping();
+
+    PolarFootFinder foot_finder = make_polar_foot_finder<
+            FootFindingSpace::LOGICAL,
+            AdvectionFieldSpace::LOGICAL>(time_stepper, mapping, idx_range, builder, evaluator);
+
+    // Advection coefficients (dt*a_x must be > r_min to ensure a negative value appears)
+    const double a_x(0.4);
+    const double a_y(0.0);
+    const double dt = 1e-3;
+
+    DVectorFieldMem<IdxRangeRTheta, LogicalBasis> adv_field_alloc(idx_range);
+    DVectorField<IdxRangeRTheta, LogicalBasis> adv_field = get_field(adv_field_alloc);
+
+    FieldMem<CoordRTheta, IdxRangeRTheta> feet_alloc(idx_range);
+    Field<CoordRTheta, IdxRangeRTheta> feet = get_field(feet_alloc);
+    FieldMem<CoordRTheta, IdxRangeRTheta> exact_feet_alloc(idx_range);
+    Field<CoordRTheta, IdxRangeRTheta> exact_feet = get_field(exact_feet_alloc);
+
+    const std::source_location location = std::source_location::current();
+    ddc::parallel_for_each(
+            location.function_name(),
+            Kokkos::DefaultExecutionSpace(),
+            idx_range,
+            KOKKOS_LAMBDA(IdxRTheta idx) {
+                CoordRTheta const coord_rtheta = ddc::coordinate(IdxRTheta(idx));
+                Coord<X, Y> const coord_xy = mapping(coord_rtheta);
+
+                DVector<X, Y> adv_field_xy(a_x, a_y);
+                DVector<R, Theta> adv_field_rtheta = to_vector_space<
+                        VectorIndexSet<R, Theta>>(mapping, coord_rtheta, adv_field_xy);
+
+                ddcHelper::get<R>(adv_field)(idx) = ddcHelper::get<R>(adv_field_rtheta);
+                ddcHelper::get<Theta>(adv_field)(idx) = ddcHelper::get<Theta>(adv_field_rtheta);
+
+                feet(idx) = coord_rtheta;
+                exact_feet(idx) = inv_mapping(coord_xy - dt * adv_field_xy);
+            });
+
+    foot_finder(feet, get_const_field(adv_field), dt);
+
+    // Check that calculation is exact when advection is aligned with A_r
+    double const error_aligned = ddc::parallel_transform_reduce(
+            location.function_name(),
+            Kokkos::DefaultExecutionSpace(),
+            r_idx_range,
+            double(0.),
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(Idx<GridR> idx_r) {
+                IdxRTheta idx(idx_r, theta_idx_range.front());
+                double local_err = norm_inf(feet(idx) - exact_feet(idx));
+                local_err = (local_err > M_PI) * Kokkos::fabs(local_err - 2 * M_PI)
+                            + (local_err <= M_PI) * local_err;
+                return local_err;
+            });
+
+    EXPECT_NEAR(error_aligned, 0.0, 1e-12);
+
+    // Check that calculation is accurate in the outer region
+    double const error_outer = ddc::parallel_transform_reduce(
+            location.function_name(),
+            Kokkos::DefaultExecutionSpace(),
+            idx_range.take_last(IdxStep<GridR, GridTheta>(4, theta_idx_range.size())),
+            double(0.),
+            ddc::reducer::max<double>(),
+            KOKKOS_LAMBDA(IdxRTheta idx) {
+                double local_err = norm_inf(feet(idx) - exact_feet(idx));
+                local_err = (local_err > M_PI) * Kokkos::fabs(local_err - 2 * M_PI)
+                            + (local_err <= M_PI) * local_err;
+                return local_err;
+            });
+
+    EXPECT_NEAR(error_outer, 0.0, 1e-4);
+
+    // The calculation is not tested near the O-point as large poloidal values give bad results when the advection field is not well aligned with the grid
+}
+
+TEST(LogicalFootFinder, PureRotation)
+{
+    test_LogicalFootFinder_PureRotation();
+}
+TEST(LogicalFootFinder, OPointReflection)
+{
+    test_LogicalFootFinder_OPointReflection();
+}
+TEST(LogicalFootFinder, PureVerticalAdvection)
+{
+    test_LogicalFootFinder_PureVerticalAdvection();
 }

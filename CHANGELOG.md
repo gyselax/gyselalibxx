@@ -54,6 +54,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix GCC version on Adastra toolchains.
 - Fix use of `BslAdvectionSpatial` and `BslAdvectionVelocity` with non-double precision.
 - Fix H100 toolchain on Jean-Zay.
+- Fix Lagrange basis non-uniform initialisation for a sub-domain.
 
 ### Changed
 
@@ -85,6 +86,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed type of species identifier read in `read_species` PDI event (from `int` to `int64`).
 - Remove version constraint on the indirect dependency Kokkos-FFT.
 - Use uppercase L suffix for long double literals.
+- Allow passing fields defined on strided domains to `BslAdvection1D`.
+- Allow `run_cppcheck` CI script to be run in parallel.
+- Simplify `restrict_to_idx_range` implementation.
+- Rename CMake options `POLAR_SPLINES_TEST_DEGREE_[MIN/MAX]` to `GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_[MIN/MAX]`.
 
 ### Deprecated
 
