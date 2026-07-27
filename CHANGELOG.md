@@ -87,6 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Allow passing fields defined on strided domains to `BslAdvection1D`.
 - Allow `run_cppcheck` CI script to be run in parallel.
 - Simplify `restrict_to_idx_range` implementation.
+- Rename CMake options `POLAR_SPLINES_TEST_DEGREE_[MIN/MAX]` to `GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_[MIN/MAX]`.
 
 ### Deprecated
 
