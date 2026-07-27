@@ -34,6 +34,15 @@ template <class Rule, class CoeffGrid, class DataType>
 using extrapolation_rule_t =
         typename details::ExtrapolationRuleResolver<Rule, CoeffGrid, DataType>::type;
 
+/// @brief True if get_extrapolation<Rule, CoeffGrid, DataType, ...> can build the rule
+/// with no extra information: the resolved rule type is default-constructible, or Rule
+/// is the ExtrapolationRule::Constant tag (which get_extrapolation knows how to build
+/// from the boundary of the discrete space).
+template <class Rule, class CoeffGrid, class DataType>
+constexpr bool is_extrapolation_rule_auto_constructible_v
+        = std::is_default_constructible_v<extrapolation_rule_t<Rule, CoeffGrid, DataType>>
+          || std::is_same_v<Rule, ExtrapolationRule::Constant>;
+
 /**
  * @brief Initialise the extrapolation rule.
  *
