@@ -20,8 +20,12 @@
  * @tparam ExecSpace     The Kokkos execution space used for computations.
  * @tparam Basis         The B-spline basis type (uniform or non-uniform).
  * @tparam InterpGrid    The discrete grid on which function values are provided.
- * @tparam MinExtrapRule The ExtrapolationRule applied below the lower boundary.
- * @tparam MaxExtrapRule The ExtrapolationRule applied above the upper boundary.
+ * @tparam MinExtrapRule The extrapolation rule applied below the lower boundary. This
+ *                       may be one of the tags in the ExtrapolationRule namespace
+ *                       (e.g. ExtrapolationRule::Periodic) or a custom, already-concrete
+ *                       extrapolation rule class.
+ * @tparam MaxExtrapRule The extrapolation rule applied above the upper boundary. See
+ *                       MinExtrapRule for the accepted forms.
  * @tparam MinBound      The ddc::SplineBuilderClosure at the lower boundary of the spline builder.
  * @tparam MaxBound      The ddc::SplineBuilderClosure at the upper boundary of the spline builder.
  * @tparam Solver        The spline solver backend (default: LAPACK).
@@ -30,8 +34,8 @@ template <
         class ExecSpace,
         class Basis,
         class InterpGrid,
-        ExtrapolationRule MinExtrapRule,
-        ExtrapolationRule MaxExtrapRule,
+        class MinExtrapRule,
+        class MaxExtrapRule,
         ddc::SplineBuilderClosure MinBound,
         ddc::SplineBuilderClosure MaxBound,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
@@ -44,8 +48,16 @@ private:
 
     static_assert(is_periodic == (MinBound == ddc::SplineBuilderClosure::PERIODIC));
     static_assert(is_periodic == (MaxBound == ddc::SplineBuilderClosure::PERIODIC));
-    static_assert(is_periodic == (MinExtrapRule == ExtrapolationRule::PERIODIC));
-    static_assert(is_periodic == (MaxExtrapRule == ExtrapolationRule::PERIODIC));
+    static_assert(
+            is_periodic
+            == std::is_same_v<
+                    extrapolation_rule_t<MinExtrapRule, Basis, double>,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
+    static_assert(
+            is_periodic
+            == std::is_same_v<
+                    extrapolation_rule_t<MaxExtrapRule, Basis, double>,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
 
     static_assert(is_spline_basis_v<Basis>);
 

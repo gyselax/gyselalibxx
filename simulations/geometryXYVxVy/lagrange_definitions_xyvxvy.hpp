@@ -58,30 +58,30 @@ using LagrangeInterpolatorX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagrangeX,
         GridX,
-        PERIODIC,
-        PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Periodic,
         Real>;
 using LagrangeInterpolatorY = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagrangeY,
         GridY,
-        PERIODIC,
-        PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Periodic,
         Real>;
 
 using LagrangeInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagrangeVx,
         GridVx,
-        CONSTANT,
-        CONSTANT,
+        ExtrapolationRule::Constant,
+        ExtrapolationRule::Constant,
         Real>;
 using LagrangeInterpolatorVy = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagrangeVy,
         GridVy,
-        CONSTANT,
-        CONSTANT,
+        ExtrapolationRule::Constant,
+        ExtrapolationRule::Constant,
         Real>;
 
 using IdxRangeLY = IdxRange<LagrangeY>;

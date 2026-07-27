@@ -267,8 +267,10 @@ public:
     using SplineInterpPointsDDim
             = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsX, SplineInterpPointsY>;
 
-    static constexpr ExtrapolationRule SplineExtrapolation
-            = DDim::PERIODIC ? ExtrapolationRule::PERIODIC : ExtrapolationRule::CONSTANT;
+    using SplineExtrapolation = std::conditional_t<
+            DDim::PERIODIC,
+            ExtrapolationRule::Periodic,
+            ExtrapolationRule::Constant>;
 
     using SplineDDimInterpolation = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,
@@ -332,16 +334,6 @@ public:
                         Y>>(idxrange, function_to_differentiate, derivative_creator, max_distance);
 
         return max_error;
-    }
-
-private:
-    ExtrapolationRule get_bv(Coord<DDim> dcoord) const
-    {
-        if constexpr (DDim::PERIODIC) {
-            return ExtrapolationRule();
-        } else {
-            return ExtrapolationRule(dcoord);
-        }
     }
 };
 
