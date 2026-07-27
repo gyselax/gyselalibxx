@@ -106,6 +106,7 @@ struct OneSidedPeriodic
     using type = ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
 };
 
+/// @brief Convenience pairing of ExtrapolationRule::OneSidedPeriodic for both boundaries.
 using Periodic = ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
 
 /// @brief Tag selecting null extrapolation: the function evaluates to zero outside the domain.
@@ -116,6 +117,7 @@ struct NullValue
     using type = ddc::NullExtrapolationRule;
 };
 
+/// @brief Convenience pairing of ExtrapolationRule::NullValue for both boundaries.
 using Null_Null = ddc::detail::TypeSeq<NullValue, NullValue>;
 
 /**
@@ -133,6 +135,7 @@ struct Constant
             ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>;
 };
 
+/// @brief Convenience pairing of ExtrapolationRule::Constant for both boundaries.
 using Constant_Constant = ddc::detail::TypeSeq<Constant, Constant>;
 
 } // namespace ExtrapolationRule
