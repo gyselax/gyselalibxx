@@ -84,8 +84,7 @@ using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
-        XExtrapRule,
-        XExtrapRule,
+        ddc::detail::TypeSeq<XExtrapRule, XExtrapRule>,
         SplineXClosure,
         SplineXClosure>;
 
@@ -93,8 +92,7 @@ using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVx,
         GridVx,
-        ExtrapolationRule::Constant,
-        ExtrapolationRule::Constant,
+        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
         SplineVxClosure,
         SplineVxClosure>;
 

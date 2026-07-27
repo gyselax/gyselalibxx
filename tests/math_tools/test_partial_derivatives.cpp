@@ -274,8 +274,7 @@ public:
             Kokkos::DefaultExecutionSpace,
             BSplinesDDim,
             GridDDim,
-            SplineExtrapolation,
-            SplineExtrapolation,
+            ddc::detail::TypeSeq<SplineExtrapolation, SplineExtrapolation>,
             SplineClosure,
             SplineClosure>;
 

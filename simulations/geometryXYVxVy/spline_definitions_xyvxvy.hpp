@@ -47,8 +47,7 @@ using SplineInterpolatorY = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesY,
         GridY,
-        ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
+        ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Periodic>,
         SplineYClosure,
         SplineYClosure>;
 
@@ -56,8 +55,7 @@ using SplineInterpolatorVy = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVy,
         GridVy,
-        ExtrapolationRule::Constant,
-        ExtrapolationRule::Constant,
+        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
         SplineVyClosure,
         SplineVyClosure>;
 

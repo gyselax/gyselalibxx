@@ -24,24 +24,25 @@
  * @tparam ExecSpace     The Kokkos execution space used for computations.
  * @tparam Basis         The Lagrange basis type (uniform or non-uniform).
  * @tparam InterpGrid    The discrete grid on which function values are provided.
- * @tparam MinExtrapRule The extrapolation rule applied below the lower boundary. This
- *                       may be one of the tags in the ExtrapolationRule namespace
- *                       (e.g. ExtrapolationRule::Periodic) or a custom, already-concrete
+ * @tparam ExtrapRules   A ddc::detail::TypeSeq<MinExtrapRule, MaxExtrapRule> pairing the
+ *                       extrapolation rules applied below/above the boundary. Each may
+ *                       be one of the tags in the ExtrapolationRule namespace (e.g.
+ *                       ExtrapolationRule::Periodic) or a custom, already-concrete
  *                       extrapolation rule class.
- * @tparam MaxExtrapRule The extrapolation rule applied above the upper boundary. See
- *                       MinExtrapRule for the accepted forms.
  * @tparam DataType      The floating-point type of the function values (default: double).
  */
 template <
         class ExecSpace,
         class Basis,
         class InterpGrid,
-        class MinExtrapRule,
-        class MaxExtrapRule,
+        class ExtrapRules,
         class DataType = double>
 class LagrangeInterpolator
 {
     using continuous_dimension_type = typename InterpGrid::continuous_dimension_type;
+
+    using MinExtrapRule = ddc::type_seq_element_t<0, ExtrapRules>;
+    using MaxExtrapRule = ddc::type_seq_element_t<1, ExtrapRules>;
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 

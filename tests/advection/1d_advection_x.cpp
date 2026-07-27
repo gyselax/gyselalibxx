@@ -61,8 +61,7 @@ using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
-        ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
+        ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Periodic>,
         SplineXClosure,
         SplineXClosure>;
 
@@ -79,15 +78,13 @@ using LagrangeInterpolatorX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagBasisX,
         GridX,
-        ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic>;
+        ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Periodic>>;
 
 using LagrangeInterpolatorFloatX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagBasisFloatX,
         GridX,
-        ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
+        ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Periodic>,
         float>;
 
 
