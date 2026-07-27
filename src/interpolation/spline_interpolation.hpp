@@ -226,10 +226,16 @@ public:
  * @tparam Basis2         The B-spline basis type for the second dimension (uniform or non-uniform).
  * @tparam InterpGrid1    The discrete grid on which function values are provided along the first dimension.
  * @tparam InterpGrid2    The discrete grid on which function values are provided along the second dimension.
- * @tparam MinExtrapRule1 The ExtrapolationRule applied below the lower boundary of the first dimension.
- * @tparam MaxExtrapRule1 The ExtrapolationRule applied above the upper boundary of the first dimension.
- * @tparam MinExtrapRule2 The ExtrapolationRule applied below the lower boundary of the second dimension.
- * @tparam MaxExtrapRule2 The ExtrapolationRule applied above the upper boundary of the second dimension.
+ * @tparam MinExtrapRule1 The extrapolation rule applied below the lower boundary of the
+ *                        first dimension. This may be one of the tags in the
+ *                        ExtrapolationRule namespace (e.g. ExtrapolationRule::Periodic)
+ *                        or a custom, already-concrete extrapolation rule class.
+ * @tparam MaxExtrapRule1 The extrapolation rule applied above the upper boundary of the
+ *                        first dimension. See MinExtrapRule1 for the accepted forms.
+ * @tparam MinExtrapRule2 The extrapolation rule applied below the lower boundary of the
+ *                        second dimension. See MinExtrapRule1 for the accepted forms.
+ * @tparam MaxExtrapRule2 The extrapolation rule applied above the upper boundary of the
+ *                        second dimension. See MinExtrapRule1 for the accepted forms.
  * @tparam MinBound1      The ddc::BoundCond at the lower boundary of the first dimension.
  * @tparam MaxBound1      The ddc::BoundCond at the upper boundary of the first dimension.
  * @tparam MinBound2      The ddc::BoundCond at the lower boundary of the second dimension.
@@ -242,10 +248,10 @@ template <
         class Basis2,
         class InterpGrid1,
         class InterpGrid2,
-        ExtrapolationRule MinExtrapRule1,
-        ExtrapolationRule MaxExtrapRule1,
-        ExtrapolationRule MinExtrapRule2,
-        ExtrapolationRule MaxExtrapRule2,
+        class MinExtrapRule1,
+        class MaxExtrapRule1,
+        class MinExtrapRule2,
+        class MaxExtrapRule2,
         ddc::BoundCond MinBound1,
         ddc::BoundCond MaxBound1,
         ddc::BoundCond MinBound2,
@@ -262,16 +268,37 @@ private:
 
     static_assert(is_periodic1 == (MinBound1 == ddc::BoundCond::PERIODIC));
     static_assert(is_periodic1 == (MaxBound1 == ddc::BoundCond::PERIODIC));
-    static_assert(is_periodic1 == (MinExtrapRule1 == ExtrapolationRule::PERIODIC));
-    static_assert(is_periodic1 == (MaxExtrapRule1 == ExtrapolationRule::PERIODIC));
+    static_assert(
+            is_periodic1
+            == std::is_same_v<
+                    extrapolation_rule_t<MinExtrapRule1, Basis1, double>,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type1>>);
+    static_assert(
+            is_periodic1
+            == std::is_same_v<
+                    extrapolation_rule_t<MaxExtrapRule1, Basis1, double>,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type1>>);
 
     static_assert(is_periodic2 == (MinBound2 == ddc::BoundCond::PERIODIC));
     static_assert(is_periodic2 == (MaxBound2 == ddc::BoundCond::PERIODIC));
-    static_assert(is_periodic2 == (MinExtrapRule2 == ExtrapolationRule::PERIODIC));
-    static_assert(is_periodic2 == (MaxExtrapRule2 == ExtrapolationRule::PERIODIC));
+    static_assert(
+            is_periodic2
+            == std::is_same_v<
+                    extrapolation_rule_t<MinExtrapRule2, Basis2, double>,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type2>>);
+    static_assert(
+            is_periodic2
+            == std::is_same_v<
+                    extrapolation_rule_t<MaxExtrapRule2, Basis2, double>,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type2>>);
 
     static_assert(is_spline_basis_v<Basis1>);
     static_assert(is_spline_basis_v<Basis2>);
+
+    using MinExtrapolationRule1 = extrapolation_rule_t<MinExtrapRule1, Basis1, double>;
+    using MaxExtrapolationRule1 = extrapolation_rule_t<MaxExtrapRule1, Basis1, double>;
+    using MinExtrapolationRule2 = extrapolation_rule_t<MinExtrapRule2, Basis2, double>;
+    using MaxExtrapolationRule2 = extrapolation_rule_t<MaxExtrapRule2, Basis2, double>;
 
 public:
     /// @brief The ddc::SplineBuilder2D type built from the template parameters.
@@ -296,10 +323,10 @@ public:
             Basis2,
             InterpGrid1,
             InterpGrid2,
-            extrapolation_rule_t<MinExtrapRule1, Basis1, double>,
-            extrapolation_rule_t<MaxExtrapRule1, Basis1, double>,
-            extrapolation_rule_t<MinExtrapRule2, Basis2, double>,
-            extrapolation_rule_t<MaxExtrapRule2, Basis2, double>>;
+            MinExtrapolationRule1,
+            MaxExtrapolationRule1,
+            MinExtrapolationRule2,
+            MaxExtrapolationRule2>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -308,10 +335,10 @@ public:
     }
 
 private:
-    extrapolation_rule_t<MinExtrapRule1, Basis1, double> m_min_extrapolation1;
-    extrapolation_rule_t<MaxExtrapRule1, Basis1, double> m_max_extrapolation1;
-    extrapolation_rule_t<MinExtrapRule2, Basis2, double> m_min_extrapolation2;
-    extrapolation_rule_t<MaxExtrapRule2, Basis2, double> m_max_extrapolation2;
+    MinExtrapolationRule1 m_min_extrapolation1;
+    MaxExtrapolationRule1 m_max_extrapolation1;
+    MinExtrapolationRule2 m_min_extrapolation2;
+    MaxExtrapolationRule2 m_max_extrapolation2;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
@@ -321,15 +348,60 @@ public:
      *
      * The extrapolation rules are initialised from the discrete spaces of @c Basis1 and
      * @c Basis2, so the corresponding ddc discrete spaces must be initialised before
-     * construction.
+     * construction. This overload is only available when all four extrapolation rules
+     * can be built automatically (they are default-constructible, or the tag
+     * ExtrapolationRule::Constant is used) - otherwise use the overload that takes the
+     * extrapolation rules explicitly.
      *
      * @param idx_range The 2D interpolation index range passed to the builder.
      */
     explicit SplineInterpolator2D(IdxRange<InterpGrid1, InterpGrid2> idx_range)
+        requires(
+                is_extrapolation_rule_auto_constructible_v<MinExtrapRule1, Basis1, double> &&
+                is_extrapolation_rule_auto_constructible_v<MaxExtrapRule1, Basis1, double> &&
+                is_extrapolation_rule_auto_constructible_v<MinExtrapRule2, Basis2, double> &&
+                is_extrapolation_rule_auto_constructible_v<MaxExtrapRule2, Basis2, double>)
         : m_min_extrapolation1(get_extrapolation<MinExtrapRule1, Basis1, double>(Extremity::FRONT))
         , m_max_extrapolation1(get_extrapolation<MaxExtrapRule1, Basis1, double>(Extremity::BACK))
         , m_min_extrapolation2(get_extrapolation<MinExtrapRule2, Basis2, double>(Extremity::FRONT))
         , m_max_extrapolation2(get_extrapolation<MaxExtrapRule2, Basis2, double>(Extremity::BACK))
+        , m_builder(idx_range)
+        , m_evaluator(
+                  m_min_extrapolation1,
+                  m_max_extrapolation1,
+                  m_min_extrapolation2,
+                  m_max_extrapolation2)
+    {
+    }
+
+    /**
+     * @brief Construct a SplineInterpolator2D on the given 2D interpolation index range,
+     * specifying the extrapolation rules explicitly.
+     *
+     * Use this overload when a chosen extrapolation rule cannot be built automatically,
+     * e.g. a custom extrapolation rule that is not default-constructible and is not
+     * ExtrapolationRule::Constant.
+     *
+     * @param idx_range The 2D interpolation index range passed to the builder.
+     * @param min_extrapolation_rule1 The extrapolation rule to use below the lower
+     *                                boundary of the first dimension.
+     * @param max_extrapolation_rule1 The extrapolation rule to use above the upper
+     *                                boundary of the first dimension.
+     * @param min_extrapolation_rule2 The extrapolation rule to use below the lower
+     *                                boundary of the second dimension.
+     * @param max_extrapolation_rule2 The extrapolation rule to use above the upper
+     *                                boundary of the second dimension.
+     */
+    explicit SplineInterpolator2D(
+            IdxRange<InterpGrid1, InterpGrid2> idx_range,
+            MinExtrapolationRule1 min_extrapolation_rule1,
+            MaxExtrapolationRule1 max_extrapolation_rule1,
+            MinExtrapolationRule2 min_extrapolation_rule2,
+            MaxExtrapolationRule2 max_extrapolation_rule2)
+        : m_min_extrapolation1(std::move(min_extrapolation_rule1))
+        , m_max_extrapolation1(std::move(max_extrapolation_rule1))
+        , m_min_extrapolation2(std::move(min_extrapolation_rule2))
+        , m_max_extrapolation2(std::move(max_extrapolation_rule2))
         , m_builder(idx_range)
         , m_evaluator(
                   m_min_extrapolation1,
