@@ -197,6 +197,7 @@ public:
      * @param[in] to_physical The mapping from the logical to the physical domain.
      * @param[in] builder A builder to construct the coefficients of the interpolation.
      * @param[in] evaluator The evaluator for the interpolation.
+     * @param[in] extrapolation_rule A parameter to pass extrapolation rule to GMGPolar, default ExtrapolationType::NONE.
      * @param[in] max_iterations The maximum number of iterations that the solver should carry out.
      * @param[in] absTol The absolute tolerance for the convergence of the solver.
      * @param[in] relTol The relative tolerance for the convergence of the solver.
