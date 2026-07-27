@@ -29,7 +29,7 @@ export PYTHONPYCACHEPREFIX=$ALL_CCFRSCRATCH/pycache
 
 module purge
 
-git clone --branch v1.1.1 --depth 1 https://github.com/spack/spack.git $ALL_CCFRWORK/spack || true
+git clone --branch v1.2.2 --depth 1 https://github.com/spack/spack.git $ALL_CCFRWORK/spack || true
 . $ALL_CCFRWORK/spack/share/spack/setup-env.sh
 
 # Bootstrap must happen before getting on a compute node
@@ -52,4 +52,4 @@ spack --env gyselalibxx-spack-environment mirror add local_filesystem ${SPACK_US
 # Install on the compute node
 GPUS=3
 CPUS_PER_TASK=$((${GPUS} * ${CPUS_PER_GPU}))
-srun --account=${slurm_account} --constraint=h100 --ntasks=1 --gres=gpu:${GPUS} --cpus-per-task=${CPUS_PER_TASK} --time=02:00:00 --qos=qos_gpu_h100-dev spack --env gyselalibxx-spack-environment install --concurrent-packages ${GPUS} --jobs ${CPUS_PER_GPU}
+srun --account=${slurm_account} --constraint=h100 --ntasks=1 --gres=gpu:${GPUS} --cpus-per-task=${CPUS_PER_TASK} --time=02:00:00 --qos=qos_gpu_h100-dev spack --env gyselalibxx-spack-environment install --jobs ${CPUS_PER_TASK}
