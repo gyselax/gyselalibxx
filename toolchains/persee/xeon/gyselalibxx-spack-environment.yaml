@@ -1,48 +1,49 @@
 spack:
   definitions:
   - packages:
-    - 'cmake@3.22:3'
+    - 'cmake@3.31'
     - 'ddc@0.15 +fft +pdi +splines'
-    - 'ginkgo@1.9 +openmp'
+    - 'ginkgo@1.11 +openmp'
     - 'gmgpolar@2.3'
-    - 'googletest +gmock'
-    - 'kokkos@4.6:4 +openmp'
-    - 'kokkos-kernels@4.6:4'
+    - 'googletest@1.17 +gmock'
+    - 'kokkos@5.1 +openmp'
+    - 'kokkos-kernels@5.1'
     - 'kokkos-tools@git.3d33d0a783c5321d6981b3b4e43d3c157d2ca887=develop'
-    - 'koliop@0.1.2:0.1'
+    - 'koliop@0.2'
     - 'lapack'
     - 'mpi'
-    - 'ninja'
-    - 'paraconf@1'
-    - 'pdi@1.10.1:1'
-    - 'pdiplugin-decl-hdf5 +mpi'
-    - 'pdiplugin-decl-netcdf +mpi'
-    - 'pdiplugin-mpi'
-    - 'pdiplugin-pycall'
-    - 'pdiplugin-set-value'
-    - 'pdiplugin-trace'
-    - 'python@3.13'
+    - 'ninja@1.13'
+    - 'paraconf@1.0'
+    - 'pdi@1.11'
+    - 'pdiplugin-decl-hdf5@1.11 +mpi'
+    - 'pdiplugin-decl-netcdf@1.11 +mpi'
+    - 'pdiplugin-mpi@1.11'
+    - 'pdiplugin-pycall@1.11'
+    - 'pdiplugin-set-value@1.11'
+    - 'pdiplugin-trace@1.11'
+    - 'python@3.14'
 
-    - 'py-dask'
-    - 'py-h5py'
-    - 'py-imageio'
-    - 'py-matplotlib'
-    - 'py-netcdf4 +mpi'
-    - 'py-numpy'
-    - 'py-pyyaml'
-    - 'py-scipy'
-    - 'py-sympy'
-    - 'py-xarray'
+    - 'py-dask@2026.3'
+    - 'py-h5py@3.16'
+    - 'py-imageio@2.37'
+    - 'py-matplotlib@3.11 ^freetype@2.14.1'
+    - 'py-netcdf4@1.7 +mpi'
+    - 'py-numpy@2.4'
+    - 'py-pyyaml@6.0'
+    - 'py-scipy@1.17'
+    - 'py-sympy@1.14'
+    - 'py-xarray@2026.4'
   specs:
   - matrix:
     - [$packages]
   repos:
     patches:
       git: https://github.com/gyselax/spack.git
-      branch: releases/v2025.11
+      branch: releases/v2026.06
     builtin:
-      branch: releases/v2025.11
+      branch: releases/v2026.06
   concretizer:
+    reuse: false
     unify: true
   view:
     default:
@@ -50,8 +51,11 @@ spack:
       exclude: ['gcc-runtime']
   packages:
     all:
+      permissions:
+        read: world
+        write: group
       require: ~cuda
-      variants: ~fortran ~mpi +openmp cxxstd=17
+      variants: ~fortran ~mpi +openmp
     c:
       require: gcc@13
     cxx:
@@ -59,9 +63,9 @@ spack:
     kokkos-fft:
       require: 'host_backend=fftw-openmp'
     lapack:
-      require: openblas
+      require: openblas@0.3
     mpi:
-      require: openmpi ~cuda
+      require: openmpi@5.0 ~cuda
     py-dask:
       prefer: ['~dataframe']
     py-pandas:
