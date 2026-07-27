@@ -78,7 +78,8 @@ using LagrangeInterpolatorX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagBasisX,
         GridX,
-        ExtrapolationRule::Periodic, ExtrapolationRule::Periodic>;
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Periodic>;
 
 using LagrangeInterpolatorFloatX = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
