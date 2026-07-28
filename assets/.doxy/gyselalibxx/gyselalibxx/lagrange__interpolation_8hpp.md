@@ -10,6 +10,7 @@
 
 
 
+* `#include <utility>`
 * `#include "extrapolation_rule_choice.hpp"`
 * `#include "identity_interpolation_builder.hpp"`
 * `#include "lagrange_basis_non_uniform.hpp"`
@@ -34,7 +35,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**LagrangeInterpolator**](classLagrangeInterpolator.md) &lt;class ExecSpace, class Basis, class InterpGrid, MinExtrapRule, MaxExtrapRule, class DataType&gt;<br>_An owning interpolation object that bundles a Lagrange builder and evaluator._  |
+| class | [**LagrangeInterpolator**](classLagrangeInterpolator.md) &lt;class ExecSpace, class Basis, class InterpGrid, class MinExtrapRule, class MaxExtrapRule, class DataType&gt;<br>_An owning interpolation object that bundles a Lagrange builder and evaluator._  |
 
 
 

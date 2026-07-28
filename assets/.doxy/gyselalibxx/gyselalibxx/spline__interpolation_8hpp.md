@@ -10,6 +10,7 @@
 
 
 
+* `#include <utility>`
 * `#include <ddc/kernels/splines.hpp>`
 * `#include "ddc_aliases.hpp"`
 * `#include "extrapolation_rule_choice.hpp"`
@@ -32,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| class | [**SplineInterpolator**](classSplineInterpolator.md) &lt;class ExecSpace, class Basis, class InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver&gt;<br>_An owning interpolation object that bundles a spline builder and evaluator._  |
+| class | [**SplineInterpolator**](classSplineInterpolator.md) &lt;class ExecSpace, class Basis, class InterpGrid, class MinExtrapRule, class MaxExtrapRule, MinBound, MaxBound, Solver&gt;<br>_An owning interpolation object that bundles a spline builder and evaluator._  |
 
 
 

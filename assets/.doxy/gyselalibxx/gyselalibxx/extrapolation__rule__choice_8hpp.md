@@ -33,11 +33,16 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef details::GetExtrapolationRuleClass&lt; Rule, CoeffGrid, DataType &gt;::type | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br> |
+| typedef typename details::ExtrapolationRuleResolver&lt; Rule, CoeffGrid, DataType &gt;::type | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br>_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given CoeffGrid/DataType._  |
 
 
 
 
+## Public Attributes
+
+| Type | Name |
+| ---: | :--- |
+|  constexpr bool | [**is\_extrapolation\_rule\_auto\_constructible\_v**](#variable-is_extrapolation_rule_auto_constructible_v)   = `/* multi line expression */`<br>_True if get\_extrapolation&lt;Rule, CoeffGrid, DataType, ...&gt; can build the rule with no extra information: the resolved rule type is default-constructible, or Rule is the_ [_**ExtrapolationRule::Constant**_](structExtrapolationRule_1_1Constant.md) _tag (which get\_extrapolation knows how to build from the boundary of the discrete space)._ |
 
 
 
@@ -58,7 +63,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  extrapolation\_rule\_t&lt; Rule, CoeffGrid, DataType &gt; | [**get\_extrapolation**](#function-get_extrapolation) (Extremity extremity) <br> |
+|  extrapolation\_rule\_t&lt; Rule, CoeffGrid, DataType &gt; | [**get\_extrapolation**](#function-get_extrapolation) (Extremity extremity) <br>_Initialise the extrapolation rule._  |
 
 
 
@@ -94,8 +99,25 @@
 
 ### typedef extrapolation\_rule\_t 
 
+_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given CoeffGrid/DataType._ 
 ```C++
-using extrapolation_rule_t =  details::GetExtrapolationRuleClass<Rule, CoeffGrid, DataType>::type;
+using extrapolation_rule_t =  typename details::ExtrapolationRuleResolver<Rule, CoeffGrid, DataType>::type;
+```
+
+
+
+
+<hr>
+## Public Attributes Documentation
+
+
+
+
+### variable is\_extrapolation\_rule\_auto\_constructible\_v 
+
+_True if get\_extrapolation&lt;Rule, CoeffGrid, DataType, ...&gt; can build the rule with no extra information: the resolved rule type is default-constructible, or Rule is the_ [_**ExtrapolationRule::Constant**_](structExtrapolationRule_1_1Constant.md) _tag (which get\_extrapolation knows how to build from the boundary of the discrete space)._
+```C++
+constexpr bool is_extrapolation_rule_auto_constructible_v;
 ```
 
 
@@ -109,8 +131,9 @@ using extrapolation_rule_t =  details::GetExtrapolationRuleClass<Rule, CoeffGrid
 
 ### function get\_extrapolation 
 
+_Initialise the extrapolation rule._ 
 ```C++
-template<ExtrapolationRule Rule, class CoeffGrid, class DataType, class Basis>
+template<class Rule, class CoeffGrid, class DataType, class Basis>
 extrapolation_rule_t< Rule, CoeffGrid, DataType > get_extrapolation (
     Extremity extremity
 ) 
@@ -118,6 +141,10 @@ extrapolation_rule_t< Rule, CoeffGrid, DataType > get_extrapolation (
 
 
 
+Initialise the extrapolation rule using the default constructor if available. For a constant extrapolation, initialise the extrapolation from the selected extremity. 
+
+
+        
 
 <hr>
 

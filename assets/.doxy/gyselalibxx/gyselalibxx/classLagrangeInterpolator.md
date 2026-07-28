@@ -2,7 +2,7 @@
 
 # Class LagrangeInterpolator
 
-**template &lt;class ExecSpace, class Basis, class InterpGrid, ExtrapolationRule MinExtrapRule, ExtrapolationRule MaxExtrapRule, class DataType&gt;**
+**template &lt;class ExecSpace, class Basis, class InterpGrid, class MinExtrapRule, class MaxExtrapRule, class DataType&gt;**
 
 
 
@@ -36,7 +36,7 @@ _An owning interpolation object that bundles a Lagrange builder and evaluator._ 
 | ---: | :--- |
 | typedef [**IdentityInterpolationBuilder**](classIdentityInterpolationBuilder.md)&lt; ExecSpace, typename ExecSpace::memory\_space, DataType, InterpGrid, Basis &gt; | [**BuilderType**](#typedef-buildertype)  <br>_The_ [_**IdentityInterpolationBuilder**_](classIdentityInterpolationBuilder.md) _type built from the template parameters._ |
 | typedef typename [**BuilderType::basis\_domain\_type**](classIdentityInterpolationBuilder.md#typedef-basis_domain_type) | [**CoeffGridType**](#typedef-coeffgridtype)  <br>_The discrete grid type used for the Lagrange coefficients (the Lagrange basis grid)._  |
-| typedef [**LagrangeEvaluator**](classLagrangeEvaluator.md)&lt; ExecSpace, typename ExecSpace::memory\_space, DataType, Basis, InterpGrid, extrapolation\_rule\_t&lt; MinExtrapRule, [**CoeffGridType**](classLagrangeInterpolator.md#typedef-coeffgridtype), DataType &gt;, extrapolation\_rule\_t&lt; MaxExtrapRule, [**CoeffGridType**](classLagrangeInterpolator.md#typedef-coeffgridtype), DataType &gt; &gt; | [**EvaluatorType**](#typedef-evaluatortype)  <br>_The_ [_**LagrangeEvaluator**_](classLagrangeEvaluator.md) _type built from the template parameters._ |
+| typedef [**LagrangeEvaluator**](classLagrangeEvaluator.md)&lt; ExecSpace, typename ExecSpace::memory\_space, DataType, Basis, InterpGrid, MinExtrapolationRule, MaxExtrapolationRule &gt; | [**EvaluatorType**](#typedef-evaluatortype)  <br>_The_ [_**LagrangeEvaluator**_](classLagrangeEvaluator.md) _type built from the template parameters._ |
 
 
 
@@ -61,7 +61,8 @@ _An owning interpolation object that bundles a Lagrange builder and evaluator._ 
 
 | Type | Name |
 | ---: | :--- |
-|   | [**LagrangeInterpolator**](#function-lagrangeinterpolator) (IdxRange&lt; InterpGrid &gt; idx\_range=IdxRange&lt; InterpGrid &gt; {}) <br>_Construct a_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _._ |
+|   | [**LagrangeInterpolator**](#function-lagrangeinterpolator-12) (IdxRange&lt; InterpGrid &gt; idx\_range=IdxRange&lt; InterpGrid &gt; {}) <br>_Construct a_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _._ |
+|   | [**LagrangeInterpolator**](#function-lagrangeinterpolator-22) (IdxRange&lt; InterpGrid &gt; idx\_range, MinExtrapolationRule min\_extrapolation\_rule, MaxExtrapolationRule max\_extrapolation\_rule) <br>_Construct a_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _, specifying the extrapolation rules explicitly._ |
 |  [**BuilderType**](classLagrangeInterpolator.md#typedef-buildertype) const & | [**get\_builder**](#function-get_builder) () const<br>_Return a const reference to the owned identity builder._  |
 |  [**EvaluatorType**](classLagrangeInterpolator.md#typedef-evaluatortype) const & | [**get\_evaluator**](#function-get_evaluator) () const<br>_Return a const reference to the owned Lagrange evaluator._  |
 
@@ -114,8 +115,8 @@ The builder is an identity operation: it passes function values on the interpola
 * `ExecSpace` The Kokkos execution space used for computations. 
 * `Basis` The Lagrange basis type (uniform or non-uniform). 
 * `InterpGrid` The discrete grid on which function values are provided. 
-* `MinExtrapRule` The ExtrapolationRule applied below the lower boundary. 
-* `MaxExtrapRule` The ExtrapolationRule applied above the upper boundary. 
+* `MinExtrapRule` The extrapolation rule applied below the lower boundary. This may be one of the tags in the [**ExtrapolationRule**](namespaceExtrapolationRule.md) namespace (e.g. [**ExtrapolationRule::Periodic**](structExtrapolationRule_1_1Periodic.md)) or a custom, already-concrete extrapolation rule class. 
+* `MaxExtrapRule` The extrapolation rule applied above the upper boundary. See MinExtrapRule for the accepted forms. 
 * `DataType` The floating-point type of the function values (default: double). 
 
 
@@ -159,7 +160,7 @@ using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtr
 
 _The_ [_**LagrangeEvaluator**_](classLagrangeEvaluator.md) _type built from the template parameters._
 ```C++
-using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType >::EvaluatorType =  LagrangeEvaluator< ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>, extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType> >;
+using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, DataType >::EvaluatorType =  LagrangeEvaluator< ExecSpace, typename ExecSpace::memory_space, DataType, Basis, InterpGrid, MinExtrapolationRule, MaxExtrapolationRule>;
 ```
 
 
@@ -171,7 +172,7 @@ using LagrangeInterpolator< ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtr
 
 
 
-### function LagrangeInterpolator 
+### function LagrangeInterpolator [1/2]
 
 _Construct a_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _._
 ```C++
@@ -182,7 +183,7 @@ inline explicit LagrangeInterpolator::LagrangeInterpolator (
 
 
 
-The extrapolation rules are initialised from the discrete space of `Basis`, so the corresponding ddc discrete space must be initialised before construction. No index range is required because the identity builder needs none.
+The extrapolation rules are initialised from the discrete space of `Basis`, so the corresponding ddc discrete space must be initialised before construction. No index range is required because the identity builder needs none. This overload is only available when both extrapolation rules can be built automatically (they are default-constructible, or the tag [**ExtrapolationRule::Constant**](structExtrapolationRule_1_1Constant.md) is used) - otherwise use the overload that takes the extrapolation rules explicitly.
 
 
 
@@ -191,6 +192,40 @@ The extrapolation rules are initialised from the discrete space of `Basis`, so t
 
 
 * `idx_range` The index range on which the interpolator will act. This is unused but is included to match the [**SplineInterpolator**](classSplineInterpolator.md) interface. 
+
+
+
+
+        
+
+<hr>
+
+
+
+### function LagrangeInterpolator [2/2]
+
+_Construct a_ [_**LagrangeInterpolator**_](classLagrangeInterpolator.md) _, specifying the extrapolation rules explicitly._
+```C++
+inline explicit LagrangeInterpolator::LagrangeInterpolator (
+    IdxRange< InterpGrid > idx_range,
+    MinExtrapolationRule min_extrapolation_rule,
+    MaxExtrapolationRule max_extrapolation_rule
+) 
+```
+
+
+
+Use this overload when the chosen extrapolation rule cannot be built automatically, e.g. a custom extrapolation rule that is not default-constructible and is not [**ExtrapolationRule::Constant**](structExtrapolationRule_1_1Constant.md).
+
+
+
+
+**Parameters:**
+
+
+* `idx_range` The index range on which the interpolator will act. This is unused but is included to match the [**SplineInterpolator**](classSplineInterpolator.md) interface. 
+* `min_extrapolation_rule` The extrapolation rule to use below the lower boundary. 
+* `max_extrapolation_rule` The extrapolation rule to use above the upper boundary. 
 
 
 

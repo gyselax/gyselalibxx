@@ -576,59 +576,57 @@
 
 namespace details {
 
-// Get the class describing the interpolation rule
-template &lt;ExtrapolationRule Rule, class CoeffGrid, class DataType&gt;
-struct GetExtrapolationRuleClass;
-
-template &lt;class CoeffGrid, class DataType&gt;
-struct GetExtrapolationRuleClass&lt;PERIODIC, CoeffGrid, DataType&gt;
+template &lt;class Rule, class CoeffGrid, class DataType, class = void&gt;
+struct ExtrapolationRuleResolver
 {
-    using type = ddc::PeriodicExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;;
+    using type = Rule;
 };
 
-template &lt;class CoeffGrid, class DataType&gt;
-struct GetExtrapolationRuleClass&lt;NULL_VALUE, CoeffGrid, DataType&gt;
+template &lt;class Rule, class CoeffGrid, class DataType&gt;
+struct ExtrapolationRuleResolver&lt;
+        Rule,
+        CoeffGrid,
+        DataType,
+        std::void_t&lt;typename Rule::template type&lt;CoeffGrid, DataType&gt;&gt;&gt;
 {
-    using type = ddc::NullExtrapolationRule;
-};
-
-template &lt;class CoeffGrid, class DataType&gt;
-struct GetExtrapolationRuleClass&lt;CONSTANT, CoeffGrid, DataType&gt;
-{
-    using type = std::conditional_t&lt;
-            is_spline_basis_v&lt;CoeffGrid&gt;,
-            ddc::ConstantExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;,
-            ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid, DataType&gt;&gt;;
+    using type = typename Rule::template type&lt;CoeffGrid, DataType&gt;;
 };
 
 } // namespace details
 
-template &lt;ExtrapolationRule Rule, class CoeffGrid, class DataType&gt;
-using extrapolation_rule_t = details::GetExtrapolationRuleClass&lt;Rule, CoeffGrid, DataType&gt;::type;
+template &lt;class Rule, class CoeffGrid, class DataType&gt;
+using extrapolation_rule_t =
+        typename details::ExtrapolationRuleResolver&lt;Rule, CoeffGrid, DataType&gt;::type;
 
-template &lt;ExtrapolationRule Rule, class CoeffGrid, class DataType, class Basis = CoeffGrid&gt;
+template &lt;class Rule, class CoeffGrid, class DataType&gt;
+constexpr bool is_extrapolation_rule_auto_constructible_v
+        = std::is_default_constructible_v&lt;extrapolation_rule_t&lt;
+                  Rule,
+                  CoeffGrid,
+                  DataType&gt;&gt; || std::is_same_v&lt;Rule, ExtrapolationRule::Constant&gt;;
+
+template &lt;class Rule, class CoeffGrid, class DataType, class Basis = CoeffGrid&gt;
 extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt; get_extrapolation(Extremity extremity)
 {
-    if constexpr (Rule == CONSTANT) {
+    using RuleType = extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;;
+    if constexpr (std::is_default_constructible_v&lt;RuleType&gt;) {
+        return RuleType();
+    } else if constexpr (std::is_same_v&lt;Rule, ExtrapolationRule::Constant&gt;) {
         if constexpr (is_spline_basis_v&lt;Basis&gt;) {
             if (extremity == Extremity::FRONT) {
-                return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;(
-                        ddc::discrete_space&lt;CoeffGrid&gt;().rmin());
+                return RuleType(ddc::discrete_space&lt;CoeffGrid&gt;().rmin());
             } else {
-                return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;(
-                        ddc::discrete_space&lt;CoeffGrid&gt;().rmax());
+                return RuleType(ddc::discrete_space&lt;CoeffGrid&gt;().rmax());
             }
         } else {
             if (extremity == Extremity::FRONT) {
-                return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;(
-                        ddc::discrete_space&lt;Basis&gt;().full_domain().front());
+                return RuleType(ddc::discrete_space&lt;Basis&gt;().full_domain().front());
             } else {
-                return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;(
-                        ddc::discrete_space&lt;Basis&gt;().full_domain().back());
+                return RuleType(ddc::discrete_space&lt;Basis&gt;().full_domain().back());
             }
         }
     } else {
-        return extrapolation_rule_t&lt;Rule, CoeffGrid, DataType&gt;();
+        static_assert("Extrapolation rule initialisation cannot be deduced from type.");
     }
 }
 </code></pre></div>

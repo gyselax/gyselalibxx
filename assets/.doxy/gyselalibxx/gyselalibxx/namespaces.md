@@ -4,6 +4,7 @@
 Here is a list of all namespaces with brief descriptions:
 
 
+* **namespace** [**ExtrapolationRule**](namespaceExtrapolationRule.md) _A namespace containing tag types describing how a function is extrapolated outside the interpolation domain._     
 * **namespace** [**GMGPolarTools**](namespaceGMGPolarTools.md)     
 * **namespace** [**GrevillePointsR**](namespaceGrevillePointsR.md) 
 * **namespace** [**GrevillePointsTheta**](namespaceGrevillePointsTheta.md) 

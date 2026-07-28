@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Class SplineInterpolator - GyselalibX</title>
+    <title>Struct ExtrapolationRule::NullValue - GyselalibX</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Class SplineInterpolator";
-        var mkdocs_page_input_path = "gyselalibxx/classSplineInterpolator.md";
+        var mkdocs_page_name = "Struct ExtrapolationRule::NullValue";
+        var mkdocs_page_input_path = "gyselalibxx/structExtrapolationRule_1_1NullValue.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -556,9 +556,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Class SplineInterpolator</li>
+      <li class="breadcrumb-item active">Struct ExtrapolationRule::NullValue</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/classSplineInterpolator.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/gyselax/gyselalibxx/edit/main/gyselalibxx/structExtrapolationRule_1_1NullValue.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -566,12 +566,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <div><h1 id="class-splineinterpolator">Class SplineInterpolator</h1>
-<p><strong>template &lt;class ExecSpace, class Basis, class InterpGrid, class MinExtrapRule, class MaxExtrapRule, ddc::SplineBuilderClosure MinBound, ddc::SplineBuilderClosure MaxBound, ddc::SplineSolver Solver&gt;</strong></p>
-<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a></p>
-<p><em>An owning interpolation object that bundles a spline builder and evaluator.</em> <a href="#detailed-description">More...</a></p>
+                <div><h1 id="struct-extrapolationrulenullvalue">Struct ExtrapolationRule::NullValue</h1>
+<p><a href="annotated.html"><strong>ClassList</strong></a> <strong>&gt;</strong> <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> <strong>&gt;</strong> <a href="structExtrapolationRule_1_1NullValue.html"><strong>NullValue</strong></a></p>
+<p><em>Tag selecting null extrapolation: the function evaluates to zero outside the domain.</em> </p>
 <ul>
-<li><code>#include &lt;spline_interpolation.hpp&gt;</code></li>
+<li><code>#include &lt;i_interpolation.hpp&gt;</code></li>
 </ul>
 <h2 id="public-types">Public Types</h2>
 <table>
@@ -583,180 +582,20 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef ddc::SplineBuilder&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, MinBound, MaxBound, Solver &gt;</td>
-<td style="text-align: left;"><a href="#typedef-buildertype"><strong>BuilderType</strong></a>  <br><em>The ddc::SplineBuilder type built from the template parameters.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;">typedef ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, MinExtrapolationRule, MaxExtrapolationRule &gt;</td>
-<td style="text-align: left;"><a href="#typedef-evaluatortype"><strong>EvaluatorType</strong></a>  <br><em>The ddc::SplineEvaluator type built from the template parameters.</em></td>
+<td style="text-align: right;">typedef ddc::NullExtrapolationRule</td>
+<td style="text-align: left;"><a href="#typedef-type"><strong>type</strong></a>  <br><em>The concrete extrapolation rule class for a given CoeffGrid/DataType.</em></td>
 </tr>
 </tbody>
 </table>
-<h2 id="public-functions">Public Functions</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splineinterpolator-14"><strong>SplineInterpolator</strong></a> (std::string const &amp; label, IdxRange&lt; InterpGrid &gt; idx_range) <br><em>Construct a</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>on the given interpolation index range.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splineinterpolator-24"><strong>SplineInterpolator</strong></a> (IdxRange&lt; InterpGrid &gt; idx_range) <br><em>Construct a</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>on the given interpolation index range.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splineinterpolator-34"><strong>SplineInterpolator</strong></a> (std::string const &amp; label, IdxRange&lt; InterpGrid &gt; idx_range, MinExtrapolationRule min_extrapolation_rule, MaxExtrapolationRule max_extrapolation_rule) <br><em>Construct a</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>on the given interpolation index range, specifying the extrapolation rules explicitly.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"></td>
-<td style="text-align: left;"><a href="#function-splineinterpolator-44"><strong>SplineInterpolator</strong></a> (IdxRange&lt; InterpGrid &gt; idx_range, MinExtrapolationRule min_extrapolation_rule, MaxExtrapolationRule max_extrapolation_rule) <br><em>Construct a</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>on the given interpolation index range, specifying the extrapolation rules explicitly.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"><a href="classSplineInterpolator.html#typedef-buildertype"><strong>BuilderType</strong></a> const &amp;</td>
-<td style="text-align: left;"><a href="#function-get_builder"><strong>get_builder</strong></a> () const<br><em>Return a const reference to the owned spline builder.</em></td>
-</tr>
-<tr>
-<td style="text-align: right;"><a href="classSplineInterpolator.html#typedef-evaluatortype"><strong>EvaluatorType</strong></a> const &amp;</td>
-<td style="text-align: left;"><a href="#function-get_evaluator"><strong>get_evaluator</strong></a> () const<br><em>Return a const reference to the owned spline evaluator.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="public-static-functions">Public Static Functions</h2>
-<table>
-<thead>
-<tr>
-<th style="text-align: right;">Type</th>
-<th style="text-align: left;">Name</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: right;">constexpr std::size_t</td>
-<td style="text-align: left;"><a href="#function-rank"><strong>rank</strong></a> () <br><em>The number of interpolation dimensions.</em></td>
-</tr>
-</tbody>
-</table>
-<h2 id="detailed-description">Detailed Description</h2>
-<p><a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a> constructs and owns a matching ddc::SplineBuilder and ddc::SplineEvaluator for a given dimension. It satisfies the concepts::Interpolation concept and is the recommended way to create a spline interpolation for use with advection operators and similar algorithms.</p>
-<p>The boundary condition (MinBound / MaxBound) and extrapolation rule (MinExtrapRule / MaxExtrapRule) must be consistent: both must be PERIODIC for periodic dimensions and both must be non-PERIODIC for non-periodic dimensions.</p>
-<p><strong>Template parameters:</strong></p>
-<ul>
-<li><code>ExecSpace</code> The Kokkos execution space used for computations. </li>
-<li><code>Basis</code> The B-spline basis type (uniform or non-uniform). </li>
-<li><code>InterpGrid</code> The discrete grid on which function values are provided. </li>
-<li><code>MinExtrapRule</code> The extrapolation rule applied below the lower boundary. This may be one of the tags in the <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> namespace (e.g. <a href="structExtrapolationRule_1_1Periodic.html"><strong>ExtrapolationRule::Periodic</strong></a>) or a custom, already-concrete extrapolation rule class. </li>
-<li><code>MaxExtrapRule</code> The extrapolation rule applied above the upper boundary. See MinExtrapRule for the accepted forms. </li>
-<li><code>MinBound</code> The ddc::SplineBuilderClosure at the lower boundary of the spline builder. </li>
-<li><code>MaxBound</code> The ddc::SplineBuilderClosure at the upper boundary of the spline builder. </li>
-<li><code>Solver</code> The spline solver backend (default: LAPACK). </li>
-</ul>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="typedef-buildertype">typedef BuilderType</h3>
-<p><em>The ddc::SplineBuilder type built from the template parameters.</em> </p>
-<pre><code class="language-C++">using SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::BuilderType =  ddc::SplineBuilder&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, MinBound, MaxBound, Solver&gt;;
-</code></pre>
-<hr>
-
-<h3 id="typedef-evaluatortype">typedef EvaluatorType</h3>
-<p><em>The ddc::SplineEvaluator type built from the template parameters.</em> </p>
-<pre><code class="language-C++">using SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, MinExtrapRule, MaxExtrapRule, MinBound, MaxBound, Solver &gt;::EvaluatorType =  ddc::SplineEvaluator&lt; ExecSpace, typename ExecSpace::memory_space, Basis, InterpGrid, MinExtrapolationRule, MaxExtrapolationRule&gt;;
-</code></pre>
-<hr>
-<h2 id="public-functions-documentation">Public Functions Documentation</h2>
-<h3 id="function-splineinterpolator-14">function SplineInterpolator [1/4]</h3>
-<p><em>Construct a</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>on the given interpolation index range.</em></p>
-<pre><code class="language-C++">inline explicit SplineInterpolator::SplineInterpolator (
-    std::string const &amp; label,
-    IdxRange&lt; InterpGrid &gt; idx_range
-) 
-</code></pre>
-<p>The extrapolation rules are initialised from the discrete space of <code>Basis</code>, so the corresponding ddc discrete space must be initialised before construction. This overload is only available when both extrapolation rules can be built automatically (they are default-constructible, or the tag <a href="structExtrapolationRule_1_1Constant.html"><strong>ExtrapolationRule::Constant</strong></a> is used) - otherwise use the overload that takes the extrapolation rules explicitly.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>label</code> A label used to tag parallel regions and memory allocations for profiling. </li>
-<li><code>idx_range</code> The 1D interpolation index range passed to the builder. </li>
-</ul>
-<hr>
-
-<h3 id="function-splineinterpolator-24">function SplineInterpolator [2/4]</h3>
-<p><em>Construct a</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>on the given interpolation index range.</em></p>
-<pre><code class="language-C++">inline explicit SplineInterpolator::SplineInterpolator (
-    IdxRange&lt; InterpGrid &gt; idx_range
-) 
-</code></pre>
-<p>The extrapolation rules are initialised from the discrete space of <code>Basis</code>, so the corresponding ddc discrete space must be initialised before construction. This overload is only available when both extrapolation rules can be built automatically (they are default-constructible, or the tag <a href="structExtrapolationRule_1_1Constant.html"><strong>ExtrapolationRule::Constant</strong></a> is used) - otherwise use the overload that takes the extrapolation rules explicitly.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range</code> The 1D interpolation index range passed to the builder. </li>
-</ul>
-<hr>
-
-<h3 id="function-splineinterpolator-34">function SplineInterpolator [3/4]</h3>
-<p><em>Construct a</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>on the given interpolation index range, specifying the extrapolation rules explicitly.</em></p>
-<pre><code class="language-C++">inline explicit SplineInterpolator::SplineInterpolator (
-    std::string const &amp; label,
-    IdxRange&lt; InterpGrid &gt; idx_range,
-    MinExtrapolationRule min_extrapolation_rule,
-    MaxExtrapolationRule max_extrapolation_rule
-) 
-</code></pre>
-<p>Use this overload when the chosen extrapolation rule cannot be built automatically, e.g. a custom extrapolation rule that is not default-constructible and is not <a href="structExtrapolationRule_1_1Constant.html"><strong>ExtrapolationRule::Constant</strong></a>.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>label</code> A label used to tag parallel regions and memory allocations for profiling. </li>
-<li><code>idx_range</code> The 1D interpolation index range passed to the builder. </li>
-<li><code>min_extrapolation_rule</code> The extrapolation rule to use below the lower boundary. </li>
-<li><code>max_extrapolation_rule</code> The extrapolation rule to use above the upper boundary. </li>
-</ul>
-<hr>
-
-<h3 id="function-splineinterpolator-44">function SplineInterpolator [4/4]</h3>
-<p><em>Construct a</em> <a href="classSplineInterpolator.html"><em><strong>SplineInterpolator</strong></em></a> <em>on the given interpolation index range, specifying the extrapolation rules explicitly.</em></p>
-<pre><code class="language-C++">inline explicit SplineInterpolator::SplineInterpolator (
-    IdxRange&lt; InterpGrid &gt; idx_range,
-    MinExtrapolationRule min_extrapolation_rule,
-    MaxExtrapolationRule max_extrapolation_rule
-) 
-</code></pre>
-<p>Use this overload when the chosen extrapolation rule cannot be built automatically, e.g. a custom extrapolation rule that is not default-constructible and is not <a href="structExtrapolationRule_1_1Constant.html"><strong>ExtrapolationRule::Constant</strong></a>.</p>
-<p><strong>Parameters:</strong></p>
-<ul>
-<li><code>idx_range</code> The 1D interpolation index range passed to the builder. </li>
-<li><code>min_extrapolation_rule</code> The extrapolation rule to use below the lower boundary. </li>
-<li><code>max_extrapolation_rule</code> The extrapolation rule to use above the upper boundary. </li>
-</ul>
-<hr>
-
-<h3 id="function-get_builder">function get_builder</h3>
-<p><em>Return a const reference to the owned spline builder.</em> </p>
-<pre><code class="language-C++">inline BuilderType const &amp; SplineInterpolator::get_builder () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>The BuilderType instance. </p>
-<hr>
-
-<h3 id="function-get_evaluator">function get_evaluator</h3>
-<p><em>Return a const reference to the owned spline evaluator.</em> </p>
-<pre><code class="language-C++">inline EvaluatorType const &amp; SplineInterpolator::get_evaluator () const
-</code></pre>
-<p><strong>Returns:</strong></p>
-<p>The EvaluatorType instance. </p>
-<hr>
-<h2 id="public-static-functions-documentation">Public Static Functions Documentation</h2>
-<h3 id="function-rank">function rank</h3>
-<p><em>The number of interpolation dimensions.</em> </p>
-<pre><code class="language-C++">static inline constexpr std::size_t SplineInterpolator::rank () 
+<h3 id="typedef-type">typedef type</h3>
+<p><em>The concrete extrapolation rule class for a given CoeffGrid/DataType.</em> </p>
+<pre><code class="language-C++">using ExtrapolationRule::NullValue::type =  ddc::NullExtrapolationRule;
 </code></pre>
 <hr>
 
 <hr>
-<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp</code></p></div>
+<p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp</code></p></div>
               
             </div>
           </div><footer>

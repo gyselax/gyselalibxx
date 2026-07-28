@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="structExtrapolationRule_1_1Constant" kind="struct" language="C++" prot="public">
+    <compoundname>ExtrapolationRule::Constant</compoundname>
+    <includes refid="i__interpolation_8hpp" local="no">i_interpolation.hpp</includes>
+    <sectiondef kind="public-type">
+      <memberdef kind="typedef" id="structExtrapolationRule_1_1Constant_1a3b8ad99779014e98e8c7f3428c919be2" prot="public" static="no">
+        <templateparamlist>
+          <param>
+            <type>class CoeffGrid</type>
+          </param>
+          <param>
+            <type>class DataType</type>
+          </param>
+        </templateparamlist>
+        <type>std::conditional_t&lt; is_spline_basis_v&lt; CoeffGrid &gt;, ddc::ConstantExtrapolationRule&lt; typename CoeffGrid::continuous_dimension_type &gt;, <ref refid="classConstantIdentityInterpolationExtrapolationRule" kindref="compound">ConstantIdentityInterpolationExtrapolationRule</ref>&lt; CoeffGrid, DataType &gt; &gt;</type>
+        <definition>using ExtrapolationRule::Constant::type =  std::conditional_t&lt; is_spline_basis_v&lt;CoeffGrid&gt;, ddc::ConstantExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;, ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid, DataType&gt; &gt;</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <qualifiedname>ExtrapolationRule::Constant::type</qualifiedname>
+        <briefdescription>
+<para>The concrete extrapolation rule class for a given CoeffGrid/DataType. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="126" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="129" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
+    <briefdescription>
+<para>Tag selecting constant extrapolation. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>The function is clamped to the value at the nearest boundary point. </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="122" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="123" bodyend="130"/>
+    <listofallmembers>
+      <member refid="structExtrapolationRule_1_1Constant_1a3b8ad99779014e98e8c7f3428c919be2" prot="public" virt="non-virtual"><scope>ExtrapolationRule::Constant</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

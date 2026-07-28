@@ -12,14 +12,13 @@
 #pragma once
 #include <ddc/kernels/splines.hpp>
 
+#include "constant_identity_interpolation_extrapolation_rule.hpp"
 #include "geometry_descriptors.hpp"
 #include "i_interpolation_builder.hpp"
 #include "i_interpolation_evaluator.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
 #include "type_seq_tools.hpp"
-
-enum ExtrapolationRule { PERIODIC, NULL_VALUE, CONSTANT };
 
 namespace concepts {
 
@@ -57,6 +56,31 @@ constexpr bool is_lagrange_basis_v
 template <class Basis>
 constexpr bool is_spline_basis_v
         = ddc::is_uniform_bsplines_v<Basis> || ddc::is_non_uniform_bsplines_v<Basis>;
+
+namespace ExtrapolationRule {
+
+struct Periodic
+{
+    template <class CoeffGrid, class DataType>
+    using type = ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
+};
+
+struct NullValue
+{
+    template <class CoeffGrid, class DataType>
+    using type = ddc::NullExtrapolationRule;
+};
+
+struct Constant
+{
+    template <class CoeffGrid, class DataType>
+    using type = std::conditional_t<
+            is_spline_basis_v<CoeffGrid>,
+            ddc::ConstantExtrapolationRule<typename CoeffGrid::continuous_dimension_type>,
+            ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>;
+};
+
+} // namespace ExtrapolationRule
 ```
 
 

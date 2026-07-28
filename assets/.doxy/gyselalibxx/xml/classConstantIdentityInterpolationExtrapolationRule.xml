@@ -25,7 +25,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="23" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="23" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="24" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="24" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
@@ -56,7 +56,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="32" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="32" bodyend="35"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="33" column="14" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="33" bodyend="36"/>
       </memberdef>
       <memberdef kind="function" id="classConstantIdentityInterpolationExtrapolationRule_1a54fa69a7e733cb0ab33b37c230a3049b" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <templateparamlist>
@@ -110,7 +110,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="46" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="46" bodyend="51"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="47" column="28" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="47" bodyend="52"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -118,7 +118,7 @@
     </briefdescription>
     <detaileddescription>
 <para>When an evaluation coordinate falls outside the interpolation domain, this rule returns the interpolation coefficient at a fixed boundary index (<computeroutput>m_coeff_idx</computeroutput>) rather than extrapolating the polynomial. This is the Lagrange analog of ddc::ConstantExtrapolationRule used with spline evaluators.</para>
-<para>It is intended to be constructed via get_extrapolation&lt;CONSTANT, CoeffGrid, DataType, Basis&gt;(), which supplies the appropriate boundary index automatically.</para>
+<para>It is intended to be constructed via get_extrapolation&lt;ExtrapolationRule::Constant, CoeffGrid, DataType, Basis&gt;(), which supplies the appropriate boundary index automatically.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>CoeffGrid</parametername>
@@ -138,7 +138,7 @@
 </parameterlist>
 </para>
     </detaileddescription>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="20" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="21" bodyend="52"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" line="21" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/constant_identity_interpolation_extrapolation_rule.hpp" bodystart="22" bodyend="53"/>
     <listofallmembers>
       <member refid="classConstantIdentityInterpolationExtrapolationRule_1a236beb3602d3220eabce2135f93172ef" prot="public" virt="non-virtual"><scope>ConstantIdentityInterpolationExtrapolationRule</scope><name>ConstantIdentityInterpolationExtrapolationRule</name></member>
       <member refid="classConstantIdentityInterpolationExtrapolationRule_1ac5eda8d67bb280de45c80085cc6312d5" prot="private" virt="non-virtual"><scope>ConstantIdentityInterpolationExtrapolationRule</scope><name>m_coeff_idx</name></member>

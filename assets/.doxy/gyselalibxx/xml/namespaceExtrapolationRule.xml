@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.9.8" xml:lang="en-US">
+  <compounddef id="namespaceExtrapolationRule" kind="namespace" language="C++">
+    <compoundname>ExtrapolationRule</compoundname>
+    <innerclass refid="structExtrapolationRule_1_1Constant" prot="public">ExtrapolationRule::Constant</innerclass>
+    <innerclass refid="structExtrapolationRule_1_1NullValue" prot="public">ExtrapolationRule::NullValue</innerclass>
+    <innerclass refid="structExtrapolationRule_1_1Periodic" prot="public">ExtrapolationRule::Periodic</innerclass>
+    <briefdescription>
+<para>A namespace containing tag types describing how a function is extrapolated outside the interpolation domain. </para>
+    </briefdescription>
+    <detaileddescription>
+<para>Each tag exposes a type alias template that resolves, given the coefficient grid and data type of the interpolator, to the concrete extrapolation rule class to use. This keeps the set of extrapolation rules open for extension: user code may define its own tag following the same pattern, or bypass tags entirely and pass an already-concrete extrapolation rule class directly to <ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref> or <ref refid="classLagrangeInterpolator" kindref="compound">LagrangeInterpolator</ref> (see <ref refid="extrapolation__rule__choice_8hpp_source" kindref="compound">extrapolation_rule_choice.hpp</ref> for the generic resolution mechanism). </para>
+    </detaileddescription>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="94" column="1"/>
+  </compounddef>
+</doxygen>

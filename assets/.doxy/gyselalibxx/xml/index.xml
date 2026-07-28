@@ -548,6 +548,9 @@
     <member refid="classCombinedMapping_1a9ca64a62435219e248a9b4a0da886318" kind="function"><name>get</name></member>
     <member refid="classCombinedMapping_1af2a39b1a3c17e96b9ce968db9b9bccf1" kind="function"><name>non_singular_inverse_jacobian_matrix</name></member>
   </compound>
+  <compound refid="structExtrapolationRule_1_1Constant" kind="struct"><name>ExtrapolationRule::Constant</name>
+    <member refid="structExtrapolationRule_1_1Constant_1a3b8ad99779014e98e8c7f3428c919be2" kind="typedef"><name>type</name></member>
+  </compound>
   <compound refid="structConstantExtrapolationRuleOnion" kind="struct"><name>ConstantExtrapolationRuleOnion</name>
     <member refid="structConstantExtrapolationRuleOnion_1a0632822e7212fdbe203d64498c651d8f" kind="typedef"><name>PatchOrdering</name></member>
     <member refid="structConstantExtrapolationRuleOnion_1a06c0684b7f8c3bbdc89a01fe9cb50987" kind="typedef"><name>MinRadiusPatch</name></member>
@@ -2007,16 +2010,19 @@
   </compound>
   <compound refid="classLagrangeInterpolator" kind="class"><name>LagrangeInterpolator</name>
     <member refid="classLagrangeInterpolator_1a6a6ef881ab9f541bee72d23402f718f3" kind="typedef"><name>continuous_dimension_type</name></member>
+    <member refid="classLagrangeInterpolator_1ab0a7c62b9874f573a377063e27e82819" kind="typedef"><name>MinExtrapolationRule</name></member>
+    <member refid="classLagrangeInterpolator_1aa2b7b0856b5cc86ab72120771283af91" kind="typedef"><name>MaxExtrapolationRule</name></member>
     <member refid="classLagrangeInterpolator_1abb7cc397d8a31585050c9dcd731cd3e8" kind="typedef"><name>BuilderType</name></member>
     <member refid="classLagrangeInterpolator_1a0b39edd1c1d1287a21c6d8739d8c3972" kind="typedef"><name>CoeffGridType</name></member>
-    <member refid="classLagrangeInterpolator_1a751f1f09b56751c3865d446bb5f9dc18" kind="typedef"><name>EvaluatorType</name></member>
+    <member refid="classLagrangeInterpolator_1a715f96c51b312859c843a281d9dcfe83" kind="typedef"><name>EvaluatorType</name></member>
     <member refid="classLagrangeInterpolator_1a460e5cf11a041e462ae01f4e615daaf1" kind="variable"><name>is_periodic</name></member>
-    <member refid="classLagrangeInterpolator_1abe1d053c210195fc6cb6278913f2a3ce" kind="variable"><name>m_min_extrapolation</name></member>
-    <member refid="classLagrangeInterpolator_1a51a53561b335ebe6c613e9a6acd5128d" kind="variable"><name>m_max_extrapolation</name></member>
+    <member refid="classLagrangeInterpolator_1a361c5835053cf3bb3cbedee6fa96e4d6" kind="variable"><name>m_min_extrapolation</name></member>
+    <member refid="classLagrangeInterpolator_1aba711a0d2dec8846f57b2e43f4e041b9" kind="variable"><name>m_max_extrapolation</name></member>
     <member refid="classLagrangeInterpolator_1a24173291aefe41b454321b3abcf213e0" kind="variable"><name>m_builder</name></member>
     <member refid="classLagrangeInterpolator_1a2de809db131307b4e34459aac65c2f5f" kind="variable"><name>m_evaluator</name></member>
     <member refid="classLagrangeInterpolator_1a0d842fc9431acf76753830fb3c3fadc0" kind="function"><name>rank</name></member>
-    <member refid="classLagrangeInterpolator_1a6a99820f2559aa04b8f099149b3e2ac6" kind="function"><name>LagrangeInterpolator</name></member>
+    <member refid="classLagrangeInterpolator_1a0a850f9616aa580554e86833662e2b3d" kind="function"><name>LagrangeInterpolator</name></member>
+    <member refid="classLagrangeInterpolator_1a91849efb91eaf3b3b04431a3bfaa5e06" kind="function"><name>LagrangeInterpolator</name></member>
     <member refid="classLagrangeInterpolator_1a965b5286cf2d264e3730ca726d090874" kind="function"><name>get_builder</name></member>
     <member refid="classLagrangeInterpolator_1a5a99324e8694814d22fdb62891f3c4ef" kind="function"><name>get_evaluator</name></member>
   </compound>
@@ -2621,6 +2627,9 @@
     <member refid="classNullQNSolver_1af88ab5772e4ae0767b8d44449bd307d4" kind="function"><name>~NullQNSolver</name></member>
     <member refid="classNullQNSolver_1ae374abc707f0fad8f196d58b3d23ca63" kind="function"><name>operator()</name></member>
   </compound>
+  <compound refid="structExtrapolationRule_1_1NullValue" kind="struct"><name>ExtrapolationRule::NullValue</name>
+    <member refid="structExtrapolationRule_1_1NullValue_1a4228f6729e81c136cee01b2b884a59a3" kind="typedef"><name>type</name></member>
+  </compound>
   <compound refid="classOnionPatchLocator" kind="class"><name>OnionPatchLocator</name>
   </compound>
   <compound refid="classOnionPatchLocator_3_01MultipatchType_3_01IdxRangeOnPatch_00_01Patches_8_8_8_01_4_00_01Logicff6c45b073183ccdfc0de0e4a415a7fa" kind="class"><name>OnionPatchLocator&lt; MultipatchType&lt; IdxRangeOnPatch, Patches... &gt;, LogicalToPhysicalMapping, PhysicalToLogicalMapping, ExecSpace &gt;</name>
@@ -2698,6 +2707,9 @@
   </compound>
   <compound refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4" kind="struct"><name>connectivity_details::PatchConnection&lt; Patch, ddc::detail::TypeSeq&lt;&gt; &gt;</name>
     <member refid="structconnectivity__details_1_1PatchConnection_3_01Patch_00_01ddc_1_1detail_1_1TypeSeq_3_4_01_4_1a29d56e6980c8c4f084dbeadd8b217794" kind="typedef"><name>type</name></member>
+  </compound>
+  <compound refid="structExtrapolationRule_1_1Periodic" kind="struct"><name>ExtrapolationRule::Periodic</name>
+    <member refid="structExtrapolationRule_1_1Periodic_1a8847f3df4f0f77a128bd8f640996894e" kind="typedef"><name>type</name></member>
   </compound>
   <compound refid="classPoissonLikeRHSFunction" kind="class"><name>PoissonLikeRHSFunction</name>
     <member refid="classPoissonLikeRHSFunction_1a3b5a32dcc6fb06f49fffec5f8dedd2d7" kind="typedef"><name>evaluator_type</name></member>
@@ -3257,16 +3269,20 @@
   </compound>
   <compound refid="classSplineInterpolator" kind="class"><name>SplineInterpolator</name>
     <member refid="classSplineInterpolator_1a6ccadb16c290f6a7de78a1aefb544c48" kind="typedef"><name>continuous_dimension_type</name></member>
+    <member refid="classSplineInterpolator_1ac76493fff203927404d61f8840202768" kind="typedef"><name>MinExtrapolationRule</name></member>
+    <member refid="classSplineInterpolator_1a1bf4336b2ae952a039d369caa44329f2" kind="typedef"><name>MaxExtrapolationRule</name></member>
     <member refid="classSplineInterpolator_1a94fcefcca82dc71c237fb3011e96742f" kind="typedef"><name>BuilderType</name></member>
-    <member refid="classSplineInterpolator_1a64ff6718a029aab810df7ddfb78acbc2" kind="typedef"><name>EvaluatorType</name></member>
+    <member refid="classSplineInterpolator_1af7bda900644b48d8b7b6acdd42f61c07" kind="typedef"><name>EvaluatorType</name></member>
     <member refid="classSplineInterpolator_1a2db070d5637b9e19a7201c95017101dd" kind="variable"><name>is_periodic</name></member>
-    <member refid="classSplineInterpolator_1a65108aee05adb4d6e60229867e13211c" kind="variable"><name>m_min_extrapolation</name></member>
-    <member refid="classSplineInterpolator_1a8c22844dc4fdb188ea9bb9b41bbce555" kind="variable"><name>m_max_extrapolation</name></member>
+    <member refid="classSplineInterpolator_1abdaea3ebd1236fa041dc4872d1ed66f5" kind="variable"><name>m_min_extrapolation</name></member>
+    <member refid="classSplineInterpolator_1aa18047eda8137e3237c6bbb5cb5f3fac" kind="variable"><name>m_max_extrapolation</name></member>
     <member refid="classSplineInterpolator_1a6f394ea211d048ed0de9e84b377363ae" kind="variable"><name>m_builder</name></member>
     <member refid="classSplineInterpolator_1a4de6b5624065659fa7c93dfa0ac7482b" kind="variable"><name>m_evaluator</name></member>
     <member refid="classSplineInterpolator_1aa044a8ca3d0ca692d6c222079dd3ad7a" kind="function"><name>rank</name></member>
-    <member refid="classSplineInterpolator_1ac2a99db22fe1b60ccff83df1b57c1ac6" kind="function"><name>SplineInterpolator</name></member>
-    <member refid="classSplineInterpolator_1ae2c1a56b6213dff24c6103312aac9f82" kind="function"><name>SplineInterpolator</name></member>
+    <member refid="classSplineInterpolator_1a8bc2778d4fbd67dfe6d2e5c1a290e3d1" kind="function"><name>SplineInterpolator</name></member>
+    <member refid="classSplineInterpolator_1a45e16baf0083acaeb67f993bcef6e39b" kind="function"><name>SplineInterpolator</name></member>
+    <member refid="classSplineInterpolator_1a44629a28c7478a4cd0732657319a52fa" kind="function"><name>SplineInterpolator</name></member>
+    <member refid="classSplineInterpolator_1a3579bf9c7666949789af73315821f080" kind="function"><name>SplineInterpolator</name></member>
     <member refid="classSplineInterpolator_1a9cefde9ee3fd244ed79474da0d53d0fa" kind="function"><name>get_builder</name></member>
     <member refid="classSplineInterpolator_1ae8584ebde1004817ffc9a5eb00760095" kind="function"><name>get_evaluator</name></member>
   </compound>
@@ -3698,6 +3714,8 @@
   </compound>
   <compound refid="namespaceequilibrium" kind="namespace"><name>equilibrium</name>
     <member refid="geometryXVx_2initialisation_2iequilibrium_8hpp_1a836b2d1d30cdb635cdac8dedd80401e2" kind="function"><name>init_from_input</name></member>
+  </compound>
+  <compound refid="namespaceExtrapolationRule" kind="namespace"><name>ExtrapolationRule</name>
   </compound>
   <compound refid="namespaceGMGPolarTools" kind="namespace"><name>GMGPolarTools</name>
   </compound>
@@ -4423,14 +4441,11 @@
   <compound refid="constant__identity__interpolation__extrapolation__rule_8hpp" kind="file"><name>constant_identity_interpolation_extrapolation_rule.hpp</name>
   </compound>
   <compound refid="extrapolation__rule__choice_8hpp" kind="file"><name>extrapolation_rule_choice.hpp</name>
-    <member refid="extrapolation__rule__choice_8hpp_1a8a8b07cd157e3ef869cd3cd8f84be98f" kind="typedef"><name>extrapolation_rule_t</name></member>
+    <member refid="extrapolation__rule__choice_8hpp_1aacbab01a61d214cc728942b850e54a46" kind="typedef"><name>extrapolation_rule_t</name></member>
+    <member refid="extrapolation__rule__choice_8hpp_1a7295e4d19093c88bf88be07c05c935b1" kind="variable"><name>is_extrapolation_rule_auto_constructible_v</name></member>
     <member refid="extrapolation__rule__choice_8hpp_1aa6b4312ac6241951c8cefa00646bdd72" kind="function"><name>get_extrapolation</name></member>
   </compound>
   <compound refid="i__interpolation_8hpp" kind="file"><name>i_interpolation.hpp</name>
-    <member refid="i__interpolation_8hpp_1aff8781cc8ba44dbb49ecfdfe29e2f1e1" kind="enum"><name>ExtrapolationRule</name></member>
-    <member refid="i__interpolation_8hpp_1aff8781cc8ba44dbb49ecfdfe29e2f1e1ae4379d044711537d9ce3b3b58c575c58" kind="enumvalue"><name>PERIODIC</name></member>
-    <member refid="i__interpolation_8hpp_1aff8781cc8ba44dbb49ecfdfe29e2f1e1a729570cb0cd3cb1738ca651ec2583de1" kind="enumvalue"><name>NULL_VALUE</name></member>
-    <member refid="i__interpolation_8hpp_1aff8781cc8ba44dbb49ecfdfe29e2f1e1a83972670b57415508523b5641bb46116" kind="enumvalue"><name>CONSTANT</name></member>
     <member refid="i__interpolation_8hpp_1adf428c74a6d15b30756e98a48efc01fe" kind="variable"><name>is_lagrange_basis_v</name></member>
     <member refid="i__interpolation_8hpp_1a0e8d6b32dd36dd4f6bc5b7f4834d6473" kind="variable"><name>is_spline_basis_v</name></member>
   </compound>

@@ -60,6 +60,10 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**Euler**](classEuler.md) _A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._    
 * **class** [**Euler&lt; FieldMem, DerivFieldMem, ExecSpace &gt;**](classEuler_3_01FieldMem_00_01DerivFieldMem_00_01ExecSpace_01_4.md) _A class which provides an implementation of an explicit_ [_**Euler**_](classEuler.md) _method._    
 * **class** [**ExplicitTimeStepperBuilder**](classExplicitTimeStepperBuilder.md) _A class to indicate that an explicit time stepper should be constructed for use in other operators._     
+* **namespace** [**ExtrapolationRule**](namespaceExtrapolationRule.md) _A namespace containing tag types describing how a function is extrapolated outside the interpolation domain._     
+    * **struct** [**Constant**](structExtrapolationRule_1_1Constant.md) _Tag selecting constant extrapolation._     
+    * **struct** [**NullValue**](structExtrapolationRule_1_1NullValue.md) _Tag selecting null extrapolation: the function evaluates to zero outside the domain._     
+    * **struct** [**Periodic**](structExtrapolationRule_1_1Periodic.md) _Tag selecting periodic extrapolation._     
 * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md)     
     * **struct** [**GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) _The grid of quadrature points along the PDEDim direction._ 
     * **struct** [**HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) 

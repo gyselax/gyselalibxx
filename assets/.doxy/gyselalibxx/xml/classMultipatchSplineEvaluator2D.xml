@@ -1664,7 +1664,7 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
-<parametername>ExtrapolationRule</parametername>
+<parametername><ref refid="namespaceExtrapolationRule" kindref="compound">ExtrapolationRule</ref></parametername>
 </parameternamelist>
 <parameterdescription>
 <para>The extrapolation rule type for outside of the global domain. </para>

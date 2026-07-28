@@ -583,8 +583,23 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">typedef details::GetExtrapolationRuleClass&lt; Rule, CoeffGrid, DataType &gt;::type</td>
-<td style="text-align: left;"><a href="#typedef-extrapolation_rule_t"><strong>extrapolation_rule_t</strong></a>  <br></td>
+<td style="text-align: right;">typedef typename details::ExtrapolationRuleResolver&lt; Rule, CoeffGrid, DataType &gt;::type</td>
+<td style="text-align: left;"><a href="#typedef-extrapolation_rule_t"><strong>extrapolation_rule_t</strong></a>  <br><em>Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given CoeffGrid/DataType.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-attributes">Public Attributes</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">constexpr bool</td>
+<td style="text-align: left;"><a href="#variable-is_extrapolation_rule_auto_constructible_v"><strong>is_extrapolation_rule_auto_constructible_v</strong></a>   = <code>/* multi line expression */</code><br><em>True if get_extrapolation&lt;Rule, CoeffGrid, DataType, ...&gt; can build the rule with no extra information: the resolved rule type is default-constructible, or Rule is the</em> <a href="structExtrapolationRule_1_1Constant.html"><em><strong>ExtrapolationRule::Constant</strong></em></a> <em>tag (which get_extrapolation knows how to build from the boundary of the discrete space).</em></td>
 </tr>
 </tbody>
 </table>
@@ -599,22 +614,31 @@
 <tbody>
 <tr>
 <td style="text-align: right;">extrapolation_rule_t&lt; Rule, CoeffGrid, DataType &gt;</td>
-<td style="text-align: left;"><a href="#function-get_extrapolation"><strong>get_extrapolation</strong></a> (Extremity extremity) <br></td>
+<td style="text-align: left;"><a href="#function-get_extrapolation"><strong>get_extrapolation</strong></a> (Extremity extremity) <br><em>Initialise the extrapolation rule.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="public-types-documentation">Public Types Documentation</h2>
 <h3 id="typedef-extrapolation_rule_t">typedef extrapolation_rule_t</h3>
-<pre><code class="language-C++">using extrapolation_rule_t =  details::GetExtrapolationRuleClass&lt;Rule, CoeffGrid, DataType&gt;::type;
+<p><em>Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given CoeffGrid/DataType.</em> </p>
+<pre><code class="language-C++">using extrapolation_rule_t =  typename details::ExtrapolationRuleResolver&lt;Rule, CoeffGrid, DataType&gt;::type;
+</code></pre>
+<hr>
+<h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
+<h3 id="variable-is_extrapolation_rule_auto_constructible_v">variable is_extrapolation_rule_auto_constructible_v</h3>
+<p><em>True if get_extrapolation&lt;Rule, CoeffGrid, DataType, ...&gt; can build the rule with no extra information: the resolved rule type is default-constructible, or Rule is the</em> <a href="structExtrapolationRule_1_1Constant.html"><em><strong>ExtrapolationRule::Constant</strong></em></a> <em>tag (which get_extrapolation knows how to build from the boundary of the discrete space).</em></p>
+<pre><code class="language-C++">constexpr bool is_extrapolation_rule_auto_constructible_v;
 </code></pre>
 <hr>
 <h2 id="public-functions-documentation">Public Functions Documentation</h2>
 <h3 id="function-get_extrapolation">function get_extrapolation</h3>
-<pre><code class="language-C++">template&lt;ExtrapolationRule Rule, class CoeffGrid, class DataType, class Basis&gt;
+<p><em>Initialise the extrapolation rule.</em> </p>
+<pre><code class="language-C++">template&lt;class Rule, class CoeffGrid, class DataType, class Basis&gt;
 extrapolation_rule_t&lt; Rule, CoeffGrid, DataType &gt; get_extrapolation (
     Extremity extremity
 ) 
 </code></pre>
+<p>Initialise the extrapolation rule using the default constructor if available. For a constant extrapolation, initialise the extrapolation from the selected extremity. </p>
 <hr>
 
 <hr>

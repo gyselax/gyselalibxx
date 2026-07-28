@@ -157,7 +157,7 @@ This operator does not work on batched domain.
 * `BSpline2OnPatch` A type alias which provides the second BSpline type along which the splines are built template on the [**Patch**](structPatch.md). 
 * `Grid1OnPatch` A type alias which provides the first Grid type along which the interpolation points of the splines are found template on the [**Patch**](structPatch.md). 
 * `Grid2OnPatch` A type alias which provides the second Grid type along which the interpolation points of the splines are found template on the [**Patch**](structPatch.md). 
-* `ExtrapolationRule` The extrapolation rule type for outside of the global domain. 
+* [**ExtrapolationRule**](namespaceExtrapolationRule.md) The extrapolation rule type for outside of the global domain. 
 * `ValuesOnPatch` A Field type storing the evaluated values of the splines. Template on the [**Patch**](structPatch.md). 
 * `PatchLocator` A operator that finds the patch where a given coordinate is physically located. 
 * `Patches` A variadic template of all the patches. 

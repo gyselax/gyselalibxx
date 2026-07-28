@@ -571,6 +571,7 @@
 <p><a href="i__interpolation_8hpp_source.html">Go to the source code of this file</a></p>
 <ul>
 <li><code>#include &lt;ddc/kernels/splines.hpp&gt;</code></li>
+<li><code>#include "constant_identity_interpolation_extrapolation_rule.hpp"</code></li>
 <li><code>#include "geometry_descriptors.hpp"</code></li>
 <li><code>#include "i_interpolation_builder.hpp"</code></li>
 <li><code>#include "i_interpolation_evaluator.hpp"</code></li>
@@ -589,11 +590,15 @@
 <tbody>
 <tr>
 <td style="text-align: right;">namespace</td>
+<td style="text-align: left;"><a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> <br><em>A namespace containing tag types describing how a function is extrapolated outside the interpolation domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">namespace</td>
 <td style="text-align: left;"><a href="namespaceconcepts.html"><strong>concepts</strong></a> <br></td>
 </tr>
 </tbody>
 </table>
-<h2 id="public-types">Public Types</h2>
+<h2 id="classes">Classes</h2>
 <table>
 <thead>
 <tr>
@@ -603,8 +608,16 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">enum</td>
-<td style="text-align: left;"><a href="#enum-extrapolationrule"><strong>ExtrapolationRule</strong></a>  <br><em>An enum describing how a function is extrapolated outside the interpolation domain.</em></td>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structExtrapolationRule_1_1Constant.html"><strong>Constant</strong></a> <br><em>Tag selecting constant extrapolation.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structExtrapolationRule_1_1NullValue.html"><strong>NullValue</strong></a> <br><em>Tag selecting null extrapolation: the function evaluates to zero outside the domain.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">struct</td>
+<td style="text-align: left;"><a href="structExtrapolationRule_1_1Periodic.html"><strong>Periodic</strong></a> <br><em>Tag selecting periodic extrapolation.</em></td>
 </tr>
 </tbody>
 </table>
@@ -627,21 +640,6 @@
 </tr>
 </tbody>
 </table>
-<h2 id="public-types-documentation">Public Types Documentation</h2>
-<h3 id="enum-extrapolationrule">enum ExtrapolationRule</h3>
-<p><em>An enum describing how a function is extrapolated outside the interpolation domain.</em> </p>
-<pre><code class="language-C++">enum ExtrapolationRule {
-    PERIODIC,
-    NULL_VALUE,
-    CONSTANT
-};
-</code></pre>
-<ul>
-<li>PERIODIC : the function is assumed to be periodic. The value at a point outside the domain is taken as the value at the equivalent point inside the domain.</li>
-<li>NULL_VALUE : the function evaluates to zero outside the domain.</li>
-<li>CONSTANT : the function is clamped to the value at the nearest boundary point. </li>
-</ul>
-<hr>
 <h2 id="public-attributes-documentation">Public Attributes Documentation</h2>
 <h3 id="variable-is_lagrange_basis_v">variable is_lagrange_basis_v</h3>
 <p><em>A type trait that is true when Basis is a Lagrange basis type.</em> </p>

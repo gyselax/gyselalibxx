@@ -573,14 +573,13 @@
 #pragma once
 #include &lt;ddc/kernels/splines.hpp&gt;
 
+#include "constant_identity_interpolation_extrapolation_rule.hpp"
 #include "geometry_descriptors.hpp"
 #include "i_interpolation_builder.hpp"
 #include "i_interpolation_evaluator.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
 #include "type_seq_tools.hpp"
-
-enum ExtrapolationRule { PERIODIC, NULL_VALUE, CONSTANT };
 
 namespace concepts {
 
@@ -618,6 +617,31 @@ constexpr bool is_lagrange_basis_v
 template &lt;class Basis&gt;
 constexpr bool is_spline_basis_v
         = ddc::is_uniform_bsplines_v&lt;Basis&gt; || ddc::is_non_uniform_bsplines_v&lt;Basis&gt;;
+
+namespace ExtrapolationRule {
+
+struct Periodic
+{
+    template &lt;class CoeffGrid, class DataType&gt;
+    using type = ddc::PeriodicExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;;
+};
+
+struct NullValue
+{
+    template &lt;class CoeffGrid, class DataType&gt;
+    using type = ddc::NullExtrapolationRule;
+};
+
+struct Constant
+{
+    template &lt;class CoeffGrid, class DataType&gt;
+    using type = std::conditional_t&lt;
+            is_spline_basis_v&lt;CoeffGrid&gt;,
+            ddc::ConstantExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;,
+            ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid, DataType&gt;&gt;;
+};
+
+} // namespace ExtrapolationRule
 </code></pre></div>
               
             </div>

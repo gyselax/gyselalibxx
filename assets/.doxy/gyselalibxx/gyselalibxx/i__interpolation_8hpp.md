@@ -11,6 +11,7 @@
 
 
 * `#include <ddc/kernels/splines.hpp>`
+* `#include "constant_identity_interpolation_extrapolation_rule.hpp"`
 * `#include "geometry_descriptors.hpp"`
 * `#include "i_interpolation_builder.hpp"`
 * `#include "i_interpolation_evaluator.hpp"`
@@ -34,16 +35,19 @@
 
 | Type | Name |
 | ---: | :--- |
+| namespace | [**ExtrapolationRule**](namespaceExtrapolationRule.md) <br>_A namespace containing tag types describing how a function is extrapolated outside the interpolation domain._  |
 | namespace | [**concepts**](namespaceconcepts.md) <br> |
 
 
-
-
-## Public Types
+## Classes
 
 | Type | Name |
 | ---: | :--- |
-| enum  | [**ExtrapolationRule**](#enum-extrapolationrule)  <br>_An enum describing how a function is extrapolated outside the interpolation domain._  |
+| struct | [**Constant**](structExtrapolationRule_1_1Constant.md) <br>_Tag selecting constant extrapolation._  |
+| struct | [**NullValue**](structExtrapolationRule_1_1NullValue.md) <br>_Tag selecting null extrapolation: the function evaluates to zero outside the domain._  |
+| struct | [**Periodic**](structExtrapolationRule_1_1Periodic.md) <br>_Tag selecting periodic extrapolation._  |
+
+
 
 
 
@@ -98,35 +102,6 @@
 
 
 
-## Public Types Documentation
-
-
-
-
-### enum ExtrapolationRule 
-
-_An enum describing how a function is extrapolated outside the interpolation domain._ 
-```C++
-enum ExtrapolationRule {
-    PERIODIC,
-    NULL_VALUE,
-    CONSTANT
-};
-```
-
-
-
-
-* PERIODIC : the function is assumed to be periodic. The value at a point outside the domain is taken as the value at the equivalent point inside the domain.
-* NULL\_VALUE : the function evaluates to zero outside the domain.
-* CONSTANT : the function is clamped to the value at the nearest boundary point. 
-
-
-
-
-        
-
-<hr>
 ## Public Attributes Documentation
 
 
