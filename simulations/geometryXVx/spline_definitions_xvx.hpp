@@ -57,7 +57,7 @@ using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVx,
         GridVx,
-        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
+        ExtrapolationRule::Constant_Constant,
         SplineVxClosure,
         SplineVxClosure>;
 
