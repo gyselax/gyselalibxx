@@ -206,7 +206,7 @@ public:
             ToPhysicalMapping to_physical,
             SplineBuilder const& builder,
             SplineEvaluator const& evaluator,
-            ExtrapolationType const& extrapolation_rule = ExtrapolationType::NONE,
+            ExtrapolationType const extrapolation_rule = ExtrapolationType::NONE,
             std::optional<int> max_iterations = std::nullopt,
             std::optional<double> absTol = std::nullopt,
             std::optional<double> relTol = std::nullopt)
@@ -222,7 +222,7 @@ public:
                   get_const_field(m_coeff_beta))
         , m_max_iterations(max_iterations.value_or(100))
         , m_absTol(absTol.value_or(1e-10))
-        , m_relTol(relTol.value_or(1e-7))
+        , m_relTol(relTol.value_or(1e-6))
     {
     }
 
