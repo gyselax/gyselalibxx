@@ -66,7 +66,7 @@ void test_GMGPolarIntegration__PoissonEquation()
 {
     CoordR const r_min(1e-5);
     CoordR const r_max(1.0);
-    IdxStepR const r_ncells(16 - BSDegreeR + 1); // To have a number of grid cells that is 2**N
+    IdxStepR const r_ncells(32 - BSDegreeR + 1); // To have a number of grid cells that is 2**N
 
     CoordTheta const theta_min(0.0);
     CoordTheta const theta_max(2.0 * M_PI);
