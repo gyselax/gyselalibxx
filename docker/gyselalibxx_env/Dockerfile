@@ -27,7 +27,6 @@ RUN chmod +x /bin/bash_run \
     build-essential \
     clang-19 \
     libomp-dev \
-    clang-format-14 \
     doxygen \
     pkg-config \
     git \
@@ -161,6 +160,7 @@ RUN chmod +x /bin/bash_run \
     scipy \
     xarray \
     'pylint==3.3.9' \
+    'clang-format==14.0.6' \
  && rm -rf /var/lib/apt/lists/* \
  && useradd -d /ci -m -U ci \
  && mkdir /data \
