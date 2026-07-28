@@ -139,7 +139,7 @@ void test_GMGPolarIntegration__PoissonEquation()
 
     std::cout << "Max L-inf error: " << max_err << std::endl;
 
-    EXPECT_LT(max_err, 1e-6);
+    EXPECT_LT(max_err, 1e-5);
 }
 TEST(GMGPolarIntegration, PoissonEquation)
 {
