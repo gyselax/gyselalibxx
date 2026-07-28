@@ -10,8 +10,9 @@
  * rather than extrapolating the polynomial. This is the Lagrange analog of
  * ddc::ConstantExtrapolationRule used with spline evaluators.
  *
- * It is intended to be constructed via get_extrapolation<CONSTANT, CoeffGrid, DataType, Basis>(),
- * which supplies the appropriate boundary index automatically.
+ * It is intended to be constructed via
+ * get_extrapolation<ExtrapolationRule::Constant, CoeffGrid, DataType, Basis>(), which
+ * supplies the appropriate boundary index automatically.
  *
  * @tparam CoeffGrid The discrete grid type of the interpolation coefficients.
  * @tparam DataType  The floating-point type of the function values (default: double).

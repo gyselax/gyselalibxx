@@ -104,8 +104,8 @@ using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
-        PERIODIC,
-        PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Periodic,
         SplineXClosure,
         SplineXClosure>;
 

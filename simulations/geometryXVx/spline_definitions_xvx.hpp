@@ -40,7 +40,8 @@ using SplineInterpPointsX
 using SplineInterpPointsVx
         = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
-ExtrapolationRule constexpr XExtrapRule = X::PERIODIC ? PERIODIC : CONSTANT;
+using XExtrapRule
+        = std::conditional_t<X::PERIODIC, ExtrapolationRule::Periodic, ExtrapolationRule::Constant>;
 
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
@@ -55,8 +56,8 @@ using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVx,
         GridVx,
-        CONSTANT,
-        CONSTANT,
+        ExtrapolationRule::Constant,
+        ExtrapolationRule::Constant,
         SplineVxClosure,
         SplineVxClosure>;
 

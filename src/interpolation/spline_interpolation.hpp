@@ -1,5 +1,7 @@
 // SPDX-License-Identifier: MIT
 #pragma once
+#include <utility>
+
 #include <ddc/kernels/splines.hpp>
 
 #include "ddc_aliases.hpp"
@@ -20,8 +22,12 @@
  * @tparam ExecSpace     The Kokkos execution space used for computations.
  * @tparam Basis         The B-spline basis type (uniform or non-uniform).
  * @tparam InterpGrid    The discrete grid on which function values are provided.
- * @tparam MinExtrapRule The ExtrapolationRule applied below the lower boundary.
- * @tparam MaxExtrapRule The ExtrapolationRule applied above the upper boundary.
+ * @tparam MinExtrapRule The extrapolation rule applied below the lower boundary. This
+ *                       may be one of the tags in the ExtrapolationRule namespace
+ *                       (e.g. ExtrapolationRule::Periodic) or a custom, already-concrete
+ *                       extrapolation rule class.
+ * @tparam MaxExtrapRule The extrapolation rule applied above the upper boundary. See
+ *                       MinExtrapRule for the accepted forms.
  * @tparam MinBound      The ddc::SplineBuilderClosure at the lower boundary of the spline builder.
  * @tparam MaxBound      The ddc::SplineBuilderClosure at the upper boundary of the spline builder.
  * @tparam Solver        The spline solver backend (default: LAPACK).
@@ -30,8 +36,8 @@ template <
         class ExecSpace,
         class Basis,
         class InterpGrid,
-        ExtrapolationRule MinExtrapRule,
-        ExtrapolationRule MaxExtrapRule,
+        class MinExtrapRule,
+        class MaxExtrapRule,
         ddc::SplineBuilderClosure MinBound,
         ddc::SplineBuilderClosure MaxBound,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
@@ -44,10 +50,21 @@ private:
 
     static_assert(is_periodic == (MinBound == ddc::SplineBuilderClosure::PERIODIC));
     static_assert(is_periodic == (MaxBound == ddc::SplineBuilderClosure::PERIODIC));
-    static_assert(is_periodic == (MinExtrapRule == ExtrapolationRule::PERIODIC));
-    static_assert(is_periodic == (MaxExtrapRule == ExtrapolationRule::PERIODIC));
+    static_assert(
+            is_periodic
+            == std::is_same_v<
+                    extrapolation_rule_t<MinExtrapRule, Basis, double>,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
+    static_assert(
+            is_periodic
+            == std::is_same_v<
+                    extrapolation_rule_t<MaxExtrapRule, Basis, double>,
+                    ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
 
     static_assert(is_spline_basis_v<Basis>);
+
+    using MinExtrapolationRule = extrapolation_rule_t<MinExtrapRule, Basis, double>;
+    using MaxExtrapolationRule = extrapolation_rule_t<MaxExtrapRule, Basis, double>;
 
 public:
     /// @brief The ddc::SplineBuilder type built from the template parameters.
@@ -66,8 +83,8 @@ public:
             typename ExecSpace::memory_space,
             Basis,
             InterpGrid,
-            extrapolation_rule_t<MinExtrapRule, Basis, double>,
-            extrapolation_rule_t<MaxExtrapRule, Basis, double>>;
+            MinExtrapolationRule,
+            MaxExtrapolationRule>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -76,8 +93,8 @@ public:
     }
 
 private:
-    extrapolation_rule_t<MinExtrapRule, Basis, double> m_min_extrapolation;
-    extrapolation_rule_t<MaxExtrapRule, Basis, double> m_max_extrapolation;
+    MinExtrapolationRule m_min_extrapolation;
+    MaxExtrapolationRule m_max_extrapolation;
     BuilderType m_builder;
     EvaluatorType m_evaluator;
 
@@ -87,11 +104,16 @@ public:
      *
      * The extrapolation rules are initialised from the discrete space of @c Basis,
      * so the corresponding ddc discrete space must be initialised before construction.
+     * This overload is only available when both extrapolation rules can be built
+     * automatically (they are default-constructible, or the tag ExtrapolationRule::Constant
+     * is used) - otherwise use the overload that takes the extrapolation rules explicitly.
      *
      * @param label A label used to tag parallel regions and memory allocations for profiling.
      * @param idx_range The 1D interpolation index range passed to the builder.
      */
-    explicit SplineInterpolator(std::string const& label, IdxRange<InterpGrid> idx_range)
+    explicit SplineInterpolator(std::string const& label, IdxRange<InterpGrid> idx_range) requires(
+            is_extrapolation_rule_auto_constructible_v<MinExtrapRule, Basis, double>&&
+                    is_extrapolation_rule_auto_constructible_v<MaxExtrapRule, Basis, double>)
         : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis, double>(Extremity::FRONT))
         , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis, double>(Extremity::BACK))
         , m_builder(label, idx_range)
@@ -103,12 +125,65 @@ public:
      *
      * The extrapolation rules are initialised from the discrete space of @c Basis,
      * so the corresponding ddc discrete space must be initialised before construction.
+     * This overload is only available when both extrapolation rules can be built
+     * automatically (they are default-constructible, or the tag ExtrapolationRule::Constant
+     * is used) - otherwise use the overload that takes the extrapolation rules explicitly.
      *
      * @param idx_range The 1D interpolation index range passed to the builder.
      */
-    explicit SplineInterpolator(IdxRange<InterpGrid> idx_range)
+    explicit SplineInterpolator(IdxRange<InterpGrid> idx_range) requires(
+            is_extrapolation_rule_auto_constructible_v<MinExtrapRule, Basis, double>&&
+                    is_extrapolation_rule_auto_constructible_v<MaxExtrapRule, Basis, double>)
         : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis, double>(Extremity::FRONT))
         , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis, double>(Extremity::BACK))
+        , m_builder(idx_range)
+        , m_evaluator(m_min_extrapolation, m_max_extrapolation)
+    {
+    }
+
+    /**
+     * @brief Construct a SplineInterpolator on the given interpolation index range,
+     * specifying the extrapolation rules explicitly.
+     *
+     * Use this overload when the chosen extrapolation rule cannot be built
+     * automatically, e.g. a custom extrapolation rule that is not default-constructible
+     * and is not ExtrapolationRule::Constant.
+     *
+     * @param label A label used to tag parallel regions and memory allocations for profiling.
+     * @param idx_range The 1D interpolation index range passed to the builder.
+     * @param min_extrapolation_rule The extrapolation rule to use below the lower boundary.
+     * @param max_extrapolation_rule The extrapolation rule to use above the upper boundary.
+     */
+    explicit SplineInterpolator(
+            std::string const& label,
+            IdxRange<InterpGrid> idx_range,
+            MinExtrapolationRule min_extrapolation_rule,
+            MaxExtrapolationRule max_extrapolation_rule)
+        : m_min_extrapolation(std::move(min_extrapolation_rule))
+        , m_max_extrapolation(std::move(max_extrapolation_rule))
+        , m_builder(label, idx_range)
+        , m_evaluator(m_min_extrapolation, m_max_extrapolation)
+    {
+    }
+
+    /**
+     * @brief Construct a SplineInterpolator on the given interpolation index range,
+     * specifying the extrapolation rules explicitly.
+     *
+     * Use this overload when the chosen extrapolation rule cannot be built
+     * automatically, e.g. a custom extrapolation rule that is not default-constructible
+     * and is not ExtrapolationRule::Constant.
+     *
+     * @param idx_range The 1D interpolation index range passed to the builder.
+     * @param min_extrapolation_rule The extrapolation rule to use below the lower boundary.
+     * @param max_extrapolation_rule The extrapolation rule to use above the upper boundary.
+     */
+    explicit SplineInterpolator(
+            IdxRange<InterpGrid> idx_range,
+            MinExtrapolationRule min_extrapolation_rule,
+            MaxExtrapolationRule max_extrapolation_rule)
+        : m_min_extrapolation(std::move(min_extrapolation_rule))
+        , m_max_extrapolation(std::move(max_extrapolation_rule))
         , m_builder(idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
