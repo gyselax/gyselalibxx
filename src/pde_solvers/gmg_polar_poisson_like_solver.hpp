@@ -181,6 +181,7 @@ private:
     DomainGeometry const m_domain_geom;
     SplineBuilder const& m_builder;
     SplineEvaluator const& m_evaluator;
+    ExtrapolationType const m_extrapolation_rule;
     SplineRThetaMem m_coeff_alpha;
     SplineRThetaMem m_coeff_beta;
     DensityCoeffs const m_density_coeffs;
@@ -196,6 +197,7 @@ public:
      * @param[in] to_physical The mapping from the logical to the physical domain.
      * @param[in] builder A builder to construct the coefficients of the interpolation.
      * @param[in] evaluator The evaluator for the interpolation.
+     * @param[in] extrapolation_rule A parameter to pass extrapolation rule to GMGPolar, default ExtrapolationType::NONE.
      * @param[in] max_iterations The maximum number of iterations that the solver should carry out.
      * @param[in] absTol The absolute tolerance for the convergence of the solver.
      * @param[in] relTol The relative tolerance for the convergence of the solver.
@@ -204,12 +206,14 @@ public:
             ToPhysicalMapping to_physical,
             SplineBuilder const& builder,
             SplineEvaluator const& evaluator,
+            ExtrapolationType const extrapolation_rule = ExtrapolationType::NONE,
             std::optional<int> max_iterations = std::nullopt,
             std::optional<double> absTol = std::nullopt,
             std::optional<double> relTol = std::nullopt)
         : m_domain_geom(to_physical)
         , m_builder(builder)
         , m_evaluator(evaluator)
+        , m_extrapolation_rule(extrapolation_rule)
         , m_coeff_alpha(get_spline_idx_range(m_builder))
         , m_coeff_beta(get_spline_idx_range(m_builder))
         , m_density_coeffs(
@@ -282,7 +286,7 @@ public:
         solver.cacheDomainGeometry(true);
 
         // --- Multigrid settings --- //
-        solver.extrapolation(ExtrapolationType::IMPLICIT_EXTRAPOLATION); // Select extrapolation
+        solver.extrapolation(m_extrapolation_rule); // Select extrapolation
         solver.maxLevels(-1); // Max multigrid levels (-1 = use deepest possible)
         solver.preSmoothingSteps(1); // Smoothing before coarse-grid correction
         solver.postSmoothingSteps(1); // Smoothing after coarse-grid correction
