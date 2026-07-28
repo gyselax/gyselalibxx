@@ -181,7 +181,7 @@ private:
     DomainGeometry const m_domain_geom;
     SplineBuilder const& m_builder;
     SplineEvaluator const& m_evaluator;
-    ExtrapolationType const& m_extrapolation_rule;
+    ExtrapolationType const m_extrapolation_rule;
     SplineRThetaMem m_coeff_alpha;
     SplineRThetaMem m_coeff_beta;
     DensityCoeffs const m_density_coeffs;
