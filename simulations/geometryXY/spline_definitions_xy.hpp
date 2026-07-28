@@ -30,8 +30,8 @@ struct BSplinesY
 ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
 ddc::SplineBuilderClosure constexpr SplineYClosure = ddc::SplineBuilderClosure::PERIODIC;
 
-ExtrapolationRule constexpr SplineXExtrapolation = ExtrapolationRule::PERIODIC;
-ExtrapolationRule constexpr SplineYExtrapolation = ExtrapolationRule::PERIODIC;
+using SplineXExtrapolation = ExtrapolationRule::Periodic;
+using SplineYExtrapolation = ExtrapolationRule::Periodic;
 
 // IDim initialisers
 using SplineInterpPointsX
