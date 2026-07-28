@@ -212,6 +212,20 @@
         </inbodydescription>
         <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="183" column="27" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="183" bodyend="-1"/>
       </memberdef>
+      <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1aa685c6843479b2e0711d3b6f38a111cd" prot="private" static="no" mutable="no">
+        <type>ExtrapolationType const</type>
+        <definition>ExtrapolationType const GMGPolarPoissonLikeSolver&lt; ToPhysicalMapping, GridR, GridTheta, BSplinesR, BSplinesTheta, SplineBuilder, SplineEvaluator &gt;::m_extrapolation_rule</definition>
+        <argsstring></argsstring>
+        <name>m_extrapolation_rule</name>
+        <qualifiedname>GMGPolarPoissonLikeSolver::m_extrapolation_rule</qualifiedname>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="184" column="29" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="184" bodyend="-1"/>
+      </memberdef>
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1abfea96b98d0ec624cb52108f915addf0" prot="private" static="no" mutable="no">
         <type>SplineRThetaMem</type>
         <definition>SplineRThetaMem GMGPolarPoissonLikeSolver&lt; ToPhysicalMapping, GridR, GridTheta, BSplinesR, BSplinesTheta, SplineBuilder, SplineEvaluator &gt;::m_coeff_alpha</definition>
@@ -224,7 +238,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="184" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="184" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="185" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="185" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1afcc06a38e11f5778f2b959514e6d9ebe" prot="private" static="no" mutable="no">
         <type>SplineRThetaMem</type>
@@ -238,7 +252,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="185" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="185" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="186" column="21" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="186" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1a0e38704eeeba2c93c5614bef2e475708" prot="private" static="no" mutable="no">
         <type><ref refid="classGMGPolarTools_1_1PolarPoissonLikeCoefficients" kindref="compound">DensityCoeffs</ref> const</type>
@@ -252,7 +266,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="186" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="186" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="187" column="25" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="187" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1a4859c418b40e5cfef6111d51763c893a" prot="private" static="no" mutable="no">
         <type>int</type>
@@ -266,7 +280,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="187" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="187" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="188" column="9" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="188" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1ae43ee21bc1e07d1deb09fa04ec46170c" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -280,7 +294,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="188" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="188" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="189" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="189" bodyend="-1"/>
       </memberdef>
       <memberdef kind="variable" id="classGMGPolarPoissonLikeSolver_1a4d7dd0293e5261b94c9c8721f137fdfa" prot="private" static="no" mutable="no">
         <type>double</type>
@@ -294,14 +308,14 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="189" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="189" bodyend="-1"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="190" column="12" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="190" bodyend="-1"/>
       </memberdef>
     </sectiondef>
     <sectiondef kind="public-func">
-      <memberdef kind="function" id="classGMGPolarPoissonLikeSolver_1a5eed23393b2a488e744e6d47de6c2b70" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+      <memberdef kind="function" id="classGMGPolarPoissonLikeSolver_1ab1d9f251e68cc5d3440a135cf2fa83b1" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type></type>
         <definition>GMGPolarPoissonLikeSolver&lt; ToPhysicalMapping, GridR, GridTheta, BSplinesR, BSplinesTheta, SplineBuilder, SplineEvaluator &gt;::GMGPolarPoissonLikeSolver</definition>
-        <argsstring>(ToPhysicalMapping to_physical, SplineBuilder const &amp;builder, SplineEvaluator const &amp;evaluator, std::optional&lt; int &gt; max_iterations=std::nullopt, std::optional&lt; double &gt; absTol=std::nullopt, std::optional&lt; double &gt; relTol=std::nullopt)</argsstring>
+        <argsstring>(ToPhysicalMapping to_physical, SplineBuilder const &amp;builder, SplineEvaluator const &amp;evaluator, ExtrapolationType const extrapolation_rule=ExtrapolationType::NONE, std::optional&lt; int &gt; max_iterations=std::nullopt, std::optional&lt; double &gt; absTol=std::nullopt, std::optional&lt; double &gt; relTol=std::nullopt)</argsstring>
         <name>GMGPolarPoissonLikeSolver</name>
         <qualifiedname>GMGPolarPoissonLikeSolver::GMGPolarPoissonLikeSolver</qualifiedname>
         <param>
@@ -315,6 +329,11 @@
         <param>
           <type>SplineEvaluator const &amp;</type>
           <declname>evaluator</declname>
+        </param>
+        <param>
+          <type>ExtrapolationType const</type>
+          <declname>extrapolation_rule</declname>
+          <defval>ExtrapolationType::NONE</defval>
         </param>
         <param>
           <type>std::optional&lt; int &gt;</type>
@@ -361,6 +380,14 @@
 </parameteritem>
 <parameteritem>
 <parameternamelist>
+<parametername direction="in">extrapolation_rule</parametername>
+</parameternamelist>
+<parameterdescription>
+<para>A parameter to pass extrapolation rule to GMGPolar, default ExtrapolationType::NONE. </para>
+</parameterdescription>
+</parameteritem>
+<parameteritem>
+<parameternamelist>
 <parametername direction="in">max_iterations</parametername>
 </parameternamelist>
 <parameterdescription>
@@ -388,7 +415,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="203" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="203" bodyend="223"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="205" column="5" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="205" bodyend="227"/>
       </memberdef>
       <memberdef kind="function" id="classGMGPolarPoissonLikeSolver_1a56cac7c4dd9d79beaa9f0f02fd5f490f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -429,7 +456,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="230" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="230" bodyend="235"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="234" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="234" bodyend="239"/>
       </memberdef>
       <memberdef kind="function" id="classGMGPolarPoissonLikeSolver_1aa80ab58a29baf81116ecd830853898db" prot="public" static="no" const="yes" explicit="no" inline="yes" virt="non-virtual">
         <type>void</type>
@@ -470,7 +497,7 @@
         </detaileddescription>
         <inbodydescription>
         </inbodydescription>
-        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="243" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="243" bodyend="327"/>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="247" column="10" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="247" bodyend="331"/>
       </memberdef>
     </sectiondef>
     <briefdescription>
@@ -561,11 +588,11 @@
         <link refid="classIPolarPoissonLikeSolver"/>
       </node>
     </collaborationgraph>
-    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="163" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="165" bodyend="328"/>
+    <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" line="163" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/pde_solvers/gmg_polar_poisson_like_solver.hpp" bodystart="165" bodyend="332"/>
     <listofallmembers>
       <member refid="classGMGPolarPoissonLikeSolver_1a02bb87c4ec5e14a1b1d6fe15fdb28389" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>DensityCoeffs</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1a82cc8fe1761227ae7f0966c43d95f014" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>DomainGeometry</name></member>
-      <member refid="classGMGPolarPoissonLikeSolver_1a5eed23393b2a488e744e6d47de6c2b70" prot="public" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>GMGPolarPoissonLikeSolver</name></member>
+      <member refid="classGMGPolarPoissonLikeSolver_1ab1d9f251e68cc5d3440a135cf2fa83b1" prot="public" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>GMGPolarPoissonLikeSolver</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1a9368395b5c86eb23164056a88aa14e72" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>IdxR</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1a052c2a4282ed84e3d104e5e0cef8973b" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>IdxRangeR</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1afa2cecfd14886819581c7dd2f786f368" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>IdxRangeRTheta</name></member>
@@ -580,6 +607,7 @@
       <member refid="classGMGPolarPoissonLikeSolver_1a0e38704eeeba2c93c5614bef2e475708" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>m_density_coeffs</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1a73a92e8bad009795f840be6576540096" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>m_domain_geom</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1a8cbd778c27deaf40c6481a3a3ec6ef72" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>m_evaluator</name></member>
+      <member refid="classGMGPolarPoissonLikeSolver_1aa685c6843479b2e0711d3b6f38a111cd" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>m_extrapolation_rule</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1a4859c418b40e5cfef6111d51763c893a" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>m_max_iterations</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1a4d7dd0293e5261b94c9c8721f137fdfa" prot="private" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>m_relTol</name></member>
       <member refid="classGMGPolarPoissonLikeSolver_1aa80ab58a29baf81116ecd830853898db" prot="public" virt="non-virtual"><scope>GMGPolarPoissonLikeSolver</scope><name>operator()</name></member>

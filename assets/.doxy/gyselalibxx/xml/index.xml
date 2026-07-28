@@ -1391,13 +1391,14 @@
     <member refid="classGMGPolarPoissonLikeSolver_1a73a92e8bad009795f840be6576540096" kind="variable"><name>m_domain_geom</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1a66c711dd2c2a659be61ad156eb30b248" kind="variable"><name>m_builder</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1a8cbd778c27deaf40c6481a3a3ec6ef72" kind="variable"><name>m_evaluator</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1aa685c6843479b2e0711d3b6f38a111cd" kind="variable"><name>m_extrapolation_rule</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1abfea96b98d0ec624cb52108f915addf0" kind="variable"><name>m_coeff_alpha</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1afcc06a38e11f5778f2b959514e6d9ebe" kind="variable"><name>m_coeff_beta</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1a0e38704eeeba2c93c5614bef2e475708" kind="variable"><name>m_density_coeffs</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1a4859c418b40e5cfef6111d51763c893a" kind="variable"><name>m_max_iterations</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1ae43ee21bc1e07d1deb09fa04ec46170c" kind="variable"><name>m_absTol</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1a4d7dd0293e5261b94c9c8721f137fdfa" kind="variable"><name>m_relTol</name></member>
-    <member refid="classGMGPolarPoissonLikeSolver_1a5eed23393b2a488e744e6d47de6c2b70" kind="function"><name>GMGPolarPoissonLikeSolver</name></member>
+    <member refid="classGMGPolarPoissonLikeSolver_1ab1d9f251e68cc5d3440a135cf2fa83b1" kind="function"><name>GMGPolarPoissonLikeSolver</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1a56cac7c4dd9d79beaa9f0f02fd5f490f" kind="function"><name>update_coefficients</name></member>
     <member refid="classGMGPolarPoissonLikeSolver_1aa80ab58a29baf81116ecd830853898db" kind="function"><name>operator()</name></member>
   </compound>
