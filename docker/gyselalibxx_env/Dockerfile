@@ -26,7 +26,7 @@ RUN chmod +x /bin/bash_run \
  && apt-get install -y --no-install-recommends \
     build-essential \
     clang-19 \
-    libomp-dev \
+    libomp-19-dev \
     doxygen \
     pkg-config \
     git \
