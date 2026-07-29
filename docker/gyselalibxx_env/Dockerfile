@@ -25,7 +25,7 @@ RUN chmod +x /bin/bash_run \
  && apt-get update -y \
  && apt-get install -y --no-install-recommends \
     build-essential \
-    clang-19 \
+    clang-21 \
     libomp-19-dev \
     doxygen \
     pkg-config \
@@ -43,8 +43,8 @@ RUN chmod +x /bin/bash_run \
     python3-venv \
     libpdi-dev \
     cmake \
- && ln -sf /usr/bin/clang-19 /usr/bin/clang \
- && ln -sf /usr/bin/clang++-19 /usr/bin/clang++ \
+ && ln -sf /usr/bin/clang-21 /usr/bin/clang \
+ && ln -sf /usr/bin/clang++-21 /usr/bin/clang++ \
  && git clone --branch v1.11.0 --depth 1 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
