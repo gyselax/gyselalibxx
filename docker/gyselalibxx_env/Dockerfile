@@ -45,18 +45,18 @@ RUN chmod +x /bin/bash_run \
     cmake \
  && ln -sf /usr/bin/clang-22 /usr/bin/clang \
  && ln -sf /usr/bin/clang++-22 /usr/bin/clang++ \
- && git clone --branch v1.11.0 --depth 1 https://github.com/ginkgo-project/ginkgo.git \
+ && git clone --branch v1.8.0 --depth 1 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
  && cmake --build build \
  && cmake --install build \
  && cd .. \
  && rm -rf ginkgo \
- && git clone --branch 5.1.1 --depth 1 https://github.com/kokkos/kokkos.git \
- && git clone --branch v1.1.0 --depth 1 https://github.com/kokkos/kokkos-fft.git \
- && git clone --branch 5.1.1 --depth 1 https://github.com/kokkos/kokkos-kernels.git \
+ && git clone --branch 4.7.01 --depth 1 https://github.com/kokkos/kokkos.git \
+ && git clone --branch v0.4.0 --depth 1 https://github.com/kokkos/kokkos-fft.git \
+ && git clone --branch 4.7.01 --depth 1 https://github.com/kokkos/kokkos-kernels.git \
  && git clone --branch develop --depth 1 https://github.com/kokkos/kokkos-tools.git \
- && git clone --branch v0.2.0 --depth 1 https://gitlab.com/cines/code.gysela/libkoliop \
+ && git clone --branch v0.1.2 --depth 1 https://gitlab.com/cines/code.gysela/libkoliop \
  && git clone --branch v0.15.0 --depth 1 https://github.com/CExA-project/ddc.git \
  && git clone --branch v2.3.1 --depth 1 https://github.com/SciCompMod/GMGPolar.git \
  && export Kokkos_ROOT=/opt/serial/Kokkos \
@@ -130,7 +130,7 @@ RUN chmod +x /bin/bash_run \
  && cmake --install build --prefix $GMGPolar_ROOT \
  && rm -rf build \
  && rm -rf kokkos kokkos-fft kokkos-kernels kokkos-tools ddc gmgpolar \
- && git clone --branch v1.17.0 --depth 1 https://github.com/google/googletest.git \
+ && git clone --branch v1.12.1 --depth 1 https://github.com/google/googletest.git \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
  && cmake --build build \
  && cmake --install build --prefix /opt/googletest \
