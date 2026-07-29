@@ -35,6 +35,6 @@ target_link_libraries("initialisation_${GEOMETRY_VARIANT}"
 
 add_library("gslx::initialisation_${GEOMETRY_VARIANT}" ALIAS "initialisation_${GEOMETRY_VARIANT}")
 
-install(TARGETS initialisation_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS initialisation_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/initialisation)
 
 endforeach()

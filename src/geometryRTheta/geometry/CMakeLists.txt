@@ -21,4 +21,4 @@ target_link_libraries("geometry_RTheta" INTERFACE
 )
 add_library("gslx::geometry_RTheta" ALIAS "geometry_RTheta")
 
-install(TARGETS geometry_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS geometry_RTheta EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/geometry)

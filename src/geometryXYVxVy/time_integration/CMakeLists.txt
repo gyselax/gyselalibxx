@@ -29,6 +29,6 @@ target_link_libraries("time_integration_xyvxvy_${PRECISION_VARIANT}"
 
 add_library("gslx::time_integration_xyvxvy_${PRECISION_VARIANT}" ALIAS "time_integration_xyvxvy_${PRECISION_VARIANT}")
 
-install(TARGETS time_integration_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS time_integration_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/time_integration)
 
 endforeach()

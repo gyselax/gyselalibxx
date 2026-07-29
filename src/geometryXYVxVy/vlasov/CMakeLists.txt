@@ -29,6 +29,6 @@ target_link_libraries("vlasov_xyvxvy_${PRECISION_VARIANT}"
 
 add_library("gslx::vlasov_xyvxvy_${PRECISION_VARIANT}" ALIAS "vlasov_xyvxvy_${PRECISION_VARIANT}")
 
-install(TARGETS vlasov_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS vlasov_xyvxvy_${PRECISION_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXYVxVy/vlasov)
 
 endforeach()

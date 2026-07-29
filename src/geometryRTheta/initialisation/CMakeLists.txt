@@ -49,4 +49,4 @@ target_link_libraries(vortex_merger_init_eq
 
 add_library("gslx::vortex_merger_init_eq" ALIAS "vortex_merger_init_eq")
 
-install(TARGETS vortex_merger_init_eq EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS vortex_merger_init_eq EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryRTheta/initialisation)

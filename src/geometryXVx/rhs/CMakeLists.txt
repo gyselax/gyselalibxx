@@ -43,6 +43,6 @@ target_link_libraries("rhs_${GEOMETRY_VARIANT}"
 
 add_library("gslx::rhs_${GEOMETRY_VARIANT}" ALIAS "rhs_${GEOMETRY_VARIANT}")
 
-install(TARGETS rhs_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS rhs_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/rhs)
 
 endforeach()

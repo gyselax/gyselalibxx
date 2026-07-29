@@ -27,4 +27,4 @@ target_link_libraries("initialisation_vparmu"
 
 add_library("gslx::initialisation_vparmu" ALIAS "initialisation_vparmu")
 
-install(TARGETS initialisation_vparmu EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS initialisation_vparmu EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/initialisation)

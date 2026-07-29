@@ -22,4 +22,4 @@ target_link_libraries("predcorr_rk2_xy" INTERFACE
 )
 add_library("gslx::predcorr_rk2_xy" ALIAS "predcorr_rk2_xy")
 
-install(TARGETS predcorr_rk2_xy EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS predcorr_rk2_xy EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXY/time_integration)

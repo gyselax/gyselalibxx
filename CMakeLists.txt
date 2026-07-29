@@ -66,6 +66,9 @@ find_package(GMGPolar 2.3.1 REQUIRED)
 ###############################################################################################
 # Our project code
 
+## Provides CMAKE_INSTALL_<dir> variables
+include(GNUInstallDirs)
+
 set(GEOMETRY_XVx_VARIANTS_LIST xperiod_vx xnonperiod_vx xperiod_vx_user_defined_grid xnonperiod_vx_user_defined_grid)
 set(PRECISION_VARIANTS_LIST float double)
 
@@ -85,7 +88,6 @@ if("${GYSELALIBXX_BUILD_TESTING}")
 endif()
 
 include(CMakePackageConfigHelpers)
-include(GNUInstallDirs)
 
 ## Installation of Config and ConfigVersion files
 

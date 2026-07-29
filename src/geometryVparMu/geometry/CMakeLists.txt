@@ -16,4 +16,4 @@ target_link_libraries("geometry_vparmu" INTERFACE
 )
 add_library("gslx::geometry_vparmu" ALIAS "geometry_vparmu")
 
-install(TARGETS geometry_vparmu EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS geometry_vparmu EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryVparMu/geometry)

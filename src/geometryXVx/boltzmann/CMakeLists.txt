@@ -30,6 +30,6 @@ target_link_libraries("boltzmann_${GEOMETRY_VARIANT}"
 
 add_library("gslx::boltzmann_${GEOMETRY_VARIANT}" ALIAS "boltzmann_${GEOMETRY_VARIANT}")
 
-install(TARGETS boltzmann_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS)
+install(TARGETS boltzmann_${GEOMETRY_VARIANT} EXPORT GyselalibxxTargets FILE_SET HEADERS DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/geometryXVx/boltzmann)
 
 endforeach()
