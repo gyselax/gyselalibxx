@@ -8,7 +8,7 @@ string(STRIP "${GYSELALIBXX_VERSION_STRING}" GYSELALIBXX_VERSION_STRING)
 
 # Set project language and version
 project(gyselalibxx
-    LANGUAGES C CXX
+    LANGUAGES CXX
     VERSION ${GYSELALIBXX_VERSION_STRING})
 
 set_property(GLOBAL PROPERTY GLOBAL_DEPENDS_NO_CYCLES ON)
@@ -48,8 +48,6 @@ find_package(paraconf 1.0.0...<2 REQUIRED COMPONENTS C)
 
 find_package(PDI 1.10.1...<2 REQUIRED COMPONENTS C)
 
-find_package(GTest 1.12 REQUIRED)
-
 find_package(Kokkos 4.4.1...<6 REQUIRED)
 
 find_package(KokkosKernels 4.5.1...<6 REQUIRED)
@@ -83,6 +81,8 @@ endif()
 
 ## if tests are enabled, build the tests in `tests/`
 if("${GYSELALIBXX_BUILD_TESTING}")
+    find_package(GTest 1.12 REQUIRED)
+
     add_subdirectory(tests/)
 endif()
 

@@ -91,6 +91,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Simplify `restrict_to_idx_range` implementation.
 - Rename CMake options `POLAR_SPLINES_TEST_DEGREE_[MIN/MAX]` to `GYSELALIBXX_POLAR_SPLINES_TEST_DEGREE_[MIN/MAX]`.
 - Changed `ExtrapolationRule::RULENAME` from an enum to `ExtrapolationRule::RuleName`, a struct tag in a namespace.
+- Remove the C compiler dependency.
+- Make the dependency on GoogleTest dependent on the CMake option `GYSELALIBXX_BUILD_TESTING`.
 
 ### Deprecated
 
