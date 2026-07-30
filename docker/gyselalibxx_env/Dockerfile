@@ -130,7 +130,7 @@ RUN chmod +x /bin/bash_run \
  && cmake --install build --prefix $GMGPolar_ROOT \
  && rm -rf build \
  && rm -rf kokkos kokkos-fft kokkos-kernels kokkos-tools ddc gmgpolar \
- && git clone --branch v1.12.1 --depth 1 https://github.com/google/googletest.git \
+ && git clone --branch release-1.12.1 --depth 1 https://github.com/google/googletest.git \
  && cmake -DCMAKE_BUILD_TYPE=Release -B build -S googletest \
  && cmake --build build \
  && cmake --install build --prefix /opt/googletest \
