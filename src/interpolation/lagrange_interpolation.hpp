@@ -9,6 +9,8 @@
 #include "lagrange_basis_uniform.hpp"
 #include "lagrange_evaluator.hpp"
 
+namespace detail {
+
 /**
  * @brief An owning interpolation object that bundles a Lagrange builder and evaluator.
  *
@@ -24,11 +26,9 @@
  * @tparam ExecSpace     The Kokkos execution space used for computations.
  * @tparam Basis         The Lagrange basis type (uniform or non-uniform).
  * @tparam InterpGrid    The discrete grid on which function values are provided.
- * @tparam ExtrapRules   A ddc::detail::TypeSeq<MinExtrapRule, MaxExtrapRule> pairing the
- *                       extrapolation rules applied below/above the boundary. Each may
- *                       be one of the tags in the ExtrapolationRule namespace (e.g.
- *                       ExtrapolationRule::Periodic) or a custom, already-concrete
- *                       extrapolation rule class.
+ * @tparam ExtrapRules   A ddc::detail::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> pairing the
+ *                       extrapolation rules applied below/above the boundary. Where
+ *                       MinExtrapolationRule and MaxExtrapolationRule are extrapolation rule classes.
  * @tparam DataType      The floating-point type of the function values (default: double).
  */
 template <
@@ -41,8 +41,8 @@ class LagrangeInterpolator
 {
     using continuous_dimension_type = typename InterpGrid::continuous_dimension_type;
 
-    using MinExtrapRule = ddc::type_seq_element_t<0, ExtrapRules>;
-    using MaxExtrapRule = ddc::type_seq_element_t<1, ExtrapRules>;
+    using MinExtrapolationRule = ddc::type_seq_element_t<0, ExtrapRules>;
+    using MaxExtrapolationRule = ddc::type_seq_element_t<1, ExtrapRules>;
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
@@ -64,16 +64,13 @@ private:
     static_assert(
             is_periodic
             == std::is_same_v<
-                    extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>,
+                    MinExtrapolationRule,
                     ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
     static_assert(
             is_periodic
             == std::is_same_v<
-                    extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType>,
+                    MaxExtrapolationRule,
                     ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
-
-    using MinExtrapolationRule = extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>;
-    using MaxExtrapolationRule = extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType>;
 
 public:
     /// @brief The LagrangeEvaluator type built from the template parameters.
@@ -113,15 +110,16 @@ public:
      *                  unused but is included to match the SplineInterpolator interface.
      */
     explicit LagrangeInterpolator(IdxRange<InterpGrid> idx_range = IdxRange<InterpGrid> {}) requires(
-            is_extrapolation_rule_auto_constructible_v<MinExtrapRule, CoeffGridType, DataType>&&
+            (is_extrapolation_rule_auto_constructible_v<MinExtrapolationRule, CoeffGridType, DataType, Basis>)&&(
                     is_extrapolation_rule_auto_constructible_v<
-                            MaxExtrapRule,
+                            MaxExtrapolationRule,
                             CoeffGridType,
-                            DataType>)
-        : m_min_extrapolation(
-                get_extrapolation<MinExtrapRule, CoeffGridType, DataType, Basis>(Extremity::FRONT))
-        , m_max_extrapolation(
-                  get_extrapolation<MaxExtrapRule, CoeffGridType, DataType, Basis>(Extremity::BACK))
+                            DataType,
+                            Basis>))
+        : m_min_extrapolation(get_extrapolation<MinExtrapolationRule, CoeffGridType, DataType, Basis>(
+                Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<MaxExtrapolationRule, CoeffGridType, DataType, Basis>(
+                  Extremity::BACK))
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
@@ -166,3 +164,37 @@ public:
         return m_evaluator;
     }
 };
+
+} // namespace detail
+
+/**
+ * @brief A helper alias to define an instance of detail::LagrangeInterpolator.
+ *
+ * The helper allows ExtrapRules to be more general. It is a
+ * ddc::detail::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> pairing the
+ * extrapolation rules applied below/above the boundary. Each may
+ * be one of the tags in the ExtrapolationRule namespace (e.g.
+ * ExtrapolationRule::Periodic) or a custom, already-concrete
+ * extrapolation rule class.
+ */
+template <
+        class ExecSpace,
+        class Basis,
+        class InterpGrid,
+        class ExtrapRules,
+        class DataType = double>
+using LagrangeInterpolator = detail::LagrangeInterpolator<
+        ExecSpace,
+        Basis,
+        InterpGrid,
+        extrapolation_rule_t<
+                ExtrapRules,
+                typename IdentityInterpolationBuilder<
+                        ExecSpace,
+                        typename ExecSpace::memory_space,
+                        DataType,
+                        InterpGrid,
+                        Basis>::basis_domain_type,
+                DataType,
+                Basis>,
+        DataType>;
