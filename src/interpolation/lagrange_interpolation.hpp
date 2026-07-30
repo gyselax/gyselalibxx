@@ -116,10 +116,12 @@ public:
                             CoeffGridType,
                             DataType,
                             Basis>))
-        : m_min_extrapolation(get_extrapolation<MinExtrapolationRule, CoeffGridType, DataType, Basis>(
-                Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation<MaxExtrapolationRule, CoeffGridType, DataType, Basis>(
-                  Extremity::BACK))
+        : m_min_extrapolation(
+                get_extrapolation<MinExtrapolationRule, CoeffGridType, DataType, Basis>(
+                        Extremity::FRONT))
+        , m_max_extrapolation(
+                  get_extrapolation<MaxExtrapolationRule, CoeffGridType, DataType, Basis>(
+                          Extremity::BACK))
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }

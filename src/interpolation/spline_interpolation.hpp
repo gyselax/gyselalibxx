@@ -254,4 +254,3 @@ using SplineInterpolator = detail::SplineInterpolator<
         MinBound,
         MaxBound,
         Solver>;
-

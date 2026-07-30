@@ -47,10 +47,16 @@ constexpr bool is_extrapolation_rule_auto_constructible_v
 /// class) to the concrete extrapolation rule class to use for a given Basis/DataType.
 template <class Rule, class CoeffGrid, class DataType, class Basis>
 using extrapolation_rule_t = ddc::detail::TypeSeq<
-        typename details::
-                ExtrapolationRuleResolver<ddc::type_seq_element_t<0, Rule>, CoeffGrid, DataType, Basis>::type,
-        typename details::
-                ExtrapolationRuleResolver<ddc::type_seq_element_t<1, Rule>, CoeffGrid, DataType, Basis>::type>;
+        typename details::ExtrapolationRuleResolver<
+                ddc::type_seq_element_t<0, Rule>,
+                CoeffGrid,
+                DataType,
+                Basis>::type,
+        typename details::ExtrapolationRuleResolver<
+                ddc::type_seq_element_t<1, Rule>,
+                CoeffGrid,
+                DataType,
+                Basis>::type>;
 
 /**
  * @brief Initialise the extrapolation rule.
@@ -72,9 +78,10 @@ Rule get_extrapolation(Extremity extremity)
         } else {
             return Rule(ddc::discrete_space<Basis>().rmax());
         }
-    } else if constexpr (std::is_same_v<
-                                 Rule,
-                                 ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>) {
+    } else if constexpr (
+            std::is_same_v<
+                    Rule,
+                    ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>) {
         if (extremity == Extremity::FRONT) {
             return Rule(ddc::discrete_space<Basis>().full_domain().front());
         } else {
