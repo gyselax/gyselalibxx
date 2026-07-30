@@ -16,7 +16,7 @@ struct ExtrapolationRuleResolver
 /// Specialisation selected via SFINAE when Rule exposes `Rule::type<CoeffGrid, DataType>`
 /// (i.e. Rule is a self-describing tag such as ExtrapolationRule::Periodic) - resolve
 /// through it to obtain the concrete extrapolation rule class.
-template <class Rule, class CoeffGrid, class DataType>
+template <class Rule, class Basis, class DataType>
 struct ExtrapolationRuleResolver<
         Rule,
         CoeffGrid,
@@ -30,7 +30,7 @@ struct ExtrapolationRuleResolver<
 
 /// @brief Resolve Rule (either a self-describing tag or a concrete extrapolation rule
 /// class) to the concrete extrapolation rule class to use for a given CoeffGrid/DataType.
-template <class Rule, class CoeffGrid, class DataType>
+template <class Rule, class Basis, class DataType>
 using extrapolation_rule_t =
         typename details::ExtrapolationRuleResolver<Rule, CoeffGrid, DataType>::type;
 
@@ -38,7 +38,7 @@ using extrapolation_rule_t =
 /// with no extra information: the resolved rule type is default-constructible, or Rule
 /// is the ExtrapolationRule::Constant tag (which get_extrapolation knows how to build
 /// from the boundary of the discrete space).
-template <class Rule, class CoeffGrid, class DataType>
+template <class Rule, class Basis, class DataType>
 constexpr bool is_extrapolation_rule_auto_constructible_v
         = std::is_default_constructible_v<extrapolation_rule_t<
                   Rule,
@@ -60,9 +60,9 @@ extrapolation_rule_t<Rule, CoeffGrid, DataType> get_extrapolation(Extremity extr
     } else if constexpr (std::is_same_v<Rule, ExtrapolationRule::Constant>) {
         if constexpr (is_spline_basis_v<Basis>) {
             if (extremity == Extremity::FRONT) {
-                return RuleType(ddc::discrete_space<CoeffGrid>().rmin());
+                return RuleType(ddc::discrete_space<Basis>().rmin());
             } else {
-                return RuleType(ddc::discrete_space<CoeffGrid>().rmax());
+                return RuleType(ddc::discrete_space<Basis>().rmax());
             }
         } else {
             if (extremity == Extremity::FRONT) {

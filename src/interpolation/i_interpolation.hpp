@@ -102,7 +102,7 @@ namespace ExtrapolationRule {
 struct OneSidedPeriodic
 {
     /// @brief The concrete extrapolation rule class for a given CoeffGrid/DataType.
-    template <class CoeffGrid, class DataType>
+    template <class Basis, class DataType>
     using type = ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
 };
 
@@ -113,7 +113,7 @@ using Periodic = ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
 struct NullValue
 {
     /// @brief The concrete extrapolation rule class for a given CoeffGrid/DataType.
-    template <class CoeffGrid, class DataType>
+    template <class Basis, class DataType>
     using type = ddc::NullExtrapolationRule;
 };
 
@@ -128,11 +128,11 @@ using Null_Null = ddc::detail::TypeSeq<NullValue, NullValue>;
 struct Constant
 {
     /// @brief The concrete extrapolation rule class for a given CoeffGrid/DataType.
-    template <class CoeffGrid, class DataType>
+    template <class Basis, class DataType>
     using type = std::conditional_t<
-            is_spline_basis_v<CoeffGrid>,
-            ddc::ConstantExtrapolationRule<typename CoeffGrid::continuous_dimension_type>,
-            ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>;
+            is_spline_basis_v<Basis>,
+            ddc::ConstantExtrapolationRule<typename Basis::continuous_dimension_type>,
+            ConstantIdentityInterpolationExtrapolationRule<Basis, DataType>>;
 };
 
 /// @brief Convenience pairing of ExtrapolationRule::Constant for both boundaries.
