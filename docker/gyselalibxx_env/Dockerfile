@@ -45,6 +45,8 @@ RUN chmod +x /bin/bash_run \
     cmake \
  && ln -sf /usr/bin/clang-22 /usr/bin/clang \
  && ln -sf /usr/bin/clang++-22 /usr/bin/clang++ \
+ && export CC=clang \
+ && export CXX=clang++ \
  && git clone --branch v1.8.0 --depth 1 https://github.com/ginkgo-project/ginkgo.git \
  && cd ginkgo \
  && cmake -DCMAKE_BUILD_TYPE=Release -DGINKGO_BUILD_TESTS=OFF -DGINKGO_BUILD_EXAMPLES=OFF -DGINKGO_BUILD_BENCHMARKS=OFF -B build \
@@ -59,8 +61,6 @@ RUN chmod +x /bin/bash_run \
  && git clone --branch v0.1.2 --depth 1 https://gitlab.com/cines/code.gysela/libkoliop \
  && git clone --branch v0.15.0 --depth 1 https://github.com/CExA-project/ddc.git \
  && git clone --branch v2.3.1 --depth 1 https://github.com/SciCompMod/GMGPolar.git \
- && export CC=clang \
- && export CXX=clang++ \
  && export Kokkos_ROOT=/opt/serial/Kokkos \
  && export KokkosFFT_ROOT=/opt/serial/KokkosFFT \
  && export KokkosKernels_ROOT=/opt/serial/KokkosKernels \
