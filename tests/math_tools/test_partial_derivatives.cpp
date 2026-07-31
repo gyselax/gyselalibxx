@@ -395,17 +395,16 @@ public:
             ddc::PeriodicExtrapolationRule<Y>,
             ddc::ConstantExtrapolationRule<Y, X>>;
 
-    using SplineEvaluator2D = ddc::SplineEvaluator2D<
+    using SplineEvaluator2D = ddc::SplineEvaluatorND<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesX,
-            BSplinesY,
-            GridX,
-            GridY,
-            XExtrapolationRule,
-            XExtrapolationRule,
-            YExtrapolationRule,
-            YExtrapolationRule>;
+            ddc::detail::TypeSeq<BSplinesX, BSplinesY>,
+            ddc::detail::TypeSeq<GridX, GridY>,
+            ddc::detail::TypeSeq<
+                    XExtrapolationRule,
+                    XExtrapolationRule,
+                    YExtrapolationRule,
+                    YExtrapolationRule>>;
 
     XExtrapolationRule const m_bv_xmin;
     XExtrapolationRule const m_bv_xmax;

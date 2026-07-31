@@ -111,17 +111,16 @@ TEST(PolarSplineTest, ConstantEval)
             ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
-    using EvaluatorRTheta = ddc::SplineEvaluator2D<
+    using EvaluatorRTheta = ddc::SplineEvaluatorND<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::HostSpace,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+            ddc::detail::TypeSeq<GridR, GridTheta>,
+            ddc::detail::TypeSeq<
+                    ddc::NullExtrapolationRule,
+                    ddc::NullExtrapolationRule,
+                    ddc::PeriodicExtrapolationRule<Theta>,
+                    ddc::PeriodicExtrapolationRule<Theta>>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -232,17 +231,16 @@ void test_polar_spline_eval_gpu()
             ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
-    using EvaluatorRTheta = ddc::SplineEvaluator2D<
+    using EvaluatorRTheta = ddc::SplineEvaluatorND<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+            ddc::detail::TypeSeq<GridR, GridTheta>,
+            ddc::detail::TypeSeq<
+                    ddc::NullExtrapolationRule,
+                    ddc::NullExtrapolationRule,
+                    ddc::PeriodicExtrapolationRule<Theta>,
+                    ddc::PeriodicExtrapolationRule<Theta>>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);
@@ -351,17 +349,16 @@ void test_polar_integrals()
             ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
 
-    using EvaluatorRTheta = ddc::SplineEvaluator2D<
+    using EvaluatorRTheta = ddc::SplineEvaluatorND<
             Kokkos::DefaultExecutionSpace,
             Kokkos::DefaultExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+            ddc::detail::TypeSeq<GridR, GridTheta>,
+            ddc::detail::TypeSeq<
+                    ddc::NullExtrapolationRule,
+                    ddc::NullExtrapolationRule,
+                    ddc::PeriodicExtrapolationRule<Theta>,
+                    ddc::PeriodicExtrapolationRule<Theta>>>;
 
     CoordR constexpr r0(0.);
     CoordR constexpr rN(1.);

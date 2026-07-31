@@ -51,29 +51,27 @@ using SplineRThetaBuilder_host = ddc::SplineBuilder2D<
         SplineThetaClosure,
         ddc::SplineSolver::LAPACK>;
 
-using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorConstBound_host = ddc::SplineEvaluatorND<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at r=0
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::ConstantExtrapolationRule<R, Theta>, // boundary at r=0
+                ddc::ConstantExtrapolationRule<R, Theta>, // boundary at rmax
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
-using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorNullBound_host = ddc::SplineEvaluatorND<
         Kokkos::DefaultHostExecutionSpace,
         Kokkos::HostSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::NullExtrapolationRule, // boundary at r=0
+                ddc::NullExtrapolationRule, // boundary at rmax
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
 using SplineRThetaBuilder = ddc::SplineBuilder2D<
         Kokkos::DefaultExecutionSpace,
@@ -88,29 +86,27 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         SplineThetaClosure,
         ddc::SplineSolver::LAPACK>;
 
-using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorConstBound = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at r=0
-        ddc::ConstantExtrapolationRule<R, Theta>, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::ConstantExtrapolationRule<R, Theta>, // boundary at r=0
+                ddc::ConstantExtrapolationRule<R, Theta>, // boundary at rmax
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
-using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule, // boundary at r=0
-        ddc::NullExtrapolationRule, // boundary at rmax
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::NullExtrapolationRule, // boundary at r=0
+                ddc::NullExtrapolationRule, // boundary at rmax
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
 using IdxRangeBSR = IdxRange<BSplinesR>;
 using IdxRangeBSTheta = IdxRange<BSplinesTheta>;

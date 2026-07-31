@@ -13,7 +13,7 @@ namespace detail {
  * @brief An owning interpolation object that bundles a spline builder and evaluator.
  *
  * SplineInterpolator constructs and owns a matching ddc::SplineBuilder and
- * ddc::SplineEvaluator for a given dimension. It satisfies the
+ * ddc::SplineEvaluatorND for a given dimension. It satisfies the
  * concepts::Interpolation concept and is the recommended way to create a
  * spline interpolation for use with advection operators and similar algorithms.
  *
@@ -75,14 +75,13 @@ public:
             MaxBound,
             Solver>;
 
-    /// @brief The ddc::SplineEvaluator type built from the template parameters.
-    using EvaluatorType = ddc::SplineEvaluator<
+    /// @brief The ddc::SplineEvaluatorND type built from the template parameters.
+    using EvaluatorType = ddc::SplineEvaluatorND<
             ExecSpace,
             typename ExecSpace::memory_space,
-            Basis,
-            InterpGrid,
-            MinExtrapolationRule,
-            MaxExtrapolationRule>;
+            ddc::detail::TypeSeq<Basis>,
+            ddc::detail::TypeSeq<InterpGrid>,
+            ddc::detail::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule>>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()

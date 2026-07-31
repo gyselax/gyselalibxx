@@ -87,17 +87,16 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
         SplineThetaClosure,
         ddc::SplineSolver::LAPACK>;
 
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluator = ddc::SplineEvaluatorND<
         Kokkos::DefaultExecutionSpace,
         typename Kokkos::DefaultExecutionSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::ConstantExtrapolationRule<R, Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::ConstantExtrapolationRule<R, Theta>,
+                ddc::ConstantExtrapolationRule<R, Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 
 using SplineInterpPointsR
         = ddc::GrevilleInterpolationPoints<BSplinesR, SplineRClosure, SplineRClosure>;

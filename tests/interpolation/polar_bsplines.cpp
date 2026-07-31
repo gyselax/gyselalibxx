@@ -133,17 +133,16 @@ TYPED_TEST(PolarBsplineFixture, PartitionOfUnity)
             ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineBuilderClosure::PERIODIC,
             ddc::SplineSolver::LAPACK>;
-    using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
+    using SplineRThetaEvaluator = ddc::SplineEvaluatorND<
             Kokkos::DefaultHostExecutionSpace,
             Kokkos::DefaultHostExecutionSpace::memory_space,
-            BSplinesR,
-            BSplinesTheta,
-            GridR,
-            GridTheta,
-            ddc::NullExtrapolationRule,
-            ddc::NullExtrapolationRule,
-            ddc::PeriodicExtrapolationRule<Theta>,
-            ddc::PeriodicExtrapolationRule<Theta>>;
+            ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+            ddc::detail::TypeSeq<GridR, GridTheta>,
+            ddc::detail::TypeSeq<
+                    ddc::NullExtrapolationRule,
+                    ddc::NullExtrapolationRule,
+                    ddc::PeriodicExtrapolationRule<Theta>,
+                    ddc::PeriodicExtrapolationRule<Theta>>>;
     using BSplines = typename TestFixture::BSplines;
     using CoordR = Coord<R>;
     using CoordTheta = Coord<Theta>;

@@ -193,17 +193,16 @@ using SplineRThetaBuilder = ddc::SplineBuilder2D<
 using SplineRThetaBuilder_host = SplineRThetaBuilder<Kokkos::DefaultHostExecutionSpace>;
 
 template <class ExecSpace>
-using SplineRThetaEvaluator = ddc::SplineEvaluator2D<
+using SplineRThetaEvaluator = ddc::SplineEvaluatorND<
         ExecSpace,
         typename ExecSpace::memory_space,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::NullExtrapolationRule,
-        ddc::NullExtrapolationRule,
-        ddc::PeriodicExtrapolationRule<Theta>,
-        ddc::PeriodicExtrapolationRule<Theta>>;
+        ddc::detail::TypeSeq<BSplinesR, BSplinesTheta>,
+        ddc::detail::TypeSeq<GridR, GridTheta>,
+        ddc::detail::TypeSeq<
+                ddc::NullExtrapolationRule,
+                ddc::NullExtrapolationRule,
+                ddc::PeriodicExtrapolationRule<Theta>,
+                ddc::PeriodicExtrapolationRule<Theta>>>;
 using SplineRThetaEvaluator_host = SplineRThetaEvaluator<Kokkos::DefaultHostExecutionSpace>;
 
 using IdxRangeBSR = IdxRange<BSplinesR>;
