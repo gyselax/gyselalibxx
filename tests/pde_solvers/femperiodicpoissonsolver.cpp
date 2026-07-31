@@ -60,7 +60,6 @@ using SplineXInterpolator = SplineInterpolator<
         BSplinesX,
         GridX,
         ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
         ddc::SplineBuilderClosure::PERIODIC,
         ddc::SplineBuilderClosure::PERIODIC>;
 

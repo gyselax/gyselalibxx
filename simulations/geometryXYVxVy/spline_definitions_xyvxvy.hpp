@@ -48,7 +48,6 @@ using SplineInterpolatorY = SplineInterpolator<
         BSplinesY,
         GridY,
         ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
         SplineYClosure,
         SplineYClosure>;
 
@@ -56,8 +55,7 @@ using SplineInterpolatorVy = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVy,
         GridVy,
-        ExtrapolationRule::Constant,
-        ExtrapolationRule::Constant,
+        ExtrapolationRule::Constant_Constant,
         SplineVyClosure,
         SplineVyClosure>;
 
