@@ -373,12 +373,17 @@ public:
      *
      * @param idx_range The 2D interpolation index range passed to the builder.
      */
-    explicit SplineInterpolator2D(IdxRange<InterpGrid1, InterpGrid2> idx_range)
-        requires(
-                is_extrapolation_rule_auto_constructible_v<MinExtrapRule1, Basis1, double> &&
-                is_extrapolation_rule_auto_constructible_v<MaxExtrapRule1, Basis1, double> &&
-                is_extrapolation_rule_auto_constructible_v<MinExtrapRule2, Basis2, double> &&
-                is_extrapolation_rule_auto_constructible_v<MaxExtrapRule2, Basis2, double>)
+    explicit SplineInterpolator2D(IdxRange<InterpGrid1, InterpGrid2> idx_range) requires(
+            is_extrapolation_rule_auto_constructible_v<MinExtrapRule1, Basis1, double>&&
+                    is_extrapolation_rule_auto_constructible_v<MaxExtrapRule1, Basis1, double>&&
+                            is_extrapolation_rule_auto_constructible_v<
+                                    MinExtrapRule2,
+                                    Basis2,
+                                    double>&&
+                                    is_extrapolation_rule_auto_constructible_v<
+                                            MaxExtrapRule2,
+                                            Basis2,
+                                            double>)
         : m_min_extrapolation1(get_extrapolation<MinExtrapRule1, Basis1, double>(Extremity::FRONT))
         , m_max_extrapolation1(get_extrapolation<MaxExtrapRule1, Basis1, double>(Extremity::BACK))
         , m_min_extrapolation2(get_extrapolation<MinExtrapRule2, Basis2, double>(Extremity::FRONT))
