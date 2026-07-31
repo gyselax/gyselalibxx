@@ -29,11 +29,13 @@
 
 
 
-## Classes
+
+
+## Public Types
 
 | Type | Name |
 | ---: | :--- |
-| class | [**SplineInterpolator**](classSplineInterpolator.md) &lt;class ExecSpace, class Basis, class InterpGrid, class MinExtrapRule, class MaxExtrapRule, MinBound, MaxBound, Solver&gt;<br>_An owning interpolation object that bundles a spline builder and evaluator._  |
+| typedef detail::SplineInterpolator&lt; ExecSpace, Basis, InterpGrid, extrapolation\_rule\_t&lt; ExtrapRules, InterpGrid, double, Basis &gt;, MinBound, MaxBound, Solver &gt; | [**SplineInterpolator**](#typedef-splineinterpolator)  <br>_A helper alias to define an instance of detail::SplineInterpolator._  |
 
 
 
@@ -82,8 +84,26 @@
 
 
 
+## Public Types Documentation
 
 
+
+
+### typedef SplineInterpolator 
+
+_A helper alias to define an instance of detail::SplineInterpolator._ 
+```C++
+using SplineInterpolator =  detail::SplineInterpolator< ExecSpace, Basis, InterpGrid, extrapolation_rule_t<ExtrapRules, InterpGrid, double, Basis>, MinBound, MaxBound, Solver>;
+```
+
+
+
+The helper allows ExtrapRules to be more general. It is a ddc::detail::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the [**ExtrapolationRule**](namespaceExtrapolationRule.md) namespace (e.g. [**ExtrapolationRule::Periodic**](namespaceExtrapolationRule.md#typedef-periodic)) or a custom, already-concrete extrapolation rule class. 
+
+
+        
+
+<hr>
 
 ------------------------------
 The documentation for this class was generated from the following file `/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/spline_interpolation.hpp`

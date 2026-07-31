@@ -63,7 +63,7 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **namespace** [**ExtrapolationRule**](namespaceExtrapolationRule.md) _A namespace containing tag types describing how a function is extrapolated outside the interpolation domain._     
     * **struct** [**Constant**](structExtrapolationRule_1_1Constant.md) _Tag selecting constant extrapolation._     
     * **struct** [**NullValue**](structExtrapolationRule_1_1NullValue.md) _Tag selecting null extrapolation: the function evaluates to zero outside the domain._     
-    * **struct** [**Periodic**](structExtrapolationRule_1_1Periodic.md) _Tag selecting periodic extrapolation._     
+    * **struct** [**OneSidedPeriodic**](structExtrapolationRule_1_1OneSidedPeriodic.md) _Tag selecting periodic extrapolation._     
 * **class** [**FEM1DPoissonSolver**](classFEM1DPoissonSolver.md)     
     * **struct** [**GridPDEDimQ**](structFEM1DPoissonSolver_1_1GridPDEDimQ.md) _The grid of quadrature points along the PDEDim direction._ 
     * **struct** [**HiddenFEMBSplines**](structFEM1DPoissonSolver_1_1HiddenFEMBSplines.md) 
@@ -141,7 +141,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**KrookSourceAdaptive**](classKrookSourceAdaptive.md) _A class that describes a source of particles._     
 * **class** [**KrookSourceConstant**](classKrookSourceConstant.md) _A class that describes a source of particles._     
 * **class** [**LagrangeEvaluator**](classLagrangeEvaluator.md) _A class to evaluate, differentiate or integrate a Lagrange function._     
-* **class** [**LagrangeInterpolator**](classLagrangeInterpolator.md) _An owning interpolation object that bundles a Lagrange builder and evaluator._     
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md)     
 * **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._    
 * **class** [**LinearCoordTransform**](classLinearCoordTransform.md) _A class describing a linear coordinate transformation._     
@@ -246,7 +245,6 @@ Here are the classes, structs, unions and interfaces with brief descriptions:
 * **class** [**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md) _A class which stores information necessary to create a pointer to an instance of the_ [_**Spline2DPartialDerivative**_](classSpline2DPartialDerivative.md) _class._    
 * **class** [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) _A class that stores spline builder coefficients and recomputes them when required._     
 * **class** [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md) _[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md) _._    
-* **class** [**SplineInterpolator**](classSplineInterpolator.md) _An owning interpolation object that bundles a spline builder and evaluator._     
 * **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._    
 * **class** [**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md) _A class that solves a Boltzmann equation using Strang's splitting._     
 * **class** [**SplitVlasovSolver**](classSplitVlasovSolver.md) _A class that solves a Vlasov equation using Strang's splitting._     

@@ -577,7 +577,7 @@
 <li><code>#include "lagrange_basis_uniform.hpp"</code></li>
 <li><code>#include "lagrange_evaluator.hpp"</code></li>
 </ul>
-<h2 id="classes">Classes</h2>
+<h2 id="public-types">Public Types</h2>
 <table>
 <thead>
 <tr>
@@ -587,11 +587,19 @@
 </thead>
 <tbody>
 <tr>
-<td style="text-align: right;">class</td>
-<td style="text-align: left;"><a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a> &lt;class ExecSpace, class Basis, class InterpGrid, class MinExtrapRule, class MaxExtrapRule, class DataType&gt;<br><em>An owning interpolation object that bundles a Lagrange builder and evaluator.</em></td>
+<td style="text-align: right;">typedef detail::LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, extrapolation_rule_t&lt; ExtrapRules, typename <a href="classIdentityInterpolationBuilder.html"><strong>IdentityInterpolationBuilder</strong></a>&lt; ExecSpace, typename ExecSpace::memory_space, DataType, InterpGrid, Basis &gt;::basis_domain_type, DataType, Basis &gt;, DataType &gt;</td>
+<td style="text-align: left;"><a href="#typedef-lagrangeinterpolator"><strong>LagrangeInterpolator</strong></a>  <br><em>A helper alias to define an instance of detail::LagrangeInterpolator.</em></td>
 </tr>
 </tbody>
 </table>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-lagrangeinterpolator">typedef LagrangeInterpolator</h3>
+<p><em>A helper alias to define an instance of detail::LagrangeInterpolator.</em> </p>
+<pre><code class="language-C++">using LagrangeInterpolator =  detail::LagrangeInterpolator&lt; ExecSpace, Basis, InterpGrid, extrapolation_rule_t&lt; ExtrapRules, typename IdentityInterpolationBuilder&lt; ExecSpace, typename ExecSpace::memory_space, DataType, InterpGrid, Basis&gt;::basis_domain_type, DataType, Basis&gt;, DataType&gt;;
+</code></pre>
+<p>The helper allows ExtrapRules to be more general. It is a ddc::detail::TypeSeq&lt;MinExtrapolationRule, MaxExtrapolationRule&gt; pairing the extrapolation rules applied below/above the boundary. Each may be one of the tags in the <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> namespace (e.g. <a href="namespaceExtrapolationRule.html#typedef-periodic"><strong>ExtrapolationRule::Periodic</strong></a>) or a custom, already-concrete extrapolation rule class. </p>
+<hr>
+
 <hr>
 <p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/lagrange_interpolation.hpp</code></p></div>
               

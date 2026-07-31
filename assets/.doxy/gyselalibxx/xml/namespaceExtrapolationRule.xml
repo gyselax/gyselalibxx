@@ -4,12 +4,59 @@
     <compoundname>ExtrapolationRule</compoundname>
     <innerclass refid="structExtrapolationRule_1_1Constant" prot="public">ExtrapolationRule::Constant</innerclass>
     <innerclass refid="structExtrapolationRule_1_1NullValue" prot="public">ExtrapolationRule::NullValue</innerclass>
-    <innerclass refid="structExtrapolationRule_1_1Periodic" prot="public">ExtrapolationRule::Periodic</innerclass>
+    <innerclass refid="structExtrapolationRule_1_1OneSidedPeriodic" prot="public">ExtrapolationRule::OneSidedPeriodic</innerclass>
+    <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="namespaceExtrapolationRule_1a58088f206966c61e34f5fc92fcd3ddbe" prot="public" static="no">
+        <type>ddc::detail::TypeSeq&lt; <ref refid="structExtrapolationRule_1_1OneSidedPeriodic" kindref="compound">OneSidedPeriodic</ref>, <ref refid="structExtrapolationRule_1_1OneSidedPeriodic" kindref="compound">OneSidedPeriodic</ref> &gt;</type>
+        <definition>using ExtrapolationRule::Periodic = typedef ddc::detail::TypeSeq&lt;OneSidedPeriodic, OneSidedPeriodic&gt;</definition>
+        <argsstring></argsstring>
+        <name>Periodic</name>
+        <qualifiedname>ExtrapolationRule::Periodic</qualifiedname>
+        <briefdescription>
+<para>Convenience pairing of <ref refid="structExtrapolationRule_1_1OneSidedPeriodic" kindref="compound">ExtrapolationRule::OneSidedPeriodic</ref> for both boundaries. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="110" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="110" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceExtrapolationRule_1a09227876d2442ba8cd05940b5adbd303" prot="public" static="no">
+        <type>ddc::detail::TypeSeq&lt; <ref refid="structExtrapolationRule_1_1NullValue" kindref="compound">NullValue</ref>, <ref refid="structExtrapolationRule_1_1NullValue" kindref="compound">NullValue</ref> &gt;</type>
+        <definition>using ExtrapolationRule::Null_Null = typedef ddc::detail::TypeSeq&lt;NullValue, NullValue&gt;</definition>
+        <argsstring></argsstring>
+        <name>Null_Null</name>
+        <qualifiedname>ExtrapolationRule::Null_Null</qualifiedname>
+        <briefdescription>
+<para>Convenience pairing of <ref refid="structExtrapolationRule_1_1NullValue" kindref="compound">ExtrapolationRule::NullValue</ref> for both boundaries. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="121" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="121" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="namespaceExtrapolationRule_1a394933e226a9432a0c5d7e6992402e0a" prot="public" static="no">
+        <type>ddc::detail::TypeSeq&lt; <ref refid="structExtrapolationRule_1_1Constant" kindref="compound">Constant</ref>, <ref refid="structExtrapolationRule_1_1Constant" kindref="compound">Constant</ref> &gt;</type>
+        <definition>using ExtrapolationRule::Constant_Constant = typedef ddc::detail::TypeSeq&lt;Constant, Constant&gt;</definition>
+        <argsstring></argsstring>
+        <name>Constant_Constant</name>
+        <qualifiedname>ExtrapolationRule::Constant_Constant</qualifiedname>
+        <briefdescription>
+<para>Convenience pairing of <ref refid="structExtrapolationRule_1_1Constant" kindref="compound">ExtrapolationRule::Constant</ref> for both boundaries. </para>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="139" column="1" bodyfile="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" bodystart="139" bodyend="-1"/>
+      </memberdef>
+    </sectiondef>
     <briefdescription>
 <para>A namespace containing tag types describing how a function is extrapolated outside the interpolation domain. </para>
     </briefdescription>
     <detaileddescription>
-<para>Each tag exposes a type alias template that resolves, given the coefficient grid and data type of the interpolator, to the concrete extrapolation rule class to use. This keeps the set of extrapolation rules open for extension: user code may define its own tag following the same pattern, or bypass tags entirely and pass an already-concrete extrapolation rule class directly to <ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref> or <ref refid="classLagrangeInterpolator" kindref="compound">LagrangeInterpolator</ref> (see <ref refid="extrapolation__rule__choice_8hpp_source" kindref="compound">extrapolation_rule_choice.hpp</ref> for the generic resolution mechanism). </para>
+<para>Each tag exposes a type alias template that resolves, given the coefficient grid and data type of the interpolator, to the concrete extrapolation rule class to use. This keeps the set of extrapolation rules open for extension: user code may define its own tag following the same pattern, or bypass tags entirely and pass an already-concrete extrapolation rule class directly to SplineInterpolator or LagrangeInterpolator (see <ref refid="extrapolation__rule__choice_8hpp_source" kindref="compound">extrapolation_rule_choice.hpp</ref> for the generic resolution mechanism). </para>
     </detaileddescription>
     <location file="/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp" line="94" column="1"/>
   </compounddef>

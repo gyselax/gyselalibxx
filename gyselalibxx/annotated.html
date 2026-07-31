@@ -635,7 +635,7 @@
 <li><strong>namespace</strong> <a href="namespaceExtrapolationRule.html"><strong>ExtrapolationRule</strong></a> <em>A namespace containing tag types describing how a function is extrapolated outside the interpolation domain.</em>     <ul>
 <li><strong>struct</strong> <a href="structExtrapolationRule_1_1Constant.html"><strong>Constant</strong></a> <em>Tag selecting constant extrapolation.</em>     </li>
 <li><strong>struct</strong> <a href="structExtrapolationRule_1_1NullValue.html"><strong>NullValue</strong></a> <em>Tag selecting null extrapolation: the function evaluates to zero outside the domain.</em>     </li>
-<li><strong>struct</strong> <a href="structExtrapolationRule_1_1Periodic.html"><strong>Periodic</strong></a> <em>Tag selecting periodic extrapolation.</em>     </li>
+<li><strong>struct</strong> <a href="structExtrapolationRule_1_1OneSidedPeriodic.html"><strong>OneSidedPeriodic</strong></a> <em>Tag selecting periodic extrapolation.</em>     </li>
 </ul>
 </li>
 <li><strong>class</strong> <a href="classFEM1DPoissonSolver.html"><strong>FEM1DPoissonSolver</strong></a>     <ul>
@@ -725,7 +725,6 @@
 <li><strong>class</strong> <a href="classKrookSourceAdaptive.html"><strong>KrookSourceAdaptive</strong></a> <em>A class that describes a source of particles.</em>     </li>
 <li><strong>class</strong> <a href="classKrookSourceConstant.html"><strong>KrookSourceConstant</strong></a> <em>A class that describes a source of particles.</em>     </li>
 <li><strong>class</strong> <a href="classLagrangeEvaluator.html"><strong>LagrangeEvaluator</strong></a> <em>A class to evaluate, differentiate or integrate a Lagrange function.</em>     </li>
-<li><strong>class</strong> <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a> <em>An owning interpolation object that bundles a Lagrange builder and evaluator.</em>     </li>
 <li><strong>class</strong> <a href="classLeviCivitaTensor.html"><strong>LeviCivitaTensor</strong></a>     </li>
 <li><strong>class</strong> <a href="classLiePoissonBracket.html"><strong>LiePoissonBracket</strong></a> <em>A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:</em> <span class="arithmatex">\(\{F, G\} = b\dot(\nabla F \cross \nabla G)\)</span> <em>with</em><span class="arithmatex">\(b= \mathbf{B} / B\)</span> <em>the unitary magnetic field, i.e:</em><span class="arithmatex">\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\)</span> <em>with</em><span class="arithmatex">\({\cal J}_{\rm x}\)</span> <em>the jacobian of the system,</em><span class="arithmatex">\(b_k\)</span> <em>the covariant components of b and</em><span class="arithmatex">\(\epsilon^{ijk}\)</span> <em>the Levi-Civita symbol.</em>    </li>
 <li><strong>class</strong> <a href="classLinearCoordTransform.html"><strong>LinearCoordTransform</strong></a> <em>A class describing a linear coordinate transformation.</em>     </li>
@@ -848,7 +847,6 @@
 <li><strong>class</strong> <a href="classSpline2DPartialDerivativeCreator.html"><strong>Spline2DPartialDerivativeCreator</strong></a> <em>A class which stores information necessary to create a pointer to an instance of the</em> <a href="classSpline2DPartialDerivative.html"><em><strong>Spline2DPartialDerivative</strong></em></a> <em>class.</em>    </li>
 <li><strong>class</strong> <a href="classSplineBuilder2DCache.html"><strong>SplineBuilder2DCache</strong></a> <em>A class that stores spline builder coefficients and recomputes them when required.</em>     </li>
 <li><strong>class</strong> <a href="classSplineBuilderDerivField2D.html"><strong>SplineBuilderDerivField2D</strong></a> <em>[Temporary] Apply a SplineBuilder2D to a</em> <a href="classDerivField.html"><em><strong>DerivField</strong></em></a> <em>.</em>    </li>
-<li><strong>class</strong> <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a> <em>An owning interpolation object that bundles a spline builder and evaluator.</em>     </li>
 <li><strong>class</strong> <a href="classSplinePolarFootFinder.html"><strong>SplinePolarFootFinder</strong></a> <em>A class to find the foot of the characteristics on the</em> <span class="arithmatex">\((r,\theta)\)</span> <em>plane.</em>    </li>
 <li><strong>class</strong> <a href="classSplitRightHandSideSolver.html"><strong>SplitRightHandSideSolver</strong></a> <em>A class that solves a Boltzmann equation using Strang's splitting.</em>     </li>
 <li><strong>class</strong> <a href="classSplitVlasovSolver.html"><strong>SplitVlasovSolver</strong></a> <em>A class that solves a Vlasov equation using Strang's splitting.</em>     </li>

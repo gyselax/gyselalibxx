@@ -8,6 +8,11 @@
 * **apply\_template\_to\_type\_seq\_t** ([**ddcHelper**](namespaceddcHelper.md))
 
 
+## c
+
+* **Constant\_Constant** ([**ExtrapolationRule**](namespaceExtrapolationRule.md))
+
+
 ## e
 
 * **enforce\_first\_interface\_edge\_t** ([**connectivity\_details**](namespaceconnectivity__details.md))
@@ -28,7 +33,13 @@
 
 ## n
 
+* **Null\_Null** ([**ExtrapolationRule**](namespaceExtrapolationRule.md))
 * **non\_repeated\_indices\_t** ([**tensor\_tools**](namespacetensor__tools.md))
+
+
+## p
+
+* **Periodic** ([**ExtrapolationRule**](namespaceExtrapolationRule.md))
 
 
 ## r

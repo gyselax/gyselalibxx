@@ -32,7 +32,7 @@ _Tag selecting constant extrapolation._ [More...](#detailed-description)
 
 | Type | Name |
 | ---: | :--- |
-| typedef std::conditional\_t&lt; is\_spline\_basis\_v&lt; CoeffGrid &gt;, ddc::ConstantExtrapolationRule&lt; typename CoeffGrid::continuous\_dimension\_type &gt;, [**ConstantIdentityInterpolationExtrapolationRule**](classConstantIdentityInterpolationExtrapolationRule.md)&lt; CoeffGrid, DataType &gt; &gt; | [**type**](#typedef-type)  <br>_The concrete extrapolation rule class for a given CoeffGrid/DataType._  |
+| typedef std::conditional\_t&lt; is\_spline\_basis\_v&lt; Basis &gt;, ddc::ConstantExtrapolationRule&lt; typename CoeffGrid::continuous\_dimension\_type &gt;, [**ConstantIdentityInterpolationExtrapolationRule**](classConstantIdentityInterpolationExtrapolationRule.md)&lt; CoeffGrid, DataType &gt; &gt; | [**type**](#typedef-type)  <br>_The concrete extrapolation rule class for a given CoeffGrid/DataType._  |
 
 
 
@@ -97,7 +97,7 @@ The function is clamped to the value at the nearest boundary point.
 
 _The concrete extrapolation rule class for a given CoeffGrid/DataType._ 
 ```C++
-using ExtrapolationRule::Constant::type =  std::conditional_t< is_spline_basis_v<CoeffGrid>, ddc::ConstantExtrapolationRule<typename CoeffGrid::continuous_dimension_type>, ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType> >;
+using ExtrapolationRule::Constant::type =  std::conditional_t< is_spline_basis_v<Basis>, ddc::ConstantExtrapolationRule<typename CoeffGrid::continuous_dimension_type>, ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType> >;
 ```
 
 

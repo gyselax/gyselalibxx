@@ -45,7 +45,7 @@
 | ---: | :--- |
 | struct | [**Constant**](structExtrapolationRule_1_1Constant.md) <br>_Tag selecting constant extrapolation._  |
 | struct | [**NullValue**](structExtrapolationRule_1_1NullValue.md) <br>_Tag selecting null extrapolation: the function evaluates to zero outside the domain._  |
-| struct | [**Periodic**](structExtrapolationRule_1_1Periodic.md) <br>_Tag selecting periodic extrapolation._  |
+| struct | [**OneSidedPeriodic**](structExtrapolationRule_1_1OneSidedPeriodic.md) <br>_Tag selecting periodic extrapolation._  |
 
 
 

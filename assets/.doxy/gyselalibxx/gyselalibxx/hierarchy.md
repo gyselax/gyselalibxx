@@ -118,7 +118,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**InverseJacobianMatrix**](classInverseJacobianMatrix.md) 
 * **class** [**KelvinHelmholtzInstabilityInitialisation**](classKelvinHelmholtzInstabilityInitialisation.md) _Initialise the allfdistribu function._ 
 * **class** [**LagrangeEvaluator**](classLagrangeEvaluator.md) _A class to evaluate, differentiate or integrate a Lagrange function._ 
-* **class** [**LagrangeInterpolator**](classLagrangeInterpolator.md) _An owning interpolation object that bundles a Lagrange builder and evaluator._ 
 * **class** [**LeviCivitaTensor**](classLeviCivitaTensor.md) 
 * **class** [**LiePoissonBracket**](classLiePoissonBracket.md) _A class which implements a gyrokinetic Poisson bracket operator. The implemented equation is:_ \(\{F, G\} = b\dot(\nabla F \cross \nabla G)\) _with_\(b= \mathbf{B} / B\) _the unitary magnetic field, i.e:_\(\{F, G\} = {\cal J}_{\rm x}^{-1}\epsilon^{ijk}\partial_{x^i} F \partial_{x^j} G b_k\) _with_\({\cal J}_{\rm x}\) _the jacobian of the system,_\(b_k\) _the covariant components of b and_\(\epsilon^{ijk}\) _the Levi-Civita symbol._
 * **class** [**LinearCoordTransform**](classLinearCoordTransform.md) _A class describing a linear coordinate transformation._ 
@@ -172,7 +171,6 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **class** [**SpeciesInformation::Impl**](classSpeciesInformation_1_1Impl.md) [_**Impl**_](classSpeciesInformation_1_1Impl.md) _object storing attributes in_`MemorySpace` _._
 * **class** [**SplineBuilder2DCache**](classSplineBuilder2DCache.md) _A class that stores spline builder coefficients and recomputes them when required._ 
 * **class** [**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md) _[Temporary] Apply a SplineBuilder2D to a_ [_**DerivField**_](classDerivField.md) _._
-* **class** [**SplineInterpolator**](classSplineInterpolator.md) _An owning interpolation object that bundles a spline builder and evaluator._ 
 * **class** [**SplinePolarFootFinder**](classSplinePolarFootFinder.md) _A class to find the foot of the characteristics on the_ \((r,\theta)\) _plane._
 * **class** [**TensorCommon**](classTensorCommon.md) _A superclass for_ [_**Tensor**_](classTensor.md) _calculations._[_**Tensor**_](classTensor.md) _classes containing data will inherit from this class. The class_[_**Tensor**_](classTensor.md) _will represent most Tensors but other subclasses may be necessary (e.g. to access a Vector in a_[_**VectorField**_](classVectorField.md) _)._
 * **class** [**ToroidalToCylindrical**](classToroidalToCylindrical.md) _A class describing a coordinate change from a toroidal system of coordinates to a cylindrical system of coordinates. The toroidal coordinates are described by a polar plane_ \((\rho, \theta)\) _and a perpendicular dimension_\(\phi\) _. The cylindrical coordinates are_\((R, Z, \zeta)\) _._\((R, Z)\) _describe a Cartesian slice._\((\rho, \theta)\) _are therefore defined from this slice with a 2D coordinate change operator._\(\zeta\) _is chosen to be equal to_\(-\phi\) _to preserve the orientation of the axes (following the right-hand rule)._
@@ -197,7 +195,7 @@ This inheritance list is sorted roughly, but not completely, alphabetically:
 * **struct** [**Edge**](structEdge.md) _Define an edge of a given patch._ 
 * **struct** [**ExtrapolationRule::Constant**](structExtrapolationRule_1_1Constant.md) _Tag selecting constant extrapolation._ 
 * **struct** [**ExtrapolationRule::NullValue**](structExtrapolationRule_1_1NullValue.md) _Tag selecting null extrapolation: the function evaluates to zero outside the domain._ 
-* **struct** [**ExtrapolationRule::Periodic**](structExtrapolationRule_1_1Periodic.md) _Tag selecting periodic extrapolation._ 
+* **struct** [**ExtrapolationRule::OneSidedPeriodic**](structExtrapolationRule_1_1OneSidedPeriodic.md) _Tag selecting periodic extrapolation._ 
 * **struct** [**FluidMoments::MomentDensity**](structFluidMoments_1_1MomentDensity.md) 
 * **struct** [**FluidMoments::MomentTemperature**](structFluidMoments_1_1MomentTemperature.md) 
 * **struct** [**FluidMoments::MomentVelocity**](structFluidMoments_1_1MomentVelocity.md) 

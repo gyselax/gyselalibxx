@@ -17,19 +17,23 @@
 #include "ddc_aliases.hpp"
 #include "extrapolation_rule_choice.hpp"
 
+namespace detail {
+
 template <
         class ExecSpace,
         class Basis,
         class InterpGrid,
-        class MinExtrapRule,
-        class MaxExtrapRule,
+        class ExtrapRules,
         ddc::SplineBuilderClosure MinBound,
         ddc::SplineBuilderClosure MaxBound,
-        ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
+        ddc::SplineSolver Solver>
 class SplineInterpolator
 {
 private:
     using continuous_dimension_type = typename InterpGrid::continuous_dimension_type;
+
+    using MinExtrapolationRule = ddc::type_seq_element_t<0, ExtrapRules>;
+    using MaxExtrapolationRule = ddc::type_seq_element_t<1, ExtrapRules>;
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
@@ -38,18 +42,15 @@ private:
     static_assert(
             is_periodic
             == std::is_same_v<
-                    extrapolation_rule_t<MinExtrapRule, Basis, double>,
+                    MinExtrapolationRule,
                     ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
     static_assert(
             is_periodic
             == std::is_same_v<
-                    extrapolation_rule_t<MaxExtrapRule, Basis, double>,
+                    MaxExtrapolationRule,
                     ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
 
     static_assert(is_spline_basis_v<Basis>);
-
-    using MinExtrapolationRule = extrapolation_rule_t<MinExtrapRule, Basis, double>;
-    using MaxExtrapolationRule = extrapolation_rule_t<MaxExtrapRule, Basis, double>;
 
 public:
     using BuilderType = ddc::SplineBuilder<
@@ -82,19 +83,39 @@ private:
 
 public:
     explicit SplineInterpolator(std::string const& label, IdxRange<InterpGrid> idx_range) requires(
-            is_extrapolation_rule_auto_constructible_v<MinExtrapRule, Basis, double>&&
-                    is_extrapolation_rule_auto_constructible_v<MaxExtrapRule, Basis, double>)
-        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis, double>(Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis, double>(Extremity::BACK))
+            is_extrapolation_rule_auto_constructible_v<
+                    MinExtrapolationRule,
+                    InterpGrid,
+                    double,
+                    Basis>&&
+                    is_extrapolation_rule_auto_constructible_v<
+                            MaxExtrapolationRule,
+                            InterpGrid,
+                            double,
+                            Basis>)
+        : m_min_extrapolation(
+                get_extrapolation<MinExtrapolationRule, Basis, double>(Extremity::FRONT))
+        , m_max_extrapolation(
+                  get_extrapolation<MaxExtrapolationRule, Basis, double>(Extremity::BACK))
         , m_builder(label, idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
     explicit SplineInterpolator(IdxRange<InterpGrid> idx_range) requires(
-            is_extrapolation_rule_auto_constructible_v<MinExtrapRule, Basis, double>&&
-                    is_extrapolation_rule_auto_constructible_v<MaxExtrapRule, Basis, double>)
-        : m_min_extrapolation(get_extrapolation<MinExtrapRule, Basis, double>(Extremity::FRONT))
-        , m_max_extrapolation(get_extrapolation<MaxExtrapRule, Basis, double>(Extremity::BACK))
+            is_extrapolation_rule_auto_constructible_v<
+                    MinExtrapolationRule,
+                    InterpGrid,
+                    double,
+                    Basis>&&
+                    is_extrapolation_rule_auto_constructible_v<
+                            MaxExtrapolationRule,
+                            InterpGrid,
+                            double,
+                            Basis>)
+        : m_min_extrapolation(get_extrapolation<MinExtrapolationRule, InterpGrid, double, Basis>(
+                Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<MaxExtrapolationRule, InterpGrid, double, Basis>(
+                  Extremity::BACK))
         , m_builder(idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
@@ -133,6 +154,25 @@ public:
         return m_evaluator;
     }
 };
+
+} // namespace detail
+
+template <
+        class ExecSpace,
+        class Basis,
+        class InterpGrid,
+        class ExtrapRules,
+        ddc::SplineBuilderClosure MinBound,
+        ddc::SplineBuilderClosure MaxBound,
+        ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
+using SplineInterpolator = detail::SplineInterpolator<
+        ExecSpace,
+        Basis,
+        InterpGrid,
+        extrapolation_rule_t<ExtrapRules, InterpGrid, double, Basis>,
+        MinBound,
+        MaxBound,
+        Solver>;
 ```
 
 

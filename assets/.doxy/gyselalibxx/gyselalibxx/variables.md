@@ -443,6 +443,7 @@
 
 * **local\_idx\_range\_r\_offset** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
 * **local\_idx\_range\_theta\_offset** ([**collision\_operator.cpp**](collision__operator_8cpp.md))
+* **LagrangeInterpolator** ([**lagrange\_interpolation.hpp**](lagrange__interpolation_8hpp.md))
 
 
 ## m
@@ -493,6 +494,7 @@
 * **SplineRThetaEvaluatorNullBound** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **SplineRThetaEvaluatorNullBound\_host** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
 * **SplineThetaClosure** ([**spline\_definitions\_r\_theta.hpp**](spline__definitions__r__theta_8hpp.md))
+* **SplineInterpolator** ([**spline\_interpolation.hpp**](spline__interpolation_8hpp.md))
 * **strip\_outside\_edges\_t** ([**connectivity\_details.hpp**](connectivity__details_8hpp.md))
 * **SplineCoeff1OnPatch\_1D** ([**types.hpp**](types_8hpp.md))
 * **SplineCoeff1OnPatch\_2D** ([**types.hpp**](types_8hpp.md))

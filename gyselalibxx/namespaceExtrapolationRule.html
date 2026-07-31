@@ -588,12 +588,54 @@
 </tr>
 <tr>
 <td style="text-align: right;">struct</td>
-<td style="text-align: left;"><a href="structExtrapolationRule_1_1Periodic.html"><strong>Periodic</strong></a> <br><em>Tag selecting periodic extrapolation.</em></td>
+<td style="text-align: left;"><a href="structExtrapolationRule_1_1OneSidedPeriodic.html"><strong>OneSidedPeriodic</strong></a> <br><em>Tag selecting periodic extrapolation.</em></td>
+</tr>
+</tbody>
+</table>
+<h2 id="public-types">Public Types</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Type</th>
+<th style="text-align: left;">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; <a href="structExtrapolationRule_1_1Constant.html"><strong>Constant</strong></a>, <a href="structExtrapolationRule_1_1Constant.html"><strong>Constant</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-constant_constant"><strong>Constant_Constant</strong></a>  <br><em>Convenience pairing of</em> <a href="structExtrapolationRule_1_1Constant.html"><em><strong>ExtrapolationRule::Constant</strong></em></a> <em>for both boundaries.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; <a href="structExtrapolationRule_1_1NullValue.html"><strong>NullValue</strong></a>, <a href="structExtrapolationRule_1_1NullValue.html"><strong>NullValue</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-null_null"><strong>Null_Null</strong></a>  <br><em>Convenience pairing of</em> <a href="structExtrapolationRule_1_1NullValue.html"><em><strong>ExtrapolationRule::NullValue</strong></em></a> <em>for both boundaries.</em></td>
+</tr>
+<tr>
+<td style="text-align: right;">typedef ddc::detail::TypeSeq&lt; <a href="structExtrapolationRule_1_1OneSidedPeriodic.html"><strong>OneSidedPeriodic</strong></a>, <a href="structExtrapolationRule_1_1OneSidedPeriodic.html"><strong>OneSidedPeriodic</strong></a> &gt;</td>
+<td style="text-align: left;"><a href="#typedef-periodic"><strong>Periodic</strong></a>  <br><em>Convenience pairing of</em> <a href="structExtrapolationRule_1_1OneSidedPeriodic.html"><em><strong>ExtrapolationRule::OneSidedPeriodic</strong></em></a> <em>for both boundaries.</em></td>
 </tr>
 </tbody>
 </table>
 <h2 id="detailed-description">Detailed Description</h2>
-<p>Each tag exposes a type alias template that resolves, given the coefficient grid and data type of the interpolator, to the concrete extrapolation rule class to use. This keeps the set of extrapolation rules open for extension: user code may define its own tag following the same pattern, or bypass tags entirely and pass an already-concrete extrapolation rule class directly to <a href="classSplineInterpolator.html"><strong>SplineInterpolator</strong></a> or <a href="classLagrangeInterpolator.html"><strong>LagrangeInterpolator</strong></a> (see extrapolation_rule_choice.hpp for the generic resolution mechanism). </p>
+<p>Each tag exposes a type alias template that resolves, given the coefficient grid and data type of the interpolator, to the concrete extrapolation rule class to use. This keeps the set of extrapolation rules open for extension: user code may define its own tag following the same pattern, or bypass tags entirely and pass an already-concrete extrapolation rule class directly to SplineInterpolator or LagrangeInterpolator (see extrapolation_rule_choice.hpp for the generic resolution mechanism). </p>
+<h2 id="public-types-documentation">Public Types Documentation</h2>
+<h3 id="typedef-constant_constant">typedef Constant_Constant</h3>
+<p><em>Convenience pairing of</em> <a href="structExtrapolationRule_1_1Constant.html"><em><strong>ExtrapolationRule::Constant</strong></em></a> <em>for both boundaries.</em></p>
+<pre><code class="language-C++">using ExtrapolationRule::Constant_Constant = typedef ddc::detail::TypeSeq&lt;Constant, Constant&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-null_null">typedef Null_Null</h3>
+<p><em>Convenience pairing of</em> <a href="structExtrapolationRule_1_1NullValue.html"><em><strong>ExtrapolationRule::NullValue</strong></em></a> <em>for both boundaries.</em></p>
+<pre><code class="language-C++">using ExtrapolationRule::Null_Null = typedef ddc::detail::TypeSeq&lt;NullValue, NullValue&gt;;
+</code></pre>
+<hr>
+
+<h3 id="typedef-periodic">typedef Periodic</h3>
+<p><em>Convenience pairing of</em> <a href="structExtrapolationRule_1_1OneSidedPeriodic.html"><em><strong>ExtrapolationRule::OneSidedPeriodic</strong></em></a> <em>for both boundaries.</em></p>
+<pre><code class="language-C++">using ExtrapolationRule::Periodic = typedef ddc::detail::TypeSeq&lt;OneSidedPeriodic, OneSidedPeriodic&gt;;
+</code></pre>
+<hr>
+
 <hr>
 <p>The documentation for this class was generated from the following file <code>/home/runner/work/gyselalibxx/gyselalibxx/code_branch/src/interpolation/i_interpolation.hpp</code></p></div>
               

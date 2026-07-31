@@ -220,8 +220,6 @@
 * **GyroAverageOperator** ([**GyroAverageOperator**](classGyroAverageOperator.md))
 * **get\_amplitudes** ([**KrookSourceAdaptive**](classKrookSourceAdaptive.md))
 * **getclosest** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
-* **get\_builder** ([**LagrangeInterpolator**](classLagrangeInterpolator.md), [**SplineInterpolator**](classSplineInterpolator.md))
-* **get\_evaluator** ([**LagrangeInterpolator**](classLagrangeInterpolator.md), [**SplineInterpolator**](classSplineInterpolator.md))
 * **get\_distribution** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **get\_local\_idx\_range** ([**MPITransposeAllToAll**](classMPITransposeAllToAll.md))
 * **get\_conforming\_idx\_vector** ([**MatchingIdxSlice**](classMatchingIdxSlice.md))
@@ -315,7 +313,6 @@
 
 * **LagrangeEvaluator** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
 * **lower\_extrapolation\_rule** ([**LagrangeEvaluator**](classLagrangeEvaluator.md))
-* **LagrangeInterpolator** ([**LagrangeInterpolator**](classLagrangeInterpolator.md))
 * **LeviCivitaTensor** ([**LeviCivitaTensor**](classLeviCivitaTensor.md))
 * **LiePoissonBracket** ([**LiePoissonBracket**](classLiePoissonBracket.md))
 * **LinearCoordTransform** ([**LinearCoordTransform**](classLinearCoordTransform.md))
@@ -413,7 +410,7 @@
 
 ## r
 
-* **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md), [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md), [**InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;**](structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c.md), [**LagrangeInterpolator**](classLagrangeInterpolator.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**SplineInterpolator**](classSplineInterpolator.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
+* **rank** ([**CartesianLeviCivitaTensor**](classCartesianLeviCivitaTensor.md), [**IdentityTensor**](classIdentityTensor.md), [**InterpolationBuilderTraits**](structInterpolationBuilderTraits.md), [**InterpolationBuilderTraits&lt; ddc::SplineBuilder&lt; ExecSpace, MemorySpace, BSplines, InterpolationDDim, SBCLower, SBCUpper, Solver &gt; &gt;**](structInterpolationBuilderTraits_3_01ddc_1_1SplineBuilder_3_01ExecSpace_00_01MemorySpace_00_01BS04e46d553625cfb48b00fa941a11f2b1.md), [**InterpolationEvaluatorTraits**](structInterpolationEvaluatorTraits.md), [**InterpolationEvaluatorTraits&lt; ddc::SplineEvaluator&lt; ExecSpace, MemorySpace, BSplines, EvaluationDDim, LowerExtrapolationRule, UpperExtrapolationRule &gt; &gt;**](structInterpolationEvaluatorTraits_3_01ddc_1_1SplineEvaluator_3_01ExecSpace_00_01MemorySpace_00_d1b6a95c83b6477a5bf82cab0b04af1c.md), [**LeviCivitaTensor**](classLeviCivitaTensor.md), [**TensorCommon**](classTensorCommon.md), [**TriangularBernsteinPolynomialBasis**](classTriangularBernsteinPolynomialBasis.md))
 * **recursive\_dispatch\_patch\_function** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **replace\_periodic\_coord\_inside** ([**MultipatchSplineEvaluator2D**](classMultipatchSplineEvaluator2D.md))
 * **rmax** ([**NonUniformLagrangeBasis::Impl**](classNonUniformLagrangeBasis_1_1Impl.md), [**UniformLagrangeBasis::Impl**](classUniformLagrangeBasis_1_1Impl.md))
@@ -465,7 +462,6 @@
 * **Spline2DPartialDerivativeCreator** ([**Spline2DPartialDerivativeCreator**](classSpline2DPartialDerivativeCreator.md))
 * **SplineBuilder2DCache** ([**SplineBuilder2DCache**](classSplineBuilder2DCache.md))
 * **SplineBuilderDerivField2D** ([**SplineBuilderDerivField2D**](classSplineBuilderDerivField2D.md))
-* **SplineInterpolator** ([**SplineInterpolator**](classSplineInterpolator.md))
 * **SplinePolarFootFinder** ([**SplinePolarFootFinder**](classSplinePolarFootFinder.md))
 * **SplitRightHandSideSolver** ([**SplitRightHandSideSolver**](classSplitRightHandSideSolver.md))
 * **SplitVlasovSolver** ([**SplitVlasovSolver**](classSplitVlasovSolver.md))

@@ -19,16 +19,20 @@
 #include "lagrange_basis_uniform.hpp"
 #include "lagrange_evaluator.hpp"
 
+namespace detail {
+
 template <
         class ExecSpace,
         class Basis,
         class InterpGrid,
-        class MinExtrapRule,
-        class MaxExtrapRule,
+        class ExtrapRules,
         class DataType = double>
 class LagrangeInterpolator
 {
     using continuous_dimension_type = typename InterpGrid::continuous_dimension_type;
+
+    using MinExtrapolationRule = ddc::type_seq_element_t<0, ExtrapRules>;
+    using MaxExtrapolationRule = ddc::type_seq_element_t<1, ExtrapRules>;
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
@@ -48,16 +52,13 @@ private:
     static_assert(
             is_periodic
             == std::is_same_v<
-                    extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>,
+                    MinExtrapolationRule,
                     ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
     static_assert(
             is_periodic
             == std::is_same_v<
-                    extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType>,
+                    MaxExtrapolationRule,
                     ddc::PeriodicExtrapolationRule<continuous_dimension_type>>);
-
-    using MinExtrapolationRule = extrapolation_rule_t<MinExtrapRule, CoeffGridType, DataType>;
-    using MaxExtrapolationRule = extrapolation_rule_t<MaxExtrapRule, CoeffGridType, DataType>;
 
 public:
     using EvaluatorType = LagrangeEvaluator<
@@ -82,15 +83,18 @@ private:
 
 public:
     explicit LagrangeInterpolator(IdxRange<InterpGrid> idx_range = IdxRange<InterpGrid> {}) requires(
-            is_extrapolation_rule_auto_constructible_v<MinExtrapRule, CoeffGridType, DataType>&&
+            (is_extrapolation_rule_auto_constructible_v<MinExtrapolationRule, CoeffGridType, DataType, Basis>)&&(
                     is_extrapolation_rule_auto_constructible_v<
-                            MaxExtrapRule,
+                            MaxExtrapolationRule,
                             CoeffGridType,
-                            DataType>)
+                            DataType,
+                            Basis>))
         : m_min_extrapolation(
-                get_extrapolation<MinExtrapRule, CoeffGridType, DataType, Basis>(Extremity::FRONT))
+                get_extrapolation<MinExtrapolationRule, CoeffGridType, DataType, Basis>(
+                        Extremity::FRONT))
         , m_max_extrapolation(
-                  get_extrapolation<MaxExtrapRule, CoeffGridType, DataType, Basis>(Extremity::BACK))
+                  get_extrapolation<MaxExtrapolationRule, CoeffGridType, DataType, Basis>(
+                          Extremity::BACK))
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
     }
@@ -115,6 +119,30 @@ public:
         return m_evaluator;
     }
 };
+
+} // namespace detail
+
+template <
+        class ExecSpace,
+        class Basis,
+        class InterpGrid,
+        class ExtrapRules,
+        class DataType = double>
+using LagrangeInterpolator = detail::LagrangeInterpolator<
+        ExecSpace,
+        Basis,
+        InterpGrid,
+        extrapolation_rule_t<
+                ExtrapRules,
+                typename IdentityInterpolationBuilder<
+                        ExecSpace,
+                        typename ExecSpace::memory_space,
+                        DataType,
+                        InterpGrid,
+                        Basis>::basis_domain_type,
+                DataType,
+                Basis>,
+        DataType>;
 ```
 
 

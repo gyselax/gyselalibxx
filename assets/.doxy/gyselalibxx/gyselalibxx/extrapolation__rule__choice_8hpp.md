@@ -33,7 +33,7 @@
 
 | Type | Name |
 | ---: | :--- |
-| typedef typename details::ExtrapolationRuleResolver&lt; Rule, CoeffGrid, DataType &gt;::type | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br>_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given CoeffGrid/DataType._  |
+| typedef ddc::detail::TypeSeq&lt; typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 0, Rule &gt;, CoeffGrid, DataType, Basis &gt;::type, typename details::ExtrapolationRuleResolver&lt; ddc::type\_seq\_element\_t&lt; 1, Rule &gt;, CoeffGrid, DataType, Basis &gt;::type &gt; | [**extrapolation\_rule\_t**](#typedef-extrapolation_rule_t)  <br>_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._  |
 
 
 
@@ -63,7 +63,7 @@
 
 | Type | Name |
 | ---: | :--- |
-|  extrapolation\_rule\_t&lt; Rule, CoeffGrid, DataType &gt; | [**get\_extrapolation**](#function-get_extrapolation) (Extremity extremity) <br>_Initialise the extrapolation rule._  |
+|  Rule | [**get\_extrapolation**](#function-get_extrapolation) (Extremity extremity) <br>_Initialise the extrapolation rule._  |
 
 
 
@@ -99,9 +99,9 @@
 
 ### typedef extrapolation\_rule\_t 
 
-_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given CoeffGrid/DataType._ 
+_Resolve Rule (either a self-describing tag or a concrete extrapolation rule class) to the concrete extrapolation rule class to use for a given Basis/DataType._ 
 ```C++
-using extrapolation_rule_t =  typename details::ExtrapolationRuleResolver<Rule, CoeffGrid, DataType>::type;
+using extrapolation_rule_t =  ddc::detail::TypeSeq< typename details::ExtrapolationRuleResolver< ddc::type_seq_element_t<0, Rule>, CoeffGrid, DataType, Basis>::type, typename details::ExtrapolationRuleResolver< ddc::type_seq_element_t<1, Rule>, CoeffGrid, DataType, Basis>::type>;
 ```
 
 
@@ -134,7 +134,7 @@ constexpr bool is_extrapolation_rule_auto_constructible_v;
 _Initialise the extrapolation rule._ 
 ```C++
 template<class Rule, class CoeffGrid, class DataType, class Basis>
-extrapolation_rule_t< Rule, CoeffGrid, DataType > get_extrapolation (
+Rule get_extrapolation (
     Extremity extremity
 ) 
 ```

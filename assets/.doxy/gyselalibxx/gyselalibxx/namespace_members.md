@@ -13,6 +13,7 @@
 
 ## c
 
+* **Constant\_Constant** ([**ExtrapolationRule**](namespaceExtrapolationRule.md))
 * **create\_mirror\_view\_and\_copy** ([**ddcHelper**](namespaceddcHelper.md))
 * **create\_transpose\_mirror** ([**ddcHelper**](namespaceddcHelper.md))
 * **create\_transpose\_mirror\_view\_and\_copy** ([**ddcHelper**](namespaceddcHelper.md))
@@ -63,11 +64,13 @@
 
 ## n
 
+* **Null\_Null** ([**ExtrapolationRule**](namespaceExtrapolationRule.md))
 * **non\_repeated\_indices\_t** ([**tensor\_tools**](namespacetensor__tools.md))
 
 
 ## p
 
+* **Periodic** ([**ExtrapolationRule**](namespaceExtrapolationRule.md))
 * **PresentErrorExplanation** ([**gslx::error**](namespacegslx_1_1error.md))
 
 

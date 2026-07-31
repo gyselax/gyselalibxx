@@ -34,7 +34,7 @@ concept <ref refid="conceptconcepts_1_1Interpolation" kindref="compound">concept
     </briefdescription>
     <detaileddescription>
 <para>An Interpolation bundles a builder (which converts function values on the interpolation mesh into interpolation coefficients) and an evaluator (which reconstructs function values from those coefficients) into a single owning object.</para>
-<para>Concrete models include <ref refid="classSplineInterpolator" kindref="compound">SplineInterpolator</ref> and <ref refid="classLagrangeInterpolator" kindref="compound">LagrangeInterpolator</ref>.</para>
+<para>Concrete models include SplineInterpolator and LagrangeInterpolator.</para>
 <para><parameterlist kind="templateparam"><parameteritem>
 <parameternamelist>
 <parametername>T</parametername>

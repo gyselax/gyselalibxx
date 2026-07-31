@@ -620,26 +620,32 @@ constexpr bool is_spline_basis_v
 
 namespace ExtrapolationRule {
 
-struct Periodic
+struct OneSidedPeriodic
 {
-    template &lt;class CoeffGrid, class DataType&gt;
+    template &lt;class CoeffGrid, class DataType, class Basis&gt;
     using type = ddc::PeriodicExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;;
 };
 
+using Periodic = ddc::detail::TypeSeq&lt;OneSidedPeriodic, OneSidedPeriodic&gt;;
+
 struct NullValue
 {
-    template &lt;class CoeffGrid, class DataType&gt;
+    template &lt;class CoeffGrid, class DataType, class Basis&gt;
     using type = ddc::NullExtrapolationRule;
 };
 
+using Null_Null = ddc::detail::TypeSeq&lt;NullValue, NullValue&gt;;
+
 struct Constant
 {
-    template &lt;class CoeffGrid, class DataType&gt;
+    template &lt;class CoeffGrid, class DataType, class Basis&gt;
     using type = std::conditional_t&lt;
-            is_spline_basis_v&lt;CoeffGrid&gt;,
+            is_spline_basis_v&lt;Basis&gt;,
             ddc::ConstantExtrapolationRule&lt;typename CoeffGrid::continuous_dimension_type&gt;,
             ConstantIdentityInterpolationExtrapolationRule&lt;CoeffGrid, DataType&gt;&gt;;
 };
+
+using Constant_Constant = ddc::detail::TypeSeq&lt;Constant, Constant&gt;;
 
 } // namespace ExtrapolationRule
 </code></pre></div>

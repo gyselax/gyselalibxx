@@ -1,10 +1,10 @@
 
 
-# Struct ExtrapolationRule::Periodic
+# Struct ExtrapolationRule::OneSidedPeriodic
 
 
 
-[**ClassList**](annotated.md) **>** [**ExtrapolationRule**](namespaceExtrapolationRule.md) **>** [**Periodic**](structExtrapolationRule_1_1Periodic.md)
+[**ClassList**](annotated.md) **>** [**ExtrapolationRule**](namespaceExtrapolationRule.md) **>** [**OneSidedPeriodic**](structExtrapolationRule_1_1OneSidedPeriodic.md)
 
 
 
@@ -97,7 +97,7 @@ The value at a point outside the domain is taken as the value at the equivalent 
 
 _The concrete extrapolation rule class for a given CoeffGrid/DataType._ 
 ```C++
-using ExtrapolationRule::Periodic::type =  ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
+using ExtrapolationRule::OneSidedPeriodic::type =  ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
 ```
 
 
