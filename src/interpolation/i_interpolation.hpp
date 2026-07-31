@@ -99,20 +99,26 @@ namespace ExtrapolationRule {
  * The value at a point outside the domain is taken as the value at the equivalent
  * point inside the domain.
  */
-struct Periodic
+struct OneSidedPeriodic
 {
     /// @brief The concrete extrapolation rule class for a given CoeffGrid/DataType.
-    template <class CoeffGrid, class DataType>
+    template <class CoeffGrid, class DataType, class Basis>
     using type = ddc::PeriodicExtrapolationRule<typename CoeffGrid::continuous_dimension_type>;
 };
+
+/// @brief Convenience pairing of ExtrapolationRule::OneSidedPeriodic for both boundaries.
+using Periodic = ddc::detail::TypeSeq<OneSidedPeriodic, OneSidedPeriodic>;
 
 /// @brief Tag selecting null extrapolation: the function evaluates to zero outside the domain.
 struct NullValue
 {
     /// @brief The concrete extrapolation rule class for a given CoeffGrid/DataType.
-    template <class CoeffGrid, class DataType>
+    template <class CoeffGrid, class DataType, class Basis>
     using type = ddc::NullExtrapolationRule;
 };
+
+/// @brief Convenience pairing of ExtrapolationRule::NullValue for both boundaries.
+using Null_Null = ddc::detail::TypeSeq<NullValue, NullValue>;
 
 /**
  * @brief Tag selecting constant extrapolation.
@@ -122,11 +128,14 @@ struct NullValue
 struct Constant
 {
     /// @brief The concrete extrapolation rule class for a given CoeffGrid/DataType.
-    template <class CoeffGrid, class DataType>
+    template <class CoeffGrid, class DataType, class Basis>
     using type = std::conditional_t<
-            is_spline_basis_v<CoeffGrid>,
+            is_spline_basis_v<Basis>,
             ddc::ConstantExtrapolationRule<typename CoeffGrid::continuous_dimension_type>,
             ConstantIdentityInterpolationExtrapolationRule<CoeffGrid, DataType>>;
 };
+
+/// @brief Convenience pairing of ExtrapolationRule::Constant for both boundaries.
+using Constant_Constant = ddc::detail::TypeSeq<Constant, Constant>;
 
 } // namespace ExtrapolationRule

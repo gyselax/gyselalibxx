@@ -105,7 +105,6 @@ using SplineInterpolatorX = SplineInterpolator<
         BSplinesX,
         GridX,
         ExtrapolationRule::Periodic,
-        ExtrapolationRule::Periodic,
         SplineXClosure,
         SplineXClosure>;
 
