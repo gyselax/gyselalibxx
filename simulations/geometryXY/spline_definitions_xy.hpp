@@ -46,7 +46,6 @@ using SplineXInterpolator = SplineInterpolator<
         BSplinesX,
         GridX,
         SplineXExtrapolation,
-        SplineXExtrapolation,
         SplineXClosure,
         SplineXClosure>;
 
@@ -54,7 +53,6 @@ using SplineYInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesY,
         GridY,
-        SplineYExtrapolation,
         SplineYExtrapolation,
         SplineYClosure,
         SplineYClosure>;

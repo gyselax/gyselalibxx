@@ -93,6 +93,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed `ExtrapolationRule::RULENAME` from an enum to `ExtrapolationRule::RuleName`, a struct tag in a namespace.
 - Remove the C compiler dependency.
 - Make the dependency on GoogleTest dependent on the CMake option `GYSELALIBXX_BUILD_TESTING`.
+- Group extrapolation rules by dimension in `SplineInterpolator` and `LagrangeInterpolator`.
 
 ### Deprecated
 

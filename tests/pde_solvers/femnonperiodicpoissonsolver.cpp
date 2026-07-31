@@ -43,8 +43,7 @@ using SplineXInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
-        ExtrapolationRule::NullValue,
-        ExtrapolationRule::NullValue,
+        ExtrapolationRule::Null_Null,
         ddc::SplineBuilderClosure::GREVILLE,
         ddc::SplineBuilderClosure::GREVILLE>;
 
