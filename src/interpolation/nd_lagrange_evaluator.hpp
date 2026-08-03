@@ -260,7 +260,7 @@ public:
      * @return The derivative of the spline function at the desired coordinate.
      */
     template <class IdxDerivDims, class Layout, class BatchedLagrangeIdxRange, class... CoordsDims>
-    KOKKOS_FUNCTION double deriv(
+    KOKKOS_FUNCTION data_type deriv(
             IdxDerivDims const& deriv_order,
             Coord<CoordsDims...> const& coord_eval,
             ConstField<data_type, BatchedLagrangeIdxRange, memory_space, Layout> const
