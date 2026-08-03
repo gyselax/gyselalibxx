@@ -93,10 +93,10 @@ public:
                             InterpGrid,
                             double,
                             Basis>)
-        : m_min_extrapolation(
-                get_extrapolation<MinExtrapolationRule, Basis, double>(Extremity::FRONT))
-        , m_max_extrapolation(
-                  get_extrapolation<MaxExtrapolationRule, Basis, double>(Extremity::BACK))
+        : m_min_extrapolation(get_extrapolation<MinExtrapolationRule, InterpGrid, double, Basis>(
+                Extremity::FRONT))
+        , m_max_extrapolation(get_extrapolation<MaxExtrapolationRule, InterpGrid, double, Basis>(
+                  Extremity::BACK))
         , m_builder(label, idx_range)
         , m_evaluator(m_min_extrapolation, m_max_extrapolation)
     {
