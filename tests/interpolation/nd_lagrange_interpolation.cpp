@@ -9,8 +9,10 @@
 
 #include "ddc_alias_inline_functions.hpp"
 #include "ddc_helper.hpp"
+#include "i_interpolation.hpp"
 #include "lagrange_basis_non_uniform.hpp"
 #include "lagrange_basis_uniform.hpp"
+#include "lagrange_interpolation.hpp"
 #include "mesh_builder.hpp"
 #include "nd_identity_interpolation_builder.hpp"
 #include "nd_lagrange_evaluator.hpp"
@@ -536,6 +538,220 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
     ddc::host_for_each(test_range, [&](Idx<TestGridX, TestGridY> idx) {
         double const x = ddc::coordinate(Idx<TestGridX>(idx));
         double const y = ddc::coordinate(Idx<TestGridY>(idx));
+        double const expected = std::cos(x) * (1.0 + y);
+        EXPECT_NEAR(result_host(idx), expected, tol);
+    });
+}
+
+/**
+ * @brief Test that the bundled NDLagrangeInterpolator reproduces a separable polynomial
+ * exactly, going through its get_builder()/get_evaluator() interface (auto-extrapolation
+ * constructor) rather than constructing NDIdentityInterpolationBuilder/LagrangeEvaluator/
+ * NDLagrangeEvaluator directly.
+ *
+ * As with LagrangeInterpolator, the same grid type is used both to provide the function
+ * values (via the builder) and as the evaluator's InterpolationGrid. Evaluation is
+ * nonetheless performed away from the grid nodes by using the explicit-coordinates
+ * overload with a field of independently-chosen interior coordinates, so the test still
+ * exercises the Lagrange reconstruction rather than a trivial identity round-trip.
+ */
+TYPED_TEST(NDLagrangeNonPeriodicFixture, InterpolatorExactPolynomialInterpolation)
+{
+    using DataType = typename TestFixture::DataType;
+    using GridX = typename TestFixture::GridX;
+    using GridY = typename TestFixture::GridY;
+    using LagBasisX = typename TestFixture::LagBasisX;
+    using LagBasisY = typename TestFixture::LagBasisY;
+
+    constexpr std::size_t degree = TestFixture::degree;
+    static constexpr double TOL = TestFixture::TOL;
+
+    using Interpolator = LagrangeInterpolator<
+            Kokkos::DefaultExecutionSpace,
+            DataType,
+            IdxRange<LagBasisX, LagBasisY>,
+            IdxRange<GridX, GridY>,
+            ddc::detail::TypeSeq<ExtrapolationRule::Null_Null, ExtrapolationRule::Null_Null>>;
+    static_assert(concepts::Interpolation<Interpolator>);
+
+    // Set up the domains
+    Coord<X> xmin(0.0), xmax(2.0);
+    Coord<Y> ymin(0.0), ymax(3.0);
+    std::size_t const ncells = 10;
+
+    if constexpr (TestFixture::UNIFORM) {
+        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
+        ddc::init_discrete_space<GridY>(GridY::init(ymin, ymax, IdxStep<GridY>(ncells + 1)));
+    } else {
+        ddc::init_discrete_space<GridX>(
+                build_random_non_uniform_break_points(xmin, xmax, IdxStep<GridX>(ncells), 0.5));
+        ddc::init_discrete_space<GridY>(
+                build_random_non_uniform_break_points(ymin, ymax, IdxStep<GridY>(ncells), 0.5));
+    }
+
+    IdxRange<GridX> const x_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
+    IdxRange<GridY> const y_range(Idx<GridY>(0), IdxStep<GridY>(ncells + 1));
+    IdxRange<GridX, GridY> const idx_range(x_range, y_range);
+    ddc::init_discrete_space<LagBasisX>(x_range);
+    ddc::init_discrete_space<LagBasisY>(y_range);
+
+    std::array<DataType, degree + 1> coeffs_x, coeffs_y;
+    std::mt19937 gen(42);
+    std::uniform_real_distribution<double> dis(0.5, 1.5);
+    for (std::size_t i(0); i <= degree; ++i) {
+        coeffs_x[i] = static_cast<DataType>(dis(gen));
+        coeffs_y[i] = static_cast<DataType>(dis(gen));
+    }
+
+    FieldMem<DataType, IdxRange<GridX, GridY>> vals_alloc("vals", idx_range);
+    fill_polynomial_2d(get_field(vals_alloc), coeffs_x, coeffs_y);
+
+    Interpolator const interpolator(idx_range);
+    auto const& builder = interpolator.get_builder();
+    auto const& evaluator = interpolator.get_evaluator();
+
+    using IdxRangeCoeff = InterpolationBuilderTraits<typename Interpolator::BuilderType>::
+            template batched_basis_idx_range_type<IdxRange<GridX, GridY>>;
+    FieldMem<DataType, IdxRangeCoeff>
+            poly_coeffs_alloc("coeffs", batched_basis_idx_range(builder, idx_range));
+    builder(get_field(poly_coeffs_alloc), get_const_field(vals_alloc));
+
+    // Evaluate at independently-chosen interior coordinates (not the grid nodes) using a
+    // sub-range of GridX/GridY purely as index storage for the explicit-coordinates overload.
+    std::size_t const ntest = 7;
+    IdxRange<GridX> const test_x_range = x_range.take_first(IdxStep<GridX>(ntest));
+    IdxRange<GridY> const test_y_range = y_range.take_first(IdxStep<GridY>(ntest));
+    IdxRange<GridX, GridY> const test_range(test_x_range, test_y_range);
+
+    FieldMem<Coord<X, Y>, IdxRange<GridX, GridY>> coords_alloc(test_range);
+    auto coords_host = ddc::create_mirror_view(get_field(coords_alloc));
+    std::uniform_real_distribution<double>
+            coord_dis_x(static_cast<double>(xmin), static_cast<double>(xmax));
+    std::uniform_real_distribution<double>
+            coord_dis_y(static_cast<double>(ymin), static_cast<double>(ymax));
+    ddc::host_for_each(test_range, [&](Idx<GridX, GridY> idx) {
+        coords_host(idx) = Coord<X, Y>(coord_dis_x(gen), coord_dis_y(gen));
+    });
+    ddc::parallel_deepcopy(get_field(coords_alloc), get_field(coords_host));
+
+    FieldMem<DataType, IdxRange<GridX, GridY>> result_alloc(test_range);
+    evaluator(
+            get_field(result_alloc),
+            get_const_field(coords_alloc),
+            get_const_field(poly_coeffs_alloc));
+
+    auto const result_host = ddc::create_mirror_view_and_copy(get_const_field(result_alloc));
+    ddc::host_for_each(test_range, [&](Idx<GridX, GridY> idx) {
+        Coord<X, Y> const coord = coords_host(idx);
+        DataType const expected
+                = polynomial(Coord<X>(coord), coeffs_x) * polynomial(Coord<Y>(coord), coeffs_y);
+        EXPECT_NEAR(
+                static_cast<double>(result_host(idx)),
+                static_cast<double>(expected),
+                TOL * expected);
+    });
+}
+
+/**
+ * @brief Test that the bundled NDLagrangeInterpolator, constructed with the explicit-rules
+ * constructor (one std::pair<Min, Max> per dimension), correctly handles a periodic
+ * dimension via a round-trip evaluation of cos(x)*(1+y) at interior points distinct from
+ * the grid nodes.
+ */
+TYPED_TEST(NDLagrangePeriodicFixture, InterpolatorPeriodicWraparound)
+{
+    using DataType = typename TestFixture::DataType;
+    using GridX = typename TestFixture::GridX;
+    using GridY = typename TestFixture::GridY;
+    using LagBasisX = typename TestFixture::LagBasisX;
+    using LagBasisY = typename TestFixture::LagBasisY;
+
+    constexpr std::size_t degree = TestFixture::degree;
+
+    using Interpolator = LagrangeInterpolator<
+            Kokkos::DefaultExecutionSpace,
+            DataType,
+            IdxRange<LagBasisX, LagBasisY>,
+            IdxRange<GridX, GridY>,
+            ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Null_Null>>;
+    static_assert(concepts::Interpolation<Interpolator>);
+
+    Coord<XPeriodic> const xmin(0.0), xmax(2.0 * M_PI);
+    Coord<Y> const ymin(0.0), ymax(1.0);
+    std::size_t const ncells = 10;
+
+    if constexpr (TestFixture::UNIFORM) {
+        ddc::init_discrete_space<GridX>(GridX::init(xmin, xmax, IdxStep<GridX>(ncells + 1)));
+        ddc::init_discrete_space<GridY>(GridY::init(ymin, ymax, IdxStep<GridY>(ncells + 1)));
+    } else {
+        ddc::init_discrete_space<GridX>(
+                build_random_non_uniform_break_points(xmin, xmax, IdxStep<GridX>(ncells), 0.5));
+        ddc::init_discrete_space<GridY>(
+                build_random_non_uniform_break_points(ymin, ymax, IdxStep<GridY>(ncells), 0.5));
+    }
+
+    IdxRange<GridX> const knot_x_range(Idx<GridX>(0), IdxStep<GridX>(ncells + 1));
+    IdxRange<GridY> const knot_y_range(Idx<GridY>(0), IdxStep<GridY>(ncells + 1));
+    IdxRange<GridX, GridY> const
+            idx_range(knot_x_range.remove_last(IdxStep<GridX>(1)), knot_y_range);
+
+    ddc::init_discrete_space<LagBasisX>(knot_x_range);
+    ddc::init_discrete_space<LagBasisY>(knot_y_range);
+
+    FieldMem<DataType, IdxRange<GridX, GridY>> vals_alloc("vals", idx_range);
+    Field<DataType, IdxRange<GridX, GridY>> vals(vals_alloc);
+    fill_cos_2d(vals);
+
+    ddc::PeriodicExtrapolationRule<XPeriodic> const periodic_extrap;
+    ddc::NullExtrapolationRule const null_extrap;
+    Interpolator const interpolator(
+            idx_range,
+            std::make_pair(periodic_extrap, periodic_extrap),
+            std::make_pair(null_extrap, null_extrap));
+    auto const& builder = interpolator.get_builder();
+    auto const& evaluator = interpolator.get_evaluator();
+
+    using IdxRangeCoeff = InterpolationBuilderTraits<typename Interpolator::BuilderType>::
+            template batched_basis_idx_range_type<IdxRange<GridX, GridY>>;
+    FieldMem<DataType, IdxRangeCoeff>
+            coeffs_alloc("coeffs", batched_basis_idx_range(builder, idx_range));
+    builder(get_field(coeffs_alloc), get_const_field(vals_alloc));
+
+    double h = static_cast<double>(xmax) / static_cast<double>(ncells);
+    double const tol = ipow(h, degree + 1);
+
+    // Round-trip evaluation at independently-chosen interior coordinates, using a
+    // sub-range of GridX/GridY purely as index storage for the explicit-coordinates overload.
+    std::size_t const ntest = 7;
+    IdxRange<GridX> const idx_range_x(idx_range);
+    IdxRange<GridY> const idx_range_y(idx_range);
+    IdxRange<GridX> const test_x_range = idx_range_x.take_first(IdxStep<GridX>(ntest));
+    IdxRange<GridY> const test_y_range = idx_range_y.take_first(IdxStep<GridY>(ntest));
+    IdxRange<GridX, GridY> const test_range(test_x_range, test_y_range);
+
+    FieldMem<Coord<XPeriodic, Y>, IdxRange<GridX, GridY>> coords_alloc(test_range);
+    auto coords_host = ddc::create_mirror_view(get_field(coords_alloc));
+    std::mt19937 gen(42);
+    std::uniform_real_distribution<double>
+            coord_dis_x(static_cast<double>(xmin), static_cast<double>(xmax));
+    std::uniform_real_distribution<double>
+            coord_dis_y(static_cast<double>(ymin), static_cast<double>(ymax));
+    ddc::host_for_each(test_range, [&](Idx<GridX, GridY> idx) {
+        coords_host(idx) = Coord<XPeriodic, Y>(coord_dis_x(gen), coord_dis_y(gen));
+    });
+    ddc::parallel_deepcopy(get_field(coords_alloc), get_field(coords_host));
+
+    FieldMem<DataType, IdxRange<GridX, GridY>> result_alloc(test_range);
+    evaluator(
+            get_field(result_alloc),
+            get_const_field(coords_alloc),
+            get_const_field(coeffs_alloc));
+
+    auto const result_host = ddc::create_mirror_view_and_copy(get_const_field(result_alloc));
+    ddc::host_for_each(test_range, [&](Idx<GridX, GridY> idx) {
+        Coord<XPeriodic, Y> const coord = coords_host(idx);
+        double const x = Coord<XPeriodic>(coord);
+        double const y = Coord<Y>(coord);
         double const expected = std::cos(x) * (1.0 + y);
         EXPECT_NEAR(result_host(idx), expected, tol);
     });
