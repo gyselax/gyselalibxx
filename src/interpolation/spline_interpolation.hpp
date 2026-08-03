@@ -7,6 +7,33 @@
 #include "ddc_aliases.hpp"
 #include "extrapolation_rule_choice.hpp"
 
+/**
+ * @brief Groups the lower (min) and upper (max) ddc::SplineBuilderClosure of a
+ * spline builder into a single non-type template argument.
+ */
+struct SplineBoundaryClosures
+{
+    ddc::SplineBuilderClosure min;
+    ddc::SplineBuilderClosure max;
+};
+
+/// @brief Predefined SplineBoundaryClosures for the common case where the same
+/// closure applies at both boundaries.
+namespace SplineBoundaryClosure {
+inline constexpr SplineBoundaryClosures Periodic {
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC};
+inline constexpr SplineBoundaryClosures Greville {
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE};
+inline constexpr SplineBoundaryClosures Hermite {
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE};
+inline constexpr SplineBoundaryClosures HomogeneousHermite {
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE};
+} // namespace SplineBoundaryClosure
+
 namespace detail {
 
 /**
@@ -17,7 +44,7 @@ namespace detail {
  * concepts::Interpolation concept and is the recommended way to create a
  * spline interpolation for use with advection operators and similar algorithms.
  *
- * The boundary condition (MinBound / MaxBound) and extrapolation rule
+ * The boundary condition (BoundaryClosures) and extrapolation rule
  * (the Min/Max pair in ExtrapRules) must be consistent: both must be PERIODIC for
  * periodic dimensions and both must be non-PERIODIC for non-periodic dimensions.
  *
@@ -27,8 +54,8 @@ namespace detail {
  * @tparam ExtrapRules   A ddc::detail::TypeSeq<MinExtrapolationRule, MaxExtrapolationRule> pairing the
  *                       extrapolation rules applied below/above the boundary. Where
  *                       MinExtrapolationRule and MaxExtrapolationRule are extrapolation rule classes.
- * @tparam MinBound      The ddc::SplineBuilderClosure at the lower boundary of the spline builder.
- * @tparam MaxBound      The ddc::SplineBuilderClosure at the upper boundary of the spline builder.
+ * @tparam BoundaryClosures A SplineBoundaryClosures pairing the ddc::SplineBuilderClosure
+ *                       applied at the lower/upper boundary of the spline builder.
  * @tparam Solver        The spline solver backend (default: LAPACK).
  */
 template <
@@ -36,8 +63,7 @@ template <
         class Basis,
         class InterpGrid,
         class ExtrapRules,
-        ddc::SplineBuilderClosure MinBound,
-        ddc::SplineBuilderClosure MaxBound,
+        SplineBoundaryClosures BoundaryClosures,
         ddc::SplineSolver Solver>
 class SplineInterpolator
 {
@@ -46,6 +72,9 @@ private:
 
     using MinExtrapolationRule = ddc::type_seq_element_t<0, ExtrapRules>;
     using MaxExtrapolationRule = ddc::type_seq_element_t<1, ExtrapRules>;
+
+    static constexpr ddc::SplineBuilderClosure MinBound = BoundaryClosures.min;
+    static constexpr ddc::SplineBuilderClosure MaxBound = BoundaryClosures.max;
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
@@ -243,14 +272,12 @@ template <
         class Basis,
         class InterpGrid,
         class ExtrapRules,
-        ddc::SplineBuilderClosure MinBound,
-        ddc::SplineBuilderClosure MaxBound,
+        SplineBoundaryClosures BoundaryClosures,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
 using SplineInterpolator = detail::SplineInterpolator<
         ExecSpace,
         Basis,
         InterpGrid,
         extrapolation_rule_t<ExtrapRules, InterpGrid, double, Basis>,
-        MinBound,
-        MaxBound,
+        BoundaryClosures,
         Solver>;
