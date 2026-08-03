@@ -387,8 +387,8 @@ struct LagrangeInterpolatorResolver<
 {
     using type = detail::LagrangeInterpolator<
             ExecSpace,
-            IdxRange<Basis>,
-            IdxRange<Grid>,
+            Basis,
+            Grid,
             extrapolation_rule_t<
                     ExtrapRules,
                     typename IdentityInterpolationBuilder<
@@ -457,7 +457,7 @@ template <
         class IdxRangeBasis,
         class IdxRangeInterpGrid,
         class... ExtrapRules>
-using LagrangeInterpolator = typename detail::NDLagrangeInterpolatorResolver<
+using LagrangeInterpolator = typename detail::LagrangeInterpolatorResolver<
         ExecSpace,
         DataType,
         IdxRangeBasis,
