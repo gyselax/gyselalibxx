@@ -20,15 +20,12 @@ struct SplineBoundaryClosures
 /// @brief Predefined SplineBoundaryClosures for the common case where the same
 /// closure applies at both boundaries.
 namespace SplineBoundaryClosure {
-inline constexpr SplineBoundaryClosures Periodic {
-        ddc::SplineBuilderClosure::PERIODIC,
-        ddc::SplineBuilderClosure::PERIODIC};
-inline constexpr SplineBoundaryClosures Greville {
-        ddc::SplineBuilderClosure::GREVILLE,
-        ddc::SplineBuilderClosure::GREVILLE};
-inline constexpr SplineBoundaryClosures Hermite {
-        ddc::SplineBuilderClosure::HERMITE,
-        ddc::SplineBuilderClosure::HERMITE};
+inline constexpr SplineBoundaryClosures
+        Periodic {ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC};
+inline constexpr SplineBoundaryClosures
+        Greville {ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE};
+inline constexpr SplineBoundaryClosures
+        Hermite {ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE};
 inline constexpr SplineBoundaryClosures HomogeneousHermite {
         ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
         ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE};
