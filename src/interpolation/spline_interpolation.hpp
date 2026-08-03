@@ -11,12 +11,13 @@
  * @brief Groups the lower (min) and upper (max) ddc::SplineBuilderClosure of a
  * spline builder into a single non-type template argument.
  */
+template <ddc::SplineBuilderClosure MinClosure, ddc::SplineBuilderClosure MaxClosure>
 struct SplineBoundaryClosures
 {
     /// @brief The ddc::SplineBuilderClosure at the lower boundary of the spline builder.
-    ddc::SplineBuilderClosure min;
+    using min = std::integral_constant<ddc::SplineBuilderClosure, MinClosure>;
     /// @brief The ddc::SplineBuilderClosure at the upper boundary of the spline builder.
-    ddc::SplineBuilderClosure max;
+    using max = std::integral_constant<ddc::SplineBuilderClosure, MaxClosure>;
 };
 
 /// @brief Predefined SplineBoundaryClosures for the common case where the same
@@ -24,22 +25,25 @@ struct SplineBoundaryClosures
 namespace SplineBoundaryClosure {
 
 /// @brief Convenience pairing of ddc::SplineBuilderClosure::PERIODIC for both boundaries.
-inline constexpr SplineBoundaryClosures
-        Periodic {ddc::SplineBuilderClosure::PERIODIC, ddc::SplineBuilderClosure::PERIODIC};
+using Periodic = SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::PERIODIC,
+        ddc::SplineBuilderClosure::PERIODIC>;
 
 /// @brief Convenience pairing of ddc::SplineBuilderClosure::GREVILLE for both boundaries.
-inline constexpr SplineBoundaryClosures
-        Greville {ddc::SplineBuilderClosure::GREVILLE, ddc::SplineBuilderClosure::GREVILLE};
+using Greville_Greville = SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::GREVILLE,
+        ddc::SplineBuilderClosure::GREVILLE>;
 
 /// @brief Convenience pairing of ddc::SplineBuilderClosure::HERMITE for both boundaries.
-inline constexpr SplineBoundaryClosures
-        Hermite {ddc::SplineBuilderClosure::HERMITE, ddc::SplineBuilderClosure::HERMITE};
+using Hermite_Hermite = SplineBoundaryClosures<
+        ddc::SplineBuilderClosure::HERMITE,
+        ddc::SplineBuilderClosure::HERMITE>;
 
 /// @brief Convenience pairing of ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE for both
 /// boundaries.
-inline constexpr SplineBoundaryClosures HomogeneousHermite {
+using HomogeneousHermite_HomogeneousHermite = SplineBoundaryClosures<
         ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE,
-        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE};
+        ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE>;
 
 } // namespace SplineBoundaryClosure
 
