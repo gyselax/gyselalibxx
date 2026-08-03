@@ -106,7 +106,7 @@ using SplineInterpolatorX = SplineInterpolator<
         BSplinesX,
         GridX,
         ExtrapolationRule::Periodic,
-        SplineBoundaryClosures {SplineXClosure, SplineXClosure}>;
+        SplineBoundaryClosures<SplineXClosure, SplineXClosure>>;
 
 
 class Spatial1DAdvectionTest : public ::testing::Test

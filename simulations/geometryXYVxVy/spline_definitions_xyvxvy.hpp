@@ -48,14 +48,14 @@ using SplineInterpolatorY = SplineInterpolator<
         BSplinesY,
         GridY,
         ExtrapolationRule::Periodic,
-        SplineBoundaryClosures {SplineYClosure, SplineYClosure}>;
+        SplineBoundaryClosures<SplineYClosure, SplineYClosure>>;
 
 using SplineInterpolatorVy = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVy,
         GridVy,
         ExtrapolationRule::Constant_Constant,
-        SplineBoundaryClosures {SplineVyClosure, SplineVyClosure}>;
+        SplineBoundaryClosures<SplineVyClosure, SplineVyClosure>>;
 
 using IdxRangeBSY = IdxRange<BSplinesY>;
 using IdxRangeBSXY = IdxRange<BSplinesX, BSplinesY>;

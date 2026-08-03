@@ -76,7 +76,7 @@ template <
         class Basis,
         class InterpGrid,
         class ExtrapRules,
-        SplineBoundaryClosures BoundaryClosures,
+        class BoundaryClosures,
         ddc::SplineSolver Solver>
 class SplineInterpolator
 {
@@ -86,8 +86,8 @@ private:
     using MinExtrapolationRule = ddc::type_seq_element_t<0, ExtrapRules>;
     using MaxExtrapolationRule = ddc::type_seq_element_t<1, ExtrapRules>;
 
-    static constexpr ddc::SplineBuilderClosure MinBound = BoundaryClosures.min;
-    static constexpr ddc::SplineBuilderClosure MaxBound = BoundaryClosures.max;
+    static constexpr ddc::SplineBuilderClosure MinBound = BoundaryClosures::min::value;
+    static constexpr ddc::SplineBuilderClosure MaxBound = BoundaryClosures::max::value;
 
     static constexpr bool is_periodic = continuous_dimension_type::PERIODIC;
 
@@ -285,7 +285,7 @@ template <
         class Basis,
         class InterpGrid,
         class ExtrapRules,
-        SplineBoundaryClosures BoundaryClosures,
+        class BoundaryClosures,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
 using SplineInterpolator = detail::SplineInterpolator<
         ExecSpace,
