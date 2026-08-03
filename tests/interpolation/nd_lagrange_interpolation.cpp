@@ -571,7 +571,8 @@ TYPED_TEST(NDLagrangeNonPeriodicFixture, InterpolatorExactPolynomialInterpolatio
             DataType,
             IdxRange<LagBasisX, LagBasisY>,
             IdxRange<GridX, GridY>,
-            ddc::detail::TypeSeq<ExtrapolationRule::Null_Null, ExtrapolationRule::Null_Null>>;
+            ExtrapolationRule::Null_Null,
+            ExtrapolationRule::Null_Null>;
     static_assert(concepts::Interpolation<Interpolator>);
 
     // Set up the domains
@@ -673,7 +674,8 @@ TYPED_TEST(NDLagrangePeriodicFixture, InterpolatorPeriodicWraparound)
             DataType,
             IdxRange<LagBasisX, LagBasisY>,
             IdxRange<GridX, GridY>,
-            ddc::detail::TypeSeq<ExtrapolationRule::Periodic, ExtrapolationRule::Null_Null>>;
+            ExtrapolationRule::Periodic,
+            ExtrapolationRule::Null_Null>;
     static_assert(concepts::Interpolation<Interpolator>);
 
     Coord<XPeriodic> const xmin(0.0), xmax(2.0 * M_PI);
