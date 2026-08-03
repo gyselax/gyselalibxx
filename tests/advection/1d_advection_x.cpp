@@ -62,8 +62,7 @@ using SplineInterpolatorX = SplineInterpolator<
         BSplinesX,
         GridX,
         ExtrapolationRule::Periodic,
-        SplineXClosure,
-        SplineXClosure>;
+        SplineBoundaryClosures {SplineXClosure, SplineXClosure}>;
 
 // Lagrange basis for the advection field interpolation
 struct LagBasisX : UniformLagrangeBasis<X, 3, double>

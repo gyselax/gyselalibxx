@@ -129,8 +129,7 @@ using SplineInterpolatorVx = SplineInterpolator<
         BSplinesVx,
         GridVx,
         ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
-        SplineVxClosure,
-        SplineVxClosure>;
+        SplineBoundaryClosures {SplineVxClosure, SplineVxClosure}>;
 
 
 class Velocity1DAdvectionTest : public ::testing::Test

@@ -46,16 +46,14 @@ using SplineXInterpolator = SplineInterpolator<
         BSplinesX,
         GridX,
         SplineXExtrapolation,
-        SplineXClosure,
-        SplineXClosure>;
+        SplineBoundaryClosures {SplineXClosure, SplineXClosure}>;
 
 using SplineYInterpolator = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesY,
         GridY,
         SplineYExtrapolation,
-        SplineYClosure,
-        SplineYClosure>;
+        SplineBoundaryClosures {SplineYClosure, SplineYClosure}>;
 
 // Spline index range
 using IdxRangeBSX = IdxRange<BSplinesX>;
