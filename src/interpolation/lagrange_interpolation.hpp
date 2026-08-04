@@ -225,7 +225,9 @@ private:
     using MaxRule = ddc::type_seq_element_t<1, Rule>;
 
     template <class B>
-    using CoeffGridOf = typename B::template Impl<B, memory_space>::knot_grid;
+    using CoeffGrid = ddc::type_seq_element_t<
+            ddc::type_seq_rank_v<B, ddc::detail::TypeSeq<Basis...>>,
+            ddc::to_type_seq_t<typename BuilderType::coeff_idx_range_type>>;
 
     static_assert(
             ((Basis::is_periodic()
@@ -290,12 +292,12 @@ public:
     explicit NDLagrangeInterpolator(IdxRange<Grid1D...> idx_range = IdxRange<Grid1D...> {}) requires(
             (is_extrapolation_rule_auto_constructible_v<
                      MinRule<ExtrapRules>,
-                     CoeffGridOf<Basis>,
+                     CoeffGrid<Basis>,
                      DataType,
                      Basis> && ...)
             && (is_extrapolation_rule_auto_constructible_v<
                         MaxRule<ExtrapRules>,
-                        CoeffGridOf<Basis>,
+                        CoeffGrid<Basis>,
                         DataType,
                         Basis> && ...))
         : m_evaluator(LagrangeEvaluator<
@@ -306,9 +308,9 @@ public:
                       Grid1D,
                       MinRule<ExtrapRules>,
                       MaxRule<ExtrapRules>>(
-                get_extrapolation<MinRule<ExtrapRules>, CoeffGridOf<Basis>, DataType, Basis>(
+                get_extrapolation<MinRule<ExtrapRules>, CoeffGrid<Basis>, DataType, Basis>(
                         Extremity::FRONT),
-                get_extrapolation<MaxRule<ExtrapRules>, CoeffGridOf<Basis>, DataType, Basis>(
+                get_extrapolation<MaxRule<ExtrapRules>, CoeffGrid<Basis>, DataType, Basis>(
                         Extremity::BACK))...)
     {
     }
