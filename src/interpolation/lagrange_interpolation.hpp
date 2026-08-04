@@ -200,15 +200,15 @@ template <
 class NDLagrangeInterpolator;
 
 /// The implementation of NDLagrangeInterpolator. This is separate to allow variadic packs.
-template <class ExecSpace, class... Basis, class... Grid, class... ExtrapRules, class DataType>
+template <class ExecSpace, class... Basis, class... Grid1D, class... ExtrapRules, class DataType>
 class NDLagrangeInterpolator<
         ExecSpace,
         IdxRange<Basis...>,
-        IdxRange<Grid...>,
+        IdxRange<Grid1D...>,
         ddc::detail::TypeSeq<ExtrapRules...>,
         DataType>
 {
-    static_assert(sizeof...(Basis) == sizeof...(Grid));
+    static_assert(sizeof...(Basis) == sizeof...(Grid1D));
     static_assert(sizeof...(Basis) == sizeof...(ExtrapRules));
     static_assert(sizeof...(Basis) > 0);
     static_assert((is_lagrange_basis_v<Basis> && ...));
@@ -250,7 +250,7 @@ public:
             ExecSpace,
             memory_space,
             DataType,
-            IdxRange<Grid...>,
+            IdxRange<Grid1D...>,
             IdxRange<Basis...>>;
 
     /// @brief The NDLagrangeEvaluator type built from the template parameters.
@@ -259,14 +259,14 @@ public:
             memory_space,
             DataType,
             Basis,
-            Grid,
+            Grid1D,
             MinOf<ExtrapRules>,
             MaxOf<ExtrapRules>>...>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
     {
-        return sizeof...(Grid);
+        return sizeof...(Grid1D);
     }
 
 private:
@@ -287,7 +287,7 @@ public:
      * @param idx_range The index range on which the interpolator will act. This is
      *                  unused but is included to match the SplineInterpolator interface.
      */
-    explicit NDLagrangeInterpolator(IdxRange<Grid...> idx_range = IdxRange<Grid...> {}) requires(
+    explicit NDLagrangeInterpolator(IdxRange<Grid1D...> idx_range = IdxRange<Grid1D...> {}) requires(
             (is_extrapolation_rule_auto_constructible_v<
                      MinOf<ExtrapRules>,
                      CoeffGridOf<Basis>,
@@ -303,7 +303,7 @@ public:
                       memory_space,
                       DataType,
                       Basis,
-                      Grid,
+                      Grid1D,
                       MinOf<ExtrapRules>,
                       MaxOf<ExtrapRules>>(
                 get_extrapolation<MinOf<ExtrapRules>, CoeffGridOf<Basis>, DataType, Basis>(
@@ -327,14 +327,14 @@ public:
      *                  per dimension, in the same order as IdxRangeBasis/IdxRangeInterpGrid.
      */
     explicit NDLagrangeInterpolator(
-            IdxRange<Grid...> idx_range,
+            IdxRange<Grid1D...> idx_range,
             std::pair<MinOf<ExtrapRules>, MaxOf<ExtrapRules>> const&... extrapolation_rules)
         : m_evaluator(LagrangeEvaluator<
                       ExecSpace,
                       memory_space,
                       DataType,
                       Basis,
-                      Grid,
+                      Grid1D,
                       MinOf<ExtrapRules>,
                       MaxOf<ExtrapRules>>(extrapolation_rules.first, extrapolation_rules.second)...)
     {
@@ -377,25 +377,25 @@ template <
         class... ExtrapRulesSeq>
 struct LagrangeInterpolatorResolver;
 
-template <class ExecSpace, class DataType, class Basis, class Grid, class ExtrapRules>
+template <class ExecSpace, class DataType, class Basis, class Grid1D, class ExtrapRules>
 struct LagrangeInterpolatorResolver<
         ExecSpace,
         DataType,
         IdxRange<Basis>,
-        IdxRange<Grid>,
+        IdxRange<Grid1D>,
         ExtrapRules>
 {
     using type = detail::LagrangeInterpolator<
             ExecSpace,
             Basis,
-            Grid,
+            Grid1D,
             extrapolation_rule_t<
                     ExtrapRules,
                     typename IdentityInterpolationBuilder<
                             ExecSpace,
                             typename ExecSpace::memory_space,
                             DataType,
-                            Grid,
+                            Grid1D,
                             Basis>::basis_domain_type,
                     DataType,
                     Basis>,
@@ -407,22 +407,22 @@ template <
         class DataType,
         class BasisHead,
         class... Basis,
-        class GridHead,
-        class... Grid,
+        class Grid1DHead,
+        class... Grid1D,
         class ExtrapRulesHead,
         class... ExtrapRules>
 struct LagrangeInterpolatorResolver<
         ExecSpace,
         DataType,
         IdxRange<BasisHead, Basis...>,
-        IdxRange<GridHead, Grid...>,
+        IdxRange<Grid1DHead, Grid1D...>,
         ExtrapRulesHead,
         ExtrapRules...>
 {
     using type = detail::NDLagrangeInterpolator<
             ExecSpace,
             IdxRange<BasisHead, Basis...>,
-            IdxRange<GridHead, Grid...>,
+            IdxRange<Grid1DHead, Grid1D...>,
             ddc::detail::TypeSeq<
                     extrapolation_rule_t<
                             ExtrapRulesHead,
