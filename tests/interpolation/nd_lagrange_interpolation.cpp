@@ -548,12 +548,6 @@ TYPED_TEST(NDLagrangePeriodicFixture, PeriodicWraparound)
  * exactly, going through its get_builder()/get_evaluator() interface (auto-extrapolation
  * constructor) rather than constructing NDIdentityInterpolationBuilder/LagrangeEvaluator/
  * NDLagrangeEvaluator directly.
- *
- * As with LagrangeInterpolator, the same grid type is used both to provide the function
- * values (via the builder) and as the evaluator's InterpolationGrid. Evaluation is
- * nonetheless performed away from the grid nodes by using the explicit-coordinates
- * overload with a field of independently-chosen interior coordinates, so the test still
- * exercises the Lagrange reconstruction rather than a trivial identity round-trip.
  */
 TYPED_TEST(NDLagrangeNonPeriodicFixture, InterpolatorExactPolynomialInterpolation)
 {
