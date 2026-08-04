@@ -20,7 +20,7 @@ DFieldSpVx BumpontailEquilibrium::operator()(DFieldSpVx const allfequilibrium) c
     IdxRangeSp const gridsp = get_idx_range<Species>(allfequilibrium);
 
     // Initialisation of the maxwellian
-    DFieldMemVx maxwellian_alloc(gridvx);
+    DFieldMemVx maxwellian_alloc("maxwellian (BumpontailEquilibrium::operator())", gridvx);
     DFieldVx maxwellian = get_field(maxwellian_alloc);
     ddc::host_for_each(gridsp, [&](IdxSp const isp) {
         compute_twomaxwellian(

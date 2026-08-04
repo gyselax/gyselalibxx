@@ -45,8 +45,9 @@ struct BSplinesVx : ddc::UniformBSplines<Vx, 3>
 {
 };
 
-ddc::BoundCond constexpr SplineXBoundary = ddc::BoundCond::PERIODIC;
-ddc::BoundCond constexpr SplineVxBoundary = ddc::BoundCond::HERMITE;
+ddc::SplineBuilderClosure constexpr SplineXClosure = ddc::SplineBuilderClosure::PERIODIC;
+ddc::SplineBuilderClosure constexpr SplineVxClosure
+        = ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE;
 
 
 // Discrete dimensions
@@ -59,9 +60,9 @@ struct GridVx : UniformGridBase<Vx>
 
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
 
 using IdxRangeX = IdxRange<GridX>;
@@ -119,8 +120,7 @@ using LagrangeInterpolatorVx = LagrangeInterpolator<
         Kokkos::DefaultExecutionSpace,
         LagBasisVx,
         GridVx,
-        ExtrapolationRule::CONSTANT,
-        ExtrapolationRule::CONSTANT>;
+        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>>;
 
 
 // Operators
@@ -128,10 +128,9 @@ using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVx,
         GridVx,
-        ExtrapolationRule::CONSTANT,
-        ExtrapolationRule::CONSTANT,
-        SplineVxBoundary,
-        SplineVxBoundary>;
+        ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
+        SplineVxClosure,
+        SplineVxClosure>;
 
 
 class Velocity1DAdvectionTest : public ::testing::Test
@@ -245,8 +244,8 @@ public:
                 allfdistribu,
                 advection_field,
                 timestep,
-                get_const_field(advection_field_derivatives_min),
-                get_const_field(advection_field_derivatives_max));
+                std::optional(get_const_field(advection_field_derivatives_min)),
+                std::optional(get_const_field(advection_field_derivatives_max)));
 
 
         double const max_advection_error = ddc::parallel_transform_reduce(

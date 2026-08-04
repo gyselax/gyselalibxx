@@ -13,15 +13,12 @@ if command -v spack >/dev/null 2>&1
 then
     spack env deactivate
 else
-    . /data/gyselarunner/spack-1.1.1/share/spack/setup-env.sh
+    . /data/gyselarunner/spack-1.2.2/share/spack/setup-env.sh
 fi
 
-# The hdf5 package is injecting the environment view `lib` path to `LD_LIBRARY_PATH`
-# which causes spurious segfaults for system executables, we manually remove it.
-LD_LIBRARY_PATH_TMP="$LD_LIBRARY_PATH"
+spack --env gyselalibxx-env-omp repo update
+
 spack env activate gyselalibxx-env-omp
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH_TMP"
-unset LD_LIBRARY_PATH_TMP
 
 module load gcc/13
 # Looks suspicious to set LD_PRELOAD, so we unset it

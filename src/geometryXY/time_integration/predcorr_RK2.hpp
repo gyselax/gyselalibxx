@@ -85,10 +85,13 @@ public:
         IdxRangeXY const meshXY = get_idx_range(allfdistribu);
 
         // Output of the Poisson solver
-        DFieldMemXY electrostatic_potential_alloc(meshXY);
+        DFieldMemXY electrostatic_potential_alloc(
+                "electrostatic_potential (PredCorrRK2XY::operator())",
+                meshXY);
         DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
 
-        VectorFieldMemXY_XY electric_field_alloc(meshXY);
+        VectorFieldMemXY_XY
+                electric_field_alloc("electri_field (PredCorrRK2XY::operator())", meshXY);
         VectorFieldXY_XY electric_field = get_field(electric_field_alloc);
 
         // Definition of the RK2
@@ -100,7 +103,9 @@ public:
                       IdxRangeXY idx_range_xy(get_idx_range<GridX, GridY>(allfdistribu_const));
 
                       // --- compute electrostatic potential and electric field:
-                      DFieldMemXY electrostatic_potential_alloc(idx_range_xy);
+                      DFieldMemXY electrostatic_potential_alloc(
+                              "electrostatic_potential (PredCorrRK2XY::operator()::[])",
+                              idx_range_xy);
                       DFieldXY electrostatic_potential = get_field(electrostatic_potential_alloc);
 
                       /*
@@ -109,7 +114,9 @@ public:
                         allfdistribu_alloc chunk containing the values of the constant 
                         allfdistribu to solve the type conflict in the Poisson solver. 
                       */
-                      DFieldMemXY allfdistribu_alloc(idx_range_xy);
+                      DFieldMemXY allfdistribu_alloc(
+                              "allfdistribu (PredCorrRK2XY::operator()::[])",
+                              idx_range_xy);
                       DFieldXY allfdistribu = get_field(allfdistribu_alloc);
                       ddc::parallel_deepcopy(
                               Kokkos::DefaultExecutionSpace(),
@@ -128,8 +135,12 @@ public:
 
                       // --- compute advection field:
                       IdxRangeXY idx_range = get_idx_range(electric_field);
-                      DFieldMemXY advection_field_x_alloc(idx_range);
-                      DFieldMemXY advection_field_y_alloc(idx_range);
+                      DFieldMemXY advection_field_x_alloc(
+                              "advection_field_x (PredCorrRK2XY::operator()::[])",
+                              idx_range);
+                      DFieldMemXY advection_field_y_alloc(
+                              "advection_field_y (PredCorrRK2XY::operator()::[])",
+                              idx_range);
                       DFieldXY advection_field_x = get_field(advection_field_x_alloc);
                       DFieldXY advection_field_y = get_field(advection_field_y_alloc);
                       const std::source_location location = std::source_location::current();

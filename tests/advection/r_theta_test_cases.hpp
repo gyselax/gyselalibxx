@@ -44,7 +44,7 @@ class FunctionToBeAdvected_cos_4_ellipse
     using Theta = typename Mapping::curvilinear_tag_theta;
 
 private:
-    Mapping const& m_mapping;
+    Mapping m_mapping;
 
 public:
     /**
@@ -107,7 +107,7 @@ class FunctionToBeAdvected_gaussian
     using Theta = typename Mapping::curvilinear_tag_theta;
 
 private:
-    Mapping const& m_mapping;
+    Mapping m_mapping;
     double const m_constant;
     Coord<X> const m_x0;
     Coord<Y> const m_y0;
@@ -180,8 +180,8 @@ public:
         if ((m_rmin <= r) and (r <= m_rmax)) {
             return m_constant
                    * Kokkos::exp(
-                           -ipow(deviation_x, 2) / (2 * m_sig_x * m_sig_x)
-                           - ipow(deviation_y, 2) / (2 * m_sig_y * m_sig_y));
+                           -(deviation_x * deviation_x) / (2 * m_sig_x * m_sig_x)
+                           - (deviation_y * deviation_y) / (2 * m_sig_y * m_sig_y));
         } else {
             return 0.0;
         }

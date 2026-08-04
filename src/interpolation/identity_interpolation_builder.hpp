@@ -111,9 +111,9 @@ public:
             IdxRange<basis_domain_type> extended_domain(
                     ddc::discrete_space<Basis>().full_domain().remove_first(
                             bp_idx_range.extents()));
-            typename BatchedInterpolationIdxRange::discrete_vector_type nrepeat(
-                    extended_domain.size());
-            BatchedInterpolationIdxRange repeat_domain(get_idx_range(vals).take_first(nrepeat));
+            IdxStep<InterpolationGrid> nrepeat(extended_domain.size());
+            IdxRange<InterpolationGrid> repeat_domain(
+                    get_idx_range<InterpolationGrid>(vals).take_first(nrepeat));
             Kokkos::deep_copy(
                     coeffs[extended_domain].allocation_kokkos_view(),
                     vals[repeat_domain].allocation_kokkos_view());
@@ -123,7 +123,7 @@ public:
     /**
      * @brief Get the whole domain on which derivatives on lower boundary are defined.
      *
-     * This is only used with BoundCond::HERMITE boundary conditions.
+     * This is only used with SplineBuilderClosure::HERMITE boundary conditions.
      *
      * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
      *
@@ -141,7 +141,7 @@ public:
     /**
      * @brief Get the whole domain on which derivatives on upper boundary are defined.
      *
-     * This is only used with BoundCond::HERMITE boundary conditions.
+     * This is only used with SplineBuilderClosure::HERMITE boundary conditions.
      *
      * @param batched_interpolation_domain The whole domain on which the interpolation points are defined.
      *

@@ -31,33 +31,35 @@ struct BSplinesVx
 {
 };
 
-auto constexpr SplineXBoundary = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
-auto constexpr SplineVxBoundary = ddc::BoundCond::HOMOGENEOUS_HERMITE;
+auto constexpr SplineXClosure
+        = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC : ddc::SplineBuilderClosure::GREVILLE;
+auto constexpr SplineVxClosure = ddc::SplineBuilderClosure::HOMOGENEOUS_HERMITE;
 
 using SplineInterpPointsX
-        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXBoundary, SplineXBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesX, SplineXClosure, SplineXClosure>;
 using SplineInterpPointsVx
-        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxBoundary, SplineVxBoundary>;
+        = ddc::GrevilleInterpolationPoints<BSplinesVx, SplineVxClosure, SplineVxClosure>;
 
-ExtrapolationRule constexpr XExtrapRule = X::PERIODIC ? PERIODIC : CONSTANT;
+using XExtrapRule = std::conditional_t<
+        X::PERIODIC,
+        ExtrapolationRule::Periodic,
+        ExtrapolationRule::Constant_Constant>;
 
 using SplineInterpolatorX = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesX,
         GridX,
         XExtrapRule,
-        XExtrapRule,
-        SplineXBoundary,
-        SplineXBoundary>;
+        SplineXClosure,
+        SplineXClosure>;
 
 using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
         BSplinesVx,
         GridVx,
-        CONSTANT,
-        CONSTANT,
-        SplineVxBoundary,
-        SplineVxBoundary>;
+        ExtrapolationRule::Constant_Constant,
+        SplineVxClosure,
+        SplineVxClosure>;
 
 using IdxRangeBSX = IdxRange<BSplinesX>;
 

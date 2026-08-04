@@ -161,6 +161,63 @@ void copy_to_vector_space(
  * If the vector space is different then the vectors in the vector
  * field are mapped to the new vector space and a VectorFieldMem is returned.
  *
+ * @param[in] label Label to use in case a new memory allocation.
+ * @param[in] exec_space The space on which the function is executed (CPU/GPU).
+ * @param[in] vector_field The vector field to be mapped to the new vector space.
+ * @param[in] mapping A mapping describing the relation between the 2 vector
+ *              spaces (or describing the relation between the vector space and
+ *              the Cartesian space if a change of variance
+ *              (covariant <-> contravariant) is required).
+ *
+ * @tparam OutVectorSpace The vector space of the final vector.
+ *
+ * @returns A VectorField or VectorFieldMem containing the vectors in the
+ *      requested vector space.
+ */
+template <
+        class OutVectorSpace,
+        class ExecSpace,
+        class Mapping,
+        class ElementType,
+        class IdxRangeType,
+        class InVectorSpace,
+        class LayoutStridedPolicy>
+auto create_mirror_view_and_copy_on_vector_space(
+        std::string const& label,
+        ExecSpace exec_space,
+        VectorField<
+                ElementType,
+                IdxRangeType,
+                InVectorSpace,
+                typename ExecSpace::memory_space,
+                LayoutStridedPolicy> vector_field,
+        Mapping mapping)
+{
+    if constexpr (std::is_same_v<InVectorSpace, OutVectorSpace>) {
+        return vector_field;
+    } else {
+        VectorFieldMem<
+                std::remove_const_t<ElementType>,
+                IdxRangeType,
+                OutVectorSpace,
+                typename ExecSpace::memory_space>
+                vector_field_out(label, get_idx_range(vector_field));
+        copy_to_vector_space(
+                exec_space,
+                get_field(vector_field_out),
+                mapping,
+                get_const_field(vector_field));
+        return vector_field_out;
+    }
+}
+
+/**
+ * @brief A helper method to get a vector field on a different vector space.
+ * If the requested vector space is the same as the current vector space
+ * then the same vector field is returned.
+ * If the vector space is different then the vectors in the vector
+ * field are mapped to the new vector space and a VectorFieldMem is returned.
+ *
  * @param[in] exec_space The space on which the function is executed (CPU/GPU).
  * @param[in] vector_field The vector field to be mapped to the new vector space.
  * @param[in] mapping A mapping describing the relation between the 2 vector
@@ -191,20 +248,16 @@ auto create_mirror_view_and_copy_on_vector_space(
                 LayoutStridedPolicy> vector_field,
         Mapping mapping)
 {
-    if constexpr (std::is_same_v<InVectorSpace, OutVectorSpace>) {
-        return vector_field;
-    } else {
-        VectorFieldMem<
-                std::remove_const_t<ElementType>,
-                IdxRangeType,
-                OutVectorSpace,
-                typename ExecSpace::memory_space>
-                vector_field_out(get_idx_range(vector_field));
-        copy_to_vector_space(
-                exec_space,
-                get_field(vector_field_out),
-                mapping,
-                get_const_field(vector_field));
-        return vector_field_out;
-    }
+    return create_mirror_view_and_copy_on_vector_space<
+            OutVectorSpace,
+            ExecSpace,
+            Mapping,
+            ElementType,
+            IdxRangeType,
+            InVectorSpace,
+            LayoutStridedPolicy>(
+            "_ (create_mirror_view_and_copy_on_vector_space)",
+            exec_space,
+            vector_field,
+            mapping);
 }

@@ -17,6 +17,8 @@ export SPACK_USER_CACHE_PATH=$SPACK_USER_PREFIX/cache
 export PYTHONPYCACHEPREFIX=/ptmp/$USER/pycache
 . $HOME/spack/share/spack/setup-env.sh
 
+spack --env gyselalibxx-spack-environment repo update
+
 eval -- "$(
     spack \
         --env gyselalibxx-spack-environment \
@@ -24,6 +26,7 @@ eval -- "$(
         cmake \
         ddc \
         ginkgo \
+        gmgpolar \
         googletest \
         kokkos \
         kokkos-kernels \

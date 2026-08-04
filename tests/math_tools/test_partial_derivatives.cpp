@@ -243,21 +243,22 @@ public:
     using typename base_type::IdxRangeXY;
     using typename base_type::IdxRangeY;
 
-    static constexpr ddc::BoundCond SplineBoundary
-            = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
+    static constexpr ddc::SplineBuilderClosure SplineClosure
+            = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC
+                          : ddc::SplineBuilderClosure::GREVILLE;
 
     struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree>
     {
     };
     using SplineInterpPointsX
-            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineBoundary, SplineBoundary>;
+            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineClosure, SplineClosure>;
 
 
     struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree>
     {
     };
     using SplineInterpPointsY
-            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineBoundary, SplineBoundary>;
+            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineClosure, SplineClosure>;
 
     using BSplinesDDim = find_grid_t<DDim, ddc::detail::TypeSeq<BSplinesX, BSplinesY>>;
 
@@ -266,17 +267,18 @@ public:
     using SplineInterpPointsDDim
             = std::conditional_t<std::is_same_v<DDim, X>, SplineInterpPointsX, SplineInterpPointsY>;
 
-    static constexpr ExtrapolationRule SplineExtrapolation
-            = DDim::PERIODIC ? ExtrapolationRule::PERIODIC : ExtrapolationRule::CONSTANT;
+    using SplineExtrapolation = std::conditional_t<
+            DDim::PERIODIC,
+            ExtrapolationRule::Periodic,
+            ExtrapolationRule::Constant_Constant>;
 
     using SplineDDimInterpolation = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,
             BSplinesDDim,
             GridDDim,
             SplineExtrapolation,
-            SplineExtrapolation,
-            SplineBoundary,
-            SplineBoundary>;
+            SplineClosure,
+            SplineClosure>;
 
 public:
     PartialDerivativeTestSpline1D(
@@ -332,16 +334,6 @@ public:
 
         return max_error;
     }
-
-private:
-    ExtrapolationRule get_bv(Coord<DDim> dcoord) const
-    {
-        if constexpr (DDim::PERIODIC) {
-            return ExtrapolationRule();
-        } else {
-            return ExtrapolationRule(dcoord);
-        }
-    }
 };
 
 /**
@@ -365,20 +357,21 @@ public:
     using typename base_type::IdxRangeXY;
     using typename base_type::IdxRangeY;
 
-    static constexpr ddc::BoundCond SplineBoundary
-            = X::PERIODIC ? ddc::BoundCond::PERIODIC : ddc::BoundCond::GREVILLE;
+    static constexpr ddc::SplineBuilderClosure SplineClosure
+            = X::PERIODIC ? ddc::SplineBuilderClosure::PERIODIC
+                          : ddc::SplineBuilderClosure::GREVILLE;
 
     struct BSplinesX : ddc::NonUniformBSplines<X, spline_degree>
     {
     };
     using SplineInterpPointsX
-            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineBoundary, SplineBoundary>;
+            = ddc::GrevilleInterpolationPoints<BSplinesX, SplineClosure, SplineClosure>;
 
     struct BSplinesY : ddc::NonUniformBSplines<Y, spline_degree>
     {
     };
     using SplineInterpPointsY
-            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineBoundary, SplineBoundary>;
+            = ddc::GrevilleInterpolationPoints<BSplinesY, SplineClosure, SplineClosure>;
 
     using SplineBuilder2D = ddc::SplineBuilder2D<
             Kokkos::DefaultExecutionSpace,
@@ -387,10 +380,10 @@ public:
             BSplinesY,
             GridX,
             GridY,
-            SplineBoundary,
-            SplineBoundary,
-            SplineBoundary,
-            SplineBoundary,
+            SplineClosure,
+            SplineClosure,
+            SplineClosure,
+            SplineClosure,
             ddc::SplineSolver::LAPACK>;
 
     using XExtrapolationRule = std::conditional_t<
@@ -474,7 +467,7 @@ public:
     }
 
 private:
-    XExtrapolationRule get_x_bv(Coord<X> xmin, Coord<Y> ymin, Coord<Y> ymax)
+    static XExtrapolationRule get_x_bv(Coord<X> xmin, Coord<Y> ymin, Coord<Y> ymax)
     {
         if constexpr (X::PERIODIC) {
             return XExtrapolationRule();
@@ -482,7 +475,7 @@ private:
             return XExtrapolationRule(xmin, ymin, ymax);
         }
     }
-    YExtrapolationRule get_y_bv(Coord<Y> ymin, Coord<X> xmin, Coord<X> xmax)
+    static YExtrapolationRule get_y_bv(Coord<Y> ymin, Coord<X> xmin, Coord<X> xmax)
     {
         if constexpr (Y::PERIODIC) {
             return YExtrapolationRule();

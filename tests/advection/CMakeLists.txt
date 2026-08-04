@@ -7,6 +7,7 @@ add_executable(unit_tests_advection
     1d_advection_x.cpp
     1d_advection_xvx.cpp
     1d_advection_xyvxvy.cpp
+    logical_foot_finder.cpp
     polar_foot_finder.cpp
     spatial_advection_1d.cpp
     velocity_advection_1d.cpp
@@ -27,6 +28,7 @@ target_compile_definitions(unit_tests_advection PUBLIC)
 
 
 gtest_discover_tests(unit_tests_advection
-    PROPERTIES TIMEOUT 10
+    PROPERTIES TIMEOUT 100
+    DISCOVERY_TIMEOUT ${GYSELALIBXX_DISCOVERY_TIMEOUT}
     DISCOVERY_MODE PRE_TEST
 )

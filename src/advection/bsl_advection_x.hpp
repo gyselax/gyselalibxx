@@ -17,7 +17,7 @@ template <class Geometry, concepts::Interpolation1D FunctionInterpolator, class 
 class BslAdvectionSpatial
     : public IAdvectionSpatial<
               Geometry,
-              interpolation_grid_type<typename FunctionInterpolator::BuilderType>,
+              interpolation_grid_t<typename FunctionInterpolator::BuilderType>,
               DataType>
 {
     static_assert(std::is_floating_point_v<DataType>);
@@ -25,7 +25,7 @@ class BslAdvectionSpatial
     using FunctionBuilder = typename FunctionInterpolator::BuilderType;
     using FunctionEvaluator = typename FunctionInterpolator::EvaluatorType;
 
-    using GridX = interpolation_grid_type<typename FunctionInterpolator::BuilderType>;
+    using GridX = interpolation_grid_t<typename FunctionInterpolator::BuilderType>;
 
     using GridV = typename Geometry::template velocity_dim_for<GridX>;
     using IdxRangeFdistrib = typename Geometry::IdxRangeFdistribu;
@@ -85,7 +85,7 @@ public:
         using IdxRangeBatch = ddc::remove_dims_of_t<IdxRangeFdistrib, Species, GridX>;
         using IdxBatch = typename IdxRangeBatch::discrete_element_type;
 
-        Kokkos::Profiling::pushRegion("BslAdvectionSpatial");
+        Kokkos::Profiling::pushRegion("(GSLX) BslAdvectionSpatial");
         IdxRangeFdistrib const idx_range = get_idx_range(allfdistribu);
         IdxRange<GridX> const x_idx_range = ddc::select<GridX>(idx_range);
         IdxRange<Species> const sp_idx_range = ddc::select<Species>(idx_range);
@@ -96,7 +96,7 @@ public:
                 "feet_coords (BslAdvectionVelocity::operator())",
                 batched_feet_idx_range);
         Field<Coord<DimX>, IdxRangeSpaceVelocity> feet_coords(get_field(feet_coords_alloc));
-        DFieldMem<IdxRangeFunctionBasis> function_coefs_alloc(
+        FieldMem<DataType, IdxRangeFunctionBasis> function_coefs_alloc(
                 "function_coefs (BslAdvectionVelocity::operator())",
                 batched_basis_idx_range(m_function_builder, batched_feet_idx_range));
 

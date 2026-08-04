@@ -12,11 +12,8 @@ set(CMAKE_CXX_EXTENSIONS OFF) # Avoid a Kokkos warning that will force if to OFF
 set(CMAKE_CXX_FLAGS_INIT "-fno-ipa-sra -Wno-deprecated-gpu-targets")
 set(CMAKE_CXX_FLAGS_INIT "${CMAKE_CXX_FLAGS_INIT} -Wall -Wno-sign-compare --Werror cross-execution-space-call -Xcudafe --diag_suppress=unsigned_compare_with_zero -Xcudafe --diag_suppress=integer_sign_change")
 
-# Gyselalibxx options
-set(GYSELALIBXX_DEFAULT_CXX_FLAGS "" CACHE STRING "Default flags for C++ specific to Gyselalib++" FORCE)
-
 # Activate/deactivate parts of the code
 if (DEFINED ENV{DDC_BUILD_TESTING})
     set(DDC_BUILD_TESTS $ENV{DDC_BUILD_TESTING})
 endif()
-set(ACTIVATE_RESTART_TESTS OFF)
+set(GYSELALIBXX_ACTIVATE_RESTART_TESTS OFF)

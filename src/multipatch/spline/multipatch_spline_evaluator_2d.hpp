@@ -400,7 +400,7 @@ public:
         static_assert((std::is_same_v<InterestDim, Dim1>) || (std::is_same_v<InterestDim, Dim2>));
         if constexpr (std::is_same_v<InterestDim, Dim1>) {
             return deriv_dim_1(coord_eval, patches_splines);
-        } else if constexpr (std::is_same_v<InterestDim, Dim2>) {
+        } else {
             return deriv_dim_2(coord_eval, patches_splines);
         }
     }
@@ -566,9 +566,11 @@ public:
         using IdxBS12 = typename spline_idx_range_type<Patch>::discrete_element_type;
 
         DFieldMem<IdxRange<bsplines_1>, memory_space> values1_alloc(
+                "values1 (MultipatchSplineEvaluator2D::apply_integrate)",
                 get_idx_range<bsplines_1>(spline_coef));
         DField<IdxRange<bsplines_1>, memory_space> values1 = get_field(values1_alloc);
         DFieldMem<IdxRange<bsplines_2>, memory_space> values2_alloc(
+                "values2 (MultipatchSplineEvaluator2D::apply_integrate)",
                 get_idx_range<bsplines_2>(spline_coef));
         DField<IdxRange<bsplines_2>, memory_space> values2 = get_field(values2_alloc);
         ddc::integrals(exec_space(), values1);
@@ -617,8 +619,9 @@ private:
                 replace_periodic_coord_inside<AnyPatch>(coord);
                 return m_extrapolation_rule(coord, patches_splines, patch_idx);
             } else {
-                Kokkos::abort("The spline derivatives cannot be evaluated at coordinates "
-                              "outside of the domain.");
+                Kokkos::abort( // cppcheck-suppress missingReturn
+                        "The spline derivatives cannot be evaluated at coordinates "
+                        "outside of the domain.");
             }
         } else {
             if (patch_idx == TestPatchIdx) {

@@ -78,16 +78,16 @@ template <
         class MemorySpace,
         class BSplines,
         class InterpolationDDim,
-        ddc::BoundCond BcLower,
-        ddc::BoundCond BcUpper,
+        ddc::SplineBuilderClosure SBCLower,
+        ddc::SplineBuilderClosure SBCUpper,
         ddc::SplineSolver Solver>
 struct InterpolationBuilderTraits<ddc::SplineBuilder<
         ExecSpace,
         MemorySpace,
         BSplines,
         InterpolationDDim,
-        BcLower,
-        BcUpper,
+        SBCLower,
+        SBCUpper,
         Solver>>
 {
 private:
@@ -96,8 +96,8 @@ private:
             MemorySpace,
             BSplines,
             InterpolationDDim,
-            BcLower,
-            BcUpper,
+            SBCLower,
+            SBCUpper,
             Solver>;
 
 public:
@@ -247,7 +247,7 @@ concept InterpolationBuilder1D
 
 /// @brief The discrete grid on which interpolation values are given (1D builders only).
 template <concepts::InterpolationBuilder1D BuilderType>
-using interpolation_grid_type = ddc::type_seq_element_t<
+using interpolation_grid_t = ddc::type_seq_element_t<
         0,
         ddc::to_type_seq_t<
                 typename InterpolationBuilderTraits<BuilderType>::interpolation_idx_range_type>>;
