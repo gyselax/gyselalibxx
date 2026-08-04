@@ -219,10 +219,10 @@ public:
 
 private:
     template <class Rule>
-    using MinOf = ddc::type_seq_element_t<0, Rule>;
+    using Min = ddc::type_seq_element_t<0, Rule>;
 
     template <class Rule>
-    using MaxOf = ddc::type_seq_element_t<1, Rule>;
+    using MaxRule = ddc::type_seq_element_t<1, Rule>;
 
     template <class B>
     using CoeffGridOf = typename B::template Impl<B, memory_space>::knot_grid;
@@ -230,7 +230,7 @@ private:
     static_assert(
             ((Basis::is_periodic()
               == std::is_same_v<
-                      MinOf<ExtrapRules>,
+                      MinRule<ExtrapRules>,
                       ddc::PeriodicExtrapolationRule<
                               typename Basis::continuous_dimension_type>>)&&...),
             "PeriodicExtrapolationRule has to be used if and only if the dimension is "
@@ -238,7 +238,7 @@ private:
     static_assert(
             ((Basis::is_periodic()
               == std::is_same_v<
-                      MaxOf<ExtrapRules>,
+                      MaxRule<ExtrapRules>,
                       ddc::PeriodicExtrapolationRule<
                               typename Basis::continuous_dimension_type>>)&&...),
             "PeriodicExtrapolationRule has to be used if and only if the dimension is "
@@ -260,8 +260,8 @@ public:
             DataType,
             Basis,
             Grid1D,
-            MinOf<ExtrapRules>,
-            MaxOf<ExtrapRules>>...>;
+            MinRule<ExtrapRules>,
+            MaxRule<ExtrapRules>>...>;
 
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
@@ -289,12 +289,12 @@ public:
      */
     explicit NDLagrangeInterpolator(IdxRange<Grid1D...> idx_range = IdxRange<Grid1D...> {}) requires(
             (is_extrapolation_rule_auto_constructible_v<
-                     MinOf<ExtrapRules>,
+                     MinRule<ExtrapRules>,
                      CoeffGridOf<Basis>,
                      DataType,
                      Basis> && ...)
             && (is_extrapolation_rule_auto_constructible_v<
-                        MaxOf<ExtrapRules>,
+                        MaxRule<ExtrapRules>,
                         CoeffGridOf<Basis>,
                         DataType,
                         Basis> && ...))
@@ -304,11 +304,11 @@ public:
                       DataType,
                       Basis,
                       Grid1D,
-                      MinOf<ExtrapRules>,
-                      MaxOf<ExtrapRules>>(
-                get_extrapolation<MinOf<ExtrapRules>, CoeffGridOf<Basis>, DataType, Basis>(
+                      MinRule<ExtrapRules>,
+                      MaxRule<ExtrapRules>>(
+                get_extrapolation<MinRule<ExtrapRules>, CoeffGridOf<Basis>, DataType, Basis>(
                         Extremity::FRONT),
-                get_extrapolation<MaxOf<ExtrapRules>, CoeffGridOf<Basis>, DataType, Basis>(
+                get_extrapolation<MaxRule<ExtrapRules>, CoeffGridOf<Basis>, DataType, Basis>(
                         Extremity::BACK))...)
     {
     }
@@ -328,15 +328,17 @@ public:
      */
     explicit NDLagrangeInterpolator(
             IdxRange<Grid1D...> idx_range,
-            std::pair<MinOf<ExtrapRules>, MaxOf<ExtrapRules>> const&... extrapolation_rules)
+            std::pair<MinRule<ExtrapRules>, MaxRule<ExtrapRules>> const&... extrapolation_rules)
         : m_evaluator(LagrangeEvaluator<
                       ExecSpace,
                       memory_space,
                       DataType,
                       Basis,
                       Grid1D,
-                      MinOf<ExtrapRules>,
-                      MaxOf<ExtrapRules>>(extrapolation_rules.first, extrapolation_rules.second)...)
+                      MinRule<ExtrapRules>,
+                      MaxRule<ExtrapRules>>(
+                extrapolation_rules.first,
+                extrapolation_rules.second)...)
     {
     }
 
