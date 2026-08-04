@@ -219,11 +219,31 @@ public:
 
 private:
     template <class Rule>
-    using Min = ddc::type_seq_element_t<0, Rule>;
+    using MinRule = ddc::type_seq_element_t<0, Rule>;
 
     template <class Rule>
     using MaxRule = ddc::type_seq_element_t<1, Rule>;
 
+public:
+    /// @brief The NDIdentityInterpolationBuilder type built from the template parameters.
+    using BuilderType = NDIdentityInterpolationBuilder<
+            ExecSpace,
+            memory_space,
+            DataType,
+            IdxRange<Grid1D...>,
+            IdxRange<Basis...>>;
+
+    /// @brief The NDLagrangeEvaluator type built from the template parameters.
+    using EvaluatorType = NDLagrangeEvaluator<LagrangeEvaluator<
+            ExecSpace,
+            memory_space,
+            DataType,
+            Basis,
+            Grid1D,
+            MinRule<ExtrapRules>,
+            MaxRule<ExtrapRules>>...>;
+
+private:
     template <class B>
     using CoeffGrid = ddc::type_seq_element_t<
             ddc::type_seq_rank_v<B, ddc::detail::TypeSeq<Basis...>>,
@@ -247,24 +267,6 @@ private:
             "periodic");
 
 public:
-    /// @brief The NDIdentityInterpolationBuilder type built from the template parameters.
-    using BuilderType = NDIdentityInterpolationBuilder<
-            ExecSpace,
-            memory_space,
-            DataType,
-            IdxRange<Grid1D...>,
-            IdxRange<Basis...>>;
-
-    /// @brief The NDLagrangeEvaluator type built from the template parameters.
-    using EvaluatorType = NDLagrangeEvaluator<LagrangeEvaluator<
-            ExecSpace,
-            memory_space,
-            DataType,
-            Basis,
-            Grid1D,
-            MinRule<ExtrapRules>,
-            MaxRule<ExtrapRules>>...>;
-
     /// @brief The number of interpolation dimensions.
     static constexpr std::size_t rank()
     {
