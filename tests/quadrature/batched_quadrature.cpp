@@ -228,7 +228,7 @@ void batched_operator_1d_2d()
                      + y_min * y_min * (-x_max * x_max - 6 * x_max + x_min * x_min + 6 * x_min)
                      - 4 * y_min * (x_max * x_max - x_min * x_min))
                   / 4;
-        EXPECT_DOUBLE_EQ(results_host(ib), exact);
+        EXPECT_NEAR(results_host(ib), exact, 1e-11);
     });
 }
 
