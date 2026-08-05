@@ -119,10 +119,9 @@ using SplineInterpolatorRTheta = SplineInterpolator2D<
         BSplinesTheta,
         GridR,
         GridTheta,
-        ExtrapolationRule::NullValue, // below r=0
-        ExtrapolationRule::NullValue, // above rmax
-        ExtrapolationRule::Periodic, // below theta=0
-        ExtrapolationRule::Periodic, // above theta=2*pi
+        ddc::detail::TypeSeq<
+                ExtrapolationRule::Null_Null, // radial extrapolation
+                ExtrapolationRule::Periodic>, // poloidal extrapolation
         SplineRBoundary, // boundary at r=0
         SplineRBoundary, // boundary at rmax
         SplineThetaBoundary,

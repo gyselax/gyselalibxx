@@ -254,10 +254,10 @@ public:
  *                        second dimension. See MinExtrapRule1 for the accepted forms.
  * @tparam MaxExtrapRule2 The extrapolation rule applied above the upper boundary of the
  *                        second dimension. See MinExtrapRule1 for the accepted forms.
- * @tparam MinBound1      The ddc::BoundCond at the lower boundary of the first dimension.
- * @tparam MaxBound1      The ddc::BoundCond at the upper boundary of the first dimension.
- * @tparam MinBound2      The ddc::BoundCond at the lower boundary of the second dimension.
- * @tparam MaxBound2      The ddc::BoundCond at the upper boundary of the second dimension.
+ * @tparam MinBound1      The ddc::SplineBuilderClosure at the lower boundary of the first dimension.
+ * @tparam MaxBound1      The ddc::SplineBuilderClosure at the upper boundary of the first dimension.
+ * @tparam MinBound2      The ddc::SplineBuilderClosure at the lower boundary of the second dimension.
+ * @tparam MaxBound2      The ddc::SplineBuilderClosure at the upper boundary of the second dimension.
  * @tparam Solver         The spline solver backend (default: LAPACK).
  */
 template <
@@ -270,10 +270,10 @@ template <
         class MaxExtrapRule1,
         class MinExtrapRule2,
         class MaxExtrapRule2,
-        ddc::BoundCond MinBound1,
-        ddc::BoundCond MaxBound1,
-        ddc::BoundCond MinBound2,
-        ddc::BoundCond MaxBound2,
+        ddc::SplineBuilderClosure MinBound1,
+        ddc::SplineBuilderClosure MaxBound1,
+        ddc::SplineBuilderClosure MinBound2,
+        ddc::SplineBuilderClosure MaxBound2,
         ddc::SplineSolver Solver = ddc::SplineSolver::LAPACK>
 class SplineInterpolator2D
 {
@@ -284,8 +284,8 @@ private:
     static constexpr bool is_periodic1 = continuous_dimension_type1::PERIODIC;
     static constexpr bool is_periodic2 = continuous_dimension_type2::PERIODIC;
 
-    static_assert(is_periodic1 == (MinBound1 == ddc::BoundCond::PERIODIC));
-    static_assert(is_periodic1 == (MaxBound1 == ddc::BoundCond::PERIODIC));
+    static_assert(is_periodic1 == (MinBound1 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic1 == (MaxBound1 == ddc::SplineBuilderClosure::PERIODIC));
     static_assert(
             is_periodic1
             == std::is_same_v<
@@ -297,8 +297,8 @@ private:
                     extrapolation_rule_t<MaxExtrapRule1, Basis1, double>,
                     ddc::PeriodicExtrapolationRule<continuous_dimension_type1>>);
 
-    static_assert(is_periodic2 == (MinBound2 == ddc::BoundCond::PERIODIC));
-    static_assert(is_periodic2 == (MaxBound2 == ddc::BoundCond::PERIODIC));
+    static_assert(is_periodic2 == (MinBound2 == ddc::SplineBuilderClosure::PERIODIC));
+    static_assert(is_periodic2 == (MaxBound2 == ddc::SplineBuilderClosure::PERIODIC));
     static_assert(
             is_periodic2
             == std::is_same_v<

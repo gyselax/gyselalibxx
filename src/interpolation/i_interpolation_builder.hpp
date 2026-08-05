@@ -150,10 +150,10 @@ template <
         class BSpline2,
         class InterpolationDDim1,
         class InterpolationDDim2,
-        ddc::BoundCond BcLower1,
-        ddc::BoundCond BcUpper1,
-        ddc::BoundCond BcLower2,
-        ddc::BoundCond BcUpper2,
+        ddc::SplineBuilderClosure BcLower1,
+        ddc::SplineBuilderClosure BcUpper1,
+        ddc::SplineBuilderClosure BcLower2,
+        ddc::SplineBuilderClosure BcUpper2,
         ddc::SplineSolver Solver>
 struct InterpolationBuilderTraits<ddc::SplineBuilder2D<
         ExecSpace,
