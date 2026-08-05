@@ -45,15 +45,15 @@ using SplineInterpPointsVy
 // SplineBuilder and SplineEvaluator definition
 using SplineInterpolatorY = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesY,
-        GridY,
+        IdxRange<BSplinesY>,
+        IdxRange<GridY>,
         ExtrapolationRule::Periodic,
         SplineBoundaryClosures<SplineYClosure, SplineYClosure>>;
 
 using SplineInterpolatorVy = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesVy,
-        GridVy,
+        IdxRange<BSplinesVy>,
+        IdxRange<GridVy>,
         ExtrapolationRule::Constant_Constant,
         SplineBoundaryClosures<SplineVyClosure, SplineVyClosure>>;
 

@@ -274,8 +274,8 @@ public:
 
     using SplineDDimInterpolation = SplineInterpolator<
             Kokkos::DefaultExecutionSpace,
-            BSplinesDDim,
-            GridDDim,
+            IdxRange<BSplinesDDim>,
+            IdxRange<GridDDim>,
             SplineExtrapolation,
             SplineBoundaryClosures<SplineClosure, SplineClosure>>;
 

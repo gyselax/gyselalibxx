@@ -113,19 +113,16 @@ using SplineRThetaEvaluatorNullBound = ddc::SplineEvaluator2D<
         ddc::PeriodicExtrapolationRule<Theta>,
         ddc::PeriodicExtrapolationRule<Theta>>;
 
-using SplineInterpolatorRTheta = SplineInterpolator2D<
+using SplineInterpolatorRTheta = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesR,
-        BSplinesTheta,
-        GridR,
-        GridTheta,
-        ddc::detail::TypeSeq<
-                ExtrapolationRule::Null_Null, // radial extrapolation
-                ExtrapolationRule::Periodic>, // poloidal extrapolation
-        SplineRBoundary, // boundary at r=0
-        SplineRBoundary, // boundary at rmax
-        SplineThetaBoundary,
-        SplineThetaBoundary>;
+        IdxRange<BSplinesR, BSplinesTheta>,
+        IdxRangeRTheta,
+        ExtrapolationRule::Null_Null, // radial extrapolation
+        ExtrapolationRule::Periodic, // poloidal extrapolation
+        SplineBoundaryClosures<
+                SplineRClosure, // boundary at r=0
+                SplineRClosure>, // boundary at rmax
+        SplineBoundaryClosures<SplineThetaClosure, SplineThetaClosure>>;
 
 using IdxRangeBSR = IdxRange<BSplinesR>;
 using IdxRangeBSTheta = IdxRange<BSplinesTheta>;

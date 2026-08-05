@@ -126,8 +126,8 @@ using LagrangeInterpolatorVx = LagrangeInterpolator<
 // Operators
 using SplineInterpolatorVx = SplineInterpolator<
         Kokkos::DefaultExecutionSpace,
-        BSplinesVx,
-        GridVx,
+        IdxRange<BSplinesVx>,
+        IdxRange<GridVx>,
         ddc::detail::TypeSeq<ExtrapolationRule::Constant, ExtrapolationRule::Constant>,
         SplineBoundaryClosures<SplineVxClosure, SplineVxClosure>>;
 
